@@ -1,0 +1,67 @@
+# Fifth-vacancy Portfolio decision and conformance intake
+
+**PRO_FINAL / OWNER_DELEGATED: option A selects FSD as the primary additional chain and MGTAP as its sole conditional fallback. Each receives one bounded source/design return, zero implementation and zero numerical allowance; at most one advances for this vacancy at a time.** Root applies this conforming decision under AGENTS §4.8. This intake applies no lifecycle, priority, recast, family-opening, fusion, C or formal UAV-entry change and dispatches no direction locally.
+
+The authoritative source is the complete [Pro response at f4fce9a4fd9603db66463ad8c81bb9464533e260](https://github.com/CartmanFatass/My-paper-code/blob/f4fce9a4fd9603db66463ad8c81bb9464533e260/docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/archive/RESPONSE.md), not the earlier 635-byte capability-gap reply. The [delivery record](../pro_packets/20260910_fifth_vacancy_selection/DELIVERY_STATUS.md) preserves both; [execution mapping](../pro_packets/20260910_fifth_vacancy_selection/EXECUTION_MAPPING.md) gives Root the exact first actions and stopping conditions. Application is **planned** pending Root's dispatch record, not claimed completed here.
+
+## 1. What was checked and the rules applied
+
+Root assigned this DM the conformance/intake of request `2026-09-10-fifth-vacancy-portfolio-01`, originally forwarding an archived incomplete reply. Fresh direct GitHub reconciliation found the later full file and matching Issue17 comment, so the same assignment continued with the full immutable answer. The scientific question remains the one additional primary and one fallback outside the four already allocated FOLR/UCOPE/RCLE/ACVC chains. It was not broadened during recovery.
+
+The initial reply is 635 bytes with SHA256 `d7fa2b960eeba34c8b96d815c8b5a8686207f4e711629eaa20a735110b633922`. It answers only a capability/delivery gap and explicitly says scientific review is incomplete. It names no primary, fallback, comparative investment rationale or complete reading. Its `ARCHIVED` and natural-completion facts therefore did **not** form a Portfolio decision. The rule applied verbatim is AGENTS §3:
+
+> A connector, evidence, or transport blocker means no Pro decision was formed. It never transfers
+> final authority to a local model, and it must not stall the loop:
+
+The later complete file is 40,937 bytes, 152 lines and SHA256 `47a555508bc98c83a36e95a302fb0d20d8bba5d84c2264f2e3a834bcf0dae4cb`. This DM read the complete text directly from Git object `f4fce9a4f`, verified that its sole changed path is the authorized response, and checked all27 cited immutable path/SHA mappings against REQUEST. Comment5627433082 links that exact response and TASK9ada5ce; the accepted prompt/binding remain unchanged. Full-byte, count, scope and comment receipts are in [DELIVERY_OBSERVATION.json](../pro_packets/20260910_fifth_vacancy_selection/archive/DELIVERY_OBSERVATION.json). Provider discovery logs were not independently replayed, and the earlier message's discrepancy is not given an invented cause.
+
+The current finality rule applied verbatim is AGENTS §4.8:
+
+> A complete archived response from
+> `portfolio:cross_direction` decides the bound investment, priority, lifecycle, capacity,
+> fusion/separation or registration question within current owner instructions and specifications.
+> The designated DM checks scientific/specification conformance; Root implements and records the
+> decision without per-item owner ratification.
+
+This is the existing conformance check, not another scientific vote. Current main owner reviews and relevant Portfolio ledger owner columns were empty at intake. The applicable AGENTS, evidence specification, GitHub collaboration and ROOT_OPERATIONS requirements have no intervening change from the accepted named method version relevant to this check.
+
+## 2. Completeness and specification conformance
+
+| Required question or constraint | Complete response and intake finding |
+| --- | --- |
+| One primary plus exactly one fallback; prior four excluded | Lines1–15 select FSD and MGTAP with one return each; lines56–64 restrict activation to the actual extra vacancy. Lines102–106 preserve the four prior allocations. Complete; no fifth-plus-sixth allocation. |
+| Concrete first action, deliverable, allowance and stop | FSD specifies one actual native individual-renewal/credit/update arrangement against intact recurrent current-information D0. MGTAP specifies one source-compatible local-geometry operation against equally informed parameter-matched DENSE. Each may return a card-level design, precise family-node question or reasoned no-ready, as alternative forms of one terminal return. Implementation, model/test and numerical work are all zero. |
+| Comparative reasons and strongest opposing evidence | FSD's observed renewal/data/credit/update junction and retained HIGH priority justify one design return. MGTAP's explicit re-entry condition is the nearest order alternative. The response directly weighs FSD's two losses/heavier prior work and VSP03's cheap positive native fits; it does not dismiss another useful same-recipe history or call design free. |
+| Evidence class and claim ceiling under §8.1/§11 | Prospective Portfolio investment in preparation; no new empirical claim. Existing B package observations and original MEIs keep their independent-unit, adaptivity and conditional-panel limits. No C-style confirmation, exact upper, full-support census, positive pilot or complete causal explanation is added. |
+| Native meaning and competent nulls | D0 retains every-primitive observation/action and recurrent reaction. Optimizer-count differences are not a proved cause. MGTAP retains full raw local information/history, ranked truncated rows, legal velocity, fixed five-UAV membership, channel/interference/SINR/capacity/association, native team reward and PPO credit. No proxy or actor information change is selected. |
+| Costs, headroom and dominant work | Old measured windows, summed wall, critical path, CPU and support unknowns remain separate. New treatment and authoring costs stay unknown; no cost experiment follows. Missing tuned same-information headroom is a sequencing input, not a gate or zero. Existing work multipliers are context, not unused numerical grants. |
+| Original stops and real decision tiers | The stopped FSD package/twenty-rollout alternative, MGTAP families, VSP03 family and all other scoped stops remain. A real family-scope change goes to its original direction node. Ordinary B within an accepted mechanism receives no universal extra Pro gate. The selected preparation does not itself authorize Send or subsequent work. |
+| Restrictions, priorities and rolling execution | CBSC/FRRIE remain without an established permitted executable step; VNFC SEND_UNCERTAIN remains with Root/Transport and supplies no new run. VSP02 stays LOW. ACVC/SCDMP/VNFC retain second-recast lowest contention. No direction waits for sibling results/cleanup or a batch. |
+
+No concrete scientific/specification conflict, stronger-class rejection or unrequested engineering machinery was found. The selected zero-numerical boundary is the finite investment actually posed and decided, not a new prerequisite for every B. Engineering Scope §4 needs **none** for this intake or the selected document-only tasks; no source implementation, runtime service or scientific check was added.
+
+Scientific-tools scientific-reading mode reuses the current assignment, named intakes/spec sections, FOUNDATIONS §§4–6 and empirical topic already read for this exact question. Concrete assumptions retained: conditional evaluation panels do not enlarge independent training counts; a whole training-package contrast does not locate a component cause; held latent skills do not freeze primitive observations/actions; an architecture's representation capacity does not establish finite-training value. Those distinctions explain why a specific prospective comparison is useful without demanding causal proof. No new mechanism, literature claim, baseline implementation or numerical reanalysis is accepted by this Portfolio intake; no additional library search or experiment was needed.
+
+## 3. Bounded reading, support and contradiction
+
+The strongest support for the selected next investment is FSD's source-visible junction between individual skill renewal and the data, credit and actual update schedule that train the later policy, together with the intact D0 comparison. It gives the assigned DM a concrete question to specify. It is **not** evidence that fewer optimizer calls, balanced total work or a nonzero endpoint gap would improve return. The two historical I−D0 values, −0.049670563167111874 and −0.035312725297886094, retain their opposite-sign readings at MEI0.01 and two-pair ceiling. Positive training/component/episode observations do not replace the native endpoints.
+
+The strongest countercase is substantive: FSD lost twice at greater work, while VSP03 has positive final greedy results and an8.927880-second complete B07 fit. Its latest Q=−0.0016064453125 does not erase those final gains or establish general deterioration. MGTAP also offers a more explicit re-entry condition with smaller old native work, but its actual changed operation remains unselected and generic conditioning is a strong explanation. Pro's preference for one FSD return is an investment judgment under these unknowns, not a measured efficiency or expected-value ranking.
+
+Historical cost denominators remain honest: FSD3,462.16s over two valid pairs; MGTAP722.64s for one complete two-master/four-fit result; VSP03 B07 one fit8.927880s. The response's additional CRTO169s shared-command and DISH454.50s complete-runner statements were checked against their cited current intakes; neither supplies a transferable per-arm budget or resolved total support cost. All previously reported failures and unknown totals remain. The source-derived historical multipliers in FACTS are reused; this intake does not recompute results or run simulations to establish them.
+
+The claim ceiling is a **bounded preparation investment**, not performance superiority, equivalence, component causality, tuned headroom, transfer or a family/lifecycle disposition. The next discriminator is one FSD return that makes a specific native comparison concrete or identifies why it is not ready. It can support later correctly scoped investment; it is not itself an empirical result or a numerical allowance.
+
+## 4. Decisions this intake produces
+
+1. **Technical delivery classification.** Options: (a) preserve the initial blocker and use the later verified full same-request delivery; (b) retain only the obsolete absence claim; (c) resend or substitute a local Portfolio choice. Recommend and execute(a). **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** The initial635-byte reply remains incomplete history; full file/comment reconciliation resolves the current gap. No resend or recovery Pro payload is warranted. Root routes remaining Transport record reconciliation without Send.
+2. **Portfolio selection.** Original options were A:FSD primary/MGTAP fallback, B:the reverse order, C:VSP03 with one named fallback or another concrete eligible selection. **Pro selects A; complete conformance is accepted.** The DM makes no replacement selection. Root applies one FSD source/design assignment, with MGTAP activated at most once after the specified primary stop and only for the still-available vacancy. Current application state is planned; no selected direction was dispatched by this author.
+3. **Publication and continuation boundary.** Options: (a) retain exact accepted inputs, publish the response/intake/mapping and return the formed decision to Root; (b) rewrite the packet or launch from it. Recommend and execute(a), under the same standing technical delegation. No current Pro correction, new request, native result or invocation is needed. FOLR/UCOPE/RCLE/ACVC allocations remain their own existing decisions, not renewed here.
+
+The existing P2 Portfolio [owner item20260910-root-005](../owner/inbox/2026-09-10/20260910-root-005.json) retains its A/B/C packet and contrary evidence; its CLI trace records the actual source, checked decision and planned application. No owner reply or executed dispatch is invented. Owner flag: `portfolio`; prediction: `not taken` because this is not a new empirical result. Audit rows append the technical reconciliation and Pro selection without changing previous rows or item004.
+
+## 5. Return and residual risks
+
+Root receives the actual response commit, this intake and the exact execution mapping. It integrates the new paths while retaining current main audit rows and records actual dispatch/application. The shared `codex/portfolio` checkout remains the designated authoring/delivery checkout. The Transport-owned runtime archive and prior evidence remain intact; there is no test scratch to reclaim.
+
+Unresolved science is limited and explicit: the new FSD arrangement and MGTAP operation are not yet specified, their benefit and complete prospective cost are unknown, and matching tuned headroom is absent. Transport must reconcile its earlier receipt with the later observed file/comment; that discrepancy supplies no scientific polarity and no permission for a duplicate Send. No other blocker or specification exception remains in this intake.

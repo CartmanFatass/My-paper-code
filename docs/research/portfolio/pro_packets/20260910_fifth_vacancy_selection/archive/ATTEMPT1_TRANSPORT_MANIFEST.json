@@ -1,0 +1,40 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-10-fifth-vacancy-portfolio-01--portfolio",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-10-fifth-vacancy-portfolio-01",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "capability_bound_semantic_currentness",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "finite_resource_relational_inductive_efficiency",
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation",
+    "semigroup_consistent_duration_model_policy",
+    "variable_n_fleet_churn",
+    "vsp_02",
+    "vsp_03",
+    "vsp_c1"
+  ],
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "PROMPT_BODY.md",
+    "bytes": 1233,
+    "sha256": "fc3d5fe45b738f5148f7ba7e3d3fe73c2de30586f099764ea6a370ff5c7f1e59",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-10_fifth_vacancy_selection\\PROMPT_BODY.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "archive_response": {
+    "canonical_filename": "RESPONSE.md"
+  }
+}
