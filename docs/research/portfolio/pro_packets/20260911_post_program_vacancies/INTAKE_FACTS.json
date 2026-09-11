@@ -560,31 +560,45 @@
       "source_transactions": 1,
       "enclosing_source_command_seconds": 7.5772148,
       "I1280_launch_at_this_snapshot": "not accepted yet; preselected pending D0 collection",
-      "complete_pair_result_at_this_snapshot": false
+      "complete_pair_result_at_this_snapshot": false,
+      "confirmed_adoption_integration_sha": "76440e33a98666b027532328493a12a6e8a5e20c",
+      "admission_exact_units_limit": "Published D0_HANDOFF_RECEIPT retains Root shorthand15.64GB/4GB; exact native receipt bytes remain for original DM collection."
     },
     "fifth_slot": "explicitly vacant",
     "VNFC": "unchanged conditional queued/unready; no new repair allocation",
     "FOLR": {
       "source_sha": "2b22270b3b076df60f4afd3203c3f09aeab3b98b",
       "node": "hmasd-wsl-node",
-      "fact_provenance": "two distinct Root routed Monitor adoption receipts; no independent remote query by this DM",
+      "fact_provenance": "two distinct Root routed Monitor adoption receipts, subsequently verified against complete published FOLR B02 launch-evidence file at c05c4eeca; no remote query",
       "arms": [
         {
           "arm": "RETAIN",
           "handle": "folr-learned-retention-b02-retain-20260911",
           "Monitor_adoption": "confirmed",
           "admission_as_reported_by_Root": "14.55 GB",
-          "state_as_reported": "running"
+          "state_as_reported": "running",
+          "published_admission_available_physical_and_effective_bytes": 14551658496,
+          "published_admission_floor_bytes": 4294967296
         },
         {
           "arm": "LEARNED_EVENT",
           "handle": "folr-learned-retention-b02-learned-event-20260911",
           "Monitor_adoption": "confirmed in later separate receipt",
           "admission_as_reported_by_Root": "14.31 GB",
-          "state_as_reported": "running"
+          "state_as_reported": "running",
+          "published_admission_available_physical_and_effective_bytes": 14309847040,
+          "published_admission_floor_bytes": 4294967296
         }
       ],
-      "complete_result_intake": "pending"
+      "complete_result_intake": "pending",
+      "main_integration_shas": [
+        "de63df4ef3120f3eab5f2d56fd40c9a00dd69c79",
+        "4577a3ed30e75a2e0db3333f045689a64d540e70",
+        "c05c4eeca808d0d8f8ebf9b5451ed3d291028449"
+      ],
+      "training_identity": 7810,
+      "evaluation_identity": 107810,
+      "preparation_limit": "Initial CRLF script failed before a scientific root/model/handle; same-source binary LF preparation succeeded after absence reconciliation, as published. Not another scientific fit."
     }
   },
   "owner_items_application": {
@@ -607,6 +621,20 @@
     {
       "sha": "edf1bdf80b0f4913f4293d5787aa5c02a8a65042",
       "path": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771003_20260911/MONITOR_DISPATCH.json"
+    },
+    {
+      "sha": "c05c4eeca808d0d8f8ebf9b5451ed3d291028449",
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md",
+      "bytes": 2902,
+      "sha256": "81b70d00984525fcd3927f37dc043eaa015a0edd899c6d081f04142a64a8dd5f",
+      "full_file_read": true
+    },
+    {
+      "sha": "76440e33a98666b027532328493a12a6e8a5e20c",
+      "path": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771003_20260911/D0_HANDOFF_RECEIPT.json",
+      "bytes": 3944,
+      "sha256": "3ea7576e2355e557afee0587a11c749ab43e1bf40a4a42ddcc11d0502db3e3ec",
+      "full_file_read": true
     }
   ],
   "publication_checks": {
@@ -623,5 +651,6 @@
     "unapplied_owner_reviews_author_and_primary": [],
     "no_new_runtime_tests_or_empirical_exposure": true,
     "scope": "documents, facts, archive preservation and actual application receipts only"
-  }
+  },
+  "current_main_at_application_update": "76440e33a98666b027532328493a12a6e8a5e20c"
 }

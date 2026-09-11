@@ -259,6 +259,16 @@ as 14.55/14.31 GB; each handle and receipt scope is in the mapping. These are
 attributed launch/adoption facts, with result/intake still pending. Maintained
 items record actually applied **b** and **P**, not the author's former A + P.
 
+The subsequent main publication receipts are incorporated without a new
+Portfolio choice: FOLR binding/commands/adoption at
+`de63df4ef3120f3eab5f2d56fd40c9a00dd69c79`,
+`4577a3ed30e75a2e0db3333f045689a64d540e70`, and
+`c05c4eeca808d0d8f8ebf9b5451ed3d291028449`; FSD's confirmed-adoption record at
+`76440e33a98666b027532328493a12a6e8a5e20c`. The full FOLR launch-evidence file
+and FSD D0 handoff receipt were read. Exact FOLR admission bytes are recorded
+in the mapping/facts; FSD's exact units/bytes remain for original collection.
+Both source records distinguish accepted running work from a completed primary.
+
 ## 7. Publication and preservation
 
 This work reuses `C:/Projects/HMASD-worktrees/codex-portfolio`, branch

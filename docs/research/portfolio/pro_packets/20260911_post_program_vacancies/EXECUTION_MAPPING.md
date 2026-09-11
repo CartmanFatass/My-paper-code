@@ -56,6 +56,23 @@ results/intake remain pending. RCLE/ACVC are preparing their single questions.
 Selection, task dispatch, launch, Monitor adoption and final result acceptance
 remain distinct. Each direction returns independently.
 
+The later published application sources are also read and fixed here. FOLR's
+card/binding, exact commands and launch/adoption are integrated on main at
+`de63df4ef3120f3eab5f2d56fd40c9a00dd69c79`,
+`4577a3ed30e75a2e0db3333f045689a64d540e70`, and
+`c05c4eeca808d0d8f8ebf9b5451ed3d291028449`. Its complete current launch-evidence
+file confirms one new training/evaluation identity 7810/107810 and both separate
+adoptions. The recorded available physical/effective bytes are 14,551,658,496
+for RETAIN and 14,309,847,040 for LEARNED_EVENT, above 4,294,967,296 each; terminal
+counts and primaries remain pending. The failed initial CRLF staging script and
+successful same-source binary LF preparation are technical exposure, not another
+scientific fit. FSD's later adoption/handoff record is integrated at
+`76440e33a98666b027532328493a12a6e8a5e20c`; its full D0_HANDOFF_RECEIPT.json
+confirms the Root receipt and explicitly retains the shorthand-unit limitation
+until original admission collection. These current records supersede the
+pending-adoption statements in the earlier launch snapshots without rewriting
+them. The Portfolio DM made no remote status query or new scientific invocation.
+
 The checkout registration read at intake found FSD `d46b10d4a457577a057b155c6f416e21340c15e0`,
 FOLR `8da607b4b7fb415b4212e0e20d74f9dc9c20a32e`,
 RCLE `b842a255359f96d2173d0d4ee9d7551860680229`, and
