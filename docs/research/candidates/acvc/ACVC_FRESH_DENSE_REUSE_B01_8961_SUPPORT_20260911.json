@@ -132,23 +132,48 @@
     {
       "label": "existing new-card owner item application state",
       "s": 0.2354779
+    },
+    {
+      "label": "preserve readable evidence/preparation inputs, write collection and intake audit, check required brief",
+      "s": 0.350283
+    },
+    {
+      "label": "artifact/source-surface check and result preservation commit with immediate push",
+      "s": 5.8939969
+    },
+    {
+      "label": "resolve cleanup retention owner boundary",
+      "s": 0.2100002
+    },
+    {
+      "label": "preservation verification and exact remote cleanup/absence",
+      "s": 0.8773843
+    },
+    {
+      "label": "read-only local preservation/blocker inventory and tracked supervisor-log copy",
+      "s": 0.2818184
+    },
+    {
+      "label": "final owner-review boundary",
+      "s": 0.4276555
     }
   ],
-  "known_support_s": 58.73212799999446,
+  "known_support_s": 66.77326629999446,
   "support_cap_s": 330,
   "native_cap_s": 270,
   "complete_cap_s": 600,
   "known_native_charge_s": 178,
-  "known_native_plus_support_s": 236.73212799999447,
+  "known_native_plus_support_s": 244.77326629999448,
   "native_cap_pass": true,
   "full_support_and_complete_cap_conformance": "unestablished: known subtotals are not complete bills",
   "observed_cap_breach": false,
   "missing_or_pending": [
-    "unmeasured client/message overhead not represented by command/tool wall",
-    "result publication/push after this cutoff",
+    "unmeasured client/message overhead including rejected local cleanup before process creation",
+    "this final closeout publication/push tail, to be returned once to Root",
     "Root integration and associated support tail",
-    "scoped cleanup and closeout publication"
+    "same-path local cleanup if runtime policy later permits; not attempted through another executor"
   ],
   "monitor_shared_query": "0.9s full four-handle terminal query charged without splitting, separately from 0.7s adoption",
-  "non_effect_rejection": "apply_patch refused same-file delete/add for support JSON; no mutation or following command occurred; corrected with a direct data write"
+  "non_effect_rejection": "apply_patch refused same-file delete/add for support JSON; no mutation or following command occurred; corrected with a direct data write",
+  "cleanup_state": "remote absent/unregistered; local5-file preparation duplicate115516942bytes retained after blocked-by-policy rejection"
 }
