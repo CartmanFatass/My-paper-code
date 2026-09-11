@@ -1,0 +1,80 @@
+{
+  "id": "20260911-root-003",
+  "created": "2026-09-11T11:02:28-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "两个空槽：建议本轮零追加投资",
+  "context": "现有RCLE、ACVC、FOLR已派发。按Root本轮排除范围，其余方向没有合格的新投入对象。VNFC新出现答复文件，已交原接收与入库流程，无再次发送。这里只发布建议，Portfolio尚未决定。",
+  "options": [
+    {
+      "key": "a",
+      "label": "本轮零追加，现有链继续",
+      "consequence": "保留空缺和全部已有预算、停点与依赖，不改变生命周期、优先级或recast。"
+    },
+    {
+      "key": "b",
+      "label": "由原节点更正具体就绪事实",
+      "consequence": "先指出固定证据中的准确冲突；不自动给未指定方向放款，也不重启已结束工作。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "明确排除范围内没有合格对象，空槽本身不提供新科学投资理由；历史正面结果和新VNFC文件作为反方事实保留。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L50",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "RCLE、ACVC、FOLR已经推进；在排除正在运行、已完成无后继、执行依赖未解和裁决未完成的方向后，剩余两个槽位是否本轮零追加投入？",
+    "changes_if_approved": [
+      {
+        "target": "本轮新增投资",
+        "from": "两个目标槽位尚空缺",
+        "to": "建议本轮零追加；现有三条链及各自预算继续，生命周期和优先级不变"
+      }
+    ],
+    "if_refused": "由原Portfolio节点指出具体就绪事实冲突；不凭空指定新方向，不动已接受预算，也不把未来条件当成自动放款。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "quote": "Root has actually dispatched all three to their existing DMs and shared checkouts.",
+        "why": "当前投资已经落实，不能重复计数或重复派发。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/SCIENCE_BRIEF.md",
+        "quote": "New allocation proposed by this request: zero per direction",
+        "why": "其余方向在本轮明确排除范围内，没有带确定预算的合格补位对象。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_FALLBACK_CONVERGENCE_INTAKE_20260911.md",
+        "quote": "all four positive final histories",
+        "why": "历史正面结果和不确定性说明这些问题并非毫无价值；零追加仅约束本轮。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/SCIENCE_BRIEF.md",
+        "quote": "Its opening describes the existing interval-credit re-entry question",
+        "why": "VNFC新出现完整答复文件，需要走原接收和科学入库流程，不能沿用文件不存在的旧状态。"
+      }
+    ],
+    "uncertainty": [
+      "VNFC新文件的完整Transport接收、原DM合规入库和后续执行状态，交Root原流程核实，无再次发送。",
+      "CBSC和FRRIE缺的是具体允许执行的方法事实，不代表科学反例。",
+      "现有结果不足以断言更广方向无价值；新授权问题可在其适当层级讨论。"
+    ],
+    "cost": {
+      "compute": "各方向本轮新增数值、实现、检查和支持任务均为零；现有RCLE750秒、ACVC600秒及FOLR零数值问答范围不变。作者和Pro讨论成本未测，不称为免费。",
+      "owner_time": "异步可看，无需等待回复",
+      "reversibility": "reversible",
+      "waits_on_this": "只有本轮追加投资选择；三条独立链继续"
+    },
+    "verdict_text": "DM建议A：在本轮明确排除范围内零追加投入，保留空缺；这不是Portfolio已作裁决，也不关闭任何方向。",
+    "source": "docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/SCIENCE_BRIEF.md"
+  },
+  "starred": true
+}
