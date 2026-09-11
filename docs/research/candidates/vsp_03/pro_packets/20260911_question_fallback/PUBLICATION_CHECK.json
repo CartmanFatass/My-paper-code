@@ -1,0 +1,165 @@
+{
+  "checked_utc": "2026-09-11T05:34:41.875126+00:00",
+  "request_id": "2026-09-11-vsp03-question-fallback-01",
+  "remote_refs_observed": {
+    "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906": "9079c31ac7e23c1c74649135750d1aaea6440e05",
+    "refs/heads/main": "a98e61a56f529e185b2df44085336f2f141b2781"
+  },
+  "references": [
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_FALLBACK_QUESTION_INTAKE_20260911.md",
+      "commit_sha": "9079c31ac7e23c1c74649135750d1aaea6440e05",
+      "bytes": 13907,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05"
+      ],
+      "rendered_effective_mapping": "matched"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/pro_packets/20260911_question_fallback/PREPARATION_FACTS.json",
+      "commit_sha": "9079c31ac7e23c1c74649135750d1aaea6440e05",
+      "bytes": 7900,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05"
+      ],
+      "rendered_effective_mapping": "matched"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_POST_B07_CONVERGENCE_INTAKE_20260910.md",
+      "commit_sha": "5e8a5cf6c29b7321d9e85ba2458ac32141a6488d",
+      "bytes": 16769,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05"
+      ],
+      "rendered_effective_mapping": "matched"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/DIRECTION.md",
+      "commit_sha": "5e8a5cf6c29b7321d9e85ba2458ac32141a6488d",
+      "bytes": 35455,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05"
+      ],
+      "rendered_effective_mapping": "matched"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B07_CONTINUOUS512_SCIENCE_CARD_20260910.md",
+      "commit_sha": "adcff0a92559ac5552e24a9861e2b65572b478c5",
+      "bytes": 14921,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05"
+      ],
+      "rendered_effective_mapping": "matched"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B07_INTAKE_20260910.md",
+      "commit_sha": "4b1682acfc45a2c2acde6688302aba8fdac8883a",
+      "bytes": 20939,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05"
+      ],
+      "rendered_effective_mapping": "matched"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B06_INTAKE_20260909.md",
+      "commit_sha": "09e1e048b7422247729962a410e4d91af42a23c8",
+      "bytes": 25964,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05"
+      ],
+      "rendered_effective_mapping": "matched"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "commit_sha": "1ea43d8fbc846807d71d4d894136f357f65551b6",
+      "bytes": 47134,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05",
+        "refs/heads/main@a98e61a56f529e185b2df44085336f2f141b2781"
+      ],
+      "rendered_effective_mapping": "matched"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "0ec6ad62039b209327f46636f7b488ba1a88d204",
+      "bytes": 45053,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05",
+        "refs/heads/main@a98e61a56f529e185b2df44085336f2f141b2781"
+      ],
+      "rendered_effective_mapping": "matched"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "0ec6ad62039b209327f46636f7b488ba1a88d204",
+      "bytes": 7819,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05",
+        "refs/heads/main@a98e61a56f529e185b2df44085336f2f141b2781"
+      ],
+      "rendered_effective_mapping": "matched"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "0ec6ad62039b209327f46636f7b488ba1a88d204",
+      "bytes": 4252,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05",
+        "refs/heads/main@a98e61a56f529e185b2df44085336f2f141b2781"
+      ],
+      "rendered_effective_mapping": "matched"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "0ec6ad62039b209327f46636f7b488ba1a88d204",
+      "bytes": 20899,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05",
+        "refs/heads/main@a98e61a56f529e185b2df44085336f2f141b2781"
+      ],
+      "rendered_effective_mapping": "matched"
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "0ec6ad62039b209327f46636f7b488ba1a88d204",
+      "bytes": 42600,
+      "published_ancestors": [
+        "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906@9079c31ac7e23c1c74649135750d1aaea6440e05",
+        "refs/heads/main@a98e61a56f529e185b2df44085336f2f141b2781"
+      ],
+      "rendered_effective_mapping": "matched"
+    }
+  ],
+  "reference_checks": "all fixed paths exist; each commit reachable from observed published ref; TASK manifest effective mapping matches request",
+  "issue": {
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/6",
+    "number": 6,
+    "state": "open",
+    "observed_via": "gh api repos/CartmanFatass/My-paper-code/issues/6"
+  },
+  "scientific_exposure": 0,
+  "publication_is_not_connector_access": true,
+  "bound_task_check": {
+    "checked_utc": "2026-09-11T05:36:46.481645+00:00",
+    "task_commit": "cddc0be2dabf8728e4c5199be89794c228192b03",
+    "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/cddc0be2dabf8728e4c5199be89794c228192b03/docs/research/candidates/vsp_03/pro_packets/20260911_question_fallback/TASK.md",
+    "task_bytes": 25869,
+    "task_sha256": "339a20e4b7ed1aaf85a4c25becf6dd076cd43bffa6fc8dd78b04d7ad015933ee",
+    "GitHub_blob_sha": "3716e2cfa16ae6232de5e7a50016719f75d0cf98",
+    "GitHub_bytes_equal_Git": true,
+    "conversation_binding_key": "em:vsp_03:convergence",
+    "requested_conversation_id": "6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+    "source_thread_id": "01a08ee9-1223-7bf2-bf21-8c35033cd3ad",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+    "native_return_target": "/root/dm_vsp03_question_fallback",
+    "provider_prompt_field": "transport_request.prompt",
+    "provider_prompt_bytes": 1908,
+    "provider_prompt_sha256": "b211b49f91489fe4a1165a1d5f78fb755d9d1e685072a3bdd7d18fdcb04fd4fc",
+    "app_dispatch_instruction_field": "dispatch_prompt",
+    "dispatch_state": "READY_TO_DISPATCH",
+    "dispatches_by_DM": 0,
+    "provider_sends_by_DM": 0,
+    "primary_unapplied_owner_reviews": []
+  }
+}

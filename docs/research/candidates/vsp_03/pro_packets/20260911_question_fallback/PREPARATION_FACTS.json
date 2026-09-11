@@ -1,0 +1,198 @@
+{
+  "created_utc": "2026-09-11T05:28:50.432534+00:00",
+  "purpose": "Question preparation only: metadata extraction and copying accepted counts; no scientific numerical recomputation",
+  "synchronized_commit": "4f1597cde5f26e39b1672f64d47058abb7bc1742",
+  "source_counts": {
+    "path": "docs/research/candidates/vsp_03/VSP03_POST_B07_COUNTS_20260910.json",
+    "commit_sha": "32b0bfb4e78a55b50b04febc49592993107c2edd",
+    "sha256": "99380837e42fa83315ab9533f961533ccf98cf0d661019dadf621bef19d812a4"
+  },
+  "owner_boundary": {
+    "primary_sha": "0ec6ad62039b209327f46636f7b488ba1a88d204",
+    "unapplied_reviews": [],
+    "relevant_nonempty_audit_owner_fields": [
+      {
+        "path": "docs/research/portfolio/audit/2026-09-04.md",
+        "line": 214,
+        "direction": "portfolio",
+        "owner": "Direct conversation: 我们开始推进自动研究流程"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-04.md",
+        "line": 259,
+        "direction": "portfolio",
+        "owner": "Direct conversation: dedicated luna-xhigh sibling to record, track and remind DMs"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 357,
+        "direction": "portfolio",
+        "owner": "Current Root chat: 同意; owner/reviews/2026-09-05.md#20260905-root-001"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 397,
+        "direction": "portfolio",
+        "owner": "那么我批准了这个更改了 我们修改一下边界 就是这些重要改动按照Pro6的回复继续, 但是需要在Dashboard中星标标出 方便我追溯"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 398,
+        "direction": "portfolio",
+        "owner": "current explicit instruction above; prior ratification row is not proof of earlier authorization"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 420,
+        "direction": "portfolio",
+        "owner": "我明确批准这里涉及的修改  包括后续对各个subagent的delegation 都在我的批准范围内 我批准对后续研究方向的修改 且批准策略B 先前的授权也已经得到我的确认 这个修改符合我的本意"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 421,
+        "direction": "portfolio",
+        "owner": "我已经批准FSD的恢复 当前这个设置已经满足要求了 继续即可"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 434,
+        "direction": "portfolio",
+        "owner": "这符合我的本意 我的同意就是全面批准 不是什么模糊的误解"
+      }
+    ],
+    "interpretation": "No unapplied console review and no nonempty VSP03 owner override. Eight historical Portfolio owner cells concern already recorded authorization/control-plane adoption or out-of-scope FSD; current AGENTS/current endpoint and the formed four-slot allocation control this assignment."
+  },
+  "actual_author_thread_id": "01a08ee9-1223-7bf2-bf21-8c35033cd3ad",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "native_return_target": "/root/dm_vsp03_question_fallback",
+  "accepted_B07_copied": {
+    "independent_training_units": 1,
+    "model_constructions": 1,
+    "parameters": 2083,
+    "training_episodes": 65536,
+    "evaluation_episodes": 8192,
+    "actual_rollouts": {
+      "episodes_started": 73728,
+      "episodes_completed": 73728,
+      "team_ticks": 2949120,
+      "target_transitions": 5898240,
+      "decision_rows": 431296,
+      "rollout_policy_forwards": 8716
+    },
+    "backward_calls": 512,
+    "Adam_steps": 512,
+    "initial_scale": {
+      "parameters": 2083,
+      "initial_l2": 5.835648059844971,
+      "initial_rms": 0.12786288559436798,
+      "current_l2": 5.835648059844971,
+      "displacement_l2": 0.0,
+      "displacement_over_initial_l2": 0.0
+    },
+    "final_scale": {
+      "parameters": 2083,
+      "initial_l2": 5.835648059844971,
+      "initial_rms": 0.12786288559436798,
+      "current_l2": 8.276124954223633,
+      "displacement_l2": 5.499176502227783,
+      "displacement_over_initial_l2": 0.9423420408210624
+    },
+    "primary": {
+      "mean": 0.011567382812500002,
+      "conditional_world_sd": 0.09613782948786226,
+      "conditional_world_se": 0.0030043071714956956,
+      "worlds": 1024
+    },
+    "paired_Q": {
+      "mean": -0.0016064453124999994,
+      "conditional_world_sd": 0.05288252531171355,
+      "conditional_world_se": 0.0016525789159910485,
+      "worlds": 1024
+    },
+    "complete_wall_s": 8.927880000032019,
+    "study_elapsed_s": 8.927880000032019,
+    "aggregate_cpu_s": 9.244309,
+    "peak_rss_bytes": 493867008,
+    "resources_unmeasured": [
+      "cgroup_headroom_bytes",
+      "cgroup_memory_current_bytes",
+      "cgroup_memory_max_bytes"
+    ]
+  },
+  "historical_B06_native_walls_copied_s": [
+    8.888241,
+    8.718389,
+    8.380174
+  ],
+  "future_same_recipe_unallocated": {
+    "fits": 1,
+    "learned_arms": [
+      "G"
+    ],
+    "updates_per_fit": 512,
+    "episodes_per_update": 128,
+    "training_episodes": 65536,
+    "evaluation_endpoints": [
+      128,
+      512
+    ],
+    "evaluation_modes": [
+      "G_greedy",
+      "G_stochastic",
+      "R0",
+      "R"
+    ],
+    "worlds_per_panel": 1024,
+    "evaluation_episodes": 8192,
+    "total_episodes": 73728,
+    "team_ticks": 2949120,
+    "target_transitions": 5898240,
+    "models": 1,
+    "Adam_steps": 512,
+    "rollout_policy_batch_call_upper": 8772,
+    "rollout_count_excludes": "objective/critic/backward calls; fixed rules do not call the learned model",
+    "nested_candidate_trajectory_solver_search": 0,
+    "added_scientific_validation": {
+      "models": 0,
+      "episodes": 0,
+      "updates": 0,
+      "evaluations": 0
+    },
+    "same_recipe_observed_complete_wall_range_s": [
+      8.380174,
+      8.927880000032019
+    ],
+    "future_wall_CPU_and_parameter_movement": "unknown; existing timings are planning evidence, not guarantee",
+    "new_RNG_or_fit_identity": null,
+    "execution_allocation": null,
+    "new_proposed_caps_unallocated_s": {
+      "complete_native": 30,
+      "all_additional_support": 30,
+      "complete": 60
+    },
+    "cost_authority": "Unselected Portfolio option B at 1ea43d8fbc846807d71d4d894136f357f65551b6; no allocated numerical or implementation work",
+    "old_B07_deadlines": "historical, not inherited; no new command/card/deadline prepared"
+  },
+  "new_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "RNG_objects": 0,
+    "worlds": 0,
+    "transitions": 0,
+    "optimizer_steps": 0,
+    "evaluations": 0,
+    "numerical_reanalyses": 0,
+    "tests": 0,
+    "builds": 0,
+    "profiling_invocations": 0,
+    "implementation_lines": 0,
+    "provider_sends": 0
+  },
+  "exposure_line": "Question-only fallback: zero new scientific invocations/models/RNG objects/worlds/transitions/optimizer steps/evaluations/numerical reanalysis/tests/builds/profiling/implementation; no parameter displacement occurs. Historical accepted B07 only: 1 independent G fit, 2083 parameters, 65536 training and 8192 evaluation episodes, 2949120 team ticks, 5898240 target transitions, 512 backward/Adam steps; initial L2 5.835648059844971, final displacement L2 5.499176502227783 (0.9423420408210624 of initial L2). These are copied prior counts, not new exposure. Future one-fit work is unallocated; native/support/complete proposal 30/30/60s is not released.",
+  "scientific_pooling": "none; no new fit summary or uncertainty calculated",
+  "MEI": "0.02 absolute utility, reused interpretation scale",
+  "headroom": "tuned current-N2 record absent, not zero",
+  "full_historical_support_cost": "unaggregated; unknown is not zero",
+  "consultation_effort": "unmeasured",
+  "scope_section4": "none"
+}
