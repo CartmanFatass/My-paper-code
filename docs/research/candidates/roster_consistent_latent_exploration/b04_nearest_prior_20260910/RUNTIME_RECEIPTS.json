@@ -1,0 +1,39 @@
+{
+  "learned-admission.json": {
+    "assessed_at": "2026-09-11T05:20:18.117910Z",
+    "available_physical_bytes": 15562735616,
+    "captured_at": "2026-09-11T05:20:18.117657Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15562735616,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "reference-admission.json": {
+    "assessed_at": "2026-09-11T05:21:37.331031Z",
+    "available_physical_bytes": 15564587008,
+    "captured_at": "2026-09-11T05:21:37.330764Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15564587008,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "time_files": {
+    "chain-time.txt": "wall_s=81.78,peak_rss_kib=590592,exit=0",
+    "learned-time.txt": "wall_s=79.21 peak_rss_kib=590592 exit=0",
+    "reference-time.txt": "wall_s=2.56 peak_rss_kib=429612 exit=0"
+  }
+}

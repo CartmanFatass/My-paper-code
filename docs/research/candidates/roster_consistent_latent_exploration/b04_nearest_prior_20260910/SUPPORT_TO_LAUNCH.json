@@ -1,0 +1,57 @@
+{
+  "components": [
+    {
+      "phase": "preparation before measured collection",
+      "charged_s": 30,
+      "note": "Conservative charge for recovery reads, input sync/push and source/card plumbing; authoring effort separate."
+    },
+    {
+      "phase": "exposure generation",
+      "wall_s": 0.3116938
+    },
+    {
+      "phase": "focused tensor and publication check",
+      "wall_s": 4.181481
+    },
+    {
+      "phase": "owner item and scratch inspection",
+      "wall_s": 0.3929833
+    },
+    {
+      "phase": "independent review",
+      "wall_s": 3.476438
+    },
+    {
+      "phase": "source/card/owner publication",
+      "wall_s": 8.9915819
+    },
+    {
+      "phase": "scope/diff and audit checks",
+      "wall_s": 0.4848982
+    },
+    {
+      "phase": "source bundle staging and exact detached checkout",
+      "wall_s": 8.7155167
+    },
+    {
+      "phase": "live-main reviews at launch boundary",
+      "wall_s": 0.3961831
+    },
+    {
+      "phase": "exact command and preparation publication",
+      "wall_s": 4.3764543
+    },
+    {
+      "phase": "single detached submission",
+      "wall_s": 0.8468777
+    },
+    {
+      "phase": "Monitor dispatch",
+      "charged_s": 1,
+      "note": "Conservative direct-tool charge; actual observation commands are separate."
+    }
+  ],
+  "charged_or_measured_s": 63.174108000000004,
+  "remaining_unmeasured": "launch receipt publication, Monitor observation, collection, analysis, result publication and preservation/cleanup",
+  "cap_s": 140
+}
