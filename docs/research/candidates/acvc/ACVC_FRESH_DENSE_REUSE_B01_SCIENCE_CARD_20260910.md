@@ -387,3 +387,60 @@ bill is not fully established because Monitor measured only part of its work; th
 known components and missing overhead are explicit in the new collection/intake.
 This does not rewrite the old8921 accounting deviation or the new valid primaries.
 The new numerical allocation is finished; no retry or successor is authorized.
+
+## 12. Prospectively bound independent follow-up 8941
+
+The [four-slot Portfolio mapping, ACVC](../../portfolio/pro_packets/20260910_four_slot_rolling_refill/EXECUTION_MAPPING.md#acvc-one-further-unscreened-fresh-dense-fit-360-seconds)
+allocates exactly one further unscreened fresh fit under §§2–5,10–11, with the
+complete conforming response at1ea43d8fbc846807d71d4d894136f357f65551b6. Root assigned
+this batch to the replacement DM on2026-09-10. This allocation supersedes only
+the earlier no-successor boundary for this new fit; no fourth fresh fit follows.
+
+Select training master **8941** and evaluation namespace **8942** before any new
+learner/RNG/native output. Replace m/q in §§3–4; all other quantities, draw order,
+native semantics and fixed final endpoint remain unchanged. Existing8921/8922 and
+8931/8932 are historical. The [8941 prospective facts](ACVC_FRESH_DENSE_REUSE_B01_8941_PROSPECTIVE_FACTS_20260910.json)
+expand the seed ranges, count law, movable parameters and retained cost projections.
+No retained checkpoint, screened initialization or best-of-many endpoint is used.
+
+Exactly512 training episodes,256 sequential two-episode rollouts and1024 Adam/
+backward calls fit all69079 parameters under the existing nonzero-lr learner.
+Always apply proposals while fitting, then preserve the final checkpoint and
+evaluate C→F→dwell64 episodes each, including an intact weak fit. There are704
+scored episodes/180224 team steps, plus four unscored constructor resets. Intrinsic
+dominant factors remain512×256×5 collection,256×4 updates replaying2×256×5 agent
+steps each, and3×64×256×5 evaluation forwards. No nested search or extra panel.
+
+Apply the unchanged rule separately to F−C, F−dwell and secondary dwell−C:
+**UP** if mean difference >0.01 J; **DOWN** if <−0.01 J; otherwise **WITHIN**,
+retaining the sign. Both exact boundaries remain WITHIN. MEI.01J is the retained
+native practical margin. New pre-output predictions: **P(F−C is UP)=.75;
+P(F−dwell is UP)=.65**. Owner prediction: **not taken (unattended)**. These forecasts
+remain distinct from the already scored8921/8931 forecasts.
+
+Scientific-reading mode used FOUNDATIONS§6 and04_EMPIRICAL: the entire fit is the
+independent training unit; paired initial worlds support only checkpoint-conditional
+SEs because private streams, histories, commands and reactive teammates diverge.
+A third favorable fit would extend the observed package support, not establish
+stable superiority, pure retrace causality or transfer. Above the MEI against both
+comparators supports continued consideration of this package; a competitive dwell
+or opposite sign weakens that recommendation; within the MEI does not prove
+equivalence. All outcomes survive. The two preceding fresh observations remain
+separate from selected8201/8202 assets and the ended learned T/G losses. Their
+F−dwell gains coexist with5 and11 adverse worlds and positive dwell−C means.
+No new comparator/mechanism or unresolved source claim needs another corpus search.
+Tuned same-information native headroom remains absent; F is attained, not an upper.
+
+Caps remain **270s complete supervised native chain +90s all additional runtime
+support, including Monitor =360s complete**, with no transfer, retry, replacement,
+resumed slice, panel reduction, T/G reopening or automatic successor. Earlier
+accounting gaps remain historical. Native CPU FP32/Torch1/1, remote-first routing,
+committed exact source, joined destination admission and detached execution persist.
+Engineering-scope §4: **none needed**. Existing source/runner/test budgets are not
+renewed. L0, acceptance, exact launch and accounting belong in the
+[8941 execution record](ACVC_FRESH_DENSE_REUSE_B01_8941_EXECUTION_20260910.md).
+
+Object-tier options: (a) bind the one allocated unchanged fit to fresh8941/8942;
+(b) substitute retained/screened data; (c) alter fitting or panels. Recommend/select
+(a), the conforming realization. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).** Recasts2 and lowest contention remain unchanged.

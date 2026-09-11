@@ -144,21 +144,21 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
     code = module.run(output, "synthetic", time.monotonic(), 20.0,
                       make_env=fake_env, train_episodes=4, horizon=8, eval_episodes=3)
     assert code == 0
-    assert calls["templates"] == [8931]
-    assert calls["dense"][0][1:] == (module.DENSE, 893100012)
+    assert calls["templates"] == [8941]
+    assert calls["dense"][0][1:] == (module.DENSE, 894100012)
     assert [item["constructor_seed"] for item in calls["envs"]] == [
-        893101000, 893200062, 893200063, 893200064,
+        894101000, 894200062, 894200063, 894200064,
     ]
-    assert [item[1] for item in calls["loads"]] == [8932, 8932, 8932]
+    assert [item[1] for item in calls["loads"]] == [8942, 8942, 8942]
     assert [item[2] for item in calls["evaluation"]] == [
         arm for arm in ("C", "F", "dwell") for _episode in range(3)
     ]
     assert [item["reset_seed"] for item in calls["training"]] == [
-        893101000, 893101001, 893101002, 893101003,
+        894101000, 894101001, 894101002, 894101003,
     ]
     assert len({id(item["velocity_rng"]) for item in calls["training"]}) == 1
     assert [item["duration_rng"]["seed"] for item in calls["training"]] == [
-        893104000, 893104001, 893104002, 893104003,
+        894104000, 894104001, 894104002, 894104003,
     ]
     assert all(item["options"] == {
         "real": True, "diagnostics": False,

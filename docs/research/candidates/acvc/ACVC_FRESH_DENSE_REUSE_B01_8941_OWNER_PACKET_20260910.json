@@ -1,0 +1,37 @@
+{
+  "question": "记录已获分配的第三次新DENSE训练8941及固定C/F/dwell比较；所有者可异步覆盖尚未执行的选择。",
+  "changes_if_approved": [
+    {
+      "target": "ACVC卡第12节",
+      "from": "8921与8931结果已完成",
+      "to": "只新增8941训练、8942评价；原生270秒加全部支持90秒"
+    }
+  ],
+  "if_refused": "按所有者明确覆盖处理尚未执行的工作，保留已有证据；不自动替换或重跑。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/EXECUTION_MAPPING.md",
+      "quote": "Bind one new unscreened training/evaluation namespace; run the accepted fresh-DENSE/C/F/dwell law once and complete intake/closeout.",
+      "why": "完整Portfolio决定已分配这一次原生训练。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md",
+      "quote": "The strongest contrary evidence is **11/64 F−dwell losses**",
+      "why": "前两次均值正向仍有反例；停留控制也有收益，不能推断稳定优势或纯回撤效应。"
+    }
+  ],
+  "uncertainty": [
+    "新实例可能弱或反向；仍保留全部三组评价。",
+    "旧Monitor精确总账未知；新任务明确纳入支持上限。"
+  ],
+  "cost": {
+    "compute": "一次704回合、180224团队步、1024 Adam；原生270秒、全部支持90秒、总360秒。",
+    "owner_time": "无需等待回复",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md"
+}
