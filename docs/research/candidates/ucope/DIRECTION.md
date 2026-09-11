@@ -26,6 +26,15 @@ remains dated provenance under the controlling evidence specification section 11
 - Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
 - Latest direction-tier decision:
+  **2026-09-11 PRO_FINAL / PARK**, limited to further empirical continuation of
+  the instantiated continue/end-credit L recipe tested on 8801: fixed-five-UAV,
+  own-expiry physical {1,2}, final2048 comparison against freshly trained F.
+  Retain the unchanged-L spending stop; no successor is selected. This changes
+  no all-renewal or ordinary-feedback disposition, Portfolio lifecycle/priority,
+  formal UAV entry or C status. Recasts remain **1** and the older
+  retained-policy/root-residual PARK stays separate. See the
+  [complete response and applied conformance intake](pro_packets/20260911_post_8801_convergence/INTAKE.md).
+- Previous direction-tier decision and subsequent object history:
   **2026-09-09 PRO_FINAL / CONTINUE**, bounded current-host comparator
   development inside the existing renewal family. Select one future B question
   comparing training-only scalar value-target normalization in legal feedback G
@@ -241,7 +250,43 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-11 separate continue/end credit loses to fixed-law F on8801
+## Current scientific position — 2026-09-11 instantiated continue/end-credit L continuation is parked
+
+**Conclusion and bounded claim.** The complete original Convergence response
+selects a narrow **PRO_FINAL / PARK** of further empirical continuation of the
+specific L recipe tested on8801, retaining the unchanged-L spending stop.
+Its boundary is fixed-five-UAV, one/two-tick own-expiry control and final2048
+comparison against fresh trained fixed-law F. No successor is selected.
+This is a reversible spending decision under uncertainty; it does not establish
+population inferiority or close the renewal/credit family.
+
+**Strongest support.**8801 is VALID COMPLETE/DOWN, L−F
+**−0.024105609431490836**, beyond its0.01 MEI, after both learners moved and
+L's duration head/residual were exercised.40 of64 worlds favor competent F.
+The earlier two T histories also have adverse T−F panels; those different
+recipes are relevant caution, not additional L replications.
+
+**Strongest contradiction and surviving alternative.** Only one L/F training
+pair exists and24 worlds favor L. A second unchanged pair could alter the
+comparison. Earlier8703 native/H improvement and fixed-short gains remain
+separate positive evidence. Pro accepts an independent pair as a legitimate
+B option but finds its marginal decision value insufficient to select it now;
+no positive-first, novelty or complete-cause condition is imposed. Finite
+optimization, regression/gradient allocation and partner co-adaptation remain
+unresolved; a sound first-step ordering argument does not guarantee a learning gain.
+
+**Next discriminator and ceiling.** None is selected or funded. A future
+separately authorized decision can reconsider the same recipe for a concrete
+decision-value reason while preserving every outcome. No current L−G/L−H,
+stable ranking, component cause, exact headroom, transfer or deployment claim
+is available. Recasts1 and absent tuned headroom remain; the older
+retained-policy/root-residual PARK and Portfolio state are unchanged.
+
+See the [immutable full response](pro_packets/20260911_post_8801_convergence/archive/RESPONSE.md)
+at81d5d48a648427674684909d641b7d90f18c87c0 and
+[conformance, application and strongest alternative](pro_packets/20260911_post_8801_convergence/INTAKE.md).
+
+## Previous scientific position — 2026-09-11 separate continue/end credit loses to fixed-law F on8801
 
 **Conclusion and bounded claim.** One fresh L/F pair is VALID COMPLETE/DOWN
 at the fixed2048-episode endpoint: L−F **−0.024105609431490836**, conditional
