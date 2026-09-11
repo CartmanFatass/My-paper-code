@@ -88,5 +88,15 @@
     "verdict_text": "**Recommendation A: allocate UCOPE's proposed L/F comparison, RCLE's proposed nearest-prior comparison, one zero-numerical FOLR post-HALF-B02 Convergence question, and one further fresh ACVC comparison.** Requested complete numerical/runtime caps are 3300, 300, 0 and 360 seconds respectively. These are recommendations to `portfolio:cross_direction`, not locally applied investments. Compare option B, which replaces the FOLR question with VSP03's inexpensive, conditional same-recipe B opportunity. Both options have an explicit finite fallback order below.",
     "source": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T01:31:06+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md#3-blocker-rule",
+      "record": "docs/research/portfolio/decisions/2026-09-10-four-slot-rolling-refill.md",
+      "state": "blocked",
+      "summary": "按既有所有者阻塞规则和Root本次指令记录：两次点击中一次确认受理，终止节点没有完整答复；GitHub新响应404且仅有准备评论。没有Portfolio裁决，A/B及候补未执行，禁止再次Send。既有第五席MGTAP设计候补由Root独立激活，与本题无关。"
+    }
+  ]
 }
