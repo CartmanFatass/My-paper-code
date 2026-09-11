@@ -88,5 +88,15 @@
     "verdict_text": "建议A：新选FSD与MGTAP各一个完整比较，并各选RCLE、ACVC一个原Convergence问题；保留VNFC条件排队。尚未执行任何本轮投资选项。",
     "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T22:01:38+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "record": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "按Root拓宽后的准备任务发布建议，投资尚未执行。MGTAP和ACVC科学intake及远端收尾均已完成，本地重复件因执行前策略拒绝而保留，不占科研链。现仅FOLR运行，VNFC条件排队，四个空位；A/B/C/D仍由Portfolio决定。"
+    }
+  ]
 }

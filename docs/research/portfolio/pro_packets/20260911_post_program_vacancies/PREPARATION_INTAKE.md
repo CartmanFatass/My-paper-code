@@ -161,3 +161,18 @@ audit row is95 in docs/research/portfolio/audit/2026-09-11.md at this authoring
 boundary; all94 rows from the current main snapshot were retained, including
 concurrent FOLR/MGTAP/ACVC records. No owner reply or Portfolio selection is
 invented. Final owner reviews again returned[] before publication.
+
+## Final closeout facts before the first TASK rendering
+
+Root returned MGTAP maina267ba0a30a86f7e49edd320354c195016081cda and ACVC
+maind4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6. The complete appended intake
+and ACVC E0/execution closeout sections were read directly. Both remote execution
+checkouts are absent/unregistered and unique evidence is preserved. MGTAP retains
+four local duplicates/4487368 bytes and ACVC five/115516942 bytes after pre-effect
+policy rejection; the original DMs retain cleanup ownership, with no bypass.
+These are completed scientific allocations, not two live chains. With FOLR still
+running/adopted and VNFC unready/queued, the current vacancy count is four.
+Known support becomes63.1389747s MGTAP and66.7732663s ACVC at their named cutoffs;
+full support remains unestablished. Updated Root tracking at3c7181282 is read
+alongside these final receipts. Only factual preparation snapshots changed;
+no new science, old request or local investment choice was changed.

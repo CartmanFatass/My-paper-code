@@ -36,7 +36,10 @@
     "FSD_ended": 1,
     "VNFC_unready_queued_not_advancing": 1,
     "vacancies_after_current_MGTAP_ACVC_closeout": 4,
-    "actual_NEW_author_scientific_units": 0
+    "actual_NEW_author_scientific_units": 0,
+    "current_MGTAP_ACVC_advancing_chains_after_closeout": 0,
+    "current_live_FOLR_directions": 1,
+    "current_vacancies_after_closeout": 4
   },
   "actual_new_results": {
     "MGTAP8213": {
@@ -233,6 +236,29 @@
     "Pro/authoring calendar and unknown full support/CPU are not measured as zero",
     "Question-only units release no illustrative future fit or causal audit"
   ],
-  "current_integrated_snapshot_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
-  "new_ACVC_main_integration_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b"
+  "current_integrated_snapshot_sha": "d4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6",
+  "new_ACVC_main_integration_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+  "closeout_snapshot": {
+    "read_utc": "2026-09-11T22:01:38.476844+00:00",
+    "MGTAP_main": "a267ba0a30a86f7e49edd320354c195016081cda",
+    "ACVC_main": "d4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6",
+    "MGTAP_remote_absence_and_registration": true,
+    "ACVC_remote_absence_and_registration": true,
+    "MGTAP_local_duplicates_retained_files": 4,
+    "MGTAP_local_duplicates_retained_bytes": 4487368,
+    "ACVC_local_duplicates_retained_files": 5,
+    "ACVC_local_duplicates_retained_bytes": 115516942,
+    "reason_local_not_removed": "guarded PowerShell cleanup rejected before process creation; no bypass; original DM retains ownership",
+    "unique_evidence_preserved": true,
+    "known_support_seconds_at_closeout": {
+      "MGTAP": 63.13897470000001,
+      "ACVC": 66.7732663
+    },
+    "known_native_plus_support_seconds_at_closeout": {
+      "MGTAP": 421.2489747,
+      "ACVC": 244.7732663
+    },
+    "complete_support_certified": false,
+    "scientific_successor_selected": false
+  }
 }

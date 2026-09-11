@@ -55,7 +55,7 @@ Pro cost to experiment cost has been estimated.
 
 ## 1. Current state and what changed
 
-The current integrated snapshot is main7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b.
+The current integrated snapshot is maind4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6.
 It includes MGTAP's full intake/E0 at5321b69fdecdc6de81fd5e8fb9efe648a5950e6e
 and ACVC's full intake/E0 from source6a24944011e1f11f105e7bd045700cd0ece90094.
 Both were read completely before freezing; Root's earlier reports retain their
@@ -68,15 +68,18 @@ complete program intake. FACTS.json distinguishes the dated observations.
 | --- | --- | --- |
 | FSD, ACTIVE/HIGH | New770903 staging reached its one remote Git fetch, which returned128 with GnuTLS receive/decode error, early EOF and invalid index-pack. The helper ended before checkout or admission. Exact execution/input/supervisor paths and checkout registration were absent. | The allocated unit is closed. Zero models, RNG masters, transitions, updates, evaluations or primary differences; no new scientific polarity. A further pair requires a newly selected investment, not reuse of770903. |
 | VNFC, ACTIVE/HIGH, recasts2 | Exact interpreter mapping expects40 bytes, while the retained failing block has32-byte metadata and a False keyword at offset32. Allocation-time counts/request and corrupting history are missing. Independent review found that the proposed numerical/path-exclusion checks do not establish corruption independence. Production remains unchanged and the draft checks unrun. | Existing conditional900-second funding remains unused unless Pro expressly changes it. Current repair/readiness assignment is closed NOT READY. No fresh scientific launch, additional diagnostic or alternate executor is selected here. |
-| MGTAP, ACTIVE/MEDIUM | Published valid COMPLETE COND_ADVERSE: COND.19342135238526614 versus DENSE.21589092584121028; delta−.02246957345594415, conditional SE.004312411137154014,5/32 positive. Full counts and binding pass; native358.11s. | Finish its current intake/closeout; no successor is selected. Its completion creates an additional vacancy. A new pair is proposed separately, not released by this result. |
+| MGTAP, ACTIVE/MEDIUM | Published valid COMPLETE COND_ADVERSE: COND.19342135238526614 versus DENSE.21589092584121028; delta−.02246957345594415, conditional SE.004312411137154014,5/32 positive. Full counts and binding pass; native358.11s. | Its scientific intake and remote closeout are complete; no successor is selected. Its completion creates an additional vacancy. A new pair is proposed separately, not released by this result. |
 | FOLR, ACTIVE/MEDIUM | Both7809 RETAIN/LEARNED_EVENT handles and actual Monitor adoption are recorded in the current result-evidence file. Completion and primary acceptance were still pending at that record. | Preserve its3900-second allocation. It is one direction chain, not two slots; no additional training is proposed. |
-| ACVC, ACTIVE/MEDIUM, recasts2 | Published valid complete B: F−C+.1414322041 J and F−dwell+.0944113176 J, both UP; dwell−C+.0470208865. All704 episode rows,1024 updates and exact8961/8962 keys pass; conservative native178s. | Finish its intake/closeout; no successor or promotion selected. C/dwell remain own-history controls, not F-clock/dose matches. Its third fresh gain changes the value of a direction decision. |
+| ACVC, ACTIVE/MEDIUM, recasts2 | Published valid complete B: F−C+.1414322041 J and F−dwell+.0944113176 J, both UP; dwell−C+.0470208865. All704 episode rows,1024 updates and exact8961/8962 keys pass; conservative native178s. | Its scientific intake and remote closeout are complete; no successor or promotion selected. C/dwell remain own-history controls, not F-clock/dose matches. Its third fresh gain changes the value of a direction decision. |
 
-FOLR is still live at the latest routed snapshot. MGTAP and ACVC owning DMs are
-completing acceptance/publication/closeout; count that actual work until each
-returns, then its allocation contributes no advancing chain. The post-closeout
-vacancy set is four: FSD, VNFC, MGTAP and ACVC. Replacement work is dispatched
-direction by direction at each ready boundary, without a global wait. A later
+FOLR is still live at the latest routed snapshot. MGTAP and ACVC have completed
+their scientific intakes and remote closeout: MGTAP at
+a267ba0a30a86f7e49edd320354c195016081cda, ACVC at
+d4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6. Their local duplicate removals were
+rejected before execution and remain owned by their DMs; unique evidence is
+preserved. Those residues are not advancing chains or scientific blocks. The
+current vacancy set is four: FSD, VNFC, MGTAP and ACVC. Replacement work is
+dispatched direction by direction at each ready boundary, without a global wait. A later
 FOLR completion does not silently expand these four investments or buy a successor.
 Root maintains actual execution state; queued funding is not an active chain.
 
