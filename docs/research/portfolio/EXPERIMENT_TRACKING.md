@@ -947,3 +947,21 @@ current advancing directions.
 The next current-vacancies Portfolio handoff is integrated through `99c9fd935`, recommends zero
 eligible additions under the named exclusions, and awaits serial Transport dispatch after FOLR
 clears. It records two vacancies after ACVC closeout; it does not itself select science or fill them.
+
+## VNFC B02 accepted execution
+
+VNFC B02 source `76d4afca6`, exact command `8dc043f2f` and accepted-handle receipt `4f443d381`
+are integrated through `f6fb5606b`. The sole selected handle
+`vnfc-b02-credit-20260911-01` runs from the declared exact-source checkout on `hmasd-wsl-node`.
+The adjacent destination admission passed with 15,636,619,264 physical and effective bytes
+available against the 4 GiB floor. The configured shared Monitor confirmed adoption while the
+supervisor was running; its initial observation command wall is 1.0 second. A remote HTTPS fetch
+timed out during preparation, after which the exact 89,959-byte Git bundle was staged and imported;
+this changed neither source nor scientific-attempt identity and caused no retry. The DM retains
+terminal collection, technical acceptance, scientific intake and scoped cleanup, with routine
+polling stopped.
+
+The rolling count remains three distinct directions: RCLE's adopted B06 run, VNFC's adopted B02
+run and FOLR's accepted original-node Pro generation. FOLR still has exactly one Send. The fixed
+current-vacancies Portfolio handoff remains unsent behind that serial binding and will be dispatched
+once after FOLR clears; no local replacement investment has been selected.

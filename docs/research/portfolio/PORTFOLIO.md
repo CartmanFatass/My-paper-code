@@ -32,13 +32,16 @@ Current execution supersedes that dispatch-time count. RCLE B06 is running with 
 adoption. ACVC8951 closed before admission or scientific exposure after its one bounded remote
 preparation received CRLF-contaminated shell input; no retry or successor follows. FOLR has one
 confirmed Send and active original-node Pro generation. VNFC's delayed existing response was
-reconciled without another Send; its original DM is applying the response-selected B02 direction
-decision and preparing the exact600/300/900-second object. Thus RCLE, FOLR and VNFC currently advance.
+reconciled without another Send; its exact B02 source and accepted launch are integrated through
+`f6fb5606b`. Handle `vnfc-b02-credit-20260911-01` passed destination admission with
+15,636,619,264 bytes available and is adopted by the configured Monitor. Thus RCLE, FOLR and VNFC
+currently advance, with VNFC counted once across implementation and its accepted run.
 
 The fixed current-vacancies Portfolio packet at `5b9bfee40`, integrated through `99c9fd935`,
 recommends zero additions from the other accepted rows and records two vacancies after ACVC closeout.
 It remains queued behind FOLR on the serial Transport route; no Portfolio selection has formed from
-that packet.
+that packet. Its fixed factual snapshot predates VNFC launch adoption; the set remains three distinct
+advancing directions rather than four because VNFC's implementation and run are one direction chain.
 
 ## Post-option-A refill decision — 2026-09-11
 
