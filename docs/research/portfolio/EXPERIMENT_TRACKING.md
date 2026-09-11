@@ -981,3 +981,31 @@ fixed-half pause, and supplies zero present implementation or numerical allowanc
 intake are integrated through `66eb1f550`; no successor was selected. The counted set is therefore
 two directions, RCLE collection/intake and VNFC failure collection/intake. The current-vacancies
 Portfolio generation remains cross-direction work and is not counted as another direction.
+
+## Current-vacancies Portfolio decision and completed returns
+
+RCLE B06 is accepted as one valid single-fit result: `Delta_ref=-0.00575764973958`, initialization-
+relative `G_U=-0.000107828776042`, and all eight nearest-reference comparisons lose. Four
+initialization cells improve, so the result does not establish stable inferiority or direction-family
+failure. Its result intake and verified remote cleanup are integrated through `758dfdbdc`; no
+successor is selected. Known native wall is335.86 seconds and final recorded known support is
+86.7963743 seconds, while missing timing components keep full cap conformance unestablished.
+
+VNFC B02 preserves an incomplete primary: exit139/signal11 after77.84 seconds, 15 logged arm rounds
+and480 optimizer steps, with no final summary, midpoint/final checkpoint or performance polarity.
+Its preserved intake and remote cleanup are integrated through `0ab9a5d86`; no retry or successor is
+selected. Automatic approval review rejected the exact local duplicate/source cleanup before
+execution, so those copies and the earlier scratch remain preserved without a bypass.
+
+Transport archived the complete current-vacancies response at `a9adb7f00` after one Send and natural
+completion. The designated Portfolio DM verified all29 fixed references plus TASK and response bytes,
+found no conflict, and accepted `PRO_FINAL / OWNER_DELEGATED` option A: zero additional assignments or
+allowance. The decision and execution mapping are integrated through `c14e08a59`. FOLR's narrow OPEN
+with zero present allowance, RCLE's valid bounded adverse aggregate, VNFC's incomplete primary,
+ACVC's zero-exposure closeout and every other explicit exclusion remain unchanged.
+
+All four chains in the fixed snapshot have completed their named allocations and executable
+closeouts. The current advancing-direction count is zero. No lifecycle, priority, recast or formal-UAV
+state changes; no cap transfers, retries, new source/check tasks, repeated empty-set consultation or
+automatic successors are selected. A future refill requires a concrete attributable eligibility
+change and a specific ready task under the then-applicable authority.

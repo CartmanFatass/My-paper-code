@@ -1,58 +1,31 @@
 # HMASD Research Portfolio
 
-## Current remaining-capacity refill — 2026-09-11
+## Current zero-addition Portfolio boundary — 2026-09-11
 
-The post-option-A work has reached separate boundaries. FSD B02 ended before admission or numerical
-exposure because the projected support path exceeded its 300-second cap. UCOPE's complete direction
-decision narrowly parks further empirical continuation of the 8801 L recipe and selects no successor.
-MGTAP completed its sole COND/DENSE pair: `COND-DENSE=+0.005761321371348559`, conditional SE
-`0.00888326841451271`, with 19/13 world signs. The point is inside the declared ±0.01 band, so DENSE
-remains generic and the allocation ends. Accepted evidence is integrated through `811f35338`; native
-arm and native-total caps pass, while unknown unitemized support prevents certification of the full
-support/complete envelope.
+The canonical Transport archived request
+`2026-09-11-current-vacancies-refill-portfolio-01` after one accepted Send and natural completion.
+The designated Portfolio DM verified all 29 fixed references plus TASK and the 40,449-byte response,
+found no scientific or specification conflict, and accepted option A under
+`PRO_FINAL / OWNER_DELEGATED`: **zero additional assignments and zero additional allowance**. The
+[decision](decisions/2026-09-11-current-vacancies-refill.md) and
+[execution mapping](pro_packets/20260911_two_vacancy_refill/EXECUTION_MAPPING.md) are integrated
+through `c14e08a59`. This bounded decision does not close the Portfolio or claim that remaining
+questions lack scientific value.
 
-The canonical Transport archived the fixed remaining-capacity request
-`2026-09-11-remaining-capacity-refill-portfolio-01` after one accepted Send and natural completion.
-The designated Portfolio DM verified the complete response and accepted conforming option A. The
-[decision](decisions/2026-09-11-remaining-capacity-refill.md) and
-[execution mapping](pro_packets/20260911_remaining_capacity_refill/EXECUTION_MAPPING.md) are
-integrated through `bb40797dc`.
+All four chains in the fixed request snapshot completed their named allocations independently:
 
-| Direction | Current selected investment | Separate complete limits |
-| --- | --- | --- |
-| roster_consistent_latent_exploration, ACTIVE/MEDIUM | One fresh `.99` nearest-prior, `.002` each-other final1000 B with initialization/final/reference panels. | Learned600/reference10/support140/complete750 seconds. |
-| acvc, ACTIVE/MEDIUM, recasts2 | One new unscreened unchanged DENSE fit and final C/F/dwell64 panels. | Native270/support330/complete600 seconds. |
-| vap_folr_core, ACTIVE/MEDIUM | One learned-retention candidate note, original Convergence question and full intake. | Zero implementation and zero numerical allowance. |
+| Direction | Accepted boundary |
+| --- | --- |
+| RCLE | B06 is a valid single-fit result with `Delta_ref=-0.00575764973958`; all eight nearest-reference cells lose. Result and exact remote cleanup are integrated through `758dfdbdc`; no successor. |
+| ACVC | 8951 ended before admission or scientific exposure after CRLF-contaminated remote preparation input. Preserved closeout is integrated through `ece2de702`; no retry or successor. |
+| FOLR | The complete Convergence response opens the narrow learned-retention question in-family, preserves RETAIN and the fixed-half pause, and supplies zero present implementation/numerical allowance. Intake is integrated through `66eb1f550`; no funded successor. |
+| VNFC | B02 ended exit139 after 77.84 seconds with 480 logged optimizer steps but no final primary or performance polarity. Remote cleanup is integrated through `0ab9a5d86`; no retry or successor. Local duplicate/scratch cleanup remains policy-blocked and preserved. |
 
-Root has actually dispatched all three to their existing DMs and shared checkouts. MGTAP's named
-allocation and cleanup are complete, so three chains advance and two target slots remain vacant.
-No MGTAP successor, cap transfer, fallback or local fourth/fifth investment was selected.
-
-Current execution supersedes that dispatch-time count. RCLE B06 is running with actual Monitor
-adoption. ACVC8951 closed before admission or scientific exposure after its one bounded remote
-preparation received CRLF-contaminated shell input; no retry or successor follows. FOLR has one
-confirmed Send and active original-node Pro generation. VNFC's delayed existing response was
-reconciled without another Send; its exact B02 source and accepted launch are integrated through
-`f6fb5606b`. Handle `vnfc-b02-credit-20260911-01` passed destination admission with
-15,636,619,264 bytes available and is adopted by the configured Monitor. Thus RCLE, FOLR and VNFC
-currently advance, with VNFC counted once across implementation and its accepted run.
-
-The fixed current-vacancies Portfolio packet at `5b9bfee40`, integrated through `99c9fd935`,
-recommends zero additions from the other accepted rows and records two vacancies after ACVC closeout.
-After FOLR archived, the canonical Transport verified the handoff and confirmed its one provider
-Send; request `2026-09-11-current-vacancies-refill-portfolio-01` is now `WAITING_GENERATION` with
-no retry. No Portfolio selection has yet formed from that packet. Its fixed factual snapshot predates
-VNFC launch adoption; the set remains three distinct advancing directions because VNFC's
-implementation and run are one direction chain.
-
-The shared Monitor subsequently reported RCLE B06 terminal exit 0 after 336 seconds with a complete
-reference, and VNFC B02 terminal exit 139/core dump after 78 seconds. Both terminals are routed to
-their original DMs for separate collection and intake; neither terminal alone selects a retry or
-successor. FOLR's complete response then passed conformance and opened the narrow learned-retention
-question as an in-family extension while preserving RETAIN, the fixed-half pause and zero current
-implementation/numerical allowance. Its decision is integrated through `66eb1f550` and reaches a
-clean boundary without a selected successor. RCLE and VNFC intake remain the two advancing direction
-chains while the Portfolio request generates separately.
+These completed returns contribute **zero advancing direction chains**. All 15 directions retain
+their existing lifecycle, priority, recast, MEI, headroom and historical evidence. No cap transfer,
+conditional future budget, new source/check task, repeated empty-set question or automatic successor
+was selected. A future Portfolio revisit requires a concrete attributable eligibility change and a
+specific ready task within the then-applicable scope.
 
 ## Post-option-A refill decision — 2026-09-11
 
