@@ -1,0 +1,120 @@
+{
+  "id": "20260910-root-006",
+  "created": "2026-09-10T18:00:33-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "四个空位：具体学习比较与FOLR/VSP03取舍",
+  "context": "FSD设计仍推进，旧四链已完成。推荐A只是一份待Portfolio裁决的有限投入建议，没有本地选定、实现或数值执行。保留FSD/MGTAP原额度、最窄家族停止、真实成本未知和独立滚动推进。",
+  "options": [
+    {
+      "key": "a",
+      "label": "UCOPE/RCLE真实比较，FOLR问题，ACVC新拟合",
+      "consequence": "新完整数值运行上限3960秒；VSP03零数值问题再VSPC1设计为有限候补；不释放FOLR拟合或VSP03拟合。"
+    },
+    {
+      "key": "b",
+      "label": "用VSP03条件拟合替换FOLR问题",
+      "consequence": "新完整上限4020秒；VSP03须原方向节点处理暂停后才可用新60秒单拟合额度；FOLR问题再VSPC1设计为候补。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "两份实际新学习方案值得有限原生比较；FOLR反号后先问窄家族判断，ACVC的第三拟合仍须与便宜VSP03机会比较。",
+  "evidence": [
+    "docs\\research\\portfolio\\pro_packets\\20260910_four_slot_rolling_refill\\SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L143",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "FSD仍在做已获准的设计任务，另外四个空位该投入哪些具体首步，受阻时按什么顺序候补？",
+    "changes_if_approved": [
+      {
+        "target": "四个独立滚动补位",
+        "from": "旧FOLR/ACVC执行和UCOPE/RCLE设计均完成，没有继承的后继额度",
+        "to": "建议A：UCOPE新L/F比较3300秒、RCLE最近点先验比较300秒、FOLR一次零数值收敛问题、ACVC一次新拟合360秒；候补为VSP03零数值收敛问题，再VSPC1一次零数值设计。最终由Portfolio Pro选择，当前没有执行该投入。"
+      }
+    ],
+    "if_refused": "由同一Portfolio节点选择B或具体合规替代。B用有条件的VSP03一次60秒拟合机会替换FOLR问题，其原方向节点须先处理现有家族暂停。FSD及它唯一的MGTAP候补保持原额度；不等待所有者逐项批准。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_CARD_20260910.md",
+        "quote": "Does learned-credit arm **L**, defined below, exceed a freshly trained **F**\nat the final2048 endpoint by more than0.01J?",
+        "why": "已有具体更新规则、保持信息和原生奖励的比较器、有限工作量；下一次真实训练能回答这个新问题。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_SERVICE_COMPARISON_DESIGN_INTAKE_20260910.md",
+        "quote": "**Recommend one new B/EXPLORE design: one fresh nearest-guided FLEX fit, 200 updates,\ncompared with its untrained initialization and the existing deterministic\nINDEPENDENT-NEAREST reference.**",
+        "why": "把重点移到能否超过已达到的服务控制器，同时保留从初始策略学习及碎片化损失，避免继续只对比弱控制。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md",
+        "quote": "Both prospectively chosen\nfresh fits now show that pattern; this remains bounded package evidence.",
+        "why": "两次新拟合均正向，支持考虑一次有界后续；不是总体稳定性或纯回溯因果证明。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_INTAKE_20260910.md",
+        "quote": "**−4.293046875**, below−1. Select **RETAIN_ABOVE_MEI** at the existing absolute MEI1.",
+        "why": "FOLR新一对反转了旧收益；建议只投入一次最窄家族判断，不把一次损失写成全方向负面，也不直接延长拟合。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_POST_B07_CONVERGENCE_INTAKE_20260910.md",
+        "quote": "Final greedy and stochastic\nbeat both rules in B06 and B07.",
+        "why": "四个最终策略的正收益和8至9秒原生拟合使VSP03成为实质竞争项；另一个同配方训练历史合法，无须新机制。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md",
+        "quote": "The strongest contrary evidence is **11/64 F−dwell losses**, including−.0570047755J,\nand **4/64 F−C losses**, including−.0113615693J.",
+        "why": "两次正均值不保证每个情形获益；第三次拟合的边际价值也应与更便宜的替代比较。"
+      }
+    ],
+    "uncertainty": [
+      "UCOPE新信用包和RCLE新先验尚未实现，新增反向传播、构建和完整支持成本未知；额度不是预测。",
+      "FOLR和ACVC旧Monitor支持账不完整，不能认证旧总额度符合，也不能据此否定原生结果或创造重跑额度。",
+      "VSP03目前家族暂停，B选项必须由原方向节点处理具体停止范围；这不成为所有B的额外门槛。",
+      "当前宿主都缺调优同信息基线的headroom；缺失是排序信息，不是禁入条件。",
+      "ACVC保留第二次recast的最低争用顺序；MGTAP只保留为FSD的既有候补。CBSC、FRRIE限制及VNFC原发送不确定性不变。"
+    ],
+    "cost": {
+      "compute": "本次作者零模型、环境、训练、优化、评估、测试、诊断和Pro发送。A新完整运行上限3960秒，B为4020秒，各臂和支持不可借用：UCOPE1800+1200+300；RCLE150+10+140；ACVC270+90；B的VSP03条件拟合30+30。零数值设计、人工判断和Pro耗时并不等于免费，未计成原生运行秒数。",
+      "owner_time": "可异步查看或覆盖；无须等待逐项批准。",
+      "reversibility": "costly",
+      "waits_on_this": "这四个新投入等待Portfolio形成裁决，FSD和其他独立已授权工作继续。"
+    },
+    "verdict_text": "**Recommendation A: allocate UCOPE's proposed L/F comparison, RCLE's proposed nearest-prior comparison, one zero-numerical FOLR post-HALF-B02 Convergence question, and one further fresh ACVC comparison.** Requested complete numerical/runtime caps are 3300, 300, 0 and 360 seconds respectively. These are recommendations to `portfolio:cross_direction`, not locally applied investments. Compare option B, which replaces the FOLR question with VSP03's inexpensive, conditional same-recipe B opportunity. Both options have an explicit finite fallback order below.",
+    "source": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T01:31:06+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md#3-blocker-rule",
+      "record": "docs/research/portfolio/decisions/2026-09-10-four-slot-rolling-refill.md",
+      "state": "blocked",
+      "summary": "按既有所有者阻塞规则和Root本次指令记录：两次点击中一次确认受理，终止节点没有完整答复；GitHub新响应404且仅有准备评论。没有Portfolio裁决，A/B及候补未执行，禁止再次Send。既有第五席MGTAP设计候补由Root独立激活，与本题无关。"
+    },
+    {
+      "at": "2026-09-11T03:50:11+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/OWNER_DIRECT_RESEND_TERMINAL_FACTS.json",
+      "record": "docs/research/portfolio/decisions/2026-09-10-four-slot-rolling-refill.md",
+      "state": "blocked",
+      "summary": "所有者亲自重发指令已由Root按固定提示执行一次；6 Pro自然运行12分16秒后完整返回能力缺口，未写响应或评论并明确科学审查未完成。新GitHub读取仍为77b9d573、response404、只有准备评论。A/B未选、额度未释放、不得再次Send。"
+    },
+    {
+      "at": "2026-09-11T04:48:34+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/1ea43d8fbc846807d71d4d894136f357f65551b6/docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-10-four-slot-rolling-refill.md",
+      "state": "applied",
+      "summary": "完整Pro裁决已核对，应用A的投入记录：UCOPE3300、RCLE300、FOLR零数值问题、ACVC360秒；候补VSP03问题再VSPC1设计，各一次。Root分派及真实运行尚未发生，不改生命周期/优先级/recast，不给第五位FSD/MGTAP实现额度。中文应用包见该intake链接。",
+      "correction": "之前的blocked记录和建议包是交付前历史。现有47134字节完整响应1ea43d8f和Issue17评论5629259208，下载/侧录字节一致，已通过完整科学/规范核对。依据AGENTS4.8应用，不等待所有者逐项批准；auto_applied只记录投入选项，非运行完成。"
+    }
+  ],
+  "approval_correction": "之前的blocked记录和建议包是交付前历史。现有47134字节完整响应1ea43d8f和Issue17评论5629259208，下载/侧录字节一致，已通过完整科学/规范核对。依据AGENTS4.8应用，不等待所有者逐项批准；auto_applied只记录投入选项，非运行完成。"
+}

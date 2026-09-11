@@ -480,7 +480,12 @@ appendix and completed historical tasks remain unchanged.
 - Scoped GitHub Pro delivery is described in
   `docs/project/GITHUB_RESEARCH_COLLABORATION.md`. New requests use committed task links and
   a named branch response/comment; Transport archives its receipt and Root/DM reads
-  the complete fixed file for intake. Accepted requests remain on their original route; attachment mode is only an explicit
+  the complete fixed file for intake. When the GitHub connector cannot expose or complete the
+  scoped writes after actual-state readback, the same prompt requires Pro to attach its complete
+  answer as a downloadable Markdown document; Transport downloads and hashes those exact bytes, stores the Transport attempt artifact as
+  `<archive_id>__02_RESPONSE.md`, and retains repository sidecar `archive/CHAT_FALLBACK_RESPONSE.md`
+  for DM intake without another Send. It never synthesizes the scoped GitHub `archive/RESPONSE.md`. Accepted requests remain on their original route;
+  attachment input mode is only an explicit
   recorded capability fallback. No duplicate Send, scientific launch gate, main write or
   Pro code/PR merge authority is implied.
 

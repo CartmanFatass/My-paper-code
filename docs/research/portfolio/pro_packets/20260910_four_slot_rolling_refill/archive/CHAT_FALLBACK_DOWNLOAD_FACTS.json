@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-10-four-slot-rolling-refill-01",
+  "event": "OWNER_INITIATED_CHAT_MARKDOWN_DOWNLOAD",
+  "observed_at_utc": "2026-09-11T04:26:46.540794+00:00",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "paired_user_text": "无法发布就给我一个md文档",
+  "assistant_worked_for": "6m 27s",
+  "provider_message_id": "2acd865d-2313-4200-bc5f-2483bc895a96",
+  "provider_filename": "FOUR_SLOT_ROLLING_REFILL_RESPONSE.md",
+  "download_path": "C:\\Users\\fires\\Downloads\\FOUR_SLOT_ROLLING_REFILL_RESPONSE.md",
+  "repository_sidecar": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/CHAT_FALLBACK_RESPONSE.md",
+  "byte_count": 47134,
+  "sha256": "bb7763097d3aceabdbe85d6f06193e3cc79b4be2cc9140c64c616340d30d388f",
+  "github_response": {
+    "commit": "1ea43d8fbc846807d71d4d894136f357f65551b6",
+    "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+    "issue_comment_id": 5629259208,
+    "byte_count": 47134,
+    "sha256": "bb7763097d3aceabdbe85d6f06193e3cc79b4be2cc9140c64c616340d30d388f"
+  },
+  "byte_equal_to_github_response": true,
+  "download_event_confirmed": true,
+  "scientific_intake_status": "PENDING_DESIGNATED_DM_CONFORMANCE"
+}

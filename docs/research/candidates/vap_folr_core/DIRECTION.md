@@ -500,3 +500,48 @@ References:
 - `FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_SUMMARY_20260910.json`
 - `FOLR_PUBLIC_LIFECYCLE_HALF_B01_INTAKE_20260910.md` §§5–6
 - `evidence/2026-09-10-folr-public-lifecycle-half-b01-run-analysis.json`
+
+## Accepted public-lifecycle half-attenuation B02 science — 2026-09-10
+
+**Conclusion.** The newly allocated matched7808/107808 fitting instance gives
+HALF_EVENT5.17875 and RETAIN9.471796875 after5000 training and128 final episodes per
+arm. The fixed-.5 package's difference **−4.293046875** selects RETAIN_ABOVE_MEI at
+absolute MEI1. Its earlier practical gain did not recur in this instance. The
+low-confidence WITHIN_MEI forecast missed. All256 returns and both completed real
+learners remain represented; the old positive pair is not pooled into this endpoint.
+
+**Bounded claim.** A native loss of one complete learned package to fresh generic
+retention on the explicit public-lifecycle Traffic Junction variant. One new matched
+training pair does not estimate training-population uncertainty; conditional rollout
+SDs9.89218/6.96587 are not training variance. Equal evaluation labels do not pair
+action-dependent traffic worlds. No stable winner, universal failure of attenuation,
+equivalence, causal timing/staleness, useful-memory fraction, omitted RANDOM/full-EVENT
+superiority, original-CAMA, headroom, transfer/UAV/C or Portfolio claim follows.
+
+**Strongest support and contradiction.** HALF-B01's+1.56546875 remains direct support
+for bounded interest in this same fixed law. This new−4.293046875 point is direct
+contrary evidence under a matched competent retention comparator. Cumulative training
+means also favor RETAIN (−.313516 versus−3.735168) as a separate observation. No
+pooled mean, selected checkpoint, omitted outcome or changed margin replaces either
+instance. Same-information tuned headroom remains absent; generic RETAIN is untuned.
+
+**Surviving alternative.** Actual half attenuation occurred46657/1409 times in train/
+final phases, with zero full survivor resets and consistent acting/replay handling.
+This does not identify the cause of the loss. Useful historical context,
+representation/optimization, action-dependent data, joint intervention and partner
+co-adaptation remain possible contributors. Multiplying a hidden vector by.5 does
+not measure how much useful information survives.
+
+**Next discriminator.** The allocated recurrence question has returned an adverse
+point; no successor is selected. Any later claim of repeatable native benefit needs
+separately authorized evidence against matching retention with clear decision value.
+The completed allocation changes no family lifecycle, recast count, promotion or
+Portfolio priority. Historical positive and negative evidence keeps its meaning.
+
+References:
+
+- `FOLR_PUBLIC_LIFECYCLE_HALF_B02_SCIENCE_CARD_20260910.md`
+- `FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_EVIDENCE_20260910.md` §§8–10
+- `FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_SUMMARY_20260910.json`
+- `FOLR_PUBLIC_LIFECYCLE_HALF_B02_INTAKE_20260910.md` §§8–9
+- `evidence/2026-09-10-folr-public-lifecycle-half-b02-run-analysis.json`

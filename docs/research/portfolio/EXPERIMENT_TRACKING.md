@@ -1,5 +1,30 @@
 # HMASD experiment tracking
 
+## Four-slot decision checked; execution mapping returned — 2026-09-11
+
+The complete Portfolio response `1ea43d8fbc846807d71d4d894136f357f65551b6`
+and direct Issue17 delivery comment5629259208 are verified. The designated DM's
+[full conformance intake](decisions/2026-09-10-four-slot-rolling-refill.md)
+applies option A: UCOPE L/F3300 seconds, RCLE nearest-prior300, FOLR one
+zero-numerical original Convergence question/intake and ACVC one fresh fit360.
+The [execution mapping](pro_packets/20260910_four_slot_rolling_refill/EXECUTION_MAPPING.md)
+returns exact scientific/cost/stop boundaries and existing checkouts to Root.
+No new source acceptance, scientific handle, Monitor adoption or current advancing
+count is claimed here; Root integration and original-DM dispatch are next.
+
+The downloaded47134-byte Markdown and separately archived sidecar are byte-equal
+to the immutable GitHub response. Earlier attempts and capability-gap/404 facts
+remain preserved at their observation times. The old raw Transport binding still
+reads BLOCKED despite actual delivery; Root routes its ordinary archival/readiness
+reconciliation without another four-slot Send. The disjoint fifth-slot FSD/MGTAP
+implementation question is unchanged/unselected and gains no allowance here.
+
+VSP03 question-only then VSPC1 source/design-only are finite fallbacks, activated
+once in order only on specified primary blockage/no-ready facts. Completion alone
+does not release another investment. All four directions roll independently;
+ACVC retains second-recast lowest contention, and lifecycle/priority/recasts/UAV
+entry are unchanged. This supersedes older operational descriptions below.
+
 ## 2026-09-10 rolling execution update
 
 The app restart was reconciled against persisted repository and supervisor state; no completed

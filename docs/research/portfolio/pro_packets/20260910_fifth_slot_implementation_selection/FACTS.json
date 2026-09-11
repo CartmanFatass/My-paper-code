@@ -1,0 +1,186 @@
+{
+  "prepared_at_utc": "2026-09-11T02:49:16.233608+00:00",
+  "assignment": "Root designated this native DM to author one disjoint fifth-slot Portfolio question after both completed source/design returns; no Send, local Portfolio choice, implementation or numerical work.",
+  "assigned_main_sha": "0a250b507c5c95110d7c9c5237ad986fe0295122",
+  "prior_authoring_sha": "3632ed53ba0fe5cf2e16ee1b35012ea3d4a67471",
+  "reconciliation_sha": "0c5df5c78e35573657bfcd91151a0d5879d0efb8",
+  "reconciliation": "Conventional preserving merge; audit conflict resolved to assigned-main bytes only after verifying every prior authoring-ledger row was present. All owner rows and blocked four-slot packet preserved; pushed immediately.",
+  "observed_published_refs": [
+    "0c5df5c78e35573657bfcd91151a0d5879d0efb8\trefs/heads/codex/portfolio",
+    "0a250b507c5c95110d7c9c5237ad986fe0295122\trefs/heads/main"
+  ],
+  "checkout": "C:\\Projects\\HMASD-worktrees\\codex-portfolio",
+  "branch": "codex/portfolio",
+  "source_thread_id": "01a08e10-2ada-7d31-8e3a-6bc8f05f59d5",
+  "source_identity_provenance": "Current process CODEX_THREAD_ID, independently the actual native-author UUID already bound in the completed MGTAP conditional-pooling request. Not a context-window ID and not represented as an app-addressable task. Prompt Author requires native author UUID; only Root is the receipt parent.",
+  "native_author": "/root/dm_mgtap_conditional_fallback",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+  "workflow_node": "portfolio_decision",
+  "caller_role": "portfolio",
+  "conversation_key": "portfolio:cross_direction",
+  "provider_conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_binding_observation": {
+    "workflow_node": "portfolio_decision",
+    "direction_id": "portfolio",
+    "direction_ids": [
+      "acvc",
+      "capability_bound_semantic_currentness",
+      "commitment_residual_triggered_options",
+      "degraded_incumbent_shadow_handover",
+      "finite_resource_relational_inductive_efficiency",
+      "metric_ground_transport_allocation",
+      "roster_consistent_latent_exploration",
+      "semigroup_consistent_duration_model_policy",
+      "ucope",
+      "vap_folr_core",
+      "variable_n_fleet_churn",
+      "vsp_02",
+      "vsp_03",
+      "vsp_c1"
+    ],
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "request_id": "2026-09-10-four-slot-rolling-refill-01",
+    "state": "BLOCKED",
+    "archive_status": "ARCHIVED",
+    "send_click_count": 2,
+    "response_sha256": null,
+    "monitor": {
+      "identity_key": "2026-09-10-four-slot-rolling-refill-01|portfolio:cross_direction|6a9c109e-b264-83e8-a78b-f9ea1b767b7b|https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+      "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+      "last_observed_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+      "last_observed_state": "PARTIAL_RESPONSE; textless assistant node; copy returned prompt",
+      "last_observed_at": "2026-09-11T01:20:40Z",
+      "cursor": null
+    }
+  },
+  "binding_limit": "Existing four-slot accepted request remains blocked and unchanged. This author prepares an unsent disjoint request only; no registry mutation, new provider conversation, Send or recovery control. Root and dedicated Transport retain acceptance/reconciliation ownership.",
+  "directions_in_scope": [
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation"
+  ],
+  "excluded_other_request_scope": [
+    "ucope",
+    "roster_consistent_latent_exploration",
+    "vap_folr_core",
+    "acvc",
+    "vsp_03"
+  ],
+  "excluded_request_id": "2026-09-10-four-slot-rolling-refill-01",
+  "vacancies_in_this_assignment": 1,
+  "conditional_fallbacks": 0,
+  "current_portfolio_rows": {
+    "flexible_skill_duration": {
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH",
+      "headroom": "Current native tuned same-information headroom absent"
+    },
+    "metric_ground_transport_allocation": {
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM",
+      "headroom": "Current native tuned same-information headroom absent",
+      "readiness_update": "Current direction Convergence admits only prospective COND/DENSE scientific eligibility; the dated Portfolio row retains older native-family PARK wording; no allocation follows."
+    }
+  },
+  "recommendation_only": "A",
+  "selected_portfolio_option": null,
+  "future_implementation_proposals": {
+    "A": {
+      "direction": "flexible_skill_duration",
+      "implementation_batches": 1,
+      "max_fixture_invocations": 1,
+      "complete_fixture_command_cap_seconds": 60,
+      "max_lightweight_configs": 4,
+      "max_sampler_passes": 2,
+      "max_joint_buffer_rows": 1281,
+      "max_synthetic_pair_readouts": 4,
+      "scores_per_arm_per_readout": 32,
+      "model_constructions": 0,
+      "real_scientific_exposure": 0
+    },
+    "B": {
+      "direction": "metric_ground_transport_allocation",
+      "implementation_batches": 1,
+      "max_fixture_invocations": 1,
+      "complete_fixture_command_cap_seconds": 60,
+      "max_encoder_module_constructions": 2,
+      "max_forward_calls_per_encoder": 4,
+      "max_rows_per_forward": 16,
+      "input_width": 108,
+      "max_backward_calls_per_encoder": 1,
+      "max_synthetic_pair_readouts": 4,
+      "scores_per_arm_per_readout": 32,
+      "full_actor_critic_learner_constructions": 0,
+      "optimizer_steps": 0,
+      "real_scientific_exposure": 0
+    },
+    "C": {
+      "implementation_batches": 0,
+      "numerical_invocations": 0,
+      "real_scientific_exposure": 0
+    },
+    "status": "All are proposals to Portfolio, not allocated or executed. Pro may explicitly withhold numerical checking while retaining source implementation; that leaves numerical acceptance incomplete."
+  },
+  "retained_empirical_counterevidence": {
+    "FSD_P70_I_minus_D0": "-0.049670563167111874",
+    "FSD_P72_I_minus_D0": "-0.035312725297886094",
+    "MGTAP_P75_REL_minus_DENSE_by_master": [
+      "-0.04468252516448091",
+      "-0.003243683445650989"
+    ],
+    "MGTAP_P75_aggregate": "-0.02396310430506595",
+    "use": "Copied from pinned accepted intakes; none estimates the new I1280 or COND package."
+  },
+  "future_real_B_allocation": {
+    "FSD": "None; existing 3000-second request is unallocated, not a measured prediction",
+    "MGTAP": "None; no new master or cap chosen",
+    "unit": "One matched training pair per prospective comparison; evaluation episodes give only conditional uncertainty"
+  },
+  "author_exposure": {
+    "scientific_invocations": 0,
+    "policy_models": 0,
+    "encoder_modules": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_environment_steps": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "real_evaluation_episodes": 0,
+    "replay": 0,
+    "profiling": 0,
+    "source_tests": 0,
+    "test_fixtures": 0,
+    "support_search": 0,
+    "source_implementation_edits": 0,
+    "provider_sends": 0
+  },
+  "machine_generated_exposure_line": "FIFTH_SLOT_IMPLEMENTATION_PREPARATION: scientific_invocations=0; policy_models=0; encoder_modules=0; checkpoint_loads=0; environments=0; native_steps=0; synthetic_environment_steps=0; training_episodes=0; optimizer_steps=0; real_evaluation_episodes=0; replay=0; profiling=0; source_tests=0; test_fixtures=0; support_search=0; source_implementation_edits=0; provider_sends=0; parameter_displacement=not applicable: no learner",
+  "exposure_observation_scope": "This new author-preparation task, before any Transport dispatch; historical completed design/Pro work is separate provenance.",
+  "owner_review_query": {
+    "checkout": "C:/Projects/HMASD",
+    "at_utc": "2026-09-11T02:49:16.233608+00:00",
+    "unapplied_reviews": []
+  },
+  "administrative_cost": "Not measured and not claimed free; Git/file/Issue/review reads and document rendering are not scientific numerical work.",
+  "claim_ceiling": "Source/design readiness and a proposed bounded implementation investment only. No empirical result, stable superiority, equivalence, component causality, tuned headroom, transfer or Portfolio disposition.",
+  "cleanup": "No test scratch, experiment root or remote worktree created. Shared Portfolio checkout retained for unsent delivery and subsequent intake; Root owns integration and final retention.",
+  "delivery_state_reconciliation": {
+    "observed_prior_state": "BLOCKED",
+    "observed_archive_status": "ARCHIVED",
+    "rule": ".agents/skills/hmasd-chatgpt-pro-transport/references/state-schema.md:125-129 requires previous request ARCHIVED before a new same-key request; otherwise BINDING_BUSY",
+    "meaning": "Unsent author publication can complete. Existing terminal state/history needs factual reconciliation by dedicated Transport before new acceptance. No registry mutation, provider reset, new old-request Send or speculative outcome by DM.",
+    "parent_notified": true
+  },
+  "owner_item_creation": {
+    "path": "docs/research/portfolio/owner/inbox/2026-09-10/20260910-root-007.json",
+    "id": "20260910-root-007",
+    "auto_applied": null,
+    "receipt": "item.py returned this path, file verified. Local wrapper initially tried to parse the path as JSON and failed after creation; no repeated item creation or lost item."
+  },
+  "audit_rows": [
+    154,
+    155
+  ]
+}

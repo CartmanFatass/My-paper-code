@@ -1,0 +1,67 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
+  "remote_verification": {
+    "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
+    "verified_at_utc": "2026-09-11T00:34:08.186904+00:00",
+    "archive_members_compared_to_originals_before_any_removal": true,
+    "originals_rechecked_unchanged_after_archive": true,
+    "member_counts": {
+      "file": 2350,
+      "dir": 358,
+      "symlink": 0
+    },
+    "total_members": 2708,
+    "archives": [
+      {
+        "path": "/home/wu/hmasd-recovery/folr-public-lifecycle-half-b02-20260910/worktree.tar.gz",
+        "name": "worktree.tar.gz",
+        "bytes": 17107603,
+        "sha256": "87543f7a33fcf84237fdcc1e47f897d4758c73ed1143ce758b6cba3ed6c74df5",
+        "members_compared_with_originals": 2692,
+        "all_member_content_type_mode_match": true
+      },
+      {
+        "path": "/home/wu/hmasd-recovery/folr-public-lifecycle-half-b02-20260910/supervisors.tar.gz",
+        "name": "supervisors.tar.gz",
+        "bytes": 5000,
+        "sha256": "a8db120a41d7381b287ea24de1649f86dfb8c48d80da7e7e229d27575a71da26",
+        "members_compared_with_originals": 16,
+        "all_member_content_type_mode_match": true
+      }
+    ],
+    "roots": [
+      "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd",
+      "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
+      "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910"
+    ],
+    "git_common_dir": "/home/wu/projects/HMASD/.git",
+    "source_ref": "refs/archive/folr-public-lifecycle-half-b02-20260910",
+    "source_ref_commit": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+    "remote_archive_inner_seconds": 1.9990862149279565,
+    "removal_performed": false
+  },
+  "local_preservation_verified_at_utc": "2026-09-11T00:35:16.478752+00:00",
+  "local_archives": [
+    {
+      "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/folr-public-lifecycle-half-b02-20260910/worktree.tar.gz",
+      "bytes": 17107603,
+      "sha256": "87543f7a33fcf84237fdcc1e47f897d4758c73ed1143ce758b6cba3ed6c74df5",
+      "matches_verified_remote_archive": true,
+      "remote_archive": "/home/wu/hmasd-recovery/folr-public-lifecycle-half-b02-20260910/worktree.tar.gz"
+    },
+    {
+      "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/folr-public-lifecycle-half-b02-20260910/supervisors.tar.gz",
+      "bytes": 5000,
+      "sha256": "a8db120a41d7381b287ea24de1649f86dfb8c48d80da7e7e229d27575a71da26",
+      "matches_verified_remote_archive": true,
+      "remote_archive": "/home/wu/hmasd-recovery/folr-public-lifecycle-half-b02-20260910/supervisors.tar.gz"
+    }
+  ],
+  "all_local_archives_byte_match_verified_remote_archives": true,
+  "original_inventory_local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/folr-public-lifecycle-half-b02-20260910/original-inventories.json",
+  "original_inventory_sha256": "7e05850cea8b47a20fda5603bf5ebe57668bf4cc98e2290e9da0aba464581cc6",
+  "local_source_ref": "refs/archive/folr-public-lifecycle-half-b02-20260910",
+  "local_source_ref_commit": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+  "local_transfer_verification_inner_seconds": 3.66874990001088,
+  "remote_roots_not_removed_yet": true
+}

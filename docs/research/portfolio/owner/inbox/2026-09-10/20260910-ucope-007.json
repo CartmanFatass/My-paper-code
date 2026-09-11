@@ -1,0 +1,87 @@
+{
+  "id": "20260910-ucope-007",
+  "created": "2026-09-10T16:48:18-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE续约信用L/F设计：已写清，数值额度仍为0",
+  "context": "Claim under test: separate PPO credit for velocity and end/continue, with a conditional suffix-return baseline, can improve native return over trained fixed-short F. Binding: temporal abstraction/termination with private recurrent five-UAV co-adaptation. This publishes a design only; zero numerical allowance. Future3300s is proposed, not released.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "保留设计，数值仍未放行",
+      "consequence": "接受当前设计文档与未来额度建议；不实施、不测试、不加载模型、不启动实验。"
+    },
+    {
+      "key": "reject",
+      "label": "撤回这份设计",
+      "consequence": "撤回候选并回报暂无后续方案；旧结果与方向状态不变。"
+    },
+    {
+      "key": "revise",
+      "label": "修改具体设计后再提交",
+      "consequence": "按明确意见修订设计；任何数值工作仍须另行分配。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "The source-grounded action/credit law, attained F comparator and complete known work are concrete; uncertain runtime/benefit is disclosed and no numerical allowance is inferred.",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_CARD_20260910.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_INTAKE_20260910.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_FACTS_20260910.json"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L34",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留这个已写清楚的续约信用分配设计，供之后另行分配额度？本条不放行任何数值工作。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_CARD_20260910.md",
+        "from": "只有设计任务，无具体候选",
+        "to": "L对F两臂设计：分开速度与续约PPO项，续约用首步之后的原生回报和条件基线；2048回合、仅终点64世界；拟议3300秒，尚未获数值额度"
+      }
+    ],
+    "if_refused": "撤回这份候选，回报暂无可执行新方案；不重跑旧T/F/G，不改变方向状态。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_INTAKE_20260910.md",
+        "quote": "This is an untested package.",
+        "why": "把可能改变第二步保持概率的真实学习动作和训练比较器写清楚后，才能决定是否值得投入。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_INTAKE_20260910.md",
+        "quote": "T trails frozen F by more than0.01 at all three panels in both complete instances.",
+        "why": "旧学习头两次完整训练都低于固定短续约，F是这次必须面对的已取得替代方案。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_CARD_20260910.md",
+        "quote": "Omitting one reward alone may have little effect over256 ticks.",
+        "why": "新信用项和新增基线未经过实验，基线误差、容量与梯度竞争可能抵消收益。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_INTAKE_20260910.md",
+        "quote": "It is not evidence of a uniquely diagnosed credit error.",
+        "why": "旧主结果负／带内，8703高于悬停；不能把设计动机说成已找到原因。"
+      }
+    ],
+    "uncertainty": [
+      "新增基线和分项反向传播的秒数未知；1800/1200/300只是拟议上限。",
+      "只能比较整个L方案对F；不证明相对G、悬停、某一组件的因果效应或稳定优势。",
+      "8702崩溃仍未解释；A01不是独立性能样本。"
+    ],
+    "cost": {
+      "compute": "本任务数值调用0；若之后明确分配：1个独立配对、两臂各2048训练回合、各64终点评价，1081344原生步／8192次Adam；拟议L1800秒+F1200秒+全部支持含Monitor300秒=3300秒。",
+      "owner_time": "可异步阅览，无需回复后才交付设计。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; 本设计交付即结束，数值工作需另行明确选择和分配。"
+    },
+    "verdict_text": "One concrete within-family design is ready for a later explicit allocation: learned separated-credit L versus fresh trained fixed-short F. Current numerical allowance remains zero.",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_INTAKE_20260910.md"
+  },
+  "starred": false
+}

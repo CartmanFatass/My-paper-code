@@ -1,0 +1,96 @@
+{
+  "id": "20260910-root-005",
+  "created": "2026-09-10T16:54:22-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "剩余第五席：FSD具体设计与MGTAP候补",
+  "context": "四条已选方向保持原额度，只决定剩余一个名额。建议FSD一次具体原生设计，MGTAP为唯一条件候补，VSP03为实质竞争项。首步均零数值工作，Portfolio Pro决定；本地未应用选择。",
+  "options": [
+    {
+      "key": "a",
+      "label": "FSD首选，MGTAP候补",
+      "consequence": "只释放FSD一次具体源代码/设计文档任务；条件满足时MGTAP替补，同席零数值。"
+    },
+    {
+      "key": "b",
+      "label": "MGTAP首选，FSD候补",
+      "consequence": "交换两者先后，保留单席、一次交付、家族停止和零数值边界。"
+    },
+    {
+      "key": "c",
+      "label": "VSP03首选，FSD或MGTAP之一候补",
+      "consequence": "先准备完整服务效用的具体VSP03问题；不释放旧60秒拟合额度，候补只取一条。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "FSD保留HIGH顺位且有明确原生更新/学习差异可转成问题；MGTAP重新进入边界具体，VSP03便宜正收益仍是反对证据。",
+  "evidence": [
+    "docs\\research\\portfolio\\pro_packets\\20260910_fifth_vacancy_selection\\SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L127",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "FOLR、UCOPE、RCLE和ACVC已获本次投入后，剩余一个名额给哪条方向的一次具体设计任务，唯一候补是谁？",
+    "changes_if_approved": [
+      {
+        "target": "剩余第五个推进名额",
+        "from": "四条已选链的额度保持原样；剩余一席尚未分配",
+        "to": "建议FSD准备一份具体的原生个体更新/信用/学习方案，MGTAP准备任务为条件候补；同一时刻只占一席，各为一次文档交付，数值额度均为零；最终由Portfolio Pro裁决"
+      }
+    ],
+    "if_refused": "执行Pro在同一单席、零数值范围内选择的明确替代首步和候补；不把等待、旧额度或家族暂停当作新授权。此项不等所有者逐项批准。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md",
+        "quote": "I's extra gap path acts during training:54390/65761 gap causes and3345/3765\ncoordinator optimizer steps, against525 per D0.",
+        "why": "已观察到个体更新与训练暴露一起变化，能提出明确的原生表现问题，但尚不能认定某个差异造成损失。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_POST_B01_CONVERGENCE_INTAKE_20260909.md",
+        "quote": "Re-entry requires one materially changed, source-compatible learned actor\noperation against an equally informed valid generic comparator.",
+        "why": "候补有已明确的重新进入边界：具体局部几何事件如何改变有用速度或信用，且稠密比较器保留完整信息。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/SCIENCE_BRIEF.md",
+        "quote": "Two native I−D0 means−.049670563167111874/−.035312725297886094, both opposite_sign beyond absolute MEI.01.",
+        "why": "FSD已有两次原生损失，旧方案工作量也高；新设计可能仍然没有值得训练的问题。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/SCIENCE_BRIEF.md",
+        "quote": "Its repeated positive final greedy results and8–9s complete native fits are substantive reasons to revisit investment.",
+        "why": "VSP03是实质性竞争项；低优先级及反号继续训练结果不能抹掉已有正收益和短运行。"
+      }
+    ],
+    "uncertainty": [
+      "FSD尚无选定的新处理规则，不能把训练更新次数差异写成已证实原因；MGTAP也尚无选定的新局部几何操作。",
+      "当前宿主缺调优同信息基线的headroom；缺失不是研究禁入条件，新方案成本仍未知。",
+      "FSD/MGTAP的旧家族停止保持原范围；CBSC/FRRIE执行限制和VNFC发送不确定性不因本项解除。",
+      "若首选受阻、明确无可用问题或完成且没有后续额度，只考虑该单席的一次候补，不自动形成下一轮实验序列。"
+    ],
+    "cost": {
+      "compute": "本次咨询零模型、测试、环境、训练、优化、评估或数值诊断；建议首步及候补均零数值额度。历史FSD两对科学进程合计3462.16秒，MGTAP一次两主种子结果722.64秒，VSP03 B07一次拟合8.927880秒；窗口和任务不同，不作原始速度排名。设计作者与后续真实算法成本未知。",
+      "owner_time": "异步查看或覆盖即可；无需等待或逐项批准。",
+      "reversibility": "reversible",
+      "waits_on_this": "这个新增名额的具体分配等待Portfolio形成裁决；其他已授权链独立继续。"
+    },
+    "verdict_text": "**A — recommended: FSD primary, MGTAP fallback.** FSD has an accepted native multi-agent renewal path and a specific unresolved distinction between renewal opportunities, ensuing data/credit and optimizer exposure. It remains ACTIVE/HIGH. The proposed first action is to turn that distinction into one implementable performance question, not to diagnose every old loss or rerun the stopped .25/k10/five-update package. MGTAP's explicit count/geometry re-entry condition supplies a more concrete fallback than generic brainstorming: one source-compatible learned structural operation against a fully informed dense null, with a native event-to-velocity/credit prediction.",
+    "source": "docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T00:37:17+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/archive/RESPONSE.md@f4fce9a4fd9603db66463ad8c81bb9464533e260",
+      "record": "docs/research/portfolio/decisions/2026-09-10-fifth-vacancy-selection.md",
+      "state": "planned",
+      "summary": "已核对完整40937字节Pro回复及Issue17评论5627433082，选择A：FSD一次具体设计、MGTAP唯一条件候补，均零实施和数值额度，同席最多一条。原635字节能力阻塞回复保留为历史，后来完整文件已交付，不需重发。27个固定证据映射及现行规范合规；Root实际派发尚未在本记录执行。"
+    }
+  ]
+}
