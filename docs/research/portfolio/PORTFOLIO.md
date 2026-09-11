@@ -39,9 +39,11 @@ currently advance, with VNFC counted once across implementation and its accepted
 
 The fixed current-vacancies Portfolio packet at `5b9bfee40`, integrated through `99c9fd935`,
 recommends zero additions from the other accepted rows and records two vacancies after ACVC closeout.
-It remains queued behind FOLR on the serial Transport route; no Portfolio selection has formed from
-that packet. Its fixed factual snapshot predates VNFC launch adoption; the set remains three distinct
-advancing directions rather than four because VNFC's implementation and run are one direction chain.
+After FOLR archived, the canonical Transport verified the handoff and confirmed its one provider
+Send; request `2026-09-11-current-vacancies-refill-portfolio-01` is now `WAITING_GENERATION` with
+no retry. No Portfolio selection has yet formed from that packet. Its fixed factual snapshot predates
+VNFC launch adoption; the set remains three distinct advancing directions because VNFC's
+implementation and run are one direction chain.
 
 ## Post-option-A refill decision — 2026-09-11
 

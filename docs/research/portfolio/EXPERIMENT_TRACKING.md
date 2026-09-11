@@ -962,6 +962,9 @@ terminal collection, technical acceptance, scientific intake and scoped cleanup,
 polling stopped.
 
 The rolling count remains three distinct directions: RCLE's adopted B06 run, VNFC's adopted B02
-run and FOLR's accepted original-node Pro generation. FOLR still has exactly one Send. The fixed
-current-vacancies Portfolio handoff remains unsent behind that serial binding and will be dispatched
-once after FOLR clears; no local replacement investment has been selected.
+run and FOLR's full-response scientific intake. FOLR archived after natural completion with exactly
+one Send; its verified 34,159-byte response is delivered at `a2a47f1d7` with SHA-256
+`ed976d34511bad25061ccfe368390f88d085862d1ce434cf51bf383648cbd48b` and is routed to its original
+DM. Once that serial binding cleared, Root dispatched the fixed current-vacancies Portfolio handoff
+to the canonical Transport. The handoff passed direction verification and has one confirmed provider
+Send in `WAITING_GENERATION`; no retry or local replacement investment has been selected.
