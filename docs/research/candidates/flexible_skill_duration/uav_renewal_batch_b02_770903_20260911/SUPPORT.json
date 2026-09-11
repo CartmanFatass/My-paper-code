@@ -1,0 +1,81 @@
+{
+  "allocation": "Portfolio6c32ade3216c374ecf2f5179b15d559729cd45c9 fresh FSD770903/780903",
+  "native_caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "sum": 2700
+  },
+  "support_cap_seconds": 300,
+  "complete_cap_seconds": 3000,
+  "charges": [
+    {
+      "purpose": "assignment currentness and scoped discovery",
+      "wall_seconds": 0.641687,
+      "session_id": null
+    },
+    {
+      "purpose": "applicable authority and live control",
+      "wall_seconds": 0.3382849
+    },
+    {
+      "purpose": "card and accepted delivery implementation",
+      "wall_seconds": 3.7635583
+    },
+    {
+      "purpose": "fresh entry protected card and execution scopes",
+      "wall_seconds": 0.3606564
+    },
+    {
+      "purpose": "immutable allocated Portfolio decision and launch ownership",
+      "wall_seconds": 0.426879
+    },
+    {
+      "purpose": "reconcile and publish current main inputs; exact shared runner consumers",
+      "wall_seconds": 0.2527694
+    },
+    {
+      "purpose": "reconciliation facts and exact runner command contracts",
+      "wall_seconds": 0.5686151
+    },
+    {
+      "purpose": "merge/push current authority and retained scientific count contract",
+      "wall_seconds": 0.9858716
+    },
+    {
+      "purpose": "resolve actual audit overlap and read protected dependent paths",
+      "wall_seconds": 0.3074444
+    },
+    {
+      "purpose": "preserve audit overlap, publish reconciliation, read final Portfolio return rule",
+      "wall_seconds": 5.7762218
+    },
+    {
+      "purpose": "unscreened identity reconciliation and count computation",
+      "wall_seconds": 2.1231892
+    },
+    {
+      "purpose": "author minimal fresh binding card and exact commands",
+      "wall_seconds": 0.2691373
+    },
+    {
+      "purpose": "single changed-binding static check and object audit",
+      "wall_seconds": 0.5826456
+    },
+    {
+      "purpose": "accept independent review and publish owner freeze record",
+      "wall_seconds": 0.5027431
+    },
+    {
+      "purpose": "independent reviewer four bounded read-only commands",
+      "wall_seconds": 1.1253553
+    },
+    {
+      "purpose": "correct UTF-8 document serialization and create owner item",
+      "wall_seconds": 1.010073
+    }
+  ],
+  "known_support_seconds": 19.035131399999997,
+  "accounting": "Tool execution wall for each invoked support command, including failed mechanical reads and current-input reconciliation; reviewer command wall separately once. Inner timings are context, not additional charges. Agent authoring, Pro and idle calendar time excluded.",
+  "pending": "Commit/push, actual staging/launch, Monitor observations, collection/reduction, integration/publication and cleanup will be added. Unknown attribution stays unknown; this subtotal does not certify complete cost.",
+  "scientific_submissions": 0
+}
