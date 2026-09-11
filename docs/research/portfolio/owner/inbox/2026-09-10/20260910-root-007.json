@@ -1,0 +1,105 @@
+{
+  "id": "20260910-root-007",
+  "created": "2026-09-10T19:51:09-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "第五空位：FSD与MGTAP的有限实现投资（建议，待Portfolio）",
+  "context": "两个设计均已完成。只比较FSD I1280/D0与窄范围MGTAP COND/DENSE；另一个四空位请求的五个方向全部排除。建议先做FSD一次实现与有限夹具检查，不授予真实训练。",
+  "options": [
+    {
+      "key": "a",
+      "label": "FSD一次有限实现",
+      "consequence": "只实现FSD绑定与读数；建议最多一次60秒配置/采样/读数夹具检查，无模型、环境、训练或真实评价；Pro可明确不给数值检查。"
+    },
+    {
+      "key": "b",
+      "label": "MGTAP一次有限实现",
+      "consequence": "只实现精确COND/DENSE操作；建议最多一次60秒、两个编码器的小型前后向及读数夹具检查，无完整actor/learner、环境、优化器或真实评价；Pro可明确不给数值检查。"
+    },
+    {
+      "key": "c",
+      "label": "零工作，无就绪投资",
+      "consequence": "不追加实现或数值工作，空位暂空；须指出可改变此判断的具体事实，不改生命周期或优先级。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "FSD已存在真实批量消费者，剩余绑定和读数改动较集中；这不是收益或耗时预测，两次原方案损失仍成立。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260910_fifth_slot_implementation_selection/SCIENCE_BRIEF.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_DESIGN_INTAKE_20260910.md",
+    "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/CONVERGENCE_INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L154",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "在已完成FSD与MGTAP设计后，这一个独立空位应先实现哪一个？本地只建议，交给Portfolio节点裁决。",
+    "changes_if_approved": [
+      {
+        "target": "一个第五滚动空位的下一次实现任务",
+        "from": "两份设计已完成，尚无实现、测试或实验额度",
+        "to": "建议A：只实现FSD I1280/D0绑定与读数；最多一次60秒有限夹具检查；真实环境、训练与评价仍为零。B为精确定义的MGTAP实现；C不追加工作。"
+      }
+    ],
+    "if_refused": "若不采纳A，Portfolio可选B或C；不自动切换，不动另一个四空位请求涉及的UCOPE、RCLE、FOLR、ACVC、VSP03。生命周期与优先级不变。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260910_fifth_slot_implementation_selection/SCIENCE_BRIEF.md",
+        "quote": "A's remaining edit is an existing consumer's explicit binding and its dependent\nreadout. B requires a new masking/normalization/multiplicative encoder path and\ncorresponding numerical acceptance.",
+        "why": "现有代码已支持FSD所需批量，缺口较集中；这里只比较下一次实现价值，不声称它会更快或有收益。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md",
+        "quote": "P70−.049670563167111874 and\nP72−.035312725297886094. D0 is the better observed endpoint in each.",
+        "why": "两次原方案都输；扩大批量也可能少学了有用内容。MGTAP新条件聚合是有竞争力的备选，但P75平均仍为−0.02396310430506595。"
+      }
+    ],
+    "uncertainty": [
+      "两者只有源码设计，没有新方案收益；MGTAP只获得窄范围科学资格。",
+      "未来训练完整耗时、内存和支持成本均未知；FSD原申请3000秒未获分配。",
+      "60秒是建议的单次工程检查上限，不是耗时预测；失败不判科学阴性。"
+    ],
+    "cost": {
+      "compute": "本轮实现、模型、测试、环境、训练、评价均0。若Portfolio选A/B，可分别授予文中唯一有限检查；不授予真实实验。",
+      "owner_time": "无需等待回复；未测量作者投入。",
+      "reversibility": "reversible",
+      "waits_on_this": "只涉及这一个空位的下一次实现选择；其他方向独立推进。"
+    },
+    "verdict_text": "Recommendation only: A, one bounded FSD I1280/D0 implementation return.",
+    "source": "docs/research/portfolio/pro_packets/20260910_fifth_slot_implementation_selection/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T03:10:11+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md#3-blocker-rule",
+      "record": "docs/research/portfolio/decisions/2026-09-10-fifth-slot-implementation-selection.md",
+      "state": "blocked",
+      "summary": "依既有所有者阻塞规则及Root转交：新第五空位请求校验通过，但旧四空位绑定仍BLOCKED，故BINDING_BUSY；打开页面、粘贴、发送、重试、修改registry均0。A/B/C未选，auto_applied为空，所有实现/检查/实验额度未释放。仅等待旧绑定的真实新响应或交付，或已授权Transport对状态的核实回执；不提出状态修改或再次发送。"
+    },
+    {
+      "at": "2026-09-11T03:59:47+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md#3-blocker-rule",
+      "record": "docs/research/portfolio/decisions/2026-09-10-fifth-slot-implementation-selection.md",
+      "state": "blocked",
+      "summary": "已收取真实新事件：所有者授权Root对旧四空位请求重发一次，12分16秒后自然结束；完整621字节回复为能力缺口，未形成科学决定。本DM用GitHub实际分支、精确文件404和Issue17仅准备评论独立核对交付，并保留回复自述的局限。第五空位仍未发送，待专职Transport核实归档和同一绑定可用性；不新增发送或修改科学选择，auto_applied仍为空。"
+    },
+    {
+      "at": "2026-09-11T04:48:34+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/1ea43d8fbc846807d71d4d894136f357f65551b6/docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-10-fifth-slot-implementation-selection.md",
+      "state": "blocked",
+      "summary": "四位问题已形成并通过核对，明确不涉及这个独立第五位。此问A/B/C仍未选择、auto_applied仍为空，没有实现/夹具/实验额度；上次BINDING_BUSY尚无可复用回执，Root须将实际完整交付交给Transport归档对账。科学包、TASK及HANDOFF保持原字节，本DM零发送。",
+      "correction": "旧四位无完整答案的表述已被实际响应1ea43d8f及其intake取代，只保留为历史。该变化不替第五位选择FSD/MGTAP，也不根据旧registry字段断言新发送已经可以接受；先返回原绑定实际就绪事实。"
+    }
+  ],
+  "approval_correction": "旧四位无完整答案的表述已被实际响应1ea43d8f及其intake取代，只保留为历史。该变化不替第五位选择FSD/MGTAP，也不根据旧registry字段断言新发送已经可以接受；先返回原绑定实际就绪事实。"
+}

@@ -1,0 +1,87 @@
+{
+  "status": "PROPOSED_NOT_SELECTED",
+  "configuration_source": {
+    "commit": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+    "path": "experiments/candidates/degraded_incumbent_shadow_handover/control_low_lr_b04/study.py",
+    "lines": "74-86"
+  },
+  "new_consultation_exposure": {
+    "initializers": 0,
+    "models": 0,
+    "learners": 0,
+    "training_transitions": 0,
+    "backward_calls": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "native_calls": 0,
+    "scientific_invocations": 0,
+    "provider_sends": 0
+  },
+  "proposed_comparison": {
+    "arms": [
+      "REPLACE",
+      "HALF_RETAIN"
+    ],
+    "independent_training_pairs": 1,
+    "seed": null,
+    "new_card_selected": false,
+    "updates_per_arm": 16,
+    "lanes": 32,
+    "ticks_per_update": 128,
+    "epochs": 4,
+    "minibatches_per_epoch": 8,
+    "training_transitions_per_arm": 65536,
+    "training_transitions_pair": 131072,
+    "optimizer_steps_per_arm": 512,
+    "optimizer_steps_pair": 1024,
+    "backward_calls_per_arm": 512,
+    "batched_policy_forward_ticks_per_arm": 2048,
+    "replay_steps_per_minibatch": 64,
+    "final_episodes_per_arm": 4,
+    "final_episodes_pair": 8,
+    "max_final_ticks_per_arm": 4800,
+    "max_final_ticks_pair": 9600,
+    "initial_evaluation_episodes": 0,
+    "native_training_cost_law": "2N+2E+H; 0<=E<=N; 0<=H<=20E",
+    "native_training_calls_per_arm_bounds": [
+      131072,
+      1572864
+    ],
+    "native_training_calls_pair_bounds": [
+      262144,
+      3145728
+    ],
+    "additional_algorithm_work": "128-wide elementwise blend at each active bridge use in live/replay; future active counts unknown; no new trainable weights or nested candidate search",
+    "private_label_work": "retained algorithm work; H unmeasured if not exposed by the existing path",
+    "added_validation": "one focused changed-bridge/live-replay/primary contract check; independent high-risk source review; no scientific calibration or historical replay"
+  },
+  "movement_evidence": {
+    "source": "DISH_OWN_COMMAND_MEAN_B07_RESULT_EVIDENCE_20260908.md section 2",
+    "same_recipe_prior_direct_relative_parameter_l2": 0.04690254949701972,
+    "limitation": "historical observed ability to move, not a new fit or guaranteed displacement"
+  },
+  "unallocated_budget": {
+    "arm_exclusive_seconds_each": 900,
+    "shared_support_seconds_max": 300,
+    "complete_charged_seconds_each_max": 1050,
+    "complete_pair_seconds_max": 2100,
+    "shared_allocation": "S/2 per arm; charge S once; reserve publication inside the same cap",
+    "included_shared_work": [
+      "focused checks and failed attempts",
+      "necessary build/load and common initialization",
+      "source/input staging computation",
+      "observation tool work",
+      "collection",
+      "intake and publication",
+      "preservation and closeout computation"
+    ],
+    "no_renewal": "No slice, failure, process restart or new script renews this proposed allowance"
+  },
+  "historical_cost_anchors": {
+    "b07_known_subtotal_seconds": 463.83358418601875,
+    "b07_missing": "syntax-check cost unmeasured; not exact complete wall or complete-cap certification",
+    "b05_complete_pair_seconds": 432.82,
+    "future_complete_cost": "unknown; no new cost probe"
+  },
+  "machine_generated_exposure_line": "Consultation: 0 initializers/models/learners/transitions/backward/optimizer/evaluation/native calls/invocations. Proposed only: 2 learners; 2*16*32*128=131072 ordinary training transitions; 2*16*4*8=1024 backward/AdamW steps; 2*4=8 final episodes <= 9600 native ticks; native training calls 262144..3145728 plus evaluation. Same-recipe historical DIRECT relative parameter L2=0.04690254949701972; no new movement measured."
+}

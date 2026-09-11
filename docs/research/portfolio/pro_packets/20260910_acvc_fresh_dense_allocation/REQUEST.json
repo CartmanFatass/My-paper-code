@@ -1,0 +1,191 @@
+{
+  "caller_role": "portfolio",
+  "workflow_node": "portfolio_decision",
+  "request_id": "2026-09-10-acvc-fresh-dense-allocation-portfolio-01",
+  "source_thread_id": "01a08447-a33c-7881-8c2a-a6e7e918b2a7",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_ids": [
+    "acvc",
+    "vap_folr_core",
+    "ucope",
+    "vsp_03",
+    "roster_consistent_latent_exploration",
+    "capability_bound_semantic_currentness",
+    "finite_resource_relational_inductive_efficiency"
+  ],
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "53349830641cff8d64fdf7c6b2007f4ec02c9bfa",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "decision_authority": "pro_final",
+  "scientific_question": "Decide the one bounded Portfolio allocation now that ACVC_FRESH_DENSE_REUSE_B01 has a complete accepted design: A release exactly one fresh DENSE implementation/fitting/C-F-dwell study at the proposed360s complete cap; B retain design-only with zero allocation; or C defer/substitute one actually permitted reserve action. Read SCIENCE_BRIEF and the complete ACVC card/intake/facts. The designated DM recommends A as advice only, preserving lowest contention and the existing first-four allocation boundaries; no local investment choice has executed. Current fixed context includes accepted VSP03 B07 endpoint gain with negative pairedQ/no successor, FOLR RETAIN completion/EVENT adoption, RCLE Monitor adoption and completed CBSC status reconciliation with no permitted next action. The snapshot is dated and not live resource polling. State the precise effect and revisit condition rather than counting completed authoring or unresolved waits. EXPOSURE consultation-only: scientific_invocations=0; new_fits=0; model_constructions/loads=0; training_team_steps=0; optimizer_updates=0; evaluation_episodes=0; native_steps=0; scientific_tests=0; performance_probes=0; provider_sends_by_author=0; local_portfolio_allocations=0.",
+  "deliverable": "Write a conclusion-first Portfolio decision selecting A, B or C with decisive comparative reasons, strongest countercase, uncertainty and revisit condition. If A, explicitly release or refuse the exact one-fit360s complete allocation (330s whole supervised task plus≤30s total support), preserving the accepted design, all outcomes, remote-first CPUFP32/thread1 boundary, required proportionate semantic acceptance and ordinary-B integrity. Give Root the bounded implementation/execution/intake consequence without creating a new owner-ratification or universal Pro gate. If B/C, name the zero-allocation effect and the exact permitted next action or missing factual dependency; CBSC's completed reconciliation may not be repeated to manufacture a chain. No reopened/completed VSP03 fit, unspecified reserve B, broader five-chain replanning, lifecycle/fusion change or hidden cost allowance follows. A material new scope or actual current-spec conflict must be named explicitly. Pro writes only the scoped response and delivery comment; it runs no experiment and edits no source/card/Portfolio state.",
+  "claim_ceiling": "Ordinary B/EXPLORE: one prospectively selected independently initialized/trained DENSE instance, with conditional64-world F-C/F-dwell package comparisons and complete adverse outcomes. No stable training-population superiority, pure retrace causality/history necessity, tuned headroom, optimality, transfer, C promotion or formal UAV-validation entry. Prior selected fits and stopped T/G losses remain separate.",
+  "reference_files": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/SCIENCE_BRIEF.md",
+      "commit_sha": "53349830641cff8d64fdf7c6b2007f4ec02c9bfa",
+      "purpose": "Read the complete bounded allocation question, A/B/C effects, recommendation, contrary evidence, current contention and complete cost.",
+      "provenance": "Designated DM advice only; no local Portfolio selection, source change, numerical allocation or Pro Send."
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/FACTS.json",
+      "commit_sha": "53349830641cff8d64fdf7c6b2007f4ec02c9bfa",
+      "purpose": "Read consultation zero-exposure line, proposed intrinsic counts, per-arm common-cost attribution and dated operational snapshot.",
+      "provenance": "Static arithmetic over accepted design and published current records; no fresh timing, resource admission or experiment."
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/ISSUE_SNAPSHOT.json",
+      "commit_sha": "53349830641cff8d64fdf7c6b2007f4ec02c9bfa",
+      "purpose": "Read the retained Issue17 discussion/delivery snapshot used for continuity; the sole old comment identifies the completed prior task and response.",
+      "provenance": "Read-back mutable discussion frozen here; old delivery is not delivery of this new request."
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Apply §§2,4.7–4.8,5–7: proper-node final authority, asynchronous overrides, working-set and shared-branch rules, remote-first and actual-node admission.",
+      "provenance": "Current OWNER_DIRECT instructions; this prospective Portfolio decision needs no per-item ratification and does not revive old allowances."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Apply §§4,5.2,7–8.1,11.4,11.7–11.10; §11.4.1 remains confined to completed ACVC E01.",
+      "provenance": "Controlling evidence and Portfolio principles; ordinary B real learning, honest ceilings/costs, proportionate burden and no silent exception."
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Apply §§4–5 and7 to the proposed no-new-machinery implementation, complete scope, cumulative tests and required high-impact review.",
+      "provenance": "Current engineering limits; the new card names no §4 quantity and requests no line/test-budget reset."
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Apply current responsibility map and Portfolio-material/response route; DM owns technical/scientific delivery, Root integrates/applies, Transport sends/observes.",
+      "provenance": "Current control-plane responsibilities, not a new CM layer or an experiment allocation in this authoring task."
+    },
+    {
+      "path": ".codex/hmasd-compute.toml",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Read remote_first/default_result_node and CPU-compatible execution route/admission fields for the proposed future allocation; no new measurements are requested.",
+      "provenance": "Configured host route only; old hardware/environment facts do not establish present resource availability."
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Read the seven scoped lifecycle/priority rows and headroom/cost records, preserving recasts2/lowest contention and other directions.",
+      "provenance": "Published Portfolio snapshot; direct newer component intakes below supersede stale preparation labels, without changing lifecycle."
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Read the current 2026-09-10 restart/application section; supplement with the latest FOLR/VSP03/RCLE/CBSC records listed below.",
+      "provenance": "Actual prior dispatch/design acceptance context; historical zero-live-run sentences refer to earlier boundaries."
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-10-next-five-chains.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Read conformance/application corrections, bounded counts, decisions and reserve-readiness limits.",
+      "provenance": "Accepted prior Portfolio A: first four finite chains, ACVC design only; completed authoring did not itself allocate numerical work."
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_next_five_chains/EXECUTION_MAPPING.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Read common application facts, four existing finite caps and ACVC design-only/Root return boundaries; do not repeat completed assignments.",
+      "provenance": "Accepted operational mapping; prospective UCOPE units are episodes, and existing allocations/restrictions remain unchanged."
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md",
+      "commit_sha": "08e989073839fe5f0f91c6a8ad90a399bee37b6c",
+      "purpose": "Read prior selected order, ACVC/cost and reserve-readiness decision sections as the original formed answer.",
+      "provenance": "Complete immutable prior Pro response; this new allocation question preserves its accepted request and direction boundaries."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+      "commit_sha": "28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
+      "purpose": "Read the complete exact one-fit definition: master8921, actual PPO law, all C/F/dwell panels, MEI/predictions, whole360s proposal and no-allocation boundary.",
+      "provenance": "Accepted object-tier scientific design; unchanged original bytes, not accepted source or a released experiment."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_DESIGN_INTAKE_20260910.md",
+      "commit_sha": "28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
+      "purpose": "Read complete fitting-provenance checks, historical support/contradiction, finite selection, cost limits and remaining exact execution dependency.",
+      "provenance": "Accepted design intake only; no new numerical outcome or extension of E01's exception."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_PROSPECTIVE_FACTS_20260910.json",
+      "commit_sha": "28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
+      "purpose": "Read exact training/evaluation/RNG/parameter counts and retained-cost inputs/projection.",
+      "provenance": "Tool-generated prospective arithmetic, including no project runtime or RNG construction during design."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_INTAKE_20260909.md",
+      "commit_sha": "b74c3206ecbed7ceb401abc2262be5a3b3f99155",
+      "purpose": "Read §§5–9: four primary UP means, dwell gains, adverse worlds, selected-base ceiling, full89.35s bill and unfunded fresh-fit recommendation.",
+      "provenance": "Completed named E01 on two retained selected bases, zero new fitting under its sole exception; evidence is not a successor allowance."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P80_CONVERGENCE_INTAKE_20260909.md",
+      "commit_sha": "b74c3206ecbed7ceb401abc2262be5a3b3f99155",
+      "purpose": "Read §§2 and6: final learned-T/G package end and bounded execution boundary.",
+      "provenance": "Direction PRO_FINAL stop preserved; neither its losses nor recasts2/lowest contention are erased by fixed-F gains."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B02_INTAKE_20260910.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Read §5: accepted RETAIN832.49s/128 final outcomes and EVENT Monitor adoption; preserve already selected RANDOM.",
+      "provenance": "Partial law completion within the already allocated triple; no current triple contrast or new allocation."
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B07_INTAKE_20260910.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Read decision and §§2–8: accepted small endpoint gain, negative pairedQ, all mode/component limits,8.927880s complete cost and no successor.",
+      "provenance": "Latest accepted completed fit; prior B06 stays separate and terminal success is no longer the only evidence."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S21_EXECUTION_20260910.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Read final execution-budget and accepted-submission/Monitor-handover sections.",
+      "provenance": "S21 accepted/adopted within existing1500s allocation; no complete result is claimed and no polling/duplicate launch is requested."
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_RESERVE_READINESS_INTAKE_20260910.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Read completed status finding, exact unresolved restriction disposition, preserved system312/check scope and next-owner boundary.",
+      "provenance": "Zero-exposure A reconciliation complete; no next executable CBSC action established as permitted and no repeated-authoring substitute."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Read §§2–4 and6: dynamic fixed-parameter behavior, actor/critic information, finite learning versus representation and independent empirical units.",
+      "provenance": "Explanatory knowledge only; these passages narrow inference and create no investment/launch authority."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "purpose": "Read comparison object, randomness levels, complete package versus component attribution, return/cost and claim-dependent evidence sections.",
+      "provenance": "Explanatory selection/uncertainty/cost reasoning; no fixed seed quota, significance gate or cross-task return ranking."
+    }
+  ],
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/17"
+  ],
+  "constraints": [
+    "Preserve exact ACVC scientific design at28e99edc7ae93c1101aa78d00e46f6c71e92e81d: master8921/evaluation8922,512 complete training episodes/1024 Adam updates, final checkpoint then C/F/dwell64 episodes each, MEI.01J and every outcome regardless of base attractiveness.",
+    "No weak-fit rejection,8201/8202 substitution,best-of-many initialization/seed/checkpoint,extra panel,pilot,tuning,Proposed-cap inflation,retry or automatic successor. P80 learned T/G stop and recasts2/lowest ACTIVE contention remain.",
+    "252.19968455692754s is a retained-timing estimate including30s support, not measured fresh runtime;360s is only proposed until this node forms a conforming allocation. One common fit/support underlies the per-arm table; its conservative attributions must not be summed. Whole initialization/admission/import/fitting/evaluation/publication/actual exit and support remain charged without panel clock resets.",
+    "E01's named zero-new-learning exception and180s cap/89.35s historical charge fund nothing. Ordinary B §§4,5.2,11.4 apply; no exact upper,full causal audit,headroom test,seed quorum,search-before-learning or timing-probe prerequisite is requested.",
+    "Preserve source-specific SHAs in the manifest. Current published operational context is99168437c1c0d52101b6326fe4db491f760fe28d, with direct component intakes superseding older tracking labels. A later terminal or unrelated commit does not change frozen science, and Root reconciles actual operational state before applying a formed decision.",
+    "First-four finite allocations and their current completion states remain intact. No extra VSP03 fit or direction-family change is selected by a vacant slot; CBSC's completed static status return has no currently established executable continuation. Runtime restrictions, unknown permissions and failed transports are not scientific polarity or authority to bypass.",
+    "Apply only named current instruction/specification sections; foundations and empirical topics are explanatory evidence, not another source of authority. No specification amendment is requested; report an actual conflict to the same node.",
+    "Preparation-only authoring: zero scientific/model/test invocations and zero Pro sends. Source is the designated DM, parent/dispatcher Root, operator the existing Transport. Existing provider conversation and Issue17 are reused; accepted previous request bytes are not regenerated.",
+    "Return readable natural scientific prose, not request IDs or a routing/schema envelope. The fixed task's exact response-file and Issue-comment scope is the only authorized external effect for Pro."
+  ],
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/portfolio",
+    "base_sha": "53349830641cff8d64fdf7c6b2007f4ec02c9bfa",
+    "response_path": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/17"
+  }
+}

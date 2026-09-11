@@ -1,0 +1,53 @@
+{
+  "observed_at": "2026-09-10T21:29:00.335818+00:00",
+  "request_id": "folr-public-lifecycle-timing-family-convergence-20260910",
+  "response_commit": "f64b461cd918ecefc7058a6e1e83aaa1b9f96ce6",
+  "response_path": "docs/research/candidates/vap_folr_core/pro_packets/20260910_timing_family_convergence/archive/RESPONSE.md",
+  "response_blob_sha": "aa984629f61d8e68e2036b184a007795fcd2f441",
+  "full_scientific_response_sha256": "51fc7764686142097747d4c751c1e8d1c49aa3c63f92b9776f9d1cc46945d154",
+  "full_scientific_response_bytes": 31192,
+  "full_scientific_response_lines": 120,
+  "chat_receipt_sha256": "6156259c6f9211206c31414c50a5c36f65b424ee02fad17d69956bfbc2499300",
+  "transport_response_hash_scope": "The receipt response_sha256 hashes the short chat receipt, not the full scientific RESPONSE.md.",
+  "github_bytes_match_immutable_git_blob": true,
+  "changed_scope": "A\tdocs/research/candidates/vap_folr_core/pro_packets/20260910_timing_family_convergence/archive/RESPONSE.md",
+  "fixed_task_sha": "6a400c4ca8c8076bf8701d8977f60fc56d9a1e2c",
+  "manifest_paths": 23,
+  "response_reference_mappings_exact": true,
+  "additional_reference": "fixed TASK only",
+  "method_currentness_checked_against_main": "fd3b7867919ba50a001587fc73ba6b1f5a5fb099",
+  "current_method_surface_differences": [],
+  "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5625607880",
+  "transport_reported_one_send": 1,
+  "transport_reported_natural_completion": "Thought 13m 54s; complete response and delivery comment links; no active generation",
+  "message_identity_limit": "Transport used visible-node descriptions for current paired user/assistant IDs; no server UUIDs are inferred.",
+  "archive_members": {
+    "RESPONSE.md": {
+      "bytes": 31192,
+      "sha256": "51fc7764686142097747d4c751c1e8d1c49aa3c63f92b9776f9d1cc46945d154"
+    },
+    "CHAT_RECEIPT.md": {
+      "bytes": 387,
+      "sha256": "6156259c6f9211206c31414c50a5c36f65b424ee02fad17d69956bfbc2499300"
+    },
+    "PROVIDER_PROMPT.md": {
+      "bytes": 1250,
+      "sha256": "02d15a9504bd1b14fbd0bf2ec3ad7eda0ce02f0599e274491358a4f652a48b81"
+    },
+    "TRANSPORT_FACTS.json": {
+      "bytes": 2386,
+      "sha256": "718f15dcf2387825da4ec8a3a2a757162485f82ea1ced1292b844ee1ef8af832"
+    },
+    "PACKET_MANIFEST.json": {
+      "bytes": 1870,
+      "sha256": "916f89d9be7ee806e5812d7973030a704fbb6ee7b62ae4d242cdcbd9b6cbf5e9"
+    },
+    "ISSUE_COMMENT.json": {
+      "bytes": 4176,
+      "sha256": "3cf7cab49d0e277e68f4a7a6b3807e36bd272c41b8b3a3b8401d28e4bfe43be7"
+    }
+  },
+  "new_scientific_invocations": 0,
+  "scope": "Direct GitHub/Git reference and archive-byte facts; scientific conformance and interpretation belong in the DM intake.",
+  "actual_provider_prompt_matches_bound_handoff_bytes": true
+}

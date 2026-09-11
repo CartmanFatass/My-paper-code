@@ -1,0 +1,179 @@
+{
+  "checked_at_utc": "2026-09-10T19:22:31.881334+00:00",
+  "observed_remote_refs": {
+    "refs/heads/codex/scdmp": "a1d06fadc6a6875a1d52a7b318a809150486f156",
+    "refs/heads/main": "706382ecc23e1c15b8be8f5f5e19af5b21f0a79d"
+  },
+  "reference_checks": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/SCIENCE_BRIEF.md",
+      "effective_sha": "a1d06fadc6a6875a1d52a7b318a809150486f156",
+      "bytes": 16418,
+      "sha256": "f5bf6e4fb28fd5cb18643e2ffdfae68f73a54189ec605d276fb5e227c13b6a09",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/codex/scdmp",
+          "observed_head": "a1d06fadc6a6875a1d52a7b318a809150486f156"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/PREPARATION_FACTS.json",
+      "effective_sha": "a1d06fadc6a6875a1d52a7b318a809150486f156",
+      "bytes": 26599,
+      "sha256": "0b7cca7bacec700ad33483fea4b5fb3944606b60ea084ee84c79bf1e49ac8a86",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/codex/scdmp",
+          "observed_head": "a1d06fadc6a6875a1d52a7b318a809150486f156"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md",
+      "effective_sha": "5d52c5e5bed047e8e32fde575952133a7817b9d2",
+      "bytes": 13155,
+      "sha256": "eefc728bd81e40b29da48224875b916874d4b250bf55fe213ac535ef41bbec25",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/codex/scdmp",
+          "observed_head": "a1d06fadc6a6875a1d52a7b318a809150486f156"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_RESULT_EVIDENCE_20260909.json",
+      "effective_sha": "e5ed770301e8f5bac9fd77063edd24bee550fb5f",
+      "bytes": 123322,
+      "sha256": "8690694c6efabafa5739181a50573da14b060804a69030a5ae349a59bd3feff3",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/codex/scdmp",
+          "observed_head": "a1d06fadc6a6875a1d52a7b318a809150486f156"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md",
+      "effective_sha": "40b27ad1862c4c3201ce1b073377d587f3fc715c",
+      "bytes": 15015,
+      "sha256": "c4009661746162723e7c89b584a5ed296d82554b54bfa03010e52af5c78311b3",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/codex/scdmp",
+          "observed_head": "a1d06fadc6a6875a1d52a7b318a809150486f156"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+      "effective_sha": "40b27ad1862c4c3201ce1b073377d587f3fc715c",
+      "bytes": 49062,
+      "sha256": "ec667927daa18c2a7e5918800d7d29766a3b411d026d9c67088812ea196cdf30",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/codex/scdmp",
+          "observed_head": "a1d06fadc6a6875a1d52a7b318a809150486f156"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+      "effective_sha": "ac1d97f5920fe2dfc88698681d389af0b907dbfe",
+      "bytes": 29522,
+      "sha256": "bbf51f5f7448071bb177628059468bf8d15c89f6688ef4d45f01b7517037b845",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/codex/scdmp",
+          "observed_head": "a1d06fadc6a6875a1d52a7b318a809150486f156"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_RETURN_COMPOSITION_P56_SOURCE_INTAKE_20260908.md",
+      "effective_sha": "21a801279bd449c09907f5cf040efa693ae345a3",
+      "bytes": 22267,
+      "sha256": "53b1d27c7e0ffd2d5c3af8091fa8beca2628e4c224d51a3c77ecfc8b55f6f955",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/codex/scdmp",
+          "observed_head": "a1d06fadc6a6875a1d52a7b318a809150486f156"
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/scdmp_variable_k/native_hold_residual_b01/learner.py",
+      "effective_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+      "bytes": 3329,
+      "sha256": "588f0a5225cc760a54303cd94ab06174c4c552f42591e0de166cb2ed30e2f4f1",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/codex/scdmp",
+          "observed_head": "a1d06fadc6a6875a1d52a7b318a809150486f156"
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/scdmp_variable_k/native_hold_residual_b01/study.py",
+      "effective_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+      "bytes": 13496,
+      "sha256": "a17dba9ae81462dc1ec62951ab51d58050e150cdef398094c63abdabd5a61f4b",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/codex/scdmp",
+          "observed_head": "a1d06fadc6a6875a1d52a7b318a809150486f156"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "effective_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/main",
+          "observed_head": "706382ecc23e1c15b8be8f5f5e19af5b21f0a79d"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "effective_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/main",
+          "observed_head": "706382ecc23e1c15b8be8f5f5e19af5b21f0a79d"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "effective_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/main",
+          "observed_head": "706382ecc23e1c15b8be8f5f5e19af5b21f0a79d"
+        }
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "effective_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "published_ancestors": [
+        {
+          "ref": "refs/heads/main",
+          "observed_head": "706382ecc23e1c15b8be8f5f5e19af5b21f0a79d"
+        }
+      ]
+    }
+  ],
+  "scope": "Publication/path identity only; local access does not prove Pro access. No new guard or scientific invocation.",
+  "task_not_yet_bound": true
+}

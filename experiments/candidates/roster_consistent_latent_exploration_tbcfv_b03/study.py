@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 import json
 import time
+import traceback
 
 import numpy as np
 import torch
@@ -122,13 +123,14 @@ def primary(init_rows, w1_rows, w100_rows):
 
 
 def run(arm, out, launch_sha, admission_receipt, started, wall_cap, control_summary=None,
-        *, seed=SEED, reporting_object=OBJECT_ID):
+        *, seed=SEED, updates=200, reporting_object=OBJECT_ID):
     out.mkdir(parents=True, exist_ok=True)
     authority, rng = make_rng(seed)
     summary = dict(object=reporting_object, arm=arm, package=FLEX if arm in WEIGHTS else arm,
                    seed=seed, launch_sha=launch_sha, admission_receipt=str(admission_receipt),
                    root_key_hex=host.seed_root_key(f"{OBJECT_ID}/seed/{seed}").hex(),
                    block_digest_hex=authority.root_digest, native=authority.certificate["native"],
+                   updates_per_fit=updates if arm in WEIGHTS else 0,
                    status="IN_PROGRESS", scenarios=[], curves=[])
     try:
         if arm == "reference":
@@ -149,7 +151,7 @@ def run(arm, out, launch_sha, admission_receipt, started, wall_cap, control_summ
                 summary["initialization_panel"] = panel(model, rng, "FLEX-INIT", started, wall_cap)
                 host.write_json(out / "init_scenarios.json", summary["initialization_panel"])
             baselines = torch.zeros(8, dtype=torch.float64)
-            for update in range(200):
+            for update in range(updates):
                 host.check_wall(started, wall_cap)
                 baselines, curve = training_update(model, rng, update, baselines, WEIGHTS[arm])
                 summary["curves"].append(curve)
@@ -172,6 +174,7 @@ def run(arm, out, launch_sha, admission_receipt, started, wall_cap, control_summ
         host.check_wall(started, wall_cap)
         summary["status"] = "COMPLETE"
     except Exception as exc:
+        traceback.print_exc()
         summary["status"] = "TECHNICAL_STOP"
         summary["stop_reason"] = f"{type(exc).__name__}: {exc}"
         if isinstance(exc, host.ArmWallExpired) and exc.evaluated_rows:

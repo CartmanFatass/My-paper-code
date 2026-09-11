@@ -74,6 +74,15 @@ Root checks published artifact/route facts and dispatches the exact handoff. It 
 omissions to the author instead of rewriting the packet. Transport receipts still go only to Root;
 Root forwards the complete response to the designated DM using `followup_task`.
 
+New GitHub-delivery prompts include an in-turn downloadable Markdown fallback. If Pro cannot
+expose or complete its scoped GitHub writes after checking actual state, it finishes the review
+and attaches the full `RESPONSE.md` in chat. Transport downloads it, binds it to the accepted request and paired response, records its byte
+count and SHA-256, stores `<archive_id>__02_RESPONSE.md`, and retains the same bytes as repository
+sidecar `archive/CHAT_FALLBACK_RESPONSE.md`. The GitHub `archive/RESPONSE.md` remains reserved for
+actual connector delivery.
+Root forwards that artifact to the designated DM for the same conformance intake. This fallback
+does not assert a GitHub commit/comment and does not authorize another Send.
+
 The DM reads the full response and checks the bound question, current owner/spec constraints,
 scientific meaning and evidence. It returns the actual decision and operational mapping, or a
 concrete conflict for the same Pro node. It does not locally overrule or add approval to a formed

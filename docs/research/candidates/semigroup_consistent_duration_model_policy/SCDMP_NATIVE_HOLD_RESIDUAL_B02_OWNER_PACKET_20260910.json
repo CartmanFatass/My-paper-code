@@ -1,0 +1,38 @@
+{
+  "question": "执行同一Convergence已选择的B02：不变残差MC比较的一个新独立训练配对，固定master8202。",
+  "changes_if_approved": [
+    {
+      "target": "SCDMP-NATIVE-HOLD-RESIDUAL-B02",
+      "from": "B01完整WITHIN；DM原建议暂时暂停这个家族",
+      "to": "按完整Pro裁决继续一对不变比较；8202从头训练，两臂及H，未运行也不改判B01"
+    }
+  ],
+  "if_refused": "按所有者异步指令停止或修改未开始的B02；保留已经发生的事实、B01和完整Pro响应，不另换seed或扩大预算。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/archive/RESPONSE.md",
+      "quote": "选择一次新的、原比较不变的独立训练配对 B/EXPLORE，暂不 PARK 当前开场保持段 residual-MC 家族。",
+      "why": "Pro认为一次新训练实例能以有界工作增加当前缺失的观察维度，保留所有符号结果；这是继续原机制而非第三次recast。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/CONVERGENCE_INTAKE_20260910.md",
+      "quote": "Strongest contradiction is that B01 did not clear its selected scale and intact MLP remains competitive.",
+      "why": "原结果+0.0067374仍在±0.01内，14/32负差；再看一对也不能证明稳定优势，可能仍支持暂停。"
+    }
+  ],
+  "uncertainty": [
+    "新配对尚无结果；主观测是独立新训练后的Δ2，不重评旧权重。",
+    "即便两对也不能可靠分离训练变动与评价噪声或证明独有保持机制。",
+    "H是已达到的参考，缺少调优同信息headroom。"
+  ],
+  "cost": {
+    "compute": "一次新配对：286720原生步、2048 Adam、96最终评价。历史科学进程323.02秒作参考，保留1800秒/臂及3600秒/整对上限；无额外seed/重试/后继。",
+    "owner_time": "可异步覆盖；不等待回复才能继续已授权工作。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing; current exact allocation proceeds under the formed Pro decision and standing delegation"
+  },
+  "verdict_text": "这是已接受机制内部的一次有限续行，不是第三次 RECAST。",
+  "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B02_SCIENCE_CARD_20260910.md"
+}

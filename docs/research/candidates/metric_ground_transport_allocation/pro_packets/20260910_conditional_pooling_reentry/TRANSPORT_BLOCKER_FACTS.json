@@ -1,0 +1,139 @@
+{
+  "captured_at": "2026-09-11T02:14:22.3317868Z",
+  "source": "Read-only projection of current primary-control Transport registry and exact materialized packet manifest; plus Root-forwarded receipt facts. No provider or GitHub delivery read performed by this intake.",
+  "registry_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/registry.json",
+  "request": {
+    "request_id": "2026-09-10-mgtap-conditional-pooling-reentry-01",
+    "workflow_node": "em_convergence",
+    "conversation_binding_key": "em:metric_ground_transport_allocation:convergence",
+    "direction_id": "metric_ground_transport_allocation",
+    "decision_authority": "pro_final",
+    "state": "BLOCKED",
+    "conversation_id": "6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+    "provider_url": "https://chatgpt.com/c/6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+    "source_thread_id": "01a08e10-2ada-7d31-8e3a-6bc8f05f59d5",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+    "send_click_count": 2,
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "thinking_effort": "Pro, 5 of 5.",
+    "response_sha256": null,
+    "archive": null,
+    "archive_status": "BLOCKED",
+    "wait_status": "TERMINAL_PROVIDER_ERROR",
+    "prompt_sha256": "a7b0c676bcda2bd120e9e72ce2279c3bef6088edebb106af6cba6dd19e3219e0",
+    "scientific_decision_formed": false
+  },
+  "monitor": {
+    "identity_key": "2026-09-10-mgtap-conditional-pooling-reentry-01|em:metric_ground_transport_allocation:convergence|6a9b6b01-a918-83e8-8b06-ca9dd8184dab|https://chatgpt.com/c/6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+    "provider_url": "https://chatgpt.com/c/6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+    "last_observed_url": "https://chatgpt.com/c/6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+    "last_observed_state": "BLOCKED; provider displayed 出了点问题。请重试。; Retry control present; no assistant response",
+    "last_observed_at": "2026-09-11T02:09:48Z",
+    "cursor": null
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a08e10-2ada-7d31-8e3a-6bc8f05f59d5",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-10-mgtap-conditional-pooling-reentry-01|em:metric_ground_transport_allocation:convergence|6a9b6b01-a918-83e8-8b06-ca9dd8184dab|BLOCKER|BLOCKED|762c3cd3f69bb92e",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "kind": "TERMINAL_BLOCKER",
+    "blocker_state": "BLOCKED",
+    "error": "Accepted Send produced a terminal provider generation error: after exact-URL reload, the current-round user node remained present and the page displayed '出了点问题。请重试。' with a Retry control; no complete assistant response was available. No Retry or other generation control was used.",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "staged_at": "2026-09-11T02:09:48Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "sent_at": "2026-09-11T02:10:25Z",
+    "updated_at": "2026-09-11T02:10:25Z"
+  },
+  "packet_manifest": {
+    "schema_version": 4,
+    "packet_id": "2026-09-10-mgtap-conditional-pooling-reentry-01--metric_ground_transport_allocation",
+    "attempt": 1,
+    "canonical_form": "logical_packet_manifest",
+    "request_id": "2026-09-10-mgtap-conditional-pooling-reentry-01",
+    "direction_id": "metric_ground_transport_allocation",
+    "direction_ids": [
+      "metric_ground_transport_allocation"
+    ],
+    "workflow_node": "em_convergence",
+    "conversation_binding_key": "em:metric_ground_transport_allocation:convergence",
+    "decision_authority": "pro_final",
+    "source_mode": "paste",
+    "body": {
+      "role": "prompt",
+      "source_path": "<paste>",
+      "canonical_filename": "2026-09-10-mgtap-conditional-pooling-reentry-01--metric_ground_transport_allocation__00_PROMPT.md",
+      "bytes": 1273,
+      "sha256": "a7b0c676bcda2bd120e9e72ce2279c3bef6088edebb106af6cba6dd19e3219e0",
+      "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-mgtap-conditional-pooling-reentry-01\\2026-09-10-mgtap-conditional-pooling-reentry-01--metric_ground_transport_allocation__00_PROMPT.md"
+    },
+    "references": [],
+    "reference_order_is_authoritative": true,
+    "provider_filename_policy": "record_observed_name_only",
+    "companion_prompt_is_transport_ui_only": true,
+    "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-mgtap-conditional-pooling-reentry-01\\2026-09-10-mgtap-conditional-pooling-reentry-01--metric_ground_transport_allocation__PACKET_MANIFEST.json",
+    "materialized_artifacts": {
+      "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-mgtap-conditional-pooling-reentry-01\\2026-09-10-mgtap-conditional-pooling-reentry-01--metric_ground_transport_allocation__00_PROMPT.md",
+      "references": []
+    },
+    "materialized_hashes": {
+      "body": "a7b0c676bcda2bd120e9e72ce2279c3bef6088edebb106af6cba6dd19e3219e0",
+      "references": []
+    }
+  },
+  "root_forwarded_attempt_facts": [
+    {
+      "send_click": 1,
+      "effect": "Unchanged pre-send state; no current-round user node from that click",
+      "provenance": "Exact Root-forwarded Transport blocker assignment"
+    },
+    {
+      "send_click": 2,
+      "effect": "One permitted same-payload retry confirmed the current-round user node",
+      "provenance": "Exact Root-forwarded Transport blocker assignment"
+    }
+  ],
+  "root_forwarded_terminal_facts": {
+    "condition": "Exact bound URL reload showed the current-round user node plus 出了点问题。请重试。 and a Retry control; no complete assistant response.",
+    "retry_or_generation_control_used": false,
+    "duplicate_send": false,
+    "response_sha256": null,
+    "archive": null,
+    "decision_formed": false
+  },
+  "inherited_fields_preserved_for_provenance": {
+    "observed_page_state": "Worked for 11m 43s; complete assistant response; Copy response present; no active generation control",
+    "send_evidence": {
+      "send_click_count": 1,
+      "url_observed": true,
+      "user_node_observed": true,
+      "user_node_exact": true,
+      "prompt_link_resource_pill_observed": true,
+      "expected_binding": "em:metric_ground_transport_allocation:convergence",
+      "observed_binding": "em:metric_ground_transport_allocation:convergence",
+      "binding_match": true
+    },
+    "timestamps": {
+      "received_at": "2026-09-09T05:44:00Z",
+      "sent_at": "2026-09-09T05:45:52Z",
+      "generation_started_at": "2026-09-09T05:46:16Z",
+      "completed_at": "2026-09-09T05:58:00Z",
+      "captured_at": "2026-09-09T06:00:00Z",
+      "archived_at": "2026-09-09T06:02:00Z",
+      "tab_closed_at": "2026-09-09T09:25:35Z"
+    },
+    "user_message_id": "ce2cb700-f18e-47cb-b138-14bfa7c469f7",
+    "assistant_message_id": "8e75963c-4bf0-4076-ab28-56fa55639add",
+    "interpretation": "These fields retain older completion/one-click/2026-09-09 values. They do not establish a current-round response or supersede the current request-specific monitor and terminal receipt. Do not assign their message IDs to the current user/assistant pair without a new actual observation."
+  },
+  "delivery_limit": "No archive reported is not proof that no GitHub write occurred. The previously observed pre-dispatch target absence is historical. Reconcile current delivery only after a material event under the conditional observation payload; no Retry, Send or routine polling now."
+}

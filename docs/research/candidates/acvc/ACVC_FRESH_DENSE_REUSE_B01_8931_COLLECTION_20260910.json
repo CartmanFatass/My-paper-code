@@ -1,0 +1,159 @@
+{
+  "object": "ACVC_FRESH_DENSE_REUSE_B01",
+  "master": 8931,
+  "evaluation_namespace": 8932,
+  "source_sha": "dfee6e8a3cecfde866da07fef60ffcdd319956b5",
+  "supervisor_handle": "acvc-fresh-dense-b01-8931-dfee6e8a3",
+  "execution_node": "wsl_4070",
+  "remote_checkout": "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8931-dfee6e8a3",
+  "status": "valid complete native B accepted; preservation and scoped remote closeout complete; inclusive Monitor cost conformance unestablished",
+  "checks": [
+    {
+      "name": "single focused synthetic target, shell syntax and creator cleanup",
+      "charge_s": 2.0633717,
+      "method": "client Stopwatch including SSH/readback/cleanup",
+      "remote_process_s": 1.71,
+      "test_exit_code": 0,
+      "test_result": "1 passed in 1.28s; shell syntax passed; owned scratch absent",
+      "enclosing_receipt_exit_code": 2,
+      "receipt_defect": "trailing CR in final exit argument of ad-hoc stdin shell; occurred after test success and cleanup; retained with no repeat"
+    },
+    {
+      "name": "supervisor usage read",
+      "charge_s": 0.6127231,
+      "method": "client Stopwatch including SSH",
+      "exit_code": 1,
+      "result": "usage text received; no scientific submission"
+    },
+    {
+      "name": "initial local terminal receipt/readback",
+      "charge_s": 0.287587,
+      "method": "full tool command wall; includes source/status read",
+      "exit_code": 0
+    },
+    {
+      "name": "remote archive, scp, extraction and archive hash comparison",
+      "charge_s": 1.2440704,
+      "method": "client Stopwatch including SSH and local extraction",
+      "exit_code": 0
+    },
+    {
+      "name": "authoritative summary/admission/supervisor/timing readback",
+      "charge_s": 0.1049822,
+      "method": "client Stopwatch",
+      "exit_code": 0
+    },
+    {
+      "name": "independent complete-row reduction and durable preservation",
+      "charge_s": 0.3062593,
+      "method": "client Stopwatch; no model load/native work",
+      "exit_code": 0
+    },
+    {
+      "name": "scoped remote checkout/supervisor removal and disk/registration absence confirmation",
+      "charge_s": 0.3929901,
+      "method": "client Stopwatch including SSH; conservatively includes Git removal",
+      "exit_code": 0
+    }
+  ],
+  "timing": {
+    "whole_task_cap_s": 270,
+    "all_support_including_monitor_cap_s": 90,
+    "complete_cap_s": 360,
+    "prelaunch_support_s": 2.6760948,
+    "prior_directory_test_s": 27.7442098,
+    "new_directory_test_s": 2.0633717,
+    "directory_test_total_s": 29.8075815,
+    "monitor_observation_s": 1.082,
+    "whole_task_charge_s": 169,
+    "complete_charge_s": null,
+    "whole_command_wall_s": 166.05,
+    "peak_rss_kib": 549820,
+    "runner_to_summary_s": 165.6791978069814,
+    "whole_task_charge_method": "ceil(166 integer supervisor duration +1 timestamp granularity +1 final sleep +.5530635 submission client wall)",
+    "whole_task_cap_pass": true,
+    "dm_runtime_support_s": 5.011983799999999,
+    "monitor_observation_is_partial": true,
+    "measured_support_subtotal_s": 6.093983799999999,
+    "native_plus_measured_support_subtotal_s": 175.0939838,
+    "all_support_cap_pass": null,
+    "complete_cap_pass": null,
+    "measurement_limit": "Monitor partial measured1.082s plus two estimated.8s observations and unmeasured publication/message overhead; not a complete inclusive cost bill",
+    "resources": "resources_unmeasured; peakRSS/wall retained, aggregate CPU/scratch/cgroup headroom unavailable"
+  },
+  "submission": {
+    "accepted_handle": "acvc-fresh-dense-b01-8931-dfee6e8a3",
+    "supervisor_response": "Task started in tmux session agent_acvc-fresh-dense-b01-8931-dfee6e8a3",
+    "submit_client_wall_s": 0.5530635,
+    "accepted_submissions": 1,
+    "no_scientific_retry": true,
+    "empirical_counts": "512 training episodes;1024 Adam/backward calls;192 evaluation episodes;180224 team steps; complete"
+  },
+  "monitor": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "root_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "original_dm_native": "/root/dm_acvc_restart_successor",
+    "dispatch": "MONITOR_ADD accepted by app tool; no error",
+    "adoption": "MONITOR_ADOPTED forwarded by Root for exact handle/source/node",
+    "inclusive_support_required": true,
+    "proposed_monitor_support_s": 60,
+    "acceptance_timestamp": "not supplied; authoritative supervisor timestamps will be collected, no placeholder timestamp recorded",
+    "terminal_evidence": "C:/Users/fires/Documents/Codex/2026-09-09/hmasd-folr-b02-monitor-20260909/outputs/acvc-fresh-dense-b01-8931-dfee6e8a3-terminal.txt",
+    "bookkeeping_correction": "Root forwarded Monitor correction:1.082s includes only three stopwatch-measured SSH queries; separate initial adoption observation and terminal collection/status each about.8s tool wall; adoption/terminal messaging/publication overhead unmeasured. No new query was commissioned to repair this bill.",
+    "measured_query_components_s": [
+      0.308,
+      0.426,
+      0.348
+    ],
+    "other_observation_estimates_s": [
+      0.8,
+      0.8
+    ],
+    "message_publication_overhead_s": null
+  },
+  "archive": {
+    "local": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_reuse_b01_8931_20260910_collection/collection.tgz",
+    "sha256": "c3b637e02295dadd20db62587a96f5be0a64ea8a78f9474c776c3fc04e738de6",
+    "remote_local_hash_match": true,
+    "captured_files": 14,
+    "final_checkpoint_sha256": "2078fc6495a777e306f4831d9878e82ec5b4a83e97caa41961b649c70e29c312",
+    "readback": "docs/research/candidates/acvc/fresh_dense_reuse_b01_8931_20260910",
+    "full_archive_and_extracted_checkpoint_retained": true
+  },
+  "terminal": {
+    "status": "finished",
+    "exit_code": 0,
+    "supervisor_start": "2026-09-11T07:42:21+08:00",
+    "supervisor_exit": "2026-09-11T07:45:07+08:00",
+    "duration_s": 166,
+    "no_active_tmux_during_collection": true,
+    "memory_admission_pass": true,
+    "physical_and_effective_available_bytes": 15633240064,
+    "raw_monitor_timestamp": "2026-09-10T23:45:31-07:00",
+    "timestamp_limit": "Monitor local label inconsistent with authoritative remote UTC; preserved verbatim and excluded from duration derivation"
+  },
+  "cleanup": {
+    "owner": "DM /root/dm_acvc_restart_successor; Root integration/retention and acceptance",
+    "status": "complete; Root accepted scope and retained local archive/shared checkout",
+    "exact_remote_checkout": "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8931-dfee6e8a3",
+    "exact_remote_supervisor": "/home/wu/.agent-tasks/acvc-fresh-dense-b01-8931-dfee6e8a3",
+    "preserve_shared_authoring_checkout": true,
+    "source_reachable_from_published_direction_branch": true,
+    "recorded_at": "2026-09-10T23:58:34.013992+00:00",
+    "preservation_commits": [
+      "94a001969",
+      "7edbb1ce0"
+    ],
+    "validated_exact_resolved_paths": true,
+    "source_clean_and_exact_before_removal": true,
+    "supervisor_finished_exit0_before_removal": true,
+    "tmux_absent_before_removal": true,
+    "remote_checkout_absent_on_disk": true,
+    "remote_supervisor_absent_on_disk": true,
+    "remote_checkout_absent_from_git_registration": true,
+    "local_full_archive_retained": true,
+    "shared_authoring_checkout_retained": true,
+    "other_paths_touched": false,
+    "receipt": "exact_remote_checkout_and_supervisor_absent_and_worktree_unregistered; SSH exit0"
+  }
+}

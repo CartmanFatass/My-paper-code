@@ -1,0 +1,236 @@
+{
+  "recorded_at_utc": "2026-09-10T20:09:31.180862+00:00",
+  "class": "A_SOURCE_AND_EXISTING_EVIDENCE_ASSESSMENT",
+  "starting_revision": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+  "tracked_start": "clean; equal upstream",
+  "current_method_revision": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab",
+  "source_reads": [
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_training_engine.py",
+      "ranges": [
+        "35-54",
+        "88-163",
+        "647-675"
+      ],
+      "source_commit": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+      "git_blob_sha256": "69369e5058081177086e4e5e5834c0cb91e146fb2d107116eb67d396810907e6"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_recurrent_trainer.py",
+      "ranges": [
+        "234-243",
+        "273-386",
+        "486-509"
+      ],
+      "source_commit": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+      "git_blob_sha256": "c61e4bc27d342ee213041f80836f532b0c8fb157a36b59213e66eb8978a8a4a5"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover/control_low_lr_b04/study.py",
+      "ranges": [
+        "74-86",
+        "146-213"
+      ],
+      "source_commit": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+      "git_blob_sha256": "9ef0d8b17c3b4503402ad9e5ff0e276263afde931b5da66934599ac6e7305161"
+    }
+  ],
+  "accepted_masked_snapshot_counts": {
+    "DIRECT": 12321,
+    "OWN_COMMAND_MEAN": 12309,
+    "source": "DISH_OWN_COMMAND_MEAN_B07_RESULT_EVIDENCE_20260908.md section 2",
+    "meaning": "stored masked training samples counted by Welford; not independent messages or new observations",
+    "ordinary_transfers_in_b07_train_eval": 0
+  },
+  "proposal": {
+    "current": "h_pre=b=tanh(W_bridge[old_h,tanh(W_enc*packet)]) at active received mask",
+    "candidate": "h_pre=0.5*old_h+0.5*b at identical event",
+    "effect_before_cas": "standby motion/commit/prediction use shadow before transfer",
+    "no_guarantee": "one-step state interpolation does not imply action/trajectory/return improvement",
+    "family_choice": "em convergence pending; no local selection or budget"
+  },
+  "scientific_reading": {
+    "sources": [
+      "docs/rl-marl-foundations-20260907/FOUNDATIONS.md sections 2-4",
+      "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md first two sections"
+    ],
+    "concrete_assumption": "state evolution at fixed weights differs from parameter learning; test two complete fresh learners using native service",
+    "limit": "no Markov sufficiency, strict decentralization, unique-information or finite-training guarantee"
+  },
+  "literature": {
+    "catalog_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\llm-index\\catalog.v2.jsonl",
+    "catalog_count": 190,
+    "catalog_sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0",
+    "query_terms": [
+      "memory",
+      "recurrent",
+      "message reliability",
+      "timeliness",
+      "gating",
+      "information bottleneck"
+    ],
+    "metadata_hits": [
+      {
+        "id": "MARL-0015",
+        "title": "Learning from Good Trajectories in Offline Multi-Agent Reinforcement Learning",
+        "matched_terms": [
+          "memory"
+        ]
+      },
+      {
+        "id": "MARL-0020",
+        "title": "Quantum Multi-Agent Meta Reinforcement Learning",
+        "matched_terms": [
+          "memory"
+        ]
+      },
+      {
+        "id": "MARL-0041",
+        "title": "Learning Efficient and Robust Multi-Agent Communication via Graph Information Bottleneck",
+        "matched_terms": [
+          "information bottleneck"
+        ]
+      },
+      {
+        "id": "MARL-0050",
+        "title": "Robust Communicative Multi-Agent Reinforcement Learning with Active Defense",
+        "matched_terms": [
+          "message reliability"
+        ]
+      },
+      {
+        "id": "MARL-0066",
+        "title": "CoDe: Communication Delay-Tolerant Multi-Agent Collaboration via Dual Alignment of Intent and Timeliness",
+        "matched_terms": [
+          "timeliness"
+        ]
+      },
+      {
+        "id": "MARL-0078",
+        "title": "Investigating Relational State Abstraction in Collaborative MARL",
+        "matched_terms": [
+          "gating"
+        ]
+      },
+      {
+        "id": "MARL-0104",
+        "title": "ADAPT: Adaptive Decentralized Architecture with Perception-Aligned Training for Structural Generalization in Multi-Agent RL",
+        "matched_terms": [
+          "gating"
+        ]
+      },
+      {
+        "id": "MARL-0134",
+        "title": "Emergent Fast-Slow Dynamics in Multi-Agent Q-Learning for Networked Stochastic Games",
+        "matched_terms": [
+          "gating"
+        ]
+      },
+      {
+        "id": "MARL-0471",
+        "title": "Learning Progress Driven Multi-Agent Curriculum",
+        "matched_terms": [
+          "gating"
+        ]
+      },
+      {
+        "id": "MARL-0485",
+        "title": "Sable: a Performant, Efficient and Scalable Sequence Model for MARL",
+        "matched_terms": [
+          "memory"
+        ]
+      },
+      {
+        "id": "MARL-0620",
+        "title": "High-order Interactions Modeling for Interpretable Multi-Agent Q-Learning",
+        "matched_terms": [
+          "information bottleneck"
+        ]
+      },
+      {
+        "id": "MARL-0624",
+        "title": "In-Context Fully Decentralized Cooperative Multi-Agent Reinforcement Learning",
+        "matched_terms": [
+          "gating"
+        ]
+      },
+      {
+        "id": "MARL-0656",
+        "title": "Rainbow Delay Compensation: A Multi-Agent Reinforcement Learning Framework for Mitigating Observation Delays",
+        "matched_terms": [
+          "gating"
+        ]
+      },
+      {
+        "id": "VS-0005",
+        "title": "Learning Uncertainty-Aware Temporally-Extended Actions",
+        "matched_terms": [
+          "gating"
+        ]
+      }
+    ],
+    "metadata_hit_count": 14,
+    "verified_primary_passages": [
+      {
+        "paper_id": "MARL-0050",
+        "source_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\json\\MARL-0050.json",
+        "sha256": "f268f5c4ccb98e2482b4fca83c5e26d08d018671c250a08a6433239fd989d4d1",
+        "read_passages": [
+          "page1 id50",
+          "page1 id53",
+          "page2 id84"
+        ],
+        "source_scope_effect": "Learned reliability-weighted action preferences under attacks are not a fixed recurrent snapshot interpolation; no evidence that DISH packets are attacked or that coefficient 0.5 helps.",
+        "metadata_quality": "official_title_matched; grade A; warnings []; abstract-grounded tags do not substitute for source passages"
+      },
+      {
+        "paper_id": "MARL-0066",
+        "source_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\json\\MARL-0066.json",
+        "sha256": "0b18d3dc866bbf4d451fc8949923d806005f86b00dd964a9cdc1a416c8ca295f",
+        "read_passages": [
+          "page1 id25",
+          "page3 id155",
+          "page3 id156",
+          "page4 id158"
+        ],
+        "source_scope_effect": "GRU history and future-action intent alignment support an information-processing question, not a DISH bridge-value result or a transplanted package.",
+        "metadata_quality": "official_title_matched; grade A; warnings []; abstract-grounded tags do not substitute for source passages"
+      }
+    ],
+    "mylib_registry": "C:/Projects/My-lib/registry/papers.yaml",
+    "mylib_excluded_synthetic_ids": [
+      "P-SYN-001",
+      "P-SYN-002"
+    ],
+    "coverage_limit": "formal catalog and checked tracked registry; not all local/unified/global sources"
+  },
+  "owner_audit_check": [
+    {
+      "root": "C:\\Projects\\HMASD",
+      "dish_rows_checked": 129,
+      "nonempty_owner_fields": []
+    },
+    {
+      "root": "C:\\Projects\\HMASD-worktrees\\dm-dish-b06-scientific-intake-20260907",
+      "dish_rows_checked": 127,
+      "nonempty_owner_fields": []
+    }
+  ],
+  "all_age_reviews": {
+    "main": [],
+    "direction": []
+  },
+  "new_scientific_exposure": {
+    "initializers": 0,
+    "models": 0,
+    "learners": 0,
+    "training_transitions": 0,
+    "backward_calls": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "native_calls": 0,
+    "scientific_invocations": 0,
+    "provider_sends": 0
+  },
+  "next_discriminator": "formed Convergence decision, no empirical invocation selected"
+}

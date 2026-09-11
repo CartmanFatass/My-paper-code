@@ -1,0 +1,89 @@
+{
+  "id": "20260910-mgtap-001",
+  "created": "2026-09-10T18:52:35-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "MGTAP 条件汇聚重入建议：待原 Convergence，零数值分配",
+  "context": "旧 P75 聚合差为 -0.02396310430506595。新源设计用可见其他 UAV 的学习查询调整用户权重，DENSE 保留完整输入与循环历史。这里只准备原节点家族问题，无本地方向裁决或实施、运行额度。",
+  "options": [
+    {
+      "key": "reopen",
+      "label": "仅重开 COND/DENSE 前瞻比较资格",
+      "consequence": "由原 Convergence 决定后，仅进入后续另行分配的 B 准备；本次无实施、无数值额度。"
+    },
+    {
+      "key": "park",
+      "label": "保留原生演员家族 PARK",
+      "consequence": "保留现有家族边界和全部旧结果，不追加此项工作；Portfolio 状态不变。"
+    }
+  ],
+  "recommended": "reopen",
+  "auto_applied": "reopen",
+  "dm_reason": "现有参数块可以承载实际条件运算，值得原节点判断；旧方案落后与新运算成本、收益未知仍是主要反证和限制。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/PREPARATION_INTAKE.md",
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_SOURCE_DESIGN_RETURN_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L149",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否仅重开 COND/DENSE 这一项原生 UAV 条件汇聚比较的研究资格，还是保留该演员家族 PARK？这是给原 Convergence 的建议，尚无裁决。",
+    "changes_if_approved": [
+      {
+        "target": "MGTAP 原生地面几何演员家族",
+        "from": "PARK，只有完成的源代码设计",
+        "to": "若原 Convergence 选择重开，仅允许后续另行分配的 COND/DENSE B 方案进入准备；本次不实施、不分配数值工作"
+      }
+    ],
+    "if_refused": "保留原生演员家族 PARK 和旧坐标分配家族 PARK，保存 P75 全部结果；方向 ACTIVE/MEDIUM 等 Portfolio 状态不变。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_SOURCE_DESIGN_RETURN_20260910.md#3-one-actual-learned-operation-and-its-comparator",
+        "quote": "For fixed visible counts and fixed user rows, moving an observed UAV can change `q`, the relative user weights and hence the residual. That cross-type interaction is the selected change.",
+        "why": "给出了可由现有合法输入实现的实际条件运算，区别于仅把均值改成总和；DENSE 保留全部输入和循环历史。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/PREPARATION_INTAKE.md#2-what-the-packet-preserves",
+        "quote": "P75 is a technically accepted adverse native comparison: REL−DENSE is −0.04468252516448091 and −0.003243683445650989, aggregate **−0.02396310430506595**.",
+        "why": "相关旧方案真实落后；新条件汇聚尚未实现或验证，不能把源代码可行性当作收益。"
+      }
+    ],
+    "uncertainty": [
+      "COND 的收益、完整耗时、激活内存和配套工作成本均未知。",
+      "同信息 DENSE 有效但未调优，当前原生宿主没有调优后的 headroom；不把缺失记录变成 B 前置关卡。",
+      "若以后分配一对训练，只能说明该次有限训练的整体方案差异，不能说明稳定优越或注意力机制因果。"
+    ],
+    "cost": {
+      "compute": "本次仅文档，科学调用 0；未来一对训练的已知暴露写在设计 §6，但无新时间上限、种子或运行额度。",
+      "owner_time": "可异步查看，无需批准逐项编辑或等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "原 Convergence 的家族选择；独立方向继续。"
+    },
+    "verdict_text": "建议原 Convergence 仅重开 COND/DENSE 这项前瞻性比较的研究资格；后续 B 仍须另行分配。本次只提交建议，不实施、不分配数值工作，也不在本地作家族裁决。",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/PREPARATION_INTAKE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T02:17:08+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md#3-blocker-rule",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/BLOCKER_INTAKE.md",
+      "state": "blocked",
+      "summary": "按现有所有者 AGENTS 第3节的阻塞规则记录：本轮两次 Send 点击仅形成一个当前问题，随后出现提供方错误；没有完整答复或方向裁决。保留原请求和历史 PARK，当前链在干净边界等待实际交付变化，不重发、不点 Retry、不在本地选择。此归因只说明既有阻塞规则，不表示所有者新答复或 Pro 裁决。"
+    },
+    {
+      "at": "2026-09-11T02:27:46+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/CONVERGENCE_INTAKE.md",
+      "state": "applied",
+      "summary": "同一请求随后交付完整答复319c51a5f，37,234字节及哈希与 Transport 回执一致，原提供方错误和两次点击保留，无新 Send。原 Convergence 最终仅重开 COND/DENSE 问题的科学资格；DM 已核对完整答复符合问题及规范，并写入 DIRECTION。未分配卡冻结、实施、测试、种子、数值调用或时间额度，旧负结果和 Portfolio 状态保留。此前待裁决建议及 blocked 轨迹是历史记录，不是新答复的当前状态。"
+    }
+  ]
+}

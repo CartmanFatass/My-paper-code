@@ -1,0 +1,1279 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
+  "state": "complete_pair_intaken_scoped_closeout_verified_pending_Root_integration_acceptance",
+  "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+  "authority_commit": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+  "starting_checkout_commit": "85a443f413e07773a5d89904dd21476c5b4b8550",
+  "starting_status": "clean",
+  "arms": [
+    "RETAIN",
+    "HALF_EVENT"
+  ],
+  "training_seed": 7808,
+  "evaluation_seed": 107808,
+  "primary": {
+    "definition": "J_HALF_EVENT minus J_RETAIN from complete128 final episodes per arm in new matched training instance7808",
+    "RETAIN_mean": 9.471796875,
+    "HALF_EVENT_mean": 5.178749999999999,
+    "delta_HR": -4.293046875000002,
+    "absolute_MEI": 1.0,
+    "branch": "RETAIN_ABOVE_MEI",
+    "independent_training_pairs": 1,
+    "training_population_uncertainty": "not estimable from one new pair",
+    "same_index_evaluation_episodes_paired": false,
+    "older_pairs_pooled": false
+  },
+  "arms_results": {
+    "RETAIN": {
+      "arm": "RETAIN",
+      "training_seed": 7808,
+      "evaluation_seed": 107808,
+      "launch_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "status": "complete",
+      "training_episodes": 5000,
+      "training_ticks": 100000,
+      "optimizer_steps": 4969,
+      "evaluation_episodes": 128,
+      "evaluation_ticks": 2560,
+      "evaluation_returns": [
+        -11.820000000000006,
+        20.14,
+        11.45,
+        -3.2300000000000013,
+        2.4100000000000015,
+        7.0,
+        8.3,
+        11.34,
+        25.629999999999995,
+        -4.31,
+        7.37,
+        5.7500000000000036,
+        7.889999999999998,
+        28.64,
+        19.06,
+        16.219999999999995,
+        13.67,
+        11.510000000000005,
+        12.74,
+        -7.32,
+        0.2999999999999978,
+        19.67,
+        5.529999999999999,
+        2.349999999999999,
+        5.09,
+        2.1099999999999985,
+        -6.880000000000001,
+        15.460000000000003,
+        6.62,
+        5.220000000000001,
+        10.459999999999999,
+        0.12999999999999634,
+        8.749999999999998,
+        11.17,
+        5.619999999999998,
+        10.19,
+        14.34,
+        -4.14,
+        23.289999999999996,
+        14.339999999999996,
+        12.110000000000001,
+        10.3,
+        2.5699999999999985,
+        8.38,
+        18.21,
+        -9.540000000000004,
+        -1.7600000000000011,
+        10.669999999999998,
+        14.71,
+        -6.490000000000004,
+        10.15,
+        2.6400000000000006,
+        17.9,
+        10.35,
+        23.19,
+        11.339999999999998,
+        35.370000000000005,
+        -4.82,
+        16.4,
+        8.740000000000002,
+        17.45,
+        1.1299999999999955,
+        3.68,
+        20.91,
+        11.69,
+        19.389999999999997,
+        20.52,
+        6.199999999999999,
+        6.850000000000001,
+        30.059999999999995,
+        26.200000000000003,
+        -2.61,
+        31.779999999999998,
+        11.86,
+        20.68,
+        3.09,
+        -2.280000000000001,
+        7.160000000000001,
+        6.549999999999997,
+        24.15,
+        17.78,
+        29.220000000000006,
+        -0.4799999999999977,
+        18.839999999999996,
+        19.91,
+        12.790000000000001,
+        1.7499999999999964,
+        -16.790000000000006,
+        -4.380000000000001,
+        -1.1200000000000012,
+        12.370000000000001,
+        20.320000000000004,
+        14.729999999999999,
+        -5.529999999999996,
+        -7.769999999999999,
+        16.439999999999998,
+        8.390000000000002,
+        8.09,
+        12.329999999999997,
+        -3.209999999999998,
+        9.230000000000004,
+        -3.5300000000000025,
+        20.93,
+        9.32,
+        16.319999999999997,
+        6.539999999999999,
+        22.62,
+        7.050000000000001,
+        -4.980000000000001,
+        4.91,
+        7.079999999999999,
+        13.020000000000005,
+        13.770000000000001,
+        15.249999999999998,
+        1.86,
+        16.04,
+        7.090000000000001,
+        19.040000000000003,
+        4.380000000000001,
+        8.45,
+        7.419999999999997,
+        -1.000000000000002,
+        -1.4500000000000017,
+        28.460000000000004,
+        9.18,
+        4.35,
+        23.220000000000002,
+        7.199999999999998
+      ],
+      "training_return_sum": -1567.5800000000443,
+      "training_events": {
+        "births": 23382,
+        "departures": 11932,
+        "survivor_opportunities": 54125,
+        "eligible_survivor_opportunities": 242948,
+        "survivor_resets": 0,
+        "survivor_attenuations": 0
+      },
+      "evaluation_events": {
+        "births": 709,
+        "departures": 435,
+        "survivor_opportunities": 1616,
+        "eligible_survivor_opportunities": 5657,
+        "survivor_resets": 0,
+        "survivor_attenuations": 0
+      },
+      "mean_native_return": 9.471796875,
+      "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final greedy evaluation episodes",
+      "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107808 for final evaluation",
+      "torch_version": "2.7.0+cu118",
+      "numpy_version": "1.26.3",
+      "torch_threads": [
+        1,
+        1
+      ],
+      "wall_seconds": 748.1175824130187,
+      "peak_rss_kib": 644236
+    },
+    "HALF_EVENT": {
+      "arm": "HALF_EVENT",
+      "training_seed": 7808,
+      "evaluation_seed": 107808,
+      "launch_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "status": "complete",
+      "training_episodes": 5000,
+      "training_ticks": 100000,
+      "optimizer_steps": 4969,
+      "evaluation_episodes": 128,
+      "evaluation_ticks": 2560,
+      "evaluation_returns": [
+        -4.24,
+        9.06,
+        10.179999999999998,
+        -0.6100000000000008,
+        7.860000000000001,
+        6.120000000000001,
+        4.239999999999999,
+        5.120000000000001,
+        0.16000000000000025,
+        1.9699999999999993,
+        11.79,
+        6.67,
+        3.4099999999999966,
+        -11.04,
+        15.469999999999999,
+        9.52,
+        -3.2700000000000005,
+        -5.080000000000001,
+        0.3000000000000007,
+        7.090000000000002,
+        2.0399999999999983,
+        -5.080000000000001,
+        9.120000000000001,
+        -3.130000000000001,
+        11.050000000000002,
+        6.66,
+        0.42999999999999994,
+        6.240000000000001,
+        14.690000000000001,
+        -2.1799999999999993,
+        7.849999999999999,
+        -5.42,
+        -3.909999999999996,
+        1.4199999999999986,
+        15.450000000000001,
+        5.54,
+        9.36,
+        -5.659999999999997,
+        -1.570000000000001,
+        1.0600000000000012,
+        1.4099999999999988,
+        -6.23,
+        2.49,
+        3.1,
+        8.8,
+        -4.569999999999996,
+        -3.3,
+        6.02,
+        16.29,
+        9.53,
+        16.88,
+        1.3400000000000007,
+        12.11,
+        4.67,
+        4.3999999999999995,
+        -4.420000000000001,
+        10.52,
+        -2.9200000000000026,
+        6.829999999999999,
+        11.770000000000001,
+        18.269999999999996,
+        3.1100000000000003,
+        -2.0700000000000003,
+        9.899999999999999,
+        9.389999999999999,
+        -5.129999999999997,
+        0.7100000000000002,
+        0.20999999999999974,
+        3.34,
+        13.71,
+        5.23,
+        10.349999999999998,
+        5.22,
+        22.44,
+        -3.9300000000000015,
+        1.3999999999999997,
+        14.380000000000003,
+        14.21,
+        10.41,
+        26.079999999999995,
+        16.21,
+        12.020000000000001,
+        2.1999999999999997,
+        5.130000000000001,
+        16.750000000000004,
+        -3.869999999999999,
+        -0.6200000000000004,
+        7.179999999999998,
+        2.43,
+        -1.0600000000000005,
+        -3.1299999999999994,
+        2.76,
+        6.970000000000001,
+        13.219999999999997,
+        10.04,
+        15.6,
+        7.519999999999996,
+        7.769999999999999,
+        18.229999999999997,
+        8.93,
+        1.529999999999999,
+        -3.61,
+        -3.0000000000000018,
+        -5.97,
+        13.679999999999998,
+        6.989999999999999,
+        -8.520000000000003,
+        3.209999999999998,
+        10.82,
+        11.769999999999998,
+        1.42,
+        6.7900000000000045,
+        0.47000000000000064,
+        8.02,
+        10.749999999999996,
+        3.4599999999999995,
+        -0.7900000000000018,
+        3.7399999999999967,
+        11.479999999999999,
+        6.05,
+        13.849999999999998,
+        7.7,
+        11.43,
+        9.209999999999999,
+        5.559999999999999,
+        0.43000000000000216,
+        1.0900000000000003,
+        0.4099999999999997
+      ],
+      "training_return_sum": -18675.840000000044,
+      "training_events": {
+        "births": 21038,
+        "departures": 7507,
+        "survivor_opportunities": 46657,
+        "eligible_survivor_opportunities": 264581,
+        "survivor_resets": 0,
+        "survivor_attenuations": 46657
+      },
+      "evaluation_events": {
+        "births": 574,
+        "departures": 232,
+        "survivor_opportunities": 1409,
+        "eligible_survivor_opportunities": 6517,
+        "survivor_resets": 0,
+        "survivor_attenuations": 1409
+      },
+      "mean_native_return": 5.178749999999999,
+      "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final greedy evaluation episodes",
+      "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107808 for final evaluation",
+      "torch_version": "2.7.0+cu118",
+      "numpy_version": "1.26.3",
+      "torch_threads": [
+        1,
+        1
+      ],
+      "wall_seconds": 767.4672104330966,
+      "peak_rss_kib": 646488
+    }
+  },
+  "accepted_handles": [
+    "folr-public-lifecycle-half-b02-retain-20260910",
+    "folr-public-lifecycle-half-b02-half-event-20260910"
+  ],
+  "budget": {
+    "accepted_invocations": 2,
+    "per_complete_arm_seconds": 1800,
+    "summed_pair_scientific_seconds": 3600,
+    "all_additional_runtime_support_including_Monitor_seconds": 300,
+    "complete_seconds": 3900,
+    "cumulative_directory_tests_already_used_seconds": 32.4911638,
+    "directory_tests_cap_seconds": 300,
+    "accepted_invocations_so_far": 2
+  },
+  "launch_plans": [
+    {
+      "arm": "RETAIN",
+      "node": "hmasd-wsl-node",
+      "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "handle": "folr-public-lifecycle-half-b02-retain-20260910",
+      "cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd",
+      "out": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain_memory.json",
+      "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain'",
+      "state": "complete_technically_accepted"
+    },
+    {
+      "arm": "HALF_EVENT",
+      "node": "hmasd-wsl-node",
+      "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "handle": "folr-public-lifecycle-half-b02-half-event-20260910",
+      "cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd",
+      "out": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event_memory.json",
+      "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm HALF_EVENT --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event'",
+      "state": "complete_technically_accepted"
+    }
+  ],
+  "checks": {
+    "source_and_tests_match_accepted_c6": true,
+    "loop_ranges": [
+      [
+        1,
+        5001
+      ],
+      [
+        128
+      ]
+    ],
+    "existing_test_count": 26,
+    "new_tests": 0,
+    "existing_independent_review": "no material finding; unchanged source reused",
+    "prepared_commands": [
+      {
+        "arm": "RETAIN",
+        "handle_absent": true,
+        "scientific_out_absent": true,
+        "memory_receipt_absent": true,
+        "bash_syntax_passed": true,
+        "runner_arguments_match": true
+      },
+      {
+        "arm": "HALF_EVENT",
+        "handle_absent": true,
+        "scientific_out_absent": true,
+        "memory_receipt_absent": true,
+        "bash_syntax_passed": true,
+        "runner_arguments_match": true
+      }
+    ],
+    "first_argument_readback_failure": "first --out selected memory path in joined command; corrected check isolates last runner command; source/command never changed and zero scientific invocations",
+    "owner_metadata_decode": "default Windows decoder failed on Chinese owner item before bookkeeping update; explicit UTF-8 read and accept value passed. Published scientific card/commands were unchanged."
+  },
+  "support": {
+    "scope": "all additional invoked runtime work including Monitor, once; excludes idle waiting and double-counted native chains",
+    "initial_preparation_reads_seconds": 1.5200933,
+    "binding_and_plan_seconds": 0.05237610000767745,
+    "dm_seconds": 46.788574999999994,
+    "monitor_seconds": null,
+    "total_seconds": null,
+    "cap_seconds": 300,
+    "monitor_actual_receipts": "to accompany adoption/terminal for each named handle; no standing accounting service",
+    "source_stage_first_failed_readback_seconds": 0.7768738,
+    "source_stage_corrected_check_seconds": 0.484080800000811,
+    "owner_cli_usage_read_seconds": 0.2447053,
+    "input_binding_and_owner_item_command_seconds": 0.3910203999839723,
+    "command_wall_records": [
+      {
+        "activity": "initial assignment/Portfolio/card/spec/source reads",
+        "seconds": 1.5200933
+      },
+      {
+        "activity": "committed input import and static binding/plan command",
+        "seconds": 0.3164187
+      },
+      {
+        "activity": "owner CLI usage read",
+        "seconds": 0.2447053
+      },
+      {
+        "activity": "source worktree creation and failed admission-out readback",
+        "seconds": 0.7768738
+      },
+      {
+        "activity": "corrected isolated-runner readback command",
+        "seconds": 0.6671776
+      },
+      {
+        "activity": "fixed-input blob check, owner packet and owner CLI insertion",
+        "seconds": 0.6038299
+      },
+      {
+        "activity": "metadata tail/read after patch-context mismatch",
+        "seconds": 0.2505273
+      },
+      {
+        "activity": "selection publication including default-decoder read failure, explicit-path commit and push",
+        "seconds": 4.824346
+      },
+      {
+        "activity": "UTF8 correction, source/current command check and RETAIN submission",
+        "seconds": 0.5251856
+      },
+      {
+        "activity": "direct Monitor dispatch API wall",
+        "seconds": 0.182
+      },
+      {
+        "activity": "handover record and current branch readback",
+        "seconds": 0.322604
+      },
+      {
+        "activity": "bound card and publication readback",
+        "seconds": 0.2157146
+      },
+      {
+        "activity": "primary owner review read at adopted boundary",
+        "seconds": 0.3303493
+      },
+      {
+        "activity": "previous adopted-boundary record check/commit/push",
+        "seconds": 4.5849562
+      },
+      {
+        "activity": "RETAIN terminal local card/summary reads",
+        "seconds": 0.246209
+      },
+      {
+        "activity": "Monitor terminal, live config and primary owner review reads",
+        "seconds": 0.3782944
+      },
+      {
+        "activity": "RETAIN remote source/read/transfer and local byte verification",
+        "seconds": 2.2049499
+      },
+      {
+        "activity": "RETAIN log shape and supervisor facts read",
+        "seconds": 0.1762484
+      },
+      {
+        "activity": "RETAIN acceptance arithmetic and count/publication checks",
+        "seconds": 0.2179824
+      },
+      {
+        "activity": "RETAIN E0 and technical intake update",
+        "seconds": 0.025
+      },
+      {
+        "activity": "RETAIN acceptance record check/commit/push",
+        "seconds": 4.6273702
+      },
+      {
+        "activity": "original HALF_EVENT command readback/source check and detached submission",
+        "seconds": 1.0943122
+      },
+      {
+        "activity": "direct HALF_EVENT Monitor dispatch API wall",
+        "seconds": 0.236
+      },
+      {
+        "activity": "HALF_EVENT E0 and intake handover update",
+        "seconds": 0.018
+      },
+      {
+        "activity": "previous HALF_EVENT handover record check/commit/push",
+        "seconds": 4.9665565
+      },
+      {
+        "activity": "HALF_EVENT terminal/current card/DIRECTION read",
+        "seconds": 0.319962
+      },
+      {
+        "activity": "primary owner review read at final intake",
+        "seconds": 0.4385417
+      },
+      {
+        "activity": "HALF_EVENT remote read/transfer and local byte verification",
+        "seconds": 2.2577317
+      },
+      {
+        "activity": "reused scientific-reading record and run analysis tool location",
+        "seconds": 0.2536988
+      },
+      {
+        "activity": "run analysis argument contract read",
+        "seconds": 0.1378956
+      },
+      {
+        "activity": "HALF_EVENT technical checks and matched run-level analysis",
+        "seconds": 0.3600272
+      },
+      {
+        "activity": "paired E0/intake/DIRECTION and Chinese brief update",
+        "seconds": 0.049
+      },
+      {
+        "activity": "paired result record checks and explicit-path commit/push",
+        "seconds": 4.9556719
+      },
+      {
+        "activity": "remote complete archives and original-member verification",
+        "seconds": 2.9806428
+      },
+      {
+        "activity": "archive transfer, local byte verification and source-ref preservation",
+        "seconds": 3.937202
+      },
+      {
+        "activity": "unchanged-original recheck, exact remote cleanup and absence verification",
+        "seconds": 0.9859505
+      },
+      {
+        "activity": "final primary owner review read",
+        "seconds": 0.3652613
+      },
+      {
+        "activity": "final archive/absence chronology and retained-artifact checks",
+        "seconds": 0.1912849
+      }
+    ],
+    "accounting_method": "Enclosing invoked command/tool wall including startup and nested remote work once; narrower helper durations not separately summed. Publication commands included conservatively.",
+    "known_subtotal_seconds": 67.69557499999999,
+    "subtotal_boundary": "through verified closeout and final owner/artifact checks; this final publication command is reported separately in the final handoff",
+    "unmeasured_pending_work": [
+      "one prior DM handover bookkeeping command with no returned elapsed receipt",
+      "RETAIN Monitor yielded-query runtimes and messaging without stopwatch output",
+      "HALF_EVENT Monitor post-loop terminal query and messaging without stopwatch output"
+    ],
+    "monitor_measured_seconds": 20.907,
+    "monitor_receipts": {
+      "RETAIN": {
+        "measured_query_seconds": 4.475999999999999,
+        "components": [
+          0.552,
+          0.389,
+          0.299,
+          0.335,
+          0.431,
+          0.395,
+          0.304,
+          0.403,
+          0.385,
+          0.346,
+          0.358,
+          0.279
+        ],
+        "unmeasured": "queries whose sleep+query calls yielded without stopwatch output, plus messaging overhead",
+        "source": "retained in RETAIN collection receipt monitor_terminal"
+      },
+      "HALF_EVENT": {
+        "measured_query_seconds": 16.431,
+        "unmeasured": "post-loop terminal query and messaging overhead not stopwatch-captured",
+        "source": "retained in HALF_EVENT collection receipt monitor_terminal",
+        "attribution": "reported for this named handle; no extra shared-batch adjustment declared"
+      }
+    },
+    "complete_cap_compliance": "not certified because support durations remain unmeasured",
+    "final_publication_runtime": "reported in final DM handoff after this command completes; no complete cost certification"
+  },
+  "monitor": {
+    "config_source": "C:/Projects/HMASD/.codex/hmasd-monitor.toml",
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "root_thread": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "collection_owner": "/root/dm_folr_restart_recovery",
+    "new_registration": "HALF_EVENT_delivered",
+    "adoption": "HALF_EVENT_confirmed_by_Root",
+    "adoption_observation_timestamp": "not separately supplied;00:08:08.331457Z is HALF_EVENT supervisor acceptance",
+    "actual_enclosing_query_seconds": "RETAIN measured4.476s plus explicitly unmeasured observations/messaging; no complete Monitor total",
+    "RETAIN_terminal": "routed_by_Root_and_collected",
+    "RETAIN": {
+      "state": "complete_collected_technically_accepted",
+      "adoption": "previously_confirmed_by_Root",
+      "terminal_receipt": "evidence/2026-09-10-folr-public-lifecycle-half-b02-retain-collection.json"
+    },
+    "HALF_EVENT": {
+      "handle": "folr-public-lifecycle-half-b02-half-event-20260910",
+      "registration": "delivered",
+      "adoption": "confirmed_by_Root",
+      "adoption_observation_timestamp": "not separately supplied;00:08:08.331457Z is supervisor acceptance",
+      "actual_query_cost_accounting": "Monitor retains actual query runtime separately from idle waits",
+      "state": "complete_collected_technically_accepted",
+      "terminal_receipt": "evidence/2026-09-10-folr-public-lifecycle-half-b02-half-event-collection.json"
+    }
+  },
+  "full_engineering_elapsed": "not measured as command runtime; not imputed zero",
+  "owner_reviews": [],
+  "source_staging": {
+    "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+    "cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd",
+    "verified_at_utc": "2026-09-10T23:41:23.627434+00:00",
+    "source_from": "existing published compute-repository commit; detached worktree created in initial source-staging command, no new bundle/input staging",
+    "tracked_status": "",
+    "source_diff_passed": true,
+    "prepared_checks": [
+      {
+        "arm": "RETAIN",
+        "handle_absent": true,
+        "scientific_out_absent": true,
+        "memory_receipt_absent": true,
+        "bash_syntax_passed": true,
+        "runner_arguments_match": true
+      },
+      {
+        "arm": "HALF_EVENT",
+        "handle_absent": true,
+        "scientific_out_absent": true,
+        "memory_receipt_absent": true,
+        "bash_syntax_passed": true,
+        "runner_arguments_match": true
+      }
+    ],
+    "scientific_invocations": 0,
+    "remote_stage_check_seconds": 0.09611529391258955,
+    "local_orchestration_seconds": 0.484080800000811
+  },
+  "selection_time_utc": "2026-09-10T23:42:46.925546+00:00",
+  "required_input_import": {
+    "source_commit": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+    "paths": [
+      "docs/research/portfolio/decisions/2026-09-10-rolling-successor-allocation.md",
+      "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/EXECUTION_MAPPING.md",
+      "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md"
+    ],
+    "git_blob_ids_match": true,
+    "other_paths_reconciled": false
+  },
+  "owner_item_cli_result": "docs/research/portfolio/owner/inbox/2026-09-10/20260910-folr-005.json",
+  "selection_source_command_commit": "ea73b1c3dabafe6482db03df8a9e51c1ad672260",
+  "retain_launch": {
+    "submission_started_utc": "2026-09-10T23:47:46.571111+00:00",
+    "returned_utc": "2026-09-10T23:47:46.884434+00:00",
+    "command_record_commit": "ea73b1c3dabafe6482db03df8a9e51c1ad672260",
+    "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+    "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain'",
+    "remote_submission": "git -C /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd diff --exit-code c6be208cd514b5d12fb13c7637e2d6376de11eb6 -- experiments/candidates/vap_folr_core/public_lifecycle_b01 scripts/run_folr_public_lifecycle_b01.py scripts/hmasd_resource_preflight.py && test ! -e /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910 && test ! -e /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain && /usr/local/bin/agent-task run folr-public-lifecycle-half-b02-retain-20260910 '/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain'\"'\"''",
+    "handle": "folr-public-lifecycle-half-b02-retain-20260910",
+    "returncode": 0,
+    "stdout": "Task 'folr-public-lifecycle-half-b02-retain-20260910' started in tmux session 'agent_folr-public-lifecycle-half-b02-retain-20260910'. Output: /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910/task.log\n",
+    "stderr": "",
+    "local_inner_seconds": 0.3470421000092756
+  },
+  "technical_acceptance": {
+    "RETAIN": {
+      "status": "technically_accepted_complete_RETAIN",
+      "checked_at_utc": "2026-09-11T00:04:56.195797+00:00",
+      "source_surface_matches": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "collection_receipt": "evidence/2026-09-10-folr-public-lifecycle-half-b02-retain-collection.json",
+      "raw_files_verified": 10,
+      "full_counts_match_card": {
+        "arm": "RETAIN",
+        "training_seed": 7808,
+        "evaluation_seed": 107808,
+        "launch_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+        "status": "complete",
+        "training_episodes": 5000,
+        "training_ticks": 100000,
+        "optimizer_steps": 4969,
+        "evaluation_episodes": 128,
+        "evaluation_ticks": 2560,
+        "torch_threads": [
+          1,
+          1
+        ]
+      },
+      "task_log_final_equals_summary": true,
+      "progress_rows": [
+        {
+          "episode": 200,
+          "updates": 169,
+          "wall_seconds": 27.358741597970948
+        },
+        {
+          "episode": 400,
+          "updates": 369,
+          "wall_seconds": 57.329770550946705
+        },
+        {
+          "episode": 600,
+          "updates": 569,
+          "wall_seconds": 86.79354780202266
+        },
+        {
+          "episode": 800,
+          "updates": 769,
+          "wall_seconds": 116.14242094592191
+        },
+        {
+          "episode": 1000,
+          "updates": 969,
+          "wall_seconds": 145.65625767793972
+        },
+        {
+          "episode": 1200,
+          "updates": 1169,
+          "wall_seconds": 174.96159570896998
+        },
+        {
+          "episode": 1400,
+          "updates": 1369,
+          "wall_seconds": 204.4241538749775
+        },
+        {
+          "episode": 1600,
+          "updates": 1569,
+          "wall_seconds": 233.62200346100144
+        },
+        {
+          "episode": 1800,
+          "updates": 1769,
+          "wall_seconds": 263.1439405239653
+        },
+        {
+          "episode": 2000,
+          "updates": 1969,
+          "wall_seconds": 292.41043386491947
+        },
+        {
+          "episode": 2200,
+          "updates": 2169,
+          "wall_seconds": 322.0404155399883
+        },
+        {
+          "episode": 2400,
+          "updates": 2369,
+          "wall_seconds": 351.3949717269279
+        },
+        {
+          "episode": 2600,
+          "updates": 2569,
+          "wall_seconds": 381.454348427942
+        },
+        {
+          "episode": 2800,
+          "updates": 2769,
+          "wall_seconds": 410.7445477700094
+        },
+        {
+          "episode": 3000,
+          "updates": 2969,
+          "wall_seconds": 440.3115922539728
+        },
+        {
+          "episode": 3200,
+          "updates": 3169,
+          "wall_seconds": 470.38212938501965
+        },
+        {
+          "episode": 3400,
+          "updates": 3369,
+          "wall_seconds": 500.9670075549511
+        },
+        {
+          "episode": 3600,
+          "updates": 3569,
+          "wall_seconds": 531.0280515810009
+        },
+        {
+          "episode": 3800,
+          "updates": 3769,
+          "wall_seconds": 561.9030626269523
+        },
+        {
+          "episode": 4000,
+          "updates": 3969,
+          "wall_seconds": 592.4908726050053
+        },
+        {
+          "episode": 4200,
+          "updates": 4169,
+          "wall_seconds": 623.6716347159818
+        },
+        {
+          "episode": 4400,
+          "updates": 4369,
+          "wall_seconds": 654.4856123089558
+        },
+        {
+          "episode": 4600,
+          "updates": 4569,
+          "wall_seconds": 685.0513096100185
+        },
+        {
+          "episode": 4800,
+          "updates": 4769,
+          "wall_seconds": 715.6821763929911
+        },
+        {
+          "episode": 5000,
+          "updates": 4969,
+          "wall_seconds": 746.5153436890105
+        }
+      ],
+      "final_checkpoint_bytes": 4662779,
+      "memory_receipt": {
+        "assessed_at": "2026-09-10T23:47:46.781396Z",
+        "available_physical_bytes": 15631994880,
+        "captured_at": "2026-09-10T23:47:46.781077Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15631994880,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "supervisor_start": "2026-09-11T07:47:46+08:00",
+      "supervisor_terminal": "2026-09-11T08:00:15+08:00",
+      "supervisor_elapsed_integer_seconds": 749.0,
+      "outer_wall_seconds": 748.47,
+      "outer_user_seconds": 732.5,
+      "outer_system_seconds": 17.53,
+      "outer_cpu_seconds": 750.03,
+      "outer_peak_rss_kib": 656744,
+      "runner_wall_seconds": 748.1175824130187,
+      "runner_peak_rss_kib": 644236,
+      "final_return_sample_sd_conditional_on_fit": 9.892176056839958,
+      "training_return_mean": -0.31351600000000884,
+      "terminal_timestamp_warning": "Monitor local_observation_time declares00:00:52-07 while native terminal is00:00:15Z. Preserve original text; use supervisor and whole.time clocks for elapsed, not that unconfirmed local offset."
+    },
+    "HALF_EVENT": {
+      "status": "technically_accepted_complete_HALF_EVENT",
+      "checked_at_utc": "2026-09-11T00:25:46.388129+00:00",
+      "source_surface_matches": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "collection_receipt": "evidence/2026-09-10-folr-public-lifecycle-half-b02-half-event-collection.json",
+      "raw_files_verified": 10,
+      "full_counts_match_card": {
+        "arm": "HALF_EVENT",
+        "training_seed": 7808,
+        "evaluation_seed": 107808,
+        "launch_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+        "status": "complete",
+        "training_episodes": 5000,
+        "training_ticks": 100000,
+        "optimizer_steps": 4969,
+        "evaluation_episodes": 128,
+        "evaluation_ticks": 2560,
+        "torch_threads": [
+          1,
+          1
+        ]
+      },
+      "task_log_final_equals_summary": true,
+      "progress_rows": [
+        {
+          "episode": 200,
+          "updates": 169,
+          "wall_seconds": 27.27091789408587
+        },
+        {
+          "episode": 400,
+          "updates": 369,
+          "wall_seconds": 58.13302505901083
+        },
+        {
+          "episode": 600,
+          "updates": 569,
+          "wall_seconds": 88.80622772907373
+        },
+        {
+          "episode": 800,
+          "updates": 769,
+          "wall_seconds": 118.73567522503436
+        },
+        {
+          "episode": 1000,
+          "updates": 969,
+          "wall_seconds": 149.51969881006517
+        },
+        {
+          "episode": 1200,
+          "updates": 1169,
+          "wall_seconds": 179.3979576980928
+        },
+        {
+          "episode": 1400,
+          "updates": 1369,
+          "wall_seconds": 209.81036635802593
+        },
+        {
+          "episode": 1600,
+          "updates": 1569,
+          "wall_seconds": 239.64619978307746
+        },
+        {
+          "episode": 1800,
+          "updates": 1769,
+          "wall_seconds": 269.4519526970107
+        },
+        {
+          "episode": 2000,
+          "updates": 1969,
+          "wall_seconds": 299.5194232460344
+        },
+        {
+          "episode": 2200,
+          "updates": 2169,
+          "wall_seconds": 329.15816564904526
+        },
+        {
+          "episode": 2400,
+          "updates": 2369,
+          "wall_seconds": 359.3207698829938
+        },
+        {
+          "episode": 2600,
+          "updates": 2569,
+          "wall_seconds": 389.8389890870312
+        },
+        {
+          "episode": 2800,
+          "updates": 2769,
+          "wall_seconds": 421.2994800300803
+        },
+        {
+          "episode": 3000,
+          "updates": 2969,
+          "wall_seconds": 452.5046135840239
+        },
+        {
+          "episode": 3200,
+          "updates": 3169,
+          "wall_seconds": 484.0875235350104
+        },
+        {
+          "episode": 3400,
+          "updates": 3369,
+          "wall_seconds": 515.2335840580054
+        },
+        {
+          "episode": 3600,
+          "updates": 3569,
+          "wall_seconds": 545.5819076640764
+        },
+        {
+          "episode": 3800,
+          "updates": 3769,
+          "wall_seconds": 576.7888131371001
+        },
+        {
+          "episode": 4000,
+          "updates": 3969,
+          "wall_seconds": 608.1443574210862
+        },
+        {
+          "episode": 4200,
+          "updates": 4169,
+          "wall_seconds": 639.9653576189885
+        },
+        {
+          "episode": 4400,
+          "updates": 4369,
+          "wall_seconds": 671.1178689820226
+        },
+        {
+          "episode": 4600,
+          "updates": 4569,
+          "wall_seconds": 702.4820817180444
+        },
+        {
+          "episode": 4800,
+          "updates": 4769,
+          "wall_seconds": 734.2243582570227
+        },
+        {
+          "episode": 5000,
+          "updates": 4969,
+          "wall_seconds": 765.8274576840922
+        }
+      ],
+      "final_checkpoint_bytes": 4662779,
+      "memory_receipt": {
+        "assessed_at": "2026-09-11T00:08:08.011234Z",
+        "available_physical_bytes": 15626715136,
+        "captured_at": "2026-09-11T00:08:08.010920Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15626715136,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "supervisor_start": "2026-09-11T08:08:07+08:00",
+      "supervisor_terminal": "2026-09-11T08:20:56+08:00",
+      "supervisor_elapsed_integer_seconds": 769.0,
+      "outer_wall_seconds": 768.73,
+      "outer_user_seconds": 744.43,
+      "outer_system_seconds": 25.62,
+      "outer_cpu_seconds": 770.05,
+      "outer_peak_rss_kib": 678048,
+      "runner_wall_seconds": 767.4672104330966,
+      "runner_peak_rss_kib": 646488,
+      "final_return_sample_sd_conditional_on_fit": 6.9658697757195736,
+      "training_return_mean": -3.7351680000000087,
+      "attenuation_fraction_of_eligible_training": 0.17634297247345804,
+      "attenuation_fraction_of_eligible_final": 0.2162037747429799,
+      "terminal_timestamp_warning": "Monitor local_observation_time declares00:21:04-07 while native terminal is00:20:56Z. Preserve original text; use supervisor and whole.time clocks, not this unconfirmed local offset."
+    }
+  },
+  "continuation_decision": {
+    "tier": "object",
+    "kind": "technical",
+    "options": [
+      "accept complete RETAIN and execute already selected HALF_EVENT once",
+      "stop if collected integrity or counts fail"
+    ],
+    "chosen": 0,
+    "provenance": "Owner-delegated decision (unattended,2026-09-03 instruction): (a)",
+    "rule": "Execute RETAIN then HALF_EVENT, both preselected regardless of RETAIN score, one accepted invocation each. Failure retains evidence and stops the dependent sequence.",
+    "new_scientific_selection": false,
+    "support_complete_compliance_claimed": false
+  },
+  "half_event_launch": {
+    "submission_started_utc": "2026-09-11T00:08:07.523443+00:00",
+    "returned_utc": "2026-09-11T00:08:08.331457+00:00",
+    "command_record_commit": "ea73b1c3dabafe6482db03df8a9e51c1ad672260",
+    "acceptance_intake_commit": "fb98e0fe8afab80d51553ac274b99479acfdaad2",
+    "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+    "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm HALF_EVENT --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event'",
+    "remote_submission": "git -C /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd diff --exit-code c6be208cd514b5d12fb13c7637e2d6376de11eb6 -- experiments/candidates/vap_folr_core/public_lifecycle_b01 scripts/run_folr_public_lifecycle_b01.py scripts/hmasd_resource_preflight.py && test ! -e /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910 && test ! -e /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event && test ! -e /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event_memory.json && /usr/local/bin/agent-task run folr-public-lifecycle-half-b02-half-event-20260910 '/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm HALF_EVENT --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event'\"'\"''",
+    "handle": "folr-public-lifecycle-half-b02-half-event-20260910",
+    "returncode": 0,
+    "stdout": "Task 'folr-public-lifecycle-half-b02-half-event-20260910' started in tmux session 'agent_folr-public-lifecycle-half-b02-half-event-20260910'. Output: /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910/task.log\n",
+    "stderr": "",
+    "local_inner_seconds": 0.8920250000082888
+  },
+  "prediction": {
+    "DM": "WITHIN_MEI",
+    "confidence": "low",
+    "outcome": "RETAIN_ABOVE_MEI",
+    "score": "missed",
+    "owner": "not taken (unattended)"
+  },
+  "pair_totals": {
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_ticks": 5120,
+    "native_ticks": 205120,
+    "summed_whole_wall_seconds": 1517.2,
+    "summed_cpu_seconds": 1520.08,
+    "summed_runner_wall_seconds": 1515.5847928461153,
+    "study_elapsed_supervisor_seconds": 1990.0,
+    "training_return_mean_delta_HR": -3.421652
+  },
+  "run_analysis": {
+    "input_csv": "docs/research/candidates/vap_folr_core/evidence/2026-09-10-folr-public-lifecycle-half-b02-run-scores.csv",
+    "output_json": "docs/research/candidates/vap_folr_core/evidence/2026-09-10-folr-public-lifecycle-half-b02-run-analysis.json",
+    "unit": "one score per fitted arm; one matched training pair",
+    "paired_baseline": "RETAIN",
+    "result": {
+      "unit": "caller-declared independent training run",
+      "inference": "descriptive only; no confidence interval or success classification",
+      "groups": [
+        {
+          "task": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
+          "arm": "HALF_EVENT",
+          "n": 1,
+          "mean": 5.178749999999999,
+          "sample_sd": null,
+          "min": 5.178749999999999,
+          "max": 5.178749999999999,
+          "runs": {
+            "7808": 5.178749999999999
+          }
+        },
+        {
+          "task": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
+          "arm": "RETAIN",
+          "n": 1,
+          "mean": 9.471796875,
+          "sample_sd": null,
+          "min": 9.471796875,
+          "max": 9.471796875,
+          "runs": {
+            "7808": 9.471796875
+          }
+        }
+      ],
+      "paired_differences": [
+        {
+          "task": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
+          "arm": "HALF_EVENT",
+          "baseline": "RETAIN",
+          "summary": {
+            "n": 1,
+            "mean": -4.293046875000002,
+            "sample_sd": null,
+            "min": -4.293046875000002,
+            "max": -4.293046875000002
+          },
+          "differences": {
+            "7808": -4.293046875000002
+          },
+          "unmatched_arm_seeds": [],
+          "unmatched_baseline_seeds": []
+        }
+      ]
+    }
+  },
+  "resources_unmeasured": "some support command/query/messaging durations; native arm time/RSS and required memory admissions measured",
+  "scientific_intake": {
+    "path": "FOLR_PUBLIC_LIFECYCLE_HALF_B02_INTAKE_20260910.md",
+    "evidence_class": "B/EXPLORE",
+    "reading_rule_verbatim": "RETAIN_ABOVE_MEI: d_HR<=-1",
+    "claim_ceiling": "one new matched trained-package comparison; no stable, causal, omitted-control, transfer, C or Portfolio conclusion",
+    "old_pair_preserved_separately": true,
+    "prediction_scored": "WITHIN_MEI low confidence missed",
+    "owner_prediction": "not taken (unattended)",
+    "owner_brief": "docs/research/portfolio/owner/briefs/vap_folr_core/2026-09-10_FOLR_PUBLIC_LIFECYCLE_HALF_B02.md",
+    "decisions": [
+      {
+        "tier": "object",
+        "kind": "technical",
+        "options": [
+          "accept valid paired B result",
+          "quarantine only for demonstrated integrity defect"
+        ],
+        "chosen": 0,
+        "provenance": "Owner-delegated decision (unattended,2026-09-03 instruction): (a)"
+      },
+      {
+        "tier": "object",
+        "kind": "technical",
+        "options": [
+          "preserve and verify archives, then remove exact completed roots",
+          "retain for a live or unresolved preservation dependency"
+        ],
+        "chosen": 0,
+        "provenance": "Owner-delegated decision (unattended,2026-09-03 instruction): (a)",
+        "state": "executed_after_verified_preservation"
+      }
+    ],
+    "successor": "none authorized by this completed allocation",
+    "direction_or_portfolio_disposition": "none locally selected"
+  },
+  "closeout_inventory": {
+    "state": "verified_complete",
+    "remote_roots": [
+      "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd",
+      "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
+      "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910"
+    ],
+    "remote_input_staging": "none created for B02",
+    "preserve": [
+      "complete source worktree including ignored evidence",
+      "both completed supervisor roots",
+      "all local raw collections and Monitor receipts",
+      "exact source c6 recovery ref"
+    ],
+    "retained_local_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-vap-folr"
+  },
+  "closeout": {
+    "archive_verification_receipt": "evidence/2026-09-10-folr-public-lifecycle-half-b02-archive-verification.json",
+    "remote_closeout_receipt": "evidence/2026-09-10-folr-public-lifecycle-half-b02-remote-closeout.json",
+    "all_members_verified_before_removal": true,
+    "verified_members": 2708,
+    "local_archive_bytes": 17112603,
+    "removed_exact_roots": [
+      "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd",
+      "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
+      "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910"
+    ],
+    "disk_absence": {
+      "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd": true,
+      "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910": true,
+      "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910": true
+    },
+    "worktree_registration_absent": true,
+    "verified_removed_at_utc": "2026-09-11T00:36:44.836110+00:00",
+    "local_source_ref": "refs/archive/folr-public-lifecycle-half-b02-20260910",
+    "remote_source_ref": "refs/archive/folr-public-lifecycle-half-b02-20260910",
+    "source_ref_commit": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+    "local_preservation": [
+      "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/folr-public-lifecycle-half-b02-20260910/worktree.tar.gz",
+      "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/folr-public-lifecycle-half-b02-20260910/supervisors.tar.gz"
+    ],
+    "local_collected_raw_evidence": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/collected",
+    "shared_local_authoring_checkout_retained": "C:/Projects/HMASD-worktrees/codex-vap-folr",
+    "other_roots_targeted": false,
+    "Root_acceptance": "pending integration and reclamation acceptance"
+  }
+}

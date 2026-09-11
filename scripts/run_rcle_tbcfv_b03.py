@@ -17,7 +17,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--arm", choices=("W1", "W100", "reference"), required=True)
-    parser.add_argument("--seed", type=int, choices=(19, 20), default=19)
+    parser.add_argument("--seed", type=int, choices=(19, 20, 21, 22, 23), default=19)
+    parser.add_argument("--updates", type=int, choices=(200, 1000), default=200)
     parser.add_argument("--reporting-object", default="RCLE-TBCFV-B03-ACTOR100")
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--launch-sha", required=True)
@@ -36,7 +37,7 @@ def main():
     signal.setitimer(signal.ITIMER_REAL, max(0.001, args.wall_cap - (time.perf_counter() - STARTED)))
     result = run(args.arm, args.out, args.launch_sha, args.admission_receipt,
                  STARTED, args.wall_cap, args.control_summary,
-                 seed=args.seed, reporting_object=args.reporting_object)
+                 seed=args.seed, updates=args.updates, reporting_object=args.reporting_object)
     signal.setitimer(signal.ITIMER_REAL, 0)
     print(result["status"], args.arm, flush=True)
     return 0 if result["status"] == "COMPLETE" else 2

@@ -1,0 +1,128 @@
+{
+  "object": "UCOPE-UAV-SHORT-LEARNED-RENEWAL-CONTINUOUS-B01",
+  "master": 8703,
+  "configuration": {
+    "seed": 8703,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 2048,
+    "checkpoints": [
+      512,
+      1024,
+      2048
+    ],
+    "eval_episodes": 64,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 5100
+  },
+  "frozen_at_utc": "2026-09-10T21:07:34Z",
+  "method": "Integer arithmetic from accepted configuration and recorded results; no RNG/model/environment invocation.",
+  "exposure": {
+    "independent_matched_training_instances": 1,
+    "fits": 3,
+    "training_episodes": 6144,
+    "training_ticks": 1572864,
+    "rollouts": 3072,
+    "adam_calls": 12288,
+    "evaluation_episodes": 640,
+    "evaluation_ticks": 163840,
+    "total_native_ticks": 1736704,
+    "recurrent_agent_observation_rows": 8683520,
+    "explicit_resets": 6784,
+    "constructor_resets": 3,
+    "trainable_parameters": {
+      "T": 68553,
+      "F": 66311,
+      "G": 66311
+    },
+    "frozen_F_head_parameters": 2242,
+    "unchanged_budget_8701_T_duration_exposure": {
+      "parameters": 2242,
+      "initial_norm": 3.2213196754455566,
+      "final_norm": 3.3493101596832275,
+      "displacement": 0.8411278128623962,
+      "relative_displacement": 0.2611128039460395
+    }
+  },
+  "seed_addresses": {
+    "created_or_reserved": 3272,
+    "minimum": 870300011,
+    "maximum": 870382063,
+    "overlap_with_declared_old_blocks": {
+      "8601": 0,
+      "8602": 0,
+      "8701": 0,
+      "8702": 0
+    },
+    "A01_master": "repeated 8702 block, already included",
+    "fixture_master": 9002,
+    "intentional_sharing": "Common actor/critic initialization and initial T/F head; matched train/evaluation worlds; constructor repeats first train world."
+  },
+  "dominant_head_work": {
+    "forward_rows_per_T_or_F_fit_lower": 8110080,
+    "forward_rows_per_T_or_F_fit_upper": 16220160,
+    "dense_forward_MACs_per_row": 2208,
+    "observed_8701_T_forward_rows": 11245232,
+    "observed_8701_F_forward_rows": 10826492,
+    "T_backward_wall": "unmeasured; no profiling allocation"
+  },
+  "cost": {
+    "per_arm": {
+      "T": {
+        "training_ticks": 524288,
+        "evaluation_ticks": 49152,
+        "optimizer_steps": 4096,
+        "same_work_multiplier_vs_8701": 1,
+        "reference_nested_wall_s": 729.1363350299653,
+        "reference_assigning_all_unlocalized_outer_overhead_s": 849.8099995329535,
+        "complete_fit_cap_s": 1800,
+        "total_native_ticks": 573440
+      },
+      "F": {
+        "training_ticks": 524288,
+        "evaluation_ticks": 49152,
+        "optimizer_steps": 4096,
+        "same_work_multiplier_vs_8701": 1,
+        "reference_nested_wall_s": 708.7234487819951,
+        "reference_assigning_all_unlocalized_outer_overhead_s": 829.3971132849833,
+        "complete_fit_cap_s": 1800,
+        "total_native_ticks": 573440
+      },
+      "G": {
+        "training_ticks": 524288,
+        "evaluation_ticks": 65536,
+        "optimizer_steps": 4096,
+        "same_work_multiplier_vs_8701": 1,
+        "reference_nested_wall_s": 553.0765516850515,
+        "reference_assigning_all_unlocalized_outer_overhead_s": 673.7502161880398,
+        "complete_fit_cap_s": 1800,
+        "total_native_ticks": 589824
+      }
+    },
+    "complete_fit_cap_s": 1800,
+    "complete_study_cap_including_support_s": 5400,
+    "internal_scientific_deadline_s": 5100,
+    "support_reserve_s": 300,
+    "new_focused_check_cap_s": 15,
+    "cumulative_directory_test_s_before_8703": 48.25920262996807,
+    "remaining_directory_test_s": 251.74079737003194,
+    "conservative_prior_all_preparation_charging_s": 55.3690011,
+    "prior_8701_outer_s": 2111.61,
+    "prior_unlocalized_outer_overhead_s": 120.67366450298823,
+    "accumulated_accepted_scientific_outer_s": {
+      "8701_complete_comparison": 2111.61,
+      "8702_incomplete_comparison": 603.07,
+      "A01_repeated_prefix_diagnostic": 592.44
+    },
+    "accumulated_outer_s": 3307.12,
+    "complete_performance_comparisons_in_window": 1,
+    "complete_A_diagnostics_in_window": 1,
+    "incomplete_performance_attempts_in_window": 1,
+    "accumulation_limit": "3307.12 s covers these three native commands once; it excludes separately recorded support and is not aggregate CPU or wall critical path.",
+    "forecast_limit": "The same-work predecessor is a reference, not a runtime guarantee; per-arm attribution of all outer overhead is conservative and is never summed three times."
+  },
+  "exposure_line": "NEW allocation 8703: 1 independent matched training instance; 3 fits; 6144 training episodes /1572864 training ticks; 3072 rollouts /12288 Adam calls; 640 evaluation episodes /163840 ticks; 1736704 native ticks total. T has 68553 trainable parameters including 2242 duration-head parameters and 4096 Adam calls; the unchanged 8701 budget moved that head by 0.8411278128623962 from initial norm 3.2213196754455566 (relative 0.2611128039460395), establishing that this learner can move; new movement is measured, not guaranteed. F/G each train 66311 parameters; F's head stays frozen. No search, retuning, extra native validation, replay or replacement. Preparation scientific exposure 0.",
+  "new_scientific_invocations": 0,
+  "arithmetic_elapsed_s_before_serialization": 0.004006599978310987
+}

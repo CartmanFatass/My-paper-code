@@ -1,0 +1,43 @@
+{
+  "question": "记录已获分配的新三臂卡：用一组新训练随机数检验 EVENT 的最终回报排序是否重现。",
+  "changes_if_approved": [
+    {
+      "target": "FOLR-PUBLIC-LIFECYCLE-TIMING-B02 science card",
+      "from": "Portfolio A 已分配一次新三臂，具体实例未绑定",
+      "to": "训练7805、评估107805，RANDOM 私有流207805/307805；RETAIN/EVENT/RANDOM 全部预定并顺序执行"
+    }
+  ],
+  "if_refused": "在下一个清洁边界按异步指令处理尚未发生的工作，保留已接受运行及全部结果，不自动补跑或更换种子。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B01_INTAKE_20260909.md",
+      "quote": "EVENT_CLEAR_ADVANTAGE",
+      "why": "上一组 EVENT 比 RETAIN 高2.80分、比 RANDOM 高1.36分；一个新训练实例能直接检验这次局部排序。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_next_five_chains/EXECUTION_MAPPING.md#folr--one-new-timing-triple",
+      "quote": "Complete one fresh matched RETAIN/EVENT/RANDOM training instance to observe whether the trained-package endpoint ordering recurs.",
+      "why": "Root 已应用完整 Portfolio 决定并分配这一次完整三臂链。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B01_INTAKE_20260909.md",
+      "quote": "lower cumulative EVENT training return",
+      "why": "EVENT 的累计训练回报较低，旧 B03 也曾反向；当前最终优势不是稳定优势。"
+    }
+  ],
+  "uncertainty": [
+    "RANDOM 的清空概率固定为0.1，实际次数与 EVENT 不匹配；仍不能分离时间、剂量、联合清空模式和训练差异。",
+    "128次最终评估来自每臂一个拟合实例，不是128个独立训练样本。",
+    "现有日志只有累计训练回报，不能重建训练回报曲线；同信息调优基线的余量也未知。"
+  ],
+  "cost": {
+    "compute": "3次训练共300000训练ticks、14907次RMSprop；384次最终评估，共307680 native ticks。每完整臂≤1800秒、总和≤5400秒，另有≤300秒辅助；旧完整链2347秒仅作点预测。",
+    "owner_time": "可异步检查卡和预测；没有等待项。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Recommendation and selection: (a).",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B02_INTAKE_20260910.md#1-assignment-and-prospective-object-decision"
+}

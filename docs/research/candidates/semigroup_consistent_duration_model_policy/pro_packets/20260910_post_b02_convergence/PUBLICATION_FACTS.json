@@ -1,0 +1,148 @@
+{
+  "observed_at_utc": "2026-09-10T21:51:38.960087+00:00",
+  "remote_refs": {
+    "refs/heads/codex/scdmp": "d4cc1673479e708dc1f9bbfd5ba5e48810e03da6",
+    "refs/heads/main": "11b861ed0570341d12ad84ed61337ae27e844199"
+  },
+  "references": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/PREPARATION_FACTS.json",
+      "commit_sha": "d4cc1673479e708dc1f9bbfd5ba5e48810e03da6",
+      "bytes": 8947,
+      "sha256": "ef45e8be32124cc3989e921b7585dcf14a7ab87e93ec54fa10af01e2ab089e3e",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/scdmp"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B02_INTAKE_20260910.md",
+      "commit_sha": "859b0b2ed9f1c1eaa3bbc650c558befeca2b5bba",
+      "bytes": 11821,
+      "sha256": "02f3a264ca18a64918607b1fe3df9fea22a6c142920dfe89620fa3d57561c71f",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/scdmp"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B02_SCIENCE_CARD_20260910.md",
+      "commit_sha": "78397e045e135e3b55a6d6af06a1227d50996f46",
+      "bytes": 14593,
+      "sha256": "461f6d8d3650393f730e4ddf3ec057116c6d284d03f59df8e834fe2aab5d89bd",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/scdmp"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B02_RESULT_EVIDENCE_20260910.json",
+      "commit_sha": "859b0b2ed9f1c1eaa3bbc650c558befeca2b5bba",
+      "bytes": 137737,
+      "sha256": "439488361357b3a41d1347d28e50e05ba34f3815f2e9441d989e66f8f1b91e92",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/scdmp"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/archive/RESPONSE.md",
+      "commit_sha": "2b1a8d7a8395827ed654dac120641710e6a6c87a",
+      "bytes": 30060,
+      "sha256": "ddfd25cad9c00f9c4324eef11abc2cf2aba3105932e67f6956f86f34368835e7",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/scdmp"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+      "commit_sha": "859b0b2ed9f1c1eaa3bbc650c558befeca2b5bba",
+      "bytes": 52558,
+      "sha256": "3cccf1f476174a154c99a97411d6f93936c50122b8c61f162ddc9c9573b55a33",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/scdmp"
+      ]
+    },
+    {
+      "path": "experiments/candidates/scdmp_variable_k/native_hold_residual_b01/study.py",
+      "commit_sha": "f079c753052f95f01754e50676a59d7541fd683c",
+      "bytes": 13609,
+      "sha256": "bc0cfed6a2d57159899979e05366d1c058e95e6708ef414f457dc68db404f74f",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/scdmp"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md",
+      "commit_sha": "5d52c5e5bed047e8e32fde575952133a7817b9d2",
+      "bytes": 13155,
+      "sha256": "eefc728bd81e40b29da48224875b916874d4b250bf55fe213ac535ef41bbec25",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/scdmp"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_RESULT_EVIDENCE_20260909.json",
+      "commit_sha": "e5ed770301e8f5bac9fd77063edd24bee550fb5f",
+      "bytes": 123322,
+      "sha256": "8690694c6efabafa5739181a50573da14b060804a69030a5ae349a59bd3feff3",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/scdmp"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_RETURN_COMPOSITION_P56_SOURCE_INTAKE_20260908.md",
+      "commit_sha": "21a801279bd449c09907f5cf040efa693ae345a3",
+      "bytes": 22267,
+      "sha256": "53b1d27c7e0ffd2d5c3af8091fa8beca2628e4c224d51a3c77ecfc8b55f6f955",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/scdmp"
+      ]
+    },
+    {
+      "path": "experiments/candidates/scdmp_variable_k/native_hold_residual_b01/learner.py",
+      "commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+      "bytes": 3329,
+      "sha256": "588f0a5225cc760a54303cd94ab06174c4c552f42591e0de166cb2ed30e2f4f1",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/scdmp"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/main"
+      ]
+    }
+  ],
+  "all_paths_exactly_published": true,
+  "pro_access": "Not established by local publication checks; provider reads its fixed TASK evidence.",
+  "owner_reviews": "Primary review query returned [] at preparation; no owner reply inferred.",
+  "scope_machinery": "None under engineering scope section4; zero new scientific invocation."
+}

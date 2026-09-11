@@ -465,3 +465,162 @@ a causal 200-versus1,000 estimate or an extrapolated promised gain. Another unch
 runner-up. The bounded recommendation names 136,192 episodes / 8,716,288 ticks / 2,000 calls and
 rough 855.1s runner projection within a candidate 1500s complete cap. No successor card,
 invocation, priority/lifecycle disposition or Pro request is made by this recommendation.
+
+## Fixed 1,000-update learning comparison selected — 2026-09-10
+
+Portfolio PRO_FINAL A at `08e989073839fe5f0f91c6a8ad90a399bee37b6c`, applied by Root,
+selects the preceding finite learning question. The new
+`RCLE_B03_FRESH1000_S21_SCIENCE_CARD_20260910.md` fixes a fresh matched seed-21 pair,
+1,000 updates per arm and the same four native panels. This is the next discriminator
+for practical learning and whole-law contrast at that endpoint. The two earlier
+200-update comparisons, sub-MEI effects, recovery/reference limitations and unexplained
+failed prefix retain their original meaning. No new empirical result exists at freeze;
+this selection grants no successor, causal budget effect or stable-superiority claim.
+
+## Fresh 1,000-update pair: large local native learning signal — 2026-09-10
+
+`RCLE_B03_FRESH1000_S21_RESULT_INTAKE_20260910.md` accepts one fresh seed-21 W1/W100
+pair at the prospectively fixed 1,000-update endpoint. Both fits make 1,000 nonzero
+joint updates from matching fresh initial tensors. Primary native U_W1−U_W100 is
+**+0.3791442871**, conditional scenario interval [.3728085,.3854801]; W100's gain from
+initialization is **+.38115234375** versus W1's small+.00200806. Both primary paths
+and all8 U/Y/F cell means favor W100. The above-MEI local-service branch applies.
+This is substantial native learning for this pair, beyond the earlier small200-update
+signals. Those outcomes and the unknown historical failed prefix retain their meanings;
+unequal endpoints are not pooled or treated as a causal budget comparison.
+
+The strongest support is the complete native service/reward comparison and the retained
+late improvement in W100's training curve. The strongest competence contradiction is
+that the fixed reference still has lower U in every cell (primary gap+.0419108), while
+2035/2048 W100 recovery scores remain failure-coded at40. H_A1 remains unidentified.
+All four final-roster12 F means now improve versus W1, so the old universal adverse-F
+story does not describe this outcome. This does not causally attribute its reversal
+to training duration. The DM's small-size forecast is refuted; practical learning and
+majority-tau40 forecasts are supported.
+
+The full normalized joint gradient changes shared features, plans, baselines and
+visitation as well as action scores. Those remain alternatives to pure actor-credit
+causality; one1,000-update pair does not establish stable superiority, broad recovery,
+optimality, transfer or C readiness. Strongest evidence is the complete fresh1000 E0,
+its row/checkpoint/count readback, and `b03_fresh1000_s21_20260910/DM_RESULT_ANALYSIS.json`.
+The next discriminator recommended for separate allocation is one fresh matched pair
+at the same fixed1,000 endpoint with all outcomes retained. The current allocation
+ends; no successor, seed, priority/lifecycle disposition or Pro request is created.
+
+## Same-endpoint independent training pair selected — 2026-09-10
+
+The accepted seed21 native learning signal motivates the object-tier continuation in
+`RCLE_B03_FRESH1000_S22_SCIENCE_CARD_20260910.md`: one fresh matched seed22 pair at the
+same1,000-update endpoint. The mechanism, W1/W100 comparator, information and four panels
+remain fixed. This next observation tests recurrence under independent training, rather
+than adding evaluation to the one existing trained pair. Standing delegation and the
+owner's independent-progression instruction select it; no family/class/lifecycle change
+is made. S21 remains n1 at selection, with its reference gap, saturated recovery,
+whole-law attribution limits and all earlier failures retained. Every S22 outcome will
+be reported; no all-positive seed rule or causal200-to1000 claim follows.
+
+## Independent same1000 attempt incomplete; native contrast still n1 — 2026-09-10
+
+`RCLE_B03_FRESH1000_S22_RESULT_INTAKE_20260910.md` preserves an incomplete seed22 pair.
+W1 completed1000 updates and its native endpoint has only a small initialization gain
++.0039571, with all recovery scores40. W100 retained983 completed training blocks and
+a favorable late training trend, then stopped with a caught exception before its final
+evaluation; reference was not invoked. That curve cannot substitute for the fixed
+held-out comparison. The large W100 signal remains supported by the one complete S21
+pair, with its existing reference gap and recovery limitation. This attempt adds no
+second paired effect and no algorithmic negative; all exposure and unknown partial
+work remain visible. The next discriminator is a traceback-equipped, separately selected
+completion attempt using the intact W1 control, or the actual failure location if it
+stops again. No cause is assigned to the error or linked to the historical signal11;
+no family/lifecycle/class decision or automatic retry follows.
+
+## Seed22 native comparison completion selected — 2026-09-10
+
+The next object-tier discriminator is one fresh-initialization W100 seed22 fit at
+the same1000 endpoint, with the verified completed W1 control and reference on success:
+`RCLE_B03_FRESH1000_S22_RECOVERY_SCIENCE_CARD_20260910.md`. The original failed attempt
+remains incomplete; its favorable training curve supplies no paired effect. This
+selection preserves the same law, information, reference and reading rules, includes
+the accepted ordinary traceback reporting, and consumes a separate900s complete cap.
+It tests the missing native contrast or records a concrete failure location; neither
+a second independent seed sample from repetition nor a crash-cure claim follows.
+S21 is still the only complete same1000 pair at selection. Prior reference/recovery
+deficits and all failed exposure remain visible. No family/class/lifecycle change.
+
+## Seed22 recovered: large native signal across two1000 roots — 2026-09-10
+
+`RCLE_B03_FRESH1000_S22_RECOVERY_RESULT_INTAKE_20260910.md` accepts a complete
+new W1001000/reference sequence against the exact retained W1 control. New W100
+starts at matching fresh seed22 initial tensors/zero baselines and records1000
+nonzero joint updates. Delta_U+.3678243001 and W100 initialization gain+.3717814128
+exceed.05; all512 primary scenarios and all8 U/Y/F means favor W100. This completes
+seed22's comparison while preserving its old983-block failed attempt and costs.
+S21 and recoveredS22 are two completed training roots, with descriptive mean
+Delta+.3734842936; the repeated22 invocation is not an additional independent seed.
+
+The strongest support is the intact native learning/contrast recurring at the fixed
+endpoint. The strongest competence contradiction remains: reference U is lower in
+every cell (primary gap+.0568258), and2037/2048 W100 recovery scores remain40.
+The full joint law still changes shared features, plans, baselines and visitation;
+pure actor-credit causality, tuned headroom, stable superiority and transfer remain
+unidentified. The successful attempt does not diagnose or cure prior exceptions.
+
+The next discriminator recommended for separate selection is another independent
+matched pair at the same endpoint, retaining every outcome; it can measure additional
+training variation but cannot alone establish competence against the reference.
+Current allocation closes after preserved cleanup; no successor/card/budget, family
+change, C promotion or Portfolio disposition follows automatically.
+
+## Third independent same1000 root selected as a close call — 2026-09-10
+
+`RCLE_B03_FRESH1000_S23_SCIENCE_CARD_20260910.md` selects one fresh matched seed23
+pair at the unchanged1000 endpoint under object-tier delegation. Two completed roots
+support a large whole-law native signal; another independent root can expose training
+variation or contradiction. Ending unchanged-law spending is the close runner-up because
+reference/recovery deficits persist and further recurrence cannot establish competence.
+Seed21 and recovered22 remain the two prior units; the failed/repeated22 exposure and
+recovery adaptivity are retained. This finite next discriminator changes no family,
+lifecycle, priority or class and grants no automatic subsequent pair.
+
+## Third same1000 root: service signal with fragmentation loss — 2026-09-10
+
+`RCLE_B03_FRESH1000_S23_RESULT_INTAKE_20260910.md` accepts a complete fresh seed23
+pair. Delta_U +.3033203125 and W100 initialization gain +.3080179850 exceed .05;
+all512 primary scenarios and all8 U/Y means favor W100. This supports recurrence
+of native service learning under the whole normalized law, with smaller magnitude
+than roots21/22. Three-root descriptive mean Delta +.3500963 (sample SD .0409027)
+retains outcome-informed selection and recovered22 as one root.
+
+The strongest new contradiction is fragmentation: all8 F means worsen, primary
+increase +.015234375, reversing the prior two roots' favorable F pattern. Reference
+U is still better in every cell, primary deficit .1162374; W1002045/2048 recovery
+scores remain failure-coded40. No unqualified nonharm branch or all-native improvement
+is claimed. A post-hoc F threshold is not supplied. Pure actor-credit causality,
+tuned headroom, stable superiority and transfer remain unidentified; whole-law
+feature/plan/baseline/visitation changes survive as alternatives, with no explanation
+assigned to the F reversal or historical failures.
+
+The next discriminator recommended for separate selection is a competence comparison
+addressing absolute U/reference deficit with explicit fragmentation consequences,
+rather than another immediate unchanged-law replica. Current allocation ends after
+preserved closeout; no new card, seed, budget, family/lifecycle/priority disposition or
+C promotion is selected. Evidence: the S23 E0/readback and three-root analysis.
+
+## Competence comparison designed, with no numerical allocation — 2026-09-10
+
+The accepted Portfolio design assignment is completed in
+RCLE_SERVICE_COMPARISON_DESIGN_INTAKE_20260910.md. Its proposed next discriminator
+is one fresh nearest-guided FLEX fit at 200 updates versus its untrained initialization
+and the attained deterministic INDEPENDENT-NEAREST reference. A fixed action preference
+uses the already legal candidate-distance feature; the learner may override it using
+the same native Y and FLEX state/information path. The primary is absolute post-churn
+U improvement over the reference, with all F/recovery consequences retained.
+
+This is a source-grounded object-design recommendation, not a performance result,
+frozen card, new family or numerical allocation. Proposed complete work is 18,944
+episodes/1,212,416 ticks/200 updates, within a requested 300 s including all runtime support
+and Monitor work. Current new exposure is zero. The prior can itself harm service and
+the learner may not improve it; old seed23 service gains, all-eight F harm, reference
+deficit and failure-coded recovery remain the strongest support and contradiction.
+No fourth unchanged same 1000 root, F exchange rate, headroom or causal claim is added.
+Root receives the concrete design and separate allocation need; ACTIVE/MEDIUM persists.

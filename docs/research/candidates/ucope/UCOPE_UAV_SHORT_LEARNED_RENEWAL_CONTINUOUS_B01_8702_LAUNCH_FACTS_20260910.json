@@ -1,0 +1,157 @@
+{
+  "source": {
+    "source": "b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9",
+    "base": "3182c4c844803ab362034c2b3d5d22f7f62bca3a",
+    "sha256": {
+      "experiments/candidates/ucope/uav_motion_prefix_b01/study.py": "0e787d017f6486603aa573ce29b3be9ac6c4ce8c775df55412fdaa20afe5e5f1",
+      "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py": "08873c2e0e918cf3194c7e7d7c81cac34d117d82611e2d4082d814f6b3d40944",
+      "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py": "e0f907921ab8b48f6755b2513431b78a7f4a95ebce9a631e925fb82c0dfed911",
+      "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6",
+      "experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/study.py": "9fa3f15ea1cab0a809e8302e033ef16743f7786044345322fcd5b5127da7d340",
+      "experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/__init__.py": "ac2510ac2e2167070946b91d6331e471626f8a3bd69b70ac0b74a4d16134b989",
+      "scripts/run_ucope_uav_short_fixed_renewal_continuous_b01.py": "1a5d48ad52bff810648fbc9571a01320afa9bcf161335145c8c0da19f77da942",
+      "scripts/hmasd_resource_preflight.py": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc",
+      "scripts/hmasd_platform.py": "f9e1fd0a88f9c0eef9b706802ae3aaceac4bc2f8ea394e895d01146e8e17865b",
+      "envs/pettingzoo/uav_env.py": "f50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803",
+      "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+      "tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py": "05d112ba4e5a5a3afa14243fe78f187a4f9f234381e499ca176da40781873221"
+    },
+    "pack_bytes": 400083,
+    "pack_sha256": "029d1f6d4db26c222f8eff20e730361d87385e76afe7e36661199bb27faba444",
+    "wrapper_bytes": 552,
+    "wrapper_sha256": "151dd01a280e797721fab7e7ec034c892a9d74d4054c041215d44bb654778fc9",
+    "command": "/usr/local/bin/agent-task run ucope-uav-short-learned-renewal-continuous-b01-8702-20260910 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 5100s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910.sh'",
+    "node": "hmasd-wsl-node",
+    "cwd": "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910",
+    "handle": "ucope-uav-short-learned-renewal-continuous-b01-8702-20260910"
+  },
+  "card": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_SCIENCE_CARD_20260910.md",
+  "technical_acceptance_sha": "b96439039007dd54da8956a622c6814ebc39d135",
+  "submission": {
+    "started_at": "2026-09-10T19:22:49.128084+00:00",
+    "returned_at": "2026-09-10T19:22:49.684522+00:00",
+    "source": "b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9",
+    "acceptance_record": "b96439039007dd54da8956a622c6814ebc39d135",
+    "handle": "ucope-uav-short-learned-renewal-continuous-b01-8702-20260910",
+    "cwd": "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910",
+    "argv": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=10",
+      "hmasd-wsl-node",
+      "/usr/local/bin/agent-task run ucope-uav-short-learned-renewal-continuous-b01-8702-20260910 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 5100s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910.sh'"
+    ],
+    "returncode": 0,
+    "stdout": "Task 'ucope-uav-short-learned-renewal-continuous-b01-8702-20260910' started in tmux session 'agent_ucope-uav-short-learned-renewal-continuous-b01-8702-20260910'. Output: /home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/task.log\n",
+    "stderr": "",
+    "wall_seconds": 0.5580670999916038
+  },
+  "initial_readback": {
+    "supervisor": {
+      "returncode": 0,
+      "stdout": "{\"task\": \"ucope-uav-short-learned-renewal-continuous-b01-8702-20260910\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3096219, \"uptime_seconds\": 35, \"tmux_active\": true}\n",
+      "stderr": ""
+    },
+    "admission": {
+      "returncode": 0,
+      "stdout": "{\n  \"assessed_at\": \"2026-09-10T19:22:48.906934Z\",\n  \"available_physical_bytes\": 15243468800,\n  \"captured_at\": \"2026-09-10T19:22:48.906651Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15243468800,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\n",
+      "stderr": ""
+    },
+    "observed_at": "2026-09-10T19:23:24.389387+00:00",
+    "wall_seconds": 0.7186356000020169
+  },
+  "supervisor": {
+    "task": "ucope-uav-short-learned-renewal-continuous-b01-8702-20260910",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3096219,
+    "uptime_seconds": 35,
+    "tmux_active": true
+  },
+  "admission": {
+    "assessed_at": "2026-09-10T19:22:48.906934Z",
+    "available_physical_bytes": 15243468800,
+    "captured_at": "2026-09-10T19:22:48.906651Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15243468800,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "time_boundary": "Submission/readback dates are local; admission is the executing node clock. No elapsed time is inferred by subtracting different node clocks.",
+  "independent_review": {
+    "finding": "no material finding; no additional probe gap",
+    "owner": "review_ucope_t8701",
+    "science_calls": 0,
+    "source_inspection_only": true
+  },
+  "focused_check": {
+    "argv": [
+      "/home/wu/.venvs/hmasd/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/temp/directions/ucope/test/seed8702-routing-20260910-b",
+      "tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py::test_learned_cli_seed_and_card_without_scientific_draws"
+    ],
+    "returncode": 0,
+    "wall_seconds": 1.052899732021615,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.79s\n",
+    "stderr": "",
+    "owned_scratch_absent": true,
+    "prior_setup_failed_wall_seconds": 1.3469966979464516,
+    "new_focused_check_seconds": 2.3998964299680665,
+    "cumulative_directory_seconds": 45.37920262996807
+  },
+  "conservative_test_preparation_charge_seconds": 5.5280977,
+  "conservative_directory_charge_seconds": 48.5074039,
+  "monitor": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "root_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "original_owner": "/root/dm_ucope_p47_resume",
+    "live_config": "C:/Projects/HMASD/.codex/hmasd-monitor.toml",
+    "dispatch": "MONITOR_ADD accepted by send_message_to_thread; isError false",
+    "adoption": "confirmed by Root after canonical admission passed",
+    "at_dispatch": "adoption pending; accepted message delivery alone was not adoption",
+    "confirmation_source": "Root native message 2026-09-10: independent Monitor adoption confirmed for this exact handle/source; main integrates card/source/technical acceptance through368b9a9db.",
+    "routine_dm_polling": false
+  },
+  "budget": {
+    "complete_fit_seconds": 1800,
+    "internal_and_outer_scientific_seconds": 5100,
+    "complete_study_seconds": 5400,
+    "support_reserve_within_study_seconds": 300,
+    "result_bearing_invocations_allocated": 1,
+    "invocations_accepted": 1,
+    "retry_resume_replacement_allocated": 0,
+    "automatic_third_instance": false
+  },
+  "exposure": {
+    "planned_independent_training_instances": 1,
+    "planned_fits": 3,
+    "planned_training_episodes": 6144,
+    "planned_evaluation_episodes": 640,
+    "planned_native_ticks": 1736704,
+    "planned_adam_calls": 12288,
+    "observed_native_counts": "not collected; run still active at initial readback"
+  },
+  "claims": "Launch and engineering facts only; no 8702 performance reading, stable superiority/harm, causal attribution, headroom or lifecycle change.",
+  "cleanup": {
+    "owner": "DM after terminal collection and Root preservation acceptance",
+    "live_dependency": "This exact detached worktree, supervisor and staged wrapper/pack support accepted active8702.",
+    "scientific_evidence_preserved": true,
+    "owned_test_scratch_absent": true
+  },
+  "record_time": "2026-09-10T19:25:22.456557+00:00"
+}

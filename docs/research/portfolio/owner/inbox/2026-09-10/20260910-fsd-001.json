@@ -1,0 +1,81 @@
+{
+  "id": "20260910-fsd-001",
+  "created": "2026-09-10T17:56:06-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FSD：仅返回 I1280 对完整 D0 的批量更新设计",
+  "context": "检验固定较大协调器批量的个体续约方案，能否在同样五轮原生训练后超过完整 D0。绑定结构是个体技能边界改变多机协调器的片段信用和更新暴露；本次只发表设计，代码与数值额度为零。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "保留设计，不启动",
+      "consequence": "保留一个以后可分配的 I1280/D0 比较；本次提交返回即止，不能由此实现或运行。"
+    },
+    {
+      "key": "reject",
+      "label": "撤回待分配设计",
+      "consequence": "停止后续考虑此设计，保留本次源码发现和全部旧证据。"
+    },
+    {
+      "key": "revise",
+      "label": "修改这份设计",
+      "consequence": "按明确异议修改尚未执行的设计，不追改旧结果，也不增加调用。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "现有 D2 批处理消费端支持一个精确的新方案；保留完整 D0、所有负结果和实际未实现的绑定缺口。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_DESIGN_CARD_20260910.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_DESIGN_INTAKE_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L140",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留这份仅供以后分配的 FSD I1280/D0 比较设计？当前只发表设计，不执行实验。",
+    "changes_if_approved": [
+      {
+        "target": "FSD 新的批量更新设计",
+        "from": "只有一次有界源码/设计任务，尚无具体新比较",
+        "to": "固定 I 的协调器批量为1280，完整 D0 保持128；其余原生语义和五轮训练量不变，返回一个未来 B 设计"
+      }
+    ],
+    "if_refused": "撤回这个待分配设计，保留旧结果和本次源码发现；不改变生命周期，也不自行启动备选方向。",
+    "evidence_for": [
+      {
+        "path": "hmasd/agent.py",
+        "quote": "coordinator_batch_size = getattr(self.config, 'coordinator_batch_size', 128)",
+        "why": "现有 D2 更新确实读取这个配置，实际操作不需要新算法。"
+      },
+      {
+        "path": "hmasd/utils.py",
+        "quote": "for start in range(0, num_valid_samples, num_sequences_per_batch):",
+        "why": "所有有效片段行仍逐轮进入训练；改变的是每次更新聚合多少行。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md",
+        "quote": "Both accepted native differences remain **−.049670563167111874 (P70)** and\n**−.035312725297886094 (P72)**, each below the .01 absolute native MEI.",
+        "why": "原方案两次落后；更新次数更多并不证明这就是损失原因，改大批量也可能学习不足。"
+      }
+    ],
+    "uncertainty": [
+      "1280只在源码层面可行，未构建或执行；旧运行器还没有新对象的配置传递及读数约束。",
+      "批量同时改变更新次数和优势归一化分组，未来正结果只能支持整套方案。",
+      "新方案完整耗时、内存和支持开销未测；同信息调优基线余量仍缺失。"
+    ],
+    "cost": {
+      "compute": "当前实现、模型、测试及数值调用全为零。未来仅建议一对训练、80000训练步和32000评价步；请求完整3000秒支出上限，尚未分配，绝非耗时预测。旧两对完整墙钟3462.16秒仅作历史。",
+      "owner_time": "异步复审，不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "保留 I1280 对完整 D0 的唯一源码支持设计；本次到提交返回为止，不能据此实现、测试、发送 Pro 或启动实验。",
+    "source": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_DESIGN_INTAKE_20260910.md"
+  },
+  "starred": false
+}
