@@ -187,3 +187,40 @@ integration acceptance of the preserved evidence. The scratch `blocked by policy
 rejection remains unresolved; no bypass or repeated deletion attempt is authorized.
 The shared authoring checkout is retained for this intake/cleanup, with eventual
 reclamation owned by Root. Verified deletion or remaining-path facts will follow here.
+
+### Root acceptance and actual cleanup — 2026-09-11
+
+Root integrated the14-file preservation/intake commit
+`94c8fdfa888df014fa9fd83a4014a1cb10b7d501` through published main
+`cf93e737ee83f2d78d14c5569874590af8ccd347`, then explicitly returned the named cleanup
+inventory. Before remote removal, all11 archived byte streams equalled their originals;
+the five noncache ignored files were exactly covered, both input-copy digests matched,
+and the detached checkout had clean tracked/untracked source at the bound launch SHA.
+
+[Remote cleanup receipt](evidence/b02_credit_20260911_01/remote_cleanup.json) verifies
+the exact checkout `/home/wu/hmasd-worktrees/vnfc-b02-credit-20260911-01` is absent on
+disk and from `git worktree list --porcelain`. Input copies
+`/home/wu/hmasd-inputs/vnfc_b02_76d4afca6.bundle` and
+`/home/wu/hmasd-inputs/vnfc_b02_partial_20260911.tgz` are also absent. The small terminal
+supervisor directory and its six files remain. No other checkout or source branch was removed.
+
+The remote cleanup command executed its removals, then its final receipt here-document
+terminator reached Python as `PY`, causing `NameError` after the absence assertions/JSON
+print. No deletion was repeated. A separate read-only reconciliation verified the actual
+absence facts above and produced the receipt. The failed command1.0538243s displayed
+wall and read-only reconciliation0.4776158s internal wall are both retained as support.
+
+Automatic approval review rejected the separate exact PowerShell local draft/source-copy
+cleanup before execution with `blocked by policy`. This new rejection concerns only
+the three preserved draft/source files and their empty draft directory; the earlier
+blocked test scratch was not targeted again. No alternative deletion method or repeated
+attempt followed. [Local cleanup record](evidence/b02_credit_20260911_01/local_cleanup.json)
+confirms all four local files (including the earlier scratch) still exist and match the
+committed recovery archive. Local cleanup is blocked, not complete. These exact local
+paths remain DM-owned; Root owns the shared direction checkout's lifecycle.
+
+`support_costs.json` now includes the collection publication and these closeout operations;
+its selected documented component sum is108.999243 s, plus approximate3.7s Root preparation.
+Unmeasured scopes remain explicit; final cleanup-record publication timing is returned
+to Root separately. The final owner review read returned `[]` and the intake audit owner
+cell remained blank. This closeout changes no scientific interpretation or allocation.

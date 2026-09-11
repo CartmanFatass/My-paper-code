@@ -152,3 +152,11 @@ Reviewed source is retained at the published launch SHA and in that bundle.
 All local relative cleanup paths above are under
 `temp/directions/variable_n_fleet_churn/`. Integration acceptance and verified deletion
 facts are recorded in the execution record's terminal closeout section when available.
+
+Closeout update: Root integrated this preservation at main
+`cf93e737ee83f2d78d14c5569874590af8ccd347`. The execution record's
+[actual cleanup section](VNFC_N7_NATIVE_SERVICE_CREDIT_B02_EXECUTION_20260911.md#root-acceptance-and-actual-cleanup--2026-09-11)
+supersedes the inventory's pending state: remote checkout/input copies are absent,
+supervisor record retained, local draft/source cleanup rejected before execution with
+`blocked by policy`, and prior scratch retained without a bypass. The archives remain
+published; cleanup is incomplete only for those explicitly recorded local copies/scratch.
