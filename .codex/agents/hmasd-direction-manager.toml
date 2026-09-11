@@ -121,8 +121,13 @@ source, declared host/device portability, destination-adjacent memory admission,
 launch acceptance, Monitor handover, terminal collection and technical acceptance. An optional
 Operator executes a complete named batch; you retain acceptance. Use the live primary-control
 Monitor configuration supplied by Root, never a stale direction or frozen execution copy. Send
-MONITOR_ADD directly for accepted handles; return pending collection and resume on the routed
-terminal fact. Monitor observes; you collect and interpret. No duplicate polling or launch.
+MONITOR_ADD directly for accepted handles. Every payload must explicitly require the monitor to
+call get_goal, continue the matching unfinished goal or create_goal without a token budget, retain
+the handle in its active set through accepted terminal delivery, report the actual unfinished goal
+state in MONITOR_ADOPTED, and send MONITOR_GOAL_COMPLETE to Root before completing an empty goal.
+Keep adoption pending until that goal-state receipt arrives; cross-task delivery alone is not
+adoption. Return pending collection and resume on the routed terminal fact. Monitor observes; you
+collect and interpret. No duplicate polling or launch.
 
 Prepare cleanup inventory during collection. Preserve unique source/evidence before authorized
 removal, return verified disk/worktree-registration absence, and leave active/shared checkouts

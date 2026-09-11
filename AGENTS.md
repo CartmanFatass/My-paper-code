@@ -328,9 +328,15 @@ Resume model: commit and push before every launch; launch every result-bearing r
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
 configured `agent-task` supervisor; OWNER_DIRECT 2026-09-09 assigns accepted-experiment observation
 to one reusable independent Luna/low task with a goal covering its multiple adopted experiments.
-DM/Operator directly notifies that monitor after launch acceptance; the monitor establishes or
-continues its goal, while the DM stops routine polling and retains collection and technical acceptance.
-Record dispatch and actual adoption separately; failed delivery returns for same-handle recovery.
+DM/Operator directly notifies that monitor after launch acceptance. Every `MONITOR_ADD` assignment
+explicitly requires the monitor to read `get_goal`, continue the matching unfinished goal or call
+`create_goal` without a token budget, and keep the accepted handle in that goal until its terminal
+notice reaches Root. The monitor reports the actual goal state in `MONITOR_ADOPTED`; message delivery
+alone is not goal establishment or adoption. DM stops routine polling only after that confirmation
+and retains collection and technical acceptance. When the last handle and pending notice leave the
+active set, the monitor sends `MONITOR_GOAL_COMPLETE` to Root before completing the goal. Record
+dispatch and actual adoption separately; failed delivery or missing goal confirmation returns for
+same-handle recovery.
 Independent Transport observes Pro requests
 (`docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).
