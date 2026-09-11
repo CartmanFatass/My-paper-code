@@ -1,5 +1,10 @@
 # Published unsent Portfolio handoff
 
+**Latest status: [material event intaken; Transport reconciliation pending](DELIVERY_STATUS.md).**
+The older Root resend has naturally completed without scientific delivery. Its
+verified terminal event warrants only the recorded no-Send reconciliation action;
+the fifth-slot request and its published prompt remain unchanged and unsent.
+
 **Subsequent status: [QUEUED / BLOCKED_PRE_SEND — BINDING_BUSY](DELIVERY_STATUS.md).**
 Transport validated the exact prompt but opened no tab and made no paste/Send/retry
 or registry mutation. The publication facts and exact line below are preserved as

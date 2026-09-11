@@ -1,5 +1,17 @@
 # Event that can resume factual reconciliation of the queued question
 
+**Received and intaken:** Root's owner-directed resend of the older request
+completed naturally with a full capability-gap reply. The complete captured text
+and independent GitHub checks are recorded in the
+[material-event intake](../../decisions/2026-09-10-fifth-slot-implementation-selection.md#material-event-intake--2026-09-11).
+This meets the event condition below but forms no Portfolio decision and does not
+establish binding availability. The next bounded action is
+[Transport reconciliation](TRANSPORT_RECONCILIATION_NEXT_ACTION.txt), with no Send.
+The original event criteria remain below as history; waiting for this first event
+is no longer the current blocker.
+
+## Preserved event criteria
+
 Wait for **Root to receive and forward** either:
 
 1. An actual material provider response or matching immutable GitHub delivery for

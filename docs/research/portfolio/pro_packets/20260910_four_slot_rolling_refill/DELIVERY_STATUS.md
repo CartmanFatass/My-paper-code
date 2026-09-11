@@ -1,5 +1,24 @@
 # Four-slot request delivery status
 
+## Current complete intake and allocation
+
+**DELIVERED / COMPLETE_CONFORMING / PRO_FINAL, option A.** The transferred
+designated DM read the full immutable response at
+`1ea43d8fbc846807d71d4d894136f357f65551b6`, directly checked matching Issue17
+comment5629259208 and all47134 bytes, and independently verified equality with
+the downloaded Markdown and separately retained sidecar. The
+[conformance intake](../../decisions/2026-09-10-four-slot-rolling-refill.md)
+applies UCOPE3300/RCLE300/FOLR0/ACVC360 and the finite zero-numerical VSP03 then
+VSPC1 fallbacks. Root integration/DM dispatch is the next operational action,
+not a missing scientific decision. No scientific execution occurred in this intake.
+
+The observed primary Transport registry still carries the old BLOCKED/ARCHIVED
+fields and null response digest. Dedicated Transport must reconcile actual
+delivery and binding readiness; those raw fields do not undo the verified answer.
+No further four-slot Send is requested. The disjoint fifth-slot question is
+unchanged and unselected. See [exact intake facts](INTAKE_FACTS.json) and
+[Root execution mapping](EXECUTION_MAPPING.md).
+
 ## Actual delivery and downloaded-copy update
 
 The request later delivered its complete GitHub response at
@@ -12,8 +31,10 @@ retained as [`archive/CHAT_FALLBACK_RESPONSE.md`](archive/CHAT_FALLBACK_RESPONSE
 [`archive/CHAT_FALLBACK_DOWNLOAD_FACTS.json`](archive/CHAT_FALLBACK_DOWNLOAD_FACTS.json).
 
 The historical observations below remain time-bounded facts from before the later delivery; they
-no longer describe the current delivery state. Scientific conformance remains pending designated-DM
-intake and is not inferred from transport success or byte equality.
+no longer describe current delivery. Scientific conformance was subsequently checked in the full
+intake linked above; it was not inferred from transport success or byte equality.
+
+## Preserved earlier attempts
 
 **BLOCKED after completed OWNER_DIRECT Root resend — no Portfolio decision.** The owner
 instructed Root to resend this exact request personally. At

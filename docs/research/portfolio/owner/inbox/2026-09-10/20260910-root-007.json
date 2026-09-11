@@ -82,6 +82,24 @@
       "record": "docs/research/portfolio/decisions/2026-09-10-fifth-slot-implementation-selection.md",
       "state": "blocked",
       "summary": "依既有所有者阻塞规则及Root转交：新第五空位请求校验通过，但旧四空位绑定仍BLOCKED，故BINDING_BUSY；打开页面、粘贴、发送、重试、修改registry均0。A/B/C未选，auto_applied为空，所有实现/检查/实验额度未释放。仅等待旧绑定的真实新响应或交付，或已授权Transport对状态的核实回执；不提出状态修改或再次发送。"
+    },
+    {
+      "at": "2026-09-11T03:59:47+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md#3-blocker-rule",
+      "record": "docs/research/portfolio/decisions/2026-09-10-fifth-slot-implementation-selection.md",
+      "state": "blocked",
+      "summary": "已收取真实新事件：所有者授权Root对旧四空位请求重发一次，12分16秒后自然结束；完整621字节回复为能力缺口，未形成科学决定。本DM用GitHub实际分支、精确文件404和Issue17仅准备评论独立核对交付，并保留回复自述的局限。第五空位仍未发送，待专职Transport核实归档和同一绑定可用性；不新增发送或修改科学选择，auto_applied仍为空。"
+    },
+    {
+      "at": "2026-09-11T04:48:34+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/1ea43d8fbc846807d71d4d894136f357f65551b6/docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-10-fifth-slot-implementation-selection.md",
+      "state": "blocked",
+      "summary": "四位问题已形成并通过核对，明确不涉及这个独立第五位。此问A/B/C仍未选择、auto_applied仍为空，没有实现/夹具/实验额度；上次BINDING_BUSY尚无可复用回执，Root须将实际完整交付交给Transport归档对账。科学包、TASK及HANDOFF保持原字节，本DM零发送。",
+      "correction": "旧四位无完整答案的表述已被实际响应1ea43d8f及其intake取代，只保留为历史。该变化不替第五位选择FSD/MGTAP，也不根据旧registry字段断言新发送已经可以接受；先返回原绑定实际就绪事实。"
     }
-  ]
+  ],
+  "approval_correction": "旧四位无完整答案的表述已被实际响应1ea43d8f及其intake取代，只保留为历史。该变化不替第五位选择FSD/MGTAP，也不根据旧registry字段断言新发送已经可以接受；先返回原绑定实际就绪事实。"
 }
