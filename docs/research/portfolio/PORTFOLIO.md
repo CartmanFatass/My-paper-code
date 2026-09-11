@@ -1,6 +1,24 @@
 # HMASD Research Portfolio
 
-## Current post-option-A refill — 2026-09-11
+## Current remaining-capacity refill — 2026-09-11
+
+The post-option-A work has reached separate boundaries. FSD B02 ended before admission or numerical
+exposure because the projected support path exceeded its 300-second cap. UCOPE's complete direction
+decision narrowly parks further empirical continuation of the 8801 L recipe and selects no successor.
+MGTAP completed its sole COND/DENSE pair: `COND-DENSE=+0.005761321371348559`, conditional SE
+`0.00888326841451271`, with 19/13 world signs. The point is inside the declared ±0.01 band, so DENSE
+remains generic and the allocation ends. Accepted evidence is integrated through `811f35338`; native
+arm and native-total caps pass, while unknown unitemized support prevents certification of the full
+support/complete envelope.
+
+The designated Portfolio DM has published the fixed remaining-capacity request
+`2026-09-11-remaining-capacity-refill-portfolio-01`. It offers at most RCLE, ACVC and one
+zero-numerical FOLR direction question, with a smaller set and no-new-investment alternatives. The
+canonical Transport registry records exactly one accepted Send and `WAITING_GENERATION`. No complete
+response or Portfolio selection has formed, so no mapped direction is launched from this request.
+MGTAP preservation cleanup remains direction-local closeout and does not fill a direction slot.
+
+## Post-option-A refill decision — 2026-09-11
 
 The complete Portfolio response for
 `2026-09-11-post-a-execution-refill-portfolio-01` passed its designated-DM

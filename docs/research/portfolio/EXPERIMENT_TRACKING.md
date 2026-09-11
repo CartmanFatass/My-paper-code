@@ -900,3 +900,24 @@ These are three advancing direction chains. The Portfolio response left three ex
 unallocated, so Root returned a new refill question to the designated Portfolio DM for proper-node
 selection rather than choosing another direction locally. Existing pauses, no-successor boundaries,
 lifecycle, priority, recasts and contrary evidence remain unchanged.
+
+## Remaining-capacity refill pending after completed post-A work
+
+The post-A allocations have reached independent clean boundaries. FSD B02 performed no admission,
+fit, model construction or evaluation because its pre-execution support projection exceeded the
+300-second support cap; its question therefore remains unobserved, with no retry or successor.
+UCOPE's complete direction response selected the narrow PARK of further 8801-L empirical spending
+with no numerical successor. MGTAP's accepted 8212 COND/DENSE pair is valid and complete:
+`COND-DENSE=+0.005761321371348559`, conditional SE `0.00888326841451271`, with 19 positive and
+13 negative worlds. The result is `INSIDE_MEI`; DENSE remains the generic choice, and the named
+allocation ends without a retry or automatic successor. Native arm walls 192.93299/171.85701 seconds
+pass the 450-second arm and 900-second native caps; the full support/complete cost remains uncertified
+because unitemized support is unknown. The result and intake are integrated through `811f35338`.
+
+The designated Portfolio DM published request
+`2026-09-11-remaining-capacity-refill-portfolio-01` with options covering at most RCLE, ACVC and one
+zero-numerical FOLR direction question. The canonical singleton Transport has exactly one accepted
+Send and registry state `WAITING_GENERATION`; no response, archive or Portfolio selection has yet
+formed. No dependent launch is authorized while that proper-node decision remains pending. MGTAP's
+scoped duplicate cleanup continues under its original DM after accepted preservation; it is closeout,
+not an advancing direction chain.
