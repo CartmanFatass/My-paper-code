@@ -1,0 +1,103 @@
+{
+  "identity": "fresh8961",
+  "known_components": [
+    {
+      "label": "assignment checkout and current specification deltas",
+      "s": 0.4250756
+    },
+    {
+      "label": "Portfolio source, active node/Monitor and owner reads",
+      "s": 0.5616209
+    },
+    {
+      "label": "read immutable Portfolio §§1–9, current scientific law and exact C/F/dwell consumers",
+      "s": 0.8777441
+    },
+    {
+      "label": "complete affected immutable Portfolio sections and current repair acceptance",
+      "s": 0.3434817
+    },
+    {
+      "label": "read affected Portfolio sections with explicit UTF-8 output",
+      "s": 0.3071097
+    },
+    {
+      "label": "rejected fast-forward (direction repair was cherry-picked on main)",
+      "s": 0.3141475
+    },
+    {
+      "label": "merge accepted main while preserving shared-branch history and push if complete",
+      "s": 0.9689999999827705
+    },
+    {
+      "label": "inspect sole append-only audit merge conflict",
+      "s": 0.3217665
+    },
+    {
+      "label": "finish audit-preserving accepted-input merge and immediate push",
+      "s": 4.422000000020489
+    },
+    {
+      "label": "prospective namespace/exposure/cost arithmetic and new-card/audit publication",
+      "s": 0.2533897
+    },
+    {
+      "label": "one changed-binding stub, shell syntax and owned test cleanup",
+      "s": 5.7189999999827705
+    },
+    {
+      "label": "independent changed-risk review commands",
+      "s": 1.1236679
+    },
+    {
+      "label": "publish review/check acceptance and new-card owner item",
+      "s": 0.6550986
+    },
+    {
+      "label": "commit and immediate push of new8961 source/card/acceptance",
+      "s": 4.655999999988126
+    },
+    {
+      "label": "resumed exact source/command/helper and live Monitor reads",
+      "s": 0.8166148
+    },
+    {
+      "label": "new payload LF syntax, source bundle, transfer and exact remote preparation",
+      "s": 19.794037800020305
+    },
+    {
+      "label": "read preparation receipt and owner-boundary command",
+      "s": 0.2891437
+    },
+    {
+      "label": "prelaunch owner and live Monitor boundary",
+      "s": 0.4355783
+    },
+    {
+      "label": "publish exact command and preparation receipt, immediate push",
+      "s": 4.7365363
+    },
+    {
+      "label": "single detached submission complete local command",
+      "s": 0.9550454
+    },
+    {
+      "label": "direct MONITOR_ADD app delivery",
+      "s": 0.181
+    },
+    {
+      "label": "Monitor actual adoption query (Root-routed receipt)",
+      "s": 0.7
+    }
+  ],
+  "known_support_s": 48.85705849999446,
+  "support_cap_s": 330,
+  "native_cap_s": 270,
+  "complete_cap_s": 600,
+  "missing_or_pending": [
+    "unmeasured client/message overhead not represented by command/tool wall",
+    "this receipt publication/push",
+    "future Monitor observation and notification",
+    "collection/reduction/evidence preservation/integration/cleanup"
+  ]
+}
