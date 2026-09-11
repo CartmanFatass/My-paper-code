@@ -111,3 +111,51 @@ locally. The scientific next discriminator remains one intact unscreened trained
 fit with C/F/dwell panels, but this allocation supplies no further preparation or
 execution. A later applicable allocation must carry any continuation; this failure
 and nominal unused270s do not grant it.
+
+## 6. Root integration and final8951 accounting
+
+Root integrated source/closeout throughd5fce9f06a195d6df5bb45fdb9eae48713cefceb
+at mainece2de702, retaining all ACVC audit rows and the concurrent RCLE/FOLR rows.
+The previously recorded56.3381539s snapshot receives the4.5793169s terminal
+publication tail and Root's reported components: inspection.1301621s, merge
+attempt.4898842s, conflict inspection1.5919898s, and resolve/commit/push4.8355802s.
+These Root components sum7.0476163s. Root separately reported the conflict patch
+as **approximately.1s**, which is not silently assigned the precision of the others.
+
+The known quantified lower bound is67.9650871s before that approximate patch;
+including it gives approximately68.0650871s. Earlier missing command/client overhead
+remains, so exact330/600s conformance is still unestablished. Each component is
+charged once in the [updated technical facts](ACVC_FRESH_DENSE_REUSE_B01_8951_TECHNICAL_EVIDENCE_20260911.json).
+Cleanup remains complete. This old account is distinct from the later repair below.
+
+## 7. Separate owner-directed technical repair
+
+Root subsequently relayed OWNER_DIRECT: repair the non-scientific input blocker
+and publish technical readiness for a future separately allocated unchanged ACVC
+fit. This supplies **60s invoked command support** for a bounded technical task,
+with zero scientific allocation. The shared checkout was cleanly synchronized to
+f2ca4a8111aa8aa4f51662c6e6320c0dfc4fb047. No shared runner/wrapper/core code changed;
+the reusable implementation is the two Python blocks in the
+[execution/preparation record](ACVC_FRESH_DENSE_REUSE_B01_8951_EXECUTION_20260911.md#separate-technical-repair-for-a-future-allocation-2026-09-11).
+
+The helper canonicalizes CRLF to LF, rejects bare CR and requires local`bash -n -s`
+on the exact bytes before future source transfer or other remote effects. The
+sender passes those same bytes with`text=False`; the existing whole-command
+remote/client deadlines remain. A single focused static/stub/readback batch
+reproduced the original Windows producer, checked valid/rejected inputs and
+sender flags, then returned the975-byte payload identically through one read-only
+SSH echo. The payload was data only. Independent review found no material issue;
+all check/review receipts are linked from technical acceptance. No scratch exists.
+
+**Decision, object-tier technical:** options (a) accept the verified binary-input
+repair as READY for future allocated preparation; (b) keep the defective producer;
+(c) execute the ended8951 input or change science. Recommend/select **(a)** under
+the new **OWNER_DIRECT correction relayed by Root2026-09-11**. READY refers to the
+LF/input path; future payload assembly, source preparation, admission and native
+execution remain unperformed. No scientific polarity or successor selection follows.
+The old identities/law/panels/caps, ended allocation and unscored forecasts remain.
+
+The [repair check record](ACVC_SSH_INPUT_REPAIR_CHECK_20260911.json) records current
+support separately. Actual command support is charged once; unmeasured tool/client
+overhead stays explicit. Final publication and Root integration add their ordinary
+receipts to this repair account, without changing the historical8951 bill.

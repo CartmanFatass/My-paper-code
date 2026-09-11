@@ -177,5 +177,37 @@
   "decision": "End named allocation at precise bounded no-ready; no preparation retry, scientific retry, replacement, substitution, successor or local direction/Portfolio disposition.",
   "cleanup": "Remote worktree disk/registration and supervisor root absent; preserved stage removed/absent; local duplicate preparation and test scratch removed/absent; shared authoring checkout retained.",
   "accounting_snapshot": "Before terminal commit/push; its measured receipt is returned to Root for the same account, together with Root integration. No recursive accounting-only commit required.",
-  "terminal_owner_reviews": "Live-primary query returned[]; no unapplied instruction or prediction reply."
+  "terminal_owner_reviews": "Live-primary query returned[]; no unapplied instruction or prediction reply.",
+  "post_snapshot_publication_support_s": 4.579316900008615,
+  "root_integration": {
+    "main_sha": "ece2de702",
+    "source_and_closeout_through": "d5fce9f06a195d6df5bb45fdb9eae48713cefceb",
+    "exact_components": [
+      {
+        "label": "Root preintegration inspection",
+        "s": 0.1301621
+      },
+      {
+        "label": "Root merge attempt",
+        "s": 0.4898842
+      },
+      {
+        "label": "Root conflict inspection",
+        "s": 1.5919898
+      },
+      {
+        "label": "Root resolve/commit/push",
+        "s": 4.8355802
+      }
+    ],
+    "exact_component_sum_s": 7.0476163,
+    "separate_approximate_component": {
+      "label": "Root conflict patch tool wall",
+      "approximately_s": 0.1
+    },
+    "preservation": "Root reports all ACVC rows and both RCLE/FOLR main audit rows retained."
+  },
+  "final_known_support_lower_bound_s_excluding_approximate_patch": 67.96508710000744,
+  "final_approximate_support_plus_patch_s": 68.06508710000743,
+  "final_accounting_limit": "Known quantified subtotal plus approximately0.1s Root patch; missing earlier command/client overhead remains. No exact full-cap conformance claim. The later OWNER_DIRECT technical repair is separately budgeted and does not refund, relaunch or alter8951."
 }

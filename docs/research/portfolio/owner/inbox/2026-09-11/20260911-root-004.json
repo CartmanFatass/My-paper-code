@@ -1,0 +1,104 @@
+{
+  "id": "20260911-root-004",
+  "created": "2026-09-11T13:10:09-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "开放方向后续研究与技术修复建议",
+  "context": "按所有者新指令提出后续研究，保留旧零追加决定的固定范围；技术问题独立修复，科学后继另作新投资选择。",
+  "options": [
+    {
+      "key": "A",
+      "label": "五个独立有限B单元",
+      "consequence": "新提议总上限9600秒，五项及子项独立，不重复旧尝试；技术修复并行。"
+    },
+    {
+      "key": "B",
+      "label": "FSD/MGTAP两项加FOLR准备",
+      "consequence": "新提议FSD/MGTAP共4200秒，FOLR仅准备无数值投资；其余未分配，修复继续。"
+    },
+    {
+      "key": "C",
+      "label": "其他明确子集或方向问题",
+      "consequence": "Portfolio逐项写清对象、责任人、预算或准备范围；没有隐含后继。"
+    }
+  ],
+  "recommended": "A",
+  "auto_applied": null,
+  "dm_reason": "DM建议A：分别为FSD、FOLR、MGTAP、ACVC、VNFC选择一个新的有限B研究单元，总提议上限9600秒，各方向及子项互不转账。技术修复独立推进；VNFC须有被接受的相关修复。此处只发布建议，Portfolio尚未裁决或放款。",
+  "evidence": [
+    "docs\\research\\portfolio\\pro_packets\\20260911_open_directions_program\\SCIENCE_BRIEF.md",
+    "docs\\research\\portfolio\\pro_packets\\20260911_open_directions_program\\PREPARATION_INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L70",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "现有15个ACTIVE方向接下来应研究什么、按什么顺序投入；哪些技术问题独立修复？",
+    "changes_if_approved": [
+      {
+        "target": "新研究投资",
+        "from": "旧固定空位问题已决定零追加；新问题尚未分配数值后继",
+        "to": "建议五个独立新B单元及明确子上限；也提供只做FSD/MGTAP的4200秒方案或其他明确子集"
+      },
+      {
+        "target": "非科学阻塞",
+        "from": "ACVC已修复；FSD源交付已报告就绪、收尾待接受；VNFC归因待完成；CBSC/FRRIE历史方法未明确",
+        "to": "继续原DM有限技术修复与核验，不把工程失败、缺计时或保留副本当科学排除理由"
+      }
+    ],
+    "if_refused": "保留全部旧结论和已授权修复；由Portfolio明确选择更小投入或有具体问题的准备任务，不自动填槽，不恢复旧尝试或预算。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+        "quote": "one local I1280/D0 package\ngain.",
+        "why": "一个有效训练对显著超过本卡实用阈值，值得观察另一训练历史。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/SCIENCE_BRIEF.md",
+        "quote": "The author recommends option A below;",
+        "why": "本材料只给出可选择的研究方案，正式投资由原Portfolio节点决定。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_INTAKE_20260911.md",
+        "quote": "inside the declared±0.01 band.",
+        "why": "小正结果还没有达到本卡实用幅度，新样本可能仍无法分开。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/SCIENCE_BRIEF.md",
+        "quote": "The strongest legal null RETAIN already has learned recurrent gates.",
+        "why": "FOLR的新门控可能重复已有能力；VNFC尚无完整主结果，不能承诺收益。"
+      }
+    ],
+    "uncertainty": [
+      "没有匹配的已调基线与上界构成的当前主机headroom记录；缺失不等于零，也不阻止B。",
+      "未来完整成本未知；3900秒FOLR是新提案、不是旧余额或预测。",
+      "VNFC损坏写入者未知，数值等价的替换只算候选规避措施，尚不表示运行修复。",
+      "CBSC/FRRIE由Root恢复原DM明确有限修复范围，不重放旧诊断预算或绕过实际限制。"
+    ],
+    "cost": {
+      "compute": "A提议FSD3000/FOLR3900/MGTAP1200/ACVC600/VNFC900秒；B提议FSD+MGTAP共4200秒。各项新投资只有Pro明确选择后才生效；本作者科学暴露、实现、测试和Send均0。",
+      "owner_time": "异步可阅，不等待回复；作者/Pro时间未测。",
+      "reversibility": "costly",
+      "waits_on_this": "只有新科学投资；已授权技术修复独立继续。"
+    },
+    "verdict_text": "DM建议A：分别为FSD、FOLR、MGTAP、ACVC、VNFC选择一个新的有限B研究单元，总提议上限9600秒，各方向及子项互不转账。技术修复独立推进；VNFC须有被接受的相关修复。此处只发布建议，Portfolio尚未裁决或放款。",
+    "source": "docs/research/portfolio/pro_packets/20260911_open_directions_program/PREPARATION_INTAKE.md"
+  },
+  "starred": true,
+  "approval_correction": "并发FSD审计追加后，本作者发布记录的正确链接为 docs/research/portfolio/audit/2026-09-11.md#L71；条目原始L70链接保留为创建时记录。没有owner答复或科学放款。",
+  "execution_history": [
+    {
+      "at": "2026-09-11T20:13:03+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260911_open_directions_program/OWNER_PACKET.json",
+      "record": "docs/research/portfolio/pro_packets/20260911_open_directions_program/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "建议仍未执行；当前ACVC/FSD修复均已接受，VNFC是唯一推进的技术链。新研究建议A或更小方案由Portfolio裁决；完整更新见引用材料。",
+      "correction": "并发FSD审计追加后，本作者发布记录的正确链接为 docs/research/portfolio/audit/2026-09-11.md#L71；条目原始L70链接保留为创建时记录。没有owner答复或科学放款。"
+    }
+  ]
+}
