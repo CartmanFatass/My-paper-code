@@ -224,3 +224,146 @@ its selected documented component sum is108.999243 s, plus approximate3.7s Root 
 Unmeasured scopes remain explicit; final cleanup-record publication timing is returned
 to Root separately. The final owner review read returned `[]` and the intake audit owner
 cell remained blank. This closeout changes no scientific interpretation or allocation.
+
+## Owner-directed technical repair assignment — 2026-09-11
+
+Root's OWNER_DIRECT correction assigns diagnosis/repair of exit139 and technical readiness
+for a future separately allocated invocation. L0 goal: identify an attributable defect and
+make the smallest semantics-preserving source repair, or return the exact remaining
+diagnostic and a bounded non-result-bearing method. Owned checkout remains
+`C:/Projects/HMASD-worktrees/codex-vnfc`, branch `codex/vnfc`; clean starting HEAD0afee6d88
+was fast-forwarded/pushed to current mainf2ca4a811. The B02/N7 source surfaces did not change.
+
+Entry points are the preserved11-file archive and supervisor log, the exact launch
+source76d4afca6, N7 `native.py`, R09 `native_backend.py`/`native/bpcr_general.hpp`, and
+`models.py::exact_binary64_mean` through `torch_models.py::_ExactRosterMean`. This DM
+owns the bounded repair record/evidence and any attributable change on that path; a
+shared scientific-code change receives independent high-risk review before acceptance.
+The card supplies protected seeds, reward/credit, comparator, MEI, dtype and native
+semantics. None changes, and the incomplete primary stays incomplete.
+
+Acceptance uses existing-core reads, static source/binary interface checks and bounded
+synthetic checks only. No model/environment construction, training, evaluation, RNG master,
+native scientific trajectory, resource admission, agent-task launch or scientific retry
+is authorized. Individual debugger reads are bounded at45s or less; a focused synthetic
+primitive check, if needed, is bounded at20s. This assignment will stop at attributable
+repair/readiness or a precise attribution gap, with at most120s additional measured
+support work selected locally; this is not an added scientific allowance. All measured
+work is reported alongside the unchanged600/300/900 limits and the earlier missing
+support scopes. No new machinery under Engineering Scope §4 is selected. Existing local
+copies/scratch remain preserved and are explicitly nonblocking; no deletion is attempted.
+
+### Technical investigation closeout — 2026-09-11
+
+**Not ready: the source-level writer remains unattributed.** Root's final instruction
+closes the present investigation using the saved/static findings, with no further
+diagnostic and no scientific execution. Production source is unchanged. The proposed
+integer-ratio mean exists only as the unadopted
+[candidate patch](evidence/b02_credit_20260911_01/repair_candidate.patch), not a runnable
+repair or a readiness claim. This section supersedes the earlier terminal assignment's
+prohibition on all investigation only for the expressly authorized technical work above.
+It changes no historical source, scientific result, invocation count or decision rule.
+
+The original WSL crash file was found after the earlier checkout-root inventory, which
+had not searched the host crash store. Its argv/PID/time identify the B02 process;
+631,513,088 bytes, SHA256
+`0698c60ba73088b5c512c1941a2bdfc9cec3e87f22cf8a10adfd2f0a3e32e323`.
+[Symbolized core](evidence/b02_credit_20260911_01/repair_core_symbols.json) and
+[decoded Python frames](evidence/b02_credit_20260911_01/repair_python_frames.json)
+place the stopped call in Fraction deallocation inside `exact_binary64_mean` during
+PPO update. The saved stack is a detection site, not the corrupting instruction.
+Debugger failures while locating frame/string/NumPy dtype layouts remain in the
+`repair_core_python`, `repair_core_frames` and `repair_mean_input` receipts. Their
+read-only failures were corrected only to recover existing bytes. Debugger warnings
+about executable/CUDA build identity are retained; no stronger binary-identity claim
+is inferred from matching function names.
+
+A recovered finite 7×64 binary64 input has SHA256
+`b75af3ba32ead6bfc5d08069ff579658643c2cc301818f2493703c3abde87a7a`.
+The [isolated primitive check](evidence/b02_credit_20260911_01/repair_primitive_check.json)
+passed 1,025 exact-mean calls without importing Torch/native code. The
+[isolated autograd check](evidence/b02_credit_20260911_01/repair_autograd_check.json)
+passed 64 applications to 24 repeated copies of that matrix (1,536 means and 64
+synthetic backward calls). Both retained output digest
+`92e005521234d95c422df6e3e9800874fa2b552ab2c79606099f50b6d5811bd7`.
+These are fixed-input function checks, with no scientific model, environment,
+optimizer, RNG master, trajectory, training or evaluation.
+
+An allocator-guarded version of the same isolated bridge then aborted within its
+256-application bound; the completed application count was not printed. The
+[recorded failure](evidence/b02_credit_20260911_01/repair_allocator_failure.txt) and
+[saved synthetic core](evidence/b02_credit_20260911_01/repair_allocator_core.json)
+show a 32-byte CPython API-m block checked while being freed by
+`_PyObject_Call_Prepend`, through `slot_tp_new` / `type_call` / Fraction construction.
+Its trailing eight bytes contain a pointer-sized value in place of allocator padding.
+The current mean's Fraction list comprehension has not completed: its final
+`np.array`, following `torch.from_numpy` and outer `torch.stack` have not executed.
+This does not establish a numeric output-array overwrite. Earlier operations in the
+same process remain possible contributors. No local extension, array operation or
+CPython instruction is identified as the writer by these stopped stacks.
+
+The [allocation-trace receipt](evidence/b02_credit_20260911_01/repair_allocator_trace.json)
+preserves both outcomes: 1,025 pure arithmetic calls passed; the traced bridge reached
+its 20-second bound without output and was terminated. The latter produced no completed
+diagnostic result. A [static ABI check](evidence/b02_credit_20260911_01/repair_static_abi.json)
+found six archived native-export sizes equal their ctypes declarations; one initial
+parser assertion on a differently encoded unused export was retained in accounting.
+Size agreement does not prove memory ownership or exclude earlier corruption.
+
+Independent Astra/high review found the integer-ratio candidate preserves the exact
+rational mean's final binary64 rounding, input validation, output type and custom
+backward `gradient / n`; both arms would share it. It found no material numerical
+defect, but correctly limited it to a candidate workaround. A further saved-evidence
+review confirmed the call-argument-block attribution gap. The
+[review record](evidence/b02_credit_20260911_01/repair_review.md) preserves both findings.
+No candidate execution, model test or scientific rerun was used to imply crash repair.
+
+### Remaining diagnostic and concrete exit condition
+
+The missing facts are the damaged block's exact allocation ownership/size operands,
+the argument-write extent in the bound CPython executable and its constructor/vectorcall
+callees, and evidence identifying the instruction that first changes the trailing bytes.
+The bounded future method is a conventional memory-ownership check on the same saved
+matrix and isolated function bridge, capped at one 20-second diagnostic process, with
+no scientific workload. It must yield either the allocating/writing call sites and
+their sizes, or a source-boundary proof that the minimal correction removes the offending
+write while preserving the mean/gradient contract. A completed faithful synthetic check
+and independent review would then establish only that bounded technical correction.
+That method is **not executed or queued by this closeout**. Failure to obtain those
+facts leaves readiness unresolved; passing the candidate alone is not the exit condition.
+A future result-bearing attempt still needs a separate allocation and its own admission;
+the ended B02 allowance, seeds, comparator, MEI and 600/300/900 caps remain unchanged.
+
+Root reported two automated service rejections before any reported command/tool effect.
+Their exact attempted methods, rejection text and reported provenance are retained in
+[tool events](evidence/b02_credit_20260911_01/repair_tool_events.json). They are rejected
+method requests, not performed checks, scientific outcomes or permission to bypass a
+restriction. No further dynamic method follows the final closeout instruction.
+
+### Retention and costs
+
+The original scientific core and synthetic allocator-abort core remain in the host's
+existing `/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/` store at the exact paths in
+their receipts. The latter is 537,112,576 bytes, SHA256
+`b2dd8cab7946120d68a312189a4a8821e34a4e6a64b3f78d2612c13d1999d2e7`.
+Both are retained diagnostic evidence; this DM owns any later preservation/reclamation
+handover to Root. Neither core is embedded in Git or deleted here. The original 11-file
+archive, supervisor record and four preserved local copies/scratch remain intact.
+The previously verified remote checkout/input removal is not repeated. The shared
+authoring checkout remains Root's maintained direction checkout.
+
+[Repair costs](evidence/b02_credit_20260911_01/repair_costs.json) distinguish bounded
+diagnostic commands, failed reads, synthetic checks, review and publication support;
+internal and enclosing alternatives are not summed twice. Additional support does not
+alter the prior 77.84-second scientific invocation. Full 300/900-second support/cost
+conformance remains unestablished because earlier components were unmeasured. No new
+primary, valid-result efficiency ratio or scientific exposure is reported. At the final
+owner-review boundary, `item.py reviews --json` returned `[]` and relevant audit owner
+cells were blank. No new P1/P2 item or mechanism-level `DIRECTION.md` edit follows.
+
+The documented repair component subtotal is69.756358s through record readback.
+Combining the selected prior components and separately returned prior final-publication
+clocks gives183.698311s of documented support, plus approximate3.7s prior Root preparation.
+This is a partial sum, not a claim that the entire support cap passed. The last record
+formatting/restoration command cost0.404504s; final commit/push timing is returned to
+Root separately so accounting does not create an endless publication cycle.

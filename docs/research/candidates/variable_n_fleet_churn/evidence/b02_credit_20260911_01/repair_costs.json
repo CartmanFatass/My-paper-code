@@ -1,0 +1,217 @@
+{
+  "scope": "Selected non-overlapping measured repair/support components through closeout preparation; not a complete support total.",
+  "unit": "wall_seconds",
+  "components": [
+    {
+      "name": "repair_core_read.json",
+      "seconds": "1.8915024709422141",
+      "clock_scope": "receipt internal command clock; enclosing SSH/tool clock is not added",
+      "receipt_field": "command_seconds"
+    },
+    {
+      "name": "repair_core_symbols.json",
+      "seconds": "4.100389987928793",
+      "clock_scope": "receipt internal command clock; enclosing SSH/tool clock is not added",
+      "receipt_field": "command_seconds"
+    },
+    {
+      "name": "repair_core_python.json",
+      "seconds": "1.871074895025231",
+      "clock_scope": "receipt internal command clock; enclosing SSH/tool clock is not added",
+      "receipt_field": "command_seconds"
+    },
+    {
+      "name": "repair_core_frames.json",
+      "seconds": "1.9097383200423792",
+      "clock_scope": "receipt internal command clock; enclosing SSH/tool clock is not added",
+      "receipt_field": "command_seconds"
+    },
+    {
+      "name": "repair_python_frames.json",
+      "seconds": "1.879587495001033",
+      "clock_scope": "receipt internal command clock; enclosing SSH/tool clock is not added",
+      "receipt_field": "command_seconds"
+    },
+    {
+      "name": "repair_mean_input.json",
+      "seconds": "1.8719754610210657",
+      "clock_scope": "receipt internal command clock; enclosing SSH/tool clock is not added",
+      "receipt_field": "command_seconds"
+    },
+    {
+      "name": "repair_static_abi.json",
+      "seconds": "0.07848709999234416",
+      "clock_scope": "receipt internal command clock; enclosing SSH/tool clock is not added",
+      "receipt_field": "command_seconds"
+    },
+    {
+      "name": "repair_primitive_check.json",
+      "seconds": "3.125929772038944",
+      "clock_scope": "receipt internal command clock; enclosing SSH/tool clock is not added",
+      "receipt_field": "total_command_seconds"
+    },
+    {
+      "name": "repair_autograd_check.json",
+      "seconds": "2.939598590019159",
+      "clock_scope": "receipt internal command clock; enclosing SSH/tool clock is not added",
+      "receipt_field": "command_seconds"
+    },
+    {
+      "name": "repair_allocator_trace.json",
+      "seconds": "23.55999178206548",
+      "clock_scope": "receipt internal command clock; enclosing SSH/tool clock is not added",
+      "receipt_field": "total_command_seconds"
+    },
+    {
+      "name": "repair_allocator_core.json",
+      "seconds": "4.020967710996047",
+      "clock_scope": "receipt internal command clock; enclosing SSH/tool clock is not added",
+      "receipt_field": "command_seconds"
+    },
+    {
+      "name": "Allocator-guarded isolated bridge abort",
+      "seconds": "7.7646428",
+      "clock_scope": "displayed command wall; incomplete primitive count"
+    },
+    {
+      "name": "Initial static ABI parser assertion on unused export",
+      "seconds": "0.3132354",
+      "clock_scope": "displayed command wall; no native library execution"
+    },
+    {
+      "name": "Reconcile main f2ca4a811 and push direction branch",
+      "seconds": "4.8996958",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Initial candidate source/test-reference read",
+      "seconds": "0.2709185",
+      "clock_scope": "displayed command wall; no test execution"
+    },
+    {
+      "name": "Independent first candidate review, five read-only commands",
+      "seconds": "3.6420961",
+      "clock_scope": "sum of command clocks; enclosing approximately4.8s alternative excluded"
+    },
+    {
+      "name": "Independent follow-up saved-evidence review, three read-only commands",
+      "seconds": "1.0504297",
+      "clock_scope": "sum of command clocks; enclosing approximately1.8s alternative excluded"
+    },
+    {
+      "name": "Repair record/status and artifact inventory read",
+      "seconds": "0.3095256",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Scientific tool and active compute configuration read",
+      "seconds": "0.173965",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Core/bridge evidence and source read",
+      "seconds": "0.1861028",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Scientific-reading pointer and failed glob search",
+      "seconds": "0.2035407",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Abort-core inventory and symbols, initial unmatched glob",
+      "seconds": "0.8156277",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Corrected abort-core inventory",
+      "seconds": "0.5271089",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Preserve candidate patch before production restoration",
+      "seconds": "0.2282641",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Closeout docs/skill/accounting read",
+      "seconds": "0.2234154",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Primary-control owner ledger and publication-format read",
+      "seconds": "0.3287741",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Cost-receipt summary arithmetic",
+      "seconds": "0.2722697",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Final owner-review read",
+      "seconds": "0.5080455",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Repair cost record arithmetic/write",
+      "seconds": "0.2217372",
+      "clock_scope": "displayed command wall"
+    },
+    {
+      "name": "Documentary JSON/link/currentness readback",
+      "seconds": "0.567719",
+      "clock_scope": "displayed command wall; no diagnostic or scientific execution"
+    }
+  ],
+  "documented_repair_component_sum_seconds": "69.75635758507269016",
+  "prior_support_receipt": "support_costs.json",
+  "prior_documented_components_seconds": "108.9992429",
+  "prior_late_publication_components": [
+    {
+      "name": "Prior final cleanup-record write",
+      "seconds": "0.2716601"
+    },
+    {
+      "name": "Prior cleanup-record commit and push 0afee6d88",
+      "seconds": "4.6710508"
+    }
+  ],
+  "combined_documented_support_components_seconds": "183.69831138507269016",
+  "additional_approximate_prior_root_preparation_seconds": "3.7",
+  "combined_including_approximate_components_seconds": "187.39831138507269016",
+  "local_repair_planning_bound_seconds": 120,
+  "local_planning_bound_completeness": "Documented subtotal only; do not substitute it for a complete measurement.",
+  "scope_limits": {
+    "scientific_invocations": 0,
+    "scientific_models": 0,
+    "environments": 0,
+    "optimizers": 0,
+    "scientific_rng_masters": 0,
+    "training": 0,
+    "evaluation": 0
+  },
+  "caps_unchanged": {
+    "native_seconds": 600,
+    "support_seconds": 300,
+    "combined_seconds": 900
+  },
+  "observed_original_native_seconds": "77.84",
+  "support_complete": false,
+  "full_cost_conformance": "unestablished",
+  "unmeasured": [
+    "Earlier unmeasured support scopes remain as listed in support_costs.json",
+    "Other repair preparation reads, source restoration/patching, retrieval-service and local orchestration costs not reconstructed",
+    "This accounting write, final documentary checks/commit/push and Root integration are returned separately when observed",
+    "Root-reported rejected method requests have no measured command effect"
+  ],
+  "clock_notes": [
+    "Selected receipt clocks include failed debugger/allocator/timeout work; failures are not removed from cost.",
+    "Do not add nested pure/bridge clocks to repair_allocator_trace total.",
+    "The traced bridge communicate timeout was20s; the observed subprocess orchestration duration was20.03084654500708s including termination/capture.",
+    "No elapsed conversation or idle interval is inferred as command work.",
+    "This record neither enlarges the support cap nor claims completed budget conformance."
+  ],
+  "complete_primary_count": 0,
+  "cost_per_valid_result": null
+}
