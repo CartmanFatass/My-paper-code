@@ -1,0 +1,3 @@
+task,seed,arm,score
+vspc1_native_hold_value_b05_wide133,8301,GATED-V,0.194786498888121
+vspc1_native_hold_value_b05_wide133,8301,MLP-V,0.17819458751184225

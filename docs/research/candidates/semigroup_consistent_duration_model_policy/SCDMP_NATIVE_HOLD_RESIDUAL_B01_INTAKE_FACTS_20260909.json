@@ -1,0 +1,166 @@
+{
+  "source": "../summary.json primary.J final-only sampled endpoint scores; CM owns independent raw-row/count readback",
+  "object": "SCDMP-NATIVE-HOLD-RESIDUAL-B01",
+  "launch_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+  "training_pair": 8201,
+  "independent_training_pairs": 1,
+  "mean_J": {
+    "RESIDUAL-MC": 0.1549340414324733,
+    "MLP-MC": 0.14819663397657912,
+    "H": 0.14784738196394714
+  },
+  "selected_delta": 0.0067374074558942025,
+  "MEI_absolute": 0.01,
+  "reading": "WITHIN",
+  "conditional_evaluation_SE": 0.0055965465359414865,
+  "SE_is_training_population_uncertainty": false,
+  "training_population_uncertainty": "not estimable from one training pair",
+  "DM_prediction": {
+    "predicted_event": "WITHIN",
+    "probability": 0.65,
+    "event_observed": true,
+    "binary_Brier_score": 0.12249999999999998
+  },
+  "owner_prediction": "not taken (unattended)",
+  "native_H_reading": "both mean learner contrasts positive; neither establishes a stable or selected-scale gain over H",
+  "no_new_model_or_scientific_invocation": true,
+  "method": "Existing summarize_runs.py --paired --baseline MLP-MC, two final endpoint scores aggregated once per declared matched training pair. Primary retained as mean episode-paired difference; mean-of-means differs only by floating summation order.",
+  "run_level_descriptive_summary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "SCDMP-NATIVE-HOLD-RESIDUAL-B01",
+        "arm": "MLP-MC",
+        "n": 1,
+        "mean": 0.14819663397657912,
+        "sample_sd": null,
+        "min": 0.14819663397657912,
+        "max": 0.14819663397657912,
+        "runs": {
+          "8201": 0.14819663397657912
+        }
+      },
+      {
+        "task": "SCDMP-NATIVE-HOLD-RESIDUAL-B01",
+        "arm": "RESIDUAL-MC",
+        "n": 1,
+        "mean": 0.1549340414324733,
+        "sample_sd": null,
+        "min": 0.1549340414324733,
+        "max": 0.1549340414324733,
+        "runs": {
+          "8201": 0.1549340414324733
+        }
+      }
+    ],
+    "paired_differences": [
+      {
+        "task": "SCDMP-NATIVE-HOLD-RESIDUAL-B01",
+        "arm": "RESIDUAL-MC",
+        "baseline": "MLP-MC",
+        "summary": {
+          "n": 1,
+          "mean": 0.006737407455894184,
+          "sample_sd": null,
+          "min": 0.006737407455894184,
+          "max": 0.006737407455894184
+        },
+        "differences": {
+          "8201": 0.006737407455894184
+        },
+        "unmatched_arm_seeds": [],
+        "unmatched_baseline_seeds": []
+      }
+    ]
+  },
+  "card_rule_matches_E0_verbatim": true,
+  "E0_summary_matches_collected_summary": true,
+  "E0_commit": "e5ed770301e8f5bac9fd77063edd24bee550fb5f",
+  "original_card_commit": "5d52c5e5bed047e8e32fde575952133a7817b9d2",
+  "eligible_pairs_by_arm": {
+    "RESIDUAL-MC": 1500,
+    "MLP-MC": 1500
+  },
+  "treatment_residual_terms": 6000,
+  "both_training_arms_exercised": true,
+  "source_exposure_verified_from_accepted_E0": {
+    "RESIDUAL-MC": {
+      "common_actor": {
+        "parameters": 32134,
+        "initial_norm": 12.363519668579102,
+        "final_norm": 12.508277893066406,
+        "displacement": 1.856449007987976,
+        "relative_displacement": 0.1501553811335653
+      },
+      "critic": {
+        "parameters": 34177,
+        "initial_norm": 9.265983581542969,
+        "final_norm": 12.13939094543457,
+        "displacement": 7.436262607574463,
+        "relative_displacement": 0.8025335402477991
+      },
+      "duration": {
+        "parameters": 130,
+        "initial_norm": 0.0,
+        "final_norm": 0.2954736649990082,
+        "displacement": 0.2954736649990082,
+        "relative_displacement": null,
+        "reason": "undefined: zero initial norm"
+      },
+      "total": {
+        "parameters": 66441,
+        "initial_norm": 15.450409889221191,
+        "final_norm": 17.4329833984375,
+        "displacement": 7.6701812744140625,
+        "relative_displacement": 0.4964386918799212
+      }
+    },
+    "MLP-MC": {
+      "common_actor": {
+        "parameters": 32134,
+        "initial_norm": 12.363519668579102,
+        "final_norm": 12.525110244750977,
+        "displacement": 1.93837308883667,
+        "relative_displacement": 0.15678165609771574
+      },
+      "critic": {
+        "parameters": 34177,
+        "initial_norm": 9.265983581542969,
+        "final_norm": 12.313504219055176,
+        "displacement": 7.7204484939575195,
+        "relative_displacement": 0.8332033427444385
+      },
+      "duration": {
+        "parameters": 130,
+        "initial_norm": 0.0,
+        "final_norm": 0.19526587426662445,
+        "displacement": 0.19526587426662445,
+        "relative_displacement": null,
+        "reason": "undefined: zero initial norm"
+      },
+      "total": {
+        "parameters": 66441,
+        "initial_norm": 15.450409889221191,
+        "final_norm": 17.56526756286621,
+        "displacement": 7.962459087371826,
+        "relative_displacement": 0.5153558478035093
+      }
+    }
+  },
+  "complete_process_resources": {
+    "whole_wall_seconds": 323.02,
+    "user_seconds": 320.87,
+    "system_seconds": 0.9,
+    "aggregate_cpu_seconds": 321.77,
+    "max_rss_kib": 558232,
+    "scope": "GNU time Python invocation including subprocess accounting; no GPU; exit0"
+  },
+  "original_summary_resources_flag": "resources_unmeasured",
+  "result_classification": "valid complete B/EXPLORE; WITHIN on selected scale; no statistical equivalence or stable superiority",
+  "actual_object_decision": "complete this allocated one-pair batch; do not repeat unchanged penalty or add a successor under this budget",
+  "no_direction_family_close_or_portfolio_lifecycle_change": true,
+  "recasts": 2,
+  "owner_reviews_read_at_main": "664afecaf36c6f436dbe870fd6c80afb11a05d75",
+  "owner_reviews_unapplied": []
+}

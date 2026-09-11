@@ -1,0 +1,49 @@
+{
+  "question": "是否接受共同按每架无人机裁剪PPO比率的B02卡和完整实现规格，固定新种子7001/7002后交Root安排后续工程？",
+  "changes_if_approved": [
+    {
+      "target": "UCOPE-UAV-MOTION-PREFIX-B02 card / CODE_SPEC / CM_TASK",
+      "from": "P29已选共同裁剪改动，但后继卡、种子和完整工程检查未固定",
+      "to": "固定7001/7002、每个体速度与开局时长的联合概率、按个体求和后按原始时间平均，以及完整代码规格和独立信用分配审查；本次仅准备"
+    }
+  ],
+  "if_refused": "按所有者具体覆盖修改或撤回待执行卡，保留P29和全部P21/P24结果，不启动实验，也不把拒绝解释为科学负结果。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B02_SCIENCE_CARD_20260908.md",
+      "quote": "This tests amended T versus amended G.",
+      "why": "同一学习改动用于两个学习臂，开局时长、免费局部信息和原生回报不变；问题仍在已接受的家族内。"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B02_PREPARATION_INTAKE_20260908.md",
+      "quote": "B02 requires\nan agent dimension in both collected old values and update recomputation,\nand a vector-aware finite check.",
+      "why": "源码已确认需要修改的真实收集与更新路径；检查覆盖梯度尺度、掩码、开局时长和新对象标签。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B02_SCIENCE_CARD_20260908.md",
+      "quote": "There is **no tuned same-information headroom record** on this host.",
+      "why": "悬停参照不证明普通反馈已充分优化；正差值只能按实际比较器表现解释。"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_P24_INTAKE_20260907.md",
+      "quote": "T therefore retains the larger opening displacement in **both** new pairs,\nincluding the native loss.",
+      "why": "6902的原生损失和6901的弱普通反馈均保留；更大移动或更多输入变化不能代替任务收益。"
+    }
+  ],
+  "uncertainty": [
+    "旧结果不能识别联合裁剪是否造成波动；新B也不因与旧结果不同就证明裁剪因果效应。",
+    "两个新训练对只支持该任务和预算内的初步比较；所有相反符号都要保留。",
+    "普通反馈可能获益同样多或更多，较大的联合更新也可能让协同学习更差。",
+    "新增逐元素裁剪的单位耗时未知；已有完整运行时间仅作参考，没有新增成本探测。"
+  ],
+  "cost": {
+    "compute": "本次零模型、学习、评价或源码测试。未来两对合计573440团队步、4096次Adam、192个最终评价回合；1800秒/臂、3600秒/对、7200秒合计仅为前瞻停止上限。后续工程限一次300秒内测试和一次60秒内合成检查；不做第四批模型比较。",
+    "owner_time": "异步阅读卡与规格；无需等待答复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；Root需另行获得具名工程和运行任务，当前未派发CM。"
+  },
+  "verdict_text": "接受B02前瞻卡和完整实现规格，固定两对新种子7001/7002，并把准备好的任务交Root；保留全部既有负值和不确定性，本次不编码、不测试、不启动UAV实验。",
+  "source": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B02_PREPARATION_INTAKE_20260908.md"
+}

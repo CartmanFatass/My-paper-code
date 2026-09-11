@@ -1,0 +1,38 @@
+{
+  "id": "20260905-dish-013",
+  "created": "2026-09-05T04:00:40-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "DISH A03：用实际消息来源界定交接后的服务",
+  "context": "实施前静态检查发现，交接当下的服务可能仍来自旧所有者已经发出的消息。完整路径资格只计新所有者在合法应用后发出、真正到达基地并形成的服务；其余服务仍全部报告。尚未产生 A03 原生或测试输出，宿主与预算不变。",
+  "options": [
+    {
+      "key": "a",
+      "label": "根据真实新所有者消息判断后果",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "把任何交接后服务算作新动作后果",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "增加反事实服务干预",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "时间在交接之后不足以说明消息属于新动作，已有发送者与到达状态即可区分。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_SELECTION_INTAKE_20260905.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-ground-endpoint-a03-selection",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

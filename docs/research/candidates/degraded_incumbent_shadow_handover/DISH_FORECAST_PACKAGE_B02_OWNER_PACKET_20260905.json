@@ -1,0 +1,49 @@
+{
+  "question": "按已完整归档的 Pro 裁决，继续 N3 的同一研究族，投入一组真实学习的联合预测损失与服务接口比较；新卡已按无人值守委托记录，可异步提出修订。",
+  "changes_if_approved": [
+    {
+      "target": "N3 / DISH-FORECAST-PACKAGE-B02 科学卡与方向记录",
+      "from": "A05 已完成合成接口与梯度图诊断，尚无修正后的真实学习收益证据。",
+      "to": "在 A03 地面终端环境比较原学习器与联合改动组；每组训练 16 次更新，仅评估最终检查点的 4 个情境，保留全部结果。"
+    },
+    {
+      "target": "既有 CM 的下一项实施",
+      "from": "源码可行性已查证，后继学习对象尚未实施。",
+      "to": "实施 sigmoid 服务接口与四维高斯联合预测损失，保留原控制组、标签生成、PPO 和原生规则；一次针对实际改动及主要结果输出的适量核对后，按上限执行。"
+    }
+  ],
+  "if_refused": "若所有者异步撤销或修订新卡，在下一个干净边界应用具体指令；保留全部已有证据和实际开销，不把撤销解释为科学负面，也不继续启动被撤销的新调用。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_a05_convergence/archive/RESPONSE.md",
+      "quote": "Continue the existing first-application-valid RETAIN/COPY/SHADOW exploratory family through one new, two-arm B/EXPLORE learner/package comparison on the A03 ground-terminal host.",
+      "why": "同一方向的完整 Pro 裁决明确选择真实学习比较，无需另买历史重放、全支持统计或完整接力资格证明。"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_a05_convergence/archive/RESPONSE.md",
+      "quote": "On its ground-terminal trajectory, both receivers adopted SOURCE packets, common-source support occurred for 1,199 ticks, and there were 331 snapshot deliveries, 634 readiness deliveries and 299 native service ticks.",
+      "why": "已有原生轨迹证明该环境能够产生信息与服务，下一问题是联合改动能否改善真正的学习后表现。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_a05_convergence/archive/RESPONSE.md",
+      "quote": "A new likelihood loss may change optimization adversely; larger predicted covariance may make a certificate more permissive without making predictions better calibrated. Sixteen updates are an economical allocation, not demonstrated sufficient training.",
+      "why": "接口与图连接正确不等于控制收益；即使出现收益，也可能来自在任角色或共享表示，不能宣称影子状态优越。"
+    }
+  ],
+  "uncertainty": [
+    "新的环境与标签克隆工作量尚无匹配的完整实测时间，上限不等于必定完成的预测。",
+    "只投入一个配对训练种子，四个情境不能当成四个独立训练种子。",
+    "平均原生服务增加至少 24 tick 且没有抵消收益的不利后果，可以支持下一步一至两个独立训练种子；本次没有预购这些后继实验。",
+    "没有合法接力时仍可解释整集表现，但收益必须标为在任角色范围；出现接力也不证明 SHADOW 优于 COPY。"
+  ],
+  "cost": {
+    "compute": "每组完整链路最多 1,800 秒，两组累计额度最多 3,600 秒；必要共享准备只计一次并均分扣除。每组 65,536 条普通训练转移、512 次优化器更新、最多 4,800 个普通评估 tick。未知实测成本如实保留，不额外购买校准实验。",
+    "owner_time": "可异步查看，无需再次批准后才继续。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Continue the existing first-application-valid RETAIN/COPY/SHADOW exploratory family through one new, two-arm B/EXPLORE learner/package comparison on the A03 ground-terminal host.",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_a05_convergence/archive/RESPONSE.md"
+}

@@ -1,0 +1,29 @@
+subtype_dealloc
+??:?
+
+/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+00000000002a34c0 <subtype_dealloc+0x10>:
+  2a34c0:	58                   	pop    %rax
+  2a34c1:	4c 8b 7f 08          	mov    0x8(%rdi),%r15
+  2a34c5:	41 f6 87 a9 00 00 00 	testb  $0x40,0xa9(%r15)
+  2a34cc:	40 
+  2a34cd:	0f 84 55 08 00 00    	je     2a3d28 <subtype_dealloc+0x878>
+  2a34d3:	48 8b 47 f0          	mov    -0x10(%rdi),%rax
+  2a34d7:	48 85 c0             	test   %rax,%rax
+  2a34da:	74 26                	je     2a3502 <subtype_dealloc+0x52>
+  2a34dc:	48 8b 4f f8          	mov    -0x8(%rdi),%rcx
+  2a34e0:	48 83 e1 fc          	and    $0xfffffffffffffffc,%rcx
+  2a34e4:	48 89 01             	mov    %rax,(%rcx)
+  2a34e7:	48 8b 50 08          	mov    0x8(%rax),%rdx
+  2a34eb:	83 e2 03             	and    $0x3,%edx
+  2a34ee:	48 09 ca             	or     %rcx,%rdx
+  2a34f1:	48 89 50 08          	mov    %rdx,0x8(%rax)
+  2a34f5:	48 c7 47 f0 00 00 00 	movq   $0x0,-0x10(%rdi)
+  2a34fc:	00 
+  2a34fd:	48                   	rex.W
+  2a34fe:	83                   	.byte 0x83
+  2a34ff:	67                   	addr32

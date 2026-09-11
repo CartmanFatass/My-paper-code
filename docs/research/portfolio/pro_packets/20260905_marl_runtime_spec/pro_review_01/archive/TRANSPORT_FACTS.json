@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-05-marl-runtime-spec-portfolio-01",
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "variable_n_fleet_churn",
+    "capability_bound_semantic_currentness",
+    "degraded_incumbent_shadow_handover"
+  ],
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "user_message_id": "b63f3435-e7ea-4a3c-807a-a3746ac44e44",
+  "assistant_message_id": "90865532-5d4e-4087-a667-3d2a2ea3ea03",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "prompt_sha256": "a4f591f2c82a733622527846948d919bbe4264e4fab9f129c267c6862c18a3f3",
+  "response_sha256": "da9e86d05bb34e070b936ca69aafdf4a1b912caf88bb4d1b150c3831e9a2125f",
+  "response_characters": 23780,
+  "response_bytes": 43285,
+  "send_click_count": 1,
+  "provider_filename": "PROMPT_BODY(20260905-200008).md",
+  "attachment_observed": true,
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "user_message_id": "b63f3435-e7ea-4a3c-807a-a3746ac44e44",
+    "assistant_message_id": "90865532-5d4e-4087-a667-3d2a2ea3ea03"
+  },
+  "identity_observed": {
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "user_message_id": "b63f3435-e7ea-4a3c-807a-a3746ac44e44",
+    "assistant_message_id": "90865532-5d4e-4087-a667-3d2a2ea3ea03"
+  },
+  "archive_paths": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-marl-runtime-spec-portfolio-01\\2026-09-05-marl-runtime-spec-portfolio-01--portfolio__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-marl-runtime-spec-portfolio-01\\2026-09-05-marl-runtime-spec-portfolio-01--portfolio--attempt-01__02_RESPONSE.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-marl-runtime-spec-portfolio-01\\2026-09-05-marl-runtime-spec-portfolio-01--portfolio__PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-marl-runtime-spec-portfolio-01\\2026-09-05-marl-runtime-spec-portfolio-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "da9e86d05bb34e070b936ca69aafdf4a1b912caf88bb4d1b150c3831e9a2125f"
+  },
+  "heartbeat": {
+    "automation_id": "portfolio-marl-runtime-spec-transport-wake-2026-09-05",
+    "status": "PAUSED",
+    "retirement_verified": true,
+    "retired_at": "2026-09-05T20:35:54Z"
+  },
+  "return_receipt": {
+    "status": "SENT",
+    "attempt_count": 1,
+    "delivery_status": "accepted",
+    "message_key": "2026-09-05-marl-runtime-spec-portfolio-01|portfolio|6a9c109e-b264-83e8-a78b-f9ea1b767b7b|da9e86d05bb34e070b936ca69aafdf4a1b912caf88bb4d1b150c3831e9a2125f",
+    "sent_at": "2026-09-05T20:36:41Z"
+  },
+  "captured_at": "2026-09-05T20:35:04Z",
+  "natural_completion_observed": "Worked for 16m 21s; response actions present; no Stop answering control",
+  "notes": [
+    "Exact response obtained with provider Copy response and CUA clipboard.readText; normalized CRLF to LF only.",
+    "No second Send was attempted."
+  ],
+  "archived_at": "2026-09-05T20:35:54Z"
+}

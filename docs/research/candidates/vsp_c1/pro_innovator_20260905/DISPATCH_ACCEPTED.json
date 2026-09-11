@@ -1,0 +1,44 @@
+{
+  "request_id": "2026-09-05-vspc1-k4-native-return-design-01",
+  "state": "DISPATCH_ACCEPTED",
+  "acceptance_scope": "Codex execution message accepted by existing Transport singleton; not evidence of provider Send or Pro decision.",
+  "execution_message_attempts": 1,
+  "source_thread_id": "01a07355-5b4e-7190-9cf2-f71b41920ece",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "conversation_binding_key": "em:vsp_c1:innovator",
+  "evidence_pin": "f87ceedc42dde8f49d178b79f3a5e860948f4bc9",
+  "packet_commit": "40ab2a816",
+  "body_sha256": "9e14fde70cfd15fff130afddf2843697dc3af7e48d507e7595992ac508f19aad",
+  "branch": "codex/dm-k4-vspc1-resume-20260905",
+  "actual_worktree": "C:/Projects/HMASD-worktrees/dm-k4-vspc1-design-20260905",
+  "unsent_check": {
+    "checked_at_utc": "2026-09-05T22:09:27.921458+00:00",
+    "request_absent_from_registry": true,
+    "request_archive_paths": [],
+    "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+    "dispatch_prompt": "Execute the handoff packet at C:\\Projects\\HMASD-worktrees\\dm-k4-vspc1-design-20260905\\docs\\research\\candidates\\vsp_c1\\pro_innovator_20260905\\HANDOFF.json exactly once.",
+    "evidence_pin": "f87ceedc42dde8f49d178b79f3a5e860948f4bc9",
+    "source_thread_id": "01a07355-5b4e-7190-9cf2-f71b41920ece",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267"
+  },
+  "dispatch_call": {
+    "threadId": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+    "model": "gpt-5.6-luna",
+    "thinking": "xhigh",
+    "prompt": "Execute the handoff packet at C:\\Projects\\HMASD-worktrees\\dm-k4-vspc1-design-20260905\\docs\\research\\candidates\\vsp_c1\\pro_innovator_20260905\\HANDOFF.json exactly once."
+  },
+  "exact_tool_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a06f0e-5eab-7431-8491-e7c2c62705b6\"}"
+      }
+    ],
+    "isError": false
+  },
+  "parent_receipt_policy": "Transport sends to Root with model and thinking omitted; the above overrides apply only to this incoming dispatch.",
+  "provider_send_state": "not yet observed by author",
+  "pro_decision": "not received",
+  "scientific_successor_selected": false,
+  "next_action": "Transport owns one provider Send, request-scoped wait and complete archival. Root receives the receipt, then this DM takes the complete response in. Never re-dispatch this accepted request."
+}

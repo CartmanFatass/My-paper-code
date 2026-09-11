@@ -1,0 +1,38 @@
+{
+  "id": "20260905-frrie-009",
+  "created": "2026-09-05T03:35:41-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "R07 符合工程要求并保留唯一已接受运行",
+  "context": "最终源码的编排占比为 26/88，独立审阅与一次远端针对性检查通过。实际节点的新鲜内存准入后，唯一的第二字面根完整运行已接受，tracker 已直接接管。科学结果仍待终态核对。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接纳符合要求的技术返回，保留唯一既定 R07 运行",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "把检查通过或进程接受解释为机制价值",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "没有新理由便增加随机根、调用或检查",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "精确提交、实际预算、根绑定和新鲜节点准入均符合已冻结卡；本次记录执行事实，不增加审批条件。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R07_ACCEPTED_RUN_INTAKE_20260905.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R07_SECOND_ROOT_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r07-accepted-run",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,17 @@
+{
+  "read_at": "2026-09-07T13:25:00Z",
+  "source_commit": "2347dbf2fea870cdcd02aa2eb8b3cbaff147ec34",
+  "source_parent": "b043e05d3b3af2b60ebfef3255e7f060aca4683c",
+  "input_base_sha": "b043e05d3b3af2b60ebfef3255e7f060aca4683c",
+  "response_path": "docs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_convergence/archive/RESPONSE.md",
+  "response_bytes": 28786,
+  "response_lines": 151,
+  "response_sha256": "a6e7a1e20eca88706fb01e3dcbc5a0b5a631c0a402ad8b94541cf8eebfb7cc67",
+  "scope_diff_from_input_base": "A\\tdocs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_convergence/archive/RESPONSE.md",
+  "full_response_copied_from": "raw.githubusercontent.com at delivery commit",
+  "chat_receipt_bytes": 340,
+  "chat_receipt_sha256": "7e62751aced15cc1c599467842d9699fad353f6a937a35b6add1d80b7a09c80c",
+  "delivery_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5571198932",
+  "delivery_comment_created_at": "2026-09-07T13:15:42Z",
+  "new_scientific_exposure": 0
+}

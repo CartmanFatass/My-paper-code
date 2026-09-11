@@ -1,0 +1,32 @@
+{
+  "id": "20260905-frrie-011",
+  "created": "2026-09-05T04:13:33-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "brief",
+  "title": "R07 第二固定轨迹结果简报",
+  "context": "第二条轨迹的大规模实质收益未重现；更多约束触发本身不是原生收益。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R07_RESULT_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r07-intake-r08-selection",
+  "brief": "docs/research/portfolio/owner/briefs/finite_resource_relational_inductive_efficiency/2026-09-05_r07_second_root.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,91 @@
+{
+  "id": "20260908-vsp03-001",
+  "created": "2026-09-08T12:40:56-07:00",
+  "direction": "vsp_03",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "P54：是否转向固定 greedy 的普通 G 调度（提案未执行）",
+  "context": "共享服务任务的实际用途已定义：训练后冻结 G，每个合法时钟按 logit>0 提交，否则等待，用同样公开状态和团队效用替代 R0。旧 G−R0=+0.003994，小于 MEI0.02；T=R0，随机执行亏损保留。只准备一次方向节点咨询，B03未选择、家族未重开、recasts仍1。",
+  "options": [
+    {
+      "key": "a",
+      "label": "选择单个新 G 训练研究并判定家族变化",
+      "consequence": "完整裁决后由同一DM写前瞻卡和CM规格；候选一G新种子、完整120秒；不改旧结果，不自动进入UAV。"
+    },
+    {
+      "key": "b",
+      "label": "继续当前暂停且不选后继",
+      "consequence": "保留全部证据和暂停，零实验后继；Root据实际返回补充工作位。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "动作和原生效用路径具体，已有小幅真实G信号；小幅且未重复的优势使继续暂停仍接近，需一次原节点选择。",
+  "evidence": [
+    "docs/research/candidates/vsp_03/VSP03_P54_GREEDY_USE_REENTRY_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L78",
+  "brief": "docs/research/portfolio/owner/briefs/vsp_03/2026-09-08_P54-GREEDY-USE.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否支持将固定 greedy 普通 G 替代 R0，作为共享服务任务的具体重入研究？目前仅准备一次原方向节点咨询，尚未选定新 B。",
+    "changes_if_approved": [
+      {
+        "target": "VSP03 共享服务后继选择",
+        "from": "测试过的 T 初始化/学习超越规则家族暂停，无后继",
+        "to": "由既有 Convergence 节点判断是否选择一个新 G seed5 的 B03；若选择则另写前瞻卡和 CM 任务，并按实际选择判定是否第二次 recast"
+      }
+    ],
+    "if_refused": "继续暂停，不训练、不评价旧权重、不更改旧主要结果；Root 接收零后继的干净返回。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_03/pro_packets/20260907_b02_post_result_convergence/archive/RESPONSE.md#四相称的重入问题与未选的最小判别",
+        "quote": "这样的重新选择可以由现成观察和一个有理由的用途说明支持，不需要先获得新的正值。",
+        "why": "已接受裁决允许以明确 greedy 实际用途重新选择普通 G 方案；新用途在本次来源 intake §2 定义。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_P54_GREEDY_USE_REENTRY_INTAKE_20260908.md#2-defined-use-and-actual-action-to-return-path",
+        "quote": "The decision is\nwhether this learned rule is worth retaining in place of R0's `own b == 1` rule.",
+        "why": "输出改变实际提交/等待动作及共享槽占用；所比较的是要保留的控制方案。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_B02_POST_RESULT_CONVERGENCE_INTAKE_20260907.md#3-observation-that-bounds-the-decision",
+        "quote": "One seed-4 paired training instance cannot estimate training-population variation.",
+        "why": "G−R0仅+0.003994，低于0.02解释尺度；一个新种子也不能自动支持稳定总体优势。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_P54_GREEDY_USE_REENTRY_INTAKE_20260908.md#3-surviving-evidence-and-strongest-alternative",
+        "quote": "Stochastic G−R0 = −0.0616357421875 and G stochastic−own greedy = −0.0656298828125;",
+        "why": "必须保留随机执行原生亏损，不能声称训练后所有执行方式都优于规则。"
+      }
+    ],
+    "uncertainty": [
+      "此题是否值得一个新的真实训练运行，继续暂停仍是接近的备选。",
+      "G新种子的位移、性能与完整耗时未知。",
+      "没有UAV动作/观察/资源映射或验证卡，当前用途仅属合成任务。",
+      "实际家族变化及是否第二次recast由同一方向节点判断，作者不预先执行。"
+    ],
+    "cost": {
+      "compute": "本次咨询零模型、零仿真、零训练、零评价、零profile。未选候选为1个G新训练种子、128更新、20480 joint episodes、1638400 target transitions、完整120秒cap；旧完整T/G调用5.05秒仅供规划。",
+      "owner_time": "可异步检查具体用途和是否值得继续，无需答复后才推进咨询。",
+      "reversibility": "reversible",
+      "waits_on_this": "没有工作等待 owner 回复；仅等待原方向节点的完整裁决。"
+    },
+    "verdict_text": "DM recommends the single B03 candidate, narrowly: the controllable mapping is concrete, G has an observed native gain over both fixed references, and one real new training run directly checks the controller to retain. The pause remains a close alternative because the gain is small and uncertain and randomized execution is adverse.",
+    "source": "docs/research/candidates/vsp_03/VSP03_P54_GREEDY_USE_REENTRY_INTAKE_20260908.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-08T20:16:31+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_03/pro_packets/20260908_greedy_use_reentry_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vsp_03/VSP03_P54_GREEDY_USE_CONVERGENCE_INTAKE_20260908.md",
+      "state": "applied",
+      "summary": "依据2026-09-03无人值守委托和P54，应用完整861c5072160d624970875b7345c2f72e78183e53裁决：单G seed5的B03已选，完整120秒；收窄原共享服务问题，不是第二次recast，仍1；旧暂停和全部反向证据保留。仅科学选择/卡片，尚无新实验或源码接受。"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+=== Task 'vnfc_b01_check_33e08f440_20260905_02' started at 2026-09-06T07:36:19+08:00 ===
+{
+  "assessed_at": "2026-09-05T23:36:19.948428Z",
+  "available_physical_bytes": 15426125824,
+  "captured_at": "2026-09-05T23:36:19.948057Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15426125824,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"arm": "MAPR", "round": 1, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 89090, "norm": 33.371895799754164, "max_abs": 0.891035845175006, "rms": 0.11180633186646123, "displacement_norm": 1.2639726245165686, "relative_displacement": 0.03793814913856583}}
+{"arm": "DIRECT", "round": 1, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 148739, "norm": 38.70760161270991, "max_abs": 0.9003197968861475, "rms": 0.10036535703712963, "displacement_norm": 1.4762140214953914, "relative_displacement": 0.03819214040492218, "residual_parameter_norm": 19.63598541764713, "residual_output_parameter_norm": 0.04276740481137707}}
+{"arm": "MAPR", "round": 2, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 89090, "norm": 33.474104111594166, "max_abs": 0.8820403004715931, "rms": 0.11214876181115675, "displacement_norm": 2.2935727548107483, "relative_displacement": 0.06884160585791298}}
+{"arm": "DIRECT", "round": 2, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 148739, "norm": 38.82194503008969, "max_abs": 0.8968603679969736, "rms": 0.10066183931533926, "displacement_norm": 2.679515832420208, "relative_displacement": 0.06932358275891366, "residual_parameter_norm": 19.735036772962143, "residual_output_parameter_norm": 0.082266339723949}}
+{"summary": "temp/directions/variable_n_fleet_churn/b01_check_20260905_02/output/summary.json", "complete_wall_seconds": 20.218502969000838, "summary_publication_seconds": 0.004690759989898652, "wall_cap_seconds": 300, "within_wall_cap": true, "exposure": {"MAPR": {"training_instances": 1, "rounds": 2, "training_episodes": 64, "joint_transitions": 384, "optimizer_steps": 64, "backward_calls": 64, "collection_forward_calls": 12, "optimizer_forward_calls": 64, "optimizer_forward_decisions": 1536, "evaluation_forward_calls": 19, "evaluation_episodes": 24, "initial_parameters": {"count": 89090, "norm": 33.31666549941636, "max_abs": 0.8994378877691007, "rms": 0.11162129301443717}, "final_parameters": {"count": 89090, "norm": 33.474104111594166, "max_abs": 0.8820403004715931, "rms": 0.11214876181115675, "displacement_norm": 2.2935727548107483, "relative_displacement": 0.06884160585791298}}, "DIRECT": {"training_instances": 1, "rounds": 2, "training_episodes": 64, "joint_transitions": 384, "optimizer_steps": 64, "backward_calls": 64, "collection_forward_calls": 12, "optimizer_forward_calls": 64, "optimizer_forward_decisions": 1536, "evaluation_forward_calls": 19, "evaluation_episodes": 24, "initial_parameters": {"count": 148739, "norm": 38.65229876734371, "max_abs": 0.8994378877691007, "rms": 0.10022196169386131, "residual_parameter_norm": 19.595917942265427, "residual_output_parameter_norm": 0.0}, "final_parameters": {"count": 148739, "norm": 38.82194503008969, "max_abs": 0.8968603679969736, "rms": 0.10066183931533926, "displacement_norm": 2.679515832420208, "relative_displacement": 0.06932358275891366, "residual_parameter_norm": 19.735036772962143, "residual_output_parameter_norm": 0.082266339723949}}}, "projected_complete_seconds": 282.61102228726855, "complete_projection": {"terms_seconds": {"shared_setup": 7.671872542996425, "shared_training_worlds": 1.4391448320820928, "evaluation_world_generation": 0.03871896001510322, "other_measured_overhead": 0.3292678091675043, "MAPR": 112.19928945647553, "DIRECT": 121.63288659078535, "fixed_BCRH": 37.706789263989776, "publication": 1.5930528317568013}, "per_arm": {"MAPR": {"unit_seconds": {"collect_episode": 0.012848388375005015, "update_round": 1.289208222005982, "eval_episode": 0.017585749250429217}, "projected_seconds": 112.19928945647553}, "DIRECT": {"unit_seconds": {"collect_episode": 0.0132504890934797, "update_round": 1.4287819899909664, "eval_episode": 0.01590540399956808}, "projected_seconds": 121.63288659078535}}, "projected_complete_seconds": 282.61102228726855, "cap_seconds": 2700, "source": "maximum observed unit wall; full/check publication row-ratio scaling includes all six checkpoints", "formula": "shared + sum(2048*collect_episode+64*update_round+192*eval_episode) +64*BCRH_episode+publication", "limitation": "planning estimate from selected N7 sizes; no performance guarantee or additional benchmark"}}
+.                                                                        [100%]
+1 passed in 0.75s
+=== Task 'vnfc_b01_check_33e08f440_20260905_02' exited with code 0 at 2026-09-06T07:36:41+08:00 (Duration: 22s) ===

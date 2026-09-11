@@ -1,0 +1,32 @@
+{
+  "id": "20260904-dish-018",
+  "created": "2026-09-04T18:11:27-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "brief",
+  "title": "DISH second seed: complete learning, no source opportunity",
+  "context": "Second valid B seed completes learning and all prescribed prefixes without a source fork. Preserve this support observation separately from source-value or equivalence claims.",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "Repeated non-exposure is the observation; repeated source failure is not.",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_SEED29_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n3-dish-b01-seed29-intake",
+  "brief": "docs/research/portfolio/owner/briefs/degraded_incumbent_shadow_handover/2026-09-04_n3_dish_b01_seed29.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

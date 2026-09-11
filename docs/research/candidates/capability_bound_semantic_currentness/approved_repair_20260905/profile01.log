@@ -1,0 +1,168 @@
+=== Task 'cbsc-approved-profile-8003b96bd-01' started at 2026-09-06T03:22:55+08:00 ===
+{
+  "assessed_at": "2026-09-05T19:22:55.323393Z",
+  "available_physical_bytes": 15426805760,
+  "captured_at": "2026-09-05T19:22:55.323106Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15426805760,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+...................F
+=================================== FAILURES ===================================
+_______ test_r05_complete_formal_publication_preserves_original_receipts _______
+
+path = PosixPath('/home/wu/hmasd-worktrees/cbsc-b1-r07-b230e476ec-01/temp/directions/capability_bound_semantic_currentness/exp/cbsc_omrc_b0_instrument_888bd9f50_r02')
+allowed_root = PosixPath('/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness')
+
+    def ensure_confined(path: Path, allowed_root: Path) -> Path:
+        resolved = path.resolve(strict=False)
+        root = allowed_root.resolve(strict=False)
+        try:
+>           resolved.relative_to(root)
+
+experiments/candidates/capability_bound_semantic_currentness/omrc_b01/artifact.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/wu/hmasd-worktrees/cbsc-b1-r07-b230e476ec-01/temp/directions/capability_bound_semantic_currentness/exp/cbsc_omrc_b0_instrument_888bd9f50_r02')
+other = (PosixPath('/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness'),)
+parts = ['/', 'home', 'wu', 'hmasd-worktrees', 'cbsc-b1-r07-b230e476ec-01', 'temp', ...]
+drv = '', root = '/'
+
+    def relative_to(self, *other):
+        """Return the relative path to another path identified by the passed
+        arguments.  If the operation is not possible (because this is not
+        a subpath of the other path), raise ValueError.
+        """
+        # For the purpose of this method, drive and root are considered
+        # separate parts, i.e.:
+        #   Path('c:/').relative_to('c:')  gives Path('/')
+        #   Path('c:/').relative_to('/')   raise ValueError
+        if not other:
+            raise TypeError("need at least one argument")
+        parts = self._parts
+        drv = self._drv
+        root = self._root
+        if root:
+            abs_parts = [drv, root] + parts[1:]
+        else:
+            abs_parts = parts
+        to_drv, to_root, to_parts = self._parse_args(other)
+        if to_root:
+            to_abs_parts = [to_drv, to_root] + to_parts[1:]
+        else:
+            to_abs_parts = to_parts
+        n = len(to_abs_parts)
+        cf = self._flavour.casefold_parts
+        if (root or drv) if n == 0 else cf(abs_parts[:n]) != cf(to_abs_parts):
+            formatted = self._format_parsed_parts(to_drv, to_root, to_parts)
+>           raise ValueError("{!r} is not in the subpath of {!r}"
+                    " OR one path is relative and the other is absolute."
+                             .format(str(self), str(formatted)))
+E           ValueError: '/home/wu/hmasd-worktrees/cbsc-b1-r07-b230e476ec-01/temp/directions/capability_bound_semantic_currentness/exp/cbsc_omrc_b0_instrument_888bd9f50_r02' is not in the subpath of '/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness' OR one path is relative and the other is absolute.
+
+../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:818: ValueError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = PosixPath('/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness/test/approved-repair/profile/test_r05_complete_formal_publi0')
+
+    @pytest.mark.skipif(not __import__("os").environ.get("CBSC_R05_FIXTURE"),
+                        reason="requires full frozen r05 offline evidence")
+    def test_r05_complete_formal_publication_preserves_original_receipts(tmp_path):
+        """Exercise real publication constants over quarantined input, without a learner."""
+        import os
+        import re
+        import shutil
+        import time
+        from pathlib import Path, PureWindowsPath
+        from experiments.candidates.capability_bound_semantic_currentness.omrc_b01 import b1_metrics_production as production
+        from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_artifact import make_b1_incident_lineage_witness
+        from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_metrics_artifact import FORMAL_TABLE_ROW_COUNTS, validate_metrics_only_manifest
+    
+        started = time.monotonic()
+        source = Path(os.environ["CBSC_R05_FIXTURE"])
+        b0_root = Path(os.environ["CBSC_B0_FIXTURE"])
+        staging, final = tmp_path / "offline-staging", tmp_path / "offline-publication"
+        shutil.copytree(source, staging)
+        commit = "4679e8dc86fb39b7b72fe7404f3f837f11ebbaad"
+        conformance = "2f8dc132a1ca67138b26736094999d3771a0d2b841a399c9050cfc581b71fdd0"
+        attempt = "b1-61d8b522f3fc4e8da6b48e0e01d24510"
+        literal_sha = "08cd6294cc1557ac1356862ba011be225acd00b826bdfe5a6e443f7c84d9fb1c"
+        original_receipts = {
+            Path("attempt-ledger.json"): (source / "attempt-ledger.json").read_bytes(),
+        }
+        admission_files = [*source.glob("admissions/*-admission.json"),
+                           *source.glob("policy-replay/*/admission.json")]
+        assert len(admission_files) == 48
+        for path in admission_files:
+            bound = json.loads(path.read_bytes())
+            raw = path.parent / PureWindowsPath(bound["raw_output_path"]).name
+            assert hashlib.sha256(raw.read_bytes()).hexdigest() == bound["raw_receipt_sha256"]
+            original_receipts[path.relative_to(source)] = path.read_bytes()
+            original_receipts[raw.relative_to(source)] = raw.read_bytes()
+        groups = []
+        for index, (seed, arm) in enumerate(production.B1_SLOT_ORDER):
+            tag = f"{index:02d}-seed-{seed}-{arm}"
+            group = [json.loads(path.read_bytes())["raw_evidence"]
+                     for path in sorted((staging / "workers" / tag).glob("slice-*/result.json"))]
+            assert len(group) == 3
+            groups.append(group)
+        # Reconstructed Git-blob law metadata, not original Windows checkout digests.
+        # Original raw/source/admission identities remain byte-preserved; no equality gate.
+        laws = b1._law_digests({"files": [{"path": relative,
+            "sha256": hashlib.sha256(subprocess.check_output(
+                ["git", "show", f"{commit}:{relative}"], cwd=b1.REPO_ROOT)).hexdigest()}
+            for relative in re.findall(r'"((?:experiments/|docs/)[^"]+)"', inspect.getsource(b1._law_digests))]})
+        replay = production.make_b1_policy_replay_batch_witness(
+            staging_root=staging, allowed_root=tmp_path, attempt_id=attempt,
+            implementation_commit=commit, source_conformance_sha256=conformance,
+            literal_binding_spec_sha256=literal_sha, test_only=False,
+        )
+        assert len(replay.slots) == 12
+        published = production._assemble_and_publish_b1_metrics(
+            staging_root=staging, final_path=final, grouped_raw_slices=groups,
+            implementation_commit=commit, source_conformance_sha256=conformance,
+>           b0_root=b0_root, b0_evidence=b1.locate_b0_evidence(b0_root), law_digests=laws,
+            incident_lineage_witness=make_b1_incident_lineage_witness([], allowed_root=tmp_path),
+            policy_replay_witness=replay, allowed_root=tmp_path, test_only=False,
+        )
+
+tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_formal_path_repairs.py:334: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+experiments/candidates/capability_bound_semantic_currentness/omrc_b01/b1.py:280: in locate_b0_evidence
+    root = ensure_confined(Path(b0_root), CONFINED_ROOT)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/wu/hmasd-worktrees/cbsc-b1-r07-b230e476ec-01/temp/directions/capability_bound_semantic_currentness/exp/cbsc_omrc_b0_instrument_888bd9f50_r02')
+allowed_root = PosixPath('/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness')
+
+    def ensure_confined(path: Path, allowed_root: Path) -> Path:
+        resolved = path.resolve(strict=False)
+        root = allowed_root.resolve(strict=False)
+        try:
+            resolved.relative_to(root)
+        except ValueError as exc:
+>           raise ArtifactError(f"path is outside the confined direction root: {resolved}") from exc
+E           experiments.candidates.capability_bound_semantic_currentness.omrc_b01.artifact.ArtifactError: path is outside the confined direction root: /home/wu/hmasd-worktrees/cbsc-b1-r07-b230e476ec-01/temp/directions/capability_bound_semantic_currentness/exp/cbsc_omrc_b0_instrument_888bd9f50_r02
+
+experiments/candidates/capability_bound_semantic_currentness/omrc_b01/artifact.py:83: ArtifactError
+=============================== warnings summary ===============================
+../../.venvs/hmasd/lib/python3.10/site-packages/_pytest/config/__init__.py:1249
+  /home/wu/.venvs/hmasd/lib/python3.10/site-packages/_pytest/config/__init__.py:1249: PytestConfigWarning: Unknown config option: cache_dir
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_formal_path_repairs.py::test_r05_complete_formal_publication_preserves_original_receipts
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 19 passed, 1 warning in 9.92s
+=== Task 'cbsc-approved-profile-8003b96bd-01' exited with code 1 at 2026-09-06T03:23:05+08:00 (Duration: 10s) ===

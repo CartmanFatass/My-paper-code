@@ -1,0 +1,25 @@
+=== Task 'vsp03-b04-p67-20260908' started at 2026-09-09T10:47:51+08:00 ===
+{
+  "assessed_at": "2026-09-09T02:47:51.954343Z",
+  "available_physical_bytes": 15623213056,
+  "captured_at": "2026-09-09T02:47:51.954080Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15623213056,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"arm": "G", "update": 1, "elapsed_s": 1.3999641140107997, "actual_rollouts": {"episodes_started": 128, "episodes_completed": 128, "team_ticks": 5120, "target_transitions": 10240, "decision_rows": 540, "rollout_policy_forwards": 17}, "optimizer_steps": 1}
+{"arm": "G", "update": 32, "elapsed_s": 1.7302599580143578, "actual_rollouts": {"episodes_started": 4096, "episodes_completed": 4096, "team_ticks": 163840, "target_transitions": 327680, "decision_rows": 16261, "rollout_policy_forwards": 534}, "optimizer_steps": 32}
+{"arm": "G", "update": 64, "elapsed_s": 2.067302801006008, "actual_rollouts": {"episodes_started": 8192, "episodes_completed": 8192, "team_ticks": 327680, "target_transitions": 655360, "decision_rows": 32055, "rollout_policy_forwards": 1067}, "optimizer_steps": 64}
+{"arm": "G", "update": 128, "elapsed_s": 2.7424878110177815, "actual_rollouts": {"episodes_started": 16384, "episodes_completed": 16384, "team_ticks": 655360, "target_transitions": 1310720, "decision_rows": 63151, "rollout_policy_forwards": 2115}, "optimizer_steps": 128}
+{"status": "complete", "counts": {"episodes_started": 20480, "episodes_completed": 20480, "team_ticks": 819200, "target_transitions": 1638400, "decision_rows": 88790, "rollout_policy_forwards": 2149}, "elapsed_through_readback_s": 2.9195401970064268}
+runner_exit_ready elapsed_s=2.9200185110094026
+{"terminal_published": "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_terminal.payload.json", "task_exit_code": 0, "all_descendants_terminated": true, "elapsed_through_terminal_readback_s": 3.231537289044354}
+=== Task 'vsp03-b04-p67-20260908' exited with code 0 at 2026-09-09T10:47:55+08:00 (Duration: 4s) ===

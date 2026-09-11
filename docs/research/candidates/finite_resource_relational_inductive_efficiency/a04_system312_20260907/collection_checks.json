@@ -1,0 +1,70 @@
+{
+  "branch": "A04_T0_PATH_COMPLETED",
+  "phase_count": 6,
+  "tape_constructions": 384,
+  "distinct_inputs": 128,
+  "phase_wall_sum_seconds": 10.297323798004072,
+  "supervisor_whole_chain_wall_seconds": 16,
+  "aggregate_cpu_seconds": null,
+  "peak_rss_bytes": 46542848,
+  "admission_available_gib": 14.58840560913086,
+  "command_bytes": 1379,
+  "command_sha256": "959a43cefb989e823a8fe38cdccc30dc83914f13bc3218a8cdda635c691be885",
+  "supervisor_payload_matches_frozen_command": true,
+  "rows": [
+    {
+      "repetition": 0,
+      "digest": "0f0fb392c59dcfdbaa475ae8becca03323751d0a849ee6f39c9a8c9d68057b5f",
+      "nbytes": 571392,
+      "phase": "training_update_1",
+      "tape_count": 64,
+      "wall_seconds": 1.7137919620145112,
+      "matches_a03": true
+    },
+    {
+      "repetition": 0,
+      "digest": "7e155dc5452d9303688d0a807b190ab0050db723078a7f890e1ee6b5f71a4f16",
+      "nbytes": 571392,
+      "phase": "training_update_2",
+      "tape_count": 64,
+      "wall_seconds": 1.7101653919671662,
+      "matches_a03": true
+    },
+    {
+      "repetition": 1,
+      "digest": "0f0fb392c59dcfdbaa475ae8becca03323751d0a849ee6f39c9a8c9d68057b5f",
+      "nbytes": 571392,
+      "phase": "training_update_1",
+      "tape_count": 64,
+      "wall_seconds": 1.7103567990125157,
+      "matches_a03": true
+    },
+    {
+      "repetition": 1,
+      "digest": "7e155dc5452d9303688d0a807b190ab0050db723078a7f890e1ee6b5f71a4f16",
+      "nbytes": 571392,
+      "phase": "training_update_2",
+      "tape_count": 64,
+      "wall_seconds": 1.722200964053627,
+      "matches_a03": true
+    },
+    {
+      "repetition": 2,
+      "digest": "0f0fb392c59dcfdbaa475ae8becca03323751d0a849ee6f39c9a8c9d68057b5f",
+      "nbytes": 571392,
+      "phase": "training_update_1",
+      "tape_count": 64,
+      "wall_seconds": 1.7201407919637859,
+      "matches_a03": true
+    },
+    {
+      "repetition": 2,
+      "digest": "7e155dc5452d9303688d0a807b190ab0050db723078a7f890e1ee6b5f71a4f16",
+      "nbytes": 571392,
+      "phase": "training_update_2",
+      "tape_count": 64,
+      "wall_seconds": 1.720667888992466,
+      "matches_a03": true
+    }
+  ]
+}

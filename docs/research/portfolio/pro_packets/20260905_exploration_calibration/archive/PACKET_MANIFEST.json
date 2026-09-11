@@ -1,0 +1,50 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-05-exploration-rigor-spec-portfolio-01--portfolio",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-05-exploration-rigor-spec-portfolio-01",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "acvc",
+    "capability_bound_semantic_currentness",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "finite_resource_relational_inductive_efficiency",
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation",
+    "roster_consistent_latent_exploration",
+    "semigroup_consistent_duration_model_policy",
+    "ucope",
+    "vap_folr_core",
+    "variable_n_fleet_churn",
+    "vsp_02",
+    "vsp_03",
+    "vsp_c1"
+  ],
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "decision_authority": "pro_final",
+  "source_mode": "single_body_attachment",
+  "body": {
+    "role": "prompt",
+    "source_path": "C:\\Projects\\HMASD\\docs\\research\\portfolio\\pro_packets\\20260905_exploration_calibration\\PROMPT_BODY.md",
+    "canonical_filename": "2026-09-05-exploration-rigor-spec-portfolio-01--portfolio__00_PROMPT.md",
+    "bytes": 14854,
+    "sha256": "91ffd8de589e04a78ef2df15dd95860ec3f7bbf014e7ad300a5ed82b95d0960a",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-exploration-rigor-spec-portfolio-01\\2026-09-05-exploration-rigor-spec-portfolio-01--portfolio__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-exploration-rigor-spec-portfolio-01\\2026-09-05-exploration-rigor-spec-portfolio-01--portfolio__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-exploration-rigor-spec-portfolio-01\\2026-09-05-exploration-rigor-spec-portfolio-01--portfolio__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "91ffd8de589e04a78ef2df15dd95860ec3f7bbf014e7ad300a5ed82b95d0960a",
+    "references": []
+  }
+}

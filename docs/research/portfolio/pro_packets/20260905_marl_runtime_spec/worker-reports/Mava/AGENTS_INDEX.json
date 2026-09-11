@@ -1,0 +1,232 @@
+{
+  "source": {
+    "repository": "https://github.com/instadeepai/Mava.git",
+    "checkout": "C:/Projects/ref-lib/Mava",
+    "fixed_sha": "83f7f0d19d6fdbe07264bb226a64baf8a0b17514",
+    "version": "0.2.0",
+    "upstream_agents_before_overlay": [],
+    "source_read_only": true
+  },
+  "reports": {
+    "root": "C:/Projects/ref-lib/reports/Mava",
+    "core_evidence": "CORE_EVIDENCE.md",
+    "root_return": "ROOT_RETURN.md",
+    "overlay_backups": "agents-overlays/"
+  },
+  "overlays": {
+    "count": 26,
+    "backup_method": "Each overlay and its backup were compared by SHA-256 and byte length.",
+    "entries": [
+      {
+        "path": "AGENTS.md",
+        "backup": "agents-overlays/AGENTS.md",
+        "sha256": "822417F253BD271E6245F1A0E539B70B6AFBD5FAAA25044B83F67862C03CE944",
+        "bytes": 2267,
+        "role": "repository scope, fixed-source and report navigation"
+      },
+      {
+        "path": "examples/advanced_usage/AGENTS.md",
+        "backup": "agents-overlays/examples/advanced_usage/AGENTS.md",
+        "sha256": "3531DE02798AD0CF14222BC0468AE564451CC70B36293119E451B620411D672D",
+        "bytes": 390,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "examples/AGENTS.md",
+        "backup": "agents-overlays/examples/AGENTS.md",
+        "sha256": "874E2B18A7337427E25F3D860BB861E34B46218276517414228482766EA1BE0F",
+        "bytes": 290,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/AGENTS.md",
+        "backup": "agents-overlays/mava/AGENTS.md",
+        "sha256": "28696DEF8AB4AD1354D19B1B55FA8FD4413B536054884C624EE9B093428DC9D4",
+        "bytes": 1235,
+        "role": "package entry points and shared semantic boundaries"
+      },
+      {
+        "path": "mava/configs/AGENTS.md",
+        "backup": "agents-overlays/mava/configs/AGENTS.md",
+        "sha256": "55EB0D7A64A494AB804D35FA6C5FC45610049E4CBDDBDC17A30547F3D9B3EE9D",
+        "bytes": 841,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/configs/arch/AGENTS.md",
+        "backup": "agents-overlays/mava/configs/arch/AGENTS.md",
+        "sha256": "3720802A92F871E21621CB535C1F8A9EA14723F873A47A56B55CDBB5BD8E859D",
+        "bytes": 372,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/configs/default/AGENTS.md",
+        "backup": "agents-overlays/mava/configs/default/AGENTS.md",
+        "sha256": "C656F74838EC559CB06605EC63B6A1CE3CDE98E480FD90BC329993C8B9B42F52",
+        "bytes": 341,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/configs/logger/AGENTS.md",
+        "backup": "agents-overlays/mava/configs/logger/AGENTS.md",
+        "sha256": "8878C789D75130C7C35253D75C16CEC2B943BA5D92E7E702B35C7DA1C48A2825",
+        "bytes": 410,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/configs/system/AGENTS.md",
+        "backup": "agents-overlays/mava/configs/system/AGENTS.md",
+        "sha256": "52AE59140830B92E18039DD530510B2E892E80B9F5299F4AAB85A7345A6E26E2",
+        "bytes": 438,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/networks/AGENTS.md",
+        "backup": "agents-overlays/mava/networks/AGENTS.md",
+        "sha256": "C3E559D144829EC666D2F3292E62AFFDCE850FE895EDCAAFFDE2294BEEEA9EA6",
+        "bytes": 588,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/systems/AGENTS.md",
+        "backup": "agents-overlays/mava/systems/AGENTS.md",
+        "sha256": "BA583FC96D06753912B338D2B15A51C05BFBDA6A5ACEEB5636F24C91E4758744",
+        "bytes": 1200,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/systems/ppo/AGENTS.md",
+        "backup": "agents-overlays/mava/systems/ppo/AGENTS.md",
+        "sha256": "03E1C5F0E249E2CC6C19A5C61EB390D14FD45E77DBA84FD17A0CA702F370E1D5",
+        "bytes": 947,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/systems/ppo/anakin/AGENTS.md",
+        "backup": "agents-overlays/mava/systems/ppo/anakin/AGENTS.md",
+        "sha256": "7C7C2CD5387A6F44BA30FBBD52A2FCC818AB96EC4A16159393EA7A4D30079FC4",
+        "bytes": 1051,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/systems/ppo/sebulba/AGENTS.md",
+        "backup": "agents-overlays/mava/systems/ppo/sebulba/AGENTS.md",
+        "sha256": "DA580ECA38A320A431C3CFC3988F8BBAD084F3F26629D55DE2FB8EB4CC1B2E73",
+        "bytes": 1004,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/systems/q_learning/AGENTS.md",
+        "backup": "agents-overlays/mava/systems/q_learning/AGENTS.md",
+        "sha256": "A8B9D0F3239A7C89E4BF740BF5162112F1811AD2BFDA23B5EC03263398A4EF4A",
+        "bytes": 849,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/systems/q_learning/anakin/AGENTS.md",
+        "backup": "agents-overlays/mava/systems/q_learning/anakin/AGENTS.md",
+        "sha256": "E957A75CF71C6CF8587EC628DF8024352446B805A00EAFD582A2859077F47E02",
+        "bytes": 807,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/systems/q_learning/sebulba/AGENTS.md",
+        "backup": "agents-overlays/mava/systems/q_learning/sebulba/AGENTS.md",
+        "sha256": "891D9703BC676E2D0C0DB2064594DB62F737046B4F45ADD8BFAFE617B3256526",
+        "bytes": 930,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/systems/sable/AGENTS.md",
+        "backup": "agents-overlays/mava/systems/sable/AGENTS.md",
+        "sha256": "069355F41BE2747A5726966923675C0C895CD34FAD73CC8801C0C476DE302B55",
+        "bytes": 722,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/systems/sable/anakin/AGENTS.md",
+        "backup": "agents-overlays/mava/systems/sable/anakin/AGENTS.md",
+        "sha256": "9BD38758F91AC13C78D49DE76CD03D7EE7F3F97B56B3CEE5B92586A67C64D756",
+        "bytes": 575,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/systems/sable/sebulba/AGENTS.md",
+        "backup": "agents-overlays/mava/systems/sable/sebulba/AGENTS.md",
+        "sha256": "CF61373547E2C56CCAB22BD6C7FED3B1C2D677B3F6E77E26E181627C4559C2EC",
+        "bytes": 614,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/systems/sac/AGENTS.md",
+        "backup": "agents-overlays/mava/systems/sac/AGENTS.md",
+        "sha256": "C0600E154B41447B4D8A440B9CB0D052C9CF29A924252DADD914EC79312A1EF4",
+        "bytes": 636,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/systems/sac/anakin/AGENTS.md",
+        "backup": "agents-overlays/mava/systems/sac/anakin/AGENTS.md",
+        "sha256": "7D5627616511A8685E8810E3391E91E0B06B0D5CEEC8751257E143BDF57B028A",
+        "bytes": 845,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/utils/AGENTS.md",
+        "backup": "agents-overlays/mava/utils/AGENTS.md",
+        "sha256": "3A9C6F5D1184F49CE2BB42125D5873A07F5838F9BEC64A45581A37A407EEC4F1",
+        "bytes": 913,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/utils/sebulba/AGENTS.md",
+        "backup": "agents-overlays/mava/utils/sebulba/AGENTS.md",
+        "sha256": "16D7569C436E188F3E951C98F20CDDEAB4082839F462D2428AB6553CCFD44EAB",
+        "bytes": 629,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "mava/wrappers/AGENTS.md",
+        "backup": "agents-overlays/mava/wrappers/AGENTS.md",
+        "sha256": "667348036E4A5368A946B0E2795B28D9C71DA8C80D80D634030495FD89F20171",
+        "bytes": 873,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      },
+      {
+        "path": "test/AGENTS.md",
+        "backup": "agents-overlays/test/AGENTS.md",
+        "sha256": "CEC3E530FD5BB7CFF70E37FE7C7466BE987B0DC62169FD54358394D1A0204371",
+        "bytes": 311,
+        "role": "directory-local entry points, layout and semantic boundaries"
+      }
+    ]
+  },
+  "scope": {
+    "activities_performed": [
+      "fixed-SHA source rg/read scan",
+      "official GitHub primary identity verification",
+      "additive AGENTS.md navigation overlays",
+      "evidence and return reports"
+    ],
+    "activities_not_performed": [
+      "package installation",
+      "training",
+      "benchmark",
+      "runtime speed probe",
+      "source edits",
+      "upstream commit or push"
+    ],
+    "performance_claim": "Static call-chain and layout evidence only; no measured speedup is claimed.",
+    "thresholds": {
+      "toy45min": "pending normalization survey threshold; reachability is not assumed without a declared semantic change.",
+      "UAV12h": "pending normalization survey threshold; reachability is not assumed without a declared semantic change."
+    }
+  },
+  "verification": {
+    "fixed_sha_checked_locally": true,
+    "fixed_sha_links_in_core_evidence": true,
+    "source_tracked_diff": "none",
+    "expected_git_changes": "new AGENTS.md overlays only"
+  }
+}
+

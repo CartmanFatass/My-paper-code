@@ -1,0 +1,162 @@
+{
+  "object": "UCOPE-UAV-MOTION-PREFIX-B02",
+  "assignment": "OWNER_DIRECT P47",
+  "assignment_sha": "6dd7570e9e8045fb3818c553953a92c9caa587cb",
+  "recorded_at": "2026-09-08T16:17:12.808144+00:00",
+  "original_card_sha": "1d46ddc2b142a2c2b98922a8f46e2d2609bda859",
+  "implementation_sha": "6374063408208ba67b8cb7c69ebc0babb0f00259",
+  "ratio_grouping": "agent_compound",
+  "scientific_masters": [
+    7001,
+    7002
+  ],
+  "scientific_invocations_observed": 0,
+  "engineering_fixture": {
+    "path": "temp/directions/ucope/test/uav_motion_prefix_b02_fixture/summary.json",
+    "master": 9001,
+    "invocations": 1,
+    "counts": {
+      "train_team_steps": 32,
+      "eval_team_steps": 48,
+      "team_steps": 80,
+      "optimizer_steps": 8,
+      "train_episodes": 4,
+      "eval_episodes": 6,
+      "velocity_decisions": 293,
+      "duration_decisions": 20,
+      "d4": 9,
+      "recurrent_observations": 320,
+      "explicit_resets": 10,
+      "constructor_resets": 2,
+      "constructors": 2,
+      "step_calls": 80,
+      "scientific_uav_calls": 0,
+      "diagnostic_frames": 100,
+      "completed_episode_steps": 80,
+      "rollouts": 2,
+      "partial_episode_steps": 0
+    },
+    "wall_seconds": 80.57799999997951,
+    "arm_wall_seconds": {
+      "T": 78.89099999994505,
+      "G": 1.687000000034459
+    },
+    "smoke_cap_seconds": 60,
+    "smoke_breach_seconds": 20.57799999997951,
+    "scope": "synthetic engineering evidence, not scientific UAV evidence",
+    "total_parameter_exposure": {
+      "T": {
+        "parameters": 66441,
+        "initial_norm": 15.433085441589355,
+        "final_norm": 15.436223030090332,
+        "displacement": 0.27940696477890015,
+        "relative_displacement": 0.018104413782737905
+      },
+      "G": {
+        "parameters": 66311,
+        "initial_norm": 15.433084487915039,
+        "final_norm": 15.437926292419434,
+        "displacement": 0.2890021502971649,
+        "relative_displacement": 0.018726143210286376
+      }
+    }
+  },
+  "prospective_work": {
+    "training_pairs": 2,
+    "learner_fits": 4,
+    "agents_per_team": 5,
+    "train_team_steps_per_fit": 131072,
+    "train_episodes_per_fit": 512,
+    "optimizer_steps_per_fit": 1024,
+    "final_evaluation_episodes_per_arm_pair": 32,
+    "train_team_steps": 524288,
+    "evaluation_team_steps": 49152,
+    "total_team_steps": 573440,
+    "total_optimizer_steps": 4096,
+    "total_train_episodes": 2048,
+    "total_final_evaluation_episodes": 192,
+    "total_episodes": 2240,
+    "old_team_ratio_terms_per_fit": 524288,
+    "proposed_agent_ratio_terms_per_fit": 2621440,
+    "extra_ratio_terms_per_fit": 2097152,
+    "old_team_ratio_terms_total": 2097152,
+    "proposed_agent_ratio_terms_total": 10485760,
+    "extra_ratio_terms_total": 8388608,
+    "ratio_work_basis": "dense pointwise PPO expressions before action masks; not independent samples or a fivefold wall-time prediction",
+    "old_collected_logp_bytes_per_512_step_rollout": 2048,
+    "new_collected_logp_bytes_per_512_step_rollout": 10240,
+    "extra_collected_logp_bytes_per_rollout": 8192,
+    "new_controller_forward_calls_relative_to_same_loop": 0,
+    "nested_search_candidates": 0,
+    "complete_caps_seconds": {
+      "per_arm": 1800,
+      "per_pair": 3600,
+      "sum_two_pairs": 7200
+    }
+  },
+  "cost_projection": {
+    "historical_P21_reference_T_seconds": 148.26706686698833,
+    "historical_P21_reference_G_including_H_publication_seconds": 141.37189204798779,
+    "historical_P24_sum_external_wall_seconds": 564.93,
+    "per_arm_law": "same-loop historical reference + 2097152 * incremental_seconds_per_extra_ratio_term + extra logp storage/mask reduction time",
+    "incremental_unit_time": null,
+    "qualification": "network/environment calls and rollout/update counts unchanged; added elementwise work is unmeasured; reference is not a timing guarantee; no pilot or validation invocation selected"
+  },
+  "rng": {
+    "7001": {
+      "b": 700100000,
+      "initialization": 700100011,
+      "train_velocity": 700100021,
+      "train_duration": 700100022,
+      "train_reset_range": [
+        700101000,
+        700101511
+      ],
+      "eval_reset_range": [
+        700102000,
+        700102031
+      ],
+      "eval_velocity_range": [
+        700103000,
+        700103031
+      ],
+      "eval_duration_range": [
+        700104000,
+        700104031
+      ]
+    },
+    "7002": {
+      "b": 700200000,
+      "initialization": 700200011,
+      "train_velocity": 700200021,
+      "train_duration": 700200022,
+      "train_reset_range": [
+        700201000,
+        700201511
+      ],
+      "eval_reset_range": [
+        700202000,
+        700202031
+      ],
+      "eval_velocity_range": [
+        700203000,
+        700203031
+      ],
+      "eval_duration_range": [
+        700204000,
+        700204031
+      ]
+    }
+  },
+  "generation": "stdlib readback and known configuration arithmetic; no scientific module import, checkpoint load, model construction, replay or new evaluation",
+  "exposure_line": "Synthetic fixture: T/G each made 4 Adam calls at lr=0.0003; total relative displacement T=0.018104414, G=0.018726143. Prospective real B02: T=66441/G=66311 parameters, 1024 Adam calls per fit, four fits; actual real displacement remains unmeasured.",
+  "acceptance_disposition": {
+    "assignment": "P48 named functional acceptance",
+    "assignment_sha": "209804f8bb8120394c0dc14bf346133aa525d512",
+    "main_integration_sha": "d911f83463946ffd99924f2536de1d7d23767ab9",
+    "state": "accepted functional source for unchanged P47 scientific route",
+    "original_smoke_time_conformance": false,
+    "repeat_smoke_authorized": false,
+    "scientific_caps_changed": false
+  }
+}

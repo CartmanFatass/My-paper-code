@@ -1,0 +1,37 @@
+{
+  "id": "20260905-crto-004",
+  "created": "2026-09-05T02:40:26-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B05 后续：准备 RAW 暴露量比较",
+  "context": "两个新种子都仅差一次 REPLAN 精确动作通过胜任条件，而 RAW 随预算增加有原生 regret 改善。下一对象选择同种子、同信息、原始顺序的 258/516 更新比较；这里只确定准备方向，新卡与执行尚未冻结。",
+  "options": [
+    {
+      "key": "a",
+      "label": "准备 RAW 258/516 比较",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "增加更多联合种子",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "立即重设计残差",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "固定种子提高暴露量直接检查一动作缺口的优化解释，改动和解释范围均小于扩种子或重设计残差。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_JOINT_SEED_B05_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b05-joint-seed-result",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,193 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-05-cbsc-post-repair-convergence-01",
+  "source_thread_id": "01a07397-8b61-7c11-8fb2-f69602de03f8",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "execution_mode": "REUSE_SINGLETON",
+  "direction_id": "capability_bound_semantic_currentness",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "7a8c985c75f418a63e18af92e13ada10d3ad37a5",
+  "scientific_question": "CBSC 的有界完整发布修复已结束：主发布缺失，旧段错误未被唯一复现重现，后一次出现不同 TypeError，两者根因未定。最新探索规范已应用。此时本方向最小且值得投入的下一步是否应是一个独立的新 B：用既有真实 host、FP32循环PPO和逐episode原生回报评估，先做单个新训练seed的STRUCT对同信息RAW比较，直接保存可信主测量，而不继承旧十五表与全历史重建要求？请根据代码中实际可复用的路径和仍共享的host风险，决定该最小比较、必要旧发布修复或本分支暂不投入何者最合理。",
+  "deliverable": "请作出明确的方向内最终选择。DM推荐正文提案中的新直接回报B：两个学习臂、一个前瞻新seed、每臂48次rollout/768 Adam步、0/12/24/48更新处各32个随机评估episode，以终点逐episode配对native return差为主测量，并给出MEI理由、包含空假设和有限后续。请说明新B真正需要保留的环境/信息/奖励/比较/曝光/主输出，对比哪些旧表、replay、支持普查或机制解释不服务于此主张。给出可交CM的最小完整目标、源码依赖、必要的一次针对性验证、预算和结束边界；不要求先彻底找出历史根因。若不选择该提案，请指出具体科学或可实施事实为何改变推荐，给出最小替代。区分减少无关诊断的同机制延续与真正机制recast；保持旧尝试和旧修复结论原意。无需写代码或调试，也不请求Portfolio优先级/生命周期改变。",
+  "claim_ceiling": "当前材料只有历史窄协议结果、LR01未决结果和未完成工程观察，没有完整在线B1性能结论或已修复根因。所提新B最多得到本host、本预算的单seed配对原生性能观察；不证明稳定优越、语义特异性、PI/DERANGED排除、跨seed统计效应、变量agent数/伙伴共适应/MARL协调或UAV迁移。它明确是新对象，不声称原三seed四臂十五表B1通过，不恢复r05 quarantine，也不复用旧数据作为独立训练。",
+  "reference_files": [
+    {
+      "path": "AGENTS.md",
+      "purpose": "当前决策层级及 §11.8 优先级；未完成历史对象与可选新 B 的区别。",
+      "provenance": "审计后当前指导；不从旧字段推断新调用批准。"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "第4、5.2、11.4和11.8节：可信性能事实、必要主测量、探索与独立 seed 的证据负担。",
+      "provenance": "当前控制规范，已应用完整 Pro 校准。"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "普通新研究代码预算、比例审查信号、已结束 CBSC 附款和测试账边界。",
+      "provenance": "当前规范；不把旧附款续期或旧测试账清零。"
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "purpose": "完整逻辑调用、CPU/wall区分和计时证据边界；避免把删诊断误当已测加速。",
+      "provenance": "已应用规范，VNFC 独有附款不转移。"
+    },
+    {
+      "path": ".codex/hmasd-compute.toml",
+      "purpose": "既有远程执行节点、解释器和 CPU/GPU信息；本候选明确使用 CPU FP32单线程。",
+      "provenance": "配置事实；不能代替实际调用前资源准入。"
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "purpose": "CBSC 当前 ACTIVE/HIGH与已结束修复状态；本轮不请求改其他方向。",
+      "provenance": "Root 快照，不把历史工作集或代理状态当作实验事实。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260905_exploration_calibration/archive/RESPONSE.md",
+      "purpose": "完整 Pro 负担校准：新 B 不继承无依赖的全历史重建；真实主测量不可省略。",
+      "provenance": "已归档完整原文，SHA256 49b80de5018897f9c2ff54f0f113601159fb924a722666e359e03b700c31abb9。"
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-05-exploration-rigor-spec-application.md",
+      "purpose": "校准已经应用并经根会话审核补齐，不能把旧草案未应用状态当当前事实。",
+      "provenance": "实际应用/审核记录。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
+      "purpose": "动态 host、当前机制、RAW 包含空假设、PPO参数、旧 factorial/LR01支持与反证。",
+      "provenance": "历史原 B1 要求保持原意，但不自动成为新 B 默认负担。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_APPROVED_REPAIR_INTAKE_20260905.md",
+      "purpose": "已结束修复的最终 DM intake，缺失主发布与两个不同未归因故障。",
+      "provenance": "工程观察，不产生机制正负。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_APPROVED_REPAIR_CM_RESULT_20260905.md",
+      "purpose": "完整 CM技术返回：已审阅源码、局部通过、实际正式路径未完成及累计成本。",
+      "provenance": "CM d0f67fd8b 的最终直接观察，未接受完整发布。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_R06_LAUNCH_READINESS_INTAKE_20260904.md",
+      "purpose": "历史机器曝光及每臂训练切片加 replay成本律；不覆盖新路径或完整旧发布。",
+      "provenance": "历史分项成本与曝光，非新测量。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/approved_repair_20260905/profile02-task.log",
+      "purpose": "实际错误或终止产物清单，核实原段错误、不同 TypeError以及主发布缺失。",
+      "provenance": "终止工程调用原始记录；不从错误文本推断唯一根因。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/approved_repair_20260905/repro03-task.log",
+      "purpose": "实际错误或终止产物清单，核实原段错误、不同 TypeError以及主发布缺失。",
+      "provenance": "终止工程调用原始记录；不从错误文本推断唯一根因。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/approved_repair_20260905/profile02-inventory.json",
+      "purpose": "实际错误或终止产物清单，核实原段错误、不同 TypeError以及主发布缺失。",
+      "provenance": "终止工程调用原始记录；不从错误文本推断唯一根因。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/approved_repair_20260905/repro03-inventory.json",
+      "purpose": "实际错误或终止产物清单，核实原段错误、不同 TypeError以及主发布缺失。",
+      "provenance": "终止工程调用原始记录；不从错误文本推断唯一根因。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md",
+      "purpose": "原 B1十五表和解释边界，用来明确新直接回报 B 减少什么主张和依赖。",
+      "provenance": "历史命名对象要求，不是新 B 通用规范。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_APPROVED_REPAIR_ASSIGNMENT_20260905.md",
+      "purpose": "已经结束的精确修复目标/路径/验证与停止范围，防止把新 B写成旧修复继续。",
+      "provenance": "已结束投资的历史定义。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/addressing.py",
+      "purpose": "公开地址空间、种子与允许的run_name；复用B1随机命名空间不应误报成旧B1完成。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/host.py",
+      "purpose": "真实动态环境、public events、_finish的共享依赖以及原生决策/settlement。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/tapes.py",
+      "purpose": "learner projection与evaluator-only truth/ledger分离，EpisodeTape实际结构。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/token.py",
+      "purpose": "token编码及观察到的int转换故障地点；不推断唯一原因。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/adapters.py",
+      "purpose": "STRUCT与RAW在同一公共history上生成输入，现有包含关系。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/contract.py",
+      "purpose": "动作enum、观测和原生规则常量；evaluation action-name转换必须明确。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/model.py",
+      "purpose": "实际共同FP32循环网络、参数和初始化。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/ppo.py",
+      "purpose": "真实优化器、完整episode PPO、固定8/2episode批大小和工作计数。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/engine.py",
+      "purpose": "可复用的panel、rollout、heldout helper及其返回类型；直接路径仍为真实学习。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/evaluator.py",
+      "purpose": "给定同一tape和chosen actions直接计算逐episode原生return。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/checkpoint.py",
+      "purpose": "已有checkpoint实现语义，复用时注明新对象和旧substrate命名空间区别。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/b1_metrics_production.py",
+      "purpose": "原完整发布调用依赖，确认新B可不调用旧rehydration/replay/15table组装。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/b1_metrics_rehydrate.py",
+      "purpose": "旧全历史tape重建路径及失败上下文；不应默认为新主回报的依赖。",
+      "provenance": "固定版本实际源代码，只作可行性与科学依赖证据，不请Pro调试/实现。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260905_post_repair_convergence/EVIDENCE_AND_OPTIONS.md",
+      "purpose": "本轮具体最小B提案、源到主测量路径、保留/移除的义务、预算与claim ceiling。",
+      "provenance": "新的未选提案；已结束的历史观察保留，不宣称已有可运行diff。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260905_post_repair_convergence/EXPOSURE_AND_COST.json",
+      "purpose": "既有机器曝光的零新曝光咨询行、完整计数与成本算术、未知新路径成本。",
+      "provenance": "Python标准库文档算术，没有新实验、checkpoint载入或计时；节省量保持unknown。"
+    }
+  ],
+  "constraints": [
+    "先读本轮EVIDENCE_AND_OPTIONS、零新曝光成本文件、最新修复intake和§11.8，再核对实际源码。owner特别要求查验过度实验要求是否造成巨大投影，不能只把过重验证的实现做便宜。",
+    "新B提案减少科学主张以匹配必要证据，旧B1缺失的十五表仍为历史缺口。不得要求新B默认重建十五表、精确重放旧失败、全支持普查、极严数值容差或先彻底归因；也不得把缺失主测量说成有效性能结果。",
+    "直接路径仍用host/token/addressing，因此两次历史失败触及共享依赖这一反证必须保留。应检查实际威胁reward/信息/训练/比较/主测量的缺陷；绕过发布不是共享host已正确的证据。",
+    "新B拟使用21203一个新训练seed，两个臂配对不构成两个独立训练样本。收益可触发一至两个新seed后续建议，但无需每seed都改善；不把一次正值当稳定优越或强行C级认证。",
+    "按已有实际源码说明函数返回类型与可行调用路径；没有新diff或运行接受事实。旧地址空间只允许B0/B1/B2；提案明确复用B1作为随机namespace而新外层对象不同，若有实际兼容困难应准确说明，不发明API。",
+    "新路径的每臂600秒是含启动、训练、评估、发布读回与结束宽限的拟议有限投资上限，不是实测投影。旧333.27秒仅历史切片加replay分项envelope，不覆盖完整旧发布或新路径。删表、少评估可计数，但反事实时间节省未知；无C++/GPU/并行加速实测。",
+    "本次只有文档算术，零新learner/optimizer暴露，不新增曝光实验或profiling gate。未来实际调用仍按四项B条件、配置的远程优先节点和逐调用资源准入执行。",
+    "已结束修复A174/D429与测试账保留；新B不是延长旧源码例外。现行普通预算适用，不能为了压比率填充或压缩代码；若遇实际额外预算依赖给具体事实，不发起泛化审批流。",
+    "请先给实质结论，再用自然语言阐明证据、反证、未知、主张边界和下一判别。不要回显请求、任务、会话、binding或transport标识，不输出JSON、状态块或envelope。源码版本/路径用于证据引用即可。"
+  ]
+}

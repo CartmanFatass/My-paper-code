@@ -1,0 +1,19 @@
+=== Task 'cbsc-direct-b02-2c9254f70-raw' started at 2026-09-06T08:04:28+08:00 ===
+{
+  "assessed_at": "2026-09-06T00:04:29.065407Z",
+  "available_physical_bytes": 15678758912,
+  "captured_at": "2026-09-06T00:04:29.065093Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15678758912,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{'arm': 'RAW-GRU', 'counters': {'rollout_updates': 48, 'adam_steps': 768, 'train_episodes': 384, 'train_transitions': 58368, 'train_decisions': 9216}, 'cost': {'law': 'startup + host_generation + sum_updates(project8 + rollout8 + PPO4x4) + sum_checkpoints(eval_panel + checkpoint_io) + context_RAW + publication_readback + pairing_STRUCT + process_finish', 'host_seconds': 8.143813684000634, 'eval_projection_seconds': 0.5674607539986027, 'updates': [{'update': 0, 'wall_seconds': 1.40801682700112}, {'update': 1, 'wall_seconds': 1.2668066779879155}, {'update': 2, 'wall_seconds': 1.2548096160026034}, {'update': 3, 'wall_seconds': 1.2599110279988963}, {'update': 4, 'wall_seconds': 1.3225333809969015}, {'update': 5, 'wall_seconds': 1.2713232560054166}, {'update': 6, 'wall_seconds': 1.2886510550015373}, {'update': 7, 'wall_seconds': 1.2435816249926575}, {'update': 8, 'wall_seconds': 1.2425997170066694}, {'update': 9, 'wall_seconds': 1.3089462939969962}, {'update': 10, 'wall_seconds': 1.2914941789931618}, {'update': 11, 'wall_seconds': 1.2683418379892828}, {'update': 12, 'wall_seconds': 1.321037025001715}, {'update': 13, 'wall_seconds': 1.3631836010026745}, {'update': 14, 'wall_seconds': 1.6885109069989994}, {'update': 15, 'wall_seconds': 1.4944659089960624}, {'update': 16, 'wall_seconds': 1.3290031729993643}, {'update': 17, 'wall_seconds': 1.3324315570062026}, {'update': 18, 'wall_seconds': 1.4083250719995704}, {'update': 19, 'wall_seconds': 1.2865520469931653}, {'update': 20, 'wall_seconds': 1.3083154339983594}, {'update': 21, 'wall_seconds': 1.3000215869979002}, {'update': 22, 'wall_seconds': 1.325770191004267}, {'update': 23, 'wall_seconds': 1.3029768940032227}, {'update': 24, 'wall_seconds': 1.415552068996476}, {'update': 25, 'wall_seconds': 1.6378985990013462}, {'update': 26, 'wall_seconds': 1.3807591590011725}, {'update': 27, 'wall_seconds': 1.3098512080032378}, {'update': 28, 'wall_seconds': 1.3986947390076239}, {'update': 29, 'wall_seconds': 1.5473297520074993}, {'update': 30, 'wall_seconds': 1.3509529889997793}, {'update': 31, 'wall_seconds': 1.3445776609878521}, {'update': 32, 'wall_seconds': 1.3014665480004624}, {'update': 33, 'wall_seconds': 1.3356513600010658}, {'update': 34, 'wall_seconds': 1.6840565239981515}, {'update': 35, 'wall_seconds': 1.3364517690060893}, {'update': 36, 'wall_seconds': 1.4079406169912545}, {'update': 37, 'wall_seconds': 1.331465274997754}, {'update': 38, 'wall_seconds': 1.3055932540009962}, {'update': 39, 'wall_seconds': 1.288123510996229}, {'update': 40, 'wall_seconds': 1.3363695059961174}, {'update': 41, 'wall_seconds': 1.3161102260055486}, {'update': 42, 'wall_seconds': 1.3525755169976037}, {'update': 43, 'wall_seconds': 1.3295742490008706}, {'update': 44, 'wall_seconds': 1.3358703439880628}, {'update': 45, 'wall_seconds': 1.4134224800072843}, {'update': 46, 'wall_seconds': 1.454107760990155}, {'update': 47, 'wall_seconds': 1.6854449279926484}], 'measured_seconds_per_update': 1.3643218528322905, 'peak_rss_bytes': 587796480, 'resources_unmeasured': False, 'wall_seconds_through_primary_readback': 78.70194382900081}}
+=== Task 'cbsc-direct-b02-2c9254f70-raw' exited with code 0 at 2026-09-06T08:05:48+08:00 (Duration: 80s) ===

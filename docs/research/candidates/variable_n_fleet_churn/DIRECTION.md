@@ -19,12 +19,128 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 ## Scientific question
 
-Can a presentation-safe shared MAPR-4 policy learn post-loss recovery from unshaped external return
-at training rosters `N={3,5}` and show preliminary recovery direction on untouched `N=7` worlds
-relative separately to a strictly containing same-information `DIRECT-SET-AR` learner and the
-competent fixed `BCRH-PERSIST` controller?
+Can a shared MAPR-4 policy learn post-loss recovery from unshaped external return on the
+post-loss `N=7` distribution, and how does its sampled native recovery compare separately with
+the same-information `DIRECT-SET-AR` learner and fixed `BCRH-PERSIST` controller on fresh episodes
+from that distribution? The older N={3,5}-training/N7-transfer question and its bounded negative
+comparisons remain historical evidence; this new B does not identify their unique cause.
 
 ## Current scientific disposition
+
+### Convergence pause of the B01 comparison family — 2026-09-06
+
+The [post-deployment-mode Convergence decision](pro_packets/20260906_post_depmode_convergence/archive/RESPONSE.md)
+(`PRO_FINAL`, one Send, archive sha256 `956965fe…`, taken in by
+[this intake](VNFC_POST_DEPMODE_CONVERGENCE_INTAKE_20260906.md)) pauses the current B01
+N7 direct-return comparison family: the pursuit of a comparative advantage among MAPR-4 and
+DIRECT-SET-AR on the fixed two-zone single-loss host with public actor inputs, unshaped
+`J_ext`, endpoint GAE/PPO and the 64-round configuration, and any same-configuration
+repetition meant only to rescue the small observed separation. No new training, no
+existing-record analysis and no third recast is selected; the deployment-mode sub-question is
+closed at branch 3. The accepted ground is the absence of a discriminating signal that would
+justify more of the same work; the rejected grounds are the missing headroom record and the
+lowest sequencing position, which are diagnostic and scheduling facts, not scientific
+negatives. The pause is reversible and narrow: it does not close N7 learning, shared-policy
+recovery after membership loss, or the direction; B has no consumption state; every B01,
+deployment-mode and historical result stands. Reopening needs a new learning proposal with one
+named information, representation, credit or optimization intervention, its full chain and a
+real-training comparator, or a concrete fact threatening reward, information, training or the
+primary measurement. Cost record: B01's 2,700 s is the object's cumulative total, not per
+arm; cumulative 827.76 s at the runner boundary and 828.98 s at the outer boundary. Lifecycle,
+priority and the two recasts are unchanged; VNFC leaves the hub's working set.
+
+### Deployment-mode evaluation closed and next direction question — 2026-09-06
+
+The sole next observation selected by the two-seed Convergence decision is complete:
+`VNFC-N7-B01-DEPLOYMENT-MODE-EVAL` (card and CM record of 2026-09-05, integrated at
+`6fc574561`, run on `wsl_4070`). The four saved final policies (formal_02 and seed02, MAPR and
+DIRECT, round 64, zero parameter displacement) were executed on one new shared 64-world panel in
+both modes, with fixed BCRH on the same panel; zero training, 512 evaluation episodes, 64 BCRH
+episodes, 138,240 native ticks, complete wall 44.47 s under the 180 s cap. The GREEDY path
+reproduced the B01 evaluation record row for row (64/64) before the formal run.
+
+Paired `SAMPLE − GREEDY` on `R_fail_60` is −0.0065, −0.0036, −0.0056 and +0.0169 (mean ± SE
+at most 0.018), all inside (−.10, +.10) with mixed signs; SAMPLE lowers `U_total` and `J_ext`
+in all four policies. By the card's reading rule this is branch 3: no useful deployment-mode
+signal at this exposure, and the execution-mode question closes without escalation to
+temperature, more draws, panels or checkpoints. Every learner cell remains below BCRH on
+`R_fail_60` by 0.055 to 0.074 in both modes and both zones; same-mode MAPR−DIRECT differences
+are inside noise. The B01 two-seed result is unchanged; no learner sample was added.
+
+Accepted `OWNER_DELEGATED` (ledger 2026-09-06 rows 9–10). The next VNFC object belongs to the
+same Convergence node: the post-evaluation packet
+(`pro_packets/20260906_post_depmode_convergence/`, request
+`2026-09-06-vnfc-post-depmode-convergence-01`) states the direction's headroom record (none: the
+K search and physical upper do not form a tuned same-information pair; BCRH is a native
+reference) and its second-recast standing, and carries the DM recommendation to pause the N7
+direct-return exploratory family at its smallest supported unit, offered for challenge against a
+named new B, an existing-record analysis or a third recast. Lifecycle, priority and recast count
+are Portfolio-held and unchanged (recasts two). Cumulative B01 formal investment is 827.76 s of
+2,700 s. The direction parks at this clean boundary after the Send. See
+`VNFC_N7_B01_DEPLOYMENT_MODE_EVAL_SCIENCE_CARD_20260905.md`,
+`VNFC_N7_B01_DEPLOYMENT_MODE_EVAL_CM_RECORD_20260905.md`,
+`VNFC_N7_B01_DEPLOYMENT_MODE_EVAL_RESULT_INTAKE_20260905.md` and
+`evidence/b01_depmode_formal_20260905_01/`.
+
+### Two direct learning seeds and next direction question — 2026-09-05
+
+The complete validation-method Convergence decision ended further R03 exact-headroom census
+investment and selected `VNFC-N7-DIRECT-RETURN-B01`. Two independent training seeds now have
+valid complete B results: each real learner trained64 rounds ×32 complete N7 episodes per seed,
+with2048 optimizer steps and64 fresh evaluation episodes at initialization/32/64. Fixed BCRH
+was evaluated on each seed's panel. MAPR final-minus-initial R_fail_60 is+.204128/+.199453 and
+DIRECT+.188659/+.195521; both zones also improved in both draws. This supports bounded repeated
+same-distribution recovery learning, not a cause for historical cross-N failure or stable value.
+
+The strongest contradiction to MAPR-specific value is that DIRECT also learned, MAPR's final
+advantages are only+.015469/+.003932 (inside the descriptive.10 MEI), and both learners remain
+below BCRH on all four native metrics in both zones. Their two-seed average recovery gaps to
+BCRH are-.051367/-.061068. MAPR–DIRECT zone1 changes from+.028073 to-.029323, with service
+tradeoffs retained. Generic shared-policy learning remains a live explanation; two seeds do
+not prove equivalence, stable superiority, exact headroom or a unique mechanism. Historical
+R02 negative/mixed comparisons and the limited privileged7/60 witness keep their original scope.
+
+The selected one-seed follow-up is complete. The full subsequent Convergence answer continues
+shared recovery learning and ends indiscriminate same-configuration seed filling for this greedy
+endpoint comparison. Its sole next observation uses all four saved final policies on one new
+64-episode panel to compare original-distribution single sampling with existing token-greedy
+execution, retaining fixed BCRH. It has no new training and no search or mode/checkpoint selection.
+The deployment-mode hypothesis is unmeasured and does not reclassify B01 as an evaluation error.
+The owner then requested an execution pause: OWNER_PAUSED, no successor card, implementation,
+experiment or new Pro dispatch. This is not a lifecycle PARK and does not change the science.
+Cumulative formal investment is783.29s of the original2700s; remaining budget does not select
+work. Priority/lifecycle/recasts remain unchanged, with recasts two. The headroom record remains
+incomplete and does not become a prerequisite for future exploration.
+
+No exact or bounded policy search, all-history replay or old law/DEBUG publication ladder is a
+prerequisite for this new performance comparison. Necessary checks address its actual reward,
+information, physical actions, real training and primary output under evidence-spec §11.8–11.9.
+This is a new learning B, not a shortened R03 or a relabelled old result. The incomplete first
+formal attempt and its unresolved failure remain engineering provenance, not another independent
+seed. See
+`VNFC_N7_DIRECT_RETURN_CONVERGENCE_INTAKE_20260905.md` and
+`VNFC_N7_DIRECT_RETURN_B01_SCIENCE_CARD_20260905.md`,
+`VNFC_N7_DIRECT_RETURN_B01_RESULT_INTAKE_20260905.md`,
+`VNFC_N7_DIRECT_RETURN_B01_SEED02_CARD_20260905.md`, and
+`VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md`,
+`VNFC_B01_TWO_SEED_CONVERGENCE_INTAKE_20260905.md` and `HANDOFF_20260905.md`.
+
+### Completed E01 engineering continuation — 2026-09-05
+
+Complete direction Convergence selected only `VNFC-R03-EXACT-BATCH-FEASIBILITY-E01`;
+the subsequent complete Portfolio plan is applied in `aaaad1212`. The runtime specification
+and exact E01 appendix remain operative. Source was independently reviewed and integrated;
+the unique formal assessment completed in28.11s wall/37.93 CPU-s. The full-work projection
+123765.49970804117s exceeds the original2700s cap, ending this E01 investment. This is a
+technical cost boundary, not a headroom or scientific negative and not a lifecycle change.
+No repeat calibration, retuning or full census follows. The fixed native alternative coincided
+with the baseline endpoint; the frozen fixture allowed this and no distinct native-deviation
+claim is made. See `VNFC_R03_E01_TECHNICAL_INTAKE_20260905.md` for actual resources, coverage,
+projection assumptions, source identity and the return to the existing Convergence boundary.
+
+The Innovator, controller-headroom and R02 implementation records below are historical provenance
+for the learner lineage and earlier bounded objects. They do not replace the new direct-B card or
+create an exact-law, search, old DEBUG-seal or full-history prerequisite for it.
 
 The latest complete `em:variable_n_fleet_churn:innovator` decision is:
 
@@ -39,7 +155,7 @@ return-bearing question are not closed. Its prospectively distinct, sequential s
 `VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02` at `B/EXPLORE`. R02 is motivated by a known
 conformance defect and is not independent confirmation.
 
-### Controller-headroom reconnaissance (2026-09-04; current)
+### Controller-headroom reconnaissance (2026-09-04; historical)
 
 The valid complete sequential result
 `VNFC-CONTROLLER-HEADROOM-A-RECON-MEMORY-BOUNDED-K1024-R02` is
@@ -261,6 +377,14 @@ its finite claim ceiling.
 
 ## Evidence set
 
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_CONVERGENCE_INTAKE_20260905.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_SCIENCE_CARD_20260905.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_RESULT_INTAKE_20260905.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_SEED02_CARD_20260905.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_B01_TWO_SEED_CONVERGENCE_INTAKE_20260905.md`
+- `docs/research/candidates/variable_n_fleet_churn/pro_packets/20260905_b01_two_seed_convergence/archive/RESPONSE.md`
+- `docs/research/candidates/variable_n_fleet_churn/pro_packets/20260905_validation_method_convergence/archive/RESPONSE.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_BEXP_PRESENTATION_SAFE_RETURN_R01_INNOVATOR_INTAKE_20260901.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_BEXP_R01_ENGINEERING_MILESTONE_20260901.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R01_CLOSE_R02_FINITE_ACTION_LAW_INNOVATOR_INTAKE_20260901.md`

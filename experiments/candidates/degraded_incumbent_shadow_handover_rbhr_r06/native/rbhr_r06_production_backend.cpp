@@ -203,14 +203,43 @@ inline double normal(const HostState& s,const char* purpose,const char* field,in
 }
 inline double terrain(double x,double y){return 135.0*std::exp(-sq(x/75.0)-std::pow(y/220.0,4))+55.0*std::exp(-sq((x-90.0)/35.0)-sq((y+40.0)/85.0));}
 inline bool ray_blocked(const HostState& s,Vec3 a,Vec3 b,double clearance){for(int j=1;j<=127;++j){const double q=j/128.0,x=a.x+q*(b.x-a.x),y=a.y+q*(b.y-a.y),z=a.z+q*(b.z-a.z);if(z<=terrain(x,s.reflection*y)+clearance)return true;}return false;}
+#ifdef DISH_GROUND_ENDPOINT_A03
+inline bool ground_ray_blocked(const HostState& s,Vec3 a,Vec3 b,double clearance,bool from_ground){
+  for(int j=1;j<=127;++j){
+    const double u=j/128.0,q=from_ground?u:1.0-u;
+    const double x=a.x+u*(b.x-a.x),y=a.y+u*(b.y-a.y),z=a.z+u*(b.z-a.z);
+    if(z<=terrain(x,s.reflection*y)+clearance*q)return true;
+  }
+  return false;
+}
+#endif
 inline bool ray_prism(const HostState& s,Vec3 a,Vec3 b,double xmin,double xmax,double ymin,double ymax,double zmin,double zmax){for(int j=0;j<=128;++j){const double q=j/128.0,x=a.x+q*(b.x-a.x),y=s.reflection*(a.y+q*(b.y-a.y)),z=a.z+q*(b.z-a.z);if(x>=xmin&&x<=xmax&&y>=ymin&&y<=ymax&&z>=zmin&&z<=zmax)return true;}return false;}
+#ifdef DISH_GROUND_ENDPOINT_A03
+inline double radio_margin(const HostState& s,Vec3 a,Vec3 b,const char* hop,bool relay_mask){const double d=std::sqrt(sq(a.x-b.x)+sq(a.y-b.y)+sq(a.z-b.z));const bool ground=std::strcmp(hop,"G_TO_U0")==0||std::strcmp(hop,"G_TO_U1")==0;double blocked=(ground?ground_ray_blocked(s,a,b,8.0,true):ray_blocked(s,a,b,8.0))?1.0:0.0;if(relay_mask)blocked+=1.0;return 30.0-20.0*std::log10(std::max(d,1.0)/100.0)-35.0*blocked+normal(s,"RADIO","RADIO_EPSILON",s.tick,hop);}
+#else
 inline double radio_margin(const HostState& s,Vec3 a,Vec3 b,const char* hop,bool relay_mask){const double d=std::sqrt(sq(a.x-b.x)+sq(a.y-b.y)+sq(a.z-b.z));double blocked=ray_blocked(s,a,b,8.0)?1.0:0.0;if(relay_mask)blocked+=1.0;return 30.0-20.0*std::log10(std::max(d,1.0)/100.0)-35.0*blocked+normal(s,"RADIO","RADIO_EPSILON",s.tick,hop);}
+#endif
 
 struct PhysicsTick { double gx,gy,gvx,gvy; double camera_z[4]; std::int32_t camera_present[2]; double radio[6]; double source_noise[4]; double wind_eta[2]; };
+struct B01PreparedTick {
+  HostState state;
+  StepOutput observation;
+  PhysicsTick physics;
+  std::int32_t snapshot_delivered, readiness_delivered, origin_valid;
+};
+struct B01RecurrentHandoff { double controller_hidden[512]; };
 
 inline PhysicsTick physics_tick(const HostState& s){
+#ifdef DISH_GROUND_ENDPOINT_A03
+  PhysicsTick p{};route(s,s.tick,p.gx,p.gy,p.gvx,p.gvy);const bool active=s.tick>=s.tau_d_tick&&s.tick<s.tau_d_tick+40;Vec3 g{p.gx,p.gy,terrain(p.gx,s.reflection*p.gy)+2.0},base{-600.0,0.0,20.0},u[2]{{s.p[0],s.p[1],90.0},{s.p[2],s.p[3],90.0}};
+#else
   PhysicsTick p{};route(s,s.tick,p.gx,p.gy,p.gvx,p.gvy);const bool active=s.tick>=s.tau_d_tick&&s.tick<s.tau_d_tick+40;Vec3 g{p.gx,p.gy,0.0},base{-600.0,0.0,20.0},u[2]{{s.p[0],s.p[1],90.0},{s.p[2],s.p[3],90.0}};
+#endif
+#ifdef DISH_GROUND_ENDPOINT_A03
+  for(int i=0;i<2;++i){bool clear=!ground_ray_blocked(s,u[i],g,5.0,false)&&std::sqrt(sq(u[i].x-g.x)+sq(u[i].y-g.y)+sq(u[i].z-g.z))<=500.0;if(s.mask_enabled&&s.package==0&&active&&i==s.initial_owner&&ray_prism(s,u[i],g,-20,30,-155,-85,0,120))clear=false;p.camera_present[i]=clear;if(clear){const char* fx=i==0?"CAMERA_U0_X":"CAMERA_U1_X";const char* fy=i==0?"CAMERA_U0_Y":"CAMERA_U1_Y";p.camera_z[2*i]=p.gx+2.0*normal(s,"CAMERA",fx,s.tick);p.camera_z[2*i+1]=p.gy+2.0*s.reflection*normal(s,"CAMERA",fy,s.tick);}}
+#else
   for(int i=0;i<2;++i){bool clear=!ray_blocked(s,u[i],g,5.0)&&std::sqrt(sq(u[i].x-g.x)+sq(u[i].y-g.y)+8100.0)<=500.0;if(s.mask_enabled&&s.package==0&&active&&i==s.initial_owner&&ray_prism(s,u[i],g,-20,30,-155,-85,0,120))clear=false;p.camera_present[i]=clear;if(clear){const char* fx=i==0?"CAMERA_U0_X":"CAMERA_U1_X";const char* fy=i==0?"CAMERA_U0_Y":"CAMERA_U1_Y";p.camera_z[2*i]=p.gx+2.0*normal(s,"CAMERA",fx,s.tick);p.camera_z[2*i+1]=p.gy+2.0*s.reflection*normal(s,"CAMERA",fy,s.tick);}}
+#endif
   p.radio[0]=radio_margin(s,g,u[0],"G_TO_U0",false);p.radio[1]=radio_margin(s,g,u[1],"G_TO_U1",false);
   p.radio[2]=radio_margin(s,u[0],base,"U0_TO_BASE",s.mask_enabled&&s.package==1&&active&&s.initial_owner==0&&ray_prism(s,u[0],base,-30,45,-80,80,0,130));
   p.radio[3]=radio_margin(s,u[1],base,"U1_TO_BASE",s.mask_enabled&&s.package==1&&active&&s.initial_owner==1&&ray_prism(s,u[1],base,-30,45,-80,80,0,130));
@@ -296,11 +325,12 @@ inline void critic_row(const HostState& s, const PhysicsTick& ph, bool renew, do
   x[cursor++]=s.k_active==4;x[cursor++]=s.k_active==8;x[cursor++]=s.k_active==12;x[cursor++]=s.k_epoch;x[cursor++]=s.countdown;x[cursor++]=renew;x[cursor++]=s.pending_switch;x[cursor++]=s.terminal;
 }
 
-inline void materialize_observation(const HostState& s, StepOutput& out) {
+inline void materialize_observation_at(
+    const HostState& s,const PhysicsTick& ph,bool renew,StepOutput& out) {
   std::memset(&out,0,sizeof(out));
-  const PhysicsTick ph=physics_tick(s);const bool renew=s.countdown==0;
   for(int i=0;i<2;++i)for(int c=0;c<2;++c)actor_row(s,ph,i,c,renew,out.actor+(i*2+c)*54);
   critic_row(s,ph,renew,out.critic);
+  out.renew=renew;out.terminal=s.terminal;
   out.owner=s.owner;out.service_epoch=s.service_epoch;out.next_payload_sequence=s.next_payload_sequence;
   out.handover_used=s.handover_used;out.invalid_commit=s.invalid_commit;out.token_gap=s.token_gap;
   out.dual_owner=s.dual_owner;out.dual_payload=s.dual_payload;out.buffer_clear=s.buffer_clear;
@@ -309,10 +339,18 @@ inline void materialize_observation(const HostState& s, StepOutput& out) {
   out.total_energy=s.total_energy;out.snapshot_accepted=s.snapshot_accepted;
   out.readiness_accepted=s.readiness_accepted;out.application_reason=s.application_reason;
   out.cas_applied=s.cas_applied;out.actuator_owner=s.actuator_owner;
-  out.protocol_wire_messages=s.protocol_wire_messages;
+  out.protocol_wire_hash=s.protocol_wire_hash;out.protocol_wire_messages=s.protocol_wire_messages;
   std::memcpy(out.snapshot_payload,s.accepted_snapshot_payload,sizeof(out.snapshot_payload));
   std::memcpy(out.readiness_candidate,s.accepted_readiness_candidate,sizeof(out.readiness_candidate));
   out.version_match=s.readiness_accepted&&s.snapshot_accepted&&s.readiness_snapshot_tick==s.snapshot_tick;
+}
+
+inline void materialize_observation(const HostState& s, StepOutput& out) {
+  const PhysicsTick ph=physics_tick(s);
+  materialize_observation_at(s,ph,s.countdown==0,out);
+  // Preserve the legacy TEST/source-clone StepOutput bytes.  These fields are
+  // populated only by the private B01 prepared/branch materializer.
+  out.renew=0;out.terminal=0;out.protocol_wire_hash=0;
 }
 
 inline double predictive_q95(const double* q){double dp[21]={};dp[0]=1.0;for(int j=0;j<20;++j){const double p=std::clamp(q[j],1e-6,1.0-1e-6);for(int m=j+1;m>=0;--m){const double keep=dp[m]*(1.0-p),add=m>0?dp[m-1]*p:0.0;dp[m]=keep+add;}}for(int m=20;m>=0;--m){double tail=0;for(int k=m;k<=20;++k)tail+=dp[k];if(tail>=0.95)return m/20.0;}return 0.0;}
@@ -354,16 +392,9 @@ inline void reset_one(const ResetInput& x, HostState& s, StepOutput& out) {
   std::memset(&out,0,sizeof(out));for(int i=0;i<2;++i)for(int c=0;c<2;++c)actor_row(s,blank,i,c,s.countdown==0,out.actor+(i*2+c)*54);critic_row(s,blank,s.countdown==0,out.critic);out.owner=s.owner;out.tick=0;out.min_separation=s.min_separation;
 }
 
-inline int step_one(HostState& s, const StepInput& in, StepOutput& out, bool scripted_transfer=false) {
-  if(!s.initialized || s.tick<0 || s.tick>=TICKS) return 11;
-  std::memset(&out,0,sizeof(out));if(in.arm_mode<0||in.arm_mode>4)return 14;bool noop_intent_emitted=false;
-  if(terminal_at(s)) s.terminal=1;
-  if(s.terminal){s.total_energy+=130.0;s.battery[0]=std::max(0.0,s.battery[0]-65.0);s.battery[1]=std::max(0.0,s.battery[1]-65.0);++s.tick;out.terminal=1;out.tick=s.tick;out.owner=s.owner;out.service_epoch=s.service_epoch;out.next_payload_sequence=s.next_payload_sequence;out.handover_used=s.handover_used;out.total_energy=s.total_energy;out.min_separation=s.min_separation;return 0;}
-  const PhysicsTick ph=physics_tick(s);std::memcpy(s.controller_hidden,in.controller_hidden,sizeof(s.controller_hidden));
-
-  bool snapshot_delivered_this_tick=false,readiness_delivered_this_tick=false;
-  // Delivery suborder: SNAPSHOT/intent headers arm the one-tick lineage lock
-  // before SOURCE replacement.  The lock releases only after application.
+inline void process_pending_arrivals(
+    HostState& s,const PhysicsTick& ph,bool& snapshot_delivered,bool& readiness_delivered){
+  snapshot_delivered=false;readiness_delivered=false;
   if(s.pending_snapshot){
     const int sender=s.pending_snapshot_sender,receiver=1-sender;
     s.lineage_lock[sender]=1;s.lineage_sequence[sender]=s.pending_snapshot_sequence;
@@ -373,7 +404,8 @@ inline int step_one(HostState& s, const StepInput& in, StepOutput& out, bool scr
          s.source_sequence[0]==s.pending_snapshot_sequence &&
          s.source_sequence[1]==s.pending_snapshot_sequence){
         s.snapshot_accepted=1;s.snapshot_tick=s.pending_snapshot_tick;
-        std::memcpy(s.accepted_snapshot_payload,s.pending_snapshot_payload,sizeof(s.accepted_snapshot_payload));snapshot_delivered_this_tick=true;
+        std::memcpy(s.accepted_snapshot_payload,s.pending_snapshot_payload,sizeof(s.accepted_snapshot_payload));
+        snapshot_delivered=true;
       }
     }
     s.pending_snapshot=0;
@@ -382,13 +414,22 @@ inline int step_one(HostState& s, const StepInput& in, StepOutput& out, bool scr
   if(s.pending_relay_exists && s.pending_relay_second_margin>=6.0){s.base_exists=1;s.base_source_sequence=s.pending_relay_source_sequence;s.base_source_tick=s.pending_relay_source_tick;s.base_relay_tick=s.pending_relay_tick;std::memcpy(s.base_z,s.pending_relay_z,4*sizeof(double));s.base_first_margin=s.pending_relay_first_margin;s.base_second_margin=s.pending_relay_second_margin;}
   for(int receiver=0;receiver<2;++receiver){const int sender=1-receiver;const double margin=ph.radio[4+sender];if(margin>=6.0){s.partner_present[receiver]=1;s.partner_tick[receiver]=s.tick;}}
   if(s.pending_readiness){
-    if(s.pending_readiness_margin>=6.0 && s.snapshot_accepted){s.readiness_accepted=1;s.readiness_tick=s.pending_readiness_tick;s.readiness_snapshot_tick=s.snapshot_tick;std::memcpy(s.accepted_readiness_candidate,s.pending_readiness_candidate,sizeof(s.accepted_readiness_candidate));readiness_delivered_this_tick=true;}
+    if(s.pending_readiness_margin>=6.0 && s.snapshot_accepted){s.readiness_accepted=1;s.readiness_tick=s.pending_readiness_tick;s.readiness_snapshot_tick=s.snapshot_tick;std::memcpy(s.accepted_readiness_candidate,s.pending_readiness_candidate,sizeof(s.accepted_readiness_candidate));readiness_delivered=true;}
     s.pending_readiness=0;
   }
+}
 
-  bool renew=s.countdown==0; if(s.tick>=s.switch_tick && s.k_active!=s.k_new) s.pending_switch=1;
-  if(renew && s.pending_switch){s.k_active=s.k_new;++s.k_epoch;s.pending_switch=0;}
-  s.application_reason=0;s.cas_applied=0;
+inline int complete_prepared_tick(
+    HostState& s,const StepInput& in,StepOutput& out,const PhysicsTick& ph,
+    bool snapshot_delivered_this_tick,bool readiness_delivered_this_tick,
+    bool scripted_transfer=false,int b01_origin_mode=-1,
+    bool prepared_result_already_accounted=false) {
+  if(!s.initialized || s.tick<0 || s.tick>=TICKS) return 11;
+  std::memset(&out,0,sizeof(out));if(in.arm_mode<0||in.arm_mode>4)return 14;bool noop_intent_emitted=false;
+  if(terminal_at(s)) s.terminal=1;
+  if(s.terminal){s.total_energy+=130.0;s.battery[0]=std::max(0.0,s.battery[0]-65.0);s.battery[1]=std::max(0.0,s.battery[1]-65.0);++s.tick;out.terminal=1;out.tick=s.tick;out.owner=s.owner;out.service_epoch=s.service_epoch;out.next_payload_sequence=s.next_payload_sequence;out.handover_used=s.handover_used;out.total_energy=s.total_energy;out.min_separation=s.min_separation;return 0;}
+  std::memcpy(s.controller_hidden,in.controller_hidden,sizeof(s.controller_hidden));
+  const bool renew=s.countdown==0;
   if(s.pending_intent){
     if(s.intent_readiness_tick==0&&s.intent_origin_tick>0){s.intent_readiness_tick=s.readiness_tick;s.intent_snapshot_tick=s.snapshot_tick;}
     int reason=0;
@@ -405,7 +446,8 @@ inline int step_one(HostState& s, const StepInput& in, StepOutput& out, bool scr
       else if(s.terminal)reason=10;
       else if(s.battery[0]<=0||s.battery[1]<=0)reason=11;
       else if(separation(s)<15.0||std::hypot((s.p[0]+DT*s.v[0])-(s.p[2]+DT*s.v[2]),(s.p[1]+DT*s.v[1])-(s.p[3]+DT*s.v[3]))<15.0)reason=12;
-      else for(int i=0;i<2;++i){const Vec2 bounded=clipped({in.raw_action[2*i],in.raw_action[2*i+1]},3.0);if(norm({bounded.x-s.a[2*i],bounded.y-s.a[2*i+1]})>1.5+1e-12){reason=13;break;}}
+      else if(b01_origin_mode<0)for(int i=0;i<2;++i){const Vec2 bounded=clipped({in.raw_action[2*i],in.raw_action[2*i+1]},3.0);if(norm({bounded.x-s.a[2*i],bounded.y-s.a[2*i+1]})>1.5+1e-12){reason=13;break;}}
+      if(b01_origin_mode==0&&reason==0)reason=2;
       const int old_owner=s.owner;
       if(reason==0){promote_recurrent_state(s,old_owner,s.intent_alpha);s.owner=1-s.owner;++s.service_epoch;s.handover_used=1;s.cas_applied=1;}
       else ++s.invalid_commit;
@@ -445,7 +487,7 @@ inline int step_one(HostState& s, const StepInput& in, StepOutput& out, bool scr
   if(s.pending_relay_exists){const auto wire=relay_wire(s,s.pending_relay_sender);account_wire(s,wire);}
   int service=0;if(s.base_exists){const double age=(s.tick-s.base_source_tick)*DT;const double hx=s.base_z[0]+age*s.base_z[2],hy=s.base_z[1]+age*s.base_z[3];service=age<=0.5&&std::hypot(hx-gx,hy-gy)<=8.0&&s.base_first_margin>=6.0&&s.base_second_margin>=6.0;}s.service_ticks+=service;
 
-  std::uint64_t tx_bytes[2]={64,64};if(s.pending_relay_exists)tx_bytes[s.pending_relay_sender]+=64;if(emit_snapshot)tx_bytes[s.owner]+=96;if(s.pending_readiness)tx_bytes[1-s.owner]+=48;if(s.pending_intent)tx_bytes[s.intent_owner]+=32;if(noop_intent_emitted)tx_bytes[s.owner]+=32;if(s.application_reason||s.cas_applied)tx_bytes[s.owner]+=24;
+  std::uint64_t tx_bytes[2]={64,64};if(s.pending_relay_exists)tx_bytes[s.pending_relay_sender]+=64;if(emit_snapshot)tx_bytes[s.owner]+=96;if(s.pending_readiness)tx_bytes[1-s.owner]+=48;if(s.pending_intent)tx_bytes[s.intent_owner]+=32;if(noop_intent_emitted)tx_bytes[s.owner]+=32;if((s.application_reason||s.cas_applied)&&!prepared_result_already_accounted)tx_bytes[s.owner]+=24;
   for(int i=0;i<2;++i){const int p=2*i;const double power=650+1.5*(sq(s.v[p])+sq(s.v[p+1]))+12*(sq(s.a[p])+sq(s.a[p+1]));const double byte_energy=0.02*tx_bytes[i];const double energy=DT*power+byte_energy;s.total_energy+=energy;s.battery[i]=std::max(0.0,s.battery[i]-energy);s.p[p]+=DT*s.v[p];s.p[p+1]+=DT*s.v[p+1];s.v[p]+=DT*(s.a[p]+s.wind[0]);s.v[p+1]+=DT*(s.a[p+1]+s.wind[1]);Vec2 vv=clipped({s.v[p],s.v[p+1]},18);s.v[p]=vv.x;s.v[p+1]=vv.y;}
   s.wind[0]=std::clamp(0.95*s.wind[0]+0.05*ph.wind_eta[0],-1.5,1.5);s.wind[1]=std::clamp(0.95*s.wind[1]+0.05*ph.wind_eta[1],-1.5,1.5);
   const double sep=separation(s);s.min_separation=std::min(s.min_separation,sep);if(sep<15.0){++s.separation_breach;s.terminal=1;}
@@ -453,6 +495,23 @@ inline int step_one(HostState& s, const StepInput& in, StepOutput& out, bool scr
   for(int i=0;i<2;++i)for(int c=0;c<2;++c)actor_row(s,ph,i,c,renew,out.actor+(i*2+c)*54);critic_row(s,ph,renew,out.critic);
   if(s.tick==TICKS-1)s.terminal=1;
   ++s.tick;out.service=service;out.renew=renew;out.terminal=s.terminal;out.owner=s.owner;out.service_epoch=s.service_epoch;out.next_payload_sequence=s.next_payload_sequence;out.handover_used=s.handover_used;out.invalid_commit=s.invalid_commit;out.token_gap=s.token_gap;out.dual_owner=s.dual_owner;out.dual_payload=s.dual_payload;out.buffer_clear=s.buffer_clear;out.command_slew_breach=s.command_slew_breach;out.separation_breach=s.separation_breach;out.tick=s.tick;out.protocol_bytes=s.protocol_bytes;out.min_separation=s.min_separation;out.total_energy=s.total_energy;out.snapshot_accepted=s.snapshot_accepted;out.readiness_accepted=s.readiness_accepted;out.application_reason=s.application_reason;out.cas_applied=s.cas_applied;out.actuator_owner=s.actuator_owner;out.protocol_wire_hash=s.protocol_wire_hash;out.protocol_wire_messages=s.protocol_wire_messages;std::memcpy(out.snapshot_payload,s.accepted_snapshot_payload,sizeof(out.snapshot_payload));std::memcpy(out.readiness_candidate,s.accepted_readiness_candidate,sizeof(out.readiness_candidate));out.snapshot_delivery_mask=snapshot_delivered_this_tick;out.readiness_delivery_mask=readiness_delivered_this_tick;out.version_match=s.readiness_accepted&&s.snapshot_accepted&&s.readiness_snapshot_tick==s.snapshot_tick;return 0;
+}
+
+inline int step_one(HostState& s,const StepInput& in,StepOutput& out,bool scripted_transfer=false) {
+  if(!s.initialized||s.tick<0||s.tick>=TICKS)return 11;
+  if(in.arm_mode<0||in.arm_mode>4)return 14;
+  if(terminal_at(s))s.terminal=1;
+  if(s.terminal){PhysicsTick none{};return complete_prepared_tick(s,in,out,none,false,false,scripted_transfer);}
+  const PhysicsTick ph=physics_tick(s);
+  bool snapshot=false,readiness=false;
+  // Delivery suborder: SNAPSHOT/intent headers arm the one-tick lineage lock
+  // before SOURCE replacement.  The lock releases only after application.
+  process_pending_arrivals(s,ph,snapshot,readiness);
+  const bool renew=s.countdown==0;
+  if(s.tick>=s.switch_tick&&s.k_active!=s.k_new)s.pending_switch=1;
+  if(renew&&s.pending_switch){s.k_active=s.k_new;++s.k_epoch;s.pending_switch=0;}
+  s.application_reason=0;s.cas_applied=0;
+  return complete_prepared_tick(s,in,out,ph,snapshot,readiness,scripted_transfer);
 }
 
 inline bool first_application_valid(const HostState& s,const StepInput& in){
@@ -467,6 +526,58 @@ inline bool first_application_valid(const HostState& s,const StepInput& in){
   if(separation(s)<15.0||std::hypot((s.p[0]+DT*s.v[0])-(s.p[2]+DT*s.v[2]),(s.p[1]+DT*s.v[1])-(s.p[3]+DT*s.v[3]))<15.0)return false;
   for(int i=0;i<2;++i){const Vec2 bounded=clipped({in.raw_action[2*i],in.raw_action[2*i+1]},3.0);if(norm({bounded.x-s.a[2*i],bounded.y-s.a[2*i+1]})>1.5+1e-12)return false;}
   return true;
+}
+
+inline bool b01_origin_valid(const HostState& s){
+  if(s.test_mode!=0||!s.initialized||(s.owner!=0&&s.owner!=1))return false;
+  if(!s.pending_intent||s.pending_intent_margin<6.0)return false;
+  if(!s.intent_certificate||s.handover_used)return false;
+  const bool legacy_ticks=s.intent_readiness_tick==0&&s.intent_origin_tick>0;
+  const int readiness_tick=legacy_ticks?s.readiness_tick:s.intent_readiness_tick;
+  const int intent_snapshot_tick=legacy_ticks?s.snapshot_tick:s.intent_snapshot_tick;
+  if(s.intent_origin_tick+1!=s.tick||readiness_tick!=s.intent_origin_tick-1||
+     intent_snapshot_tick!=s.intent_origin_tick||s.snapshot_tick!=s.intent_origin_tick)return false;
+  if(s.owner!=s.intent_owner||s.service_epoch!=s.intent_epoch||
+     s.next_payload_sequence!=s.intent_next_sequence)return false;
+  if(!s.source_exists[0]||!s.source_exists[1]||s.source_sequence[0]!=s.source_sequence[1])return false;
+  if(s.k_epoch!=s.intent_k_epoch||s.terminal||s.battery[0]<=0||s.battery[1]<=0)return false;
+  if(separation(s)<15.0)return false;
+  return std::hypot((s.p[0]+DT*s.v[0])-(s.p[2]+DT*s.v[2]),
+                    (s.p[1]+DT*s.v[1])-(s.p[3]+DT*s.v[3]))>=15.0;
+}
+
+inline int prepare_b01_one(const HostState& parent,B01PreparedTick& prepared){
+  std::memset(&prepared,0,sizeof(prepared));
+  if(!parent.initialized||parent.tick<0||parent.tick>=TICKS||parent.test_mode!=0)return 2;
+  prepared.state=parent;
+  if(terminal_at(prepared.state))prepared.state.terminal=1;
+  if(!prepared.state.terminal){
+    prepared.physics=physics_tick(prepared.state);
+    bool snapshot=false,readiness=false;
+    process_pending_arrivals(prepared.state,prepared.physics,snapshot,readiness);
+    bool renew=prepared.state.countdown==0;
+    if(prepared.state.tick>=prepared.state.switch_tick&&prepared.state.k_active!=prepared.state.k_new)
+      prepared.state.pending_switch=1;
+    if(renew&&prepared.state.pending_switch){prepared.state.k_active=prepared.state.k_new;++prepared.state.k_epoch;prepared.state.pending_switch=0;}
+    prepared.state.application_reason=0;prepared.state.cas_applied=0;
+    prepared.snapshot_delivered=snapshot;prepared.readiness_delivered=readiness;
+  }
+  materialize_observation_at(
+    prepared.state,prepared.physics,prepared.state.countdown==0,prepared.observation);
+  prepared.observation.snapshot_delivery_mask=prepared.snapshot_delivered;
+  prepared.observation.readiness_delivery_mask=prepared.readiness_delivered;
+  prepared.origin_valid=b01_origin_valid(prepared.state)?1:0;
+  return 0;
+}
+
+inline int complete_b01_one(
+    const B01PreparedTick& prepared,const StepInput& input,HostState& state,StepOutput& output){
+  if(prepared.state.test_mode!=0)return 2;
+  state=prepared.state;
+  return complete_prepared_tick(
+    state,input,output,prepared.physics,prepared.snapshot_delivered,
+    prepared.readiness_delivered,false,prepared.origin_valid?1:0,
+    prepared.state.handover_used&& !prepared.state.pending_intent);
 }
 
 inline bool source_factored_combined_predicate(const HostState& s,const StepInput& in){
@@ -529,12 +640,14 @@ inline void invalidate_source_transaction(HostState& s){
   s.lineage_lock[0]=s.lineage_lock[1]=0;s.lineage_sequence[0]=s.lineage_sequence[1]=0;
 }
 
-inline int clone_promotion_source_one(const HostState& parent,const StepInput& current,PromotionSourceForkOutput& out){
-  std::memset(&out,0,sizeof(out));if(!source_factored_combined_predicate(parent,current))return 2;
-  const HostState before=parent;out.retain_state=parent;out.transfer_copy_state=parent;out.transfer_shadow_state=parent;
+inline int clone_promotion_source_materialized(
+    const HostState& parent,const double* controller_hidden,PromotionSourceForkOutput& out,
+    const B01PreparedTick* prepared=nullptr){
+  std::memset(&out,0,sizeof(out));
+  out.retain_state=parent;out.transfer_copy_state=parent;out.transfer_shadow_state=parent;
   const int incumbent=parent.owner,recipient=1-incumbent;
   for(HostState* branch:{&out.retain_state,&out.transfer_copy_state,&out.transfer_shadow_state}){
-    std::memcpy(branch->controller_hidden,current.controller_hidden,sizeof(branch->controller_hidden));
+    std::memcpy(branch->controller_hidden,controller_hidden,sizeof(branch->controller_hidden));
     ++branch->service_epoch;branch->handover_used=1;branch->application_reason=0;
     branch->total_energy+=0.48;branch->battery[incumbent]=std::max(0.0,branch->battery[incumbent]-0.48);
     invalidate_source_transaction(*branch);
@@ -556,12 +669,27 @@ inline int clone_promotion_source_one(const HostState& parent,const StepInput& c
     static_cast<std::uint8_t>(recipient),static_cast<std::uint8_t>(recipient),parent.tick,
     static_cast<std::uint16_t>(parent.service_epoch+1),static_cast<std::uint32_t>(parent.next_payload_sequence),
     static_cast<std::uint16_t>(parent.k_epoch),static_cast<std::uint32_t>(parent.intent_origin_tick));
-  for(HostState* branch:{&out.retain_state,&out.transfer_copy_state,&out.transfer_shadow_state}){
+  if(prepared){
+    account_wire(out.retain_state,retain_receipt);
+    account_wire(out.transfer_copy_state,copy_receipt);
+    account_wire(out.transfer_shadow_state,shadow_receipt);
+  }else for(HostState* branch:{&out.retain_state,&out.transfer_copy_state,&out.transfer_shadow_state}){
     branch->protocol_bytes+=24;++branch->protocol_wire_messages;
   }
-  materialize_observation(out.retain_state,out.retain_observation);
-  materialize_observation(out.transfer_copy_state,out.transfer_copy_observation);
-  materialize_observation(out.transfer_shadow_state,out.transfer_shadow_observation);
+  if(prepared){
+    const bool renew=prepared->state.countdown==0;
+    materialize_observation_at(out.retain_state,prepared->physics,renew,out.retain_observation);
+    materialize_observation_at(out.transfer_copy_state,prepared->physics,renew,out.transfer_copy_observation);
+    materialize_observation_at(out.transfer_shadow_state,prepared->physics,renew,out.transfer_shadow_observation);
+    for(StepOutput* observation:{&out.retain_observation,&out.transfer_copy_observation,&out.transfer_shadow_observation}){
+      observation->snapshot_delivery_mask=prepared->snapshot_delivered;
+      observation->readiness_delivery_mask=prepared->readiness_delivered;
+    }
+  }else{
+    materialize_observation(out.retain_state,out.retain_observation);
+    materialize_observation(out.transfer_copy_state,out.transfer_copy_observation);
+    materialize_observation(out.transfer_shadow_state,out.transfer_shadow_observation);
+  }
   std::memcpy(out.retain_receipt,retain_receipt.data(),retain_receipt.size());
   std::memcpy(out.transfer_copy_receipt,copy_receipt.data(),copy_receipt.size());
   std::memcpy(out.transfer_shadow_receipt,shadow_receipt.data(),shadow_receipt.size());
@@ -577,12 +705,27 @@ inline int clone_promotion_source_one(const HostState& parent,const StepInput& c
   out.linearization_intent_readiness_tick=parent.intent_readiness_tick;
   std::memcpy(out.linearization_lineage_lock,parent.lineage_lock,sizeof(out.linearization_lineage_lock));
   std::memcpy(out.linearization_lineage_sequence,parent.lineage_sequence,sizeof(out.linearization_lineage_sequence));
-  std::memcpy(out.linearization_controller_hidden,current.controller_hidden,sizeof(out.linearization_controller_hidden));
-  out.parent_byte_immutable=std::memcmp(&before,&parent,sizeof(parent))==0;out.combined_predicate_valid=1;
+  std::memcpy(out.linearization_controller_hidden,controller_hidden,sizeof(out.linearization_controller_hidden));
+  out.parent_byte_immutable=1;out.combined_predicate_valid=1;
   out.retain_cas_applied=0;out.transfer_copy_cas_applied=1;out.transfer_shadow_cas_applied=1;
   out.retained_by_design=1;out.application_latency_ticks=1;out.receipt_bytes=24;
   out.retain_alpha=-1.0;out.transfer_copy_alpha=0.0;out.transfer_shadow_alpha=1.0;out.transaction_energy=0.48;
-  return out.parent_byte_immutable?0:3;
+  return 0;
+}
+
+inline int clone_promotion_source_one(const HostState& parent,const StepInput& current,PromotionSourceForkOutput& out){
+  if(!source_factored_combined_predicate(parent,current))return 2;
+  return clone_promotion_source_materialized(parent,current.controller_hidden,out);
+}
+
+inline int clone_b01_prepared_one(
+    const B01PreparedTick& prepared,const B01RecurrentHandoff& handoff,
+    PromotionSourceForkOutput& out){
+  if(!prepared.origin_valid||!b01_origin_valid(prepared.state))return 2;
+  for(double value:handoff.controller_hidden)
+    if(!std::isfinite(value)||value<-1.0||value>1.0)return 2;
+  return clone_promotion_source_materialized(
+    prepared.state,handoff.controller_hidden,out,&prepared);
 }
 
 inline int passive_labels_one(const HostState& source,const StepInput& input,PassiveLabelOutput& out){
@@ -684,6 +827,8 @@ DISH_EXPORT std::uint64_t dish_rbhr_r06_prod_recovery_witness_output_size(){retu
 DISH_EXPORT std::uint64_t dish_rbhr_r06_prod_protocol_audit_output_size(){return sizeof(ProtocolAuditOutput);}
 DISH_EXPORT std::uint64_t dish_rbhr_r06_prod_protocol_transition_output_size(){return sizeof(ProtocolTransitionOutput);}
 DISH_EXPORT std::uint64_t dish_rbhr_r06_prod_promotion_source_fork_output_size(){return sizeof(PromotionSourceForkOutput);}
+DISH_EXPORT std::uint64_t dish_rbhr_r06_prod_b01_prepared_tick_size(){return sizeof(B01PreparedTick);}
+DISH_EXPORT std::uint64_t dish_rbhr_r06_prod_b01_recurrent_handoff_size(){return sizeof(B01RecurrentHandoff);}
 
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_reset_batch(const ResetInput* in,std::uint64_t count,HostState* state,StepOutput* out){if(!in||!state||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i){if(!validate_reset(in[i]))return 2;reset_one(in[i],state[i],out[i]);}return 0;}
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_reset_selected_batch(const ResetInput* in,const std::int32_t* selected,std::uint64_t count,HostState* state,StepOutput* out){if(!in||!selected||!state||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i)if(selected[i]){if(!validate_reset(in[i]))return 2;reset_one(in[i],state[i],out[i]);}return 0;}
@@ -691,6 +836,9 @@ DISH_EXPORT std::int32_t dish_rbhr_r06_prod_step_batch(HostState* state,const St
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_rollout_batch(HostState* state,const StepInput* in,std::uint64_t steps,std::uint64_t count,StepOutput* out){if(!in||!state||!out||count==0||steps==0)return 1;for(std::uint64_t t=0;t<steps;++t)for(std::uint64_t i=0;i<count;++i){const int rc=step_one(state[i],in[t*count+i],out[t*count+i]);if(rc)return rc;}return 0;}
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_passive_labels_batch(const HostState* state,const StepInput* in,std::uint64_t count,PassiveLabelOutput* out){if(!in||!state||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i){const int rc=passive_labels_one(state[i],in[i],out[i]);if(rc)return rc;}return 0;}
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_first_application_valid_batch(const HostState* state,const StepInput* in,std::uint64_t count,std::int32_t* out){if(!in||!state||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i)out[i]=first_application_valid(state[i],in[i])?1:0;return 0;}
+DISH_EXPORT std::int32_t dish_rbhr_r06_prod_b01_prepare_batch(const HostState* state,std::uint64_t count,B01PreparedTick* out){if(!state||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i){const int rc=prepare_b01_one(state[i],out[i]);if(rc)return rc;}return 0;}
+DISH_EXPORT std::int32_t dish_rbhr_r06_prod_b01_complete_batch(const B01PreparedTick* prepared,const StepInput* in,std::uint64_t count,HostState* state,StepOutput* out){if(!prepared||!in||!state||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i){const int rc=complete_b01_one(prepared[i],in[i],state[i],out[i]);if(rc)return rc;}return 0;}
+DISH_EXPORT std::int32_t dish_rbhr_r06_prod_b01_clone_prepared_batch(const B01PreparedTick* prepared,const B01RecurrentHandoff* handoff,std::uint64_t count,PromotionSourceForkOutput* out){if(!prepared||!handoff||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i){const int rc=clone_b01_prepared_one(prepared[i],handoff[i],out[i]);if(rc)return rc;}return 0;}
 DISH_EXPORT std::int32_t clone_promotion_source_batch(const HostState* parent,const StepInput* current,std::size_t count,PromotionSourceForkOutput* out){if(!parent||!current||!out||count==0)return 1;for(std::size_t i=0;i<count;++i)if(!source_factored_combined_predicate(parent[i],current[i]))return 2;for(std::size_t i=0;i<count;++i){const int rc=clone_promotion_source_one(parent[i],current[i],out[i]);if(rc)return rc;}return 0;}
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_clone_promotion_source_batch(const HostState* parent,const StepInput* current,std::uint64_t count,PromotionSourceForkOutput* out){return clone_promotion_source_batch(parent,current,static_cast<std::size_t>(count),out);}
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_source_factored_test_fixture_batch(std::uint64_t count,HostState* state,StepInput* current){
@@ -743,6 +891,28 @@ DISH_EXPORT std::int32_t dish_rbhr_r06_prod_source_factored_test_mismatch_fixtur
     else if(mismatch==23)state[i].readiness_accepted=2;
     else if(mismatch==24)state[i].test_mode=3;
     else return 2;
+  }
+  return 0;
+}
+DISH_EXPORT std::int32_t dish_rbhr_r06_prod_b01_test_fixture_batch(std::int32_t valid_origin,std::uint64_t count,HostState* state,StepOutput* out){
+  if((valid_origin!=0&&valid_origin!=1)||!state||!out||count==0)return 1;
+  for(std::uint64_t i=0;i<count;++i){
+    ResetInput reset{};reset.fixture_key=i+1;reset.test_mode=0;reset.package=static_cast<std::int32_t>(i%2);
+    reset.reflection=1;reset.initial_owner=static_cast<std::int32_t>(i%2);reset.qa_owner=reset.initial_owner;
+    reset.k_initial=8;reset.k_new=8;reset.switch_tick=500;reset.tau_d_tick=420;reset.phase=0;
+    reset.route_speed=4;reset.turn_magnitude_deg=25;reset.turn_sign=1;reset.initial_ux=40;reset.initial_uy=120;
+    reset_one(reset,state[i],out[i]);HostState& s=state[i];s.tick=100;s.countdown=7;
+    s.source_exists[0]=s.source_exists[1]=1;s.source_sequence[0]=s.source_sequence[1]=7;
+    s.source_tick[0]=s.source_tick[1]=99;s.snapshot_accepted=1;s.snapshot_tick=99;
+    s.readiness_accepted=1;s.readiness_tick=98;s.readiness_snapshot_tick=99;
+    s.pending_snapshot=1;s.pending_snapshot_sender=s.owner;s.pending_snapshot_sequence=7;
+    s.pending_snapshot_tick=99;s.pending_snapshot_margin=12.0;
+    for(int j=0;j<18;++j)s.pending_snapshot_payload[j]=0.01*static_cast<double>(j+1);
+    s.pending_intent=1;s.pending_intent_margin=12.0;s.intent_owner=s.owner;
+    s.intent_epoch=s.service_epoch;s.intent_next_sequence=s.next_payload_sequence;s.intent_k_epoch=s.k_epoch;
+    s.intent_certificate=valid_origin;s.intent_origin_tick=99;s.intent_readiness_tick=98;s.intent_snapshot_tick=99;
+    s.lineage_lock[s.owner]=1;s.lineage_sequence[s.owner]=7;
+    materialize_observation(s,out[i]);
   }
   return 0;
 }

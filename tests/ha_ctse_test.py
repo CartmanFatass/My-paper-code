@@ -17,7 +17,7 @@ from hmasd.ha_ctse import (
 )
 from hmasd.networks import IndividualDiscriminator, R_Actor, SkillDiscoverer, TeamDiscriminator
 from hmasd.utils import RolloutBuffer, SkillProcessSegmentBuffer
-from config_1 import Config
+from configs.config_1 import Config
 from hmasd.process_exploration import (
     PROCESS_OUTCOME_FIELDS,
     SkillOutcomePredictor,

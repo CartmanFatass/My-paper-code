@@ -1,0 +1,171 @@
+{
+  "object": "ACVC_FRESH_DENSE_REUSE_B01",
+  "status": "DESIGN_ONLY; scientific definition selected; numerical execution not allocated",
+  "bound_checkout_sha": "db1834ebc8b329f3efb2edd7d615faedb2f5939a",
+  "observed_design_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "model_loads": 0,
+    "training_episodes": 0,
+    "training_team_steps": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "native_steps": 0,
+    "tests": 0,
+    "profiles": 0,
+    "probes": 0
+  },
+  "calculation_method": "Static integer and retained-timing arithmetic in the tool runtime; no project code, learner, simulator, numerical experiment or RNG instance executed.",
+  "proposed_exposure": {
+    "independent_fresh_fits": 1,
+    "retained_fit_substitutions": 0,
+    "training_episodes": 512,
+    "training_team_steps": 131072,
+    "two_episode_rollouts": 256,
+    "adam_calls": 1024,
+    "backward_calls": 1024,
+    "training_actor_agent_forwards": 655360,
+    "training_critic_primitive_forwards": 131072,
+    "recurrent_update_batch_calls": 1024,
+    "recurrent_replay_agent_steps": 2621440,
+    "critic_update_rows": 524288,
+    "replay_shape_per_update": {
+      "time_steps": 32,
+      "independent_sequences": 80,
+      "hidden_width": 64
+    },
+    "evaluation_panels": 3,
+    "evaluation_episodes": 192,
+    "evaluation_team_steps": 49152,
+    "evaluation_actor_agent_forwards": 245760,
+    "total_episodes": 704,
+    "total_team_steps": 180224,
+    "total_collection_actor_agent_forwards": 901120,
+    "training_environment_constructors": 1,
+    "evaluation_environment_constructors": 3,
+    "total_unscored_constructor_resets": 4,
+    "fresh_DENSE_initializations": 1,
+    "postfit_checkpoint_loads": 3,
+    "gate_constructions": 0,
+    "duration_head_constructions": 0,
+    "selector_optimizer_updates": 0,
+    "evaluation_optimizer_updates": 0,
+    "coordinate_pair_check_upper_bound": 6553600
+  },
+  "parameter_arithmetic": {
+    "raw_encoder": 6976,
+    "dense_inner": 1744,
+    "dense_projection": 1024,
+    "gru": 24960,
+    "mean_head": 195,
+    "log_std": 3,
+    "actor": 34902,
+    "critic": 34177,
+    "actor_plus_critic": 69079
+  },
+  "rng": {
+    "training_master": 8921,
+    "evaluation_namespace": 8922,
+    "common_actor_then_critic_initialization": 892100011,
+    "dense_branch_initialization": 892100012,
+    "persistent_training_velocity_seed": 892100021,
+    "training_constructor_seed": 892101000,
+    "training_episode_reset_keys": [
+      892101000,
+      892101511
+    ],
+    "training_unused_duration_seed_keys": [
+      892104000,
+      892104511
+    ],
+    "evaluation_load_construction_seed": 892200014,
+    "evaluation_constructor_seeds": {
+      "C": 892200062,
+      "F": 892200063,
+      "dwell": 892200064
+    },
+    "paired_evaluation_reset_keys": [
+      892202000,
+      892202063
+    ],
+    "private_evaluation_proposal_keys": {
+      "C": [
+        892230200,
+        892230263
+      ],
+      "F": [
+        892230300,
+        892230363
+      ],
+      "dwell": [
+        892230400,
+        892230463
+      ]
+    },
+    "old_primary_fit_and_evaluation_namespaces": [
+      8201,
+      8202,
+      8901,
+      8902,
+      8911,
+      8912
+    ],
+    "namespace_search_scope": "No 8921/8922 occurrence in existing owned ACVC CARD/FACTS/INTAKE files before design; not a global seed-registry claim.",
+    "no_rng_initialized_during_design": true
+  },
+  "historical_cost_inputs": {
+    "MGTAP_source_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+    "DENSE_phase_walls_s": {
+      "base8201": 168.74397892004345,
+      "base8202": 166.18349101697095
+    },
+    "DENSE_with_remaining_H_publication_exit_s": {
+      "base8201": 180.05527891804462,
+      "base8202": 180.16581205296563
+    },
+    "E01_source_sha": "6b269374d98886bce120ccde9bd6879ddc32882b",
+    "E01_six_panel_walls_s": [
+      11.96904265502235,
+      13.479934598028194,
+      13.654578721965663,
+      11.83161417604424,
+      13.806098793982528,
+      13.679409444972407
+    ],
+    "E01_conservative_whole_task_charge_s": 81,
+    "E01_actual_complete_charge_s": 89.35
+  },
+  "proposed_cost": {
+    "retained_DENSE_tail_proxy_s": 180.16581205296563,
+    "new_three_panel_proxy_by_arm_s": {
+      "C": 11.96904265502235,
+      "F": 13.806098793982528,
+      "dwell": 13.679409444972407
+    },
+    "new_three_panel_proxy_sum_s": 39.454550893977284,
+    "retained_E01_nonpanel_charge_residual_s": 2.5793216099846177,
+    "nominal_process_projection_s": 222.19968455692754,
+    "support_proposal_s": 30,
+    "nominal_complete_projection_s": 252.19968455692754,
+    "proposed_whole_supervised_task_cap_s": 330,
+    "proposed_complete_cap_including_support_s": 360,
+    "nominal_margin_inside_complete_cap_s": 107.80031544307246,
+    "allocation_released_s": 0,
+    "scientific_invocations_released": 0,
+    "limitations": [
+      "DENSE tail proxy deliberately retains old 32-DENSE and 32-H evaluation/publication work that the new study will not run.",
+      "E01 per-panel windows include base loading and environment constructor work.",
+      "The E01 nonpanel residual is a conservative accounting proxy, not a standalone fresh-learner initialization measurement.",
+      "New seed trajectories, standalone construction/import/publication, contention and focused-check cost are unmeasured.",
+      "No timing pilot, favorable-base rejection, retry or additional panel is part of this proposal."
+    ]
+  },
+  "predictions": {
+    "F_minus_C_probability_UP": 0.75,
+    "F_minus_dwell_probability_UP": 0.65,
+    "owner": "not taken (unattended); unscored"
+  },
+  "engineering_scope_section4": "none",
+  "missing_scientific_recipe_dependency": null,
+  "remaining_execution_dependency": "Root must separately issue a concrete implementation/execution mapping; no single-fit fresh-base runner exists or is accepted for this new binding."
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-05-ucope-post-interface-convergence-01--ucope",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-05-ucope-post-interface-convergence-01",
+  "direction_id": "ucope",
+  "direction_ids": [
+    "ucope"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:ucope:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "single_body_attachment",
+  "body": {
+    "role": "prompt",
+    "source_path": "C:\\Projects\\HMASD\\docs\\research\\candidates\\ucope\\pro_packets\\20260905_post_interface_convergence\\PROMPT_BODY.md",
+    "canonical_filename": "2026-09-05-ucope-post-interface-convergence-01--ucope__00_PROMPT.md",
+    "bytes": 22360,
+    "sha256": "74fa2ba6cf5c266f4b5d5aa4d30cdcc1fad0213a60bf5525fd7d580966fe0574",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-ucope-post-interface-convergence-01\\2026-09-05-ucope-post-interface-convergence-01--ucope__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-ucope-post-interface-convergence-01\\2026-09-05-ucope-post-interface-convergence-01--ucope__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-ucope-post-interface-convergence-01\\2026-09-05-ucope-post-interface-convergence-01--ucope__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "74fa2ba6cf5c266f4b5d5aa4d30cdcc1fad0213a60bf5525fd7d580966fe0574",
+    "references": []
+  }
+}

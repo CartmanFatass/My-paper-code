@@ -1,0 +1,93 @@
+{
+  "mode": "scientific",
+  "handoff_kind": "CLAUDE_CALLER_DIRECT_REACTIVATION",
+  "request_id": "2026-09-05-dish-post-b02-convergence-recovery-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_scope": ["degraded_incumbent_shadow_handover"],
+  "decision_authority": "pro_final",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "conversation_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+  "tab_id": "ab9ba5a0-4979-46e1-9dec-78bdd5e3966b",
+  "tab_lifecycle": "agent-created; closed after archive verification",
+  "model_preflight": {
+    "requested_product_model_first": "GPT-6 Astra",
+    "requested_product_model_first_result": "chatgpt_product_model_unavailable_or_unselected",
+    "matched_product_model": "Latest",
+    "matched_reasoning_effort": "Pro",
+    "reasoning_effort_evidence": {
+      "selectionView": "chatgpt_target_menu_reasoning_slider",
+      "actionOwner": "Power",
+      "min": 0,
+      "max": 4,
+      "value": 4,
+      "targetValue": 4,
+      "selectionMethod": "already_selected_exact_reasoning_effort"
+    },
+    "product_model_evidence": {
+      "selectionView": "chatgpt_target_menu_product_list",
+      "matchedLabel": "Latest",
+      "selectionMethod": "selected_product_menuitemradio_observed"
+    }
+  },
+  "prompt": {
+    "path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-05-dish-post-b02-convergence-recovery-01/2026-09-05-dish-post-b02-convergence-recovery-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "sha256": "4c729a1bd2b7e387f84ac7f3e5b747031a3d125554fff28353d95a369c27ffff",
+    "size_bytes": 578,
+    "source_mode": "paste"
+  },
+  "send_evidence": {
+    "idempotency_key": "2026-09-05-dish-post-b02-convergence-recovery-01",
+    "operation_id": "d40ea19f-2336-4f52-aa66-5a850e0270fd",
+    "send_click_count": 1,
+    "send_attempted": true,
+    "send_attempted_at_epoch_ms": 1788670313836,
+    "first_call_error": "review_user_message_content_mismatch (transient; persisted operation error USER_MESSAGE_CONTENT_MISMATCH)",
+    "recovery_call": "verifyExisting=true, same idempotencyKey, no resend",
+    "provider_user_message_id": "b618646e-95f3-4615-8c5c-dafa34c97f33",
+    "provider_assistant_message_id": "a6b0d72d-5a7b-433f-9176-870a137f6936",
+    "observed_conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "observed_conversation_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+    "wait_status": "COMPLETE"
+  },
+  "short_chat_response": {
+    "path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-05-dish-post-b02-convergence-recovery-01/2026-09-05-dish-post-b02-convergence-recovery-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+    "sha256": "24548e1cfabc40dc864052bb9796a2243229156fa92147a15c9551224fd2b369",
+    "size_bytes": 638,
+    "content_summary": "Reported a GitHub write-capability gap at capture time (no file/commit/comment write route visible in-session); branch reported still at base sha, response path reported 404, issue 4 reported zero comments."
+  },
+  "github_delivery_actual_state_on_direct_readback": {
+    "branch": "codex/pro-dish-b02-convergence-20260905",
+    "base_sha_before_send": "46d9071378a4272e9e1e8ec64d0c0d5abdb9088f",
+    "branch_head_sha_after_send": "bc0808401af81c367b560cd553497707b8c682dd",
+    "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_b02_convergence/archive/RESPONSE.md",
+    "response_path_matches_declared": true,
+    "commit_is_on_declared_branch": true,
+    "github_response_archive_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-05-dish-post-b02-convergence-recovery-01/GITHUB_RESPONSE.md",
+    "github_response_sha256": "cd87b643260d3c14fea5e34ec3de623bc9cbbf8d45770831685a14b9e43ad56a",
+    "github_response_size_bytes": 37017,
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4",
+    "issue_comment_id": 5557093321,
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5557093321",
+    "issue_comment_created_at": "2026-09-06T05:06:00Z",
+    "delivery_comment_archive_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-05-dish-post-b02-convergence-recovery-01/DELIVERY_COMMENT.json",
+    "note": "The captured short chat reply reported a write-capability gap, but the direct GitHub readback performed immediately afterward shows an actual completed delivery (file + issue comment) on the exact declared branch and path, dated after the captured chat reply. Transport preserves both facts without reconciling or interpreting them; Root/DM intake resolves the discrepancy."
+  },
+  "registry_result": {
+    "script": ".agents/skills/hmasd-chatgpt-pro-transport/scripts/bind_conversation.py",
+    "invocation_exit_code": 2,
+    "refusal": {
+      "bound": false,
+      "state": "SOURCE_THREAD_UNVERIFIED",
+      "error": "canonical binding requires source_thread_id"
+    },
+    "note": "Script requires a Codex source_thread_id for canonical em_convergence binding; this Claude CALLER_DIRECT request has no Codex thread identity to supply. Not forced. Registry left unmodified: prior binding for em:degraded_incumbent_shadow_handover:convergence still shows conversation_id 6a9bec54-df00-83e8-9840-46440458f316, state ARCHIVED, request_id 2026-09-05-dish-post-a05-convergence-01, no active_request_id."
+  },
+  "timestamps": {
+    "preflight_and_navigate": "2026-09-06T~06:xx UTC (session-local)",
+    "send_attempted_epoch_ms": 1788670313836,
+    "archive_verified_epoch_ms": 1788671030402,
+    "github_direct_readback_after_archive": "2026-09-06T05:0x-05:1x UTC window (comment created_at 2026-09-06T05:06:00Z)"
+  }
+}

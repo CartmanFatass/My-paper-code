@@ -1,0 +1,43 @@
+{
+  "id": "20260905-dish-011",
+  "created": "2026-09-05T03:56:32-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "DISH A03：选定地面终端定义与普通路径诊断",
+  "context": "已收到完整 CONTINUE。选择一个地形上方两米的地面终端和线性净空定义，用同一保留策略与字面宿主在原坐标各走至多一集，观察真实信息到达至原生服务。零训练，不强制证书或交接，不判断来源价值。",
+  "options": [
+    {
+      "key": "a",
+      "label": "一个明确新宿主与原坐标配对普通轨迹",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "继续字面宿主的重复或学习",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "多高度搜索或制造控制器证书",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "本地改变家族裁决",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "建议采用一个明确的两米地面终端与线性净空定义，在原坐标用同一保留策略各跑至多一集，记录真实到达、协议、动作和服务；不强制触发，也不推断来源价值。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_SELECTION_INTAKE_20260905.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-ground-endpoint-a03-selection",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

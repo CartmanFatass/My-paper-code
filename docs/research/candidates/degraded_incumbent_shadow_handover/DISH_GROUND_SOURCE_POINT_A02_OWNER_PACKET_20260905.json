@@ -1,0 +1,11 @@
+{
+  "question": "是否先观察原宿主的一个原生地面源点，核对实际链路余量和净空见证，再决定是否需要调整宿主？",
+  "changes_if_approved": [{"target": "DISH 现有诊断阶梯", "from": "准备提议存在，但共同源数据、快照与服务均未出现", "to": "固定原第一个坐标的零时刻，只读取一次原生准备态；不加载策略、不推进完整tick、不改物理规则"}],
+  "if_refused": "保留已完成的原前缀诊断和三种子结果，在安全边界按回复修订；不自动增加训练或改变高度。",
+  "evidence_for": [{"path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_RESULT_EVIDENCE_20260905.md", "quote": "Every row has at least one prepare proposal and latch.", "why": "缺口已定位到提议之后、共同源和快照支持之前，单点原生观测比继续猜测训练不足更直接。"}],
+  "evidence_against": [{"path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RBHR_R05_HOST_GENERATOR_AND_RNG_MANIFEST_20260821.md", "quote": "where `epsilon~Normal(0,1 dB)` is independently addressed.", "why": "遮挡仍含随机链路噪声，不能把净空问题直接写成数学上绝无接收或修复已经有效。"}],
+  "uncertainty": ["现有源码与继承规格一致，尚无实现违反规格的证据。", "单点只能给出这个时刻的实际余量，不能替代全路径分布或证明某个高度修改更好。"],
+  "cost": {"compute": "一次原生准备点，预测15秒，上限60秒，无新增训练或策略加载。", "owner_time": "约一分钟异步复核。", "reversibility": "reversible", "waits_on_this": "nothing"},
+  "verdict_text": "选择原第一个坐标的单点原生观测，保留实际链路余量与净空见证，先不更改任何宿主语义。",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_INTAKE_20260905.md"
+}

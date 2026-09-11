@@ -1,0 +1,33 @@
+{
+  "id": "20260904-fsd-009",
+  "created": "2026-09-04T18:54:44-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "decision",
+  "title": "E3 large D0 seed 1：接受第十三个有效单元并按指令收尾",
+  "context": "现有大差异固定时钟第一种子已完成。CM 核对完整学习、评估、路径、位移和 checkpoint，十个文件三处一致；DM 复算四次评估和比较器比例，符合原卡胜任线。接受为第十三个有效 B 单元，不作完整研究判断。依照最新直接指令，本轮收尾后暂停，后继五格不启动。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受完整单元并保留十八格读取规则",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "等完整矩阵后才承认本单元有效",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整技术证据与独立算术支持单元有效，尚不触发任何总体机制分支。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D0_SEED1_INTAKE_20260904.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D0_SEED1_RESULT_EVIDENCE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#fsd-e3-large-d0-seed1-terminal-20260904",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,33 @@
+{
+  "request_id": "2026-09-06-vsp03-shared-service-convergence-01",
+  "recorded_at_utc": "2026-09-07 03:16:36 UTC",
+  "source_sha": "585fe948cdbde4fdb3c2fcf658cd02d848ba5c5f",
+  "task_sha": "e7a83daab6c25444641865d3d8307a15b2beb78b",
+  "bound_handoff_sha": "7ea297b2c70515a953842b456b3feebb4234b2c8",
+  "app_dispatch_args": {
+    "threadId": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+    "prompt": "Execute the handoff packet at C:\\Projects\\HMASD-worktrees\\dm-vsp03-next-20260906\\docs\\research\\candidates\\vsp_03\\pro_packets\\20260906_shared_service_convergence\\HANDOFF.json exactly once.",
+    "model": "gpt-5.6-luna",
+    "thinking": "xhigh"
+  },
+  "app_dispatch_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a06f0e-5eab-7431-8491-e7c2c62705b6\"}"
+      }
+    ],
+    "isError": false
+  },
+  "observation": "One app dispatch accepted. This is not evidence of provider Send, receipt, formed decision or experiment launch.",
+  "provider_send_observed": false,
+  "formed_decision_observed": false,
+  "no_resend": true,
+  "new_experiment_exposure": {
+    "models": 0,
+    "training_seeds": 0,
+    "episodes": 0,
+    "optimizer_steps": 0,
+    "evaluations": 0
+  }
+}

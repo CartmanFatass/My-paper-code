@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-05-github-link-only-roundtrip-01--portfolio",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-05-github-link-only-roundtrip-01",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "variable_n_fleet_churn"
+  ],
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-05-github-link-only-roundtrip-01--portfolio__00_PROMPT.md",
+    "bytes": 709,
+    "sha256": "7914078dac08e8dcc1bff448bc71b64ad5cb57da7f062b47e77a2d4e3a3a699e",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-github-link-only-roundtrip-01\\2026-09-05-github-link-only-roundtrip-01--portfolio__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-github-link-only-roundtrip-01\\2026-09-05-github-link-only-roundtrip-01--portfolio__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-github-link-only-roundtrip-01\\2026-09-05-github-link-only-roundtrip-01--portfolio__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "7914078dac08e8dcc1bff448bc71b64ad5cb57da7f062b47e77a2d4e3a3a699e",
+    "references": []
+  }
+}

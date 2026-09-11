@@ -1,0 +1,57 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-05-portfolio-next-investment-01--portfolio",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-05-portfolio-next-investment-01",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "active_post_churn_population_flow_identification",
+    "acvc",
+    "capability_bound_semantic_currentness",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "ec4g_r1",
+    "eociv_lite",
+    "expressibility_gated_renewal_credit_relay",
+    "finite_resource_relational_inductive_efficiency",
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation",
+    "orbit_shadow_read",
+    "recct_lite",
+    "roster_consistent_latent_exploration",
+    "scope_1s",
+    "semigroup_consistent_duration_model_policy",
+    "ucope",
+    "vap_folr_core",
+    "variable_n_fleet_churn",
+    "vsp_02",
+    "vsp_03",
+    "vsp_c1"
+  ],
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "decision_authority": "pro_final",
+  "source_mode": "single_body_attachment",
+  "body": {
+    "role": "prompt",
+    "source_path": "C:\\Projects\\HMASD-worktrees\\root-integration-02-20260904\\docs\\research\\portfolio\\pro_packets\\20260905_next_investment\\PROMPT_BODY.md",
+    "canonical_filename": "2026-09-05-portfolio-next-investment-01--portfolio__00_PROMPT.md",
+    "bytes": 14906,
+    "sha256": "85c1ce724c63ae8a0ef41e4ca06ef3f8ba264c23a834886b9ecd80d2f3f094ae",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-portfolio-next-investment-01\\2026-09-05-portfolio-next-investment-01--portfolio__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-portfolio-next-investment-01\\2026-09-05-portfolio-next-investment-01--portfolio__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-portfolio-next-investment-01\\2026-09-05-portfolio-next-investment-01--portfolio__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "85c1ce724c63ae8a0ef41e4ca06ef3f8ba264c23a834886b9ecd80d2f3f094ae",
+    "references": []
+  }
+}

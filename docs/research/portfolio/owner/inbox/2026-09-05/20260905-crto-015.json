@@ -1,0 +1,32 @@
+{
+  "id": "20260905-crto-015",
+  "created": "2026-09-05T03:46:12-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "brief",
+  "title": "CRTO B07：中心化仍未修复比较器",
+  "context": "两种子均受比较器限制；种子 1 修正一条 REPLAN 又新错一条，种子 2 不变。整体受限预测成立，但至少一枚胜任并有实质收益的预测被反驳。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "简报区分预测命中与失败，保持单次干预和整个研究家族之间的边界。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CENTERED_LOSS_B07_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b07-centered-loss-result",
+  "brief": "docs/research/portfolio/owner/briefs/commitment_residual_triggered_options/2026-09-05_raw_centered_loss_b07.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

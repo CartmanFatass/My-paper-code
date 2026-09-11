@@ -1,0 +1,8 @@
+{
+  "id": "20260905-root-001",
+  "choice": "ratify",
+  "comment": "所有者在当前 Root 对话回复「同意」；Root 按当前综合 P1 的推荐 B 记录批准，非此前仅同意准备的回复。",
+  "answered_at": "2026-09-05T07:06:59-07:00",
+  "recommended": "ratify",
+  "auto_applied": null
+}

@@ -1,5 +1,68 @@
 # Direction degraded_incumbent_shadow_handover: degraded incumbent shadow handover
 
+## Tested arrival-bridge retention family parked — 2026-09-10
+
+Convergence's complete post-B08 decision parks the retained-A03 finite-training received-
+snapshot retention programme instantiated by HALF_RETAIN versus full learned REPLACE.
+REPLACE remains the development default and no successor is selected. This is a reversible
+direction-family boundary; it does not close the broader ordinary-source agenda or change
+DISH's Portfolio lifecycle, priority, recast count or UAV-entry state.
+
+The active pre-CAS receipt→standby control→learner path was the strongest support for the
+question. The contrary native observation is−6.5 mean service ticks with differences
+−15,0,−8,−3 and four added final invalid commits. The strongest counterweight to parking
+is the small inside±24 effect from one pair and lower mean energy. Full REPLACE/GRU may
+already retain useful information; stale history, finite co-adaptation and run-specific
+variation remain. No equivalence, stable inferiority or isolated memory cause is established.
+Zero ordinary TRAIN/EVAL CAS leaves source-origin and COPY−RETAIN/SHADOW−COPY unestimated.
+
+No next discriminator or allocation is selected. Reentry needs a concrete decision-relevant
+receipt-to-control question and native-service comparison, or an explicit use/research
+decision making independent-pair uncertainty about0.5 worth revisiting. This is not an
+instruction for continued screening or a proof, positive-prior, headroom or census gate.
+Prior B06/B07 and forecast-package stops and the finite B08 evidence remain intact.
+
+Authority: [complete Convergence response](pro_packets/20260910_post_b08_convergence/archive/RESPONSE.md)
+at `b0fe38d19c7b6245a4ce1d2c4b29c4e9a2fc6599`, applied as `PRO_FINAL / OWNER_DELEGATED`
+in [post-B08 conformance intake](DISH_POST_B08_CONVERGENCE_INTAKE_20260910.md).
+
+## B08 arrival-bridge finite observation — 2026-09-10
+
+The one fresh matched pair on retained A03 gives HALF_RETAIN minus REPLACE final service
+−6.5 mean ticks (434.5 versus441), inside the±24 effect band. The four condition differences
+are−15,0,−8,−3; all eight episodes complete1200 ticks. Mean energy is lower, while HALF_RETAIN
+adds four final invalid commits. The frozen negative-mean branch favors REPLACE and ending
+this fixed half-retention candidate's extension; no broader arrival/source-family closure follows.
+
+The receipt-to-standby-control/learner path remains the strongest mechanistic support for
+asking the question: masked training snapshot counts are13263/13949. The strongest contrary
+evidence is the nonpositive service sign in every final condition. A full bridge already
+learning useful retention, stale retained history and finite co-adaptation remain alternatives;
+their causes are not identified. TRAIN and EVAL ordinary CAS counts are zero, leaving source
+origin and COPY−RETAIN/SHADOW−COPY unestimated. The ceiling is one-pair finite whole-policy
+performance; no population equivalence, safety or formal UAV validation follows. Headroom
+remains unmeasured. No next empirical discriminator or successor is selected.
+
+References: [B08 E0](DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_EVIDENCE_20260910.md),
+[B08 intake and decisions](DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_INTAKE_20260910.md),
+[frozen card](DISH_ARRIVAL_BRIDGE_RETENTION_B08_SCIENCE_CARD_20260910.md).
+
+## Accepted arrival-bridge question — 2026-09-10
+
+Convergence selected one narrow B08 performance pair: ordinary receipt replaces the standby
+shadow with the full learned bridge in REPLACE, versus fixed half previous state plus half
+bridge in HALF_RETAIN, followed by unchanged GRU/control/replay. Both are newly trained with
+equal exposure on retained A03; the next discriminator is complete final native service and
+costs. At selection this was an untested finite-learning hypothesis, not a diagnosed overwrite defect.
+Strongest support is a receipt-to-standby-action and learner path active before CAS; historical
+masked samples12321/12309 establish exposure only. Strongest alternative is useful retention
+already learned by full bridge/GRU, while the fixed skip may preserve staleness. The one-pair
+claim ceiling excludes memory necessity, isolated source value and formal UAV validation.
+P62/P67 and B06/B07 adverse readings remain; no old treatment, recast or Portfolio change follows.
+Authority/evidence: [complete Pro response](pro_packets/20260910_arrival_bridge_retention/archive/RESPONSE.md),
+[conformance intake §8](DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md#8-complete-convergence-intake-and-application--2026-09-10),
+[B08 card](DISH_ARRIVAL_BRIDGE_RETENTION_B08_SCIENCE_CARD_20260910.md).
+
 ## Research organization — 2026-09-04
 
 This source belongs to route **N3 — 状态保留、重建与迁移**, in the **成员变化后的恢复** family
@@ -260,3 +323,827 @@ law and full R02 production surface are not B admission gates.
 exactly-once FSM axis. VSP-05 asks whether a proposed handoff should be accepted; DISH's original
 contrast asks which state source should be transferred. Evidence for either axis cannot substitute
 for the other, and no legacy polarity transfers.
+
+## Accepted complete B01 observation — 2026-09-04
+
+**Conclusion and bounded claim.** All three original B01 seeds (11, 29, 47) completed 64 updates
+and the full sixteen-row panel: zero first-valid triggers over 57,600 total prefix ticks. The
+unchanged ordered rule selects **FTS-B0 — TRIGGER_SUPPORT_INSUFFICIENT**, with zero usable seeds.
+No COPY/SHADOW effect is identified; B has no consumption state.
+
+**Strongest support and limitation.** The exact declared panel completed, model/optimizer state
+was finite, and total relative parameter displacement was 0.42465718774783356,
+0.419585027483137 and 0.4196544358013136. No source branch was exposed, so empty-support reducer
+zeros are not source equality and their nonharm Boolean is not observed nonharm. Trigger
+competence, preparation/delivery, application eligibility, terminal/live opportunity and
+seed/budget/panel dependence remain unresolved. No R02 or FOLR polarity transfers.
+
+**Surviving alternative and next discriminator.** Useful shadow preparation may remain hidden
+behind a policy that rarely proposes an application-valid handover at this exposure. Conversely,
+COPY or deadline-bound replay may absorb its value if an opportunity is reached. Replay the
+retained seed-11 checkpoint's original sixteen rows in A/RECON to measure where the exposure
+chain stops, without training or forcing a handover. No tuned B01 headroom is available;
+the five-tick MEI cannot be estimated. No lifecycle or family disposition follows.
+
+Evidence: `N3_DISH_B01_C04_SEED11_RESULT_EVIDENCE_20260904.md`,
+`N3_DISH_B01_C04_SEED11_SUMMARY_20260904.json`, `N3_DISH_B01_C04_SEED11_INTAKE_20260904.md`,
+and `N3_DISH_B01_C04_SEED11_COLLECTION_20260904.md`.
+Seed 29 evidence: `N3_DISH_B01_C04_SEED29_RESULT_EVIDENCE_20260904.md`,
+`N3_DISH_B01_C04_SEED29_SUMMARY_20260904.json`, `N3_DISH_B01_C04_SEED29_INTAKE_20260904.md`,
+and `N3_DISH_B01_C04_SEED29_COLLECTION_20260904.md`.
+Complete evidence: `N3_DISH_B01_C04_RESULT_EVIDENCE_20260904.md`,
+`N3_DISH_B01_C04_SEED47_SUMMARY_20260904.json`,
+`N3_DISH_B01_C04_SEED47_COLLECTION_20260904.md`,
+`N3_DISH_B01_C04_COMPLETE_INTAKE_20260904.md`,
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_SCIENCE_CARD_20260904.md`.
+
+## Accepted retained-prefix A01 measurement — 2026-09-05
+
+**Conclusion and bounded claim.** The retained seed-11 checkpoint exactly reproduced its
+original sixteen no-trigger prefixes, with zero new learning/parameter movement. All 19,200
+prepared inputs were live, with 2,720 renewal opportunities, 2,234 prepare proposals,
+1,131 commit proposals and 19,148 completion-latch ticks. Common-source support, snapshot/
+readiness delivery, emitted intent and native service were all zero. The card reads
+**A01-PREFIX-FUNNEL-OBSERVED**, sixteen **PREPARATION_SUPPORT_GAP(snapshot_delivery)** rows.
+This is A/RECON measurement evidence, not a source-effect estimate; B01 FTS-B0 is unchanged.
+
+**Strongest support and contradiction.** Preparation/latch presence together with full live
+prefixes narrows the missing exposure upstream of source selection. No early terminal
+padding or complete absence of prepare proposals explains these rows. One retained
+checkpoint and zero downstream exposure cannot establish a remedy, source equality,
+headroom, native-host defect or general policy incapacity.
+
+**Surviving alternative and next discriminator.** Ground-source visibility/admission may
+prevent common-source and snapshot support; learned motion and later protocol constraints
+remain alternatives. Qualify that exact native source/spec path before more training or a
+physics change. No new family, recast or lifecycle action follows. Evidence:
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_RESULT_EVIDENCE_20260905.md`,
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_SUMMARY_20260905.json`,
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_COLLECTION_20260905.md`,
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_INTAKE_20260905.md`.
+
+## Accepted native ground-source A02 point — 2026-09-05
+
+**Conclusion and bounded claim.** At the original seed-11 first coordinate and native
+tick 0, one normal prepared point has both camera flags absent and source-hop margins
+-9.303396681040274/-10.285571482315484 dB, both below the 6-dB send threshold. Both
+declared near-ground samples at height 0.703125 fail their terrain+8/+5 clearances.
+The rule reads **A02-ENDPOINT-CLEARANCE-WITNESS**, A/RECON with no model or completed tick.
+
+**Support, contradiction and surviving alternative.** Actual signals agree with the
+inherited host definition and strengthen A01's upstream information-path explanation.
+The code follows the definition; this is not a demonstrated implementation defect.
+The fixed 0/90 heights and nonnegative terrain imply the near-endpoint camera obstruction
+under changed horizontal motion, while noisy blocked radio is not impossible reception.
+One point neither tests a host remedy nor identifies any RETAIN/COPY/SHADOW effect.
+
+**Decision and next discriminator.** The completed node selected **PRO_FINAL CONTINUE**
+for the existing source-selection family, as recorded in
+`DISH_A02_HOST_CONVERGENCE_PRO_INTAKE_20260905.md`. It authorizes a prospectively distinct,
+bounded host qualification; A02 itself establishes no remedy, learner or source effect.
+Evidence:
+`DISH_GROUND_SOURCE_POINT_A02_RESULT_EVIDENCE_20260905.md`,
+`DISH_GROUND_SOURCE_POINT_A02_SUMMARY_20260905.json`,
+`DISH_GROUND_SOURCE_POINT_A02_COLLECTION_20260905.md`,
+`DISH_GROUND_SOURCE_POINT_A02_INTAKE_20260905.md`.
+
+## Final host-qualification Convergence — 2026-09-05
+
+The complete archived response selects **PRO_FINAL CONTINUE** for the existing
+first-application-valid RETAIN/COPY/SHADOW exploratory family. It identifies a concrete
+host-information obstruction that a bounded native-path comparison can discriminate;
+the rationale is not merely that source value remains untested. B01 FTS-B0 and both A
+observations remain valid, R02 remains closed, and no RECAST or Portfolio change occurs.
+
+The next discriminator first needs one prospectively distinct ground-endpoint access
+definition, then one paired original-coordinate ordinary native trace under a fixed
+causal controller. It must observe real arrivals/common SOURCE, snapshot/readiness,
+legal actions and native service as well as camera/filter inputs. Partial restoration
+and failed proposals remain informative. No ray-point-only qualification, forced margin,
+accepted state, readiness or ownership is allowed; no new learner or source-effect study
+is authorized. The locally selected A03 card now declares a terrain-referenced two-metre
+ground terminal, linear ground-linked clearance, the same retained causal policy and
+one ordinary episode per host at the original coordinate. Its literal comparator and
+all failed/partial stages are retained. Its now-complete A03 intake below observes
+restored access and incumbent service with a remaining legal-application gap. See
+`DISH_GROUND_ENDPOINT_PATH_A03_SCIENCE_CARD_20260905.md` and
+`DISH_GROUND_ENDPOINT_PATH_A03_SELECTION_INTAKE_20260905.md`. Decision evidence:
+`DISH_A02_HOST_CONVERGENCE_PRO_INTAKE_20260905.md` and the exact response under
+`external/2026-09-05-dish-a02-host-convergence-01/`.
+
+## Accepted ground-endpoint path A03 — 2026-09-05
+
+**Conclusion and bounded claim.** One complete paired A/RECON trajectory reaches
+**A03-DOWNSTREAM-STAGE-GAP** on the prospectively distinct ground-terminal host.
+Each host has 1,200 live completed ticks. The new host has actual SOURCE adoptions
+287/287, snapshot/readiness deliveries 331/634 and 299 native service ticks, while
+the literal host has none. Both remain with their initial physical owner. Four
+new-host intents carry certificate 0; no application-valid boundary or legal transfer
+occurs. The 299 service ticks all precede any transfer and are not source-selection value.
+
+**Strongest support and contradiction.** The declared endpoint law restores real
+information and ordinary incumbent service without parameter updates or forced signals.
+The absent legal application and four rejected intents prevent full path qualification.
+The complete data agree with the DM's predicted input-restoration/downstream-gap branch;
+test conformance and service under the original owner cannot establish shadow advantage.
+
+**Surviving alternative and next discriminator.** The fixed retained policy's certificate
+inputs and ordinary action/timing predicates remain unresolved. Select a separately carded,
+data-only reconstruction of all four recorded origin-certificate calls at the exact
+post-projection/pre-motion boundary. No new trace, learner, threshold override, source
+intervention, RECAST or Portfolio action is selected. No tuned headroom exists; the B01
+source-effect MEI remains unestimated. Existing RCLE/FOLR/VSP-02 meanings stay separate.
+
+Evidence: `DISH_GROUND_ENDPOINT_PATH_A03_RESULT_EVIDENCE_20260905.md`,
+`DISH_GROUND_ENDPOINT_PATH_A03_SUMMARY_20260905.json`,
+`DISH_GROUND_ENDPOINT_PATH_A03_COLLECTION_20260905.md`,
+`DISH_GROUND_ENDPOINT_PATH_A03_INTAKE_20260905.md`.
+
+## Accepted origin-certificate A04 reconstruction — 2026-09-05
+
+**Conclusion and bounded claim.** The four actual A03 origin certificates are completely
+reconstructed from their retained inputs, selecting **A04-RECORDED-REJECTION-RECONSTRUCTED**.
+Every native/reconstructed value is false. Mahalanobis disagreement exceeds 5.99 and
+service q95 is below 0.60 at all four calls; these are the only failed predicates.
+All state/support and physical/action conditions pass, with no close comparison among
+56 predicates or 84 probability tails. This is adaptive A/RECON evidence, not replication,
+new learning, a remedy or a RETAIN/COPY/SHADOW effect.
+
+**Strongest support and contradiction.** Exact recorded-call agreement and non-close
+failure of both prediction conditions explain the observed rejections. They rule out
+missing preparation/source or the measured action restriction as the rejection predicate
+at these four calls. Zero legal application and transfer still prevent full host-path
+qualification; A03's 299 incumbent service ticks remain outside source-effect evidence.
+q95 failure matches the DM prediction but ties with Mahalanobis failure, rather than
+identifying one uniquely dominant restriction. Headroom and source MEI remain unestimated.
+
+**Surviving alternative and next discriminator.** The retained prediction-head semantics,
+learning signal and finite exposure need separation. A bounded static code map finds
+service outputs trained with a logits loss but sent raw to native probability clipping,
+and no direct Cholesky-head term in the formal training loss. Shared hidden state can
+still change; actual gradient/mask coverage and prediction competence are unmeasured.
+These are potential contract/training explanations, not reproduced defects. Select a
+separately carded synthetic reproduction of that existing boundary before any production
+repair or learned-controller intervention. No new native trajectory, optimizer update
+or source comparison is selected; PRO_FINAL CONTINUE and all N3 constituent IDs persist.
+
+Evidence: `DISH_ORIGIN_CERTIFICATE_A04_RESULT_EVIDENCE_20260905.md`,
+`DISH_ORIGIN_CERTIFICATE_A04_SUMMARY_20260905.json`,
+`DISH_ORIGIN_CERTIFICATE_A04_COLLECTION_20260905.md`,
+`DISH_ORIGIN_CERTIFICATE_A04_INTAKE_20260905.md`.
+
+## Accepted synthetic prediction-head A05 — 2026-09-05
+
+**Conclusion and bounded claim.** The complete original A/RECON call selects
+**A05-SYNTHETIC-BOUNDARY-REPRODUCED**. Both role cases exactly pass raw service logits
+to the native row, separated from their sigmoid references by about 0.575. The actual
+training-head API connects 16 parameter tensors under its declared synthetic scalar,
+with Cholesky weight/bias absent; a genuine full-head positive control connects both
+with finite nonzero gradients. The unchanged native helper gives equal raw/clip q95
+for all three fixed vectors, with linked contrasts 0.3 and 0.25 in two cases and an
+unchanged zero readout in the negative-input case. Parameter displacement is zero.
+
+**Strongest support and contradiction.** Genuine role outputs, the graph positive
+control and real-helper contrast reproduce the previously static interface explanation.
+This does not measure B01 learner masks/full loss gradients or prediction calibration,
+and changing the shared hidden representation can still alter covariance indirectly.
+The strongest contrary fact remains no legal handover in A03/A04; all 299 A03 service
+ticks belong to the incumbent. Synthetic interface facts establish no repair efficacy,
+SHADOW advantage or generic transfer effect. No tuned source-effect headroom is added.
+
+**Surviving alternative and next discriminator.** Actual training support, finite exposure,
+calibration, joint certificate feasibility and checkpoint/state co-adaptation remain.
+Any subsequent object must separately define how to distinguish training/forecast
+support from a controller correction and then its native consequence. This intake ends
+only the approved original A05 investment; it selects no successor or production change.
+Existing PRO_FINAL CONTINUE, prior valid evidence, closed R02 and constituent identities
+remain. Evidence: `DISH_A05_APPROVED_RESULT_EVIDENCE_20260905.md`,
+`a05_approved_20260905/formal-summary.json`, `DISH_A05_APPROVED_CM_TECHNICAL_RECORD_20260905.md`
+and `DISH_A05_APPROVED_INTAKE_20260905.md`.
+
+## Post-A05 Convergence and selected package B02 — 2026-09-05
+
+The complete formed response selects **PRO_FINAL CONTINUE, not RECAST**, through one
+new real learner/package B on the A03 ground-terminal host. It compares the inherited
+controller with a joint sigmoid service-interface and mean/Cholesky likelihood package,
+using one paired training seed, sixteen updates and four ordinary final-checkpoint
+episodes per arm. The primary quantity is whole-episode native service, with a +24-tick
+useful-effect scale. A native gain could be incumbent-only and would not establish
+calibration, source value or stable superiority.
+
+The concrete support is restored ordinary information/service plus the bounded A04/A05
+interface explanation. The strongest contradiction remains no observed legal handover
+or repair benefit; changed covariance can affect snapshots or certificate permissiveness.
+Component attribution, co-adaptation and COPY/RETAIN/replay alternatives remain unresolved.
+Current evidence-spec §§11.8–11.9 permit this performance comparison without prior exact
+reconstruction, support census or complete mechanism localization. No such additional
+diagnostic is selected, and no B02 result or code acceptance is asserted.
+
+The next discriminator is the selected bounded B02 pair under 1,800 seconds per complete
+arm invocation, with all ordinary and passive-label learning work charged. Source-derived
+work counts are explicit; matching whole-run wall/CPU remain unmeasured. Historical B01,
+A01–A05 and the closed R02 retain their meanings, with no change to other N3 constituents.
+Evidence: `DISH_POST_A05_CONVERGENCE_INTAKE_20260905.md`,
+`DISH_FORECAST_PACKAGE_B02_SCIENCE_CARD_20260905.md`, and the exact response under
+`pro_packets/20260905_post_a05_convergence/archive/`.
+
+## Accepted real forecast-package B02 pair — 2026-09-05
+
+**Conclusion and bounded claim.** Both original real learners complete sixteen updates
+and four ordinary final-checkpoint evaluations on the A03 host. CONTROL and package mean
+service are each470 ticks, with four paired differences0 versus the +24-tick MEI. This is
+a valid inside-MEI B observation: no native package gain established at this exposure,
+not equivalence or stable superiority. All eight episodes reach1200 ticks, with matching
+row energy, zero hard events and zero legal transfer. Source contrasts remain unestimated.
+
+**Support and contradiction.** Each arm has65536 ordinary transitions,512 actual optimizer
+steps and nonzero, different parameter movement. No failed/negative row or old checkpoint
+is substituted. Very large finite package loss/gradient spikes remain contrary optimization
+evidence, without post-result repair. Target-MSE and likelihood losses are not comparable
+accuracy scores; training BCE does not replace held-out or native performance. One paired
+seed and four development conditions do not establish population uncertainty or tuned headroom.
+
+**Surviving alternative and next discriminator.** Finite competence, objective scale,
+ordinary action selection and shared-state/co-adaptation remain possible explanations;
+none is diagnosed by endpoint equality. The DM ends the selected pair's spending without
+automatically scaling the unchanged package, and returns the direction question to the
+same Convergence node: select a concretely justified next real B or the smallest supported
+pause/scope disposition. No new object, recast or Portfolio change is selected locally, and
+no exact cause/census/upper/replay prerequisite is added. Complete charged pair compute is
+642.66s wall and669.61CPU-s, below the original per-arm ceilings. H/scratch remain unmeasured.
+
+Evidence: `DISH_FORECAST_PACKAGE_B02_RESULT_EVIDENCE_20260905.md`,
+`DISH_FORECAST_PACKAGE_B02_INTAKE_20260905.md`,
+`DISH_FORECAST_PACKAGE_B02_DM_COMPUTED_20260905.json`, `b02_20260905/`.
+
+## Accepted renewal-boundary A01 measurement — 2026-09-06
+
+**Conclusion and bounded claim.** The post-B02 Convergence decision (PRO_FINAL, archived at
+`bc0808401`) selected one A/RECON observation of the policy-to-native renewal boundary on the
+unmodified B02 ordinary evaluation path. It is complete and reads branch 1 on both windows:
+with the retained seed-61 FORECAST_PACKAGE checkpoint (update 16, zero parameter movement) and
+two initial 32-tick windows (K8, K4), the `renew` flag the policy consumes at tick n is the native
+flag of the transition that ended at tick n−1. At every native admission tick the policy read
+`renew = 0`, copied the held command and emitted zeros, which native incorporated; at every
+following tick it read `renew = 1` and emitted a nonzero fresh command, which native did not
+incorporate. Counts over 64 live ticks: 12 native admissions with policy renew false, 12 policy
+renewals with native admission false, 0 matched renewals, 40 matched non-renewals, 0 held-command
+changes (per window 4/4/0/24 and 8/8/0/16; DM predicted 4 and 8). This is a measured interface
+discrepancy at that scope, not a service, learning or equivalence result.
+
+**Support and contradiction.** Tick-0 flags are correct (countdown 4 and 2), so the reset
+boundary contributes nothing; the eval path consumes no random draws; the checkpoint digest
+matches the card and B02. Prepare and commit proposals were likewise emitted only on
+non-admission ticks and the CAS gate never fired, so whether they suffer the same lag at their
+own native gate is unresolved. Reading the source, the training collection stacks the same
+pass-through flag as `renew`, `prepare_mask` and `commit_mask`, so the B01/B02 learners very
+likely trained under the same lag and never had a fresh motion command incorporated in ordinary
+rollouts; this is an inference the A did not measure. B02's identical 470-tick service in both
+arms is consistent with it and not thereby explained.
+
+**Disposition.** Accepted `OWNER_DELEGATED` (ledger 2026-09-06 rows 7–8). No local correction,
+retraining, repeat or widening: the card's branch-1 rule and the Pro decision reserve the
+timing/interface correction, and any B01/B02 reinterpretation, to a separately selected object
+under the same Convergence node. The post-A01 Convergence packet
+(`pro_packets/20260906_post_a01_convergence/`, request `2026-09-06-dish-post-a01-convergence-01`)
+carries the DM recommendation of one bounded wrapper-boundary correction with the same two
+windows as its acceptance check; the direction parks at this clean boundary after the Send.
+Implementation was by Grok Build under hub review (integrated at `ffa23bf8d`); runner wall
+under 0.1 s per profile on `wsl_4070`, peak RSS 363 MB, the 120 s bound closed.
+
+Evidence: `DISH_RENEWAL_BOUNDARY_A01_SCIENCE_CARD_20260905.md`,
+`DISH_RENEWAL_BOUNDARY_A01_CM_RECORD_20260905.md`,
+`DISH_RENEWAL_BOUNDARY_A01_RESULT_INTAKE_20260905.md`, `a01_renewal_boundary_20260905/`,
+`DISH_POST_B02_CONVERGENCE_INTAKE_20260905.md`.
+
+## A02 ordinary-renewal correction accepted; B01/B02 qualified reinterpretation — 2026-09-06
+
+`DISH-RENEWAL-BOUNDARY-A02-CORRECTION` (A/RECON, card
+`DISH_RENEWAL_BOUNDARY_A02_CORRECTION_SCIENCE_CARD_20260906.md`; Grok Build implementation
+reviewed by `hmasd-reviewer` and the hub, integrated at `3f4d447f6`) ran on `wsl_4070` (check
+then formal, 120 s bound, runner wall 0.064 s / 0.092 s, peak RSS 363 MB, zero training exposure,
+checkpoint `504329d6…` verified). Result, formal: on the two A01 windows the policy's consumed
+permission equals native admission on all 64 ticks (0 disagreements of either kind), 12 matched
+renewals (t = 4, 12, 20, 28 and t = 2, 6, …, 30) and 52 matched non-renewals; at all 12
+admissions the emitted command is nonzero, differs from the held vector, and the held vector
+after the step equals native's float64 projection of it; 0 held changes outside admissions; no
+early terminal, no hard event, CAS 0; service 60/64 (as A01), energy sum 9220.97 (A01 8563.59).
+Card row 1 first applicable: the local correction is accepted on the observed windows
+(`DISH_RENEWAL_BOUNDARY_A02_RESULT_INTAKE_20260906.md`); Pro's expected counts matched, the DM's
+service sub-prediction was wrong. The qualified reinterpretation
+(`DISH_B01_B02_QUALIFIED_REINTERPRETATION_INTAKE_20260906.md`) keeps B02's 572/447/433/428 and
+its inside-MEI reading as outcomes of the executed interface, in which learned fresh motion
+commands were never incorporated at admission; the training-side lag is source-supported
+inference, unmeasured; B01 and A03–A05 are not invalidated; no quarantine, no "timing explains
+the null". The corrected boundary is the ordinary path from here. The next object (a learning
+comparison on the corrected interface or otherwise) goes to `em:dish:convergence`.
+
+## Post-A02 Convergence: B03 selected on the corrected boundary — 2026-09-06
+
+The complete archived post-A02 Convergence response (`pro_packets/20260906_post_a02_convergence/archive/RESPONSE.md`,
+commit `d7710921`, Issue 4 comment 5560502547; intake
+`DISH_POST_A02_CONVERGENCE_INTAKE_20260906.md`, `PRO_FINAL`) continues the first-application
+RETAIN/COPY/SHADOW exploratory family with exactly one next investment: `DISH-FORECAST-PACKAGE-B03`
+(B/EXPLORE), the B02 two-arm comparison CONTROL versus FORECAST_PACKAGE re-asked as a new object on
+the corrected ordinary renewal boundary (`3f4d447f6`, both arms), with one new paired seed 73
+(master = SHA256 of `DISH-FORECAST-PACKAGE-B03/seed/73`, hex `b938a93e…`), sixteen updates per arm,
+four final-checkpoint evaluation conditions, MEI +24 mean service ticks unchanged, B02's six-row
+reading rule, and a 1,800 s per-arm / 3,600 s summed ceiling with one shared preparation cost
+split between the arms. Not a recast; no zero-training witness of the seed-61 checkpoints; no
+held-only reference row; B02 is not "rerun as repaired" and its inside-MEI observation persists
+whatever B03 shows. The node rejected two DM formulations ("no partner co-adaptation";
+"fresh motion was never incorporated" as more than source-supported inference) and corrected the
+cost framing (B02's 337 s / 299 s are planning references, not per-arm projections). Launch
+preparation is one focused check on `wsl_4070` that also closes the Windows `test_package.py`
+collection gap; no new A. Card `DISH_FORECAST_PACKAGE_B03_SCIENCE_CARD_20260906.md`; CM objective
+`DISH_FORECAST_PACKAGE_B03_CM_OBJECTIVE_20260906.md` (Grok Build thin entry, hub review).
+R02 stays closed; B01, A01–A05 and B02's qualified readings stand; no Portfolio change.
+
+## Adverse forecast-package B03 on the corrected boundary — 2026-09-06
+
+`DISH-FORECAST-PACKAGE-B03` (B/EXPLORE, card `DISH_FORECAST_PACKAGE_B03_SCIENCE_CARD_20260906.md`;
+thin entry by Grok Build reusing the B02 study, integrated at `ad01757c4`) completed both arms
+on `wsl_4070` (shared focused check 21 passed including `test_package.py`, C = 4.94 s; CONTROL
+211.04 s, FORECAST_PACKAGE 196.18 s; pair charge 412.16 s of 3,600 s; two earlier CONTROL
+attempts failed in the launch wrapper before any learner work and carry no exposure). Result:
+`Delta_B03 = −272.0` mean service ticks against MEI +24 (CONTROL 460.5, package 188.5; rows
+452/92, 458/222, 449/129, 483/311); the pair's only hard events (`separation_breach` 1,
+`invalid_commit` 17) are in the package arm; no legal transfer; package energy 4–7 % lower.
+Card row 3 applied: **adverse** for the joint forecast package at this exposure
+(`DISH_FORECAST_PACKAGE_B03_RESULT_INTAKE_20260906.md`); no further seeds or variants of the
+unchanged package. Independent fact recorded at its own ceiling: from an identical, near-saturated
+update 1 (98 % of training lane-ticks served) both arms' training service collapses by update 16
+(CONTROL 435, package 1,340 of 4,096) and the final checkpoints serve 38–40 % (CONTROL) and
+8–26 % (package) of the 1,200-tick horizon; the package's loss and gradient norm explode
+(finite) at updates 2 and 10–13. The DM's inside-margin prediction was wrong; the node's
+prospective judgement held. B02's inside-MEI reading on the lagged path stands; B02 and B03 are
+not two replicates. The family's next decision (end the package family; a zero-training witness
+of the initial and update-16 policies on the corrected boundary; a learner-stability B; or park)
+is put to `em:dish:convergence` (`pro_packets/20260906_post_b03_convergence/`).
+
+## Post-B03 Convergence: the forecast-package branch ends; one zero-update controller witness — 2026-09-06
+
+The complete post-B03 Convergence response (`pro_packets/20260906_post_b03_convergence/archive/RESPONSE.md`
+at commit `f85016d76`, evidence base `3f71098dc`, intake
+`DISH_POST_B03_CONVERGENCE_INTAKE_20260906.md`, `PRO_FINAL`) continues the first-legal-application
+RETAIN/COPY/SHADOW agenda but **ends the expansion investment in the current joint forecast-package
+branch**: no further seeds, longer training or coefficient variants of the four-dimensional-NLL
+(0.025) plus sigmoid-interface package on this host and budget. B02 (lagged interface, inside MEI)
+and B03 (corrected interface, `Delta_B03 = −272`) stay as the branch's evidence and are not two
+replicates; ending the branch is a bounded next-step choice, not a family-null theorem; reopening
+needs a new, independently reasoned scientific change through the existing decision process.
+
+The response narrows three DM statements: "sixteen updates made both arms worse than
+initialization" is not yet an observation (the initial controller was never evaluated on the
+1,200-tick panel; the training curves are staged, not monotone: CONTROL update 11 = 4,093 > update
+1 = 4,016); "update 1 identical" holds only for training service and support counts, not
+loss/gradient; the B03 card §5 rationale misquoted B02 as 447 vs 572 (both arm means were 470).
+"No legal transfer" is limited to the eight evaluation episodes; CONTROL recorded one training
+legal transfer.
+
+**Sole next object `DISH-INIT-WITNESS-A01` (A/RECON,
+`DISH_INIT_WITNESS_A01_SCIENCE_CARD_20260906.md`)**: on B03's four development conditions with the
+recorded `evaluation_rows[].reset` reused verbatim, evaluate the seed-73 zero-update initialization
+in two interface views (CONTROL raw logits; FORECAST_PACKAGE sigmoid on the same parameters, no new
+weight draw), zero-update normalization state, fresh recurrent state per episode, 1,200-tick fixed
+range; the two update-16 controllers are read-only reuse of the accepted B03 rows. Primary
+`D_a = (1/4) Σ_r (J_a,16,r − J_a,0,r)` per arm, 24 mean service ticks as a symmetric descriptive
+scale, five-row reading table, no outcome buys a learner B or restores the package. Whole-item
+cap 120 s on `wsl_4070`, at most 9,600 actual evaluation ticks, zero training. Input rule: read
+the saved zero-update snapshot if one exists, otherwise reconstruct it once from the recorded
+master and the existing B03 initializer and label it reconstructed; if neither yields a
+determinate input, return that gap. Not selected: learner-stability B, held-only rows, B02
+checkpoints, PARK, RECAST. No Portfolio change.
+
+## Zero-update controller witness A01: both trained controllers below their initialization — 2026-09-06
+
+`DISH-INIT-WITNESS-A01` (A/RECON, card `DISH_INIT_WITNESS_A01_SCIENCE_CARD_20260906.md`; thin entry
+by Grok Build, integrated at `3c0ed5c87`) ran on `wsl_4070` as attempt r2 (`COMPLETE` 8/8, whole-item
+charge 16.23 s of 120 s; r1 stopped in the focused check because the node worktree's sparse
+checkout lacked the `docs/` evidence input, no exposure). The seed-73 zero-update initialization
+(reconstructed once from the recorded master, norm 38.24996300787587, Welford counts 0) serves
+467 / 478 / 942 / 938 ticks on the four B03 conditions (mean 706.25) with zero hard events and zero
+transfers, identically in the CONTROL (raw-logit) and FORECAST_PACKAGE (sigmoid) interface views.
+Against the recorded update-16 rows: `D_C = −245.75` (452/458/449/483) and `D_P = −517.75`
+(92/222/129/311); card row 1 with the package also dropping, read as a **shared conditional
+before/after loss** on this seed and panel (`DISH_INIT_WITNESS_A01_RESULT_INTAKE_20260906.md`). "Sixteen
+updates degraded whole-episode evaluation service in both arms" is now an observation conditional on
+this seed, initialization and panel; it attributes the loss to no component and is not a general
+learning-harm claim. CONTROL's loss sits in the two TERRAIN rows (−493, −455); its TARGET rows are
+inside the band. The identical views are an observation; the DM's inference (the service-probability
+input acts only around prepare/commit/transfer, none of which the initialization triggered) is
+labelled as such. The DM's predictions (row 2; materially different views) were wrong on both
+counts. B03's package-adverse reading, B02's qualified reading, B01 and A01–A05 are unchanged. The
+successor (a named learner-stability B, a second-seed witness, a B02-checkpoint witness, or park) is
+put to `em:dish:convergence` (`pro_packets/20260906_post_witness_convergence/`).
+
+## Post-witness Convergence: one low-learning-rate CONTROL B (B04) — 2026-09-06
+
+The post-witness Convergence response (`pro_packets/20260906_post_witness_convergence/archive/RESPONSE.md`,
+delivered at `27730bf75`, **PRO_FINAL**, intake `DISH_POST_WITNESS_CONVERGENCE_INTAKE_20260906.md`)
+continues the first-legal-application RETAIN/COPY/SHADOW agenda, keeps the forecast-package branch
+ended, and selects exactly one new B/EXPLORE: **`DISH-CONTROL-LOW-LR-B04`**, the inherited CONTROL
+learner (raw-logit interface, mean-MSE, PPO, normal Welford updates) with AdamW learning rate 3e-4
+(`CONTROL`) versus 3e-5 on every original parameter group (`LOW_LR`), one new paired seed 89
+(master = sha256 of `DISH-CONTROL-LOW-LR-B04/seed/89`), sixteen updates per arm, plus a four-row
+zero-update reference of the same initialization on the raw interface and the four seed-89 resets
+derived by the inherited coordinate law. Primary `Delta_LR = mean_r (J_LOW_LR,16,r − J_CONTROL,16,r)`;
+ancillary `D_CONTROL,new`, `D_LOW_LR,new` against the seed-89 initial rows; scale +24 mean ticks;
+seven-row reading; cap 1,800 s per arm and 3,600 s for both, the shared item (initialization,
+reference rows, focused check, publication) charged once. The witness fact motivates the change
+but does not diagnose an over-large learning rate: the object is a performance hypothesis, not a
+localized repair. Pro withdrew the DM's frozen-Welford preference (a component intervention that
+does not identify the cause) and the one-epoch variant (it cuts optimizer steps 512 → 128); a
+standalone second CONTROL seed is not bought first because the new CONTROL arm plus its own
+reference already reports whether the before/after loss repeats. The identical-views explanation
+stays an inference. Card `DISH_CONTROL_LOW_LR_B04_SCIENCE_CARD_20260906.md` and objective
+`DISH_CONTROL_LOW_LR_B04_CM_OBJECTIVE_20260906.md` frozen at `171924cb6` after a read-only code map:
+the engine rebuilds AdamW with `lr=3e-4` at every update and then restores the previous
+checkpoint's optimizer state, so the rate in effect is the one carried by the initializer payload;
+the thin entry rewrites both parameter groups' `lr` in that payload before training and records the
+rate read back from the trainer's checkpoint after every update. Implementation by Grok Build
+(`grok/dish-control-low-lr-b04-20260906`); no outcome authorizes another learning rate, a frozen
+normalization, reopening the package or a Portfolio change.
+
+## B04 result: a tenfold smaller AdamW rate loses less, the before/after loss repeats on seed 89 — 2026-09-06
+
+`DISH-CONTROL-LOW-LR-B04` ran complete on `wsl_4070` at `ef23d9270` (chain 432 s of 3,600 s; shared
+item 15.84 s, CONTROL 210 s, LOW_LR 206 s; 512 optimizer steps and 65,536 transitions per arm; the
+rate read back from the trainer checkpoint after every update was `[3e-4, 3e-4]` and `[3e-5, 3e-5]`
+at all sixteen updates). Rows (zero-update raw reference / CONTROL / LOW_LR): TARGET/K8 617 / 92 / 760,
+TARGET/K4_TO_K12 312 / 151 / 150, TERRAIN/K8 279 / 148 / 275, TERRAIN/K4_TO_K12 367 / 225 / 162; means
+393.75 / 154.0 / 336.75. **`Delta_LR = +182.75`** (rows +668, −1, +127, −63); **`D_CONTROL,new = −239.75`**;
+**`D_LOW_LR,new = −57.0`**; scale 24. CONTROL's TARGET/K8 row terminated natively at tick 684
+(`separation_below_15`), the first evaluation-row termination in the family; no legal transfer in any of
+the twelve evaluation episodes or in either arm's training; parameter displacement 8.62 (CONTROL) versus
+1.91 (LOW_LR). Card rows 2, 4 and 6 apply together: a relative signal with no adverse LOW_LR companion,
+but LOW_LR still below its initialization by more than the scale, mixed row signs with the mean dominated
+by the terminated condition, incumbent-only. Across seeds the CONTROL learner ends far below its own
+zero-update controller on both training instances (seed 73: −245.75; seed 89: −239.75) at different
+absolute levels (706.25 versus 393.75). The DM's primary prediction held in its mixed-rows form; the
+competing prediction (LOW_LR recovers the initialization) failed. Intake
+`DISH_CONTROL_LOW_LR_B04_RESULT_INTAKE_20260906.md` (evidence `control_low_lr_b04_20260906/`, checkpoints
+retained on the node); accepted as a valid complete B/EXPLORE result under the unattended delegation;
+the successor question (an evaluation-across-updates B on seed 89, a second seed of the LR pair, both
+combined, the source question, or park) is put to `em:dish:convergence` through
+`pro_packets/20260906_post_b04_convergence/`. No card is frozen and nothing is launched from this record.
+
+## Post-B04 Convergence: a second independent paired seed of the learning-rate comparison (recorded, not executed) — 2026-09-06
+
+The post-B04 Convergence response (`pro_packets/20260906_post_b04_convergence/archive/RESPONSE.md`,
+delivered at `a9718a45e`, **PRO_FINAL**, intake `DISH_POST_B04_CONVERGENCE_INTAKE_20260906.md`) continues
+the RETAIN/COPY/SHADOW agenda, keeps the forecast-package branch ended, and selects only the DM's option 2:
+a **seed-101 independent paired follow-up of the B04 learning-rate comparison** (B/EXPLORE, own card and
+outputs): the same CONTROL 3e-4 versus LOW_LR 3e-5 arms on every original parameter group, master =
+sha256 of `DISH-CONTROL-LOW-LR-B04/seed/101`, one new STRUCTURED initialization and empty Welford state
+shared by both arms and by a four-row zero-update raw-interface reference, four seed-101 resets by the
+inherited coordinate law, sixteen updates, update-16 only, the four development conditions and the
+terminated-row treatment unchanged. Primary `Delta_101 = mean_r (J_LOW_LR,16,101,r − J_CONTROL,16,101,r)`
+with `D_CONTROL,101`, `D_LOW_LR,101`; scale +24; seven-row reading; seed 89's +182.75 listed beside the
+new value (an equal-weight two-seed mean may be appended as description only); caps 1,800 s per arm and
+3,600 s for both, the shared item charged once, no inherited balance; B04's 432.4 s chain is a planning
+reference, not a promise. Not chosen: retraining seed 89 with evaluation across updates (a new training B,
+no independent pair, no cause identification), the combined five-checkpoint variant (44 evaluation
+episodes, no timing basis for "most information per charge"), a source study on the zero-update
+controller (no ordinary legal first-application object exists; the DM's "no legal transfer on the
+corrected path" overstated the record: B03 CONTROL had one training transfer), and park (a real
+treatment's finite signal has a concrete repeatability test). The two CONTROL before/after losses change
+no earlier reading; the source quantity stays unestimated; no Portfolio change. **Under the owner's
+18:11 PDT stop the decision is recorded only: no card, no CM objective, no implementation, no launch.**
+The first request (`-01`) pinned an evidence reference that predated the packet's aux files and was
+returned by Pro with three 404s; corrected and resent as `-02` (hub error, see the intake).
+
+## Accepted post-B04 reading and seed-101 discriminator — 2026-09-06 resume
+
+The current owner resume lifts the historical execution stop. The accepted node decision is now
+made concrete by `DISH_CONTROL_LOW_LR_B05_SCIENCE_CARD_20260906.md`: one independent seed-101
+CONTROL/LOW_LR pair, its own raw zero-update reference, sixteen updates and final-only evaluation.
+It asks whether the same LR comparison still has development value on another random instance;
+the source quantity remains unestimated. No additional family, source intervention or Portfolio
+disposition is implied.
+
+The full post-B04 response also corrects three overstatements in the prior B04 narrative above.
+The +182.75 mean remains a real complete-panel comparison despite mixed rows; the old row-4
+application stays historical and is not carried forward as an all-rows-positive requirement.
+LOW_LR had native costs (invalid commits and higher energy, including both K4_TO_K12 rows), so
+"no adverse LOW_LR companion" does not mean harmlessness. Tick-684 separation was an early native
+termination; it was not the first terminal flag in the family. B04's dominant +668 row contributes
+167 ticks of its mean but the existing evidence does not identify how much of that difference was
+caused by termination rather than preceding motion/control-state differences. The prediction's
+mixed-sign component held; its magnitude prediction did not predict +182.75.
+
+Strongest support: a real LR intervention with all sixteen parameter-group read-backs, nonzero
+learning and complete native outcomes gave a useful seed-89 mean increment. Strongest
+contradiction: concentration, two non-positive rows, LOW_LR's -57 before/after loss and no legal
+evaluation transfer. Surviving alternatives include seed/condition-specific motion and termination,
+joint normalization/parameter/recurrent/auxiliary changes, and an incumbent-only benefit unrelated
+to source selection. The next discriminator is seed101's complete pair and reference, preserving
+all native bad outcomes and reporting seed89 separately. Two observed pairs still cannot establish
+stable superiority, safety, general learning or RETAIN/COPY/SHADOW value.
+
+References: complete `pro_packets/20260906_post_b04_convergence/archive/RESPONSE.md` §§一–五
+(immutable delivery `a9718a45e`); `DISH_POST_B04_CONVERGENCE_INTAKE_20260906.md` §2;
+`DISH_CONTROL_LOW_LR_B05_SCIENCE_CARD_20260906.md` §§1–6. No seed-101 outcome is asserted here.
+
+## B05 result: another useful mean LR increment, with native costs and no source estimate — 2026-09-06
+
+The seed101 independent CONTROL/LOW_LR pair completed at `1d87e0219`: reference/CONTROL/LOW_LR
+means 297.25/280.75/517.0, `Delta_101=+236.25`, before/after -16.5/+219.75. Paired rows are
++413/-277/+542/+267; all twelve reference/final rows ran their complete 1200 ticks, with no
+early termination. LOW_LR therefore has a second useful mean comparison, and in this instance
+improves its own initialization rather than merely losing less. Seed89 remains +182.75 with
+LOW_LR -57 versus its own reference; the two-seed +209.5 mean is descriptive, not stability.
+Two paired training instances are not eight independent condition samples.
+
+The new gain does not require an early CONTROL termination, without explaining the old +668
+row. Its strongest contradiction is TARGET/K4_TO_K12 (-277 against CONTROL, -116 against
+reference) and LOW_LR's 108/0/101/0 invalid commits versus CONTROL's four zeros. LOW_LR energy
+is lower than CONTROL in all four equal-duration rows; the other six hard-event classes are
+zero. This supports bounded development interest, not dominance, harmlessness or safety.
+The DM's near-band magnitude and repeated large CONTROL-loss predictions missed; only the
+positive sign/mixed-row component held.
+
+All sixteen LR read-backs, real learner counts and finite records are complete; parameter
+displacement is 8.425/1.956 from common norm38.262. Ordinary training transfers are 3/0,
+while all twelve evaluation rows have zero transfers. The complete service comparison is
+incumbent-only; no matched RETAIN/COPY/SHADOW source effect has been estimated. Smaller LR,
+its coupled AdamW decay, normalization, parameters, recurrence, auxiliaries and data changes
+remain jointly unlocalized. The forecast-package branch stays ended and no earlier evidence
+is reinterpreted as a source result.
+
+Accepted B/EXPLORE intake applies card rows1,3-positive,5-termination and6. Full machine wall
+432.82s, charged215.30/217.52s including all shared work and the retained initial focused setup
+failure; no scope or runtime cap breach. The next discriminator is returned to Convergence
+as a choice among a specific further bounded question and a narrow stop; no automatic third
+seed or new family follows. References: `DISH_CONTROL_LOW_LR_B05_RESULT_INTAKE_20260906.md`,
+`control_low_lr_b05_20260906/TECHNICAL_ACCEPTANCE.json`, `RUN_SUMMARY.json`, and the frozen card.
+
+## Accepted post-B05 discriminator: ordinary execution law — 2026-09-06
+
+Complete Convergence at immutable `db0bbfd8e1d96b06e8c6e8aa9bfa70787fe9a9cd` continues the
+existing first-ordinary-legal-application RETAIN/COPY/SHADOW agenda and selects only
+**DISH-SAMPLED-EXECUTION-B06, B/EXPLORE**. One new seed113 LOW_LR learner at 3e-5 runs sixteen
+updates; its single final checkpoint supplies four modal and eight fixed sampled episodes,
+with four own-initial raw modal references inside the same B. The primary is each condition's
+two-sample mean minus modal service, averaged across four conditions; MEI +24, complete native
+outcomes retained. The whole object, including necessary checks and publication, has one new
+1800s cap. No preceding path A, third LR pair, intermediate selection or source fork is selected.
+
+The bounded reason is now precise: two finite positive mean LR comparisons retain LOW_LR as
+a development candidate, while code distinguishes sampled training actions from modal final
+execution. Comparing those execution laws at one final state directly tests native performance.
+It does not diagnose modal execution as the cause of zero evaluation transfers or retrospectively
+explain the LR gains. B05's -277 condition and 209 invalid commits, B04's initial-relative loss
+and early termination, and all zero-transfer final panels remain contradictions. The source
+quantity stays unestimated; a legal event would establish only an observed path, not an eligible
+source cut or COPY−RETAIN/SHADOW−COPY value.
+
+Surviving alternatives include useful exploration of motion/proposal combinations, noise costs,
+seed/condition effects and the unchanged recurrent/normalization/auxiliary couplings. The next
+discriminator is the complete sampled-versus-modal primary with events, energy and terminal
+exposure; the prospective low-confidence prediction is Delta_exec<=-24. No B06 outcome exists.
+The response conforms to current B burdens; the card freezes an object-local width1 RNG address
+under the existing backend namespace. This boundary records the decision/card only, with no CM
+implementation or launch. No recast, C promotion or Portfolio change follows.
+
+References: `DISH_POST_B05_CONVERGENCE_INTAKE_20260906.md` §§1–5;
+`DISH_SAMPLED_EXECUTION_B06_SCIENCE_CARD_20260906.md` §§1–7;
+`pro_packets/20260906_post_b05_convergence/archive/RESPONSE.md` §§三–七.
+
+## B06 result: joint sampled execution loses service and adds native costs — 2026-09-07
+
+One complete seed113 LOW_LR B/EXPLORE result compares the same update16 controller under
+ordinary modal execution and the frozen joint Gaussian-motion/Bernoulli-intent rule. Initial,
+final modal and final sampled means are369.75/662.25/584.75. Delta_exec=-77.5; all four condition
+means are negative (-92.5/-41/-94/-82.5). The frozen adverse/zero-transfer branches apply and the
+low-confidence Delta_exec<=-24 prediction is a magnitude/sign hit. The current development
+choice is to retain modal in this instance and stop adding runs of this tested joint rule.
+
+Strongest support is the negative complete primary with increased invalid-commit and energy
+means in every condition. Final modal/sample invalid-commit means are3.5/31.875 per episode;
+sample energy mean is4642.6427 higher. All16 rows complete1200 ticks. Training separately has
+1030 invalid commits,3 separation breaches and35 terminal events over65536 ordinary transitions.
+There is no evaluation early termination or missing-primary explanation for the loss.
+
+The limits remain one training instance, two samples per condition and jointly changed action
+components. Two individual samples beat modal; positive overall modal/initial (+292.5) and
+sampled/initial (+215) means retain the latter's TERRAIN/K8 -57 row. The sampled/initial
+comparison mixes learning and execution interfaces. No causal claim identifies motion noise,
+intent noise, normalization or the cause of earlier LR gains. B05's +236.25 support and its
+-277 condition/209 invalid commits remain separate evidence.
+
+All reference/final rows and this learner have zero legal transfers. First-transfer ticks are
+null; source-origin eligibility and COPY–RETAIN/SHADOW–COPY value remain unestimated. This does
+not imply transfer impossibility, SHADOW worthlessness or a direction-level null. No membership,
+role-ownership, information or native reward change is inferred.
+
+The scientific next choice is returned to the existing Convergence node: recommend the narrow
+stop on this joint-execution exploration, or require a specifically justified bounded next
+object inside the existing source agenda. A fresh independent training seed is an unselected
+alternative for learning-seed uncertainty; component variants are unestimated, not automatic
+new arms. The prepared request has not been sent. No broader family closure, PARK, recast,
+C promotion or Portfolio change is applied locally.
+
+Support: `DISH_SAMPLED_EXECUTION_B06_RESULT_INTAKE_20260907.md` §§1–7;
+`DISH_SAMPLED_EXECUTION_B06_RESULT_EVIDENCE_20260907.md` (integrated33db0d860);
+`sampled_execution_b06_20260907_run01/DM_READBACK.json`; frozen card §§4–7;
+`pro_packets/20260907_post_b06_convergence/EXPOSURE_AND_COST.json`.
+
+## Accepted post-B06 boundary: stop the tested joint-rule extension — 2026-09-07
+
+Complete Convergence at immutable `f7b58f1b88d7282f98ca6be531e9b4c27f85b690` is a conforming
+**PRO_FINAL** direction decision: stop current extension of the tested joint Gaussian-motion /
+Bernoulli-intent rule on the corrected A03 host with the existing LOW_LR learner and ordinary
+renewal boundaries; retain modal execution as this instance's development default. No new A,
+B or scientific invocation is selected. The first-ordinary-legal-application RETAIN/COPY/SHADOW
+agenda remains open; no whole-direction PARK, CLOSE, RECAST or Portfolio action follows.
+
+The bounded reason is B06's complete -77.5 sampled-minus-modal mean and four adverse condition
+means (-92.5/-41/-94/-82.5), with invalid-commit and energy means increasing in every condition.
+The adverse and zero-transfer card branches apply; the low-confidence <=-24 prediction hits
+its sign/threshold. All 16 evaluation episodes complete 1200 ticks, so early evaluation stopping
+or a missing primary does not explain this finite loss. Complete charged wall remains 226.02 s;
+this decision buys no new exposure.
+
+Strongest contradiction: only one trained controller and two samples per condition were tested;
+two sampled episodes win (+14/+3), modal improves 292.5 over initialization, and sampled improves
+215 overall while retaining TERRAIN/K8 -57. That last contrast combines learning and execution.
+Another learner or component-only rule could change sign. Joint motion/intent sampling changes
+future observations and recurrent state, so event increases do not isolate a noise component.
+These limits prevent a population negative or causal diagnosis without forcing another seed
+before this finite development stop.
+
+All reference/final rows and the B06 learner have zero legal transfers. Source-origin eligibility
+and COPY−RETAIN/SHADOW−COPY value remain unestimated, not zero; private label clones are not
+ordinary source applications. Native training costs (1030 invalid commits, 3 separation breaches,
+35 terminal events), prior B04/B05 LR gains and their adverse conditions remain separate facts.
+B06 is not a third LR pair. No safety, stable superiority or transfer-impossibility claim is made.
+
+The next scientific discriminator, if separately selected for a concrete decision, could be a
+new independent controller's native sampled-minus-modal contrast; component-only performance
+remains another unestimated question. Neither is selected now. The finite measured comparison
+already answers B06's chosen question; no exact search, forced transfer or full causal diagnosis
+is required. No tuned-baseline/upper headroom record exists, and this absence does not negate B06.
+Portfolio receives the clean return through Root and owns the next bounded task assignment.
+
+References: `DISH_POST_B06_CONVERGENCE_INTAKE_20260907.md` §§1–7;
+`pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md` §§1–7;
+`DISH_SAMPLED_EXECUTION_B06_RESULT_INTAKE_20260907.md` §§2–7. Prior delivery blockers and
+prepared-only statements remain historical provenance; this section records the accepted answer.
+
+## Accepted P53 source boundary — 2026-09-08
+
+Source reconnaissance identifies each physical vehicle's already-observed applied acceleration
+in actor indices8:10 and retained `actor_raw` training fragments. Current motion uses a direct
+`3*tanh(m)` mean. Prepare is selected from the incumbent recurrent copy and commit from the
+standby shadow copy before serialization in the owner's native slot. The actor's repeated
+prepare/warmup fields are not the native readiness/version/origin certificate. Native certification
+uses additional joint source, prediction, geometry and timing state; private future labels and
+their forced promotion remain supervision, not ordinary application evidence.
+
+This supports one source-grounded question about a fixed own-command input inside the motion
+mean, with the accepted direct-mean learner as the same-information comparator. It supplies no
+observed performance gain or B06 cause. Strongest contrary case: the generic network already
+sees the input, projection already handles applied slew, and persistence can worsen tracking.
+The proposed next discriminator is one matched new training pair's native service contrast;
+selection remains with Convergence. No successor, source-value estimate, launch, recast or
+Portfolio disposition is applied. The accepted post-B06 narrow stop remains unchanged.
+
+Reference: `DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md` §§1–8, particularly the
+source/information map, ordinary mean comparison, contrary outcome and zero-execution boundary.
+
+## Accepted P53 discriminator: own applied command in the mean — 2026-09-08
+
+Complete Convergence at immutable `ddb4c9ff20167837c99d146b2177c3e784066411` is a
+conforming **PRO_FINAL** direction decision selecting only **DISH-OWN-COMMAND-MEAN-B07,
+B/EXPLORE**. One new matched seed127 pair compares `3*tanh(m+a_prev/3)` with the newly
+trained direct mean `3*tanh(m)`. The fixed input is each physical vehicle's pre-decision
+raw actor acceleration8:10 from its incumbent/shadow copy. It changes how already
+available own information reaches the motion proposal under the existing partially
+observed multi-agent host. Prepare remains incumbent-owned; commit remains standby-shadow
+owned and serialized in the native owner's slot. No certificate or privileged mask is added.
+
+Both arms retain STRUCTURED initialization, LOW_LR3e-5, common exogenous streams, raw
+Gaussian likelihood/noise, modal final execution and all native projection, information,
+reward and timing semantics. Each arm receives sixteen updates/65536 transitions/512
+optimizer steps, four own-initial modal rows and four final modal rows. The primary is
+the mean of four final OWN-minus-DIRECT native-service differences at update16; MEI+24
+ticks (2% of1200), opposite scale−24. Complete cap is1800s/arm and3600s/pair, including
+shared work counted once. Initial-relative changes and costs remain companion facts.
+
+Strongest support is the inspected own-input path in both live behavior and stored replay,
+making a competent same-information learner comparison possible without a diagnostic
+prerequisite. Strongest contradiction is redundancy with the existing network input and
+native slew projection, or harmful persistence of a bad acceleration. Other certificate
+conditions can still block transfer. The input path gives no legal-transfer guarantee,
+causal account of B06, stable superiority or uniquely MARL benefit. Native partner/summary
+features keep the accepted A03 information ceiling; a strict fresh-message decentralized
+claim is unavailable.
+
+B06's−77.5 joint-sampling loss, all adverse condition means, increased invalid commits and
+energy, two positive sampled exceptions and zero transfers remain unchanged. Earlier LR
+means and adverse conditions stay separate. COPY−RETAIN/SHADOW−COPY value remains
+unestimated; the existing joint-rule stop is not reopened. No tuned-baseline/upper
+headroom record exists. A future one-pair B result can support only a finite native-service
+signal; transfer observations and source value are separate quantities.
+
+The low-confidence positive-sign prediction is pending and MEI crossing uncertain. The
+next discriminator is the selected pair's complete native final-service contrast, with
+adverse conditions, actual terminal exposure, energy and hard events preserved separately.
+This intake records selection only: no new implementation, RNG master, learner or run.
+The existing route continues through a prospective card and full CM specification; no
+second Send, recast, C promotion, UAV-validation entry or Portfolio disposition follows.
+
+References: `DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md` §9;
+`pro_packets/20260908_p53_own_command_mean/archive/RESPONSE.md` §§一–七;
+the adjacent exact chat receipt, Transport facts and Issue4 comment snapshot.
+
+## B07 native-service result and narrow stop — 2026-09-08
+
+The sole matched seed127 **B/EXPLORE** pair gives final OWN_COMMAND_MEAN557.75 versus
+DIRECT693 mean service ticks: **−135.25**, below the frozen−24 opposite scale. Condition
+differences are−221,+74,−329,−65. Both real learners completed16 updates/65536 transitions/
+512 optimizer steps; all16 initial/final modal rows completed1200 ticks. The card's negative
+branch is applied at object tier: **retain DIRECT and stop this fixed own-command mean's
+current extension**. No unchanged extra seed, arm, coefficient tuning or diagnostic is selected.
+
+The bounded claim is a native-service loss on this observed pair, not stable inferiority,
+universal rejection of own-command parameterization, mechanism identification or source-value
+evidence. DIRECT improves+164.5 from its own initialization and OWN+55.75, with individual
+initial-relative losses retained. These changes do not rebase the final primary or isolate
+learning speed. The prior low-confidence positive-sign prediction missed.
+
+Strongest remaining support for OWN is the+74 final condition, fewer final invalid commits
+(32 versus119) and positive own-initial mean change. Strongest contradiction is the mean
+loss, three negative conditions and greater native energy in every final condition
+(mean+13715.5899), all at equal1200-tick duration. TRAIN is separate: OWN has4405 versus4366
+invalid commits and2 versus1 separation breaches. No event-count or training proxy rescues
+the final service result. The already recorded persistence caution remains a possible
+explanation, alongside redundant information/projection and changed control/co-adaptation;
+the experiment does not identify the cause.
+
+Zero ordinary legal transfers occur in every evaluation row and both training arms. Native
+service remains valid ordinary/incumbent evidence; origin eligibility and COPY−RETAIN/
+SHADOW−COPY value remain unestimated. The accepted information ceiling, absent tuned/upper
+headroom, earlier B06 negative and LR means/adverse rows remain. H/resource gaps and unmeasured
+syntax-check cost limit their own quantities, not the complete service comparison.
+
+No further B07 discriminator is selected at this intake. A next experiment requires a
+specifically justified new comparison; this result provides no automatic successor or
+source-value answer. Whole-direction lifecycle, priority, recast count and UAV status are
+unchanged. This is the existing card's narrow stop, not closure of the source agenda.
+
+References: `DISH_OWN_COMMAND_MEAN_B07_RESULT_EVIDENCE_20260908.md` §§1–5;
+`DISH_OWN_COMMAND_MEAN_B07_RESULT_INTAKE_20260908.md` §§2–6;
+frozen card §§3–5 and `own_command_mean_b07_20260908_run01/` evidence.
+
+## P62 accepted scope: narrow stops and no successor — 2026-09-08
+
+Complete Convergence at immutable `0086cfd7e8f7326fbadf879f844b757f661e8809` is a
+conforming **PRO_FINAL** decision selecting no successor. Retain DIRECT and the already
+applied stops of B07's fixed own-command mean and B06's joint sampled-execution rule.
+The bounded post-B07 assessment advanced no distinct intervention with a supported
+native-value rationale. This does not close or recast the retained-host ordinary-source
+family; its RETAIN/COPY/SHADOW agenda remains unresolved without a continuing assessment
+or experiment selected in this round.
+
+Strongest support is B07's−135.25 native-service mean and energy increase in all four
+conditions, B06's separate−77.5 loss, and no nominated successor. The two treatments and
+estimands are different and cannot be pooled as source-family replication. Strongest
+contrary evidence to a broader stop remains B07's+74 condition and fewer final invalid
+commits, both moved learners and positive own-initial means, prior LOW_LR gains with
+adverse conditions, and B05 CONTROL's three ordinary training transfers.
+
+Neither this bounded screening nor the negative means identify a persistence or auxiliary
+gradient cause. Other legal parameterizations remain possible. Current zero transfers
+leave origin eligibility and COPY−RETAIN/SHADOW−COPY value unestimated; the A03 information
+ceiling remains. DIRECT is a development default, with no optimality, safety or stable
+superiority claim. There is no tuned-baseline/upper headroom record, and none is required
+to justify a future specifically chosen B.
+
+No next empirical discriminator is selected. The no-successor scope question is answered;
+this round allocates no new card, seed, diagnostic or scientific exposure. It makes no
+recast, C or Portfolio lifecycle/priority decision and no UAV-validation entry.
+
+References: `DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md` §8;
+`pro_packets/20260908_p62_post_b07_scope/archive/RESPONSE.md` §§一–七, immutable commit above;
+B07 E0/intake and the previous B06/LR evidence retained in the preceding sections.
+
+## P67 source-path distinction — 2026-09-08
+
+The resumed source assessment confirms that ordinary source-state selection is distinct
+from B07's mean and B06's sampled-execution rule. The native snapshot carries18 forecast/
+control fields; it does not transmit the128-dimensional incumbent GRU state. The snapshot
+bridge updates the standby shadow's existing history. At a legal application, source
+promotion instead selects/mixes that history and the full old-incumbent history before
+subsequent control. These are different information paths, with the A03 ceiling preserved.
+
+No new source effect is measured. B07's zero ordinary transfers leave the conditional
+contrast unestimated; B05 CONTROL's three training transfers preserve path existence.
+Own-history control, copying and causal reconstruction remain alternatives, without an
+observed source defect, replay-absorption result or unique-information claim. The bounded
+P67 assessment nominates no new intervention or empirical discriminator. P62's narrow
+stops and the unresolved ordinary-source agenda remain; no broader closure/recast follows.
+
+Reference: `DISH_P67_SOURCE_STATE_REENTRY_INTAKE_20260908.md` §§2–6 and its scoped
+source/literature/count record `evidence/2026-09-08-p67-source-state-reentry.json`.

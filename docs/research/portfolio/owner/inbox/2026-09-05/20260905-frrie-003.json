@@ -1,0 +1,43 @@
+{
+  "id": "20260905-frrie-003",
+  "created": "2026-09-05T02:14:20-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "R06 采用模块入口，删除重复启动与转发",
+  "context": "原布局超过编排预算。CM 与 reviewer 在改代码前同意模块入口、单个固定学习率开关和发布处的固定身份；预计编排为 23/79，但最终必须按真实差异复核。科学参数、比较器、工作和分支均不变。",
+  "options": [
+    {
+      "key": "a",
+      "label": "采用模块入口和单学习率传递",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "重复三参数转发方案",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "稀释统计分母或接受超限候选",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "修改科学问题以回避实现",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "真实删除手工路径设置和重复转发，保持已冻结对象，预算并未豁免。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R06_MODULE_ENTRY_LAYOUT_INTAKE_20260905.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_LR003_R06_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r06-module-layout",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

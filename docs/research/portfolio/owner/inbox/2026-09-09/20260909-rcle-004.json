@@ -1,0 +1,86 @@
+{
+  "id": "20260909-rcle-004",
+  "created": "2026-09-09T15:22:06-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "object",
+  "kind": "close-call",
+  "title": "RCLE恢复后下一对训练：小收益与暂缓接近",
+  "context": "已完成的恢复比较使主要U下降0.01322，低于0.05；所有学习端点恢复时间仍到40，四个12人格碎片化变差。推荐另选一对同法新独立训练观察收益与代价是否再现，但暂缓也是可信选项。本次实际动作仅发布建议，无新卡或调用分配。",
+  "options": [
+    {
+      "key": "propose-one-pair",
+      "label": "建议另选一对新独立训练",
+      "consequence": "只发布方向内建议；Root另行排序分配、DM冻结后续卡前不运行。"
+    },
+    {
+      "key": "defer",
+      "label": "暂缓不变学习法的后续",
+      "consequence": "保留当前完整结果，暂不为同法分配新对，不改方向生命周期。"
+    },
+    {
+      "key": "change-question",
+      "label": "先明确改法的新问题",
+      "consequence": "改变权重、基线或额度属于新问题；须先明确对应比较，当前不运行。"
+    }
+  ],
+  "recommended": "propose-one-pair",
+  "auto_applied": "propose-one-pair",
+  "dm_reason": "两条主路径均有小正收益且完整成本有限，一对新训练能观察其与碎片化代价是否再现；低于预定效应尺度使暂缓仍是接近选项。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_RESULT_INTAKE_20260909.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_RESULT_EVIDENCE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L134",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "恢复比较已完成，下一步是否优先考虑一对同法同额度的新独立训练，而非暂缓这项小收益？本次只发布建议，不冻结新卡或分配调用。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_RESULT_INTAKE_20260909.md §7",
+        "from": "当前恢复额度已完成，后续未分配",
+        "to": "在Root另行排序、DM冻结卡并明确分配后，用一对新独立训练观察U小收益及碎片化代价是否再现"
+      }
+    ],
+    "if_refused": "保留完整恢复结果及所有失败事实，暂缓该不变学习法的下一对；不改变方向生命周期，也不偷偷更换权重、基线或训练额度。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_RESULT_INTAKE_20260909.md §3",
+        "quote": "Both primary paths favor W100: +0.0134358724 and+0.0130126953.",
+        "why": "两个预定主路径和八格U均值均有小幅改善；完整真实学习比较足以支持考虑一个有界B后续。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_RESULT_INTAKE_20260909.md §5",
+        "quote": "Complete W100 wall 70.95s≤600s, reference 2.59s≤30s; logical sum 73.54s.",
+        "why": "完整运行成本可供后续投影，无须先增加诊断搜索。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_RESULT_INTAKE_20260909.md §2",
+        "quote": "abs(Delta_U)<0.05, both G_U small and tau saturated — No useful benefit shown by this 200-update comparison; end this spend and return to object selection.",
+        "why": "当前结果低于预定有用尺度，恢复未改善；重复小效果的研究价值未必高于暂缓。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_RESULT_INTAKE_20260909.md §3",
+        "quote": "It **worsens in all four\nN_after=12 cells**, while improving in the four N_after=8 cells.",
+        "why": "分配碎片化在四个12人格变差，简单参考仍远强；不能只报道主要指标。"
+      }
+    ],
+    "uncertainty": [
+      "现有完整端点只形成一个训练种子对，场景区间不反映训练种子差异。",
+      "新的一对可能无收益或出现相反结果，必须原样保留，不以全种子改善或显著性为继续门槛。",
+      "旧信号11原因未明；新调用未复发不能证明修复。"
+    ],
+    "cost": {
+      "compute": "本次建议零新增调用。若另行选择：2臂×200×64训练加4个2048场景面板，共33792回合、2162688步、400次反传；历史完整臂/参考合计152.78秒供投影，拟保留600秒/学习臂、1500秒全链上限。",
+      "owner_time": "可异步选择支持或暂缓，无需回复才能完成当前交付。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；无新运行在等待所有者批准"
+    },
+    "verdict_text": "Recommend **(a)** as a bounded proposal only. Both primary means favor W100 at modest complete cost, and a new independent training pair can show whether the U gain and F tradeoff recur beyond this selected seed.",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_RESULT_INTAKE_20260909.md"
+  },
+  "starred": true
+}

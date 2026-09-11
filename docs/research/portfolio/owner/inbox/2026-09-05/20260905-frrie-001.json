@@ -1,0 +1,37 @@
+{
+  "id": "20260905-frrie-001",
+  "created": "2026-09-05T02:05:23-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "恢复原 R06 的有界工程任务",
+  "context": "所有者 2026-09-05 最新指令：继续自动推进任务。R05 有效结果不变；R06 仍未运行。先在保存字节上核对导入问题，再以真实缩减修复编排预算；符合原卡后允许一次新远端运行。",
+  "options": [
+    {
+      "key": "a",
+      "label": "恢复原对象的诊断、精简实现和符合后的执行",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "维持已被撤销的暂停",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "直接运行未接受候选或重跑 R05",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "按所有者当前指令继续既有对象，同时保留原结果和候选未获接受的事实。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R06_OWNER_DIRECT_RESUME_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r06-owner-direct-resume",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,73 @@
+{
+  "id": "20260904-dish-022",
+  "created": "2026-09-04T18:41:22-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "DISH A01：保留检查点的交接阶段诊断",
+  "context": "只读重走第一个保留检查点的原16行，定位交接阶段的观察缺口。绑定结构为 systems / information flow，问题来自两名智能体的局部信息、准备消息和交接时序。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "继续一次原检查点原面板的只读诊断，预测450秒，上限600秒。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在安全边界停止该诊断，保留完整触发不足结果，不自动追加训练。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按回复在后续启动前修订卡片，已完成结果保留。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "来源干预没有发生，先记录现有交接路径比改变训练或强制交接更能定位下一问题。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n3-dish-b01-complete-intake",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否先用保留的第一个检查点重走原面板，记录交接链停在哪一步，再决定后续训练？",
+    "changes_if_approved": [
+      {
+        "target": "DISH 当前探索阶梯",
+        "from": "三种子完整结果为触发不足，原因未定位",
+        "to": "新增一次只读前缀诊断：固定第一个检查点、原十六行，不训练或强制交接"
+      }
+    ],
+    "if_refused": "在下一个安全边界按回复修订或停止这项诊断；已完成的触发不足结果和方向状态保留，不自动增加训练预算。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_RESULT_EVIDENCE_20260904.md",
+        "quote": "There are **zero usable seeds out of three**, with **zero triggered rows out of 48**.",
+        "why": "来源干预尚未发生，先定位暴露链比继续猜测来源价值更能决定下一步。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_SCIENCE_CARD_20260904.md",
+        "quote": "Counts locate observed absence; they cannot identify a causal repair by themselves.",
+        "why": "一个检查点的阶段计数只能定位观察缺口，不能证明修复有效或代表其他策略。"
+      }
+    ],
+    "uncertainty": [
+      "可能是没有准备提议、消息条件不足、时序不合或提前终止；现有摘要无法区分。",
+      "诊断不估计影子状态增益，也不填补已调优基线的提升空间记录。"
+    ],
+    "cost": {
+      "compute": "一次只读前缀诊断，预测450秒，上限600秒；没有新增训练或额外种子。",
+      "owner_time": "约一分钟异步复核。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "选择一次保留检查点的原面板诊断，先定位缺失的交接阶段，再决定最小下一步。",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_COMPLETE_INTAKE_20260904.md"
+  }
+}

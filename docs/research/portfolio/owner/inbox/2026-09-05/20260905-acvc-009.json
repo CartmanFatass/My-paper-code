@@ -1,0 +1,33 @@
+{
+  "id": "20260905-acvc-009",
+  "created": "2026-09-05T04:24:13-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "ACVC：接受真实上界并应用原 HC-C 规则",
+  "context": "唯一真实计算给出的精确收益上界为 0.2139371，低于预设 0.25；输入、成本、完整计数和原始分数核对一致。接受结果后执行此前已经决定的固定宿主停止规则。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受完整结果",
+      "consequence": "执行原 HC-C：结束该固定宿主的 learner 投资并停在方向边界，Portfolio 生命周期不变。"
+    },
+    {
+      "key": "b",
+      "label": "指出具体缺失或不一致后退回",
+      "consequence": "在明确证据缺陷时处理其有效性，不改阈值、不为了结果重跑。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "原始结果、固定系数与 dual、信息放松、完整成本和实际准入均符合冻结卡，精确比较严格低于门槛。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_INTAKE_20260905.md",
+    "docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#acvc-actual-upper-r03-intake-20260905",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

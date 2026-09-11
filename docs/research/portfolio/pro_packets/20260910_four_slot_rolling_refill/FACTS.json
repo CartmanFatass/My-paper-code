@@ -1,0 +1,366 @@
+{
+  "recorded_at_utc": "2026-09-11T00:58:48.821422+00:00",
+  "assignment": {
+    "main_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+    "authoring_sync_sha": "c1bdb2fd209d796119dfdeaa8b57f84cfa0e5583",
+    "trees_equal": true,
+    "target_advancing_directions": 5,
+    "currently_advancing": [
+      "flexible_skill_duration"
+    ],
+    "vacant_slots": 4,
+    "remaining_active": [
+      {
+        "direction": "acvc",
+        "lifecycle": "ACTIVE",
+        "priority": "MEDIUM"
+      },
+      {
+        "direction": "capability_bound_semantic_currentness",
+        "lifecycle": "ACTIVE",
+        "priority": "HIGH"
+      },
+      {
+        "direction": "commitment_residual_triggered_options",
+        "lifecycle": "ACTIVE",
+        "priority": "MEDIUM"
+      },
+      {
+        "direction": "degraded_incumbent_shadow_handover",
+        "lifecycle": "ACTIVE",
+        "priority": "MEDIUM"
+      },
+      {
+        "direction": "finite_resource_relational_inductive_efficiency",
+        "lifecycle": "ACTIVE",
+        "priority": "HIGH"
+      },
+      {
+        "direction": "metric_ground_transport_allocation",
+        "lifecycle": "ACTIVE",
+        "priority": "MEDIUM"
+      },
+      {
+        "direction": "roster_consistent_latent_exploration",
+        "lifecycle": "ACTIVE",
+        "priority": "MEDIUM"
+      },
+      {
+        "direction": "semigroup_consistent_duration_model_policy",
+        "lifecycle": "ACTIVE",
+        "priority": "HIGH"
+      },
+      {
+        "direction": "ucope",
+        "lifecycle": "ACTIVE",
+        "priority": "HIGH"
+      },
+      {
+        "direction": "vap_folr_core",
+        "lifecycle": "ACTIVE",
+        "priority": "MEDIUM"
+      },
+      {
+        "direction": "variable_n_fleet_churn",
+        "lifecycle": "ACTIVE",
+        "priority": "HIGH"
+      },
+      {
+        "direction": "vsp_02",
+        "lifecycle": "ACTIVE",
+        "priority": "LOW"
+      },
+      {
+        "direction": "vsp_03",
+        "lifecycle": "ACTIVE",
+        "priority": "LOW"
+      },
+      {
+        "direction": "vsp_c1",
+        "lifecycle": "ACTIVE",
+        "priority": "MEDIUM"
+      }
+    ],
+    "excluded_parked": [
+      {
+        "direction": "active_post_churn_population_flow_identification",
+        "lifecycle": "PARKED",
+        "priority": "LOW"
+      },
+      {
+        "direction": "ec4g_r1",
+        "lifecycle": "PARKED",
+        "priority": "LOW"
+      },
+      {
+        "direction": "eociv_lite",
+        "lifecycle": "PARKED",
+        "priority": "MEDIUM"
+      },
+      {
+        "direction": "expressibility_gated_renewal_credit_relay",
+        "lifecycle": "PARKED",
+        "priority": "MEDIUM"
+      },
+      {
+        "direction": "orbit_shadow_read",
+        "lifecycle": "PARKED",
+        "priority": "LOW"
+      },
+      {
+        "direction": "recct_lite",
+        "lifecycle": "PARKED",
+        "priority": "MEDIUM"
+      },
+      {
+        "direction": "scope_1s",
+        "lifecycle": "PARKED",
+        "priority": "LOW"
+      }
+    ],
+    "fsd_conditional_fallback_reserved": "metric_ground_transport_allocation",
+    "restricted_or_send_uncertain": [
+      "capability_bound_semantic_currentness",
+      "finite_resource_relational_inductive_efficiency",
+      "variable_n_fleet_churn"
+    ],
+    "owner005_preserved": true,
+    "all_prior_audit_rows_preserved": true
+  },
+  "routing": {
+    "source_thread_id": "01a08d62-3e51-7983-b7c2-bc4292af3f15",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+    "binding": "portfolio:cross_direction",
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b"
+  },
+  "current_author_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_steps": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "replay": 0,
+    "profiling": 0,
+    "source_tests": 0,
+    "test_fixtures": 0,
+    "support_search": 0,
+    "provider_sends": 0
+  },
+  "parameter_displacement": "not applicable: no learner",
+  "owner_reviews_at_preparation": [],
+  "recommendation_only": "A; no Portfolio option applied",
+  "options": {
+    "a": {
+      "primary": [
+        "ucope",
+        "roster_consistent_latent_exploration",
+        "vap_folr_core",
+        "acvc"
+      ],
+      "fallback_order": [
+        "vsp_03",
+        "vsp_c1"
+      ],
+      "complete_numerical_runtime_caps_s": [
+        3300,
+        300,
+        0,
+        360
+      ],
+      "sum_complete_caps_s": 3960,
+      "fallback_caps_s": [
+        0,
+        0
+      ]
+    },
+    "b": {
+      "primary": [
+        "ucope",
+        "roster_consistent_latent_exploration",
+        "vsp_03",
+        "acvc"
+      ],
+      "fallback_order": [
+        "vap_folr_core",
+        "vsp_c1"
+      ],
+      "complete_numerical_runtime_caps_s": [
+        3300,
+        300,
+        60,
+        360
+      ],
+      "sum_complete_caps_s": 4020,
+      "fallback_caps_s": [
+        0,
+        0
+      ]
+    }
+  },
+  "prospective_work": {
+    "ucope": {
+      "source_facts_path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_FACTS_20260910.json",
+      "source_commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "exposure": {
+        "independent_matched_training_instances": 1,
+        "fresh_fits": 2,
+        "train_episodes_per_fit": 2048,
+        "final_eval_episodes_per_fit": 64,
+        "train_episodes_total": 4096,
+        "eval_episodes_total": 128,
+        "native_train_team_steps": 1048576,
+        "native_eval_team_steps": 32768,
+        "native_team_steps_total": 1081344,
+        "explicit_resets": 4224,
+        "constructor_resets": 2,
+        "rollouts_per_fit": 1024,
+        "rollouts_total": 2048,
+        "epochs_per_rollout": 4,
+        "Adam_calls_per_fit": 4096,
+        "Adam_calls_total": 8192,
+        "actor_replay_GRU_rows_total": 20971520,
+        "actor_acting_GRU_rows_total": 5406720,
+        "global_critic_replay_rows_total": 4194304,
+        "per_arm_train_renewal_bounds": [
+          1310720,
+          2621440
+        ],
+        "L_credit_rows_excluding_final_tick_bounds": [
+          1310720,
+          2611200
+        ],
+        "per_arm_final_eval_renewal_bounds": [
+          40960,
+          81920
+        ],
+        "new_search_or_counterfactual_trajectory_calls": 0,
+        "extra_numerical_validation_runs": 0,
+        "interim_evaluations": 0,
+        "G_H_or_old_T_fits": 0
+      },
+      "parameters": {
+        "common_actor": 32134,
+        "global_critic": 34177,
+        "duration_head": 2242,
+        "L_residual_baseline": 2209,
+        "L_trainable_total": 70762,
+        "F_trainable_total": 66311,
+        "F_stored_total_including_frozen_head": 68553
+      },
+      "work_law": {
+        "F_duration_head_forward_rows": "6*N_train_draws+2*N_eval_draws",
+        "L_duration_head_forward_rows": "2*N_train_draws+4*N_credit_rows+2*N_eval_draws",
+        "duration_head_dense_MACs_per_row": 2208,
+        "L_residual_forward_rows": "(1 acting old prediction+4 regression epochs)*N_credit_rows",
+        "L_residual_forward_rows_bounds": [
+          6553600,
+          13056000
+        ],
+        "L_residual_dense_MACs_per_forward_row": 2176,
+        "L_residual_dense_forward_MACs_bounds": [
+          14260633600,
+          28409856000
+        ],
+        "backward_and_Adam_cost": "additional work, unit seconds unmeasured",
+        "primitive_denominator": "E*H for both policy terms; agent/event contributions summed, no duration/event reward average"
+      },
+      "cost_proposal": {
+        "authorized_now_s": 0,
+        "L_complete_fit_cap_requested_s": 1800,
+        "F_complete_fit_cap_requested_s": 1200,
+        "summed_scientific_cap_requested_s": 3000,
+        "all_additional_runtime_support_cap_requested_s": 300,
+        "support_includes": [
+          "implementation/check machine work",
+          "source staging/preparation",
+          "Monitor runtime",
+          "collection",
+          "analysis",
+          "publication",
+          "closeout"
+        ],
+        "complete_cap_requested_s": 3300,
+        "L_runtime_prediction_s": null,
+        "F_runtime_prediction_s": null,
+        "historical_reference_8703_T_nested_s": 743.3080151620088,
+        "historical_reference_8703_F_nested_s": 776.6612845610362,
+        "historical_reference_8701_T_nested_s": 729.1363350299653,
+        "historical_reference_8701_F_nested_s": 708.7234487819951,
+        "historical_panel_count": 3,
+        "proposed_panel_count": 1,
+        "limit": "Historical nested fit walls include2048 training and192 evaluation episodes; proposed64 final evaluations. No full-wall scaling, inherited5400 budget, hidden profiling or transfer of savings. Actual added baseline/clip/backward seconds remain unknown."
+      }
+    },
+    "rcle": {
+      "fresh_fits": 1,
+      "untrained_helpers": 6,
+      "train_updates": 200,
+      "train_episodes": 12800,
+      "eval_episodes": 6144,
+      "native_ticks": 1212416,
+      "neural_agent_claim_decisions": 2293760,
+      "neural_candidate_scores": 13762560,
+      "learned_invocation_cap_s": 150,
+      "reference_invocation_cap_s": 10,
+      "all_support_cap_s": 140,
+      "complete_cap_s": 300,
+      "future_wall_prediction_s": null
+    },
+    "acvc": {
+      "fresh_fits": 1,
+      "train_episodes": 512,
+      "evaluation_roles": 3,
+      "eval_episodes": 192,
+      "native_ticks": 180224,
+      "Adam_calls": 1024,
+      "native_invocation_cap_s": 270,
+      "all_support_cap_s": 90,
+      "complete_cap_s": 360,
+      "future_wall_prediction_s": null
+    },
+    "vsp_03": {
+      "conditional_fresh_fits_in_option_b": 1,
+      "fits_in_option_a_fallback": 0,
+      "train_episodes": 65536,
+      "eval_episodes": 8192,
+      "native_ticks": 2949120,
+      "Adam_calls": 512,
+      "rollout_call_upper": 8772,
+      "native_invocation_cap_s_proposed": 30,
+      "all_support_cap_s_proposed": 30,
+      "complete_cap_s_in_b": 60,
+      "complete_cap_s_in_a": 0,
+      "future_wall_prediction_s": null,
+      "scope_condition": "Current paused family must be resolved by a complete conforming original direction-node decision; no universal Pro B gate and no mandatory new mechanism."
+    },
+    "folr": {
+      "new_numerical_allowance": 0,
+      "first_action": "one post-HALF-B02 em_convergence question and conformance intake",
+      "known_unallocated_pair_ticks": 205120,
+      "known_unallocated_pair_updates": 9938,
+      "known_unallocated_native_cap_per_arm_s": 1800,
+      "known_unallocated_support_cap_s": 300,
+      "known_unallocated_total_cap_s": 3900
+    },
+    "vsp_c1": {
+      "new_numerical_allowance": 0,
+      "implementation_allowance": 0,
+      "first_action": "one concrete remaining-hold value/learning source/design return, proper-node question or no-ready"
+    }
+  },
+  "cost_interpretation": "Caps are prospective requested spending limits, not measured projections. All additional runtime includes Monitor/build/check/publication/preservation work once. Native invocation sums, critical path, aggregate CPU and author deliberation differ. Historical support gaps remain; no inherited seconds or profiling allocation.",
+  "scope_section4_new_items": [],
+  "issue_snapshot": {
+    "number": 17,
+    "state": "OPEN",
+    "comments": 5,
+    "last_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5627433082"
+  },
+  "performed_work": "Document/Git/Issue retrieval, static integer configuration arithmetic, owner/audit writing and packet publication only; no experiment module imported.",
+  "exposure_line": "FOUR_SLOT_ROLLING_REFILL_PREPARATION: scientific_invocations=0; models=0; checkpoint_loads=0; environments=0; native_steps=0; synthetic_steps=0; training_episodes=0; optimizer_steps=0; evaluation_episodes=0; replay=0; profiling=0; source_tests=0; test_fixtures=0; support_search=0; provider_sends=0; parameter_displacement=not applicable: no learner"
+}

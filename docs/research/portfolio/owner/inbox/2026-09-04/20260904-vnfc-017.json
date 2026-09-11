@@ -1,0 +1,33 @@
+{
+  "id": "20260904-vnfc-017",
+  "created": "2026-09-04T18:31:09-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "decision",
+  "title": "R03 先实现不读取结果的成本校准",
+  "context": "完整终局的成本计数已补正，真正的 BCRH 包含独立检查器，执行成本可能高于原估计。CM 建议先实现原卡允许的单位成本校准和合成输入精确求解器；只有预测低于原上限时才完成全量枚举代码。只改变实现顺序，不增加校准次数或结果臂。",
+  "options": [
+    {
+      "key": "a",
+      "label": "先实现并执行一次既定成本校准",
+      "consequence": "超上限即返回工程阻塞；未超上限再完成全量枚举实现和正式运行。"
+    },
+    {
+      "key": "b",
+      "label": "先写完整枚举再执行同一校准",
+      "consequence": "先支付完整实现成本，运行上限与科学定义不变。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "先回答当前成本不确定性，避免为可能无法入限的对象实现未使用的全量路径。",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CAUSAL_ONE_DEVIATION_R03_CONTINUATION_INTAKE_20260904.md",
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CAUSAL_ONE_DEVIATION_R03_COST_ACCOUNTING_ADDENDUM_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#vnfc-r03-calibration-first-20260904",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

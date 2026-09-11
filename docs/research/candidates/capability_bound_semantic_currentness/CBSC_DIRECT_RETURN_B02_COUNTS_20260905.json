@@ -1,0 +1,127 @@
+{
+  "role": "Prospective calculation from actual source constants; no experiment or source import",
+  "source_version": "69cea0319d9dd96fbb94fcbe01be1a94e7202ee3",
+  "constants_source": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/ppo.py",
+  "source_constants": {
+    "EPISODE_TRANSITIONS": 152,
+    "OPPORTUNITIES": 24,
+    "EPISODES_PER_ROLLOUT": 8,
+    "PPO_EPOCHS": 4,
+    "EPISODES_PER_MINIBATCH": 2,
+    "MINIBATCHES_PER_EPOCH": 4
+  },
+  "formal_configuration": {
+    "arms": [
+      "RAW-GRU",
+      "STRUCT-CURRENTNESS-GRU"
+    ],
+    "training_seed": 21203,
+    "independent_training_seed_pairs": 1,
+    "rng_namespace": "B1_RUN",
+    "training_episode_ids": [
+      0,
+      383
+    ],
+    "evaluation_split": "EVAL_STOCHASTIC",
+    "evaluation_episode_ids": [
+      0,
+      31
+    ],
+    "checkpoint_updates": [
+      0,
+      12,
+      24,
+      48
+    ]
+  },
+  "per_arm": {
+    "training_episode_executions": 384,
+    "training_transitions": 58368,
+    "training_decisions": 9216,
+    "rollout_updates": 48,
+    "adam_steps": 768,
+    "evaluation_episode_executions": 128,
+    "evaluation_transitions": 19456,
+    "evaluation_decisions": 3072,
+    "train_and_eval_transitions": 77824
+  },
+  "two_arm_total": {
+    "training_episode_executions": 768,
+    "training_transitions": 116736,
+    "training_decisions": 18432,
+    "rollout_updates": 96,
+    "adam_steps": 1536,
+    "evaluation_episode_executions": 256,
+    "evaluation_transitions": 38912,
+    "evaluation_decisions": 6144,
+    "train_and_eval_transitions": 155648
+  },
+  "baseline_context": {
+    "policies": [
+      "ALWAYS_REFRESH",
+      "ALWAYS_SAFE"
+    ],
+    "same_tape_ledger_scoring_passes": 64,
+    "opportunity_ledger_scores": 1536,
+    "meaning": "Two deterministic baselines on 32 existing held-out tapes, computed once in RAW invocation; no new model training or tape/world population"
+  },
+  "engineering_fixture": {
+    "seed": 21201,
+    "arms": 2,
+    "rollout_updates_per_arm": 1,
+    "training_episodes_per_arm": 8,
+    "evaluation_updates": [
+      0,
+      1
+    ],
+    "evaluation_episodes_per_checkpoint": 1,
+    "training_transitions_total": 2432,
+    "evaluation_transitions_total": 608,
+    "adam_steps_total": 32,
+    "train_and_eval_transitions_total": 3040,
+    "claim": "Integration verification only; not an independent scientific training sample"
+  },
+  "dominant_work": {
+    "formal_train_law": "2 arms * 1 seed * 48 updates * 8 episodes * 152 transitions",
+    "formal_eval_law": "2 arms * 1 seed * 4 checkpoints * 32 episode executions * 152 transitions",
+    "optimizer_law": "2 arms * 1 seed * 48 rollout updates * 4 epochs * 4 minibatches",
+    "learned_policy_class_search_calls": 0,
+    "nested_candidate_trajectory_search_calls": 0,
+    "old_B1_scheduled_train_eval_transitions": 1167360,
+    "old_B1_to_new_scheduled_transition_ratio": 7.5,
+    "ratio_limit": "Scheduled train/evaluation transition count only; excludes extra old replay/rehydration/publication and is not a measured time saving"
+  },
+  "wall_bound": {
+    "formal_per_arm_complete_seconds": 600,
+    "formal_max_arm_invocations": 2,
+    "formal_paired_summary": "Included inside second arm 600-second invocation",
+    "focused_total_seconds": 175,
+    "focused_timeout_seconds": 173,
+    "focused_kill_grace_seconds": 2,
+    "focused_prior_charged_seconds": 124.49,
+    "focused_directory_limit_seconds": 300,
+    "focused_remaining_before_new_check_seconds": 175.51
+  },
+  "cost": {
+    "old_componentwise_training_plus_replay_seconds": 333.27086379998946,
+    "new_full_route_prediction_seconds": null,
+    "counterfactual_saved_seconds": null,
+    "new_full_route_law": "startup + host generation + 48 rollout/update blocks + 4 eval32 passes + checkpoint/result writing + readback + pairing (second arm) + termination grace"
+  },
+  "exposure": {
+    "consultation_new_optimizer_steps": 0,
+    "historical_B0_seed": 21001,
+    "historical_B0_adam_steps_per_arm": 16,
+    "historical_B0_initial_parameter_l2": 29.89684618357759,
+    "historical_B0_displacement_l2_range": [
+      0.4576527919924285,
+      0.47487743607923133
+    ],
+    "historical_B0_displacement_percent_of_initial_l2": [
+      1.5307728085506833,
+      1.588386390869826
+    ],
+    "new_formal_adam_steps_per_arm": 768,
+    "meaning": "Historical machine observation supports ability to move; no extrapolated displacement or predicted performance"
+  }
+}

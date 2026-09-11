@@ -1,0 +1,59 @@
+{
+  "snapshot_kind": "Direct GitHub read-back after DM issue creation; mutable discussion is preserved at authoring time",
+  "issue": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "issue": {
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5",
+        "title": "VSP-C1 K4：三种子混合结果后，当前跨周期价值学习 toy 的下一步",
+        "issue_number": 5,
+        "body": "这是 DM 对完整实测的综合与下一方向问题，不是 Pro 原文。\n\n同信息、同交互和更新预算的 FACTOR/GENERIC 比较已完成三个独立训练种子，每臂每种子 128 次真实更新。FACTOR 终点差依次为 −0.041667、+0.083333、+0.083333；固定全曲线 AUC 差依次为 −0.028646、+0.033854、+0.023438。三种子平均终点差 +0.041667，平均 AUC 差 +0.009549。首个负结果保留；这只支持训练实例敏感的小幅 B/EXPLORE 信号，不能证明稳定优势或通用 MARL 效果。\n\n当前问题：继续这一公开固定伙伴计划的小 toy 家族，实施一个有决策价值的有限真实学习比较，还是停在已有结论、转向明确定义的新问题？请比较新增训练随机性信息、改变训练预算和更改宿主/比较器的价值与实际工作量。精确参考、全面因果解释或政策搜索不是默认前置要求。\n\n固定证据：\n\n- [完整三种子 intake](https://github.com/CartmanFatass/My-paper-code/blob/d7ea795e67a52eadf1cfab2fb95dc3bcbfd25305/docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B01_SEED12_INTAKE_20260905.md)\n- [完整结果、原始包、曲线与实际成本](https://github.com/CartmanFatass/My-paper-code/blob/d7ea795e67a52eadf1cfab2fb95dc3bcbfd25305/docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B01_SEED12_RESULT_EVIDENCE_20260905.md)\n- [当前科学边界](https://github.com/CartmanFatass/My-paper-code/blob/d7ea795e67a52eadf1cfab2fb95dc3bcbfd25305/docs/research/candidates/vsp_c1/DIRECTION.md)\n\n六次调用合计 17.00 秒完整 wall、14.47 CPU 秒、150048 联合步和 768 更新，均已完成。公开固定伙伴使该任务可还原为单控制器问题；GENERIC 同样共享隐藏特征，两个周期列上的四维嵌入也不构成严格低秩瓶颈。旧 A01 缺失 headroom 和旧 D6 停止边界不变。\n\n下一轮将通过本问题的固定任务文件与独立响应分支交付完整 Convergence 原文。此时未选择新实验，也未改变 Portfolio 生命周期或优先级。",
+        "state": "open",
+        "user": {
+          "login": "CartmanFatass",
+          "name": "CartmanFatass",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/11737246?v=4",
+          "id": 11737246
+        },
+        "assignees": null,
+        "labels": null,
+        "milestone": null,
+        "state_reason": null,
+        "comments": 0,
+        "created_at": "2026-09-06T00:36:31Z",
+        "updated_at": "2026-09-06T00:36:31Z",
+        "closed_at": null,
+        "display_url": "https://github.com/CartmanFatass/My-paper-code/issues/5",
+        "display_title": "VSP-C1 K4：三种子混合结果后，当前跨周期价值学习 toy 的下一步"
+      },
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/5",
+      "title": "VSP-C1 K4：三种子混合结果后，当前跨周期价值学习 toy 的下一步",
+      "display_url": "https://github.com/CartmanFatass/My-paper-code/issues/5",
+      "display_title": "VSP-C1 K4：三种子混合结果后，当前跨周期价值学习 toy 的下一步"
+    },
+    "isError": false
+  },
+  "comments": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "comments": [],
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/5",
+      "title": "CartmanFatass/My-paper-code Issue #5 comments",
+      "display_url": "https://github.com/CartmanFatass/My-paper-code/issues/5",
+      "display_title": "CartmanFatass/My-paper-code Issue #5 comments"
+    },
+    "isError": false
+  },
+  "snapshot_recorded_at_utc": "2026-09-06T00:40:03.474799+00:00"
+}

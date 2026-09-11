@@ -1,0 +1,43 @@
+{
+  "id": "20260905-frrie-007",
+  "created": "2026-09-05T03:11:10-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "R06 后固定第二条轨迹检查大规模信号",
+  "context": "R06 仅大规模刚越过阈值。下一 B 对象固定字面种子 2，保持学习率、两臂约束与 128 次更新；透明地将大规模设为主问题，完整保留小规模结果。旧根和旧规则不变。",
+  "options": [
+    {
+      "key": "a",
+      "label": "固定第二个字面根，检验大规模信号并完整报告小规模",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "继续在已观察根上调整学习率或收缩强度",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "在根敏感性检查前加入关系干预",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "把 R05 与 R06 当独立种子合并或重开旧停止面板",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "根敏感性是当前直接的替代解释，继续调整剂量不能消除它；这是同一已接受 B 家族内可逆的下一格。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R06_RESULT_INTAKE_20260905.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R07_SECOND_ROOT_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r06-intake-r07-selection",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

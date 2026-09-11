@@ -1,0 +1,58 @@
+{
+  "artifact_digests_match": true,
+  "source_seed_object_arm_counts_curve_weights_readback_pass": true,
+  "paired_world_identities_match": true,
+  "endpoint_means_from_rows": {
+    "G_greedy": 0.3632958984375,
+    "G_stochastic": 0.3094384765625,
+    "R0": 0.360966796875,
+    "R": 0.359853515625
+  },
+  "computed_existing_paired_differences": {
+    "G_greedy-R0": {
+      "mean": 0.002329101562499998,
+      "sample_sd": 0.24544963447179877,
+      "conditional_se": 0.0076703010772437115,
+      "recorded_mean_difference": 1.3010426069826053e-18
+    },
+    "G_greedy-R": {
+      "mean": 0.003442382812499998,
+      "sample_sd": 0.24139489677343232,
+      "conditional_se": 0.00754359052416976,
+      "recorded_mean_difference": 8.673617379884035e-19
+    },
+    "G_stochastic-R0": {
+      "mean": -0.0515283203125,
+      "sample_sd": 0.33686262095197556,
+      "conditional_se": 0.010526956904749236,
+      "recorded_mean_difference": -6.938893903907228e-18
+    },
+    "G_stochastic-R": {
+      "mean": -0.0504150390625,
+      "sample_sd": 0.3362133867872232,
+      "conditional_se": 0.010506668337100724,
+      "recorded_mean_difference": 0.0
+    },
+    "G_stochastic-G_greedy": {
+      "mean": -0.053857421875,
+      "sample_sd": 0.3455927136639722,
+      "conditional_se": 0.010799772301999131,
+      "recorded_mean_difference": -6.938893903907228e-18
+    }
+  },
+  "terminal_exit_and_termination_pass": true,
+  "legacy_adapter_tag": "VSP03_B04 per prospective DM clarification; scientific summary VSP03_B05/seed7 with P76 paths and command",
+  "origin_to_manager_finished_journal_s": 4.1917280000052415,
+  "resource_journal_fields": {
+    "MEMORY_PEAK": "18604032",
+    "CPU_USAGE_NSEC": "3500596000",
+    "MEMORY_SWAP_PEAK": "0"
+  },
+  "scientific_validation_models_episodes_updates_evaluations": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "note": "Existing artifact readback only; no model load/world/rollout/evaluation. Normal-run weights_readback retained; collected weights hash-match remote."
+}

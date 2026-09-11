@@ -1,0 +1,117 @@
+{
+  "status": "prospective B02 definition frozen under P09-VSP03-SELECTED-B02-01; no execution at card preparation",
+  "source_response_commit": "a62defbbe843149c836c132d6a8f6bb5540506a2",
+  "source_response_path": "docs/research/candidates/vsp_03/pro_packets/20260906_shared_service_convergence/archive/RESPONSE.md",
+  "original_counts_path": "docs/research/candidates/vsp_03/VSP03_B02_COUNTS_20260906.json",
+  "evidence_class": "B/EXPLORE",
+  "recasts": 1,
+  "configuration": {
+    "learner_arms": [
+      "T",
+      "G"
+    ],
+    "fixed_references": [
+      "R",
+      "R0"
+    ],
+    "independent_paired_training_seeds": [
+      4
+    ],
+    "updates_per_arm": 128,
+    "joint_episodes_per_update": 128,
+    "horizon_team_ticks": 40,
+    "targets_per_team_tick": 2,
+    "evaluation_worlds": 1024,
+    "evaluation_executions_per_world": 6,
+    "max_clock_opportunities_per_joint_episode": 17
+  },
+  "per_learner_arm": {
+    "actor_parameters": 1570,
+    "critic_parameters": 513,
+    "total_parameters": 2083,
+    "training_joint_episodes": 16384,
+    "training_team_ticks": 655360,
+    "training_target_transitions": 1310720,
+    "max_training_decision_rows": 278528,
+    "max_decision_rows_per_batch": 2176,
+    "optimizer_steps": 128,
+    "final_greedy_episodes": 1024,
+    "final_stochastic_episodes": 1024
+  },
+  "algorithm_and_evaluation": {
+    "training_joint_episode_executions": 32768,
+    "evaluation_joint_episode_executions": 6144,
+    "total_joint_episode_executions": 38912,
+    "team_ticks": 1556480,
+    "target_transitions": 3112960,
+    "optimizer_steps": 256,
+    "independent_training_pairs": 1
+  },
+  "added_r0_relative_to_draft": {
+    "fixed_rule_joint_episodes": 1024,
+    "team_ticks": 40960,
+    "target_transitions": 81920,
+    "learner_starts": 0,
+    "optimizer_steps": 0
+  },
+  "focused_validation": {
+    "scripted_joint_episodes": 8,
+    "team_ticks": 320,
+    "target_transitions": 640,
+    "optimizer_steps": 0
+  },
+  "complete_invocation_including_check": {
+    "joint_episode_executions": 38920,
+    "team_ticks": 1556800,
+    "target_transitions": 3113600,
+    "optimizer_steps": 256
+  },
+  "dominant_work": {
+    "training": "2 arms * 1 paired seed * 128 updates * 128 joint episodes * 40 team ticks * 2 target updates",
+    "evaluation": "6 fixed executions * 1024 paired evaluation worlds * 40 team ticks * 2 target updates",
+    "added_validation": "8 scripted joint episodes * 40 team ticks * 2 target updates; no optimizer.step",
+    "nested_candidate_or_trajectory_searches": 0,
+    "solver_calls": 0
+  },
+  "cost": {
+    "whole_logical_invocation_wall_cap_seconds": 120,
+    "per_arm_time_limit_is_part_of_same_cap": true,
+    "historical_b01_complete_pair_walls_seconds": [
+      2.364870157,
+      5.905074235,
+      4.023389709
+    ],
+    "historical_b01_pair_wall_sum_seconds": 12.293334101,
+    "inherited_conditional_pair_planning_seconds": 23.62029694,
+    "conditional_anchor_covers_measured_n2_or_r0_cost": false,
+    "n2_complete_wall_seconds": null,
+    "per_arm_measured_wall_seconds": null,
+    "calibration_invocations": 0,
+    "meaning": "One complete120-second admission-and-run command through process exit includes imports/initialization, both sequential arms, all six evaluations including R/R0, one eight-episode check, outputs and necessary readback; no per-arm clock reset."
+  },
+  "mei": {
+    "absolute_team_return": 0.02,
+    "explanation": "Four waiting ticks for each of two jobs = 8/400 team-return units; interpretation scale, not a validity or significance threshold."
+  },
+  "exposure_line": "Frozen B02:2 learners*2083 parameters*128 Adam steps at lr0.001;16384 training joint episodes and2048 final evaluation episodes per arm;R/R0 each1024 same-world evaluations. Existing N1 displacement/initial L2=0.399793..0.521253 after128 steps supports movement of the reused recipe, not measured N2 displacement. Initial/first/final N2 exposure is measured within the sole normal invocation.128*0.001=0.128 is nominal, not an Adam bound. Card preparation adds0 models/episodes/updates/evaluations.",
+  "method": "Existing machine-computed selected constants read as JSON and checked by PowerShell arithmetic at card preparation; no simulation or model import. Prior selected/draft count files are preserved.",
+  "card_path": "docs/research/candidates/vsp_03/VSP03_B02_SCIENCE_CARD_20260907.md",
+  "accepted_selection_intake_revision": "34db0d58a",
+  "rng_realization": {
+    "exogenous": "PCG64 SeedSequence([302,seed,split,episode,target]);40 uniforms;target0/1",
+    "phase": "PCG64 SeedSequence([302,seed,split,episode,2]);one integers(0,2) names phase-zero identity",
+    "action": "PCG64 SeedSequence([303,seed,split,mode,arm,episode]);17 uniforms at calendar t=0,2,...,32",
+    "split": "training100/evaluation200",
+    "action_mode": "training0/stochastic-final1;greedy/rules no action stream",
+    "arm": "T0/G1",
+    "initialization": "torch.manual_seed(40000+seed) for each arm;fresh separate optimizer"
+  },
+  "actual_card_preparation_exposure": {
+    "models_constructed": 0,
+    "training_starts": 0,
+    "environment_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluations": 0,
+    "result_bearing_invocations": 0
+  }
+}

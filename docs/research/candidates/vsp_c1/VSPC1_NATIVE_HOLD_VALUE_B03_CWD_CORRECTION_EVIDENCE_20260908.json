@@ -1,0 +1,127 @@
+{
+  "failed_status": {
+    "argv": [
+      "/usr/local/bin/agent-task",
+      "status",
+      "vspc1_hold_value_b03_8201_7a8ed3aa5d25"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"task\": \"vspc1_hold_value_b03_8201_7a8ed3aa5d25\", \"status\": \"failed\", \"exit_code\": 1, \"pid\": 3009140, \"uptime_seconds\": 392, \"tmux_active\": false}\n",
+    "stderr": ""
+  },
+  "failed_log": {
+    "argv": [
+      "cat",
+      "/home/wu/.agent-tasks/vspc1_hold_value_b03_8201_7a8ed3aa5d25/task.log"
+    ],
+    "exit_code": 0,
+    "stdout": "=== Task 'vspc1_hold_value_b03_8201_7a8ed3aa5d25' started at 2026-09-09T06:40:46+08:00 ===\n/bin/bash: line 2: cd: /home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25: No such file or directory\nCommand exited with non-zero status 1\nwhole_wall_seconds=0.00,peak_rss_kib=3200\n=== Task 'vspc1_hold_value_b03_8201_7a8ed3aa5d25' exited with code 1 at 2026-09-09T06:40:46+08:00 (Duration: 0s) ===\n",
+    "stderr": ""
+  },
+  "failed_wrapper": {
+    "argv": [
+      "cat",
+      "/home/wu/.agent-tasks/vspc1_hold_value_b03_8201_7a8ed3aa5d25/runner.sh"
+    ],
+    "exit_code": 0,
+    "stdout": "#!/usr/bin/env bash\necho $$ > \"/home/wu/.agent-tasks/vspc1_hold_value_b03_8201_7a8ed3aa5d25/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'vspc1_hold_value_b03_8201_7a8ed3aa5d25' started at $(date -Iseconds) ===\" >> \"/home/wu/.agent-tasks/vspc1_hold_value_b03_8201_7a8ed3aa5d25/task.log\"\n\n# Execute command capturing output\nset +e\neval '/bin/bash /home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh' >> \"/home/wu/.agent-tasks/vspc1_hold_value_b03_8201_7a8ed3aa5d25/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/.agent-tasks/vspc1_hold_value_b03_8201_7a8ed3aa5d25/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/.agent-tasks/vspc1_hold_value_b03_8201_7a8ed3aa5d25/status\"\nelse\n    echo \"failed\" > \"/home/wu/.agent-tasks/vspc1_hold_value_b03_8201_7a8ed3aa5d25/status\"\nfi\necho \"=== Task 'vspc1_hold_value_b03_8201_7a8ed3aa5d25' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/.agent-tasks/vspc1_hold_value_b03_8201_7a8ed3aa5d25/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+    "stderr": ""
+  },
+  "head": {
+    "argv": [
+      "git",
+      "-C",
+      "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit_code": 0,
+    "stdout": "7a8ed3aa5d25ded71164aa338749d09318124dcf\n",
+    "stderr": ""
+  },
+  "status": {
+    "argv": [
+      "git",
+      "-C",
+      "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25",
+      "status",
+      "--porcelain"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "detached": {
+    "argv": [
+      "git",
+      "-C",
+      "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25",
+      "symbolic-ref",
+      "-q",
+      "HEAD"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "source_files": {
+    "argv": [
+      "git",
+      "-C",
+      "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25",
+      "ls-files",
+      "scripts/run_vspc1_native_hold_value_b03.py",
+      "scripts/hmasd_resource_preflight.py",
+      "experiments/candidates/vsp_c1/native_hold_value_b03/value_normalization.py"
+    ],
+    "exit_code": 0,
+    "stdout": "experiments/candidates/vsp_c1/native_hold_value_b03/value_normalization.py\nscripts/hmasd_resource_preflight.py\nscripts/run_vspc1_native_hold_value_b03.py\n",
+    "stderr": ""
+  },
+  "source_exists": {
+    "argv": [
+      "ls",
+      "-l",
+      "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25/scripts/run_vspc1_native_hold_value_b03.py",
+      "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25/scripts/hmasd_resource_preflight.py",
+      "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25/experiments/candidates/vsp_c1/native_hold_value_b03/value_normalization.py"
+    ],
+    "exit_code": 0,
+    "stdout": "-rw-rw-r-- 1 wu wu  1388 Sep  9 06:46 /home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25/experiments/candidates/vsp_c1/native_hold_value_b03/value_normalization.py\n-rw-rw-r-- 1 wu wu 21314 Sep  9 06:46 /home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25/scripts/hmasd_resource_preflight.py\n-rw-rw-r-- 1 wu wu  1333 Sep  9 06:46 /home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25/scripts/run_vspc1_native_hold_value_b03.py\n",
+    "stderr": ""
+  },
+  "roots_absent": {
+    "argv": [
+      "ls",
+      "-ld",
+      "/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b03_8201_7a8ed3aa5d25",
+      "/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b03_8201_7a8ed3aa5d25_admission.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "ls: cannot access '/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b03_8201_7a8ed3aa5d25': No such file or directory\nls: cannot access '/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b03_8201_7a8ed3aa5d25_admission.json': No such file or directory\n"
+  },
+  "next_handle": {
+    "argv": [
+      "/usr/local/bin/agent-task",
+      "status",
+      "vspc1_hold_value_b03_8201_7a8ed3aa5d25_cwd1"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"task\": \"vspc1_hold_value_b03_8201_7a8ed3aa5d25_cwd1\", \"status\": \"not_found\"}\n",
+    "stderr": ""
+  },
+  "script_digest": {
+    "argv": [
+      "sha256sum",
+      "/home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh"
+    ],
+    "exit_code": 0,
+    "stdout": "46a2ac327ddf65350c6af18282a7e87944c5be921c7008a0a5423cc0199e916e  /home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh\n",
+    "stderr": ""
+  },
+  "next_submission": "ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task run vspc1_hold_value_b03_8201_7a8ed3aa5d25_cwd1 /bin/bash /home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh",
+  "submitted": false,
+  "scientific_exposure": 0,
+  "source_stage": "bundle transfer, fetch, exact-SHA detached worktree add"
+}

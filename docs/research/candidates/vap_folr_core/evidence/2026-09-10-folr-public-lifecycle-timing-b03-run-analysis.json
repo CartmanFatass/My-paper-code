@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "FOLR_TIMING_128",
+      "arm": "EVENT",
+      "n": 1,
+      "mean": 1.4470312499999995,
+      "sample_sd": null,
+      "min": 1.4470312499999995,
+      "max": 1.4470312499999995,
+      "runs": {
+        "7806": 1.4470312499999995
+      }
+    },
+    {
+      "task": "FOLR_TIMING_128",
+      "arm": "RETAIN",
+      "n": 1,
+      "mean": 6.8931249999999995,
+      "sample_sd": null,
+      "min": 6.8931249999999995,
+      "max": 6.8931249999999995,
+      "runs": {
+        "7806": 6.8931249999999995
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "FOLR_TIMING_128",
+      "arm": "EVENT",
+      "baseline": "RETAIN",
+      "summary": {
+        "n": 1,
+        "mean": -5.44609375,
+        "sample_sd": null,
+        "min": -5.44609375,
+        "max": -5.44609375
+      },
+      "differences": {
+        "7806": -5.44609375
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

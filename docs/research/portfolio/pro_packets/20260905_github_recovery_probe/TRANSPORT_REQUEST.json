@@ -1,0 +1,33 @@
+{
+  "request_id": "2026-09-05-github-existing-conflict-recovery-01",
+  "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "creator_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "dispatch_mode": "REUSE_SINGLETON",
+  "operator_reuse_required": true,
+  "operator_model": "gpt-5.6-luna",
+  "operator_thinking": "xhigh",
+  "provider_requirement": {
+    "model": "GPT-6 Astra",
+    "mode": "Pro",
+    "label": "6 Pro",
+    "selector_hint": "Latest"
+  },
+  "return_route": "PARENT_SESSION",
+  "return_receipt_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "variable_n_fleet_churn"
+  ],
+  "caller_role": "portfolio",
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "requested_conversation_id": null,
+  "conversation_reuse_required": true,
+  "reset_invalid_provider_context": false,
+  "provider_context_reset_evidence": null,
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "prompt": "所有者授权的隔离恢复验证，并非科研或规范审阅。请读取并执行固定任务中的两项条件处理：https://github.com/CartmanFatass/My-paper-code/blob/2fd1cf09a482a7a95adff27b97256a7162a86d29/docs/research/portfolio/pro_packets/20260905_github_recovery_probe/TASK.md 。只允许该任务精确声明的条件写入范围；实际查验既有交付和目标内容后复用或报告冲突。最后简短自然语言返回两项结果和实际链接，不搬运正文或路由字段。"
+}

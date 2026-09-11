@@ -1,0 +1,37 @@
+{
+  "id": "20260904-frrie-023",
+  "created": "2026-09-04T18:35:15-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接受接触生效后的 R05 有效小差异结果",
+  "context": "完整 128 次成对更新和 18 个评估单元符合原卡。紧约束后续触发 50 次，但两种规模差异小于 0.005 且符号相反；宽约束均略高于随机参照。按原分支接受单根 B 类结果，不推断等价或故障修复。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受原规则下的有界 B 结果",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "推断稳定等价、优势或修复",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "临时提高比较器标准而否定结果",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整证据满足原卡，首个匹配分支是小或规模混合差异。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#frrie-r05-intake-r06-selection",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

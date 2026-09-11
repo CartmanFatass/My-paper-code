@@ -1,0 +1,163 @@
+{
+  "master": 8601,
+  "b": 860100000,
+  "computed_utc": "2026-09-09T12:33:03.572914+00:00",
+  "configuration_source": "experiments/candidates/vsp_c1/native_hold_value_b01/study.py",
+  "configuration_read_sha": "82b0c97f1e1bd9336880a1fdabef9d15ceb8afe4",
+  "configuration_defaults": {
+    "seed": 8101,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "selected_configuration": {
+    "seed": 8601,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 768,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "evaluation_endpoints": [
+    768
+  ],
+  "common_initialization": 860100011,
+  "extra_initialization": 860100012,
+  "training_velocity": 860100021,
+  "training_duration": 860100022,
+  "training_constructor_reset": 860101000,
+  "evaluation_constructor_reset": 860102000,
+  "training_resets": [
+    860101000,
+    860101767
+  ],
+  "evaluation_resets": [
+    860102000,
+    860102031
+  ],
+  "evaluation_velocity": [
+    860103000,
+    860103031
+  ],
+  "evaluation_duration": [
+    860104000,
+    860104031
+  ],
+  "unique_integer_keys": 868,
+  "prior_train_episodes": {
+    "8101": 512,
+    "8102": 512,
+    "8201": 512,
+    "8202": 512,
+    "8301": 512,
+    "8302": 512,
+    "8303": 512,
+    "8401": 768,
+    "8402": 768,
+    "8501": 768,
+    "8502": 768,
+    "8503": 768
+  },
+  "overlap_with_prior": {
+    "8101": 0,
+    "8102": 0,
+    "8201": 0,
+    "8202": 0,
+    "8301": 0,
+    "8302": 0,
+    "8303": 0,
+    "8401": 0,
+    "8402": 0,
+    "8501": 0,
+    "8502": 0,
+    "8503": 0
+  },
+  "train_eval_reset_overlap": 0,
+  "parameters": {
+    "ordinary_body133": 34827,
+    "gate": 640,
+    "gated_body133_plus_gate": 35467,
+    "increase_percent": 1.8376546931978064,
+    "capacity_matched": false
+  },
+  "algorithm_work": {
+    "matched_pairs": 1,
+    "fits": 2,
+    "training_episodes": 1536,
+    "train_steps": 393216,
+    "eval_episodes": 96,
+    "eval_steps": 24576,
+    "steps": 417792,
+    "rollouts": 768,
+    "adam": 3072,
+    "moment_merges": 768,
+    "target_rows": 393216,
+    "four_epoch_target_terms": 1572864,
+    "scored_episodes": 1632,
+    "learned_endpoints": 2,
+    "hover_banks": 1,
+    "constructors": 4
+  },
+  "per_arm_work": {
+    "train_steps": 196608,
+    "adam": 1536,
+    "moment_merges": 384,
+    "targets_per_merge": 512,
+    "target_rows": 196608,
+    "learned_eval_steps": 8192,
+    "gated_total_steps": 204800,
+    "mlp_with_hover_total_steps": 212992
+  },
+  "actual_new_exposure_at_definition": {
+    "scientific_invocations": 0,
+    "accepted_submissions": 0,
+    "native_steps": 0,
+    "training_pairs": 0,
+    "fits": 0,
+    "model_constructions": 0,
+    "environment_constructions": 0,
+    "adam": 0,
+    "eval_episodes": 0
+  },
+  "prospective_predictions": {
+    "pro": {
+      "event": "Delta_new <= 0.01",
+      "label": "NO_UP",
+      "probability": 0.65,
+      "source": "77687230cb1f3898e55c21d23c05ba1840d820ea RESPONSE section 6"
+    },
+    "dm": {
+      "event": "-0.01 <= Delta_new <= 0.01",
+      "label": "WITHIN",
+      "probability": 0.45,
+      "qualification": "Separate DM judgment before new output; DM has read the Pro forecast, so forecasts are not independent empirical evidence."
+    },
+    "owner": "not taken (unattended)"
+  },
+  "planning_reference": {
+    "observed_complete_pair_walls_seconds": [
+      475.85,
+      507.29,
+      504.91
+    ],
+    "sum_invocation_wall_seconds": 1488.0500000000002,
+    "observed_wall_per_valid_pair_seconds": 496.0166666666667,
+    "candidate_incremental_wall_seconds": null,
+    "candidate_per_arm_unit_wall_seconds": null,
+    "aggregate_cpu_seconds": null,
+    "candidate_engineering_hours": null,
+    "proposed_complete_arm_cap_seconds": 1800,
+    "proposed_whole_pair_cap_seconds": 3600,
+    "method": "Known native-step/rollout/Adam/evaluation factors; existing whole-run timings are references, not new-candidate timing guarantees. No profiling or cost experiment."
+  },
+  "freshness_qualification": "Bounded whole-token 8601 / named B13 search over current vsp_c1 direction, scripts and direction tests returned no matches before definition. Twelve prior native-hold master domains checked arithmetically; not a global freshness or randomness guarantee.",
+  "exposure_line": "B13 prospective real learner: 2 fits, 393216 native training team steps, 3072 Adam calls, 96 evaluation episodes; zero scientific invocations at definition. Historical B12/8503 at 19e0d0d303686cd7590ecfe7970d2057d652eea5 moved total parameters relatively by 0.3296981592727421 (GATED) and 0.33448970524761296 (MLP), with gate absolute displacement 0.8511881828308105; this establishes prior learner mobility in the declared update budget, not B13 benefit. New gate-relative displacement is undefined at zero initialization; record actual new absolute movement."
+}

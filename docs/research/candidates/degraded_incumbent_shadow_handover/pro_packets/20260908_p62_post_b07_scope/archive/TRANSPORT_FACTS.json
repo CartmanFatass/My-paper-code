@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-08-dish-p62-post-b07-scope-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_ids": [
+    "degraded_incumbent_shadow_handover"
+  ],
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "provider_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+  "user_message_id": "bc54f66a-2dc6-450c-985b-779e5f1397bd",
+  "assistant_message_id": "f8a68290-bef7-4a65-b7b6-6e283eaf7f6a",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "7046fe889abf30bd3de0f1cb27706021a6f8497afa85a88aa7392e4df625a263",
+  "response_sha256": "c9f88329d4c558a280110e0b9c041786c38bec03bb0f9bcea6aa1b098c186b2c",
+  "response_characters": 319,
+  "response_bytes": 348,
+  "send_click_count": 1,
+  "send_evidence": {
+    "send_click_count": 1,
+    "send_attempted": true,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "bc54f66a-2dc6-450c-985b-779e5f1397bd",
+    "provider_url_observed": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+    "binding_match": true,
+    "paste_mode": true
+  },
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "user_message_id": "bc54f66a-2dc6-450c-985b-779e5f1397bd",
+    "assistant_message_id": "f8a68290-bef7-4a65-b7b6-6e283eaf7f6a"
+  },
+  "identity_observed": {
+    "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "user_message_id": "bc54f66a-2dc6-450c-985b-779e5f1397bd",
+    "assistant_message_id": "f8a68290-bef7-4a65-b7b6-6e283eaf7f6a"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-08-dish-p62-post-b07-scope-convergence-01\\2026-09-08-dish-p62-post-b07-scope-convergence-01--degraded_incumbent_shadow_handover__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-08-dish-p62-post-b07-scope-convergence-01\\2026-09-08-dish-p62-post-b07-scope-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-08-dish-p62-post-b07-scope-convergence-01\\2026-09-08-dish-p62-post-b07-scope-convergence-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-08-dish-p62-post-b07-scope-convergence-01\\2026-09-08-dish-p62-post-b07-scope-convergence-01--degraded_incumbent_shadow_handover--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "c9f88329d4c558a280110e0b9c041786c38bec03bb0f9bcea6aa1b098c186b2c"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 14m 19s; current assistant Copy response present; composer Stop answering remained visible; response stable across bounded observations",
+  "capture_method": "Current-round Copy response control scoped to assistant message f8a68290-bef7-4a65-b7b6-6e283eaf7f6a via CUA clipboard.readText; raw UTF-8 response preserved",
+  "archive_status": "ARCHIVED",
+  "timestamps": {
+    "sent_at": "2026-09-08T22:44:52Z",
+    "completed_at": "2026-09-08T22:44:52Z",
+    "captured_at": "2026-09-08T22:44:52Z",
+    "archived_at": "2026-09-08T22:44:52Z"
+  },
+  "scientific_decision_formed": false,
+  "return_receipt": {
+    "status": "SENT",
+    "attempt_count": 1,
+    "delivery_status": "accepted",
+    "message_key": "2026-09-08-dish-p62-post-b07-scope-convergence-01|degraded_incumbent_shadow_handover|6a9bec54-df00-83e8-9840-46440458f316|c9f88329d4c558a280110e0b9c041786c38bec03bb0f9bcea6aa1b098c186b2c",
+    "sent_at": "2026-09-08T22:45:45Z",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267"
+  },
+  "notes": [
+    "Exactly one provider Send occurred; no second Send or repair prompt was attempted.",
+    "Response paired to current-round user message and assistant node by DOM IDs.",
+    "The captured short response contains links to the prior P53 artifact; Transport archives the actual response without interpreting its scientific or scope correctness."
+  ]
+}

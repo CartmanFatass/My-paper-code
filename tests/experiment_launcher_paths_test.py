@@ -9,7 +9,7 @@ def test_launcher_command_resolves_train_entrypoint_from_module_location():
     command = launcher.build_command("hmasd", ["--extra"], 10)
 
     expected_train_path = (
-        Path(launcher.__file__).resolve().parents[2] / "train_multiproc_config_1.py"
+        Path(launcher.__file__).resolve().parent / "train_multiproc_config_1.py"
     )
     assert command == [
         "python",

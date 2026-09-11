@@ -1,0 +1,55 @@
+{
+  "observed_at_utc": "2026-09-10T16:10:18.563363+00:00",
+  "direct_observations": {
+    "response_commit": "08e989073839fe5f0f91c6a8ad90a399bee37b6c",
+    "response_path": "docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md",
+    "response_bytes": 35946,
+    "response_sha256": "3d1ee054c330d1602f4acbd1a85c7e54fc37b5724f4034933ca93942bdc9ab62",
+    "response_commit_changed_paths": [
+      "docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md"
+    ],
+    "task_commit": "38653196ba2a6c8503cdf9db3fb49fae6d9cb7ba",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/17",
+    "delivery_comment": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5621611566",
+    "delivery_comment_created_at": "2026-09-10T15:59:18Z",
+    "delivery_comment_count_at_read": 1,
+    "issue_snapshot_sha256": "23f327fd9ff20901542f3c595dddee0e357ed5182660af53ef0c2ae415921ed1"
+  },
+  "parent_reported_transport_facts": {
+    "state": "ARCHIVED",
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "user_node": "7d27f46d-82ce-4f53-aa40-c87a56e3d13d",
+    "assistant_node": "9b585979-3119-4018-b6b8-071f3b389441",
+    "scientific_conformance": "NOT_ASSESSED",
+    "chat_receipt_sha256_prefix_only": "abb8bb6d",
+    "independent_provider_ui_reobservation_by_this_author": false
+  },
+  "prospective_arithmetic": {
+    "ucope_training_episodes_per_fit": 2048,
+    "ucope_two_episode_rollouts_per_fit": 1024,
+    "ucope_adam_per_rollout": 4,
+    "ucope_adam_per_fit": 4096,
+    "ucope_three_fit_adam": 12288,
+    "ucope_training_ticks": 1572864,
+    "ucope_evaluation_episodes": 640,
+    "ucope_evaluation_ticks": 163840,
+    "ucope_total_ticks": 1736704,
+    "folr_training_ticks": 300000,
+    "folr_final_ticks": 7680,
+    "folr_updates": 14907,
+    "vsp03_episodes": 73728,
+    "rcle_episodes": 136192,
+    "acvc_scored_evaluation_ticks": 49152,
+    "acvc_training_exposure": null
+  },
+  "new_exposure": {
+    "training_fits": 0,
+    "optimizer_updates": 0,
+    "environment_steps": 0,
+    "evaluation_episodes": 0,
+    "scientific_probes": 0,
+    "test_probes": 0,
+    "provider_sends": 0
+  },
+  "application_state": "planned; no direction dispatch or scientific execution by this intake"
+}

@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "DISH-B08-A03",
+      "arm": "HALF_RETAIN",
+      "n": 1,
+      "mean": 434.5,
+      "sample_sd": null,
+      "min": 434.5,
+      "max": 434.5,
+      "runs": {
+        "137": 434.5
+      }
+    },
+    {
+      "task": "DISH-B08-A03",
+      "arm": "REPLACE",
+      "n": 1,
+      "mean": 441.0,
+      "sample_sd": null,
+      "min": 441.0,
+      "max": 441.0,
+      "runs": {
+        "137": 441.0
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "DISH-B08-A03",
+      "arm": "HALF_RETAIN",
+      "baseline": "REPLACE",
+      "summary": {
+        "n": 1,
+        "mean": -6.5,
+        "sample_sd": null,
+        "min": -6.5,
+        "max": -6.5
+      },
+      "differences": {
+        "137": -6.5
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

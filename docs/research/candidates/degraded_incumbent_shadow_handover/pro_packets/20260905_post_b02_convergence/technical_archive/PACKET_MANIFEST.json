@@ -1,0 +1,52 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-05-dish-post-b02-convergence-01--degraded_incumbent_shadow_handover",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-05-dish-post-b02-convergence-01",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_ids": [
+    "degraded_incumbent_shadow_handover"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-05-dish-post-b02-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "bytes": 578,
+    "sha256": "4c729a1bd2b7e387f84ac7f3e5b747031a3d125554fff28353d95a369c27ffff",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-05-dish-post-b02-convergence-01\\2026-09-05-dish-post-b02-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-05-dish-post-b02-convergence-01\\2026-09-05-dish-post-b02-convergence-01--degraded_incumbent_shadow_handover__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-05-dish-post-b02-convergence-01\\2026-09-05-dish-post-b02-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "4c729a1bd2b7e387f84ac7f3e5b747031a3d125554fff28353d95a369c27ffff",
+    "references": []
+  },
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/pro-dish-b02-convergence-20260905",
+    "base_sha": "46d9071378a4272e9e1e8ec64d0c0d5abdb9088f",
+    "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_b02_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4"
+  },
+  "observed_existing_binding": {
+    "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+    "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "provider_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316"
+  },
+  "observed_replacement_binding": {
+    "conversation_id": "6a9cbbcd-4da8-83e8-a802-8b670b436462",
+    "provider_url": "https://chatgpt.com/c/6a9cbbcd-4da8-83e8-a802-8b670b436462"
+  }
+}

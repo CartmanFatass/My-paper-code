@@ -1,0 +1,38 @@
+{
+  "question": "是否维持已执行的窄停止：本例保留模态，停止B06联合抽样规则的当前扩展，并且本轮不选新实验？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md · Accepted post-B06 boundary",
+      "from": "B06局部选择已记录，方向层科学裁决待完整交付",
+      "to": "应用完整Pro窄停止；无新A/B，首次普通合法应用来源议程仍开放"
+    }
+  ],
+  "if_refused": "保留B06及全部历史数据，按你的具体指令重新处理范围；若仍需方向裁决，则回到同一节点。不会仅凭拒绝就自动加种子、改组件或开始实验。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md",
+      "quote": "**方向层决定：停止 B06 所测试的联合高斯运动／Bernoulli 意图抽样规则的当前扩展投入；本轮不选择新的 A 或 B，也不追加任何科学调用。** 最小停止单位是在修正 A03 宿主、既有 LOW_LR 学习器及普通续约边界上，用这项联合抽样法替换同一最终控制器模态执行的探索支线。",
+      "why": "完整裁决明确最小停止单位，选择不追加调用；有限服务差值为-77.5，四个条件均负且原生代价增加。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md",
+      "quote": "**对本次停止最强的异议**是只有一个训练实例和每条件两个样本，另一个控制器可能改变差分符号；组件单独抽样也可能优于联合抽样。这些都是实质不确定性，而不是已经排除的解释。",
+      "why": "只有一个训练实例，另一个控制器或单独组件可能改变符号，因此不能推广为总体负结论或原因诊断。"
+    }
+  ],
+  "uncertainty": [
+    "来源原点资格及COPY−RETAIN、SHADOW−COPY价值仍未估计，零换主不等于零价值。",
+    "两个个别抽样轨迹胜出；无效提交与能量增加没有定位哪种噪声导致损失。",
+    "新独立种子和具体组件比较均未被选择；未来须说明新观测要决定什么。"
+  ],
+  "cost": {
+    "compute": "本轮新增0训练、0评价、0科学调用。已有B06完整计费226.02秒；未选的新种子为65536转移、512优化步、至多19200评价时刻，耗时未知，226.02秒仅作参考。",
+    "owner_time": "无需即时回复；若想复审，可指出一个具体新问题。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "**方向层决定：停止 B06 所测试的联合高斯运动／Bernoulli 意图抽样规则的当前扩展投入；本轮不选择新的 A 或 B，也不追加任何科学调用。** 最小停止单位是在修正 A03 宿主、既有 LOW_LR 学习器及普通续约边界上，用这项联合抽样法替换同一最终控制器模态执行的探索支线。保留模态作为本实例的开发默认。依据仍是 **B/EXPLORE 的有限原生比较**，不是新的 C 结论，不是整个 DISH 或首次普通合法应用 RETAIN/COPY/SHADOW 议程的 PARK、CLOSE 或 RECAST。",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md"
+}

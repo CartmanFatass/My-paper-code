@@ -1,0 +1,50 @@
+{
+  "question": "B07 之后，是否继续当前已选面板上的平衡残差对象族，还是可逆暂停、关闭或重述它？",
+  "changes_if_approved": [
+    {
+      "target": "当前已选面板上的平衡残差对象族",
+      "from": "B07 已完成，尚未选择后继；Direction 处置待 Convergence",
+      "to": "按建议可逆暂停该对象族，并记录明确再进入条件；不改 Portfolio 生命周期或优先级"
+    }
+  ],
+  "if_refused": "由 Convergence 在继续一个明确 B 判别、有限关闭或重述中形成最终决定；DM 不自行冻结新卡，不重跑 B07，不改变既有结果。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_INTAKE_20260904.md",
+      "quote": "Frozen branch: **BR-D — NO_TRUE_GAIN**.",
+      "why": "唯一 RAW 合格的种子比较不支持真残差收益，负向差异超过原先声明的最小关注效应。"
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CENTERED_LOSS_B07_INTAKE_20260905.md",
+      "quote": "Legal-action centering did not recover competence at 516 updates.",
+      "why": "两个后续种子的这项比较器修复均未恢复合格性，不能据此补上残差复核。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_EXPOSURE_B06_INTAKE_20260905.md",
+      "quote": "Seed 2 nevertheless gained native value beyond this diagnostic's MEI by correcting a KEEP action.",
+      "why": "更多暴露曾带来真实收益，不能说继续学习无效。"
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CENTERED_LOSS_B07_INTAKE_20260905.md",
+      "quote": "This is not proof that the learner ignores the information or cannot learn the actions.",
+      "why": "中心化改正一个动作却又错了另一个；容量、目标及优化解释仍活着，暂停与继续的取舍接近。"
+    }
+  ],
+  "uncertainty": [
+    "比较器平均后悔均达标，但两个种子各少一个正确 REPLAN；这限制残差比较，不证明机制无效。",
+    "种子共同改变预测器、门控及适用时的打乱，不是纯门控初始化实验。",
+    "无调优的同信息 RAW 与兼容上界组成的余量记录；缺少此项不阻止 B 实验。",
+    "原 A01 原生崩溃仍未复现归因；旧自然面板关闭与本对象族分开保留。"
+  ],
+  "cost": {
+    "compute": "本请求不新增学习。B05/B06/B07 六次调用共 807 秒监督器机器时间；若继续，下一对象另行声明逐臂成本和暴露。",
+    "owner_time": "约 2 分钟；可异步回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "没有实验等待所有者回复。对象族处置等待 Convergence 最终回答，Root 可推进其他方向。"
+  },
+  "verdict_text": "建议可逆暂停当前已选面板上的平衡残差对象族，直到提出一个能改变合格同信息 RAW 动作或原生收益的明确判别问题；这只是提交给 Convergence 的建议，尚未执行。",
+  "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_FAMILY_CONVERGENCE_REQUEST_20260905.md"
+}
+

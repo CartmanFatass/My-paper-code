@@ -1,0 +1,43 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-05-cbsc-two-seed-family-convergence-01--capability_bound_semantic_currentness",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-05-cbsc-two-seed-family-convergence-01",
+  "direction_id": "capability_bound_semantic_currentness",
+  "direction_ids": [
+    "capability_bound_semantic_currentness"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:capability_bound_semantic_currentness:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-05-cbsc-two-seed-family-convergence-01--capability_bound_semantic_currentness__00_PROMPT.md",
+    "bytes": 588,
+    "sha256": "283f6a3e9439698d51c20c93357c2b50ebe5817985d2f9da59998b2b8080696c",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\capability_bound_semantic_currentness\\2026-09-05-cbsc-two-seed-family-convergence-01\\2026-09-05-cbsc-two-seed-family-convergence-01--capability_bound_semantic_currentness__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\capability_bound_semantic_currentness\\2026-09-05-cbsc-two-seed-family-convergence-01\\2026-09-05-cbsc-two-seed-family-convergence-01--capability_bound_semantic_currentness__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\capability_bound_semantic_currentness\\2026-09-05-cbsc-two-seed-family-convergence-01\\2026-09-05-cbsc-two-seed-family-convergence-01--capability_bound_semantic_currentness__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "283f6a3e9439698d51c20c93357c2b50ebe5817985d2f9da59998b2b8080696c",
+    "references": []
+  },
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/pro-cbsc-two-seed-family-20260905",
+    "base_sha": "09664be0bb9d8ff843ce70389764c10e779e4b64",
+    "response_path": "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260905_two_seed_family_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/7"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "recorded_at": "2026-09-09T13:05:33-07:00",
+  "object": "UCOPE-UAV-FEEDBACK-VALUE-NORMALIZATION-B01",
+  "selector": "feedback_value_normalization_b01",
+  "authority": "Root 2026-09-09 exact one-invocation allocation; standing object-tier delegation",
+  "accepted_source": "7c88fb8405c75339e9634b78f1ef6de770f24e31",
+  "authoring_start": "961bc69f9d0dcf15f8e1e7b39a10a3b35ce73538",
+  "configuration_defaults": {
+    "seed": 8501,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600
+  },
+  "prospective_counts": {
+    "matched_learning_instances": 1,
+    "fitted_arms": 2,
+    "trainable_parameters_per_arm": 66311,
+    "training_episodes": 1024,
+    "training_native_steps": 262144,
+    "final_eval_episodes": 96,
+    "final_native_steps": 24576,
+    "native_steps": 286720,
+    "Adam_calls_per_arm": 1024,
+    "Adam_calls": 2048,
+    "normalized_moments_updates": 256,
+    "normalized_moments_n": 131072,
+    "explicit_resets": 1120,
+    "constructor_resets": 2
+  },
+  "allocated_result_bearing_invocations": 1,
+  "new_actual_scientific_exposure_before_launch": {
+    "result_bearing_invocations": 0,
+    "native_steps": 0,
+    "Adam_calls": 0,
+    "final_eval_episodes": 0
+  },
+  "supporting_check_budget_seconds": 300,
+  "already_spent_supporting_outer_seconds": 7.32,
+  "new_supporting_suite_allocated": false,
+  "complete_arm_cap_seconds": 1800,
+  "whole_invocation_cap_seconds": 3600,
+  "planned_node": "hmasd-wsl-node CPU FP32 one Torch thread",
+  "prospective_native_wall_seconds": null,
+  "predictions_before_output": [
+    {
+      "event": "Delta_N > 0.01",
+      "probability": 0.5
+    },
+    {
+      "event": "mean(G_normalized-H) > 0",
+      "probability": 0.55
+    },
+    {
+      "event": "mean(G_raw-H) > 0",
+      "probability": 0.5
+    }
+  ],
+  "owner_prediction": "not taken (unattended)",
+  "exposure_line": "matched_learning_instances=1; fitted_arms=2; train_steps_per_arm=131072; Adam_calls_per_arm=1024; trainable_parameters_per_arm=66311; lr=0.0003; all_actor_critic_parameters_trainable; native_steps=286720; final_eval_episodes=96; new_actual_scientific_exposure=0; allocated_result_bearing_invocations=1"
+}

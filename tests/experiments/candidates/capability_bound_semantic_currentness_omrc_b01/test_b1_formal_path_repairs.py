@@ -273,3 +273,90 @@ def test_memory_admission_failure_still_reports_a_stderr_refusal(monkeypatch, tm
             arm=b1.ARM_SEED_ORDER[0][1], seed=b1.ARM_SEED_ORDER[0][0],
             implementation_commit="c" * 40, source_conformance_sha256="d" * 64,
         )
+
+
+@pytest.mark.skipif(not __import__("os").environ.get("CBSC_R05_FIXTURE"),
+                    reason="requires full frozen r05 offline evidence")
+def test_r05_complete_formal_publication_preserves_original_receipts(tmp_path):
+    """Exercise real publication constants over quarantined input, without a learner."""
+    import os
+    import re
+    import shutil
+    import time
+    from pathlib import Path, PureWindowsPath
+    from experiments.candidates.capability_bound_semantic_currentness.omrc_b01 import b1_metrics_production as production
+    from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_artifact import make_b1_incident_lineage_witness
+    from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_metrics_artifact import FORMAL_TABLE_ROW_COUNTS, validate_metrics_only_manifest
+
+    started = time.monotonic()
+    source = Path(os.environ["CBSC_R05_FIXTURE"])
+    b0_root = Path(os.environ["CBSC_B0_FIXTURE"])
+    staging, final = tmp_path / "offline-staging", tmp_path / "offline-publication"
+    shutil.copytree(source, staging)
+    commit = "4679e8dc86fb39b7b72fe7404f3f837f11ebbaad"
+    conformance = "2f8dc132a1ca67138b26736094999d3771a0d2b841a399c9050cfc581b71fdd0"
+    attempt = "b1-61d8b522f3fc4e8da6b48e0e01d24510"
+    literal_sha = "08cd6294cc1557ac1356862ba011be225acd00b826bdfe5a6e443f7c84d9fb1c"
+    original_receipts = {
+        Path("attempt-ledger.json"): (source / "attempt-ledger.json").read_bytes(),
+    }
+    admission_files = [*source.glob("admissions/*-admission.json"),
+                       *source.glob("policy-replay/*/admission.json")]
+    assert len(admission_files) == 48
+    for path in admission_files:
+        bound = json.loads(path.read_bytes())
+        raw = path.parent / PureWindowsPath(bound["raw_output_path"]).name
+        assert hashlib.sha256(raw.read_bytes()).hexdigest() == bound["raw_receipt_sha256"]
+        original_receipts[path.relative_to(source)] = path.read_bytes()
+        original_receipts[raw.relative_to(source)] = raw.read_bytes()
+    groups = []
+    for index, (seed, arm) in enumerate(production.B1_SLOT_ORDER):
+        tag = f"{index:02d}-seed-{seed}-{arm}"
+        group = [json.loads(path.read_bytes())["raw_evidence"]
+                 for path in sorted((staging / "workers" / tag).glob("slice-*/result.json"))]
+        assert len(group) == 3
+        groups.append(group)
+    # Reconstructed Git-blob law metadata, not original Windows checkout digests.
+    # Original raw/source/admission identities remain byte-preserved; no equality gate.
+    laws = b1._law_digests({"files": [{"path": relative,
+        "sha256": hashlib.sha256(subprocess.check_output(
+            ["git", "show", f"{commit}:{relative}"], cwd=b1.REPO_ROOT)).hexdigest()}
+        for relative in re.findall(r'"((?:experiments/|docs/)[^"]+)"', inspect.getsource(b1._law_digests))]})
+    replay = production.make_b1_policy_replay_batch_witness(
+        staging_root=staging, allowed_root=tmp_path, attempt_id=attempt,
+        implementation_commit=commit, source_conformance_sha256=conformance,
+        literal_binding_spec_sha256=literal_sha, test_only=False,
+    )
+    assert len(replay.slots) == 12
+    published = production._assemble_and_publish_b1_metrics(
+        staging_root=staging, final_path=final, grouped_raw_slices=groups,
+        implementation_commit=commit, source_conformance_sha256=conformance,
+        b0_root=b0_root, b0_evidence=b1.locate_b0_evidence(b0_root), law_digests=laws,
+        incident_lineage_witness=make_b1_incident_lineage_witness([], allowed_root=tmp_path),
+        policy_replay_witness=replay, allowed_root=tmp_path, test_only=False,
+    )
+    manifest = json.loads((published / "manifest.json").read_bytes())
+    validate_metrics_only_manifest(manifest, root=published, allow_test_only=False)
+    assert len(manifest["table_inventory"]) == 15
+    for table in manifest["table_inventory"]:
+        rows = (published / table["relative_path"]).read_bytes().splitlines()
+        assert len(rows) == table["row_count"]
+        assert all(isinstance(json.loads(row), dict) for row in rows)
+    counts = {row["table"]: row["row_count"] for row in manifest["table_inventory"]}
+    assert all(counts[name] == count for name, count in FORMAL_TABLE_ROW_COUNTS.items())
+    assert counts["telemetry"] == counts["resource_admissions"] == 48
+    for relative, payload in original_receipts.items():
+        assert (published / relative).read_bytes() == payload
+        assert (source / relative).read_bytes() == payload
+    summary = json.loads((published / "summary.json").read_bytes())
+    assert summary["evidence_role"] == "ENGINEERING_ONLY"
+    assert summary["execution_sha"] == subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=b1.REPO_ROOT, text=True).strip()
+    assert summary["input_identity"]["implementation_commit"] == commit
+    assert summary["descriptive_curves"]
+    assert all(value is None for value in manifest["derived_fields"].values())
+    assert all(manifest[field] is None for field in (
+        "scientific_branch", "scientific_polarity", "promotion_eligible", "b2_extension_trigger"))
+    import resource
+    print(json.dumps({"offline_formal_wall_seconds": time.monotonic() - started,
+                      "peak_rss_bytes": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024}))

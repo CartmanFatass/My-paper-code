@@ -1,0 +1,201 @@
+{
+  "object": "CBSC-DIRECT-RETURN-B03",
+  "seed": 21209,
+  "primary_mean_difference": 0.0,
+  "episode_differences": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "checks": {
+    "pair_metadata_equal": true,
+    "named_B03_seed": true,
+    "all32differences_match": true,
+    "mean_matches": true,
+    "all_native_rows_include_settlement": true,
+    "fresh_episode_sequence": true,
+    "all768_finite_losses_per_arm": true,
+    "action_uniform_addresses_match": true
+  },
+  "arms": [
+    {
+      "arm": "RAW-GRU",
+      "counters": {
+        "rollout_updates": 48,
+        "adam_steps": 768,
+        "train_episodes": 384,
+        "train_transitions": 58368,
+        "train_decisions": 9216
+      },
+      "evaluation_executions": 128,
+      "evaluation_transitions": 19456,
+      "curves": [
+        {
+          "update": 0,
+          "mean_native_return": 2.415625,
+          "actions": {
+            "SERVE": 306,
+            "REFRESH": 233,
+            "SAFE_FALLBACK": 229
+          }
+        },
+        {
+          "update": 12,
+          "mean_native_return": 10.5875,
+          "actions": {
+            "SERVE": 0,
+            "REFRESH": 768,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "update": 24,
+          "mean_native_return": 10.5875,
+          "actions": {
+            "SERVE": 0,
+            "REFRESH": 768,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "update": 48,
+          "mean_native_return": 10.5875,
+          "actions": {
+            "SERVE": 0,
+            "REFRESH": 768,
+            "SAFE_FALLBACK": 0
+          }
+        }
+      ],
+      "relative_displacement": 0.2032705530558844,
+      "displacement_l2": 6.078076362609863,
+      "initial_parameter_l2": 29.901411056518555,
+      "execution": {
+        "torch_threads": 1,
+        "dtype": "torch.float32",
+        "device": "cpu"
+      },
+      "sampled_training_actions": {
+        "SERVE": 243,
+        "SAFE_FALLBACK": 458,
+        "REFRESH": 8515
+      },
+      "last_update_sampled_actions": {
+        "REFRESH": 191,
+        "SAFE_FALLBACK": 1
+      },
+      "cost": {
+        "host_seconds": 6.67605249400367,
+        "update_seconds_sum": 48.33841103903251,
+        "outer_wall_seconds": 59.53
+      }
+    },
+    {
+      "arm": "STRUCT-CURRENTNESS-GRU",
+      "counters": {
+        "rollout_updates": 48,
+        "adam_steps": 768,
+        "train_episodes": 384,
+        "train_transitions": 58368,
+        "train_decisions": 9216
+      },
+      "evaluation_executions": 128,
+      "evaluation_transitions": 19456,
+      "curves": [
+        {
+          "update": 0,
+          "mean_native_return": 2.415625,
+          "actions": {
+            "SERVE": 306,
+            "REFRESH": 233,
+            "SAFE_FALLBACK": 229
+          }
+        },
+        {
+          "update": 12,
+          "mean_native_return": 10.5875,
+          "actions": {
+            "SERVE": 0,
+            "REFRESH": 768,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "update": 24,
+          "mean_native_return": 10.5875,
+          "actions": {
+            "SERVE": 0,
+            "REFRESH": 768,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "update": 48,
+          "mean_native_return": 10.5875,
+          "actions": {
+            "SERVE": 0,
+            "REFRESH": 768,
+            "SAFE_FALLBACK": 0
+          }
+        }
+      ],
+      "relative_displacement": 0.18682867606079778,
+      "displacement_l2": 5.5864410400390625,
+      "initial_parameter_l2": 29.901411056518555,
+      "execution": {
+        "torch_threads": 1,
+        "dtype": "torch.float32",
+        "device": "cpu"
+      },
+      "sampled_training_actions": {
+        "SERVE": 237,
+        "SAFE_FALLBACK": 410,
+        "REFRESH": 8569
+      },
+      "last_update_sampled_actions": {
+        "REFRESH": 192
+      },
+      "cost": {
+        "host_seconds": 7.102838024991797,
+        "update_seconds_sum": 48.31928278703708,
+        "outer_wall_seconds": 58.67
+      }
+    }
+  ],
+  "source_commit": "65bf2486594fc29b4813df2d1d79dec82f5756af",
+  "method": "Artifact-only native return/count/loss/action arithmetic; no new learner, replay or evaluation.",
+  "context_means": {
+    "ALWAYS_REFRESH": 10.5875,
+    "ALWAYS_SAFE": 4.0375
+  },
+  "formal_wall_sum_seconds": 118.2
+}

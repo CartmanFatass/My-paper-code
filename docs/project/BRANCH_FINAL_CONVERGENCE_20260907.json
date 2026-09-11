@@ -1,0 +1,77 @@
+{
+  "removed_local": 105,
+  "removed_remote": 128,
+  "detached_worktrees": 90,
+  "remaining_local": [
+    "refs/heads/codex/pro-dish-post-b06-20260907",
+    "refs/heads/codex/pro-rcle-post-a02-20260906",
+    "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906",
+    "refs/heads/main"
+  ],
+  "remaining_remote": {
+    "refs/heads/codex/pro-dish-post-b06-20260907": "6b45ea47bea500bea11f1215080653a8df19bdd6",
+    "refs/heads/codex/pro-rcle-post-a02-20260906": "5a335eaff0f2242c515f6867e22d04bdd8d832ef",
+    "refs/heads/codex/pro-rcle-tbcfv-first-b-20260906": "4715e912cb926368db050f5440e5cc4957ebb90f",
+    "refs/heads/codex/pro-vnfc-b01-two-seed-convergence-20260905": "25b73b91a25e3b11835de81cd690ac6232d94044",
+    "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906": "a62defbbe843149c836c132d6a8f6bb5540506a2",
+    "refs/heads/codex/pro-vspc1-k4-three-seed-20260905": "a7265e9733873e3dd16de76861c75f3634302095",
+    "refs/heads/main": "2cc404579c9fb6e10197381bf47ff500886254e0"
+  },
+  "archive_tag": "archive/branch-final-convergence-20260907",
+  "archive_commit": "1e8e5bdf557d951db349cb6edb5f12a6d2217977",
+  "dirty_backups": 18,
+  "pr2": "CLOSED without merge",
+  "deleted_worktree_directories": 0,
+  "retained_delivery_reasons": [
+    {
+      "branch": "codex/pro-dish-post-b06-20260907",
+      "remote_tip": "6b45ea47bea500bea11f1215080653a8df19bdd6",
+      "local_tip": "6b45ea47bea500bea11f1215080653a8df19bdd6",
+      "current_remote_tip": "6b45ea47bea500bea11f1215080653a8df19bdd6",
+      "retirement_candidate": false,
+      "evidence": "Prepared/unsent; no formed response or Pro intake found."
+    },
+    {
+      "branch": "codex/pro-rcle-post-a02-20260906",
+      "remote_tip": "5a335eaff0f2242c515f6867e22d04bdd8d832ef",
+      "local_tip": "5a335eaff0f2242c515f6867e22d04bdd8d832ef",
+      "current_remote_tip": "5a335eaff0f2242c515f6867e22d04bdd8d832ef",
+      "retirement_candidate": false,
+      "evidence": "No formed response or round intake found; unresolved current boundary."
+    },
+    {
+      "branch": "codex/pro-rcle-tbcfv-first-b-20260906",
+      "remote_tip": "4715e912cb926368db050f5440e5cc4957ebb90f",
+      "local_tip": null,
+      "current_remote_tip": "4715e912cb926368db050f5440e5cc4957ebb90f",
+      "retirement_candidate": false,
+      "evidence": "Original round lacks response; r02 is a different binding."
+    },
+    {
+      "branch": "codex/pro-vnfc-b01-two-seed-convergence-20260905",
+      "remote_tip": "25b73b91a25e3b11835de81cd690ac6232d94044",
+      "local_tip": null,
+      "current_remote_tip": "25b73b91a25e3b11835de81cd690ac6232d94044",
+      "retirement_candidate": false,
+      "evidence": "Response bytes match main, but no matching current-round intake was located."
+    },
+    {
+      "branch": "codex/pro-vsp03-shared-service-convergence-20260906",
+      "remote_tip": "a62defbbe843149c836c132d6a8f6bb5540506a2",
+      "local_tip": "585fe948cdbde4fdb3c2fcf658cd02d848ba5c5f",
+      "current_remote_tip": "a62defbbe843149c836c132d6a8f6bb5540506a2",
+      "retirement_candidate": false,
+      "evidence": "Continuation receipt is not the requested response; transport-blocker intake exists."
+    },
+    {
+      "branch": "codex/pro-vspc1-k4-three-seed-20260905",
+      "remote_tip": "a7265e9733873e3dd16de76861c75f3634302095",
+      "local_tip": null,
+      "current_remote_tip": "a7265e9733873e3dd16de76861c75f3634302095",
+      "retirement_candidate": false,
+      "evidence": "Misrouted Portfolio response; r02 is a different binding. Preserve misroute."
+    }
+  ],
+  "backup_root": "C:/Projects/HMASD-branch-backups/20260907T164718Z",
+  "policy_review": "branch_unique_3: focused independent review accepted all five branch lifecycle scenarios"
+}

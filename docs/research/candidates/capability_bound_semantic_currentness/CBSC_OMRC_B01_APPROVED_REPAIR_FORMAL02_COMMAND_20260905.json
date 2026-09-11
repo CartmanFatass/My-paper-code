@@ -1,0 +1,15 @@
+{
+  "source_sha": "8003b96bd79910864e9372ad6f1ea81f1c80520c",
+  "node": "wsl_4070",
+  "task": "cbsc-approved-profile-8003b96bd-02",
+  "cwd": "/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905",
+  "command": "cd /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness/test/approved-repair/profile02-admission.json && CBSC_R05_FIXTURE=/home/wu/hmasd-inputs/cbsc-r07-resource-repair-20260904/snap_r05 CBSC_B0_FIXTURE=/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness/test/approved-repair/input-b0 /usr/bin/time -f 'process_wall_seconds=%e peak_rss_kib=%M' -o /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness/test/approved-repair/profile02-time.txt timeout -k 1s 231s /home/wu/.venvs/hmasd/bin/python -m pytest -q -s -p no:cacheprovider --maxfail=1 --basetemp /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness/test/approved-repair/profile02 tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_formal_path_repairs.py::test_r05_complete_formal_publication_preserves_original_receipts",
+  "reason": "Profile01 19 focused passed; formal failed before publication on B0 input outside confined root. Reviewer reproduced exact pathlib failure. Same original B0 bytes copied inside direction root; no source or science change.",
+  "prior_profile_process_seconds": 10.64,
+  "remaining_seconds": 232.91,
+  "bound_seconds": 232,
+  "original_b0_manifest_sha256": "c7c6f73be17e785cbe6ffaba6cfd30c4c8483ecf23e43bbd48df535c676bc298",
+  "original_b0_files": 33,
+  "original_b0_bytes": 12807274,
+  "delivery": "agent-task run receives one shell-quoted bash -lc command string, preserving inner quoting"
+}

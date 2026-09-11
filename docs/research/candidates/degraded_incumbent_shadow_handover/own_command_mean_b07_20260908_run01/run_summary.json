@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "DISH-OWN-COMMAND-MEAN-B07",
+      "arm": "DIRECT_MEAN",
+      "n": 1,
+      "mean": 693.0,
+      "sample_sd": null,
+      "min": 693.0,
+      "max": 693.0,
+      "runs": {
+        "127": 693.0
+      }
+    },
+    {
+      "task": "DISH-OWN-COMMAND-MEAN-B07",
+      "arm": "OWN_COMMAND_MEAN",
+      "n": 1,
+      "mean": 557.75,
+      "sample_sd": null,
+      "min": 557.75,
+      "max": 557.75,
+      "runs": {
+        "127": 557.75
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "DISH-OWN-COMMAND-MEAN-B07",
+      "arm": "OWN_COMMAND_MEAN",
+      "baseline": "DIRECT_MEAN",
+      "summary": {
+        "n": 1,
+        "mean": -135.25,
+        "sample_sd": null,
+        "min": -135.25,
+        "max": -135.25
+      },
+      "differences": {
+        "127": -135.25
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

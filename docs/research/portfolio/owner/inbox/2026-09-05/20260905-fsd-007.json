@@ -1,0 +1,33 @@
+{
+  "id": "20260905-fsd-007",
+  "created": "2026-09-05T04:04:55-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "brief",
+  "title": "E3 大差异固定时钟种子二有效结果简报",
+  "context": "末次回报约 0.56488，本种子达到预定比较器能力线。E3 15/18，整体效果尚未判读。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "报告完整单格及比较器能力，同时保留未完成的总体问题。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D0_SEED2_INTAKE_20260905.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D0_SEED2_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#fsd-e3-large-d0-seed2-terminal-20260905",
+  "brief": "docs/research/portfolio/owner/briefs/flexible_skill_duration/2026-09-05_E3_large_d0_seed2.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

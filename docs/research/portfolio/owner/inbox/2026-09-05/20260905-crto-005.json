@@ -1,0 +1,32 @@
+{
+  "id": "20260905-crto-005",
+  "created": "2026-09-05T02:40:27-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "brief",
+  "title": "CRTO B05：两个新种子均受比较器限制",
+  "context": "有效结果简报：两个 RAW 长终点在 REPLAN 都是 5/8，低于卡定 6/8。联合种子敏感性可见，但没有合格比较器支持三种子残差结论。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "独立重算符合逐种子 BR-E 与合并比较器受限规则；条件性残差信号预测不可评估。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_JOINT_SEED_B05_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b05-joint-seed-result",
+  "brief": "docs/research/portfolio/owner/briefs/commitment_residual_triggered_options/2026-09-05_joint_seed_b05.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

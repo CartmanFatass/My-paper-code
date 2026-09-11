@@ -1,0 +1,19 @@
+{
+  "observed_at_utc": "2026-09-07 03:15:53 UTC",
+  "tool": "mcp__codex_app__send_message_to_thread",
+  "request_id": "2026-09-06-vspc1-reactive-queues-convergence-01",
+  "thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "prompt": "Execute the handoff packet at C:\\Projects\\HMASD-worktrees\\dm-vspc1-next-20260906\\docs\\research\\candidates\\vsp_c1\\pro_packets\\20260906_reactive_queues_convergence\\HANDOFF.json exactly once.",
+  "model": "gpt-5.6-luna",
+  "thinking": "xhigh",
+  "raw_tool_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a06f0e-5eab-7431-8491-e7c2c62705b6\"}"
+      }
+    ],
+    "isError": false
+  },
+  "interpretation": "App dispatch accepted. Provider Send, Pro result, and response commit are not observed by this receipt. No resend authorized by this receipt."
+}

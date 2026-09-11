@@ -1,0 +1,43 @@
+{
+  "question": "是否按已批准的小规模复用规则，执行第三个事前固定路径，观察紧约束优势是否再次出现？",
+  "changes_if_approved": [
+    {
+      "target": "FRRIE 下一 B 类对象",
+      "from": "R08 已完成，第三根候选因编排比例返回；已有两个不同路径的结果不一致",
+      "to": "事前固定整数3对应的根与新标签，保持学习率0.003、128次更新和两臂约束，完整报告15与9个体"
+    }
+  ],
+  "if_refused": "在下一安全边界执行拒绝或修订意见；保留已完成结果和原始证据，不替换已观察过的根，不回填历史规则。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-05-next-investment-owner-ratification.md",
+      "quote": "FRRIE's prospective third independent fixed path is the preferred next executable candidate, subject to a real implementation and the normal DM object choice.",
+      "why": "所有者已批准这一条件投入；本卡固定实际科学问题与执行边界。"
+    },
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R08_RESULT_INTAKE_20260905.md",
+      "quote": "R07's sub-MEI opposite-sign N15 result remains the strongest contradiction to assuming recurrence across paths.",
+      "why": "第三个未观察路径直接增加复现边界信息，避免继续围绕已知正结果调参。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R08_RESULT_INTAKE_20260905.md",
+      "quote": "R08's intact endpoint numerically matches R06, but it uses the same literal root, configuration and addressed tapes and is not another independent root.",
+      "why": "历史正结果并未增加独立路径数量；三条固定路径仍不能给出随机根总体或稳定优越性结论。"
+    }
+  ],
+  "uncertainty": [
+    "实际源代码尚需审查；全逻辑新增非测试源代码必须不超过100行且不能新增机械设施。",
+    "新根可能不触发投影，或宽臂低于最低参考，必须按预定分支如实保留。",
+    "缺少同信息调优基线和可行上参考；该缺口不成为本 B 对象的附加启动条件。"
+  ],
+  "cost": {
+    "compute": "每臂655,360原生时隙、总1,316,864；同配置参考约15分钟全调用和每臂150秒直接计时，上限仍每臂4小时、整次8小时；各次执行前实际节点新鲜内存准入。",
+    "owner_time": "约一分钟；不需要再次批准已通过的规则。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "推荐执行第三个事前固定的字面路径，保持学习率、工作量和比较器不变；实际实现按已批准的整项小规模复用例外审查，科学结论只限于该路径。",
+  "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_THIRD_ROOT_SCIENCE_CARD_20260905.md"
+}

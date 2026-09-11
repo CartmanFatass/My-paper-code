@@ -1,0 +1,97 @@
+{
+  "id": "20260908-dish-002",
+  "created": "2026-09-08T12:36:30-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "DISH B07：冻结本机加速度均值的一组真实学习比较",
+  "context": "主张待检验：把本机已施加加速度直接接入运动均值，可能提高相同训练曝光后的原生服务。绑定结构：systems / information flow，处于部分观测、移动伙伴与角色循环状态中；不声称独有多智能体优势。已按完整Convergence裁定冻结卡片与CM规范，本次无实现或运行。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "接受该卡片",
+      "consequence": "沿既有路线交付实现；只保留这一组配对和完整预算，本次不启动实验。"
+    },
+    {
+      "key": "reject",
+      "label": "拒绝该卡片",
+      "consequence": "保留已有证据，依实际所有者指令停止或修订该卡片；不自行换方案。"
+    },
+    {
+      "key": "revise",
+      "label": "修订该卡片",
+      "consequence": "按具体反馈修订未运行卡片，若涉及方向裁定冲突则返回原节点。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "卡片准确保留已接受的唯一处理、真实对照、物理映射、主量和预算；聚焦检查直接保护动作分布与学习比较。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_CM_SPEC_20260908.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md#10-b07-card-and-complete-engineering-handoff--2026-09-08"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L72",
+  "brief": "docs/research/portfolio/owner/briefs/degraded_incumbent_shadow_handover/2026-09-08_P53-source.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否接受按已归档裁定冻结的DISH B07卡片与完整工程规范？本次仅准备，不运行。",
+    "changes_if_approved": [
+      {
+        "target": "DISH B07卡片与CM实现规范",
+        "from": "单组比较已获方向节点选择，具体卡片与工程交付尚待形成",
+        "to": "冻结种子127两臂各十六更新、各自初始化与最终评价、最终服务差及每臂1800秒/配对3600秒预算；交由既有CM路线实施"
+      }
+    ],
+    "if_refused": "保留已归档选择与所有旧结果，按实际反馈修订卡片或把具体冲突返回原节点；不擅自换臂、加种子或运行。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p53_own_command_mean/archive/RESPONSE.md",
+        "quote": "**选择一个新的 DISH-OWN-COMMAND-MEAN-B07（B/EXPLORE）：新配对种子127，OWN_COMMAND_MEAN 对 DIRECT_MEAN，两臂各十六更新，只比较各自 update16 的完整模态原生服务，并保留各臂自己的初始化模态参考。** 这使现有普通来源应用议程继续到一个具体的学习／控制参数化问题，不重开 B06 已停止的联合抽样执行支线，不选择另一学习率配对，不作整个 DISH 的 PARK、CLOSE 或 RECAST。完整新支出界为每臂1,800秒、配对合计3,600秒，包含必要检查和发布；本次只作科学选择，不实施、不运行。",
+        "why": "完整答复已经选择这一项有限真实学习比较，卡片没有新增对象或提高证据负担。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_SCIENCE_CARD_20260908.md#2-fixed-treatment-comparator-and-informationaction-path",
+        "quote": "OWN_COMMAND_MEAN: mu_i = 3 * tanh(m_i + a_prev,i / 3)",
+        "why": "本机实际加速度已在执行和回放输入中；新规范明确四个均值/概率消费点和角色映射。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_SCIENCE_CARD_20260908.md#1-question-authority-and-ceiling",
+        "quote": "Strongest contradiction: the network\nalready sees this input, native projection already limits applied slew, and persistence\ncan retain an unhelpful acceleration.",
+        "why": "该输入可能冗余，错误加速度的持续也可能降低服务；尚无B07效果。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_SCIENCE_CARD_20260908.md#1-question-authority-and-ceiling",
+        "quote": "−77.5 service mean and condition means −92.5/−41/−94/−82.5",
+        "why": "B06原生服务损失、代价和零换主保留，不能把历史结果当作新处理的改善证据。"
+      }
+    ],
+    "uncertainty": [
+      "真实执行与PPO回放是否正确使用同一均值，仍需指定的聚焦工程检查。",
+      "一组训练配对只支持有限信号；新服务、代价、运行时间和训练标签数量未测。",
+      "换主事件不等于来源收益；没有调优基线/上界headroom记录。"
+    ],
+    "cost": {
+      "compute": "本次0模型、0原生调用、0训练/评价。后续唯一配对共131072普通转移、1024优化步和16评价回合；完整1800秒/臂、3600秒/对，必要共享检查只计一次。",
+      "owner_time": "可异步更改；当前冻结不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待所有者；后续实现与实际启动沿已有路线，本次尚未开始。"
+    },
+    "verdict_text": "**选择一个新的 DISH-OWN-COMMAND-MEAN-B07（B/EXPLORE）：新配对种子127，OWN_COMMAND_MEAN 对 DIRECT_MEAN，两臂各十六更新，只比较各自 update16 的完整模态原生服务，并保留各臂自己的初始化模态参考。** 这使现有普通来源应用议程继续到一个具体的学习／控制参数化问题，不重开 B06 已停止的联合抽样执行支线，不选择另一学习率配对，不作整个 DISH 的 PARK、CLOSE 或 RECAST。完整新支出界为每臂1,800秒、配对合计3,600秒，包含必要检查和发布；本次只作科学选择，不实施、不运行。",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_SCIENCE_CARD_20260908.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-08T19:37:31+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p53_own_command_mean/archive/RESPONSE.md",
+      "record": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md#10-b07-card-and-complete-engineering-handoff--2026-09-08",
+      "state": "applied",
+      "summary": "按不可变裁定ddb4c9ff及2026-09-03无人值守授权冻结B07卡片和完整CM规范；采用已选种子127配对、16行评价、最终服务差和完整1800秒/臂3600秒/对预算。本次仅准备，未派发CM、实现、生成实验master或运行。账本第72行为本作者分支冻结记录。"
+    }
+  ]
+}

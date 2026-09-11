@@ -1,0 +1,4 @@
+SOURCE_SUMMARY.json -text -whitespace
+SOURCE_TASK.log -text -whitespace
+CM_COLLECTION_CHECKS.json -text -whitespace
+MEMORY_ADMISSION.json -text -whitespace

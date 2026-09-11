@@ -1,0 +1,66 @@
+{
+  "object": "DISH-CONTROL-LOW-LR-B05",
+  "evidence_class": "B/EXPLORE",
+  "paired_training_seeds": [
+    101
+  ],
+  "arms": [
+    "CONTROL",
+    "LOW_LR"
+  ],
+  "rng_family": "DISH-CONTROL-LOW-LR-B04/seed/101",
+  "planned": {
+    "updates_per_arm": 16,
+    "lanes": 32,
+    "ticks_per_update": 128,
+    "ordinary_transitions_per_arm": 65536,
+    "ordinary_transitions_total": 131072,
+    "optimizer_steps_per_arm": 512,
+    "optimizer_steps_total": 1024,
+    "reference_episodes": 4,
+    "final_episodes": 8,
+    "evaluation_ticks_upper": 14400,
+    "native_training_call_law": "2N+2E+H; 0<=H<=20E; E<=N",
+    "native_training_calls_upper_per_arm": 1572864,
+    "intermediate_checkpoints": 0,
+    "search_candidates": 0
+  },
+  "new_actual_exposure_at_freeze": {
+    "initializers": 0,
+    "ordinary_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "caps_seconds": {
+    "fully_charged_per_arm": 1800,
+    "total": 3600,
+    "shared_allocation_per_arm": "S/2; includes focused checks, initializer/reference, actual build/load and shared reduction/publication"
+  },
+  "prior_B04_conditional_planning_seconds": {
+    "shared": 15.84,
+    "control_outer": 210.07,
+    "low_lr_outer": 206.49,
+    "chain": 432.4,
+    "charged_control": 217.98999999999998,
+    "charged_low_lr": 214.41
+  },
+  "prior_B04_exposure": {
+    "source": "control_low_lr_b04_20260906/{control,low_lr}/summary.json",
+    "control_parameter_movement": {
+      "absolute_l1_displacement": 2811.1429342152283,
+      "final_norm": 39.23581816918745,
+      "initial_norm": 38.26126788822669,
+      "l2_displacement": 8.621537324105303,
+      "relative_l2_displacement": 0.22533328872664518
+    },
+    "low_lr_parameter_movement": {
+      "absolute_l1_displacement": 646.5577737623518,
+      "final_norm": 38.316834036306595,
+      "initial_norm": 38.26126788822669,
+      "l2_displacement": 1.9122897033986779,
+      "relative_l2_displacement": 0.049979778740868785
+    }
+  },
+  "exposure_line": "Planned seed101: 2 arms x 16 updates x 32 lanes x 128 ticks = 131072 ordinary transitions; 2 x 16 x 4 x 8 = 1024 optimizer steps; 12 final/reference episodes <=14400 ticks. Same learner/rates at seed89 moved parameters nonzero as recorded below; seed101 movement is unobserved at freeze.",
+  "projection_status": "B04 same-scale full chain is a conditional planning reference (~hundreds of seconds), not a promised cost or episode unit price; future E/H and load unknown; no calibration run selected."
+}

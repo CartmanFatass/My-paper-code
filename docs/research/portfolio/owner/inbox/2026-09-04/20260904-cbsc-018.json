@@ -1,0 +1,38 @@
+{
+  "id": "20260904-cbsc-018",
+  "created": "2026-09-04T18:16:23-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CBSC 直接路径候选因编排预算返回",
+  "context": "独立逐行评审在108行候选中宽松允许18行科学调用，编排仍为90行（83.33%）；候选还缺学习调用、checkpoint replay、完整审计和三张表。37个既有受保护文件与基线一致，旧证据未修改。按有界契约停止本实现并保存拒绝源码；只接受技术报告，不执行测试、离线发布或r08。该结果不证明所有实现均不可行，也无科学负面含义。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接收有界工程报告并保留未接受候选，结束本实现段",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "接受超预算且不完整的候选作为实验源码",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "继续扩展架构或复制科学代码改变比例",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "精确源码、独立计数和缺失功能支持按已约定停止分支收尾，未形成可启动实现。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_DIRECT_PATH_RETURN_INTAKE_20260904.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_DIRECT_PATH_CM_RESULT_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#cbsc-b1-direct-path-return",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,58 @@
+{
+  "read_at_utc": "2026-09-07T20:02:33.071599+00:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "request_id": "2026-09-07-dish-post-b06-delivery-correction-01",
+  "response_commit": "f7b58f1b88d7282f98ca6be531e9b4c27f85b690",
+  "response_parent": "8a5cf6205b2ea0c0df8541b4c461234d81ec615a",
+  "scientific_input_sha": "6b45ea47bea500bea11f1215080653a8df19bdd6",
+  "authorized_delivery_base_sha": "dba5cfc8a58eba9a0c1b2cefb9e954f3c92a7e71",
+  "task_commit": "25c93b776b8d8a8d706ef1259601775d15210594",
+  "handoff_commit": "8a5cf6205b2ea0c0df8541b4c461234d81ec615a",
+  "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md",
+  "response_bytes": 28039,
+  "response_lines": 159,
+  "response_sha256": "a2e4e03f1631c3b24e7e70b9397d0c6a08e37c79716eda10b43232d38297fdd5",
+  "root_response_captures_equal_git_blob": true,
+  "commit_scope": "A\tdocs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md",
+  "response_parent_descends_authorized_delivery_base": true,
+  "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5574756410",
+  "comment_created_at": "2026-09-07T19:10:37Z",
+  "comment_updated_at": "2026-09-07T19:10:37Z",
+  "transport_input_base_field_interpretation": "The preserved Root TRANSPORT_FACTS github_delivery.input_base_sha 8a5cf6205... is the actual response-parent HEAD; the scientific input is 6b45ea47... and the authorized delivery baseline is dba5cfc8.... These fields are not interchangeable.",
+  "full_read_scope": "DM read all 159 lines directly from immutable Git f7b58f1b in ranges 1-80 and 81-159 before this byte/readback receipt. The 356-byte chat reply is only a delivery receipt.",
+  "observation_attribution": "Provider model, one Send, UI completion and exact question/reply pairing are Root transport observations. Git blob, parent/scope, byte agreement, comment and scientific conformance are DM direct checks.",
+  "new_pro_sends": 0,
+  "new_result_bearing_invocations": 0,
+  "archives": [
+    {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\PROMPT_BODY.md",
+      "archive_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/PROMPT_BODY.md",
+      "bytes": 1274,
+      "sha256": "3b9e8d29e195f0cb6d1a96d66684a8e44ac8f2612f92b00b39d1d7d0d175e540"
+    },
+    {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\PACKET_MANIFEST.json",
+      "archive_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/PACKET_MANIFEST.json",
+      "bytes": 1957,
+      "sha256": "fe6ac30f9c32ae850bdb08e681650e21a5a1e001d91d7b8ab241319a3a0edcb6"
+    },
+    {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\TRANSPORT_FACTS.json",
+      "archive_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/TRANSPORT_FACTS.json",
+      "bytes": 11040,
+      "sha256": "1fe74699ffc156cc94f1884da20e052f20fc062f6d603bf4c5bc938928677fa8"
+    },
+    {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\2026-09-07-dish-post-b06-delivery-correction-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+      "archive_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/CHAT_RECEIPT.md",
+      "bytes": 356,
+      "sha256": "64197894d124d07a947ef5823ccf51a062bfbe6230c501e1dd41eb39b1f36147"
+    },
+    {
+      "source": "https://api.github.com/repos/CartmanFatass/My-paper-code/issues/comments/5574756410",
+      "archive_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/GITHUB_COMMENT_SNAPSHOT.json",
+      "bytes": 5133,
+      "sha256": "dce816ab189416495ab64c4520f7216ccd116404254444f6752b08825facfa03"
+    }
+  ]
+}

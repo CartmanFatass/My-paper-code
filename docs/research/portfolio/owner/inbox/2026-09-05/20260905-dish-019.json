@@ -1,0 +1,100 @@
+{
+  "id": "20260905-dish-019",
+  "created": "2026-09-05T22:37:09-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "冻结 DISH-RENEWAL-BOUNDARY-A01：策略 renew 标志与原生指令采纳时机的同tick测量（A/RECON，120 秒）",
+  "context": "Pro Convergence 节点在 B02 无增益结果后选定 CONTINUE，并把下一笔投入收窄为一次有界的 A/RECON 定时测量；枢纽按无人值守委托冻结科学卡并派发 CM。静态读码预测策略消费的是上一tick的标志。",
+  "options": [
+    {
+      "key": "a",
+      "label": "冻结科学卡并派发 CM（推荐）",
+      "consequence": "CM 在工作树实现测量入口与聚焦测试；远端 120 秒内一次正式运行；结果按四个预设分支读取，不自动扩展到其他坐标或历史。"
+    },
+    {
+      "key": "b",
+      "label": "先核实远端检查点再冻结",
+      "consequence": "多一轮往返；检查点核对本来就是 CM 的第一个停止条件，科学内容不变。"
+    },
+    {
+      "key": "c",
+      "label": "退回 Convergence 节点重新提问",
+      "consequence": "无新证据可提供；Pro 决定对本节点已是最终，退回不产生新决策。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "决定已由 Pro 节点形成且符合规范；冻结与派发是可逆的对象层动作，检查点摘要核对内置在 CM 停止规则中。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RENEWAL_BOUNDARY_A01_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#L582",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否冻结 DISH 后继对象「DISH-RENEWAL-BOUNDARY-A01」：用 B02 保留的 seed-61 FORECAST_PACKAGE 第16次更新检查点，在两个原始坐标各前32个原生tick上，逐tick记录策略实际消费的 renew 标志与原生指令更新时机是否同tick一致、以及原生实际采纳了哪条指令（零训练，120秒总上限），并交 CM 实现？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/degraded_incumbent_shadow_handover/ 新科学卡与 CM 目标",
+        "from": "Pro 已选定但未冻结的后继",
+        "to": "冻结的 A/RECON 定时测量对象，CM 已派发实现测量入口"
+      },
+      {
+        "target": "DISH 新增预算",
+        "from": "无",
+        "to": "最多 120 秒完整调用（含编译、加载、检查、两窗口、发布）"
+      },
+      {
+        "target": "方向生命周期 / 优先级 / recast 计数 / N3 其他成员",
+        "from": "ACTIVE，CONTINUE",
+        "to": "不变"
+      }
+    ],
+    "if_refused": "对象保持为 Pro 已选定但未执行的记录；不追加未改动的 B02 种子，不做本地方向层处置；方向在干净边界停车，下一步仍需通过同一 Convergence 节点。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_b02_convergence/archive/RESPONSE.md",
+        "quote": "Continue the first-application-valid RETAIN/COPY/SHADOW exploratory family, but narrow the next purchase to one bounded A/RECON observation of the ordinary policy-to-native renewal boundary.",
+        "why": "这是 Convergence 节点完整、已归档、符合规范的 PRO_FINAL 决定；本卡只是把它冻结为可执行对象。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RENEWAL_BOUNDARY_A01_SCIENCE_CARD_20260905.md",
+        "quote": "The returned _StepOutput.renew is therefore the flag of the transition just completed. Python passes it through unchanged",
+        "why": "静态读源代码显示策略在第n个tick消费的是第n−1个tick的标志；若属实，学到的动作会在原生采纳时机之后一tick才发出，这会改变对 B01/B02 结果的解读。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B02_CONVERGENCE_INTAKE_20260905.md",
+        "quote": "No concrete conflict found. The decision is applied as PRO_FINAL.",
+        "why": "对照 AGENTS.md §2、证据规范 §11.4 与工程范围规范逐项核查，未发现需要例外的规则。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_b02_convergence/archive/RESPONSE.md",
+        "quote": "The strongest contradiction to this choice is that the suspected timing mismatch may already be reconciled by an uninspected wrapper, leaving the original finite-budget null unexplained.",
+        "why": "静态读码不是测量；若窗口内标志一致，本对象只排除一个局部怀疑，B02 的零增益仍无解释。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FORECAST_PACKAGE_B02_INTAKE_20260905.md",
+        "quote": "Finite competence, objective scale, ordinary action selection and shared-state/co-adaptation remain possible explanations",
+        "why": "即使发现定时不一致，也不能说这就是 B02 无增益的原因，更不能推出 SHADOW 有价值。"
+      }
+    ],
+    "uncertainty": [
+      "保留检查点（sha256 504329d6…）只在远端 wsl_4070 输出根和本地 temp 缓存里，不在 Git；CM 第一步核对摘要，不匹配即停。",
+      "两个窗口的复位相位（预期 4 与 2）由哈希导出，实际值以复位行读回为准；相位为 0 时 tick 0 的 renew 会被复位代码硬置为 0。",
+      "DM 预测：分支 1（同tick不一致，且采纳的是上一tick发出的指令），每窗口约 32/k 次；所有者预测槽：待填。"
+    ],
+    "cost": {
+      "compute": "wsl_4070 单线程，完整调用 ≤120 秒（新选定的上限，不动用 A05 例外或 B02 未用额度）",
+      "owner_time": "阅读本条目约 3 分钟；可选填写「一致 / 不一致」预测",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待；无人值守委托下已按推荐项执行（卡已冻结、CM 已派发）；所有者的不同指示在下一个干净边界应用"
+    },
+    "verdict_text": "PRO_FINAL / CONTINUE, not RECAST：one bounded A/RECON observation of the ordinary policy-to-native renewal boundary。DM 推荐：冻结此卡并交 CM 实现。",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B02_CONVERGENCE_INTAKE_20260905.md"
+  },
+  "starred": false
+}

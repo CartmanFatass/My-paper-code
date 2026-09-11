@@ -1,0 +1,102 @@
+{
+  "id": "20260906-vspc1-001",
+  "created": "2026-09-06T06:31:43-07:00",
+  "direction": "vsp_c1",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "VSP-C1 B02 预算依赖卡冻结（seed 3，128→512 次更新）",
+  "context": "Pro Convergence r02（PRO_FINAL，2026-09-05）选定的唯一后继：FACTOR 与同信息 GENERIC 各用全新 seed 3 在不变的 K4 宿主上连续训练到 512 次更新（前 128 次原 schedule，其后 epsilon 0.1），保留同实例第 128 次读数；主终点 ΔJ_512，三段 AUC（除数 8/32/24），预算响应 D=ΔJ_512−ΔJ_128；每臂 16,384 训练 episode、512 次 Adam 更新、33 个评价点；每臂完整调用上限 2,700 秒。Pro 预测差距更可能缩小；DM 预测 |ΔJ_512|≤1/12 且 D 与 ΔJ_128 反号。欢迎填写你的预测。实现路由 Grok Build。",
+  "options": [
+    {
+      "key": "a",
+      "label": "冻结此卡并交 CM（Grok Build）实现（推荐）",
+      "consequence": "新增 budget512 入口与 runner，远端两次串行调用各 ≤2,700 秒；不改 B01 路径与旧结果；不改变方向生命周期。"
+    },
+    {
+      "key": "b",
+      "label": "先追加一个原预算 seed 3 再决定",
+      "consequence": "多买一次 128 更新对，但不回答 Pro 提出的预算依赖问题；三种子已回答符号敏感性。"
+    },
+    {
+      "key": "c",
+      "label": "不实现，直接回到 Convergence 提新问题",
+      "consequence": "放弃 Pro 已选定的有限观察；方向在干净边界停车。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "Pro 已作出该方向层决定；此对象是同宿主同学习器的有限预算探索，成本小、退出点明确，直接回答已有记录不能回答的问题。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B02_BUDGET512_SCIENCE_CARD_20260906.md",
+    "docs/research/candidates/vsp_c1/VSPC1_K4_THREE_SEED_CONVERGENCE_R02_INTAKE_20260906.md",
+    "docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence_r02/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-06.md#L12",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否冻结 VSP-C1 后继对象「VSPC1-K4-FACTOR-VALUE-B02-BUDGET512」：FACTOR 与同信息 GENERIC 各用全新 seed 3，在不变的 K4 宿主上连续训练到 512 次更新（前 128 次沿用原 schedule，其后 epsilon 0.1），保留同一实例内第 128 次更新的读数，报告 ΔJ_512、三段 AUC 与预算响应 D（每臂完整调用上限 2,700 秒），并交 CM（Grok Build）实现？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/vsp_c1/ 新科学卡与 CM 目标",
+        "from": "Pro r02 已选定但未冻结的后继",
+        "to": "冻结的 B/EXPLORE 预算依赖对象，CM 已派发实现 budget512 入口与 runner"
+      },
+      {
+        "target": "VSP-C1 新增预算",
+        "from": "无",
+        "to": "两次完整臂调用，各 ≤2,700 秒（条件线性情景 7–16 秒/臂，未测）"
+      },
+      {
+        "target": "方向生命周期 / 优先级 / D6 停止边界 / A01 缺口",
+        "from": "ACTIVE / MEDIUM，A01 缺口非零，D6 PARK",
+        "to": "不变"
+      }
+    ],
+    "if_refused": "对象保持为 Pro 已选定但未执行的记录；不追加原预算种子，不改比较器，不做本地方向层处置；方向在干净边界停车，下一步仍需通过同一 Convergence 节点。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence_r02/archive/RESPONSE.md",
+        "quote": "我的选择是继续，但只选择一次“公开计划下的跨周期价值：新种子 128→512 更新预算对照”B：FACTOR 与原先的同信息 GENERIC 各用全新 seed 3 连续训练到 512 次更新，在同一训练实例内保留第 128 次更新的测量。",
+        "why": "这是本节点完整、已归档、符合规范的 PRO_FINAL 决定；卡只是把它冻结为可执行对象。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence_r02/archive/RESPONSE.md",
+        "quote": "尚未回答的是，同一个新实例中，当前参数化差异在双方获得更多真实学习后会缩小、保留还是反转。",
+        "why": "三种子已回答符号对训练实例敏感；预算依赖是现有记录不能回答、且能改变是否继续投入该参数化的问题。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_K4_THREE_SEED_CONVERGENCE_R02_INTAKE_20260906.md",
+        "quote": "No conflict found; nothing returned to the node.",
+        "why": "对照 AGENTS.md §2、证据规范 §11、工程范围与运行时规范逐项核查，未发现需要例外的规则。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence_r02/archive/RESPONSE.md",
+        "quote": "原始 seed 0 在终点和全曲线均不利于 FACTOR，三种子平均效果很小；一个新的长训练实例仍不能估计训练总体的预算响应。",
+        "why": "一个实例只能观察一次有限的预算依赖，不能升级为普遍结论；负种子保留。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence_r02/archive/RESPONSE.md",
+        "quote": "一对新长运行的总步数甚至大于已有六次调用的 150,048 步",
+        "why": "投入不小于已有全部 B01 工作；若结果落在“后段近乎不变”分支，本次只得到停止该预算路径的信息。"
+      }
+    ],
+    "uncertainty": [
+      "seed 3 的实际回报、位移与成本未知；7.04–15.8 秒/臂只是同形状条件线性情景，不是测量或上界。",
+      "本处理不能分离数据量、优化器步数、探索退火与墙钟预算的各自因果效应；分离它们是另一对象。",
+      "Pro 预测：128 点的差距更可能缩小；DM 预测：|ΔJ_512| ≤ 1/12，D 与 ΔJ_128 反号，两臂后段都仍在学习；所有者预测槽：待填。"
+    ],
+    "cost": {
+      "compute": "wsl_4070 单进程单线程 CPU FP32，两次串行完整调用，各 ≤2,700 秒；每次调用前新鲜 ≥4 GiB 内存准入",
+      "owner_time": "阅读本条目约 3 分钟；可选填写你对 ΔJ_512 相对 ΔJ_128 缩小/保留/反转的预测",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待；无人值守委托下已按推荐项执行（卡已冻结、CM 已派发 Grok Build）；所有者的不同指示在下一个干净边界应用"
+    },
+    "verdict_text": "PRO_FINAL / CONTINUE：一次 seed-3 128→512 预算依赖 B，两臂各 512 次更新，保留 128 读数，不追加原预算种子。DM 推荐：冻结此卡并交 CM 实现。",
+    "source": "docs/research/candidates/vsp_c1/VSPC1_K4_THREE_SEED_CONVERGENCE_R02_INTAKE_20260906.md"
+  },
+  "starred": false
+}

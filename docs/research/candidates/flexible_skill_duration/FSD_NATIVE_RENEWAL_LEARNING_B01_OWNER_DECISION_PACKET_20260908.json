@@ -1,0 +1,39 @@
+{
+  "question": "是否保留已按 P25 裁决写定的这一张早期学习 B 卡，并把完整实现任务交回 Root/Portfolio 作下一项有限分配？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B01_SCIENCE_CARD_20260908.md",
+      "from": "P25 已选一对真实学习问题，尚无数值 seed/keys 和完整训练实现规格",
+      "to": "卡片写定训练770203、评价770204；每臂五轮、16环境、400步，终点C/H/G各32回合；给出完整新 runner 和测试任务，当前零编码与运行"
+    }
+  ],
+  "if_refused": "按 owner 的具体指令在下一干净边界修订或撤回这张前瞻卡；保留 P25 原裁决、旧结果和阻塞存档，当前没有新实验需要中止。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260907_post_native_control_convergence/archive/RESPONSE.md",
+      "quote": "**开放一个有界真实学习问题：在原大差异 K2 corridor 上，从头训练一对 C_train／H_train，比较原生续约执行规则在真实学习过程中带来的总回报差异。选择一个新的配对训练种子、每臂五个 rollout、每 rollout 十六个环境与四百步；只在第五次更新后各评价三十二个配对回合，并在同一评价 keys 上运行三十二回合的公开信息 G。**",
+      "why": "完整 Pro 已选择这个有限学习问题；本次只把真实学习、独立评价和原生动作语义写成可实施规格。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260907_post_native_control_convergence/archive/RESPONSE.md",
+      "quote": "最强当前支持是 A01 的真实局部 native gain；最强当前反证是 **H 的 .16403 剩余 G 差距、H 更高的 wrong-role loss/rate，以及六个 competent E3 学习亏损**。",
+      "why": "旧局部正值不能保证从头学习后的收益；公开规则本身与剩余角色损失限制因果归因。"
+    }
+  ],
+  "uncertainty": [
+    "只有一对训练 seed，32回合的配对标准误不能估计训练种子间稳定性。",
+    "新 H 训练衔接尚未实现；实际内部 segment、optimizer 调用与完整耗时未知。",
+    "C 不是调优后的最强固定时钟基线；公开 G 仍可能留下明显能力差距。",
+    "旧短阻塞收据与完整 GitHub 交付矛盾，原因未知，存档保留且不重发。"
+  ],
+  "cost": {
+    "compute": "当前新增模型、回合、训练、科学调用和 Pro Send 都是0。未来设计为64000训练步、38400评价步，C/H各900秒、G60秒完整调用上限，合计1860秒；尚未分配执行。",
+    "owner_time": "异步阅读即可，无需即时确认。",
+    "reversibility": "reversible",
+    "waits_on_this": "不等待 owner；Root 接收完整任务，Portfolio 再给出有限 CM 实现分配。"
+  },
+  "verdict_text": "接受这一张前瞻 B 卡和完整实现规格；只比较一对从头学习的 C/H 与公开 G，当前不编码、不运行、不再发 Pro，也不启动第四轮模型比较。",
+  "source": "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B01_PREPARATION_INTAKE_20260908.md"
+}

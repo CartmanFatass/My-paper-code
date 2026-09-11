@@ -1,0 +1,86 @@
+{
+  "id": "20260905-dish-009",
+  "created": "2026-09-05T03:07:04-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "方向节点问题：保留来源比较家族还是改变宿主家族",
+  "context": "有效B01未暴露来源比较；A01完整前缀缺共同源，A02实际信号与继承净空限制一致。建议保留来源问题并另立前瞻宿主限定，交Convergence决定；这是建议，尚无家族处置或后继实验。",
+  "options": [
+    {
+      "key": "continue",
+      "label": "保留来源家族，另立前瞻宿主限定",
+      "consequence": "由方向节点明确独立宿主限定和最小判别；旧结果不改写，尚不新增学习或强制触发。"
+    },
+    {
+      "key": "recast",
+      "label": "承认问题变化，重写最小家族",
+      "consequence": "执行完整归档的重写决定并记录recast次数；不将未曝光对比解释成负结果。"
+    },
+    {
+      "key": "park",
+      "label": "暂停最小宿主或对象家族",
+      "consequence": "停在保存边界，等待节点给出的再进入条件；Portfolio生命周期另由其层级处理。"
+    },
+    {
+      "key": "close",
+      "label": "关闭最小受支持的宿主或对象家族",
+      "consequence": "只关闭证据支持的最小家族，保留原B与A结果及其有限解释。"
+    }
+  ],
+  "recommended": "continue",
+  "auto_applied": null,
+  "dm_reason": "信息进入条件限制了原比较的曝光；机制仍未得到比较，保留问题并独立限定宿主最有依据，但需要方向节点最终判定。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_INTAKE_20260905.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-ground-source-a02-intake",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "原宿主的信息路径受继承净空定义限制后，是否保留来源比较家族并另立宿主限定，还是改写、暂停或关闭最小对象家族？",
+    "changes_if_approved": [
+      {
+        "target": "DISH 来源比较家族的后继范围",
+        "from": "原B01没有触发；两项诊断已指向宿主的信息进入路径",
+        "to": "建议保留RETAIN/COPY/SHADOW问题，由方向节点明确一个前瞻且独立的宿主限定与最小判别；暂不实施物理修改或新增学习"
+      }
+    ],
+    "if_refused": "保留三项有效结果，按明确回复改变方向节点的问题或执行最终家族决定；不把既有零曝光改成来源无效。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_RESULT_EVIDENCE_20260905.md",
+        "quote": "Learning a different horizontal motion does not\nremove that near-endpoint camera obstruction under the unchanged definition.",
+        "why": "继续调学习预算不能解决这个静态相机条件，需要正面决定宿主定义怎样承载原问题。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_RESULT_EVIDENCE_20260905.md",
+        "quote": "Every row has at least one prepare proposal and latch.",
+        "why": "原前缀确实产生了准备行为，但共同源和快照支持缺失，不能直接否定被比较的状态来源。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_RESULT_EVIDENCE_20260905.md",
+        "quote": "It does not prove a source-selection remedy, SHADOW/COPY equality, a general learning\nfailure, an implementation-versus-spec defect, physical realism or benefit from any\nheight/clearance change.",
+        "why": "改变宿主可能改变问题本身，诊断尚未证明哪种修改有效；方向节点可以选择重写或停止最小家族。"
+      }
+    ],
+    "uncertainty": [
+      "缺口来自原生实现遵循的宿主定义，尚无可称为实现修复的偏差。",
+      "高斯噪声使遮挡不等于无线接收在数学上绝无可能；当前只测得一个点的实际余量。",
+      "没有调优的同信息基线余量，原来的五服务步最小效应仍未估计。",
+      "建议保留家族尚未执行；完整的方向节点归档答案才形成该层决定。"
+    ],
+    "cost": {
+      "compute": "A02已完成，监督进程1秒，峰值内存约327MiB；本次整理材料不新增实验，后继成本尚未选定。",
+      "owner_time": "约两分钟异步复核；不等待所有者回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "下一家族或宿主范围等待方向节点形成决定；当前没有运行中的N3实验。"
+    },
+    "verdict_text": "建议保留来源比较家族，先独立限定一个能承载信息进入路径的宿主，再决定最小判别；这只是提交给方向节点的建议，尚未执行。",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_INTAKE_20260905.md"
+  }
+}

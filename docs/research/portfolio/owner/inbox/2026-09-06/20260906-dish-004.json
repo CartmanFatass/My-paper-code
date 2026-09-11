@@ -1,0 +1,96 @@
+{
+  "id": "20260906-dish-004",
+  "created": "2026-09-06T15:07:32-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "DISH 见证后 Convergence 决定（PRO_FINAL）：预测包支线保持结束；唯一下一对象 = DISH-CONTROL-LOW-LR-B04（AdamW 3e-4 对 3e-5，seed 89，16 次更新，1,800 s/臂）",
+  "context": "Pro 继续 RETAIN/COPY/SHADOW 议程，预测包支线保持结束；本轮只开一个新的 B/EXPLORE：继承的 CONTROL 学习器（raw-logit 接口、mean-MSE、PPO、正常 Welford 更新）在相同十六次更新曝光下，AdamW 恒定学习率 3e-4（CONTROL）对 3e-5 作用于全部原参数组（LOW_LR）；新配对种子 89（master = sha256(\"DISH-CONTROL-LOW-LR-B04/seed/89\")）；两臂同一初始参数与初始空 Welford；四个评估 reset 按继承坐标法则为 seed 89 导出并记录；另含同一种子初始化的四行零更新参考（raw 接口）。主量 Delta_LR = 四行 (LOW_LR − CONTROL) 均值，附属 D_CONTROL,new 与 D_LOW_LR,new，尺度 +24，七行读法；任何结果不自动授权另一个 LR、冻结 Welford、重开包或改 Portfolio。上限：每臂完整收费 ≤ 1,800 s，两臂合计 ≤ 3,600 s（含共享初始化、四行参考、聚焦检查、构建/加载、发布）。见证事实是动机而非诊断（未证明学习率过大）；Pro 不选 DM 首选的冻结 Welford（部件干预不识别原因）、不选单 epoch（优化步 512→128）、不先买第二个 CONTROL 种子。验收核心：所选学习率在每次更新都作用于全部参数组，checkpoint/状态恢复或 trainer 重建不得重设回 3e-4。只读代码图：引擎每次更新重建 AdamW(lr=3e-4) 后用上一 checkpoint 的优化器状态覆盖，因此薄入口在初始化 payload 中改写两个参数组的 lr，并在每次更新后从 trainer checkpoint 读回记录。已执行：卡与 CM 目标冻结（171924cb6），Grok Build 实现中，枢纽审阅后提交并由 operator 在 wsl_4070 启动。DM 预测：D_CONTROL,new ≤ −24 且 Delta_LR 带内/混合（表第 4 行）；竞争预测：Delta_LR ≥ +24 且 LOW_LR 前后带内（第 3 行）。所有者预测槽位未取用，可在本条目填写。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受（已执行）",
+      "consequence": "B04 按卡实现并在 wsl_4070 启动；结果 intake 后回到同一 Convergence 节点。"
+    },
+    {
+      "key": "b",
+      "label": "改选：冻结 Welford 的 B、单 epoch 变体或先做第二个 CONTROL 种子",
+      "consequence": "DM 在下一个干净边界把该要求作为具体问题返回同一 Convergence 节点；B04 准备暂停。"
+    },
+    {
+      "key": "c",
+      "label": "暂停 DISH 投入（Portfolio 层）",
+      "consequence": "属于 Portfolio 层；Root 记录后按指示处理；已实现的薄入口保留为代码，不启动。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整归档的 PRO_FINAL 方向层决定，无规范冲突。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_WITNESS_CONVERGENCE_INTAKE_20260906.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_CONTROL_LOW_LR_B04_SCIENCE_CARD_20260906.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_witness_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-06.md#L65",
+  "brief": "docs/research/portfolio/owner/briefs/degraded_incumbent_shadow_handover/2026-09-06_post-witness-convergence.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Pro（PRO_FINAL）已作出 DISH 见证后的方向层决定：预测包支线保持结束；本轮只开一个新的 B/EXPLORE——DISH-CONTROL-LOW-LR-B04：继承的 CONTROL 学习器，AdamW 学习率 3e-4 对 3e-5（作用于全部原参数组），新配对种子 89，每臂 16 次更新，另含同一种子的四行零更新参考；每臂 ≤ 1,800 s，两臂合计 ≤ 3,600 s。不冻结 Welford，不减 epoch，不重开包，不停车，不 RECAST。是否对这一决定作异步改动？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_CONTROL_LOW_LR_B04_SCIENCE_CARD_20260906.md",
+        "from": "无 B04 卡",
+        "to": "B/EXPLORE 卡冻结（171924cb6）：两臂只差学习率；seed 89 主键 sha256(\"DISH-CONTROL-LOW-LR-B04/seed/89\")；四个评估 reset 按继承坐标法则为 seed 89 导出并记录；主量 Delta_LR，附属 D_CONTROL,new / D_LOW_LR,new；尺度 +24；七行读法；验收要求所选学习率在每次更新都作用于全部参数组，恢复/重建不得重设回 3e-4"
+      },
+      {
+        "target": "实现与启动",
+        "from": "无 B04 入口",
+        "to": "Grok Build 实现薄入口（新 control_low_lr_b04 study、runner、tests；在初始化 payload 的优化器状态中改写两个参数组的 lr，每次更新后从 trainer checkpoint 读回并记录；B02/B03/见证/r06 源码不动），枢纽审阅后提交；operator 在 wsl_4070 依次启动共享项（聚焦检查+初始化+四行参考）、CONTROL、LOW_LR"
+      },
+      {
+        "target": "DIRECTION.md 与 PORTFOLIO 行",
+        "from": "见证结果待 Convergence 决定",
+        "to": "B04 已选并写卡；DISH 留在 Claude 工作集，生命周期与优先级不变"
+      }
+    ],
+    "if_refused": "所有者若指示改选（例如冻结 Welford 的 B、单 epoch 变体、先做第二个 CONTROL 种子或停车），DM 在下一个干净边界停止 B04 准备并把该要求作为具体问题返回同一 Convergence 节点；已实现的薄入口保留为代码，不启动。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_witness_convergence/archive/RESPONSE.md",
+        "quote": "本轮只选择一个新的有界 B/EXPLORE：继承的 CONTROL 学习器在相同十六次更新曝光下，把 AdamW 恒定学习率 3e-4 改为 3e-5",
+        "why": "本节点完整、已归档的 PRO_FINAL 方向层决定（提交 27730bf75）。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_INIT_WITNESS_A01_RESULT_INTAKE_20260906.md",
+        "quote": "D_C = −245.75",
+        "why": "见证把“训练后 CONTROL 低于自身零更新控制器”变成有界事实，是本 B 的动机。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_witness_convergence/archive/RESPONSE.md",
+        "quote": "这个事实提供动机，但没有诊断学习率过大",
+        "why": "选的是性能假设，不是已定位原因的修复；结果不自动授权另一个学习率或冻结归一化。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_witness_convergence/EVIDENCE_AND_OPTIONS.md",
+        "quote": "The DM recommends option 1 with Welford frozen at the zero-update state",
+        "why": "DM 曾首选冻结 Welford 的变体；Pro 以“部件干预不识别原因、会同时改变有效输入与采样”为由不选。"
+      }
+    ],
+    "uncertainty": [
+      "r06 代码三处写死 lr=3e-4；只读代码图确认引擎每次更新重建优化器后用上一 checkpoint 的优化器状态覆盖，因此在初始化 payload 改写 lr 即贯穿全部十六次更新；这一机制由 B04 聚焦检查（链式两次合成更新）钉住，尚未在真实训练链上观察。",
+      "1,800 s/臂是支出上限，不是投影；新种子与新学习率下的 E、H 与实际墙钟未测。"
+    ],
+    "cost": {
+      "compute": "wsl_4070 单线程 CPU：每臂 ≤ 1,800 s，两臂合计 ≤ 3,600 s（含共享初始化、四行参考、聚焦检查、构建/加载、发布）；每臂 65,536 普通转移、512 优化步；评估 ≤ 14,400 tick",
+      "owner_time": "阅读本条目约 3 分钟；可选填写 B04 预测",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待；已按 PRO_FINAL 执行；所有者的不同指示在下一个干净边界应用"
+    },
+    "verdict_text": "PRO_FINAL / CONTINUE：预测包支线保持结束；下一对象 = DISH-CONTROL-LOW-LR-B04（B/EXPLORE），AdamW 3e-4 对 3e-5，seed 89，16 次更新，四行零更新参考，1,800 s/臂。",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_WITNESS_CONVERGENCE_INTAKE_20260906.md"
+  },
+  "starred": true
+}

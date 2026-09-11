@@ -1,7 +1,7 @@
 import numpy as np
 
-from config_1 import Config
-from train_multiproc_config_1 import (
+from configs.config_1 import Config
+from experiments.launchers.train_multiproc_config_1 import (
     Scenario7SafetyDualController,
     broadcast_scenario7_safety_dual,
 )

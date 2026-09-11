@@ -1,0 +1,29 @@
+{
+  "role": "original frozen evidence only",
+  "source": "/home/wu/hmasd-worktrees/cbsc-b1-r07-b230e476ec-01/temp/sessions/hmasd-chatgpt-pro-transport/archive/capability_bound_semantic_currentness",
+  "staging": "/home/wu/hmasd-inputs/cbsc-approved-repair-20260905/pro-decisions",
+  "names_in_each_request": [
+    "RESPONSE.md",
+    "TRANSPORT_FACTS.json",
+    "PACKET_MANIFEST.json"
+  ],
+  "request_prefix": "cbsc-online-b-innovator-20260901-",
+  "sha256_by_suffix": {
+    "01": [
+      "94f163f8ba777950c9c19ffac1acca3c697f09642d4713ef13b1e66d9f04d778",
+      "2cda1b4066ad74546f2c03fa13fdeb3f352851389c412e8e6e5ca78c06ed9b66",
+      "ff7e5daf8fb29a5e2eaecb4cfbe106a3743a8b25236b0c1544df3446785a1aa0"
+    ],
+    "02": [
+      "e96df981f7cdb40a6206f2fddcc989a05783491a1fa422e7b0ca673344a05844",
+      "4f978a4615274d15e4bda3eee36681a7581c0b1078ebc0b91e3ccb0cd249181e",
+      "d822a1da6181d298b4b45906c3448f242a9e15f3944db06d52b031802ce8663b"
+    ],
+    "03": [
+      "7a3bd74e12508e22ea577a1563737eda119c10560e094b25279503648d1105f7",
+      "a552168f7dfc3ecc1624d7e6038a21a7ec0a4d1a5b4a38f115a54823d87abde0",
+      "a98d763a3eefb64dc61083926b514433d476f3bd86e20303afaa5fda5c3b604d"
+    ]
+  },
+  "observation": "All nine source bytes matched these digests before staging; destination bytes matched source. DM explicitly included this original evidence dependency before copying. No source was staged."
+}

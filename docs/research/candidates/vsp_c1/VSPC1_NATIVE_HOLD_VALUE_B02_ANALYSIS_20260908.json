@@ -1,0 +1,725 @@
+{
+  "independent_unit": "matched independent training pair",
+  "independent_training_pairs": 2,
+  "selection": "B02 is outcome-informed exploration selected after B01 UP; no outcome discarded",
+  "interpretation": "descriptive two-pair summary; conditional episode SE is not training-population uncertainty",
+  "hover_role": "attained untuned no-learning reference, reported per pair and excluded from learned-run CSV",
+  "pairs": [
+    {
+      "object": "VSPC1-NATIVE-HOLD-VALUE-B01",
+      "seed": 8101,
+      "launch_sha": "65c89368ab0fc7402fb0e24254447629e829a12d",
+      "evidence_path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_COLLECTION_EVIDENCE_20260908.json",
+      "independent_training_pairs": 1,
+      "endpoint_means": {
+        "GATED-V": 0.16488608226755597,
+        "MLP-V": 0.1355204237071898,
+        "H": 0.14548553287361884
+      },
+      "contrasts": {
+        "GATED-V_minus_MLP-V": {
+          "mean": 0.029365658560366156,
+          "conditional_evaluation_se": 0.005274225674828064,
+          "evaluation_pairs": 32,
+          "negative_episode_differences": 6,
+          "positive_episode_differences": 26,
+          "zero_episode_differences": 0,
+          "negative_episode_identities": [
+            [
+              4,
+              810102004
+            ],
+            [
+              10,
+              810102010
+            ],
+            [
+              15,
+              810102015
+            ],
+            [
+              19,
+              810102019
+            ],
+            [
+              22,
+              810102022
+            ],
+            [
+              31,
+              810102031
+            ]
+          ],
+          "minimum_episode_difference": -0.017314067614898565,
+          "maximum_episode_difference": 0.1149646401458361
+        },
+        "GATED-V_minus_H": {
+          "mean": 0.01940054939393713,
+          "conditional_evaluation_se": 0.010345689108976694,
+          "evaluation_pairs": 32,
+          "negative_episode_differences": 7,
+          "positive_episode_differences": 25,
+          "zero_episode_differences": 0,
+          "negative_episode_identities": [
+            [
+              5,
+              810102005
+            ],
+            [
+              8,
+              810102008
+            ],
+            [
+              9,
+              810102009
+            ],
+            [
+              14,
+              810102014
+            ],
+            [
+              16,
+              810102016
+            ],
+            [
+              17,
+              810102017
+            ],
+            [
+              19,
+              810102019
+            ]
+          ],
+          "minimum_episode_difference": -0.10413267495360856,
+          "maximum_episode_difference": 0.1614442760299446
+        },
+        "MLP-V_minus_H": {
+          "mean": -0.009965109166429027,
+          "conditional_evaluation_se": 0.010730982423058314,
+          "evaluation_pairs": 32,
+          "negative_episode_differences": 16,
+          "positive_episode_differences": 16,
+          "zero_episode_differences": 0,
+          "negative_episode_identities": [
+            [
+              0,
+              810102000
+            ],
+            [
+              2,
+              810102002
+            ],
+            [
+              5,
+              810102005
+            ],
+            [
+              6,
+              810102006
+            ],
+            [
+              8,
+              810102008
+            ],
+            [
+              9,
+              810102009
+            ],
+            [
+              13,
+              810102013
+            ],
+            [
+              14,
+              810102014
+            ],
+            [
+              16,
+              810102016
+            ],
+            [
+              17,
+              810102017
+            ],
+            [
+              19,
+              810102019
+            ],
+            [
+              23,
+              810102023
+            ],
+            [
+              24,
+              810102024
+            ],
+            [
+              27,
+              810102027
+            ],
+            [
+              29,
+              810102029
+            ],
+            [
+              30,
+              810102030
+            ]
+          ],
+          "minimum_episode_difference": -0.1430263913630504,
+          "maximum_episode_difference": 0.1018588519058611
+        }
+      },
+      "selected_region": "UP",
+      "actual_counts": {
+        "train_team_steps": 262144,
+        "eval_team_steps": 24576,
+        "team_steps": 286720,
+        "optimizer_steps": 2048,
+        "train_episodes": 1024,
+        "eval_episodes": 96,
+        "velocity_decisions": 1384747,
+        "duration_decisions": 5440,
+        "d4": 2631,
+        "recurrent_observations": 1392640,
+        "explicit_resets": 1120,
+        "constructor_resets": 2,
+        "constructors": 2,
+        "step_calls": 286720,
+        "scientific_uav_calls": 286720,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 286720,
+        "rollouts": 512,
+        "partial_episode_steps": 0
+      },
+      "hold_exposure": {
+        "GATED-V": {
+          "training_nonzero_rows": 1491,
+          "training_rows": 131072,
+          "training_fraction": 0.01137542724609375,
+          "sampled_final_long_hold_fraction": 0.5,
+          "parameter_exposure": {
+            "common_actor": {
+              "parameters": 32134,
+              "initial_norm": 12.326472282409668,
+              "final_norm": 12.566121101379395,
+              "displacement": 2.565382957458496,
+              "relative_displacement": 0.20811980091978013
+            },
+            "critic": {
+              "parameters": 34817,
+              "initial_norm": 9.317384719848633,
+              "final_norm": 11.01327133178711,
+              "displacement": 5.530591011047363,
+              "relative_displacement": 0.5935776161807579
+            },
+            "duration": {
+              "parameters": 130,
+              "initial_norm": 0.0,
+              "final_norm": 0.13272611796855927,
+              "displacement": 0.13272611796855927,
+              "relative_displacement": 132726117968.55927
+            },
+            "total": {
+              "parameters": 67081,
+              "initial_norm": 15.451714515686035,
+              "final_norm": 16.709794998168945,
+              "displacement": 6.098053455352783,
+              "relative_displacement": 0.39465222122515015
+            },
+            "gate": {
+              "parameters": 640,
+              "initial_norm": 0.0,
+              "final_norm": 1.9885854721069336,
+              "displacement": 1.9885854721069336,
+              "relative_displacement": null,
+              "reason": "undefined: gate initial norm is zero"
+            }
+          }
+        },
+        "MLP-V": {
+          "training_nonzero_rows": 1494,
+          "training_rows": 131072,
+          "training_fraction": 0.0113983154296875,
+          "sampled_final_long_hold_fraction": 0.49375,
+          "parameter_exposure": {
+            "common_actor": {
+              "parameters": 32134,
+              "initial_norm": 12.326472282409668,
+              "final_norm": 12.589046478271484,
+              "displacement": 2.612138509750366,
+              "relative_displacement": 0.21191290175355137
+            },
+            "critic": {
+              "parameters": 34177,
+              "initial_norm": 9.317384719848633,
+              "final_norm": 11.64602279663086,
+              "displacement": 6.744048595428467,
+              "relative_displacement": 0.7238134732229137
+            },
+            "duration": {
+              "parameters": 130,
+              "initial_norm": 0.0,
+              "final_norm": 0.15823301672935486,
+              "displacement": 0.15823301672935486,
+              "relative_displacement": 158233016729.35486
+            },
+            "total": {
+              "parameters": 66441,
+              "initial_norm": 15.451714515686035,
+              "final_norm": 17.150482177734375,
+              "displacement": 7.233981609344482,
+              "relative_displacement": 0.46816692102357516
+            }
+          }
+        }
+      }
+    },
+    {
+      "object": "VSPC1-NATIVE-HOLD-VALUE-B02",
+      "seed": 8102,
+      "launch_sha": "0ec208899f5e8b4c190ab7bd9806be2cc30b6fda",
+      "evidence_path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B02_COLLECTION_EVIDENCE_20260908.json",
+      "independent_training_pairs": 1,
+      "endpoint_means": {
+        "GATED-V": 0.1889430171129279,
+        "MLP-V": 0.07321588661930342,
+        "H": 0.16244093193733047
+      },
+      "contrasts": {
+        "GATED-V_minus_MLP-V": {
+          "mean": 0.11572713049362449,
+          "conditional_evaluation_se": 0.009472055753507819,
+          "evaluation_pairs": 32,
+          "negative_episode_differences": 1,
+          "positive_episode_differences": 31,
+          "zero_episode_differences": 0,
+          "negative_episode_identities": [
+            [
+              26,
+              810202026
+            ]
+          ],
+          "minimum_episode_difference": -0.0029350003404915587,
+          "maximum_episode_difference": 0.22601033547185717
+        },
+        "GATED-V_minus_H": {
+          "mean": 0.026502085175597434,
+          "conditional_evaluation_se": 0.009388482227809858,
+          "evaluation_pairs": 32,
+          "negative_episode_differences": 11,
+          "positive_episode_differences": 21,
+          "zero_episode_differences": 0,
+          "negative_episode_identities": [
+            [
+              0,
+              810202000
+            ],
+            [
+              2,
+              810202002
+            ],
+            [
+              6,
+              810202006
+            ],
+            [
+              9,
+              810202009
+            ],
+            [
+              11,
+              810202011
+            ],
+            [
+              14,
+              810202014
+            ],
+            [
+              15,
+              810202015
+            ],
+            [
+              16,
+              810202016
+            ],
+            [
+              26,
+              810202026
+            ],
+            [
+              27,
+              810202027
+            ],
+            [
+              31,
+              810202031
+            ]
+          ],
+          "minimum_episode_difference": -0.06838157876241358,
+          "maximum_episode_difference": 0.13670420162369798
+        },
+        "MLP-V_minus_H": {
+          "mean": -0.08922504531802705,
+          "conditional_evaluation_se": 0.010765618591322513,
+          "evaluation_pairs": 32,
+          "negative_episode_differences": 29,
+          "positive_episode_differences": 3,
+          "zero_episode_differences": 0,
+          "negative_episode_identities": [
+            [
+              0,
+              810202000
+            ],
+            [
+              1,
+              810202001
+            ],
+            [
+              2,
+              810202002
+            ],
+            [
+              3,
+              810202003
+            ],
+            [
+              4,
+              810202004
+            ],
+            [
+              5,
+              810202005
+            ],
+            [
+              6,
+              810202006
+            ],
+            [
+              7,
+              810202007
+            ],
+            [
+              9,
+              810202009
+            ],
+            [
+              11,
+              810202011
+            ],
+            [
+              12,
+              810202012
+            ],
+            [
+              13,
+              810202013
+            ],
+            [
+              14,
+              810202014
+            ],
+            [
+              15,
+              810202015
+            ],
+            [
+              16,
+              810202016
+            ],
+            [
+              17,
+              810202017
+            ],
+            [
+              18,
+              810202018
+            ],
+            [
+              19,
+              810202019
+            ],
+            [
+              20,
+              810202020
+            ],
+            [
+              22,
+              810202022
+            ],
+            [
+              23,
+              810202023
+            ],
+            [
+              24,
+              810202024
+            ],
+            [
+              25,
+              810202025
+            ],
+            [
+              26,
+              810202026
+            ],
+            [
+              27,
+              810202027
+            ],
+            [
+              28,
+              810202028
+            ],
+            [
+              29,
+              810202029
+            ],
+            [
+              30,
+              810202030
+            ],
+            [
+              31,
+              810202031
+            ]
+          ],
+          "minimum_episode_difference": -0.20452619436758315,
+          "maximum_episode_difference": 0.08180846484651051
+        }
+      },
+      "selected_region": "UP",
+      "actual_counts": {
+        "train_team_steps": 262144,
+        "eval_team_steps": 24576,
+        "team_steps": 286720,
+        "optimizer_steps": 2048,
+        "train_episodes": 1024,
+        "eval_episodes": 96,
+        "velocity_decisions": 1384801,
+        "duration_decisions": 5440,
+        "d4": 2613,
+        "recurrent_observations": 1392640,
+        "explicit_resets": 1120,
+        "constructor_resets": 2,
+        "constructors": 2,
+        "step_calls": 286720,
+        "scientific_uav_calls": 286720,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 286720,
+        "rollouts": 512,
+        "partial_episode_steps": 0
+      },
+      "hold_exposure": {
+        "GATED-V": {
+          "training_nonzero_rows": 1473,
+          "training_rows": 131072,
+          "training_fraction": 0.01123809814453125,
+          "sampled_final_long_hold_fraction": 0.4875,
+          "parameter_exposure": {
+            "common_actor": {
+              "parameters": 32134,
+              "initial_norm": 12.332098007202148,
+              "final_norm": 12.75282096862793,
+              "displacement": 3.323208808898926,
+              "relative_displacement": 0.26947635406058623
+            },
+            "critic": {
+              "parameters": 34817,
+              "initial_norm": 9.296940803527832,
+              "final_norm": 12.192646980285645,
+              "displacement": 7.628961563110352,
+              "relative_displacement": 0.8205883767932171
+            },
+            "duration": {
+              "parameters": 130,
+              "initial_norm": 0.0,
+              "final_norm": 0.17618238925933838,
+              "displacement": 0.17618238925933838,
+              "relative_displacement": 176182389259.33838
+            },
+            "total": {
+              "parameters": 67081,
+              "initial_norm": 15.443889617919922,
+              "final_norm": 17.644433975219727,
+              "displacement": 8.323209762573242,
+              "relative_displacement": 0.5389322229365768
+            },
+            "gate": {
+              "parameters": 640,
+              "initial_norm": 0.0,
+              "final_norm": 2.601895809173584,
+              "displacement": 2.601895809173584,
+              "relative_displacement": null,
+              "reason": "undefined: gate initial norm is zero"
+            }
+          }
+        },
+        "MLP-V": {
+          "training_nonzero_rows": 1482,
+          "training_rows": 131072,
+          "training_fraction": 0.0113067626953125,
+          "sampled_final_long_hold_fraction": 0.45625,
+          "parameter_exposure": {
+            "common_actor": {
+              "parameters": 32134,
+              "initial_norm": 12.332098007202148,
+              "final_norm": 13.084083557128906,
+              "displacement": 4.294393539428711,
+              "relative_displacement": 0.3482289499256628
+            },
+            "critic": {
+              "parameters": 34177,
+              "initial_norm": 9.296940803527832,
+              "final_norm": 11.003137588500977,
+              "displacement": 5.680190086364746,
+              "relative_displacement": 0.610974104966735
+            },
+            "duration": {
+              "parameters": 130,
+              "initial_norm": 0.0,
+              "final_norm": 0.19975757598876953,
+              "displacement": 0.19975757598876953,
+              "relative_displacement": 199757575988.76953
+            },
+            "total": {
+              "parameters": 66441,
+              "initial_norm": 15.443889617919922,
+              "final_norm": 17.096843719482422,
+              "displacement": 7.123647212982178,
+              "relative_displacement": 0.46125991503565106
+            }
+          }
+        }
+      }
+    }
+  ],
+  "run_level_summary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "VSPC1 native hold-value unchanged comparison",
+        "arm": "GATED-V",
+        "n": 2,
+        "mean": 0.17691454969024195,
+        "sample_sd": 0.017010821763725446,
+        "min": 0.16488608226755597,
+        "max": 0.1889430171129279,
+        "runs": {
+          "8101": 0.16488608226755597,
+          "8102": 0.1889430171129279
+        }
+      },
+      {
+        "task": "VSPC1 native hold-value unchanged comparison",
+        "arm": "MLP-V",
+        "n": 2,
+        "mean": 0.10436815516324661,
+        "sample_sd": 0.044055960673533213,
+        "min": 0.07321588661930342,
+        "max": 0.1355204237071898,
+        "runs": {
+          "8101": 0.1355204237071898,
+          "8102": 0.07321588661930342
+        }
+      }
+    ],
+    "paired_differences": [
+      {
+        "task": "VSPC1 native hold-value unchanged comparison",
+        "arm": "GATED-V",
+        "baseline": "MLP-V",
+        "summary": {
+          "n": 2,
+          "mean": 0.07254639452699532,
+          "sample_sd": 0.06106678243725866,
+          "min": 0.02936565856036616,
+          "max": 0.11572713049362449
+        },
+        "differences": {
+          "8101": 0.02936565856036616,
+          "8102": 0.11572713049362449
+        },
+        "unmatched_arm_seeds": [],
+        "unmatched_baseline_seeds": []
+      }
+    ]
+  },
+  "b02_prediction": {
+    "event": "UP",
+    "probability": 0.55,
+    "observed": "UP",
+    "hit": true,
+    "binary_event_brier": 0.20249999999999996,
+    "owner_prediction": "not taken (unattended)"
+  },
+  "analysis_new_model_constructions": 0,
+  "analysis_new_environment_steps": 0,
+  "analysis_new_optimizer_calls": 0,
+  "anchor_arithmetic_only": {
+    "b02_primary": 0.11572713049362449,
+    "gated_minus_h_component": 0.026502085175597434,
+    "h_minus_mlp_component": 0.08922504531802705,
+    "h_minus_mlp_fraction_of_primary": 0.7709950548107865,
+    "primary_widening_from_b01": 0.08636147193325833,
+    "gated_h_change": 0.007101535781660305,
+    "mlp_h_change": -0.07925993615159803,
+    "fraction_of_widening_from_lower_mlp_relative_to_h": 0.9177696301060212,
+    "interpretation": "identity decomposition using a common H anchor, not causal attribution"
+  },
+  "per_pair_resource_accounting": [
+    {
+      "seed": 8101,
+      "enclosing_wall_seconds": 308.63,
+      "internal_wall_seconds": 289.1486691409955,
+      "arm_wall_upper_bounds_seconds": {
+        "GATED-V": 170.77636824501212,
+        "MLP-V": 157.3349626139924
+      },
+      "peak_rss_mib": 542.47265625,
+      "aggregate_cpu": "unmeasured"
+    },
+    {
+      "seed": 8102,
+      "enclosing_wall_seconds": 304.52,
+      "internal_wall_seconds": 303.9593814199907,
+      "arm_wall_upper_bounds_seconds": {
+        "GATED-V": 158.20621363298733,
+        "MLP-V": 146.87440494702196
+      },
+      "peak_rss_mib": 542.0625,
+      "aggregate_cpu": "unmeasured"
+    }
+  ],
+  "two_pair_totals": {
+    "independent_training_pairs": 2,
+    "learned_fits": 4,
+    "training_team_steps": 524288,
+    "evaluation_team_steps": 49152,
+    "native_team_steps": 573440,
+    "optimizer_steps": 4096,
+    "evaluation_episodes": 192,
+    "sum_of_enclosing_walls_seconds": 613.15,
+    "mean_enclosing_wall_per_valid_pair_seconds": 306.575,
+    "wall_interpretation": "sum of two enclosing invocation intervals, not study critical path or aggregate CPU"
+  },
+  "future_comparator_question_work_only": {
+    "selected_current_invocations": 0,
+    "if_later_assigned_new_matched_pairs": 1,
+    "fits": 2,
+    "training_team_steps": 262144,
+    "evaluation_team_steps": 24576,
+    "native_team_steps": 286720,
+    "adam_calls": 2048,
+    "final_evaluation_episodes": 96,
+    "arm_cap_seconds": 1800,
+    "pair_cap_seconds": 3600,
+    "additional_normalization_wall_cost": "unmeasured",
+    "not_a_frozen_card_or_launch_allocation": true
+  },
+  "collection_commits": {
+    "B01": "3ff962acbfabaaa26e2f07d9d38fc2d94a1c3141",
+    "B02": "bc45c2f48c4072c2565ae5d93c34da2ffe829d25"
+  }
+}

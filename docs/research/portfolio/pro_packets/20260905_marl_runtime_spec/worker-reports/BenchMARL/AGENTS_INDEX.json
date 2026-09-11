@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "source": {
+    "name": "BenchMARL",
+    "local_dir": "C:/Projects/ref-lib/BenchMARL",
+    "upstream_url": "https://github.com/facebookresearch/BenchMARL.git",
+    "fixed_commit": "65d649d80e0bdcbdbe2c5d6a3f02dbfed8f0bec1",
+    "version": "1.5.2",
+    "license_path": "LICENSE",
+    "license": "MIT",
+    "upstream_agents": [],
+    "upstream_preservation": "No upstream AGENTS.md exists in the fixed tree; no upstream file was replaced or edited.",
+    "official_identity_sources": [
+      "https://github.com/facebookresearch/BenchMARL",
+      "https://github.com/facebookresearch/BenchMARL/releases/tag/1.5.2",
+      "https://github.com/facebookresearch/BenchMARL/blob/65d649d80e0bdcbdbe2c5d6a3f02dbfed8f0bec1/README.md"
+    ]
+  },
+  "local_overlays": [
+    {
+      "path": "AGENTS.md",
+      "scope": "repository root",
+      "backup": "agents-overlays/AGENTS.md",
+      "kind": "navigation",
+      "upstream_conflict": false
+    },
+    {
+      "path": "benchmarl/AGENTS.md",
+      "scope": "Python package root",
+      "backup": "agents-overlays/benchmarl/AGENTS.md",
+      "kind": "navigation",
+      "upstream_conflict": false
+    },
+    {
+      "path": "benchmarl/experiment/AGENTS.md",
+      "scope": "experiment lifecycle, collector, evaluation and I/O",
+      "backup": "agents-overlays/benchmarl/experiment/AGENTS.md",
+      "kind": "navigation",
+      "upstream_conflict": false
+    },
+    {
+      "path": "benchmarl/environments/AGENTS.md",
+      "scope": "environment adapters, specs and vectorization",
+      "backup": "agents-overlays/benchmarl/environments/AGENTS.md",
+      "kind": "navigation",
+      "upstream_conflict": false
+    },
+    {
+      "path": "benchmarl/algorithms/AGENTS.md",
+      "scope": "algorithm workload, TensorDict processing and replay",
+      "backup": "agents-overlays/benchmarl/algorithms/AGENTS.md",
+      "kind": "navigation",
+      "upstream_conflict": false
+    },
+    {
+      "path": "benchmarl/models/AGENTS.md",
+      "scope": "model shapes, recurrent paths, GNN batching and compile",
+      "backup": "agents-overlays/benchmarl/models/AGENTS.md",
+      "kind": "navigation",
+      "upstream_conflict": false
+    },
+    {
+      "path": "benchmarl/benchmark/AGENTS.md",
+      "scope": "benchmark expansion and sweep scheduling",
+      "backup": "agents-overlays/benchmarl/benchmark/AGENTS.md",
+      "kind": "navigation",
+      "upstream_conflict": false
+    }
+  ],
+  "reports": [
+    "CORE_EVIDENCE.md",
+    "ROOT_RETURN.md",
+    "AGENTS_INDEX.json"
+  ],
+  "verification": {
+    "source_bytes_changed": false,
+    "dependencies_installed": false,
+    "training_or_benchmark_run": false,
+    "speedup_measured": false,
+    "native_source_or_artifact_in_fixed_tree": false,
+    "toy_or_uav_runtime_evidence": false
+  }
+}

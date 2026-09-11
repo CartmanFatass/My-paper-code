@@ -6,10 +6,42 @@
 `AGENTS.md` §4.5 和证据规范 §11.7。批改台：`python tools/owner_console/server.py`，然后打开
 `http://127.0.0.1:8765/`。
 
+## 当前维护范围
+
+仅维护 P1/P2 批改项。普通委托决定、预测、技术项和简报保存在科学记录中，
+不另建、补写或催审 P3/P4 批改项。已有文件和回复保留，待批计数只含 P1/P2。
+`item.py add` 对 P3/P4 返回成功并输出 `skipped`，不创建文件、不分配 ID；审计直接引用
+card/intake。`seed-ledger` 停止批量补建旧条目。既有 owner 指令仍须读取并执行。
+科学卡片、预测记录、结果证据、intake、中文结果简报和必要审计照常保留；不再为这些
+普通记录另建批改任务。真实的新卡、close-call、重大异议、方向决定和 Portfolio 提案
+按原 P1/P2 分类处理，不为绕过限制而升级普通条目。
+决定：[2026-09-05-owner-review-p2-cutoff.md](../decisions/2026-09-05-owner-review-p2-cutoff.md)。
+
+## ★ 重要改动与 6 Pro 执行委托（当前边界）
+
+完整裁决的执行委托及此前批准归因纠正见 [本次明确指令](../decisions/2026-09-05-pro6-delegation-and-starred-trace.md)。
+方向/Portfolio 层级及重大异议、close-call、second-recast 新项自动星标；重要治理改动用既有 P1 项。
+「★ 重要改动」显示全部历史星标项，包含已答项。星标不代表 owner 逐项批准。
+
+执行时通过 CLI 追加记录，保留原回复与 status，不伪写 owner ratify：
+
+```
+python tools/owner_console/item.py trace <id> --authority "PRO_FINAL / OWNER_DELEGATED" --source <archived-response.md> --record <application-intake.md> --state applied --summary "实际变化与影响" --auto-applied <option-key>
+```
+
+`--state planned|applied|blocked`；仅已执行可填 `--auto-applied`。`--authority OWNER_DIRECT` 仅用于有明确 owner 指令的事项。application record 列出变化前后、修改文件和提交定位；`execution_history` 逐条追加时间、来源、状态与记录链接。`--correction` 用于保留原回复并明确纠正其授权归因，不冒充新回复。新 owner 回复仍按原流程生效。此记录不新增运行关卡。
+
+## 2026-09-10 Portfolio 裁决与异步覆盖
+
+按 AGENTS §4.8，新 Portfolio Pro 裁决由指定 DM 完整读取并检查适用规范，Root 执行符合范围的裁决，不等逐项 ratify。
+新默认选项为 keep/refuse/amend；keep 或 agree 只表示已阅，不增加运行授权。
+refuse/amend 在下一个干净边界覆盖后续执行，保留已执行效果和历史，不隐含重跑或回滚。
+旧 ratify 条目与回复保留原语义；自定义选项保留其实际含义。执行状态仍用 trace 的 planned/applied/blocked，
+auto_applied 只填实际已执行选项。保留的 packet 字段 changes_if_approved 描述变更内容，不构成新批准关卡。
+
 ## 所有者每天怎么用（约 15 分钟）
 
-1. 打开批改台的收件箱。只有需要你看的条目会出现：已按委托执行的决定、新卡片、预测请求、简报、
-   批评者异议、二次重铸、等待批准的 Portfolio 提案。
+1. 打开批改台的收件箱，查看新卡片、方向决定、重大异议、close-call、二次重铸和 Portfolio 提案。
 2. 每张卡片：看一眼推荐项（★）和已执行项（✓），同意就按 `g`；不同意就选另一项并写一句原因，
    `Ctrl+Enter` 提交。每次提交都会写入 reply 文件、重生成当天的 `reviews/<日期>.md` 并按 pathspec
    commit。推送由你手动按。
@@ -31,20 +63,18 @@ owner/
 ## How the loop writes items (the stable contract)
 
 Agents never write item JSON by hand. They call `tools/owner_console/item.py`, which validates the
-fields, assigns the id and writes the file; `tests/tools/owner_console/` pins the schema, and the
+fields and writes an ID/file for P1/P2; P3/P4 returns `skipped` with neither. `tests/tools/owner_console/` pins the schema, and the
 skill `.agents/skills/hmasd-owner-item/SKILL.md` names every insertion point with the exact
 command. The DM definition and the Portfolio skill reference that skill.
 
 | Moment in the loop | kind |
 | --- | --- |
-| an object-tier decision is recorded in the audit ledger | `decision` (executed option in `auto_applied`) |
+| a direction- or portfolio-tier decision is recorded | `decision` with explicit tier and packet (executed option in `auto_applied`) |
 | a science card is frozen | `new-card` |
-| a ladder's first card is frozen | `prediction` |
-| a valid result is taken in and its brief written | `brief` |
 | a critic's material dissent is overruled | `critic-dissent` |
 | a recommendation and its runner-up were not clearly separated | `close-call` |
 | Convergence returns a second `RECAST` | `second-recast` |
-| Root records a Portfolio proposal or a DM returns a direction recommendation | `portfolio` |
+| Portfolio records a proposal or a DM returns a direction recommendation | `portfolio` |
 
 ```
 python tools/owner_console/item.py add --direction <id> --kind <kind> --title "…" [--context "…"] \
@@ -59,8 +89,7 @@ One JSON file per item at `inbox/<YYYY-MM-DD>/<id>.json`, written at the moment 
 made or the card is frozen, next to the ledger row. `id` is `<YYYYMMDD>-<script prefix>-<nnn>`
 (prefixes in `docs/research/RESEARCH_MAP.md`; Root uses `root`). The console assigns a grading
 priority from `kind` and `tier`: P1 `portfolio`, `second-recast`; P2 `new-card`,
-`critic-dissent`, `close-call`, direction-tier decisions; P3 delegated decisions and predictions;
-P4 briefs and decisions whose `ledger_kind` is `technical`.
+`critic-dissent`, `close-call`, direction- and portfolio-tier `decision` items.
 
 ```json
 {
@@ -68,7 +97,7 @@ P4 briefs and decisions whose `ledger_kind` is `technical`.
   "created": "2026-09-05T03:12:00Z",
   "direction": "flexible_skill_duration",
   "tier": "object | direction | portfolio",
-  "kind": "decision | new-card | prediction | brief | critic-dissent | close-call | second-recast | portfolio",
+  "kind": "decision | new-card | critic-dissent | close-call | second-recast | portfolio",
   "title": "one line",
   "context": "<= 200 words of markdown: what is being decided, why now, what the DM saw",
   "options": [
@@ -91,19 +120,18 @@ Options per kind:
 
 | kind | options the DM writes | what a reply means |
 | --- | --- | --- |
-| `decision` | the object-tier options, one marked `recommended`; `auto_applied` = the one executed | `agree` or the same key: delegated decision stands; another key: override at the next clean boundary |
+| `decision` | direction/portfolio options, one marked `recommended`; `auto_applied` = the one executed | the owner's selected option applies at the next clean boundary |
 | `new-card` | `accept`, `reject`, `revise` | reject or revise carries the reason in the comment; launch is not blocked meanwhile |
-| `prediction` | the competing mechanisms (two or three) | the owner's prediction; scored at intake; comment carries magnitude or `unclear` |
-| `brief` | `reading-agreed`, `reading-disputed` | dispute with the comment |
 | `critic-dissent`, `close-call` | the DM's options plus the critic's position as one option | as `decision` |
 | `second-recast` | `continue-low-priority`, `park` | park is a Portfolio record; continue keeps lowest sequencing priority |
-| `portfolio` | `ratify`, `refuse`, `amend` | ratification or refusal of a Portfolio proposal; amend with the comment |
+| `portfolio` | `keep`, `refuse`, `amend` | keep acknowledges the formed Pro disposition; refuse/amend overrides at the next clean boundary, preserving executed effects and history |
 
-Every item is also one ledger row (audit record) whose evidence path names the item file.
+Created items can be cited by their ledger row. Ordinary audit records cite the card/intake;
+a `skipped` result supplies no item path.
 
 ## Decision packet (P1/P2 items)
 
-An item the owner must rule on (`portfolio`, `second-recast`, `critic-dissent`, `close-call`,
+An item requiring a P1/P2 review packet (`portfolio`, `second-recast`, `critic-dissent`, `close-call`,
 `new-card`, and any direction- or portfolio-tier item) carries a `packet` object, written in
 Chinese, and every option has a non-empty `consequence`. `item.py add --packet <file.json>`
 refuses the item otherwise; the console shows an incomplete one as 上下文不足 and the owner's
@@ -122,16 +150,17 @@ reply `needs-context` sends it back to be re-filed. Fields:
 | `source` | the Pro response, intake or card the packet was drawn from |
 
 The console renders the packet as sections above the options and opens `source` in the evidence
-pane when a P1/P2 strip is expanded. An object-tier `decision` needs no packet: the owner reviews
-it after the fact, and the context paragraph plus the intake link suffice.
+pane when a P1/P2 strip is expanded. Ordinary object-tier decisions stay in their intake/audit.
 
 ## Review document (the loop reads this)
 
 `reviews/<YYYY-MM-DD>.md` is regenerated by the console from every reply answered that day. One
 section per item with `owner:` (the chosen option), `comment:`, and one `instruction:` line. At
-every clean boundary the DM and Root read today's and yesterday's review files, apply each
-`instruction` that differs from what already ran, mark the item's `status` as `answered` in the
-item file, and cite the review line in the ledger. `agree` means seen; nothing changes.
+every clean boundary the DM and Root query `python tools/owner_console/item.py reviews` for all
+unapplied instructions across dates, apply each instruction that differs from what already ran,
+and use `mark-answered` after application. The dated review file supplies the original instruction
+and review-line citation for the ledger; its date does not limit the pending query. `agree` means
+seen; nothing changes.
 
 ```markdown
 ## 20260905-fsd-003 · flexible_skill_duration · decision · E3 之后的下一 rung
@@ -143,7 +172,7 @@ item file, and cite the review line in the ledger. `agree` means seen; nothing c
 ## Briefs
 
 One page in Chinese, under 600 characters, six fixed headings, written by the DM at every
-valid-result intake beside the English intake document, and referenced from a `brief` item:
+valid-result intake beside and linked from the English intake document:
 
 ```markdown
 # <direction> · <object> · <date>

@@ -1,0 +1,294 @@
+[
+  {
+    "cas_applied": 0,
+    "commit": [
+      0,
+      0
+    ],
+    "energy_increment": 132.56,
+    "hard_event_increments": {
+      "buffer_clear": 0,
+      "command_slew_breach": 0,
+      "dual_owner": 0,
+      "dual_payload": 0,
+      "invalid_commit": 0,
+      "separation_breach": 0,
+      "token_gap": 0
+    },
+    "hard_events": {
+      "buffer_clear": 0,
+      "command_slew_breach": 0,
+      "dual_owner": 0,
+      "dual_payload": 0,
+      "invalid_commit": 0,
+      "separation_breach": 0,
+      "token_gap": 0
+    },
+    "held_changed": false,
+    "held_minus_projected": null,
+    "held_minus_raw": null,
+    "native_admission": false,
+    "observation_tick": 0,
+    "policy_renew": false,
+    "post_a": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "post_countdown": 3,
+    "pre_a": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pre_actuator_owner": 0,
+    "pre_cas_applied": 0,
+    "pre_countdown": 4,
+    "pre_k_active": 8,
+    "pre_k_epoch": 0,
+    "pre_owner": 0,
+    "pre_tick": 0,
+    "prepare": [
+      0,
+      0
+    ],
+    "projected_raw": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "raw_action": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "returned_renew": false,
+    "service": 0,
+    "t": 0,
+    "terminal": false,
+    "window": 1
+  },
+  {
+    "cas_applied": 0,
+    "commit": [
+      0,
+      0
+    ],
+    "energy_increment": 133.83999999999997,
+    "hard_event_increments": {
+      "buffer_clear": 0,
+      "command_slew_breach": 0,
+      "dual_owner": 0,
+      "dual_payload": 0,
+      "invalid_commit": 0,
+      "separation_breach": 0,
+      "token_gap": 0
+    },
+    "hard_events": {
+      "buffer_clear": 0,
+      "command_slew_breach": 0,
+      "dual_owner": 0,
+      "dual_payload": 0,
+      "invalid_commit": 0,
+      "separation_breach": 0,
+      "token_gap": 0
+    },
+    "held_changed": false,
+    "held_minus_projected": null,
+    "held_minus_raw": null,
+    "native_admission": false,
+    "observation_tick": 1,
+    "policy_renew": false,
+    "post_a": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "post_countdown": 2,
+    "pre_a": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pre_actuator_owner": 0,
+    "pre_cas_applied": 0,
+    "pre_countdown": 3,
+    "pre_k_active": 8,
+    "pre_k_epoch": 0,
+    "pre_owner": 0,
+    "pre_tick": 1,
+    "prepare": [
+      0,
+      0
+    ],
+    "projected_raw": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "raw_action": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "returned_renew": false,
+    "service": 0,
+    "t": 1,
+    "terminal": false,
+    "window": 1
+  },
+  {
+    "cas_applied": 0,
+    "commit": [
+      0,
+      0
+    ],
+    "energy_increment": 133.84001045483893,
+    "hard_event_increments": {
+      "buffer_clear": 0,
+      "command_slew_breach": 0,
+      "dual_owner": 0,
+      "dual_payload": 0,
+      "invalid_commit": 0,
+      "separation_breach": 0,
+      "token_gap": 0
+    },
+    "hard_events": {
+      "buffer_clear": 0,
+      "command_slew_breach": 0,
+      "dual_owner": 0,
+      "dual_payload": 0,
+      "invalid_commit": 0,
+      "separation_breach": 0,
+      "token_gap": 0
+    },
+    "held_changed": false,
+    "held_minus_projected": null,
+    "held_minus_raw": null,
+    "native_admission": false,
+    "observation_tick": 2,
+    "policy_renew": false,
+    "post_a": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "post_countdown": 1,
+    "pre_a": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pre_actuator_owner": 0,
+    "pre_cas_applied": 0,
+    "pre_countdown": 2,
+    "pre_k_active": 8,
+    "pre_k_epoch": 0,
+    "pre_owner": 0,
+    "pre_tick": 2,
+    "prepare": [
+      0,
+      0
+    ],
+    "projected_raw": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "raw_action": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "returned_renew": false,
+    "service": 1,
+    "t": 2,
+    "terminal": false,
+    "window": 1
+  },
+  {
+    "cas_applied": 0,
+    "commit": [
+      0,
+      0
+    ],
+    "energy_increment": 133.84004732711372,
+    "hard_event_increments": {
+      "buffer_clear": 0,
+      "command_slew_breach": 0,
+      "dual_owner": 0,
+      "dual_payload": 0,
+      "invalid_commit": 0,
+      "separation_breach": 0,
+      "token_gap": 0
+    },
+    "hard_events": {
+      "buffer_clear": 0,
+      "command_slew_breach": 0,
+      "dual_owner": 0,
+      "dual_payload": 0,
+      "invalid_commit": 0,
+      "separation_breach": 0,
+      "token_gap": 0
+    },
+    "held_changed": false,
+    "held_minus_projected": null,
+    "held_minus_raw": null,
+    "native_admission": false,
+    "observation_tick": 3,
+    "policy_renew": false,
+    "post_a": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "post_countdown": 0,
+    "pre_a": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pre_actuator_owner": 0,
+    "pre_cas_applied": 0,
+    "pre_countdown": 1,
+    "pre_k_active": 8,
+    "pre_k_epoch": 0,
+    "pre_owner": 0,
+    "pre_tick": 3,
+    "prepare": [
+      0,
+      0
+    ],
+    "projected_raw": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "raw_action": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "returned_renew": false,
+    "service": 1,
+    "t": 3,
+    "terminal": false,
+    "window": 1
+  }
+]

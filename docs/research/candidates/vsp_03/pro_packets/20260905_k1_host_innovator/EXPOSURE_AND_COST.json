@@ -1,0 +1,74 @@
+{
+  "purpose": "Read existing JSON exposure fields for prospective VSP-03 host selection; no experiment code imported or executed.",
+  "source_base": "5f1ec0cc8dc6132557877d967e20ffca36cdb84d",
+  "generator": "Python standard-library json and pathlib read the named historical files; current task counts are the declared document-only assignment, not measured learner counts.",
+  "historical_vsp03": {
+    "source": "docs/research/candidates/vsp_03/VSP03_A1_EVENT_CERTIFIED_BOUNDARY_CONFIRMATION_RESULT.json",
+    "terminal_branch": "A1_INVALID_EVENT_CAUSALITY_OR_SCOPE",
+    "activity": {
+      "environment_calls": 0,
+      "environment_episodes": 0,
+      "environment_transitions": 0,
+      "evaluation_calls": 0,
+      "learner_calls": 0,
+      "lookup_evaluations": 0,
+      "model_fit_calls": 0,
+      "optimizer_updates": 0,
+      "policy_calls": 0,
+      "registered_audits": 1,
+      "retries_or_recoveries": 0,
+      "return_computations": 0,
+      "rng_draws": 0,
+      "trainer_calls": 0
+    },
+    "claim_boundary": "causal-information-interface and truth-table evidence only; no natural value, novelty, return, or deployment claim"
+  },
+  "historical_fsd_e4": [
+    {
+      "source": "docs/research/candidates/flexible_skill_duration/e4_census_20260905/census_deterministic.json",
+      "learner_exposure": {
+        "episodes": 0,
+        "transitions": 0,
+        "optimizer_updates": 0,
+        "checkpoint_selection": 0
+      }
+    },
+    {
+      "source": "docs/research/candidates/flexible_skill_duration/e4_census_20260905/census_geometric.json",
+      "learner_exposure": {
+        "episodes": 0,
+        "transitions": 0,
+        "optimizer_updates": 0,
+        "checkpoint_selection": 0
+      }
+    },
+    {
+      "source": "docs/research/candidates/flexible_skill_duration/e4_census_20260905/census_lognormal.json",
+      "learner_exposure": {
+        "episodes": 0,
+        "transitions": 0,
+        "optimizer_updates": 0,
+        "checkpoint_selection": 0
+      }
+    }
+  ],
+  "current_packet_exposure": {
+    "selected_result_bearing_invocations": 0,
+    "new_environment_interactions": 0,
+    "new_learner_updates": 0,
+    "new_model_selection_calls": 0,
+    "new_models_or_checkpoints": 0,
+    "parameter_count": null,
+    "initialization_scale": null,
+    "parameter_displacement": null,
+    "displacement_to_initialization_ratio": null,
+    "applicability": "No learner is selected by this packet preparation. Relative displacement is inapplicable, not evidence that a generic learner cannot move."
+  },
+  "cost": {
+    "new_sweep_arms": [],
+    "new_runner_cost_law": null,
+    "new_runtime_projection_seconds": null,
+    "scope": "Only static code and documentary reads. No host, oracle, policy evaluation, training, calibration or formal fixture is launched.",
+    "prospective_boundary": "If Pro selects an A/B object, its complete work counts, actual-node cost law, per-invocation cap and exposure are fixed in its own card/CM assignment; no historical timing is a new-run estimate."
+  }
+}

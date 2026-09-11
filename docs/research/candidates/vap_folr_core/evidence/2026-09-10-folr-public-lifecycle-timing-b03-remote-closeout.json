@@ -1,0 +1,77 @@
+{
+  "source_sha": "6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c",
+  "archive_ref": "refs/archive/folr-public-lifecycle-timing-b03-20260910",
+  "archive_verified_at_utc": "2026-09-10T20:14:37.252248+00:00",
+  "predelete_reconciliation_at_utc": "2026-09-10T20:18:02.310084+00:00",
+  "completed_at_utc": "2026-09-10T20:18:02.366574+00:00",
+  "archive_members_compared_to_originals_before_delete": true,
+  "original_inventory_rechecked_before_delete": true,
+  "all_scoped_paths_removed": true,
+  "worktree_unregistered": true,
+  "removed_paths": [
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b03-6fb1e1f6",
+      "absent_on_disk": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-retain-20260910",
+      "absent_on_disk": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-event-20260910",
+      "absent_on_disk": true
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/folr-public-lifecycle-timing-b03-20260910",
+      "absent_on_disk": true
+    }
+  ],
+  "archives_preserved": [
+    {
+      "path": "/home/wu/hmasd-recovery/folr-public-lifecycle-timing-b03-20260910/worktree.tar.gz",
+      "bytes": 17097390,
+      "sha256": "0bff6614549c75187bfe2d8a1ee6198ca1131534fb3ee501e0b6cdf8136337d5",
+      "original_roots": [
+        "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b03-6fb1e1f6"
+      ],
+      "members": 2688,
+      "regular_files": 2332,
+      "directories": 356,
+      "symlinks": 0,
+      "all_member_content_and_mode_match_originals": true,
+      "originals_unchanged_after_archive": true
+    },
+    {
+      "path": "/home/wu/hmasd-recovery/folr-public-lifecycle-timing-b03-20260910/supervisors.tar.gz",
+      "bytes": 5009,
+      "sha256": "9195537dc6580921aad5592ea6987746c263839a4b9b927a45791bc2563cd853",
+      "original_roots": [
+        "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-retain-20260910",
+        "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-event-20260910"
+      ],
+      "members": 16,
+      "regular_files": 14,
+      "directories": 2,
+      "symlinks": 0,
+      "all_member_content_and_mode_match_originals": true,
+      "originals_unchanged_after_archive": true
+    },
+    {
+      "path": "/home/wu/hmasd-recovery/folr-public-lifecycle-timing-b03-20260910/inputs.tar.gz",
+      "bytes": 1756594,
+      "sha256": "d6c8dad51eb5380b23b2f69bdb0026aa068100d49db0b9a498db833891443075",
+      "original_roots": [
+        "/home/wu/hmasd-inputs/folr-public-lifecycle-timing-b03-20260910"
+      ],
+      "members": 2,
+      "regular_files": 1,
+      "directories": 1,
+      "symlinks": 0,
+      "all_member_content_and_mode_match_originals": true,
+      "originals_unchanged_after_archive": true
+    }
+  ],
+  "source_input_archive_preserved": true,
+  "known_live_experiment_processes_remaining": false,
+  "no_other_targets_removed": true
+}

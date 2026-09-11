@@ -12,9 +12,9 @@ Rigor is proportional to the claim. The project must not demand deployment-grade
 mechanism study, and it must not present a toy result as evidence of deployment safety or general
 MARL superiority.
 
-This document specializes the A/B/C evidence burdens in
-`docs/project/ALGORITHM_PRINCIPLES.md`. If a direction document asks for a stronger burden, that
-stronger burden applies only to the named claim or object; it does not silently become a global MARL
+This document defines the current A/B/C evidence burdens.
+`docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a current contract.
+If a direction document asks for a stronger burden, that stronger burden applies only to the named claim or object; it does not silently become a global MARL
 standard.
 
 ## 2. Normative terms and scientific units
@@ -62,7 +62,8 @@ Every class MUST:
 3. preserve direct observations, including null, unstable, and adverse outcomes;
 4. distinguish environment interaction from optimizer-update and model-selection exposure;
 5. report material implementation, precision, RNG, checkpoint, leakage, and side-effect changes;
-6. treat an engineering or instrumentation failure as no scientific observation; and
+6. treat an engineering or instrumentation failure as limiting the dependent observation; a
+   separate direct fact remains reportable when it is independently trustworthy; and
 7. bound interpretation to the population, information set, resource budget, and measurement that
    were actually observed.
 
@@ -91,8 +92,8 @@ and failures remain visible.
 
 - One to three seeds can be sufficient for debugging or mechanism scouting.
 - Three to five seeds can estimate preliminary direction and obvious instability.
-- These counts do not support stable-performance, general-superiority, transfer, or retirement
-  claims.
+- These counts do not by themselves support stable-performance, general-superiority, transfer, or
+  retirement claims; they are defaults, not universal gates.
 - A B run MUST exercise the real environment, policy, learner, trainer, and evaluator and report
   nonzero transition, update, and evaluation counts when it is called an algorithm experiment.
 - Outcome-informed adaptation is legitimate exploration. It MUST NOT be relabelled as prospective
@@ -102,9 +103,15 @@ A B result may justify implementation investment, a better discriminator, a boun
 study, or retirement of a narrow conjecture contradicted by direct evidence. It does not by itself
 retire a direction.
 
+A single trustworthy, meaningfully comparable observation may justify bounded follow-up under
+§11.8; prior statistical significance or positive replication is not required. Training-seed
+variation and evaluation noise are distinct; more episodes on one checkpoint do not add training runs.
+
 ### 5.3 C-BENCH — BOUNDED_BENCHMARK
 
-Development and hyperparameter selection MUST be separated from the frozen final evaluation.
+Development and hyperparameter selection MUST be separated from the frozen final evaluation when
+the study makes a conclusion-bearing claim. This separation is not a prerequisite for B
+exploration.
 Before final evaluation, freeze the treatment, competent comparator, task population, training and
 evaluation budgets, primary estimand, checkpoints or selection rule, stopping rule, uncertainty
 method, decision rule, and interpretation boundary.
@@ -178,14 +185,17 @@ not ban further research on the mechanism or direction.
 The following do **not** consume a C object:
 
 - failed or missing resource admission;
-- absent required telemetry or prospective instrumentation;
+- absent prospective instrumentation needed by the estimand (optional resource telemetry alone
+  does not invalidate a non-resource claim);
 - code that does not conform to the frozen algorithm/comparison;
 - truncated, corrupted, or unobserved output;
 - leakage, RNG, checkpoint, precision, or evaluator defects that invalidate the estimand; or
 - infrastructure and transport failures.
 
 After repair, an outcome-blind fresh attempt MAY implement the unchanged C object. The invalid
-artifact must be quarantined and cannot be interpreted or salvaged as scientific evidence.
+artifact must be quarantined and cannot be interpreted as a complete result or salvaged for the
+dependent claim. Independently trustworthy direct measurements from the same attempt may remain
+visible at their narrower ceiling.
 
 ### 6.3 Learning after a valid result
 
@@ -197,9 +207,10 @@ post-hoc seed, budget, metric, threshold, model, comparator, or population chang
   support law, intervention, or decision rule; or
 - a narrower or recast mechanism hypothesis.
 
-The new object does not erase the old observation. It is independent confirmation only if its
-motivation and design are genuinely independent of the earlier outcome; otherwise it is sequential
-follow-up evidence and must be labelled as such.
+The new object does not erase the old observation. Its motivation may use earlier outcomes while
+new training random streams remain independent. Disclose adaptive design and selection; distinguish
+fresh independent training evidence from reuse of observed data. Confirmation requires an applicable
+prospectively fixed evaluation and analysis, not a motivation uninfluenced by prior research.
 
 ## 7. Lifecycle implications
 
@@ -223,7 +234,14 @@ or a portfolio value judgment that no narrower or recast object merits investmen
 
 ## 8. Responsibility split
 
-### 8.1 Portfolio / Root
+### 8.1 Portfolio Pro and its designated DM author
+
+OWNER_DIRECT 2026-09-10: Portfolio is the persistent `portfolio:cross_direction` Pro node.
+Root designates a relevant recently active DM to prepare its materials and check the full response
+for scientific/specification conformance. Root owns routing and operational application, not
+scientific selection. A complete conforming Pro decision is final under AGENTS §4.8 without
+per-item owner ratification; asynchronous owner overrides remain. Existing direction Pro nodes
+and DM object-tier decisions retain their scopes. A local conformance check is not another verdict.
 
 Portfolio MUST:
 
@@ -244,7 +262,29 @@ When an external scientific consultation applies a stronger class than the state
 Portfolio must treat the mismatch as an unresolved methodology issue and seek a class-corrected
 answer. It must not convert the mismatched standard into a scientific negative.
 
-### 8.2 Evidence / Experiment Manager
+**Portfolio principles and experience.** Keep classification, management grouping, investment
+and execution capacity separate. The owner's two-line framework (flexible agents and flexible
+skill duration) does not require one retained route per line or a two-route budget. Share useful
+learners, controls, interventions and diagnostics without conflating scientific objects. Propose
+fusion only when question, comparator, estimand and next object materially coincide. Apply the
+smallest justified disposition under §7; scheduling alone never changes lifecycle.
+
+Every material Portfolio request makes its basis explicit: the relevant principles in this
+section and §§7,11.7–11.10; the applicable card/specification constraints; and empirical/engineering
+experience with exact sources, original scope and strongest contrary evidence. Explain what each
+source changes about the live choices. Prior formal artifacts, an untuned reference gap, a finite
+or zero-learner calculation, and a cheap model are not investment value by themselves. Compare
+decision relevance, known complete cost, uncertainty, substitutability and reversibility. Preserve
+unknown costs and the observation that would change the recommendation. Do not turn a benchmark
+sample or local failure into a universal investment threshold.
+
+Experience informs the choice; it does not silently override a specification. Pro states its
+chosen option, decisive reasons, uncertainty, revisit condition and bounded consequences. A needed
+rule change names the exact rule, necessity and scope under the proper-node authority. Owner
+changes to the question return to that node; preserve its previous answer instead of inventing
+a revised local decision. No new required response schema or scientific exposure follows.
+
+### 8.2 Direction Manager (including engineering delivery)
 
 EM MUST:
 
@@ -259,8 +299,8 @@ EM MUST:
    and a refuted mechanism proposition;
 6. preserve every valid result at its original meaning while permitting explicitly new follow-up
    objects;
-7. ask CM for the performance and instrumentation implementation required by the selected class,
-   not for unrelated proof machinery; and
+7. implement and technically accept the performance/instrumentation path required by the selected
+   class, optionally using a bounded Implementer, not unrelated proof machinery; and
 8. recommend lifecycle consequences at the smallest supported unit and state what evidence would
    justify promotion, parking, recasting, or closure.
 
@@ -319,12 +359,14 @@ follows the order rather than preceding it:
 2. **B — EXPLORE ladder.** One-to-three-seed runs on the real learner, changed between named runs
    as the results suggest, with each change and its reason recorded. B is the default early mode
    (§5.2) and is entered directly from an inspiration model.
-3. **C-BENCH** only when a B signal is repeatable across three to five seeds and is being promoted
-   to a paper-level or portfolio-level claim.
+3. **C-BENCH** when a conclusion-bearing bounded comparison is justified by the claim, with its
+   independent runs and uncertainty chosen for the task, variance, margin and cost. A repeatable
+   B signal is useful evidence for promotion, but three to five seeds is not a universal gate.
 
-Frozen contracts, pre-registered failure boundaries, oracle-retuned comparators, held-out transfer
-splits (train-k / test-k′, train-N / test-N′), and consumption semantics are **C-time obligations**.
-They MUST NOT be launch conditions for A or B objects. A B object MAY be planned with them in mind,
+Confirmatory contracts and consumption semantics apply to their declared C objects. Oracle-retuned
+comparators and held-out transfer splits (train-k / test-k′, train-N / test-N′) apply only where the
+specific claim needs them, not to every C-BENCH. External preregistration is not a universal duty.
+These MUST NOT be launch conditions for A or B objects. A B object MAY be planned with them in mind,
 but their absence never blocks a B launch and never lowers a B result below its §5.2 ceiling.
 
 ### 11.2 Theory ceiling
@@ -364,6 +406,14 @@ the run's own claim needs, capacity gates, formal-analysis flags, or prospective
 hold a B launch. The quarantine rule for incomplete attempts (§6.2) is unchanged by this section;
 whether an instrumentation failure downgrades rather than annuls a run is a separate owner decision
 not taken here.
+
+#### 11.4.1 Named exception — ACVC_FIXED_RETRACE_REUSE_E01
+
+For ACVC_FIXED_RETRACE_REUSE_E01 only, B/EXPLORE MAY compare the fixed C, F and dwell execution rules on the retained, frozen DENSE/8201 and DENSE/8202 trained policies without new fitting or training. The scope is the unchanged five-UAV, 50-user, 256-step native host and one serial six-panel comparison, with 64 prespecified evaluation episodes per base/rule panel. This is an explicit object-limited exception to the real-learner/trainer, nonzero-update and learner-movement requirements in §§5.2 and 11.4. The learner/trainer wording of §11.8.6 is subject to exactly this substitution for E01; its other verification requirements remain.
+
+The real native environment, retained learned recurrent stochastic policy and evaluator MUST run, with nonzero native transition and evaluation counts. A machine-generated exposure line MUST report two retained base fits; zero new fits, training steps, optimizer updates and parameter displacement during evaluation; and actual transition, evaluation and intervention counts. Historical training is provenance, not new exposure. Private recurrent state evolution and sampled actions MUST NOT be described as parameter learning. Common integrity under §4, fresh actual-node resource admission, reward/information/RNG semantics, own-trajectory recurrence and actual-command feedback, complete cost accounting, and proportionate verification and dependency-based failure interpretation under §§11.8.6–11.8.7 remain applicable.
+
+Report F-C and F-dwell separately for each base, retain dwell-C and all outcomes, and use conditional paired-episode uncertainty. The ceiling is a preliminary native execution-package signal or counterexample conditional on these two selected retained bases and the declared fresh panels, not new learning, training-population superiority, isolated mechanism/history necessity, optimality, tuned headroom or transfer. The named scope retains the proposed 180-second whole-logical-invocation cap, including the proposed 30-second focused-check/readback allowance; this paragraph allocates no execution. It authorizes no additional fit, panel, search, retry or successor and does not reopen the stopped T/G selector. Ordinary B requirements and all other objects remain unchanged; no new class or general Pro-consultation gate is created.
 
 ### 11.5 Direction separation for the untying programme
 
@@ -422,3 +472,179 @@ launch condition, an exclusion rule, or a rewrite of a B result's polarity, and 
 
 Ladders already open on 2026-09-04 continue under their cards unchanged. The fields apply to
 every card frozen after that date.
+
+### 11.8 Exploration and publication burden calibration (2026-09-05)
+
+This section is the final Portfolio Pro calibration for all ACTIVE directions. It removes defaults
+that do not serve the current claim; it does not rewrite historical results, completed objects or
+the named VNFC E01 appendix.
+
+#### 11.8.1 Claim determines burden
+
+B exploration asks whether a bounded next investment is worthwhile; a conclusion-bearing comparison
+asks what performance judgment the declared population supports. Ordinary A/B/C-BENCH work does not
+default to extreme tolerances, cross-platform element/bit equality, exhaustive mechanism explanation,
+full historical replay, full intermediate-array publication or exact support census. Require one only
+when the current claim depends on it or a concrete correctness risk requires it. Missing an exact upper,
+tuned headroom or complete causal explanation does not block performance exploration.
+
+#### 11.8.2 A credible signal supports bounded follow-up
+
+One real execution with a trustworthy primary measurement and clear comparison meaning may support a
+bounded B follow-up. It need not first be statistically significant, replicated on several seeds,
+positive on every seed or mechanistically localized. This is an investment signal, not stable
+superiority. A local or proxy improvement is reported as local; native-return losses, wrong actions
+or unchanged complete competence remain alongside it. Outcome selection of the best seed, checkpoint,
+metric or configuration must be disclosed.
+
+Absence of improvement may also motivate a specifically justified new B change. A positive result
+is neither a universal prerequisite for follow-up nor an entitlement to unlimited further compute.
+
+#### 11.8.3 Independent training seeds
+
+When the question is learning performance, prefer a small follow-up with one or two new independent
+training seeds using the same comparison and evaluation. Choose more when variance, margin, task
+population or claim requires it. Preserve every seed, failure, curve and exposure; do not run until
+all signs are positive. Paired treatment/control seeds or common exogenous randomness are allowed
+when declared, but repeated evaluation of one checkpoint, another fold on the same data, or more
+rollouts is not a new training sample. Few seeds require per-seed outcomes and a limited uncertainty
+statement; they cannot support a stable population claim by themselves.
+
+The one-or-two-seed follow-up is an economical starting point, not a launch requirement or assurance
+of statistical sufficiency. One training seed cannot estimate training-seed population uncertainty;
+resampling units must respect shared data, folds and actual independence.
+
+#### 11.8.4 Publication-stage claims
+
+Paper-level performance claims require fair comparators, transparent development/checkpoint selection,
+independent training and evaluation appropriate to the task, and uncertainty reporting. The values
+10 runs, 32 evaluation episodes and 95% intervals are planning defaults, not universal laws. Three
+to five seeds, all-positive seeds or one significance test alone never guarantees sufficiency.
+Mechanism attribution, exclusion of a competitor, invariance, safety or exact claims require only the
+interventions, ablations or proof that those stronger claims actually need. An unresolved mechanism
+does not erase an independently measured performance fact; it narrows the wording.
+
+#### 11.8.5 Three kinds of reproducibility
+
+Deterministic numerical replay serves a code path, regression, numerical diagnostic or explicitly
+exact semantic object, and is conditional on the stated execution boundary. Statistical replication
+serves a learning-performance claim through independent training runs, per-run results, aggregate
+effect and uncertainty; it does not require trace equality. Exact algorithm/semantic validation keeps
+the integer, support, ordering, tie or applicable tolerance checks needed by that named object only.
+Source SHA or input identity does not imply output bit equality. There is no project-wide `1e-12` or
+other extreme tolerance. Select absolute/relative or decision-level checks from dtype, scale,
+conditioning, accumulation and actual action/metric consequences. Near a decision boundary, checking
+the affected action, order or return can suffice; an equivalence claim cannot be made if its required
+semantic check fails.
+
+#### 11.8.6 Proportionate verification
+
+An ordinary B must run the real environment, policy, learner, trainer and evaluator; its transitions,
+updates, evaluation and selection exposure and primary comparison must be readable, with reward,
+information and budget semantics intact. Use existing trustworthy paths and checks where applicable.
+Add one focused verification for changed behavior and primary output; do not repeat smoke merely because
+a launch boundary occurred. Do not default to cross-platform solve, all-history replay, full arrays,
+support census or mechanism diagnosis. Resource admission remains required for each actual invocation.
+
+#### 11.8.7 Failure follows dependency
+
+Report observed exception, exit, missing output and counts immediately. Root-cause attribution requires
+direct evidence, but reproducing and uniquely locating every historical cause is not a universal
+prerequisite for later work. Repair or check a defect that threatens reward, information access,
+comparison, training or the primary measurement. A credible alternative path may proceed without
+solving unrelated historical failures, with the non-dependence stated. A damaged primary measurement
+cannot support its dependent performance claim; independently trustworthy narrower facts remain
+reportable. A new B that does not use an old publication system does not inherit that system's full
+replay obligation. These rules do not retroactively change quarantined artifacts.
+
+#### 11.8.8 Engineering proportion and transition
+
+For ordinary research changes, the 30% orchestration ratio is a review signal, not an automatic return,
+budget ceiling or scientific-validity test. Reviewers identify unnecessary machinery, concrete risk and
+impact; required I/O, serialization and parameter handling are judged by purpose and readability. Do
+not pad computation, compress code or move wrappers to satisfy a denominator. Existing 2,000-line,
+600-line-runner, test and resource budgets remain unless a named task changes them. Future A/B objects
+may remove or adjust unneeded diagnostics in their card/task and state the claim impact; no separate
+tolerance or ratio approval is needed. Existing records, failures and named tasks retain their original
+meaning. The current VNFC E01 exact appendix remains unchanged; finished CBSC/N3 work and old UCOPE
+attempt02 are not reopened by this calibration.
+
+No new line-by-line orchestration census or 100-line exception application is required for this
+ordinary rule. Explicitly labelled reanalysis may use a revised method if existing data support it;
+it must acknowledge observed outcomes and cannot be reported as passing the old rule or as fresh
+independent confirmation. Adjusting irrelevant diagnostic burden alone is not a mechanism recast.
+
+### 11.9 Applying the method in questions and decisions (OWNER_DIRECT, 2026-09-05)
+
+Select the question as well as its evidence burden proportionately. A performance exploration
+does not need to establish the exact maximum of a policy class, complete headroom, or a unique
+causal explanation before real training and sampled return comparison. Choosing an exact claim
+does not itself justify studying it. Replacing a census with bounded, beam or best-of-many search
+does not repair an unnecessary search-before-learning dependency. Search remains appropriate
+when it has an explicit algorithmic or separately justified diagnostic purpose; a smaller search
+budget alone is not that purpose. Ordinary action selection/optimization is not a prerequisite
+search over policies or future trajectories.
+
+Prompt authors and Pro compare the decision value and known dominant work of a proposed diagnostic
+with a minimal real learning comparison or directly sampled measurement. Finite, deterministic or
+zero-learner work is not presumed cheap. Discuss prospective work even when the consultation itself
+runs nothing; unknown cost is not zero and does not demand a separate calibration experiment.
+On cost refusal, reconsider the chosen question and necessary evidence as well as execution.
+Moving a prohibited B prerequisite into a preceding A does not make it permissible.
+
+Pro decisions are final within current owner instructions and applicable specifications. In the
+existing intake, the designated DM cites any concrete conflict and returns it to the same node for correction
+before executing the affected requirement, while independent conforming work continues. Preserve
+the exact response and do not invent a substitute decision. Explicit specification exceptions name
+the rule, scientific necessity and scope and follow existing appropriate-node authority. No silent
+exception follows from response completeness, and no extra reviewer/approval/launch gate is added.
+
+This owner-directed clarification changes future authoring and current decision intake; it does
+not rewrite accepted request bodies, historical results or completed experiment assignments.
+
+**Request complexity.** Before selecting a new experimental design, describe the dominant work
+factors. This is a MARL empirical-research repository: the default performance path is implement,
+train on a selected task/benchmark, compare with competent baselines, and assess repeatability with
+independent training seeds as the claim warrants. Neither bounded nor exhaustive policy search
+substitutes for that comparison or supplies a general prerequisite for it. A bounded search can
+still be combinatorially expensive; its cost advantage over actual experiments must not be assumed.
+
+Describe dominant work
+factors in its existing question/card: arms, independent training seeds, environment steps,
+evaluation checkpoints/episodes, and nested candidate/trajectory/controller/solver calls. Separate
+work intrinsic to the proposed algorithm from verification added to study it. Joint-action growth
+such as a^N, trajectory branching b^H, all subsets, full cross-products and per-candidate replanning
+are reasons to reconsider the question and sufficient measurement, not just accelerate its code.
+Smaller sampled empirical comparisons and removal of unnecessary dimensions are preferable when
+they answer the decision with an honest narrower claim. Intrinsic algorithmic search is assessed
+as part of that algorithm, not silently removed while retaining an equivalence claim.
+
+Use counts and existing measurements where available; distinguish total work, elapsed wall and
+parallel capacity. Finite counts, native code or batching alone do not establish affordability.
+No universal overhead multiplier, asymptotic proof, new profiling run or validation service is
+required. Unknown work/cost stays unknown; a ratio to a budget cap is not an inflation ratio against
+a minimal adequate experiment. This is design reasoning, not an extra §11.4 launch condition.
+
+### 11.10 Scientific knowledge use
+
+For a concrete mechanism, card, comparator, estimand, intake or scientific review,
+local roles start with the current assignment and relevant specification sections, then use
+`hmasd-scientific-tools` scientific-reading mode to locate the relevant passages in
+`docs/rl-marl-foundations-20260907/FOUNDATIONS.md` and its topic notes. Read only the
+concepts needed for this judgment; reuse current relevant reads. In the existing
+card/intake or technical acceptance, state the assumption or inferential limit that
+supports or changes the judgment. A citation alone does not demonstrate use.
+
+Pro reads only the specification sections and knowledge passages listed in TASK at
+their declared fixed versions. TASK adopts the applicable named specification
+requirements; no local skill invocation or unlisted linked dependency is required.
+
+These materials explain concepts; they have no independent decision authority.
+SESSION_CHOICES.md records choices for its original discussion and is an input only
+when explicitly applicable to the current task. It sets no global endpoint, baseline
+or investment rule. Preserve frozen scientific meaning, source versions and budgets.
+Sections 11.8–11.9 remain controlling: no textbook census, fixed seed quota, positive
+result, proof, full mechanism explanation or Pro round becomes a new A/B condition.
+Mechanical work does not preload this material; scientific reading does not invoke
+grilling or require owner confirmation. Missing decision-critical sources follow the
+existing node's gap procedure; an explanatory-source gap alone is no launch refusal.

@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "reference": "JaxMARL",
+  "local_source_root": "C:/Projects/ref-lib/JaxMARL",
+  "reports_root": "C:/Projects/ref-lib/reports/JaxMARL",
+  "upstream_url": "https://github.com/FLAIROx/JaxMARL.git",
+  "canonical_web_url": "https://github.com/bold-lab-ai/JaxMARL",
+  "fixed_commit": "b0c4d77b2cc06711031aec846a55ed0c8cf0f6e9",
+  "license": {
+    "path": "LICENSE",
+    "spdx": "Apache-2.0",
+    "source_excerpt_lines": "1-5"
+  },
+  "upstream_instruction_files_at_fixed_commit": [],
+  "source_mutation_policy": "read-only; local AGENTS.md overlays only",
+  "reports": [
+    "CORE_EVIDENCE.md",
+    "ROOT_RETURN.md",
+    "AGENTS_INDEX.json"
+  ],
+  "overlay_backup_root": "agents-overlays",
+  "overlays": [
+    {
+      "source": "AGENTS.md",
+      "backup": "agents-overlays/AGENTS.md",
+      "focus": "fixed-SHA scope, module map, transform/RNG/dtype/timing rules"
+    },
+    {
+      "source": "jaxmarl/AGENTS.md",
+      "backup": "agents-overlays/jaxmarl/AGENTS.md",
+      "focus": "package entry points and pure JAX API"
+    },
+    {
+      "source": "jaxmarl/environments/AGENTS.md",
+      "backup": "agents-overlays/jaxmarl/environments/AGENTS.md",
+      "focus": "environment API, state trees, agent dict to array boundary"
+    },
+    {
+      "source": "jaxmarl/environments/mpe/AGENTS.md",
+      "backup": "agents-overlays/jaxmarl/environments/mpe/AGENTS.md",
+      "focus": "MPE state, nested entity vmap, collision cost"
+    },
+    {
+      "source": "jaxmarl/environments/smax/AGENTS.md",
+      "backup": "agents-overlays/jaxmarl/environments/smax/AGENTS.md",
+      "focus": "SMAX state, nested world scan, masks, unit-pair arrays, speed harness"
+    },
+    {
+      "source": "jaxmarl/environments/hanabi/AGENTS.md",
+      "backup": "agents-overlays/jaxmarl/environments/hanabi/AGENTS.md",
+      "focus": "turn semantics, legal moves, host formatting enumeration"
+    },
+    {
+      "source": "jaxmarl/environments/overcooked_v2/AGENTS.md",
+      "backup": "agents-overlays/jaxmarl/environments/overcooked_v2/AGENTS.md",
+      "focus": "recipe combinations and state permutations"
+    },
+    {
+      "source": "jaxmarl/environments/storm/AGENTS.md",
+      "backup": "agents-overlays/jaxmarl/environments/storm/AGENTS.md",
+      "focus": "import-time spawn combinations and grid shape drivers"
+    },
+    {
+      "source": "jaxmarl/wrappers/AGENTS.md",
+      "backup": "agents-overlays/jaxmarl/wrappers/AGENTS.md",
+      "focus": "logging, batch vmap, padding, global state/reward"
+    },
+    {
+      "source": "baselines/AGENTS.md",
+      "backup": "agents-overlays/baselines/AGENTS.md",
+      "focus": "single-file baselines, scan/vmap/jit nesting, callback and timing caveats"
+    },
+    {
+      "source": "baselines/IPPO/AGENTS.md",
+      "backup": "agents-overlays/baselines/IPPO/AGENTS.md",
+      "focus": "RNN/IPPO actor-time-environment axes and io callback"
+    },
+    {
+      "source": "baselines/MAPPO/AGENTS.md",
+      "backup": "agents-overlays/baselines/MAPPO/AGENTS.md",
+      "focus": "recurrent MAPPO rollout/update and central value shapes"
+    },
+    {
+      "source": "baselines/QLearning/AGENTS.md",
+      "backup": "agents-overlays/baselines/QLearning/AGENTS.md",
+      "focus": "VDN/replay scan, parameter sharing, greedy evaluation and debug callback"
+    },
+    {
+      "source": "baselines/QLearning/utils/AGENTS.md",
+      "backup": "agents-overlays/baselines/QLearning/utils/AGENTS.md",
+      "focus": "fast attention scan utility"
+    }
+  ],
+  "verification": {
+    "head_matches_fixed_commit": true,
+    "remote_matches_manifest": true,
+    "source_files_changed": false,
+    "git_status_expected": "only listed local AGENTS.md overlays are untracked",
+    "runtime_execution": "not performed",
+    "dependency_installation": "not performed",
+    "benchmark_or_training": "not performed"
+  }
+}

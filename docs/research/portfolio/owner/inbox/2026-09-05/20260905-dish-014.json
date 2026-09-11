@@ -1,0 +1,43 @@
+{
+  "id": "20260905-dish-014",
+  "created": "2026-09-05T04:28:59-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "DISH A03 intake：输入恢复，合法应用仍有缺口",
+  "context": "全部2400行轨迹独立复算一致。新宿主两端各接收287次来源信息、快照331次、就绪634次，产生299个原所有者服务时刻；四次意图证书为零，没有合法交接。接受完整 A 诊断，读作下游阶段缺口。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受完整 A03 及下游缺口读法",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "把原所有者服务算作来源收益或完整资格",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "把普通证书拒绝当作技术失败",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "因没有交接而重复同一对轨迹",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整观测说明必要输入已恢复，但合法应用和新所有者服务尚未发生。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_INTAKE_20260905.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-ground-endpoint-a03-intake",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-05-vspc1-k4-native-return-design-01--vsp_c1",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-05-vspc1-k4-native-return-design-01",
+  "direction_id": "vsp_c1",
+  "direction_ids": [
+    "vsp_c1"
+  ],
+  "workflow_node": "em_innovator",
+  "conversation_binding_key": "em:vsp_c1:innovator",
+  "decision_authority": "pro_final",
+  "source_mode": "single_body_attachment",
+  "body": {
+    "role": "prompt",
+    "source_path": "C:\\Projects\\HMASD-worktrees\\dm-k4-vspc1-design-20260905\\docs\\research\\candidates\\vsp_c1\\pro_innovator_20260905\\PROMPT_BODY.md",
+    "canonical_filename": "2026-09-05-vspc1-k4-native-return-design-01--vsp_c1__00_PROMPT.md",
+    "bytes": 17258,
+    "sha256": "9e14fde70cfd15fff130afddf2843697dc3af7e48d507e7595992ac508f19aad",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-vspc1-k4-native-return-design-01\\2026-09-05-vspc1-k4-native-return-design-01--vsp_c1__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-vspc1-k4-native-return-design-01\\2026-09-05-vspc1-k4-native-return-design-01--vsp_c1__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-vspc1-k4-native-return-design-01\\2026-09-05-vspc1-k4-native-return-design-01--vsp_c1__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "9e14fde70cfd15fff130afddf2843697dc3af7e48d507e7595992ac508f19aad",
+    "references": []
+  }
+}

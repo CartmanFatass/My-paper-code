@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-09-acvc-native-link-loss-convergence-01--acvc",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-09-acvc-native-link-loss-convergence-01",
+  "direction_id": "acvc",
+  "direction_ids": [
+    "acvc"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:acvc:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-09-acvc-native-link-loss-convergence-01--acvc__00_PROMPT.md",
+    "bytes": 1244,
+    "sha256": "a22e3714e935fd478ed6f9745087ab24b4f78b20c3c9967ecc32cad1fcdaed17",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-09-acvc-native-link-loss-convergence-01\\2026-09-09-acvc-native-link-loss-convergence-01--acvc__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-09-acvc-native-link-loss-convergence-01\\2026-09-09-acvc-native-link-loss-convergence-01--acvc__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-09-acvc-native-link-loss-convergence-01\\2026-09-09-acvc-native-link-loss-convergence-01--acvc__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "a22e3714e935fd478ed6f9745087ab24b4f78b20c3c9967ecc32cad1fcdaed17",
+    "references": []
+  }
+}

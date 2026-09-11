@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "packet": "20260905_marl_runtime_spec",
+  "status": "reference_collection_complete",
+  "captured_at": "2026-09-05",
+  "collection_root": "C:/Projects/ref-lib",
+  "hmasd_packet_root": "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec",
+  "source_policy": "shallow public clones; source bytes unchanged; local AGENTS.md navigation overlays only",
+  "references": [
+    {
+      "name": "EPyMARL",
+      "local_dir": "C:/Projects/ref-lib/epymarl",
+      "upstream_url": "https://github.com/uoe-agents/epymarl.git",
+      "web_url": "https://github.com/uoe-agents/epymarl",
+      "branch_at_clone": "main",
+      "clone_depth": 1,
+      "commit": "cbc38c09588064eab978501d0f12c2cf58fa7fc2",
+      "commit_date": "2024-09-24T09:38:39+01:00",
+      "license_path": "LICENSE",
+      "license": "Apache-2.0",
+      "upstream_agents": [],
+      "local_overlay_paths": [
+        "AGENTS.md",
+        "src/components/AGENTS.md",
+        "src/controllers/AGENTS.md",
+        "src/envs/AGENTS.md",
+        "src/learners/AGENTS.md",
+        "src/runners/AGENTS.md"
+      ],
+      "worker_artifacts": [
+        "worker-reports/epymarl/CORE_EVIDENCE.md",
+        "worker-reports/epymarl/ROOT_RETURN.md",
+        "worker-reports/epymarl/AGENTS_INDEX.json"
+      ],
+      "worker_artifact_sha256": {
+        "worker-reports/epymarl/CORE_EVIDENCE.md": "6256351632eed5700602a2f090aa24bce066fad62ba733d611ab729d3ebc9af3",
+        "worker-reports/epymarl/ROOT_RETURN.md": "a3c15d9953d2cfde6e103f4807d5841b45531f4c7eb925df7be1d89a9c50b845",
+        "worker-reports/epymarl/AGENTS_INDEX.json": "fd44b2674fa4a63fa8e99fb85a483897daee546b697421a4009f7f1e401208bc"
+      },
+      "source_focus": [
+        "src/runners/parallel_runner.py",
+        "src/components/episode_buffer.py",
+        "src/learners/q_learner.py",
+        "src/config/default.yaml"
+      ]
+    },
+    {
+      "name": "MAPPO on-policy",
+      "local_dir": "C:/Projects/ref-lib/on-policy",
+      "upstream_url": "https://github.com/marlbenchmark/on-policy.git",
+      "web_url": "https://github.com/marlbenchmark/on-policy",
+      "branch_at_clone": "main",
+      "clone_depth": 1,
+      "commit": "de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+      "commit_date": "2024-07-18T18:00:36+08:00",
+      "license_path": "LICENSE",
+      "license": "MIT",
+      "upstream_agents": [],
+      "local_overlay_paths": [
+        "AGENTS.md",
+        "onpolicy/AGENTS.md",
+        "onpolicy/algorithms/AGENTS.md",
+        "onpolicy/algorithms/r_mappo/AGENTS.md",
+        "onpolicy/algorithms/r_mappo/algorithm/AGENTS.md",
+        "onpolicy/algorithms/utils/AGENTS.md",
+        "onpolicy/envs/AGENTS.md",
+        "onpolicy/envs/football/AGENTS.md",
+        "onpolicy/envs/hanabi/AGENTS.md",
+        "onpolicy/envs/mpe/AGENTS.md",
+        "onpolicy/envs/starcraft2/AGENTS.md",
+        "onpolicy/envs/starcraft2/StarCraft2v2/AGENTS.md",
+        "onpolicy/runner/AGENTS.md",
+        "onpolicy/runner/separated/AGENTS.md",
+        "onpolicy/runner/shared/AGENTS.md",
+        "onpolicy/scripts/AGENTS.md",
+        "onpolicy/scripts/train/AGENTS.md",
+        "onpolicy/utils/AGENTS.md"
+      ],
+      "worker_artifacts": [
+        "worker-reports/on-policy/CORE_EVIDENCE.md",
+        "worker-reports/on-policy/ROOT_RETURN.md",
+        "worker-reports/on-policy/AGENTS_INDEX.json"
+      ],
+      "worker_artifact_sha256": {
+        "worker-reports/on-policy/CORE_EVIDENCE.md": "49b17a0c76c48119f6e2658de432d868e69f70eba6172015375758976f7f4298",
+        "worker-reports/on-policy/ROOT_RETURN.md": "84c79ebcce7abe3765a08f95291b63d3840a13b2f42fff80e23e00c14c288f5d",
+        "worker-reports/on-policy/AGENTS_INDEX.json": "4bc4671eeae697f7db08c39be4b68cf8e63d81b6a1eab3b82f2745905b92036a"
+      },
+      "source_focus": [
+        "onpolicy/envs/env_wrappers.py",
+        "onpolicy/runner/shared/base_runner.py",
+        "onpolicy/runner/shared/smac_runner.py",
+        "onpolicy/utils/shared_buffer.py",
+        "onpolicy/algorithms/r_mappo/r_mappo.py",
+        "onpolicy/config.py"
+      ]
+    },
+    {
+      "name": "BenchMARL",
+      "local_dir": "C:/Projects/ref-lib/BenchMARL",
+      "upstream_url": "https://github.com/facebookresearch/BenchMARL.git",
+      "web_url": "https://github.com/facebookresearch/BenchMARL",
+      "branch_at_clone": "main",
+      "clone_depth": 1,
+      "commit": "65d649d80e0bdcbdbe2c5d6a3f02dbfed8f0bec1",
+      "commit_date": "2026-02-07T15:54:54Z",
+      "license_path": "LICENSE",
+      "license": "MIT",
+      "upstream_agents": [],
+      "local_overlay_paths": [
+        "AGENTS.md",
+        "benchmarl/AGENTS.md",
+        "benchmarl/algorithms/AGENTS.md",
+        "benchmarl/benchmark/AGENTS.md",
+        "benchmarl/environments/AGENTS.md",
+        "benchmarl/experiment/AGENTS.md",
+        "benchmarl/models/AGENTS.md"
+      ],
+      "worker_artifacts": [
+        "worker-reports/BenchMARL/CORE_EVIDENCE.md",
+        "worker-reports/BenchMARL/ROOT_RETURN.md",
+        "worker-reports/BenchMARL/AGENTS_INDEX.json"
+      ],
+      "worker_artifact_sha256": {
+        "worker-reports/BenchMARL/CORE_EVIDENCE.md": "5dc904835fde5b4c3d0bd7d180a6f56fabc2ff79e15a64aae7006731c1c3124a",
+        "worker-reports/BenchMARL/ROOT_RETURN.md": "4c710e5eb144ec75cd41b6ff1ccdb34167c0a8a911ba5c5bc65f597dbff6146d",
+        "worker-reports/BenchMARL/AGENTS_INDEX.json": "80fbbee0f137b7791752de60215744e0857b4bfca4fa1bcf7a1b740aa47fe545"
+      },
+      "source_focus": [
+        "benchmarl/run.py",
+        "benchmarl/experiment/experiment.py",
+        "benchmarl/benchmark/benchmark.py",
+        "benchmarl/algorithms/mappo.py",
+        "benchmarl/environments/common.py",
+        "benchmarl/conf/experiment/base_experiment.yaml"
+      ]
+    },
+    {
+      "name": "MARLlib",
+      "local_dir": "C:/Projects/ref-lib/MARLlib",
+      "upstream_url": "https://github.com/Replicable-MARL/MARLlib.git",
+      "web_url": "https://github.com/Replicable-MARL/MARLlib",
+      "branch_at_clone": "master",
+      "clone_depth": 1,
+      "commit": "80e9973a430271a93c781d7422133acb1198f84b",
+      "commit_date": "2024-11-28T17:34:07+10:30",
+      "license_path": "LICENSE",
+      "license": "MIT",
+      "upstream_agents": [],
+      "local_overlay_paths": [
+        "AGENTS.md",
+        "examples/AGENTS.md",
+        "marllib/AGENTS.md",
+        "marllib/envs/AGENTS.md",
+        "marllib/envs/base_env/AGENTS.md",
+        "marllib/envs/base_env/config/AGENTS.md",
+        "marllib/envs/global_reward_env/AGENTS.md",
+        "marllib/marl/AGENTS.md",
+        "marllib/marl/algos/AGENTS.md",
+        "marllib/marl/algos/core/AGENTS.md",
+        "marllib/marl/algos/core/CC/AGENTS.md",
+        "marllib/marl/algos/core/IL/AGENTS.md",
+        "marllib/marl/algos/core/VD/AGENTS.md",
+        "marllib/marl/algos/hyperparams/AGENTS.md",
+        "marllib/marl/algos/hyperparams/common/AGENTS.md",
+        "marllib/marl/algos/scripts/AGENTS.md",
+        "marllib/marl/algos/utils/AGENTS.md",
+        "marllib/marl/models/AGENTS.md",
+        "marllib/marl/models/configs/AGENTS.md",
+        "marllib/marl/models/zoo/AGENTS.md",
+        "marllib/marl/models/zoo/encoder/AGENTS.md",
+        "marllib/marl/models/zoo/mixer/AGENTS.md",
+        "marllib/marl/models/zoo/mlp/AGENTS.md",
+        "marllib/marl/models/zoo/rnn/AGENTS.md",
+        "marllib/marl/ray/AGENTS.md",
+        "marllib/patch/AGENTS.md",
+        "marllib/patch/rllib/AGENTS.md",
+        "marllib/patch/rllib/execution/AGENTS.md",
+        "marllib/patch/rllib/models/AGENTS.md",
+        "marllib/patch/rllib/policy/AGENTS.md",
+        "marllib/patch/rllib/utils/AGENTS.md",
+        "tests/AGENTS.md"
+      ],
+      "worker_artifacts": [
+        "worker-reports/MARLlib/CORE_EVIDENCE.md",
+        "worker-reports/MARLlib/ROOT_RETURN.md",
+        "worker-reports/MARLlib/AGENTS_INDEX.json"
+      ],
+      "worker_report_summary": {
+        "fixed_sha_permalink_count": 53,
+        "overlay_count": 32,
+        "incremental_topics": [
+          "preprocessor flattening and nested-space boundary",
+          "single-group policy mapping and shared-policy batch slicing boundary",
+          "num_cpus_per_worker visibility in the runner configuration"
+        ]
+      },
+      "worker_artifact_sha256": {
+        "worker-reports/MARLlib/CORE_EVIDENCE.md": "634f2d9ca9d5ea731a4935c59660303d1f4b029d21184d3bddaf31b7ee5dcbaf",
+        "worker-reports/MARLlib/ROOT_RETURN.md": "c249d9460ae0dce09645a50116e618f1b38a7828fac45bf9fce6d75e14afacba",
+        "worker-reports/MARLlib/AGENTS_INDEX.json": "c6342b00e3468932d92d95aa5e284b93064dab395b1b1f458b564855e757f44d"
+      },
+      "source_focus": [
+        "marllib/marl/algos/run_cc.py",
+        "marllib/marl/algos/scripts/mappo.py",
+        "marllib/marl/algos/core/CC/mappo.py",
+        "marllib/marl/algos/utils/episode_execution_plan.py",
+        "marllib/patch/rllib/execution/train_ops.py",
+        "marllib/marl/ray/ray.yaml"
+      ]
+    },
+    {
+      "name": "Mava",
+      "local_dir": "C:/Projects/ref-lib/Mava",
+      "upstream_url": "https://github.com/instadeepai/Mava.git",
+      "web_url": "https://github.com/instadeepai/Mava",
+      "branch_at_clone": "develop",
+      "clone_depth": 1,
+      "commit": "83f7f0d19d6fdbe07264bb226a64baf8a0b17514",
+      "commit_date": "2026-09-04T11:05:11+02:00",
+      "license_path": "LICENSE",
+      "license": "Apache-2.0",
+      "upstream_agents": [],
+      "local_overlay_paths": [
+        "AGENTS.md",
+        "examples/AGENTS.md",
+        "examples/advanced_usage/AGENTS.md",
+        "mava/AGENTS.md",
+        "mava/configs/AGENTS.md",
+        "mava/configs/arch/AGENTS.md",
+        "mava/configs/default/AGENTS.md",
+        "mava/configs/logger/AGENTS.md",
+        "mava/configs/system/AGENTS.md",
+        "mava/networks/AGENTS.md",
+        "mava/systems/AGENTS.md",
+        "mava/systems/ppo/AGENTS.md",
+        "mava/systems/ppo/anakin/AGENTS.md",
+        "mava/systems/ppo/sebulba/AGENTS.md",
+        "mava/systems/q_learning/AGENTS.md",
+        "mava/systems/q_learning/anakin/AGENTS.md",
+        "mava/systems/q_learning/sebulba/AGENTS.md",
+        "mava/systems/sable/AGENTS.md",
+        "mava/systems/sable/anakin/AGENTS.md",
+        "mava/systems/sable/sebulba/AGENTS.md",
+        "mava/systems/sac/AGENTS.md",
+        "mava/systems/sac/anakin/AGENTS.md",
+        "mava/utils/AGENTS.md",
+        "mava/utils/sebulba/AGENTS.md",
+        "mava/wrappers/AGENTS.md",
+        "test/AGENTS.md"
+      ],
+      "worker_artifacts": [
+        "worker-reports/Mava/CORE_EVIDENCE.md",
+        "worker-reports/Mava/ROOT_RETURN.md",
+        "worker-reports/Mava/AGENTS_INDEX.json"
+      ],
+      "worker_artifact_sha256": {
+        "worker-reports/Mava/CORE_EVIDENCE.md": "98d68a8a890bed58e61d903cce98da6a3adfed5b6ab5f9107d748786331a0d97",
+        "worker-reports/Mava/ROOT_RETURN.md": "12b6a5bee8618bffbd39f2dd903d7ab62d32641b276a913ef61d84f53ee4ee88",
+        "worker-reports/Mava/AGENTS_INDEX.json": "de36970c88159f794fba8f73857ab699254acec0d1ae03d4493ef9cd67e8191f"
+      },
+      "source_focus": [
+        "mava/systems/ppo/anakin/ff_mappo.py",
+        "mava/systems/ppo/sebulba/ff_mappo.py",
+        "mava/utils/sebulba/pipelines.py",
+        "mava/utils/jax_utils.py",
+        "mava/configs/arch/anakin.yaml",
+        "mava/configs/arch/sebulba.yaml"
+      ]
+    },
+    {
+      "name": "JaxMARL",
+      "local_dir": "C:/Projects/ref-lib/JaxMARL",
+      "upstream_url": "https://github.com/FLAIROx/JaxMARL.git",
+      "canonical_web_url": "https://github.com/bold-lab-ai/JaxMARL",
+      "web_url": "https://github.com/FLAIROx/JaxMARL",
+      "branch_at_clone": "main",
+      "clone_depth": 1,
+      "commit": "b0c4d77b2cc06711031aec846a55ed0c8cf0f6e9",
+      "commit_date": "2026-09-04T20:03:50+01:00",
+      "license_path": "LICENSE",
+      "license": "Apache-2.0",
+      "upstream_agents": [],
+      "local_overlay_paths": [
+        "AGENTS.md",
+        "baselines/AGENTS.md",
+        "baselines/IPPO/AGENTS.md",
+        "baselines/MAPPO/AGENTS.md",
+        "baselines/QLearning/AGENTS.md",
+        "baselines/QLearning/utils/AGENTS.md",
+        "jaxmarl/AGENTS.md",
+        "jaxmarl/environments/AGENTS.md",
+        "jaxmarl/environments/hanabi/AGENTS.md",
+        "jaxmarl/environments/mpe/AGENTS.md",
+        "jaxmarl/environments/overcooked_v2/AGENTS.md",
+        "jaxmarl/environments/smax/AGENTS.md",
+        "jaxmarl/environments/storm/AGENTS.md",
+        "jaxmarl/wrappers/AGENTS.md"
+      ],
+      "worker_artifacts": [
+        "worker-reports/JaxMARL/CORE_EVIDENCE.md",
+        "worker-reports/JaxMARL/ROOT_RETURN.md",
+        "worker-reports/JaxMARL/AGENTS_INDEX.json"
+      ],
+      "worker_artifact_sha256": {
+        "worker-reports/JaxMARL/CORE_EVIDENCE.md": "80cfa62aab7d828dc161a2b16aa823a1d06e043cd504c68350fbeb5438150e35",
+        "worker-reports/JaxMARL/ROOT_RETURN.md": "03b7b51c2e639a472e6159321a11d33b2a3b397ce6fddb0fd00ed5ef45cf863f",
+        "worker-reports/JaxMARL/AGENTS_INDEX.json": "ea05258b62dfc820a8b9040321d2ac6d14464555f5f79c7f9da5e30968d5b05c"
+      },
+      "source_focus": [
+        "baselines/QLearning/vdn_ff.py",
+        "baselines/IPPO/ippo_rnn_smax.py",
+        "jaxmarl/environments/mpe/simple_spread.py",
+        "jaxmarl/environments/smax/speed.py",
+        "baselines/QLearning/config/config.yaml"
+      ]
+    }
+  ],
+  "overlay_policy": {
+    "root_overlay_required": true,
+    "hierarchical_overlays": "only actual relevant module directories selected by each worker",
+    "preserve_upstream_agents": true,
+    "source_bytes_may_change": false,
+    "overlay_backup_root": "agents-overlays/",
+    "collection_overlays": [
+      {
+        "external_path": "C:/Projects/ref-lib/AGENTS.md",
+        "packet_copy": "agents-overlays/ref-lib/AGENTS.md",
+        "kind": "collection_root_navigation",
+        "status": "captured"
+      }
+    ]
+  }
+}

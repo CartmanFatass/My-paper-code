@@ -1,0 +1,120 @@
+=== Task 'frrie_r09_segfault_a01_43eec21e_20260905' started at 2026-09-06T00:21:23+08:00 ===
+{
+  "assessed_at": "2026-09-05T16:21:23.090023Z",
+  "available_physical_bytes": 15422091264,
+  "captured_at": "2026-09-05T16:21:23.089770Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15422091264,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+Traceback (most recent call last):
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pdb.py", line 1721, in main
+    pdb._runmodule(mainpyfile)
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pdb.py", line 1557, in _runmodule
+    self.run(code)
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/bdb.py", line 598, in run
+    exec(cmd, globals, locals)
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/scripts/run_frrie_b01_contact_r09.py", line 9, in <module>
+    raise SystemExit(main([*sys.argv[1:], "--seed", "3"]))
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py", line 560, in main
+    execute(
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py", line 166, in execute
+    evaluation_tapes = {
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py", line 167, in <dictcomp>
+    roster: tuple(
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py", line 168, in <genexpr>
+    evaluation_tape(
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py", line 216, in evaluation_tape
+    uplink[slot, sender, receiver] = rng.uniform_float32(
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py", line 113, in uniform_float32
+    return int.from_bytes(self.block(address)[:3], "big") * (1.0 / 2**24)
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py", line 109, in block
+    + address.canonical_bytes() + retry.to_bytes(4, "big")
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py", line 96, in canonical_bytes
+    "schema": "FRRIE_B01_EVALUATION_ADDRESS_V1", **asdict(self.validate()),
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/dataclasses.py", line 1238, in asdict
+    return _asdict_inner(obj, dict_factory)
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/dataclasses.py", line 1245, in _asdict_inner
+    value = _asdict_inner(getattr(obj, f.name), dict_factory)
+AttributeError: 'tuple_iterator' object has no attribute 'name'
+Uncaught exception. Entering post mortem debugging
+Running 'cont' or 'step' will restart the program
+> /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/dataclasses.py(1245)_asdict_inner()
+-> value = _asdict_inner(getattr(obj, f.name), dict_factory)
+(Pdb)   /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pdb.py(1721)main()
+-> pdb._runmodule(mainpyfile)
+  /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pdb.py(1557)_runmodule()
+-> self.run(code)
+  /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/bdb.py(598)run()
+-> exec(cmd, globals, locals)
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/scripts/run_frrie_b01_contact_r09.py(9)<module>()
+-> raise SystemExit(main([*sys.argv[1:], "--seed", "3"]))
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(560)main()
+-> execute(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(166)execute()
+-> evaluation_tapes = {
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(167)<dictcomp>()
+-> roster: tuple(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(168)<genexpr>()
+-> evaluation_tape(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(216)evaluation_tape()
+-> uplink[slot, sender, receiver] = rng.uniform_float32(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(113)uniform_float32()
+-> return int.from_bytes(self.block(address)[:3], "big") * (1.0 / 2**24)
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(109)block()
+-> + address.canonical_bytes() + retry.to_bytes(4, "big")
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(96)canonical_bytes()
+-> "schema": "FRRIE_B01_EVALUATION_ADDRESS_V1", **asdict(self.validate()),
+  /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/dataclasses.py(1238)asdict()
+-> return _asdict_inner(obj, dict_factory)
+> /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/dataclasses.py(1245)_asdict_inner()
+-> value = _asdict_inner(getattr(obj, f.name), dict_factory)
+(Pdb) ('FIELD_TYPES', 'R02EvaluationAddress', 'tuple_iterator', None)
+(Pdb) ('FIELD_INVENTORY', [('seed_label', 'Field', 'seed_label'), ('roster', 'Field', 'roster'), ('episode', 'Field', 'episode'), ('kind', 'Field', 'kind'), ('basin', 'Field', 'basin'), ('event_ordinal', 'Field', 'event_ordinal'), ('slot', 'Field', 'slot'), ('public_role', 'Field', 'public_role'), ('role_local_index', 'Field', 'role_local_index'), ('sender', 'Field', 'sender'), ('receiver', 'Field', 'receiver'), ('draw', 'Field', 'draw')])
+(Pdb) > /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(96)canonical_bytes()
+-> "schema": "FRRIE_B01_EVALUATION_ADDRESS_V1", **asdict(self.validate()),
+(Pdb) *** AttributeError: 'R02EvaluationAddress' object has no attribute 'seed_block'
+(Pdb) > /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(166)execute()
+-> evaluation_tapes = {
+(Pdb) *** NameError: name 'number' is not defined
+(Pdb)   /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pdb.py(1721)main()
+-> pdb._runmodule(mainpyfile)
+  /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pdb.py(1557)_runmodule()
+-> self.run(code)
+  /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/bdb.py(598)run()
+-> exec(cmd, globals, locals)
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/scripts/run_frrie_b01_contact_r09.py(9)<module>()
+-> raise SystemExit(main([*sys.argv[1:], "--seed", "3"]))
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(560)main()
+-> execute(
+> /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(166)execute()
+-> evaluation_tapes = {
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(167)<dictcomp>()
+-> roster: tuple(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(168)<genexpr>()
+-> evaluation_tape(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(216)evaluation_tape()
+-> uplink[slot, sender, receiver] = rng.uniform_float32(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(113)uniform_float32()
+-> return int.from_bytes(self.block(address)[:3], "big") * (1.0 / 2**24)
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(109)block()
+-> + address.canonical_bytes() + retry.to_bytes(4, "big")
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(96)canonical_bytes()
+-> "schema": "FRRIE_B01_EVALUATION_ADDRESS_V1", **asdict(self.validate()),
+  /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/dataclasses.py(1238)asdict()
+-> return _asdict_inner(obj, dict_factory)
+  /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/dataclasses.py(1245)_asdict_inner()
+-> value = _asdict_inner(getattr(obj, f.name), dict_factory)
+(Pdb) Post mortem debugger finished. The scripts.run_frrie_b01_contact_r09 will be restarted
+> /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/scripts/run_frrie_b01_contact_r09.py(1)<module>()
+-> """Module entry point for the frozen FRRIE R09 third-root object."""
+(Pdb) 
+=== Task 'frrie_r09_segfault_a01_43eec21e_20260905' exited with code 0 at 2026-09-06T00:21:42+08:00 (Duration: 19s) ===

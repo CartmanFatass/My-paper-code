@@ -12,6 +12,7 @@ import hashlib
 import os
 from pathlib import Path
 import platform
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -46,6 +47,16 @@ MSVC_COMPILE_FLAGS = (
     "/EHsc",
     "/LD",
     "/fp:strict",
+)
+POSIX_COMPILE_FLAGS = (
+    "-std=c++17",
+    "-O2",
+    "-fexceptions",
+    "-shared",
+    "-fPIC",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "-fno-unsafe-math-optimizations",
 )
 
 
@@ -226,9 +237,75 @@ def _compiler_path() -> Path:
     return max(candidates, key=version).resolve()
 
 
+def _posix_compiler_path() -> Path:
+    for name in ("g++", "clang++"):
+        located = shutil.which(name)
+        if located:
+            return Path(located).resolve()
+    raise NativeBackendError("g++ and clang++ are unavailable")
+
+
+def _posix_toolchain_identity() -> dict[str, object]:
+    compiler = _posix_compiler_path()
+    try:
+        probe = subprocess.run(
+            [str(compiler), "--version"], capture_output=True, text=True, check=False
+        )
+    except OSError as exc:
+        raise NativeBackendError("POSIX compiler identity probe failed") from exc
+    version_text = "\n".join(
+        line.strip()
+        for line in (probe.stdout + "\n" + probe.stderr).splitlines()
+        if line.strip()
+    )
+    if probe.returncode != 0 or not version_text:
+        raise NativeBackendError("POSIX compiler identity could not be verified")
+    stat = compiler.stat()
+    return {
+        "compiler_path": str(compiler),
+        "compiler_sha256": _sha256_file(compiler),
+        "compiler_size": stat.st_size,
+        "compiler_mtime_ns": stat.st_mtime_ns,
+        "compiler_version_output": version_text,
+        "compile_flags": list(POSIX_COMPILE_FLAGS),
+    }
+
+
+def _posix_compile_artifact(
+    *, cache: Path, snapshot: Path, toolchain: dict[str, object]
+) -> Path:
+    artifact = cache / "tbcfv_backend.so"
+    if artifact.is_file():
+        return artifact
+    suffix = f"{os.getpid()}.{threading.get_ident()}"
+    candidate = cache / f"tbcfv_backend.{suffix}.so"
+    command = [
+        str(toolchain["compiler_path"]),
+        *POSIX_COMPILE_FLAGS,
+        str(snapshot),
+        "-o",
+        str(candidate),
+    ]
+    result = subprocess.run(command, cwd=cache, capture_output=True, text=True)
+    if result.returncode != 0 or not candidate.is_file():
+        raise NativeBackendError(
+            f"native TBCFV compilation failed ({result.returncode}):\n"
+            f"{result.stdout}\n{result.stderr}"
+        )
+    try:
+        os.replace(candidate, artifact)
+    except OSError:
+        if not artifact.is_file():
+            raise
+        candidate.unlink(missing_ok=True)
+    return artifact
+
+
 @functools.lru_cache(maxsize=1)
 def native_toolchain_identity() -> dict[str, object]:
     """Freeze the process toolchain identity used by every loaded build key."""
+    if os.name != "nt":
+        return _posix_toolchain_identity()
     compiler = _compiler_path()
     try:
         probe = subprocess.run([str(compiler)], capture_output=True, text=True, check=False)
@@ -293,12 +370,13 @@ def _visible_material(build_root: str | Path | None) -> tuple[tuple[str, ...], b
         raise NativeBackendError("native TBCFV source is unavailable") from exc
     source_digest = hashlib.sha256(source_bytes).hexdigest()
     resolved = _resolved_build_root(build_root)
+    compile_flags = MSVC_COMPILE_FLAGS if os.name == "nt" else POSIX_COMPILE_FLAGS
     visible_key = (
         source_digest,
         _runtime_digest(),
         str(NATIVE_ABI_VERSION),
         f"{FIXTURE_MAGIC:016x}",
-        *MSVC_COMPILE_FLAGS,
+        *compile_flags,
         str(resolved),
     )
     return visible_key, source_bytes, resolved
@@ -352,6 +430,10 @@ def _compile_artifact(
     cache = build_root / build_key
     cache.mkdir(parents=True, exist_ok=True)
     snapshot = _source_snapshot(cache, source_bytes)
+    if os.name != "nt":
+        return _posix_compile_artifact(
+            cache=cache, snapshot=snapshot, toolchain=toolchain
+        )
     artifact = cache / "tbcfv_backend.dll"
     if artifact.is_file():
         return artifact

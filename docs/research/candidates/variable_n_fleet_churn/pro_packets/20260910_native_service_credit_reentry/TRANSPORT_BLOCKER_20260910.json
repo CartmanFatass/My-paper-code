@@ -1,0 +1,44 @@
+{
+  "recorded_at": "2026-09-10T20:32:12Z",
+  "source": "Root's native forward of the Transport terminal blocker, 2026-09-10",
+  "forwarded_receipt": {
+    "request_id": "2026-09-10-vnfc-native-service-credit-reentry-01",
+    "workflow_node": "em_convergence",
+    "binding": "em:variable_n_fleet_churn:convergence",
+    "direction": "variable_n_fleet_churn",
+    "state": "SEND_UNCERTAIN",
+    "conversation_id": "6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+    "provider_url": "https://chatgpt.com/c/6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+    "send_click_count": 1,
+    "wait_status": "WAITING_UNKNOWN",
+    "observed": "Exact bound URL reloaded; no current-round user node or assistant response; acceptance unresolved",
+    "blocker": "Pro Send acceptance unresolved after one click; no retry permitted",
+    "archive": null,
+    "scientific_decision": null
+  },
+  "read_only_registry_corroboration": {
+    "source": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/registry.json",
+    "read_at": "2026-09-10T20:32:12Z",
+    "binding": "em:variable_n_fleet_churn:convergence",
+    "request_id": "2026-09-10-vnfc-native-service-credit-reentry-01",
+    "state": "SEND_UNCERTAIN",
+    "send_click_count": 1,
+    "wait_status": "WAITING_UNKNOWN",
+    "prompt_sha256": "5ba42839e95b7b252acb61f965b3aca2dd25bbb89f9faf49205e62c78e85ecba",
+    "last_observed_at": "2026-09-10T20:28:57Z",
+    "last_observed_state": "SEND_UNCERTAIN; bound URL reloaded; no current-round user node; no retry permitted",
+    "return_receipt": {
+      "status": "SENT",
+      "kind": "TERMINAL_BLOCKER",
+      "blocker_state": "SEND_UNCERTAIN",
+      "attempt_count": 1,
+      "retry_allowed": false,
+      "delivery_status": "accepted",
+      "sent_at": "2026-09-10T20:29:56Z",
+      "error": "Pro Send acceptance remains unresolved after one click: exact bound URL reloaded with no current-round user node or assistant response; no retry permitted under transport rules."
+    }
+  },
+  "interpretation": "The accepted delivery_status describes the blocker receipt sent to Root, not provider acceptance of the Pro prompt. No formed scientific decision exists.",
+  "recovery_record": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md#8-transport-blocker-and-same-request-reconciliation-wait",
+  "scientific_effect": "No direction option selected, no local provisional disposition, no new allocation or scientific exposure. Preserve the same request and fixed inputs for Root/Transport acceptance reconciliation; no DM Send or resend."
+}

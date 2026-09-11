@@ -1,3 +1,6 @@
+Claim: At a fixed first valid two-agent handover, promoting the prepared shadow state may improve 100-tick recovery over an incumbent-state copy under the same trained checkpoint and future tape.
+Binding MARL structure: systems / information flow. The question arises from two agents' role-specific partial observations and recurrent histories before a change in action ownership.
+
 # DISH first-trigger source scout B01 — science card
 
 - Direction: `degraded_incumbent_shadow_handover`
@@ -265,3 +268,31 @@ real-learner observation that can change the next object.
 **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** This is a reversible
 object-tier selection inside the owner-authorized ACTIVE direction; it changes no direction or
 Portfolio state.
+
+## 13. Resumption description supplement — 2026-09-04
+
+Added before any B01 result-bearing invocation. The original question, seeds, training budget,
+panel, source intervention, estimands, predictions and ordered section-7 rule remain unchanged.
+This supplement supplies evidence-spec section 11.7 description fields; it adds no launch gate.
+
+**Minimum effect of interest:** an absolute mean SHADOW-COPY difference of five service-positive
+ticks in the 100-tick recovery horizon. Native service is binary per tick, so this is five percent
+of the maximum recovery return and a concrete recovery difference larger than a one-tick edge.
+The same scale is used descriptively for COPY-RETAIN. Relative return alone is unsuitable where
+COPY can supply little service. The original sign-based `FTS-*` rule is not replaced by this MEI.
+
+**Headroom:** no tuned same-information generic baseline with the B01 64-update process and
+sixteen-row first-trigger population has been observed. Earlier R06 checkpoints/panels and the
+FOLR B04 host differ in observation, action, information or budget and do not fill this slot.
+COPY is the immediate legal source-selection comparator; replay/replan remains a stronger live
+containing explanation for any positive source-specific result. No compatible host baseline
+package has been identified, and this absence does not hold the launch.
+
+**How the result will be interpreted:** an improvement above five ticks, repeated across usable
+seeds with the original tail and nonharm checks, would motivate a further B discriminator of
+source preparation versus replay/replan or training co-adaptation. A difference inside five ticks
+would leave a small finite-budget effect possible but would not justify a practically substantial
+source claim, even if the original sign rule says `FTS-BS`. A difference below minus five ticks
+would favor COPY on this population and motivate inspection of shadow co-adaptation or source
+mismatch. Insufficient trigger support still follows `FTS-B0` and cannot be read as source equality.
+The original branches remain the reading rule, and no direction disposition follows locally.

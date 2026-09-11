@@ -1,0 +1,85 @@
+{
+  "id": "20260907-frrie-001",
+  "created": "2026-09-07T14:19:08-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FRRIE A04：单个系统Python替代路径，卡片已备但尚未分配运行",
+  "context": "在专用系统CPython3.12.3与固定NumPy1.26.3环境，复用T0构造384条tape，观察是否完成；systems / information flow，不作算法或旧故障归因。本次只准备，R09停止条件继续有效。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "保留该卡与交接（仅准备）",
+      "consequence": "保留单臂A04候选；安装和探针仍由Portfolio另行分配，当前次数为零。"
+    },
+    {
+      "key": "reject",
+      "label": "撤回该候选卡",
+      "consequence": "不据此安装或运行；保留A03证据与R09停止条件，返回后续任务需求。"
+    },
+    {
+      "key": "revise",
+      "label": "修改候选方案",
+      "consequence": "按实际回复修改未运行的候选；不推断R09恢复或已解决故障。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "现有T0代码可复用，单个替代路径能提供有界完成事实；无需为本问题增加完整解释器/wheel归因实验。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_A04_ALTERNATIVE_STACK_SCIENCE_CARD_20260907.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_A04_PREPARATION_INTAKE_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L81",
+  "brief": "docs/research/portfolio/owner/briefs/finite_resource_relational_inductive_efficiency/2026-09-07_A04-preparation.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已准备好的A04单臂方案：在专用系统Python3.12环境中，用固定NumPy重复一次完整T0输入构造？本条目仅记录准备，不分配安装或执行。",
+    "changes_if_approved": [
+      {
+        "target": "FRRIE A04卡与交接",
+        "from": "A03之后仅有多臂解释器/轮子归因建议，缺少可执行准备",
+        "to": "单个替代运行环境、384次tape构造、总上限300秒加5秒终止宽限的明确候选；执行次数仍为零"
+      }
+    ],
+    "if_refused": "保留A03证据和R09停止条件，返回具体修改或后续任务需求；不安装、不运行，不改变方向状态。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_A04_PREPARATION_INTAKE_20260907.md",
+        "quote": "Recommend and select (a); source code needs no change.",
+        "why": "复用已接受的T0实现，无需新工程框架。"
+      },
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_A04_PREPARATION_INTAKE_20260907.md",
+        "quote": "`/usr/bin/python3.12`, CPython 3.12.3, GCC 13.3.0",
+        "why": "节点确实存在另一套系统解释器。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SEGFAULT_A03_TAPE_ISOLATION_INTAKE_20260906.md",
+        "quote": "which of interpreter build, numpy wheel, or host (memory, kernel, CPU) is the agent is\nnot identified",
+        "why": "更换Python同时改变NumPy二进制；单臂完成也不能锁定旧原因。"
+      },
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_A04_PREPARATION_INTAKE_20260907.md",
+        "quote": "No NumPy metadata/package directory found",
+        "why": "目前尚无所需安装依赖；可下载性、导入和总耗时都未验证。"
+      }
+    ],
+    "uncertainty": [
+      "同一物理主机可能仍有问题；安装和探针运行可能失败或超过时间上限。",
+      "未评分A04预测，旧A03错误预测保留；该检查不证明R09可移植或算法有效。"
+    ],
+    "cost": {
+      "compute": "当前仅版本和文件盘点；未来候选为1×3×2×64=384次构造，零学习器，总上限300秒加5秒终止宽限，尚未分配。",
+      "owner_time": "可异步审阅；本次准备无需等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；后续安装与探针由Portfolio另行分配。"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Preparation only.",
+    "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_A04_PREPARATION_INTAKE_20260907.md"
+  },
+  "starred": false
+}

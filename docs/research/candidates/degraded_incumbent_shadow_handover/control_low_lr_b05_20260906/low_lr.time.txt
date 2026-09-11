@@ -1,0 +1,23 @@
+	Command being timed: "/usr/bin/timeout --signal=ALRM 1780.335s bash -lc /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/low_lr.memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_dish_control_low_lr_b05.py run --arm LOW_LR --seed 101 --shared temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/shared --shared-preparation-seconds 9.33 --out temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/low_lr --admission temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/low_lr.memory.json --control-summary temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/control/summary.json"
+	User time (seconds): 195.06
+	System time (seconds): 23.73
+	Percent of CPU this job got: 102%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:32.86
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 608364
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 2938
+	Minor (reclaiming a frame) page faults: 10374682
+	Voluntary context switches: 383689
+	Involuntary context switches: 7227
+	Swaps: 0
+	File system inputs: 615368
+	File system outputs: 4744
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

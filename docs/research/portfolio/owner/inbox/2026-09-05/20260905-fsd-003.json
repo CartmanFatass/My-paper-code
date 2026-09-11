@@ -1,0 +1,33 @@
+{
+  "id": "20260905-fsd-003",
+  "created": "2026-09-05T03:07:37-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "decision",
+  "title": "按原卡继续 E3 大差异固定时钟种子二",
+  "context": "当前指令继续自动推进。14 格有效、0 运行、4 格未启动；下一格固定时钟种子二，预算与比较器不变。",
+  "options": [
+    {
+      "key": "a",
+      "label": "继续原定下一格及后续原矩阵",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "维持已被新指令取代的暂停",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "补齐原比较，逐格验收；不根据中间结果选择种子或更改治疗。下一格前瞻 1.68 小时，单格上限 8 小时。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D2_SEED1_INTAKE_20260905.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#fsd-e3-large-d2-seed1-terminal-20260905",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

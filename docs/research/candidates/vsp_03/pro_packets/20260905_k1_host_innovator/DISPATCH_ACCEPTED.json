@@ -1,0 +1,40 @@
+{
+  "recorded_at_utc": "2026-09-05 22:15:01 UTC",
+  "status": "DISPATCH_ACCEPTED",
+  "meaning": "One author-to-singleton Codex dispatch was accepted by the tool. This is not provider-send evidence or a formed scientific decision.",
+  "request_id": "2026-09-05-vsp03-k1-host-innovator-01",
+  "source_thread_id": "01a07355-29e4-7041-8361-3746dace66d3",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "conversation_binding_key": "em:vsp_03:innovator",
+  "packet_commit": "6cb64af717f37baf47bdf919e827f5ff550b48f6",
+  "evidence_pin": "b96ee986c47ccede71637bbd4904d6b4b83affca",
+  "body_sha256": "147338b059319a90f175668247b044a6f02e8439e03585c093969b3bffd81a6f",
+  "author_call_count": 1,
+  "tool": "mcp__codex_app__send_message_to_thread",
+  "tool_arguments": {
+    "threadId": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+    "model": "gpt-5.6-luna",
+    "thinking": "xhigh",
+    "prompt": "Execute the handoff packet at C:\\Projects\\HMASD-worktrees\\dm-k1-vsp03-design-20260905\\docs\\research\\candidates\\vsp_03\\pro_packets\\20260905_k1_host_innovator\\HANDOFF.json exactly once."
+  },
+  "tool_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a06f0e-5eab-7431-8491-e7c2c62705b6\"}"
+      }
+    ],
+    "isError": false
+  },
+  "return_receipt_instruction": "Send only to the declared parent and omit model and thinking to preserve parent settings.",
+  "pre_dispatch_evidence": {
+    "root_confirmed_unsent": true,
+    "registry_updated_at": "2026-09-05T22:07:17Z",
+    "registry_sha256": "e6af3d98eafefbf06a4b499581bbd854651d894db94eeaee1299476763f7211f",
+    "exact_request_found": false,
+    "source_node_binding_found": false,
+    "transport_artifact_request_matches": 0,
+    "scope_note": "VSP-03 name occurrences were Portfolio scope/history only."
+  },
+  "next_action": "Await the complete archive through the declared parent, then resume the author DM for full intake. Do not edit accepted provider bytes or repeat this accepted dispatch."
+}

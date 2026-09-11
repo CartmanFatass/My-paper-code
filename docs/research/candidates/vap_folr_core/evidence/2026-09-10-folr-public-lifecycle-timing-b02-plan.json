@@ -1,0 +1,67 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-TIMING-B02",
+  "created_before_scientific_output": true,
+  "base_sha": "0a809f5282a957e28ff772dc0ffc33cc84b2350a",
+  "seeds": {
+    "training": 7805,
+    "evaluation": 107805,
+    "random_mask_training": 207805,
+    "random_mask_evaluation": 307805
+  },
+  "arm_order": [
+    "RETAIN",
+    "EVENT",
+    "RANDOM"
+  ],
+  "independent_matched_training_instances": 1,
+  "per_arm": {
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "final_episodes": 128,
+    "final_ticks": 2560,
+    "total_native_ticks": 102560,
+    "acting_gru_rows": 538440,
+    "online_plus_target_replay_gru_rows": 33391680,
+    "nominal_lr_times_steps": 2.4845
+  },
+  "triple": {
+    "training_episodes": 15000,
+    "training_ticks": 300000,
+    "optimizer_steps": 14907,
+    "final_episodes": 384,
+    "final_ticks": 7680,
+    "total_native_ticks": 307680,
+    "acting_gru_rows": 1615320,
+    "online_plus_target_replay_gru_rows": 100175040
+  },
+  "random_only": {
+    "p": 0.1,
+    "frequency_matched": false,
+    "private_uniform_draws": 538440,
+    "stored_training_mask_booleans": 525000
+  },
+  "projection": {
+    "basis": "TIMING-B01 conservative whole-chain wall charges, same work ratio 1.0; point projections, not upper bounds",
+    "RETAIN_seconds": 739,
+    "EVENT_seconds": 788,
+    "RANDOM_seconds": 820,
+    "sum_seconds": 2347,
+    "sum_minutes": 39.11666666666667
+  },
+  "budget": {
+    "complete_arm_seconds": 1800,
+    "summed_complete_triple_seconds": 5400,
+    "separate_total_support_seconds": 300,
+    "directory_test_seconds_cumulative": 300,
+    "new_scientific_invocations": 3,
+    "retries_or_replacements": 0,
+    "extra_final_episodes": 0
+  },
+  "exposure_line": "Per law: 100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final non-learning greedy episodes. Three laws: 307680 total native ticks and14907 optimizer calls.",
+  "prospective_prediction": "EVENT_CLEAR_ADVANTAGE (low confidence)",
+  "algorithm_work": "3*4969*32*21*5*2 replay actor rows plus backward/mixing; 3*5128*21*5 acting rows; RANDOM private draws only. No search or validation multiplier.",
+  "support": "Changed seed/publication stand-in cases plus necessary independent read-only RNG review; existing scientific checks reused. No simulation/profiling/count probe.",
+  "new_scientific_calls_at_creation": 0,
+  "arithmetic_script_seconds": 8.100003469735384e-06
+}

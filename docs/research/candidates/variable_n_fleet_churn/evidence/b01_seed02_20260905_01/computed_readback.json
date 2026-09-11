@@ -1,0 +1,10 @@
+{
+  "endpoint_discrepancies": 0,
+  "description": "Read-only saved JSON arithmetic; no simulation or checkpoint replay",
+  "training_rows": 4096,
+  "native_ticks": 1090560.0,
+  "native_flags": 0,
+  "round_count_discrepancies": 0,
+  "evaluation_rows": 448,
+  "curve_rows": 128
+}

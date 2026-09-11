@@ -1,0 +1,32 @@
+{
+  "id": "20260905-dish-016",
+  "created": "2026-09-05T04:29:01-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "brief",
+  "title": "DISH A03 简报：真实信息恢复，尚未合法交接",
+  "context": "",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "新宿主普通信息链恢复；299个服务时刻仍属于原所有者，不能越过零合法交接这一边界。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-ground-endpoint-a03-intake",
+  "brief": "docs/research/portfolio/owner/briefs/degraded_incumbent_shadow_handover/2026-09-05_ground_endpoint_a03.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

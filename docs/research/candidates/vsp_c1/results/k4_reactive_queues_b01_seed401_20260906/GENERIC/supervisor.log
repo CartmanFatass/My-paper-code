@@ -1,0 +1,20 @@
+=== Task 'vspc1-reactive-b01-generic-run02' started at 2026-09-07T14:17:09+08:00 ===
+{
+  "assessed_at": "2026-09-07T06:17:09.434040Z",
+  "available_physical_bytes": 15669395456,
+  "captured_at": "2026-09-07T06:17:09.433755Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15669395456,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"status": "complete", "observed_counts": {"training_episodes": 4096, "training_joint_steps": 196608, "training_renewal_rows": 65536, "optimizer_steps": 256, "training_nonterminal_rows": 61440, "evaluation_episodes": 2304, "evaluation_joint_steps": 110592, "evaluation_decisions": 36864, "all_focal_decisions": 102400, "scalar_q_predictions": 454656, "target_copies": 17, "model_selection_steps": 0}, "wall_seconds_through_final_readback": 4.2558269489964005}
+{"status": "complete", "output": "/home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835/temp/directions/vsp_c1/exp/k4_reactive_queues_b01_run02/paired_summary.json"}
+=== Task 'vspc1-reactive-b01-generic-run02' exited with code 0 at 2026-09-07T14:17:14+08:00 (Duration: 5s) ===

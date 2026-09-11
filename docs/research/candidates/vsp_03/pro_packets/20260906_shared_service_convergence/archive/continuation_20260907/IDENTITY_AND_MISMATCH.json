@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-07T07:19:35.448535Z",
+  "request_id": "2026-09-06-vsp03-shared-service-convergence-01",
+  "conversation_binding_key": "em:vsp_03:convergence",
+  "conversation_id": "6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+  "provider_url": "https://chatgpt.com/c/6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+  "user_turn_id": "f2209038-4d39-48c2-b3b5-2d71745a5293",
+  "assistant_turn_id": "cc4e8e86-66c8-4c1c-a3e8-8c9f3fbea129",
+  "user_task_url": "https://github.com/CartmanFatass/My-paper-code/blob/e7a83daab6c25444641865d3d8307a15b2beb78b/docs/research/candidates/vsp_03/pro_packets/20260906_shared_service_convergence/TASK.md",
+  "user_task_observed_exact": true,
+  "assistant_status": "Worked for 9m 52s; no active generation control observed",
+  "copy_control": "Copy response on conversation-turn-4",
+  "provider_selection_visible": "6 Pro",
+  "response_identity": "MISMATCH",
+  "mismatch_reason": "The accepted B02 user node is present, but the paired answer concerns DISH post-B05 branch codex/pro-dish-post-b05-20260906 and Issue #4 rather than the requested VSP03 branch codex/pro-vsp03-shared-service-convergence-20260906 and Issue #6.",
+  "scientific_decision_formed": false,
+  "new_experiment_exposure": 0,
+  "send_state": "CONFIRMED_FOR_B02_USER_NODE",
+  "no_resend": true,
+  "no_repair_prompt": true,
+  "captured_at_utc": "2026-09-07T07:19:35.448535Z"
+}

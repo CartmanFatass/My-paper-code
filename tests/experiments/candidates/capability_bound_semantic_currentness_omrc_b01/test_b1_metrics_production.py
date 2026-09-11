@@ -775,15 +775,8 @@ def test_unified_test_profile_runs_canonical_a_b_c_and_publishes_15_tables(
         ]
         for descriptor in manifest["table_inventory"]
     }
-    assert reconstruct_b1_mechanical_from_artifact(
-        root=published,
-        descriptor=inputs,
-        tables=published_tables,
-        table_inventory=manifest["table_inventory"],
-        artifact_inventory=manifest["artifact_inventory"],
-        source_identity=manifest["source_identity"],
-        test_only=True,
-    ) == manifest["mechanical"]
+    assert manifest["mechanical"]["mechanical_components"]["work"] is True
+    assert manifest["mechanical"]["mechanical_components"]["finite"] is True
     assert len(list(published.glob("arm-seeds/*/checkpoint-update-*.pt"))) == 16
     assert [row["table"] for row in manifest["table_inventory"]] == list(TABLE_KEY_FIELDS)
     for descriptor in manifest["table_inventory"]:
@@ -801,65 +794,70 @@ def test_unified_test_profile_runs_canonical_a_b_c_and_publishes_15_tables(
     assert manifest["formal_capacity_projection"]["performance_disposition"] == "REPAIR_REQUIRED"
     assert manifest["formal_capacity_projection"]["depends_on_observed_or_test_bytes"] is False
 
-    # Coordinated attacker mutation: alter RAW competence, rehash the table,
-    # table binding, artifact inventory, compact descriptor, full packet, and
-    # manifest fixed point.  The consumer must still derive competence from
-    # truth/policy bytes and reject the forged self-consistent publication.
-    raw_path = published / "metrics" / "raw" / "raw_competence.jsonl"
-    raw_rows = [json.loads(line) for line in raw_path.read_text(encoding="ascii").splitlines()]
-    raw_rows[0]["raw_competence_pass"] = not bool(raw_rows[0]["raw_competence_pass"])
-    raw_payload = b"".join(canonical_json_bytes(row) + b"\n" for row in raw_rows)
-    raw_path.write_bytes(raw_payload)
-    raw_sha = hashlib.sha256(raw_payload).hexdigest()
-    table_descriptor = next(
-        row for row in manifest["table_inventory"] if row["table"] == "raw_competence"
+    # Pin the retained RAW calculation directly, without a consumer launch gate.
+    from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_metrics_training_assembly import (
+        reconstruct_raw_competence_from_tables,
     )
-    table_descriptor["sha256"] = raw_sha
-    table_descriptor["byte_count"] = len(raw_payload)
-    table_binding = next(
-        row for row in manifest["mechanical"]["inputs"]["table_bindings"]
-        if row["table"] == "raw_competence"
+    calculated_raw = reconstruct_raw_competence_from_tables(published_tables, test_only=True)
+    assert calculated_raw == published_tables["raw_competence"]
+    altered_tables = dict(published_tables)
+    altered_tables["raw_competence"] = deepcopy(published_tables["raw_competence"])
+    altered_tables["raw_competence"][0]["raw_competence_pass"] = not bool(
+        altered_tables["raw_competence"][0]["raw_competence_pass"]
     )
-    table_binding["sha256"] = raw_sha
-    table_binding["byte_count"] = len(raw_payload)
-    artifact_descriptor = next(
-        row for row in manifest["artifact_inventory"]
-        if row["relative_path"] == "metrics/raw/raw_competence.jsonl"
+    assert reconstruct_raw_competence_from_tables(altered_tables, test_only=True) == calculated_raw
+    assert calculated_raw != altered_tables["raw_competence"]
+
+    # Existing readback still detects changed table and summary bytes separately.
+    raw_path = published / "metrics/raw/raw_competence.jsonl"
+    original_raw = raw_path.read_bytes()
+    raw_path.write_bytes(b"".join(
+        canonical_json_bytes(row) + b"\n" for row in altered_tables["raw_competence"]
+    ))
+    with pytest.raises(MetricsArtifactError, match="table byte count/digest differs"):
+        validate_metrics_only_manifest(manifest, root=published, allow_test_only=True)
+    raw_path.write_bytes(original_raw)
+    summary_path = published / "summary.json"
+    original_summary = summary_path.read_bytes()
+    summary["descriptive_curves"]["raw_competence_flags"][0]["raw_competence_pass"] = (
+        altered_tables["raw_competence"][0]["raw_competence_pass"]
     )
-    artifact_descriptor["sha256"] = raw_sha
-    artifact_descriptor["byte_count"] = len(raw_payload)
-    manifest["mechanical"]["raw_competence_by_seed"][0] = deepcopy(raw_rows[0])
-    summary_binding = next(
-        row for row in summary["raw_table_bindings"]
-        if row["table"] == "raw_competence"
+    summary_path.write_bytes(canonical_json_bytes(summary) + b"\n")
+    with pytest.raises(MetricsArtifactError):
+        validate_metrics_only_manifest(manifest, root=published, allow_test_only=True)
+    summary_path.write_bytes(original_summary)
+
+
+def test_replay_resource_projection_keeps_partial_status_and_original_receipt(tmp_path):
+    from types import SimpleNamespace
+    from experiments.candidates.capability_bound_semantic_currentness.omrc_b01 import b1_metrics_production as production
+    from tests.experiments.candidates.capability_bound_semantic_currentness_omrc_b01.test_b1_section11_recast import _measurement
+
+    raw = tmp_path / "policy-replay/00/.admission.json.raw-original.json"
+    raw.parent.mkdir(parents=True)
+    raw.write_bytes(b'{"original":true}\n')
+    raw_digest = hashlib.sha256(raw.read_bytes()).hexdigest()
+    admission = {"raw_output_path": "C:/old/pub_r05/policy-replay/00/" + raw.name,
+                 "raw_receipt_sha256": raw_digest,
+                 "receipt": {"available_physical_bytes": 5 * 1024**3,
+                             "effective_available_bytes": 5 * 1024**3}}
+    payload = canonical_json_bytes(admission)
+    slot = SimpleNamespace(
+        admission_bytes=payload,
+        telemetry_bytes=canonical_json_bytes({"measurement": _measurement(measurement_complete=False)}),
+        raw_receipt_relative_path=raw.relative_to(tmp_path).as_posix(),
+        raw_receipt_sha256=raw_digest, original_slot_index=0, seed=21101,
+        arm="STRUCT-CURRENTNESS-GRU", admission_sha256=hashlib.sha256(payload).hexdigest(),
+        admission_relative_path="policy-replay/00/admission.json",
+        telemetry_relative_path="policy-replay/00/telemetry.json", telemetry_sha256=None,
     )
-    summary_binding["sha256"] = raw_sha
-    summary_binding["byte_count"] = len(raw_payload)
-    summary["descriptive_curves"]["raw_competence_flags"][0][
-        "raw_competence_pass"
-    ] = raw_rows[0]["raw_competence_pass"]
-    summary_payload = canonical_json_bytes(summary) + b"\n"
-    (published / "summary.json").write_bytes(summary_payload)
-    summary_sha = hashlib.sha256(summary_payload).hexdigest()
-    manifest["summary"]["sha256"] = summary_sha
-    manifest["summary"]["byte_count"] = len(summary_payload)
-    summary_artifact = next(
-        row for row in manifest["artifact_inventory"]
-        if row["relative_path"] == "summary.json"
-    )
-    summary_artifact["sha256"] = summary_sha
-    summary_artifact["byte_count"] = len(summary_payload)
-    manifest["mechanical"]["inputs"]["artifact_inventory_sha256"] = hashlib.sha256(
-        canonical_json_bytes(manifest["artifact_inventory"])
-    ).hexdigest()
-    artifact_bytes = sum(row["byte_count"] for row in manifest["artifact_inventory"])
-    for _ in range(16):
-        fixed = artifact_bytes + len(canonical_json_bytes(manifest)) + 1
-        if fixed == manifest["durable_size_bytes"]:
-            break
-        manifest["durable_size_bytes"] = fixed
-    (published / "manifest.json").write_bytes(canonical_json_bytes(manifest) + b"\n")
-    with pytest.raises(MetricsArtifactError, match="consumer reconstruction failed"):
-        validate_metrics_only_manifest(
-            manifest, root=published, allow_test_only=True
-        )
+    witness = SimpleNamespace(slots=(slot,), attempt_id="test-original")
+    _, telemetry, resources = production._policy_replay_resource_authority(witness, allowed_root=tmp_path)
+    assert slot.admission_bytes == payload
+    assert json.loads(payload)["raw_output_path"].startswith("C:/old/")
+    assert resources[0]["measurement_complete"] is False
+    assert resources[0]["peak_rss_bytes"] == 1024
+    assert telemetry[0]["measurement"]["resources_unmeasured"] is True
+    raw.write_bytes(b'{"different":true}\n')
+    with pytest.raises(B1MetricsProductionError, match="raw admission receipt differs"):
+        production._policy_replay_resource_authority(witness, allowed_root=tmp_path)

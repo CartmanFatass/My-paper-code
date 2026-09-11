@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-05-vnfc-validation-method-convergence-01--variable_n_fleet_churn",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-05-vnfc-validation-method-convergence-01",
+  "direction_id": "variable_n_fleet_churn",
+  "direction_ids": [
+    "variable_n_fleet_churn"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:variable_n_fleet_churn:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "single_body_attachment",
+  "body": {
+    "role": "prompt",
+    "source_path": "C:\\Projects\\HMASD\\docs\\research\\candidates\\variable_n_fleet_churn\\pro_packets\\20260905_validation_method_convergence\\PROMPT_BODY.md",
+    "canonical_filename": "2026-09-05-vnfc-validation-method-convergence-01--variable_n_fleet_churn__00_PROMPT.md",
+    "bytes": 9794,
+    "sha256": "6b1c2baef83f34fae49dfc7c2c9fc6184b9a3fe406aad089210685934e02b4df",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-vnfc-validation-method-convergence-01\\2026-09-05-vnfc-validation-method-convergence-01--variable_n_fleet_churn__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-vnfc-validation-method-convergence-01\\2026-09-05-vnfc-validation-method-convergence-01--variable_n_fleet_churn__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-vnfc-validation-method-convergence-01\\2026-09-05-vnfc-validation-method-convergence-01--variable_n_fleet_churn__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "6b1c2baef83f34fae49dfc7c2c9fc6184b9a3fe406aad089210685934e02b4df",
+    "references": []
+  }
+}

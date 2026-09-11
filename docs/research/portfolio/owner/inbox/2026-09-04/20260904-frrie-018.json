@@ -1,0 +1,37 @@
+{
+  "id": "20260904-frrie-018",
+  "created": "2026-09-04T16:50:43-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "prediction",
+  "title": "A01 会再次看到哪类技术边界",
+  "context": "独立诊断预测，不替代原 R02 算法预测。一次完整原调用链，最多 1800 秒；此前 r04 未保存失败状态，另一次不同故障的孤立表达式后来完成。",
+  "options": [
+    {
+      "key": "no_fault",
+      "label": "本次界内没有重现原错误",
+      "consequence": ""
+    },
+    {
+      "key": "matching",
+      "label": "相同序列化错误再现并捕获现场",
+      "consequence": ""
+    },
+    {
+      "key": "different",
+      "label": "出现另一个不同错误",
+      "consequence": ""
+    }
+  ],
+  "recommended": "no_fault",
+  "auto_applied": null,
+  "dm_reason": "低信心预测界内不再现；原过程状态缺失，已有错误表现并不稳定，这不意味着环境已修复。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R04_RECONSTRUCTION_A01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#frrie-r04-reconstruction-a01-selection",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

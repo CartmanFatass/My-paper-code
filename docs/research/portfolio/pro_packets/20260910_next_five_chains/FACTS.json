@@ -1,0 +1,159 @@
+{
+  "input_sha": "3472022f00b2b38b46f9047bd0ee4985aadf2041",
+  "scope": "retained-byte arithmetic only, no experiment",
+  "exposure": {
+    "new_training_fits": 0,
+    "new_optimizer_updates": 0,
+    "new_training_environment_steps": 0,
+    "new_evaluation_episodes": 0,
+    "new_trajectories": 0,
+    "new_performance_probes": 0,
+    "new_provider_sends_by_author": 0
+  },
+  "exposure_line": "EXPOSURE consultation-only: new_fits=0; optimizer_updates=0; training_env_steps=0; eval_episodes=0; trajectories=0; performance_probes=0; provider_sends_by_author=0.",
+  "inventory_source": "RESEARCH_MAP.md Source evidence and code index, Research directory column only; PORTFOLIO.md lifecycle table",
+  "direction_count": 22,
+  "active_count": 15,
+  "parked_count": 7,
+  "inventory": [
+    {
+      "direction": "active_post_churn_population_flow_identification",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "acvc",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "capability_bound_semantic_currentness",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "commitment_residual_triggered_options",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "degraded_incumbent_shadow_handover",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "ec4g_r1",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "eociv_lite",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "expressibility_gated_renewal_credit_relay",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "finite_resource_relational_inductive_efficiency",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "flexible_skill_duration",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "metric_ground_transport_allocation",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "orbit_shadow_read",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "recct_lite",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "roster_consistent_latent_exploration",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "scope_1s",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "semigroup_consistent_duration_model_policy",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "ucope",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "vap_folr_core",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "variable_n_fleet_churn",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "vsp_02",
+      "lifecycle": "ACTIVE",
+      "priority": "LOW"
+    },
+    {
+      "direction": "vsp_03",
+      "lifecycle": "ACTIVE",
+      "priority": "LOW"
+    },
+    {
+      "direction": "vsp_c1",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    }
+  ],
+  "proposal_arithmetic": {
+    "folr_total_ticks": 307680,
+    "folr_updates": 14907,
+    "ucope_training_ticks": 1572864,
+    "ucope_evaluation_ticks": 163840,
+    "ucope_total_ticks": 1736704,
+    "ucope_adam_calls": 12288,
+    "ucope_T_equals_F_illustration_seconds": "2165.6298606560450",
+    "vsp03_total_episodes": 73728,
+    "vsp03_team_ticks": 2949120,
+    "rcle_total_episodes": 136192,
+    "rcle_total_ticks": 8716288,
+    "rcle_planning_seconds": "855.10",
+    "acvc_new_base_scored_ticks": 49152,
+    "acvc_new_base_agent_forwards": 245760
+  },
+  "headroom_all_seven": "verified tuned same-information baseline plus stated upper reference absent",
+  "unknowns": [
+    "ACVC new DENSE fitting law and full successor wall",
+    "UCOPE duration-head incremental cost",
+    "CBSC permitted execution boundary and future pair cost",
+    "FRRIE permitted P63 observation and future pair law/cost"
+  ],
+  "not_executed": [
+    "five-chain selection",
+    "science cards",
+    "experiments",
+    "provider Send"
+  ]
+}

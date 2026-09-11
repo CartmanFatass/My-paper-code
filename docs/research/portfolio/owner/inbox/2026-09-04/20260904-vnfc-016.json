@@ -1,0 +1,32 @@
+{
+  "id": "20260904-vnfc-016",
+  "created": "2026-09-04T18:29:42-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "decision",
+  "title": "补全 R03 终点回放的成本算术",
+  "context": "CM 和 DM 核对原生代码后确认：候选动作的完整终点为 120 秒，原成本表只计到 60 秒收益窗口，另漏掉世界重建的前段计时。尚无运行或结果。补全计数后按完整 BCRH 函数成本投影，保持同一策略类和 2700 秒上限。",
+  "options": [
+    {
+      "key": "a",
+      "label": "补全成本计数后继续同一对象",
+      "consequence": "完整回放保持原样；若校准预测达到上限就返回工程阻塞。"
+    },
+    {
+      "key": "b",
+      "label": "暂停并为算术问题再问方向节点",
+      "consequence": "本地不再推进实现，科学定义仍不变。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "仅纠正已要求计算量的漏计，不增加科学范围或机器时间上限。",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CAUSAL_ONE_DEVIATION_R03_COST_ACCOUNTING_ADDENDUM_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#vnfc-r03-cost-accounting-20260904",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

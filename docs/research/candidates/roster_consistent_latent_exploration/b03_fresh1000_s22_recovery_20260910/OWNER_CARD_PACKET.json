@@ -1,0 +1,38 @@
+{
+  "question": "是否接受一次从头训练的 seed22 W100，以已完成 W1 为固定比较器，成功后运行参考策略？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S22_RECOVERY_SCIENCE_CARD_20260910.md",
+      "from": "seed22 比较不完整，仅发布下一步建议；没有已选重试",
+      "to": "单独选择一次 W100 从初始化训练至1000步，再运行同种子参考；完整工作上限900秒"
+    }
+  ],
+  "if_refused": "保留旧失败和完整 W1，不执行尚未启动的新序列；已发生计算不撤销。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S22_RECOVERY_SCIENCE_CARD_20260910.md",
+      "quote": "Reusing W1 avoids another full\nfit and two panels.",
+      "why": "完整 W1 已验证，复用它可减少一半训练并回答未完成的比较。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S22_RECOVERY_SCIENCE_CARD_20260910.md",
+      "quote": "The original\nTypeError's cause is unknown; traceback reporting fixes a diagnostic omission only.",
+      "why": "新日志不能保证错误不复发；若再次失败，只能读取独立完好的事实。"
+    }
+  ],
+  "uncertainty": [
+    "S21 是唯一完整的1000步配对结果；失败曲线不能代替 seed22 的终点评估。",
+    "同一 seed22 的重跑不是新的独立种子，也不能证明故障根因已修复。",
+    "全梯度变化不能归因于纯 actor-credit 机制；参考差距与恢复指标缺陷仍须保留。"
+  ],
+  "cost": {
+    "compute": "新增68096回合、4358144环境步、1000次反向更新；完整上限900秒，原失败费用保留。",
+    "owner_time": "可异步查看卡和反对依据，无需回复才能推进。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**",
+  "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S22_RECOVERY_SCIENCE_CARD_20260910.md"
+}

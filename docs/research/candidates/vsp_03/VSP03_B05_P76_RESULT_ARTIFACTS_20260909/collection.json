@@ -1,0 +1,139 @@
+{
+  "collected_unix_s": 1788945617.0611472,
+  "files": {
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909/summary.json": {
+      "sha256": "5facdb93ebbb7a3700a0f4bf8776740f8736b6faa94b028eca25bf23ccf24834",
+      "size": 7835,
+      "local_path": "science/summary.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909/paired_differences.json": {
+      "sha256": "038585962f3bd4545524b6551804b6254feba7d1fe217b622d825dcc604f4376",
+      "size": 239671,
+      "local_path": "science/paired_differences.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909/R.json": {
+      "sha256": "55b8056ba85a4a596ca099161f7b8f7fb60bd1c8f83dab88cb1f5664db2fffc4",
+      "size": 646327,
+      "local_path": "science/R.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909/G_curve.jsonl": {
+      "sha256": "2a115ff3a3a61f48c83d54aa1e13aa2e4782ad67aaa08ea9748d121bbc493dc1",
+      "size": 70746,
+      "local_path": "science/G_curve.jsonl"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909/G_greedy.json": {
+      "sha256": "a20c4a0563aaaf36b5068bb3841bc5faa6b657016ef0ae48a17a759cbb4db9af",
+      "size": 646800,
+      "local_path": "science/G_greedy.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909/R0.json": {
+      "sha256": "351fd61852b768dd519afc7eac3561e7ec932b736b5749567adecf5b6fbc7a74",
+      "size": 646308,
+      "local_path": "science/R0.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909/G_final.pt": {
+      "sha256": "e7e736424a45f970297869767ea3ba2dfdc8a90008dd77ece85198f0cb0e9d84",
+      "size": 12354,
+      "local_path": "science/G_final.pt"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909/G_stochastic.json": {
+      "sha256": "e4dd7e8bfef5ae393e65fb1288907f76120084bcc75896e617258d2291a9d8da",
+      "size": 645755,
+      "local_path": "science/G_stochastic.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_admission.json": {
+      "sha256": "87bfae338108648f23731e9e47a18f3f0c95a55d7ae9c24c70c9810ca026575e",
+      "size": 504,
+      "local_path": "b05_seed7_p76_20260909_admission.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_terminal.json": {
+      "sha256": "d2be08b7518c999855f4030fb52cc28920f2cc8c3405f92f5cb01dc1502c9682",
+      "size": 2009,
+      "local_path": "b05_seed7_p76_20260909_terminal.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_terminal.payload.json": {
+      "sha256": "9d0f7e8d2af51bf08631ec14d3c50d1bd55f0a7323bc8713e0416c7873ae1e23",
+      "size": 1076,
+      "local_path": "b05_seed7_p76_20260909_terminal.payload.json"
+    },
+    "/home/wu/.agent-tasks/vsp03-b05-p76-20260909/task.log": {
+      "sha256": "439e844cbb9bbc9ea4366081a8fed2b469421f0a7d3d929b68bfdf95b442caca",
+      "size": 2271,
+      "local_path": "supervisor_task.log"
+    },
+    "/home/wu/.agent-tasks/vsp03-b05-p76-20260909/start_time": {
+      "sha256": "488c49f7a4232cf1a1c536ce5188f931f9b2939acce2bee524c64990a7c20b5a",
+      "size": 11,
+      "local_path": "supervisor_start_time"
+    },
+    "/home/wu/.agent-tasks/vsp03-b05-p76-20260909/exit_code": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size": 2,
+      "local_path": "supervisor_exit_code"
+    },
+    "/home/wu/.agent-tasks/vsp03-b05-p76-20260909/status": {
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+      "size": 9,
+      "local_path": "supervisor_status"
+    },
+    "/home/wu/.agent-tasks/vsp03-b05-p76-20260909/runner.sh": {
+      "sha256": "f24de4b69739b447b2ac0102f624d0dea9ffd6b1fee1db8633c3327fe9e0cf7d",
+      "size": 1642,
+      "local_path": "supervisor_runner.sh"
+    },
+    "/home/wu/.agent-tasks/vsp03-b05-p76-20260909/pid": {
+      "sha256": "942682a40bcf85df0d7aeec7b236735a73280c3877a1c58a02b29e36054d17e7",
+      "size": 8,
+      "local_path": "supervisor_pid"
+    }
+  },
+  "manager": {
+    "argv": [
+      "systemctl",
+      "--user",
+      "show",
+      "vsp03-b05-p76-20260909.service"
+    ],
+    "exit_code": 0,
+    "stdout": "ExitType=main\nRestart=no\nRestartMode=normal\nNotifyAccess=none\nRestartUSec=100ms\nRestartSteps=0\nRestartMaxDelayUSec=infinity\nRestartUSecNext=100ms\nTimeoutStartUSec=1min 30s\nTimeoutStopUSec=1min 30s\nTimeoutAbortUSec=1min 30s\nTimeoutStartFailureMode=terminate\nTimeoutStopFailureMode=terminate\nRuntimeMaxUSec=infinity\nRuntimeRandomizedExtraUSec=0\nWatchdogUSec=infinity\nWatchdogTimestampMonotonic=0\nRootDirectoryStartOnly=no\nRemainAfterExit=no\nGuessMainPID=yes\nMainPID=0\nControlPID=0\nFileDescriptorStoreMax=0\nNFileDescriptorStore=0\nFileDescriptorStorePreserve=restart\nStatusErrno=0\nResult=success\nReloadResult=success\nCleanResult=success\nUID=[not set]\nGID=[not set]\nNRestarts=0\nReloadSignal=1\nExecMainStartTimestampMonotonic=0\nExecMainExitTimestampMonotonic=0\nExecMainPID=0\nExecMainCode=0\nExecMainStatus=0\nControlGroupId=0\nMemoryCurrent=[not set]\nMemoryPeak=[not set]\nMemorySwapCurrent=[not set]\nMemorySwapPeak=[not set]\nMemoryZSwapCurrent=[not set]\nMemoryAvailable=[not set]\nCPUUsageNSec=[not set]\nTasksCurrent=[not set]\nIPIngressBytes=[no data]\nIPIngressPackets=[no data]\nIPEgressBytes=[no data]\nIPEgressPackets=[no data]\nIOReadBytes=[not set]\nIOReadOperations=[not set]\nIOWriteBytes=[not set]\nIOWriteOperations=[not set]\nDelegate=no\nCPUAccounting=yes\nCPUWeight=[not set]\nStartupCPUWeight=[not set]\nCPUShares=[not set]\nStartupCPUShares=[not set]\nCPUQuotaPerSecUSec=infinity\nCPUQuotaPeriodUSec=infinity\nIOAccounting=no\nIOWeight=[not set]\nStartupIOWeight=[not set]\nBlockIOAccounting=no\nBlockIOWeight=[not set]\nStartupBlockIOWeight=[not set]\nMemoryAccounting=yes\nDefaultMemoryLow=0\nDefaultStartupMemoryLow=0\nDefaultMemoryMin=0\nMemoryMin=0\nMemoryLow=0\nStartupMemoryLow=0\nMemoryHigh=infinity\nStartupMemoryHigh=infinity\nMemoryMax=infinity\nStartupMemoryMax=infinity\nMemorySwapMax=infinity\nStartupMemorySwapMax=infinity\nMemoryZSwapMax=infinity\nStartupMemoryZSwapMax=infinity\nMemoryLimit=infinity\nDevicePolicy=auto\nTasksAccounting=yes\nTasksMax=18949\nIPAccounting=no\nManagedOOMSwap=auto\nManagedOOMMemoryPressure=auto\nManagedOOMMemoryPressureLimit=0\nManagedOOMPreference=none\nMemoryPressureWatch=auto\nMemoryPressureThresholdUSec=200ms\nCoredumpReceive=no\nUMask=0002\nLimitCPU=infinity\nLimitCPUSoft=infinity\nLimitFSIZE=infinity\nLimitFSIZESoft=infinity\nLimitDATA=infinity\nLimitDATASoft=infinity\nLimitSTACK=infinity\nLimitSTACKSoft=8388608\nLimitCORE=infinity\nLimitCORESoft=0\nLimitRSS=infinity\nLimitRSSSoft=infinity\nLimitNOFILE=1048576\nLimitNOFILESoft=1048576\nLimitAS=infinity\nLimitASSoft=infinity\nLimitNPROC=63165\nLimitNPROCSoft=63165\nLimitMEMLOCK=2071089152\nLimitMEMLOCKSoft=2071089152\nLimitLOCKS=infinity\nLimitLOCKSSoft=infinity\nLimitSIGPENDING=63165\nLimitSIGPENDINGSoft=63165\nLimitMSGQUEUE=819200\nLimitMSGQUEUESoft=819200\nLimitNICE=0\nLimitNICESoft=0\nLimitRTPRIO=0\nLimitRTPRIOSoft=0\nLimitRTTIME=infinity\nLimitRTTIMESoft=infinity\nRootEphemeral=no\nOOMScoreAdjust=200\nCoredumpFilter=0x33\nNice=0\nIOSchedulingClass=2\nIOSchedulingPriority=4\nCPUSchedulingPolicy=0\nCPUSchedulingPriority=0\nCPUAffinityFromNUMA=no\nNUMAPolicy=n/a\nTimerSlackNSec=50000\nCPUSchedulingResetOnFork=no\nNonBlocking=no\nStandardInput=null\nStandardOutput=inherit\nStandardError=inherit\nTTYReset=no\nTTYVHangup=no\nTTYVTDisallocate=no\nSyslogPriority=30\nSyslogLevelPrefix=yes\nSyslogLevel=6\nSyslogFacility=3\nLogLevelMax=-1\nLogRateLimitIntervalUSec=0\nLogRateLimitBurst=0\nSecureBits=0\nCapabilityBoundingSet=cap_chown cap_dac_override cap_dac_read_search cap_fowner cap_fsetid cap_kill cap_setgid cap_setuid cap_setpcap cap_linux_immutable cap_net_bind_service cap_net_broadcast cap_net_admin cap_net_raw cap_ipc_lock cap_ipc_owner cap_sys_module cap_sys_rawio cap_sys_chroot cap_sys_ptrace cap_sys_pacct cap_sys_admin cap_sys_boot cap_sys_nice cap_sys_resource cap_sys_time cap_sys_tty_config cap_mknod cap_lease cap_audit_write cap_audit_control cap_setfcap cap_mac_override cap_mac_admin cap_syslog cap_wake_alarm cap_block_suspend cap_audit_read cap_perfmon cap_bpf cap_checkpoint_restore\nDynamicUser=no\nSetLoginEnvironment=no\nRemoveIPC=no\nPrivateTmp=no\nPrivateDevices=no\nProtectClock=no\nProtectKernelTunables=no\nProtectKernelModules=no\nProtectKernelLogs=no\nProtectControlGroups=no\nPrivateNetwork=no\nPrivateUsers=no\nPrivateMounts=no\nPrivateIPC=no\nProtectHome=no\nProtectSystem=no\nSameProcessGroup=no\nUtmpMode=init\nIgnoreSIGPIPE=yes\nNoNewPrivileges=no\nSystemCallErrorNumber=2147483646\nLockPersonality=no\nRuntimeDirectoryPreserve=no\nRuntimeDirectoryMode=0755\nStateDirectoryMode=0755\nCacheDirectoryMode=0755\nLogsDirectoryMode=0755\nConfigurationDirectoryMode=0755\nTimeoutCleanUSec=infinity\nMemoryDenyWriteExecute=no\nRestrictRealtime=no\nRestrictSUIDSGID=no\nRestrictNamespaces=no\nMountAPIVFS=no\nKeyringMode=inherit\nProtectProc=default\nProcSubset=all\nProtectHostname=no\nMemoryKSM=no\nRootImagePolicy=root=verity+signed+encrypted+unprotected+absent:usr=verity+signed+encrypted+unprotected+absent:home=encrypted+unprotected+absent:srv=encrypted+unprotected+absent:tmp=encrypted+unprotected+absent:var=encrypted+unprotected+absent\nMountImagePolicy=root=verity+signed+encrypted+unprotected+absent:usr=verity+signed+encrypted+unprotected+absent:home=encrypted+unprotected+absent:srv=encrypted+unprotected+absent:tmp=encrypted+unprotected+absent:var=encrypted+unprotected+absent\nExtensionImagePolicy=root=verity+signed+encrypted+unprotected+absent:usr=verity+signed+encrypted+unprotected+absent:home=encrypted+unprotected+absent:srv=encrypted+unprotected+absent:tmp=encrypted+unprotected+absent:var=encrypted+unprotected+absent\nKillMode=control-group\nKillSignal=15\nRestartKillSignal=15\nFinalKillSignal=9\nSendSIGKILL=yes\nSendSIGHUP=no\nWatchdogSignal=6\nId=vsp03-b05-p76-20260909.service\nNames=vsp03-b05-p76-20260909.service\nDescription=vsp03-b05-p76-20260909.service\nLoadState=not-found\nActiveState=inactive\nFreezerState=running\nSubState=dead\nStateChangeTimestampMonotonic=0\nInactiveExitTimestampMonotonic=0\nActiveEnterTimestampMonotonic=0\nActiveExitTimestampMonotonic=0\nInactiveEnterTimestampMonotonic=0\nCanStart=no\nCanStop=yes\nCanReload=no\nCanIsolate=no\nCanFreeze=yes\nStopWhenUnneeded=no\nRefuseManualStart=no\nRefuseManualStop=no\nAllowIsolate=no\nDefaultDependencies=yes\nSurviveFinalKillSignal=no\nOnSuccessJobMode=fail\nOnFailureJobMode=replace\nIgnoreOnIsolate=no\nNeedDaemonReload=no\nJobTimeoutUSec=infinity\nJobRunningTimeoutUSec=infinity\nJobTimeoutAction=none\nConditionResult=no\nAssertResult=no\nConditionTimestampMonotonic=0\nAssertTimestampMonotonic=0\nLoadError=org.freedesktop.systemd1.NoSuchUnit \"Unit vsp03-b05-p76-20260909.service not found.\"\nTransient=no\nPerpetual=no\nStartLimitIntervalUSec=10s\nStartLimitBurst=5\nStartLimitAction=none\nFailureAction=none\nSuccessAction=none\nCollectMode=inactive\n",
+    "stderr": ""
+  },
+  "journal": {
+    "argv": [
+      "journalctl",
+      "--user",
+      "-u",
+      "vsp03-b05-p76-20260909.service",
+      "--no-pager",
+      "-o",
+      "short-precise"
+    ],
+    "exit_code": 0,
+    "stdout": "Sep 09 17:19:10.634455 LAPTOP-U9TDKC8A systemd[638]: Starting vsp03-b05-p76-20260909.service - /home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b05-p76-32ce8a7355b86bee64956e3d24b76d01c31a8d77/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b05-p76-20260909.service --name=vsp03-b05-p76-20260909 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_terminal.json --cap=120 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b05.py --seed 7 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\" --node wsl_4070\"...\nSep 09 17:19:10.724937 LAPTOP-U9TDKC8A python[3037823]: Task 'vsp03-b05-p76-20260909' started in tmux session 'agent_vsp03-b05-p76-20260909'. Output: /home/wu/.agent-tasks/vsp03-b05-p76-20260909/task.log\nSep 09 17:19:16.189902 LAPTOP-U9TDKC8A python[3037821]: {\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_terminal.json\", \"task_exit_code\": 0, \"elapsed_through_terminal_readback_s\": 4.1882996509666555}\nSep 09 17:19:16.193266 LAPTOP-U9TDKC8A systemd[638]: Finished vsp03-b05-p76-20260909.service - /home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b05-p76-32ce8a7355b86bee64956e3d24b76d01c31a8d77/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b05-p76-20260909.service --name=vsp03-b05-p76-20260909 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_terminal.json --cap=120 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b05.py --seed 7 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\" --node wsl_4070\".\nSep 09 17:19:16.193357 LAPTOP-U9TDKC8A systemd[638]: vsp03-b05-p76-20260909.service: Consumed 3.500s CPU time, 17.7M memory peak, 0B memory swap peak.\n",
+    "stderr": ""
+  },
+  "journal_json": {
+    "argv": [
+      "journalctl",
+      "--user",
+      "-u",
+      "vsp03-b05-p76-20260909.service",
+      "--no-pager",
+      "-o",
+      "json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"__MONOTONIC_TIMESTAMP\":\"407907852792\",\"_PID\":\"638\",\"_AUDIT_SESSION\":\"2\",\"_RUNTIME_SCOPE\":\"system\",\"USER_UNIT\":\"vsp03-b05-p76-20260909.service\",\"_SELINUX_CONTEXT\":\"kernel\",\"_AUDIT_LOGINUID\":\"1000\",\"_HOSTNAME\":\"LAPTOP-U9TDKC8A\",\"JOB_ID\":\"1142\",\"_CMDLINE\":\"/usr/lib/systemd/systemd --user --deserialize=8\",\"__CURSOR\":\"s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=24071;b=5afa96f012d9434283af54a9a85c7e9f;m=5ef933e1f8;t=65b0958116e53;x=a957311110f41c70\",\"PRIORITY\":\"6\",\"SYSLOG_FACILITY\":\"3\",\"_SOURCE_REALTIME_TIMESTAMP\":\"1788945550634455\",\"_COMM\":\"systemd\",\"_MACHINE_ID\":\"6910bce2db53443699ddeaa436cc2d2a\",\"__SEQNUM\":\"147569\",\"_SYSTEMD_UNIT\":\"user@1000.service\",\"CODE_FUNC\":\"job_emit_start_message\",\"TID\":\"638\",\"_CAP_EFFECTIVE\":\"0\",\"_EXE\":\"/usr/lib/systemd/systemd\",\"_TRANSPORT\":\"journal\",\"_GID\":\"1000\",\"USER_INVOCATION_ID\":\"d5a0e046dc5d4914ae94a2f305d0a534\",\"_SYSTEMD_CGROUP\":\"/user.slice/user-1000.slice/user@1000.service/init.scope\",\"MESSAGE_ID\":\"7d4958e842da4a758f6c1cdc7b36dcc5\",\"_SYSTEMD_USER_UNIT\":\"init.scope\",\"_SYSTEMD_USER_SLICE\":\"-.slice\",\"__SEQNUM_ID\":\"ecbd01ef5f624e2a9c9bd9c3dd5cbeb8\",\"CODE_FILE\":\"src/core/job.c\",\"__REALTIME_TIMESTAMP\":\"1788945550634579\",\"_UID\":\"1000\",\"_SYSTEMD_OWNER_UID\":\"1000\",\"_SYSTEMD_SLICE\":\"user-1000.slice\",\"_BOOT_ID\":\"5afa96f012d9434283af54a9a85c7e9f\",\"SYSLOG_IDENTIFIER\":\"systemd\",\"MESSAGE\":\"Starting vsp03-b05-p76-20260909.service - /home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b05-p76-32ce8a7355b86bee64956e3d24b76d01c31a8d77/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b05-p76-20260909.service --name=vsp03-b05-p76-20260909 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_terminal.json --cap=120 --reserve=10 -- bash -c \\\"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b05.py --seed 7 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909 --started-monotonic \\\\\\\"\\\\$VSP03_B04_STARTED\\\\\\\" --node wsl_4070\\\"...\",\"JOB_TYPE\":\"start\",\"CODE_LINE\":\"609\"}\n{\"__SEQNUM_ID\":\"ecbd01ef5f624e2a9c9bd9c3dd5cbeb8\",\"SYSLOG_IDENTIFIER\":\"python\",\"_MACHINE_ID\":\"6910bce2db53443699ddeaa436cc2d2a\",\"__REALTIME_TIMESTAMP\":\"1788945550724937\",\"_SYSTEMD_OWNER_UID\":\"1000\",\"_PID\":\"3037823\",\"_BOOT_ID\":\"5afa96f012d9434283af54a9a85c7e9f\",\"_HOSTNAME\":\"LAPTOP-U9TDKC8A\",\"PRIORITY\":\"6\",\"_SYSTEMD_CGROUP\":\"/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b05-p76-20260909.service\",\"_SYSTEMD_INVOCATION_ID\":\"d5a0e046dc5d4914ae94a2f305d0a534\",\"SYSLOG_FACILITY\":\"3\",\"_STREAM_ID\":\"99eccd9c28cb4bd7a1b7d45c889ab5c4\",\"_SYSTEMD_USER_UNIT\":\"vsp03-b05-p76-20260909.service\",\"_SYSTEMD_USER_SLICE\":\"app.slice\",\"__MONOTONIC_TIMESTAMP\":\"407907943150\",\"MESSAGE\":\"Task 'vsp03-b05-p76-20260909' started in tmux session 'agent_vsp03-b05-p76-20260909'. Output: /home/wu/.agent-tasks/vsp03-b05-p76-20260909/task.log\",\"_RUNTIME_SCOPE\":\"system\",\"_SYSTEMD_SLICE\":\"user-1000.slice\",\"_UID\":\"1000\",\"_AUDIT_SESSION\":\"2\",\"_SELINUX_CONTEXT\":\"kernel\",\"_SYSTEMD_UNIT\":\"user@1000.service\",\"_CAP_EFFECTIVE\":\"0\",\"_GID\":\"1000\",\"__CURSOR\":\"s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=24072;b=5afa96f012d9434283af54a9a85c7e9f;m=5ef93542ee;t=65b095812cf49;x=3e44fd95671abd3\",\"_TRANSPORT\":\"stdout\",\"_AUDIT_LOGINUID\":\"1000\",\"__SEQNUM\":\"147570\",\"_COMM\":\"bash\"}\n{\"_AUDIT_SESSION\":\"2\",\"_AUDIT_LOGINUID\":\"1000\",\"_STREAM_ID\":\"99eccd9c28cb4bd7a1b7d45c889ab5c4\",\"_CAP_EFFECTIVE\":\"0\",\"_SYSTEMD_USER_UNIT\":\"vsp03-b05-p76-20260909.service\",\"__SEQNUM_ID\":\"ecbd01ef5f624e2a9c9bd9c3dd5cbeb8\",\"_TRANSPORT\":\"stdout\",\"__MONOTONIC_TIMESTAMP\":\"407912040991\",\"_SYSTEMD_CGROUP\":\"/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b05-p76-20260909.service\",\"_COMM\":\"python\",\"__SEQNUM\":\"147574\",\"_HOSTNAME\":\"LAPTOP-U9TDKC8A\",\"_GID\":\"1000\",\"_SYSTEMD_OWNER_UID\":\"1000\",\"_EXE\":\"/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10\",\"_RUNTIME_SCOPE\":\"system\",\"_UID\":\"1000\",\"__REALTIME_TIMESTAMP\":\"1788945556189902\",\"_SELINUX_CONTEXT\":\"kernel\",\"_BOOT_ID\":\"5afa96f012d9434283af54a9a85c7e9f\",\"__CURSOR\":\"s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=24076;b=5afa96f012d9434283af54a9a85c7e9f;m=5ef973ca1f;t=65b09586632ce;x=bef9d6b3f889afa8\",\"_SYSTEMD_USER_SLICE\":\"app.slice\",\"PRIORITY\":\"6\",\"_MACHINE_ID\":\"6910bce2db53443699ddeaa436cc2d2a\",\"MESSAGE\":\"{\\\"terminal_published\\\": \\\"/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_terminal.json\\\", \\\"task_exit_code\\\": 0, \\\"elapsed_through_terminal_readback_s\\\": 4.1882996509666555}\",\"_SYSTEMD_UNIT\":\"user@1000.service\",\"_SYSTEMD_INVOCATION_ID\":\"d5a0e046dc5d4914ae94a2f305d0a534\",\"_CMDLINE\":\"/home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b05-p76-32ce8a7355b86bee64956e3d24b76d01c31a8d77/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b05-p76-20260909.service --name=vsp03-b05-p76-20260909 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_terminal.json --cap=120 --reserve=10 -- bash -c \\\"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b05.py --seed 7 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909 --started-monotonic \\\\\\\"\\\\$VSP03_B04_STARTED\\\\\\\" --node wsl_4070\\\"\",\"SYSLOG_IDENTIFIER\":\"python\",\"SYSLOG_FACILITY\":\"3\",\"_SYSTEMD_SLICE\":\"user-1000.slice\",\"_PID\":\"3037821\"}\n{\"__REALTIME_TIMESTAMP\":\"1788945556193289\",\"__SEQNUM_ID\":\"ecbd01ef5f624e2a9c9bd9c3dd5cbeb8\",\"_SOURCE_REALTIME_TIMESTAMP\":\"1788945556193266\",\"_PID\":\"638\",\"_SYSTEMD_OWNER_UID\":\"1000\",\"_GID\":\"1000\",\"_BOOT_ID\":\"5afa96f012d9434283af54a9a85c7e9f\",\"USER_INVOCATION_ID\":\"d5a0e046dc5d4914ae94a2f305d0a534\",\"_MACHINE_ID\":\"6910bce2db53443699ddeaa436cc2d2a\",\"TID\":\"638\",\"_SELINUX_CONTEXT\":\"kernel\",\"_SYSTEMD_SLICE\":\"user-1000.slice\",\"_AUDIT_LOGINUID\":\"1000\",\"_HOSTNAME\":\"LAPTOP-U9TDKC8A\",\"_RUNTIME_SCOPE\":\"system\",\"CODE_LINE\":\"796\",\"_UID\":\"1000\",\"_CAP_EFFECTIVE\":\"0\",\"USER_UNIT\":\"vsp03-b05-p76-20260909.service\",\"CODE_FILE\":\"src/core/job.c\",\"SYSLOG_IDENTIFIER\":\"systemd\",\"_SYSTEMD_UNIT\":\"user@1000.service\",\"_SYSTEMD_CGROUP\":\"/user.slice/user-1000.slice/user@1000.service/init.scope\",\"JOB_TYPE\":\"start\",\"_COMM\":\"systemd\",\"_SYSTEMD_USER_UNIT\":\"init.scope\",\"JOB_RESULT\":\"done\",\"MESSAGE\":\"Finished vsp03-b05-p76-20260909.service - /home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b05-p76-32ce8a7355b86bee64956e3d24b76d01c31a8d77/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b05-p76-20260909.service --name=vsp03-b05-p76-20260909 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_terminal.json --cap=120 --reserve=10 -- bash -c \\\"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b05.py --seed 7 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909 --started-monotonic \\\\\\\"\\\\$VSP03_B04_STARTED\\\\\\\" --node wsl_4070\\\".\",\"CODE_FUNC\":\"job_emit_done_message\",\"__MONOTONIC_TIMESTAMP\":\"407912044377\",\"SYSLOG_FACILITY\":\"3\",\"_CMDLINE\":\"/usr/lib/systemd/systemd --user --deserialize=8\",\"_TRANSPORT\":\"journal\",\"MESSAGE_ID\":\"39f53479d3a045ac8e11786248231fbf\",\"__CURSOR\":\"s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=24077;b=5afa96f012d9434283af54a9a85c7e9f;m=5ef973d759;t=65b0958664009;x=fcb43ccb8fa51cca\",\"_AUDIT_SESSION\":\"2\",\"PRIORITY\":\"6\",\"_SYSTEMD_USER_SLICE\":\"-.slice\",\"JOB_ID\":\"1142\",\"_EXE\":\"/usr/lib/systemd/systemd\",\"__SEQNUM\":\"147575\"}\n{\"_CMDLINE\":\"/usr/lib/systemd/systemd --user --deserialize=8\",\"MESSAGE\":\"vsp03-b05-p76-20260909.service: Consumed 3.500s CPU time, 17.7M memory peak, 0B memory swap peak.\",\"CODE_FILE\":\"src/core/unit.c\",\"_MACHINE_ID\":\"6910bce2db53443699ddeaa436cc2d2a\",\"CODE_FUNC\":\"unit_log_resources\",\"PRIORITY\":\"6\",\"_AUDIT_SESSION\":\"2\",\"TID\":\"638\",\"_CAP_EFFECTIVE\":\"0\",\"USER_UNIT\":\"vsp03-b05-p76-20260909.service\",\"__MONOTONIC_TIMESTAMP\":\"407912044538\",\"USER_INVOCATION_ID\":\"d5a0e046dc5d4914ae94a2f305d0a534\",\"MEMORY_PEAK\":\"18604032\",\"_HOSTNAME\":\"LAPTOP-U9TDKC8A\",\"_SYSTEMD_SLICE\":\"user-1000.slice\",\"_BOOT_ID\":\"5afa96f012d9434283af54a9a85c7e9f\",\"_AUDIT_LOGINUID\":\"1000\",\"__SEQNUM_ID\":\"ecbd01ef5f624e2a9c9bd9c3dd5cbeb8\",\"_SYSTEMD_USER_UNIT\":\"init.scope\",\"_SYSTEMD_UNIT\":\"user@1000.service\",\"_SYSTEMD_OWNER_UID\":\"1000\",\"SYSLOG_IDENTIFIER\":\"systemd\",\"_SYSTEMD_CGROUP\":\"/user.slice/user-1000.slice/user@1000.service/init.scope\",\"_UID\":\"1000\",\"_PID\":\"638\",\"_SYSTEMD_USER_SLICE\":\"-.slice\",\"_SELINUX_CONTEXT\":\"kernel\",\"__REALTIME_TIMESTAMP\":\"1788945556193450\",\"_TRANSPORT\":\"journal\",\"MESSAGE_ID\":\"ae8f7b866b0347b9af31fe1c80b127c0\",\"SYSLOG_FACILITY\":\"3\",\"_GID\":\"1000\",\"_EXE\":\"/usr/lib/systemd/systemd\",\"CPU_USAGE_NSEC\":\"3500596000\",\"_SOURCE_REALTIME_TIMESTAMP\":\"1788945556193357\",\"__SEQNUM\":\"147576\",\"__CURSOR\":\"s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=24078;b=5afa96f012d9434283af54a9a85c7e9f;m=5ef973d7fa;t=65b09586640aa;x=5ba594de6c94ef4a\",\"MEMORY_SWAP_PEAK\":\"0\",\"_COMM\":\"systemd\",\"_RUNTIME_SCOPE\":\"system\",\"CODE_LINE\":\"2577\"}\n",
+    "stderr": ""
+  },
+  "recorded_pid_states_at_collection": {
+    "3037847": null,
+    "3037833": null,
+    "3037834": null
+  },
+  "terminal_cgroup": {
+    "journal_cgroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b05-p76-20260909.service",
+    "directory_exists": false,
+    "members": []
+  }
+}

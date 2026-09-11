@@ -1,0 +1,87 @@
+{
+  "id": "20260909-fsd-002",
+  "created": "2026-09-09T02:07:46-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "P74：结束所测 UAV 短预算续约扩展，无后继",
+  "context": "实际 GitHub 完整答复与匹配评论已确认，原短失败文字完整保留。Convergence 选择 A：只结束 .25/k10/每臂五次更新的原样延续，不选择二十轮 B。两次原生亏损、训练/分量正信号及长预算未知均保留；无新实验或 Portfolio 变化。",
+  "options": [
+    {
+      "key": "a",
+      "label": "落实完整 A 的有限结束",
+      "consequence": "仅更新已测试扩展的科学边界，无第三对、长预算、实现或调用分配；其他阈值与预算仍未决。"
+    },
+    {
+      "key": "b",
+      "label": "按 owner 覆盖重议后续问题",
+      "consequence": "保留不可变答复和全部结果，按实际覆盖明确后续问题；不自动恢复旧额度或启动新实验。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整原节点在承认二十轮 B 合法且可能有信息价值后明确不选择该投入；读法符合当前 §11.8，未把负号变为强证据门槛。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md",
+    "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md",
+    "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/BLOCKER_INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L9",
+  "brief": "docs/research/portfolio/owner/briefs/flexible_skill_duration/2026-09-09_FSD_P74_POST_UAV_B02_CONVERGENCE.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已按完整 Convergence 答复执行的决定：结束所测 .25/k10/五次更新扩展，本次不选二十轮或其他后继？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/flexible_skill_duration/DIRECTION.md · Post-native-UAV-B02 extension boundary",
+        "from": "两次原生亏损已接收，后续方向选择未形成",
+        "to": "仅结束所测不变短预算扩展；二十轮 B 未选，其他预算与更广 FSD 仍未决，无 Portfolio 或 recast 变化"
+      }
+    ],
+    "if_refused": "保留完整裁决和全部正反数据，在下一干净边界按实际 owner 覆盖修订后续方向；未分配的实现、种子或运行不会自动启动。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md",
+        "quote": "选择 A：结束 scenario1 上个体 gap cost=.25、团队时钟与两级 cap 均为10、每臂五次更新这一已测试配置的原样延续；本次没有选择下一对象，也不选择所提二十轮训练比较。",
+        "why": "原 Convergence 对本次 A/B 问题给出完整、范围有限的明确选择。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md",
+        "quote": "停止依据是已观察的收益／成本与下一条信息的价值判断，不是稳定 D0 优势、全部预算无效或整个 FSD 无价值的证明。",
+        "why": "判断依据是具体投入与信息价值，没有把两个负例升级为总体无效证明或强证据门槛。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md",
+        "quote": "反对停止的最强材料也必须保留：P72 的 I 在第2–5轮随机采集回报上高于 D0，并有质量、海拔成本的小幅改善；五次更新没有被证明足以收敛。",
+        "why": "更长训练仍有可能不同，训练与分量的局部好信号保留，停止会放弃这一未测答案。"
+      }
+    ],
+    "uncertainty": [
+      "两个训练实例及有限终点评价不支持稳定总体排序；D0 真实合法但并非已调优能力上界。",
+      "二十轮预算的相对收益仍未知；它是合法问题，本次因具体价值判断没有选中。",
+      "初始 Transport 失败文字与已确认 GitHub 完整交付矛盾；原件保留，原因由 Root/Transport 核对，不影响直接读到的完整科学答复。"
+    ],
+    "cost": {
+      "compute": "本次无新训练/评估/诊断/Send；旧两对合计3462.16秒完整 wall。未选二十轮 B 原提32万训练+3.2万评分步，7076.68秒旧工作情景与21600秒新总 cap 均未分配。",
+      "owner_time": "可异步覆盖，执行不等逐阶段回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；按既有委托落实所选边界，Root 继续独立方向并整合记录"
+    },
+    "verdict_text": "选择 A：结束 scenario1 上个体 gap cost=.25、团队时钟与两级 cap 均为10、每臂五次更新这一已测试配置的原样延续；本次没有选择下一对象，也不选择所提二十轮训练比较。",
+    "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T09:07:47+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md",
+      "state": "applied",
+      "summary": "按2026-09-03常驻委托与 Root 扩展 intake 指令，落实 immutable c01801fc2 的完整 A：仅结束所测 .25/k10/五次更新原样延续，不选20轮或其他后继。原865字节失败文字及事实保留，实际30817字节GitHub答复与评论确认。无新科学调用、实现、Send、recast 或 Portfolio 变化。"
+    }
+  ]
+}

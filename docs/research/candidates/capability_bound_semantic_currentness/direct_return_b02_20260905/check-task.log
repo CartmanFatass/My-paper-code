@@ -1,0 +1,32 @@
+=== Task 'cbsc-direct-b02-2c9254f70-check' started at 2026-09-06T08:02:19+08:00 ===
+{
+  "assessed_at": "2026-09-06T00:02:19.409547Z",
+  "available_physical_bytes": 15676522496,
+  "captured_at": "2026-09-06T00:02:19.409211Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15676522496,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"engineering_adam_steps": 32, "engineering_train_eval_transitions": 3040, "arm_costs": [{"law": "startup + host_generation + sum_updates(project8 + rollout8 + PPO4x4) + sum_checkpoints(eval_panel + checkpoint_io) + context_RAW + publication_readback + pairing_STRUCT + process_finish", "host_seconds": 0.15570788900367916, "eval_projection_seconds": 0.023967531000380404, "updates": [{"update": 0, "wall_seconds": 1.1333960339979967}], "measured_seconds_per_update": 1.1333960339979967, "peak_rss_bytes": 505528320, "resources_unmeasured": false, "wall_seconds_through_primary_readback": 3.0178006250062026}, {"law": "startup + host_generation + sum_updates(project8 + rollout8 + PPO4x4) + sum_checkpoints(eval_panel + checkpoint_io) + context_RAW + publication_readback + pairing_STRUCT + process_finish", "host_seconds": 0.14224145100160968, "eval_projection_seconds": 0.007678127003600821, "updates": [{"update": 0, "wall_seconds": 0.9370662919973256}], "measured_seconds_per_update": 0.9370662919973256, "peak_rss_bytes": 506511360, "resources_unmeasured": false, "wall_seconds_through_primary_readback": 1.6787481659994228}]}
+.
+=============================== warnings summary ===============================
+../../.venvs/hmasd/lib/python3.10/site-packages/_pytest/config/__init__.py:1249
+  /home/wu/.venvs/hmasd/lib/python3.10/site-packages/_pytest/config/__init__.py:1249: PytestConfigWarning: Unknown config option: cache_dir
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_direct_return_b02.py::test_two_arm_real_update_native_return_and_paired_readback
+  /home/wu/hmasd-worktrees/cbsc-direct-return-b02-2c9254f70-20260905/tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_direct_return_b02.py:35: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at /pytorch/torch/csrc/utils/tensor_new.cpp:254.)
+    public = torch.tensor([token.float32_channels() for token in tape.learner_tokens()])
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1 passed, 2 warnings in 6.18s
+=== Task 'cbsc-direct-b02-2c9254f70-check' exited with code 0 at 2026-09-06T08:02:26+08:00 (Duration: 7s) ===

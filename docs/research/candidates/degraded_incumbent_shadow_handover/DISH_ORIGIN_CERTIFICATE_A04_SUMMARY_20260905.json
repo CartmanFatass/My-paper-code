@@ -1,0 +1,2200 @@
+{
+  "admission_receipt": "/home/wu/hmasd-worktrees/dish-certificate-a04-d543146c/temp/directions/degraded_incumbent_shadow_handover/exp/origin_certificate_a04_20260905/a1_admission.json",
+  "comparison_convention": "signed_distance=value-threshold; close means abs(distance)<=1e-10, never threshold relaxation",
+  "coordinate_reference": "CM-verified original seed11/panel0 retained A03 trace; coordinate is not a per-tick trace field",
+  "discrepancy": {
+    "boolean_mismatch": false,
+    "only_close_boundary_support": false
+  },
+  "host": "GROUND-TERMINAL-LINEAR-CLEARANCE-A03",
+  "launch_sha": "d543146cc11ccf880da1245bfb6884356772dd38",
+  "measured_cost": {
+    "origin_reconstructions": 4,
+    "seconds_per_origin": 0.0724934684985783,
+    "wall_seconds": 0.2899738739943132
+  },
+  "new_exposure": {
+    "following_comparisons": 4,
+    "learner_updates": 0,
+    "models_initialized": 0,
+    "native_completed_ticks": 0,
+    "native_prepared_ticks": 0,
+    "optimizer_steps": 0,
+    "optimizers_initialized": 0,
+    "origin_reconstructions": 4,
+    "parameter_displacement": null,
+    "policies_initialized": 0,
+    "trace_reads": 1,
+    "training_transitions": 0
+  },
+  "object": "DISH-ORIGIN-CERTIFICATE-A04",
+  "origins": [
+    {
+      "boolean_match": true,
+      "commands": [
+        {
+          "bounded_raw": [
+            -2.863769769668579,
+            -0.7972807884216309
+          ],
+          "norm": 0.0,
+          "physical_uav": 0,
+          "post_projection_held": [
+            -2.863769769668579,
+            -0.7972807884216309
+          ],
+          "raw": [
+            -2.863769769668579,
+            -0.7972807884216309
+          ]
+        },
+        {
+          "bounded_raw": [
+            0.49890315532684326,
+            2.543511152267456
+          ],
+          "norm": 0.0,
+          "physical_uav": 1,
+          "post_projection_held": [
+            0.49890315532684326,
+            2.543511152267456
+          ],
+          "raw": [
+            0.49890315532684326,
+            2.543511152267456
+          ]
+        }
+      ],
+      "failed_groups": [
+        "prediction/service-confidence"
+      ],
+      "failed_predicates": [
+        "mahalanobis_limit",
+        "predictive_q95"
+      ],
+      "following_native_rejection": {
+        "application_reason": 2,
+        "invalid_commit_delta": 1
+      },
+      "following_tick": 341,
+      "mahalanobis": {
+        "det": 3.807529089667114,
+        "dx": -77.48543739318848,
+        "dy": 16.192360877990723,
+        "s00": 1.45236608308103,
+        "s01": -0.2691630477532456,
+        "s11": 2.6714874997025517,
+        "value": 4135.21963947819
+      },
+      "non_close_failed_predicates": [
+        "mahalanobis_limit",
+        "predictive_q95"
+      ],
+      "observed_identity": {
+        "host": "GROUND-TERMINAL-LINEAR-CLEARANCE-A03",
+        "initial_owner": 0,
+        "intent_origin_tick": 340,
+        "intent_owner": 0,
+        "owner": 0
+      },
+      "observed_inputs": {
+        "countdown": 0,
+        "policy_output": {
+          "commit": [
+            1,
+            0
+          ],
+          "prediction_covariance": [
+            1.349060070117049,
+            -0.6336693619580301,
+            -0.2085112886078579,
+            0.31384456527939875,
+            -0.6336693619580301,
+            0.830715702810151,
+            -0.2568232688577054,
+            -0.37545403533182176,
+            -0.2085112886078579,
+            -0.2568232688577054,
+            1.6587484627638316,
+            1.4685655112533482,
+            0.31384456527939875,
+            -0.37545403533182176,
+            1.4685655112533482,
+            4.624982918582925,
+            0.10330501296398119,
+            0.3645063142047845,
+            0.38131033686555643,
+            -0.10151404965429754,
+            0.3645063142047845,
+            1.8407707968924008,
+            1.4543884591943617,
+            -0.02101595578415072,
+            0.38131033686555643,
+            1.4543884591943617,
+            2.2969770962363083,
+            -1.6888732130504698,
+            -0.10151404965429754,
+            -0.02101595578415072,
+            -1.6888732130504698,
+            2.9042236002980704
+          ],
+          "prediction_mean": [
+            -55.34800338745117,
+            -8.318427085876465,
+            3.205811023712158,
+            0.2248374968767166,
+            22.137434005737305,
+            -24.510787963867188,
+            -0.30771762132644653,
+            -0.026243209838867188
+          ],
+          "prepare": [
+            1,
+            0
+          ],
+          "raw_action": [
+            -2.863769769668579,
+            -0.7972807884216309,
+            0.49890315532684326,
+            2.543511152267456
+          ],
+          "service_q": [
+            -0.4217783510684967,
+            0.06146754324436188,
+            0.31526002287864685,
+            -0.6757773160934448,
+            -0.8072431087493896,
+            -0.7306885123252869,
+            1.080077052116394,
+            -0.5540727376937866,
+            -1.436737060546875,
+            -1.002824068069458,
+            1.1374919414520264,
+            -1.6632707118988037,
+            0.7378184795379639,
+            2.3334102630615234,
+            0.22700105607509613,
+            -0.39638400077819824,
+            -0.14787721633911133,
+            0.07475882768630981,
+            0.2593608498573303,
+            0.8876217603683472
+          ]
+        },
+        "post_increment_latch": 1,
+        "post_increment_warmup": 57,
+        "prepared_positions": [
+          -619.0954789147789,
+          -334.0708237740354,
+          -742.4377774557316,
+          -205.3575097289213
+        ],
+        "renewal": true
+      },
+      "origin_tick": 340,
+      "predicates_native_order": [
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "renewal",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "handover_unused",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 0,
+          "value": 0
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "preparation_latched",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "warmup",
+          "numerically_close": false,
+          "operator": ">=",
+          "passes": true,
+          "signed_distance": 47,
+          "threshold": 10,
+          "value": 57
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "source_u0_exists",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "source_u1_exists",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "source_sequence_match",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 283,
+          "value": 283
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "nonterminal",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 0,
+          "value": 0
+        },
+        {
+          "discrete": true,
+          "group": "prediction/service-confidence",
+          "name": "mahalanobis_finite",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": false,
+          "group": "prediction/service-confidence",
+          "name": "mahalanobis_limit",
+          "numerically_close": false,
+          "operator": "<=",
+          "passes": false,
+          "signed_distance": 4129.229639478191,
+          "threshold": 5.99,
+          "value": 4135.21963947819
+        },
+        {
+          "discrete": false,
+          "group": "prediction/service-confidence",
+          "name": "predictive_q95",
+          "numerically_close": false,
+          "operator": ">=",
+          "passes": false,
+          "signed_distance": -0.39999999999999997,
+          "threshold": 0.6,
+          "value": 0.2
+        },
+        {
+          "discrete": false,
+          "group": "physical/action",
+          "name": "separation",
+          "numerically_close": false,
+          "operator": ">=",
+          "passes": true,
+          "signed_distance": 163.27069254883617,
+          "threshold": 15.0,
+          "value": 178.27069254883617
+        },
+        {
+          "discrete": false,
+          "group": "physical/action",
+          "name": "command_u0",
+          "numerically_close": false,
+          "operator": "<=",
+          "passes": true,
+          "signed_distance": -1.500000000001,
+          "threshold": 1.500000000001,
+          "value": 0.0
+        },
+        {
+          "discrete": false,
+          "group": "physical/action",
+          "name": "command_u1",
+          "numerically_close": false,
+          "operator": "<=",
+          "passes": true,
+          "signed_distance": -1.500000000001,
+          "threshold": 1.500000000001,
+          "value": 0.0
+        }
+      ],
+      "predictive_service": {
+        "clipped_probabilities": [
+          1e-06,
+          0.06146754324436188,
+          0.31526002287864685,
+          1e-06,
+          1e-06,
+          1e-06,
+          0.999999,
+          1e-06,
+          1e-06,
+          1e-06,
+          0.999999,
+          1e-06,
+          0.7378184795379639,
+          0.999999,
+          0.22700105607509613,
+          1e-06,
+          1e-06,
+          0.07475882768630981,
+          0.2593608498573303,
+          0.8876217603683472
+        ],
+        "dp": [
+          1.0029873500404247e-20,
+          3.0089710400412116e-14,
+          3.00899202893297e-08,
+          0.010030203379372951,
+          0.11999041410021047,
+          0.36298682387927145,
+          0.3407463446440937,
+          0.13829260750157626,
+          0.025855293515443672,
+          0.0020424044257609563,
+          5.587790565023723e-05,
+          5.586672885019885e-10,
+          2.513836826191793e-15,
+          6.703346928507882e-21,
+          1.1730632980756823e-26,
+          1.4076584954857591e-32,
+          1.1730386872648901e-38,
+          6.703036778940028e-45,
+          2.513627265793433e-51,
+          5.585818994405994e-58,
+          5.5858041585471355e-65
+        ],
+        "q95": 0.2,
+        "tails_descending_m": [
+          {
+            "m": 20,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 5.5858041585471355e-65,
+            "threshold": 0.95
+          },
+          {
+            "m": 19,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 5.5858195529864105e-58,
+            "threshold": 0.95
+          },
+          {
+            "m": 18,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 2.5136278243753882e-51,
+            "threshold": 0.95
+          },
+          {
+            "m": 17,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 6.703039292567852e-45,
+            "threshold": 0.95
+          },
+          {
+            "m": 16,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 1.1730393575688193e-38,
+            "threshold": 0.95
+          },
+          {
+            "m": 15,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 1.4076596685251166e-32,
+            "threshold": 0.95
+          },
+          {
+            "m": 14,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 1.1730647057353508e-26,
+            "threshold": 0.95
+          },
+          {
+            "m": 13,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 6.703358659154939e-21,
+            "threshold": 0.95
+          },
+          {
+            "m": 12,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9499999999999974,
+            "tail": 2.5138435295504522e-15,
+            "threshold": 0.95
+          },
+          {
+            "m": 11,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9499999994413302,
+            "tail": 5.586698023455181e-10,
+            "threshold": 0.95
+          },
+          {
+            "m": 10,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9499441215356799,
+            "tail": 5.587846432003958e-05,
+            "threshold": 0.95
+          },
+          {
+            "m": 9,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.947901717109919,
+            "tail": 0.0020982828900809962,
+            "threshold": 0.95
+          },
+          {
+            "m": 8,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9220464235944753,
+            "tail": 0.02795357640552467,
+            "threshold": 0.95
+          },
+          {
+            "m": 7,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.7837538160928991,
+            "tail": 0.16624618390710091,
+            "threshold": 0.95
+          },
+          {
+            "m": 6,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.44300747144880526,
+            "tail": 0.5069925285511947,
+            "threshold": 0.95
+          },
+          {
+            "m": 5,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.08002064756953375,
+            "tail": 0.8699793524304662,
+            "threshold": 0.95
+          },
+          {
+            "m": 4,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.03996976653067663,
+            "tail": 0.9899697665306766,
+            "threshold": 0.95
+          },
+          {
+            "m": 3,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.049999969910049624,
+            "tail": 0.9999999699100496,
+            "threshold": 0.95
+          },
+          {
+            "m": 2,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.049999999999969846,
+            "tail": 0.9999999999999698,
+            "threshold": 0.95
+          },
+          {
+            "m": 1,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.050000000000000044,
+            "tail": 1.0,
+            "threshold": 0.95
+          },
+          {
+            "m": 0,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.050000000000000044,
+            "tail": 1.0,
+            "threshold": 0.95
+          }
+        ]
+      },
+      "reconstructed_certificate": false,
+      "recorded_certificate": false
+    },
+    {
+      "boolean_match": true,
+      "commands": [
+        {
+          "bounded_raw": [
+            -2.864161491394043,
+            -0.7799912691116333
+          ],
+          "norm": 0.0,
+          "physical_uav": 0,
+          "post_projection_held": [
+            -2.864161491394043,
+            -0.7799912691116333
+          ],
+          "raw": [
+            -2.864161491394043,
+            -0.7799912691116333
+          ]
+        },
+        {
+          "bounded_raw": [
+            0.31606435775756836,
+            2.6777758598327637
+          ],
+          "norm": 0.0,
+          "physical_uav": 1,
+          "post_projection_held": [
+            0.31606435775756836,
+            2.6777758598327637
+          ],
+          "raw": [
+            0.31606435775756836,
+            2.6777758598327637
+          ]
+        }
+      ],
+      "failed_groups": [
+        "prediction/service-confidence"
+      ],
+      "failed_predicates": [
+        "mahalanobis_limit",
+        "predictive_q95"
+      ],
+      "following_native_rejection": {
+        "application_reason": 2,
+        "invalid_commit_delta": 1
+      },
+      "following_tick": 365,
+      "mahalanobis": {
+        "det": 2.706788676572196,
+        "dx": -77.55811882019043,
+        "dy": 18.815893173217773,
+        "s00": 1.08455024425459,
+        "s01": -0.0515928554849428,
+        "s11": 2.49822496805714,
+        "value": 5637.997396171908
+      },
+      "non_close_failed_predicates": [
+        "mahalanobis_limit",
+        "predictive_q95"
+      ],
+      "observed_identity": {
+        "host": "GROUND-TERMINAL-LINEAR-CLEARANCE-A03",
+        "initial_owner": 0,
+        "intent_origin_tick": 364,
+        "intent_owner": 0,
+        "owner": 0
+      },
+      "observed_inputs": {
+        "countdown": 0,
+        "policy_output": {
+          "commit": [
+            1,
+            0
+          ],
+          "prediction_covariance": [
+            0.9476395584189845,
+            -0.46805889127949685,
+            -0.2730897213833357,
+            0.13753562712276207,
+            -0.46805889127949685,
+            0.6621557689445026,
+            0.01628190668744596,
+            -0.2481151192771411,
+            -0.2730897213833357,
+            0.01628190668744596,
+            1.3195778996658418,
+            1.3417376018519245,
+            0.13753562712276207,
+            -0.2481151192771411,
+            1.3417376018519245,
+            5.340597303115697,
+            0.1369096858356056,
+            0.41646603579455405,
+            0.4719148678306107,
+            -0.07097826921580443,
+            0.41646603579455405,
+            1.8360681991126373,
+            1.5951198628355383,
+            0.21384659199241557,
+            0.4719148678306107,
+            1.5951198628355383,
+            2.783068595018391,
+            -1.7778917912548917,
+            -0.07097826921580443,
+            0.21384659199241557,
+            -1.7778917912548917,
+            3.324439679107481
+          ],
+          "prediction_mean": [
+            -57.19935607910156,
+            -7.028919219970703,
+            3.28413987159729,
+            0.2025367170572281,
+            20.358762741088867,
+            -25.844812393188477,
+            -0.6587700247764587,
+            0.1412130445241928
+          ],
+          "prepare": [
+            1,
+            0
+          ],
+          "raw_action": [
+            -2.864161491394043,
+            -0.7799912691116333,
+            0.31606435775756836,
+            2.6777758598327637
+          ],
+          "service_q": [
+            -0.39311501383781433,
+            -0.10746149718761444,
+            0.16986329853534698,
+            -0.7508562803268433,
+            -0.8992188572883606,
+            -0.7139744758605957,
+            1.0201084613800049,
+            -0.5823068618774414,
+            -1.2991249561309814,
+            -1.2589434385299683,
+            1.0625180006027222,
+            -1.7067615985870361,
+            0.6866480708122253,
+            2.3100368976593018,
+            0.3148598074913025,
+            -0.4372752606868744,
+            -0.1911826729774475,
+            0.19074484705924988,
+            0.27396360039711,
+            0.9354773163795471
+          ]
+        },
+        "post_increment_latch": 1,
+        "post_increment_warmup": 81,
+        "prepared_positions": [
+          -659.5961833993853,
+          -349.1017698030637,
+          -774.6116362458101,
+          -194.0492097948848
+        ],
+        "renewal": true
+      },
+      "origin_tick": 364,
+      "predicates_native_order": [
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "renewal",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "handover_unused",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 0,
+          "value": 0
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "preparation_latched",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "warmup",
+          "numerically_close": false,
+          "operator": ">=",
+          "passes": true,
+          "signed_distance": 71,
+          "threshold": 10,
+          "value": 81
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "source_u0_exists",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "source_u1_exists",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "source_sequence_match",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 341,
+          "value": 341
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "nonterminal",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 0,
+          "value": 0
+        },
+        {
+          "discrete": true,
+          "group": "prediction/service-confidence",
+          "name": "mahalanobis_finite",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": false,
+          "group": "prediction/service-confidence",
+          "name": "mahalanobis_limit",
+          "numerically_close": false,
+          "operator": "<=",
+          "passes": false,
+          "signed_distance": 5632.007396171908,
+          "threshold": 5.99,
+          "value": 5637.997396171908
+        },
+        {
+          "discrete": false,
+          "group": "prediction/service-confidence",
+          "name": "predictive_q95",
+          "numerically_close": false,
+          "operator": ">=",
+          "passes": false,
+          "signed_distance": -0.39999999999999997,
+          "threshold": 0.6,
+          "value": 0.2
+        },
+        {
+          "discrete": false,
+          "group": "physical/action",
+          "name": "separation",
+          "numerically_close": false,
+          "operator": ">=",
+          "passes": true,
+          "signed_distance": 178.05400995202896,
+          "threshold": 15.0,
+          "value": 193.05400995202896
+        },
+        {
+          "discrete": false,
+          "group": "physical/action",
+          "name": "command_u0",
+          "numerically_close": false,
+          "operator": "<=",
+          "passes": true,
+          "signed_distance": -1.500000000001,
+          "threshold": 1.500000000001,
+          "value": 0.0
+        },
+        {
+          "discrete": false,
+          "group": "physical/action",
+          "name": "command_u1",
+          "numerically_close": false,
+          "operator": "<=",
+          "passes": true,
+          "signed_distance": -1.500000000001,
+          "threshold": 1.500000000001,
+          "value": 0.0
+        }
+      ],
+      "predictive_service": {
+        "clipped_probabilities": [
+          1e-06,
+          1e-06,
+          0.16986329853534698,
+          1e-06,
+          1e-06,
+          1e-06,
+          0.999999,
+          1e-06,
+          1e-06,
+          1e-06,
+          0.999999,
+          1e-06,
+          0.6866480708122253,
+          0.999999,
+          0.3148598074913025,
+          1e-06,
+          1e-06,
+          0.19074484705924988,
+          0.27396360039711,
+          0.9354773163795471
+        ],
+        "dp": [
+          6.7563625525727276e-21,
+          2.026918877933112e-14,
+          2.0269411292246252e-08,
+          0.00675670645713245,
+          0.12139200725161584,
+          0.3626627204321508,
+          0.3414965591188564,
+          0.1398976678447646,
+          0.025998767412947342,
+          0.0017955314638518067,
+          1.9749149971165147e-08,
+          9.874298882870551e-14,
+          2.9622497308164404e-19,
+          5.924453910722029e-25,
+          8.294195725644786e-31,
+          8.294169703036064e-37,
+          5.924394471163415e-43,
+          2.9621930484566253e-49,
+          9.873967637313219e-56,
+          1.9747923825536046e-62,
+          1.7952652341762816e-69
+        ],
+        "q95": 0.2,
+        "tails_descending_m": [
+          {
+            "m": 20,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 1.7952652341762816e-69,
+            "threshold": 0.95
+          },
+          {
+            "m": 19,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 1.974792562080128e-62,
+            "threshold": 0.95
+          },
+          {
+            "m": 18,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 9.87396961210578e-56,
+            "threshold": 0.95
+          },
+          {
+            "m": 17,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 2.9621940358535864e-49,
+            "threshold": 0.95
+          },
+          {
+            "m": 16,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 5.924397433357451e-43,
+            "threshold": 0.95
+          },
+          {
+            "m": 15,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 8.294175627433496e-37,
+            "threshold": 0.95
+          },
+          {
+            "m": 14,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 8.294204019820413e-31,
+            "threshold": 0.95
+          },
+          {
+            "m": 13,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 5.924462204926049e-25,
+            "threshold": 0.95
+          },
+          {
+            "m": 12,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 2.9622556552786453e-19,
+            "threshold": 0.95
+          },
+          {
+            "m": 11,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9499999999999013,
+            "tail": 9.874328505427103e-14,
+            "threshold": 0.95
+          },
+          {
+            "m": 10,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9499999802507513,
+            "tail": 1.9749248714450202e-08,
+            "threshold": 0.95
+          },
+          {
+            "m": 9,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9482044487868995,
+            "tail": 0.0017955512131005212,
+            "threshold": 0.95
+          },
+          {
+            "m": 8,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9222056813739521,
+            "tail": 0.027794318626047865,
+            "threshold": 0.95
+          },
+          {
+            "m": 7,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.7823080135291874,
+            "tail": 0.1676919864708125,
+            "threshold": 0.95
+          },
+          {
+            "m": 6,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.4408114544103311,
+            "tail": 0.5091885455896689,
+            "threshold": 0.95
+          },
+          {
+            "m": 5,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.07814873397818034,
+            "tail": 0.8718512660218196,
+            "threshold": 0.95
+          },
+          {
+            "m": 4,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.04324327327343558,
+            "tail": 0.9932432732734355,
+            "threshold": 0.95
+          },
+          {
+            "m": 3,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.04999997973056791,
+            "tail": 0.9999999797305679,
+            "threshold": 0.95
+          },
+          {
+            "m": 2,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.04999999999997917,
+            "tail": 0.9999999999999791,
+            "threshold": 0.95
+          },
+          {
+            "m": 1,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.0499999999999996,
+            "tail": 0.9999999999999996,
+            "threshold": 0.95
+          },
+          {
+            "m": 0,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.0499999999999996,
+            "tail": 0.9999999999999996,
+            "threshold": 0.95
+          }
+        ]
+      },
+      "reconstructed_certificate": false,
+      "recorded_certificate": false
+    },
+    {
+      "boolean_match": true,
+      "commands": [
+        {
+          "bounded_raw": [
+            -2.840364933013916,
+            -0.8322581052780151
+          ],
+          "norm": 0.0,
+          "physical_uav": 0,
+          "post_projection_held": [
+            -2.840364933013916,
+            -0.8322581052780151
+          ],
+          "raw": [
+            -2.840364933013916,
+            -0.8322581052780151
+          ]
+        },
+        {
+          "bounded_raw": [
+            0.020651541650295258,
+            2.7326772212982178
+          ],
+          "norm": 0.0,
+          "physical_uav": 1,
+          "post_projection_held": [
+            0.020651541650295258,
+            2.7326772212982178
+          ],
+          "raw": [
+            0.020651541650295258,
+            2.7326772212982178
+          ]
+        }
+      ],
+      "failed_groups": [
+        "prediction/service-confidence"
+      ],
+      "failed_predicates": [
+        "mahalanobis_limit",
+        "predictive_q95"
+      ],
+      "following_native_rejection": {
+        "application_reason": 2,
+        "invalid_commit_delta": 1
+      },
+      "following_tick": 389,
+      "mahalanobis": {
+        "det": 2.296689393140153,
+        "dx": -74.94141960144043,
+        "dy": 14.426403999328613,
+        "s00": 0.8422146187364429,
+        "s01": -0.06822401362277586,
+        "s11": 2.7324910515417224,
+        "value": 6693.99393802707
+      },
+      "non_close_failed_predicates": [
+        "mahalanobis_limit",
+        "predictive_q95"
+      ],
+      "observed_identity": {
+        "host": "GROUND-TERMINAL-LINEAR-CLEARANCE-A03",
+        "initial_owner": 0,
+        "intent_origin_tick": 388,
+        "intent_owner": 0,
+        "owner": 0
+      },
+      "observed_inputs": {
+        "countdown": 0,
+        "policy_output": {
+          "commit": [
+            1,
+            0
+          ],
+          "prediction_covariance": [
+            0.6756178786461625,
+            -0.5478787595929295,
+            -0.004343851486414965,
+            0.085712155632706,
+            -0.5478787595929295,
+            0.8683757196939965,
+            0.030366222173607998,
+            -0.26097286035618894,
+            -0.004343851486414965,
+            0.030366222173607998,
+            1.4136499880438296,
+            1.502100028241444,
+            0.085712155632706,
+            -0.26097286035618894,
+            1.502100028241444,
+            5.50656414262629,
+            0.1665957400902804,
+            0.4796547459701537,
+            0.5052731395193094,
+            -0.054018472605793205,
+            0.4796547459701537,
+            1.8641143318477258,
+            1.4979072503367277,
+            0.22707687051992287,
+            0.5052731395193094,
+            1.4979072503367277,
+            2.6740061139496167,
+            -1.744189244644807,
+            -0.054018472605793205,
+            0.22707687051992287,
+            -1.744189244644807,
+            3.119328505796811
+          ],
+          "prediction_mean": [
+            -56.4412956237793,
+            -11.1493558883667,
+            2.838984966278076,
+            0.17126686871051788,
+            18.500123977661133,
+            -25.575759887695312,
+            -0.8380582928657532,
+            0.15010899305343628
+          ],
+          "prepare": [
+            1,
+            0
+          ],
+          "raw_action": [
+            -2.840364933013916,
+            -0.8322581052780151,
+            0.020651541650295258,
+            2.7326772212982178
+          ],
+          "service_q": [
+            -0.3648758828639984,
+            -0.2319168746471405,
+            0.24455973505973816,
+            -0.5811702013015747,
+            -0.8203475475311279,
+            -0.8221490383148193,
+            0.8830090165138245,
+            -0.4311419725418091,
+            -1.1243113279342651,
+            -1.2141132354736328,
+            1.1763049364089966,
+            -1.4579399824142456,
+            0.6356553435325623,
+            2.1684088706970215,
+            0.3201018273830414,
+            -0.40826085209846497,
+            -0.045060962438583374,
+            0.2002170979976654,
+            0.3038523197174072,
+            0.7647960782051086
+          ]
+        },
+        "post_increment_latch": 1,
+        "post_increment_warmup": 105,
+        "prepared_positions": [
+          -700.1889191199929,
+          -363.8812998902443,
+          -802.8891415266837,
+          -168.89291036546433
+        ],
+        "renewal": true
+      },
+      "origin_tick": 388,
+      "predicates_native_order": [
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "renewal",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "handover_unused",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 0,
+          "value": 0
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "preparation_latched",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "warmup",
+          "numerically_close": false,
+          "operator": ">=",
+          "passes": true,
+          "signed_distance": 95,
+          "threshold": 10,
+          "value": 105
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "source_u0_exists",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "source_u1_exists",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "source_sequence_match",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 365,
+          "value": 365
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "nonterminal",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 0,
+          "value": 0
+        },
+        {
+          "discrete": true,
+          "group": "prediction/service-confidence",
+          "name": "mahalanobis_finite",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": false,
+          "group": "prediction/service-confidence",
+          "name": "mahalanobis_limit",
+          "numerically_close": false,
+          "operator": "<=",
+          "passes": false,
+          "signed_distance": 6688.00393802707,
+          "threshold": 5.99,
+          "value": 6693.99393802707
+        },
+        {
+          "discrete": false,
+          "group": "prediction/service-confidence",
+          "name": "predictive_q95",
+          "numerically_close": false,
+          "operator": ">=",
+          "passes": false,
+          "signed_distance": -0.39999999999999997,
+          "threshold": 0.6,
+          "value": 0.2
+        },
+        {
+          "discrete": false,
+          "group": "physical/action",
+          "name": "separation",
+          "numerically_close": false,
+          "operator": ">=",
+          "passes": true,
+          "signed_distance": 205.38105120869872,
+          "threshold": 15.0,
+          "value": 220.38105120869872
+        },
+        {
+          "discrete": false,
+          "group": "physical/action",
+          "name": "command_u0",
+          "numerically_close": false,
+          "operator": "<=",
+          "passes": true,
+          "signed_distance": -1.500000000001,
+          "threshold": 1.500000000001,
+          "value": 0.0
+        },
+        {
+          "discrete": false,
+          "group": "physical/action",
+          "name": "command_u1",
+          "numerically_close": false,
+          "operator": "<=",
+          "passes": true,
+          "signed_distance": -1.500000000001,
+          "threshold": 1.500000000001,
+          "value": 0.0
+        }
+      ],
+      "predictive_service": {
+        "clipped_probabilities": [
+          1e-06,
+          1e-06,
+          0.24455973505973816,
+          1e-06,
+          1e-06,
+          1e-06,
+          0.8830090165138245,
+          1e-06,
+          1e-06,
+          1e-06,
+          0.999999,
+          1e-06,
+          0.6356553435325623,
+          0.999999,
+          0.3201018273830414,
+          1e-06,
+          1e-06,
+          0.2002170979976654,
+          0.3038523197174072,
+          0.7647960782051086
+        ],
+        "dp": [
+          2.866962924420392e-15,
+          5.733960324816776e-09,
+          0.0028670376105655202,
+          0.04021034623622306,
+          0.17996775528219086,
+          0.3365920222318015,
+          0.28920552537778293,
+          0.12353216203756621,
+          0.025580451970945443,
+          0.002044671029133131,
+          2.248971553399155e-08,
+          1.1244587634881443e-13,
+          3.3733374575193642e-19,
+          6.74663101429204e-25,
+          9.445245594462641e-31,
+          9.445221274874567e-37,
+          6.746575283208422e-43,
+          3.3732839805609227e-49,
+          1.12442724212721e-55,
+          2.248853663583742e-62,
+          2.0444121404542227e-69
+        ],
+        "q95": 0.2,
+        "tails_descending_m": [
+          {
+            "m": 20,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 2.0444121404542227e-69,
+            "threshold": 0.95
+          },
+          {
+            "m": 19,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 2.248853868024956e-62,
+            "threshold": 0.95
+          },
+          {
+            "m": 18,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 1.1244274670125969e-55,
+            "threshold": 0.95
+          },
+          {
+            "m": 17,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 3.3732851049883896e-49,
+            "threshold": 0.95
+          },
+          {
+            "m": 16,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 6.746578656493528e-43,
+            "threshold": 0.95
+          },
+          {
+            "m": 15,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 9.445228021453223e-37,
+            "threshold": 0.95
+          },
+          {
+            "m": 14,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 9.445255039690664e-31,
+            "threshold": 0.95
+          },
+          {
+            "m": 13,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 6.74664045954708e-25,
+            "threshold": 0.95
+          },
+          {
+            "m": 12,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 3.3733442041598235e-19,
+            "threshold": 0.95
+          },
+          {
+            "m": 11,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9499999999998875,
+            "tail": 1.1244621368323484e-13,
+            "threshold": 0.95
+          },
+          {
+            "m": 10,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.949999977510172,
+            "tail": 2.2489827980205233e-08,
+            "threshold": 0.95
+          },
+          {
+            "m": 9,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9479553064810389,
+            "tail": 0.0020446935189611113,
+            "threshold": 0.95
+          },
+          {
+            "m": 8,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9223748545100934,
+            "tail": 0.027625145489906553,
+            "threshold": 0.95
+          },
+          {
+            "m": 7,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.7988426924725271,
+            "tail": 0.15115730752747278,
+            "threshold": 0.95
+          },
+          {
+            "m": 6,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.5096371670947442,
+            "tail": 0.44036283290525574,
+            "threshold": 0.95
+          },
+          {
+            "m": 5,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.17304514486294265,
+            "tail": 0.7769548551370573,
+            "threshold": 0.95
+          },
+          {
+            "m": 4,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.006922610419248132,
+            "tail": 0.9569226104192481,
+            "threshold": 0.95
+          },
+          {
+            "m": 3,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.047132956655471236,
+            "tail": 0.9971329566554712,
+            "threshold": 0.95
+          },
+          {
+            "m": 2,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.04999999426603674,
+            "tail": 0.9999999942660367,
+            "threshold": 0.95
+          },
+          {
+            "m": 1,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.04999999999999716,
+            "tail": 0.9999999999999971,
+            "threshold": 0.95
+          },
+          {
+            "m": 0,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.050000000000000044,
+            "tail": 1.0,
+            "threshold": 0.95
+          }
+        ]
+      },
+      "reconstructed_certificate": false,
+      "recorded_certificate": false
+    },
+    {
+      "boolean_match": true,
+      "commands": [
+        {
+          "bounded_raw": [
+            -2.4774861335754395,
+            -0.43528640270233154
+          ],
+          "norm": 5.551115123125783e-17,
+          "physical_uav": 0,
+          "post_projection_held": [
+            -2.4774861335754395,
+            -0.4352864027023316
+          ],
+          "raw": [
+            -2.4774861335754395,
+            -0.43528640270233154
+          ]
+        },
+        {
+          "bounded_raw": [
+            -2.6371610164642334,
+            -0.7109769582748413
+          ],
+          "norm": 1.4337300687094967,
+          "physical_uav": 1,
+          "post_projection_held": [
+            -1.4149336712451888,
+            0.038517689151372325
+          ],
+          "raw": [
+            -2.6371610164642334,
+            -0.7109769582748413
+          ]
+        }
+      ],
+      "failed_groups": [
+        "prediction/service-confidence"
+      ],
+      "failed_predicates": [
+        "mahalanobis_limit",
+        "predictive_q95"
+      ],
+      "following_native_rejection": {
+        "application_reason": 2,
+        "invalid_commit_delta": 1
+      },
+      "following_tick": 597,
+      "mahalanobis": {
+        "det": 9.665771928824388,
+        "dx": -21.61324453353882,
+        "dy": -41.10264205932617,
+        "s00": 3.5358618039436003,
+        "s01": -1.5013895589879827,
+        "s11": 3.371156226571984,
+        "value": 1056.9161411453172
+      },
+      "non_close_failed_predicates": [
+        "mahalanobis_limit",
+        "predictive_q95"
+      ],
+      "observed_identity": {
+        "host": "GROUND-TERMINAL-LINEAR-CLEARANCE-A03",
+        "initial_owner": 0,
+        "intent_origin_tick": 596,
+        "intent_owner": 0,
+        "owner": 0
+      },
+      "observed_inputs": {
+        "countdown": 0,
+        "policy_output": {
+          "commit": [
+            1,
+            0
+          ],
+          "prediction_covariance": [
+            2.5850677250014504,
+            -0.6342162269509022,
+            2.6941427662970745,
+            -0.47397890429537204,
+            -0.6342162269509022,
+            0.9494492856196897,
+            -0.8380810566469057,
+            0.01217035942919499,
+            2.6941427662970745,
+            -0.8380810566469057,
+            4.0762453229948505,
+            -1.2865091622721252,
+            -0.47397890429537204,
+            0.01217035942919499,
+            -1.2865091622721252,
+            1.4065901279864315,
+            0.9507930789421498,
+            -0.8671733320370805,
+            -0.2753822707769379,
+            -0.020524300192804407,
+            -0.8671733320370805,
+            2.421705940952294,
+            -0.022595958642695146,
+            -0.7067142133236644,
+            -0.2753822707769379,
+            -0.022595958642695146,
+            0.4143586335479707,
+            1.3099304845640973,
+            -0.020524300192804407,
+            -0.7067142133236644,
+            1.3099304845640973,
+            5.339975212281206
+          ],
+          "prediction_mean": [
+            -28.4508113861084,
+            -37.834144592285156,
+            1.3698238134384155,
+            -0.36723312735557556,
+            -6.83756685256958,
+            3.2684974670410156,
+            -0.7438327670097351,
+            0.6644388437271118
+          ],
+          "prepare": [
+            1,
+            0
+          ],
+          "raw_action": [
+            -2.4774861335754395,
+            -0.43528640270233154,
+            -2.6371610164642334,
+            -0.7109769582748413
+          ],
+          "service_q": [
+            -1.0568455457687378,
+            -0.6887191534042358,
+            -0.5159433484077454,
+            -0.033140987157821655,
+            -0.4313430190086365,
+            1.0121490955352783,
+            -0.500786304473877,
+            0.5119418501853943,
+            -0.08497403562068939,
+            -0.03756643086671829,
+            0.03794409707188606,
+            1.455876111984253,
+            0.26198163628578186,
+            -0.06473109126091003,
+            -0.3563283383846283,
+            0.3294098377227783,
+            -0.6625934839248657,
+            0.7359389662742615,
+            0.5286574363708496,
+            -0.5355141758918762
+          ]
+        },
+        "post_increment_latch": 1,
+        "post_increment_warmup": 313,
+        "prepared_positions": [
+          -1067.0598513936889,
+          -430.7528683569538,
+          -896.5618052095671,
+          185.23096546494662
+        ],
+        "renewal": true
+      },
+      "origin_tick": 596,
+      "predicates_native_order": [
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "renewal",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "handover_unused",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 0,
+          "value": 0
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "preparation_latched",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "warmup",
+          "numerically_close": false,
+          "operator": ">=",
+          "passes": true,
+          "signed_distance": 303,
+          "threshold": 10,
+          "value": 313
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "source_u0_exists",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "source_u1_exists",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "source_sequence_match",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 389,
+          "value": 389
+        },
+        {
+          "discrete": true,
+          "group": "state/support",
+          "name": "nonterminal",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 0,
+          "value": 0
+        },
+        {
+          "discrete": true,
+          "group": "prediction/service-confidence",
+          "name": "mahalanobis_finite",
+          "numerically_close": false,
+          "operator": "==",
+          "passes": true,
+          "signed_distance": 0,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "discrete": false,
+          "group": "prediction/service-confidence",
+          "name": "mahalanobis_limit",
+          "numerically_close": false,
+          "operator": "<=",
+          "passes": false,
+          "signed_distance": 1050.9261411453172,
+          "threshold": 5.99,
+          "value": 1056.9161411453172
+        },
+        {
+          "discrete": false,
+          "group": "prediction/service-confidence",
+          "name": "predictive_q95",
+          "numerically_close": false,
+          "operator": ">=",
+          "passes": false,
+          "signed_distance": -0.44999999999999996,
+          "threshold": 0.6,
+          "value": 0.15
+        },
+        {
+          "discrete": false,
+          "group": "physical/action",
+          "name": "separation",
+          "numerically_close": false,
+          "operator": ">=",
+          "passes": true,
+          "signed_distance": 624.1444807573085,
+          "threshold": 15.0,
+          "value": 639.1444807573085
+        },
+        {
+          "discrete": false,
+          "group": "physical/action",
+          "name": "command_u0",
+          "numerically_close": false,
+          "operator": "<=",
+          "passes": true,
+          "signed_distance": -1.500000000001,
+          "threshold": 1.500000000001,
+          "value": 5.551115123125783e-17
+        },
+        {
+          "discrete": false,
+          "group": "physical/action",
+          "name": "command_u1",
+          "numerically_close": false,
+          "operator": "<=",
+          "passes": true,
+          "signed_distance": -0.06626993129150338,
+          "threshold": 1.500000000001,
+          "value": 1.4337300687094967
+        }
+      ],
+      "predictive_service": {
+        "clipped_probabilities": [
+          1e-06,
+          1e-06,
+          1e-06,
+          1e-06,
+          1e-06,
+          0.999999,
+          1e-06,
+          0.5119418501853943,
+          1e-06,
+          1e-06,
+          0.03794409707188606,
+          0.999999,
+          0.26198163628578186,
+          1e-06,
+          1e-06,
+          0.3294098377227783,
+          1e-06,
+          0.7359389662742615,
+          0.5286574363708496,
+          1e-06
+        ],
+        "dp": [
+          2.892224437179051e-14,
+          5.784459989573966e-08,
+          0.028922524522292783,
+          0.16899865669707437,
+          0.3419826334630115,
+          0.30990961923105936,
+          0.12839391241248285,
+          0.021140132015214398,
+          0.000652455986361542,
+          7.82783077895822e-09,
+          4.305008941795666e-14,
+          1.4349540339905592e-19,
+          3.2285817902693554e-25,
+          5.165663481205054e-31,
+          6.026552964007506e-37,
+          5.16558312653091e-43,
+          3.228473789696682e-49,
+          1.4348719572798655e-55,
+          4.304603688143799e-62,
+          7.826535004526761e-69,
+          6.522101410169566e-76
+        ],
+        "q95": 0.15,
+        "tails_descending_m": [
+          {
+            "m": 20,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 6.522101410169566e-76,
+            "threshold": 0.95
+          },
+          {
+            "m": 19,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 7.826535656736902e-69,
+            "threshold": 0.95
+          },
+          {
+            "m": 18,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 4.3046044707973655e-62,
+            "threshold": 0.95
+          },
+          {
+            "m": 17,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 1.4348723877403125e-55,
+            "threshold": 0.95
+          },
+          {
+            "m": 16,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 3.2284752245690696e-49,
+            "threshold": 0.95
+          },
+          {
+            "m": 15,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 5.165586355006134e-43,
+            "threshold": 0.95
+          },
+          {
+            "m": 14,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 6.026558129593861e-37,
+            "threshold": 0.95
+          },
+          {
+            "m": 13,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 5.165669507763183e-31,
+            "threshold": 0.95
+          },
+          {
+            "m": 12,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 3.2285869559388633e-25,
+            "threshold": 0.95
+          },
+          {
+            "m": 11,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.95,
+            "tail": 1.434957262577515e-19,
+            "threshold": 0.95
+          },
+          {
+            "m": 10,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9499999999999569,
+            "tail": 4.3050232913682915e-14,
+            "threshold": 0.95
+          },
+          {
+            "m": 9,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9499999921721262,
+            "tail": 7.827873829191134e-09,
+            "threshold": 0.95
+          },
+          {
+            "m": 8,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9493475361857646,
+            "tail": 0.0006524638142353711,
+            "threshold": 0.95
+          },
+          {
+            "m": 7,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.9282074041705501,
+            "tail": 0.021792595829449767,
+            "threshold": 0.95
+          },
+          {
+            "m": 6,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.7998134917580674,
+            "tail": 0.1501865082419326,
+            "threshold": 0.95
+          },
+          {
+            "m": 5,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.48990387252700796,
+            "tail": 0.460096127472992,
+            "threshold": 0.95
+          },
+          {
+            "m": 4,
+            "numerically_close": false,
+            "passes": false,
+            "signed_distance": -0.14792123906399635,
+            "tail": 0.8020787609360036,
+            "threshold": 0.95
+          },
+          {
+            "m": 3,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.02107741763307791,
+            "tail": 0.9710774176330779,
+            "threshold": 0.95
+          },
+          {
+            "m": 2,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.049999942155370736,
+            "tail": 0.9999999421553707,
+            "threshold": 0.95
+          },
+          {
+            "m": 1,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.049999999999970735,
+            "tail": 0.9999999999999707,
+            "threshold": 0.95
+          },
+          {
+            "m": 0,
+            "numerically_close": false,
+            "passes": true,
+            "signed_distance": 0.0499999999999996,
+            "tail": 0.9999999999999996,
+            "threshold": 0.95
+          }
+        ]
+      },
+      "reconstructed_certificate": false,
+      "recorded_certificate": false
+    }
+  ],
+  "peak_rss_bytes": 16220160,
+  "resources_unmeasured": false,
+  "result": "A04-RECORDED-REJECTION-RECONSTRUCTED",
+  "seed": 11,
+  "timing_scope": "Full trace read, four reconstructions and metadata; summary serialization/write excluded, cap checked after publication.",
+  "trace_path": "/home/wu/hmasd-worktrees/dish-endpoint-a03-818b2566/temp/directions/degraded_incumbent_shadow_handover/exp/ground_endpoint_path_a03_20260905/a1/trace.jsonl",
+  "wall_seconds": 0.2899738739943132
+}

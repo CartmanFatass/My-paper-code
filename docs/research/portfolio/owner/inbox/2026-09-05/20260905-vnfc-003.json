@@ -1,0 +1,101 @@
+{
+  "id": "20260905-vnfc-003",
+  "created": "2026-09-05T21:53:14-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "VNFC B01 部署模式评估卡冻结（零训练，四个已保存最终策略）",
+  "context": "Pro Convergence（PRO_FINAL，2026-09-05）选定的后继：对 B01 两个训练种子的 MAPR/DIRECT 最终检查点，在一个新的共享 64 回合面板上比较逐 token 贪心执行与训练时的单次掩码分类采样执行，BCRH 固定参考执行一次。576 回合，138,240 native ticks，零训练，完整调用上限 180 秒，计入原 2700 秒预算。主要读数：每个策略的配对 SAMPLE−GREEDY R_fail_60；描述性 .10 尺度。DM 预测：最可能无有用信号；若有效应更可能对 SAMPLE 为负。欢迎填写你对 SAMPLE−GREEDY 符号的预测。",
+  "options": [
+    {
+      "key": "a",
+      "label": "冻结此卡并交 CM 实现（推荐）",
+      "consequence": "CM 新增评估专用入口，远端一次 ≤180 秒调用，得到四个策略的配对模式差；不改变方向生命周期。"
+    },
+    {
+      "key": "b",
+      "label": "先追加一个训练种子再评估",
+      "consequence": "再买一次约 350 秒的训练，但不回答 Pro 提出的执行方式问题；两个种子已足够做这次固定策略比较。"
+    },
+    {
+      "key": "c",
+      "label": "不评估，直接回到 Convergence 提新问题",
+      "consequence": "放弃一次便宜的证伪，Pro 的已选后继保持未执行，方向在干净边界停车。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "Pro 已作出该方向层决定；此对象零训练、成本极低、直接回答 Pro 提出的可证伪假设；追加种子与再提问都不改变当前问题。",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_B01_DEPLOYMENT_MODE_EVAL_SCIENCE_CARD_20260905.md",
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_B01_TWO_SEED_CONVERGENCE_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#L580",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否冻结 VNFC 后继对象「B01 部署模式评估」：用 B01 两个训练种子已保存的四个最终策略，在一个新的共享 64 回合面板上比较贪心执行与训练时的单次采样执行（零训练，180 秒上限），并交 CM 实现？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/variable_n_fleet_churn/ 新科学卡与 CM 目标",
+        "from": "Pro 选定但未执行的后继",
+        "to": "冻结的 B/EXPLORE 固定策略评估对象，CM 已派发实现评估入口"
+      },
+      {
+        "target": "B01 累计正式预算",
+        "from": "已用 783.29 秒 / 2700 秒",
+        "to": "最多再计入 180 秒（完整调用上限）"
+      },
+      {
+        "target": "方向生命周期 / 优先级 / recast 计数",
+        "from": "ACTIVE / HIGH / recasts2 最低排序",
+        "to": "不变"
+      }
+    ],
+    "if_refused": "对象保持为 Pro 已选定但未执行的记录；不追加训练种子，不做任何本地方向层处置；方向在干净边界停车，下一步仍需通过现有阶梯选择。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_B01_TWO_SEED_CONVERGENCE_INTAKE_20260905.md",
+        "quote": "The answer's opening selects “训练时原分布单次采样执行，对照当前逐token贪心执行” for all four already saved final policies. This is the one selected next observation, not four new training runs.",
+        "why": "该对象是 Convergence 节点的完整 PRO_FINAL 选择，本卡只是把它冻结为可执行的对象。"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_B01_TWO_SEED_CONVERGENCE_INTAKE_20260905.md",
+        "quote": "Planned work is512 learned-policy evaluation episodes +64 BCRH =576 episodes,138,240 native ticks, 3,072 learned-policy joint decisions and384 complete BCRH calls; new training/updates are zero.",
+        "why": "零训练、零优化器步；证据规范 §11.8.3 明确这不是新的训练样本，也不是学习前置诊断。"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_FORMAL02_TECHNICAL_ACCEPTANCE_20260905.md",
+        "quote": "MAPR collection36.275563/update113.412477/evaluation3.291750s; DIRECT collection37.702908/update135.175703/evaluation3.427946s; BCRH46.377076s.",
+        "why": "已测得的 64 回合贪心评估约 1.1–1.4 秒/检查点，BCRH 一次约 38–46 秒，180 秒上限充裕。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md",
+        "quote": "Both final learners remain below BCRH on all four metrics in both zones. MAPR versus DIRECT has native tradeoffs.",
+        "why": "即使部署模式有差异，也不改变学习者仍低于 BCRH 的事实；此对象只回答执行方式问题，不能被读成新的学习者结果。"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_B01_TWO_SEED_CONVERGENCE_INTAKE_20260905.md",
+        "quote": "Sampling can be worse; DIRECT may benefit equally.",
+        "why": "预期结果很可能是无有用信号（分支 3）；这是一次便宜的证伪，不是有把握的增益。"
+      }
+    ],
+    "uncertainty": [
+      "B01 模块没有评估专用入口或检查点加载路径，CM 需新增最小入口；原生库仅能在 wsl_4070 构建，正式与检查运行都在远端。",
+      "检查点加载、新入口自身开销与原生库编译时间未测量；若完整路径放不进 180 秒，CM 返回具体缺口而不是缩小比较。",
+      "DM 预测：最可能为分支 3（无有用信号）；若有效应更可能对 SAMPLE 为负。所有者预测槽：待填。"
+    ],
+    "cost": {
+      "compute": "wsl_4070 CPU 单线程，完整调用 ≤180 秒（计入 B01 原 2700 秒预算，已用 783.29 秒）",
+      "owner_time": "阅读本条目约 3 分钟；可选填写 SAMPLE−GREEDY 符号预测",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待；无人值守委托下已按推荐项执行（卡已冻结、CM 已派发）；所有者的不同指示在下一个干净边界应用"
+    },
+    "verdict_text": "PRO_FINAL / CONTINUE：narrowly the shared-policy recovery family and one fixed-checkpoint deployment-mode evaluation extension。DM 推荐：冻结此卡并交 CM 实现。",
+    "source": "docs/research/candidates/variable_n_fleet_churn/VNFC_B01_TWO_SEED_CONVERGENCE_INTAKE_20260905.md"
+  },
+  "starred": false
+}

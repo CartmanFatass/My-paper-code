@@ -1,0 +1,87 @@
+{
+  "config": {
+    "n_agents": 6,
+    "n_roles": 2,
+    "n_zones": 4,
+    "n_regions": 2,
+    "horizon": 400,
+    "delta": 0.4,
+    "event_process": "renewal",
+    "lambda_regions": [
+      0.005,
+      0.02
+    ],
+    "renewal_law": "geometric",
+    "renewal_mean": 20.0,
+    "lognormal_shape": 1.0,
+    "d0_k_set": [
+      1,
+      2,
+      5,
+      20,
+      40
+    ],
+    "rho": 0.0,
+    "c_probe": 0.0,
+    "e5_coupling_enabled": false,
+    "role_decode": "argmax"
+  },
+  "law": {
+    "mean": 20.0,
+    "variance": 380.0,
+    "dp_age_cap": 1,
+    "hazard": [
+      0.05,
+      0.05
+    ]
+  },
+  "launch_sha": "bc3eaeecf5f97e630a886028db0053ba2d08d56f",
+  "node": "wsl_4070",
+  "command": [
+    "scripts/run_flexible_skill_duration_e4_census.py",
+    "--law",
+    "geometric",
+    "--mode",
+    "calibration",
+    "--horizon",
+    "400",
+    "--seed",
+    "0",
+    "--launch-sha",
+    "bc3eaeecf5f97e630a886028db0053ba2d08d56f",
+    "--node",
+    "wsl_4070",
+    "--output",
+    "/home/wu/hmasd-worktrees/fsd-e4-census-bc3eaeecf/temp/directions/flexible_skill_duration/exp/e4_census_20260905/calibration_geometric/summary.json"
+  ],
+  "seed": 0,
+  "seed_active": false,
+  "mode": "calibration",
+  "toy": false,
+  "cold_seconds": 2.5706991436891258e-05,
+  "mean_discrepancy": 0.0,
+  "resources_unmeasured": [
+    "peak_rss"
+  ],
+  "learner_exposure": {
+    "episodes": 0,
+    "transitions": 0,
+    "optimizer_updates": 0,
+    "checkpoint_selection": 0
+  },
+  "dp_seconds": {
+    "switching": 0.011186856994754635,
+    "oracle_1": 0.011005887005012482,
+    "oracle_40": 0.010526275000302121,
+    "open_1": 0.010593373008305207,
+    "open_40": 0.010848990001250058,
+    "open_None": 0.010553870000876486
+  },
+  "age_states": 2,
+  "dp_calls_per_census": 36,
+  "projection_seconds": 0.8055051176052075,
+  "cost_law": "2 * (cold_seconds + 36 * max(dp_seconds)); empirical heuristic",
+  "wall_seconds_before_publication": 0.16190573100175243,
+  "timing_window": "module body before numpy import through computation; excludes interpreter startup/output",
+  "status": "COMPLETE"
+}

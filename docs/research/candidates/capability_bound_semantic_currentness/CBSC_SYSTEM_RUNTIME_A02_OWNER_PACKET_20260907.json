@@ -1,0 +1,39 @@
+{
+  "question": "是否保留一个绕过登录启动、明确完整时间上限的下一运行路径方案？本次只准备，不执行。",
+  "changes_if_approved": [
+    {
+      "target": "CBSC_SYSTEM_RUNTIME_A02_SCIENCE_CARD_20260907.md",
+      "from": "A01 已结束：路径不完整，626.74秒超过600秒，未测到候选或导入",
+      "to": "准备一个非登录命令路径及原 CM 五项交接；540秒终止、600秒完整上限只是后续方案，本次零新执行"
+    }
+  ],
+  "if_refused": "保留 A01 超时和 B04 原有证据，返回具体修改意见；不重跑、不选择训练，也不推断方向停止。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A01_CM_RECORD_20260907.md",
+      "quote": "This established the outer cap process was active while the command was in login-shell startup at that observation.",
+      "why": "支持把下一工程工作放在实际启动路径上，而不是再做训练或全面故障诊断。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A01_CM_RECORD_20260907.md",
+      "quote": "Nominal timeout arguments do not prove actual runtime cap conformance.",
+      "why": "提前终止只提供余量，并未证明以后一定守时；不能把静态命令审查当成修复结果。"
+    }
+  ],
+  "uncertainty": [
+    "现有 supervisor 是否额外引入登录 shell，须由 CM 针对实际包装代码确认。",
+    "显式网络配置和指定二进制包可用性尚未验证；不得编造或替换配置。",
+    "A01 启动停顿、超时偏差及 B04 故障原因均未确定。",
+    "较短的工作时间可能不足以下载和安装；没有自动追加预算或候选。"
+  ],
+  "cost": {
+    "compute": "当前仅文档和已有记录分析：零安装、导入、模型、环境调用。后续一次安装/导入的600秒完整上限和540秒终止仍是未执行方案。",
+    "owner_time": "无需再次确认；Portfolio 负责下一具体命令。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A01_INTAKE_20260907.md"
+}

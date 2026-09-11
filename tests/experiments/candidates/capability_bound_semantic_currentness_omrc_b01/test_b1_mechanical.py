@@ -81,6 +81,7 @@ def _facts() -> dict[str, object]:
                 "peak_rss_bytes": 1024,
                 "scratch_peak_bytes": 0,
                 "durable_peak_bytes": 1024,
+                "measurement_complete": True,
             }
         ],
         "digest_bindings": [

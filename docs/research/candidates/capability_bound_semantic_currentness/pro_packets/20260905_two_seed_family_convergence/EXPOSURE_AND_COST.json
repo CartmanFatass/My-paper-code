@@ -1,0 +1,122 @@
+{
+  "derivation": "Python standard-library arithmetic from B02/B03 DM artifact readback, direct runner loop shape and complete external time records; no project import, model, simulation, replay or new timing.",
+  "consultation_new_exposure": {
+    "adam_steps": 0,
+    "training_transitions": 0,
+    "evaluation_executions": 0,
+    "new_parameter_displacement_measurement": false
+  },
+  "observed_formal_arms": [
+    {
+      "object": "CBSC-DIRECT-RETURN-B02",
+      "seed": 21203,
+      "arm": "RAW-GRU",
+      "rollout_updates": 48,
+      "adam_steps": 768,
+      "train_episodes": 384,
+      "train_transitions": 58368,
+      "train_decisions": 9216,
+      "evaluation_executions": 128,
+      "evaluation_transitions": 19456,
+      "relative_parameter_displacement": 0.19646984547808052
+    },
+    {
+      "object": "CBSC-DIRECT-RETURN-B02",
+      "seed": 21203,
+      "arm": "STRUCT-CURRENTNESS-GRU",
+      "rollout_updates": 48,
+      "adam_steps": 768,
+      "train_episodes": 384,
+      "train_transitions": 58368,
+      "train_decisions": 9216,
+      "evaluation_executions": 128,
+      "evaluation_transitions": 19456,
+      "relative_parameter_displacement": 0.18723867166651137
+    },
+    {
+      "object": "CBSC-DIRECT-RETURN-B03",
+      "seed": 21209,
+      "arm": "RAW-GRU",
+      "rollout_updates": 48,
+      "adam_steps": 768,
+      "train_episodes": 384,
+      "train_transitions": 58368,
+      "train_decisions": 9216,
+      "evaluation_executions": 128,
+      "evaluation_transitions": 19456,
+      "relative_parameter_displacement": 0.2032705530558844
+    },
+    {
+      "object": "CBSC-DIRECT-RETURN-B03",
+      "seed": 21209,
+      "arm": "STRUCT-CURRENTNESS-GRU",
+      "rollout_updates": 48,
+      "adam_steps": 768,
+      "train_episodes": 384,
+      "train_transitions": 58368,
+      "train_decisions": 9216,
+      "evaluation_executions": 128,
+      "evaluation_transitions": 19456,
+      "relative_parameter_displacement": 0.18682867606079778
+    }
+  ],
+  "observed_total": {
+    "independent_paired_run_seeds": 2,
+    "arm_invocations": 4,
+    "adam_steps": 3072,
+    "train_transitions": 233472,
+    "evaluation_executions": 512,
+    "train_plus_evaluation_transitions": 311296,
+    "formal_invocation_wall_sum_seconds": 288.67,
+    "additional_B02_engineering_wall_seconds": 6.97,
+    "aggregate_cpu_work": null
+  },
+  "exposure_line": "Consultation adds zero optimizer steps or evaluation. Each of 4 completed formal arms ran 48 rollout updates and 768 Adam steps. Initial-relative parameter movement was run 21203: RAW 19.6469845478% / STRUCT 18.7238671667%; run 21209: RAW 20.3270553056% / STRUCT 18.6828676061%. This activity does not establish mechanism value. Proposed one-seed two-arm 192-update B would have 3072 Adam steps per arm; displacement unknown, no linear extrapolation.",
+  "unselected_192_update_alternative": {
+    "class": "B/EXPLORE proposal; not selected or launched",
+    "arms": 2,
+    "independent_paired_run_seeds": 1,
+    "per_arm": {
+      "rollout_updates": 192,
+      "train_episodes": 1536,
+      "train_transitions": 233472,
+      "train_decisions": 36864,
+      "adam_steps": 3072,
+      "evaluation_checkpoints": [
+        48,
+        192
+      ],
+      "evaluation_executions": 64,
+      "evaluation_transitions": 9728,
+      "train_plus_evaluation_transitions": 243200
+    },
+    "pair_adam_steps": 6144,
+    "pair_train_plus_evaluation_transitions": 486400,
+    "additional_candidate_trajectory_solver_calls": 0,
+    "native_context_scoring": "reuse the32 evaluation worlds for64 fixed-policy scoring passes; no new stochastic training/evaluation worlds",
+    "complete_proposed_cap_seconds_per_arm": 600,
+    "maximum_proposed_invocations": 2,
+    "existing_runner_cost_law": "startup + host generation + U*(project8 + rollout8 + PPO4epochs*4minibatches) + K*(eval32 + checkpoint_io) + RAW context + publication/readback + STRUCT pairing + process finish",
+    "projection_formula": "T192 = measured T48 +3*(measured host + measured48update sum), holding remaining full-call time fixed and claiming no saving from fewer evaluation points; compare4*entireB02call only as another scenario.",
+    "projections": [
+      {
+        "arm": "RAW-GRU",
+        "reference_full_outer_seconds": 59.53,
+        "reference_host_seconds": 6.67605249400367,
+        "reference_48_update_seconds": 48.33841103903251,
+        "phase_extrapolation_seconds": 224.57339059910854,
+        "four_times_B02_whole_call_scenario_seconds": 318.76
+      },
+      {
+        "arm": "STRUCT-CURRENTNESS-GRU",
+        "reference_full_outer_seconds": 58.67,
+        "reference_host_seconds": 7.102838024991797,
+        "reference_48_update_seconds": 48.31928278703708,
+        "phase_extrapolation_seconds": 224.93636243608663,
+        "four_times_B02_whole_call_scenario_seconds": 363.12
+      }
+    ],
+    "uncertainty": "Neither model is a guaranteed bound or new timing; changes in sampled actions, host generation, serialization and runtime load can change cost. No measured acceleration/inflation ratio or required calibration experiment.",
+    "scope_section4_new_items": "none"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "20260905-frrie-005",
+  "created": "2026-09-05T03:11:09-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "R06 有效混合规模结果与预测矛盾项",
+  "context": "完整 R06 的大规模差异为 +0.00555，小规模为 +0.00107；仅大规模超过预设阈值。原规则命中规模混合分支，但预测中的无实质差异判断被大规模结果反驳。",
+  "options": [
+    {
+      "key": "a",
+      "label": "按原规则接纳结果，保留大规模信号并如实记混合预测核对",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "把两个差异都称为小并认定预测完全命中",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "把单根信号升级为稳定优势或 C 类证据",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "技术完整性与原规则均满足，预测必须按事先记录的矛盾条件核对。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R06_RESULT_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r06-intake-r07-selection",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

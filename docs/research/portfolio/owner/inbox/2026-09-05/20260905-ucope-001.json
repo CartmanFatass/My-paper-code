@@ -1,0 +1,112 @@
+{
+  "id": "20260905-ucope-001",
+  "created": "2026-09-05T12:55:21-07:00",
+  "direction": "ucope",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "UCOPE：已执行当前根误差定位分支的可逆暂停",
+  "context": "完整6 Pro裁决已归档并intake；仅暂停同一数据、既有策略的根误差定位与其数值诊断依赖，PA-B/TW-B正反证据保留，UCOPE仍ACTIVE/HIGH，没有新实验或recast。",
+  "options": [
+    {
+      "key": "park",
+      "label": "应用当前分支可逆暂停",
+      "consequence": "按完整Pro结论停止这一分支；保留其他机制、正反证据和再入条件。"
+    },
+    {
+      "key": "continue",
+      "label": "提出有新完整证据的继续方案",
+      "consequence": "需要真实可执行且有判别价值的新证据，不能重复未验收接口。"
+    },
+    {
+      "key": "recast",
+      "label": "提出明确新科学对象",
+      "consequence": "必须明确改变的科学定义及完整成本与证据，不自动执行。"
+    },
+    {
+      "key": "close",
+      "label": "主张更强家族结论",
+      "consequence": "需新证据支持，当前Pro没有选择close，不能抹去既有正向观察。"
+    }
+  ],
+  "recommended": "park",
+  "auto_applied": "park",
+  "dm_reason": "执行完整正确方向节点Pro裁决，未形成更强close或有价值的唯一继续对象。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_POST_INTERFACE_CONVERGENCE_INTAKE_20260905.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": {
+    "question": "是否对已按6 Pro完整裁决执行的最小分支暂停提出新证据或覆盖指令？这不是再次请求逐项批准。",
+    "changes_if_approved": [
+      {
+        "target": "ucope DIRECTION.md · current root-residual localization family",
+        "from": "父审计与数值诊断尚未取得合规输出，等待Convergence",
+        "to": "按PRO_FINAL可逆暂停同一数据、既有策略的根误差定位分支，当前不选下一对象"
+      },
+      {
+        "target": "原PA-B/TW-B、attempt02和完整numerical-locus计划",
+        "from": "正向及相反证据、隔离和完整技术要求",
+        "to": "全部保持；不产生新机制极性或预算豁免"
+      },
+      {
+        "target": "UCOPE Portfolio lifecycle / priority / recast",
+        "from": "ACTIVE / HIGH，原计数",
+        "to": "保持不变；本方向裁决只改变最小家族状态"
+      }
+    ],
+    "if_refused": "保留全部历史证据与Pro原文。Root在下一干净边界应用所有者的明确覆盖指令；若提出新事实则交正确节点处理，不盲目重跑或把旧草稿视为通过。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/pro_packets/20260905_post_interface_convergence/archive/RESPONSE.md",
+        "quote": "Reversibly park the current same-draw, retained-policy root-residual localization family. Do not close UCOPE, recast its mechanism, or select another implementation iteration.",
+        "why": "完整方向节点明确选择最小可逆暂停；没有选择新实验或实现轮。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/pro_packets/20260905_post_interface_convergence/archive/RESPONSE.md",
+        "quote": "General100 changes ratio treatment for eligible complete logical changes; no newer qualifying UCOPE diff or accepted interface is reported.",
+        "why": "通用比例例外没有提供实际已验收接口，因此未恢复前次认为存在可执行判别的前提。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/pro_packets/20260905_post_interface_convergence/archive/RESPONSE.md",
+        "quote": "the positive PA-B and TW-B observations are real, the parent fork is scientifically meaningful, and its technical diagnostic has explicit quantities, a small fixed workload and a bounded historical projection.",
+        "why": "科学问题仍有价值，合规接口也可能出现，因此只暂停最小分支，不关闭方向。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_THREE_WITNESS_HINGE_R01_RESULT_EVIDENCE_20260904.md",
+        "quote": "The tail closure did **not** improve the full competence count: `C_even` remained **3 of 6 for both arms**.",
+        "why": "尾部收益没有转化成完整能力改善，必须保留原生根动作反证。"
+      }
+    ],
+    "uncertainty": [
+      "两个根假阳性究竟来自目标/精确投影还是有限根训练，仍未辨别。",
+      "数值差异首次出现于设计、目标、求解器还是保留参考路径，仍未测量。",
+      "现行规则下完整合规的接口尚不存在；这不证明任何实现都不可能。",
+      "原始归档中的executor字段笔误已由Transport独立更正；原档和科学回答不改，intake单独记录。",
+      "不存在可复用的UCOPE P2旧项；历史十项为P3/P4，Root通过CLI记录这次真实新方向P2，不升级旧技术项。"
+    ],
+    "cost": {
+      "compute": "本次只读归档和intake，零实验。既定未运行诊断仍为每节点61.827秒上限、两节点合计预测123.654秒；这不是实测成本，也未选择启动。",
+      "owner_time": "无需新批准；如有新证据或覆盖指令可异步填写。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; direction decision already applied in DIRECTION and intake, pending Root Git integration and console trace only"
+    },
+    "verdict_text": "Reversibly park the current same-draw, retained-policy root-residual localization family. Do not close UCOPE, recast its mechanism, or select another implementation iteration.",
+    "source": "docs/research/candidates/ucope/pro_packets/20260905_post_interface_convergence/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-05T19:56:28+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/ucope/pro_packets/20260905_post_interface_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/ucope/UCOPE_POST_INTERFACE_CONVERGENCE_INTAKE_20260905.md",
+      "state": "applied",
+      "summary": "已执行完整6 Pro的分支级可逆暂停，7def833f2已整合推送；正向付费获取、尾部覆盖和相反根动作保留，UCOPE整体ACTIVE/HIGH不变，没有新实验或recast，无重复请批。"
+    }
+  ]
+}

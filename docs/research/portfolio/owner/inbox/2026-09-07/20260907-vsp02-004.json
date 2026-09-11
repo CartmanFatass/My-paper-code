@@ -1,0 +1,81 @@
+{
+  "id": "20260907-vsp02-004",
+  "created": "2026-09-07T20:14:14-07:00",
+  "direction": "vsp_02",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "VSP02 两个前缀后续：建议固定成员家族收敛问题",
+  "context": "两个独立前缀均为有效 B/EXPLORE，RESET-CARRY 分别+0.0185546875与-0.0087890625，远小于MEI0.5。建议不再扩展同配置种子，把家族继续或结束的问题作为后续任务交给Convergence；本次无Pro、实验或家族处置。",
+  "options": [
+    {
+      "key": "ratify",
+      "label": "ratify the proposal",
+      "consequence": "Portfolio 后续发出范围明确的 Convergence 准备/交付命令；当前只保留建议，不自动发送或运行。"
+    },
+    {
+      "key": "refuse",
+      "label": "refuse",
+      "consequence": "保留两次有效结果与P17完成状态，不启动新任务或改变家族、生命周期。"
+    },
+    {
+      "key": "amend",
+      "label": "amend per the comment",
+      "consequence": "Portfolio 给出不同的具体后续问题或任务范围；没有隐含新增实验许可。"
+    }
+  ],
+  "recommended": "ratify",
+  "auto_applied": null,
+  "dm_reason": "两次原生差异都很小且符号相反，下一步应明确家族问题，不能因运行便宜而无限追加同配置种子。",
+  "evidence": [
+    "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_INTAKE_20260907.md",
+    "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_INTAKE_ANALYSIS_20260907.json"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L96",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否把两次完整结果交给收敛节点讨论当前固定成员家族的去留，并停止建议追加同配置种子？本次仅返回后续任务建议。",
+    "changes_if_approved": [
+      {
+        "target": "下一条 VSP02 任务",
+        "from": "P17 两个前缀已完成，尚无后续运行或家族处置",
+        "to": "由 Portfolio 发出具体命令，准备并交付一个固定成员家族的 Convergence 问题；不含新实验"
+      }
+    ],
+    "if_refused": "保留全部结果与 P17 完成状态，不创建 Pro 请求、第三个种子或家族处置；由 Portfolio 安排其他具体任务。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_INTAKE_20260907.md",
+        "quote": "Seed1117 gives CARRY7.8564453125 and\nRESET7.84765625 native deliveries per adaptation episode: **Delta RESET minus CARRY\n= -0.0087890625**, or nine fewer deliveries for RESET over1024 episodes.",
+        "why": "第二个独立训练前缀出现小幅原生损失，与第一个前缀的微小正值相反，两者均远低于预定尺度。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_INTAKE_20260907.md",
+        "quote": "The permitted unweighted mean paired Delta is **+0.0048828125** (0.9765625% of MEI).",
+        "why": "描述性平均不足以支持收益或推广；重复同一配置的决策价值有限，下一步应明确当前家族继续或结束的范围。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_INTAKE_20260907.md",
+        "quote": "New-host tuned-baseline headroom and competent-comparator qualification remain absent; service\nnear8 does not prove effective use of all available information.",
+        "why": "不能由两个局部结果关闭更广的问题，或把缺少更强证据当作机制不存在。"
+      }
+    ],
+    "uncertainty": [
+      "只有两个独立训练前缀，不能证明稳定优势或等价。",
+      "普通优化器暂态、循环策略推断与初始学习状态差异仍可解释结果。",
+      "家族是否继续、结束或重构属于方向层，当前尚无新裁决；生命周期与优先级不变。"
+    ],
+    "cost": {
+      "compute": "未来咨询可直接引用现有700416联合步、12288次Adam更新、两次完整结果；新增学习/评估曝光为零。一个外部评审的时长和模型成本尚未测量。",
+      "owner_time": "可异步查看，无需当前回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Exact next-task need through Root to Portfolio: a new, bounded question to\n`em:vsp_02:convergence` on whether to continue or end the **accepted fixed-member\nteammate-policy-change family**, using both complete outcomes and their claim ceiling. If it\ncontinues, the node should name what new observation would change the decision; absence of a\nstronger unrequested C claim must not be used as a negative. DM advises against further\nunchanged-seed B01 expansion and against performance/UAV promotion on these data. It does not\ndeclare the family closed, parked or recast; those direction-tier choices remain unmade.",
+    "source": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_INTAKE_20260907.md"
+  },
+  "starred": true
+}

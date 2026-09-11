@@ -1,0 +1,27 @@
+=== Task 'cbsc-approved-smoke-8003b96bd-02' started at 2026-09-06T03:22:19+08:00 ===
+{
+  "assessed_at": "2026-09-05T19:22:19.249248Z",
+  "available_physical_bytes": 15419916288,
+  "captured_at": "2026-09-05T19:22:19.248983Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15419916288,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+.
+=============================== warnings summary ===============================
+../../.venvs/hmasd/lib/python3.10/site-packages/_pytest/config/__init__.py:1249
+  /home/wu/.venvs/hmasd/lib/python3.10/site-packages/_pytest/config/__init__.py:1249: PytestConfigWarning: Unknown config option: cache_dir
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1 passed, 1 warning in 13.46s
+=== Task 'cbsc-approved-smoke-8003b96bd-02' exited with code 0 at 2026-09-06T03:22:33+08:00 (Duration: 14s) ===

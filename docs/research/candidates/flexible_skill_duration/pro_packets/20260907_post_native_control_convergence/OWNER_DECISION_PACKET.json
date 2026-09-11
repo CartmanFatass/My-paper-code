@@ -1,0 +1,38 @@
+{
+  "question": "是否执行完整 Convergence 裁决，只开放一次从头真实学习的 C_train/H_train 比较，并把卡片与实现分配交回现有路线？",
+  "changes_if_approved": [
+    {
+      "target": "DIRECTION.md · Post-native-control learning boundary",
+      "from": "A01 已完成；普通 fixed-K2 家族暂停，尚无真实学习后继",
+      "to": "仅开放一对新训练种子下的 C_train/H_train 五轮早期比较，保留公开 G；其他对象继续原暂停边界，当前不分配编码或运行"
+    }
+  ],
+  "if_refused": "保留全部历史结果和已归档裁决，在下一干净边界依 owner 指令调整有限重入；当前没有需要取消的新实验。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260907_post_native_control_convergence/archive/RESPONSE.md",
+      "quote": "**开放一个有界真实学习问题：在原大差异 K2 corridor 上，从头训练一对 C_train／H_train，比较原生续约执行规则在真实学习过程中带来的总回报差异。选择一个新的配对训练种子、每臂五个 rollout、每 rollout 十六个环境与四百步；只在第五次更新后各评价三十二个配对回合，并在同一评价 keys 上运行三十二回合的公开信息 G。** 不增加第三个 trained arm，不重复旧检查点面板，不重跑 E3/E4，也不开放阈值、host 或架构搜索。",
+      "why": "完整答复已按固定提交读完，选定最小真实学习问题和有限终点，不把旧权重测量冒称学习效果。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260907_post_native_control_convergence/archive/RESPONSE.md",
+      "quote": "最强当前支持是 A01 的真实局部 native gain；最强当前反证是 **H 的 .16403 剩余 G 差距、H 更高的 wrong-role loss/rate，以及六个 competent E3 学习亏损**。",
+      "why": "公开规则可能解释收益；角色损失、旧学习亏损与不充分比较器限制仍在，下一 B 不能声称机制或稳定优势。"
+    }
+  ],
+  "uncertainty": [
+    "新 H_train 训练衔接尚未实现，新成本与实际更新量未知；五轮不是收敛保证。",
+    "只有一对训练 seed，32回合只能描述条件评价噪声，C 不是本 host 最强固定时钟基线。",
+    "917字节聊天阻塞与更早的完整 GitHub 交付相矛盾，原因未知；Root/Transport 只需核对既有收据，不得重发。"
+  ],
+  "cost": {
+    "compute": "本次咨询新增模型、训练、回合和科学调用均为0；后续设计含64000训练步、38400评价评分步，上限900秒/学习臂、60秒/G、合计1860秒，尚非执行额度。",
+    "owner_time": "异步阅读这一方向决定即可，无需即时回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "不等待 owner；下一个实现或执行分配仍由 Portfolio 形成具体命令。"
+  },
+  "verdict_text": "**开放一个有界真实学习问题：在原大差异 K2 corridor 上，从头训练一对 C_train／H_train，比较原生续约执行规则在真实学习过程中带来的总回报差异。选择一个新的配对训练种子、每臂五个 rollout、每 rollout 十六个环境与四百步；只在第五次更新后各评价三十二个配对回合，并在同一评价 keys 上运行三十二回合的公开信息 G。** 不增加第三个 trained arm，不重复旧检查点面板，不重跑 E3/E4，也不开放阈值、host 或架构搜索。",
+  "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260907_post_native_control_convergence/archive/RESPONSE.md"
+}

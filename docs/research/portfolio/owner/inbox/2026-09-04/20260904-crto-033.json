@@ -1,0 +1,32 @@
+{
+  "id": "20260904-crto-033",
+  "created": "2026-09-04T18:47:10-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B04：保留原比较器，结束本次不变干预",
+  "context": "真实残差短长终点相对RAW分别多付约0.01153与0.00713原生损失；本种子长终点RAW胜任。只淘汰这次种子和预算组合，家族保持开放。",
+  "options": [
+    {
+      "key": "a",
+      "label": "保留RAW并结束这次不变残差干预",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "原样再跑一次",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "原样重复不能检验剩余的联合种子不确定性。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b04-complete-cycle-residual-result",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

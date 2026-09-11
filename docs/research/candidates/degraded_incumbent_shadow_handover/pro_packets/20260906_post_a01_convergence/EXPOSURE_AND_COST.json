@@ -1,0 +1,58 @@
+{
+  "evidence_role": "DOCUMENTARY_DERIVATION_NOT_NEW_EXPERIMENT",
+  "written_at": "2026-09-06T10:24:38+00:00",
+  "derivation": "Counts and timings copied from the A01 formal/check summaries and the result intake; no project import, checkpoint load, experiment or new timing. Consultation exposure is zero.",
+  "sources": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RENEWAL_BOUNDARY_A01_RESULT_INTAKE_20260905.md",
+      "sha256": "bbaa30a0ceeeed9819c41c6686355b512260b17fc5c46a3cff46dfdd53f3da92"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/a01_renewal_boundary_20260905/formal/summary.json",
+      "sha256": "284c2f7bc7669ab8582c35a6833349e1e49b48f68a8705fb7277c4bd153b1102"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/a01_renewal_boundary_20260905/check/summary.json",
+      "sha256": "21795bfdd38ed0bddc1b3c15ce4505ed9873024b333724ddc30088fa6584117d"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RENEWAL_BOUNDARY_A01_CM_RECORD_20260905.md",
+      "sha256": "b3881b1f3ffff380dd0012d98335ce12e62a962344baa80b85d9ac484b06bc96"
+    }
+  ],
+  "exposure_line": "DISH-RENEWAL-BOUNDARY-A01: training instances 0, optimizer steps 0, backward calls 0, parameter updates 0 (norm 39.149200792042365 before and after each window); checkpoints loaded 1 (FORECAST_PACKAGE seed 61 update 16, sha256 504329d6ee0c001f827be67bf101d3850d2787a3011a7fb43137d3d3f162dc66); windows 2 x 32 live ticks = 64 native ticks; check profile 4 ticks. Consultation: zero new models, native states, transitions, backwards, optimizer steps, tests or experiments.",
+  "measured": {
+    "formal_runner_wall_s": 0.09,
+    "check_runner_wall_s": 0.065,
+    "peak_rss_mb_formal": 363,
+    "peak_rss_mb_check": 362,
+    "node": "wsl_4070",
+    "bound_s": 120,
+    "counts": {
+      "native_admission_policy_false": 12,
+      "policy_renew_native_false": 12,
+      "both_true": 0,
+      "both_false": 40,
+      "held_command_changes": 0,
+      "per_window": {
+        "window1_K8": "4/4/0/24",
+        "window2_K4": "8/8/0/16"
+      }
+    }
+  },
+  "prospective_option_1_correction_object": {
+    "training": "none",
+    "acceptance_run": "A01 runner on both windows at the new sha; measured A01 cost is the reference: under 1 s runner wall plus native build (about 2 s when cold) and preflight on wsl_4070",
+    "engineering": "ordinary research-code change inside ENGINEERING_SCOPE_SPEC budgets (no A05 appendix); paths production_backend.py and/or production_recurrent_trainer.py wrapper boundary; native ABI unchanged",
+    "unknown": "whether the correction changes any prepare/commit gate behaviour; not measured by A01"
+  },
+  "prospective_option_3_new_b_on_corrected_path": {
+    "reference_cost": "B02 pair: 642.66 s external wall, 669.61 CPU-s for two arms x 16 updates x one seed (charged arm walls 340.645 and 302.015 s under 1800 s ceilings); a corrected-path learner is a new object whose cost is not established by linear projection",
+    "training": "prospective, not requested by this consultation"
+  },
+  "budget_state": {
+    "a01_bound_s": 120,
+    "a01_closed": true,
+    "b02_cumulative_wall_s": 642.66
+  }
+}

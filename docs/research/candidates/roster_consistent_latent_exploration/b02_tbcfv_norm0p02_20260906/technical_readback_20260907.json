@@ -1,0 +1,487 @@
+{
+  "purpose": "2026-09-07 technical closeout over retained B02 bytes; no model execution or new scientific sample",
+  "analysis_source_revision": "02728db5a385d0e7990beef3e037983bef021ecd",
+  "launch_sha_values": [
+    "8ad01cb9ea69b77a2e907947bef59bf716a8b45a"
+  ],
+  "status_values": {
+    "c1p1": "COMPLETE",
+    "flex": "COMPLETE",
+    "reference": "COMPLETE"
+  },
+  "root_key_values": [
+    "fd3cd5cf0f085e880a424f7a546017a62d300676e385e1174676b9f4c14e5093"
+  ],
+  "root_key_recomputed_sha256": "fd3cd5cf0f085e880a424f7a546017a62d300676e385e1174676b9f4c14e5093",
+  "block_digest_values": [
+    "82593ad701533212112f1e29d22f3d0b701fd8360b88d9bfcb61ac565f6b2210"
+  ],
+  "seed_values": [
+    18
+  ],
+  "scenario_counts": {
+    "c1p1": 2048,
+    "flex": 2048,
+    "reference": 2048,
+    "init": 2048
+  },
+  "scenario_keys_match_exact_8x256_panel": {
+    "c1p1": true,
+    "flex": true,
+    "reference": true,
+    "init": true
+  },
+  "initial_panel_standalone_equals_both_embedded": true,
+  "cell_counts": {
+    "c1p1": {
+      "8_to_8.ACTIVE_CONTINUATION": 256,
+      "8_to_8.NEW_EPOCH": 256,
+      "12_to_12.ACTIVE_CONTINUATION": 256,
+      "12_to_12.NEW_EPOCH": 256,
+      "8_to_12.ACTIVE_CONTINUATION": 256,
+      "8_to_12.NEW_EPOCH": 256,
+      "12_to_8.ACTIVE_CONTINUATION": 256,
+      "12_to_8.NEW_EPOCH": 256
+    },
+    "flex": {
+      "8_to_8.ACTIVE_CONTINUATION": 256,
+      "8_to_8.NEW_EPOCH": 256,
+      "12_to_12.ACTIVE_CONTINUATION": 256,
+      "12_to_12.NEW_EPOCH": 256,
+      "8_to_12.ACTIVE_CONTINUATION": 256,
+      "8_to_12.NEW_EPOCH": 256,
+      "12_to_8.ACTIVE_CONTINUATION": 256,
+      "12_to_8.NEW_EPOCH": 256
+    },
+    "reference": {
+      "8_to_8.ACTIVE_CONTINUATION": 256,
+      "8_to_8.NEW_EPOCH": 256,
+      "12_to_12.ACTIVE_CONTINUATION": 256,
+      "12_to_12.NEW_EPOCH": 256,
+      "8_to_12.ACTIVE_CONTINUATION": 256,
+      "8_to_12.NEW_EPOCH": 256,
+      "12_to_8.ACTIVE_CONTINUATION": 256,
+      "12_to_8.NEW_EPOCH": 256
+    },
+    "init": {
+      "8_to_8.ACTIVE_CONTINUATION": 256,
+      "8_to_8.NEW_EPOCH": 256,
+      "12_to_12.ACTIVE_CONTINUATION": 256,
+      "12_to_12.NEW_EPOCH": 256,
+      "8_to_12.ACTIVE_CONTINUATION": 256,
+      "8_to_12.NEW_EPOCH": 256,
+      "12_to_8.ACTIVE_CONTINUATION": 256,
+      "12_to_8.NEW_EPOCH": 256
+    }
+  },
+  "tau40_count": {
+    "c1p1": 2048,
+    "flex": 2048,
+    "reference": 2011,
+    "init": 2048
+  },
+  "reference_Y_all_null": true,
+  "paired_primary_error": null,
+  "arms": {
+    "c1p1": {
+      "counts": {
+        "completed_updates": 200,
+        "heldout_scenarios": 2048,
+        "nonzero_update_count": 200,
+        "zero_update_incidence": 0
+      },
+      "curve_count": 200,
+      "update_indices_0_to_199": true,
+      "training_episodes_from_per_cell_rows": 12800,
+      "every_curve_eight_training_cells": true,
+      "all_nonzero": true,
+      "event_order_all_parameter_then_baseline": true,
+      "prescribed_delta_values": [
+        0.02
+      ],
+      "measured_delta_min": 0.019999999999999993,
+      "measured_delta_max": 0.020000000000000007,
+      "max_absolute_difference_from_0p02": 6.938893903907228e-18,
+      "initial_parameter_norm": 21.205717682888885,
+      "final_displacement": 0.47288939377781736,
+      "internal_wall_seconds": 70.2398255809967,
+      "internal_cpu_seconds": 70.20330899999999,
+      "internal_peak_rss_bytes": 581488640,
+      "configured_wall_cap": 580.0,
+      "allocation_record": {
+        "package_models_allocated": [
+          "C1P1-COMMON-PERSISTENT",
+          "FLEX-REKEY",
+          "C1P0-COMMON-REFRESH",
+          "C0P1-PRIVATE-PERSISTENT",
+          "C0P0-PRIVATE-REFRESH"
+        ],
+        "package_models_allocated_count": 5,
+        "training_instances": [
+          "C1P1-COMMON-PERSISTENT",
+          "FLEX-REKEY"
+        ],
+        "training_instances_count": 2
+      },
+      "gradient_norm_first_three": [
+        0.6763798898831621,
+        0.7987240378489503,
+        0.5798406076922927
+      ],
+      "gradient_norm_last_three": [
+        0.05978134054174476,
+        0.037425249488884385,
+        0.034087735714149074
+      ],
+      "Y_first50_mean": 0.2868797200520833,
+      "Y_last50_mean": 0.2871204427083333
+    },
+    "flex": {
+      "counts": {
+        "completed_updates": 200,
+        "heldout_scenarios": 2048,
+        "nonzero_update_count": 200,
+        "zero_update_incidence": 0
+      },
+      "curve_count": 200,
+      "update_indices_0_to_199": true,
+      "training_episodes_from_per_cell_rows": 12800,
+      "every_curve_eight_training_cells": true,
+      "all_nonzero": true,
+      "event_order_all_parameter_then_baseline": true,
+      "prescribed_delta_values": [
+        0.02
+      ],
+      "measured_delta_min": 0.019999999999999993,
+      "measured_delta_max": 0.020000000000000007,
+      "max_absolute_difference_from_0p02": 6.938893903907228e-18,
+      "initial_parameter_norm": 21.205717682888885,
+      "final_displacement": 0.4729438987020604,
+      "internal_wall_seconds": 70.03524024999933,
+      "internal_cpu_seconds": 69.94458800000001,
+      "internal_peak_rss_bytes": 591872000,
+      "configured_wall_cap": 580.0,
+      "allocation_record": {
+        "package_models_allocated": [
+          "C1P1-COMMON-PERSISTENT",
+          "FLEX-REKEY",
+          "C1P0-COMMON-REFRESH",
+          "C0P1-PRIVATE-PERSISTENT",
+          "C0P0-PRIVATE-REFRESH"
+        ],
+        "package_models_allocated_count": 5,
+        "training_instances": [
+          "C1P1-COMMON-PERSISTENT",
+          "FLEX-REKEY"
+        ],
+        "training_instances_count": 2
+      },
+      "gradient_norm_first_three": [
+        0.6763799215447864,
+        0.798724047071481,
+        0.5798406239103824
+      ],
+      "gradient_norm_last_three": [
+        0.05870292658550939,
+        0.03664821705058513,
+        0.034081680949247
+      ],
+      "Y_first50_mean": 0.2868797200520833,
+      "Y_last50_mean": 0.28711474609375
+    }
+  },
+  "active_paths": [
+    {
+      "cell": "8_to_12.ACTIVE_CONTINUATION",
+      "n": 256,
+      "U_means": {
+        "c1p1": 0.6953125,
+        "flex": 0.6953450520833333,
+        "reference": 0.2456461588541667,
+        "init": 0.6967447916666667
+      },
+      "delta_U": 3.255208333333365e-05,
+      "paired_mc_se": 3.255208333333365e-05,
+      "G_U_c1p1": 0.0014322916666666963,
+      "G_U_flex": 0.0013997395833333925,
+      "reference_tau40_count": 256
+    },
+    {
+      "cell": "12_to_8.ACTIVE_CONTINUATION",
+      "n": 256,
+      "U_means": {
+        "c1p1": 0.718701171875,
+        "flex": 0.71866455078125,
+        "reference": 0.31865234375,
+        "init": 0.721240234375
+      },
+      "delta_U": -3.662109375000009e-05,
+      "paired_mc_se": 3.662109375000009e-05,
+      "G_U_c1p1": 0.002539062499999911,
+      "G_U_flex": 0.0025756835937499334,
+      "reference_tau40_count": 249
+    }
+  ],
+  "primary": {
+    "delta_U": -2.0345052083332177e-06,
+    "paired_mc_se": 2.4498686887191496e-05,
+    "G_U_c1p1": 0.0019856770833333037,
+    "G_U_flex": 0.001987711588541663,
+    "delta_tau": 0.0,
+    "absolute_difference_from_published": {
+      "delta_U": 2.6020852139652106e-17,
+      "paired_mc_se": 0.0,
+      "G_U_c1p1": 0.0,
+      "G_U_flex": 0.0,
+      "delta_tau": 0.0
+    }
+  },
+  "all_8_cells_U_means": {
+    "c1p1": {
+      "12_to_12.ACTIVE_CONTINUATION": 0.6934488932291667,
+      "12_to_12.NEW_EPOCH": 0.6941813151041667,
+      "12_to_8.ACTIVE_CONTINUATION": 0.718701171875,
+      "12_to_8.NEW_EPOCH": 0.71629638671875,
+      "8_to_12.ACTIVE_CONTINUATION": 0.6953125,
+      "8_to_12.NEW_EPOCH": 0.6923828125,
+      "8_to_8.ACTIVE_CONTINUATION": 0.71964111328125,
+      "8_to_8.NEW_EPOCH": 0.7161376953125
+    },
+    "flex": {
+      "12_to_12.ACTIVE_CONTINUATION": 0.6934651692708333,
+      "12_to_12.NEW_EPOCH": 0.694091796875,
+      "12_to_8.ACTIVE_CONTINUATION": 0.71866455078125,
+      "12_to_8.NEW_EPOCH": 0.716259765625,
+      "8_to_12.ACTIVE_CONTINUATION": 0.6953450520833333,
+      "8_to_12.NEW_EPOCH": 0.6923665364583333,
+      "8_to_8.ACTIVE_CONTINUATION": 0.71962890625,
+      "8_to_8.NEW_EPOCH": 0.71617431640625
+    },
+    "reference": {
+      "12_to_12.ACTIVE_CONTINUATION": 0.2340494791666667,
+      "12_to_12.NEW_EPOCH": 0.2515299479166667,
+      "12_to_8.ACTIVE_CONTINUATION": 0.31865234375,
+      "12_to_8.NEW_EPOCH": 0.33369140625,
+      "8_to_12.ACTIVE_CONTINUATION": 0.2456461588541667,
+      "8_to_12.NEW_EPOCH": 0.25520019531250004,
+      "8_to_8.ACTIVE_CONTINUATION": 0.3201171875,
+      "8_to_8.NEW_EPOCH": 0.328857421875
+    },
+    "init": {
+      "12_to_12.ACTIVE_CONTINUATION": 0.6958089192708333,
+      "12_to_12.NEW_EPOCH": 0.6958333333333333,
+      "12_to_8.ACTIVE_CONTINUATION": 0.721240234375,
+      "12_to_8.NEW_EPOCH": 0.71754150390625,
+      "8_to_12.ACTIVE_CONTINUATION": 0.6967447916666667,
+      "8_to_12.NEW_EPOCH": 0.6944173177083334,
+      "8_to_8.ACTIVE_CONTINUATION": 0.71898193359375,
+      "8_to_8.NEW_EPOCH": 0.716943359375
+    }
+  },
+  "paired_scenarios_with_different_U": 14,
+  "init_c1p1_scenarios_with_different_U": 1918,
+  "counts": {
+    "independent_paired_training_seeds": 1,
+    "training_instances": 2,
+    "training_episodes": 25600,
+    "final_eval_episodes": 4096,
+    "initial_eval_episodes": 2048,
+    "reference_eval_episodes": 2048,
+    "total_episodes": 33792,
+    "environment_ticks": 2162688,
+    "backward_and_joint_update_calls": 400
+  },
+  "memory_receipts": {
+    "build": {
+      "captured_at": "2026-09-06T22:23:39.105940Z",
+      "assessed_at": "2026-09-06T22:23:39.106299Z",
+      "minimum_available_bytes": 4294967296,
+      "available_physical_bytes": 15258902528,
+      "effective_available_bytes": 15258902528,
+      "physical_floor_pass": true,
+      "effective_floor_pass": true,
+      "passed": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo"
+    },
+    "pytest": {
+      "captured_at": "2026-09-06T22:23:42.185994Z",
+      "assessed_at": "2026-09-06T22:23:42.186267Z",
+      "minimum_available_bytes": 4294967296,
+      "available_physical_bytes": 15254589440,
+      "effective_available_bytes": 15254589440,
+      "physical_floor_pass": true,
+      "effective_floor_pass": true,
+      "passed": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo"
+    },
+    "c1p1": {
+      "captured_at": "2026-09-06T22:23:46.287365Z",
+      "assessed_at": "2026-09-06T22:23:46.287653Z",
+      "minimum_available_bytes": 4294967296,
+      "available_physical_bytes": 15256367104,
+      "effective_available_bytes": 15256367104,
+      "physical_floor_pass": true,
+      "effective_floor_pass": true,
+      "passed": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo"
+    },
+    "flex": {
+      "captured_at": "2026-09-06T22:24:57.801537Z",
+      "assessed_at": "2026-09-06T22:24:57.801814Z",
+      "minimum_available_bytes": 4294967296,
+      "available_physical_bytes": 15678771200,
+      "effective_available_bytes": 15678771200,
+      "physical_floor_pass": true,
+      "effective_floor_pass": true,
+      "passed": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo"
+    },
+    "reference": {
+      "captured_at": "2026-09-06T22:26:09.069298Z",
+      "assessed_at": "2026-09-06T22:26:09.069565Z",
+      "minimum_available_bytes": 4294967296,
+      "available_physical_bytes": 15675715584,
+      "effective_available_bytes": 15675715584,
+      "physical_floor_pass": true,
+      "effective_floor_pass": true,
+      "passed": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo"
+    }
+  },
+  "whole_process_timings": {
+    "build": {
+      "wall_seconds": 3.04,
+      "user_seconds": 2.39,
+      "system_seconds": 0.4,
+      "peak_rss_kib": 430288,
+      "exit_status": 0,
+      "cpu_seconds": 2.79,
+      "peak_rss_bytes": 440614912
+    },
+    "pytest": {
+      "wall_seconds": 4.05,
+      "user_seconds": 3.7,
+      "system_seconds": 0.29,
+      "peak_rss_kib": 602492,
+      "exit_status": 0,
+      "cpu_seconds": 3.99,
+      "peak_rss_bytes": 616951808
+    },
+    "c1p1": {
+      "wall_seconds": 71.47,
+      "user_seconds": 70.06,
+      "system_seconds": 1.36,
+      "peak_rss_kib": 575040,
+      "exit_status": 0,
+      "cpu_seconds": 71.42,
+      "peak_rss_bytes": 588840960
+    },
+    "flex": {
+      "wall_seconds": 71.23,
+      "user_seconds": 70.39,
+      "system_seconds": 0.74,
+      "peak_rss_kib": 580532,
+      "exit_status": 0,
+      "cpu_seconds": 71.13,
+      "peak_rss_bytes": 594464768
+    },
+    "reference": {
+      "wall_seconds": 2.62,
+      "user_seconds": 2.5,
+      "system_seconds": 0.11,
+      "peak_rss_kib": 429628,
+      "exit_status": 0,
+      "cpu_seconds": 2.61,
+      "peak_rss_bytes": 439939072
+    }
+  },
+  "chain_wall_seconds": 152.622,
+  "preparation_wall_seconds": 7.173,
+  "sum_measured_invocation_wall_seconds": 152.41,
+  "sum_measured_process_cpu_seconds": 151.94,
+  "step_exit_records": [
+    "STEP1_EXIT=0",
+    "STEP2_EXIT=0",
+    "STEP3_EXIT=0",
+    "STEP4_EXIT=0",
+    "STEP5_EXIT=0"
+  ],
+  "stderr_bytes": {
+    "build": 0,
+    "c1p1": 0,
+    "flex": 0,
+    "reference": 0
+  },
+  "native_artifact_hash_values": [
+    "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983"
+  ],
+  "native_source_hash_values": [
+    "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819"
+  ],
+  "new_exposure": {
+    "models": 0,
+    "episodes": 0,
+    "derivatives": 0,
+    "optimizer_updates": 0,
+    "tests": 0,
+    "result_bearing_invocations": 0
+  },
+  "retained_log_locations": {
+    "docs\\research\\candidates\\roster_consistent_latent_exploration\\b02_tbcfv_norm0p02_20260906\\pytest.log": false,
+    "docs\\research\\candidates\\roster_consistent_latent_exploration\\b02_tbcfv_norm0p02_20260906\\task.log": false,
+    "C:\\Projects\\HMASD\\docs\\research\\candidates\\roster_consistent_latent_exploration\\b02_tbcfv_norm0p02_20260906\\pytest.log": true,
+    "C:\\Projects\\HMASD\\docs\\research\\candidates\\roster_consistent_latent_exploration\\b02_tbcfv_norm0p02_20260906\\task.log": true
+  },
+  "init_c1p1_difference_qualification": {
+    "different_stored_binary64_values": 1918,
+    "differences_greater_than_1e_15": 1874,
+    "extra_roundoff_scale_differences": 44,
+    "extra_absolute_difference_range": [
+      1.1102230246251565e-16,
+      4.440892098500626e-16
+    ],
+    "threshold_scope": "one descriptive check of historical 1874 count; no change to primary arithmetic or card rule"
+  },
+  "allocation_interpretation": {
+    "source_observed": "8ad01cb9:run_arm calls initialize_block_models once per arm process; helper creates one initialization reference plus five package models",
+    "inferred_package_allocations_across_two_arm_calls": 10,
+    "inferred_initialization_reference_allocations": 2,
+    "actual_trained_instances": 2,
+    "scope": "static call-count reading for the two result-bearing arms only; excludes historical tests and does not treat package templates as independent training"
+  },
+  "historical_checks": {
+    "local_cm_record": "18 passed, 1 warning in 5.22s",
+    "local_test_scope": "B02 and B01 two-update focused tests on cached MSVC; whole-process wall and CPU not recorded here",
+    "remote_retained_pytest": "23 passed, 1 warning in 3.72s",
+    "remote_whole_process_wall_seconds": 4.05,
+    "warning": "Unknown config option: cache_dir",
+    "remote_chain_plus_known_local_pytest_seconds": 157.842,
+    "cost_scope": "157.842 s combines recorded remote chain wall with local pytest internal duration; not a complete all-history whole-process total"
+  },
+  "retained_log_copies": [
+    "pytest_retained_20260907.txt",
+    "task_retained_20260907.txt"
+  ],
+  "post_a02_delivery_readback": {
+    "observed_at_utc": "2026-09-07T20:00:18Z",
+    "mode": "read-only gh api and git cat-file",
+    "request_id": "2026-09-06-rcle-post-a02-innovator-01",
+    "workflow_node": "em_innovator",
+    "binding": "em:roster_consistent_latent_exploration:innovator",
+    "conversation_id": "6a9d9a3a-fd40-83e8-9e80-ad720582aaee",
+    "branch": "codex/pro-rcle-post-a02-20260906",
+    "remote_head": "5a335eaff0f2242c515f6867e22d04bdd8d832ef",
+    "response_exists_at_remote_head": false,
+    "issue_8_comment_ids": [
+      5560789984,
+      5562367990,
+      5564117795
+    ],
+    "provider_send_state": "unresolved; reuse Root P07 read-only conversation observation, no fresh provider action"
+  }
+}

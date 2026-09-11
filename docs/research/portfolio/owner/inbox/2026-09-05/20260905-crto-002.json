@@ -1,0 +1,74 @@
+{
+  "id": "20260905-crto-002",
+  "created": "2026-09-05T02:13:00-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CRTO B05：联合种子敏感性卡",
+  "context": "主张：种子0残差负结果可能延伸到两枚预定的联合种子。绑定结构：systems / information flow；四智能体承诺门控在部分共同历史下行动，本卡检验确定性信息包几何的联合种子敏感性。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "接受B05卡",
+      "consequence": "按固定种子1和2各执行一次，保留逐种子结果和比较器不足分支。"
+    },
+    {
+      "key": "reject",
+      "label": "拒绝B05卡",
+      "consequence": "在干净边界停止此次扩展，保留B04和既有家族状态。"
+    },
+    {
+      "key": "revise",
+      "label": "修订B05卡",
+      "consequence": "按批注调整尚未执行的部分，新含义另立卡。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "明确联合种子、实现来源与科学身份，复用已接受函数和预算，不添加封装。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_JOINT_SEED_B05_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b05-joint-seeds",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否固定新增联合种子1、2，在同一面板和33/258终点检查B04的残差负结果是否延伸？",
+    "changes_if_approved": [
+      {
+        "target": "CRTO 已开放残差 B 梯子",
+        "from": "种子0有胜任比较器下的有效负结果，其他联合种子尚未测",
+        "to": "两次独立调用已接受函数，分别运行种子1和2；不重跑种子0"
+      }
+    ],
+    "if_refused": "保留B04负结果，在干净边界停止或修订这次种子扩展；不会自动增加预算或打开新家族。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_INTAKE_20260904.md",
+        "quote": "Only one coupled seed and a deliberately exposed selected panel/adaptive endpoint choice are measured.",
+        "why": "联合随机性的敏感性尚未排除，固定两枚新增种子可用同一实现直接检查。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_INTAKE_20260904.md",
+        "quote": "Strongest support is the competent RAW-LONG comparator, material adverse TRUE differences at both fixed endpoints and no alignment-control advantage.",
+        "why": "原种子的负差距已经明显，新增种子未必支持残差；RAW胜任性本身也可能变化。"
+      }
+    ],
+    "uncertainty": [
+      "seed同时改变预测器、门控初始化和打乱映射，不能单独归因于门控初始化。",
+      "数据面板与终点已经暴露，结果不能当作新环境泛化。",
+      "原产物的B04标识保留为实现来源，新B05身份由卡片、种子、SHA、命令和输出根绑定。"
+    ],
+    "cost": {
+      "compute": "两次各774更新、24768样本；保守预计每次1307秒，上限各1500秒。每臂预测1016/1078/990秒，上限1200秒；共享准备每次只计一次。",
+      "owner_time": "约2分钟核对种子含义与有限解释",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；按常设委托推进，异步回复在干净边界应用"
+    },
+    "verdict_text": "推荐同时预定种子1、2，复用已接受函数和33/258暴露，检验联合种子敏感性，不重跑种子0或增加实现。",
+    "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_JOINT_SEED_B05_SCIENCE_CARD_20260905.md"
+  }
+}

@@ -1,0 +1,39 @@
+=== Task 'vnfc_b01_formal_33e08f440_20260905_01' started at 2026-09-06T07:50:26+08:00 ===
+{
+  "assessed_at": "2026-09-05T23:50:26.265644Z",
+  "available_physical_bytes": 15406366720,
+  "captured_at": "2026-09-05T23:50:26.265275Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15406366720,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"arm": "MAPR", "round": 1, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 89090, "norm": 33.37912531531826, "max_abs": 1.0320256155795837, "rms": 0.11183055301413722, "displacement_norm": 1.238721479703965, "relative_displacement": 0.037180235810983696}}
+{"arm": "DIRECT", "round": 1, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 148739, "norm": 38.688921342394416, "max_abs": 1.0350614484665643, "rms": 0.10031692076307361, "displacement_norm": 1.1466528605032864, "relative_displacement": 0.02966583869707803, "residual_parameter_norm": 19.614376668208834, "residual_output_parameter_norm": 0.02634843741942213}}
+{"arm": "MAPR", "round": 2, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 89090, "norm": 33.50292535790168, "max_abs": 1.0265935675341142, "rms": 0.11224532203802544, "displacement_norm": 2.417960414562793, "relative_displacement": 0.0725751025295479}}
+{"arm": "DIRECT", "round": 2, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 148739, "norm": 38.86492978748858, "max_abs": 1.0448625983761972, "rms": 0.10077329495567212, "displacement_norm": 2.9327244773173486, "relative_displacement": 0.07587451641544096, "residual_parameter_norm": 19.77222009418922, "residual_output_parameter_norm": 0.08824586517868341}}
+{"arm": "MAPR", "round": 3, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 89090, "norm": 33.58410353133014, "max_abs": 1.02544155379687, "rms": 0.1125172944142164, "displacement_norm": 2.9829078391086097, "relative_displacement": 0.08953200431060139}}
+{"arm": "DIRECT", "round": 3, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 148739, "norm": 38.940351647565265, "max_abs": 1.0478983427151578, "rms": 0.10096885710883109, "displacement_norm": 3.580364185178466, "relative_displacement": 0.09263004528474306, "residual_parameter_norm": 19.842657702554316, "residual_output_parameter_norm": 0.10736707573020388}}
+{"arm": "MAPR", "round": 4, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 89090, "norm": 33.69131444744661, "max_abs": 1.0303610912842593, "rms": 0.11287648465437988, "displacement_norm": 3.6415356193607136, "relative_displacement": 0.10930072276964532}}
+{"arm": "DIRECT", "round": 4, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 148739, "norm": 39.00571944090162, "max_abs": 1.0500249722245985, "rms": 0.10113834996407374, "displacement_norm": 4.040258791796568, "relative_displacement": 0.10452829251154591, "residual_parameter_norm": 19.895042807457504, "residual_output_parameter_norm": 0.1191702310245138}}
+{"arm": "MAPR", "round": 5, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 89090, "norm": 33.732202836392844, "max_abs": 1.0351087444813505, "rms": 0.11301347359895286, "displacement_norm": 3.865735561705811, "relative_displacement": 0.11603008595723759}}
+{"arm": "DIRECT", "round": 5, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 148739, "norm": 39.051349145728246, "max_abs": 1.050577290125021, "rms": 0.10125666371707358, "displacement_norm": 4.330082281252631, "relative_displacement": 0.11202651379976918, "residual_parameter_norm": 19.93781225515257, "residual_output_parameter_norm": 0.1279200294089164}}
+{"arm": "MAPR", "round": 6, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 89090, "norm": 33.77655544657461, "max_abs": 1.0363729559471664, "rms": 0.11316206877265476, "displacement_norm": 4.1199299826520415, "relative_displacement": 0.12365973367665546}}
+{"arm": "DIRECT", "round": 6, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 148739, "norm": 39.134168517133254, "max_abs": 1.0529345771936087, "rms": 0.10147140695701448, "displacement_norm": 4.765079108868046, "relative_displacement": 0.12328061359429245, "residual_parameter_norm": 20.008572785455588, "residual_output_parameter_norm": 0.1451829645916523}}
+{"arm": "MAPR", "round": 7, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 89090, "norm": 33.839369713191665, "max_abs": 1.038078636217072, "rms": 0.11337251629357106, "displacement_norm": 4.428796321127876, "relative_displacement": 0.1329303594684606}}
+{"arm": "DIRECT", "round": 7, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 148739, "norm": 39.171663072693676, "max_abs": 1.0535177663249464, "rms": 0.10156862699388015, "displacement_norm": 4.982964858251864, "relative_displacement": 0.1289176845145841, "residual_parameter_norm": 20.04034222259689, "residual_output_parameter_norm": 0.15262314691157575}}
+{"arm": "MAPR", "round": 8, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 89090, "norm": 33.857854936242084, "max_abs": 1.038394809363308, "rms": 0.11343444759634756, "displacement_norm": 4.538680439412256, "relative_displacement": 0.13622853221886103}}
+{"arm": "DIRECT", "round": 8, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 148739, "norm": 39.23227277278061, "max_abs": 1.0562796747907373, "rms": 0.10172578253789975, "displacement_norm": 5.311652155012587, "relative_displacement": 0.1374213778845221, "residual_parameter_norm": 20.092336417949138, "residual_output_parameter_norm": 0.16549073404324574}}
+{"arm": "MAPR", "round": 9, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 89090, "norm": 33.900776835539, "max_abs": 1.04136967507726, "rms": 0.11357824943924932, "displacement_norm": 4.771046625364378, "relative_displacement": 0.14320300527818303}}
+{"arm": "DIRECT", "round": 9, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 148739, "norm": 39.271322138932675, "max_abs": 1.0576831495811738, "rms": 0.10182703405989119, "displacement_norm": 5.484496606675626, "relative_displacement": 0.14189315465266275, "residual_parameter_norm": 20.116296854597838, "residual_output_parameter_norm": 0.17052968039545124}}
+{"arm": "MAPR", "round": 10, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 89090, "norm": 33.94209963371241, "max_abs": 1.0423786924662992, "rms": 0.11371669379116597, "displacement_norm": 4.970286551211113, "relative_displacement": 0.14918319335703578}}
+{"arm": "DIRECT", "round": 10, "actual_transitions": 192, "optimizer_steps": 32, "parameters": {"count": 148739, "norm": 39.31593568477246, "max_abs": 1.059782700459088, "rms": 0.10194271300331176, "displacement_norm": 5.708897852100123, "relative_displacement": 0.1476987924175785, "residual_parameter_norm": 20.164493057822188, "residual_output_parameter_norm": 0.1830907133884257}}
+timeout: the monitored command dumped core
+=== Task 'vnfc_b01_formal_33e08f440_20260905_01' exited with code 139 at 2026-09-06T07:51:54+08:00 (Duration: 88s) ===

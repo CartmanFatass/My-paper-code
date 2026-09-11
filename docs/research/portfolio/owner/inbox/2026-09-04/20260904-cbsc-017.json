@@ -1,0 +1,37 @@
+{
+  "id": "20260904-cbsc-017",
+  "created": "2026-09-04T18:05:50-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CBSC 选择直接执行与完整数据发布路径",
+  "context": "r07仍是不完整隔离尝试；旧资源补丁42项通过但编排占比100%，正式发布仍未到达。已找到原始PPO入口，当前发布接口把科学表与身份见证耦合。本轮限定复用原学习计算、保留全部科学数据，按规范11.6去除不影响B判断的身份和consumer门槛，用完整旧r05记录离线验证；旧身份不改写，不启动r08。",
+  "options": [
+    {
+      "key": "a",
+      "label": "实现一条有界直接路径并离线验证完整科学数据",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "继续修旧编排栈及历史总体哈希门槛",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "凭42项通过启动r08",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "直接处理已定位的发布耦合，保留原算法和测量，并在实际diff上核对预算。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_DIRECT_PATH_SELECTION_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#cbsc-b1-direct-path-selection",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

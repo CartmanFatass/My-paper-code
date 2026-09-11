@@ -1,0 +1,38 @@
+--- a/docs/project/ENGINEERING_SCOPE_SPEC.md
++++ b/docs/project/ENGINEERING_SCOPE_SPEC.md
+@@ -82,6 +82,16 @@
+ | Test wall time per research directory | 5 minutes total excluding the smoke of the runner | slow tests are deleted or become the experiment |
+ | Time to first run of a new object, from card to launch | one session | if exceeded, the implementer reports which of §4 it was building |
+ 
++### Owner-proposed small reuse / net-deletion exception (2026-09-05)
++
++**小规模复用／净删除例外。** 对research层、事前在既有科学卡或技术任务记录中声明的单一逻辑变更，若其目的为复用现有科学计算，或其全部非测试源代码删除行数严格大于新增行数；且整项逻辑变更累计新增非测试源代码不超过100行、不新增§4所列机械设施，则可适用本例外。例外不得改变未被相应权限明确选择的科学含义或对象之外的科学行为。
++
++从声明基线起跨文件、跨提交合并报告新增行数A、删除行数D及编排行数O；本例外的比例报告采用`O/(A+D)`，替换按删除和新增两侧计数，测试与文档分列。符合例外时，比例达到或超过30%本身不再构成自动退回理由；既有独立reviewer须说明编排变更为何必要，审阅全部受影响的科学计算、观测、消费者和发布路径，并明确尚未验证的事实。行数资格不等于正确性或源码接受。
++
++不得拆分同一逻辑变更、压缩或搬移代码、复制／添加无需求的计算或测试、把未改动helper计入分母来取得资格。净删除也不得删除冻结对象要求的科学量、改写历史证据或把真实learner工作完整性与可选资源遥测混为一谈。
++
++不符合本例外的research变更继续适用现行比例规则。2000新增行、600行runner、其余测试及scope预算、源码所有权、科学完整性、既有post-learner离线发布要求、资源准入、逐臂计算上限和证据规范§11.4保持不变。本条不接受任何已有拒绝补丁，不授权实验，不新增reviewer角色、登记服务、runtime validator或A/B启动关卡。
++
+ ## 6. Core code discipline
+ 
+ Core changes are rare and small. They preserve every route, checkpoint format, RNG stream, and
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -217,7 +217,15 @@
+ schema validators, registries, telemetry beyond wall time and peak RSS, compatibility shims,
+ repeated smoke tests), and budgets (2,000 new lines per attempt, 600 per runner, orchestration
+ under 30% of a diff, the four §11.4 launch conditions and no other gate). A guard is a bug until
+-a card asks for it.
++a card asks for it. The section 5 small reuse / net-deletion exception applies only to a
++prospectively declared whole logical research change that reuses existing scientific computation
++or has strictly more source deletions than additions, cumulatively adds at most 100 non-test
++source lines across files and commits, and adds no section 4 machinery. For this class, report
++A, D and O/(A+D); the existing independent reviewer assesses necessity and all affected science,
++observations, consumers and publication paths instead of rejecting solely on the ratio. Preserve
++science outside explicitly selected changes; no artificial splitting, compression, relocation,
++padding or unchanged-helper denominator. All other budgets, integrity and launch conditions stay;
++this exception itself accepts no old patch and authorizes no experiment.
+ 
+ Do not silently change scientific meaning, numerical precision, RNG behavior, checkpoint format,
+ bit identity, declared comparison, or external side effects. State material assumptions and

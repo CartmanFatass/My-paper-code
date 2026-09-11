@@ -1,0 +1,43 @@
+{
+  "id": "20260905-frrie-012",
+  "created": "2026-09-05T04:13:34-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "选择已知正信号的公共先验列切断诊断",
+  "context": "新卡按委托选择已知正信号根1，保持完整训练，追加最终角色先验列旋转。它与第三个固定根的价值没有明显分离，因此另标 close-call；尚未启动运行。",
+  "options": [
+    {
+      "key": "a",
+      "label": "新 B 对象检查已知正信号对公共先验列对齐的条件依赖",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "用第三个固定根扩展同配置重现性信息",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "继续调整学习率或约束范围",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "把不存在的旧权重重建称为离线重放或重开旧面板",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "选择直接检验该信号的图表依赖，并明确保留结果依赖选根和计算成本的不确定性；第三根是合理的近邻选择。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R07_RESULT_INTAKE_20260905.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R08_ROLE_COLUMN_CUT_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r07-intake-r08-selection",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

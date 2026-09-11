@@ -1,0 +1,55 @@
+{
+  "collected_utc": "2026-09-10T22:34:08.081656+00:00",
+  "arm": "HALF_EVENT",
+  "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+  "remote_roots": [
+    "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b01-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_half_event",
+    "/home/wu/.agent-tasks/folr-public-lifecycle-half-b01-half-event-20260910",
+    "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b01-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_half_event_memory.json"
+  ],
+  "local_collection": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\public_lifecycle_half_b01_control_20260910\\collected",
+  "files": {
+    "public_lifecycle_half_b01_seed7807_half_event/final.pt": {
+      "size": 4662779,
+      "sha256": "9d93d7e00e56964c554188c7dfb6455cdbe9be7ba87839384a87487b288ce241"
+    },
+    "public_lifecycle_half_b01_seed7807_half_event/summary.json": {
+      "size": 3919,
+      "sha256": "29b65d983b529367f4a5d1bcc8fa259f9670a5ba7d7d8e588a4fcf75a639e5c9"
+    },
+    "folr-public-lifecycle-half-b01-half-event-20260910/exit_code": {
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "folr-public-lifecycle-half-b01-half-event-20260910/pid": {
+      "size": 8,
+      "sha256": "34dafafab5b3d63a26ee51e64eb3f706424ccff056dd0d344cb4f88e37624c7f"
+    },
+    "folr-public-lifecycle-half-b01-half-event-20260910/runner.sh": {
+      "size": 1854,
+      "sha256": "5c487355379cc990311fc8189cd633ea57750388a74c1ab1e2a67071bdfc50d2"
+    },
+    "folr-public-lifecycle-half-b01-half-event-20260910/start_time": {
+      "size": 11,
+      "sha256": "71a4519fa809ba619382b3025f2a5ccfb4366cd800c6e93b93ddd262f1507e28"
+    },
+    "folr-public-lifecycle-half-b01-half-event-20260910/status": {
+      "size": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "folr-public-lifecycle-half-b01-half-event-20260910/task.log": {
+      "size": 5772,
+      "sha256": "8a15eb65bacb11c7232b4de4a4d13bc037c1cfc22b1e672ec4040ec432808411"
+    },
+    "folr-public-lifecycle-half-b01-half-event-20260910/whole.time": {
+      "size": 1323,
+      "sha256": "6d663cb20088e0e86ad72238a9d2c7473b6c65c872e67e31abfc002d25bddd42"
+    },
+    "public_lifecycle_half_b01_seed7807_half_event_memory.json": {
+      "size": 504,
+      "sha256": "aae1b2d54fb4638f840ceda14480eaa5b243b2fe468b598744b0b8d93a561b73"
+    }
+  },
+  "all_files_match": true,
+  "collection_seconds": 4.078112999995938
+}

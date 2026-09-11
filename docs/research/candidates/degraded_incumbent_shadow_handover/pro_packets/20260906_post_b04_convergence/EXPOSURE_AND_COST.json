@@ -1,0 +1,468 @@
+{
+  "evidence_role": "DOCUMENTARY_DERIVATION_NOT_NEW_EXPERIMENT",
+  "written_at": "2026-09-06T22:44:00+00:00",
+  "derivation": "Counts and timings copied from the B04 summaries, paired.json, /usr/bin/time records and the chain log, and from the witness/B03 records; no project import, checkpoint load, experiment or new timing. Consultation exposure is zero.",
+  "sources": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_CONTROL_LOW_LR_B04_RESULT_INTAKE_20260906.md",
+      "sha256_prefix": "d3404b3d7ae97728"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/control_low_lr_b04_20260906/low_lr/paired.json",
+      "sha256_prefix": "755d080023fbb412"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/control_low_lr_b04_20260906/control/summary.json",
+      "sha256_prefix": "0e3beda7b771cc93"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/control_low_lr_b04_20260906/low_lr/summary.json",
+      "sha256_prefix": "1efe7ecde6d90004"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/control_low_lr_b04_20260906/shared/summary.json",
+      "sha256_prefix": "b8ad2118dc41fe59"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_CONTROL_LOW_LR_B04_SCIENCE_CARD_20260906.md",
+      "sha256_prefix": "08cd53ced574f0d8"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_CONTROL_LOW_LR_B04_CM_RECORD_20260906.md",
+      "sha256_prefix": "146017388137de1f"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_INIT_WITNESS_A01_RESULT_INTAKE_20260906.md",
+      "sha256_prefix": "f6aa22592f8be2b3"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_WITNESS_CONVERGENCE_INTAKE_20260906.md",
+      "sha256_prefix": "7c6c2c1076e56464"
+    }
+  ],
+  "exposure_line": "DISH-CONTROL-LOW-LR-B04: two learner arms (CONTROL 3e-4, LOW_LR 3e-5), seed 89, 16 updates x 32 lanes x 128 ticks each = 65,536 ordinary transitions and 512 optimizer steps per arm (131,072 / 1,024 total); one initializer call; four zero-update raw-interface reference episodes (4,800 ticks); final evaluation 2 x 4 episodes (CONTROL 4,284 executed ticks after one native termination at 684; LOW_LR 4,800); chain COMPLETE at ef23d9270 on wsl_4070. Consultation: zero new models, native states, transitions, backwards, optimizer steps, tests or experiments.",
+  "measured": {
+    "chain_wall_s": 432.4,
+    "shared_item_s": 15.84,
+    "arm_time_v_wall_s": {
+      "CONTROL": 210.07,
+      "LOW_LR": 206.49
+    },
+    "arm_timeout_s": 1788.68,
+    "cap_per_arm_s": 1800,
+    "cap_total_s": 3600,
+    "shared": {
+      "status": "COMPLETE",
+      "initial_model_norm": 38.26126788822669,
+      "welford_counts": {
+        "actor": 0,
+        "critic": 0,
+        "snapshot": 0
+      },
+      "initial_learning_rates": [
+        0.0003,
+        0.0003
+      ],
+      "reference_rows": [
+        [
+          "TARGET_VISUAL_MASK/K8/0",
+          617,
+          0
+        ],
+        [
+          "TARGET_VISUAL_MASK/K4_TO_K12/0",
+          312,
+          42
+        ],
+        [
+          "TERRAIN_RELAY_MASK/K8/0",
+          279,
+          38
+        ],
+        [
+          "TERRAIN_RELAY_MASK/K4_TO_K12/0",
+          367,
+          0
+        ]
+      ],
+      "reference_mean": 393.75,
+      "prepublication_wall_s": 6.548561142000835
+    },
+    "CONTROL": {
+      "status": "COMPLETE",
+      "completed_updates": 16,
+      "optimizer_steps": 512,
+      "ordinary_training_transitions": 65536,
+      "service_label_eligible": 22044,
+      "prepublication_wall_s": 209.78506206299062,
+      "cpu_s": 216.209486,
+      "peak_self_rss_bytes": 626708480,
+      "mean_service_ticks": 154.0,
+      "rows": [
+        [
+          "TARGET_VISUAL_MASK/K8/0",
+          92,
+          684,
+          [
+            "separation_below_15"
+          ],
+          26,
+          1,
+          0
+        ],
+        [
+          "TARGET_VISUAL_MASK/K4_TO_K12/0",
+          151,
+          1200,
+          [
+            "fixed_horizon"
+          ],
+          64,
+          0,
+          0
+        ],
+        [
+          "TERRAIN_RELAY_MASK/K8/0",
+          148,
+          1200,
+          [
+            "fixed_horizon"
+          ],
+          89,
+          0,
+          0
+        ],
+        [
+          "TERRAIN_RELAY_MASK/K4_TO_K12/0",
+          225,
+          1200,
+          [
+            "fixed_horizon"
+          ],
+          50,
+          0,
+          0
+        ]
+      ],
+      "learning_rates_per_update": [
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ],
+        [
+          0.0003,
+          0.0003
+        ]
+      ],
+      "parameter_movement": {
+        "absolute_l1_displacement": 2811.1429342152283,
+        "final_norm": 39.23581816918745,
+        "initial_norm": 38.26126788822669,
+        "l2_displacement": 8.621537324105303,
+        "relative_l2_displacement": 0.22533328872664518
+      },
+      "training_service_sum": 30846,
+      "training_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 3251,
+        "separation_breach": 2,
+        "token_gap": 0
+      },
+      "training_legal_transfers": 0,
+      "last_loss": 218.66627502441406,
+      "last_gradient_norm": 16.5568790435791
+    },
+    "LOW_LR": {
+      "status": "COMPLETE",
+      "completed_updates": 16,
+      "optimizer_steps": 512,
+      "ordinary_training_transitions": 65536,
+      "service_label_eligible": 15616,
+      "prepublication_wall_s": 206.15564484801143,
+      "cpu_s": 212.55661,
+      "peak_self_rss_bytes": 620961792,
+      "mean_service_ticks": 336.75,
+      "rows": [
+        [
+          "TARGET_VISUAL_MASK/K8/0",
+          760,
+          1200,
+          [
+            "fixed_horizon"
+          ],
+          23,
+          0,
+          0
+        ],
+        [
+          "TARGET_VISUAL_MASK/K4_TO_K12/0",
+          150,
+          1200,
+          [
+            "fixed_horizon"
+          ],
+          4,
+          0,
+          0
+        ],
+        [
+          "TERRAIN_RELAY_MASK/K8/0",
+          275,
+          1200,
+          [
+            "fixed_horizon"
+          ],
+          0,
+          0,
+          0
+        ],
+        [
+          "TERRAIN_RELAY_MASK/K4_TO_K12/0",
+          162,
+          1200,
+          [
+            "fixed_horizon"
+          ],
+          11,
+          0,
+          0
+        ]
+      ],
+      "learning_rates_per_update": [
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ],
+        [
+          3e-05,
+          3e-05
+        ]
+      ],
+      "parameter_movement": {
+        "absolute_l1_displacement": 646.5577737623518,
+        "final_norm": 38.316834036306595,
+        "initial_norm": 38.26126788822669,
+        "l2_displacement": 1.9122897033986779,
+        "relative_l2_displacement": 0.049979778740868785
+      },
+      "training_service_sum": 26412,
+      "training_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 2234,
+        "separation_breach": 2,
+        "token_gap": 0
+      },
+      "training_legal_transfers": 0,
+      "last_loss": 244.78091430664062,
+      "last_gradient_norm": 29.422218322753906
+    },
+    "paired": {
+      "delta_lr": 182.75,
+      "d_control_new": -239.75,
+      "d_low_lr_new": -57.0,
+      "control_mean": 154.0,
+      "low_lr_mean": 336.75,
+      "reference_mean": 393.75,
+      "scale_ticks": 24
+    },
+    "paired_rows": [
+      [
+        "TARGET_VISUAL_MASK/K8/0",
+        617,
+        92,
+        760,
+        668,
+        -525,
+        143
+      ],
+      [
+        "TARGET_VISUAL_MASK/K4_TO_K12/0",
+        312,
+        151,
+        150,
+        -1,
+        -161,
+        -162
+      ],
+      [
+        "TERRAIN_RELAY_MASK/K8/0",
+        279,
+        148,
+        275,
+        127,
+        -131,
+        -4
+      ],
+      [
+        "TERRAIN_RELAY_MASK/K4_TO_K12/0",
+        367,
+        225,
+        162,
+        -63,
+        -142,
+        -205
+      ]
+    ],
+    "node": "wsl_4070",
+    "launch_sha": "ef23d927045e449a0aa831e6a94a99d976e91924"
+  },
+  "prior_records": {
+    "witness_seed73": {
+      "initial_view_mean": 706.25,
+      "D_CONTROL": -245.75,
+      "D_PACKAGE": -517.75,
+      "charge_s": 16.23
+    },
+    "b03": {
+      "pair_charge_s": 412.16,
+      "rows_control": [
+        452,
+        458,
+        449,
+        483
+      ],
+      "delta_b03": -272.0
+    },
+    "b02": {
+      "pair_wall_s": 642.66
+    },
+    "family_cumulative_training_transitions": 393216
+  },
+  "prospective_option_1_evaluation_across_updates": {
+    "design": "single CONTROL arm at 3e-4 from the saved seed-89 initial state, 16 updates, four-row evaluation on the recorded resets after updates 1, 2, 4, 8, 16; reference row 393.75",
+    "reference_cost": "B04 CONTROL 210 s + 16 evaluation episodes (reference four took ~6.5 s) ~ 240 s; not measured for per-checkpoint evaluation",
+    "training": "65,536 transitions, 512 optimizer steps"
+  },
+  "prospective_option_2_second_seed_lr_pair": {
+    "design": "the B04 entry on a new seed with its own zero-update reference",
+    "reference_cost": "~432 s from the measured chain",
+    "training": "131,072 transitions, 1,024 optimizer steps"
+  },
+  "prospective_option_3_combined": {
+    "design": "B04 entry with per-checkpoint evaluation (1, 2, 4, 8, 16) on a new seed, both arms",
+    "reference_cost": "~432 s + 2 x ~30 s",
+    "training": "131,072 transitions, 1,024 optimizer steps"
+  },
+  "prospective_option_4_source_question": {
+    "design": "no bounded object identified: no legal transfer in 20 evaluation rows across B03/B04 and none in B04 training; scripted triggers excluded by the family",
+    "reference_cost": "n/a"
+  }
+}

@@ -595,6 +595,14 @@ def test_slice_telemetry_join_rejects_missing_duplicate_reorder_and_work_mismatc
             measurement["stage_measurements"][0]["transitions"]
             / measurement["stage_measurements"][0]["wall_seconds"]
         )
+    if defect == "mismatch":
+        result = assemble_b1_metrics_training(
+            raw_slice_groups=[raw], admission_groups=[admissions],
+            telemetry_groups=[telemetry], shared_tables=shared,
+            policy_tables=policy, test_only=True,
+        )
+        assert len(result["tables"]["training_episodes"]) == 48
+        return
     with pytest.raises(B1MetricsTrainingAssemblyError, match="inventory|attempt_order|slice work"):
         assemble_b1_metrics_training(
             raw_slice_groups=[raw], admission_groups=[admissions],
@@ -845,3 +853,36 @@ def test_policy_replay_resources_join_canonical_tables_and_mechanical_inventory(
             telemetry_groups=[[_telemetry()]], policy_replay_resources=tampered,
             shared_tables=shared, policy_tables=policy, test_only=True,
         )
+
+
+@pytest.mark.parametrize("incomplete_kind", ("TRAINING_SLICE", "POLICY_REPLAY"))
+def test_partial_resource_samples_survive_projection_without_full_certificate(incomplete_kind):
+    from tests.experiments.candidates.capability_bound_semantic_currentness_omrc_b01.test_b1_mechanical import (
+        _facts, _competence, SEEDS,
+    )
+    shared, policy = _shared_policy_tables()
+    training = _telemetry()
+    replay = _policy_replay_resources()
+    measured = training if incomplete_kind == "TRAINING_SLICE" else replay["telemetry"][0]
+    measured["measurement"]["measurement_complete"] = False
+    observed_rss = measured["measurement"]["process_tree_peak_rss_bytes"]
+    result = assemble_b1_metrics_training(
+        raw_slice_groups=[[_raw_slice()]], admission_groups=[[_admission()]],
+        telemetry_groups=[[training]], policy_replay_resources=replay,
+        shared_tables=shared, policy_tables=policy, test_only=True,
+    )
+    measurement = next(row["measurement"] for row in result["tables"]["telemetry"]
+                       if row["invocation_kind"] == incomplete_kind)
+    assert measurement["resources_unmeasured"] is True
+    assert measurement["process_tree_peak_rss_bytes"] == observed_rss
+    resources = result["prepublication_raw_facts"]["resources"]
+    partial = next(row for row in resources if row["invocation_id"].startswith(incomplete_kind))
+    assert partial["measurement_complete"] is False
+    assert partial["peak_rss_bytes"] == observed_rss
+    facts = _facts()
+    facts["resources"] = resources
+    mechanical = compute_b1_mechanical(facts, [_competence(seed) for seed in SEEDS])
+    assert mechanical["mechanical_components"]["resource_caps"] is False
+    assert mechanical["mechanical_conformance_pass"] is False
+    assert mechanical["mechanical_attempt_complete"] is True
+    assert mechanical["scientific_packet_readable"] is True

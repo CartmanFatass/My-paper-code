@@ -1,0 +1,55 @@
+{
+  "source": "docs/research/candidates/vsp_03/VSP03_B01_PLAN_20260905.json",
+  "source_sha256": "042f5b4236091dde7a6db8898d226dea7562fc256a39e12de0bc0dbb039f68e4",
+  "method": "Python standard-library arithmetic over prospective plan; no simulation, model construction or measured runtime",
+  "independent_training_seed_pairs": 1,
+  "separately_trained_models": 2,
+  "per_arm_per_seed": {
+    "actor_parameters": 1314,
+    "critic_parameters": 257,
+    "total_parameters": 1571,
+    "training_episodes": 16384,
+    "training_primitive_ticks": 655360,
+    "optimizer_steps": 128,
+    "training_decision_rows_upper_bound": 147456,
+    "gradient_rows_per_update_upper_bound": 1152,
+    "evaluation_episodes": 1280,
+    "evaluation_primitive_ticks": 51200,
+    "evaluation_batches": 10,
+    "complete_training_and_evaluation_ticks": 706560
+  },
+  "shared_work": {
+    "fixed_rule_episodes": 1024,
+    "fixed_rule_ticks": 40960,
+    "focused_check_episodes": 8,
+    "focused_check_ticks": 320
+  },
+  "whole_invocation": {
+    "primitive_ticks": 1454400,
+    "optimizer_steps": 256,
+    "complete_episodes_including_check": 36360,
+    "cap_seconds": 1800
+  },
+  "cost_law_per_arm": "I_q + 128*C_q(128 episodes,40 ticks) + 10*E_q(128 episodes,40 ticks) + O_q",
+  "cost_law_shared": "imports + 8 full check episodes + 8 fixed-rule evaluation batches + summary/publication/read-back",
+  "candidate_or_trajectory_search_calls": 0,
+  "unit_times_seconds": null,
+  "projected_wall_seconds": null,
+  "new_experiment_observation_counts": {
+    "models": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "exposure_to_measure_in_normal_invocation": [
+    "actor/critic parameter counts",
+    "initial L2 and RMS",
+    "first-update and final parameter displacement and ratio to initialization",
+    "zero-initialization denominator reported undefined rather than zero ratio",
+    "actual valid decision/gradient rows",
+    "actual optimizer.step calls",
+    "training/evaluation episodes and ticks",
+    "policy forward calls",
+    "fixed checkpoints and configuration-selection count"
+  ]
+}

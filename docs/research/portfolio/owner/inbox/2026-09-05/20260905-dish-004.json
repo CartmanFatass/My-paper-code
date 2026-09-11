@@ -1,0 +1,33 @@
+{
+  "id": "20260905-dish-004",
+  "created": "2026-09-05T02:39:26-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "brief",
+  "title": "原前缀诊断完成：准备存在，源与快照支持缺失",
+  "context": "十六行原前缀全部重现，零新增学习；计数缺口在共同源和快照支持，不能推出三种来源相等或无效。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "简报按预定诊断规则解释现有观测，并保留未曝光比较的限制。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_INTAKE_20260905.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-prefix-a01-intake",
+  "brief": "docs/research/portfolio/owner/briefs/degraded_incumbent_shadow_handover/2026-09-05_prefix_funnel_a01.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

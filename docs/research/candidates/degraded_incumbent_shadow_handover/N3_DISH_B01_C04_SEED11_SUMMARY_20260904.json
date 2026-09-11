@@ -1,0 +1,159 @@
+{
+  "admission_receipt": "/home/wu/hmasd-worktrees/dish-b01-c04-e0541d0c/temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed11_a1_admission.json",
+  "branch_consequence_ticks": 0,
+  "estimands": {
+    "delta_copy": 0.0,
+    "delta_shadow": 0.0,
+    "delta_shadow_worst20": 0.0,
+    "shadow_nonharm": true,
+    "usable_trigger_support": false
+  },
+  "evaluation_prefix_ticks": 19200,
+  "exposure": {
+    "final_norm": 41.78517869974931,
+    "initial_norm": 38.19731474061207,
+    "maximum_per_tensor_displacement_ratio": 1.2535341627432597e+300,
+    "optimizer_steps": 2048,
+    "relative_l2_displacement": 0.42465718774783356
+  },
+  "launch_sha": "e0541d0cb3e9e63731c72f4dacb10b44d268fd39",
+  "learner_updates": 64,
+  "object": "DISH-FIRST-TRIGGER-SOURCE-SCOUT-B01",
+  "optimizer_steps": 2048,
+  "panel_rows": [
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/0",
+      "package": "TARGET_VISUAL_MASK",
+      "schedule": "K8",
+      "slot": 0,
+      "speed": 4,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/3",
+      "package": "TARGET_VISUAL_MASK",
+      "schedule": "K8",
+      "slot": 3,
+      "speed": 4,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/32",
+      "package": "TARGET_VISUAL_MASK",
+      "schedule": "K8",
+      "slot": 0,
+      "speed": 8,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/35",
+      "package": "TARGET_VISUAL_MASK",
+      "schedule": "K8",
+      "slot": 3,
+      "speed": 8,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K4_TO_K12/0",
+      "package": "TARGET_VISUAL_MASK",
+      "schedule": "K4_TO_K12",
+      "slot": 0,
+      "speed": 4,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K4_TO_K12/3",
+      "package": "TARGET_VISUAL_MASK",
+      "schedule": "K4_TO_K12",
+      "slot": 3,
+      "speed": 4,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K4_TO_K12/32",
+      "package": "TARGET_VISUAL_MASK",
+      "schedule": "K4_TO_K12",
+      "slot": 0,
+      "speed": 8,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K4_TO_K12/35",
+      "package": "TARGET_VISUAL_MASK",
+      "schedule": "K4_TO_K12",
+      "slot": 3,
+      "speed": 8,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K8/0",
+      "package": "TERRAIN_RELAY_MASK",
+      "schedule": "K8",
+      "slot": 0,
+      "speed": 4,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K8/3",
+      "package": "TERRAIN_RELAY_MASK",
+      "schedule": "K8",
+      "slot": 3,
+      "speed": 4,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K8/32",
+      "package": "TERRAIN_RELAY_MASK",
+      "schedule": "K8",
+      "slot": 0,
+      "speed": 8,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K8/35",
+      "package": "TERRAIN_RELAY_MASK",
+      "schedule": "K8",
+      "slot": 3,
+      "speed": 8,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K4_TO_K12/0",
+      "package": "TERRAIN_RELAY_MASK",
+      "schedule": "K4_TO_K12",
+      "slot": 0,
+      "speed": 4,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K4_TO_K12/3",
+      "package": "TERRAIN_RELAY_MASK",
+      "schedule": "K4_TO_K12",
+      "slot": 3,
+      "speed": 4,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K4_TO_K12/32",
+      "package": "TERRAIN_RELAY_MASK",
+      "schedule": "K4_TO_K12",
+      "slot": 0,
+      "speed": 8,
+      "triggered": false
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K4_TO_K12/35",
+      "package": "TERRAIN_RELAY_MASK",
+      "schedule": "K4_TO_K12",
+      "slot": 3,
+      "speed": 8,
+      "triggered": false
+    }
+  ],
+  "peak_rss_bytes": 628801536,
+  "resources_unmeasured": false,
+  "seed": 11,
+  "training_transitions": 262144,
+  "trigger_count": 0,
+  "wall_seconds": 1068.1102725170058
+}

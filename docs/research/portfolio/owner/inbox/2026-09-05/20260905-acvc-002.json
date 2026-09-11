@@ -1,0 +1,38 @@
+{
+  "id": "20260905-acvc-002",
+  "created": "2026-09-05T02:42:10-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "ACVC：保留工程证据，原定输入成本仍未测得",
+  "context": "唯一远端合成测试在 40.23 秒触及上限，峰值内存约 18 MiB。随后在同一源码复现：原始 512 位分数归一化后，实际分母变成 12,221–12,252 位。这只说明本次更重合成构造未通过成本投影，不能说明目标上界不可行。已保留推导和证据；拒绝用这张成本收据准入真实计算。没有重跑、真实新上界或 learner，原 HC-D 和你的最低顺序继续选择均不变。",
+  "options": [
+    {
+      "key": "a",
+      "label": "保留有限证据并返回明确的输入表示依赖",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "把扩大压力测试失败判成上界不可行",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "用当前收据准入真实 ACVC 计算",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "规定工作量没有被测量；工程输入缺陷不能转为科学负结果或准入依据。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HC_D_EXACT_UPPER_REENTRY_INTAKE_20260905.md",
+    "docs/research/candidates/acvc/ACVC_HC_D_UPPER_PREFIX_CM_ASSESSMENT_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#acvc-upper-input-envelope-disposition-20260905",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,63 @@
+{
+  "object": "CBSC-DIRECT-RETURN-B03",
+  "source_sha": "65bf2486594fc29b4813df2d1d79dec82f5756af",
+  "node": "wsl_4070",
+  "ssh": "hmasd-wsl-node",
+  "cwd": "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905",
+  "python": "/home/wu/.venvs/hmasd/bin/python",
+  "observation_root": "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/test/cbsc_direct_return_b03_65bf24865",
+  "formal_root": "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/exp/cbsc_direct_return_b03_seed21209_65bf24865",
+  "operations": [
+    {
+      "kind": "raw",
+      "task": "cbsc-direct-b03-65bf24865-raw",
+      "argv": [
+        "/home/wu/.venvs/hmasd/bin/python",
+        "scripts/run_cbsc_direct_return_b02.py",
+        "--object",
+        "CBSC-DIRECT-RETURN-B03",
+        "--arm",
+        "RAW-GRU",
+        "--seed",
+        "21209",
+        "--output",
+        "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/exp/cbsc_direct_return_b03_seed21209_65bf24865/RAW"
+      ],
+      "command": "/usr/bin/time -f 'process_wall_seconds=%e peak_rss_kib=%M' -o /home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/test/cbsc_direct_return_b03_65bf24865/raw-time.txt timeout -k 2s 598s bash -lc 'cd /home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905 && export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/test/cbsc_direct_return_b03_65bf24865/raw-admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_cbsc_direct_return_b02.py --object CBSC-DIRECT-RETURN-B03 --arm RAW-GRU --seed 21209 --output /home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/exp/cbsc_direct_return_b03_seed21209_65bf24865/RAW'",
+      "receipt": "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/test/cbsc_direct_return_b03_65bf24865/raw-admission.json",
+      "time": "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/test/cbsc_direct_return_b03_65bf24865/raw-time.txt",
+      "output_root": "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/exp/cbsc_direct_return_b03_seed21209_65bf24865/RAW",
+      "complete_bound_seconds": 600,
+      "projection_seconds": 79.69
+    },
+    {
+      "kind": "struct",
+      "task": "cbsc-direct-b03-65bf24865-struct",
+      "argv": [
+        "/home/wu/.venvs/hmasd/bin/python",
+        "scripts/run_cbsc_direct_return_b02.py",
+        "--object",
+        "CBSC-DIRECT-RETURN-B03",
+        "--arm",
+        "STRUCT-CURRENTNESS-GRU",
+        "--seed",
+        "21209",
+        "--output",
+        "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/exp/cbsc_direct_return_b03_seed21209_65bf24865/STRUCT",
+        "--raw-result",
+        "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/exp/cbsc_direct_return_b03_seed21209_65bf24865/RAW/summary.json"
+      ],
+      "command": "/usr/bin/time -f 'process_wall_seconds=%e peak_rss_kib=%M' -o /home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/test/cbsc_direct_return_b03_65bf24865/struct-time.txt timeout -k 2s 598s bash -lc 'cd /home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905 && export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/test/cbsc_direct_return_b03_65bf24865/struct-admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_cbsc_direct_return_b02.py --object CBSC-DIRECT-RETURN-B03 --arm STRUCT-CURRENTNESS-GRU --seed 21209 --output /home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/exp/cbsc_direct_return_b03_seed21209_65bf24865/STRUCT --raw-result /home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/exp/cbsc_direct_return_b03_seed21209_65bf24865/RAW/summary.json'",
+      "receipt": "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/test/cbsc_direct_return_b03_65bf24865/struct-admission.json",
+      "time": "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/test/cbsc_direct_return_b03_65bf24865/struct-time.txt",
+      "output_root": "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/exp/cbsc_direct_return_b03_seed21209_65bf24865/STRUCT",
+      "complete_bound_seconds": 600,
+      "projection_seconds": 90.78
+    }
+  ],
+  "order": "RAW then STRUCT after preceding primary path completes; no score gate; exactly2calls; no new simulation check.",
+  "projection": "Measured B02 fullcalls, sameworkshape/newseed uncertainty, not guaranteedupper or speedup.",
+  "timeout_scope": "Outer598+2seconds includes admission/startup/alltraining/evaluation/checkpoints/publication/readback and STRUCT pairing.",
+  "delivery": "agent-task run gets one fullyquoted shlex.join([bash,-lc,command]) argument.",
+  "stop": "Completepair or primarydependency/capfailure; no retry/extra seed/trainingextension."
+}

@@ -1,0 +1,73 @@
+{
+  "id": "20260904-crto-026",
+  "created": "2026-09-04T17:45:20-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CRTO B03：冻结配对 TRAIN 顺序卡",
+  "context": "Claim: Labelled interleaving of the original TRAIN pairs may improve RAW native action regret over the canonical order at exactly matched per-row exposure on the selected panel. Binding MARL structure: systems / information flow; fixed four-agent partial common history, measuring a training-order package.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "运行一次共享准备的两臂比较，完整报告三个固定终点。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "安全边界停止该顺序候选，保留先前结果。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "先记录并修改尚未执行的卡内容。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "原始配对身份明确，完整周期终点具有逐行暴露匹配。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_PAIRED_ORDER_B03_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b03-paired-order-start",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否采用原始训练对的交错顺序，在逐行暴露完全匹配的三个周期终点检查 RAW 动作改进？",
+    "changes_if_approved": [
+      {
+        "target": "CRTO 已开放 RAW 梯子",
+        "from": "B02 平均读出未胜任；配对顺序仅经源码确认可构造",
+        "to": "B03 一次共享准备、两条 RAW 轨迹，固定比较252、255、258更新，258为主终点"
+      }
+    ],
+    "if_refused": "在安全边界停止或修订此顺序候选；保留B02有效负结果与既有RAW/残差问题。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CYCLE_READOUT_B02_INTAKE_20260904.md",
+        "quote": "Interleaving the original 24 TRAIN pairs, taking 16 pairs per batch, would give 16 KEEP and 16 REPLAN examples per update and each row twice per three updates.",
+        "why": "无需增加训练信息，可保持每行累计训练次数一致，直接测量动作影响。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CYCLE_READOUT_B02_INTAKE_20260904.md",
+        "quote": "The strongest support for the bounded negative is direct failure at all three predeclared endings: averaging loses one exact REPLAN action relative to the already competent phase-0 endpoint and does not improve any endpoint's aggregate regret.",
+        "why": "普通完整周期终点已胜任，新的顺序未必有足够实际收益；单种子面板已暴露。"
+      }
+    ],
+    "uncertainty": [
+      "顺序同时改变双侧平衡、原始配对相邻和事件分组，阳性只属于整个顺序方案。",
+      "每行累计暴露只在完整三次更新终点相同；本卡仅测这些终点。"
+    ],
+    "cost": {
+      "compute": "两条 RAW 路径共用一次准备；每臂约259.73秒，共享预计302.80秒，整次600秒上限，机器时间只计一次。",
+      "owner_time": "约2分钟核对比较器与暴露边界",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；按常设委托执行，异步意见在安全边界应用"
+    },
+    "verdict_text": "推荐一个同种子、同初始化、逐行暴露匹配的配对顺序判别；先测这个具体顺序方案，不扩大模型或打开残差臂。",
+    "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_PAIRED_ORDER_B03_SCIENCE_CARD_20260904.md"
+  }
+}

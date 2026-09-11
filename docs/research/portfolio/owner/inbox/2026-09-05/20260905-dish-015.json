@@ -1,0 +1,42 @@
+{
+  "id": "20260905-dish-015",
+  "created": "2026-09-05T04:29:00-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "DISH 下一判别：只读四次意图的证书条件",
+  "context": "四次真实意图均未通过证书，已有轨迹保存所需的预测、协方差、服务概率、命令和状态边界。选择另写 A04 卡，固定这四处输入拆解原条件；尚未进行谓词计算，不改变阈值或再造轨迹。",
+  "options": [
+    {
+      "key": "a",
+      "label": "另卡复算四处实际证书条件",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "现在增加学习或做来源实验",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "改变高度、净空或证书阈值",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "重复旧配对轨迹",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "已有数据能够直接定位缺口，不需要制造更多暴露或覆盖原结果。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-ground-endpoint-a03-intake",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

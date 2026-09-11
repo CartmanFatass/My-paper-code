@@ -1,0 +1,55 @@
+{
+  "evidence_role": "DOCUMENTARY_DERIVATION_NOT_NEW_EXPERIMENT",
+  "written_at": "2026-09-06T15:50:00+00:00",
+  "derivation": "Counts and timings copied from the A02 formal/check summaries, rows and the result intake, and from the B02 card and intake; no project import, checkpoint load, experiment or new timing. Consultation exposure is zero.",
+  "sources": [
+    {"path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RENEWAL_BOUNDARY_A02_RESULT_INTAKE_20260906.md", "sha256_prefix": "1473c76f6f491210"},
+    {"path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_B01_B02_QUALIFIED_REINTERPRETATION_INTAKE_20260906.md", "sha256_prefix": "debc24836c66bab8"},
+    {"path": "docs/research/candidates/degraded_incumbent_shadow_handover/a02_renewal_boundary_20260906/formal/summary.json", "sha256_prefix": "33398ff46a07991c"},
+    {"path": "docs/research/candidates/degraded_incumbent_shadow_handover/a02_renewal_boundary_20260906/formal/rows.json", "sha256_prefix": "c0211c823201dc25"},
+    {"path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RENEWAL_BOUNDARY_A02_CORRECTION_CM_RECORD_20260906.md", "sha256_prefix": "38bdafe0299da991"},
+    {"path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FORECAST_PACKAGE_B02_SCIENCE_CARD_20260905.md", "sha256_prefix": "73f5227c7b33f2a1"},
+    {"path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FORECAST_PACKAGE_B02_INTAKE_20260905.md", "sha256_prefix": "f2c0d2200608592e"}
+  ],
+  "exposure_line": "DISH-RENEWAL-BOUNDARY-A02-CORRECTION: training transitions 0, optimizer steps 0, backward calls 0, new models 0, parameter norm 39.149200792042365 before and after each window; checkpoint loaded (FORECAST_PACKAGE seed 61 update 16, sha256 504329d6ee0c001f827be67bf101d3850d2787a3011a7fb43137d3d3f162dc66) for two policy constructions; 2 x 32 live ordinary native ticks = 64 plus a 4-tick check profile. Consultation: zero new models, native states, transitions, backwards, optimizer steps, tests or experiments.",
+  "measured": {
+    "formal_runner_wall_s": 0.092,
+    "check_runner_wall_s": 0.064,
+    "peak_rss_mb_formal": 363,
+    "peak_rss_mb_check": 361,
+    "node": "wsl_4070",
+    "launch_sha": "3f4d447f662db638dbdf0c75d49dfa8b230dc002",
+    "bound_s": 120,
+    "counts": {
+      "native_out_renew_equals_policy_renew": 64,
+      "native_out_true_policy_false": 0,
+      "policy_true_native_out_false": 0,
+      "matched_renewals": 12,
+      "matched_non_renewals": 52,
+      "admissions_held_equals_projected": 12,
+      "admissions_emitted_equals_held": 0,
+      "held_changed_ticks": 12,
+      "service_ticks": "60 of 64 (A01: 60 of 64)",
+      "energy_increment_sum": "9220.97 (A01: 8563.59)",
+      "early_terminal": 0,
+      "hard_events": 0,
+      "cas_applied": 0
+    }
+  },
+  "prospective_option_1_b03_corrected_path_pair": {
+    "design": "B02 design unchanged: A03 ground-terminal host, CONTROL vs FORECAST_PACKAGE, 16 updates per arm, 32 lanes x 128 ticks per update, 4 epochs x 8, update-16 checkpoint, four paired evaluation conditions (max 4,800 evaluation ticks per arm), MEI +24 mean service ticks; corrected ordinary boundary in both arms; fresh paired training seed",
+    "reference_cost": "B02 pair: 642.66 s external wall, 669.61 CPU-s for two arms (charged arm walls 340.645 s and 302.015 s under 1,800 s ceilings); the correction adds no computational work to collection or evaluation, so the same law N = 32*128*16 = 65,536 training transitions per arm applies; a corrected-path run is a new object whose wall is not established by projection",
+    "ceiling": "1,800 s per complete arm, 3,600 s summed, as the B02 card; not carried-over balance",
+    "unknown": "whether corrected-path collection changes the per-update wall marginally (proposal sampling now on admission ticks); no speed-up assumed"
+  },
+  "prospective_option_2_zero_training_witness": {
+    "design": "retained B02 update-16 checkpoints of both arms evaluated on the corrected path over the four conditions",
+    "reference_cost": "A02 formal 0.092 s for 64 ticks; 4,800 ticks per arm projects to seconds of runner wall plus native build; not requested as a prerequisite",
+    "training": "none"
+  },
+  "budget_state": {
+    "a02_bound_s": 120,
+    "a02_closed": true,
+    "b02_cumulative_wall_s": 642.66
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "question": "执行已归档的CONTINUE决定：仅保留现有来源选择家族，下一步先另立宿主规则并写小型原生轨迹卡。",
+  "changes_if_approved": [
+    {
+      "target": "DISH 当前家族节点",
+      "from": "等待Convergence归档，无家族决定",
+      "to": "PRO_FINAL CONTINUE已形成并执行；具体新宿主规则及实验卡另行前瞻选择，没有RECAST或Portfolio变更"
+    }
+  ],
+  "if_refused": "所有者可下达明确的新指令；在此之前按完整归档的CONTINUE范围推进，旧B01/A01/A02含义保持。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/external/2026-09-05-dish-a02-host-convergence-01/2026-09-05-dish-a02-host-convergence-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+      "quote": "Continue this family **through a prospectively distinct, bounded host qualification**.",
+      "why": "完整答复明确限定CONTINUE的最小对象家族，并给出可判别的上游宿主信息缺口。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/external/2026-09-05-dish-a02-host-convergence-01/2026-09-05-dish-a02-host-convergence-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+      "quote": "**No supported numerical height/clearance remedy has been selected or tested.**",
+      "why": "CONTINUE不等于选好修复，更不直接授权改变宿主、追加学习或来源效果实验。"
+    }
+  ],
+  "uncertainty": [
+    "新宿主的数值端点定义仍待固定，尚无修改后轨迹。",
+    "必须读取实际到达和完整原生因果路径；射线变清或合法交接不能代替服务。",
+    "无线噪声、下游协议限制及比较器能力仍未充分观测。",
+    "原始传输时间统一到同一分钟，实际持续时间未测量；提示附言精确性也未建立，均已保留记录。"
+  ],
+  "cost": {
+    "compute": "本次是归档和决定接收，没有新实验；Provider实际持续时间未测量，后继成本将在新卡单独声明。",
+    "owner_time": "约两分钟异步复核，不等待回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "**最终决定：CONTINUE，仅适用于现有 RETAIN/COPY/SHADOW 源选择探索家族。** B01 没有暴露任何源分支；A01 已排除“完全没有准备”和“提前终止填充”这两种解释；A02 的真实信号与继承定义中的近地端点遮挡一致。这不是实现错误，也不是 SHADOW 无效的证据。下一步应先明确一个语义上独立的新宿主端点规则，再用小规模 A/RECON 检查真实到达、共同 SOURCE、快照、合法动作和原生服务是否连通，不能只看射线变清或强制触发成功。新宿主规则、后续协议可达性、比较器能力及 SHADOW 增益都仍未验证。本决定不启动实验、不追加训练、不复活 R02，也不改变 Portfolio 优先级或生命周期。",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/external/2026-09-05-dish-a02-host-convergence-01/2026-09-05-dish-a02-host-convergence-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md"
+}

@@ -1,0 +1,9 @@
+1e72526547c0709e2fbc8feb3101a09f0d9896d3e09ba52ce6e0e4ede3f1f5d8  /home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_01/temp/directions/variable_n_fleet_churn/b01_formal_20260905_01/output/b01_native.so
+ca420bd4614ae7757b4cd4938b3c663e98d2b631bda518610071d9a4ca0b509e  /home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10
+[127532.343631] python[1703953]: segfault at 71a6981c ip 000057824a33f4e4 sp 00007ffca9f95750 error 6 in python3.10[57824a1e1000+984000] likely on CPU 18 (core 9, socket 0)
+[127532.346321] WSL (1704390 - CaptureCrash): Capturing crash for pid: 1702677, executable: !home!wu!.local!share!uv!python!cpython-3.10.21-linux-x86_64-gnu!bin!python3.10, signal: 11, port: 50005
+|/wsl-capture-crash %t %E %p %s
+1e72526547c0709e2fbc8feb3101a09f0d9896d3e09ba52ce6e0e4ede3f1f5d8  /home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440_02/temp/directions/variable_n_fleet_churn/b01_check_20260905_02/output/b01_native.so
+7af8dc11ef48a3c6a1cec68c2c4c7f9bc4349a7804b47c462114c0e547d72e25  /home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_01/temp/directions/variable_n_fleet_churn/b01_formal_20260905_01/output/MAPR_initial.pt
+d2f6bc60ac0c8f9b5e8d4b27e4cdfed505fc483120d408a96cde12e201aec89c  /home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_01/temp/directions/variable_n_fleet_churn/b01_formal_20260905_01/output/DIRECT_initial.pt
+c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0

@@ -9,7 +9,7 @@ from typing import Final, Iterable, Mapping, Protocol
 
 import numpy as np
 
-from .production_backend import NativeBatch, native_batch_from_rows
+from .production_backend import B01PreparedBatch, NativeBatch, native_batch_from_rows
 from .production_contract import ARMS, COMPONENT, MASK_VIEWS, TICKS_PER_EPISODE
 from .production_population import EvaluationCoordinate, address, complete_evaluation_coordinates
 from .production_recurrent_trainer import AddressedPolicySampler, BatchedRecurrentPolicy, RecurrentRolloutState
@@ -59,6 +59,18 @@ class EvaluationForkObserver(Protocol):
         observation: Mapping[str, np.ndarray], policy_state: RecurrentRolloutState,
     ) -> None: ...
     def complete(self) -> tuple[Mapping[str, object], ...]: ...
+
+
+def prepare_b01_application(
+    *, native: NativeBatch, policy: BatchedRecurrentPolicy,
+) -> tuple[B01PreparedBatch, Mapping[str, np.ndarray], np.ndarray]:
+    """Reach the normal-mode post-arrival/pre-GRU application boundary."""
+
+    prepared = native.prepare_b01_tick()
+    observation = prepared.observe()
+    policy.prepare_recurrent(observation)
+    hidden = policy.state.hidden.detach().cpu().numpy().copy()
+    return prepared, observation, hidden
 
 
 class MasterAddressedEvaluationBatchFactory:
@@ -232,5 +244,5 @@ def flow_local_evaluator_self_audit() -> dict[str, object]:
 __all__ = [
     "CheckpointLoadedFiveArmEvaluator", "EvaluationBatchFactory", "MasterAddressedEvaluationBatchFactory", "EvaluationFlowError",
     "EvaluationForkObserver", "EvaluationItem", "EvaluationTelemetry", "complete_evaluation_plan",
-    "flow_local_evaluator_self_audit",
+    "flow_local_evaluator_self_audit", "prepare_b01_application",
 ]

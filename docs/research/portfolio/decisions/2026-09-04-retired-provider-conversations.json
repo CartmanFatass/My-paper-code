@@ -1,0 +1,123 @@
+{
+  "cutover_at": "2026-09-05T00:56:02Z",
+  "provenance": "OWNER_DIRECT",
+  "owner_instructions": [
+    "弃用这个session 创建一个新的transport",
+    "然后不要再使用旧的conversation id 这些没有兼容到6 pro"
+  ],
+  "old_operator_thread_id": "01a06c45-e279-7813-822f-9ea90cb14a72",
+  "new_operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "policy": "Never navigate, prebind, append or Send to any pre-cutover provider conversation ID; listed IDs are observed inventory, not a permission to reuse unlisted old IDs. Preserve all old records. Create fresh verified 6 Pro contexts per stable decision binding, then reuse only post-cutover verified bindings.",
+  "retired_conversation_ids": [
+    "6a960bf7-68cc-83e8-ad37-8f86aa9536c3",
+    "6a960ccc-511c-83e8-a910-1bd951ef1d90",
+    "6a960d11-45e8-83e8-a321-f0ad0a128414",
+    "6a961753-0424-83e8-848c-dbe2cfe3369c",
+    "6a961889-c40c-83e8-bd1d-3f59113ecb9f",
+    "6a963684-685c-83e8-a894-439bb35203d6",
+    "6a9642a3-cdd0-83e8-9334-21262386768c",
+    "6a969af4-0b58-83e8-9115-16d851bfd938",
+    "6a96a6c0-e918-83e8-a0c0-9dc9222dce1c",
+    "6a96a6c4-f170-83e8-a876-2502d5272d73",
+    "6a96a6c9-1070-83e8-bd90-c528e9cdfda4",
+    "6a96a735-442c-83e8-98e3-76949dc1799d",
+    "6a96aaa7-f344-83e8-95d7-162b5bd61a74",
+    "6a9aa8d1-3338-83e8-aeae-18863837a4ea",
+    "6a9aaf1b-f200-83e8-af10-dc9d00d0b8c9",
+    "6a9ab0d1-ff9c-83e8-8e7c-6ac082ab11fd",
+    "6a9ab103-03a8-83e8-9f93-5ad067d05399",
+    "6a9b2be3-3b34-83e8-9864-59783c44768e"
+  ],
+  "bindings_at_cutover": [
+    {
+      "key": "em:finite_resource_relational_inductive_efficiency:convergence",
+      "conversation_id": "6a960bf7-68cc-83e8-ad37-8f86aa9536c3",
+      "previous_request_id": "frrie-em-convergence-20260831-02",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:semigroup_consistent_duration_model_policy:convergence",
+      "conversation_id": "6a961753-0424-83e8-848c-dbe2cfe3369c",
+      "previous_request_id": "2026-09-04-scdmp-d6-a02-population-convergence-04",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:commitment_residual_triggered_options:convergence",
+      "conversation_id": "6a960d11-45e8-83e8-a321-f0ad0a128414",
+      "previous_request_id": "crto-em-convergence-20260831-03",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:degraded_incumbent_shadow_handover:convergence",
+      "conversation_id": "6a961889-c40c-83e8-bd1d-3f59113ecb9f",
+      "previous_request_id": "dish-em-convergence-20260831-01",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:ucope:innovator",
+      "conversation_id": "6a963684-685c-83e8-a894-439bb35203d6",
+      "previous_request_id": "ucope-em-innovator-20260901-03",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:ucope:convergence",
+      "conversation_id": "6a9642a3-cdd0-83e8-9334-21262386768c",
+      "previous_request_id": "ucope-em-convergence-20260904-02",
+      "observed_state": "DIRECTION_VERIFIED"
+    },
+    {
+      "key": "portfolio:cross_direction",
+      "conversation_id": "6a9b2be3-3b34-83e8-9864-59783c44768e",
+      "previous_request_id": "owner-followup-edbf0ee1-b41e-4d55-86ab-b17285712824",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:capability_bound_semantic_currentness:innovator",
+      "conversation_id": "6a96a6c0-e918-83e8-a0c0-9dc9222dce1c",
+      "previous_request_id": "cbsc-online-b-innovator-20260901-03",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:finite_resource_relational_inductive_efficiency:innovator",
+      "conversation_id": "6a96a6c9-1070-83e8-bd90-c528e9cdfda4",
+      "previous_request_id": "frrie-em-innovator-b01-parameter-distance-clarification-20260901-03",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:semigroup_consistent_duration_model_policy:innovator",
+      "conversation_id": "6a96a735-442c-83e8-98e3-76949dc1799d",
+      "previous_request_id": "scdmp-em-innovator-b01-fresh-attempt-identity-20260901-04",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:variable_n_fleet_churn:innovator",
+      "conversation_id": "6a96aaa7-f344-83e8-95d7-162b5bd61a74",
+      "previous_request_id": "vnfc-b-explore-innovator-conformance-20260901-02",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:variable_n_fleet_churn:convergence",
+      "conversation_id": "6a9aa8d1-3338-83e8-aeae-18863837a4ea",
+      "previous_request_id": "2026-09-04-vnfc-controller-headroom-convergence-02",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:acvc:convergence",
+      "conversation_id": "6a9aaf1b-f200-83e8-af10-dc9d00d0b8c9",
+      "previous_request_id": "2026-09-04-acvc-headroom-engineering-dissent-convergence-02",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:eociv_lite:convergence",
+      "conversation_id": "6a9ab0d1-ff9c-83e8-8e7c-6ac082ab11fd",
+      "previous_request_id": "eociv-b9r1-convergence-20260904-01",
+      "observed_state": "ARCHIVED"
+    },
+    {
+      "key": "em:expressibility_gated_renewal_credit_relay:convergence",
+      "conversation_id": "6a9ab103-03a8-83e8-9f93-5ad067d05399",
+      "previous_request_id": "2026-09-04-egrcr-frcs-b01-convergence-01",
+      "observed_state": "ARCHIVED"
+    }
+  ]
+}

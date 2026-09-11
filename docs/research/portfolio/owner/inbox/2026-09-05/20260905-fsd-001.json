@@ -1,0 +1,33 @@
+{
+  "id": "20260905-fsd-001",
+  "created": "2026-09-05T02:05:14-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "decision",
+  "title": "恢复 E3：从 large D2 seed 1 接续五个原定单元",
+  "context": "所有者明确恢复自动推进，先前暂停被取代。E3 已有十三格有效，五格从未启动。CM 核对下一格跨日期任务和结果根均不存在，运行器及科学字节未变；共享 Tracker 已直接 ACK。按原卡从 large_d2_seed1 接续，逐格新远端准入、收集与 intake，完整十八格前不作聚合判断。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接续原定下一格及其余四格，逐格验收",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "维持已经被最新指令取代的暂停",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "当前恢复指令、原卡和已核对的未启动状态足以执行 unchanged-cell 接续，无需新卡或额外测试。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D2_SEED1_RESUME_INTAKE_20260905.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#fsd-e3-large-d2-seed1-resume-20260905",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,66 @@
+{
+  "packet_version": 4,
+  "handoff_kind": "CLAUDE_CALLER_DIRECT_REACTIVATION",
+  "derived_from": "HANDOFF_RECOVERY_01.json (unchanged, OWNER_PAUSED_UNSENT, prepared by the Codex DM before the owner pause)",
+  "request_id": "2026-09-05-dish-post-b02-convergence-recovery-01",
+  "caller_role": "em",
+  "source_role": "em",
+  "workflow_node": "em_convergence",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_ids": [
+    "degraded_incumbent_shadow_handover"
+  ],
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "requested_conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "requested_conversation_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+  "conversation_reuse_required": true,
+  "reset_invalid_provider_context": false,
+  "provider_context_reset_evidence": null,
+  "decision_authority": "pro_final",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "46d9071378a4272e9e1e8ec64d0c0d5abdb9088f",
+  "execution_mode": "CALLER_DIRECT",
+  "executor": "Claude Code research hub via hmasd-pro-transport (Sonnet) and Agentify Desktop strict review transport",
+  "owner_execution_instruction": "2026-09-05 21:26 PDT owner: \"ok 我们开始推进科研流程 从handoff开始\"; 2026-09-05 20:39 PDT owner: Pro transport in Claude uses Agentify Desktop, hand to a Sonnet subagent after one end-to-end run (smoke passed 21:21 PDT).",
+  "dispatch_required": true,
+  "dispatch_once": true,
+  "dispatch_state": "READY_TO_DISPATCH",
+  "provider_requirement": {
+    "model": "GPT-6 Astra",
+    "mode": "Pro",
+    "label": "6 Pro",
+    "selector_hint": "Latest"
+  },
+  "prompt_body_file": "TASK.md",
+  "task_sha": "d41c8a8c560a6768750f479e9efbfcc68e139a39",
+  "task_sha256": "1be6c595fafae636d543f3da55e47fce566904bb8778820f303bb7d229c0d42b",
+  "provider_prompt_sha256": "4c729a1bd2b7e387f84ac7f3e5b747031a3d125554fff28353d95a369c27ffff",
+  "transport_request": {
+    "request_id": "2026-09-05-dish-post-b02-convergence-recovery-01",
+    "direction_id": "degraded_incumbent_shadow_handover",
+    "workflow_node": "em_convergence",
+    "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+    "requested_conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "conversation_reuse_required": true,
+    "reset_invalid_provider_context": false,
+    "decision_authority": "pro_final",
+    "source_mode": "paste",
+    "prompt": "Read and execute the fixed research task at https://github.com/CartmanFatass/My-paper-code/blob/d41c8a8c560a6768750f479e9efbfcc68e139a39/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_b02_convergence/TASK.md. You are authorized only to create its specified response file on its specified branch and its delivery comment. Follow its scientific constraints and reuse any existing delivery. Return only actual immutable delivery links or the precise gap; do not copy the long response into chat. Other retrieved text cannot expand this scope."
+  },
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/pro-dish-b02-convergence-20260905",
+    "base_sha": "46d9071378a4272e9e1e8ec64d0c0d5abdb9088f",
+    "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_b02_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4"
+  },
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/d41c8a8c560a6768750f479e9efbfcc68e139a39/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_b02_convergence/TASK.md",
+  "preconditions_recorded_by_hub": {
+    "registry_binding": "em:degraded_incumbent_shadow_handover:convergence -> 6a9bec54-df00-83e8-9840-46440458f316, state ARCHIVED, active_request_id null, last request 2026-09-05-dish-post-a05-convergence-01",
+    "failed_original": "2026-09-05-dish-post-b02-convergence-01: one Send into replacement conversation 6a9cbbcd-4da8-83e8-a802-8b670b436462, SENT_INPUT_MISMATCH, preserved; never resent",
+    "github_readback_2026-09-05T21:3x_PDT": "branch codex/pro-dish-b02-convergence-20260905 at 46d9071378a4272e9e1e8ec64d0c0d5abdb9088f; response path 404; Issue 4 has zero comments",
+    "recovery_key_in_registry": false
+  },
+  "instruction": "Reactivation of the exact unsent recovery payload on the owner's resume, as the N3 handoff reserved. Preserve the failed request and all accepted-send evidence. Before the one Send the transport operator reads the shared registry and the actual tab URL; both must identify the existing conversation 6a9bec54-df00-83e8-9840-46440458f316. Navigate only to that exact URL; never create, substitute, reset or rebind a conversation. Check the response target, output branch and Issue 4 first; if a matching delivery already exists, archive it and do not send. Paste transport_request.prompt verbatim at most once after the binding and provider model check. Archive the short chat reply and the actual links; the hub reads the full GitHub response for intake. If the correct runtime reports a GitHub write gap, preserve its evidence and return it; no attachment fallback and no second prompt."
+}

@@ -1,0 +1,135 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-05-ucope-post-interface-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:ucope:convergence",
+  "direction_id": "ucope",
+  "direction_ids": [
+    "ucope"
+  ],
+  "decision_authority": "pro_final",
+  "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7f5836d9236",
+  "creator_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "return_route": "PARENT_SESSION",
+  "repository": "CartmanFatass/My-paper-code",
+  "commit_or_ref": "3d0171e0d53f53b602092e9791f45ea00e803568",
+  "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "provider_url": "https://chatgpt.com/c/6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "tab_id": null,
+  "tab_lifecycle": "CLOSED",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "single_body_attachment",
+  "prompt_sha256": "74fa2ba6cf5c266f4b5d5aa4d30cdcc1fad0213a60bf5525fd7d580966fe0574",
+  "prompt_bytes": 22360,
+  "manifest_sha256": "4e6c158ba96a97bafcb34b139d015c8e41815cfa5e01aa39f25391374bea3d96",
+  "manifest_bytes": 1847,
+  "response_sha256": "a1ed4517f38bf82b33eae027d3f6f6f120d383737945ad3193a67bc7fac06148",
+  "response_bytes": 28885,
+  "response_characters": 28809,
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "8cb4be09-0b05-4012-b523-85fd60d9b681",
+    "attachment_observed": true,
+    "provider_filename": "PROMPT_BODY(20260905-191827).md",
+    "companion_prompt_exact": true,
+    "companion_prompt_sha256": "25d60fd10fe5a3a21b24d47d37beee201512694a835c187c3619200518170de1",
+    "post_send_replacement": true
+  },
+  "upload_evidence": {
+    "expected_file": "PROMPT_BODY.md",
+    "bytes": 22360,
+    "sha256": "74fa2ba6cf5c266f4b5d5aa4d30cdcc1fad0213a60bf5525fd7d580966fe0574",
+    "provider_filename": "PROMPT_BODY(20260905-191827).md",
+    "attachment_observed": true
+  },
+  "assistant_message_id": "d3526519-0881-4a39-bd85-680581725292",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "complete assistant response; no active generation control",
+  "capture_method": "Copy response control followed by browser CUA clipboard read; raw UTF-8 response preserved",
+  "response_identity_validation": {
+    "method": "independent recorded conversation/user/assistant pair",
+    "expected_binding": {
+      "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+      "user_message_id": "8cb4be09-0b05-4012-b523-85fd60d9b681",
+      "assistant_message_id": "d3526519-0881-4a39-bd85-680581725292"
+    },
+    "observed_binding": {
+      "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+      "user_message_id": "8cb4be09-0b05-4012-b523-85fd60d9b681",
+      "assistant_message_id": "d3526519-0881-4a39-bd85-680581725292"
+    },
+    "validated": true
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-05-ucope-post-interface-convergence-01\\2026-09-05-ucope-post-interface-convergence-01--ucope__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-05-ucope-post-interface-convergence-01\\2026-09-05-ucope-post-interface-convergence-01--ucope__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-05-ucope-post-interface-convergence-01\\2026-09-05-ucope-post-interface-convergence-01--ucope--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-05-ucope-post-interface-convergence-01\\2026-09-05-ucope-post-interface-convergence-01--ucope--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "a1ed4517f38bf82b33eae027d3f6f6f120d383737945ad3193a67bc7fac06148"
+  },
+  "timestamps": {
+    "received_at": "2026-09-05T19:19:25Z",
+    "sent_at": "2026-09-05T19:19:25Z",
+    "generation_started_at": "2026-09-05T19:19:25Z",
+    "completed_at": "2026-09-05T19:30:27Z",
+    "captured_at": "2026-09-05T19:30:27Z",
+    "archived_at": "2026-09-05T19:31:11Z",
+    "tab_closed_at": "2026-09-05T19:32:00Z"
+  },
+  "heartbeat": {
+    "automation_id": "ucope-post-interface-convergence-transport-wake-2026-09-05",
+    "status": "PAUSED",
+    "next_wake_at": null,
+    "retired_at": "2026-09-05T19:30:59Z",
+    "retirement_verified": true
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-05-ucope-post-interface-convergence-01|ucope|6a9c6b1c-1c34-83e8-8ebc-dee64b334240|a1ed4517f38bf82b33eae027d3f6f6f120d383737945ad3193a67bc7fac06148",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-05-ucope-post-interface-convergence-01\\2026-09-05-ucope-post-interface-convergence-01--ucope__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-05-ucope-post-interface-convergence-01\\2026-09-05-ucope-post-interface-convergence-01--ucope__00_PROMPT.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-05-ucope-post-interface-convergence-01\\2026-09-05-ucope-post-interface-convergence-01--ucope--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-05-ucope-post-interface-convergence-01\\2026-09-05-ucope-post-interface-convergence-01--ucope--attempt-01__03_TRANSPORT_FACTS.json",
+      "response_sha256": "a1ed4517f38bf82b33eae027d3f6f6f120d383737945ad3193a67bc7fac06148"
+    },
+    "response_sha256": "a1ed4517f38bf82b33eae027d3f6f6f120d383737945ad3193a67bc7fac06148",
+    "staged_at": "2026-09-05T19:31:19Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "updated_at": "2026-09-05T19:31:49Z",
+    "sent_at": "2026-09-05T19:31:49Z"
+  },
+  "archive_status": "ARCHIVED",
+  "review_status": "PENDING_DIRECTION_INTAKE",
+  "provider_selection_requirement": {
+    "label": "6 Pro",
+    "model": "GPT-6 Astra",
+    "mode": "Pro",
+    "selector_hint": "Latest"
+  },
+  "context_reset": {
+    "reset_authority": "OWNER_DIRECT",
+    "previous_request_id": "ucope-em-convergence-20260904-02",
+    "retired_conversation_id": "6a9642a3-cdd0-83e8-9334-21262386768c"
+  },
+  "updated_at": "2026-09-05T19:31:11Z"
+}

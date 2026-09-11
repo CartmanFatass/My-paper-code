@@ -1,0 +1,261 @@
+{
+  "unit": "one independent paired training instance, seed 401",
+  "evaluation_uncertainty": "conditional on the two trained models; no training-population interval",
+  "periods": {
+    "2": {
+      "n_paired_evaluation_episodes": 128,
+      "FACTOR": 0.7266438802083334,
+      "GENERIC": 0.7266438802083334,
+      "delta": 0.0,
+      "conditional_se": 0.0,
+      "sample_variance_paired_differences": 0.0,
+      "episode_difference_counts": {
+        "positive": 0,
+        "zero": 128,
+        "negative": 0
+      },
+      "consequence_means": {
+        "FACTOR": {
+          "overflow": 0,
+          "final_backlog": 1.3359375,
+          "unused_service": 26.2421875
+        },
+        "GENERIC": {
+          "overflow": 0,
+          "final_backlog": 1.3359375,
+          "unused_service": 26.2421875
+        }
+      },
+      "outcome_informed_supply_upper": 0.7405598958333334,
+      "supply_upper_minus_GENERIC": 0.013916015625,
+      "supply_upper_minus_FACTOR": 0.013916015625
+    },
+    "6": {
+      "n_paired_evaluation_episodes": 128,
+      "FACTOR": 0.72314453125,
+      "GENERIC": 0.7237955729166666,
+      "delta": -0.0006510416666666661,
+      "conditional_se": 0.0002237445952550358,
+      "sample_variance_paired_differences": 6.4078904199474955e-06,
+      "episode_difference_counts": {
+        "positive": 0,
+        "zero": 120,
+        "negative": 8
+      },
+      "consequence_means": {
+        "FACTOR": {
+          "overflow": 0,
+          "final_backlog": 1.4140625,
+          "unused_service": 26.578125
+        },
+        "GENERIC": {
+          "overflow": 0,
+          "final_backlog": 1.3515625,
+          "unused_service": 26.515625
+        }
+      },
+      "outcome_informed_supply_upper": 0.7378743489583334,
+      "supply_upper_minus_GENERIC": 0.01407877604166674,
+      "supply_upper_minus_FACTOR": 0.01472981770833337
+    }
+  },
+  "curve": [
+    {
+      "update": 0,
+      "FACTOR": 0.7252197265625,
+      "GENERIC": 0.7252197265625,
+      "delta": 0.0,
+      "periods": {
+        "2": {
+          "FACTOR": 0.7266438802083333,
+          "GENERIC": 0.7266438802083333,
+          "delta": 0.0
+        },
+        "6": {
+          "FACTOR": 0.7237955729166666,
+          "GENERIC": 0.7237955729166666,
+          "delta": 0.0
+        }
+      }
+    },
+    {
+      "update": 32,
+      "FACTOR": 0.7220865885416667,
+      "GENERIC": 0.7252197265625,
+      "delta": -0.0031331380208332593,
+      "periods": {
+        "2": {
+          "FACTOR": 0.7203776041666667,
+          "GENERIC": 0.7266438802083333,
+          "delta": -0.006266276041666519
+        },
+        "6": {
+          "FACTOR": 0.7237955729166666,
+          "GENERIC": 0.7237955729166666,
+          "delta": 0.0
+        }
+      }
+    },
+    {
+      "update": 64,
+      "FACTOR": 0.724365234375,
+      "GENERIC": 0.7252197265625,
+      "delta": -0.0008544921875,
+      "periods": {
+        "2": {
+          "FACTOR": 0.7251790364583333,
+          "GENERIC": 0.7266438802083333,
+          "delta": -0.00146484375
+        },
+        "6": {
+          "FACTOR": 0.7235514322916666,
+          "GENERIC": 0.7237955729166666,
+          "delta": -0.000244140625
+        }
+      }
+    },
+    {
+      "update": 96,
+      "FACTOR": 0.7246907552083333,
+      "GENERIC": 0.7242024739583333,
+      "delta": 0.00048828125,
+      "periods": {
+        "2": {
+          "FACTOR": 0.7255859375,
+          "GENERIC": 0.7246093749999999,
+          "delta": 0.000976562500000111
+        },
+        "6": {
+          "FACTOR": 0.7237955729166666,
+          "GENERIC": 0.7237955729166666,
+          "delta": 0.0
+        }
+      }
+    },
+    {
+      "update": 128,
+      "FACTOR": 0.7157796223958333,
+      "GENERIC": 0.7242024739583333,
+      "delta": -0.0084228515625,
+      "periods": {
+        "2": {
+          "FACTOR": 0.7086588541666666,
+          "GENERIC": 0.7246093749999999,
+          "delta": -0.01595052083333326
+        },
+        "6": {
+          "FACTOR": 0.722900390625,
+          "GENERIC": 0.7237955729166666,
+          "delta": -0.0008951822916666297
+        }
+      }
+    },
+    {
+      "update": 160,
+      "FACTOR": 0.7244466145833333,
+      "GENERIC": 0.7194010416666666,
+      "delta": 0.00504557291666663,
+      "periods": {
+        "2": {
+          "FACTOR": 0.725341796875,
+          "GENERIC": 0.715087890625,
+          "delta": 0.01025390625
+        },
+        "6": {
+          "FACTOR": 0.7235514322916666,
+          "GENERIC": 0.7237141927083333,
+          "delta": -0.00016276041666662966
+        }
+      }
+    },
+    {
+      "update": 192,
+      "FACTOR": 0.7231038411458333,
+      "GENERIC": 0.7195231119791666,
+      "delta": 0.0035807291666666297,
+      "periods": {
+        "2": {
+          "FACTOR": 0.7232259114583334,
+          "GENERIC": 0.7154134114583333,
+          "delta": 0.007812500000000111
+        },
+        "6": {
+          "FACTOR": 0.7229817708333333,
+          "GENERIC": 0.7236328125,
+          "delta": -0.0006510416666667407
+        }
+      }
+    },
+    {
+      "update": 224,
+      "FACTOR": 0.7246907552083333,
+      "GENERIC": 0.7191975911458333,
+      "delta": 0.0054931640625,
+      "periods": {
+        "2": {
+          "FACTOR": 0.7264811197916666,
+          "GENERIC": 0.7147623697916666,
+          "delta": 0.01171875
+        },
+        "6": {
+          "FACTOR": 0.722900390625,
+          "GENERIC": 0.7236328125,
+          "delta": -0.000732421875
+        }
+      }
+    },
+    {
+      "update": 256,
+      "FACTOR": 0.7248942057291665,
+      "GENERIC": 0.7252197265625,
+      "delta": -0.00032552083333348136,
+      "periods": {
+        "2": {
+          "FACTOR": 0.7266438802083333,
+          "GENERIC": 0.7266438802083333,
+          "delta": 0.0
+        },
+        "6": {
+          "FACTOR": 0.7231445312499999,
+          "GENERIC": 0.7237955729166666,
+          "delta": -0.0006510416666667407
+        }
+      }
+    }
+  ],
+  "auc": {
+    "FACTOR": {
+      "mean": 0.7230275472005206,
+      "periods": {
+        "2": 0.722686767578125,
+        "6": 0.7233683268229166
+      }
+    },
+    "GENERIC": {
+      "mean": 0.722773234049479,
+      "periods": {
+        "2": 0.7218017578125,
+        "6": 0.7237447102864584
+      }
+    }
+  },
+  "delta": -0.00032552083333333304,
+  "conditional_se_delta": 0.00011187229762751792,
+  "auc_delta": 0.00025431315104162966,
+  "initial_to_endpoint": {
+    "FACTOR": -0.00032552083333348136,
+    "GENERIC": 0.0
+  },
+  "outcome_informed_A_RECON": {
+    "question": "Does the recorded available-work upper leave MEI-sized improvement over this observed baseline on these tapes?",
+    "method": "From conservation: available jobs = served + overflow + final backlog. Any policy on the same arrival tape serves at most min(96, available jobs). This loose upper includes unservable final-tick arrivals.",
+    "new_exposure": 0,
+    "mean_supply_upper": 0.7392171223958334,
+    "mean_gap_above_GENERIC": 0.01399739583333337,
+    "limit": "Recorded evaluation tapes only; untuned baseline, no attainable optimum or population headroom claim."
+  },
+  "source_summaries_sha256": {
+    "FACTOR": "0e7014506bfe2d19c4f9b7c8ce66eb29a1974ccbed9441a488a2170de6e5d04f",
+    "GENERIC": "b5866d68ef0b0ae2f3e57548d6522b1f809d2a3499b803f13b330e16ee1e6a93"
+  }
+}

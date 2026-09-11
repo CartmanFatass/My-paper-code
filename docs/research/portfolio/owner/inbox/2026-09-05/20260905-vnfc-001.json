@@ -1,0 +1,87 @@
+{
+  "id": "20260905-vnfc-001",
+  "created": "2026-09-05T12:56:28-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "VNFC：推进一次等价批处理评估的Pro方案",
+  "context": "完整方向Pro同意继续一项结果盲工程评估，原2700秒完整运行上限与全部科学量保持；正确Portfolio节点已收到源码规范与具体执行提案，尚无新实测或census。",
+  "options": [
+    {
+      "key": "continue",
+      "label": "落实唯一有界评估方案",
+      "consequence": "向正确Portfolio节点形成完整资源与规范附款，按已有委托执行；不提前启动。"
+    },
+    {
+      "key": "park",
+      "label": "保留具体工程缺口",
+      "consequence": "若后续方案或评估不能成立，带明确缺口返回原Convergence；不作科学负面推断。"
+    }
+  ],
+  "recommended": "continue",
+  "auto_applied": "continue",
+  "dm_reason": "完整方向Pro已选定有新判别价值的执行设计，后续正确节点无需另一次所有者批准。",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_R03_COST_CONVERGENCE_INTAKE_20260905.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": {
+    "question": "如何落实已形成的VNFC等价批处理评估方向裁决，并保留完整科学要求与原45分钟运行上限？",
+    "changes_if_approved": [
+      {
+        "target": "VNFC当前工程下一步",
+        "from": "串行完整投影超限，原校准已完成",
+        "to": "仅向正确Portfolio Pro节点提交一项固定、结果盲、等价执行评估方案；完整方案后按已有委托实施，不重复逐项请批"
+      }
+    ],
+    "if_refused": "若所有者实际覆盖此决定，按具体指令处理；当前未发生覆盖，保留原成本及全部科学证据，不启动完整census或重跑校准。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_R03_COST_CONVERGENCE_INTAKE_20260905.md",
+        "quote": "PRO_FINAL: CONTINUE only with `VNFC-R03-EXACT-BATCH-FEASIBILITY-E01`",
+        "why": "完整方向节点已明确选定一个小范围工程投资，不能因旧审批排除而不送后续正确节点。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_R03_COST_CONVERGENCE_INTAKE_20260905.md",
+        "quote": "about 97.3 percent",
+        "why": "完整比较器占据绝大部分成本且总投影远超上限；并行/分解尚未实现或实测，不保证能进入完整运行。"
+      }
+    ],
+    "uncertainty": [
+      "原单线程限制和一次新增评估额度须由正确Portfolio节点明确处理。",
+      "新固定batch配置的线程安全、完整等价性、全部成本与资源仍未验证。"
+    ],
+    "cost": {
+      "compute": "当前仅归档/查证/提案；一次60秒评估仍为待Pro决定的明确提案，原完整运行2700秒不扩大。",
+      "owner_time": "无需重复逐项批准；高亮记录供异步覆盖。",
+      "reversibility": "reversible",
+      "waits_on_this": "已有Portfolio Pro审阅正在进行，不等待新的owner投票。"
+    },
+    "verdict_text": "唯一继续投入是一项结果盲的等价批处理可行性评估。",
+    "source": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260905_r03_cost_convergence/archive/2026-09-05-vnfc-r03-cost-convergence-01--variable_n_fleet_churn--attempt-01__02_RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-05T19:56:50+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260905_r03_cost_convergence/archive/2026-09-05-vnfc-r03-cost-convergence-01--variable_n_fleet_churn--attempt-01__02_RESPONSE.md",
+      "record": "docs/research/candidates/variable_n_fleet_churn/VNFC_R03_COST_CONVERGENCE_INTAKE_20260905.md",
+      "state": "applied",
+      "summary": "原方向裁决已intake：仅继续一个结果盲等价batch评估方案。31证据Portfolio规范审阅已单次派发，原2700秒不扩大；尚未实施/测得新加速，无census或旧校准重跑。"
+    },
+    {
+      "at": "2026-09-05T20:41:59+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/pro_review_01/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-marl-runtime-engineering-spec.md",
+      "state": "applied",
+      "summary": "正确Portfolio完整方案已应用，仅E01四计算参与者、batch8、60秒wall/300 CPU秒；原2700秒完整运行cap及科学量保留，完整运行未获新CPU额度。现在进入CM实现与完整依赖/fixture核对，尚未运行。"
+    }
+  ]
+}

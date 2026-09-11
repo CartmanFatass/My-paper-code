@@ -1,0 +1,38 @@
+{
+  "id": "20260905-dish-002",
+  "created": "2026-09-05T02:39:26-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接收原前缀诊断：缺少快照支持，不能读成来源无用",
+  "context": "保留检查点重现十六行、共19200个原始前缀步，全部有准备提议和准备状态，但没有共同源、快照或交接意图。诊断完整；这只定位未曝光阶段，原B01仍为触发支持不足。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接收完整诊断并保留单检查点与未曝光限制",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "将下游零计数读成来源价值为负",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "因未发生交接而丢弃诊断",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整数据满足事先固定的诊断规则，阶段缺失正是该诊断要测量的量。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_INTAKE_20260905.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-prefix-a01-intake",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

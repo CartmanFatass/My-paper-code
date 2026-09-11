@@ -1,0 +1,88 @@
+{
+  "read_at_utc": "2026-09-06T01:24:01.220815+00:00",
+  "registry_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\registry.json",
+  "registry_sha256": "120f674319f73ab07c9d66d6c99c5e5c009f1198ff20ed7a973e647bebc86c4d",
+  "registry_root_keys": [
+    "version",
+    "directions",
+    "heartbeat",
+    "latest_attempts",
+    "bindings",
+    "quarantined_conversations",
+    "blocked_requests",
+    "updated_at"
+  ],
+  "binding_keys_read": [
+    "em:finite_resource_relational_inductive_efficiency:convergence",
+    "em:semigroup_consistent_duration_model_policy:convergence",
+    "em:commitment_residual_triggered_options:convergence",
+    "em:degraded_incumbent_shadow_handover:convergence",
+    "em:ucope:innovator",
+    "em:ucope:convergence",
+    "portfolio:cross_direction",
+    "em:capability_bound_semantic_currentness:innovator",
+    "em:finite_resource_relational_inductive_efficiency:innovator",
+    "em:semigroup_consistent_duration_model_policy:innovator",
+    "em:variable_n_fleet_churn:innovator",
+    "em:variable_n_fleet_churn:convergence",
+    "em:acvc:convergence",
+    "em:eociv_lite:convergence",
+    "em:expressibility_gated_renewal_credit_relay:convergence",
+    "em:metric_ground_transport_allocation:convergence",
+    "em:flexible_skill_duration:convergence",
+    "em:vsp_c1:innovator",
+    "em:vsp_03:innovator",
+    "em:capability_bound_semantic_currentness:convergence",
+    "em:vsp_03:convergence"
+  ],
+  "intended_binding": {
+    "conversation_binding_key": "em:variable_n_fleet_churn:convergence",
+    "conversation_id": "6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+    "provider_url": "https://chatgpt.com/c/6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+    "state": "ARCHIVED",
+    "request_id": "2026-09-05-vnfc-validation-method-convergence-01",
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "thinking_effort": "Pro, 5 of 5.",
+    "timestamps": {
+      "received_at": "2026-09-05T19:03:20Z",
+      "sent_at": "2026-09-05T19:03:20Z",
+      "generation_started_at": "2026-09-05T19:03:20Z",
+      "completed_at": "2026-09-05T22:21:40Z",
+      "captured_at": "2026-09-05T22:21:40Z",
+      "archived_at": "2026-09-05T22:21:40Z",
+      "tab_closed_at": "2026-09-05T22:22:55Z"
+    },
+    "archive": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\variable_n_fleet_churn\\2026-09-05-vnfc-validation-method-convergence-01\\2026-09-05-vnfc-validation-method-convergence-01--variable_n_fleet_churn__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\variable_n_fleet_churn\\2026-09-05-vnfc-validation-method-convergence-01\\2026-09-05-vnfc-validation-method-convergence-01--variable_n_fleet_churn__00_PROMPT.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\variable_n_fleet_churn\\2026-09-05-vnfc-validation-method-convergence-01\\2026-09-05-vnfc-validation-method-convergence-01--variable_n_fleet_churn--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\variable_n_fleet_churn\\2026-09-05-vnfc-validation-method-convergence-01\\2026-09-05-vnfc-validation-method-convergence-01--variable_n_fleet_churn--attempt-01__03_TRANSPORT_FACTS.json",
+      "response_sha256": "d4bdaceeaa8c46faa348180f476a0f310ca6d1c834ee8215820926e1c2097008",
+      "archived_at": "2026-09-05T22:21:40Z"
+    },
+    "send_evidence": {
+      "send_click_count": 1,
+      "pre_send_url": "https://chatgpt.com/c/6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+      "pre_send_user_node_exact": false,
+      "send_control_enabled": true,
+      "attachment_observed": true,
+      "post_send_url": "https://chatgpt.com/c/6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+      "url_observed": true,
+      "user_node_observed": true,
+      "user_node_exact": true,
+      "user_message_id": "8e3a3b72-e6a0-4c41-a2cb-60606de1dcc0"
+    },
+    "monitor": {
+      "identity_key": "2026-09-05-vnfc-validation-method-convergence-01|em:variable_n_fleet_churn:convergence|6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08|https://chatgpt.com/c/6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+      "provider_url": "https://chatgpt.com/c/6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+      "last_observed_url": "https://chatgpt.com/c/6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+      "last_observed_state": "NATURAL_COMPLETION",
+      "last_observed_at": "2026-09-05T22:21:40Z",
+      "cursor": null
+    }
+  },
+  "retired_or_quarantined": false,
+  "interpretation": "Current registry.bindings entry and its accepted send/monitor URL agree. Historical page_ready_evidence has a retired URL and is not the current target. Transport must read the complete bindings map and verify the actual loaded intended URL before Send; this author read is not a fresh browser observation. No reset/replacement/new tools test selected."
+}

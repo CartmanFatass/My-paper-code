@@ -1,0 +1,32 @@
+{
+  "id": "20260904-vnfc-019",
+  "created": "2026-09-04T18:54:30-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "brief",
+  "title": "R03 成本校准：完整计算超预算，本轮暂停",
+  "context": "这是一份有效工程校准简报，不是恢复收益结果。原生评分和独立复核的保守成本已超上限，未启动完整枚举；所有者已要求本轮结束后暂停。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "成本观测与科学机制证据分开解读，保留所有原问题和反证。",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CAUSAL_ONE_DEVIATION_R03_CALIBRATION_INTAKE_AND_PAUSE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#vnfc-r03-calibration-brief-20260904",
+  "brief": "docs/research/portfolio/owner/briefs/variable_n_fleet_churn/2026-09-04_r03_calibration.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

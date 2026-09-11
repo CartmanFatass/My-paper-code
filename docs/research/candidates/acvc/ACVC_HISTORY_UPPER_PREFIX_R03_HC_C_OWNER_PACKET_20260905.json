@@ -1,0 +1,43 @@
+{
+  "question": "是否认可这条已经执行的 PRO_FINAL 方向处置记录：仅结束固定宿主的学习器投资并停在方向边界？",
+  "changes_if_approved": [
+    {
+      "target": "HC-C 方向执行的批改记录",
+      "from": "处置已经执行，独立方向账本行仅链接 intake",
+      "to": "补齐专门方向 decision、完整归档原文和选项后果；科学处置不发生第二次变化"
+    }
+  ],
+  "if_refused": "在下一个干净边界核对你指出的具体证据或表述问题并补充说明，保留已归档结果；本记录不授权新实验、新宿主或新 Pro，也不会自行改变 Portfolio 生命周期。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/external/2026-09-04-acvc-headroom-engineering-dissent-convergence-02/RESPONSE.md",
+      "quote": "no legal history policy satisfying the frozen consequence envelope can clear the material threshold. Close the uncertain/delayed R01 host family as a learner-investment target and park ACVC at the direction-local boundary.",
+      "why": "完整归档 Pro 已预先规定该分支的有限宿主处置；下方 verdict_text 保留完整 HC-C 小节，包括条件、优先规则、处置和重入条件。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_INTAKE_20260905.md",
+      "quote": "The exact new upper gap is `101807318141829913/475875000000000000 =0.21393710142753856... <1/4`.",
+      "why": "有效 R03 实际证书满足原先严格小于四分之一的条件，DM 已独立核对并接受。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_RESULT_EVIDENCE_20260905.md",
+      "quote": "The positive legal R02 action witness remains evidence of smaller history value.",
+      "why": "结论不能扩大为历史普遍无用；已证明的小幅合法历史价值继续成立。"
+    }
+  ],
+  "uncertainty": [
+    "有限范围仅为未变十二次决策宿主、原比较器及风险限制，不涉及其他宿主或学习器失败原因。",
+    "ACTIVE、原优先级和 recasts: 2 保持不变；方向内停在此边界不等于 Portfolio PARK。",
+    "以后若考虑新宿主，必须独立给出合法信息、动作改变和超过原门槛的收益理由，并取得相应方向权限；本次没有这种后继。"
+  ],
+  "cost": {
+    "compute": "0；本次仅补记录，不运行实验、成本测量或新 Pro。",
+    "owner_time": "无需现在回复，可异步阅览完整证据。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；PRO_FINAL 处置已经执行，本次没有等待批准的后继操作。"
+  },
+  "verdict_text": "### 2. `HC-C / MATERIAL_COMPATIBLE_HEADROOM_CERTIFIED_IMPOSSIBLE`\n\nCondition:\n\n$$\n\\Delta_U<\\tfrac14.\n$$\n\nThis branch takes precedence over an incompatible lower-policy gain.\n\n**Mapping:** no legal history policy satisfying the frozen consequence envelope can clear the material threshold. Close the uncertain/delayed R01 host family as a learner-investment target and park ACVC at the direction-local boundary. Retain exact binding only as a primitive/control.\n\n**Re-entry condition:** a new, independently motivated host must prospectively specify a competent same-information history policy expected to change a legal action and clear `1/4` native-return headroom over its strongest competent fixed null. The current thresholds or envelope may not be tuned to this result.\n\n",
+  "source": "docs/research/candidates/acvc/external/2026-09-04-acvc-headroom-engineering-dissent-convergence-02/RESPONSE.md"
+}

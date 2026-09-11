@@ -1,0 +1,32 @@
+{
+  "id": "20260904-dish-021",
+  "created": "2026-09-04T18:41:22-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "brief",
+  "title": "DISH 完整结果简报：48行没有来源分叉",
+  "context": "三种子有效，触发不足预测命中，来源效果与五服务tick阈值均未识别。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "完整规则和原始行都支持触发不足，没有来源等效含义。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_COMPLETE_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n3-dish-b01-complete-intake",
+  "brief": "docs/research/portfolio/owner/briefs/degraded_incumbent_shadow_handover/2026-09-04_n3_dish_b01_complete.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,37 @@
+{
+  "id": "20260905-cbsc-001",
+  "created": "2026-09-05T02:07:30-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CBSC 检查现有发布路径的最小门槛删除",
+  "context": "昨日直接调用候选仍超预算且不完整。所有者今日恢复自动推进，本轮复用原CM检查现有执行和完整发布代码，保留原学习算法及所有科学测量，只删除规范11.6已降为可选分析的阻塞行为；独立审查真实增删行和必要性，不创建新wrapper或填充计算，超出有界范围即返回具体事实，无r08。",
+  "options": [
+    {
+      "key": "a",
+      "label": "检查现有路径的一份最小修改并独立核对预算",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "重做被拒wrapper或复制计算稀释比例",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "不执行本次获准的有界检查",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "现有发布已生成科学数据，原位消除多余拒绝是不同于昨日wrapper的具体改动入口。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_EXISTING_PATH_SELECTION_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#cbsc-existing-path-selection",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

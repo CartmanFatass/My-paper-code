@@ -1,0 +1,194 @@
+[
+  {
+    "arm": "MAPR",
+    "round": 1,
+    "episodes": 32,
+    "joint_transitions": 192,
+    "collection_seconds": 0.4111484280001605,
+    "update": {
+      "seconds": 1.289208222005982,
+      "optimizer_steps": 32,
+      "backward_calls": 32,
+      "optimizer_forward_calls": 32,
+      "optimizer_forward_decisions": 768,
+      "mean_losses": {
+        "actor": -0.0023359891344989165,
+        "value": 0.003890852249143686,
+        "entropy": 1.0919052236665197,
+        "total": -0.011309615246592275
+      },
+      "mean_preclip_gradient_norm": 0.15591058610144584,
+      "mean_postclip_residual_gradient_norm": 0.0
+    },
+    "parameters": {
+      "count": 89090,
+      "norm": 33.371895799754164,
+      "max_abs": 0.891035845175006,
+      "rms": 0.11180633186646123,
+      "displacement_norm": 1.2639726245165686,
+      "relative_displacement": 0.03793814913856583
+    },
+    "model_forward_calls": 6,
+    "residual": null,
+    "checks": {
+      "physical_commands": 192,
+      "null_choices": 127,
+      "fixed_choices": 218,
+      "zone2_commands": 96,
+      "presentation_checks": 0
+    },
+    "training_means": {
+      "R_fail_60": 0.030520833333333334,
+      "U_total": 0.08908502635887504,
+      "U_intact": 0.1047331011002886,
+      "J_ext": 0.059802929846104184
+    }
+  },
+  {
+    "arm": "DIRECT",
+    "round": 1,
+    "episodes": 32,
+    "joint_transitions": 192,
+    "collection_seconds": 0.4240156509913504,
+    "update": {
+      "seconds": 1.4287819899909664,
+      "optimizer_steps": 32,
+      "backward_calls": 32,
+      "optimizer_forward_calls": 32,
+      "optimizer_forward_decisions": 768,
+      "mean_losses": {
+        "actor": -0.0023550096925995826,
+        "value": 0.0019393316014295371,
+        "entropy": 1.1019301086091104,
+        "total": -0.012404644977975927
+      },
+      "mean_preclip_gradient_norm": 0.12507637615775116,
+      "mean_postclip_residual_gradient_norm": 0.033023468518575856
+    },
+    "parameters": {
+      "count": 148739,
+      "norm": 38.70760161270991,
+      "max_abs": 0.9003197968861475,
+      "rms": 0.10036535703712963,
+      "displacement_norm": 1.4762140214953914,
+      "relative_displacement": 0.03819214040492218,
+      "residual_parameter_norm": 19.63598541764713,
+      "residual_output_parameter_norm": 0.04276740481137707
+    },
+    "model_forward_calls": 6,
+    "residual": {
+      "logit_rms": 0.0,
+      "logit_max_abs": 0.0,
+      "observed_elements": 6144
+    },
+    "checks": {
+      "physical_commands": 192,
+      "null_choices": 130,
+      "fixed_choices": 213,
+      "zone2_commands": 96,
+      "presentation_checks": 0
+    },
+    "training_means": {
+      "R_fail_60": 0.019791666666666666,
+      "U_total": 0.05739373267019358,
+      "U_intact": 0.06190397276334777,
+      "J_ext": 0.03859269966843012
+    }
+  },
+  {
+    "arm": "MAPR",
+    "round": 2,
+    "episodes": 32,
+    "joint_transitions": 192,
+    "collection_seconds": 0.4001515859999927,
+    "update": {
+      "seconds": 1.2107331349980086,
+      "optimizer_steps": 32,
+      "backward_calls": 32,
+      "optimizer_forward_calls": 32,
+      "optimizer_forward_decisions": 768,
+      "mean_losses": {
+        "actor": -0.006261149108455264,
+        "value": 0.0015007804123932029,
+        "entropy": 1.033534381142937,
+        "total": -0.015846102713688033
+      },
+      "mean_preclip_gradient_norm": 0.20272822449699987,
+      "mean_postclip_residual_gradient_norm": 0.0
+    },
+    "parameters": {
+      "count": 89090,
+      "norm": 33.474104111594166,
+      "max_abs": 0.8820403004715931,
+      "rms": 0.11214876181115675,
+      "displacement_norm": 2.2935727548107483,
+      "relative_displacement": 0.06884160585791298
+    },
+    "model_forward_calls": 6,
+    "residual": null,
+    "checks": {
+      "physical_commands": 192,
+      "null_choices": 92,
+      "fixed_choices": 238,
+      "zone2_commands": 96,
+      "presentation_checks": 0
+    },
+    "training_means": {
+      "R_fail_60": 0.04505208333333335,
+      "U_total": 0.08095394854331013,
+      "U_intact": 0.09678943452380952,
+      "J_ext": 0.06300301593832174
+    }
+  },
+  {
+    "arm": "DIRECT",
+    "round": 2,
+    "episodes": 32,
+    "joint_transitions": 192,
+    "collection_seconds": 0.4144530529883923,
+    "update": {
+      "seconds": 1.4112005979986861,
+      "optimizer_steps": 32,
+      "backward_calls": 32,
+      "optimizer_forward_calls": 32,
+      "optimizer_forward_decisions": 768,
+      "mean_losses": {
+        "actor": -0.0076415967653616,
+        "value": 0.0020430759180227473,
+        "entropy": 1.0326367054856511,
+        "total": -0.016946425861206742
+      },
+      "mean_preclip_gradient_norm": 0.3440549117347984,
+      "mean_postclip_residual_gradient_norm": 0.16576691329851428
+    },
+    "parameters": {
+      "count": 148739,
+      "norm": 38.82194503008969,
+      "max_abs": 0.8968603679969736,
+      "rms": 0.10066183931533926,
+      "displacement_norm": 2.679515832420208,
+      "relative_displacement": 0.06932358275891366,
+      "residual_parameter_norm": 19.735036772962143,
+      "residual_output_parameter_norm": 0.082266339723949
+    },
+    "model_forward_calls": 6,
+    "residual": {
+      "logit_rms": 0.008437351170885343,
+      "logit_max_abs": 0.029744276814674665,
+      "observed_elements": 6144
+    },
+    "checks": {
+      "physical_commands": 192,
+      "null_choices": 109,
+      "fixed_choices": 254,
+      "zone2_commands": 96,
+      "presentation_checks": 0
+    },
+    "training_means": {
+      "R_fail_60": 0.050260416666666675,
+      "U_total": 0.06303001507859056,
+      "U_intact": 0.06776836444805194,
+      "J_ext": 0.05664521587262863
+    }
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "id": "20260905-acvc-011",
+  "created": "2026-09-05T04:35:07-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "ACVC：已执行原 HC-C 固定宿主边界",
+  "context": "PRO_FINAL / 已执行。R03 的精确上界增量 0.2139371 小于原 0.25，已经按归档分支结束未变十二步宿主的学习器投资并停在方向边界。本条只补齐专门方向批改记录；ACTIVE、原优先级与 recasts: 2 不变，不等待批准，也没有后继实验或新 Pro。",
+  "options": [
+    {
+      "key": "execute-hc-c",
+      "label": "保留已经执行的原 HC-C 处置",
+      "consequence": "确认有限宿主的 learner 投资停止边界；保留原始证据、ACTIVE 和 recasts，不触发任何新调用。"
+    },
+    {
+      "key": "review-evidence",
+      "label": "指出具体证据或解释问题",
+      "consequence": "在下一个干净边界核对所指问题并补充说明；不自动改写结果、重算、新开家族或改变 Portfolio。"
+    }
+  ],
+  "recommended": "execute-hc-c",
+  "auto_applied": "execute-hc-c",
+  "dm_reason": "PRO_FINAL / 已执行：归档 Pro 已预定条件与处置，独立 DM intake 确认实际证书满足条件；本次补记录，不是 DM 新作方向取舍。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_HC_C_OWNER_RECORD_20260905.md",
+    "docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_INTAKE_20260905.md",
+    "docs/research/candidates/acvc/external/2026-09-04-acvc-headroom-engineering-dissent-convergence-02/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#acvc-actual-upper-r03-hcc-execution-20260905",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否认可这条已经执行的 PRO_FINAL 方向处置记录：仅结束固定宿主的学习器投资并停在方向边界？",
+    "changes_if_approved": [
+      {
+        "target": "HC-C 方向执行的批改记录",
+        "from": "处置已经执行，独立方向账本行仅链接 intake",
+        "to": "补齐专门方向 decision、完整归档原文和选项后果；科学处置不发生第二次变化"
+      }
+    ],
+    "if_refused": "在下一个干净边界核对你指出的具体证据或表述问题并补充说明，保留已归档结果；本记录不授权新实验、新宿主或新 Pro，也不会自行改变 Portfolio 生命周期。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/external/2026-09-04-acvc-headroom-engineering-dissent-convergence-02/RESPONSE.md",
+        "quote": "no legal history policy satisfying the frozen consequence envelope can clear the material threshold. Close the uncertain/delayed R01 host family as a learner-investment target and park ACVC at the direction-local boundary.",
+        "why": "完整归档 Pro 已预先规定该分支的有限宿主处置；下方 verdict_text 保留完整 HC-C 小节，包括条件、优先规则、处置和重入条件。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_INTAKE_20260905.md",
+        "quote": "The exact new upper gap is `101807318141829913/475875000000000000 =0.21393710142753856... <1/4`.",
+        "why": "有效 R03 实际证书满足原先严格小于四分之一的条件，DM 已独立核对并接受。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_RESULT_EVIDENCE_20260905.md",
+        "quote": "The positive legal R02 action witness remains evidence of smaller history value.",
+        "why": "结论不能扩大为历史普遍无用；已证明的小幅合法历史价值继续成立。"
+      }
+    ],
+    "uncertainty": [
+      "有限范围仅为未变十二次决策宿主、原比较器及风险限制，不涉及其他宿主或学习器失败原因。",
+      "ACTIVE、原优先级和 recasts: 2 保持不变；方向内停在此边界不等于 Portfolio PARK。",
+      "以后若考虑新宿主，必须独立给出合法信息、动作改变和超过原门槛的收益理由，并取得相应方向权限；本次没有这种后继。"
+    ],
+    "cost": {
+      "compute": "0；本次仅补记录，不运行实验、成本测量或新 Pro。",
+      "owner_time": "无需现在回复，可异步阅览完整证据。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；PRO_FINAL 处置已经执行，本次没有等待批准的后继操作。"
+    },
+    "verdict_text": "### 2. `HC-C / MATERIAL_COMPATIBLE_HEADROOM_CERTIFIED_IMPOSSIBLE`\n\nCondition:\n\n$$\n\\Delta_U<\\tfrac14.\n$$\n\nThis branch takes precedence over an incompatible lower-policy gain.\n\n**Mapping:** no legal history policy satisfying the frozen consequence envelope can clear the material threshold. Close the uncertain/delayed R01 host family as a learner-investment target and park ACVC at the direction-local boundary. Retain exact binding only as a primitive/control.\n\n**Re-entry condition:** a new, independently motivated host must prospectively specify a competent same-information history policy expected to change a legal action and clear `1/4` native-return headroom over its strongest competent fixed null. The current thresholds or envelope may not be tuned to this result.\n\n",
+    "source": "docs/research/candidates/acvc/external/2026-09-04-acvc-headroom-engineering-dissent-convergence-02/RESPONSE.md"
+  }
+}

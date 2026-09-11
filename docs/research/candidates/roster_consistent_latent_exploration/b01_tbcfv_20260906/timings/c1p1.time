@@ -1,0 +1,23 @@
+	Command being timed: "/home/wu/.venvs/hmasd/bin/python scripts/run_rcle_tbcfv_b01.py arm --arm C1P1 --out /home/wu/hmasd-worktrees/rcle-b01-4d40621/temp/directions/roster_consistent_latent_exploration/exp/tbcfv_b01_20260906/c1p1 --wall-cap 2600 --admission-receipt /home/wu/hmasd-worktrees/rcle-b01-4d40621/temp/directions/roster_consistent_latent_exploration/exp/tbcfv_b01_20260906/receipts/c1p1.json --launch-sha 4d40621e0a9abd26e783e8c8aeeaf2653e49cf6a --updates 200 --eval-episodes 256"
+	User time (seconds): 62.77
+	System time (seconds): 0.46
+	Percent of CPU this job got: 98%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:03.96
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 590708
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 3338
+	Minor (reclaiming a frame) page faults: 158816
+	Voluntary context switches: 4281
+	Involuntary context switches: 119
+	Swaps: 0
+	File system inputs: 664832
+	File system outputs: 5136
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

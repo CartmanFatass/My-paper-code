@@ -22,6 +22,7 @@ from ..b01.r128_smoke import (
     _launch_sha,
 )
 from ..b01.trainer import PairedB01Trainer
+from ..b01.three_seed import _evaluate_cell as _evaluate_intervention_cell
 from ..state_codec import decode_optimizer_state, encode_optimizer_state
 from .collector import collect_r02_arm_update
 from .semantics import (
@@ -38,9 +39,11 @@ from .semantics import (
     TEST_SEED_LABEL,
     classify_r02,
     cost_config,
+    cut_contrasts,
+    contact_integrity,
     exposure_record,
+    _initialize_contact_pair,
     initialize_contact_pair,
-    initialize_test_contact_pair,
 )
 from .tapes import evaluation_tape, production_training_inputs
 
@@ -142,6 +145,7 @@ def _training_curve_row(receipt: Any) -> dict[str, Any]:
 
 def execute(
     *, output_root: Path, admission_receipt: Path, test_only: bool = False,
+    adam_lr: float = 0.0003, seed: int = SEED, role_column_cut: bool = False,
 ) -> dict[str, Any]:
     if not output_root.is_absolute() or not admission_receipt.is_absolute():
         raise B01ContractError("output and admission paths must be absolute")
@@ -152,6 +156,12 @@ def execute(
     eval_episodes = 1 if test_only else PRODUCTION_EVAL_EPISODES
     root_hex = TEST_ROOT_HEX if test_only else ROOT_HEX
     seed_label = TEST_SEED_LABEL if test_only else SEED_LABEL
+    if seed == 2:
+        root_hex, seed_label, adam_lr = f"{seed:064x}", "FRRIE-B07-CONTACT-BLOCK-002", 0.003
+    if seed == 3:
+        root_hex, seed_label, adam_lr = "0000000000000000000000000000000000000000000000000000000000000003", "FRRIE-B09-CONTACT-BLOCK-003", 0.003
+    if role_column_cut:
+        seed, root_hex, seed_label, adam_lr = 1, ROOT_HEX, SEED_LABEL, 0.003
     root = bytes.fromhex(root_hex)
     evaluation_tapes = {
         roster: tuple(
@@ -190,14 +200,15 @@ def execute(
 
     torch.set_num_threads(1)
     torch_threads = torch.get_num_threads()
-    initializer = initialize_test_contact_pair if test_only else initialize_contact_pair
-    models, optimizers, initial_audit, raw_initial = initializer()
-    if not test_only and initial_audit["tight_changed_coordinates"] != 5:
+    models, optimizers, initial_audit, raw_initial = _initialize_contact_pair(
+        root_hex, seed_label, adam_lr=adam_lr,
+    )
+    if seed == 1 and not test_only and initial_audit["tight_changed_coordinates"] != 5:
         raise B01ContractError("initial tight clip did not change exactly five coordinates")
-    if initial_audit["tight_changed_coordinates"] <= 0:
+    if seed == 1 and initial_audit["tight_changed_coordinates"] <= 0:
         raise B01ContractError("initial tight clip was not active")
     paired = PairedB01Trainer(models, optimizers)
-    paired.first_tight_contact_update = 0
+    paired.first_tight_contact_update = initial_audit["first_tight_contact_update"]
     paired.changed_coordinates = set(initial_audit["tight_changed_coordinate_indices"])
     paired.maximum_tight_overshoot = initial_audit["tight_maximum_overshoot"]
     paired.cumulative_tight_displacement = initial_audit["tight_projection_displacement"]
@@ -256,6 +267,18 @@ def execute(
             training_curves[arm].append(_training_curve_row(receipts[arm]))
         _enforce_time_cap(started, learned_wall)
 
+    if role_column_cut:
+        for arm in LEARNED_ARMS:
+            for roster in ROSTERS:
+                arm_started = time.perf_counter()
+                values, _ = _evaluate_intervention_cell(
+                    adapter, models[arm], tapes=evaluation_tapes[roster], intervention="SEMANTIC_COLUMN_ROTATE",
+                )
+                cells.append({**_result_cell(arm, updates, roster, values), "intervention": "SEMANTIC_COLUMN_ROTATE"})
+                tape_uses[roster] += 1
+                evaluation_preserved &= values["model_bytes_preserved"]
+                learned_wall[arm] += time.perf_counter() - arm_started
+                _enforce_time_cap(started, learned_wall)
     projection = paired.projection_audit()
     final_displacement = {}
     for arm in LEARNED_ARMS:
@@ -274,13 +297,13 @@ def execute(
                 row for row in cells
                 if row["arm"] == "PHY_TRUST_004"
                 and row["checkpoint"] == checkpoint
-                and row["roster"] == roster
+                and row["roster"] == roster and row["intervention"] == "INTACT"
             )
             edge = next(
                 row for row in cells
                 if row["arm"] == "EDGE_FLEX_150"
                 and row["checkpoint"] == checkpoint
-                and row["roster"] == roster
+                and row["roster"] == roster and row["intervention"] == "INTACT"
             )
             descriptors.append({
                 "checkpoint": checkpoint,
@@ -295,8 +318,8 @@ def execute(
     ]
     evaluation_episodes = sum(row["episodes"] for row in cells)
     evaluation_transitions = sum(row["transitions"] for row in cells)
-    costs = cost_config(updates, checkpoints, eval_episodes)
-    expected_uses = 1 + 2 * len(checkpoints)
+    costs = cost_config(updates, checkpoints, eval_episodes, role_column_cut=role_column_cut)
+    expected_uses = 1 + 2 * (len(checkpoints) + role_column_cut)
     same_tapes = all(value == expected_uses for value in tape_uses.values())
     paired_work = paired_updates == updates and len(set(training_slots.values())) == 1
     optimizer_projection_unchanged = initial_audit[
@@ -306,6 +329,8 @@ def execute(
         for curve in training_curves.values() for row in curve
     )
 
+    contrasts, cut_complete = cut_contrasts(cells, checkpoints, eval_episodes) if role_column_cut else ([], False)
+    contact = contact_integrity(initial_audit, training_curves, projection["first_tight_contact_update"])
     if test_only:
         complete = True
         completion = {"complete": True, "status": "TEST_ONLY_NON_RESULT"}
@@ -317,15 +342,15 @@ def execute(
             "backward_per_arm": _public({arm: 128 for arm in LEARNED_ARMS}),
             "adam_per_arm": _public({arm: 128 for arm in LEARNED_ARMS}),
             "paired_updates": 128,
-            "cells": 18,
-            "learned_cells": 16,
+            "cells": 22 if role_column_cut else 18,
+            "learned_cells": 20 if role_column_cut else 16,
             "uniform_cells": 2,
-            "evaluation_episodes": 4_608,
-            "evaluation_transitions": 55_296,
+            "evaluation_episodes": 5_632 if role_column_cut else 4_608,
+            "evaluation_transitions": 67_584 if role_column_cut else 55_296,
             "descriptors": 8,
-            "tape_uses": {9: 9, 15: 9},
+            "tape_uses": {n: 11 if role_column_cut else 9 for n in ROSTERS},
             "cost_config": cost_config(
-                PRODUCTION_UPDATES, PRODUCTION_CHECKPOINTS, PRODUCTION_EVAL_EPISODES
+                PRODUCTION_UPDATES, PRODUCTION_CHECKPOINTS, PRODUCTION_EVAL_EPISODES, role_column_cut=role_column_cut,
             ),
             "torch_threads": 1,
             "evaluation_preserved": True,
@@ -367,6 +392,11 @@ def execute(
                 arm: factual_episodes[arm] * HORIZON for arm in LEARNED_ARMS
             }),
         }
+        if seed in (2, 3):
+            for name in ("initial_tight_clip_changed_coordinates", "first_tight_contact_update"):
+                del expected[name], observed[name]
+            expected.update(initial_projection_conformant=True, contact_history_truthful=True)
+            observed.update(contact)
         checks = {name: observed[name] == value for name, value in expected.items()}
         complete = all(checks.values())
         completion = {
@@ -376,7 +406,19 @@ def execute(
             "observed": observed,
         }
 
+    final_group_lr = {
+        PUBLIC_ARM[arm]: [group["lr"] for group in optimizers[arm].param_groups]
+        for arm in LEARNED_ARMS
+    }
     rule_inputs = {
+        **contact,
+        "r08_binding": seed == 1 and root_hex == ROOT_HEX and seed_label == SEED_LABEL,
+        "cut_panel_complete": cut_complete,
+        "cut_contrasts": contrasts,
+        "r07_binding": seed == int(root_hex, 16) == 2 and seed_label == "FRRIE-B07-CONTACT-BLOCK-002",
+        "r09_binding": seed == int(root_hex, 16) == 3 and seed_label == "FRRIE-B09-CONTACT-BLOCK-003",
+        "initial_optimizer_group_lr": initial_audit["initial_optimizer_group_lr"],
+        "final_optimizer_group_lr": final_group_lr,
         "complete": complete,
         "admission_valid": True,
         "exposure_present": True,
@@ -405,11 +447,18 @@ def execute(
     wall = time.perf_counter() - started
     peak = _peak_rss_bytes()
     summary = {
-        "object_id": OBJECT_ID,
+        "object_id": (
+            "FRRIE-B01-R128-LR003-R08-ROLE-COLUMN-CUT-20260905" if role_column_cut else
+            "FRRIE-B01-CONTACT-R128-LR003-R09-THIRD-ROOT-20260905" if seed == 3 else
+            "FRRIE-B01-CONTACT-R128-LR003-R07-SECOND-ROOT-20260905" if seed == 2 else
+            "FRRIE-B01-CONTACT-ACTIVE-R128-LR003-R06-20260904" if adam_lr == 0.003 else OBJECT_ID
+        ),
         "evidence_class": "B/EXPLORE",
         "test_only": test_only,
-        "branch": classify_r02(rule_inputs, test_only=test_only),
-        "seed": SEED,
+        "branch": classify_r02(
+            rule_inputs, test_only=test_only, branch_prefix="R08" if role_column_cut else "R09" if seed == 3 else "R07" if seed == 2 else "R06" if adam_lr == 0.003 else "R02",
+        ),
+        "seed": seed,
         "seed_label": seed_label,
         "seed_root_hex": root_hex,
         "launch_sha": launch_sha,
@@ -418,7 +467,10 @@ def execute(
             "validated": True,
             "facts": admission,
         },
-        "exposure": exposure_record(updates, initial_audit["tight_changed_coordinates"]),
+        "exposure": {**exposure_record(
+            updates, initial_audit["tight_changed_coordinates"],
+            adam_lr=initial_audit["initial_optimizer_group_lr"]["PHY_TRUST_004"][0],
+        ), "first_tight_contact_update": projection["first_tight_contact_update"]},
         "deterministic_rule_inputs": rule_inputs,
         "runtime_configuration": {
             "device": "CPU",
@@ -447,6 +499,7 @@ def execute(
         },
         "cells": cells,
         "descriptive_estimands": descriptors,
+        "cut_contrasts": contrasts,
         "work": {
             "expected_cost_law": costs,
             "observed_training_slots": _public(training_slots),
@@ -459,10 +512,10 @@ def execute(
                     "factual_learner_transitions": factual_episodes[arm] * HORIZON,
                     "training_environment_slots": training_slots[arm],
                     "learned_evaluation_episodes": (
-                        len(checkpoints) * len(ROSTERS) * eval_episodes
+                        (len(checkpoints) + role_column_cut) * len(ROSTERS) * eval_episodes
                     ),
                     "learned_evaluation_environment_slots": (
-                        len(checkpoints) * len(ROSTERS) * eval_episodes * HORIZON
+                        (len(checkpoints) + role_column_cut) * len(ROSTERS) * eval_episodes * HORIZON
                     ),
                     "backward_calls": backward[arm],
                     "adam_steps": adam[arm],
@@ -495,16 +548,19 @@ def parser() -> argparse.ArgumentParser:
     value.add_argument("--admission-receipt", required=True, type=Path)
     value.add_argument("--seed", required=True, type=int)
     value.add_argument("--test-only", action="store_true")
+    value.add_argument("--lr003", action="store_true")
+    value.add_argument("--role-column-cut", action="store_true")
     return value
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
-    if args.seed != SEED:
-        raise B01ContractError("R02 seed is fixed to literal seed 1")
+    if args.seed not in (1, 2, 3):
+        raise B01ContractError("contact seed must be literal 1, 2 or 3")
     execute(
         output_root=args.output_root,
         admission_receipt=args.admission_receipt,
         test_only=args.test_only,
+        adam_lr=0.003 if args.lr003 else 0.0003, seed=args.seed, role_column_cut=args.role_column_cut,
     )
     return 0

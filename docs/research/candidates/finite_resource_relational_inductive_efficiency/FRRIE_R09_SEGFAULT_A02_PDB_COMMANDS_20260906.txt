@@ -1,0 +1,15 @@
+where
+p ("PY", __import__("sys").version, __import__("sys").flags)
+p ("FIELD_TYPES", type(obj).__name__, type(f).__name__, getattr(f, "name", None))
+p ("F_LOCAL", repr(f), type(f).__module__, id(f), getattr(f, "name", None), getattr(f, "_field_type", None))
+p ("FIELDS_FN", fields, getattr(fields, "__module__", None), id(fields), fields is __import__("dataclasses").fields)
+p ("RESULT_SO_FAR", len(result), [r[0] for r in result])
+p ("FIELDS_RESULT", [(type(x).__name__, getattr(x, "name", None), id(x)) for x in fields(obj)])
+p ("VALUES_NOFILTER", [(type(x).__name__, getattr(x, "name", None), id(x), getattr(x, "_field_type", None)) for x in obj.__dataclass_fields__.values()])
+p ("INSTANCE_VS_CLASS", obj.__dataclass_fields__ is type(obj).__dataclass_fields__, id(obj.__dataclass_fields__), id(type(obj).__dataclass_fields__))
+p ("SLOTS", type(obj).__slots__)
+p ("ADDRESS", obj.seed_label, obj.roster, obj.episode, obj.kind, obj.basin, obj.event_ordinal, obj.slot, obj.public_role, obj.role_local_index, obj.sender, obj.receiver, obj.draw)
+up 5
+p ("TAPE_LOOP", seed_label, roster, episode, slot, sender, receiver, role, local)
+where
+q

@@ -88,6 +88,13 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### plans/
 
+- `CLAUDE_SUBAGENT_WORKFLOW_20260905.md` — build record of the Claude Code research workflow: the
+  Fable session as research hub (Root plus DM, two directions at a time), eleven subagents under
+  `.claude/agents/` ported from the Codex roles with Opus for code and judgment and Sonnet for
+  scouting, launch, observation and clerking, the two skills that carry the hub and transport
+  procedures, the stated deviations from the Codex topology, and the Agentify Desktop transport
+  facts with the owner actions that precede the first smoke (model-gate labels, GUI, session
+  restart).
 - `OWNER_CONSOLE_DESIGN_20260904.md` — design and build record of the owner console
   (`tools/owner_console/`): Codex writes one JSON item per thing needing the owner's eye, the
   local page renders them as grading cards (options with ★ recommended and ✓ executed, free
@@ -107,6 +114,14 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   first-class object, invest only where a MARL structure binds, fewer directions on the production
   host, three readings written before the run), six actions with tiers, a proposed ACTIVE/PARK
   disposition for all 22 directions, and the [DECIDE]/[ASK] items.
+- `RESEARCH_STATUS_AND_ADVICE_20260904.md` — read-only status check at the owner-directed pause
+  (`origin/main` `e4c0c93c7`, 2026-09-05T02:00Z): loop state and zero live compute verified on
+  both nodes, the day's throughput counts, the nine routes' latest results and boundaries, the
+  assessment (every learner comparison inside its MEI from one-seed objects; three of six invested
+  entries held by the 30% orchestration rule; VNFC census 129× over its cap; 208 inbox items with
+  2 answered; serial CPU-only compute), and ten advice items with [DECIDE]/[ASK] markers plus a
+  proposed resume order (finish E3 concurrently, amend the rule, park or recast VNFC, no more
+  one-seed rungs, E2b on the UAV host next).
 - `CODEBASE_LAYOUT_STANDARD_20260903.md` — alignment draft for the directory standard: nine
   principles-to-application sections (target layout, candidate directories, tests, scripts,
   scratch/worktrees/branches/git hygiene, `.gitignore` rewrite, layered `AGENTS.md` with one-line
@@ -162,6 +177,9 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   what was built and where, how each invariant is met, enumeration results next to the table
   values, throughput and machine identity, twelve reading choices, and what could not be
   verified (no learner ran; the adapter is not yet wired into the base route).
+- `GROK_BUILD_CM_DELEGATION_PLAN_20260905.md` — 方案：把一部分 CM 工作交给 Grok Build（本机
+  CLI 1.0.5 已验证无头模式；分 A 只读侦察与第二评审、B 机械修改、C 低风险语义实现三层，
+  启动、传输和科学判断不交；调用形状、围栏、附录 C 提案、三次试点与五个待决项）。
 
 ### environment_design/
 
@@ -203,6 +221,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   segment-length measurements, the two mechanisms and the reading rule written before the data.
   Launches after P4 with the owner's prediction on record.
 - `E0_probe_set_sample_seed1.json` — the first 32 probes of the frozen set, for checking the recipe.
+- `TRANSPORT_SMOKE_AGENTIFY_20260905.md` — transport check, not evidence: the one non-scientific
+  Send from Claude Code through Agentify Desktop to ChatGPT 6 Pro (matched `Latest` / `Pro`,
+  reply `READY`, receipt `COMPLETE`), the three Agentify defects it exposed and their patches,
+  and the consequence for unattended dispatch.
 
 ### artifacts/
 

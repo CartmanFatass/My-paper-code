@@ -1,0 +1,1230 @@
+{
+  "object": "VSPC1-K4-FACTOR-VALUE-B01",
+  "arm": "FACTOR",
+  "seed": 0,
+  "launch": {
+    "sha": "e7e574b4496875f45e1d1b9b41c02cd35cf3684e",
+    "hostname": "LAPTOP-U9TDKC8A",
+    "cwd": "/home/wu/hmasd-worktrees/vspc1-b01-e7e574b44",
+    "python": "/home/wu/.venvs/hmasd/bin/python",
+    "argv": [
+      "scripts/run_vspc1_k4_factor_value_b01.py",
+      "--arm",
+      "FACTOR",
+      "--seed",
+      "0",
+      "--out",
+      "/home/wu/hmasd-worktrees/vspc1-b01-e7e574b44/temp/directions/vsp_c1/exp/k4_b01_factor_seed0_e7e574b44_01"
+    ],
+    "numpy": "1.26.3",
+    "torch": "2.7.0+cu118"
+  },
+  "device": "cpu",
+  "dtype": "float32",
+  "compute_threads": 1,
+  "batch_episodes": 32,
+  "status": "complete",
+  "curve": [
+    {
+      "update": 0,
+      "mean_return": 0.5,
+      "contexts": [
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 0,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 0,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 1,
+          "return": 0.3333333333333333
+        }
+      ],
+      "by_period": {
+        "2": 0.5,
+        "6": 0.49999999999999994
+      },
+      "by_partner": {
+        "2": 0.5,
+        "4": 0.49999999999999994
+      }
+    },
+    {
+      "update": 16,
+      "mean_return": 0.5416666666666666,
+      "contexts": [
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        }
+      ],
+      "by_period": {
+        "2": 0.49999999999999994,
+        "6": 0.5833333333333333
+      },
+      "by_partner": {
+        "2": 0.49999999999999994,
+        "4": 0.5833333333333333
+      }
+    },
+    {
+      "update": 32,
+      "mean_return": 0.5416666666666666,
+      "contexts": [
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        }
+      ],
+      "by_period": {
+        "2": 0.49999999999999994,
+        "6": 0.5833333333333333
+      },
+      "by_partner": {
+        "2": 0.49999999999999994,
+        "4": 0.5833333333333333
+      }
+    },
+    {
+      "update": 48,
+      "mean_return": 0.5833333333333333,
+      "contexts": [
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 1,
+          "return": 0.3333333333333333
+        }
+      ],
+      "by_period": {
+        "2": 0.5833333333333333,
+        "6": 0.5833333333333334
+      },
+      "by_partner": {
+        "2": 0.5833333333333333,
+        "4": 0.5833333333333334
+      }
+    },
+    {
+      "update": 64,
+      "mean_return": 0.5416666666666666,
+      "contexts": [
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 1,
+          "return": 0.0
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        }
+      ],
+      "by_period": {
+        "2": 0.5,
+        "6": 0.5833333333333333
+      },
+      "by_partner": {
+        "2": 0.5833333333333334,
+        "4": 0.5
+      }
+    },
+    {
+      "update": 80,
+      "mean_return": 0.625,
+      "contexts": [
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        }
+      ],
+      "by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.5833333333333333
+      },
+      "by_partner": {
+        "2": 0.5833333333333334,
+        "4": 0.6666666666666666
+      }
+    },
+    {
+      "update": 96,
+      "mean_return": 0.625,
+      "contexts": [
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        }
+      ],
+      "by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.5833333333333333
+      },
+      "by_partner": {
+        "2": 0.5833333333333334,
+        "4": 0.6666666666666666
+      }
+    },
+    {
+      "update": 112,
+      "mean_return": 0.625,
+      "contexts": [
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        }
+      ],
+      "by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.5833333333333333
+      },
+      "by_partner": {
+        "2": 0.5833333333333334,
+        "4": 0.6666666666666666
+      }
+    },
+    {
+      "update": 128,
+      "mean_return": 0.625,
+      "contexts": [
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 1,
+          "return": 0.3333333333333333
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 0,
+          "return": 0.6666666666666666
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 1,
+          "return": 0.6666666666666666
+        }
+      ],
+      "by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.5833333333333333
+      },
+      "by_partner": {
+        "2": 0.5833333333333334,
+        "4": 0.6666666666666666
+      }
+    }
+  ],
+  "primary_dependency_defects": [],
+  "optimizer_steps": 128,
+  "parameter_count": 188,
+  "theta0_norm": 4.011008262634277,
+  "streams": {
+    "numpy": {
+      "context": [
+        0,
+        101
+      ],
+      "exploration": [
+        0,
+        102
+      ]
+    },
+    "torch": {
+      "FACTOR_dense": 201,
+      "FACTOR_embedding": 202
+    },
+    "evaluation": "greedy deterministic; no random draws or training stream consumption"
+  },
+  "initialization_wall_seconds": 0.5023415360046783,
+  "training_counts": {
+    "legal_decisions": 8192,
+    "joint_steps": 24576,
+    "renewals_p2": 6144,
+    "renewals": 8192,
+    "renewals_p6": 2048,
+    "episodes": 4096
+  },
+  "evaluation_counts": {
+    "legal_decisions": 144,
+    "joint_steps": 432,
+    "renewals_p2": 108,
+    "renewals": 144,
+    "renewals_p6": 36,
+    "episodes": 72
+  },
+  "training_action_counts": [
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "tick": 0,
+      "action": 0,
+      "count": 143
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "tick": 0,
+      "action": 1,
+      "count": 369
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "tick": 2,
+      "action": 0,
+      "count": 118
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "tick": 2,
+      "action": 1,
+      "count": 394
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "tick": 4,
+      "action": 0,
+      "count": 170
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "tick": 4,
+      "action": 1,
+      "count": 342
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "tick": 0,
+      "action": 0,
+      "count": 342
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "tick": 0,
+      "action": 1,
+      "count": 170
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "tick": 2,
+      "action": 0,
+      "count": 336
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "tick": 2,
+      "action": 1,
+      "count": 176
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "tick": 4,
+      "action": 0,
+      "count": 354
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "tick": 4,
+      "action": 1,
+      "count": 158
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "tick": 0,
+      "action": 0,
+      "count": 370
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "tick": 0,
+      "action": 1,
+      "count": 142
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "tick": 2,
+      "action": 0,
+      "count": 384
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "tick": 2,
+      "action": 1,
+      "count": 128
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "tick": 4,
+      "action": 0,
+      "count": 369
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "tick": 4,
+      "action": 1,
+      "count": 143
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "tick": 0,
+      "action": 0,
+      "count": 216
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "tick": 0,
+      "action": 1,
+      "count": 296
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "tick": 2,
+      "action": 0,
+      "count": 155
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "tick": 2,
+      "action": 1,
+      "count": 357
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "tick": 4,
+      "action": 0,
+      "count": 149
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "tick": 4,
+      "action": 1,
+      "count": 363
+    },
+    {
+      "p": 6,
+      "tau": 2,
+      "c": 0,
+      "tick": 0,
+      "action": 0,
+      "count": 151
+    },
+    {
+      "p": 6,
+      "tau": 2,
+      "c": 0,
+      "tick": 0,
+      "action": 1,
+      "count": 361
+    },
+    {
+      "p": 6,
+      "tau": 2,
+      "c": 1,
+      "tick": 0,
+      "action": 0,
+      "count": 144
+    },
+    {
+      "p": 6,
+      "tau": 2,
+      "c": 1,
+      "tick": 0,
+      "action": 1,
+      "count": 368
+    },
+    {
+      "p": 6,
+      "tau": 4,
+      "c": 0,
+      "tick": 0,
+      "action": 0,
+      "count": 384
+    },
+    {
+      "p": 6,
+      "tau": 4,
+      "c": 0,
+      "tick": 0,
+      "action": 1,
+      "count": 128
+    },
+    {
+      "p": 6,
+      "tau": 4,
+      "c": 1,
+      "tick": 0,
+      "action": 0,
+      "count": 146
+    },
+    {
+      "p": 6,
+      "tau": 4,
+      "c": 1,
+      "tick": 0,
+      "action": 1,
+      "count": 366
+    }
+  ],
+  "evaluation_action_counts": [
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "tick": 0,
+      "action": 0,
+      "count": 0
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "tick": 0,
+      "action": 1,
+      "count": 9
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "tick": 2,
+      "action": 0,
+      "count": 0
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "tick": 2,
+      "action": 1,
+      "count": 9
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "tick": 4,
+      "action": 0,
+      "count": 0
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "tick": 4,
+      "action": 1,
+      "count": 9
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "tick": 0,
+      "action": 0,
+      "count": 6
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "tick": 0,
+      "action": 1,
+      "count": 3
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "tick": 2,
+      "action": 0,
+      "count": 6
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "tick": 2,
+      "action": 1,
+      "count": 3
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "tick": 4,
+      "action": 0,
+      "count": 5
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "tick": 4,
+      "action": 1,
+      "count": 4
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "tick": 0,
+      "action": 0,
+      "count": 8
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "tick": 0,
+      "action": 1,
+      "count": 1
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "tick": 2,
+      "action": 0,
+      "count": 8
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "tick": 2,
+      "action": 1,
+      "count": 1
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "tick": 4,
+      "action": 0,
+      "count": 8
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "tick": 4,
+      "action": 1,
+      "count": 1
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "tick": 0,
+      "action": 0,
+      "count": 3
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "tick": 0,
+      "action": 1,
+      "count": 6
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "tick": 2,
+      "action": 0,
+      "count": 1
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "tick": 2,
+      "action": 1,
+      "count": 8
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "tick": 4,
+      "action": 0,
+      "count": 0
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "tick": 4,
+      "action": 1,
+      "count": 9
+    },
+    {
+      "p": 6,
+      "tau": 2,
+      "c": 0,
+      "tick": 0,
+      "action": 0,
+      "count": 1
+    },
+    {
+      "p": 6,
+      "tau": 2,
+      "c": 0,
+      "tick": 0,
+      "action": 1,
+      "count": 8
+    },
+    {
+      "p": 6,
+      "tau": 2,
+      "c": 1,
+      "tick": 0,
+      "action": 0,
+      "count": 2
+    },
+    {
+      "p": 6,
+      "tau": 2,
+      "c": 1,
+      "tick": 0,
+      "action": 1,
+      "count": 7
+    },
+    {
+      "p": 6,
+      "tau": 4,
+      "c": 0,
+      "tick": 0,
+      "action": 0,
+      "count": 9
+    },
+    {
+      "p": 6,
+      "tau": 4,
+      "c": 0,
+      "tick": 0,
+      "action": 1,
+      "count": 0
+    },
+    {
+      "p": 6,
+      "tau": 4,
+      "c": 1,
+      "tick": 0,
+      "action": 0,
+      "count": 2
+    },
+    {
+      "p": 6,
+      "tau": 4,
+      "c": 1,
+      "tick": 0,
+      "action": 1,
+      "count": 7
+    }
+  ],
+  "training_context_counts": [
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 0,
+      "episodes": 512
+    },
+    {
+      "p": 2,
+      "tau": 2,
+      "c": 1,
+      "episodes": 512
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 0,
+      "episodes": 512
+    },
+    {
+      "p": 2,
+      "tau": 4,
+      "c": 1,
+      "episodes": 512
+    },
+    {
+      "p": 6,
+      "tau": 2,
+      "c": 0,
+      "episodes": 512
+    },
+    {
+      "p": 6,
+      "tau": 2,
+      "c": 1,
+      "episodes": 512
+    },
+    {
+      "p": 6,
+      "tau": 4,
+      "c": 0,
+      "episodes": 512
+    },
+    {
+      "p": 6,
+      "tau": 4,
+      "c": 1,
+      "episodes": 512
+    }
+  ],
+  "checks": {
+    "held_action_violations": 0,
+    "partner_timing_violations": 0,
+    "reward_violations": 0,
+    "return_violations": 0,
+    "terminal_bootstrap_violations": 0,
+    "loss_weight_violations": 0,
+    "episodes_checked": 4168
+  },
+  "measured_phase_cost": {
+    "rollout_wall_seconds": 0.11517931697017048,
+    "update_wall_seconds": 0.146568756113993,
+    "evaluation_wall_seconds": 0.010838588001206517
+  },
+  "theta_displacement_norm": 2.032857894897461,
+  "theta128_norm": 4.344733715057373,
+  "displacement_to_initial_norm": 0.5068196727080182,
+  "metrics": {
+    "initial_return": 0.5,
+    "final_return": 0.625,
+    "learning_gain": 0.125,
+    "normalized_auc": 0.5807291666666666
+  },
+  "cost_law": {
+    "work": "init + rollout(24576 joint ticks,8192 renewals) + 128 updates(64 rows) + eval(432 joint ticks) + checks/publication",
+    "measured_rollout_seconds_per_cycle": 0.0008998384138294568,
+    "measured_update_seconds_per_step": 0.0011450684071405703,
+    "measured_evaluation_seconds_per_checkpoint": 0.001204287555689613,
+    "scope": "actual fixed batch32/H6; not an extrapolation to other shapes; rollout includes trajectory checks"
+  },
+  "resources": {
+    "wall_seconds_through_primary_readback": 1.4784817170002498,
+    "peak_rss_bytes": 479449088,
+    "rss_scope": "main process lifetime high-water",
+    "aggregate_cpu_seconds_through_primary_readback": 1.4427720000000002,
+    "cpu_scope": "process cumulative plus exited child cumulative; threads not counted twice",
+    "status": "measured",
+    "timing_note": "Includes heavy imports, initialization, training, nine evaluations and primary publication/readback; final metadata write/read and stdout are covered by external invocation timing."
+  }
+}

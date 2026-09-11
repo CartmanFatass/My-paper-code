@@ -30,7 +30,6 @@ TRANSPORT_VALIDATE = _load("transport_validate", SCRIPT_DIR / "validate_request.
 MATERIALIZE = _load("transport_materialize", SCRIPT_DIR / "materialize_packet.py")
 BIND = _load("transport_bind", SCRIPT_DIR / "bind_conversation.py")
 TRANSPORT_SKILL = ROOT / ".agents" / "skills" / "hmasd-chatgpt-pro-transport" / "SKILL.md"
-OUTSOURCE_SKILL = ROOT / ".agents" / "skills" / "hmasd-workflow-outsource" / "SKILL.md"
 SINGLETON_THREAD_ID = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
 
 
@@ -53,7 +52,7 @@ def project_root(tmp_path: Path) -> Path:
                 f'thread_id = "{SINGLETON_THREAD_ID}"',
                 'environment = "local"',
                 'model = "gpt-5.6-luna"',
-                'reasoning_effort = "xhigh"',
+                'reasoning_effort = "high"',
                 "",
             )
         ),
@@ -71,6 +70,13 @@ def upload_request(tmp_path: Path) -> dict[str, object]:
     return {
         "request_id": "req-transport-01",
         "direction_id": "demo_direction",
+        "workflow_node": "em_innovator",
+        "decision_authority": "pro_final",
+        "operator_thread_id": SINGLETON_THREAD_ID,
+        "dispatch_mode": "REUSE_SINGLETON",
+        "operator_reuse_required": True,
+        "operator_model": "gpt-5.6-luna",
+        "operator_thinking": "high",
         "prompt_path": str(prompt.resolve()),
         "reference_paths": [str(reference.resolve())],
         "source_thread_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
@@ -203,6 +209,83 @@ def test_receipt_outbox_is_deterministic_and_uncertain_is_not_retryable() -> Non
     assert record["return_receipt"]["status"] == "UNCERTAIN"
     assert record["return_receipt"]["retry_allowed"] is False
     assert record["return_receipt"]["attempt_count"] == 1
+
+
+@pytest.mark.parametrize("blocker", [False, True])
+def test_confirmed_rejected_receipt_retries_same_identity(blocker: bool) -> None:
+    record = _record()
+    record["state"] = "BLOCKED" if blocker else "ARCHIVED"
+    if blocker:
+        contract.stage_blocker_receipt(record, "BLOCKED", "missing source")
+    else:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "b" * 64)
+    original = dict(record["return_receipt"])
+    contract.record_receipt_result(record, "FAILED", error="tool rejected before acceptance")
+    with pytest.raises(ValueError, match="direct evidence"):
+        contract.retry_rejected_receipt(record, not_accepted_evidence="")
+    contract.retry_rejected_receipt(record, not_accepted_evidence="tool receipt: accepted=false, no message created")
+    receipt = record["return_receipt"]
+    for key in ("message_key", "parent_thread_id", "destination_thread_id", "archive_paths", "response_sha256"):
+        assert receipt.get(key) == original.get(key)
+    assert receipt["attempt_count"] == 1
+    assert receipt["rejected_attempts"][0]["error"] == "tool rejected before acceptance"
+    contract.record_receipt_result(record, "SENT", delivery_status="accepted")
+    assert record["return_receipt"]["attempt_count"] == 2
+
+
+@pytest.mark.parametrize("status", ["SENT", "UNCERTAIN"])
+def test_accepted_or_uncertain_receipt_cannot_be_reopened(status: str) -> None:
+    record = _record()
+    record["state"] = "ARCHIVED"
+    contract.stage_receipt(record, {"response_file": "response.md"}, "b" * 64)
+    contract.record_receipt_result(record, status)
+    with pytest.raises(ValueError, match="rejected receipt"):
+        contract.retry_rejected_receipt(record, not_accepted_evidence="unsupported assertion")
+
+
+@pytest.mark.parametrize("blocker", [False, True])
+@pytest.mark.parametrize("adopted", [False, True])
+def test_integrated_root_receipt_is_local_and_cannot_be_sent(blocker: bool, adopted: bool) -> None:
+    record = _record()
+    record["operator_thread_id"] = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb" if adopted else record["parent_thread_id"]
+    if adopted:
+        record["execution_thread_id"] = record["parent_thread_id"]
+    record["state"] = "SEND_UNCERTAIN" if blocker else "ARCHIVED"
+    if blocker:
+        contract.stage_blocker_receipt(record, "SEND_UNCERTAIN", "acceptance unknown")
+    else:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "b" * 64)
+    receipt = dict(record["return_receipt"])
+    assert receipt["status"] == "LOCAL"
+    assert receipt["routing_mode"] == "LOCAL"
+    assert receipt["required"] is False
+    assert receipt["destination_thread_id"] is None
+    assert receipt["attempt_count"] == 0
+    with pytest.raises(ValueError, match="pending"):
+        contract.record_receipt_result(record, "SENT")
+    if not blocker:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "b" * 64)
+        assert record["return_receipt"] == receipt
+        contract.close_tab_lease(record, reason="archive complete; locally routed")
+
+
+@pytest.mark.parametrize("blocker", [False, True])
+def test_adopted_unsent_parent_outbox_becomes_local(blocker: bool) -> None:
+    record = _record()
+    record["operator_thread_id"] = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+    record["state"] = "SEND_UNCERTAIN" if blocker else "ARCHIVED"
+    def stage():
+        if blocker:
+            contract.stage_blocker_receipt(record, "SEND_UNCERTAIN", "unknown")
+        else:
+            contract.stage_receipt(record, {"response_file": "response.md"}, "a" * 64)
+    stage()
+    assert record["return_receipt"]["status"] == "PENDING"
+    record["execution_thread_id"] = record["parent_thread_id"]
+    stage()
+    assert record["return_receipt"]["status"] == "LOCAL"
+    assert record["return_receipt"]["attempt_count"] == 0
+    assert record["return_receipt"]["destination_thread_id"] is None
 
 
 def test_missing_parent_blocks_completion_receipt_without_a_destination() -> None:
@@ -417,6 +500,15 @@ def test_validate_request_exposes_packet_plan_and_return_readiness(
     assert "fallback_thread_id" not in result
 
 
+def test_root_parent_reports_local_receipt_for_reused_executor(
+    project_root: Path, upload_request: dict[str, object]
+) -> None:
+    request = {**upload_request, "parent_thread_id": SINGLETON_THREAD_ID}
+    result = TRANSPORT_VALIDATE.validate(request, project_root)
+    assert result["dispatch_mode"] == "REUSE_SINGLETON"
+    assert result["return_receipt_ready"] is False
+
+
 def test_validate_request_requires_operator_for_every_canonical_workflow(
     project_root: Path, upload_request: dict[str, object]
 ) -> None:
@@ -429,8 +521,9 @@ def test_validate_request_requires_operator_for_every_canonical_workflow(
         "dispatch_mode": "REUSE_SINGLETON",
         "operator_reuse_required": True,
         "operator_model": "gpt-5.6-luna",
-        "operator_thinking": "xhigh",
+        "operator_thinking": "high",
     }
+    canonical.pop("operator_thread_id")
     with pytest.raises(ValueError, match="requires the configured Transport singleton operator_thread_id"):
         TRANSPORT_VALIDATE.validate(canonical, project_root)
 
@@ -457,17 +550,17 @@ def test_validate_request_requires_operator_for_every_canonical_workflow(
         )
 
 
-def test_validate_request_allows_legacy_transport_without_a_receipt_parent(
-    project_root: Path, upload_request: dict[str, object]
+@pytest.mark.parametrize("workflow_node", [None, "legacy"])
+def test_validate_new_request_cannot_fall_back_to_unrouted_legacy_mode(
+    project_root: Path, upload_request: dict[str, object], workflow_node
 ) -> None:
-    legacy = dict(upload_request)
-    legacy.pop("parent_thread_id")
-    accepted = TRANSPORT_VALIDATE.validate(legacy, project_root)
-    assert accepted["workflow_node"] == "legacy"
-    assert accepted["source_thread_id"] == upload_request["source_thread_id"]
-    assert accepted["parent_thread_id"] is None
-    assert accepted["return_receipt_ready"] is False
-    assert accepted["return_receipt_thread_id"] is None
+    request = dict(upload_request)
+    for field in ("workflow_node", "source_thread_id", "parent_thread_id", "operator_thread_id"):
+        request.pop(field, None)
+    if workflow_node is not None:
+        request["workflow_node"] = workflow_node
+    with pytest.raises(ValueError, match="workflow_node must be"):
+        TRANSPORT_VALIDATE.validate(request, project_root)
 
 
 @pytest.mark.parametrize(
@@ -519,7 +612,7 @@ def test_validate_request_enforces_canonical_single_body_attachment(
         "dispatch_mode": "REUSE_SINGLETON",
         "operator_reuse_required": True,
         "operator_model": "gpt-5.6-luna",
-        "operator_thinking": "xhigh",
+        "operator_thinking": "high",
         "operator_thread_id": SINGLETON_THREAD_ID,
     }
     canonical.pop("reference_paths")
@@ -666,6 +759,25 @@ def _em_bind_args(tmp_path: Path, request_id: str) -> Namespace:
     )
 
 
+@pytest.mark.parametrize("node", [None, "legacy"])
+def test_binding_cli_requires_current_explicit_node_before_registry_mutation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, node
+) -> None:
+    args = _em_bind_args(tmp_path, "new-request")
+    argv = ["bind_conversation.py"]
+    for name, value in vars(args).items():
+        if value is None or name == "workflow_node":
+            continue
+        argv.extend(["--" + name.replace("_", "-"), str(value)])
+    if node is not None:
+        argv.extend(["--workflow-node", node])
+    monkeypatch.setattr(sys, "argv", argv)
+    with pytest.raises(SystemExit) as exc:
+        BIND.main()
+    assert exc.value.code == 2
+    assert not args.registry.exists()
+
+
 def test_bind_rejects_canonical_request_without_runtime_operator(tmp_path: Path) -> None:
     request = _em_bind_args(tmp_path, "req-no-operator")
     request.operator_thread_id = None
@@ -782,14 +894,15 @@ def test_same_request_bind_is_idempotent_after_initial_admission(tmp_path: Path)
 
 def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> None:
     transport_text = TRANSPORT_SKILL.read_text(encoding="utf-8")
-    outsource_text = OUTSOURCE_SKILL.read_text(encoding="utf-8")
+    for reference in ("attachment-compatibility.md", "attachment-send.md"):
+        transport_text += (TRANSPORT_SKILL.parent / "references" / reference).read_text(encoding="utf-8")
 
     for phrase in (
-        "The transport task is the execution owner",
+        "independent Luna/high Transport task executes",
         "scripts/materialize_packet.py",
-        "never use `INTERVAL=1` busy polling",
+        "without busy polling",
         "the tab lease remains active while generation is pending",
-        "The executor turn ending, a heartbeat wake returning, or a timeout is never",
+        "The executor turn ending, an observation pass returning, or a timeout is never",
         "request_id|conversation_binding_key|conversation_id|provider_url",
         "stage_receipt",
         "provider filename suffix or normalization",
@@ -799,7 +912,7 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
         "rejected before acceptance and produced no external effect",
         "`parent_thread_id` is the sole completion",
         "`fallback_enabled=false`",
-        "a rejection must not cause a second send",
+        "call `retry_rejected_receipt` with the direct `not_accepted_evidence`",
         "`RETURN_RECEIPT_BLOCKED`",
         "Never multiplex a later",
         "stage_blocker_receipt",
@@ -810,13 +923,11 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
     assert "transport-level confirmation gate" not in transport_text
     assert "01a05860-" not in transport_text
     assert "01a04f5a-" not in transport_text
-    assert "owns the complete edit and verification" in outsource_text
-    assert "never silently fan out, duplicate, or replace an agent" in outsource_text
     assert "close the temporary tab\nafter recording that state" not in transport_text
 
 
 def test_skill_contracts_bound_locator_coordinate_offset_recovery() -> None:
-    transport_text = TRANSPORT_SKILL.read_text(encoding="utf-8")
+    transport_text = (TRANSPORT_SKILL.parent / "references" / "send-hit-point-recovery.md").read_text(encoding="utf-8")
 
     for phrase in (
         "Locator hit-point mismatch recovery",
@@ -841,7 +952,10 @@ def test_skill_contracts_bound_locator_coordinate_offset_recovery() -> None:
 
 
 def test_transport_contracts_require_one_attachment_for_prompt_author_packets() -> None:
-    transport_text = TRANSPORT_SKILL.read_text(encoding="utf-8")
+    transport_text = "\n".join(
+        (TRANSPORT_SKILL.parent / "references" / reference).read_text(encoding="utf-8")
+        for reference in ("attachment-compatibility.md", "attachment-send.md")
+    )
 
     assert "`PROMPT_BODY.md` is the sole scientific\nattachment" in transport_text
     assert "must not declare, upload, or synthesize `reference_paths`" in transport_text
@@ -869,9 +983,20 @@ def test_provider_model_is_verified_separately_from_executor(visible, underlying
 
 
 def test_old_answer_capture_is_not_accepted_as_new_request() -> None:
+    binding = {"conversation_id": "conversation", "user_message_id": "question", "assistant_message_id": "answer"}
+    answer = "建议继续这一项有界研究。证据支持该选择，但加速效果尚未实测。"
     with pytest.raises(ValueError, match="RESPONSE_IDENTITY_MISMATCH"):
-        contract.validate_response_identity("PINNED_REFERENCE=old-ref\nKeep the prior 19 ACTIVE directions.", request_id="new-review", pinned_reference="new-ref")
-    contract.validate_response_identity("REQUEST_ID=new-review\nPINNED_REFERENCE=new-ref\nDecision.", request_id="new-review", pinned_reference="new-ref")
+        contract.validate_response_identity(answer, expected_binding=binding, observed_binding={**binding, "assistant_message_id": "earlier-answer"})
+    contract.validate_response_identity(answer, expected_binding=binding, observed_binding=dict(binding))
+
+
+@pytest.mark.parametrize("field", ["conversation_id", "user_message_id", "assistant_message_id"])
+def test_response_pairing_requires_complete_matching_provider_evidence(field) -> None:
+    binding = {"conversation_id": "conversation", "user_message_id": "question", "assistant_message_id": "answer"}
+    with pytest.raises(ValueError, match="RESPONSE_IDENTITY_MISMATCH"):
+        contract.validate_response_identity("结论", expected_binding=binding, observed_binding={**binding, field: "other"})
+    with pytest.raises(ValueError, match="missing recorded provider binding"):
+        contract.validate_response_identity("结论", expected_binding={**binding, field: ""}, observed_binding=binding)
 
 
 def test_direct_transport_requires_owner_and_exact_caller(project_root, upload_request) -> None:
@@ -883,3 +1008,31 @@ def test_direct_transport_requires_owner_and_exact_caller(project_root, upload_r
     request["operator_thread_id"] = SINGLETON_THREAD_ID
     with pytest.raises(ValueError, match="exact source caller"):
         TRANSPORT_VALIDATE.validate(request, project_root)
+
+
+@pytest.mark.parametrize("blocker", [False, True])
+def test_native_author_receipt_after_transport_migration_returns_to_root(blocker: bool) -> None:
+    record = _record()
+    child = record["source_thread_id"]
+    root = record["parent_thread_id"]
+    record["operator_thread_id"] = root  # Immutable pre-migration handoff.
+    record["execution_thread_id"] = SINGLETON_THREAD_ID
+    assert child != root != SINGLETON_THREAD_ID
+    record["state"] = "SEND_UNCERTAIN" if blocker else "ARCHIVED"
+    if blocker:
+        contract.stage_blocker_receipt(record, "SEND_UNCERTAIN", "acceptance unknown")
+    else:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "d" * 64)
+    receipt = record["return_receipt"]
+    assert receipt["status"] == "PENDING"
+    assert receipt["destination_thread_id"] == root
+    assert receipt["routing_mode"] == "PARENT_SESSION"
+    assert receipt["source_thread_id"] == child
+    assert record["operator_thread_id"] == root
+    contract.record_receipt_result(record, "SENT")
+    saved = dict(record["return_receipt"])
+    if blocker:
+        contract.stage_blocker_receipt(record, "SEND_UNCERTAIN", "same uncertainty")
+    else:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "d" * 64)
+    assert record["return_receipt"] == saved

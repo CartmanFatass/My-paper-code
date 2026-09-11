@@ -24,7 +24,7 @@ from transport_contract import (  # noqa: E402
 )
 
 
-WORKFLOW_NODES = {"em_innovator", "em_convergence", "portfolio_decision", "legacy"}
+WORKFLOW_NODES = {"em_innovator", "em_convergence", "portfolio_decision"}
 
 
 def _error(message: str) -> int:
@@ -52,10 +52,10 @@ def _singleton_thread_id(project_root: Path) -> str:
         raise ValueError("Transport singleton config must be schema 1, singleton, and active")
     if (
         config.get("model") != "gpt-5.6-luna"
-        or config.get("reasoning_effort") != "xhigh"
+        or config.get("reasoning_effort") != "high"
         or config.get("environment") != "local"
     ):
-        raise ValueError("Transport singleton config must pin gpt-5.6-luna/xhigh in the local project")
+        raise ValueError("Transport singleton config must pin gpt-5.6-luna/high in the local project")
     return validate_source_thread_id(config.get("thread_id"))
 
 
@@ -84,9 +84,9 @@ def validate(request: dict, project_root: Path) -> dict:
         raise ValueError("direction_id must use letters, digits, underscore, or hyphen")
 
     portfolio_path = project_root / "docs" / "research" / "portfolio" / "PORTFOLIO.md"
-    workflow_node = request.get("workflow_node", "legacy")
+    workflow_node = request.get("workflow_node")
     if workflow_node not in WORKFLOW_NODES:
-        raise ValueError("workflow_node must be em_innovator, em_convergence, portfolio_decision, or legacy")
+        raise ValueError("workflow_node must be em_innovator, em_convergence, or portfolio_decision")
     direction_ids_value = request.get("direction_ids", [direction_id])
     if not isinstance(direction_ids_value, list) or not direction_ids_value:
         raise ValueError("direction_ids must be a non-empty list")
@@ -110,10 +110,6 @@ def validate(request: dict, project_root: Path) -> dict:
             raise ValueError("an EM decision node requires exactly its direction_id in direction_ids")
         suffix = "innovator" if workflow_node == "em_innovator" else "convergence"
         expected_binding_key = f"em:{direction_id}:{suffix}"
-    else:
-        if direction_ids != [direction_id]:
-            raise ValueError("legacy transport accepts exactly one direction")
-        expected_binding_key = f"legacy:{direction_id}"
 
     conversation_binding_key = request.get("conversation_binding_key", expected_binding_key)
     if conversation_binding_key != expected_binding_key:
@@ -149,7 +145,7 @@ def validate(request: dict, project_root: Path) -> dict:
             raise ValueError("provider_context_reset_evidence requires reset_invalid_provider_context=true")
         provider_context_reset_evidence = None
     decision_authority = request.get("decision_authority")
-    if workflow_node != "legacy" and decision_authority != "pro_final":
+    if decision_authority != "pro_final":
         raise ValueError("decision_authority must be pro_final for a Pro decision node")
 
     prompt = request.get("prompt")
@@ -213,11 +209,9 @@ def validate(request: dict, project_root: Path) -> dict:
             }
         )
 
-    canonical_handoff = workflow_node != "legacy" or declared_source_mode == "single_body_attachment"
     source_thread_id = request.get("source_thread_id")
     if source_thread_id is None:
-        if canonical_handoff:
-            raise ValueError("canonical handoff requires source_thread_id")
+        raise ValueError("canonical handoff requires source_thread_id")
     else:
         source_thread_id = validate_source_thread_id(source_thread_id)
     creator_thread_id = request.get("creator_thread_id", source_thread_id)
@@ -227,8 +221,7 @@ def validate(request: dict, project_root: Path) -> dict:
             raise ValueError("creator_thread_id must equal source_thread_id")
     parent_thread_id = request.get("parent_thread_id")
     if parent_thread_id is None:
-        if canonical_handoff:
-            raise ValueError("canonical handoff requires parent_thread_id")
+        raise ValueError("canonical handoff requires parent_thread_id")
     else:
         parent_thread_id = validate_parent_thread_id(parent_thread_id)
     return_receipt_thread_id = request.get("return_receipt_thread_id", parent_thread_id)
@@ -242,12 +235,12 @@ def validate(request: dict, project_root: Path) -> dict:
     operator_thread_id = request.get("operator_thread_id")
     if operator_thread_id is not None:
         operator_thread_id = validate_source_thread_id(operator_thread_id)
-    if canonical_handoff and operator_thread_id is None:
+    if operator_thread_id is None:
         raise ValueError("canonical handoff requires the configured Transport singleton operator_thread_id")
     dispatch_mode = request.get("dispatch_mode")
     if dispatch_mode not in {None, "REUSE_SINGLETON", "CALLER_DIRECT"}:
         raise ValueError("dispatch_mode=REUSE_SINGLETON or owner-directed CALLER_DIRECT is required")
-    if canonical_handoff and dispatch_mode not in {"REUSE_SINGLETON", "CALLER_DIRECT"}:
+    if dispatch_mode not in {"REUSE_SINGLETON", "CALLER_DIRECT"}:
         raise ValueError("new canonical handoffs require an explicit dispatch_mode")
     owner_execution_instruction = request.get("owner_execution_instruction")
     if dispatch_mode == "CALLER_DIRECT":
@@ -268,8 +261,8 @@ def validate(request: dict, project_root: Path) -> dict:
     if dispatch_mode == "REUSE_SINGLETON":
         if operator_reuse_required is not True:
             raise ValueError("REUSE_SINGLETON requires operator_reuse_required=true")
-        if operator_model != "gpt-5.6-luna" or operator_thinking != "xhigh":
-            raise ValueError("Transport singleton must use gpt-5.6-luna with xhigh reasoning")
+        if operator_model != "gpt-5.6-luna" or operator_thinking != "high":
+            raise ValueError("Transport singleton must use gpt-5.6-luna with high reasoning")
         if operator_thread_id != _singleton_thread_id(project_root):
             raise ValueError("operator_thread_id does not match the configured project Transport singleton")
 
@@ -287,7 +280,7 @@ def validate(request: dict, project_root: Path) -> dict:
         "workflow_node": workflow_node,
         "conversation_binding_key": conversation_binding_key,
         "requested_conversation_id": requested_conversation_id,
-        "conversation_reuse_required": bool(request.get("conversation_reuse_required", workflow_node != "legacy")),
+        "conversation_reuse_required": bool(request.get("conversation_reuse_required", True)),
         "reset_invalid_provider_context": reset_invalid_provider_context,
         "provider_context_reset_evidence": provider_context_reset_evidence,
         "decision_authority": decision_authority,
@@ -317,7 +310,7 @@ def validate(request: dict, project_root: Path) -> dict:
         "provider_requirement": dict(provider_requirement),
         "return_route": return_route,
         "return_receipt_thread_id": return_receipt_thread_id,
-        "return_receipt_ready": bool(parent_thread_id) and not (dispatch_mode == "CALLER_DIRECT" and parent_thread_id == source_thread_id),
+        "return_receipt_ready": parent_thread_id != operator_thread_id,
         "reference_files": reference_files,
         "packet": packet,
     }

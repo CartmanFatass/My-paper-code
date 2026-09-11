@@ -1,0 +1,75 @@
+{
+  "id": "20260908-frrie-003",
+  "created": "2026-09-08T02:18:03-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FRRIE A08：一次原生故障位置观察的静态准备",
+  "context": "Claim: A08 will locate the original R09 process's native fault context if a fatal stop yields a readable PC/module or native caller record within one bounded observation.\nBinding MARL structure: systems / information flow.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "在P39内继续静态准备；方法和精确字节接受后才运行一次，现时零新运行。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "保留A07结论并停止新增观察准备。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按指定改动修订未来观察，旧证据不变。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "保留材料无法回答原生位置；P39已明确分配条件路线，完整终止方法尚待落实。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_NATIVE_FATAL_A08_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_NATIVE_CONTEXT_P39_RETAINED_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受一次原生故障位置观察的问题与准备范围？只有现有设施能满足全程终止边界、命令被接受后才执行。",
+    "changes_if_approved": [
+      {
+        "target": "FRRIE A08 原生故障卡",
+        "from": "限定位置无可用转存材料；没有新的原生观察命令",
+        "to": "准备一次至多120秒的原日程原生故障观察；包含调试器及子进程创建到强制终止，最多32帧、一条指令及指定通用寄存器"
+      }
+    ],
+    "if_refused": "保留A07故障栈和定时报栈未实现的原结论；停止新增观察准备，不改源码或重跑学习。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_NATIVE_CONTEXT_P39_RETAINED_INTAKE_20260908.md",
+        "quote": "No attributable native crash material was accessible through the permitted paths.",
+        "why": "现有Python故障栈缺少原生指令位置，限定的离线材料路线不能回答这一问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_B05_NATIVE_FATAL_P36_RESULT_EVIDENCE_20260908.md",
+        "quote": "creation-through-KILL containment of both debugger and inferior inside the one115+5s envelope",
+        "why": "现有调试器虽已安装，全程终止方法仍未落实；不能把后期EXITKILL当作整个过程的保证。"
+      }
+    ],
+    "uncertainty": [
+      "可能不重现或缺少符号；故障位置也不等于导致损坏的写入者。",
+      "静态准备若无法建立现有设施的方法，返回具体工程缺口，保持零新运行。"
+    ],
+    "cost": {
+      "compute": "只读查找已用2.1170146秒；离线调试0次。将来的单次观察至多120秒，原两臂128轮上限不变；新增一次有界原生报告，开销未知但计入同一上限。",
+      "owner_time": "无需等待回复，已有P39范围内继续准备。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "接受A08问题与静态准备范围。只有完整终止方法及精确命令被接受后，才由Root执行P39的一次条件观察；否则返回具体缺口。",
+    "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_NATIVE_FATAL_A08_SCIENCE_CARD_20260908.md"
+  },
+  "starred": false
+}

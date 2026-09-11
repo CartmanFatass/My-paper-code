@@ -5,8 +5,8 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from config_1 import Config
-from train_multiproc_config_1 import run_scenario7_physical_feasibility_check
+from configs.config_1 import Config
+from experiments.launchers.train_multiproc_config_1 import run_scenario7_physical_feasibility_check
 
 
 if __name__ == "__main__":

@@ -1,0 +1,96 @@
+{
+  "id": "20260905-vspc1-001",
+  "created": "2026-09-05T16:44:53-07:00",
+  "direction": "vsp_c1",
+  "tier": "direction",
+  "kind": "new-card",
+  "title": "VSP-C1完整支持两臂B01",
+  "context": "完整Pro已选定并成卡；当前继续工程准备，保留旧证据。供异步审阅，不等待再次批准。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "继续已选卡与必要工程。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在干净边界停止未执行的受影响工作并保留证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体修改意见处理受影响的后续工作。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B01_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": {
+    "question": "VSP-C1 已按完整 Pro 选择冻结一次真实的两臂单种子学习比较；是否需要异步修订这张 B 卡？当前工程准备继续推进，不等待再次批准。",
+    "changes_if_approved": [
+      {
+        "target": "VSPC1_K4_FACTOR_VALUE_B01_SCIENCE_CARD_20260905.md",
+        "from": "旧材料仅有宿主缺失的可用性结论，新学习对象尚未选定",
+        "to": "已选定并冻结完整支持人口的 FACTOR 与 GENERIC 比较：一个训练种子，每臂128次更新，六步原生服务回报；实现和实验尚未完成"
+      },
+      {
+        "target": "DIRECTION.md 的下一判别项；由 Root 同步 Portfolio 科学说明",
+        "from": "前瞻四角与伙伴留出设计",
+        "to": "首轮训练全部八个外生上下文，以真实有限预算学习比较决定下一步；生命周期和优先级不变"
+      }
+    ],
+    "if_refused": "异步拒绝或修订在下一个干净边界应用，停止尚未执行的受影响后续工作并保留已经观察的证据；旧宿主缺失结论和旧 D6 停止边界仍在，不把拒绝解释成机制负面。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_innovator_20260905/archive/RESPONSE.md",
+        "quote": "我的最终选择是：采用这个两角色服务 toy，补全学习器与测量口径，直接进入一次 seed 0、两个学习臂的有界 B 比较；不先安排零学习 A，也不把强制首动作表或穷举上参考设为前置。首轮训练全部身份—周期单元，并让两个伙伴行为层都出现在训练中。",
+        "why": "完整 Pro 已明确选择真实学习并补全参数、训练、评价与预算，设计无需另一轮上参考审计。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_innovator_20260905/archive/RESPONSE.md",
+        "quote": "同一公开初态的最优首动作随周期翻转。",
+        "why": "周期实际改变合法动作的原生后果，这次学习比较具有一个具体的判别问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_innovator_20260905/archive/RESPONSE.md",
+        "quote": "整个任务可以还原为完全可观测的单控制器有限时域问题。",
+        "why": "固定且公开的伙伴不支持战略性 MARL、非平稳性或协同适应主张。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_innovator_20260905/archive/RESPONSE.md",
+        "quote": "两个周期配四维嵌入，并没有形成有约束力的“秩四瓶颈”",
+        "why": "即使因子化模型更好，初始化、优化和一般参数化差异仍是替代解释。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_IDENTITY_PERIOD_HEADROOM_A01_INTAKE_20260904.md",
+        "quote": "Missing production-host support is an engineering/access fact, and the current Portfolio text already forbids using it to decide bounded compositional learning.",
+        "why": "旧核查仍没有可用学习宿主或数值 headroom；需要实际实现，不能把缺失值当零或胜负证据。"
+      }
+    ],
+    "uncertainty": [
+      "尚无新学习器、真实参数位移、回报和实际运行耗时；准备计数不是实验结果。",
+      "任务很小且伙伴计划公开，通用模型可能迅速追平，使宿主缺乏进一步分辨力。",
+      "一个训练种子不能估计训练种子总体不确定性，评价上下文和重复 checkpoint 不能冒充独立训练。",
+      "可信改善可支持另行记录的有限独立种子跟进；没有正结果也不是全面停止规则。"
+    ],
+    "cost": {
+      "compute": "每臂计划4,096条训练任务、128次更新、72条评价任务，训练加评价25,008个联合原生步；两臂共50,016步。两臂串行，每臂完整调用上限45分钟，实际耗时和内存尚未测量。未选择额外A、参考普查、第三臂或未来种子。",
+      "owner_time": "无需实时批准；可在批改台异步查看、拒绝或修订。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；卡已冻结，工程实现仍按正常流程推进"
+    },
+    "verdict_text": "我的最终选择是：采用这个两角色服务 toy，补全学习器与测量口径，直接进入一次 seed 0、两个学习臂的有界 B 比较；不先安排零学习 A，也不把强制首动作表或穷举上参考设为前置。首轮训练全部身份—周期单元，并让两个伙伴行为层都出现在训练中。",
+    "source": "docs/research/candidates/vsp_c1/pro_innovator_20260905/archive/RESPONSE.md"
+  },
+  "starred": true
+}

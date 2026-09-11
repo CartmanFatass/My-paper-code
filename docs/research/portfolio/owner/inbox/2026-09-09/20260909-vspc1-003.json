@@ -1,0 +1,76 @@
+{
+  "id": "20260909-vspc1-003",
+  "created": "2026-09-09T02:59:32-07:00",
+  "direction": "vsp_c1",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "P77：独立重复固定512/768回合原生比较",
+  "context": "主张：新训练配对中门控网络相对普通宽MLP的回报差从512到768回合再次下降超过.01。绑定MARL结构：时间抽象，五个部分可观察且共同适应的智能体。新主键8502、固定CHANGE_DOWN(.60)，保留所有端点和H损失。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "在P77独立预算内执行唯一新配对，不等待回复。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一个干净边界停止依赖此卡的未执行部分，保留全部已有证据，不补跑。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在下一个干净边界按具体修订处理，不改写已经观察到的结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "新训练实例直接检验局部变化是否重现；同一端点追加评估不能替代独立配对，Root已给新预算。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B11_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B11_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L21",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "P77已单独分配一组新训练，是否保留8502固定512/768端点及同一悬停参照的独立重复卡？",
+    "changes_if_approved": [
+      {
+        "target": "VSPC1 B11 card",
+        "from": "P76已完成，下一组仍是建议",
+        "to": "8502一组新配对，沿用全部方法、主次读数和预算，固定CHANGE_DOWN(.60)预测"
+      }
+    ],
+    "if_refused": "在下一个干净边界应用修订或拒绝；保留8501所有端点和旧正负结果，不补跑、不把操作决定当科学负证据。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B11_SCIENCE_CARD_20260909.md#1-question-and-authority",
+        "quote": "The next new pair measures another real learning outcome and its variation;",
+        "why": "当前只有一组同轨迹观测，新配对直接给出另一个独立训练实例，而追加旧端点评估不能做到。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B11_SCIENCE_CARD_20260909.md#1-question-and-authority",
+        "quote": "GATED's\npoint mean increased .0037860920 and MLP's .0580251854; MLP512 was below H,\nwith the other three means above H.",
+        "why": "第一次的相对优势缩小包含普通MLP追赶，不能解释成门控绝对退化；中点参照的能力也有限。"
+      }
+    ],
+    "uncertainty": [
+      "新结果完成后仍只有两个训练配对；各自32个评估回合不是训练种子。",
+      "768端点的原小正差值接近.01边界，保留噪声与全部H损失。",
+      "调优同信息余量仍缺失；相同方法重复不识别预算因果或专属信用机制。"
+    ],
+    "cost": {
+      "compute": "最多一次被接受的提交，434176团队步、3072次Adam、160次评估、四次构造；完整每臂1800秒、整组3600秒。上组475.85秒仅作计划；新绑定检查不超过300秒，不重复模型或原生试跑。",
+      "owner_time": "异步阅读，不等待回复。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Options: (a) one further independent unchanged two-endpoint pair; (b) add\nevaluation/checkpoints to8501 or select its best; (c) exact diagnosis or stronger\nclass. Recommend/select(a).",
+    "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B11_SCIENCE_CARD_20260909.md"
+  },
+  "starred": false
+}

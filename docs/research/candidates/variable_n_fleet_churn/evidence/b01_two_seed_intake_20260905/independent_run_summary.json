@@ -1,0 +1,52 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "VNFC-N7-DIRECT-RETURN-B01",
+      "arm": "DIRECT",
+      "n": 2,
+      "mean": 0.24305338541666666,
+      "sample_sd": 0.007264417322346179,
+      "min": 0.23791666666666667,
+      "max": 0.24819010416666668,
+      "runs": {
+        "2026090501": 0.24819010416666668,
+        "2026090503": 0.23791666666666667
+      }
+    },
+    {
+      "task": "VNFC-N7-DIRECT-RETURN-B01",
+      "arm": "MAPR",
+      "n": 2,
+      "mean": 0.25275390625,
+      "sample_sd": 0.015421925240722235,
+      "min": 0.24184895833333334,
+      "max": 0.2636588541666667,
+      "runs": {
+        "2026090501": 0.2636588541666667,
+        "2026090503": 0.24184895833333334
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "VNFC-N7-DIRECT-RETURN-B01",
+      "arm": "MAPR",
+      "baseline": "DIRECT",
+      "summary": {
+        "n": 2,
+        "mean": 0.009700520833333337,
+        "sample_sd": 0.008157507918376055,
+        "min": 0.003932291666666671,
+        "max": 0.015468750000000003
+      },
+      "differences": {
+        "2026090501": 0.015468750000000003,
+        "2026090503": 0.003932291666666671
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

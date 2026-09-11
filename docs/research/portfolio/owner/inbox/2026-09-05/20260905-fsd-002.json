@@ -1,0 +1,33 @@
+{
+  "id": "20260905-fsd-002",
+  "created": "2026-09-05T03:07:36-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接受 E3 大差异提前续约种子一为第十四个有效单元",
+  "context": "原卡完整训练、评估、路径与参数变化记录齐全；十个产物哈希一致。E3 为 14/18，有效单格不触发总体规则。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受完整单元，保留全矩阵判读规则",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "等待全矩阵再确认单格有效性",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "原卡必需证据和技术验收齐全，单格有效性与总体机制判读分别处理。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D2_SEED1_INTAKE_20260905.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D2_SEED1_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#fsd-e3-large-d2-seed1-terminal-20260905",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

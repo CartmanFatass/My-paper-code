@@ -1,0 +1,38 @@
+{
+  "id": "20260904-dish-024",
+  "created": "2026-09-04T18:47:47-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "DISH A01 计数口径：保留同一tick内首次出现的准备状态",
+  "context": "CM在实现前发现：准备状态可在最后一个存活tick的完成阶段出现，若只检查准备边界会漏报。选择分别记录两个边界，任一存活边界观察到即计为存在；固定计数时钟和终止补齐分母。",
+  "options": [
+    {
+      "key": "a",
+      "label": "分别记录并保留任一存活边界的观察",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "只读取准备边界",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "暂缓诊断",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "不能把已在原生完成步骤中观察到的准备状态误标成不存在；该口径保持原路径和科学问题。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_SCIENCE_CARD_20260904.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_COMPLETE_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n3-dish-b01-complete-intake",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,32 @@
+{
+  "id": "20260905-crto-003",
+  "created": "2026-09-05T02:40:26-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B05：接受两个比较器受限结果",
+  "context": "种子 1 和 2 的独立重算均为 BR-E：RAW 长终点 REPLAN 为 5/8，低于 6/8；两侧平均 regret 均通过。两次完整有效结果按冻结规则合并为比较器受限，不能扩展 B04 的残差负结论。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受完整诊断",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "等另一个比较器后再读取",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "后续比较器工作改变下一对象的范围，不改变这两次完整结果的有效性。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_JOINT_SEED_B05_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b05-joint-seed-result",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

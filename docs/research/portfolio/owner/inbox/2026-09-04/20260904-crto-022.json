@@ -1,0 +1,37 @@
+{
+  "id": "20260904-crto-022",
+  "created": "2026-09-04T17:13:48-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B02：接受完整周期不胜任结果",
+  "context": "独立重算全部 96 个决策与五组预测，均与卡和结果一致。平均读出在三个结束点都未胜任，配对 regret 变化全部在 MEI 内；这是有效探索性负结果。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受卡定结果并保留全部数据",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "因未改善而隔离结果",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "把动作不变认作胜任",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "测量与工程完整，分支映射唯一；未改善不等于无效。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CYCLE_READOUT_B02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b02-full-cycle-readout-result",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

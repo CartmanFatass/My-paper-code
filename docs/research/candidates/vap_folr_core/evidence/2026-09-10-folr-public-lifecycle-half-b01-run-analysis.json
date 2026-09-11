@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "FOLR-PUBLIC-LIFECYCLE-HALF-B01",
+      "arm": "HALF_EVENT",
+      "n": 1,
+      "mean": 3.2459374999999997,
+      "sample_sd": null,
+      "min": 3.2459374999999997,
+      "max": 3.2459374999999997,
+      "runs": {
+        "7807": 3.2459374999999997
+      }
+    },
+    {
+      "task": "FOLR-PUBLIC-LIFECYCLE-HALF-B01",
+      "arm": "RETAIN",
+      "n": 1,
+      "mean": 1.6804687499999995,
+      "sample_sd": null,
+      "min": 1.6804687499999995,
+      "max": 1.6804687499999995,
+      "runs": {
+        "7807": 1.6804687499999995
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "FOLR-PUBLIC-LIFECYCLE-HALF-B01",
+      "arm": "HALF_EVENT",
+      "baseline": "RETAIN",
+      "summary": {
+        "n": 1,
+        "mean": 1.5654687500000002,
+        "sample_sd": null,
+        "min": 1.5654687500000002,
+        "max": 1.5654687500000002
+      },
+      "differences": {
+        "7807": 1.5654687500000002
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

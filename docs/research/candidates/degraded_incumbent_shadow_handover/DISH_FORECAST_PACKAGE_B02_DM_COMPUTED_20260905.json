@@ -1,0 +1,308 @@
+{
+  "object": "DISH-FORECAST-PACKAGE-B02",
+  "unit": "one paired training seed; four finite development conditions aggregated once per arm",
+  "source_launch_sha": "47f81c15c536c2b4c4ee463eaa7a35f720ec08c7",
+  "primary": {
+    "control_mean": 470.0,
+    "package_mean": 470.0,
+    "mean_difference": 0.0,
+    "MEI_ticks": 24,
+    "training_seed_pairs": 1,
+    "population_uncertainty": "unestimated; n=1 paired seed"
+  },
+  "paired_rows": [
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/0",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K8",
+      "control_service_ticks": 572,
+      "package_service_ticks": 572,
+      "difference": 0,
+      "control_energy": 169692.20416642696,
+      "package_energy": 169692.20416642696,
+      "control_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "package_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "control_transfers": 0,
+      "package_transfers": 0,
+      "control_terminal_causes": [
+        "fixed_horizon"
+      ],
+      "package_terminal_causes": [
+        "fixed_horizon"
+      ]
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K4_TO_K12/0",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K4_TO_K12",
+      "control_service_ticks": 447,
+      "package_service_ticks": 447,
+      "difference": 0,
+      "control_energy": 162885.33075914986,
+      "package_energy": 162885.33075914986,
+      "control_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "package_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "control_transfers": 0,
+      "package_transfers": 0,
+      "control_terminal_causes": [
+        "fixed_horizon"
+      ],
+      "package_terminal_causes": [
+        "fixed_horizon"
+      ]
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K8/0",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K8",
+      "control_service_ticks": 433,
+      "package_service_ticks": 433,
+      "difference": 0,
+      "control_energy": 164828.901961202,
+      "package_energy": 164828.901961202,
+      "control_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "package_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "control_transfers": 0,
+      "package_transfers": 0,
+      "control_terminal_causes": [
+        "fixed_horizon"
+      ],
+      "package_terminal_causes": [
+        "fixed_horizon"
+      ]
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K4_TO_K12/0",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K4_TO_K12",
+      "control_service_ticks": 428,
+      "package_service_ticks": 428,
+      "difference": 0,
+      "control_energy": 161669.57931834974,
+      "package_energy": 161669.57931834974,
+      "control_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "package_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "control_transfers": 0,
+      "package_transfers": 0,
+      "control_terminal_causes": [
+        "fixed_horizon"
+      ],
+      "package_terminal_causes": [
+        "fixed_horizon"
+      ]
+    }
+  ],
+  "arms": {
+    "CONTROL": {
+      "actual_exposure": {
+        "completed_updates": 16,
+        "consequence_scope": "unmeasured; zero service does not reveal skipped native calls",
+        "consequence_steps": null,
+        "consequence_steps_upper": 172820,
+        "delay_steps": 17282,
+        "native_training_calls_lower": 148354,
+        "native_training_calls_upper": 321174,
+        "next_label_steps": 65536,
+        "next_mask_count": 65504,
+        "optimizer_steps": 512,
+        "ordinary_evaluation_ticks": 4800,
+        "ordinary_training_transitions": 65536,
+        "paired_training_replicates": 1,
+        "service_label_eligible": 8641
+      },
+      "parameter_movement": {
+        "absolute_l1_displacement": 2923.5314606231263,
+        "final_norm": 39.30807845434155,
+        "initial_norm": 38.24157533891136,
+        "l2_displacement": 9.020952382577892,
+        "relative_l2_displacement": 0.23589384858313983
+      },
+      "training_service": 36615,
+      "training_energy": 8968683.269300953,
+      "training_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "training_legal_transfers": 0,
+      "training_terminals": 32,
+      "last_service_bce": 0.04465655982494354,
+      "last_target_loss": 11066.8193359375,
+      "resources_unmeasured": true,
+      "resource_scope": "Linux self + reaped-child CPU; separate self/child RSS maxima, not summed; scratch unmeasured. Wall starts before runner imports except time.",
+      "external_wall_seconds": 337.23,
+      "external_user_cpu_seconds": 289.24,
+      "external_system_cpu_seconds": 63.55,
+      "external_cpu_seconds": 352.79,
+      "max_rss_kib": 612084,
+      "complete_charged_external_wall_seconds": 340.64500000000004,
+      "loss_comparison_scope": "target losses differ in objective/scaling; service BCE is training on respective trajectories, not held-out matched accuracy",
+      "curve_extrema": {
+        "mean_loss": {
+          "min": 149.33744502067566,
+          "min_update": 15,
+          "max": 825.6531448364258,
+          "max_update": 10
+        },
+        "mean_gradient_norm": {
+          "min": 23.15243637561798,
+          "min_update": 15,
+          "max": 391.3915294408798,
+          "max_update": 10
+        }
+      }
+    },
+    "FORECAST_PACKAGE": {
+      "actual_exposure": {
+        "completed_updates": 16,
+        "consequence_scope": "unmeasured; zero service does not reveal skipped native calls",
+        "consequence_steps": null,
+        "consequence_steps_upper": 172980,
+        "delay_steps": 17298,
+        "native_training_calls_lower": 148370,
+        "native_training_calls_upper": 321350,
+        "next_label_steps": 65536,
+        "next_mask_count": 65504,
+        "optimizer_steps": 512,
+        "ordinary_evaluation_ticks": 4800,
+        "ordinary_training_transitions": 65536,
+        "paired_training_replicates": 1,
+        "service_label_eligible": 8649
+      },
+      "parameter_movement": {
+        "absolute_l1_displacement": 2729.5323303272066,
+        "final_norm": 39.149200792042365,
+        "initial_norm": 38.24157533891136,
+        "l2_displacement": 8.515494924525886,
+        "relative_l2_displacement": 0.22267636333122617
+      },
+      "training_service": 36607,
+      "training_energy": 8968698.629300952,
+      "training_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "training_legal_transfers": 0,
+      "training_terminals": 32,
+      "last_service_bce": 0.007441193331032991,
+      "last_target_loss": 99.36277770996094,
+      "resources_unmeasured": true,
+      "resource_scope": "Linux self + reaped-child CPU; separate self/child RSS maxima, not summed; scratch unmeasured. Wall starts before runner imports except time.",
+      "external_wall_seconds": 298.6,
+      "external_user_cpu_seconds": 261.09,
+      "external_system_cpu_seconds": 49.02,
+      "external_cpu_seconds": 310.10999999999996,
+      "max_rss_kib": 609420,
+      "complete_charged_external_wall_seconds": 302.01500000000004,
+      "loss_comparison_scope": "target losses differ in objective/scaling; service BCE is training on respective trajectories, not held-out matched accuracy",
+      "curve_extrema": {
+        "mean_loss": {
+          "min": 10.566485837101936,
+          "min_update": 16,
+          "max": 7423381.7265625,
+          "max_update": 10
+        },
+        "mean_gradient_norm": {
+          "min": 16.111391201615334,
+          "min_update": 16,
+          "max": 22054892.236206055,
+          "max_update": 11
+        }
+      }
+    }
+  },
+  "shared_focused": {
+    "external_wall_seconds": 6.83,
+    "external_user_cpu_seconds": 6.25,
+    "external_system_cpu_seconds": 0.46,
+    "external_cpu_seconds": 6.71,
+    "max_rss_kib": 581340
+  },
+  "source_paths": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/b02_20260905/control.summary.json",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/b02_20260905/forecast_package.summary.json"
+  ],
+  "analysis_exposure": {
+    "new_models": 0,
+    "new_native_steps": 0,
+    "new_backward": 0,
+    "new_optimizer_steps": 0
+  },
+  "complete_pair_external_wall_seconds": 642.6600000000001,
+  "complete_pair_external_cpu_seconds": 669.61,
+  "whole_wall_scope": "single shared focused preparation plus two complete original preflight-and-runner commands; agent/Git/queue gaps excluded; no speedup claim",
+  "source_collection_commit": "f1886e4aef198b0bc6e1a76261fe80d973105a25"
+}

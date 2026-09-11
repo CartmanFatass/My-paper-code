@@ -1,0 +1,95 @@
+{
+  "id": "20260906-vnfc-001",
+  "created": "2026-09-06T07:18:20-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "VNFC：Pro 暂停 B01 N7 直接回报比较族（可逆，无下一对象）",
+  "context": "部署方式评估分支 3 后，Convergence（PRO_FINAL，2026-09-06）暂停当前 B01 比较族：不选新训练、记录分析或第三次 recast；DM 提案中的「缺少 headroom 记录」与「排序最低」两条理由被 Pro 剔除，只以缺少判别信号为据。可逆、限定范围，不是 PARK；重开需要一个具名的信息/表示/信用/优化干预及其完整链条与真实训练对照。成本口径：2,700 秒是对象累计总额；累计 827.76 秒（runner）/ 828.98 秒（外层）。VNFC 退出 Claude 工作集，ACTIVE 不变。",
+  "options": [
+    {
+      "key": "a",
+      "label": "按 Pro 决定暂停（已执行）",
+      "consequence": "VNFC 回到队列；生命周期、优先级、recast 计数不变；无新调用。"
+    },
+    {
+      "key": "b",
+      "label": "提出满足重开条件的具体新学习问题",
+      "consequence": "DM 在下一个干净边界按你的问题写卡并回到 Convergence 节点。"
+    },
+    {
+      "key": "c",
+      "label": "指示 Portfolio 层 PARK",
+      "consequence": "属于 Portfolio 层决定；Root 记录后按你的指示处理。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "PRO_FINAL 方向层决定已归档且符合规范；本节点无权改生命周期。",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_POST_DEPMODE_CONVERGENCE_INTAKE_20260906.md",
+    "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260906_post_depmode_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-06.md#L20",
+  "brief": "docs/research/portfolio/owner/briefs/variable_n_fleet_churn/2026-09-06_post-deployment-mode-convergence.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Pro 已决定暂停 VNFC 当前 B01 的 N7 直接回报比较族（不选新训练、记录分析或第三次 recast；部署方式子问题按分支 3 结束）；是否对这一限定范围作异步改动？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md 与 PORTFOLIO 行",
+        "from": "部署方式评估后待 Convergence 决定",
+        "to": "B01 比较族暂停（可逆、限定）；无下一对象；重开条件已记录"
+      },
+      {
+        "target": "Claude 枢纽工作集",
+        "from": "VNFC 占一个推进槽",
+        "to": "VNFC 退出工作集，回到队列；生命周期 ACTIVE、优先级、recast 计数不变"
+      },
+      {
+        "target": "成本口径",
+        "from": "累计 827.76 秒；「每臂 2,700 秒」表述",
+        "to": "runner 口径 827.76 秒 / 外层口径 828.98 秒并列；2,700 秒是对象累计总额，不是每臂"
+      }
+    ],
+    "if_refused": "所有者若在条目里指示继续（例如提出满足重开条件的具体新学习问题），DM 在下一个干净边界按指示重开；否则暂停按 Pro 决定执行。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260906_post_depmode_convergence/archive/RESPONSE.md",
+        "quote": "最终决定：暂停当前 B01 的 N7 直接回报比较族……此刻不选择新的训练、额外记录分析或第三次 recast。",
+        "why": "本节点完整、已归档的 PRO_FINAL 方向层决定。"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_B01_DEPLOYMENT_MODE_EVAL_RESULT_INTAKE_20260905.md",
+        "quote": "All four primary differences lie within (−.10, +.10) and the signs are mixed",
+        "why": "上一轮唯一后继观察无可用信号，执行方式被排除为解释。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260906_post_depmode_convergence/archive/RESPONSE.md",
+        "quote": "DM 的暂停建议中，“缺少 headroom 记录”和“second-recast 后排序最低”不应进入本次科学否定链。",
+        "why": "Pro 明确剔除了 DM 的两条理由；暂停只以缺少判别信号为据。"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md",
+        "quote": "MAPR final-minus-initial R_fail_60 is+.204128/+.199453 and DIRECT+.188659/+.195521",
+        "why": "真实恢复学习已两次出现；暂停不是「没学会」。"
+      }
+    ],
+    "uncertainty": [
+      "未测的表示、信用分配、优化曝光或信息差异仍可能重要；部署方式评价没有唯一定位它们。",
+      "HMAC/SIGSEGV 仍未唯一定位；不被两次成功运行治愈，也不自动阻塞新路径。"
+    ],
+    "cost": {
+      "compute": "零；本轮无新调用",
+      "owner_time": "阅读本条目约 2 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待；暂停已按 PRO_FINAL 执行；所有者的不同指示在下一个干净边界应用"
+    },
+    "verdict_text": "PRO_FINAL / PAUSE：暂停当前 B01 N7 直接回报比较族；无下一对象；可逆，不是 PARK。",
+    "source": "docs/research/candidates/variable_n_fleet_churn/VNFC_POST_DEPMODE_CONVERGENCE_INTAKE_20260906.md"
+  },
+  "starred": true
+}

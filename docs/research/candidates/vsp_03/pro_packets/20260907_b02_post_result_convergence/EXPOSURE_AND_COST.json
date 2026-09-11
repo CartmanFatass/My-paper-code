@@ -1,0 +1,90 @@
+{
+  "method": "Python 3.11 standard-library arithmetic over existing summary.json and supervisor.log; no model, rollout, optimizer, evaluator or analysis-summarizer rerun.",
+  "source_revision": "088e5d9892fa10687d12f1770e7eec21122d5a3f",
+  "sources": [
+    "docs/research/candidates/vsp_03/b02_p10_result_20260907/summary.json",
+    "docs/research/candidates/vsp_03/b02_p10_result_20260907/supervisor.log",
+    "docs/research/candidates/vsp_03/VSP03_B02_P10_INTAKE_20260907.md#5-exposure-cost-and-prediction"
+  ],
+  "observed_B02": {
+    "independent_training_pairs": 1,
+    "learner_starts": 2,
+    "parameters_per_learner": {
+      "T": 2083,
+      "G": 2083
+    },
+    "training_joint_episodes": 32768,
+    "final_evaluation_joint_episodes": 6144,
+    "validation_joint_episodes": 8,
+    "complete_joint_episodes": 38920,
+    "team_ticks": 1556800,
+    "target_transitions": 3113600,
+    "optimizer_steps": 256,
+    "gradient_rows": {
+      "T": 90504,
+      "G": 58610
+    },
+    "displacement_over_initial_l2": {
+      "T": 0.49696407671592663,
+      "G": 0.37748837857977446
+    },
+    "whole_wall_s": 5.05,
+    "prior_prelearner_attempt_wall_s": 1.59,
+    "scoped_known_accepted_attempt_walls_s": 6.64,
+    "aggregate_cpu_s": null,
+    "host": "wsl_4070",
+    "device": "cpu",
+    "dtype": "float32",
+    "absolute_endpoint_returns": {
+      "T_greedy": 0.35067382812500003,
+      "T_stochastic": 0.3388134765625,
+      "G_greedy": 0.35466796875000006,
+      "G_stochastic": 0.2890380859375,
+      "R": 0.34958984375,
+      "R0": 0.35067382812500003
+    },
+    "contrasts": {
+      "T_greedy-R": 0.0010839843749999999,
+      "T_greedy-G_greedy": -0.003994140625000004,
+      "G_greedy-R": 0.0050781250000000045,
+      "T_greedy-R0": 0.0,
+      "G_greedy-R0": 0.003994140625000004,
+      "T_stochastic-R": -0.010776367187500002,
+      "T_stochastic-R0": -0.011860351562500001,
+      "T_stochastic-T_greedy": -0.011860351562500001,
+      "G_stochastic-R": -0.060551757812499996,
+      "G_stochastic-R0": -0.06163574218749999,
+      "G_stochastic-G_greedy": -0.06562988281249998
+    },
+    "complete_count_matches": true
+  },
+  "preparation_exposure": {
+    "models": 0,
+    "training_starts": 0,
+    "independent_training_pairs": 0,
+    "environment_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluations": 0,
+    "result_bearing_invocations": 0
+  },
+  "exposure_line": "Preparation exposure: models=0; training starts=0; independent training pairs=0; environment episodes=0; optimizer steps=0; evaluations=0; result-bearing invocations=0. Reused B02: 2 learners x 2083 parameters, 128 Adam steps each at lr=0.001; displacement/initial L2 T=0.4969640767, G=0.3774883786; 38920 joint episodes, 3113600 target transitions, 256 steps; whole wall=5.05s.",
+  "prospective_work_comparison": {
+    "status": "Not selected or allocated; comparison of decision value only",
+    "training_work": "2 arms x 1 paired seed x 128 updates x 128 joint episodes x 40 team ticks x 2 targets",
+    "evaluation_work": "6 fixed endpoint executions x 1024 shared worlds x 40 team ticks x 2 targets",
+    "algorithm_plus_evaluation_joint_episodes": 38912,
+    "algorithm_plus_evaluation_target_transitions": 3112960,
+    "added_validation": "Original B02 included one eight-episode check, 640 target transitions, zero optimizer steps. No automatic repeat is imposed on future unchanged work.",
+    "complete_same_card_counts_if_later_selected": {
+      "joint_episodes": 38920,
+      "target_transitions": 3113600,
+      "optimizer_steps": 256
+    },
+    "nested_candidates_trajectories_solver_calls": 0,
+    "conditional_cost_anchor_wall_s": 5.05,
+    "anchor_is_future_bound": false,
+    "inherited_complete_pair_cap_s": 120,
+    "future_per_arm_seconds": "unknown; no split of shared overhead",
+    "other_changed_design_work": "unknown until a concrete design is specified; not zero and no separate cost experiment required"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "handle": "dish_b07_seed127_20260908_run01",
+  "source_sha": "a4612a020921d24269a19a3471cc03fa62c082c8",
+  "payload_document_sha": "ae5cdea0f292d632c59eb79e655f6d4861a81224",
+  "local_envelope": "temp/directions/degraded_incumbent_shadow_handover/exp/own_command_mean_b07_seed127_20260908_run01",
+  "remote_cwd": "/home/wu/hmasd-worktrees/dish-b07-seed127-20260908-run01",
+  "retained_bytes": {
+    "summary.json": {
+      "source": "run/summary.json",
+      "bytes": 70438,
+      "sha256": "67782aab11fd7774117c56db86b6cb581e739789b481349cc2e76753a7266eeb"
+    },
+    "cm_collection.json": {
+      "source": "cm_collection.json",
+      "bytes": 15609,
+      "sha256": "af421bebc354e0d5d6e97f881afbedbdfec2c4a7809160b9cf2bdd4a6250e2ca"
+    },
+    "admission.json": {
+      "source": "admission.json",
+      "bytes": 504,
+      "sha256": "67a3809284aab93106020903f5a45ed77310a46353992f656cd3eba3f459bf0d"
+    },
+    "whole_chain.json": {
+      "source": "whole_chain.json",
+      "bytes": 280,
+      "sha256": "4b35ce2965b66d45ed5371cf9589194a4e10f19b2e4ba60e47ea7b43a6c9e4a2"
+    },
+    "supervised.time": {
+      "source": "supervised.time",
+      "bytes": 49,
+      "sha256": "8f2489b7be49da84918514b9b23c08638dec7f3b1a40467b55ec6c82aa6aa5f7"
+    },
+    "resets.json": {
+      "source": "run/shared/resets.json",
+      "bytes": 3003,
+      "sha256": "c0746c4ccdb9433eefa0da289323a9dac52504adb64a6127dc44a737ed28d1a1"
+    }
+  },
+  "runtime_files_retained_in_envelope": {
+    "launch.sh": {
+      "bytes": 2432,
+      "sha256": "2fb1d2bd447b0bb84594869cd50610de94518ac85a10c69ed400eaac382ceedd"
+    },
+    "run/shared/initial_state.pt": {
+      "bytes": 836667,
+      "sha256": "6f26cdb805ab1038aac7d44b19be705a0b07cee803007e4d71060cf8995ae8ae"
+    },
+    "run/direct_mean/checkpoint_update16.pt": {
+      "bytes": 2356639,
+      "sha256": "ee35cffbe03b991b26dcb334d4248a0d4773d695f17752f757a0fae1bbea1f3e"
+    },
+    "run/own_command_mean/checkpoint_update16.pt": {
+      "bytes": 2356639,
+      "sha256": "a1fbfa9700a52331ba7f3d6cb3cd83d988388d09164be0c99ca101b1cd129c86"
+    },
+    "runner.log": {
+      "bytes": 2102,
+      "sha256": "6b742139241eea5f676b4ed2176124da3fb8dfb215b7f4f0b9c9b3b82a1eaaa8"
+    }
+  }
+}

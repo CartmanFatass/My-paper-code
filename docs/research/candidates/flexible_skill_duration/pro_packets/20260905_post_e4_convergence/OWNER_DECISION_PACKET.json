@@ -1,0 +1,38 @@
+{
+  "question": "6 Pro 已决定可逆暂停当前固定 K2 corridor 的 policy-gap 学习收益分支；是否需要所有者异步干预这一已执行的方向裁决？",
+  "changes_if_approved": [
+    {
+      "target": "FSD 当前固定 K2 policy-gap 学习收益对象族",
+      "from": "E4 完整，等待 Convergence 下一对象选择",
+      "to": "PRO_FINAL PARK，不选择下一实验；Portfolio ACTIVE/HIGH 不变"
+    }
+  ],
+  "if_refused": "保留完整 E3/E4 与 Pro 原文；记录所有者具体覆盖指令，在下一干净边界按实际指令处理，不编造新实验授权。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260905_post_e4_convergence/archive/RESPONSE.md",
+      "quote": "新增 E4 已经回答了上次唯一选择的结构问题，却没有留下未被 public greedy 解释的同信息参考机会。",
+      "why": "继续理由需来自新的学习判别，不能重复结构枚举。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260905_post_e4_convergence/archive/RESPONSE.md",
+      "quote": "small seed 2 是合格正例，不能被平均或家族裁决抹去。",
+      "why": "因此只可逆暂停当前分支，不永久关闭整个方向。"
+    }
+  ],
+  "uncertainty": [
+    "policy-gap 噪声、优化暴露、团队干扰和 actor/表示质量尚未因果分离。",
+    "现有接口不证明旧 checkpoint、normalizer 或反事实 replay 已可用。",
+    "tuned generic headroom 缺失不是独立停止门槛；数值 residual0 不是无限尾定理。"
+  ],
+  "cost": {
+    "compute": "新增调用为0；既有 E4 正式2.35秒，校准加正式3.09秒；E3有效18格累计66087秒，其他开销仍未完整计量。",
+    "owner_time": "P2 可异步审阅，方向节点完整裁决已执行，不等待重复批准。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；家族再入需要具体可执行判别依据，不需要预先正结果。"
+  },
+  "verdict_text": "> **REQUEST_ID=2026-09-05-fsd-post-e4-convergence-01**\n> **PINNED_REFERENCE=d990575470126c896ffb36db64cd1aab0dff08a2**\n> **FINAL_DECISION=PARK；DECISION_AUTHORITY=PRO_FINAL。**\n>\n> 暂停现行固定 N6/K2/Z4、公共 flag／lagged cue、原生 role／lease-renewal 条件下，经既有 HMASD 技能／actor 路径实施 policy-gap interruption 的学习收益探索分支。不选择下一对象，不执行 Portfolio 生命周期、优先级、容量或融合变更。\n>\n> E4 保留 COMPLETE A/RECON：三 law、288 候选、零 learner；确定性 m_dur 为零数值观察，两种随机 law 的 m_dur 约 .0971/.0982，全部 switching-reference 机会均由合法同信息 public greedy 解释。该结构结果不构成 D2/D8 学习收益，也不自动选择继续训练。\n>\n> E3 保留 18/18 有效 adaptive B 与原 `E3-H0-NO-ADVANTAGE`，阴性只适用于 c=c_Z=.25、声明的大差异行和原预算；全部六个合格 medium／large 亏损、small seed2 合格正例、small seed3 未达 competence 的正观察及两个路径窗口均保留。\n>\n> Policy-gap 噪声、优化暴露、team-renewal interference 与 seed／representation／actor 质量尚未被因果分离。现有原生接口提供新干预的可能位置，但现有记录不证明可直接利用旧 checkpoint 或日志进行该反事实比较。不以这个未知选择重复 census、额外训练或 D3/K3 等改写。\n>\n> 再进入需要一个源码与执行事实支持、明确隔离变量及原生收益后果、能够产生不同方向判断的同 host 学习实现判别，并诚实列出暴露和逐臂成本。仅有结构 gap、参数移动、预测相关性或增加预算不够；无需先取得正结果、超过 public greedy 或完成 C-time 义务。\n>\n> 21/21 清单路径访问成功。**本节点决定已形成，无访问 blocker；未执行代码或修改仓库。**",
+  "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260905_post_e4_convergence/archive/RESPONSE.md"
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-09-rcle-post-a02-innovator-recovery-01--roster_consistent_latent_exploration",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-09-rcle-post-a02-innovator-recovery-01",
+  "direction_id": "roster_consistent_latent_exploration",
+  "direction_ids": [
+    "roster_consistent_latent_exploration"
+  ],
+  "workflow_node": "em_innovator",
+  "conversation_binding_key": "em:roster_consistent_latent_exploration:innovator",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-09-rcle-post-a02-innovator-recovery-01--roster_consistent_latent_exploration__00_PROMPT.md",
+    "bytes": 1275,
+    "sha256": "e465735fca32db267e4e7f3f0d65d9891092c2218f579ff4662d1df7366900ca",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-09-rcle-post-a02-innovator-recovery-01\\2026-09-09-rcle-post-a02-innovator-recovery-01--roster_consistent_latent_exploration__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-09-rcle-post-a02-innovator-recovery-01\\2026-09-09-rcle-post-a02-innovator-recovery-01--roster_consistent_latent_exploration__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-09-rcle-post-a02-innovator-recovery-01\\2026-09-09-rcle-post-a02-innovator-recovery-01--roster_consistent_latent_exploration__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "e465735fca32db267e4e7f3f0d65d9891092c2218f579ff4662d1df7366900ca",
+    "references": []
+  }
+}

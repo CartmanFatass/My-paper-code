@@ -1,0 +1,554 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-05",
+  "repository": "https://github.com/Replicable-MARL/MARLlib",
+  "source_root": "C:/Projects/ref-lib/MARLlib",
+  "report_root": "C:/Projects/ref-lib/reports/MARLlib",
+  "fixed_commit": "80e9973a430271a93c781d7422133acb1198f84b",
+  "source_read_only": true,
+  "upstream_agents_at_fixed_commit": [],
+  "overlay_kind": "local_navigation",
+  "reports": [
+    "CORE_EVIDENCE.md",
+    "ROOT_RETURN.md"
+  ],
+  "overlay_backup_root": "agents-overlays",
+  "entries": [
+    {
+      "path": "AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/AGENTS.md",
+      "scope": "库根目录导航；固定 commit、许可证、报告边界与只读规则。",
+      "key_paths": [
+        "requirements.txt",
+        "setup.py",
+        "LICENSE",
+        "marllib",
+        "examples",
+        "tests"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/AGENTS.md",
+      "scope": "MARLlib 主包入口、注册与训练编排。",
+      "key_paths": [
+        "marllib/marl/__init__.py",
+        "marllib/marl/common.py",
+        "marllib/envs",
+        "marllib/marl/algos",
+        "marllib/marl/models"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/envs/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/envs/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/envs/AGENTS.md",
+      "scope": "环境注册、原生 wrapper 与全局奖励 wrapper。",
+      "key_paths": [
+        "marllib/envs/base_env/__init__.py",
+        "marllib/envs/global_reward_env/__init__.py",
+        "marllib/envs/base_env",
+        "marllib/envs/global_reward_env"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/envs/base_env/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/envs/base_env/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/envs/base_env/AGENTS.md",
+      "scope": "逐 agent MultiAgentEnv wrapper 与空间/观测/终止协议。",
+      "key_paths": [
+        "marllib/envs/base_env/__init__.py",
+        "marllib/envs/base_env/mpe.py",
+        "marllib/envs/base_env/smac.py",
+        "marllib/envs/base_env/mamujoco.py",
+        "marllib/envs/base_env/magent.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/envs/base_env/config/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/envs/base_env/config/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/envs/base_env/config/AGENTS.md",
+      "scope": "环境参数、全局状态、动作 mask、对手动作与 batch 标志。",
+      "key_paths": [
+        "marllib/envs/base_env/config/mpe.yaml",
+        "marllib/envs/base_env/config/smac.yaml",
+        "marllib/envs/base_env/config/mamujoco.yaml",
+        "marllib/envs/base_env/config/magent.yaml"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/envs/global_reward_env/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/envs/global_reward_env/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/envs/global_reward_env/AGENTS.md",
+      "scope": "合作奖励包装层；记录 reward 聚合/均分代码。",
+      "key_paths": [
+        "marllib/envs/global_reward_env/__init__.py",
+        "marllib/envs/global_reward_env/mpe_fcoop.py",
+        "marllib/envs/global_reward_env/smac_fcoop.py",
+        "marllib/envs/global_reward_env/mamujoco_fcoop.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/AGENTS.md",
+      "scope": "高层 API、配置合并、环境登记、模型选择与算法入口。",
+      "key_paths": [
+        "marllib/marl/__init__.py",
+        "marllib/marl/common.py",
+        "marllib/marl/ray",
+        "marllib/marl/algos",
+        "marllib/marl/models"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/ray/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/ray/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/ray/AGENTS.md",
+      "scope": "Ray/Tune 运行配置静态入口。",
+      "key_paths": [
+        "marllib/marl/ray/ray.yaml"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/algos/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/algos/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/algos/AGENTS.md",
+      "scope": "IL/CC/VD 运行器和算法脚本调用层。",
+      "key_paths": [
+        "marllib/marl/algos/run_il.py",
+        "marllib/marl/algos/run_cc.py",
+        "marllib/marl/algos/run_vd.py",
+        "marllib/marl/algos/scripts",
+        "marllib/marl/algos/core",
+        "marllib/marl/algos/utils"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/algos/core/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/algos/core/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/algos/core/AGENTS.md",
+      "scope": "旧版 RLlib Policy/Trainer 扩展的算法核心。",
+      "key_paths": [
+        "marllib/marl/algos/core/IL",
+        "marllib/marl/algos/core/CC",
+        "marllib/marl/algos/core/VD"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/algos/core/IL/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/algos/core/IL/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/algos/core/IL/AGENTS.md",
+      "scope": "独立 learner policy 的 PPO/A2C 更新包装。",
+      "key_paths": [
+        "marllib/marl/algos/core/IL/ppo.py",
+        "marllib/marl/algos/core/IL/a2c.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/algos/core/CC/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/algos/core/CC/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/algos/core/CC/AGENTS.md",
+      "scope": "集中式 critic 的 postprocessing、loss 与 policy mixin。",
+      "key_paths": [
+        "marllib/marl/algos/core/CC/mappo.py",
+        "marllib/marl/algos/core/CC/maa2c.py",
+        "marllib/marl/algos/core/CC/happo.py",
+        "marllib/marl/algos/core/CC/hatrpo.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/algos/core/VD/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/algos/core/VD/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/algos/core/VD/AGENTS.md",
+      "scope": "价值分解、Joint Q、VDN/QMIX/FACMAC 学习入口。",
+      "key_paths": [
+        "marllib/marl/algos/core/VD/iql_vdn_qmix.py",
+        "marllib/marl/algos/core/VD/vda2c.py",
+        "marllib/marl/algos/core/VD/facmac.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/algos/scripts/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/algos/scripts/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/algos/scripts/AGENTS.md",
+      "scope": "Tune 注册、batch/序列参数与 custom model 配置。",
+      "key_paths": [
+        "marllib/marl/algos/scripts/ippo.py",
+        "marllib/marl/algos/scripts/mappo.py",
+        "marllib/marl/algos/scripts/vdn_qmix_iql.py",
+        "marllib/marl/algos/scripts/facmac.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/algos/utils/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/algos/utils/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/algos/utils/AGENTS.md",
+      "scope": "跨 agent 对齐、central critic、mixing、execution plan 与 replay。",
+      "key_paths": [
+        "marllib/marl/algos/utils/centralized_critic.py",
+        "marllib/marl/algos/utils/mixing_Q.py",
+        "marllib/marl/algos/utils/episode_execution_plan.py",
+        "marllib/marl/algos/utils/episode_replay_buffer.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/algos/hyperparams/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/algos/hyperparams/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/algos/hyperparams/AGENTS.md",
+      "scope": "算法超参数 YAML 目录导航。",
+      "key_paths": [
+        "marllib/marl/algos/hyperparams/common",
+        "marllib/marl/algos/hyperparams/finetuned",
+        "marllib/marl/algos/hyperparams/test"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/algos/hyperparams/common/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/algos/hyperparams/common/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/algos/hyperparams/common/AGENTS.md",
+      "scope": "共享算法 batch、replay、target update 和优化配置。",
+      "key_paths": [
+        "marllib/marl/algos/hyperparams/common/mappo.yaml",
+        "marllib/marl/algos/hyperparams/common/qmix.yaml",
+        "marllib/marl/algos/hyperparams/common/iql.yaml",
+        "marllib/marl/algos/hyperparams/common/facmac.yaml"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/models/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/models/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/models/AGENTS.md",
+      "scope": "MARLlib custom model 导出与构造接口。",
+      "key_paths": [
+        "marllib/marl/models/__init__.py",
+        "marllib/marl/models/zoo",
+        "marllib/marl/models/configs"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/models/zoo/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/models/zoo/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/models/zoo/AGENTS.md",
+      "scope": "MLP/RNN/encoder/mixer 模型族。",
+      "key_paths": [
+        "marllib/marl/models/zoo/rnn",
+        "marllib/marl/models/zoo/mlp",
+        "marllib/marl/models/zoo/encoder",
+        "marllib/marl/models/zoo/mixer"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/models/zoo/rnn/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/models/zoo/rnn/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/models/zoo/rnn/AGENTS.md",
+      "scope": "RLlib TorchRNN 适配、时序张量和 central/Q 模型。",
+      "key_paths": [
+        "marllib/marl/models/zoo/rnn/base_rnn.py",
+        "marllib/marl/models/zoo/rnn/cc_rnn.py",
+        "marllib/marl/models/zoo/rnn/vd_rnn.py",
+        "marllib/marl/models/zoo/rnn/jointQ_rnn.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/models/zoo/mlp/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/models/zoo/mlp/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/models/zoo/mlp/AGENTS.md",
+      "scope": "非循环 policy/value 模型。",
+      "key_paths": [
+        "marllib/marl/models/zoo/mlp/base_mlp.py",
+        "marllib/marl/models/zoo/mlp/cc_mlp.py",
+        "marllib/marl/models/zoo/mlp/vd_mlp.py",
+        "marllib/marl/models/zoo/mlp/jointQ_mlp.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/models/zoo/encoder/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/models/zoo/encoder/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/models/zoo/encoder/AGENTS.md",
+      "scope": "观测 flatten、FC/CNN 编码器与空间形状分支。",
+      "key_paths": [
+        "marllib/marl/models/zoo/encoder/base_encoder.py",
+        "marllib/marl/models/zoo/encoder/cc_encoder.py",
+        "marllib/marl/models/configs/fc_encoder.yaml",
+        "marllib/marl/models/configs/cnn_encoder.yaml"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/models/zoo/mixer/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/models/zoo/mixer/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/models/zoo/mixer/AGENTS.md",
+      "scope": "VDN/QMIX 混合器及状态输入。",
+      "key_paths": [
+        "marllib/marl/models/zoo/mixer/sum_mixer.py",
+        "marllib/marl/models/zoo/mixer/monotonic_mixer.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/marl/models/configs/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/marl/models/configs/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/marl/models/configs/AGENTS.md",
+      "scope": "模型 YAML；hidden size、core arch、encoder、mixer 入口。",
+      "key_paths": [
+        "marllib/marl/models/configs/rnn.yaml",
+        "marllib/marl/models/configs/mlp.yaml",
+        "marllib/marl/models/configs/fc_encoder.yaml",
+        "marllib/marl/models/configs/cnn_encoder.yaml",
+        "marllib/marl/models/configs/mixer.yaml"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/patch/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/patch/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/patch/AGENTS.md",
+      "scope": "可选 Ray 安装补丁的来源与激活边界。",
+      "key_paths": [
+        "marllib/patch/add_patch.py",
+        "marllib/patch/rllib"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/patch/rllib/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/patch/rllib/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/patch/rllib/AGENTS.md",
+      "scope": "MARLlib 仓库内携带的旧版 RLlib 文件副本。",
+      "key_paths": [
+        "marllib/patch/rllib/execution",
+        "marllib/patch/rllib/policy",
+        "marllib/patch/rllib/models",
+        "marllib/patch/rllib/utils"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/patch/rllib/policy/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/patch/rllib/policy/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/patch/rllib/policy/AGENTS.md",
+      "scope": "RNN chopping/padding、Torch policy 多设备 batch/gradient。",
+      "key_paths": [
+        "marllib/patch/rllib/policy/rnn_sequencing.py",
+        "marllib/patch/rllib/policy/torch_policy.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/patch/rllib/execution/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/patch/rllib/execution/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/patch/rllib/execution/AGENTS.md",
+      "scope": "旧版 replay buffer、容量检查、序列 replay 与 Ray actor 声明。",
+      "key_paths": [
+        "marllib/patch/rllib/execution/replay_buffer.py",
+        "marllib/patch/rllib/execution/train_ops.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/patch/rllib/models/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/patch/rllib/models/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/patch/rllib/models/AGENTS.md",
+      "scope": "空间 flatten/preprocessor 的本地副本。",
+      "key_paths": [
+        "marllib/patch/rllib/models/preprocessors.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "marllib/patch/rllib/utils/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/marllib/patch/rllib/utils/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/marllib/patch/rllib/utils/AGENTS.md",
+      "scope": "patched RLlib utility subtree；探索 utility 的链接目标。",
+      "key_paths": [
+        "marllib/patch/rllib/utils/exploration/ornstein_uhlenbeck_noise.py",
+        "marllib/patch/add_patch.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "examples/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/examples/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/examples/AGENTS.md",
+      "scope": "自定义环境与 policy sharing 参考入口；仅静态阅读。",
+      "key_paths": [
+        "examples/add_new_env.py",
+        "examples/customize_policy_sharing.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    },
+    {
+      "path": "tests/AGENTS.md",
+      "source_path": "C:/Projects/ref-lib/MARLlib/tests/AGENTS.md",
+      "backup_path": "C:/Projects/ref-lib/reports/MARLlib/agents-overlays/tests/AGENTS.md",
+      "scope": "仓库测试目录；本证据任务不安装依赖、不运行训练。",
+      "key_paths": [
+        "tests/test_env.py",
+        "tests/test_model.py",
+        "tests/test_algorithm.py",
+        "tests/test_grid_search.py"
+      ],
+      "report_refs": [
+        "CORE_EVIDENCE.md",
+        "ROOT_RETURN.md"
+      ],
+      "preservation_rule": "Preserve any future upstream AGENTS.md; this local overlay does not replace it."
+    }
+  ],
+  "verification": {
+    "fixed_commit_checked": true,
+    "upstream_agents_search_at_fixed_commit": "none",
+    "source_code_edits": false,
+    "training_or_dependency_execution": false,
+    "key_paths_checked": "all indexed paths exist; all AGENTS backups SHA256-equal"
+  },
+  "license_note": "MARLlib LICENSE is MIT; navigation/report files retain notices and do not reproduce large source fragments."
+}

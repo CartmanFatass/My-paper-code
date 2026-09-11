@@ -1,0 +1,209 @@
+{
+  "mode": "profile-cost",
+  "complete": true,
+  "status": "complete",
+  "actual_profile": {
+    "families": {
+      "atoms": {
+        "count": 48,
+        "numerator_bits": [
+          1,
+          11
+        ],
+        "denominator_bits": [
+          7,
+          14
+        ]
+      },
+      "marginals": {
+        "count": 24,
+        "numerator_bits": [
+          1,
+          8
+        ],
+        "denominator_bits": [
+          4,
+          11
+        ]
+      },
+      "scores": {
+        "count": 72,
+        "numerator_bits": [
+          0,
+          18
+        ],
+        "denominator_bits": [
+          1,
+          19
+        ]
+      },
+      "multipliers": {
+        "count": 2,
+        "numerator_bits": [
+          0,
+          6
+        ],
+        "denominator_bits": [
+          1,
+          8
+        ]
+      },
+      "budgets": {
+        "count": 2,
+        "numerator_bits": [
+          14,
+          15
+        ],
+        "denominator_bits": [
+          17,
+          19
+        ]
+      },
+      "priors": {
+        "count": 2,
+        "numerator_bits": [
+          1,
+          1
+        ],
+        "denominator_bits": [
+          2,
+          2
+        ]
+      }
+    },
+    "fraction_count": 150,
+    "D_star": 273517810125000,
+    "D_star_bits": 48,
+    "within_actual_range": true
+  },
+  "synthetic_profile": {
+    "families": {
+      "atoms": {
+        "count": 48,
+        "numerator_bits": [
+          36,
+          44
+        ],
+        "denominator_bits": [
+          40,
+          48
+        ]
+      },
+      "marginals": {
+        "count": 24,
+        "numerator_bits": [
+          39,
+          45
+        ],
+        "denominator_bits": [
+          42,
+          48
+        ]
+      },
+      "scores": {
+        "count": 72,
+        "numerator_bits": [
+          36,
+          48
+        ],
+        "denominator_bits": [
+          37,
+          48
+        ]
+      },
+      "multipliers": {
+        "count": 2,
+        "numerator_bits": [
+          39,
+          46
+        ],
+        "denominator_bits": [
+          39,
+          46
+        ]
+      },
+      "budgets": {
+        "count": 2,
+        "numerator_bits": [
+          46,
+          47
+        ],
+        "denominator_bits": [
+          46,
+          47
+        ]
+      },
+      "priors": {
+        "count": 2,
+        "numerator_bits": [
+          1,
+          1
+        ],
+        "denominator_bits": [
+          2,
+          2
+        ]
+      }
+    },
+    "fraction_count": 150,
+    "D_star": 273517810125000,
+    "D_star_bits": 48,
+    "within_actual_range": true
+  },
+  "static_counts": {
+    "histories": 14425,
+    "action_scores": 519300,
+    "terms_per_score": 2,
+    "tail_scores": 72,
+    "history_expansions": 14424
+  },
+  "execution": {
+    "source_sha": "c4c46e50af614c8f3c12c7ec3a7290befc7c6dd8",
+    "argv": [
+      "scripts/run_acvc_history_upper_prefix_actual_r03.py",
+      "--mode",
+      "profile-cost",
+      "--input",
+      "/home/wu/hmasd-inputs/acvc-upper-prefix-actual-r03-20260905/r02_coefficients.json",
+      "--out",
+      "temp/directions/acvc/exp/history_upper_prefix_actual_r03_20260905/profile_cost01",
+      "--admission",
+      "temp/directions/acvc/exp/history_upper_prefix_actual_r03_20260905/profile_cost01/admission.json",
+      "--source-sha",
+      "c4c46e50af614c8f3c12c7ec3a7290befc7c6dd8"
+    ],
+    "node": "wsl_4070",
+    "cwd": "/home/wu/hmasd-worktrees/acvc-actual-upper-c4c46e50",
+    "input": "/home/wu/hmasd-inputs/acvc-upper-prefix-actual-r03-20260905/r02_coefficients.json",
+    "input_source": {
+      "commit": "1d023aaa59097c92e1b72221d893aac21a42ff54",
+      "path": "docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_RESULT_20260904.json",
+      "sha256": "6243e867eea3556a67aafebbf2f09640a0efa50d5d231ab0eff2c9ce52737b3b"
+    },
+    "admission": {
+      "path": "temp/directions/acvc/exp/history_upper_prefix_actual_r03_20260905/profile_cost01/admission.json",
+      "record": {
+        "assessed_at": "2026-09-05T11:12:02.480715Z",
+        "available_physical_bytes": 13178777600,
+        "captured_at": "2026-09-05T11:12:02.480447Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 13178777600,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      }
+    },
+    "profile_cost_reference": null
+  },
+  "resources": {
+    "wall_seconds": 4.287796675009304,
+    "peak_rss_bytes": 18513920,
+    "status": "measured"
+  }
+}

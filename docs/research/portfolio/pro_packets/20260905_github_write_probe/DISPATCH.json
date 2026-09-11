@@ -1,0 +1,12 @@
+{
+  "request_id": "2026-09-05-github-direct-write-probe-01",
+  "state": "CODEX_DISPATCH_ACCEPTED",
+  "recorded_at": "2026-09-05T23:42:38.249678+00:00",
+  "dispatch_count": 1,
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "provider_result": "pending",
+  "migration": "not started",
+  "test_issue": "https://github.com/CartmanFatass/My-paper-code/issues/3",
+  "test_branch": "codex/pro-github-write-probe-20260905",
+  "base_sha": "b11d1f212233ce28549d7896e4ab7ae06e158945"
+}

@@ -1,5 +1,90 @@
 # Direction capability_bound_semantic_currentness: capability-bound semantic currentness
 
+## Accepted B04 partial observation — 2026-09-06
+
+B04's one completed RAW learner reaches12.0375 at update48, above its initial
+-1.68125 and the same-tape ALWAYS_REFRESH11.025, but below public REQUEST_ONLY
+12.375. On the32 recorded evaluation tapes it refreshes all660 active requests
+and serves all108 inactive requests. The latter actions each cost0.1 against
+the rule's fallback, accounting exactly for the0.3375 mean deficit. This supports
+a narrow observation of learned public-request sensitivity; a simple public-only
+rule still explains the relevant opportunity and performs better. It does not
+identify an effect of replacing GAE or a currentness-specific advantage.
+
+STRUCT has no formal policy measurement, so the selected B04 representation
+comparison remains unanswered. The two earlier zero representation gaps remain
+contrary evidence, without adding a fabricated third zero or pooling different
+learning packages. The surviving alternative is ordinary public-activity
+conditioning, not demonstrated semantic currentness. The next scientific
+discriminator remains a complete paired native-return observation on a
+prospectively bound credible execution path; no successor or recast is selected.
+See CBSC_OPPORTUNITY_CREDIT_B04_RESULT_EVIDENCE_20260906.md and
+CBSC_OPPORTUNITY_CREDIT_B04_INTAKE_20260906.md.
+
+## Accepted next discriminator — 2026-09-06
+
+Convergence selects CBSC-OPPORTUNITY-CREDIT-B04: one new paired RAW/STRUCT
+run with sampled decision-plus-settlement targets and matching decision-only
+value supervision,48rollouts/768Adam per arm and fixed0/48evaluation.
+Actions leave later public history and host state unchanged, so a local target
+is a concrete learning alternative to extending the old training package.
+This motivates the comparison; it does not establish a GAE defect or a gain.
+
+The full-public-history RAW learner remains the containing null. A new cheap
+REQUEST_ONLY reference uses only public request activity. Old measured context
+means and the ledger imply that rule scores12.1875/12.1125 on the old panels,
+1.475/1.525 above the old all-REFRESH policies. This outcome-informed arithmetic
+is neither new execution nor tuned headroom. Future gains must be read against
+that simple alternative; exceeding it still does not establish semantic specificity.
+
+The strongest contrary evidence remains two zero representation gaps. The
+selected discriminator is fixed-endpoint native return inside the changed
+credit package, not a causal effect of replacing GAE or general MARL value.
+The old unchanged48-update family remains paused; no recast is counted.
+See CBSC_OPPORTUNITY_CREDIT_B04_CONVERGENCE_INTAKE_20260906.md,
+CBSC_OPPORTUNITY_CREDIT_B04_SCIENCE_CARD_20260906.md and the complete Pro
+decision in pro_packets/20260906_opportunity_credit_convergence/archive/RESPONSE.md.
+
+## Current learning evidence and scoped family decision — 2026-09-05
+
+The Pro-selected **CBSC-DIRECT-RETURN-B02** is complete and valid at its local
+B/EXPLORE ceiling. Seed 21203 gave RAW = STRUCT = 10.7125 at update 48;
+all 32 paired native-return differences are zero. Both curves are
+0.6875/10.7125/10.7125/10.7125 at updates 0/12/24/48, and both trained
+evaluation policies choose REFRESH throughout, matching the fixed-refresh
+context. Real learner movement and complete direct publication are observed;
+neither supplies a structured-representation advantage.
+
+The strongest contrary evidence now includes this local zero result, older
+exact RAW equality and mixed LR01. A seed-dependent fixed-policy learning
+pattern remains possible; neither its cause nor a matched tuned optimum is
+established. One paired training seed cannot show general equivalence or
+mechanism failure. Old B1/r05 quarantine and unresolved historical host errors
+remain unchanged despite success of this new direct path.
+
+The separately delegated **CBSC-DIRECT-RETURN-B03** is also complete and valid:
+seed 21209 gave RAW = STRUCT = 10.5875, all 32 differences zero, with both
+curves 2.415625/10.5875/10.5875/10.5875 and trained greedy actions all REFRESH.
+The two recorded independent run seeds vary initialization, training and
+procedural evaluation together; they do not isolate a unique cause. B03's
+sampled training included other actions but concentrated on REFRESH by the
+last batch. Its native pair completed in 118.20 s, with no new simulation smoke.
+
+Convergence has parked only the unchanged dynamic-host, RAW/STRUCT-adapter,
+recurrent-PPO, 48-update greedy comparison family. No third pair, 192-update
+extension or other new experiment is selected. The reason is the limited added
+information from more of this comparison, not compute refusal, mechanism failure
+or statistical equivalence. This is not a mechanism recast or a Portfolio
+lifecycle/priority change; it does not prohibit a later properly selected distinct
+learning question. No old replay, exact-headroom or unique-cause prerequisite
+is created. The complete formed decision and scope are in
+CBSC_DIRECT_RETURN_FAMILY_CONVERGENCE_INTAKE_20260905.md and its raw Pro archive.
+See both
+CBSC_DIRECT_RETURN_B02_RESULT_EVIDENCE_20260905.md and
+CBSC_DIRECT_RETURN_B03_RESULT_EVIDENCE_20260905.md, their DM intakes and
+CBSC_DIRECT_RETURN_TWO_SEED_SUMMARY_20260905.json. Earlier B1 requirements
+below remain historical definitions of that separate object.
+
 ## Research organization — 2026-09-04
 
 This source belongs to route **N4 — 旧信息有效性**, in the **成员变化后的恢复** family

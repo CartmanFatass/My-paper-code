@@ -1,0 +1,7339 @@
+{
+  "object": "CBSC-DIRECT-RETURN-B02",
+  "arm": "STRUCT-CURRENTNESS-GRU",
+  "seed": 21203,
+  "rng_namespace": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+  "profile": "B/EXPLORE",
+  "launch_sha": "2c9254f70c3a8ef9d95ac6dc3f6585382304be41",
+  "configuration": {
+    "gamma": 1.0,
+    "gae_lambda": 0.95,
+    "clip": 0.2,
+    "value_coefficient": 0.5,
+    "entropy_coefficient": 0.01,
+    "learning_rate": 0.0003,
+    "adam_betas": [
+      0.9,
+      0.999
+    ],
+    "adam_epsilon": 1e-08,
+    "weight_decay": 0.0,
+    "gradient_norm_cap": 0.5,
+    "advantage_epsilon": 1e-08,
+    "epochs": 4,
+    "episodes_per_minibatch": 2
+  },
+  "updates": 48,
+  "eval_episodes": 32,
+  "initialization_digest": "05e9ddb879814bddb8cf0ef9e86194f1fb93bcf655748e91fce8af3c1efc0bfe",
+  "training_tape_digest": "fa28ea796808138ac82e2d062223b7d3e228eb4ccf8372edda8882027d7452ba",
+  "evaluation_tape_digest": "dc6fec9862e58b82243a1ad64d53695247d39e9fa3984a5c4dad3218c5b19368",
+  "execution": {
+    "torch_threads": 1,
+    "dtype": "torch.float32",
+    "device": "cpu"
+  },
+  "parameter_count": 121349,
+  "initial_parameter_l2": 29.92544937133789,
+  "parameter_movement_l2": 5.603201389312744,
+  "relative_parameter_movement": 0.18723867166651137,
+  "changed_parameters": 115465,
+  "counters": {
+    "rollout_updates": 48,
+    "adam_steps": 768,
+    "train_episodes": 384,
+    "train_transitions": 58368,
+    "train_decisions": 9216
+  },
+  "evaluation_executions": 128,
+  "evaluation_transitions": 19456,
+  "eval_adapter_work": {
+    "byte_reads": 19456,
+    "byte_writes": 455,
+    "uint8_xors": 1536,
+    "appended_bytes": 0,
+    "age_increments": 0
+  },
+  "evaluations": [
+    {
+      "update": 0,
+      "episodes": [
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 0
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 7,
+            "denominator": 1,
+            "float": 7.0
+          },
+          "decision_sum": {
+            "numerator": -7,
+            "denominator": 1,
+            "float": -7.0
+          },
+          "settlement_sum": {
+            "numerator": 14,
+            "denominator": 1,
+            "float": 14.0
+          },
+          "action_counts": {
+            "SERVE": 9,
+            "REFRESH": 15,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 1
+          },
+          "actions": [
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": -7,
+            "denominator": 10,
+            "float": -0.7
+          },
+          "decision_sum": {
+            "numerator": -57,
+            "denominator": 10,
+            "float": -5.7
+          },
+          "settlement_sum": {
+            "numerator": 5,
+            "denominator": 1,
+            "float": 5.0
+          },
+          "action_counts": {
+            "SERVE": 18,
+            "REFRESH": 6,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 2
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 13,
+            "denominator": 10,
+            "float": 1.3
+          },
+          "decision_sum": {
+            "numerator": -57,
+            "denominator": 10,
+            "float": -5.7
+          },
+          "settlement_sum": {
+            "numerator": 7,
+            "denominator": 1,
+            "float": 7.0
+          },
+          "action_counts": {
+            "SERVE": 11,
+            "REFRESH": 13,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 3
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": 3,
+            "denominator": 2,
+            "float": 1.5
+          },
+          "decision_sum": {
+            "numerator": -9,
+            "denominator": 2,
+            "float": -4.5
+          },
+          "settlement_sum": {
+            "numerator": 6,
+            "denominator": 1,
+            "float": 6.0
+          },
+          "action_counts": {
+            "SERVE": 17,
+            "REFRESH": 7,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 4
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 37,
+            "denominator": 10,
+            "float": 3.7
+          },
+          "decision_sum": {
+            "numerator": -63,
+            "denominator": 10,
+            "float": -6.3
+          },
+          "settlement_sum": {
+            "numerator": 10,
+            "denominator": 1,
+            "float": 10.0
+          },
+          "action_counts": {
+            "SERVE": 14,
+            "REFRESH": 10,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 5
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 10,
+            "float": 4.7
+          },
+          "decision_sum": {
+            "numerator": -43,
+            "denominator": 10,
+            "float": -4.3
+          },
+          "settlement_sum": {
+            "numerator": 9,
+            "denominator": 1,
+            "float": 9.0
+          },
+          "action_counts": {
+            "SERVE": 14,
+            "REFRESH": 10,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 6
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": 13,
+            "denominator": 5,
+            "float": 2.6
+          },
+          "decision_sum": {
+            "numerator": -12,
+            "denominator": 5,
+            "float": -2.4
+          },
+          "settlement_sum": {
+            "numerator": 5,
+            "denominator": 1,
+            "float": 5.0
+          },
+          "action_counts": {
+            "SERVE": 18,
+            "REFRESH": 6,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 7
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": -2,
+            "denominator": 1,
+            "float": -2.0
+          },
+          "decision_sum": {
+            "numerator": -7,
+            "denominator": 1,
+            "float": -7.0
+          },
+          "settlement_sum": {
+            "numerator": 5,
+            "denominator": 1,
+            "float": 5.0
+          },
+          "action_counts": {
+            "SERVE": 18,
+            "REFRESH": 6,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 8
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": -47,
+            "denominator": 10,
+            "float": -4.7
+          },
+          "decision_sum": {
+            "numerator": -57,
+            "denominator": 10,
+            "float": -5.7
+          },
+          "settlement_sum": {
+            "numerator": 1,
+            "denominator": 1,
+            "float": 1.0
+          },
+          "action_counts": {
+            "SERVE": 22,
+            "REFRESH": 2,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 9
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": -3,
+            "denominator": 5,
+            "float": -0.6
+          },
+          "decision_sum": {
+            "numerator": -38,
+            "denominator": 5,
+            "float": -7.6
+          },
+          "settlement_sum": {
+            "numerator": 7,
+            "denominator": 1,
+            "float": 7.0
+          },
+          "action_counts": {
+            "SERVE": 16,
+            "REFRESH": 8,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 10
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": 8,
+            "denominator": 5,
+            "float": 1.6
+          },
+          "decision_sum": {
+            "numerator": -2,
+            "denominator": 5,
+            "float": -0.4
+          },
+          "settlement_sum": {
+            "numerator": 2,
+            "denominator": 1,
+            "float": 2.0
+          },
+          "action_counts": {
+            "SERVE": 21,
+            "REFRESH": 3,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 11
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": -3,
+            "denominator": 2,
+            "float": -1.5
+          },
+          "decision_sum": {
+            "numerator": -7,
+            "denominator": 2,
+            "float": -3.5
+          },
+          "settlement_sum": {
+            "numerator": 2,
+            "denominator": 1,
+            "float": 2.0
+          },
+          "action_counts": {
+            "SERVE": 22,
+            "REFRESH": 2,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 12
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 2,
+            "denominator": 5,
+            "float": 0.4
+          },
+          "decision_sum": {
+            "numerator": -38,
+            "denominator": 5,
+            "float": -7.6
+          },
+          "settlement_sum": {
+            "numerator": 8,
+            "denominator": 1,
+            "float": 8.0
+          },
+          "action_counts": {
+            "SERVE": 14,
+            "REFRESH": 10,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 13
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": -1,
+            "denominator": 10,
+            "float": -0.1
+          },
+          "decision_sum": {
+            "numerator": -11,
+            "denominator": 10,
+            "float": -1.1
+          },
+          "settlement_sum": {
+            "numerator": 1,
+            "denominator": 1,
+            "float": 1.0
+          },
+          "action_counts": {
+            "SERVE": 23,
+            "REFRESH": 1,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 14
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 33,
+            "denominator": 10,
+            "float": 3.3
+          },
+          "decision_sum": {
+            "numerator": -17,
+            "denominator": 10,
+            "float": -1.7
+          },
+          "settlement_sum": {
+            "numerator": 5,
+            "denominator": 1,
+            "float": 5.0
+          },
+          "action_counts": {
+            "SERVE": 19,
+            "REFRESH": 5,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 15
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": -11,
+            "denominator": 10,
+            "float": -1.1
+          },
+          "decision_sum": {
+            "numerator": -41,
+            "denominator": 10,
+            "float": -4.1
+          },
+          "settlement_sum": {
+            "numerator": 3,
+            "denominator": 1,
+            "float": 3.0
+          },
+          "action_counts": {
+            "SERVE": 19,
+            "REFRESH": 5,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 16
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 6,
+            "denominator": 5,
+            "float": 1.2
+          },
+          "decision_sum": {
+            "numerator": -39,
+            "denominator": 5,
+            "float": -7.8
+          },
+          "settlement_sum": {
+            "numerator": 9,
+            "denominator": 1,
+            "float": 9.0
+          },
+          "action_counts": {
+            "SERVE": 14,
+            "REFRESH": 10,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 17
+          },
+          "actions": [
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": -2,
+            "denominator": 1,
+            "float": -2.0
+          },
+          "decision_sum": {
+            "numerator": -8,
+            "denominator": 1,
+            "float": -8.0
+          },
+          "settlement_sum": {
+            "numerator": 6,
+            "denominator": 1,
+            "float": 6.0
+          },
+          "action_counts": {
+            "SERVE": 12,
+            "REFRESH": 12,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 18
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 41,
+            "denominator": 10,
+            "float": 4.1
+          },
+          "decision_sum": {
+            "numerator": -39,
+            "denominator": 10,
+            "float": -3.9
+          },
+          "settlement_sum": {
+            "numerator": 8,
+            "denominator": 1,
+            "float": 8.0
+          },
+          "action_counts": {
+            "SERVE": 16,
+            "REFRESH": 8,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 19
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": 3,
+            "denominator": 10,
+            "float": 0.3
+          },
+          "decision_sum": {
+            "numerator": -17,
+            "denominator": 10,
+            "float": -1.7
+          },
+          "settlement_sum": {
+            "numerator": 2,
+            "denominator": 1,
+            "float": 2.0
+          },
+          "action_counts": {
+            "SERVE": 21,
+            "REFRESH": 3,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 20
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": -13,
+            "denominator": 5,
+            "float": -2.6
+          },
+          "decision_sum": {
+            "numerator": -28,
+            "denominator": 5,
+            "float": -5.6
+          },
+          "settlement_sum": {
+            "numerator": 3,
+            "denominator": 1,
+            "float": 3.0
+          },
+          "action_counts": {
+            "SERVE": 19,
+            "REFRESH": 5,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 21
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": 5,
+            "denominator": 2,
+            "float": 2.5
+          },
+          "decision_sum": {
+            "numerator": -13,
+            "denominator": 2,
+            "float": -6.5
+          },
+          "settlement_sum": {
+            "numerator": 9,
+            "denominator": 1,
+            "float": 9.0
+          },
+          "action_counts": {
+            "SERVE": 14,
+            "REFRESH": 10,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 22
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": 3,
+            "denominator": 10,
+            "float": 0.3
+          },
+          "decision_sum": {
+            "numerator": -57,
+            "denominator": 10,
+            "float": -5.7
+          },
+          "settlement_sum": {
+            "numerator": 6,
+            "denominator": 1,
+            "float": 6.0
+          },
+          "action_counts": {
+            "SERVE": 18,
+            "REFRESH": 6,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 23
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 17,
+            "denominator": 5,
+            "float": 3.4
+          },
+          "decision_sum": {
+            "numerator": -23,
+            "denominator": 5,
+            "float": -4.6
+          },
+          "settlement_sum": {
+            "numerator": 8,
+            "denominator": 1,
+            "float": 8.0
+          },
+          "action_counts": {
+            "SERVE": 16,
+            "REFRESH": 8,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 24
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 13,
+            "denominator": 5,
+            "float": 2.6
+          },
+          "decision_sum": {
+            "numerator": -27,
+            "denominator": 5,
+            "float": -5.4
+          },
+          "settlement_sum": {
+            "numerator": 8,
+            "denominator": 1,
+            "float": 8.0
+          },
+          "action_counts": {
+            "SERVE": 14,
+            "REFRESH": 10,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 25
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": -41,
+            "denominator": 10,
+            "float": -4.1
+          },
+          "decision_sum": {
+            "numerator": -61,
+            "denominator": 10,
+            "float": -6.1
+          },
+          "settlement_sum": {
+            "numerator": 2,
+            "denominator": 1,
+            "float": 2.0
+          },
+          "action_counts": {
+            "SERVE": 22,
+            "REFRESH": 2,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 26
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": -2,
+            "denominator": 5,
+            "float": -0.4
+          },
+          "decision_sum": {
+            "numerator": -17,
+            "denominator": 5,
+            "float": -3.4
+          },
+          "settlement_sum": {
+            "numerator": 3,
+            "denominator": 1,
+            "float": 3.0
+          },
+          "action_counts": {
+            "SERVE": 19,
+            "REFRESH": 5,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 27
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": -11,
+            "denominator": 10,
+            "float": -1.1
+          },
+          "decision_sum": {
+            "numerator": -31,
+            "denominator": 10,
+            "float": -3.1
+          },
+          "settlement_sum": {
+            "numerator": 2,
+            "denominator": 1,
+            "float": 2.0
+          },
+          "action_counts": {
+            "SERVE": 22,
+            "REFRESH": 2,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 28
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": 23,
+            "denominator": 5,
+            "float": 4.6
+          },
+          "decision_sum": {
+            "numerator": -2,
+            "denominator": 5,
+            "float": -0.4
+          },
+          "settlement_sum": {
+            "numerator": 5,
+            "denominator": 1,
+            "float": 5.0
+          },
+          "action_counts": {
+            "SERVE": 19,
+            "REFRESH": 5,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 29
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": -19,
+            "denominator": 10,
+            "float": -1.9
+          },
+          "decision_sum": {
+            "numerator": -39,
+            "denominator": 10,
+            "float": -3.9
+          },
+          "settlement_sum": {
+            "numerator": 2,
+            "denominator": 1,
+            "float": 2.0
+          },
+          "action_counts": {
+            "SERVE": 21,
+            "REFRESH": 3,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 30
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE"
+          ],
+          "native_return": {
+            "numerator": -12,
+            "denominator": 5,
+            "float": -2.4
+          },
+          "decision_sum": {
+            "numerator": -22,
+            "denominator": 5,
+            "float": -4.4
+          },
+          "settlement_sum": {
+            "numerator": 2,
+            "denominator": 1,
+            "float": 2.0
+          },
+          "action_counts": {
+            "SERVE": 22,
+            "REFRESH": 2,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 31
+          },
+          "actions": [
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "REFRESH",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "SERVE",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 21,
+            "denominator": 10,
+            "float": 2.1
+          },
+          "decision_sum": {
+            "numerator": -49,
+            "denominator": 10,
+            "float": -4.9
+          },
+          "settlement_sum": {
+            "numerator": 7,
+            "denominator": 1,
+            "float": 7.0
+          },
+          "action_counts": {
+            "SERVE": 17,
+            "REFRESH": 7,
+            "SAFE_FALLBACK": 0
+          }
+        }
+      ],
+      "state": {
+        "model_digest_before": "05e9ddb879814bddb8cf0ef9e86194f1fb93bcf655748e91fce8af3c1efc0bfe",
+        "model_digest_after": "05e9ddb879814bddb8cf0ef9e86194f1fb93bcf655748e91fce8af3c1efc0bfe",
+        "training_mode_before": true,
+        "training_mode_after": true,
+        "consumed_uniform_rows": []
+      },
+      "optimizer_before": "070369cb41336332a54469f987b0b9ea5f38104966e41d71e032be321c40d996",
+      "optimizer_after": "070369cb41336332a54469f987b0b9ea5f38104966e41d71e032be321c40d996",
+      "action_counts": {
+        "SERVE": 561,
+        "REFRESH": 207,
+        "SAFE_FALLBACK": 0
+      },
+      "wall_seconds": 0.08354116100235842
+    },
+    {
+      "update": 12,
+      "episodes": [
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 0
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 1
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 2
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 37,
+            "denominator": 5,
+            "float": 7.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 17,
+            "denominator": 1,
+            "float": 17.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 3
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 4
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 5
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 67,
+            "denominator": 5,
+            "float": 13.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 23,
+            "denominator": 1,
+            "float": 23.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 6
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 62,
+            "denominator": 5,
+            "float": 12.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 22,
+            "denominator": 1,
+            "float": 22.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 7
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 8
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 9
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 10
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 11
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 72,
+            "denominator": 5,
+            "float": 14.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 24,
+            "denominator": 1,
+            "float": 24.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 12
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 13
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 14
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 15
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 37,
+            "denominator": 5,
+            "float": 7.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 17,
+            "denominator": 1,
+            "float": 17.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 16
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 17
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 32,
+            "denominator": 5,
+            "float": 6.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 16,
+            "denominator": 1,
+            "float": 16.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 18
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 67,
+            "denominator": 5,
+            "float": 13.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 23,
+            "denominator": 1,
+            "float": 23.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 19
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 20
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 42,
+            "denominator": 5,
+            "float": 8.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 18,
+            "denominator": 1,
+            "float": 18.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 21
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 22
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 23
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 24
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 25
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 72,
+            "denominator": 5,
+            "float": 14.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 24,
+            "denominator": 1,
+            "float": 24.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 26
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 27
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 62,
+            "denominator": 5,
+            "float": 12.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 22,
+            "denominator": 1,
+            "float": 22.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 28
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 29
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 42,
+            "denominator": 5,
+            "float": 8.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 18,
+            "denominator": 1,
+            "float": 18.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 30
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 62,
+            "denominator": 5,
+            "float": 12.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 22,
+            "denominator": 1,
+            "float": 22.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 31
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 62,
+            "denominator": 5,
+            "float": 12.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 22,
+            "denominator": 1,
+            "float": 22.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        }
+      ],
+      "state": {
+        "model_digest_before": "389432909bbda31a18491ef2da39a456b54110a42c92e09742bcb82aa5360c6c",
+        "model_digest_after": "389432909bbda31a18491ef2da39a456b54110a42c92e09742bcb82aa5360c6c",
+        "training_mode_before": true,
+        "training_mode_after": true,
+        "consumed_uniform_rows": []
+      },
+      "optimizer_before": "8f8119f83c3d1ea90a2fc5b3881214ad4f6e907c9d6ceb898e956afa93aadc60",
+      "optimizer_after": "8f8119f83c3d1ea90a2fc5b3881214ad4f6e907c9d6ceb898e956afa93aadc60",
+      "action_counts": {
+        "SERVE": 0,
+        "REFRESH": 768,
+        "SAFE_FALLBACK": 0
+      },
+      "wall_seconds": 0.07844743398891296
+    },
+    {
+      "update": 24,
+      "episodes": [
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 0
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 1
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 2
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 37,
+            "denominator": 5,
+            "float": 7.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 17,
+            "denominator": 1,
+            "float": 17.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 3
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 4
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 5
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 67,
+            "denominator": 5,
+            "float": 13.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 23,
+            "denominator": 1,
+            "float": 23.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 6
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 62,
+            "denominator": 5,
+            "float": 12.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 22,
+            "denominator": 1,
+            "float": 22.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 7
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 8
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 9
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 10
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 11
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 72,
+            "denominator": 5,
+            "float": 14.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 24,
+            "denominator": 1,
+            "float": 24.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 12
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 13
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 14
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 15
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 37,
+            "denominator": 5,
+            "float": 7.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 17,
+            "denominator": 1,
+            "float": 17.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 16
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 17
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 32,
+            "denominator": 5,
+            "float": 6.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 16,
+            "denominator": 1,
+            "float": 16.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 18
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 67,
+            "denominator": 5,
+            "float": 13.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 23,
+            "denominator": 1,
+            "float": 23.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 19
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 20
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 42,
+            "denominator": 5,
+            "float": 8.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 18,
+            "denominator": 1,
+            "float": 18.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 21
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 22
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 23
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 24
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 25
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 72,
+            "denominator": 5,
+            "float": 14.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 24,
+            "denominator": 1,
+            "float": 24.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 26
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 27
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 62,
+            "denominator": 5,
+            "float": 12.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 22,
+            "denominator": 1,
+            "float": 22.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 28
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 29
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 42,
+            "denominator": 5,
+            "float": 8.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 18,
+            "denominator": 1,
+            "float": 18.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 30
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 62,
+            "denominator": 5,
+            "float": 12.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 22,
+            "denominator": 1,
+            "float": 22.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 31
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 62,
+            "denominator": 5,
+            "float": 12.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 22,
+            "denominator": 1,
+            "float": 22.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        }
+      ],
+      "state": {
+        "model_digest_before": "252a4a0ae848d126a86659676785bbb13b5dba62d53d4580ffdf2030e36b8977",
+        "model_digest_after": "252a4a0ae848d126a86659676785bbb13b5dba62d53d4580ffdf2030e36b8977",
+        "training_mode_before": true,
+        "training_mode_after": true,
+        "consumed_uniform_rows": []
+      },
+      "optimizer_before": "0b6ad3f79b7de5d957f221a3190ad6854429de4f35d62c4ffcd43d20061cdbef",
+      "optimizer_after": "0b6ad3f79b7de5d957f221a3190ad6854429de4f35d62c4ffcd43d20061cdbef",
+      "action_counts": {
+        "SERVE": 0,
+        "REFRESH": 768,
+        "SAFE_FALLBACK": 0
+      },
+      "wall_seconds": 0.08170761000656057
+    },
+    {
+      "update": 48,
+      "episodes": [
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 0
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 1
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 2
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 37,
+            "denominator": 5,
+            "float": 7.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 17,
+            "denominator": 1,
+            "float": 17.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 3
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 4
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 5
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 67,
+            "denominator": 5,
+            "float": 13.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 23,
+            "denominator": 1,
+            "float": 23.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 6
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 62,
+            "denominator": 5,
+            "float": 12.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 22,
+            "denominator": 1,
+            "float": 22.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 7
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 8
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 9
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 10
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 11
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 72,
+            "denominator": 5,
+            "float": 14.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 24,
+            "denominator": 1,
+            "float": 24.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 12
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 13
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 47,
+            "denominator": 5,
+            "float": 9.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 19,
+            "denominator": 1,
+            "float": 19.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 14
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 15
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 37,
+            "denominator": 5,
+            "float": 7.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 17,
+            "denominator": 1,
+            "float": 17.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 16
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 17
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 32,
+            "denominator": 5,
+            "float": 6.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 16,
+            "denominator": 1,
+            "float": 16.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 18
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 67,
+            "denominator": 5,
+            "float": 13.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 23,
+            "denominator": 1,
+            "float": 23.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 19
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 20
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 42,
+            "denominator": 5,
+            "float": 8.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 18,
+            "denominator": 1,
+            "float": 18.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 21
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 22
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 23
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 24
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 57,
+            "denominator": 5,
+            "float": 11.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 21,
+            "denominator": 1,
+            "float": 21.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 25
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 72,
+            "denominator": 5,
+            "float": 14.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 24,
+            "denominator": 1,
+            "float": 24.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 26
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 27
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 62,
+            "denominator": 5,
+            "float": 12.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 22,
+            "denominator": 1,
+            "float": 22.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 28
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 52,
+            "denominator": 5,
+            "float": 10.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 20,
+            "denominator": 1,
+            "float": 20.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 29
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 42,
+            "denominator": 5,
+            "float": 8.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 18,
+            "denominator": 1,
+            "float": 18.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 30
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 62,
+            "denominator": 5,
+            "float": 12.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 22,
+            "denominator": 1,
+            "float": 22.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21203,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 31
+          },
+          "actions": [
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH",
+            "REFRESH"
+          ],
+          "native_return": {
+            "numerator": 62,
+            "denominator": 5,
+            "float": 12.4
+          },
+          "decision_sum": {
+            "numerator": -48,
+            "denominator": 5,
+            "float": -9.6
+          },
+          "settlement_sum": {
+            "numerator": 22,
+            "denominator": 1,
+            "float": 22.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 24,
+            "SAFE_FALLBACK": 0
+          }
+        }
+      ],
+      "state": {
+        "model_digest_before": "61eb51abc4435e62c2f84dbfe76eefd5463d090df8b261e24971bfdb601851ba",
+        "model_digest_after": "61eb51abc4435e62c2f84dbfe76eefd5463d090df8b261e24971bfdb601851ba",
+        "training_mode_before": true,
+        "training_mode_after": true,
+        "consumed_uniform_rows": []
+      },
+      "optimizer_before": "d86bc6acb0864a060c1505f9dd33ddff5fa3465984a3bd5af5fbc4392f328f6f",
+      "optimizer_after": "d86bc6acb0864a060c1505f9dd33ddff5fa3465984a3bd5af5fbc4392f328f6f",
+      "action_counts": {
+        "SERVE": 0,
+        "REFRESH": 768,
+        "SAFE_FALLBACK": 0
+      },
+      "wall_seconds": 0.07857137999963015
+    }
+  ],
+  "curve": [
+    {
+      "update": 0,
+      "mean_native_return": {
+        "numerator": 11,
+        "denominator": 16,
+        "float": 0.6875
+      }
+    },
+    {
+      "update": 12,
+      "mean_native_return": {
+        "numerator": 857,
+        "denominator": 80,
+        "float": 10.7125
+      }
+    },
+    {
+      "update": 24,
+      "mean_native_return": {
+        "numerator": 857,
+        "denominator": 80,
+        "float": 10.7125
+      }
+    },
+    {
+      "update": 48,
+      "mean_native_return": {
+        "numerator": 857,
+        "denominator": 80,
+        "float": 10.7125
+      }
+    }
+  ],
+  "checkpoints": [
+    {
+      "update": 0,
+      "path": "update-0.pt",
+      "counters": {
+        "rollout_updates": 0,
+        "adam_steps": 0,
+        "train_episodes": 0,
+        "train_transitions": 0,
+        "train_decisions": 0
+      },
+      "wall_seconds": 0.018934792999061756
+    },
+    {
+      "update": 12,
+      "path": "update-12.pt",
+      "counters": {
+        "rollout_updates": 12,
+        "adam_steps": 192,
+        "train_episodes": 96,
+        "train_transitions": 14592,
+        "train_decisions": 2304
+      },
+      "wall_seconds": 0.02223401199444197
+    },
+    {
+      "update": 24,
+      "path": "update-24.pt",
+      "counters": {
+        "rollout_updates": 24,
+        "adam_steps": 384,
+        "train_episodes": 192,
+        "train_transitions": 29184,
+        "train_decisions": 4608
+      },
+      "wall_seconds": 0.015535893006017432
+    },
+    {
+      "update": 48,
+      "path": "update-48.pt",
+      "counters": {
+        "rollout_updates": 48,
+        "adam_steps": 768,
+        "train_episodes": 384,
+        "train_transitions": 58368,
+        "train_decisions": 9216
+      },
+      "wall_seconds": 0.019366435008123517
+    }
+  ],
+  "context": {},
+  "cost": {
+    "law": "startup + host_generation + sum_updates(project8 + rollout8 + PPO4x4) + sum_checkpoints(eval_panel + checkpoint_io) + context_RAW + publication_readback + pairing_STRUCT + process_finish",
+    "host_seconds": 9.652590001991484,
+    "eval_projection_seconds": 0.25085704699449707,
+    "updates": [
+      {
+        "update": 0,
+        "wall_seconds": 1.5653715660009766
+      },
+      {
+        "update": 1,
+        "wall_seconds": 1.4462182209972525
+      },
+      {
+        "update": 2,
+        "wall_seconds": 1.4921189159940695
+      },
+      {
+        "update": 3,
+        "wall_seconds": 1.5541059359966312
+      },
+      {
+        "update": 4,
+        "wall_seconds": 1.5910829589993227
+      },
+      {
+        "update": 5,
+        "wall_seconds": 1.4815500849945238
+      },
+      {
+        "update": 6,
+        "wall_seconds": 1.5502795840002364
+      },
+      {
+        "update": 7,
+        "wall_seconds": 1.5669155139912618
+      },
+      {
+        "update": 8,
+        "wall_seconds": 1.5557177110022167
+      },
+      {
+        "update": 9,
+        "wall_seconds": 1.5520662030030508
+      },
+      {
+        "update": 10,
+        "wall_seconds": 1.5796877979882993
+      },
+      {
+        "update": 11,
+        "wall_seconds": 1.5700497959915083
+      },
+      {
+        "update": 12,
+        "wall_seconds": 1.555048068999895
+      },
+      {
+        "update": 13,
+        "wall_seconds": 1.5654863890085835
+      },
+      {
+        "update": 14,
+        "wall_seconds": 1.5825939679925796
+      },
+      {
+        "update": 15,
+        "wall_seconds": 1.4757788569986587
+      },
+      {
+        "update": 16,
+        "wall_seconds": 1.470437858995865
+      },
+      {
+        "update": 17,
+        "wall_seconds": 1.5480803920072503
+      },
+      {
+        "update": 18,
+        "wall_seconds": 1.55398111899558
+      },
+      {
+        "update": 19,
+        "wall_seconds": 1.5842971469974145
+      },
+      {
+        "update": 20,
+        "wall_seconds": 1.624449959010235
+      },
+      {
+        "update": 21,
+        "wall_seconds": 1.5775015280087246
+      },
+      {
+        "update": 22,
+        "wall_seconds": 1.5232708239927888
+      },
+      {
+        "update": 23,
+        "wall_seconds": 1.6379374410025775
+      },
+      {
+        "update": 24,
+        "wall_seconds": 1.7890871639974648
+      },
+      {
+        "update": 25,
+        "wall_seconds": 1.5497882680065231
+      },
+      {
+        "update": 26,
+        "wall_seconds": 1.5654639429994859
+      },
+      {
+        "update": 27,
+        "wall_seconds": 1.6833827770024072
+      },
+      {
+        "update": 28,
+        "wall_seconds": 1.6629842149995966
+      },
+      {
+        "update": 29,
+        "wall_seconds": 1.7258939729945268
+      },
+      {
+        "update": 30,
+        "wall_seconds": 1.6119595089985523
+      },
+      {
+        "update": 31,
+        "wall_seconds": 1.6406731679890072
+      },
+      {
+        "update": 32,
+        "wall_seconds": 1.6398941990046296
+      },
+      {
+        "update": 33,
+        "wall_seconds": 1.6101781080069486
+      },
+      {
+        "update": 34,
+        "wall_seconds": 1.6251029940031003
+      },
+      {
+        "update": 35,
+        "wall_seconds": 1.5793414150102763
+      },
+      {
+        "update": 36,
+        "wall_seconds": 1.5895505270018475
+      },
+      {
+        "update": 37,
+        "wall_seconds": 1.7076208319922443
+      },
+      {
+        "update": 38,
+        "wall_seconds": 1.731296530997497
+      },
+      {
+        "update": 39,
+        "wall_seconds": 1.6468320910062175
+      },
+      {
+        "update": 40,
+        "wall_seconds": 1.7195996889931848
+      },
+      {
+        "update": 41,
+        "wall_seconds": 1.6549104399891803
+      },
+      {
+        "update": 42,
+        "wall_seconds": 1.5951541579997865
+      },
+      {
+        "update": 43,
+        "wall_seconds": 1.5992289770074422
+      },
+      {
+        "update": 44,
+        "wall_seconds": 1.5935516809986439
+      },
+      {
+        "update": 45,
+        "wall_seconds": 1.6335612330003642
+      },
+      {
+        "update": 46,
+        "wall_seconds": 1.5726520289899781
+      },
+      {
+        "update": 47,
+        "wall_seconds": 1.666924655000912
+      }
+    ],
+    "measured_seconds_per_update": 1.5958054253533192,
+    "peak_rss_bytes": 591798272,
+    "resources_unmeasured": false,
+    "wall_seconds_through_primary_readback": 89.94678430000204
+  }
+}

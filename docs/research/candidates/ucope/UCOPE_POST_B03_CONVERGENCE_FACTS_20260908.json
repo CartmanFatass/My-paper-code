@@ -1,0 +1,229 @@
+{
+  "purpose": "P61 Convergence question preparation; prospective counts are a proposal, not a launch allocation or result",
+  "prepared_at_utc": "2026-09-08T21:47:32.955726+00:00",
+  "assignment_commit": "392f3724777d6b19cd9365e978cb47d521dc6b55",
+  "starting_direction_commit": "ae7f9afd393a492c2cc7092c8552e9f3c1bfcdc5",
+  "accepted_research_source": "70900ac7e7aa3a85b4f4ad6a2a8031ccb346fd44",
+  "recorded_B03": {
+    "source": "70900ac7e7aa3a85b4f4ad6a2a8031ccb346fd44",
+    "master": 7101,
+    "independent_training_pairs": 1,
+    "J_means": {
+      "T": 0.1784473239057538,
+      "G": 0.18854040905238276,
+      "H": 0.1409724467347594
+    },
+    "contrasts": {
+      "T_minus_G": {
+        "mean": -0.010093085146628955,
+        "conditional_episode_se": 0.008506138301283968,
+        "negative_episodes": 15,
+        "positive_episodes": 17,
+        "zero_episodes": 0,
+        "min": -0.11007592829342794,
+        "max": 0.08040545648681256
+      },
+      "G_minus_H": {
+        "mean": 0.04756796231762334,
+        "conditional_episode_se": 0.011545966671454506,
+        "negative_episodes": 8,
+        "positive_episodes": 24,
+        "zero_episodes": 0,
+        "min": -0.06520037935073608,
+        "max": 0.17534285953832038
+      },
+      "T_minus_H": {
+        "mean": 0.03747487717099439,
+        "conditional_episode_se": 0.010037043349360902,
+        "negative_episodes": 7,
+        "positive_episodes": 25,
+        "zero_episodes": 0,
+        "min": -0.0503732620966412,
+        "max": 0.14243598143193595
+      }
+    },
+    "reading": "DOWN",
+    "distance_below_negative_MEI": 9.30851466289552e-05,
+    "exposure": {
+      "T": {
+        "train_team_steps": 131072,
+        "adam_calls": 1024,
+        "learning_rate": 0.0003,
+        "entropy_coef": 0.0,
+        "total": {
+          "parameters": 66441,
+          "initial_norm": 15.454122543334961,
+          "final_norm": 17.842164993286133,
+          "displacement": 8.625264167785645,
+          "relative_displacement": 0.5581206013863907
+        },
+        "common_actor": {
+          "parameters": 32134,
+          "initial_norm": 12.346709251403809,
+          "final_norm": 12.513291358947754,
+          "displacement": 2.1527419090270996,
+          "relative_displacement": 0.17435754460502587
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.294557571411133,
+          "final_norm": 12.717764854431152,
+          "displacement": 8.351143836975098,
+          "relative_displacement": 0.8984982633989214
+        },
+        "duration_absolute_displacement": 0.1387743502855301
+      },
+      "G": {
+        "train_team_steps": 131072,
+        "adam_calls": 1024,
+        "learning_rate": 0.0003,
+        "entropy_coef": 0.0,
+        "total": {
+          "parameters": 66311,
+          "initial_norm": 15.454122543334961,
+          "final_norm": 17.680580139160156,
+          "displacement": 8.321733474731445,
+          "relative_displacement": 0.5384798426048392
+        },
+        "common_actor": {
+          "parameters": 32134,
+          "initial_norm": 12.346709251403809,
+          "final_norm": 12.657620429992676,
+          "displacement": 2.846850633621216,
+          "relative_displacement": 0.2305756599311919
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.294557571411133,
+          "final_norm": 12.344537734985352,
+          "displacement": 7.819635391235352,
+          "relative_displacement": 0.841313352588907
+        }
+      }
+    },
+    "exposure_line": "2 real fits; T/G each131072 train steps/1024 Adam at lr0.0003 and entropy_coef0.0; T66441/G66311 parameters; total relative displacement T0.558120601386/G0.538479842605; no new exposure at intake",
+    "resources": {
+      "admission": {
+        "assessed_at": "2026-09-08T20:46:06.795821Z",
+        "available_physical_bytes": 15645777920,
+        "captured_at": "2026-09-08T20:46:06.795543Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15645777920,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "whole_wall_seconds": 283.51,
+      "internal_pair_wall_seconds": 282.95776479900815,
+      "arm_wall_seconds": {
+        "T": 143.64492219901877,
+        "G": 139.312841313018
+      },
+      "peak_rss_kib": 554276,
+      "aggregate_cpu_seconds": null,
+      "cap_breach": false,
+      "limits": [],
+      "run_start_utc": "2026-09-08T20:46:06Z",
+      "run_end_utc": "2026-09-08T20:50:50Z",
+      "supervisor_pid": 3007532
+    }
+  },
+  "recorded_B03_summary_sha256": "36e76086346a56853f3839b183f4a28f53ef8acbaedf39b257776a262c04a6f5",
+  "consultation_exposure": {
+    "new_models": 0,
+    "new_training_pairs": 0,
+    "new_environment_episodes": 0,
+    "new_native_steps": 0,
+    "new_optimizer_steps": 0,
+    "new_evaluation_episodes": 0,
+    "new_replay_calls": 0,
+    "new_profiling_calls": 0,
+    "new_scientific_invocations": 0
+  },
+  "consultation_exposure_line": "P61_consultation: new_models=0; new_training_pairs=0; new_environment_episodes=0; new_native_steps=0; new_optimizer_steps=0; new_evaluation_episodes=0; new_replay_calls=0; new_profiling_calls=0; new_scientific_invocations=0.",
+  "proposed_B04": {
+    "status": "unselected; awaits the one proper-node decision and prospective card/source binding",
+    "candidate_master": 7201,
+    "candidate_seed_search": {
+      "scope": "current UCOPE Markdown/JSON/source files only, before this facts file",
+      "files_searched": 273,
+      "matches": [],
+      "limit": "bounded local nonreuse check, not a global RNG census"
+    },
+    "counts": {
+      "independent_training_pairs": 1,
+      "learned_arms": 2,
+      "training_episodes_per_arm": 512,
+      "primitive_steps_per_episode": 256,
+      "training_steps_per_arm": 131072,
+      "train_team_steps": 262144,
+      "final_evaluation_arms_including_hover": 3,
+      "final_evaluation_episodes_per_arm": 32,
+      "eval_team_steps": 24576,
+      "team_steps": 286720,
+      "optimizer_steps_per_arm": 1024,
+      "optimizer_steps": 2048,
+      "rollouts": 512,
+      "eval_episodes": 96,
+      "explicit_resets": 1120,
+      "constructor_resets": 2,
+      "existing_diagnostic_frames": 1600
+    },
+    "head_parameters": {
+      "old_T_duration": 130,
+      "new_T_duration": 2242,
+      "increment": 2112,
+      "new_T_total": 68553,
+      "unchanged_G_total": 66311
+    },
+    "opening_head_forward_rows": {
+      "training_sampling": 2560,
+      "training_old_log_probability": 2560,
+      "training_four_epoch_recomputation": 10240,
+      "evaluation_sampling": 160,
+      "evaluation_log_probability": 160,
+      "total": 15680
+    },
+    "dense_multiply_adds_per_new_head_row": 2208,
+    "dense_multiply_adds_for_named_head_rows": 34621440,
+    "work_condition": "compute the new conditional duration head only at t0 duration-mask rows; ordinary GRU/velocity/critic/native paths unchanged",
+    "added_candidates_or_trajectories_per_decision": 0,
+    "extra_environment_or_recurrent_forwards": 0,
+    "new_learning_rate": 0.0003,
+    "common_entropy_coef": 0,
+    "cap_seconds_per_arm": 1800,
+    "cap_seconds_complete_pair": 3600,
+    "cost_reference": {
+      "source": "accepted B03, no rerun",
+      "T_seconds": 143.64492219901877,
+      "G_seconds_including_hover": 139.312841313018,
+      "whole_seconds": 283.51,
+      "new_head_increment_seconds": null,
+      "interpretation": "known same-loop reference plus unknown incremental head/optimizer time; not a measured B04 forecast or launch"
+    },
+    "added_validation": "one affected directory suite at most300s and independent action/credit review; no standalone smoke, profiling, replay or pilot scientific run"
+  },
+  "no_successor_option": {
+    "new_scientific_invocations": 0,
+    "new_native_steps": 0,
+    "claim": "end only the tested opening family by direction decision, not a general impossibility or Portfolio lifecycle conclusion"
+  },
+  "local_library_query": {
+    "catalog_count": 190,
+    "pattern": "terminat|temporally extended|temporal abstraction|macro.?action|action repeat|commitment|option.critic|semi.markov",
+    "match_count": 3,
+    "candidate_ids": [
+      "MARL-0449",
+      "MARL-0543",
+      "VS-0005"
+    ],
+    "real_source_used": "VS-0005 page3 element144; corroborated official AAAI identity",
+    "My_lib_current_coverage": "synthetic-core,2papers/2mechanisms; external literature not covered"
+  }
+}

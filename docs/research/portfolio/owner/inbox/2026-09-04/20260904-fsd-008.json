@@ -1,0 +1,32 @@
+{
+  "id": "20260904-fsd-008",
+  "created": "2026-09-04T17:47:34-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "brief",
+  "title": "E3 中等差异 D2 第三种子有效单元简报",
+  "context": "本格完成，十二格有效；完整十八格前不作配对或机制判断。暂缺资源峰值保留为未测量。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "单元记录完整且独立算术吻合，简报仅陈述单元有效性和后续原顺序。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_MEDIUM_D2_SEED3_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#fsd-e3-medium-d2-seed3-terminal-20260904",
+  "brief": "docs/research/portfolio/owner/briefs/flexible_skill_duration/2026-09-04_E3_medium_d2_seed3.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

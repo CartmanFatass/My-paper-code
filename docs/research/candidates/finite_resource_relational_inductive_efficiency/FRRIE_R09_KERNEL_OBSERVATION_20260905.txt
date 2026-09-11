@@ -1,0 +1,16 @@
+[93976.701070] WSL (289) ERROR: CheckConnection: getaddrinfo() failed: -5
+[93978.351108] mini_init (270): drop_caches: 1
+[93987.924393] python[1679277]: segfault at 0 ip 0000643adf145599 sp 00007ffe83168dc0 error 4 in python3.10[643adefbf000+984000] likely on CPU 19 (core 9, socket 0)
+[93987.924442] Code: fe ff ff 8b 40 44 85 c0 0f 85 de 94 02 00 4d 89 f7 4c 89 f9 45 8b 7c 24 60 4c 89 e0 4d 89 ec 4c 2b 65 98 49 d1 ec 44 89 60 60 <41> 0f b7 45 00 83 bd 58 fe ff ff 00 0f 85 33 98 01 00 0f b7 c0 41
+[93987.924461] python3.10: python: potentially unexpected fatal signal 11.
+[93987.924463] CPU: 19 PID: 1679277 Comm: python Not tainted 6.6.87.2-microsoft-standard-WSL2 #1
+[93987.924472] RIP: 0033:0x643adf145599
+[93987.924476] Code: fe ff ff 8b 40 44 85 c0 0f 85 de 94 02 00 4d 89 f7 4c 89 f9 45 8b 7c 24 60 4c 89 e0 4d 89 ec 4c 2b 65 98 49 d1 ec 44 89 60 60 <41> 0f b7 45 00 83 bd 58 fe ff ff 00 0f 85 33 98 01 00 0f b7 c0 41
+[93987.924477] RSP: 002b:00007ffe83168dc0 EFLAGS: 00010a02
+[93987.924483] RAX: 00007b4886ea7780 RBX: 00007b4796c46e30 RCX: 00007b4886ea7900
+[93987.924489] RDX: 00007b488a4adcc0 RSI: 0000000000000003 RDI: 00007b4796c46e30
+[93987.924490] RBP: 00007ffe83169090 R08: 0000643af4532f58 R09: 00007b4886ea78f8
+[93987.924490] R10: 7fffffffffffffef R11: 000000000000000a R12: 7fffc25bbae7a838
+[93987.924491] R13: 0000000000000000 R14: 00007b4886ea7900 R15: 0000000000000002
+[93987.924491] FS:  00007b488a9c6740 GS:  0000000000000000
+[93987.926063] WSL (1679304 - CaptureCrash): Capturing crash for pid: 1678077, executable: !home!wu!.local!share!uv!python!cpython-3.10.21-linux-x86_64-gnu!bin!python3.10, signal: 11, port: 50005

@@ -1,0 +1,139 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-05-github-direct-write-probe-01",
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "variable_n_fleet_churn"
+  ],
+  "decision_authority": "pro_final",
+  "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "creator_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "return_route": "PARENT_SESSION",
+  "repository": "CartmanFatass/My-paper-code",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "tab_id": "26",
+  "tab_lifecycle": "OPEN",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "upload",
+  "prompt_sha256": "7163d4707923053e84f32b01095ec6719169260a36b62550571a144bfe4fd58a",
+  "prompt_bytes": 2192,
+  "manifest_sha256": "cad3f417819d07b8101701496f5ebea260e2331f4b057e968484c5deca628a59",
+  "manifest_bytes": 1817,
+  "response_sha256": "93eda374d1e39a697c2b31ec1506151b75affeced1f869fe6199fd857093c223",
+  "response_bytes": 501,
+  "response_characters": 499,
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "3f78434e-d00b-4c42-a984-c0233303486a",
+    "assistant_message_id": "request-6a9c109e-b264-83e8-a78b-f9ea1b767b7b-0",
+    "attachment_observed": true,
+    "provider_filename": "2026-09-05-github-direct-write-probe-01--portfolio__00_PROMPT.md",
+    "companion_prompt_exact": true,
+    "companion_prompt_sha256": "054d5b4435dace0436872f6d61168fa6c8c823993ff05ea8bcfc9cfa80ddc9b5"
+  },
+  "upload_evidence": {
+    "expected_file": "2026-09-05-github-direct-write-probe-01--portfolio__00_PROMPT.md",
+    "provider_filename": "2026-09-05-github-direct-write-probe-01--portfolio__00_PROMPT.md",
+    "attachment_observed": true,
+    "bytes": 2192,
+    "sha256": "7163d4707923053e84f32b01095ec6719169260a36b62550571a144bfe4fd58a"
+  },
+  "assistant_message_id": "request-6a9c109e-b264-83e8-a78b-f9ea1b767b7b-0",
+  "user_message_id": "3f78434e-d00b-4c42-a984-c0233303486a",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Newest assistant Copy response control via browser CUA Playwright click and CUA clipboard.readText; raw UTF-8 response preserved",
+  "github_probe": {
+    "owner_authorized": true,
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/3",
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/3#issuecomment-5555607897",
+    "issue_comment_id": 5555607897,
+    "issue_comment_body": "Pro 直接写入能力测试：这条评论由当前 Pro 会话调用其 GitHub 写接口创建；它不包含科研结论。对应测试文件是 docs/research/portfolio/collaboration_probe/pro-write-check.md。",
+    "comment_count_after_readback": 1,
+    "branch": "codex/pro-github-write-probe-20260905",
+    "branch_url": "https://github.com/CartmanFatass/My-paper-code/tree/codex/pro-github-write-probe-20260905",
+    "branch_head_sha": "b86b9f71ea22291b3a664249f93a14abaa2a8968",
+    "branch_parent_sha": "b11d1f212233ce28549d7896e4ab7ae06e158945",
+    "branch_protected": false,
+    "commit_sha": "b86b9f71ea22291b3a664249f93a14abaa2a8968",
+    "commit_url": "https://github.com/CartmanFatass/My-paper-code/commit/b86b9f71ea22291b3a664249f93a14abaa2a8968",
+    "commit_message": "Pro GitHub connectivity probe",
+    "commit_files": [
+      "docs/research/portfolio/collaboration_probe/pro-write-check.md"
+    ],
+    "target_path": "docs/research/portfolio/collaboration_probe/pro-write-check.md",
+    "target_file_url": "https://github.com/CartmanFatass/My-paper-code/blob/b86b9f71ea22291b3a664249f93a14abaa2a8968/docs/research/portfolio/collaboration_probe/pro-write-check.md",
+    "target_content_sha256": "44c205d464af346dd8a4f26cbc88c69a78fb1bd91a74c062640f8fc2f79bdf06",
+    "target_blob_sha": "072a398a5aaa5cf9a297f98a8fbd50a77719f887",
+    "target_content_exact": true,
+    "changed_paths_exact": true,
+    "direct_readback": "verified",
+    "missing_capabilities": [],
+    "root_side_writes": false,
+    "readback_tools": [
+      "github_fetch_issue",
+      "github_fetch_issue_comments",
+      "github_fetch_file",
+      "github_fetch_commit",
+      "github_fetch"
+    ]
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-direct-write-probe-01\\2026-09-05-github-direct-write-probe-01--portfolio__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-direct-write-probe-01\\2026-09-05-github-direct-write-probe-01--portfolio__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-direct-write-probe-01\\2026-09-05-github-direct-write-probe-01--portfolio--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-direct-write-probe-01\\2026-09-05-github-direct-write-probe-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "93eda374d1e39a697c2b31ec1506151b75affeced1f869fe6199fd857093c223"
+  },
+  "timestamps": {
+    "received_at": "2026-09-05T23:07:00Z",
+    "sent_at": "2026-09-05T23:49:36Z",
+    "generation_started_at": "2026-09-05T23:49:36Z",
+    "completed_at": "2026-09-05T23:51:37Z",
+    "captured_at": "2026-09-05T23:51:57Z",
+    "archived_at": "2026-09-05T23:54:36Z"
+  },
+  "heartbeat": {
+    "automation_id": null,
+    "status": "NOT_CREATED",
+    "retired_at": null,
+    "retirement_verified": true
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "PENDING",
+    "attempt_count": 0,
+    "message_key": null,
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "fallback_enabled": false
+  },
+  "archive_status": "ARCHIVED",
+  "response_identity": "PASS",
+  "identity_binding": {
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "user_message_id": "3f78434e-d00b-4c42-a984-c0233303486a",
+    "assistant_message_id": "request-6a9c109e-b264-83e8-a78b-f9ea1b767b7b-0"
+  },
+  "notes": [
+    "Exactly one provider Send confirmed on reused portfolio binding.",
+    "Current response paired by newest user and assistant IDs.",
+    "Pro performed both owner-authorized GitHub writes.",
+    "Root verified issue comment, branch head, commit parent, exact changed path, and exact file bytes directly through GitHub read interfaces.",
+    "No second Send or duplicate write was attempted."
+  ]
+}

@@ -1,0 +1,74 @@
+--- a/docs/project/ENGINEERING_SCOPE_SPEC.md
++++ b/docs/project/ENGINEERING_SCOPE_SPEC.md
+@@ -92,6 +92,27 @@
+ 
+ 不符合本例外的research变更继续适用现行比例规则。2000新增行、600行runner、其余测试及scope预算、源码所有权、科学完整性、既有post-learner离线发布要求、资源准入、逐臂计算上限和证据规范§11.4保持不变。本条不接受任何已有拒绝补丁，不授权实验，不新增reviewer角色、登记服务、runtime validator或A/B启动关卡。
+ 
++### CBSC B1修复与DISH A05对象限定附款
++
++**1．适用对象与基线。** 本附款仅适用于下表两个完整逻辑变更。所有依赖文件及后续修订从同一声明基线合并计数；已有候选的新增行计入上限，不另发增量额度。通用“小规模复用／净删除例外”的100行规定保持不变。
++
++| 对象                                                      | 计数基线                                                        | 整项非测试源码边界                                         |
++| ------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------- |
++| `DISH-PREDICTION-HEAD-CONTRACT-A05`完整原卡实施               | pre-A05 accepted `d543146cc11ccf880da1245bfb6884356772dd38` | `A≤250，D=0`；只新增下列runner和薄C++导出，不改既有生产源码           |
++| `CBSC-OMRC-B01`在2026-09-05 selection intake声明的完整执行到发布修复 | `0ffca930b9e43b0c6402fce65493cdf6ae24f66f`                  | `A≤200，D≤500`，因此`A+D≤700`；仅限下列既有依赖范围，不增加runner或框架 |
++
++A05运行源码仅为`scripts/run_dish_prediction_head_contract_a05.py`和`experiments/candidates/degraded_incumbent_shadow_handover/head_contract_a05.cpp`。
++
++CBSC运行源码仅限`experiments/candidates/capability_bound_semantic_currentness/omrc_b01/`中的`b1.py`、`telemetry.py`、`b1_metrics_production.py`、`b1_metrics_training_assembly.py`、`b1_metrics_rehydrate.py`、`b1_mechanical.py`、`b1_metrics_artifact.py`。每个实际变更仍须属于资源缺失的真实报告、独立wall处理、同一原始fixture的定位、科学量组装或完整发布／消费者处理。
++
++**2．比例规则。** 对符合上述对象、范围和行数边界的变更，完整报告A、D、O及`O/(A+D)`，替换两侧计数，测试和文档分列。编排占比达到或超过30%本身不再自动退回；既有独立reviewer审阅必要性、全部受影响科学量与消费者，并列明未验证事实。不重新分类已报告编排行以取得资格，不把未改helper或测试计入分母。
++
++**3．科学保护。** A05原卡第2—7节的真实调用、输入、全部读数、正控制、数值语义、分支、曝光和运行上限不变；四个保护生产surface不变。CBSC原完整科学比较、种子、曝光、数值/RNG语义、十五表、summary、RAW能力输入和解释权限不变。不得删除科学量来适配源码或验证预算；不得把可选资源缺失重新提升为科学有效性门槛，也不得把部分资源观察认证为完整资源覆盖。
++
++**4．验证与非授权。** 不新增§4机械设施，不改变2000新增行、600行runner、既有测试／发布要求、资源准入、逐臂数值预算或证据规范§11.4。本附款不接受`ea05e9308`、`9ee4a381`、`cfbe91367`或任何旧拒绝补丁，不放行任何调用。A05依原非卡smoke／rule profile验证；CBSC保留原真实常量离线发布及全部读回要求。测试不因不利输出而删除；不足的验证预算如实返回。
++
++**5．完成与停止。** 不得拆分逻辑变更、重置基线、挪移／压缩代码或填充计算规避计数。预算内只处理该范围内明确发现的问题；出现所列范围之外依赖、保护语义改变或预算不足时，返回整个变更与具体缺口，不自动扩展。A05在原完整读数intake后、CBSC在完整工程验证intake后结束本项投入；后继对象与新learner运行不继承此例外。此结束是投资边界，不是A/B消费或科学负面。
++
+ ## 6. Core code discipline
+ 
+ Core changes are rare and small. They preserve every route, checkpoint format, RNG stream, and
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -218,6 +218,15 @@
+ repeated smoke tests), and budgets (2,000 new lines per attempt, 600 per runner, orchestration
+ under 30% of a diff, the four §11.4 launch conditions and no other gate). A guard is a bug until
+ a card asks for it.
++
++The object-specific appendix in ENGINEERING_SCOPE_SPEC §5 applies only to complete DISH A05
++from d543146cc (A<=250,D=0) and the declared CBSC B1 execution/publication repair from0ffca930b
++(A<=200,D<=500,A+D<=700). Existing candidate changes count toward these totals. Within the
++named source paths, report A,D,O/(A+D); the ratio alone does not refuse an eligible change.
++Preserve the appendix's complete science, independent review, verification, resource and stop
++boundaries. No old patch or invocation is accepted by this clause. The general100-line exception
++and decision authority are unchanged; the exception ends at A05 result intake / CBSC technical
++intake and does not transfer to a successor or learner.
+ 
+ Do not silently change scientific meaning, numerical precision, RNG behavior, checkpoint format,
+ bit identity, declared comparison, or external side effects. State material assumptions and
+--- /dev/null
++++ b/docs/research/candidates/degraded_incumbent_shadow_handover/DISH_A05_OBJECT_EXCEPTION_IMPLEMENTATION_20260905.md
+@@ -0,0 +1,9 @@
++# DISH A05 prospective implementation addendum
++
++Authority: owner-ratified Portfolio follow-up2026-09-05-portfolio-cbsc-n3-evidence-followup-01, optionB for N3. Record actual ratification and application in Root's intake before using this addendum.
++
++Only the complete original A05 is covered, from d543146cc11ccf880da1245bfb6884356772dd38. Whole cumulative A<=250,D=0; existing190lines count inside250. Owned source is scripts/run_dish_prediction_head_contract_a05.py and experiments/candidates/degraded_incumbent_shadow_handover/head_contract_a05.cpp. The existing independent reviewer assesses the whole actual change, including necessity and every scientific observation/consumer, with A,D,O/(A+D) reported. Ratio alone no longer rejects an otherwise eligible change.
++
++Preserve the original A05 card sections2–7, protected production surfaces at818b2566, inputs, seed50511, three comparisons, all outputs and alternatives, native calls, graph positive control, precision, exposure, zero parameter update and25.5s forecast/60s cap. Original non-card smoke seed50512 and helper inputs-1/.5/1 remain. Formal compile/load is not replaced by smoke cache. No production correction, real trajectory, learner, new seed or silent changed scientific scope.
++
++No existing candidate is accepted by this addendum. CM/reviewer establish source/verification conformity before the original invocation. Stop at complete original A05 intake; out-of-scope dependency, protected-source change or budget excess returns the full change and exact gap. No automatic successor or further budget increase.
+--- /dev/null
++++ b/docs/research/candidates/capability_bound_semantic_currentness/CBSC_B01_OBJECT_EXCEPTION_REPAIR_20260905.md
+@@ -0,0 +1,11 @@
++# CBSC B1 prospective complete repair addendum
++
++Authority: owner-ratified Portfolio follow-up2026-09-05-portfolio-cbsc-n3-evidence-followup-01, optionB for CBSC. Record actual ratification and application in Root's intake before using this addendum.
++
++Only the complete logical repair declared in CBSC_OMRC_B01_POLICY_B_REPAIR_SELECTION_INTAKE_20260905.md is covered, from0ffca930b9e43b0c6402fce65493cdf6ae24f66f. Whole cumulative A<=200,D<=500,A+D<=700; existing165/426counts are included. Allowed files under omrc_b01 are b1.py,telemetry.py,b1_metrics_production.py,b1_metrics_training_assembly.py,b1_metrics_rehydrate.py,b1_mechanical.py,b1_metrics_artifact.py. No new runner/framework. Report A,D,O/(A+D); existing independent reviewer checks all affected calculations, observations, consumers and publication, with ratio alone not rejecting eligible work.
++
++Repair the actual resource-completeness projection while preserving measured values and resources_unmeasured scientific validity; keep learner/work failures distinct. Locate the same preserved historical receipt in the staged fixture without modifying old metadata/identity or substituting new receipts. Preserve the entire scientific comparison, all fifteen tables and summary, seeds/exposure/precision/RNG/RAW capability/null meanings from the original selection intake.
++
++Static whole review and exact Root integration precede remote verification. Use the full quarantined r05 fixture and real publication constants, read all fifteen tables plus summary; no TEST_ONLY substitute and no scientific rehabilitation of old evidence. Remaining focused allowance243.55s is cumulative and excludes original smoke under60s. Source/count/publication acceptance cannot be inferred from the rule. Keep7200s independent wall stop, immediate actual-node admission and original numerical budgets.
++
++Stop at complete technical repair/verification intake; no r08/B1B/B2/newseed or learner is selected here. Return full change and exact gap if source/verification bounds or allowed paths are insufficient; no deleted observations, renamed object, reset baseline or automatic expanded budget.

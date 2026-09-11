@@ -1,0 +1,202 @@
+{
+  "evidence_role": "DOCUMENTARY_DERIVATION_NOT_NEW_EXPERIMENT",
+  "written_at": "2026-09-06T21:08:00+00:00",
+  "derivation": "Counts and timings copied from the witness summary, its /usr/bin/time record and focused-check wall, and from the B03 records; no project import, checkpoint load, experiment or new timing. Consultation exposure is zero.",
+  "sources": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_INIT_WITNESS_A01_RESULT_INTAKE_20260906.md",
+      "sha256_prefix": "f6aa22592f8be2b3"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/init_witness_a01_20260906/witness/summary.json",
+      "sha256_prefix": "f86340a6f444f99c"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_INIT_WITNESS_A01_SCIENCE_CARD_20260906.md",
+      "sha256_prefix": "ccd2103261158a3b"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_INIT_WITNESS_A01_CM_RECORD_20260906.md",
+      "sha256_prefix": "e3e4a309f785a37d"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FORECAST_PACKAGE_B03_RESULT_INTAKE_20260906.md",
+      "sha256_prefix": "616ef51c4f7149a6"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/b03_forecast_package_20260906/control/summary.json",
+      "sha256_prefix": "ccbe5664f90c0d4b"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/b03_forecast_package_20260906/forecast_package/summary.json",
+      "sha256_prefix": "7078d998f8bd024e"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B03_CONVERGENCE_INTAKE_20260906.md",
+      "sha256_prefix": "cbd7631a7db8c5f7"
+    }
+  ],
+  "exposure_line": "DISH-INIT-WITNESS-A01: 8 zero-update evaluation episodes (2 interface views x 4 B03 conditions), 9,600 native ticks, one initializer call, 8 policy constructions, zero training transitions / backward passes / optimizer steps / label calls; r2 COMPLETE at 3c0ed5c87 on wsl_4070; r1 stopped in the focused check with no exposure. Consultation: zero new models, native states, transitions, backwards, optimizer steps, tests or experiments.",
+  "measured": {
+    "witness": {
+      "status": "COMPLETE",
+      "completed_episodes": 8,
+      "prepublication_wall_s": 10.953281042980962,
+      "cpu_s": 10.948027000000002,
+      "time_v_wall_s": 11.25,
+      "focused_check_wall_s": 4.981,
+      "charged_whole_item_s": 16.231,
+      "cap_s": 120.0,
+      "allowance_s": 115.019,
+      "peak_self_rss_bytes": 473096192,
+      "initialization": {
+        "checkpoint_loads": 8,
+        "expected_initial_norm": 38.24996300787587,
+        "helper_constructed_objects": [
+          "model",
+          "optimizer"
+        ],
+        "initial_model_norm": 38.24996300787587,
+        "initialization_source": "reconstructed_from_master",
+        "initializer_calls": 1,
+        "norm_matches": true,
+        "policy_constructions": 8,
+        "update": 0,
+        "welford_counts": {
+          "actor": 0,
+          "critic": 0,
+          "snapshot": 0
+        }
+      },
+      "zero_training": {
+        "backward_passes": 0,
+        "next_label_steps": 0,
+        "optimizer_steps": 0,
+        "ordinary_training_transitions": 0,
+        "passive_label_calls": 0
+      },
+      "rows_view_coordinate_service_energy_completed": [
+        [
+          "CONTROL",
+          "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/0",
+          467,
+          278614.3174473612,
+          1200
+        ],
+        [
+          "CONTROL",
+          "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K4_TO_K12/0",
+          478,
+          281821.1590661393,
+          1200
+        ],
+        [
+          "CONTROL",
+          "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K8/0",
+          942,
+          282598.1425239703,
+          1200
+        ],
+        [
+          "CONTROL",
+          "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K4_TO_K12/0",
+          938,
+          277817.136758902,
+          1200
+        ],
+        [
+          "FORECAST_PACKAGE",
+          "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/0",
+          467,
+          278614.3174473612,
+          1200
+        ],
+        [
+          "FORECAST_PACKAGE",
+          "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K4_TO_K12/0",
+          478,
+          281821.1590661393,
+          1200
+        ],
+        [
+          "FORECAST_PACKAGE",
+          "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K8/0",
+          942,
+          282598.1425239703,
+          1200
+        ],
+        [
+          "FORECAST_PACKAGE",
+          "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K4_TO_K12/0",
+          938,
+          277817.136758902,
+          1200
+        ]
+      ],
+      "D_CONTROL": -245.75,
+      "D_FORECAST_PACKAGE": -517.75,
+      "initial_view_mean": 706.25,
+      "final_means": {
+        "CONTROL": 460.5,
+        "FORECAST_PACKAGE": 188.5
+      },
+      "pattern": "D_C<=-24",
+      "views_identical": true
+    },
+    "r1_attempt": {
+      "focused_check_wall_s": 5.816,
+      "exposure": 0,
+      "cause": "node worktree sparse checkout omitted docs/ (B03 summaries absent); staged and relaunched once as r2"
+    },
+    "b03_reference": {
+      "arm_walls_s": [
+        211.04,
+        196.18
+      ],
+      "shared_preparation_s": 4.94,
+      "pair_charge_s": 412.16,
+      "rows_control": [
+        452,
+        458,
+        449,
+        483
+      ],
+      "rows_package": [
+        92,
+        222,
+        129,
+        311
+      ],
+      "delta_b03": -272.0,
+      "MEI": 24,
+      "parameter_l2_displacement": [
+        8.605,
+        7.514
+      ],
+      "initial_norm": 38.24996300787587
+    },
+    "node": "wsl_4070",
+    "launch_sha": "3c0ed5c87f91ec0e4692aa7dd0214f83482b4418"
+  },
+  "prospective_option_1_named_stability_pair": {
+    "design": "CONTROL learner vs one named change (LR 3e-5 | 1 epoch x 8 minibatches | Welford frozen at the zero-update state), same 16-update exposure, seed 73 initialization, four B03 conditions, MEI +24, zero-update view 706.25 as a fixed reference row",
+    "reference_cost": "B03 arm walls 211.04 / 196.18 s; pair ~410 s plus ~5 s shared preparation; ceiling 1,800 s per arm; not measured for the changed learner",
+    "training": "2 x 65,536 transitions, 2 x 512 optimizer steps (option b: 2 x 128)"
+  },
+  "prospective_option_2_second_seed_control_plus_witness": {
+    "design": "one CONTROL arm on a fresh seed, 16 updates, plus its eight zero-update episodes",
+    "reference_cost": "~211 s + ~16 s from measured walls",
+    "training": "65,536 transitions, 512 optimizer steps"
+  },
+  "prospective_option_3_b02_checkpoint_witness": {
+    "design": "zero-update evaluation of B02's two update-16 checkpoints (seed 61, lagged path) against their initialization on the four B02 conditions",
+    "reference_cost": "~16 s from the witness's measured wall plus checkpoint loads; B02 checkpoints retained on the node",
+    "training": "none"
+  },
+  "budget_state": {
+    "witness_charge_s": 16.231,
+    "b03_pair_charge_s": 412.16,
+    "b02_pair_wall_s": 642.66,
+    "family_cumulative_training_transitions": 262144
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "object": "VSP03_B03",
+  "seed": 5,
+  "launch_sha": "4eb8a36b9184633f5e28eff999a99f2dbc948040",
+  "node": "wsl_4070",
+  "command": "VSP03_B03_STARTED=$(/home/wu/.venvs/hmasd/bin/python -c \"import time; print(time.perf_counter())\")\n/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b03_seed5_p54_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b03.py --seed 5 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b03_seed5_p54_20260908 --started-monotonic \"$VSP03_B03_STARTED\" --node wsl_4070",
+  "status": "complete",
+  "arms": {
+    "G": {
+      "initial": {
+        "actor": {
+          "parameters": 1570,
+          "initial_l2": 4.714305400848389,
+          "initial_rms": 0.11897832900285721,
+          "current_l2": 4.714305400848389,
+          "displacement_l2": 0.0,
+          "displacement_over_initial_l2": 0.0
+        },
+        "critic": {
+          "parameters": 513,
+          "initial_l2": 3.434918165206909,
+          "initial_rms": 0.15165531635284424,
+          "current_l2": 3.434918165206909,
+          "displacement_l2": 0.0,
+          "displacement_over_initial_l2": 0.0
+        },
+        "total": {
+          "parameters": 2083,
+          "initial_l2": 5.832952976226807,
+          "initial_rms": 0.12780380249023438,
+          "current_l2": 5.832952976226807,
+          "displacement_l2": 0.0,
+          "displacement_over_initial_l2": 0.0
+        }
+      },
+      "training_episodes": 16384,
+      "training_team_ticks": 655360,
+      "training_target_transitions": 1310720,
+      "training_valid_rows": 64912,
+      "gradient_rows": 64912,
+      "optimizer_steps": 128,
+      "backward_calls": 128,
+      "evaluation_episodes": 2048,
+      "first": {
+        "actor": {
+          "parameters": 1570,
+          "initial_l2": 4.714305400848389,
+          "initial_rms": 0.11897832900285721,
+          "current_l2": 4.714308738708496,
+          "displacement_l2": 0.005830887705087662,
+          "displacement_over_initial_l2": 0.0012368498027383488
+        },
+        "critic": {
+          "parameters": 513,
+          "initial_l2": 3.434918165206909,
+          "initial_rms": 0.15165531635284424,
+          "current_l2": 3.435602903366089,
+          "displacement_l2": 0.022649196907877922,
+          "displacement_over_initial_l2": 0.006593809755730702
+        },
+        "total": {
+          "parameters": 2083,
+          "initial_l2": 5.832952976226807,
+          "initial_rms": 0.12780380249023438,
+          "current_l2": 5.833359241485596,
+          "displacement_l2": 0.023387718945741653,
+          "displacement_over_initial_l2": 0.004009584689103836
+        }
+      },
+      "final": {
+        "actor": {
+          "parameters": 1570,
+          "initial_l2": 4.714305400848389,
+          "initial_rms": 0.11897832900285721,
+          "current_l2": 5.776658535003662,
+          "displacement_l2": 2.893106460571289,
+          "displacement_over_initial_l2": 0.6136866864948215
+        },
+        "critic": {
+          "parameters": 513,
+          "initial_l2": 3.434918165206909,
+          "initial_rms": 0.15165531635284424,
+          "current_l2": 3.4378933906555176,
+          "displacement_l2": 0.582332193851471,
+          "displacement_over_initial_l2": 0.16953306187904277
+        },
+        "total": {
+          "parameters": 2083,
+          "initial_l2": 5.832952976226807,
+          "initial_rms": 0.12780380249023438,
+          "current_l2": 6.722268581390381,
+          "displacement_l2": 2.9511311054229736,
+          "displacement_over_initial_l2": 0.5059411789278623
+        }
+      },
+      "weights_readback": true,
+      "arm_wall_s": 2.2798535019974224
+    }
+  },
+  "actual_rollouts": {
+    "episodes_started": 20480,
+    "episodes_completed": 20480,
+    "team_ticks": 819200,
+    "target_transitions": 1638400,
+    "decision_rows": 93244,
+    "rollout_policy_forwards": 2142
+  },
+  "model_constructions": 1,
+  "optimizer_steps": 128,
+  "device": "cpu",
+  "dtype": "float32",
+  "compute_threads": 1,
+  "rng": {
+    "worlds": "PCG64 SeedSequence([302,seed,split,episode,target]);40 uniforms",
+    "phase": "[302,seed,split,episode,2];one integers(0,2)",
+    "actions": "[303,seed,split,mode,arm,episode];17 calendar-position uniforms",
+    "splits": "train100/evaluation200",
+    "modes": "train0/stochastic-final1",
+    "arms": "G1",
+    "initialization": 40005
+  },
+  "cost_law": "admission+imports+G_init+128*batch128x40x2+4*eval1024x40x2+weights+publication/readback/exit",
+  "independent_training_instances": 1,
+  "validation_models": 0,
+  "validation_episodes": 0,
+  "validation_optimizer_steps": 0,
+  "aggregate_cpu_s": null,
+  "absolute": {
+    "G_greedy": {
+      "episodes": 1024,
+      "return": 0.3547216796875,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 10.1962890625,
+      "eligible_decisions": 8.23828125,
+      "blocked_pending": 1.9580078125,
+      "blocked_final_clocks": 0.052734375,
+      "success_per_team": 0.982421875,
+      "attempt_per_team": 1.7578125,
+      "failed_attempt_per_team": 0.775390625,
+      "non_submission_per_team": 0.2421875,
+      "waiting_ticks_per_team": 37.017578125
+    },
+    "G_stochastic": {
+      "episodes": 1024,
+      "return": 0.33962890625,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 7.8154296875,
+      "eligible_decisions": 5.8203125,
+      "blocked_pending": 1.9951171875,
+      "blocked_final_clocks": 0.0107421875,
+      "success_per_team": 0.9052734375,
+      "attempt_per_team": 1.935546875,
+      "failed_attempt_per_team": 1.0302734375,
+      "non_submission_per_team": 0.064453125,
+      "waiting_ticks_per_team": 25.84765625
+    },
+    "R": {
+      "episodes": 1024,
+      "return": 0.3694970703125,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.802734375,
+      "eligible_decisions": 6.814453125,
+      "blocked_pending": 1.98828125,
+      "blocked_final_clocks": 0.0146484375,
+      "success_per_team": 0.984375,
+      "attempt_per_team": 1.8251953125,
+      "failed_attempt_per_team": 0.8408203125,
+      "non_submission_per_team": 0.1748046875,
+      "waiting_ticks_per_team": 30.82421875
+    },
+    "R0": {
+      "episodes": 1024,
+      "return": 0.3686962890625,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.783203125,
+      "eligible_decisions": 6.794921875,
+      "blocked_pending": 1.98828125,
+      "blocked_final_clocks": 0.013671875,
+      "success_per_team": 0.982421875,
+      "attempt_per_team": 1.8291015625,
+      "failed_attempt_per_team": 0.8466796875,
+      "non_submission_per_team": 0.1708984375,
+      "waiting_ticks_per_team": 30.71484375
+    }
+  },
+  "comparisons": {
+    "G_greedy-R0": {
+      "mean": -0.013974609375000007,
+      "conditional_world_sd": 0.2337120721914452,
+      "conditional_world_se": 0.007303502255982663,
+      "worlds": 1024
+    },
+    "G_greedy-R": {
+      "mean": -0.01477539062500001,
+      "conditional_world_sd": 0.23061511596272738,
+      "conditional_world_se": 0.007206722373835231,
+      "worlds": 1024
+    },
+    "G_stochastic-R0": {
+      "mean": -0.0290673828125,
+      "conditional_world_sd": 0.3153095646421544,
+      "conditional_world_se": 0.009853423895067326,
+      "worlds": 1024
+    },
+    "G_stochastic-R": {
+      "mean": -0.029868164062499997,
+      "conditional_world_sd": 0.3164075554653686,
+      "conditional_world_se": 0.009887736108292768,
+      "worlds": 1024
+    },
+    "G_stochastic-G_greedy": {
+      "mean": -0.015092773437499997,
+      "conditional_world_sd": 0.319897368968617,
+      "conditional_world_se": 0.00999679278026928,
+      "worlds": 1024
+    }
+  },
+  "primary": {
+    "mean": -0.013974609375000007,
+    "conditional_world_sd": 0.2337120721914452,
+    "conditional_world_se": 0.007303502255982663,
+    "worlds": 1024
+  },
+  "primary_name": "G_greedy-R0",
+  "elapsed_through_output_start_s": 3.18488888599677,
+  "peak_rss_bytes": 492929024
+}

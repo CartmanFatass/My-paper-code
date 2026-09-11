@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+echo $$ > "/home/wu/.agent-tasks/frrie_r09_segfault_a01_43eec21e_20260905/pid"
+START_TS=$(date +%s)
+echo "=== Task 'frrie_r09_segfault_a01_43eec21e_20260905' started at $(date -Iseconds) ===" >> "/home/wu/.agent-tasks/frrie_r09_segfault_a01_43eec21e_20260905/task.log"
+
+# Execute command capturing output
+set +e
+eval 'cd /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/temp/directions/finite_resource_relational_inductive_efficiency/technical/r09_segfault_a01_admission.json && timeout --signal=TERM --kill-after=5s 60s /home/wu/.venvs/hmasd/bin/python -X faulthandler -m pdb -c continue -m scripts.run_frrie_b01_contact_r09 --output-root /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/temp/directions/finite_resource_relational_inductive_efficiency/exp/r09_segfault_a01 --admission-receipt /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905/temp/directions/finite_resource_relational_inductive_efficiency/technical/r09_segfault_a01_admission.json --seed 3 < docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R04_RECONSTRUCTION_A01_PDB_COMMANDS_20260904.txt' >> "/home/wu/.agent-tasks/frrie_r09_segfault_a01_43eec21e_20260905/task.log" 2>&1
+EXIT_CODE=$?
+set -e
+
+END_TS=$(date +%s)
+echo $EXIT_CODE > "/home/wu/.agent-tasks/frrie_r09_segfault_a01_43eec21e_20260905/exit_code"
+if [ $EXIT_CODE -eq 0 ]; then
+    echo "finished" > "/home/wu/.agent-tasks/frrie_r09_segfault_a01_43eec21e_20260905/status"
+else
+    echo "failed" > "/home/wu/.agent-tasks/frrie_r09_segfault_a01_43eec21e_20260905/status"
+fi
+echo "=== Task 'frrie_r09_segfault_a01_43eec21e_20260905' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===" >> "/home/wu/.agent-tasks/frrie_r09_segfault_a01_43eec21e_20260905/task.log"
+
+# Keep session alive briefly for inspection, then exit
+sleep 1

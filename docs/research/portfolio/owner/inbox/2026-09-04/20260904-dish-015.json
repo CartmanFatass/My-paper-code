@@ -1,0 +1,32 @@
+{
+  "id": "20260904-dish-015",
+  "created": "2026-09-04T17:45:26-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "brief",
+  "title": "DISH first seed: training complete, no valid handover",
+  "context": "One valid B seed supplies no-trigger evidence, not a source-effect estimate. Sixteen prescribed prefixes completed; the three-seed aggregate and owner prediction scoring remain pending.",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "Keep complete no-trigger evidence visible and do not turn empty-support values into equivalence.",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_SEED11_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n3-dish-b01-seed11-intake",
+  "brief": "docs/research/portfolio/owner/briefs/degraded_incumbent_shadow_handover/2026-09-04_n3_dish_b01_seed11.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

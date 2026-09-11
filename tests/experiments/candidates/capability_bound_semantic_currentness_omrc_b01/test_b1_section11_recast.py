@@ -436,7 +436,7 @@ def test_slot_evidence_records_unmeasured_resources_without_refusing(
         expected_attempt_id="attempt-1", expected_commit="a" * 40,
     )
     assert telemetry_record["resources_unmeasured"] is True
-    assert telemetry_record["unmeasured_reasons"] == ["telemetry_missing"]
+    assert telemetry_record["unmeasured_reasons"] == ["telemetry_incomplete"]
     assert telemetry_record["recorded_cap_exceedances"] == []
     assert telemetry_record["invocations"] == []
 

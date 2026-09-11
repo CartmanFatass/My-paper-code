@@ -1,0 +1,32 @@
+{
+  "id": "20260905-frrie-006",
+  "created": "2026-09-05T03:11:09-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "brief",
+  "title": "R06 高学习暴露结果简报",
+  "context": "两臂确有更大参数移动，只有大规模超过效应阈值；更多交付伴随更高浪费率，单根信号尚未证明稳定收益。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R06_RESULT_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r06-intake-r07-selection",
+  "brief": "docs/research/portfolio/owner/briefs/finite_resource_relational_inductive_efficiency/2026-09-05_r06_high_lr.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

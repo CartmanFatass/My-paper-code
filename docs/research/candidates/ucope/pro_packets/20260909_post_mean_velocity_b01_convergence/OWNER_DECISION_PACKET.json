@@ -1,0 +1,38 @@
+{
+  "question": "P85后，是否按Pro裁决把下一问题改为归一化反馈对原反馈，而不再重复均值执行？",
+  "changes_if_approved": [
+    {
+      "target": "UCOPE DIRECTION.md 与本轮Convergence intake",
+      "from": "DM窄幅推荐另一对五模式训练；三项选择未决",
+      "to": "接收PRO_FINAL选项c：未来归一化G对原G并保留悬停；不再选均值执行重复；CONTINUE、recasts仍1；本次只落实科学记录"
+    }
+  ],
+  "if_refused": "保留全部原始结果与Pro原文；应用你的明确改判，在影响后续设计前按原决策层处理。现有P85已结束，本次没有新运行可停止。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md",
+      "quote": "The decision it would inform is concrete: **retain or decline this normalized-feedback training variant for further consideration**, based on complete native return against the raw-target learner, with both hover contrasts visible.",
+      "why": "检验一个当前学习路径上的明确改动，可以改变未来是否保留该反馈版本的选择；不要求它先成功才能继续续约研究。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md",
+      "quote": "**Option (b) is the runner-up.** P85 already supports declining the instantiated mean-execution remedy without more empirical work.",
+      "why": "零新增实验是实质备选；原G有过悬停收益，归一化未必有效，一对新训练仍不能给出稳定结论。"
+    }
+  ],
+  "uncertainty": [
+    "归一化的精确统计更新、初值、尺度下限和保存语义须在后来获分配的对象中明确；本次不实施。",
+    "不能把相对原G的收益直接解释为绝对能力、续约收益或P85损失原因。",
+    "当前同信息调好基线的headroom缺失，归一化未来墙钟未知。"
+  ],
+  "cost": {
+    "compute": "当前0新仿真/训练/评价/诊断/画像。未来选择为2×512×256训练+3×32×256评价=286720步、2048次Adam、96次最终评价；归一化G有256次统计更新；1800秒/臂、3600秒完整调用，当前未分配。",
+    "owner_time": "异步查看，优先关注c与零工作b的接近取舍。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；完整科学选择已记录，实施和运行取决于Root后来的具体任务，不等待owner回复。"
+  },
+  "verdict_text": "**Select option (c): continue with one future B/EXPLORE comparison of training-only scalar value-target normalization in the legal feedback learner against its current raw-target version, with hover retained. Do not select another five-mode mean-execution instance.** The marginally more useful observation is whether a concrete training change improves native feedback performance, rather than whether another learning history repeats a mean-extraction failure that already warrants withholding that execution choice on the observed fits. This is a close choice over **option (b), no further empirical work on the tested mean-execution package**, which is the runner-up. It is not a diagnosis that raw critic targets caused P85, or a prediction that normalization will succeed.",
+  "source": "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md"
+}

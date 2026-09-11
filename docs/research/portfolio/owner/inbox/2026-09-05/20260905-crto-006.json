@@ -1,0 +1,37 @@
+{
+  "id": "20260905-crto-006",
+  "created": "2026-09-05T02:46:28-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B06：固定 RAW 258/516 暴露比较",
+  "context": "B05 两个新种子均为比较器受限。选择同种子的预算比较，先判断原生 regret 实质代价，再解释胜任条件变化；新诊断阈值 0.000625 对应一个最低材料动作错误对十六行均值的贡献，不改变旧残差阈值。",
+  "options": [
+    {
+      "key": "a",
+      "label": "固定 RAW 258/516 两种子比较",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "继续增加联合种子",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "立即重设计残差",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "一次预算翻倍直接检查可用暴露解释，成本可测，复用既有训练循环并保持同信息比较。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_EXPOSURE_B06_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b06-raw-exposure",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

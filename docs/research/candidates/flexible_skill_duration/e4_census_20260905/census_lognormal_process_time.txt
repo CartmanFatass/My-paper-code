@@ -1,0 +1,23 @@
+	Command being timed: "/home/wu/.venvs/hmasd/bin/python scripts/run_flexible_skill_duration_e4_census.py --law lognormal --mode census --horizon 400 --seed 0 --launch-sha bc3eaeecf5f97e630a886028db0053ba2d08d56f --node wsl_4070 --output /home/wu/hmasd-worktrees/fsd-e4-census-bc3eaeecf/temp/directions/flexible_skill_duration/exp/e4_census_20260905/census_lognormal/summary.json"
+	User time (seconds): 1.88
+	System time (seconds): 1.39
+	Percent of CPU this job got: 222%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.47
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 47500
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 24623
+	Voluntary context switches: 30
+	Involuntary context switches: 30
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 48
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

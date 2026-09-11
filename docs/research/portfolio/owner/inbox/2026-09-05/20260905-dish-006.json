@@ -1,0 +1,43 @@
+{
+  "id": "20260905-dish-006",
+  "created": "2026-09-05T02:50:15-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "单点读取器先删减重复启动代码，保持工程预算",
+  "context": "未启动的草稿有147行，独立检查指出52行属于编排，约35.37%。选择模块启动并复用原模块导入，删除第二次收据校验；实际节点紧邻运行的内存准入仍保留。加入固定种子参数，测量、物理和结果规则均不变。",
+  "options": [
+    {
+      "key": "a",
+      "label": "删减重复启动和校验代码后重新核算",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "用测试行扩大分母",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "接受超预算草稿",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "不尝试删减就停止单点诊断",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "可以删除真实重复的启动与校验逻辑，保留所有原定测量和一次有效准入，不必放宽预算。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_IMPLEMENTATION_INTAKE_20260905.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-ground-source-a02-implementation",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

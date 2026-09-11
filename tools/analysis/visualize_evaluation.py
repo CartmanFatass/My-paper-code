@@ -10,7 +10,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from datetime import datetime
 
 # 导入必要的模块
-from config_1 import Config
+from configs.config_1 import Config
 from hmasd.agent import HMASDAgent
 from envs.pettingzoo.scenario1 import UAVBaseStationEnv
 from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv
@@ -1280,7 +1280,7 @@ def parse_args():
     # 模型和场景参数
     parser.add_argument('--model_path', type=str, default=None,
                        help='训练好的模型文件路径（除非显式指定 --use_random，否则必需且必须存在）')
-    parser.add_argument('--config', type=str, default='config_1',
+    parser.add_argument('--config', type=str, default='configs.config_1',
                        help='配置文件名，不带.py后缀')
     parser.add_argument('--preset', type=str, default='',
                        help='论文实验preset，例如 S4-R3、S6-S6/S8/S9/S10 或 S7-S1/S2/S3/S4')

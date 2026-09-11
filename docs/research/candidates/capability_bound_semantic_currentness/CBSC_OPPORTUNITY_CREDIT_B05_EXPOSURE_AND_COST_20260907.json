@@ -1,0 +1,97 @@
+{
+  "counts": {
+    "arms": 2,
+    "new_training_seeds": 1,
+    "seed": 21223,
+    "rollouts_per_arm": 48,
+    "episodes_per_rollout": 8,
+    "primitive_steps_per_episode": 152,
+    "opportunities_per_episode": 24,
+    "adam_steps_per_arm": 768,
+    "train_episodes_per_arm": 384,
+    "train_transitions_per_arm": 58368,
+    "train_decisions_per_arm": 9216,
+    "eval_executions_per_arm": 64,
+    "eval_transitions_per_arm": 9728,
+    "complete_transitions_per_arm": 68096,
+    "paired_adam_steps": 1536,
+    "paired_eval_executions": 128,
+    "paired_complete_transitions": 136192,
+    "fixed_rule_tape_passes_once": 96,
+    "fixed_rule_action_scores_once": 2304,
+    "per_arm_cap_seconds": 600,
+    "sum_caps_seconds": 1200
+  },
+  "projection_seconds": {
+    "RAW": "159.38",
+    "STRUCT": "181.56"
+  },
+  "projection_source": "B04 card original twice-largest-completed-same-arm scenario; new-runtime timing unknown",
+  "latest_B04_RAW_outer_seconds": "53.46",
+  "existing_exposure": {
+    "source": "CBSC_OPPORTUNITY_CREDIT_B04_RESULT_EVIDENCE_20260906.md",
+    "initial_L2": "29.883094787597656",
+    "final_L2": "30.112651824951172",
+    "displacement_L2": "3.647372245788574",
+    "relative_displacement": "0.1220547025571909107597504041"
+  },
+  "MEI_absolute": "0.25",
+  "MEI_percent_of_theoretical_24": "1.041666666666666666666666667",
+  "exposure_line": "B05 seed 21223 plans two fresh real learner arms, each 48 rollouts / 768 Adam steps / 384 training episodes / 64 evaluations; existing B04 RAW with the same learner and 768 Adam steps moved L2=3.647372245788574 from initial L2=29.883094787597656 (12.2054702557%). This is prior movement evidence, not a B05 gain forecast. Current P18 host/model/optimizer/evaluation exposure=0.",
+  "actual_new_exposure": {
+    "RAW_candidate_invocations": 1,
+    "STRUCT_candidate_invocations": 0,
+    "complete_paired_observations": 0,
+    "durable_RAW_rollouts": 24,
+    "durable_RAW_adam_steps": 384,
+    "durable_RAW_training_episodes": 192,
+    "durable_RAW_training_transitions": 29184,
+    "durable_RAW_training_decisions": 4608,
+    "work_beyond_durable_prefix": "unknown"
+  },
+  "actual_new_exposure_at_P18": 0,
+  "stage": "P28 incomplete RAW signal11/exit139; STRUCT uninvoked; route exhausted",
+  "stage_at_P18": "prospective preparation only; source repair needed; no actual B05 execution",
+  "p20_source_binding": {
+    "source_sha": "d2753be86c12bfa63c404ac2cac513b914371115",
+    "handoff_sha": "87c1f2f01466e8ce0a558fc939b3f774b02af9f2",
+    "root_source_integration_sha": "898e78b193b2f83fa2a2fad4e87845928f98fb8d",
+    "root_handoff_integration_sha": "2d5cc3887cb140be46078a674339a56ada6f15cf",
+    "local_inert_cases_passed": 13,
+    "local_check_command_wall_seconds": "8.0478434",
+    "target_runtime_invocations": 0,
+    "scientific_invocations": 0
+  },
+  "p28_allocation": {
+    "authority_sha": "8347aab8b9a5f368a5009bd1b8eb44aba95f78cd",
+    "accepted_intake_on_main": "d24b7b9a27be84ed6e0989327b82777f11e621cb",
+    "handoff_sha": "87c1f2f01466e8ce0a558fc939b3f774b02af9f2",
+    "source_sha": "d2753be86c12bfa63c404ac2cac513b914371115",
+    "actual_candidate_calls_at_selection": 0,
+    "new_readiness_or_probe_calls": 0
+  },
+  "p28_result": {
+    "evidence_sha": "5de24ff9ae56647f1d91d20b866fa88778536567",
+    "root_evidence_integration_sha": "197ed1c8c6e6c756e805ff78b1481a86397e48e9",
+    "handle": "cbsc-b05-raw-20260907",
+    "signal": 11,
+    "exit_code": 139,
+    "complete_outer_wall_seconds": "39.83",
+    "peak_rss_kib": 849140,
+    "adjacent_admission_passed": true,
+    "physical_available_bytes": 15647051776,
+    "effective_available_bytes": 15647051776,
+    "initial_evaluation_executions_inferred_from_source_order": 32,
+    "initial_evaluation_scores_published": false,
+    "final_RAW_evaluation_completion": "not established",
+    "final_RAW_summary_available": false,
+    "paired_primary_available": false,
+    "cause": "unknown",
+    "new_retry_or_diagnostic_calls": 0
+  },
+  "source_references": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_SCIENCE_CARD_20260906.md#exposure-cost-and-execution",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_RESULT_EVIDENCE_20260906.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P17_INTAKE_20260907.md"
+  ]
+}

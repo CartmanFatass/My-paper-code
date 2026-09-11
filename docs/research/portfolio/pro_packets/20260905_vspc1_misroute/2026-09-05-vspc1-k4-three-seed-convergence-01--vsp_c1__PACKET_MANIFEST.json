@@ -1,0 +1,48 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-05-vspc1-k4-three-seed-convergence-01--vsp_c1",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-05-vspc1-k4-three-seed-convergence-01",
+  "direction_id": "vsp_c1",
+  "direction_ids": [
+    "vsp_c1"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vsp_c1:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-05-vspc1-k4-three-seed-convergence-01--vsp_c1__00_PROMPT.md",
+    "bytes": 552,
+    "sha256": "fbdce358eaa7774cd64876bc260b9af4cfd34e570d0bff5b12008ee22a76419e",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-05-vspc1-k4-three-seed-convergence-01\\2026-09-05-vspc1-k4-three-seed-convergence-01--vsp_c1__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-05-vspc1-k4-three-seed-convergence-01\\2026-09-05-vspc1-k4-three-seed-convergence-01--vsp_c1__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-05-vspc1-k4-three-seed-convergence-01\\2026-09-05-vspc1-k4-three-seed-convergence-01--vsp_c1__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "fbdce358eaa7774cd64876bc260b9af4cfd34e570d0bff5b12008ee22a76419e",
+    "references": []
+  },
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/pro-vspc1-k4-three-seed-20260905",
+    "base_sha": "4cb615bbe75a3b2ddf1f6ffb8788e2c66199adb7",
+    "response_path": "docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/5"
+  },
+  "observed_provider_binding": {
+    "conversation_binding_key": "portfolio:cross_direction",
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b"
+  }
+}

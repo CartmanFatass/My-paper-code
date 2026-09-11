@@ -1,0 +1,91 @@
+{
+  "id": "20260907-vsp02-005",
+  "created": "2026-09-07T21:12:01-07:00",
+  "direction": "vsp_02",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "当前固定成员配置收束，原成员恢复议程保留",
+  "context": "两个独立前缀的原生差为+0.0185546875、-0.0087890625，均在MEI0.5内；第二次终点评估损失-0.046875。完整Convergence回应选择结束当前唯一配置的探索，不把n=2写成等价，不关闭整个方向。该有限收束已按委托执行，未选新实验。",
+  "options": [
+    {
+      "key": "a",
+      "label": "应用当前配置收束",
+      "consequence": "结束当前实例化组合及未变配置扩种子，保留全部结果、原议程和现有Portfolio状态；没有新运行。"
+    },
+    {
+      "key": "b",
+      "label": "重议原配置追加前缀",
+      "consequence": "将追加前缀的具体决策价值退回同一节点重议；现有回应和两次结果保留，任何运行需新的任务额度。"
+    },
+    {
+      "key": "c",
+      "label": "重议有限历史使用测量",
+      "consequence": "将测量能改变何种选择及其可执行输入退回同一节点重议；不自动增加学习、模型取得或测量额度。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "两个完整原生比较及第二次反号支持结束当前组合；能力与机制的不确定性限制结论，但不要求用更强证据为B补门槛。",
+  "evidence": [
+    "docs/research/candidates/vsp_02/pro_packets/20260907_post_b01_two_prefix_convergence/archive/RESPONSE.md",
+    "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_POST_B01_CONVERGENCE_INTAKE_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L98",
+  "brief": "docs/research/portfolio/owner/briefs/vsp_02/2026-09-07_VSP02_TEAMMATE_POLICY_CHANGE_POST_B01_CONVERGENCE.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受已执行的有限收束：结束当前固定成员宿主、PPO 与 P4096/Q1024 组合的探索，保留原成员恢复议程？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/vsp_02/DIRECTION.md · Accepted fixed-member teammate-policy-change family",
+        "from": "两次 B 已完成，等待当前家族的方向级处置；无已选后继",
+        "to": "当前唯一实例化家族/配置的继续探索已结束；不继续原配置扩种子，无后继实验；VSP02 仍 ACTIVE/LOW、recasts: 1，原成员恢复未解决"
+      }
+    ],
+    "if_refused": "保留完整回应、两次 B 和全部负值，把具体异议及拟继续方案交回同一方向节点按既有任务路线重议；不把异议本身当成新学习、评估或代码额度。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_02/pro_packets/20260907_post_b01_two_prefix_convergence/archive/RESPONSE.md",
+        "quote": "**支持停止当前配置的最强证据**，因此是两次完整的、信息和起点匹配的真实学习比较共同呈现很小且反号的主差，并有实际原生与终点损失；不是执行成功本身，也不是只有一个统计均值。",
+        "why": "两次起点和信息匹配的真实学习窗口都没有显示所定尺度的 RESET 收益；第二次反号并保留原生与终点损失。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_02/pro_packets/20260907_post_b01_two_prefix_convergence/archive/RESPONSE.md",
+        "quote": "保留普通 CARRY 是本配置下不增加状态清空干预的默认选择，**不是已经证明 CARRY 稳定优于 RESET**。原成员年龄／恢复议程仍未解决；本决定不 PARK 或 CLOSE 整个 VSP02，不改变 Portfolio 生命周期、优先级、注册、融合、投资或 UAV 计数，也不形成第二次重铸。",
+        "why": "完整决定明确保留普通 CARRY 只是默认选择，并保留整个方向、原议程和第一次重铸的边界。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_02/pro_packets/20260907_post_b01_two_prefix_convergence/archive/RESPONSE.md",
+        "quote": "对本次停止最强的反对是：当前学习器可能并未充分利用合法灯信号和近期队友历史，因而比较仍处于较弱的学习工作点；也可能循环推断很快补偿了变化，或较长 Q 窗口稀释了短暂效应。两次完整运行并不排除一个有理由的学习器修订会改变答案，n=2 也不排除另一个独立前缀出现较大效应。",
+        "why": "学习器胜任性未知且只有两个独立前缀，不能排除一个有具体理由的共同修订或以后真实观察改变状态比较。"
+      }
+    ],
+    "uncertainty": [
+      "新宿主尚无调优同信息 headroom 或胜任基线资格，约8的服务不能代替这些证据。",
+      "当前没有直接定位的学习器错误；合法历史、循环推断、critic 和 Adam 步计数等解释仍未分离。",
+      "只有具体新事实或另行授权的可比全窗口收益/损害才使本配置重议；不要求正结果、显著性或完整机制证明作为所有新 B 的门槛。"
+    ],
+    "cost": {
+      "compute": "本次咨询和摄入新增训练、评估均0，未选择后继。已有两对共700416联合步，runner墙钟合计约72.77秒；外部模型成本未测，停止并非过预算判断。",
+      "owner_time": "约1分钟，可异步要求重议",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；有限收束已按既有委托执行，未启动新实验"
+    },
+    "verdict_text": "我选择结束已接受的固定成员队友策略变化家族在当前唯一宿主／学习器配置上的探索，不追加原配置第三个独立前缀，不选择替代实验，也不据此推进性能确认或 UAV。停止的具体单位是：双工位交接宿主、固定 N=2 与实体身份、队友由顺灯改为逆灯的一次情节边界变化、当前循环 PPO、P=4096／Q=1024，以及从同一已学习起点比较完整 Adam RESET 与普通 CARRY 的这个组合及其未变配置种子扩展。",
+    "source": "docs/research/candidates/vsp_02/pro_packets/20260907_post_b01_two_prefix_convergence/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-08T04:13:07+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_02/pro_packets/20260907_post_b01_two_prefix_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_POST_B01_CONVERGENCE_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "按P19及既有委托应用84d3042de的完整方向决定：DIRECTION由家族去向待定改为结束当前唯一固定成员配置及原配置扩种子；保留两次正负结果、原成员恢复议程、ACTIVE/LOW与recasts: 1；无新代码、实验或UAV。"
+    }
+  ]
+}

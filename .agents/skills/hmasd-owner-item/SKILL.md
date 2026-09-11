@@ -1,9 +1,22 @@
 ---
 name: hmasd-owner-item
-description: Use whenever a DM or Root makes something the owner should see (a delegated object-tier decision, a frozen card, a ladder's first card, a valid-result brief, an overruled critic, a second recast, a Portfolio recommendation) and at every clean boundary to read and apply the owner's review instructions.
+description: Use when DM or Root records a P1/P2 owner item (new card, direction decision, material dissent, close call, second recast or Portfolio proposal), and at clean boundaries to apply owner reviews.
 ---
 
 # HMASD owner items
+
+## Maintained items and authority
+
+Maintain P1/P2 items only. Ordinary delegated object decisions, predictions, technical
+facts and result briefs belong in card/intake/audit records, without separate review items.
+Keep every scientific card, prediction, result, Chinese brief and required audit record.
+`item.py add` returns `skipped` without an ID or file for P3/P4; cite the card/intake
+directly and do not upgrade an ordinary item to manufacture a higher priority.
+
+Apply AGENTS §4.7 for a complete Pro-directed specification plan within delegated scope.
+Read/archive the full decision, implement its exact authorized plan, and use `item.py trace`
+on the relevant P1/P2 item with the actual authority, source, application record and state.
+Do not fabricate owner replies, accept code solely from a rule change or broaden scope.
 
 The owner intervenes softly through `tools/owner_console/`. The loop never waits for the owner and
 never writes item JSON by hand: it calls `tools/owner_console/item.py`, which validates the item
@@ -16,36 +29,35 @@ Rule text: `AGENTS.md` §4.4–4.5. Controlling decision:
 
 | Moment in the loop | kind | options | extra fields |
 | --- | --- | --- | --- |
-| an object-tier decision is recorded in the audit ledger (`AGENTS.md` §4.1, §4.4) | `decision` | the ledger row's options, same keys; `--recommended` and `--auto-applied` = the executed one | `--ledger-row`, `--ledger-kind technical\|selection`, `--evidence` = the intake or card |
+| a direction- or portfolio-tier decision is recorded | `decision` | the recorded options, recommendation and actual executed choice | explicit `--tier`, `--packet`, `--ledger-row`, `--evidence` |
 | a science card is frozen | `new-card` | default `accept / reject / revise` | `--context` = the one-sentence claim and binding structure line; `--evidence` = the card |
-| a ladder's first card is frozen | `prediction` | the competing mechanisms as options | `--dm-reason` = your own prediction; `--evidence` = the card |
-| a valid result is taken in and its Chinese brief written | `brief` | default `reading-agreed / reading-disputed` | `--brief` = the brief path; `--evidence` = the intake |
 | you overrule a critic return ending `MATERIAL_DISSENT: yes` | `critic-dissent` | your options plus the critic's position as one option | `--evidence` = the critic return and the card |
 | your recommendation and its runner-up were not clearly separated | `close-call` | as `decision` | as `decision` |
 | Convergence returns a second `RECAST` for the direction | `second-recast` | default `continue-low-priority / park` | `--tier direction`, `--evidence` = the Pro archive |
-| Root records a Portfolio proposal, or a DM returns a direction recommendation to Root | `portfolio` | default `ratify / refuse / amend` | `--tier portfolio`, `--direction portfolio` for cross-direction items |
+| Portfolio records its conforming Pro decision | `portfolio` | default `keep / refuse / amend` | `--tier portfolio`, `--direction portfolio` for cross-direction items |
 
-The audit ledger row's evidence path names the item file the command prints.
+For a created P1/P2 item, the audit row can cite the returned item path. A `skipped`
+result has no item path; ordinary audit rows cite the card/intake directly.
 
 ```
-python tools/owner_console/item.py add --direction <direction-id> --kind decision \
+python tools/owner_console/item.py add --direction <direction-id> --kind close-call \
   --title "<one line>" --context "<what is decided, why now, what you saw; <= 200 words>" \
-  --option a "<label>" --option b "<label>" [--consequence a "<one line>"] \
+  --option a "<label>" --option b "<label>" --consequence a "<effect>" --consequence b "<effect>" \
   --recommended a --auto-applied a --dm-reason "<one sentence>" \
-  --evidence <path> [--evidence <path>] --ledger-row "<ledger path>#L<n>" --ledger-kind selection
+  --packet <packet.json> --evidence <path> --ledger-row "<ledger path>#L<n>" --ledger-kind selection
 ```
 
 `--direction` is the direction id from `docs/research/RESEARCH_MAP.md` (or `portfolio`); the id
 prefix is derived from it. Kinds with default options need no `--option`.
 
-## Decision packet (required for anything the owner must rule on)
+## Decision packet (required for P1/P2 review)
 
 `item.py add` refuses a `portfolio`, `second-recast`, `critic-dissent`, `close-call` or
 `new-card` item, and any direction- or portfolio-tier item, without `--packet <file.json>` and a
 non-empty `consequence` on every option. The owner cannot rule on a one-line context; the console
 shows such an item as "上下文不足" and the owner's reply `needs-context` sends it back. Write the
-packet in Chinese, from the material you already have (the Pro response's PORTFOLIO_EFFECTS,
-RATIFICATION_CHANGES, EVIDENCE and UNCERTAINTY sections; the intake; the card):
+packet in Chinese, from the material you already have (the Pro response's relevant
+conclusions and evidence, the intake, or the card). Pro prose needs no named sections:
 
 ```json
 {
@@ -68,23 +80,29 @@ RATIFICATION_CHANGES, EVIDENCE and UNCERTAINTY sections; the intake; the card):
 ```
 
 Required: `question`, `changes_if_approved` (at least one entry, or one string `"none"`),
-`if_refused`, `evidence_for` (each with `path` and `quote`), `cost.reversibility`. A `decision` of
-object tier needs no packet; its `context` paragraph and the intake link are enough because the
-owner is reviewing, not ruling.
+`if_refused`, `evidence_for` (each with `path` and `quote`), `cost.reversibility`.
 
 ## Read point (every clean boundary)
 
 ```
-python tools/owner_console/item.py reviews          # unapplied owner instructions, last 2 days
+python tools/owner_console/item.py reviews          # all unapplied owner instructions, regardless of age
 python tools/owner_console/item.py reviews --json
 python tools/owner_console/item.py mark-answered <id> [<id> ...]
 ```
 
 Apply each `instruction` that differs from what already ran (an override of a delegated decision
 takes effect at this boundary; a `reject` or `revise` on a card is applied before its next launch;
-a `prediction` reply is scored at intake; `ratify` is the owner's Portfolio ratification), cite
+a `prediction` reply is scored at intake; legacy `ratify` retains its original meaning), cite
 the review line in the ledger, then `mark-answered`. `agree` needs no action beyond
 `mark-answered`. Nothing here holds a launch (`AGENTS.md` §4.5; evidence spec §11.4).
+
+For prospective Portfolio decisions under AGENTS §4.8, `keep` or `agree` acknowledges the
+record without granting fresh authorization. `refuse` or `amend` is an asynchronous override
+at the next clean boundary; preserve executed effects and do not infer a rerun or reversal.
+Custom option keys retain their actual recorded meanings. Preserve historical items and replies.
+Use `trace` for planned/applied/blocked state; `auto_applied` records only an executed option.
+The retained packet field `changes_if_approved` describes the disposition's changes, not a new
+ratification gate. Read/archive Pro and record the designated DM's conformance check before application.
 
 ## What not to do
 

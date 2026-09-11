@@ -1,0 +1,42 @@
+{
+  "id": "20260905-frrie-010",
+  "created": "2026-09-05T04:13:32-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "R07 有效阈值内结果与预测核对",
+  "context": "大规模差异约 −0.00195，小规模约 +0.00091；两处宽约束臂高于随机参考，完整计数和接触均成立。第二固定轨迹未重现第一条的实质收益，预登记条件预测命中。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接纳原阈值内分支和预测核对，保留未重现边界",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "把两条轨迹称为等价或关闭整个家族",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "把 R05、R06、R07 合并为独立种子证据",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "因三次初始裁剪或缺少 scratch 测量而作废",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "实际完整执行符合原卡，历史五次裁剪不是 R07 条件，资源局部未测不使该非资源结果失效。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R07_RESULT_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r07-intake-r08-selection",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

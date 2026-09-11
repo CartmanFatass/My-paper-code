@@ -1,0 +1,19 @@
+=== Task 'vnfc_b01_initialize_diagnostic_20260905_01' started at 2026-09-06T07:12:57+08:00 ===
+{
+  "assessed_at": "2026-09-05T23:12:57.668675Z",
+  "available_physical_bytes": 15422214144,
+  "captured_at": "2026-09-05T23:12:57.668381Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15422214144,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+non_target_initialize_completed ['DIRECT', 'MAPR']
+=== Task 'vnfc_b01_initialize_diagnostic_20260905_01' exited with code 0 at 2026-09-06T07:13:03+08:00 (Duration: 6s) ===

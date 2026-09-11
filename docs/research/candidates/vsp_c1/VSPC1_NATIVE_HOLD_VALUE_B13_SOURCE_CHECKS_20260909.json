@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "temp/directions/vsp_c1/test/b13_p80_focused1",
+    "tests/experiments/candidates/vsp_c1/native_hold_value_b13",
+    "tests/experiments/candidates/vsp_c1/native_hold_value_b05/test_critic.py",
+    "tests/experiments/candidates/vsp_c1/native_hold_value_b10/test_endpoints.py",
+    "tests/experiments/candidates/vsp_c1/native_hold_value_b08/test_schedule.py"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 4.267959299999347,
+  "stdout": "..................................                                       [100%]\n============================== warnings summary ===============================\n..\\..\\..\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: cache_dir\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n34 passed, 1 warning in 3.56s\n",
+  "stderr": ""
+}

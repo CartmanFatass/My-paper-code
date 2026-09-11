@@ -632,3 +632,146 @@ lineage has no current decision-relevant continuation. Exact decision intake and
 bytes are in `SCDMP_D6_A02_POPULATION_CONVERGENCE_INTAKE_20260904.md` and
 `external/2026-09-04-scdmp-d6-a02-population-convergence-04/`. Portfolio state and the separate
 unmeasured headroom item remain unchanged.
+
+## Native held-segment residual-MC recast — 2026-09-09
+
+The complete P58 Convergence response at immutable commit
+`ac1d97f5920fe2dfc88698681d389af0b907dbfe` selects
+`SCDMP-NATIVE-HOLD-RESIDUAL-B01` and explicitly confirms a new substantive RECAST.
+Its full SHA256 is `bbf51f5f7448071bb177628059468bf8d15c89f6688ef4d45f01b7517037b845`.
+The compliant replacement answer is applied; the retired-context P56 answer stays
+historically unapplied. Recasts: **2**; the existing owner rule requires lowest ACTIVE
+sequencing through Root, without a direction-local Portfolio lifecycle change.
+
+The accepted question changes from D6 cross-k action-value sharing and its population
+search to a fixed two-ended residual-MC learning loss on actual opening hold segments
+of the existing five-UAV native actor–critic. Preserve complete same-information MLP,
+MC targets, duration actor, native law and optimizer counts. Both current critic
+endpoints differentiate; the sampled residual is a real error-coupling change, not
+new information, MC target identity, ordinary semi-gradient TD or the VSPC1 capacity gate.
+
+Strongest support is the nonredundant gradient change and complete native action path.
+Strongest contradiction is harmful coupling of imperfect predictions on sparse opening
+pairs, with an already competent containing MLP and adverse UCOPE/H context. Generic
+regularization, gradient cancellation, omitted history and joint clipping remain live
+explanations. No mechanism or performance effect has yet been measured for this loss.
+
+The one-pair B ceiling is a final sampled native-return package comparison, not stable
+superiority, unique hold/semigroup attribution, TD/gate superiority or automatic UAV
+entry. The next discriminator is master8201 RESIDUAL-MC versus MLP-MC with both H
+contrasts, 286,720 total steps, 2,048 Adam calls and original 1,800s/arm, 3,600s/pair caps.
+Old D6 source/countdown-search family PARK and earlier evidence remain unchanged.
+See `SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md` and
+`pro_packets/20260908_held_residual_context_repair/CONVERGENCE_INTAKE_20260909.md`.
+
+## Native held-segment residual-MC B01 result — 2026-09-09
+
+The complete original master8201 pair is a valid B/EXPLORE observation. Final sampled
+RESIDUAL-MC minus intact MLP-MC is **+0.006737407456**, conditional evaluation SE
+0.005596546536, with 14/32 negative episode contrasts. The card reads **WITHIN** its
+inclusive ±0.01 scale. This completes the allocated batch without selected-scale reason
+to repeat the unchanged penalty; it is neither statistical equivalence nor a direction
+or residual-family closure. No successor is allocated.
+
+Both means exceed attained H: residual−H +0.007086659469 and MLP−H +0.000349252013,
+with 15/32 and 18/32 adverse H contrasts. One independent training pair cannot estimate
+training-seed uncertainty or establish stable useful duration control. Tuned same-
+information headroom remains absent; no automatic UAV-entry or C promotion follows.
+
+The strongest support is the positive native point difference after genuine two-ended
+learning: 1,500 eligible training pairs, 6,000 residual terms, 286,720 native steps and
+2,048 Adam. The strongest contradiction is the below-MEI effect with a competitive
+complete MLP and adverse episodes. Generic regularization, clipping/optimization,
+successor noise and gradient cancellation remain unresolved alternatives to a hold-
+specific mechanism. Sparse-support nonexecution was excluded for this instance.
+
+Complete process wall 323.02 s meets original caps; implementation and focused review
+were accepted. Runtime-blocked cleanup of two test scratch paths is an engineering
+limitation, separate from the trustworthy result. Source 7d0fc9d00 and E0 e5ed77030
+facts are in `SCDMP_NATIVE_HOLD_RESIDUAL_B01_RESULT_EVIDENCE_20260909.md`; scientific
+intake, decisions and bounded alternatives are in
+`SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md`. Recasts: 2 and old D6 family PARK
+remain unchanged. No next scientific discriminator is currently selected.
+
+## Unchanged residual-MC independent pair B02 — 2026-09-10
+
+The complete post-B01 Convergence response at immutable commit
+2b1a8d7a8395827ed654dac120641710e6a6c87a selects one unchanged independent training
+pair and declines the DM's immediate narrow-PARK recommendation. This continues the
+accepted mechanism; recasts remain2, old D6 family stays PARK and Portfolio state is
+unchanged. B01 remains valid WITHIN at absolute MEI0.01, not retrospectively successful.
+
+The accepted question adds a training instance while holding residual-MC versus intact
+MLP-MC fixed. Strongest support is a real nonzero intervention with a positive native
+point difference and an existing323.02-second full process observation. Strongest
+contradiction is the within-scale result,14/32 adverse paired evaluations and competitive
+MLP. Generic regularization, clipping/optimization, cancellation, successor noise and
+omitted history survive. Another pair does not establish stable superiority or unique causality.
+
+The next discriminator is SCDMP-NATIVE-HOLD-RESIDUAL-B02, fresh master8202 with unchanged
+coefficient1, native law, learner/comparator, final sampled evaluation and MEI0.01. Its
+Δ2, both H contrasts, adverse episodes, conditional uncertainty, actual intervention
+exposure and full cost are read alongside B01. WITHIN or DOWN strengthens the recommendation
+to park this fixed opening t1–3→t4 package; UP adds one local signal. No branch allocates a
+third pair or already executes a future family disposition.
+
+References: [decision and conformance intake](pro_packets/20260910_post_b01_convergence/CONVERGENCE_INTAKE_20260910.md),
+[B02 card](SCDMP_NATIVE_HOLD_RESIDUAL_B02_SCIENCE_CARD_20260910.md) and preserved
+[B01 result intake](SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md).
+
+## Native held-segment residual-MC B02 result — 2026-09-10
+
+The selected independent master 8202 pair is accepted WITHIN: native treatment-minus-MLP
+Δ2=+0.003658055973, conditional evaluation SE0.009076161384,12/32 adverse episodes.
+Its actual treatment exercises 1,494 held team pairs and 5,976 residual terms with fully
+trained learners. Alongside B01's+0.006737407456, both observed training-pair means are
+positive but below the fixed absolute MEI 0.01. These are two bounded package observations,
+not 64 independent training samples, stable superiority, equivalence or unique semigroup causality.
+
+The positive signs and real nonzero treatment are the strongest support. The two within-scale
+outcomes are the strongest contradiction to continued use of this fixed package for the
+selected effect. B02 RESIDUAL−H is+0.002998505017, whereas MLP−H is−0.000659550956;
+the native loss to attained H is retained separately. Tuned same-information headroom
+remains absent. Small regularization benefit, clipping/optimization, baseline changes,
+error cancellation, successor noise and omitted history remain possible explanations.
+
+The next discriminator is Convergence's narrow-family disposition: the DM recommends PARK
+of this unchanged opening t1–3→t4/full-MC/coefficient1 package, with the positive evidence
+and uncertainty presented against that recommendation. No third pair or replacement is
+selected. This intake does not change old D6 PARK, recasts 2 or Portfolio state.
+
+References: [B02 E0](SCDMP_NATIVE_HOLD_RESIDUAL_B02_RESULT_EVIDENCE_20260910.md),
+[B02 intake](SCDMP_NATIVE_HOLD_RESIDUAL_B02_INTAKE_20260910.md),
+[B02 card](SCDMP_NATIVE_HOLD_RESIDUAL_B02_SCIENCE_CARD_20260910.md).
+
+## Fixed opening-held residual-MC family PARK — 2026-09-10
+
+The complete post-B02 Convergence response at immutable commit
+1eef68f018b16470e870876f1c8acb985409f785 is accepted and applied as **PRO_FINAL**:
+narrowly PARK the fixed opening t1–3→same-episode t4, two-ended residual,
+full-MC-anchored coefficient1 package on the existing five-UAV native task.
+The full response SHA256 is 0fc4de0d2e5a4a22924f7e4b611de2e9172623c6cd7ff8a081bef0a8e5ba935b.
+No third pair, loss modification, diagnostic or successor is selected.
+
+The strongest support for stopping this package is the completed independent follow-up:
+B01 +0.006737407456 and B02 +0.003658055973 both remain WITHIN absolute MEI 0.01 against
+intact same-information MLP-MC. The strongest contradiction is two positive native point
+gaps after real nonzero treatment, uncertain training-population behavior and low measured
+323.02s/295.03s scientific-process costs. The decision explicitly weighs this contrary
+evidence; it is not equivalence, a negative population mean or general residual-method failure.
+B02 MLP−H = −0.000659550956 remains a separate native loss; H is attained and tuned headroom absent.
+
+Small useful regularization, clipping/optimization, baseline changes, endpoint cancellation,
+successor noise, omitted history and conditional evaluation variation survive. The ceiling
+remains two bounded package observations, with no stable superiority, unique hold/semigroup
+causality, expected-Bellman guarantee, transfer, safety, C promotion or automatic UAV entry.
+
+No next scientific discriminator is currently selected. Re-entry may propose a concrete
+loss/credit hypothesis within the accepted mechanism, or a replication whose cross-training
+variation now changes a specific use/research decision. It need not first prove a bug,
+positive effect, significance, exact upper, headroom or complete mechanism explanation.
+These are future question-selection reasons, not an allocated run or a universal Pro gate.
+A different family remains a scope decision under the existing ladder. Old D6 family PARK,
+recasts2, lowest-contention ordering and Portfolio lifecycle/priority remain unchanged.
+
+Reference: [complete decision, conformance and application intake](pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md).

@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-09-06T01:22:29.661122+00:00",
+  "full_response_commit": "8a02f09d2ed5693e9f150ba5d0243bdc0e6eee98",
+  "full_response_bytes": 24870,
+  "full_response_sha256": "8005eef870cca1928f9928b48a83ebe63cd08a14c1b9a82229018198431021b8",
+  "full_response_git_blob": "6f254f2f524e7473f32e74a1d080f9d713e9f7d6",
+  "full_response_lines_read": 134,
+  "short_receipt_sha256": "18a44cdb0580d0c2d3343f071cbaeb14d16742d1ef7d01b180fce9e21f25e81c",
+  "complete_provider_file_is_distinct_from_chat_receipt": true,
+  "expected_parent_and_single_added_response_path_verified": true,
+  "source_prompt_matches_pushed_handoff": true,
+  "send_count_reported": 1,
+  "binding": "em:vsp_03:convergence",
+  "provider_conversation": "6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+  "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/6#issuecomment-5556005326",
+  "artifacts": {
+    "RESPONSE.md": {
+      "source": "temp\\vsp03_convergence_readback\\RESPONSE.md",
+      "bytes": 24870,
+      "sha256": "8005eef870cca1928f9928b48a83ebe63cd08a14c1b9a82229018198431021b8"
+    },
+    "CHAT_RECEIPT.md": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-b01-three-seed-convergence-01\\2026-09-05-vsp03-b01-three-seed-convergence-01--vsp_03--attempt-01__02_RESPONSE.md",
+      "bytes": 327,
+      "sha256": "18a44cdb0580d0c2d3343f071cbaeb14d16742d1ef7d01b180fce9e21f25e81c"
+    },
+    "TRANSPORT_FACTS.json": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-b01-three-seed-convergence-01\\2026-09-05-vsp03-b01-three-seed-convergence-01--vsp_03--attempt-01__03_TRANSPORT_FACTS.json",
+      "bytes": 7197,
+      "sha256": "e12045742f9511690a82e3c5671aaec373d459d7056a55ba286a283bc4e4df53"
+    },
+    "PACKET_MANIFEST.json": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-b01-three-seed-convergence-01\\2026-09-05-vsp03-b01-three-seed-convergence-01--vsp_03__PACKET_MANIFEST.json",
+      "bytes": 2187,
+      "sha256": "47ef1fc32db4ed1579320e25f37d36b230cfe7b036883fdf43798cb33d8a7be9"
+    },
+    "PROMPT.md": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-b01-three-seed-convergence-01\\2026-09-05-vsp03-b01-three-seed-convergence-01--vsp_03__00_PROMPT.md",
+      "bytes": 556,
+      "sha256": "c87ac0521cea9baad7d65de6cb8a538c3dcf5a99fad88d4ed692c9ed699b0e3b"
+    },
+    "COMMENT.json": {
+      "source": "temp\\vsp03_convergence_readback\\COMMENT.json",
+      "bytes": 4507,
+      "sha256": "53b389dc97dbed2df33063272b1203138e845dd0c9f5a272616f76e154f4c9da"
+    },
+    "COMMIT_SCOPE.json": {
+      "source": "temp\\vsp03_convergence_readback\\COMMIT_SCOPE.json",
+      "bytes": 897,
+      "sha256": "6aab560bf7d062d6b0da5827af013f42a302607333afd74960f3c4b763445bcf"
+    },
+    "GITHUB_READBACK.json": {
+      "source": "temp\\vsp03_convergence_readback\\READBACK.json",
+      "bytes": 460,
+      "sha256": "fa17cc172a5c099004415d5df726a098a56c73484aa40d5094aeec5c53129f3e"
+    }
+  },
+  "transport_metadata_limits": [
+    "received_at equals archive materialization time and is later than sent_at; not used as request receipt time or latency",
+    "top-level tab_lifecycle is CLOSED while nested tab_lease.lifecycle remains OPEN; preserved as differing metadata, no new browser action"
+  ],
+  "new_scientific_exposure": {
+    "models": 0,
+    "training_seeds": 0,
+    "updates": 0,
+    "episodes": 0,
+    "ticks": 0,
+    "evaluation_calls": 0
+  }
+}

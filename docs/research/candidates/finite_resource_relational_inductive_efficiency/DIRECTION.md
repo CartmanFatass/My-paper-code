@@ -398,3 +398,146 @@ would require a separately authorized outcome-blind card. The existing A1 local 
 census remains only a read-only boundary, not a frozen successor. See
 `FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_EVIDENCE_20260904.md` and
 `FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_INTAKE_20260904.md`.
+
+## B01 contact-active R128 result — 2026-09-04
+
+The first valid contact-active R128 result is `R02_SMALL_OR_ROSTER_MIXED`, at B/EXPLORE ceiling.
+On one literal root, the tight `[-0.04,0.04]` package changes five coordinates before checkpoint 0
+and contacts in 50 subsequent updates, while the containing `[-1.50,1.50]` comparator does not
+contact. Both arms complete 128 real RSCF/Adam updates with equal information and work.
+
+At update 128, tight minus wide native return is `+0.000467050572` at N=9 and `-0.000867790232`
+at N=15. Both absolute gaps are below the declared 0.005 MEI. Wide minus uniform is only
+`+0.000507024660` and `+0.000484763443`, respectively: it passes this card's minimal competence
+branch without establishing a tuned comparator or a host headroom record.
+
+Strongest support is the complete paired native learner/evaluator trace with actual repeated
+projection contact. Strongest contradiction to a meaningful tight-box advantage at this budget
+is the two sub-MEI, opposite-sign gaps after activation. Nonactivation no longer explains this
+particular result; equivalence, stable superiority and relation specificity remain unestablished.
+Surviving alternatives include limited low-LR learning exposure, common K0 dominance, generic
+shrinkage/Adam geometry, one-root variation and roster dependence. The bounded claim covers
+this root, Linux CPU FP32, INTACT and seen N={9,15}, without held-out or membership-change claims.
+
+The next discriminator is a new B rung with tenfold shared LR at the same 128-update information
+and work budget. This tests dose while retaining the paired tight/wide comparison; it does not
+reinterpret the accepted low-LR result or create a family/lifecycle decision. See
+`FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_EVIDENCE_20260904.md`,
+`FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_INTAKE_20260904.md` and
+`FRRIE_B01_CONTACT_ACTIVE_R128_LR003_R06_SCIENCE_CARD_20260904.md`.
+
+## B01 higher-exposure contact-active result — 2026-09-05
+
+The complete R06 B/EXPLORE result is `R06_SMALL_OR_ROSTER_MIXED`: tight minus wide return
+is +0.001066907914 at N=9 and +0.005548293532 at N=15. Both are positive, but only N15
+exceeds the prospective 0.005 MEI. The wide arm exceeds uniform by +0.007199240468 and
++0.014761398958. The original favorable-both branch therefore does not apply.
+
+At the same literal root and 128-update work, shared LR 0.003 produced Linf movement about
+4.37/4.11 times the initialization half-range, versus about 0.52/0.53 at LR 0.0003. Tight
+contact occurred in 125 later updates. At N15, tight/wide made 92/80 deliveries; higher
+delivery and balance terms outweighed a slightly worse waste term. This is a native package
+consequence under actually increased learning exposure, not just a parameter statistic.
+
+Strongest support is the complete paired learner/evaluator trace and above-MEI N15 difference
+against the same-information containing arm. Strongest contradiction to an across-roster
+material advantage is N9's sub-MEI gap. N15 is only slightly above threshold on one root,
+and earlier checkpoints do not show stable positive separation. Root-specific co-adaptation,
+generic shrinkage/Adam geometry, common K0 alignment and roster dependence remain live;
+relation specificity, held-out transfer and seed-population superiority are unestablished.
+
+The next discriminator keeps LR/work/boxes fixed on a second prospectively specified literal
+root, with N15 primary and N9 fully reported. This outcome-informed B successor preserves
+R06's original reading and the old B01 three-root stop. See
+`FRRIE_B01_CONTACT_ACTIVE_R128_LR003_R06_RESULT_20260905.md`,
+`FRRIE_R06_RESULT_INTAKE_20260905.md` and `FRRIE_R07_SECOND_ROOT_SCIENCE_CARD_20260905.md`.
+
+## Second literal path at higher exposure — 2026-09-05
+
+The complete R07 B/EXPLORE result is `R07_N15_WITHIN_MEI`: final tight-minus-wide return
+is -0.001948094523 at primary N15 and +0.000910016910 at N9, both within the prospective
+0.005 margin. EDGE exceeds uniform by +0.026623984248 / +0.014817785945 respectively.
+Thus R06's material N15 gap did not reappear on this second prespecified literal path.
+
+The treatment is active: three initial clips, 127 later contact updates and 995 coordinate
+events, with preserved optimizer moments and Linf motion about 4.50/4.57 initial half-ranges.
+At N15, tight/wide deliver 95/98; delivery, balance and waste contributions all favor wide
+slightly. More contact is not itself native value. R06 remains conditional positive support,
+while R07 contradicts assuming material reappearance across the two chosen paths. Neither
+supplies a material N9 benefit. No equivalence or sampled-root population conclusion follows.
+
+Root-specific initialization/tapes/co-adaptation, generic projected-Adam geometry, common K0
+alignment and roster dependence survive. The next discriminator targets chart dependence of
+the known positive root-1 signal by rotating common role-prior columns at final evaluation,
+with unchanged training. This is an outcome-informed conditional B diagnostic, not a robustness
+test or semantic-mechanism claim. See `FRRIE_R07_RESULT_20260905.md`,
+`FRRIE_R07_RESULT_INTAKE_20260905.md` and `FRRIE_R08_ROLE_COLUMN_CUT_SCIENCE_CARD_20260905.md`.
+
+## Conditional common-chart cut on the positive path — 2026-09-05
+
+The complete R08 B/EXPLORE result is `R08_INTERACTION_WITHIN_MEI`. At primary N15,
+the intact tight-minus-wide gap is +0.005548293532 and the rotated gap is +0.005538119438:
+attenuation is only +0.000010174094, below the prospective absolute 0.005 MEI.
+The containing arm remains above uniform under both conditions. N9's interaction is
++0.000001569022, also small; its intact gap remains below the primary anchor threshold.
+
+All 128 paired learner updates and 22 evaluation cells completed. The cut actually
+rotates common prior-probability/latency sender columns and permits different native
+trajectories; it leaves delivery and balance quantities unchanged in all four final
+learned cells. Small changes in actions/events and waste account for the tiny return
+changes. Contact and parameter movement remain substantial; this is not nonactivation.
+
+The strongest direct support remains the selected root-1 N15 package gap. The strongest
+contradiction to common-chart alignment being necessary for that gap is its survival
+under this precise cut. R07 remains the contradiction to assuming recurrence across
+literal paths. R08 reuses root-1 training/tapes and cannot count as independent-root
+evidence. No equivalence, semantic correctness, universal cut insensitivity or family
+closure follows. Generic projected-Adam/shrinkage, training-path co-adaptation and roster
+dependence remain live; this evaluation cut does not isolate training influence.
+
+The next unresolved discriminator is another prospectively fixed literal path at the
+same LR/work, without selecting it for its outcome. It remains an unexecuted proposal;
+`FRRIE_R09_THIRD_ROOT_IMPLEMENTATION_BOUNDARY_20260905.md` records current representation
+feasibility rather than a new card or scientific disposition. See
+`FRRIE_R08_RESULT_20260905.md` and `FRRIE_R08_RESULT_INTAKE_20260905.md`.
+
+## R09 failure diagnosis: A01, A02 and the A03 probe — 2026-09-06
+
+The R09 third-root attempt at 43eec21e (exit 139 at 16 s, no traceback) has now been re-run twice
+under `-X faulthandler` and module-mode pdb on wsl_4070: [A01](FRRIE_R09_SEGFAULT_A01_INTAKE_20260905.md)
+observed a different original failure at 19 s (`AttributeError: 'tuple_iterator' object has no
+attribute 'name'` inside `dataclasses._asdict_inner` during the evaluation tapes), and
+[A02](FRRIE_R09_SEGFAULT_A02_INTAKE_20260906.md), with corrected postmortem capture commands,
+observed a third at 33 s (`ContractError: semantic RNG basin must be absent or in [0,1]` in the
+training tapes, after the evaluation tapes and the output-root creation had succeeded); nothing
+was captured because the postmortem frame differed. A read-only engineering map
+([FRRIE_R09_FAILURE_CHAIN_MAP_20260906.md](FRRIE_R09_FAILURE_CHAIN_MAP_20260906.md)) found a
+single `asdict` call site, no shadowing, byte-identical R09 sources on `main`, and only the
+import-time libtorch and numpy loads before the tapes. Reading: runtime corruption of Python
+objects on this node/interpreter under this chain, agent unidentified; not a deterministic source
+defect; the R09 B stays frozen and unexecuted, its native-return prediction unscored. Selected next
+(object tier): [A03 tape-isolation probe](FRRIE_R09_SEGFAULT_A03_TAPE_ISOLATION_SCIENCE_CARD_20260906.md),
+three arms (no torch and no tracer; torch imported; torch under pdb), 300 s each, zero learner,
+whose branches decide between a host/interpreter question, a torch-load suspect, and an
+outcome-blind plain R09 attempt without pdb. Mechanism-level evidence in this record is unchanged.
+
+## A03 result: corruption without torch; host/interpreter question to the owner — 2026-09-06
+
+The A03 tape-isolation probe (`50283c9cf`, Grok Build implementation, hub-reviewed; three arms
+on `wsl_4070`, 300 s each, fresh admissions) failed in every arm within 31 s of tape work: T0
+(torch never imported, no tracer) raised `AttributeError: 'tuple_iterator' object has no
+attribute 'name'` from `dataclasses.fields` inside `generate_episode_tape` after two successful
+64-tape updates; T1 (torch imported first) raised `SystemError: error return without exception
+set` in the evaluation-tape address constructor after 512 + 128 successful tapes; T2 (T1 under
+pdb) died with SIGSEGV in `rng.py validate`. Every completed phase's digest agrees across arms
+and with the local Windows run. First matching branch `A03_CORRUPTION_WITHOUT_TORCH`
+(`FRRIE_R09_SEGFAULT_A03_TAPE_ISOLATION_INTAKE_20260906.md`): the corruption needs neither the
+torch extension nor a tracer; the node's interpreter build (uv CPython 3.10.21, Clang 22.1.3,
+PGO+LTO), the numpy 1.26.3 wheel, or the WSL2 host is implicated, agent unidentified; the DM's
+prediction (only-with-torch or only-under-pdb) was wrong. Card consequence applied: a
+host/interpreter question is put to the owner (owner item 2026-09-06) and no R09 launch happens
+on this substrate until it is answered. Node inventory (operator, read-only): the only other
+interpreter is system CPython 3.12.3 (GCC) without numpy; an A04 second-interpreter probe would
+need a task-isolated venv, so it waits for the owner. The R09 B stays frozen and unexecuted;
+mechanism evidence R06–R08 unchanged; FRRIE parks at this boundary and leaves the Claude working
+set.

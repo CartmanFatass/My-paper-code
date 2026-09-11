@@ -1,0 +1,96 @@
+{
+  "id": "20260906-dish-002",
+  "created": "2026-09-06T09:39:27-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "DISH post-A02 Convergence 决定（PRO_FINAL）：B03 = 修正边界上的 CONTROL 对 FORECAST_PACKAGE，种子 73，16 次更新，MEI +24",
+  "context": "Pro 继续 RETAIN/COPY/SHADOW 探索家族，下一笔投入只选一个 B/EXPLORE：B03，在修正后的普通续约边界（3f4d447f6，两臂同用）上重新比较 CONTROL 与 FORECAST_PACKAGE（B02 的联合预测 NLL 监督，系数 0.025，加 sigmoid 服务概率接口；不调系数不换目标）。新配对种子 73（master = sha256(\"DISH-FORECAST-PACKAGE-B03/seed/73\")），seed 61 的 master/checkpoint/结果不作输入；每臂 16 次更新、65,536 普通训练转移、512 优化步、只用 update 16、四个评估条件（两种 mask × K8/K4_TO_K12）、1,200 tick 固定范围、最多 4,800 评估 tick。主测量 Delta_B03 = 四行配对差的均值；MEI +24 平均服务 tick 不变；沿用 B02 六行读法。不是 RECAST；不先做旧 checkpoint 的零训练见证；不加仅持有参考行；B02 不当作「修复后重跑」，其 inside-MEI 观察无论 B03 结果如何都保留。成本：每臂上限 1,800 s，合计 3,600 s，共享聚焦检查成本各分摊一半；B02 的 337 s / 299 s 只是规划参考。启动前只需一次与本改动相关的聚焦检查，并在 wsl_4070 补齐 Windows 未收集的 test_package.py，不 stub 依赖；不需要新的 A。Pro 剔除了 DM 两条表述（「没有 partner co-adaptation」；「新运动从未被采纳」只能作源码支持的推断）。节点前瞻判断：≥ +24 的包优势没有可靠先验。已执行：B03 卡与 CM 目标冻结，Grok Build 实现薄入口，枢纽审阅后提交并由 operator 启动。所有者预测槽位未取用，可在本条目填写。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受（已执行）",
+      "consequence": "B03 按卡实现并在 wsl_4070 启动；结果 intake 后回到同一 Convergence 节点。"
+    },
+    {
+      "key": "b",
+      "label": "先做旧 checkpoint 的零训练见证或加仅持有参考行",
+      "consequence": "DM 在下一个干净边界把该要求作为具体问题返回同一 Convergence 节点；B03 准备暂停。"
+    },
+    {
+      "key": "c",
+      "label": "暂停 DISH 投入（Portfolio 层）",
+      "consequence": "属于 Portfolio 层；Root 记录后按指示处理；已实现的薄入口保留为代码，不启动。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整归档的 PRO_FINAL 方向层决定，无规范冲突。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_A02_CONVERGENCE_INTAKE_20260906.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FORECAST_PACKAGE_B03_SCIENCE_CARD_20260906.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_a02_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-06.md#L37",
+  "brief": "docs/research/portfolio/owner/briefs/degraded_incumbent_shadow_handover/2026-09-06_post-A02-convergence.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Pro（PRO_FINAL）已选定 DISH 下一对象 B03：在修正后的普通续约边界上，CONTROL 对 FORECAST_PACKAGE 的真实学习两臂比较，新配对种子 73、每臂 16 次更新、MEI +24、每臂 1,800 s；不是 RECAST，不先做旧 checkpoint 零训练见证，不加仅持有参考行。是否对这一决定作异步改动？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FORECAST_PACKAGE_B03_SCIENCE_CARD_20260906.md",
+        "from": "无 B03 卡",
+        "to": "B03 卡冻结（种子 73 master 法则、两臂同用修正边界、16 次更新、4 个评估条件、MEI +24、六行读法、每臂 1,800 s、节点上含 test_package.py 的聚焦检查为共享准备成本）"
+      },
+      {
+        "target": "实现与启动",
+        "from": "无 B03 入口",
+        "to": "Grok Build 实现薄 B03 入口（新 forecast_package_b03 study、runner、tests；B02 与 r06 源码不动），枢纽审阅后提交；operator 在 wsl_4070 先跑聚焦检查再依次启动两臂"
+      },
+      {
+        "target": "DIRECTION.md 与 PORTFOLIO 行",
+        "from": "A02 后待 Convergence 决定",
+        "to": "B03 已选定并写卡；DISH 留在 Claude 工作集"
+      }
+    ],
+    "if_refused": "所有者若指示暂停或改选（例如先做零训练见证），DM 在下一个干净边界停止 B03 准备并回到同一 Convergence 节点；已实现的薄入口保留为代码，不启动。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_a02_convergence/archive/RESPONSE.md",
+        "quote": "继续……下一笔投入是且仅是一个修正接口上的 B/EXPLORE 两臂真实学习比较（B03：CONTROL 对 FORECAST_PACKAGE），一个新的配对训练种子，每臂十六次更新",
+        "why": "本节点完整、已归档的 PRO_FINAL 方向层决定（提交 d7710921）。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RENEWAL_BOUNDARY_A02_RESULT_INTAKE_20260906.md",
+        "quote": "64/64 permission agreement, 12/12 admissions incorporated as native projects them",
+        "why": "具体、已观测的动作交付障碍已在其范围内排除，使包问题可以在交付了学习运动的条件下重问。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_B01_B02_QUALIFIED_REINTERPRETATION_INTAKE_20260906.md",
+        "quote": "B02's 572/447/433/428 and its inside-MEI reading as outcomes of the executed interface",
+        "why": "B02 的 inside-MEI 观察无论 B03 结果如何都保留；B03 不解释 B02 的零差异。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_a02_convergence/archive/RESPONSE.md",
+        "quote": "≥ +24 的包优势没有可靠先验；inside-MEI、混合或不利结果都是严肃的结果",
+        "why": "节点自己的前瞻判断不看好正结果；这是一次有界投入判断，不是预期收益证明。"
+      }
+    ],
+    "uncertainty": [
+      "十六次更新的学习能力、NLL 尺度、共享表示与快照反馈、prepare/certificate/intent 门、真实换主机会、训练样本方差均未知。",
+      "修正边界改变了动作与提案时机，E/H 可能变化；B02 的 337 s / 299 s 只是规划参考，不是每臂投影。"
+    ],
+    "cost": {
+      "compute": "wsl_4070 单线程 CPU：每臂上限 1,800 s，合计 3,600 s（含共享聚焦检查各分摊一半）；参考 B02 一对 642.66 s",
+      "owner_time": "阅读本条目约 3 分钟；可选填写 B03 预测",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待；已按 PRO_FINAL 执行；所有者的不同指示在下一个干净边界应用"
+    },
+    "verdict_text": "PRO_FINAL / CONTINUE：B03 CONTROL 对 FORECAST_PACKAGE，修正边界，种子 73，16 次更新，MEI +24，1,800 s/臂。",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_A02_CONVERGENCE_INTAKE_20260906.md"
+  },
+  "starred": true
+}

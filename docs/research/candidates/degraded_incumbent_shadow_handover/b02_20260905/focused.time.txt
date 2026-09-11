@@ -1,0 +1,23 @@
+	Command being timed: "/usr/bin/timeout 300s bash -lc /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_focused.memory.json && /home/wu/.venvs/hmasd/bin/python -m pytest tests/experiments/candidates/degraded_incumbent_shadow_handover/forecast_package_b02 -q"
+	User time (seconds): 6.25
+	System time (seconds): 0.46
+	Percent of CPU this job got: 98%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:06.83
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 581340
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 84
+	Minor (reclaiming a frame) page faults: 105910
+	Voluntary context switches: 536
+	Involuntary context switches: 30
+	Swaps: 0
+	File system inputs: 18056
+	File system outputs: 688
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

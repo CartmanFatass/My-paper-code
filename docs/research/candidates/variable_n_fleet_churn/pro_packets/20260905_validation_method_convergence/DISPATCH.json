@@ -1,0 +1,10 @@
+{
+  "request_id": "2026-09-05-vnfc-validation-method-convergence-01",
+  "state": "DISPATCH_ACCEPTED",
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "recorded_at": "2026-09-05T22:04:32.959519+00:00",
+  "dispatch_count": 1,
+  "provider_send_observed": false,
+  "packet_commit": "1bcddf2d5",
+  "note": "Tool accepted the singleton execution message. Provider send is owned by Transport; do not duplicate."
+}

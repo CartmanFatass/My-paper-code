@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "VSPC1-K4-SERVICE-ALLOCATION-B01",
+      "arm": "FACTOR",
+      "n": 1,
+      "mean": 0.7589111328125,
+      "sample_sd": null,
+      "min": 0.7589111328125,
+      "max": 0.7589111328125,
+      "runs": {
+        "402": 0.7589111328125
+      }
+    },
+    {
+      "task": "VSPC1-K4-SERVICE-ALLOCATION-B01",
+      "arm": "GENERIC",
+      "n": 1,
+      "mean": 0.7524007161458333,
+      "sample_sd": null,
+      "min": 0.7524007161458333,
+      "max": 0.7524007161458333,
+      "runs": {
+        "402": 0.7524007161458333
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "VSPC1-K4-SERVICE-ALLOCATION-B01",
+      "arm": "FACTOR",
+      "baseline": "GENERIC",
+      "summary": {
+        "n": 1,
+        "mean": 0.006510416666666741,
+        "sample_sd": null,
+        "min": 0.006510416666666741,
+        "max": 0.006510416666666741
+      },
+      "differences": {
+        "402": 0.006510416666666741
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "20260908-ucope-008",
+  "created": "2026-09-08T23:40:45-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE P72：原续约机制的第三个独立训练对",
+  "context": "新卡检验同一到期续约机制的原生回报门槛能否在第三个独立训练对7501上再次达到，绑定多智能体时间抽象与终止。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "继续已分配的一次训练，保持全部比较与预算，保留所有结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一干净边界停止尚未执行的卡内工作，保留既有证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "依具体修改更新受影响卡或绑定，不自动增加预算。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "两次正向原生结果支持一次有限的新训练观察；第三次仍单独判读，不能推出稳定或因果优势。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B03_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_RESULT_EVIDENCE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L94",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受P72新卡：同一续约机制再做一个独立训练对7501，观察第三次拟合的表现与变化？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B03_SCIENCE_CARD_20260908.md",
+        "from": "两次独立训练已完成并各自UP，尚无第三次观察",
+        "to": "新卡事前绑定7501及预测；只增加已分配的一对训练，保持算法、比较器和预算"
+      }
+    ],
+    "if_refused": "在下一干净边界执行具体拒绝或修订，保留已产生证据；不自动换种子或增加预算。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_RESULT_EVIDENCE_20260908.md",
+        "quote": "These are **two independent fitted observations**, each with its own final\npanel. Both are above the same MEI; the second is smaller.",
+        "why": "两次真实原生比较支持再看一个独立训练结果，但幅度变化需要保留。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_RESULT_EVIDENCE_20260908.md",
+        "quote": "P70 remains separate; two favorable fitted observations do not establish stable\ntraining-population superiority or isolate renewal/information value.",
+        "why": "少量拟合与条件评估误差不足以证明稳定性能或机制因果。"
+      }
+    ],
+    "uncertainty": [
+      "第三次可能UP、接近零或为负，全部结果都保留。",
+      "普通反馈相对悬停的表现曾变号，调优同信息基线余量仍未测。",
+      "持续控制、几何、容量、梯度暴露和队友共同适应没有分离。"
+    ],
+    "cost": {
+      "compute": "新独立训练对1个、学习臂2个；286720原生步、2048次Adam更新、96次最终评估；每臂1800秒、全程3600秒上限。P71实测306.04秒仅供参考。",
+      "owner_time": "异步查看即可，不等待先回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐按同一机制、比较器和预算执行第三个独立训练对7501，观察训练结果的变化；保留三次结果和原预测分别可读，本次单独判读，不调参、不追加运行，也不据此声称稳定或因果优势。",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B03_P72_INTAKE_20260908.md"
+  },
+  "starred": false
+}

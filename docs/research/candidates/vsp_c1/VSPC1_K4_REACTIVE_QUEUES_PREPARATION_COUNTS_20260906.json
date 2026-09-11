@@ -1,0 +1,117 @@
+{
+  "evidence_role": "DOCUMENTARY_ARITHMETIC_NOT_EXPERIMENT",
+  "written_at": "2026-09-07T03:08:10.936426+00:00",
+  "derivation": "Python integer arithmetic from proposal configuration; read existing B02 JSON only; no project/environment/learner imports. H//d renewals per episode; candidate scores count ordinary two-action selection, not search trajectories.",
+  "exposure_line": "Consultation/preparation: 0 new models, 0 environment interactions, 0 optimizer steps, 0 policy evaluations, 0 result-bearing invocations; no parameter initialization or displacement occurred. Recorded B02 displacement at 512 real updates: FACTOR 3.55676 (initial norm 4.02008); GENERIC 2.53128 (initial norm 3.87731). Historical evidence is from another host and is not a new-host movement measurement.",
+  "new_exposure": {
+    "models": 0,
+    "joint_steps": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "result_invocations": 0
+  },
+  "historical_movement": {
+    "factor": {
+      "path": "docs/research/candidates/vsp_c1/results/k4_b02_budget512_seed3_20260906/factor/summary.json",
+      "sha256": "2d59b4ba7ec5e76b9ca438368828c4c3dbb9ae6d4cfb4a0073c79bc34d1ef944",
+      "optimizer_steps": 512,
+      "theta0_norm": 4.020082473754883,
+      "theta0_to_512_displacement_norm": 3.556758403778076,
+      "displacement_to_initial_norm": 0.8847476207262864
+    },
+    "generic": {
+      "path": "docs/research/candidates/vsp_c1/results/k4_b02_budget512_seed3_20260906/generic/summary.json",
+      "sha256": "b676389886483b944fc3f7c5b92472d2e2eec8d84e8b6be652754248015a762d",
+      "optimizer_steps": 512,
+      "theta0_norm": 3.8773133754730225,
+      "theta0_to_512_displacement_norm": 2.531275749206543,
+      "displacement_to_initial_norm": 0.6528427042340197
+    }
+  },
+  "prospective_not_authorized": {
+    "configuration": {
+      "arms": [
+        "FACTOR",
+        "GENERIC"
+      ],
+      "training_seeds": [
+        401
+      ],
+      "H": 48,
+      "periods": [
+        2,
+        6
+      ],
+      "queue_capacity": 4,
+      "arrival_probability_per_queue": 0.7,
+      "cycles": 256,
+      "episodes_per_cycle_per_period": 8,
+      "evaluation_checkpoints": [
+        0,
+        32,
+        64,
+        96,
+        128,
+        160,
+        192,
+        224,
+        256
+      ],
+      "evaluation_episodes_per_period_per_checkpoint": 128
+    },
+    "parameter_counts": {
+      "FACTOR": 300,
+      "GENERIC": 309,
+      "relative_generic_excess": 0.03,
+      "target_copy_per_arm": "same-sized non-optimized state; initial copy plus 16 scheduled synchronizations"
+    },
+    "per_arm": {
+      "training_episodes": 4096,
+      "training_joint_steps": 196608,
+      "training_focal_decisions_and_TD_rows": 65536,
+      "training_decisions_by_period": {
+        "2": 49152,
+        "6": 16384
+      },
+      "optimizer_steps": 256,
+      "nonterminal_backup_rows": 61440,
+      "evaluation_episodes": 2304,
+      "evaluation_joint_steps": 110592,
+      "evaluation_focal_decisions": 36864,
+      "total_joint_steps_and_reactive_partner_calls": 307200,
+      "training_action_selection_scalar_scores": 131072,
+      "Double_Q_online_next_action_scalar_scores": 122880,
+      "Double_Q_target_selected_action_scores": 61440,
+      "optimizer_prediction_scalar_scores": 65536,
+      "evaluation_scalar_scores": 73728,
+      "total_scalar_Q_predictions": 454656,
+      "target_state_copies_including_initial": 17
+    },
+    "pair_total": {
+      "complete_episodes": 12800,
+      "training_joint_steps": 393216,
+      "evaluation_joint_steps": 221184,
+      "total_joint_steps": 614400,
+      "focal_decisions": 204800,
+      "optimizer_steps": 512,
+      "partner_optimizer_steps": 0
+    },
+    "MEI": {
+      "absolute_J": 0.025,
+      "expected_jobs_per_episode": 2.4000000000000004
+    },
+    "algorithm_work_law": "Per arm: initialization + 256 x [16 episodes x 48 ticks + one update on 256 actual renewal rows (240 nonterminal Double-Q backups)] + 9 x [256 evaluation episodes x 48 ticks] + target copies + primary publication. Partner has one reactive call per tick. Two legal-action scores at each decision; no counterfactual trajectories/periods or policy search.",
+    "added_validation": "One focused semantic/unit check and primary output readback; no result-bearing smoke, support census, reference-policy solver, parameter sweep or mandatory profiling. Check time within ordinary five-minute directory budget.",
+    "runtime_projection_seconds": null,
+    "runtime_unknown_reason": "The proposed host/trainer has not been implemented or timed; old six-tick timings do not measure the new shape. No added calibration experiment is selected.",
+    "whole_invocation_cap_seconds_per_arm_seed": 2700,
+    "sum_of_two_caps_seconds": 5400,
+    "cap_is_not_runtime_forecast": true,
+    "automatic_extension_or_extra_seed_budget": 0,
+    "portable_device": "CPU float32 one compute thread; configured remote_first route"
+  },
+  "owner_review_readback": {
+    "command": "python tools/owner_console/item.py reviews --json",
+    "unapplied_relevant_instructions": []
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "mode": "scientific",
+  "request_id": "2026-09-06-dish-post-a02-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_ids": ["degraded_incumbent_shadow_handover"],
+  "decision_authority": "pro_final",
+  "delivery_mode": "github_delivery",
+  "conversation": {
+    "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "provider_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+    "requested_conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "conversation_reuse_required": true
+  },
+  "preflight_tab_id": "516f328d-256d-4055-9c53-3215ebd61dd4",
+  "review_query_tab_id": "35cf93c9-79e9-4474-842d-db47e0555517",
+  "model_preflight": {
+    "requested_first": "GPT-6 Astra",
+    "requested_first_result": "chatgpt_product_model_unavailable_or_unselected",
+    "matched_product_model": "Latest",
+    "product_model_selection_method": "selected_product_menuitemradio_observed",
+    "matched_reasoning_effort": "Pro",
+    "reasoning_effort_evidence": {"actionOwner": "Power", "min": 0, "max": 4, "value": 4, "targetValue": 4, "selectionMethod": "already_selected_exact_reasoning_effort"}
+  },
+  "prompt": {
+    "path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-06-dish-post-a02-convergence-01/2026-09-06-dish-post-a02-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "sha256": "07344f0f1f36937f2be78f58c6a230932566a1004588ffd9edf169aa2450a407",
+    "size_bytes": 818,
+    "source_mode": "paste"
+  },
+  "send_evidence": {
+    "operation_id": "2638ff0d-0034-44a2-805a-d31f7fe00012",
+    "idempotency_key": "2026-09-06-dish-post-a02-convergence-01",
+    "send_attempted": true,
+    "send_attempted_at": 1788710380817,
+    "send_click_count": 1,
+    "provider_user_message_id": "b0c8be7f-2aee-4347-9e69-482d6df5e175",
+    "provider_assistant_message_id": "1a5cce08-2137-4ffe-88f4-fe5c632a1b7e",
+    "observed_conversation_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+    "observed_conversation_id": "6a9bec54-df00-83e8-9840-46440458f316"
+  },
+  "wait_status": "COMPLETE",
+  "short_receipt": {
+    "path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-06-dish-post-a02-convergence-01/2026-09-06-dish-post-a02-convergence-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+    "sha256": "f3b7b56a7640dcf6bf3982ab1e56185572191d87d5ae73ce3df8b25679c86343",
+    "size_bytes": 889,
+    "note": "Short chat reply asserted a write-capability gap and reported base sha / 404 / no third comment; this is stale relative to the GitHub state observed at readback time (known false-negative pattern for this transport, cf. skill notes 2026-09-05). Reply text is a capability report, not the delivery."
+  },
+  "github_readback": {
+    "delivery_commit": "d7710921fd140f9778d473b3f732e0d65813d619",
+    "delivery_commit_parent": "a0be9f02aced95928519f61d5cd9143a68897843",
+    "base_sha": "a0be9f02aced95928519f61d5cd9143a68897843",
+    "branch": "codex/pro-dish-a02-convergence-20260906",
+    "branch_head_equals_delivery_commit": true,
+    "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_a02_convergence/archive/RESPONSE.md",
+    "response_path_matches_handoff": true,
+    "github_blob_sha": "a93fa080b39ddbcf56cbc70297374e35eb62a574",
+    "github_response_file": {
+      "path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-06-dish-post-a02-convergence-01/GITHUB_RESPONSE.md",
+      "sha256": "f5148c488d9e3fb9ba7291f225544220f96913a4cd071ce090189fe39c02ba9a",
+      "size_bytes": 34626
+    },
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4",
+    "issue_comments_before": ["5557093321", "5558729980"],
+    "delivery_comment_id": 5560502547,
+    "delivery_comment_created_at": "2026-09-06T16:15:16Z",
+    "delivery_comment_html_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5560502547",
+    "delivery_comment_file": {
+      "path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-06-dish-post-a02-convergence-01/DELIVERY_COMMENT.json"
+    },
+    "performed_via_github_app_name": "ChatGPT Codex Connector",
+    "performed_via_github_app_slug": "chatgpt-codex-connector",
+    "waited_for_third_comment": false,
+    "third_comment_note": "Third Issue comment (5560502547) was already present at first post-COMPLETE readback; no 5-minute wait was needed."
+  },
+  "registry": {
+    "bind_conversation_result": "BINDING_BUSY",
+    "bound": false,
+    "state": "BINDING_BUSY",
+    "active_request_id": "2026-09-05-dish-post-b02-convergence-recovery-01",
+    "requested_request_id": "2026-09-06-dish-post-a02-convergence-01",
+    "note": "Registry walk to ARCHIVED skipped per coordinator instruction pending owner ruling on reconciliation; archive_delivered_claude_request.py not run."
+  },
+  "tab_lifecycle": "pending_close_this_call",
+  "timestamps": {
+    "send_attempted_at_epoch_ms": 1788710380817,
+    "complete_observed_at_epoch_ms": 1788711357587,
+    "facts_written_at_utc": "2026-09-06T16:20:00Z"
+  }
+}

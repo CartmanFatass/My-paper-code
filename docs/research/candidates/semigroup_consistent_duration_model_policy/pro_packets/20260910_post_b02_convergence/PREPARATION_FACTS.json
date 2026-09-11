@@ -1,0 +1,227 @@
+{
+  "question": "Disposition of the unchanged opening-held full-MC residual package after the Pro-selected independent B02 pair.",
+  "accepted_evidence": [
+    {
+      "object": "SCDMP-NATIVE-HOLD-RESIDUAL-B01",
+      "source_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+      "contrasts": {
+        "RESIDUAL-MC_minus_MLP-MC": {
+          "mean": 0.0067374074558942025,
+          "conditional_se": 0.0055965465359414865,
+          "negative_episodes": 14,
+          "complete": true
+        },
+        "RESIDUAL-MC_minus_H": {
+          "mean": 0.007086659468526168,
+          "conditional_se": 0.011858107098025586,
+          "negative_episodes": 15,
+          "complete": true
+        },
+        "MLP-MC_minus_H": {
+          "mean": 0.00034925201263196577,
+          "conditional_se": 0.00934944486292681,
+          "negative_episodes": 18,
+          "complete": true
+        }
+      },
+      "counts": {
+        "train_team_steps": 262144,
+        "eval_team_steps": 24576,
+        "team_steps": 286720,
+        "optimizer_steps": 2048,
+        "train_episodes": 1024,
+        "eval_episodes": 96,
+        "velocity_decisions": 1383877,
+        "duration_decisions": 5440,
+        "d4": 2921,
+        "recurrent_observations": 1392640,
+        "explicit_resets": 1120,
+        "constructor_resets": 2,
+        "constructors": 2,
+        "step_calls": 286720,
+        "scientific_uav_calls": 286720,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 286720,
+        "rollouts": 512,
+        "partial_episode_steps": 0
+      },
+      "process_resources": {
+        "whole_wall_seconds": 323.02,
+        "user_seconds": 320.87,
+        "system_seconds": 0.9,
+        "aggregate_cpu_seconds": 321.77,
+        "max_rss_kib": 558232,
+        "scope": "GNU time Python invocation including subprocess accounting; no GPU; exit0"
+      }
+    },
+    {
+      "object": "SCDMP-NATIVE-HOLD-RESIDUAL-B02",
+      "source_sha": "f079c753052f95f01754e50676a59d7541fd683c",
+      "contrasts": {
+        "RESIDUAL-MC_minus_MLP-MC": {
+          "mean": 0.0036580559726658735,
+          "conditional_se": 0.009076161383550479,
+          "negative_episodes": 12,
+          "complete": true
+        },
+        "RESIDUAL-MC_minus_H": {
+          "mean": 0.0029985050167081395,
+          "conditional_se": 0.011735783142938593,
+          "negative_episodes": 14,
+          "complete": true
+        },
+        "MLP-MC_minus_H": {
+          "mean": -0.000659550955957733,
+          "conditional_se": 0.014463146814519831,
+          "negative_episodes": 17,
+          "complete": true
+        }
+      },
+      "counts": {
+        "train_team_steps": 262144,
+        "eval_team_steps": 24576,
+        "team_steps": 286720,
+        "optimizer_steps": 2048,
+        "train_episodes": 1024,
+        "eval_episodes": 96,
+        "velocity_decisions": 1384459,
+        "duration_decisions": 5440,
+        "d4": 2727,
+        "recurrent_observations": 1392640,
+        "explicit_resets": 1120,
+        "constructor_resets": 2,
+        "constructors": 2,
+        "step_calls": 286720,
+        "scientific_uav_calls": 286720,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 286720,
+        "rollouts": 512,
+        "partial_episode_steps": 0
+      },
+      "process_resources": {
+        "wall_seconds": 295.03,
+        "user_cpu_seconds": 292.58,
+        "system_cpu_seconds": 1.5,
+        "aggregate_cpu_seconds": 294.08,
+        "peak_rss_kib": 553832,
+        "supervisor_duration_seconds": 295,
+        "within_process_seconds": 294.5617349590175,
+        "external_minus_internal_seconds": 0.46826504098248733,
+        "source_resources_label": "resources_unmeasured",
+        "whole_pair_below_each_arm_cap": true,
+        "whole_pair_below_pair_cap": true
+      }
+    }
+  ],
+  "two_pair_descriptive_summary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "opening_hold_residual_mc",
+        "arm": "MLP-MC",
+        "n": 2,
+        "mean": 0.14445212739904537,
+        "sample_sd": 0.005295531986343493,
+        "min": 0.14070762082151161,
+        "max": 0.14819663397657912,
+        "runs": {
+          "8201": 0.14819663397657912,
+          "8202": 0.14070762082151161
+        }
+      },
+      {
+        "task": "opening_hold_residual_mc",
+        "arm": "RESIDUAL-MC",
+        "n": 2,
+        "mean": 0.1496498591133254,
+        "sample_sd": 0.007472962301791095,
+        "min": 0.14436567679417747,
+        "max": 0.1549340414324733,
+        "runs": {
+          "8201": 0.1549340414324733,
+          "8202": 0.14436567679417747
+        }
+      }
+    ],
+    "paired_differences": [
+      {
+        "task": "opening_hold_residual_mc",
+        "arm": "RESIDUAL-MC",
+        "baseline": "MLP-MC",
+        "summary": {
+          "n": 2,
+          "mean": 0.005197731714280021,
+          "sample_sd": 0.0021774303154476027,
+          "min": 0.003658055972665858,
+          "max": 0.006737407455894184
+        },
+        "differences": {
+          "8201": 0.006737407455894184,
+          "8202": 0.003658055972665858
+        },
+        "unmatched_arm_seeds": [],
+        "unmatched_baseline_seeds": []
+      }
+    ]
+  },
+  "actual_consultation_exposure": {
+    "models": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_steps": 0,
+    "training_episodes": 0,
+    "evaluation_episodes": 0,
+    "optimizer_steps": 0,
+    "replay": 0,
+    "profiling": 0,
+    "support_search": 0,
+    "new_scientific_invocations": 0
+  },
+  "machine_exposure_line": "SCDMP_POST_B02_CONSULTATION: models=0; environments=0; native_steps=0; synthetic_steps=0; training_episodes=0; evaluation_episodes=0; optimizer_steps=0; replay=0; profiling=0; support_search=0; new_scientific_invocations=0; parameter_displacement=not applicable: no learner",
+  "latest_measured_exposure_line": "B02 observed exposure: n=1 independent training pair; 2 learners x66441 parameters; 512 training episodes and1024 Adam per arm; native training steps=262144, final evaluation steps=24576, total steps=286720; 32 final sampled policy episodes per arm plus32 H; treatment eligible_pairs=1494, residual_terms=5976; total parameter displacement/initial L2=0.4040849090800015/0.5128799408218019; critic ratios=0.5639214998023688/0.7650236554643457; duration relative displacement undefined (zero initialization), absolute=0.20008046925067902/0.24749335646629333. Collection/analysis/archival adds zero models, environment transitions, Adam, policy evaluation, replay or profiling.",
+  "two_pair_accounting": {
+    "independent_training_pairs": 2,
+    "native_team_steps": 573440,
+    "adam_calls": 4096,
+    "final_episodes": 192,
+    "complete_scientific_process_wall_seconds": 618.05,
+    "aggregate_scientific_process_cpu_seconds": 615.8499999999999,
+    "wall_seconds_per_valid_pair": 309.025,
+    "scope": "Two pair invocations across separate days; summed invocation wall, not measured common elapsed study critical path. Control-plane preparation, checks, review, analysis, collection and archival are excluded."
+  },
+  "prospective_one_pair_not_allocated": {
+    "allocation_state": "Not allocated; one alternative for proper-node selection only.",
+    "training_pairs": 1,
+    "learners": 2,
+    "train_episodes_per_arm": 512,
+    "horizon": 256,
+    "training_steps": 262144,
+    "final_steps": 24576,
+    "total_steps": 286720,
+    "adam_calls": 2048,
+    "final_episodes": 96,
+    "max_eligible_pairs_per_training_arm": 1536,
+    "max_treatment_scalar_terms": 6144,
+    "arm_cap_seconds": 1800,
+    "pair_cap_seconds": 3600,
+    "per_arm_projection_seconds": 323.02,
+    "conservative_pair_projection_seconds": 646.04,
+    "projection_basis": "Largest observed complete-pair process wall conservatively charged once per arm. This is a projection, not a bound; added work for a changed treatment is unknown.",
+    "per_arm_cost_law": "131072*c_collection +1024*c_update +8192*c_eval +complete overhead; second arm adds8192 H steps and pair publication/readback/exit",
+    "nested_search": "None proposed.",
+    "host_device": "Configured wsl_4070 CPU FP32/thread1; no substitution selected."
+  },
+  "headroom": "Tuned same-information upper-minus-baseline absent; H is attained, not upper.",
+  "scope": "Exact fixed opening t1-3 to t4 residual package only. Old D6 PARK and recasts2 persist. No Portfolio lifecycle/priority, third recast, new family or C/UAV entry is requested.",
+  "remote_closeout": {
+    "remote_execution_path": "/home/wu/hmasd-worktrees/scdmp-hold-residual-b02-f079c7530",
+    "path_exists": false,
+    "registered": false,
+    "staged_launcher_path": "/home/wu/hmasd-inputs/scdmp-hold-residual-b02-8202-20260910.sh",
+    "staged_launcher_exists": false,
+    "supervisor_receipts_retained": true,
+    "observed_at_utc": "2026-09-10T21:19:36Z",
+    "archive_verified_before_removal": true
+  }
+}

@@ -2,7 +2,8 @@
 
 Status: confirmed by the owner 2026-09-03 (20:05 PDT; two tiers, the §4 list, the §5 budgets and
 the §7 application all accepted as drafted). Normative for every agent runtime; cited by
-`AGENTS.md` §8, the Codex subagent definitions, and the outsource contract template.
+`AGENTS.md` §8 and the Codex subagent definitions. Section 7 also maintains the owner-approved
+2026-09-10 code-task specification, delegation and review method.
 
 ## 1. Purpose
 
@@ -22,7 +23,7 @@ never an instruction to follow; this document is the exception only because the 
 
 | Tier | Paths | Obligation | Compatibility |
 | --- | --- | --- | --- |
-| **Core** | `hmasd/`, `ha_ctse_process/`, `envs/`, `scripts/hmasd_*.py`, `main.py`, `config*.py`, `train_multiproc_config_1.py` | runnable, behaviour-preserving, tested at the boundary it changes | preserved: routes, checkpoint formats, RNG streams, numerical semantics, public function signatures |
+| **Core** | `hmasd/`, `ha_ctse_process/`, `envs/`, `scripts/hmasd_*.py`, `experiments/launchers/main.py`, `configs/config*.py`, `experiments/launchers/train_multiproc_config_1.py` | runnable, behaviour-preserving, tested at the boundary it changes | preserved: routes, checkpoint formats, RNG streams, numerical semantics, public function signatures |
 | **Research** | `experiments/candidates/**`, `scripts/run_*.py`, `tests/experiments/**`, `temp/directions/**` | runnable now, readable later, disposable when the object closes | none: an attempt may break its own earlier attempts, need not support resume, and is never a dependency of core |
 
 A research directory that core imports (today three prior attempts loaded by
@@ -38,10 +39,13 @@ code core obligations.
    admitted, receipted, or witnessed.
 3. A launch sha recorded in the summary; the runner's own cost law reported (wall time per unit
    of the swept quantity) when the card asks for a projection.
-4. Tests: one smoke test that runs the runner end to end at toy size in under 60 seconds, plus
-   rule tests that pin the mapping from numbers to result branches. Nothing else is required.
-5. Reproducibility means re-running the recorded command at the recorded sha gives the recorded
-   numbers to the stated tolerance. It does not mean hash chains, byte manifests, or a witness.
+4. Tests: one proportionate focused check of changed behavior and the primary output, plus rule
+   tests when the object has branch rules. Reuse existing checks where the relevant path is
+   unchanged; a launch boundary alone does not require a second smoke run.
+5. Reproducibility is claim-dependent: deterministic numerical replay is for a named code path,
+   regression, diagnostic or exact semantic object; statistical replication uses independent
+   training runs, per-run outcomes and uncertainty for performance claims. Neither implies a
+   project-wide tolerance or cross-platform bit equality.
 
 ## 4. What is not built unless a science card names the need in writing
 
@@ -51,7 +55,10 @@ message: "adds <item> because card line <n> asks for <quantity>". Without that l
 returns the diff.
 
 - Distributed, multi-process, or multi-node execution; worker pools; queues beyond a list of
-  commands run in order; a scheduler.
+  commands run in order; a scheduler. Ordinary in-process tensor/array batching and a named
+  computation's single-layer fixed synchronous native team are not generic worker pools when
+  they satisfy MARL_RUNTIME_ENGINEERING_SPEC §4 (General requirements). Original card topology
+  constraints still require an object-specific appendix; no dynamic executor or service follows.
 - Checkpoint, resume, or recovery orchestration beyond what the learner already has; retry loops;
   leases, locks, heartbeats, liveness probes, supervisors that kill and restart.
 - Tamper evidence of any kind: hash chains, byte manifests, content-addressed receipts,
@@ -63,13 +70,18 @@ returns the diff.
 - Schema validation of internal JSON; registries, plugin systems, abstract base classes, factory
   layers, or configuration layering for a single use; custom exception hierarchies; logging
   frameworks; CLI frameworks beyond `argparse`.
-- Telemetry beyond wall time and peak RSS; performance dispositions; worker-count equivalence
-  studies; benchmarks that are not the experiment.
+- Telemetry beyond wall time and peak RSS; performance dispositions; unselected worker-count
+  sweeps or benchmarks. Exception: minimal whole-invocation aggregate user+system CPU accounting
+  under MARL_RUNTIME_ENGINEERING_SPEC §6 when parallelism changes budget meaning or the named
+  engineering task assesses resource/throughput feasibility. Include actual children without
+  double-counting threads; use existing OS cumulative accounting, no standing profiler/framework.
+  A selected bounded A-class execution-equivalence assessment is allowed under its actual semantic
+  and resource contract; such assessments are not categorically restricted to C evidence.
 - Backward-compatibility shims, deprecation paths, or version fields inside research code.
 - Defensive handling of conditions that cannot occur on this machine (missing interpreter,
   hostile input, concurrent writers to a directory only this run writes).
-- Smoke tests run more than once per change: tests run once after an edit and once before a
-  launch. They do not run per slice, per phase, or per heartbeat.
+- Smoke checks are proportionate to the changed behavior and primary output. Do not repeat a smoke
+  solely because a launch boundary occurs, or run it per slice, phase, or heartbeat.
 
 ## 5. Budgets
 
@@ -77,10 +89,61 @@ returns the diff.
 | --- | --- | --- |
 | New lines in a research attempt (code, excluding tests and the card) | 2,000 | the DM splits the object or the implementer returns the excess as a named list |
 | Runner script | 600 lines | same |
-| Orchestration share of a research diff (lines that do not compute, sample, learn, or evaluate) | 30% of the diff | the reviewer returns the diff with the orchestration lines listed |
+| Orchestration share of a research diff (lines that do not compute, sample, learn, or evaluate) | 30% review signal | the reviewer identifies unnecessary machinery and concrete impact; ratio alone does not return the diff |
 | Launch conditions | the four of evidence spec §11.4 | any other gate is deleted, not recorded |
-| Test wall time per research directory | 5 minutes total excluding the smoke of the runner | slow tests are deleted or become the experiment |
+| Test wall time per research directory | 5 minutes total excluding the smoke of the runner | delete unrequired duplication only; required scientific coverage remains, and insufficient budget returns a concrete gap; another bounded engineering task is separately selected, never automatic |
 | Time to first run of a new object, from card to launch | one session | if exceeded, the implementer reports which of §4 it was building |
+
+### Owner-ratified small reuse / net-deletion exception (2026-09-05)
+
+For future ordinary research, §11.8 supersedes the ratio-exception procedure below: no 100-line
+application or new line-by-line orchestration census is needed. Preserve historical reports and
+independent named appendices; ordinary source, runner and test budgets remain.
+
+**小规模复用／净删除例外。** 对research层、事前在既有科学卡或技术任务记录中声明的单一逻辑变更，若其目的为复用现有科学计算，或其全部非测试源代码删除行数严格大于新增行数；且整项逻辑变更累计新增非测试源代码不超过100行、不新增§4所列机械设施，则可适用本例外。例外不得改变未被相应权限明确选择的科学含义或对象之外的科学行为。
+
+从声明基线起跨文件、跨提交合并报告新增行数A、删除行数D及编排行数O；本例外的比例报告采用`O/(A+D)`，替换按删除和新增两侧计数，测试与文档分列。对普通research变更，编排占比30%仅为审查提示，不是预算硬上限、源码接受否决条件或科学有效性判据；既有独立reviewer应说明必要性、受影响计算与未验证事实。不得填充计算、压缩代码或移动包装以制造比例合规。行数资格不等于正确性或源码接受。
+
+不得拆分同一逻辑变更、压缩或搬移代码、复制／添加无需求的计算或测试、把未改动helper计入分母来取得资格。净删除也不得删除冻结对象要求的科学量、改写历史证据或把真实learner工作完整性与可选资源遥测混为一谈。
+
+不符合本例外的research变更也采用上述审查提示。2000新增行、600行runner、其余测试及scope预算、源码所有权、科学完整性、资源准入、逐臂计算上限和证据规范§11.4保持不变；post-learner发布要求按证据规范§11.8.6—7的实际依赖限定。本条不接受任何已有拒绝补丁，不授权实验，不新增reviewer角色、登记服务、runtime validator或A/B启动关卡。
+
+### CBSC B1修复与DISH A05对象限定附款
+
+**1．适用对象与基线。** 本附款仅适用于下表两个完整逻辑变更。所有依赖文件及后续修订从同一声明基线合并计数；已有候选的新增行计入上限，不另发增量额度。通用“小规模复用／净删除例外”的100行规定保持不变。
+
+| 对象                                                      | 计数基线                                                        | 整项非测试源码边界                                         |
+| ------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------- |
+| `DISH-PREDICTION-HEAD-CONTRACT-A05`完整原卡实施               | pre-A05 accepted `d543146cc11ccf880da1245bfb6884356772dd38` | `A≤250，D=0`；只新增下列runner和薄C++导出，不改既有生产源码           |
+| `CBSC-OMRC-B01`在2026-09-05 selection intake声明的完整执行到发布修复 | `0ffca930b9e43b0c6402fce65493cdf6ae24f66f`                  | `A≤200，D≤500`，因此`A+D≤700`；仅限下列既有依赖范围，不增加runner或框架 |
+
+A05运行源码仅为`scripts/run_dish_prediction_head_contract_a05.py`和`experiments/candidates/degraded_incumbent_shadow_handover/head_contract_a05.cpp`。
+
+CBSC运行源码仅限`experiments/candidates/capability_bound_semantic_currentness/omrc_b01/`中的`b1.py`、`telemetry.py`、`b1_metrics_production.py`、`b1_metrics_training_assembly.py`、`b1_metrics_rehydrate.py`、`b1_mechanical.py`、`b1_metrics_artifact.py`。每个实际变更仍须属于资源缺失的真实报告、独立wall处理、同一原始fixture的定位、科学量组装或完整发布／消费者处理。
+
+**2．比例规则。** 对符合上述对象、范围和行数边界的变更，完整报告A、D、O及`O/(A+D)`，替换两侧计数，测试和文档分列。编排占比达到或超过30%本身不再自动退回；既有独立reviewer审阅必要性、全部受影响科学量与消费者，并列明未验证事实。不重新分类已报告编排行以取得资格，不把未改helper或测试计入分母。
+
+**3．科学保护。** A05原卡第2—7节的真实调用、输入、全部读数、正控制、数值语义、分支、曝光和运行上限不变；四个保护生产surface不变。CBSC原完整科学比较、种子、曝光、数值/RNG语义、十五表、summary、RAW能力输入和解释权限不变。不得删除科学量来适配源码或验证预算；不得把可选资源缺失重新提升为科学有效性门槛，也不得把部分资源观察认证为完整资源覆盖。
+
+**4．验证与非授权。** 不新增§4机械设施，不改变2000新增行、600行runner、既有测试／发布要求、资源准入、逐臂数值预算或证据规范§11.4。本附款不接受`ea05e9308`、`9ee4a381`、`cfbe91367`或任何旧拒绝补丁，不放行任何调用。A05依原非卡smoke／rule profile验证；CBSC保留原真实常量离线发布及全部读回要求。测试不因不利输出而删除；不足的验证预算如实返回。
+
+**5．完成与停止。** 不得拆分逻辑变更、重置基线、挪移／压缩代码或填充计算规避计数。预算内只处理该范围内明确发现的问题；出现所列范围之外依赖、保护语义改变或预算不足时，返回整个变更与具体缺口，不自动扩展。A05在原完整读数intake后、CBSC在完整工程验证intake后结束本项投入；后继对象与新learner运行不继承此例外。此结束是投资边界，不是A/B消费或科学负面。
+
+### VNFC exact batch feasibility E01 appendix (2026-09-05)
+
+The complete [runtime specification appendix](MARL_RUNTIME_ENGINEERING_SPEC.md#vnfc唯一对象限定附款)
+applies only to `VNFC-R03-EXACT-BATCH-FEASIBILITY-E01`: configured `wsl_4070`, one scientific
+process, calling thread plus three native threads (four total), fixed batch8, no nested compute
+team, ordinary single-job build included. One complete assessment is limited to60s wall and300
+aggregate CPU-seconds including imports/build/reference/candidate/checks/merge/publication.
+Freeze deterministic non-target fixture bytes and full coverage before any E01 measurement.
+Original R03 cumulative2000 non-test source/600 runner budgets include existing483/58; ordinary
+orchestration/test limits remain. No CBSC/N3 exception is inherited. The original2700s full-census
+cap remains; this appendix allocates no new full-census CPU budget or four-thread full launch.
+All three selected design components, exact four-map/tie semantics, independent checks and full
+cost law remain required. Missing dependencies, unsafe ownership, inequivalence, incomplete cost,
+over-limit assessment or full wall projection >=2700s ends this one investment and returns the
+precise gap to existing Convergence; no automatic configuration/fixture/node/timing retry.
 
 ## 6. Core code discipline
 
@@ -92,10 +155,17 @@ never grows a service layer: no daemons, no dashboards, no control plane in Pyth
 
 ## 7. How agents apply this
 
+Apply `MARL_RUNTIME_ENGINEERING_SPEC.md` and the actual object appendix before interpreting §4/§5.
+DM records full work/cost, shapes, topology/state ownership, protected semantics, measurement
+scope, validation and stop. A delegated Implementer follows that contract and returns any needed
+scientific-meaning change to DM. Independent review checks full
+dependencies, internal threads, scientific outputs and publication as well as complete cost scope.
+No new profiling task or launch condition follows merely from this reference.
+
 - **Direction Manager**: the card names every §4 item the object needs, with the quantity that
   needs it; an object that needs none says so in one line. The DM returns a result whose
   implementation exceeded a §5 budget with the breach recorded.
-- **Code Manager and implementers**: before writing, list the §4 items the change would add and
+- **DM and Implementer**: before writing, list the §4 items the change would add and
   the card line for each; if there is none, do not add it. The smallest runnable path is the
   correct one. A guard is a bug until a card asks for it.
 - **Reviewer and critic**: the first check on any research diff is §4 and §5, before correctness.
@@ -103,6 +173,64 @@ never grows a service layer: no daemons, no dashboards, no control plane in Pyth
   is not a finding.
 - **Self-check line**: every commit touching research code ends its message with
   `scope: none` or `scope: <item> per <card line>`.
+
+### 7.1 Code-task specification: L0 with optional L1–L3 detail
+
+Every code task, whether implemented directly or delegated, has five concise L0 facts:
+deliverable/goal; owned paths, checkout and entry points; preserved semantics; acceptance with
+applicable card/specification sections; budget and stop condition, including execution constraints.
+Existing accessible card sections supply their facts. Use section/version links and state only
+missing facts or this task's changes; no second contract document or full-history copy is required.
+
+| Detail | Add only when useful for the actual task |
+| --- | --- |
+| L0 | The five facts above; mandatory baseline, ordinary prose or bullets |
+| L1 | Interface, shape, dtype, state/array ownership and local code conventions |
+| L2 | State transitions, data/RNG flow and the specific logic that preserves the contract |
+| L3 | A local skeleton or relevant example with its assumptions and applicability limits |
+
+These are engineering specification detail levels adopted from the delegation benchmark, not
+scientific evidence classes, role counts, model choices or mandatory sequential stages. DM selects
+useful details from known failure risks. Benchmark fixtures/answers and its frozen task treatments
+remain separate evidence; they do not prescribe new research behavior. Do not turn a local example
+into a global convention or write extra details merely to claim a higher level.
+
+### 7.2 Direct work, delegation and acceptance
+
+DM implements directly by default and owns technical acceptance as well as separate scientific
+intake. Delegate one complete bounded implementation only when it saves material work, isolates
+substantial context or enables useful independent parallelism. Small edits and commands stay local.
+The Implementer owns its named edit/check scope; DM owns Git, review disposition and result-bearing
+execution. Reuse the same executor for corrections. Do not delegate and duplicate its work.
+Root retains main integration and accepts shared control-plane engineering without a direction DM.
+
+Scout, Implementer, Reviewer, Verifier, Operator and Critic return to their actual assigning DM
+(or Root for its own bounded work); they do not create another ordinary child chain. A missing
+specialist fact returns with the completed work and exact question so that the parent can resolve
+it or assign an independent sibling. Existing legacy tasks finish their accepted scope on their
+original return route. This is a working method, not a new approval or authorization boundary.
+
+Parent acceptance checks actual artifacts, affected behavior and credible focused check results,
+not a completion assertion. Do not routinely repeat all child commands or reread all inputs.
+Expand for a concrete contradiction, missing coverage, integration change or unresolved risk.
+Keep technical validity, scientific interpretation and dispatch/observation state distinct.
+
+### 7.3 Independent high-risk review
+
+An independent Reviewer is required for a high-risk diff affecting shared core, scientific meaning,
+numerics, RNG, replay/recurrent state, checkpoint compatibility, bit identity or external effects.
+Codex uses Astra/high, read-only. Ordinary mechanical edits use owner self-checks. Risk determines
+review needs, not whether implementation was delegated. Reviewer evidence is not permission or
+a scientific disposition; DM (or Root for control-plane work) resolves findings and accepts.
+
+Give the Reviewer independent initial context containing the fixed contract, protected invariants,
+source/diff and relevant evidence, without the implementer's discussion history. It inspects the
+reachable changed behavior and states exact failure, impact and residual limits. Verify meaningful
+counterexamples rather than merely repeating public examples. For numerical changes consider
+intermediate operations, reduction/normalization, masking and gradients over the contract's actual
+input range; do not impose arbitrary extreme tolerances or unrequested domains. For state/RNG
+changes inspect ownership, lifetime, ordering and consumers. Reuse that Reviewer for correction
+checks. High-risk review does not create another research launch condition or test budget.
 
 ## 8. What this does not change
 

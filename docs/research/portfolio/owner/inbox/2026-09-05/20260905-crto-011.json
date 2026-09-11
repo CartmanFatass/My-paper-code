@@ -1,0 +1,37 @@
+{
+  "id": "20260905-crto-011",
+  "created": "2026-09-05T03:20:06-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B07：选择固定预算的动作中心化损失",
+  "context": "B06 翻倍预算后 REPLAN 仍为 5/8，存在动作差异学习不足的待测解释。选择固定 516 更新和同一 RAW 信息的合法动作中心化损失，比较器复用已完成 B06；它会同时改变梯度、裁剪和 Adam，不能单独归因共同 return。",
+  "options": [
+    {
+      "key": "a",
+      "label": "中心化损失与固定 B06 比较",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "再次翻倍原损失预算",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "改变门控容量",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "固定暴露的新目标比较可检验不同解释，而继续加预算只延伸已有曲线，容量改变更多学习器部分。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CENTERED_LOSS_B07_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b07-centered-loss",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

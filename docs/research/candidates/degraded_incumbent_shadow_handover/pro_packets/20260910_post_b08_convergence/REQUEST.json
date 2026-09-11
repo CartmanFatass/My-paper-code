@@ -1,0 +1,121 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-10-dish-post-b08-convergence-01",
+  "source_thread_id": "01a08d61-df0e-7892-9beb-9d32b110453c",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "7e00e69145c1f1aed63ce8e931c5a640d666bea1",
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/pro-dish-post-b06-20260907",
+    "base_sha": "ff2cfddb629a16b5e38efb1af6bb46579b407a99",
+    "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4"
+  },
+  "scientific_question": "After the accepted B08 result, decide one direction-tier choice: (a) park the tested arrival-bridge retention family, retain REPLACE and select no successor (DM recommendation); or (b) select one specifically justified bounded continuation. This asks about the tested received-snapshot information-processing family, not Portfolio lifecycle, broader source-family closure, a recast or C promotion. No family disposition has been taken locally. The B08 allocation is complete and is not replenished. A direction-family choice is why this question is at Convergence; a Pro round is not a generic prerequisite for ordinary B work.\n\nB08's one matched seed137 pair trained two real policies for sixteen updates each and compared final update16 modal service. HALF_RETAIN minus REPLACE was -6.5 mean service ticks (434.5 versus 441), with all four differences -15, 0, -8, -3; all eight episodes completed 1,200 ticks. The effect lies inside the +/-24 MEI band. The frozen negative-mean branch favors REPLACE and ending extension of this fixed HALF_RETAIN candidate, already recorded at object tier. Mean final energy is lower by 2,496.189061 units but service is also lower, and HALF_RETAIN adds four final invalid commits. Neither a proxy nor lower energy rescues the service comparison. One matched pair cannot establish equivalence or population inferiority; four conditions are not four training replicates.\n\nThe hypothesis concerned a real pre-CAS path: the 18-field received forecast/control packet is encoded and bridged with the physical standby shadow; REPLACE uses the full learned bridge, HALF_RETAIN uses half old state plus half bridge after reset at the existing delivery mask, followed by the same GRU/control/replay. The packet is not an incumbent hidden-state transmission. Snapshot training counts 13,263/13,949 and 4.93%/5.07% parameter movement establish exposure, not useful retained information. The strongest null is a competent full bridge/GRU already learning retention; stale state, changed finite co-adaptation and single-pair variation also remain. TRAIN and EVAL ordinary CAS counts are all zero, leaving source-origin qualification, COPY-RETAIN and SHADOW-COPY unestimated. Retained A03 actor partner/current-summary features prevent an established strict fresh-message-decentralization claim.\n\nExplain why (a) is or is not the smallest supported development-value boundary. If (b) is better, name one concrete question, treatment, strongest legal comparator, primary observation, independent unit and claim ceiling, and why the observation has decision value after B08. If revisiting the fixed candidate or replicating it, explicitly explain the reason to revisit its recorded stop recommendation; do not silently convert a small negative into automatic resampling. Absence of improvement may motivate a specifically justified new B under section 11.8.2. A positive prior, complete mechanism explanation, source-prevalence census, tuned headroom or significance is not required.\n\nFor any proposed continuation, compare a direct real B with sampled native returns against any finite diagnostic on decision value and known work. State arms, independent training seeds, updates, lanes, primitive steps, optimizer/evaluation work and nested controller/trajectory/consequence calls; separate algorithm work from added validation. A same-size pair's illustrative work is in the exposure file and is not a selected successor. Exact H and new unit time are unknown. If selecting future work, give its fresh complete cap and stop scope without inheriting B08's allowance. No coefficient/search tree, exact maximum, support census or old-telemetry repair becomes a prerequisite. If no sufficiently valuable concrete continuation is selected, return the precise no-successor family boundary rather than a research programme or broad negative.",
+  "deliverable": "One complete conclusion-first scientific decision in the specified response file. Select (a) or one fully specified (b), state the smallest family scope and rationale, preserve contrary evidence and the one-pair ceiling, explain the native action/learning path and strongest alternative, and name the next discriminator or the precise revisit condition if parked. For selected future work give the sufficient evidence class, primary comparison, independent unit, known dominant work, complete proposed budget/stop and material unknowns. Distinguish a formed decision from engineering acceptance, execution and Portfolio action. Identify any concrete specification/evidence conflict instead of inventing a decision when the bound question cannot be answered. No implementation or experiment is requested in this task.",
+  "claim_ceiling": "B/EXPLORE, one matched seed137 training pair on retained A03, finite-budget update16 whole-policy native service. No stable superiority/inferiority, equivalence, learning-speed or initialization-relative claim, isolated memory/source causality, source-value null, strict decentralization, safety, optimality, C-BENCH, formal UAV validation or Portfolio lifecycle conclusion.",
+  "constraints": [
+    "Apply the named current specification sections and owner instructions at their exact method version. Section 11 controls ordinary B burdens. A complete conforming Pro answer is final for this direction node under standing delegation; DM checks the complete response and returns a concrete conflict to the same node. Owner review is asynchronous, not per-item ratification.",
+    "The current authoring assignment has zero scientific exposure: no project models, native calls, transitions, optimizer steps, evaluations or selection trials. Read existing evidence and write only the scoped response/comment. Do not run source or tests, change a card, or infer an experiment allocation from this packet.",
+    "Preserve the B08 -6.5 primary and -15/0/-8/-3 rows, all adverse native events, the one-pair uncertainty, all zero ordinary CAS counts and unestimated source value. The frozen rule already ended this fixed candidate extension. The current question does not retroactively change that result or its rule.",
+    "The complete B08 runner wall is 454.50s; exclusive arms 224.203384/226.978758s. Monitor observation-command wall remains unmeasured/unverified; Duration455 is execution already counted. Exact H, aggregate CPU and scratch peak are unknown. Full shared/category cost conformance is uncertifiable; no measured breach is inferred. Missing resource coverage does not invalidate independently trustworthy service, create negative polarity or require a rerun.",
+    "Tuned same-host headroom is absent, not zero and not a stop reason. Preserve REPLACE/DIRECT and B06/B07/forecast-package narrow stops; keep source-origin/COPY-RETAIN/SHADOW-COPY separate from arrival retention. No automatic successor, broader family closure, recast, Portfolio lifecycle/priority change or renewed budget.",
+    "If continuation is chosen, it is one specifically justified bounded next observation. Default learning-performance work uses real training and sampled returns; one or two independent pairs are a starting point, not a fixed quota or all-positive requirement. No exhaustive or bounded search-before-learning without a specific algorithmic/diagnostic purpose, no extra cost experiment or universal verification gate.",
+    "Known B08 algorithm work is 2N+2E+H per arm, with N ordinary transitions and matching next-label work, 2E delay steps and H consequence calls. Preserve complete algorithm/auxiliary work in prospective cost. Native code, batching or a higher cap does not justify an unnecessary question. Unknown future cost remains unknown; the reference-size example allocates nothing.",
+    "Read only the listed exact passages. Prior source/literature conclusions are explanatory evidence; no full paper access by Pro is asserted and no linked historical dependency or local skill becomes mandatory. Preserve immutable scientific mappings while using separately pinned current methods.",
+    "Reuse the existing shared branch and Issue #4. Read current descendant delivery HEAD and preserve unrelated changes and accepted requests. Write only the specified response and a current-round delivery-link comment; no main, source, card, DIRECTION, owner, other response, PR or lifecycle edit. A prepared task is not yet a Send; Transport handles provider verification and delivery."
+  ],
+  "response_schema": [
+    "Lead with one final direction-family choice and its precise scope, separating decision from execution.",
+    "Explain strongest support, contradiction, alternatives and inferential limits at the declared B ceiling.",
+    "Give one bounded next discriminator with work/cap if selected, or a precise family parking/no-successor boundary and concrete revisit condition."
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/SCIENCE_BRIEF.md",
+      "purpose": "Start here; all sections: current assignment, B08 reading, concrete options, assumptions, preserved stops, work and authority limits.",
+      "provenance": "Current DM recommendation only; no local direction disposition or new budget.",
+      "commit_sha": "ff2cfddb629a16b5e38efb1af6bb46579b407a99"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_SCIENCE_CARD_20260910.md",
+      "purpose": "Sections1-6: frozen question, exact comparator/path, exposure, MEI/rule, cost and protected semantics. Later execution appendices are provenance.",
+      "provenance": "Accepted B08 card at accepted result revision; its frozen meaning is not changed."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_EVIDENCE_20260910.md",
+      "purpose": "Sections1-4: actual rule, real learner counts, all native rows/events, technical acceptance and incomplete cost coverage.",
+      "provenance": "Accepted E0 result for one matched pair; keep narrower claims and resource gaps separate."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_INTAKE_20260910.md",
+      "purpose": "Sections1-6: full accepted all-outcome intake, predictions, object choice, claim ceiling and no-successor boundary.",
+      "provenance": "Accepted DM intake, Root-integrated from 7e00e6914; no direction-family decision."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/archive/RESPONSE.md",
+      "purpose": "Opening and sections1-6: accepted one-pair family scope, strongest full-bridge null, protected meaning and finite allowance; cited older links are not additional required input.",
+      "provenance": "Immutable prior formed Convergence decision; its B08 allocation is complete.",
+      "commit_sha": "9e99e48dca9fe34b25c11cb7814ba4d54e83a2b5"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md",
+      "purpose": "Section3 only: reused local-library coverage and verified passage limits; do not use the earlier positive prediction as a B08 result.",
+      "provenance": "Pre-B08 source/literature assessment, not evidence of bridge benefit or provider access.",
+      "commit_sha": "b666f575a95ad15da9b9ff9f23cbc003f2e34450"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_training_engine.py",
+      "purpose": "Lines88-165 only: reset, actual mask, complete bridge and half-retention, ordinary advance/replay/promotion separation. No execution.",
+      "provenance": "Exact accepted B08 scientific source; comparator and action/credit path.",
+      "commit_sha": "a01522a6f6cf12e5549b3e03596ce58642b68cf1"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_recurrent_trainer.py",
+      "purpose": "Lines273-386 only: actual receipt input, preparation/GRU ordering and standby action/prediction consumers. No execution.",
+      "provenance": "Exact accepted B08 scientific source, unchanged ordinary source promotion.",
+      "commit_sha": "a01522a6f6cf12e5549b3e03596ce58642b68cf1"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/EXPOSURE_AND_COST.json",
+      "purpose": "Machine-generated zero new exposure, B08 reduction and complete cost limits, illustrative unselected work factors.",
+      "provenance": "Existing recorded-byte arithmetic; no new independent empirical sample or allocated comparison.",
+      "commit_sha": "ff2cfddb629a16b5e38efb1af6bb46579b407a99"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply sections3-4,5.2,7 and11.4,11.7-11.10: class-correct bounded decision, preserved adverse facts, failure dependency, proportionate question and finality. Section11 controls older wording.",
+      "provenance": "Current controlling methodological/owner specification, separately pinned from frozen science.",
+      "commit_sha": "74f8e7ce958d0af92d59b1874f13a0b09180b52b"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Apply sections1-4 and5 opening rolling-chain rule; sections6-7 only if describing future source/resource duties. Proper decision tier, current DM ownership, no sibling waits and asynchronous owner override.",
+      "provenance": "Current owner authority and routing; no execution or Portfolio action in this task.",
+      "commit_sha": "74f8e7ce958d0af92d59b1874f13a0b09180b52b"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Apply sections4-5 and7.1-7.3 for any proposed later work: no unrequested machinery, proportionate budgets/L0 and required high-risk review.",
+      "provenance": "Current engineering constraints; no implementation commissioned by this consultation.",
+      "commit_sha": "74f8e7ce958d0af92d59b1874f13a0b09180b52b"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Sections2-4 and6 only: memory/information, finite learnability, independent unit and claim scope.",
+      "provenance": "Explanatory knowledge; cannot select investment or create a scientific gate.",
+      "commit_sha": "74f8e7ce958d0af92d59b1874f13a0b09180b52b"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Sections on comparison objects, randomness hierarchy, whole-method versus causal interpretation, return/cost and claim strength.",
+      "provenance": "Explanatory assumptions: conditions do not create independent training runs, and observed performance does not isolate mechanism.",
+      "commit_sha": "74f8e7ce958d0af92d59b1874f13a0b09180b52b"
+    }
+  ]
+}

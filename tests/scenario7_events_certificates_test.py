@@ -7,7 +7,7 @@ from unittest.mock import Mock
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 pytest.importorskip("gymnasium")
 
-from config_1 import Config
+from configs.config_1 import Config
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
 from tests._scenario7_fixtures import (

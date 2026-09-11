@@ -5,13 +5,10 @@ This is the stable contract between the loop and the owner console: the loop nev
 JSON by hand, it calls this script; the console never reads anything the loop did not write here.
 Standard library only.
 
-    # at the moment a delegated decision is recorded in the ledger
-    python tools/owner_console/item.py add --direction flexible_skill_duration --kind decision \
-        --title "next rung after E3" --context "..." \
-        --option a "E2b: transfer c=0.25 to scenario 1" --option b "E4: random-duration events" \
-        --recommended a --auto-applied a --dm-reason "..." \
-        --evidence docs/research/candidates/flexible_skill_duration/FSD_E3_INTAKE_20260905.md \
-        --ledger-row "docs/research/portfolio/audit/2026-09-05.md#L14" --ledger-kind selection
+    # create a maintained P1/P2 item from the current scientific record
+    python tools/owner_console/item.py add --direction <direction-id> --kind new-card \
+        --title "<card title>" --context "..." --recommended accept \
+        --packet <packet.json> --evidence <card.md> --ledger-row "<ledger.md>#L<n>"
 
     # at every clean boundary: what the owner asked for that is not applied yet
     python tools/owner_console/item.py reviews            # human-readable
@@ -36,11 +33,19 @@ DEFAULT_OPTIONS = {
     "new-card": [("accept", "launch as carded"), ("reject", "do not launch"), ("revise", "revise before launch")],
     "brief": [("reading-agreed", "the reading stands"), ("reading-disputed", "re-read per the comment")],
     "second-recast": [("continue-low-priority", "continue at lowest sequencing priority"), ("park", "PARK the direction")],
-    "portfolio": [("ratify", "ratify the proposal"), ("refuse", "refuse"), ("amend", "amend per the comment")],
+    "portfolio": [
+        ("keep", "retain the formed Pro disposition"),
+        ("refuse", "override the Pro disposition at the next clean boundary"),
+        ("amend", "override the Pro disposition per the comment at the next clean boundary"),
+    ],
 }
 
 
 def cmd_add(a) -> int:
+    priority = srv.item_priority({"kind": a.kind, "tier": a.tier, "ledger_kind": a.ledger_kind})
+    if priority > 2:
+        print(f"skipped P{priority}: owner maintains P1/P2 only; cite the card/intake in the audit ledger")
+        return 0
     options = [{"key": k, "label": label, "consequence": ""} for k, label in (a.option or [])]
     if not options and a.kind in DEFAULT_OPTIONS:
         options = [{"key": k, "label": l, "consequence": l} for k, l in DEFAULT_OPTIONS[a.kind]]
@@ -60,7 +65,7 @@ def cmd_add(a) -> int:
 
 
 def cmd_reviews(a) -> int:
-    rows = srv.pending_instructions(a.root, days=a.days)
+    rows = srv.pending_instructions(a.root)
     if a.json:
         print(json.dumps(rows, ensure_ascii=False, indent=2))
         return 0
@@ -78,6 +83,14 @@ def cmd_mark(a) -> int:
     for item_id in a.ids:
         p = srv.mark_answered(a.root, item_id)
         print(str(p.relative_to(a.root)).replace("\\", "/"))
+    return 0
+
+
+def cmd_trace(a) -> int:
+    p = srv.record_trace(a.root, a.id, authority=a.authority, source=a.source, record=a.record,
+                         state=a.state, summary=a.summary, auto_applied=a.auto_applied,
+                         correction=a.correction)
+    print(str(p.relative_to(a.root)).replace("\\", "/"))
     return 0
 
 
@@ -107,13 +120,23 @@ def main(argv=None) -> int:
     s.set_defaults(fn=cmd_add)
 
     r = sub.add_parser("reviews", help="owner instructions not yet applied")
-    r.add_argument("--days", type=int, default=2)
     r.add_argument("--json", action="store_true")
     r.set_defaults(fn=cmd_reviews)
 
     m = sub.add_parser("mark-answered", help="record that the loop applied the owner's instruction")
     m.add_argument("ids", nargs="+")
     m.set_defaults(fn=cmd_mark)
+
+    t = sub.add_parser("trace", help="star an important change and append its execution record; never writes a reply")
+    t.add_argument("id")
+    t.add_argument("--authority", required=True, choices=("OWNER_DIRECT", "PRO_FINAL / OWNER_DELEGATED"))
+    t.add_argument("--source", required=True, help="archived Pro response or explicit owner instruction record")
+    t.add_argument("--record", required=True, help="intake/application record with changes and commit references")
+    t.add_argument("--state", required=True, choices=("planned", "applied", "blocked"))
+    t.add_argument("--summary", required=True)
+    t.add_argument("--auto-applied")
+    t.add_argument("--correction", default="")
+    t.set_defaults(fn=cmd_trace)
 
     a = ap.parse_args(argv)
     try:

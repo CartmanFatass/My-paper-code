@@ -1,0 +1,4 @@
+PROMPT_BODY.md -text
+RESPONSE.md -text
+PACKET_MANIFEST.json -text
+TRANSPORT_FACTS.json -text

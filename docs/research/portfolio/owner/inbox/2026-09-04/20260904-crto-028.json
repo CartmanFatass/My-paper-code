@@ -1,0 +1,37 @@
+{
+  "id": "20260904-crto-028",
+  "created": "2026-09-04T18:06:55-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B03：保留原训练顺序",
+  "context": "配对候选在全部固定终点未胜任，原始顺序仍胜任。只撤下这个标签配对方案，后续比较器继续原顺序；不推广为平衡无效或方向负面。",
+  "options": [
+    {
+      "key": "a",
+      "label": "保留原顺序并撤下该配对候选",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "原样重复配对顺序",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "认定平衡方法或整个方向失败",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "原顺序已满足局部比较器目标，当前替代方案没有补充原问题的价值。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_PAIRED_ORDER_B03_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b03-paired-order-result",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

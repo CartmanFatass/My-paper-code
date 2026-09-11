@@ -1,0 +1,49 @@
+{
+  "question": "两个独立运行都出现真实学习、固定刷新与零表示优势后，是否停止当前不变的48更新比较家族，或选择一个有明确判别价值的新学习实验？",
+  "changes_if_approved": [
+    {
+      "target": "CBSC 当前直接比较家族",
+      "from": "两组有效B结果已结束；没有第三组，家族裁决尚未形成",
+      "to": "推荐停止不变的48更新RAW/STRUCT重复投入；由Convergence决定是否另选一个必要的新B，Portfolio生命周期与优先级不在本题范围"
+    }
+  ],
+  "if_refused": "保留全部零结果与旧结果界限；采用正确方向节点另选的具体学习问题，不恢复历史失败调用，不自动增加种子。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DIRECT_RETURN_B03_INTAKE_20260905.md",
+      "quote": "Both arms scored10.5875 at the fixed update48 endpoint, with all32 paired\ndifferences zero.",
+      "why": "第二组重复了没有原生表示优势的实测，足以降低继续相同比较的预期信息价值。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DIRECT_RETURN_B03_INTAKE_20260905.md",
+      "quote": "More unchanged\nseeds are not a default route to a positive result.",
+      "why": "继续投入需要新的判别理由，不能把重复直到正向当作研究流程。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DIRECT_RETURN_B03_INTAKE_20260905.md",
+      "quote": "Strongest support for a further learning question is the trustworthy direct\npath and bounded measured cost;",
+      "why": "完整路径已可信且耗时小，一个明确的新学习干预仍可能值得做。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DIRECT_RETURN_B03_INTAKE_20260905.md",
+      "quote": "An\noptimization/exploration limitation remains possible, but so does adequacy of\nthe simple fixed policy for much of this host.",
+      "why": "当前证据未定位优化原因，也未证明固定策略最优，不能扩大为机制无用。"
+    }
+  ],
+  "uncertainty": [
+    "只有两组独立运行，不能证明总体等效；seed同时改变初始化、训练与评价世界。",
+    "匹配的调优基线与上界headroom仍缺失；这不阻止必要的新B。",
+    "192更新方案尚未选择或实现，已有成本推算不是完整新调用上界。",
+    "旧宿主SIGSEGV和后续TypeError原因未知，当前直接路径成功不恢复旧结果。"
+  ],
+  "cost": {
+    "compute": "咨询零新学习。已完成四臂完整wall合计288.67秒。若Pro选192更新次选，每臂3072Adam步、243200训练加评价转移、600秒完整上限；已有时段推算约224.57/224.94秒，另一粗略场景318.76/363.12秒，均非保证。",
+    "owner_time": "异步查看所选家族和理由即可；没有新增owner等待或审批层。",
+    "reversibility": "reversible",
+    "waits_on_this": "当前两组已结束；方向家族题按既有Convergence节点处理，其他研究方向继续。"
+  },
+  "verdict_text": "DM建议停止当前不变的48更新比较家族，因为两个独立运行都很快收敛到固定刷新并且原生差异为零。这是有限投资建议，不是机制负面或Portfolio处置。具体次选为一个192更新的新双臂配对B、只保留48和192评价；Pro可选择理由更充分的直接学习问题。此时尚无家族裁决或新调用。",
+  "source": "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260905_two_seed_family_convergence/EVIDENCE_AND_OPTIONS.md"
+}

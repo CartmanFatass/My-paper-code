@@ -183,6 +183,15 @@ Apply the first matching branch after validity and exact completion:
 
 ## 9. Budget, calibration, cost law, and stop
 
+**2026-09-05 traceable engineering appendix.** The early counts and cost law below remain
+historical prospective evidence. The complete-terminal cost basis is now9,418,560 native ticks,
+376,688 complete BCRH calls,738,685,168 candidate rows and94,128 continuations, as established
+by the completed calibration and direction intake. Use the full batch/tail cost law, factor2
+and fixed60s planning allowance in `docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md`'s VNFC appendix.
+It does not repeat the old calibration or change the scientific result rule or2700s full cap.
+The one E01 assessment has its own60s wall/300 aggregate CPU-s cap; these are not additive budgets.
+Application: `docs/research/portfolio/decisions/2026-09-05-marl-runtime-engineering-spec.md`.
+
 There is one result arm and at most one valid result invocation. No new seed/RNG family is opened.
 At most `1,961` legal commands per decision gives these prospective upper bounds:
 
@@ -215,6 +224,11 @@ The solver also reports class counts, action-outcome records, exact states creat
 eliminated, finite-completion evidence, wall time, and peak RSS.
 
 ## 10. Portability and resource admission
+
+**E01-only exception (2026-09-05):** the runtime specification appendix selects `wsl_4070`,
+one scientific process, calling thread plus three native threads, batch8, no nested compute
+team, and original actual-node admission. Only E01 replaces the original single-thread clause
+below. No GPU/node/fallback/configuration variation or new full-census CPU allocation is selected.
 
 This object is prospectively portable across the configured local and remote nodes because the
 scientific host is the exact native simulator bytes, not the OS or device. The earlier accepted
@@ -254,6 +268,15 @@ action continuations / native ticks / BCRH calls = report exactly
 ```
 
 ## 12. Engineering scope and implementation boundary
+
+**E01 application (2026-09-05):** the runtime spec's fixed synchronous native team and minimal
+whole-invocation aggregate CPU accounting apply only to the selected assessment, including build,
+reference, candidate, independent checks and publication. Original2000/600/ratio/test budgets
+remain cumulative with existing483 non-test source and58 runner lines; no CBSC/N3 exception.
+CM freezes non-target fixture bytes, exact size, full validation/dependency/ownership and cost
+coverage before measured E01 output. Its technical task and exact stop conditions are in
+`VNFC_R03_EXACT_BATCH_FEASIBILITY_E01_TECHNICAL_TASK_20260905.md`. The historical original scope
+below is not a reason to erase the explicitly limited later appendix.
 
 **Engineering Scope Specification section 4:** this object needs none of the default-prohibited
 machinery. It adds no distributed/multi-process execution, worker pool, scheduler, checkpoint/

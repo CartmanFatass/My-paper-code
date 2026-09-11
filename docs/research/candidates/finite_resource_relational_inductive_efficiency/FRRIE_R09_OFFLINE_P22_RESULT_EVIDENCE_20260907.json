@@ -1,0 +1,162 @@
+{
+  "evidence_class": "E0 technical collection of incomplete B/EXPLORE attempt",
+  "rule_branch": "R09_INVALID_INCOMPLETE",
+  "science_result": null,
+  "handle": "frrie-r09-system312-offline-p21-43eec21e",
+  "node": "hmasd-wsl-node",
+  "source_sha": "43eec21e9584c83e5e8d940402d7e4570b454e59",
+  "command_source_sha": "a3bcd75123825fa34c833db5104aced33d268009",
+  "supervisor": {
+    "pid": 2761895,
+    "exit_code": 0,
+    "status": "finished",
+    "start_utc": "2026-09-08T04:39:08Z",
+    "end_utc": "2026-09-08T04:40:09Z",
+    "duration_seconds": 61
+  },
+  "resources": {
+    "process_wall_seconds": 61.54,
+    "peak_rss_kib": 674988,
+    "peak_rss_bytes": 691187712,
+    "aggregate_cpu_seconds": null,
+    "peak_scratch_bytes": null,
+    "per_arm_wall_seconds": null,
+    "setup_admission_to_learner_admission_seconds": 6.712115,
+    "cap_seconds_per_arm": 14400,
+    "cap_seconds_whole_chain": 28800,
+    "timeout_term_seconds": 28795,
+    "timeout_grace_seconds": 5
+  },
+  "setup_admission": {
+    "assessed_at": "2026-09-08T04:39:08.370431Z",
+    "available_physical_bytes": 15640940544,
+    "captured_at": "2026-09-08T04:39:08.370172Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15640940544,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "learner_admission": {
+    "assessed_at": "2026-09-08T04:39:15.082763Z",
+    "available_physical_bytes": 15618752512,
+    "captured_at": "2026-09-08T04:39:15.082287Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15618752512,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "runtime": {
+    "source_sha": "43eec21e9584c83e5e8d940402d7e4570b454e59",
+    "executable": "/home/wu/.venvs/hmasd-frrie-system312-r09-offline-p21-20260907/bin/python",
+    "base_executable": "/usr/bin/python3.12",
+    "prefix": "/home/wu/.venvs/hmasd-frrie-system312-r09-offline-p21-20260907",
+    "base_prefix": "/usr",
+    "version": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "compiler": "GCC 13.3.0",
+    "installed_versions": {
+      "filelock": "3.32.5",
+      "fsspec": "2026.7.0",
+      "jinja2": "3.1.6",
+      "markupsafe": "3.0.3",
+      "mpmath": "1.3.0",
+      "networkx": "3.6.1",
+      "numpy": "1.26.3",
+      "nvidia-cublas-cu11": "11.11.3.6",
+      "nvidia-cuda-cupti-cu11": "11.8.87",
+      "nvidia-cuda-nvrtc-cu11": "11.8.89",
+      "nvidia-cuda-runtime-cu11": "11.8.89",
+      "nvidia-cudnn-cu11": "9.1.0.70",
+      "nvidia-cufft-cu11": "10.9.0.58",
+      "nvidia-curand-cu11": "10.3.0.86",
+      "nvidia-cusolver-cu11": "11.4.1.48",
+      "nvidia-cusparse-cu11": "11.7.5.86",
+      "nvidia-nccl-cu11": "2.21.5",
+      "nvidia-nvtx-cu11": "11.8.86",
+      "setuptools": "84.0.0",
+      "sympy": "1.14.0",
+      "torch": "2.7.0+cu118",
+      "triton": "3.3.0",
+      "typing-extensions": "4.16.0"
+    }
+  },
+  "original_exception": {
+    "type": "TypeError",
+    "message": "'Field' object is not iterable",
+    "location": "/usr/lib/python3.12/dataclasses.py:1286",
+    "phase": "production_training_inputs -> generate_episode_tape -> RNG address canonicalization",
+    "root_cause": "unclassified; no reproducing invocation authorized"
+  },
+  "publication": {
+    "learner_directory_exists": true,
+    "learner_files": [],
+    "summary_published": false,
+    "primary_N15": null,
+    "secondary_N9": null,
+    "checkpoint_values_published": false
+  },
+  "counts": {
+    "actual_failed_update": null,
+    "actual_paired_updates": null,
+    "actual_adam_steps": null,
+    "actual_backward_calls": null,
+    "actual_factual_episodes": null,
+    "actual_training_native_slots": null,
+    "actual_evaluation_episodes": null,
+    "actual_contact_or_displacement": null,
+    "source_reachability_inference": {
+      "condition": "retained-source ordinary call order, not recovered runtime counters",
+      "failed_update_range": [
+        1,
+        128
+      ],
+      "completed_paired_update_range": [
+        0,
+        127
+      ],
+      "completed_evaluation_cells_min": 6,
+      "completed_evaluation_episodes_min": 1536,
+      "completed_native_evaluation_slots_min": 18432,
+      "evaluation_tapes_constructed": 512,
+      "checkpoints_reached_at_least": [
+        0
+      ],
+      "published_checkpoint_summaries": 0
+    }
+  },
+  "binding_checks": {
+    "command_bytes": 3419,
+    "command_sha256": "f5e04fc2e3d0c0d0fb0e702914173a4e7a48d51321ef6c5ec416dc2ad8cb6b28",
+    "matches_published_fence": true,
+    "pdb_bytes": 528,
+    "pdb_sha256": "00631d27830cfb14b002aa0268d5ccc5d3b40a72a7a8f7d44a3c4ce295a7da65"
+  },
+  "byte_comparison": {
+    "checked_source_and_fixed_input_paths": 62,
+    "all_match": true,
+    "scope": "61 tracked direction/scoped script files plus fixed debugger input; excludes external dependencies and full runtime equivalence"
+  },
+  "native_artifact": {
+    "path": "libfrrie_ridgegate2z_external.so",
+    "bytes": 24488,
+    "sha256": "0c1af4bfd791337f4b420010a49cc1f156732a840faa7c69580d3aabcf6044b4"
+  },
+  "raw_collection_root": "temp/directions/finite_resource_relational_inductive_efficiency/exp/p22_offline_r09_collection_20260907",
+  "collection_manifest_sha256": "9150d893314582a175c8b5a0db62a1a806a9ef278013309f6491f1b0a05be486",
+  "new_result_bearing_invocations": 0,
+  "comparison_exclusion": "P22 terminal collection continuation; no new coding assignment; Root log records exclusion",
+  "scope_additions": "none"
+}

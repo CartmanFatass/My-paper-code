@@ -1,0 +1,33 @@
+{
+  "id": "20260904-vnfc-018",
+  "created": "2026-09-04T18:54:29-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接受 R03 成本校准与预算拒绝",
+  "context": "唯一校准在原节点和已推送源码上完成，实际4.10秒、内存准入通过。DM逐项重算保守投影为347623.18秒，超过2700秒上限，且完整BCRH项单独超限。没有目标世界、候选收益或学习器暴露，完整枚举未实现或运行。按所有者本轮结束后暂停的指令保存证据。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受完整工程校准并保留预算拒绝",
+      "consequence": "不启动完整枚举；完成本轮记录后暂停，科学问题仍未检验。"
+    },
+    {
+      "key": "b",
+      "label": "暂不接受并等同次运行的更多证据",
+      "consequence": "保留已有文件，不产生科学结论或新运行。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "同次运行的准入、计时、校验、退出记录及投影重算一致，没有缺失的关键观测。",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CAUSAL_ONE_DEVIATION_R03_CALIBRATION_INTAKE_AND_PAUSE_20260904.md",
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CAUSAL_ONE_DEVIATION_R03_CALIBRATION_EVIDENCE_20260904.json"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#vnfc-r03-calibration-intake-20260904",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

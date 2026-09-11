@@ -1,0 +1,192 @@
+{
+  "object": "CBSC-DIRECT-RETURN-B02",
+  "unit": "one independent paired training seed; evaluation episodes/checkpoints are not training samples",
+  "seed": 21203,
+  "primary_update": 48,
+  "primary_difference": 0.0,
+  "episode_differences": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "episode_difference_sign_counts": {
+    "positive": 0,
+    "zero": 32,
+    "negative": 0
+  },
+  "mei": 0.25,
+  "raw_context_means": {
+    "ALWAYS_REFRESH": 10.7125,
+    "ALWAYS_SAFE": 4.0625
+  },
+  "checks": {
+    "pair_metadata_equal": true,
+    "pair_identities_equal": true,
+    "all32differences_match_publication": true,
+    "mean_matches_publication": true,
+    "all_native_rows_include_settlement": true,
+    "all_update_loss_rows_finite": true,
+    "all_fresh_train_episode_ids": true,
+    "all_action_uniform_addresses_paired": true
+  },
+  "arms": [
+    {
+      "arm": "RAW-GRU",
+      "counters": {
+        "rollout_updates": 48,
+        "adam_steps": 768,
+        "train_episodes": 384,
+        "train_transitions": 58368,
+        "train_decisions": 9216
+      },
+      "loss_rows": 768,
+      "evaluation_executions": 128,
+      "evaluation_transitions": 19456,
+      "curve": [
+        {
+          "update": 0,
+          "mean": 0.6875,
+          "action_counts": {
+            "SERVE": 561,
+            "REFRESH": 207,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "update": 12,
+          "mean": 10.7125,
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 768,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "update": 24,
+          "mean": 10.7125,
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 768,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "update": 48,
+          "mean": 10.7125,
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 768,
+            "SAFE_FALLBACK": 0
+          }
+        }
+      ],
+      "learning_gain": 10.025,
+      "parameter_l2": 29.92544937133789,
+      "displacement_l2": 5.879448413848877,
+      "relative_displacement": 0.19646984547808052,
+      "changed_parameters": 115264,
+      "execution": {
+        "torch_threads": 1,
+        "dtype": "torch.float32",
+        "device": "cpu"
+      }
+    },
+    {
+      "arm": "STRUCT-CURRENTNESS-GRU",
+      "counters": {
+        "rollout_updates": 48,
+        "adam_steps": 768,
+        "train_episodes": 384,
+        "train_transitions": 58368,
+        "train_decisions": 9216
+      },
+      "loss_rows": 768,
+      "evaluation_executions": 128,
+      "evaluation_transitions": 19456,
+      "curve": [
+        {
+          "update": 0,
+          "mean": 0.6875,
+          "action_counts": {
+            "SERVE": 561,
+            "REFRESH": 207,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "update": 12,
+          "mean": 10.7125,
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 768,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "update": 24,
+          "mean": 10.7125,
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 768,
+            "SAFE_FALLBACK": 0
+          }
+        },
+        {
+          "update": 48,
+          "mean": 10.7125,
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 768,
+            "SAFE_FALLBACK": 0
+          }
+        }
+      ],
+      "learning_gain": 10.025,
+      "parameter_l2": 29.92544937133789,
+      "displacement_l2": 5.603201389312744,
+      "relative_displacement": 0.18723867166651137,
+      "changed_parameters": 115465,
+      "execution": {
+        "torch_threads": 1,
+        "dtype": "torch.float32",
+        "device": "cpu"
+      }
+    }
+  ],
+  "external_formal_wall_sum_seconds": 170.47,
+  "new_check_wall_seconds": 6.97,
+  "new_complete_calls_wall_sum_seconds": 177.44,
+  "charged_focused_total_seconds": 131.46,
+  "source_commit": "2c9254f70c3a8ef9d95ac6dc3f6585382304be41",
+  "cm_evidence_commit": "9535d9465376cb74e9ce85125e8785419fcf8e52",
+  "method": "Read recorded Fraction returns, recompute fixed endpoint and curves; read recorded update rows/counters. No models, replay, new evaluation or training."
+}
