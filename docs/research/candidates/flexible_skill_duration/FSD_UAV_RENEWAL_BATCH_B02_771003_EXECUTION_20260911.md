@@ -1,6 +1,7 @@
 # FSD new771003 pair execution
 
-D0 detached command accepted; Monitor dispatch accepted, adoption pending.
+D0 detached command accepted and running; actual memory admission and Monitor
+adoption confirmed by Root. Collection is pending its routed terminal fact.
 New B allocation under card§7 and Root's conformance-PASS dispatch.
 Reused authoring checkout C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd;
 reconciled base37d180f91621f065eaef19a194157f88826cebf2. The DM
@@ -90,3 +91,15 @@ Remote execution checkout/input/D0 supervisor root remain for active execution
 and later collection. The I supervisor root is still uncreated. DM owns cleanup
 after preserving the complete pair or bounded limitation; Root accepts retention
 and reclamation. Shared local authoring checkout remains in use.
+
+Root subsequently confirmed the exact D0 handle/source, actual memory-admission
+pass and running supervisor, plus adoption by the live app Monitor. Its supplied
+memory shorthand is retained verbatim in D0_HANDOFF_RECEIPT.json, with exact
+units/fields left to artifact collection. No DM or Root parallel polling follows.
+
+Before this pending-collection native final, exactly one required
+HMASD_ROOT_HANDOFF was accepted by relay01a08456-2cf3-7f02-8595-42d84ba41a4c.
+Event: /root/dm_fsd_i1280_implementation|FSD_B02_771003_D0_launch|6ccb35c2cf4b64b5536cb29dd947af9021263314|READY_HANDOFF.
+The event described adoption as pending at dispatch; Root's later direct receipt
+above resolves it. This is the same handover, with no second relay send. The
+accepted API result and exact message are preserved in D0_HANDOFF_RECEIPT.json.

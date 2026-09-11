@@ -50,9 +50,17 @@
     {
       "purpose": "direct Monitor assignment API elapsed, excluding Monitor observation work",
       "wall_seconds": 0.184
+    },
+    {
+      "purpose": "persist exact D0 handover/receipts and publish pending collection",
+      "wall_seconds": 4.7307724
+    },
+    {
+      "purpose": "one required D0 handover relay API elapsed, forwarding cost separate",
+      "wall_seconds": 0.221
     }
   ],
-  "known_support_seconds": 24.1014184,
+  "known_support_seconds": 29.0531908,
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
