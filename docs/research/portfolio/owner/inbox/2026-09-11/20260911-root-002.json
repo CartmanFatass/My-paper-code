@@ -1,0 +1,86 @@
+{
+  "id": "20260911-root-002",
+  "created": "2026-09-11T09:52:07-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "剩余容量补位：两条真实B与一个FOLR方向问题",
+  "context": "MGTAP独立推进；FSD零执行技术结束、UCOPE窄暂停、VNFC没有完整决定。建议最多三条新链，五条目标仍有空缺。",
+  "options": [
+    {
+      "key": "a",
+      "label": "RCLE与ACVC真实B，加FOLR零数值方向问题",
+      "consequence": "新增最多三条链：RCLE完整750秒、ACVC完整600秒，FOLR仅原节点问题和完整接收；合计最多四条推进。"
+    },
+    {
+      "key": "b",
+      "label": "只投RCLE与ACVC两条真实B",
+      "consequence": "完整上限仍为750秒与600秒；FOLR维持暂停且不新增问题。"
+    },
+    {
+      "key": "c",
+      "label": "只投指定一条B，明确含或不含FOLR问题",
+      "consequence": "由Pro明确RCLE750秒或ACVC600秒，并明确是否加FOLR零数值问题。"
+    },
+    {
+      "key": "d",
+      "label": "暂不新增投入",
+      "consequence": "零新增数值或作者任务；MGTAP继续，Pro指出会改变选择的具体事实。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "两条直接原生性能问题具体现成；FOLR只问不同保留规则的价值，最强反方是GRU本身已能门控。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/SCIENCE_BRIEF.md",
+    "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/PREPARATION_INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L43",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "FSD准备预算耗尽、UCOPE暂停、VNFC没有完整决定后，只剩MGTAP推进。是否新投RCLE较低探索先验、ACVC独立拟合，以及FOLR学习保留规则的方向问题？最多补到四条，仍明确第五条空缺。",
+    "changes_if_approved": [
+      {
+        "target": "独立推进链",
+        "from": "MGTAP已获分配；其他具体后续均未分配",
+        "to": "建议RCLE一次.99先验真实学习、ACVC一次原协议新拟合和FOLR零数值原节点问题；保留少投或不投选项"
+      }
+    ],
+    "if_refused": "只做两条B、只做指定一条B（可明确含或不含FOLR问题）或零投入；不自动重跑FSD、重发VNFC或重开暂停配方。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/SCIENCE_BRIEF.md",
+        "quote": "This makes the B05 intake's explicitly unselected lower-exploration advice concrete.",
+        "why": "RCLE新问题保留自身初始化和最近参考，避免把更强初始偏置算成学习收益。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/SCIENCE_BRIEF.md",
+        "quote": "The scientific\nquestion has not become negative because the third preparation failed.",
+        "why": "ACVC两次新拟合的优势仍在；明确为准备工作增加新预算，不掩盖旧超支。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/SCIENCE_BRIEF.md",
+        "quote": "The strongest null is the existing generic event-aware RETAIN GRU: its native gates\nalready depend on current input and previous hidden state.",
+        "why": "FOLR新门控可能重复现有能力，所以只建议一个具体方向问题，不分配实验。"
+      }
+    ],
+    "uncertainty": [
+      "RCLE更强先验可能压制有益探索，或只改善初始化而没有学习收益。",
+      "ACVC增加准备预算并不保证代码准备成功；旧成本超支完整保留。",
+      "FSD已因技术缺口结束；VNFC只返回交付缺口，两者都不算推进。"
+    ],
+    "cost": {
+      "compute": "建议RCLE完整750秒，ACVC完整600秒，合计1350秒为各自上限不可互借；FOLR数值预算零，作者及Pro耗时未知。",
+      "owner_time": "不等待逐项批准；完整合规Portfolio决定由Root应用。",
+      "reversibility": "costly",
+      "waits_on_this": "仅本次新投入；MGTAP独立继续。"
+    },
+    "verdict_text": "DM recommendation only: A, RCLE plus ACVC plus one zero-numerical FOLR direction question; fewer than five explicit.",
+    "source": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/SCIENCE_BRIEF.md"
+  },
+  "starred": true
+}
