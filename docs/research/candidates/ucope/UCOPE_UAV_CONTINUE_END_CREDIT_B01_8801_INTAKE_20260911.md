@@ -2,11 +2,13 @@
 
 ## 1. Assignment and scientific binding
 
-Current status: **one8801 invocation accepted and Monitor adoption confirmed**;
-terminal collection and scientific intake pending. Source passed focused checks
-and independent review. DM replacement resumes the accepted Portfolio allocation
-after restart; no new scientific selection is attributed to restart. Earlier
-preparation sections below retain their pre-submission boundary meaning.
+Current status: **VALID COMPLETE / DOWN**, one accepted8801 L/F pair,
+technically and scientifically taken in. Primary L−F is−0.024105609431490836;
+the strict<−0.01 branch recommends ending unchanged L spending. Complete native
+wall1384.14s passes its component caps; support is charged within300s with
+unmeasured overhead explicitly flagged. No successor is allocated. Sections2–4
+and the named preparation/launch sections retain their historical boundary
+meaning; terminal acceptance and current decisions are below.
 
 Authority is the [four-slot decision](../../portfolio/decisions/2026-09-10-four-slot-rolling-refill.md),
 immutable Portfolio response1ea43d8fbc846807d71d4d894136f357f65551b6, checked by
@@ -119,7 +121,7 @@ The failure affects cleanup conformance only, not learner or primary measurement
 Preserve shared authoring checkout while active. Remote evidence/cleanup inventory
 will be prepared at terminal collection and returned for Root's retention decision.
 
-## Decisions this intake produces
+## Prelaunch decisions (historical)
 
 Object selection: (a) execute the already allocated unchanged L/F design at fresh
 8801; (b) return a concrete contract conflict. Recommend/select(a); no conflict
@@ -188,3 +190,107 @@ Next action: collect this same handle on the routed terminal fact, verify
 primary/counts/checkpoints and inclusive costs, then write separate scientific
 intake, Chinese owner brief, prediction score and all-outcome decision. All
 branches end this allocated pair; no follow-up is presently allocated.
+
+## 5. Terminal technical acceptance and scientific intake
+
+Root routed the terminal fact for the same handle/source; no re-launch or extra
+scientific call occurred. I checked the card against the complete native
+summary, all4224 episode/2048 rollout rows, both final checkpoints, supervisor
+exit/log, admission, prelaunch focused checks and independent review. Final
+raw rewards, world IDs, endpoint counts, paired mean/SE/signs and parameter
+movement agree. All14 remote files match the preserved local archive.
+The [E0 evidence](UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_RESULT_EVIDENCE_20260911.md)
+and linked machine analysis contain the numerical details and receipts.
+The routed T_minus_G label is a confirmed handoff metadata error; actual
+published contrast is L_minus_F. No artifact was renamed into another contrast.
+
+**Rule applied verbatim:** “<−0.01” → “DOWN: adverse package evidence on this
+instance; recommend ending unchanged L spending, without closing the family
+or inventing a cause.” Primary **−0.024105609431490836**, conditional
+SE0.009287231174029437; means L0.23611295495996004/F0.26021856439145086;
+24 positive/40 negative/0 zero common worlds. The result is valid B/EXPLORE
+with two real fits:4096 training episodes/1048576 team steps,128 evaluations/
+32768 team steps,8192 Adam calls,2048 rollouts and0 partial episode steps.
+Both actor/critic paths move; L duration/residual move and F duration does not.
+All outcomes are retained and no episode is an independent training seed.
+
+**Technical acceptance:** exact471a3383d source contract, learner execution and
+final primary publication accepted. The ten prior focused tests and independent
+review are relevant check evidence; no repeat was needed. Native L686.747901s,
+F697.392099s, total1384.14s pass1800/1200/3000. The predeclared outer-minus-L
+rule charges the unlocalized26.651626s tail to F. Support 254.4329552s and
+complete 1638.5729552s are measured-plus-conservative charges, within300/3300;
+unmeasured Monitor overhead and aggregate CPU stay
+**resources_unmeasured**. This is not an exact complete support measurement.
+No observed/charged runtime or source-budget breach; outstanding scratch
+cleanup restriction remains separately recorded.
+
+**Scientific reading:** this complete changed credit package loses to the
+trained fixed-law F by more than its declared MEI on8801. Strongest support
+for the adverse reading is the prespecified native mean,40 adverse worlds and
+real trained checkpoints. Strongest contradiction to generalizing it is24
+favorable worlds, one training pair, and prior8703 T's native improvement.
+The conditional suffix argument remains a design assumption about the first
+sent velocity, not a promised learning gain. Actual L learning rejects a
+no-update explanation, not finite optimization or partner co-adaptation.
+F is legal and useful here but is not a tuned optimum. The old six adverse
+T−F panels and T−G DOWN/WITHIN remain different-recipe evidence;8702 remains
+incomplete. No component cause or seed-population ranking follows.
+
+Prediction: the predeclared .25 probability of UP is scored against false;
+**Brier0.0625**. Owner prediction **not taken (unattended)**. Scientific-tools
+summary used one final L and F endpoint from the declared matched pair; no
+training-population SD or interval is estimated. Reuse the card/design-intake
+Foundations §§5–6, hierarchy and empirical reading; no new mechanism or source
+claim required another literature retrieval.
+
+## 6. Preservation and cleanup inventory
+
+Complete evidence is retained at the two archive locations and hashes listed
+in [collection facts](UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_COLLECTION_FACTS_20260911.json).
+The unique native source is committed/pushed471a3383d; code integration is
+Root-owned. Exact terminal remote checkout
+`/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911`
+has no tracked modifications and47354344bytes; its only ignored addition is
+this direction's output. Root receives preservation facts and confirms
+integration/retention for assigned reclamation. The remote archive outside it
+and local collection archive survive execution-checkout removal. Shared
+codex/ucope authoring checkout remains active. Local preparation pack/receipts
+are separately inventoried; their removal cannot erase the retained source.
+
+Creator test scratch remains
+`temp/directions/ucope/test/continue-end-8801-20260911` under the shared
+checkout. Two previous cleanup payloads were rejected by automatic policy
+before creation, with exact reason **blocked by policy**. No third attempt,
+interpreter substitution or claim of successful cleanup is made. DM retains
+cleanup responsibility when a permitted route exists; Root has the blocker.
+This does not hold the empirical result or change its polarity.
+
+## Decisions this intake produces
+
+1. **Object/technical:** (a) accept the complete native comparison and primary,
+with disclosed resource-telemetry and cleanup limits; (b) quarantine it for a
+claim-dependent defect. Recommend/select(a): no reward, information, learner,
+comparison or primary defect was found. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).**
+
+2. **Object/selection:** (a) end this allocated pair and recommend ending
+unchanged L spending; (b) recommend a separately allocated unchanged repeat.
+Recommend/select(a), following the frozen DOWN branch and preserving one-pair
+uncertainty. **Owner-delegated decision (unattended,2026-09-03 instruction): (a).**
+No scientific invocation follows from either this record or the parent's
+no-successor allocation boundary. This neither closes the renewal family nor
+sets Portfolio priority/lifecycle. Recasts remain1; tuned headroom absent.
+
+3. **Continuation:** no next discriminator is selected or funded. Any future
+learning/credit alternative against competent F needs its own current question
+and allocation; the result supplies adverse package evidence to that choice.
+Direction or Portfolio changes remain with their proper nodes; none is locally
+substituted here.
+
+Owner flags: none for the ordinary object choices. Relevant owner reviews at
+terminal entry returned[]; no owner reply is invented. Prediction and this
+valid-result decision stay in card/intake/audit without another P1/P2 item.
+The new-card item20260910-ucope-008 remains the earlier recorded action.
+[Chinese owner brief](../../portfolio/owner/briefs/ucope/2026-09-11_continue-end-credit-8801.md)
+is under600 characters and records the six required headings.

@@ -1,0 +1,98 @@
+{
+  "files": {
+    "final_L.pt": {
+      "path": "/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911/temp/directions/ucope/exp/uav_continue_end_credit_b01_8801/final_L.pt",
+      "bytes": 291614,
+      "sha256": "44c792e173501d43b7be0a50b097ce7e169eed5ee56cfc777db91c794ae6f126"
+    },
+    "summary.json": {
+      "path": "/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911/temp/directions/ucope/exp/uav_continue_end_credit_b01_8801/summary.json",
+      "bytes": 18401,
+      "sha256": "9f8187b279f15485524cf3ad9dc785ed45f2e0509ff1f4e15780ff647ee16282"
+    },
+    "arm_L.json": {
+      "path": "/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911/temp/directions/ucope/exp/uav_continue_end_credit_b01_8801/arm_L.json",
+      "bytes": 4183,
+      "sha256": "d5e8ad7aee7ab59181aa6342d726b6b794b1060726fe39e664894990dea23851"
+    },
+    "episodes.jsonl": {
+      "path": "/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911/temp/directions/ucope/exp/uav_continue_end_credit_b01_8801/episodes.jsonl",
+      "bytes": 3095790,
+      "sha256": "ad5f0dd3e391acba6d5fadb33ee37552901ad48b10b885abe7cf8be5236bf2d2"
+    },
+    "arm_F.json": {
+      "path": "/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911/temp/directions/ucope/exp/uav_continue_end_credit_b01_8801/arm_F.json",
+      "bytes": 3653,
+      "sha256": "9e093606ea1e6f0a47755aab729aec839a840c11b77d7efd663bc457b94438a9"
+    },
+    "final_F.pt": {
+      "path": "/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911/temp/directions/ucope/exp/uav_continue_end_credit_b01_8801/final_F.pt",
+      "bytes": 281578,
+      "sha256": "fb0d708de5a59af9aafead8d026de5f13f541ab5b0fa91083b4e99e87f63ea2a"
+    },
+    "rollouts.jsonl": {
+      "path": "/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911/temp/directions/ucope/exp/uav_continue_end_credit_b01_8801/rollouts.jsonl",
+      "bytes": 1846157,
+      "sha256": "a637c1fb23f558f0ac9040c96fc8d93a5e77261f12b8f33764a2faddcb487537"
+    },
+    "runner.sh": {
+      "path": "/home/wu/.agent-tasks/ucope-continue-end-credit-b01-8801-20260911/runner.sh",
+      "bytes": 1352,
+      "sha256": "f6219af3bcfebf4f631c149b3fcbb55fcda98d30479b642c4dd6fb1c38df2715"
+    },
+    "exit_code": {
+      "path": "/home/wu/.agent-tasks/ucope-continue-end-credit-b01-8801-20260911/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "status": {
+      "path": "/home/wu/.agent-tasks/ucope-continue-end-credit-b01-8801-20260911/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "start_time": {
+      "path": "/home/wu/.agent-tasks/ucope-continue-end-credit-b01-8801-20260911/start_time",
+      "bytes": 11,
+      "sha256": "483ee54f155759157251f3fdb20d0fcd98526f7210f214c9fa577c85377ca17b"
+    },
+    "pid": {
+      "path": "/home/wu/.agent-tasks/ucope-continue-end-credit-b01-8801-20260911/pid",
+      "bytes": 8,
+      "sha256": "9ace87452a5cc2e604d553ae586b480eebc5ea01a9002cf91e470e5a2aea092d"
+    },
+    "task.log": {
+      "path": "/home/wu/.agent-tasks/ucope-continue-end-credit-b01-8801-20260911/task.log",
+      "bytes": 7069,
+      "sha256": "5ec9a45c959a2fb0150bc0a797116c10cfeded8f3417d4a9440a668013be95bb"
+    },
+    "ucope-continue-end-credit-b01-8801-20260911-memory.json": {
+      "path": "/home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-memory.json",
+      "bytes": 504,
+      "sha256": "640fe497c4926eb07a1ddfeac5bc8960e3bea10b8feaf73c0720c3bccb9d249f"
+    }
+  },
+  "source_sha": "471a3383d23b16bb01469a6f30e3987910c3e47f",
+  "tracked_status": "",
+  "untracked_dry_run": "Would remove temp/directions/ucope/\n",
+  "registered_worktrees": "worktree /home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911\nHEAD 471a3383d23b16bb01469a6f30e3987910c3e47f\ndetached\n",
+  "checkout_disk_bytes": 47354344,
+  "remote_archive": {
+    "path": "/home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-evidence.tar.gz",
+    "sha256": "beeb1e5dfcf2e08ea1a915dc82fe4166d7cd137ef9ee6c9fc5ade72105863602"
+  },
+  "remote_local_all_14_files_match": true,
+  "readback_wall_seconds": 1.012620399997104,
+  "local_archive": {
+    "path": "C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906/temp/directions/ucope/exp/uav_continue_end_credit_b01_8801_collection/evidence.tar.gz",
+    "bytes": 1756246,
+    "sha256": "beeb1e5dfcf2e08ea1a915dc82fe4166d7cd137ef9ee6c9fc5ade72105863602"
+  },
+  "cleanup": {
+    "remote_execution_checkout": "retained pending Root integration/retention reconciliation; exact terminal checkout only",
+    "remote_archive": "retain outside execution checkout",
+    "local_collection_archive": "retain as independent recovery copy",
+    "local_preparation": "retains published-source transfer pack and preparation receipts; reclaimable after preservation",
+    "shared_authoring_checkout": "retain: active direction checkout codex/ucope; DM authoring, Root integration",
+    "creator_test_scratch": "retained; two automatic policy rejections before removal, blocked by policy; no bypass or further deletion attempt"
+  }
+}

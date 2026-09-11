@@ -1,5 +1,5 @@
 {
-  "as_of": "accepted run and Root-confirmed Monitor adoption; terminal collection pending",
+  "as_of": "terminal collected; native accepted, final documentation/cleanup charged separately",
   "initial_recovery_conservative_charge_s": 60,
   "failed_fetch_conservative_charge_s": 45,
   "failed_fetch_returned_wait_intervals_s": 15.0119164,
@@ -101,7 +101,116 @@
   "final_handoff_publication_conservative_charge_s": 10,
   "charged_preterminal_support_s": 158.1582664,
   "cap_s": 300,
-  "monitor": "Root confirmed adopted; attributable Monitor work and terminal collection/publication still pending",
-  "native": "accepted once; still running at last direct pre-Monitor readback",
-  "limits": "Initial recovery/fetch/review/delivery/handoff are conservative charges, separate from measured command walls. Nested actual suite wall6.4265742 and review3.9007485 are not added again. The10s handoff charge bounds the current document/Git publication command; compare with its returned actual time."
+  "monitor": {
+    "measured_query_wall_s": 16.479,
+    "query_provenance": "Root forwarded Monitor bill: prior10.452 plus13 queries totaling6.027",
+    "later_query_wall_s": [
+      0.503,
+      0.588,
+      0.521,
+      0.437,
+      0.6,
+      0.418,
+      0.365,
+      0.409,
+      0.607,
+      0.454,
+      0.418,
+      0.356,
+      0.351
+    ],
+    "charged_s": 45,
+    "unmeasured_overhead": "Adoption/message/publication overhead was not individually measured. The28.521s remainder is a conservative charge, not observed elapsed time."
+  },
+  "native": {
+    "outer_wall_s": 1384.14,
+    "peak_rss_kib": 564872,
+    "L_charged_s": 686.7479011937976,
+    "F_charged_s": 697.3920988062025,
+    "internal_pair_wall_s": 1357.488374052802,
+    "outer_minus_internal_s": 26.651625947198,
+    "all_native_caps_pass": true,
+    "outer_precision_s": 0.01,
+    "aggregate_CPU": "unmeasured"
+  },
+  "limits": "Initial recovery/fetch/review/delivery/handoff are conservative charges, separate from measured command walls. Nested actual suite wall6.4265742 and review3.9007485 are not added again. The10s handoff charge bounds the current document/Git publication command; compare with its returned actual time.",
+  "terminal_collection_commands_before_closeout": [
+    {
+      "label": "restart state and owner check",
+      "seconds": 0.5032752
+    },
+    {
+      "label": "exact terminal summary readback",
+      "seconds": 0.7683972
+    },
+    {
+      "label": "archive exact native output/supervisor/admission and verify collection digest",
+      "seconds": 2.2897551
+    },
+    {
+      "label": "extract collected archive and inspect endpoint reduction/source retention",
+      "seconds": 0.5090078
+    },
+    {
+      "label": "validate collected rows/checkpoints/counts and compute declared-unit analysis",
+      "seconds": 2.2013623
+    },
+    {
+      "label": "resume_current_records",
+      "seconds": 0.3297634
+    },
+    {
+      "label": "card_and_scientific_routing",
+      "seconds": 0.137249
+    },
+    {
+      "label": "owner_routing_and_cleanup_scope",
+      "seconds": 0.2192062
+    },
+    {
+      "label": "evidence_and_direction_context",
+      "seconds": 0.2048751
+    },
+    {
+      "label": "focused owner cleanup evidence and current direction context",
+      "seconds": 0.2669291
+    },
+    {
+      "label": "locate exact remote access and accepted evidence format; review owner boundary",
+      "seconds": 1.9945581
+    },
+    {
+      "label": "verify all original artifacts against preserved archive and inventory remote checkout",
+      "seconds": 1.2090832
+    },
+    {
+      "label": "locate prior contrast evidence and attribution for durable intake",
+      "seconds": 0.2321693
+    },
+    {
+      "label": "read collected per-arm exposure for evidence table",
+      "seconds": 0.2113088
+    },
+    {
+      "label": "inspect final summary publication fields",
+      "seconds": 0.197749
+    }
+  ],
+  "terminal_collection_command_wall_s": 11.2746888,
+  "final_closeout_conservative_charge_s": 40,
+  "final_closeout_charge_scope": "Writing E0/intake/brief, final focused document checks, owner review, explicit commit/push/readback, assigned cleanup and receipt publication; compare actual returned command walls with40s and disclose excess. This is a charge, not a measured duration.",
+  "charged_complete_support_s": 254.4329552,
+  "charged_complete_allocation_s": 1638.5729552,
+  "cap_assessment": {
+    "L_native": true,
+    "F_native": true,
+    "native_total": true,
+    "support_charged": true,
+    "complete_charged": true
+  },
+  "resources_unmeasured": [
+    "aggregate_CPU_work",
+    "exact_complete_support_elapsed_including_unmeasured_Monitor_overhead"
+  ],
+  "interpretation": "Native complete wall is measured. Support and complete-allocation compliance use measured commands plus disclosed conservative charges; no measured or charged breach. These charges do not establish exact physical support elapsed."
 }

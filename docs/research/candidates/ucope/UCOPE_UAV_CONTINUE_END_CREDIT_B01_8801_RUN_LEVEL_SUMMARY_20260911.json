@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "ucope_continue_end_credit_final2048",
+      "arm": "F",
+      "n": 1,
+      "mean": 0.26021856439145086,
+      "sample_sd": null,
+      "min": 0.26021856439145086,
+      "max": 0.26021856439145086,
+      "runs": {
+        "8801": 0.26021856439145086
+      }
+    },
+    {
+      "task": "ucope_continue_end_credit_final2048",
+      "arm": "L",
+      "n": 1,
+      "mean": 0.23611295495996004,
+      "sample_sd": null,
+      "min": 0.23611295495996004,
+      "max": 0.23611295495996004,
+      "runs": {
+        "8801": 0.23611295495996004
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "ucope_continue_end_credit_final2048",
+      "arm": "L",
+      "baseline": "F",
+      "summary": {
+        "n": 1,
+        "mean": -0.024105609431490815,
+        "sample_sd": null,
+        "min": -0.024105609431490815,
+        "max": -0.024105609431490815
+      },
+      "differences": {
+        "8801": -0.024105609431490815
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}
