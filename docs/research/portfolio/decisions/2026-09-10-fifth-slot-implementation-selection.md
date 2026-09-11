@@ -1,5 +1,80 @@
 # Fifth-slot implementation question — pre-send blocker intake
 
+## Material event intake — 2026-09-11
+
+**The material-event condition is satisfied; the fifth-slot question remains
+queued pending dedicated Transport reconciliation. No Portfolio decision or
+implementation/numerical allowance exists.** This update supersedes waiting for
+the first material event, not the preserved pre-send refusal below.
+
+Root's published terminal record is
+`81451d3b00e77fa685489c1672fd3780e58126f8`. I read the complete captured assistant
+reply and its accepted-send/terminal facts. The owner's instruction authorized
+Root's one caller resend of the **older** request
+`2026-09-10-four-slot-rolling-refill-01`, with the same fixed TASK and conversation.
+It was accepted once and completed naturally after `12m 16s`. The earlier
+Transport two-click history remains separate. This owner-directed one-Send
+allowance is consumed; no further old-request Send or generation control follows.
+
+The full captured reply is 621 UTF-8 bytes, SHA256
+`21385d3120cd4287ef8da7eced2e945198675349f9c968d2c61aa7903a2a8145`.
+It reports a write-capability gap, no attempted write and incomplete scientific
+review. Those capability/no-write assertions are **provider self-report**, not
+independent proof of general connector capability or every possible external
+effect. The reply contains no Portfolio choice to apply.
+
+I checked the actual GitHub state at `2026-09-11T03:55:47.200697+00:00`:
+`codex/portfolio` HEAD was
+`bae2cd25c68c33c5b1c21f01a2e1f662a3b155f4`, the exact older request's
+`archive/RESPONSE.md` returned **404 at that commit**, and Issue17 had only
+preparation comment **5627828518** for that round, with no matching immutable
+response-delivery link. This agrees with Root's separate `03:48:31` and `03:50:35`
+reads at `77b9d573aa609bac253544ca9d4429b39b3a0adb`. The later HEAD change is this
+author's preserving merge of Root's terminal documentation, not a Pro delivery.
+The conclusion is time-bounded absence of the required file/comment, not a
+general claim that the provider cannot write. Exact observations, the complete
+Issue snapshot, Root source hashes and current binding fields are in
+[MATERIAL_EVENT_FACTS.json](../pro_packets/20260910_fifth_slot_implementation_selection/archive/MATERIAL_EVENT_FACTS.json).
+
+The same read-only registry snapshot still has the older request at `BLOCKED`,
+with the historical `archive_status=ARCHIVED` field. No new binding attempt or
+provider action occurred here. A complete natural-language capability-gap reply
+is a real terminal event that can be archived and reconciled; it is not a formed
+scientific decision and does not by itself establish binding availability.
+The allowed next action is the exact [Transport reconciliation task](../pro_packets/20260910_fifth_slot_implementation_selection/TRANSPORT_RECONCILIATION_NEXT_ACTION.txt):
+verify and durably reconcile the old completed event under existing identity,
+archive and receipt procedures, preserve both histories, then report availability
+of this same binding for the unchanged fifth-slot question. No manual state
+rewrite to bypass BINDING_BUSY, no new conversation and no old or fifth-slot Send
+is part of that bounded action.
+
+**Decisions this material-event intake produces:**
+
+1. Technical options: (a) recognize the verified terminal event and return the
+   bounded Transport reconciliation action; (b) treat Pro's capability statement
+   as a scientific answer or blanket external-effect fact; (c) infer availability
+   or another Send from natural completion alone. Recommend and execute (a).
+   **Owner-delegated decision (unattended, 2026-09-03 instruction): (a)** under
+   Root's exact material-event assignment and the existing blocker/recovery rules.
+2. Portfolio choice remains **none**: A/B/C are unselected, owner root007 remains
+   blocked with `auto_applied=null`, and audit row158 records only this technical
+   readiness update. Existing science, source-only claim ceilings, contrary
+   FSD/P75 results, priorities and all unreleased budgets remain unchanged.
+3. No independently allocated FSD/MGTAP implementation or numerical work has
+   appeared. Return after committing this intake; Root advances separate existing
+   authorized work and routes the Transport action. No local science is created.
+
+Current main owner reviews returned `[]`. The shared checkout incorporated Root's
+published terminal record in preserving merge `bae2cd25c68c33c5b1c21f01a2e1f662a3b155f4`,
+pushed immediately; every previous audit row was retained. Root's old-request
+records remain read-only inputs. New and old REQUEST/TASK/HANDOFF bytes are
+unchanged, including fifth-slot prompt SHA256
+`92a9a6c40ef82232aa2e8fc2271c4b873c7501bf6c96bbf482366fd10d05e5f8`.
+This intake made no Send, implementation, model, numerical/test or environment
+invocation and created no execution/test scratch. No empirical result brief is due.
+
+## Preserved initial pre-send intake
+
 **QUEUED / BLOCKED_PRE_SEND — no Portfolio decision and no new allocation.**
 The prepared FSD/MGTAP question remains unchanged. A, B and C are all unselected;
 operational queuing is not the selection of the zero-work scientific option.
