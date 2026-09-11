@@ -1,8 +1,8 @@
 # FSD I1280/D0 implementation intake — 2026-09-10
 
-**Source implementation complete; the single synthetic check is pending.
-No real B invocation, learner, environment or empirical result.**
-This record will close the one implementation allocation; it cannot allocate
+**Accepted for configuration binding, sampler traversal and synthetic primary
+publication only. One fixture passed in 4.8851396 seconds; zero real B exposure.**
+This record closes the one implementation allocation; it cannot allocate
 the prospective pair or its proposed 3000-second envelope.
 
 ## 1. Assignment, actual checkout and governing rule
@@ -100,9 +100,37 @@ checkout's `temp/`, sets MPLCONFIGDIR inside it before scientific imports,
 copies the useful report and removes the scratch in the same process. It runs
 with the existing `hmasd-amd-cpu` interpreter and `-B`. This removes the external
 launch/kill and shell-recursive-removal wrapper; it changes no fixture cases.
-Check status remains **pending** until the one command's actual return. Its
-receipt measures imports, primary publication and cleanup; outer command wall
-also includes process exit. No second numerical invocation follows.
+The correction published at
+`0207d0b3cf307f656b5f46b298b74efa438608b8`. The one subsequent foreground fixture
+returned exit 0 at those unchanged source/test bytes. Its internal receipt
+records 4.299593 seconds through imports, primary publication and scratch
+cleanup; the retained foreground receipt records **4.8851396 seconds through
+stdout and process exit**, below the complete 60-second cap. No second fixture,
+replay or numerical analysis was executed.
+
+Actual evidence inspected directly, then independently read back by the same
+Reviewer without rerunning or importing the fixture:
+
+- [Synthetic configuration, traversal and primary report](uav_renewal_batch_b01_implementation_20260910/synthetic_primary.json).
+  Both phases record I=1280/.25 and D0=128/Infinity, common team Infinity,
+  gamma .99 and fifteen future PPO epochs. The two sampler traversals themselves
+  each used one fixture epoch. Chunk lengths are [1280,1] and ten 128s plus 1;
+  both visit every valid row exactly once and exclude the invalid row.
+  The valid supplied readouts retain means ±.0175, ordered differences,
+  sample SD .022860022860034298 and conditional SE .004041119295602437.
+  Undeclared gamma rejects with `pair mismatch: learner_config`; absent U
+  rejects with `I missing primary values`. These are synthetic inputs/results,
+  not training or performance observations.
+- [Internal command receipt](uav_renewal_batch_b01_implementation_20260910/FIXTURE_COMMAND_RECEIPT.json)
+  records pass and scratch absence. Subsequent filesystem readback by DM and
+  Reviewer also found the exact leaf absent.
+- [Foreground tool receipt and exact command](uav_renewal_batch_b01_implementation_20260910/FOREGROUND_EXEC_RECEIPT.json)
+  supplies source SHA, interpreter, working directory, raw output, exit and
+  complete command wall; it closes the internal receipt's before-exit timing limit.
+
+Final [Reviewer disposition](uav_renewal_batch_b01_implementation_20260910/INDEPENDENT_REVIEW.md): no material finding after actual artifact readback.
+Binding/traversal/synthetic primary publication is supported at the stated
+ceiling; full learner, activation-memory and native-return limits remain.
 
 ## 4. Scientific intake and interpretation ceiling
 
@@ -131,28 +159,75 @@ is no empirical result evidence or valid-result Chinese brief to fabricate.
 
 ## 5. Decisions this intake produces
 
-1. Object/technical implementation: (a) accept the scoped source binding subject
-   to the single selected check's actual limit; (b) add a model smoke or change
+1. Object/technical implementation: (a) accept the scoped source binding with
+   the single selected check's actual limit; (b) add a model smoke or change
    protected algorithms. Recommend and execute (a).
    **Owner-delegated decision (unattended, 2026-09-03 instruction): (a)**,
    within Root's exact Portfolio-selected assignment. No new treatment, family
    or Portfolio choice is made here.
 2. Technical completion: (a) return one source/check/review acceptance with all
    residual gaps; (b) repeat a test, run the real pair, Send, or start a fallback.
-   Recommend (a); actual final check acceptance and cleanup will be recorded
-   below. The next empirical discriminator remains the separately unallocated
+   Recommend and execute (a).
+   **Owner-delegated decision (unattended, 2026-09-03 instruction): (a)**.
+   The next empirical discriminator remains the separately unallocated
    fresh I1280/D0 pair; nothing in this return launches it.
 
 Owner flags: none. Owner review on current main at the starting clean boundary
-returned `[]`. The existing FSD card item `20260910-fsd-001` and Portfolio
+and again on main `6b2e4ffc0` before final publication returned `[]`; relevant
+ledger owner cells were empty. No instruction was available to apply or mark
+answered. The existing FSD card item `20260910-fsd-001` and Portfolio
 selection item `20260910-root-007` preserve their historical scopes. Ordinary
 technical facts stay here and in the audit; no duplicate P1/P2 item is needed.
+The FSD item's execution trace links this completed implementation back to the
+separate Portfolio authority without inventing an owner reply or changing the
+original design-only option's meaning.
 
 ## 6. Final acceptance, accounting and cleanup
 
-Pending the single selected fixture. Implementation adds no Engineering Scope
-§4 item. Scientific invocations, models, checkpoint loads, environments,
-environment steps, training starts, optimizer calls and real evaluations remain
-zero. No scientific root or accepted handle exists; no Monitor handover applies.
-This shared direction checkout remains for ongoing direction authoring and
-Root's accepted-commit integration. Only this check's own scratch is removable.
+**Technical acceptance: PASS, limited to the exact source/check/review contract.**
+Source commits are `9dcb4bb79` (binding) and `0207d0b3c` (owned fixture cleanup);
+no source/test edit follows the passing execution. This final documentation
+commit retains actual outputs and records acceptance; Root receives named
+commits for integration rather than a request to merge historical branch work.
+
+| Actual assignment work | Observed |
+| --- | --- |
+| Accepted fixture commands / complete wall | 1 / 4.8851396 s |
+| Config objects / buffers / valid rows | 4 / 1 / 1281 |
+| Real sampler traversals / synthetic paired readouts | 2 / 4, 32 supplied scores per arm per readout |
+| Models, checkpoint loads, environments, native/simulated steps | 0 |
+| Collection/training starts, optimizer calls, real endpoint evaluations | 0 |
+| Scientific invocations, replay, explicit profiling, support search, Pro Sends | 0 |
+| Parameter displacement | Not applicable: no learner |
+
+Machine-generated exposure is retained in the synthetic report. Its supplied
+arm metadata counts are visibly fixture data, not actual learning counts.
+The complete test wall also fits the existing five-minute limit for this new
+attempt test directory, which has no other invoked tests. No allowance was
+transferred from a sibling or from old B01/B02. Peak RSS, aggregate CPU and total
+authoring/support cost are unmeasured, not zero; the future 3000-second real-B
+envelope remains wholly unallocated.
+
+Compared with reconciled source `eec2ec260`, production source adds **54 lines**
+and removes **16** across the two runners (437 and 29 total lines); the new
+test is 197 lines. This is inside the 2000/600-line limits. Parameter plumbing
+and required output comparison are the majority of this small change; the
+Reviewer found no unnecessary orchestration. No separate ratio census is
+required by §11.8.8. Engineering Scope §4 needs/additions: **none**; no breach.
+
+Cleanup: this invocation's exact
+`temp/directions/flexible_skill_duration/test/i1280_binding_9pxdob0x` directory
+was removed by its owning process, with absence independently read back.
+The rejected wrapper's prospective scratch/evidence roots never existed at
+that boundary. The three retained check evidence files and review above remain in docs.
+No scientific execution root, detached worktree, remote process or accepted
+handle was created, so there is no Monitor handover or execution-worktree
+registration to retire. The active shared `codex/fsd` checkout remains for
+Root's accepted-commit integration and future direction authoring; Root owns
+its eventual reconciliation/reclamation. Unrelated/shared work is intact.
+
+**Next authorized action:** Root integrates the named implementation/acceptance
+commits and records this allocation complete. No further check or real B runs
+from this return. The next empirical discriminator, if separately allocated,
+is the card's one fresh I1280/D0 five-rollout/final-32-episode pair. It remains
+unmeasured, with both old losses and unknown new performance/memory/cost intact.

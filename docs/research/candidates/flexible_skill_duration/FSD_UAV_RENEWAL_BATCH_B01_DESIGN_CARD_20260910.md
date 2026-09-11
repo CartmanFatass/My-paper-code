@@ -9,6 +9,9 @@ allocates one source/technical return and at most one complete 60-second synthet
 fixture. The real B and the proposed 3000-second envelope remain unallocated.
 Technical acceptance and its limits are recorded in the
 [implementation intake](FSD_UAV_RENEWAL_BATCH_B01_IMPLEMENTATION_INTAKE_20260910.md).
+The one permitted fixture passed at source `0207d0b3c` in 4.8851396 seconds
+including publication, cleanup and exit. Acceptance covers binding, traversal
+and synthetic primary publication; it provides no new native performance fact.
 
 ## 1. Authority, question and bounded selection
 
@@ -210,7 +213,7 @@ larger batches do not remove that dominant tensor work. Agent/team segment
 construction and the held-gap pass remain. There are no nested candidate,
 trajectory or policy searches and no extra validation evaluation panel.
 The expressions are source-derived; no new count program or numerical probe
-was run for this zero-numerical assignment. Actual executed calls remain a
+was run for the original design-only return. Actual executed learning calls remain a
 future measurement, including any nonfinite-update failures.
 
 Historical P70/P72 summed complete pair walls are 1693.38/1768.78 seconds,
@@ -237,6 +240,14 @@ evaluations=0; tests/fixtures=0; replay/profiling/support search=0; Pro Sends=0;
 parameter displacement=not applicable (no learner)**.
 That reused the design allocation's zero-exposure definition; file/Git and
 owner-console operations are document work. No claim is made that authoring is free.
+
+At implementation intake, the [machine-generated fixture exposure](uav_renewal_batch_b01_implementation_20260910/synthetic_primary.json)
+records one command, four configurations, one buffer/1281 valid rows, two sampler
+traversals and four synthetic pair readouts. Models, checkpoint loads,
+environments/steps, training starts, optimizer calls, real evaluations, replay,
+explicit profiling, support search and scientific invocations remain zero.
+The complete fixture wall is 4.8851396 seconds; all allowance beyond this one
+source/check return remains unallocated. No new numerical invocation follows.
 
 ## 7. Selected implementation boundary and L0
 
