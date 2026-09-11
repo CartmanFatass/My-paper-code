@@ -1,0 +1,238 @@
+{
+  "created_utc": "2026-09-11T21:50:36.301205+00:00",
+  "question": "Post-program four-vacancy investment, widened by Root before first rendering",
+  "authority": "Preparation only; no new allocation, family decision or provider Send",
+  "launch_technical_snapshot_sha": "02d61f605644da23d044d529b4361c4b701ece6c",
+  "new_MGTAP_intake_sha": "5321b69fdecdc6de81fd5e8fb9efe648a5950e6e",
+  "new_ACVC_intake_sha": "6a24944011e1f11f105e7bd045700cd0ece90094",
+  "ACVC_provenance_until_published": "Earlier Root report preserved; full150-line intake and134-line E0 now directly read at fixed source SHA",
+  "actual_author_exposure": {
+    "scientific_invocations": 0,
+    "policy_models": 0,
+    "encoder_modules": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_environment_steps": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "replay": 0,
+    "profiling": 0,
+    "source_tests": 0,
+    "numerical_fixtures": 0,
+    "support_search": 0,
+    "raw_result_reanalysis": 0,
+    "source_implementation_edits": 0,
+    "provider_sends": 0,
+    "parameter_displacement": "not applicable: no learner"
+  },
+  "exposure_line": "POST_PROGRAM_VACANCIES_PREPARATION: scientific_invocations=0; policy_models=0; encoder_modules=0; checkpoint_loads=0; environments=0; native_steps=0; synthetic_environment_steps=0; training_episodes=0; optimizer_steps=0; evaluation_episodes=0; replay=0; profiling=0; source_tests=0; numerical_fixtures=0; support_search=0; raw_result_reanalysis=0; source_implementation_edits=0; provider_sends=0; parameter_displacement=not applicable: no learner",
+  "count_snapshots": {
+    "target_advancing_directions": 5,
+    "scoped_ACTIVE_directions": 15,
+    "live_FOLR_directions": 1,
+    "MGTAP_ACVC_current_intake_chains_at_root_report": 2,
+    "FSD_ended": 1,
+    "VNFC_unready_queued_not_advancing": 1,
+    "vacancies_after_current_MGTAP_ACVC_closeout": 4,
+    "actual_NEW_author_scientific_units": 0
+  },
+  "actual_new_results": {
+    "MGTAP8213": {
+      "independent_training_units": 1,
+      "status": "VALID COMPLETE COND_ADVERSE",
+      "COND": 0.19342135238526614,
+      "DENSE": 0.21589092584121028,
+      "paired_mean": -0.02246957345594415,
+      "conditional_SE": 0.004312411137154014,
+      "worlds": 32,
+      "positive": 5,
+      "negative": 27,
+      "train_episodes": 1024,
+      "eval_episodes": 64,
+      "native_team_ticks": 278528,
+      "optimizer_steps": 2048,
+      "native_seconds": 358.11,
+      "native_caps_pass": true,
+      "full_support_complete_caps_certified": false,
+      "known_support_at_first_intake": 51.6987902,
+      "known_native_plus_support_at_first_intake": 409.80879020000003,
+      "prior8212_separate_paired_mean": 0.005761321371348559
+    },
+    "ACVC8961_published": {
+      "independent_training_units": 1,
+      "status": "VALID finite reduction, both primary contrasts UP",
+      "F_minus_C": 0.1414322041,
+      "F_minus_C_conditional_SE": 0.0079158399,
+      "F_minus_dwell": 0.0944113176,
+      "F_minus_dwell_conditional_SE": 0.0082975516,
+      "dwell_minus_C": 0.0470208865,
+      "all_episode_rows": 704,
+      "optimizer_steps": 1024,
+      "supervisor_seconds": 176,
+      "conservative_native_seconds": 178,
+      "prior_fresh_training_units_separate": 2,
+      "F_minus_C_adverse_worlds": 1,
+      "F_minus_dwell_adverse_worlds": 5,
+      "dwell_minus_C_adverse_worlds": 10,
+      "F_retraces": 8004,
+      "dwell_interventions": 4705,
+      "whole_command_seconds": 175.58,
+      "native_caps_pass": true,
+      "full_support_complete_caps_certified": false,
+      "known_support_through_analysis": 58.732128,
+      "same_fit_policy_initialization_gain": "unmeasured; no initial-policy panel"
+    }
+  },
+  "shared_terminal_observation_seconds": {
+    "value": 0.9,
+    "scope": "one enclosing query across four handles; not split or additive four times"
+  },
+  "proposed_B_units": [
+    {
+      "direction": "flexible_skill_duration",
+      "kind": "proposed new B pair",
+      "independent_training_units": 1,
+      "learners": 2,
+      "model_constructions": 4,
+      "training_episodes": 160,
+      "training_team_ticks": 80000,
+      "evaluation_episodes": 64,
+      "evaluation_team_ticks": 32000,
+      "update_stages": 10,
+      "optimizer_steps": null,
+      "d0_coordinator_chunks": 525,
+      "i_coordinator_law": "15 * sum(ceil(M_r/1280)) over five rollouts; each M_r <= 8000; historical B01 330",
+      "batched_controller_calls": 6000,
+      "agent_observations": 672000,
+      "per_arm_cost_law": "initialization + rollout + coordinator chunks + lower PPO/recurrent replay + final evaluation + checkpoint/publication/exit",
+      "new_proposed_caps_seconds": {
+        "D0": 900,
+        "I1280": 1800,
+        "native_sum": 2700,
+        "support": 300,
+        "complete": 3000,
+        "one_source_delivery_transaction_nested_in_support": 45
+      },
+      "future_unit_rates": null,
+      "anchor_native_seconds": {
+        "D0": 519.94,
+        "I1280": 1020.68,
+        "sum": 1540.62
+      },
+      "total_team_ticks": 112000
+    },
+    {
+      "direction": "metric_ground_transport_allocation",
+      "kind": "proposed new unchanged B pair after8213",
+      "independent_training_units": 1,
+      "learners": 2,
+      "model_constructions": 6,
+      "training_episodes": 1024,
+      "training_team_ticks": 262144,
+      "evaluation_episodes": 64,
+      "evaluation_team_ticks": 16384,
+      "ppo_batches": 512,
+      "optimizer_steps": 2048,
+      "actor_rows_per_arm_including_replay": 3317760,
+      "per_arm_cost_law": "initialization +131072 collection steps +1024 Adam calls/recurrent replay +8192 final steps +publication/exit",
+      "new_proposed_caps_seconds": {
+        "COND": 450,
+        "DENSE": 450,
+        "native_sum": 900,
+        "support": 300,
+        "complete": 1200
+      },
+      "future_unit_rates": null,
+      "anchor_native_seconds": {
+        "8212_pair": 364.79,
+        "8213_pair": 358.11,
+        "8213_COND_nested": 199.2965511311777,
+        "8213_DENSE_nested": 158.81344886882232
+      },
+      "total_team_ticks": 278528
+    }
+  ],
+  "proposed_direction_questions": [
+    {
+      "direction": "roster_consistent_latent_exploration",
+      "kind": "one original Convergence question and intake",
+      "new_numerical_allowance": 0,
+      "implementation_allowance": 0,
+      "provider_questions": 1,
+      "future_fit_counts_illustrative_not_selected": {
+        "train_episodes": 64000,
+        "endpoint_episodes": 6144,
+        "total_episodes": 70144,
+        "total_native_ticks": 4489216,
+        "updates": 1000,
+        "current_backward_traversals": 1000,
+        "possible_two_channel_traversals": 2000,
+        "neural_agent_claims": 8847360,
+        "candidate_scores_per_claim": 6,
+        "model_allocations": 7
+      },
+      "future_numerical_cap": null,
+      "historical_known_seconds": 422.65637430000004
+    },
+    {
+      "direction": "acvc",
+      "kind": "one original Convergence claim/investment question and intake",
+      "new_numerical_allowance": 0,
+      "implementation_allowance": 0,
+      "provider_questions": 1,
+      "future_fit_counts_illustrative_not_selected": {
+        "train_episodes": 512,
+        "evaluation_episodes": 192,
+        "total_episodes": 704,
+        "total_native_ticks": 180224,
+        "optimizer_steps": 1024
+      },
+      "future_numerical_cap": null,
+      "formal_UAV_entry_selected": false,
+      "C_freeze_selected": false
+    }
+  ],
+  "option_caps_new_seconds": {
+    "A": 4200,
+    "B": 3000,
+    "C": 0,
+    "D": 0
+  },
+  "option_A_factors": {
+    "B_units": 2,
+    "direction_question_units": 2,
+    "learners": 4,
+    "independent_training_comparison_units": 2,
+    "train_episodes": 1184,
+    "evaluation_episodes": 128,
+    "total_team_ticks": 390528,
+    "model_constructions": 10,
+    "native_caps_sum": 3600,
+    "support_caps_sum": 600,
+    "complete_caps_sum": 4200,
+    "optimizer_steps_total": null,
+    "FSD_optimizer_steps_unknown_not_update_stages": true,
+    "no_cross_host_performance_aggregate": true
+  },
+  "existing_preserved_caps_seconds": {
+    "live_FOLR_complete": 3900,
+    "conditional_queued_VNFC_complete": 900,
+    "VNFC_native": 600,
+    "VNFC_support": 300,
+    "additional_VNFC_repair_allowance": 0
+  },
+  "unselected_ended_caps_are_not_available_balances": [
+    "FSD770903",
+    "MGTAP8213",
+    "ACVC8961"
+  ],
+  "cost_limitations": [
+    "Caps are willingness-to-spend ceilings, not forecasts or transferable pool",
+    "Pro/authoring calendar and unknown full support/CPU are not measured as zero",
+    "Question-only units release no illustrative future fit or causal audit"
+  ],
+  "current_integrated_snapshot_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+  "new_ACVC_main_integration_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b"
+}
