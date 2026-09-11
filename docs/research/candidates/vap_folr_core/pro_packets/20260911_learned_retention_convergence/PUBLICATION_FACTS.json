@@ -1,0 +1,81 @@
+{
+  "checked_at_utc": "2026-09-11T18:10:08.004738+00:00",
+  "request_id": "folr-learned-retention-convergence-20260911",
+  "task_commit": "41a92b8bbebfa76ffd81a3d675ed695a666443f1",
+  "task_path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/TASK.md",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/41a92b8bbebfa76ffd81a3d675ed695a666443f1/docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/TASK.md",
+  "git_task_sha256": "9102f18b391f40e4cb4c5089b70ca964294927e3578e956d5dc56b260d2da8d5",
+  "github_task_sha256": "9102f18b391f40e4cb4c5089b70ca964294927e3578e956d5dc56b260d2da8d5",
+  "task_bytes": 28705,
+  "github_task_matches_git": true,
+  "observed_delivery_branch": "refs/heads/codex/vap-folr",
+  "observed_remote_head": "41a92b8bbebfa76ffd81a3d675ed695a666443f1",
+  "dispatch_prompt_sha256": "a4ddf8b0d3bb79a7bdffceb8df5d53bb4df6ff43d68805a135f79eda0dfe6d2f",
+  "dispatch_prompt_bytes": 189,
+  "handoff_state": "READY_TO_DISPATCH",
+  "source_thread_id": "01a08ed9-f1da-71c2-948f-a09c3c2d9b64",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+  "conversation_binding_key": "em:vap_folr_core:convergence",
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "native_return_target": "/root/dm_folr_restart_recovery2",
+  "dispatch_performed_by_DM": false,
+  "issue_readback": {
+    "number": 15,
+    "state": "OPEN",
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/15",
+    "prior_comments": 5,
+    "new_round_comment_present": false
+  },
+  "owner_reviews": [],
+  "current_main": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+  "current_method_surfaces": [
+    {
+      "path": "AGENTS.md",
+      "bound_blob": "657dc14480c90cd514f308ffb1f5ec2552554a8b",
+      "current_blob": "657dc14480c90cd514f308ffb1f5ec2552554a8b",
+      "same": true
+    },
+    {
+      "path": "docs/AGENTS.md",
+      "bound_blob": "c355829f347e8a445e36df90c60b231b2b9f0fc2",
+      "current_blob": "c355829f347e8a445e36df90c60b231b2b9f0fc2",
+      "same": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "bound_blob": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "current_blob": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "same": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "bound_blob": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "current_blob": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "same": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "bound_blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "current_blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "same": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "bound_blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "current_blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "same": true
+    },
+    {
+      "path": ".agents/skills/hmasd-pro-research-prompt-author/scripts/render_packet.py",
+      "bound_blob": "26241e60a8b19fe57c604c3ecc8e5867eb3420ad",
+      "current_blob": "26241e60a8b19fe57c604c3ecc8e5867eb3420ad",
+      "same": true
+    }
+  ],
+  "scope": "Documentation-only candidate/question. No implementation or numerical work; no Pro Send; no family decision.",
+  "preservation": "One shared direction authoring checkout retained for the live delivery/intake dependency; no remote or numerical roots created.",
+  "provider_prompt_sha256": "85cd77c9261c285f282fa7ee4376b9e180f8c31cc8a71b66a56e75e32fa04e72",
+  "provider_prompt_bytes": 1927,
+  "dispatch_prompt_scope": "189-byte instruction for Transport to load HANDOFF, distinct from provider_prompt hash/bytes."
+}

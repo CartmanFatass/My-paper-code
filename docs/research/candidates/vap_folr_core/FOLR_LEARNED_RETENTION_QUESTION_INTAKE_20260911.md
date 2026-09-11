@@ -93,3 +93,48 @@ binding remains `6aa18137-9d88-83e8-a01f-46630813faf8`; the preceding half-famil
 request is ARCHIVED. Existing substantive Issue 15 is OPEN. Preparation neither
 sends nor observes Pro. Delivery acceptance is pending Root/Transport, distinct
 from packet acceptance and from any later scientific/specification intake.
+
+## 5. Packet acceptance and ready return
+
+The candidate/source preparation is committed and published at
+`cb5d883bcaf614a1b0817b322f72462c954853e1`. The single fixed TASK is committed and
+published at `41a92b8bbebfa76ffd81a3d675ed695a666443f1`; the renderer bound those
+committed TASK bytes and formed `READY_TO_DISPATCH`. All 22 actual manifest
+path/SHA pairs resolve and are reachable from observed published remote refs.
+Direct GitHub TASK bytes equal the Git object. The source/method bytes relevant
+to this request remain unchanged at observed main
+`df042c4ac1162d22f62d7d1830cecbd3ed2ff44c`. These checks establish packet facts,
+not current Pro connector access or empirical acceptance.
+
+The local renderer refused a cosmetic overwrite of an unpublished draft with
+`use a fresh output directory; preserve existing packet and send state`. The
+original generated TASK/HANDOFF was preserved and cosmetic REQUEST edits were
+dropped to match it. No additional packet, provider Send or consultation resulted.
+The actual manifest uses path/commit pairs rather than full per-file URLs; its
+22 pairs match the author input. Publication facts preserve this technical history.
+
+The P2 close-call item is
+`docs/research/portfolio/owner/inbox/2026-09-11/20260911-folr-001.json`, with no
+`auto_applied` family choice. Its creation succeeded; a local attempt to parse
+its plain path output as JSON failed after creation, and the existing item was
+read back without repeating the add. The technical preparation decision is audit
+2026-09-11 line 50. Primary all-age owner reviews again returned `[]` at this
+boundary; no owner answer or prediction is inferred.
+
+The canonical HANDOFF is
+`pro_packets/20260911_learned_retention_convergence/HANDOFF.json`. Root is the
+receipt parent and dispatches the existing Transport; the native return target
+is `/root/dm_folr_restart_recovery2`. The original Convergence conversation is
+preserved. Provider prompt SHA256 is `85cd77c9261c285f282fa7ee4376b9e180f8c31cc8a71b66a56e75e32fa04e72`.
+[PUBLICATION_FACTS.json](pro_packets/20260911_learned_retention_convergence/PUBLICATION_FACTS.json)
+distinguishes that prompt from the shorter internal Transport load instruction.
+
+Current exposure:
+
+`FOLR_LEARNED_RETENTION_CONSULTATION: new_scientific_invocations=0; models=0; training_episodes=0; native_steps=0; evaluation_episodes=0; optimizer_steps=0; replay=0; diagnostics=0; implementation_changes=0; tests=0; checkpoints=0; parameter_displacement=not applicable (no learner).`
+
+Packet preparation is technically accepted. Pro dispatch/acceptance and the full
+response/specification intake remain pending, distinct facts. The shared direction
+checkout is retained for this live delivery/intake dependency; no remote execution
+or scientific root was created. Root integrates the named commits, preserving its
+concurrent audit rows and the three Portfolio inputs already present on main.
