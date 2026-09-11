@@ -1,8 +1,9 @@
 # Codex agent environment 迁移 WSL：实测评估与推进顺序
 
-2026-09-10，Claude Code（Opus 5）只读咨询任务。本文没有修改仓库任何受控文件，没有改动
+2026-09-10，Claude Code（Opus 5）咨询任务。没有改动仓库任何受控文件，没有改动
 `.codex/`、`.agents/`、`AGENTS.md`，没有运行任何 result-bearing 实验，没有消耗任何科学对象。
-所有性能数字都在本机（主机名 `Jacob`）实测，命令见附录 A。
+仓库之外执行过一次可逆操作：7.1 第 3 项的 WSL 二进制缓存改名。
+所有性能数字都在本机（主机名 `Jacob`）实测，命令见附录 A。更正见第 10 节。
 
 ---
 
@@ -144,9 +145,27 @@ Agentify 跨界开销。** 把 Agentify 当作迁移的阻塞点是量级上的�
 每次导入的文件打开、以及实时防护逐次检查的复合结果，全部落在 3.1 和 3.2 两条慢轴上。
 这才是这个仓库最大的重复性开销。
 
-27.5 GB 的工作树里只有 1.3 GB 是版本历史，其余绝大部分是 `temp/` 下历次测试与实验
-没有清理的残留（WSL 侧遍历时在其中撞到数百个权限拒绝的目录）。
-所以"搬迁要拷 27 GB"是个伪成本，一次 `git clone` 加一次 checkout 就够。
+### 3.5 工作树体积的构成
+
+本节的数字来自对 `temp/` 顶层 1063 个条目的逐项扫描（脚本与判定规则见 7.1）。
+
+| 构成 | 条目 | 体积 | 文件数 |
+| --- | --- | --- | --- |
+| `.git` | — | 1.30 GiB | — |
+| `temp/` 中需要保留的部分 | 90 | 23.51 GiB | 146163 |
+| `temp/` 中无引用且陈旧的 scratch | 973 | 1.02 GiB | 56482 |
+| 其余源码与文档 | — | 约 1.1 GiB | 10628（跟踪） |
+
+保留部分里 16.82 GiB 是 `temp/directions/`，即 AGENTS.md 约定的 scratch 根，
+里面是各方向实验的运行根；5.25 GiB 是 `temp/cm-model-comparison/`。
+**这两部分都被已提交的 intake 文档按路径直接引用为证据**，不是残留。
+
+两个推论，都与迁移直接相关：
+
+- **`temp/` 的绝大部分不是垃圾。** 真正可回收的只有 1.02 GiB，占体积 3.7%，
+  但占文件数 28%。清理它的收益在文件数，不在空间。
+- **这 23.5 GiB 证据不在 git 里**（`.gitignore` 第 50 行 `/temp/**`）。
+  所以"迁移只要 `git clone` 1.3 GB"这个说法是错的，见 7.3 步骤 3。
 
 ---
 
@@ -261,15 +280,28 @@ remote_receipt_admits_local = false
 
 这三件事在 A 配置下就能拿到收益，做完再谈迁移。
 
-1. **清理 `temp/`。** 按 AGENTS.md §6，测试 scratch 由创建它的调用负责删除。
-   目前它占了 27.5 GB 工作树的绝大部分，直接拖慢每一次 `git status` 和每一次目录遍历。
-   注意不要删除仍在运行的调用的 scratch，也不要碰科学证据。
+1. **清理 `temp/` 中陈旧的 scratch。** 按 AGENTS.md §6，测试 scratch 由创建它的调用负责删除。
+   按 3.5 的构成，可回收的是 973 个条目、1.02 GiB、56482 个文件，
+   收益是把工作树的文件数减掉约 28%，从而加快目录遍历与 `git status`，**不是回收空间**。
+
+   判定规则，任一命中即保留：名字被 HEAD 上任何提交内容引用；三天内有改动
+   （避开仍在写的会话）；属于 `directions/`、`sessions/`、`README.md` 三个约定根。
+   另外单独摘出三个不删：`test.bundle` 与 `vsp02.bundle` 是 §6 的恢复归档
+   （其提交当前仍可达，属冗余，但归属工作树回收流程），
+   `backup-missing-originals-20260828.zip` 是 `.agents/skills/` 的原件备份。
+
+   分类与删除脚本在会话 scratchpad 下（`classify_temp.py`、`purge_temp.py`），
+   后者不带 `--apply` 为空跑，删除时会重新 stat 每棵树，三天内被动过的一律跳过。
+   空跑结果：970 个候选、0.84 GiB、0 跳过、0 失败。**截至本文提交尚未执行。**
 2. **给 Defender 加排除。** 候选：`C:\Projects\HMASD`、
    `C:\Users\fires\.conda\envs\hmasd-amd-cpu`、以及 `python.exe`、`git.exe`、
    `node.exe` 三个进程排除。实时保护当前开启，排除列表需要管理员权限才能查看和修改。
+   进程排除收益更大但削弱面更广，建议先只加路径排除。
    做完之后重测 3.2 和 3.4 的数字，用实测决定值不值。
-3. **清掉过期的 WSL 二进制缓存。** 把 `%USERPROFILE%\.codex\bin\wsl\4f759bc6b64517c4\`
-   改名而不是删除，让应用从 9 月 5 日的包内资源重新投放。这一步也是 7.2 的前置。
+3. **清掉过期的 WSL 二进制缓存。** ~~把 `%USERPROFILE%\.codex\bin\wsl\4f759bc6b64517c4\`
+   改名而不是删除~~ **已完成（2026-09-10）**：已改名为
+   `4f759bc6b64517c4.stale-20260828`，337 MB，随时可改回。
+   这让应用在切到 WSL 时从 9 月 5 日的包内资源重新投放。这一步是 7.2 的前置。
 
 ### 7.2 受控试验，不碰 HMASD
 
@@ -301,7 +333,14 @@ remote_receipt_admits_local = false
 1. 拿到 owner 对 `.codex/hmasd-compute.toml` 的批准（6.3）。
 2. 在 WSL 里建好本项目的 Linux Python 环境，配方参考 `hmasd-wsl-node`，但用 CPU 版 torch。
    在旧位置验证它能跑通目标测试子集。
-3. `git clone` 到 ext4，**不要拷贝工作树**。1.3 GB 而不是 27.5 GB。
+3. **迁移代码与迁移证据是两件事，都要做。**
+   - 代码走 `git clone`，约 1.3 GiB 历史加约 1.1 GiB 检出。
+   - `temp/` 下约 23.5 GiB 的证据**不在 git 里**，但被已提交的 intake 文档按路径引用。
+     只 clone 会让那些引用全部断掉。先做 7.1 的清理，再把剩下的 `temp/` 一并搬过去。
+   - **不要逐文件跨 9p 拷贝。** 146163 个文件按 3.1 的速率会非常慢。
+     正确做法是在 Windows 侧打成单个归档，再在 WSL 侧解开，让跨界只发生在一个大文件上。
+   - 所以一次性搬迁的实际量级是约 25 GiB，不是 1.3 GiB。它仍然是一次性的，
+     你的原判断不受影响，但预算要按 25 GiB 排。
 4. 在新检出里跑一次 7.1 之后的 pytest 收集，与 37175 ms 对照，确认收益是真的。
 5. 同一时间窗口内完成 agent 切换与项目切换，不要留下过夜的中间态。
 6. 把 Windows 侧的旧检出保留一段时间作为回退，确认无引用后再按 AGENTS.md §6 的
@@ -346,6 +385,23 @@ integratedTerminalShell = "gitBash"
   3.4 的 `git status` 与 pytest 收集是真实负载下的锚点，两者结论一致。
 - 本次在 WSL 里对 `/mnt/c/Projects/HMASD` 跑过 `git status`（只读）。
   事后确认 Windows 侧工作树未发生改变，仍只有会话开始时的两个未跟踪文件。
+
+---
+
+## 10. 更正记录
+
+**2026-09-10，初版提交当日。** 初版把 `temp/` 的绝大部分描述为"历次测试与实验没有清理的
+残留"，并据此写出"迁移只要 `git clone` 1.3 GB"。对 1063 个顶层条目逐项扫描后，
+这两条都不成立，已改写 3.5、7.1 与 7.3。
+
+错在哪：初版只看了 `temp/` 的总体积和顶层条目数，没有区分其中哪些被已提交内容引用。
+实测是 23.51 GiB 需要保留（其中 16.82 GiB 是约定的 scratch 根 `temp/directions/`，
+被 intake 文档按路径直接引用为证据），只有 1.02 GiB 是真正无引用的陈旧 scratch。
+
+影响：清理的收益从"回收 26 GB 空间"改成"减少 28% 的文件数"；
+迁移的一次性搬运量从 1.3 GiB 改成约 25 GiB，因为那 23.5 GiB 证据不在版本库里，
+只 clone 会让已提交文档中的证据引用全部断掉。
+结论方向未变，全 Linux 终局在性能上仍然更便宜，一次性成本仍然是一次性的。
 
 ---
 
@@ -401,7 +457,8 @@ C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q --collect-only 
 | 主机名 | `Jacob` |
 | Codex 桌面版 | `OpenAI.Codex` 26.903.8094.0，MSIX |
 | 包内 Linux 二进制 | `app\resources\codex`，258 MB，9 月 5 日 |
-| 缓存的 WSL 二进制 | `~/.codex/bin/wsl/4f759bc6b64517c4/codex`，268 MB，8 月 28 日 |
+| 缓存的 WSL 二进制 | `~/.codex/bin/wsl/4f759bc6b64517c4/codex`，268 MB，8 月 28 日；已于本日改名为 `...4517c4.stale-20260828` |
+| `temp/` 构成 | 1063 个顶层条目；保留 90 个 / 23.51 GiB / 146163 文件，可删 973 个 / 1.02 GiB / 56482 文件 |
 | WSL | Ubuntu-24.04，WSL2，默认发行版，运行中；WSL1 不受支持 |
 | WSL 用户 | `fires`，家目录 `/home/fires` |
 | WSL 内 Codex CLI | `/home/fires/.local/bin/codex`，`codex-cli 0.154.0` |

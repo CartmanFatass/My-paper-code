@@ -187,7 +187,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   结论：全 Linux 终局在性能上确实更便宜（进程创建 33 倍、解释器启动 4.4 倍、
   同侧逐文件读取 3.8 倍），Agentify 跨界调用每次 38–81 ms 可忽略；
   阻塞项是桌面版 WSL 模式的可靠性、Codex home 分叉，以及
-  `.codex/hmasd-compute.toml` 里的控制面声明（需 owner 批准）。只读咨询，未改动任何受控文件。
+  `.codex/hmasd-compute.toml` 里的控制面声明（需 owner 批准）。另含 `temp/` 的实测构成
+  （1063 个顶层条目中 23.51 GiB 是被引用的证据，仅 1.02 GiB 是可回收 scratch），
+  据此把一次性搬运量从 1.3 GiB 更正为约 25 GiB。第 10 节是当日的更正记录。
+  未改动任何受控文件。
 
 ### environment_design/
 
