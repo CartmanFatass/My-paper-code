@@ -443,7 +443,7 @@
   "all_reference_bytes": 1382225,
   "publication_meaning": "Every exact Git path exists and its SHA is reachable from an observed published origin ref. This establishes publication, not Pro connector access.",
   "actual_author_exposure": "zero scientific/model/environment/training/evaluation/reanalysis and zero provider Send",
-  "task_published": false,
+  "task_published": true,
   "render_history": [
     {
       "state": "first_unpublished",
@@ -463,13 +463,14 @@
       "response": "preserve earlier bytes and use fresh delivery subdirectory"
     },
     {
-      "state": "TASK_NOT_PUBLISHED",
+      "state": "READY_TO_DISPATCH",
       "evidence_sha": "b11c7700cec1404ad3104050be84770cd48d29b2",
       "reference_count": 44,
       "out_dir": "delivery",
-      "binding": null,
+      "binding": "0cd37928e05cc442632f146835829760522cb85a",
       "task_bytes": 45455,
-      "task_sha256": "b99ec83c5b8893f2630bad475dcfdb7a19cfc706404f924b408c8d20cb313af0"
+      "task_sha256": "b99ec83c5b8893f2630bad475dcfdb7a19cfc706404f924b408c8d20cb313af0",
+      "provider_send": false
     }
   ],
   "owner_items": {
@@ -499,5 +500,23 @@
   "FOLR_source": "8da607b4b7fb415b4212e0e20d74f9dc9c20a32e",
   "rendered_manifest_matches_REQUEST_exactly": true,
   "rendered_constraints_match_REQUEST": true,
-  "routing_checked": true
+  "routing_checked": true,
+  "task_commit": "0cd37928e05cc442632f146835829760522cb85a",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/0cd37928e05cc442632f146835829760522cb85a/docs/research/portfolio/pro_packets/20260911_post_program_vacancies/delivery/TASK.md",
+  "task_bytes": 45455,
+  "task_sha256": "b99ec83c5b8893f2630bad475dcfdb7a19cfc706404f924b408c8d20cb313af0",
+  "fresh_GitHub_TASK_bytes_equal_Git": true,
+  "published_delivery_head_before_handoff": "0cd37928e05cc442632f146835829760522cb85a",
+  "issue_readback": {
+    "state": "open",
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/17",
+    "comments": 13,
+    "updated_at": "2026-09-11T20:53:40Z"
+  },
+  "bound_utc": "2026-09-11T22:30:40.570563+00:00",
+  "dispatch_state": "READY_TO_DISPATCH",
+  "root_dispatch_pending": true,
+  "provider_send_by_author": false,
+  "exact_prompt_bytes": 1914,
+  "exact_prompt_sha256": "cbc046f8ce1ba9661ce3d05384433f14a7a10bcc1c6b4603b91054b3e0e74fc4"
 }
