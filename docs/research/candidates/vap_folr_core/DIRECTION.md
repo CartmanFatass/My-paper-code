@@ -638,3 +638,44 @@ References:
 - `pro_packets/20260911_learned_retention_convergence/archive/RESPONSE.md`
 - `FOLR_LEARNED_RETENTION_CONVERGENCE_INTAKE_20260911.md`
 - `pro_packets/20260911_learned_retention_convergence/archive/DM_READBACK.json`
+
+## Accepted first learned-retention B result — 2026-09-11
+
+**Conclusion and bounded claim.** The new Portfolio-allocated B01 has one valid
+fresh learned-event/RETAIN pair at5000 training and128 final episodes per arm.
+Final native means are1.603281250 and−0.160078125, respectively; d_LR+1.763359375
+meets this card's prospective inclusive absolute1 LEARNED_EVENT_ABOVE_MEI branch.
+Support for the opened learned law now includes one native package-level gain.
+It establishes neither stable training-population superiority nor a causal account
+of useful memory. This is not a C or UAV result.
+
+**Strongest support.** Both arms complete4969 optimizer updates and the full final
+panel. The separately reported changing-policy training mean also favors the gate
+by1.029974. Its129 coefficients moveL2 1.353121908 from initialization and its law
+receives45865 training/1317 final eligible survivor-event opportunities. Acting,
+replay, optimization and published final target/checkpoint paths passed the scoped
+checks and actual collection. One fit remains one fit, regardless of episode count.
+
+**Strongest contradiction and surviving alternative.** Generic event-aware RETAIN
+already has the same local information and adaptive GRU gates. There is no second
+independent learned-gate result; the current benefit could depend on initialization,
+extra coefficients and the resulting partner/trajectory co-adaptation. The old
+fixed-half loss−4.293046875 remains contrary context for unqualified retention claims,
+not a negative sample of the learned law. Its earlier gain+1.56546875 and the fixed-half
+pause remain unchanged. Gate displacement/event exposure does not isolate the cause
+of the return gap or show which histories were useful. Tuned headroom is still absent.
+
+**Next discriminator and boundary.** The funded first pair ends at intake/closeout;
+no automatic fit, consultation or direction/Portfolio disposition follows. If a later
+allocation needs recurrence across training histories, one fresh unchanged pair
+against RETAIN at the same endpoint is the direct discriminator. No positive-first,
+causal-isolation or extra-baseline prerequisite is introduced. Whole native clocks
+835.33/867.79s pass the allocated native caps; incomplete support accounting limits
+complete-cost claims without changing the trustworthy native observation.
+
+References:
+
+- `FOLR_LEARNED_RETENTION_B01_SCIENCE_CARD_20260911.md`
+- `FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B01_RESULT_SUMMARY_20260911.json`
+- `FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md`

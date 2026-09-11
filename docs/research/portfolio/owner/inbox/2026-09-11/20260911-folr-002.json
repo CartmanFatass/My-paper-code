@@ -70,5 +70,15 @@
     "verdict_text": "执行已开放的129参数学到的保留门首次B；完成本对或准确的有界失败后结束，不追加种子、阈值、初始化、端点或重试。",
     "source": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_SCIENCE_CARD_20260911.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T22:14:38+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/6c32ade3216c374ecf2f5179b15d559729cd45c9/docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "已执行一次完整真实训练对：保留门比普通保留高1.763分，达到本卡1分尺度；仅一对训练，完整支持成本仍有未计量项，未追加后继。"
+    }
+  ]
 }
