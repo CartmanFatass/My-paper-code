@@ -1,0 +1,11 @@
+{
+  "conversation_binding_key": "em:ucope:convergence",
+  "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "provider_url": "https://chatgpt.com/c/6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "request_id": "2026-09-09-ucope-post-mean-velocity-b01-convergence-01",
+  "state": "ARCHIVED",
+  "visible_model": "6 Pro",
+  "last_observed_at": "2026-09-09T17:09:45.716965Z",
+  "receipt_status": "SENT",
+  "observation_scope": "Read-only original-node routing reconciliation; immutable GitHub response/intake, not nested historical Transport summary, establishes scientific provenance."
+}
