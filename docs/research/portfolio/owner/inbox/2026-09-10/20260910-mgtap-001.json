@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "reopen",
-  "auto_applied": null,
+  "auto_applied": "reopen",
   "dm_reason": "现有参数块可以承载实际条件运算，值得原节点判断；旧方案落后与新运算成本、收益未知仍是主要反证和限制。",
   "evidence": [
     "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/PREPARATION_INTAKE.md",
@@ -76,6 +76,14 @@
       "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/BLOCKER_INTAKE.md",
       "state": "blocked",
       "summary": "按现有所有者 AGENTS 第3节的阻塞规则记录：本轮两次 Send 点击仅形成一个当前问题，随后出现提供方错误；没有完整答复或方向裁决。保留原请求和历史 PARK，当前链在干净边界等待实际交付变化，不重发、不点 Retry、不在本地选择。此归因只说明既有阻塞规则，不表示所有者新答复或 Pro 裁决。"
+    },
+    {
+      "at": "2026-09-11T02:27:46+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/CONVERGENCE_INTAKE.md",
+      "state": "applied",
+      "summary": "同一请求随后交付完整答复319c51a5f，37,234字节及哈希与 Transport 回执一致，原提供方错误和两次点击保留，无新 Send。原 Convergence 最终仅重开 COND/DENSE 问题的科学资格；DM 已核对完整答复符合问题及规范，并写入 DIRECTION。未分配卡冻结、实施、测试、种子、数值调用或时间额度，旧负结果和 Portfolio 状态保留。此前待裁决建议及 blocked 轨迹是历史记录，不是新答复的当前状态。"
     }
   ]
 }

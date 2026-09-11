@@ -1,5 +1,7 @@
 # MGTAP conditional-pooling Convergence blocker intake — 2026-09-10
 
+**Historical initial receipt, superseded for current decision status by the later complete delivery.** The facts and original handling below record the 02:09:48Z provider observation. During publication a new scoped GitHub response appeared at `319c51a5fdc411eaaf1a47557d032f23ed269265`; Transport reconciled it without another Send and Root forwarded the exact receipt. See [CONVERGENCE_INTAKE.md](CONVERGENCE_INTAKE.md) for the complete conforming narrow-eligibility decision and current no-allocation boundary. The original failure and two-click history are retained; they were not an empirical negative.
+
 **Direction tier: no decision formed. The request is BLOCKED by a terminal provider error.** Preserve the accepted request and both Send-click facts; park this execution chain at a clean boundary. This is not a scientific rejection, a new family disposition or an authorization to select the recommendation locally. There is no independent already-authorized continuation after the completed single fallback return and this handoff.
 
 ## 1. Exact request, receipt and checked evidence
