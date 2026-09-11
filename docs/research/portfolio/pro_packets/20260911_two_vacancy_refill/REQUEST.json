@@ -205,7 +205,7 @@
     {
       "path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260910_native_service_credit_reentry/archive/RESPONSE.md",
       "commit_sha": "10bb08476ff58afd25b90b21cd2d1a739b25ca4b",
-      "purpose": "Read opening and identity only. Root now reports Transport-verified delivery and actual original-DM resumption, as preserved in PREPARATION_INTAKE. Full scientific conformance remains with that DM; do not intake, expand, duplicate Send or allocate VNFC here.",
+      "purpose": "Read opening and delivery identity only for newly observed response-file presence. Original DM full conformance/receipt route is pending; do not intake, expand or allocate this direction here.",
       "provenance": "Published origin/codex/vnfc addition discovered during required fetch; author inspected opening and commit/path metadata, not full scientific conformance."
     }
   ],
