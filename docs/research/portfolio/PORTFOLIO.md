@@ -8,11 +8,12 @@ than the completed fixed-vacancy decision below. A designated Portfolio DM is pr
 cross-direction packet that separates scientific selection and budget from engineering readiness,
 and requires a named repair owner and exit condition for each technical blocker.
 
-Three direction-local technical repair chains are actually dispatched and advancing:
+Three direction-local technical repair chains were dispatched. ACVC has completed its repair;
+VNFC and FSD remain advancing:
 
 | Direction | Non-scientific repair | Scientific boundary preserved |
 | --- | --- | --- |
-| ACVC | Repair CRLF/SSH-stdin remote preparation and prove byte-stable LF staging/readback. | The ended8951 allocation is not retried; no fit, model or numerical exposure. |
+| ACVC | **Complete through `88f9e87d5`:** repaired CRLF/SSH-stdin preparation and proved byte-stable LF staging/readback for all 975 bytes. | The ended8951 allocation was not retried; no fit, model or numerical exposure. |
 | VNFC | Diagnose and minimally repair the attributable exit139/core-dump path from preserved B02 evidence. | The incomplete B02 primary remains unscored; no rerun, new seed or successor. |
 | FSD | Repair deterministic remote staging/readback and bound the prospective support path. | The ended770803/780803 allocation and 300-second support cap are not reused or bypassed. |
 
@@ -20,7 +21,7 @@ These repairs may use bounded static, transport and synthetic checks that do not
 scientific workload. Any future result-bearing invocation still needs its own scientific selection,
 frozen card, exact source, fresh destination admission and Monitor adoption. Missing cost telemetry
 and policy-blocked duplicate cleanup remain qualified evidence/retention facts rather than scientific
-stops. The current advancing-direction count is three; Portfolio authoring is cross-direction work
+stops. The current advancing-direction count is two; Portfolio authoring is cross-direction work
 and is not counted as another chain.
 
 ## Current zero-addition Portfolio boundary — 2026-09-11

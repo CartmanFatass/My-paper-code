@@ -1,5 +1,15 @@
 # HMASD experiment tracking
 
+## ACVC input-transport repair accepted — 2026-09-11
+
+The direction-local repair is accepted and integrated at `88f9e87d5`. The attributable Windows
+text-mode stdin path is replaced by LF-normalized, residual-CR-rejecting bytes that pass a local
+Bash syntax check before remote effects and are then sent through binary SSH stdin. Static and stub
+checks reproduced the old translation, rejected malformed input and read back all 975 bytes
+unchanged. No shared scientific code changed, no 8951 retry or numerical work occurred, and a
+future fit still requires a separate allocation. VNFC and FSD technical repair chains remain
+advancing; the designated Portfolio DM is preparing the broader forward recommendation.
+
 ## Four-slot decision checked; execution mapping returned — 2026-09-11
 
 The complete Portfolio response `1ea43d8fbc846807d71d4d894136f357f65551b6`
