@@ -45,6 +45,12 @@ no retry. No Portfolio selection has yet formed from that packet. Its fixed fact
 VNFC launch adoption; the set remains three distinct advancing directions because VNFC's
 implementation and run are one direction chain.
 
+The shared Monitor subsequently reported RCLE B06 terminal exit 0 after 336 seconds with a complete
+reference, and VNFC B02 terminal exit 139/core dump after 78 seconds. Both terminals are routed to
+their original DMs for separate collection and intake; neither terminal alone selects a retry or
+successor. Together with FOLR response intake, these remain three advancing direction chains while
+the Portfolio request generates separately.
+
 ## Post-option-A refill decision — 2026-09-11
 
 The complete Portfolio response for

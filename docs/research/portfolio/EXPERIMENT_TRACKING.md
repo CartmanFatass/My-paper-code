@@ -968,3 +968,13 @@ one Send; its verified 34,159-byte response is delivered at `a2a47f1d7` with SHA
 DM. Once that serial binding cleared, Root dispatched the fixed current-vacancies Portfolio handoff
 to the canonical Transport. The handoff passed direction verification and has one confirmed provider
 Send in `WAITING_GENERATION`; no retry or local replacement investment has been selected.
+
+The shared Monitor then returned one 1.3-second joint observation query covering both adopted
+handles; that wall is recorded once and is not divided between directions. RCLE B06 finished with
+exit 0 at 2026-09-12T02:12:38+08:00 after 336 seconds and reports a complete reference. VNFC B02
+failed with exit 139 at 2026-09-12T02:28:09+08:00 after 78 seconds when the monitored command dumped
+core. Root routed each terminal fact to its original DM for separate artifact collection, technical
+acceptance, scientific intake and cleanup. No retry or successor follows from either terminal fact.
+The three counted direction chains are now RCLE collection/intake, VNFC failure collection/intake and
+FOLR response conformance/intake; the current-vacancies Portfolio generation remains cross-direction
+work and is not counted as another direction.
