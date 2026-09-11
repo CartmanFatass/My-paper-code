@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-11-ucope-post8801-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:ucope:convergence",
+  "direction_id": "ucope",
+  "direction_ids": [
+    "ucope"
+  ],
+  "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "provider_url": "https://chatgpt.com/c/6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "user_message_id": "today-current-round|TASK.md@c86f7d93977d291eca65a45b61cc1795f0f07512|user-node",
+  "assistant_message_id": "today-current-round|Complete response — immutable commit|current-round-assistant-node",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "prompt_sha256": "843daecccc51634379991b62bc92d1810ecd0c13a7eb1083a093e6cf71ec59fe",
+  "response_sha256": "616b0b537435b6d67b7ded1d3bbb2bf4d23f69df62e264c9d02640ae225a11e5",
+  "response_bytes": 34470,
+  "response_characters": 34341,
+  "send_click_count": 1,
+  "natural_completion_observed": "Worked for 14m 47s; complete response and delivery links present; no active generation control",
+  "github_delivery": {
+    "commit": "81d5d48a648427674684909d641b7d90f18c87c0",
+    "response_path": "docs/research/candidates/ucope/pro_packets/20260911_post_8801_convergence/archive/RESPONSE.md",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/81d5d48a648427674684909d641b7d90f18c87c0/docs/research/candidates/ucope/pro_packets/20260911_post_8801_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/11",
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/11#issuecomment-5637364297",
+    "issue_comment_id": 5637364297,
+    "http_status": 200,
+    "issue_comment_matches_request": true
+  },
+  "archive_paths": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-11-ucope-post8801-convergence-01\\PROMPT_BODY.md",
+    "github_response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-11-ucope-post8801-convergence-01\\GITHUB_RESPONSE.md",
+    "chat_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-11-ucope-post8801-convergence-01\\CHAT_RECEIPT.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-11-ucope-post8801-convergence-01\\PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-11-ucope-post8801-convergence-01\\TRANSPORT_FACTS.json",
+    "github_response_sha256": "616b0b537435b6d67b7ded1d3bbb2bf4d23f69df62e264c9d02640ae225a11e5",
+    "delivery_commit": "81d5d48a648427674684909d641b7d90f18c87c0",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/81d5d48a648427674684909d641b7d90f18c87c0/docs/research/candidates/ucope/pro_packets/20260911_post_8801_convergence/archive/RESPONSE.md",
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/11#issuecomment-5637364297"
+  },
+  "captured_at": "2026-09-11T16:18:57Z",
+  "identity_validation": "PASS_WITH_DOM_ID_UNAVAILABLE"
+}
