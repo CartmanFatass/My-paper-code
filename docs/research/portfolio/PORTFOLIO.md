@@ -8,20 +8,20 @@ than the completed fixed-vacancy decision below. A designated Portfolio DM is pr
 cross-direction packet that separates scientific selection and budget from engineering readiness,
 and requires a named repair owner and exit condition for each technical blocker.
 
-Three direction-local technical repair chains were dispatched. ACVC and FSD have completed their
-repairs; VNFC remains advancing:
+Three direction-local technical repair chains were dispatched. ACVC and FSD completed their
+repairs; VNFC completed its bounded investigation without an attributable fix:
 
 | Direction | Non-scientific repair | Scientific boundary preserved |
 | --- | --- | --- |
 | ACVC | **Complete through `88f9e87d5`:** repaired CRLF/SSH-stdin preparation and proved byte-stable LF staging/readback for all 975 bytes. | The ended8951 allocation was not retried; no fit, model or numerical exposure. |
-| VNFC | Diagnose and minimally repair the attributable exit139/core-dump path from preserved B02 evidence. | The incomplete B02 primary remains unscored; no rerun, new seed or successor. |
+| VNFC | **Closed through `f68fcb952` as NOT READY:** saved evidence narrows the failure to changed padding in a 32-byte CPython call-argument block during `Fraction` construction, but does not identify the writer; production source remains unchanged. | The incomplete B02 primary remains unscored; no rerun, new seed or successor. |
 | FSD | **Complete through `20258e5ef`:** deterministic binary staging/readback matched all nine paths, including lazy blob fetches in the configured network context; owned technical checkout removed. | The ended770803/780803 allocation and 300-second support cap were not reused or bypassed. |
 
 These repairs may use bounded static, transport and synthetic checks that do not construct the
 scientific workload. Any future result-bearing invocation still needs its own scientific selection,
 frozen card, exact source, fresh destination admission and Monitor adoption. Missing cost telemetry
 and policy-blocked duplicate cleanup remain qualified evidence/retention facts rather than scientific
-stops. The current advancing-direction count is one; Portfolio authoring is cross-direction work
+stops. The current advancing-direction count is zero; Portfolio authoring and Transport are cross-direction work
 and is not counted as another chain.
 
 ## Current zero-addition Portfolio boundary — 2026-09-11

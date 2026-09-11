@@ -1,5 +1,22 @@
 # HMASD experiment tracking
 
+## Open-direction program dispatched; VNFC investigation closed — 2026-09-11
+
+The fixed Portfolio program packet is integrated through `dec302a92` and was dispatched exactly
+once to the configured Transport singleton for request
+`2026-09-11-open-directions-research-program-portfolio-01`. App delivery accepted the message while
+Transport was completing an earlier queued reconciliation; provider Send is not yet inferred.
+The designated Portfolio DM remains the full-response conformance checker.
+
+VNFC's bounded investigation is integrated at `f68fcb952` with status NOT READY. Preserved core and
+static evidence locate changed padding in a 32-byte CPython call-argument block during `Fraction`
+construction but do not identify the writer or prove the candidate integer-ratio substitution is a
+repair. Production source is unchanged. Both proposed dynamic diagnostic turns were rejected by the
+service before any reported command effect; the events are retained as technical tool facts rather
+than scientific exclusions. No B02 retry, model, environment, training or new allocation occurred.
+The current direction-chain count is zero while Portfolio selection and independent technical
+readiness work proceed.
+
 ## FSD source-delivery repair accepted — 2026-09-11
 
 The complete direction-local repair series is accepted and integrated through `20258e5ef`.
