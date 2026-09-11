@@ -1,0 +1,20 @@
+[
+  {
+    "file": "admission.json",
+    "bytes": 511,
+    "sha256": "EC01F7C0361D62FA9BD8AFA1CA835FF3D5B5A0A383FCDF1276DC3C0804D78817",
+    "identical_copy": true
+  },
+  {
+    "file": "COMMAND_RECEIPT.json",
+    "bytes": 1617,
+    "sha256": "89A9371C22FB2DEFE5E950A6FCC9796AE4E6EE9EE8B2EDA504CAD128F39800A7",
+    "identical_copy": true
+  },
+  {
+    "file": "summary.json",
+    "bytes": 16211,
+    "sha256": "7A6D016323BDE7ED476243B16D1BDDADBEC141F0238E32AD536198FA8EB1D14B",
+    "identical_copy": true
+  }
+]

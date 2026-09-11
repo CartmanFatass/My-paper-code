@@ -70,5 +70,15 @@
     "verdict_text": "Recommend and select(a). Owner-delegated decision (unattended, 2026-09-03 instruction): (a), executing the current Portfolio PRO_FINAL allowance.",
     "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_IMPLEMENTATION_CARD_20260911.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T08:15:47+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_five_chain_refill/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_IMPLEMENTATION_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "精确实现与唯一编码器夹具已完成：PASS，完整命令3.8409721秒；两项失败保存问题在运行前修复。完整策略、环境、训练与真实评估均为0；技术验收不构成收益证据，后续B没有分配。"
+    }
+  ]
 }
