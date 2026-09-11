@@ -126,3 +126,38 @@ Remote bundle: `/home/wu/hmasd-inputs/vnfc_b02_76d4afca6.bundle`.
 Both are this DM's source-staging artifacts for collection-time cleanup after evidence
 preservation; the detached execution checkout remains until terminal collection/acceptance.
 Source commit/push command added5.3752014s displayed support wall.
+
+## Launch acceptance and Monitor adoption
+
+The exact command above was committed/pushed at `8dc043f2f`. Immediately before dispatch,
+the named supervisor handle returned `not_found`; the one `agent-task run` then returned
+acceptance into detached tmux. Its command support wall was0.3628601s internally
+(1.5257668s displayed enclosing command, including the pre-dispatch handle read).
+The source, identity and scientific command were not changed or retried.
+
+Destination admission at `2026-09-11T18:26:52.030302Z` reported
+physical/effective available15,636,619,264 bytes against4,294,967,296 bytes and `passed=true`.
+The receipt came from `/proc/meminfo` on this exact node. The one launch-acceptance read
+then reported `running`, supervisor wrapper PID3347770, uptime35s, exit null and active tmux.
+That combined status/receipt read cost0.5249107s displayed command wall. It is a technical
+launch observation, not evidence of final learner exposure or a valid scientific result.
+
+Direct `MONITOR_ADD` to the live singleton endpoint was accepted. Root subsequently
+confirmed actual adoption of this same handle/SHA/node/cwd/output, still running, with the
+same passed admission; adoption observation command wall1.0s. The Monitor's continuing
+status/log command costs belong to this object's support accounting. The DM has stopped
+routine polling and retains collection, technical acceptance, scientific intake and cleanup.
+Root routes the terminal fact to this original DM; no second observer or new invocation exists.
+
+Pending collection: preserve full native summary, curves, all episode rows and six
+checkpoints, plus outer time, admission and supervisor terminal log/status. Read primary
+and counter targets against the card; report every arm/zone/native metric and actual
+nonzero counts/movement, then write the valid-result intake/Chinese brief if supported.
+Inventory the exact detached checkout, source bundles and creator-owned scratch for
+cleanup only after unique evidence preservation and Root retention/integration reconciliation.
+The exact policy rejection in the scratch section remains unresolved; no deletion bypass.
+No extra arm, retry, evaluation or successor is authorized by this handover.
+
+Command/staging documentary commit/push added4.6467948s displayed support wall. Final
+support accounting will distinguish internal clocks, displayed enclosing alternatives,
+approximations and genuinely unmeasured components without double-counting.
