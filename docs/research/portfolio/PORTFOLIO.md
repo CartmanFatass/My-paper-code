@@ -48,8 +48,11 @@ implementation and run are one direction chain.
 The shared Monitor subsequently reported RCLE B06 terminal exit 0 after 336 seconds with a complete
 reference, and VNFC B02 terminal exit 139/core dump after 78 seconds. Both terminals are routed to
 their original DMs for separate collection and intake; neither terminal alone selects a retry or
-successor. Together with FOLR response intake, these remain three advancing direction chains while
-the Portfolio request generates separately.
+successor. FOLR's complete response then passed conformance and opened the narrow learned-retention
+question as an in-family extension while preserving RETAIN, the fixed-half pause and zero current
+implementation/numerical allowance. Its decision is integrated through `66eb1f550` and reaches a
+clean boundary without a selected successor. RCLE and VNFC intake remain the two advancing direction
+chains while the Portfolio request generates separately.
 
 ## Post-option-A refill decision — 2026-09-11
 

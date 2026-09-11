@@ -975,6 +975,9 @@ exit 0 at 2026-09-12T02:12:38+08:00 after 336 seconds and reports a complete ref
 failed with exit 139 at 2026-09-12T02:28:09+08:00 after 78 seconds when the monitored command dumped
 core. Root routed each terminal fact to its original DM for separate artifact collection, technical
 acceptance, scientific intake and cleanup. No retry or successor follows from either terminal fact.
-The three counted direction chains are now RCLE collection/intake, VNFC failure collection/intake and
-FOLR response conformance/intake; the current-vacancies Portfolio generation remains cross-direction
-work and is not counted as another direction.
+FOLR's complete response subsequently passed conformance. PRO_FINAL opens only the specified narrow
+learned-retention question as an in-family extension, retains RETAIN as sole comparator, preserves the
+fixed-half pause, and supplies zero present implementation or numerical allowance. The response and
+intake are integrated through `66eb1f550`; no successor was selected. The counted set is therefore
+two directions, RCLE collection/intake and VNFC failure collection/intake. The current-vacancies
+Portfolio generation remains cross-direction work and is not counted as another direction.
