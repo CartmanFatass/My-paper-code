@@ -1,6 +1,6 @@
 {
   "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
-  "state": "complete_pair_intaken_RETAIN_ABOVE_MEI_verified_closeout_pending",
+  "state": "complete_pair_intaken_scoped_closeout_verified_pending_Root_integration_acceptance",
   "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
   "authority_commit": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
   "starting_checkout_commit": "85a443f413e07773a5d89904dd21476c5b4b8550",
@@ -442,7 +442,7 @@
     "scope": "all additional invoked runtime work including Monitor, once; excludes idle waiting and double-counted native chains",
     "initial_preparation_reads_seconds": 1.5200933,
     "binding_and_plan_seconds": 0.05237610000767745,
-    "dm_seconds": 33.3725616,
+    "dm_seconds": 46.788574999999994,
     "monitor_seconds": null,
     "total_seconds": null,
     "cap_seconds": 300,
@@ -579,16 +579,39 @@
       {
         "activity": "paired E0/intake/DIRECTION and Chinese brief update",
         "seconds": 0.049
+      },
+      {
+        "activity": "paired result record checks and explicit-path commit/push",
+        "seconds": 4.9556719
+      },
+      {
+        "activity": "remote complete archives and original-member verification",
+        "seconds": 2.9806428
+      },
+      {
+        "activity": "archive transfer, local byte verification and source-ref preservation",
+        "seconds": 3.937202
+      },
+      {
+        "activity": "unchanged-original recheck, exact remote cleanup and absence verification",
+        "seconds": 0.9859505
+      },
+      {
+        "activity": "final primary owner review read",
+        "seconds": 0.3652613
+      },
+      {
+        "activity": "final archive/absence chronology and retained-artifact checks",
+        "seconds": 0.1912849
       }
     ],
     "accounting_method": "Enclosing invoked command/tool wall including startup and nested remote work once; narrower helper durations not separately summed. Publication commands included conservatively.",
-    "known_subtotal_seconds": 54.279561599999994,
-    "subtotal_boundary": "through paired technical/scientific analysis and result records; this publication and preservation/closeout pending",
+    "known_subtotal_seconds": 67.69557499999999,
+    "subtotal_boundary": "through verified closeout and final owner/artifact checks; this final publication command is reported separately in the final handoff",
     "unmeasured_pending_work": [
       "one prior DM handover bookkeeping command with no returned elapsed receipt",
-      "RETAIN Monitor yielded queries and messaging without stopwatch output",
-      "HALF_EVENT Monitor post-loop terminal query and messaging without stopwatch output",
-      "current final analysis/publication and scoped closeout still to be charged at natural boundaries"
+      "RETAIN Monitor yielded-query runtimes and messaging without stopwatch output",
+      "HALF_EVENT Monitor post-loop terminal query and messaging without stopwatch output"
     ],
     "monitor_measured_seconds": 20.907,
     "monitor_receipts": {
@@ -618,7 +641,8 @@
         "attribution": "reported for this named handle; no extra shared-batch adjustment declared"
       }
     },
-    "complete_cap_compliance": "not certified because support durations remain unmeasured"
+    "complete_cap_compliance": "not certified because support durations remain unmeasured",
+    "final_publication_runtime": "reported in final DM handoff after this command completes; no complete cost certification"
   },
   "monitor": {
     "config_source": "C:/Projects/HMASD/.codex/hmasd-monitor.toml",
@@ -1200,14 +1224,14 @@
         ],
         "chosen": 0,
         "provenance": "Owner-delegated decision (unattended,2026-09-03 instruction): (a)",
-        "state": "preservation_pending_no_deletion_yet"
+        "state": "executed_after_verified_preservation"
       }
     ],
     "successor": "none authorized by this completed allocation",
     "direction_or_portfolio_disposition": "none locally selected"
   },
   "closeout_inventory": {
-    "state": "planned_not_removed",
+    "state": "verified_complete",
     "remote_roots": [
       "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd",
       "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
@@ -1221,5 +1245,35 @@
       "exact source c6 recovery ref"
     ],
     "retained_local_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-vap-folr"
+  },
+  "closeout": {
+    "archive_verification_receipt": "evidence/2026-09-10-folr-public-lifecycle-half-b02-archive-verification.json",
+    "remote_closeout_receipt": "evidence/2026-09-10-folr-public-lifecycle-half-b02-remote-closeout.json",
+    "all_members_verified_before_removal": true,
+    "verified_members": 2708,
+    "local_archive_bytes": 17112603,
+    "removed_exact_roots": [
+      "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd",
+      "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
+      "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910"
+    ],
+    "disk_absence": {
+      "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd": true,
+      "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910": true,
+      "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910": true
+    },
+    "worktree_registration_absent": true,
+    "verified_removed_at_utc": "2026-09-11T00:36:44.836110+00:00",
+    "local_source_ref": "refs/archive/folr-public-lifecycle-half-b02-20260910",
+    "remote_source_ref": "refs/archive/folr-public-lifecycle-half-b02-20260910",
+    "source_ref_commit": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+    "local_preservation": [
+      "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/folr-public-lifecycle-half-b02-20260910/worktree.tar.gz",
+      "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/folr-public-lifecycle-half-b02-20260910/supervisors.tar.gz"
+    ],
+    "local_collected_raw_evidence": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/collected",
+    "shared_local_authoring_checkout_retained": "C:/Projects/HMASD-worktrees/codex-vap-folr",
+    "other_roots_targeted": false,
+    "Root_acceptance": "pending integration and reclamation acceptance"
   }
 }
