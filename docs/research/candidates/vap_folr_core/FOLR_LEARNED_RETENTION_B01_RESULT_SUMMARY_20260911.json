@@ -1,0 +1,229 @@
+{
+  "object": "FOLR-LEARNED-RETENTION-B01",
+  "state": "technical_checks_passed_exact_commands_prepared_not_launched",
+  "authority_sha": "6c32ade3216c374ecf2f5179b15d559729cd45c9",
+  "source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+  "training_seed": 7809,
+  "evaluation_seed": 107809,
+  "arms": [
+    "RETAIN",
+    "LEARNED_EVENT"
+  ],
+  "primary": null,
+  "commands": [
+    {
+      "arm": "RETAIN",
+      "handle": "folr-learned-retention-b01-retain-20260911",
+      "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30",
+      "output": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_memory.json",
+      "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_whole_time.txt",
+      "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7809 --evaluation-seed 107809 --launch-sha 8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain'",
+      "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b01-retain-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7809 --evaluation-seed 107809 --launch-sha 8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain'\"'\"''",
+      "status": "not_submitted"
+    },
+    {
+      "arm": "LEARNED_EVENT",
+      "handle": "folr-learned-retention-b01-learned-event-20260911",
+      "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30",
+      "output": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_memory.json",
+      "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_whole_time.txt",
+      "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7809 --evaluation-seed 107809 --launch-sha 8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event'",
+      "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b01-learned-event-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7809 --evaluation-seed 107809 --launch-sha 8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event'\"'\"''",
+      "status": "not_submitted"
+    }
+  ],
+  "execution_plan": "two preselected independent detached arms, submit consecutively with fresh per-arm admission; each preserves its whole1800s cap, no retry or replacement. No result-dependent arm choice.",
+  "caps_seconds": {
+    "per_arm": 1800,
+    "native_sum": 3600,
+    "support": 300,
+    "complete": 3900
+  },
+  "prospective_exposure": {
+    "real_learners": 2,
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "final_episodes": 256,
+    "final_ticks": 5120,
+    "total_team_ticks": 205120,
+    "replay_GRU_rows": 66783360,
+    "acting_rows": 1076880,
+    "learned_gate_forward_rows": 33930120
+  },
+  "independent_review": {
+    "agent": "learned_retention_review",
+    "model": "Astra/high",
+    "read_only": true,
+    "material_findings": 0,
+    "review_command_seconds": 2.2064189,
+    "consumer_question": "complete finite arrays must be checked before learned_primary",
+    "consumer_plan_accepted": true,
+    "runtime_acceptance_asserted": false
+  },
+  "focused_checks": {
+    "source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+    "selected_cases": 10,
+    "initial_passed": 8,
+    "initial_setup_errors": 2,
+    "error": "pytest tmp_path could not mkdir absent parent under fresh remote worktree; no source defect",
+    "correction": "create only test scratch parent; rerun only two cases that never entered their bodies",
+    "remaining_passed": 2,
+    "test_process_seconds": [
+      2.323280825978145,
+      1.9172421910334378
+    ],
+    "known_test_directory_cumulative_seconds": 36.731686817011585,
+    "both_scratch_paths_absent": true,
+    "native_scientific_exposure": 0,
+    "synthetic_optimizer_steps": 2,
+    "initial_output": "..E..E....                                                               [100%]\n==================================== ERRORS ====================================\n___ ERROR at setup of test_runner_seed_routing_with_standins[LEARNED_EVENT] ____\n\nself = PosixPath('/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911')\nmode = 448, parents = False, exist_ok = False\n\n    def mkdir(self, mode=0o777, parents=False, exist_ok=False):\n        \"\"\"\n        Create a new directory at this given path.\n        \"\"\"\n        try:\n>           self._accessor.mkdir(self, mode)\nE           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911'\n\n../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError\n_ ERROR at setup of test_learned_optimizer_independent_target_replay_copy_and_checkpoint _\n\nself = PosixPath('/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911')\nmode = 448, parents = False, exist_ok = False\n\n    def mkdir(self, mode=0o777, parents=False, exist_ok=False):\n        \"\"\"\n        Create a new directory at this given path.\n        \"\"\"\n        try:\n>           self._accessor.mkdir(self, mode)\nE           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911'\n\n../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError\n=========================== short test summary info ============================\nERROR tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_runner_seed_routing_with_standins[LEARNED_EVENT]\nERROR tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_learned_optimizer_independent_target_replay_copy_and_checkpoint\n8 passed, 2 errors in 1.68s\n\n{\"command\": [\"/home/wu/.venvs/hmasd/bin/python\", \"-B\", \"-m\", \"pytest\", \"-q\", \"-p\", \"no:cacheprovider\", \"--basetemp\", \"/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_initial_birth_previous_action_and_terminal_counts\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_actor_input_reset_timing_and_replay_parity[LEARNED_EVENT]\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_runner_seed_routing_with_standins[LEARNED_EVENT]\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_learned_constructor_common_rng_tensors_and_no_event_parity\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_learned_lifetime_gate_input_state_gradient_and_before_gru\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_learned_optimizer_independent_target_replay_copy_and_checkpoint\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_learned_primary_inclusive_thresholds\"], \"pytest_returncode\": 1, \"whole_test_seconds\": 2.323280825978145}\n{\"scratch_absent\": true, \"scratch\": \"/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911\"}\n",
+    "remaining_output": "..                                                                       [100%]\n2 passed in 1.52s\n\n{\"command\": [\"/home/wu/.venvs/hmasd/bin/python\", \"-B\", \"-m\", \"pytest\", \"-q\", \"-p\", \"no:cacheprovider\", \"--basetemp\", \"/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911_remaining\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_runner_seed_routing_with_standins[LEARNED_EVENT]\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_learned_optimizer_independent_target_replay_copy_and_checkpoint\"], \"pytest_returncode\": 0, \"whole_test_seconds\": 1.9172421910334378}\n{\"scratch_absent\": true, \"scratch\": \"/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911_remaining\"}\n"
+  },
+  "staging": {
+    "checkout_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+    "tracked_status": "clean",
+    "handles_before_submission": "both not_found",
+    "scientific_output_and_memory_paths_before_submission": "absent",
+    "command_return_note": "fetch/worktree creation succeeded; final agent-task --help returns1 after printing usage, causing local assertion. Do not repeat accepted staging. zsh prompt initialization diagnostics did not reject fetch/add.",
+    "literal_command_syntax_check": "SSH connect timeout before invocation; not yet checked"
+  },
+  "support": {
+    "measured_invoked_commands": [
+      {
+        "label": "assignment initial reads 0",
+        "seconds": 0.4485755
+      },
+      {
+        "label": "assignment initial reads 1",
+        "seconds": 0.6529152
+      },
+      {
+        "label": "assignment focused reads 0",
+        "seconds": 0.3449747
+      },
+      {
+        "label": "assignment focused reads 1",
+        "seconds": 2.117648
+      },
+      {
+        "label": "allocation/implementation reading 0",
+        "seconds": 0.2423704
+      },
+      {
+        "label": "allocation/implementation reading 1",
+        "seconds": 0.2693617
+      },
+      {
+        "label": "bounded execution/test contract read 0",
+        "seconds": 0.2262349
+      },
+      {
+        "label": "bounded execution/test contract read 1",
+        "seconds": 0.222928
+      },
+      {
+        "label": "resume state/control config 0",
+        "seconds": 0.4791883
+      },
+      {
+        "label": "resume state/control config 1",
+        "seconds": 0.246383
+      },
+      {
+        "label": "specific test and review contract 0",
+        "seconds": 0.2270148
+      },
+      {
+        "label": "specific test and review contract 1",
+        "seconds": 0.2639427
+      },
+      {
+        "label": "owned changed path and review selection 0",
+        "seconds": 0.2170894
+      },
+      {
+        "label": "owned changed path and review selection 1",
+        "seconds": 0.2587744
+      },
+      {
+        "label": "L0 and dependent consumer grounding 0",
+        "seconds": 0.2117196
+      },
+      {
+        "label": "L0 and dependent consumer grounding 1",
+        "seconds": 0.1931081
+      },
+      {
+        "label": "current source and owner boundary 0",
+        "seconds": 0.6253051
+      },
+      {
+        "label": "current source and owner boundary 1",
+        "seconds": 0.2590729
+      },
+      {
+        "label": "prospective card and authority preparation",
+        "seconds": 0.3015646
+      },
+      {
+        "label": "focused changed-risk fixture edit",
+        "seconds": 0.017
+      },
+      {
+        "label": "owner item invocation syntax and ledger currentness",
+        "seconds": 0.4267207
+      },
+      {
+        "label": "card intake owner item and ledger publication preparation",
+        "seconds": 0.6335984
+      },
+      {
+        "label": "runner instructions and source publication readback",
+        "seconds": 0.3822439
+      },
+      {
+        "label": "independent reviewer six read/search/arithmetic commands",
+        "seconds": 2.2064189
+      },
+      {
+        "label": "source/card/review commit and immediate push",
+        "seconds": 5.4310006
+      },
+      {
+        "label": "remote published source staging and supervisor syntax",
+        "seconds": 6.0889589
+      },
+      {
+        "label": "remote focused tests including transport and scratch cleanup",
+        "seconds": 3.0706062
+      },
+      {
+        "label": "two failed fixture-setup checks after scratch-parent correction",
+        "seconds": 2.6821581
+      },
+      {
+        "label": "supervisor command ownership and prospective namespace absence",
+        "seconds": 0.6904653
+      }
+    ],
+    "native_clocks_not_in_support": true,
+    "full_budget_conformance": "pending; unknown/unitemized terms stay unknown",
+    "note": "outer command durations include their nested operations once; test subclocks and reviewer detail are not double charged. Tool editing/authoring outside measured commands is not claimed zero."
+  },
+  "monitor": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "source": "live primary .codex/hmasd-monitor.toml and Root correction",
+    "dispatch": "not_sent",
+    "adoption": "not_yet",
+    "routine_DM_polling": false
+  },
+  "cleanup": {
+    "local_shared_worktree": "retained for live DM/execution/intake",
+    "remote_worktree": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30",
+    "owner": "DM through collection and authorized cleanup; Root accepts preservation/reclamation",
+    "test_scratch": "both invocations absent; control receipts retained"
+  }
+}
