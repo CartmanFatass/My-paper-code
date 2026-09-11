@@ -1,0 +1,43 @@
+{
+  "question": "已完成上一轮后，下一笔投入应同时做 FSD 独立复现和 MGTAP 首次真实配对，还是只做其中之一或暂不投入？目前均未分配。",
+  "changes_if_approved": [
+    {
+      "target": "下一轮独立推进任务",
+      "from": "FSD首次新包收益已完成；MGTAP仅技术接受；没有后续实验预算",
+      "to": "建议两条真实B：FSD同包独立配对，MGTAP最小原生入口加一次COND/DENSE配对；不填充其余空位"
+    }
+  ],
+  "if_refused": "保留仅FSD、仅MGTAP或零投入选项；不自动延长RCLE、重发UCOPE或重启其他暂停家族。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+      "quote": "The next useful discriminator would be one separately allocated fresh matched I1280/D0 training pair with the same final endpoint, preserving every sign.",
+      "why": "首次新包收益值得用新的训练随机性检验，仍保留所有旧损失。"
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_IMPLEMENTATION_INTAKE_20260911.md",
+      "quote": "The next *empirical* discriminator remains the already eligible, separately allocated one-pair native COND/DENSE final-return comparison described by the Convergence decision.",
+      "why": "缺失的编码运算已通过一次有限技术测试；下一步可直接包含必要入口工程和真实学习。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/SCIENCE_BRIEF.md",
+      "quote": "Eight endpoint losses, higher altitude penalty, lower first-two training means, almost2× D0 wall and the older I−D0 losses",
+      "why": "FSD一个收益不能说明稳定优势；MGTAP旧REL比较为负、原生入口与成本仍未知。"
+    }
+  ],
+  "uncertainty": [
+    "新FSD同包效果可能转号；没有匹配的调优基线余量。",
+    "MGTAP测试只验证编码器和读出，不证明完整学习会成功或能在预算内结束。",
+    "UCOPE账户浏览器阻塞保留原请求；当前Portfolio节点的浏览器访问未由作者测试。"
+  ],
+  "cost": {
+    "compute": "建议FSD完整3000秒（900/1800/300），MGTAP完整1200秒（450/450/300）。合计4200秒为分离上限，不是预测或可互借余额。",
+    "owner_time": "不等所有者逐项批准；完整合规Portfolio Pro决定回传后由Root应用。",
+    "reversibility": "costly",
+    "waits_on_this": "仅这次新的投入；已有独立授权工作继续。"
+  },
+  "verdict_text": "DM recommendation only: A, two independent real B chains—one fresh same-package FSD I1280/D0 repetition and one first native MGTAP COND/DENSE pair.",
+  "source": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/SCIENCE_BRIEF.md"
+}
