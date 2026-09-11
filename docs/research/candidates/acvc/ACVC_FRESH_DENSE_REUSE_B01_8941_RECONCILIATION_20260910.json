@@ -1,0 +1,29 @@
+{
+  "object": "ACVC_FRESH_DENSE_REUSE_B01",
+  "master": 8941,
+  "source_sha": "cafef130c9d4d89febda8fd788ad9458b6985aca",
+  "operation": "one read-only reconciliation after source-preparation cancellation",
+  "started_at": "2026-09-11T05:15:05.372065+00:00",
+  "timeout_s": 12,
+  "argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=5",
+    "-o",
+    "ServerAliveInterval=3",
+    "-o",
+    "ServerAliveCountMax=1",
+    "hmasd-wsl-node",
+    "printf 'RECONCILIATION_TIME='; date -u +%FT%TZ; if git -C /home/wu/projects/HMASD cat-file -e cafef130c9d4d89febda8fd788ad9458b6985aca^{commit} 2>/dev/null; then echo source_commit_present; else echo source_commit_absent; fi; if test -d /home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8941-cafef130c; then echo exact_directory_present; git -C /home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8941-cafef130c rev-parse HEAD; git -C /home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8941-cafef130c status --porcelain; else echo exact_directory_absent; fi; git -C /home/wu/projects/HMASD worktree list --porcelain"
+  ],
+  "new_scientific_invocations": 0,
+  "new_admissions": 0,
+  "exit_code": null,
+  "stdout": "RECONCILIATION_TIME=2026-09-11T05:15:05Z\n",
+  "stderr": "",
+  "status": "timeout; remote effect still unknown",
+  "client_elapsed_s": 12.03245440000319,
+  "finished_at": "2026-09-11T05:15:17.404023+00:00"
+}

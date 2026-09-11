@@ -1,0 +1,19 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "B04_primary_unmet_demand",
+      "arm": "nearest_prior_final",
+      "n": 1,
+      "mean": 0.33699544270833337,
+      "sample_sd": null,
+      "min": 0.33699544270833337,
+      "max": 0.33699544270833337,
+      "runs": {
+        "24": 0.33699544270833337
+      }
+    }
+  ],
+  "paired_differences": []
+}

@@ -1,0 +1,257 @@
+{
+  "checked_at_utc": "2026-09-11T05:56:28.686027+00:00",
+  "request_id": "folr-public-lifecycle-half-family-convergence-20260911",
+  "response_commit": "e1e9a600bd4f715328b514fe746bb367775ff3a7",
+  "response_path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/RESPONSE.md",
+  "response_full_bytes": 29325,
+  "response_full_lines": 116,
+  "response_full_sha256": "138b97ed8501db446068c236ad137d8b61661155fe06a962b8e7fd2c7e9b7563",
+  "GitHub_contents_equal_Git_blob": true,
+  "response_commit_changed_paths": [
+    "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/RESPONSE.md"
+  ],
+  "response_descends_from_handoff": "0f74ee54f227883f7c3c19b300dab026b90656d9",
+  "checkout_fast_forwarded": true,
+  "issue_comment_id": 5630096526,
+  "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5630096526",
+  "comment_task_and_response_match": true,
+  "transport_response_hash_scope": "384-byte short assistant chat link receipt, not the29325-byte scientific response",
+  "transport_chat_sha256": "d893e56d1106183a9f658ac63a7b707f283c1af0e7b93feedc68fa2160661e02",
+  "prompt_bytes_match_bound_handoff": true,
+  "prompt_sha256": "da1bf2f2935a429c54fd853ce12c963a1cb6aad8aa83e02fcf23b989f84aeb82",
+  "transport_state": "ARCHIVED",
+  "transport_receipt_status": "SENT",
+  "transport_identity_limit": "Visible paired-node descriptions; DOM/server message IDs unavailable. Natural completion and one Send are Transport observations, not independently observed by DM.",
+  "artifacts": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/PROVIDER_PROMPT.md",
+      "bytes": 1921,
+      "sha256": "da1bf2f2935a429c54fd853ce12c963a1cb6aad8aa83e02fcf23b989f84aeb82"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/CHAT_RECEIPT.md",
+      "bytes": 384,
+      "sha256": "d893e56d1106183a9f658ac63a7b707f283c1af0e7b93feedc68fa2160661e02"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/PACKET_MANIFEST.json",
+      "bytes": 1852,
+      "sha256": "1837bb379e56141f19c1f49d67feea9bebda828db0f38e96f8093f096ff5c066"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/TRANSPORT_FACTS.json",
+      "bytes": 2983,
+      "sha256": "dc35db1365bef992b3f2e59b92ee17a09c41d32753fa177f0bdf5a6e8de6f0f2"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/ISSUE_COMMENT.json",
+      "bytes": 4180,
+      "sha256": "79a3adc2296d37e88dddcbfd50079995812ff8683d7381fd3c7127cd459c3df6"
+    }
+  ],
+  "exact_bytes_archive": {
+    "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/EXACT_BYTES.zip",
+    "members": 6,
+    "purpose": "Preserve captured original bytes across Git text newline conversion; scoped RESPONSE.md remains Pro delivery."
+  },
+  "reference_count": 23,
+  "response_reference_count_including_TASK": 24,
+  "all_reference_mappings_match": true,
+  "references": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/SCIENCE_BRIEF.md",
+      "commit_sha": "83eea535550222f2b3c46195176cee76a275d980",
+      "blob": "af06ed462c746c3e0532f4621ad5e1db653d5096",
+      "sha256": "be1bf23f21cdb3136e8da28dc17983d18dc5696eae2e95e6d28f19237cfdeffc"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/EXPOSURE_AND_COST.json",
+      "commit_sha": "83eea535550222f2b3c46195176cee76a275d980",
+      "blob": "bc8de661eff912fa0ea615313acdfce5737185a1",
+      "sha256": "b7fb4845153f513209f5851fe54f232a781668cfd716245db01d82ba3c12b549"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_QUESTION_INTAKE_20260911.md",
+      "commit_sha": "83eea535550222f2b3c46195176cee76a275d980",
+      "blob": "07e8942b9a6a4dd8a25c1b37054d8e7a9e73e43e",
+      "sha256": "7c4a1fa1abfb480b97ddb79a855482a9850d85c0afe9acdfcb05d87e91b34ab8"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B01_SCIENCE_CARD_20260910.md",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "blob": "d88b4cff98de627f1fcd2781719926c3e9eab0d1",
+      "sha256": "94f0e75149eae4a9da80ed7ff694d4819a07a6a94c24b496522a87d62790fe83"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_SCIENCE_CARD_20260910.md",
+      "commit_sha": "ea73b1c3dabafe6482db03df8a9e51c1ad672260",
+      "blob": "7b33b4398cc3ad79ea2a1a17fd9e5dd82660fde8",
+      "sha256": "5d55b73d4f43bf06e7591c3a689d715427041812c81e99d53ba2f2c1f492f003"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_SUMMARY_20260910.json",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "blob": "f258feed1030747300f93d4eeedf8da31632e4d9",
+      "sha256": "2566394e3604f718fe9cb0141684fd68c9f6f3a5500eb2b4a676defedd5303d5"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_SUMMARY_20260910.json",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "blob": "f58bb24065ec009d4d87562e16c9106bd7f84766",
+      "sha256": "62683d5f5d7c7ac24206a473d1dc177b630dddf4331d519da23c1d7027b70ce4"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B01_INTAKE_20260910.md",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "blob": "248be320d393569831ef5de5ee8d535d5f63ca1b",
+      "sha256": "f304d8b784e855da74436799e686dc4eb8abda128590de3cb31e5dcb36f658b6"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_INTAKE_20260910.md",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "blob": "6307ab2f6a2605df444215ee1f80bdf4d39b3c95",
+      "sha256": "5ccba41e664deb09b6b622c70ae2da62f19c1580a43735722ff445ebcd34a81e"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_EVIDENCE_20260910.md",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "blob": "d091302092ba6875325b466df530b5119ebdc613",
+      "sha256": "f51eb905a2ea384cd5ecbc20c2cf0c9ab6b783607559d12e592b83dff2a11849"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "blob": "3922ca1d0fffd0c96f94824d4a43466385420d7a",
+      "sha256": "43d763e08978adfbac9ae55e658cf22763d2fcf2d55bf6e2fce60f70de3efb47"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260910_timing_family_convergence/archive/RESPONSE.md",
+      "commit_sha": "f64b461cd918ecefc7058a6e1e83aaa1b9f96ce6",
+      "blob": "aa984629f61d8e68e2036b184a007795fcd2f441",
+      "sha256": "51fc7764686142097747d4c751c1e8d1c49aa3c63f92b9776f9d1cc46945d154"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_FAMILY_CONVERGENCE_INTAKE_20260910.md",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "blob": "2fe189ee43ac3495fbc226256e9e2a926c383249",
+      "sha256": "30da2172e09894fe8c210009fe92a81c1d378cfc924e7ff84eb4e33c5d497d8a"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260910_timing_family_convergence/EXPOSURE_AND_COST.json",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "blob": "d44845ba6ffa2f30493a36dac3732c6798b275b0",
+      "sha256": "691639d0d2dbda4f241f5e9db229f34ad3da9ccea552ce6abaada3a3d484fd5a"
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-10-four-slot-rolling-refill.md",
+      "commit_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "blob": "c8bd635b26c095c89cd11b53d1774af7b324520d",
+      "sha256": "23299eabf4ab4d4fb9aa750fb6891988f12dca89eeab6612f4f5f6795892dcf5"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/EXECUTION_MAPPING.md",
+      "commit_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "blob": "d32915772536014580a26ec5e2296a23780cc473",
+      "sha256": "2feeadd7ea4564707307fb0bbb1b62be174512593ea69b7166d27f4af1c50cc8"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "commit_sha": "1ea43d8fbc846807d71d4d894136f357f65551b6",
+      "blob": "d76b4a085d5fd26558bf65796f130fda01e2a248",
+      "sha256": "bb7763097d3aceabdbe85d6f06193e3cc79b4be2cc9140c64c616340d30d388f"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "blob": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1"
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "blob": "4a901541441e3a4ecfd71f1709fa77970782ccd6",
+      "sha256": "62b42a39f75f84f0d243fa721c3412a0a89e885172605ff3f580eb62be4dec83"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "blob": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/ISSUE_SNAPSHOT.json",
+      "commit_sha": "83eea535550222f2b3c46195176cee76a275d980",
+      "blob": "a0ca6db8db837db6dec385e95f45abb8d0b6fc0f",
+      "sha256": "8ad1f10ceda6e6f30cf9a48bf6b91a736ce7da6714a009cdb1dc4a7e6682146c"
+    }
+  ],
+  "current_methods": [
+    {
+      "path": "AGENTS.md",
+      "bound_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "current_main_sha": "6b2e4ffc00378dad3fede1be9a78133cd770e786",
+      "blob": "4a901541441e3a4ecfd71f1709fa77970782ccd6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "bound_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "current_main_sha": "6b2e4ffc00378dad3fede1be9a78133cd770e786",
+      "blob": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "bound_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "current_main_sha": "6b2e4ffc00378dad3fede1be9a78133cd770e786",
+      "blob": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "unchanged": true
+    },
+    {
+      "path": ".agents/skills/hmasd-pro-research-prompt-author/SKILL.md",
+      "bound_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "current_main_sha": "6b2e4ffc00378dad3fede1be9a78133cd770e786",
+      "blob": "8505ee89f3b669d767e635a588b273d95199029f",
+      "unchanged": true
+    },
+    {
+      "path": ".agents/skills/hmasd-owner-item/SKILL.md",
+      "bound_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "current_main_sha": "6b2e4ffc00378dad3fede1be9a78133cd770e786",
+      "blob": "4d9c855e9b1e7d3c0ffc93c879be78972ced3383",
+      "unchanged": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "bound_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "current_main_sha": "6b2e4ffc00378dad3fede1be9a78133cd770e786",
+      "blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "unchanged": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "bound_sha": "6b07553ec2db9e347d93b67d64484566d2e70db5",
+      "current_main_sha": "6b2e4ffc00378dad3fede1be9a78133cd770e786",
+      "blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "unchanged": true
+    }
+  ],
+  "source_field_verification": "Reused accepted B result/card fields, counts, original branches, treatment and cost scopes; no raw-array recomputation or experiment reproduction.",
+  "local_display_issue": "Initial default stdout codepage read failed; completed full UTF-8 reread of all116 lines. No source/output file changed.",
+  "owner_reviews": [],
+  "conformance": "PASS: narrow reversible exact-recipe pause, no successor, zero numerical work, no Portfolio/lifecycle/recast/C/UAV change",
+  "new_scientific_invocations": 0,
+  "new_numerical_evidence": 0
+}

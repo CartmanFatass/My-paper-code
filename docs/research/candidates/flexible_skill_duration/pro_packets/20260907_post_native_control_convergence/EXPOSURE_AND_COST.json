@@ -1,0 +1,100 @@
+{
+  "calculation": "Python arithmetic over existing P21 dm_analysis.json and fixed illustrative factors only",
+  "preparation_source_sha": "0bf46000e8422a957d14b1a41eb61a3871af93b6",
+  "new_consultation_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "checkpoint_loads": 0,
+    "training_starts": 0,
+    "training_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "retained_P21_exposure": {
+    "completed_episodes": 96,
+    "scoring_steps": 38400,
+    "agent_observations": 230400,
+    "agent_step_batches": 800,
+    "greedy_act_batches": 400,
+    "model_constructions": 2,
+    "checkpoint_loads": 2,
+    "training_starts": 0,
+    "training_transitions": 0,
+    "optimizer_steps": 0
+  },
+  "retained_P21_cost": {
+    "outer_seconds_G_C_H": [
+      0.27,
+      20.44,
+      18.19
+    ],
+    "sum_outer_seconds": 38.9,
+    "sum_runner_seconds": 36.79117878898978
+  },
+  "retained_checkpoint_training": {
+    "training_transitions": 128000,
+    "updates_coordinator_actor_critic_team_individual": [
+      4350,
+      9000,
+      9000,
+      300,
+      1200
+    ],
+    "model_selection": "outcome-informed E3 large_d2_seed2 selection, not new training independence"
+  },
+  "illustrative_real_B_scales": [
+    {
+      "status": "scale illustration, not a selected card or allocation",
+      "learned_arms": 2,
+      "fresh_training_seeds": 1,
+      "rollouts_per_arm": 1,
+      "training_lanes": 16,
+      "horizon": 400,
+      "final_evaluation_episodes_per_learned_arm": 32,
+      "public_reference_episodes": 32,
+      "training_transitions_per_arm": 6400,
+      "training_transitions_total": 12800,
+      "learned_evaluation_steps": 25600,
+      "G_evaluation_steps": 12800,
+      "total_environment_steps": 51200,
+      "total_agent_step_observations": 307200,
+      "minimum_real_training_starts": 2,
+      "optimizer_steps": "must be nonzero in every declared real learner; exact counts depend on selected training route",
+      "old_mean_rollout_and_eval_law_anchor_seconds_per_learned_arm": 114.71559347096193
+    },
+    {
+      "status": "scale illustration, not a selected card or allocation",
+      "learned_arms": 2,
+      "fresh_training_seeds": 1,
+      "rollouts_per_arm": 5,
+      "training_lanes": 16,
+      "horizon": 400,
+      "final_evaluation_episodes_per_learned_arm": 32,
+      "public_reference_episodes": 32,
+      "training_transitions_per_arm": 32000,
+      "training_transitions_total": 64000,
+      "learned_evaluation_steps": 25600,
+      "G_evaluation_steps": 12800,
+      "total_environment_steps": 102400,
+      "total_agent_step_observations": 614400,
+      "minimum_real_training_starts": 2,
+      "optimizer_steps": "must be nonzero in every declared real learner; exact counts depend on selected training route",
+      "old_mean_rollout_and_eval_law_anchor_seconds_per_learned_arm": 505.86596735480975
+    }
+  ],
+  "existing_runner_cost_law": {
+    "source": "scripts/run_flexible_skill_duration_e3.py cost_law",
+    "per_arm_seconds": "1.15 * [L * (64.6 + 0.769 * M) + 0.46 * E]",
+    "M": "coordinator work variable in the legacy law; proposed D2 effective durations/work are not fixed by k_max",
+    "E": 32,
+    "known_current_projection_limit": "M for a new trained C/H route is not measured or fixed here. Historical mean-rollout anchor is not this law evaluated at a verified new M and is not admission."
+  },
+  "historical_same_node_cost_anchor": {
+    "selected_E3_mean_rollout_seconds": 85.03268997474952,
+    "selected_E3_complete_runner_seconds": 2646.4799736300047,
+    "selected_E3_rollouts": 20,
+    "selected_E3_evaluation_episodes": 3584
+  },
+  "future_complete_per_arm_cap": "not selected by preparation; Convergence is asked for finite work and stop, later card/allocation required",
+  "extra_validation": "no extra scientific matrix, timing probe, checkpoint census or mandatory diagnostic; proportional engineering checks only in a later assignment"
+}

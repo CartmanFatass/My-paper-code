@@ -1,0 +1,93 @@
+{
+  "consultation": "P45 single scoped direction question; no result-bearing execution",
+  "input_record": "docs/research/candidates/flexible_skill_duration/FSD_POST_B02_QUESTION_P44_EXPOSURE_AND_COST_20260908.json",
+  "new_scientific_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "checkpoint_loads": 0,
+    "training_starts": 0,
+    "training_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "existing_complete_panels": [
+    {
+      "object": "B01",
+      "training_master": 770203,
+      "full_H_minus_C": 0.49738281249999894,
+      "full_G_minus_H": 0.021184895833334313,
+      "complete_wall_seconds": {
+        "G": 2.47,
+        "C": 371.89,
+        "H": 333.89
+      },
+      "summed_invocation_wall_seconds": 708.25,
+      "source": "FSD_NATIVE_RENEWAL_LEARNING_B01_RESULT_EVIDENCE_20260908.md#complete-cost-admission-and-runtime-receipts"
+    },
+    {
+      "object": "B02",
+      "training_master": 770303,
+      "full_H_minus_C": 0.5203906250000002,
+      "full_G_minus_H": 0.01084635416666652,
+      "complete_wall_seconds": {
+        "G": 2.56,
+        "C": 338.46,
+        "H": 323.99
+      },
+      "summed_invocation_wall_seconds": 665.01,
+      "source": "FSD_NATIVE_RENEWAL_LEARNING_B02_RESULT_EVIDENCE_20260908.md"
+    }
+  ],
+  "alternative_minimal_real_B_not_allocated": {
+    "question": "H_train versus fresh fair D0 k=5 at the same five-rollout budget, retaining G; no C arm, third identical pair, tuning grid or causal matrix",
+    "independent_unit": "one new matched training pair; new numerical keys deliberately unassigned",
+    "learned_arms": 2,
+    "independent_training_pairs": 1,
+    "rollouts_per_arm": 5,
+    "training_lanes": 16,
+    "horizon": 400,
+    "training_transitions_expression": "2 * 1 * 5 * 16 * 400",
+    "training_transitions": 64000,
+    "training_episodes": 160,
+    "update_stages": 10,
+    "evaluation_policies": 3,
+    "endpoint_checkpoints_per_learner": 1,
+    "evaluation_episodes_per_policy": 32,
+    "evaluation_episodes": 96,
+    "scoring_steps_expression": "3 * 1 * 32 * 400",
+    "scoring_steps": 38400,
+    "all_host_steps": 102400,
+    "all_agent_observations": 614400,
+    "learner_constructions": 2,
+    "independent_evaluator_constructions": 2,
+    "old_checkpoint_loads": 0,
+    "learned_policy_batch_calls": 4800,
+    "public_reference_calls": 400,
+    "fixed_clock_lane_boundaries_per_rollout_expression": "16 * 400 / 5",
+    "fixed_clock_lane_boundaries_per_rollout": 1280,
+    "fixed_clock_agent_renewals_all_training": 38400,
+    "actual_optimizer_calls_and_H_segments": "unknown until a separately selected real execution; historical optimizer calls are not the raw clock-boundary count",
+    "MEI_absolute_mean_native_reward": 0.01,
+    "illustrative_complete_caps_seconds": {
+      "D0": 1200,
+      "H": 900,
+      "G": 60
+    },
+    "summed_complete_cap_seconds": 2160,
+    "D0_historical_cost_anchor": {
+      "expression": "1.15 * (5 * (64.6 + 0.769 * 150) + 32 * 0.46)",
+      "seconds": 1051.6405,
+      "coordinator_optimizer_steps_per_rollout_historical": 150,
+      "source": "FSD_E3_LARGE_D0_SEED2_RESULT_EVIDENCE_20260905.md#rule-cost-deviations-and-bounded-reading",
+      "observed_old_complete_runner_seconds": 2603.2776923269994,
+      "observed_old_supervisor_seconds": 2784,
+      "observed_old_rollouts": 20,
+      "observed_old_evaluation_episodes": 3584,
+      "limitation": "Historical cost-law scale using old measured optimizer workload, not measured new D0 cost, a current-source admission projection, a proportional rescaling of whole-run wall, or a guarantee."
+    },
+    "nested_policy_candidates_trajectories_or_solvers": 0,
+    "additional_scientific_validation_panel": 0,
+    "future_route_if_selected": "remote_first wsl_4070 CPU four threads, unchanged numerical semantics; fresh admission and detached complete capped invocation; no new setup now"
+  },
+  "note": "Alternative factors are consultation-only; no new keys/card/code or allocation. Actual learner movement and cost remain supported by the cited completed records, not by another probe."
+}

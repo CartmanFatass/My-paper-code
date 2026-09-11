@@ -1,0 +1,142 @@
+{
+  "source_sha": "72c6287b7bbf721d1e031ae5a9b28b92cab8a9bd",
+  "valid_results": 1,
+  "native_chain_s": 81.78,
+  "native_arm_s": {
+    "learned": 79.21,
+    "reference": 2.56
+  },
+  "support_components": [
+    {
+      "phase": "preparation before measured collection",
+      "charged_s": 30,
+      "note": "Conservative charge for recovery reads, input sync/push and source/card plumbing; authoring effort separate."
+    },
+    {
+      "phase": "exposure generation",
+      "wall_s": 0.3116938
+    },
+    {
+      "phase": "focused tensor and publication check",
+      "wall_s": 4.181481
+    },
+    {
+      "phase": "owner item and scratch inspection",
+      "wall_s": 0.3929833
+    },
+    {
+      "phase": "independent review",
+      "wall_s": 3.476438
+    },
+    {
+      "phase": "source/card/owner publication",
+      "wall_s": 8.9915819
+    },
+    {
+      "phase": "scope/diff and audit checks",
+      "wall_s": 0.4848982
+    },
+    {
+      "phase": "source bundle staging and exact detached checkout",
+      "wall_s": 8.7155167
+    },
+    {
+      "phase": "live-main reviews at launch boundary",
+      "wall_s": 0.3961831
+    },
+    {
+      "phase": "exact command and preparation publication",
+      "wall_s": 4.3764543
+    },
+    {
+      "phase": "single detached submission",
+      "wall_s": 0.8468777
+    },
+    {
+      "phase": "Monitor dispatch",
+      "charged_s": 1,
+      "note": "Conservative direct-tool charge; actual observation commands are separate."
+    },
+    {
+      "phase": "accepted-launch publication",
+      "wall_s": 6.0237644
+    },
+    {
+      "phase": "Monitor terminal observation",
+      "wall_s": 1.021
+    },
+    {
+      "phase": "terminal archive collection and digest check",
+      "wall_s": 1.6693657
+    },
+    {
+      "phase": "retained artifact inspection",
+      "wall_s": 0.3192917
+    },
+    {
+      "phase": "independent retained-data, checkpoint and run-level analysis/plot",
+      "wall_s": 3.4265981
+    },
+    {
+      "phase": "run-summary review/owner boundary",
+      "wall_s": 0.521324
+    },
+    {
+      "phase": "plot visual readback",
+      "charged_s": 1
+    },
+    {
+      "phase": "E0 table and receipt preservation",
+      "wall_s": 0.229627
+    },
+    {
+      "phase": "scoped cleanup inventory and retained source bundle check",
+      "wall_s": 0.7398893
+    },
+    {
+      "phase": "Root integration status read",
+      "wall_s": 0.2951077
+    },
+    {
+      "phase": "scientific E0/intake/brief publication and owner ledger read",
+      "wall_s": 5.7952793
+    },
+    {
+      "phase": "UTF-8 brief and verbatim reading-rule publication readback",
+      "wall_s": 0.2649971
+    },
+    {
+      "phase": "Root main integration including audit conflict/readback",
+      "charged_s": 15,
+      "note": "Root-supplied conservative charge bounding its observed integration/readback, including final4.528872s commit/push."
+    },
+    {
+      "phase": "final scoped cleanup live/state/path checks",
+      "wall_s": 0.7586459
+    },
+    {
+      "phase": "scoped remote worktree/staging reclamation and absence verification",
+      "wall_s": 0.7945895
+    },
+    {
+      "phase": "retained rejected-test-scratch inventory",
+      "wall_s": 0.2278123
+    },
+    {
+      "phase": "final DM publication plus Root closeout integration/readback",
+      "charged_s": 15,
+      "note": "Conservative terminal-publication allowance; verify actual final DM command and Root closeout work fit this15s tail, report any overrun."
+    }
+  ],
+  "charged_support_s": 116.26140000000002,
+  "charged_complete_s": 198.0414,
+  "support_cap_s": 140,
+  "complete_cap_s": 300,
+  "cost_per_valid_result_charged_s": 198.0414,
+  "scope": "B04/master24 only; full-history total and aggregate CPU unmeasured",
+  "measurement_limit": "Measured command wall plus explicit conservative charges, not exactly measured whole-study elapsed. Terminal15s allowance includes final DM publication/readback and Root closeout integration; actual terminal work is checked at final acceptance.",
+  "remote_cleanup": "execution worktree and staging absent on disk; worktree registration absent; CLOSEOUT.json",
+  "retained_local_scratch_bytes": 724042,
+  "retained_local_scratch_reason": "policy rejected all3 cleanup methods before process creation",
+  "no_extra_scientific_invocation": true
+}

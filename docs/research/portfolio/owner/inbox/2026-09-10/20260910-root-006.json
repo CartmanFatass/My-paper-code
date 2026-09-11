@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "两份实际新学习方案值得有限原生比较；FOLR反号后先问窄家族判断，ACVC的第三拟合仍须与便宜VSP03机会比较。",
   "evidence": [
     "docs\\research\\portfolio\\pro_packets\\20260910_four_slot_rolling_refill\\SCIENCE_BRIEF.md"
@@ -97,6 +97,24 @@
       "record": "docs/research/portfolio/decisions/2026-09-10-four-slot-rolling-refill.md",
       "state": "blocked",
       "summary": "按既有所有者阻塞规则和Root本次指令记录：两次点击中一次确认受理，终止节点没有完整答复；GitHub新响应404且仅有准备评论。没有Portfolio裁决，A/B及候补未执行，禁止再次Send。既有第五席MGTAP设计候补由Root独立激活，与本题无关。"
+    },
+    {
+      "at": "2026-09-11T03:50:11+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/OWNER_DIRECT_RESEND_TERMINAL_FACTS.json",
+      "record": "docs/research/portfolio/decisions/2026-09-10-four-slot-rolling-refill.md",
+      "state": "blocked",
+      "summary": "所有者亲自重发指令已由Root按固定提示执行一次；6 Pro自然运行12分16秒后完整返回能力缺口，未写响应或评论并明确科学审查未完成。新GitHub读取仍为77b9d573、response404、只有准备评论。A/B未选、额度未释放、不得再次Send。"
+    },
+    {
+      "at": "2026-09-11T04:48:34+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/1ea43d8fbc846807d71d4d894136f357f65551b6/docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-10-four-slot-rolling-refill.md",
+      "state": "applied",
+      "summary": "完整Pro裁决已核对，应用A的投入记录：UCOPE3300、RCLE300、FOLR零数值问题、ACVC360秒；候补VSP03问题再VSPC1设计，各一次。Root分派及真实运行尚未发生，不改生命周期/优先级/recast，不给第五位FSD/MGTAP实现额度。中文应用包见该intake链接。",
+      "correction": "之前的blocked记录和建议包是交付前历史。现有47134字节完整响应1ea43d8f和Issue17评论5629259208，下载/侧录字节一致，已通过完整科学/规范核对。依据AGENTS4.8应用，不等待所有者逐项批准；auto_applied只记录投入选项，非运行完成。"
     }
-  ]
+  ],
+  "approval_correction": "之前的blocked记录和建议包是交付前历史。现有47134字节完整响应1ea43d8f和Issue17评论5629259208，下载/侧录字节一致，已通过完整科学/规范核对。依据AGENTS4.8应用，不等待所有者逐项批准；auto_applied只记录投入选项，非运行完成。"
 }

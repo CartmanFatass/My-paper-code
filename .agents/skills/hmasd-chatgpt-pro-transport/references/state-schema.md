@@ -186,7 +186,14 @@ logical packet with deterministic names:
 
 Archive attempts use a separate directory suffix
 `<packet_id>--attempt-XX` and contain `<archive_id>__02_RESPONSE.md` and
-`<archive_id>__03_TRANSPORT_FACTS.json`. Existing files are idempotent only when
+`<archive_id>__03_TRANSPORT_FACTS.json`. For GitHub delivery, a short provider chat
+receipt that is distinct from the complete response is retained as
+`<archive_id>__04_CHAT_RECEIPT.md`; it never occupies `__02_RESPONSE.md`.
+When the accepted prompt returns a downloadable Markdown fallback, its complete bytes
+occupy `__02_RESPONSE.md` and are also retained in the repository as
+`archive/CHAT_FALLBACK_RESPONSE.md`. The scoped GitHub `archive/RESPONSE.md` remains
+reserved for actual connector delivery. If both exist, preserve both and compare hashes;
+do not overwrite either. Existing files are idempotent only when
 their bytes match; a different response or manifest is `ARCHIVE_CONFLICT` and never
 overwrites an existing artifact. Provider-visible filename normalization is stored
 as `provider_filename`; it never changes the canonical filename or reference order.

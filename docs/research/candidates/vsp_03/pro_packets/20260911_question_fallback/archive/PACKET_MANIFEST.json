@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-11-vsp03-question-fallback-01--vsp_03",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-11-vsp03-question-fallback-01",
+  "direction_id": "vsp_03",
+  "direction_ids": [
+    "vsp_03"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vsp_03:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-11-vsp03-question-fallback-01--vsp_03__00_PROMPT.md",
+    "bytes": 1908,
+    "sha256": "b211b49f91489fe4a1165a1d5f78fb755d9d1e685072a3bdd7d18fdcb04fd4fc",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-11-vsp03-question-fallback-01\\2026-09-11-vsp03-question-fallback-01--vsp_03__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-11-vsp03-question-fallback-01\\2026-09-11-vsp03-question-fallback-01--vsp_03__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-11-vsp03-question-fallback-01\\2026-09-11-vsp03-question-fallback-01--vsp_03__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "b211b49f91489fe4a1165a1d5f78fb755d9d1e685072a3bdd7d18fdcb04fd4fc",
+    "references": []
+  }
+}

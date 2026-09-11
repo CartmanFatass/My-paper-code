@@ -1,0 +1,11 @@
+{
+  "synthetic_fixture": true,
+  "fixture_commands": 1,
+  "wall_cap_seconds": 60,
+  "status": "pass",
+  "failure": null,
+  "scratch_path": "C:\\Projects\\HMASD-worktrees\\codex-fsd\\temp\\directions\\flexible_skill_duration\\test\\i1280_binding_9pxdob0x",
+  "scratch_absent": true,
+  "wall_through_imports_primary_publication_cleanup_seconds": 4.2995930000033695,
+  "within_wall_cap_before_exit": true
+}

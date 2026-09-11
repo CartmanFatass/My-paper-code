@@ -78,6 +78,13 @@ One more unchanged independent fit remains legitimate B evidence if later
 selected; a new use, mechanism or stronger evidence class is not required.
 This family decision adds no recast and does not change Portfolio lifecycle.
 
+The finite 2026-09-11 fallback Convergence question now retains that exact pause,
+declining this DM's weak recommendation for a separately allocated same-recipe
+fit. It adds no new empirical evidence or conditional re-entry. Four positive
+fixed512 histories remain support; the negative latest Q and native tradeoffs
+remain limits. A future unchanged B remains legitimate, but none is recommended
+or allocated by this completed question. Recasts remain1.
+
 ## Current position
 
 The historical bootstrap sentence from `RESEARCH_MAP.md` remains provenance:
@@ -403,6 +410,18 @@ and unallocated; changing this particular family pause uses its existing
 direction authority. Ordinary B work elsewhere gains no Pro gate, and no
 direction waits for a batch or sibling result.
 
+**PRO_FINAL, finite fallback, 2026-09-11: retain the same narrow pause.** The
+complete response at `00315dc9f1bfd9e58167696d7e53be881d685459` chooses(a),
+against this round's weak DM recommendation(b). It explicitly preserves all four
+positive final512 histories and the risk that pausing leaves useful ordinary
+learning gains underexplored. B07's negative paired Q does not erase its positive
+primary or stochastic recovery. The judgment is a close marginal-investment
+choice on unchanged evidence, not a four-fit stop, stronger-class requirement,
+readiness-optimality claim or new-use/mechanism gate. No conditional fit, numerical
+allowance, second recast, Portfolio change or successor is selected. A new
+independent same-recipe final512/R/Q/mode/native comparison remains a possible
+future discriminator; this one question ends at its complete intake.
+
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
 host R0, R or ordinary G may handle scheduling, while the local readiness prior could occupy the
@@ -426,7 +445,10 @@ sharing K1 does not pool polarity or reopen that family.
 ## Evidence set
 
 The evidence set includes historical observations, the separately recorded selection,
-the completed B06 and separate B07 results, and the post-B07 family decision:
+the completed B06 and separate B07 results, and the post-B07/fallback family decisions:
+
+- `docs/research/candidates/vsp_03/VSP03_FALLBACK_CONVERGENCE_INTAKE_20260911.md`
+- `docs/research/candidates/vsp_03/pro_packets/20260911_question_fallback/archive/RESPONSE.md` at `00315dc9f1bfd9e58167696d7e53be881d685459`
 
 - `docs/research/candidates/vsp_03/VSP03_POST_B07_CONVERGENCE_INTAKE_20260910.md`
 - `docs/research/candidates/vsp_03/pro_packets/20260910_post_b07_convergence/archive/RESPONSE.md` at `50db79b04bbeb0baf92335dde5502859fc4fc2e9`

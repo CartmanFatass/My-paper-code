@@ -1,8 +1,54 @@
 # Four-slot request delivery status
 
-**BLOCKED / PARTIAL_RESPONSE — no Portfolio decision.** Root forwarded the accepted-Send
-terminal blocker; the designated DM's fresh GitHub check at
-`2026-09-11T01:22:00.398184+00:00` found no later complete response or matching delivery comment.
+## Current complete intake and allocation
+
+**DELIVERED / COMPLETE_CONFORMING / PRO_FINAL, option A.** The transferred
+designated DM read the full immutable response at
+`1ea43d8fbc846807d71d4d894136f357f65551b6`, directly checked matching Issue17
+comment5629259208 and all47134 bytes, and independently verified equality with
+the downloaded Markdown and separately retained sidecar. The
+[conformance intake](../../decisions/2026-09-10-four-slot-rolling-refill.md)
+applies UCOPE3300/RCLE300/FOLR0/ACVC360 and the finite zero-numerical VSP03 then
+VSPC1 fallbacks. Root integration/DM dispatch is the next operational action,
+not a missing scientific decision. No scientific execution occurred in this intake.
+
+The observed primary Transport registry still carries the old BLOCKED/ARCHIVED
+fields and null response digest. Dedicated Transport must reconcile actual
+delivery and binding readiness; those raw fields do not undo the verified answer.
+No further four-slot Send is requested. The disjoint fifth-slot question is
+unchanged and unselected. See [exact intake facts](INTAKE_FACTS.json) and
+[Root execution mapping](EXECUTION_MAPPING.md).
+
+## Actual delivery and downloaded-copy update
+
+The request later delivered its complete GitHub response at
+`1ea43d8fbc846807d71d4d894136f357f65551b6` and matching Issue17 comment
+`5629259208`. The owner's subsequent in-conversation Markdown request produced
+`FOUR_SLOT_ROLLING_REFILL_RESPONSE.md`. Root completed the browser download and verified its
+47,134 bytes and SHA-256 `bb7763097d3aceabdbe85d6f06193e3cc79b4be2cc9140c64c616340d30d388f`
+are byte-for-byte identical to the GitHub `archive/RESPONSE.md`. The exact downloaded bytes are
+retained as [`archive/CHAT_FALLBACK_RESPONSE.md`](archive/CHAT_FALLBACK_RESPONSE.md), with
+[`archive/CHAT_FALLBACK_DOWNLOAD_FACTS.json`](archive/CHAT_FALLBACK_DOWNLOAD_FACTS.json).
+
+The historical observations below remain time-bounded facts from before the later delivery; they
+no longer describe current delivery. Scientific conformance was subsequently checked in the full
+intake linked above; it was not inferred from transport success or byte equality.
+
+## Preserved earlier attempts
+
+**BLOCKED after completed OWNER_DIRECT Root resend — no Portfolio decision.** The owner
+instructed Root to resend this exact request personally. At
+`2026-09-11T03:35:17.603414+00:00`, Root verified the original bound conversation,
+`6 Pro` and `Pro, 5 of 5`, pasted the canonical HANDOFF prompt, and clicked Send once.
+The exact new user-message node appeared with the fixed TASK link and the provider entered
+`Pro 思考中`; no retry or generation control was used. The prior `BLOCKED / PARTIAL_RESPONSE`
+record and Transport's two-click history remain preserved below. The accepted resend
+completed with the terminal capability gap recorded below. Exact send facts:
+[`OWNER_DIRECT_RESEND_FACTS.json`](OWNER_DIRECT_RESEND_FACTS.json).
+
+Before that owner-directed resend, Root forwarded the accepted-Send terminal blocker; the
+designated DM's fresh GitHub check at `2026-09-11T01:22:00.398184+00:00` found no later complete
+response or matching delivery comment.
 
 The fixed request remains `2026-09-10-four-slot-rolling-refill-01`, TASK
 `0a49fcc5659723e260f4d64d9892d25d3234b16c`, bound HANDOFF
@@ -10,6 +56,20 @@ The fixed request remains `2026-09-10-four-slot-rolling-refill-01`, TASK
 `portfolio:cross_direction` / `6a9c109e-b264-83e8-a78b-f9ea1b767b7b`.
 TASK, REQUEST and HANDOFF remain unchanged. HANDOFF's READY_TO_DISPATCH describes its
 publication state before the now-accepted attempt; **it is not a current dispatch command**.
+
+That accepted generation completed naturally after `12m 16s`. Its full assistant text is a
+transport capability gap: it found no available action to create the required response file or
+delivery comment, attempted no write, and explicitly left the scientific review incomplete.
+Root's fresh read at `2026-09-11T03:48:31.0030398+00:00` confirmed
+`codex/portfolio` at `77b9d573aa609bac253544ca9d4429b39b3a0adb`, the exact response
+path absent, and only preparation comment `5627828518`. The exact terminal text and observation
+are retained in [`archive/OWNER_DIRECT_RESEND_RESPONSE.md`](archive/OWNER_DIRECT_RESEND_RESPONSE.md)
+and [`archive/OWNER_DIRECT_RESEND_TERMINAL_FACTS.json`](archive/OWNER_DIRECT_RESEND_TERMINAL_FACTS.json).
+This is a complete transport response but not a formed Portfolio decision. It releases no
+allocation, and no further Send is authorized.
+A second delayed read at `2026-09-11T03:50:35.2353441+00:00`, made after the owner
+called out false negative upload self-reports, found the same HEAD, absent file and sole preparation
+comment. Delivery classification is based on these repository/comment readbacks, not Pro's claim.
 
 Transport reports two clicks: the first left the unchanged composer with no user node;
 the permitted unchanged-control retry produced the current user node and Pro generation.

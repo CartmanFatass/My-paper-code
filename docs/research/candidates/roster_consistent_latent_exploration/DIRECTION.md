@@ -624,3 +624,34 @@ the learner may not improve it; old seed23 service gains, all-eight F harm, refe
 deficit and failure-coded recovery remain the strongest support and contradiction.
 No fourth unchanged same 1000 root, F exchange rate, headroom or causal claim is added.
 Root receives the concrete design and separate allocation need; ACTIVE/MEDIUM persists.
+
+## Nearest-prior200: attained-reference deficit with almost unchanged service — 2026-09-10
+
+`RCLE_B04_NEAREST_PRIOR_RESULT_INTAKE_20260910.md` accepts one fresh B04/master24
+fit under the subsequently allocated300s comparison. Final U=.336995442708 remains
+above nearest.279846191406; primary reference-minus-final is−.0571492513021,
+conditional SE.00425400925. All eight final U means lose to nearest. Initialization
+gain+.000144449870 has conditional95% interval[−.00262017032,+.00290907006], with
+one active cross-roster path improving and the other worsening. The prior/learner
+combination did not establish the intended service advantage at200 updates.
+
+Strongest support: five of eight U cell means improve from initialization, and the
+small aggregate gain and all-cell Y increase remain direct facts. Strongest
+contradiction: all-cell nearest deficit, F worsening against nearest in6/8 cells
+and2,034/2,048 final tau scores still coded40. All-cell F also worsens slightly from
+initialization. No scalar tradeoff, reference competence, stable superiority or
+isolated actor-credit claim follows. Native chain81.78s includes200 nonzero updates,
+18,944 complete episodes and1,212,416 primitive ticks; supporting costs are separate.
+
+The legal prior adds a starting preference rather than information. Exploration
+mass, finite exposure and the whole normalized learning package survive as
+alternative limitations; none is diagnosed by the almost-flat outcome or measured
+parameter displacement. B03 history and its seed23 F harm keep their original
+meaning. This result bounds one fixed200 recipe, not the family or representable
+policy class. Tuned headroom remains absent.
+
+This allocation ends at preserved closeout. A possible next separately allocated
+discriminator is one fresh final1000 comparison of the same prior against its own
+initialization and nearest, asking longer-budget performance rather than budget
+causality. No successor, new seed/card, family/lifecycle/priority change or C claim
+is selected here. References: B04 card, E0, retained-data analysis and full intake.

@@ -1,0 +1,92 @@
+{
+  "id": "20260910-acvc-003",
+  "created": "2026-09-10T22:10:59-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "一次新DENSE训练8941及固定规则比较",
+  "context": "第三个事前固定的新训练实例8941、评价8942，沿用原生DENSE学习与C/F/dwell终点比较；来自已完整审阅的四槽Portfolio分配。结构是多智能体局部观测。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "按当前绑定执行",
+      "consequence": "执行一次512训练回合与三组64评价；无自动后继。"
+    },
+    {
+      "key": "reject",
+      "label": "停止尚未执行工作",
+      "consequence": "保留已有两次结果，不替代或重跑。"
+    },
+    {
+      "key": "revise",
+      "label": "按明确指令修订",
+      "consequence": "只处理所有者明确覆盖的尚未执行范围。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "已分配的完整比较用事前固定新种子落地，保留所有结果。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L162",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "记录已获分配的第三次新DENSE训练8941及固定C/F/dwell比较；所有者可异步覆盖尚未执行的选择。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC卡第12节",
+        "from": "8921与8931结果已完成",
+        "to": "只新增8941训练、8942评价；原生270秒加全部支持90秒"
+      }
+    ],
+    "if_refused": "按所有者明确覆盖处理尚未执行的工作，保留已有证据；不自动替换或重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/EXECUTION_MAPPING.md",
+        "quote": "Bind one new unscreened training/evaluation namespace; run the accepted fresh-DENSE/C/F/dwell law once and complete intake/closeout.",
+        "why": "完整Portfolio决定已分配这一次原生训练。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md",
+        "quote": "The strongest contrary evidence is **11/64 F−dwell losses**",
+        "why": "前两次均值正向仍有反例；停留控制也有收益，不能推断稳定优势或纯回撤效应。"
+      }
+    ],
+    "uncertainty": [
+      "新实例可能弱或反向；仍保留全部三组评价。",
+      "旧Monitor精确总账未知；新任务明确纳入支持上限。"
+    ],
+    "cost": {
+      "compute": "一次704回合、180224团队步、1024 Adam；原生270秒、全部支持90秒、总360秒。",
+      "owner_time": "无需等待回复",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+    "source": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T05:19:16+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8941_INTAKE_20260910.md",
+      "state": "blocked",
+      "summary": "8941事前绑定和独立审查已完成并推送cafef130c；来源准备102.104秒超过全部支持90秒，原生训练和评价均未启动。一次只读核对12.032秒超时，远端效果未知；结束本次分配，无重跑或科学负结论。"
+    },
+    {
+      "at": "2026-09-11T05:31:10+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8941_INTAKE_20260910.md",
+      "state": "blocked",
+      "summary": "另行授权的技术恢复已完成：8941远端目录与工作树登记均不存在，原进程及所有已记录子进程已消失；只终止身份核实的残留树。Git查询触发延迟下载的事实已保留。原训练仍未启动，超预算事实及预测未评分不变。"
+    }
+  ]
+}

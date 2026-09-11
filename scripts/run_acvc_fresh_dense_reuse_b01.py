@@ -53,8 +53,8 @@ from experiments.candidates.ucope.uav_motion_prefix_b01.study import clean_json
 
 OBJECT = "ACVC_FRESH_DENSE_REUSE_B01"
 CARD = "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md"
-MASTER = 8931
-EVALUATION_NAMESPACE = 8932
+MASTER = 8941
+EVALUATION_NAMESPACE = 8942
 ARMS = ("C", "F", "dwell")
 
 

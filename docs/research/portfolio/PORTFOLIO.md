@@ -1,5 +1,49 @@
 # HMASD Research Portfolio
 
+## Current four-slot allocation — 2026-09-11
+
+The full Portfolio response at `1ea43d8fbc846807d71d4d894136f357f65551b6`
+passes the transferred designated-DM check and selects **option A** under
+`PRO_FINAL / OWNER_DELEGATED`. The
+[intake](decisions/2026-09-10-four-slot-rolling-refill.md) and
+[execution mapping](pro_packets/20260910_four_slot_rolling_refill/EXECUTION_MAPPING.md)
+apply these finite investments; Root integration/DM dispatch is pending at this
+authoring boundary. They are allocations, not accepted source or live handles.
+
+| Direction | Current selected investment | Separate complete limits |
+| --- | --- | --- |
+| ucope, ACTIVE/HIGH, recasts1 | One fresh specified L/F continue/end-credit pair; two2048 fits,64 final worlds each; implementation through complete intake. | L1800/F1200/native sum3000/all support300/complete3300 seconds. |
+| roster_consistent_latent_exploration, ACTIVE/MEDIUM | One B04/master24 nearest-prior200-update fit with initialization/final/INDEPENDENT-NEAREST. | Learned150/reference10/all support140/complete300 seconds. |
+| vap_folr_core, ACTIVE/MEDIUM | One original Convergence question/intake after the opposite-signed HALF pairs. | Zero numerical/implementation work; no third pair or inherited3900-second allowance. |
+| acvc, ACTIVE/MEDIUM, recasts2 | One new unscreened fresh-DENSE fit and final C/F/dwell64 panels, retaining lowest contention. | Native270/all support90/complete360 seconds. |
+
+The3960-second sum is separate finite caps, not measured cost, shared reserve or
+elapsed critical path. All additional runtime support includes Monitor, checks,
+collection, publication and scoped preservation/cleanup. New accepted scientific
+invocations/results at this intake are0/0; actual future cost per valid result is
+not yet defined. Current-host tuned same-information headroom remains absent for
+these comparisons. UCOPE's old nested F708.723/776.661-second components and
+RCLE's old200-update89.83/80.62-second learned invocations plus2.85-second reference
+are planning anchors, not complete changed-law forecasts. ACVC8931's169 native
+plus6.0939838 known support and FOLR HALF-B02's1517.20 native plus67.6955750
+bound-intake support subtotal leave full support/total conformance unestablished.
+Existing per-result and all-attempt historical windows below remain unchanged;
+no missing total is replaced with zero or an invented denominator.
+
+First fallback VSP03 receives one zero-numerical original-node question/intake;
+second VSPC1 receives one zero-numerical source/design or precise family-question/
+no-ready return. Each is used once, in order, only for actual primary start failure,
+unresolved execution/scope dependency or no-ready and an eligible vacancy. A valid
+completed result/question/design does not activate a fallback or buy a successor.
+Independent rolling work never waits for sibling completion. Lifecycle, priority,
+family stops, recasts and formal UAV/C entry are unchanged.
+
+The separate [fifth-slot FSD/MGTAP implementation question](decisions/2026-09-10-fifth-slot-implementation-selection.md)
+remains unselected and queued for actual binding reconciliation. Earlier FSD/MGTAP
+document allocations are complete; the four-slot answer neither repeats nor funds
+them. Old transport-blocker and execution paragraphs below retain their dated
+historical meaning and do not override this checked allocation.
+
 ## Current execution boundary — 2026-09-10
 
 OWNER_DIRECT “开始研究” resumes the loop after the complete 2026-09-09 synthesis batch. The

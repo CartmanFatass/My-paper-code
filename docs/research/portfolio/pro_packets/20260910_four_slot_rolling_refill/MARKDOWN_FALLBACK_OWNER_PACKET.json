@@ -1,0 +1,37 @@
+{
+  "question": "当Pro的GitHub写入动作不可用时，如何保证完整科研答复仍可交付并归档？",
+  "changes_if_approved": [
+    {
+      "target": "新Pro GitHub交付提示与Transport归档",
+      "from": "连接器无法写入时可能只返回能力缺口，完整科学答复没有交付物",
+      "to": "同一提示要求生成可下载完整Markdown；Transport下载、绑定回复节点、记录字节与SHA-256，并以CHAT_FALLBACK_RESPONSE.md侧车归档"
+    }
+  ],
+  "if_refused": "保留现有GitHub文件与评论交付；连接器写入不可用时仍可能只得到能力缺口。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/CHAT_FALLBACK_DOWNLOAD_FACTS.json",
+      "quote": "\"byte_equal_to_github_response\": true",
+      "why": "当前请求证明可下载Markdown能够原样保存完整响应，并可与实际GitHub文件逐字节核对。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": ".agents/skills/hmasd-chatgpt-pro-transport/references/state-schema.md",
+      "quote": "a different response or manifest is `ARCHIVE_CONFLICT` and never overwrites an existing artifact",
+      "why": "双路径交付可能产生不同内容，所以必须分开命名、比较哈希并禁止覆盖。"
+    }
+  ],
+  "uncertainty": [
+    "提供商下载控件和文件名可能变化；Transport以回复节点、实际字节和哈希绑定，不依赖显示名称作为身份。",
+    "GitHub稍后恢复时可能同时存在两份响应；只有完整一致性检查后才进入DM科学 intake。"
+  ],
+  "cost": {
+    "compute": "控制面文档与生成器修改；80项聚焦测试通过；本次科研数值暴露为零。",
+    "owner_time": "无需后续逐项批准；所有者可异步覆盖。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "无法使用GitHub connector完成任务时就发布为md文档供我下载，然后完成下载归档。",
+  "source": "docs/research/portfolio/decisions/2026-09-10-pro-chat-markdown-output-fallback.md"
+}

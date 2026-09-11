@@ -1,0 +1,104 @@
+{
+  "observed_at_utc": "2026-09-11T02:49:16.233608+00:00",
+  "command": "gh issue view 17 --repo CartmanFatass/My-paper-code --json number,title,url,state,body,comments",
+  "use": "Existing Issue continuity and historical delivery only; no prior comment delivers this new request. No comment was written.",
+  "issue": {
+    "body": "Choose the next five advancing research chains after the completed 2026-09-09 synthesis allocation. Compare FOLR, UCOPE, VSP03, RCLE, ACVC and the CBSC/FRRIE readiness alternatives. State bounded next investments, first actions, counterevidence, stops and full cost limits or explicit unknowns, preserving stopped families and second-recast ordering.\r\n\r\nFixed TASK scope: docs/research/portfolio/pro_packets/20260910_next_five_chains on existing codex/portfolio. Pro delivery: only this round archive/RESPONSE.md plus one immutable delivery-link comment here. No code, main, experiments or historical-request changes.\r\n\r\nThis new investment question does not alter the completed foundations-special-review Issue #16.\r\n",
+    "comments": [
+      {
+        "id": "IC_kwDOO8trO88AAAABTxL8Lg",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "Delivered this round's complete Portfolio decision: https://github.com/CartmanFatass/My-paper-code/blob/08e989073839fe5f0f91c6a8ad90a399bee37b6c/docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md\n\nFixed task: https://github.com/CartmanFatass/My-paper-code/blob/38653196ba2a6c8503cdf9db3fb49fae6d9cb7ba/docs/research/portfolio/pro_packets/20260910_next_five_chains/TASK.md\n\nCommit 08e989073839fe5f0f91c6a8ad90a399bee37b6c adds only the specified response file on codex/portfolio. Fixed scientific inputs and historical decisions are preserved; no experiment was executed.",
+        "createdAt": "2026-09-10T15:59:18Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5621611566",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABTyfGqA",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "Delivered the complete ACVC fresh-DENSE allocation decision for this new round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/caf8cf61d92fb3a669f93439a0e2b9967eca943c/docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/17ee7705658f7c540eea51f9d91c9a04ce327c66/docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/TASK.md\n\nCommit caf8cf61d92fb3a669f93439a0e2b9967eca943c adds only the specified response file on codex/portfolio. The full file was read back. No experiment, science-code/card edit, main change or modification of the preceding next-five response was performed.",
+        "createdAt": "2026-09-10T17:46:06Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5622974120",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABT2DpQw",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "Delivered the complete rolling-successor allocation decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/b4d71be60f789e97bf1f4c7130bb9995fc84f387/docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/134f9aaa4e1f82af05a61f291a796f373ceebfb9/docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/TASK.md\n\nCommit b4d71be60f789e97bf1f4c7130bb9995fc84f387 adds only the specified response file on codex/portfolio. The complete file was read back, and the commit comparison confirms that single-path scope. No experiment, source/card/Portfolio-state edit, main change or rewrite of either previous response was performed.",
+        "createdAt": "2026-09-10T23:16:52Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5626718531",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABT2geCA",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "Prepared a separate Portfolio question for the **one remaining fifth vacancy** after the complete A decision allocated FOLR, UCOPE, RCLE and ACVC. Those four allocations remain unchanged and excluded here.\r\n\r\n[Read the fixed task](https://github.com/CartmanFatass/My-paper-code/blob/9ada5ce1793862fc57aea4fd9b71ca9a83a64514/docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/TASK.md). Recommendation only: one bounded FSD source/design return, with MGTAP as the single conditional fallback; VSP03 is a substantive competing option. The requested first actions have zero numerical allowance and preserve existing family stops, priorities/recasts and access restrictions.\r\n\r\nThis is preparation for the normal Transport route, not a formed Portfolio decision. The complete response belongs only at `docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/archive/RESPONSE.md` on `codex/portfolio`, with its own immutable delivery-link comment. Previous accepted tasks and deliveries remain intact.\r\n",
+        "createdAt": "2026-09-11T00:01:57Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5627190792",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABT2vQeg",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "Delivered the complete fifth-vacancy Portfolio decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/f4fce9a4fd9603db66463ad8c81bb9464533e260/docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/9ada5ce1793862fc57aea4fd9b71ca9a83a64514/docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/TASK.md\n\nCommit f4fce9a4fd9603db66463ad8c81bb9464533e260 adds only the specified response file on codex/portfolio. The complete file was read back and the commit comparison confirms the single-path scope. No experiment, source/card/Portfolio-state edit, main change or rewrite of previous responses was performed.",
+        "createdAt": "2026-09-11T00:25:16Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5627433082",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABT3HZJg",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "Prepared new request `2026-09-10-four-slot-rolling-refill-01` for the same `portfolio:cross_direction` node.\r\n\r\nThe fixed [TASK](https://github.com/CartmanFatass/My-paper-code/blob/0a49fcc5659723e260f4d64d9892d25d3234b16c/docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/TASK.md) asks for up to four independent rolling replacements alongside the active FSD design, preserving its MGTAP-only fallback. Recommendation A compares UCOPE L/F (3300 s), RCLE nearest-prior (300 s), one zero-numerical FOLR Convergence question and one ACVC fresh fit (360 s); B substitutes the explicitly conditional VSP03 60 s opportunity. These are pending proposals, not local Portfolio decisions or released budgets.\r\n\r\nAuthor preparation has zero scientific/model/test/provider-Send exposure. Root dispatches the bound HANDOFF once to the existing Transport task. This is a new question, not a resend of the completed fifth-vacancy request.\r\n\r\nThe scoped response is `docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md` on current descendant `codex/portfolio` HEAD. Preserve earlier requests, responses and all unrelated paths.\r\n",
+        "createdAt": "2026-09-11T01:08:02Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5627828518",
+        "viewerDidAuthor": true
+      }
+    ],
+    "number": 17,
+    "state": "OPEN",
+    "title": "Portfolio: next five advancing chains after completed synthesis",
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/17"
+  }
+}
