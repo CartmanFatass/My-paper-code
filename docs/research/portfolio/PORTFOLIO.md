@@ -30,6 +30,14 @@ observation path; FRRIE is reconciling the P59/P63 factory-observation path. The
 direction-local engineering chains. Neither assignment selects, launches or funds the scientific
 object, and each must return an attributable repair or a concrete executable exit condition.
 
+CBSC's source-only observation is accepted through `929f95c37`: all six saved edits reconstruct the
+published retained52 source and AST exactly. No attributable transport defect can be repaired because
+the old rejection lacks a tool, payload and full event record. Retained52 remains unrun and
+unallocated. FRRIE is the one remaining advancing technical chain. The owner separately directed
+Transport to resolve and retry failures itself when authoritative state proves no external effect,
+then accept the resulting receipt; uncertain or accepted Sends still require same-request
+reconciliation before any retry.
+
 ## Current zero-addition Portfolio boundary — 2026-09-11
 
 The canonical Transport archived request

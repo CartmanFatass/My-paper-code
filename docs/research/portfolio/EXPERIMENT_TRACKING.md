@@ -25,6 +25,20 @@ result-bearing invocation is allocated. The actual advancing direction-chain cou
 two while the Portfolio request remains queued behind Transport's confirmed-live prior
 reconciliation.
 
+CBSC returned and Root accepted its source-only readiness evidence at `929f95c37`. The 0.084374-second
+check reconstructed all six saved edits with exact text and AST equality without importing research
+code or constructing scientific state. The historical rejection still names no tool/payload/full
+event, so no restriction-specific repair is attributable; retained52 remains unrun and unallocated.
+A separate guarded cleanup command was rejected before process creation, leaving the DM's five-file
+scratch preserved without affecting scientific readiness. FRRIE is now the sole advancing technical
+chain.
+
+Root also delivered the owner's current Transport instruction to the configured singleton: retry the
+same exact payload after resolving a failure only when authoritative state proves non-acceptance/no
+external effect, and process the resulting receipt itself. An uncertain or accepted Send is first
+reconciled on the same request/conversation and is never blindly duplicated. The queued Portfolio
+request and its one-dispatch record remain unchanged.
+
 ## FSD source-delivery repair accepted — 2026-09-11
 
 The complete direction-local repair series is accepted and integrated through `20258e5ef`.
