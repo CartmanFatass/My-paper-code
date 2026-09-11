@@ -115,3 +115,45 @@ and supervisor receipt, verify meaningful count/comparison/publication contracts
 prepare E0/intake/Chinese brief and preserve unique runtime evidence before any
 authorized cleanup. Remote execution worktree and staging are retained for that live
 dependency; DM owns their collection/cleanup inventory and Root accepts reclamation.
+
+## Terminal acceptance, integration and closeout
+
+The historical pending state above is superseded by the complete exit0 result and
+`RCLE_B04_NEAREST_PRIOR_RESULT_EVIDENCE_20260910.md` / `RCLE_B04_NEAREST_PRIOR_RESULT_INTAKE_20260910.md`.
+Root's routed terminal fact was verified against the collected supervisor/output.
+One valid B04/master24 result has200 nonzero updates and18,944 complete episodes;
+primary Delta_ref−.0571492513021 and tiny initialization gain+.0001444498698 retain
+mixed F/recovery consequences. No successor is allocated. The publication-only
+Chinese brief length check first used Windows cp1252 and failed before reading;
+explicit UTF-8 readback then passed356 characters/six headings. All six E0 card
+reading rows match verbatim. No scientific data or interpretation changed in that repair.
+
+Root integrated/pushed the accepted result3b15d5f4f as mainb8012f3c5, preserving all
+163 ACVC/RCLE audit rows through the shared-file conflict. Its supplied conservative
+integration/readback charge is15s. Root confirmed source/evidence retention and
+authorized this completed scoped reclamation. Final checks found the exact detached
+source, clean tracked/untracked state, finished exit0/tmux inactive and matching
+preserved source/terminal archives. The50MiB execution checkout and34MiB source staging
+were then removed through Git worktree removal and literal staging-file/empty-directory
+removal. Both paths are absent on disk; the execution path is absent from
+`git worktree list --porcelain`. [CLOSEOUT.json](b04_nearest_prior_20260910/CLOSEOUT.json)
+retains the exact facts. Shared `codex/rcle`, local source/terminal archives and
+completed supervisor receipts remain; no active/shared checkout was removed.
+
+Final charged bill: **81.78s native chain +116.2614s support =198.0414s per one valid
+B04 result**, within150/10/140/300 boundaries. The support bill includes measured
+command wall, conservative initial30s, direct dispatch/visual1s each, Root integration15s,
+and final15s for this DM publication/readback plus Root closeout integration. This is
+a conservative charge, not an exactly measured whole-study elapsed or aggregateCPU.
+The actual final publication tail must fit its15s allowance; any overrun is reported
+within the remaining23.7386s support margin. The component record is
+[SUPPORT_FINAL.json](b04_nearest_prior_20260910/SUPPORT_FINAL.json). No phase is charged
+twice or treated as free; old history and unrelated directions retain separate bills.
+
+The remaining cleanup exception is local test scratch:7 supplied-fixture files,
+724,042B, at the exact path in [LOCAL_TEST_SCRATCH.json](b04_nearest_prior_20260910/LOCAL_TEST_SCRATCH.json).
+All three deletion methods were policy-rejected before execution. DM retains creator
+ownership for the next permitted cleanup boundary; no alternative deletion mechanism
+was used. That factual exception does not lower the accepted native-result ceiling
+or authorize another scientific invocation. Root accepts final retention/reclamation;
+the named research allocation is finished.

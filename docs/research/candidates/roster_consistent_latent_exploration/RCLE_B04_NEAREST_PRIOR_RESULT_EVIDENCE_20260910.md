@@ -131,3 +131,10 @@ Machine readback: [DM_RESULT_ANALYSIS.json](b04_nearest_prior_20260910/DM_RESULT
 [curves](b04_nearest_prior_20260910/CURVES.json),
 [run-unit summary](b04_nearest_prior_20260910/RUN_SUMMARY.json),
 [result view](b04_nearest_prior_20260910/RESULT_VIEW.png).
+
+Final retention/bill: mainb8012f3c5 includes the accepted result; completed remote
+worktree/staging are verified absent. SUPPORT_FINAL records198.0414s charged complete
+work for one valid result (81.78 native +116.2614 support with explicit conservative
+allowances), below300s complete/140s support. The final publication/integration tail
+is checked against its included15s allowance at acceptance. Seven local test-fixture
+files remain under the separately recorded policy-rejected cleanup exception.
