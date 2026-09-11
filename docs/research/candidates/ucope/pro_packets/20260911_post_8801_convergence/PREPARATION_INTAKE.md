@@ -197,3 +197,20 @@ for the original node, not its verdict. Question preparation and current
 exposure are recorded; the scientific direction decision remains pending.
 The stop is one complete original-node intake or a concrete access/receipt
 conflict. No repeated consultation series or successor is authorized.
+
+## Published handoff boundary
+
+TASK is committed and pushed at **c86f7d93977d291eca65a45b61cc1795f0f07512**.
+The renderer bound its exact committed bytes and produced READY_TO_DISPATCH.
+Scientific default input is bf73d627794b5fc45848634c9a012f2a062cf5e9;
+each reference retains its explicitly listed immutable version. All18 paths
+exist at their effective SHA and are reachable from the observed published
+codex/ucope ref. This establishes publication, not current Pro access.
+
+HANDOFF is returned to Root for one dispatch to the existing Transport; this DM
+has sent no provider prompt. The exact response path is this packet
+archive/RESPONSE.md, on codex/ucope with Issue11. Preserve the accepted request
+after dispatch and resume /root/dm_ucope_restart_recovery2 for the complete
+immutable response/conformance intake. Until then there is no new direction
+verdict or numerical allocation. No independent work is pending under this
+zero-numerical authoring assignment.
