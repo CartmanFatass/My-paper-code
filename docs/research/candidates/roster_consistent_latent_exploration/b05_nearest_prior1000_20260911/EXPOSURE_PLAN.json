@@ -1,0 +1,47 @@
+{
+  "OBJECT_ID": "RCLE-TBCFV-B05-NEAREST-PRIOR1000",
+  "SEED": 25,
+  "UPDATES": 1000,
+  "host_cost_law": {
+    "updates": 1000,
+    "eval_episodes_per_cell": 256,
+    "training_episodes": 64000,
+    "heldout_episodes": 2048,
+    "environment_ticks_training": 4096000,
+    "environment_ticks_heldout": 131072,
+    "wall_unit": "complete logical invocation",
+    "projection_note": "B04 learned79.21s x5=396.05s analogy only, not a wall bound; new rates and support unknown"
+  },
+  "learned_invocation": {
+    "training_episodes": 64000,
+    "evaluation_episodes": 4096,
+    "total_episodes": 68096,
+    "ticks": 4358144,
+    "backward_update_calls": 1000,
+    "models": 7,
+    "training_instances": 1,
+    "untrained_helpers": 6,
+    "wall_cap_s": 600
+  },
+  "reference_invocation": {
+    "episodes": 2048,
+    "ticks": 131072,
+    "models": 0,
+    "training_instances": 0,
+    "wall_cap_s": 10
+  },
+  "total": {
+    "episodes": 70144,
+    "ticks": 4489216,
+    "backward_update_calls": 1000,
+    "rollout_batches": 2000,
+    "training_agent_ticks": 32768000,
+    "neural_agent_claim_decisions": 8847360,
+    "candidate_scores": 53084160,
+    "l2_parameter_path_budget": 20.0,
+    "support_cap_s": 140,
+    "complete_cap_s": 750
+  },
+  "exposure_line": "One fresh B05/master25 fit, 26161 trainable FP64 scalars, 1000 nonzero-step opportunities x normalized L2 .02 = path-length budget 20.0; fresh norm and actual displacement will be measured. No fitted-state reuse. Prior B04 accepted supplied-tensor gradient coverage is reused; no native validation allocated.",
+  "scientific_exposure_before_execution": 0
+}
