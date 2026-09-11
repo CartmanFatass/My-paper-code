@@ -1,0 +1,74 @@
+{
+  "id": "20260910-rcle-006",
+  "created": "2026-09-10T22:14:28-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "RCLE B04：从最近目标先验学习服务",
+  "context": "按已形成的Portfolio分配冻结一次200更新比较；检验学习能否超越已达到的最近目标服务规则。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行已分配的一次完整比较，总300秒。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一边界停止未执行工作，保留已发生结果。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体指示调整未执行部分，不自动扩大预算。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "固定先验保留全部动作，并与初始化和最近目标参照同时比较。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B04_NEAREST_PRIOR_SCIENCE_CARD_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按已形成的Portfolio分配执行一次最近目标先验FLEX学习比较。",
+    "changes_if_approved": [
+      {
+        "target": "RCLE B04/master24",
+        "from": "已分配、未执行",
+        "to": "一组200次更新，含初始、最终、最近目标比较"
+      }
+    ],
+    "if_refused": "在下个清晰边界应用实际所有者指示，保留已发生结果，不自动重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B04_NEAREST_PRIOR_SCIENCE_CARD_20260910.md",
+        "quote": "One B/EXPLORE fit is selected by the complete four-slot Portfolio decision.",
+        "why": "检验真实学习能否超越已达到的服务规则。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_SERVICE_COMPARISON_DESIGN_INTAKE_20260910.md",
+        "quote": "The stochastic initialization is not assumed competent.",
+        "why": "随机探索可能损害服务，旧种子23在所有8格的碎片化均变差。"
+      }
+    ],
+    "uncertainty": [
+      "一个训练实例只能支持局部探索。",
+      "150秒学习、10秒参考、140秒支持均为上限，尚非实际耗时。"
+    ],
+    "cost": {
+      "compute": "全部运行支持包含在300秒内，18944回合，200次更新。",
+      "owner_time": "无需回复即可继续；可异步干预。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommend/select(a), preserving the allocated question, counts and caps.",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B04_NEAREST_PRIOR_SCIENCE_CARD_20260910.md"
+  },
+  "starred": false
+}
