@@ -1,0 +1,80 @@
+{
+  "recorded_at_utc": "2026-09-11T05:26:38.072186+00:00",
+  "status": "ACCEPTED_RUNNING; MONITOR_ADOPTED confirmed by Root; pending terminal collection",
+  "source": "471a3383d23b16bb01469a6f30e3987910c3e47f",
+  "node": "hmasd-wsl-node",
+  "cwd": "/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911",
+  "handle": "ucope-continue-end-credit-b01-8801-20260911",
+  "output": "/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911/temp/directions/ucope/exp/uav_continue_end_credit_b01_8801",
+  "resource_receipt": "/home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-memory.json",
+  "argv": [
+    "/usr/local/bin/agent-task",
+    "run",
+    "ucope-continue-end-credit-b01-8801-20260911",
+    "/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3000s /bin/bash --noprofile --norc /home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911/experiments/candidates/ucope/uav_continue_end_credit_b01/command.sh"
+  ],
+  "payload": "/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3000s /bin/bash --noprofile --norc /home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911/experiments/candidates/ucope/uav_continue_end_credit_b01/command.sh",
+  "wrapper_sha256": "cba26e84f44d6cd36b5c5ff7f660b626a52d4ee8ad58b47ba9fded1e3612f2f0",
+  "scientific_invocations_accepted": 1,
+  "prior_handle_status": "not_found",
+  "failed_fetch": {
+    "result": "outer command exit1, no stdout/stderr",
+    "effects": "authoritative readback found no new worktree and handle not_found; no invocation submitted",
+    "conservative_support_charge_s": 45
+  },
+  "exact_commit_transfer": {
+    "source": "471a3383d23b16bb01469a6f30e3987910c3e47f",
+    "remote_base": "72f798c5908b69d9627e2facf88d3f6ff7dd6c26",
+    "bytes": 36226108,
+    "sha256": "6fab271637cbe60a1eec59f138f61b48e8b1c2ec9b6bd3021c4fea2a832a81cf",
+    "transfer_returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "wall_seconds": 4.546999999991385
+  },
+  "destination": {
+    "command": "cd /home/wu/projects/HMASD && git index-pack --stdin < /home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-source.pack && git -c core.autocrlf=false worktree add --detach /home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911 471a3383d23b16bb01469a6f30e3987910c3e47f && cd /home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911 && git rev-parse HEAD && /bin/bash -n experiments/candidates/ucope/uav_continue_end_credit_b01/command.sh && git status --short && sha256sum experiments/candidates/ucope/uav_continue_end_credit_b01/command.sh && /usr/local/bin/agent-task status ucope-continue-end-credit-b01-8801-20260911",
+    "returncode": 0,
+    "stdout": "pack\t291bad5623c772a3eada92761ee942d1b71f2b52\nHEAD is now at 471a3383d Implement the allocated UCOPE continue-end credit pair\n471a3383d23b16bb01469a6f30e3987910c3e47f\ncba26e84f44d6cd36b5c5ff7f660b626a52d4ee8ad58b47ba9fded1e3612f2f0  experiments/candidates/ucope/uav_continue_end_credit_b01/command.sh\n{\"task\": \"ucope-continue-end-credit-b01-8801-20260911\", \"status\": \"not_found\"}\n",
+    "stderr": "Preparing worktree (detached HEAD 471a3383d)\n",
+    "wall_seconds": 2.0
+  },
+  "submission_started_at_utc": "2026-09-11T05:27:29.889482+00:00",
+  "submission": {
+    "command": "/usr/local/bin/agent-task run ucope-continue-end-credit-b01-8801-20260911 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3000s /bin/bash --noprofile --norc /home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911/experiments/candidates/ucope/uav_continue_end_credit_b01/command.sh'",
+    "returncode": 0,
+    "stdout": "Task 'ucope-continue-end-credit-b01-8801-20260911' started in tmux session 'agent_ucope-continue-end-credit-b01-8801-20260911'. Output: /home/wu/.agent-tasks/ucope-continue-end-credit-b01-8801-20260911/task.log\n",
+    "stderr": "",
+    "wall_seconds": 0.7339999999967404
+  },
+  "initial_readback": {
+    "observed_at_utc": "2026-09-11T05:27:46.877379+00:00",
+    "command": "/usr/local/bin/agent-task status ucope-continue-end-credit-b01-8801-20260911; cat /home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-memory.json",
+    "returncode": 0,
+    "stdout": "{\"task\": \"ucope-continue-end-credit-b01-8801-20260911\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3334572, \"uptime_seconds\": 16, \"tmux_active\": true}\n{\n  \"assessed_at\": \"2026-09-11T05:27:30.478378Z\",\n  \"available_physical_bytes\": 15634829312,\n  \"captured_at\": \"2026-09-11T05:27:30.478116Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15634829312,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\n",
+    "stderr": "",
+    "wall_seconds": 0.42199999999138527
+  },
+  "initial_status": {
+    "status": "running",
+    "pid": 3334572,
+    "observed_at_utc": "2026-09-11T05:27:46.877379+00:00"
+  },
+  "admission": {
+    "passed": true,
+    "assessed_at": "2026-09-11T05:27:30.478378Z",
+    "available_physical_bytes": 15634829312,
+    "effective_available_bytes": 15634829312,
+    "minimum_available_bytes": 4294967296
+  },
+  "monitor": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "root_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "dispatch": "accepted directly via app message",
+    "adoption": "confirmed by Root native message",
+    "root_confirmation_recorded_at": "2026-09-11T05:31:35.824675+00:00",
+    "collection_owner": "/root/dm_ucope_restart_recovery2",
+    "routine_dm_polling": false,
+    "support_timing_requested": true
+  }
+}

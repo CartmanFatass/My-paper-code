@@ -1,0 +1,74 @@
+{
+  "id": "20260910-ucope-008",
+  "created": "2026-09-10T22:21:16-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE 8801：已分配的一次L/F续约信用比较",
+  "context": "L分开速度和持续时长的PPO信用，用训练期残差预测后续回报；五架部分可观测UAV每步更新私有记忆并保持一或两步动作。比较全新训练的固定F，最终64个世界；3300秒完整分配，一次训练对。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行Portfolio已分配的一次8801比较，保留全部结果，无自动后继。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "应用后续停止指示，保留已经执行的证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体科学定义冲突修订后再执行受影响工作，不增加预算。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "定义、比较器和学习暴露已具体化；独立审查未见实质问题。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_SCIENCE_CARD_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "已分配的一次L/F比较现绑定8801并执行，是否保留此科学定义？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_SCIENCE_CARD_20260911.md",
+        "from": "只完成设计",
+        "to": "按Portfolio既定分配实现并执行一次L/F训练比较"
+      }
+    ],
+    "if_refused": "应用异步指示；已执行结果保留，不自动替换种子或增加训练。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_SCIENCE_CARD_20260911.md",
+        "quote": "Primary Delta_F=mean over64 common final worlds of J_L−J_F",
+        "why": "直接比较新学习包和实际达到的固定短保持基线。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_INTAKE_20260910.md",
+        "quote": "This is an untested package.",
+        "why": "旧T对F六个面板均不利，新残差和裁剪也可能损害学习；不能宣称发现了旧缺陷。"
+      }
+    ],
+    "uncertainty": [
+      "仅一对独立训练；64次评价只给出该对策略的条件误差。",
+      "L新增学习工作秒数未知；严格保留有限预算。"
+    ],
+    "cost": {
+      "compute": "L1800秒、F1200秒、原生合计3000秒、全部额外运行支持300秒、完整3300秒；不转移节余。",
+      "owner_time": "无需等待回复",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "执行已分配的8801一次L/F比较；不增加后继、种子、面板或方向处置。",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_SCIENCE_CARD_20260911.md"
+  },
+  "starred": false
+}

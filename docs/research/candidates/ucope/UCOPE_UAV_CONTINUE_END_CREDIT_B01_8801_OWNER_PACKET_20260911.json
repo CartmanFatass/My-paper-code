@@ -1,0 +1,37 @@
+{
+  "question": "已分配的一次L/F比较现绑定8801并执行，是否保留此科学定义？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_SCIENCE_CARD_20260911.md",
+      "from": "只完成设计",
+      "to": "按Portfolio既定分配实现并执行一次L/F训练比较"
+    }
+  ],
+  "if_refused": "应用异步指示；已执行结果保留，不自动替换种子或增加训练。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_SCIENCE_CARD_20260911.md",
+      "quote": "Primary Delta_F=mean over64 common final worlds of J_L−J_F",
+      "why": "直接比较新学习包和实际达到的固定短保持基线。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_INTAKE_20260910.md",
+      "quote": "This is an untested package.",
+      "why": "旧T对F六个面板均不利，新残差和裁剪也可能损害学习；不能宣称发现了旧缺陷。"
+    }
+  ],
+  "uncertainty": [
+    "仅一对独立训练；64次评价只给出该对策略的条件误差。",
+    "L新增学习工作秒数未知；严格保留有限预算。"
+  ],
+  "cost": {
+    "compute": "L1800秒、F1200秒、原生合计3000秒、全部额外运行支持300秒、完整3300秒；不转移节余。",
+    "owner_time": "无需等待回复",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "执行已分配的8801一次L/F比较；不增加后继、种子、面板或方向处置。",
+  "source": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_SCIENCE_CARD_20260911.md"
+}
