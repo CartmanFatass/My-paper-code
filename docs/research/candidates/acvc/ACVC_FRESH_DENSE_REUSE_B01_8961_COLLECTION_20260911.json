@@ -109,7 +109,7 @@
     "unmeasured_message_overhead": null
   },
   "cleanup": {
-    "status": "preserved; scoped removal pending publication/integration retention",
+    "status": "remote complete; local preparation duplicate blocked before process creation",
     "owner": "/root/dm_acvc_restart_successor2",
     "targets": [
       "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8961-62d7eae7d",
@@ -120,8 +120,77 @@
     ],
     "retained": [
       "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\exp\\fresh_dense_reuse_b01_8961_20260911_collection",
-      "C:/Projects/HMASD-worktrees/codex-acvc"
+      "C:/Projects/HMASD-worktrees/codex-acvc",
+      "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\8961-20260911"
     ],
-    "test_scratch_absent": "temp/directions/acvc/test/8961-stub-20260911"
-  }
+    "test_scratch_absent": "temp/directions/acvc/test/8961-stub-20260911",
+    "root_preservation_integration": "7c2873dd3 on main, reported by Root after integrating6a24944011e1f11f105e7bd045700cd0ece90094",
+    "remote": {
+      "label": "preserved exact remote checkout/supervisor/staging cleanup",
+      "wall_s": 0.611828199995216,
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout": "{\"removed_paths_absent\": {\"/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8961-62d7eae7d\": true, \"/home/wu/.agent-tasks/acvc-fresh-dense-b01-8961-62d7eae7d\": true, \"/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d.bundle\": true, \"/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d-collected.tar.gz\": true}, \"worktree_unregistered\": true, \"tmux_absent\": true, \"source_sha\": \"62d7eae7dedf5560171d636e845286108a4bc528\"}\n",
+      "stderr": ""
+    },
+    "remote_absence": {
+      "removed_paths_absent": {
+        "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8961-62d7eae7d": true,
+        "/home/wu/.agent-tasks/acvc-fresh-dense-b01-8961-62d7eae7d": true,
+        "/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d.bundle": true,
+        "/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d-collected.tar.gz": true
+      },
+      "worktree_unregistered": true,
+      "tmux_absent": true,
+      "source_sha": "62d7eae7dedf5560171d636e845286108a4bc528"
+    },
+    "local": {
+      "status": "blocked before process creation; no removal occurred",
+      "blocker": "CreateProcess Rejected: guarded native PowerShell Remove-Item -LiteralPath of exact owned preparation path rejected: blocked by policy",
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\8961-20260911",
+      "path_still_present": true,
+      "files": [
+        {
+          "name": "launch_submission.json",
+          "bytes": 1084
+        },
+        {
+          "name": "preparation.json",
+          "bytes": 1571
+        },
+        {
+          "name": "preparation.sh",
+          "bytes": 888
+        },
+        {
+          "name": "prepare.py",
+          "bytes": 4227
+        },
+        {
+          "name": "source.bundle",
+          "bytes": 115509172
+        }
+      ],
+      "retained_bytes": 115516942,
+      "preserved_input_hash_matches": {
+        "prepare.py": true,
+        "preparation.sh": true,
+        "preparation.json": true,
+        "launch_submission.json": true
+      },
+      "local_archive_sha256": "aa2dfd36a1b648733be449c435aaecd7150920e353b5aa9828513d20c1493ea1",
+      "local_checkpoint_sha256": "069b6594b8ec3222c7412627c1f32338b6a29ffa2e2484ffa3b1af5d8a2a8318",
+      "test_scratch_absent": true,
+      "owner": "/root/dm_acvc_restart_successor2",
+      "resume_condition": "same authorized target when runtime policy permits; no alternative-shell/executor bypass or escalation request"
+    }
+  },
+  "durable_log_rename": {
+    "archive_path": "supervisor/task.log",
+    "tracked_path": "supervisor/task_log.txt",
+    "sha256": "8439e389f7784ce2a58be05042d54c74ab48808450ac6051adcfae34c76bf8d3",
+    "reason": "*.log is ignored; original bytes preserved"
+  },
+  "root_checkpoint_retention_clarification": "origin/main has readable evidence and hashes; actual final_DENSE.pt/full archive remain in retained local runtime collection root",
+  "closeout_recorded_utc": "2026-09-11T21:56:20.214018+00:00"
 }

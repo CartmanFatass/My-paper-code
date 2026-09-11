@@ -132,3 +132,19 @@ This valid complete B result consumes no C object. It ends the named allocation
 without extra fitting, checkpoint selection, panels, successor or local lifecycle
 decision. The [intake](ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md) separates
 scientific interpretation, technical acceptance and cost limitations.
+
+Closeout after preservation6a24944011e1f11f105e7bd045700cd0ece90094 and Root's
+main integration7c2873dd3: exact remote checkout is absent and unregistered;
+its tmux/supervisor and both staged files are absent. The local full archive and
+checkpoint remain hash-verified. The supervisor log is additionally tracked as
+`fresh_dense_reuse_b01_8961_20260911/supervisor/task_log.txt`, preserving its original bytes.
+
+Guarded native PowerShell removal of the local preparation duplicate was rejected
+before process creation with**`blocked by policy`**. The5-file,115,516,942-byte
+directory remains at`temp/directions/acvc/preparation/8961-20260911`; no deletion
+is claimed and no alternate-shell/executor bypass was attempted. All four small
+preparation inputs already have hash-matching retained copies. DM owns this remaining
+cleanup when runtime policy permits. Test scratch is absent; shared checkout and
+unique local evidence remain. Known support through this readback is66.7732663s,
+native-plus-known-support244.7732663s, excluding final publication/Root support tail
+and unmeasured overhead. These remain subtotals, not unconditional cap acceptance.

@@ -207,3 +207,28 @@ Technical/scientific acceptance is complete with the separate inclusive-cost
 limitation. This single allocation ends; no extra native/model work or successor
 is selected. The [collection receipt](ACVC_FRESH_DENSE_REUSE_B01_8961_COLLECTION_20260911.json)
 records preservation locations and scoped cleanup inventory/absence facts.
+
+## Scoped closeout and retained local restriction
+
+Root integrated preservation6a24944011e1f11f105e7bd045700cd0ece90094 at main7c2873dd3
+and confirmed cleanup continuation. After verifying local archive/checkpoint and
+the matching remote archive, scoped remote removal completed: exact checkout
+absent/unregistered, tmux/supervisor absent, its staged source bundle and collected
+archive absent. Complete local command0.8773843s includes the0.6118282s SSH phase;
+these nested measurements are charged once.
+
+The guarded local PowerShell cleanup was rejected before process creation:
+**`CreateProcess Rejected ... rejected: blocked by policy`**. Its target
+`temp/directions/acvc/preparation/8961-20260911` remains with5 files/115,516,942 bytes.
+Read-only verification0.2818184s confirmed the four small preparation inputs have
+matching retained copies, the full archive/checkpoint remain hash-identical, and
+test scratch is absent. No alternate-shell/executor bypass or escalation followed.
+The shared authoring checkout and local unique evidence remain retained; the actual
+checkpoint is local runtime evidence, not a Git blob. DM owns the blocked duplicate
+cleanup when runtime policy permits. This restriction has no scientific polarity.
+
+The supervisor log is now published under`supervisor/task_log.txt` because the
+repository ignores`*.log`; its bytes match the preserved raw log hash. The final
+owner review returned[]. Known support before final publication is66.7732663s;
+complete known subtotal with178s native is244.7732663s. Final commit/push and Root
+integration/support tail are returned once; missing overhead remains unknown.

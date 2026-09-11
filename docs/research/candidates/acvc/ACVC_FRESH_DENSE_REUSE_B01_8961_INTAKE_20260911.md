@@ -148,3 +148,27 @@ The [collection receipt](ACVC_FRESH_DENSE_REUSE_B01_8961_COLLECTION_20260911.jso
 gives exact locations, hashes, cleanup inventory and final absence facts.
 The shared`C:/Projects/HMASD-worktrees/codex-acvc`/`codex/acvc` authoring checkout
 stays in use for Root integration. No other active/shared path is included.
+
+Root integrated result/intake6a24944011e1f11f105e7bd045700cd0ece90094 on main as
+7c2873dd3 and confirmed continuation of the assigned cleanup. Readable evidence
+and hashes are on main; the actual checkpoint/full archive remain in the local
+runtime collection root. The exact completed remote checkout is now absent on
+disk and unregistered, with its supervisor, tmux and two staged files absent.
+
+Local cleanup is**blocked**, not completed. The native guarded PowerShell
+`Remove-Item -LiteralPath` command targeting only
+`C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/8961-20260911`
+was rejected before process creation:`CreateProcess Rejected ... blocked by policy`.
+Read-only verification confirms5 retained files/115,516,942 bytes, all four small
+inputs preserved elsewhere byte-for-byte, intact local archive/checkpoint and
+absent test scratch. No alternate deletion method, executor or escalation was used.
+
+Technical continuation options:(a) retain this precise residual and return its
+policy blocker;(b) bypass the rejection;(c) claim absence. Recommend/select**(a)**.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** DM retains
+same-path cleanup ownership until runtime policy permits. This does not change
+UP/UP, the spent cap, the ended allocation or direction/Portfolio authority.
+
+Known support through this readback is66.7732663s; native-plus-known-support is
+244.7732663s. Final publication and Root integration/support timing remain to be
+reported once, with unmeasured overhead explicit. The final owner review was[].
