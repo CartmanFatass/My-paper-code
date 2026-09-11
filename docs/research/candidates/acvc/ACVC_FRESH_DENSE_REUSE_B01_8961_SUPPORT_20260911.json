@@ -10,7 +10,7 @@
       "s": 0.5616209
     },
     {
-      "label": "read immutable Portfolio §§1–9, current scientific law and exact C/F/dwell consumers",
+      "label": "read immutable Portfolio \u00a7\u00a71\u20139, current scientific law and exact C/F/dwell consumers",
       "s": 0.8777441
     },
     {
@@ -88,16 +88,67 @@
     {
       "label": "Monitor actual adoption query (Root-routed receipt)",
       "s": 0.7
+    },
+    {
+      "label": "publish launch and adopted Monitor receipts, immediate push",
+      "s": 5.0733916
+    },
+    {
+      "label": "Monitor terminal query shared across four handles; charged whole, not split",
+      "s": 0.9
+    },
+    {
+      "label": "terminal intake current tools and prior E0/intake structure",
+      "s": 0.2242087
+    },
+    {
+      "label": "terminal intake current tools and actual publication and accepted direction state",
+      "s": 0.2409559
+    },
+    {
+      "label": "scientific reading/card rule and intake/authoring ownership",
+      "s": 0.2142289
+    },
+    {
+      "label": "terminal source verification, complete archive, transfer and hash match",
+      "s": 1.5404735999999999
+    },
+    {
+      "label": "extract and inventory verified archive, read exact receipts and publication rows",
+      "s": 0.3673265
+    },
+    {
+      "label": "inspect evaluation keys, supervisor exit and intake rule/audit",
+      "s": 0.3161535
+    },
+    {
+      "label": "independent finite reduction of all episode/update/primary/receipt records",
+      "s": 0.2704657
+    },
+    {
+      "label": "intake owner-review/audit boundary",
+      "s": 0.4923872
+    },
+    {
+      "label": "existing new-card owner item application state",
+      "s": 0.2354779
     }
   ],
-  "known_support_s": 48.85705849999446,
+  "known_support_s": 58.73212799999446,
   "support_cap_s": 330,
   "native_cap_s": 270,
   "complete_cap_s": 600,
+  "known_native_charge_s": 178,
+  "known_native_plus_support_s": 236.73212799999447,
+  "native_cap_pass": true,
+  "full_support_and_complete_cap_conformance": "unestablished: known subtotals are not complete bills",
+  "observed_cap_breach": false,
   "missing_or_pending": [
     "unmeasured client/message overhead not represented by command/tool wall",
-    "this receipt publication/push",
-    "future Monitor observation and notification",
-    "collection/reduction/evidence preservation/integration/cleanup"
-  ]
+    "result publication/push after this cutoff",
+    "Root integration and associated support tail",
+    "scoped cleanup and closeout publication"
+  ],
+  "monitor_shared_query": "0.9s full four-handle terminal query charged without splitting, separately from 0.7s adoption",
+  "non_effect_rejection": "apply_patch refused same-file delete/add for support JSON; no mutation or following command occurred; corrected with a direct data write"
 }

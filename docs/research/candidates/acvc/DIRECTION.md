@@ -323,7 +323,35 @@ still absent and the learned T/G package remains ended. See the
 [intake](ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md), which separate scientific
 acceptance from the inclusive accounting limitation.
 
+### Independent fresh fit8961 — accepted 2026-09-11
+
+The new unscreened8961 fit completed512 training episodes/1024 Adam calls and all
+C/F/dwell64-world panels. F−C is**+.1414322041J** (conditional SE.0079158399);
+F−dwell is**+.0944113176J** (SE.0082975516), both UP under the.01J rule.
+Dwell−C is also UP,+.0470208865J. Together with8921/8931 this is a third completed
+favorable fresh realization of the fixed package; each fit and every outcome remain
+separate. The64-world SEs do not estimate training-population uncertainty.
+
+The strongest support is the extra margin over the useful simpler dwell control.
+The strongest contradiction is5 adverse F−dwell worlds, minimum−.0793154814J,
+and one F−C loss,−.0237342650J. F's8004 retraces and dwell's4705 interventions
+occur on their respective evolving histories. C always sends its sampled proposal;
+dwell uses its own cue and borrows neither F times nor dose. The observed benefit
+does not isolate a pure-retrace effect, prove history necessity or establish transfer.
+
+The next discriminator, if separately selected and allocated, remains variation
+across independent trained endpoints under the same primary comparison. No successor
+is selected by this completed allocation. Tuned native headroom remains absent;
+the ended T/G package, recasts2/lowest contention and formal UAV-validation status
+are unchanged. See the [8961 E0](ACVC_FRESH_DENSE_REUSE_B01_8961_RESULT_EVIDENCE_20260911.md)
+and [intake](ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md), which retain the
+separate inclusive-cost accounting limitation.
+
 ## Evidence set
+
+- `docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_RESULT_EVIDENCE_20260911.md`
+- `docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md`
+- `docs/research/candidates/acvc/fresh_dense_reuse_b01_8961_20260911/dm_analysis.json`
 
 - `docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8931_RESULT_EVIDENCE_20260910.md`
 - `docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md`

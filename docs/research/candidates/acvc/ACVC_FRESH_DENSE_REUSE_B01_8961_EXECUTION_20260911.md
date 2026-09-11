@@ -183,3 +183,27 @@ The adoption query took0.7s, bringing known invoked support to48.8570585s before
 this publication. The precise admission bytes and execution timestamps remain
 for terminal artifact collection. Monitor now owns observation; DM owns collection,
 technical acceptance and scientific intake on Root's routed terminal fact.
+
+## Terminal collection and acceptance
+
+Root routed MONITOR_TERMINAL: finished/exit0,176s supervisor duration. Its terminal
+query cost0.9s shared across four handles; the whole0.9s is charged without division,
+separately from adoption0.7s. Direct collection verified exact source62d7eae7d,
+empty tracked status and absent tmux, then captured every scientific/support/
+supervisor file. The full12-file archive matches remote/local SHA256
+`aa2dfd36a1b648733be449c435aaecd7150920e353b5aa9828513d20c1493ea1`.
+
+Whole-command time175.58s, peakRSS550012KiB; native charge178s conservatively covers
+the176s supervisor interval, integer timestamp granularity and recorded final sleep.
+Submission is separately charged once to support. Admission passed with15,625,396,224
+physical/effective bytes. The byte-only reduction checked all704 episode rows and
+1024 update records, all seed/rollout/epoch keys, complete counts/fit/checkpoint and
+every primary vector/mean/SE/reading. F−C+.1414322041J and F−dwell+.0944113176J
+are both UP. All adverse worlds and positive dwell−C remain preserved in the
+[E0](ACVC_FRESH_DENSE_REUSE_B01_8961_RESULT_EVIDENCE_20260911.md) and
+[intake](ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md).
+
+Technical/scientific acceptance is complete with the separate inclusive-cost
+limitation. This single allocation ends; no extra native/model work or successor
+is selected. The [collection receipt](ACVC_FRESH_DENSE_REUSE_B01_8961_COLLECTION_20260911.json)
+records preservation locations and scoped cleanup inventory/absence facts.
