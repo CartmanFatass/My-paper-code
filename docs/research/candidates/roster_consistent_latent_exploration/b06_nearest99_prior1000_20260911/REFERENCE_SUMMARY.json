@@ -1,0 +1,405 @@
+{
+  "Y_note": "ScriptedEpisodeResult has no Y; Y is unavailable",
+  "action_law": {
+    "distance_field": 76,
+    "nearest_probability": 0.99,
+    "other_probability": 0.002,
+    "pointer_output_initially_zero": true,
+    "tie": "first candidate"
+  },
+  "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911/temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/reference-admission.json",
+  "allocations": {
+    "models": 0,
+    "training_instances": 0
+  },
+  "arm": "reference",
+  "block_digest_hex": "c2025cc336c464a7786be608fa6c4955e33418bc0bab06f3e1e3cc358dbac6f1",
+  "cells": {
+    "12_to_12.ACTIVE_CONTINUATION": {
+      "40U_mean": 9.414062500000002,
+      "F_mean": 0.2353515625,
+      "U_mean": 0.23535156250000003,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 252,
+      "tau40_fraction": 0.984375,
+      "tau_mean": 39.375
+    },
+    "12_to_12.NEW_EPOCH": {
+      "40U_mean": 10.07291666666667,
+      "F_mean": 0.23307291666666669,
+      "U_mean": 0.25182291666666673,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 256,
+      "tau40_fraction": 1.0,
+      "tau_mean": 40.0
+    },
+    "12_to_8.ACTIVE_CONTINUATION": {
+      "40U_mean": 12.87109375,
+      "F_mean": 0.32177734375,
+      "U_mean": 0.32177734375,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 254,
+      "tau40_fraction": 0.9921875,
+      "tau_mean": 39.8125
+    },
+    "12_to_8.NEW_EPOCH": {
+      "40U_mean": 13.48583984375,
+      "F_mean": 0.32109375,
+      "U_mean": 0.33714599609375,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 245,
+      "tau40_fraction": 0.95703125,
+      "tau_mean": 38.82421875
+    },
+    "8_to_12.ACTIVE_CONTINUATION": {
+      "40U_mean": 9.66666666666667,
+      "F_mean": 0.2392578125,
+      "U_mean": 0.24166666666666672,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 254,
+      "tau40_fraction": 0.9921875,
+      "tau_mean": 39.703125
+    },
+    "8_to_12.NEW_EPOCH": {
+      "40U_mean": 10.052734375000004,
+      "F_mean": 0.23697916666666669,
+      "U_mean": 0.2513183593750001,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 252,
+      "tau40_fraction": 0.984375,
+      "tau_mean": 39.40234375
+    },
+    "8_to_8.ACTIVE_CONTINUATION": {
+      "40U_mean": 12.7890625,
+      "F_mean": 0.3197265625,
+      "U_mean": 0.3197265625,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 250,
+      "tau40_fraction": 0.9765625,
+      "tau_mean": 39.4375
+    },
+    "8_to_8.NEW_EPOCH": {
+      "40U_mean": 13.2275390625,
+      "F_mean": 0.3138671875,
+      "U_mean": 0.3306884765625,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 247,
+      "tau40_fraction": 0.96484375,
+      "tau_mean": 39.1640625
+    }
+  },
+  "comparison": {
+    "cells": {
+      "12_to_12.ACTIVE_CONTINUATION": {
+        "Delta_ref": -0.009301757812499992,
+        "G_U": -0.000252278645833333,
+        "SE": 0.0030485971343626947,
+        "final_U": 0.24465332031250003,
+        "final_minus_initial": {
+          "F": 0.0005208333333333327,
+          "U": 0.000252278645833333,
+          "tau": 0.0
+        },
+        "final_minus_reference": {
+          "F": 0.004459635416666664,
+          "U": 0.009301757812499992,
+          "tau": 0.0
+        },
+        "initial_U": 0.2444010416666667,
+        "n": 256,
+        "reference_U": 0.23535156250000006,
+        "reference_gap": 0.009301757812499992
+      },
+      "12_to_12.NEW_EPOCH": {
+        "Delta_ref": -0.009513346354166657,
+        "G_U": 0.00010579427083333285,
+        "SE": 0.003148072242249488,
+        "final_U": 0.26133626302083335,
+        "final_minus_initial": {
+          "F": 3.2526065174565133e-19,
+          "U": -0.00010579427083333285,
+          "tau": 0.0
+        },
+        "final_minus_reference": {
+          "F": 0.004850260416666662,
+          "U": 0.009513346354166657,
+          "tau": 0.0
+        },
+        "initial_U": 0.2614420572916667,
+        "n": 256,
+        "reference_U": 0.2518229166666667,
+        "reference_gap": 0.009513346354166657
+      },
+      "12_to_8.ACTIVE_CONTINUATION": {
+        "Delta_ref": -0.0034423828125,
+        "G_U": -0.00047607421874999993,
+        "SE": 0.0031545250307090872,
+        "final_U": 0.32521972656250003,
+        "final_minus_initial": {
+          "F": 0.00043945312499999963,
+          "U": 0.00047607421874999993,
+          "tau": 0.0
+        },
+        "final_minus_reference": {
+          "F": -0.0017578125000000024,
+          "U": 0.0034423828125,
+          "tau": 0.15625
+        },
+        "initial_U": 0.32474365234375,
+        "n": 256,
+        "reference_U": 0.32177734375,
+        "reference_gap": 0.0034423828125
+      },
+      "12_to_8.NEW_EPOCH": {
+        "Delta_ref": -0.004382324218750001,
+        "G_U": -0.0002563476562500005,
+        "SE": 0.0028217069193316865,
+        "final_U": 0.3415283203125,
+        "final_minus_initial": {
+          "F": 0.0004882812500000005,
+          "U": 0.0002563476562500005,
+          "tau": -0.0859375
+        },
+        "final_minus_reference": {
+          "F": 0.00029296874999999766,
+          "U": 0.004382324218750001,
+          "tau": 0.22265625
+        },
+        "initial_U": 0.34127197265625,
+        "n": 256,
+        "reference_U": 0.33714599609374996,
+        "reference_gap": 0.004382324218750001
+      },
+      "8_to_12.ACTIVE_CONTINUATION": {
+        "Delta_ref": -0.008072916666666654,
+        "G_U": 0.0002604166666666678,
+        "SE": 0.002631393616804171,
+        "final_U": 0.24973958333333338,
+        "final_minus_initial": {
+          "F": -0.000130208333333334,
+          "U": -0.0002604166666666678,
+          "tau": 0.0
+        },
+        "final_minus_reference": {
+          "F": 0.0034830729166666604,
+          "U": 0.008072916666666654,
+          "tau": 0.0
+        },
+        "initial_U": 0.25,
+        "n": 256,
+        "reference_U": 0.24166666666666672,
+        "reference_gap": 0.008072916666666654
+      },
+      "8_to_12.NEW_EPOCH": {
+        "Delta_ref": -0.009236653645833318,
+        "G_U": -0.0003011067708333339,
+        "SE": 0.0027089429546112336,
+        "final_U": 0.2605550130208334,
+        "final_minus_initial": {
+          "F": 0.0003255208333333331,
+          "U": 0.0003011067708333339,
+          "tau": 0.0
+        },
+        "final_minus_reference": {
+          "F": 0.0038085937499999934,
+          "U": 0.009236653645833318,
+          "tau": 0.1484375
+        },
+        "initial_U": 0.26025390625,
+        "n": 256,
+        "reference_U": 0.2513183593750001,
+        "reference_gap": 0.009236653645833318
+      },
+      "8_to_8.ACTIVE_CONTINUATION": {
+        "Delta_ref": -0.002734375,
+        "G_U": 6.1035156249999566e-05,
+        "SE": 0.003129448809398131,
+        "final_U": 0.3224609375,
+        "final_minus_initial": {
+          "F": -0.00024414062499999978,
+          "U": -6.1035156249999566e-05,
+          "tau": 0.03125
+        },
+        "final_minus_reference": {
+          "F": -0.001953125000000001,
+          "U": 0.002734375,
+          "tau": -0.0625
+        },
+        "initial_U": 0.32252197265625004,
+        "n": 256,
+        "reference_U": 0.3197265625,
+        "reference_gap": 0.002734375
+      },
+      "8_to_8.NEW_EPOCH": {
+        "Delta_ref": -0.0018920898437499965,
+        "G_U": 0.0006469726562499999,
+        "SE": 0.00308978783804717,
+        "final_U": 0.33258056640625,
+        "final_minus_initial": {
+          "F": -0.0006835937500000001,
+          "U": -0.0006469726562499999,
+          "tau": 0.0
+        },
+        "final_minus_reference": {
+          "F": -0.003320312500000001,
+          "U": 0.0018920898437499965,
+          "tau": -0.0234375
+        },
+        "initial_U": 0.3332275390625,
+        "n": 256,
+        "reference_U": 0.3306884765625,
+        "reference_gap": 0.0018920898437499965
+      }
+    },
+    "primary": {
+      "Delta_ref": -0.005757649739583327,
+      "G_U": -0.00010782877604166607,
+      "MEI_U": 0.05,
+      "SE": 0.002053975446294813,
+      "active_paths": [
+        {
+          "Delta_ref": -0.008072916666666654,
+          "G_U": 0.0002604166666666678,
+          "SE": 0.002631393616804171,
+          "cell": "8_to_12.ACTIVE_CONTINUATION",
+          "final_U": 0.24973958333333338,
+          "final_minus_initial": {
+            "F": -0.000130208333333334,
+            "U": -0.0002604166666666678,
+            "tau": 0.0
+          },
+          "final_minus_reference": {
+            "F": 0.0034830729166666604,
+            "U": 0.008072916666666654,
+            "tau": 0.0
+          },
+          "initial_U": 0.25,
+          "n": 256,
+          "reference_U": 0.24166666666666672,
+          "reference_gap": 0.008072916666666654
+        },
+        {
+          "Delta_ref": -0.0034423828125,
+          "G_U": -0.00047607421874999993,
+          "SE": 0.0031545250307090872,
+          "cell": "12_to_8.ACTIVE_CONTINUATION",
+          "final_U": 0.32521972656250003,
+          "final_minus_initial": {
+            "F": 0.00043945312499999963,
+            "U": 0.00047607421874999993,
+            "tau": 0.0
+          },
+          "final_minus_reference": {
+            "F": -0.0017578125000000024,
+            "U": 0.0034423828125,
+            "tau": 0.15625
+          },
+          "initial_U": 0.32474365234375,
+          "n": 256,
+          "reference_U": 0.32177734375,
+          "reference_gap": 0.0034423828125
+        }
+      ],
+      "approximate_95_interval": [
+        -0.00978344161432116,
+        -0.0017318578648454937
+      ],
+      "final_U": 0.2874796549479167,
+      "initial_U": 0.287371826171875,
+      "positive_favors": "learned final",
+      "reference_U": 0.28172200520833335,
+      "reference_gap": 0.005757649739583327,
+      "uncertainty": "conditional scenario Monte Carlo, one training instance; distinct cell RNG domains"
+    }
+  },
+  "counts": {
+    "backward_step_calls": 0,
+    "final_episodes": 2048,
+    "init_episodes": 0,
+    "nonzero_steps": 0,
+    "training_episodes": 0
+  },
+  "eight_cell_mean": {
+    "40U_mean": 11.447489420572918,
+    "F_mean": 0.2776407877604167,
+    "U_mean": 0.28618723551432296,
+    "Y_mean": null,
+    "cells": [
+      "8_to_8.ACTIVE_CONTINUATION",
+      "8_to_8.NEW_EPOCH",
+      "12_to_12.ACTIVE_CONTINUATION",
+      "12_to_12.NEW_EPOCH",
+      "8_to_12.ACTIVE_CONTINUATION",
+      "8_to_12.NEW_EPOCH",
+      "12_to_8.ACTIVE_CONTINUATION",
+      "12_to_8.NEW_EPOCH"
+    ],
+    "tau40_fraction": 0.9814453125,
+    "tau_mean": 39.46484375
+  },
+  "launch_sha": "baf63642a776ef3e60f4310ce47d76c45168c283",
+  "native": {
+    "abi": {
+      "abi_version": 2,
+      "event_input_size": 64,
+      "fixture_input_size": 224,
+      "fixture_magic": 5927665395199787847,
+      "snapshot_size": 464,
+      "step_input_size": 64
+    },
+    "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+    "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+    "load_seconds": 0.0021719919750466943,
+    "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+    "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+    "runtime_abi": {
+      "byteorder": "little",
+      "cache_tag": "cpython-310",
+      "event_input_size": 64,
+      "fixture_input_size": 224,
+      "implementation": "cpython",
+      "machine": "x86_64",
+      "pointer_bits": 64,
+      "python_version": [
+        3,
+        10,
+        21
+      ],
+      "snapshot_size": 464,
+      "step_input_size": 64
+    },
+    "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+    "toolchain": {
+      "compile_flags": [
+        "-std=c++17",
+        "-O2",
+        "-fexceptions",
+        "-shared",
+        "-fPIC",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fno-unsafe-math-optimizations"
+      ],
+      "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+      "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+    }
+  },
+  "object": "RCLE-TBCFV-B06-NEAREST99-PRIOR1000",
+  "peak_rss_bytes": 408117248,
+  "reading": [
+    "no positive learning from initialization",
+    "mixed native consequences"
+  ],
+  "root_key_hex": "43448f432f37cfc458c34aa494492b152b8c56ed5cc5054d69040030b772facb",
+  "seed": 26,
+  "status": "COMPLETE",
+  "wall_seconds": 2.220682200975716
+}

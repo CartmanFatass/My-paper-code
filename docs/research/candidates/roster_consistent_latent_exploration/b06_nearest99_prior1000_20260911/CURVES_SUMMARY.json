@@ -1,0 +1,181 @@
+{
+  "completed_updates": 1000,
+  "all_nonzero": true,
+  "all_event_orders": [
+    "parameter_update",
+    "baseline_update"
+  ],
+  "gradient_norm_range": [
+    0.07429007071912627,
+    1.5715162394086284
+  ],
+  "step_norm_range": [
+    0.01999999999999999,
+    0.02000000000000001
+  ],
+  "first_block": {
+    "agent_claim_decisions": 8192,
+    "agent_ticks": 32768,
+    "environment_ticks": 4096,
+    "event_order": [
+      "parameter_update",
+      "baseline_update"
+    ],
+    "loss": 6.411583388083283,
+    "measured_parameter_delta_norm": 0.02,
+    "nonzero": true,
+    "parameter_delta_norm": 0.02,
+    "per_cell": [
+      {
+        "F_mean": 0.325,
+        "U_mean": 0.3317708333333334,
+        "Y_mean": 0.6634114583333334,
+        "cell": "6_to_6.ACTIVE_CONTINUATION",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.28750000000000003,
+        "U_mean": 0.30364583333333345,
+        "Y_mean": 0.6923828125000002,
+        "cell": "6_to_6.NEW_EPOCH",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.22875,
+        "U_mean": 0.233125,
+        "Y_mean": 0.7759765625,
+        "cell": "10_to_10.ACTIVE_CONTINUATION",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.29374999999999996,
+        "U_mean": 0.3078125000000001,
+        "Y_mean": 0.70078125,
+        "cell": "10_to_10.NEW_EPOCH",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.32625,
+        "U_mean": 0.33375000000000016,
+        "Y_mean": 0.6429687500000001,
+        "cell": "6_to_10.ACTIVE_CONTINUATION",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.30124999999999996,
+        "U_mean": 0.3168750000000001,
+        "Y_mean": 0.6779296875,
+        "cell": "6_to_10.NEW_EPOCH",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.35208333333333336,
+        "U_mean": 0.36250000000000016,
+        "Y_mean": 0.6410156250000001,
+        "cell": "10_to_6.ACTIVE_CONTINUATION",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.29583333333333334,
+        "U_mean": 0.32031250000000006,
+        "Y_mean": 0.6738281250000001,
+        "cell": "10_to_6.NEW_EPOCH",
+        "episodes": 8,
+        "tau_mean": 40.0
+      }
+    ],
+    "raw_gradient_norm": 0.9770847392028555,
+    "training_episodes": 64,
+    "update": 0
+  },
+  "last_block": {
+    "agent_claim_decisions": 8192,
+    "agent_ticks": 32768,
+    "environment_ticks": 4096,
+    "event_order": [
+      "parameter_update",
+      "baseline_update"
+    ],
+    "loss": 0.08112839448992518,
+    "measured_parameter_delta_norm": 0.02,
+    "nonzero": true,
+    "parameter_delta_norm": 0.02,
+    "per_cell": [
+      {
+        "F_mean": 0.25,
+        "U_mean": 0.25208333333333344,
+        "Y_mean": 0.7249348958333335,
+        "cell": "6_to_6.ACTIVE_CONTINUATION",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.32916666666666666,
+        "U_mean": 0.3505208333333334,
+        "Y_mean": 0.6520182291666667,
+        "cell": "6_to_6.NEW_EPOCH",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.28875,
+        "U_mean": 0.29343750000000013,
+        "Y_mean": 0.70078125,
+        "cell": "10_to_10.ACTIVE_CONTINUATION",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.31625000000000003,
+        "U_mean": 0.33468749999999997,
+        "Y_mean": 0.6712890625,
+        "cell": "10_to_10.NEW_EPOCH",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.28375,
+        "U_mean": 0.29375000000000007,
+        "Y_mean": 0.6904296875,
+        "cell": "6_to_10.ACTIVE_CONTINUATION",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.29374999999999996,
+        "U_mean": 0.31125000000000014,
+        "Y_mean": 0.6876302083333333,
+        "cell": "6_to_10.NEW_EPOCH",
+        "episodes": 8,
+        "tau_mean": 37.0
+      },
+      {
+        "F_mean": 0.3354166666666667,
+        "U_mean": 0.3359375000000001,
+        "Y_mean": 0.6792968750000001,
+        "cell": "10_to_6.ACTIVE_CONTINUATION",
+        "episodes": 8,
+        "tau_mean": 40.0
+      },
+      {
+        "F_mean": 0.2916666666666667,
+        "U_mean": 0.3083333333333334,
+        "Y_mean": 0.6955729166666668,
+        "cell": "10_to_6.NEW_EPOCH",
+        "episodes": 8,
+        "tau_mean": 35.25
+      }
+    ],
+    "raw_gradient_norm": 0.0992036402163608,
+    "training_episodes": 64,
+    "update": 999
+  },
+  "full_block_records": "Preserved raw/learned/completed_blocks.jsonl and raw/learned/summary.json; COLLECTION.json maps bytes and hashes."
+}

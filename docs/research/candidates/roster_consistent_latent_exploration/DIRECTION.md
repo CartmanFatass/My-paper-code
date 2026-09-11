@@ -687,3 +687,36 @@ F/recovery consequences. A lower exploratory mass is an unallocated option, not
 an established cause or selected successor. No new probability, seed, card, budget,
 family/lifecycle/priority disposition or C claim is created. References: B05 card,
 E0, compact summaries, retained-data analysis and full intake.
+
+## Nearest99-prior1000: no aggregate learning gain, reference deficit — 2026-09-11
+
+RCLE_B06_NEAREST99_PRIOR1000_RESULT_INTAKE_20260911.md accepts one fresh
+B06/master26 B. Final primary U=.287479654948 remains above attained nearest
+.281722005208, Delta_ref−.005757649740. Initialization gain is−.000107828776,
+with conditional95% interval[−.000743939284,+.000528281732]. All eight final
+service means lose to nearest;504/512 primary initialization comparisons tie in U.
+These are score ties, not policy/action identity or an equivalence result.
+
+The strongest direct support is four initialization U cell gains, including
+active8→12 +.000260416667. Strongest contradiction is all-cell reference deficit,
+active12→8 initialization loss.000476074219, five reference F losses and2012/2048
+final tau40 failure codes. The raw five-positive initial F count includes a
++3.25e−19 contrast with identical displayed endpoint means; preserve its precision
+qualification rather than describing five substantive harms. All-cell Y declines
+slightly and all-cell mean failure-coded tau improves slightly; neither supplies
+a general recovery/nonharm or learned-competence claim.
+
+One thousand nonzero .02 updates move the26,161 FP64 state by.714670178467 from
+fresh norm21.1477941906 along path20. That establishes exposure, not why competent
+service barely changes. The stronger legal prior adds a starting preference rather
+than information. Its own initialization was already close to nearest; cross-root
+comparison with the .9-prior B04/B05 results cannot isolate probability causality.
+Finite learning exposure, credit/update allocation and partner co-adaptation remain
+surviving limitations. Tuned same-information headroom is still absent.
+
+This named allocation ends at intake and preserved closeout. No probability sweep,
+longer training, new seed, family/lifecycle/priority change or automatic successor
+is selected. A separately allocated next discriminator would need actual learning
+from competent behavior while overcoming the attained legal null; no method or
+budget is chosen here. References: B06 card, E0, compact summaries, full preserved
+block/endpoint evidence, parameter facts and scientific intake.

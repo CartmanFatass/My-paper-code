@@ -1,0 +1,19 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "RCLE_B06_primary_U",
+      "arm": "nearest_prior_final1000",
+      "n": 1,
+      "mean": 0.2874796549479167,
+      "sample_sd": null,
+      "min": 0.2874796549479167,
+      "max": 0.2874796549479167,
+      "runs": {
+        "26": 0.2874796549479167
+      }
+    }
+  ],
+  "paired_differences": []
+}

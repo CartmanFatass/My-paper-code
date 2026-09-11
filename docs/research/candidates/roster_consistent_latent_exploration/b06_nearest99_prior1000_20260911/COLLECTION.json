@@ -1,0 +1,151 @@
+{
+  "handle": "rcle-b06-nearest99-s26-20260911",
+  "source_sha": "baf63642a776ef3e60f4310ce47d76c45168c283",
+  "remote_cwd": "/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911",
+  "remote_output": "/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911/temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911",
+  "steps": [
+    {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "set -e\ntest \"$(git -C /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911 rev-parse HEAD)\" = baf63642a776ef3e60f4310ce47d76c45168c283\ntest \"$(cat /home/wu/.agent-tasks/rcle-b06-nearest99-s26-20260911/status)\" = finished\ntest \"$(cat /home/wu/.agent-tasks/rcle-b06-nearest99-s26-20260911/exit_code)\" = 0\ntar -czf /home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911/terminal.tar.gz -C /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911 temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911 -C /home/wu/.agent-tasks rcle-b06-nearest99-s26-20260911\nsha256sum /home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911/terminal.tar.gz /home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911/source.bundle\ndu -sb /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911 /home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911\ngit -C /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911 status --porcelain --untracked-files=all"
+      ],
+      "exit_code": 0,
+      "stdout": "4c3188b056ccc91a67482663a3d97f9d38f216d41b55b331127ab1b744202494  /home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911/terminal.tar.gz\n9e22ced7157debd250e289f57855ef513e36ba7dfc575da5b8921b21b2feffd6  /home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911/source.bundle\n48502754\t/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911\n2736081\t/home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911\n",
+      "stderr": "",
+      "wall_s": 1.0305783999792766
+    },
+    {
+      "argv": [
+        "scp",
+        "-q",
+        "hmasd-wsl-node:/home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911/terminal.tar.gz",
+        "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\terminal.tar.gz"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "wall_s": 0.7586079000029713
+    }
+  ],
+  "archive_sha256": "4c3188b056ccc91a67482663a3d97f9d38f216d41b55b331127ab1b744202494",
+  "archive_bytes": 807556,
+  "source_bundle": {
+    "path": "temp\\directions\\roster_consistent_latent_exploration\\b06-nearest99-prior1000-preparation\\source.bundle",
+    "bytes": 1928525,
+    "sha256": "9e22ced7157debd250e289f57855ef513e36ba7dfc575da5b8921b21b2feffd6"
+  },
+  "archive_members": 21,
+  "files": [
+    {
+      "archive_member": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/reference/summary.json",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\reference\\summary.json",
+      "bytes": 397730,
+      "sha256": "700b1d0a0db2cd9348ff9722742e99b414450f3db44881bc7ee46df273013fb1"
+    },
+    {
+      "archive_member": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/learned/summary.json",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\learned\\summary.json",
+      "bytes": 3228295,
+      "sha256": "3c9a1fb9a04568e2e061c40804cce7efb94b5f80e531e835ff669f91ad9125cd"
+    },
+    {
+      "archive_member": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/learned/initial_parameters.pt",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\learned\\initial_parameters.pt",
+      "bytes": 219989,
+      "sha256": "56034f0f58f031f2548b95427983882f3c0660984955961a38e5ec0691564e43"
+    },
+    {
+      "archive_member": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/learned/init_scenarios.json",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\learned\\init_scenarios.json",
+      "bytes": 416476,
+      "sha256": "1a320ca65383845a48da60ed98dbdde758bdae5e4bc7745d02880e2c54c39a29"
+    },
+    {
+      "archive_member": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/learned/parameters.pt",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\learned\\parameters.pt",
+      "bytes": 219701,
+      "sha256": "e4abb705bbee596d1604315d6f6d00b872787ef00dad5e265d5a08cecd1e2be8"
+    },
+    {
+      "archive_member": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/learned/completed_blocks.jsonl",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\learned\\completed_blocks.jsonl",
+      "bytes": 1569600,
+      "sha256": "892cec2cc7c22b2ffcec2eb9c38c4117fa05b54bd90177af9fa021157dee530d"
+    },
+    {
+      "archive_member": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/reference-admission.json",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\reference-admission.json",
+      "bytes": 504,
+      "sha256": "4e27e957e1bd20c3c0748363d4232b9f3dd96dd782627935d09cd77161b59669"
+    },
+    {
+      "archive_member": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/chain-time.txt",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\chain-time.txt",
+      "bytes": 41,
+      "sha256": "bac2563d9c4283788607e260cc4a7b5ff766b6b9862efc5ea8f9f52280fadff5"
+    },
+    {
+      "archive_member": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/learned-admission.json",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\learned-admission.json",
+      "bytes": 504,
+      "sha256": "9b8884a1d9115578f624648089744252c1724b13a4271503e15aa7e30eeec425"
+    },
+    {
+      "archive_member": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/learned-time.txt",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\learned-time.txt",
+      "bytes": 41,
+      "sha256": "16dec73ba5eae6ee5bb7686704fa6962eb8202a31689f374212e9c2cd4ea972b"
+    },
+    {
+      "archive_member": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/reference-time.txt",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\reference-time.txt",
+      "bytes": 39,
+      "sha256": "3ae9af356888f7061b3153d74ce14ab4179f9fbf91e03cff15662a3c8bae203b"
+    },
+    {
+      "archive_member": "rcle-b06-nearest99-s26-20260911/runner.sh",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\supervisor\\runner.sh",
+      "bytes": 1625,
+      "sha256": "7ad4947aeda2e8c3bce16dc9d598e6ffe8f961069d2e61ec624b5f2cb77bda1c"
+    },
+    {
+      "archive_member": "rcle-b06-nearest99-s26-20260911/exit_code",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\supervisor\\exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "archive_member": "rcle-b06-nearest99-s26-20260911/status",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\supervisor\\status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "archive_member": "rcle-b06-nearest99-s26-20260911/start_time",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\supervisor\\start_time",
+      "bytes": 11,
+      "sha256": "e63334c17abdccb4e1641bf89b91ac07f73456be4e61ba6da41ab4e7efc05448"
+    },
+    {
+      "archive_member": "rcle-b06-nearest99-s26-20260911/pid",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\supervisor\\pid",
+      "bytes": 8,
+      "sha256": "cc9af6341a406dc9d2a17e81a23c0bea7fdaa21810cc48d4f31f9df5c8ce54a6"
+    },
+    {
+      "archive_member": "rcle-b06-nearest99-s26-20260911/task.log",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b06-nearest99-prior1000-s26-20260911\\raw\\supervisor\\task.log",
+      "bytes": 1240,
+      "sha256": "47af94c178e46bf3dc8df3a5c7710d73f3056b76c0a55dbd5a22b1fdf1acff87"
+    }
+  ],
+  "status": "COMPLETE_PRESERVED",
+  "source_and_archive_local_remote_hash_match": true,
+  "extraction": "Same-byte mapping directly to short raw/learned, raw/reference and raw/supervisor paths; no deep-prefix extraction.",
+  "collection_wall_s": 1.8396033000026364
+}
