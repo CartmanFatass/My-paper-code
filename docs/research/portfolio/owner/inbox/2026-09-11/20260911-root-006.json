@@ -1,0 +1,75 @@
+{
+  "id": "20260911-root-006",
+  "created": "2026-09-11T15:18:13-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "decision",
+  "title": "FOLR首次门控收益后的第五位投资",
+  "context": "原DM已接受首次LEARNED_EVENT比RETAIN高1.763359375，超过1单位门槛，但仅一个完整训练对。Root要求发布前将第五个空位独立交由Portfolio决定；其他A/B/C/D四项选择不变。",
+  "options": [
+    {
+      "key": "P",
+      "label": "新完整训练对",
+      "consequence": "新选一对相同5000训练和128评估比较，完整3900秒，结束后无自动后续。"
+    },
+    {
+      "key": "Q",
+      "label": "仅原Convergence问题",
+      "consequence": "原DM只提交并接收一个方向问题，零实现及数值额度。"
+    },
+    {
+      "key": "R",
+      "label": "保留空位",
+      "consequence": "不增加此方向任务或数值投入；由Pro写明再议条件。"
+    }
+  ],
+  "recommended": "P",
+  "auto_applied": null,
+  "dm_reason": "新一次独立真实训练直接判断首个超过门槛的收益是否再次出现，同时保留所有正负结果。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L98",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "FOLR首个学习门控比较超过1单位门槛后，第五个空位是否新投一次相同训练比较？",
+    "changes_if_approved": [
+      {
+        "target": "FOLR当前分配结束后的新投资",
+        "from": "原DM已接受一次正向结果，当前分配没有自动后续",
+        "to": "建议P：新选一个LEARNED_EVENT/RETAIN比较，完整上限3900秒；与A/B/C/D独立选择"
+      }
+    ],
+    "if_refused": "按Pro选择Q仅提交一个零实现、零数值额度的原Convergence问题，或R保留空位；不自动复用原预算。其他方向按各自决定继续。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_SCIENCE_CARD_20260911.md",
+        "quote": "A gap above it would support a bounded package-level gain and discussion of a later\nindependently selected replication.",
+        "why": "原DM接受的差值+1.763359375超过预定1单位门槛；另一次独立训练直接检验这个有限收益是否再次出现。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_SCIENCE_CARD_20260911.md",
+        "quote": "Its GRU already conditions on the same current input/history and public lifecycle\ncues.",
+        "why": "比较器已有自适应循环门；新增参数和寿命处理不能解释成纯记忆机制因果效应，当前也仅一个训练对。"
+      }
+    ],
+    "uncertainty": [
+      "RETAIN−0.160078125、学习门控1.60328125只是一对完整训练；不提供跨训练种子的稳定优越性。",
+      "旧固定HALF正负结果来自不同操作，不能合并为学习门控的重复证据。",
+      "新预算是上限而非预测；已有全命令1703.12秒，完整支持成本仍待原DM报告。"
+    ],
+    "cost": {
+      "compute": "P新增每臂1800秒、原生合计3600、支持300、完整3900；Q/R零数值额度。A+P为三个独立比较上限8100秒，不能互相借用。",
+      "owner_time": "无需逐项回复；保留异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "只有新的FOLR投资等待Portfolio选择；各方向当前收尾继续。"
+    },
+    "verdict_text": "建议P：另选一个新的相同LEARNED_EVENT/RETAIN真实训练对，完整上限3900秒；Q仅问原Convergence，R留空。此建议与四项A/B/C/D独立，尚未执行。",
+    "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/SCIENCE_BRIEF.md"
+  },
+  "starred": true
+}

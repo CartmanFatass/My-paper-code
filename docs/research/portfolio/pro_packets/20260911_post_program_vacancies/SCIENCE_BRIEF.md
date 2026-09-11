@@ -2,13 +2,12 @@
 
 ## Decision and recommendation
 
-Decide whether to invest in up to four independently executable replacements after
+Decide whether to invest in up to five independently executable next tasks after
 FSD770903 ended before scientific exposure, VNFC remained technically unready,
-and MGTAP8213/ACVC8961 produced new valid results and are completing intake/closeout.
-Preserve FOLR7809 through its terminal-result acceptance and finish the accepted MGTAP/ACVC intakes
-without interruption. This is a new investment question
-based on those actual execution returns, not a correction or resend of the
-complete open-direction decision at6c32ade3216c374ecf2f5179b15d559729cd45c9.
+and MGTAP8213/ACVC8961/FOLR7809 produced new valid results. Finish each accepted
+allocation's own collection/closeout independently. This is a new investment
+question based on those actual execution returns, not a correction or resend of
+the complete open-direction decision at6c32ade3216c374ecf2f5179b15d559729cd45c9.
 The present author has selected no replacement or new allowance.
 
 **Author recommendation A: one newly bounded FSD I1280/D0 pair, one fresh unchanged
@@ -20,6 +19,12 @@ three fresh package gains justify continued B investment or a bounded benchmark
 design. Both questions have zero numerical allowance. Each can start at its own
 ready boundary; no result, intake or decision is a prerequisite for a sibling.
 The questions do not authorize a subsequent experiment or C freeze.
+**Separately recommend P in section8: one new unchanged FOLR LEARNED_EVENT/RETAIN
+pair with a new complete3900-second cap**, after its first accepted gain. Q is one
+zero-numerical original-Convergence question/intake; R leaves that vacancy empty.
+A+P would commission three B pairs and two direction questions across five
+directions, with separate complete caps3000/1200/3900, sum8100 seconds. Selecting
+A alone never selects P. No repeated-until-positive or automatic successor follows.
 Keep VNFC's existing conditional900-second scientific allocation queued and
 unspent, without counting it as an advancing chain or adding a repair allowance.
 
@@ -69,20 +74,24 @@ complete program intake. FACTS.json distinguishes the dated observations.
 | FSD, ACTIVE/HIGH | New770903 staging reached its one remote Git fetch, which returned128 with GnuTLS receive/decode error, early EOF and invalid index-pack. The helper ended before checkout or admission. Exact execution/input/supervisor paths and checkout registration were absent. | The allocated unit is closed. Zero models, RNG masters, transitions, updates, evaluations or primary differences; no new scientific polarity. A further pair requires a newly selected investment, not reuse of770903. |
 | VNFC, ACTIVE/HIGH, recasts2 | Exact interpreter mapping expects40 bytes, while the retained failing block has32-byte metadata and a False keyword at offset32. Allocation-time counts/request and corrupting history are missing. Independent review found that the proposed numerical/path-exclusion checks do not establish corruption independence. Production remains unchanged and the draft checks unrun. | Existing conditional900-second funding remains unused unless Pro expressly changes it. Current repair/readiness assignment is closed NOT READY. No fresh scientific launch, additional diagnostic or alternate executor is selected here. |
 | MGTAP, ACTIVE/MEDIUM | Published valid COMPLETE COND_ADVERSE: COND.19342135238526614 versus DENSE.21589092584121028; delta−.02246957345594415, conditional SE.004312411137154014,5/32 positive. Full counts and binding pass; native358.11s. | Its scientific intake and remote closeout are complete; no successor is selected. Its completion creates an additional vacancy. A new pair is proposed separately, not released by this result. |
-| FOLR, ACTIVE/MEDIUM | Both7809 handles/adoption are published. Root now reports both terminal complete/exit0, native834.9379585s RETAIN and867.4317784s LEARNED_EVENT; the owning DM is collecting/accepting and primary polarity is pending. | Preserve its3900-second allocation through intake. It is one advancing intake chain, not two slots; a fifth vacancy follows its completion and requires an explicit decision. |
+| FOLR, ACTIVE/MEDIUM | Root forwarded owning-DM acceptance: LEARNED_EVENT1.60328125 versus RETAIN−.160078125, difference+1.763359375, LEARNED_EVENT_ABOVE_MEI. Both5000 training episodes/4969 optimizer steps/128 final returns; finite checkpoints and exact target copies; gate L2 displacement1.353121908. Whole native835.33+867.79=1703.12s. | One valid trained pair, no successor. Preserve its current complete intake/closeout; separately choose P/Q/R for the fifth vacancy. Full result publication is pinned when supplied before final TASK binding. |
 | ACVC, ACTIVE/MEDIUM, recasts2 | Published valid complete B: F−C+.1414322041 J and F−dwell+.0944113176 J, both UP; dwell−C+.0470208865. All704 episode rows,1024 updates and exact8961/8962 keys pass; conservative native178s. | Its scientific intake and remote closeout are complete; no successor or promotion selected. C/dwell remain own-history controls, not F-clock/dose matches. Its third fresh gain changes the value of a direction decision. |
 
-FOLR is now terminal and its owning DM is still collecting/accepting the result. MGTAP and ACVC have completed
-their scientific intakes and remote closeout: MGTAP at
-a267ba0a30a86f7e49edd320354c195016081cda, ACVC at
-d4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6. Their local duplicate removals were
-rejected before execution and remain owned by their DMs; unique evidence is
-preserved. Those residues are not advancing chains or scientific blocks. The
-current vacancy set is four: FSD, VNFC, MGTAP and ACVC. Replacement work is
-dispatched direction by direction at each ready boundary, without a global wait. FOLR
-intake completion creates a fifth vacancy horizon; section8 asks for an explicit
-fifth-slot choice, without inferring its still-pending scientific outcome.
-Root maintains actual execution state; queued funding is not an active chain.
+MGTAP and ACVC have completed scientific intake and remote closeout at
+ a267ba0a30a86f7e49edd320354c195016081cda and
+ d4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6, respectively. Their local duplicate
+removals were rejected before execution and remain owned by their DMs; unique
+evidence is preserved. Those residues are not advancing chains or scientific
+blocks. FOLR's original DM has accepted its primary and is completing publication/
+closeout. Four vacancies already exist; the next scientific allocation ends at
+FOLR's own boundary, creating the fifth. A continuing intake may count once while
+it is actual work; terminal handles or a future intention do not count.
+
+Section8 asks for an explicit fifth choice using the accepted positive result.
+No direction waits for another's intake or cleanup, and no old/new task counts
+twice for one direction. Root maintains actual execution state; queued VNFC
+funding is not an active chain. The packet supplies up to five independent next
+tasks rather than asserting five are already advancing.
 
 All15 scoped directions remain ACTIVE. Priorities, recasts, family pauses, formal
 UAV entry and lifecycle are unchanged unless Pro explicitly selects a prospective
@@ -113,7 +122,7 @@ recast count; it is not zero.
 | DISH / MEDIUM / NR | HALF_RETAIN−REPLACE service−6.5, lower energy but four extra invalid commits; ordinary CAS=0 leaves source-origin effect unmeasured. MEI24 service ticks. | Preserve arrival-bridge family pause; no generic source-transfer conclusion or receipt experiment selected. |
 | VSP02 / LOW /1 | Adaptation RESET−CARRY+.0185547/−.0087891, both inside.5 deliveries; two common-prefix learning units. | Preserve instantiated-family pause; no new optimizer/host/member intervention proposed. |
 | MGTAP / MEDIUM / NR | First COND−DENSE+.0057613214 inside.01 J; new8213−.0224695735 beyond the adverse margin,27/32 adverse worlds. DENSE can learn context allocation; two histories do not estimate stable superiority. | One newly allocated unchanged third pair proposed; existing8213 ends first on its own boundary. |
-| FOLR / MEDIUM / NR | Learned gate was open but unmeasured; fixed HALF+1.56547/−4.29305 are contrary context, not its test. RETAIN already has recurrent gates. Current MEI1 native return. | Preserve current7809 terminal intake and same legal information; its unaccepted primary has no claimed sign. Section8 addresses its fifth-vacancy horizon. |
+| FOLR / MEDIUM / NR | First learned gate−RETAIN+1.763359375 exceeds1-return MEI in one trained pair; actual129-coefficient gate changes. Fixed HALF+1.56547/−4.29305 are different-law context. RETAIN already has recurrent gates; capacity/lifetime package effects are not separated. | P proposes one new unscreened unchanged pair; Q buys one original-Convergence question; R leaves vacancy. No stable, causal, C or UAV conclusion. |
 | ACVC / MEDIUM /2 | Third fresh base adds F−C+.1414322 and F−dwell+.0944113 to+.122933/+.091528 and+.0877165/+.0638999. Fresh F−dwell adverse worlds are5/11/5; all three mean dwell−C gains remain. MEI.01 J. | One original-Convergence claim/investment question proposed; no automatic fourth fit, C freeze or UAV entry, lowest contention retained. |
 
 Absence of a positive, optimal, novel, fully diagnosed or formally bounded result
@@ -350,43 +359,89 @@ would not answer either missing question. No unchanged52-tape/P63/R09 invocation
 expired120-second allowance, cleanup bypass or executor substitution is proposed.
 The question does not rule out a separately specified credible future path.
 
-## 8. FOLR terminal intake and the fifth vacancy horizon
+## 8. FOLR: a separate fifth investment after the first gate gain
 
-After the first unpublished TASK render, Root reported both FOLR arms complete/
-exit0: RETAIN native834.9379585s, supervisor836s, RSS638384KiB;
-LEARNED_EVENT native867.4317784s, supervisor868s, RSS649364KiB. The shared
-terminal query1.2s is a whole enclosing observation. The DM is collecting and
-accepting; no primary score, counts/measurement acceptance or scientific polarity
-is supplied by that terminal report. Earlier launch-only evidence retains its
-scope. The full existing3900-second allocation still ends at its own intake.
+Root first reported both7809 arms complete/exit0 while intake was pending, then
+forwarded the owning DM's accepted scientific result before this TASK was published:
+RETAIN mean−.160078125; LEARNED_EVENT mean1.60328125; d_LR=+1.763359375 native
+return. At the frozen inclusive thresholds, this is LEARNED_EVENT_ABOVE_MEI.
+Both arms completed5000 training episodes,4969 RMSprop calls and all128 final
+returns. Checkpoints are finite, target-copy checks exact, and the129-coefficient
+gate moves L2=1.353121908 across4969 updates. These are owning-DM accepted facts;
+full immutable intake/E0 publication is pinned before final delivery when available.
+No primary was inferred from the earlier terminal labels.
 
-Thus the current four vacancies become five when the FOLR intake chain finishes.
-A supplies four new tasks; it cannot be described as restoring five after that
-boundary. **Recommend deferring any fifth numerical allocation until FOLR's
-complete intake is available.** Pro must explicitly choose whether the fifth
-slot remains unallocated, or whether to commission **one original FOLR
-Convergence question/full intake after its current result is accepted**, with
-zero implementation/numerical allowance. This choice is separable from A/B/C/D
-and adds no native allowance to their4200/3000/0/0 sums. If no useful formed
-scientific question remains after that intake, return that precise finite fact;
-no automatic repair/experiment or substitute question follows.
+The once-charged whole native windows are835.33/867.79 seconds, sum1703.12.
+Earlier runner834.9379585/867.4317784 and supervisor836/868 are overlapping
+windows, not extra work. RSS638384/649364KiB and the shared1.2-second terminal
+query retain their windows. Full support and aggregate CPU are not measured zero.
+The original3900-second allocation ends at its own complete intake/closeout;
+its unspent difference is not available funding and no successor was selected.
 
-The optional question is concrete: for the first learned event-retention gate
-versus RETAIN at the frozen5000-training/128-final episode law, what next
-bounded learning or family decision does the complete native comparison justify?
-It preserves the129-coefficient event gate, true-survivor ownership, newborn/
-departed state rules, acting and replay/target behavior, equally legal information,
-current1-return MEI and native traffic reward. Fixed-HALF history is not a gate
-replication. The original DM supplies its actually accepted outcome, every arm,
-exposure, cost and prediction to the original node; no favorable, negative or
-complete-primary result is assumed here. No next fit or C freeze is funded by
-this question. This is an optional next direction decision, not a requirement
-that ordinary B elsewhere obtain Pro approval.
+| Separate fifth choice | What Pro would select | New allowance and stop |
+| --- | --- | --- |
+| **P, recommended** | One fresh unchanged LEARNED_EVENT/RETAIN B pair under the existing5000-training/128-final law and a new unscreened initialization/evaluation identity selected by its original DM. | Each whole arm≤1800s, native sum≤3600s, invoked support≤300s, complete≤3900s. End after that pair's full intake/closeout or bounded limitation. No extension or third fit. |
+| Q | Exactly one original FOLR Convergence question and complete intake: what next bounded learning/family claim does the first gate gain justify? | Zero implementation/numerical allowance. One question; no automatic model, diagnostic, fit, C freeze or Innovator dispatch. |
+| R | Leave the FOLR vacancy unallocated after current closeout. | Zero additional task or allowance. State a concrete revisit condition. |
 
-No other direction waits for FOLR's intake, and its current work is not counted
-twice with a later selected task. A terminal label alone does not authorize a
-performance claim. Root applies the current independent dispatch boundaries and
-returns the completed FOLR facts at the next appropriate scientific decision.
+This choice is independent of A/B/C/D. New complete caps are A+P8100, B+P6900,
+C+P3900, D+P3900 seconds; Q/R add zero. Each cap is a separate willingness-to-spend
+ceiling, not a shared pool or prediction. A+P has three independent trained pairs
+and two direction questions; A+Q has two pairs and three questions; A+R has four
+next tasks. Questions are not extra numerical units, and one direction counts once.
+Pro may choose explicit vacancies; the execution target does not require P or Q.
+
+P's question is whether this first beyond-MEI learned-gate gain recurs on one
+independently selected training pair. Primary remains the difference of all128
+native-return means, LEARNED_EVENT−RETAIN, with each arm's conditional SD. Preserve
+all signed outcomes and the existing absolute1-return MEI (one tenth of the
+native10-unit collision penalty). Above it supports a second finite package
+observation; inside it retains the signed result without equivalence; opposite
+sign favors RETAIN on that history. None automatically selects another result.
+No proportional effect relative to near-zero RETAIN, across-seed uncertainty from
+one fit, or paired-world episode interpretation is valid. Action-dependent traffic
+and RNG use break world pairing even at equal evaluation row labels.
+
+The operation stays g=sigmoid(w_x*x+w_h*h_bar+b), zero128 weights and biaslog(99),
+initially.99 at a completed public lifecycle event for a true survivor, identity
+outside that event. Physical newborn/recycled/departed/inactive lanes have the
+existing zeroing; survivor histories are entity-owned, not blindly slot-owned.
+The existing event-aware attention/GRU RETAIN is a competent equally informed
+null. Extra gate parameters are an inductive bias within a finite training package,
+not a new-information or pure causal memory test. Common actor/mixer constructor
+RNG remains isolated from the gate constructor. Acting and full-episode online/
+target replay use their own parameters/history; keep target-copy cadence, gate
+optimizer/checkpoint inclusion, rewards, discount, native action consequences and
+partner co-adaptation. No architecture, seed or coefficient search is proposed.
+The old7809/107809 identities, models and RNG namespace are not reused.
+
+Known work for P:2×5000×20=200000 training team ticks and2×128×20=5120 final ticks;
+10256 episodes and205120 ticks; two learners and2×4969=9938 RMSprop calls. The
+complete replay law is2 arms×4969×32 complete episodes×21 observations×5 slots×
+2 networks=66783360 GRU rows. Acting adds2×5128×21×5=1076880 rows. The learned
+arm's128-input scalar gate runs33930120 forward rows, plus online gradients and
+optimizer work. Top-level construction/checkpoint counts remain source-defined;
+they are not invented from the two learner count. Mixer/data movement/native
+publication are real work. No extra initial panel, pilot or diagnostic is funded.
+Per-arm complete cost law is admission/imports/constructors,5000 native episodes,
+4969 sampled replay/optimizer calls,128 final episodes, checkpoint/publication/exit.
+Current835.33/867.79-second whole windows are planning anchors; future rates and
+complete support remain unknown. Preserve configured remote CPU FP32/one-thread
+execution, exact committed source and fresh destination-adjacent memory admission.
+Reuse accepted unchanged engineering evidence; focus any new check on changed
+identity/binding/publication surfaces, without automatically repeating the original
+full high-risk review or manufacturing a new scientific prerequisite.
+
+P is preferred because the actual operation moved and the first full native result
+exceeds the card's practical margin, while one independent repeat directly tests
+the next performance observation. A complete causal diagnosis, learned-gate maximum,
+full support census or direction consultation is not required for this B. Q is a
+credible alternative if Portfolio values defining the next claim over this finite
+repeat; it must ask a real direction question rather than rubber-stamp B. R declines
+additional investment without claiming futility. Contrary evidence remains one
+trained history, existing RETAIN adaptability, extra capacity/lifetime confounding,
+and fixed-half signs+1.56546875/−4.293046875 from another operation. A fresh gain
+would not erase those distinctions or establish population-stable superiority.
 
 ## 9. Interpretation, execution and revisit boundaries
 
@@ -408,7 +463,7 @@ Return a conclusion-first choice with decisive reasons, strongest alternative,
 uncertainty, concrete revisit condition and execution mapping: each selected
 direction, exact deliverable, proper owner/tier, new or retained caps, dependencies,
 stop and consequence for actual advancing count. State explicitly whether VNFC's
-conditional funding remains queued. Finish current MGTAP/ACVC intakes independently
-and preserve FOLR terminal acceptance; explicitly settle the fifth-slot choice
-in section8 without inventing its pending outcome or an automatic allocation.
+conditional funding remains queued. Preserve all completed intakes and each DM's
+remaining collection/cleanup; explicitly settle A/B/C/D and P/Q/R separately
+without an automatic successor or a requirement to fill every slot.
 Apply a complete conforming Portfolio decision without per-item owner ratification.
