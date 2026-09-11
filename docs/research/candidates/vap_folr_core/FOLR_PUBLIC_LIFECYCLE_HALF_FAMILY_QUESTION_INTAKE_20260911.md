@@ -99,3 +99,32 @@ same node within the existing allocation boundary; no local replacement decision
 or repeated consultation budget is inferred.
 
 Owner close-call item: `docs/research/portfolio/owner/inbox/2026-09-10/20260910-folr-006.json` (P2); no `auto_applied` family choice.
+
+## 5. Published exact handoff ready for Root
+
+Scientific preparation was committed/pushed at
+`83eea535550222f2b3c46195176cee76a275d980`; the fixed TASK/REQUEST and reference
+publication facts are committed/pushed at `a790e8e6f68849f06a542ca4e36bee87445a40e0`.
+The current primary renderer bound that exact TASK with `--bind-task-sha`, producing
+READY_TO_DISPATCH on the original conversation and configured Transport route.
+All23 declared paths resolve at their effective Git objects and each commit is
+reachable from an observed published branch. GitHub's direct contents read returns
+exactly the committed TASK bytes; the rendered task retains the actual mappings
+and full Markdown output fallback. Publication checks do not establish Pro access.
+
+The author posted one read-back-verified [Issue15 update](https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5629858139)
+linking this fixed TASK; the original Issue and previous delivery comments remain.
+[Publication facts](pro_packets/20260911_half_family_convergence/PUBLICATION_FACTS.json)
+record TASK/prompt hashes, exact source/parent/operator IDs, current branch and the
+native return target. The owner item remains a recommendation with no executed
+family choice. Primary owner reviews again returned `[]`.
+
+**Technical packet acceptance: accepted and ready.** No code/source/tests, model,
+scientific invocation, Pro Send or family disposition occurred. Root now dispatches
+request `folr-public-lifecycle-half-family-convergence-20260911` from the committed
+HANDOFF once, then forwards the complete immutable response to
+`/root/dm_folr_restart_recovery2`. The shared checkout is retained for this actual
+live delivery/intake dependency; this DM owns its next authoring event and Root
+retains main integration/reclamation. No remote execution checkout exists for this
+question. Return at a clean boundary pending that routed response, without routine
+provider polling or another request. Scientific/specification acceptance is pending.
