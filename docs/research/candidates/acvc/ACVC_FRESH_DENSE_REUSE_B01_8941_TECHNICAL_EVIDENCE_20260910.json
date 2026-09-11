@@ -1,0 +1,105 @@
+{
+  "object": "ACVC_FRESH_DENSE_REUSE_B01",
+  "binding": 8941,
+  "evaluation_namespace": 8942,
+  "authority_response_sha": "1ea43d8fbc846807d71d4d894136f357f65551b6",
+  "source_sha": "cafef130c9d4d89febda8fd788ad9458b6985aca",
+  "source_review": "independent read-only review found no material finding; focused runtime target not run",
+  "status": "TECHNICAL_NO_READY_BEFORE_SCIENTIFIC_LAUNCH",
+  "local_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+  "branch": "codex/acvc",
+  "remote_checkout_effect_uncertain": "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8941-cafef130c",
+  "preparation_command": "ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node 'cd /home/wu/projects/HMASD && git fetch origin cafef130c9d4d89febda8fd788ad9458b6985aca && git worktree add --detach /home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8941-cafef130c cafef130c9d4d89febda8fd788ad9458b6985aca && git -C /home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8941-cafef130c sparse-checkout set hmasd ha_ctse_process envs environments experiments scripts tools tests manifold_hmasd && git -C /home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8941-cafef130c rev-parse HEAD && git -C /home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8941-cafef130c status --porcelain'",
+  "preparation_local_pid": 40204,
+  "preparation_started_at": "2026-09-11T05:12:26.6475680Z",
+  "local_elapsed_before_cancellation_s": 102.1040615,
+  "cancellation": "identity matched exact ssh.exe PID and full source-fetch command; Stop-Process stopped only that local transport",
+  "canceled_local_transport_exit_code": 1,
+  "preparation_stdout": "",
+  "preparation_stderr": "",
+  "remote_process_exit": "unknown; stopping local SSH is not proof of remote child exit",
+  "reconciliation_receipt": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8941_RECONCILIATION_20260910.json",
+  "reconciliation_client_elapsed_s": 12.03245440000319,
+  "reconciliation_observation": "Remote shell printed RECONCILIATION_TIME=2026-09-11T05:15:05Z; no commit, directory or worktree fact before 12-second timeout.",
+  "native_task_cap_s": 270,
+  "inclusive_support_cap_s": 90,
+  "complete_cap_s": 360,
+  "support_lower_bound_s": 114.13651590000319,
+  "preparation_alone_excess_above_support_cap_s": 12.1040615,
+  "separately_known_local_commands_no_wait_overlap": [
+    {
+      "label": "synchronization merge and push (conservatively charged)",
+      "s": 5.8526198
+    },
+    {
+      "label": "prospective binding and existing evidence read",
+      "s": 1.1493899
+    },
+    {
+      "label": "prospective configuration arithmetic and changed-source checks",
+      "s": 0.4293497
+    },
+    {
+      "label": "owner new-card publication",
+      "s": 0.3278684
+    },
+    {
+      "label": "accepted source and prospective records commit/push (conservative)",
+      "s": 5.1326002
+    },
+    {
+      "label": "identify and cancel exact unreturned local preparation transport",
+      "s": 0.3902545
+    },
+    {
+      "label": "local no-ready boundary reviews and state",
+      "s": 2.5182497
+    },
+    {
+      "label": "live-primary owner-boundary review and owner-tool usage read",
+      "s": 0.4776417
+    }
+  ],
+  "independent_review_shell_displayed_seconds": [
+    0.8,
+    0.9,
+    0.9,
+    0.9,
+    1.1,
+    0.7
+  ],
+  "independent_review_timing_limit": "5.3s displayed-value sum only; higher precision and tool/client overhead unavailable; no runtime/model check",
+  "exact_complete_support_s": null,
+  "cost_limit": "The strict support breach is established without needing a complete total. Other preparation/publication/continued-remote-process overhead is not fully aggregated. Partial exec waits are not added again to the 102.1040615s process duration.",
+  "new_scientific_exposure": {
+    "scientific_submissions": 0,
+    "accepted_scientific_handles": 0,
+    "admissions": 0,
+    "model_constructions": 0,
+    "model_loads": 0,
+    "rng_master_constructions": 0,
+    "training_episodes": 0,
+    "updates": 0,
+    "evaluation_episodes": 0,
+    "native_steps": 0,
+    "new_runtime_tests": 0
+  },
+  "monitor_dispatches": 0,
+  "monitor_adoptions": 0,
+  "scientific_polarity": "none",
+  "predictions": {
+    "F_minus_C_UP": 0.75,
+    "F_minus_dwell_UP": 0.65,
+    "status": "unscored; no new result",
+    "owner": "not taken (unattended)"
+  },
+  "decisions": "Root confirmed technical no-ready closeout and authorized only one bounded read-only reconciliation; no launch, preparation retry, local fallback or budget transfer.",
+  "cleanup": {
+    "new_test_scratch": "none created",
+    "scientific_results": "none created by a submitted scientific command",
+    "local_control_checkout": "retained; ongoing direction authoring/integration dependency",
+    "remote_checkout": "unknown existence/registration; retained without deletion",
+    "remote_preparation_processes": "unknown terminal state; no scientific command in either preparation/reconciliation payload",
+    "reconciliation_owner": "Root coordinates exact-handle/path infrastructure reconciliation on a separately authorized recovery event; this allocation does not invoke another query"
+  }
+}
