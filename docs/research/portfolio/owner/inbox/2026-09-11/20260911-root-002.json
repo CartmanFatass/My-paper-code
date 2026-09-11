@@ -29,7 +29,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "两条直接原生性能问题具体现成；FOLR只问不同保留规则的价值，最强反方是GRU本身已能门控。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/SCIENCE_BRIEF.md",
@@ -91,6 +91,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-11-remaining-capacity-refill.md",
       "state": "planned",
       "summary": "完整247行Pro回应已检查，选择A：RCLE750秒、ACVC600秒、FOLR仅零数值原节点问题。Root派发待执行，未由作者启动。MGTAP后来完成，当前新增最多三条、空两位。最强备选B和风险见 docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/INTAKE_OWNER_PACKET.json；精确任务见 docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/EXECUTION_MAPPING.md。"
+    },
+    {
+      "at": "2026-09-11T17:50:07+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-11-remaining-capacity-refill.md; main bb40797dc; native dispatches /root/dm_rcle_restart_recovery2, /root/dm_acvc_restart_successor2, /root/dm_folr_restart_recovery2",
+      "state": "applied",
+      "summary": "Root已在main bb40797dc合并完整合规决定，并实际派发A：RCLE一次.99先验B、ACVC一次新身份原协议B、FOLR一次零数值原Convergence问题。MGTAP已结束，当前三条新链推进、两空位；未派发MGTAP后继。"
     }
   ]
 }

@@ -11,12 +11,22 @@ remains generic and the allocation ends. Accepted evidence is integrated through
 arm and native-total caps pass, while unknown unitemized support prevents certification of the full
 support/complete envelope.
 
-The designated Portfolio DM has published the fixed remaining-capacity request
-`2026-09-11-remaining-capacity-refill-portfolio-01`. It offers at most RCLE, ACVC and one
-zero-numerical FOLR direction question, with a smaller set and no-new-investment alternatives. The
-canonical Transport registry records exactly one accepted Send and `WAITING_GENERATION`. No complete
-response or Portfolio selection has formed, so no mapped direction is launched from this request.
-MGTAP preservation cleanup remains direction-local closeout and does not fill a direction slot.
+The canonical Transport archived the fixed remaining-capacity request
+`2026-09-11-remaining-capacity-refill-portfolio-01` after one accepted Send and natural completion.
+The designated Portfolio DM verified the complete response and accepted conforming option A. The
+[decision](decisions/2026-09-11-remaining-capacity-refill.md) and
+[execution mapping](pro_packets/20260911_remaining_capacity_refill/EXECUTION_MAPPING.md) are
+integrated through `bb40797dc`.
+
+| Direction | Current selected investment | Separate complete limits |
+| --- | --- | --- |
+| roster_consistent_latent_exploration, ACTIVE/MEDIUM | One fresh `.99` nearest-prior, `.002` each-other final1000 B with initialization/final/reference panels. | Learned600/reference10/support140/complete750 seconds. |
+| acvc, ACTIVE/MEDIUM, recasts2 | One new unscreened unchanged DENSE fit and final C/F/dwell64 panels. | Native270/support330/complete600 seconds. |
+| vap_folr_core, ACTIVE/MEDIUM | One learned-retention candidate note, original Convergence question and full intake. | Zero implementation and zero numerical allowance. |
+
+Root has actually dispatched all three to their existing DMs and shared checkouts. MGTAP's named
+allocation and cleanup are complete, so three chains advance and two target slots remain vacant.
+No MGTAP successor, cap transfer, fallback or local fourth/fifth investment was selected.
 
 ## Post-option-A refill decision — 2026-09-11
 

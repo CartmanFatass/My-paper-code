@@ -914,10 +914,16 @@ allocation ends without a retry or automatic successor. Native arm walls 192.932
 pass the 450-second arm and 900-second native caps; the full support/complete cost remains uncertified
 because unitemized support is unknown. The result and intake are integrated through `811f35338`.
 
-The designated Portfolio DM published request
-`2026-09-11-remaining-capacity-refill-portfolio-01` with options covering at most RCLE, ACVC and one
-zero-numerical FOLR direction question. The canonical singleton Transport has exactly one accepted
-Send and registry state `WAITING_GENERATION`; no response, archive or Portfolio selection has yet
-formed. No dependent launch is authorized while that proper-node decision remains pending. MGTAP's
-scoped duplicate cleanup continues under its original DM after accepted preservation; it is closeout,
-not an advancing direction chain.
+The canonical singleton Transport archived request
+`2026-09-11-remaining-capacity-refill-portfolio-01` after exactly one accepted Send and natural
+completion. The designated Portfolio DM verified the complete 247-line response, fixed TASK,
+Transport/GitHub bytes and references, found no scientific/specification conflict, and accepted
+PRO_FINAL option A. Decision and execution mapping are integrated through `bb40797dc`.
+
+Root actually dispatched three independent chains to their existing DMs and shared direction
+checkouts: RCLE one fresh `.99/.002` final1000 B under 600/10/140/750-second component/support/
+complete limits; ACVC one new unscreened unchanged fit and C/F/dwell64 panels under270/330/600;
+and FOLR one learned-retention candidate plus original Convergence question/full intake with zero
+implementation and zero numerical allowance. MGTAP cleanup is complete and integrated through
+`084775b84`; no MGTAP successor was selected. Three chains now advance and two target slots remain
+vacant. Owner item `20260911-root-002` records option A as actually auto-applied.
