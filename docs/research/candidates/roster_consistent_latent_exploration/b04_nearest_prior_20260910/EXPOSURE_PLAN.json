@@ -1,0 +1,47 @@
+{
+  "OBJECT_ID": "RCLE-TBCFV-B04-NEAREST-PRIOR",
+  "SEED": 24,
+  "UPDATES": 200,
+  "host_cost_law": {
+    "updates": 200,
+    "eval_episodes_per_cell": 256,
+    "training_episodes": 12800,
+    "heldout_episodes": 2048,
+    "environment_ticks_training": 819200,
+    "environment_ticks_heldout": 131072,
+    "wall_unit": "complete logical invocation",
+    "projection_note": "no pre-launch numeric wall exists; measured wall per update and per held-out episode are recorded after the invocation"
+  },
+  "learned_invocation": {
+    "training_episodes": 12800,
+    "evaluation_episodes": 4096,
+    "total_episodes": 16896,
+    "ticks": 1081344,
+    "backward_update_calls": 200,
+    "models": 7,
+    "training_instances": 1,
+    "untrained_helpers": 6,
+    "wall_cap_s": 150
+  },
+  "reference_invocation": {
+    "episodes": 2048,
+    "ticks": 131072,
+    "models": 0,
+    "training_instances": 0,
+    "wall_cap_s": 10
+  },
+  "total": {
+    "episodes": 18944,
+    "ticks": 1212416,
+    "backward_update_calls": 200,
+    "rollout_batches": 400,
+    "neural_agent_claim_decisions": 2293760,
+    "candidate_scores": 13762560,
+    "l2_parameter_path_budget": 4.0,
+    "support_cap_s": 140,
+    "complete_cap_s": 300
+  },
+  "exposure_line": "One fresh B04/master24 fit, 26161 trainable FP64 scalars, 200 nonzero-step opportunities x normalized L2 .02 = path-length budget 4.0; fresh norm and actual displacement will be measured. Pointer-output gradients are checked on supplied tensors. No fitted-state reuse.",
+  "scientific_exposure_before_execution": 0,
+  "timing_note": "Old 200-update initial/final learned89.83s and reference2.85s are analogues, not a measurement of the changed law; build/support unknown until executed."
+}

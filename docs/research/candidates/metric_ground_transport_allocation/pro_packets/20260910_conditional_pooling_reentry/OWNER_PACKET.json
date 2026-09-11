@@ -1,0 +1,21 @@
+{
+  "question": "是否仅重开 COND/DENSE 这一项原生 UAV 条件汇聚比较的研究资格，还是保留该演员家族 PARK？这是给原 Convergence 的建议，尚无裁决。",
+  "changes_if_approved": [
+    {"target": "MGTAP 原生地面几何演员家族", "from": "PARK，只有完成的源代码设计", "to": "若原 Convergence 选择重开，仅允许后续另行分配的 COND/DENSE B 方案进入准备；本次不实施、不分配数值工作"}
+  ],
+  "if_refused": "保留原生演员家族 PARK 和旧坐标分配家族 PARK，保存 P75 全部结果；方向 ACTIVE/MEDIUM 等 Portfolio 状态不变。",
+  "evidence_for": [
+    {"path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_SOURCE_DESIGN_RETURN_20260910.md#3-one-actual-learned-operation-and-its-comparator", "quote": "For fixed visible counts and fixed user rows, moving an observed UAV can change `q`, the relative user weights and hence the residual. That cross-type interaction is the selected change.", "why": "给出了可由现有合法输入实现的实际条件运算，区别于仅把均值改成总和；DENSE 保留全部输入和循环历史。"}
+  ],
+  "evidence_against": [
+    {"path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/PREPARATION_INTAKE.md#2-what-the-packet-preserves", "quote": "P75 is a technically accepted adverse native comparison: REL−DENSE is −0.04468252516448091 and −0.003243683445650989, aggregate **−0.02396310430506595**.", "why": "相关旧方案真实落后；新条件汇聚尚未实现或验证，不能把源代码可行性当作收益。"}
+  ],
+  "uncertainty": [
+    "COND 的收益、完整耗时、激活内存和配套工作成本均未知。",
+    "同信息 DENSE 有效但未调优，当前原生宿主没有调优后的 headroom；不把缺失记录变成 B 前置关卡。",
+    "若以后分配一对训练，只能说明该次有限训练的整体方案差异，不能说明稳定优越或注意力机制因果。"
+  ],
+  "cost": {"compute": "本次仅文档，科学调用 0；未来一对训练的已知暴露写在设计 §6，但无新时间上限、种子或运行额度。", "owner_time": "可异步查看，无需批准逐项编辑或等待回复。", "reversibility": "reversible", "waits_on_this": "原 Convergence 的家族选择；独立方向继续。"},
+  "verdict_text": "建议原 Convergence 仅重开 COND/DENSE 这项前瞻性比较的研究资格；后续 B 仍须另行分配。本次只提交建议，不实施、不分配数值工作，也不在本地作家族裁决。",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/PREPARATION_INTAKE.md"
+}

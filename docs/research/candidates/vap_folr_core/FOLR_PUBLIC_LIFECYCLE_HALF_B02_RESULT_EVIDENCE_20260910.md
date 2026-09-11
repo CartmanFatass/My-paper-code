@@ -1,6 +1,6 @@
 # FOLR public-lifecycle HALF-B02 technical evidence
 
-Current state: RETAIN complete and technically accepted; HALF_EVENT accepted and Monitor adoption confirmed by Root. The paired scientific endpoint is pending.
+Current state: both arms complete and intaken under RETAIN_ABOVE_MEI; scoped remote closeout is verified. Root integration and reclamation acceptance remain.
 
 ## 1. Accepted reuse and focused new binding
 
@@ -215,3 +215,128 @@ Known invoked support through second submission and direct dispatch is **29.0471
 and the explicitly unmeasured bookkeeping/query/messaging durations; it is not a
 complete bill or a 300s/3900s compliance claim. The caps and no-transfer rule remain
 unchanged. No retry, third fitting pair, additional arm or successor is allocated.
+
+## 8. HALF_EVENT terminal collection and technical acceptance
+
+Root routed the original second handle's exit0 terminal. Supervisor start/end were
+**2026-09-11T00:08:07Z /00:20:56Z**, integer769s. The complete outer chain measured
+**768.73s**, below1800s, with744.43s user,25.62s system and678048KiB peak RSS.
+Runner wall767.4672104330966s and peak646488KiB are nested measurements. Fresh
+admission at00:08:08.011234Z measured physical/effective available memory
+**15626715136 bytes**, both above4GiB before learner construction.
+
+The [HALF_EVENT collection receipt](evidence/2026-09-10-folr-public-lifecycle-half-b02-half-event-collection.json)
+verifies all **10 files /4676090 bytes** against remote originals. Together with RETAIN,
+all **20 raw files /9351870 bytes** match their length/SHA256 records. Both checkpoints
+are retained at4662779 bytes each. Source surfaces still matchc6be208cd; the final raw
+log JSON equals the run summary, all25 progress rows show episode200..5000 and
+updates=episode−31, and every expected count/seed/thread field matches the card.
+No checkpoint was loaded and no new learner, evaluation or retry was invoked.
+
+HALF_EVENT completed5000 train episodes/100000 ticks/4969 updates, then128 final
+episodes/2560 ticks. Final mean is **5.17875**, conditional rollout sample SD6.96587;
+training return sum is−18675.840000000044 and mean−3.735168. Train phase counts are
+births21038, departures7507, event-survivor opportunities46657 and eligible controls
+264581; final counts are574,232,1409,6517. Full survivor resets are zero in both phases.
+Applied half attenuations equal event-survivor opportunities: **46657 train /1409 final**,
+17.6343%/21.6204% of eligible controls. The counters describe actual acting exposure;
+correct replay/acting conformance does not identify a causal explanation for return.
+
+Technical acceptance is complete for both arms. Their total exposure is **10000 train
+episodes /200000 training ticks /9938 RMSprop updates**, plus **256 final episodes /
+5120 evaluation ticks =205120 native ticks**. All256 final returns and50 progress rows
+remain in the summary. Whole-chain wall sums to **1517.20s** (within3600s); CPU sums
+to1520.08s. Runner wall sum1515.5847928461153s is not added again. Study elapsed from
+first supervisor start to final terminal is1990s, including the inter-arm collection/
+publication gap; it is distinct from summed invocation wall and aggregate CPU work.
+
+## 9. Frozen paired result, prediction and bounded reading
+
+Using only the new matched7808 fitting instance and its fixed107808 final evaluation:
+
+| Arm | Final mean native return | Cumulative training mean | Complete outer wall |
+| --- | ---: | ---: | ---: |
+| RETAIN | 9.471796875 | −.313516 | 748.47s |
+| HALF_EVENT | 5.17875 | −3.735168 | 768.73s |
+
+**`d_HR=5.17875−9.471796875=−4.293046875`.** The frozen rule
+**`RETAIN_ABOVE_MEI: d_HR<=-1`** applies at absolute MEI1. The prospective DM
+**WITHIN_MEI, low confidence** forecast missed; owner prediction is **not taken
+(unattended)**. The old positive HALF-B01 point is retained separately and not pooled
+into this reading. The earlier practical gain did not recur in this new instance.
+
+The [run-level analysis](evidence/2026-09-10-folr-public-lifecycle-half-b02-run-analysis.json)
+uses exactly two endpoint rows, one per fitted arm, paired by training-instance7808.
+It reports one paired difference and no training-population SD or interval. The128
+rollouts per arm are conditional evaluations; their indices are not paired native
+worlds because policy-dependent RNG paths diverge. Cumulative training mean also
+favors RETAIN by3.421652 as a separate observation, not a recorded learning curve.
+
+This is a bounded loss of the complete fixed-.5 trained package to generic retention
+in this fitting instance. It supports neither stable superiority of RETAIN nor a
+general failure of attenuation. B01's+1.56546875 remains the strongest direct support
+for this same law; the present−4.293046875 is direct contrary evidence. Useful history,
+representation/optimization, action-dependent data and partner co-adaptation remain
+possible contributors. No memory-content fraction, timing effect, causal staleness,
+RANDOM/full-EVENT superiority, original-CAMA, headroom, transfer/UAV/C or Portfolio
+claim follows. The allocation has no successor; there is no local family disposition.
+
+## 10. Support accounting and preservation inventory
+
+Monitor reports4.476s for RETAIN and16.431s for HALF_EVENT, **20.907s measured query
+work** in total, attributed as reported for the named handles. Yielded RETAIN queries,
+the HALF_EVENT post-loop terminal query and messaging were not fully timed. One
+earlier DM bookkeeping command also lacks its elapsed receipt. These remain
+**resources_unmeasured**, not zero. The native chains' times/RSS and required memory
+admissions are measured; their trustworthy primary returns remain reportable.
+
+Known DM work through collection/analysis-contract reads is32.9635344s, giving
+53.8705344s known support before final analysis, publication and closeout. Later
+measured work is added at its natural boundary in the summary. Full support300s and
+complete3900s compliance cannot be certified from the incomplete support bill. No
+measured overrun, source-scope budget breach or additional invocation was observed;
+native savings do not fund support. Monitor's−07 local labels again conflict with
+the native UTC terminal clocks; originals are retained and not used for elapsed.
+
+Preserve the complete B02 detached source worktree, including ignored/raw evidence,
+both completed supervisor roots and all local collected artifacts. No B02 input-stage
+directory was created. The three exact remote roots are the worktree named in §2 and
+the RETAIN/HALF_EVENT supervisor roots. Preserve a source recovery ref, compare every
+archive member with its original before deletion, verify retained local archive bytes,
+reconcile unchanged originals immediately before deletion, then verify disk and Git
+worktree-registration absence. The shared local authoring checkout and older objects
+remain intact. Root integrates published evidence and accepts reclamation.
+
+## 11. Verified preservation and scoped closeout
+
+The [archive verification receipt](evidence/2026-09-10-folr-public-lifecycle-half-b02-archive-verification.json)
+and [remote closeout receipt](evidence/2026-09-10-folr-public-lifecycle-half-b02-remote-closeout.json)
+record the completed preservation/removal sequence. All **2708 members** (2350 regular
+files,358 directories,zero symlinks) were compared by content/type/mode with original
+members before removal. This includes2692 worktree members and16 supervisor members.
+`worktree.tar.gz` is17107603 bytes; `supervisors.tar.gz` is5000 bytes. Both retained
+local archives, **17112603 bytes** total, match the verified remote SHA256/lengths.
+The full member inventory and original verification receipt are retained with them.
+
+Archive/original verification completed **2026-09-11T00:34:08.186904Z**; local archive
+preservation passed **00:35:16.478752Z**. Original content/metadata were rechecked
+unchanged immediately before removal at **00:36:44.727865Z**. Disk absence for all
+three exact completed roots, plus worktree-registration absence, was verified at
+**00:36:44.836110Z**. The source worktree was removed through Git worktree removal;
+only the two named completed supervisor roots were removed with it. No rejection or
+fallback deletion occurred. No input stage existed for this object.
+
+Retained archives live under the B02 local control root's
+`folr-public-lifecycle-half-b02-20260910/` directory and the remote recovery directory
+of the same name. All local `collected/` raw files, checkpoints and receipts remain.
+Control and compute Git both retain `refs/archive/folr-public-lifecycle-half-b02-20260910`
+at exact sourcec6be208cd514b5d12fb13c7637e2d6376de11eb6. The shared local
+`C:/Projects/HMASD-worktrees/codex-vap-folr` checkout and all older objects remain
+intact. Root integrates the published result/closeout commits and accepts reclamation.
+
+Known support through verified closeout and the final owner/artifact checks is **67.6955750s**
+(46.7885750s DM +20.907s measured Monitor queries). This final publication
+command is reported separately in the handoff. Missing historical support durations
+remain unmeasured; no complete300s/3900s compliance is certified. Native whole-chain
+wall is1517.20s and both arm caps passed. Primary owner reviews returned no unapplied
+items. The paired result, prediction score and no-successor allocation are unchanged.

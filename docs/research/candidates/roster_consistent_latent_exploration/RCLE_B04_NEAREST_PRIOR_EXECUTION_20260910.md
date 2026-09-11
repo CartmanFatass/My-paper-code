@@ -1,0 +1,159 @@
+# RCLE B04 nearest-prior technical execution record
+
+## Accepted preparation
+
+Card: `RCLE_B04_NEAREST_PRIOR_SCIENCE_CARD_20260910.md`; Portfolio-selected
+B04/master24,200 updates,learned150/reference10/support140/complete300s.
+Authoring: `C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906`, `codex/rcle`, initially
+clean at85b5b1435 and fast-forwarded/pushed to6b07553ec before this change. Only new
+B04 study/entry/test/card/evidence and the explicit audit/new-card item are owned.
+
+Implementation adds212 non-test source lines,52 of them entry points. Existing
+B01/B02/B03, common model/rollout/native sources and scientific history are unchanged.
+No added engineering §4 machinery or source/runner budget breach.
+
+Focused check: `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q
+-p no:cacheprovider --basetemp temp/directions/roster_consistent_latent_exploration/test/b04-nearest-prior-20260910
+tests/experiments/candidates/roster_consistent_latent_exploration/b04_nearest_prior/test_study.py`.
+**6 passed in2.84s; complete pytest subprocess3.987027s**, tool-command4.181481s.
+New attempt test-directory total3.987027/300s. Log and timing are retained under
+`temp/directions/roster_consistent_latent_exploration/b04-nearest-prior-preparation/`.
+Tests use three synthetic model allocations, one real tensor backward, one explicit
+fixture parameter edit, supplied action uniforms/panel rows and200 supplied update
+calls. Zero native/environment episodes, scientific training instances, RNG masters
+or scientific optimizer calls. They exercise actual action/score wiring, absolute
+distance ties, initial probabilities, live output gradient, checkpoint roundtrip,
+run publication and all primary branch boundaries; unchanged native training tests
+are reused rather than repeated.
+
+Independent required Astra/high Reviewer `/root/dm_rcle_restart_recovery2/rv_ah_rcle_b04`
+returned **PASS, no material finding**, after source/caller review. It checked scope,
+legal distance/tie/override, shared action-score tensor,7 allocations/one fit,
+B04 semantic RNG, FLEX lifecycle,200 balanced updates, native objective/normalization,
+all endpoint metrics, sign/SE and complete-arm timeouts. Reviewer numerical exposure0;
+read-only shell charge3.476438s. It did not rerun tests. Residual limits: native runtime/
+build/publication need actual execution; internal summary wall excludes its final
+write/exit, so external wall is controlling. Interrupted counters can omit a partial
+batch; preserve such missing exposure rather than infer a zero prefix.
+
+DM technical acceptance covers the changed contract at this boundary, not empirical
+performance. New-card owner item `20260910-rcle-006` has auto-applied accept; live
+reviews were empty at recovery. The prior scientific-reading/design assumptions and
+prediction are fixed in the card.
+
+## Runtime restriction and retained test scratch
+
+The original combined test/finally-cleanup command was rejected before process creation
+as `blocked by policy`; the separate test above then ran once. A separate exact-literal
+recursive Remove-Item and Root's safer resolved-path/nonrecursive file-and-empty-directory
+cleanup were also rejected before execution as `blocked by policy`. No deletion took
+effect and no alternate shell/deletion route was attempted. Test creator remains DM;
+the exact verified path is
+`C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906/temp/directions/roster_consistent_latent_exploration/test/b04-nearest-prior-20260910`.
+The small supplied-fixture artifacts remain there pending a permitted cleanup operation.
+This cleanup restriction changes neither result budget nor scientific polarity.
+
+## Complete accounting and launch boundary
+
+Conservative30s covers earlier recovery/config/source reads, Git input sync/push and
+preparation plumbing; measured support thereafter is retained in the preparation facts.
+All remaining staging, Monitor, collection, analysis, publication and scoped closeout
+remain inside140s, with each learned/reference complete arm bounded separately.
+Reasoning/calendar effort and aggregate CPU are unmeasured, not called runtime wall.
+No numerical/native launch occurred before this source publication. The exact SHA,
+committed command, accepted handle and Monitor dispatch will be appended next.
+
+## Exact launch binding
+
+Source/card/test SHA **72c6287b7bbf721d1e031ae5a9b28b92cab8a9bd** is published
+on `codex/rcle`. Source-only bundle staging completed in8.7155167s. Remote checkout
+`/home/wu/hmasd-worktrees/rcle-b04-nearest-prior-s24-20260910` is detached at exactly
+that SHA with the configured sparse source paths; `bash -n` passed without execution.
+The same named source staging directory is under `/home/wu/hmasd-inputs/`.
+No pre-existing handle/worktree was found in the bounded recovery query. No old fitted
+or scientific input is staged.
+
+The exact supervisor payload is committed in
+[LAUNCH_COMMAND.txt](b04_nearest_prior_20260910/LAUNCH_COMMAND.txt).
+Handle `rcle-b04-nearest-prior-s24-20260910`; supervisor root
+`/home/wu/.agent-tasks/rcle-b04-nearest-prior-s24-20260910`.
+The outer receipt/log container holds admission/time files; each scientific per-arm
+output directory and RNG/model state is created by the runner only after its passed
+adjacent admission. Each arm's external timeout includes admission through process
+exit (150/10s); internal148/8s allows publication/exit margin. The two-command chain
+has an outer160s timeout. No return or update endpoint is reduced.
+
+Known/conservatively charged support before this launch-binding publication is
+56.5545929s, including the30s initial allowance. Current live-main owner reviews
+again return[]; no applicable override. This command's publication, submission,
+Monitor, collection, analysis/publication and cleanup remain within the remaining
+140s support allowance; support facts distinguish component charge from a cap.
+`PREPARATION_FACTS.json` preserves the source/fixture/review/staging facts.
+
+After launch acceptance send MONITOR_ADD to live-main configured thread
+`01a087e5-2044-7301-abb6-7a1709a98197`, Root `01a07249-b095-7821-8ce2-e9c32ba85267`,
+original DM `/root/dm_rcle_restart_recovery2`. Routine polling stops; actual adoption
+and routed terminal are separate. DM retains collection/scientific intake and exact
+cleanup inventory. Shared `codex/rcle` remains in use through that boundary.
+
+## Accepted launch and adopted observation
+
+The sole `agent-task run` submission returned exit0 and the exact tmux/session/output
+receipt for `rcle-b04-nearest-prior-s24-20260910`. Submission subprocess .5848266s;
+complete control command .8468777s. Exact command/stdout/stderr are retained in
+`b04_nearest_prior_20260910/LAUNCH_RECEIPT.json`. No second invocation was submitted.
+
+MONITOR_ADD direct app delivery to `01a087e5-2044-7301-abb6-7a1709a98197` was accepted.
+Root then confirmed **MONITOR_ADOPTED** for this exact handle/source/cwd/output and
+140s support boundary. DM performs no routine polling. Terminal status, actual
+admissions, produced checkpoints/counts/native comparisons and full runtime cost
+remain pending collection and separate technical/scientific intake.
+
+`SUPPORT_TO_LAUNCH.json` retains component charges and remaining support scope;
+no unmeasured phase is represented as zero. On routed terminal, collect the output
+and supervisor receipt, verify meaningful count/comparison/publication contracts,
+prepare E0/intake/Chinese brief and preserve unique runtime evidence before any
+authorized cleanup. Remote execution worktree and staging are retained for that live
+dependency; DM owns their collection/cleanup inventory and Root accepts reclamation.
+
+## Terminal acceptance, integration and closeout
+
+The historical pending state above is superseded by the complete exit0 result and
+`RCLE_B04_NEAREST_PRIOR_RESULT_EVIDENCE_20260910.md` / `RCLE_B04_NEAREST_PRIOR_RESULT_INTAKE_20260910.md`.
+Root's routed terminal fact was verified against the collected supervisor/output.
+One valid B04/master24 result has200 nonzero updates and18,944 complete episodes;
+primary Delta_ref−.0571492513021 and tiny initialization gain+.0001444498698 retain
+mixed F/recovery consequences. No successor is allocated. The publication-only
+Chinese brief length check first used Windows cp1252 and failed before reading;
+explicit UTF-8 readback then passed356 characters/six headings. All six E0 card
+reading rows match verbatim. No scientific data or interpretation changed in that repair.
+
+Root integrated/pushed the accepted result3b15d5f4f as mainb8012f3c5, preserving all
+163 ACVC/RCLE audit rows through the shared-file conflict. Its supplied conservative
+integration/readback charge is15s. Root confirmed source/evidence retention and
+authorized this completed scoped reclamation. Final checks found the exact detached
+source, clean tracked/untracked state, finished exit0/tmux inactive and matching
+preserved source/terminal archives. The50MiB execution checkout and34MiB source staging
+were then removed through Git worktree removal and literal staging-file/empty-directory
+removal. Both paths are absent on disk; the execution path is absent from
+`git worktree list --porcelain`. [CLOSEOUT.json](b04_nearest_prior_20260910/CLOSEOUT.json)
+retains the exact facts. Shared `codex/rcle`, local source/terminal archives and
+completed supervisor receipts remain; no active/shared checkout was removed.
+
+Final charged bill: **81.78s native chain +116.2614s support =198.0414s per one valid
+B04 result**, within150/10/140/300 boundaries. The support bill includes measured
+command wall, conservative initial30s, direct dispatch/visual1s each, Root integration15s,
+and final15s for this DM publication/readback plus Root closeout integration. This is
+a conservative charge, not an exactly measured whole-study elapsed or aggregateCPU.
+The actual final publication tail must fit its15s allowance; any overrun is reported
+within the remaining23.7386s support margin. The component record is
+[SUPPORT_FINAL.json](b04_nearest_prior_20260910/SUPPORT_FINAL.json). No phase is charged
+twice or treated as free; old history and unrelated directions retain separate bills.
+
+The remaining cleanup exception is local test scratch:7 supplied-fixture files,
+724,042B, at the exact path in [LOCAL_TEST_SCRATCH.json](b04_nearest_prior_20260910/LOCAL_TEST_SCRATCH.json).
+All three deletion methods were policy-rejected before execution. DM retains creator
+ownership for the next permitted cleanup boundary; no alternative deletion mechanism
+was used. That factual exception does not lower the accepted native-result ceiling
+or authorize another scientific invocation. Root accepts final retention/reclamation;
+the named research allocation is finished.

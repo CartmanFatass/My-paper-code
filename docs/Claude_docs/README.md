@@ -181,6 +181,20 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   CLI 1.0.5 已验证无头模式；分 A 只读侦察与第二评审、B 机械修改、C 低风险语义实现三层，
   启动、传输和科学判断不交；调用形状、围栏、附录 C 提案、三次试点与五个待决项）。
 
+- `WSL_AGENT_ENVIRONMENT_MIGRATION_20260910.md` — 评估：把 Codex 桌面版的 agent environment
+  迁到 WSL，以及项目是否要一并迁到 ext4。本机实测三条轴（文件系统、进程与解释器、
+  跨环境调用），四种配置的账，上次崩溃的归因与回滚杠杆，以及分三步的推进顺序。
+  结论：全 Linux 终局在性能上确实更便宜（进程创建 33 倍、解释器启动 4.4 倍、
+  同侧逐文件读取 3.8 倍），Agentify 跨界调用每次 38–81 ms 可忽略；
+  阻塞项是桌面版 WSL 模式的可靠性、Codex home 分叉，以及
+  `.codex/hmasd-compute.toml` 里的控制面声明（需 owner 批准），以及 6.3 列出的
+  配置路径清单（用户级 7 处 Windows 绝对路径、51 条盘符项目条目、一条指向 `codex.exe`
+  的 `CODEX_CLI_PATH`，项目级一条 Windows 路径 MCP 参数）。另含 `temp/` 的实测构成
+  （1063 个顶层条目中 23.51 GiB 是被引用的证据，仅 1.02 GiB 是可回收 scratch），
+  据此把一次性搬运量从 1.3 GiB 更正为约 25 GiB。第 10 节记录当日的三次更正：
+  `temp/` 构成、Codex home 归属、崩溃归因，共同原因是从外部材料推断本机状态。
+  未改动任何受控文件。
+
 ### environment_design/
 
 - `TOY_HOST_AND_UAV_ENV_DESIGN_ADVICE_20260901.md` — inventory of the five first-wave hosts and

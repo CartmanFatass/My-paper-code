@@ -1,0 +1,74 @@
+{
+  "request_id": "2026-09-10-four-slot-rolling-refill-01",
+  "recorded_at_utc": "2026-09-11T01:26:31.802018+00:00",
+  "source_thread_id": "01a08d62-3e51-7983-b7c2-bc4292af3f15",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "task_sha": "0a49fcc5659723e260f4d64d9892d25d3234b16c",
+  "handoff_published_sha": "eff00fbef82f642bdb01063a43c1c779657eef1f",
+  "canonical_prompt_sha256": "326fe3efd3463f192f9d5208cbfce785a62abfccab94cdf820ad1c533dfbef48",
+  "canonical_prompt_bytes": 1234,
+  "state": "BLOCKED",
+  "blocker_code": "PARTIAL_RESPONSE",
+  "scientific_decision_formed": false,
+  "send_click_count": 2,
+  "accepted_current_user_nodes_reported": 1,
+  "first_click": "unchanged URL/composer, no user node, Send enabled; one permitted retry used",
+  "retry_click": "current user node today 18:15; Pro thinking/Stop answering present",
+  "reported_send_confirmed_at": "2026-09-11T01:15:56Z",
+  "terminal_observed_at": "2026-09-11T01:20:40Z",
+  "terminal_state": "PARTIAL_RESPONSE; textless assistant node; copy returned prompt",
+  "receipt_sent_at": "2026-09-11T01:21:08Z",
+  "receipt_delivery_status": "accepted",
+  "no_further_send": true,
+  "author_provider_operations": 0,
+  "new_scientific_exposure": 0,
+  "preserved_copies": [
+    {
+      "source_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\request\\2026-09-10-four-slot-rolling-refill-01.json",
+      "retained_path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/TRANSPORT_REQUEST.json",
+      "bytes": 2826,
+      "sha256": "b94af5231c83e05939a8d9f3ea7a3e2a9194b392aa07ed6f705446120fa930e1",
+      "copy_exact": true
+    },
+    {
+      "source_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-four-slot-rolling-refill-01\\2026-09-10-four-slot-rolling-refill-01--portfolio__PACKET_MANIFEST.json",
+      "retained_path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/PACKET_MANIFEST.json",
+      "bytes": 2105,
+      "sha256": "a60ec10ba9bf429bf529e49293fb324477fa91e6d768e07ebb347f7f99200747",
+      "copy_exact": true
+    },
+    {
+      "source_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-four-slot-rolling-refill-01\\2026-09-10-four-slot-rolling-refill-01--portfolio__00_PROMPT.md",
+      "retained_path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/SUBMITTED_PROMPT.md",
+      "bytes": 1234,
+      "sha256": "326fe3efd3463f192f9d5208cbfce785a62abfccab94cdf820ad1c533dfbef48",
+      "copy_exact": true
+    }
+  ],
+  "stale_fields_not_attributed": [
+    "top-level send_evidence identifies TASK134f9aaa and one click",
+    "top-level send_attempted_at/send_confirmed_at identify prior00:09 events",
+    "timestamps completion/capture/archive identify prior00:25 events",
+    "nested transport_facts.prompt_sha256 and response_sha256/635bytes identify older requests",
+    "nested transport_facts.archive_paths/status name prior fifth-vacancy archive",
+    "historical user/assistant/turn IDs without current-request verification"
+  ],
+  "native_provider_ids_for_current_round": "not established by forwarded terminal facts; current visual user label today18:15 is retained without inventing a DOM id",
+  "independent_advance": {
+    "source": "Root native message during this intake, plus published FSD intake at main6f1e908bc",
+    "fsd_design_complete": true,
+    "fsd_numerical_allowance": 0,
+    "mgtap_fallback": "Root confirmed actual one-time activation after completed FSD design with no allocated continuation and free vacancy",
+    "mgtap_scope": "one source/design return; zero implementation, numerical, model, test or probe"
+  },
+  "final_github_observation": {
+    "at_utc": "2026-09-11T01:31:58.215762+00:00",
+    "remote_head": "eff00fbef82f642bdb01063a43c1c779657eef1f",
+    "response_http_status": 404,
+    "delivery_comment_observed": false,
+    "current_question_still_no_decision": true
+  }
+}

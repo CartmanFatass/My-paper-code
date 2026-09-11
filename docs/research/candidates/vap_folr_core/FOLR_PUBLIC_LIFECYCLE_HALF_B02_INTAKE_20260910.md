@@ -176,3 +176,111 @@ delta, branch, forecast score and scientific interpretation remain pending; RETA
 alone does not decide them. Both arms' raw evidence and the shared remote checkout
 remain for verified preservation/closeout. No further invocation or successor follows
 from this allocation.
+
+## 8. Complete paired scientific intake
+
+Checked the complete result document against card §§3–5 and the original artifacts:
+both exactc6 source surfaces, fresh memory admissions, exit0/finished supervisor facts,
+two checkpoints,20 raw-file byte comparisons, raw-log/final-publication equality,
+50 progress rows and all exposure/counter fields. [E0 §§8–10](FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_EVIDENCE_20260910.md#8-half_event-terminal-collection-and-technical-acceptance)
+and the two collection receipts retain the checks. Each arm has5000 training episodes,
+100000 ticks and4969 updates, then128 non-learning final episodes/2560 ticks. The pair
+has205120 native ticks,9938 updates and256 preserved final returns. Outer walls
+748.47/768.73s satisfy1800s each;1517.20s summed native wall satisfies3600s. No source
+change, new test suite, top-up, checkpoint selection or retry occurred.
+
+The applied frozen reading rule, verbatim: **“RETAIN_ABOVE_MEI: `d_HR<=-1`.”**
+The primary is HALF_EVENT5.17875 minus matched RETAIN9.471796875 =
+**−4.293046875**, below−1. Select **RETAIN_ABOVE_MEI** at the existing absolute MEI1.
+This new fitting instance does not reproduce HALF-B01's practical gain. Historical
+HALF-B01+1.56546875 remains separate; no cross-seed baseline replacement, pooled
+endpoint, altered margin or outcome-based redefinition was used.
+
+Scientific-reading assumption and limit: reuse the current card's Foundations §6 /
+04_EMPIRICAL and CAMA/Sable reading record, as already stated in HALF-B01 intake §2.
+The independent unit is the new matched pair of real training fits, not128 evaluation
+episodes. The standard run-summary tool receives one score per fitted arm and reports
+one paired difference with no training-population interval/SD. Equal final seed labels
+do not pair traffic worlds after action-dependent RNG divergence. Conditional SDs
+9.89218 RETAIN/6.96587 HALF_EVENT characterize rollouts under their fitted policies;
+they do not estimate training variance. The observed counterexample changes the
+performance reading, not the established comparator or a literature/mechanism claim.
+
+Mechanism trace remains native birth/departure event → continuing physical-trip owner
+→ shared local/public observation → fixed.5 incoming-state attenuation before GRU
+in acting and online/target histories → equal finite learner exposure and partner
+adaptation → native return. HALF_EVENT applied46657/1409 attenuations in train/final
+phases and zero full resets; RETAIN applied none. Correct law/exposure does not
+localize whether useful context, representation, optimization/data or co-adaptation
+contributed. The separate cumulative training means (−.313516 RETAIN/−3.735168 HALF)
+also favor retention here, without constituting a learning curve.
+
+Prediction scoring: **WITHIN_MEI, low confidence → RETAIN_ABOVE_MEI: missed.**
+Owner prediction: **not taken (unattended)**; primary review read found no unapplied
+instruction. The [Chinese owner brief](../../portfolio/owner/briefs/vap_folr_core/2026-09-10_FOLR_PUBLIC_LIFECYCLE_HALF_B02.md)
+reports the result and next step without internal source fields.
+
+Bounded claim: one new complete learned-package comparison favors retention by more
+than MEI. Strongest support for attenuation is the earlier direct positive B01 point;
+strongest contradiction is this matched native loss, with the training-return endpoint
+agreeing in sign. No stable population winner, universal negative, equivalence,
+causal timing/staleness, useful-memory fraction, omitted-control superiority, tuned
+headroom, transfer/UAV/C or Portfolio conclusion follows. No family is closed locally.
+
+Engineering and resource limits remain separate. The unchanged implementation retains
+its accepted26-test/high-risk-review evidence and32.4911638s cumulative directory-test
+charge; it adds no §4 machinery or observed §5 source-budget breach. Native time/RSS
+and admission are measured. Support is **resources_unmeasured** in part:20.907s of
+reported Monitor queries are measured, but omitted query/messaging time and one DM
+bookkeeping duration remain unknown. No complete300s/3900s compliance is certified,
+and no measured cap breach is established. Missing support measurements neither
+invert the native result nor grant more exposure. Original inconsistent Monitor
+local offsets are retained; use native supervisor/time clocks for elapsed.
+
+## 9. Decisions this intake produces
+
+1. **Object result acceptance.** Options: (a) accept the valid paired B result under
+   RETAIN_ABOVE_MEI and preserve all outcomes; (b) quarantine for a demonstrated
+   implementation/count/publication defect. Recommend and select(a): all primary
+   integrity checks pass, and support telemetry incompleteness does not compromise
+   the primary measurement. **Owner-delegated decision (unattended,2026-09-03
+   instruction): (a).** This B object has no C-style consumption state.
+2. **Allocated continuation and closeout.** Options: (a) preserve/verify the completed
+   evidence and reclaim only the three exact completed remote roots; (b) retain them
+   for a live execution or unresolved preservation dependency. Recommend(a), since
+   both invocations are terminal and only preservation verification remains. Execute
+   removal after archive-to-original and retained-copy verification. **Owner-delegated
+   decision (unattended,2026-09-03 instruction): (a).** No successor is authorized by
+   this card; the two accepted invocations complete its finite allocation.
+3. **Further science.** No local direction or Portfolio disposition is made. The
+   current recurrence discriminator returned an adverse point. A later investment or
+   object requires its own authorized decision and distinct decision value; there is
+   no additional run, diagnostic, coefficient search, recast or promotion here.
+
+Owner flags: partial support accounting and unconfirmed Monitor offsets, retained in
+the receipts; no material reviewer dissent or close threshold call. Ordinary result
+acceptance is recorded here and in the audit ledger without a separate console item.
+The accepted direction record preserves both opposite-signed instances. Return the
+completed result and verified closeout to Root for integration/reclamation acceptance.
+
+## 10. Closeout delivered and final boundary
+
+The [E0 §11](FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_EVIDENCE_20260910.md#11-verified-preservation-and-scoped-closeout)
+and linked receipts verify2708 archive members against their originals before removal,
+two retained local archives totaling17112603 bytes, unchanged-original reconciliation
+immediately before deletion, and all three exact remote roots absent on disk with the
+worktree absent from Git registration. Verification preceded removal: remote archives
+00:34:08Z, retained local copies00:35:16Z, unchanged-original check00:36:44.727865Z,
+verified absence00:36:44.836110Z. Both control/compute source refs preservec6be208cd;
+all local raw evidence/checkpoints remain. The shared authoring checkout and older
+objects are retained. No failed operation or additional source/evidence deletion arose.
+
+The selected closeout option is executed; Root integration and reclamation acceptance
+remain. Primary owner reviews again returned no unapplied instruction. Ordinary
+technical completion is recorded here and in the audit ledger, without a new console
+item. The Chinese brief now reports completed preservation and cleanup.
+
+Final measured support subtotal before this publication is67.6955750s; the final
+publication duration is returned separately. The partial bill remains resources_unmeasured,
+so complete300s/3900s compliance is unverified. This limit does not change the valid
+RETAIN_ABOVE_MEI branch or create exposure. No successor is selected or allocated.

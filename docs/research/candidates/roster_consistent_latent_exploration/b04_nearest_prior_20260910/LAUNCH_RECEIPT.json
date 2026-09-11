@@ -1,0 +1,8 @@
+{
+  "handle": "rcle-b04-nearest-prior-s24-20260910",
+  "command": "cd /home/wu/hmasd-worktrees/rcle-b04-nearest-prior-s24-20260910 && mkdir -p temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910 && HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python /usr/bin/time -f wall_s=%e,peak_rss_kib=%M,exit=%x -o temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/chain-time.txt timeout 160 bash scripts/run_rcle_b04_nearest_prior.sh 72c6287b7bbf721d1e031ae5a9b28b92cab8a9bd /home/wu/hmasd-worktrees/rcle-b04-nearest-prior-s24-20260910/temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910",
+  "exit_code": 0,
+  "stdout": "Task 'rcle-b04-nearest-prior-s24-20260910' started in tmux session 'agent_rcle-b04-nearest-prior-s24-20260910'. Output: /home/wu/.agent-tasks/rcle-b04-nearest-prior-s24-20260910/task.log\n",
+  "stderr": "",
+  "submission_wall_s": 0.5848265999811701
+}

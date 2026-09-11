@@ -1,0 +1,38 @@
+{
+  "question": "在已完成FSD与MGTAP设计后，这一个独立空位应先实现哪一个？本地只建议，交给Portfolio节点裁决。",
+  "changes_if_approved": [
+    {
+      "target": "一个第五滚动空位的下一次实现任务",
+      "from": "两份设计已完成，尚无实现、测试或实验额度",
+      "to": "建议A：只实现FSD I1280/D0绑定与读数；最多一次60秒有限夹具检查；真实环境、训练与评价仍为零。B为精确定义的MGTAP实现；C不追加工作。"
+    }
+  ],
+  "if_refused": "若不采纳A，Portfolio可选B或C；不自动切换，不动另一个四空位请求涉及的UCOPE、RCLE、FOLR、ACVC、VSP03。生命周期与优先级不变。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_fifth_slot_implementation_selection/SCIENCE_BRIEF.md",
+      "quote": "A's remaining edit is an existing consumer's explicit binding and its dependent\nreadout. B requires a new masking/normalization/multiplicative encoder path and\ncorresponding numerical acceptance.",
+      "why": "现有代码已支持FSD所需批量，缺口较集中；这里只比较下一次实现价值，不声称它会更快或有收益。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md",
+      "quote": "P70−.049670563167111874 and\nP72−.035312725297886094. D0 is the better observed endpoint in each.",
+      "why": "两次原方案都输；扩大批量也可能少学了有用内容。MGTAP新条件聚合是有竞争力的备选，但P75平均仍为−0.02396310430506595。"
+    }
+  ],
+  "uncertainty": [
+    "两者只有源码设计，没有新方案收益；MGTAP只获得窄范围科学资格。",
+    "未来训练完整耗时、内存和支持成本均未知；FSD原申请3000秒未获分配。",
+    "60秒是建议的单次工程检查上限，不是耗时预测；失败不判科学阴性。"
+  ],
+  "cost": {
+    "compute": "本轮实现、模型、测试、环境、训练、评价均0。若Portfolio选A/B，可分别授予文中唯一有限检查；不授予真实实验。",
+    "owner_time": "无需等待回复；未测量作者投入。",
+    "reversibility": "reversible",
+    "waits_on_this": "只涉及这一个空位的下一次实现选择；其他方向独立推进。"
+  },
+  "verdict_text": "Recommendation only: A, one bounded FSD I1280/D0 implementation return.",
+  "source": "docs/research/portfolio/pro_packets/20260910_fifth_slot_implementation_selection/SCIENCE_BRIEF.md"
+}
