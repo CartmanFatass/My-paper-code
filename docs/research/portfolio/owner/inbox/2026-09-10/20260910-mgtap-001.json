@@ -67,5 +67,15 @@
     "verdict_text": "建议原 Convergence 仅重开 COND/DENSE 这项前瞻性比较的研究资格；后续 B 仍须另行分配。本次只提交建议，不实施、不分配数值工作，也不在本地作家族裁决。",
     "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/PREPARATION_INTAKE.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T02:17:08+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md#3-blocker-rule",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/BLOCKER_INTAKE.md",
+      "state": "blocked",
+      "summary": "按现有所有者 AGENTS 第3节的阻塞规则记录：本轮两次 Send 点击仅形成一个当前问题，随后出现提供方错误；没有完整答复或方向裁决。保留原请求和历史 PARK，当前链在干净边界等待实际交付变化，不重发、不点 Retry、不在本地选择。此归因只说明既有阻塞规则，不表示所有者新答复或 Pro 裁决。"
+    }
+  ]
 }
