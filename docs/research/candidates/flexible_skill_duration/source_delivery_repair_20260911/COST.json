@@ -1,0 +1,62 @@
+{
+  "assignment": "OWNER_DIRECT technical repair only; separate from ended B02 scientific allocation",
+  "charges": [
+    {
+      "label": "repair_assignment_checkout_and_owned_surface_read",
+      "seconds": 0.6443831
+    },
+    {
+      "label": "repair_current_inputs_and_transport_surface_map",
+      "seconds": 0.4744596
+    },
+    {
+      "label": "reconcile_current_owner_unblocking_inputs_and_shell_identity",
+      "seconds": 5.1149998
+    },
+    {
+      "label": "identify_literal_transport_runtime_and_owner_repair_record",
+      "seconds": 0.4703973
+    },
+    {
+      "label": "write_scoped_repair_L0_and_non_scientific_bounds",
+      "seconds": 0.013
+    },
+    {
+      "label": "implement_binary_bounded_FSD_source_delivery_helper",
+      "seconds": 0.012
+    },
+    {
+      "label": "single_bounded_binary_EOF_and_script_transport_diagnosis_batch",
+      "seconds": 1.1289643
+    },
+    {
+      "label": "correct_full_command_timing_and_commit_exact_check_caller",
+      "seconds": 0.026
+    },
+    {
+      "label": "independent_static_source_delivery_review_initial",
+      "seconds": 0.6978828
+    },
+    {
+      "label": "single_static_AST_binary_timeout_and_receipt_contract_check",
+      "seconds": 0.3741181
+    },
+    {
+      "label": "independent_review_timing_correction_readback",
+      "seconds": 0.2665328
+    },
+    {
+      "label": "record_review_resolution_and_bounded_check_evidence",
+      "seconds": 0.016
+    }
+  ],
+  "recorded_invoked_support_seconds": 9.2387378,
+  "technical_target_seconds": 180,
+  "diagnosis_limit_seconds": 20,
+  "source_only_complete_check_limit_seconds": 45,
+  "cleanup_limit_seconds": 15,
+  "static_review_limit_seconds": 30,
+  "new_scientific_exposure": 0,
+  "old_support_refund": false,
+  "note": "Inner check and remote timings are subsets of these enclosing command charges. Final publication/collection costs append at later boundaries."
+}
