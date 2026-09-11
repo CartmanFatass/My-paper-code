@@ -1,0 +1,26 @@
+{
+  "head": "323cdf576a7b7290bd74bbccf47c0386072dc4c2",
+  "status": "",
+  "cwd": "/home/wu/hmasd-worktrees/mgtap-cond-b01-8213-20260911",
+  "command_sha256": "cdddd0581a0989e9c2a0f58d5339df89cd076719271d77964118d69d51d93234",
+  "LF": true,
+  "bash_syntax": "pass",
+  "source_sha256": {
+    "scripts/run_mgtap_conditional_pooling_b01.py": "35c87ea04f2a7c4b943537bd150f945cf090a70d94f23b6168b42e500b63454f",
+    "scripts/hmasd_resource_preflight.py": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc",
+    "experiments/candidates/metric_ground_transport_allocation/mgtap_conditional_pooling_b01/study.py": "9b070a53e3df24a6908c92894112ece5fc3cdecb6564d17e8ce342cddebf0cfb",
+    "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/conditional_pooling.py": "1425913aab459df3583952df3694ef327708dc54c7f9dbf1c27d0d31668cb752",
+    "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py": "8c6108eda8c053d81cd686929cbca3765bec76d26e57fe66b6e386013a838fca",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py": "2f5ce83684d5aa4b96944aef10ec3f40b850d679a7048de48881c5bfac1126dd",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py": "e324640251d0d025549705ff7541b765e7b96733f422c48ee9c2f5bd07709614",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/study.py": "0e787d017f6486603aa573ce29b3be9ac6c4ce8c775df55412fdaa20afe5e5f1"
+  },
+  "runtime_root_absent": true,
+  "supervisor": {
+    "task": "mgtap-cond-b01-8213-20260911",
+    "status": "not_found"
+  },
+  "inner_wall_seconds": 0.6018742630258203,
+  "all_nine_published_source_blobs_match": true
+}

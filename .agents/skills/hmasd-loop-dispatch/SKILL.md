@@ -40,10 +40,13 @@ At goal-turn entry, a return or receipt, and before waiting:
    observation. Route terminal evidence promptly. If Transport is idle with a pending request,
    reconcile its persisted state and resume that same observation/recovery route. App dispatch
    acceptance is not provider Send acceptance.
-6. Wait only when no authorized action is ready across all directions, for the first event for at
-   most 60 seconds while retaining exact dependencies. On wake, process and dispatch the waking
-   direction before waiting again; do not defer a ready direction to align it with peers. A batch
-   never creates a completion barrier; unresolved waits do not fill available direction slots.
+6. After every currently ready independent action is dispatched, end the Root turn when the
+   remaining dependencies are long-running DM, legacy CM, Monitor or Transport work. Do not use
+   `wait_agent`, `wait_threads`, timers or status polling to hold that turn open. The independent
+   completion relay wakes Root for actionable native returns; Monitor and Transport use their
+   existing direct Root receipt routes. On that wake, process and dispatch the waking direction
+   before ending the new turn. A batch never creates a completion barrier; unresolved waits do
+   not fill available direction slots.
 
 ## Bounded assignments
 

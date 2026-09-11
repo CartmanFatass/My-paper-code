@@ -1,0 +1,43 @@
+{
+  "path": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904/temp/directions/metric_ground_transport_allocation/exp/conditional_pooling_b01_20260911_8213_source",
+  "disk_absent": false,
+  "files": [
+    {
+      "name": "COMMAND.sh",
+      "bytes": 968,
+      "sha256": "cdddd0581a0989e9c2a0f58d5339df89cd076719271d77964118d69d51d93234"
+    },
+    {
+      "name": "native_result.tar.gz",
+      "bytes": 1005587,
+      "sha256": "5426b5dc1a5c1a09ac1d989239174f1e4a204c098e633cd4eb2a2837ceaa1fb4"
+    },
+    {
+      "name": "source.bundle",
+      "bytes": 3478401,
+      "sha256": "8e9d0049d3cad6107a2aa3cbd5e8d66a0551fb15eb9f11c8c8830b78ecb26f90"
+    },
+    {
+      "name": "supervisor_result.tar.gz",
+      "bytes": 2412,
+      "sha256": "6d6e55923e75c90334dcce9ddfdb634f05ae4fd745bc37fba154f069486505ca"
+    }
+  ],
+  "total_bytes": 4487368,
+  "read_only_hash_verification_after_rejection": true,
+  "blocker": {
+    "phase": "local_duplicate_cleanup_pre_effect_rejection",
+    "accepted_process": false,
+    "command_invoked_wall_seconds": 0,
+    "tool_wall_seconds_reported": 0,
+    "reason": "CreateProcess rejected: blocked by policy",
+    "operation": "Guarded exact local8213 directory cleanup: hash checks, four explicit nonrecursive Remove-Item file operations, empty directory removal and cleanup receipt update.",
+    "effect": "No local operation executed; four duplicate files retained; no alternate deletion attempted."
+  },
+  "cleanup_owner": "original DM /root/dm_mgtap_cond_implementation",
+  "cleanup_event": "same exact paths only when the actual runtime restriction permits; no alternate deletion attempted",
+  "shared_authoring_checkout_present_registered": true,
+  "test_scratch_absent": true,
+  "root_integration_full_sha": "5321b69fdecdc6de81fd5e8fb9efe648a5950e6e",
+  "scientific_meaning_unchanged": true
+}

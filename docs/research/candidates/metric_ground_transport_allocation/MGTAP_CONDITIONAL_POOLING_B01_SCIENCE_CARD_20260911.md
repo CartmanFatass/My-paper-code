@@ -164,3 +164,82 @@ Recommend/select(a): it directly supplies the requested native performance obser
 Portfolio PRO_FINAL option A. Owner flag:none. The audit records this selection;
 a P2 new-card item supplies asynchronous visibility. Current primary-control owner
 reviews were empty at preparation. This card is B/EXPLORE and has no C consumption state.
+
+## 6. New Portfolio allocation — master8213 (2026-09-11)
+
+The historical master8212 allocation above is complete and stays unchanged.
+Portfolio PRO_FINAL / OWNER_DELEGATED response
+`6c32ade3216c374ecf2f5179b15d559729cd45c9` §§1,4,9 selects **one new unchanged
+COND/intact-DENSE pair**, dispatched by Root on2026-09-11. Its full immutable
+[response](https://github.com/CartmanFatass/My-paper-code/blob/6c32ade3216c374ecf2f5179b15d559729cd45c9/docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md)
+was read for the applicable allocation and stopping rules. The new instance tests
+whether the small first COND signal recurs across a fresh training history. This
+implements the conforming Portfolio selection; it changes no family, Priority,
+recast count or lifecycle.
+
+This section binds master**8213**, selected prospectively without screening, to
+the existing entry point and unchanged §§2–4 law. Local exact identity search
+found no prior named use; the destination supervisor returned `not_found` and
+both prospective execution/staging paths were absent before preparation.
+Only the driver MASTER constant and matching stub expectations change. All old
+source and8212 results remain at their published SHAs; no state/checkpoint is reused.
+The effective new base is**821300000**; every reset/private-stream offset,
+constructor order, tensor ownership, exposure and sampled endpoint remains as
+specified above. Source baseline for the accepted native path is
+`2814fbd3e24877464e4dd7c12df55c24567e8723`.
+
+L0: DM delivers the single fresh pair through final evidence/intake and scoped
+cleanup, owning this card, the existing study/test binding and new
+`conditional_pooling_b01_8213_20260911/` evidence in the same shared checkout
+and `codex/mgtap` branch. It started clean at412f6d4f1, fast-forwarded to
+main2bfe94789 and was pushed. Protected algorithm/information/native-PPO/primary
+semantics are unchanged. Acceptance reuses the accepted numerical fixture and
+prior failure/publication checks, runs only the one existing pure-stub success
+case for the new identity, and obtains an independent read-only review of the
+actual identity/command diff. The unchanged CLI is source-parsed only.
+Engineering Scope §4 needs **none**; one source constant changes, with no new
+runner, numerical check, encoder fixture or additional scientific exposure.
+
+Fresh separate caps:COND450/DENSE450/native900/invoked-support300/complete1200
+seconds, with the complete accounting in §3. Prior native364.79s
+(COND192.9329938/DENSE171.8570062) is a planning anchor, not a new forecast or
+reusable allowance. Dominant work remains two fits,512×256 training per arm,
+256×4=1024 Adam calls per arm and32×256 final sampled steps per arm:
+278528 native team steps/2048 Adam calls/1088 episodes total. The six top-level
+model constructions include the two untrained common-template helpers.
+Per-arm actor work remains3317760 rows including replay. No known projected
+overrun; unknown rates stay unknown. This new allowance ends after its one
+pair/intake/closeout or a concrete bounded limitation. No retry, replacement,
+third pair, H panel, pilot, shortened endpoint or automatic successor is allocated.
+
+CPU FP32/one thread and the exact existing native path remain fixed. Runtime:
+`/home/wu/hmasd-worktrees/mgtap-cond-b01-8213-20260911`, output
+`temp/directions/metric_ground_transport_allocation/exp/conditional_pooling_b01_20260911_8213/`,
+supervisor `mgtap-cond-b01-8213-20260911`. Staged command/source use the matching
+directory under `/home/wu/hmasd-inputs/`. Destination admission and runner are
+one detached measured chain. Root reconfirmed live-primary Monitor app thread
+`01a087e5-2044-7301-abb6-7a1709a98197`; direct dispatch and actual adoption are
+separate receipts. Cleanup preserves unique raw evidence/checkpoints first and
+keeps the shared authoring checkout. Stub scratch:
+`temp/directions/metric_ground_transport_allocation/test/native_binding_8213/`.
+
+The first two card lines, MEI0.01, absent tuned native headroom, complete32-world
+reading rule and claim ceiling remain binding. **Above+.01 is a first local
+package gain; inclusive±.01 retains sign/DENSE remains generic choice;
+below−.01 is adverse; damaged/incomplete primary has no paired polarity.**
+Here a new local gain would add a recurrence observation, inside would preserve
+the small/uncertain magnitude and DENSE default, adverse would oppose recurrence;
+none establishes a training-population effect or selects further work.
+The prior8212 point+0.005761321371348559 is supporting context; its13 adverse
+worlds and separate old REL evidence are counterevidence, not new units in this
+pair. Keep both trained-pair observations separate before any explicitly
+descriptive synthesis. Independent unit:one matched training pair;32 worlds
+supply only conditional evaluation spread. Scientific-reading assumptions from
+§4 remain current; no new mechanism/literature question is introduced.
+
+DM prediction for8213:inside MEI, DENSE generic. Owner prediction:not taken
+(unattended); primary-control reviews were empty at preparation. Object options:
+(a) prospectively bind8213 to the selected unchanged unit;(b) modify the comparison;
+(c) leave the allocation unused. Recommend/select(a).
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a)**.
+Owner flag:none; P2 card visibility and the audit record accompany publication.

@@ -268,6 +268,13 @@ Root applies the `hmasd-loop-dispatch` skill's stable next-action trigger at goa
 native return, Transport receipt and before blocking waits. Check owner pause/stop instructions
 first. A workflow edit or status question does not resume paused research.
 
+OWNER_DIRECT 2026-09-11: after Root has dispatched every currently ready independent action,
+it ends its turn when the remaining work is long-running DM, legacy CM, Monitor or Transport work.
+Root does not hold the turn open with native waits, app-task waits, timers or status polling. The
+independent completion relay wakes Root for actionable native DM/legacy-CM returns; Monitor and
+Transport use their existing direct Root receipt routes. A wake starts the stable next-action pass
+again. This turn boundary changes no ownership, acceptance requirement or experiment observation.
+
 While research is authorized to advance, Root plans and maintains five advancing direction
 chains until five formally enter UAV validation, traced to their direction decisions and UAV
 cards. Count active native work, accepted running experiments and accepted Pro generation once
