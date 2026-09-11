@@ -1,0 +1,18 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-11-post-program-vacancies-portfolio-01--portfolio",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-11-post-program-vacancies-portfolio-01",
+  "direction_id": "portfolio",
+  "direction_ids": ["acvc", "capability_bound_semantic_currentness", "commitment_residual_triggered_options", "degraded_incumbent_shadow_handover", "finite_resource_relational_inductive_efficiency", "flexible_skill_duration", "metric_ground_transport_allocation", "roster_consistent_latent_exploration", "semigroup_consistent_duration_model_policy", "ucope", "vap_folr_core", "variable_n_fleet_churn", "vsp_02", "vsp_03", "vsp_c1"],
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {"role": "prompt", "source_path": "<paste>", "canonical_filename": "2026-09-11-post-program-vacancies-portfolio-01--portfolio__00_PROMPT.md", "bytes": 1914, "sha256": "cbc046f8ce1ba9661ce3d05384433f14a7a10bcc1c6b4603b91054b3e0e74fc4"},
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true
+}

@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "P",
-  "auto_applied": null,
+  "auto_applied": "P",
   "dm_reason": "新一次独立真实训练直接判断首个超过门槛的收益是否再次出现，同时保留所有正负结果。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/SCIENCE_BRIEF.md"
@@ -80,6 +80,16 @@
       "record": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
       "state": "planned",
       "summary": "FOLR完整intake/E0/摘要已发布8da607b4b并集成bc78a6bf8，全文已读；五个旧分配均结束，五个空位。建议P另投3900秒相同比较，Q仅问方向、R留空，尚未执行。原生1703.12秒；完整支持未知，本地重复件策略拒绝仅限制清理。"
+    },
+    {
+      "at": "2026-09-11T23:40:21+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-11-post-program-vacancies.md",
+      "state": "applied",
+      "summary": "Pro独立选择P，完整回复合规。Root已派发FOLR新相同比较3900秒；RETAIN与LEARNED_EVENT分别确认Monitor接管，源2b22270b3b076df60f4afd3203c3f09aeab3b98b，尚无本轮完整结果intake。实际组合B+P新增上限6900秒、四项任务、一个空位，各预算不可互借。中文完整裁决、成本和未知项见同目录INTAKE_OWNER_PACKET.json；没有所有者回复或新C/UAV决定。",
+      "correction": "当前实际选择行是docs/research/portfolio/audit/2026-09-11.md#L108；原L98为历史准备记录，P与原A/B/C/D独立选择。"
     }
-  ]
+  ],
+  "approval_correction": "当前实际选择行是docs/research/portfolio/audit/2026-09-11.md#L108；原L98为历史准备记录，P与原A/B/C/D独立选择。"
 }
