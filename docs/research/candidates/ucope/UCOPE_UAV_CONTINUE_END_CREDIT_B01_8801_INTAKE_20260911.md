@@ -138,3 +138,24 @@ Owner new-card item [20260910-ucope-008](../../portfolio/owner/inbox/2026-09-10/
 was created with its Chinese packet and executed accept option, representing
 the already allocated card binding. The owner's local-date item directory
 differs from this UTC-date intake. No owner reply or additional allocation is implied.
+
+## Exact-source preparation and pre-submission boundary
+
+Source **471a3383d23b16bb01469a6f30e3987910c3e47f** is committed and pushed on codex/ucope. The committed
+wrapper passed remote bash syntax and matches its Git blob SHA256
+`cba26e84f44d6cd36b5c5ff7f660b626a52d4ee8ad58b47ba9fded1e3612f2f0`. The destination
+is a clean detached worktree at that SHA; the named supervisor handle is
+`not_found`. One remote Git fetch command ended exit1 without output;
+authoritative reconciliation showed no worktree/run creation. The permitted
+committed-object pack route then transferred36,226,108bytes and imported the
+exact published Git source; no uncommitted source or alternate interpreter
+was used. Charge45s conservatively for the bounded failed fetch/reconciliation
+interval rather than treating the truncated wait timing as its full duration.
+Pack transfer/preparation have their own measured records. See
+[launch facts](UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_LAUNCH_FACTS_20260911.json)
+for exact argv, node/cwd/outputs, source, hashes and commands.
+
+No scientific run has been submitted at this committed boundary. The single
+next action is the frozen agent-task command; its adjacent memory admission
+will admit or refuse that attempt. No extra reviewer/check/native invocation
+follows from this documentation-only publication.
