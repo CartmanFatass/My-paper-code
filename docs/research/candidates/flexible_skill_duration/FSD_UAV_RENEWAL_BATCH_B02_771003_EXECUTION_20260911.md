@@ -1,6 +1,7 @@
 # FSD new771003 pair execution
 
-Prospective new B allocation under card§7 and Root's conformance-PASS dispatch.
+D0 detached command accepted; Monitor dispatch accepted, adoption pending.
+New B allocation under card§7 and Root's conformance-PASS dispatch.
 Reused authoring checkout C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd;
 reconciled base37d180f91621f065eaef19a194157f88826cebf2. The DM
 /root/dm_fsd_i1280_implementation owns source, technical acceptance, launch,
@@ -10,8 +11,8 @@ collection/intake and cleanup. Root integrates and accepts retention.
 
 The existing B02 entry binds object FSD_UAV_RENEWAL_BATCH_B02_771003,
 training771003/evaluation781003 and the original B02 card. All shared science
-and the accepted delivery helper remain unchanged. Published source SHA is
-recorded with the staging receipt before launch. One nonnumerical changed-binding
+and the accepted delivery helper remain unchanged. Published and delivered source SHA is
+5250c43536d8520d4005eed3f613226ec4bc6e73, also the D0 launch source. One nonnumerical changed-binding
 check passed and independent review found no material issue. DM accepts the
 new binding/commands; unchanged numerical checks are reused. Evidence and costs
 are in BINDING_CHECK.json and INDEPENDENT_REVIEW.md.
@@ -61,3 +62,31 @@ send exactly one HMASD_ROOT_HANDOFF through relay app
 01a08456-2cf3-7f02-8595-42d84ba41a4c under live SIBLING_COMMUNICATION.md, after
 publication, and retain the accepted/uncertain receipt with the return. No relay
 message or Monitor handle has yet been sent for this instance.
+
+## D0 accepted handover2026-09-11
+
+The single source transaction succeeded at23:31:09.415666–23:31:16.780500Z:
+complete helper7.359s, enclosing command7.5772148s, remote6.490008224034682s.
+Nine declared paths match the published SHA; both shell inputs are LF and pass
+bash syntax. These nested costs are one support charge. No repeat transaction.
+Before launch the admission helper bytes were also read against that source.
+The named input directory was created; no earlier instance was reused.
+
+At23:32:28.668494Z agent-task returned0 and confirmed tmux session
+agent_fsd-uav-renewal-batch-b02-771003-D0-20260911. D0_LAUNCH_RECEIPT.json records
+the exact900s command with fresh admit-memory && runner. Admission was not yet
+published when the launch call returned; scientific execution cannot cross a
+failed admission in this exact command. Its actual receipt and terminal result
+remain to be collected. No measured learning result is asserted at handover.
+
+MONITOR_ADD was accepted by live app01a087e5-2044-7301-abb6-7a1709a98197;
+MONITOR_DISPATCH.json preserves the prompt and API outcome. Actual adoption is
+pending Root's routed confirmation. DM performs no parallel routine polling.
+The same DM resumes on routed D0 terminal, collects/accepts this D0 companion,
+then submits the already selected I command once at the same source with a new
+adjacent admission. No extra source-delivery transaction or scientific retry.
+
+Remote execution checkout/input/D0 supervisor root remain for active execution
+and later collection. The I supervisor root is still uncreated. DM owns cleanup
+after preserving the complete pair or bounded limitation; Root accepts retention
+and reclamation. Shared local authoring checkout remains in use.
