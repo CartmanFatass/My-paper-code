@@ -1,6 +1,7 @@
 # ACVC fresh DENSE reuse B01 / 8941 — execution
 
-Date: 2026-09-10 (America/Los_Angeles). Prospective binding; no new scientific run yet.
+Date: 2026-09-10 (America/Los_Angeles). **Technical no-ready closeout; zero scientific launches.**
+The source-preparation support breach below ends this allocation before its focused check.
 
 ## L0 and ownership
 
@@ -93,3 +94,27 @@ The machine-generated prospective exposure is1 fresh fit,69079 trainable paramet
 nonzero-lr Adam1024,131072 training and49152 evaluation team steps; actual new
 scientific exposure is still0. New-card owner item20260910-acvc-003 records the
 already applied prospective binding, with no wait for a reply. Forecasts are.75/.65.
+
+## Preparation failure and exact stop
+
+Published source is **cafef130c9d4d89febda8fd788ad9458b6985aca**. The single
+SSH source fetch/worktree preparation returned no output; matching local PID40204
+was stopped at102.1040615s elapsed, exceeding the90s inclusive support cap by
+at least12.1040615s before any admission/check/`agent-task` command was sent.
+Local transport exit1 is retained; remote fetch/worktree/child termination remain
+unknown. Stopping SSH does not establish remote absence.
+
+Root confirmed no-ready and one bounded read-only reconciliation. That call reached
+a remote shell at2026-09-11T05:15:05Z but returned no Git or path fact before its
+12-second timeout (measured12.0324544s). No further query, preparation or launch
+ran. Known preparation/reconciliation support alone is≥114.1365159s. Source and
+review are preserved, but focused runtime acceptance, actual resource admission,
+scientific handle/adoption and all new numerical exposure are absent.
+
+The [technical evidence](ACVC_FRESH_DENSE_REUSE_B01_8941_TECHNICAL_EVIDENCE_20260910.json),
+[exact reconciliation receipt](ACVC_FRESH_DENSE_REUSE_B01_8941_RECONCILIATION_20260910.json)
+and [no-ready intake](ACVC_FRESH_DENSE_REUSE_B01_8941_INTAKE_20260910.md) record the
+cap rule, counts, uncertainty, decisions and preservation inventory. No result
+polarity, cost transfer, retry, local fallback or additional scientific allowance
+follows. The shared authoring checkout remains; the remote path is retained as
+an uncertain effect pending Root's separately authorized recovery coordination.

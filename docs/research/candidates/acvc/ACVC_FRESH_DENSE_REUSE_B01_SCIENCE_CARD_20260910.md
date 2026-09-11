@@ -444,3 +444,21 @@ Object-tier options: (a) bind the one allocated unchanged fit to fresh8941/8942;
 (b) substitute retained/screened data; (c) alter fitting or panels. Recommend/select
 (a), the conforming realization. **Owner-delegated decision (unattended,
 2026-09-03 instruction): (a).** Recasts2 and lowest contention remain unchanged.
+
+## 13. 8941 preparation stop with no scientific output
+
+The §12 source/card/prediction binding was published atcafef130c9d4d89febda8fd788ad9458b6985aca
+and independently reviewed without a material finding. The one remote source-
+preparation command then exceeded the inclusive90s support cap: its matching
+local transport was stopped after102.1040615s without output. Root confirmed
+technical no-ready and one bounded read-only reconciliation; that12.0324544s
+call reached a remote shell but returned no Git/path fact before timeout.
+Remote preparation effects remain unknown and are preserved without another query.
+
+No synthetic target, admission, scientific submission, model/RNG construction,
+training/update/evaluation or Monitor assignment occurred. The forecast stays
+unscored, and no8941 primary or polarity exists. The
+[technical intake](ACVC_FRESH_DENSE_REUSE_B01_8941_INTAKE_20260910.md) records the
+support breach and exact no-ready return. This allocation ends; no retry,
+replacement, budget transfer or new fit is authorized. All previous scientific
+results and their limits remain unchanged.
