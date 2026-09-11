@@ -1,0 +1,7 @@
+{
+  "purpose": "Locate reached source-only stage after bounded failure",
+  "seconds": 0.6719999999913853,
+  "returncode": 0,
+  "stdout": "{\"files\": {\"scripts/run_fsd_uav_renewal_batch_b02.py\": false, \"hmasd/agent.py\": false, \"configs/config_1.py\": false, \"docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_770803_20260911/D0.sh\": false}, \"head\": {\"returncode\": 0, \"stdout\": \"c0cede0ad4ac2276a022b80973d8f5de5a3c0c1a\\n\", \"stderr\": \"\"}, \"git_dir\": {\"returncode\": 0, \"stdout\": \"/home/wu/projects/HMASD/.git/worktrees/fsd-source-delivery-repair-20260911\\n\", \"stderr\": \"\"}, \"sparse\": {\"returncode\": 0, \"stdout\": \"configs\\ndocs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_770803_20260911\\nenvironments\\nenvs\\nexperiments\\nha_ctse_process\\nhmasd\\nmanifold_hmasd\\nscripts\\ntests\\ntools\\n\", \"stderr\": \"\"}, \"hooks_path\": {\"returncode\": 1, \"stdout\": \"\", \"stderr\": \"\"}, \"scoped_processes\": []}\n",
+  "stderr": ""
+}

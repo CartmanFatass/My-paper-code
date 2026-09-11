@@ -1,0 +1,7 @@
+{
+  "purpose": "Creator cleanup of completed source-only technical checkout after local readback receipts and published source retention",
+  "seconds": 0.5940000000118744,
+  "returncode": 0,
+  "stdout": "{\"source_preserved_at\": \"acaa4f67e2685f559c22bd57dedde0a1a0b9e28b\", \"pre_cleanup_status\": \"\", \"scientific_temp_existed\": false, \"technical_worktree_absent\": true, \"registration_absent\": true, \"scientific_exposure\": 0, \"shared_authoring_checkout_retained\": true}\n",
+  "stderr": "(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\n"
+}

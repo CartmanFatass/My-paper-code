@@ -1,5 +1,72 @@
 # HMASD experiment tracking
 
+## Open-direction program dispatched; VNFC investigation closed — 2026-09-11
+
+The fixed Portfolio program packet is integrated through `dec302a92` and was dispatched exactly
+once to the configured Transport singleton for request
+`2026-09-11-open-directions-research-program-portfolio-01`. App delivery accepted the message while
+Transport was completing an earlier queued reconciliation; provider Send is not yet inferred.
+The designated Portfolio DM remains the full-response conformance checker.
+
+VNFC's bounded investigation is integrated at `f68fcb952` with status NOT READY. Preserved core and
+static evidence locate changed padding in a 32-byte CPython call-argument block during `Fraction`
+construction but do not identify the writer or prove the candidate integer-ratio substitution is a
+repair. Production source is unchanged. Both proposed dynamic diagnostic turns were rejected by the
+service before any reported command effect; the events are retained as technical tool facts rather
+than scientific exclusions. No B02 retry, model, environment, training or new allocation occurred.
+The current direction-chain count is zero while Portfolio selection and independent technical
+readiness work proceed.
+
+Root subsequently resumed the original CBSC and FRRIE DMs on their shared direction checkouts for
+bounded technical readiness work. CBSC owns exact P47/retained52 observation-path reconciliation;
+FRRIE owns exact P59/P63 factory-observation reconciliation. Static and tiny synthetic source-only
+checks are permitted, but no model, environment, optimizer, RNG, training, evaluation or
+result-bearing invocation is allocated. The actual advancing direction-chain count is therefore
+two while the Portfolio request remains queued behind Transport's confirmed-live prior
+reconciliation.
+
+CBSC returned and Root accepted its source-only readiness evidence at `929f95c37`. The 0.084374-second
+check reconstructed all six saved edits with exact text and AST equality without importing research
+code or constructing scientific state. The historical rejection still names no tool/payload/full
+event, so no restriction-specific repair is attributable; retained52 remains unrun and unallocated.
+A separate guarded cleanup command was rejected before process creation, leaving the DM's five-file
+scratch preserved without affecting scientific readiness. FRRIE is now the sole advancing technical
+chain.
+
+FRRIE subsequently returned and Root accepted its source-only observation through `77028e93b`, with
+the two audit rows integrated through `6903e5d66`. The 76-line AST reader mapped all nine P59 frames
+across six unchanged files in two checks totaling 0.535 seconds without workload imports. The
+traceback line is a function declaration and the retained dump contains no attributable native fault
+context, so production source remains unchanged. A combined wrapper was rejected before execution;
+the narrower direct read-only method succeeded. P63 remains unrun and no old allowance was reused.
+The direction-local advancing count returns to zero pending Portfolio's decision.
+
+Root also delivered the owner's current Transport instruction to the configured singleton: retry the
+same exact payload after resolving a failure only when authoritative state proves non-acceptance/no
+external effect, and process the resulting receipt itself. An uncertain or accepted Send is first
+reconciled on the same request/conversation and is never blindly duplicated. The queued Portfolio
+request and its one-dispatch record remain unchanged.
+
+## FSD source-delivery repair accepted — 2026-09-11
+
+The complete direction-local repair series is accepted and integrated through `20258e5ef`.
+Finite binary stdin and the configured network context now cover fetch, sparse checkout and exact
+readback for the remote partial clone. The accepted check matched all nine required committed
+paths, passed both shell checks and completed in 5.672 seconds; the owned temporary checkout is
+absent from disk and Git registration. No admission, model, RNG, training, evaluation or scientific
+retry occurred. B02 remains ended with zero exposure and any future pair requires a separate
+Portfolio allocation. VNFC is the one remaining advancing technical repair chain.
+
+## ACVC input-transport repair accepted — 2026-09-11
+
+The direction-local repair is accepted and integrated at `88f9e87d5`. The attributable Windows
+text-mode stdin path is replaced by LF-normalized, residual-CR-rejecting bytes that pass a local
+Bash syntax check before remote effects and are then sent through binary SSH stdin. Static and stub
+checks reproduced the old translation, rejected malformed input and read back all 975 bytes
+unchanged. No shared scientific code changed, no 8951 retry or numerical work occurred, and a
+future fit still requires a separate allocation. VNFC and FSD technical repair chains remain
+advancing; the designated Portfolio DM is preparing the broader forward recommendation.
+
 ## Four-slot decision checked; execution mapping returned — 2026-09-11
 
 The complete Portfolio response `1ea43d8fbc846807d71d4d894136f357f65551b6`
@@ -1009,3 +1076,26 @@ closeouts. The current advancing-direction count is zero. No lifecycle, priority
 state changes; no cap transfers, retries, new source/check tasks, repeated empty-set consultation or
 automatic successors are selected. A future refill requires a concrete attributable eligibility
 change and a specific ready task under the then-applicable authority.
+
+## Owner-directed non-scientific blocker repair and new Portfolio advice
+
+The owner explicitly directed that non-scientific blockers must not block research and requested a
+new Portfolio recommendation over the existing open directions. This current instruction expands
+beyond the completed fixed-vacancy question. Root resumed the designated Portfolio DM to prepare an
+evidence-grounded program that separates scientific selection/budget from technical readiness and
+assigns each repair an owner, bounded action, verification and exit condition.
+
+Root also actually resumed three original direction DMs for independent technical unblocking. ACVC
+owns a minimal CRLF/SSH-input preparation repair and LF/readback readiness proof. VNFC owns bounded
+exit139 diagnosis and, if attributable without changing semantics, a minimal reviewed fix. FSD owns
+deterministic remote staging/readback and a prospective bounded support path. Each retains its ended
+scientific attempt, no-retry/no-successor record, original comparator/estimand/MEI and caps. The
+assignments permit no result-bearing launch, model/environment construction, new RNG master, training
+or evaluation. A repair makes a direction technically ready for later selection; it does not itself
+allocate a scientific invocation.
+
+These three direction chains now advance once each. Portfolio authoring is not another direction
+slot. Unknown timing terms and VNFC's policy-blocked retained duplicate/scratch files remain explicit
+limitations but are not counted as scientific blockers. CBSC, FRRIE and other missing-operation rows
+will be classified in the Portfolio packet as mechanical repair versus scientific-method choice;
+only the latter remains with its proper scientific decision tier.

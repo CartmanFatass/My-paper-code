@@ -1,0 +1,18 @@
+diff --git a/experiments/candidates/variable_n_fleet_churn_bpcr_r09/models.py b/experiments/candidates/variable_n_fleet_churn_bpcr_r09/models.py
+index 2152a24af..0ac9c943f 100644
+--- a/experiments/candidates/variable_n_fleet_churn_bpcr_r09/models.py
++++ b/experiments/candidates/variable_n_fleet_churn_bpcr_r09/models.py
+@@ -106,5 +106,8 @@ def exact_binary64_mean(rows: np.ndarray) -> np.ndarray:
+-    return np.array(
+-        [float(sum((Fraction.from_float(float(x)) for x in values[:, j]), Fraction()) / values.shape[0])
+-         for j in range(values.shape[1])],
+-        dtype=np.float64,
+-    )
++    means = []
++    for column in values.T:
++        ratios = [float(value).as_integer_ratio() for value in column]
++        # Binary64 denominators are powers of two, so their maximum is a common denominator.
++        denominator = max(den for _, den in ratios)
++        numerator = sum(num * (denominator // den) for num, den in ratios)
++        means.append(numerator / (denominator * values.shape[0]))
++    return np.asarray(means, dtype=np.float64)

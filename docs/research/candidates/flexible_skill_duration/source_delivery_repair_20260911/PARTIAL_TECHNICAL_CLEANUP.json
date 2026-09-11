@@ -1,0 +1,7 @@
+{
+  "purpose": "Preserve failed source-only receipts and remove its empty partial technical worktree before the concrete correction check",
+  "seconds": 0.9210000000020955,
+  "returncode": 0,
+  "stdout": "{\"source_preserved_at\": \"c0cede0ad4ac2276a022b80973d8f5de5a3c0c1a\", \"files_before\": [\".git\"], \"technical_worktree_absent\": true, \"registration_absent\": true, \"scientific_exposure\": 0}\n",
+  "stderr": ""
+}
