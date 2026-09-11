@@ -134,3 +134,105 @@ The [E0 technical result](ACVC_FRESH_DENSE_REUSE_B01_8951_RESULT_20260911.md) an
 [intake](ACVC_FRESH_DENSE_REUSE_B01_8951_INTAKE_20260911.md) end this allocation
 at the mandated precise no-ready boundary. No scientific polarity, retry, successor
 or direction/Portfolio disposition follows.
+
+## Separate technical repair for a future allocation —2026-09-11
+
+**L0.** Root relayed OWNER_DIRECT to repair the non-scientific blocker and publish
+technical readiness for a future separately allocated unchanged fit. Own this
+preparation record and its focused repair evidence in the shared`codex/acvc`
+checkout, synchronized cleanly tof2ca4a8111aa8aa4f51662c6e6320c0dfc4fb047.
+The ended8951 allocation, identities, scientific source, DENSE/learner/RNG law,
+C/F/dwell panels and270/330/600 caps remain historical and unchanged. This repair
+has **60s invoked command support**, including review/check/readback/publication;
+it grants zero scientific or source-preparation retries. One local static/stub
+check and one bounded read-only SSH byte echo may verify this path. No model,
+environment, scientific RNG, admission, source transfer/checkout or supervisor
+invocation runs. Stop at READY for input transport or a precise residual defect.
+Engineering-scope§4 additions: **none**; no runner or orchestration module is added.
+
+### Reusable input repair
+
+The preserved command used`Popen(...,text=True)` and`communicate(input=script)`.
+On Windows that producer writes CRLF, including to SSH stdin; the remote first-line
+option and path failures are consistent with those added CR bytes. The successful
+closeout used explicit UTF-8 bytes. Reuse that byte transport, while moving local
+syntax checking before **every remote effect of a future allocated preparation**,
+including its SCP. The earlier input reconstruction remains inference; no historical
+receipt is rewritten or rerun.
+
+The following small helper is the reusable preparation-record implementation.
+Call it first on the future allocation's shell input. It accepts LF or CRLF source
+files, removes only CRLF pairs, rejects residual CR, and returns immutable bytes
+only after Bash accepts the exact normalized input. Do not open a text-mode pipe
+after this check.
+
+```python
+import subprocess
+
+
+def checked_acvc_preparation_input(script_bytes, bash_path):
+    payload = script_bytes.replace(b"\r\n", b"\n")
+    if b"\r" in payload:
+        raise ValueError("ACVC preparation input contains a bare CR")
+    subprocess.run(
+        [bash_path, "-n", "-s"], input=payload,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        text=False, check=True, timeout=5,
+    )
+    return payload
+```
+
+Before building/transferring any source or contacting the remote host, obtain
+`payload` with this helper using`Path(preparation_script).read_bytes()`. A future
+allocation supplies its own identity, source/path bindings and resource budget;
+do not execute the ended8951 input. After the permitted source transfer, pass the
+**same bytes** through the existing bounded SSH command as follows. The existing
+remote`timeout --signal=TERM --kill-after=2 43 bash -s` and50s client lifetime
+remain; a connection timeout alone still does not suffice. All output decoding
+happens after subprocess completion.
+
+```python
+completed = subprocess.run(
+    ssh_arguments, input=payload,
+    stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+    text=False, check=True, timeout=50,
+)
+stdout = completed.stdout.decode("utf-8", errors="replace")
+stderr = completed.stderr.decode("utf-8", errors="replace")
+```
+
+The helper and sending fragment are checked directly from these code blocks. The
+remote check only reads bytes from stdin and returns them; it never evaluates the
+shell payload. Readiness here establishes the LF/binary input contract and its
+syntax-check ordering. It does not establish resource admission, future checkout
+availability or scientific validity, and authorizes no successor selection.
+
+### Technical acceptance
+
+**READY for the corrected input-transport contract.** The
+[focused check receipt](ACVC_SSH_INPUT_REPAIR_CHECK_20260911.json) directly
+reproduced the old Windows text-mode producer: LF input reached a raw-byte child
+as CRLF. This establishes the producer's present behavior while leaving the
+historical uncaptured-stdin limit intact. The helper normalized both retained
+CRLF and LF input to the same975 bytes, passed local Bash syntax, rejected bare
+CR and invalid shell syntax before any SSH, and the actual sending fragment's
+stub required the same immutable bytes plus explicit`text=False`.
+
+One read-only SSH echo returned all975 bytes identically, SHA256
+`64b2b11dfc7fa5198dda84c25dacc85c6fd1661d40e6a6d783389f117295a26b`, in.438s
+under a10s client/6s remote TERM/+1s kill bound. Its Python command read and echoed
+stdin; it never evaluated the historical shell payload. The whole focused batch
+took.735s and created no scratch. No source bundle transfer, Git fetch/checkout,
+admission, model/environment/RNG, evaluation or scientific supervisor call occurred.
+
+Independent Reviewer`rv_ah_acvc_8941_binding` found no material issue in the exact
+two snippets, syntax-before-effect ordering, binary sending or stated readiness
+ceiling. Its three static commands totaled.6707192s, below the3s review allowance;
+client/tool overhead was unmeasured. The old source/checkpoint/scientific code is
+unchanged. DM accepts this bounded transport repair; a future allocation must
+still assemble its own permitted payload and establish its actual source/runtime
+readiness and adjacent resource admission. The ended8951 budget is not reopened.
+
+The [repair intake and cost](ACVC_FRESH_DENSE_REUSE_B01_8951_INTAKE_20260911.md#7-separate-owner-directed-technical-repair)
+record the new support allocation separately from8951 and retain Root's final
+integration/accounting receipt for the old allocation.
