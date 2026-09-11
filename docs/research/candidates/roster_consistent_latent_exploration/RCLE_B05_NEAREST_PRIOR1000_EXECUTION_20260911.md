@@ -70,3 +70,24 @@ contains6 files/189324B. Automatic approval review rejected the one exact-path
 checked PowerShell removal before process creation as `blocked by policy`.
 It remains with DM creator ownership; no bypass/repeated removal. The historical
 B04 scratch has its separate existing exception and was untouched.
+
+## Accepted launch and Monitor handover
+
+The one exact command at7d29c9fd1 was accepted by `agent-task`: submission exit0,
+tmux `agent_rcle-b05-nearest-prior1000-s25-20260911`, empty stderr. This is launch
+acceptance, not native completion or scientific acceptance. The submission command
+cost.5118815s; its embedded SSH call.3165502s is included, not charged twice.
+Receipt: [LAUNCH_RECEIPT.json](b05_nearest_prior1000_20260911/LAUNCH_RECEIPT.json).
+
+DM reread live main Monitor configuration and owner reviews[] and directly sent
+MONITOR_ADD to01a087e5-2044-7301-abb6-7a1709a98197. The app accepted delivery;
+actual adoption remains pending until Root forwards MONITOR_ADOPTED. Root was
+notified promptly with the exact handle/source/cwd/output and original collection
+owner. DM does not poll routinely and returns pending collection. Source, command,
+handle and state are recoverable here; terminal facts resume this same owner.
+
+Support through dispatch is29.7720462s, including the explicit3s initial-read
+allowance and1s Monitor dispatch allowance. This publication and later observation,
+collection/reduction/intake/preservation/cleanup/Root integration are added on
+receipt within140s. Native measured wall is still unknown; no saving or assumed
+completion is recorded.
