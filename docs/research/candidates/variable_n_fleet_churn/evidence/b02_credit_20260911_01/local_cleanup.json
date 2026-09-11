@@ -1,0 +1,45 @@
+{
+  "recorded_at": "2026-09-11T18:55:41.304700+00:00",
+  "root_integration": "cf93e737ee83f2d78d14c5569874590af8ccd347",
+  "preservation_commit": "94c8fdfa888df014fa9fd83a4014a1cb10b7d501",
+  "state": "blocked_before_execution",
+  "rejection": "exec_command CreateProcess Rejected: blocked by policy",
+  "rejected_action": "PowerShell Remove-Item on three exact preserved local draft/source files, followed by the emptied draft directory; no recursive or broad removal",
+  "cleanup_process_started": false,
+  "removed_paths": [],
+  "retained_files": [
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vnfc\\temp\\directions\\variable_n_fleet_churn\\pro_authoring\\20260910_native_service_credit_draft01\\HANDOFF.json",
+      "exists": true,
+      "bytes": 3104,
+      "sha256": "8feae2ae5f04f3d2c77c31fb50e15eda73031b10c67ae9d0debd239fb8f43079",
+      "matches_preserved_archive": true
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vnfc\\temp\\directions\\variable_n_fleet_churn\\pro_authoring\\20260910_native_service_credit_draft01\\TASK.md",
+      "exists": true,
+      "bytes": 24972,
+      "sha256": "40a12c6b1f9b6138b51fd11d71c9d8ee8cdc7e98aed0ba837665545fb5998261",
+      "matches_preserved_archive": true
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vnfc\\temp\\directions\\variable_n_fleet_churn\\source_staging\\b02_76d4afca6.bundle",
+      "exists": true,
+      "bytes": 89959,
+      "sha256": "141e50a9a1e3d508cc77c4be5c281f4f0878f99f89553c0bc754b02a80980259",
+      "matches_preserved_archive": true
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vnfc\\temp\\directions\\variable_n_fleet_churn\\test\\b02_credit_20260911_01\\test_primary_round_tradeoffs_p0\\summary.json",
+      "exists": true,
+      "bytes": 34477,
+      "sha256": "a3c974137b1a7b48857d387d60ca2f93a4d536448fb53f1a15a31c3e51cd3601",
+      "matches_preserved_archive": true
+    }
+  ],
+  "retained_draft_directory": "C:\\Projects\\HMASD-worktrees\\codex-vnfc\\temp\\directions\\variable_n_fleet_churn\\pro_authoring\\20260910_native_service_credit_draft01",
+  "prior_scratch": "Earlier test scratch remains preserved; this terminal closeout made no scratch deletion attempt",
+  "alternative_deletion_attempted": false,
+  "cleanup_owner": "DM for these named local copies/scratch; Root for shared direction checkout lifecycle",
+  "shared_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-vnfc"
+}
