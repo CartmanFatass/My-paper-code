@@ -1,12 +1,4 @@
 {
-  "allocation": "Portfolio6c32ade3216c374ecf2f5179b15d559729cd45c9 fresh FSD770903/780903",
-  "native_caps_seconds": {
-    "D0": 900,
-    "I": 1800,
-    "sum": 2700
-  },
-  "support_cap_seconds": 300,
-  "complete_cap_seconds": 3000,
   "charges": [
     {
       "purpose": "assignment currentness and scoped discovery",
@@ -72,10 +64,51 @@
     {
       "purpose": "correct UTF-8 document serialization and create owner item",
       "wall_seconds": 1.010073
+    },
+    {
+      "purpose": "persist prelaunch cost snapshot",
+      "wall_seconds": 0.2618701
+    },
+    {
+      "purpose": "publish accepted fresh source/card/exact commands",
+      "wall_seconds": 5.3626575
+    },
+    {
+      "purpose": "accepted helper exact-source staging/readback",
+      "wall_seconds": 4.2544016,
+      "session_id": null
+    },
+    {
+      "purpose": "same-identity bounded terminal staging reconciliation and cleanup absence",
+      "wall_seconds": 0.899828
+    },
+    {
+      "purpose": "owner clean-boundary review and execution-state trace contract",
+      "wall_seconds": 0.6361788
+    },
+    {
+      "purpose": "write bounded limitation intake, scoped cleanup and owner trace",
+      "wall_seconds": 0.4703499
     }
   ],
-  "known_support_seconds": 19.035131399999997,
-  "accounting": "Tool execution wall for each invoked support command, including failed mechanical reads and current-input reconciliation; reviewer command wall separately once. Inner timings are context, not additional charges. Agent authoring, Pro and idle calendar time excluded.",
-  "pending": "Commit/push, actual staging/launch, Monitor observations, collection/reduction, integration/publication and cleanup will be added. Unknown attribution stays unknown; this subtotal does not certify complete cost.",
-  "scientific_submissions": 0
+  "known_support_seconds": 30.920417299999997,
+  "allocation": "Portfolio6c32ade fresh FSD770903/780903",
+  "support_cap_seconds": 300,
+  "native_caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "sum": 2700
+  },
+  "complete_cap_seconds": 3000,
+  "scientific_submissions": 0,
+  "native_invocation_seconds": 0,
+  "complete_cost_certified": false,
+  "known_projected_overrun": false,
+  "accounting": "Each invoked support command wall once; independent reviewer commands separately once. Inner helper/check/SSH durations are already enclosed and are not added. Agent authoring, Pro and idle calendar time are separate.",
+  "unknown": "Root integration attribution and final publication after this snapshot remain pending; tool-service/message overhead is not fully attributed. Unknown is not zero. This is a source delivery failure, not a cap breach.",
+  "staging": {
+    "complete_helper_wall_seconds": 3.9690000000118744,
+    "enclosing_command_wall_seconds": 4.2544016,
+    "remote_fetch_failure_wall_seconds": 3.0428903200663626
+  }
 }
