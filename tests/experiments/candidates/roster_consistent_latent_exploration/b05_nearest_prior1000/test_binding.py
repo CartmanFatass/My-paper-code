@@ -36,6 +36,7 @@ def test_binding_domains_without_scientific_rng(monkeypatch):
 def test_final1000_counts_checkpoints_and_primary(monkeypatch, tmp_path):
     # Two fixed FP64 scalars stand in for the accepted full model; no full allocation.
     model = torch.nn.Module()
+    model.action_law = dict(b04.LAW)
     model.register_parameter("fixture", torch.nn.Parameter(torch.tensor([1., 2.], dtype=torch.float64)))
     rng_calls, panels, updates = [], [], []
     def rng(seed, object_id):
@@ -43,7 +44,7 @@ def test_final1000_counts_checkpoints_and_primary(monkeypatch, tmp_path):
         return SimpleNamespace(root_digest="supplied", certificate={"native": {}}), None
     monkeypatch.setattr(b04, "make_rng", rng)
     monkeypatch.setattr(b04.host, "seed_root_key", lambda text: b"supplied")
-    monkeypatch.setattr(b04, "initialize_model", lambda rng: model)
+    monkeypatch.setattr(b04, "initialize_model", lambda rng, action_law=None: model)
     rows = [[dict(cell=cell, index=i, U=u + .001 * i, Y=y, tau=40., F=f)
              for cell in study.host.HELDOUT_CELLS for i in range(4)]
             for u, y, f in ((.4, .5, .1), (.2, .6, .15), (.3, None, .1))]

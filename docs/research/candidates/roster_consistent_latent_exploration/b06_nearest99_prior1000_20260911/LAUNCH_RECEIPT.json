@@ -1,0 +1,136 @@
+{
+  "source_sha": "baf63642a776ef3e60f4310ce47d76c45168c283",
+  "command_commit": "e761cf581e01ba0a633c7c5321a5907e12e1919a",
+  "handle": "rcle-b06-nearest99-s26-20260911",
+  "command": "cd /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911 && mkdir -p temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911 && HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python /usr/bin/time -f 'wall_s=%e,peak_rss_kib=%M,exit=%x' -o temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/chain-time.txt timeout 610 bash scripts/run_rcle_b06_nearest99_prior1000.sh baf63642a776ef3e60f4310ce47d76c45168c283 /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911/temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911",
+  "exit_code": 0,
+  "stdout": "Task 'rcle-b06-nearest99-s26-20260911' started in tmux session 'agent_rcle-b06-nearest99-s26-20260911'. Output: /home/wu/.agent-tasks/rcle-b06-nearest99-s26-20260911/task.log\n",
+  "stderr": "",
+  "submission_wall_s": 0.6482001000258606,
+  "launch_submission_complete_command_wall_s": 0.8973439,
+  "monitor": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "dispatch_accepted": true,
+    "dispatch_wall_s": 0.189,
+    "adoption": "ROOT_FORWARDED_ACTUAL_ADOPTION",
+    "observed_status": "running",
+    "source_cwd_output_supervisor": "confirmed correct by Root",
+    "admission": "Root reports passed 15.63 GB versus 4 GB; exact receipt remains for terminal collection",
+    "adoption_observation_command_wall_s": 0.9,
+    "earlier_observation_cost": "no prior timing supplied; do not infer zero or issue another query",
+    "terminal": "PENDING"
+  },
+  "support_through_adoption": {
+    "components": [
+      {
+        "name": "accepted B06 assignment and checkout/applicable instructions",
+        "charged_s": 0.2409931
+      },
+      {
+        "name": "accepted B06 assignment and checkout/applicable instructions",
+        "charged_s": 0.3007695
+      },
+      {
+        "name": "required Portfolio-input fast-forward and push",
+        "charged_s": 5.0650517
+      },
+      {
+        "name": "B06 owned caller/card/spec pointers and live config",
+        "charged_s": 0.2154743
+      },
+      {
+        "name": "B06 owned caller/card/spec pointers and live config",
+        "charged_s": 0.2593653
+      },
+      {
+        "name": "current fixed card, law consumers and scientific-reading route",
+        "charged_s": 0.1337453
+      },
+      {
+        "name": "current fixed card, law consumers and scientific-reading route",
+        "charged_s": 0.5240226
+      },
+      {
+        "name": "law/credit dependent path and changed-risk review routes",
+        "charged_s": 0.1921784
+      },
+      {
+        "name": "law/credit dependent path and changed-risk review routes",
+        "charged_s": 0.2604281
+      },
+      {
+        "name": "unchanged learner/Monitor route readback",
+        "charged_s": 0.2177059
+      },
+      {
+        "name": "old test consumers and unscreened identity collision check",
+        "charged_s": 0.2482494
+      },
+      {
+        "name": "unchanged action-credit and historical stub consumers",
+        "charged_s": 0.2439734
+      },
+      {
+        "name": "fixed entry/wrapper and configuration exposure arithmetic",
+        "charged_s": 0.251508
+      },
+      {
+        "name": "one nonnumerical static/symbolic changed-law check",
+        "charged_s": 0.1830005
+      },
+      {
+        "name": "diff and owner clean-boundary readback",
+        "charged_s": 0.6981582
+      },
+      {
+        "name": "new-card owner item and object selection audit",
+        "charged_s": 0.4674438
+      },
+      {
+        "name": "independent high-risk static law/credit/serialization review",
+        "charged_s": 1.1550574,
+        "breakdown_s": [
+          0.5443512,
+          0.2487388,
+          0.3619674
+        ]
+      },
+      {
+        "name": "exact B06 source/card/check/review/owner publication",
+        "charged_s": 5.2085645
+      },
+      {
+        "name": "committed source bundle and bounded exact remote staging",
+        "charged_s": 2.473154
+      },
+      {
+        "name": "exact B06 command and staging publication",
+        "charged_s": 4.5128991
+      },
+      {
+        "name": "live destination/Monitor configuration and owner read before launch",
+        "charged_s": 0.578736
+      },
+      {
+        "name": "single exact detached B06 launch submission",
+        "charged_s": 0.8973439
+      },
+      {
+        "name": "accepted-handle Monitor dispatch",
+        "charged_s": 0.189,
+        "kind": "measured app-call elapsed"
+      },
+      {
+        "name": "Monitor B06 adoption observation",
+        "charged_s": 0.9,
+        "kind": "Root-forwarded locally measured command wall",
+        "earlier_observations": "no prior timing supplied; first-observation status to be clarified from existing records"
+      }
+    ],
+    "known_charged_s": 25.416822399999997,
+    "receipt_publication_not_yet_measured": true
+  },
+  "collection_owner": "/root/dm_rcle_restart_recovery2",
+  "root_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "scientific_status": "single invocation accepted/running; no scientific result accepted yet; no successor"
+}

@@ -1,0 +1,68 @@
+{
+  "source_sha": "baf63642a776ef3e60f4310ce47d76c45168c283",
+  "handle": "rcle-b06-nearest99-s26-20260911",
+  "cwd": "/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911",
+  "staging": "/home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911",
+  "prerequisite_sha": "3ffa65cb4e1a67182b90dce3822d0018ac623c72",
+  "budgeted_command_lifetime_s": 25,
+  "steps": [
+    {
+      "argv": [
+        "git",
+        "bundle",
+        "create",
+        "temp\\directions\\roster_consistent_latent_exploration\\b06-nearest99-prior1000-preparation\\source.bundle",
+        "codex/rcle",
+        "^3ffa65cb4e1a67182b90dce3822d0018ac623c72"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "wall_s": 0.1952033000125084
+    },
+    {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "test ! -e /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911 && test ! -e /home/wu/.agent-tasks/rcle-b06-nearest99-s26-20260911 && test ! -e /home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911 && git -C /home/wu/projects/HMASD cat-file -e 3ffa65cb4e1a67182b90dce3822d0018ac623c72 && mkdir -p /home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "wall_s": 0.553663200000301
+    },
+    {
+      "argv": [
+        "scp",
+        "-q",
+        "temp\\directions\\roster_consistent_latent_exploration\\b06-nearest99-prior1000-preparation\\source.bundle",
+        "hmasd-wsl-node:/home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911/source.bundle"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "wall_s": 0.675411999982316
+    },
+    {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "git -C /home/wu/projects/HMASD fetch /home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911/source.bundle refs/heads/codex/rcle && git -C /home/wu/projects/HMASD worktree add --detach --no-checkout /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911 baf63642a776ef3e60f4310ce47d76c45168c283 && git -C /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911 sparse-checkout set hmasd ha_ctse_process envs environments experiments scripts tools tests manifold_hmasd && git -C /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911 checkout baf63642a776ef3e60f4310ce47d76c45168c283 && bash -n /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911/scripts/run_rcle_b06_nearest99_prior1000.sh && git -C /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911 rev-parse HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "baf63642a776ef3e60f4310ce47d76c45168c283\n",
+      "stderr": "From /home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911/source.bundle\n * branch                codex/rcle -> FETCH_HEAD\nPreparing worktree (detached HEAD baf63642a)\nHEAD is now at baf63642a Add explicit 0.99 nearest-prior RCLE B06 comparison\n",
+      "wall_s": 0.80073529999936
+    }
+  ],
+  "status": "STAGED_EXACT_SOURCE",
+  "preparation_wall_s": 2.22505400000955
+}
