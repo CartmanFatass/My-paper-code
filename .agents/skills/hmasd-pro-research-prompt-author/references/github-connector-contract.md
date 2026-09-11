@@ -24,6 +24,11 @@ one delivery comment on its named Issue. Follow [github-delivery.md](github-deli
 for publication, current-state readback and partial success. This does not authorize
 source changes, main writes, PR operations or scientific state updates.
 
+If those scoped GitHub write actions are unavailable after actual-state readback, the same
+accepted request directs Pro to finish the complete review and attach it as a downloadable
+`RESPONSE.md`. Transport downloads and hash-archives that exact output as `<archive_id>__02_RESPONSE.md` and repository sidecar `archive/CHAT_FALLBACK_RESPONSE.md`. This fallback does
+not assert GitHub delivery, alter the question, or authorize another Send.
+
 `archive_attachment` supplies read-only scientific analysis in an explicitly selected
 fallback. Pro returns the complete answer in chat for archival; the attachment grants
 no GitHub writing permission. Follow [attachment-delivery.md](attachment-delivery.md).

@@ -66,10 +66,23 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
 5. Before its final chat reply, Pro makes fresh reads of delivery branch HEAD, the
    response at that commit and this round's Issue comment. It returns actual immutable
    delivery links, confirmed partial delivery with the remaining gap, or unresolved
-   status marked unconfirmed. Each input path stays pinned to its original effective SHA.
-6. Transport archives the exact short chat reply and actual delivery facts. The designated DM
+   status marked unconfirmed. If the GitHub connector cannot expose or complete the scoped
+   write actions after actual-state readback, Pro completes the same scientific review and
+   attaches its entire answer as a downloadable `RESPONSE.md` in chat. It labels GitHub
+   delivery unconfirmed and does not substitute a summary for the document. Each input path
+   stays pinned to its original effective SHA.
+6. Transport archives the exact short chat reply and actual delivery facts. When the response
+   uses the chat Markdown fallback, Transport downloads the generated `.md`, verifies that it
+   is the attachment paired with the accepted request and complete assistant response, records
+   its byte count and SHA-256, and preserves them first as `<archive_id>__02_RESPONSE.md` and then as the repository sidecar
+   `archive/CHAT_FALLBACK_RESPONSE.md`. It never creates or overwrites the scoped GitHub
+   `archive/RESPONSE.md`. The distinct short chat receipt is stored as
+   `<archive_id>__04_CHAT_RECEIPT.md`. If GitHub and fallback response artifacts both exist,
+   preserve both and compare their hashes; differing bytes are an archive conflict, not an
+   overwrite. The designated DM
    reads the complete response at its fixed commit, preserves original bytes and the
-   comment snapshot, and performs specification-conformance and scientific intake.
+   comment snapshot, or reads the hash-verified downloaded artifact, and performs
+   specification-conformance and scientific intake.
    Root checks the actual changed scope and integrates under the normal Git rules.
    A file delivery or process success alone is not a formed scientific decision.
 
@@ -93,6 +106,7 @@ Repeated notifications reuse the existing request/commit/path intake.
 | Cleanup removed or renamed a delivery target | Reconcile the affected request and recovery ref before further writes. Correct unsent handoffs and publish/bind their new TASK; preserve accepted/uncertain handoffs and Root resolves restoration or explicit correction. Branch cleanup alone never authorizes a replacement conversation or another Send. |
 | Main advances after input was bound | Keep each original effective input path/SHA mapping. The designated DM assesses material scientific changes at intake; unrelated commits do not invalidate the response. |
 | Provider access is unavailable | Record the precise unreadable paths or unavailable action and any confirmed partial delivery. A local tool's access does not establish Pro access. |
+| GitHub write actions are unavailable after actual-state readback | Complete the review in the same accepted turn and attach the full answer as downloadable `RESPONSE.md`. Transport downloads and hash-archives it; do not send a second scientific prompt merely to change delivery mode. |
 | A conclusion needs correction | Ask the same node a new explicit question with a new output path and links to the prior response; preserve the original answer. |
 
 `archive_attachment` is a per-request capability fallback requiring an explicit mode
@@ -100,6 +114,12 @@ and nonempty `fallback_reason`. An unsent request may use that fallback; an acce
 request requires reconciliation before any new prompt. Never send both modes for the
 same unresolved request. No cross-service atomicity or race-free write guarantee is
 implied by a separate branch.
+
+The downloadable Markdown output fallback above is distinct from `archive_attachment`.
+`archive_attachment` changes how an unsent question is supplied to Pro; the output fallback
+preserves the already accepted GitHub-delivery request and changes only how Pro returns the
+complete response when its connector cannot write. It does not authorize another Send, alter
+the scientific question, or claim that a GitHub file/comment exists.
 
 For branch-retirement routing and current-record reconciliation, use
 ROOT_OPERATIONS.md, “Current records, integration and cleanup”. Request-specific delivery,

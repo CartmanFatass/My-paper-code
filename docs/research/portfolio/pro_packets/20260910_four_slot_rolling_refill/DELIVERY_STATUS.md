@@ -1,5 +1,20 @@
 # Four-slot request delivery status
 
+## Actual delivery and downloaded-copy update
+
+The request later delivered its complete GitHub response at
+`1ea43d8fbc846807d71d4d894136f357f65551b6` and matching Issue17 comment
+`5629259208`. The owner's subsequent in-conversation Markdown request produced
+`FOUR_SLOT_ROLLING_REFILL_RESPONSE.md`. Root completed the browser download and verified its
+47,134 bytes and SHA-256 `bb7763097d3aceabdbe85d6f06193e3cc79b4be2cc9140c64c616340d30d388f`
+are byte-for-byte identical to the GitHub `archive/RESPONSE.md`. The exact downloaded bytes are
+retained as [`archive/CHAT_FALLBACK_RESPONSE.md`](archive/CHAT_FALLBACK_RESPONSE.md), with
+[`archive/CHAT_FALLBACK_DOWNLOAD_FACTS.json`](archive/CHAT_FALLBACK_DOWNLOAD_FACTS.json).
+
+The historical observations below remain time-bounded facts from before the later delivery; they
+no longer describe the current delivery state. Scientific conformance remains pending designated-DM
+intake and is not inferred from transport success or byte equality.
+
 **BLOCKED after completed OWNER_DIRECT Root resend — no Portfolio decision.** The owner
 instructed Root to resend this exact request personally. At
 `2026-09-11T03:35:17.603414+00:00`, Root verified the original bound conversation,

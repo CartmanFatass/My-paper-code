@@ -191,6 +191,9 @@ def test_github_binding_preserves_current_executor_and_exact_task(
     assert handoff["dispatch_required"] is (not root_direct)
     assert renderer.GITHUB_DELIVERY_READBACK in transport["prompt"]
     assert renderer.GITHUB_DELIVERY_READBACK in before.decode()
+    assert renderer.GITHUB_DELIVERY_MARKDOWN_FALLBACK in transport["prompt"]
+    assert renderer.GITHUB_DELIVERY_MARKDOWN_FALLBACK in before.decode()
+    assert "downloadable RESPONSE.md" in transport["prompt"]
     assert "prompt_path" not in transport
     if root_direct:
         assert handoff["dispatch_mode"] == "CALLER_DIRECT"
