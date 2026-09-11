@@ -104,6 +104,9 @@ notification's accepted app delivery is distinct from DM technical or scientific
 
 App messages omit `model` and `thinking` to preserve the recipient's settings. Native DM
 authors deliver ready packets to Root; Root sends the exact committed handoff to Transport.
+Per OWNER_DIRECT 2026-09-11, browser ownership by a Codex task does not grant or block Send
+authority. Transport may use any accessible browser surface whose target ChatGPT session is
+logged in, while preserving the exact conversation binding and one-Send reconciliation.
 New requests name the actual author as source, Root as parent and Transport as operator.
 The designated Portfolio DM is the actual source for new Portfolio questions; Root remains
 parent and dispatches the handoff. Transport returns one

@@ -117,3 +117,13 @@ operational fact is owning-account IAB access to the original bound conversation
 within the dedicated Transport task. Scientific intake resumes only on a complete
 response routed by Root; no result brief or
 prediction score arises from this blocker.
+
+## Owner correction — 2026-09-11
+
+The owner superseded the task-scope interpretation: Pro Send authority is independent
+of which Codex task opened or owns the browser. Browser ownership is not a permission
+blocker. Readiness is determined by the actual target ChatGPT session login state,
+the unchanged conversation/request binding, provider state and one-Send reconciliation.
+Accordingly, `ROOT_SCOPED_IAB_NOT_TRANSFERABLE` is preserved as historical
+pre-correction evidence, not a current recovery condition. Transport may use any
+accessible logged-in browser surface for this exact unsent request.

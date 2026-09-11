@@ -161,6 +161,12 @@ An ordinary bad answer, model mismatch, timeout or uncertain Send does not autho
 
 ## Browser and model preflight
 
+OWNER_DIRECT 2026-09-11: a browser is an interaction surface, not an authority boundary.
+Do not classify a Root-owned, Transport-owned or other task-scoped tab as a permission blocker.
+Use any browser surface accessible to Transport when the target ChatGPT session is actually
+logged in. Send readiness is established by that login state, the exact persisted conversation
+and request binding, the provider/model checks below, and reconciliation of accepted-send state.
+
 Use the existing in-app-browser binding. Claim an explicitly mentioned user tab by
 exact title/URL/provider identity; otherwise create one agent tab and retain its
 lease for the whole request. Navigate once to `https://chatgpt.com/` only when no
