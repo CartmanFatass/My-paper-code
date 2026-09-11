@@ -1,0 +1,37 @@
+{
+  "source_sha": "62d7eae7dedf5560171d636e845286108a4bc528",
+  "remote_worktree": "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8961-62d7eae7d",
+  "remote_bundle": "/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d.bundle",
+  "started_utc": "2026-09-11T21:24:08.437575+00:00",
+  "phases": [
+    {
+      "label": "source bundle",
+      "wall_s": 5.963769900001353,
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "source transfer",
+      "wall_s": 8.919313699996565,
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "offline exact source preparation",
+      "wall_s": 4.802569500025129,
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout": "The bundle contains this ref:\n62d7eae7dedf5560171d636e845286108a4bc528 HEAD\nThe bundle records a complete history.\nThe bundle uses this hash algorithm: sha1\n62d7eae7dedf5560171d636e845286108a4bc528\n",
+      "stderr": "/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d.bundle is okay\nFrom /home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d.bundle\n * branch                HEAD       -> FETCH_HEAD\nPreparing worktree (detached HEAD 62d7eae7de)\nHEAD is now at 62d7eae7de Bind fresh ACVC8961 fit to unchanged own-history controls\n"
+    }
+  ],
+  "lf_input_check_s": 0.1083846999972593,
+  "input_bytes": 888,
+  "source_bundle_bytes": 115509172,
+  "completed_utc": "2026-09-11T21:24:28.293747+00:00",
+  "complete": true
+}

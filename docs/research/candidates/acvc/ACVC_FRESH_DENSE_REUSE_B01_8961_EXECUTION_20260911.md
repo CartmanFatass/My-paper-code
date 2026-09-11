@@ -118,3 +118,34 @@ publication was disabled. All model/environment/optimizer/learner functions were
 replaced; there was no real scientific exposure. The accepted unchanged LF repair
 was not retested. DM accepts source and binding/publication evidence; actual
 resource, complete native outputs and cost facts remain pending execution.
+
+
+## Exact published submission
+
+Source62d7eae7dedf5560171d636e845286108a4bc528 was committed/pushed before
+preparation. The [preparation receipt](ACVC_FRESH_DENSE_REUSE_B01_8961_PREPARATION_20260911.json)
+records the first and only preparation: exact888-byte LF input accepted by local
+Bash in0.1083847s before source creation/contact; source bundle5.9637699s,
+115509172 bytes; transfer8.9193137s; offline remote preparation4.8025695s.
+All completed/exit0 within their bounds. Remote HEAD equals the source SHA and
+its tracked status is empty. Only the receipt parent exists; zero native/model/
+RNG/scientific-output exposure occurred. No preparation retry or byte echo ran.
+
+Exact remote cwd and supervisor handle are
+`/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8961-62d7eae7d` and
+`acvc-fresh-dense-b01-8961-62d7eae7d`. Submit the following unchanged command once
+to `/usr/local/bin/agent-task run <handle>`:
+
+```bash
+cd /home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8961-62d7eae7d && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\npeak_rss_kib=%M\nexit_code=%x' -o temp/directions/acvc/fresh_dense_reuse_b01_8961_task_time.txt timeout --signal=TERM --kill-after=1 267 bash scripts/run_acvc_fresh_dense_reuse_b01.sh 62d7eae7dedf5560171d636e845286108a4bc528
+```
+
+Known invoked support through preparation and final owner/Monitor reads is
+42.2844768s/330s, excluding this publication, launch and later observation/
+collection/integration/cleanup. Unmeasured client overhead remains unknown; the
+later intake reports complete known components and any missing facts. The live
+primary owner query returned[] immediately before publication. Live Monitor is
+still01a087e5-2044-7301-abb6-7a1709a98197. No ready-VNFC contention notice was
+received. This is the selected new allocation with fresh caps, not a retry.
+Source surface is unchanged by this documentation commit. Actual destination
+admission, acceptance, adoption and empirical outputs remain separate pending facts.
