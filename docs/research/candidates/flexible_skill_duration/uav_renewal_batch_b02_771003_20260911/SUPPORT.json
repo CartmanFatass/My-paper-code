@@ -1,0 +1,49 @@
+{
+  "allocation": "New post-program Portfolio FSD771003/781003",
+  "charges": [
+    {
+      "purpose": "new allocation authority, live control and relay contract",
+      "wall_seconds": 0.7810774
+    },
+    {
+      "purpose": "current direction source and bounded card",
+      "wall_seconds": 0.5003182
+    },
+    {
+      "purpose": "resolve exact new Portfolio allocation and required Git input reconciliation",
+      "wall_seconds": 0.3190966
+    },
+    {
+      "purpose": "read selected immutable FSD transaction and reconcile current inputs",
+      "wall_seconds": 0.9914863
+    },
+    {
+      "purpose": "preserve integrated audit rows and publish required-input merge",
+      "wall_seconds": 4.6989595
+    },
+    {
+      "purpose": "select unscreened identity, compute counts and bind fresh card/source/commands",
+      "wall_seconds": 1.071092
+    },
+    {
+      "purpose": "single binding/command check and card owner/audit publication preparation",
+      "wall_seconds": 0.5296597
+    },
+    {
+      "purpose": "independent reviewer three bounded read commands",
+      "wall_seconds": 0.8934921
+    }
+  ],
+  "known_support_seconds": 9.7851818,
+  "caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "native": 2700,
+    "support": 300,
+    "complete": 3000,
+    "one_source_transaction": 45
+  },
+  "scientific_submissions": 0,
+  "accounting": "Each invoked command once; inner check, staging and SSH durations are not additional charges. Authoring/Pro/idle calendar time excluded. Source publication, delivery, Monitor, collection/reduction, integration and cleanup remain pending; unknown attribution stays unknown.",
+  "complete_cost_certified": false
+}
