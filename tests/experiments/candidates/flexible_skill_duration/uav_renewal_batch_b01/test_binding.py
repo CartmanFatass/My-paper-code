@@ -1,25 +1,26 @@
 """One explicitly synthetic binding/sampler/primary fixture; no learner or host.
 
-Run directly with --scratch pointing to this invocation's directory under temp/.
-The caller retains this report, removes its scratch, and measures complete wall.
+Run directly with --report pointing to the retained evidence directory.
+This command owns its unique scratch under temp/, including import caches.
 """
+import time
+
+PROCESS_START = time.perf_counter()
+
 import argparse
 import inspect
 import json
 import math
+import os
+import shutil
 import sys
+import tempfile
+import traceback
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[5]
 sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT))
-
-import numpy as np
-import run_fsd_uav_renewal_batch_b01 as binding
-from hmasd.utils import RolloutBuffer
-
-shared = binding.shared
-
 
 def synthetic_arm(arm, configs, scores):
     """Supplied metadata only: the counts below never describe executed learning."""
@@ -154,7 +155,43 @@ def run_fixture(scratch):
     print(json.dumps({"synthetic_fixture": True, "status": "pass", "actual_exposure": report["actual_exposure"]}))
 
 
-if __name__ == "__main__":
+def main():
+    global np, binding, RolloutBuffer, shared
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--scratch", type=Path, required=True)
-    run_fixture(parser.parse_args().scratch)
+    parser.add_argument("--report", type=Path, required=True)
+    args = parser.parse_args()
+    parent = ROOT / "temp/directions/flexible_skill_duration/test"
+    parent.mkdir(parents=True, exist_ok=True)
+    args.report.mkdir(parents=True, exist_ok=True)
+    previous_mpl = os.environ.get("MPLCONFIGDIR")
+    receipt = {"synthetic_fixture": True, "fixture_commands": 1, "wall_cap_seconds": 60,
+               "status": "incomplete", "failure": None}
+    try:
+        with tempfile.TemporaryDirectory(prefix="i1280_binding_", dir=parent) as directory:
+            scratch = Path(directory)
+            receipt["scratch_path"] = str(scratch)
+            os.environ["MPLCONFIGDIR"] = str(scratch / "matplotlib")
+            import numpy as np
+            import run_fsd_uav_renewal_batch_b01 as binding
+            from hmasd.utils import RolloutBuffer
+            shared = binding.shared
+            run_fixture(scratch)
+            shutil.copyfile(scratch / "synthetic_primary.json", args.report / "synthetic_primary.json")
+        receipt["status"] = "pass"
+    except Exception:
+        receipt["failure"] = traceback.format_exc()
+    finally:
+        if previous_mpl is None:
+            os.environ.pop("MPLCONFIGDIR", None)
+        else:
+            os.environ["MPLCONFIGDIR"] = previous_mpl
+    receipt["scratch_absent"] = not Path(receipt["scratch_path"]).exists()
+    receipt["wall_through_imports_primary_publication_cleanup_seconds"] = time.perf_counter() - PROCESS_START
+    receipt["within_wall_cap_before_exit"] = time.perf_counter() - PROCESS_START <= 60
+    (args.report / "FIXTURE_COMMAND_RECEIPT.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(receipt))
+    return 0 if receipt["status"] == "pass" and receipt["within_wall_cap_before_exit"] else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -88,12 +88,21 @@ scaling, sample SD and conditional SE; rejected cases retain no paired result.
 Old defaults and the unchanged inside-MEI branch use static/prior evidence;
 no fifth Config, third traversal, extra readout or full learner smoke is allowed.
 
-Check status and complete wall receipt: **pending**. No fixture was run before
-this source publication. The next permitted operation is exactly one local
-fixture command using the existing `hmasd-amd-cpu` interpreter, `-B`, and
-MPLCONFIGDIR within its own `temp/` directory. Its outer command must retain
-the useful report, remove its own scratch and include those operations and
-process exit in the 60-second measurement. No second invocation follows.
+The numerical fixture and runner first published at source `9dcb4bb79`.
+The outer PowerShell launch/timeout/cleanup wrapper was rejected before
+CreateProcess with only `rejected: blocked by policy`; the runtime supplied
+no narrower reason. Neither its scratch nor its evidence directory existed
+on readback. No fixture was accepted or numerical allowance spent by that
+rejection. No escalation or repeat of that wrapper was requested.
+
+A simpler foreground entry now owns a unique `TemporaryDirectory` under this
+checkout's `temp/`, sets MPLCONFIGDIR inside it before scientific imports,
+copies the useful report and removes the scratch in the same process. It runs
+with the existing `hmasd-amd-cpu` interpreter and `-B`. This removes the external
+launch/kill and shell-recursive-removal wrapper; it changes no fixture cases.
+Check status remains **pending** until the one command's actual return. Its
+receipt measures imports, primary publication and cleanup; outer command wall
+also includes process exit. No second numerical invocation follows.
 
 ## 4. Scientific intake and interpretation ceiling
 
