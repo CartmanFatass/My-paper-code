@@ -11,9 +11,11 @@
 
 三句话：
 
-1. **上次崩溃是上游缺陷，不是配置错误。** 当时的桌面版没有随包发出 Linux 版 `codex`
-   二进制，或者投放了过期的缓存。当前安装的 26.903.8094.0 已经带了 9 月 5 日的 Linux 二进制，
-   这一类原因消失了。
+1. **上次崩溃的成因未定，本机配置里有充分的路径冲突素材。** 初版把它归给上游缺陷，
+   那是从 issue 反推的，证据不足，已收回（见第 10 节）。同一时期确有上游缺陷，
+   但本机配置里同时存在 51 条 Windows 盘符项目条目、两条 `\\?\` 扩展长度的
+   marketplace 源、若干 `.exe` 命令，以及一条 `CODEX_CLI_PATH` 指向 Windows 的
+   `codex.exe`，任何一条在 Linux 侧都无法解析（见 6.3）。切换前先按 6.3 清一遍。
 2. **性能账上，全 Linux 终局确实比现状便宜，而且不是只便宜一点。** 进程创建快 33 倍，
    解释器启动快 4.4 倍，同侧逐文件读取快 3.8 倍。跨环境调用 Agentify 的代价是每次 38–81 ms，
    在任何合理的调用频率下都可以忽略。
@@ -45,8 +47,23 @@
 
 ## 2. 上次崩溃的归因
 
-症状属于 Codex Windows 应用 WSL 模式的一个已知缺陷族，上游至今有多条记录（附录 C）。
-按时间可以分成两代：
+**这一节初版给出的是一个从上游 issue 反推的单一归因，证据不足，已收回。**
+现在分成"本机可查的事实"和"外部可参考的同期缺陷"两部分，不再给单一结论。
+
+### 2.1 本机可查的：配置里的路径冲突
+
+owner 的回忆是当时发现了路径冲突。本机配置支持这个方向：用户级配置里有 7 处
+Windows 绝对路径（含两条 `\\?\` 扩展长度前缀和一条指向 `codex.exe` 的
+`CODEX_CLI_PATH`），51 条项目信任条目全部以 Windows 盘符为键，项目级配置里还有一条
+Windows 路径的 MCP 参数。完整清单见 6.3。按 6.2 的文档说法，app 在 WSL 模式下加载的
+正是这份配置，所以这些条目会被 Linux 侧的 app-server 读到。
+
+本文没有当时的崩溃日志，无法把崩溃与其中某一条对应起来。**具体是哪一条，以
+owner 当时的观察为准。**
+
+### 2.2 外部可参考的：同期的上游缺陷
+
+同一时间窗口内上游确有多条相关记录（附录 C），按时间分成两代：
 
 **第一代，启动即失败。** 应用的相对路径投放步骤去 `app\resources\codex` 取 Linux 二进制，
 而 MSIX 包里只有 `codex.exe`，于是报 `Unable to locate the Codex CLI binary`。
@@ -58,7 +75,9 @@
 所有线程失败于 `invalid transport in mcp_servers.codex_app`（#40732）。
 
 本机 `~/.codex/bin/wsl/4f759bc6b64517c4/codex` 的时间戳是 8 月 28 日，与
-`.codex-global-state.json` 的同期备份对得上，所以你那次尝试大概率落在第二代窗口里。
+`.codex-global-state.json` 的同期备份对得上，所以那次尝试在时间上落在第二代窗口内。
+**时间吻合不等于成因。** 这些 issue 说明同期存在什么缺陷，不说明本机崩溃是哪一条造成的；
+2.1 的配置路径冲突是同样成立的候选，且可以在本机直接查证。
 
 当前状态与那时不同的地方：
 
@@ -206,17 +225,39 @@ Agentify 跨界开销。** 把 Agentify 当作迁移的阻塞点是量级上的�
 
 ## 6. 真正的阻塞项
 
-不是性能，是下面三条。
+不是性能，是下面四条。6.3 是其中唯一需要你动手改配置的一条。
 
 ### 6.1 Codex 桌面版 WSL 模式的可靠性
 
 8 月底那批功能缺陷（#40786、#41290、#40732）在 26.903 上是否修复，没有公开依据。
 必须自己冒烟。冒烟集见 7.2。
 
-### 6.2 Codex home 分叉
+### 6.2 Codex home：文档怎么说，以及一条与之矛盾的缺陷报告
 
-WSL 模式下 app-server 读的是 `/home/fires/.codex/config.toml`，不是 Windows 那份（#22759）。
-本机这两份差别很大：
+**官方文档的说法是明确的，且不带 agent environment 这个条件：**
+
+> The Windows app uses the same Codex home directory as native Codex on Windows:
+> `%USERPROFILE%\.codex`.
+
+> If you also run the Codex CLI inside WSL, the CLI uses the Linux home directory by default,
+> so it doesn't automatically share configuration, cached auth, or session history with the
+> Windows app.
+
+所以按文档，**切换 agent environment 不改变 app 的配置目录**。桌面应用始终用
+`%USERPROFILE%\.codex`；`/home/fires/.codex` 是你另外装的 WSL Codex CLI 的家目录，
+两者本来就是分开的两套东西，不是同一套配置的两个读取者。
+
+本机的直接证据与文档一致：上次崩溃后，改回 Windows 侧 `config.toml` 里的
+`[desktop] runCodexInWindowsSubsystemForLinux` 就恢复了启动。
+如果 app 读的是 Linux 那份，这个杠杆不会起作用。
+
+**唯一的反面材料是 issue #22759**，一位用户报告 WSL 模式下 app-server 实际读了
+WSL 的 `~/.codex`，并列出了由此产生的配置漂移。它是一份**尚未修复的缺陷报告，
+不是文档化的行为**。本文没有在本机验证过它，也无法在不切换到 WSL 模式的前提下验证。
+处理方式：把它当作切换后要检查的一项，放进 7.2 的冒烟集，而不是当作既定事实来做准备。
+
+下面这张表列的是两个**本来就独立**的家目录当前各自的内容，供对照，
+**不表示切换后 app 会采用右列**：
 
 | 键 | Windows `%USERPROFILE%\.codex` | WSL `/home/fires/.codex` |
 | --- | --- | --- |
@@ -230,17 +271,51 @@ WSL 模式下 app-server 读的是 `/home/fires/.codex/config.toml`，不是 Win
 
 两条推论：
 
-- 切过去之后 agent 的模型、审批策略、沙箱模式会**静默变成另一套**。必须在切换前
-  把 WSL 侧的 `config.toml` 按意图对齐，不要指望 UI 里的设置生效。
-- **不要用 `CODEX_HOME=/mnt/c/Users/fires/.codex` 去共用 Windows 那份。**
-  Windows 配置里的 `mcp_servers.node_repl`、`mcp_servers.agentify-desktop` 的 command
-  和 `notify` 都是 Windows 路径与 `.exe`，在 Linux 侧加载会直接出配置错误，
-  这正是 #40732 那一类症状。要共用就必须先把这些条目拆成平台相关的两份。
+- **按文档，切换本身不需要你去改 WSL 侧那份 `config.toml`。** 它属于 WSL CLI。
+  真正要做的是切换后核对 agent 实际生效的模型与审批策略，确认与 Windows 侧一致；
+  不一致就说明 #22759 在这个版本上仍然成立，按 8 节回滚。
+- **文档给出的共用方案有一个本机特有的坑。** 文档建议让 WSL CLI 指向 Windows 家目录：
+  `export CODEX_HOME=/mnt/c/Users/<windows-user>/.codex`。
+  在本机不要这样做：Windows 配置里 `mcp_servers.node_repl`、`mcp_servers.agentify-desktop`
+  的 command 和 `notify` 都是 Windows 路径与 `.exe`，被 Linux 侧的 CLI 加载会直接出配置
+  错误，正是 #40732 那一类症状。要共用就必须先把这些条目拆成平台相关的两份。
+  这条针对的是 CLI 的配置共用，与 app 切不切 WSL 无关。
 
-`agentify-desktop` 这一条是可以留在 Windows 侧、由 WSL 通过 interop 调用的，
-但 MCP 的 command 必须改写成 interop 形式，不能照抄 `command = "node"`。
+顺带一条与迁移无关但值得知道的事实：如果将来确实要让 WSL 侧也能驱动 Agentify，
+它可以留在 Windows 侧由 WSL 通过 interop 调用，但 MCP 的 command 必须改写成 interop
+形式，不能照抄 `command = "node"`。按 3.3 的实测，这种调用每次 38–81 ms。
 
-### 6.3 治理声明
+### 6.3 配置里的 Windows 专用路径（切换前必须清的一份清单）
+
+按 6.2，app 在两种 agent environment 下用的都是 `%USERPROFILE%\.codex`。
+所以 WSL 模式下，Linux 侧的 app-server 要加载的正是下面这份满是 Windows 绝对路径的配置。
+这是本机最具体的"路径冲突"来源，也是切换前唯一真正需要动手的准备。
+
+用户级 `%USERPROFILE%\.codex\config.toml`（990 行，2026-09-10 实测）：
+
+| 位置 | 内容 | 在 Linux 侧的问题 |
+| --- | --- | --- |
+| `notify` | `C:\...\codex-computer-use.exe` | 可执行文件不存在 |
+| `[marketplaces.openai-bundled] source` | `\\?\C:\Users\fires\.codex\.tmp\...` | `\\?\` 是 Win32 扩展长度前缀，Linux 无此语义 |
+| `[marketplaces.openai-primary-runtime] source` | `\\?\C:\Users\fires\.cache\...` | 同上 |
+| `[mcp_servers.node_repl] command` | `...\node_repl.exe` | 可执行文件不存在 |
+| `[mcp_servers.node_repl.env] NODE_REPL_NODE_PATH` | `...\node.exe` | 同上 |
+| `[mcp_servers.node_repl.env] NODE_REPL_TRUSTED_SERVICES` | 内嵌 `C:/Users/...` 服务路径 | 解析不到 |
+| `[mcp_servers.node_repl.env] CODEX_CLI_PATH` | `C:\...\Codex\bin\<hash>\codex.exe` | **正是 #28086 警告的那个变量指向 Windows 二进制** |
+| `[projects.*]` | 51 条，**全部**以 Windows 盘符为键，POSIX 键 0 条 | WSL 下项目路径是 `/mnt/c/...`，一条都匹配不上，等于全部未信任 |
+
+项目级 `C:\Projects\HMASD\.codex\config.toml`：
+
+| 位置 | 内容 | 在 Linux 侧的问题 |
+| --- | --- | --- |
+| `[mcp_servers.agentify-desktop] args` | `['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]` | node 拿到 Windows 路径，起不来 |
+
+还有一条要知道的性质：**这些路径是应用自己生成并持续重写的**，不是你手写的。
+本次会话内实测，`config.toml` 在 22:01:55 被重写过一次，其中
+`runtimes\cua_node\<hash>` 的哈希与两小时前那次读取不同。所以清理之后要复查，
+应用更新或重启可能把 Windows 路径写回来。
+
+### 6.4 治理声明
 
 `.codex/hmasd-compute.toml` 目前写死：
 
@@ -313,16 +388,21 @@ remote_receipt_admits_local = false
 - WSL 内已有 Codex CLI 0.154.0（已满足）。
 - **不要设置 `CODEX_CLI_PATH` 指向 Windows 的 `codex.exe`**，那会通过 interop 起一个
   半 Windows 半 Linux 的混合会话（#28086）。
-- 先按 6.2 把 `/home/fires/.codex/config.toml` 的模型、审批、沙箱、trust 条目对齐。
+- 按 6.2，**不需要**预先改 `/home/fires/.codex/config.toml`。那是 WSL CLI 的家目录，
+  按文档与 app 无关。切换前先把它当天的 mtime 记下来，作为下面那项检查的基线。
+- **按 6.3 清一遍 Windows 专用路径**，用户级和项目级两份都要。这是切换前唯一
+  真正需要动手的准备，也是本机最可能的崩溃来源。清完记录 `config.toml` 的 mtime，
+  切换后复查一次，确认应用没有把 Windows 路径写回来。
 
-冒烟集，四项对应四个已知缺陷，任一失败即回滚：
+冒烟集，五项对应五个已知缺陷，任一失败即回滚：
 
-| 动作 | 对应缺陷 |
-| --- | --- |
-| 新建会话 | #40786 |
-| 新建项目、删除项目 | #41290 |
-| 任意线程跑一条 shell 命令 | #40732 |
-| 改一个文件并 `git status` | 常规 |
+| 动作 | 判据 | 对应缺陷 |
+| --- | --- | --- |
+| 新建会话 | 不报 `AbsolutePathBuf` | #40786 |
+| 新建项目、删除项目 | 两者都生效 | #41290 |
+| 任意线程跑一条 shell 命令 | 不报 `invalid transport` | #40732 |
+| 改一个文件并 `git status` | 结果正确 | 常规 |
+| 核对 agent 实际生效的模型与审批策略 | 与 Windows 侧一致，且 `/home/fires/.codex` 没有新写入 | #22759 |
 
 切换方式：设置里改 Agent environment，**从托盘完全退出**，再启动。不是关窗口。
 
@@ -330,7 +410,7 @@ remote_receipt_admits_local = false
 
 顺序很重要，目的是避开第 5 节的 B 和 D 两个中间态。
 
-1. 拿到 owner 对 `.codex/hmasd-compute.toml` 的批准（6.3）。
+1. 拿到 owner 对 `.codex/hmasd-compute.toml` 的批准（6.4）。
 2. 在 WSL 里建好本项目的 Linux Python 环境，配方参考 `hmasd-wsl-node`，但用 CPU 版 torch。
    在旧位置验证它能跑通目标测试子集。
 3. **迁移代码与迁移证据是两件事，都要做。**
@@ -385,12 +465,19 @@ integratedTerminalShell = "gitBash"
   3.4 的 `git status` 与 pytest 收集是真实负载下的锚点，两者结论一致。
 - 本次在 WSL 里对 `/mnt/c/Projects/HMASD` 跑过 `git status`（只读）。
   事后确认 Windows 侧工作树未发生改变，仍只有会话开始时的两个未跟踪文件。
+- **上次崩溃的具体成因未确定。** 没有保留当时的崩溃日志，本文只能给出两类候选：
+  本机配置里可查证的 Windows 路径冲突（2.1、6.3），以及同期的上游缺陷（2.2）。
+  两者都没有被排除，也没有被证实。
 
 ---
 
 ## 10. 更正记录
 
-**2026-09-10，初版提交当日。** 初版把 `temp/` 的绝大部分描述为"历次测试与实验没有清理的
+本节按发现顺序记录，全部发生在 2026-09-10 当日。
+
+### 更正一：`temp/` 的构成
+
+初版把 `temp/` 的绝大部分描述为"历次测试与实验没有清理的
 残留"，并据此写出"迁移只要 `git clone` 1.3 GB"。对 1063 个顶层条目逐项扫描后，
 这两条都不成立，已改写 3.5、7.1 与 7.3。
 
@@ -402,6 +489,36 @@ integratedTerminalShell = "gitBash"
 迁移的一次性搬运量从 1.3 GiB 改成约 25 GiB，因为那 23.5 GiB 证据不在版本库里，
 只 clone 会让已提交文档中的证据引用全部断掉。
 结论方向未变，全 Linux 终局在性能上仍然更便宜，一次性成本仍然是一次性的。
+
+### 更正二：Codex home 的归属
+
+初版在 6.2 断言"WSL 模式下 app-server 读的是 `/home/fires/.codex`，切过去之后模型、
+审批、沙箱会静默变成另一套"，并据此要求切换前先对齐那份配置。这是错的。
+
+错在哪：把一份**尚未修复的缺陷报告**（#22759）当成了当前的既定行为，并且没有区分
+两个不同的读取者，即 Windows 上的桌面 UI 进程与 agent 侧的 app-server。
+更根本的是，官方文档里就写着 app 用 `%USERPROFILE%\.codex`、不带 agent environment
+这个条件，我应该先引文档再引 issue。owner 提出的反证也是直接成立的：
+既然改回 Windows 侧 `config.toml` 就能恢复启动，app 显然在读 Windows 那份。
+
+已改写 6.2，把它降级为"文档说不会，有一份缺陷报告说会，切换后验证"，
+并把验证挪进 7.2 的冒烟集；7.2 里"先对齐 WSL 侧配置"这条前置条件删除。
+
+顺带记录一个方法上的错误：为验证此事我去看了 `/home/fires/.codex` 的写入活动，
+但那是 owner 自己在 WSL 里装的 Codex CLI 的家目录，它的活动对 app-server 说明不了任何事。
+用错了仪器。
+
+### 更正三：崩溃归因
+
+初版第 2 节从上游 issue 反推出单一归因，并在结论里写成"是上游缺陷，不是配置错误"。
+证据不足。owner 的回忆是当时发现了路径冲突，而本机配置里确实有充分的素材：
+用户级 7 处 Windows 绝对路径、51 条全部以盘符为键的项目条目、一条指向 `codex.exe` 的
+`CODEX_CLI_PATH`，项目级还有一条 Windows 路径的 MCP 参数。
+
+已把第 2 节拆成 2.1（本机可查的配置路径冲突）与 2.2（同期的上游缺陷），
+不再给单一结论；新增 6.3 作为切换前的路径清单；结论第 1 条相应改写。
+
+三次更正的共同原因是同一个：从外部材料推断本机状态，而没有先读本机的配置和证据。
 
 ---
 
