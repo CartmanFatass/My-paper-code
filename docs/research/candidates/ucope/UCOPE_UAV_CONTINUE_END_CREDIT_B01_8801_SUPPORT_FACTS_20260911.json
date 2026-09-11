@@ -1,11 +1,14 @@
 {
-  "as_of": "before source publication",
+  "as_of": "accepted run and Root-confirmed Monitor adoption; terminal collection pending",
   "initial_recovery_conservative_charge_s": 60,
+  "failed_fetch_conservative_charge_s": 45,
+  "failed_fetch_returned_wait_intervals_s": 15.0119164,
   "independent_review": {
     "subprocess_wall_s": 3.9007485,
     "enclosing_tool_wall_approx_s": 10.1,
     "charged_s": 12
   },
+  "monitor_add_delivery_charge_s": 0.5,
   "subsequent_support_commands": [
     {
       "label": "read reused helpers",
@@ -54,12 +57,51 @@
     {
       "label": "record independent review and source acceptance",
       "seconds": 0.015
+    },
+    {
+      "label": "inspect final diff and record support/audit",
+      "seconds": 0.4729231
+    },
+    {
+      "label": "publish accepted source/card/check evidence",
+      "seconds": 5.7638037
+    },
+    {
+      "label": "reconcile failed fetch on authoritative remote state",
+      "seconds": 0.91113
+    },
+    {
+      "label": "transfer published committed Git object pack",
+      "seconds": 4.7952612,
+      "session_id": null
+    },
+    {
+      "label": "import exact committed objects and prepare verified detached destination",
+      "seconds": 2.2537812,
+      "session_id": null
+    },
+    {
+      "label": "bind prepared exact command and publish launch facts",
+      "seconds": 4.8024503
+    },
+    {
+      "label": "verify protected environment/current source and fresh owner boundary",
+      "seconds": 0.5119728
+    },
+    {
+      "label": "submit exact detached native chain once",
+      "seconds": 0.9457795
+    },
+    {
+      "label": "one acceptance and adjacent admission readback",
+      "seconds": 0.6812577
     }
   ],
-  "subsequent_command_wall_s": 9.5199069,
-  "charged_subtotal_s": 81.5199069,
+  "subsequent_command_wall_s": 30.6582664,
+  "final_handoff_publication_conservative_charge_s": 10,
+  "charged_preterminal_support_s": 158.1582664,
   "cap_s": 300,
-  "monitor": "pending; request attributable ordinary invocation timings",
-  "native": "not launched",
-  "limits": "Conservative charges and measured command wall are distinct. No double counting of nested suite/reviewer measures. Further preparation, launch, monitor, collection and publication remain."
+  "monitor": "Root confirmed adopted; attributable Monitor work and terminal collection/publication still pending",
+  "native": "accepted once; still running at last direct pre-Monitor readback",
+  "limits": "Initial recovery/fetch/review/delivery/handoff are conservative charges, separate from measured command walls. Nested actual suite wall6.4265742 and review3.9007485 are not added again. The10s handoff charge bounds the current document/Git publication command; compare with its returned actual time."
 }

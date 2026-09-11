@@ -2,10 +2,11 @@
 
 ## 1. Assignment and scientific binding
 
-Current status: source technically accepted with focused checks and independent
-review; exact-SHA remote preparation/launch and scientific intake pending. No8801 scientific invocation
-has been accepted at this writing. DM replacement resumes the accepted Portfolio
-allocation after restart; no new scientific selection is attributed to restart.
+Current status: **one8801 invocation accepted and Monitor adoption confirmed**;
+terminal collection and scientific intake pending. Source passed focused checks
+and independent review. DM replacement resumes the accepted Portfolio allocation
+after restart; no new scientific selection is attributed to restart. Earlier
+preparation sections below retain their pre-submission boundary meaning.
 
 Authority is the [four-slot decision](../../portfolio/decisions/2026-09-10-four-slot-rolling-refill.md),
 immutable Portfolio response1ea43d8fbc846807d71d4d894136f357f65551b6, checked by
@@ -159,3 +160,31 @@ No scientific run has been submitted at this committed boundary. The single
 next action is the frozen agent-task command; its adjacent memory admission
 will admit or refuse that attempt. No extra reviewer/check/native invocation
 follows from this documentation-only publication.
+
+## Accepted launch and Monitor handover
+
+**One8801 invocation was accepted**, agent-task submission return0. Initial
+authoritative readback at2026-09-11T05:27:46.877379Z was running, PID3334572,
+tmux active. Destination memory admission at05:27:30.478378Z passed with
+physical/effective15,634,829,312bytes versus4,294,967,296 required. Exact
+source471a3383d23b16bb01469a6f30e3987910c3e47f and prepared-command
+publicationbb6a53fce retain their distinct roles. No second submission occurred.
+
+MONITOR_ADD was sent directly to the live primary-control Monitor
+`01a087e5-2044-7301-abb6-7a1709a98197`; app delivery was accepted and Root
+subsequently confirmed actual adoption of this handle/source/PID. Original
+collection owner is `/root/dm_ucope_restart_recovery2`; Monitor returns terminal
+facts to Root, who resumes this DM. No routine DM polling continues.
+
+[Support facts](UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_SUPPORT_FACTS_20260911.json)
+carry a preterminal conservative/measured charge of **158.1582664s**
+including a10s upper for this handoff publication. Monitor was explicitly asked
+to retain attributable ordinary query timing; that work and collection/intake/
+closeout remain to be added within300s. Native actual cost and scientific
+polarity are pending. No cap compliance or algorithm result is inferred from
+launch or adoption. Test scratch remains at the policy-rejected cleanup path.
+
+Next action: collect this same handle on the routed terminal fact, verify
+primary/counts/checkpoints and inclusive costs, then write separate scientific
+intake, Chinese owner brief, prediction score and all-outcome decision. All
+branches end this allocated pair; no follow-up is presently allocated.
