@@ -1,0 +1,27 @@
+{
+  "command": [
+    "C:\\Users\\fires\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "tools/experiments/fsd_stage_source.py",
+    "--control-root",
+    "C:/Projects/HMASD",
+    "--sha",
+    "c0cede0ad4ac2276a022b80973d8f5de5a3c0c1a",
+    "--destination",
+    "/home/wu/hmasd-worktrees/fsd-source-delivery-repair-20260911",
+    "--commands-dir",
+    "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_770803_20260911",
+    "--receipt",
+    "docs\\research\\candidates\\flexible_skill_duration\\source_delivery_repair_20260911\\STAGING_READBACK.json",
+    "--seconds",
+    "45"
+  ],
+  "outer_limit_seconds": 45,
+  "started_utc": "2026-09-11T19:54:08.434514+00:00",
+  "returncode": 1,
+  "stdout": "{\"sha\": \"c0cede0ad4ac2276a022b80973d8f5de5a3c0c1a\", \"destination\": \"/home/wu/hmasd-worktrees/fsd-source-delivery-repair-20260911\", \"command\": [\"ssh\", \"-o\", \"BatchMode=yes\", \"-o\", \"ConnectTimeout=8\", \"-o\", \"ServerAliveInterval=3\", \"-o\", \"ServerAliveCountMax=1\", \"hmasd-wsl-node\", \"/usr/bin/timeout --signal=KILL 35.0s /home/wu/.venvs/hmasd/bin/python -u -\"], \"payload_bytes\": 3302, \"cr_bytes\": 0, \"requested_outer_limit_seconds\": 45.0, \"remote_limit_seconds\": 35.0, \"scientific_submissions\": 0, \"returncode\": 4294967295, \"stdout\": \"{\\\"boundary\\\": \\\"payload_received\\\", \\\"destination\\\": \\\"/home/wu/hmasd-worktrees/fsd-source-delivery-repair-20260911\\\"}\\n\", \"stderr\": \"\", \"local_wall_before_receipt_seconds\": 35.546999999991385, \"timing_limit\": \"External caller measures startup, receipt publication and exit.\"}\r\n",
+  "stderr": "",
+  "complete_helper_wall_seconds": 35.625,
+  "ended_utc": "2026-09-11T19:54:44.062712+00:00",
+  "includes": "Helper interpreter/startup, transport, readback, its receipt publication, stdout and exit.",
+  "outside_this_interval": "This caller's setup and collection of the command receipt; charged in outer tool wall."
+}
