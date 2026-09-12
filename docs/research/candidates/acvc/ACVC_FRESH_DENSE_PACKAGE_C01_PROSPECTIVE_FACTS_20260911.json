@@ -1,0 +1,489 @@
+{
+  "object": "ACVC_FRESH_DENSE_PACKAGE_C01",
+  "selected_at_utc": "2026-09-12T04:19:41.791317+00:00",
+  "sampling_law": {
+    "unit_count": 5,
+    "training_master": "10000 + secrets.randbelow(10000)",
+    "evaluation_namespace": "20000 + secrets.randbelow(10000)",
+    "replacement": true,
+    "draw_order": "m1,q1,m2,q2,m3,q3,m4,q4,m5,q5",
+    "standard_library_calls": 10,
+    "outcome_dependent_filtering": false,
+    "identity_rejection_or_redraw": false,
+    "randomness": "Python secrets.randbelow, OS-backed; runtime learner/private RNGs not constructed"
+  },
+  "units": [
+    {
+      "unit_index": 1,
+      "master": 12794,
+      "evaluation_namespace": 23947,
+      "training": {
+        "template": 1279400011,
+        "dense_branch": 1279400012,
+        "persistent_velocity": 1279400021,
+        "constructor": 1279401000,
+        "resets": {
+          "first": 1279401000,
+          "last": 1279401511,
+          "count": 512
+        },
+        "unused_duration": {
+          "first": 1279404000,
+          "last": 1279404511,
+          "count": 512,
+          "draws": 0
+        }
+      },
+      "evaluation": {
+        "model_construction": 2394700014,
+        "paired_resets": {
+          "first": 2394702000,
+          "last": 2394702063,
+          "count": 64
+        },
+        "arms": {
+          "C": {
+            "constructor": 2394700062,
+            "proposal": {
+              "first": 2394730200,
+              "last": 2394730263,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2394740200,
+              "last": 2394740263,
+              "count": 64,
+              "draws": 0
+            }
+          },
+          "F": {
+            "constructor": 2394700063,
+            "proposal": {
+              "first": 2394730300,
+              "last": 2394730363,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2394740300,
+              "last": 2394740363,
+              "count": 64,
+              "draws": 0
+            }
+          },
+          "dwell": {
+            "constructor": 2394700064,
+            "proposal": {
+              "first": 2394730400,
+              "last": 2394730463,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2394740400,
+              "last": 2394740463,
+              "count": 64,
+              "draws": 0
+            }
+          }
+        }
+      },
+      "relative_output": "temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_12794",
+      "complete_native_projection_s": 222.5
+    },
+    {
+      "unit_index": 2,
+      "master": 11477,
+      "evaluation_namespace": 24930,
+      "training": {
+        "template": 1147700011,
+        "dense_branch": 1147700012,
+        "persistent_velocity": 1147700021,
+        "constructor": 1147701000,
+        "resets": {
+          "first": 1147701000,
+          "last": 1147701511,
+          "count": 512
+        },
+        "unused_duration": {
+          "first": 1147704000,
+          "last": 1147704511,
+          "count": 512,
+          "draws": 0
+        }
+      },
+      "evaluation": {
+        "model_construction": 2493000014,
+        "paired_resets": {
+          "first": 2493002000,
+          "last": 2493002063,
+          "count": 64
+        },
+        "arms": {
+          "C": {
+            "constructor": 2493000062,
+            "proposal": {
+              "first": 2493030200,
+              "last": 2493030263,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2493040200,
+              "last": 2493040263,
+              "count": 64,
+              "draws": 0
+            }
+          },
+          "F": {
+            "constructor": 2493000063,
+            "proposal": {
+              "first": 2493030300,
+              "last": 2493030363,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2493040300,
+              "last": 2493040363,
+              "count": 64,
+              "draws": 0
+            }
+          },
+          "dwell": {
+            "constructor": 2493000064,
+            "proposal": {
+              "first": 2493030400,
+              "last": 2493030463,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2493040400,
+              "last": 2493040463,
+              "count": 64,
+              "draws": 0
+            }
+          }
+        }
+      },
+      "relative_output": "temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_11477",
+      "complete_native_projection_s": 222.5
+    },
+    {
+      "unit_index": 3,
+      "master": 18150,
+      "evaluation_namespace": 21370,
+      "training": {
+        "template": 1815000011,
+        "dense_branch": 1815000012,
+        "persistent_velocity": 1815000021,
+        "constructor": 1815001000,
+        "resets": {
+          "first": 1815001000,
+          "last": 1815001511,
+          "count": 512
+        },
+        "unused_duration": {
+          "first": 1815004000,
+          "last": 1815004511,
+          "count": 512,
+          "draws": 0
+        }
+      },
+      "evaluation": {
+        "model_construction": 2137000014,
+        "paired_resets": {
+          "first": 2137002000,
+          "last": 2137002063,
+          "count": 64
+        },
+        "arms": {
+          "C": {
+            "constructor": 2137000062,
+            "proposal": {
+              "first": 2137030200,
+              "last": 2137030263,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2137040200,
+              "last": 2137040263,
+              "count": 64,
+              "draws": 0
+            }
+          },
+          "F": {
+            "constructor": 2137000063,
+            "proposal": {
+              "first": 2137030300,
+              "last": 2137030363,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2137040300,
+              "last": 2137040363,
+              "count": 64,
+              "draws": 0
+            }
+          },
+          "dwell": {
+            "constructor": 2137000064,
+            "proposal": {
+              "first": 2137030400,
+              "last": 2137030463,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2137040400,
+              "last": 2137040463,
+              "count": 64,
+              "draws": 0
+            }
+          }
+        }
+      },
+      "relative_output": "temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_18150",
+      "complete_native_projection_s": 222.5
+    },
+    {
+      "unit_index": 4,
+      "master": 12604,
+      "evaluation_namespace": 21030,
+      "training": {
+        "template": 1260400011,
+        "dense_branch": 1260400012,
+        "persistent_velocity": 1260400021,
+        "constructor": 1260401000,
+        "resets": {
+          "first": 1260401000,
+          "last": 1260401511,
+          "count": 512
+        },
+        "unused_duration": {
+          "first": 1260404000,
+          "last": 1260404511,
+          "count": 512,
+          "draws": 0
+        }
+      },
+      "evaluation": {
+        "model_construction": 2103000014,
+        "paired_resets": {
+          "first": 2103002000,
+          "last": 2103002063,
+          "count": 64
+        },
+        "arms": {
+          "C": {
+            "constructor": 2103000062,
+            "proposal": {
+              "first": 2103030200,
+              "last": 2103030263,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2103040200,
+              "last": 2103040263,
+              "count": 64,
+              "draws": 0
+            }
+          },
+          "F": {
+            "constructor": 2103000063,
+            "proposal": {
+              "first": 2103030300,
+              "last": 2103030363,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2103040300,
+              "last": 2103040363,
+              "count": 64,
+              "draws": 0
+            }
+          },
+          "dwell": {
+            "constructor": 2103000064,
+            "proposal": {
+              "first": 2103030400,
+              "last": 2103030463,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2103040400,
+              "last": 2103040463,
+              "count": 64,
+              "draws": 0
+            }
+          }
+        }
+      },
+      "relative_output": "temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_12604",
+      "complete_native_projection_s": 222.5
+    },
+    {
+      "unit_index": 5,
+      "master": 14295,
+      "evaluation_namespace": 23946,
+      "training": {
+        "template": 1429500011,
+        "dense_branch": 1429500012,
+        "persistent_velocity": 1429500021,
+        "constructor": 1429501000,
+        "resets": {
+          "first": 1429501000,
+          "last": 1429501511,
+          "count": 512
+        },
+        "unused_duration": {
+          "first": 1429504000,
+          "last": 1429504511,
+          "count": 512,
+          "draws": 0
+        }
+      },
+      "evaluation": {
+        "model_construction": 2394600014,
+        "paired_resets": {
+          "first": 2394602000,
+          "last": 2394602063,
+          "count": 64
+        },
+        "arms": {
+          "C": {
+            "constructor": 2394600062,
+            "proposal": {
+              "first": 2394630200,
+              "last": 2394630263,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2394640200,
+              "last": 2394640263,
+              "count": 64,
+              "draws": 0
+            }
+          },
+          "F": {
+            "constructor": 2394600063,
+            "proposal": {
+              "first": 2394630300,
+              "last": 2394630363,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2394640300,
+              "last": 2394640363,
+              "count": 64,
+              "draws": 0
+            }
+          },
+          "dwell": {
+            "constructor": 2394600064,
+            "proposal": {
+              "first": 2394630400,
+              "last": 2394630463,
+              "count": 64
+            },
+            "unused_gate": {
+              "first": 2394640400,
+              "last": 2394640463,
+              "count": 64,
+              "draws": 0
+            }
+          }
+        }
+      },
+      "relative_output": "temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_14295",
+      "complete_native_projection_s": 222.5
+    }
+  ],
+  "state": "first ten outcome-blind values retained before any new scientific execution",
+  "per_unit_counts": {
+    "fresh_fits": 1,
+    "training_episodes": 512,
+    "training_native_ticks": 131072,
+    "evaluation_panels": 3,
+    "evaluation_episodes": 192,
+    "evaluation_native_ticks": 49152,
+    "total_episodes": 704,
+    "native_ticks": 180224,
+    "adam_calls": 1024,
+    "training_collection_actor_rows": 655360,
+    "recurrent_replay_actor_rows": 2621440,
+    "critic_update_rows": 524288,
+    "evaluation_actor_rows": 245760,
+    "top_level_model_constructions": 9,
+    "postfit_loads": 3,
+    "coordinate_pair_check_upper_bound": 6553600
+  },
+  "five_unit_counts": {
+    "fresh_fits": 5,
+    "training_episodes": 2560,
+    "training_native_ticks": 655360,
+    "evaluation_panels": 15,
+    "evaluation_episodes": 960,
+    "evaluation_native_ticks": 245760,
+    "total_episodes": 3520,
+    "native_ticks": 901120,
+    "adam_calls": 5120,
+    "training_collection_actor_rows": 3276800,
+    "recurrent_replay_actor_rows": 13107200,
+    "critic_update_rows": 2621440,
+    "evaluation_actor_rows": 1228800,
+    "top_level_model_constructions": 45,
+    "postfit_loads": 15,
+    "coordinate_pair_check_upper_bound": 32768000
+  },
+  "limits_s": {
+    "per_native_unit": 270,
+    "native_sum": 1350,
+    "all_invoked_support": 1650,
+    "complete_invoked_work": 3000
+  },
+  "projection": {
+    "basis": "Latest accepted unchanged complete native unit conservatively charged178 seconds; arbitrary explicit 25% planning allowance, not a measured speedup or guaranteed forecast.",
+    "factor": 1.25,
+    "per_complete_unit_s": 222.5,
+    "sum_five_native_s": 1112.5,
+    "per_arm_scope": "C/F/dwell are contained in each complete fit-plus-panel unit; no division into separately fitted-arm caps.",
+    "future_actual_cost": "unknown"
+  },
+  "observed_namespace_facts": {
+    "all_ten_values_distinct": true,
+    "maximum_inherited_seed": 2493040463,
+    "all_inherited_seeds_below_2_to_32": true,
+    "domains_are_disjoint": true,
+    "meaning": "Outcome-blind configured values and arithmetic, not evidence that PRNG policy returns have a normal distribution."
+  },
+  "scientific_exposure": {
+    "scientific_invocations": 0,
+    "runtime_scientific_rng_masters": 0,
+    "model_constructions": 0,
+    "model_loads": 0,
+    "native_ticks": 0,
+    "training_episodes": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "search_candidates": 0,
+    "prospective_namespace_pairs_sampled": 5
+  },
+  "previous_acvc_record_search": {
+    "search_scope": [
+      "docs/research/candidates/acvc",
+      "experiments/candidates/acvc",
+      "scripts/run_acvc_fresh_dense_reuse_b01.py",
+      "-g",
+      "*.md",
+      "-g",
+      "*.json",
+      "-g",
+      "*.py",
+      "-g",
+      "!ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md",
+      "-g",
+      "!ACVC_FRESH_DENSE_PACKAGE_C01_PROSPECTIVE_FACTS_20260911.json"
+    ],
+    "pattern": "12794|23947|11477|24930|18150|21370|12604|21030|14295|23946",
+    "exit_code": 1,
+    "matches": "",
+    "meaning": "Read-only direction-local prior-record search after retaining the first random draw. No output-dependent filtering, redraw or global registry."
+  }
+}

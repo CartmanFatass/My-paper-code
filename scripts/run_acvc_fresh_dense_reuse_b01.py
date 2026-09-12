@@ -131,16 +131,18 @@ def final_panel(rows, expected):
 
 
 def run(output, launch_sha, process_start, execution_seconds, make_env=make_real,
-        train_episodes=512, horizon=256, eval_episodes=64):
+        train_episodes=512, horizon=256, eval_episodes=64, *, master=MASTER,
+        evaluation_namespace=EVALUATION_NAMESPACE, object_name=OBJECT, card_path=CARD,
+        mode="UAV_B_EXPLORE", allocation_seconds=None):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     counts = _counts()
     summary = {
-        "object": OBJECT,
-        "card": CARD,
-        "mode": "UAV_B_EXPLORE",
-        "master": MASTER,
-        "evaluation_namespace": EVALUATION_NAMESPACE,
+        "object": object_name,
+        "card": card_path,
+        "mode": mode,
+        "master": master,
+        "evaluation_namespace": evaluation_namespace,
         "launch_sha": launch_sha,
         "status": "incomplete",
         "counts": counts,
@@ -176,7 +178,7 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
             "replay/backward/Adam calls + 3 checkpoint loads + 49152 evaluation team "
             "steps + C/F/dwell checks + publication and process exit"
         ),
-        "allocation_seconds": {
+        "allocation_seconds": dict(allocation_seconds) if allocation_seconds is not None else {
             "whole_supervised_task": 270,
             "cumulative_runtime_support": 330,
             "complete_charge": 600,
@@ -189,7 +191,7 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
     scientific_path_complete = False
 
     def timeout(*_):
-        raise TimeoutError(f"{OBJECT} remaining process timeout reached")
+        raise TimeoutError(f"{object_name} remaining process timeout reached")
 
     def check():
         if time.monotonic() - process_start >= execution_seconds:
@@ -206,27 +208,27 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
     with episode_path.open("w", encoding="utf-8") as episode_file, \
             update_path.open("w", encoding="utf-8") as update_file:
         def emit_training(row):
-            published = dict(row, base=MASTER, rule="DENSE_fit", S=row["reward_sum"])
+            published = dict(row, base=master, rule="DENSE_fit", S=row["reward_sum"])
             rows.append(published)
             episode_file.write(json.dumps(published, allow_nan=False) + "\n")
             episode_file.flush()
 
         def emit_evaluation(row):
-            published = dict(row, base=MASTER, rule=row["arm"],
-                             evaluation_namespace=EVALUATION_NAMESPACE)
+            published = dict(row, base=master, rule=row["arm"],
+                             evaluation_namespace=evaluation_namespace)
             rows.append(published)
             episode_file.write(json.dumps(published, allow_nan=False) + "\n")
             episode_file.flush()
 
         try:
             check()
-            common_actor, critic = templates(MASTER)
-            actor = NativeGeometryActor(common_actor, DENSE, 100000 * MASTER + 12)
+            common_actor, critic = templates(master)
+            actor = NativeGeometryActor(common_actor, DENSE, 100000 * master + 12)
             counts["fresh_dense_initializations"] += 1
             initial = geometry_snapshot(actor, critic)
             optimizer = optimizer_for(actor, critic)
-            train_velocity = generator(100000 * MASTER + 21)
-            env = make_env(100000 * MASTER + 1000)
+            train_velocity = generator(100000 * master + 21)
+            env = make_env(100000 * master + 1000)
             counts["environment_constructors"] += 1
             counts["unscored_constructor_resets"] += 1
             for rollout_index in range(train_episodes // 2):
@@ -238,9 +240,9 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
                     try:
                         episode = collect_episode(
                             env, actor, critic, horizon,
-                            100000 * MASTER + 1000 + episode_index,
-                            train_velocity, generator(100000 * MASTER + 4000 + episode_index),
-                            {"master": MASTER, "base": MASTER, "arm": DENSE,
+                            100000 * master + 1000 + episode_index,
+                            train_velocity, generator(100000 * master + 4000 + episode_index),
+                            {"master": master, "base": master, "arm": DENSE,
                              "phase": "train", "episode": episode_index},
                             check, counts, emit_training, lambda _row: None, summary["limits"],
                             real=True, diagnostics=False, ratio_grouping="agent_compound",
@@ -279,7 +281,7 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
                 counts["critic_update_rows"] += performed * 2 * horizon
                 for record in records:
                     update_file.write(json.dumps(dict(
-                        record, master=MASTER, rollout=rollout_index,
+                        record, master=master, rollout=rollout_index,
                         episodes=episode_ids,
                     ), allow_nan=False) + "\n")
                     counts["update_records"] += 1
@@ -305,8 +307,8 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
             torch.save({
                 "actor": actor.state_dict(),
                 "critic": critic.state_dict(),
-                "master": MASTER,
-                "object": OBJECT,
+                "master": master,
+                "object": object_name,
             }, checkpoint)
             counts["final_checkpoints"] += 1
             counts["selected_final_checkpoints"] += 1
@@ -315,9 +317,9 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
 
             for arm, arm_index in zip(ARMS, (2, 3, 4)):
                 panel_start = time.monotonic()
-                base = load_base(checkpoint, EVALUATION_NAMESPACE)
+                base = load_base(checkpoint, evaluation_namespace)
                 counts["post_fit_loads"] += 1
-                env = make_env(100000 * EVALUATION_NAMESPACE + 60 + arm_index)
+                env = make_env(100000 * evaluation_namespace + 60 + arm_index)
                 counts["environment_constructors"] += 1
                 counts["unscored_constructor_resets"] += 1
                 before_rows = len(rows)
@@ -328,7 +330,7 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
                     episode_complete = False
                     try:
                         collect(
-                            env, base, None, None, EVALUATION_NAMESPACE, arm, "eval",
+                            env, base, None, None, evaluation_namespace, arm, "eval",
                             episode_index, horizon, check, counts, emit_evaluation,
                         )
                         episode_complete = True
@@ -406,7 +408,7 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
             )
             if summary["process_wall_s_to_summary"] >= execution_seconds:
                 summary["status"] = "incomplete"
-                summary.setdefault("error", f"TimeoutError: {OBJECT} remaining process timeout reached")
+                summary.setdefault("error", f"TimeoutError: {object_name} remaining process timeout reached")
             cleaned = clean_json(summary, summary["limits"])
             try:
                 write_json(output / "summary.json", cleaned)

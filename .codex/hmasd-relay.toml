@@ -1,7 +1,7 @@
 schema_version = 1
 status = "active"
 thread_id = "01a08456-2cf3-7f02-8595-42d84ba41a4c"
-root_thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
+root_thread_id = "01a095b7-850f-7401-ad4e-5e4320d285f1"
 model = "gpt-5.6-luna"
 reasoning_effort = "low"
 instructions_path = "docs/project/SIBLING_COMMUNICATION.md"

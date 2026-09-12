@@ -1,0 +1,196 @@
+{
+  "observed_utc": "2026-09-12T05:19:47.170575+00:00",
+  "object": "FOLR-LEARNED-RETENTION-B03",
+  "scientific_invocations": 0,
+  "technical_status": "prelaunch support cap breached; no scientific result",
+  "source_sha": "89035d8f1e3f44a07e80c08e3140283c03592efb",
+  "command_commit": "e3ac72da5750821e3ea67cbad98c27252161929d",
+  "original_timeout": {
+    "observed_at": "2026-09-12T05:06:52.006225+00:00",
+    "command_commit": "e3ac72da5750821e3ea67cbad98c27252161929d",
+    "source_sha": "89035d8f1e3f44a07e80c08e3140283c03592efb",
+    "error": "subprocess.TimeoutExpired: Command ['ssh', 'hmasd-wsl-node', 'bash', '-s'] timed out after 55 seconds",
+    "timeout_seconds": 55,
+    "output_limitation": "Initial caller did not preserve TimeoutExpired stdout/stderr; do not infer no staging effect from empty tool output",
+    "scientific_submission_count": 0,
+    "scope": "Only exact published source staging and static binding checks; no agent-task run command was executed"
+  },
+  "readback": {
+    "checkout_was_present_and_registered": true,
+    "head": "89035d8f1e3f44a07e80c08e3140283c03592efb",
+    "source_file_count": 10,
+    "source_files_present": 0,
+    "index_exists": false,
+    "index_lock_exists": true,
+    "staged_deletion_rows_from_missing_index": 11569,
+    "initial_staging_stdout_stderr": "not captured by first timeout caller; archived script/request and later factual readback remain"
+  },
+  "owned_process_stop": {
+    "action": "TERM only verified owned interrupted source-staging processes",
+    "processes": [
+      {
+        "pid": 3366162,
+        "command": "git -C /home/wu/projects/HMASD worktree add --detach /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 89035d8f1e3f44a07e80c08e3140283c03592efb",
+        "cwd": "/home/wu/projects/HMASD",
+        "elapsed_seconds": 274.8100000000559,
+        "state": "S"
+      },
+      {
+        "pid": 3366164,
+        "command": "/usr/lib/git-core/git reset --hard --no-recurse-submodules",
+        "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
+        "elapsed_seconds": 274.8100000000559,
+        "state": "S"
+      },
+      {
+        "pid": 3366165,
+        "command": "/usr/lib/git-core/git -c fetch.negotiationAlgorithm=noop fetch origin --no-tags --no-write-fetch-head --recurse-submodules=no --filter=blob:none --stdin",
+        "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
+        "elapsed_seconds": 274.78000000002794,
+        "state": "S"
+      },
+      {
+        "pid": 3366166,
+        "command": "/usr/lib/git-core/git remote-https origin https://github.com/CartmanFatass/My-paper-code.git",
+        "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
+        "elapsed_seconds": 274.78000000002794,
+        "state": "S"
+      },
+      {
+        "pid": 3366167,
+        "command": "/usr/lib/git-core/git-remote-https origin https://github.com/CartmanFatass/My-paper-code.git",
+        "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
+        "elapsed_seconds": 274.78000000002794,
+        "state": "S"
+      }
+    ],
+    "scientific_invocations": 0,
+    "new_staging_or_launch": false
+  },
+  "verified_termination": {
+    "receipt_utc": "2026-09-12T05:11:49.332649+00:00",
+    "old_pid_states": [],
+    "active_related_processes": [],
+    "checkout_disk_exists": false,
+    "checkout_registered": false,
+    "own_worktree_record": null,
+    "unique_worktree_files": [],
+    "handles": {
+      "folr-learned-retention-b03-retain-20260911": false,
+      "folr-learned-retention-b03-learned-event-20260911": false
+    },
+    "scientific_invocations": 0
+  },
+  "budget": {
+    "known_support_lower_bound_at_stop_seconds": 308.8422538000558,
+    "known_support_lower_bound_at_this_snapshot_seconds": 315.26373200005565,
+    "support_cap_seconds": 300,
+    "native_spent_seconds": 0,
+    "native_budget_may_not_pay_support_overrun": true,
+    "one_enclosing_remote_parent_git_elapsed_seconds": 274.8100000000559,
+    "double_count_rule": "This274.81 replaces the55s client timeout; nested checkout/fetch/helper lifetimes are not added. SSH setup, fetch before parent start, teardown and unitemized terms remain unknown.",
+    "closure_after_stop": "Root explicitly authorized termination verification, evidence publication and scoped closeout only; no renewed allowance",
+    "snapshot_limit": "Includes retained command receipts through passed documentary consistency/Git-state checks. This write, final Git publication, relay and Root integration remain additional/unmeasured; the fixed stop snapshot is unchanged."
+  },
+  "archive": {
+    "path": "docs/research/candidates/vap_folr_core/evidence/2026-09-11-folr-learned-retention-b03-prelaunch-control.zip",
+    "bytes": 103396,
+    "sha256": "71a64ec6e0dc52f9956fa7ab02520a2ce7a56698a555c139079fd8415341f7d8",
+    "members": [
+      {
+        "path": "stage_exact_source_lf.sh",
+        "bytes": 10308,
+        "sha256": "6254bc16a57dc10a334602c6f6580caea74127d033092d22f2dcf5c0b6cbd9ee"
+      },
+      {
+        "path": "staging_detail_receipt.json",
+        "bytes": 2910,
+        "sha256": "1f4a8ff9d7e17bfa09ae2795e9b287914ee063ec6c13412b0644f0ae6703e2ae"
+      },
+      {
+        "path": "staging_readback_receipt.json",
+        "bytes": 1173927,
+        "sha256": "64294337b06fede5e074054ab775e5e3f26c0ba472bc2973c2e6dd1a841fc951"
+      },
+      {
+        "path": "staging_stop_receipt.json",
+        "bytes": 1830,
+        "sha256": "51e227bef01290a8a4d148b4cf9711ddbeafe24803431f7b4b15b00fc751a10a"
+      },
+      {
+        "path": "staging_timeout_receipt.json",
+        "bytes": 625,
+        "sha256": "b86cf438e2acb61364b7df8f73dd41eb45e6497f64c029320b078ea28330c3bf"
+      },
+      {
+        "path": "termination_inventory_receipt.json",
+        "bytes": 584,
+        "sha256": "02d67c6b3617df87603a5e6438b55b4ebd2e660bf8adfb967149021f061abf4a"
+      }
+    ],
+    "all_members_byte_verified": true
+  },
+  "cleanup": {
+    "remote_checkout": "automatically absent after verified TERM; no separate recursive removal requested",
+    "remote_registration_absent": true,
+    "both_supervisor_roots_absent": true,
+    "local_control_root": "temp/directions/vap_folr_core/exp/learned_retention_b03_control_20260911",
+    "local_control_removal": "not attempted; retained at OWNER_DIRECT HANDOFF boundary",
+    "shared_authoring_checkout": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr",
+    "older_restricted_B01_B02_duplicates": "untouched/outside assignment",
+    "local_control_disk_exists": true,
+    "local_control_absolute_path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911",
+    "local_control_files": [
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911\\stage_exact_source_lf.sh",
+        "bytes": 10308,
+        "sha256": "6254bc16a57dc10a334602c6f6580caea74127d033092d22f2dcf5c0b6cbd9ee"
+      },
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911\\staging_detail_receipt.json",
+        "bytes": 2910,
+        "sha256": "1f4a8ff9d7e17bfa09ae2795e9b287914ee063ec6c13412b0644f0ae6703e2ae"
+      },
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911\\staging_readback_receipt.json",
+        "bytes": 1173927,
+        "sha256": "64294337b06fede5e074054ab775e5e3f26c0ba472bc2973c2e6dd1a841fc951"
+      },
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911\\staging_stop_receipt.json",
+        "bytes": 1830,
+        "sha256": "51e227bef01290a8a4d148b4cf9711ddbeafe24803431f7b4b15b00fc751a10a"
+      },
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911\\staging_timeout_receipt.json",
+        "bytes": 625,
+        "sha256": "b86cf438e2acb61364b7df8f73dd41eb45e6497f64c029320b078ea28330c3bf"
+      },
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911\\termination_inventory_receipt.json",
+        "bytes": 584,
+        "sha256": "02d67c6b3617df87603a5e6438b55b4ebd2e660bf8adfb967149021f061abf4a"
+      }
+    ],
+    "local_control_bytes": 1190184,
+    "local_control_archive_reverified": true,
+    "shared_authoring_branch": "codex/vap-folr",
+    "retention_authority": "OWNER_DIRECT: existing DMs enter HANDOFF; no discretionary deletion of evidence/shared checkouts",
+    "retention_owner": "Root receives integration/retention inventory; DM stops after published handoff",
+    "removal_requests_this_handoff": 0,
+    "active_owned_remote_processes_at_verified_terminal_receipt": 0
+  },
+  "owner_handoff": {
+    "instruction": "后续不要再开启新的DM 现有DM进入handoff",
+    "route": "Root native task to original FOLR DM",
+    "scope": "Necessary safe termination verification/preservation and ready technical handoff publication only; no new agent, staging retry, scientific launch, top-up or Pro question.",
+    "after_publication": "one relay HANDOFF, then stop",
+    "pending_root_actions": [
+      "Accept/integrate the returned ready source/card 89035d8f1 and command e3ac72da5 plus technical handoff commits; input sync f41f59543 is not a deliverable cherry-pick.",
+      "Reconcile the retained direction checkout and local six-file control copy/committed archive under the owner HANDOFF boundary; no automatic successor.",
+      "Preserve zero scientific invocations, the null primary and known support cap breach independently of prior B01/B02 performance."
+    ],
+    "no_required_remote_collection": true,
+    "no_pending_scientific_handle_or_monitor_adoption": true
+  }
+}

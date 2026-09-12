@@ -1,0 +1,727 @@
+{
+  "prospective_exposure": {
+    "real_training_fits": 2,
+    "matched_initialization_pairs": 1,
+    "training_episodes": 10000,
+    "training_team_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_team_ticks": 5120,
+    "total_team_ticks": 205120,
+    "replay_gru_rows": 66783360,
+    "acting_rows": 1076880,
+    "learned_gate_forward_rows": 33930120,
+    "new_validation_model_fixture_test_invocations": 0
+  },
+  "acceptance_reuse": {
+    "independent_review": {
+      "agent": "learned_retention_review",
+      "model": "Astra/high",
+      "read_only": true,
+      "material_findings": 0,
+      "review_command_seconds": 2.2064189,
+      "consumer_question": "complete finite arrays must be checked before learned_primary",
+      "consumer_plan_accepted": true,
+      "runtime_acceptance_asserted": false
+    },
+    "accepted_focused_cases": 10,
+    "accepted_check_source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+    "rerun_count": 0,
+    "new_changed_risk": "fresh identity, exact source and command/publication binding only"
+  },
+  "object": "FOLR-LEARNED-RETENTION-B03",
+  "state": "prelaunch_stop_support_cap_breach_no_scientific_result",
+  "bound_utc": "2026-09-12T05:00:56.643449+00:00",
+  "authority_sha": "f4bbe6cae2d351b4c80c5e0d9d66690d337749ce",
+  "authority_path": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md",
+  "authority_response_sha256": "a80571571b323bf937adee9875969d67356db121ff0c6de4b5de9b3483e3dabf",
+  "root_application_commit": "deb2e5e1e",
+  "root_conformance": "PASS; Root applied final F+U and assigned this pair",
+  "accepted_source_reused": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+  "source_sha": "89035d8f1e3f44a07e80c08e3140283c03592efb",
+  "source_compared_current_head": "f41f59543c8ed7945afbd1092f9f868d19dc515b",
+  "source_surface": [
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+      "git_blob": "1509a32ad88912263c60d63bd7eba2e1da6d932c",
+      "sha256": "775e598921ee7b09721b205624c7e7ac30e1ace177bdcb720b9120c5f4443fa3",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+      "git_blob": "77c2fda3f3f6132ec0e9605413f569f9c029898d",
+      "sha256": "0b95da626bab87c1cab7d38886b53291fd1a5167b66bfabf9e0dc33d5e81ed03",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+      "git_blob": "50b1b72d4888aa3014189c8a3a05a82f767d73d0",
+      "sha256": "29dc8e1a18426a42f3cf01f0eba03f6bfa44eeeefddeec684d6458c7139b774c",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py",
+      "git_blob": "006bb0573f4c4bcfbdd709ed191d30b4d7e972ed",
+      "sha256": "ae141219443ad169c5b7f58608e6785eadbd60a8de63c2d9366716ddd19fed9a",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+      "git_blob": "250fe41e2631335930998116c519dcc530cf0695",
+      "sha256": "01770613528bc8e1f3b86c4cafa934dda98c9639490733a123b101c48723e54a",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "git_blob": "afc1f521464019800baf3d01a0b74cf4dff43993",
+      "sha256": "3936fd69b99d1b65c7644821848e419a9e3118120efbcc57667fba5ef5db3dc1",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py",
+      "git_blob": "f1a5e40a3008aed1ef2d8c49298a87c2acf9e4da",
+      "sha256": "dc342eefc74af9be788b006dfc70ef471088380543a3d005af19b0309d57fc86",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "scripts/hmasd_resource_preflight.py",
+      "git_blob": "4127cd22d2e0c4cc1ad6df85aafeb7131c3d07b2",
+      "sha256": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "scripts/run_folr_public_lifecycle_b01.py",
+      "git_blob": "51c2d81317df75d25a80a0d913a2c09746832aa5",
+      "sha256": "30d021557e10c25638cdc313274cae4e13cdacd75832c58ebafa87b4dad8026c",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py",
+      "git_blob": "c12963e53b321f15045fbfcb819170f889df92aa",
+      "sha256": "faf58e6103cbf234a711e6870481b9145b1705a0ebc3a6578efa2ad85bff4d29",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": false,
+      "working_text_equal_after_newline_normalization": true
+    }
+  ],
+  "training_seed": 7811,
+  "evaluation_seed": 107811,
+  "identity_selection": "Next unused sequential identities after7809/107809 and7810/107810, without sampling or screening",
+  "arms": [
+    "RETAIN",
+    "LEARNED_EVENT"
+  ],
+  "primary": null,
+  "commands": [
+    {
+      "arm": "RETAIN",
+      "handle": "folr-learned-retention-b03-retain-20260911",
+      "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
+      "output": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_memory.json",
+      "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_whole_time.txt",
+      "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1340s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7811 --evaluation-seed 107811 --launch-sha 89035d8f1e3f44a07e80c08e3140283c03592efb --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain'",
+      "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b03-retain-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1340s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7811 --evaluation-seed 107811 --launch-sha 89035d8f1e3f44a07e80c08e3140283c03592efb --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain'\"'\"''",
+      "status": "never_submitted_support_cap_stop"
+    },
+    {
+      "arm": "LEARNED_EVENT",
+      "handle": "folr-learned-retention-b03-learned-event-20260911",
+      "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
+      "output": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_memory.json",
+      "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_whole_time.txt",
+      "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1340s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7811 --evaluation-seed 107811 --launch-sha 89035d8f1e3f44a07e80c08e3140283c03592efb --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event'",
+      "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b03-learned-event-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1340s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7811 --evaluation-seed 107811 --launch-sha 89035d8f1e3f44a07e80c08e3140283c03592efb --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event'\"'\"''",
+      "status": "never_submitted_support_cap_stop"
+    }
+  ],
+  "source_check_limitation": "Initial raw-byte assertion stopped on Windows test file CRLF only: published accepted/current Git bytes identical,9 production/admission files exact in checkout, test normalized text identical; remote execution must match all10 exact Git bytes. No source edit or scientific invocation.",
+  "caps_seconds": {
+    "each_whole_arm": 1350,
+    "native_sum": 2700,
+    "invoked_support": 300,
+    "complete": 3000
+  },
+  "outer_timeout": {
+    "TERM_after_seconds": 1340,
+    "KILL_grace_seconds": 5,
+    "whole_arm_cap_seconds": 1350,
+    "scope": "admission/startup through publication/exit; reserve teardown inside1350; actual whole wall checked",
+    "runner_internal1800_label": "historical internal label; not current authority"
+  },
+  "actual_binding_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "source_edits": 0,
+    "new_test_invocations": 0
+  },
+  "cost_projection": {
+    "basis": "same fixed complete runner cost law and B01/B02 whole-arm observations; no profile or guaranteed future forecast",
+    "RETAIN": {
+      "historical_whole_seconds": [
+        835.33,
+        895.43
+      ],
+      "latest_anchor_seconds": 895.43,
+      "cap_seconds": 1350
+    },
+    "LEARNED_EVENT": {
+      "historical_whole_seconds": [
+        867.79,
+        920.56
+      ],
+      "latest_anchor_seconds": 920.56,
+      "cap_seconds": 1350
+    },
+    "latest_anchor_sum_seconds": 1815.9899999999998,
+    "native_sum_cap_seconds": 2700,
+    "current_wall_rss_and_complete_support": "unknown"
+  },
+  "prediction": {
+    "DM": "WITHIN_MEI",
+    "confidence": "low",
+    "owner": "not taken",
+    "score": "not scorable: no final primary",
+    "actual_status": "not scorable; no primary; owner prediction not taken"
+  },
+  "monitor": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "configuration_source": "live primary config/Root assignment",
+    "dispatch": "none; no accepted scientific handles",
+    "adoption": "not applicable; no scientific handles",
+    "goal_requirement": "get_goal; continue matching unfinished goal or create an unbudgeted goal; actual handle adoption required"
+  },
+  "support": {
+    "measured_invoked_commands": [
+      {
+        "label": "initial direction Git status",
+        "seconds": 0.3374394,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "initial direction log",
+        "seconds": 0.2769673,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B02 frozen card read",
+        "seconds": 0.2363653,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "primary compute Monitor and scientific-tools read",
+        "seconds": 0.2304601,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "owned B02 document inventory",
+        "seconds": 0.2351168,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "fetch accepted Portfolio source",
+        "seconds": 2.2768994,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "input merge attempted; audit conflict",
+        "seconds": 0.9874388,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "audit multiset preservation check",
+        "seconds": 0.3695179,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "ignored runtime filename search returned none",
+        "seconds": 0.1780418,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "accepted runner read",
+        "seconds": 0.2115116,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "fresh identity string search",
+        "seconds": 1.0283984,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "resolve audit with verified incoming superset",
+        "seconds": 0.2112466,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "input sync commit",
+        "seconds": 0.5381674,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "immediate input-sync push",
+        "seconds": 4.0352897,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B02 summary search (overbroad output narrowed subsequently)",
+        "seconds": 0.1889008,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B02 intake selected passages",
+        "seconds": 0.203351,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "experiments AGENTS current read",
+        "seconds": 0.3073363,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "scripts AGENTS current read",
+        "seconds": 0.250857,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "tests AGENTS current read",
+        "seconds": 0.2924694,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "scientific-reading reference",
+        "seconds": 0.2525499,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "prior accepted source/acceptance extraction",
+        "seconds": 0.3688574,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "prior local control filenames",
+        "seconds": 0.2577926,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "reuse exact LF staging method",
+        "seconds": 0.2060021,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "prior execution and staging semantics",
+        "seconds": 0.2196565,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "current direction accepted scientific boundary",
+        "seconds": 0.2026475,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "write B03 prospective card and intake",
+        "seconds": 0.021,
+        "source": "tool request elapsed"
+      },
+      {
+        "label": "compute B03 counts verify exact source and write prospective summary owner/audit",
+        "seconds": 1.9302669,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B03 clean-boundary primary owner reviews",
+        "seconds": 0.4406329,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "inspect focused test source difference",
+        "seconds": 0.2031959,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "distinguish test Git bytes from checkout newline representation",
+        "seconds": 0.3579811,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "complete B03 prospective summary owner/audit after test CRLF distinction",
+        "seconds": 1.9359799,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B03 new-card item CLI",
+        "seconds": 0.3638849,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "record B03 prospective source and owner facts",
+        "seconds": 0.014,
+        "source": "tool request elapsed"
+      },
+      {
+        "label": "trace B03 card application without asserting launch",
+        "seconds": 0.3429085,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "final B03 prospective card facts and quotations checks",
+        "seconds": 0.2700705,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "stage exact B03 card paths",
+        "seconds": 0.2804123,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B03 staged whitespace check",
+        "seconds": 0.1817872,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B03 card/source binding commit",
+        "seconds": 0.5889548,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "immediate B03 binding push",
+        "seconds": 4.6988856,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "read B03 exact source/card SHA",
+        "seconds": 0.1909449,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "prepare exact B03 supervisor commands and LF source-staging inputs",
+        "seconds": 0.2428519,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "focused literal command and LF staging syntax checks",
+        "seconds": 0.2904355,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "stage literal B03 commands",
+        "seconds": 0.2443598,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B03 command diff whitespace",
+        "seconds": 0.1932463,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "commit exact B03 commands",
+        "seconds": 0.5524825,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "immediate B03 command push",
+        "seconds": 3.9912857,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "read committed command SHA",
+        "seconds": 0.2006321,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "one source-staging transaction: orphaned git worktree/lazy fetch until verified TERM",
+        "seconds": 274.8100000000559,
+        "source": "remote parent git process elapsed from /proc at stop; lower bound for enclosing staging, subsumes55s client timeout and all nested child processes",
+        "status": "support cap breach; no scientific submission"
+      },
+      {
+        "label": "read-only same-checkout and handle reconciliation after staging timeout",
+        "seconds": 1.1715445,
+        "source": "exec_command wall_time_seconds; includes nested SSH readback"
+      },
+      {
+        "label": "read exact interrupted checkout source and live-writer state",
+        "seconds": 0.7850741,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "stop only verified orphaned B03 source-staging processes",
+        "seconds": 0.636155,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "Root-authorized termination verification and exact cleanup inventory after cap breach",
+        "seconds": 0.8629152,
+        "source": "exec_command wall_time_seconds; closure only no renewed allowance"
+      },
+      {
+        "label": "Root-authorized preservation and technical prelaunch intake facts after cap stop",
+        "seconds": 0.366928,
+        "source": "exec_command wall_time_seconds; closure only"
+      },
+      {
+        "label": "local instructions (closeout)",
+        "seconds": 0.352816,
+        "source": "exec_command wall_time_seconds; closure only no renewed allowance"
+      },
+      {
+        "label": "B03 intake and card (closeout)",
+        "seconds": 0.323044,
+        "source": "exec_command wall_time_seconds; closure only no renewed allowance"
+      },
+      {
+        "label": "existing closeout (closeout)",
+        "seconds": 0.3551305,
+        "source": "exec_command wall_time_seconds; closure only no renewed allowance"
+      },
+      {
+        "label": "owner CLI current instructions (closeout)",
+        "seconds": 0.3347231,
+        "source": "exec_command wall_time_seconds; closure only no renewed allowance"
+      },
+      {
+        "label": "summary shape and audit tail (closeout)",
+        "seconds": 0.442854,
+        "source": "exec_command wall_time_seconds; closure only no renewed allowance"
+      },
+      {
+        "label": "primary owner reviews",
+        "seconds": 0.4390036,
+        "source": "exec_command wall_time_seconds; closure only no renewed allowance"
+      },
+      {
+        "label": "owner trace arguments",
+        "seconds": 0.3201044,
+        "source": "exec_command wall_time_seconds; closure only no renewed allowance"
+      },
+      {
+        "label": "closeout essential receipts",
+        "seconds": 0.2478441,
+        "source": "exec_command wall_time_seconds; closure only no renewed allowance"
+      },
+      {
+        "label": "recovered checkout status and current instructions at closeout",
+        "seconds": 0.4595912,
+        "source": "exec_command wall_time_seconds; closure only no renewed allowance"
+      },
+      {
+        "label": "closeout exact receipts, attribution and live relay read",
+        "seconds": 0.3483912,
+        "source": "exec_command wall_time_seconds; closure only no renewed allowance"
+      },
+      {
+        "label": "read current handoff relay instruction",
+        "seconds": 0.1883602,
+        "source": "exec_command wall_time_seconds; owner-directed handoff only"
+      },
+      {
+        "label": "write owner-directed HANDOFF technical inventory and preserved support snapshot",
+        "seconds": 0.2991597,
+        "source": "exec_command wall_time_seconds; handoff only"
+      },
+      {
+        "label": "trace existing B03 card blocked execution at owner HANDOFF boundary",
+        "seconds": 0.3069344,
+        "source": "exec_command wall_time_seconds; handoff only"
+      },
+      {
+        "label": "focused documentary consistency",
+        "seconds": 0.2928042,
+        "source": "exec_command wall_time_seconds; owner-directed handoff only"
+      },
+      {
+        "label": "owned diff and Git state",
+        "seconds": 0.4808744,
+        "source": "exec_command wall_time_seconds; owner-directed handoff only"
+      }
+    ],
+    "known_seconds_through_snapshot": 315.26373200005565,
+    "native_clocks_not_in_support": true,
+    "unmeasured_terms": [
+      "two early read-command clocks not retained in truncated output",
+      "SSH/fetch work before the enclosing remote parent start and unitemized teardown",
+      "unitemized tool/authoring effort",
+      "this write and later handoff publication, relay delivery and Root integration"
+    ],
+    "full_budget_conformance": "FAILED: known support lower bound exceeds300s before any fit; closure work separately identified, not a top-up",
+    "historical_client55s_is_subsumed": true,
+    "snapshot_limit": "Includes retained command receipts through passed documentary consistency/Git-state checks. This write, final Git publication, relay and Root integration remain additional/unmeasured; the fixed stop snapshot is unchanged."
+  },
+  "cleanup": {
+    "remote_checkout": "automatically absent after verified TERM; no separate recursive removal requested",
+    "remote_registration_absent": true,
+    "both_supervisor_roots_absent": true,
+    "local_control_root": "temp/directions/vap_folr_core/exp/learned_retention_b03_control_20260911",
+    "local_control_removal": "not attempted; retained at OWNER_DIRECT HANDOFF boundary",
+    "shared_authoring_checkout": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr",
+    "older_restricted_B01_B02_duplicates": "untouched/outside assignment",
+    "local_control_disk_exists": true,
+    "local_control_absolute_path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911",
+    "local_control_files": [
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911\\stage_exact_source_lf.sh",
+        "bytes": 10308,
+        "sha256": "6254bc16a57dc10a334602c6f6580caea74127d033092d22f2dcf5c0b6cbd9ee"
+      },
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911\\staging_detail_receipt.json",
+        "bytes": 2910,
+        "sha256": "1f4a8ff9d7e17bfa09ae2795e9b287914ee063ec6c13412b0644f0ae6703e2ae"
+      },
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911\\staging_readback_receipt.json",
+        "bytes": 1173927,
+        "sha256": "64294337b06fede5e074054ab775e5e3f26c0ba472bc2973c2e6dd1a841fc951"
+      },
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911\\staging_stop_receipt.json",
+        "bytes": 1830,
+        "sha256": "51e227bef01290a8a4d148b4cf9711ddbeafe24803431f7b4b15b00fc751a10a"
+      },
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911\\staging_timeout_receipt.json",
+        "bytes": 625,
+        "sha256": "b86cf438e2acb61364b7df8f73dd41eb45e6497f64c029320b078ea28330c3bf"
+      },
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911\\termination_inventory_receipt.json",
+        "bytes": 584,
+        "sha256": "02d67c6b3617df87603a5e6438b55b4ebd2e660bf8adfb967149021f061abf4a"
+      }
+    ],
+    "local_control_bytes": 1190184,
+    "local_control_archive_reverified": true,
+    "shared_authoring_branch": "codex/vap-folr",
+    "retention_authority": "OWNER_DIRECT: existing DMs enter HANDOFF; no discretionary deletion of evidence/shared checkouts",
+    "retention_owner": "Root receives integration/retention inventory; DM stops after published handoff",
+    "removal_requests_this_handoff": 0,
+    "active_owned_remote_processes_at_verified_terminal_receipt": 0
+  },
+  "execution_plan": {
+    "node": "wsl_4070",
+    "ssh_target": "hmasd-wsl-node",
+    "repo": "/home/wu/projects/HMASD",
+    "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
+    "python": "/home/wu/.venvs/hmasd/bin/python",
+    "device": "cpu",
+    "dtype": "float32",
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "supervisor": "/usr/local/bin/agent-task",
+    "portability": "Linux CPU native publication only; no Windows fallback",
+    "staging": "one exact published source worktree; binary LF control transport"
+  },
+  "machine_generated_exposure_line": "B03 BINDING EXPOSURE: scientific_invocations=0, models=0, checkpoint_loads=0, environments=0, scientific_rng_masters=0, training_episodes=0, optimizer_steps=0, evaluation_episodes=0, diagnostic_trajectories=0, source_edits=0, new_test_invocations=0. Both fits preselected; no outcome screening.",
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-folr-006.json",
+  "owner_reviews_at_binding": {
+    "surface": "primary-control owner_console reviews --json",
+    "unapplied": []
+  },
+  "control_preparation": {
+    "staging_script": "set -e\n/home/wu/.venvs/hmasd/bin/python - <<'FOLR_B03_ABSENCE'\nfrom pathlib import Path\nimport json,subprocess\ns=json.loads(\"{\\\"cwd\\\": \\\"/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1\\\", \\\"handles\\\": [\\\"folr-learned-retention-b03-retain-20260911\\\", \\\"folr-learned-retention-b03-learned-event-20260911\\\"]}\")\nassert not Path(s['cwd']).exists()\nlisting=subprocess.check_output(['git','-C','/home/wu/projects/HMASD','worktree','list','--porcelain'],text=True)\nassert ('worktree '+s['cwd']+'\\n') not in listing\nfor h in s['handles']: assert not (Path('/home/wu/.agent-tasks')/h).exists(),h\nprint(json.dumps({'fresh_worktree_and_handles':'absent','scientific_invocations':0}))\nFOLR_B03_ABSENCE\nzsh -lic 'git -C /home/wu/projects/HMASD fetch origin codex/vap-folr'\ngit -C /home/wu/projects/HMASD worktree add --detach /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 89035d8f1e3f44a07e80c08e3140283c03592efb\n/home/wu/.venvs/hmasd/bin/python - <<'FOLR_B03_CHECK'\nfrom pathlib import Path\nimport hashlib,json,subprocess\ns=json.loads(\"{\\\"source_sha\\\": \\\"89035d8f1e3f44a07e80c08e3140283c03592efb\\\", \\\"source_surface\\\": [{\\\"path\\\": \\\"experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py\\\", \\\"git_blob\\\": \\\"1509a32ad88912263c60d63bd7eba2e1da6d932c\\\", \\\"sha256\\\": \\\"775e598921ee7b09721b205624c7e7ac30e1ace177bdcb720b9120c5f4443fa3\\\", \\\"git_same_as_accepted\\\": true, \\\"working_bytes_equal\\\": true, \\\"working_text_equal_after_newline_normalization\\\": true}, {\\\"path\\\": \\\"experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py\\\", \\\"git_blob\\\": \\\"77c2fda3f3f6132ec0e9605413f569f9c029898d\\\", \\\"sha256\\\": \\\"0b95da626bab87c1cab7d38886b53291fd1a5167b66bfabf9e0dc33d5e81ed03\\\", \\\"git_same_as_accepted\\\": true, \\\"working_bytes_equal\\\": true, \\\"working_text_equal_after_newline_normalization\\\": true}, {\\\"path\\\": \\\"experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py\\\", \\\"git_blob\\\": \\\"50b1b72d4888aa3014189c8a3a05a82f767d73d0\\\", \\\"sha256\\\": \\\"29dc8e1a18426a42f3cf01f0eba03f6bfa44eeeefddeec684d6458c7139b774c\\\", \\\"git_same_as_accepted\\\": true, \\\"working_bytes_equal\\\": true, \\\"working_text_equal_after_newline_normalization\\\": true}, {\\\"path\\\": \\\"experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py\\\", \\\"git_blob\\\": \\\"006bb0573f4c4bcfbdd709ed191d30b4d7e972ed\\\", \\\"sha256\\\": \\\"ae141219443ad169c5b7f58608e6785eadbd60a8de63c2d9366716ddd19fed9a\\\", \\\"git_same_as_accepted\\\": true, \\\"working_bytes_equal\\\": true, \\\"working_text_equal_after_newline_normalization\\\": true}, {\\\"path\\\": \\\"experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py\\\", \\\"git_blob\\\": \\\"250fe41e2631335930998116c519dcc530cf0695\\\", \\\"sha256\\\": \\\"01770613528bc8e1f3b86c4cafa934dda98c9639490733a123b101c48723e54a\\\", \\\"git_same_as_accepted\\\": true, \\\"working_bytes_equal\\\": true, \\\"working_text_equal_after_newline_normalization\\\": true}, {\\\"path\\\": \\\"experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py\\\", \\\"git_blob\\\": \\\"afc1f521464019800baf3d01a0b74cf4dff43993\\\", \\\"sha256\\\": \\\"3936fd69b99d1b65c7644821848e419a9e3118120efbcc57667fba5ef5db3dc1\\\", \\\"git_same_as_accepted\\\": true, \\\"working_bytes_equal\\\": true, \\\"working_text_equal_after_newline_normalization\\\": true}, {\\\"path\\\": \\\"experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py\\\", \\\"git_blob\\\": \\\"f1a5e40a3008aed1ef2d8c49298a87c2acf9e4da\\\", \\\"sha256\\\": \\\"dc342eefc74af9be788b006dfc70ef471088380543a3d005af19b0309d57fc86\\\", \\\"git_same_as_accepted\\\": true, \\\"working_bytes_equal\\\": true, \\\"working_text_equal_after_newline_normalization\\\": true}, {\\\"path\\\": \\\"scripts/hmasd_resource_preflight.py\\\", \\\"git_blob\\\": \\\"4127cd22d2e0c4cc1ad6df85aafeb7131c3d07b2\\\", \\\"sha256\\\": \\\"cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc\\\", \\\"git_same_as_accepted\\\": true, \\\"working_bytes_equal\\\": true, \\\"working_text_equal_after_newline_normalization\\\": true}, {\\\"path\\\": \\\"scripts/run_folr_public_lifecycle_b01.py\\\", \\\"git_blob\\\": \\\"51c2d81317df75d25a80a0d913a2c09746832aa5\\\", \\\"sha256\\\": \\\"30d021557e10c25638cdc313274cae4e13cdacd75832c58ebafa87b4dad8026c\\\", \\\"git_same_as_accepted\\\": true, \\\"working_bytes_equal\\\": true, \\\"working_text_equal_after_newline_normalization\\\": true}, {\\\"path\\\": \\\"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py\\\", \\\"git_blob\\\": \\\"c12963e53b321f15045fbfcb819170f889df92aa\\\", \\\"sha256\\\": \\\"faf58e6103cbf234a711e6870481b9145b1705a0ebc3a6578efa2ad85bff4d29\\\", \\\"git_same_as_accepted\\\": true, \\\"working_bytes_equal\\\": false, \\\"working_text_equal_after_newline_normalization\\\": true}], \\\"execution_plan\\\": {\\\"node\\\": \\\"wsl_4070\\\", \\\"ssh_target\\\": \\\"hmasd-wsl-node\\\", \\\"repo\\\": \\\"/home/wu/projects/HMASD\\\", \\\"cwd\\\": \\\"/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1\\\", \\\"python\\\": \\\"/home/wu/.venvs/hmasd/bin/python\\\", \\\"device\\\": \\\"cpu\\\", \\\"dtype\\\": \\\"float32\\\", \\\"torch_threads\\\": 1, \\\"torch_interop_threads\\\": 1, \\\"supervisor\\\": \\\"/usr/local/bin/agent-task\\\", \\\"portability\\\": \\\"Linux CPU native publication only; no Windows fallback\\\", \\\"staging\\\": \\\"one exact published source worktree; binary LF control transport\\\"}, \\\"commands\\\": [{\\\"arm\\\": \\\"RETAIN\\\", \\\"handle\\\": \\\"folr-learned-retention-b03-retain-20260911\\\", \\\"cwd\\\": \\\"/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1\\\", \\\"output\\\": \\\"temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain\\\", \\\"memory_receipt\\\": \\\"temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_memory.json\\\", \\\"whole_time\\\": \\\"temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_whole_time.txt\\\", \\\"command\\\": \\\"cd /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1340s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7811 --evaluation-seed 107811 --launch-sha 89035d8f1e3f44a07e80c08e3140283c03592efb --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain'\\\", \\\"supervisor_command\\\": \\\"/usr/local/bin/agent-task run folr-learned-retention-b03-retain-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1340s bash -lc '\\\\\\\"'\\\\\\\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7811 --evaluation-seed 107811 --launch-sha 89035d8f1e3f44a07e80c08e3140283c03592efb --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain'\\\\\\\"'\\\\\\\"''\\\", \\\"status\\\": \\\"committed_plan_not_submitted\\\"}, {\\\"arm\\\": \\\"LEARNED_EVENT\\\", \\\"handle\\\": \\\"folr-learned-retention-b03-learned-event-20260911\\\", \\\"cwd\\\": \\\"/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1\\\", \\\"output\\\": \\\"temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event\\\", \\\"memory_receipt\\\": \\\"temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_memory.json\\\", \\\"whole_time\\\": \\\"temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_whole_time.txt\\\", \\\"command\\\": \\\"cd /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1340s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7811 --evaluation-seed 107811 --launch-sha 89035d8f1e3f44a07e80c08e3140283c03592efb --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event'\\\", \\\"supervisor_command\\\": \\\"/usr/local/bin/agent-task run folr-learned-retention-b03-learned-event-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1340s bash -lc '\\\\\\\"'\\\\\\\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7811 --evaluation-seed 107811 --launch-sha 89035d8f1e3f44a07e80c08e3140283c03592efb --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event'\\\\\\\"'\\\\\\\"''\\\", \\\"status\\\": \\\"committed_plan_not_submitted\\\"}]}\")\nroot=Path(s['execution_plan']['cwd'])\nactual=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip()\nassert actual==s['source_sha']\nassert not subprocess.check_output(['git','status','--porcelain'],cwd=root,text=True).strip()\nfor entry in s['source_surface']:\n assert hashlib.sha256((root/entry['path']).read_bytes()).hexdigest()==entry['sha256'],entry['path']\nfor cmd in s['commands']:\n assert not (Path('/home/wu/.agent-tasks')/cmd['handle']).exists(),cmd['handle']\n for key in ('output','memory_receipt','whole_time'): assert not (root/cmd[key]).exists(),cmd[key]\n subprocess.run(['bash','-n','-c',cmd['command']],check=True)\nprint(json.dumps({'source_sha':actual,'tracked_status':'clean','source_paths_verified':len(s['source_surface']),'namespaces':'both absent','both_literal_commands_bash_n':True,'models_or_tests':0}))\nFOLR_B03_CHECK\n",
+    "transport": "binary LF bytes to SSH bash -s; no Windows text-mode conversion",
+    "source_boundary": "only exact published workload/source; staging and syntax checks are mechanical",
+    "scientific_invocations": 0
+  },
+  "command_commit": "e3ac72da5750821e3ea67cbad98c27252161929d",
+  "scientific_intake": {
+    "valid_performance_result": false,
+    "primary": null,
+    "polarity": "none",
+    "new_completed_fits": 0,
+    "question_unanswered": true,
+    "reason": "No scientific invocation; source staging breached separate support cap",
+    "B_or_A_consumption_state": "not applicable",
+    "direction_meaning": "Original learned-family A and all previous results unchanged; no local hold/recast/Portfolio substitute",
+    "evidence_document": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_RESULT_EVIDENCE_20260911.md",
+    "intake_document": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md",
+    "brief": "docs/research/portfolio/owner/briefs/vap_folr_core/2026-09-11_FOLR_LEARNED_RETENTION_B03.md"
+  },
+  "technical_acceptance": {
+    "source_git_bytes": "accepted unchanged law;10 published paths match",
+    "new_remote_source": "not accepted; source files were absent",
+    "scientific_launch": "none submitted or accepted",
+    "monitor_adoption": "not applicable; no scientific handle",
+    "termination": "verified all5 known PIDs absent and no related process",
+    "scope_spec4_additions": "none",
+    "source_or_test_spec5_breach": "none; production/test edits0",
+    "object_support_budget_breach": true,
+    "documentary_checks": "PASS: exact source/commands, zero actual exposure/null primary, verbatim reading rule, budget breach, terminal absence, archive digest/retained six-file copy, links and owner trace; no new scientific/test invocation.",
+    "handoff_scope": "OWNER_DIRECT HANDOFF; no local cleanup request, remote reprobe, new agent/research/launch/staging/top-up"
+  },
+  "actual_final_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "new_test_invocations": 0
+  },
+  "machine_generated_final_exposure_line": "B03 FINAL ACTUAL EXPOSURE: scientific_invocations=0, models=0, checkpoint_loads=0, environments=0, scientific_rng_masters=0, training_episodes=0, native_ticks=0, optimizer_steps=0, evaluation_episodes=0, diagnostic_trajectories=0, new_test_invocations=0. Source-only preparation; no empirical result.",
+  "staging": {
+    "status": "single transaction stopped; no retry",
+    "observed_timeout_seconds": 55,
+    "orphan_parent_elapsed_seconds": 274.8100000000559,
+    "source_state_before_stop": "registered exact HEAD but no files/index; lazy blob fetch remained live",
+    "root_cause": "not established; observed HTTPS missing-blob checkout wait, with first stdout/stderr unavailable",
+    "readback_noise": "Initial status output contained11569 missing-index deletion rows; raw output archived, later diagnostic reported only counts",
+    "proof": "docs/research/candidates/vap_folr_core/evidence/2026-09-11-folr-learned-retention-b03-closeout.json"
+  },
+  "budget_reading": {
+    "known_support_lower_bound_at_stop_seconds": 308.8422538000558,
+    "known_support_lower_bound_at_this_snapshot_seconds": 315.26373200005565,
+    "support_cap_seconds": 300,
+    "native_spent_seconds": 0,
+    "native_budget_may_not_pay_support_overrun": true,
+    "one_enclosing_remote_parent_git_elapsed_seconds": 274.8100000000559,
+    "double_count_rule": "This274.81 replaces the55s client timeout; nested checkout/fetch/helper lifetimes are not added. SSH setup, fetch before parent start, teardown and unitemized terms remain unknown.",
+    "closure_after_stop": "Root explicitly authorized termination verification, evidence publication and scoped closeout only; no renewed allowance",
+    "snapshot_limit": "Includes retained command receipts through passed documentary consistency/Git-state checks. This write, final Git publication, relay and Root integration remain additional/unmeasured; the fixed stop snapshot is unchanged."
+  },
+  "owner_handoff": {
+    "instruction": "后续不要再开启新的DM 现有DM进入handoff",
+    "route": "Root native task to original FOLR DM",
+    "scope": "Necessary safe termination verification/preservation and ready technical handoff publication only; no new agent, staging retry, scientific launch, top-up or Pro question.",
+    "after_publication": "one relay HANDOFF, then stop",
+    "pending_root_actions": [
+      "Accept/integrate the returned ready source/card 89035d8f1 and command e3ac72da5 plus technical handoff commits; input sync f41f59543 is not a deliverable cherry-pick.",
+      "Reconcile the retained direction checkout and local six-file control copy/committed archive under the owner HANDOFF boundary; no automatic successor.",
+      "Preserve zero scientific invocations, the null primary and known support cap breach independently of prior B01/B02 performance."
+    ],
+    "no_required_remote_collection": true,
+    "no_pending_scientific_handle_or_monitor_adoption": true
+  },
+  "owner_reviews_at_closeout": [],
+  "handoff_delivery_at_commit": "Prepared for one READY_HANDOFF through live relay; actual send receipt is retained by the relay and native final after publication."
+}
