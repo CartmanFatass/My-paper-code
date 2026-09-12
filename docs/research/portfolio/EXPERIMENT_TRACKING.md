@@ -5,7 +5,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC | Complete immutable uniform→cluster response integrated at mainfa3ad35a8; original DM is performing scientific/spec intake | Publish conforming direction decision and continue its bounded selected action; no repeat consultation or third unchanged pair |
+| ACVC | Original-node intake accepted at main4ac951c14: one fresh cluster-law C-fit with C/F/own-dwell panels selected; direction ACTIVE, no empirical grant | Portfolio DM prepares a separate investment request after the in-flight Portfolio round; no repeat consultation or third training-F pair |
 | MGTAP | Original Convergence response accepted: one fresh TOP/intact-DENSE B selected; intake integrated at main6f506e474, direction remains ACTIVE | Portfolio decides the pending whole-object investment (450s/arm, 1200s complete); no experiment before allocation |
 | FSD | D0 finished exit0 in459s; preselected I handle `fsd-uav-renewal-batch-b02-771303-I-20260912` is running remotely at source8ea629595 with confirmed Monitor goal adoption | Monitor delivers I terminal notice to Root/DM; DM collects and intakes the complete pair under native2700/support300/complete3000; no retry/sixth pair |
 | RCLE | Complete immutable post-B07 response integrated at main7d9434fe5; original DM is performing scientific/spec intake | Publish the conforming direction decision; zero ungranted implementation/numeric work, no repeated B07 or added fit |

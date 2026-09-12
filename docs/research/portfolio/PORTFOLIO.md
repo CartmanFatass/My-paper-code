@@ -11,7 +11,7 @@
 Root当前实际工作集5/5：ACVC、MGTAP、FSD、RCLE、FOLR五个ACTIVE方向的原DM均已恢复，继续下一有界对象或方向判断。最近有限对象已完成，但没有Portfolio决定停止这些方向；cleanup与Transport不另占槽位。
 FSD为一对I1280/authentic-D0，D0≤900、I≤1800、native≤2700、support≤300、完整≤3000秒；FOLR仅一次原节点post-B03 Convergence及完整intake，零实验额度、完整成本未知。MGTAP1200未分配。
 N/R选择已经intake；FSD进入新pair执行流程，RCLE进入一次原节点问题起草。新的方向发现/注册及独立MGTAP T投入请求已由provider exact-once接受并生成中；该请求已用各方向最新handoff、DIRECTION和intake刷新旧方向事实。
-FSD预选I臂已远端运行并获Monitor goal接管；ACVC、FOLR与RCLE进入原DM响应intake，MGTAP有Portfolio投入路由。严格推进计数5/5，不以排队意图补槽。
+FSD预选I臂已远端运行并获Monitor goal接管；ACVC已完成方向intake并进入Portfolio投入起草，FOLR与RCLE在原DM响应intake，MGTAP有在途Portfolio投入裁决。严格推进计数5/5，不以排队意图补槽。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
 “待选择”是尚未分配的未来工作，不能冒充已运行，也不是永久禁入。
@@ -19,7 +19,7 @@ FSD预选I臂已远端运行并获Monitor goal接管；ACVC、FOLR与RCLE进入�
 | 方向 | 最新证据/科学状态 | 当前实际工作 | 下一步及边界 |
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
-| [ACVC](../candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md) | B02再次DOWN：train-F相对train-C共同F评估−0.0573422 J，50/64 adverse；两次局部观察均保留，仍不作总体结论。 | uniform→cluster部署问题已由Transport exact-once发送，provider生成中。 | 完整响应回原DM intake；不做第三个原样pair或重开旧learned-gate。 |
+| [ACVC](../candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE.md) | 原节点选择一个fresh cluster-law C-fit，同一checkpoint做C/F/own-dwell三组64-world panel；历史正负证据均保留。 | intake已集成main4ac951c14，完整投入未知且尚未拨款；Portfolio DM正在起草独立投资请求。 | Portfolio决定成本上限、投入与排序；不重复咨询、不做第三个training-F pair。 |
 | [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md) | C pair完整验收为WITHIN_MEI：RAW=STRUCT=11.15、32/32零差，均低于REQUEST_ONLY12.45；只支持本对象的局部零差异。 | 已购pair结束，证据已保全至main9ca150856；无活动科学工作。 | 仅完成已列明的scoped reclamation；无retry、第二个S或自动successor。 |
 | [CRTO](../candidates/commitment_residual_triggered_options/DIRECTION.md) | P72 PRO_FINAL保留B08测试的selected-panel family PARK；finite-zero修复已集成。 | 无 | 新的具体方向选择；没有自动successor。 |
 | [DISH](../candidates/degraded_incumbent_shadow_handover/DIRECTION.md) | **更新：B08 HALF_RETAIN−REPLACE为−6.5 ticks，WITHIN；REPLACE默认。post-B08已PARK retained-A03 arrival-bridge retention家族。** P62/DIRECT只是更早历史。 | 无 | 具体receipt-to-control研究问题或对独立pair不确定性的实际决策需求；新选择才续行，不要求完整机制证明。 |
