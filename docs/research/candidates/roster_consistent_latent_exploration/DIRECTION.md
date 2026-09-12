@@ -19,41 +19,43 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 ## Current scientific question
 
-Fresh cycle
-`2026-08-29.8-successor-01a04a02-rcle-public-containment-03` asks for the exact
-containment boundary of public-plan continuity under roster churn. When CARRY's
-complete public maximum-overlap/minimum-travel repair is a legal member of a
-competent REPLAN class with identical public history, objective, actions,
-dynamics, clocks, and useful computation, can CARRY have any direct physical
-recovery or service-nonharm value over that class?
-
-The cycle first derives the finite public-history containment theorem and its
-failure assumptions. It activates a fresh bounded finite host family only if a
-same-information, same-objective exception survives without comparator
-handicap. Finite-budget optimization, partial observability, private setup
-state, changed objectives, APFI event-order identification, and DISH controller
-handover are explicit separate objects.
+Can a fresh FLEX learner, retaining the legal .99-nearest prior and full native
+roster-change task, improve its own initialization and exceed attained
+INDEPENDENT-NEAREST at final1000 when complete manager/claim score gradients are
+separately normalized and combined with equal weight? This is a finite whole-recipe
+service question. An advantage over joint100, identified gradient conflict,
+variance reduction, stable superiority and transfer are outside this comparison.
 
 ## Current position
 
-This WORK ends at `SCOPE_FROZEN` / `TERMINAL_GAP`. Two independent result-blind
-local routes provisionally agreed that complete functional policy containment
-makes the exact CARRY trajectory law attainable by REPLAN and that no genuine
-same-information counterexample survives. They sharpened the candidate theorem
-to attainable-set containment and a class-value or competent-selector claim,
-not nested Pareto fronts or a claim about every arbitrary implementation.
+The original Convergence response of 2026-09-12 retains the exact equal-unit
+manager/claim candidate for a later separately funded, one-fit service B, as a
+close call against holding this named route. The complete response and its
+scientific/specification check are accepted in
+[RCLE_CHANNEL_NORMALIZATION_CONVERGENCE_INTAKE_20260912.md](RCLE_CHANNEL_NORMALIZATION_CONVERGENCE_INTAKE_20260912.md).
+It selects own initialization and attained nearest as comparators, without a
+fresh joint100 arm. This direction judgment adds no present implementation or
+numerical allowance and changes no Portfolio lifecycle, priority or recast count.
 
-The required Pro Innovator barrier was not validly completed. Primary operation
-`d330f60e-5ae3-4aed-97e4-b9e2814ea086` and the sole owner-authorized
-new-conversation replacement `8c0fa78b-501b-4e02-842f-ade354d29a06` each
-terminalized `SENT_INPUT_MISMATCH`; their separate provider conversations are
-isolated and no response archive exists. The shared replacement boundary is
-exhausted and no live Effect remains.
+The selected rule is `d = u(g_M) + u(g_C)`, then `theta -= .02*u(d)` when d is
+nonzero; exact cancellation leaves parameters fixed. Both derivatives use the
+same 64-episode graph and complete 26,161-scalar FP64 inventory; shared tensors
+receive both contributions once, and the ordinary baseline update follows.
+There is no factor 100. Near cancellation or a weak noisy channel can receive
+the full step, so this is an untested allocation heuristic rather than a repair
+or an unbiased reformulation. Native reward, available information, physical
+survivor/newcomer/departure ownership and four-tick claims remain protected.
 
-The local theorem and counterexample observations remain provisional rather
-than accepted direction science. No synthesis, finite enumeration, CM, source
-change, result command, learning, or Convergence was reached. This transport-
-limited gap has no scientific decision impact and no lifecycle recommendation.
+B06 remains one valid fit with Delta_ref=-.00575764973958 and
+G_U=-.000107828776042, eight reference U deficits, mixed local learning signs,
+five reference F harms and 2012/2048 failure-coded tau40 outcomes. Earlier W100/W1
+native learning and four B06 initialization-cell gains are the strongest support
+against a broad unlearnability claim. Supplied-prior competence, finite exposure,
+update allocation and partner co-adaptation remain alternatives; no current cause
+is identified. A separately funded single fresh final1000 observation could
+inform this recipe's usefulness, with conditional scenario uncertainty, .05 U
+MEI, all native consequences and the existing absence of tuned headroom retained.
+The historical sections below preserve the earlier objects and their own limits.
 
 ## Portfolio recast — 2026-08-30
 
