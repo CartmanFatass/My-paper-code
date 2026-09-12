@@ -1,0 +1,19 @@
+# ACPS-B01 execution and technical acceptance
+
+Original DM `/root/dm_acps_start`; `codex/acps`, `C:/Projects/HMASD-worktrees/codex-acps`; clean authoring base `2492dcb06`. The same branch is retained through launch, collection and closeout. Source/card maps are in [the card](ACPS_B01_SCIENCE_CARD_20260912.md). Shared core/defaults are unchanged.
+
+## Focused verification before scientific launch
+
+One focused check set: first local invocation reported3 passing changed physical/input/RNG/replay checks and4 pytest-fixture setup errors because the new basetemp parent was absent. Tool wall4.4688161s. After creating only the parent directory, the previously unexecuted four primary-rule/serialized-consumer cases passed in2.7782426s invoked wall. No passed semantic check was repeated. Total known local test wall7.2470587s; no scientific fit/evaluator, timing pilot or full-model smoke occurred. The test's real-environment calls were bounded physical/feedback checks, and its backward pass used synthetic replay-shaped inputs, not training episodes. Only the one model test constructs fresh torch actor/critic objects (two pairs) within support, distinct from the future two fits.
+
+The initial test+cleanup combined PowerShell command was rejected before execution with `blocked by policy`. A separate fully qualified, resolved, exact-target recursive Remove-Item was also rejected before execution. No escalation or alternate-language deletion was attempted. Creator-owned scratch currently retained: `C:/Projects/HMASD-worktrees/codex-acps/temp/directions/actuator_conditioned_partial_sharing/test/acps-b01-20260912`. This is a cleanup/runtime fact and does not change scientific polarity. DM remains cleanup owner; a permitted scoped removal will be reconciled before declaring closeout.
+
+Independent Astra/high reviewer `/root/dm_acps_start/review_acps_b01` returned: no material scientific-correctness finding, no uncarded§4 addition; physical/proposal/history boundary, equal118 inputs, common/private RNG, exact1,340 residual parameters, recurrent replay/gradient and512/32/1,024 workload match. New source328 lines, runner49. Review was read-only, no runtime tests or scientific invocation; known review shell wall2.99s, other overhead unmeasured.
+
+Reviewer flagged a resource-accounting fact: `study.py` final internal check precedes final summary rewrite/runner printing/actual exit, and the admission is included only when `ACPS_ARM_WALL_START` is exported before preflight. DM accepts the source and will use outer `/usr/bin/time` over the exact shell payload, with the start timestamp exported before admission. The resulting whole-arm receipt includes the final rewrite/print/actual exit; internal `elapsed_wall` is explicitly a partial observation, never the complete450s verdict. This is no observed breach. The exact launch envelope is published after the source commit. All future boundary facts remain to be checked; no native feasibility/result is claimed.
+
+## Support accounting and current boundary
+
+Worktree creation7.4686835s, local tests7.2470587s, initial owner-review read4.0140844s are directly timed invocation walls. Other short source reads and edits have partial tool timestamps; complete source-definition/agent/Root-integration/monitor/cleanup tails remain unmeasured. Unknown is not zero and no complete-support compliance verdict is inferred. These support calls are not charged again as native. No actual scientific source run, model, optimizer or native result root has been accepted yet.
+
+Per-arm startup/admission plus all native phases will be measured by an outer process wall receipt and an inside-run450s deadline; each arm has its own accepted invocation. Required preflight remains adjacent on the actual remote node. Exact published SHA/cwd/commands/handle and received Monitor state will be appended at the launch stage. The selected companion arm remains preselected regardless of first score.
