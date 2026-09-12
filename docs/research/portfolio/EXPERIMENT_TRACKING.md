@@ -6,16 +6,15 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACVC post-C01 materials | Direction input accepted/main e85cb3a95 and delivered to Portfolio DM; recommends one original-Convergence question, with all fit and1200-second figures explicitly unapproved | Portfolio investment decision, then original Convergence selection if funded; no active ACVC execution now |
-| FOLR B03 | Both arms terminal exit0: RETAIN852s supervisor/818.712s logged work; learned-event899s/864.776s. Monitor delivered both notices and completed its goal with active_set empty; original DM collecting | Complete two-arm technical acceptance, paired scientific intake and full cost accounting |
-| VNFC conditional fresh pair | Fresh invocation `vnfc-b03-credit-20260912-01` completed35 logged rounds per arm (at least13,440 joint transitions/2,240 optimizer steps), then SIGSEGV/exit139 after104.89s; no final primary. Monitor delivered notice and completed its goal; original DM collecting/quarantining | Technical acceptance and bounded relevant diagnosis; allocation ends with no scientific score or automatic retry |
-| RCLE original Convergence request | One exact Send completed naturally and archived/main189fa6dc8; response SHA256 `1dc39fa0...34d4f6`,41605 bytes. Replacement original DM is checking full scientific/spec conformance | Complete direction intake, then execute only the conforming authorized continuation |
+| FOLR B03 | Final paired intake accepted/main47d75d7f9: RETAIN0.947578125, LEARNED_EVENT−0.267968750, d_LR−1.215546875 ⇒ RETAIN_ABOVE_MEI; native1750.81s within cap; finite grant ended | Scoped terminal-copy cleanup only; no successor or active scientific work |
+| VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
+| RCLE original Convergence request | Final intake accepted/main2f80926ae: retain exact equal-unit candidate for a later separately funded single fit; no current implementation/numerical allowance | Future Portfolio investment only; consultation complete and no active RCLE work |
 | Portfolio marginal investment | Fixed current packet integrated/main f91aa3827; original bound conversation reconciled, exact1928-byte prompt accepted once under6 Pro/Pro5-of-5; generation active | Observe same generation, archive immutable response, then original Portfolio author conformance/intake |
 
-Direction chains3/5: FOLR running, VNFC under active native continuation, and RCLE has an accepted
-Pro generation. ACVC's bounded authoring return is complete and therefore no longer counts. Two
-FOLR handles count once for that direction. The accepted Portfolio generation is cross-direction
-work and not an extra direction; its decision must supply ready independent replacements for the
-two open slots.
+Direction chains0/5: FOLR, VNFC and RCLE have all reached accepted clean scientific boundaries;
+their remaining scoped cleanup does not count as research advancement. ACVC authoring is also
+complete. The accepted Portfolio generation is cross-direction work and not an extra direction;
+its decision must provide the next ready independent working set.
 
 ## Current routing
 
