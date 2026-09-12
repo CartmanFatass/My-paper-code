@@ -1,0 +1,53 @@
+{
+  "observed_utc": "2026-09-12T21:35:07.503632+00:00",
+  "source_sha": "8ea629595da592dfce9b7774341863a7115c7cef",
+  "targets": {
+    "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771303-20260912": {
+      "exists": true,
+      "resolved": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771303-20260912",
+      "bytes": 44134794,
+      "files": 2565,
+      "git_registered": true,
+      "cleanup": "pending Root retention acceptance"
+    },
+    "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771303-20260912": {
+      "exists": true,
+      "resolved": "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771303-20260912",
+      "bytes": 1208,
+      "files": 4,
+      "git_registered": false,
+      "cleanup": "pending Root retention acceptance"
+    },
+    "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771303-D0-20260912": {
+      "exists": true,
+      "resolved": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771303-D0-20260912",
+      "bytes": 2311,
+      "files": 6,
+      "git_registered": false,
+      "cleanup": "pending Root retention acceptance"
+    },
+    "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771303-I-20260912": {
+      "exists": true,
+      "resolved": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771303-I-20260912",
+      "bytes": 2299,
+      "files": 6,
+      "git_registered": false,
+      "cleanup": "pending Root retention acceptance"
+    }
+  },
+  "removed": false,
+  "root_retention": "pending acceptance of both current archives and 22 original raw files",
+  "tracked_status": "",
+  "ignored_files": [
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771303/D0/manifest.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771303/D0/summary.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771303/D0/training.jsonl",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771303/I/manifest.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771303/I/summary.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771303/I/training.jsonl"
+  ],
+  "shared_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-fsd",
+  "shared_remote_repository": "/home/wu/projects/HMASD",
+  "cleanup_owner": "/root/dm_fsd_d_pair",
+  "cleanup_event": "Root retention acceptance followed by exact four-target terminal cleanup"
+}

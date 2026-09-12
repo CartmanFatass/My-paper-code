@@ -1,0 +1,83 @@
+{
+  "accepted_utc": "2026-09-12T21:37:38.779003+00:00",
+  "status": "technically accepted",
+  "arm": "I",
+  "source_sha": "8ea629595da592dfce9b7774341863a7115c7cef",
+  "checks": {
+    "counts": {
+      "model_constructions": 2,
+      "training_starts": 1,
+      "checkpoint_loads": 0,
+      "training_transitions": 40000,
+      "stored_training_transitions": 40000,
+      "training_episodes": 80,
+      "update_stages": 5,
+      "training_agent_step_batches": 2500,
+      "evaluation_steps": 16000,
+      "evaluation_episodes": 32,
+      "evaluation_agent_step_batches": 500
+    },
+    "optimizer_calls": {
+      "coordinator": 315,
+      "discoverer_actor": 11250,
+      "discoverer_critic": 11250,
+      "team_discriminator": 75,
+      "individual_discriminator": 300
+    },
+    "last_relative_initialization_displacement": {
+      "coordinator": 0.04179306809537966,
+      "discoverer_actor": 0.4328064163429457,
+      "discoverer_critic": 0.16021362325998884,
+      "team_discriminator": 0.027174669156643065,
+      "individual_discriminator": 0.04294262142079833
+    },
+    "learner_precision": "float32",
+    "reward_return_precision": "float64",
+    "coordinator_cost_law_steps": 315,
+    "source_bound_publication": true,
+    "prior_same_arm_config_match_except_seed": true,
+    "manifest_identity_match": true,
+    "training_jsonl_exact_summary_match": true,
+    "all_modules_updated_and_moved": true,
+    "fresh_admission": {
+      "assessed_at": "2026-09-12T21:15:41.405428Z",
+      "available_physical_bytes": 15631953920,
+      "captured_at": "2026-09-12T21:15:41.405149Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15631953920,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "sole_complete_endpoint": true,
+    "evaluation_optimizer_calls": {
+      "coordinator": 0,
+      "discoverer_actor": 0,
+      "discoverer_critic": 0,
+      "team_discriminator": 0,
+      "individual_discriminator": 0
+    }
+  },
+  "complete_command_cost": {
+    "elapsed_seconds": 987.99,
+    "peak_rss_kib": 3492180.0,
+    "user_seconds": 3872.92,
+    "system_seconds": 41.28,
+    "exit_status": 0.0,
+    "aggregate_cpu_seconds": 3914.2000000000003
+  },
+  "supervisor_duration_seconds": 988,
+  "I_mean_native_J": 0.4946649968879237,
+  "source_pair_and_independent_reduction_agree": true,
+  "archive_sha256": "dc0b3fc50bedca2d617a7c6fad77d7a765c71625880a29df29e7f1badb3eac26",
+  "raw_file_count": 11,
+  "Monitor_actual_adoption_terminal_and_empty_goal_complete": true,
+  "decision": "accept complete I and perform the single frozen paired scientific intake",
+  "new_scientific_invocations_during_collection": 0
+}
