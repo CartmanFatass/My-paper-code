@@ -21,7 +21,7 @@ paper registry currently contains synthetic fixtures; exclude these from scienti
 retrieval and do not present them as real mechanism evidence. The owner's unified-library
 integration is assigned; this document does not claim it is already complete.
 
-- **My-lib — existing retrieval interface:** `/mnt/c/Projects/My-lib/README.md`
+- **My-lib — existing retrieval interface:** `C:/Projects/My-lib/README.md`
   documents the existing local CLI and mechanism/evidence records. Use its existing
   verified real-collection index and supported search interface. A CLI search uses the library's Innovation
   Brief and explicit collection selection; derive these from the current question,
@@ -29,7 +29,7 @@ integration is assigned; this document does not claim it is already complete.
   source pointers, conditions and differences. No new index, service or acquisition
   pipeline is needed for HMASD integration.
 - **Inst-sci — formal source corpus:** the formal library is
-  `/mnt/c/Projects/Inst-sci/papers/MyLib/`; start with `llm-index/catalog.v2.jsonl`.
+  `C:/Projects/Inst-sci/papers/MyLib/`; start with `llm-index/catalog.v2.jsonl`.
   Search title, algorithm, setting, benchmark or mechanism terms with bounded output.
   Read a candidate's full metadata record in `metadata/v2/papers.v2.jsonl` when
   needed, including quality warnings and field provenance. Read relevant pages or

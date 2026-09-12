@@ -1,18 +1,16 @@
 # HMASD collaboration and authority
 
+OWNER_DIRECT2026-09-12: Current control uses Windows C:/Projects/HMASD and PowerShell.
+Read live task endpoints from that checkout's .codex/hmasd-*.toml and
+docs/project/ROOT_OPERATIONS.md. Superseded task/path literals in fixed evidence are
+not dispatch routes. Keep current control documents free of obsolete state snapshots.
+
+
 This file governs repository work on every agent runtime the owner uses (Codex, Claude Code, or
 another). The body is runtime-neutral. Runtime-specific mechanics are in the two appendices.
 Directory conventions live beside the code in one `AGENTS.md` per area (`experiments/`,
 `ha_ctse_process/`, `envs/`, `tests/`, `scripts/`, `docs/`), each imported by a one-line `CLAUDE.md`;
 `docs/project/PROJECT_MAP.md` indexes them. Nearest file wins on a conflict.
-
-OWNER_DIRECT 2026-09-12 — local WSL paths: daily authoring uses the current native
-checkout under `/home/fires/projects/`; resolve its root with `git rev-parse --show-toplevel`.
-The live primary control checkout is `/home/fires/projects/HMASD`; read current task endpoints
-there when an assignment requests them. Windows originals are rollback copies. Remote
-`/home/wu/` execution paths and historical evidence literals keep their original meaning.
-Current OS boundaries are listed in `/home/fires/projects/HMASD/docs/migration/WSL_PATHS_20260912.md`.
-This infrastructure migration does not resume paused research.
 
 ## 1. Operating model
 
@@ -183,8 +181,16 @@ none of it is a §11.4 launch condition, and ladders already open continue.
 
 ## 3. Blocker rule
 
-A connector, evidence, or transport blocker means no Pro decision was formed. It never transfers
-final authority to a local model, and it must not stall the loop:
+A connector, evidence, or transport status alone does not establish whether a Pro decision was
+formed. Reconcile the bound request and full response first; a verified complete response goes
+to its designated DM for intake even if a chat receipt or local status reports a blocker.
+If no decision was formed, the blocker never transfers final authority to a local model:
+
+Transport retains recovery of the same request, prompt and binding. Proven ineffective clicks
+permit a concrete repaired attempt under the Transport skill; uncertain acceptance stops Send,
+not reconciliation or observation. Preserve prior attempts and blocker receipts, and clear
+previous-round observations when binding a successor. Root advances independent work and routes
+the eventual complete response; a blocker return does not close the recovery assignment.
 
 - **Object tier**: the DM takes the recommended option as a provisional decision labelled
   `PRO_BLOCKED / LOCAL_PROVISIONAL`, restricted to reversible actions, queues the round for retry,
@@ -336,9 +342,15 @@ Resume model: commit and push before every launch; launch every result-bearing r
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
 configured `agent-task` supervisor; OWNER_DIRECT 2026-09-09 assigns accepted-experiment observation
 to one reusable independent Luna/low task with a goal covering its multiple adopted experiments.
-DM/Operator directly notifies that monitor after launch acceptance; the monitor establishes or
-continues its goal, while the DM stops routine polling and retains collection and technical acceptance.
-Record dispatch and actual adoption separately; failed delivery returns for same-handle recovery.
+DM/Operator directly notifies that monitor after launch acceptance. Every `MONITOR_ADD` assignment
+explicitly requires the monitor to read `get_goal`, continue the matching unfinished goal or call
+`create_goal` without a token budget, and keep the accepted handle in that goal until its terminal
+notice reaches Root. The monitor reports the actual goal state in `MONITOR_ADOPTED`; message delivery
+alone is not goal establishment or adoption. DM stops routine polling only after that confirmation
+and retains collection and technical acceptance. When the last handle and pending notice leave the
+active set, the monitor sends `MONITOR_GOAL_COMPLETE` to Root before completing the goal. Record
+dispatch and actual adoption separately; failed delivery or missing goal confirmation returns for
+same-handle recovery.
 Independent Transport observes Pro requests
 (`docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).
@@ -510,13 +522,12 @@ appendix and completed historical tasks remain unchanged.
 
 
 - Native custom subagents are registered in `.codex/config.toml`: Direction Manager,
-  Implementer, Scout, Reviewer, Critic, Verifier and Operator. Root defaults to
-  `gpt-5.6-sol/low`; DM to `gpt-6-astra/max`; Implementer to `gpt-5.6-sol/medium`;
+  Implementer, Scout, Reviewer, Critic, Verifier and Operator. Root follows the Codex app model/effort selection; DM defaults to `gpt-6-astra/max`; Implementer to `gpt-5.6-sol/medium`;
   Reviewer to `gpt-6-astra/high` with read-only access. Other specialist model settings
   are unchanged. CM, Routine Implementer and the dedicated Terra/high workflow-outsource
   path are retired. Configurations take effect after restart; Codex App provides native
   task/message lifecycle behavior. Do not add reload probes, delivery test services or timers.
-- The existing Root task remains the execution coordinator and sole receipt parent.
+- The current Root task in live configuration is the execution coordinator and sole receipt parent.
   Transport uses Luna/high; the shared experiment monitor and completion Relay retain
   Luna/low. Read their existing `.codex/hmasd-*.toml` endpoints; never replace or rebind
   accepted work merely because the role structure changed.

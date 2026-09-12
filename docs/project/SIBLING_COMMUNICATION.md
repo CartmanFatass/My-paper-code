@@ -1,5 +1,11 @@
 # Native agents and Transport communication
 
+OWNER_DIRECT2026-09-12: Current control uses Windows C:/Projects/HMASD and PowerShell.
+Read live task endpoints from that checkout's .codex/hmasd-*.toml and
+docs/project/ROOT_OPERATIONS.md. Superseded task/path literals in fixed evidence are
+not dispatch routes. Keep current control documents free of obsolete state snapshots.
+
+
 Root coordinates execution within accepted decisions. Use native `collaboration` tools for its agent
 tree and `send_message_to_thread` for the independent Transport task in `.codex/hmasd-transport.toml`.
 ROOT_OPERATIONS.md defines responsibility and observation. Root handles operational replacement and integration; the designated DM prepares Portfolio
@@ -107,6 +113,12 @@ the Relay as a second copy or address native owner names as app task IDs. Root r
 original native owner with `followup_task` when collection/intake remains, deduplicating any
 already completed native work. Cross-task messages omit model/effort overrides. A terminal
 notification's accepted app delivery is distinct from DM technical or scientific acceptance.
+
+Every `MONITOR_ADD` explicitly instructs the task to call `get_goal`, continue the matching
+unfinished goal or create a new unbudgeted goal, and keep the handle active through accepted
+terminal delivery. `MONITOR_ADOPTED` reports that actual goal state. After the final terminal
+notice, the monitor sends `MONITOR_GOAL_COMPLETE` with an empty active set to Root before marking
+the goal complete. Cross-task send acceptance alone never proves these goal operations occurred.
 
 ## Independent Transport (existing receipt route)
 
