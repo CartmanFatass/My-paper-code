@@ -6,14 +6,15 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACVC F | Both sourcea4c24e4e handles terminal exit0 and their Monitor goal is complete; owning DM reconciled C=train-C/deploy-F and F=train-through-F/deploy-F and is publishing paired intake | Integrate one complete paired intake, cost and cleanup; no retry or extra panel |
-| CBSC C | Handle `cbsc-public-stream-b01-20260912` terminal exit0 after90s with RAW/STRUCT/paired summaries present; Monitor delivered notice and completed goal, active_set empty; original DM collecting | Technical acceptance, frozen scientific intake, cost/preservation and scoped cleanup; reconcile lingering tmux flag without retry |
+| CBSC C | Complete intake accepted at main9ca150856: RAW=STRUCT11.15, exact-zero32/32, WITHIN_MEI and below REQUEST_ONLY12.45; native90.27s, evidence preserved, purchased pair ended | Scoped reclamation only; no retry, second S or active scientific work |
 | FOLR B03 | Final paired intake accepted/main47d75d7f9: RETAIN0.947578125, LEARNED_EVENT−0.267968750, d_LR−1.215546875 ⇒ RETAIN_ABOVE_MEI; native1750.81s within cap; finite grant ended. Remote roots removed; three archived local duplicates retained after PowerShell policy rejection | No successor or active scientific work; local retention is an engineering restriction, not a scientific blocker |
 | VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
 | RCLE R | Handle `rcle-b07-equal-unit-s27-20260912` terminal exit2 after338s; tmux inactive and Monitor goal complete. TECHNICAL_STOP is an attributable scripted-action roster-column mismatch; no scientific result | Same DM performs bounded repair/acceptance under unchanged900native/600support/1500total and frozen object; no added fit or semantic change |
 | Portfolio two remaining chains | Exact request at main13d604c4d bound to current Portfolio conversation; Transport verified bytes/binding and provider accepted the unique Send, generation in progress. D+P, renewed M and no-addition remain options; no grant yet | Transport observes/archives once; original Portfolio DM checks the complete response |
 
-Direction chains3/5: ACVC F, CBSC C and RCLE R are independently active. Two vacancies remain
-without automatic grants; M and all other unselected work stay unfunded.
+Direction chains2/5: ACVC F and RCLE R remain independently active. CBSC C completed and released
+its slot. The in-flight Portfolio request can select at most two chains, so a third vacancy is now
+recorded for the next rolling decision; no queued intention is counted as active work.
 
 ## Current routing
 
