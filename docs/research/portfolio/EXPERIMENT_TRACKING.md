@@ -6,7 +6,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACVC F | Portfolio F=yes/main2667cfc79; original DM actively owns faithful implementation, review, one fresh two-fit pair and intake;270/arm,540native,660support,1200total | Bind accepted source/identity/commands, launch remote-first with Monitor adoption, collect/intake once |
-| CBSC C | Portfolio C=yes/main2667cfc79; original S DM actively owns implementation, review, one fresh RAW/STRUCT pair and intake;600/arm,1200native,600support,1800total | Bind accepted source/identity/commands, launch remote-first with Monitor adoption, collect/intake once |
+| CBSC C | Remote handle `cbsc-public-stream-b01-20260912` running from source2717796f, pid3376051; Monitor active unbudgeted goal confirmed adoption;600/arm,1200native,600support,1800total | Monitor terminal delivery, then original-DM collection and complete intake |
 | FOLR B03 | Final paired intake accepted/main47d75d7f9: RETAIN0.947578125, LEARNED_EVENT−0.267968750, d_LR−1.215546875 ⇒ RETAIN_ABOVE_MEI; native1750.81s within cap; finite grant ended. Remote roots removed; three archived local duplicates retained after PowerShell policy rejection | No successor or active scientific work; local retention is an engineering restriction, not a scientific blocker |
 | VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
 | RCLE R | Portfolio R=yes/main2667cfc79; original replacement DM actively owns exact equal-unit implementation, review, one final1000 fit and intake;900native incl nearest,600support,1500total | Bind accepted source/identity/commands, launch remote-first with Monitor adoption, collect/intake once |
@@ -21,7 +21,7 @@ without automatic grants; M and all other unselected work stay unfunded.
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
 | Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; latest VNFC goal completed after exit139 notice, active_set empty |
+| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; active goal owns CBSC handle `cbsc-public-stream-b01-20260912` |
 | Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
 Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the
