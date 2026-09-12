@@ -8,7 +8,7 @@
 本表是当前控制面状态。登记为15 ACTIVE、7 PARKED，
 未作新的生命周期、优先级或科学裁决。Oracle建议当前版已接受并发布main a607eefb3；Portfolio DM继续准备必要的新投入选择。
 
-当前三条方向DM链推进：ACVC后续问题材料、FOLR同一B03恢复、VNFC条件任务的有限工程恢复。
+当前三个方向实际推进：FOLR同一B03运行、VNFC条件fresh pair连续准备、RCLE同一Pro请求生成。ACVC后续问题材料已完成，不再按在途计数。
 RCLE由新Windows Transport接手准备，旧执行者已确认停止且零新Send；FOLR原定两个arm已实际运行并由新Monitor采用。
 因此方向工作集为3/5，两个空槽待就绪任务补入；这不是三个运行中实验。Portfolio DM的跨方向核对不另计方向槽位。
 新Monitor与Relay已亲自回报Windows可用；Monitor已建立非空未完成goal，持有两个FOLR运行句柄。新Transport已验证Windows及CUA工具，同请求恢复已授权。
@@ -19,7 +19,7 @@ RCLE由新Windows Transport接手准备，旧执行者已确认停止且零新Se
 | 方向 | 最新证据/科学状态 | 当前实际工作 | 下一步及边界 |
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
-| [ACVC](../candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#owner-directed-handoff) | 五个fit完整，冻结计算qualified JOINT_ABOVE_MEI；14288810c完整交接已合入main8cfd0d92f并随合并推送。 | 最终科学intake/DIRECTION/预测已接受集成77c17d111；DM正为Portfolio提供原Convergence下一问题材料，无实验。 | 接受最终验收与保留清单；C已满足消费条件，无第六fit或自动successor。 |
+| [ACVC](../candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#owner-directed-handoff) | 五个fit完整，冻结计算qualified JOINT_ABOVE_MEI；最终科学intake/DIRECTION已接受集成77c17d111。 | 后续问题材料已接受/main e85cb3a95并交Portfolio DM；无新fit或活动执行，候选预算尚未批准。 | Portfolio若投资，再由原`em:acvc:convergence`选择是否比较“训练through F”与“训练C、部署F”；无第六fit或自动successor。 |
 | [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_P47_TECHNICAL_UNBLOCKING_INTAKE_20260911.md) | P47技术intake完成；retained52源码/AST核对完成，未建立可归因修复，retained52未运行。 | 无；Portfolio DM核对候选续行。 | 具体最小修复或可信替代执行路径及所需科学选择；不把完整历史根因重建当通用门槛。现有source-only授权不含retained52运行。 |
 | [CRTO](../candidates/commitment_residual_triggered_options/DIRECTION.md) | P72 PRO_FINAL保留B08测试的selected-panel family PARK；finite-zero修复已集成。 | 无 | 新的具体方向选择；没有自动successor。 |
 | [DISH](../candidates/degraded_incumbent_shadow_handover/DIRECTION.md) | **更新：B08 HALF_RETAIN−REPLACE为−6.5 ticks，WITHIN；REPLACE默认。post-B08已PARK retained-A03 arrival-bridge retention家族。** P62/DIRECT只是更早历史。 | 无 | 具体receipt-to-control研究问题或对独立pair不确定性的实际决策需求；新选择才续行，不要求完整机制证明。 |

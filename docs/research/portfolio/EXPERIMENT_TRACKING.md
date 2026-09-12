@@ -5,15 +5,16 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC post-C01 materials | Final scientific intake accepted/main77c17d111; /root/dm_a_mx_acvc_resume supplies next-question facts to Portfolio author; no new fit | Concrete proper-node question/investment option; retention inventory is recorded |
+| ACVC post-C01 materials | Direction input accepted/main e85cb3a95 and delivered to Portfolio DM; recommends one original-Convergence question, with all fit and1200-second figures explicitly unapproved | Portfolio investment decision, then original Convergence selection if funded; no active ACVC execution now |
 | FOLR B03 | Both original arms running, actual new Monitor goal adoption confirmed at approximately2026-09-12T13:35Z; owner /root/dm_a_mx_folr_cap_review | Independent terminal notices, then same-DM collection and scientific intake |
 | VNFC conditional fresh pair | Owned-value pooling boundary repair accepted/main91c16cb06 after independent256/256 allocator-debug check; /root/dm_a_mx_vnfc_recovery continues the selected conditional fresh pair;900-second fresh grant unused | Bind fresh namespace/card, pass admission, then launch without another scheduling approval |
 | RCLE original Convergence request | Same request accepted by provider as `WEB:34cdbc67-caba-4b09-8430-473bdf66af5d`; Pro generation active under Windows Transport | Observe same conversation, archive complete response, then direction-DM intake; no duplicate Send |
 | Portfolio readiness/Oracle | /root/dm_a_mx_portfolio_resume; latest22-direction evidence and concrete next-slot choices | Ready-now actions immediately; necessary Portfolio packet via existing Pro node |
 
-Direction chains4/5: FOLR running, VNFC and ACVC under active native continuation, and RCLE has an
-accepted Pro generation. Two FOLR handles count once for that direction. Portfolio preparation is
-not an extra direction; its current decision is expected to fill the remaining independent slot.
+Direction chains3/5: FOLR running, VNFC under active native continuation, and RCLE has an accepted
+Pro generation. ACVC's bounded authoring return is complete and therefore no longer counts. Two
+FOLR handles count once for that direction. Portfolio preparation is not an extra direction; its
+current decision must supply ready independent replacements for the two open slots.
 
 ## Current routing
 
