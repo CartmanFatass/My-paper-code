@@ -26,6 +26,11 @@ Older pending/zero-active paragraphs below are dated evidence, not current statu
   164.04035623092204s and peak548684KiB. Root immediately used `followup_task` for
   full collection/acceptance and fixed unit3 `(18150,21370)`; precise summary timing
   remains for collection verification. Monitor then confirmed empty-set goal completion.
+  Complete unit2 intake is now integrated at `e3f726244`: all required records and
+  12 raw files match; full-summary wall164.04166260396596s, earlier164.04035623092204s
+  was the last-panel log. Inclusive unit charge171s, completed sum341s. Fixed unit3
+  `acvc-fresh-dense-c01-18150-3fd9062d5` accepted04:59:38.304056Z; direct Monitor
+  adoption04:59:50Z confirms running and that exact active handle, forwarded to DM.
 - Main accepted card/source/commands/launch as `0d3bc3257`, `0451da37a`,
   `3ed01fb83`, `2fadb1ddc`. Existing 12 focused checks and independent no-material-
   finding review are reused; no repeat scientific or verification invocation.
