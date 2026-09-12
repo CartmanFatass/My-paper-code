@@ -15,7 +15,7 @@ only the mode needed now; this is not a launch checklist or new review layer.
   verify decision-relevant claims in the source. Reuse relevant prior retrieval;
   routine implementation does not require another literature pass. For a specific
   coverage gap or current-information need, use official paper/code sources or the locally available
-  `C:/Projects/HMASD-scientific-skills/.agents/skills/paper-lookup/SKILL.md` and its
+  `/mnt/c/Projects/HMASD-scientific-skills/.agents/skills/paper-lookup/SKILL.md` and its
   relevant database reference. Existing web/connector tools remain valid alternatives.
   Retrieve public queries, retain exact relevant excerpts/links, and distinguish
   metadata existence from support for a claim. Do not route to an additional LLM
