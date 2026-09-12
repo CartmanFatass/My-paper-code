@@ -32,7 +32,7 @@
     "unknown_rates_no_calibration_required": true
   },
   "support": {
-    "known_invoked_seconds": 52.78188300009022,
+    "known_invoked_seconds": 62.67113360009022,
     "known_components": [
       {
         "stage": "grant read/fetch",
@@ -137,12 +137,72 @@
       {
         "stage": "read adjacent native admission once",
         "seconds": 0.4648776
+      },
+      {
+        "stage": "launch record publication and commit",
+        "seconds": 0.7403589
+      },
+      {
+        "stage": "launch record push/revision",
+        "seconds": 4.2230504
+      },
+      {
+        "stage": "terminal checkout and evidence-layout read",
+        "seconds": 0.1450388
+      },
+      {
+        "stage": "terminal file inventory and whole timing read",
+        "seconds": 0.5837547
+      },
+      {
+        "stage": "current scientific/intake rules read",
+        "seconds": 0.0756394
+      },
+      {
+        "stage": "current main owner reviews and tracking read",
+        "seconds": 0.4282813
+      },
+      {
+        "stage": "terminal archive collection/transfer/byte verification, outer command once",
+        "seconds": 1.7047163
+      },
+      {
+        "stage": "full native summary/rows/terminal and scientific-reading read",
+        "seconds": 0.3719066
+      },
+      {
+        "stage": "bounded direction and cost rule read",
+        "seconds": 0.0892356
+      },
+      {
+        "stage": "current main integration and Portfolio row read",
+        "seconds": 0.2091037
+      },
+      {
+        "stage": "all-row frozen-primary technical intake arithmetic",
+        "seconds": 0.2323569
+      },
+      {
+        "stage": "result facts and readable evidence publication",
+        "seconds": 0.2906742
+      },
+      {
+        "stage": "owner trace command/record read",
+        "seconds": 0.333633
+      },
+      {
+        "stage": "focused current evidence-spec read",
+        "seconds": 0.1859308
+      },
+      {
+        "stage": "new-card applied execution trace",
+        "seconds": 0.27557
       }
     ],
-    "coverage": "Nonoverlapping known command/phase walls only. Preparation parent overhead after fixture error, unreturned edit/read time, client/provider/deliberation tails and future integration/collection/cleanup are unmeasured or pending. Nested check/review walls are not counted again. No complete cost claim or zero fill."
+    "coverage": "Nonoverlapping known command/phase walls only. Missing provider/deliberation/client, some authoring/read tails, Monitor/tool delivery and Root integration/closing costs remain UNKNOWN; closing publication/cleanup not yet charged. No inference of zero, whole-support certification or budget breach from missing coverage. Adjacent admission/evaluation/publication are already inside native time and not support-charged twice."
   },
   "source_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
-  "acceptance": "ACCEPTED for the single planned original invocation; no scientific output created during checks",
+  "acceptance": "VALID COMPLETE B/EXPLORE; exact source/counts/config/primary and original exit verified",
   "remote_worktree": "/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f",
   "launch": {
     "handle": "acvc-cluster-b01-e06b3d63f",
@@ -169,8 +229,22 @@
     "stderr": "",
     "wall_s": 0.5581011999747716
   },
-  "monitor_adoption": null,
-  "status": "Original supervisor launch accepted once and adjacent memory admission passed; Monitor goal adoption pending; no terminal result accepted",
+  "monitor_adoption": {
+    "source": "Exact MONITOR_ADOPTED receipt forwarded by Root during intake, originally received before terminal",
+    "goal": "Observe accepted handle acvc-cluster-b01-e06b3d63f through terminal completion; deliver terminal notification to Root and finish only after accepted delivery.",
+    "goal_state": "actual matching unfinished goal",
+    "handle": "acvc-cluster-b01-e06b3d63f",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3408418,
+    "tmux_active": true,
+    "uptime_seconds": 36,
+    "node": "hmasd-wsl-node",
+    "source_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+    "runtime_cwd": "/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f",
+    "output_root": "/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f/temp/directions/acvc/exp/cluster_deployment_b01_20260912"
+  },
+  "status": "Complete native result collected and technically/scientifically accepted; Root integration/retention and exact scoped cleanup pending; no successor allocation",
   "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-acvc-005.json",
   "audit_row": "docs/research/portfolio/audit/2026-09-12.md#L116",
   "stop": "one original invocation only; no retry/extra fit/panel/consultation",
@@ -179,7 +253,7 @@
   "engineering_evidence": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/ENGINEERING_CHECKS.json",
   "source_bundle_bytes": 120288727,
   "protected_source_currentness": "Shared UCOPE/native/model/Binding/reuse source matched accepted main665f704f7; changed source only the new cluster wrapper/protocol/tests. Working source surface unchanged at command publication.",
-  "owner_review": "Current main owner/reviews query shows no new ACVC override; historical answered second-recast remains applied.",
+  "owner_review": "Current main item.py reviews --json returned []; owner prediction not taken; no new override.",
   "planned_launch": {
     "handle": "acvc-cluster-b01-e06b3d63f",
     "execution_node": "hmasd-wsl-node",
@@ -202,7 +276,7 @@
     "delivery": "accepted",
     "instructions": "get_goal; continue matching unfinished goal or create without token budget; retain handle through accepted terminal delivery; actual goal state in MONITOR_ADOPTED; MONITOR_GOAL_COMPLETE to Root before empty-goal completion"
   },
-  "updated_utc": "2026-09-12T23:35:05.765966+00:00",
+  "updated_utc": "2026-09-12T23:44:45.131127+00:00",
   "adjacent_admission": {
     "assessed_at": "2026-09-12T23:33:38.792548Z",
     "available_physical_bytes": 15627849728,
@@ -218,5 +292,54 @@
     "passed": true,
     "physical_floor_pass": true,
     "schema_version": 1
-  }
+  },
+  "cost": {
+    "native_whole_command_wall_s": 165.33,
+    "supervisor_duration_s": 166,
+    "native_charge_s": 166,
+    "native_charge_basis": "Retain the full recorded supervisor duration, which encloses the measured165.33s admission-through-process-exit chain; do not add nested panel/fit timers.",
+    "native_cap_s": 600,
+    "native_cap_pass": true,
+    "known_support_s": 62.67113360009022,
+    "known_native_plus_support_s": 228.67113360009023,
+    "support_cap_s": 600,
+    "complete_cap_s": 1200,
+    "complete_support_cap_certified": false,
+    "complete_cost_certified": false,
+    "observed_breach": false,
+    "peak_rss_kib": 557308,
+    "peak_rss_gib": 0.5314903259277344,
+    "resources": "resources_unmeasured",
+    "qualification": "Whole wall and peak RSS are measured; complete resource/CPU and support coverage is not. No overrun observed, no complete total certification."
+  },
+  "terminal": {
+    "event_id": "acvc-cluster-b01-e06b3d63f-exit0",
+    "status": "finished",
+    "exit_code": 0,
+    "duration_s": 166,
+    "pid": 3408418,
+    "tmux_active": false,
+    "exited_at": "2026-09-13T07:36:24+08:00",
+    "completed_arms": [
+      "C",
+      "F",
+      "dwell"
+    ],
+    "monitor_goal_complete": true,
+    "active_set": [],
+    "terminal_source": "Root forwarded accepted Monitor terminal and goal-complete receipts; original full supervisor bytes independently collected",
+    "original_supervisor_files": {
+      "exit_code": "0",
+      "pid": "3408418",
+      "start_time": "1789256018",
+      "status": "finished"
+    }
+  },
+  "result_evidence": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_RESULT_EVIDENCE_20260912.md",
+  "scientific_intake": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md",
+  "primary_readings": {
+    "F-C": "UP",
+    "F-dwell": "UP"
+  },
+  "cleanup_inventory": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/CLEANUP_INVENTORY.json"
 }
