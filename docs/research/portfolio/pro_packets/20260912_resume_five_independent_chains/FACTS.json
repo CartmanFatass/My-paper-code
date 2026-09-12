@@ -166,14 +166,19 @@
     "parked": 7,
     "target_independent_chains": 5,
     "root_reported_advancing_native_directions": [
-      "acvc",
       "vap_folr_core",
       "variable_n_fleet_churn"
     ],
-    "root_reported_accepted_running_experiments": 0,
-    "accepted_rcle_generation": false,
+    "root_reported_accepted_running_experiments": 2,
+    "accepted_rcle_generation": true,
     "vacancies_at_root_report": 2,
-    "additional_execution_ready_existing_scientific_allocations_found": 0
+    "additional_execution_ready_existing_scientific_allocations_found": 0,
+    "snapshot_source": "Root latest direct return and published main c8ed4714c; FOLR two Monitor-adopted running handles count once, VNFC accepted repair/continuation, RCLE accepted generation; ACVC authoring complete no longer counts",
+    "root_reported_advancing_pro_directions": [
+      "roster_consistent_latent_exploration"
+    ],
+    "accepted_rcle_provider_handle": "WEB:34cdbc67-caba-4b09-8430-473bdf66af5d",
+    "total_advancing_directions": 3
   },
   "new_scientific_exposure": {
     "result_bearing_invocations": 0,
@@ -211,7 +216,10 @@
     "scientific_calls": 0,
     "future_fit_allocation": null,
     "preparation_complete_cost": null,
-    "stop": "one complete card/L0 with focused dependency and known-cost map, or one concrete no-ready return; no recurrent architecture audit, target import, retained52/P63 run, fresh test/model/learner or same-request research loop"
+    "stop": "one complete card/L0 with focused dependency and known-cost map, or one concrete no-ready return; no recurrent architecture audit, target import, retained52/P63 run, fresh test/model/learner or same-request research loop",
+    "new_complete_invoked_support_cap_seconds": 600,
+    "support_reference_seconds": 300,
+    "authority": "S is proposed only; no current execution grant. Complete documentary/model/provider effort remains unmeasured, not zero."
   },
   "existing_cbsc_recipe_if_later_funded": {
     "status": "unfunded counts only; old B04 seed/allowance not reused",
@@ -245,6 +253,55 @@
     "acvc_final_intake_commit": "48b278091",
     "main_integration": "77c17d111",
     "source": "direct ACVC DM return",
-    "state": "final intake complete; preparing one concrete original-Convergence question/use, no new scientific grant or Pro dispatch selected"
-  }
+    "state": "final intake accepted; new original-Convergence question proposal complete, no active ACVC work or new grant",
+    "acvc_question_note_commit": "c717996f3f2654e044fac05f9dc6a5d87d5b1369",
+    "acvc_question_note_path": "docs/research/candidates/acvc/ACVC_POST_C01_DIRECTION_QUESTION_20260912.md",
+    "vnfc_accepted_repair_main_commit": "91c16cb06",
+    "vnfc_actual_state": "Root accepted owned-value repair after relevant independent256/256 allocator-debug check; existing conditional fresh pair continuing; no new primary received"
+  },
+  "prepared_at_utc": "2026-09-12T13:48:08.326767+00:00",
+  "current_input_integration_sha": "24f5504aa35cbf027270420c8c966f690b3136af",
+  "proposed_cbsc_optional_conditional_pair": {
+    "selection": "S+B is an explicit option, not implied by S",
+    "fresh_training_pairs": 1,
+    "native_whole_arm_cap_seconds": 600,
+    "native_sum_cap_seconds": 1200,
+    "complete_support_cap_seconds_including_S": 600,
+    "complete_invoked_work_cap_seconds_including_S": 1800,
+    "forecast": null,
+    "condition": "same accepted opportunity-credit scientific meaning plus relevant focused technical evidence protecting the primary; no complete historical root-cause requirement",
+    "automatic_followup": false
+  },
+  "proposed_acvc_original_convergence": {
+    "consultations": 1,
+    "empirical_allowance_from_consultation_alone": 0,
+    "documentary_provider_complete_cost": null,
+    "question": "Should fixed F also execute during same DENSE/PPO training, compared with equal-budget C-training then F-deployment?",
+    "source": "ACVC DM published proposal c717996f3f2654e044fac05f9dc6a5d87d5b1369; no selected object/card/allocation",
+    "optional_conditional_B": {
+      "training_pairs": 1,
+      "fresh_fits": 2,
+      "training_episodes_per_fit": 512,
+      "final_F_episodes_per_fit": 64,
+      "training_episodes": 1024,
+      "evaluation_episodes": 128,
+      "team_steps": 294912,
+      "adam_calls": 2048,
+      "replay_actor_rows": 5242880,
+      "F_predicate_agent_tick_opportunities": 819200,
+      "native_whole_arm_cap_seconds": 270,
+      "native_sum_cap_seconds": 540,
+      "support_complete_cap_seconds": 660,
+      "complete_invoked_work_cap_seconds": 1200,
+      "mei_J": 0.01,
+      "future_changed_law_runtime_forecast": null,
+      "historical_C01_whole_fit_seconds": [
+        170,
+        178
+      ],
+      "historical_planning_anchor_seconds": 222.5,
+      "condition": "separately selected by original Convergence; valid proposal-versus-executed-action PPO semantics and relevant independent review; no new cost experiment"
+    }
+  },
+  "current_control_sha": "c8ed4714c90af7879dc4d315e036186cde438b93"
 }
