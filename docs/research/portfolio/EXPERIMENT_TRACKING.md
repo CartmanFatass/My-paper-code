@@ -5,21 +5,19 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC | Original-node intake accepted at main4ac951c14: one fresh cluster-law C-fit with C/F/own-dwell panels selected; direction ACTIVE, no empirical grant | Portfolio DM prepares a separate investment request after the in-flight Portfolio round; no repeat consultation or third training-F pair |
-| MGTAP | Original Convergence response accepted: one fresh TOP/intact-DENSE B selected; intake integrated at main6f506e474, direction remains ACTIVE | Portfolio decides the pending whole-object investment (450s/arm, 1200s complete); no experiment before allocation |
+| ACVC | Original-node cluster-law object selected; original DM actively prepares exact implementation/resource readiness, no empirical grant | Deliver bounded cost/readiness input to Portfolio; no implementation, repeat consultation or third training-F pair |
+| MGTAP | Portfolio T=yes at main2492dcb06; original DM resumed for the selected TOP/intact-DENSE B | Execute one pair under 450s/arm,900native,300support,1200complete through Monitor/intake/cleanup |
 | FSD | Fifth pair accepted ABOVE_MEI; four-target scoped cleanup verified complete at main0603d31c1, finite N fully closed, direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice; no automatic sixth pair/S/successor |
 | RCLE | Original-node intake accepted at main8973c0515: HOLD only tested equal-unit/.99-prior/FLEX/final1000 spending; direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice from refreshed evidence; no repeated recipe, fit or consultation |
-| FOLR | Original-node intake accepted at main2e2549d3c: new entity-history-before-aggregation B family OPEN; direction ACTIVE, old package H retained, no empirical grant | Portfolio DM prepares its finite implementation-plus-one-pair investment as a distinct item; no repeat consultation or inferred grant |
-| Portfolio | Complete immutable new-direction discovery plus separate MGTAP T response integrated at mainc869ecbb9; designated DM is performing full Portfolio intake | Apply conforming registration/investment/priority decisions while keeping MGTAP T separate from genuinely new directions |
+| FOLR | Entity-history family OPEN; original DM actively prepares exact implementation/resource readiness, no empirical grant | Deliver bounded cost/readiness input to Portfolio without changing old package H or repeating consultation |
+| ACPS | Newly registered ACTIVE/HIGH; accountable DM active on ACPS-B01 source/card/implementation readiness | One matched pair under450s/arm,900native,900support,1800complete after fresh admission |
+| CADC | Newly registered ACTIVE/HIGH; accountable DM active on CADC-B01 source/card/implementation readiness | One matched pair under600s/arm,1200native,900support,2100complete after T→ACPS→CADC contention order |
+| Portfolio | New-direction/MGTAP-T decision accepted at main2492dcb06; separate ACVC/FOLR/RCLE/FSD round is being authored | Apply T/ACPS/CADC independently and prepare the four distinct later choices without batch waits |
 
-Direction chains5/5: ACVC, MGTAP, FSD, RCLE and FOLR DMs have resumed their next bounded object or
-proper-node direction step. Their latest allocations completed, but no Portfolio decision stopped
-these ACTIVE directions. The N/S/R generation supplies concrete FSD/RCLE choices; new-direction
-drafting first refreshes all affected old-direction facts from the current DMs.
-
-Strict advancing count5/5: ACVC and FOLR have separately accepted provider generations, FSD and
-RCLE have active DM work, and MGTAP has active Portfolio investment routing. No queued intention is
-used to fill this count.
+Strict advancing direction-DM chains5/5: MGTAP, ACPS, CADC, ACVC and FOLR each have an active
+accountable DM with concrete current work. FSD and RCLE remain ACTIVE in the separate Portfolio
+round; they are not used to fill the five count. Temporary overlap drains at each direction's clean
+boundary, and no ended allocation is interpreted as a direction stop.
 
 ## Current routing
 
