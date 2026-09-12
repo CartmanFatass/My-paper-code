@@ -1,0 +1,141 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-12-mgtap-post8214-top-query-01",
+  "source_thread_id": "01a09717-83a6-7132-8488-53e0070bf8ad",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "direction_id": "metric_ground_transport_allocation",
+  "conversation_id": "6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "94d202b754ae23c48cbe547cce9c7b902b6e870e",
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/mgtap",
+    "base_sha": "94d202b754ae23c48cbe547cce9c7b902b6e870e",
+    "response_path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/18"
+  },
+  "scientific_question": "After the separately accepted COND/DENSE training-pair sequence +0.005761321371348559, -0.02246957345594415, +0.02447811898058116 J, what one direction-local scientific step should advance MGTAP now? Evaluate the author's specific TOP-query proposal: replace only COND's mean visible-partner query with the already highest-local-SINR visible row's learned query, retaining all raw actor information, the all-partner context, private recurrence, native primitive reward/action/PPO path and intact DENSE. Decide whether one new TOP/DENSE B package question is useful, or reject that change and name one better source-grounded next direction step. The owner explicitly keeps MGTAP advancing; the completed8214 grant is not a direction stop. No fourth unchanged COND/DENSE pair, stable-advantage inference or silent DENSE-default change is permitted.",
+  "deliverable": "Return a conclusion-first final original-node direction decision, your selected next question and concrete operation, its smallest sufficient evidence class, native consequence, intact comparator, primary/MEI interpretation, strongest support and contradiction, and why the runner-up loses. If TOP is selected, state the bounded scientific object and recommended fresh work/resource envelope; distinguish this scientific choice from separate Portfolio investment and actual launch acceptance. If TOP is rejected, explain the missing decision value and name one concrete next source/design or comparably bounded scientific step so the ACTIVE direction can continue, without treating an ended allowance as a lifecycle PARK. No broad search/menu, historical replay, exact optimum or causal explanation prerequisite is requested. Challenge the author's assumptions when warranted. This consultation executes no source/model/experiment and cannot borrow the old grant.",
+  "claim_ceiling": "A direction-tier selection of a new bounded B/EXPLORE package question or its concrete source/design alternative. The three accepted COND points remain separate local observations with conditional evaluation uncertainty; no new pooled result, stable training-population advantage, attention/geometry/causal-credit identification, optimal transport, transfer, formal UAV validation, recast count or Portfolio lifecycle/priority is asserted locally. TOP is a source-grounded unimplemented hypothesis; highest SINR is not established as decision relevance. A future one-pair TOP/DENSE comparison would support only its realized package outcome, not causal superiority to mean COND or old REL.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST8214_DIRECTION_QUESTION_20260912.md",
+      "commit_sha": "aae355b2a7485a53a58e0b9d996496bbe172eb77",
+      "purpose": "Read sections1–6: current owner continuation, mixed accepted evidence, exact TOP proposal, intact null, native consequence, proposed work/budget, strongest alternatives and author advice. This TASK adopts the explicit current continuation in section1.",
+      "provenance": "Current DM source-grounded question; TOP is unimplemented and untested, advice is not a local direction decision. The new owner continuation is distinct from the old M allocation."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md",
+      "commit_sha": "6561056ed6f2f51d57801d315af2ca8749cee6d2",
+      "purpose": "Read sections1–4 for complete validation, three separately retained training-pair results, costs and limitations; section6 confirms completed duplicate cleanup. Its no-successor/no-consultation statements concern the old M allocation only.",
+      "provenance": "Accepted complete original-DM scientific/technical intake. No historical primary is recomputed or promoted by this question."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_RESULT_20260912.md",
+      "commit_sha": "a12fb206aeac848ccf5f7dc585e9a35afeef0f03",
+      "purpose": "Read the complete E0 result: original reading rule, source/measurement/learning integrity, actual 8214 own-arm and paired facts, costs and limitations.",
+      "provenance": "Accepted native B evidence, retaining its one-training-pair claim ceiling and all adverse worlds."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_SCIENCE_CARD_20260912.md",
+      "commit_sha": "10ea737f0f9210ee2c126ad1e095734f21d4fcbc",
+      "purpose": "Read sections2–4 for inherited native host/information, training/RNG/initializer law, final primary and MEI. Preserve the original 8214 object; its completed budget is not a new grant.",
+      "provenance": "Exact committed launch card for the accepted third COND/DENSE pair; proposed TOP cannot be relabelled as that object."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "a12fb206aeac848ccf5f7dc585e9a35afeef0f03",
+      "purpose": "Read the opening accepted 8214,8213,8212 and COND eligibility sections; retain the old native actor/coordinate-family boundaries as summarized, without recursively loading history. Latest owner continuation in this TASK supersedes old execution stop wording only.",
+      "provenance": "Accepted mechanism science and strongest support/contradiction; current control state is not inferred from historical snippets."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/archive/RESPONSE.md",
+      "commit_sha": "319c51a5fdc411eaaf1a47557d032f23ed269265",
+      "purpose": "Read opening choice and sections1,3–7: original-node rationale for conditional partner/user interaction, prior adverse REL alternative, legitimate B question and claim ceiling. Preserve this original decision.",
+      "provenance": "Complete original Convergence response; original COND-only eligibility does not silently authorize TOP."
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py",
+      "commit_sha": "10ea737f0f9210ee2c126ad1e095734f21d4fcbc",
+      "purpose": "Inspect ConditionalResidualEncoder, DenseResidualEncoder, make_encoder and NativeGeometryActor only: mean partner query, existing raw/context paths, parameter blocks and initialization; assess the exact row0 replacement without execution.",
+      "provenance": "Accepted native actor source. TOP is absent; no source change is authorized by reading."
+    },
+    {
+      "path": "envs/pettingzoo/uav_env.py",
+      "commit_sha": "10ea737f0f9210ee2c126ad1e095734f21d4fcbc",
+      "purpose": "Inspect _local_uav_entries, _get_local_uavs and its reference ordering, observation packing around lines463–489, and default reward if needed: native descending pre-normalization SINR/ties, masked padding and actor-visible rows. Do not enlarge actor access to internal global arrays.",
+      "provenance": "Native source establishes delivered row0 semantics, not that strongest-link partner is causally most relevant."
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/conditional_pooling.py",
+      "commit_sha": "10ea737f0f9210ee2c126ad1e095734f21d4fcbc",
+      "purpose": "Inspect build_cond_pair and primary only: common/private generation, complete32 ordered final native J differences and conditional SE. A future TOP object needs its own correct identity/operation/readout; no execution.",
+      "provenance": "Accepted comparison/publication consumer, not an already executable TOP object."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/EXPOSURE.json",
+      "commit_sha": "aae355b2a7485a53a58e0b9d996496bbe172eb77",
+      "purpose": "Read zero new consultation exposure and machine-computed prospective one-pair counts/cost-law inputs.",
+      "provenance": "Configuration arithmetic only; no model, training, evaluation, fixture or profiling was invoked."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_SOURCE_DESIGN_RETURN_20260910.md",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Read section7 only for prior verified real-corpus attention/relational-state retrieval and its precise limits; this question also records the fresh source-page reading in its own section5.",
+      "provenance": "Historical source-design reading, explanatory only. CAMA/MARC are different methods and no TOP effectiveness or novelty is inferred."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "purpose": "Adopt sections3–5.2,11.4,11.7–11.10 for the B evidence class, common integrity, card meaning, units and proportional question/engineering burden; section11 controls.",
+      "provenance": "Applicable current normative evidence standard; no exhaustive mechanism/search, full historical reconstruction or C-level requirement is added to a B."
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "purpose": "Adopt sections4–5 and7.1,7.3 for necessary machinery, proportional scope, direct L0 work and independent review if a later high-risk implementation is selected. Current authoring needs none of section4.",
+      "provenance": "Applicable engineering requirements; no implementation or numerical acceptance follows from this consultation."
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "purpose": "Adopt sections1–4 for the original-node direction decision, owner override, Portfolio separation and standing delegation; section6 for shared branch publication. Current OWNER_DIRECT continuation is explicitly stated in this TASK.",
+      "provenance": "Current owner methods and authorities at the listed version. No old grant is extended and no broader lifecycle/priority action is requested."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "purpose": "Read sections2–4 and6: own history/partial information, joint native consequence, finite learning versus representation and evidence scope.",
+      "provenance": "Explanatory knowledge, not extra authority or a launch gate."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "purpose": "Read comparison units, randomness hierarchy, package/attribution distinctions and return/cost interpretation.",
+      "provenance": "Explanatory empirical knowledge; few training units and selected hypotheses retain their limits."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/ISSUE_SNAPSHOT.json",
+      "commit_sha": "94d202b754ae23c48cbe547cce9c7b902b6e870e",
+      "purpose": "Read this new MGTAP discussion and observation timestamp. Historical Issue5 is cited only for old delivery provenance; no other direction is part of the question.",
+      "provenance": "Direct Issue18 body readback matched the authored scope; mutable discussion pinned before TASK."
+    }
+  ],
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/18"
+  ],
+  "constraints": [
+    "Current OWNER_DIRECT via Root on2026-09-12 requires MGTAP to continue as an advancing direction after already-scoped cleanup; prior no-successor/no-consultation language belongs to the completed M allocation. This is a new original-node question, not a replacement Send or local direction verdict. DENSE stays generic, both previous M=no facts and the later one-pair M=yes remain historical facts.",
+    "TOP uses source-delivered row0, already sorted by descending actual SINR before clipping. It changes the query only. No partner visible means zero query. Keep raw108, all-partner context, existing masks/user-score/softmax/count law, projection, private GRU, actor/critic information, velocity, reward and PPO. TOP has no new parameter block or user-by-partner expansion. The author's cancellation/strongest-partner motivation is untested and does not diagnose old losses.",
+    "The proposed package comparison deliberately omits a third mean-COND arm and gives up causal query attribution and contemporaneous TOP-minus-COND comparison. DENSE has the same ordered information and a competent unchanged nonlinear branch; do not weaken it or require baseline tuning/complete headroom before B. Tuned native headroom is absent.",
+    "Consultation new scientific invocations/models/checkpoint loads/environment instances/train steps/eval steps/optimizer calls/fixtures/profiling=0. Proposed only: 1 matched unit,2 fits,1088 episodes,278528 native team ticks,2048 Adam calls,6635520 actor-row opportunities;0 extra panel/search dimension. Actual TOP movement and cost unknown; Pro Send/provider cost separate and unmeasured.",
+    "Proposed future scale only: one unscreened matched master, two fresh native fits, each512x256 train and32x256 sampled final;256 two-episode rollouts times4 epochs yields1024 Adam calls per arm. Keep CPU FP32/thread1 and original private/common RNG law. No best-seed/checkpoint/rate search, old-checkpoint continuation, extra H/causal panel or fourth unchanged pair. No master is assigned now.",
+    "Proposed primary: mean of all32 ordered TOP-minus-DENSE J differences, J=sum native team rewards/256; report every arm/paired value and conditional SE. Proposed absolute MEI=.01 J has the inherited .014 coverage contribution per additionally continuously connected user as scale. Above MEI supports a local optional-development signal; inclusive band is not equivalence; adverse weighs against the exact TOP package; damaged primary has no paired polarity. One matched training unit cannot estimate population training uncertainty.",
+    "Dominant per-arm work is initialization +131072 collection ticks +1024 Adam/recurrent calls +8192 final ticks +closed publication/exit; five actors and four replay epochs are actual algorithm work. Latest unchanged complete pair361.85s is planning evidence, not a TOP timing. The new proposed cap is450s per complete arm,900s native,1200s complete future invoked, with300s support as planning reference. No new allocation follows from that quote. Unknown operation rates, activation memory and complete support remain unknown; no timing probe or full cost reconstruction is required.",
+    "Use empirical-spec11.8–11.10 when selecting the question, not only its implementation. A costly exact diagnostic or search-before-learning needs its own decision value; finite/zero-learner work is not presumed cheap. For this package question compare against minimal real training/sampled returns. No exhaustive enumeration, full support, strict reconstruction, mechanism localization or stronger C evidence is a prerequisite.",
+    "Scientific method changes and family/recast meaning must be explicit at their proper tier. Do not change Portfolio priority/lifecycle/capacity or infer formal UAV entry; if the chosen next task needs fresh investment, return its decision-ready need for Root's proper Portfolio route rather than pretending that prior M left spendable budget. Do not invent an owner approval gate for ordinary authorized preparation or response intake.",
+    "Read only listed fixed sources and exact sections needed for this decision. Original snapshots and quoted history remain evidence, not live dispatch/control routes. Local literature is explanatory: CAMA uses action prediction/communication and supplies no TOP effectiveness or novelty evidence. No code execution or new scientific measurement is authorized."
+  ]
+}

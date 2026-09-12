@@ -19,12 +19,13 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 ## Current scientific question
 
-Can a fresh FLEX learner, retaining the legal .99-nearest prior and full native
-roster-change task, improve its own initialization and exceed attained
-INDEPENDENT-NEAREST at final1000 when complete manager/claim score gradients are
-separately normalized and combined with equal weight? This is a finite whole-recipe
-service question. An advantage over joint100, identified gradient conflict,
-variance reduction, stable superiority and transfer are outside this comparison.
+After the B06/B07 native comparisons, what further development of the tested
+equal-unit/.99-nearest-prior/FLEX recipe is worthwhile alongside attained
+INDEPENDENT-NEAREST? RCLE's multi-agent credit question during physical roster
+change remains scientifically open. The prepared post-B07 decision concerns
+holding further spending on this exact recipe or retaining one unchanged candidate
+for later investment. It does not presume an advantage over joint100, identified
+gradient conflict, stable superiority, transfer or general unlearnability.
 
 ## Current position
 
@@ -69,8 +70,12 @@ MEI. This is one training realization, without normalization-vs-joint100 attribu
 stable superiority/degradation, equivalence or a family verdict. Tuned headroom
 remains absent. The original reference-column failure is retained separately; one
 authorized eager-reference completion supplies the fixed missing panel, without
-identifying a fault cause or global cure. That discriminator is complete and the
-named allocation ends; no further discriminator or successor is allocated here.
+identifying a fault cause or global cure. That B07 discriminator and its finite
+allocation are complete. OWNER_DIRECT2026-09-12 confirms that the RCLE direction
+continues; the result does not close its broader scientific question. The
+[post-B07 continuation readiness](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md)
+preserves the exact pending original-node development choice and evidence bounds,
+without selecting a new mechanism or inferring another fit's allocation.
 The historical sections below preserve the earlier objects and their own limits.
 
 ## Portfolio recast — 2026-08-30
