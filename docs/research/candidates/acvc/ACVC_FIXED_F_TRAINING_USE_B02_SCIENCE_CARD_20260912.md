@@ -48,3 +48,9 @@ Preserve unique checkpoints and raw evidence before exact duplicate/worktree rec
 ## 6. Decisions taken prospectively
 
 Object options:(a) bind the selected unchanged pair to fresh20319/30319 and reuse accepted semantics;(b) reuse an old fit or alter the treatment. Recommend/select(a). **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** The Portfolio A investment is already final; this local binding is not a new direction or investment decision. Current owner reviews returned[]; P2 new-card record follows without waiting. Exact source, focused acceptance, commands and actual observations will be appended before their dependent steps.
+
+## 7. Reviewed source and exact command binding
+
+Published scientific entry/wrapper source is **ac64769f6403e4495a00673e2230d100edb7a02b**. Independent Astra/high reviewer `/root/dm_a_mx_acvc_resume/training_f_semantic_review` found no material binding/argument/default/currentness issue; two read-only commands0.5505398s, no tests/model/RNG/remote probe. Two new stub CLI cases pass0.08s with no test scratch created; existing14 semantic checks are reused. DM accepts the inspected source and focused evidence as technically conforming, without predicting the result or certifying actual future runtime. All unchanged mechanisms remain at their accepted bytes.
+
+The complete119740673-byte source bundle was prepared/transferred once and checked out offline at the exact SHA with empty tracked status; committed wrapper syntax passed. Whole helper18.671926800045185s includes the nested phases once. [Execution facts](ACVC_FIXED_F_TRAINING_USE_B02_EXECUTION_FACTS_20260912.json) fix both complete commands, independent handles/output/admission/timing paths and current support charges before launch. Owner item20260912-acvc-003 records the already applied new card; no reply or extra scientific gate is awaited.
