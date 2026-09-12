@@ -6,7 +6,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACVC K | PRO_FINAL grant integrated at main665f704f7: one C fit + C/F/own-dwell panels,180224 ticks, native≤600/support≤600/complete≤1200 | Original DM binds card/identity/caps, implements and reviews, then performs one detached remote invocation through Monitor to intake/cleanup |
-| MGTAP | TOP8221 accepted TOP_ADVERSE; four-target cleanup accepted at main65c07ad61, archives retained and no run remains | Original DM is authoring one bounded next-use/investment input for the next clean Portfolio request; no implementation or run |
+| MGTAP | Post-T A/U/P next-use input published at main843f64bd0; recommends one bounded use/design judgment, zero native, complete cost UNKNOWN | Portfolio DM authors the next clean request from the fixed input; no option funded, no implementation/run, lifecycle unchanged |
 | FSD U | PRO_FINAL one-use-question grant integrated at main665f704f7; B-LONG-D0 explicitly excluded | Original DM authors one fixed use question, routes it once through Root/Transport and performs full intake; zero numerical work |
 | RCLE L | PRO_FINAL one-design grant integrated at main665f704f7; documentary complete cost UNKNOWN accepted | Original DM returns at most one distinct B design or concrete no-candidate; zero implementation/numerical/Pro work |
 | FOLR E | PRO_FINAL BANK-vs-Generic grant integrated at main665f704f7;5000/128 each, Generic≤1800/BANK≤3000/complete≤6000 | Original DM implements/reviews thin interfaces and executes Generic first then BANK through remote admission, Monitor, intake and cleanup |
@@ -15,7 +15,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | Portfolio | K/E/L/U response archived at mainde02dc94d and conforming intake/mapping integrated at main665f704f7 | Four original DMs execute independently; E precedes K only under actual contention, with no sibling batch wait |
 
 Actual advancing directions5: ACVC K, FOLR E, RCLE L and FSD U are dispatched to their original DMs,
-counted once per direction; MGTAP has active accountable DM authoring for one bounded next-use input.
+counted once per direction; MGTAP has active next-request authoring at the designated Portfolio DM.
 ACPS and CADC finished finite cleanup and no longer fill a slot. No queued intention or ended allocation
 is used to fill the count, and no direction is stopped to manufacture capacity.
 
