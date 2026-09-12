@@ -1,0 +1,32 @@
+{
+  "provenance": "Root assigning native message; actual Transport receipt forwarded to original DM",
+  "request_id": "2026-09-12-acvc-post-two-training-use-convergence-01",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "binding": "em:acvc:convergence",
+  "source_delivery_commit": "15c56cc40c56d2edb6e8c9a1a217a994f30cb3fc",
+  "root_integrated_main": "fa3ad35a87ca820a693a16dee00bc7b8b1df3e82",
+  "response_path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md",
+  "send_count": 1,
+  "natural_completion": true,
+  "DM_browser_Send": false,
+  "limit": "No independent DM observation of provider UI or cost; exact source bytes and delivery comment are checked separately.",
+  "initial_external_transcription": {
+    "bytes": 31932,
+    "sha256": "b179fae665eab1977543f0514a2a192b74d1786cc560386294143a151e01bc0e",
+    "authority": "nonauthoritative; original Root transcription, not a preserved response artifact",
+    "matches_actual_response": false
+  },
+  "corrected_authoritative_response": {
+    "bytes": 31907,
+    "sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+    "line_feeds": 149,
+    "crlf_pairs": 0,
+    "source": "Root native reconciliation assignment after Transport checked immutable Git blob, archive, registry and extraction",
+    "transport_archive_byte_equal": true,
+    "root_confirmation_received": true,
+    "correction_fact_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/acvc/2026-09-12-acvc-post-two-training-use-convergence-01/TRANSPORT_FACTS.json",
+    "preserved_correction": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/TRANSPORT_FACTS_SNAPSHOT.json"
+  },
+  "resolution": "Use the immutable 31907-byte response. The initial variant is retained only as external transcription provenance. No Send, retry, replacement question or scientific conflict follows.",
+  "DM_reconciled_utc": "2026-09-12T21:24:52.541548+00:00"
+}

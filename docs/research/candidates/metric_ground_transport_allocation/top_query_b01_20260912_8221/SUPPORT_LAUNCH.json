@@ -1,0 +1,120 @@
+{
+  "known_dm_command_walls": [
+    {
+      "phase": "state-and-input",
+      "wall_seconds": 0.3074196
+    },
+    {
+      "phase": "live-control",
+      "wall_seconds": 0.5472121
+    },
+    {
+      "phase": "owned-source-and-T-mapping",
+      "wall_seconds": 0.2943472
+    },
+    {
+      "phase": "assigned-main-reconciliation",
+      "wall_seconds": 1.1577084
+    },
+    {
+      "phase": "reconciliation-and-source-binding",
+      "wall_seconds": 4.6319433
+    },
+    {
+      "phase": "audit-merge-repair-and-identity",
+      "wall_seconds": 5.1601477
+    },
+    {
+      "phase": "fresh-identity-and-source-currentness",
+      "wall_seconds": 0.624637
+    },
+    {
+      "phase": "implementation-new-object-binding",
+      "wall_seconds": 0.2956007
+    },
+    {
+      "phase": "configuration-and-pure-stub-binding-check",
+      "wall_seconds": 0.5655709
+    },
+    {
+      "phase": "command-and-card-records",
+      "wall_seconds": 0.2168132
+    },
+    {
+      "phase": "card-source-checks-publication",
+      "wall_seconds": 4.8656992
+    },
+    {
+      "phase": "published-source-bundle-preparation",
+      "wall_seconds": 0.2611095
+    },
+    {
+      "phase": "resume-control-and-source-read",
+      "wall_seconds": 0.5636837
+    },
+    {
+      "phase": "published-source-bundle-corrected",
+      "wall_seconds": 0.4963198
+    },
+    {
+      "phase": "remote-staging-directory-and-sparse-config",
+      "wall_seconds": 0.8881257
+    },
+    {
+      "phase": "remote-source-and-command-copy",
+      "wall_seconds": 0.9061481
+    },
+    {
+      "phase": "remote-exact-sha-worktree-staging",
+      "wall_seconds": 0.7589934
+    },
+    {
+      "phase": "remote-checkout-reconcile-read",
+      "wall_seconds": 0.862947
+    },
+    {
+      "phase": "remote-empty-worktree-initialization",
+      "wall_seconds": 0.8171904
+    },
+    {
+      "phase": "sole-remote-encoder-gradient-publication-fixture",
+      "wall_seconds": 1.8398227999999999
+    },
+    {
+      "phase": "prelaunch-evidence-and-owner-read-0",
+      "wall_seconds": 0.0325837
+    },
+    {
+      "phase": "prelaunch-evidence-and-owner-read-1",
+      "wall_seconds": 0.2044741
+    },
+    {
+      "phase": "technical-acceptance-and-source-currentness",
+      "wall_seconds": 0.3915953
+    },
+    {
+      "phase": "technical-acceptance-commit-push",
+      "wall_seconds": 4.8132614
+    },
+    {
+      "phase": "exact-source-detached-launch-acceptance",
+      "wall_seconds": 0.6298443
+    },
+    {
+      "phase": "accepted-launch-admission-receipt-copy",
+      "wall_seconds": 0.5809223
+    }
+  ],
+  "known_dm_sum_seconds": 32.71412079999999,
+  "independent_review_command_seconds": 2.1409756,
+  "known_support_sum_seconds": 34.85509639999999,
+  "status": "partial snapshot before this receipt publication; native execution running",
+  "limits": {
+    "arm": 450,
+    "native": 900,
+    "support": 300,
+    "complete": 1200
+  },
+  "shared_cost_attribution": "T excludes one-time discovery intake/registration/control-plane application; Root assigned it to ACPS. T-specific later Root integration remains charged once.",
+  "unknown_tails": "Patch/agent/provider and unmeasured tool-client/Monitor/Root tails; native terminal/collection/intake/retention/cleanup costs still pending. Unknown is not zero, proof of excess or complete compliance."
+}

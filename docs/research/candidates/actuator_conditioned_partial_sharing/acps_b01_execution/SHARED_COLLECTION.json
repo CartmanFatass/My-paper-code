@@ -1,0 +1,136 @@
+{
+  "checks": {
+    "complete": true,
+    "rows_match": true,
+    "train_order": true,
+    "final_order": true,
+    "all_steps": true,
+    "all_finite": true,
+    "rollout_epochs": true,
+    "source": true,
+    "own_arm": true,
+    "caps": true,
+    "world_binding": true
+  },
+  "counts": {
+    "train_team_steps": 131072,
+    "eval_team_steps": 8192,
+    "team_steps": 139264,
+    "optimizer_steps": 1024,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "velocity_decisions": 696320,
+    "duration_decisions": 0,
+    "d4": 0,
+    "recurrent_observations": 696320,
+    "explicit_resets": 544,
+    "constructor_resets": 1,
+    "constructors": 1,
+    "step_calls": 139264,
+    "scientific_uav_calls": 139264,
+    "diagnostic_frames": 0,
+    "completed_episode_steps": 139264,
+    "rollouts": 256
+  },
+  "whole_native_wall_seconds": 165.05,
+  "partial_internal_wall_seconds": 164.59650678245816,
+  "J_mean": 0.14885927425137008,
+  "J_final": [
+    0.20180518956271337,
+    0.15180184566488103,
+    0.07409601226625163,
+    0.17898589103297985,
+    0.16776252946034792,
+    0.1398100816983976,
+    0.16767290062097095,
+    0.20250775516612357,
+    0.13074532423645072,
+    0.06298659197761768,
+    0.18986269270738526,
+    0.22870101582605962,
+    0.024363019676561456,
+    0.1573629138394668,
+    0.1622642699708337,
+    0.05536721492179454,
+    0.09808590767767085,
+    0.11141307253572622,
+    0.15854619807506273,
+    0.12498323877518742,
+    0.2472708009475479,
+    0.1800158210539095,
+    0.1756503612411805,
+    0.04285653117751928,
+    0.21044898859653569,
+    0.16822209227875531,
+    0.10027397162042277,
+    0.2366553283579171,
+    0.10283612922651042,
+    0.15014927527726227,
+    0.18119585125842586,
+    0.17879795931537282
+  ],
+  "limits": [],
+  "exposure": {
+    "common_actor": {
+      "parameters": 35702,
+      "initial_norm": 12.529149055480957,
+      "final_norm": 12.91651439666748,
+      "displacement": 3.2008349895477295,
+      "relative_displacement": 0.25547105995578395
+    },
+    "critic": {
+      "parameters": 34177,
+      "initial_norm": 9.291126251220703,
+      "final_norm": 10.809124946594238,
+      "displacement": 5.22715425491333,
+      "relative_displacement": 0.5625964079679325
+    },
+    "total": {
+      "parameters": 69879,
+      "initial_norm": 15.598221778869629,
+      "final_norm": 16.842605590820312,
+      "displacement": 6.129312038421631,
+      "relative_displacement": 0.3929494095746733
+    }
+  },
+  "files": [
+    {
+      "name": "admission.json",
+      "bytes": 504
+    },
+    {
+      "name": "episodes.jsonl",
+      "bytes": 406934
+    },
+    {
+      "name": "final.pt",
+      "bytes": 285053
+    },
+    {
+      "name": "process_wall_seconds.txt",
+      "bytes": 7
+    },
+    {
+      "name": "rollouts.jsonl",
+      "bytes": 187857
+    },
+    {
+      "name": "summary.json",
+      "bytes": 558913
+    },
+    {
+      "name": "supervisor.log",
+      "bytes": 1454
+    }
+  ],
+  "checkpoint_readback": {
+    "arm": "SHARED",
+    "seed": 9101,
+    "source": "2302072e2dcb7aa0c4ee2f71572ef8ca67cd9a46",
+    "actor_tensors": 12,
+    "critic_tensors": 6,
+    "all_finite": true,
+    "actor_parameters": 35702,
+    "critic_parameters": 34177
+  }
+}

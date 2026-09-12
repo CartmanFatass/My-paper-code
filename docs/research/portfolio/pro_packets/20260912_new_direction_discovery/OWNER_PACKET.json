@@ -1,0 +1,43 @@
+{
+  "question": "委托Portfolio提出并比较真正新的独立科研方向，登记有价值的集合并明确逐项首轮投资，支持持续五链推进。",
+  "changes_if_approved": [
+    {
+      "target": "Portfolio新方向发现/登记",
+      "from": "现有22方向及五DM继续，不因有限grant结束退出",
+      "to": "Pro提出不同问题/比较器/estimand的新方向，比较并选择登记、priority与有界首个A/B；不是作者本地决定"
+    },
+    {
+      "target": "首轮资源",
+      "from": "没有新方向实施/实验款",
+      "to": "仅Pro明确选中的新对象产生逐项完整cap和执行边界，登记本身不拨款"
+    }
+  ],
+  "if_refused": "仍记录具体新科学选项及不投资理由，不停止旧ACTIVE方向；保留较小集合或只登记的实质替代，不能以旧FSD/RCLE重复替代新方向需求。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/SCIENCE_BRIEF.md",
+      "quote": "Build a ranked set sufficient to sustain\nfive independent advancing chains.",
+      "why": "满足owner新方向要求，同时把方向登记、拨款与实际工作数分开。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/SCIENCE_BRIEF.md",
+      "quote": "A smaller funded set or\nregistration-only may dominate a diffuse five-project implementation burden.",
+      "why": "避免为凑五个名称而购买弱null或过度工程；全成本未知仍需明确。"
+    }
+  ],
+  "uncertainty": [
+    "新方法的native速度、支持/agent/provider总成本未知，旧cap不能直接套用。",
+    "现有cluster、TOP和entity-history都是旧方向接续，不能改名登记或重置recasts。",
+    "局部文献覆盖及旧包负值均不提供完整新颖性/不可能性证明。"
+  ],
+  "cost": {
+    "compute": "作者零新数值实验；新方向首A/B的逐arm/native/support/complete caps由Pro明确提议并选择，登记无自动grant。",
+    "owner_time": "异步阅览，无逐项批准等待。",
+    "reversibility": "costly",
+    "waits_on_this": "新方向登记/首轮投资取决于Pro；已有五DM及N/R独立继续。"
+  },
+  "verdict_text": "Author recommendation: Portfolio should propose and compare genuinely new research directions, register the justified set, and explicitly select bounded starter investments where warranted. Build a ranked set sufficient to sustain five independent advancing chains.",
+  "source": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/SCIENCE_BRIEF.md"
+}

@@ -12,6 +12,46 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## TOP single-partner query fresh8221 adverse result — 2026-09-12
+
+The selected and Portfolio-funded TOP/intact-DENSE B is a complete valid
+**TOP_ADVERSE** observation: TOP meanJ0.10615334230466392 versus
+DENSE0.1746043221148783, difference **−0.0684509798102144 J**, conditional
+SE0.009502685781897066,4 positive/28 adverse final worlds. Both native
+512-train/32-final fits completed1024 Adam calls with nonzero own-arm movement.
+
+This first TOP observation is direct local evidence against unchanged TOP
+carry-forward at this exposure. Prior mean-COND8214+.02447811898058116 remains
+the strongest direct support for conditional-pooling development;8213
+−.02246957345594415 remains its strongest prior contradiction, and8212
++.005761321371348559 was inside MEI. Those are distinct mean-query packages
+and fitted identities, not TOP replicates or a direct TOP-versus-mean comparison.
+No pooled primary or reclassified history is introduced.
+
+TOP replaced only the mean visible-partner query with the mapped delivered
+highest-local-SINR row while preserving raw108/all-partner context, private
+recurrence, primitive action/reward and PPO. Strongest-link irrelevance, rank
+switching, lost query-context usefulness, finite training variation, partner
+co-adaptation and competent DENSE adaptation remain alternatives; the loss does
+not identify any one mechanism. Claim ceiling is this realized package outcome,
+not stable inferiority, general geometry/attention/credit failure, scaling/churn,
+transfer or formal UAV validation. DENSE remains default and tuned native
+same-information headroom remains absent.
+
+The accepted Convergence negative branch recommends against carrying this TOP
+package forward unchanged. This one T grant ends at result/intake/scoped cleanup;
+no second pair, search, causal/timing panel, fourth unchanged COND pair or
+consultation is funded by it. MGTAP remains ACTIVE and advancing under the current
+owner instruction. The next discriminator is a properly selected distinct bounded
+use question informed by mixed mean-COND and adverse TOP evidence, with its own
+investment; none is locally opened here. Old coordinate-family PARK, C meanings,
+recast count and both earlier M=no facts remain unchanged.
+
+[TOP E0 result](MGTAP_TOP_QUERY_B01_RESULT_20260912.md),
+[technical/scientific intake](MGTAP_TOP_QUERY_B01_INTAKE_20260912.md),
+[card](MGTAP_TOP_QUERY_B01_SCIENCE_CARD_20260912.md),
+[original Convergence intake](pro_packets/20260912_post8214_top_query/CONVERGENCE_INTAKE_20260912.md).
+
 ## Conditional pooling fresh8214 local gain — 2026-09-12
 
 The newly Portfolio-funded third unchanged COND/DENSE pair is a complete valid

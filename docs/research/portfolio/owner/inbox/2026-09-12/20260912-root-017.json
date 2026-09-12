@@ -1,0 +1,87 @@
+{
+  "id": "20260912-root-017",
+  "created": "2026-09-12T15:09:48-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "FSD五pair后的单次用途判断投资建议",
+  "context": "原DM无现成distinct B；现有五结果足够作同host可选方案判断，完整咨询费用未知，不自动第六pair/旧S。",
+  "options": [
+    {
+      "key": "a",
+      "label": "一次新用途判断",
+      "consequence": "新原Convergence+完整intake，决定可选学习方案用途，零经验/代码工作。"
+    },
+    {
+      "key": "b",
+      "label": "本次不追加",
+      "consequence": "不买用途咨询或unchanged经验投入，保留ACTIVE与全部证据，不推断方向停止。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "有限用途分叉具体，不要求额外观察；Portfolio最终选择，不是作者授权。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L93",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Portfolio 是否新买一次 FSD 原 Convergence 的同host可选学习方案用途判断，用五组现有结果作决定，而不再自动加pair？",
+    "changes_if_approved": [
+      {
+        "target": "flexible_skill_duration 下一有限投入",
+        "from": "第五N与cleanup完成，ACTIVE/HIGH；无第六pair或新咨询款",
+        "to": "建议U=yes：一次原节点use判断＋完整intake，零代码/数值/实验；旧S=no不作授权"
+      }
+    ],
+    "if_refused": "不新增用途咨询或 unchanged package 经验投入，保留全部证据；等待真实新用途明确比较问题，不因此推断FSD停止或PARK。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+        "quote": "There is no ready new B object and no extra observation is a prerequisite to this limited judgment.",
+        "why": "已有五组完整native结果可决定可选用途，不先购买更多重复或诊断。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+        "quote": "That avoids repeated investment and does not itself stop FSD.",
+        "why": "不咨询的强反选项可节省只重述已知结论的文档成本。"
+      }
+    ],
+    "uncertainty": [
+      "五pair四正一负，不是稳定优势/组件归因或seed门槛。",
+      "U完整documentary/invoked/provider/agent费用未知，非廉价假设、旧余额或自动重复。"
+    ],
+    "cost": {
+      "compute": "零新实现/数字分析/fit；一次新原节点问题/Transport once/完整intake，完整费用由Portfolio明确接受或界定。",
+      "owner_time": "无需逐项批准，可异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "只FSD U新投入；其他K/E/L与已选T/ACPS/CADC独立。"
+    },
+    "verdict_text": "作者依据原FSD DM建议U=yes：从五个接受pair判断I1280是否成为同host可选学习方案，保留authentic D0、成本和混合结果，不改默认或买第六pair；U=no为真实反选项。",
+    "source": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T22:09:48+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md#5-capacity-and-resume",
+      "record": "docs\\research\\portfolio\\pro_packets\\20260912_cluster_entity_investment\\PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "Root新指定FSD为第四独立项；原DM建议一新用途判断，未拨款或Send，不从N结束停止方向。"
+    },
+    {
+      "at": "2026-09-12T23:04:56+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/INTAKE.md",
+      "state": "applied",
+      "summary": "完整PRO_FINAL选U一次原Convergence同host用途判断/full intake，完整文档成本接受UNKNOWN，零实现/数值/第六pair。晚到B-LONG-D0未包含且无拨款；Root独立派发，未声称新Pro已经发送。"
+    }
+  ]
+}

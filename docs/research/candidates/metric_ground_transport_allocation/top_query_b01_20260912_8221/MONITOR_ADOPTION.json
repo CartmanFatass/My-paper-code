@@ -1,0 +1,22 @@
+{
+  "status": "MONITOR_ADOPTED",
+  "monitor_thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+  "root_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "original_dm": "/root/dm_mgtap_m_pair",
+  "handle": "mgtap-top-b01-8221-20260912",
+  "source_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+  "execution_node": "hmasd-wsl-node",
+  "cwd": "/home/wu/hmasd-worktrees/mgtap-top-b01-8221-20260912",
+  "output": "/home/wu/hmasd-worktrees/mgtap-top-b01-8221-20260912/temp/directions/metric_ground_transport_allocation/exp/top_query_b01_20260912_8221",
+  "status_observation": {
+    "status": "running",
+    "exit_code": null,
+    "pid": 3403683,
+    "tmux_active": true,
+    "uptime_seconds": 33
+  },
+  "actual_goal_state": "Root forwarded confirmed actual adoption: existing unfinished Monitor goal active set includes this accepted handle and ACPS companion. This records actual goal adoption, separately from accepted MONITOR_ADD delivery.",
+  "goal_requirements_sent": "get_goal; continue matching unfinished goal or create_goal with no token budget; retain through accepted terminal delivery; send actual goal state to Root; MONITOR_GOAL_COMPLETE to Root before empty completion.",
+  "receipt_route": "Root native message to /root/dm_mgtap_m_pair; no duplicate observer or second ADD.",
+  "pending_owner_actions": "Monitor observes through terminal delivery. DM retains ordered-pair collection, technical/scientific intake and authorized cleanup; no extra arm or retry."
+}

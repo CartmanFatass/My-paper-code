@@ -1,0 +1,53 @@
+{
+  "question": "原 Convergence 已选择聚集用户场景的一次 C 训练及 C/F/dwell 部署比较；现已应用这一方向选择，并把完整实验投入需求交 Portfolio。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/acvc/DIRECTION.md",
+      "from": "两次训练加入 F 的有限比较结束，下一不同对象尚未选择",
+      "to": "记录原节点选定的 cluster 场景部署用途 B；ACVC 继续 ACTIVE，实验本身仍需实际投入。"
+    },
+    {
+      "target": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE.md",
+      "from": "完整原节点回答待验收",
+      "to": "完整回答验收并应用；原始字节与转录差异已对齐，完整未来工作与未知成本明确。"
+    }
+  ],
+  "if_refused": "保留全部已完成证据与原回答，按 owner 的新明确指令调整下一对象；不自动重跑旧 pair、增加咨询或停止 ACTIVE 方向。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md",
+      "quote": "Continue ACVC by selecting the proposed cluster-law deployment-use B/EXPLORE object: one freshly C-trained DENSE policy, followed by C, fixed F and own-predicate dwell on its single final checkpoint, with 64 paired initial worlds per panel.",
+      "why": "原节点给出了具体、规模小的下一用途选择；既保留真实训练，也保留普通执行与简单修正两个比较器。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md",
+      "quote": "Both frozen lower bounds exceed 0.01, yielding qualified JOINT_ABOVE_MEI.",
+      "why": "固定 F 的部署收益有既有正证据，训练中加入 F 的损失不消除这项用途。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md",
+      "quote": "Accepted valid complete B/EXPLORE: DOWN.",
+      "why": "第二次训练加入 F 仍有损失；不能靠重复原样 pair 推动方向，也不能推定聚集场景一定受益。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md",
+      "quote": "There is no observed increase in saturation, trigger rate or return under cluster.",
+      "why": "聚集分布的实际效果未知，一个新训练实例只能形成有界探索观察。"
+    }
+  ],
+  "uncertainty": [
+    "普通 C 或 dwell 在聚集场景可能已足够；机制因果与总体泛化仍未确定。",
+    "单训练实例不能估计训练总体的不确定性。",
+    "新场景完整 native 与实现/支持成本未知，当前没有新计算拨款。"
+  ],
+  "cost": {
+    "compute": "当前仅咨询与文档验收，科研执行0。未来1 fit/180224 team steps/1024 Adam/3×64最终面板；完整耗时与支持成本未知。",
+    "owner_time": "异步查看即可，现有委托下已应用方向记录。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; 不等待 owner 回复，下一步由 Root 路由完整投入需求"
+  },
+  "verdict_text": "Final disposition: select the one-fit cluster-law C-training/C–F–own-dwell deployment-use B as ACVC's next distinct scientific object and continue the direction through this decision and its complete intake.",
+  "source": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md"
+}

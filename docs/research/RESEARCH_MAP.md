@@ -1,12 +1,24 @@
 # HMASD Research Map
 
-This is the human navigation map for nine coordinated research routes and their 22 historical source IDs. It records
+This is the human navigation map for 27 registered directions: the 22 historical source IDs and five new independent programmes registered on 2026-09-12. It records
 a concise position and links to stable research and code directories. It is documentation, not an
 authorization, scheduling, lease, or workflow surface.
 
 Current lifecycle, priority, capacity, and direction owner exist only in
 [`portfolio/PORTFOLIO.md`](portfolio/PORTFOLIO.md). The 14 structurally closed or absorbed labels
 and their complete evidence live under [`legacy/directions/`](legacy/directions/README.md).
+
+## Newly registered independent programmes — 2026-09-12
+
+The [conforming Portfolio decision](portfolio/decisions/2026-09-12-new-direction-discovery.md) registers the following distinct questions. ACPS/CADC have one bounded B grant each; the other three have zero implementation/empirical grant. Code locations below are designated ownership surfaces, not existing implementations. Lifecycle/priority and actual tasks remain in Portfolio; these are not additional route fusions or formal-UAV entries.
+
+| Programme | Scientific question | Accepted research record | Designated code / prefix |
+| --- | --- | --- | --- |
+| ACPS / ACTIVE | One finite recurrent learner with capability-indexed partial sharing can improve native service over an equally informed intact shared policy on a declared heterogeneous-actuation task. | [actuator_conditioned_partial_sharing](candidates/actuator_conditioned_partial_sharing/DIRECTION.md) | `experiments/candidates/actuator_conditioned_partial_sharing/`; `run_acps_` (unimplemented) |
+| CADC / ACTIVE | Jointly learned decentralized send and motion decisions can improve cost-adjusted native service over collision-free round-robin plus a fully learned motion policy. | [contention_aware_decentralized_communication](candidates/contention_aware_decentralized_communication/DIRECTION.md) | `experiments/candidates/contention_aware_decentralized_communication/`; `run_cadc_` (unimplemented) |
+| TRDL / PARKED | A distributional training baseline may improve finite lower-tail cooperative return over a scalar baseline aimed at the same lower-tail objective. | [tail_return_distributional_learning](candidates/tail_return_distributional_learning/DIRECTION.md) | `experiments/candidates/tail_return_distributional_learning/`; `run_trdl_` (unimplemented) |
+| CPCP / PARKED | Population-mixing training may improve zero-adaptation cross-play return over matched-exposure self-play when independently trained populations are combined. | [cross_play_compatible_population_learning](candidates/cross_play_compatible_population_learning/DIRECTION.md) | `experiments/candidates/cross_play_compatible_population_learning/`; `run_cpcp_` (unimplemented) |
+| LCAC / PARKED | A learned focal-action counterfactual baseline may improve finite native cooperative learning over a competent scalar central-value baseline with identical decentralized actor information. | [learned_counterfactual_agent_credit](candidates/learned_counterfactual_agent_credit/DIRECTION.md) | `experiments/candidates/learned_counterfactual_agent_credit/`; `run_lcac_` (unimplemented) |
 
 ## Adopted research organization — 2026-09-04
 
