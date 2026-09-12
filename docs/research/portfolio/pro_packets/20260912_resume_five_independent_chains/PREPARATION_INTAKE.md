@@ -25,6 +25,8 @@ Machine-generated FACTS reconciles22=15ACTIVE+7PARKED, latest Root-reported3 adv
 - Direction: ACVC next object remains with its original Convergence. No completed or paused family is reopened locally, no second recast erased, and no formal UAV entry claimed from a host name. CBSC/MGTAP are optional same-mechanism B allocations, not direction closures.
 - Engineering: ordinary card/L0 and relevant technical evidence protect the chosen claim; no exhaustive cause reconstruction, extra cost experiment, historical fixture or mandatory preceding A. Unresolved dependent facts stop only affected work. Five-slot scheduling is not a grant.
 
+The latest responsible VNFC DM directly corrected the row-versus-invocation count:35 complete rounds per arm imply at least2240optimizer steps/13440joint transitions;192/32 are per-round fields. Its sourceb93329b3c44ea9d0cf5622c00f5ca6eea0740dac terminated after104.89s, no final primary, sole allocation ended/no automaticretry. These are terminal/collection facts with formal intake pending, not a new score. Root was sent the correction.
+
 ## Publication, return and remaining risk
 
 New Transport01a095ca-7b4a-7940-8acf-fca1b52c784d and Relay01a095ca-8676-74e1-b78c-ea459d41e905 are current Root-reported READY. Portfolio conversation6a9c109e-b264-83e8-a78b-f9ea1b767b7b is preserved. This author prepares only; Root loads the exact published HANDOFF and dispatches once, Transport returns to Root, which resumes this same native author with the immutable complete response. No Pro Send or new experiment was performed. FOLR/VNFC terminal/Monitor facts and RCLE generation acceptance are explicitly Root-reported at current maincc7191717, not independently observed by this author. The new Portfolio request remains unsent.
@@ -32,3 +34,5 @@ New Transport01a095ca-7b4a-7940-8acf-fca1b52c784d and Relay01a095ca-8676-74e1-b7
 A full Pro response must be checked against this question and current owner/spec requirements. A concrete conflict returns unchanged to the same node; it does not transfer authority locally. Later direction returns can change actual capacity without rebinding this question. Resource forecasts for changed paths and complete documentary effort remain unknown; suggested ceilings are new prospective asks, not evidence that an invocation will fit. Shared active checkout and original raw evidence remain retained; no new experiment/test scratch was created by this preparation.
 
 Prepared at 2026-09-12T13:48:08.326767+00:00.
+
+Renderer operational correction: the first provisional delivery/ output was unbound/TASK_NOT_PUBLISHED. After a material terminal-fact update the renderer refused in-place regeneration (use a fresh output directory; preserve existing packet and send state). That zero-dispatch draft is explicitly marked DRAFT_ONLY; the sole current request is rendered to delivery_ready/. No provider Send or acceptance occurred and no accepted bytes were replaced.

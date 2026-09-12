@@ -8,7 +8,7 @@
 
 ## 当前就绪判断
 
-FOLR 两个原定 arm 均 exit0，由原 DM 收集和科学 intake；VNFC 新配对 source b93329b3 在报告 round35/192 transitions/32 optimizer steps 后105秒 exit139，无 final primary，原 DM 收集/隔离并做有限相关诊断，没有自动重试；RCLE 同请求已被 provider 接受并生成。Monitor 已送达 terminal 并完成空集合目标，当前无已确认运行中实验。两个原 DM 仅在实际工作期间各计一个方向。Transport、Monitor、Relay 的新 Windows 路由已实际建立；本文不复制会过期的会话 ID。
+FOLR 两个原定 arm 均 exit0，由原 DM 收集和科学 intake；VNFC 新配对 source b93329b3 两臂各35个完整 logged rounds 后104.89秒 exit139，原 DM 报告至少2240 optimizer steps/13440 joint transitions（192/32是单round字段），无 final primary，原 DM 收集/隔离并做有限相关诊断，没有自动重试；RCLE 同请求已被 provider 接受并生成。Monitor 已送达 terminal 并完成空集合目标，当前无已确认运行中实验。两个原 DM 仅在实际工作期间各计一个方向。Transport、Monitor、Relay 的新 Windows 路由已实际建立；本文不复制会过期的会话 ID。
 
 - **ACVC：**五个完整训练单位的冻结 qualified JOINT_ABOVE_MEI 已最终验收，C01 consumed。新建议已完成：原 Convergence 判断是否让同一 DENSE/PPO 在训练期也执行固定 F，以“训练 C→部署 F”为强 null；没有新咨询/fit 预算，保持 recasts 2 最低争用顺序。
 - **FOLR：**原 B03 两臂 terminal exit0，科学结果尚待 intake；owner 明确 300 秒 support 是参考，308.8422538 秒不能单独挡住恢复。原每臂 native 1350 秒、两臂 2700 秒与科学定义保持，RETAIN 是有 GRU 历史适应的合法强对照。
