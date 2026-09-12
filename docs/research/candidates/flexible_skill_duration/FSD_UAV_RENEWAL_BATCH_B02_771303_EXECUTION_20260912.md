@@ -1,7 +1,7 @@
 # FSD B02 / 771303 — execution
 
 State: D0 accepted once by the detached supervisor; I preselected and unlaunched.
-Monitor ADD delivery accepted; actual unfinished-goal adoption is pending.
+Monitor actual unfinished-goal adoption confirmed; D0 running at that receipt.
 Seven pure binding checks and independent review passed; no material finding.
 DM /root/dm_fsd_d_pair, C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd.
 Input merge dd4c829d93acf12b0f487ee9ff0d31ff005535d8 brings main0c0648bd0
@@ -79,6 +79,11 @@ measured receipt and complete learning are future collection facts.
 
 Direct Monitor ADD delivery was accepted, requiring actual get_goal/create_goal
 and unfinished-goal adoption. D0_MONITOR_ADD.json distinguishes that delivery
-from the pending MONITOR_ADOPTED receipt. The DM retains same-handle handover,
-terminal collection/acceptance and preselected I. No duplicate launch or I
-invocation occurred. All four remote targets are retained for active execution.
+from the actual MONITOR_ADOPTED receipt. Root separately routed adoption:
+unfinished goal explicitly covers this handle through terminal delivery;
+running,exit null,pid3394294,tmux active,uptime41s, source/cwd/output consistent.
+D0_MONITOR_ADOPTION.json records the actual goal and facts. Root integrated
+source/card and launch at main3cbfae297/c5b9d1e1d. Observation now belongs to
+Monitor; DM does not poll or repeat ADD and resumes collection/technical
+acceptance on the routed terminal fact. I remains preselected and unlaunched.
+All four remote targets remain required for execution and collection.
