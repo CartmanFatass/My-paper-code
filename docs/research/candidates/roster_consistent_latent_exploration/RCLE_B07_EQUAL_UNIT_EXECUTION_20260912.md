@@ -1,9 +1,9 @@
 # RCLE B07 execution and technical acceptance
 
-Current boundary: terminal exit2 is collected. Learned fit/panels are accepted at
-their narrower ceiling; reference primary is missing. The prepared reference-path
-alternative has focused technical acceptance, with cause/runtime limits explicit.
-No additional native invocation or successor has occurred.
+Current boundary: original exit2 is collected and the learned fit/panels are accepted
+at their narrower ceiling. Root mapped one reference-only completion into the
+original R logical invocation; its exact detached submission is accepted, with
+actual Monitor goal adoption/terminal intake pending. No fit or budget was added.
 
 The [card](RCLE_B07_EQUAL_UNIT_SCIENCE_CARD_20260912.md) binds fresh
 RCLE-TBCFV-B07-EQUAL-UNIT/master27 and exactly one final1000 fit with three
@@ -146,3 +146,19 @@ new execution with the existing invocation allocation. No second submission
 is performed by this return. The [cleanup inventory](b07_equal_unit_20260912/CLEANUP_INVENTORY.json)
 retains exact terminal remote targets pending Root integration/preservation and
 completion-input mapping; nothing has been deleted.
+
+## Authorized reference-only completion submitted
+
+Root reconciled the exact missing reference measurement under the original R
+logical invocation after main71198147e. Source9eeef867f/command2c4777901 remained
+fixed. The scoped detached checkout/input bundle and the preserved learned
+summary match their byte digests; original native C++ hash18d45b95... also matches.
+The immutable command passes bash-n and its source-surface guard passes.
+
+One submission rcle-b07-reference-completion-s27-20260912 returned exit0 and
+confirmed its tmux session. Complete command wall1.0518815s includes embedded
+SSH .8037886s. [Receipt](b07_equal_unit_20260912/REFERENCE_COMPLETION_LAUNCH.json)
+records direct Monitor dispatch with explicit actual-goal obligations. Delivery
+is accepted; actual adoption/terminal/admission remain pending receipts, not
+inferred from the dispatch. The12s command includes byte check, fresh memory
+admission and the10s reference runner; no learned arm/model/gradient occurs.
