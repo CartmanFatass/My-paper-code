@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "keep",
-  "auto_applied": null,
+  "auto_applied": "keep",
   "dm_reason": "Pro最终选择与原问题/当前规范一致，S和A有独立用途与有限终点；强备选M+A/H和未知成本均保留。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/archive/RESPONSE.md",
@@ -94,8 +94,8 @@
       "authority": "PRO_FINAL / OWNER_DELEGATED",
       "source": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/archive/RESPONSE.md",
       "record": "docs/research/portfolio/decisions/2026-09-12-resume-independent-chains.md",
-      "state": "planned",
-      "summary": "S/A各自就绪；Root可立即独立派发。已记录Pro决定和作者接受，未把派发/launch/ROOT_INTEGRATED写成已发生；M与两经验tranche不拨款。"
+      "state": "applied",
+      "summary": "Root已集成并独立派发S/A：CBSC接任DM与ACVC原DM均实际开始；M与两经验tranche不拨款。"
     }
   ]
 }

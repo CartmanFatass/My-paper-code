@@ -1,0 +1,55 @@
+{
+  "question": "原 Convergence 已选择一对“训练时接入固定 F”与“训练 C、部署 F”的 B 比较；是否保留这项尚未拨款、尚未实现的方向选择？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/acvc/DIRECTION.md",
+      "from": "C01 已 consumed，下一科学对象尚待原节点选择",
+      "to": "记录已选的一对共同 F 部署比较；当前仍使用 train-C→deploy-F 参考，全部实现与计算待 Portfolio 投资。"
+    },
+    {
+      "target": "docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE.md",
+      "from": "唯一已拨款咨询等待完整回答",
+      "to": "完整回答已验收，本次 A 结束；保留精确未来需要及未知完整成本。"
+    }
+  ],
+  "if_refused": "按所有者异步覆盖只保留现有合格参考；保留这次 Pro 回答、C01 数据与既有已执行事实，不重写历史，不自动提出新问题或运行实验。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/archive/RESPONSE.md",
+      "quote": "Select one bounded B/EXPLORE comparison of training through fixed F versus training C and adding F only at deployment, with both final policies deployed through F.",
+      "why": "原方向节点选择了明确用途；共同 F 部署可以检验训练适应是否带来额外价值。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md",
+      "quote": "JOINT_ABOVE_MEI",
+      "why": "C01 在限定模型下支持现有部署 F 包；这使 train-C→deploy-F 成为有竞争力的比较器，而不是假定训练 through F 已经有效。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/archive/RESPONSE.md",
+      "quote": "Reference-only retention is the strongest alternative.",
+      "why": "现有 F 已有用；训练时介入可能抑制探索或产生无用提议。F 训练路径尚未实现，完整成本未知。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md",
+      "quote": "46/320",
+      "why": "仍有 F-dwell 反向世界、有效 dwell 与不等私有干预历史，不能宣称普遍受益或纯 retrace 因果。"
+    }
+  ],
+  "uncertainty": [
+    "新增比较尚无经验结果；一对训练只产生一次比较重复，64 个世界不构成训练总体重复。",
+    "实际发出的 F 命令必须反馈进后续历史，PPO 比率仍按采样提议与旧密度计算；未来实现需保护这一语义。",
+    "同信息当前主机的调优 headroom 仍无记录；完整新路径成本未知，旧 270/540/660/1200 额度均未拨款。",
+    "Transport 完成时间字段早于固定 TASK 发布，已保留原字段；不据此计算时长，不影响独立验证的回答身份与内容。"
+  ],
+  "cost": {
+    "compute": "本次只完成一问及 intake，完整文书/provider 成本未知，新增实现、模型、RNG、训练、评估、诊断、runtime test 都为零。未来若投资源须覆盖两次新拟合、每臂 512 训练/64 最终 F 评估及必要完整支持；目前无数值额度。",
+    "owner_time": "异步阅知或覆盖即可；不等逐项批准。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；方向记录已应用，任何未来工程/计算依赖单独 Portfolio 投资。"
+  },
+  "verdict_text": "**Select one bounded B/EXPLORE comparison of training through fixed F versus training C and adding F only at deployment, with both final policies deployed through F.** This is the next scientific object I select after consumed C01, rather than reference-only retention with no further standalone comparison. Its value is a concrete use decision: whether the proposer and its teammates should learn from the corrected motion and private feedback they will encounter at deployment, or whether the already useful deployment-only correction is sufficient. The strong null is **train-C → deploy-F**, not deploy-C. C01 establishes qualified value for that null; it does not establish either a training-mismatch penalty or an additional gain from learning through F. [Original DM note, “The one proposed question and its use” and “Candidate B”][note]; [C01 final intake, “Frozen rule and complete observation”][intake].\n\n**This favorable direction decision allocates no implementation or experiment.** Portfolio purchased exactly this one documentary question and full intake; A+B and every offered 270/540/660/1,200-second figure remain unallocated. No source patch, target import, model, scientific RNG, runtime check, new card or fit follows from this response. The implementation is not ready unchanged. The selected B is a specific, unfunded next evidence need for a later investment decision, not permission to begin preparing or running it now. [Current facts, `current_allocation` and `stop`][facts]; [Portfolio response §§1 and 4][portfolio]; [execution mapping, A][mapping].",
+  "source": "docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/archive/RESPONSE.md",
+  "source_commit": "4d50f9a6a2d125e373b414499d580f875c1fc61c"
+}

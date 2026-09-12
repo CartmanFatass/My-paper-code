@@ -8,8 +8,7 @@
 本表登记15 ACTIVE、7 PARKED，生命周期、priority、recasts与UAV字段不变。
 最新 [Portfolio决定](decisions/2026-09-12-resume-independent-chains.md) 已由原作者完整核对：**S+A；保持M不追加；S+B/A+B不拨款**。
 
-Root在本次intake入口报告实际工作集0/5：FOLR、VNFC和RCLE已完成其科学分配，剩余cleanup不计研究推进。
-新选CBSC S与ACVC A分别就绪，Root实际派发后按真实活动计数；两项启动只达到2/5，未执行任务和Portfolio作者不计槽位。
+Root当前实际工作集0/5：ACVC A与CBSC S均已完成；Portfolio作者正在准备下一边际投资问题，但不计方向槽位。
 CBSC只买一次候选准备（complete invoked-support≤600秒、300参考），ACVC只买一次原Convergence与完整intake（成本未知）；都没有新增数值额度。
 两项互不等待，剩余三个空槽也没有自动备用款。详细直接任务见 [独立执行映射](pro_packets/20260912_resume_five_independent_chains/EXECUTION_MAPPING.md)。
 Monitor当前没有活动实验目标，原terminal notices已送达；Transport本轮Portfolio答复已完整归档。实际新派发由Root持续更新。
@@ -20,8 +19,8 @@ Monitor当前没有活动实验目标，原terminal notices已送达；Transport
 | 方向 | 最新证据/科学状态 | 当前实际工作 | 下一步及边界 |
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
-| [ACVC](../candidates/acvc/ACVC_POST_C01_DIRECTION_QUESTION_20260912.md) | C01五fit完整并consumed，qualified JOINT_ABOVE_MEI限制保持；具体train-through-F强null建议已完成。 | **A已选、独立就绪**：当前ACVC DM的一次原Convergence+完整intake；实际派发待Root记录。 | 选择训练through F vs训练C/部署F，或只留参考；完整咨询成本未知，零实现/fit；A+B未拨款，recasts2排序保持。 |
-| [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_SCIENCE_CARD_20260906.md) | 当前机会信用包缺完整STRUCT primary；旧source-only已完成且不等于production修复。 | **S已选、独立就绪**：一次prospective B卡/L0+supported路径候选或具体no-ready；实际派发待Root记录。 | 新complete invoked-support≤600秒、300参考；零target import/model/test/runtime验证/学习。只买候选描述，S+B不拨款；不要求全历史归因。 |
+| [ACVC](../candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE.md) | C01保持qualified JOINT_ABOVE_MEI；最新PRO_FINAL/maince92d9791选择未来单pair：train-through-F vs train-C，两边deployF并保留当前参考。 | 无活动执行；A完成，零实现/fit，A+B未拨款。 | 未来Portfolio须覆盖faithful implementation、checks/review、两fresh fits及完整support；不得直接启动。 |
+| [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_PUBLIC_STREAM_B_SCIENCE_CARD_20260912.md) | S完成/main3e4292ea4：形成owned17-byte public-row/FP32 projection候选与明确EpisodeTape边界；runtime independence/crash repair未证明。 | 无活动执行；零target import/model/test/runtime验证/学习。 | 未来具体Portfolio投资；S+B未拨款，不自动实现或运行。 |
 | [CRTO](../candidates/commitment_residual_triggered_options/DIRECTION.md) | P72 PRO_FINAL保留B08测试的selected-panel family PARK；finite-zero修复已集成。 | 无 | 新的具体方向选择；没有自动successor。 |
 | [DISH](../candidates/degraded_incumbent_shadow_handover/DIRECTION.md) | **更新：B08 HALF_RETAIN−REPLACE为−6.5 ticks，WITHIN；REPLACE默认。post-B08已PARK retained-A03 arrival-bridge retention家族。** P62/DIRECT只是更早历史。 | 无 | 具体receipt-to-control研究问题或对独立pair不确定性的实际决策需求；新选择才续行，不要求完整机制证明。 |
 | [ec4g_r1](../candidates/ec4g_r1/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
