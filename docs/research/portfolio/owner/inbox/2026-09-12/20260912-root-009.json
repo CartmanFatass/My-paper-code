@@ -1,0 +1,106 @@
+{
+  "id": "20260912-root-009",
+  "created": "2026-09-12T12:24:12-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "Portfolio最终A M各一新pair，Q不追加",
+  "context": "完整同节点答复已原作者核对：A840、M1200新future invoked caps，Q=no。D/P已后来结束，当前0/5，A/M实际独立启动后2/5；不把三空位当追加拨款。",
+  "options": [
+    {
+      "key": "am",
+      "label": "执行最终A加M",
+      "consequence": "Root独立派发ACVC与MGTAP完整有界任务，按实际开始记数；每项结束，无retry或successor。"
+    },
+    {
+      "key": "amend",
+      "label": "异步调整未执行部分",
+      "consequence": "仅按owner新指令改变其覆盖范围；保留已发生结果与成本，不自动改冻结科学或挪用余额。"
+    },
+    {
+      "key": "refuse",
+      "label": "拒绝未执行新投入",
+      "consequence": "停止尚未执行的新增范围，保留已形成Pro决定和已执行证据，不自动退款、重跑或补位。"
+    }
+  ],
+  "recommended": "am",
+  "auto_applied": null,
+  "dm_reason": "执行完整符合规范的Portfolio最终选择；M接近取舍和A alone/H强反方保留，不添加逐项批准层。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L53",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Portfolio已最终选择A和M、拒绝Q；将两项分别执行，当前0/5只在实际启动后改为2/5，并记录剩余三槽。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC A",
+        "from": "第一common-F训练pair为DOWN，旧F额度已结束；本次之前A仅未资助提案",
+        "to": "PRO_FINAL新一原样pair：270每臂/540native/300support/840完整future invoked秒；独立DM绑定、执行、完整intake后结束。"
+      },
+      {
+        "target": "MGTAP M",
+        "from": "两次既有M=no与within/adverse证据保持，无新M数据",
+        "to": "本次明确新授予一原样第三pair：450每臂/900native/300support/1200完整future invoked秒，DENSE默认保留。"
+      },
+      {
+        "target": "CBSC Q与当前容量",
+        "from": "Q是未知完整成本的单次咨询候选；固定输入曾为D/P活动2/5",
+        "to": "Q=no，不发咨询且不作CBSC家族PARK。D/P已后来各自结束，当前0/5；A/M实际开始后2/5，余三槽无资金。"
+      }
+    ],
+    "if_refused": "owner异步覆盖后由Root在实际边界处理未执行部分；已发生工作和完整原响应保留，不隐含重跑、退款或新的替代款。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md",
+        "quote": "Fresh unscreened training pairs can change those development recommendations without another architecture build, a causal diagnosis or more evaluation of old weights.",
+        "why": "具体用途是训练F与可选COND是否值得继续开发，各买一条独立训练观察。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md",
+        "quote": "M no longer displaces those purchases.",
+        "why": "本次边际机会集合变化，两个旧M=no没有被改写成错误或未用授权。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md",
+        "quote": "The strongest objection is that a third point may merely add another adverse realization to an already useful DENSE default.",
+        "why": "M是更接近的投资取舍；A alone和H都有强理由，新增观察不保证有实用增益。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md",
+        "quote": "The strongest case against A is that this complete adverse result already supports a useful reference, while a second pair may not change practice.",
+        "why": "部署F已提供有用参考，训练F复现的边际信息价值不确定。"
+      }
+    ],
+    "uncertainty": [
+      "总2040只为两笔future invoked上限，不是预测、生命周期或完整agent/provider费用；历史缺测继续保留。",
+      "Q本轮未选，FSD第五pair/FOLR第四pair/RCLE新对象均无自动资金。",
+      "FSD新+.01255481只略高MEI且条件SE.01250684；FOLR最新H仅hold测试配方，二者均已释放槽位。",
+      "全22生命周期、priority、headroom缺失、recasts和UAV字段不变，ACVC第二recast低优先争用保持。"
+    ],
+    "cost": {
+      "compute": "新A270/540/300/840与M450/900/300/1200秒，非互转，总2040future invoked ceilings；完整agent/provider及旧总成本未知。Q零新款；无fixture/额外panel/重试/后续pair/新咨询。",
+      "owner_time": "无需逐项批准；完整同节点选择已核对，Root按各DM实际派发记录。",
+      "reversibility": "costly",
+      "waits_on_this": "没有批次等待；A/M各自可现在开始，其他三槽另行准备而无资金。"
+    },
+    "verdict_text": "**Final decision: A=yes at270/arm,540 native,300 support,840 future invoked seconds; M=yes at450/arm,900 native,300 support,1,200 future invoked seconds; Q=no; H not selected.** Preserve both earlier M=no decisions as history and create only this new marginal M allowance. D/P continue unchanged. Each selected chain begins and returns independently, with one complete paired observation and honest limitations or its concrete dependent failure. No empty slot, favorable sign, failed receipt, unused cap or completed unit funds a replacement or automatic successor.",
+    "source": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T19:24:54+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-12-post-cfr-marginal-investment.md",
+      "state": "planned",
+      "summary": "新A/M一pair的符合规范最终选择，两个独立DM派发就绪；当前0/5，实际start由Root记录，Q无新款。"
+    }
+  ]
+}
