@@ -29,7 +29,7 @@ Monitor reported actual get_goal=null, active_set=[], pending notices=[], short 
 reachability succeeded; it can adopt later nonempty MONITOR_ADD with an unbudgeted goal.
 Relay's indexed rollout path was missing. The same-ID archived original was copied
 byte-for-byte to that exact path, preserving the archive; the recovery message then
-was accepted. Operational response remains pending at this record.
+was accepted. Relay subsequently returned its actual retained receipt state to new Root; no pending old events need replay. Its recovery is confirmed.
 
 ## Accepted preservation and remaining assignments
 
@@ -62,3 +62,25 @@ Other ended allocations, narrow family parks and unready grants remain as record
 vacancies are not new allowances. Portfolio scientific choices remain with Portfolio Pro
 through a designated DM; Root does not select replacement science. Owner-console reviews
 returned [] at recovery. No new scheduler, standing timer or heartbeat was introduced.
+
+## Dispatch reconciliation
+
+Main merge/publication succeeded at d24e49025; Windows main was clean afterward.
+Transport same-request recovery was dispatched and its actual task snapshot reported
+active/inProgress (turn01a095c2-17aa-7723-876b-4e5c0a4abd18); provider acceptance remains
+unconfirmed, so RCLE is not yet counted as an advancing generation.
+Portfolio preparation is assigned to /root/dm_a_mx_portfolio_resume, explicitly replacing
+the unavailable original native author and reusing codex/portfolio. It must return
+already-authorized ready directions immediately and prepare only necessary investment
+choices for the existing Portfolio Pro node. This cross-direction preparation is not
+an extra research direction slot. At this boundary ACVC and FOLR are the two advancing
+native direction chains, no accepted experiment is running, and three target slots
+remain unfilled. Root fills ready slots on returns; stopped/ended historical allocations
+and an unaccepted Transport request are not counted as active experiments.
+
+FOLR DM's direct accounting review:308.8422538 =274.81 remote Git parent wall +34.0322538
+other recorded command wall. The55-second client timeout is replaced by the surviving
+parent duration, not added again. The quantity is a lower-bound sum of invocation wall,
+not CPU time or study elapsed. The Git preparation was about89 percent of the total.
+The owner support-reference clarification permits minimal repair of the original
+unexecuted pair rather than treating this engineering delay as a scientific outcome.
