@@ -11,6 +11,14 @@ publication, precise recovery inventories and Root acceptance of existing handof
 Transport holds unaccepted RCLE recovery without further Send or repeated browser
 checks. The rolling status below is historical relative to this owner boundary.
 
+FOLR B03 handoff accepted: source/card89035d8f1→`f227552b7`, commandse3ac72da5→
+`13299d89c`, technicalhandoff31a5b81c7→`51bbbdbb9`. Zero scientific exposure/null
+primary; support breach308.8422538s at stop, later known lower bound321.5195587s
+plus unmeasured publication/relay/integration. Six local files/committed ZIP match;
+archiveSHA25671a64ec6e0dc52f9956fa7ab02520a2ce7a56698a555c139079fd8415341f7d8.
+Terminal absence receipt05:11:49.332649Z is preserved. DM stopped; remaining local
+retention is intentional and owned by Root, with no new removal or continuation.
+
 ## Current rolling handoffs — 2026-09-12 04:52 UTC
 
 Current execution ownership is recorded at the top of [PORTFOLIO.md](PORTFOLIO.md).

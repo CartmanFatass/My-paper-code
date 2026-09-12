@@ -18,6 +18,13 @@ Monitor has an empty active set; Transport preserves unaccepted RCLE for handoff
 and holds new Sends. Prior working-set counts below are pre-handoff snapshots,
 not dispatch instructions or vacant slots to refill.
 
+FOLR's handoff is now accepted and integrated through `51bbbdbb9`; its DM has
+stopped. Root verified the committed control archive and all six retained local
+files byte-for-byte (1,190,184 bytes). The preserved terminal receipt records no
+owned remote processes, checkout/registration or supervisor roots. Shared/local
+evidence remains retained under the owner handoff instruction. ACVC's final
+handoff is still being prepared; no research continuation is dispatched.
+
 ## Current execution ownership — 2026-09-12 04:52 UTC
 
 This current snapshot supersedes the operational counts/waits in older dated sections
