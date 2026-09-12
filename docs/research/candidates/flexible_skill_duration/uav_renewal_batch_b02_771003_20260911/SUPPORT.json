@@ -120,9 +120,17 @@
     {
       "purpose": "Monitor actual I adoption observation reported by Root",
       "wall_seconds": 0.8
+    },
+    {
+      "purpose": "publish exact I launch and actual goal-persistent Monitor handover",
+      "wall_seconds": 5.2827333
+    },
+    {
+      "purpose": "one required I handover relay API elapsed, forwarding cost separate",
+      "wall_seconds": 0.189
     }
   ],
-  "known_support_seconds": 45.2265047,
+  "known_support_seconds": 50.698237999999996,
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -153,5 +161,5 @@
     "I": null
   },
   "native_wall_sum_observed_seconds": 538.66,
-  "support_plus_native_known_seconds": 583.8865046999999
+  "support_plus_native_known_seconds": 589.3582379999999
 }
