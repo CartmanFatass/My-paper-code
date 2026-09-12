@@ -175,8 +175,16 @@ none of it is a §11.4 launch condition, and ladders already open continue.
 
 ## 3. Blocker rule
 
-A connector, evidence, or transport blocker means no Pro decision was formed. It never transfers
-final authority to a local model, and it must not stall the loop:
+A connector, evidence, or transport status alone does not establish whether a Pro decision was
+formed. Reconcile the bound request and full response first; a verified complete response goes
+to its designated DM for intake even if a chat receipt or local status reports a blocker.
+If no decision was formed, the blocker never transfers final authority to a local model:
+
+Transport retains recovery of the same request, prompt and binding. Proven ineffective clicks
+permit a concrete repaired attempt under the Transport skill; uncertain acceptance stops Send,
+not reconciliation or observation. Preserve prior attempts and blocker receipts, and clear
+previous-round observations when binding a successor. Root advances independent work and routes
+the eventual complete response; a blocker return does not close the recovery assignment.
 
 - **Object tier**: the DM takes the recommended option as a provisional decision labelled
   `PRO_BLOCKED / LOCAL_PROVISIONAL`, restricted to reversible actions, queues the round for retry,

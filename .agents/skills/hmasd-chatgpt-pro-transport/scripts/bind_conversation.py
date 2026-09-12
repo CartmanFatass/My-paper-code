@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import os
 import re
@@ -253,26 +254,25 @@ def _expected_binding_key(workflow_node: str, direction_id: str, direction_ids: 
 
 
 def _archived_round(record: dict) -> dict:
-    """Preserve the completed provider round before clearing an admitted reset."""
+    """Keep complete round evidence without recursively duplicating prior rounds."""
 
-    archived = {
-        "request_id": record.get("request_id"),
-        "packet_id": record.get("packet_id"),
-        "state": record.get("state"),
-        "source_thread_id": record.get("source_thread_id"),
-        "creator_thread_id": record.get("creator_thread_id") or record.get("source_thread_id"),
-        "parent_thread_id": record.get("parent_thread_id"),
-        "operator_thread_id": record.get("operator_thread_id"),
-        "return_route": record.get("return_route"),
-        "conversation_id": record.get("conversation_id"),
-        "provider_url": record.get("provider_url"),
-        "archive": record.get("archive"),
-        "return_receipt": record.get("return_receipt"),
-    }
-    for key in LEGACY_TOP_LEVEL_ROUTE_FIELDS:
-        if key in record:
-            archived[key] = record[key]
-    return archived
+    return copy.deepcopy({key: value for key, value in record.items() if key != "request_history"})
+
+
+def _binding_fields(record: dict) -> dict:
+    """Carry only durable conversation identity and context-reset provenance forward.
+
+    Request observations are intentionally not enumerated: new or ad-hoc fields
+    belong to the archived round unless explicitly admitted here.
+    """
+
+    fields = (
+        "conversation_binding_key", "workflow_node", "direction_id",
+        "decision_authority", "conversation_id", "provider_url",
+        "request_history", "quarantined_provider_conversations",
+        "pending_context_reset", "last_provider_context_reset",
+    )
+    return {key: copy.deepcopy(record[key]) for key in fields if key in record}
 
 
 def _archived_direction_mirror(
@@ -573,6 +573,15 @@ def bind(args: argparse.Namespace) -> int:
             )
         if old is None and args.conversation_binding_key == f"legacy:{args.direction_id}":
             old = directions.get(args.direction_id)
+        if old is None:
+            prebinding = directions.get(args.direction_id)
+            if (
+                isinstance(prebinding, dict)
+                and prebinding.get("conversation_binding_key") == args.conversation_binding_key
+                and prebinding.get("request_id") == args.request_id
+                and prebinding.get("conversation_id") is None
+            ):
+                old = prebinding
         if old is not None:
             old = _reconcile_archived_binding_mirror(
                 old,
@@ -596,6 +605,49 @@ def bind(args: argparse.Namespace) -> int:
                     },
                     3,
                 )
+        if (
+            old is not None
+            and old.get("conversation_id") is None
+            and old.get("request_id") == args.request_id
+            and old.get("state") != "CONTEXT_RESET_PENDING"
+        ):
+            # Binding the observed URL does not start a new request or erase its
+            # home-page attempts. The operator records actual clicks before bind.
+            if not observed_after_successful_send or reset_invalid_provider_context:
+                return _result(
+                    {"bound": False, "state": "CONVERSATION_UNVERIFIED",
+                     "error": "prebinding recovery requires an observed successful Send"}, 3,
+                )
+            for field in ("prompt_sha256", "source_thread_id", "parent_thread_id", "operator_thread_id"):
+                if old.get(field) != getattr(args, field):
+                    return _result(
+                        {"bound": False, "state": "BINDING_CONFLICT",
+                         "error": f"prebinding recovery identity mismatch: {field}"}, 3,
+                    )
+            if not _tab_handle(old.get("tab_id")) or _tab_handle(old.get("tab_id")) != _tab_handle(args.tab_id):
+                return _result(
+                    {"bound": False, "state": "BINDING_CONFLICT",
+                     "error": "prebinding recovery requires the original tab"}, 3,
+                )
+            count = old.get("send_click_count", 1)
+            if not isinstance(count, int) or isinstance(count, bool) or count < 1:
+                return _result(
+                    {"bound": False, "state": "BINDING_CONFLICT",
+                     "error": "prebinding recovery requires a positive actual Send count"}, 3,
+                )
+            recovered = copy.deepcopy(old)
+            recovered.update(conversation_id=args.conversation_id, provider_url=args.provider_url,
+                             state="SEND_CONFIRMED", send_click_count=count)
+            # Preserve acceptance even if a later operational blocker changes state.
+            recovered.setdefault("send_evidence", {})["observed_after_successful_send"] = True
+            monitor = recovered.setdefault("monitor", {})
+            monitor.update(identity_key=monitor_identity_key(recovered), provider_url=args.provider_url,
+                           last_observed_url=args.provider_url)
+            bindings[args.conversation_binding_key] = recovered
+            directions[args.direction_id] = recovered
+            _atomic_write(registry_path, registry)
+            return _result({"bound": True, "idempotent": False, "prebinding_recovered": True,
+                            "state": "BOUND", "record": recovered})
         if old is not None and old.get("state") == "CONTEXT_RESET_PENDING":
             pending_reset = old.get("pending_context_reset")
             if not isinstance(pending_reset, dict):
@@ -636,6 +688,7 @@ def bind(args: argparse.Namespace) -> int:
                 canonical_refs.append(enriched)
             tab_handle = _tab_handle(args.tab_id)
             logical_packet_id = args.packet_id or packet_id(args.request_id, args.direction_id)
+            old = _binding_fields(old)
             old.update(
                 {
                     "schema_version": SCHEMA_VERSION,
@@ -775,6 +828,7 @@ def bind(args: argparse.Namespace) -> int:
                     canonical_refs.append(enriched)
                 tab_handle = _tab_handle(args.tab_id)
                 logical_packet_id = args.packet_id or packet_id(args.request_id, args.direction_id)
+                old = _binding_fields(old)
                 old.update(
                     {
                         "schema_version": SCHEMA_VERSION,
