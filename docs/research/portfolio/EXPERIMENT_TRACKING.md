@@ -9,13 +9,17 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | MGTAP | Original Convergence response accepted: one fresh TOP/intact-DENSE B selected; intake integrated at main6f506e474, direction remains ACTIVE | Portfolio decides the pending whole-object investment (450s/arm, 1200s complete); no experiment before allocation |
 | FSD | PRO_FINAL N=yes/main0c0648bd0; original DM dispatched for one fresh fifth I1280/authentic-D0 pair | D0/I execution under900/1800/native2700/support300/complete3000; no retry/sixth pair |
 | RCLE | PRO_FINAL R=yes/main0c0648bd0; original DM dispatched for one post-B07 Convergence question/full intake | Zero implementation/numeric work; one exact Transport Send, no repeated B07 or added fit |
-| FOLR | Distinct entity-history continuity Convergence request is queued through Transport after ACVC | Transport performs exact-once Send; original DM intakes the response without undoing package-level H or repeating the pair |
+| FOLR | Distinct entity-history continuity request accepted once by provider on its bound conversation; generation active alongside ACVC observation | Transport observes natural completion; original DM intakes the response without undoing package-level H or repeating the pair |
 | Portfolio | N/R selections are integrated; designated DM is preparing new-direction discovery/registration and now includes MGTAP's fresh investment need | Return exact Portfolio handoff to Root, then Transport sends it once; Portfolio decides registration/investment/priority |
 
 Direction chains5/5: ACVC, MGTAP, FSD, RCLE and FOLR DMs have resumed their next bounded object or
 proper-node direction step. Their latest allocations completed, but no Portfolio decision stopped
 these ACTIVE directions. The N/S/R generation supplies concrete FSD/RCLE choices; new-direction
 drafting first refreshes all affected old-direction facts from the current DMs.
+
+Strict advancing count5/5: ACVC and FOLR have separately accepted provider generations, FSD and
+RCLE have active DM work, and MGTAP has active Portfolio investment routing. No queued intention is
+used to fill this count.
 
 ## Current routing
 
