@@ -110,9 +110,14 @@ Direct MONITOR_ADD send was accepted by the app, with all required goal/terminal
 instructions. Root then forwarded actual MONITOR_ADOPTED: a fresh unbudgeted goal
 is active, same supervisor running at2026-09-12T17:21Z, pid3376051,
 tmux_active=true, uptime approximately34s, exit=null. **Adoption confirmed.**
-The monitor retains this handle through accepted terminal delivery and sends
-MONITOR_GOAL_COMPLETE before completing an empty goal. DM stopped routine polling;
-terminal collection/intake is pending and remains with /root/dm_a_mx_cbsc_s.
+DM stopped routine polling. Root subsequently forwarded MONITOR_TERMINAL:
+finished/exit0 at2026-09-12T17:22:15Z, supervisor duration90s. DM collected and
+accepted the complete original pair; result/intake are in
+CBSC_PUBLIC_STREAM_B01_RESULT_EVIDENCE_20260912.md and
+CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md. During collection the same supervisor
+returned finished/exit0/tmux_active=false; the earlier terminal true flag was
+the wrapper's one-second tail. No stop/retry was needed. Root tracks the
+Monitor's required goal-completion receipt; no observation remains for this pair.
 
 ## Cost and cleanup obligations
 
@@ -127,9 +132,10 @@ must be charged once inside600s; full deliberation/client overhead is unmeasured
 Old S cost and older cumulative unknown tails remain historical once, outside C's
 new future allowance. No native saving transfers to support.
 
-Cleanup inventory: this one detached worktree, one supervisor root, the local and
-remote30MB source bundle, and collected runtime copies. Preserve original evidence/
-digests and receive Root integration/retention/reclamation acceptance before removing
-scientific roots. Shared authoring checkout remains in use. Terminal result ends
-the finite pair; DM returns its bounded scientific reading or concrete dependent
-limitation and explicit unexecuted remainder. No second S/retry is authorized.
+Cleanup inventory: this one terminal detached worktree, one supervisor root, the
+local/remote30MB source bundle and two remote result/supervisor transport archives.
+Full original runtime and supervisor bytes are preserved in committed direction
+evidence archives with matching remote/local SHA256 and19 result-member digests.
+Root integration/retention/reclamation acceptance remains the removal boundary;
+DM owns its execution. Shared authoring checkout remains in use. The finite pair
+is scientifically complete; no second S/retry or other numerical remainder exists.

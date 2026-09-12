@@ -89,6 +89,14 @@
       "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_EXECUTION_20260912.md",
       "state": "applied",
       "summary": "C 源码与五项针对性检查已接受；唯一 RAW/STRUCT 监督句柄已启动，实际 Monitor 未完成 goal 接管已确认；等待原始终态 intake。"
+    },
+    {
+      "at": "2026-09-12T17:31:40+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "唯一新配对完整结束并 intake：RAW=STRUCT11.15，32个差值全零，低于 REQUEST_ONLY12.45；native90.27秒；保全完整产物，有限 C 结束，无自动追加。"
     }
   ]
 }
