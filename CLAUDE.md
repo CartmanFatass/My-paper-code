@@ -22,13 +22,16 @@ work follows the second system's conventions even when the edit lands in the fir
 
 ## Environment
 
-Daily WSL control-plane checks use `/home/fires/.venvs/hmasd-control/bin/python`.
-This environment contains pytest and jsonschema, without torch. Read `tests/AGENTS.md`
-for invocation-local scratch and cleanup. Scientific checks use the assigned node and
-interpreter in `.codex/hmasd-compute.toml`; the preserved Windows conda environments
-are Windows-only fallbacks. The scientific capability catalog records those environments
-in `configs/scientific-capabilities-v1.toml`; it does not declare a native Linux science stack.
-Never install or upgrade packages in an existing scientific environment for a migration check.
+Daily WSL control-plane checks use `/home/fires/.venvs/hmasd-control/bin/python`
+(pytest/jsonschema, no torch). The native CPU environment is
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python`; the analysis environment is
+`/home/fires/.venvs/hmasd-linux-science-tools/bin/python`. Read `environments/README.md`
+for exact version records, activation (including Ninja), recreation and platform limits.
+`configs/scientific-capabilities-v1.toml` selects the native analysis environment.
+Scientific checks still use the assigned node/interpreter in `.codex/hmasd-compute.toml`;
+the remote node remains the result/heavy-compute default. Read `tests/AGENTS.md` for
+invocation-local scratch and cleanup. Preserved Windows conda environments are Windows
+fallbacks. Do not upgrade an existing scientific environment for a migration check.
 
 ## Commands
 
