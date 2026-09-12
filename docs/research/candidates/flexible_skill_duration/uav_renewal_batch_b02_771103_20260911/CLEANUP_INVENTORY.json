@@ -1,42 +1,153 @@
 {
-  "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
-  "prepared_utc": "2026-09-12T02:52:33.075473+00:00",
-  "state": "I active; retention needed until terminal collection and full preservation",
-  "cleanup_owner": "/root/dm_fsd_i1280_implementation",
-  "Root_role": "integration and retention/reclamation acceptance",
-  "paths": [
+  "recorded_utc": "2026-09-12T03:15:51.120039+00:00",
+  "source_sha": "5b15e536806d3b54dc693e7b4b911eba53ff643c",
+  "raw_file_count": 22,
+  "all_raw_files_match_preserved_archives": true,
+  "raw_files": {
+    "D0/manifest.json": {
+      "bytes": 1605,
+      "sha256": "3e3714b1b674c5caac920495c8162f2e9310d1933c298f6ab6fa8124efe3c146"
+    },
+    "D0/summary.json": {
+      "bytes": 49573,
+      "sha256": "a35ec41bcf70f6e48bef82e3718b0096848a3e3d648f37d6944c4c3a0b514475"
+    },
+    "D0/training.jsonl": {
+      "bytes": 22299,
+      "sha256": "a64435767ea41874a14b178b00d5550b25284eb177fddc4b42bc6bb72e9f12c3"
+    },
+    "I/manifest.json": {
+      "bytes": 1605,
+      "sha256": "9a00017c1278d5fdfa1788a317a426684dedaa7cc19bc74970b0476da85a86d6"
+    },
+    "I/summary.json": {
+      "bytes": 51333,
+      "sha256": "2648618aa724f22a50b9eeb874928345372c3df6f63f5e5f2be1ecd6357edd4c"
+    },
+    "I/training.jsonl": {
+      "bytes": 22371,
+      "sha256": "129f86f5a853cf43819d676ec9c191fbcac26f675e8df4f081b030318eab7612"
+    },
+    "inputs/D0_admission.json": {
+      "bytes": 504,
+      "sha256": "fc01b15c40fc7ee75dccad17aecb0195108848406b077064e3a9fb2d70b302e2"
+    },
+    "inputs/D0_process_time.txt": {
+      "bytes": 100,
+      "sha256": "cb833da0b501e6748cf5e95939ee915ecb4784726bdd7456522bfcf1ecd8fa1c"
+    },
+    "inputs/I_admission.json": {
+      "bytes": 504,
+      "sha256": "961c85fcf76785f2209376b7312d5a4ae3e94f4ea6400bd8d1a35155ed00e79b"
+    },
+    "inputs/I_process_time.txt": {
+      "bytes": 101,
+      "sha256": "a0c5e6bff78b0265285a1b6802f2f7fb09316a61a1fb28aa769034cd62af63c2"
+    },
+    "supervisor_D0/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "supervisor_D0/pid": {
+      "bytes": 8,
+      "sha256": "56d3c7d629c386b5b72b90744b61c4a4062acbdb47951816e08a2687af1af08e"
+    },
+    "supervisor_D0/runner.sh": {
+      "bytes": 1497,
+      "sha256": "2c1730a0a64ea6ee3c26d901ed741be306d9d0d79f44f3ceaca5193cad9e72e4"
+    },
+    "supervisor_D0/start_time": {
+      "bytes": 11,
+      "sha256": "4603fc1cd81c073d197c77e9c777564f15c4bac0b82ae059e0a9497a8ad90cc4"
+    },
+    "supervisor_D0/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "supervisor_D0/task.log": {
+      "bytes": 784,
+      "sha256": "e1c222a2ff3b127c35faba7063c23d5decb267f1919ebcde3eea4a4e91575860"
+    },
+    "supervisor_I/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "supervisor_I/pid": {
+      "bytes": 8,
+      "sha256": "5a570a935e22e9e41f1a0c3e0a09d8345a1358a5f14387247993ef1087994660"
+    },
+    "supervisor_I/runner.sh": {
+      "bytes": 1487,
+      "sha256": "1bde3077632598b3ce9a2865df5d2b9579d3c3e6cc65565afb1d62fa5dbc0cde"
+    },
+    "supervisor_I/start_time": {
+      "bytes": 11,
+      "sha256": "7ab6d9e95d3d2382e733127d0b5ef2ba39a29d9d1f4804f33373545ebf33132a"
+    },
+    "supervisor_I/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "supervisor_I/task.log": {
+      "bytes": 783,
+      "sha256": "112d22df8ea4b56126451461601deb75c3a2e19d9e5b858edf948eae56caa5d0"
+    }
+  },
+  "tracked_untracked_status": "",
+  "known_ignored_outputs": [
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771103/D0/manifest.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771103/D0/summary.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771103/D0/training.jsonl",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771103/I/manifest.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771103/I/summary.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771103/I/training.jsonl"
+  ],
+  "terminal": {
+    "D0": {
+      "status": "finished",
+      "exit_code": 0,
+      "tmux_has_session_returncode": 1,
+      "pid_record": "3359885"
+    },
+    "I": {
+      "status": "finished",
+      "exit_code": 0,
+      "tmux_has_session_returncode": 1,
+      "pid_record": "3361553"
+    }
+  },
+  "owned_paths": [
     {
       "path": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911",
-      "kind": "detached execution worktree",
-      "retention": "active I plus D0 companion; preserve outputs before removal; verify disk and Git registration absence"
+      "canonical_path": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911",
+      "bytes": 43885122,
+      "file_count": 2518,
+      "contains_symlink": false
     },
     {
       "path": "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911",
-      "kind": "receipt inputs",
-      "retention": "I admission/time and D0 receipts needed for collection"
+      "canonical_path": "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911",
+      "bytes": 1209,
+      "file_count": 4,
+      "contains_symlink": false
     },
     {
       "path": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-D0-20260911",
-      "kind": "terminal D0 supervisor",
-      "retention": "included in published 11-file raw archive; retain through pair closeout"
+      "canonical_path": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-D0-20260911",
+      "bytes": 2311,
+      "file_count": 6,
+      "contains_symlink": false
     },
     {
       "path": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-I-20260911",
-      "kind": "active I supervisor",
-      "retention": "retain until terminal receipt and complete preservation"
+      "canonical_path": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-I-20260911",
+      "bytes": 2300,
+      "file_count": 6,
+      "contains_symlink": false
     }
   ],
-  "preserved_D0": {
-    "commit": "581bef523c8df7d026fd5a1fcf2785c09569d745",
-    "archive": "D0_collection.tar.gz",
-    "sha256": "8539d21d1e70f78f8b6431479471a32d9d707ea857297f3f729b2737a40303a2",
-    "raw_files": 11
-  },
-  "local_temporary_extraction_created": false,
-  "shared_local_authoring": {
-    "path": "C:/Projects/HMASD-worktrees/codex-fsd",
-    "disposition": "retain; shared direction authoring and current DM"
-  },
-  "prior_771003_duplicate": "outside this allocation; existing policy restriction and retention unchanged",
-  "removals_performed": 0
+  "worktree_registration": "worktree /home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911\nHEAD 5b15e536806d3b54dc693e7b4b911eba53ff643c\ndetached",
+  "shared_checkout_touched": false,
+  "removals_performed": 0,
+  "local_inventory_command_wall_seconds": 0.7660000000032596
 }

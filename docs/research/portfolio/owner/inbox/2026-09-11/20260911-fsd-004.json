@@ -76,5 +76,15 @@
     "verdict_text": "Recommend/select (a), with the stop above.",
     "source": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T03:28:01+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/05c24bcd85f92efc26fb2a9cb2152bed51dd90e9/docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "771103 原包学习对完成：I−D0 −0.01243，按原规则为 opposite_sign；16升16降，保留条件不确定性和两次旧增益。低信心正收益预测错误。原生1495.25秒；本对结束，保存与授权清理，不加实验。"
+    }
+  ]
 }
