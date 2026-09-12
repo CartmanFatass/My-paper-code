@@ -168,16 +168,80 @@
     {
       "purpose": "final E0/intake/execution/audit/owner trace, brief and link checks",
       "wall_seconds": 0.507665
+    },
+    {
+      "purpose": "paired final support/staging",
+      "wall_seconds": 0.437362
+    },
+    {
+      "purpose": "paired final science commit",
+      "wall_seconds": 0.5660247
+    },
+    {
+      "purpose": "paired intake immediate push, clean status and owner boundary",
+      "wall_seconds": 4.4740269
+    },
+    {
+      "purpose": "paired published raw archive Git blob readback",
+      "wall_seconds": 0.3193552
+    },
+    {
+      "purpose": "paired intake Relay send",
+      "wall_seconds": 0.163
+    },
+    {
+      "purpose": "cleanup initial inventory, config and Git read",
+      "wall_seconds": 0.2549963
+    },
+    {
+      "purpose": "cleanup initial owner and relay read",
+      "wall_seconds": 0.4511783
+    },
+    {
+      "purpose": "cleanup resumed inventory, Git and live Relay procedure read",
+      "wall_seconds": 0.2504896
+    },
+    {
+      "purpose": "accepted main raw archive and metadata readback",
+      "wall_seconds": 0.3301943
+    },
+    {
+      "purpose": "scoped remote cleanup and complete enclosing local retention verification",
+      "wall_seconds": 1.4185428
+    },
+    {
+      "purpose": "cleanup current evidence record read",
+      "wall_seconds": 0.1414003
+    },
+    {
+      "purpose": "cleanup audit, brief, item and unsupported reviews flag read",
+      "wall_seconds": 0.3266075
+    },
+    {
+      "purpose": "cleanup documentation read encoding failure and owner CLI help",
+      "wall_seconds": 0.4995748
+    },
+    {
+      "purpose": "cleanup final E0 read and primary owner boundary",
+      "wall_seconds": 0.4047726
+    },
+    {
+      "purpose": "cleanup receipt, current records, audit and owner trace update",
+      "wall_seconds": 0.6017667
+    },
+    {
+      "purpose": "review scoped cleanup diff and unchanged scientific result",
+      "wall_seconds": 0.230374
     }
   ],
-  "known_support_wall_seconds": 65.7439651,
+  "known_support_wall_seconds": 76.61363109999998,
   "counting": "Each known enclosing invoked command once. Initial batched output had one unavailable command wall; apply_patch, current owner-card preparation and later operations are recorded where measured or explicit unknown. Agent/provider/calendar time separate.",
   "unknown": [
     "one initial batched read command wall unavailable in truncated output",
     "apply_patch execution intervals where tool reports rounded zero",
     "Monitor command cost not included in terminal receipts; no extra observation query",
     "Relay service/client and send interval rounding",
-    "Root integrations and final publication/cleanup until attributed"
+    "Root integrations and cleanup receipt final publication tail until attributed"
   ],
   "source_delivery_transactions": 1,
   "scientific_submissions": 2,
@@ -194,7 +258,14 @@
   "native_pair_wall_seconds": 1517.95,
   "aggregate_cpu_seconds": 5999.42,
   "claim": "Native arm and sum caps pass; no observed breach. Support/complete total remains partially unmeasured, not certified from subtotal.",
-  "known_native_plus_support_seconds": 1583.6939651,
+  "known_native_plus_support_seconds": 1594.5636311,
   "supervisor_study_elapsed_seconds": 1798.0,
-  "study_elapsed_boundary": "D0 supervisor start to I terminal log; one-second timestamp resolution, includes inter-arm collection/publication gap; not summed native wall or a study cap."
+  "study_elapsed_boundary": "D0 supervisor start to I terminal log; one-second timestamp resolution, includes inter-arm collection/publication gap; not summed native wall or a study cap.",
+  "cleanup": {
+    "complete": true,
+    "receipt": "CLEANUP_RECEIPT.json",
+    "root_retention_commit": "42a483997",
+    "scientific_submissions_added": 0,
+    "inner_remote_not_readded": true
+  }
 }
