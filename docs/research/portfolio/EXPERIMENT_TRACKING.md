@@ -6,11 +6,11 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACVC | Focused uniform→cluster deployment-correction Convergence request accepted once by provider on the bound original conversation; generation active | Transport observes natural completion; original DM intakes next distinct object, no third unchanged pair |
-| MGTAP | Highest-local-SINR partner-query Convergence task integrated at main235f202ca; exact prompt verified and unique Send accepted by provider | Transport observes natural completion; original DM intakes next-object decision, no fourth unchanged pair |
+| MGTAP | Original Convergence response accepted: one fresh TOP/intact-DENSE B selected; intake integrated at main6f506e474, direction remains ACTIVE | Portfolio decides the pending whole-object investment (450s/arm, 1200s complete); no experiment before allocation |
 | FSD | PRO_FINAL N=yes/main0c0648bd0; original DM dispatched for one fresh fifth I1280/authentic-D0 pair | D0/I execution under900/1800/native2700/support300/complete3000; no retry/sixth pair |
 | RCLE | PRO_FINAL R=yes/main0c0648bd0; original DM dispatched for one post-B07 Convergence question/full intake | Zero implementation/numeric work; one exact Transport Send, no repeated B07 or added fit |
-| FOLR | Original DM resumed outside the held LEARNED_EVENT/5000/128 package | Prepare a distinct direction question without undoing package-level H or repeating the pair |
-| Portfolio N/S/R | Exact request accepted by provider and under Transport observation; new-direction drafter is refreshing all five current DM states | Intake immutable response, apply selections, then send the separate new-direction discovery/registration question |
+| FOLR | Distinct entity-history continuity Convergence request is queued through Transport after ACVC | Transport performs exact-once Send; original DM intakes the response without undoing package-level H or repeating the pair |
+| Portfolio | N/R selections are integrated; designated DM is preparing new-direction discovery/registration and now includes MGTAP's fresh investment need | Return exact Portfolio handoff to Root, then Transport sends it once; Portfolio decides registration/investment/priority |
 
 Direction chains5/5: ACVC, MGTAP, FSD, RCLE and FOLR DMs have resumed their next bounded object or
 proper-node direction step. Their latest allocations completed, but no Portfolio decision stopped
