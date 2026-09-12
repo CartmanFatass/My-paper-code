@@ -1,0 +1,94 @@
+{
+  "prepared_at_utc": "2026-09-12T15:02:14.400736+00:00",
+  "method": "Documentary Python standard-library serialization of current allocation, all-zero new-exposure counters and attributed accepted facts. No scientific target imported or numerical result recomputed.",
+  "current_allocation": {
+    "question_count": 1,
+    "full_intake_count": 1,
+    "complete_documentary_provider_intake_cost": "unknown",
+    "native_and_implementation_allowance": "zero",
+    "A_plus_B": "unallocated",
+    "historical_offered_seconds_not_allocated": [
+      270,
+      540,
+      660,
+      1200
+    ],
+    "authority_response_sha": "86428c9e87fc4c61888b5638781603038c39399d",
+    "execution_mapping_sha": "739aec7f4b22a28f3a0093d211f0a09a4c1ad4a4"
+  },
+  "current_new_scientific_exposure": {
+    "source_patches": 0,
+    "target_imports": 0,
+    "model_constructions": 0,
+    "checkpoint_loads": 0,
+    "scientific_rng_calls": 0,
+    "fresh_fits": 0,
+    "training_episodes": 0,
+    "evaluation_episodes": 0,
+    "environment_steps": 0,
+    "optimizer_updates": 0,
+    "diagnostic_invocations": 0,
+    "runtime_test_invocations": 0,
+    "outcome_reductions": 0,
+    "checkpoint_rehashes": 0
+  },
+  "machine_generated_exposure_line": "NEW_EXPOSURE source_patches=0; target_imports=0; model_constructions=0; checkpoint_loads=0; scientific_rng_calls=0; fresh_fits=0; training_episodes=0; evaluation_episodes=0; environment_steps=0; optimizer_updates=0; diagnostic_invocations=0; runtime_test_invocations=0; outcome_reductions=0; checkpoint_rehashes=0; complete_documentary_provider_intake_cost=unknown; one_question_plus_full_intake_only",
+  "accepted_C01": {
+    "source": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md, Final scientific intake 2026-09-12",
+    "source_commit": "c717996f3f2654e044fac05f9dc6a5d87d5b1369",
+    "status": "valid_complete_consumed",
+    "result": "qualified JOINT_ABOVE_MEI",
+    "independent_complete_fit_panel_units": 5,
+    "F_minus_C_J": 0.09591596868548655,
+    "F_minus_C_interval_J": [
+      0.07485045569783069,
+      0.1169814816731424
+    ],
+    "F_minus_dwell_J": 0.0651337689972464,
+    "F_minus_dwell_interval_J": [
+      0.03828638558156777,
+      0.09198115241292504
+    ],
+    "qualification": "Prespecified iid-normal complete-fit-panel model only; actual neural-training calibration unestablished. No raw-return reanalysis in this task.",
+    "adverse_F_minus_dwell_worlds": "46/320; minimum -0.11330831398543613 J",
+    "adverse_F_minus_C_worlds": "17/320; minimum -0.09167901784519482 J",
+    "dwell_minus_C_J": 0.03078219968824015,
+    "F_and_dwell_interventions": [
+      37100,
+      25949
+    ],
+    "interpretation": "Unequal private histories/timing/dose; motion suppression and recurrent/teammate feedback remain surviving accounts. No pure-retrace, history-necessity, general-transfer, stable-superiority or formal-UAV-entry result.",
+    "completed_native_charge_s": 855,
+    "raw_recorded_work_s": 841.92,
+    "full_historical_support_and_complete_conformance": "unestablished; no saved balance transfers"
+  },
+  "future_B_candidate_unselected_unfunded": {
+    "source": "docs/research/candidates/acvc/ACVC_POST_C01_DIRECTION_QUESTION_20260912.md",
+    "source_commit": "c717996f3f2654e044fac05f9dc6a5d87d5b1369",
+    "comparison": "train-through-fixed-F minus train-C, both deployed through fixed F",
+    "counts_status": "Copied from previously tool-computed proposal, not executed, recomputed, bound or allocated here",
+    "fresh_fits": 2,
+    "matched_training_pairs": 1,
+    "training_episodes": 1024,
+    "final_F_evaluation_episodes": 128,
+    "native_team_steps": 294912,
+    "Adam_calls": 2048,
+    "replay_actor_rows": 5242880,
+    "training_collection_actor_rows": 1310720,
+    "evaluation_actor_rows": 163840,
+    "F_predicate_agent_tick_opportunities": 819200,
+    "nested_search": "none",
+    "complete_changed_path_cost": "unknown; C01 times are not forecasts for F in training",
+    "proposed_MEI_J_not_frozen": 0.01,
+    "scientific_identity": "not selected or instantiated"
+  },
+  "direction_limits": {
+    "recasts": 2,
+    "contention_priority": "lowest among ACTIVE; no cross-direction wait",
+    "headroom": "No tuned same-information current-host headroom record",
+    "reference_only_is_complete_answer": true,
+    "T_G_learned_gate_family": "remains ended",
+    "sixth_C01_fit": "forbidden"
+  },
+  "stop": "Complete original-node response/intake or precise blocker. No source/check/run authority, no second question, automatic Innovator, automatic empirical successor or empirical funding, including after a favorable B recommendation."
+}

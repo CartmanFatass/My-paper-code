@@ -1,0 +1,27 @@
+{
+  "command": [
+    "C:\\Users\\fires\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "tools/experiments/fsd_stage_source.py",
+    "--control-root",
+    "C:/Projects/HMASD",
+    "--sha",
+    "9eb99f8b68dd2863212c10693b911746a6d24354",
+    "--destination",
+    "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912",
+    "--commands-dir",
+    "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771203_20260912",
+    "--receipt",
+    "docs\\research\\candidates\\flexible_skill_duration\\uav_renewal_batch_b02_771203_20260912\\STAGING_READBACK.json",
+    "--seconds",
+    "45"
+  ],
+  "outer_limit_seconds": 45,
+  "started_utc": "2026-09-12T18:26:53.227970+00:00",
+  "returncode": 0,
+  "stdout": "{\"sha\": \"9eb99f8b68dd2863212c10693b911746a6d24354\", \"destination\": \"/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912\", \"command\": [\"ssh\", \"-o\", \"BatchMode=yes\", \"-o\", \"ConnectTimeout=8\", \"-o\", \"ServerAliveInterval=3\", \"-o\", \"ServerAliveCountMax=1\", \"hmasd-wsl-node\", \"/usr/bin/timeout --signal=KILL 35.0s zsh -lic 'exec /home/wu/.venvs/hmasd/bin/python -u -'\"], \"network_context\": \"zsh -lic\", \"payload_bytes\": 3206, \"cr_bytes\": 0, \"requested_outer_limit_seconds\": 45.0, \"remote_limit_seconds\": 35.0, \"scientific_submissions\": 0, \"returncode\": 0, \"stdout\": \"{\\\"boundary\\\": \\\"payload_received\\\", \\\"destination\\\": \\\"/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912\\\"}\\n{\\\"status\\\": \\\"ready\\\", \\\"sha\\\": \\\"9eb99f8b68dd2863212c10693b911746a6d24354\\\", \\\"worktree\\\": \\\"/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912\\\", \\\"readback_paths\\\": [\\\"scripts/run_fsd_uav_renewal_batch_b02.py\\\", \\\"scripts/run_fsd_uav_individual_renewal_b01.py\\\", \\\"scripts/run_flexible_skill_duration_e0.py\\\", \\\"hmasd/agent.py\\\", \\\"hmasd/utils.py\\\", \\\"configs/config_1.py\\\", \\\"envs/pettingzoo/scenario1.py\\\", \\\"docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771203_20260912/D0.sh\\\", \\\"docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771203_20260912/I.sh\\\"], \\\"scientific_submissions\\\": 0, \\\"remote_wall_seconds\\\": 4.9401251510716975}\\n\", \"stderr\": \"(eval):1: can't change option: zle\\n(anon):setopt:7: can't change option: monitor\\n\\n[\\u001b[31mERROR\\u001b[39m]: gitstatus failed to initialize.\\n\\n\\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\\n\\n    GITSTATUS_LOG_LEVEL=DEBUG\\n\\n  Restart Zsh to retry gitstatus initialization:\\n\\n    \\u001b[32mexec zsh\\u001b[39m\\n\", \"local_wall_before_receipt_seconds\": 6.0, \"timing_limit\": \"External caller measures startup, receipt publication and exit.\"}\r\n",
+  "stderr": "",
+  "complete_helper_wall_seconds": 6.063000000023749,
+  "ended_utc": "2026-09-12T18:26:59.291772+00:00",
+  "includes": "Helper interpreter/startup, transport, readback, its receipt publication, stdout and exit.",
+  "outside_this_interval": "This caller's setup and collection of the command receipt; charged in outer tool wall."
+}

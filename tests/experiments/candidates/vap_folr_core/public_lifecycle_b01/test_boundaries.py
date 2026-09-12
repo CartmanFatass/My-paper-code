@@ -87,16 +87,19 @@ def test_initial_birth_previous_action_and_terminal_counts():
     assert count_transition(env, 'EVENT')['survivor_resets'] == 2
     assert count_transition(env, 'RETAIN')['survivor_resets'] == 0
     assert count_transition(env, 'HALF_EVENT')['survivor_attenuations'] == 2
+    assert count_transition(env, 'LEARNED_EVENT')['survivor_attenuations'] == 2
     assert count_transition(env, 'HALF_EVENT')['survivor_resets'] == 0
     assert count_transition(env, 'RETAIN')['survivor_attenuations'] == 0
     env.event = False
     assert count_transition(env, 'RANDOM')['eligible_survivor_opportunities'] == 2
     assert count_transition(env, 'RANDOM')['survivor_opportunities'] == 0
     assert count_transition(env, 'HALF_EVENT')['survivor_attenuations'] == 0
+    assert count_transition(env, 'LEARNED_EVENT')['survivor_attenuations'] == 0
     env.event = True
     env.t = 20
     assert count_transition(env, 'EVENT') == dict(births=1, departures=1, survivor_opportunities=0, eligible_survivor_opportunities=0, survivor_resets=0, survivor_attenuations=0)
     assert count_transition(env, 'HALF_EVENT')['survivor_attenuations'] == 0
+    assert count_transition(env, 'LEARNED_EVENT')['survivor_attenuations'] == 0
 
 
 def test_random_collection_schedule_replay_and_rng_isolation():
@@ -199,7 +202,7 @@ def synthetic_batch():
     return batch
 
 
-@pytest.mark.parametrize('arm', ['RETAIN', 'EVENT', 'RANDOM', 'HALF_EVENT'])
+@pytest.mark.parametrize('arm', ['RETAIN', 'EVENT', 'RANDOM', 'HALF_EVENT', 'LEARNED_EVENT'])
 def test_actor_input_reset_timing_and_replay_parity(arm):
     from experiments.candidates.vap_folr_core.public_lifecycle_b01.model import Actor
     torch.manual_seed(13)
@@ -231,7 +234,7 @@ def test_actor_input_reset_timing_and_replay_parity(arm):
     h.remove()
     got = actual_inputs[0].reshape(2, 5, 64)
     assert not got[:, 0].any() and not got[:, 4].any()
-    multiplier = 1 if arm == 'RETAIN' else 0.5 if arm == 'HALF_EVENT' else 0
+    multiplier = 1 if arm == 'RETAIN' else 0.5 if arm == 'HALF_EVENT' else 0.99 if arm == 'LEARNED_EVENT' else 0
     torch.testing.assert_close(got[:, 1:4], torch.full_like(got[:, 1:4], multiplier))
 
 
@@ -306,7 +309,7 @@ def test_primary_rules_replay_rng_and_publication(tmp_path, monkeypatch):
     assert json.loads((tmp_path/'summary.json').read_text())['evaluation_returns'] == [1.25]*32
 
 
-@pytest.mark.parametrize('arm', ['RETAIN', 'EVENT', 'RANDOM', 'HALF_EVENT'])
+@pytest.mark.parametrize('arm', ['RETAIN', 'EVENT', 'RANDOM', 'HALF_EVENT', 'LEARNED_EVENT'])
 def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, arm):
     # Exercise real argparse/main/publication; replace every scientific entry point.
     import random
@@ -327,7 +330,7 @@ def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, arm):
 
     def collect(env, actor, epsilon, mask_rng):
         masks.append(mask_rng)
-        return {}, 1.25, dict(survivor_attenuations=3 if arm == 'HALF_EVENT' else 0)
+        return {}, 1.25, dict(survivor_attenuations=3 if arm in ['HALF_EVENT', 'LEARNED_EVENT'] else 0)
 
     def learner(arm):
         calls.append(('learner', arm))
@@ -348,11 +351,11 @@ def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, arm):
     spec.loader.exec_module(runner)
     monkeypatch.setattr(runner.signal, 'signal', lambda *args: None)
     argv = [str(path), '--arm', arm, '--launch-sha', 'fixture', '--out', str(tmp_path)]
-    if arm in ['RETAIN', 'HALF_EVENT']:
+    if arm in ['RETAIN', 'HALF_EVENT', 'LEARNED_EVENT']:
         argv += ['--seed', '7807', '--evaluation-seed', '107807']
     monkeypatch.setattr(sys, 'argv', argv)
     runner.main()
-    train, final = (7807, 107807) if arm in ['RETAIN', 'HALF_EVENT'] else (7805, 107805)
+    train, final = (7807, 107807) if arm in ['RETAIN', 'HALF_EVENT', 'LEARNED_EVENT'] else (7805, 107805)
     assert calls == [('python', train), ('numpy', train), ('torch', train),
                      ('learner', arm), ('environment', train),
                      ('python', final), ('numpy', final), ('torch', final),
@@ -363,8 +366,8 @@ def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, arm):
     assert summary['status'] == 'complete' and summary['evaluation_returns'] == [1.25]*128
     assert updates == list(range(32, 5001)) and evaluations == [4969]
     assert len(masks) == 5128
-    assert summary['training_events']['survivor_attenuations'] == (15000 if arm == 'HALF_EVENT' else 0)
-    assert summary['evaluation_events']['survivor_attenuations'] == (384 if arm == 'HALF_EVENT' else 0)
+    assert summary['training_events']['survivor_attenuations'] == (15000 if arm in ['HALF_EVENT', 'LEARNED_EVENT'] else 0)
+    assert summary['evaluation_events']['survivor_attenuations'] == (384 if arm in ['HALF_EVENT', 'LEARNED_EVENT'] else 0)
     if arm == 'RANDOM':
         assert all(x is masks[0] for x in masks[:5000])
         assert all(x is masks[5000] for x in masks[5000:])
@@ -387,3 +390,111 @@ def test_half_primary_inclusive_thresholds(d, rule):
     result = half_primary([0]*128, [d]*128)
     assert result['rule'] == rule
     assert result['d_HR'] == pytest.approx(d)
+
+
+def test_learned_constructor_common_rng_tensors_and_no_event_parity():
+    from experiments.candidates.vap_folr_core.public_lifecycle_b01.learner import Learner
+    torch.manual_seed(91)
+    retain = Learner('RETAIN')
+    after_retain = torch.get_rng_state()
+    torch.manual_seed(91)
+    learned = Learner('LEARNED_EVENT')
+    assert torch.equal(after_retain, torch.get_rng_state())
+    for name in ['actor', 'mixer', 'target_actor', 'target_mixer']:
+        other = getattr(learned, name).state_dict()
+        for key, tensor in getattr(retain, name).state_dict().items():
+            assert torch.equal(tensor, other[key]), (name, key)
+    assert sum(p.numel() for p in learned.actor.parameters()) - sum(p.numel() for p in retain.actor.parameters()) == 129
+    assert not learned.actor.retention_gate.weight.any()
+    assert torch.sigmoid(learned.actor.retention_gate.bias).item() == pytest.approx(.99)
+    batch = synthetic_batch()
+    batch['event'].zero_()
+    for a, b in zip(retain.actor(batch), learned.actor(batch)):
+        assert torch.equal(a, b)
+
+
+def test_learned_lifetime_gate_input_state_gradient_and_before_gru():
+    from experiments.candidates.vap_folr_core.public_lifecycle_b01.model import Actor
+    actor = Actor('LEARNED_EVENT')
+    with torch.no_grad():
+        actor.retention_gate.weight.copy_(torch.linspace(-.08, .12, 128)[None])
+        actor.retention_gate.bias.fill_(.3)
+    batch = synthetic_batch()
+    for t in [0, 7, 8, 20]:
+        current = {k: v[:, t:t+1].clone() for k, v in batch.items()
+                   if k not in ['actions', 'reward', 'terminated']}
+        if t == 20:
+            current['event'].fill_(True)
+        incoming = torch.linspace(-1, 1, 2*5*64).reshape(2, 5, 64).requires_grad_()
+        gate_inputs, gru_inputs = [], []
+        gh = actor.retention_gate.register_forward_pre_hook(lambda module, inputs: gate_inputs.append(inputs[0]))
+        rh = actor.rnn.register_forward_pre_hook(lambda module, inputs: gru_inputs.append(inputs))
+        _, states = actor(current, incoming)
+        gh.remove()
+        rh.remove()
+        x, actual_h = gru_inputs[0]
+        carry = current['continuation'][:, 0].reshape(10, 1)
+        eligible = carry & current['event'][:, 0, None].expand(2, 5).reshape(10, 1)
+        hbar = incoming.reshape(10, 64) * carry
+        torch.testing.assert_close(gate_inputs[0], torch.cat((x, hbar), -1))
+        g = torch.sigmoid(actor.retention_gate(torch.cat((x, hbar), -1)))
+        scale = torch.where(eligible, g, torch.ones_like(g))
+        torch.testing.assert_close(actual_h, hbar * scale)
+        got_gradient = torch.autograd.grad(actual_h.sum(), incoming)[0]
+        expected_gradient = carry * torch.where(eligible,
+            g + hbar.sum(-1, keepdim=True) * g * (1-g) * actor.retention_gate.weight[:, 64:],
+            torch.ones_like(hbar))
+        torch.testing.assert_close(got_gradient.reshape(10, 64), expected_gradient)
+        expected_states = actor.rnn(x, actual_h).reshape(2, 1, 5, 64)
+        expected_states = expected_states.masked_fill(current['entity_mask'][..., None], 0)
+        torch.testing.assert_close(states, expected_states)
+
+
+def test_learned_optimizer_independent_target_replay_copy_and_checkpoint(tmp_path):
+    from experiments.candidates.vap_folr_core.public_lifecycle_b01.learner import Learner
+    from experiments.candidates.vap_folr_core.public_lifecycle_b01.model import Actor
+    learner = Learner('LEARNED_EVENT')
+    batch = synthetic_batch()
+    gate = learner.actor.retention_gate
+    assert all(any(p is q for q in learner.params) for p in gate.parameters())
+    with torch.no_grad():
+        learner.target_actor.retention_gate.bias.fill_(.2)
+    original_target = copy.deepcopy(learner.target_actor.state_dict())
+    before = copy.deepcopy(gate.state_dict())
+    # Different target parameters must induce their own replayed gate/state law.
+    online_h, target_h = [], []
+    ah = learner.actor.rnn.register_forward_pre_hook(lambda module, inputs: online_h.append(inputs[1].detach().clone()))
+    th = learner.target_actor.rnn.register_forward_pre_hook(lambda module, inputs: target_h.append(inputs[1].detach().clone()))
+    learner.update(batch, 32)
+    ah.remove()
+    th.remove()
+    assert not torch.equal(online_h[7], target_h[7])
+    for key, value in original_target.items():
+        assert torch.equal(value, learner.target_actor.state_dict()[key])
+    assert all(p.grad is not None and torch.isfinite(p.grad).all() for p in gate.parameters())
+    assert gate.weight.grad.abs().sum() > 0 and gate.bias.grad.abs().sum() > 0
+    assert any(not torch.equal(value, gate.state_dict()[key]) for key, value in before.items())
+    assert all(p in learner.optimiser.state for p in gate.parameters())
+    learner.update(batch, 200)
+    for key, value in learner.actor.state_dict().items():
+        assert torch.equal(value, learner.target_actor.state_dict()[key])
+    learner.save(tmp_path / 'final.pt')
+    saved = torch.load(tmp_path / 'final.pt', weights_only=False)
+    restored = Actor(saved['arm'])
+    restored.load_state_dict(saved['actor'])
+    for got, expected in zip(restored(batch), learner.actor(batch)):
+        torch.testing.assert_close(got, expected)
+    assert saved['updates'] == 2
+    for key, value in learner.target_actor.state_dict().items():
+        assert torch.equal(value, saved['target_actor'][key])
+    assert len(saved['optimiser']['state']) == len(learner.params)
+
+
+@pytest.mark.parametrize('d,rule', [(1, 'LEARNED_EVENT_ABOVE_MEI'),
+                                   (-1, 'RETAIN_ABOVE_MEI'),
+                                   (.999, 'WITHIN_MEI'), (-.999, 'WITHIN_MEI')])
+def test_learned_primary_inclusive_thresholds(d, rule):
+    from experiments.candidates.vap_folr_core.public_lifecycle_b01.collection import learned_primary
+    result = learned_primary([0]*128, [d]*128)
+    assert result['rule'] == rule
+    assert result['d_LR'] == pytest.approx(d)

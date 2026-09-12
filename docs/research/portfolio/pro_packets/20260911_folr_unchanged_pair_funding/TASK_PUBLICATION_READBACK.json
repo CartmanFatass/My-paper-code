@@ -1,0 +1,15 @@
+{
+  "checked_utc": "2026-09-12 03:55:55 UTC",
+  "task_commit": "19c2b1db12c286f85d528efaf062f7f2bf010f51",
+  "path": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/delivery_ready/TASK.md",
+  "github_blob_sha": "2b504dcb86b63c827be57acfa28fe70a1cc967f1",
+  "git": {
+    "blob_sha": "2b504dcb86b63c827be57acfa28fe70a1cc967f1",
+    "bytes": 39906,
+    "sha256": "61091fe96038caa86b0d334ceb3cc0ba0e843065ef7b932830575039904cfd17"
+  },
+  "encoding": "base64",
+  "display_url": "https://github.com/CartmanFatass/My-paper-code/blob/19c2b1db12c286f85d528efaf062f7f2bf010f51/docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/delivery_ready/TASK.md",
+  "matching_git_blob": true,
+  "meaning": "Fresh GitHub Contents blob identity equals the exact pushed Git TASK object; no Pro-access claim."
+}

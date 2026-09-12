@@ -1,0 +1,114 @@
+{
+  "charges": [
+    {
+      "purpose": "assignment currentness and scoped discovery",
+      "wall_seconds": 0.641687,
+      "session_id": null
+    },
+    {
+      "purpose": "applicable authority and live control",
+      "wall_seconds": 0.3382849
+    },
+    {
+      "purpose": "card and accepted delivery implementation",
+      "wall_seconds": 3.7635583
+    },
+    {
+      "purpose": "fresh entry protected card and execution scopes",
+      "wall_seconds": 0.3606564
+    },
+    {
+      "purpose": "immutable allocated Portfolio decision and launch ownership",
+      "wall_seconds": 0.426879
+    },
+    {
+      "purpose": "reconcile and publish current main inputs; exact shared runner consumers",
+      "wall_seconds": 0.2527694
+    },
+    {
+      "purpose": "reconciliation facts and exact runner command contracts",
+      "wall_seconds": 0.5686151
+    },
+    {
+      "purpose": "merge/push current authority and retained scientific count contract",
+      "wall_seconds": 0.9858716
+    },
+    {
+      "purpose": "resolve actual audit overlap and read protected dependent paths",
+      "wall_seconds": 0.3074444
+    },
+    {
+      "purpose": "preserve audit overlap, publish reconciliation, read final Portfolio return rule",
+      "wall_seconds": 5.7762218
+    },
+    {
+      "purpose": "unscreened identity reconciliation and count computation",
+      "wall_seconds": 2.1231892
+    },
+    {
+      "purpose": "author minimal fresh binding card and exact commands",
+      "wall_seconds": 0.2691373
+    },
+    {
+      "purpose": "single changed-binding static check and object audit",
+      "wall_seconds": 0.5826456
+    },
+    {
+      "purpose": "accept independent review and publish owner freeze record",
+      "wall_seconds": 0.5027431
+    },
+    {
+      "purpose": "independent reviewer four bounded read-only commands",
+      "wall_seconds": 1.1253553
+    },
+    {
+      "purpose": "correct UTF-8 document serialization and create owner item",
+      "wall_seconds": 1.010073
+    },
+    {
+      "purpose": "persist prelaunch cost snapshot",
+      "wall_seconds": 0.2618701
+    },
+    {
+      "purpose": "publish accepted fresh source/card/exact commands",
+      "wall_seconds": 5.3626575
+    },
+    {
+      "purpose": "accepted helper exact-source staging/readback",
+      "wall_seconds": 4.2544016,
+      "session_id": null
+    },
+    {
+      "purpose": "same-identity bounded terminal staging reconciliation and cleanup absence",
+      "wall_seconds": 0.899828
+    },
+    {
+      "purpose": "owner clean-boundary review and execution-state trace contract",
+      "wall_seconds": 0.6361788
+    },
+    {
+      "purpose": "write bounded limitation intake, scoped cleanup and owner trace",
+      "wall_seconds": 0.4703499
+    }
+  ],
+  "known_support_seconds": 30.920417299999997,
+  "allocation": "Portfolio6c32ade fresh FSD770903/780903",
+  "support_cap_seconds": 300,
+  "native_caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "sum": 2700
+  },
+  "complete_cap_seconds": 3000,
+  "scientific_submissions": 0,
+  "native_invocation_seconds": 0,
+  "complete_cost_certified": false,
+  "known_projected_overrun": false,
+  "accounting": "Each invoked support command wall once; independent reviewer commands separately once. Inner helper/check/SSH durations are already enclosed and are not added. Agent authoring, Pro and idle calendar time are separate.",
+  "unknown": "Root integration attribution and final publication after this snapshot remain pending; tool-service/message overhead is not fully attributed. Unknown is not zero. This is a source delivery failure, not a cap breach.",
+  "staging": {
+    "complete_helper_wall_seconds": 3.9690000000118744,
+    "enclosing_command_wall_seconds": 4.2544016,
+    "remote_fetch_failure_wall_seconds": 3.0428903200663626
+  }
+}

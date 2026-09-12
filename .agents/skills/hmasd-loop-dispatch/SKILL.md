@@ -33,17 +33,31 @@ At goal-turn entry, a return or receipt, and before waiting:
    for scientific/specification checking, then Root applies the conforming decision. Never hold a
    ready direction for peer completion or to assemble a multi-direction result bundle.
 5. Check that each accepted experiment has confirmed adoption by the independent Luna/low
-   monitor under EXPERIMENT_MONITOR.md. DM/Operator directly adds new accepted handles to its shared active set;
-   a dispatched message alone is not adoption. Route each terminal notice to its original
+   monitor under EXPERIMENT_MONITOR.md. DM/Operator's `MONITOR_ADD` must require the recipient to
+   read/continue its unfinished goal or create an unbudgeted goal. Confirmed adoption includes the
+   monitor's actual unfinished goal state and handle membership; a dispatched message alone is not
+   adoption. Route each terminal notice to its original
    DM for remaining collection/intake using followup_task, without waiting for other runs.
+   Reconcile `MONITOR_GOAL_COMPLETE` only after its active set is empty and every terminal notice
+   was delivered to Root.
    Read supervisor state only for handles Root actually owns or is reconciling after lost
    observation. Route terminal evidence promptly. If Transport is idle with a pending request,
    reconcile its persisted state and resume that same observation/recovery route. App dispatch
    acceptance is not provider Send acceptance.
-6. Wait only when no authorized action is ready across all directions, for the first event for at
-   most 60 seconds while retaining exact dependencies. On wake, process and dispatch the waking
-   direction before waiting again; do not defer a ready direction to align it with peers. A batch
-   never creates a completion barrier; unresolved waits do not fill available direction slots.
+   A failed-effect Send, uncertain acceptance, archive-label defect or receipt
+   failure gets an explicit same-request Transport recovery assignment at this
+   boundary. Route an already available complete immutable response to its DM
+   immediately; metadata correction proceeds independently. Before ending the
+   Root turn, establish that pending recovery is actively owned or record its
+   concrete unavailable prerequisite. A reported blocker or exhausted click count
+   is not a completed request, and queued recovery does not count as advancement.
+6. After every currently ready independent action is dispatched, end the Root turn when the
+   remaining dependencies are long-running DM, legacy CM, Monitor or Transport work. Do not use
+   `wait_agent`, `wait_threads`, timers or status polling to hold that turn open. The independent
+   completion relay wakes Root for actionable native returns; Monitor and Transport use their
+   existing direct Root receipt routes. On that wake, process and dispatch the waking direction
+   before ending the new turn. A batch never creates a completion barrier; unresolved waits do
+   not fill available direction slots.
 
 ## Bounded assignments
 

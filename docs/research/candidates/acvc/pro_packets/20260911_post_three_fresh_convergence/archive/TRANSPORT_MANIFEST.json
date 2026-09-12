@@ -1,0 +1,26 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-11-acvc-post-three-fresh-convergence-01--acvc",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-11-acvc-post-three-fresh-convergence-01",
+  "direction_id": "acvc",
+  "direction_ids": [
+    "acvc"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:acvc:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-11-acvc-post-three-fresh-convergence-01--acvc__00_PROMPT.md",
+    "bytes": 1917,
+    "sha256": "acf7126a3258592e8a46d435107c124b6d6d2abdd33c986dde8a8a78fd6e1210"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true
+}

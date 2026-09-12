@@ -1,0 +1,595 @@
+{
+  "object": "ACVC_FRESH_DENSE_PACKAGE_C01",
+  "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+  "bound_utc": "2026-09-12T04:37:37.128369+00:00",
+  "node": "wsl_4070",
+  "ssh_target": "hmasd-wsl-node",
+  "cwd": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5",
+  "python": "/home/wu/.venvs/hmasd/bin/python",
+  "supervisor": "/usr/local/bin/agent-task",
+  "caps_s": {
+    "whole_supervised_task": 270,
+    "native_sum": 1350,
+    "cumulative_runtime_support": 1650,
+    "complete_charge": 3000
+  },
+  "order": "serial fixed order, no interim efficacy/futility decision",
+  "units": [
+    {
+      "order": 1,
+      "master": 12794,
+      "evaluation_namespace": 23947,
+      "handle": "acvc-fresh-dense-c01-12794-3fd9062d5",
+      "command": "cd /home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/fresh_dense_package_c01_12794_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/fresh_dense_package_c01/launch.sh 3fd9062d5456a6b61a132a16ebd33a7099810143 12794",
+      "output": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_12794",
+      "admission": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_12794_admission.json",
+      "time": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_12794_task_time.txt",
+      "state": "complete, collected and technically accepted; retained as first final-population unit",
+      "launch_receipt": {
+        "handle": "acvc-fresh-dense-c01-12794-3fd9062d5",
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "command_publication_sha": "f8fb97ac48f9bfe94b70785424f8862b44be252d",
+        "command": "cd /home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/fresh_dense_package_c01_12794_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/fresh_dense_package_c01/launch.sh 3fd9062d5456a6b61a132a16ebd33a7099810143 12794",
+        "submitted_utc": "2026-09-12T04:40:37.079656+00:00",
+        "wall_s": 1.005340999981854,
+        "exit_code": 0,
+        "uncertain": false,
+        "accepted": true,
+        "stdout": "Task 'acvc-fresh-dense-c01-12794-3fd9062d5' started in tmux session 'agent_acvc-fresh-dense-c01-12794-3fd9062d5'. Output: /home/wu/.agent-tasks/acvc-fresh-dense-c01-12794-3fd9062d5/task.log\n",
+        "stderr": "",
+        "monitor_thread_id_from_live_primary": "01a087e5-2044-7301-abb6-7a1709a98197"
+      },
+      "monitor": {
+        "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+        "dispatch": "accepted app delivery, no model/effort overrides",
+        "adoption": "confirmed by Root from actual MONITOR_ADOPTED",
+        "adopted_at_utc": "2026-09-12T04:41:00Z",
+        "active_set": [
+          "acvc-fresh-dense-c01-12794-3fd9062d5"
+        ],
+        "reported_status": "running",
+        "pid": 3364324,
+        "uptime_s": 30,
+        "tmux_active": true,
+        "owner": "Monitor retains through delivered terminal notice; DM stopped remote polling",
+        "terminal_delivered": true,
+        "goal_complete_after_terminal": true,
+        "terminal_active_set": []
+      },
+      "technical_acceptance": {
+        "accepted": true,
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "whole_command_wall_s": 167.06,
+        "summary_process_wall_s": 162.43909501598682,
+        "last_panel_log_wall_s": 162.4378159570042,
+        "supervisor_duration_s": 167,
+        "inclusive_native_charge_s": 170,
+        "charge_method": "ceil(max(command wall, integer supervisor interval)+1 second timestamp granularity+recorded 1 second final sleep), submission charged once separately to support",
+        "peak_rss_kib": 546928,
+        "admission_physical_effective_bytes": 15632752640,
+        "resource_flag": "resources_unmeasured",
+        "terminal_event_id": "acvc-fresh-dense-c01-12794-3fd9062d5@2026-09-12T12:43:24+08:00",
+        "monitor_command_wall_s": null,
+        "monitor_limit": "Root confirmed no precise per-handle total is available from prior observations; no rerun/profile to reconstruct",
+        "checkpoint_sha256": "ee4827a71486e1f83e8280ff866c28e4df768e8a4d0913fa7a2dfccf3b92d073",
+        "archive_sha256": "b0fef35c0d490888ac62141e85b93daabed31cee060d1cb96312ec6658681088",
+        "archive_bytes": 416465,
+        "scope": "complete component unit only; no interim population interval or efficacy decision; C01 not consumed"
+      },
+      "evidence": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_12794/"
+    },
+    {
+      "order": 2,
+      "master": 11477,
+      "evaluation_namespace": 24930,
+      "handle": "acvc-fresh-dense-c01-11477-3fd9062d5",
+      "command": "cd /home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/fresh_dense_package_c01_11477_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/fresh_dense_package_c01/launch.sh 3fd9062d5456a6b61a132a16ebd33a7099810143 11477",
+      "output": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_11477",
+      "admission": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_11477_admission.json",
+      "time": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_11477_task_time.txt",
+      "state": "complete, collected and technically accepted; retained as second final-population unit",
+      "launch_receipt": {
+        "handle": "acvc-fresh-dense-c01-11477-3fd9062d5",
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "command_publication_sha": "f8fb97ac48f9bfe94b70785424f8862b44be252d",
+        "prior_unit_intake_sha": "694ce0cd1320f144efcddc1ca9f509893712b71e",
+        "command": "cd /home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/fresh_dense_package_c01_11477_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/fresh_dense_package_c01/launch.sh 3fd9062d5456a6b61a132a16ebd33a7099810143 11477",
+        "submitted_utc": "2026-09-12T04:52:15.804337+00:00",
+        "wall_s": 0.6568048999761231,
+        "exit_code": 0,
+        "uncertain": false,
+        "accepted": true,
+        "stdout": "Task 'acvc-fresh-dense-c01-11477-3fd9062d5' started in tmux session 'agent_acvc-fresh-dense-c01-11477-3fd9062d5'. Output: /home/wu/.agent-tasks/acvc-fresh-dense-c01-11477-3fd9062d5/task.log\n",
+        "stderr": "",
+        "monitor_thread_id_from_live_primary": "01a087e5-2044-7301-abb6-7a1709a98197"
+      },
+      "monitor": {
+        "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+        "dispatch": "accepted app delivery without model/effort override",
+        "adoption": "Root-confirmed actual MONITOR_ADOPTED",
+        "adopted_at_utc": "2026-09-12T04:52:30Z",
+        "active_set": [
+          "acvc-fresh-dense-c01-11477-3fd9062d5"
+        ],
+        "reported_status": "running",
+        "owner": "Monitor retains until terminal notice delivered to Root; DM stopped remote polling",
+        "terminal_delivered": true,
+        "goal_complete_after_terminal": true,
+        "terminal_active_set": []
+      },
+      "technical_acceptance": {
+        "accepted": true,
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "whole_command_wall_s": 168.51,
+        "summary_process_wall_s": 164.04166260396596,
+        "last_panel_log_wall_s": 164.04035623092204,
+        "supervisor_duration_s": 169,
+        "inclusive_native_charge_s": 171,
+        "charge_method": "ceil(max(command wall, integer supervisor interval)+1 second timestamp granularity+recorded 1 second final sleep), submission charged once separately to support",
+        "peak_rss_kib": 548684,
+        "admission_physical_effective_bytes": 15634452480,
+        "resource_flag": "resources_unmeasured",
+        "terminal_event_id": "acvc-fresh-dense-c01-11477-3fd9062d5@2026-09-12T12:55:04+08:00",
+        "monitor_command_wall_s": null,
+        "monitor_limit": "precise per-handle total not supplied; no rerun/profile reconstruction",
+        "checkpoint_sha256": "2e2572882e18fe563f8ac58cc4c1d7397d5ee023b5210260cfa9fc66fa71e145",
+        "archive_sha256": "56340bcb1ebe44126b439b38a64cf68f78f5a3003f717dd2791df117816897ac",
+        "archive_bytes": 415817,
+        "scope": "complete component unit only; no interim population interval or efficacy decision; C01 not consumed"
+      },
+      "evidence": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_11477/"
+    },
+    {
+      "order": 3,
+      "master": 18150,
+      "evaluation_namespace": 21370,
+      "handle": "acvc-fresh-dense-c01-18150-3fd9062d5",
+      "command": "cd /home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/fresh_dense_package_c01_18150_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/fresh_dense_package_c01/launch.sh 3fd9062d5456a6b61a132a16ebd33a7099810143 18150",
+      "output": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_18150",
+      "admission": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_18150_admission.json",
+      "time": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_18150_task_time.txt",
+      "state": "complete, collected and technically accepted; retained as final-population unit",
+      "launch_receipt": {
+        "handle": "acvc-fresh-dense-c01-18150-3fd9062d5",
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "command_publication_sha": "f8fb97ac48f9bfe94b70785424f8862b44be252d",
+        "prior_unit_intake_sha": "c669a3fd2c4d77539590f31512a90dabe8b05018",
+        "command": "cd /home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/fresh_dense_package_c01_18150_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/fresh_dense_package_c01/launch.sh 3fd9062d5456a6b61a132a16ebd33a7099810143 18150",
+        "submitted_utc": "2026-09-12T04:59:38.304056+00:00",
+        "wall_s": 1.0611483000102453,
+        "exit_code": 0,
+        "uncertain": false,
+        "accepted": true,
+        "stdout": "Task 'acvc-fresh-dense-c01-18150-3fd9062d5' started in tmux session 'agent_acvc-fresh-dense-c01-18150-3fd9062d5'. Output: /home/wu/.agent-tasks/acvc-fresh-dense-c01-18150-3fd9062d5/task.log\n",
+        "stderr": "",
+        "monitor_thread_id_from_live_primary": "01a087e5-2044-7301-abb6-7a1709a98197"
+      },
+      "monitor": {
+        "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+        "dispatch": "accepted app delivery without model/effort override",
+        "adoption": "Root-confirmed actual MONITOR_ADOPTED",
+        "adopted_at_utc": "2026-09-12T04:59:50Z",
+        "active_set": [
+          "acvc-fresh-dense-c01-18150-3fd9062d5"
+        ],
+        "reported_status": "running",
+        "owner": "Monitor retains until terminal notice delivered to Root; DM stopped remote polling",
+        "terminal_delivered": true,
+        "goal_complete_after_terminal": true,
+        "terminal_active_set": []
+      },
+      "technical_acceptance": {
+        "accepted": true,
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "whole_command_wall_s": 175.29,
+        "summary_process_wall_s": 169.75113218510523,
+        "last_panel_log_wall_s": 169.74978735507466,
+        "supervisor_duration_s": 175,
+        "inclusive_native_charge_s": 178,
+        "charge_method": "ceil(max(command wall, integer supervisor interval)+1 second timestamp granularity+recorded 1 second final sleep), submission charged once separately to support",
+        "peak_rss_kib": 550036,
+        "admission_physical_effective_bytes": 15636324352,
+        "resource_flag": "resources_unmeasured",
+        "terminal_event_id": "acvc-fresh-dense-c01-18150-3fd9062d5@2026-09-12T13:02:33+08:00",
+        "monitor_command_wall_s": null,
+        "monitor_limit": "precise per-handle total not supplied; no rerun/profile reconstruction",
+        "checkpoint_sha256": "801f810a9f060e8af5679e02fc6ca469ba55c9ead9f6b1d280188c3844361fb0",
+        "archive_sha256": "d0c9eaa015c7037b4a25b7acec403696835e632ea9024365fce33e1b87f5588a",
+        "archive_bytes": 415719,
+        "scope": "complete component unit only; no interim population interval or efficacy decision; C01 not consumed"
+      },
+      "evidence": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_18150/"
+    },
+    {
+      "order": 4,
+      "master": 12604,
+      "evaluation_namespace": 21030,
+      "handle": "acvc-fresh-dense-c01-12604-3fd9062d5",
+      "command": "cd /home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/fresh_dense_package_c01_12604_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/fresh_dense_package_c01/launch.sh 3fd9062d5456a6b61a132a16ebd33a7099810143 12604",
+      "output": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_12604",
+      "admission": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_12604_admission.json",
+      "time": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_12604_task_time.txt",
+      "state": "complete, collected and technically accepted; retained as final-population unit",
+      "launch_receipt": {
+        "handle": "acvc-fresh-dense-c01-12604-3fd9062d5",
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "command_publication_sha": "f8fb97ac48f9bfe94b70785424f8862b44be252d",
+        "prior_unit_intake_sha": "f8092da377d7640a04422188cf993480bd5285f4",
+        "command": "cd /home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/fresh_dense_package_c01_12604_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/fresh_dense_package_c01/launch.sh 3fd9062d5456a6b61a132a16ebd33a7099810143 12604",
+        "submitted_utc": "2026-09-12T05:07:36.853166+00:00",
+        "wall_s": 0.4094998999789823,
+        "exit_code": 0,
+        "uncertain": false,
+        "accepted": true,
+        "stdout": "Task 'acvc-fresh-dense-c01-12604-3fd9062d5' started in tmux session 'agent_acvc-fresh-dense-c01-12604-3fd9062d5'. Output: /home/wu/.agent-tasks/acvc-fresh-dense-c01-12604-3fd9062d5/task.log\n",
+        "stderr": "",
+        "monitor_thread_id_from_live_primary": "01a087e5-2044-7301-abb6-7a1709a98197"
+      },
+      "monitor": {
+        "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+        "dispatch": "accepted app delivery without model/effort override",
+        "adoption": "Root-confirmed actual MONITOR_ADOPTED",
+        "adopted_at_utc": "2026-09-12T05:08:00Z",
+        "active_set": [
+          "acvc-fresh-dense-c01-12604-3fd9062d5"
+        ],
+        "reported_status": "running",
+        "owner": "Monitor retains until terminal notice delivered to Root; DM stopped remote polling",
+        "terminal_delivered": true,
+        "goal_complete_after_terminal": true,
+        "terminal_active_set": []
+      },
+      "technical_acceptance": {
+        "accepted": true,
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "whole_command_wall_s": 166.65,
+        "summary_process_wall_s": 162.05238466197625,
+        "last_panel_log_wall_s": 162.05118205701,
+        "supervisor_duration_s": 166,
+        "inclusive_native_charge_s": 169,
+        "charge_method": "ceil(max(command wall, integer supervisor interval)+1 second timestamp granularity+recorded 1 second final sleep), submission charged once separately to support",
+        "peak_rss_kib": 548880,
+        "admission_physical_effective_bytes": 15620947968,
+        "resource_flag": "resources_unmeasured",
+        "terminal_event_id": "acvc-fresh-dense-c01-12604-3fd9062d5@2026-09-12T13:10:23+08:00",
+        "monitor_command_wall_s": null,
+        "monitor_limit": "precise per-handle total not supplied; no rerun/profile reconstruction",
+        "checkpoint_sha256": "edc5de41007dd681b63c70883df5d6a2b8af2ad793ffc94dfbf6892001b4fe3a",
+        "archive_sha256": "93a0967a91fe032e87c6f12fda0b26dc255541d47c1a3558ff9958300e53361a",
+        "archive_bytes": 417331,
+        "scope": "complete component unit only; no interim population interval or efficacy decision; C01 not consumed"
+      },
+      "evidence": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_12604/"
+    },
+    {
+      "order": 5,
+      "master": 14295,
+      "evaluation_namespace": 23946,
+      "handle": "acvc-fresh-dense-c01-14295-3fd9062d5",
+      "command": "cd /home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/fresh_dense_package_c01_14295_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/fresh_dense_package_c01/launch.sh 3fd9062d5456a6b61a132a16ebd33a7099810143 14295",
+      "output": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_14295",
+      "admission": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_14295_admission.json",
+      "time": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_14295_task_time.txt",
+      "state": "complete, collected and technically accepted; retained as final-population unit",
+      "launch_receipt": {
+        "handle": "acvc-fresh-dense-c01-14295-3fd9062d5",
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "command_publication_sha": "f8fb97ac48f9bfe94b70785424f8862b44be252d",
+        "prior_unit_intake_sha": "0c797c30e09ef37ad078e1273f9a69677cf3eda1",
+        "command": "cd /home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/fresh_dense_package_c01_14295_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/fresh_dense_package_c01/launch.sh 3fd9062d5456a6b61a132a16ebd33a7099810143 14295",
+        "submitted_utc": "2026-09-12T05:13:28.312209+00:00",
+        "wall_s": 0.5906091000069864,
+        "exit_code": 0,
+        "uncertain": false,
+        "accepted": true,
+        "stdout": "Task 'acvc-fresh-dense-c01-14295-3fd9062d5' started in tmux session 'agent_acvc-fresh-dense-c01-14295-3fd9062d5'. Output: /home/wu/.agent-tasks/acvc-fresh-dense-c01-14295-3fd9062d5/task.log\n",
+        "stderr": "",
+        "monitor_thread_id_from_live_primary": "01a087e5-2044-7301-abb6-7a1709a98197"
+      },
+      "monitor": {
+        "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+        "dispatch": "accepted app delivery without model/effort override",
+        "adoption": "Root-confirmed actual MONITOR_ADOPTED",
+        "adopted_at_utc": "2026-09-12T05:13:40Z",
+        "active_set": [
+          "acvc-fresh-dense-c01-14295-3fd9062d5"
+        ],
+        "reported_status": "running",
+        "owner": "Monitor retains until terminal notice delivered to Root; DM stopped remote polling",
+        "terminal_delivered": true,
+        "goal_complete_after_terminal": true,
+        "terminal_active_set": []
+      },
+      "technical_acceptance": {
+        "accepted": true,
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "whole_command_wall_s": 164.41,
+        "summary_process_wall_s": 159.809225467965,
+        "last_panel_log_wall_s": 159.80775067897048,
+        "supervisor_duration_s": 164,
+        "inclusive_native_charge_s": 167,
+        "charge_method": "ceil(max(command wall, integer supervisor interval)+1 second timestamp granularity+recorded 1 second final sleep), submission charged once separately to support",
+        "peak_rss_kib": 548600,
+        "admission_physical_effective_bytes": 15628738560,
+        "resource_flag": "resources_unmeasured",
+        "terminal_event_id": "acvc-fresh-dense-c01-14295-3fd9062d5@2026-09-12T13:16:12+08:00",
+        "monitor_command_wall_s": null,
+        "monitor_limit": "precise per-handle total not supplied; no rerun/profile reconstruction",
+        "checkpoint_sha256": "bfdc650fa2ebc827fd29d7c3c6aea0cc0177e60791d09acaa055f049a1948b33",
+        "archive_sha256": "bf20f6c08f13c234408c743e33cc598a044d3ad70137645ad96e54b82400f365",
+        "archive_bytes": 417171,
+        "scope": "complete component unit only; no interim population interval or efficacy decision; C01 not consumed"
+      },
+      "evidence": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_14295/"
+    }
+  ],
+  "analysis_command": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m experiments.candidates.acvc.fresh_dense_package_c01.protocol --root <collected-cohort-root> --output <complete-analysis.json>",
+  "scientific_invocations_at_binding": 0,
+  "review": {
+    "reviewer": "rv_ah_acvc_8941_binding",
+    "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+    "findings": "no material findings",
+    "invoked_command_wall_s": 1.5728774,
+    "checks": "static only; no repeated tests or scientific execution",
+    "limit": "outer commands, actual admission/exit, preservation and inclusive accounting need execution evidence"
+  },
+  "cleanup": {
+    "execution_checkout": "retained by owner handoff; all five terminal; Root retention/integration and later assignment required before cleanup",
+    "authoring_checkout": "shared C:/Projects/HMASD-worktrees/codex-acvc, codex/acvc, registered and retained",
+    "test_scratch": "creator removed, absent",
+    "historical_blocked_preparation": "outside this allocation, untouched",
+    "generated_bytecode": {
+      "status": "blocked before process creation by runtime policy",
+      "exact_error": "CreateProcess Rejected(... rejected: blocked by policy)",
+      "effect": "no deletion; no alternate executor/retry",
+      "owner": "original DM; same-path cleanup only when permitted",
+      "paths": [
+        "tests/experiments/candidates/acvc/native_link_loss_b01/__pycache__/test_fresh_dense_b01.cpython-310-pytest-9.1.1.pyc",
+        "scripts/__pycache__/run_acvc_fresh_dense_reuse_b01.cpython-310.pyc",
+        "scripts/__pycache__/run_acvc_fresh_dense_package_c01.cpython-310.pyc",
+        "experiments/candidates/acvc/fresh_dense_package_c01/__pycache__/protocol.cpython-310.pyc",
+        "tests/experiments/candidates/acvc/fresh_dense_package_c01/__pycache__/test_protocol.cpython-310-pytest-9.1.1.pyc"
+      ],
+      "future_python": "-B; scientific source and native results unchanged"
+    },
+    "local_preparation": "temp/directions/acvc/preparation/c01-20260911/: source.bundle 117759064 bytes, preparation.sh 878 bytes, prepare.py, preparation.json, five launch receipts and handoff support input retained",
+    "local_evidence": "temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/: five complete tar.gz archives, extracted checkpoints/raw outputs, collection/unit records and population_analysis.json retained",
+    "remote_bundle": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-3fd9062d5.bundle retained",
+    "remote_execution": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 retained at exact source",
+    "remote_archives_and_supervisors": "All five /home/wu/hmasd-inputs/acvc-fresh-dense-c01-<master>-3fd9062d5-collected.tar.gz and /home/wu/.agent-tasks/acvc-fresh-dense-c01-<master>-3fd9062d5 directories retained; masters/handles exact in units",
+    "cleanup_complete": false,
+    "deletion_after_owner_handoff": false
+  },
+  "next_action": "Root accepts/integrates final scientific intake and reconciles retention inventory; scoped cleanup remains unexecuted. No sixth fit, new object, primary reduction or Pro request follows from this task.",
+  "current_consumption": "C01 consumed by its valid complete frozen five-unit result; final scientific intake recorded 2026-09-12. No repeat or successor is allocated.",
+  "owner_instruction_applied": "Root forwarded Transport operational correction at main 8bf1269e5: a short/status receipt does not establish no formed decision; ACVC already verified the full immutable Innovator response and preserved separate receipt roles. Accepted engineering continues unchanged.",
+  "completion": {
+    "five_unit_collection_complete": true,
+    "primary_analysis_complete": true,
+    "primary_analysis_source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+    "primary_reading": "JOINT_ABOVE_MEI",
+    "scientific_intake_complete": true,
+    "direction_update_complete": true,
+    "C_consumption": "C01 consumed by its valid complete frozen five-unit result; final scientific intake recorded 2026-09-12. No repeat or successor is allocated.",
+    "predictions": "Final intake records prior probabilities .80/.65/.60, all three pass events 1, Brier .04/.1225/.16 and mean .1075 from stored result_summary.json; no calibration claim or new calculation.",
+    "owner_prediction": "not taken (unattended)",
+    "actual_new_fits": 5,
+    "live_scientific_processes": [],
+    "terminal_state_source": "Five exit-zero/tmux-absent collection receipts and Root-routed final Monitor goal complete/active_set=[]. No new handoff polling."
+  },
+  "handoff": {
+    "authority": "OWNER_DIRECT: \u540e\u7eed\u4e0d\u8981\u518d\u5f00\u542f\u65b0\u7684DM \u73b0\u6709DM\u8fdb\u5165handoff; automatic continuation and discretionary deletion stopped",
+    "recorded_utc": "2026-09-12T05:23:38.605338+00:00",
+    "state": "preserve, publish, then stop",
+    "local_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+    "branch": "codex/acvc",
+    "pre_handoff_head": "ac6ccb9d202699fc546773604b0c1cc9171c7f9a",
+    "remaining": [
+      "Full English scientific intake of existing completed results and prediction/decision recording.",
+      "DIRECTION accepted mechanism synthesis and applicable final owner/audit updates.",
+      "Root retention/integration reconciliation and later authorized scoped cleanup."
+    ],
+    "next_owner": "Root accepts/integrates and determines any later assignment. Original DM retains evidence/cleanup responsibility without automatic continuation."
+  },
+  "finalization_20260912": {
+    "recorded_utc": "2026-09-12T13:23:03.722358+00:00",
+    "authority": "OWNER_DIRECT 2026-09-12 resume routed by new Root, explicitly reassigning the original C01 final intake/records without new scientific execution or deletion.",
+    "dm": "/root/dm_a_mx_acvc_resume",
+    "root_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+    "relay_thread_id": "01a08456-2cf3-7f02-8595-42d84ba41a4c",
+    "checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+    "branch": "codex/acvc",
+    "starting_head": "14288810ca7f9302064991281ae84a184bb7adf1",
+    "pre_edit_head": "505d595e49f8a51ca207b83cebfe63df19df15b8",
+    "actual_environment": "Microsoft Windows NT 10.0.26200.0; native PowerShell 7.6.4; C:/Program Files/Git/cmd/git.exe",
+    "science_source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+    "frozen_analysis_runs_existing": 1,
+    "new_primary_reductions": 0,
+    "new_tests": 0,
+    "new_scientific_exposure": 0,
+    "exposure_line": "EXPOSURE: fits=5; training_episodes=2560; evaluation_episodes=960; native_team_steps=901120; optimizer_steps=5120; final_checkpoints=5; post_fit_loads=15; finalization_new_fits=0; finalization_new_episodes=0; finalization_new_primary_reductions=0.",
+    "owner_review": {
+      "command": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -B tools/owner_console/item.py reviews --json",
+      "cwd": "C:/Projects/HMASD",
+      "unapplied": [],
+      "owner_prediction": "not taken (unattended)",
+      "new_P1_P2_item": "none; ordinary final result and object bookkeeping"
+    },
+    "intake": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#final-scientific-intake-2026-09-12",
+    "brief": "docs/research/portfolio/owner/briefs/acvc/2026-09-12_fresh_dense_package_c01.md",
+    "audit": "docs/research/portfolio/audit/2026-09-12.md",
+    "retention_inventory": [
+      {
+        "master": 12794,
+        "evaluation_namespace": 23947,
+        "record_complete": true,
+        "record_issues": [],
+        "local_archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/collection/unit_12794.tar.gz",
+        "archive_bytes": 416465,
+        "archive_sha256": "b0fef35c0d490888ac62141e85b93daabed31cee060d1cb96312ec6658681088",
+        "matches_accepted_archive_digest": true,
+        "local_checkpoint": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/unit_12794/final_DENSE.pt",
+        "checkpoint_bytes": 282957,
+        "checkpoint_sha256": "ee4827a71486e1f83e8280ff866c28e4df768e8a4d0913fa7a2dfccf3b92d073",
+        "matches_accepted_checkpoint_digest": true,
+        "preserved_supervisor_exit_code": 0,
+        "preserved_supervisor_status": "finished",
+        "recorded_remote_archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-12794-3fd9062d5-collected.tar.gz",
+        "recorded_remote_supervisor": "/home/wu/.agent-tasks/acvc-fresh-dense-c01-12794-3fd9062d5"
+      },
+      {
+        "master": 11477,
+        "evaluation_namespace": 24930,
+        "record_complete": true,
+        "record_issues": [],
+        "local_archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/collection/unit_11477.tar.gz",
+        "archive_bytes": 415817,
+        "archive_sha256": "56340bcb1ebe44126b439b38a64cf68f78f5a3003f717dd2791df117816897ac",
+        "matches_accepted_archive_digest": true,
+        "local_checkpoint": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/unit_11477/final_DENSE.pt",
+        "checkpoint_bytes": 282957,
+        "checkpoint_sha256": "2e2572882e18fe563f8ac58cc4c1d7397d5ee023b5210260cfa9fc66fa71e145",
+        "matches_accepted_checkpoint_digest": true,
+        "preserved_supervisor_exit_code": 0,
+        "preserved_supervisor_status": "finished",
+        "recorded_remote_archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-11477-3fd9062d5-collected.tar.gz",
+        "recorded_remote_supervisor": "/home/wu/.agent-tasks/acvc-fresh-dense-c01-11477-3fd9062d5"
+      },
+      {
+        "master": 18150,
+        "evaluation_namespace": 21370,
+        "record_complete": true,
+        "record_issues": [],
+        "local_archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/collection/unit_18150.tar.gz",
+        "archive_bytes": 415719,
+        "archive_sha256": "d0c9eaa015c7037b4a25b7acec403696835e632ea9024365fce33e1b87f5588a",
+        "matches_accepted_archive_digest": true,
+        "local_checkpoint": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/unit_18150/final_DENSE.pt",
+        "checkpoint_bytes": 282957,
+        "checkpoint_sha256": "801f810a9f060e8af5679e02fc6ca469ba55c9ead9f6b1d280188c3844361fb0",
+        "matches_accepted_checkpoint_digest": true,
+        "preserved_supervisor_exit_code": 0,
+        "preserved_supervisor_status": "finished",
+        "recorded_remote_archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-18150-3fd9062d5-collected.tar.gz",
+        "recorded_remote_supervisor": "/home/wu/.agent-tasks/acvc-fresh-dense-c01-18150-3fd9062d5"
+      },
+      {
+        "master": 12604,
+        "evaluation_namespace": 21030,
+        "record_complete": true,
+        "record_issues": [],
+        "local_archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/collection/unit_12604.tar.gz",
+        "archive_bytes": 417331,
+        "archive_sha256": "93a0967a91fe032e87c6f12fda0b26dc255541d47c1a3558ff9958300e53361a",
+        "matches_accepted_archive_digest": true,
+        "local_checkpoint": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/unit_12604/final_DENSE.pt",
+        "checkpoint_bytes": 282957,
+        "checkpoint_sha256": "edc5de41007dd681b63c70883df5d6a2b8af2ad793ffc94dfbf6892001b4fe3a",
+        "matches_accepted_checkpoint_digest": true,
+        "preserved_supervisor_exit_code": 0,
+        "preserved_supervisor_status": "finished",
+        "recorded_remote_archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-12604-3fd9062d5-collected.tar.gz",
+        "recorded_remote_supervisor": "/home/wu/.agent-tasks/acvc-fresh-dense-c01-12604-3fd9062d5"
+      },
+      {
+        "master": 14295,
+        "evaluation_namespace": 23946,
+        "record_complete": true,
+        "record_issues": [],
+        "local_archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/collection/unit_14295.tar.gz",
+        "archive_bytes": 417171,
+        "archive_sha256": "bf20f6c08f13c234408c743e33cc598a044d3ad70137645ad96e54b82400f365",
+        "matches_accepted_archive_digest": true,
+        "local_checkpoint": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/unit_14295/final_DENSE.pt",
+        "checkpoint_bytes": 282957,
+        "checkpoint_sha256": "bfdc650fa2ebc827fd29d7c3c6aea0cc0177e60791d09acaa055f049a1948b33",
+        "matches_accepted_checkpoint_digest": true,
+        "preserved_supervisor_exit_code": 0,
+        "preserved_supervisor_status": "finished",
+        "recorded_remote_archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-14295-3fd9062d5-collected.tar.gz",
+        "recorded_remote_supervisor": "/home/wu/.agent-tasks/acvc-fresh-dense-c01-14295-3fd9062d5"
+      }
+    ],
+    "local_preparation_files": [
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/handoff_support_components.json",
+        "bytes": 22289
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/launch_unit_11477.json",
+        "bytes": 1287
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/launch_unit_12604.json",
+        "bytes": 1287
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/launch_unit_12794.json",
+        "bytes": 1214
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/launch_unit_14295.json",
+        "bytes": 1287
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/launch_unit_18150.json",
+        "bytes": 1287
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/preparation.json",
+        "bytes": 1552
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/preparation.sh",
+        "bytes": 878
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/prepare.py",
+        "bytes": 4217
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/source.bundle",
+        "bytes": 117759064
+      }
+    ],
+    "recorded_remote_execution_checkout": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5",
+    "recorded_remote_source_bundle": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-3fd9062d5.bundle",
+    "remote_observation_limit": "Last accepted collection and owner handoff receipts; no new remote status polling or filesystem inventory in this documentation assignment.",
+    "generated_bytecode_inventory": [
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/tests/experiments/candidates/acvc/native_link_loss_b01/__pycache__/test_fresh_dense_b01.cpython-310-pytest-9.1.1.pyc",
+        "present": true
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/scripts/__pycache__/run_acvc_fresh_dense_reuse_b01.cpython-310.pyc",
+        "present": true
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/scripts/__pycache__/run_acvc_fresh_dense_package_c01.cpython-310.pyc",
+        "present": true
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/experiments/candidates/acvc/fresh_dense_package_c01/__pycache__/protocol.cpython-310.pyc",
+        "present": true
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/tests/experiments/candidates/acvc/fresh_dense_package_c01/__pycache__/test_protocol.cpython-310-pytest-9.1.1.pyc",
+        "present": true
+      }
+    ],
+    "deletions_attempted": 0,
+    "cleanup_complete": false,
+    "cleanup_owner": "Current ACVC DM inherits original evidence and creator-cleanup responsibility. Root confirms integration/retention and routes a later scoped cleanup event; shared active checkout and unique checkpoint/archive bytes stay intact.",
+    "next_scientific_authority": "em:acvc:convergence selects a next object after consumed C; portfolio:cross_direction decides new investment/capacity/lifecycle. No local disposition or new request prepared under this documentation assignment.",
+    "document_verification": {
+      "frozen_card_prefix_unchanged": true,
+      "brief_characters": 448,
+      "brief_six_required_headings": true,
+      "final_intake_local_links_present": true,
+      "metadata_parse_and_complete_flags": "pass",
+      "git_diff_check": "pass",
+      "scientific_source_and_raw_analysis_paths_changed": false,
+      "reporting_note": "First documentation-check invocation reached its final print after all assertions, then stdout cp1252 could not encode Chinese headings. The same bounded documentation check completed with per-command -X utf8; no source/runtime configuration or scientific output was changed."
+    }
+  }
+}

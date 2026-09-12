@@ -1,0 +1,326 @@
+{
+  "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
+  "recorded_utc": "2026-09-12T03:41:54.2612783Z",
+  "caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "native_sum": 2700,
+    "support": 300,
+    "one_source_delivery_transaction": 45,
+    "complete": 3000
+  },
+  "charges": [
+    {
+      "purpose": "read new accepted Assignment 1 and live control settings",
+      "wall_seconds": 0.3961478
+    },
+    {
+      "purpose": "read reused FSD source, exact transaction and complete work law",
+      "wall_seconds": 0.351979
+    },
+    {
+      "purpose": "check current authority differences, Portfolio row and owner reviews",
+      "wall_seconds": 0.512121
+    },
+    {
+      "purpose": "read changed-contract review, owned source area and unchanged delivery helper",
+      "wall_seconds": 0.2631468
+    },
+    {
+      "purpose": "reconcile current committed authority in reused direction checkout",
+      "wall_seconds": 0.8765088
+    },
+    {
+      "purpose": "preserve every audit row and publish required-input reconciliation merge",
+      "wall_seconds": 4.5744856
+    },
+    {
+      "purpose": "prospectively reconcile and bind fresh 771103 identities with exact unchanged commands/counts",
+      "wall_seconds": 2.6121851
+    },
+    {
+      "purpose": "write fresh card appendix and complete execution/handover contract",
+      "wall_seconds": 0.2042468
+    },
+    {
+      "purpose": "independent Astra/high reviewer three bounded read commands",
+      "wall_seconds": 0.8423783
+    },
+    {
+      "purpose": "single new-binding forwarding/AST/command check and independent review acceptance",
+      "wall_seconds": 0.2469108
+    },
+    {
+      "purpose": "recover accepted preparation state and owner-item insertion contract",
+      "wall_seconds": 0.3151998
+    },
+    {
+      "purpose": "read accepted new card, exact commands and append location",
+      "wall_seconds": 0.188951
+    },
+    {
+      "purpose": "read authoritative owner reviews before new card freeze",
+      "wall_seconds": 0.3543611
+    },
+    {
+      "purpose": "complete accepted new card and command read with UTF-8 output",
+      "wall_seconds": 0.198909
+    },
+    {
+      "purpose": "freeze fresh card owner packet/audit and initial support record",
+      "wall_seconds": 0.3976958
+    },
+    {
+      "purpose": "publish exact fresh source/card/commands, owner/audit and preparation evidence",
+      "wall_seconds": 4.9006801
+    },
+    {
+      "purpose": "single allocated source delivery transaction and its complete-command receipt",
+      "wall_seconds": 7.6788293
+    },
+    {
+      "purpose": "submit the sole exact D0 handle and persist acceptance with live Monitor/relay configuration",
+      "wall_seconds": 0.6606675
+    },
+    {
+      "purpose": "direct D0 Monitor handover dispatch with unfinished-goal requirement",
+      "wall_seconds": 0.888
+    },
+    {
+      "purpose": "persist source acceptance, D0 launch and direct Monitor dispatch",
+      "wall_seconds": 0.2680543
+    },
+    {
+      "purpose": "publish distinct D0 launch/source receipts and confirmed active Monitor adoption",
+      "wall_seconds": 4.9332481999999995
+    },
+    {
+      "purpose": "single actionable D0 accepted/adopted handover through live Root relay",
+      "wall_seconds": 0.229
+    },
+    {
+      "purpose": "authoritative owner reviews at adopted D0 clean handover boundary",
+      "wall_seconds": 0.4013125
+    },
+    {
+      "purpose": "publish sole D0 relay receipt and final handover support snapshot",
+      "wall_seconds": 5.2884728
+    },
+    {
+      "purpose": "Root reported FSD-only source/handover inspection, integrations and pushes; 0.6 + 8.5 s, approximate",
+      "wall_seconds": 9.1
+    },
+    {
+      "purpose": "read prior accepted collection contract and preselected I command",
+      "wall_seconds": 0.222927
+    },
+    {
+      "purpose": "owner reviews on routed D0 terminal boundary",
+      "wall_seconds": 0.3940172
+    },
+    {
+      "purpose": "collect closed D0 raw bytes, receipts and supervisor once into durable archive without temporary duplicate",
+      "wall_seconds": 0.9391812
+    },
+    {
+      "purpose": "single D0 acceptance over all collected training/endpoint/identity/admission/cost records",
+      "wall_seconds": 0.3408051
+    },
+    {
+      "purpose": "publish preserved D0 raw archive, technical acceptance and partial native/support accounting",
+      "wall_seconds": 5.261379
+    },
+    {
+      "purpose": "submit the one preselected I companion after accepted published D0; no new source transaction",
+      "wall_seconds": 0.9737234
+    },
+    {
+      "purpose": "direct I Monitor handover dispatch requiring actual unfinished-goal adoption",
+      "wall_seconds": 0.155
+    },
+    {
+      "purpose": "publish I launch and active Monitor adoption plus scoped terminal cleanup inventory",
+      "wall_seconds": 5.2214325
+    },
+    {
+      "purpose": "Root reported current FSD D0 inspection, integration/conflict resolution and push; conservative enclosing bound 0.7 + 0.7 + 5.4 s",
+      "wall_seconds": 6.8
+    },
+    {
+      "purpose": "single actionable I accepted/adopted handover through live Root relay",
+      "wall_seconds": 0.232
+    },
+    {
+      "purpose": "authoritative owner review read at accepted I clean handover boundary",
+      "wall_seconds": 0.4394353
+    },
+    {
+      "purpose": "publish sole I relay receipt and final handover support snapshot",
+      "wall_seconds": 4.8911139
+    },
+    {
+      "purpose": "Root reported I launch/adoption inspection, integration and push; approximate 0.7 + 4.6 s",
+      "wall_seconds": 5.3
+    },
+    {
+      "purpose": "read current frozen card and scientific intake routing at I terminal; confirm preserved checkout state",
+      "wall_seconds": 0.3461173
+    },
+    {
+      "purpose": "read existing paired collection/publication surface and scientific-reading reference",
+      "wall_seconds": 0.3450327
+    },
+    {
+      "purpose": "authoritative owner reviews on routed paired terminal entry",
+      "wall_seconds": 0.3899392
+    },
+    {
+      "purpose": "collect terminal I raw outputs and all current receipts into durable archive; no temporary extraction",
+      "wall_seconds": 0.8755428
+    },
+    {
+      "purpose": "read frozen primary reducer and recorded I array/diagnostic shapes for focused integrity check",
+      "wall_seconds": 0.2263225
+    },
+    {
+      "purpose": "single full I/paired integrity check and predeclared reduction; run-level one-pair summary",
+      "wall_seconds": 0.4225114
+    },
+    {
+      "purpose": "read current direction conclusion and existing E0/intake shape for bounded adverse result",
+      "wall_seconds": 0.2561916
+    },
+    {
+      "purpose": "read existing owner item trace application interface",
+      "wall_seconds": 0.2896122
+    },
+    {
+      "purpose": "native reward decomposition and existing exposure/segment description for bounded adverse intake",
+      "wall_seconds": 0.2966191
+    },
+    {
+      "purpose": "correct diagnostic field mapping and read current authority/resource-uncertainty rule",
+      "wall_seconds": 0.2811701
+    },
+    {
+      "purpose": "prepare terminal four-path cleanup inventory against all 22 preserved raw files",
+      "wall_seconds": 1.0016725
+    },
+    {
+      "purpose": "read current card status, immutable Portfolio authority pointer and relevant owner audit overrides",
+      "wall_seconds": 0.2359013
+    },
+    {
+      "purpose": "intake write command rejected before process creation by Windows command-length limit (OS 206); enclosing tool reported 0.1 s",
+      "wall_seconds": 0.1
+    },
+    {
+      "purpose": "write bounded adverse E0 record directly after command-length rejection",
+      "wall_seconds": 0.015
+    },
+    {
+      "purpose": "write full scientific intake with decisions, uncertainty, history and pending preservation/cleanup",
+      "wall_seconds": 0.015
+    },
+    {
+      "purpose": "write six-heading owner brief and accepted card/direction result boundary; verify direct-written records",
+      "wall_seconds": 0.2937787
+    },
+    {
+      "purpose": "write terminal execution/audit/support record and applied result trace on existing owner card",
+      "wall_seconds": 0.3877923
+    },
+    {
+      "purpose": "publish accepted adverse pair, raw preservation, intake/brief/owner/audit and current science",
+      "wall_seconds": 5.5026969
+    },
+    {
+      "purpose": "publish explicitly ignored ordered/run score CSVs and verify dependent result/intake evidence links",
+      "wall_seconds": 5.1159536
+    },
+    {
+      "purpose": "read back published original archives and remove/verify four terminal owned remote paths",
+      "wall_seconds": 1.5739085
+    },
+    {
+      "purpose": "authoritative owner reviews at completed current-allocation cleanup boundary",
+      "wall_seconds": 0.4089284
+    },
+    {
+      "purpose": "Root reported paired intake/table inspection, integration/conflict resolution and two pushes; approximate 0.6 + 0.7 + 9.5 s",
+      "wall_seconds": 10.8
+    },
+    {
+      "purpose": "publish verified current-allocation cleanup completion and honest final cost limitations",
+      "wall_seconds": 5.0524937
+    },
+    {
+      "purpose": "recover final clean-boundary state, live relay contract and published cost snapshot",
+      "wall_seconds": 0.5055619
+    },
+    {
+      "purpose": "resolve exact published closeout evidence paths and primary-control relay identity",
+      "wall_seconds": 0.2292705
+    },
+    {
+      "purpose": "read final intake, current support schema and accepted prior relay receipt for terminal publication",
+      "wall_seconds": 0.2237943
+    },
+    {
+      "purpose": "single actionable terminal-intake and verified-cleanup handoff through live Root relay",
+      "wall_seconds": 0.59
+    },
+    {
+      "purpose": "persist accepted sole terminal Root relay with exact event and original substantive return",
+      "wall_seconds": 0.016
+    },
+    {
+      "purpose": "Root reported final cleanup closeout inspection, integration and push; approximate 0.6 + 4.5 s",
+      "wall_seconds": 5.1
+    },
+    {
+      "purpose": "record Root accepted closure, integrated cleanup and final terminal receipt/support snapshot",
+      "wall_seconds": 0.5275054
+    }
+  ],
+  "known_support_wall_seconds": 119.27882289999997,
+  "counting": "Each enclosing invoked support interval once, through final receipt preparation and Root cleanup acceptance. This final publication command wall is reported in native completion after measurement; no recursive accounting-only commit. Nested clocks and cumulative Root confirmations are not added again.",
+  "new_scientific_submissions": 2,
+  "new_source_delivery_transactions": 1,
+  "unknown": [
+    "Monitor command cost absent from terminal receipts; no extra query",
+    "relay-service and client/message overhead",
+    "final receipt publication command wall until measured and any later Root integration"
+  ],
+  "claim": "Both complete native arms and their sum pass. Support/complete totals are partially unmeasured; no observed breach. Primary is valid.",
+  "native_wall_seconds": {
+    "D0": 471.82,
+    "I": 1023.43
+  },
+  "source_transaction": {
+    "outer_tool_wall_seconds": 7.6788293,
+    "complete_helper_wall_seconds": 7.437999999994645,
+    "limit_seconds": 45,
+    "status": "successful single transaction; nested helper clock not added again"
+  },
+  "known_native_plus_support_seconds": 1614.5288229,
+  "Root_integration": {
+    "source_main": "31e9cc05a",
+    "D0_handover_main": "0e7bb1e83",
+    "charged_reported_seconds": 9.1,
+    "exactness": "approximately 0.6 + 8.5 s; client/message overhead unknown",
+    "D0_collection_main": "a755d804f",
+    "D0_collection_reported_support_bound_seconds": 6.8,
+    "counting": "Earlier approximate 9.1 s plus this conservative <=6.8 s contribution are charged once each; client/message overhead remains unknown.",
+    "paired_intake_main": "14fdaa63c",
+    "tables_main": "cf5dccaa6",
+    "paired_reported_support_seconds": 10.8,
+    "I_handover_main": "ced17727e",
+    "I_handover_reported_support_seconds": 5.3,
+    "cleanup_main": "be2eb581d",
+    "cleanup_reported_support_seconds": 5.1
+  },
+  "native_pair_wall_seconds": 1495.25,
+  "current_cleanup_complete": true,
+  "root_pair_acceptance": "Root accepted the bounded pair and ended its allocation without successor; cleanup closeout integrated/pushed as main be2eb581d."
+}

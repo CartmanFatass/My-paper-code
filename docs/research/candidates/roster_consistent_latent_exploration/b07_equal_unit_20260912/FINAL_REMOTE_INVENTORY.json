@@ -1,0 +1,86 @@
+{
+  "targets": [
+    {
+      "path": "/home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912",
+      "exists": false,
+      "sha": "1652c44ac65ed6e686610c3cfcff67dab1a0fc6b",
+      "registered": false,
+      "cleanup_owner": "/root/dm_a_mx_rcle_intake",
+      "cleanup_event": "Completed after Root retention/integration acceptance; same DM verified absence.",
+      "files_before_cleanup": 2417,
+      "file_bytes_before_cleanup": 48669048,
+      "tracked_status_before_cleanup": "",
+      "disk_absence_verified": true,
+      "git_worktree_registration_absence_verified": true
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/rcle-b07-equal-unit-s27-20260912",
+      "exists": false,
+      "cleanup_owner": "/root/dm_a_mx_rcle_intake",
+      "cleanup_event": "Completed after Root retention/integration acceptance; same DM verified absence.",
+      "files_before_cleanup": 2,
+      "file_bytes_before_cleanup": 6801354,
+      "disk_absence_verified": true,
+      "git_worktree_registration_absence_verified": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/rcle-b07-equal-unit-s27-20260912",
+      "exists": false,
+      "exit_code": 2,
+      "pid": 3377723,
+      "cleanup_owner": "/root/dm_a_mx_rcle_intake",
+      "cleanup_event": "Completed after Root retention/integration acceptance; same DM verified absence.",
+      "files_before_cleanup": 6,
+      "file_bytes_before_cleanup": 3918,
+      "terminal_status_before_cleanup": "failed",
+      "disk_absence_verified": true,
+      "git_worktree_registration_absence_verified": true
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/rcle-b07-reference-completion-s27-20260912",
+      "exists": false,
+      "sha": "9eeef867f0adcf6d9a8ca9441781ad4ec2764a30",
+      "registered": false,
+      "cleanup_owner": "/root/dm_a_mx_rcle_intake",
+      "cleanup_event": "Completed after Root retention/integration acceptance; same DM verified absence.",
+      "files_before_cleanup": 2410,
+      "file_bytes_before_cleanup": 42951456,
+      "tracked_status_before_cleanup": "",
+      "disk_absence_verified": true,
+      "git_worktree_registration_absence_verified": true
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/rcle-b07-reference-completion-s27-20260912",
+      "exists": false,
+      "cleanup_owner": "/root/dm_a_mx_rcle_intake",
+      "cleanup_event": "Completed after Root retention/integration acceptance; same DM verified absence.",
+      "files_before_cleanup": 3,
+      "file_bytes_before_cleanup": 3530006,
+      "disk_absence_verified": true,
+      "git_worktree_registration_absence_verified": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/rcle-b07-reference-completion-s27-20260912",
+      "exists": false,
+      "exit_code": 0,
+      "pid": 3380786,
+      "cleanup_owner": "/root/dm_a_mx_rcle_intake",
+      "cleanup_event": "Completed after Root retention/integration acceptance; same DM verified absence.",
+      "files_before_cleanup": 6,
+      "file_bytes_before_cleanup": 3633,
+      "terminal_status_before_cleanup": "finished",
+      "disk_absence_verified": true,
+      "git_worktree_registration_absence_verified": true
+    }
+  ],
+  "keep": [
+    "shared authoring checkout and local raw/archives/source bundles",
+    "shared /tmp/hmasd_rcle_tbcfv_native cache",
+    "all unrelated worktrees"
+  ],
+  "deletion_performed": true,
+  "root_final_integration_acceptance": "Root accepted final integration/retention through main2a53388b8 and explicitly assigned exactly six named remote removals.",
+  "status": "COMPLETE_RECLAIMED_EVIDENCE_RETAINED",
+  "cleanup_receipt": "b07_equal_unit_20260912/CLEANUP_RECEIPT.json",
+  "verified_at_utc": "2026-09-12T18:24:31.357996+00:00"
+}

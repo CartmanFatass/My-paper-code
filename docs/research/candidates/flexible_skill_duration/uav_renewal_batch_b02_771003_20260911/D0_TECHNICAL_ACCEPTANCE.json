@@ -1,0 +1,67 @@
+{
+  "status": "accepted_complete_D0_companion",
+  "accepted_utc": "2026-09-11T23:59:45.257466+00:00",
+  "source_sha": "5250c43536d8520d4005eed3f613226ec4bc6e73",
+  "counts": {
+    "model_constructions": 2,
+    "training_starts": 1,
+    "checkpoint_loads": 0,
+    "training_transitions": 40000,
+    "stored_training_transitions": 40000,
+    "training_episodes": 80,
+    "update_stages": 5,
+    "training_agent_step_batches": 2500,
+    "evaluation_steps": 16000,
+    "evaluation_episodes": 32,
+    "evaluation_agent_step_batches": 500
+  },
+  "optimizer_calls": {
+    "coordinator": 525,
+    "discoverer_actor": 11250,
+    "discoverer_critic": 11250,
+    "team_discriminator": 75,
+    "individual_discriminator": 300
+  },
+  "evaluation_optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 0,
+    "discoverer_critic": 0,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "all_summary_training_measurements_finite": true,
+  "training_jsonl_matches_summary": true,
+  "initial_relative_displacement_final": {
+    "coordinator": 0.04470412879200881,
+    "discoverer_actor": 0.41209481620651106,
+    "discoverer_critic": 0.16063828919893297,
+    "team_discriminator": 0.026414674896479272,
+    "individual_discriminator": 0.054394295281804866
+  },
+  "mean_final_J": 0.2617101876076477,
+  "conditional_episode_sd": 0.05218057746537218,
+  "conditional_episode_se": 0.009224310042998653,
+  "train_mean_J": [
+    0.24853785960688798,
+    0.20418279084128974,
+    0.2252226325610327,
+    0.24064533899054863,
+    0.2494322608179417
+  ],
+  "process_cost": {
+    "elapsed_seconds": 538.66,
+    "peak_rss_kib": 1667448.0,
+    "user_seconds": 2094.18,
+    "system_seconds": 25.69,
+    "exit_status": 0.0
+  },
+  "aggregate_cpu_seconds": 2119.87,
+  "admission_bytes": {
+    "physical": 15641456640,
+    "effective": 15641456640,
+    "floor": 4294967296
+  },
+  "rule": "Accept only a complete, correctly bound D0 companion; then submit the already selected I once with fresh adjacent admission. No score-based selection.",
+  "decision": "Owner-delegated decision (unattended, 2026-09-03 instruction): accept complete D0 and proceed to preselected I.",
+  "claim_limit": "One complete own-arm endpoint; paired primary remains unavailable until I completes. No extra experiment or numerical replay."
+}

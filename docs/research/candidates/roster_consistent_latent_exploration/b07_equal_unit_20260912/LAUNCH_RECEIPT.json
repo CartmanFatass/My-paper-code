@@ -1,0 +1,33 @@
+{
+  "source_sha": "1652c44ac65ed6e686610c3cfcff67dab1a0fc6b",
+  "command_commit": "e6325dcdb50e97eda62adaf5ce8c844b7735501f",
+  "handle": "rcle-b07-equal-unit-s27-20260912",
+  "command": "cd /home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912 && mkdir -p temp/directions/roster_consistent_latent_exploration/exp/b07-equal-unit-s27-20260912 && HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python /usr/bin/time -f 'wall_s=%e,peak_rss_kib=%M,exit=%x' -o temp/directions/roster_consistent_latent_exploration/exp/b07-equal-unit-s27-20260912/chain-time.txt timeout 900 bash scripts/run_rcle_b07_equal_unit.sh 1652c44ac65ed6e686610c3cfcff67dab1a0fc6b /home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912/temp/directions/roster_consistent_latent_exploration/exp/b07-equal-unit-s27-20260912",
+  "exit_code": 0,
+  "stdout": "Task 'rcle-b07-equal-unit-s27-20260912' started in tmux session 'agent_rcle-b07-equal-unit-s27-20260912'. Output: /home/wu/.agent-tasks/rcle-b07-equal-unit-s27-20260912/task.log\n",
+  "stderr": "",
+  "submission_wall_s": 0.3897249999572523,
+  "launch_submission_complete_command_wall_s": 0.6987168,
+  "monitor": {
+    "thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+    "dispatch_accepted": true,
+    "dispatch_elapsed_s": 0.07,
+    "adoption": "ROOT_FORWARDED_ACTUAL_UNFINISHED_GOAL_ADOPTION",
+    "goal_state": "freshly_created_unbudgeted_unfinished",
+    "observed_status": "running",
+    "observed_pid": 3377723,
+    "source_cwd_output_supervisor_binding": "Root confirms source1652c44ac65ed6e686610c3cfcff67dab1a0fc6b and declared cwd/output/supervisor root",
+    "adoption_recorded_at_utc": "2026-09-12T17:28:21Z",
+    "adoption_source": "Root native followup with MONITOR_ADOPTED; actual Monitor goal created without token budget",
+    "observation_command_wall_s": null,
+    "observation_cost_note": "No timing supplied in Root adoption payload; unknown, not zero and no extra query commissioned",
+    "terminal": "ROOT_FORWARDED_AND_DM_COLLECTED_EXIT2",
+    "terminal_at_utc": "2026-09-12T17:31:10Z",
+    "terminal_goal_state": "complete; active_set empty"
+  },
+  "collection_owner": "/root/dm_a_mx_rcle_intake",
+  "root_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "scientific_status": "One learned fit and two panels accepted as partial; reference primary missing after roster-column failure. Terminal evidence collected; no additional native invocation.",
+  "known_support_command_and_dispatch_s": 30.7713295,
+  "accounting_note": "Launch outer command includes embedded SSH elapsed; counted once. Monitor observation, later publication/collection/intake/cleanup/integration and unknown earlier tool/review tails remain. No native/support transfer."
+}

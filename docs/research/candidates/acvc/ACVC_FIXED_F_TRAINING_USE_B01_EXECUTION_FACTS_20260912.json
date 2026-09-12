@@ -1,0 +1,495 @@
+{
+  "object": "ACVC_FIXED_F_TRAINING_USE_B01",
+  "source_sha": "a4c24e4eef4eb290d5026596a0a49ba4f4f9ce4f",
+  "author_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+  "branch": "codex/acvc",
+  "execution_node": "wsl_4070",
+  "remote_worktree": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee",
+  "remote_interpreter": "/home/wu/.venvs/hmasd/bin/python",
+  "master": 20261,
+  "evaluation_namespace": 30261,
+  "caps_seconds": {
+    "whole_supervised_arm": 270,
+    "native_sum": 540,
+    "future_support": 660,
+    "future_complete": 1200
+  },
+  "source_review": {
+    "reviewer": "/root/dm_a_mx_acvc_resume/training_f_semantic_review",
+    "verdict": "No material findings; scientific source and admission wrapper",
+    "command_wall_s": 2.8481445
+  },
+  "preparation": {
+    "complete": true,
+    "source_bundle_bytes": 119365875,
+    "whole_helper_wall_s": 17.826921099971514,
+    "local_path": "temp/directions/acvc/preparation/training-use-b01-20260912",
+    "remote_bundle": "/home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle",
+    "LF_binary_stdin": true,
+    "offline_checkout_exact": true,
+    "tracked_status_empty": true,
+    "wrapper_syntax_pass": true
+  },
+  "support": {
+    "commands": [
+      {
+        "label": "Initial direction state and AGENTS read",
+        "wall_s": 2.2101887
+      },
+      {
+        "label": "Current primary routes/allocation/owner review read",
+        "wall_s": 0.6453735
+      },
+      {
+        "label": "F mapping and owned implementation source reads",
+        "wall_s": 0.3362515
+      },
+      {
+        "label": "Current allocation, high-risk review and monitor contract",
+        "wall_s": 0.3792351
+      },
+      {
+        "label": "Complete shared rollout/update and ACVC F collector source read",
+        "wall_s": 0.1733504
+      },
+      {
+        "label": "Training runner, feedback ownership, fixed predicate and focused test source",
+        "wall_s": 0.3530124
+      },
+      {
+        "label": "Exact allocation source, existing runner CLI/tests/scope and identity reuse check",
+        "wall_s": 1.3181377
+      },
+      {
+        "label": "Existing stub publication checks and exact funding/engineering rules",
+        "wall_s": 0.2921305
+      },
+      {
+        "label": "Reuse five already accepted panel timing facts for prospective full-arm planning",
+        "wall_s": 0.2002447
+      },
+      {
+        "label": "Resume state and policy focused read",
+        "seconds": 0.3130802
+      },
+      {
+        "label": "Focused fixtures and owner CLI reuse",
+        "seconds": 0.2056546
+      },
+      {
+        "label": "Focused learner/runner source followup",
+        "seconds": 0.1810696
+      },
+      {
+        "label": "Focused tests invocation1",
+        "seconds": 3.3116223
+      },
+      {
+        "label": "Focused tests corrected fixtures and handoff/card read",
+        "seconds": 2.8804454
+      },
+      {
+        "label": "Prior accepted supervisor and attribution",
+        "seconds": 0.3842827
+      },
+      {
+        "label": "Source/card/tests commit and push",
+        "seconds": 4.9367812
+      },
+      {
+        "label": "Launch interface and owner reviews",
+        "seconds": 3.2255953
+      },
+      {
+        "label": "Exact prior launch and remote source presence",
+        "seconds": 10.00301
+      },
+      {
+        "label": "New card owner record CLI",
+        "seconds": 0.277895
+      },
+      {
+        "label": "Accepted prior wrapper receipt read",
+        "seconds": 0.1456159
+      },
+      {
+        "label": "Owner item update interface",
+        "seconds": 0.3479359
+      },
+      {
+        "label": "Owner citation correction interface and offline remote read",
+        "seconds": 1.2034499
+      },
+      {
+        "label": "CLI correction supported fields",
+        "seconds": 0.1992284
+      },
+      {
+        "label": "Independent semantic reviewer eight commands",
+        "seconds": 2.6916601
+      },
+      {
+        "label": "Acceptance owner/audit/wrapper commit push",
+        "seconds": 4.5275554
+      },
+      {
+        "label": "Reviewer launch-only read",
+        "seconds": 0.1564844
+      },
+      {
+        "label": "Offline full source bundle/transfer/checkout helper (nested phases not added twice)",
+        "seconds": 17.826921099971514
+      },
+      {
+        "label": "Preparation receipt and live Relay read",
+        "seconds": 0.2317283
+      },
+      {
+        "label": "Exact command binding commit push",
+        "seconds": 4.5613388
+      },
+      {
+        "label": "C submission helper complete and Monitor live read",
+        "seconds": 0.7383943
+      },
+      {
+        "label": "F submission helper complete",
+        "seconds": 0.6218078
+      },
+      {
+        "label": "Read original launch receipts and existing E0 layout",
+        "seconds": 0.2181528
+      },
+      {
+        "label": "Pair launch/adoption publication commit push",
+        "seconds": 4.930318
+      },
+      {
+        "label": "C terminal assignment current state",
+        "seconds": 0.3767136
+      },
+      {
+        "label": "C summary/timing collection and analysis route",
+        "seconds": 0.5885247
+      },
+      {
+        "label": "Arm C complete terminal collection/archive/transfer",
+        "seconds": 1.1065101
+      },
+      {
+        "label": "Arm F complete terminal collection/archive/transfer",
+        "seconds": 1.3624218
+      },
+      {
+        "label": "Collected admission/row schemas and current scientific-reading/DIRECTION",
+        "seconds": 0.2580417
+      },
+      {
+        "label": "Both preserved arms technical acceptance and one card primary reduction",
+        "seconds": 2.2097848
+      },
+      {
+        "label": "Current synthesis, E0/readiness review and own retained scratch inventory",
+        "seconds": 0.5440915
+      },
+      {
+        "label": "Preserve original human-readable paired evidence",
+        "seconds": 0.3975239
+      },
+      {
+        "label": "Read existing one-shot analysis for final evidence index",
+        "seconds": 0.1610824
+      },
+      {
+        "label": "Paired final intake/evidence/audit/owner commit push",
+        "seconds": 6.5575568
+      },
+      {
+        "label": "Preserve explicitly owned supervisor logs excluded by generic ignore",
+        "seconds": 4.3822226
+      },
+      {
+        "label": "Accepted-retention cleanup assignment state and archive presence",
+        "seconds": 0.6118846
+      },
+      {
+        "label": "Root-accepted six-target remote cleanup and absence verification",
+        "seconds": 0.9579787
+      }
+    ],
+    "known_reported_seconds": 89.5422890999715,
+    "complete_coverage": false,
+    "limits": [
+      "Initial interrupted SSH object query whole lifetime not measured;10.00301s returned segment is included, remaining tail unknown.",
+      "Provider, client and remaining Monitor/Root integration/cleanup costs not certified zero; append actual receipts once.",
+      "Prior A is historical and not charged again against future660; no lifetime total certification."
+    ],
+    "known_native_plus_support": 425.5422890999715,
+    "note": "Known receipts through remote cleanup, before this receipt's publication. Root/Monitor and client/provider/initial-query unknowns stay explicit; no full660/1200 certification."
+  },
+  "tests": {
+    "passed": 14,
+    "pytest_seconds": 1.93,
+    "first_attempt_failed_fixture_assertions": 3,
+    "no_scientific_fit": true,
+    "scratch_retained": [
+      "temp/directions/acvc/test/training-use-f01",
+      "temp/directions/acvc/test/training-use-f02"
+    ],
+    "cleanup_rejection": "combined scoped PowerShell test/Remove-Item command rejected before execution: blocked by policy; no bypass"
+  },
+  "arms": [
+    {
+      "arm": "C",
+      "handle": "acvc-training-use-b01-c-a4c24e4ee",
+      "command": "cd /home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/training_use_b01_C_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/training_use_b01/launch.sh a4c24e4eef4eb290d5026596a0a49ba4f4f9ce4f C",
+      "output": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/exp/training_use_b01_20260912/arm_C",
+      "admission": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/training_use_b01_C_admission.json",
+      "timing": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/training_use_b01_C_task_time.txt",
+      "submission": "accepted_once",
+      "submitted_utc": "2026-09-12T17:22:19.690568+00:00",
+      "uncertain": false,
+      "command_publication_sha": "7d14db67a2c802892fee4216512680cef21654ad",
+      "submission_receipt": "temp/directions/acvc/preparation/training-use-b01-20260912/launch_C.json",
+      "monitor": {
+        "thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+        "dispatch": "accepted",
+        "adoption": "actual_running_handle_in_active_unbudgeted_goal",
+        "receipt_source": "Root native message in this assignment",
+        "reported_pid": 3376424,
+        "reported_exit": null,
+        "reported_tmux_active": true,
+        "collection": "both terminal deliveries accepted; Root forwarded MONITOR_GOAL_COMPLETE active_set=[] and no pending",
+        "terminal_exit": 0,
+        "terminal_tmux_active": false
+      },
+      "technical_acceptance": {
+        "accepted": true,
+        "identity": "train-C / deploy-F",
+        "training_episodes": 512,
+        "final_F_episodes": 64,
+        "adam_records": 1024,
+        "expected_counts_matched": {
+          "environment_constructors": 2,
+          "unscored_constructor_resets": 2,
+          "explicit_resets": 576,
+          "step_calls": 147456,
+          "team_steps": 147456,
+          "train_team_steps": 131072,
+          "eval_team_steps": 16384,
+          "completed_episode_steps": 147456,
+          "train_episodes": 512,
+          "eval_episodes": 64,
+          "rollouts": 256,
+          "optimizer_steps": 1024,
+          "backward_calls": 1024,
+          "update_records": 1024,
+          "train_actor_agent_forwards": 655360,
+          "eval_actor_agent_forwards": 81920,
+          "replayed_actor_agent_steps": 2621440,
+          "critic_update_rows": 524288,
+          "duration_decisions": 0,
+          "scientific_uav_calls": 147456,
+          "post_fit_loads": 1,
+          "new_fits": 1,
+          "final_checkpoints": 1
+        },
+        "parameter_counts": {
+          "actor": 34902,
+          "critic": 34177
+        },
+        "checkpoint_sha256": "0d06ffb51ef897b82e4edcb1c95ca5bd456d31b82680c851e515a357f09d1ae5",
+        "whole_command_wall_s": 157.1,
+        "supervisor_duration_s": 157,
+        "inclusive_native_charge_s": 160,
+        "inclusive_charge_rule": "max(ceil(whole_command_wall_s), integer supervisor duration)+2s for enclosing integer-boundary/exit slack; not added to inner timing",
+        "process_wall_s_to_summary": 149.83063295600004,
+        "peak_rss_kib": 557064,
+        "admission": {
+          "assessed_at": "2026-09-12T17:22:18.720282Z",
+          "available_physical_bytes": 15631151104,
+          "captured_at": "2026-09-12T17:22:18.719987Z",
+          "cgroup_headroom_bytes": null,
+          "cgroup_memory_current_bytes": null,
+          "cgroup_memory_max_bytes": null,
+          "effective_available_bytes": 15631151104,
+          "effective_floor_pass": true,
+          "failure_reasons": [],
+          "measurement_source": "/proc/meminfo",
+          "minimum_available_bytes": 4294967296,
+          "passed": true,
+          "physical_floor_pass": true,
+          "schema_version": 1
+        },
+        "final_F_mean_J": 0.2975423661208032,
+        "final_F_mean_S": 76.17084572692562,
+        "training_F_exposure": "C bypasses F; incidence unmeasured",
+        "final_F_interventions": {
+          "opportunities": 8745,
+          "retrace": 8745,
+          "dwell": 0,
+          "apply": 0,
+          "distinguishable": 8745
+        },
+        "resources": "resources_unmeasured"
+      },
+      "evidence_directory": "docs/research/candidates/acvc/training_use_b01_20260912/arm_C",
+      "checkpoint_archive": "temp/directions/acvc/training_use_b01_20260912_collection/arm_C.tar.gz"
+    },
+    {
+      "arm": "F",
+      "handle": "acvc-training-use-b01-f-a4c24e4ee",
+      "command": "cd /home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/training_use_b01_F_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/training_use_b01/launch.sh a4c24e4eef4eb290d5026596a0a49ba4f4f9ce4f F",
+      "output": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/exp/training_use_b01_20260912/arm_F",
+      "admission": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/training_use_b01_F_admission.json",
+      "timing": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/training_use_b01_F_task_time.txt",
+      "submission": "accepted_once",
+      "submitted_utc": "2026-09-12T17:22:41.553473+00:00",
+      "uncertain": false,
+      "command_publication_sha": "7d14db67a2c802892fee4216512680cef21654ad",
+      "submission_receipt": "temp/directions/acvc/preparation/training-use-b01-20260912/launch_F.json",
+      "monitor": {
+        "thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+        "dispatch": "accepted",
+        "adoption": "actual_running_handle_in_active_unbudgeted_goal",
+        "receipt_source": "Root native message in this assignment",
+        "reported_pid": 3376599,
+        "reported_exit": null,
+        "reported_tmux_active": true,
+        "collection": "both terminal deliveries accepted; Root forwarded MONITOR_GOAL_COMPLETE active_set=[] and no pending",
+        "terminal_exit": 0,
+        "terminal_tmux_active": false
+      },
+      "technical_acceptance": {
+        "accepted": true,
+        "identity": "train-F / deploy-F",
+        "training_episodes": 512,
+        "final_F_episodes": 64,
+        "adam_records": 1024,
+        "expected_counts_matched": {
+          "environment_constructors": 2,
+          "unscored_constructor_resets": 2,
+          "explicit_resets": 576,
+          "step_calls": 147456,
+          "team_steps": 147456,
+          "train_team_steps": 131072,
+          "eval_team_steps": 16384,
+          "completed_episode_steps": 147456,
+          "train_episodes": 512,
+          "eval_episodes": 64,
+          "rollouts": 256,
+          "optimizer_steps": 1024,
+          "backward_calls": 1024,
+          "update_records": 1024,
+          "train_actor_agent_forwards": 655360,
+          "eval_actor_agent_forwards": 81920,
+          "replayed_actor_agent_steps": 2621440,
+          "critic_update_rows": 524288,
+          "duration_decisions": 0,
+          "scientific_uav_calls": 147456,
+          "post_fit_loads": 1,
+          "new_fits": 1,
+          "final_checkpoints": 1
+        },
+        "parameter_counts": {
+          "actor": 34902,
+          "critic": 34177
+        },
+        "checkpoint_sha256": "7cd45dd6f7ae5c6c26a29e2a3da5a83f6eb68e0c7a5e26f55791ea1f11f8630a",
+        "whole_command_wall_s": 173.46,
+        "supervisor_duration_s": 174,
+        "inclusive_native_charge_s": 176,
+        "inclusive_charge_rule": "max(ceil(whole_command_wall_s), integer supervisor duration)+2s for enclosing integer-boundary/exit slack; not added to inner timing",
+        "process_wall_s_to_summary": 166.16392149799503,
+        "peak_rss_kib": 551132,
+        "admission": {
+          "assessed_at": "2026-09-12T17:22:40.996660Z",
+          "available_physical_bytes": 15326814208,
+          "captured_at": "2026-09-12T17:22:40.996279Z",
+          "cgroup_headroom_bytes": null,
+          "cgroup_memory_current_bytes": null,
+          "cgroup_memory_max_bytes": null,
+          "effective_available_bytes": 15326814208,
+          "effective_floor_pass": true,
+          "failure_reasons": [],
+          "measurement_source": "/proc/meminfo",
+          "minimum_available_bytes": 4294967296,
+          "passed": true,
+          "physical_floor_pass": true,
+          "schema_version": 1
+        },
+        "final_F_mean_J": 0.27144615364933855,
+        "final_F_mean_S": 69.49021533423067,
+        "training_F_exposure": {
+          "training_F_agent_ticks": 655360,
+          "training_F_opportunities": 60928,
+          "training_F_retrace": 60928
+        },
+        "final_F_interventions": {
+          "opportunities": 8178,
+          "retrace": 8178,
+          "dwell": 0,
+          "apply": 0,
+          "distinguishable": 8178
+        },
+        "resources": "resources_unmeasured"
+      },
+      "evidence_directory": "docs/research/candidates/acvc/training_use_b01_20260912/arm_F",
+      "checkpoint_archive": "temp/directions/acvc/training_use_b01_20260912_collection/arm_F.tar.gz"
+    }
+  ],
+  "sequence": "C and F each submitted once independently; no intermediate efficacy selection",
+  "stop": "Complete pair intake or concrete dependent limitation; no retry, sixth C01 fit, extra panels or successor",
+  "retention": {
+    "remote_bundle": "/home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle",
+    "local_preparation": "temp/directions/acvc/preparation/training-use-b01-20260912",
+    "local_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+    "cleanup_owner": "ACVC DM; Root confirms integration/retention before reclaiming unique scientific evidence or execution checkout",
+    "event": "Both terminal results collected, preserved and accepted; active shared checkout remains",
+    "C01": "Existing accepted inventory and unique checkpoints/evidence unchanged; do not rehash or delete for this pair",
+    "pending_remote_cleanup": [],
+    "preserve_unique_local": "temp/directions/acvc/training_use_b01_20260912_collection/arm_C.tar.gz and arm_F.tar.gz, extracted checkpoints, original receipts; remote/local archive SHA256 verified once",
+    "test_scratch": [
+      {
+        "path": "temp/directions/acvc/test/training-use-f01",
+        "files": 30,
+        "bytes": 68121
+      },
+      {
+        "path": "temp/directions/acvc/test/training-use-f02",
+        "files": 30,
+        "bytes": 68325
+      }
+    ],
+    "integration_and_reclamation": "All six allocated remote targets absent on disk; execution worktree absent from Git registration. Shared authoring checkout and C01 untouched. Previously rejected local test scratch remains outside this six-target cleanup.",
+    "removed_remote_targets": [
+      "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee",
+      "/home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle",
+      "/home/wu/hmasd-inputs/acvc-training-use-b01-C-a4c24e4ee.tar.gz",
+      "/home/wu/hmasd-inputs/acvc-training-use-b01-F-a4c24e4ee.tar.gz",
+      "/home/wu/.agent-tasks/acvc-training-use-b01-c-a4c24e4ee",
+      "/home/wu/.agent-tasks/acvc-training-use-b01-f-a4c24e4ee"
+    ],
+    "former_remote_checkout": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee",
+    "root_integration_and_retention_accepted": "Root direct assignment: main f6bf9e467, two unique local checkpoint archives and published evidence accepted",
+    "remote_cleanup_receipt": "docs/research/candidates/acvc/training_use_b01_20260912/remote_cleanup.json",
+    "remote_cleanup_complete": true
+  },
+  "status": "valid_complete_B_DOWN",
+  "analysis": "docs/research/candidates/acvc/training_use_b01_20260912/paired_analysis.json",
+  "scientific_intake": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md",
+  "primary_summary": {
+    "reading": "DOWN",
+    "mean_J": -0.026096212471464608,
+    "conditional_SE_J": 0.007136541708512396,
+    "adverse_worlds": 43,
+    "n_training_pairs": 1,
+    "n_worlds": 64
+  },
+  "native_cost": {
+    "measured_whole_command_sum_s": 330.56,
+    "inclusive_charge_sum_s": 336,
+    "per_arm_cap_pass": true,
+    "sum_cap_pass": true
+  }
+}

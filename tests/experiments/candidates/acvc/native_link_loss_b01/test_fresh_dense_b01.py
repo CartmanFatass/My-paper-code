@@ -6,6 +6,8 @@ import time
 import pytest
 import torch
 
+from experiments.candidates.acvc.fresh_dense_package_c01.protocol import CARD, CAPS, OBJECT, UNITS
+
 
 class FakeModule:
     def __init__(self, value):
@@ -15,12 +17,19 @@ class FakeModule:
         return {"weight": torch.tensor([self.value], dtype=torch.float32)}
 
 
-def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch):
+@pytest.mark.parametrize("binding", [None, UNITS[0]])
+def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch, binding):
     script = Path(__file__).resolve().parents[5] / "scripts/run_acvc_fresh_dense_reuse_b01.py"
     spec = importlib.util.spec_from_file_location("fresh_dense_b01_runner", script)
     module = importlib.util.module_from_spec(spec)
     monkeypatch.setattr(torch, "set_num_interop_threads", lambda _threads: None)
     spec.loader.exec_module(module)
+    master, namespace = binding or (module.MASTER, module.EVALUATION_NAMESPACE)
+    binding_options = {} if binding is None else {
+        "master": master, "evaluation_namespace": namespace,
+        "object_name": OBJECT, "card_path": CARD,
+        "mode": "PROVISIONAL_SINGLE_TASK_C_BENCH_UNIT", "allocation_seconds": CAPS,
+    }
 
     alarm = {"armed": False, "events": [], "handlers": []}
 
@@ -142,23 +151,24 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
 
     output = tmp_path / "complete"
     code = module.run(output, "synthetic", time.monotonic(), 20.0,
-                      make_env=fake_env, train_episodes=4, horizon=8, eval_episodes=3)
+                      make_env=fake_env, train_episodes=4, horizon=8, eval_episodes=3, **binding_options)
     assert code == 0
-    assert calls["templates"] == [8951]
-    assert calls["dense"][0][1:] == (module.DENSE, 895100012)
+    assert calls["templates"] == [master]
+    assert calls["dense"][0][1:] == (module.DENSE, 100000 * master + 12)
     assert [item["constructor_seed"] for item in calls["envs"]] == [
-        895101000, 895200062, 895200063, 895200064,
+        100000 * master + 1000, 100000 * namespace + 62,
+        100000 * namespace + 63, 100000 * namespace + 64,
     ]
-    assert [item[1] for item in calls["loads"]] == [8952, 8952, 8952]
+    assert [item[1] for item in calls["loads"]] == [namespace, namespace, namespace]
     assert [item[2] for item in calls["evaluation"]] == [
         arm for arm in ("C", "F", "dwell") for _episode in range(3)
     ]
     assert [item["reset_seed"] for item in calls["training"]] == [
-        895101000, 895101001, 895101002, 895101003,
+        100000 * master + 1000 + e for e in range(4)
     ]
     assert len({id(item["velocity_rng"]) for item in calls["training"]}) == 1
     assert [item["duration_rng"]["seed"] for item in calls["training"]] == [
-        895104000, 895104001, 895104002, 895104003,
+        100000 * master + 4000 + e for e in range(4)
     ]
     assert all(item["options"] == {
         "real": True, "diagnostics": False,
@@ -174,12 +184,21 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
 
     saved = json.loads((output / "summary.json").read_text(encoding="utf-8"))
     assert saved["status"] == "complete"
-    assert saved["master"] == 8951 and saved["evaluation_namespace"] == 8952
-    assert saved["allocation_seconds"] == {
+    assert saved["master"] == master and saved["evaluation_namespace"] == namespace
+    assert saved["allocation_seconds"] == (CAPS if binding else {
         "whole_supervised_task": 270,
         "cumulative_runtime_support": 330,
         "complete_charge": 600,
-    }
+    })
+    assert saved["object"] == (OBJECT if binding else module.OBJECT)
+    assert saved["card"] == (CARD if binding else module.CARD)
+    assert saved["mode"] == ("PROVISIONAL_SINGLE_TASK_C_BENCH_UNIT" if binding else "UAV_B_EXPLORE")
+    checkpoint_metadata = torch.load(output / "final_DENSE.pt", weights_only=False)
+    assert checkpoint_metadata["master"] == master
+    assert checkpoint_metadata["object"] == saved["object"]
+    assert all(row["metadata"]["master"] == master for row in calls["training"])
+    assert all(call[1] == namespace for call in calls["evaluation"])
+    assert all(row["master"] == master for row in map(json.loads, (output / "updates.jsonl").read_text().splitlines()))
     assert saved["fit_complete"] and saved["checkpoint_complete"]
     assert saved["training_rows"] == 4 and saved["evaluation_rows"] == 9
     assert saved["counts"]["team_steps"] == 104
@@ -221,7 +240,7 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
     partial = tmp_path / "partial"
     assert module.run(partial, "synthetic", time.monotonic(), 20.0,
                       make_env=fake_env, train_episodes=4, horizon=8,
-                      eval_episodes=3) == 1
+                      eval_episodes=3, **binding_options) == 1
     failed = json.loads((partial / "summary.json").read_text(encoding="utf-8"))
     assert failed["status"] == "incomplete"
     assert failed["fit_complete"] and failed["checkpoint_complete"]
@@ -240,7 +259,7 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
     interrupted = tmp_path / "interrupted-update"
     assert module.run(interrupted, "synthetic", time.monotonic(), 20.0,
                       make_env=fake_env, train_episodes=4, horizon=8,
-                      eval_episodes=3) == 1
+                      eval_episodes=3, **binding_options) == 1
     stopped = json.loads((interrupted / "summary.json").read_text(encoding="utf-8"))
     assert stopped["status"] == "incomplete"
     assert stopped["counts"]["optimizer_steps"] == 2

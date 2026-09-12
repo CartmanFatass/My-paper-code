@@ -540,7 +540,104 @@ Portfolio lifecycle/priority remain unchanged.
 Evidence: `FSD_UAV_RENEWAL_BATCH_B01_RESULT_EVIDENCE_20260911.md`,
 `FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md`, and the unchanged card.
 
-## Objects and their state (2026-09-11)
+## Accepted native UAV renewal-batch gain recurrence (B02/771003, 2026-09-11)
+
+The new unchanged I1280/authentic-D0 pair gives native I−D0
+**+.206285904082309**, above the .01 MEI, with means .46799609168995665 and
+.2617101876076477. All 32 ordered episode contrasts are positive; conditional
+SE is .01230361547990872. This is one new learning pair and the second local
+same-package gain, separate from B01's +.0569774672. It does not establish
+stable superiority or isolated batch/renewal causality. Both old batch128 losses
+remain −.0496705632 and−.0353127253 with their original meaning.
+
+Higher coverage/quality and lower altitude penalty account for this gain.
+I has 44697 training gap causes and 26492 valid joint rows versus 0/4000 D0, while
+coordinator calls are 345 versus 525. The first two I sampled training means are
+lower and the final three higher. Nine final gap causes versus zero show sparse
+online renewal without identifying its causal contribution. Endpoint duration
+statistics remain unmeasured because evaluator segment storage is empty.
+
+Strongest support is the second complete native gain and 32 positive contrasts.
+Strongest contradiction to broad benefit remains the older losses, B01's eight
+adverse episodes, initial sampled training deficits and 1.98504× D0 wall. The
+large change in fresh D0's score/altitude term across pairs highlights training
+instance variation; optimization grouping, data/credit and learned spatial
+behavior remain alternatives. Tuned same-information UAV headroom is absent.
+
+Both original arm caps pass at 538.66/1069.26s, sum 1607.92s. Partial support
+telemetry limits complete-cost certification while leaving the native primary
+intact. The allocated pair ends at intake/closeout. Further fresh-pair robustness
+against authentic D0 remains an unresolved discriminator, with no third pair,
+C freeze or Portfolio disposition selected here. Evidence:
+`FSD_UAV_RENEWAL_BATCH_B02_771003_RESULT_EVIDENCE_20260911.md` and
+`FSD_UAV_RENEWAL_BATCH_B02_771003_INTAKE_20260911.md`.
+
+## Accepted native UAV renewal-batch adverse pair (B02/771103, 2026-09-11)
+
+The third separately allocated unchanged I1280/authentic-D0 pair gives native
+I−D0 **−0.012430430599850807**, just beyond the negative .01 MEI. Means are
+.3948596946403985 and .4072901252402493; 16 ordered contrasts are positive and
+16 negative, with conditional episode SE .01926754789685166. The fixed
+`opposite_sign` branch is valid, while one trained pair cannot establish stable
+harm. The prior package gains +.0569774672 and +.2062859041 and older batch128
+losses retain their separate meanings.
+
+Lower coverage accounts for most of the new native loss; quality is slightly
+lower and altitude penalty higher. I has 42413 training gap causes and 24891
+joint rows versus 0/4000 D0, with 315 versus 525 coordinator calls. Its first
+three training means are higher and last two lower. Both final panels have
+zero individual gap causes, so extra online renewal is absent in this observed
+panel; training data, credit and update grouping still differ. Endpoint duration
+statistics remain unmeasured.
+
+Strongest support for benefit remains the two prior native gains. Strongest
+current contradiction is this complete unchanged-package loss and 2.16911× D0
+wall. The observed package history is mixed; learning-instance variation and
+learned spatial behavior remain alternatives. Tuned same-information UAV
+headroom is absent. No stable seed, isolated batch/renewal, transfer or safety
+claim follows.
+
+Both original arm caps pass at 471.82/1023.43 s, sum 1495.25 s. Partial support
+telemetry limits total-cost certification while the native primary remains
+valid. The allocation ends at intake/closeout. A repeatable advantage over
+fresh authentic D0 remains unresolved; no fourth unchanged pair, C promotion
+or next measurement is assigned. Evidence:
+`FSD_UAV_RENEWAL_BATCH_B02_771103_RESULT_EVIDENCE_20260911.md` and
+`FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md`.
+
+## Accepted fourth native UAV renewal-batch observation (B02/771203, 2026-09-12)
+
+The separately allocated unchanged I1280/authentic-D0 pair gives native
+I−D0 **+.012554805665750726 J**, just above the absolute .01 MEI. D0/I means
+are .32245044157604/.335005247241791;19 ordered contrasts are positive and13
+adverse, conditional episode SE .01250683666255726. The valid `above_mei`
+branch supplies a small local optional-package gain, not stable superiority.
+
+Higher coverage and lower altitude penalty outweigh lower quality. I's sampled
+training return is lower on rollouts2–4. Its training has47196 individual gap
+causes/26340 joint rows versus0/4000 D0; coordinator steps360 versus525.
+The final panel has8 individual gap causes versus0 D0. Training data/credit,
+advantage grouping and learned spatial behavior remain alternative explanations;
+sparse endpoint renewal does not establish causation. Endpoint duration and
+tuned same-information headroom remain unmeasured.
+
+Strongest support remains the prior +.2062859041 gain and this additional
+positive native observation. Strongest contradiction remains the prior
+unchanged −.0124304306, current13 adverse contrasts and2.19548× D0 wall.
+Earlier+.0569774672 and the different batch128 losses retain their separate
+meanings. The four package observations comprise three above-MEI and one
+opposite-sign reading; no pooled primary or fixed adequacy threshold is implied.
+
+Both native arms and their sum pass at475.03/1042.92s,total1517.95s. Partial
+support telemetry limits complete-cost certification without changing this
+primary. Robust optional-use value against fresh authentic D0 remains the
+unresolved discriminator; no fifth pair, new consultation, C promotion or
+successor is selected by this completed finite allocation. No isolated batching,
+renewal, transfer or safety claim follows. Evidence:
+`FSD_UAV_RENEWAL_BATCH_B02_771203_RESULT_EVIDENCE_20260912.md` and
+`FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md`.
+
+## Objects and their state (2026-09-12)
 
 | Object | State | Record |
 | --- | --- | --- |
@@ -560,6 +657,9 @@ Evidence: `FSD_UAV_RENEWAL_BATCH_B01_RESULT_EVIDENCE_20260911.md`,
 | Native individual-renewal UAV B02 / P72 | complete valid B, new770603/780603 pair; I−D0−.0353127253 below−.01, native loss in both observed learning instances; different component balance, training activity and endpoint inactivity retained;1768.78s summed wall; no successor selected | `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_RESULT_EVIDENCE_20260909.md`; `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md`; B02 card |
 | Post-native-UAV-B02 Convergence / P74 | complete PRO_FINAL A; end only unchanged .25/k10/five-update extension, no twenty-rollout B or successor selected; longer-budget value remains unresolved, no recast or Portfolio change | `pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md`; `pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md` |
 | UAV renewal batch B01 / 770703 | complete valid B, one I1280/D0 pair; native+.0569774672 above+.01,24 positive/8 negative contrasts;1540.62s arm wall, partial support telemetry; no successor allocated | `FSD_UAV_RENEWAL_BATCH_B01_RESULT_EVIDENCE_20260911.md`; `FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md`; original card |
+| UAV renewal batch B02 / 771003 | complete valid B, one new I1280/D0 pair; native+.2062859041 above+.01,32 positive contrasts;1607.92s arm wall, partial support telemetry; no successor selected | `FSD_UAV_RENEWAL_BATCH_B02_771003_RESULT_EVIDENCE_20260911.md`; `FSD_UAV_RENEWAL_BATCH_B02_771003_INTAKE_20260911.md`; card§7 |
+| UAV renewal batch B02 / 771103 | complete valid B, one new I1280/D0 pair; native −.0124304306 under opposite_sign, 16 positive/16 negative; 1495.25 s native wall, partial support telemetry; no successor | `FSD_UAV_RENEWAL_BATCH_B02_771103_RESULT_EVIDENCE_20260911.md`; `FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md`; card §8 |
+| UAV renewal batch B02 / 771203 | complete valid B, one new pair; native+.0125548057 above_mei,19 positive/13 adverse,1517.95s native wall; partial support telemetry, finite grant ends with no successor | `FSD_UAV_RENEWAL_BATCH_B02_771203_RESULT_EVIDENCE_20260912.md`; `FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md`; current card |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code

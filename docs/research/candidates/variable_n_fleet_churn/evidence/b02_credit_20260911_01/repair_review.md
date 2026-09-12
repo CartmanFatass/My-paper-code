@@ -39,3 +39,30 @@ command calls, summed command wall1.0504297s; approximately1.8s enclosing tool w
 an alternative. No edits, tests, models, native execution or scientific invocation
 were performed by the reviewer. Root-reported rejected dynamic method requests are
 separate tool events in `repair_tool_events.json`.
+
+## Portfolio-conditioned candidate review
+
+The exact-build static mapping was subsequently published in
+`repair_exact_interpreter_static.json`, commit06fc94e6268072a3be02abc78738d32813b950f0.
+The binary computes40 bytes for the declared call and already includes its reserved
+pointer. The saved tail resolves to `_Py_FalseStruct`, expected at offset32. The saved
+32-byte debug header remains inconsistent; allocation-time state and metadata origin
+remain unobserved. This does not establish a missing-slot bug in the inspected binary.
+
+The reviewer then inspected the concrete replacement, two-test draft and Portfolio
+response6c32ade3216c374ecf2f5179b15d559729cd45c9 §6. No numerical or gradient defect
+was found. The tests meaningfully cover exact output/rounding/order, input ownership
+and removal of the helper's former Fraction path through custom autograd. They do
+not establish independence from prior corruption. Prior successful checks of the old
+primitive/bridge also coexist with the allocator failure. This is one material
+readiness-claim finding; it is not a scientific objection to temporal credit.
+
+DM disposition: accept the finding. Preserve the replacement and regression only as
+`repair_fraction_path_candidate.patch`, with no production adoption or test execution.
+No full-runtime repair, remote staging acceptance or scientific launch is implied.
+
+Additional review costs: exact-static seven-command review4.9540463s (approximately6.7s
+enclosing alternative); artifact publication6.3729295s, including its0.6437807s capture;
+subsequent diff/test/Portfolio read-only review0.6660973s. The latter two sum7.0390268s.
+These are additional to the earlier review account, with nested clocks excluded.
+No diagnostic fixture, debugger, test or scientific code was executed by the reviewer.

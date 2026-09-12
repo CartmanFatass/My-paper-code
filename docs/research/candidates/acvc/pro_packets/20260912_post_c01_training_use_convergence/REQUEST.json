@@ -1,0 +1,145 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-12-acvc-post-c01-training-use-convergence-01",
+  "source_thread_id": "01a095be-63c8-7c23-8384-edaf74dcb154",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "direction_id": "acvc",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "c4082f54f8e2deb44d3ed8e839bc3d362b0bf213",
+  "execution_mode": "REUSE_SINGLETON",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "reset_invalid_provider_context": false,
+  "github_delivery": {
+    "branch": "codex/acvc",
+    "base_sha": "c4082f54f8e2deb44d3ed8e839bc3d362b0bf213",
+    "response_path": "docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  },
+  "scientific_question": "C01 is valid, complete and consumed. Its five complete fresh fit-plus-panel units support qualified JOINT_ABOVE_MEI for deploying fixed F after C training: F-C +0.095915968685 J and F-dwell +0.065133768997 J, with both frozen lower bounds above .01 J under the prespecified iid-normal model. Actual neural-training calibration is unestablished. The result does not say whether a proposer and its teammates would benefit from learning on F-corrected execution rather than first encountering it at deployment.\n\nShould the next ACVC object be one bounded B comparison of **training through the same fixed F rule versus training C and adding F only at deployment, with both final policies evaluated through F**, or should ACVC retain train-C→deploy-F as a qualified same-host reference asset without another standalone fit? Make this genuine next-object/use decision on the original direction node now. The reference-only answer is complete and useful; a favorable B answer is a scientific choice for a later investment, not a present fit allocation.\n\nThe practical use is deciding whether to keep F as a deployment correction or put it inside the training environment so the proposer and partners can adapt to actual corrected motion and its private observations. Binding MARL structure is multi-agent partial observability and other-agent non-stationarity during learning. The hypothesized path is local retained-user loss plus proposed away-motion → each UAV's own fixed F predicate → actual corrected command → joint service geometry/private recurrent and teammate feedback → real PPO exposure to those consequences → final native team return. F may improve adaptation, suppress useful exploration, or leave the competent deployment-only package sufficient. Useful dwell, 46/320 adverse F-dwell worlds (minimum -0.113308313985 J), 17/320 adverse F-C worlds and unequal F/dwell intervention histories remain contrary evidence.\n\nThe specific candidate is two fresh fits, one matched training pair with separate mutable state: unchanged C training versus fixed-F execution throughout training. Retain the existing five-UAV/fifty-user, H256 native host; DENSE actor/private GRU and centralized training-only critic; CPU FP32/thread1; 512 training episodes and 1,024 Adam calls per arm. Evaluate each final checkpoint through its own F history on 64 prospectively paired initial worlds. The proposed primary is mean final J of train-through-F minus train-C, both deployed through F. The DM suggests .01 J as a prospective practical margin on the unchanged reward scale; decide its appropriateness as part of this narrow B choice. No RNG/seed identity or new card is frozen here. One pair can supply a bounded exploratory observation, not stable training-population superiority or equivalence inside the margin.\n\nCurrent source has no implemented F actor-training path. The original DM note records the specific rollout/storage/recurrent PPO issue: keep the sampled proposal and its old density as the policy-likelihood object while feeding back actual F-sent commands into later observations/history. A many-to-one overridden displacement must not silently become the sampled Gaussian action. This is a later primary-protecting implementation dependency, not a requirement to reconstruct all reasons for C01's gain. Existing shared UCOPE defaults/callers must be preserved if implementation is later funded.\n\nPortfolio has selected only A: exactly this one documentary question plus full intake. Complete documentary/provider cost is unknown. A+B and all offered 270/540/660/1200-second figures are unallocated. The changed F-in-training complete cost is unknown, and C01's 170-178-second units or old planning anchor do not forecast it. No implementation, target import, model, scientific RNG, train/eval, diagnostic or runtime-test allowance exists now. Do not treat a positive direction verdict as investment approval.",
+  "deliverable": "Give one conclusion-first, complete original-Convergence decision between the specific training-through-F candidate and reference-only retention, with your recommendation, strongest support, strongest contrary evidence, residual uncertainty and practical consequence. If choosing the candidate, settle its minimal B question, competent common-F null, primary/MEI interpretation and necessary later proposal-density/actual-feedback semantics; retain one-pair/one-final-F-panel scope unless a material reason changes the scientific choice. State any such change explicitly as a direction proposal outside the held empirical allocation, not as an automatic successor. If choosing reference-only, state the bounded same-host use and what concrete new observation/use could make training adaptation worth reconsidering; no new investigation is purchased by that trigger. Distinguish this direction decision from Portfolio lifecycle/investment and unseen technical acceptance.\n\nRead the listed evidence and method passages directly and identify their actual access. Use supplied previously computed work counts; no source execution, fresh calculation over outcomes, broad related-work review, mechanism census, proof of cause, exact optimum or cost pilot is requested. Preserve C01's frozen result, all adverse observations and known cost/inference limits. End with the finite decision and unallocated future need; no further consultation, Innovator, implementation or numerical continuation is authorized by the current allocation.",
+  "claim_ceiling": "One direction-local next-object/reference-use decision after consumed C01, using a prospective B/EXPLORE performance comparison. Existing C01 remains a qualified single-task complete-package finding under its prespecified iid-normal model. No pure retracing, history necessity, calibrated stable superiority, tuned headroom, transfer, new learned-gate family, Portfolio disposition or formal UAV entry is established. Future implementation and all scientific execution remain unfunded.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/FACTS.json",
+      "purpose": "Read completely: current one-question/full-intake allocation and machine-generated zero-exposure line; accepted C01 facts; explicitly unselected/unfunded candidate counts and cost unknowns.",
+      "provenance": "Standard-library documentary serialization of current authority and previously accepted/previously computed facts; no result recomputation."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_C01_DIRECTION_QUESTION_20260912.md",
+      "purpose": "Read completely: the concrete training-use question, strong common-F deployment null, candidate learner/observable, source-level proposal-density/actual-feedback risk and bounded scientific-reading coverage. Its last section offered alternatives before Portfolio chose A; the current allocation in FACTS and the Portfolio response supersedes those offers.",
+      "provenance": "Original reassigned DM recommendation and actual source/primary-PPO reading; not an accepted new object, implementation or allocation.",
+      "commit_sha": "c717996f3f2654e044fac05f9dc6a5d87d5b1369"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md",
+      "purpose": "Read Final scientific intake 2026-09-12 completely, including frozen rule, complete-unit count, contrary observations, model qualification, predictions, cost/retention limits and Decisions this final intake produces. Earlier component/unconsumed/no-question states are historical.",
+      "provenance": "Accepted complete five-unit C01 scientific intake, integrated by Root; no raw-result reanalysis is commissioned.",
+      "commit_sha": "c717996f3f2654e044fac05f9dc6a5d87d5b1369"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md",
+      "purpose": "Sections 2 and 4, and final section 15: protected host, learner, local predicate/actual feedback, final return, frozen complete-fit-panel target and consumed status. Do not recursively read linked development cards or borrow old budgets/identities.",
+      "provenance": "Frozen executed C01 meaning plus append-only final intake status; prospective B may reuse this host law without inheriting C certainty or funding.",
+      "commit_sha": "c717996f3f2654e044fac05f9dc6a5d87d5b1369"
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "purpose": "Scientific question, Current position and Bounded conclusion only: latest accepted mechanism-level support/contradiction and ended learned-gate/uncertain-delayed family boundaries.",
+      "provenance": "Accepted direction science; current allocation/lifecycle follows the separately pinned authority, not older historical prose.",
+      "commit_sha": "c717996f3f2654e044fac05f9dc6a5d87d5b1369"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/archive/RESPONSE.md",
+      "purpose": "Opening and sections 1,4,7 only: actual Portfolio A purchase, why the strong null answers a practical use, implementation limits and A+B withholding. Other directions are outside this decision.",
+      "provenance": "Complete immutable Portfolio PRO_FINAL / OWNER_DELEGATED decision; it allocates this consultation, not the next scientific object.",
+      "commit_sha": "86428c9e87fc4c61888b5638781603038c39399d"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/EXECUTION_MAPPING.md",
+      "purpose": "Section A only: one original Convergence/full intake, exact zero implementation/numerical/test allowance, reference-only valid endpoint and no automatic empirical successor.",
+      "provenance": "Designated Portfolio author conforming execution mapping, assigned and integrated by Root.",
+      "commit_sha": "739aec7f4b22a28f3a0093d211f0a09a4c1ad4a4"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections 4,6.3,11.4,11.7-11.10: integrity, consumed C versus proposed B, proportional performance exploration, independent training unit, headroom/MEI and actual knowledge use. Section 11 controls; no stronger-class prerequisite is imported.",
+      "provenance": "Current applicable empirical requirements at the published control version; the named sections are adopted by this task.",
+      "commit_sha": "64514a82d4bccd474bfa24fb08e7e644b4cf3acc"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Sections 1-4 and 6: actual direction versus Portfolio authority, conforming complete-response finality, existing delegation, preserved shared branch and fixed evidence. Current Windows routes supersede old historical endpoints.",
+      "provenance": "Current owner-governed authority; no new approval layer, allocation or governance edit is requested.",
+      "commit_sha": "64514a82d4bccd474bfa24fb08e7e644b4cf3acc"
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "purpose": "Current Direction Manager, Portfolio and Transport responsibility/return passages only.",
+      "provenance": "Current execution route and ownership; Root coordinates but does not choose direction science.",
+      "commit_sha": "64514a82d4bccd474bfa24fb08e7e644b4cf3acc"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Sections 4-5,7.1,7.3 only: no added machinery; this documentary L0; later minimal implementation and relevant independent high-risk semantic review if actually funded.",
+      "provenance": "Current engineering method, not permission for implementation or runtime checks during A.",
+      "commit_sha": "64514a82d4bccd474bfa24fb08e7e644b4cf3acc"
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "purpose": "Sections 1-3: complete native versus invoked support versus provider/unknown cost, once-only accounting and preserved per-arm work.",
+      "provenance": "Current cost definitions; no old or proposed numerical ceiling is allocated to this one-question task.",
+      "commit_sha": "64514a82d4bccd474bfa24fb08e7e644b4cf3acc"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Section 6 only: fitted-policy replication, selection, uncertainty and package versus mechanism claims.",
+      "provenance": "Explanatory scientific grounding already applied by the DM, not independent authority or empirical evidence.",
+      "commit_sha": "64514a82d4bccd474bfa24fb08e7e644b4cf3acc"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Relevant independent-unit, seed, fixed-endpoint and package/causal comparison passages; do not impose a universal seed quota or positive-first rule.",
+      "provenance": "Explanatory grounding for a one-pair B claim and consumed-C qualification.",
+      "commit_sha": "64514a82d4bccd474bfa24fb08e7e644b4cf3acc"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/01_RL.md",
+      "purpose": "Data and updates, and policy gradient/baseline/critic sections only: distinguish sampled policy action likelihood from transformed actual execution and subsequent feedback.",
+      "provenance": "Explanatory grounding; the original note attributes its precise same-sampled-action ratio check to the primary PPO paper. Do not claim independent paper/code access from that attribution.",
+      "commit_sha": "64514a82d4bccd474bfa24fb08e7e644b4cf3acc"
+    },
+    {
+      "path": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "purpose": "Scoped one-response/one-delivery-comment, complete response/readback and partial-success/fallback passages only.",
+      "provenance": "Current authorized GitHub delivery method; the fixed task bounds this round.",
+      "commit_sha": "64514a82d4bccd474bfa24fb08e7e644b4cf3acc"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/ISSUE_INPUT_SNAPSHOT.json",
+      "purpose": "Current Issue 14 prefix and relevant retained discussion for chronology/one-delivery reconciliation. Prior budgets and pre-freeze statuses are historical; this fixed task controls the new question.",
+      "provenance": "Actual gh issue readback after one preserved-history prefix update; six existing delivery comments; no provider Send."
+    }
+  ],
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  ],
+  "constraints": [
+    "Current allocation is one original Convergence question and full intake, with unknown full documentary/provider cost. No source patch, target import, model, scientific RNG, optimizer/train/eval, diagnostic, runtime test or outcome reanalysis. All A+B 270/540/660/1200 figures are unallocated; C01 historical resources cannot be reused.",
+    "Train-C→deploy-F is the strong null. A deploy-C-only comparison would not answer the value of training adaptation under a common F deployment rule. Do not reopen ended T/G selective-retrace or uncertain/delayed families.",
+    "Use the proposed finite work as attributed counts, not executed exposure: 2 fits/1 matched pair, 1,024 train and 128 final-F episodes, 294,912 team steps, 2,048 Adam calls, 5,242,880 replay actor rows and 819,200 F predicate agent-tick opportunities. The last count is not predicted interventions or independent replication. No C/dwell diagnostic panel, checkpoint search, nested controllers, exhaustive census or alternate-trajectory search is proposed.",
+    "Preserve sampled-proposal/old-density recurrent PPO semantics and actual-command observation/history feedback as necessary later acceptance concerns. The note records actual DM source/PPO reading; do not claim independent access to unlisted production files, raw arrays or external papers. No proof of F benefit follows from the PPO formulation.",
+    "Apply the named current evidence specification, especially section 11.8, rather than demanding a stronger C claim, positive pilot, causal decomposition, exact headroom or normality test before this B decision. Missing tuned current-host headroom is recorded, not a universal investment threshold. Recasts:2 and lowest-contention treatment remain; no wait for CBSC.",
+    "Reference-only retention selects no standalone empirical object or automatic reuse in another direction; receiving use must match actual host/information/action/budget. A favorable next-object answer is also no present implementation/fit allocation. A material alternative or precise blocker is not authority for a second question.",
+    "Fixed per-file commits control evidence. Latest final C01 and current Portfolio A authority supersede historical component/pre-freeze/zero-question stages. Preserve historical evidence and current consumed rule. Only the named response and one delivery comment may be written; no card, code, specification, old response, main or runtime state changes."
+  ],
+  "response_schema": [
+    "Actual choice and reason; the strongest candidate and reference-only alternative, without a broad family enumeration.",
+    "Bounded evidence, contrary worlds/useful dwell, model and headroom limits; distinguish observation from source-attributed inference.",
+    "If the candidate survives, its concrete native action/learning use, competent null, B primary/MEI reading and proportionate future semantic dependencies; if reference-only, its actual reuse limits and concrete reconsideration trigger.",
+    "Known dominant work and unknown complete costs; current single-consultation stop and explicitly unallocated empirical need, including after a favorable answer.",
+    "Actual accessed fixed sources and any concrete specification/access conflict; full scientific answer and verified delivery links or complete downloadable Markdown fallback."
+  ]
+}

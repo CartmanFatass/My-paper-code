@@ -202,6 +202,12 @@ answer as superseded for the owner's model requirement, not as a scientific nega
 
 ## Exact input and one-send rule
 
+OWNER_DIRECT 2026-09-11: repair recurring Transport stalls under the existing request.
+The one-send rule protects one accepted provider submission, not a lifetime quota of
+ineffective UI clicks. A browser error or exhausted local click retry is a recovery
+handoff, not completion of the research request. Use the recovery procedure below;
+preserve every actual click and its evidence rather than resetting the counter.
+
 For paste mode, write the exact UTF-8 text to the tab clipboard, focus the composer,
 and use the platform paste key. Verify the composer text before sending. Do not use
 `locator.fill()` for transport: the live test produced a duplicated/malformed user
@@ -218,8 +224,9 @@ After the verified packet is ready, click Send once. Record `SEND_ATTEMPTED`, th
   keep observing the same tab without another Send;
 - a URL change without the user node is `SEND_UNCERTAIN`;
 - an unchanged URL, unchanged composer, enabled Send control, and no user node are
-  the only positive evidence that a pre-send click failed and may permit one retry
-  with the same request/idempotency key.
+  positive evidence that a pre-send click failed. One immediate retry uses the same
+  request/idempotency key; if it also has no effect, repair the interaction surface
+  under `references/send-hit-point-recovery.md` before any further submission.
 
 For a packet with references, `SEND_CONFIRMED` additionally requires every expected
 file group and its recorded hash to be associated with the bound conversation; the
@@ -230,9 +237,10 @@ Persist the exact user-message ID or another unique DOM identity when available,
 alongside its text and attachment association. A file chip proves page association;
 its byte identity comes from the pre-upload local hash, not from its display name.
 
-If a locator reports a hit-point/coordinate failure, read
+If a locator reports a hit-point/coordinate failure, or a verified click has no effect, read
 [send-hit-point-recovery.md](references/send-hit-point-recovery.md) before any replacement
-click. The error alone proves neither submission nor a safe retry; uncertain Send stops.
+click. The error alone proves neither submission nor a safe retry. Uncertain Send
+stops submission actions while same-request read-only reconciliation continues.
 
 ## Long generation and asynchronous wake-up
 
@@ -270,6 +278,17 @@ assistant response: download it only after natural completion, verify its Markdo
 retain the provider-visible filename and node association.
 
 ## Archive and tab lifecycle
+
+For GitHub delivery, obtain the exact complete response from its verified immutable
+commit/path and archive those bytes as `__02_RESPONSE.md`. Record that artifact's hash
+as `response_sha256`; store the short chat links separately as `__04_CHAT_RECEIPT.md`
+and `short_receipt_sha256`. A local checkout may have newline conversion: read the
+Git blob bytes rather than pipe text through a shell writer. If full delivery cannot
+yet be retrieved, retain the chat receipt and `ARCHIVE_PENDING`; a short link receipt
+does not satisfy full-response archival. Existing mislabeled artifacts remain intact:
+add a role correction and a separately verified full-response reference, preserve any
+attempted receipt's original key, and do not resend the provider prompt. Archival alone
+does not prove the parent received anything; use the existing receipt helper/outbox.
 
 Write one canonical packet manifest plus exact UTF-8 prompt, reference-file, and
 response artifacts and a transport-fact file containing workflow node, binding
@@ -383,8 +402,12 @@ observation as instructed; preserve other pending records and follow the owner's
 Do not resume stopped browser actions or change the prompt. Recovery of a proven
 accepted request observes the same request without another Send.
 
-Stop and report the exact state on unknown direction, missing prompt, failed Pro
+Stop the affected unsafe action and report the exact state on unknown direction, missing prompt, failed Pro
 verification, incomplete upload, uncertain/mismatched submission, stale/ambiguous
 conversation identity, partial response, archive conflict, observation conflict, or a
 recovery URL that no longer resolves to the bound conversation.
+Keep recoverable transport work assigned to Transport. Each recovery report names
+the exact request/binding, observed effect, remaining uncertainty, attempted repair,
+and concrete next action or external prerequisite. Root resumes that same operation;
+neither a blocker receipt nor a terminal state label silently cancels recovery.
 Transport facts never imply scientific conclusions.

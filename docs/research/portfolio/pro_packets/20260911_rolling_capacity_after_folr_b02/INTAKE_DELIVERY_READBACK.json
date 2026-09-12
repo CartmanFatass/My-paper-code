@@ -1,0 +1,17 @@
+{
+  "github_response": {
+    "blob_sha": "0bd8c09a4047e0c8ffe137f5189859944bbaa46a",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/05c24bcd85f92efc26fb2a9cb2152bed51dd90e9/docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md",
+    "encoding": "base64"
+  },
+  "issue_comment": {
+    "id": 5642632827,
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5642632827",
+    "body": "Delivered the complete rolling-capacity decision after FOLR B02 for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/05c24bcd85f92efc26fb2a9cb2152bed51dd90e9/docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/56de8d1072c55b16116a6fe14890927b346e4a66/docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/delivery/TASK.md\n\nCommit 05c24bcd85f92efc26fb2a9cb2152bed51dd90e9 adds only the specified response file on codex/portfolio. The complete 231-line response, including all fixed-reference definitions, was read back. Comparison with parent 0e06b09ba60973879d2053faefed7483bbd7458d confirms the single-path addition. No scientific execution, source/card/Portfolio-state edit, main change or rewrite of earlier responses was performed.",
+    "created_at": null,
+    "updated_at": null
+  },
+  "comment_count": 16,
+  "observed_utc": null,
+  "observed_time_note": "Fresh connector read during this intake; exact readback timestamp was not retained. Comment timestamps are unavailable."
+}

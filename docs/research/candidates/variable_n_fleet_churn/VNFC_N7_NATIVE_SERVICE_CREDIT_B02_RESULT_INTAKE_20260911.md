@@ -136,3 +136,111 @@ This is not a direction/Portfolio decision, new object selection or reopened B02
 The earlier partial-result reading and unscored predictions remain unchanged. No new
 valid result exists, so the earlier Chinese incomplete-attempt brief remains applicable.
 Root receives the committed evidence/intake and the precise remaining technical gap.
+
+## Portfolio-conditioned static intake — 2026-09-11
+
+Portfolio response `6c32ade3216c374ecf2f5179b15d559729cd45c9` prospectively selects a
+new fresh pair, conditional on relevant repair acceptance; it does not renew B02.
+I checked its complete VNFC §6, the exact-build static artifact published at
+`06fc94e6268072a3be02abc78738d32813b950f0`, the prepared source/regression diff and the
+independent review against the current technical assignment. Rule applied verbatim:
+"The existing technical DM must demonstrate a supported repair of the affected path,
+or a credible same-meaning alternative whose independence from the corruption is
+established by relevant focused evidence."
+
+The new [static assessment](evidence/b02_credit_20260911_01/repair_fraction_path_assessment.json)
+shows that the exact interpreter formula already provides40 bytes for the expected
+constructor call. The saved tail is precisely the expected `False` keyword at offset32,
+which is legitimate within40 bytes but outside the recorded32-byte metadata boundary.
+That discrepancy is established. Its origin is not: actual allocation-time counts and
+size were not captured. Neither a missing-slot formula nor a particular corrupting
+instruction is demonstrated. The strongest support is the exact-build source/symbol
+mapping; the strongest limit is the missing allocation-time/history fact.
+
+Independent review found the candidate mathematically equivalent and its proposed
+tests useful for numerical/gradient behavior and path exclusion. It found a material
+gap if these alone were used to satisfy corruption independence. I accept that finding:
+the original implementation's passing isolated checks already coexist with allocator
+failure. The prepared two-test draft is preserved unrun in the candidate patch, and
+production is restored unchanged. No new test, debugger, dynamic fixture or scientific
+workload ran in this continuation. [Execution and review disposition](VNFC_N7_NATIVE_SERVICE_CREDIT_B02_EXECUTION_20260911.md#static-mapping-review-and-disposition)
+records costs, provenance and retention.
+
+Decisions this intake produces: (A) retain the exact static evidence and unadopted draft
+while reporting NOT READY; (B) accept Fraction-path avoidance as sufficient readiness.
+Recommend A: B would silently weaken Portfolio §6. **Owner-delegated decision
+(unattended, 2026-09-03 instruction): (A) decline unsupported adoption and retain the
+precise technical gap.** The ordinary object-tier technical audit row records this
+choice; the review finding was accepted, not overruled. No new P1/P2 scientific item,
+Portfolio disposition or Pro request is produced locally.
+
+The next technical discriminator remains the actual allocation request/counts versus
+subsequent metadata, or relevant evidence that a same-meaning alternative is independent
+of the corruption. No further method is dispatched by this intake. Scientific funding
+is selected but unused, its acceptance condition remains unmet, and historical B02
+results/predictions retain their prior reading. The earlier Chinese incomplete-result
+brief remains applicable; this is not a new valid scientific result.
+
+
+## Owned-boundary recovery intake — 2026-09-12
+
+I checked the actual `d76d96cbe` source and dependent encoder/checkpoint path,
+the independent design/source/receipt reviews, exact staging/readbacks and one
+complete retained-input check against Portfolio6c32ade32 section6. Rule applied
+verbatim: "The existing technical DM must demonstrate a supported repair of the
+affected path, or a credible same-meaning alternative whose independence from the
+corruption is established by relevant focused evidence."
+
+The new implementation removes the *whole local* Fraction plus Torch/NumPy shared
+storage boundary, using owned Python scalar values, shared exact-integer arithmetic
+and owned CPU float64 output. Both arms keep exact pooling and backward `g/N`.
+The original isolated allocator failure supplied a relevant context without a native
+environment or scientific model. The single new allocator-debug check on the same
+interpreter and retained7x64 input×24 completed256 forward/backward applications,
+passed exact output/gradient/input checks, exited0 with empty stderr in3.177215865s,
+and cleaned its scratch. This is direct finite evidence, not a reproduced B02 run.
+
+**Technical acceptance: supported bounded same-meaning alternative; the relevant
+Portfolio integrity dependency is satisfied.** Scientific acceptance remains separate:
+zero new learners, optimizers, environments, scientific RNG masters, training/evaluation
+or scientific submissions occurred. There is still no B02 primary or performance
+branch. Its old failure, unscored prediction and quarantine remain unchanged.
+
+Strongest support: the whole changed boundary eliminates the implicated construction
+and local shared-storage dependencies, preserves exact computation/gradient by source
+review, and completes the finite allocator-debug context that previously failed.
+Strongest contradiction/limit: altered allocation patterns also change detection
+opportunities; a pass cannot identify the old writer, resolve expected40 versus saved32
+bytes, certify all interpreter states or predict full-training cost/primary success.
+The prior arithmetic-only refusal was correct for its evidence; the new whole-boundary
+implementation and executed check add the missing relevant evidence prospectively.
+
+Scientific-reading use: empirical11.8.6–.7 and FOUNDATIONS§6/04_EMPIRICAL distinguish
+a finite implementation check from an independent learning observation. The concrete
+assumption is that source-level removal of these local dependencies plus completion of
+the demonstrated isolated context supports this alternative at a bounded ceiling.
+It does not prove universal memory safety or improve the temporal-credit hypothesis.
+No new mechanism/comparator/literature claim is selected. Predictions are not scored
+from a technical fixture. Primary-control owner reviews returned[] at this boundary.
+
+### Decisions this intake produces
+
+(A) Accept the bounded owned-boundary alternative and prepare the already selected
+fresh pair under its existing900-second allocation. (B) Keep NOT READY until every
+historical write is uniquely localized. (C) Adopt the old Fraction-only candidate
+without relevant execution. Recommend and select A: B adds an unnecessary cause-first
+condition; C lacks the evidence required by Portfolio§6.
+
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (A) accept the bounded
+same-meaning alternative.** Root's explicit2026-09-12 resumption and single20-second
+maintenance check supply the engineering authorization; this decision adds no scientific
+budget, object family or Portfolio disposition. Record the ordinary technical audit row;
+no critic dissent was overruled and no new technical owner-console item is required.
+
+Next discriminator: the already funded fresh INTERVAL−TERMINAL final recovery/native
+tradeoff comparison, with new identities, unchanged complete600-native/300-support/
+900-total ceilings and ordinary destination admission. No B02 rerun follows. Root
+integrates the named repair/acceptance commits while DM prepares that independent
+allocation. [Acceptance evidence and cleanup ownership](evidence/b02_credit_20260911_01/repair_owned_boundary_acceptance_20260912.json)
+retain all precise receipts, limits and cost scopes. The existing incomplete-result
+Chinese brief remains applicable; this technical return creates no valid scientific result.

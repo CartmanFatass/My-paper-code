@@ -1,0 +1,522 @@
+{
+  "prepared_utc": "2026-09-11T22:29:02.093595+00:00",
+  "request_id": "2026-09-11-post-program-vacancies-portfolio-01",
+  "evidence_commit": "b11c7700cec1404ad3104050be84770cd48d29b2",
+  "earlier_prepublication_evidence_commits": [
+    "9f56357985d617c37f66f39b4577e03a232ed5a3",
+    "b4a4ff8efe39d9e3d47e3bed4de5874cee4c1b8e",
+    "a7c90bfcb77b6e9d6a5b24eba66707b17694b6f0",
+    "7029369d7722865ca886e238e1f75edda015920a"
+  ],
+  "new_reference_count": 44,
+  "pre_render_fixed_path_checks": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/SCIENCE_BRIEF.md",
+      "commit_sha": "b11c7700cec1404ad3104050be84770cd48d29b2",
+      "bytes": 40399,
+      "sha256": "746a0c049884ca13ce86756fc8b687fbf19c396aecfb1e589d39cee578899043",
+      "published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "commit_sha": "b11c7700cec1404ad3104050be84770cd48d29b2",
+      "bytes": 20216,
+      "sha256": "0dd30e996d9a5ce688759bdc1bcafc5ddfc38f89a2856a0385b18d6bc9eabd49",
+      "published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/FACTS.json",
+      "commit_sha": "b11c7700cec1404ad3104050be84770cd48d29b2",
+      "bytes": 15915,
+      "sha256": "4bdaf4ea43bc90e2b8d1b63f9b04b2fa9fae08ea68a3e64a5d74deea15eaa50b",
+      "published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/ISSUE_SNAPSHOT.json",
+      "commit_sha": "b11c7700cec1404ad3104050be84770cd48d29b2",
+      "bytes": 70140,
+      "sha256": "ed3b33162f16c49a50141937b2cedd47b455a055d67c25da0acf9c30d9599e91",
+      "published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 42984,
+      "sha256": "cfbe996017cd6ffd7e4a8e8af0321b8bc28904f7529626d1d0f7548222b0c4b5",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 10764,
+      "sha256": "09f31d16810b7fca039b6895af0e97b201dee7962b8ed526312188385ab06ef8",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 4038,
+      "sha256": "4dae3729dc54db39599a689712fa1f6ccdb80d5fd2f08e96757bcf8686e6e0b9",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 4598,
+      "sha256": "9fd3736fefe5c3cf52432b1ab3d4ed220188b1666bf10163ad55f5dcca69f06c",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "bc78a6bf86854f9b3cbdc47880053337bcb72277",
+      "bytes": 62942,
+      "sha256": "f01b9f8385202e82e67ae58b4d6bfc48ada8a208723c20581d89e2ddbdcbee75",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "commit_sha": "bc78a6bf86854f9b3cbdc47880053337bcb72277",
+      "bytes": 225137,
+      "sha256": "62c14a34886878ddf580a70d99c569da91a19296422a789ebbd0de4b685a70a7",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+      "commit_sha": "6c32ade3216c374ecf2f5179b15d559729cd45c9",
+      "bytes": 66815,
+      "sha256": "4610af5b470a2b3b10d6d89d6bf9e884bb811945171b7b8c2958328df43b876d",
+      "published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-11-open-directions-research-program.md",
+      "commit_sha": "aaff91d3b532a0a1d04102601a3be825904aec83",
+      "bytes": 27489,
+      "sha256": "e8a069c6b1cf8fb59ebb79ed807e40a15d05b86dda3a5f0f2d9c18faba83317f",
+      "published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 16835,
+      "sha256": "13b1aa9c7f738f0b9c2edb16b530172c174802a316a3e63ee3031d042710211d",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_770903_EXECUTION_LIMITATION_INTAKE_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 8002,
+      "sha256": "6baefd17a7870920815c735a01945eaabbea83e1435457347c8b04dbf28c456b",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 10116,
+      "sha256": "53097d68ce4aa7a9d310139717dc05dbccdf4980e26c0ddbdeacde3994192b38",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_SOURCE_DELIVERY_REPAIR_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 9919,
+      "sha256": "77903bfd268d963ef7ed8b848c6f95399bfec3d2a45d83a736fb57b52d227cc2",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md",
+      "commit_sha": "5321b69fdecdc6de81fd5e8fb9efe648a5950e6e",
+      "bytes": 16984,
+      "sha256": "746fb3f7feebbcb3ece119ff83f4bbf6299ba84203b1e2a9bdba9370dba4cae0",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md",
+      "commit_sha": "a267ba0a30a86f7e49edd320354c195016081cda",
+      "bytes": 12341,
+      "sha256": "d05b5042a4be39cea9c00c37c505e6d2974b11f86f4cc3c90c5db12ea0f6e1e7",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_RESULT_20260911.md",
+      "commit_sha": "5321b69fdecdc6de81fd5e8fb9efe648a5950e6e",
+      "bytes": 6713,
+      "sha256": "17eb42ee8b392263b617a029a690b3c3a17322ce8b3085a8ebf8b789dc9e4c53",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+      "commit_sha": "6a24944011e1f11f105e7bd045700cd0ece90094",
+      "bytes": 43535,
+      "sha256": "d52891c39dc300ad83449226962f98cd913eff9891b6d046e918b8742e04e599",
+      "published_refs": [
+        "refs/remotes/origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md",
+      "commit_sha": "d4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6",
+      "bytes": 11212,
+      "sha256": "d3a7b5bcae1b573d2029b615c714913733426ae63c06c0ff3cb680e8ac3d08db",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "d4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6",
+      "bytes": 9281,
+      "sha256": "4ca765bdc81be5c8e31edd411677e47eee7fcfa427c64b264fc5754356a2cdab",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 52543,
+      "sha256": "895476dcacf024a251f4902cec7f8168b9b68e04f659a66c14193fabf5b40744",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_SCIENCE_CARD_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 11854,
+      "sha256": "c16bd7a1cea6c4a1490fa8f2776653de19f6490c5424849a8be1ffb1a22771cb",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_RESULT_INTAKE_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 11756,
+      "sha256": "a4734a2a474bce975ecd4b4d28a0442ca3f8d1d8f43ec98ff14c50b14b86ad09",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv_b03/study.py",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 10277,
+      "sha256": "2d5c279d7b769e29b3d3ff5e1f4aadf671da0aea712154414c3bda4d1f5193be",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_SERVICE_COMPARISON_DESIGN_INTAKE_20260910.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 24333,
+      "sha256": "14f350f4e46b55354e46443e7c0e232f302a222a3412ba54fb5051f1510a2f17",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_A02_RESULT_INTAKE_20260906.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 21494,
+      "sha256": "9befb297b901b1617c7849ee81330e5f5bb4419c029fa003f8e9206ccfd4ff12",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_INTAKE_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 12981,
+      "sha256": "fc3d75fc48f5f33a2b4759d906e62769dd4127a245f99766ab9c3e2dfe5295c6",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_SCIENCE_CARD_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 11583,
+      "sha256": "d2d764571ff5340c773a09a5ef06ec78b86c7f1a9ef95830be2a8e79773689fd",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_P47_TECHNICAL_UNBLOCKING_INTAKE_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 12119,
+      "sha256": "202048abd52475a258c83565a9a84730f279c44b962441eb8fbba441bdea17e9",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 10425,
+      "sha256": "9fe8b6dfbd681f4f96eee27148c6b2bfb891af66a3342bc9245147a7d65dab87",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/ucope/DIRECTION.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 160313,
+      "sha256": "2be254a9501ae8de51df3b3c4a2d361a3e9c58424008e7a70f7a9c55c90566d2",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/DIRECTION.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "bytes": 37002,
+      "sha256": "666f324eb0b109a06c3f73135da68bb6333a8f045014ca645b112d5f697d75ae",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_SCIENCE_CARD_20260911.md",
+      "commit_sha": "02d61f605644da23d044d529b4361c4b701ece6c",
+      "bytes": 11273,
+      "sha256": "593906f848ce614b32a8f93f52aa511e8816954ac33334bbc984c32b75d8dc8a",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "8da607b4b7fb415b4212e0e20d74f9dc9c20a32e",
+      "bytes": 8559,
+      "sha256": "0b1e2698a6df49681bc6a986c1445c514dd39ee7f83dce5ae656229efdccf227",
+      "published_refs": [
+        "refs/remotes/origin/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md",
+      "commit_sha": "8da607b4b7fb415b4212e0e20d74f9dc9c20a32e",
+      "bytes": 19895,
+      "sha256": "54f9eb1a539b29c3260dbae4ae5af9768a41f9620be5be03bb565ac804f4fa77",
+      "published_refs": [
+        "refs/remotes/origin/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_RESULT_SUMMARY_20260911.json",
+      "commit_sha": "8da607b4b7fb415b4212e0e20d74f9dc9c20a32e",
+      "bytes": 83806,
+      "sha256": "2f271ebf749f7e135ed83e4fd3fe5b9684a9f86cc9f4bdc6c3712fd64360b149",
+      "published_refs": [
+        "refs/remotes/origin/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "8da607b4b7fb415b4212e0e20d74f9dc9c20a32e",
+      "bytes": 43685,
+      "sha256": "52db33334648548312e15bb0c93aee2c4961f406c0b1ff38c88ec45bdf2e69f4",
+      "published_refs": [
+        "refs/remotes/origin/codex/vap-folr"
+      ]
+    }
+  ],
+  "all_reference_bytes": 1382225,
+  "publication_meaning": "Every exact Git path exists and its SHA is reachable from an observed published origin ref. This establishes publication, not Pro connector access.",
+  "actual_author_exposure": "zero scientific/model/environment/training/evaluation/reanalysis and zero provider Send",
+  "task_published": true,
+  "render_history": [
+    {
+      "state": "first_unpublished",
+      "evidence_sha": "b4a4ff8efe39d9e3d47e3bed4de5874cee4c1b8e",
+      "reference_count": 39,
+      "task_sha256": "3fbb6fb7b76f4c3b65f8e8bf557f71f223ea4aa1e4b316232ea8b4bdad47d89c",
+      "dispatch_required": false,
+      "binding": null,
+      "provider_send": false,
+      "preserved_at": "unpublished_draft/ORIGINAL_BYTES.zip",
+      "exact_hand_off_entry_sha256": "d6682d1d2e772d549427cb730d78d209e9e78333cbd2eba1806d89133358a17c"
+    },
+    {
+      "state": "same_directory_attempt_refused",
+      "error": "malformed_input: use a fresh output directory; preserve existing packet and send state",
+      "effect": "no new output accepted; no binding/READY/dispatch/Send",
+      "response": "preserve earlier bytes and use fresh delivery subdirectory"
+    },
+    {
+      "state": "READY_TO_DISPATCH",
+      "evidence_sha": "b11c7700cec1404ad3104050be84770cd48d29b2",
+      "reference_count": 44,
+      "out_dir": "delivery",
+      "binding": "0cd37928e05cc442632f146835829760522cb85a",
+      "task_bytes": 45455,
+      "task_sha256": "b99ec83c5b8893f2630bad475dcfdb7a19cfc706404f924b408c8d20cb313af0",
+      "provider_send": false
+    }
+  ],
+  "owner_items": {
+    "20260911-root-005": {
+      "options": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "recommendation": "a",
+      "auto_applied": null,
+      "ledger_row_at_author_commit": 95
+    },
+    "20260911-root-006": {
+      "options": [
+        "P",
+        "Q",
+        "R"
+      ],
+      "recommendation": "P",
+      "auto_applied": null,
+      "ledger_row_at_author_commit": 98
+    }
+  },
+  "current_main_snapshot": "bc78a6bf86854f9b3cbdc47880053337bcb72277",
+  "FOLR_source": "8da607b4b7fb415b4212e0e20d74f9dc9c20a32e",
+  "rendered_manifest_matches_REQUEST_exactly": true,
+  "rendered_constraints_match_REQUEST": true,
+  "routing_checked": true,
+  "task_commit": "0cd37928e05cc442632f146835829760522cb85a",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/0cd37928e05cc442632f146835829760522cb85a/docs/research/portfolio/pro_packets/20260911_post_program_vacancies/delivery/TASK.md",
+  "task_bytes": 45455,
+  "task_sha256": "b99ec83c5b8893f2630bad475dcfdb7a19cfc706404f924b408c8d20cb313af0",
+  "fresh_GitHub_TASK_bytes_equal_Git": true,
+  "published_delivery_head_before_handoff": "0cd37928e05cc442632f146835829760522cb85a",
+  "issue_readback": {
+    "state": "open",
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/17",
+    "comments": 13,
+    "updated_at": "2026-09-11T20:53:40Z"
+  },
+  "bound_utc": "2026-09-11T22:30:40.570563+00:00",
+  "dispatch_state": "READY_TO_DISPATCH",
+  "root_dispatch_pending": true,
+  "provider_send_by_author": false,
+  "exact_prompt_bytes": 1914,
+  "exact_prompt_sha256": "cbc046f8ce1ba9661ce3d05384433f14a7a10bcc1c6b4603b91054b3e0e74fc4"
+}
