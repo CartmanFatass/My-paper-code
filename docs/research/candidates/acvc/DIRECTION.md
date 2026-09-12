@@ -19,12 +19,15 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 ## Scientific question
 
-The latest bounded question is whether fixed cue-triggered retrace improves native return
-over always-apply and same-cue dwell on two retained trained bases. E01 answers positively
-on both selected bases, without new training. It follows the stopped learned selective-retrace
-comparison: in two bounded native instances, both learned gates improved over always-apply,
-but fixed retrace was stronger in both. The structured gate's advantage over the generic
-gate appeared in the first instance and did not recur in the second.
+The latest accepted question is whether the complete fixed F package improves expected
+endpoint native return by more than .01 J over C and over own-predicate dwell under the
+unchanged five-UAV/fifty-user fresh-DENSE training and evaluation law. Three unscreened
+fresh fits have favorable bounded means against both controls. Convergence selects a
+provisional five-new-fit/64-world claim design as the next evidence, with no present
+implementation, numerical allowance, C promotion or freeze. The older E01 observations
+on two selected retained bases remain development evidence. The learned selective-retrace
+package stays ended: both learned gates improved over C, but F was stronger in both
+instances and the structured gate's advantage over the generic gate did not recur.
 The historical source-grounded
 statement remains provenance: “Adaptive learner lost to the deterministic comparator; retain
 the negative-evidence protocol lesson.” The closed uncertain/delayed family remains closed.
@@ -70,7 +73,7 @@ optimization or objective bias. No accepted policy has established material `0.2
 reach that registered gain on the unchanged uncertain/delayed host. Its learner-investment family
 is closed by the existing HC-C mapping; this is not a general absence-of-history-value claim.
 
-The later native E01 supports a distinct, bounded fixed-rule reuse claim. Same-cue dwell
+The later native E01 supports a distinct, bounded fixed-rule reuse claim. Own-predicate dwell
 does not attain F's means on either retained base, while its own gains preserve evidence
 for motion suppression. Own trajectories and private recurrent feedback remain coupled;
 fresh episodes on selected old fits do not supply new training replicates or causal isolation.
@@ -347,7 +350,41 @@ are unchanged. See the [8961 E0](ACVC_FRESH_DENSE_REUSE_B01_8961_RESULT_EVIDENCE
 and [intake](ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md), which retain the
 separate inclusive-cost accounting limitation.
 
+### Post-three-fresh Convergence — accepted claim design, 2026-09-11
+
+The complete original-node [response](pro_packets/20260911_post_three_fresh_convergence/archive/RESPONSE.md)
+at `67b9ab3a794d026cf95ade7dfa770037dc786528` passes current scientific/specification
+[intake](ACVC_POST_THREE_FRESH_CONVERGENCE_INTAKE_20260911.md). It selects the
+provisional single-task C-BENCH **claim-design route**, rather than one more B or a
+narrow scientific hold. This is a selected future discriminator, not C promotion,
+frozen confirmation or an empirical allocation.
+
+The present support is repeated above-.01 J F-C and F-dwell means on three fresh
+fits, especially the gains over beneficial dwell. The contradiction remains
+5/11/5 F-dwell adverse worlds and useful dwell-C gains; unseen training histories
+and proposer dependence remain unresolved. F and dwell act on their own histories,
+so neither comparison identifies pure retrace, history necessity or matched dose.
+
+The proposed next evidence is five genuinely new independent complete fits, each
+with C/F/dwell64 final panels under the unchanged law. All existing retained and
+fresh results are development evidence. The two expected native-return estimands
+are separate; equally weighted fit means and prespecified simultaneous t intervals
+would support the conjunction only if both lower bounds exceed .01 J. That future
+inference is provisional under a small-sample fit-level model, not guaranteed by
+five positive means, 64 worlds or the chosen sample count. Split, adverse and
+inconclusive outcomes keep their narrower meanings.
+
+No new card, RNG master, implementation, numerical work, Innovator/other consultation
+or C freeze is released by this decision. Later preparation/freeze and complete-work
+investment need their actual authority. Tuned same-information headroom is absent;
+ended T/G, old-host findings and Portfolio lifecycle/priority/recast status keep
+their existing scope. This question/full-intake unit ends with the accepted record.
+
 ## Evidence set
+
+- `docs/research/candidates/acvc/ACVC_POST_THREE_FRESH_CONVERGENCE_INTAKE_20260911.md`
+- `docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/archive/RESPONSE.md`
+- `docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/INTAKE_FACTS.json`
 
 - `docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_RESULT_EVIDENCE_20260911.md`
 - `docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md`
