@@ -12,5 +12,21 @@
   },
   "reported_native_status": "running/tmux active",
   "admission_limit": "Root/Monitor confirms an actual pass; exact physical/effective bytes will be collected from I_admission.json. The supplied 15.63GB vs 4GB shorthand is not reinterpreted.",
-  "relay_for_this_I_handover": "pending publication; exactly one send before actionable native final"
+  "relay_for_this_I_handover": "one accepted send after handover publication",
+  "relay": {
+    "prompt": "HMASD_ROOT_HANDOFF\nevent_id: /root/dm_fsd_i1280_implementation|FSD_B02_771003_I_launch|933aa3269db146d5243a495c7843db9a74b6ee99|READY_HANDOFF\nsource: /root/dm_fsd_i1280_implementation\nparent: /root\ndirection/request: flexible_skill_duration / selected 771003 I1280-authentic-D0 B pair\nstatus: READY_HANDOFF\nroot_action: Integrate published D0 collection/technical acceptance 569d921cd1394206cb824310ae8bba22f858240e and I handover 933aa3269db146d5243a495c7843db9a74b6ee99 (with prior receipt 8e7b1dbef150505f6ef6c8810fe0478d40fb2222 if not already integrated). Track I as accepted, actually admitted and adopted in an unfinished Monitor goal. Resume original DM only on routed I terminal for full paired collection, technical/scientific intake and scoped cleanup. No new pair, retry or source-delivery transaction.\nevidence: Clean codex/fsd at 933aa3269db146d5243a495c7843db9a74b6ee99, C:/Projects/HMASD-worktrees/codex-fsd. Execution record docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771003_EXECUTION_20260911.md; existing evidence directory uav_renewal_batch_b02_771003_20260911 holds complete D0 artifacts/acceptance, I_LAUNCH_RECEIPT.json, I_MONITOR_DISPATCH.json, I_HANDOFF_RECEIPT.json and SUPPORT.json.\nresult: D0 complete and accepted: all five training stages, 32 final episodes, nonzero learner movement and optimizer exposure, zero evaluator updates, own-arm J mean 0.2617101876076477, complete native wall 538.66 s below its 900 s cap. The preselected I launched once at frozen source 5250c43536d8520d4005eed3f613226ec4bc6e73, accepted 2026-09-12T00:04:38.846392Z as fsd-uav-renewal-batch-b02-771003-I-20260911 on hmasd-wsl-node. Cwd /home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771003-20260911; output temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003/I; input/admission/cost root /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771003-20260911. Exact 1800 s command contains fresh admit-memory && frozen runner. Root confirmed actual Monitor goal adoption: initial get_goal null, successful create_goal active/no token budget, I active-set membership, running supervisor/tmux, actual admission pass; 0.8 s adoption cost charged once. Monitor app 01a087e5-2044-7301-abb6-7a1709a98197 owns routine observation. No paired result yet; one source transaction total, two selected scientific submissions total. Known exclusive support through publication 50.5092380 s; D0 538.66 s separate; shared 1.0 s query unallocated and remaining integration/observation/native/closeout costs unknown. Caps remain D0 900 / I 1800 / native 2700 / support 300 / complete 3000. Both supervisor roots, source checkout and input root are retained for this active pair; DM collects/preserves and cleans after terminal, shared local checkout stays. This is the single required I handover relay, not a second D0 relay.",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a08456-2cf3-7f02-8595-42d84ba41a4c\"}"
+        }
+      ],
+      "isError": false
+    },
+    "message_call_elapsed_seconds": 0.189
+  },
+  "relay_send_count_this_handover": 1,
+  "relay_event_id": "/root/dm_fsd_i1280_implementation|FSD_B02_771003_I_launch|933aa3269db146d5243a495c7843db9a74b6ee99|READY_HANDOFF",
+  "relay_recorded_utc": "2026-09-12T00:08:38.362306+00:00"
 }

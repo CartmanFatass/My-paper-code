@@ -156,3 +156,10 @@ local codex/fsd checkout remains in use. There is no full-pair observation yet.
 Current primary-control owner reviews were empty and the FSD audit rows carried
 no owner override at this handover boundary. This is technical continuation of
 the accepted card, with no new scientific selection or owner-console item.
+
+Exactly one HMASD_ROOT_HANDOFF for the I launch handover was accepted by the live
+relay after publication of 933aa3269db146d5243a495c7843db9a74b6ee99. Its event is
+/root/dm_fsd_i1280_implementation|FSD_B02_771003_I_launch|933aa3269db146d5243a495c7843db9a74b6ee99|READY_HANDOFF.
+I_HANDOFF_RECEIPT.json contains the exact prompt and accepted API result.
+This receipt update creates no second relay send or additional launch. Root can
+integrate the published evidence while Monitor continues observing I.
