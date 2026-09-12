@@ -52,3 +52,38 @@ supervisor runner/log/status/exit and exact source before any removal. Inventory
 the one detached checkout, owned support/output roots and supervisor roots;
 shared authoring remains. Root accepts retention before assigned reclamation.
 Support/caps are in [SUPPORT.json](entity_history_b01_781201/SUPPORT.json).
+
+## Generic accepted; collection pending
+
+At2026-09-12T23:37:05.265622Z the exact selected handle was absent, then one
+supervisor `run` returned exit0. Immediate direct status: **running**,
+PID3409032, tmux active, no exit code. Preserve
+[GENERIC_LAUNCH_RECEIPT.json](entity_history_b01_781201/GENERIC_LAUNCH_RECEIPT.json).
+Adjacent [GENERIC_ADMISSION.json](entity_history_b01_781201/GENERIC_ADMISSION.json)
+passed at23:37:05.312559Z with physical/effective available15631327232 bytes,
+above4294967296. This is the scientific invocation's own receipt, not the test
+receipt. No native terminal result or cost is claimed yet.
+
+Initial command preparation attempted remote `git show` for a lazily absent
+documentation blob. It remained in an owned git/HTTPS retrieval chain; direct
+readback found no supervisor root or scientific output directory. The exact
+retrieval process and descendants were terminated, and the original preparation
+exited on that read before any launch call. The committed LF shell bytes were
+then extracted by Windows PowerShell's local Git and scp-delivered; local staging
+files/directory were removed and absence verified. This changed command transport,
+not source, RNG, budget or invocation count. Preserve the lower-bound/unknown
+preparation cost in support, not as scientific polarity or a hidden native retry.
+
+MONITOR_ADD was sent directly to live primary Monitor
+`01a095d0-21ee-7c02-9d97-3681b5678200`; app send was accepted. Its payload
+requires get_goal, matching unfinished goal continuation or unbudgeted creation,
+retention through terminal delivery, actual goal-state MONITOR_ADOPTED, and
+MONITOR_GOAL_COMPLETE before finishing an empty goal. **Goal-state adoption is
+pending** until the actual receipt returns; the app's active status is not proof.
+Root confirms that receipt to this DM under EXPERIMENT_MONITOR.md. No duplicate
+status loop or launch is added. Root receives this committed same-handle pending
+boundary through Relay and retains any adoption reconciliation.
+
+DM retains complete Generic technical collection, then the preselected BANK
+invocation regardless of score, scientific intake and assigned preservation/cleanup.
+Neither the shared authoring checkout nor active detached execution is reclaimed.
