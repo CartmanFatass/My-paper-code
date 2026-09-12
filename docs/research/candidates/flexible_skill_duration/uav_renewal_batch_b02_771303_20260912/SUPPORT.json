@@ -144,9 +144,29 @@
     {
       "purpose": "I receipt and publication diff review",
       "wall_seconds": 0.3319081
+    },
+    {
+      "purpose": "I accepted launch receipt publication and immediate push",
+      "wall_seconds": 4.984494
+    },
+    {
+      "purpose": "single I handover task-state read",
+      "wall_seconds": 0.041
+    },
+    {
+      "purpose": "D0 intake and I accepted launch Relay handoff",
+      "wall_seconds": 0.168
+    },
+    {
+      "purpose": "actual I adoption and current record read",
+      "wall_seconds": 0.3348978
+    },
+    {
+      "purpose": "I adoption clean-boundary owner review read",
+      "wall_seconds": 0.386631
     }
   ],
-  "known_support_wall_seconds": 51.45039960000001,
+  "known_support_wall_seconds": 57.36542240000001,
   "counting": "Each known enclosing invoked command once; nested SSH not readded. Prior readiness overlap conservatively included, old D spending never reused.",
   "unknown": [
     "earlier readiness command walls unavailable in truncated outputs",
@@ -167,7 +187,7 @@
     "within45": true,
     "nested_not_readded": true
   },
-  "actual_Monitor_adoption": "D0 accepted/goal complete; I message delivered, actual goal-adoption receipt pending",
+  "actual_Monitor_adoption": "D0 accepted/goal complete; I actual unfinished goal adoption confirmed via Root",
   "aggregate_cpu_seconds": 1804.26,
-  "known_native_plus_support_seconds": 510.25039960000004
+  "known_native_plus_support_seconds": 516.1654224
 }

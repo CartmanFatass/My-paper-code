@@ -1,7 +1,7 @@
 # FSD B02 / 771303 — execution
 
 State: D0 complete/exit0 and technically accepted; preselected I accepted once.
-D0 Monitor goal complete. I Monitor ADD accepted; actual goal adoption pending.
+D0 Monitor goal complete. I actual unfinished Monitor goal adoption confirmed.
 Seven pure binding checks and independent review passed; no material finding.
 DM /root/dm_fsd_d_pair, C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd.
 Input merge dd4c829d93acf12b0f487ee9ff0d31ff005535d8 brings main0c0648bd0
@@ -122,6 +122,11 @@ Fresh admission is inside the complete1800s native command.
 Direct I Monitor ADD delivery was accepted. The payload requires get_goal,
 new unbudgeted goal if the prior D0 goal is complete, actual unfinished-goal
 adoption, terminal delivery and empty-goal completion. I_MONITOR_ADD.json is
-the delivery receipt; actual MONITOR_ADOPTED remains pending. DM retains
-same-handle handover, terminal collection, the frozen paired reduction/intake
-and scoped cleanup. No routine D0 observation, duplicate ADD or launch.
+the delivery receipt; I_MONITOR_ADOPTION.json records the separate actual
+unfinished-goal adoption forwarded by Root. Monitor observed I running, exit null,
+pid 3395436, tmux active, uptime 36 seconds, with exact source/cwd/output.
+Root integrated D0 adoption/acceptance and I launch as main aa677342e,
+e73c50ced and 5cf2fb4a1. The primary owner review command returned no unapplied
+instruction at this clean boundary. DM retains terminal collection, the frozen
+paired reduction/intake and scoped cleanup; Monitor owns observation. No
+duplicate ADD, routine polling, retry or sixth pair.
