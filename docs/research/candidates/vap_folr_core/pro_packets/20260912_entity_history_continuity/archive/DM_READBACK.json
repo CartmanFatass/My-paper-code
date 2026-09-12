@@ -1,0 +1,118 @@
+{
+  "checked_at_utc": "2026-09-12T21:22:40.219496+00:00",
+  "author": "/root/dm_folr_post_b03",
+  "author_uuid": "01a096d5-6991-7611-892d-f1a1fa910761",
+  "response": {
+    "commit_sha": "3bc6fb929f43463eddd37dc4584951896c08fe3e",
+    "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/archive/RESPONSE.md",
+    "bytes": 37581,
+    "lines": 151,
+    "sha256": "e1bae505f803d606dab53ec49537c0576f5f693a82505583a90ee1ad87325099",
+    "root_integrated_main_sha": "bdf276fd359e3fd09900d509f02c2cdeae50eb02",
+    "main_and_direction_git_blob_bytes_match": true,
+    "windows_worktree_bytes": 37732,
+    "windows_worktree_sha256": "69a6ce9aceb6f0bdc91f65479f1482c4841113046197a70e246671080881d775",
+    "windows_line_endings": "CRLF checkout; LF-normalized text exactly equals immutable Git bytes; archive not edited",
+    "complete_author_read": true,
+    "scope_changes": [
+      "A\tdocs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/archive/RESPONSE.md"
+    ]
+  },
+  "task": {
+    "commit_sha": "e029de7154260a773710385b8ad74587bcfcbe33",
+    "request_id": "folr-entity-history-continuity-20260912",
+    "evidence_mapping_count": 20,
+    "all_response_citations_match_effective_task_versions": true
+  },
+  "transport_receipt_routed_by_root": {
+    "state": "complete immutable response",
+    "send_count": 1,
+    "completion": "natural",
+    "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+    "delivery_commit": "3bc6fb929f43463eddd37dc4584951896c08fe3e",
+    "root_integration": "bdf276fd359e3fd09900d509f02c2cdeae50eb02",
+    "source": "Root assignment2026-09-12; provider browser was not independently re-observed by DM"
+  },
+  "committed_request": {
+    "provider_requirement": {
+      "model": "GPT-6 Astra",
+      "mode": "Pro",
+      "label": "6 Pro",
+      "selector_hint": "Latest"
+    },
+    "prompt_bytes": 1932,
+    "prompt_sha256": "0406937e8777b7b05a1ce6bf41e6374e19dc302ad803870ead9c2d3e78a97e34",
+    "note": "Committed request facts; distinct from actual provider observations in Transport custody."
+  },
+  "direct_comment": {
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5648731547",
+    "created_at": "2026-09-12T21:14:19Z",
+    "fixed_task_and_response_match": true,
+    "artifact": "archive/DELIVERY_COMMENT.json"
+  },
+  "current_method_surface_checks": [
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "pinned_commit": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "current_main": "16249c5cc0bcc3b015f38533e497e3287a1dfb8e",
+      "bytes_match": true
+    },
+    {
+      "path": "AGENTS.md",
+      "pinned_commit": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "current_main": "16249c5cc0bcc3b015f38533e497e3287a1dfb8e",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "pinned_commit": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "current_main": "16249c5cc0bcc3b015f38533e497e3287a1dfb8e",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "pinned_commit": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "current_main": "16249c5cc0bcc3b015f38533e497e3287a1dfb8e",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "pinned_commit": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "current_main": "16249c5cc0bcc3b015f38533e497e3287a1dfb8e",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "pinned_commit": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "current_main": "16249c5cc0bcc3b015f38533e497e3287a1dfb8e",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "pinned_commit": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "current_main": "16249c5cc0bcc3b015f38533e497e3287a1dfb8e",
+      "bytes_match": true
+    }
+  ],
+  "owner_reviews": "[] from current primary checkout at intake entry; no reply or empirical prediction invented",
+  "scientific_conformance": {
+    "decision": "accept",
+    "conflicts": [],
+    "pro_verdict": "OPEN",
+    "family": "observer-owned entity-history-continuity B",
+    "classification": "new family inside current FOLR; not direction RECAST",
+    "selected_bank_width": 16,
+    "selected_null": "fresh adaptive same-information attention-then-GRU RETAIN width64",
+    "pooled_recurrent_layer_in_bank": false,
+    "new_public_interface": "stable slot labels, active flags and per-slot birth/departure facts to both arms; identical own-visibility/seen/age information; no unseen physical features",
+    "H_preserved": true,
+    "old_evidence_preserved": true,
+    "recast_count_change": 0,
+    "portfolio_lifecycle_change": false,
+    "current_implementation_or_empirical_allowance": 0,
+    "repeat_consultation": false
+  },
+  "new_work": "Document/source/citation/hash/Issue readback and scientific intake only. No source edit, model/checkpoint/environment/RNG construction, fresh numerical experiment, result recomputation, test, fit, evaluation, profiling or Send.",
+  "next_authorized_boundary": "Apply accepted family scope in DIRECTION and owner/audit/intake records; return finite implementation-and-one-pair investment need to Root/proper Portfolio route. No local investment verdict or experiment.",
+  "cost": "Complete consultation/provider/agent and future implementation/per-arm/native/support/complete costs unknown; no old cap or grant reused."
+}
