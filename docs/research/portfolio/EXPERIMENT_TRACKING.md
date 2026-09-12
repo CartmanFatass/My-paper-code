@@ -5,16 +5,16 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC A | Complete36,101-byte original-Convergence response archived/main913e0dc6f after one Send; original DM actively performing scientific/spec intake; zero implementation or fit allowance | Publish conforming direction intake and exact future investment need; A+B remains unallocated |
+| ACVC A | Final intake accepted/maince92d9791: PRO_FINAL selects one future train-through-F vs train-C pair, both deployF; current reference retained; zero implementation/fit exposure and A+B unallocated | Future Portfolio investment for faithful implementation, checks, two fresh fits and full support; A complete |
 | CBSC S | Single preparation accepted/main3e4292ea4: concrete owned17-byte public-row/FP32 projection candidate with explicit EpisodeTape boundary; runtime independence/crash repair unproved; zero runtime/test/model/scientific exposure | Future Portfolio investment discriminator; S complete and S+B remains unallocated |
 | FOLR B03 | Final paired intake accepted/main47d75d7f9: RETAIN0.947578125, LEARNED_EVENT−0.267968750, d_LR−1.215546875 ⇒ RETAIN_ABOVE_MEI; native1750.81s within cap; finite grant ended. Remote roots removed; three archived local duplicates retained after PowerShell policy rejection | No successor or active scientific work; local retention is an engineering restriction, not a scientific blocker |
 | VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
 | RCLE original Convergence request | Final intake accepted/main2f80926ae: retain exact equal-unit candidate for a later separately funded single fit; no current implementation/numerical allowance | Future Portfolio investment only; consultation complete and no active RCLE work |
 | Portfolio marginal investment | Complete61,049-byte response archived/main b0ce16514 after one Send; original Portfolio author performing scientific/spec conformance and execution mapping | Apply conforming PRO_FINAL decisions and dispatch each ready independent direction immediately |
 
-Direction chains1/5: ACVC has active original-DM response intake. CBSC S is complete and does not count.
-Four vacancies require concrete Portfolio investment; completed preparations and queued work do
-not count.
+Direction chains0/5: ACVC A and CBSC S are complete and do not count. The Portfolio author is
+actively preparing the next marginal investment question from both concrete unfunded needs, but
+cross-direction preparation is not a direction slot.
 
 ## Current routing
 
