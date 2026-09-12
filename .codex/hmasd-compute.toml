@@ -1,9 +1,16 @@
 schema_version = 1
 status = "active"
 routing_policy = "remote_first"
-control_plane_node = "local_windows"
+# OWNER_DIRECT 2026-09-12: native local authoring; Windows remains a fallback.
+control_plane_node = "local_linux"
 default_result_node = "wsl_4070"
 fallback_policy = "local_only_if_prospectively_portable_no_remote_process_and_freshly_admitted"
+
+[nodes.local_linux]
+role = "control_plane_only"
+project_root = "/home/fires/projects/HMASD"
+python = "/home/fires/.venvs/hmasd-control/bin/python"
+result_memory_floor_gib = 4
 
 [nodes.local_windows]
 role = "control_plane_and_fallback_compute"
