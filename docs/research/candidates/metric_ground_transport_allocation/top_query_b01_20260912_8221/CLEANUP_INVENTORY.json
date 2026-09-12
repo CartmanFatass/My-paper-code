@@ -1,0 +1,124 @@
+{
+  "source_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+  "status": "finished",
+  "files": {
+    "native/admission.json": {
+      "bytes": 504,
+      "sha256": "b55034edc7cd3bf759d9681fb5e576e5133706fbe1b936625e21841b95c32839"
+    },
+    "native/episodes.jsonl": {
+      "bytes": 763379,
+      "sha256": "c9521d73046c5c35e0b3c380b1ec42e7cb7b3b8abc8dbca065479f1cb6447392"
+    },
+    "native/final_DENSE.pt": {
+      "bytes": 282893,
+      "sha256": "0f7f4ed44a128d8183fda0eb7b9754dc344580f84bc00cabb6e015d4abac47c8"
+    },
+    "native/final_TOP.pt": {
+      "bytes": 282845,
+      "sha256": "2c91e64f4deb6215746933377230d07449a429cda9b3e1f14133dc772d876bee"
+    },
+    "native/rollouts.jsonl": {
+      "bytes": 420444,
+      "sha256": "59da8994419812bd4e20cfb583893affd394afd1903ad3c0895e0bc3280b269e"
+    },
+    "native/summary.json": {
+      "bytes": 1016433,
+      "sha256": "e022a9e9c2a7a9c594812512ddbb928f0d69b84a15527a211bac7b6bf8aa3bd0"
+    },
+    "supervisor/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "supervisor/pid": {
+      "bytes": 8,
+      "sha256": "b7787a80edd7db3f7c513e4f56cf3996bf47253ea746e031a03396c014c38edf"
+    },
+    "supervisor/runner.sh": {
+      "bytes": 1016,
+      "sha256": "4cbc1a02097aed66479d5f37a0fd8ce14e7b1afa9f46e3a8a308f3459dc12e54"
+    },
+    "supervisor/start_time": {
+      "bytes": 11,
+      "sha256": "1b9d22f1a5d97a980a662be7648bce3abc337ecbeb00668b8ece5d99b95c26d1"
+    },
+    "supervisor/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "supervisor/task.log": {
+      "bytes": 3492,
+      "sha256": "a96dcec3ff1985681ffc32888bb3c25528ebc81d9160746891bf6685441cfb3b"
+    }
+  },
+  "archives": {
+    "native.tar.gz": {
+      "bytes": 1003436,
+      "sha256": "7c51724884ce0a32164c7b0d6514b694cb97817eefa934dc6ea3863f1f603425"
+    },
+    "supervisor.tar.gz": {
+      "bytes": 2443,
+      "sha256": "5e68ce1681613e1530b95640b6e285f7e00ac784b8eb57a24eb28b2e07527569"
+    }
+  },
+  "tracked_status": "",
+  "untracked": [],
+  "ignored": [
+    "temp/directions/metric_ground_transport_allocation/exp/top_query_b01_20260912_8221/admission.json",
+    "temp/directions/metric_ground_transport_allocation/exp/top_query_b01_20260912_8221/episodes.jsonl",
+    "temp/directions/metric_ground_transport_allocation/exp/top_query_b01_20260912_8221/final_DENSE.pt",
+    "temp/directions/metric_ground_transport_allocation/exp/top_query_b01_20260912_8221/final_TOP.pt",
+    "temp/directions/metric_ground_transport_allocation/exp/top_query_b01_20260912_8221/rollouts.jsonl",
+    "temp/directions/metric_ground_transport_allocation/exp/top_query_b01_20260912_8221/summary.json"
+  ],
+  "pid": 3403683,
+  "pid_exists": false,
+  "tmux_active": false,
+  "stage_files": {
+    "supervisor.tar.gz": {
+      "bytes": 2443,
+      "sha256": "5e68ce1681613e1530b95640b6e285f7e00ac784b8eb57a24eb28b2e07527569"
+    },
+    "source.bundle": {
+      "bytes": 2246020,
+      "sha256": "c610478a215dbd68c029db6cbdb68509c59ba6254c72c496adc6ac3c3ab7372e"
+    },
+    "COMMAND.sh": {
+      "bytes": 937,
+      "sha256": "821a5997c8a89a368a862492b0efe4df255168fd25bd4fba99c001939a1a6704"
+    },
+    "native.tar.gz": {
+      "bytes": 1003436,
+      "sha256": "7c51724884ce0a32164c7b0d6514b694cb97817eefa934dc6ea3863f1f603425"
+    }
+  },
+  "supervisor_files": [
+    "exit_code",
+    "pid",
+    "runner.sh",
+    "start_time",
+    "status",
+    "task.log"
+  ],
+  "worktree_registered": true,
+  "local_duplicate_files": {
+    "COMMAND.sh": {
+      "bytes": 937,
+      "sha256": "821a5997c8a89a368a862492b0efe4df255168fd25bd4fba99c001939a1a6704"
+    },
+    "source.bundle": {
+      "bytes": 2246020,
+      "sha256": "c610478a215dbd68c029db6cbdb68509c59ba6254c72c496adc6ac3c3ab7372e"
+    }
+  },
+  "removal_state": "pending Root integration/retention acceptance; no target removed",
+  "owned_targets": [
+    "/home/wu/hmasd-worktrees/mgtap-top-b01-8221-20260912",
+    "/home/wu/hmasd-inputs/mgtap-top-b01-8221-20260912",
+    "/home/wu/.agent-tasks/mgtap-top-b01-8221-20260912",
+    "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904/temp/directions/metric_ground_transport_allocation/exp/top_query_b01_20260912_8221_source"
+  ],
+  "cleanup_owner": "/root/dm_mgtap_m_pair",
+  "retained": "Published exact source; native.tar.gz/supervisor.tar.gz and all12 raw/checkpoint/terminal members in this evidence directory; shared codex/mgtap authoring checkout and caches; all older accepted evidence.",
+  "cleanup_event": "Root confirms main integration/retention of these verified archives; DM rechecks only exact targets, removes duplicates and verifies disk/worktree-registration absence."
+}
