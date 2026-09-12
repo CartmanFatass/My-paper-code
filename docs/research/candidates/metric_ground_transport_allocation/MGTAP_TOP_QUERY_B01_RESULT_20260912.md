@@ -87,8 +87,11 @@ tails and final publication/cleanup remain unknown. No complete300support/
 1200total cap certificate or breach is inferred from a partial subtotal.
 No observed Engineering Scope§5 or scientific-integrity breach exists.
 
-Unique evidence is preserved. Four exact terminal duplicate targets are listed
-in [CLEANUP_INVENTORY.json](top_query_b01_20260912_8221/CLEANUP_INVENTORY.json);
-removal follows Root's integration/retention acceptance. Shared authoring/cache
-and all older results are retained. [DM intake](MGTAP_TOP_QUERY_B01_INTAKE_20260912.md)
-records the bounded reading, predictions and direction-ready need.
+Root retained both complete archives/all12 raw members on mainb47e6c2f9. The four
+exact terminal duplicate targets were removed with disk/Git-registration absence
+verified in [CLEANUP_RECEIPT.json](top_query_b01_20260912_8221/CLEANUP_RECEIPT.json).
+Shared authoring/cache, exact source and all older results remain retained.
+T is closed with no scientific follow-up; MGTAP remains ACTIVE. The
+[closeout support record](top_query_b01_20260912_8221/SUPPORT_CLOSEOUT.json)
+retains unknown-tail limits. [DM intake](MGTAP_TOP_QUERY_B01_INTAKE_20260912.md)
+records the unchanged adverse reading, predictions and direction-ready need.
