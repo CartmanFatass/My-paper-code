@@ -1,0 +1,23 @@
+{
+  "source_sha": "1652c44ac65ed6e686610c3cfcff67dab1a0fc6b",
+  "command_commit": "e6325dcdb50e97eda62adaf5ce8c844b7735501f",
+  "handle": "rcle-b07-equal-unit-s27-20260912",
+  "command": "cd /home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912 && mkdir -p temp/directions/roster_consistent_latent_exploration/exp/b07-equal-unit-s27-20260912 && HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python /usr/bin/time -f 'wall_s=%e,peak_rss_kib=%M,exit=%x' -o temp/directions/roster_consistent_latent_exploration/exp/b07-equal-unit-s27-20260912/chain-time.txt timeout 900 bash scripts/run_rcle_b07_equal_unit.sh 1652c44ac65ed6e686610c3cfcff67dab1a0fc6b /home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912/temp/directions/roster_consistent_latent_exploration/exp/b07-equal-unit-s27-20260912",
+  "exit_code": 0,
+  "stdout": "Task 'rcle-b07-equal-unit-s27-20260912' started in tmux session 'agent_rcle-b07-equal-unit-s27-20260912'. Output: /home/wu/.agent-tasks/rcle-b07-equal-unit-s27-20260912/task.log\n",
+  "stderr": "",
+  "submission_wall_s": 0.3897249999572523,
+  "launch_submission_complete_command_wall_s": 0.6987168,
+  "monitor": {
+    "thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+    "dispatch_accepted": true,
+    "dispatch_elapsed_s": 0.07,
+    "adoption": "PENDING_ACTUAL_UNFINISHED_GOAL_RECEIPT_FROM_ROOT",
+    "terminal": "PENDING"
+  },
+  "collection_owner": "/root/dm_a_mx_rcle_intake",
+  "root_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "scientific_status": "Accepted single supervisor submission; destination admission and numerical progress not yet collected; no scientific result accepted.",
+  "known_support_command_and_dispatch_s": 30.7713295,
+  "accounting_note": "Launch outer command includes embedded SSH elapsed; counted once. Monitor observation, later publication/collection/intake/cleanup/integration and unknown earlier tool/review tails remain. No native/support transfer."
+}
