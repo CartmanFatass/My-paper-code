@@ -1,6 +1,6 @@
 # FSD B02 / 771303 — execution
 
-State: both arms complete/exit 0 and technically accepted; paired scientific intake in preparation.
+State: complete pair technically accepted with scientific intake complete as above_mei; scoped cleanup pending Root retention acceptance.
 Both actual Monitor goals are complete, active_set empty and terminal notices delivered.
 Seven pure binding checks and independent review passed; no material finding.
 DM /root/dm_fsd_d_pair, C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd.
@@ -149,3 +149,14 @@ publication and independent ordered reduction agree on +0.0737976491890039 J,
 sums to 1446.79 seconds; aggregate CPU is 5718.46 seconds. Partial support
 telemetry remains explicit. CLEANUP_INVENTORY.json names only the four terminal
 remote targets; removal awaits Root's acceptance of retained current archives.
+
+## Complete paired intake and retention handoff
+
+The E0 result and scientific intake accept the frozen above_mei branch, retain
+all six adverse worlds and prior mixed results, and limit the claim to this
+same-host optional package. The Chinese owner brief, existing card owner trace
+and four audit decisions record the actual result and OWNER_DIRECT continuity.
+Both raw archives and all 22 individual original Git blobs were verified at
+476e2e64a against their collection digests. Root integration/retention acceptance
+precedes the same DM's exact four-target cleanup. No sixth pair, S consultation
+or automatic successor was selected.

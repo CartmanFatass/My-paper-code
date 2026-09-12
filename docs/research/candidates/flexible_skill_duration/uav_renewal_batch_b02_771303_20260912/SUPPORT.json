@@ -208,9 +208,17 @@
     {
       "purpose": "reward weights and publication inventory check",
       "wall_seconds": 0.2684432
+    },
+    {
+      "purpose": "I original/technical/paired evidence publication and immediate push",
+      "wall_seconds": 4.5749619
+    },
+    {
+      "purpose": "paired E0/intake/brief/audit and published raw preservation verification",
+      "wall_seconds": 1.4654779
     }
   ],
-  "known_support_wall_seconds": 65.18632790000001,
+  "known_support_wall_seconds": 71.22676770000001,
   "counting": "Each known enclosing invoked command once; nested SSH not readded. Prior readiness overlap conservatively included, old D spending never reused.",
   "unknown": [
     "earlier readiness command walls unavailable in truncated outputs",
@@ -234,6 +242,6 @@
   },
   "actual_Monitor_adoption": "D0 and I actual unfinished goals adopted; both terminal notices delivered and goals complete with active_set empty",
   "aggregate_cpu_seconds": 5718.46,
-  "known_native_plus_support_seconds": 1511.9763279,
+  "known_native_plus_support_seconds": 1518.0167677,
   "study_elapsed_D0_start_to_I_terminal_seconds": 1911
 }
