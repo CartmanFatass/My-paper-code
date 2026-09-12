@@ -1,6 +1,6 @@
 {
   "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
-  "recorded_utc": "2026-09-12T03:28:01.791296+00:00",
+  "recorded_utc": "2026-09-12T03:36:38.139665+00:00",
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -233,16 +233,32 @@
     {
       "purpose": "publish accepted adverse pair, raw preservation, intake/brief/owner/audit and current science",
       "wall_seconds": 5.5026969
+    },
+    {
+      "purpose": "publish explicitly ignored ordered/run score CSVs and verify dependent result/intake evidence links",
+      "wall_seconds": 5.1159536
+    },
+    {
+      "purpose": "read back published original archives and remove/verify four terminal owned remote paths",
+      "wall_seconds": 1.5739085
+    },
+    {
+      "purpose": "authoritative owner reviews at completed current-allocation cleanup boundary",
+      "wall_seconds": 0.4089284
+    },
+    {
+      "purpose": "Root reported paired intake/table inspection, integration/conflict resolution and two pushes; approximate 0.6 + 0.7 + 9.5 s",
+      "wall_seconds": 10.8
     }
   ],
-  "known_support_wall_seconds": 89.13540659999998,
-  "counting": "Each outer invoked support interval once; nested clocks are not additive. Intake writing/publication, cleanup and final relay/publication are charged as measured in subsequent records.",
+  "known_support_wall_seconds": 107.03419709999997,
+  "counting": "Each enclosing invoked support interval once. Current cleanup is complete; this cleanup-publication command and final relay/receipt publication will be returned or added when measured. Nested clocks and Root's cumulative confirmations are not added again.",
   "new_scientific_submissions": 2,
   "new_source_delivery_transactions": 1,
   "unknown": [
-    "Monitor invoked observation cost unavailable in receipts; Root confirms no accounting query",
+    "Monitor command cost absent from terminal receipts; no extra query",
     "relay-service and client/message overhead",
-    "future final publication/integration and cleanup command wall"
+    "remaining final publication/integration command wall until measured"
   ],
   "claim": "Both complete native arms and their sum pass. Support/complete totals are partially unmeasured; no observed breach. Primary is valid.",
   "native_wall_seconds": {
@@ -255,7 +271,7 @@
     "limit_seconds": 45,
     "status": "successful single transaction; nested helper clock not added again"
   },
-  "known_native_plus_support_seconds": 1584.3854066,
+  "known_native_plus_support_seconds": 1602.2841971,
   "Root_integration": {
     "source_main": "31e9cc05a",
     "D0_handover_main": "0e7bb1e83",
@@ -263,7 +279,11 @@
     "exactness": "approximately 0.6 + 8.5 s; client/message overhead unknown",
     "D0_collection_main": "a755d804f",
     "D0_collection_reported_support_bound_seconds": 6.8,
-    "counting": "Earlier approximate 9.1 s plus this conservative <=6.8 s contribution are charged once each; client/message overhead remains unknown."
+    "counting": "Earlier approximate 9.1 s plus this conservative <=6.8 s contribution are charged once each; client/message overhead remains unknown.",
+    "paired_intake_main": "14fdaa63c",
+    "tables_main": "cf5dccaa6",
+    "paired_reported_support_seconds": 10.8
   },
-  "native_pair_wall_seconds": 1495.25
+  "native_pair_wall_seconds": 1495.25,
+  "current_cleanup_complete": true
 }
