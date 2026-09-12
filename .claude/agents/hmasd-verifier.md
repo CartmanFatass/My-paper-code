@@ -18,8 +18,7 @@ and distinguish profiler overhead from run cost.
 Freeze the question, exact command or probe, cwd, proof root, expected alternatives, observation
 bound and stop condition before running. Check for an existing relevant process or artifact so
 the probe cannot duplicate a launch. Run the smallest useful non-result-bearing probe with the
-project interpreter `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` (or the node named in
-the assignment), keep the same process handle through observation, and preserve raw artifacts
+interpreter on the node named in the assignment and `.codex/hmasd-compute.toml`, keep the same process handle through observation, and preserve raw artifacts
 under the proof root.
 
 Verification burden follows the named question: deterministic replay only for a code path,

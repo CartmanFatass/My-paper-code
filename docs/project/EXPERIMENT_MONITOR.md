@@ -13,7 +13,7 @@ DM and Root do not maintain parallel status-polling loops. Independent Transport
 separate and observes Pro requests.
 
 Read the endpoint from the live primary control checkout (currently
-`C:/Projects/HMASD/.codex/hmasd-monitor.toml`, supplied in the handoff), not a stale direction
+`/home/fires/projects/HMASD/.codex/hmasd-monitor.toml`, supplied in the handoff), not a stale direction
 checkout or the frozen remote scientific SHA. Endpoint currentness does not change scientific
 source bindings. Root carries this exact live configuration path in new DM assignments.
 
