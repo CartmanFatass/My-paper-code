@@ -7,7 +7,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | --- | --- | --- |
 | ACVC | Original-node intake accepted at main4ac951c14: one fresh cluster-law C-fit with C/F/own-dwell panels selected; direction ACTIVE, no empirical grant | Portfolio DM prepares a separate investment request after the in-flight Portfolio round; no repeat consultation or third training-F pair |
 | MGTAP | Original Convergence response accepted: one fresh TOP/intact-DENSE B selected; intake integrated at main6f506e474, direction remains ACTIVE | Portfolio decides the pending whole-object investment (450s/arm, 1200s complete); no experiment before allocation |
-| FSD | D0 finished exit0 in459s; preselected I handle `fsd-uav-renewal-batch-b02-771303-I-20260912` is running remotely at source8ea629595 with confirmed Monitor goal adoption | Monitor delivers I terminal notice to Root/DM; DM collects and intakes the complete pair under native2700/support300/complete3000; no retry/sixth pair |
+| FSD | Fifth-pair D0/I both finished exit0 (459s/988s) at source8ea629595; Monitor delivered I terminal receipt and closed its empty goal | Original DM collects/technically accepts I, publishes complete paired intake and performs scoped cleanup; no retry/sixth pair/successor |
 | RCLE | Complete immutable post-B07 response integrated at main7d9434fe5; original DM is performing scientific/spec intake | Publish the conforming direction decision; zero ungranted implementation/numeric work, no repeated B07 or added fit |
 | FOLR | Original-node intake accepted at main2e2549d3c: new entity-history-before-aggregation B family OPEN; direction ACTIVE, old package H retained, no empirical grant | Portfolio DM prepares its finite implementation-plus-one-pair investment as a distinct item; no repeat consultation or inferred grant |
 | Portfolio | New-direction discovery plus separate MGTAP T investment request accepted once by provider on the bound Portfolio conversation; generation active | Transport observes natural completion; designated DM intakes registration/investment/priority without treating T as new |
@@ -27,7 +27,7 @@ used to fill this count.
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
 | Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; unfinished goal owns FSD I handle through accepted terminal delivery |
+| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; FSD I terminal delivered, active_set empty and goal complete |
 | Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
 Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the
