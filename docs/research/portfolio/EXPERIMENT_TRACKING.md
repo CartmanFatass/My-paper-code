@@ -1,5 +1,16 @@
 # HMASD experiment tracking
 
+## OWNER_DIRECT: existing DMs enter handoff
+
+The owner instructed: “后续不要再开启新的DM 现有DM进入handoff”. No new DM or
+research continuation is dispatched. ACVC/FOLR are the only remaining active DMs
+and have received explicit handoff-only instructions; all other native DMs are
+already completed and remain stopped. All five ACVC handles are terminal and
+Monitor reports an empty active set. Remaining work is evidence/ready-result
+publication, precise recovery inventories and Root acceptance of existing handoffs.
+Transport holds unaccepted RCLE recovery without further Send or repeated browser
+checks. The rolling status below is historical relative to this owner boundary.
+
 ## Current rolling handoffs — 2026-09-12 04:52 UTC
 
 Current execution ownership is recorded at the top of [PORTFOLIO.md](PORTFOLIO.md).

@@ -1,5 +1,23 @@
 # HMASD Research Portfolio
 
+## Owner handoff-only boundary — 2026-09-11 PDT
+
+**OWNER_DIRECT: “后续不要再开启新的DM 现有DM进入handoff”.** Root stops new DM
+creation and research continuation dispatch. The two remaining active DMs, ACVC
+and FOLR, were instructed through `followup_task` to preserve/publish their current
+work and precise remaining actions, return a recoverable handoff, and stop.
+Completed historical DMs remain stopped. No replacement chain, successor, new
+experiment or Pro question is started. Later status/receipt processing does not
+resume research without a new owner instruction.
+
+All five ACVC scientific handles are already terminal; its final complete analysis
+was reported before this boundary and is being preserved with its exact completion
+state. FOLR is preserving its zero-exposure prelaunch-cap stop and verified remote
+termination/absence facts. Root only accepts/integrates these existing handoffs.
+Monitor has an empty active set; Transport preserves unaccepted RCLE for handoff
+and holds new Sends. Prior working-set counts below are pre-handoff snapshots,
+not dispatch instructions or vacant slots to refill.
+
 ## Current execution ownership — 2026-09-12 04:52 UTC
 
 This current snapshot supersedes the operational counts/waits in older dated sections
