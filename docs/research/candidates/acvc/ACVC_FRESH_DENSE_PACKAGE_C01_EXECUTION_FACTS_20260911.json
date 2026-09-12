@@ -360,18 +360,18 @@
     "cleanup_complete": false,
     "deletion_after_owner_handoff": false
   },
-  "next_action": "OWNER_DIRECT HANDOFF: Root integrates preservation state. Final scientific intake/DIRECTION and eventual authorized cleanup remain pending; no automatic research restart.",
-  "current_consumption": "C01 not consumed; no complete five-unit scientific result yet",
+  "next_action": "Root accepts/integrates final scientific intake and reconciles retention inventory; scoped cleanup remains unexecuted. No sixth fit, new object, primary reduction or Pro request follows from this task.",
+  "current_consumption": "C01 consumed by its valid complete frozen five-unit result; final scientific intake recorded 2026-09-12. No repeat or successor is allocated.",
   "owner_instruction_applied": "Root forwarded Transport operational correction at main 8bf1269e5: a short/status receipt does not establish no formed decision; ACVC already verified the full immutable Innovator response and preserved separate receipt roles. Accepted engineering continues unchanged.",
   "completion": {
     "five_unit_collection_complete": true,
     "primary_analysis_complete": true,
     "primary_analysis_source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
     "primary_reading": "JOINT_ABOVE_MEI",
-    "scientific_intake_complete": false,
-    "direction_update_complete": false,
-    "C_consumption": "Valid complete frozen result meets the consumption condition regardless of sign; full final intake unfinished. No repeat/successor follows.",
-    "predictions": "All three pass events occurred; prior probabilities and Brier arithmetic saved in result_summary.json; final intake integration unfinished.",
+    "scientific_intake_complete": true,
+    "direction_update_complete": true,
+    "C_consumption": "C01 consumed by its valid complete frozen five-unit result; final scientific intake recorded 2026-09-12. No repeat or successor is allocated.",
+    "predictions": "Final intake records prior probabilities .80/.65/.60, all three pass events 1, Brier .04/.1225/.16 and mean .1075 from stored result_summary.json; no calibration claim or new calculation.",
     "owner_prediction": "not taken (unattended)",
     "actual_new_fits": 5,
     "live_scientific_processes": [],
@@ -390,5 +390,206 @@
       "Root retention/integration reconciliation and later authorized scoped cleanup."
     ],
     "next_owner": "Root accepts/integrates and determines any later assignment. Original DM retains evidence/cleanup responsibility without automatic continuation."
+  },
+  "finalization_20260912": {
+    "recorded_utc": "2026-09-12T13:23:03.722358+00:00",
+    "authority": "OWNER_DIRECT 2026-09-12 resume routed by new Root, explicitly reassigning the original C01 final intake/records without new scientific execution or deletion.",
+    "dm": "/root/dm_a_mx_acvc_resume",
+    "root_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+    "relay_thread_id": "01a08456-2cf3-7f02-8595-42d84ba41a4c",
+    "checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+    "branch": "codex/acvc",
+    "starting_head": "14288810ca7f9302064991281ae84a184bb7adf1",
+    "pre_edit_head": "505d595e49f8a51ca207b83cebfe63df19df15b8",
+    "actual_environment": "Microsoft Windows NT 10.0.26200.0; native PowerShell 7.6.4; C:/Program Files/Git/cmd/git.exe",
+    "science_source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+    "frozen_analysis_runs_existing": 1,
+    "new_primary_reductions": 0,
+    "new_tests": 0,
+    "new_scientific_exposure": 0,
+    "exposure_line": "EXPOSURE: fits=5; training_episodes=2560; evaluation_episodes=960; native_team_steps=901120; optimizer_steps=5120; final_checkpoints=5; post_fit_loads=15; finalization_new_fits=0; finalization_new_episodes=0; finalization_new_primary_reductions=0.",
+    "owner_review": {
+      "command": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -B tools/owner_console/item.py reviews --json",
+      "cwd": "C:/Projects/HMASD",
+      "unapplied": [],
+      "owner_prediction": "not taken (unattended)",
+      "new_P1_P2_item": "none; ordinary final result and object bookkeeping"
+    },
+    "intake": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#final-scientific-intake-2026-09-12",
+    "brief": "docs/research/portfolio/owner/briefs/acvc/2026-09-12_fresh_dense_package_c01.md",
+    "audit": "docs/research/portfolio/audit/2026-09-12.md",
+    "retention_inventory": [
+      {
+        "master": 12794,
+        "evaluation_namespace": 23947,
+        "record_complete": true,
+        "record_issues": [],
+        "local_archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/collection/unit_12794.tar.gz",
+        "archive_bytes": 416465,
+        "archive_sha256": "b0fef35c0d490888ac62141e85b93daabed31cee060d1cb96312ec6658681088",
+        "matches_accepted_archive_digest": true,
+        "local_checkpoint": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/unit_12794/final_DENSE.pt",
+        "checkpoint_bytes": 282957,
+        "checkpoint_sha256": "ee4827a71486e1f83e8280ff866c28e4df768e8a4d0913fa7a2dfccf3b92d073",
+        "matches_accepted_checkpoint_digest": true,
+        "preserved_supervisor_exit_code": 0,
+        "preserved_supervisor_status": "finished",
+        "recorded_remote_archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-12794-3fd9062d5-collected.tar.gz",
+        "recorded_remote_supervisor": "/home/wu/.agent-tasks/acvc-fresh-dense-c01-12794-3fd9062d5"
+      },
+      {
+        "master": 11477,
+        "evaluation_namespace": 24930,
+        "record_complete": true,
+        "record_issues": [],
+        "local_archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/collection/unit_11477.tar.gz",
+        "archive_bytes": 415817,
+        "archive_sha256": "56340bcb1ebe44126b439b38a64cf68f78f5a3003f717dd2791df117816897ac",
+        "matches_accepted_archive_digest": true,
+        "local_checkpoint": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/unit_11477/final_DENSE.pt",
+        "checkpoint_bytes": 282957,
+        "checkpoint_sha256": "2e2572882e18fe563f8ac58cc4c1d7397d5ee023b5210260cfa9fc66fa71e145",
+        "matches_accepted_checkpoint_digest": true,
+        "preserved_supervisor_exit_code": 0,
+        "preserved_supervisor_status": "finished",
+        "recorded_remote_archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-11477-3fd9062d5-collected.tar.gz",
+        "recorded_remote_supervisor": "/home/wu/.agent-tasks/acvc-fresh-dense-c01-11477-3fd9062d5"
+      },
+      {
+        "master": 18150,
+        "evaluation_namespace": 21370,
+        "record_complete": true,
+        "record_issues": [],
+        "local_archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/collection/unit_18150.tar.gz",
+        "archive_bytes": 415719,
+        "archive_sha256": "d0c9eaa015c7037b4a25b7acec403696835e632ea9024365fce33e1b87f5588a",
+        "matches_accepted_archive_digest": true,
+        "local_checkpoint": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/unit_18150/final_DENSE.pt",
+        "checkpoint_bytes": 282957,
+        "checkpoint_sha256": "801f810a9f060e8af5679e02fc6ca469ba55c9ead9f6b1d280188c3844361fb0",
+        "matches_accepted_checkpoint_digest": true,
+        "preserved_supervisor_exit_code": 0,
+        "preserved_supervisor_status": "finished",
+        "recorded_remote_archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-18150-3fd9062d5-collected.tar.gz",
+        "recorded_remote_supervisor": "/home/wu/.agent-tasks/acvc-fresh-dense-c01-18150-3fd9062d5"
+      },
+      {
+        "master": 12604,
+        "evaluation_namespace": 21030,
+        "record_complete": true,
+        "record_issues": [],
+        "local_archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/collection/unit_12604.tar.gz",
+        "archive_bytes": 417331,
+        "archive_sha256": "93a0967a91fe032e87c6f12fda0b26dc255541d47c1a3558ff9958300e53361a",
+        "matches_accepted_archive_digest": true,
+        "local_checkpoint": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/unit_12604/final_DENSE.pt",
+        "checkpoint_bytes": 282957,
+        "checkpoint_sha256": "edc5de41007dd681b63c70883df5d6a2b8af2ad793ffc94dfbf6892001b4fe3a",
+        "matches_accepted_checkpoint_digest": true,
+        "preserved_supervisor_exit_code": 0,
+        "preserved_supervisor_status": "finished",
+        "recorded_remote_archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-12604-3fd9062d5-collected.tar.gz",
+        "recorded_remote_supervisor": "/home/wu/.agent-tasks/acvc-fresh-dense-c01-12604-3fd9062d5"
+      },
+      {
+        "master": 14295,
+        "evaluation_namespace": 23946,
+        "record_complete": true,
+        "record_issues": [],
+        "local_archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/collection/unit_14295.tar.gz",
+        "archive_bytes": 417171,
+        "archive_sha256": "bf20f6c08f13c234408c743e33cc598a044d3ad70137645ad96e54b82400f365",
+        "matches_accepted_archive_digest": true,
+        "local_checkpoint": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/unit_14295/final_DENSE.pt",
+        "checkpoint_bytes": 282957,
+        "checkpoint_sha256": "bfdc650fa2ebc827fd29d7c3c6aea0cc0177e60791d09acaa055f049a1948b33",
+        "matches_accepted_checkpoint_digest": true,
+        "preserved_supervisor_exit_code": 0,
+        "preserved_supervisor_status": "finished",
+        "recorded_remote_archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-14295-3fd9062d5-collected.tar.gz",
+        "recorded_remote_supervisor": "/home/wu/.agent-tasks/acvc-fresh-dense-c01-14295-3fd9062d5"
+      }
+    ],
+    "local_preparation_files": [
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/handoff_support_components.json",
+        "bytes": 22289
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/launch_unit_11477.json",
+        "bytes": 1287
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/launch_unit_12604.json",
+        "bytes": 1287
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/launch_unit_12794.json",
+        "bytes": 1214
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/launch_unit_14295.json",
+        "bytes": 1287
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/launch_unit_18150.json",
+        "bytes": 1287
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/preparation.json",
+        "bytes": 1552
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/preparation.sh",
+        "bytes": 878
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/prepare.py",
+        "bytes": 4217
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/preparation/c01-20260911/source.bundle",
+        "bytes": 117759064
+      }
+    ],
+    "recorded_remote_execution_checkout": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5",
+    "recorded_remote_source_bundle": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-3fd9062d5.bundle",
+    "remote_observation_limit": "Last accepted collection and owner handoff receipts; no new remote status polling or filesystem inventory in this documentation assignment.",
+    "generated_bytecode_inventory": [
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/tests/experiments/candidates/acvc/native_link_loss_b01/__pycache__/test_fresh_dense_b01.cpython-310-pytest-9.1.1.pyc",
+        "present": true
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/scripts/__pycache__/run_acvc_fresh_dense_reuse_b01.cpython-310.pyc",
+        "present": true
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/scripts/__pycache__/run_acvc_fresh_dense_package_c01.cpython-310.pyc",
+        "present": true
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/experiments/candidates/acvc/fresh_dense_package_c01/__pycache__/protocol.cpython-310.pyc",
+        "present": true
+      },
+      {
+        "path": "C:/Projects/HMASD-worktrees/codex-acvc/tests/experiments/candidates/acvc/fresh_dense_package_c01/__pycache__/test_protocol.cpython-310-pytest-9.1.1.pyc",
+        "present": true
+      }
+    ],
+    "deletions_attempted": 0,
+    "cleanup_complete": false,
+    "cleanup_owner": "Current ACVC DM inherits original evidence and creator-cleanup responsibility. Root confirms integration/retention and routes a later scoped cleanup event; shared active checkout and unique checkpoint/archive bytes stay intact.",
+    "next_scientific_authority": "em:acvc:convergence selects a next object after consumed C; portfolio:cross_direction decides new investment/capacity/lifecycle. No local disposition or new request prepared under this documentation assignment.",
+    "document_verification": {
+      "frozen_card_prefix_unchanged": true,
+      "brief_characters": 448,
+      "brief_six_required_headings": true,
+      "final_intake_local_links_present": true,
+      "metadata_parse_and_complete_flags": "pass",
+      "git_diff_check": "pass",
+      "scientific_source_and_raw_analysis_paths_changed": false,
+      "reporting_note": "First documentation-check invocation reached its final print after all assertions, then stdout cp1252 could not encode Chinese headings. The same bounded documentation check completed with per-command -X utf8; no source/runtime configuration or scientific output was changed."
+    }
   }
 }

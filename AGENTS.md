@@ -1,5 +1,11 @@
 # HMASD collaboration and authority
 
+OWNER_DIRECT2026-09-12: Current control uses Windows C:/Projects/HMASD and PowerShell.
+Read live task endpoints from that checkout's .codex/hmasd-*.toml and
+docs/project/ROOT_OPERATIONS.md. Superseded task/path literals in fixed evidence are
+not dispatch routes. Keep current control documents free of obsolete state snapshots.
+
+
 This file governs repository work on every agent runtime the owner uses (Codex, Claude Code, or
 another). The body is runtime-neutral. Runtime-specific mechanics are in the two appendices.
 Directory conventions live beside the code in one `AGENTS.md` per area (`experiments/`,
@@ -530,7 +536,7 @@ appendix and completed historical tasks remain unchanged.
   are unchanged. CM, Routine Implementer and the dedicated Terra/high workflow-outsource
   path are retired. Configurations take effect after restart; Codex App provides native
   task/message lifecycle behavior. Do not add reload probes, delivery test services or timers.
-- The existing Root task remains the execution coordinator and sole receipt parent.
+- The current Root task in live configuration is the execution coordinator and sole receipt parent.
   Transport uses Luna/high; the shared experiment monitor and completion Relay retain
   Luna/low. Read their existing `.codex/hmasd-*.toml` endpoints; never replace or rebind
   accepted work merely because the role structure changed.

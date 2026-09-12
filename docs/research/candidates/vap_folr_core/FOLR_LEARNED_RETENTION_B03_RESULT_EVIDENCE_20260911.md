@@ -1,6 +1,10 @@
 # FOLR learned-retention B03 — E0 technical prelaunch stop
 
-Status: **support cap breached before a scientific invocation; no performance result**.
+Current status: **OWNER_DIRECT resumes the original unsubmitted pair; support300
+is a reference**. The [current intake amendment](FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md#owner-directed-continuation-and-engineering-review--2026-09-12)
+and [resumption facts](evidence/2026-09-12-folr-learned-retention-b03-resumption.json)
+control continuation. The following account preserves the earlier prelaunch stop
+and its zero-exposure/no-performance-result meaning.
 The [prospective card](FOLR_LEARNED_RETENTION_B03_SCIENCE_CARD_20260911.md)
 remains the selected, unchanged finite question. Root confirmed termination,
 evidence publication and scoped closeout only after the concrete cap stop.

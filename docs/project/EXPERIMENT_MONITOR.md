@@ -1,5 +1,11 @@
 # Experiment observation ownership
 
+OWNER_DIRECT2026-09-12: Current control uses Windows C:/Projects/HMASD and PowerShell.
+Read live task endpoints from that checkout's .codex/hmasd-*.toml and
+docs/project/ROOT_OPERATIONS.md. Superseded task/path literals in fixed evidence are
+not dispatch routes. Keep current control documents free of obsolete state snapshots.
+
+
 This document owns experiment observation and handover procedure. AGENTS §5–7 controls
 scientific execution, resources and Git; ROOT_OPERATIONS.md assigns planning and acceptance.
 Independent Transport observes Pro requests under its own skill.

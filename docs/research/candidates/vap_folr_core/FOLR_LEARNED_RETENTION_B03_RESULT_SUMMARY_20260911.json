@@ -30,7 +30,15 @@
     "new_changed_risk": "fresh identity, exact source and command/publication binding only"
   },
   "object": "FOLR-LEARNED-RETENTION-B03",
-  "state": "prelaunch_stop_support_cap_breach_no_scientific_result",
+  "state": "OWNER_DIRECT_RESUMED_PREPARATION",
+  "historical_prelaunch_state": "prelaunch_stop_support_cap_breach_no_scientific_result",
+  "resumption": {
+    "authority": "docs/research/portfolio/decisions/2026-09-12-windows-root-resumption.md",
+    "current_facts": "evidence/2026-09-12-folr-learned-retention-b03-resumption.json",
+    "support_reference_seconds": 300,
+    "original_pair_and_other_caps_preserved": true,
+    "new_scientific_invocations_at_binding": 0
+  },
   "bound_utc": "2026-09-12T05:00:56.643449+00:00",
   "authority_sha": "f4bbe6cae2d351b4c80c5e0d9d66690d337749ce",
   "authority_path": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md",

@@ -1,7 +1,8 @@
 # FOLR learned-retention B03: technical prelaunch-stop intake
 
-Status: closed allocation after a prelaunch support-cap breach; zero scientific
-invocations and no paired performance result. The preparation record below is
+Current status: OWNER_DIRECT resumes the original unsubmitted pair; support300
+is a reference. At this binding there are still zero scientific invocations and
+no paired performance result. The earlier closed-allocation record below is
 historical; final technical intake and actual effects follow it.
 Root applied Portfolio F+U at main `deb2e5e1e` and assigned this DM the complete
 finite pair. The [B03 card](FOLR_LEARNED_RETENTION_B03_SCIENCE_CARD_20260911.md)
@@ -178,3 +179,106 @@ owner trace. No code or scientific test was rerun. The current support lower
 bound snapshot is in the JSON; later publication/relay/Root integration remain
 additional terms, never an implied zero or restored allowance. The relay's
 actual send receipt and this DM's native final complete the delivery record.
+
+## Owner-directed continuation and engineering review — 2026-09-12
+
+The current [owner instruction](../../portfolio/decisions/2026-09-12-windows-root-resumption.md)
+expressly treats300 seconds of support as a reference and resumes this same
+unexecuted task. It supersedes the prior support-only stop and HANDOFF boundary
+prospectively; archived timing, process and zero-exposure facts remain intact.
+This is object/execution continuation, not new investment or a scientific retry.
+
+**Observed timing.** Recomputing the first51 named support entries gives exactly
+`308.8422538000558 = 274.8100000000559 + 34.03225379999992` seconds.
+The274.81 value is the remote Git parent's observed wall lifetime, from process
+start to readback at termination. It replaces the55-second client timeout and
+subsumes the nested checkout/fetch/HTTPS children. Independent readback commands
+remain their own invoked work. The sum is neither CPU usage nor study elapsed.
+The8.8422538 over reference is2.9474%; Git accounts for88.9807% of the sum.
+Known support through the later closeout is315.263732 seconds. Unknown initial
+setup, authoring and later publication/integration remain unknown, not zero.
+Zero scientific ticks, fits, optimizer updates or evaluations caused the stop.
+
+**Observation versus inference.** The archived script fetched in the configured
+network shell, then attempted a full worktree checkout outside it. The interrupted
+index showed11,569 tracked paths absent and a live lazy-fetch child. These facts
+identify whole-repository materialization and ongoing Git work; they do not prove
+proxy failure, bandwidth loss, CPU saturation or algorithmic complexity. Initial
+timeout stdout/stderr is missing. No repeated empirical validation or search
+occurred: accepted source and ten passing tests were reused. Other preparation
+and preservation were elaborate, but their exact avoidable wall is unmeasured
+and cannot be claimed as the cause of the dominant274.81 seconds.
+
+**Necessary science and its limit.** Evidence-spec §§11.8.1,11.8.5–7 and11.9
+make burden proportional and allow a credible path independent of an unrelated
+historical failure. FOUNDATIONS §§4,6 and the empirical topic distinguish finite
+training-package performance from representation and causal explanations.
+Concrete assumption: one unchanged training pair can add a same-host observation
+after the B01 gain and B02 loss. Limit: one additional training instance, with128
+episodes per arm conditional on its fits, cannot establish stable superiority.
+The question needs real learning and sampled returns, not exact policy maxima,
+action/trajectory enumeration, support census, full history replay or complete
+causal reconstruction. Intrinsic counts remain2 fits,205120 team ticks and
+`2*4969*32*21*5*2 = 66783360` replay GRU rows, plus1076880 acting rows.
+These are recurrent replay/training factors, not combinatorial policy search.
+Recorded whole-arm costs835.33/895.43 and867.79/920.56 seconds support the bounded
+5000/128 design as planning anchors. Source preparation requires no scientific
+dimension, extra diagnostic or more demanding reproducibility claim.
+
+**L0 and engineering change.** Own this existing direction checkout/branch and
+its card/intake/E0/summary plus scoped control evidence. Preserve source,
+reward/information, trip-state/RNG, native CPU FP32/threads1+1, optimizer,
+checkpoint, comparator and rule at89035d8f1/e3ac72da5 unchanged. Replace the
+one-time full checkout with Git's existing no-checkout worktree, sparse pattern
+set and checkout at the same SHA, all in the configured network shell. The11
+files comprise the original ten plus `scripts/hmasd_platform.py`, which the
+unchanged admission helper imports unconditionally:85364 bytes. The extra file
+corrects dependency documentation, without a source edit. It avoids unrelated
+corpus/evidence fetches. Remote40-second TERM plus5-second teardown precedes the
+50-second client limit, avoiding the old intentionally unbounded staging parent.
+There is no retry loop, source materializer, service, fixture or new test suite.
+Static import closure, actual scoped source materialization and reused literal
+commands are sufficient focused checks. Scope §4: none added; production/test
+diff0 lines. Existing Git behavior is used:
+[worktree](https://git-scm.com/docs/git-worktree),
+[sparse checkout](https://git-scm.com/docs/git-sparse-checkout).
+
+One0.7440105-second read-only same-identity reconciliation at13:17:25 UTC
+confirmed the original checkout absent on disk and in registration, both exact
+supervisor roots absent, no related processes, original commit present and
+existing worktree-specific config. There was no accepted experiment. The
+never-submitted names may be used without a duplicate. Current Monitor/Relay
+routes are read from live Windows primary control. Input sync84b7c496b preserved
+both histories; its sole audit conflict kept all145 old lines in the150-line
+incoming superset. Owner reviews returned[]; hmasd-owner-item is used to trace
+the existing card's current application, without another ordinary technical item.
+
+Native1350 per arm/native2700 and complete invoked3000 remain hard limits.
+The largest historical native pair1815.99 plus known old support315.263732 is
+2131.253732 seconds, a planning anchor with future contention and unmeasured
+terms, not a forecast guarantee or full-cost certification. New support and
+native wall stay in the same total. No ledger reset, spare-budget transfer,
+new timing pilot or max-cap-as-runtime prediction is made. Independent
+trustworthy facts survive an actual resource or primary limitation.
+
+## Decisions this intake produces — continuation
+
+1. **Object / OWNER_DIRECT:** continue the original unsubmitted pair with300
+   as a support reference. Do not preserve the superseded support-only stop or
+   request another Pro round solely for8.84 seconds.
+2. **Object / technical:** scoped ordinary Git staging; alternative full checkout
+   fetches unrelated files. Recommend/select scoped staging. **Owner-delegated
+   decision (unattended,2026-09-03 instruction): scoped Git staging.** No scientific
+   meaning, new invocation or production source is selected by this repair.
+3. **Claim ceiling:** null primary and unscorable prediction until both original
+   fits/final arrays are accepted. B01+1.763359375 remains the strongest support,
+   B02-1.76953125 the strongest contradiction; preparation supplies neither.
+   RETAIN remains default. Next discriminator: the original complete native
+   pair; no fourth pair, extra diagnostic or automatic successor follows.
+
+[Resumption facts](evidence/2026-09-12-folr-learned-retention-b03-resumption.json)
+hold literal staging, current launch/adoption state and named clocks. They
+control current execution; the prior archive describes the historical stop.
+The combined PowerShell document-writing call was rejected before execution
+with `CreateProcess ... blocked by policy`; focused file patches replace it.
+No effect, budget use or scientific polarity is inferred from that rejection.
