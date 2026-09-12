@@ -80,18 +80,42 @@
     {
       "purpose": "read collected measurement shapes",
       "wall_seconds": 0.2424675
+    },
+    {
+      "purpose": "D0 complete technical acceptance and record/audit writing",
+      "wall_seconds": 0.3466756
+    },
+    {
+      "purpose": "D0 evidence explicit staging and archive ignore check",
+      "wall_seconds": 0.3119839
+    },
+    {
+      "purpose": "D0 preservation/acceptance commit",
+      "wall_seconds": 0.5714594
+    },
+    {
+      "purpose": "D0 immediate preservation push",
+      "wall_seconds": 4.1266681
+    },
+    {
+      "purpose": "sole preselected I detached submission",
+      "wall_seconds": 0.8337178
+    },
+    {
+      "purpose": "direct I Monitor ADD delivery",
+      "wall_seconds": 0.155
     }
   ],
-  "known_support_wall_seconds": 44.41216709999999,
+  "known_support_wall_seconds": 50.75767189999999,
   "counting": "Each known enclosing invoked command once. Initial batched output had one unavailable command wall; apply_patch, current owner-card preparation and later operations are recorded where measured or explicit unknown. Agent/provider/calendar time separate.",
   "unknown": [
     "one initial batched read command wall unavailable in truncated output",
     "apply_patch execution interval where tool reports rounded zero",
     "future Monitor/relay/client and Root integration terms",
-    "current D0 acceptance/publication until measured"
+    "current I launch/adoption publication until measured"
   ],
   "source_delivery_transactions": 1,
-  "scientific_submissions": 1,
+  "scientific_submissions": 2,
   "source_transaction": {
     "complete_helper_seconds": 6.063000000023749,
     "enclosing_tool_seconds": 6.3134795,

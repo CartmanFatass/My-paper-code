@@ -1,7 +1,7 @@
 # FSD B02 / 771203 â€” execution
 
-State: D0 completed and technically accepted; preselected I is next under fresh
-adjacent admission. D0 Monitor goal completed; I has not yet been submitted. Owner /root/dm_fsd_d_pair, shared authoring checkout
+State: D0 completed and technically accepted; its preselected I1280 detached
+submission is accepted. Direct Monitor ADD accepted; actual adoption pending. Owner /root/dm_fsd_d_pair, shared authoring checkout
 C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd. Input sync16930177f includes
 Root-assigned bd5fd849a;14748d304 reconciles auto-merged legacy control-only
 differences back to that current Windows input, preserving old commits in history.
@@ -116,3 +116,15 @@ under the standing delegation. D0 score does not select I. Owner reviews [] at
 this boundary. Source delivery remains one; I uses the already published exact
 command and original D0 summary on the retained worktree. All four remote roots
 remain necessary for I and paired collection.
+
+## I accepted launch
+
+D0 complete own-arm evidence and original archive were committed/pushed in
+85de5f98d7ecdb1b304f049ff5c1684026dba5f6 before I. The preselected I command
+from source9eb99f8b68dd2863212c10693b911746a6d24354 was submitted once at
+2026-09-12T18:40:07.612629+00:00. Supervisor handle
+fsd-uav-renewal-batch-b02-771203-I-20260912 accepted with return0; no repeated
+source delivery. Fresh adjacent admission is inside the complete1800s command.
+Direct Monitor_ADD accepted, explicitly requiring an actual unfinished goal
+and keeping771203 in the path. Actual adoption is pending the separate receipt.
+All required source/output/supervisor paths remain retained for I and collection.
