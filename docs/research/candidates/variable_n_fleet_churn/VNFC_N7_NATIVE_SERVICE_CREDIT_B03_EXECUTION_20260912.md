@@ -57,3 +57,46 @@ The exact committed supervisor string passed Bash syntax-only checking. No scien
 command was executed by staging. Local elapsed5.468s includes remote4.563541363s;
 zsh initialization warnings are preserved in `evidence/b03_credit_20260912_01/source_staging.json`.
 They did not prevent source delivery. Existing scientific source is unchanged since binding.
+
+### Accepted launch, actual Monitor goal and terminal collection
+
+The one exact invocation was accepted at 2026-09-12T13:53:09.244627Z. Destination
+admission passed immediately before scientific execution: physical/effective available
+15,623,073,792 bytes versus the 4-GiB floor. The bare supervisor handle is
+`vnfc-b03-credit-20260912-01`; tmux uses the `agent_` prefix. The
+[launch receipt](evidence/b03_credit_20260912_01/launch.json) preserves the literal command
+and accepted supervisor response. No second run was issued.
+
+MONITOR_ADD was sent directly to current primary Monitor
+`01a095d0-21ee-7c02-9d97-3681b5678200`. Root relayed its actual get_goal/created unbudgeted
+unfinished-goal receipt with this handle retained. Initial not_found observations were
+reconciled to the same live process, pid 3374208. Their cause is not proven; no naming
+bug is inferred. Dispatch, actual adoption, restored observation and final terminal
+fact are separate in [monitor receipts](evidence/b03_credit_20260912_01/monitor_receipts.json).
+The DM performed only the one Root-requested reconciliation, not a routine polling loop.
+
+Monitor then reported failed exit 139 / inactive tmux at
+2026-09-12T21:54:54+08:00, supervisor duration 105 seconds. Collection independently
+preserved supervisor files, outer signal 11 / 104.89 seconds and all generated run files.
+The completed [E0](VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_EVIDENCE_20260912.md) records
+13 raw archived files with matching remote/local digest, 70 progress records, both
+initial/midpoint checkpoints and missing final primary. A single saved-core top-12-frame
+read was bounded at 10 seconds and took 2.141 seconds; no inferior, fixture or model ran.
+Root cause remains unknown. All subsequent interpretation is in the
+[intake](VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md), which accepts partial
+execution only and ends this allocation without a scientific score or automatic repeat.
+
+[Support costs](evidence/b03_credit_20260912_01/support_costs.json) retain selected
+non-nested command-wall receipts, separate native wall and missing complete support/
+critical-path measurements. Native is below 600 seconds; complete 300/900 conformance
+is unestablished. This missing accounting does not convert the crash to scientific
+polarity, and unused arithmetic is not another invocation budget.
+
+### Preservation and next cleanup event
+
+[Cleanup inventory](evidence/b03_credit_20260912_01/cleanup_inventory.json) names the two
+terminal detached execution/check checkouts, preserved raw artifacts, external B03 core
+and supervisor history. Root integration/retention and scoped reclamation acceptance
+are pending. The DM remains cleanup owner and will return actual disk and Git-registration
+absence after removal. The shared Windows direction authoring checkout remains in use.
+No running scientific handle or pending primary collection remains in this return.

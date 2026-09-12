@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-09-12T14:16:10.025494+00:00",
+  "scope": "Documentary publication only; no scientific imports, tests, checkpoint loads or invocations",
+  "json_parse": "14 existing receipt JSON files parsed",
+  "local_links": "all links in E0/intake/execution resolve",
+  "brief_characters": 353,
+  "brief_headings": "six required headings",
+  "git_diff_check": "passed",
+  "remote_source_state": "both scoped exact-source checkouts have no tracked or unignored source change",
+  "archive_validation": "prior remote/local SHA256 and 13 member byte-readback reused; not repeated",
+  "owner_reviews": "primary item.py reviews --json returned []",
+  "source_change_after_launch": false
+}

@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-09-12T14:04:32.425329+00:00",
+  "owner": "/root/dm_a_mx_vnfc_recovery",
+  "pending_root_action": "integrate B03 source/terminal evidence and confirm retention/reclamation",
+  "remote_reclamation_candidates": [
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01",
+      "source_sha": "b93329b3c44ea9d0cf5622c00f5ca6eea0740dac",
+      "active_execution": false,
+      "evidence_preserved": "raw_collection.tar.gz contains all5 run files plus admission/timer and6 supervisor files; archive_readback.json verifies13 files and raw SHA. Full source is published.",
+      "event": "remove only after Root confirms integrated evidence/retention; verify disk and git worktree absence"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912",
+      "source_sha": "d76d96cbe3df9b598e0db695a8b39deb23e7bdb1",
+      "active_execution": false,
+      "evidence_preserved": "Exact remote receipt bytes now preserved in b02_credit_20260911_01/repair_owned_boundary_remote_receipt_20260912.json; SHA/readback and both scoped checkout states in cleanup_preservation.json. Root previously integrated repair/acceptance.",
+      "event": "Root confirms retention/reclamation; then remove terminal checkout and verify disk plus Git-registration absence."
+    }
+  ],
+  "preserve_outside_reclamation": [
+    {
+      "path": "/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1789221288-3374215-_home_wu_.local_share_uv_python_cpython-3.10.21-linux-x86_64-gnu_bin_python3.10-11.dmp",
+      "bytes": 641089536,
+      "reason": "New exact B03 core, command identity confirmed by GDB; not in checkout and not authorized for removal. Named owner DM, retention until a later explicit diagnostic/evidence disposition."
+    },
+    {
+      "path": "/home/wu/.agent-tasks/vnfc-b03-credit-20260912-01",
+      "reason": "Supervisor receipt history; preserve per existing operations. Archive also holds its6 files."
+    },
+    {
+      "path": "C:/Projects/HMASD-worktrees/codex-vnfc",
+      "reason": "Shared designated direction authoring checkout remains in use for DM publication/integration/cleanup continuation; not a reclamation target."
+    }
+  ],
+  "creator_test_scratch": "Owned mean test scratch already absent; no additional tests constructed scratch."
+}

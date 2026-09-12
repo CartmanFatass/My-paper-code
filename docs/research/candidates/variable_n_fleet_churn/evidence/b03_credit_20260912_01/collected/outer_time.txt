@@ -1,0 +1,4 @@
+Command terminated by signal 11
+elapsed_seconds=104.89
+peak_rss_kib=780784
+exit_status=0
