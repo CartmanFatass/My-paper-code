@@ -75,3 +75,12 @@ Unknown complete historical/future support, training-level effect recurrence and
 the near-margin FSD interpretation remain scientific/cost limits in SCIENCE_BRIEF.
 Documentary publication has no empirical polarity. No new launch gate, source
 acceptance, budget transfer or additional consultation is created.
+
+## Actual ready return
+
+The bound handoff and publication were committed/pushed as
+`e425432837944138ab9974e4ff0e1edeb01bd22f`; use its exact ready path above.
+One required Root-wake relay delivery for that ready event was accepted by the
+configured app endpoint. RELAY_RECEIPT.json preserves the exact payload/result.
+This is not an observed Root integration, Transport dispatch or provider Send.
+No duplicate relay, owner approval or acknowledgement wait is required.
