@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-11-acvc-five-fit-prefreeze-innovator-01",
+  "correction_kind": "receipt_label_defect",
+  "conversation_binding_key": "em:acvc:innovator",
+  "conversation_id": "6aa4c897-0b0c-83e8-9606-5916b52b1a75",
+  "send_click_count": 1,
+  "raw_capture": {
+    "original_label": "__02_RESPONSE.md",
+    "corrected_artifact_type": "chat_link_receipt",
+    "bytes": 406,
+    "sha256": "f02c91bdf2e0cfe52e7ed16da4bbc2d16049184d1a6d80667ef0236607cdbe27",
+    "byte_identical_to": "__04_CHAT_RECEIPT.md"
+  },
+  "chat_receipt": {
+    "artifact_type": "chat_link_receipt",
+    "bytes": 406,
+    "sha256": "f02c91bdf2e0cfe52e7ed16da4bbc2d16049184d1a6d80667ef0236607cdbe27"
+  },
+  "complete_response": {
+    "artifact_type": "github_git_response",
+    "repository_path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/archive/RESPONSE.md",
+    "commit": "b1709632efa060aa7e71ad377bd0559154289f12",
+    "git_blob_bytes": 36040,
+    "line_count": 161,
+    "sha256": "21e48f3c2a323083e5d61382ef8bf07ad9ccd4d3034bb702849c2d4e3db75cad",
+    "binding_evidence": [
+      "direct Git/GitHub response read at the named commit",
+      "current paired chat receipt",
+      "GitHub issue comment 5643255184"
+    ]
+  },
+  "identity": {
+    "assistant_message_id": "ef17d600-df67-409e-ba52-a281d4658f06",
+    "assistant_message_id_kind": "provider_uuid",
+    "user_message_id": "today-current-round|TASK.md@a2960298fcf3c44dd5b67bce8974536a789376c1|user-node",
+    "user_message_id_kind": "descriptive_node_marker_not_verified_provider_uuid"
+  },
+  "supersedes_labels_only": true,
+  "preserves_original_artifacts": true,
+  "provider_action_during_correction": "none",
+  "scientific_interpretation": "not_assessed_by_transport"
+}
+

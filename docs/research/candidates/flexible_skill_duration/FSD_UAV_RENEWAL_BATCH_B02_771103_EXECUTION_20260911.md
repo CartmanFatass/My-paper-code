@@ -251,3 +251,19 @@ publication/integration work is charged once in addition to prior 21.2 s.
 Monitor observation command cost is unavailable in receipts; no additional
 query is made. Final handover/publication and unknown relay/client terms remain
 explicit, with no observed cap breach and no complete-cost certificate.
+
+### Final Root handoff and acceptance
+
+The sole terminal-intake event
+`/root/dm_fsd_i1280_implementation|FSD_B02_771103_terminal_intake|982536111f1d23ae273236d512c87e9217cb122a|READY_HANDOFF`
+was accepted by the configured relay app. TERMINAL_HANDOFF_RECEIPT.json preserves
+its full original return and tool outcome; no second relay is sent for this receipt
+publication. Relay send, Root acceptance and Git integration are separate facts.
+
+Root subsequently confirmed the bounded pair accepted and allocation ended with
+no successor. Cleanup closeout 982536111f1d23ae273236d512c87e9217cb122a is
+integrated/pushed as main be2eb581d; all current remote cleanup is accepted.
+Root reported approximately 5.1 s additional inspection/integration/push, charged
+once alongside its earlier 32.0 s. Monitor and relay/client attribution remain
+unknown. The receipt publication's own measured command wall is returned in the
+native completion without an indefinite accounting-only publication loop.
