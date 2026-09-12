@@ -1,6 +1,5 @@
 {
-  "assignment": "Portfolio05c24bcd85f92efc26fb2a9cb2152bed51dd90e9 / EXECUTION_MAPPING section 2 at e83bbfc7c80af8712a1bba11ddd1572a6493800e",
-  "scope": "One promotion question, conditionally one Innovator, then only the accepted five-unit path; ordinary preparation accounting, no instrumentation framework",
+  "assignment": "Portfolio05c24bcd85f92efc26fb2a9cb2152bed51dd90e9 / Assignment 2 at e83bbfc7c80af8712a1bba11ddd1572a6493800e",
   "caps_s": {
     "per_native_unit": 270,
     "native_sum": 1350,
@@ -80,15 +79,47 @@
     {
       "phase": "publish precise new Issue context and verify preserved prior discussion",
       "wall_s": 4.3056033
+    },
+    {
+      "phase": "owner review/ledger boundary and authored-document check",
+      "wall_s": 0.5356741
+    },
+    {
+      "phase": "publish fixed scientific and authority input documents",
+      "wall_s": 4.7088948
+    },
+    {
+      "phase": "author request, verify exact published source mapping and render unbound TASK",
+      "wall_s": 10.0065608
+    },
+    {
+      "phase": "completion of request source mapping/render command",
+      "wall_s": 0.0000024,
+      "measurement": "additional tool wait; elapsed gap while asynchronous command ran is unmeasured"
+    },
+    {
+      "phase": "inspect rendered question, fixed reference mapping and original-node route",
+      "wall_s": 0.250412
+    },
+    {
+      "phase": "publish immutable TASK and bind fixed-link handoff",
+      "wall_s": 4.7435317
+    },
+    {
+      "phase": "fresh GitHub fixed-TASK readback, bound route and owner review",
+      "wall_s": 2.4553545
     }
   ],
-  "known_support_s": 18.8652825,
+  "known_support_s": 41.56571279999999,
   "known_native_s": 0,
-  "cutoff": "Before owner-boundary check and first input publication; later commands/Transport/Root/Monitor contributions append at the next boundary",
+  "cutoff": "Through fixed-TASK GitHub readback and final owner review, before this account update/ready-handoff publication and relay; final publication tail returned to Root once for later append",
   "unknown_costs": [
     "provider generation/queue",
     "deliberation",
-    "unmeasured client/message and enclosing support overhead"
+    "unmeasured client/message and enclosing support overhead",
+    "elapsed gap while the reference-verification command completed asynchronously",
+    "support-account/preparation-record editing tool time not independently measured"
   ],
-  "counting_rule": "Count each invoked command/review/observation once. Preserve shared-query enclosing costs without duplicating them across directions. No unknown cost is zero; no old allocation supplies remaining credit."
+  "counting_rule": "Every invoked command/review/observation counted once; retain shared enclosing query costs without duplicate direction charges. Known sums are lower bounds, not unconditional complete-cap conformance. No historical allowance supplies credit.",
+  "next_owner": "Original ACVC DM continues the account at full promotion response intake; Root/Transport provide actual invoked support contributions for this same allocation"
 }
