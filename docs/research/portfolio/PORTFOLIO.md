@@ -6,11 +6,11 @@
 ## 当前22方向状态 — 2026-09-12 Windows恢复
 
 本表登记15 ACTIVE、7 PARKED，生命周期、priority、recasts与UAV字段不变。
-最新 [Portfolio决定](decisions/2026-09-12-resume-independent-chains.md) 已由原作者完整核对：**S+A；保持M不追加；S+B/A+B不拨款**。
+最新 [Portfolio决定](decisions/2026-09-12-post-sa-marginal-investments.md) 已由原作者完整核对：**新资助CBSC C、RCLE R、ACVC F三条完整B链；M不追加。**
 
-Root当前实际工作集0/5：ACVC A与CBSC S均已完成；post-S/A Portfolio完整响应已归档，原作者正在intake，但跨方向决策不计方向槽位。
-CBSC只买一次候选准备（complete invoked-support≤600秒、300参考），ACVC只买一次原Convergence与完整intake（成本未知）；都没有新增数值额度。
-两项互不等待，剩余三个空槽也没有自动备用款。详细直接任务见 [独立执行映射](pro_packets/20260912_resume_five_independent_chains/EXECUTION_MAPPING.md)。
+Root在本次intake入口报告实际工作集0/5；C/R/F均已获选、独立就绪，Root实际派发后记录。跨方向作者/已选未启动/cleanup不计槽位。
+C新native600/arm、1200合计+support600=1800；R900native含nearest+support600=1500；F270/arm、540合计+support660=1200秒。每项均含完整实现/检查/review/实验/intake/清理。
+新款明确是未来工作，旧S/A费用保留一次且未知尾部不填零。三个真正启动后为3/5，剩余两槽没有自动备用款。见 [独立执行映射](pro_packets/20260912_post_sa_marginal_investment/EXECUTION_MAPPING.md)。
 Monitor当前没有活动实验目标，原terminal notices已送达；Transport本轮Portfolio答复已完整归档。实际新派发由Root持续更新。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
@@ -19,8 +19,8 @@ Monitor当前没有活动实验目标，原terminal notices已送达；Transport
 | 方向 | 最新证据/科学状态 | 当前实际工作 | 下一步及边界 |
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
-| [ACVC](../candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE.md) | C01保持qualified JOINT_ABOVE_MEI；最新PRO_FINAL/maince92d9791选择未来单pair：train-through-F vs train-C，两边deployF并保留当前参考。 | 无活动执行；A完成，零实现/fit，A+B未拨款。 | 未来Portfolio须覆盖faithful implementation、checks/review、两fresh fits及完整support；不得直接启动。 |
-| [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_PUBLIC_STREAM_B_SCIENCE_CARD_20260912.md) | S完成/main3e4292ea4：形成owned17-byte public-row/FP32 projection候选与明确EpisodeTape边界；runtime independence/crash repair未证明。 | 无活动执行；零target import/model/test/runtime验证/学习。 | 未来具体Portfolio投资；S+B未拨款，不自动实现或运行。 |
+| [ACVC](../candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE.md) | C01 qualified JOINT_ABOVE_MEI/consumed保持；原节点已选train-through-F vs train-C、双方deployF，当前参考保留。 | **F已获选、独立实现任务就绪；实际派发待Root记录。** | 原DM完成faithful PPO实现/检查/review、一fresh pair及intake；270/arm、540native、660support、1200future；无额外panel/咨询。 |
+| [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_PUBLIC_STREAM_B_SCIENCE_CARD_20260912.md) | S已形成owned17-byte public-row/FP32与EpisodeTape候选；runtime independence/crash repair未证明。 | **C已获选、独立实现任务就绪；实际派发待Root记录。** | 原S DM完整实现/相关检查/review、一RAW/STRUCT fresh pair及intake；600/arm、1200native、600support、1800future；不再买S。 |
 | [CRTO](../candidates/commitment_residual_triggered_options/DIRECTION.md) | P72 PRO_FINAL保留B08测试的selected-panel family PARK；finite-zero修复已集成。 | 无 | 新的具体方向选择；没有自动successor。 |
 | [DISH](../candidates/degraded_incumbent_shadow_handover/DIRECTION.md) | **更新：B08 HALF_RETAIN−REPLACE为−6.5 ticks，WITHIN；REPLACE默认。post-B08已PARK retained-A03 arrival-bridge retention家族。** P62/DIRECT只是更早历史。 | 无 | 具体receipt-to-control研究问题或对独立pair不确定性的实际决策需求；新选择才续行，不要求完整机制证明。 |
 | [ec4g_r1](../candidates/ec4g_r1/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
@@ -31,7 +31,7 @@ Monitor当前没有活动实验目标，原terminal notices已送达；Transport
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 最新8213 COND−DENSE−0.022469573456，5正/27负；完整intake，DENSE默认、no-addition保留。 | 无 | 必要的新投资选择；旧1200秒pair不能自动追加。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
-| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B06有效且八个nearest-reference cells全负；最新PRO_FINAL/main2f80926ae保留exact equal-unit候选，供以后单独资助的single fit，own-init/attained-nearest且无joint100臂。 | 无活动执行；咨询结束，当前实现/数值额度为零。 | 未来具体Portfolio投资；不得从close-call直接启动fit或再发咨询。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B06八个nearest-reference cells全负；原节点已选exact equal-unit单fit服务B，own-init/attained-nearest、无joint100臂。 | **R已获选、独立实现任务就绪；实际派发待Root记录。** | 当前接任DM实现/相关检查/review、一个final1000 fit和完整intake；900native含nearest、600support、1500future；不再咨询。 |
 | [scope_1s](../candidates/scope_1s/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [UCOPE](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | **更新：最新是post8801 PRO_FINAL PARK进一步8801-L continue/end-credit经验投入，保留unchanged-L spending stop。** 8601/8602、8701是更早证据。 | 无 | 有具体新选择才继续；不再凭旧8701 closeout pending造任务。其余renewal/ordinary-feedback议程未被整体关闭。 |

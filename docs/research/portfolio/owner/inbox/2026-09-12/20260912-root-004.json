@@ -1,0 +1,106 @@
+{
+  "id": "20260912-root-004",
+  "created": "2026-09-12T09:52:58-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "Portfolio已选C/R/F三条独立完整B投入",
+  "context": "完整263行响应核对通过；C/R/F已选，M未拨款，明确新future口径和累计旧费用未知。Root实际集成/派发待记录，不增加owner批准层。",
+  "options": [
+    {
+      "key": "keep",
+      "label": "retain the formed Pro disposition",
+      "consequence": "保留Pro已选C/R/F及各自完整上限，原DM独立执行；M无自动款。"
+    },
+    {
+      "key": "refuse",
+      "label": "override the Pro disposition at the next clean boundary",
+      "consequence": "owner异步覆盖尚未执行部分并保留既成事实，不自动替换方向或退款。"
+    },
+    {
+      "key": "amend",
+      "label": "override the Pro disposition per the comment at the next clean boundary",
+      "consequence": "记录owner明确修改及其适用范围，保持已发生工作/证据和未改选择。"
+    }
+  ],
+  "recommended": "keep",
+  "auto_applied": null,
+  "dm_reason": "完整答复决定了请求的问题且符合现行规范；强反方F+M/H及实际成本未知均保留。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L26",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Portfolio已最终选择C/R/F三条完整B投入；现在由原DM各自实现、检查/review、执行并intake，不等待逐项owner批准。",
+    "changes_if_approved": [
+      {
+        "target": "CBSC C",
+        "from": "17-byte候选已完成；没有实现、测试或实验款",
+        "to": "已选新买完整实现/相关检查与独立review/一fresh pair/intake；新future native600/arm、1200总和，support600，future invoked-work1800秒。"
+      },
+      {
+        "target": "RCLE R",
+        "from": "原方向已选exact equal-unit single fit；实现/数值为零",
+        "to": "已选新买完整实现/检查/review与一个fit，own-init/attained-nearest比较；native900、support600、future invoked-work1500秒。"
+      },
+      {
+        "target": "ACVC F",
+        "from": "原Convergence已选训练through-F vs训练C、两边deployF；A结束",
+        "to": "已选新买faithful PPO实现、检查/review和一pair；native270/arm、540总和，support660、future invoked-work1200秒；recasts2争用排序保持。"
+      },
+      {
+        "target": "MGTAP 与成本口径",
+        "from": "M曾被保持不追加；旧S+B/A+B数字从未拨款，S/A完整花费未知",
+        "to": "M保持为真实备选：新一pair future invoked-work1200秒。C/R/F已选三条独立链、future合计4500秒；Portfolio已明确接受新边际口径，累计保留旧S/A实际成本一次、未知仍未知。"
+      }
+    ],
+    "if_refused": "owner可异步覆盖尚未执行部分；保留已发生工作/证据。没有自动M、替代pair或新增咨询款；本记录不要求再次批准。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md",
+        "quote": "**Explicitly accept the proposed new marginal future-work accounting basis.**",
+        "why": "新future工作额度被明确选择；旧S/A成本和未知尾部继续累计一次，未刷新历史上限。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md",
+        "quote": "C, R and F do not wait for a bundle, sibling result, sibling intake, unrelated cleanup or all three implementations to be ready.",
+        "why": "三项现在都可独立派发完整实现任务；源码launch接受仍属各DM。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md",
+        "quote": "**The strongest competing portfolio is F+M:**",
+        "why": "健康M路径与较小future2400秒额度构成强反方；C/R实现未知与一fit/pair不确定性没有消失。"
+      }
+    ],
+    "uncertainty": [
+      "旧S的53秒只是已知support前缀；A完整耗时与provider成本未知，不能宣称旧余额或完整lifetime上限。",
+      "改变后的CBSC/RCLE/训练F运行率未知；新数字是有限投入ceiling，不是forecast或自动launch。",
+      "所有22方向当前匹配宿主调优headroom缺完整记录；不增加先求exact upper、全故障归因或cost实验门槛。",
+      "五槽是并行目标，当前准备不占槽；全部选C/R/F也只有三条方向。"
+    ],
+    "cost": {
+      "compute": "已选新future invoked-work C1800+R1500+F1200=4500秒，native/support各自不可互转。所有必要未来实现/检查/review/Monitor/收集/intake/integration/清理在款内。旧S/A实际成本保留一次，完整未知；M无款。",
+      "owner_time": "无需逐项批准；完整同节点决定核对后执行，owner可异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "三个DM可各自立即接任实现任务；实际starts才计槽位。当前0/5，三项开始后3/5，其他两槽无自动款。"
+    },
+    "verdict_text": "**Final decision: C=yes, R=yes, F=yes, M=no, H=not selected. Accept the new marginal future-work basis at C600/arm–1200native–600support–1800total; R900native including reference–600support–1500total; F270/arm–540native–660support–1200total.** Retain completed S/A costs once with their unknowns; preserve all earlier evidence and state boundaries. Three actual independent starts can create3/5 advancing directions, not five. Each task returns its one complete native observation and honest limitations or its concrete dependent failure; none purchases a replacement, extra consultation or automatic successor.",
+    "source": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T16:52:58+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-12-post-sa-marginal-investments.md",
+      "state": "planned",
+      "summary": "完整响应已接受，C/R/F各自就绪；Root集成/实际派发尚未记录，不声称已运行。新future额度及累计旧成本未知保持，M无款。"
+    }
+  ]
+}
