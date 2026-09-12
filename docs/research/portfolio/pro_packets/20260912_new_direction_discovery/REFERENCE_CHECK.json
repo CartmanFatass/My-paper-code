@@ -1,0 +1,635 @@
+{
+  "checked_at_utc": "2026-09-12T21:05:01.750143+00:00",
+  "scientific_input": "248356600c5691b226631ba0d382b8067036c7f3",
+  "references": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/SCIENCE_BRIEF.md",
+      "commit_sha": "248356600c5691b226631ba0d382b8067036c7f3",
+      "git_blob": "3407b13ad14f61726c94451fd2c49fe7d6138fb7",
+      "bytes": 13950,
+      "sha256": "fd93926494a20e4e4d64ed6517694103be6022a31c5edf86981d969f98612689",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/FACTS.json",
+      "commit_sha": "248356600c5691b226631ba0d382b8067036c7f3",
+      "git_blob": "14946af3f53b0c72ba901a230a64dbdbc512f59f",
+      "bytes": 24570,
+      "sha256": "ebdad8aa0229266bd28d5599d533780ce7e7599f54adbe930e774f4734a69869",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/CURRENT_DIRECTION_FACTS.md",
+      "commit_sha": "248356600c5691b226631ba0d382b8067036c7f3",
+      "git_blob": "d937e0e59162d9f2c4d0d0e48d05dc57fbbad4bf",
+      "bytes": 5820,
+      "sha256": "6bb3f234ea31ea767d167f19fb2702be2b95494bdc3643efb3e186e9aeac876a",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/KNOWLEDGE_AND_OVERLAP.md",
+      "commit_sha": "248356600c5691b226631ba0d382b8067036c7f3",
+      "git_blob": "de26cdd6047a545850283fb04045ddc06bcb5d65",
+      "bytes": 4420,
+      "sha256": "93a1d3f9f4bf4ad539d7ed78030d2bd8e4f3425607ca9618fb550d126bc737f1",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/PREPARATION_INTAKE.md",
+      "commit_sha": "248356600c5691b226631ba0d382b8067036c7f3",
+      "git_blob": "222f44a145ccc7b302ed4bee62d48b90dffd7a38",
+      "bytes": 4745,
+      "sha256": "364fb76108df4268b6a2ff560e6e66d471984920b2da274fd65d89d9915c4c13",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/ISSUE_SNAPSHOT.json",
+      "commit_sha": "248356600c5691b226631ba0d382b8067036c7f3",
+      "git_blob": "377b9fdba3009702cb595996d363b6dc3b19ffa6",
+      "bytes": 35921,
+      "sha256": "61f7fa9a8b99fd092e28121c831693ec5555a6112079f3854cb2b7169aa1298b",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/MGTAP_T_INVESTMENT.md",
+      "commit_sha": "248356600c5691b226631ba0d382b8067036c7f3",
+      "git_blob": "b509eb3404e24ac9177e1f4931e8d13090ff87de",
+      "bytes": 6230,
+      "sha256": "d082b9a87ef540e504cff413f83d93f524b1d026cd21f4979509ec6f615e79c1",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/ORACLE_RECOMMENDATIONS_20260911.md",
+      "commit_sha": "248356600c5691b226631ba0d382b8067036c7f3",
+      "git_blob": "ad2b55bb30dd30543f730741040d0dc141a50ecb",
+      "bytes": 16279,
+      "sha256": "6dc5b880b88abf3a1368f74e9cba9cbd384c7fca15882d9bfc43a4be31840093",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "02803820d622497fbb681efe0b94f2a6a0d21c7b",
+      "bytes": 45889,
+      "sha256": "6933e35eb254a2247e4a6b5f00067da90f4bf4e482ee16a555e52e43158efd09",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "2a903bd98ea710842852322497ce03820fdfc0a9",
+      "bytes": 13467,
+      "sha256": "c13c9e7687026048a1712e1c8d56a659a8da71c905c4e3a8a690b1d13671b2a3",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "a4dbb54d2e2128e2d8b907cf200e701d7729172a",
+      "bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "1b3ceff0c80a63f8b12f6b8686265a92fbcc9fb4",
+      "bytes": 4038,
+      "sha256": "4dae3729dc54db39599a689712fa1f6ccdb80d5fd2f08e96757bcf8686e6e0b9",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "d816b6e3446f0e2527602970a177d1620fc6b3de",
+      "bytes": 4598,
+      "sha256": "9fd3736fefe5c3cf52432b1ab3d4ed220188b1666bf10163ad55f5dcca69f06c",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "fb0065e14ecba3f32c5a8a1fee57c7cae882e469",
+      "bytes": 9874,
+      "sha256": "c508e498a515177530da05e6c17c27670aed879c39023fc2104558a2a9f0101f",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "cf46b243a9f79bf2ec9521720e35019a5f5a97ae",
+      "bytes": 4094,
+      "sha256": "7a2df2e11a1e603f4c9dbf7f038d8072cd04f9e367b001c9d75843ed982738cc",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/RESEARCH_MAP.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "39ee242477aca67ca082520f0d7a68b3970b1f46",
+      "bytes": 11027,
+      "sha256": "eb6ed4a46cc53f2629bfbba9f5c22588dee39d4fde8dee06a814461698e9a610",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/legacy/directions/README.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "ffffb0297ab2a764e5001e7c68861bf865452cb0",
+      "bytes": 4131,
+      "sha256": "336b1ddbb488cc833c66448e5f1bb63e2f577d5b40b0c12243f0be8a752eab52",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/INTAKE.md",
+      "commit_sha": "63c63c934ff98751bbc43ade731cce2f056587a4",
+      "git_blob": "2b32c07223689d7713ff58a886d55ad54408f655",
+      "bytes": 10274,
+      "sha256": "844dad31fca03512fb68ab30a0f58383b71f87e1fc3d8405ad2a229d85cede47",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/EXECUTION_MAPPING.md",
+      "commit_sha": "63c63c934ff98751bbc43ade731cce2f056587a4",
+      "git_blob": "a14ddabcbd6a9aad4125f04d24947ad4646b3581",
+      "bytes": 8772,
+      "sha256": "bc1fdfa74a6f9afee4ec9511bfbf606de5a978c577d2b982f2df23dcfdd366a9",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-12-post-am-remaining-capacity.md",
+      "commit_sha": "63c63c934ff98751bbc43ade731cce2f056587a4",
+      "git_blob": "cb1de96e317918ff0ce9668ec074681f12774861",
+      "bytes": 3572,
+      "sha256": "9c04a4c539afbd3a3b9d635dafb8a005c8db23f93b034bf703c7bbe672e842a3",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/active_post_churn_population_flow_identification/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "c4819c4eff5aa518413bd9e7f52112058c873de5",
+      "bytes": 3583,
+      "sha256": "5b5e8f27b6e5379ea7bfc5dca6fabeef68039b52f197ee7606a1dd8f32bf9cb7",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "e2a187831ff8552b0a774f27c2f44382350f5811",
+      "bytes": 45894,
+      "sha256": "922e9e7401ced17c34814f1165c3ae2cc9385f65607a631ca23b334b86d12dd3",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "9a3ccaf84b88b97f8e84c9200f3e5fe877460806",
+      "bytes": 33746,
+      "sha256": "84bc01ca5be90ba6fd906c5e705192596b3a35b71a9b086d9f3fb292448310aa",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "b76a4878f065703b4766fad75a4db9ade0e33d86",
+      "bytes": 53389,
+      "sha256": "3522f67f1ed92078b6ba4954cc94ae1985d52a1a3b43fd5e59b36069f71d8ad2",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "64a77d8d5a64b2128810e1ecaed46a57add6fcc7",
+      "bytes": 84081,
+      "sha256": "08e5a85acb2fb73205022211c4ee35baa6107502b60da72c989b389d35019090",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/ec4g_r1/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "c623a7bb04d9c019c4ebd9a75c94a55c6a23c2ba",
+      "bytes": 1998,
+      "sha256": "633e18efadad7140c058983f826d98c53dd8eb0bf91f0597fe3024445856d619",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/eociv_lite/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "2e3101567196b820b541c61656aa882ed2175d27",
+      "bytes": 6842,
+      "sha256": "df513faabf2c823875fb85d78b10155b281538c155998cb2c78f419254acde08",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "0c0144322713ac97b94f07e713e169a6c6365293",
+      "bytes": 27690,
+      "sha256": "b996bdd4ad375da3a959c4538482ca491fb125ba7175bddba5b933535d36b0d8",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "63d8ad18850cfb20f013dd6cc5510d7aef2e08eb",
+      "bytes": 38169,
+      "sha256": "c056718e634bfea0825fb55b54b974e6e4fb78145feff28751483a21656cdba9",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "feaf8fc082349308b09a6441af3a5ec18921f276",
+      "bytes": 53192,
+      "sha256": "d6971d43aff66c6727b7ae4e02d122a376136fb154dbbb0058a774c9e773f8fb",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "e26e938b07551e82ca5193f75340476ff7b1b5e7",
+      "git_blob": "5fce22012cd6c8490ba27da200300f7cdb8220b7",
+      "bytes": 55065,
+      "sha256": "86eff2c3fcd912c91eb192624fc808052d8a17108813e3bf587ab1b4d6c9715c",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/orbit_shadow_read/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "2c80a264afb1f088414f15df5d6fecbfd7efe74d",
+      "bytes": 2506,
+      "sha256": "034149e80a08ae9179ba073e349b3948bf7c896d1a2d1356bf4d8740a803c466",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/recct_lite/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "af6703b558f3bd30f0bd80b4d15c8fd053b5a23e",
+      "bytes": 4894,
+      "sha256": "009493cd0884717fd041cd132e4d2db5bbe7c291230b299a1fb5a6aa905d85bd",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "acf7b2e9a6c31f665a2174d039e0610c08bdabf8",
+      "bytes": 54688,
+      "sha256": "9e53e2010efb969df80bcd1057c91b4ba7e9751303f2b56947b9e4e7a83476c5",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/scope_1s/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "f655873f5bb20994477871dd137b4ce275d021a1",
+      "bytes": 1983,
+      "sha256": "47cf30ed20470118d37041f5ff5ac6e5debb3803ce532933891cd83faaa934e0",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "9a792835701d1601e427f1466ab9ee3226c43ec4",
+      "bytes": 54871,
+      "sha256": "eaf079ddba94cd33bb7b2d385c5fa7caf4339deb2477e4eec1b3a73e6df91e16",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/ucope/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "73bc001298f5ca42bb980e89415979fa5d269501",
+      "bytes": 160313,
+      "sha256": "2be254a9501ae8de51df3b3c4a2d361a3e9c58424008e7a70f7a9c55c90566d2",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "16074198e726221bc5f15108857fa76b07f4e557",
+      "bytes": 53820,
+      "sha256": "617088ff349dfa8bf643611a75883249c4965c74437dbda09e0736999523e83d",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "bb2aaa74aaa6fafd566a4d5244a54965b783f86b",
+      "bytes": 30428,
+      "sha256": "9639d9f76a06300f1bc1ab3b867420e8827c15edd933c4b04832955ca96ba8fa",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vsp_02/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "f61e397fb1e8e52fe33f6a920ae6bc57f6a28eb1",
+      "bytes": 10794,
+      "sha256": "9f12835000b6e29662bc23265eebd49b4a9f4a237e8d36e90b76d3b6c0c323e5",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "e21a974a2be9f0cb779c2a93f9837a6c51c95f6c",
+      "bytes": 37002,
+      "sha256": "666f324eb0b109a06c3f73135da68bb6333a8f045014ca645b112d5f697d75ae",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/DIRECTION.md",
+      "commit_sha": "100fff716d88c0ba46853300e49557d7d1bab22a",
+      "git_blob": "b08e8d63134b74b359234e97ffc7ab88e386981e",
+      "bytes": 63630,
+      "sha256": "063d9291faba212941c75a7ab0e14f69c741bcfbc0c4cdca95573d8b9a88020b",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_TWO_TRAINING_USE_DIRECTION_QUESTION_20260912.md",
+      "commit_sha": "5d756f3b16ba724115bcd03233f2f5f4cd6d7533",
+      "git_blob": "ab2c284abc9526fd193b92bca19e5037ca81924e",
+      "bytes": 12434,
+      "sha256": "ffea4a78596bf888b4974c72bab601acb8669869dd467ad6ddda031814c8ddf4",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "1a97c517042986a1787c9f3f099d8537706eefde",
+      "bytes": 7466,
+      "sha256": "b30de31d2d5083bb4c573eb6a7b237a5a55b57cff274b5ca6d71de2f09fe9735",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_POST_FOUR_PAIR_CONTINUATION_INTAKE_20260912.md",
+      "commit_sha": "3874715d46b3d0a326d3f8eb55e8915aef0e94bd",
+      "git_blob": "2b37535d1f004fc469639003a8895edbb3b27f82",
+      "bytes": 10907,
+      "sha256": "d3983f3974e35efbacb92f5f9ea8b46e044c3b76d6ba239c9d2c451738fc8558",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/fsd"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "61a9a49b7b6c153ef65349134947acd97c6317f1",
+      "bytes": 9065,
+      "sha256": "c42f90b56d0528d7780a973db0592b7971adc36bc7ebbba3cf4a1055c8a21bfd",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONTINUATION_READINESS_20260912.md",
+      "commit_sha": "2e630eba2e9e60f64dc08c614170298bd5a7218a",
+      "git_blob": "ea0f32b3d34a171adbffa746ce02f051b0ceeefb",
+      "bytes": 8446,
+      "sha256": "4e79fcc2cee32ca168954053c822bc99abcc6d5b359fa711fc4b0f6acb89c19d",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "9740e121cc17767fba934168a4f787277f2a200e",
+      "bytes": 6086,
+      "sha256": "df78a16d379292c212b3099baacb66b0d3066222a0c03c5628af6e47eeb20e5e",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST8214_DIRECTION_QUESTION_20260912.md",
+      "commit_sha": "e26e938b07551e82ca5193f75340476ff7b1b5e7",
+      "git_blob": "b354e9e659e69b7ff20bed1bcc160487fd25d00c",
+      "bytes": 12152,
+      "sha256": "1217c69aedb17e3f33653b2dd932771671501c4c338d7fd9653c9e228395805b",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/CONVERGENCE_INTAKE_20260912.md",
+      "commit_sha": "e26e938b07551e82ca5193f75340476ff7b1b5e7",
+      "git_blob": "3323847e7178e0d9bf60be508c9a1dcf08a112d6",
+      "bytes": 11375,
+      "sha256": "d6aea6eba98c2bbbc4b1215ac858c08b3c2d913450006ac5a82576816d2ade3a",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/INVESTMENT_NEED.md",
+      "commit_sha": "e26e938b07551e82ca5193f75340476ff7b1b5e7",
+      "git_blob": "d6c3569490b6ea3724b9607872260795fe4ab615",
+      "bytes": 4939,
+      "sha256": "40caa00b6e892d96c4e9da2885fdb41ffc70ccdb56df6ff92e68920ed64d5b80",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md",
+      "commit_sha": "e26e938b07551e82ca5193f75340476ff7b1b5e7",
+      "git_blob": "813e9418fb972721ac12241b0dcaaf0c0c432d48",
+      "bytes": 11073,
+      "sha256": "9b7e6f460c9d2959140a8779a059ccff83e1bfc7d3aefd6b7c7650948830c5c6",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_CONTINUITY_QUESTION_20260912.md",
+      "commit_sha": "12fad5247cab21f7964cad0ffa7334f76a48e49d",
+      "git_blob": "31ca28c825357e4400cfba5684d9f6749c9b0e7f",
+      "bytes": 13034,
+      "sha256": "6bfe0f71ff6afa7059852969397eecd498c4f1edeed80be1b1b99de100b17eaa",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_learned_retention_post_b03_convergence/INTAKE.md",
+      "commit_sha": "99f4df5843a22dc2f019749d44e310e1f6dcda6f",
+      "git_blob": "7c81a98af6896bf602b4f59e8446ace1cb463a8e",
+      "bytes": 11352,
+      "sha256": "e0a1ca01cf85fbf8b830015384a427cc0c21f57321ef26fd60b05e9512e078df",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md",
+      "commit_sha": "6f506e4746882a96bb955389c9ce7052e8bceb43",
+      "git_blob": "0d73cd6ca5a9b016ecfd9c2c09b172278fcb95fc",
+      "bytes": 36746,
+      "sha256": "214eaa8efadb278e1826b80c08e809a5dbc78774ae05e48284cc478f9f92ef3d",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    }
+  ],
+  "limit": "Git publication verified, not claim of Pro access or delivery."
+}
