@@ -6,7 +6,15 @@ Binding MARL structure: temporal abstraction / termination.
 **Proposal only.** Root requested 2–3 next choices from accepted evidence at
 main 18d7a02f8 and cleanup 0603d31c1. Reused checkout:
 C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd, clean at entry.
-No funding, lifecycle, implementation, Pro consultation or launch is selected.
+No funding, lifecycle, implementation, Pro consultation or launch is selected by this input.
+
+**Routing reconciliation:** the designated Portfolio author subsequently confirmed
+that K/E/L/U was already fixed at TASK b52ed2e045841659953abfe9a76b55c69adcce5d
+and READY_HANDOFF 0a04cb44f, with Relay delivery accepted. Its FSD U is only
+one use judgment. This new B comparator is material additional science and
+does not amend that fixed request. Retain it for the next clean request
+boundary, informed by the current U result; do not issue another USE question
+or infer any B budget from this document.
 
 ## Evidence and the actual decision
 
@@ -36,7 +44,7 @@ That new question does not invalidate the accepted comparisons.
 | Choice | Next work and decision value |
 | --- | --- |
 | **B-LONG-D0 — recommended** | One fresh I1280-five-update versus authentic-D0-ten-update pair, one final 32-world panel each. Tests whether more ordinary learning changes optional-use advice; not an automatic sixth unchanged 5/5 pair. |
-| **USE** | One newly selected original-Convergence use judgment over existing evidence; zero new fits or numeric panels. Decide whether to list the complete package as a costly same-host option alongside D0. It settles bounded use without observing longer D0; complete consultation cost is unknown. |
+| **USE** | The existing fixed U offer is one original-Convergence use judgment over existing evidence; zero new fits or numeric panels. Decide whether to list the package as a costly same-host option alongside D0. Follow that same bound request; no duplicate question. It does not observe longer D0; complete consultation cost is unknown. |
 | **HOLD** | No new empirical or consultation investment in this package until a concrete use justifies it. A real Portfolio investment-hold alternative; whole-direction PARK must still conform to the owner's instruction that FSD continues. |
 
 Recommend B-LONG-D0, subject to the proper investment decision.
@@ -44,8 +52,9 @@ Ten updates are a coarse design choice, not an
 estimate of an exact equal-time maximum. Existing cost asymmetry motivates this
 one stronger null. No adaptive time matching, budget grid, pilot or checkpoint
 search is proposed. USE is the strong lower-exposure alternative if buying this
-counterfactual would not change the intended use. This input replaces the earlier
-use-judgment-only recommendation in the still-unfrozen Portfolio preparation.
+counterfactual would not change the intended use. This refines the DM's earlier
+use-judgment-only advice for a subsequent decision boundary; the already fixed
+current U offer remains unchanged.
 
 ## Recommended B: comparator, estimand and interpretation
 
@@ -144,3 +153,7 @@ Known invoked preparation commands sum to 3.7195144 seconds before final
 publication (each enclosing command once). Publication/coordination and
 agent/provider attribution remain outside that partial subtotal. Native
 scientific exposure is zero.
+
+The Portfolio author accepted the native fixed-input delivery, then reported
+the earlier K/E/L/U binding above. Root receives this factual routing correction;
+no Transport/Pro operation, new funding or scientific selection occurred.
