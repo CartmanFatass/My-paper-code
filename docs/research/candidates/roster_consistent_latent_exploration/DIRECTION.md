@@ -34,8 +34,13 @@ close call against holding this named route. The complete response and its
 scientific/specification check are accepted in
 [RCLE_CHANNEL_NORMALIZATION_CONVERGENCE_INTAKE_20260912.md](RCLE_CHANNEL_NORMALIZATION_CONVERGENCE_INTAKE_20260912.md).
 It selects own initialization and attained nearest as comparators, without a
-fresh joint100 arm. This direction judgment adds no present implementation or
-numerical allowance and changes no Portfolio lifecycle, priority or recast count.
+fresh joint100 arm. Portfolio response `268d2b4df7f31df8a27466ddfbb3bcef6ba587a4`
+subsequently funds the exact one-fit service B in
+[RCLE_B07_EQUAL_UNIT_SCIENCE_CARD_20260912.md](RCLE_B07_EQUAL_UNIT_SCIENCE_CARD_20260912.md):
+final1000 with own-init/final/nearest panels, 900 s total native including reference,
+600 s support and 1500 s complete future invoked work. This new allocation does
+not reinterpret the consultation's former zero numerical allowance, B06 evidence,
+Portfolio lifecycle, priority or recast count.
 
 The selected rule is `d = u(g_M) + u(g_C)`, then `theta -= .02*u(d)` when d is
 nonzero; exact cancellation leaves parameters fixed. Both derivatives use the
@@ -52,7 +57,7 @@ five reference F harms and 2012/2048 failure-coded tau40 outcomes. Earlier W100/
 native learning and four B06 initialization-cell gains are the strongest support
 against a broad unlearnability claim. Supplied-prior competence, finite exposure,
 update allocation and partner co-adaptation remain alternatives; no current cause
-is identified. A separately funded single fresh final1000 observation could
+is identified. The funded single fresh final1000 observation is the next discriminator to
 inform this recipe's usefulness, with conditional scenario uncertainty, .05 U
 MEI, all native consequences and the existing absence of tuned headroom retained.
 The historical sections below preserve the earlier objects and their own limits.

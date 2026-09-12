@@ -103,7 +103,8 @@ def reading(delta, gain, mixed):
 
 
 def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summary=None, seed=SEED,
-        *, updates=UPDATES, object_id=OBJECT_ID, panel_label="B04", action_law=None):
+        *, updates=UPDATES, object_id=OBJECT_ID, panel_label="B04", action_law=None,
+        equal_unit_update=None):
     action_law = dict(LAW if action_law is None else action_law)
     out.mkdir(parents=True, exist_ok=True)
     summary = dict(object=object_id, seed=seed, arm=arm, launch_sha=launch_sha,
@@ -118,15 +119,26 @@ def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summ
             initial = host.flat_parameters(model).clone()
             summary.update(allocations=dict(models=7, training_instances=1, untrained_helpers=6),
                            initial_parameter_norm=float(torch.linalg.vector_norm(initial)),
-                           actor_score_weight=100, updates_per_fit=updates)
+                           updates_per_fit=updates)
+            if equal_unit_update is None:
+                summary["actor_score_weight"] = 100
+            else:
+                summary["update_rule"] = "equal-unit-manager-claim; full-vector .02; no factor100"
             save_model(model, out / "initial_parameters.pt")
             summary["initialization_panel"] = b03.panel(model, rng, f"{panel_label}-INITIAL", started, wall_cap)
             host.write_json(out / "init_scenarios.json", summary["initialization_panel"])
             baselines = torch.zeros(8, dtype=torch.float64)
             for update in range(updates):
                 host.check_wall(started, wall_cap)
-                baselines, curve = b03.training_update(model, rng, update, baselines, 100.0)
+                if equal_unit_update is None:
+                    baselines, curve = b03.training_update(model, rng, update, baselines, 100.0)
+                else:
+                    summary["partial_update"] = {"update": update}
+                    baselines, curve = equal_unit_update(model, rng, update, baselines,
+                                                         summary["partial_update"])
                 summary["curves"].append(curve)
+                if equal_unit_update is not None:
+                    summary["partial_update"] = {}
                 with (out / "completed_blocks.jsonl").open("a", encoding="ascii") as blocks:
                     blocks.write(b03.json.dumps(curve, allow_nan=False) + "\n")
             save_model(model, out / "parameters.pt")
@@ -161,6 +173,16 @@ def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summ
                                   backward_step_calls=len(curves), nonzero_steps=sum(c["nonzero"] for c in curves),
                                   final_episodes=len(summary["scenarios"]),
                                   init_episodes=len(summary.get("initialization_panel", [])))
+        if equal_unit_update is not None:
+            partial = summary.get("partial_update", {})
+            summary["counts"].pop("backward_step_calls")
+            summary["counts"]["training_episodes"] += partial.get("returned_training_episodes", 0)
+            summary["counts"]["score_channel_derivative_traversals"] = sum(
+                c["score_channel_derivative_traversals"] for c in curves) + partial.get("derivatives_completed", 0)
+            summary["counts"]["score_channel_derivative_attempts"] = 2 * len(curves) + partial.get("derivative_attempts", 0)
+            summary["counts"]["parameter_update_attempts"] = len(curves) + partial.get("parameter_step_attempts", 0)
+            summary["counts"]["completed_parameter_steps"] = len(curves) + partial.get("parameter_steps_completed", 0)
+            summary["counts"]["nonzero_steps"] += partial.get("nonzero_steps", 0)
         summary["wall_seconds"] = time.perf_counter() - started
         summary["peak_rss_bytes"] = host.peak_rss_bytes()
         host.write_json(out / "summary.json", summary)
