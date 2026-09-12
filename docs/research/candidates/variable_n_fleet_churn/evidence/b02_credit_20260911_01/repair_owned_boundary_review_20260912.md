@@ -48,3 +48,12 @@ check and DM interpretation. No additional fixture is required by this review.
 
 First review: six commands,1.8918168 seconds. Actual-diff review: five commands,
 1.6770806 seconds. These are summed command clocks; enclosing tool clocks excluded.
+
+## Actual receipt review
+
+The same independent reviewer read the staged-source and complete-check receipts.
+No material receipt or conclusion gap: exact source/readbacks, matching interpreter
+digest,256 completions, correct output/gradient/input assertions, exit0, empty test
+stderr and3.177215865-second normal teardown support the bounded alternative-path
+acceptance. Retain staging shell warnings, prior limits and separate support scopes.
+This last read used one command/0.1740222 seconds; no test was repeated. DM accepts.

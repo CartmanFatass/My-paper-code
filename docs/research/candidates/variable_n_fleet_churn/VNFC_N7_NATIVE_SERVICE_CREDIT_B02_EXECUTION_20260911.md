@@ -549,3 +549,37 @@ source/consumer/import and test scope accepted for the single check. Its additio
 five read commands took1.6770806 seconds. [Full bounded review](evidence/b02_credit_20260911_01/repair_owned_boundary_review_20260912.md)
 retains the counterargument and post-exit evidence requirement. Three changed Python
 files passed AST parsing only; no scientific imports or numeric execution occurred locally.
+
+
+### Actual check and technical acceptance
+
+Published source `d76d96cbe3df9b598e0db695a8b39deb23e7bdb1` was staged once through
+the existing binary-stdin/network-context source helper. All four declared source/input
+readbacks matched. Interpreter digest `ca420bd4614ae7757b4cd4938b3c663e98d2b631bda518610071d9a4ca0b509e`
+matched the retained exact build. The recorded zsh initialization warnings did not
+prevent staging; its receipt preserves them. Staging local elapsed6.407 seconds
+contains remote5.629739329 seconds, not an additional scientific cost.
+
+The sole check ran on CPython3.10.21/Clang22.1.3, Torch2.7.0+cu118, NumPy1.26.3,
+CPU float64, one compute thread and allocator debug. It completed256/256 real
+forward/backward applications; exact retained mean, `g/N` and unchanged input checks
+passed. Pytest reports1 passed/2.60s. External normal exit0, empty stderr and
+3.177215865-second complete process establish teardown. Local SSH/control3.89s
+includes that process and the0.000107372-second scratch cleanup. No rerun occurred.
+
+The same independent reviewer accepted these actual receipts with no material gap.
+DM **technically accepts this bounded same-meaning alternative** under Portfolio§6.
+It supports normal preparation of the independently funded fresh pair; it is neither
+a historical writer attribution nor evidence that the primary scientific run succeeded.
+The original40-versus32-byte fact and B02 quarantine remain unchanged.
+
+[Acceptance and cost scope](evidence/b02_credit_20260911_01/repair_owned_boundary_acceptance_20260912.json)
+links source staging, actual check and review. The selected complete outer maintenance
+components total14.0399196 seconds (remote nested clocks excluded); other reads/edits/
+Git/integration work is not comprehensively measured. The new20-second check cap passed;
+no claim of full historical120/300/900-second cost conformance follows. This maintenance
+was explicitly separate from the unused fresh scientific allowance.
+
+Creator test scratch is absent. The exact-source technical checkout and its one JSON
+receipt remain only through Root integration/retention acceptance; DM owns their later
+reclamation. Historical evidence roots/cores and the shared authoring checkout remain.
