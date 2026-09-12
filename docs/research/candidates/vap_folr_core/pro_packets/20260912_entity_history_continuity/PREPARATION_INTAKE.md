@@ -95,3 +95,33 @@ Owner item: docs/research/portfolio/owner/inbox/2026-09-12/20260912-folr-002.jso
 The actual preparation audit row is audit/2026-09-12.md line66. The initial
 line78 metadata typo is corrected through the item.py trace correction and
 this record; E remains unexecuted, with no auto_applied direction choice.
+
+## Published fixed task and ready handoff
+
+Preparation commit a7610082cff51acc34c71a58c38f58162e1a88de and TASK commit
+e029de7154260a773710385b8ad74587bcfcbe33 were each pushed immediately. The
+twenty declared evidence/method mappings are exact and their four unique SHAs
+are reachable from the observed published direction branch. Fixed current
+method surfaces also remained unchanged against main at the final check.
+These mechanical facts do not assert Pro connector access or scientific truth.
+
+The prescribed binder verified committed TASK bytes and marked HANDOFF
+READY_TO_DISPATCH. It binds the actual DM, Root parent, current Transport,
+original conversation and exactly one fixed TASK URL. The provider prompt is
+1932 UTF-8 bytes, SHA256
+0406937e8777b7b05a1ce6bf41e6374e19dc302ad803870ead9c2d3e78a97e34.
+No Pro Send or Transport dispatch occurred in this DM task.
+
+Issue15 was updated from the preserved pre-update snapshot to the current
+question using the scoped body file; GitHub readback matches that body exactly.
+No old accepted request/response/comment changed. The rendered generic
+Convergence wording is scoped by the explicit current OWNER_DIRECT constraints:
+this task selects a next question, not a local Portfolio direction stop.
+
+Root integrates the scoped preparation/TASK/ready-handoff commits, excluding
+input merge ea752de8f, then dispatches the exact committed dispatch_prompt once
+to the reusable Transport. Its complete immutable response returns to
+/root/dm_folr_post_b03 for conformance, decision intake and the next actually
+authorized step. Keep the shared authoring checkout during delivery and fetch
+the response commit before any further push. No new experiment, Monitor handle,
+test scratch or cleanup inventory exists for this documentary stage.
