@@ -1,0 +1,74 @@
+{
+  "id": "20260912-cbsc-002",
+  "created": "2026-09-12T10:11:28-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CBSC C：公共字节路径新配对",
+  "context": "系统与信息流问题：保持 B04 学习器和回报，测量新 RAW/STRUCT 单配对。C 已由 Portfolio 拨款。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按已拨款 C 执行本卡有限配对，不等待异步回复"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "应用后续实际覆盖并保留已发生事实，不自动替换或重试"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "仅在实际覆盖要求内修改未执行部分，科学意义冲突返回 proper node"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "新路径具体且检查范围可约束；保持原科学问题和所有弱或负结果。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_SCIENCE_CARD_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L27",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "执行 Portfolio 已拨款的一组 CBSC 公共字节路径 RAW/STRUCT 配对实验，并保留所有结果。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_SCIENCE_CARD_20260912.md",
+        "from": "S 已结束，候选尚未实现或运行",
+        "to": "C 已拨款：实现既定边界，经针对性检查和独立审查后执行一个新配对"
+      }
+    ],
+    "if_refused": "应用实际异步覆盖，保留已发生结果；不会自动替换实验或重试。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/EXECUTION_MAPPING.md",
+        "quote": "C — CBSC direct-public-stream implementation → pair → intake",
+        "why": "Portfolio 已选择 C，Root 已指派完整有限任务。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_SCIENCE_CARD_20260912.md",
+        "quote": "Shared host constructors, Enum/Fraction/native libraries, NumPy model initialization, Torch and checkpoint runtime remain; no crash-cure claim follows.",
+        "why": "新路径移除了已选边界，但未证明旧崩溃原因消失。"
+      }
+    ],
+    "uncertainty": [
+      "一个训练配对只能说明本次局部差异，不能把 32 个评估回合当成独立训练样本。",
+      "同信息调优后的 headroom 缺失，历史 RAW 弱于 REQUEST_ONLY。"
+    ],
+    "cost": {
+      "compute": "每臂完整 600 秒，两臂 native 合计 1200 秒，剩余 support 600 秒，总计 1800 秒；不重试。",
+      "owner_time": "无需等待回复，可异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): accept the selected C card and execute one prospectively bound RAW/STRUCT pair after proportional technical acceptance.",
+    "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_SCIENCE_CARD_20260912.md"
+  },
+  "starred": false
+}
