@@ -1,0 +1,246 @@
+{
+  "checked_at_utc": "2026-09-12T22:14:49.527442+00:00",
+  "scientific_input": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+  "count": 34,
+  "scope": "Git publication/mapping only; doesnotproveProaccess",
+  "references": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/SCIENCE_BRIEF.md",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "bytes": 31051,
+      "sha256": "0d0290c6ac1e5121f8701a475f0f5b3c2e46e52627c2ee184ae5d48957dc3833",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/FACTS.json",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "bytes": 30799,
+      "sha256": "6e221747eeea4dcbfff06941c2c1086d823f295157489b3b0b8aaf510f57d8fc",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/PREPARATION_INTAKE.md",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "bytes": 4911,
+      "sha256": "93e9fa6f159666ba3692f7e1da8b3df2cc0ad310dc98799a01a122c7dba3aa02",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/ISSUE_SNAPSHOT.json",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "bytes": 379,
+      "sha256": "bfe3fa698b5e7984deabd7880c290ff02e047ebc9068c7a5c6e46a04044d2c28",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/OWNER_KE_PACKET.json",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "bytes": 3348,
+      "sha256": "91cac67abd69b8fe382aa0b635442d552a1be96c9326064e6d08ef4106d807e4",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/OWNER_L_PACKET.json",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "bytes": 2689,
+      "sha256": "c9b47f23e0f23ea941402954eb7f6c69fa416696cfffe8b1721bfba0dd3f74b5",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/OWNER_U_PACKET.json",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "bytes": 2247,
+      "sha256": "7fb133c01dea8a181d90da13fbb26c2349f2558f461c60bf6955afc7603fd9e6",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 15430,
+      "sha256": "bda680156f4adc85a9b028f2321ac516b5516e6b3654b6cb7b1301a16d8b162e",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/OWNER_PACKET.json",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 3611,
+      "sha256": "046203cb8bd1d9f38cdd0fa1db62fb6d6ddaf1a07ac4b277d19594474afdcb61",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 48822,
+      "sha256": "2fcd35c1030992782739a30e0a990133510ba0815dc5c82663cd18c64fda3766",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/INTAKE.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 18195,
+      "sha256": "8495e12624b9cedf90d0d076a1edff65938e33a5f09900888f8248b0203f9ef1",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 59187,
+      "sha256": "020d7c76427057d98f23670cf58f2ab6071e677ad910c474672360ba35f09ed2",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 15897,
+      "sha256": "3edca9f0304efa10ac5a915ddc24049a0e32c1c754c3b59cdcfa73d486a50a5f",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 54987,
+      "sha256": "55424b4d1d2b38d4ae983e8e91b04161bf59af18841dea8f5ecf77593d07a311",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONTINUATION_READINESS_20260912.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 3661,
+      "sha256": "813851874b52a086b4d7e267331611f6f92d41039cd7848eaa88e27215f5637e",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+      "commit_sha": "5545f73218cd7827a151fa1cec4fbc2ef08e38d8",
+      "bytes": 11176,
+      "sha256": "1179f525f0e427dcf357420b089385cd2642da02a2784f729664d9f72d42ca7c",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/fsd"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "commit_sha": "5545f73218cd7827a151fa1cec4fbc2ef08e38d8",
+      "bytes": 55343,
+      "sha256": "7c0ea28b8865181d5f3df8cefe43ef5923c13cd8bfaa40e3de4daa6c087d4998",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/fsd"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/INTAKE.md",
+      "commit_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "bytes": 14073,
+      "sha256": "4322618da80f4ad49ce0fb44b0ae8aa9d19dad504fa8984b56d74965c69e6b09",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-12-new-direction-discovery.md",
+      "commit_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "bytes": 3917,
+      "sha256": "b012671caff0fe9c88b3a2b2db003360f949c4051c911cb4b687d197e28d99a3",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/EXECUTION_MAPPING.md",
+      "commit_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "bytes": 12375,
+      "sha256": "4468958a496658f098ae83fa0fa67df9d2a6dab79327d99f86b30d5bb964d93c",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/REGISTRATION_MAPPING.json",
+      "commit_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "bytes": 3134,
+      "sha256": "93256f67538a3c8777ecb6a0572ccb858293a941d2f05bf7a03092442c2612bd",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md",
+      "commit_sha": "b793cf69b4935306708ad744b355acc4d5b33712",
+      "bytes": 80107,
+      "sha256": "30d24b57ae8c3260dc103007d1cd427a2b630973c6851948aeed3597a12caba6",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/ORACLE_RECOMMENDATIONS_20260911.md",
+      "commit_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "bytes": 16588,
+      "sha256": "45064e7d8ff389ee7f4ac4f227d23c0512e57d57bd33a78434171a629f4d8462",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 10286,
+      "sha256": "bed9589a2938541faf8332dc7f11331b8303fd0ccb00c15aabf124c1e37f19cc",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/research/RESEARCH_MAP.md",
+      "commit_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "bytes": 13658,
+      "sha256": "012f8ef24f9c8a21c2601a2dbd321e965667b853fa1df383b4b8b72590c6fbc0",
+      "observed_reachable_remote_ref": "refs/remotes/origin/codex/portfolio"
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 45889,
+      "sha256": "6933e35eb254a2247e4a6b5f00067da90f4bf4e482ee16a555e52e43158efd09",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 13467,
+      "sha256": "c13c9e7687026048a1712e1c8d56a659a8da71c905c4e3a8a690b1d13671b2a3",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 4038,
+      "sha256": "4dae3729dc54db39599a689712fa1f6ccdb80d5fd2f08e96757bcf8686e6e0b9",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 4598,
+      "sha256": "9fd3736fefe5c3cf52432b1ab3d4ed220188b1666bf10163ad55f5dcca69f06c",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "observed_reachable_remote_ref": "refs/remotes/origin/HEAD"
+    }
+  ]
+}

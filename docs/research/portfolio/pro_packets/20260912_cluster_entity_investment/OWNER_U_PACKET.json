@@ -1,0 +1,37 @@
+{
+  "question": "Portfolio 是否新买一次 FSD 原 Convergence 的同host可选学习方案用途判断，用五组现有结果作决定，而不再自动加pair？",
+  "changes_if_approved": [
+    {
+      "target": "flexible_skill_duration 下一有限投入",
+      "from": "第五N与cleanup完成，ACTIVE/HIGH；无第六pair或新咨询款",
+      "to": "建议U=yes：一次原节点use判断＋完整intake，零代码/数值/实验；旧S=no不作授权"
+    }
+  ],
+  "if_refused": "不新增用途咨询或 unchanged package 经验投入，保留全部证据；等待真实新用途明确比较问题，不因此推断FSD停止或PARK。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+      "quote": "There is no ready new B object and no extra observation is a prerequisite to this limited judgment.",
+      "why": "已有五组完整native结果可决定可选用途，不先购买更多重复或诊断。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+      "quote": "That avoids repeated investment and does not itself stop FSD.",
+      "why": "不咨询的强反选项可节省只重述已知结论的文档成本。"
+    }
+  ],
+  "uncertainty": [
+    "五pair四正一负，不是稳定优势/组件归因或seed门槛。",
+    "U完整documentary/invoked/provider/agent费用未知，非廉价假设、旧余额或自动重复。"
+  ],
+  "cost": {
+    "compute": "零新实现/数字分析/fit；一次新原节点问题/Transport once/完整intake，完整费用由Portfolio明确接受或界定。",
+    "owner_time": "无需逐项批准，可异步覆盖。",
+    "reversibility": "costly",
+    "waits_on_this": "只FSD U新投入；其他K/E/L与已选T/ACPS/CADC独立。"
+  },
+  "verdict_text": "作者依据原FSD DM建议U=yes：从五个接受pair判断I1280是否成为同host可选学习方案，保留authentic D0、成本和混合结果，不改默认或买第六pair；U=no为真实反选项。",
+  "source": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/SCIENCE_BRIEF.md"
+}
