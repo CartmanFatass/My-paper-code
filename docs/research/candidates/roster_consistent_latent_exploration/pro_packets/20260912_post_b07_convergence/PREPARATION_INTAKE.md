@@ -66,3 +66,19 @@ trajectories/evaluation/numerical analysis/tests/profilers. All counts/results a
 reused published evidence. Complete documentary/provider/agent cost is accepted
 unknown, not free or bounded by an ended empirical allowance. No new worktree,
 scientific process, test scratch or cleanup task is created; scope§4 machinery:none.
+
+## Published boundary
+
+Fixed TASK commit fcb4381a666a8df9bba88c8278f01bbcfbc1baf1 is published on codex/rcle. The binder
+compared committed TASK text, produced READY_TO_DISPATCH, and fixed the original
+conversation, actual source author, Root receipt parent and current Transport.
+All21 reference mappings retain their exact published source versions. The
+[publication receipt](PUBLICATION_RECEIPT.json) records task bytes/digest and
+short-prompt digest. Current owner reviews returned[]; no overriding review waits.
+
+The ready internal HANDOFF is published with this record. Root is the next
+execution owner for a single dispatch after queued ACVC/FOLR; the original DM
+resumes for complete response conformance and intake. Provider Send, accepted
+generation and formed response are not claimed at this boundary. RCLE remains
+ACTIVE. No numerical or implementation action, fit, new budget, successor
+consultation, Monitor handle or scientific cleanup task is introduced.

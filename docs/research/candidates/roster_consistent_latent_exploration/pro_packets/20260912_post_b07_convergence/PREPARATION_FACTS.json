@@ -1,5 +1,5 @@
 {
-  "status": "PREPARING_FIXED_TASK",
+  "status": "READY_HANDOFF_TO_ROOT",
   "author_native": "/root/dm_a_mx_rcle_intake",
   "author_source_uuid": "01a095ed-c382-73d3-84d4-c96279d82fc9",
   "source_uuid_observation": "current CODEX_THREAD_ID",
@@ -13,7 +13,7 @@
     "url": "https://github.com/CartmanFatass/My-paper-code/issues/8",
     "state": "OPEN",
     "updated_at": "2026-09-12T20:57:10Z",
-    "title": "RCLE\uff1aTBCFV \u539f\u751f\u5b66\u4e60\u4e0e\u6bd4\u8f83 \u2014 B07 \u540e Convergence",
+    "title": "RCLE：TBCFV 原生学习与比较 — B07 后 Convergence",
     "body_content_readback": "matches after CRLF/LF normalization",
     "historical_comments_preserved": 5,
     "mutations": 1,
@@ -23,5 +23,10 @@
   "implementation_or_scientific_invocations": 0,
   "owner_reviews": "[];no prediction taken",
   "scope_machinery": "none",
-  "documentary_complete_cost": "unknown, explicitly accepted; all failed mechanical checks belong to current documentary support"
+  "documentary_complete_cost": "unknown, explicitly accepted; all failed mechanical checks belong to current documentary support",
+  "task_commit": "fcb4381a666a8df9bba88c8278f01bbcfbc1baf1",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/fcb4381a666a8df9bba88c8278f01bbcfbc1baf1/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260912_post_b07_convergence/delivery/TASK.md",
+  "current_owner_reviews": [],
+  "publication_receipt": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260912_post_b07_convergence/PUBLICATION_RECEIPT.json",
+  "provider_send_or_generation_claimed": false
 }
