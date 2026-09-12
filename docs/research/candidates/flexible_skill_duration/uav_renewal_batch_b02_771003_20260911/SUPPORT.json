@@ -99,9 +99,30 @@
     {
       "purpose": "read live control configuration for I handover",
       "wall_seconds": 0.1685711
+    },
+    {
+      "purpose": "publish D0 complete technical acceptance and retained evidence",
+      "wall_seconds": 5.0639748
+    },
+    {
+      "purpose": "submit the preselected detached I command once at frozen source",
+      "wall_seconds": 0.7752384,
+      "session_id": null
+    },
+    {
+      "purpose": "direct I Monitor assignment API elapsed, observation work separate",
+      "wall_seconds": 0.185
+    },
+    {
+      "purpose": "read owner reviews and current FSD audit at I handover boundary",
+      "wall_seconds": 0.5052632
+    },
+    {
+      "purpose": "Monitor actual I adoption observation reported by Root",
+      "wall_seconds": 0.8
     }
   ],
-  "known_support_seconds": 37.8970283,
+  "known_support_seconds": 45.2265047,
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -110,7 +131,7 @@
     "complete": 3000,
     "one_source_transaction": 45
   },
-  "scientific_submissions": 1,
+  "scientific_submissions": 2,
   "accounting": "Each invoked command is charged once. Nested process, runner, staging and SSH durations are not additional charges. Study calendar duration and aggregate CPU work are different quantities. The shared 1.0-second observation remains explicitly unallocated. Authoring/Pro/idle calendar time excluded; unknown attribution stays unknown.",
   "complete_cost_certified": false,
   "source_transaction": {
@@ -120,7 +141,7 @@
     "returncode": 0,
     "count": 1
   },
-  "pending": "Preselected I invocation and its observation/collection/intake, further publication/integration and cleanup; shared observation attribution and other unmeasured support. This snapshot excludes its own final publication command, which is retained for the next record.",
+  "pending": "I terminal observation, actual I native cost and full-pair collection/intake; further publication/integration and cleanup. Shared observation attribution and unmeasured support remain unknown. This snapshot excludes its own publication command, retained for the next record.",
   "shared_observation": {
     "reported_by": "Root D0 terminal handoff",
     "wall_seconds": 1,
@@ -132,5 +153,5 @@
     "I": null
   },
   "native_wall_sum_observed_seconds": 538.66,
-  "support_plus_native_known_seconds": 576.5570283
+  "support_plus_native_known_seconds": 583.8865046999999
 }

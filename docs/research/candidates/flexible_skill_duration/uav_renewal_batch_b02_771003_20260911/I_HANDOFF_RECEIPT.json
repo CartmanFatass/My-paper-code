@@ -1,0 +1,16 @@
+{
+  "recorded_utc": "2026-09-12T00:07:00.738665+00:00",
+  "root_monitor_receipt_verbatim": "Confirmed new monitor-goal protocol on your I arm. Monitor reports get_goal initially null; create_goal succeeded, status active, no token budget, tokensUsed0; active-set membership includes fsd-uav-renewal-batch-b02-771003-I-20260911. Source5250c43536d8520d4005eed3f613226ec4bc6e73; remote supervisor running/tmux active; admission15.63GB vs4GB; adoption observation0.8s. This is actual adoption, not message-delivery inference. Stop routine polling and resume collection only on MONITOR_TERMINAL; no retry/duplicate launch.",
+  "monitor_adoption": "actual unfinished goal and active-set membership confirmed by Root",
+  "reported_goal": {
+    "get_goal_initial": null,
+    "create_goal_succeeded": true,
+    "status": "active",
+    "token_budget": null,
+    "tokensUsed": 0,
+    "active_set_includes": "fsd-uav-renewal-batch-b02-771003-I-20260911"
+  },
+  "reported_native_status": "running/tmux active",
+  "admission_limit": "Root/Monitor confirms an actual pass; exact physical/effective bytes will be collected from I_admission.json. The supplied 15.63GB vs 4GB shorthand is not reinterpreted.",
+  "relay_for_this_I_handover": "pending publication; exactly one send before actionable native final"
+}

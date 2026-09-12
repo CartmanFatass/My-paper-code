@@ -1,7 +1,7 @@
 # FSD new771003 pair execution
 
-D0 is terminal, collected and technically accepted. The preselected I arm is
-ready for its single submission with fresh adjacent admission; the pair is incomplete.
+D0 is terminal, collected and technically accepted. I is accepted and running;
+actual admission and Monitor goal adoption are confirmed. Pair collection is pending.
 New B allocation under card§7 and Root's conformance-PASS dispatch.
 Reused authoring checkout C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd;
 reconciled base37d180f91621f065eaef19a194157f88826cebf2. The DM
@@ -126,3 +126,33 @@ Root supplied0.7s FSD adoption observation, charged once. The later1.0s query
 covered FSD and two FOLR handles: preserve it as one unallocated shared cost,
 without splitting it or charging it fully to each direction. Integration and
 other unmeasured attribution remain unknown. No new source transaction occurs.
+
+## I accepted handover
+
+D0 collection and technical acceptance were published in
+569d921cd1394206cb824310ae8bba22f858240e. At 2026-09-12T00:04:38.846392Z,
+agent-task returned 0 and accepted the preselected I handle
+fsd-uav-renewal-batch-b02-771003-I-20260911. The source remains
+5250c43536d8520d4005eed3f613226ec4bc6e73, with exactly one prior source-delivery
+transaction and no new staging. I_LAUNCH_RECEIPT.json preserves the submitted
+1800-second command and existing D0 companion; the adjacent I memory admission
+and frozen runner form one command. The pair now has its two selected submissions.
+
+Direct MONITOR_ADD API delivery was accepted. Root subsequently supplied actual
+adoption: get_goal returned null, create_goal succeeded with active status and no
+token budget, and the I handle is in the active set. Supervisor/tmux are running,
+and actual admission passed. I_HANDOFF_RECEIPT.json preserves Root's receipt and
+its memory shorthand pending collection of exact physical/effective bytes.
+The 0.8-second adoption observation is charged once. I_MONITOR_DISPATCH.json
+preserves the exact goal-persistence and terminal-delivery instructions.
+
+The same DM resumes only on routed MONITOR_TERMINAL to collect and technically
+accept I, read the complete paired primary, and write the bounded B intake and
+owner brief. No routine polling or duplicate launch occurs. The source checkout,
+input directory and both supervisor records remain necessary until complete
+collection and preservation; DM owns their subsequent scoped cleanup. The shared
+local codex/fsd checkout remains in use. There is no full-pair observation yet.
+
+Current primary-control owner reviews were empty and the FSD audit rows carried
+no owner override at this handover boundary. This is technical continuation of
+the accepted card, with no new scientific selection or owner-console item.
