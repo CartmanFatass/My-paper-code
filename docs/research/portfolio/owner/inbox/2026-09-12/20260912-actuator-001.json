@@ -1,0 +1,74 @@
+{
+  "id": "20260912-actuator-001",
+  "created": "2026-09-12T15:17:23-07:00",
+  "direction": "actuator_conditioned_partial_sharing",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "ACPS 首个异质能力共享配对",
+  "context": "同等118维输入下，以1340个能力残差参数比较完整共享DENSE。一次有限配对，不能证明稳定优势或机制归因。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行已拨款的一次完整配对及收集验收。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "应用明确异步指令，保留已有证据并返回方向需求。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "修改被指出的具体冲突，在下一边界处理。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "执行已接受的Portfolio有限投资，强共享比较器和原生后果保持一致。",
+  "evidence": [
+    "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_SCIENCE_CARD_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#ACPS-B01",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按 Portfolio 已拨款执行 ACPS 首个有限配对：按物理能力分配少量残差参数，是否胜过同等信息的完整共享策略？",
+    "changes_if_approved": [
+      {
+        "target": "ACPS-B01",
+        "from": "已注册并拨款，尚无实现或结果",
+        "to": "固化比较器和指标，实施一次两臂训练及最终评价"
+      }
+    ],
+    "if_refused": "在下一个干净边界应用明确的异步指令；保留已经产生的证据，不自行重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md",
+        "quote": "Fund ACPS-B01: physical heterogeneity and partial sharing",
+        "why": "Portfolio 已明确选择新方向、比较器和本次完整投入。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_SCIENCE_CARD_20260912.md",
+        "quote": "the strongest countercase is that informed SHARED already adapts, while adapters waste data or hurt optimization.",
+        "why": "结构合理并不保证有限训练受益；同等信息共享基线可能已经足够。"
+      }
+    ],
+    "uncertainty": [
+      "新异质执行主机的收益、用时和匹配调优余量尚无实测。",
+      "一个配对只能支持本实例的完整方法比较，不能证明稳定优势或机制原因。"
+    ],
+    "cost": {
+      "compute": "两臂各450秒；native900秒、support900秒、完整1800秒，均为新的硬投入上限。",
+      "owner_time": "无需等待回复，保留异步干预。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "按已接受的 Portfolio 决策执行一次 ACPS-B01 配对，保持强比较器、完整学习及最终32个评价；不追加实验。",
+    "source": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_SCIENCE_CARD_20260912.md"
+  },
+  "starred": false
+}
