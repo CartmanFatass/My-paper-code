@@ -157,20 +157,4 @@ This completed allocation makes no direction-stop decision.
 
 ## Direction-local input to the current Portfolio author
 
-Root's designated author added FSD to a separate, still-unfrozen Portfolio
-investment packet and requested a concrete next-use recommendation from these
-already accepted facts. The DM recommends at most one new original-Convergence
-use judgment: should this complete I1280 package enter the same-host optional
-learning-scheme set, retaining authentic D0 and explicitly labeling cost/outcome
-variation, or remain exploratory evidence without more unchanged-package spend?
-There is no ready new B object and no extra observation is a prerequisite to
-this limited judgment. A later empirical proposal must name a concrete use
-decision that its observation would change.
-
-The strong alternative is no new use consultation or unchanged-package funding
-in this Portfolio decision, until an actual new use supplies a specific
-comparison question. That avoids repeated investment and does not itself stop
-FSD. Complete consultation cost is unmeasured; it is not described as cheap.
-This is a recommendation to the designated author only: the old S=no provides
-no authority, and no new question, Pro Send, numerical analysis, code or
-scientific invocation was executed. Portfolio retains its decision authority.
+The current three-choice input is [FSD_POST_FIVE_PAIR_DECISION_INPUT_20260912.md](FSD_POST_FIVE_PAIR_DECISION_INPUT_20260912.md). Root requested a more concrete next-use comparison after cleanup; it recommends one fresh I5/D0-long10 B proposal, retains the evidence-only USE judgment and investment HOLD as alternatives, and names all changed comparator/cost meanings. This replaces the earlier use-judgment-only recommendation in the still-unfrozen Portfolio preparation. No funding, lifecycle, new Pro Send, code or scientific invocation is selected by this intake. The five accepted results and completed N allocation are unchanged.
