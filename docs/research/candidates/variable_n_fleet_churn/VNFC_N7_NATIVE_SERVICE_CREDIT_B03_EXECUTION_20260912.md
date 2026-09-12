@@ -42,3 +42,9 @@ Accepted handles go directly to the current primary-control Monitor. Dispatch an
 actual active-goal adoption are recorded separately. No routine DM status loop follows
 adoption; Monitor sends terminal facts through Root, which resumes this DM for collection,
 technical acceptance, scientific intake and cleanup. No automatic retry/successor is selected.
+
+Exact scientific source is `b93329b3c44ea9d0cf5622c00f5ca6eea0740dac`. The committed execution-input record
+contains the literal supervisor command, new identities,69 source paths and all
+time/admission boundaries. The conservative import closure includes optional code
+only as source; it launches no extra component and imposes no extra science condition.
+The source set is about1.31MB locally. No prelaunch scientific construction occurred.
