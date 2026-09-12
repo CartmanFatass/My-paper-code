@@ -47,8 +47,8 @@ nonzero; exact cancellation leaves parameters fixed. Both derivatives use the
 same 64-episode graph and complete 26,161-scalar FP64 inventory; shared tensors
 receive both contributions once, and the ordinary baseline update follows.
 There is no factor 100. Near cancellation or a weak noisy channel can receive
-the full step, so this is an untested allocation heuristic rather than a repair
-or an unbiased reformulation. Native reward, available information, physical
+the full step, so the tested recipe remains an allocation heuristic without an
+identified conflict-repair or unbiased-reformulation claim. Native reward, available information, physical
 survivor/newcomer/departure ownership and four-tick claims remain protected.
 
 B06 remains one valid fit with Delta_ref=-.00575764973958 and
@@ -57,17 +57,20 @@ five reference F harms and 2012/2048 failure-coded tau40 outcomes. Earlier W100/
 native learning and four B06 initialization-cell gains are the strongest support
 against a broad unlearnability claim. Supplied-prior competence, finite exposure,
 update allocation and partner co-adaptation remain alternatives; no current cause
-is identified. B07 now supplies one complete final1000 fit and its own-initialization
-contrast G_U=-.000205485026042 (conditional interval spans zero), with both primary
-paths negative and three other cell improvements. Five U, four F and one
-failure-coded tau cell worsen. The reference stopped at a roster-column check,
-so Delta_ref and the complete service comparison remain unavailable.
-[Partial E0](RCLE_B07_EQUAL_UNIT_PARTIAL_EVIDENCE_20260912.md) and
-[intake/repair decision](RCLE_B07_EQUAL_UNIT_PARTIAL_INTAKE_20260912.md) preserve
-the valid narrower observations and the unknown failure cause. The next missing
-discriminator is the fixed reference panel against this retained fit, with its
-same .05 U MEI, conditional uncertainty and absent tuned-headroom record. A scoped
-eager-snapshot alternative is prepared; it is not a proven cure or another fit.
+is identified. B07 now supplies the complete one-fit final1000 comparison:
+Delta_ref=-.008841959635417 (conditional95%[-.012610153128903,-.005073766141930])
+and G_U=-.000205485026042 (conditional interval spans zero). Both primary paths
+and all eight reference U cells are negative; six reference F cells and two
+failure-coded tau cells worsen. Three cells improve over initialization, while
+five U/four F/one tau cells worsen. The [complete E0](RCLE_B07_EQUAL_UNIT_RESULT_EVIDENCE_20260912.md)
+and [intake](RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md) accept a local reference deficit,
+no positive aggregate learning claim and mixed native consequences under the .05 U
+MEI. This is one training realization, without normalization-vs-joint100 attribution,
+stable superiority/degradation, equivalence or a family verdict. Tuned headroom
+remains absent. The original reference-column failure is retained separately; one
+authorized eager-reference completion supplies the fixed missing panel, without
+identifying a fault cause or global cure. That discriminator is complete and the
+named allocation ends; no further discriminator or successor is allocated here.
 The historical sections below preserve the earlier objects and their own limits.
 
 ## Portfolio recast — 2026-08-30

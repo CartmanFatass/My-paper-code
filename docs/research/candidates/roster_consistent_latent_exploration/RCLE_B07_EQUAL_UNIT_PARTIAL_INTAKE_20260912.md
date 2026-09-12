@@ -1,5 +1,9 @@
 # RCLE B07 partial intake and reference-path repair decision
 
+This preserves the partial boundary. The authorized reference-only completion and
+combined final reading are now accepted in the [complete intake](RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md).
+The original failure, observations and authorization sequence below remain evidence.
+
 ## What was checked and accepted
 
 Read the fixed B07 card, original direction/Portfolio scope, actual terminal
