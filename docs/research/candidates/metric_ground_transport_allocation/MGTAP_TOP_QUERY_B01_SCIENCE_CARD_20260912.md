@@ -172,3 +172,10 @@ rather than change the comparison or leave this grant unused. Owner-delegated
 decision (unattended, 2026-09-03 instruction): bind8221. Applicable current owner
 reviews returned[] at main2492dcb06. Scope section4:none; no scientific execution
 occurred while preparing this card.
+
+Execution clarification from Root: the one-time Portfolio discovery intake/registration/
+control-plane application cost belongs to ACPS support, not T. T retains its own
+direction-specific preparation and later Root integration once; unknown tails remain unknown.
+Technical acceptance before the sole native launch is recorded in
+[top8221 technical acceptance](top_query_b01_20260912_8221/TECHNICAL_ACCEPTANCE.md),
+including the accepted independent review and sole remote encoder fixture.
