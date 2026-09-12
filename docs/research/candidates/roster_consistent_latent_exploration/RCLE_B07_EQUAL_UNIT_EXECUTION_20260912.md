@@ -1,7 +1,7 @@
 # RCLE B07 execution and technical acceptance
 
-Current boundary: one detached supervisor submission is accepted. Monitor dispatch
-is accepted; actual unfinished-goal adoption and terminal collection remain pending.
+Current boundary: one detached supervisor submission and actual unfinished Monitor
+goal adoption are accepted. The same DM retains terminal collection and intake.
 There is no accepted scientific result or successor.
 
 The [card](RCLE_B07_EQUAL_UNIT_SCIENCE_CARD_20260912.md) binds fresh
@@ -114,8 +114,12 @@ receipt and direct Monitor dispatch to the live01a095d0-21ee-7c02-9d97-3681b5678
 Main owner reviews were empty immediately before submission. The payload explicitly
 requires get_goal/continue-or-create without budget, retention through accepted
 terminal delivery, actual unfinished-goal MONITOR_ADOPTED and final
-MONITOR_GOAL_COMPLETE. App delivery was accepted. Actual adoption, destination
-admission and terminal evidence remain pending; no duplicate polling/submission
-is commissioned. Root forwards the actual goal receipt and resumes this same
-DM for collection on the terminal event. Source and command are ready for Root
+MONITOR_GOAL_COMPLETE. App delivery was accepted. Root subsequently forwarded
+actual adoption: Monitor created an unbudgeted unfinished goal, observed running
+pid3377723, and confirmed the exact source/cwd/output/supervisor binding. This
+receipt was recorded at2026-09-12T17:28:21Z; the observation timestamp, goal ID and
+command-wall cost were not supplied and are not invented. Destination admission
+and numerical artifacts await terminal collection; no duplicate polling/submission
+is commissioned. Root resumes this same DM for collection on the terminal event.
+Source and command are ready for Root
 integration without touching the active exact-source checkout.
