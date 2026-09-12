@@ -1,0 +1,15 @@
+{
+  "event": "fsd-uav-renewal-batch-b02-771203-I-20260912-exit0",
+  "route": "Root native terminal fact",
+  "handle": "fsd-uav-renewal-batch-b02-771203-I-20260912",
+  "status": "finished",
+  "exit_code": 0,
+  "pid": 3384259,
+  "tmux_active": false,
+  "supervisor_duration_seconds": 1043,
+  "reported_complete": true,
+  "reported_failure": null,
+  "cwd": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912",
+  "source_sha": "9eb99f8b68dd2863212c10693b911746a6d24354",
+  "goal_completion": "Root reported active_set empty, terminal delivered and no pending notice."
+}

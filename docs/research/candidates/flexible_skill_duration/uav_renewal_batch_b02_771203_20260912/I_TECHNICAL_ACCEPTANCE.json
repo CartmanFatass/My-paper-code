@@ -1,0 +1,70 @@
+{
+  "status": "accepted_complete_I_and_pair",
+  "accepted_utc": "2026-09-12T19:01:22.979980+00:00",
+  "source_sha": "9eb99f8b68dd2863212c10693b911746a6d24354",
+  "counts": {
+    "model_constructions": 2,
+    "training_starts": 1,
+    "checkpoint_loads": 0,
+    "training_transitions": 40000,
+    "stored_training_transitions": 40000,
+    "training_episodes": 80,
+    "update_stages": 5,
+    "training_agent_step_batches": 2500,
+    "evaluation_steps": 16000,
+    "evaluation_episodes": 32,
+    "evaluation_agent_step_batches": 500
+  },
+  "optimizer_calls": {
+    "coordinator": 360,
+    "discoverer_actor": 11250,
+    "discoverer_critic": 11250,
+    "team_discriminator": 75,
+    "individual_discriminator": 300
+  },
+  "evaluation_optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 0,
+    "discoverer_critic": 0,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "all_training_measurements_finite": true,
+  "training_rows_match_original_jsonl": true,
+  "all_modules_moved": true,
+  "initial_relative_displacement_final": {
+    "coordinator": 0.042565534368372605,
+    "discoverer_actor": 0.42249762580528133,
+    "discoverer_critic": 0.16492505047597214,
+    "team_discriminator": 0.026857654461241002,
+    "individual_discriminator": 0.047727352445150015
+  },
+  "process_cost": {
+    "elapsed_seconds": 1042.92,
+    "peak_rss_kib": 3476952.0,
+    "user_seconds": 4082.84,
+    "system_seconds": 47.15,
+    "exit_status": 0.0
+  },
+  "admission": {
+    "assessed_at": "2026-09-12T18:40:07.629746Z",
+    "available_physical_bytes": 15629242368,
+    "captured_at": "2026-09-12T18:40:07.629475Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15629242368,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "pair_integrity_source_function_matches_publication": true,
+  "raw_archive": "docs\\research\\candidates\\flexible_skill_duration\\uav_renewal_batch_b02_771203_20260912\\I_collection.tar.gz",
+  "raw_archive_sha256": "5258371b2e9d36467439f5b290a53563321781388d671c0ac0001626a0cf5d6e",
+  "decision": "Owner-delegated decision (unattended,2026-09-03 instruction): accept complete pair with partial support telemetry and apply frozen above_mei rule.",
+  "limit": "Conditional episode uncertainty; one independent learning pair; no stable or isolated mechanism claim."
+}

@@ -3,7 +3,8 @@ Binding MARL structure: (b) temporal abstraction or termination; asynchronous in
 
 # FSD B02 / 771203 — newly allocated fourth package pair
 
-**B/EXPLORE; prospective, no output observed.** Portfolio D is PRO_FINAL /
+**Complete B/EXPLORE; valid `above_mei`; prospective definition below preserved.**
+Portfolio D is PRO_FINAL /
 OWNER_DELEGATED in response ed1d519c60fde333609c00fd207d5bd0a3e3f507 and
 [the accepted decision](../../portfolio/decisions/2026-09-12-two-remaining-chains.md).
 Root explicitly designated /root/dm_fsd_d_pair for this complete independent
@@ -131,3 +132,16 @@ Object options: (a) bind and execute this allocated unchanged pair; (b) return a
 concrete required binding/admission/cost limitation. Recommend/select(a), with
 the stated boundary. **Owner-delegated decision (unattended, 2026-09-03
 instruction): (a).** Owner flag:none. Owner reviews at preparation were [].
+
+## Accepted result boundary — 2026-09-12
+
+The complete allocated pair gives I−D0+.012554805665750726 J,19 positive/13
+adverse contrasts, conditional episode SE .01250683666255726. The original
+above_mei branch applies; proximity to the threshold is retained. Both arms
+are complete/exit0, native wall475.03/1042.92s,total1517.95s. The prospective
+low-confidence prediction is correct; owner prediction not taken. This is
+another small local package gain with partial support telemetry, not stable
+advantage. [Result](FSD_UAV_RENEWAL_BATCH_B02_771203_RESULT_EVIDENCE_20260912.md)
+and [intake](FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md) preserve all
+outcomes and the finite no-successor boundary. Cleanup follows retained-evidence
+acceptance; no extra measurement is allocated.

@@ -76,5 +76,15 @@
     "verdict_text": "Recommend/select(a), with the stated boundary.",
     "source": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_SCIENCE_CARD_20260912.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T19:07:50+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "唯一新训练对完成：I−D0 +.0125548，略过.01门槛；19正13负，保留条件不确定性。完整原生1517.95秒，支持计时仍不完整。有限分配结束，清理待保全接收。"
+    }
+  ]
 }

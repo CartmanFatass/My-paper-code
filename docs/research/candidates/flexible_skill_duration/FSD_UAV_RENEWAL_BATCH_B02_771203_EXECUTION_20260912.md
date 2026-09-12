@@ -1,7 +1,8 @@
 # FSD B02 / 771203 â€” execution
 
-State: D0 completed and technically accepted; its preselected I1280 detached
-submission is accepted; actual fresh unfinished Monitor goal adoption confirmed. Owner /root/dm_fsd_d_pair, shared authoring checkout
+State: both arms complete and technically accepted; scientific intake above_mei.
+Both Monitor goals completed. Four remote cleanup targets await retained-evidence
+acceptance; no successor allocation. Owner /root/dm_fsd_d_pair, shared authoring checkout
 C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd. Input sync16930177f includes
 Root-assigned bd5fd849a;14748d304 reconciles auto-merged legacy control-only
 differences back to that current Windows input, preserving old commits in history.
@@ -132,3 +133,22 @@ use the correct771203 path. I_MONITOR_ADOPTION.json records this fact.
 DM retains collection/intake/cleanup and resumes on terminal facts without
 duplicate routine observation or launch.
 All required source/output/supervisor paths remain retained for I and collection.
+
+## Complete paired intake and closeout inventory
+
+I finished exit0 in1042.92s whole-command wall. Both complete fits and sole
+final panels pass technical acceptance; source-defined paired publication agrees
+with independent reduction. Primary I−D0+.012554805665750726 J, conditional
+episode SE .01250683666255726,19 positive/13 adverse. Apply original above_mei;
+low-confidence DM prediction correct, owner prediction not taken. The complete
+intake and E0 record preserve component/training contradictions and claim ceiling.
+
+D0/I native475.03/1042.92s,sum1517.95s; aggregate CPU5999.42s. Supervisor
+elapsed path1798s includes the inter-arm collection gap. Native caps pass;
+partial support measurement does not certify complete300/3000s compliance.
+Both actual Monitor goals completed with terminal delivery and active_set empty.
+D0 and I raw archives retain all22 original files and match current remote bytes.
+The exact source worktree is clean except six known ignored result files; both
+terminal PIDs/tmux are absent. CLEANUP_INVENTORY.json identifies this worktree,
+input root and two supervisor roots for DM removal after Root retention
+acceptance. Shared authoring and old evidence are outside cleanup.
