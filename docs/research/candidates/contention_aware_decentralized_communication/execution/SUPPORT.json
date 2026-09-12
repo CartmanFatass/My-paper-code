@@ -32,14 +32,22 @@
     "intake_accounting_document_check": 0.4060635,
     "root_integration_read": 0.2428229,
     "result_intake_commit_push": 5.1116084,
-    "retained_evidence_ignore_inventory": 0.229588
+    "retained_evidence_ignore_inventory": 0.229588,
+    "raw_archive_publish_readback": 5.7973584,
+    "post_intake_checkout_status": 0.2026976,
+    "cleanup_assignment_inventory_read": 0.1240565,
+    "main_archive_retention_verification": 0.2938413,
+    "remote_terminal_ownership_and_archive_precheck": 0.7138297,
+    "cleanup_owner_reviews": 0.3411383,
+    "scoped_removal_and_receipt_heredoc_error": 0.925611,
+    "read_only_removal_receipt_recovery": 0.6822887
   },
-  "selected_command_sum_seconds": 59.2393039,
+  "selected_command_sum_seconds": 68.3201254,
   "additional_canceled_network_operation_observed_lower_bounds_seconds": {
     "non_login_git_fetch": 100,
     "non_login_promisor_checkout": 76
   },
-  "known_support_lower_bound_seconds": 235.2393039,
+  "known_support_lower_bound_seconds": 244.3201254,
   "coverage": "Partial support lower bound. Canceled-command terminal tails and additional read/edit/Git/agent/provider/Monitor/Root integration/final publication/cleanup costs are unknown or not fully measured; do not treat omissions as zero. Sum of invoked command wall is not elapsed study critical path.",
   "hard_support_cap_seconds": 900,
   "hard_native_cap_seconds": 1200,
@@ -57,5 +65,6 @@
     "cap_breach_observed": false,
     "savings_fungible": false
   },
-  "pending_cleanup": "Four exact remote terminal roots await Root integration/retention before scoped removal. Local creator synthetic scratch deletion rejected by runtime policy; no bypass."
+  "pending_cleanup": "All four remote terminal roots removed with verified disk/worktree-registration absence after Root main retention9111b9b1e/363bda2a0. Only separately policy-rejected local creator synthetic scratch remains unresolved; this follow-up was remote-only.",
+  "remote_closeout_receipt": "execution/CLEANUP_RECEIPT.json"
 }

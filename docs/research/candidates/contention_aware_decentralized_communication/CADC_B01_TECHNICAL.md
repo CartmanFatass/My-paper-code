@@ -1,6 +1,6 @@
 # CADC-B01 technical acceptance
 
-DM: `/root/dm_cadc_start`; checkout `C:/Projects/HMASD-worktrees/codex-cadc`, branch `codex/cadc`, source base `2492dcb06`. The exact scientific contract is [CARD](CADC_B01_CARD.md). Implementation, focused synthetic checks and both complete native arms are technically accepted. Adjacent admission, actual Monitor goal adoption, authoritative terminal delivery and DM collection are distinct retained facts. The [scientific intake](CADC_B01_INTAKE.md) accepts the complete paired ADVERSE observation; [scoped cleanup](CADC_B01_CLEANUP.md) remains pending Root integration/retention.
+DM: `/root/dm_cadc_start`; checkout `C:/Projects/HMASD-worktrees/codex-cadc`, branch `codex/cadc`, source base `2492dcb06`. The exact scientific contract is [CARD](CADC_B01_CARD.md). Implementation, focused synthetic checks and both complete native arms are technically accepted. Adjacent admission, actual Monitor goal adoption, authoritative terminal delivery and DM collection are distinct retained facts. The [scientific intake](CADC_B01_INTAKE.md) accepts the complete paired ADVERSE observation. Root integrated/retained the evidence; [four-target remote cleanup](CADC_B01_CLEANUP.md) is complete. The separate local scratch policy restriction remains recorded below.
 
 ## Independent high-risk review
 
@@ -24,4 +24,4 @@ Own scratch is exactly `C:/Projects/HMASD-worktrees/codex-cadc/temp/directions/c
 
 Known command support, canceled network-operation lower bounds and actual native cost are maintained in [SUPPORT](execution/SUPPORT.json). Other read/edit/worktree/Git/model-tool/provider/Root and cleanup coverage is incomplete; it is not zero. Worktree creation's observed tool elapsed was7.9s, not interchangeable with a verified command-only total. Complete support/grant compliance remains uncertified. Root's shared registration/application attribution is once to ACPS support, unknown unless measured; CADC excludes that item and includes its own later Root integration once. Native savings cannot increase support.
 
-Both source22e009c93 arms ended COMPLETE/exit0 with retained native rows/checkpoints and no extra fit, retry or Pro Send. Scope-spec source/runner/test bounds passed. Preservation and the inventoried cleanup remain the DM's engineering work; finite completion does not park or release the ACTIVE direction.
+Both source22e009c93 arms ended COMPLETE/exit0 with retained native rows/checkpoints and no extra fit, retry or Pro Send. Scope-spec source/runner/test bounds passed. Evidence preservation and the four-target remote cleanup are complete; only separately policy-restricted creator scratch remains unresolved. Finite completion does not park or release the ACTIVE direction.
