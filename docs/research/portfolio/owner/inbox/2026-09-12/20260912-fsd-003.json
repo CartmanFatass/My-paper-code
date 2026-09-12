@@ -92,6 +92,14 @@
       "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
       "state": "applied",
       "summary": "第五组有效完成：I−D0 +.07380J，26正6负，超过.01；两臂完整1446.79秒，I约2.15倍D0耗时。混合历史和训练中段劣势保留，不宣称稳定优势。原始证据已保全，等待Root接收后执行四处清理；本次拨款结束不停止FSD，不自动追加第六组。"
+    },
+    {
+      "at": "2026-09-12T21:55:11+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "Root已保全两份归档及22份原始文件；本组四处终态目录完成清理，磁盘与worktree注册均不存在，两项supervisor返回not_found。共享检出与其他163项注册保留。本组有效增益+.07380及限制不变，N收尾完成，FSD继续。"
     }
   ]
 }

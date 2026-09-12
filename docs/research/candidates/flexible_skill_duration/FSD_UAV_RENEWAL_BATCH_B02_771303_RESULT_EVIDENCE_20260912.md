@@ -127,6 +127,10 @@ D0_collection.tar.gz and I_collection.tar.gz preserve all 22 original raw files.
 Their published Git blobs match both archives and the collected digests;
 RETENTION_CHECK.json records that verification at 476e2e64a. The exact source
 worktree is clean with only the six known ignored outputs. CLEANUP_INVENTORY.json
-names four terminal remote targets, with removal pending Root's retained-evidence
-acceptance. Shared authoring and shared remote source remain in use and outside
-cleanup. No new experiment or scientific consultation is included in N closeout.
+names four terminal remote targets now removed after Root retained all evidence
+at main 18d7a02f8. Both archives and all 22 raw blobs were reread from that
+accepted commit and every remote digest matched before removal.
+CLEANUP_RECEIPT.json verifies all four disk/Git-registration absences, both
+supervisor status not_found and absent PIDs/tmux. The other 163 worktree
+registrations and shared authoring/remote source remain intact. No new experiment
+or scientific consultation occurred in N closeout; FSD continuity is unchanged.
