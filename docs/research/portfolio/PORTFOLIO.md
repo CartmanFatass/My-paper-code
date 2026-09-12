@@ -1,5 +1,11 @@
 # HMASD Research Portfolio
 
+OWNER_DIRECT 2026-09-12: Windows control and research are resumed under new Root.
+See [current recovery record](decisions/2026-09-12-windows-root-resumption.md) for routing,
+actual assignments and the FOLR support-reference clarification. It supersedes the
+handoff-only pause and older execution counts below; scientific limits remain scoped.
+
+
 ## Owner handoff-only boundary — 2026-09-11 PDT
 
 **OWNER_DIRECT: “后续不要再开启新的DM 现有DM进入handoff”.** Root stops new DM
