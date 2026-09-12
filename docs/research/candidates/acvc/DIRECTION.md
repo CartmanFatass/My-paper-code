@@ -32,8 +32,11 @@ accepts this bounded package result and records the frozen C as consumed, withou
 The subsequent original-Convergence comparison of training through fixed F versus training C,
 both deployed through F, received Portfolio F funding and is now complete as one matched B pair.
 It yields **DOWN**, treatment−control−0.026096212471464608J (conditional SE0.007136541708512396;
-43/64 adverse worlds). Train-C→deploy-F stays the current reference for this bounded use.
-This is one training replication; no stable cross-training effect or mechanism diagnosis follows.
+43/64 adverse worlds). A separately funded unchanged B02 pair also gives **DOWN**,
+−0.05734219575429114J (conditionalSE0.009421918606720191;50/64 adverse worlds).
+These are two separate pair observations, not a pooled primary or stable population effect.
+Train-C→deploy-F stays the reference; another adverse instance strengthens advice against
+more unchanged training-F spending without closing ACVC or diagnosing its mechanism.
 The [training-use intake](ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md) preserves all outcomes.
 Three fresh development fits and the older E01 observations
 on two selected retained bases remain development evidence, outside C01. The learned selective-retrace
@@ -87,15 +90,21 @@ explicit working model. The claim remains tied to five complete independent fit-
 units, final-only evaluation and the exact native task/learner law. Its adverse individual
 worlds preclude universal benefit, and unequal private interventions leave motion
 suppression plus recurrent/teammate trajectory feedback as a surviving explanation.
-The original Convergence node's selected training-use discriminator is now a complete
-one-pair B result under the .01J practical margin. Final common-F mean J is0.2975423661208032
+The original Convergence node's selected training-use discriminator first completed as a
+one-pair B result under the .01J practical margin. Final common-F mean J was0.2975423661208032
 after C training versus0.27144615364933855 after F training, so the fixed training change
 does not add useful return on this pair. Strongest support for retaining the reference is
-the complete real-learning comparison with43 adverse worlds;21 favorable worlds and only
-one training replication bound any broad negative. Unequal own-history interventions and
-actor/recurrent/teammate feedback remain inseparable explanations. The allocation ends here,
-with no retry, new consultation or successor. An independently funded matched recurrence
-could later test repeatability if the proper node selects it; none is selected locally.
+the complete real-learning comparison with43 adverse worlds;21 favorable worlds bounded
+any broad negative. New Portfolio A then funded exactly one unchanged recurrence pair:
+control0.26573916727242164 versus treatment0.20839697151813052J,50 adverse/14 favorable worlds.
+The second DOWN point supports the same bounded reference recommendation, while only two
+training pairs and favorable worlds preclude stable/general harm. No historical pooling,
+vote rule or family/Portfolio disposition is applied. Unequal own-history interventions
+and actor/recurrent/teammate feedback remain inseparable explanations. The new allocation
+ends with complete intake and scoped cleanup; no third pair, consultation or successor.
+That allocation boundary is preserved in the [B02 intake](ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md).
+The subsequent original Convergence decision selects the distinct cluster-law deployment-use B
+described below; its complete empirical investment remains the next required authority.
 
 Exact binding remains a useful protocol primitive. Neither historical learner object nor the
 new native comparisons support adaptive ACVC superiority over their strongest competent fixed control.
@@ -538,10 +547,51 @@ cost pilot or Innovator follows. The next observation would be the complete pair
 endpoint, not more C01 evaluation. Recasts:2, lowest-contention status and the ended T/G and
 uncertain/delayed families remain; no Portfolio lifecycle change or formal UAV entry occurs.
 
+### Post-two-training-use Convergence — accepted 2026-09-12
+
+The original node's complete [response](pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md)
+at `15c56cc40c56d2edb6e8c9a1a217a994f30cb3fc`, accepted in the
+[full intake](pro_packets/20260912_post_two_training_use_convergence/INTAKE.md), selects
+one distinct cluster-law deployment-use B: a freshly C-trained DENSE endpoint followed
+by C, fixed F and own-predicate dwell on three private 64-world final panels. Both training
+and evaluation use the existing cluster generator while five UAVs/fifty users, H256,
+private GRU64, legal information/reward/action and the 512-episode/1,024-Adam exposure remain.
+This is a selected next object and precise future investment need; no new result exists.
+
+The practical question is whether the useful local deployment correction remains useful
+under concentrated service geometry. C01's qualified positive package comparison supports
+that question. Useful dwell, adverse C01 worlds, unequal private histories and the two
+training-use DOWN observations are its strongest contrary evidence. A local lost anchor
+may be beneficial team handoff; cluster may change cue eligibility or the value of correction.
+A full 20-row list suppresses the existing current-loss predicate, but no increased saturation
+or particular cluster effect has been observed. Ordinary C or dwell may remain sufficient.
+
+Retain separate F-C and F-dwell means with the task-specific 0.01 J practical margin and
+descriptive checkpoint-conditional spread. These are B readings, not a joint C certification;
+three panels do not create independent training replications. The complete three-panel
+pattern decides bounded usefulness on this fitted instance. No pure-retrace attribution,
+history necessity, zero-shot transfer, stable/general benefit or formal UAV entry follows.
+
+The next discriminator is this one real cluster C-fit plus its final three panels after
+actual full-path investment and technical acceptance. A small direction-local factory must
+preserve shared uniform defaults and feed every train/evaluation construction. No census,
+matched-dose reconstruction, new learning objective, third unchanged training-F pair or
+automatic extra consultation is selected. The current direction continues under OWNER_DIRECT;
+completed allocations did not stop it. The response makes no new recast, family reopening,
+Portfolio lifecycle/priority change, numeric grant or unseen implementation acceptance.
+
 ## Evidence set
+
+- `docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md`
+- `docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE.md`
+- `docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE_FACTS.json`
 
 - `docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/archive/RESPONSE.md`
 - `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_SCIENCE_CARD_20260912.md`
+- `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_SCIENCE_CARD_20260912.md`
+- `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_RESULT_EVIDENCE_20260912.md`
+- `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md`
+- `docs/research/candidates/acvc/training_use_b02_20260912/paired_analysis.json`
 - `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_RESULT_EVIDENCE_20260912.md`
 - `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md`
 - `docs/research/candidates/acvc/training_use_b01_20260912/paired_analysis.json`

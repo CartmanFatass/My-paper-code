@@ -26,10 +26,22 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 
 ## Position
 
-- Scheme ladder D0 to D8 and the B-class experiment ladder E0 to E6 are fixed in
-  `docs/Claude_docs/plans/FLEXIBLE_SKILL_DURATION_PLAN_20260902.md` (§3, §5, §11). The first object is D2 (policy-based interruption); D0 (fixed `k`) is the comparator; D1 (age-conditioned discriminator at fixed `k`) is the control arm; D8 (the `(z, k)` menu) is kept only as a comparator.
-- Theory ceiling (evidence spec §11.2): a suboptimality bound for the implemented rule against the best fixed `k` on the corridor host, stated with its assumptions; no invariance proof, no semigroup claim.
-- Claim ceiling now: B — EXPLORE. Promotion to C-BENCH only after E3 or E4 repeats across three to five seeds (plan §5).
+- Current claim ceiling is B — EXPLORE. The complete native I1280/authentic-D0
+  package has five separate observations: four above-MEI and one opposite-sign.
+  The latest 771303 pair is +.0737976492 J, with 26 positive/6 adverse endpoint
+  contrasts and about 2.15× D0 wall. It remains a valuable optional learning
+  route under OWNER_DIRECT 2026-09-12. Stable advantage and renewal/batching
+  attribution remain unresolved. The current bounded claim and next practical
+  decision are in [the fifth-pair intake](FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md).
+  Finite N closeout changes no direction lifecycle and allocates no sixth pair.
+- C-BENCH requires the evidence and prior Innovator decision appropriate to its
+  actual claim. Evidence §11.8 supplies no fixed seed-count or all-positive
+  prerequisite, and no C promotion is selected here.
+- The earlier D0–D8 / E0–E6 corridor ladder and its conditional fixed-k theory
+  target remain historical provenance in
+  `docs/Claude_docs/plans/FLEXIBLE_SKILL_DURATION_PLAN_20260902.md` (§3, §5, §11).
+  They create no proof or automatic advancement requirement for the current
+  native package question.
 
 ## Accepted mechanism-level science (2026-09-05)
 
@@ -637,6 +649,33 @@ renewal, transfer or safety claim follows. Evidence:
 `FSD_UAV_RENEWAL_BATCH_B02_771203_RESULT_EVIDENCE_20260912.md` and
 `FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md`.
 
+## Accepted fifth UAV package observation (2026-09-12)
+
+The new 771303/781303 I1280/authentic-D0 pair is valid B/EXPLORE with native
+I−D0 +.0737976491890039 J, D0 .4208673476989198 and I .4946649968879237.
+The frozen above_mei rule applies; 26 worlds are positive and six adverse,
+with conditional episode SE .013052781584169226 for one trained pair.
+This adds optional-package support without a stable population claim.
+
+Higher coverage, higher quality and lower altitude penalty account for the
+native gain; sampled I training remains lower on rollouts 2–4. I has 42,750
+training gap causes and 24,818 joint rows versus D0 0/4,000, with 315 versus
+525 coordinator steps. The final I panel has only two extra individual gap
+causes. Data/credit, grouping, learning-instance variation and learned spatial
+behavior remain causal alternatives; endpoint duration and tuned same-information
+headroom remain unmeasured. A sparse event count does not establish attribution.
+
+The prior +.2062859041 and this gain are strongest support; the unchanged
+−.0124304306, current six adverse worlds, training deficits and 2.15342× D0
+wall oppose broad benefit. All five results and older batch128 losses retain
+separate meanings. The surviving practical discriminator is optional-use value
+against authentic D0 given the cost and variation. It needs a proper scoped
+next decision, not an automatically repeated pair or exhaustive reconstruction.
+The owner-selected direction continues. No sixth pair, new consultation, C
+promotion, default switch or mechanism-causal claim follows from this grant.
+Evidence: [result](FSD_UAV_RENEWAL_BATCH_B02_771303_RESULT_EVIDENCE_20260912.md)
+and [intake](FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md).
+
 ## Objects and their state (2026-09-12)
 
 | Object | State | Record |
@@ -660,6 +699,7 @@ renewal, transfer or safety claim follows. Evidence:
 | UAV renewal batch B02 / 771003 | complete valid B, one new I1280/D0 pair; native+.2062859041 above+.01,32 positive contrasts;1607.92s arm wall, partial support telemetry; no successor selected | `FSD_UAV_RENEWAL_BATCH_B02_771003_RESULT_EVIDENCE_20260911.md`; `FSD_UAV_RENEWAL_BATCH_B02_771003_INTAKE_20260911.md`; card§7 |
 | UAV renewal batch B02 / 771103 | complete valid B, one new I1280/D0 pair; native −.0124304306 under opposite_sign, 16 positive/16 negative; 1495.25 s native wall, partial support telemetry; no successor | `FSD_UAV_RENEWAL_BATCH_B02_771103_RESULT_EVIDENCE_20260911.md`; `FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md`; card §8 |
 | UAV renewal batch B02 / 771203 | complete valid B, one new pair; native+.0125548057 above_mei,19 positive/13 adverse,1517.95s native wall; partial support telemetry, finite grant ends with no successor | `FSD_UAV_RENEWAL_BATCH_B02_771203_RESULT_EVIDENCE_20260912.md`; `FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md`; current card |
+| UAV renewal batch B02 / 771303 | complete valid B; native +.0737976492 above_mei, 26 positive/6 adverse, 1446.79 s native wall; partial support telemetry; finite N closeout preserves direction continuity | `FSD_UAV_RENEWAL_BATCH_B02_771303_RESULT_EVIDENCE_20260912.md`; `FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code

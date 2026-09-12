@@ -1,0 +1,113 @@
+{
+  "conversation_binding_key": "em:acvc:convergence",
+  "workflow_node": "em_convergence",
+  "direction_id": "acvc",
+  "decision_authority": "pro_final",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "provider_url": "https://chatgpt.com/c/6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "schema_version": 4,
+  "direction_ids": [
+    "acvc"
+  ],
+  "request_id": "2026-09-12-acvc-post-two-training-use-convergence-01",
+  "packet_id": "2026-09-12-acvc-post-two-training-use-convergence-01--acvc",
+  "packet": {
+    "packet_id": "2026-09-12-acvc-post-two-training-use-convergence-01--acvc",
+    "canonical_form": "logical_packet_manifest",
+    "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-12-acvc-post-two-training-use-convergence-01\\2026-09-12-acvc-post-two-training-use-convergence-01--acvc__PACKET_MANIFEST.json"
+  },
+  "source_thread_id": "01a095be-63c8-7c23-8384-edaf74dcb154",
+  "creator_thread_id": "01a095be-63c8-7c23-8384-edaf74dcb154",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "operator_thread_id": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+  "return_route": "PARENT_SESSION",
+  "tab_id": null,
+  "tab_lifecycle": "CLOSED",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "75ba6621d0073019e06f59abc2f6094f567396261cf19c3be677107ab8793370",
+  "reference_files": [],
+  "state": "ARCHIVED",
+  "send_click_count": 1,
+  "monitor": {
+    "identity_key": "2026-09-12-acvc-post-two-training-use-convergence-01|em:acvc:convergence|6aa12e74-8e54-83e8-95f6-001681b456f7|https://chatgpt.com/c/6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "provider_url": "https://chatgpt.com/c/6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "last_observed_url": null,
+    "last_observed_state": null,
+    "last_observed_at": null,
+    "cursor": null
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a095be-63c8-7c23-8384-edaf74dcb154",
+    "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+    "destination_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-12-acvc-post-two-training-use-convergence-01|acvc|6aa12e74-8e54-83e8-95f6-001681b456f7|78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\PROMPT_BODY.md",
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\GITHUB_RESPONSE.md",
+      "short_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\RESPONSE.md",
+      "short_receipt_sha256": "4a32206bba1c466f5ac9cd1c0ba575cfbbb3014d1150e08c81c48e7d0c54fac2",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\TRANSPORT_FACTS.json",
+      "github_response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\GITHUB_RESPONSE.md",
+      "github_response_sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+      "github_commit": "15c56cc40c56d2edb6e8c9a1a217a994f30cb3fc",
+      "response_sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb"
+    },
+    "response_sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+    "staged_at": "2026-09-12T21:03:54Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted_by_codex_app",
+    "updated_at": "2026-09-12T21:04:09Z",
+    "sent_at": "2026-09-12T21:04:09Z"
+  },
+  "archive": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\PROMPT_BODY.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\GITHUB_RESPONSE.md",
+    "short_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\RESPONSE.md",
+    "short_receipt_sha256": "4a32206bba1c466f5ac9cd1c0ba575cfbbb3014d1150e08c81c48e7d0c54fac2",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\TRANSPORT_FACTS.json",
+    "github_response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\GITHUB_RESPONSE.md",
+    "github_response_sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+    "github_commit": "15c56cc40c56d2edb6e8c9a1a217a994f30cb3fc",
+    "response_sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb"
+  },
+  "response_sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+  "updated_at": "2026-09-12T21:03:54Z",
+  "user_message_id": "cbd324f2-37a1-4975-a026-1880cee17529",
+  "assistant_message_id": "4edf6a43-14e6-414c-91aa-5075005364ba",
+  "timestamps": {
+    "send_attempted_at": "2026-09-12T20:55:00Z",
+    "completed_at": "2026-09-12T21:08:00Z",
+    "captured_at": "2026-09-12T21:08:00Z",
+    "archived_at": "2026-09-12T21:03:54Z"
+  },
+  "delivery": {
+    "mode": "github",
+    "commit": "15c56cc40c56d2edb6e8c9a1a217a994f30cb3fc",
+    "github_response_sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+    "note": "Natural completion; immutable GitHub response and Issue #14 comment verified."
+  },
+  "archive_status": "ARCHIVED",
+  "_snapshot_scope": {
+    "source": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/registry.json bindings[em:acvc:convergence]",
+    "included": "current request fields at intake",
+    "excluded_historical_or_operational_fields": [
+      "request_history",
+      "quarantined_provider_conversations",
+      "pending_context_reset",
+      "last_provider_context_reset",
+      "tab_lease",
+      "heartbeat"
+    ],
+    "preservation": "Original control registry and prior archives remain unchanged; no historical response or evidence is deleted."
+  }
+}

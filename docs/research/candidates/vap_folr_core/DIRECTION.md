@@ -19,15 +19,26 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 ## Scientific question
 
-The formal scientific question is the source-defined question for this direction; this bootstrap does not broaden or replace it. The source-grounded current-position statement is: “Early typed-state evidence is retained, but later objects are non-identifying and DEARS is cleaner.”
+The current question is whether organizing a continuing agent's legally available
+history under physical membership change improves finite-learning native
+coordination over competent generic recurrence. Each accepted object fixes its
+own information interface and comparison; the latest entity-history opening
+below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
-The current learned-event package position is the accepted post-B03 Convergence
-hold below: use event-aware RETAIN and do not retain another unchanged pair as
-the current funding candidate. This holds only the tested public-lifecycle
-5000-training/128-final recipe; broader FOLR questions and Portfolio fields are
-unchanged. Earlier accepted findings below retain their own host and claim scope.
+The latest accepted scope is the 2026-09-12 OPEN of one observer-owned entity-
+history-before-aggregation B family against equally informed generic RETAIN on
+an explicitly lifecycle-identity-visible native Traffic Junction variant. This
+selects a concrete new question, not a direction RECAST or empirical result.
+The next need is a finite implementation-and-one-pair investment through the
+proper route; current scope does not itself fund implementation or an experiment.
+
+The accepted post-B03 H still holds the exact tested LEARNED_EVENT/5000-training/
+128-final package, retaining event-aware RETAIN and no currently recommended
+fourth unchanged pair. That package hold does not stop FOLR. All B01-B03,
+earlier narrow pauses, recast history and Portfolio fields remain unchanged.
+Earlier accepted findings below retain their own host and claim scope.
 
 The following bootstrap sentence is historical provenance, not the current synthesis.
 
@@ -846,3 +857,79 @@ References:
 - `FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md`
 - `FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md`
 - `FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md`
+
+## Accepted entity-history continuity scope — 2026-09-12
+
+**Conclusion (scope, not a performance result).** Original-node Convergence
+selects and narrowly OPENs a new B family comparing observer-owned entity
+history before aggregation with fresh, adaptive generic RETAIN. This is within
+FOLR's physical-history/recovery programme, not a direction RECAST or a reopening
+of LEARNED_EVENT. The full response passed original-author scientific/spec
+intake. The exact scalar-package H, all B01-B03 observations, older pauses,
+recast history and Portfolio fields remain unchanged.
+
+**Accepted mechanism and information.** Both actors receive an explicitly new,
+idealized public channel: stable five-slot labels, active flags and per-slot
+birth/departure facts at the completed native-transition boundary, including
+initial occupancy and same-step replacement. The whole table reaches the
+generic comparator even for unseen subjects. Actor physical position/target/
+previous-action features remain limited to that observer's local sight. Both
+have the same observer-derived visibility/seen/primitive-age indicators; no
+other observer's mask, hidden state or critic-only feature is publicized.
+
+The selected treatment uses one shared GRU16 cell per observer-subject entry,
+including self, and replaces the pooled recurrent stage. Each entry carries
+only its observer's past permitted observations of that physical subject.
+Observer and subject continuation jointly cut state/temporal gradients; visible
+entries update pointwise, unseen continuing entries carry without fabricated
+observations, and reappearance in the same trip resumes them. Subject end or
+replacement clears its column; observer birth or replacement clears its row.
+Local seen/age bookkeeping obeys the same boundaries.
+
+One observer-local attention query reads its live, previously seen entries,
+with a direct current-visible-feature path and stale/visibility indicators,
+then a feedforward 64-to-five-Q readout. There is no additional pooled GRU,
+cross-observer attention or recurrent communication sweep. RETAIN keeps its
+ordinary locally masked attention and 64-coordinate own-trip GRU with the full
+same information. The existing native actions/reward/twenty-tick host and
+value-learning structure remain the reference; each arm needs its own fresh
+fit and own online/target history reconstruction. Old checkpoints are not this
+new-interface comparator.
+
+**Bounded claim.** This is a prospective whole memory-organization package
+question, with unmatched width/readout/optimization arrangements. No bank
+benefit, component cause, necessity, exact containment, complete causal
+forgetting, original-CAMA equivalence, tuned headroom, transfer or C/UAV claim
+is established. The truthful public announcements are an explicit new task
+assumption, not unchanged decentralized deployment feasibility. A five-by-five
+bank also establishes no large-population scaling result.
+
+**Strongest support and contradiction.** A separately associated local history
+could affect a continuing car's native move/wait choice after visibility change
+or replacement; the source confirms that the old actor aggregates before its
+GRU. This is an untested opportunity, not proof of a generic defect. The strongest
+opposition is B04's competent generic learner and within-MEI typed increment,
+plus the short native horizon and reobserved own position/target. Generic
+recurrence may already suffice, and the bank may add stale-information or
+optimization cost. Old signed scalar observations remain evidence about their
+own package only.
+
+**Next discriminator and actual boundary.** The selected next investment need
+is one bounded implementation/technical-acceptance batch and one matched real
+BANK/RETAIN pair, with sampled final full-episode native return. Source-sized
+5000 train/128 final per arm and inclusive absolute MEI 1 are prospective
+reference sizing/reading, not a frozen card or issued grant. A gain would
+support considering bounded independent follow-up; inside/adverse evidence
+would favor the generic package at that observation's scope. No branch funds
+an automatic successor or stops FOLR. Complete implementation, per-arm wall,
+support, memory and agent/provider costs are unknown; no old cap transfers.
+The present OPEN authorizes no implementation, scientific identity, test or
+experiment. Root receives the decision-ready finite investment need through
+the existing Portfolio route, without another Convergence consultation.
+
+References:
+
+- `pro_packets/20260912_entity_history_continuity/archive/RESPONSE.md` at immutable commit `3bc6fb929f43463eddd37dc4584951896c08fe3e`
+- `pro_packets/20260912_entity_history_continuity/INTAKE.md`
+- `FOLR_ENTITY_HISTORY_CONTINUITY_QUESTION_20260912.md`
+- `pro_packets/20260912_entity_history_continuity/FACTS.json`

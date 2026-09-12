@@ -1,0 +1,103 @@
+{
+  "request_id": "2026-09-12-new-direction-discovery-01",
+  "checked_at_utc": "2026-09-12T21:53:37.815774+00:00",
+  "fixed_TASK_sha": "bed3743d9406ba75bcad5984c336e6859226d60d",
+  "response_sha": "b793cf69b4935306708ad744b355acc4d5b33712",
+  "response_path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md",
+  "response_bytes": 80107,
+  "response_lines": 312,
+  "response_sha256": "30d24b57ae8c3260dc103007d1cd427a2b630973c6851948aeed3597a12caba6",
+  "root_integrated_archive_sha": "c869ecbb9",
+  "full_read": "Body lines1-249 plus all references251-312 read in bounded chunks; whole-file first display was truncated and not treated as complete reading",
+  "bound_reference_count": 59,
+  "response_effective_reference_count_excluding_task": 59,
+  "exact_manifest_match": true,
+  "issue_comment": {
+    "id": 5648907275,
+    "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5648907275",
+    "created_at": "2026-09-12T21:47:16Z",
+    "updated_at": "2026-09-12T21:47:16Z",
+    "body": "Delivered the complete new-direction discovery/registration and separate MGTAP TOP investment decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/b793cf69b4935306708ad744b355acc4d5b33712/docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/bed3743d9406ba75bcad5984c336e6859226d60d/docs/research/portfolio/pro_packets/20260912_new_direction_discovery/delivery/TASK.md\n\nAll 312 lines, including the fixed-reference definitions, were read back. Delivery commit b793cf69b4935306708ad744b355acc4d5b33712 adds only the specified response file on codex/portfolio, verified against its actual parent 8415aff78b3c042e5ba2fa6127123576d9aec5b6. The shared branch advanced normally after the earlier pre-write read; those intervening commits were preserved and are not changes made by this delivery.\n\nNo scientific execution, registry/control-state or source/card edit, main write, new branch, or rewrite of earlier responses was performed. The response distinguishes selected registrations and prospective funding from implementation acceptance and actual execution; it preserves existing direction continuity and N/R."
+  },
+  "receipt_provenance": "Root authoritative immutable Transport receipt: one confirmed Send and natural completion; original-author did not operate or observe browser",
+  "proposed_configuration_arithmetic_checked": {
+    "old_registry": {
+      "active": 15,
+      "parked": 7
+    },
+    "new_registry": {
+      "active": 17,
+      "parked": 10,
+      "total": 27
+    },
+    "ACPS": {
+      "new_adapter_parameters": 1340,
+      "fits": 2,
+      "training_episodes": 1024,
+      "final_episodes": 64,
+      "team_ticks": 278528,
+      "Adam_calls": 2048,
+      "collection_eval_actor_rows": 1392640,
+      "train_replay_actor_rows": 5242880,
+      "complete_cap_s": 1800
+    },
+    "CADC": {
+      "fits": 2,
+      "team_ticks": 278528,
+      "Adam_calls": 2048,
+      "sender_tick_opportunities": 1392640,
+      "complete_cap_s": 2100
+    },
+    "TRDL_unfunded": {
+      "team_ticks": 393216,
+      "Adam_calls": 256,
+      "final_returns": 512,
+      "tail_members_per_arm": 64
+    },
+    "CPCP_unfunded": {
+      "team_ticks": 655360,
+      "Adam_calls": 8192,
+      "actors": 8,
+      "critics": 8,
+      "independent_method_bundle_pair": 1
+    },
+    "LCAC_unfunded": {
+      "team_ticks": 278528,
+      "counterfactual_critic_rows": 4587520
+    },
+    "MGTAP_T": {
+      "complete_cap_s": 1200,
+      "native_cap_s": 900,
+      "support_hard_cap_s": 300
+    },
+    "funded_total_future_invoked_cap_s": 5100
+  },
+  "new_scientific_exposure": {
+    "models": 0,
+    "scientific_rng": 0,
+    "fits": 0,
+    "episodes": 0,
+    "optimizer_calls": 0,
+    "environment_ticks": 0,
+    "numeric_outcome_reanalysis": 0,
+    "tests": 0,
+    "experiments": 0,
+    "author_Pro_Sends": 0
+  },
+  "owner_prediction": "not taken",
+  "source_access_limit": "Provider detailed GitHub reads and local-primary-extract usage are reported provenance; author checks exact mapping/full scientific response, not every provider tool event",
+  "later_independent_need": "ACVC K/FOLR E/RCLE L/FSD use request remains separate and unsent; this response grants none of them",
+  "owner_current_item": {
+    "id": "20260912-root-016",
+    "path": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-016.json",
+    "ledger_rows": [
+      90,
+      91
+    ]
+  },
+  "owner_prior_proposal_trace": [
+    "20260912-root-012",
+    "20260912-root-013"
+  ],
+  "conformance": "complete; no concrete conflict; PRO_FINAL / OWNER_DELEGATED applied in science/decision records, Root integration/dispatch pending"
+}

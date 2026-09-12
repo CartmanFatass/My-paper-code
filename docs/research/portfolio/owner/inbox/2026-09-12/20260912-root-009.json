@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "am",
-  "auto_applied": null,
+  "auto_applied": "am",
   "dm_reason": "执行完整符合规范的Portfolio最终选择；M接近取舍和A alone/H强反方保留，不添加逐项批准层。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/INTAKE.md"
@@ -101,6 +101,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-12-post-cfr-marginal-investment.md",
       "state": "planned",
       "summary": "新A/M一pair的符合规范最终选择，两个独立DM派发就绪；当前0/5，实际start由Root记录，Q无新款。"
+    },
+    {
+      "at": "2026-09-12T19:47:38+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/PREPARATION_INTAKE.md",
+      "state": "applied",
+      "summary": "Root已在maincf7bd424f集成A/M最终决定，并在main9be8873d16dc7080cf51ee8c8172c4fc32c8a1b6记录ACVC A、MGTAP M独立开始：实际2/5。此trace只确认授权应用和派发开始，不声称两pair完成；Q=no与全部上限/停止边界保持。"
     }
   ]
 }
