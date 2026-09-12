@@ -1,0 +1,84 @@
+{
+  "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
+  "recorded_utc": "2026-09-12T02:35:22.352273+00:00",
+  "caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "native_sum": 2700,
+    "support": 300,
+    "one_source_delivery_transaction": 45,
+    "complete": 3000
+  },
+  "charges": [
+    {
+      "purpose": "read new accepted Assignment 1 and live control settings",
+      "wall_seconds": 0.3961478
+    },
+    {
+      "purpose": "read reused FSD source, exact transaction and complete work law",
+      "wall_seconds": 0.351979
+    },
+    {
+      "purpose": "check current authority differences, Portfolio row and owner reviews",
+      "wall_seconds": 0.512121
+    },
+    {
+      "purpose": "read changed-contract review, owned source area and unchanged delivery helper",
+      "wall_seconds": 0.2631468
+    },
+    {
+      "purpose": "reconcile current committed authority in reused direction checkout",
+      "wall_seconds": 0.8765088
+    },
+    {
+      "purpose": "preserve every audit row and publish required-input reconciliation merge",
+      "wall_seconds": 4.5744856
+    },
+    {
+      "purpose": "prospectively reconcile and bind fresh 771103 identities with exact unchanged commands/counts",
+      "wall_seconds": 2.6121851
+    },
+    {
+      "purpose": "write fresh card appendix and complete execution/handover contract",
+      "wall_seconds": 0.2042468
+    },
+    {
+      "purpose": "independent Astra/high reviewer three bounded read commands",
+      "wall_seconds": 0.8423783
+    },
+    {
+      "purpose": "single new-binding forwarding/AST/command check and independent review acceptance",
+      "wall_seconds": 0.2469108
+    },
+    {
+      "purpose": "recover accepted preparation state and owner-item insertion contract",
+      "wall_seconds": 0.3151998
+    },
+    {
+      "purpose": "read accepted new card, exact commands and append location",
+      "wall_seconds": 0.188951
+    },
+    {
+      "purpose": "read authoritative owner reviews before new card freeze",
+      "wall_seconds": 0.3543611
+    },
+    {
+      "purpose": "complete accepted new card and command read with UTF-8 output",
+      "wall_seconds": 0.198909
+    },
+    {
+      "purpose": "freeze fresh card owner packet/audit and initial support record",
+      "wall_seconds": 0.3976958
+    }
+  ],
+  "known_support_wall_seconds": 12.3352267,
+  "counting": "Each outer invoked support interval once; nested clocks are explanatory, not additive. This file's own write and later publication/execution are charged at the next record.",
+  "new_scientific_submissions": 0,
+  "new_source_delivery_transactions": 0,
+  "unknown": [
+    "future native realization",
+    "future support including integration, observation, collection and cleanup",
+    "any unmeasured external contribution is not zero"
+  ],
+  "claim": "Prospective partial support accounting; not a final cap certificate."
+}
