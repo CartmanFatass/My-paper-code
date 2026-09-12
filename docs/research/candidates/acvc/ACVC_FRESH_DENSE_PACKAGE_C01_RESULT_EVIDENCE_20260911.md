@@ -10,7 +10,7 @@ The frozen reading is: “For each primary use exactly `mean_r ± scipy.stats.t.
 | 2 | 11477 / 24930 | complete, preserved, technically accepted | 0.110783589817 | 0.084918936207 | 0.025864653610 | 168.51 s | 171 s |
 | 3 | 18150 / 21370 | complete, preserved, technically accepted | 0.096548149142 | 0.058262606480 | 0.038285542662 | 175.29 s | 178 s |
 | 4 | 12604 / 21030 | complete, preserved, technically accepted | 0.103648259406 | 0.070756277866 | 0.032891981540 | 166.65 s | 169 s |
-| 5 | 14295 / 23946 | fixed, unsubmitted | — | — | — | — | — |
+| 5 | 14295 / 23946 | accepted, monitored; collection pending | — | — | — | — | — |
 
 ## Unit 1: direct facts and technical acceptance
 
