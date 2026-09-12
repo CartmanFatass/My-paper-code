@@ -1,0 +1,66 @@
+{
+  "object": "ACVC_CLUSTER_DEPLOYMENT_B01",
+  "grant": {
+    "main": "665f704f7",
+    "mapping": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/EXECUTION_MAPPING.md",
+    "item": "K"
+  },
+  "author_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+  "branch": "codex/acvc",
+  "input_sync_commit_exclude_from_root_cherry_pick": "a78ea1f3c338f507440063e2619b8098206e2210",
+  "master": 21457,
+  "evaluation_namespace": 31457,
+  "caps_seconds": {
+    "whole_supervised_task": 600,
+    "cumulative_runtime_support": 600,
+    "complete_charge": 1200
+  },
+  "planned_counts": {
+    "training_episodes": 512,
+    "rollouts": 256,
+    "optimizer_steps": 1024,
+    "training_team_steps": 131072,
+    "evaluation_episodes": 192,
+    "evaluation_team_steps": 49152,
+    "total_team_steps": 180224
+  },
+  "exposure_line": "One real DENSE actor/critic initialization, 655360 training actor rows and 1024 full-rollout Adam calls are admitted; retain machine-produced final parameter displacement relative to initialization scale. Zero initial/extra evaluation or training-F exposure.",
+  "projection": {
+    "native_seconds": null,
+    "support_seconds": null,
+    "law_record": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_READINESS_20260912.md#runner-law-projection-and-support",
+    "unknown_rates_no_calibration_required": true
+  },
+  "support": {
+    "known_invoked_seconds": 7.2642474,
+    "known_components": [
+      {
+        "stage": "grant read/fetch",
+        "seconds": 2.4233954
+      },
+      {
+        "stage": "focused rules/source and old-route read",
+        "seconds": 0.328311
+      },
+      {
+        "stage": "input synchronization commit",
+        "seconds": 0.6142371
+      },
+      {
+        "stage": "input synchronization push",
+        "seconds": 3.8983039
+      }
+    ],
+    "coverage": "Known returned command walls only; other read/edit/client/provider/deliberation tails are unmeasured. No complete cost claim or zero fill."
+  },
+  "source_sha": null,
+  "acceptance": "pending focused checks and independent high-risk review",
+  "remote_worktree": null,
+  "launch": null,
+  "monitor_adoption": null,
+  "status": "card bound and implementation prepared; no scientific invocation accepted",
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-acvc-005.json",
+  "audit_row": "docs/research/portfolio/audit/2026-09-12.md#L116",
+  "stop": "one original invocation only; no retry/extra fit/panel/consultation",
+  "retention": "previous C01/B01/B02 evidence and shared checkout preserved; collect unique new checkpoint before scoped cleanup"
+}
