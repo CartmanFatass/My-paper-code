@@ -1,0 +1,23 @@
+{
+  "source_sha": "9eeef867f0adcf6d9a8ca9441781ad4ec2764a30",
+  "command_commit": "2c4777901c93527415f2adf6ff53232eb3b1cc37",
+  "handle": "rcle-b07-reference-completion-s27-20260912",
+  "exit_code": 0,
+  "stdout": "Task 'rcle-b07-reference-completion-s27-20260912' started in tmux session 'agent_rcle-b07-reference-completion-s27-20260912'. Output: /home/wu/.agent-tasks/rcle-b07-reference-completion-s27-20260912/task.log\n",
+  "stderr": "",
+  "submission_wall_s": 0.8037886000238359,
+  "enclosing_submission_command_wall_s": 1.0518815,
+  "monitor": {
+    "thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+    "dispatch_accepted": true,
+    "dispatch_elapsed_s": 0.154,
+    "actual_goal_adoption": "PENDING_ROOT_FORWARD",
+    "terminal": "PENDING"
+  },
+  "authority": "Root original-R logical-invocation reconciliation after main71198147e; exactly one reference-only completion",
+  "fits_added": 0,
+  "native_total_cap_s": 900,
+  "support_cap_s": 600,
+  "complete_object_cap_s": 1500,
+  "actual_admission": "pending terminal receipt; destination-adjacent admit-memory is in the exact command"
+}

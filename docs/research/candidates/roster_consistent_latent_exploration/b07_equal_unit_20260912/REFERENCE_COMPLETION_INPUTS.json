@@ -1,5 +1,5 @@
 {
-  "status": "ROOT_RECONCILED_AUTHORIZED_STAGED_NOT_YET_SUBMITTED",
+  "status": "ROOT_RECONCILED_SINGLE_SUBMISSION_ACCEPTED_MONITOR_GOAL_PENDING",
   "source_sha": "9eeef867f0adcf6d9a8ca9441781ad4ec2764a30",
   "handle": "rcle-b07-reference-completion-s27-20260912",
   "cwd": "/home/wu/hmasd-worktrees/rcle-b07-reference-completion-s27-20260912",
