@@ -1,0 +1,101 @@
+{
+  "id": "20260912-root-005",
+  "created": "2026-09-12T10:20:39-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "两个空槽的边际选择：FSD、FOLR原问题、MGTAP或不追加",
+  "context": "C/R/F已独立推进。作者建议新D+P，明确承认FSD第四pair和FOLR咨询可能价值有限；M刚被no且无新结果，只是明确重新申请。最终选择交同一Portfolio节点。",
+  "options": [
+    {
+      "key": "d_p",
+      "label": "FSD一pair加FOLR一次原咨询",
+      "consequence": "新D3000秒加完整成本未知的一次P；没有第四FOLRpair。"
+    },
+    {
+      "key": "d_m",
+      "label": "FSD和MGTAP各一pair",
+      "consequence": "新D3000+M1200秒，两不可互转的B；M须本次明确重新选择。"
+    },
+    {
+      "key": "subset",
+      "label": "只选一个或其他至多两项明确子集",
+      "consequence": "只承担明确选中单位，不生成后备或剩余款。"
+    },
+    {
+      "key": "hold",
+      "label": "不追加",
+      "consequence": "C/R/F继续；本次新工作零分配，不改变生命周期。"
+    }
+  ],
+  "recommended": "d_p",
+  "auto_applied": null,
+  "dm_reason": "FSD仍有两次同包实际增益，FOLR新B03需要有限用途判断；M无新数据且H节约所有新增成本，是有保留的建议。",
+  "evidence": [
+    "docs\\research\\portfolio\\pro_packets\\20260912_two_remaining_chains\\SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs\\research\\portfolio\\audit\\2026-09-12.md#L27",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "C/R/F 已独立推进、当前 3/5 时，是否另外资助至多两项：FSD 新一 pair、FOLR 一次原节点收口问题、重新申请的 MGTAP pair，或不追加？",
+    "changes_if_approved": [
+      {
+        "target": "FSD D",
+        "from": "当前 I1280 包三次完整 pair 已结束；无第四 pair 款",
+        "to": "建议新买一 unchanged I1280/authentic D0 pair 及全部必要接续；D0 900/I 1800/native 2700/support 300/完整 future 3000 秒，source delivery 45 秒含 support。"
+      },
+      {
+        "target": "FOLR P",
+        "from": "B03 为 RETAIN_ABOVE_MEI，原款结束；尚无 post-B03 方向选择",
+        "to": "建议新买一次原 Convergence 及完整 intake，决定仅当前 learned 包的收口或保留未资助候选；零实现/数值，完整成本未知。"
+      },
+      {
+        "target": "MGTAP M 与 H",
+        "from": "上一轮 M=no；未出现新 M 结果",
+        "to": "M 仅明确重新申请新 1200 秒 pair 作为备选；H不追加。两者都不自动成为失败后的后备。"
+      }
+    ],
+    "if_refused": "现有 C/R/F 各自继续，不变更其款额、优先级和边界。Pro可选更小子集或H；空位、失败和清理不触发备用款或重复咨询。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/SCIENCE_BRIEF.md",
+        "quote": "The current I1280 object is an accepted in-family package. Its completed grant\nhas no successor, but it is not the old batch128 family held by P74.",
+        "why": "存在明确同机制 B，不能用旧窄停放当成当前全方向阻塞。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/SCIENCE_BRIEF.md",
+        "quote": "B03 is the resulting new\nobservation and its grant has ended.",
+        "why": "FOLR原节点曾要求的一个观察现已到达，可判断当前包是否仍有追加价值。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/SCIENCE_BRIEF.md",
+        "quote": "No M empirical fact\nhas changed since that choice.",
+        "why": "健康执行和空槽不构成推翻 M 刚被 no 的新证据。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/SCIENCE_BRIEF.md",
+        "quote": "The strongest objection to P is that RETAIN already remains default and there\nis no current fourth-pair allocation.",
+        "why": "咨询可能只重述既有 no-spend；第四 FSD 也无法给稳定总体结论，H合理。"
+      }
+    ],
+    "uncertainty": [
+      "D 是第四个独立配对，是否值得继续同host可选方案是边际判断，不是 seed quota 或稳定性证明。",
+      "P 完整纪录/命令/provider/agent成本未知；D+P 是 3000 秒加未知，不能当 3000 秒完整总价。",
+      "M无新经验输入；再次投资只能源自本次明确Pro判断，不是上次未用预算。",
+      "所有22方向缺匹配当前host调优headroom；不增加先求 exact upper、全故障归因或cost试验。"
+    ],
+    "cost": {
+      "compute": "作者零实验/Send。D新future上限3000秒；M新1200秒；P一次原咨询/full intake完整成本未知。D+M=4200，D+P=3000+未知。旧款和已选C/R/F均不可转移。",
+      "owner_time": "无需逐项批准；完整同节点答复核对后Root独立执行，owner可异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "仅本次尚未分配的新D/P/M工作；运行中的C/R/F不等待。"
+    },
+    "verdict_text": "Author recommendation only: newly fund D (one unchanged FSD I1280/authentic-D0\ntraining pair) and P (one original FOLR post-B03 Convergence plus complete intake);\nhold renewed M (one unchanged MGTAP COND/DENSE pair). H makes no additions.",
+    "source": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/SCIENCE_BRIEF.md"
+  },
+  "starred": true
+}
