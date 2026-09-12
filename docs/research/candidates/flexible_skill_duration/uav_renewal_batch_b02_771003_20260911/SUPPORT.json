@@ -189,9 +189,25 @@
     {
       "purpose": "write bounded scientific intake, decisions and six-heading Chinese brief",
       "wall_seconds": 0.2459957
+    },
+    {
+      "purpose": "record accepted mechanism science, owner trace, audit and support state",
+      "wall_seconds": 0.6036828
+    },
+    {
+      "purpose": "check scientific record boundaries and publish complete evidence/intake before cleanup",
+      "wall_seconds": 5.6075314
+    },
+    {
+      "purpose": "verify published byte preservation and remove four exact terminal remote paths",
+      "wall_seconds": 1.4356217
+    },
+    {
+      "purpose": "record exact local policy cleanup blocker and read owner boundary",
+      "wall_seconds": 0.4818482
     }
   ],
-  "known_support_seconds": 89.53484780000001,
+  "known_support_seconds": 97.66353190000001,
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -210,7 +226,7 @@
     "returncode": 0,
     "count": 1
   },
-  "pending": "Final preservation/publication/integration and cleanup, plus unmeasured I terminal observation and relay-service attribution; shared query remains unallocated. This snapshot excludes its own command, retained for final closeout.",
+  "pending": "This final closeout publication, required terminal relay and its receipt publication/integration; unmeasured I terminal observation, relay service and rejected-command review overhead; unallocated shared 1.0-second query. Native pair and four-path remote cleanup are complete; local duplicate removal was policy-rejected.",
   "shared_observation": {
     "reported_by": "Root D0 terminal handoff",
     "wall_seconds": 1,
@@ -222,7 +238,7 @@
     "I": 1069.26
   },
   "native_wall_sum_observed_seconds": 1607.92,
-  "support_plus_native_known_seconds": 1697.4548478000002,
+  "support_plus_native_known_seconds": 1705.5835319,
   "root_support_receipt": {
     "reported_by": "Root at I terminal collection",
     "integration_enclosing_wall_seconds": 28.5,
@@ -241,5 +257,17 @@
     "scientific_effect": false
   },
   "resource_measurement_status": "resources_unmeasured for incomplete support attribution only",
-  "observed_cap_breach": false
+  "observed_cap_breach": false,
+  "local_cleanup_blocker": {
+    "action": "Remove the creator-owned local collection duplicate with native PowerShell Remove-Item -LiteralPath",
+    "path": "C:/Projects/HMASD-worktrees/codex-fsd/temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003_collection",
+    "outcome": "rejected before process creation",
+    "error": "exec_command failed: CreateProcess ... rejected: blocked by policy",
+    "attempts": 1,
+    "alternate_deletion_route_attempted": false,
+    "scientific_effect": false,
+    "measured_command_wall_seconds": null,
+    "cleanup_owner": "FSD DM",
+    "resume_event": "a permitted cleanup route or Root-approved retention disposition; no same-payload approval request made"
+  }
 }

@@ -116,9 +116,9 @@ Chinese owner brief:
 4. **Preservation/cleanup, technical.** Options: (a) preserve/publish unique
    source/evidence and remove the four completed owned remote paths; (b) retain
    only for live execution, delivery or unique-state dependency. Recommend(a)
-   under Root's assigned closeout. Inventory and byte preservation are verified;
-   final removal facts are appended when complete. Shared authoring checkout
-   remains in use.
+   under Root's assigned closeout. All four remote paths are removed and verified
+   absent. The small local duplicate remains after an explicit policy rejection;
+   no alternate deletion route was attempted. Shared authoring stays in use.
 
 **Owner-delegated decision (unattended, 2026-09-03 instruction): (a),
 `above_mei`, (a), and (a), respectively, at the execution states stated.**
@@ -148,3 +148,32 @@ Root confirms integration/retention and accepts reclamation. Final disk and
 worktree-registration absence will be recorded before declaring cleanup complete.
 The owned local collection copy is removable after verifying the preserved
 archives; the shared direction checkout stays intact.
+
+### Final remote cleanup and local policy limitation
+
+Published preservation commit522b7ba2bb9b7fb759d92604ad8fc37d345cbb69 contains
+both original binary collection archives and all readable result/intake records.
+Before removal, the archived Git blobs were read back, all22 raw files matched
+the retained bytes, source5250c4353 was confirmed as its ancestor, and both
+terminal supervisors had no active tmux session. At2026-09-12T00:42:47.610048Z,
+all four inventoried remote paths were absent on disk and the execution worktree
+was absent from Git registration. CLEANUP_FACTS.json preserves the completed
+remote operation and checks. The shared authoring checkout remains intact.
+
+The native PowerShell command to remove the creator-owned local collection
+was rejected before process creation: `exec_command failed: CreateProcess ...
+rejected: blocked by policy`. The command specified the exact literal target,
+containment checks and published archive verification. Its observed reason was
+only `blocked by policy`; no further reason is inferred. No alternate deletion
+route or repeated approval request followed. The retained path is
+C:/Projects/HMASD-worktrees/codex-fsd/temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003_collection,
+26 files/190929 bytes, a duplicate of the published archives. The FSD DM retains
+ownership of that cleanup gap; the next event is a permitted cleanup route or
+Root's recorded retention disposition. Remote cleanup is complete; all assigned
+cleanup is not declared complete while this local duplicate remains.
+
+This operational limitation changes no native measurement or scientific sign.
+Primary owner reviews were again[] at final closeout. Root receives the published
+intake and remote absence for integration/retention/reclamation acceptance.
+The complete-cost ledger keeps final publication and unmeasured observation/
+relay/review attribution explicit rather than treating missing terms as zero.

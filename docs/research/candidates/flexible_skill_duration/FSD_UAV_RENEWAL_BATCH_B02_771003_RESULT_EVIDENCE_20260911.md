@@ -136,3 +136,9 @@ Unknown observation costs do not enter the native primary. Evidence-spec
 bounded scientific result. No retry, new invocation, C consumption or
 retrospective change to an ended instance follows. The execution record and
 intake retain terminal receipts, decisions and final cleanup state.
+
+Final preservation: all22 raw files are retained in published commit522b7ba2b;
+all four remote execution/input/supervisor paths are absent and the detached
+worktree is unregistered. The190929-byte local collection duplicate remains
+after tool policy rejected its removal. See the intake and CLEANUP_FACTS.json;
+this cleanup limitation changes no scientific observation.

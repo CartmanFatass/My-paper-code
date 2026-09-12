@@ -1,7 +1,8 @@
 # FSD new771003 pair execution
 
-Both selected arms are terminal, collected and technically accepted. The valid
-paired intake is prepared; scoped preservation/cleanup is in progress.
+Both selected arms are terminal, collected and accepted with a valid paired
+intake. All four remote paths are removed; one local duplicate remains after
+an explicit policy rejection. No successor is selected.
 New B allocation under card§7 and Root's conformance-PASS dispatch.
 Reused authoring checkout C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd;
 reconciled base37d180f91621f065eaef19a194157f88826cebf2. The DM
@@ -189,3 +190,19 @@ A local document-writing command was rejected before process creation by Windows
 with `The filename or extension is too long. (os error 206)`. The same authorized
 document writes were split into smaller local operations and completed. This
 changed no source delivery, native invocation, result, budget or scientific sign.
+
+## Closeout: remote absence and local retention blocker
+
+Result/data/intake/brief and both raw archives were published in
+522b7ba2bb9b7fb759d92604ad8fc37d345cbb69. At2026-09-12T00:42:47.610048Z,
+after all22 raw files and source preservation were verified, the four exact
+remote paths were removed and disk/worktree-registration absence confirmed.
+CLEANUP_FACTS.json records this. No active/shared checkout was removed.
+
+The subsequent native PowerShell removal of the local collection duplicate was
+rejected before execution by tool policy: `blocked by policy`. No alternate
+removal route was attempted. The creator-owned collection directory under
+`temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003_collection`
+remains26 files/190929 bytes, already preserved in the published archives. DM
+retains the cleanup gap pending a permitted route or Root retention disposition.
+This does not change the valid above_mei result or release another invocation.
