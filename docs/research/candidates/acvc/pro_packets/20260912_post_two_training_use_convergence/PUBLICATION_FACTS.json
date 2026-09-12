@@ -1,0 +1,136 @@
+{
+  "request_id": "2026-09-12-acvc-post-two-training-use-convergence-01",
+  "input_sha": "5d756f3b16ba724115bcd03233f2f5f4cd6d7533",
+  "delivery_base_sha": "5d756f3b16ba724115bcd03233f2f5f4cd6d7533",
+  "references": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_TWO_TRAINING_USE_DIRECTION_QUESTION_20260912.md",
+      "commit_sha": "5d756f3b16ba724115bcd03233f2f5f4cd6d7533",
+      "published_ancestry_refs": [
+        "origin/codex/acvc"
+      ],
+      "exists": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/FACTS.json",
+      "commit_sha": "5d756f3b16ba724115bcd03233f2f5f4cd6d7533",
+      "published_ancestry_refs": [
+        "origin/codex/acvc"
+      ],
+      "exists": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "8f05e0d01ff829c8704f4ee08e29e451259ad237",
+      "published_ancestry_refs": [
+        "origin/codex/acvc"
+      ],
+      "exists": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md",
+      "commit_sha": "8f05e0d01ff829c8704f4ee08e29e451259ad237",
+      "published_ancestry_refs": [
+        "origin/codex/acvc"
+      ],
+      "exists": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md",
+      "commit_sha": "8f05e0d01ff829c8704f4ee08e29e451259ad237",
+      "published_ancestry_refs": [
+        "origin/codex/acvc"
+      ],
+      "exists": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md",
+      "commit_sha": "8f05e0d01ff829c8704f4ee08e29e451259ad237",
+      "published_ancestry_refs": [
+        "origin/codex/acvc"
+      ],
+      "exists": true
+    },
+    {
+      "path": "envs/pettingzoo/uav_env.py",
+      "commit_sha": "8f05e0d01ff829c8704f4ee08e29e451259ad237",
+      "published_ancestry_refs": [
+        "origin/codex/acvc"
+      ],
+      "exists": true
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "commit_sha": "8f05e0d01ff829c8704f4ee08e29e451259ad237",
+      "published_ancestry_refs": [
+        "origin/codex/acvc"
+      ],
+      "exists": true
+    },
+    {
+      "path": "experiments/candidates/acvc/native_link_loss_b01/binding.py",
+      "commit_sha": "8f05e0d01ff829c8704f4ee08e29e451259ad237",
+      "published_ancestry_refs": [
+        "origin/codex/acvc"
+      ],
+      "exists": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "f938006f1733365ce82b522a7be98d22f298554c",
+      "published_ancestry_refs": [
+        "origin/main"
+      ],
+      "exists": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "f938006f1733365ce82b522a7be98d22f298554c",
+      "published_ancestry_refs": [
+        "origin/main"
+      ],
+      "exists": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "f938006f1733365ce82b522a7be98d22f298554c",
+      "published_ancestry_refs": [
+        "origin/main"
+      ],
+      "exists": true
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "f938006f1733365ce82b522a7be98d22f298554c",
+      "published_ancestry_refs": [
+        "origin/main"
+      ],
+      "exists": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "f938006f1733365ce82b522a7be98d22f298554c",
+      "published_ancestry_refs": [
+        "origin/main"
+      ],
+      "exists": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/ISSUE_INPUT_SNAPSHOT.json",
+      "commit_sha": "5d756f3b16ba724115bcd03233f2f5f4cd6d7533",
+      "published_ancestry_refs": [
+        "origin/codex/acvc"
+      ],
+      "exists": true
+    }
+  ],
+  "manifest_exact_match": true,
+  "response_absent_before_dispatch": true,
+  "original_conversation_preserved": true,
+  "live_windows_routes_used": true,
+  "issue_status": "OPEN, seven retained delivery comments; new current prefix edited once",
+  "issue_readback_reconciliation": "Initial literal old-body substring assertion differed after Windows CRLF body-file serialization; fresh actual body equals the submitted body modulo CR normalization. Current prefix and prior discussion/comment content preserved; no second edit or provider Send.",
+  "science_or_runtime_exposure": 0,
+  "provider_access": "not independently observed; Pro must report actual access",
+  "task_publication": "TASK_NOT_PUBLISHED at this pre-publication check"
+}
