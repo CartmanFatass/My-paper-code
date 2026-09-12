@@ -1,6 +1,6 @@
 # Original-author preparation and boundary — 2026-09-12
 
-Root designated `/root/dm_a_mx_portfolio_resume` to author this one Portfolio-tier question. It now contains three separately decidable items: K ACVC selected cluster-use B, E FOLR selected entity-history B, and L RCLE current investment/lifecycle after a narrow recipe hold. This is a new request; the accepted discovery/MGTAP T question is not changed or resent.
+Root designated `/root/dm_a_mx_portfolio_resume` to author this one Portfolio-tier question. It now contains four separately decidable items: K ACVC selected cluster-use B, E FOLR selected entity-history B, L RCLE current investment/lifecycle after a narrow recipe hold, and U FSD same-host use judgment from five accepted pairs. This is a new request; the accepted discovery/MGTAP T question is not changed or resent.
 
 ## Actual reads and factual refresh
 
@@ -19,3 +19,9 @@ The ce9f9e7d4 push was rejected non-fast-forward because the accepted discovery 
 ## Recommendation versus authority
 
 Author recommends independent K and E finite B investments with explicitly chosen new caps, retaining ACVC's second-recast contention order, and one bounded original-DM L design unit. Alternatives and their opportunity/cost consequences are explicit in the brief. No disposition, card, seed, implementation, test, remote invocation, profiling, experiment or Pro Send is selected/executed by this author. Owner item is a planned recommendation under the existing delegation, not an auto-applied grant. At response arrival the same original author reads the entire immutable answer and checks exact source/question/current-owner/spec conformance; Root applies only a conforming explicit decision without per-item owner ratification.
+
+## Later current-input additions before TASK freeze
+
+Root added FSD after its fifth-pair intake. Read the complete771303 intake and current DIRECTION, then the original DM's direct use recommendation and its published5545f73218cd7827a151fa1cec4fbc2ef08e38d8 appendix/cleanup. No fresh outcome analysis or science was requested. U offers one new original-node optional-use judgment, not an automatic sixth fit or reuse of old S=no. Native1446.79s, partial support and all five separate signs are retained.
+
+The separate discovery/T immutable response subsequently received its authoritative receipt and complete original-author conformance at2f1ec644d3938919c881f5c876fc4c863b07bff5, delivered through Relay COMPLETE. Its five registrations, two new B grants and T investment now inform current marginal cost/priority without being folded into or re-decided by this new question. Required latest main/FSD inputs are preserved by ordinary merge2a49dbdac. Current registry is27(17ACTIVE/10PARKED), not a count of accepted runs. Four continuing old candidates remain independent.
