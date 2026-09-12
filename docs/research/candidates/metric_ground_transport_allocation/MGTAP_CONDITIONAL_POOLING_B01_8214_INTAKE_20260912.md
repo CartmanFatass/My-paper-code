@@ -143,3 +143,28 @@ absent; six ignored native files are accounted for. Root confirms integration/
 retention before this DM removes these four paths and verifies disk/registration
 absence. No deletion has occurred at this publication boundary. Shared authoring,
 cache, both retained archives and prior8213 inventory remain outside removal.
+
+## 6. Completed reclamation after Root retention
+
+Root integrated and pushed full evidence/intake at main
+3c5f5471fa386ea33b81888f9bad68b83ef238a4 and accepted both archives/all12 members
+for retention. Local archive bytes match those main Git blobs. Before removal,
+the remote source remained clean/exact; PID/tmux were absent; all12 raw members,
+four staged files and six ignored native files matched the accepted inventory.
+
+Exactly three remote directories (worktree/output, staging, supervisor) were
+removed; worktree registration and every target are verified absent. The local
+two-file source duplicate was separately hash-checked and removed through literal
+nonrecursive PowerShell paths; its directory and any registration are absent.
+The [remote](conditional_pooling_b01_8214_20260912/REMOTE_CLEANUP.json) and
+[local](conditional_pooling_b01_8214_20260912/LOCAL_CLEANUP.json) receipts record
+the operations; [combined receipt](conditional_pooling_b01_8214_20260912/CLEANUP_RECEIPT.json)
+closes all four named targets. Shared repositories/authoring, cache, retained
+native/supervisor archives and prior8213 inventory are intact. No policy rejection,
+additional scientific execution, retry or pending reclamation occurred here.
+
+[Support closeout](conditional_pooling_b01_8214_20260912/SUPPORT_CLOSEOUT.json)
+adds actual cleanup commands with the same unmeasured-tail qualification. The
+accepted positive local observation, DENSE default, earlier contradictory
+histories and missed/not-taken predictions are unchanged. Primary owner reviews
+were[] at cleanup entry. This new M grant is fully closed without a successor.

@@ -74,10 +74,11 @@ The complete native pair has now been collected and accepted: both512-train/
 All raw rows/checkpoints and terminal evidence are retained; see the
 [final intake](../MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md).
 
-Root has routed the terminal and Monitor empty-goal completion. It should now
-integrate final evidence/intake, accept retention and return the exact four
-cleanup targets to /root/dm_mgtap_m_pair. Scientific work is complete and no
-successor remains; shared authoring/cache and retained archives stay intact.
+Root routed the terminal/empty-goal completion, integrated final evidence/intake
+at main3c5f5471f and accepted retention. DM then removed all four exact duplicate
+targets and verified disk/registration absence in [cleanup receipt](CLEANUP_RECEIPT.json).
+Scientific work and assigned cleanup are complete with no successor; shared
+authoring/cache and retained archives stay intact.
 
 The single accepted handle contains COND then DENSE under one adjacent admission,
 as fixed in the original cost law. Root's forwarded text called it COND and

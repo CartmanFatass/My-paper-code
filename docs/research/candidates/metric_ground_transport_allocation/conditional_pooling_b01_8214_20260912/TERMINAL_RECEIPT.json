@@ -25,5 +25,6 @@
   "delta": 0.02447811898058116,
   "conditional_se": 0.004658159652932406,
   "new_scientific_invocations_after_terminal": 0,
-  "cleanup": "four scoped targets pending Root retention confirmation"
+  "cleanup": "complete: all four assigned duplicate targets absent; evidence/shared authoring/cache retained",
+  "cleanup_receipt": "CLEANUP_RECEIPT.json"
 }
