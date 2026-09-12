@@ -27,7 +27,7 @@ FSD第五pair已完整intake且scoped cleanup完成；ACVC、FOLR、RCLE与FSD�
 | [eociv_lite](../candidates/eociv_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
 | [expressibility_gated_renewal_credit_relay](../candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
 | [FRRIE](../candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md) | P59已intake；P63 source-only九frame映射完成，factory fault仍未归因，P63未运行。 | 无；本轮没有新增拨款。 | 可信最小观察/替代执行路径及必要拨款。旧故障未完全定位不自动禁止不同可信路径；不重跑旧P63。 |
-| [FSD](../candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md) | 第五pair有效ABOVE_MEI；U已获PRO_FINAL一次原节点用途判断，B-LONG-D0仍未获拨款。 | 原DM已接收U：起草一次固定GitHub用途问题，经Root/Transport一次发送并完整intake；成本UNKNOWN获接受。 | 零实现、数值重分析、fit/eval/profiling；B-LONG-D0只留下一独立投资问题。 |
+| [FSD](../candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/READY_HANDOFF.md) | 第五pair有效ABOVE_MEI；U已获PRO_FINAL一次原节点用途判断，B-LONG-D0仍未获拨款。 | 固定U请求已由provider精确一次接受，Transport观察自然完成；成本UNKNOWN获接受。 | 完整响应回原DM intake；零实现、数值重分析、fit/eval/profiling，B-LONG-D0仅属下一独立投资问题。 |
 | [LCAC](../candidates/learned_counterfactual_agent_credit/DIRECTION.md) | 新注册PARKED/MEDIUM；保留learned counterfactual agent credit的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md) | T的完整pair为TOP_ADVERSE，DENSE保持默认；新的A/U/P下一用途输入已固定，任何选项均未获拨款。 | 指定Portfolio DM正在把固定输入纳入下一干净请求；A至多购买一次用途/设计判断，零native、成本UNKNOWN。 | 等待Portfolio裁决A/U/P；不由Root选择生命周期或研究对象，无retry、额外arm/panel。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
