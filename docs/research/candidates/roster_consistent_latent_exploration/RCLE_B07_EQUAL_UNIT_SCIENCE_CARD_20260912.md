@@ -171,5 +171,9 @@ adds only an opt-in eager snapshot representation on B07's reference path,
 preserving legacy defaults, the native kernel/addresses and the entire learned
 path. It records the added L0 caller sites, focused checks/review and unknown
 cause. Original result bytes and this object's scientific meaning remain intact.
-No further native invocation has occurred; the exact reference-only completion
-proposal is subject to the existing invocation rule, not budget arithmetic alone.
+Root subsequently reconciled exactly one reference-only completion within the
+original R logical invocation, after accepting the partial result through71198147e.
+The [complete E0](RCLE_B07_EQUAL_UNIT_RESULT_EVIDENCE_20260912.md) records its new
+source/command, fresh admission, actual Monitor adoption/terminal delivery and
+intact2048-row reference. This adds no fit or scientific meaning/budget. The
+original failed work remains explicit; the named allocation now ends.

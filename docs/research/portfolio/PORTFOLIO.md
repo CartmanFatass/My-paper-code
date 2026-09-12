@@ -6,12 +6,12 @@
 ## 当前22方向状态 — 2026-09-12 Windows恢复
 
 本表登记15 ACTIVE、7 PARKED，生命周期、priority、recasts与UAV字段不变。
-最新 [Portfolio决定](decisions/2026-09-12-post-sa-marginal-investments.md) 已由原作者完整核对：**新资助CBSC C、RCLE R、ACVC F三条完整B链；M不追加。**
+最新 [Portfolio决定](decisions/2026-09-12-two-remaining-chains.md) 已由原作者完整核对：**FSD D与FOLR P独立获选，MGTAP不追加。**
 
-Root当前实际工作集1/5：RCLE在同一对象内处理一个已归因入口的技术停止。ACVC与CBSC的已购pair均已完整验收并释放槽位；跨方向作者、Transport和cleanup不计槽位。
-C新native600/arm、1200合计+support600=1800；R900native含nearest+support600=1500；F270/arm、540合计+support660=1200秒。每项均含完整实现/检查/review/实验/intake/清理。
-新款明确是未来工作，旧S/A费用保留一次且未知尾部不填零。三个真正启动后为3/5，剩余两槽没有自动备用款。见 [独立执行映射](pro_packets/20260912_post_sa_marginal_investment/EXECUTION_MAPPING.md)。
-Monitor当前无活动句柄；ACVC两臂与CBSC均terminal exit0，RCLE在338秒以exit2技术停止，三个对应Monitor goal均已完成。剩余两槽的新Portfolio问题已由当前Transport核对绑定并完成唯一一次Send，provider正在生成；尚未形成的新决定不计槽位。
+Root当前实际工作集2/5：FSD与FOLR新DM链独立推进。RCLE、ACVC与CBSC的已购对象均已完整验收并释放槽位；跨方向cleanup不计槽位。
+FSD为一对I1280/authentic-D0，D0≤900、I≤1800、native≤2700、support≤300、完整≤3000秒；FOLR仅一次原节点post-B03 Convergence及完整intake，零实验额度、完整成本未知。MGTAP1200未分配。
+最新两项真正派发后为2/5，另三槽进入下一次滚动Portfolio边界；不把旧余额或未选候选当自动授权。见 [独立执行映射](pro_packets/20260912_two_remaining_chains/EXECUTION_MAPPING.md)。
+Monitor当前无活动句柄；RCLE reference completion已在11秒exit0、完整intake且goal完成。Transport本轮响应已归档并intake，当前无待观察Pro generation。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
 “待选择”是尚未分配的未来工作，不能冒充已运行，也不是永久禁入。
@@ -31,7 +31,7 @@ Monitor当前无活动句柄；ACVC两臂与CBSC均terminal exit0，RCLE在338�
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 最新8213 COND−DENSE−0.022469573456，5正/27负；完整intake，DENSE默认、no-addition保留。 | 无 | 必要的新投资选择；旧1200秒pair不能自动追加。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
-| [RCLE](../candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_PARTIAL_INTAKE_20260912.md) | 一个1000-update fit已保留，`G_U=-0.000205485`且区间跨零；reference panel缺失，尚不能计算`Delta_ref`或科学极性。 | roster列问题的reference-only快照修复已验收并绑定；同一DM将在原完整对象上做一次fresh-admitted受限reference completion。 | 保留原900/600/1500边界、seed/dtype/kernel与科学语义；不新增fit、训练、比较器或预算。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md) | B07完整结果：`Delta_ref=-0.00884196`且区间为负，八个reference场景均落后；`G_U=-0.000205485`且区间跨零。只支持本次对象局部结论。 | 原fit与reference-only完成均验收，native343.43秒；分配结束，无活动科学工作。 | 仅清理六个已列明远端终态路径；无retry、新fit、Pro或自动successor。 |
 | [scope_1s](../candidates/scope_1s/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [UCOPE](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | **更新：最新是post8801 PRO_FINAL PARK进一步8801-L continue/end-credit经验投入，保留unchanged-L spending stop。** 8601/8602、8701是更早证据。 | 无 | 有具体新选择才继续；不再凭旧8701 closeout pending造任务。其余renewal/ordinary-feedback议程未被整体关闭。 |

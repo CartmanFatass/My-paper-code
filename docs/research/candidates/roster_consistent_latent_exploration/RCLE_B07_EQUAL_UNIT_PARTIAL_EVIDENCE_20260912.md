@@ -1,5 +1,9 @@
 # RCLE B07 equal-unit — E0 partial result evidence
 
+Historical partial boundary; the fixed reference has since been completed under
+Root's original-invocation reconciliation. See [complete E0](RCLE_B07_EQUAL_UNIT_RESULT_EVIDENCE_20260912.md).
+The original failed attempt and its independent observations below are retained.
+
 **PARTIAL_LEARNED_VALID / REFERENCE_PRIMARY_MISSING.** One final1000 fit and
 both learned panels are complete. The reference failed its roster-column check;
 Delta_ref is unavailable. This is not a complete service B or a scientific

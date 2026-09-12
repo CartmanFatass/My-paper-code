@@ -1,0 +1,138 @@
+{
+  "status": "resources_unmeasured",
+  "native": {
+    "learned_and_failed_reference_s": 338.9,
+    "reference_completion_s": 4.53,
+    "total_s": 343.43,
+    "failed_reference_s": 2.43,
+    "all_reference_submissions_s": 6.96,
+    "cap_s": 900,
+    "original_reference_suballocation_s": 15
+  },
+  "known_support_before_completion_s": 71.5882889,
+  "completion_support_components": [
+    {
+      "operation": "current input/source binding read",
+      "wall_s": 0.2464534
+    },
+    {
+      "operation": "live endpoints/owner reviews before completion",
+      "wall_s": 0.4524739
+    },
+    {
+      "operation": "source bundle",
+      "wall_s": 0.2699653
+    },
+    {
+      "operation": "remote fresh staging absence/create",
+      "wall_s": 0.7001676
+    },
+    {
+      "operation": "two input copies",
+      "wall_s": 1.3988901
+    },
+    {
+      "operation": "remote exact stage and command syntax",
+      "wall_s": 0.8962329
+    },
+    {
+      "operation": "authorization/staging publication",
+      "wall_s": 4.5699739
+    },
+    {
+      "operation": "single detached submission",
+      "wall_s": 1.0518815
+    },
+    {
+      "operation": "Monitor dispatch",
+      "wall_s": 0.154
+    },
+    {
+      "operation": "launch receipt publication",
+      "wall_s": 4.6731063
+    },
+    {
+      "operation": "terminal collection/archive",
+      "wall_s": 0.9549512
+    },
+    {
+      "operation": "terminal copy/digest",
+      "wall_s": 0.7150186
+    },
+    {
+      "operation": "resume branch read",
+      "wall_s": 5e-06
+    },
+    {
+      "operation": "live routes and cleanup route",
+      "wall_s": 0.0116487
+    },
+    {
+      "operation": "existing analysis/cost read",
+      "wall_s": 0.1642938
+    },
+    {
+      "operation": "reference archive extraction/summary inspection",
+      "wall_s": 0.2095387
+    },
+    {
+      "operation": "current records read 1",
+      "wall_s": 4e-06
+    },
+    {
+      "operation": "current records read 2",
+      "wall_s": 0.1898334
+    },
+    {
+      "operation": "current records read 3",
+      "wall_s": 0.199723
+    },
+    {
+      "operation": "focused record/owner route read 1",
+      "wall_s": 0.0488205
+    },
+    {
+      "operation": "focused record/owner route read 2",
+      "wall_s": 0.3122858
+    },
+    {
+      "operation": "scientific-tools and live unapplied owner reviews",
+      "wall_s": 0.3209391
+    },
+    {
+      "operation": "comparison/E0/inventory read",
+      "wall_s": 0.2314569
+    },
+    {
+      "operation": "comparison/receipt/reading read 1",
+      "wall_s": 0.1879516
+    },
+    {
+      "operation": "comparison/receipt/reading read 2",
+      "wall_s": 0.1449684
+    },
+    {
+      "operation": "complete paired analysis",
+      "wall_s": 0.7283779
+    },
+    {
+      "operation": "terminal remote cleanup inventory",
+      "wall_s": 1.3558089
+    }
+  ],
+  "known_support_through_inventory_s": 91.77705929999996,
+  "known_complete_through_inventory_s": 435.20705929999997,
+  "support_cap_s": 600,
+  "complete_object_cap_s": 1500,
+  "complete_accounting_verified": false,
+  "known_cap_breach": false,
+  "limitations": "Enclosing command wall counted once; embedded SSH/runner/test timers not added again. Original failed attempts remain charged. Some prior review/tool tails, Monitor/Root observation and integration, later publication and cleanup remain unmeasured until separately recorded. This known subtotal is not complete wall/CPU/resource accounting; unknown is neither zero nor an inferred breach. No new invocation or successor budget.",
+  "post_inventory_components": [
+    {
+      "operation": "record updates,4 archive/bundle checks,brief and diff check",
+      "wall_s": 0.3100332
+    }
+  ],
+  "known_support_before_final_publication_s": 92.08709249999997,
+  "known_complete_before_final_publication_s": 435.5170925
+}
