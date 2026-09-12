@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "keep",
-  "auto_applied": null,
+  "auto_applied": "keep",
   "dm_reason": "同意原Portfolio的有界投入选择；完整检查未发现科学或规范冲突，保留强反证和成本未知。",
   "evidence": [
     "docs/research/portfolio/decisions/2026-09-11-rolling-capacity-after-b02.md",
@@ -109,6 +109,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-11-rolling-capacity-after-b02.md",
       "state": "planned",
       "summary": "完整符合性检查PASS；S+A+P+N已记入决定与Portfolio摘要。Root整合和三个方向的实际派发待其记录；本接收零新增数值工作。"
+    },
+    {
+      "at": "2026-09-12T02:20:42+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md@05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+      "record": "docs/research/portfolio/decisions/2026-09-11-rolling-capacity-after-b02.md@e83bbfc7c",
+      "state": "applied",
+      "summary": "Root integrated the conforming decision as e83bbfc7c and accepted three native starts: FSD one fresh unchanged pair, ACVC conditional original-node path, and FOLR one original Convergence family question. Two vacancies remain; MGTAP receives no addition. Transport metadata correction is separate and authorizes no Send."
     }
   ]
 }
