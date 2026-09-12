@@ -27,6 +27,6 @@ The smallest proposed future performance discriminator is one newly funded unscr
 
 ## Responsibility and finite boundary
 
-Original DM `/root/dm_acps_start` owns `codex/acps` / `C:/Projects/HMASD-worktrees/codex-acps`, this research directory, `experiments/candidates/actuator_conditioned_partial_sharing/acps_b01/`, mirrored tests and `run_acps_` scripts. Source acceptance and actual Monitor/terminal facts are in [execution](ACPS_B01_EXECUTION_20260912.md). Root integrates/preserves paired evidence before assigned terminal cleanup; authoring/shared source stays intact.
+Original DM `/root/dm_acps_start` owns `codex/acps` / `C:/Projects/HMASD-worktrees/codex-acps`, this research directory, `experiments/candidates/actuator_conditioned_partial_sharing/acps_b01/`, mirrored tests and `run_acps_` scripts. Source acceptance and actual Monitor/terminal facts are in [execution](ACPS_B01_EXECUTION_20260912.md). Root accepted paired evidence retention at main `e97f8cfa1`; the [assigned remote cleanup](ACPS_B01_CLEANUP_20260912.md) is complete. Authoring/shared source stays intact; the separately rejected local test-scratch removal remains explicit.
 
 One funded pair ends its allocation at complete intake/closeout or concrete limitation; no repeat, extra panel, changed seed, pilot, automatic consultation or successor is funded. The ACTIVE direction continues through its DM's next bounded authorized work/proper-node need; finite completion is not a Root-inferred stop. Preserve other directions and shared defaults.
