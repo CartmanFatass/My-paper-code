@@ -8,7 +8,7 @@ The frozen reading is: “For each primary use exactly `mean_r ± scipy.stats.t.
 |---|---|---|---:|---:|---:|---:|---:|
 | 1 | 12794 / 23947 | complete, preserved, technically accepted | 0.093662236170 | 0.072263725773 | 0.021398510397 | 167.06 s | 170 s |
 | 2 | 11477 / 24930 | complete, preserved, technically accepted | 0.110783589817 | 0.084918936207 | 0.025864653610 | 168.51 s | 171 s |
-| 3 | 18150 / 21370 | fixed, unsubmitted | — | — | — | — | — |
+| 3 | 18150 / 21370 | accepted, monitored; collection pending | — | — | — | — | — |
 | 4 | 12604 / 21030 | fixed, unsubmitted | — | — | — | — | — |
 | 5 | 14295 / 23946 | fixed, unsubmitted | — | — | — | — | — |
 
