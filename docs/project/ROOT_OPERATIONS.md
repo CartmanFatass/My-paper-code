@@ -23,6 +23,12 @@ wait, failed admission or closeout affects only that direction. Root integrates 
 work continuously; a prior `no successor` closes only its named allocation. Cross-direction choices
 still use Portfolio authority while independent authorized work continues.
 
+OWNER_DIRECT 2026-09-12: Root cannot turn an ended allocation into a direction pause, stop or
+working-set release. The direction DM continues with a bounded next object or sends the applicable
+direction/capacity task; only the resulting Portfolio decision or a direct owner instruction stops
+that direction. The Portfolio drafter must refresh affected old-direction facts from the current DM
+records before recommending continuation, replacement or new-direction registration.
+
 OWNER_DIRECT 2026-09-11: once Root has dispatched all currently ready independent work, it ends
 the turn if only long-running DM, accepted legacy CM, Monitor or Transport dependencies remain.
 The independent relay wakes Root for actionable native completion; Monitor and Transport retain
