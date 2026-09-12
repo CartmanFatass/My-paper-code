@@ -1,0 +1,108 @@
+{
+  "object": "ACVC_FIXED_F_TRAINING_USE_B02",
+  "grant": "Portfolio A cf7bd424fc7d4e948bcc9b5ba09cddd0979f0925 / response7db34325601f494fdce1a2d775da7542589067e8",
+  "author_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+  "branch": "codex/acvc",
+  "input_sync_commit_exclude_from_root_cherry_pick": "535e1acf8f6951a9a8cbfdc3aab37c66a8633abb",
+  "source_sha": "ac64769f6403e4495a00673e2230d100edb7a02b",
+  "remote_worktree": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6",
+  "master": 20319,
+  "evaluation_namespace": 30319,
+  "caps_seconds": {
+    "whole_arm": 270,
+    "native_sum": 540,
+    "support": 300,
+    "future_complete": 840
+  },
+  "acceptance": {
+    "shared_numeric_sources_unchanged": true,
+    "independent_reviewer": "/root/dm_a_mx_acvc_resume/training_f_semantic_review",
+    "verdict": "No material findings in changed identity/CLI/wrapper/card; prior semantics reused",
+    "review_command_seconds": 0.5505398,
+    "binding_tests_passed": 2,
+    "pytest_seconds": 0.08,
+    "model_or_scientific_RNG_in_checks": false,
+    "test_scratch_created": false,
+    "unchanged_14_test_evidence": "B01 original acceptance, not repeated"
+  },
+  "preparation": {
+    "source_bundle_bytes": 119740673,
+    "whole_helper_wall_s": 18.671926800045185,
+    "complete": true,
+    "local_path": "temp/directions/acvc/preparation/training-use-b02-20260912",
+    "remote_bundle": "/home/wu/hmasd-inputs/acvc-training-use-b02-ac64769f6.bundle",
+    "offline_exact_checkout": true,
+    "tracked_status_empty": true,
+    "LF_binary_stdin": true,
+    "wrapper_syntax_pass": true
+  },
+  "support": {
+    "commands": [
+      {
+        "label": "New Portfolio assignment/current checkout/routes",
+        "wall_s": 0.3101072
+      },
+      {
+        "label": "Current A authority and source/currentness read",
+        "wall_s": 0.190262
+      },
+      {
+        "label": "Current A authority and source/currentness read",
+        "wall_s": 0.4843905
+      },
+      {
+        "label": "Exact A mapping, B evidence rules and existing fixed entry",
+        "wall_s": 0.2684725
+      },
+      {
+        "label": "Remaining A primary/cost requirements and identity check",
+        "wall_s": 0.171204
+      },
+      {
+        "label": "Fresh identity prior-record scan and published required-input sync commit push",
+        "wall_s": 4.1845632
+      },
+      {
+        "label": "Binding-only stub checks, no scratch, source/card commit push",
+        "wall_s": 5.7170315
+      },
+      {
+        "label": "Independent B02 binding review (two commands)",
+        "wall_s": 0.5505398
+      },
+      {
+        "label": "Preparation receipt read and B02 owner/audit publication",
+        "wall_s": 0.3333688
+      },
+      {
+        "label": "Complete offline source bundle/transfer/exact-checkout helper, nested phases counted once",
+        "wall_s": 18.671926800045185
+      }
+    ],
+    "known_reported_seconds": 30.881866300045182,
+    "full_coverage": false,
+    "limits": "Provider/client/deliberation and yet-unreceived Monitor/Root/closing costs remain unknown; all future needed work counts once. B01/old A costs are separate history, not rebilled."
+  },
+  "arms": [
+    {
+      "arm": "C",
+      "handle": "acvc-training-use-b02-c-ac64769f6",
+      "command": "cd /home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/training_use_b02_C_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/training_use_b02/launch.sh ac64769f6403e4495a00673e2230d100edb7a02b C",
+      "output": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6/temp/directions/acvc/exp/training_use_b02_20260912/arm_C",
+      "admission": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6/temp/directions/acvc/training_use_b02_C_admission.json",
+      "timing": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6/temp/directions/acvc/training_use_b02_C_task_time.txt",
+      "submission": "not_submitted"
+    },
+    {
+      "arm": "F",
+      "handle": "acvc-training-use-b02-f-ac64769f6",
+      "command": "cd /home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/training_use_b02_F_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/training_use_b02/launch.sh ac64769f6403e4495a00673e2230d100edb7a02b F",
+      "output": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6/temp/directions/acvc/exp/training_use_b02_20260912/arm_F",
+      "admission": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6/temp/directions/acvc/training_use_b02_F_admission.json",
+      "timing": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6/temp/directions/acvc/training_use_b02_F_task_time.txt",
+      "submission": "not_submitted"
+    }
+  ],
+  "stop": "Both original outcomes/full intake/assigned cleanup; no third pair/retry/tuning/extra panel/consultation/successor",
+  "retention": "ACVC DM preserves both unique checkpoint archives and all readable evidence before Root-accepted scoped duplicate/worktree cleanup; shared authoring checkout and all B01/C01 evidence retained."
+}
