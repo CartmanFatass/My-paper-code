@@ -1,0 +1,37 @@
+{
+  "question": "五次配对之后，完整 I1280 是否进入同一宿主的可选学习方案集合，并保留真实 D0？",
+  "changes_if_approved": [
+    {
+      "target": "FSD 方向的当前用途建议",
+      "from": "可选用途仍待原节点判断",
+      "to": "原节点决定有限可选方案，或仅保留探索证据；尚未执行裁决"
+    }
+  ],
+  "if_refused": "保留全部实验和 D0，不把 I1280 推荐为用途选项，不追加原样实验；FSD 方向继续。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+      "quote": "The fifth newly initialized matched pair gives I1280−authentic-D0\n**+0.0737976491890039 J**, with 26 positive and 6 adverse endpoint contrasts.",
+      "why": "与此前增益一起支持有限可选用途的讨论。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771103_RESULT_EVIDENCE_20260911.md",
+      "quote": "**Valid complete B/EXPLORE; one new matched training pair; `opposite_sign`.**",
+      "why": "负配对、其他面板反例和较高训练成本不支持稳定优势或默认替换。"
+    }
+  ],
+  "uncertainty": [
+    "每个32世界面板的误差只条件于该配对策略。",
+    "本次只给一次用途裁决，不研究或资助 B-LONG-D0。"
+  ],
+  "cost": {
+    "compute": "零新增拟合、评价、数值重分析或 profiling；完整文档/工具/提供方/agent 成本 UNKNOWN 已由 U 接受。",
+    "owner_time": "不等待所有者回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "原节点用途裁决；不阻塞其他方向。"
+  },
+  "verdict_text": "DM 建议：将完整 I1280 保留为同一宿主上的有限可选学习方案，真实 D0 继续默认；原节点尚未裁决。",
+  "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/SCIENCE_BRIEF.md"
+}
