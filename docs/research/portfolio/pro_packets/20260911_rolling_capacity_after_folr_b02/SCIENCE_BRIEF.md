@@ -1,7 +1,8 @@
-# Rolling investment after FOLR B02 and ACVC claim design
+# Rolling investment after FOLR/FSD B02 and ACVC claim design
 
 Date: 2026-09-11, America/Los_Angeles. Author: Root-designated recently active
-FOLR DM. **Recommendation only: A + P + N below.** Fund one complete, conditional
+FOLR DM. **Recommendation only: S + A + P + N below.** Fund one new unchanged
+FSD I1280/D0 B pair at a new 3,000-second complete ceiling and one conditional
 ACVC five-fit C-BENCH path with a new 3,000-second complete machine-work ceiling;
 commission one original FOLR Convergence question and full intake with zero
 implementation/numerical allowance; retain the present no-third-pair MGTAP choice.
@@ -11,8 +12,10 @@ selection, direction promotion, launch or implementation through this packet.
 ## 1. The live decision and current capacity
 
 The scientific and operational snapshot is main
-9993d38705f3857feea7dc654a5c4f105e613844, incorporated without losing accepted
-Portfolio history into published authoring c9d0cb6da26d597cb2a44d7fa4ca388f08ff77d6.
+d4c135a068dc51ec85af988f02bf9609bce9e4be. Its accepted FSD terminal intake and
+closeout were reconciled into the existing Portfolio branch after the earlier
+unsent draft at e731229ddd9db0b99d27b9615689059ab5efa555. Both versions remain
+recoverable; this current snapshot supersedes the earlier one/four count.
 Read the dated lifecycle/priority rows with the newer accepted intakes below;
 older opening paragraphs in PORTFOLIO.md and EXPERIMENT_TRACKING.md are not live
 process observations. PREPARATION_INTAKE records Root's exact updates and the
@@ -20,35 +23,38 @@ original ACVC DM's authority clarification. FACTS records executable arithmetic.
 
 | Direction or surface | Current attributable state | Counted advancing directions |
 |---|---|---:|
-| FSD | The existing 771003 pair is still owned by its active DM. D0 is technically accepted; the last published I handover has accepted supervisor, actual memory admission and a confirmed unfinished Monitor goal. Full-pair intake has not been published in this snapshot. | 1 |
+| FSD | Complete 771003 pair and full intake accepted at main282f518d0, remote closeout at d4c135a06. I1280−D0 +.206285904082309 is one new above-MEI package result. Its allocation ends with no successor or C freeze; retained local duplicate cleanup is separate. | 0 |
 | FOLR | B02 complete, technically/scientifically accepted and remotely closed. The first learned-gate gain did not recur; this allocation has no successor. This DM's Portfolio authorship is cross-direction work. | 0 |
 | ACVC | Full Convergence conformance PASS is integrated at main9993d3870. It selects a provisional five-new-fit claim design, with no promotion, card/freeze, funding, fit, implementation or another consultation. Its commissioned question/intake is complete. | 0 |
 | RCLE | The exact channel-normalization question is parked before submission after a factual Transport blocker. Two UI clicks produced zero accepted Pro generations. No answer or scientific decision exists; the same request remains for Root/Transport recovery. | 0 |
 | VNFC | Retained conditional900 funding is unused and NOT READY; no additional repair funding. | 0 |
 | MGTAP and the other completed/held directions | No currently dispatched successor; completed results, held families and technical returns are not live intentions. | 0 |
 
-Thus this snapshot has **one advancing direction and four vacancies**, not the
-prior packet's zero/five snapshot and not four still-running allocations. No
-experiment status is polled by the Portfolio author. If FSD later completes, its
-own collection/intake continues independently; that event neither waits for this
-decision nor funds a replacement from it. Root reconciles actual starts/returns
-at application. The requested allocations below never duplicate FSD or RCLE.
+Thus this snapshot has **zero advancing directions and five vacancies**. The
+prior allocations completed or reached their own blocker; they did not wait
+for a batch. This author read Root's terminal update and full accepted FSD
+intake rather than polling an experiment. Root reconciles actual starts/returns
+at application. S would be a new FSD unit; RCLE recovery remains its existing
+request, and neither a retained cleanup task nor Portfolio authorship counts.
 
 The previous conforming Portfolio B+P decision selected new FSD3000/FOLR3900 and
 one question each for RCLE/ACVC, deliberately leaving one fifth vacancy and
 declining another MGTAP pair. Its numerical grants and questions were specific
-finite units. FOLR and ACVC have now reached new informative boundaries. That is
+finite units. FOLR, FSD and ACVC have now reached new informative boundaries. That is
 the concrete new cross-direction choice; another generic request to fill five
 names would add no scientific question.
 
 ## 2. Independent choices, recommendation and alternative
 
-Choose one ACVC option, one FOLR option and the explicit MGTAP disposition. These
+Choose one FSD option, one ACVC option, one FOLR option and the explicit MGTAP disposition. These
 are investment alternatives, not a factorial experiment or a request to execute
 every combination. A selected direction counts once through its complete chain.
 
 | Key | Proposed bounded task | New allowance and stop |
 |---|---|---|
+| **S — recommended** | One new unchanged FSD I1280/authentic D0 B pair, fresh unscreened training/evaluation identities, five16-lane H500 rollouts and sole final32 H500 episodes per arm. | NEW D0≤900s/I≤1800s/native≤2700s/support≤300s/complete≤3000s; exactly one source-delivery transaction≤45s inside support. No changed package, third arm, extra endpoint, fourth same-package pair or automatic successor. See §4a. |
+| T | One original FSD Convergence question/full intake about the next useful question after two local I1280 package gains and the older batch128 losses. | Zero implementation/numerical allowance; future fit, diagnostic, promotion and C freeze remain unallocated. At most one question; no mandatory cause/upper/headroom prerequisite. |
+| U | Leave the new FSD vacancy unallocated. | No new task or budget; keep the two package gains, old losses, priority and lifecycle unchanged. |
 | **A — recommended** | ACVC's complete five-new-fit design: actual Convergence promotion decision, original Innovator review before freeze, prospective card and minimal implementation, five complete fits/panels, full C intake and scoped closeout, conditional on conforming direction decisions. | Each full fit plus all C/F/dwell panels ≤270s; five-unit native sum ≤1350s; all invoked support ≤1650s; complete machine work ≤3000s. At most one new promotion question and one Innovator question/full intake; no automatic correction/consultation ladder or fit replacement. See §3. |
 | B | ACVC preparation only: one actual Convergence promotion question and, only if that decision permits it, one original Innovator question/full intake, with the prospective design/card wording and complete cost proposal. | Zero implementation, models, scientific RNG draws, fits, evaluation or numerical allowance. Exact execution inputs/freeze and empirical investment remain deferred. End at those finite decisions/intakes or a concrete blocker; costs of authoring/consultation are unknown, not free. |
 | C | Leave ACVC's accepted design unfunded. | No new task, consultation or allowance; retain the accepted design as its next unexecuted discriminator. No scientific/lifecycle PARK is inferred. |
@@ -58,13 +64,24 @@ every combination. A selected direction counts once through its complete chain.
 | M | One new unchanged MGTAP COND/DENSE B pair if its marginal value now warrants investment. | NEW each arm≤450s/native sum≤900s/support≤300s/complete≤1200s, fixed512 training/final32 per arm; no fourth pair or fallback. |
 | **N — recommended** | Retain the previous no-addition MGTAP investment choice. | Zero new MGTAP task, consultation or allowance; its current family and ordinary DENSE default remain as recorded. |
 
-**A+P+N buys two new direction tasks**, not four. With the current FSD unit it
-would give at most three advancing directions after actual acceptance, leaving
+**S+A+P+N buys three new direction tasks.** It would give at most three advancing
+directions after actual acceptance, leaving
 two vacancies unless independent existing readiness/recovery changes them.
-The largest listed numerical combination A+Q+M has three separate new complete
-caps totaling8100s; it is not a transferable fund or an elapsed-time forecast.
+The largest listed numerical combination S+A+Q+M has four separate new complete
+caps totaling11100s; it is not a transferable fund or an elapsed-time forecast.
 Keep VNFC's existing conditional900 outside every new-cap sum. RCLE recovery is
 the existing request, not a freshly purchased second question.
+
+S buys the minimum fresh real-learning observation of whether the current FSD
+package's advantage recurs when D0 itself varies, without inventing a cause or
+making two favorable seeds a success quota. Both package pairs favor I1280;
+the second contains a much lower D0 return. That makes another complete pair
+more directly decision-relevant than a new question-only round about a still
+well-specified performance contrast. T is the strongest alternative: two local
+gains might make a better-specified new question more valuable than another
+point, and I costs nearly twice D0. U spends nothing while preserving that
+uncertainty. The recommendation is a marginal investment judgment; no fixed
+number of positive or negative seeds mandates it. It changes no direction claim.
 
 A is preferred because ACVC now has a specifically selected population question
 and a complete fixed-law proposal. Its repeated gain over beneficial dwell is
@@ -252,6 +269,72 @@ Monitor costs. Study elapsed981s and CPU1818.45s are different windows. The1.0s
 query shared with FSD is an unsplit single global cost, not fully added to each
 direction. B01, B02 and old-family invocations are never pooled into a new cap.
 
+## 4a. FSD: second package gain and a prospective third unchanged pair
+
+The accepted 771003 primary is I1280−D0 +.206285904082309, above the .01J
+margin: D0 .2617101876076477 and I .46799609168995665. All32 episode contrasts
+are positive for this one fresh fitted pair; conditional SE .01230361547990872
+is not training-instance uncertainty. The earlier same-package gain remains
+separately +.05697746721968016 with24 favorable/eight adverse episodes. Its D0
+mean .4162744505 differs substantially from this pair's D0, while I means are
+descriptively close. Two historical I/batch128 losses −.049670563167111874 and
+−.035312725297886094 remain different-package evidence. No pooled mean or
+new statistical quantity is computed for this packet.
+
+Six UAVs/fifty users in scenario1 use private recurrent observations under
+coevolving geometry. Primitive velocity remains reactive while skills are
+held. An individual gap event → that UAV's skill renewal → asynchronous joint
+rows and valid credit heads → PPO/decoder exposure → subsequent native service
+is the hypothesized path. I uses gap .25/batch1280; authentic D0 uses infinity/
+batch128. Preserve team threshold infinity, k and both caps10, age off, reset/
+survivor state, primitive discount, reward, segment credit and evaluator law.
+Different optimization grouping is part of this complete package. Older host
+baselines have different exposure; tuned same-information headroom is absent.
+
+771003 has26492 I joint rows versus4000 D0, while coordinator calls are345
+versus525. Nine final I gap events and empty endpoint segment storage do not
+identify online renewal benefit or endpoint duration. Lower I training means
+on the first two rollouts of both pairs, the previous adverse worlds, native
+cost, co-adaptation and learned altitude behavior remain contrary facts or
+alternative explanations. The ceiling is two local early-exposure package
+gains; stable performance, pure renewal/batching causality, transfer and safety
+are unestablished. No controlled causal explanation is required to buy S.
+
+S retains CPU FP32/four Torch threads and the accepted remote publication path.
+Its new unscreened pair has2×5×16×500=80000 training team steps,160 episodes,
+ten update stages and2×32×500=32000 final steps/64 episodes:112000 native team
+steps,672000 agent observations,6000 batched controller calls, two fits/four
+models, zero checkpoint loads. Ten update stages are not ten optimizer steps.
+Each rollout retains15 epochs: D0 coordinator chunks15×5×ceil(800/128)=525;
+I uses15×sum ceil(M_r/1280), M_r≤8000 for five rollouts, upper525. Real row/
+six-agent decoder/recurrent/gap and lower-PPO work remain in both full commands;
+there is no nested search or added validation panel. FACTS derives these
+configuration counts only, without choosing or drawing future scientific RNG.
+
+The sole future B primary is all32 ordered final I−D0 J=6U/500 differences,
+reported as one new independent training pair, separately from both predecessors.
+Keep >+.01 above_mei, inclusive±.01 small_or_resolution_limited (not equivalence),
+<−.01 opposite_sign, and damaged-primary limits; update descriptive recurrence
+wording prospectively for the third instance without rewriting any old card.
+S proposes D0≤900s/I≤1800s/native sum≤2700s/support≤300s/complete≤3000s,
+one source transaction≤45s inside support. Preparation, actual changed-binding
+checks/review, staging, Monitor, collection/reduction, publication/integration
+and closeout are charged once; no new timing pilot or numerical fixture. Any
+concrete failure or exceeded necessary envelope ends only that finite allocation.
+No replacement seed, extra arm, extra panel, fourth pair or C promotion follows.
+
+B01 native519.94/1020.68s(sum1540.62) and B02 538.66/1069.26s(sum1607.92)
+are historical complete-command scale anchors, not new coefficients or funding.
+B02 known support97.6635319s/native-plus-known1705.5835319s is an incomplete
+record; full300support/3000complete certification remains unavailable. Its
+3000s study elapsed includes idle handover;6361.64s aggregate CPU is a different
+quantity. The nested7.359s source transaction is included in its7.5772148s
+enclosing support charge. The shared1.0s FSD/FOLR query stays unsplit and
+globally counted once. Missing observation/relay/publication costs stay unknown;
+unlaunched770803/770903 attempts retain their separate costs and zero exposure.
+Remote preservation/reclamation is complete; a190929-byte local duplicate
+remains with its creator after an explicit policy rejection, not a science gate.
+
 ## 5. MGTAP and the rest of the current open set
 
 M would be a newly funded ordinary B, not a restart of8213. The unchanged
@@ -284,7 +367,7 @@ per-card MEI and host; raw return scales are not compared as a common currency.
 
 | Direction / priority / recasts | Current support, contradiction and MEI | Current next-task consequence |
 |---|---|---|
-| FSD / HIGH / NR | I1280 B01+.0569774672J,24/32 favorable; older I128−.0496705632/−.0353127253 are different-package losses. MEI.01J. | Existing771003 chain continues independently under its own900/1800/2700/300/3000 cap. D0's.2617101876 is not a paired sign; no FSD successor is requested. |
+| FSD / HIGH / NR | I1280 B01+.0569774672J and B02+.2062859041;24/32 and32/32 favorable. Older I128−.0496705632/−.0353127253 are different-package losses. MEI.01J. | 771003 allocation complete. S/T/U choose a NEW unchanged pair, one direction question or vacancy; no stable or causal claim follows. |
 | ACVC / MEDIUM /2 | Fresh F−C+.1229328560/+.0915279844/+.1414322041 and F−dwell+.0877164686/+.0638998669/+.0944113176; all three dwell−C gains and5/11/5 adverse F−dwell worlds. MEI.01J. | A/B/C choose the newly accepted but unfunded claim-design investment. Lowest-contention treatment persists. |
 | FOLR / MEDIUM / NR | Learned-gate+1.763359375/−1.769531250, opposite signs; adaptive RETAIN and different-law fixed-half outcomes remain. MEI1 return. | P/Q/R choose one new family question, unchanged B or vacancy; B02 itself ends. |
 | RCLE / MEDIUM / NR | B06 reference−final U−.005757649740, own-init gain−.000107828776; all8 reference cells lose,504/512 score ties, older W100/W1 gains remain. MEI.05U. | Same blocked question, zero generation and no method decision. Root/Transport recovery is separate; do not buy a duplicate or count it before actual advancement. |
@@ -323,7 +406,8 @@ assumptions are that fresh complete training-unit experiments instantiate their
 stated randomization law, and that named controls possess only the recorded
 information. These support comparing full native packages and separating fit
 variation from conditional world variation. Their limits change the choices:
-ACVC's iid-normal qualification stays explicit; FOLR's action-dependent world
+ACVC's iid-normal qualification stays explicit; FSD's segment/episode counts
+do not increase independent-fit n or isolate package components; FOLR's action-dependent world
 paths prohibit episode-pair inference; recurrent nulls remain adaptive without
 parameter updates; extra coefficients or intervention counts identify no cause.
 No new mechanism/comparator claim or unresolved primary-source question requires
@@ -334,7 +418,7 @@ This authoring/consultation has zero scientific invocations, models, scientific
 RNG draws, training/evaluation, diagnostics, replay, source implementation or
 numerical tests. FACTS produces that exposure line and prospective counts using
 only configuration arithmetic and committed records. Engineering-scope§4 needs
-none. Future work in A/Q/M includes all real intrinsic learner/evaluation work;
+none. Future work in S/A/Q/M includes all real intrinsic learner/evaluation work;
 added checks address changed binding/analysis or an actual risk, not routine
 replay, profiling, complete causal diagnosis or an exact upper. No new framework,
 retry service or generic validator is proposed.
@@ -345,7 +429,7 @@ and map each selected task to owner, tier, first action, new/retained limits,
 dependencies and end condition. Check the cost ceilings rather than treating
 anchors as forecasts. Preserve every existing lifecycle/Priority/recast/MEI,
 ended allowance, accepted/quarantined result and formal UAV status. Under
-contention FSD's existing HIGH/non-second-recast work remains ahead; ACVC stays
+contention FSD's HIGH/non-second-recast priority remains ahead if newly funded; ACVC stays
 second-recast lowest contention even if funded. No named batch or sibling-result
 wait is created. A future unexpected result or unmet authority/cost dependency
 returns only its affected task; it does not authorize an unnamed replacement.

@@ -104,7 +104,7 @@
     "source": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/SCIENCE_BRIEF.md"
   },
   "starred": true,
-  "approval_correction": "创建时的ledger_row误填第115行；保留原记录，当前正确入口为docs/research/portfolio/audit/2026-09-11.md#L117。本修正不改科学选择或所有者回复。",
+  "approval_correction": "容量已由Root最新事实更新；007旧选项不代表最终请求，参见008，旧audit117仍是当时准备事实。",
   "execution_history": [
     {
       "at": "2026-09-12T00:46:31+00:00",
@@ -114,6 +114,15 @@
       "state": "planned",
       "summary": "仅按Root指定作者职责准备建议；Portfolio尚未决定，投入未执行，auto_applied保持空。正确审计入口为新追加第117行。",
       "correction": "创建时的ledger_row误填第115行；保留原记录，当前正确入口为docs/research/portfolio/audit/2026-09-11.md#L117。本修正不改科学选择或所有者回复。"
+    },
+    {
+      "at": "2026-09-12T00:58:05+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/PREPARATION_INTAKE.md",
+      "record": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-root-008.json",
+      "state": "planned",
+      "summary": "FSD全对接收在TASK冻结前到达；007保留中间1推进/4空位历史，008给出最终0推进/5空位与S+A+P+N推荐。两个提案均未本地选择或发送Pro。",
+      "correction": "容量已由Root最新事实更新；007旧选项不代表最终请求，参见008，旧audit117仍是当时准备事实。"
     }
   ]
 }

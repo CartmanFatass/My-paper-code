@@ -1,17 +1,16 @@
 {
-  "created_utc": "2026-09-12T00:43:19.022894+00:00",
-  "question": "Rolling capacity after accepted FOLR B02 and ACVC claim design",
+  "created_utc": "2026-09-12T00:56:00.703206+00:00",
+  "question": "Rolling capacity after accepted FOLR/FSD B02 and ACVC claim design",
   "authority": "Preparation and recommendation only; Portfolio has not selected this request",
-  "root_snapshot_sha": "9993d38705f3857feea7dc654a5c4f105e613844",
-  "authoring_input_sync_sha": "c9d0cb6da26d597cb2a44d7fa4ca388f08ff77d6",
-  "current_advancing_directions": 1,
-  "current_vacancies": 4,
-  "advancing": [
-    "flexible_skill_duration"
-  ],
+  "root_snapshot_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+  "authoring_input_sync_sha": "ea7536fc9f4d23dc96cd5974dd0f64a6975f452c",
+  "current_advancing_directions": 0,
+  "current_vacancies": 5,
+  "advancing": [],
   "completed_new_boundaries": [
     "vap_folr_core B02",
-    "acvc one Convergence question/intake"
+    "acvc one Convergence question/intake",
+    "flexible_skill_duration B02 771003"
   ],
   "parked_pre_submission": [
     "roster_consistent_latent_exploration: zero Pro generation"
@@ -125,6 +124,14 @@
       "native_sum": 900,
       "invoked_support": 300,
       "complete": 1200
+    },
+    "FSD_S": {
+      "D0": 900,
+      "I": 1800,
+      "native": 2700,
+      "support": 300,
+      "complete": 3000,
+      "one_source_delivery_transaction_within_support": 45
     }
   },
   "new_question_only_options": {
@@ -138,21 +145,19 @@
       "questions": 1,
       "implementation_and_numerical_allowance": 0,
       "complete_effort": "unknown, not free"
+    },
+    "FSD_T": {
+      "questions": 1,
+      "implementation_and_numerical_allowance": 0,
+      "complete_effort": "unknown, not free"
     }
   },
-  "recommended": "A+P+N",
+  "recommended": "S+A+P+N",
   "selected": null,
-  "proposed_new_direction_tasks_recommended": 2,
+  "proposed_new_direction_tasks_recommended": 3,
   "remaining_vacancies_if_only_recommended_tasks_actually_advance": 2,
-  "largest_listed_new_numeric_sum_seconds": 8100,
+  "largest_listed_new_numeric_sum_seconds": 11100,
   "retained_not_new_caps_seconds": {
-    "FSD771003": {
-      "D0": 900,
-      "I": 1800,
-      "native": 2700,
-      "support": 300,
-      "complete": 3000
-    },
     "VNFC_conditional": {
       "native": 600,
       "support": 300,
@@ -181,7 +186,17 @@
     "FOLR_B02_study_elapsed": "981",
     "FOLR_B02_native_CPU_sum": "1818.45",
     "MGTAP8212_native": "364.79",
-    "MGTAP8213_native": "358.11"
+    "MGTAP8213_native": "358.11",
+    "FSD_B01_D0": "519.94",
+    "FSD_B01_I": "1020.68",
+    "FSD_B01_native_sum": "1540.62",
+    "FSD_B02_D0": "538.66",
+    "FSD_B02_I": "1069.26",
+    "FSD_B02_native_sum": "1607.92",
+    "FSD_B02_known_support": "97.6635319",
+    "FSD_B02_native_plus_known": "1705.5835319",
+    "FSD_B02_study_elapsed": 3000,
+    "FSD_B02_aggregate_CPU": "6361.64"
   },
   "historical_scope_limits": [
     "Each anchor is its own recorded window, not a forecast or new allowance.",
@@ -189,7 +204,8 @@
     "ACVC earlier Monitor deviation and qualified later support remain.",
     "One 1.0s FSD/FOLR terminal query remains unsplit and globally counted once.",
     "Earlier 0.9s shared query is one enclosing operation, not multiple additive global charges.",
-    "Provider generation, queuing, deliberation and currency costs are separate unknowns, not covered by a native-time forecast."
+    "Provider generation, queuing, deliberation and currency costs are separate unknowns, not covered by a native-time forecast.",
+    "FSD B02 is complete and its caps ended; full support300/complete3000 remain unknown. Final publication/relay/observation terms absent from the subtotal are not zero."
   ],
   "directions": [
     {
@@ -199,7 +215,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/acvc/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "capability_bound_semantic_currentness",
@@ -208,7 +224,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "commitment_residual_triggered_options",
@@ -217,7 +233,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "degraded_incumbent_shadow_handover",
@@ -226,7 +242,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "finite_resource_relational_inductive_efficiency",
@@ -235,16 +251,16 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "flexible_skill_duration",
-      "current_blob": "959010ebc41989732654d7be5ec23dddbef60b34",
-      "changed_since_previous_default_input": false,
+      "current_blob": "d447d70103290261d3a945b5768f778c40291034",
+      "changed_since_previous_default_input": true,
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "metric_ground_transport_allocation",
@@ -253,7 +269,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "roster_consistent_latent_exploration",
@@ -262,7 +278,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "semigroup_consistent_duration_model_policy",
@@ -271,7 +287,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "ucope",
@@ -280,7 +296,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/ucope/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "vap_folr_core",
@@ -289,7 +305,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "variable_n_fleet_churn",
@@ -298,7 +314,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "vsp_02",
@@ -307,7 +323,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/vsp_02/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "vsp_03",
@@ -316,7 +332,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/vsp_03/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     },
     {
       "direction": "vsp_c1",
@@ -325,7 +341,7 @@
       "lifecycle": "ACTIVE",
       "current_matching_tuned_headroom_record": "absent",
       "path": "docs/research/candidates/vsp_c1/DIRECTION.md",
-      "commit_sha": "9993d38705f3857feea7dc654a5c4f105e613844"
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
     }
   ],
   "measured_preparation_command_subset": [
@@ -481,6 +497,39 @@
     "ACVC accepted one-unit counts multiplied by five; coordinate upper is inherited from the accepted response, not rederived from source.",
     "FOLR formulas use 5000/20/4969/32/21/5/2/128 from unchanged B02 card.",
     "MGTAP formulas use 2 arms/512 train/256 ticks/4 epochs/5 agents/32 final.",
-    "Decimal addition/multiplication only for published cost windows; no empirical intervals or extra return aggregation."
-  ]
+    "Decimal addition/multiplication only for published cost windows; no empirical intervals or extra return aggregation.",
+    "FSD uses fixed 2 arms/5 rollouts/16 train lanes/32 final lanes/H500/6 agents/15 coordinator epochs, not actual future row realization or empirical reanalysis."
+  ],
+  "previous_unsent_material_sha": "e731229ddd9db0b99d27b9615689059ab5efa555",
+  "future_fsd_S": {
+    "independent_pairs": 1,
+    "real_fits": 2,
+    "model_constructions": 4,
+    "training_rollouts_per_arm": 5,
+    "training_lanes": 16,
+    "horizon": 500,
+    "final_episodes_per_arm": 32,
+    "training_team_steps": 80000,
+    "training_episodes": 160,
+    "update_stages": 10,
+    "evaluation_team_steps": 32000,
+    "evaluation_episodes": 64,
+    "total_native_team_steps": 112000,
+    "D0_coordinator_chunks": 525,
+    "I_coordinator_chunks_upper": 525,
+    "checkpoint_loads": 0,
+    "agent_observations": 672000,
+    "batched_controller_calls": 6000,
+    "I_cost_law": "15 * sum ceil(M_r/1280), five M_r <= 8000; all row/decoder/recurrent/lower PPO work retained"
+  },
+  "ended_caps_seconds": {
+    "FSD771003": {
+      "D0": 900,
+      "I": 1800,
+      "native": 2700,
+      "support": 300,
+      "complete": 3000
+    }
+  },
+  "recommended_numeric_caps_sum_seconds": 6000
 }
