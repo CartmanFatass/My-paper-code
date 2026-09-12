@@ -27,7 +27,10 @@ the exact five-new-fit/64-world comparison to provisional single-task C-BENCH un
 prescribed model-dependent inference. The original Innovator has now accepted the
 unchanged qualified proposal for prospective bindings and freeze, followed by the
 assigned minimal implementation, technical acceptance and five complete new fits.
-No new C card, namespace or scientific result exists at this decision-intake boundary. The older E01 observations
+The [C01 protocol](ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md) now fixes
+the first outcome-blind iid five-unit namespace draw, the exact joint analysis and
+all stopping/claim boundaries before implementation. No new scientific result exists;
+accepted exact source and execution inputs still precede every fit. The older E01 observations
 on two selected retained bases remain development evidence. The learned selective-retrace
 package stays ended: both learned gates improved over C, but F was stronger in both
 instances and the structured gate's advantage over the generic gate did not recur.
