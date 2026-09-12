@@ -1,7 +1,7 @@
 {
   "recorded_utc": "2026-09-12T23:43:11.035275+00:00",
   "request_id": "2026-09-12-post-kelu-marginal-investment-01",
-  "state": "READY_HANDOFF_NOT_SENT_BY_AUTHOR",
+  "state": "SUPERSEDED_UNSENT_DO_NOT_DISPATCH",
   "author": "/root/dm_a_mx_portfolio_resume",
   "source_thread_id": "01a095c2-e06a-7a92-984f-2dca23d77d57",
   "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
@@ -294,5 +294,11 @@
   "author_pro_send": 0,
   "owner_item": "20260912-root-019",
   "owner_item_no_auto_applied": true,
-  "late_original_DM_notice": "After TASK was committed/pushed, FSD DM reported a full U response (provider812ad330e/main e8b273463), with original-author intake not yet published. DM reports optional same-host five-update I1280/D0-default use only and no LONG grant, and explicitly requested preserving this fixed request boundary. This receipt is not substituted for full accepted science in this TASK; current snapshot and old U-independent author recommendation remain fixed. Root applies any completed U intake independently."
+  "late_original_DM_notice": "After TASK was committed/pushed, FSD DM reported a full U response (provider812ad330e/main e8b273463), with original-author intake not yet published. DM reports optional same-host five-update I1280/D0-default use only and no LONG grant, and explicitly requested preserving this fixed request boundary. This receipt is not substituted for full accepted science in this TASK; current snapshot and old U-independent author recommendation remain fixed. Root applies any completed U intake independently.",
+  "supersession": {
+    "authority": "Root explicit assignment and no-dispatch/no-acceptance reconciliation2026-09-12",
+    "replacement_handoff_path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/delivery_five/HANDOFF.json",
+    "root_received_old_relay": true,
+    "provider_send_confirmed": false
+  }
 }

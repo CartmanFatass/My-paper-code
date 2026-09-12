@@ -1,7 +1,7 @@
 {
-  "recorded_utc": "2026-09-12T23:32:56.138508+00:00",
+  "recorded_utc": "2026-09-12T23:56:48.267484+00:00",
   "state": "DECISION_READY_AUTHOR_RECOMMENDATIONS_NOT_GRANTED",
-  "assignment": "Root next clean Portfolio question after complete K/E/L/U intake; ACPS, CADC, MGTAP and FSD separately refreshed",
+  "assignment": "Root confirmed four-item handoff entirely undispatched/unaccepted; replace it with one five-item version adding current RCLE L output",
   "author": "/root/dm_a_mx_portfolio_resume",
   "author_uuid": "01a095c2-e06a-7a92-984f-2dca23d77d57",
   "source_manifest": [
@@ -98,31 +98,31 @@
     },
     {
       "group": "FSD",
-      "sha": "bc8d619db494bbbb23d32a70c846dee92fbfb083",
+      "sha": "7dbbc9e6b9453eac32f9ff8212fe897fc8ccbbcc",
       "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
-      "git_bytes": 10798,
-      "sha256": "5405a6ba05dc2d5c613a6aa0bc1ca0989dbcbc8f33d4e4bff072947310ace4e5"
+      "git_bytes": 10850,
+      "sha256": "5dc98b7b08550dd49cd09ff7f87eaceb2a7861485b064dbeb7ca038355c52ff5"
     },
     {
       "group": "FSD",
-      "sha": "bc8d619db494bbbb23d32a70c846dee92fbfb083",
+      "sha": "7dbbc9e6b9453eac32f9ff8212fe897fc8ccbbcc",
       "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
-      "git_bytes": 55343,
-      "sha256": "7c0ea28b8865181d5f3df8cefe43ef5923c13cd8bfaa40e3de4daa6c087d4998"
+      "git_bytes": 57584,
+      "sha256": "c2a5e735d29924ee2dda379ff7df0925f96cb8d54fd41c5ba718f7dc130e0df0"
     },
     {
       "group": "current_control",
-      "sha": "f9c320b4e98f3677fd2a617218b447da17afd1a7",
+      "sha": "d6c3a0eec00d7cb647a8313d1d3500f4fb365a51",
       "path": "docs/research/portfolio/PORTFOLIO.md",
-      "git_bytes": 12156,
-      "sha256": "aa5a456da448362f20899509e6d97454bc1daf485982a5acafb2e248bc5f84f1"
+      "git_bytes": 12187,
+      "sha256": "20fce943209587cbeed10ca357ed5a1544008ab3cedd46c722e8520aa8ecb17a"
     },
     {
       "group": "current_control",
-      "sha": "f9c320b4e98f3677fd2a617218b447da17afd1a7",
+      "sha": "d6c3a0eec00d7cb647a8313d1d3500f4fb365a51",
       "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
-      "git_bytes": 4044,
-      "sha256": "d6a0591fe2176f0b3e46f9832c43b5ecf0464107f678e212736e314251f39739"
+      "git_bytes": 4070,
+      "sha256": "98932c7f521c4ab4459697a72ca80cde94bba1c48289bd5fa3d0d2c4f8d619c4"
     },
     {
       "group": "accepted_KELU",
@@ -158,6 +158,55 @@
       "path": "docs/research/candidates/metric_ground_transport_allocation/next_use_20260912/EXPOSURE_AND_COST.json",
       "git_bytes": 1793,
       "sha256": "9a6a9dc682cc294f1fa09b4ea455f158244f20d6aa8cab3a189c72fd239831ae"
+    },
+    {
+      "group": "RCLE_L",
+      "sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_L_DESIGN_INTAKE_20260912.md",
+      "git_bytes": 11291,
+      "sha256": "cf086a50573e812e97cca45e59abd2aa7da6d761aa019d336b448e73a79a40f0"
+    },
+    {
+      "group": "RCLE_L",
+      "sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_JOINT_QUOTA_PHASE_B_PROPOSAL_20260912.md",
+      "git_bytes": 22762,
+      "sha256": "6282faf6b2025d8f9e246d909a0f487cbd94d1286ab72e3007e9e1c747006c0d"
+    },
+    {
+      "group": "RCLE_L",
+      "sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/l_design_20260912/WORK_AND_SCOPE.json",
+      "git_bytes": 3569,
+      "sha256": "dbe31be4c87e36f47bc35a5ce985a2accd3a00ff5e8bf335ec3ec76d727091be"
+    },
+    {
+      "group": "RCLE_L",
+      "sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/l_design_20260912/LITERATURE_SCOPE.json",
+      "git_bytes": 3216,
+      "sha256": "cb5d5f6c8a233cced3863ef775556484302a0a88a2517d34297e99c378ea6d68"
+    },
+    {
+      "group": "RCLE_L",
+      "sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "git_bytes": 55391,
+      "sha256": "eed8f96249f7f9d99723cf134bf3629b1a7a54cb36f574c5621de87d1020856a"
+    },
+    {
+      "group": "RCLE_L",
+      "sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TARGET_BOUND_COMMITMENT_FRAGMENTATION_VALUE_SCIENCE_CARD.md",
+      "git_bytes": 42923,
+      "sha256": "1c48d25b365e4d1d0d251a301c6f66ffc8102bae315d8c1b4b29780ec1b48bd8"
+    },
+    {
+      "group": "FSD_U_complete",
+      "sha": "7dbbc9e6b9453eac32f9ff8212fe897fc8ccbbcc",
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md",
+      "git_bytes": 11535,
+      "sha256": "71a034aa9aad2ddc4554548b29b0e2d5a81f7628252720aa628d051f733edddf"
     }
   ],
   "registry": [
@@ -298,17 +347,18 @@
     }
   ],
   "current_control_read": {
-    "source_sha": "f9c320b4e98f3677fd2a617218b447da17afd1a7",
+    "source_sha": "d6c3a0eec00d7cb647a8313d1d3500f4fb365a51",
     "reported_actual_directions": [
-      "ACVC K",
-      "FOLR E",
-      "RCLE L",
-      "FSD U",
-      "MGTAP authoring"
+      "ACVC K terminal intake",
+      "FOLR E Generic adopted run",
+      "FSD U original-DM intake",
+      "MGTAP current Portfolio authoring",
+      "RCLE current Portfolio authoring"
     ],
     "not_a_live_handle_observation": true,
-    "stale_overview_excluded": "Root removed the superseded overview at this fixed published revision. Reported preparation snapshot, not a live-handle observation.",
-    "rule": "Five is a rolling actual-direction target, not number of new grants; no ended allocation implies lifecycle stop."
+    "stale_overview_excluded": "Current source heading and EXPERIMENT_TRACKING describe latest work; an older FSD row still says provider observing, superseded by its original-DM full-response/intake notice. L design is complete; present RCLE action is this proposal request, not unused L grant.",
+    "rule": "Five is a rolling actual-direction target, not number of new grants; no ended allocation implies lifecycle stop.",
+    "later_refresh": "After the fixed d6c3a0e control snapshot, FSD U full accepted original-DM intake was published7dbbc9e6. It no longer contributes running U work. MGTAP and RCLE are two inputs authored by one native author in one Portfolio request, not two independently observed top-level execution chains. Root was notified; no lifecycle inferred."
   },
   "ACPS": {
     "lifecycle": "ACTIVE",
@@ -399,7 +449,7 @@
       987.99
     ],
     "headroom": "matching tuned same-information renewal UAV host record absent; older conditional diagnostics remain separate",
-    "current_U": "One original-Convergence use judgment/full intake funded by K/E/L/U; no empirical allowance. Do not duplicate it or require B-LONG-D0 before it.",
+    "current_U": "Complete original-DM PRO_FINAL intake7dbbc9e6: limited optional I1280 on the tested host/recipe/five-rollout budget, D0 default. No new discriminator/experiment/consultation/LONG selected; full documentary cost UNKNOWN.",
     "new_proposal": "One fresh I1280-five-update vs authentic D0-long-ten-update pair, sole32-world final per arm, MEI .01 J",
     "new_offer_not_granted": {
       "D0_long_arm_seconds": 1800,
@@ -411,8 +461,8 @@
     },
     "forecast": "D0-long wall, future I/complete support UNKNOWN; ten updates not exact equal time",
     "new_code_ready": false,
-    "latest_original_DM_refresh": "Direct native reply 2026-09-12: retain B-LONG-D0 this round while already-purchased U identifies a concrete use decision. A marginal-value recommendation, not mandatory consultation-first or a B launch gate. U and other directions continue.",
-    "current_author_recommendation": "No new LONG investment this round; preserve candidate and already-funded U. Revisit if actual optional-use decision is sensitive to extra ordinary training."
+    "latest_original_DM_refresh": "7dbbc9e6 full intake and direct message: U complete, no new use or LONG investment follows automatically. Prior no-current-LONG recommendation preserved at this clean replacement boundary.",
+    "current_author_recommendation": "Retain LONG without present new funding. U has resolved limited optional use without supplying a new wider-budget use; LONG remains a distinct unallocated comparator question for a later concrete choice."
   },
   "prospective_configuration_arithmetic": {
     "ACPS_replication_if_selected": {
@@ -497,6 +547,51 @@
       },
       "numerical_native_support_complete_costs": "UNKNOWN; no models, pilot, per-step rate or numerical budget inferred",
       "fresh_master": "unassigned"
+    },
+    "RCLE_joint_phase_if_selected": {
+      "fits": 1,
+      "optimizer_update_opportunities": 256,
+      "episodes_per_update": 64,
+      "training_episodes": 16384,
+      "endpoint_roles": [
+        "own_initialization",
+        "final256",
+        "GREEDY-QUOTA-PHASE",
+        "INDEPENDENT-NEAREST"
+      ],
+      "episodes_per_role": 512,
+      "all_evaluation_episodes": 2048,
+      "complete_episodes": 18432,
+      "complete_native_ticks": 1179648,
+      "training_batches_32": 512,
+      "endpoint_batches_32": 64,
+      "total_batches_32": 576,
+      "mean_training_N": 8,
+      "mean_training_N_squared": 68,
+      "mean_evaluation_N": 10,
+      "mean_evaluation_N_squared": 104,
+      "phase_draws_train": 262144,
+      "phase_draws_init_final": 16384,
+      "phase_head_evaluations_train": 2097152,
+      "phase_head_evaluations_init_final": 163840,
+      "assignment_element_rows_train": 17825792,
+      "assignment_element_rows_init_final": 1703936,
+      "greedy_phase_assignment_distance_rows": 851968,
+      "nearest_candidate_distance_rows": 491520,
+      "learned_parameters": 2561,
+      "parameter_expression": "(8*32+32)+(32*32+32)+(36*32+32)+(32*1+1)",
+      "neural_and_greedy_work_growth": "O(N^2) assignment rows per ordinary claim clock; N actual phase actions, no future rollout/solver or joint-action search",
+      "native_claim_clocks_per_episode": 16,
+      "MEI_U_each_primary": 0.025,
+      "MEI_normalized_unmet_ticks": 1.0,
+      "requested_whole_native_cap_s": 900,
+      "requested_all_additional_invoked_support_cap_s": 900,
+      "requested_complete_invoked_cap_s": 1800,
+      "caps_are": "future willingness to spend, not forecast, prior balance or current grant",
+      "future_complete_documentary_provider_agent_bill": "unknown; must be explicit in future investment decision",
+      "native_rate_peak_graph_memory_implementation_time": "unknown; no timing pilot or measurement allocated",
+      "independent_unit": "one fresh trained policy; scenario uncertainty conditional on it",
+      "scientific_identity_commands_and_admission": "not created; bind only if later selected and funded"
     }
   },
   "author_exposure": {
@@ -517,15 +612,49 @@
     "ACPS": "one fresh unscreened same-comparison B if Portfolio accepts newly explicit full caps; no existing cap offer or grant",
     "CADC": "no unchanged repeat; recommend explicit reversible Portfolio PARK, versus one bounded no-numerical design or ACTIVE/no addition",
     "MGTAP": "one original-node use/design question and complete intake; no B grant",
-    "FSD": "retain LONG without present additional funding; already-funded U continues"
+    "FSD": "Retain LONG without present new funding. U has resolved limited optional use without supplying a new wider-budget use; LONG remains a distinct unallocated comparator question for a later concrete choice.",
+    "RCLE": "Purchase one proper original-node family/use selection for this sole candidate; consider conditional bounded B funding inside new900+900/1800 offer if that exact family is conformingly selected, versus selection-only/no addition/explicit Portfolio PARK. No empirical invocation or local family decision."
   },
   "author_recommendations_are_not_dispositions": true,
   "input_sync_commits_not_for_root_cherry_pick": [
     "32afc7b7e2b37176adf5776482221b3ebafebbd8",
     "4245225a08646a3842f23c72a599fec4e580365f",
-    "f2d7d5b82e34a1e073fc78b69a1f602e2b7f64f2"
+    "f2d7d5b82e34a1e073fc78b69a1f602e2b7f64f2",
+    "34f7c19954fffc7b6fe1bc3fba8df03818a52eab",
+    "fc8a2a9080a9f70acd29eef13656ea704a748f17"
   ],
   "mechanical_issue": "One overlong Windows exec command rejected before acceptance with os error206 (filename or extension too long); split writes used, no scientific exposure or scope change.",
-  "owner_item": "20260912-root-019",
-  "owner_item_state": "P2 planned author recommendations; auto_applied absent"
+  "owner_item_state": "P2 five-item planned recommendations, no auto_applied; old019 traced superseded",
+  "original_four_item_status": {
+    "handoff_sha": "b24d93b30b72ae353827ee56eb5a6337d19399c4",
+    "task_sha": "fb2a219df180ef29419d65e635b70eb985502729",
+    "relay_received": true,
+    "root_fact": "Root explicitly confirmed no Transport dispatch and no provider acceptance before replacement",
+    "status": "SUPERSEDED_UNSENT_DO_NOT_DISPATCH",
+    "replacement_folder": "delivery_five"
+  },
+  "RCLE": {
+    "lifecycle": "ACTIVE",
+    "priority": "MEDIUM",
+    "recasts": "existing history preserved; no recast selected",
+    "DM": "/root/dm_a_mx_rcle_intake",
+    "checkout": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906",
+    "branch": "codex/rcle",
+    "L_status": "complete documentary unit, one candidate only; no family/code/experiment/Pro selection",
+    "proposal": "learned single public common quota phase versus same-information greedy quota phase and attained nearest; own-init/final/greedy/nearest roles",
+    "primaries": "D_g=U_greedy-U_final; D_n=U_nearest-U_final, equally weighted ACTIVE_CONTINUATION8to12 and12to8",
+    "MEI_U_each": 0.025,
+    "headroom": "matching tuned same-information upper/baseline absent",
+    "future_offer": {
+      "whole_native_seconds": 900,
+      "additional_support_seconds": 900,
+      "complete_seconds": 1800
+    },
+    "complete_native_support_forecast": "UNKNOWN",
+    "family_selection": "Ordinary original direction-tier family/use choice remains required; zero current Pro allowance. Portfolio must explicitly select investment and exact ordinary selection route, not infer L granted it.",
+    "known_contrary_evidence": "B07 reference-.008841959635417 and G_U-.000205485026042; all reference U cells adverse, early learning with fragmentation harms. Quota counts F=0 by algebra, not observed physical service.",
+    "author_recommendation": "Purchase one proper original-node family/use selection for this sole candidate; consider conditional bounded B funding inside new900+900/1800 offer if that exact family is conformingly selected, versus selection-only/no addition/explicit Portfolio PARK. No empirical invocation or local family decision."
+  },
+  "superseded_owner_item": "20260912-root-019",
+  "owner_item": "20260912-root-020"
 }

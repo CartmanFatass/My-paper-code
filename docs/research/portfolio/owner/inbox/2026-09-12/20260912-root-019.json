@@ -107,5 +107,15 @@
     "verdict_text": "建议 ACPS 购买一组新的独立配对并由 Portfolio 新定完整上限；CADC 不原样复测，建议 Portfolio 明确可逆停放；MGTAP 仅购买一次原节点用途/设计判断；FSD 本轮保留 LONG 候选，已购买 U 独立推进。每项均有真实反选项，当前无投资或生命周期选择被本作者执行。",
     "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T23:58:26+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/PREPARATION_INTAKE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "依据Root在既有owner委托下的明确未发送范围替换：旧四项从未派Transport/被provider接受，追加RCLE后仅五项新版可派发。旧项保留未应用提案历史，无旧四项投资或PARK被作者执行。新五项P2承载当前选择。"
+    }
+  ]
 }
