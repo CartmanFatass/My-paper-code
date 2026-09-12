@@ -175,3 +175,14 @@ dependent limitation. No fourth pair, replacement identity, retry, fixture,
 extra/H panel, tuning, consultation or successor. A technical failure cannot
 create scientific polarity or new budget; necessary terminal preservation
 continues honestly with any actual cost breach recorded.
+
+## 6. Observed outcome
+
+The one complete pair is accepted COND_ABOVE_MEI: +.02447811898058116 J,
+conditional SE.004658159652932406,26 positive/6 adverse. DM's inside-MEI
+prediction missed; owner prediction not taken. Complete native361.85s obeys
+the original450/450/900 convention; support tails remain qualified unknown.
+Both checkpoints/raw panels and terminal/empty-Monitor-goal evidence are
+preserved. [Final intake](MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md)
+ends scientific execution and returns only scoped cleanup after Root retention.
+Original rule/MEI/comparator/default and both prior outcomes remain unchanged.
