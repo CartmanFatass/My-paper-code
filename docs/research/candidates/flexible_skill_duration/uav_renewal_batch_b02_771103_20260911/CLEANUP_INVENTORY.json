@@ -1,0 +1,42 @@
+{
+  "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
+  "prepared_utc": "2026-09-12T02:52:33.075473+00:00",
+  "state": "I active; retention needed until terminal collection and full preservation",
+  "cleanup_owner": "/root/dm_fsd_i1280_implementation",
+  "Root_role": "integration and retention/reclamation acceptance",
+  "paths": [
+    {
+      "path": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911",
+      "kind": "detached execution worktree",
+      "retention": "active I plus D0 companion; preserve outputs before removal; verify disk and Git registration absence"
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911",
+      "kind": "receipt inputs",
+      "retention": "I admission/time and D0 receipts needed for collection"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-D0-20260911",
+      "kind": "terminal D0 supervisor",
+      "retention": "included in published 11-file raw archive; retain through pair closeout"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-I-20260911",
+      "kind": "active I supervisor",
+      "retention": "retain until terminal receipt and complete preservation"
+    }
+  ],
+  "preserved_D0": {
+    "commit": "581bef523c8df7d026fd5a1fcf2785c09569d745",
+    "archive": "D0_collection.tar.gz",
+    "sha256": "8539d21d1e70f78f8b6431479471a32d9d707ea857297f3f729b2737a40303a2",
+    "raw_files": 11
+  },
+  "local_temporary_extraction_created": false,
+  "shared_local_authoring": {
+    "path": "C:/Projects/HMASD-worktrees/codex-fsd",
+    "disposition": "retain; shared direction authoring and current DM"
+  },
+  "prior_771003_duplicate": "outside this allocation; existing policy restriction and retention unchanged",
+  "removals_performed": 0
+}

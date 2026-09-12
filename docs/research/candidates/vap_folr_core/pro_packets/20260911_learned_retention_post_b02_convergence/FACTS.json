@@ -1,0 +1,489 @@
+{
+  "request_id": "folr-learned-retention-post-b02-convergence-20260911",
+  "created_utc": "2026-09-12T02:31:13.811376+00:00",
+  "role": "direction DM author, not Portfolio author for this request",
+  "authoring_checkout": "C:/Projects/HMASD-worktrees/codex-vap-folr",
+  "branch": "codex/vap-folr",
+  "starting_clean_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+  "current_required_input_merge_sha": "d1d26644a94f83e01d3f193956f230f218664061",
+  "root_input_sha": "cbec1bea043e7ced03d60a69de5f14b0571dd245",
+  "portfolio_response_sha": "05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+  "portfolio_assignment": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/EXECUTION_MAPPING.md#3-folr--one-original-learned-recipe-family-question-and-full-intake",
+  "actual_author_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "policy_search_candidates": 0,
+    "profiling": 0,
+    "source_implementation_edits": 0,
+    "source_or_numerical_tests": 0,
+    "new_raw_result_analysis": 0,
+    "provider_sends": 0,
+    "transport_dispatches": 0
+  },
+  "machine_generated_exposure_line": "NEW EXPOSURE: scientific_invocations=0, models=0, checkpoint_loads=0, environments=0, scientific_rng_masters=0, training_episodes=0, native_ticks=0, optimizer_steps=0, evaluation_episodes=0, diagnostic_trajectories=0, policy_search_candidates=0, profiling=0, source_implementation_edits=0, source_or_numerical_tests=0, new_raw_result_analysis=0, provider_sends=0, transport_dispatches=0. Documentary retrieval and configuration arithmetic only.",
+  "current_allowance": "Exactly one original Convergence question and complete intake; zero implementation/numerical; no automatic next question",
+  "source_surface": [
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "accepted_source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "git_sha256": "3936fd69b99d1b65c7644821848e419a9e3118120efbcc57667fba5ef5db3dc1",
+      "current_git_surface_matches": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+      "accepted_source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "git_sha256": "29dc8e1a18426a42f3cf01f0eba03f6bfa44eeeefddeec684d6458c7139b774c",
+      "current_git_surface_matches": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+      "accepted_source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "git_sha256": "01770613528bc8e1f3b86c4cafa934dda98c9639490733a123b101c48723e54a",
+      "current_git_surface_matches": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+      "accepted_source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "git_sha256": "0b95da626bab87c1cab7d38886b53291fd1a5167b66bfabf9e0dc33d5e81ed03",
+      "current_git_surface_matches": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+      "accepted_source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "git_sha256": "775e598921ee7b09721b205624c7e7ac30e1ace177bdcb720b9120c5f4443fa3",
+      "current_git_surface_matches": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py",
+      "accepted_source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "git_sha256": "ae141219443ad169c5b7f58608e6785eadbd60a8de63c2d9366716ddd19fed9a",
+      "current_git_surface_matches": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py",
+      "accepted_source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "git_sha256": "dc342eefc74af9be788b006dfc70ef471088380543a3d005af19b0309d57fc86",
+      "current_git_surface_matches": true
+    },
+    {
+      "path": "scripts/run_folr_public_lifecycle_b01.py",
+      "accepted_source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "git_sha256": "30d021557e10c25638cdc313274cae4e13cdacd75832c58ebafa87b4dad8026c",
+      "current_git_surface_matches": true
+    }
+  ],
+  "historical_results": {
+    "B01": {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_RESULT_SUMMARY_20260911.json",
+      "source_record_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "training_seed": 7809,
+      "evaluation_seed": 107809,
+      "primary": {
+        "J_RETAIN": -0.16007812500000018,
+        "J_LEARNED_EVENT": 1.6032812499999995,
+        "d_LR": 1.7633593749999998,
+        "rule": "LEARNED_EVENT_ABOVE_MEI",
+        "independent_training_pairs": 1,
+        "conditional_episode_rows_paired": false,
+        "training_seed_standard_error": null,
+        "absolute_MEI": 1.0
+      },
+      "pair_totals": {
+        "real_training_fits": 2,
+        "independent_training_pairs": 1,
+        "training_episodes": 10000,
+        "training_ticks": 200000,
+        "optimizer_steps": 9938,
+        "evaluation_episodes": 256,
+        "evaluation_ticks": 5120,
+        "total_team_ticks": 205120,
+        "replay_GRU_rows": 66783360,
+        "acting_rows": 1076880,
+        "learned_gate_forward_rows": 33930120,
+        "learning_gate_displacement_l2": 1.3531219082819292,
+        "gate_displacement_relative_to_initial_gate_norm": 0.294469333135194
+      },
+      "budget_reading": {
+        "whole_native_seconds": {
+          "RETAIN": 835.33,
+          "LEARNED_EVENT": 867.79
+        },
+        "whole_native_sum_seconds": 1703.12,
+        "runner_wall_sum_seconds": 1702.3697368849535,
+        "supervisor_log_duration_seconds": {
+          "RETAIN": 836,
+          "LEARNED_EVENT": 868
+        },
+        "native_study_elapsed_seconds_from_coarse_supervisor_headers": 931,
+        "CPU_user_plus_system_seconds": 1706.1299999999999,
+        "known_native_plus_support_seconds": 1775.8515399999999,
+        "native_caps_pass": true,
+        "full_support_and_complete_caps": "not certified from incomplete support account",
+        "current_status_uptime_is_runtime": false,
+        "gate_only_overhead_identified": false
+      },
+      "support_known_seconds": 72.73154000000001,
+      "support_unknowns": [
+        "unitemized tool editing/authoring work",
+        "any interim Monitor observation work not forwarded as timed receipts",
+        "main integration work not supplied in this direction ledger",
+        "publication and cleanup beyond this snapshot"
+      ],
+      "prediction": {
+        "DM": "WITHIN_MEI",
+        "confidence": "low",
+        "observed_branch": "LEARNED_EVENT_ABOVE_MEI",
+        "score": "miss",
+        "owner": "not taken"
+      },
+      "arm_summary": {
+        "RETAIN": {
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969,
+          "evaluation_episodes": 128,
+          "evaluation_ticks": 2560,
+          "training_return_sum": -27223.240000000085,
+          "training_events": {
+            "births": 20436,
+            "departures": 6905,
+            "survivor_opportunities": 44332,
+            "eligible_survivor_opportunities": 265986,
+            "survivor_resets": 0,
+            "survivor_attenuations": 0
+          },
+          "evaluation_events": {
+            "births": 497,
+            "departures": 169,
+            "survivor_opportunities": 1160,
+            "eligible_survivor_opportunities": 6626,
+            "survivor_resets": 0,
+            "survivor_attenuations": 0
+          },
+          "mean_native_return": -0.16007812500000018
+        },
+        "LEARNED_EVENT": {
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969,
+          "evaluation_episodes": 128,
+          "evaluation_ticks": 2560,
+          "training_return_sum": -22073.37000000001,
+          "training_events": {
+            "births": 20599,
+            "departures": 7580,
+            "survivor_opportunities": 45865,
+            "eligible_survivor_opportunities": 262032,
+            "survivor_resets": 0,
+            "survivor_attenuations": 45865
+          },
+          "evaluation_events": {
+            "births": 515,
+            "departures": 159,
+            "survivor_opportunities": 1317,
+            "eligible_survivor_opportunities": 6951,
+            "survivor_resets": 0,
+            "survivor_attenuations": 1317
+          },
+          "mean_native_return": 1.6032812499999995
+        }
+      }
+    },
+    "B02": {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_RESULT_SUMMARY_20260911.json",
+      "source_record_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "source_sha": "2b22270b3b076df60f4afd3203c3f09aeab3b98b",
+      "training_seed": 7810,
+      "evaluation_seed": 107810,
+      "primary": {
+        "J_RETAIN": 6.290546875,
+        "J_LEARNED_EVENT": 4.5210156249999995,
+        "d_LR": -1.7695312500000009,
+        "rule": "RETAIN_ABOVE_MEI",
+        "independent_training_pairs": 1,
+        "conditional_episode_rows_paired": false,
+        "training_seed_standard_error": null,
+        "absolute_MEI": 1.0
+      },
+      "pair_totals": {
+        "real_training_fits": 2,
+        "matched_initialization_pairs": 1,
+        "training_episodes": 10000,
+        "training_team_ticks": 200000,
+        "optimizer_steps": 9938,
+        "evaluation_episodes": 256,
+        "evaluation_team_ticks": 5120,
+        "total_team_ticks": 205120,
+        "replay_gru_rows": 66783360,
+        "acting_rows": 1076880,
+        "learned_gate_forward_rows": 33930120
+      },
+      "budget_reading": {
+        "whole_native_sum_seconds": 1815.9899999999998,
+        "runner_wall_sum_seconds_nested": 1815.1867963549448,
+        "supervisor_duration_seconds_coarse": [
+          895,
+          920
+        ],
+        "study_elapsed_seconds_from_log_headers": 981,
+        "aggregate_native_user_system_cpu_seconds": 1818.45,
+        "native_caps_pass": true,
+        "known_native_plus_invoked_support_seconds": 1863.5954457999999,
+        "no_double_count": "whole GNU-time clocks contain nested runner clocks; supervisor current uptime is not terminal duration",
+        "gate_arm_minus_retain_whole_seconds": 25.129999999999995,
+        "gate_cost_interpretation": "package/run difference under shared execution and own trajectories, not isolated kernel overhead",
+        "valid_results_in_this_object": 1,
+        "native_seconds_per_valid_result": 1815.9899999999998
+      },
+      "support_known_seconds": 47.605445800000005,
+      "support_unknowns": [
+        "unitemized authoring/tool effort",
+        "interim Monitor and persistence-repair work not timed in supplied receipts",
+        "Root main integration work not supplied",
+        "later publication and cleanup beyond this snapshot"
+      ],
+      "prediction": {
+        "DM": "WITHIN_MEI",
+        "confidence": "low",
+        "observed_branch": "RETAIN_ABOVE_MEI",
+        "score": "missed",
+        "owner": "not taken"
+      },
+      "arm_summary": {
+        "RETAIN": {
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969,
+          "evaluation_episodes": 128,
+          "evaluation_ticks": 2560,
+          "training_return_sum": -16276.750000000118,
+          "training_events": {
+            "births": 21422,
+            "departures": 8774,
+            "survivor_opportunities": 49017,
+            "eligible_survivor_opportunities": 257787,
+            "survivor_resets": 0,
+            "survivor_attenuations": 0
+          },
+          "evaluation_events": {
+            "births": 593,
+            "departures": 285,
+            "survivor_opportunities": 1489,
+            "eligible_survivor_opportunities": 6319,
+            "survivor_resets": 0,
+            "survivor_attenuations": 0
+          },
+          "mean_native_return": 6.290546875
+        },
+        "LEARNED_EVENT": {
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969,
+          "evaluation_episodes": 128,
+          "evaluation_ticks": 2560,
+          "training_return_sum": -18861.199999999924,
+          "training_events": {
+            "births": 21439,
+            "departures": 8473,
+            "survivor_opportunities": 48158,
+            "eligible_survivor_opportunities": 261314,
+            "survivor_resets": 0,
+            "survivor_attenuations": 48158
+          },
+          "evaluation_events": {
+            "births": 598,
+            "departures": 288,
+            "survivor_opportunities": 1451,
+            "eligible_survivor_opportunities": 6437,
+            "survivor_resets": 0,
+            "survivor_attenuations": 1451
+          },
+          "mean_native_return": 4.5210156249999995
+        }
+      }
+    }
+  },
+  "historical_result_reading": "Extraction of already accepted object aggregates/counts only; no pooled estimate, interval, new checkpoint load, trajectory or raw-return reanalysis. Original card classifications and floating-point source values preserved.",
+  "possible_future_unchanged_B": {
+    "allocation": "NONE; possible future A proposal, not a new card/seed/launch budget",
+    "real_fits": 2,
+    "independent_training_pairs": 1,
+    "training_episodes_per_arm": 5000,
+    "training_ticks_per_arm": 100000,
+    "optimizer_steps_per_arm": 4969,
+    "evaluation_episodes_per_arm": 128,
+    "evaluation_ticks_per_arm": 2560,
+    "training_episodes": 10000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "total_team_ticks": 205120,
+    "replay_gru_rows": 66783360,
+    "acting_rows": 1076880,
+    "learned_gate_forward_rows": 33930120,
+    "historical_RETAIN_whole_seconds": [
+      835.33,
+      895.43
+    ],
+    "historical_LEARNED_EVENT_whole_seconds": [
+      867.79,
+      920.56
+    ],
+    "future_per_arm_wall": "unknown; historical whole-command anchors only",
+    "future_support_and_complete_cap": "unknown and unallocated; old3900 is ended",
+    "changed_B_cost": "unknown until one precise change is actually proposed; do not inherit A wall silently",
+    "added_validation": "none commissioned; future checks only for actual changed risk within a separately allocated object"
+  },
+  "later_B02_cost_window": {
+    "source": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/FACTS.json@9755931f892990e4555faf0b276ed713579c81f9",
+    "known_DM_support_seconds": 54.8407131,
+    "interpretation": "Later qualified DM window; not added to earlier47.6054458, not a complete support/total certificate. One shared1-second FSD/FOLR query stays global once."
+  },
+  "current_matching_tuned_headroom": "absent; older B3 host exact record not substituted",
+  "MEI": {
+    "absolute": 1,
+    "reason": "one tenth of native10-unit collision penalty; own-card prospective decision scale"
+  },
+  "recommendation": {
+    "option": "C narrow recipe hold",
+    "status": "unexecuted close-call recommendation only; original Convergence decides",
+    "strongest_alternative": "A one future unchanged independent B pair",
+    "B_status": "No specific changed law selected or implemented by author; Pro may name exactly one plausible source-grounded alternative in this one answer, without a causal-proof prerequisite"
+  },
+  "literature_reuse": {
+    "record_path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/FACTS.json",
+    "record_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+    "retrieval": {
+      "question": "Does own-history adaptive recurrence make event-aware RETAIN a competent null; what source evidence supports a local gate?",
+      "My_lib": {
+        "registry_entries": 2,
+        "source_types": [
+          "SYNTHETIC_FIXTURE"
+        ],
+        "knowledge_fts_rows": 2,
+        "real_corpus_used": 0,
+        "limit": "verified default registry/index are fixtures only; no corpus-wide negative claim",
+        "reuse_source_sha": "bb40797dc5312641ac640664cbf7c2bd174d9815",
+        "reuse_source_path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/FACTS.json"
+      },
+      "InstSci": {
+        "catalog_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\llm-index\\catalog.v2.jsonl",
+        "catalog_sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0",
+        "catalog_rows": 190,
+        "query_regex": "recurrent|retention|memory|gated|Sable|CAMA",
+        "query_scope": "case-insensitive lexical search of JSON catalog records, not source passages",
+        "hits": [
+          {
+            "id": "MARL-0015",
+            "title": "Learning from Good Trajectories in Offline Multi-Agent Reinforcement Learning"
+          },
+          {
+            "id": "MARL-0016",
+            "title": "Models as Agents: Optimizing Multi-Step Predictions of Interactive Local Models in Model-Based Multi-Agent Reinforcement Learning"
+          },
+          {
+            "id": "MARL-0020",
+            "title": "Quantum Multi-Agent Meta Reinforcement Learning"
+          },
+          {
+            "id": "MARL-0050",
+            "title": "Robust Communicative Multi-Agent Reinforcement Learning with Active Defense"
+          },
+          {
+            "id": "MARL-0071",
+            "title": "Efficient Communication in Multi-Agent Reinforcement Learning with Implicit Consensus Generation"
+          },
+          {
+            "id": "MARL-0409",
+            "title": "Complementary Attention for Multi-Agent Reinforcement Learning"
+          },
+          {
+            "id": "MARL-0485",
+            "title": "Sable: a Performant, Efficient and Scalable Sequence Model for MARL"
+          },
+          {
+            "id": "MARL-0585",
+            "title": "Measuring Mutual Policy Divergence for Multi-Agent Sequential Exploration"
+          },
+          {
+            "id": "MARL-0588",
+            "title": "Multi-Agent Coordination via Multi-Level Communication"
+          },
+          {
+            "id": "MARL-0602",
+            "title": "A Principle of Targeted Intervention for Multi-Agent Reinforcement Learning"
+          },
+          {
+            "id": "MARL-0653",
+            "title": "Oryx: a Scalable Sequence Model for Many-Agent Coordination in Offline MARL"
+          }
+        ],
+        "selected_source": {
+          "id": "MARL-0409",
+          "sha256": "ee9d7b6adc209780a1bb0ad95d73332e9fe4456bfe7ed738926510f70448b20b",
+          "passages": [
+            {
+              "kid": 23,
+              "id": 128,
+              "pdf_page": 2
+            },
+            {
+              "kid": 45,
+              "id": 155,
+              "pdf_page": 3
+            },
+            {
+              "kid": 46,
+              "id": 156,
+              "pdf_page": 3
+            },
+            {
+              "kid": 308,
+              "id": 497,
+              "pdf_page": 16
+            },
+            {
+              "kid": 309,
+              "id": 498,
+              "pdf_page": 16
+            },
+            {
+              "kid": 312,
+              "id": 506,
+              "pdf_page": 17
+            },
+            {
+              "kid": 313,
+              "id": 507,
+              "pdf_page": 17
+            }
+          ],
+          "effect": "Strengthens learned own-history GRU null and modified-traffic/collision-penalty grounding; no original CAMA/event-gate result or equivalence theorem.",
+          "access": "DM read primary local JSON directly; Pro receives this attributed readback, not a claim that Pro accessed the local file."
+        },
+        "limit": "Search coverage is not novelty; no claim from unviewed Sable passages."
+      }
+    },
+    "reuse_limit": "Prior verified CAMA primary passages and corpus coverage reused; no fresh corpus query, novelty inference or unviewed-paper mechanism claim."
+  },
+  "binding_readback": {
+    "request_id": "folr-learned-retention-convergence-20260911",
+    "state": "ARCHIVED",
+    "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+    "binding_key": "em:vap_folr_core:convergence",
+    "source_thread_id": "01a08ed9-f1da-71c2-948f-a09c3c2d9b64",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+    "scope": "Prior completed request; no current post-B02 Send has occurred."
+  },
+  "owner_reviews": [],
+  "consultation_cost": "Full authoring/provider/intake effort unknown, not zero. No finite numerical/implementation allocation or cost probe."
+}
