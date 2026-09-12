@@ -1,0 +1,42 @@
+{
+  "question": "是否保留已获 Portfolio M 新拨款、现已绑定的 8214 第三对 COND/DENSE？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_SCIENCE_CARD_20260912.md",
+      "from": "8212/8213 两次配对结束，后续两次 M 未获投入",
+      "to": "新 M=yes 下绑定未筛选8214，完整一次配对；DENSE默认保留"
+    }
+  ],
+  "if_refused": "停止尚未执行的依赖工作，保留既有证据和已发生的调用；不自动替换种子。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-12-post-cfr-marginal-investment.md",
+      "quote": "PRO_FINAL / OWNER_DELEGATED: A=yes; M=yes; Q=no; H not selected.",
+      "why": "完整答复已由指定作者核对，明确新投一对。"
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_INTAKE_20260911.md",
+      "quote": "COND mean J is0.16707705881756274; DENSE is0.1613157374462142.",
+      "why": "最初原生正值提供很有限的投入理由。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md",
+      "quote": "COND mean J is0.19342135238526614; intact equally informed DENSE is\n0.21589092584121028.",
+      "why": "后一次差值为负，27/32世界不利。前后结果不汇总改判。"
+    }
+  ],
+  "uncertainty": [
+    "一个新训练配对的32个评估世界只给条件波动；不能证明稳定优势或注意力因果。",
+    "已知支撑调用耗时随执行记账，未测尾项不填零。"
+  ],
+  "cost": {
+    "compute": "COND≤450s，DENSE≤450s，native≤900s，support≤300s，完整future≤1200s；一次配对、无后继。",
+    "owner_time": "不等待回复；可异步修改。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a)",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_SCIENCE_CARD_20260912.md"
+}

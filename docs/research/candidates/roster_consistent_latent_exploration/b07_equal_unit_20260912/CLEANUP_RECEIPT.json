@@ -1,0 +1,102 @@
+{
+  "root_authority": "Root accepted integrated final through main2a53388b8, local archives/evidence and failed attempt retained; exactly six named remote paths authorized",
+  "remote_transport_exit": 0,
+  "remote_ssh_wall_s": 0.6874542000005022,
+  "retained_archives_and_bundles": [
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/b07-equal-unit-collection/terminal.tar.gz",
+      "bytes": 879559,
+      "sha256": "0c02cad9bf6483832fd3f00c6df2f3b886a90fa6cbf0efbcb8cf95a980184a8e",
+      "contains": "all17 original output/supervisor files"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/b07-equal-unit-preparation/source.bundle",
+      "bytes": 5921795,
+      "sha256": "196cb885a22bc558e776539be401c82dc3c3855abde3756da95f353a19b2b8d1"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/b07-reference-completion-collection/terminal.tar.gz",
+      "bytes": 17564,
+      "sha256": "f93dd0b5299e3f579db518fc0ee0abab86066928048e397c930ead2174f93c9e",
+      "contains": "all9 completion output/supervisor files"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/b07-reference-completion-preparation/source.bundle",
+      "bytes": 37909,
+      "sha256": "731576165675f19b5e839b7420f8999f52647d587d7827f91a7eab81017ea9cb"
+    }
+  ],
+  "retained_raw_manifest_members": 26,
+  "scientific_invocations_added": 0,
+  "stdout": "{\"status\": \"COMPLETE\", \"checked\": [{\"handle\": \"rcle-b07-equal-unit-s27-20260912\", \"sha\": \"1652c44ac65ed6e686610c3cfcff67dab1a0fc6b\", \"pid_absent\": 3377723, \"tmux_inactive\": true, \"exact_manifest_members\": 17, \"stage_members\": 2, \"paths\": [\"/home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912\", \"/home/wu/hmasd-inputs/rcle-b07-equal-unit-s27-20260912\", \"/home/wu/.agent-tasks/rcle-b07-equal-unit-s27-20260912\"]}, {\"handle\": \"rcle-b07-reference-completion-s27-20260912\", \"sha\": \"9eeef867f0adcf6d9a8ca9441781ad4ec2764a30\", \"pid_absent\": 3380786, \"tmux_inactive\": true, \"exact_manifest_members\": 9, \"stage_members\": 3, \"paths\": [\"/home/wu/hmasd-worktrees/rcle-b07-reference-completion-s27-20260912\", \"/home/wu/hmasd-inputs/rcle-b07-reference-completion-s27-20260912\", \"/home/wu/.agent-tasks/rcle-b07-reference-completion-s27-20260912\"]}], \"removed\": [{\"path\": \"/home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912\", \"disk_absent\": true, \"git_worktree_registration_absent\": true}, {\"path\": \"/home/wu/hmasd-inputs/rcle-b07-equal-unit-s27-20260912\", \"disk_absent\": true, \"git_worktree_registration_absent\": true}, {\"path\": \"/home/wu/.agent-tasks/rcle-b07-equal-unit-s27-20260912\", \"disk_absent\": true, \"git_worktree_registration_absent\": true}, {\"path\": \"/home/wu/hmasd-worktrees/rcle-b07-reference-completion-s27-20260912\", \"disk_absent\": true, \"git_worktree_registration_absent\": true}, {\"path\": \"/home/wu/hmasd-inputs/rcle-b07-reference-completion-s27-20260912\", \"disk_absent\": true, \"git_worktree_registration_absent\": true}, {\"path\": \"/home/wu/.agent-tasks/rcle-b07-reference-completion-s27-20260912\", \"disk_absent\": true, \"git_worktree_registration_absent\": true}], \"unrelated_worktree_registrations_unchanged\": true, \"shared_native_cache_retained\": true, \"verified_at_utc\": \"2026-09-12T18:24:31.357996+00:00\"}\n",
+  "stderr": "",
+  "remote": {
+    "status": "COMPLETE",
+    "checked": [
+      {
+        "handle": "rcle-b07-equal-unit-s27-20260912",
+        "sha": "1652c44ac65ed6e686610c3cfcff67dab1a0fc6b",
+        "pid_absent": 3377723,
+        "tmux_inactive": true,
+        "exact_manifest_members": 17,
+        "stage_members": 2,
+        "paths": [
+          "/home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912",
+          "/home/wu/hmasd-inputs/rcle-b07-equal-unit-s27-20260912",
+          "/home/wu/.agent-tasks/rcle-b07-equal-unit-s27-20260912"
+        ]
+      },
+      {
+        "handle": "rcle-b07-reference-completion-s27-20260912",
+        "sha": "9eeef867f0adcf6d9a8ca9441781ad4ec2764a30",
+        "pid_absent": 3380786,
+        "tmux_inactive": true,
+        "exact_manifest_members": 9,
+        "stage_members": 3,
+        "paths": [
+          "/home/wu/hmasd-worktrees/rcle-b07-reference-completion-s27-20260912",
+          "/home/wu/hmasd-inputs/rcle-b07-reference-completion-s27-20260912",
+          "/home/wu/.agent-tasks/rcle-b07-reference-completion-s27-20260912"
+        ]
+      }
+    ],
+    "removed": [
+      {
+        "path": "/home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912",
+        "disk_absent": true,
+        "git_worktree_registration_absent": true
+      },
+      {
+        "path": "/home/wu/hmasd-inputs/rcle-b07-equal-unit-s27-20260912",
+        "disk_absent": true,
+        "git_worktree_registration_absent": true
+      },
+      {
+        "path": "/home/wu/.agent-tasks/rcle-b07-equal-unit-s27-20260912",
+        "disk_absent": true,
+        "git_worktree_registration_absent": true
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/rcle-b07-reference-completion-s27-20260912",
+        "disk_absent": true,
+        "git_worktree_registration_absent": true
+      },
+      {
+        "path": "/home/wu/hmasd-inputs/rcle-b07-reference-completion-s27-20260912",
+        "disk_absent": true,
+        "git_worktree_registration_absent": true
+      },
+      {
+        "path": "/home/wu/.agent-tasks/rcle-b07-reference-completion-s27-20260912",
+        "disk_absent": true,
+        "git_worktree_registration_absent": true
+      }
+    ],
+    "unrelated_worktree_registrations_unchanged": true,
+    "shared_native_cache_retained": true,
+    "verified_at_utc": "2026-09-12T18:24:31.357996+00:00"
+  },
+  "enclosing_preservation_and_cleanup_command_wall_s": 0.9928983,
+  "shared_local_authoring_and_evidence_retained": true,
+  "root_main_integration": "2a53388b8"
+}

@@ -23,8 +23,13 @@ The formal scientific question is the source-defined question for this direction
 
 ## Current position
 
-The following bootstrap sentence is preserved as provenance and is not a new synthesis. Accepted
-current-host science below controls the bounded reading of the live B3 question.
+The current learned-event package position is the accepted post-B03 Convergence
+hold below: use event-aware RETAIN and do not retain another unchanged pair as
+the current funding candidate. This holds only the tested public-lifecycle
+5000-training/128-final recipe; broader FOLR questions and Portfolio fields are
+unchanged. Earlier accepted findings below retain their own host and claim scope.
+
+The following bootstrap sentence is historical provenance, not the current synthesis.
 
 > Early typed-state evidence is retained, but later objects are non-identifying and DEARS is cleaner.
 
@@ -793,3 +798,51 @@ References:
 - `FOLR_LEARNED_RETENTION_B03_RESULT_EVIDENCE_20260911.md`
 - `FOLR_LEARNED_RETENTION_B03_RESULT_SUMMARY_20260911.json`
 - `FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md`
+
+## Accepted learned-retention post-B03 Convergence — 2026-09-12
+
+**Conclusion.** The original Convergence node selects **H**, a reversible hold
+on further development spending on the exact LEARNED_EVENT / easy public-lifecycle
+Traffic Junction / 5000-training / 128-final package. Ordinary event-aware RETAIN
+remains the usable default. Do not retain another unchanged pair as the currently
+recommended funding candidate. This is a narrow in-family recipe hold, not RECAST,
+a new OPEN, permanent retirement of learned retention or Portfolio lifecycle change.
+
+**Bounded claim.** The independently generated B03 observation requested after
+B02 has arrived and gives another adverse within-pair reading. The node judges
+further unchanged development less attractive at this boundary; it does not
+apply a three-seed quota, sign vote or new pooled primary. Both H and U carried
+zero current empirical allowance, so no funded fourth pair was cancelled.
+
+**Strongest support and contradiction.** B01 +1.763359375 remains the strongest
+direct supporting learned-package point and opposition to H. B02 -1.769531250
+is the strongest adverse point; B03 adds -1.215546875. B03's proximity to the
+adverse MEI and conditional evaluation spread limit confidence, while its positive
+changing-policy training contrast stays separate. All original readings remain.
+No stable harm/equivalence, useful-memory cause or original-CAMA advantage follows.
+
+**Surviving alternative.** U, retaining one unchanged candidate for later funding,
+is legitimate but unselected. The extra learned scalar can alter finite learning
+with the same information; ordinary RETAIN already has adaptive GRU gates.
+Initial attenuation, added parameters, optimization, traffic and partner
+co-adaptation remain explanations. The conclusion does not prove containment,
+redundancy or universal harm. Matching tuned headroom remains absent.
+
+**Re-entry and next discriminator.** A renewed worthwhile same-host decision
+about including this exact optional controller versus RETAIN-only development
+can reopen consideration. No favorable pilot, novelty, fixed seed number, exact
+upper or complete causal account is required. If later selected and funded, one
+fresh unscreened unchanged training pair is the direct recurrence measurement;
+it is not a currently retained candidate or new allocation. No scheduled re-review,
+gate change, fourth pair, implementation, numerical work, C/UAV promotion or
+successor follows this completed consultation. Older fixed-half/blanket-clear
+pauses and current Portfolio lifecycle/priority/recast fields remain unchanged.
+
+References:
+
+- `pro_packets/20260912_learned_retention_post_b03_convergence/archive/RESPONSE.md`
+  at `65be91e1cecc4317a751964afd1fd16432de0b5f`
+- `pro_packets/20260912_learned_retention_post_b03_convergence/INTAKE.md`
+- `FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md`

@@ -67,8 +67,8 @@ class BindingTest(unittest.TestCase):
                     metadata, check, counts, emit, diagnostic, limits, **options):
             arm, phase, e = metadata["arm"], metadata["phase"], metadata["episode"]
             self.assertEqual(options, dict(real=True, diagnostics=False, ratio_grouping="agent_compound"))
-            self.assertEqual((env, horizon, actor.arm, critic.arm), (821301000, 256, arm, arm))
-            self.assertEqual(reset, 821300000 + (1000 if phase == "train" else 2000) + e)
+            self.assertEqual((env, horizon, actor.arm, critic.arm), (821401000, 256, arm, arm))
+            self.assertEqual(reset, 821400000 + (1000 if phase == "train" else 2000) + e)
             self.assertEqual(duration.seed, metadata["duration_seed"])
             self.assertEqual(velocity.seed, metadata["velocity_seed"])
             if phase == "train":
@@ -110,10 +110,10 @@ class BindingTest(unittest.TestCase):
             def broken_publish(*args):
                 raise OSError("supplied publication failure")
             ns["publish_summary"] = broken_publish
-        result = ns["run_pair"](8213, output, 0.0, clock=lambda: .1)
+        result = ns["run_pair"](8214, output, 0.0, clock=lambda: .1)
         closed = json.loads((output / "summary.json").read_text(encoding="utf-8"))
         self.assertEqual(closed["status"], result["status"])
-        self.assertEqual(calls, [8213])
+        self.assertEqual(calls, [8214])
         self.assertEqual(result["top_level_model_constructions"], 6)
         self.assertIsNot(train_streams["COND"], train_streams["DENSE"])
         self.assertEqual(train_streams["COND"].seed, train_streams["DENSE"].seed)

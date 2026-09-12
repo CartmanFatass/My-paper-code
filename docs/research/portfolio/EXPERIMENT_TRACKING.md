@@ -5,16 +5,17 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC F | Complete intake accepted at mainf6bf9e467: train-F minus train-C on common-F evaluation −0.0260962 J,43/64 adverse, DOWN; both arms/terminal logs complete and local archives retained; purchased pair ended | Six scoped remote cleanup targets only; no retry, extra panel, consultation or active scientific work |
-| CBSC C | Complete intake accepted at main9ca150856: RAW=STRUCT11.15, exact-zero32/32, WITHIN_MEI and below REQUEST_ONLY12.45; native90.27s, evidence preserved, purchased pair ended | Scoped reclamation only; no retry, second S or active scientific work |
-| FOLR B03 | Final paired intake accepted/main47d75d7f9: RETAIN0.947578125, LEARNED_EVENT−0.267968750, d_LR−1.215546875 ⇒ RETAIN_ABOVE_MEI; native1750.81s within cap; finite grant ended. Remote roots removed; three archived local duplicates retained after PowerShell policy rejection | No successor or active scientific work; local retention is an engineering restriction, not a scientific blocker |
-| VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
-| RCLE R | Partial intake at main8bfa6c4d8 preserves one1000-update fit (`G_U=-0.000205485`, interval crosses zero); reference panel missing after roster-column TECHNICAL_STOP. Reference-only inputs bound at main71198147e | Same DM runs one fresh-admitted detached reference completion inside the original logical invocation; unchanged900/600/1500, no fit/training/semantic addition |
-| Portfolio two remaining chains | Exact request at main13d604c4d bound to current Portfolio conversation; Transport verified bytes/binding and provider accepted the unique Send, generation in progress. D+P, renewed M and no-addition remain options; no grant yet | Transport observes/archives once; original Portfolio DM checks the complete response |
+| ACVC | Focused uniform→cluster deployment-correction Convergence task fixed at main71e29e181 and HANDOFF integrated at main725442231; queued after current MGTAP observation | Transport sends exact request once; original node selects next distinct bounded object, no third unchanged pair |
+| MGTAP | Highest-local-SINR partner-query Convergence task integrated at main235f202ca; exact prompt verified and unique Send accepted by provider | Transport observes natural completion; original DM intakes next-object decision, no fourth unchanged pair |
+| FSD | Original DM resumed with four-pair evidence and exact N/S continuation readiness | Apply the in-flight Portfolio N or S decision immediately; no unselected fifth pair |
+| RCLE | Original DM resumed; current readiness at main2ad4898c3 preserves B06/B07 evidence and exact pending-R scope | Apply R immediately if selected; no repeated B07 or added fit |
+| FOLR | Original DM resumed outside the held LEARNED_EVENT/5000/128 package | Prepare a distinct direction question without undoing package-level H or repeating the pair |
+| Portfolio N/S/R | Exact request accepted by provider and under Transport observation; new-direction drafter is refreshing all five current DM states | Intake immutable response, apply selections, then send the separate new-direction discovery/registration question |
 
-Direction chains1/5: RCLE R remains active in bounded engineering repair. ACVC F and CBSC C completed
-and released their slots. The in-flight Portfolio request can select at most two chains; the remaining
-two vacancies are recorded for the next rolling decision. No queued intention or cleanup is counted.
+Direction chains5/5: ACVC, MGTAP, FSD, RCLE and FOLR DMs have resumed their next bounded object or
+proper-node direction step. Their latest allocations completed, but no Portfolio decision stopped
+these ACTIVE directions. The N/S/R generation supplies concrete FSD/RCLE choices; new-direction
+drafting first refreshes all affected old-direction facts from the current DMs.
 
 ## Current routing
 
