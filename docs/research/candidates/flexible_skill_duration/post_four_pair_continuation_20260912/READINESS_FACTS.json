@@ -1,0 +1,128 @@
+{
+  "recorded_utc": "2026-09-12T20:20:09.032724+00:00",
+  "authority": "OWNER_DIRECT 2026-09-12 direction continuity; Root assignment to same DM",
+  "source": "/root/dm_fsd_d_pair",
+  "checkout": "C:/Projects/HMASD-worktrees/codex-fsd",
+  "branch": "codex/fsd",
+  "authoring_start_commit": "b9e9612c35cb7cc01fda3d231f4aa7ab0a8f30dd",
+  "entry_clean": true,
+  "direction_continues": true,
+  "fourth_allocation_complete": true,
+  "new_scientific_allocation_selected": false,
+  "pending_request": {
+    "request_id": "2026-09-12-post-am-remaining-capacity-01",
+    "binding": "portfolio:cross_direction",
+    "status_source": "Root reports in flight; DM performs no observation",
+    "unchanged_bindings": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/delivery_current/TASK.md",
+        "commit": "8e026779f3711bc345bcce77791b7cfe6d23dcc8",
+        "bytes": 37819,
+        "sha256": "433e945471d0fc41ec245bc3413fb71d821fb8ca4587747884b35283645bf900",
+        "matches_current_primary_git_bytes": true
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/SCIENCE_BRIEF.md",
+        "commit": "381addb2003cf2f0ec3dd6a10b0c14ef714d9853",
+        "bytes": 13925,
+        "sha256": "c61b105c977296595b50139f69688917acfc87abbf2288b28f7aba637350d6eb",
+        "matches_current_primary_git_bytes": true
+      }
+    ],
+    "N_S_mutually_exclusive": true,
+    "new_choice_applied": null
+  },
+  "existing_execution_source": "9eb99f8b68dd2863212c10693b911746a6d24354",
+  "new_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "rng_draws": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "replay": 0,
+    "profiling": 0,
+    "source_tests": 0,
+    "test_fixtures": 0,
+    "raw_result_reanalysis": 0,
+    "source_implementation_edits": 0,
+    "provider_sends": 0,
+    "new_pro_requests": 0,
+    "remote_operations": 0
+  },
+  "parameter_displacement": "not applicable: no learner or new model",
+  "future_N_counts_reused_without_execution": {
+    "arms": 2,
+    "training_pairs": 1,
+    "training_lanes": 16,
+    "evaluation_lanes": 32,
+    "horizon": 500,
+    "rollouts_per_arm": 5,
+    "training_team_ticks": 80000,
+    "training_episodes": 160,
+    "update_stages": 10,
+    "fits": 2,
+    "model_constructions": 4,
+    "evaluation_team_ticks": 32000,
+    "evaluation_episodes": 64,
+    "total_native_team_ticks": 112000,
+    "agent_observations": 672000,
+    "batched_controller_calls": 6000,
+    "D0_coordinator_chunks": 525,
+    "I_coordinator_chunks_upper": 525,
+    "I_cost_law": "15 * sum(ceil(M_r/1280)) for five rollouts, M_r <= 8000; native simulation, all six-agent decoding, recurrence/lower PPO and full endpoint/publication retained",
+    "caps_seconds": {
+      "D0": 900,
+      "I": 1800,
+      "native_sum": 2700,
+      "support": 300,
+      "complete": 3000,
+      "one_source_delivery_transaction": 45
+    }
+  },
+  "future_N_counts_source": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771203_20260912/PROSPECTIVE_COUNTS.json",
+  "future_N_counts_status": "conditional offer only; fresh identity not bound",
+  "S_future_numerical_allowance": 0,
+  "S_complete_cost": "unknown; exactly one original question and full intake only if selected",
+  "current_preparation_cost": {
+    "known_enclosing_command_seconds": 2.992805,
+    "measured_command_walls_seconds": [
+      0.1593052,
+      0.0306628,
+      0.1887389,
+      0.1116438,
+      0.262567,
+      0.3983792,
+      0.1816497,
+      0.4926306,
+      0.7187986,
+      0.4484292
+    ],
+    "unknown": [
+      "two earlier read command wall values unavailable in truncated batched outputs",
+      "rounded apply_patch and message-delivery intervals",
+      "later documentary writing/check/Git/publication and Relay until measured",
+      "agent/provider cost not numerically attributed"
+    ],
+    "scope": "New owner-directed readiness, separate from ended D allocation. Any overlap charged to a selected future grant once; no old budget refund.",
+    "native_seconds": 0
+  },
+  "source_changes": [],
+  "new_temp_or_remote_cleanup_targets": [],
+  "owner_reviews": [],
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-fsd-002.json",
+  "owner_packet": "docs/research/candidates/flexible_skill_duration/post_four_pair_continuation_20260912/OWNER_PACKET.json",
+  "acceptance": {
+    "scope": "documentary readiness only",
+    "bound_TASK_and_brief_bytes_verified": true,
+    "original_four_results_reused": true,
+    "new_source_or_numerical_work": false,
+    "owner_continuation_applied": true,
+    "conditional_N_S_choice_not_applied": true,
+    "required_local_links_resolve": true,
+    "doc_json_and_diff_check": "current publication check"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "question": "记录并执行 owner 已选择的 FSD 继续推进，准备承接原 N/S 选择，不请求重新批准。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/flexible_skill_duration/FSD_POST_FOUR_PAIR_CONTINUATION_INTAKE_20260912.md",
+      "from": "第四组有限拨款与清理完成",
+      "to": "方向持续推进；具体 N/S 未选，准备收到完整答案后直接承接"
+    }
+  ],
+  "if_refused": "在下一干净边界应用新的明确 owner 指令；保留全部正负证据与已有拨款成本。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_POST_FOUR_PAIR_CONTINUATION_INTAKE_20260912.md",
+      "quote": "FSD remains scientifically valuable and must continue as an advancing direction; the fourth pair's finite grant end was not a direction stop.",
+      "why": "当前 owner 已明确指示方向继续，不能把单次分配结束作为方向退出。"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md",
+      "quote": "One new matched training pair gives I1280−D0 **+.012554805665750726 J**",
+      "why": "完整原生正信号允许有限继续探索，不要求先证明稳定优势。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_POST_FOUR_PAIR_CONTINUATION_INTAKE_20260912.md",
+      "quote": "Strongest contradiction is the unchanged 771103 loss",
+      "why": "四组学习结果混合，最新幅度小，I 耗时约为 D0 的 2.20 倍。"
+    }
+  ],
+  "uncertainty": [
+    "四组不是固定充分数量；32局误差只条件于各组已学策略。",
+    "本次不选第五组或新咨询；原 N/S 问题不变，两者互斥。"
+  ],
+  "cost": {
+    "compute": "当前文档准备零模型零数值，支持耗时单独记录。N 若选需新分配 3000秒完整上限；S 若选完整费用未知。",
+    "owner_time": "可异步改写指令，无需逐项确认。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "FSD continues under OWNER_DIRECT 2026-09-12.",
+  "source": "docs/research/candidates/flexible_skill_duration/FSD_POST_FOUR_PAIR_CONTINUATION_INTAKE_20260912.md"
+}
