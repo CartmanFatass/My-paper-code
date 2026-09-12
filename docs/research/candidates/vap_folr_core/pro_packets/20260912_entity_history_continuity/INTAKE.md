@@ -195,6 +195,11 @@ Portfolio scientific selection by this DM or Root. No extra consultation is
 authored or sent in this intake. Ready scope and named funding need allow the
 existing rolling process to advance without a repeat question about architecture.
 
+The follow-on [implementation/resource readiness input](IMPLEMENTATION_READINESS.md)
+binds code interfaces, source-law counts, unknown complete costs and future
+admission/acceptance. It supplies the requested investment detail without
+implementing, launching or selecting Portfolio funding.
+
 ## 5. Publication, owner surfaces and actual work boundary
 
 Update the accepted DIRECTION current position and latest mechanism section,
