@@ -32,7 +32,7 @@
     "unknown_rates_no_calibration_required": true
   },
   "support": {
-    "known_invoked_seconds": 62.67113360009022,
+    "known_invoked_seconds": 68.78930770008107,
     "known_components": [
       {
         "stage": "grant read/fetch",
@@ -197,6 +197,22 @@
       {
         "stage": "new-card applied execution trace",
         "seconds": 0.27557
+      },
+      {
+        "stage": "intake boundary/link/brief check",
+        "seconds": 0.4246355
+      },
+      {
+        "stage": "complete intake commit",
+        "seconds": 0.649902
+      },
+      {
+        "stage": "complete intake push/revision",
+        "seconds": 4.7376049
+      },
+      {
+        "stage": "immutable native-byte publication check inner command wall",
+        "seconds": 0.30603169999085367
       }
     ],
     "coverage": "Nonoverlapping known command/phase walls only. Missing provider/deliberation/client, some authoring/read tails, Monitor/tool delivery and Root integration/closing costs remain UNKNOWN; closing publication/cleanup not yet charged. No inference of zero, whole-support certification or budget breach from missing coverage. Adjacent admission/evaluation/publication are already inside native time and not support-charged twice."
@@ -300,8 +316,8 @@
     "native_charge_basis": "Retain the full recorded supervisor duration, which encloses the measured165.33s admission-through-process-exit chain; do not add nested panel/fit timers.",
     "native_cap_s": 600,
     "native_cap_pass": true,
-    "known_support_s": 62.67113360009022,
-    "known_native_plus_support_s": 228.67113360009023,
+    "known_support_s": 68.78930770008107,
+    "known_native_plus_support_s": 234.78930770008105,
     "support_cap_s": 600,
     "complete_cap_s": 1200,
     "complete_support_cap_certified": false,
@@ -341,5 +357,11 @@
     "F-C": "UP",
     "F-dwell": "UP"
   },
-  "cleanup_inventory": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/CLEANUP_INVENTORY.json"
+  "cleanup_inventory": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/CLEANUP_INVENTORY.json",
+  "publication": {
+    "result_commit": "f569a80bc28bb9c679884da36824613652b414f0",
+    "immutable_native_bytes_verified": true,
+    "receipt": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/PUBLICATION_CHECK.json",
+    "closing_receipt_commit_push_and_Root_integration_cleanup": "pending or unmeasured; not zero"
+  }
 }
