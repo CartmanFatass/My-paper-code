@@ -7,12 +7,13 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | --- | --- | --- |
 | ACVC post-C01 materials | Final scientific intake accepted/main77c17d111; /root/dm_a_mx_acvc_resume supplies next-question facts to Portfolio author; no new fit | Concrete proper-node question/investment option; retention inventory is recorded |
 | FOLR B03 | Both original arms running, actual new Monitor goal adoption confirmed at approximately2026-09-12T13:35Z; owner /root/dm_a_mx_folr_cap_review | Independent terminal notices, then same-DM collection and scientific intake |
-| VNFC conditional fresh pair | /root/dm_a_mx_vnfc_recovery; bounded engineering recovery only; selected new600-native/300-support/900-complete grant remains unused/conditional | Supported same-meaning repair or alternative with relevant focused evidence, before any fresh scientific invocation |
-| RCLE original Convergence request | Windows Transport personally READY with CUA; same-request recovery dispatched after exclusive ownership confirmation | Provider-state reconciliation, permitted repaired Send, accepted generation then archive and DM intake |
+| VNFC conditional fresh pair | Owned-value pooling boundary repair accepted/main91c16cb06 after independent256/256 allocator-debug check; /root/dm_a_mx_vnfc_recovery continues the selected conditional fresh pair;900-second fresh grant unused | Bind fresh namespace/card, pass admission, then launch without another scheduling approval |
+| RCLE original Convergence request | Same request accepted by provider as `WEB:34cdbc67-caba-4b09-8430-473bdf66af5d`; Pro generation active under Windows Transport | Observe same conversation, archive complete response, then direction-DM intake; no duplicate Send |
 | Portfolio readiness/Oracle | /root/dm_a_mx_portfolio_resume; latest22-direction evidence and concrete next-slot choices | Ready-now actions immediately; necessary Portfolio packet via existing Pro node |
 
-Direction chains3/5; two accepted live scientific handles belong to one FOLR direction. Portfolio preparation
-is not an extra direction. A pending or blocked provider request is not an accepted generation.
+Direction chains4/5: FOLR running, VNFC and ACVC under active native continuation, and RCLE has an
+accepted Pro generation. Two FOLR handles count once for that direction. Portfolio preparation is
+not an extra direction; its current decision is expected to fill the remaining independent slot.
 
 ## Current routing
 
