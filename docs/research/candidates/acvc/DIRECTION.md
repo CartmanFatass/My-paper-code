@@ -19,7 +19,7 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 ## Scientific question
 
-The latest completed question is whether the complete fixed F execution package improves
+The accepted C01 question is whether the complete fixed F execution package improves
 expected endpoint native return by more than .01 J over C and own-predicate dwell under
 the prespecified five-UAV/fifty-user fresh-DENSE training and evaluation law. The five
 prospectively selected complete fit-plus-panel units now give **JOINT_ABOVE_MEI** under
@@ -29,9 +29,13 @@ the frozen provisional single-task C-BENCH rule. F-C is +0.095915968685 J with i
 qualified by the prespecified iid-normal complete-fit-panel model; actual neural-training
 calibration remains unestablished. The [final intake](ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#final-scientific-intake-2026-09-12)
 accepts this bounded package result and records the frozen C as consumed, without a repeat.
-The subsequent original-Convergence decision selects one bounded common-F deployment
-comparison of training through fixed F versus training C. That next B remains unfunded;
-train-C→deploy-F stays the current reference. Three fresh development fits and the older E01 observations
+The subsequent original-Convergence comparison of training through fixed F versus training C,
+both deployed through F, received Portfolio F funding and is now complete as one matched B pair.
+It yields **DOWN**, treatment−control−0.026096212471464608J (conditional SE0.007136541708512396;
+43/64 adverse worlds). Train-C→deploy-F stays the current reference for this bounded use.
+This is one training replication; no stable cross-training effect or mechanism diagnosis follows.
+The [training-use intake](ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md) preserves all outcomes.
+Three fresh development fits and the older E01 observations
 on two selected retained bases remain development evidence, outside C01. The learned selective-retrace
 package stays ended: both learned gates improved over C, but F was stronger in both
 instances and the structured gate's advantage over the generic gate did not recur.
@@ -83,11 +87,15 @@ explicit working model. The claim remains tied to five complete independent fit-
 units, final-only evaluation and the exact native task/learner law. Its adverse individual
 worlds preclude universal benefit, and unequal private interventions leave motion
 suppression plus recurrent/teammate trajectory feedback as a surviving explanation.
-The original Convergence node has selected the next discriminator: one fresh matched
-training pair, train-through-F versus train-C, both evaluated through F. It tests whether
-changing training adds useful return to the established deployment-only package, with
-one-pair B scope and a .01 J practical margin. No new result, card or implementation is
-accepted; the complete empirical/support investment remains separately unallocated.
+The original Convergence node's selected training-use discriminator is now a complete
+one-pair B result under the .01J practical margin. Final common-F mean J is0.2975423661208032
+after C training versus0.27144615364933855 after F training, so the fixed training change
+does not add useful return on this pair. Strongest support for retaining the reference is
+the complete real-learning comparison with43 adverse worlds;21 favorable worlds and only
+one training replication bound any broad negative. Unequal own-history interventions and
+actor/recurrent/teammate feedback remain inseparable explanations. The allocation ends here,
+with no retry, new consultation or successor. An independently funded matched recurrence
+could later test repeatability if the proper node selects it; none is selected locally.
 
 Exact binding remains a useful protocol primitive. Neither historical learner object nor the
 new native comparisons support adaptive ACVC superiority over their strongest competent fixed control.
@@ -533,6 +541,10 @@ uncertain/delayed families remain; no Portfolio lifecycle change or formal UAV e
 ## Evidence set
 
 - `docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/archive/RESPONSE.md`
+- `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_SCIENCE_CARD_20260912.md`
+- `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_RESULT_EVIDENCE_20260912.md`
+- `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md`
+- `docs/research/candidates/acvc/training_use_b01_20260912/paired_analysis.json`
 - `docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE.md`
 - `docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE_FACTS.json`
 

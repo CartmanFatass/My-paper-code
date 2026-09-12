@@ -81,6 +81,14 @@
       "state": "applied",
       "summary": "F=yes 已执行到卡与代码；独立审查与14项检查通过，尚未训练。",
       "correction": "原 packet evidence_for 的 Train-C → deploy-F remains the competent current reference. 是对 intake 的概括而非逐字引文。更正逐字来源为新卡第1节 The latter remains the competent current reference.；方向 OWNER_PACKET 已修正，原副本保留此更正轨迹。"
+    },
+    {
+      "at": "2026-09-12T17:35:09+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/EXECUTION_MAPPING.md",
+      "record": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "已投入的两臂完整结束；DOWN，保留训练C部署F参考。所有结果已保留，无重跑或后继。完整支持费用与清理限制见intake。"
     }
   ]
 }
