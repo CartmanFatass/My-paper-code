@@ -41,6 +41,13 @@
       "completed_at_as_recorded": "2026-09-12T14:50:00Z",
       "captured_at_as_recorded": "2026-09-12T15:29:42.220070Z",
       "interpretation": "The supplied completed_at precedes the fixed TASK publication/readback. Preserve this inconsistent metadata as received; do not infer provider duration or a full cost from it. Response identity/content and one confirmed Send are separately supported."
+    },
+    "facts_snapshot_publication": {
+      "original_raw_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-12-acvc-post-c01-training-use-convergence-01\\2026-09-12-acvc-post-c01-training-use-convergence-01--acvc__TRANSPORT_FACTS.json",
+      "original_raw_sha256": "76c7c60bcb70bc91cc5d334eed0feff41419411c8f20303ff79f468389a455bb",
+      "committed_snapshot_sha256": "1fb969f9f607b9af051e3614feb71c3e1873580f058d341d3f8bb63162b98212",
+      "difference": "Git normalizes source CRLF to LF; JSON values are identical. Original raw bytes remain in the unchanged Transport archive. The raw_transport_facts_sha256 field names that original file, not the normalized Git snapshot.",
+      "complete_response_and_short_receipt": "Committed bytes equal their archived sources; no response/receipt normalization discrepancy."
     }
   },
   "conformance": {
