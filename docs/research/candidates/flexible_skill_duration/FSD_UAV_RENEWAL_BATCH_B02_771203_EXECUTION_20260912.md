@@ -1,13 +1,12 @@
 # FSD B02 / 771203 â€” execution
 
-State: card/exact commands and focused technical acceptance complete; no source
-delivery or scientific submission yet. Owner /root/dm_fsd_d_pair, shared authoring checkout
+State: exact source delivered once; D0 detached submission accepted and actual
+unfinished-goal Monitor adoption confirmed. No I submission. Owner /root/dm_fsd_d_pair, shared authoring checkout
 C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd. Input sync16930177f includes
 Root-assigned bd5fd849a;14748d304 reconciles auto-merged legacy control-only
 differences back to that current Windows input, preserving old commits in history.
 [Card](FSD_UAV_RENEWAL_BATCH_B02_771203_SCIENCE_CARD_20260912.md)
-and accepted Portfolio D control science and complete cost. Source SHA is the
-commit publishing the entry/card/commands; bind its full SHA before delivery.
+and accepted Portfolio D control science and complete cost. Published source SHA:9eb99f8b68dd2863212c10693b911746a6d24354.
 
 ## Exact execution
 
@@ -81,3 +80,20 @@ creates it before GNU time. The reviewer confirmed the correction and no other
 material finding. DM accepts; scientific validity is still unobserved. Evidence:
 `uav_renewal_batch_b02_771203_20260912/BINDING_CHECK.json` and
 `INDEPENDENT_REVIEW.md`. No tests, models or extra numerical work were added.
+
+## D0 accepted launch and actual Monitor adoption
+
+The unique source-delivery transaction succeeded in6.063s complete helper wall
+(6.3134795s enclosing command, charged once). Nine source/shell readbacks and
+both LF shell syntax checks passed. Legacy Zsh gitstatus startup diagnostics
+were nonfatal; no retry or configuration change occurred. Preflight source
+readback also matched the fixed commit before submission.
+
+D0 handle fsd-uav-renewal-batch-b02-771203-D0-20260912 was accepted once at
+2026-09-12T18:27:32.037063+00:00; supervisor returned0. Direct Monitor_ADD delivery
+was accepted. Root separately routed MONITOR_ADOPTED: fresh unbudgeted goal,
+actual unfinished state; handle running,pid3381323,exit null,tmux active,
+uptime about33s. Source/cwd/output/supervisor bindings agree. DM relinquishes
+routine observation and retains terminal collection/acceptance and preselected
+I continuation. Scientific outcome/resource admission are not yet collected.
+All four new remote paths remain needed for active execution and collection.

@@ -1,0 +1,8 @@
+{
+  "command_wall_seconds": 0.35999999998603016,
+  "returncode": 0,
+  "stdout": "{\"observed_utc\": \"2026-09-12T18:27:32.037063+00:00\", \"source_sha\": \"9eb99f8b68dd2863212c10693b911746a6d24354\", \"preflight_matches_source\": true, \"prepare_command\": \"mkdir -p /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771203-20260912\", \"launch_command\": \"/usr/local/bin/agent-task run fsd-uav-renewal-batch-b02-771203-D0-20260912 '/usr/bin/time -f elapsed_seconds=%e,peak_rss_kib=%M,user_seconds=%U,system_seconds=%S,exit_status=%x -o /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771203-20260912/D0_process_time.txt /usr/bin/timeout --signal=KILL 900s /bin/bash /home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912/docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771203_20260912/D0.sh'\", \"returncode\": 0, \"stdout\": \"Task 'fsd-uav-renewal-batch-b02-771203-D0-20260912' started in tmux session 'agent_fsd-uav-renewal-batch-b02-771203-D0-20260912'. Output: /home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771203-D0-20260912/task.log\\n\", \"stderr\": \"\"}\n",
+  "stderr": "",
+  "source_sha": "9eb99f8b68dd2863212c10693b911746a6d24354",
+  "arm": "D0"
+}
