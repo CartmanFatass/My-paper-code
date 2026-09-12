@@ -33,7 +33,7 @@ Read from the handoff: `request_id`, `direction_id`, `workflow_node`,
 
 1. `TASK_NOT_PUBLISHED` or `dispatch_required=false` means no payload: stop.
 2. The TASK commit named in the fixed link is on the remote:
-   `git branch -r --contains <sha>` in `C:/Projects/HMASD` is non-empty.
+   `git branch -r --contains <sha>` in `/home/fires/projects/HMASD` is non-empty.
 3. Registry `temp/sessions/hmasd-chatgpt-pro-transport/registry.json` (shared with Codex):
    the binding key's record, if present, has `active_request_id` null and a `conversation_id`
    equal to `requested_conversation_id`. A different conversation, an active request, or an id in
@@ -81,7 +81,7 @@ continues: call the same tool again with the same `idempotencyKey` and `verifyEx
 until `COMPLETE` or the hub's total observation bound; each call observes, none sends. A timeout
 is not terminal and never authorizes another Send. A tool error after the call (for example a
 filesystem error) is handled the same way: first inspect the persisted operation in
-`C:/Users/fires/.agentify-desktop/review-transport.json` under `operations.<idempotencyKey>`;
+`/mnt/c/Users/fires/.agentify-desktop/review-transport.json` under `operations.<idempotencyKey>`;
 if `sendAttempted` is `true`, the only permitted next call is the identical request with
 `verifyExisting=true`, which observes and archives without sending. If `sendAttempted` is
 `false` and no user turn is visible in the conversation, report `NOT_SENT` with the error and
