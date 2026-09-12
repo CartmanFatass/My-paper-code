@@ -1,5 +1,31 @@
 # HMASD Research Portfolio
 
+## Current execution ownership — 2026-09-12 04:45 UTC
+
+This current snapshot supersedes the operational counts/waits in older dated sections
+below. Those sections retain their historical allocations and evidence; an old `zero
+advancing` or pending-request sentence is not a current scheduling instruction.
+
+| Direction/work | Actual state and accountable owner | Next action and wake |
+| --- | --- | --- |
+| ACVC C01 | Unit 1 finished normally; original DM `dm_acvc_restart_successor2` is actually running on the routed terminal return. Source/card/commands/launch integrated through `2fadb1ddc`. | Same DM collects unit 1 and executes fixed units 2–5 within the existing caps, with fresh admission and actual Monitor adoption each time. No interim efficacy gate or extra fit. |
+| FOLR new unchanged pair | Complete Portfolio response is integrated at `a9c6ba2bf`; designated DM reports F+U conformance PASS and is publishing the decision/mapping. This Portfolio publication is not a new empirical start. | Root integrates the published mapping and resumes the original FOLR DM for the selected pair; native completion relay wakes Root. No dependency on ACVC or RCLE. |
+| RCLE Convergence | Original request remains unaccepted, with two ineffective clicks. Independent Transport owns recovery; fresh original-Edge selection still returns `Browser is not available: 2`. | Restore the original Edge connection, then Transport resumes the same request's reviewed preflight and repaired submission. No replacement question, hidden new Send, or advancing-slot count. |
+| FSD / MGTAP / UCOPE / VSP03 | Named allocations and intakes are complete; no successor is selected by those completions. | Preserve results and boundaries. A future scientific investment requires its proper decision; these are not unattended live jobs. |
+| VNFC / CBSC / FRRIE | Prior bounded technical work is complete; an attributable runtime repair/new funded scientific invocation remains absent. | Keep the recorded concrete readiness/authority boundaries; no routine polling or unallocated retry. |
+
+At this snapshot **one direction chain actually advances (ACVC), four working-set
+slots are vacant**; FOLR Portfolio intake/publication is separately owned and not
+counted as a direction start. Vacancies create no numerical allowance. The current
+FOLR mapping will update that count when its original DM actually starts the funded
+continuation. Lifecycle, priority and recast fields remain unchanged.
+
+Root checked owner-console reviews: no unapplied instructions. Monitor delivered
+ACVC unit-1 terminal and then `MONITOR_GOAL_COMPLETE` with an empty active set;
+Root used `followup_task`, and current native status confirmed the DM running.
+The relay also delivered the published ACVC launch handoff. Transport's unavailable
+surface is explicit, not a completed request or a silently abandoned recovery.
+
 ## Current rolling allocation after FSD/FOLR B02 — 2026-09-11
 
 The complete Portfolio response at `05c24bcd85f92efc26fb2a9cb2152bed51dd90e9`
