@@ -1,5 +1,10 @@
 # RCLE post-B07 continuation readiness
 
+R has since been selected and integrated through main0c0648bd0. The same DM is
+executing exactly the original-node documentary allocation in
+[post-B07 preparation](pro_packets/20260912_post_b07_convergence/PREPARATION_INTAKE.md).
+The conditional preparation below preserves its bound scope and evidence.
+
 OWNER_DIRECT2026-09-12, forwarded by Root: RCLE remains scientifically valuable
 and continues as a research direction. The same DM remains responsible in
 `C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906`, branch `codex/rcle`.
