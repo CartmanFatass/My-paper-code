@@ -1,0 +1,27 @@
+{
+  "completed_at_utc": "2026-09-12T22:51:24.629440+00:00",
+  "retention_main": "b47e6c2f9556bd43f5f4e036074d31758dd9a36e",
+  "validated_before_removal": {
+    "exact_paths": true,
+    "clean_exact_source": true,
+    "native_supervisor_members": 12,
+    "stage_members": 4,
+    "ignored_files": 6,
+    "pid_absent": true,
+    "tmux_inactive": true
+  },
+  "removed": {
+    "/home/wu/hmasd-worktrees/mgtap-top-b01-8221-20260912": true,
+    "/home/wu/hmasd-inputs/mgtap-top-b01-8221-20260912": true,
+    "/home/wu/.agent-tasks/mgtap-top-b01-8221-20260912": true
+  },
+  "worktree_registered": false,
+  "source_git_object_retained": true,
+  "shared_remote_repo_exists": true,
+  "operations": [
+    "git worktree remove --force exact detached terminal checkout",
+    "shutil.rmtree exact verified staging",
+    "shutil.rmtree exact verified terminal supervisor"
+  ],
+  "new_scientific_invocations": 0
+}

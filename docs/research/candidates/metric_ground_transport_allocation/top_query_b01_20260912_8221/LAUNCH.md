@@ -1,6 +1,6 @@
 # TOP8221 exact launch binding
 
-Current status: one native TOP→DENSE process accepted, fresh adjacent admission passed and Monitor actual unfinished-goal adoption confirmed. Handle running at adoption (pid3403683, exit null, tmux active, uptime33s). LAUNCH_RECEIPT.json, ADMISSION.json and MONITOR_ADOPTION.json contain the separate facts. Terminal collection/intake remains with the original DM. Fresh master8221; no second arm process. Card: ../MGTAP_TOP_QUERY_B01_SCIENCE_CARD_20260912.md. Technical acceptance: TECHNICAL_ACCEPTANCE.md.
+Current status: the sole native TOP→DENSE process finished exit0,377s supervisor duration /377.11s complete native time. Actual Monitor adoption and terminal delivery are retained separately in MONITOR_ADOPTION.json and TERMINAL_RECEIPT.json. Both arms are technically/scientifically accepted as TOP_ADVERSE in ../MGTAP_TOP_QUERY_B01_INTAKE_20260912.md; no handle remains for this DM to observe. Root retained the complete archives on mainb47e6c2f9; all four duplicate cleanup targets are now absent, with execution-worktree registration removed (CLEANUP_RECEIPT.json). No second arm process or retry. Card: ../MGTAP_TOP_QUERY_B01_SCIENCE_CARD_20260912.md.
 
 - Source SHA: aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788, published on codex/mgtap.
 - Code and command currentness is by declared source bytes; subsequent receipt-only commits do not change this execution SHA.

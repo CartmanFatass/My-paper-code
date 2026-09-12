@@ -1,6 +1,6 @@
 # ACPS continuation need after its first complete pair
 
-Current original DM `/root/dm_acps_start`, direction `actuator_conditioned_partial_sharing`, ACTIVE/HIGH/recasts0. Accepted B01 delta−.0368081418, conditional SE.01138849,7 positive/25 adverse final worlds; one training pair, not stable harm or a lifecycle verdict. Complete intake/evidence/raw archive are adjacent. First grant's two scientific invocations are terminal and its finite closeout is being completed; no successor/consultation balance exists.
+Current original DM `/root/dm_acps_start`, direction `actuator_conditioned_partial_sharing`, ACTIVE/HIGH/recasts0. Accepted B01 delta−.0368081418, conditional SE.01138849,7 positive/25 adverse final worlds; one training pair, not stable harm or a lifecycle verdict. Complete intake/evidence/raw archive are adjacent. First grant's two scientific invocations are terminal and its four-target remote closeout is complete; the runtime-rejected local test scratch remains retained. No successor/consultation balance exists.
 
 Practical question for the proper Portfolio node: given the continuing value of heterogeneous-fleet control but this adverse first learning pair, is one new independent matched ACPS/SHARED replication worthwhile, or should the exact recipe receive no new spend while Portfolio selects a different authorized continuation/priority? This is a finite investment/capacity need, not Root discretion to release or stop ACPS.
 
