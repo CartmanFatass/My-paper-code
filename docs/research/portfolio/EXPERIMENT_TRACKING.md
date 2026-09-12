@@ -6,18 +6,18 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACVC | Cluster-law readiness packet integrated at main180e18763; 180,224 team steps, native/support unknown, no empirical grant | Portfolio decides investment from the fixed readiness input; no implementation, repeat consultation or third training-F pair |
-| MGTAP | TOP8221 accepted TOP_ADVERSE at mainb47e6c2f9: TOP−DENSE −.0684509798J,4positive/28adverse; archives retained | Original DM performs only four-target scoped cleanup and returns the distinct next decision need; T end does not stop ACTIVE direction |
+| MGTAP | TOP8221 accepted TOP_ADVERSE; four-target cleanup accepted at main65c07ad61, archives retained and no run remains | Distinct bounded next decision need remains; T end does not stop ACTIVE direction and queued need does not count as advancing work |
 | FSD | Three-choice post-five-pair input integrated at main5474d95de; B-LONG-D0 is only a future proposal, not part of the frozen current U request | Current provider U decides evidence use only; preserve B-LONG-D0/USE/HOLD for a later clean Portfolio request, no launch |
 | RCLE | Original-node intake accepted at main8973c0515: HOLD only tested equal-unit/.99-prior/FLEX/final1000 spending; direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice from refreshed evidence; no repeated recipe, fit or consultation |
 | FOLR | Entity-history readiness integrated at main3bc742a85; fixed205120ticks/9938updates, new costs unknown | Bound Portfolio E decision is in accepted provider generation; no implementation before grant |
-| ACPS | B01 accepted ADVERSE at maine97f8cfa1: ACPS−SHARED −.0368081418J,7positive/25adverse; archives retained | Original DM performs only four-target scoped cleanup; continuation need is queued for the next clean Portfolio request, direction remains ACTIVE/HIGH |
+| ACPS | B01 accepted ADVERSE; four-target cleanup accepted at main3d3ef453c, archives retained and no run remains | Continuation need is retained for the next clean Portfolio request; direction remains ACTIVE/HIGH and queued need does not count as advancing work |
 | CADC | LEARNED/RR both finished exit0 (195s/180s) at source22e009c93; terminal facts delivered | Original DM collects/accepts complete pair, publishes scientific intake/preservation and scoped cleanup; no retry/extra arm |
-| Portfolio | Separate ACVC/FOLR/RCLE/FSD K/E/L/U request accepted once by provider; generation active | Transport observes natural completion; designated DM intakes four distinct investment/lifecycle decisions |
+| Portfolio | ACVC/FOLR/RCLE/FSD K/E/L/U response completed and archived exactly once at mainde02dc94d | Designated DM checks and intakes four distinct investment/lifecycle decisions; no grant or stop inferred before intake |
 
-Actual advancing directions7: MGTAP, ACPS and CADC have active accountable DM work; the accepted
-Portfolio K/E/L/U generation counts once for each of ACVC, FOLR, RCLE and FSD. This temporary
-overlap exceeds the five-direction target and drains at each clean boundary. No queued intention or
-ended allocation is used to fill the count, and no direction is stopped to manufacture capacity.
+Actual advancing directions5: CADC has active accountable DM intake; the complete Portfolio K/E/L/U
+response is with the designated DM for separate ACVC, FOLR, RCLE and FSD intake, counted once per
+direction. ACPS and MGTAP finished their finite cleanup and no longer fill a slot. No queued intention
+or ended allocation is used to fill the count, and no direction is stopped to manufacture capacity.
 
 One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
 to ACPS support only, unknown unless directly measured. MGTAP T and CADC exclude that shared item;
