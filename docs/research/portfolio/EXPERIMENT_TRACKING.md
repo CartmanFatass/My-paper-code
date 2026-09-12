@@ -20,7 +20,7 @@ is not an extra direction. A pending or blocked provider request is not an accep
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
 | Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095ca-8010-79d3-acf0-6d775cfca200 | Independent Luna/low; no assigned handles |
+| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; no assigned handles |
 | Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
 Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the

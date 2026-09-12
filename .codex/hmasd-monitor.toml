@@ -1,5 +1,5 @@
 # OWNER_DIRECT 2026-09-09: one independent Luna/low task monitors multiple accepted experiments.
-thread_id = "01a095ca-8010-79d3-acf0-6d775cfca200"
+thread_id = "01a095d0-21ee-7c02-9d97-3681b5678200"
 root_thread_id = "01a095b7-850f-7401-ad4e-5e4320d285f1"
 model = "gpt-5.6-luna"
 reasoning_effort = "low"
