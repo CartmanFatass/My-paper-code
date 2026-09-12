@@ -5,7 +5,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC K | PRO_FINAL grant integrated at main665f704f7: one C fit + C/F/own-dwell panels,180224 ticks, native≤600/support≤600/complete≤1200 | Original DM binds card/identity/caps, implements and reviews, then performs one detached remote invocation through Monitor to intake/cleanup |
+| ACVC K | Remote handle `acvc-cluster-b01-e06b3d63f` running at sourcee06b3d63f; Monitor goal established and adopted | Monitor delivers terminal once; original DM collects/intakes/preserves/cleans up under native≤600/support≤600/complete≤1200 |
 | MGTAP | Post-T A/U/P next-use input published at main843f64bd0; recommends one bounded use/design judgment, zero native, complete cost UNKNOWN | Portfolio DM authors the next clean request from the fixed input; no option funded, no implementation/run, lifecycle unchanged |
 | FSD U | Fixed handoff integrated at main7b94b325c and accepted exactly once by provider; B-LONG-D0 explicitly excluded | Transport observes natural completion, then Root returns the full response to the original DM for intake; zero numerical work |
 | RCLE L | PRO_FINAL one-design grant integrated at main665f704f7; documentary complete cost UNKNOWN accepted | Original DM returns at most one distinct B design or concrete no-candidate; zero implementation/numerical/Pro work |
