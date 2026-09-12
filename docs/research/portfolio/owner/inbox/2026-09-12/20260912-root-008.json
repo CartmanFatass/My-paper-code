@@ -91,5 +91,15 @@
     "verdict_text": "Author recommendation only: newly fund A and M, one unchanged ACVC and one\nunchanged MGTAP B pair; do not buy Q by default. Q, smaller subsets and H are\nsubstantive alternatives. Portfolio Pro decides each unit; no investment is\nselected or implemented by this recommendation.",
     "source": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T19:24:12+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-12-post-cfr-marginal-investment.md",
+      "state": "planned",
+      "summary": "完整252行与30固定引用核对通过：新A/M授予、Q=no。D/P后来都结束，当前0/5；两独立派发待Root记录，不虚写实验auto_applied。"
+    }
+  ]
 }

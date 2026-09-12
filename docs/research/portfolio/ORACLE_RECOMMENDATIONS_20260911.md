@@ -2,19 +2,19 @@
 
 作者：Root指定的Portfolio材料与科学核对DM，`/root/dm_a_mx_portfolio_resume`。本文保持当前事实与科学建议；历史由Git保留。完整Pro决定产生预算，本页不另行拨款。
 
-**当前实际2/5：Root已独立派发FSD D与FOLR P。CBSC C、ACVC F、RCLE R均已完整验收，本笔投入结束。新问题只比较至多三项边际投入：ACVC A、MGTAP M、CBSC Q，或不追加H；作者建议A+M，最终由Portfolio决定。三个空位不等于三笔拨款。**
+**本次Portfolio已最终选择ACVC A与MGTAP M，CBSC Q不追加。当前实际0/5：FSD D与FOLR P也已完整验收结束。A/M可立即独立派发，实际启动后才记2/5；还剩三个空位，没有自动拨款。**
 
-[当前决定](decisions/2026-09-12-two-remaining-chains.md)来自完整响应ed1d519c60fde333609c00fd207d5bd0a3e3f507；[intake](pro_packets/20260912_two_remaining_chains/INTAKE.md)核对全部219行/54224bytes、原问题、28个固定引用、当前规范与成本；[独立DM映射](pro_packets/20260912_two_remaining_chains/EXECUTION_MAPPING.md)可分别执行。答复的3/5是固定输入快照，正文已要求按实际完成释放槽位，不需重发。
+[当前决定](decisions/2026-09-12-post-cfr-marginal-investment.md)来自完整响应7db34325601f494fdce1a2d775da7542589067e8；[intake](pro_packets/20260912_post_cfr_marginal_investment/INTAKE.md)核对全部252行/54857bytes、30个固定引用、原问题和当前规范，未见具体冲突。[独立DM映射](pro_packets/20260912_post_cfr_marginal_investment/EXECUTION_MAPPING.md)保持精确新额度、首动作与停止边界。答复明确按到达时的实际完成重计，旧2/5不成为D/P新授权。
 
 ## 当前执行与所选接续
 
-- **FSD D正在推进：**一新unchanged I1280/authenticD0配对；D0≤900、I≤1800、native合计≤2700、support≤300、完整future≤3000秒，单次source-delivery≤45包含在support。原DM或明确接任者完成新身份/必要检查review/两臂/Monitor/intake/清理；不加Convergence或第五pair。
-- **FOLR P正在推进：**一次原节点post-B03问题及完整intake。仅判断当前LEARNED_EVENT/5000train/128final包收口，或保留一项以后另行资助的原样B候选。完整咨询成本明确接受未知；零实现或数值额度，不拨第四pair。
+- **FSD D已结束：**第四pair I-D0+.012554805665750726 J，19正/13负、条件SE.01250684，仅比MEI高.00255481；完整native1517.95秒。保留三次above-MEI与一次负点，不判稳定优越或renewal因果，无第五pair或咨询款。
+- **FOLR P已结束：**原Convergence最终H，窄hold tested LEARNED_EVENT/easy public lifecycle/5000-train/128-final包的进一步投入，保留adaptive RETAIN；不保留当前第四pair候选。是方向内包的可逆hold，非整个FOLR停放或RECAST。
 - **RCLE R已完成：**完整reference补齐后Delta_ref−.008841959635417，八个reference-U比较全负；G_U约−.00020549且条件区间跨零，有mixed native harms。一个fit的完整局部负值，不是稳定劣势或家族失败；原reference故障与原因未知保留，无successor。
-- **CBSC C、ACVC F已结束：**CBSC为WITHIN_MEI，32个零差且两臂11.15均输公开REQUEST_ONLY12.45；ACVC训练F相对训练C、共同部署F为DOWN，−.02609621J、43/64 adverse。保留新结果与各自强参考，无自动successor，cleanup不计科研。
-- **MGTAP M仍未获新款：**两个既有Portfolio的M=no保持。新问明确重新比较同包新1200秒投入；D/P已有独立款，不再需要M挤掉它们，但没有新M结果。它不是失败后的备用。
+- **ACVC新A可派发、CBSC Q未选：**旧C/F已完成；A新270/每臂、540native、300support、840完整future invoked秒，仅原样common-F第二pair。CBSC仍是32零差且输REQUEST_ONLY；此次不给新咨询/实现/数值款，Q=no不等于CBSC PARK。
+- **MGTAP新M可派发：**新450/每臂、900native、300support、1200完整future invoked秒，原样COND/DENSE第三pair。没有新M经验，过去两次M=no保留；只有这次新Pro明确yes产生资金，不是旧报价恢复或备用。
 
-D/P各自推进，不等待对方、已完成方向清理或下一Portfolio问题。[当前最小新问](pro_packets/20260912_post_cfr_marginal_investment/SCIENCE_BRIEF.md)复用post-CF事实：A新840秒，M新1200秒，Q一次原CBSC节点问题/full intake完整成本未知，任意子集或H。作者建议A+M两个直接B；Q可能有用，也可能仅重述no-spend。三者均未资助，不由旧答复或旧余额执行。实际活动由Root更新[控制表](PORTFOLIO.md)与[tracking](EXPERIMENT_TRACKING.md)。
+A/M分别开始和返回，不等待对方、已结束方向清理或下一Portfolio问题。[剩余三个空位的未发送准备](pro_packets/20260912_post_cfr_marginal_investment/REMAINING_VACANCIES.md)记录FSD新小增益、FOLR窄H、RCLE完整负值及可能的最小下一用途；没有新TASK/Send或拨款。实际活动由Root维护[控制表](PORTFOLIO.md)与[tracking](EXPERIMENT_TRACKING.md)。
 
 ## 15 个 ACTIVE 方向的科学与接续边界
 
@@ -22,12 +22,12 @@ D/P各自推进，不等待对方、已完成方向清理或下一Portfolio问�
 
 | 方向 / Priority | 最新直接证据与最强限制 | 当前动作；未来真正能区分什么 |
 | --- | --- | --- |
-| [ACVC / MEDIUM](../candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md) | 最新train-F/deploy-F−train-C/deploy-F为−.026096212471464608J，43/64 adverse，DOWN；两fresh fits完整，条件SE.00713654不供训练总体推断。C01五fit的F−C+.09591597与F−dwell+.06513377及限定区间仍有效/consumed，46/320 adverse保留。 | 保留train-C/deploy-F作当前参考，原F款结束。未选A仅新840秒同包复现候选，不重开learned gate、不反转C01或自动UAV entry；recasts2最低ACTIVE争用排序。 |
-| [FOLR / MEDIUM](../candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md) | 三个独立配对+1.763359375/−1.76953125/−1.215546875；最新RETAIN.947578125、LEARNED−.267968750，RETAIN_ABOVE_MEI；普通GRU本可适应，三点无稳定或因果结论。 | P已资助一次原Convergence/full intake，决定仅当前包收口或保留未资助原样候选，方向答案未预选。完整成本未知、零实现/数值，没有第四pair；旧B03 grant已结束。 |
+| [ACVC / MEDIUM](../candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md) | 最新train-F/deploy-F−train-C/deploy-F为−.026096212471464608J，43/64 adverse，DOWN；两fresh fits完整，条件SE.00713654不供训练总体推断。C01五fit的F−C+.09591597与F−dwell+.06513377及限定区间仍有效/consumed，46/320 adverse保留。 | 保留train-C/deploy-F作当前参考，原F款结束。本次A已新资助840秒同包第二pair，不重开learned gate、不反转C01或自动UAV entry；recasts2最低ACTIVE争用排序。 |
+| [FOLR / MEDIUM](../candidates/vap_folr_core/pro_packets/20260912_learned_retention_post_b03_convergence/INTAKE.md) | 三个独立pair+1.763359375/−1.76953125/−1.215546875保留；普通RETAIN本可适应，条件episode不是训练replication。 | 最新post-B03 PRO_FINAL H窄hold该LEARNED_EVENT/easy public lifecycle/5000/128包继续投入，RETAIN默认、U不保留为当前候选。P完整结束，无第四pair或successor，完整成本未知；不是全FOLR停放。 |
 | [VNFC / HIGH](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md) | B03新调用104.89秒SIGSEGV；每臂35rounds、1120updates，合计13440transitions/2240updates直接记录，无final primary。有限owned-boundary检查不能证明全路径修复，topstack未证明writer或共同原因。 | 完整incomplete intake已接受，分配/diagnosis结束，无retry或剩余额度。时间信用与TERMINAL强null仍未分离；未来具体可信路径与投资不要求全史复原。recasts2。 |
 | [RCLE / MEDIUM](../candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md) | B07完整一fit/1000updates/2000derivatives与三个2048 panels：Delta_ref−.00884196，八个U比较均输nearest；G_U−.00020549，无正aggregate init learning，保留三cell改善与mixed harms。 | 原R完整验收结束。reference-only成功不证明通用原因/修复，旧失败保留；无新fit、reference或咨询款。最近缺失的比较已完成，不再写partial blocker；无方向家族或lifecycle变动。 |
-| [FSD / HIGH](../candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md) | I1280−authenticD0三次+.05697747/+.20628590/−.01243043，MEI.01；最新16/16 signs且无endpoint individual-gap；I约2.17倍D0 wall。旧batch128负值另列。 | D已资助第四个独立unchanged pair及完整接续，用于是否保留同host可选学习方案；D0/I≤900/1800、native2700、support300、total3000、单次delivery45含support。全包复现不等于孤立renewal/批量因果，每分支结束且无第五pair。 |
-| [MGTAP / MEDIUM](../candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md) | COND−intactDENSE+.00576132/−.02246957，第二次5正/27负，MEI.01；真实branch更新不救负native，两个pair无稳定劣势结论。 | 本次完整Portfolio再次M=no。DENSE默认，没有第三对、准备、诊断或咨询分配；新用途/成本/证据可支持以后明确重议，不能因D/P结束自动启用1200秒报价。 |
+| [FSD / HIGH](../candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md) | 最新第四I1280−authenticD0+.01255481，MEI.01，19正/13负、条件SE.01250684；前三点+.05697747/+.20628590/−.01243043分开保留。仅8次endpoint gap，I约2.195倍D0 wall。 | 第四D完整验收结束；三正一负不是稳定优势或seed数门槛，完整native1517.95秒、support尾部未知。无第五pair/咨询/自动successor，今后需能改变可选包用途的明确新投入；不要求组件完全归因。 |
+| [MGTAP / MEDIUM](../candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md) | COND−intactDENSE+.00576132/−.02246957，第二次5正/27负，MEI.01；branch更新不救负native，两个pair不判稳定劣势。 | 本次新M=yes：一原样fresh第三pair，新450/900/300/1200秒，全32final结果；先前两次no保持原义，DENSE仍默认。无第四pair、fixture、调参、咨询或successor。 |
 | [UCOPE / HIGH](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | 最新 8801 L−F = −.02410561，MEI .01，40/64 world 负；完整 native 1384.14 秒。只有一个 L/F 配对；旧固定短 F 的收益和 8703 的原生/H 改善保留。 | post8801 已窄 PARK 此固定五 UAV、own-expiry {1,2}、final2048 的 continue/end-credit L 配方，无 successor。不是所有 renewal/ordinary feedback 停放；不能继续沿旧 8701 状态派发。 |
 | [SCDMP / HIGH](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | B01 +.00673741、B02 +.00365806，均 WITHIN .01；真实 residual 非零，B02 MLP−H 为 −.00065955。两正点和条件不确定性保留。 | post-B02 已窄 PARK opening t1–3→同 episode t4、full-MC、系数 1 包，无第三对/修改/诊断。具体新 loss/credit 或有用途的复现仍可提案，recasts 2。 |
 | [DISH / MEDIUM](../candidates/degraded_incumbent_shadow_handover/DISH_POST_B08_CONVERGENCE_INTAKE_20260910.md) | B08 HALF_RETAIN−REPLACE 为 −6.5 service ticks，WITHIN ±24；四条件 −15/0/−8/−3，额外四个 invalid commit，能耗较低。ordinary CAS 为零，source-origin 效果未估计。 | REPLACE 默认；retained-A03 arrival-bridge retention 家族窄 PARK，无 successor。未来要有具体 receipt→控制→native-service 问题，不能用旧 P62 DIRECT 代替当前方案。 |
@@ -56,13 +56,13 @@ UAV 计数需要方向决定、卡和真实执行三者相连。本轮核实了 
 
 ## 已选投入与完整成本
 
-D是新future完整grant：D0≤900、I≤1800、native合计≤2700、support≤300、总额≤3000秒；唯一source-delivery≤45秒包含在support。全部未来身份/card/source/相关检查review/Git/staging/admission/Monitor/收集/reduction/intake/Root集成/清理计入一次，native含启动至退出；额度不可互转。历史native471.82/1023.43及support缺测只提供锚点，不保证未来whole rate或总价。
+新A额度：每whole arm270、native540、support300、完整future invoked840秒。新M额度：每whole arm450、native900、support300、完整future invoked1200秒；COND先计共享模板/启动，DENSE计之后完整发布/退出，按原卡归属不事后重分。全部必要未来身份/card/source/相关检查review/Git/staging/admission/Monitor/收集/reduction/intake/Root集成/清理计入一次；native节约不能补support或另一方向。
 
-P只买一次原Convergence及完整intake，纪录/命令/provider/agent成本明确接受未知；零模型/实现/数值。D+P为3000秒加未知P，不能当成3000总价。旧FOLR B03 native1750.81、已知support342.0027033和owner300参考继续原义，不挪作P或改变D的300上限。
+已结束D新测native475.03/1042.92=1517.95秒、完整support/total仍未知；已结束P完整纪录/命令/provider/agent成本未知。FOLR旧B03 native1750.81、known support342.0027033及owner300参考保持原义，不能替A/M的新300硬上限改口径。
 
 CBSC旧C已完成：native90.27，已知support129.058004是前缀，完整费用仍未知。ACVC旧F已完成：测量whole330.56或保守inclusive336秒是不同计费口径，不能相加；完整660support/1200旧总额不获虚假认证。RCLE完整native343.43含原338.90及补齐4.53秒，查询11秒是uptime；已知support91.7770593、完整435.2070593仍是下界。旧S/A与其他历史成本各保留一次，不形成新余额。
 
-已选D/P按原判断执行。新A+M建议为2040秒future invoked caps，完整agent/provider deliberation仍未知；加Q为2040加未知咨询，不能称完整2040总价。两真实B可能仍不改变实用选择，Q可作为替代/第三项，子集/H均合理。新问题没有证明信息价值、最低成本或自动分配。每项结束释放真实槽位，不自动retry、备用或successor。
+最终A+M为2040秒新future invoked ceilings，完整agent/provider deliberation与历史总成本仍未知。强反方是A alone或H，Q可能有用但本轮拒绝。没有证明预期信息价值或最低成本，也不保证新pair正向。每项结束释放真实槽位，不自动retry、备用或successor。
 
 ## 本次使用规范与基础知识得出的限制
 
