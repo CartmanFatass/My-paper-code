@@ -9,25 +9,26 @@ this decision. Portfolio Pro chooses; this preparation grants or runs nothing.
 ## Current question and the unfilled capacity
 
 Root accepted the previous A/M decision on maincf7bd424f and independently
-dispatched both DMs. The current activity statement at main9be8873d1 is **2/5:
-ACVC A and MGTAP M**. Their accepted scopes continue without waiting for this
-question, a sibling outcome or completed-direction cleanup. Older D/P and
-generation text still present elsewhere in the control table is historical;
-the latest A/M decision and actual-start row are the current facts.
+dispatched both DMs. ACVC A has since completed and been accepted at
+main89910ecd7. The current actual set is **1/5: MGTAP M**, with **four vacancies**.
+M keeps its accepted scope without waiting for this question or sibling cleanup.
+Control-table rows still describing both A/M running or older D/P/generation
+are superseded by this latest completed intake and Root's actual1/5 instruction.
 
-Choose new marginal spending for the remaining three vacancies among N/S/R/H.
-These concrete offers cover **at most two additional directions**, because
-N/S are alternatives for FSD. This leaves at least one current vacancy even if
-two new chains actually start. There is no decision-ready third unit in this
-packet; do not invent one, revive Q=no or report5/5. A later completion lowers
-actual activity without enlarging this question's units. Empty slots are not
-the scientific case for a purchase. All22 current rows/mappings are retained.
+Choose new marginal spending for those vacancies among N/S/R/H. These concrete
+offers cover **at most two additional directions**, because N/S are alternatives
+for FSD. This leaves at least two vacancies even if M and both new chains
+actually advance. There is no decision-ready third unit in this packet; do not
+invent one, revive Q=no or report5/5. Another completion lowers actual activity
+without enlarging this question's units. Empty slots are not the scientific case
+for a purchase. All22 current rows/mappings are retained.
 
 The previous complete A/M answer is archived/intaken/applied. This is a new
 question, not recovery, a repeated Send or a modification to any prior request.
 The [preceding remaining boundary](../20260912_post_cfr_marginal_investment/REMAINING_VACANCIES.md)
-is reused for the new completed FSD/FOLR/RCLE facts. Its0/5-before-dispatch status
-is superseded by actual A/M starts. No old allowance supplies N, S or R.
+is reused for the completed FSD/FOLR/RCLE facts. Its0/5-before-dispatch status
+and initial A/M2/5 snapshot are superseded by M alone1/5. No old allowance
+supplies N, S or R.
 
 ## N versus S — what to do with the FSD optional package
 
@@ -157,6 +158,22 @@ unchanged candidate may have little value given weak service/learning. H or N
 alone may be better than buying a documentary label. This objection is not
 dismissed by calling consultation cheap; its full cost is unknown.
 
+## Newly completed ACVC A — released slot, no successor
+
+The second unchanged common-F pair is now complete and Root accepted at
+main89910ecd7: training-F minus training-C, both deploying F, gives
+**−.05734219575429114 J**, conditional SE.009421918606720191,50/64 adverse and
+14 favorable worlds. B01−.026096212471464608 stays a separate DOWN point.
+All512train/64final rows and1024Adam per arm passed with independent source/RNG/
+checkpoint ownership. This strengthens direction-local advice against more
+unchanged training-F spending while train-C→deploy-F remains useful; two pairs
+do not show stable harm, pure-retrace attribution or all-ACVC failure.
+C01 remains qualified/consumed, headroom absent, recasts2/lowest contention.
+Native inclusive164/179=343 s and measuredwhole338.10 are nonadditive views;
+complete300support/840total coverage remains unknown, not an inferred saving.
+A ends with no third pair/consultation or successor. Its pending scoped retention/
+cleanup is not active research or a substitute new option in this question.
+
 ## Comparison and retained authority
 
 N+R buys one direct native recurrence and one direction decision: **3000 newly
@@ -168,7 +185,8 @@ narrowly favors N+R because another native observation can change FSD optional
 use while the newly completed RCLE discriminator merits a narrow development
 judgment. No information-value optimality or expected-positive result is claimed.
 
-Current A/M grants and their no-retry stops stay untouched. **Q=no remains**;
+Current M continues and completed A has no successor; both grants retain their
+exact no-retry stops. **Q=no remains**;
 no new CBSC use/evidence supports recycling it here. FOLR's new original-node H
 holds only tested LEARNED_EVENT/easy public lifecycle/5000/128 spending and does
 not retain a fourth-pair candidate. FRRIE's completed P59/P63 source reader

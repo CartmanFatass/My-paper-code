@@ -1,5 +1,5 @@
 {
-  "question": "A/M已独立推进后，对三个空位是否新买FSD N加RCLE R，或选FSD仅咨询S、较小子集或不追加H？本包最多两个独立方向，不自动补满。",
+  "question": "A已完成、当前M独立推进后，对四个空位是否新买FSD N加RCLE R，或选FSD仅咨询S、较小子集或不追加H？本包最多两个独立方向，不自动补满。",
   "changes_if_approved": [
     {
       "target": "FSD N或S（互斥）",
@@ -12,12 +12,12 @@
       "to": "仅一次原Convergence及完整intake，判断窄hold已测包或保留一未资助原样fresh-fit候选；完整成本未知，零实现、数值或后续实验款。"
     },
     {
-      "target": "当前并行容量与既有A/M",
-      "from": "实际A/M两方向推进，三个空位",
-      "to": "A/M范围保持；N/S同属FSD，R属RCLE，最多两个新方向在真正开始后计入，至少一个空位仍在。"
+      "target": "当前并行容量与既有M/A边界",
+      "from": "M单方向推进，A已完整结束，四空位",
+      "to": "M范围保持；N/S同属FSD，R属RCLE，最多两个新方向在真正开始后计入，至少两个空位仍在；A无successor。"
     }
   ],
-  "if_refused": "不追加相应投入，保留所有证据和已结束边界；A/M独立继续，Root如实保留空位。Q=no和旧余额不转作备用，不把hold扩为整个方向PARK。",
+  "if_refused": "不追加相应投入，保留所有证据和已结束边界；M独立继续、A保持结束，Root如实保留空位。Q=no和旧余额不转作备用，不把hold扩为整个方向PARK。",
   "evidence_for": [
     {
       "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/SCIENCE_BRIEF.md",
@@ -46,13 +46,14 @@
     "FSD条件world误差不是训练总体不确定性，三次above-MEI及一次负点不判稳定优势或分量因果。",
     "N3000是新报价上限，不是已知最低成本或未来预测；S/R完整agent/provider/command费用未知。",
     "N/S不能同时购买或组成先咨询后自动B；任何保留候选仍未资助。",
-    "没有第三个已具体化的边际任务，不反复读FRRIE静态栈或借Q=no填空；未来独立修复不要求复原每个历史原因。"
+    "没有第三个已具体化的边际任务，不反复读FRRIE静态栈或借Q=no填空；未来独立修复不要求复原每个历史原因。",
+    "最新ACVC B02为第二个独立DOWN点，50/64负；不据此声称稳定伤害或整个方向失败，也不自动买第三pair。"
   ],
   "cost": {
     "compute": "N+R：新N3000 future invoked秒加未知R成本；N内D0 900、I1800、support300及一次source delivery45含于support。S+R两项完整成本均未知、零数值款。旧成本保留一次，不产生余额。",
     "owner_time": "异步可见，不等待逐项批准；Portfolio Pro按现有委托最终选择。",
     "reversibility": "costly",
-    "waits_on_this": "仅新N/S/R投入；当前ACVC A/M不等本问题或彼此结果。"
+    "waits_on_this": "仅新N/S/R投入；M不等待本问题，A已结束且清理不占槽。"
   },
   "verdict_text": "Author recommendation only: newly buy **N**, one unchanged FSD fifth training\npair, and **R**, one original RCLE post-B07 Convergence with complete intake.\n**S**, one FSD Convergence instead of N, and smaller subsets/**H** are substantive\nalternatives. N and S concern the same direction and are mutually exclusive in\nthis decision. Portfolio Pro chooses; this preparation grants or runs nothing.",
   "source": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/SCIENCE_BRIEF.md"

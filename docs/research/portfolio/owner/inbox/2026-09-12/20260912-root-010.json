@@ -97,5 +97,15 @@
     "verdict_text": "Author recommendation only: newly buy **N**, one unchanged FSD fifth training\npair, and **R**, one original RCLE post-B07 Convergence with complete intake.\n**S**, one FSD Convergence instead of N, and smaller subsets/**H** are substantive\nalternatives. N and S concern the same direction and are mutually exclusive in\nthis decision. Portfolio Pro chooses; this preparation grants or runs nothing.",
     "source": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T19:55:22+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "本记录只追溯既有A/M裁决的实际后果：A每分支结束条件已由main89910ecd7完整DOWN intake满足，现仅M推进1/5、四空位。旧A/M响应没有选择本项N/S/R/H；当前建议仍未授权且最多两新方向，没有auto_applied。原收件项2/5是准备时快照，当前source/packet与本记录取代该容量快照。"
+    }
+  ]
 }
