@@ -206,3 +206,11 @@ removal route was attempted. The creator-owned collection directory under
 remains26 files/190929 bytes, already preserved in the published archives. DM
 retains the cleanup gap pending a permitted route or Root retention disposition.
 This does not change the valid above_mei result or release another invocation.
+
+Exactly one terminal-intake HMASD_ROOT_HANDOFF was accepted by the live relay
+following publication of b3a4f6ed3bb71c5cc95bd8a53bd70ca55956ee4c. Event:
+/root/dm_fsd_i1280_implementation|FSD_B02_771003_terminal_intake|b3a4f6ed3bb71c5cc95bd8a53bd70ca55956ee4c|READY_HANDOFF.
+TERMINAL_HANDOFF_RECEIPT.json retains the exact prompt/API result. It asks Root
+to integrate and accept the bounded result and verified remote reclamation,
+record the local policy retention gap, and advance independent work. No second
+relay is sent for this receipt publication, and no extra experiment is selected.
