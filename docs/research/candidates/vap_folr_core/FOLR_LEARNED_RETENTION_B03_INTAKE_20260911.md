@@ -291,4 +291,16 @@ preserved without changing shell configuration. This is a source-preparation
 fact, not an experiment or controlled speedup comparison: cache/network state
 and other environmental changes prevent a unique cause attribution to the old
 274.81-second wait. No old failure was replayed. Scientific submissions remain0
-at source acceptance; the new live Monitor route is pending Root's READY receipt.
+at source acceptance. The new Monitor route is published at main d530abde0, but
+the latest two read-only task turns still forward Root's correction to that same
+task instead of evidencing its own goal/readiness operation. This scoped reading
+does not assert anything about all earlier turns. Root retains this control-plane
+correction. No further status polling, scientific launch or MONITOR_ADD followed.
+
+The clean return is source preparation accepted, pending actual Monitor readiness.
+Published scoped changes044b42fb4/0f0dbb9c3 follow input-sync84b7c496b. The exact
+remote source checkout remains for this original pair; the same DM resumes on
+Root's routed readiness without restaging or adding an invocation. Root integrates
+these documentary/source-preparation facts and routes continuation. The accepted
+source, existing local control and shared direction checkout are retained for
+that named dependency, with DM collection/cleanup ownership after terminal.

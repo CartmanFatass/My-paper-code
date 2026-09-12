@@ -1,6 +1,6 @@
 {
   "object": "FOLR-LEARNED-RETENTION-B03",
-  "status": "source_accepted_awaiting_current_monitor_route",
+  "status": "source_accepted_waiting_actual_monitor_readiness",
   "owner_instruction_record": "docs/research/portfolio/decisions/2026-09-12-windows-root-resumption.md",
   "root_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
   "native_owner": "/root/dm_a_mx_folr_cap_review",
@@ -80,8 +80,23 @@
   "staging_status": "accepted",
   "commands_source": "FOLR_LEARNED_RETENTION_B03_RESULT_SUMMARY_20260911.json commands at e3ac72da5750821e3ea67cbad98c27252161929d",
   "commands_unchanged": true,
-  "monitor_thread_id": null,
-  "monitor_route_note": "Root is replacing control-task entry points. Read its published live Windows Monitor configuration and readiness before new MONITOR_ADD; never use the historical B03 endpoint.",
+  "monitor_thread_id": "01a095ca-8010-79d3-acf0-6d775cfca200",
+  "monitor_route_note": "Live Windows route published at main d530abde0. Root's actual Monitor readiness correction remains pending; never use the historical B03 endpoint.",
+  "monitor_readiness_observation": {
+    "scope": "One read_thread of the new task's latest two turns; no further polling.",
+    "latest_turn": "01a095ce-248f-70b2-97ab-432b89beb6c0",
+    "observed": "Completed response forwards Root's correction to the same task ID; these two turns contain no actual get_goal operation or MONITOR_READY evidence.",
+    "limit": "Not a claim about all older turns. Root owns readiness reconciliation; no scientific command or MONITOR_ADD submitted."
+  },
+  "relay_thread_id": "01a095ca-8676-74e1-b78c-ea459d41e905",
+  "retention": {
+    "remote_checkout": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
+    "purpose": "Accepted sparse source for the original authorized pair; no scientific output or supervisor handle exists at source acceptance.",
+    "owner_event": "Same FOLR DM resumes after Root supplies actual Monitor readiness; then owns terminal collection and assigned cleanup. If continuation is cancelled, Root assigns scoped reclamation.",
+    "local_control": "temp/directions/vap_folr_core/exp/learned_retention_b03_resume_control_20260912",
+    "shared_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-vap-folr",
+    "shared_authoring_branch": "codex/vap-folr"
+  },
   "monitor_adoption": "not_submitted",
   "scope_4_additions": "none; ordinary Git sparse staging replaces prior one-time full checkout; no production source change or service",
   "validation": {
