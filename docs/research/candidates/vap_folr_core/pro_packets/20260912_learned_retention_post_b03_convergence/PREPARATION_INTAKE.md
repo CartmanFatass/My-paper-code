@@ -67,3 +67,37 @@ missing owner input creates no wait. Publication checks and fixed TASK/HANDOFF
 identities will be appended before the ready handoff.
 
 Owner item: docs/research/portfolio/owner/inbox/2026-09-12/20260912-folr-001.json; recommendation H has no auto_applied value because it is not the node decision.
+
+## Published request and ready return
+
+The scientific preparation is e65d7fd9962725eb6d29d64b8debbce953da7e58.
+Nineteen listed paths were read back at their exact full SHAs and proved reachable
+from observed published remote refs; PUBLICATION_CHECK.json records that narrow
+publication fact. It does not establish provider access. The rendered TASK's
+19 path/SHA mappings exactly match REQUEST.json, with historical science pins
+kept distinct from current method pins. No model, test or result analysis ran.
+
+TASK publication is 02c1cde2736938fd1f2e07feadf8afe02c4caef2, immediately pushed.
+The prescribed binder verified its committed bytes and made the internal
+delivery/HANDOFF.json READY_TO_DISPATCH. Source, Root parent, Transport operator
+and original conversation were checked against the assignment/current primary
+configuration. No route is inferred from the older response or snapshots.
+
+The renderer correctly refused an attempted overwrite while an extra redundant
+scope clarification was being considered. The matching original REQUEST was
+restored; original unpublished TASK/HANDOFF bytes were retained, then bound once.
+No alternate packet directory, second request, replacement Send or control-code
+change followed. The actual fixed question/constraints already limit all generic
+Convergence wording to the named H/U recipe choice.
+
+Issue15 was open. Its obsolete body was preserved as the pinned pre-update
+snapshot, then replaced with ISSUE_CURRENT_BODY.md and the fixed new TASK link.
+Actual GitHub readback matches that body in ISSUE_UPDATE_RECEIPT.json. Historical
+comments remain evidence; no delivery comment or scientific answer was fabricated.
+
+Root should integrate the three scoped publication commits, excluding input merge
+f76af8ff3, and send this exact handoff once to the existing Transport. Its complete
+immutable response must return to /root/dm_folr_post_b03 for original-author
+conformance and intake. Preserve codex/vap-folr during delivery and reconcile
+Pro's response commit before further local pushes. This ready boundary is not
+the final P intake and changes no science disposition, invocation or budget.
