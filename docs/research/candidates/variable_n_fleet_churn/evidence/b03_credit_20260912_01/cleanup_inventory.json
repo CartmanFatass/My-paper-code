@@ -1,21 +1,25 @@
 {
   "recorded_at": "2026-09-12T14:04:32.425329+00:00",
   "owner": "/root/dm_a_mx_vnfc_recovery",
-  "pending_root_action": "integrate B03 source/terminal evidence and confirm retention/reclamation",
+  "pending_root_action": "none for the accepted two remote checkout reclamations; cleanup receipt publication/integration follows",
   "remote_reclamation_candidates": [
     {
       "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01",
       "source_sha": "b93329b3c44ea9d0cf5622c00f5ca6eea0740dac",
       "active_execution": false,
       "evidence_preserved": "raw_collection.tar.gz contains all5 run files plus admission/timer and6 supervisor files; archive_readback.json verifies13 files and raw SHA. Full source is published.",
-      "event": "remove only after Root confirms integrated evidence/retention; verify disk and git worktree absence"
+      "event": "completed after Root integration/retention acceptance; see cleanup_result.json",
+      "disk_absent": true,
+      "git_registration_absent": true
     },
     {
       "path": "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912",
       "source_sha": "d76d96cbe3df9b598e0db695a8b39deb23e7bdb1",
       "active_execution": false,
       "evidence_preserved": "Exact remote receipt bytes now preserved in b02_credit_20260911_01/repair_owned_boundary_remote_receipt_20260912.json; SHA/readback and both scoped checkout states in cleanup_preservation.json. Root previously integrated repair/acceptance.",
-      "event": "Root confirms retention/reclamation; then remove terminal checkout and verify disk plus Git-registration absence."
+      "event": "completed after Root integration/retention acceptance; see cleanup_result.json",
+      "disk_absent": true,
+      "git_registration_absent": true
     }
   ],
   "preserve_outside_reclamation": [
@@ -33,5 +37,20 @@
       "reason": "Shared designated direction authoring checkout remains in use for DM publication/integration/cleanup continuation; not a reclamation target."
     }
   ],
-  "creator_test_scratch": "Owned mean test scratch already absent; no additional tests constructed scratch."
+  "creator_test_scratch": "Owned mean test scratch already absent; no additional tests constructed scratch.",
+  "root_retention_acceptance": "Root integrated and pushed B03 source/card/inputs/staging/intake at main efa676ac2 / 60ba92104 / 57da33f0c / 7125f368b and explicitly assigned both scoped removals.",
+  "cleanup_complete_at": "2026-09-12T14:21:00.338822+00:00",
+  "post_removal_preservation": {
+    "core_exists": true,
+    "core_bytes": 641089536,
+    "supervisor_directory_exists": true,
+    "supervisor_files": {
+      "exit_code": true,
+      "pid": true,
+      "runner.sh": true,
+      "start_time": true,
+      "status": true,
+      "task.log": true
+    }
+  }
 }

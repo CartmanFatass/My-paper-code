@@ -135,7 +135,7 @@ new diagnostic framework or Engineering Scope §5 breach is observed; source is 
 from the committed launch binding. [Support accounting](evidence/b03_credit_20260912_01/support_costs.json)
 separates selected non-nested command-wall receipts from missing preparation, routing,
 intake/publication/cleanup and complete elapsed critical path. Its recorded sum is
-31.383636 seconds; this is not complete support wall. Full 300-second support and
+40.316923 seconds; this is not complete support wall. Full 300-second support and
 900-second combined conformance is unestablished, not a measured breach or a scientific
 failure classification. Missing clocks are not zero. No valid-result cost denominator
 exists, and the unused arithmetic does not authorize another scientific invocation.
@@ -150,3 +150,12 @@ verifies disk plus Git-registration absence.
 The external B03 core and small supervisor history remain; the shared Windows
 `C:/Projects/HMASD-worktrees/codex-vnfc` authoring checkout is still used for this return.
 Owned test scratch is already absent. No evidence root is deleted in this intake.
+
+
+Closeout update: Root integrated and retained this evidence at main `7125f368b`
+(with source/input/staging `efa676ac2` / `60ba92104` / `57da33f0c`). The execution
+record's [actual cleanup section](VNFC_N7_NATIVE_SERVICE_CREDIT_B03_EXECUTION_20260912.md#root-acceptance-and-actual-cleanup--2026-09-12)
+supersedes the pending inventory above: both named detached checkouts are absent on
+disk and from Git registration. The raw archive, exact maintenance receipt, external
+core, supervisor history, B01/B02 evidence and shared authoring checkout are retained.
+No new scientific or diagnostic invocation occurred.

@@ -76,9 +76,21 @@
     {
       "operation": "cleanup_receipt_preservation_and_owned_surface_inventory",
       "seconds": 1.3867772999801673
+    },
+    {
+      "operation": "terminal_intake_commit_and_push",
+      "seconds": 7.7931249
+    },
+    {
+      "operation": "accepted_cleanup_precheck",
+      "seconds": 0.6680371999973431
+    },
+    {
+      "operation": "accepted_two_checkout_cleanup_and_verification",
+      "seconds": 0.4721241999650374
     }
   ],
-  "selected_non_nested_command_wall_sum_seconds": 31.38363629991218,
+  "selected_non_nested_command_wall_sum_seconds": 40.31692259987456,
   "provenance": "Published JSON receipts where available; remaining local command/reviewer timings are the actual task tool receipts. This is a selected command-wall inventory, not reconstructed complete support or elapsed critical path.",
   "nested_exclusions": {
     "remote_source_staging_seconds": 4.563541363,
@@ -99,5 +111,6 @@
   "valid_complete_results": 0,
   "cost_per_valid_result": null,
   "prior_maintenance_check": "Separate previously authorized engineering account; 3.177215865 seconds check is not transferred to this fresh scientific allocation.",
-  "balance": "The single accepted B03 invocation ended; unspent arithmetic does not authorize another invocation."
+  "balance": "The single accepted B03 invocation ended; unspent arithmetic does not authorize another invocation.",
+  "cleanup_account_scope": "The two-checkout cleanup command is charged once here; it includes the accepted maintenance checkout reclamation. The prior numerical maintenance check stays separate."
 }
