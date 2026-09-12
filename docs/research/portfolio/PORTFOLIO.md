@@ -11,7 +11,7 @@
 Root当前实际工作集5/5：ACVC、MGTAP、FSD、RCLE、FOLR五个ACTIVE方向的原DM均已恢复，继续下一有界对象或方向判断。最近有限对象已完成，但没有Portfolio决定停止这些方向；cleanup与Transport不另占槽位。
 FSD为一对I1280/authentic-D0，D0≤900、I≤1800、native≤2700、support≤300、完整≤3000秒；FOLR仅一次原节点post-B03 Convergence及完整intake，零实验额度、完整成本未知。MGTAP1200未分配。
 N/R选择已经intake；FSD进入新pair执行流程，RCLE进入一次原节点问题起草。新的方向发现/注册及独立MGTAP T投入请求已由provider exact-once接受并生成中；该请求已用各方向最新handoff、DIRECTION和intake刷新旧方向事实。
-FSD D0已exit0并由Monitor交付，原DM正在收集/验收并准备合规I臂；ACVC进入DM响应intake，FOLR仍在provider生成，RCLE有DM实际工作，MGTAP有Portfolio投入路由。严格推进计数5/5，不以排队意图补槽。
+FSD D0已exit0，预选I臂已远端运行并获Monitor goal接管；ACVC进入DM响应intake，FOLR与RCLE在provider生成，MGTAP有Portfolio投入路由。严格推进计数5/5，不以排队意图补槽。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
 “待选择”是尚未分配的未来工作，不能冒充已运行，也不是永久禁入。
@@ -27,7 +27,7 @@ FSD D0已exit0并由Monitor交付，原DM正在收集/验收并准备合规I臂�
 | [eociv_lite](../candidates/eociv_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
 | [expressibility_gated_renewal_credit_relay](../candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
 | [FRRIE](../candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md) | P59已intake；P63 source-only九frame映射完成，factory fault仍未归因，P63未运行。 | 无；本轮没有新增拨款。 | 可信最小观察/替代执行路径及必要拨款。旧故障未完全定位不自动禁止不同可信路径；不重跑旧P63。 |
-| [FSD](../candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md) | 771203 pair为小幅ABOVE_MEI：+0.0125548 J，19/32正；前次负结果与约2.20倍耗时保留。 | fresh第五pair的D0在459秒exit0；Monitor已交付，原DM正在收集和技术验收。 | D0有效后推进预选I臂并重新取得Monitor adoption；严守各项上限，无retry或第六pair。 |
+| [FSD](../candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md) | 771203 pair为小幅ABOVE_MEI：+0.0125548 J，19/32正；前次负结果与约2.20倍耗时保留。 | fresh第五pair D0已459秒exit0；预选I臂运行中且Monitor已实际接管。 | I终止后由原DM收集并完整intake；严守各项上限，无retry或第六pair。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/CONVERGENCE_INTAKE_20260912.md) | 原Convergence已选一个fresh TOP/intact-DENSE B：用masked最高本地SINR row0替代mean visible-partner；8213负、8214正证据分别保留，DENSE默认不变。 | intake已集成main6f506e474；整对象投入需求已交Portfolio，方向保持ACTIVE。 | Portfolio决定450秒/臂、1200秒完整上限的投入与排序；拨款前不实施或启动实验。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
