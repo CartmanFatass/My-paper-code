@@ -1,6 +1,6 @@
 {
   "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
-  "recorded_utc": "2026-09-12T02:41:15.015152+00:00",
+  "recorded_utc": "2026-09-12T02:49:24.812714+00:00",
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -101,10 +101,34 @@
     {
       "purpose": "authoritative owner reviews at adopted D0 clean handover boundary",
       "wall_seconds": 0.4013125
+    },
+    {
+      "purpose": "publish sole D0 relay receipt and final handover support snapshot",
+      "wall_seconds": 5.2884728
+    },
+    {
+      "purpose": "Root reported FSD-only source/handover inspection, integrations and pushes; 0.6 + 8.5 s, approximate",
+      "wall_seconds": 9.1
+    },
+    {
+      "purpose": "read prior accepted collection contract and preselected I command",
+      "wall_seconds": 0.222927
+    },
+    {
+      "purpose": "owner reviews on routed D0 terminal boundary",
+      "wall_seconds": 0.3940172
+    },
+    {
+      "purpose": "collect closed D0 raw bytes, receipts and supervisor once into durable archive without temporary duplicate",
+      "wall_seconds": 0.9391812
+    },
+    {
+      "purpose": "single D0 acceptance over all collected training/endpoint/identity/admission/cost records",
+      "wall_seconds": 0.3408051
     }
   ],
-  "known_support_wall_seconds": 32.2950186,
-  "counting": "Each outer invoked support interval once; nested clocks are not additive. This final receipt/publication command is not yet measurable inside its own snapshot and is returned separately, then charged at collection.",
+  "known_support_wall_seconds": 48.5804219,
+  "counting": "Each outer invoked support interval once; nested clocks are not additive. This collection-publication command will be charged in the next snapshot.",
   "new_scientific_submissions": 1,
   "new_source_delivery_transactions": 1,
   "unknown": [
@@ -114,9 +138,9 @@
     "future collection, publication and preservation/cleanup",
     "unmeasured external contribution is not zero"
   ],
-  "claim": "Prospective partial support accounting; not a final cap certificate.",
+  "claim": "D0 complete native wall passes its 900 s cap. Partial support accounting includes all known charges once; I and remaining support are unknown, so no final total cap certificate.",
   "native_wall_seconds": {
-    "D0": null,
+    "D0": 471.82,
     "I": null
   },
   "source_transaction": {
@@ -124,5 +148,12 @@
     "complete_helper_wall_seconds": 7.437999999994645,
     "limit_seconds": 45,
     "status": "successful single transaction; nested helper clock not added again"
+  },
+  "known_native_plus_support_seconds": 520.4004219,
+  "Root_integration": {
+    "source_main": "31e9cc05a",
+    "D0_handover_main": "0e7bb1e83",
+    "charged_reported_seconds": 9.1,
+    "exactness": "approximately 0.6 + 8.5 s; client/message overhead unknown"
   }
 }

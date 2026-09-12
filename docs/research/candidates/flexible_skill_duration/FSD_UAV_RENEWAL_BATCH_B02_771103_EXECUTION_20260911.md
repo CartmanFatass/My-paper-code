@@ -1,8 +1,8 @@
 # FSD UAV renewal batch B02 / 771103 — exact execution record
 
 **State:** D0 accepted detached at 2026-09-12T02:37:10.936128+00:00;
-Monitor adoption confirmed through Root with an active goal and this handle
-in its active set. D0 collection is pending; I is unlaunched.
+D0 is now collected and technically accepted. I is the preselected companion,
+not yet submitted; its launch requires fresh destination admission.
 Owner: FSD DM /root/dm_fsd_i1280_implementation. Authoring checkout
 C:/Projects/HMASD-worktrees/codex-fsd, branch codex/fsd. Root owns main integration
 and accepts retained evidence/reclamation. Assignment 1 and card §8 control this
@@ -123,3 +123,32 @@ receipt. This does not infer Root integration. No second relay is sent merely
 for this receipt publication. Authoritative owner reviews were [] again at the
 adopted-run return boundary. All new execution/source paths remain retained for
 the active run, collection and preselected companion; no current cleanup is due.
+
+## D0 terminal collection and technical acceptance
+
+Root routed the complete, exit 0 Monitor fact (terminal event in
+D0_MONITOR_TERMINAL.json). DM collected all 11 closed raw files directly into
+the durable archive without creating a temporary extraction tree. Collected
+bytes match the remote copy checksums; D0_COLLECTION_RECEIPT.json preserves the
+archive, source and file list. Shared source remains at the exact launch SHA.
+
+D0 is accepted as the complete fresh companion: two models, one real fit,
+40000 stored training ticks / 80 episodes / five updates, then 16000 final
+ticks / 32 ordered deterministic episodes. All measurements are finite, every
+learner module has nonzero displacement, evaluator optimizer calls are zero,
+and training.jsonl matches summary. Configurations, seed lanes, source/object
+identity and native J scaling match the card. D0_TECHNICAL_ACCEPTANCE.json records
+the checks, complete own-arm measurements and unchanged acceptance rule.
+
+Complete D0 command wall 471.82 s is within 900 s
+(supervisor 472 s); aggregate CPU 1860.73 s and
+peak RSS 1632916 KiB are distinct quantities. Physical and
+effective available memory were both 15628304384 bytes
+against the 4294967296-byte floor. Mean final J is
+0.4072901252402493; this own-arm observation does not select I or provide
+a paired polarity. The next action is the unchanged preselected I command at
+5b15e536806d3b54dc693e7b4b911eba53ff643c, with fresh adjacent admission and no
+new source transaction. All original caps remain in force. Owner reviews were
+[] on terminal entry. Root previously supplied approximately 9.1 s of FSD-only
+source/handover inspection and integration, charged once in SUPPORT.json;
+Monitor observation and unmeasured message/client cost remain unknown.
