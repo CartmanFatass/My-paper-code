@@ -64,9 +64,29 @@
     {
       "purpose": "technical acceptance, card owner item and support publication preparation",
       "wall_seconds": 0.5459366
+    },
+    {
+      "purpose": "source/card/command explicit staging, commit and immediate push",
+      "wall_seconds": 5.3961982
+    },
+    {
+      "purpose": "sole source-delivery enclosing command",
+      "wall_seconds": 6.5979921
+    },
+    {
+      "purpose": "preflight/command readback, input directory and sole D0 supervisor submission",
+      "wall_seconds": 0.73102
+    },
+    {
+      "purpose": "direct D0 Monitor ADD accepted delivery",
+      "wall_seconds": 0.345
+    },
+    {
+      "purpose": "D0 staging/launch/monitor receipt preparation",
+      "wall_seconds": 0.4139413
     }
   ],
-  "known_support_wall_seconds": 18.8364114,
+  "known_support_wall_seconds": 32.320563,
   "counting": "Each known enclosing invoked command once; nested SSH not readded. Prior readiness overlap conservatively included, old D spending never reused.",
   "unknown": [
     "earlier readiness command walls unavailable in truncated outputs",
@@ -74,9 +94,15 @@
     "Monitor/Relay/client/Root integration and final publication until attributed",
     "provider and agent cost not numerically attributed"
   ],
-  "source_delivery_transactions": 0,
-  "scientific_submissions": 0,
+  "source_delivery_transactions": 1,
+  "scientific_submissions": 1,
   "native_wall_seconds": {},
   "claim": "No observed budget breach; partial known support is not certification of full300/3000 compliance.",
-  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-fsd-003.json"
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-fsd-003.json",
+  "source_transaction": {
+    "complete_helper_seconds": 6.344000000040978,
+    "enclosing_tool_seconds": 6.5979921,
+    "within45": true,
+    "nested_not_readded": true
+  }
 }
