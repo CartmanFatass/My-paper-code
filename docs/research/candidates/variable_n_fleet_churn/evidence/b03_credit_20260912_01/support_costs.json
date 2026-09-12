@@ -1,0 +1,103 @@
+{
+  "recorded_at": "2026-09-12T14:12:32.322987+00:00",
+  "native_complete_invocation_wall_seconds": 104.89,
+  "native_cap_seconds": 600,
+  "support_cap_seconds": 300,
+  "complete_cap_seconds": 900,
+  "selected_support_command_wall_seconds": [
+    {
+      "operation": "runner_card_authoring",
+      "seconds": 0.2275579
+    },
+    {
+      "operation": "card_owner_item_and_audit",
+      "seconds": 0.4171308
+    },
+    {
+      "operation": "independent_identity_review",
+      "seconds": 0.3145086
+    },
+    {
+      "operation": "source_card_commit_and_push",
+      "seconds": 5.5178227
+    },
+    {
+      "operation": "AST_source_closure",
+      "seconds": 1.1154439
+    },
+    {
+      "operation": "import_source_read",
+      "seconds": 0.2326381
+    },
+    {
+      "operation": "execution_inputs_commit_and_push",
+      "seconds": 4.5138095
+    },
+    {
+      "operation": "scoped_source_staging_outer",
+      "seconds": 5.467999999993481
+    },
+    {
+      "operation": "staging_record_commit_and_push",
+      "seconds": 4.4878714
+    },
+    {
+      "operation": "launch_control_outer",
+      "seconds": 0.6720000000204891
+    },
+    {
+      "operation": "admission_receipt_collection",
+      "seconds": 0.6399999999557622
+    },
+    {
+      "operation": "requested_same_handle_reconciliation",
+      "seconds": 0.4851533
+    },
+    {
+      "operation": "terminal_archive_creation_outer",
+      "seconds": 0.7660000000032596
+    },
+    {
+      "operation": "archive_transfer_and_readback",
+      "seconds": 1.8899999999557622
+    },
+    {
+      "operation": "core_metadata_read",
+      "seconds": 0.869776
+    },
+    {
+      "operation": "saved_core_top12_read",
+      "seconds": 2.1410000000032596
+    },
+    {
+      "operation": "partial_count_analysis",
+      "seconds": 0.2381468
+    },
+    {
+      "operation": "cleanup_receipt_preservation_and_owned_surface_inventory",
+      "seconds": 1.3867772999801673
+    }
+  ],
+  "selected_non_nested_command_wall_sum_seconds": 31.38363629991218,
+  "provenance": "Published JSON receipts where available; remaining local command/reviewer timings are the actual task tool receipts. This is a selected command-wall inventory, not reconstructed complete support or elapsed critical path.",
+  "nested_exclusions": {
+    "remote_source_staging_seconds": 4.563541363,
+    "reason": "already inside staging outer wall; remote archive construction is likewise inside its outer entry"
+  },
+  "unmeasured": [
+    "other preparation/read/edit/commit operations",
+    "Root and Monitor command/delivery overhead",
+    "complete intake/publication/cleanup cost",
+    "aggregate CPU work",
+    "complete study elapsed critical path",
+    "per-arm native wall"
+  ],
+  "queue_and_deliberation": "not charged as measured machine invocation wall; not reconstructed from chat timestamps",
+  "full_support_or_complete_cap_conformance": "unestablished; no measured breach asserted and missing values are not zero",
+  "new_scientific_submissions": 1,
+  "retries": 0,
+  "valid_complete_results": 0,
+  "cost_per_valid_result": null,
+  "prior_maintenance_check": "Separate previously authorized engineering account; 3.177215865 seconds check is not transferred to this fresh scientific allocation.",
+  "balance": "The single accepted B03 invocation ended; unspent arithmetic does not authorize another invocation."
+}

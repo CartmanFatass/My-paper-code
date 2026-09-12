@@ -1,0 +1,75 @@
+{
+  "remote_archive_sha256": "a9b98b58d6b0051f8f5055e8d8b261e6c8a87e9d253de5db14d0aea156e9e9fa",
+  "local_archive_sha256": "a9b98b58d6b0051f8f5055e8d8b261e6c8a87e9d253de5db14d0aea156e9e9fa",
+  "archive_bytes": 5532089,
+  "members": [
+    {
+      "name": "run/INTERVAL_initial.pt",
+      "bytes": 722421,
+      "sha256": "aa583ad94c92d6a073bb4e8ecd3c8660d4f7dc01122e8ffb6ac1563247c0afef"
+    },
+    {
+      "name": "run/INTERVAL_midpoint.pt",
+      "bytes": 2169211,
+      "sha256": "4b15ae6935a0fd0a4c0cdc88b01883cc108b540efe2594bde2bed8a0f963c42d"
+    },
+    {
+      "name": "run/TERMINAL_initial.pt",
+      "bytes": 722421,
+      "sha256": "d5b956e61bc1058c62474e48be8b7bc05f7fb24b31f849e2c89776a5a9a26d51"
+    },
+    {
+      "name": "run/TERMINAL_midpoint.pt",
+      "bytes": 2169211,
+      "sha256": "bf531d1796e032a2985a3db66e562dcb6a3704a979c44af77759d73c71191f1c"
+    },
+    {
+      "name": "run/b01_native.so",
+      "bytes": 133704,
+      "sha256": "1e72526547c0709e2fbc8feb3101a09f0d9896d3e09ba52ce6e0e4ede3f1f5d8"
+    },
+    {
+      "name": "admission.json",
+      "bytes": 504,
+      "sha256": "15c407312424a589728edf2a2fe2c12b480eea4adeff72312dcdfb94ba7ad735"
+    },
+    {
+      "name": "outer_time.txt",
+      "bytes": 89,
+      "sha256": "57eece3c80262902c586fe5ed5294243cea77614a58930943cf5c2e7975f216d"
+    },
+    {
+      "name": "supervisor/exit_code",
+      "bytes": 4,
+      "sha256": "690e07064753123c967bbac0180f32da6a753a5bd8b79a47644cef58e776d9f0"
+    },
+    {
+      "name": "supervisor/pid",
+      "bytes": 8,
+      "sha256": "776e436779aaa2e6aebbdf91935d768794fa19b9d5dd473ab01691a0f8dd57cd"
+    },
+    {
+      "name": "supervisor/runner.sh",
+      "bytes": 1634,
+      "sha256": "e2271b12cd6cea9ab7d5a769538d181d568e49b55caf891c4e635b80af81b53b"
+    },
+    {
+      "name": "supervisor/start_time",
+      "bytes": 11,
+      "sha256": "116b020eb20853e3892c78e0cb094cb6964cf3f337c7ddecadcd69526e12624b"
+    },
+    {
+      "name": "supervisor/status",
+      "bytes": 7,
+      "sha256": "6da5b18878e110928643ebcc38dbb7552cf3a296eea56493e23edc2b93eecff8"
+    },
+    {
+      "name": "supervisor/task.log",
+      "bytes": 20812,
+      "sha256": "4f4e82a3223e5ed42d8da288f47c0739acdfea2d53a8736d6b9e584468123718"
+    }
+  ],
+  "local_download_and_read_seconds": 1.8899999999557622,
+  "checkpoint_loads": 0,
+  "scientific_submissions": 0
+}
