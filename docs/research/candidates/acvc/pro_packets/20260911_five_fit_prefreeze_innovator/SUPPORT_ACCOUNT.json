@@ -1,7 +1,12 @@
 {
-  "assignment": "Portfolio05c24bcd85f92efc26fb2a9cb2152bed51dd90e9 / Assignment 2 at e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+  "allocation": "Portfolio Assignment 2; same complete ACVC five-new-fit chain",
+  "allocation_source_sha": "05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+  "cutoff_utc": "2026-09-12T03:31:57.188Z",
+  "cutoff_phase": "bound Innovator handoff immediately before final publication",
+  "native_invoked_s": 0,
+  "known_measured_support_command_wall_s": 109.9224346,
   "caps_s": {
-    "per_native_unit": 270,
+    "per_complete_native_unit": 270,
     "native_sum": 1350,
     "all_invoked_support": 1650,
     "complete_invoked_work": 3000
@@ -94,7 +99,7 @@
     },
     {
       "phase": "completion of request source mapping/render command",
-      "wall_s": 0.0000024,
+      "wall_s": 2.4e-06,
       "measurement": "additional tool wait; elapsed gap while asynchronous command ran is unmeasured"
     },
     {
@@ -182,19 +187,100 @@
     {
       "phase": "publish promotion decisions to audit and maintained owner item via CLI",
       "wall_s": 0.4205645
+    },
+    {
+      "phase": "publish complete promotion intake, audit/owner surfaces and continuing support account",
+      "wall_s": 5.4321138
+    },
+    {
+      "phase": "start sole original Innovator packet with reused exact counts, zero exposure and current Issue snapshot",
+      "wall_s": 1.9051965
+    },
+    {
+      "phase": "Innovator continuation: current checkout, reused facts and author workflow",
+      "wall_s": 0.2883805
+    },
+    {
+      "phase": "Innovator exact promoted requirements and fixed delivery template read",
+      "wall_s": 0.2606646
+    },
+    {
+      "phase": "read promoted full decision and allocation with UTF-8 output",
+      "wall_s": 0.2333815
+    },
+    {
+      "phase": "author exact original Innovator scientific brief and preparation record",
+      "wall_s": 0.023,
+      "measurement": "enclosing apply_patch call"
+    },
+    {
+      "phase": "current owner and live fixed-route facts",
+      "wall_s": 0.235892
+    },
+    {
+      "phase": "fetch published refs before Innovator publication",
+      "wall_s": 2.1269001
+    },
+    {
+      "phase": "Innovator clean-boundary owner review",
+      "wall_s": 0.3840323
+    },
+    {
+      "phase": "verify current methodology pins, published branch, owner ledger and renderer",
+      "wall_s": 0.4976046
+    },
+    {
+      "phase": "publish original Innovator Issue context once and verify preserved discussion",
+      "wall_s": 6.7249177
+    },
+    {
+      "phase": "check Innovator scientific input files and explicit commit metadata",
+      "wall_s": 0.4949233
+    },
+    {
+      "phase": "publish original Innovator scientific and authority inputs",
+      "wall_s": 5.489213
+    },
+    {
+      "phase": "author original Innovator request, verify all exact published references and render TASK",
+      "wall_s": 6.0679802
+    },
+    {
+      "phase": "inspect rendered Innovator question and exact original-node/source manifest",
+      "wall_s": 0.4391719
+    },
+    {
+      "phase": "verify actual rendered path/full-SHA fields and original Innovator route",
+      "wall_s": 0.2428739
+    },
+    {
+      "phase": "publish immutable Innovator TASK and bind fixed-link HANDOFF",
+      "wall_s": 5.4457711
+    },
+    {
+      "phase": "fresh fixed Innovator TASK readback and bound publication facts",
+      "wall_s": 1.908462
+    },
+    {
+      "phase": "final Innovator boundary owner review",
+      "wall_s": 0.4221971
+    },
+    {
+      "phase": "final bound packet check and single Root-action relay contract",
+      "wall_s": 0.3686096
     }
   ],
-  "known_support_s": 70.93114889999998,
-  "known_native_s": 0,
-  "cutoff": "Through complete promotion intake, preserved receipt-label correction and owner item; before this account publication and the later allocated Innovator preparation",
-  "unknown_costs": [
-    "provider generation/queue (reported natural promotion generation label 11m 11s; not a measured support-command bill)",
-    "deliberation",
-    "unmeasured client/message and enclosing support overhead",
-    "elapsed gap while first reference-verification command completed asynchronously",
-    "one support/preparation editing-tool interval not independently measured",
-    "Root/Transport actual invoked integration/delivery/receipt-correction contributions not yet supplied"
+  "unknowns": [
+    "Enclosing client/message/authoring overhead where not measured; not zero.",
+    "Earlier asynchronous reference-publication command ran across a tool-yield gap not measured by its two tool receipts.",
+    "One earlier editing-tool duration was not measured; provider generation/queue and deliberation remain separately qualified.",
+    "Root/Transport preparation, delivery, observation, receipt-correction and integration command contributions have not been supplied; do not assert zero or unconditional complete-cap conformance.",
+    "This snapshot precedes its own writing/final publication and the completion relay; those measured tails are returned explicitly and carried into the next intake, without creating an endless series of accounting commits."
   ],
-  "counting_rule": "Count invoked commands/reviews/observations once, including required preparation and closeout. Keep nested and shared enclosing clocks distinct. Known sums are lower bounds, not unconditional complete-cap conformance. Historical allocations supply no credit.",
-  "continuation": "Same original DM owns one allocated Innovator review/intake and, only if conforming, the fixed five-unit complete path. No additional question, altered design, sixth/replacement fit or top-up."
+  "interpretation": "Known subtotal is a lower bound for the support account, not a new allowance or proof of unconditional total conformance. No observed overrun in known work. Native and support caps remain separate. Count commands once; nested wall clocks do not add work.",
+  "historical": "Earlier 8951/8961 and 270/330/600 allocations remain ended. Historical cost anchors do not contribute credit.",
+  "pinned_pro_account_snapshot": {
+    "commit_sha": "dbe2c5a70a374911eb24bf02c5ca28b6ce2a0251",
+    "meaning": "TASK deliberately cites the earlier exact cutoff at the scientific-input commit; this current descendant extends the same account without changing that pinned evidence."
+  }
 }

@@ -1,0 +1,74 @@
+{
+  "id": "20260911-acvc-004",
+  "created": "2026-09-11T20:11:20-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "ACVC正式晋级五次新训练方案，冻结前待Innovator",
+  "context": "三次新训练的F相对C和有效dwell均有正收益；原Convergence现正式晋级固定五次新训练方案。结论严格限定于既定任务和小样本模型，唯一Innovator审查仍须先于冻结。支持预算与不利证据均保留。",
+  "options": [
+    {
+      "key": "promote",
+      "label": "按原裁决正式晋级",
+      "consequence": "只进入已拨款的一次原Innovator审查；通过后才能冻结并执行固定五次完整单元。"
+    },
+    {
+      "key": "hold",
+      "label": "窄暂缓后续晋级路径",
+      "consequence": "停止此后续路径并保留证据；不自动购买替代实验或额外问题。"
+    }
+  ],
+  "recommended": "promote",
+  "auto_applied": "promote",
+  "dm_reason": "完整原节点裁决符合既定设计与现行规范，按常设委托应用；不把晋级当作结果阳性或冻结。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_FIVE_FIT_PROMOTION_CONVERGENCE_INTAKE_20260911.md",
+    "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L126",
+  "brief": "docs\\research\\portfolio\\owner\\briefs\\acvc\\2026-09-11_five_fit_promotion_convergence.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按原Convergence完整裁决，将既定五次新训练比较正式晋级为限定任务的C-BENCH，并进入唯一Innovator审查，还是异步覆盖为窄暂缓？",
+    "changes_if_approved": [
+      {
+        "target": "acvc/DIRECTION.md · 五次新训练晋级",
+        "from": "已选定总体结论设计，尚未正式晋级",
+        "to": "正式晋级为限定任务、模型依赖的C-BENCH；仅进入已拨款的一次原Innovator审查，尚未冻结、选种子或开跑"
+      }
+    ],
+    "if_refused": "保留全部已发布证据与原裁决记录，依所有者覆盖停止后续；不会自动改成其他实验、再发Convergence问题或挪用旧经费。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/archive/RESPONSE.md",
+        "quote": "The strongest support is the F−dwell margin on each independently completed fresh training history, not simply improvement over always-apply C.",
+        "why": "三次独立完成的新训练，F对有实际收益的dwell仍有约0.064至0.094 J的有界优势。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/archive/RESPONSE.md",
+        "quote": "Five units cannot validate tails, rule out a rare poor-training component or establish a normal approximation.",
+        "why": "五次仍不足以验证训练分布尾部；已有5/11/5个不利世界，dwell本身也有收益，不能写成稳定或纯机制优势。"
+      }
+    ],
+    "uncertainty": [
+      "原Innovator审查尚未完成，不因晋级而预设通过。",
+      "正式区间只在声明的独立同分布正态训练单元模型下有覆盖解释；实际神经网络训练校准未建立。",
+      "未来完整开销未知；支持命令、传输、观察、入库与清理均在同一新上限内。",
+      "原Transport短回执曾误标为全文；已保留原字节并完成标签更正，完整Git答复已独立核验。"
+    ],
+    "cost": {
+      "compute": "本轮科学调用0。若后续审查与冻结符合条件，五次完整单元合计901120环境步、5120次Adam；每次270秒、原生合计1350秒、支持1650秒、总计3000秒。当前已测命令累计及未测项见同包SUPPORT_ACCOUNT。",
+      "owner_time": "可异步覆盖；无需当前批准或回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; 已按委托应用晋级，下一步仅为原Innovator审查，科学运行仍受条件约束"
+    },
+    "verdict_text": "**Promote the exact five-new-fit comparison to provisional single-task C-BENCH.** The scientific reason is the repeated, practically sized native advantage of the complete fixed F execution package over both the attained C proposer and beneficial own-predicate dwell, together with a now-explicit population, development/final separation, and finite analysis that can return an inconclusive or adverse result. This is an actual direction-tier promotion decision, not another tentative claim-design recommendation and not a finding that the population claim has already passed. I accept only the qualified five-new-fit, 64-world-per-rule design and its prescribed fit-level t/Bonferroni analysis. [Science brief §§1–4][brief]; [original design, population and uncertainty sections][design]; [empirical specification §§5.3 and 11.8.4][spec].",
+    "source": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/archive/RESPONSE.md",
+    "authority": "PRO_FINAL / OWNER_DELEGATED; original Convergence103b8f811388089c714383708a13526f9a06aff3; Portfolio05c24bcd85f92efc26fb2a9cb2152bed51dd90e9 Assignment2",
+    "application_state": "actual direction promotion applied; one Innovator handoff being prepared; no freeze, namespace selection, source implementation or scientific execution"
+  },
+  "starred": true
+}

@@ -5,7 +5,7 @@ Binding MARL structure: (b) temporal abstraction or termination; asynchronous in
 
 **B/EXPLORE. Ended zero-exposure instances770803/770903 remain preserved;
 771003/781003 completed with a valid `above_mei` intake under §7;
-new771103/781103 is prospectively bound under §8.**
+771103/781103 completed with a valid `opposite_sign` intake under §8.**
 The original770803 allocation ended unlaunched with a preparation/support-cost limitation;
 see [the execution-limitation intake](FSD_UAV_RENEWAL_BATCH_B02_EXECUTION_LIMITATION_INTAKE_20260911.md).
 The accepted binding and prospective reading below remain unchanged. No retry
@@ -443,3 +443,19 @@ Object options: (a) execute this new unchanged pair within the assigned caps;
 Recommend/select (a), with the stop above. **Owner-delegated decision
 (unattended, 2026-09-03 instruction): (a).** Owner flag: none. Owner reviews were []
 at preparation. [Execution record](FSD_UAV_RENEWAL_BATCH_B02_771103_EXECUTION_20260911.md).
+
+### 8.1 Completed result boundary — 2026-09-11
+
+The allocated 771103 pair is a valid complete B/EXPLORE observation:
+I1280−D0 **−0.012430430599850807**, under the original `opposite_sign` rule.
+Sixteen differences are positive and sixteen negative; conditional episode
+SE is .01926754789685166. The near-MEI adverse result does not establish stable
+harm. The prospective low-confidence `above_mei` prediction is wrong; the owner
+prediction was not taken. Earlier package gains and batch128 losses remain
+separately valid. Native wall is 1495.25 s within the original caps; partial
+support telemetry limits total-cost certification.
+
+[Result evidence](FSD_UAV_RENEWAL_BATCH_B02_771103_RESULT_EVIDENCE_20260911.md)
+and [intake](FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md) preserve every
+outcome and the exact claim ceiling. The pair ends at intake/closeout; no fourth
+pair, C promotion, new panel or automatic successor is authorized.

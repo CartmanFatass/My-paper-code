@@ -1,0 +1,30 @@
+{
+  "checked_at_utc": "2026-09-12T03:30:36.491428+00:00",
+  "request_id": "2026-09-11-acvc-five-fit-prefreeze-innovator-01",
+  "scientific_input_sha": "dbe2c5a70a374911eb24bf02c5ca28b6ce2a0251",
+  "task_commit_sha": "a2960298fcf3c44dd5b67bce8974536a789376c1",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/a2960298fcf3c44dd5b67bce8974536a789376c1/docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/TASK.md",
+  "task_path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/TASK.md",
+  "task_bytes": 29160,
+  "task_sha256": "33e19e9941daf4c2b0bceb7b1510d5a1b3ecbe8e18938ec89e77e5a48c6b291c",
+  "fresh_github_contents_byte_match": true,
+  "github_blob_sha": "e1b77fb88bc1c653b3e5b9f85186fc7818b82894",
+  "reference_count": 18,
+  "reference_check_path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/REFERENCE_PUBLICATION_CHECK.json",
+  "original_binding": "em:acvc:innovator",
+  "conversation_reuse_required": true,
+  "provider_reset": false,
+  "source_thread_id": "01a08eda-0ae0-7123-aafc-619ab2addd1a",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+  "short_prompt_bytes": 1917,
+  "short_prompt_sha256": "598d86380745a5e7f6dc6912fa17fdf3f9187c1f2c4f27e3aa1b820f87ca5b0b",
+  "delivery": {
+    "branch": "codex/acvc",
+    "base_sha": "dbe2c5a70a374911eb24bf02c5ca28b6ce2a0251",
+    "response_path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  },
+  "status": "READY_TO_DISPATCH after committing/pushing this bound HANDOFF; no DM dispatch or Pro Send has occurred",
+  "root_action": "Load bound HANDOFF at the returned full publication commit and dispatch its exact dispatch_prompt once to the existing Transport; forward the full immutable response for original DM intake."
+}

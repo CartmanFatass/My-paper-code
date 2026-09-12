@@ -1,8 +1,8 @@
 # FSD UAV renewal batch B02 / 771103 — exact execution record
 
-**State:** D0 collected and technically accepted; I accepted detached at
-2026-09-12T02:50:17.756743Z and adopted by the active-goal Monitor. I terminal
-collection and the full paired scientific intake remain pending.
+**State:** both arms terminal and technically accepted; complete paired
+B/EXPLORE result is opposite_sign. Scientific intake and preservation are
+prepared; scoped terminal cleanup follows publication.
 Owner: FSD DM /root/dm_fsd_i1280_implementation. Authoring checkout
 C:/Projects/HMASD-worktrees/codex-fsd, branch codex/fsd. Root owns main integration
 and accepts retained evidence/reclamation. Assignment 1 and card §8 control this
@@ -194,3 +194,39 @@ publication. Authoritative owner reviews returned [] at the final I boundary.
 The DM returns pending I terminal collection, full paired intake/Chinese brief
 and preservation/cleanup. No new allocation, retry or source transaction follows
 from this handover.
+
+## I terminal collection and complete paired intake
+
+Root routed the finished/exit0 I terminal event; I_MONITOR_TERMINAL.json retains
+its exact identity. The complete I archive contains 13 raw entries, including
+two matching D0 receipt duplicates; the pair has 22 unique raw files. All
+current remote raw bytes match the archives. No local temporary extraction
+tree was created.
+
+D0 technical acceptance is reused. I acceptance confirms exact source,
+object/card/lanes/configuration, the full five-update real fit, nonzero module
+movement, zero evaluator optimization and all 32 ordered primary values.
+After integrity and native-cap checks passed, the stored pair was reduced and
+matched: I−D0 −.012430430599850807, conditional episode SE .01926754789685166,
+16 positive/16 negative. The original opposite_sign branch applies; scientific
+reading remains limited to one new trained pair. Complete native wall
+471.82 + 1023.43 = 1495.25 s passes the arm and native-sum caps.
+
+The E0 result, English intake, Chinese brief, applied owner-card trace, audit
+and DIRECTION retain the bounded adverse observation and wrong low-confidence
+forecast. This allocation ends without another invocation. A long local
+intake-writing command was rejected before process creation by Windows OS206
+(command length); direct file writes completed the same records with no
+scientific or remote effect. No experiment or source transaction was repeated.
+
+Root confirms that Monitor terminal receipts supplied no invocation-cost
+measurement; that contribution stays unknown without a new accounting query.
+Previously reported Root 9.1 + 6.8 + 5.3 = 21.2 s is already charged once.
+Remaining final integration and relay/client terms remain open as documented
+in SUPPORT.json. This limits complete-cost certification, not the primary.
+
+CLEANUP_INVENTORY.json confirms four terminal owned paths, all 22 raw files
+preserved, no tracked/untracked changes and only six known ignored outputs.
+Publish this evidence before the already authorized scoped removal, then
+record disk/worktree-registration absence. Shared authoring and the old local
+771003 duplicate remain outside removal.

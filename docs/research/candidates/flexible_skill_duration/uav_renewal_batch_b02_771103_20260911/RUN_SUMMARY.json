@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "FSD_UAV_RENEWAL_BATCH_B02_771103",
+      "arm": "D0",
+      "n": 1,
+      "mean": 0.4072901252402493,
+      "sample_sd": null,
+      "min": 0.4072901252402493,
+      "max": 0.4072901252402493,
+      "runs": {
+        "771103": 0.4072901252402493
+      }
+    },
+    {
+      "task": "FSD_UAV_RENEWAL_BATCH_B02_771103",
+      "arm": "I",
+      "n": 1,
+      "mean": 0.3948596946403985,
+      "sample_sd": null,
+      "min": 0.3948596946403985,
+      "max": 0.3948596946403985,
+      "runs": {
+        "771103": 0.3948596946403985
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "FSD_UAV_RENEWAL_BATCH_B02_771103",
+      "arm": "I",
+      "baseline": "D0",
+      "summary": {
+        "n": 1,
+        "mean": -0.012430430599850828,
+        "sample_sd": null,
+        "min": -0.012430430599850828,
+        "max": -0.012430430599850828
+      },
+      "differences": {
+        "771103": -0.012430430599850828
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}
