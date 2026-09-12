@@ -1,15 +1,15 @@
 {
   "object": "ACVC_FRESH_DENSE_PACKAGE_C01",
   "allocation": "single funded complete five-fit chain, including the two original-node consultations",
-  "cutoff_utc": "2026-09-12T05:13:13.909829+00:00",
+  "cutoff_utc": "2026-09-12T05:14:37.165426+00:00",
   "caps_s": {
     "per_native_unit": 270,
     "native_sum": 1350,
     "all_invoked_support": 1650,
     "complete": 3000
   },
-  "known_DM_and_review_support_s": 254.00651170000538,
-  "native_invocations_at_cutoff": 4,
+  "known_DM_and_review_support_s": 261.9432827000054,
+  "native_invocations_at_cutoff": 5,
   "native_sum_s_at_cutoff": 688,
   "components": [
     {
@@ -664,11 +664,40 @@
     {
       "phase": "unit 4 support cutoff fields read",
       "wall_s": 0.1943369
+    },
+    {
+      "phase": "publish unit 4 complete evidence/component intake/brief/audit and support before fixed final unit 5",
+      "wall_s": 5.805335
+    },
+    {
+      "phase": "single accepted submission of fixed C01 final unit 5 handle",
+      "wall_s": 0.8890179
+    },
+    {
+      "phase": "direct Monitor assignment for accepted C01 final unit 5",
+      "wall_s": 0.178,
+      "measurement": "enclosing app call"
+    },
+    {
+      "phase": "final-population frozen card and complete-unit analysis reader",
+      "wall_s": 0.2655171
+    },
+    {
+      "phase": "final-population scientific-reading/spec and current direction reference refresh",
+      "wall_s": 0.2903661
+    },
+    {
+      "phase": "final-population exact scientific assumptions/spec and accepted direction scope",
+      "wall_s": 0.2035686
+    },
+    {
+      "phase": "final-unit adoption schema and cleanup/frozen-source limits read",
+      "wall_s": 0.3049663
     }
   ],
   "coverage_limit": "Measured DM tool/command wall plus reported independent-review command wall through this cutoff, not complete client/provider/deliberation/Root/Transport/Monitor coverage. Overlapping phase timers are counted once as described. Publication of this snapshot and later launch/observation/collection/integration/cleanup are not yet included. Unknown stays unknown; this is not an unconditional complete-cap certificate.",
   "native_cost_reading": "Each full native unit includes adjacent admission, imports/setup, all 512 training and 192 evaluation episodes, optimizer/checkpoint/publication and actual process exit. Native savings do not extend the support envelope or fund another object.",
-  "native_status": "units 1\u20134 complete with 688 s inclusive charge; unit 5 fixed/unsubmitted; no population analysis yet",
+  "native_status": "units 1\u20134 complete with 688 s inclusive charge; final unit 5 accepted/running and actually adopted; cost pending; no population analysis yet",
   "monitor": "precise prior per-handle command-wall totals unavailable, confirmed by Root; no reconstruction measurement",
   "native_completed_units": 4,
   "native_raw_command_wall_sum_s": 677.51
