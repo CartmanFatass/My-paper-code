@@ -270,7 +270,7 @@
       "output": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_14295",
       "admission": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_14295_admission.json",
       "time": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_14295_task_time.txt",
-      "state": "accepted and actually adopted by Monitor; terminal collection pending",
+      "state": "complete, collected and technically accepted; retained as final-population unit",
       "launch_receipt": {
         "handle": "acvc-fresh-dense-c01-14295-3fd9062d5",
         "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
@@ -295,8 +295,32 @@
           "acvc-fresh-dense-c01-14295-3fd9062d5"
         ],
         "reported_status": "running",
-        "owner": "Monitor retains until terminal notice delivered to Root; DM stopped remote polling"
-      }
+        "owner": "Monitor retains until terminal notice delivered to Root; DM stopped remote polling",
+        "terminal_delivered": true,
+        "goal_complete_after_terminal": true,
+        "terminal_active_set": []
+      },
+      "technical_acceptance": {
+        "accepted": true,
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "whole_command_wall_s": 164.41,
+        "summary_process_wall_s": 159.809225467965,
+        "last_panel_log_wall_s": 159.80775067897048,
+        "supervisor_duration_s": 164,
+        "inclusive_native_charge_s": 167,
+        "charge_method": "ceil(max(command wall, integer supervisor interval)+1 second timestamp granularity+recorded 1 second final sleep), submission charged once separately to support",
+        "peak_rss_kib": 548600,
+        "admission_physical_effective_bytes": 15628738560,
+        "resource_flag": "resources_unmeasured",
+        "terminal_event_id": "acvc-fresh-dense-c01-14295-3fd9062d5@2026-09-12T13:16:12+08:00",
+        "monitor_command_wall_s": null,
+        "monitor_limit": "precise per-handle total not supplied; no rerun/profile reconstruction",
+        "checkpoint_sha256": "bfdc650fa2ebc827fd29d7c3c6aea0cc0177e60791d09acaa055f049a1948b33",
+        "archive_sha256": "bf20f6c08f13c234408c743e33cc598a044d3ad70137645ad96e54b82400f365",
+        "archive_bytes": 417171,
+        "scope": "complete component unit only; no interim population interval or efficacy decision; C01 not consumed"
+      },
+      "evidence": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_14295/"
     }
   ],
   "analysis_command": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m experiments.candidates.acvc.fresh_dense_package_c01.protocol --root <collected-cohort-root> --output <complete-analysis.json>",
@@ -310,8 +334,8 @@
     "limit": "outer commands, actual admission/exit, preservation and inclusive accounting need execution evidence"
   },
   "cleanup": {
-    "execution_checkout": "retain through all five units and preservation; DM cleans after Root retention/integration confirmation",
-    "authoring_checkout": "shared active codex/acvc; retain",
+    "execution_checkout": "retained by owner handoff; all five terminal; Root retention/integration and later assignment required before cleanup",
+    "authoring_checkout": "shared C:/Projects/HMASD-worktrees/codex-acvc, codex/acvc, registered and retained",
     "test_scratch": "creator removed, absent",
     "historical_blocked_preparation": "outside this allocation, untouched",
     "generated_bytecode": {
@@ -327,9 +351,44 @@
         "tests/experiments/candidates/acvc/fresh_dense_package_c01/__pycache__/test_protocol.cpython-310-pytest-9.1.1.pyc"
       ],
       "future_python": "-B; scientific source and native results unchanged"
-    }
+    },
+    "local_preparation": "temp/directions/acvc/preparation/c01-20260911/: source.bundle 117759064 bytes, preparation.sh 878 bytes, prepare.py, preparation.json, five launch receipts and handoff support input retained",
+    "local_evidence": "temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/: five complete tar.gz archives, extracted checkpoints/raw outputs, collection/unit records and population_analysis.json retained",
+    "remote_bundle": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-3fd9062d5.bundle retained",
+    "remote_execution": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 retained at exact source",
+    "remote_archives_and_supervisors": "All five /home/wu/hmasd-inputs/acvc-fresh-dense-c01-<master>-3fd9062d5-collected.tar.gz and /home/wu/.agent-tasks/acvc-fresh-dense-c01-<master>-3fd9062d5 directories retained; masters/handles exact in units",
+    "cleanup_complete": false,
+    "deletion_after_owner_handoff": false
   },
-  "next_action": "Collect final unit 5 on routed terminal fact, then apply full frozen five-unit primary analysis and scientific intake; preserve evidence and complete scoped closeout. No successor or sixth/replacement fit allocated.",
+  "next_action": "OWNER_DIRECT HANDOFF: Root integrates preservation state. Final scientific intake/DIRECTION and eventual authorized cleanup remain pending; no automatic research restart.",
   "current_consumption": "C01 not consumed; no complete five-unit scientific result yet",
-  "owner_instruction_applied": "Root forwarded Transport operational correction at main 8bf1269e5: a short/status receipt does not establish no formed decision; ACVC already verified the full immutable Innovator response and preserved separate receipt roles. Accepted engineering continues unchanged."
+  "owner_instruction_applied": "Root forwarded Transport operational correction at main 8bf1269e5: a short/status receipt does not establish no formed decision; ACVC already verified the full immutable Innovator response and preserved separate receipt roles. Accepted engineering continues unchanged.",
+  "completion": {
+    "five_unit_collection_complete": true,
+    "primary_analysis_complete": true,
+    "primary_analysis_source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+    "primary_reading": "JOINT_ABOVE_MEI",
+    "scientific_intake_complete": false,
+    "direction_update_complete": false,
+    "C_consumption": "Valid complete frozen result meets the consumption condition regardless of sign; full final intake unfinished. No repeat/successor follows.",
+    "predictions": "All three pass events occurred; prior probabilities and Brier arithmetic saved in result_summary.json; final intake integration unfinished.",
+    "owner_prediction": "not taken (unattended)",
+    "actual_new_fits": 5,
+    "live_scientific_processes": [],
+    "terminal_state_source": "Five exit-zero/tmux-absent collection receipts and Root-routed final Monitor goal complete/active_set=[]. No new handoff polling."
+  },
+  "handoff": {
+    "authority": "OWNER_DIRECT: \u540e\u7eed\u4e0d\u8981\u518d\u5f00\u542f\u65b0\u7684DM \u73b0\u6709DM\u8fdb\u5165handoff; automatic continuation and discretionary deletion stopped",
+    "recorded_utc": "2026-09-12T05:23:38.605338+00:00",
+    "state": "preserve, publish, then stop",
+    "local_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+    "branch": "codex/acvc",
+    "pre_handoff_head": "ac6ccb9d202699fc546773604b0c1cc9171c7f9a",
+    "remaining": [
+      "Full English scientific intake of existing completed results and prediction/decision recording.",
+      "DIRECTION accepted mechanism synthesis and applicable final owner/audit updates.",
+      "Root retention/integration reconciliation and later authorized scoped cleanup."
+    ],
+    "next_owner": "Root accepts/integrates and determines any later assignment. Original DM retains evidence/cleanup responsibility without automatic continuation."
+  }
 }
