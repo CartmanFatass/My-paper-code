@@ -24,7 +24,8 @@ equal-unit/.99-nearest-prior/FLEX recipe is worthwhile alongside attained
 INDEPENDENT-NEAREST? RCLE's multi-agent credit question during physical roster
 change remains scientifically open. The prepared post-B07 decision concerns
 holding further spending on this exact recipe or retaining one unchanged candidate
-for later investment. It does not presume an advantage over joint100, identified
+for later investment. Portfolio has selected one original-node decision on that
+question, with zero implementation/numerical allowance. It does not presume an advantage over joint100, identified
 gradient conflict, stable superiority, transfer or general unlearnability.
 
 ## Current position
@@ -74,7 +75,7 @@ identifying a fault cause or global cure. That B07 discriminator and its finite
 allocation are complete. OWNER_DIRECT2026-09-12 confirms that the RCLE direction
 continues; the result does not close its broader scientific question. The
 [post-B07 continuation readiness](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md)
-preserves the exact pending original-node development choice and evidence bounds,
+preserves the exact selected original-node development question and evidence bounds,
 without selecting a new mechanism or inferring another fit's allocation.
 The historical sections below preserve the earlier objects and their own limits.
 

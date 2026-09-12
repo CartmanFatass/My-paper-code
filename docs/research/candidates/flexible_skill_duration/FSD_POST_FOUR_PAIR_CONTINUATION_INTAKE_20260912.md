@@ -4,7 +4,10 @@
 allocation ends only its two-arm grant. Its cleanup is complete; it is neither
 a direction stop nor a requirement for another permission exchange. This record
 implements Root's routed owner instruction to continue this scientifically
-valuable direction and prepare immediate N/S intake. It selects neither offer.
+valuable direction. The completed N/S readiness has now been applied: **N=yes,
+S=no**, original-author conformance integrated on main0c0648bd0. The new
+[771303 card](FSD_UAV_RENEWAL_BATCH_B02_771303_SCIENCE_CARD_20260912.md) controls
+this selected fifth pair; no sixth pair or automatic consultation is allocated.
 
 Root routed the current owner instruction verbatim: "FSD remains scientifically
 valuable and must continue as an advancing direction; the fourth pair's finite
@@ -61,34 +64,22 @@ not isolate batching from renewal. Evidence §11.8.2–.4 supports bounded
 follow-up without a fixed seed quota. No new mechanism or source claim needs
 fresh literature retrieval; the prior B01/B02 accessed-corpus limits remain.
 
-## Exact pending selection and immediate continuation
+## Applied selection and current continuation
 
-Root reports the existing Portfolio request in flight. It remains unchanged:
-`2026-09-12-post-am-remaining-capacity-01`, `portfolio:cross_direction`, Issue17.
-The fixed TASK is commit `8e026779f3711bc345bcce77791b7cfe6d23dcc8`, path
-`docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/delivery_current/TASK.md`;
-its scientific brief is bound at `381addb2003cf2f0ec3dd6a10b0c14ef714d9853`.
-The current primary files match those published Git bytes; digests are in
-[READINESS_FACTS.json](post_four_pair_continuation_20260912/READINESS_FACTS.json).
-No new request, TASK, provider Send or replacement question is created here.
+The original request2026-09-12-post-am-remaining-capacity-01 formed response
+ba7ab4d20cd171916ee28f5d7157d64ff24d6f77. Its original author accepted N=yes,
+S=no under the later owner direction-continuity instruction; main0c0648bd0
+integrates conformance and exact execution mapping. Fixed TASK8e026779f3711bc345bcce77791b7cfe6d23dcc8
+and brief381addb2003cf2f0ec3dd6a10b0c14ef714d9853 remain historical input bindings.
+No replacement question or S packet is created.
 
-The designated Portfolio author checks the full response; Root forwards the
-conforming FSD selection to this same DM. This is a specific pending investment
-choice, not a universal Convergence prerequisite for B.
-
-| Returned choice | Same DM's first executable step | Scope and boundary |
-| --- | --- | --- |
-| **N** | Apply the exact accepted new allocation; prospectively bind one fresh unscreened training/evaluation identity and the unchanged runner/card/companion commands in `codex/fsd`. Publish the actual changed binding and its focused checks, then freshly admit D0 and its preselected I. | One new B pair only. D0≤900 s, I≤1800 s, native≤2700 s, invoked support≤300 s, complete future invoked work≤3000 s, at most one ≤45 s source delivery inside support. Full collection, scientific intake and scoped cleanup. No S prerequisite, retry, sixth pair, extra panel or automatic consultation. |
-| **S** | Prepare exactly one original FSD Convergence packet from these accepted facts through Prompt Author GitHub delivery and Root/Transport; intake its full bound response. | Decide whether to hold further spending on only the tested unchanged I1280/same-host/five-rollout/32-final package or retain one unchanged pair candidate for later funding. Complete documentary/provider/agent cost is unknown. Zero implementation or numerical allowance; a retained candidate is unfunded. No N+S sequence. |
-| **Neither** | Return the exact unselected FSD funding fact to Root alongside the owner's continuing direction instruction. | No inferred direction retirement, no locally purchased fifth pair and no duplicate Portfolio question. Root retains the concrete continuity/allocation need under the proper decision route. |
-
-For S the scientific binding is `em:flexible_skill_duration:convergence`,
-existing conversation `6a9c2865-14a8-83e8-b556-e7f5836d9236`, Issue10. Actual
-Transport/Relay endpoints come from the live Windows control checkout at use.
-An eventual narrow hold on this tested package is not whole-FSD closure. Any
-response purporting to stop the whole direction contrary to the current owner
-instruction is a concrete scope conflict for its original node; independent
-conforming work continues. No such response is asserted to exist now.
+This same DM executes the new771303 pair, D0 then its preselected I, under
+900/1800 whole-arm,2700 native,300 support,3000 complete future invoked seconds
+and one45-second source delivery within support. The new card/execution record
+owns fresh identity, focused review, publication, admission, Monitor adoption,
+complete collection/intake and scoped cleanup. The old D grant funds none of it.
+N's end does not stop FSD; the next properly scoped direction task continues
+under the owner instruction without inventing new empirical allowance.
 
 ## Proportionate preparation and execution readiness
 
@@ -100,7 +91,7 @@ clean at entry. The published Portfolio inputs are read from current primary
 and their fixed Git objects; no Portfolio-owned file is changed. Root owns main
 integration and current activity tracking.
 
-If N is selected, reuse the existing 29-line B02 entry and accepted full learner
+For selected N, reuse the existing 29-line B02 entry and accepted full learner
 path. There is no algorithm implementation to commission. Two arms × five
 16-lane H500 rollouts and two 32-world H500 final panels mean two fits/four
 models, 80,000 training ticks, 32,000 evaluation ticks and ten update stages.
@@ -119,7 +110,7 @@ accepted shared-source checks. No model fixture, profiling, seed screening,
 candidate enumeration, exact upper, complete replay or mechanism reconstruction
 is added. Engineering Scope §4: none.
 
-At an actual selected launch, use exact published bytes, the configured remote
+At each actual N launch, use exact published bytes, the configured remote
 detached supervisor and fresh per-arm admission, then direct Monitor ADD with
 actual unfinished-goal adoption. Current terminal handles and removed remote
 paths are not reused. No resource probe or new execution has occurred here.
@@ -139,10 +130,9 @@ from the ended grant. S's unknown complete cost is not described as cheap.
    rediscovered after delivery. Recommend/select the former.
    **Owner-delegated decision (unattended, 2026-09-03 instruction): prepare
    exact conditional readiness only.**
-3. **Selection boundary.** N/S are mutually exclusive and currently unselected
-   in this DM assignment. Apply the actual returned choice immediately under
-   its scope. No fifth pair, new identity, prompt dispatch or consultation is
-   preselected by this record.
+3. **Selection applied.** PRO_FINAL N=yes/S=no and Root assignment select the
+   new771303 fifth pair under its fresh card; identity binding/check/review are
+   accepted. No S packet, sixth pair or automatic consultation is selected.
 
 Primary owner reviews returned `[]`; owner prediction is not taken because no
 new scientific card or observation is being frozen. The existing three-to-five

@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "E",
-  "auto_applied": null,
+  "auto_applied": "E",
   "dm_reason": "Separate ownership of observed partner histories tests a different native action path from whole-state scalar attenuation, but generic sufficiency remains plausible.",
   "evidence": [
     "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_CONTINUITY_QUESTION_20260912.md"
@@ -67,7 +67,7 @@
     "source": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_CONTINUITY_QUESTION_20260912.md"
   },
   "starred": true,
-  "approval_correction": "The preparation audit row is docs/research/portfolio/audit/2026-09-12.md#L66; the initial #L78 field was an author transcription error. E remains unexecuted advice, not an owner decision.",
+  "approval_correction": "The earlier E proposal is now superseded by the complete PRO_FINAL narrow OPEN, including GRU16, direct current-feature path and common public metadata; no implementation/experiment or Portfolio disposition is applied. Current intake audit rows are docs/research/portfolio/audit/2026-09-12.md lines 67, 68, 69; the earlier initial line78 pointer remains a documented author typo.",
   "execution_history": [
     {
       "at": "2026-09-12T20:27:48+00:00",
@@ -77,6 +77,15 @@
       "state": "planned",
       "summary": "Owner directed FOLR continuity; original Convergence will select the next bounded question. No direction choice or empirical allocation is applied.",
       "correction": "The preparation audit row is docs/research/portfolio/audit/2026-09-12.md#L66; the initial #L78 field was an author transcription error. E remains unexecuted advice, not an owner decision."
+    },
+    {
+      "at": "2026-09-12T21:27:31+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/INTAKE.md",
+      "state": "applied",
+      "summary": "Accepted OPEN of the observer-owned entity-history family; both arms receive the same public lifecycle interface. H and old evidence remain, no RECAST or direction stop. Root receives the finite implementation-and-one-pair investment need; complete cost unknown and no current empirical grant.",
+      "correction": "The earlier E proposal is now superseded by the complete PRO_FINAL narrow OPEN, including GRU16, direct current-feature path and common public metadata; no implementation/experiment or Portfolio disposition is applied. Current intake audit rows are docs/research/portfolio/audit/2026-09-12.md lines 67, 68, 69; the earlier initial line78 pointer remains a documented author typo."
     }
   ]
 }

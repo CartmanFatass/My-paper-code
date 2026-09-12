@@ -1,0 +1,32 @@
+{
+  "checked_at_utc": "2026-09-12T20:48:17.592357+00:00",
+  "request_id": "2026-09-12-mgtap-post8214-top-query-01",
+  "binding": "em:metric_ground_transport_allocation:convergence",
+  "provider_conversation_id": "6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+  "task_commit": "7edd25cdcc81a604ae25a3309fd2371664e971e5",
+  "response_commit": "10ad0d09fda138f49b117cbcf7231c09bfdd50a4",
+  "root_integrated_main": "a6a375ffce786a2eec00a8eea6357ffce4a493d0",
+  "response_path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/archive/RESPONSE.md",
+  "response_bytes": 39166,
+  "response_sha256": "b69be963d381cd4f80eaafbae2bdbf2388c80b998de1687b382294f41ca03bfd",
+  "direct_git_checks": {
+    "exact_scope": [
+      "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/archive/RESPONSE.md"
+    ],
+    "main_bytes_equal": true,
+    "delivery_descends_from_bound_handoff": true
+  },
+  "root_forwarded_transport_facts": {
+    "provider": "6 Pro / Latest / Pro 5of5",
+    "accepted_send_count": 1,
+    "completion": "natural",
+    "user_node": "0affaa76-673a-431f-a6e9-c4e956657d1c",
+    "assistant_node": "33b26a04-ef15-4c59-9c4d-ded426a03079",
+    "prompt_bytes": 1937,
+    "prompt_sha256": "2fe244b8959d8c53de873aa52efaa4579cc54d0aae452896a504eebd5c34a992"
+  },
+  "fact_limits": "Provider state and prompt digest are Root-forwarded Transport observations, not repeated browser observations by this DM. Response/main bytes and changed scope were independently checked directly from immutable Git objects.",
+  "decision": "Select exactly one new TOP/intact-DENSE B scientific object; resource proposal is not a grant.",
+  "numerical_exposure": 0,
+  "new_provider_send_by_dm": 0
+}

@@ -1,0 +1,31 @@
+{
+  "request_id": "2026-09-12-rcle-post-b07-convergence-01",
+  "prepared_at_utc": "2026-09-12T21:11:25.520459+00:00",
+  "status": "READY_HANDOFF_TO_ROOT",
+  "task_commit": "fcb4381a666a8df9bba88c8278f01bbcfbc1baf1",
+  "task_path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260912_post_b07_convergence/delivery/TASK.md",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/fcb4381a666a8df9bba88c8278f01bbcfbc1baf1/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260912_post_b07_convergence/delivery/TASK.md",
+  "task_committed_bytes": 26513,
+  "task_committed_sha256": "71aa6a454108b3a1623f61a3f4a9528c137a59746c63fb4b3854ed621c5a41c0",
+  "observed_published_branch_head": "fcb4381a666a8df9bba88c8278f01bbcfbc1baf1",
+  "task_working_text_matches_committed_bytes_after_line_endings": true,
+  "reference_files": 21,
+  "reference_publication_record": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260912_post_b07_convergence/REFERENCE_PUBLICATION.json",
+  "source_uuid": "01a095ed-c382-73d3-84d4-c96279d82fc9",
+  "root_uuid": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "transport_uuid": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+  "original_conversation_id": "6aa55611-bf80-83e8-b018-70e30a95b28a",
+  "transport_prompt_sha256": "f9d034c593bbef86a637edc0963173b16594c52caca73e0acb6a5c971631e2da",
+  "dispatch_route": "Root sends exact committed HANDOFF once after already queued ACVC/FOLR; DM performs full immutable response intake",
+  "native_return_target": "/root/dm_a_mx_rcle_intake",
+  "provider_send_or_generation_claimed": false,
+  "formed_response_available_to_dm": false,
+  "current_owner_reviews": [],
+  "code_or_numerical_allowance": 0,
+  "scientific_invocations_added": 0,
+  "known_command_wall_seconds": {
+    "task_consistency_commit_push": 4.402202,
+    "bind_and_read_handoff": 0.3377525
+  },
+  "cost_limit": "Selected R accepts unknown complete documentary/invoked/provider/agent cost. Known command windows are partial; no inferred total or old-budget reuse."
+}

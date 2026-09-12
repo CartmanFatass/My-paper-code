@@ -1,0 +1,193 @@
+{
+  "object": "FSD_UAV_RENEWAL_BATCH_B02_771303",
+  "caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "native_sum": 2700,
+    "support": 300,
+    "complete": 3000,
+    "one_source_delivery": 45
+  },
+  "charges": [
+    {
+      "purpose": "conditional readiness overlap conservatively charged once",
+      "wall_seconds": 7.3791712
+    },
+    {
+      "purpose": "N initial source and exact command read",
+      "wall_seconds": 0.2363955
+    },
+    {
+      "purpose": "selected decision, mapping and live control read",
+      "wall_seconds": 0.2003514
+    },
+    {
+      "purpose": "selected mapping, owner clarification and relevant code instructions",
+      "wall_seconds": 0.2522689
+    },
+    {
+      "purpose": "input merge attempt",
+      "wall_seconds": 0.8879203
+    },
+    {
+      "purpose": "audit merge conflict read",
+      "wall_seconds": 0.304252
+    },
+    {
+      "purpose": "audit preservation subset check",
+      "wall_seconds": 0.3331923
+    },
+    {
+      "purpose": "resolved all unique audit rows and published input merge",
+      "wall_seconds": 5.2029036
+    },
+    {
+      "purpose": "fresh identity/source reconciliation and command binding",
+      "wall_seconds": 1.7703927
+    },
+    {
+      "purpose": "source helper and owner boundary read",
+      "wall_seconds": 0.4789906
+    },
+    {
+      "purpose": "actual publication source read",
+      "wall_seconds": 0.2218363
+    },
+    {
+      "purpose": "seven pure binding checks",
+      "wall_seconds": 0.2839984
+    },
+    {
+      "purpose": "independent high-risk reviewer two read-only commands",
+      "wall_seconds": 0.7388016
+    },
+    {
+      "purpose": "technical acceptance, card owner item and support publication preparation",
+      "wall_seconds": 0.5459366
+    },
+    {
+      "purpose": "source/card/command explicit staging, commit and immediate push",
+      "wall_seconds": 5.3961982
+    },
+    {
+      "purpose": "sole source-delivery enclosing command",
+      "wall_seconds": 6.5979921
+    },
+    {
+      "purpose": "preflight/command readback, input directory and sole D0 supervisor submission",
+      "wall_seconds": 0.73102
+    },
+    {
+      "purpose": "direct D0 Monitor ADD accepted delivery",
+      "wall_seconds": 0.345
+    },
+    {
+      "purpose": "D0 staging/launch/monitor receipt preparation",
+      "wall_seconds": 0.4139413
+    },
+    {
+      "purpose": "D0 receipt formatting/staging/commit and immediate push",
+      "wall_seconds": 4.4665198
+    },
+    {
+      "purpose": "single same-handle handover task-state read",
+      "wall_seconds": 0.036
+    },
+    {
+      "purpose": "D0 accepted launch Relay handoff",
+      "wall_seconds": 0.144
+    },
+    {
+      "purpose": "actual D0 adoption record/commit/push",
+      "wall_seconds": 4.4595636
+    },
+    {
+      "purpose": "initial D0 terminal collection empty-directory assertion",
+      "wall_seconds": 0.9564442
+    },
+    {
+      "purpose": "D0 mechanical file-inventory reconciliation",
+      "wall_seconds": 0.6079165
+    },
+    {
+      "purpose": "D0 corrected raw collection/byte preservation",
+      "wall_seconds": 1.0499717
+    },
+    {
+      "purpose": "D0 receipt and config schema read",
+      "wall_seconds": 0.2289406
+    },
+    {
+      "purpose": "complete D0 technical acceptance and decision record",
+      "wall_seconds": 0.3444452
+    },
+    {
+      "purpose": "D0 archive/acceptance publication and immediate push",
+      "wall_seconds": 4.8253531
+    },
+    {
+      "purpose": "sole preselected I supervisor submission and companion readback",
+      "wall_seconds": 0.800097
+    },
+    {
+      "purpose": "direct I Monitor ADD delivery",
+      "wall_seconds": 0.149
+    },
+    {
+      "purpose": "I launch record and owner trace preparation",
+      "wall_seconds": 0.4784916
+    },
+    {
+      "purpose": "post-context current checkout and live route read",
+      "wall_seconds": 0.2511852
+    },
+    {
+      "purpose": "I receipt and publication diff review",
+      "wall_seconds": 0.3319081
+    },
+    {
+      "purpose": "I accepted launch receipt publication and immediate push",
+      "wall_seconds": 4.984494
+    },
+    {
+      "purpose": "single I handover task-state read",
+      "wall_seconds": 0.041
+    },
+    {
+      "purpose": "D0 intake and I accepted launch Relay handoff",
+      "wall_seconds": 0.168
+    },
+    {
+      "purpose": "actual I adoption and current record read",
+      "wall_seconds": 0.3348978
+    },
+    {
+      "purpose": "I adoption clean-boundary owner review read",
+      "wall_seconds": 0.386631
+    }
+  ],
+  "known_support_wall_seconds": 57.36542240000001,
+  "counting": "Each known enclosing invoked command once; nested SSH not readded. Prior readiness overlap conservatively included, old D spending never reused.",
+  "unknown": [
+    "earlier readiness command walls unavailable in truncated outputs",
+    "rounded apply_patch and cross-task delivery intervals",
+    "Monitor/Relay/client/Root integration and final publication until attributed",
+    "provider and agent cost not numerically attributed"
+  ],
+  "source_delivery_transactions": 1,
+  "scientific_submissions": 2,
+  "native_wall_seconds": {
+    "D0": 458.8
+  },
+  "claim": "No observed budget breach; partial known support is not certification of full300/3000 compliance.",
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-fsd-003.json",
+  "source_transaction": {
+    "complete_helper_seconds": 6.344000000040978,
+    "enclosing_tool_seconds": 6.5979921,
+    "within45": true,
+    "nested_not_readded": true
+  },
+  "actual_Monitor_adoption": "D0 accepted/goal complete; I actual unfinished goal adoption confirmed via Root",
+  "aggregate_cpu_seconds": 1804.26,
+  "known_native_plus_support_seconds": 516.1654224
+}

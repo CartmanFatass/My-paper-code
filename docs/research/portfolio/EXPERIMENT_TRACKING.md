@@ -5,17 +5,21 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC | Focused uniform→cluster deployment-correction Convergence task fixed at main71e29e181 and HANDOFF integrated at main725442231; queued after current MGTAP observation | Transport sends exact request once; original node selects next distinct bounded object, no third unchanged pair |
-| MGTAP | Highest-local-SINR partner-query Convergence task integrated at main235f202ca; exact prompt verified and unique Send accepted by provider | Transport observes natural completion; original DM intakes next-object decision, no fourth unchanged pair |
-| FSD | Original DM resumed with four-pair evidence and exact N/S continuation readiness | Apply the in-flight Portfolio N or S decision immediately; no unselected fifth pair |
-| RCLE | Original DM resumed; current readiness at main2ad4898c3 preserves B06/B07 evidence and exact pending-R scope | Apply R immediately if selected; no repeated B07 or added fit |
-| FOLR | Original DM resumed outside the held LEARNED_EVENT/5000/128 package | Prepare a distinct direction question without undoing package-level H or repeating the pair |
-| Portfolio N/S/R | Exact request accepted by provider and under Transport observation; new-direction drafter is refreshing all five current DM states | Intake immutable response, apply selections, then send the separate new-direction discovery/registration question |
+| ACVC | Original-node intake accepted at main4ac951c14: one fresh cluster-law C-fit with C/F/own-dwell panels selected; direction ACTIVE, no empirical grant | Portfolio DM prepares a separate investment request after the in-flight Portfolio round; no repeat consultation or third training-F pair |
+| MGTAP | Original Convergence response accepted: one fresh TOP/intact-DENSE B selected; intake integrated at main6f506e474, direction remains ACTIVE | Portfolio decides the pending whole-object investment (450s/arm, 1200s complete); no experiment before allocation |
+| FSD | Fifth-pair D0/I both finished exit0 (459s/988s) at source8ea629595; Monitor delivered I terminal receipt and closed its empty goal | Original DM collects/technically accepts I, publishes complete paired intake and performs scoped cleanup; no retry/sixth pair/successor |
+| RCLE | Complete immutable post-B07 response integrated at main7d9434fe5; original DM is performing scientific/spec intake | Publish the conforming direction decision; zero ungranted implementation/numeric work, no repeated B07 or added fit |
+| FOLR | Original-node intake accepted at main2e2549d3c: new entity-history-before-aggregation B family OPEN; direction ACTIVE, old package H retained, no empirical grant | Portfolio DM prepares its finite implementation-plus-one-pair investment as a distinct item; no repeat consultation or inferred grant |
+| Portfolio | New-direction discovery plus separate MGTAP T investment request accepted once by provider on the bound Portfolio conversation; generation active | Transport observes natural completion; designated DM intakes registration/investment/priority without treating T as new |
 
 Direction chains5/5: ACVC, MGTAP, FSD, RCLE and FOLR DMs have resumed their next bounded object or
 proper-node direction step. Their latest allocations completed, but no Portfolio decision stopped
 these ACTIVE directions. The N/S/R generation supplies concrete FSD/RCLE choices; new-direction
 drafting first refreshes all affected old-direction facts from the current DMs.
+
+Strict advancing count5/5: ACVC and FOLR have separately accepted provider generations, FSD and
+RCLE have active DM work, and MGTAP has active Portfolio investment routing. No queued intention is
+used to fill this count.
 
 ## Current routing
 
@@ -23,7 +27,7 @@ drafting first refreshes all affected old-direction facts from the current DMs.
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
 | Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; CBSC, ACVC and RCLE notices delivered, active_set empty, no pending goal |
+| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; FSD I terminal delivered, active_set empty and goal complete |
 | Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
 Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the
