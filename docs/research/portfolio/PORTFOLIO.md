@@ -6,7 +6,7 @@
 ## 当前27方向状态 — 2026-09-12 Windows恢复
 
 本表登记17 ACTIVE、10 PARKED。新注册ACPS、CADC为ACTIVE/HIGH；TRDL、CPCP、LCAC为PARKED/MEDIUM。原22方向生命周期、priority、recasts与UAV字段不变。
-当前实际推进覆盖5个方向：ACVC K、FOLR E、RCLE L、FSD U的PRO_FINAL已完成intake并分别派回原DM执行；MGTAP的有界A/U/P下一用途输入已固定，指定Portfolio DM正在起草下一干净请求。ACPS、CADC与MGTAP的已购pair及限定清理均已完成；只有MGTAP当前实际request-authoring工作计槽。当前达到五槽目标，不以有限分配结束推断停向。
+当前实际推进覆盖5个方向：ACVC K正在终态intake，FOLR E的Generic在途，FSD U正在原DM intake；MGTAP与RCLE的最新固定输入均由指定Portfolio DM纳入正在重定稿的下一请求。ACPS、CADC与MGTAP的已购pair及限定清理均已完成；当前只计算实际intake、运行和请求authoring，不计算排队意图。当前达到五槽目标，不以有限分配结束推断停向。
 新方向发现/注册及独立MGTAP T投入决定已完整intake并集成main2492dcb06：T=yes，ACPS/CADC获有限starter投入，另三项仅注册停放。
 FSD第五pair已完整intake且scoped cleanup完成；ACVC、FOLR、RCLE与FSD的K/E/L/U已完整intake并形成独立执行映射。MGTAP的T pair与ACPS的B01 pair均已完成科学intake和限定清理并交回下一决策需求。当前严格推进计数5，达到五槽目标；不以有限分配结束推断停向。
 
@@ -32,7 +32,7 @@ FSD第五pair已完整intake且scoped cleanup完成；ACVC、FOLR、RCLE与FSD�
 | [MGTAP](../candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md) | T的完整pair为TOP_ADVERSE，DENSE保持默认；新的A/U/P下一用途输入已固定，任何选项均未获拨款。 | 指定Portfolio DM正在把固定输入纳入下一干净请求；A至多购买一次用途/设计判断，零native、成本UNKNOWN。 | 等待Portfolio裁决A/U/P；不由Root选择生命周期或研究对象，无retry、额外arm/panel。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
-| [RCLE](../candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md) | L已获PRO_FINAL一次当前证据设计；已测配方HOLD，RCLE仍ACTIVE/MEDIUM。 | 原DM已接收L：产出至多一个真正不同的B候选或具体no-candidate；完整documentary成本UNKNOWN获接受。 | 零实现、数值重分析、模型/RNG、测试、实验或Pro；未来投资需求回原层级。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/RCLE_L_DESIGN_INTAKE_20260912.md) | L已完成一个真正不同的joint-quota-phase B提案；已测配方HOLD，RCLE仍ACTIVE/MEDIUM。 | 指定Portfolio DM正将固定提案与完整未来需求纳入下一请求；当前零实现、实验或Pro。 | Portfolio决定选择/投资或PARK替代；建议上限native≤900、support≤900，实际成本UNKNOWN。 |
 | [scope_1s](../candidates/scope_1s/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [TRDL](../candidates/tail_return_distributional_learning/DIRECTION.md) | 新注册PARKED/MEDIUM；保留tail-return distributional learning的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
