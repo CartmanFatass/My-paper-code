@@ -50,4 +50,5 @@ def training_update(model, rng, update, baselines, progress=None):
 def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summary=None, seed=SEED):
     return b04.run(arm, out, launch_sha, admission_receipt, started, wall_cap,
                    learned_summary, seed, updates=UPDATES, object_id=OBJECT_ID,
-                   panel_label="B07", action_law=LAW, equal_unit_update=training_update)
+                   panel_label="B07", action_law=LAW, equal_unit_update=training_update,
+                   reference_packed_views=False)

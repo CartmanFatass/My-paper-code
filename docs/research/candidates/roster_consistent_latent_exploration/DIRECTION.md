@@ -57,9 +57,17 @@ five reference F harms and 2012/2048 failure-coded tau40 outcomes. Earlier W100/
 native learning and four B06 initialization-cell gains are the strongest support
 against a broad unlearnability claim. Supplied-prior competence, finite exposure,
 update allocation and partner co-adaptation remain alternatives; no current cause
-is identified. The funded single fresh final1000 observation is the next discriminator to
-inform this recipe's usefulness, with conditional scenario uncertainty, .05 U
-MEI, all native consequences and the existing absence of tuned headroom retained.
+is identified. B07 now supplies one complete final1000 fit and its own-initialization
+contrast G_U=-.000205485026042 (conditional interval spans zero), with both primary
+paths negative and three other cell improvements. Five U, four F and one
+failure-coded tau cell worsen. The reference stopped at a roster-column check,
+so Delta_ref and the complete service comparison remain unavailable.
+[Partial E0](RCLE_B07_EQUAL_UNIT_PARTIAL_EVIDENCE_20260912.md) and
+[intake/repair decision](RCLE_B07_EQUAL_UNIT_PARTIAL_INTAKE_20260912.md) preserve
+the valid narrower observations and the unknown failure cause. The next missing
+discriminator is the fixed reference panel against this retained fit, with its
+same .05 U MEI, conditional uncertainty and absent tuned-headroom record. A scoped
+eager-snapshot alternative is prepared; it is not a proven cure or another fit.
 The historical sections below preserve the earlier objects and their own limits.
 
 ## Portfolio recast — 2026-08-30

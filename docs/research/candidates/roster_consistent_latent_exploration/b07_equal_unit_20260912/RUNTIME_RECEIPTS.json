@@ -1,0 +1,66 @@
+{
+  "source_sha": "1652c44ac65ed6e686610c3cfcff67dab1a0fc6b",
+  "handle": "rcle-b07-equal-unit-s27-20260912",
+  "status": "failed",
+  "exit_code": 2,
+  "pid": 3377723,
+  "tmux_active": false,
+  "terminal_at_utc": "2026-09-12T17:31:10Z",
+  "supervisor_duration_s": 338,
+  "native_complete_wall_s": 338.9,
+  "learned_complete_wall_s": 336.46,
+  "reference_failed_complete_wall_s": 2.43,
+  "peak_rss_kib": 597140,
+  "admissions": [
+    {
+      "arm": "learned",
+      "captured_at": "2026-09-12T17:25:32.089747Z",
+      "effective_available_bytes": 15321964544,
+      "minimum_available_bytes": 4294967296,
+      "passed": true
+    },
+    {
+      "arm": "reference",
+      "captured_at": "2026-09-12T17:31:08.549128Z",
+      "effective_available_bytes": 15626457088,
+      "minimum_available_bytes": 4294967296,
+      "passed": true
+    }
+  ],
+  "monitor": {
+    "terminal_fact": "Root-forwarded MONITOR_TERMINAL",
+    "goal_after_terminal": "complete; active_set empty",
+    "observation_command_cost": null
+  },
+  "known_previous_support_s": 39.9620709,
+  "terminal_intake_command_components_s": [
+    2.1187915,
+    0.9202653,
+    0.123403,
+    0.6504278,
+    1.0239043,
+    0.2572846,
+    0.2296387,
+    0.3360858,
+    0.0810991,
+    0.466005,
+    0.401553,
+    0.4187842,
+    2.8930747,
+    2.7728968,
+    0.2797396,
+    2.3824099,
+    0.3178959,
+    2.2473202,
+    0.3088486,
+    0.9826082,
+    0.2478195,
+    1.7708398,
+    0.3162084
+  ],
+  "known_support_through_prepublication_s": 61.508974800000004,
+  "cost_limitations": "Counts enclosing command wall once; test runtimes and embedded SSH times are not added again. Failed fixture and failed first analysis costs are included. Monitor/Root integration and some prior review/tool tails remain unmeasured, as does later publication/cleanup. Unknown is not zero or inferred overrun.",
+  "remaining_native_total_s": 561.1,
+  "remaining_reference_original_15s_split_s": 12.57,
+  "no_new_invocation": true
+}
