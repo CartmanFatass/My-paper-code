@@ -8,10 +8,10 @@
 本表登记15 ACTIVE、7 PARKED，生命周期、priority、recasts与UAV字段不变。
 最新 [Portfolio决定](decisions/2026-09-12-post-sa-marginal-investments.md) 已由原作者完整核对：**新资助CBSC C、RCLE R、ACVC F三条完整B链；M不追加。**
 
-Root当前实际工作集3/5：ACVC与CBSC正在独立完成终端结果intake，RCLE已有被Monitor实际接管的远端运行。跨方向作者、Transport和cleanup不计槽位。
+Root当前实际工作集3/5：ACVC与CBSC正在独立完成终端结果intake，RCLE在同一对象内处理一个已归因入口的技术停止。跨方向作者、Transport和cleanup不计槽位。
 C新native600/arm、1200合计+support600=1800；R900native含nearest+support600=1500；F270/arm、540合计+support660=1200秒。每项均含完整实现/检查/review/实验/intake/清理。
 新款明确是未来工作，旧S/A费用保留一次且未知尾部不填零。三个真正启动后为3/5，剩余两槽没有自动备用款。见 [独立执行映射](pro_packets/20260912_post_sa_marginal_investment/EXECUTION_MAPPING.md)。
-Monitor当前目标仅持有RCLE句柄；ACVC两臂与CBSC均已terminal exit0并完成对应Monitor goal。剩余两槽的新Portfolio问题已一次派发至当前Transport，尚未形成的新决定不计槽位。
+Monitor当前无活动句柄；ACVC两臂与CBSC均terminal exit0，RCLE在338秒以exit2技术停止，三个对应Monitor goal均已完成。剩余两槽的新Portfolio问题已由当前Transport核对绑定并完成唯一一次Send，provider正在生成；尚未形成的新决定不计槽位。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
 “待选择”是尚未分配的未来工作，不能冒充已运行，也不是永久禁入。
@@ -31,7 +31,7 @@ Monitor当前目标仅持有RCLE句柄；ACVC两臂与CBSC均已terminal exit0�
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 最新8213 COND−DENSE−0.022469573456，5正/27负；完整intake，DENSE默认、no-addition保留。 | 无 | 必要的新投资选择；旧1200秒pair不能自动追加。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
-| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B06八个nearest-reference cells全负；原节点已选exact equal-unit单fit服务B，own-init/attained-nearest、无joint100臂。 | **R已启动并实际在途**：handle `rcle-b07-equal-unit-s27-20260912`由新Monitor goal接管，pid3377723，source1652c44ac。 | terminal后回到同一DM完成收集/intake/清理；900native含nearest、600support、1500future；不再咨询或追加fit。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B06八个nearest-reference cells全负；原节点已选exact equal-unit单fit服务B，own-init/attained-nearest、无joint100臂。 | handle `rcle-b07-equal-unit-s27-20260912`在338秒以exit2停止；报错已定位到scripted action roster列不一致，未形成科学结果；原DM正在同一对象内处理。 | 保留原900/600/1500边界和科学语义，完成有界归因修复/验收；不得借技术停止追加fit或改变比较。 |
 | [scope_1s](../candidates/scope_1s/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [UCOPE](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | **更新：最新是post8801 PRO_FINAL PARK进一步8801-L continue/end-credit经验投入，保留unchanged-L spending stop。** 8601/8602、8701是更早证据。 | 无 | 有具体新选择才继续；不再凭旧8701 closeout pending造任务。其余renewal/ordinary-feedback议程未被整体关闭。 |

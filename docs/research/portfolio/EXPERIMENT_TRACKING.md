@@ -9,8 +9,8 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | CBSC C | Handle `cbsc-public-stream-b01-20260912` terminal exit0 after90s with RAW/STRUCT/paired summaries present; Monitor delivered notice and completed goal, active_set empty; original DM collecting | Technical acceptance, frozen scientific intake, cost/preservation and scoped cleanup; reconcile lingering tmux flag without retry |
 | FOLR B03 | Final paired intake accepted/main47d75d7f9: RETAIN0.947578125, LEARNED_EVENT−0.267968750, d_LR−1.215546875 ⇒ RETAIN_ABOVE_MEI; native1750.81s within cap; finite grant ended. Remote roots removed; three archived local duplicates retained after PowerShell policy rejection | No successor or active scientific work; local retention is an engineering restriction, not a scientific blocker |
 | VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
-| RCLE R | Handle `rcle-b07-equal-unit-s27-20260912` running, pid3377723, source1652c44ac; fresh unbudgeted Monitor goal confirmed actual adoption;900native incl nearest,600support,1500total | Terminal delivery to the same DM, then collect/intake/cleanup once |
-| Portfolio two remaining chains | Exact request at main13d604c4d dispatched once to current Transport; proposes D+P with renewed M/no-addition alternatives; no new grant exists until a conforming final response is intaken | Transport reconciles/observes/archives; original Portfolio DM checks the complete response |
+| RCLE R | Handle `rcle-b07-equal-unit-s27-20260912` terminal exit2 after338s; tmux inactive and Monitor goal complete. TECHNICAL_STOP is an attributable scripted-action roster-column mismatch; no scientific result | Same DM performs bounded repair/acceptance under unchanged900native/600support/1500total and frozen object; no added fit or semantic change |
+| Portfolio two remaining chains | Exact request at main13d604c4d bound to current Portfolio conversation; Transport verified bytes/binding and provider accepted the unique Send, generation in progress. D+P, renewed M and no-addition remain options; no grant yet | Transport observes/archives once; original Portfolio DM checks the complete response |
 
 Direction chains3/5: ACVC F, CBSC C and RCLE R are independently active. Two vacancies remain
 without automatic grants; M and all other unselected work stay unfunded.
@@ -21,7 +21,7 @@ without automatic grants; M and all other unselected work stay unfunded.
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
 | Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; current unfinished goal owns RCLE after completed CBSC and ACVC goals |
+| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; CBSC, ACVC and RCLE notices delivered, active_set empty, no pending goal |
 | Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
 Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the
