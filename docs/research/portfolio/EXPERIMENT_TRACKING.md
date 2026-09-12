@@ -5,20 +5,19 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC | Cluster-law readiness packet integrated at main180e18763; 180,224 team steps, native/support unknown, no empirical grant | Portfolio decides investment from the fixed readiness input; no implementation, repeat consultation or third training-F pair |
+| ACVC K | PRO_FINAL grant integrated at main665f704f7: one C fit + C/F/own-dwell panels,180224 ticks, native≤600/support≤600/complete≤1200 | Original DM binds card/identity/caps, implements and reviews, then performs one detached remote invocation through Monitor to intake/cleanup |
 | MGTAP | TOP8221 accepted TOP_ADVERSE; four-target cleanup accepted at main65c07ad61, archives retained and no run remains | Original DM is authoring one bounded next-use/investment input for the next clean Portfolio request; no implementation or run |
-| FSD | Three-choice post-five-pair input integrated at main5474d95de; B-LONG-D0 is only a future proposal, not part of the frozen current U request | Current provider U decides evidence use only; preserve B-LONG-D0/USE/HOLD for a later clean Portfolio request, no launch |
-| RCLE | Original-node intake accepted at main8973c0515: HOLD only tested equal-unit/.99-prior/FLEX/final1000 spending; direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice from refreshed evidence; no repeated recipe, fit or consultation |
-| FOLR | Entity-history readiness integrated at main3bc742a85; fixed205120ticks/9938updates, new costs unknown | Bound Portfolio E decision is in accepted provider generation; no implementation before grant |
+| FSD U | PRO_FINAL one-use-question grant integrated at main665f704f7; B-LONG-D0 explicitly excluded | Original DM authors one fixed use question, routes it once through Root/Transport and performs full intake; zero numerical work |
+| RCLE L | PRO_FINAL one-design grant integrated at main665f704f7; documentary complete cost UNKNOWN accepted | Original DM returns at most one distinct B design or concrete no-candidate; zero implementation/numerical/Pro work |
+| FOLR E | PRO_FINAL BANK-vs-Generic grant integrated at main665f704f7;5000/128 each, Generic≤1800/BANK≤3000/complete≤6000 | Original DM implements/reviews thin interfaces and executes Generic first then BANK through remote admission, Monitor, intake and cleanup |
 | ACPS | B01 accepted ADVERSE; four-target cleanup accepted at main3d3ef453c, archives retained and no run remains | Continuation need is retained for the next clean Portfolio request; direction remains ACTIVE/HIGH and queued need does not count as advancing work |
 | CADC | B01 accepted ADVERSE; four-target cleanup accepted at main60ed6a98e, archives retained and no run remains | Next-use need is retained for the next clean Portfolio boundary; no retry/extra arm/successor and queued need does not count as advancing work |
-| Portfolio | ACVC/FOLR/RCLE/FSD K/E/L/U response completed and archived exactly once at mainde02dc94d | Designated DM checks and intakes four distinct investment/lifecycle decisions; no grant or stop inferred before intake |
+| Portfolio | K/E/L/U response archived at mainde02dc94d and conforming intake/mapping integrated at main665f704f7 | Four original DMs execute independently; E precedes K only under actual contention, with no sibling batch wait |
 
-Actual advancing directions5: the complete Portfolio K/E/L/U response is with the designated DM for
-separate ACVC, FOLR, RCLE and FSD intake, counted once per direction; MGTAP has active accountable
-DM authoring for one bounded next-use input. ACPS and CADC finished finite cleanup and no longer fill
-a slot. No queued intention or ended allocation is used to fill the count, and no direction is stopped
-to manufacture capacity.
+Actual advancing directions5: ACVC K, FOLR E, RCLE L and FSD U are dispatched to their original DMs,
+counted once per direction; MGTAP has active accountable DM authoring for one bounded next-use input.
+ACPS and CADC finished finite cleanup and no longer fill a slot. No queued intention or ended allocation
+is used to fill the count, and no direction is stopped to manufacture capacity.
 
 One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
 to ACPS support only, unknown unless directly measured. MGTAP T and CADC exclude that shared item;
