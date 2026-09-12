@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "有限用途分叉具体，不要求额外观察；Portfolio最终选择，不是作者授权。",
   "evidence": [
     "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md"
@@ -74,6 +74,14 @@
       "record": "docs\\research\\portfolio\\pro_packets\\20260912_cluster_entity_investment\\PREPARATION_INTAKE.md",
       "state": "planned",
       "summary": "Root新指定FSD为第四独立项；原DM建议一新用途判断，未拨款或Send，不从N结束停止方向。"
+    },
+    {
+      "at": "2026-09-12T23:04:56+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/INTAKE.md",
+      "state": "applied",
+      "summary": "完整PRO_FINAL选U一次原Convergence同host用途判断/full intake，完整文档成本接受UNKNOWN，零实现/数值/第六pair。晚到B-LONG-D0未包含且无拨款；Root独立派发，未声称新Pro已经发送。"
     }
   ]
 }
