@@ -1,8 +1,8 @@
 # FSD UAV renewal batch B02 / 771103 — exact execution record
 
-**State:** D0 collected and technically accepted; I accepted detached at
-2026-09-12T02:50:17.756743Z and adopted by the active-goal Monitor. I terminal
-collection and the full paired scientific intake remain pending.
+**State:** complete valid opposite_sign B/EXPLORE; intake, raw preservation
+and all cleanup assigned to the 771103 allocation are complete. Final Root
+handover/publication records follow; no successor is allocated.
 Owner: FSD DM /root/dm_fsd_i1280_implementation. Authoring checkout
 C:/Projects/HMASD-worktrees/codex-fsd, branch codex/fsd. Root owns main integration
 and accepts retained evidence/reclamation. Assignment 1 and card §8 control this
@@ -194,3 +194,76 @@ publication. Authoritative owner reviews returned [] at the final I boundary.
 The DM returns pending I terminal collection, full paired intake/Chinese brief
 and preservation/cleanup. No new allocation, retry or source transaction follows
 from this handover.
+
+## I terminal collection and complete paired intake
+
+Root routed the finished/exit0 I terminal event; I_MONITOR_TERMINAL.json retains
+its exact identity. The complete I archive contains 13 raw entries, including
+two matching D0 receipt duplicates; the pair has 22 unique raw files. All
+current remote raw bytes match the archives. No local temporary extraction
+tree was created.
+
+D0 technical acceptance is reused. I acceptance confirms exact source,
+object/card/lanes/configuration, the full five-update real fit, nonzero module
+movement, zero evaluator optimization and all 32 ordered primary values.
+After integrity and native-cap checks passed, the stored pair was reduced and
+matched: I−D0 −.012430430599850807, conditional episode SE .01926754789685166,
+16 positive/16 negative. The original opposite_sign branch applies; scientific
+reading remains limited to one new trained pair. Complete native wall
+471.82 + 1023.43 = 1495.25 s passes the arm and native-sum caps.
+
+The E0 result, English intake, Chinese brief, applied owner-card trace, audit
+and DIRECTION retain the bounded adverse observation and wrong low-confidence
+forecast. This allocation ends without another invocation. A long local
+intake-writing command was rejected before process creation by Windows OS206
+(command length); direct file writes completed the same records with no
+scientific or remote effect. No experiment or source transaction was repeated.
+
+Root confirms that Monitor terminal receipts supplied no invocation-cost
+measurement; that contribution stays unknown without a new accounting query.
+Previously reported Root 9.1 + 6.8 + 5.3 = 21.2 s is already charged once.
+Remaining final integration and relay/client terms remain open as documented
+in SUPPORT.json. This limits complete-cost certification, not the primary.
+
+CLEANUP_INVENTORY.json confirms four terminal owned paths, all 22 raw files
+preserved, no tracked/untracked changes and only six known ignored outputs.
+Publish this evidence before the already authorized scoped removal, then
+record disk/worktree-registration absence. Shared authoring and the old local
+771003 duplicate remain outside removal.
+
+## Final cleanup acceptance
+
+Published paired preservation b30bf53384c89127560b6cc2a77f0671b36b36f1 was read back from
+Git before deletion; both archives retain all 22 original raw files, and the
+launch source is preserved in its ancestry. Root integrated/pushed paired
+intake and ordered/run tables as main 14fdaa63c and cf5dccaa6.
+
+At 2026-09-12T03:32:22.190448+00:00, the exact execution worktree, input directory and
+both supervisor directories were absent; worktree registration was absent.
+CLEANUP_FACTS.json records the scoped operation, file matches and absence.
+The new local collection directory is absent and no temporary extraction
+was created. Shared remote/local checkouts remain. The older 771003 local
+duplicate is outside this allocation and was untouched. Current cleanup is
+complete; Root accepts integration, retention and reclamation.
+
+Owner reviews were [] again at closeout. Root's reported 10.8 s paired
+publication/integration work is charged once in addition to prior 21.2 s.
+Monitor observation command cost is unavailable in receipts; no additional
+query is made. Final handover/publication and unknown relay/client terms remain
+explicit, with no observed cap breach and no complete-cost certificate.
+
+### Final Root handoff and acceptance
+
+The sole terminal-intake event
+`/root/dm_fsd_i1280_implementation|FSD_B02_771103_terminal_intake|982536111f1d23ae273236d512c87e9217cb122a|READY_HANDOFF`
+was accepted by the configured relay app. TERMINAL_HANDOFF_RECEIPT.json preserves
+its full original return and tool outcome; no second relay is sent for this receipt
+publication. Relay send, Root acceptance and Git integration are separate facts.
+
+Root subsequently confirmed the bounded pair accepted and allocation ended with
+no successor. Cleanup closeout 982536111f1d23ae273236d512c87e9217cb122a is
+integrated/pushed as main be2eb581d; all current remote cleanup is accepted.
+Root reported approximately 5.1 s additional inspection/integration/push, charged
+once alongside its earlier 32.0 s. Monitor and relay/client attribution remain
+unknown. The receipt publication's own measured command wall is returned in the
+native completion without an indefinite accounting-only publication loop.

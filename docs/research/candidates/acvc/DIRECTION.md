@@ -22,9 +22,15 @@ This authority preserves the direction's source-grounded scientific question, ev
 The latest accepted question is whether the complete fixed F package improves expected
 endpoint native return by more than .01 J over C and over own-predicate dwell under the
 unchanged five-UAV/fifty-user fresh-DENSE training and evaluation law. Three unscreened
-fresh fits have favorable bounded means against both controls. Convergence selects a
-provisional five-new-fit/64-world claim design as the next evidence, with no present
-implementation, numerical allowance, C promotion or freeze. The older E01 observations
+fresh fits have favorable bounded means against both controls. Convergence now promotes
+the exact five-new-fit/64-world comparison to provisional single-task C-BENCH under the
+prescribed model-dependent inference. The original Innovator has now accepted the
+unchanged qualified proposal for prospective bindings and freeze, followed by the
+assigned minimal implementation, technical acceptance and five complete new fits.
+The [C01 protocol](ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md) now fixes
+the first outcome-blind iid five-unit namespace draw, the exact joint analysis and
+all stopping/claim boundaries before implementation. No new scientific result exists;
+accepted exact source and execution inputs still precede every fit. The older E01 observations
 on two selected retained bases remain development evidence. The learned selective-retrace
 package stays ended: both learned gates improved over C, but F was stronger in both
 instances and the structured gate's advantage over the generic gate did not recur.
@@ -379,6 +385,61 @@ or C freeze is released by this decision. Later preparation/freeze and complete-
 investment need their actual authority. Tuned same-information headroom is absent;
 ended T/G, old-host findings and Portfolio lifecycle/priority/recast status keep
 their existing scope. This question/full-intake unit ends with the accepted record.
+
+### Five-fit promotion — accepted 2026-09-11
+
+The original Convergence node's complete response at
+`103b8f811388089c714383708a13526f9a06aff3`, accepted in the
+[full promotion intake](ACVC_FIVE_FIT_PROMOTION_CONVERGENCE_INTAKE_20260911.md),
+formally promotes the exact five-new-fit comparison to provisional single-task
+C-BENCH. The earlier response remains claim design only. The newer Portfolio
+Assignment 2 conditionally funds the complete path; promotion does not itself freeze
+a card, accept source or start training.
+
+The promoted claim is expected F-C and F-dwell each above .01 J under the unchanged
+fresh-DENSE/native-five-UAV/fifty-user recipe. Each of five new fit-plus-64-world-panel
+units receives equal weight. The specified t(.9875,4) intervals and simultaneous
+Bonferroni reading have their coverage qualification only under iid-normal fit-panel
+means; actual neural-training calibration is unestablished. Both strict lower-bound
+passes are required jointly. Component-only, inconclusive, adverse and extreme outcomes
+remain visible without a result-driven top-up or changed rule.
+
+The strongest support is recurrence over both attained controls across three fresh
+development fits. The strongest contrary evidence is beneficial dwell, 5/11/5 adverse
+F-dwell worlds and the latest -.0793154814 J minimum, with different private histories
+and doses. All old fitted assets remain development. General motion suppression,
+proposer quality, joint geometry and training variation survive as alternatives to
+pure retrace causality; stable superiority, history necessity, tuned headroom,
+transfer and formal UAV entry are unestablished.
+
+The next discriminator is the one allocated original Innovator review before freeze.
+Only its conforming complete return permits the subsequent outcome-blind namespace
+and exact protocol binding, minimum accepted implementation and five full units.
+Rejection, material redesign, blocker or unmet envelope stops dependent continuation.
+No additional question, sixth/replacement fit, extra panel or interim efficacy/futility
+stop is funded. The full response is verified in immutable GitHub/Git; the short
+Transport chat receipt's mislabel and preservation-aware correction are recorded separately.
+
+### Original five-fit Innovator — accepted 2026-09-11
+
+The original Innovator's complete response at
+`b1709632efa060aa7e71ad377bd0559154289f12`, accepted in the
+[full pre-freeze intake](ACVC_FIVE_FIT_PREFREEZE_INNOVATOR_INTAKE_20260911.md),
+accepts the unchanged promoted proposal for its assigned prospective bindings and
+freeze. It selects no material redesign, extra consultation or specification
+exception. No implementation or population result is pre-accepted.
+
+The useful question remains joint expected F-C and F-dwell gain above .01 J on
+five new complete fresh-DENSE fit-plus-panel units. The exact t(.9875,4) rule
+retains its iid-normal-model/provisional qualification; all development assets,
+useful dwell, adverse worlds and unequal private histories remain visible.
+Repeated development gains support the question, while unknown training tails and
+complete-package attribution bound it. The next discriminator is the fixed five-unit
+comparison, after outcome-blind namespace/card/source/analysis binding and focused
+technical acceptance. A concrete integrity/resource/cost limitation or material
+redesign stops the dependent chain without a replacement fit or extra question.
+Stable superiority, pure retrace/history necessity, headroom, transfer and formal
+UAV entry remain unestablished.
 
 ## Evidence set
 

@@ -1,0 +1,80 @@
+{
+  "id": "20260911-acvc-006",
+  "created": "2026-09-11T21:21:07-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "ACVC五次新训练C卡与首次抽取编号已固定",
+  "context": "固定本任务上F相对C及自身条件停留的双期望增益问题；绑定多智能体局部历史与共同运动的部分可观测结构。五组编号已按预先写定的独立有放回均匀规则一次抽取；无新增训练或模型。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "按原裁决执行该卡",
+      "consequence": "源码技术验收后执行五次完整新拟合及所有面板，不追加预算或样本。"
+    },
+    {
+      "key": "reject",
+      "label": "停止该卡后续",
+      "consequence": "在干净边界停止后续并保留已有事实，不变成科学负结果或自动替代实验。"
+    },
+    {
+      "key": "revise",
+      "label": "提出具体覆盖要求",
+      "consequence": "记录具体覆盖；若涉及冻结科学含义或已发生结果，按现有权限处理，不静默修改。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "该卡逐项实现两个原节点的明确裁决，并在结果前固定实际采样规则和全部编号。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L129",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按已接受的原Convergence及Innovator裁决，冻结这张五次新训练的有限C卡及首次随机抽取的五组编号；所有者可异步覆盖。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC_FRESH_DENSE_PACKAGE_C01",
+        "from": "两个原节点均已同意，尚未绑定具体五组新编号",
+        "to": "固定独立同分布有放回抽样规则和首次五组m/q、双主指标、正态模型限制、全部训练/评估及成本；代码技术验收后才执行"
+      }
+    ],
+    "if_refused": "在下个干净边界停止该卡的后续；保留既有决策、抽取值和历史证据，不自动换编号、补样或再发问题。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/archive/RESPONSE.md",
+        "quote": "Accept the unchanged, expressly qualified five-new-fit proposal for subsequent prospective binding and freeze.",
+        "why": "此次卡和抽样是原节点明确选择的下一步，而不是新增科学投资。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md",
+        "quote": "Before any new training/evaluation, draw **five iid pairs** `(m_i,q_i)`, in unit order i=1..5: `m_i = 10000 + secrets.randbelow(10000)` and `q_i = 20000 + secrets.randbelow(10000)`.",
+        "why": "在结果前固定抽取规则并保留首次十个值，避免事后挑选训练种子。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md",
+        "quote": "Actual neural-training outcomes can be nonnormal; five fits and 64 worlds do not validate cross-fit tails or establish practical calibration.",
+        "why": "即使联合通过，也只有这个任务和既定统计模型下的暂定支持。"
+      }
+    ],
+    "uncertainty": [
+      "有益停留、不利场景、不等干预次数和训练尾部分布继续限制解释。",
+      "源码、检查和独立审查尚待完成；抽取值不是性能证据。",
+      "完整成本未知；222.5秒每单元是已有178秒事实乘1.25的规划值，不是保证。"
+    ],
+    "cost": {
+      "compute": "原270秒每单元、1350秒原生合计、1650秒全部调用支持、3000秒完整调用上限；五次每次512训练集/1024 Adam后完整C/F/dwell各64集。",
+      "owner_time": "无需逐项批准；可异步覆盖。",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待回复；先完成最小源码和技术验收。"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): freeze the accepted C01 scientific protocol and the first outcome-blind five-unit namespace draw; preserve all stop and claim boundaries.",
+    "source": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md"
+  },
+  "starred": false
+}

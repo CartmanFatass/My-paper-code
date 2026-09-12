@@ -44,6 +44,13 @@ At goal-turn entry, a return or receipt, and before waiting:
    observation. Route terminal evidence promptly. If Transport is idle with a pending request,
    reconcile its persisted state and resume that same observation/recovery route. App dispatch
    acceptance is not provider Send acceptance.
+   A failed-effect Send, uncertain acceptance, archive-label defect or receipt
+   failure gets an explicit same-request Transport recovery assignment at this
+   boundary. Route an already available complete immutable response to its DM
+   immediately; metadata correction proceeds independently. Before ending the
+   Root turn, establish that pending recovery is actively owned or record its
+   concrete unavailable prerequisite. A reported blocker or exhausted click count
+   is not a completed request, and queued recovery does not count as advancement.
 6. After every currently ready independent action is dispatched, end the Root turn when the
    remaining dependencies are long-running DM, legacy CM, Monitor or Transport work. Do not use
    `wait_agent`, `wait_threads`, timers or status polling to hold that turn open. The independent

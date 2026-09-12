@@ -1,0 +1,113 @@
+{
+  "id": "20260911-root-010",
+  "created": "2026-09-11T20:48:49-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "FOLR原样比较的新资金：建议F+U，保留FSD一次问题备选",
+  "context": "方向A推荐已完成但不含实验资金。ACVC一项原Innovator已确认生成，4空位。FOLR两对一正一负；FSD第三对小幅反向且已闭环。此处仅提出新投资选项，不在本地裁决。",
+  "options": [
+    {
+      "key": "f_u",
+      "label": "F+U：FOLR新一对，FSD不追加",
+      "consequence": "新完整3000秒仅一对原样FOLR及接收清理；FSD无后继，ACVC独立继续。"
+    },
+    {
+      "key": "h_u",
+      "label": "H+U：两者均不追加",
+      "consequence": "保留空位与方向A科学建议，不新拨FOLR经验额度或FSD问题。"
+    },
+    {
+      "key": "h_t",
+      "label": "H+T：只选FSD一次家族问题",
+      "consequence": "FOLR不新拨；FSD仅一问及完整接收，零实现/数值额度，未来经验投入未定。"
+    },
+    {
+      "key": "f_t",
+      "label": "F+T：分别资助上述两项",
+      "consequence": "分别资助一对FOLR与一次FSD问题；后者零数值，双方各自有限结束，无填满名额要求。"
+    }
+  ],
+  "recommended": "f_u",
+  "auto_applied": null,
+  "dm_reason": "直接观测原样FOLR有具体决策用途且已知完整原生成本；持有空位仍是接近备选，FSD问题不因零学习就被当作便宜。",
+  "evidence": [
+    "docs\\research\\portfolio\\pro_packets\\20260911_folr_unchanged_pair_funding\\SCIENCE_BRIEF.md",
+    "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L136",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "FOLR原方向节点已建议未来再做一对原样比较；Portfolio现在是否新拨完整3000秒，并是否另选FSD的一次家族问题？",
+    "changes_if_approved": [
+      {
+        "target": "FOLR未来一对原样学习门/RETAIN",
+        "from": "方向推荐A已接受，尚无经验工作预算",
+        "to": "建议F：新拨每原生臂1350秒、原生合计2700秒、全部已调用支持300秒、完整3000秒；新卡和未筛选身份随后由原DM绑定，仅一对及全部结果接收/清理"
+      },
+      {
+        "target": "FSD后续投入",
+        "from": "第三对已接受为小幅反向结果；三对与清理全部完成，无后继",
+        "to": "建议U暂不增加；T作为真实备选只买一次原Convergence家族问题及完整接收，零实现与数值工作，经验资金继续未定"
+      },
+      {
+        "target": "实际方向容量",
+        "from": "已确认ACVC原Innovator正在生成，1个推进方向、4个空位",
+        "to": "F+U实际启动后若ACVC仍推进，则2个推进、3个空位；不按名额硬填。ACVC原有条件路径独立继续"
+      }
+    ],
+    "if_refused": "H仅暂不资助该经验比较，保留方向建议A和RETAIN默认，不改家族或生命周期。也可单选T或同时选F+T，但须Portfolio分别说明价值与有限边界；不能从空位推出自动新工作。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md",
+        "quote": "The strongest support is B01's practical native gain under the actual learned law.",
+        "why": "+1.763359375是实际完整学习后的收益；方向节点认为再观察一次可影响是否继续保留这套可选包。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/SCIENCE_BRIEF.md",
+        "quote": "Another consultation about the already answered FOLR family question would add no new observation.",
+        "why": "新增投资直接买原样B比较；不重复已经完整回答的FOLR家族问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md",
+        "quote": "The strongest contradiction is B02's comparably scaled loss against its stronger attained RETAIN policy, plus RETAIN's already adaptive GRU at the same legal information interface.",
+        "why": "-1.76953125与第一次正收益相近，比较器本来就能适应；暂不投钱是接近的备选。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md",
+        "quote": "The two earlier gains survive.",
+        "why": "FSD新增-.01243没有否定过去两次收益；原方向问题也有现实依据，但无学习工作不代表便宜。"
+      }
+    ],
+    "uncertainty": [
+      "FOLR一对新结果只能提供一个训练实例观察；不能靠三次多数票认定稳定赢家。",
+      "未来完整支持和实际总成本未知，3000秒是新上限而非预测；原3900秒额度已结束。",
+      "FSD的T完整咨询/接收成本未知且不预定家族结论；没有第四对、诊断或第二个问题。",
+      "对应宿主的调好同信息基线余量仍缺失；不把缺失当负结果或停止条件。",
+      "真实异步完成会改变容量，Root据实更新，不改变此固定科学输入或自动补位。"
+    ],
+    "cost": {
+      "compute": "当前零科学调用、模型、RNG、训练和评估。F拟新完整3000秒，2个fit、205120个原生团队步、9938次优化；无额外诊断。T只一问及完整接收，零数值额度但咨询成本未知。现有ACVC3000秒条件路径独立且不转移。",
+      "owner_time": "无需逐项批准；可异步拒绝或修改Portfolio的最终决定。",
+      "reversibility": "costly",
+      "waits_on_this": "只有尚未获拨款的新F/T工作；ACVC及原有恢复路径独立继续。"
+    },
+    "verdict_text": "**Author recommendation: F + U.** Fund one FOLR pair within a new complete 3,000-second invoked-work cap; do not add a FSD consultation now.",
+    "source": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T04:48:56+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "f4bbe6cae2d351b4c80c5e0d9d66690d337749ce:docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-11-folr-unchanged-pair-funding.md",
+      "state": "planned",
+      "summary": "完整Pro最终F+U通过指定DM核对；新FOLR一对1350/2700/300/3000，FSD无新问题或后继。准备项由最终项20260911-root-011承接；Root真实应用待记录，未声称实验启动。"
+    }
+  ]
+}

@@ -10,6 +10,7 @@ actions restartable and testable.
 from __future__ import annotations
 
 import hashlib
+import copy
 import os
 import re
 import time
@@ -312,6 +313,94 @@ def receipt_message_key(
     return "|".join((request_id, direction_id, conversation_id, response_sha256))
 
 
+def reconcile_send_effect(
+    record: MutableMapping[str, Any], *, request_id: str,
+    conversation_binding_key: str, prompt_sha256: str,
+    conversation_id: str | None, provider_url: str | None, tab_id: str | None,
+    outcome: str, evidence: str, observed_at: str,
+    repaired_surface: str | None = None, user_message_id: str | None = None,
+    message_identity_kind: str | None = None,
+    exact_composer_payload: bool = False, current_user_absent: bool = False,
+    generation_absent: bool = False, exact_paired_user: bool = False,
+    now: str | None = None,
+) -> MutableMapping[str, Any]:
+    """Reconcile one failed send from operator-verified fresh effect evidence.
+
+    This never operates a browser or retries a Send. NOT_ACCEPTED re-arms the
+    original payload once per distinct repair/effect evidence; ACCEPTED only
+    resumes observation. General transition rules remain closed to resets.
+    """
+    if record.get("state") not in {"SEND_UNCERTAIN", "BLOCKED", "SEND_FAILED_PRE_SEND"}:
+        raise ValueError("send reconciliation requires an unresolved failed send")
+    identities = dict(request_id=request_id, conversation_binding_key=conversation_binding_key,
+                      prompt_sha256=prompt_sha256, conversation_id=conversation_id,
+                      provider_url=provider_url, tab_id=tab_id)
+    for key, value in identities.items():
+        if record.get(key) != value:
+            raise ValueError(f"send reconciliation identity mismatch: {key}")
+    if not request_id or not conversation_binding_key or not re.fullmatch(r"[0-9a-fA-F]{64}", prompt_sha256 or ""):
+        raise ValueError("exact request, binding key and payload digest are required")
+    if not conversation_id and not tab_id:
+        raise ValueError("prebinding reconciliation requires the original home tab")
+    if outcome not in {"ACCEPTED", "NOT_ACCEPTED"} or not evidence.strip():
+        raise ValueError("send effect must be proven accepted or not accepted")
+    def timestamp(value: str) -> datetime:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            raise ValueError("reconciliation timestamps require timezone")
+        return parsed
+    current_time = now or utc_now()
+    observed = timestamp(observed_at)
+    if observed > timestamp(current_time):
+        raise ValueError("effect evidence cannot be in the future")
+    prior_times = [record.get("updated_at"), (record.get("timestamps") or {}).get("send_attempted_at")]
+    if not any(prior_times) or any(observed <= timestamp(value) for value in prior_times if value):
+        raise ValueError("effect evidence must be newer than the failed attempt/state")
+    history = copy.deepcopy(record.get("send_reconciliation_history") or [])
+    if outcome == "NOT_ACCEPTED":
+        if not all(value is True for value in (exact_composer_payload, current_user_absent, generation_absent)):
+            raise ValueError("nonacceptance requires exact composer, absent user and absent generation")
+        send_evidence = record.get("send_evidence") or {}
+        timestamps = record.get("timestamps") or {}
+        if (record.get("user_message_id") or record.get("assistant_message_id")
+                or send_evidence.get("user_node_exact") or send_evidence.get("user_node_observed")
+                or send_evidence.get("observed_after_successful_send") is True
+                or timestamps.get("sent_at") or timestamps.get("generation_started_at")
+                or any(timestamps.get(key) for key in ("completed_at", "captured_at", "archived_at"))
+                or record.get("response_sha256")
+                or any(item.get("outcome") == "ACCEPTED" for item in history)):
+            raise ValueError("nonacceptance conflicts with preserved accepted-turn evidence")
+        if not repaired_surface or not repaired_surface.strip():
+            raise ValueError("nonacceptance requires a named repaired surface")
+        if any(item.get("outcome") == outcome and
+               (item.get("repaired_surface"), item.get("evidence")) == (repaired_surface, evidence)
+               for item in history):
+            raise ValueError("this repair/effect evidence already re-armed one Send")
+    else:
+        if not conversation_id or provider_url != f"https://chatgpt.com/c/{conversation_id}":
+            raise ValueError("accepted effect requires an observed concrete conversation binding first")
+        if exact_paired_user is not True:
+            raise ValueError("accepted effect requires exact paired user evidence")
+        if not user_message_id or not user_message_id.strip() or message_identity_kind not in {"PROVIDER", "DOM", "MANUAL_EXACT_PAIRING"}:
+            raise ValueError("accepted effect requires an explicit observed message identity")
+        if record.get("user_message_id") and record["user_message_id"] != user_message_id:
+            raise ValueError("accepted message identity conflicts with recorded turn")
+    prior_record = copy.deepcopy(dict(record))
+    prior_record.pop("send_reconciliation_history", None)
+    history.append(dict(outcome=outcome, evidence=evidence, observed_at=observed_at,
+                        repaired_surface=repaired_surface, prior_record=prior_record,
+                        exact_composer_payload=exact_composer_payload, current_user_absent=current_user_absent,
+                        generation_absent=generation_absent, exact_paired_user=exact_paired_user,
+                        message_identity_kind=message_identity_kind, user_message_id=user_message_id))
+    record["send_reconciliation_history"] = history
+    record["state"] = "SEND_CONFIRMED" if outcome == "ACCEPTED" else "PROMPT_READY"
+    if outcome == "ACCEPTED":
+        record["user_message_id"] = user_message_id
+        record["user_message_identity_kind"] = message_identity_kind
+    record["updated_at"] = current_time
+    return record
+
+
 def validate_source_thread_id(value: object) -> str:
     """Validate the task UUID that authored the handoff."""
 
@@ -514,6 +603,19 @@ def stage_receipt(
     monitor_identity_key(record)
     timestamp = now or utc_now()
     existing = dict(record.get("return_receipt") or {})
+    if existing.get("kind") == "TERMINAL_BLOCKER":
+        # A completion is a different event, never a retry of an uncertain blocker.
+        parent = existing.get("parent_thread_id")
+        if parent and parent != record.get("parent_thread_id"):
+            raise ValueError("completion parent conflicts with original blocker route")
+        candidate = copy.deepcopy(dict(record))
+        candidate.setdefault("return_receipt_history", []).append(copy.deepcopy(existing))
+        candidate.pop("return_receipt", None)
+        candidate.pop("return_receipt_state", None)
+        stage_receipt(candidate, archive_paths, response_sha256, now=timestamp)
+        record.clear()
+        record.update(candidate)
+        return record
     if receipt_has_delivery_evidence(existing):
         return record
     try:
@@ -619,7 +721,10 @@ def stage_blocker_receipt(
         raise ValueError("blocker_state must be a non-archive terminal transport state")
     if str(record.get("state")) != blocker_state:
         raise ValueError("record state must equal blocker_state")
-    monitor_identity_key(record)
+    if record.get("conversation_id"):
+        monitor_identity_key(record)
+    elif not record.get("request_id") or not record.get("conversation_binding_key"):
+        raise ValueError("prebinding blocker requires exact request and binding key")
     timestamp = now or utc_now()
     existing = dict(record.get("return_receipt") or {})
     if receipt_has_delivery_evidence(existing):
@@ -667,7 +772,7 @@ def stage_blocker_receipt(
         (
             str(record["request_id"]),
             binding,
-            str(record["conversation_id"]),
+            str(record.get("conversation_id") or "PREBINDING"),
             "BLOCKER",
             blocker_state,
             error_key,

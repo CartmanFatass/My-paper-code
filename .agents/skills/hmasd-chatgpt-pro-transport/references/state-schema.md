@@ -218,6 +218,23 @@ transport state.
 `DIRECTION_VERIFIED`. A timeout or browser exception is never converted into a new
 conversation.
 
+Terminal labels prohibit normal submission transitions; they do not cancel
+same-request reconciliation under the owner's Transport-stall repair. Use the
+`scripts/transport_contract.py:reconcile_send_effect` with fresh effect evidence and original identity,
+not an unrestricted state reset. Preserve prior attempts and blocker notifications.
+The helper consumes operator-verified browser evidence; it performs no browser action.
+`NOT_ACCEPTED` requires exact restored composer payload, absent current user/generation,
+a named repaired interaction, and no conflicting preserved acceptance evidence.
+`ACCEPTED` requires the concrete observed conversation and exact paired user identity;
+it resumes observation only. An unbound recovery stays on its original recorded home tab.
+Before binding an observed first submission, record every actual click in the same-request
+prebinding record (canonical binding or exact direction mirror, `conversation_id=null`).
+Use the existing binder with original request/payload/routing/tab, the observed UUID/URL and
+`--observed-after-successful-send`; it carries the count, history and blocker receipt forward.
+After actual recovery/completion, a separately keyed completion receipt may be
+staged while the earlier blocker receipt remains in history, including uncertain
+delivery facts. No prior notification is retried merely to report completion.
+
 ## Tab lease and monitor identity
 
 `tab_lifecycle` may be `OPEN`, `HANDOFF`, or `CLOSED`, but it is never the

@@ -1,5 +1,40 @@
 # HMASD experiment tracking
 
+## Current rolling handoffs — 2026-09-12 04:45 UTC
+
+Current execution ownership is recorded at the top of [PORTFOLIO.md](PORTFOLIO.md).
+Older pending/zero-active paragraphs below are dated evidence, not current status.
+
+- ACVC C01 unit 1 `acvc-fresh-dense-c01-12794-3fd9062d5` finished exit 0 at
+  `2026-09-12T04:43:24Z`: whole-command wall 167.06 s, full-summary process wall
+  162.43909501598682 s, peak RSS 546928 KiB. The original Monitor value
+  162.4378159570042 s was the last-panel log, subsequently corrected by DM and
+  Monitor without altering the raw receipt. This is terminal execution evidence,
+  not complete five-unit scientific acceptance. Monitor delivered terminal and
+  empty-set goal completion. Root immediately resumed the same DM through
+  `followup_task` for collection and fixed unit 2 `(11477,24930)`, followed by the
+  remaining authorized sequence; current native status is running.
+  DM subsequently collected and byte-matched all 12 files: all 512 training episodes,
+  1024 updates, 192 final episodes and 180224 ticks are complete; fixed unit 2 is
+  proceeding. Monitor's per-handle observation command-wall total is unavailable,
+  remains an explicit support-account unknown, and is not reconstructed by rerunning.
+- Main accepted card/source/commands/launch as `0d3bc3257`, `0451da37a`,
+  `3ed01fb83`, `2fadb1ddc`. Existing 12 focused checks and independent no-material-
+  finding review are reused; no repeat scientific or verification invocation.
+- FOLR's designated DM is actively publishing the conforming F+U Portfolio mapping
+  from the complete response already integrated at `a9c6ba2bf`; Root owns immediate
+  integration and dispatch when that handoff arrives. No empirical start is yet
+  claimed by this snapshot.
+- RCLE Transport rechecked original Edge browser 2/tab 507083308 and received
+  `Browser is not available: 2`; original count 2 and exact request remain intact.
+  Same-request recovery is owned by Transport, with original connection restoration
+  as its explicit prerequisite. No accepted generation is counted.
+
+Actual direction count: 1; vacancies: 4. Published intentions, completed returns,
+cross-direction authoring and unresolved browser waits are excluded. No pending
+Monitor handle is orphaned at this snapshot. Later changed events update this
+section or the current Portfolio snapshot rather than silently inheriting old counts.
+
 ## Open-direction program dispatched; VNFC investigation closed — 2026-09-11
 
 The fixed Portfolio program packet is integrated through `dec302a92` and was dispatched exactly

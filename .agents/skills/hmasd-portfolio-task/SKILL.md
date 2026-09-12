@@ -57,6 +57,11 @@ bound question, evidence class, current owner instructions, applicable specs, sc
 and declared budget. An incomplete response or concrete conflict goes back to the same Pro node
 with exact evidence; no local substitute or new approval tier follows. Independent conforming work
 continues. Direction/Portfolio questions have no local provisional disposition on a Pro blocker.
+Reconcile actual full-response delivery before treating a transport status as absence of a
+decision. Short chat receipts and their hashes are separate from full Git response bytes and
+hashes. A verified complete response enters this conformance check while Transport repairs its
+receipt bookkeeping. If no decision exists, Transport retains the original request recovery;
+do not create a replacement Portfolio question solely to escape an operational blocker.
 
 For a complete conforming decision, record the actual choice, reasons, limits, opposing evidence
 and affected direction/actions in the existing Portfolio decision record. Return that record and
