@@ -1,0 +1,147 @@
+{
+  "observed_utc": "2026-09-12T00:29:34.237660+00:00",
+  "source_sha": "5250c43536d8520d4005eed3f613226ec4bc6e73",
+  "tracked_and_untracked_status": "",
+  "ignored_untracked_files": [
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003/D0/manifest.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003/D0/summary.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003/D0/training.jsonl",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003/I/manifest.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003/I/summary.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003/I/training.jsonl"
+  ],
+  "inventory": {
+    "worktree": {
+      "path": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771003-20260911",
+      "file_count": 2514,
+      "bytes": 43834335
+    },
+    "inputs": {
+      "path": "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771003-20260911",
+      "file_count": 4,
+      "bytes": 1209
+    },
+    "supervisor_D0": {
+      "path": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771003-D0-20260911",
+      "file_count": 6,
+      "bytes": 2311
+    },
+    "supervisor_I": {
+      "path": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771003-I-20260911",
+      "file_count": 6,
+      "bytes": 2300
+    }
+  },
+  "raw_files": {
+    "D0/manifest.json": {
+      "bytes": 1605,
+      "sha256": "81b775d1fa2f6ad5c7e310f24c03f29df56ea1794785afac8ecabaa13c66193a"
+    },
+    "D0/summary.json": {
+      "bytes": 49519,
+      "sha256": "6ef9a881ef822d4073876cc1ade0de08cb6ab05cb0a6e13a3a7b2a5b112a9b9c"
+    },
+    "D0/training.jsonl": {
+      "bytes": 22321,
+      "sha256": "4a73d5246350f688f963a288be07b24941d46f44e0b14827e9af22e82246a035"
+    },
+    "I/manifest.json": {
+      "bytes": 1605,
+      "sha256": "ec7cfd04123de965ae7c2492f393817e05d3fdc28d34ec588029c3a25687ff6b"
+    },
+    "I/summary.json": {
+      "bytes": 51338,
+      "sha256": "55ecfb95cbe61e16e6a52cce7689e4cafd886c2693297659cab81b451d11fc6a"
+    },
+    "I/training.jsonl": {
+      "bytes": 22469,
+      "sha256": "ee16772246f661902fff2058d79c038c2db5c39090cc897f3bf16f1748b64f90"
+    },
+    "inputs/D0_admission.json": {
+      "bytes": 504,
+      "sha256": "e9ee37058acfead15b427319d4751d5c5c48af4bb6af3db8db4d14f5ff15a50f"
+    },
+    "inputs/D0_process_time.txt": {
+      "bytes": 100,
+      "sha256": "42d93eec79b938748e1fe20c81d2d6089b20a440179ebc012c8afd1f48060650"
+    },
+    "inputs/I_admission.json": {
+      "bytes": 504,
+      "sha256": "5e20e3fcdd3f6867afc8ef526b525ca5233acb0e36fb155302bb8ca5522907b6"
+    },
+    "inputs/I_process_time.txt": {
+      "bytes": 101,
+      "sha256": "3c124682f84f767e724a0a717e2567a972a1e459c5870831779c26435b346870"
+    },
+    "supervisor_D0/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "supervisor_D0/pid": {
+      "bytes": 8,
+      "sha256": "9daad5fbb05eed4a08a085510e591df24438833ac7091567c2603c6b423fc9d7"
+    },
+    "supervisor_D0/runner.sh": {
+      "bytes": 1497,
+      "sha256": "9c02136b4da65e1f28f7db8d45353bdee88ca8b92bc96a8b47738acb402d78ce"
+    },
+    "supervisor_D0/start_time": {
+      "bytes": 11,
+      "sha256": "a07cadde1595d41aa5f4c098381c5646e4b729d01aa65818f0421a19706ebf70"
+    },
+    "supervisor_D0/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "supervisor_D0/task.log": {
+      "bytes": 784,
+      "sha256": "530b7d115d77dc114d89c0f52bec0b9cf44b64ec09a91ac5754ab8bec9d44051"
+    },
+    "supervisor_I/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "supervisor_I/pid": {
+      "bytes": 8,
+      "sha256": "0899fca4c08015d71d720a9e8bdba343af9ab76d21fc0ad530ada5b82d32d1f8"
+    },
+    "supervisor_I/runner.sh": {
+      "bytes": 1487,
+      "sha256": "168b353dbd6a50ca1bccec15151629c3772e915685ae2dded9183f4b0586fd4c"
+    },
+    "supervisor_I/start_time": {
+      "bytes": 11,
+      "sha256": "8bec01df8555a9facaebf53cda39ba05b95499f28a3c8faa9723095faccadab8"
+    },
+    "supervisor_I/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "supervisor_I/task.log": {
+      "bytes": 783,
+      "sha256": "ecc6db012f6bc9f987048f943a34160dd3b261bab404e73db43482e446ecf2e8"
+    }
+  },
+  "supervisors": {
+    "D0": {
+      "status": "finished",
+      "exit_code": "0",
+      "tmux_active": false,
+      "tmux_returncode": 1
+    },
+    "I": {
+      "status": "finished",
+      "exit_code": "0",
+      "tmux_active": false,
+      "tmux_returncode": 1
+    }
+  },
+  "inner_inventory_wall_seconds": 1.077999999979511,
+  "all_22_raw_files_match_collected_bytes": true,
+  "preservation_archives": [
+    "D0_collection.tar.gz",
+    "I_collection.tar.gz"
+  ],
+  "shared_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-fsd; retained",
+  "cleanup_state": "inventory complete; preserve/publish before removal"
+}
