@@ -1,9 +1,12 @@
 # RCLE B07 execution and technical acceptance
 
-Current boundary: original exit2 is collected and the learned fit/panels are accepted
-at their narrower ceiling. Root mapped one reference-only completion into the
-original R logical invocation; its exact detached submission is accepted, with
-actual Monitor goal adoption/terminal intake pending. No fit or budget was added.
+Current boundary: complete B07 result accepted after the original fit and the
+single Root-authorized reference completion (exit0). Actual Monitor goal adoption,
+accepted terminal delivery and empty completed goal are confirmed. Frozen
+Delta_ref=−.008841959635417 and G_U=−.000205485026042; native343.43s.
+The named allocation ends. Final publication/Root retention and scoped remote
+cleanup remain; no fit, budget, retry or successor is added. See the
+[complete intake](RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md).
 
 The [card](RCLE_B07_EQUAL_UNIT_SCIENCE_CARD_20260912.md) binds fresh
 RCLE-TBCFV-B07-EQUAL-UNIT/master27 and exactly one final1000 fit with three
