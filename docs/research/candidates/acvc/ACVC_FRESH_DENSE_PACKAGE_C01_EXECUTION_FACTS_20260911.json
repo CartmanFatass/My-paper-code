@@ -24,7 +24,7 @@
       "output": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_12794",
       "admission": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_12794_admission.json",
       "time": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_12794_task_time.txt",
-      "state": "accepted; Root-confirmed Monitor adoption; terminal collection pending",
+      "state": "complete, collected and technically accepted; retained as first final-population unit",
       "launch_receipt": {
         "handle": "acvc-fresh-dense-c01-12794-3fd9062d5",
         "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
@@ -51,8 +51,32 @@
         "pid": 3364324,
         "uptime_s": 30,
         "tmux_active": true,
-        "owner": "Monitor retains through delivered terminal notice; DM stopped remote polling"
-      }
+        "owner": "Monitor retains through delivered terminal notice; DM stopped remote polling",
+        "terminal_delivered": true,
+        "goal_complete_after_terminal": true,
+        "terminal_active_set": []
+      },
+      "technical_acceptance": {
+        "accepted": true,
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "whole_command_wall_s": 167.06,
+        "summary_process_wall_s": 162.43909501598682,
+        "last_panel_log_wall_s": 162.4378159570042,
+        "supervisor_duration_s": 167,
+        "inclusive_native_charge_s": 170,
+        "charge_method": "ceil(max(command wall, integer supervisor interval)+1 second timestamp granularity+recorded 1 second final sleep), submission charged once separately to support",
+        "peak_rss_kib": 546928,
+        "admission_physical_effective_bytes": 15632752640,
+        "resource_flag": "resources_unmeasured",
+        "terminal_event_id": "acvc-fresh-dense-c01-12794-3fd9062d5@2026-09-12T12:43:24+08:00",
+        "monitor_command_wall_s": null,
+        "monitor_limit": "Root confirmed no precise per-handle total is available from prior observations; no rerun/profile to reconstruct",
+        "checkpoint_sha256": "ee4827a71486e1f83e8280ff866c28e4df768e8a4d0913fa7a2dfccf3b92d073",
+        "archive_sha256": "b0fef35c0d490888ac62141e85b93daabed31cee060d1cb96312ec6658681088",
+        "archive_bytes": 416465,
+        "scope": "complete component unit only; no interim population interval or efficacy decision; C01 not consumed"
+      },
+      "evidence": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_12794/"
     },
     {
       "order": 2,
@@ -113,9 +137,23 @@
     "execution_checkout": "retain through all five units and preservation; DM cleans after Root retention/integration confirmation",
     "authoring_checkout": "shared active codex/acvc; retain",
     "test_scratch": "creator removed, absent",
-    "historical_blocked_preparation": "outside this allocation, untouched"
+    "historical_blocked_preparation": "outside this allocation, untouched",
+    "generated_bytecode": {
+      "status": "blocked before process creation by runtime policy",
+      "exact_error": "CreateProcess Rejected(... rejected: blocked by policy)",
+      "effect": "no deletion; no alternate executor/retry",
+      "owner": "original DM; same-path cleanup only when permitted",
+      "paths": [
+        "tests/experiments/candidates/acvc/native_link_loss_b01/__pycache__/test_fresh_dense_b01.cpython-310-pytest-9.1.1.pyc",
+        "scripts/__pycache__/run_acvc_fresh_dense_reuse_b01.cpython-310.pyc",
+        "scripts/__pycache__/run_acvc_fresh_dense_package_c01.cpython-310.pyc",
+        "experiments/candidates/acvc/fresh_dense_package_c01/__pycache__/protocol.cpython-310.pyc",
+        "tests/experiments/candidates/acvc/fresh_dense_package_c01/__pycache__/test_protocol.cpython-310-pytest-9.1.1.pyc"
+      ],
+      "future_python": "-B; scientific source and native results unchanged"
+    }
   },
-  "next_action": "Collect unit 1 on the routed terminal fact, then run fixed unit 2 (11477,24930) unless a concrete dependent integrity/resource/envelope limitation applies; no interim efficacy decision.",
+  "next_action": "Execute fixed unit 2 (11477,24930) from the published command with fresh admission/Monitor adoption; no interim efficacy decision.",
   "current_consumption": "C01 not consumed; no complete five-unit scientific result yet",
   "owner_instruction_applied": "Root forwarded Transport operational correction at main 8bf1269e5: a short/status receipt does not establish no formed decision; ACVC already verified the full immutable Innovator response and preserved separate receipt roles. Accepted engineering continues unchanged."
 }
