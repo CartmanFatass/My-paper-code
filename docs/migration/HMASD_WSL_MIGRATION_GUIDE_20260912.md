@@ -10,6 +10,7 @@
 | 当前方向工作树 | /home/fires/projects/HMASD-worktrees 下，保持各自分支、提交及未提交内容 |
 | 实验产物和历史运行记录 | 主仓库 temp/ 保持相对结构及文件原始内容 |
 | 本机控制端 Python | /home/fires/.venvs/hmasd-control，依赖由验收记录给出 |
+| 本机 CPU / 分析 Python | `/home/fires/.venvs/hmasd-linux-cpu` / `/home/fires/.venvs/hmasd-linux-science-tools`，见 `environments/README.md` |
 | Desktop/Agentify | 继续运行在 Windows，Agent 已在 WSL |
 | 远端实验节点 | 继续使用现有 hmasd-wsl-node / wsl_4070，/home/wu 路径不改变 |
 | Windows 原仓库及工作树 | 保留，作为明确的回退来源；切换后不再双边同时日常写入 |
@@ -36,14 +37,37 @@ Windows 原项目及工作树保持原样。之前的 WSL 候选仓库和工作�
 - 入口阶段：Desktop 项目及旧任务实际 cwd 切换到已验证的目标。复制文件并不自动改变任务 cwd。
 - 若入口切换必须关闭 Desktop，则先完成备份、切换工具及其测试，再把关闭/重启作为最后一步交给用户执行，明确尚未完成的项目，不在线改写会话数据库。
 
-## 回退
+## 当前使用与回退
 
-保留 Windows 副本和 Desktop 路径备份。需要回退时先保全迁移后新增的 Linux 提交、修改和证据，再在 Desktop 退出状态恢复明确的路径记录。已成功启用的 WSL Agent 开关无需因项目迁移而关闭。
+用开始菜单 `Codex - WSL Repair` 启动已验证的可回滚适配器（安装包
+`26.908.4834.0`）。原 HMASD 项目和项目“1”的主目录均已正常保存为
+`/home/fires/projects/HMASD`；原项目 ID、附加 remote-test 根目录及任务历史保留。
+本次没有直接写入生产 SQLite、global-state 或历史会话文件。
 
-## Desktop 入口尚未切换
+已有任务的 cwd 不随项目根目录自动更新。旧任务恢复时须明确指定已分配的 native
+checkout，并检查实际 `pwd` 与 `git rev-parse --show-toplevel`；本次没有批量唤醒任务。
+main 和各方向工作树的环境入口及检查范围见 `WSL_PATHS_20260912.md`。
 
-Windows 文件选择器可以读取 `\\wsl.localhost\Ubuntu-24.04\home\fires\projects\HMASD`，但当前安装版创建项目时，Linux 后端拒绝该 UNC 路径，错误为 `AbsolutePathBuf deserialized without a base path`。Root 在隔离配置目录复现了 UNC 失败、原生 `/home/fires/projects/HMASD` 成功。仅换成另一种 UNC 写法不能视为修复。
+CPU 和分析环境分别按 Windows 实际包版本重建，依赖检查和主要导入通过；Linux
+C++ loader 的两个现有检查通过。解释器和包版本、明确省略项、编译器/BLAS 平台
+边界及重建命令见 `environments/README.md`。远端节点和 Windows 专用工具继续沿用
+原环境；安装完成不恢复研究或改写任何冻结实验条件。
 
-尚未改写正在运行的 Desktop 项目、会话数据库或已有任务 cwd。原生 Linux 后端接受路径，不等于 Windows Desktop 全流程已验证；文件迁移与入口切换分别记账。迁移记录目录中的旧 staging 脚本不具备已验证的完整切换能力，不应当作可直接安装的修复运行。
+完整退出后通过原官方快捷方式启动，可停用路径适配器。后续官方升级需重新核验。
+若需要回到 Windows 项目，先保全 Linux 新增提交、修改和证据，再通过正常项目界面
+选择已保留的 Windows 副本；不要用旧数据库覆盖新任务历史，也不要双边同时日常写入。
+迁移记录中的旧 staging/数据库修补脚本不是当前切换方法。
 
-WSL agent 访问 /mnt/c 上的仓库有跨文件系统开销，尤其是大量小文件和 Git 操作；把 agent 切到 WSL 不会自动把项目文件迁入 Linux 文件系统。模型生成速度和远端实验计算速度不因此直接改变。
+## 故障与扫描记录
+
+原缺陷是 Windows Desktop 传入盘符或 UNC 项目路径，而 Linux 后端按 POSIX 绝对
+路径解析；仅改变文件选择器里的 UNC 拼写不足以修复。当前适配器只在项目
+create/import/update 请求边界转换路径，真实创建和更新均已验证。
+
+全部 20 个 native checkout 已扫描 Windows 路径残留，18 个有分支的 checkout 修复
+当前入口；两个 detached 固定 SHA 快照、历史证据与主机专属科学实现保留。
+完整路径清单、逐文件备份、提交/推送、环境与 Desktop 读回证据位于
+`/home/fires/migration-records/hmasd-wsl-20260912/astra-desktop-repair/`。
+
+WSL Agent 访问 `/mnt/c` 上的仓库仍有跨文件系统开销；日常代码和工作树现位于 Linux
+文件系统。模型生成速度和远端实验计算速度不因此直接改变。
