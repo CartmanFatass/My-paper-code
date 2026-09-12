@@ -84,3 +84,46 @@ One required Root-wake relay delivery for that ready event was accepted by the
 configured app endpoint. RELAY_RECEIPT.json preserves the exact payload/result.
 This is not an observed Root integration, Transport dispatch or provider Send.
 No duplicate relay, owner approval or acknowledgement wait is required.
+
+## Complete-response intake and finite application mapping
+
+The complete answer arrived at `f4bbe6cae2d351b4c80c5e0d9d66690d337749ce` and
+Root integrated it as `a9c6ba2bf`. The author read all201 lines and verified its
+50629 Git bytes against fresh GitHub Contents. Full-response SHA256 is
+`a80571571b323bf937adee9875969d67356db121ff0c6de4b5de9b3483e3dabf`.
+Original470-byte `__02_RESPONSE`/chat receipts have the different `8ed3…` hash;
+all originals and the full Git answer are preserved in the scoped archive ZIP.
+Stale Send-time/top-level fields remain flagged separately; Root/Transport own
+their correction. No resend or new question follows from those metadata gaps.
+
+Complete scientific/specification conformance **passes**. The final decision is
+**F+U**: one new unchanged FOLR B pair at1350 per whole native arm/2700 native
+sum/300 invoked support/3000 complete, and no FSD question or successor work.
+See `../../decisions/2026-09-11-folr-unchanged-pair-funding.md` and
+`EXECUTION_MAPPING.md`. Fresh identity/card/command binding belongs to the
+original FOLR DM when Root resumes it; no new empirical work is performed by
+this intake. ACVC and exact RCLE recovery continue independently; other current
+boundaries survive. Current owner reviews were empty. Owner traces distinguish
+the final decision from pending Root application; no reply or launch is invented.
+
+`INTAKE_FACTS.json` records exact references, receipt limits, current source
+annotations, inherited work counts and zero new science/source/test/Send exposure.
+Source updates through accepted mainf5628 and current recovery rules8bf1269 were
+reconciled by input-sync merges, which are not deliverable cherry-picks. Focused
+documentary checks suffice; no workload was invoked. No runtime/test scratch or
+new branch was created. The shared Portfolio checkout remains live for Root's
+integration/recovery; existing scientific evidence and restricted old duplicates
+are untouched. One new completion relay is sent for this intake event, distinct
+from the earlier ready-handoff relay above.
+
+Final focused checks passed: all new Markdown targets exist, intake/owner JSON
+parses, Chinese packet quoted words match their sources after line-wrap whitespace
+normalization, the brief has
+all six headings and367 characters, both owner items retain planned application
+with `auto_applied=null`, the new selection is audit line140, inherited count/cap
+arithmetic agrees and the preserved ZIP digest is unchanged. No source or
+numerical check was invoked. Final item is `20260911-root-011`; preparation
+item010 retains its historical recommendation and links this formed decision.
+The first literal-substring quotation check failed on two Markdown wrapping
+newlines; the source and quoted words were unchanged, and the corrected focused
+check passed. This was a documentary-check assumption, not an evidence defect.

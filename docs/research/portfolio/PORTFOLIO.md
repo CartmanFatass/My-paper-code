@@ -26,7 +26,45 @@ Root used `followup_task`, and current native status confirmed the DM running.
 The relay also delivered the published ACVC launch handoff. Transport's unavailable
 surface is explicit, not a completed request or a silently abandoned recovery.
 
-## Current rolling allocation after FSD/FOLR B02 — 2026-09-11
+## Current FOLR unchanged-pair funding — 2026-09-11
+
+The complete Portfolio response `f4bbe6cae2d351b4c80c5e0d9d66690d337749ce`
+passes the designated DM's full conformance check and selects **F+U**, under
+`PRO_FINAL / OWNER_DELEGATED`. The
+[decision/intake](decisions/2026-09-11-folr-unchanged-pair-funding.md) and
+[execution mapping](pro_packets/20260911_folr_unchanged_pair_funding/EXECUTION_MAPPING.md)
+are ready for Root integration and immediate original-DM continuation. This
+section supersedes the older S/P task-allocation status below, preserving its
+historical costs and all other narrow boundaries. It records no new actual
+FOLR start or numerical result by the Portfolio author.
+
+| Direction | Current final investment | Separate limits and next action |
+| --- | --- | --- |
+| vap_folr_core, ACTIVE/MEDIUM | F: exactly one new unchanged unscreened LEARNED_EVENT/RETAIN B pair after accepted direction A. B01 +1.763359375 and B02 −1.76953125 remain separate; generic RETAIN stays default. | New complete native arm ≤1350 s, native sum ≤2700, invoked support ≤300, complete invoked work ≤3000. Original DM prospectively binds fresh identities/card/commands and completes 5000 training/128 final episodes per arm through intake and scoped cleanup. No new family question, fourth pair, replacement or automatic successor. |
+| flexible_skill_duration, ACTIVE/HIGH | U: no added family question, implementation or empirical task. The third 771103 result −.0124304306 is a small original adverse-branch point, with 16/16 signs and conditional SE .0192675479; prior gains survive. | No new allowance. The previous allocation is ended; all four current remote cleanup paths are verified absent. A later concrete use/successor/claim-choice need may justify reconsideration. No fourth pair, diagnostic or C promotion. |
+| acvc, ACTIVE/MEDIUM, recasts2 | Preserve the already funded five-new-fit path. The original Innovator intake is now accepted; Root reports live unit 1 independently. | Retained, not renewed: ≤270 per complete unit, native ≤1350, support ≤1650, complete ≤3000 including prior support. Five new fitted bases and the original qualified C estimand; no sixth/replacement fit or new question. |
+| roster_consistent_latent_exploration | Preserve same-request recovery under Root/Transport and the original DM; receipt labels do not establish whether a full decision exists. | No duplicate/replacement question or new empirical allowance. |
+| variable_n_fleet_churn | Existing unused conditional pair remains queued/unready, not newly funded or started. | Retain 900=600 whole native pair/reference+300 support; no extra repair/diagnostic funding. |
+| metric_ground_transport_allocation | Preserve generic DENSE and the no-addition disposition. | No new1200-second pair, preparation or consultation; no automatic fallback. |
+
+The fixed request snapshot was one advancing direction/four vacancies. Actual
+FOLR resumption adds one; if ACVC still advances then, two directions advance
+and three vacancies remain. Funding and documentary intake are not starts.
+All15 lifecycle/priority/recast/MEI/formal-UAV fields and the other nine narrow
+boundaries remain unchanged. No selected work waits for a sibling or Transport
+metadata correction. Matching tuned same-information headroom remains absent,
+not zero or a launch prerequisite; historical other-host diagnostics survive.
+
+FOLR's new pair is two fits/one training unit, 205120 native team ticks and 9938
+updates, with no added search or diagnostic trajectories. The3000-second limit
+is a new complete-work ceiling, not a forecast or renewed old3900 allowance.
+FSD's native1495.25 plus latest119.2788229 known support gives1614.5288229 seconds;
+the response's pinned1602.2841971 subtotal and earlier windows remain separately
+scoped. Full historical/future support and training-level recurrence remain
+unknown. Neither missing telemetry nor the new near-margin FSD loss erases
+independently accepted native evidence.
+
+## Prior rolling allocation after FSD/FOLR B02 — 2026-09-11
 
 The complete Portfolio response at `05c24bcd85f92efc26fb2a9cb2152bed51dd90e9`
 passes the designated DM's full scientific/specification check and selects
