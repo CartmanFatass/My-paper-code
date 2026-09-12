@@ -13,12 +13,12 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | RCLE R | Complete intake accepted at main2a53388b8: `Delta_ref=-0.00884196` with negative CI and8/8 reference losses; `G_U=-0.000205485` interval crosses zero. One fit plus reference-only completion, native343.43s; allocation ended | Six scoped remote terminal-path cleanups only; no retry, new fit, Pro or active scientific work |
 | Portfolio two remaining chains | Final response archived/intaken at mainbd5fd849a: D=yes, P=yes, M=no; exact execution mapping published | ROOT_INTEGRATED; FSD and FOLR dispatched independently, no common wait |
 | ACVC A | Complete B02 intake accepted at main89910ecd7: train-F minus train-C −0.0573422 J, SE0.00942192,50/64 adverse, DOWN; both arms exit0, native338.10s, grant ended | Six scoped remote cleanup targets only; no third pair, retry, panel or active scientific work |
-| MGTAP M | Single accepted handle `mgtap-cond-b01-8214-20260912` runs the complete ordered COND→DENSE pair and is actually adopted by Monitor, pid3393092, source10ea737f0 | Same handle completes both arms under450/arm,900native,300support,1200 total; terminal collection/paired intake, no second process/retry |
+| MGTAP M | Complete intake accepted at main3c5f5471f: COND−DENSE+0.0244781 J,SE0.00465816,26/32 positive, COND_ABOVE_MEI; one handle exit0/native361.85s, grant ended | Four scoped duplicate cleanup targets only; no fourth pair, consultation or active scientific work |
 | Portfolio post-CFR vacancies | Final response/intake accepted at maincf7bd424f: A=yes,M=yes,Q=no; execution mapping published | A/M dispatched independently; three remaining vacancies move to the next rolling Portfolio question |
 
-Direction chains1/5: MGTAP M remains active in terminal collection/intake. ACVC A, FSD D, FOLR P,
-RCLE R and prior objects completed and released their slots. Four vacancies remain for the next rolling
-Portfolio question; no queued intention, Transport session, or cleanup is counted as a direction.
+Direction chains0/5: MGTAP M, ACVC A, FSD D, FOLR P, RCLE R and prior objects completed and released
+their slots. The active N/S/R Portfolio generation can select at most two new chains; at least three
+vacancies will remain. Transport sessions and cleanup do not count as directions.
 
 ## Current routing
 

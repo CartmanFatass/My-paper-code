@@ -8,7 +8,7 @@
 本表登记15 ACTIVE、7 PARKED，生命周期、priority、recasts与UAV字段不变。
 最新 [Portfolio决定](decisions/2026-09-12-two-remaining-chains.md) 已由原作者完整核对：**FSD D与FOLR P独立获选，MGTAP不追加。**
 
-Root当前实际工作集1/5：MGTAP M正在终态收集/intake。ACVC A已完成并释放槽位；FSD D、FOLR P、RCLE R及更早对象均已完整intake。cleanup与Portfolio准备不计槽位。
+Root当前实际工作集0/5：MGTAP M与ACVC A均已完整intake并释放槽位；FSD D、FOLR P、RCLE R及更早对象也已验收。cleanup与Portfolio生成不计槽位。
 FSD为一对I1280/authentic-D0，D0≤900、I≤1800、native≤2700、support≤300、完整≤3000秒；FOLR仅一次原节点post-B03 Convergence及完整intake，零实验额度、完整成本未知。MGTAP1200未分配。
 补位Portfolio请求已由provider接受并正在生成，最终至多选择三项，至少仍会留下两个槽位。不把旧余额或未选候选当自动授权。
 Monitor当前无活动目标；FSD与FOLR均已完成。Transport正在观察post-CFR Portfolio generation。
@@ -28,7 +28,7 @@ Monitor当前无活动目标；FSD与FOLR均已完成。Transport正在观察pos
 | [expressibility_gated_renewal_credit_relay](../candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
 | [FRRIE](../candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md) | P59已intake；P63 source-only九frame映射完成，factory fault仍未归因，P63未运行。 | 无；本轮没有新增拨款。 | 可信最小观察/替代执行路径及必要拨款。旧故障未完全定位不自动禁止不同可信路径；不重跑旧P63。 |
 | [FSD](../candidates/flexible_skill_duration/DIRECTION.md#accepted-native-uav-renewal-batch-adverse-pair-b02771103-2026-09-11) | 771103 pair−0.0124304306、16/16 signs；既有正值保留，分配结束，四个远端路径已清理。 | 无 | 具体use/successor/claim-choice投资选择；无已分配第四pair或C promotion。 |
-| [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 最新8213 COND−DENSE−0.022469573456，5正/27负；DENSE默认及两次M=no历史保留。 | **新M已派发**：独立DM负责一对unchanged COND/DENSE对象。 | 450/arm、900native、300support、1200完整上限；fresh identity/admission/Monitor/intake，禁止额外panel、retry或successor。 |
+| [MGTAP](../candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md) | 8214为COND_ABOVE_MEI：COND−DENSE+0.0244781 J、26/32正、SE0.00465816；此前负结果保留，DENSE默认不变。 | M证据已保全至main3c5f5471f，分配结束，无活动科学工作。 | 四个scoped重复目标清理；无第四pair、consultation、retry、panel或successor。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
 | [RCLE](../candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md) | B07完整结果：`Delta_ref=-0.00884196`且区间为负，八个reference场景均落后；`G_U=-0.000205485`且区间跨零。只支持本次对象局部结论。 | 原fit与reference-only完成均验收，native343.43秒；分配结束，无活动科学工作。 | 仅清理六个已列明远端终态路径；无retry、新fit、Pro或自动successor。 |
