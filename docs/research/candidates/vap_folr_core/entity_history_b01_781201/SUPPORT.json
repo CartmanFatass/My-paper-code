@@ -1,0 +1,55 @@
+{
+  "recorded_at": "2026-09-12T23:31:50.557544+00:00",
+  "hard_support_cap_seconds": 1200,
+  "native_caps_seconds": {
+    "generic": 1800,
+    "bank": 3000,
+    "sum": 4800
+  },
+  "complete_invoked_cap_seconds": 6000,
+  "rows": [
+    {
+      "component": "accepted-input merge attempt and reconciliation",
+      "seconds": 7.062500399999999
+    },
+    {
+      "component": "card/exposure and owner item commands",
+      "seconds": 4.4742683
+    },
+    {
+      "component": "source/card/check and correction commits/pushes",
+      "seconds": 8.9314809
+    },
+    {
+      "component": "remote supervisor help/read",
+      "seconds": 1.2401768
+    },
+    {
+      "component": "exact-source remote stages",
+      "seconds": 11.3366371
+    },
+    {
+      "component": "focused invocation SSH/control including inner check",
+      "seconds": 3.9081011
+    },
+    {
+      "component": "unexecuted-case correction SSH/control including inner check",
+      "seconds": 3.3439921
+    },
+    {
+      "component": "check receipt collection",
+      "seconds": 0.9944623
+    },
+    {
+      "component": "independent review read commands",
+      "seconds": 2.509
+    }
+  ],
+  "known_support_seconds": 43.800619000000005,
+  "accounting": "Outer command elapsed covers inner pytest/admission once; do not add 3.346657243/2.834894535 again.",
+  "uncovered": "Other short document/source reads, apply_patch/control service overhead, future integration/collection/cleanup and provider/agent costs are not measured here; no zero or complete-total assertion.",
+  "scientific_invocations_so_far": 0,
+  "native_spend_so_far": 0,
+  "rates": "Both new full native arm rates and process peaks UNKNOWN; no pilot",
+  "remaining_scope": "Generic then BANK after complete technical collection; no extra pair/arm/width/shortened exposure. Continue support accounting at launch, collection and closeout."
+}
