@@ -70,5 +70,17 @@
     "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): accept the selected C card and execute one prospectively bound RAW/STRUCT pair after proportional technical acceptance.",
     "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_SCIENCE_CARD_20260912.md"
   },
-  "starred": false
+  "starred": true,
+  "approval_correction": "packet evidence_for 的 quote 是标题摘要；映射真实标题为 C — CBSC public-stream implementation and opportunity-credit B。拨款行原文为 One fresh RAW/STRUCT pair.600s/whole arm,1200native sum,600support,1800future invoked-work total.",
+  "execution_history": [
+    {
+      "at": "2026-09-12T17:13:07+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_SCIENCE_CARD_20260912.md",
+      "state": "planned",
+      "summary": "C 卡已采用；已发布05a232369代码，尚未技术接受或启动。",
+      "correction": "packet evidence_for 的 quote 是标题摘要；映射真实标题为 C — CBSC public-stream implementation and opportunity-credit B。拨款行原文为 One fresh RAW/STRUCT pair.600s/whole arm,1200native sum,600support,1800future invoked-work total."
+    }
+  ]
 }
