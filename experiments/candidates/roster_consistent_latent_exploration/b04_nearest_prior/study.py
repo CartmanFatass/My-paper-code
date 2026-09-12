@@ -104,7 +104,7 @@ def reading(delta, gain, mixed):
 
 def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summary=None, seed=SEED,
         *, updates=UPDATES, object_id=OBJECT_ID, panel_label="B04", action_law=None,
-        equal_unit_update=None):
+        equal_unit_update=None, reference_packed_views=True):
     action_law = dict(LAW if action_law is None else action_law)
     out.mkdir(parents=True, exist_ok=True)
     summary = dict(object=object_id, seed=seed, arm=arm, launch_sha=launch_sha,
@@ -149,7 +149,11 @@ def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summ
             summary["final_baselines"] = baselines.tolist()
         else:
             summary["allocations"] = dict(models=0, training_instances=0)
-            summary["scenarios"] = host.evaluate_scripted(rng, 256)
+            if reference_packed_views:
+                summary["scenarios"] = host.evaluate_scripted(rng, 256)
+            else:
+                summary["reference_packed_views"] = False
+                summary["scenarios"] = host.evaluate_scripted(rng, 256, packed_views=False)
             summary["Y_note"] = "ScriptedEpisodeResult has no Y; Y is unavailable"
             learned = host.load_control_summary(learned_summary)
             result = comparisons(learned["initialization_panel"], learned["scenarios"], summary["scenarios"])

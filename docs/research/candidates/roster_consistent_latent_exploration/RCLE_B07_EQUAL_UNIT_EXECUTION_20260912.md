@@ -1,8 +1,9 @@
 # RCLE B07 execution and technical acceptance
 
-Current boundary: one detached supervisor submission and actual unfinished Monitor
-goal adoption are accepted. The same DM retains terminal collection and intake.
-There is no accepted scientific result or successor.
+Current boundary: terminal exit2 is collected. Learned fit/panels are accepted at
+their narrower ceiling; reference primary is missing. The prepared reference-path
+alternative has focused technical acceptance, with cause/runtime limits explicit.
+No additional native invocation or successor has occurred.
 
 The [card](RCLE_B07_EQUAL_UNIT_SCIENCE_CARD_20260912.md) binds fresh
 RCLE-TBCFV-B07-EQUAL-UNIT/master27 and exactly one final1000 fit with three
@@ -123,3 +124,25 @@ and numerical artifacts await terminal collection; no duplicate polling/submissi
 is commissioned. Root resumes this same DM for collection on the terminal event.
 Source and command are ready for Root
 integration without touching the active exact-source checkout.
+
+## Terminal collection and bounded reference-path change
+
+Root forwarded failed/exit2, inactive tmux, pid3377723 and complete Monitor goal
+with empty active set. Direct terminal collection confirms learned COMPLETE1000
+and TECHNICAL_STOP reference. Whole native338.90 s is learned336.46/ref2.43 plus
+boundary/rounding; both fresh4GiB admissions pass. All17 files and the exact
+source bundle are preserved locally with matching archive digests.
+
+[Partial E0](RCLE_B07_EQUAL_UNIT_PARTIAL_EVIDENCE_20260912.md),
+[intake](RCLE_B07_EQUAL_UNIT_PARTIAL_INTAKE_20260912.md) and
+[runtime receipts](b07_equal_unit_20260912/RUNTIME_RECEIPTS.json) record the
+one-fit counts, small negative G_U, missing Delta_ref, native side effects,
+unexplained truncated error text and complete-known/unknown cost split.
+The opt-in eager reference snapshot path and failure context pass focused
+checks/independent review; no underlying writer or runtime cure is established.
+The unchanged reference-only completion input can reuse the retained learned
+summary at its exact digest, without a new model or fit, if Root reconciles its
+new execution with the existing invocation allocation. No second submission
+is performed by this return. The [cleanup inventory](b07_equal_unit_20260912/CLEANUP_INVENTORY.json)
+retains exact terminal remote targets pending Root integration/preservation and
+completion-input mapping; nothing has been deleted.

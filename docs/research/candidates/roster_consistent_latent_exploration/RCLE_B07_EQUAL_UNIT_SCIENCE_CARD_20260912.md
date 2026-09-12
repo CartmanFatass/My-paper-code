@@ -162,3 +162,14 @@ defer it. Recommend/select(a). Owner-delegated decision (unattended,2026-09-03
 instruction): **(a)** under Portfolio PRO_FINAL / OWNER_DELEGATED. Current main
 owner reviews were empty at preparation. No second fit, joint100 arm, extra
 consultation, extension, scientific retry or automatic successor is allocated.
+
+## Post-learner engineering boundary
+
+The original source executed one complete fit but its reference failed the
+roster-column alignment check. The [partial intake](RCLE_B07_EQUAL_UNIT_PARTIAL_INTAKE_20260912.md)
+adds only an opt-in eager snapshot representation on B07's reference path,
+preserving legacy defaults, the native kernel/addresses and the entire learned
+path. It records the added L0 caller sites, focused checks/review and unknown
+cause. Original result bytes and this object's scientific meaning remain intact.
+No further native invocation has occurred; the exact reference-only completion
+proposal is subject to the existing invocation rule, not budget arithmetic alone.

@@ -21,11 +21,13 @@
     "adoption_source": "Root native followup with MONITOR_ADOPTED; actual Monitor goal created without token budget",
     "observation_command_wall_s": null,
     "observation_cost_note": "No timing supplied in Root adoption payload; unknown, not zero and no extra query commissioned",
-    "terminal": "PENDING"
+    "terminal": "ROOT_FORWARDED_AND_DM_COLLECTED_EXIT2",
+    "terminal_at_utc": "2026-09-12T17:31:10Z",
+    "terminal_goal_state": "complete; active_set empty"
   },
   "collection_owner": "/root/dm_a_mx_rcle_intake",
   "root_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
-  "scientific_status": "Accepted running handle with actual unfinished Monitor goal adoption; destination admission and numerical artifacts await terminal collection; no scientific result accepted.",
+  "scientific_status": "One learned fit and two panels accepted as partial; reference primary missing after roster-column failure. Terminal evidence collected; no additional native invocation.",
   "known_support_command_and_dispatch_s": 30.7713295,
   "accounting_note": "Launch outer command includes embedded SSH elapsed; counted once. Monitor observation, later publication/collection/intake/cleanup/integration and unknown earlier tool/review tails remain. No native/support transfer."
 }
