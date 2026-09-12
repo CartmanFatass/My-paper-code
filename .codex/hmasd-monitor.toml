@@ -5,7 +5,8 @@ root_thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
 # Root uses the model and reasoning effort selected by the owner.
 # OWNER_DIRECT 2026-09-08: app heartbeat hmasd wakes this Root task every 20 minutes.
 # It services the existing workflow without another experiment observer or new budget.
-primary_checkout = 'C:\Projects\HMASD'
+# Current primary path; retained monitor_checkout is a historical task-cwd record.
+primary_checkout = "/home/fires/projects/HMASD"
 monitor_checkout = 'C:\Projects\HMASD'
 tracking_path = "docs/research/portfolio/EXPERIMENT_TRACKING.md"
 instructions_path = "docs/project/ROOT_OPERATIONS.md"

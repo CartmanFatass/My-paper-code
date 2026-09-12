@@ -51,6 +51,6 @@ description = "Optional routine implementation method."
 config_file = "./agents/hmasd-routine-implementer.toml"
 
 [mcp_servers.agentify-desktop]
-command = "node"
+command = "/mnt/c/Program Files/nodejs/node.exe"
 args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
 tool_timeout_sec = 2700
