@@ -1,5 +1,5 @@
 {
-  "status": "BOTH_TERMINAL_EVIDENCE_PRESERVED_FINAL_ROOT_RETENTION_PENDING",
+  "status": "COMPLETE_RECLAIMED_EVIDENCE_RETAINED",
   "owner": "/root/dm_a_mx_rcle_intake",
   "authoring_checkout": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906",
   "branch": "codex/rcle",
@@ -38,63 +38,75 @@
   "remote_targets": [
     {
       "path": "/home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912",
-      "exists": true,
-      "files": 2417,
-      "file_bytes": 48669048,
+      "exists": false,
       "sha": "1652c44ac65ed6e686610c3cfcff67dab1a0fc6b",
-      "tracked_status": "",
-      "registered": true,
+      "registered": false,
       "cleanup_owner": "/root/dm_a_mx_rcle_intake",
-      "cleanup_event": "Root confirms published final evidence integration/retention and accepts scoped reclamation"
+      "cleanup_event": "Completed after Root retention/integration acceptance; same DM verified absence.",
+      "files_before_cleanup": 2417,
+      "file_bytes_before_cleanup": 48669048,
+      "tracked_status_before_cleanup": "",
+      "disk_absence_verified": true,
+      "git_worktree_registration_absence_verified": true
     },
     {
       "path": "/home/wu/hmasd-inputs/rcle-b07-equal-unit-s27-20260912",
-      "exists": true,
-      "files": 2,
-      "file_bytes": 6801354,
+      "exists": false,
       "cleanup_owner": "/root/dm_a_mx_rcle_intake",
-      "cleanup_event": "Root confirms published final evidence integration/retention and accepts scoped reclamation"
+      "cleanup_event": "Completed after Root retention/integration acceptance; same DM verified absence.",
+      "files_before_cleanup": 2,
+      "file_bytes_before_cleanup": 6801354,
+      "disk_absence_verified": true,
+      "git_worktree_registration_absence_verified": true
     },
     {
       "path": "/home/wu/.agent-tasks/rcle-b07-equal-unit-s27-20260912",
-      "exists": true,
-      "files": 6,
-      "file_bytes": 3918,
-      "status": "failed",
+      "exists": false,
       "exit_code": 2,
       "pid": 3377723,
       "cleanup_owner": "/root/dm_a_mx_rcle_intake",
-      "cleanup_event": "Root confirms published final evidence integration/retention and accepts scoped reclamation"
+      "cleanup_event": "Completed after Root retention/integration acceptance; same DM verified absence.",
+      "files_before_cleanup": 6,
+      "file_bytes_before_cleanup": 3918,
+      "terminal_status_before_cleanup": "failed",
+      "disk_absence_verified": true,
+      "git_worktree_registration_absence_verified": true
     },
     {
       "path": "/home/wu/hmasd-worktrees/rcle-b07-reference-completion-s27-20260912",
-      "exists": true,
-      "files": 2410,
-      "file_bytes": 42951456,
+      "exists": false,
       "sha": "9eeef867f0adcf6d9a8ca9441781ad4ec2764a30",
-      "tracked_status": "",
-      "registered": true,
+      "registered": false,
       "cleanup_owner": "/root/dm_a_mx_rcle_intake",
-      "cleanup_event": "Root confirms published final evidence integration/retention and accepts scoped reclamation"
+      "cleanup_event": "Completed after Root retention/integration acceptance; same DM verified absence.",
+      "files_before_cleanup": 2410,
+      "file_bytes_before_cleanup": 42951456,
+      "tracked_status_before_cleanup": "",
+      "disk_absence_verified": true,
+      "git_worktree_registration_absence_verified": true
     },
     {
       "path": "/home/wu/hmasd-inputs/rcle-b07-reference-completion-s27-20260912",
-      "exists": true,
-      "files": 3,
-      "file_bytes": 3530006,
+      "exists": false,
       "cleanup_owner": "/root/dm_a_mx_rcle_intake",
-      "cleanup_event": "Root confirms published final evidence integration/retention and accepts scoped reclamation"
+      "cleanup_event": "Completed after Root retention/integration acceptance; same DM verified absence.",
+      "files_before_cleanup": 3,
+      "file_bytes_before_cleanup": 3530006,
+      "disk_absence_verified": true,
+      "git_worktree_registration_absence_verified": true
     },
     {
       "path": "/home/wu/.agent-tasks/rcle-b07-reference-completion-s27-20260912",
-      "exists": true,
-      "files": 6,
-      "file_bytes": 3633,
-      "status": "finished",
+      "exists": false,
       "exit_code": 0,
       "pid": 3380786,
       "cleanup_owner": "/root/dm_a_mx_rcle_intake",
-      "cleanup_event": "Root confirms published final evidence integration/retention and accepts scoped reclamation"
+      "cleanup_event": "Completed after Root retention/integration acceptance; same DM verified absence.",
+      "files_before_cleanup": 6,
+      "file_bytes_before_cleanup": 3633,
+      "terminal_status_before_cleanup": "finished",
+      "disk_absence_verified": true,
+      "git_worktree_registration_absence_verified": true
     }
   ],
   "keep": [
@@ -103,7 +115,10 @@
     "shared /tmp/hmasd_rcle_tbcfv_native cache",
     "all unrelated worktrees"
   ],
-  "deletion_performed": false,
-  "root_existing_integration": "71198147e accepted original partial evidence and reference-only repair; new complete intake awaits Root integration/retention acceptance.",
-  "retirement_event": "Root confirms final publication/retention and accepts six named remote paths; same DM then removes and verifies disk and worktree registration absence. No scientific work remains."
+  "deletion_performed": true,
+  "root_existing_integration": "Original partial/repair accepted through71198147e; complete result/retention accepted through2a53388b8.",
+  "retirement_event": "Completed; no pending remote reclamation for this allocation. Shared authoring, source bundles, raw/archives and published evidence retained.",
+  "root_final_integration_acceptance": "Root accepted final integration/retention through main2a53388b8 and explicitly assigned exactly six named remote removals.",
+  "cleanup_receipt": "b07_equal_unit_20260912/CLEANUP_RECEIPT.json",
+  "verified_at_utc": "2026-09-12T18:24:31.357996+00:00"
 }
