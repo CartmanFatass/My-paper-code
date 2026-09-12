@@ -11,7 +11,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | RCLE | Original-node intake accepted at main8973c0515: HOLD only tested equal-unit/.99-prior/FLEX/final1000 spending; direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice from refreshed evidence; no repeated recipe, fit or consultation |
 | FOLR | Entity-history readiness integrated at main3bc742a85; fixed205120ticks/9938updates, new costs unknown | Bound Portfolio E decision is in accepted provider generation; no implementation before grant |
 | ACPS | B01 accepted ADVERSE; four-target cleanup accepted at main3d3ef453c, archives retained and no run remains | Continuation need is retained for the next clean Portfolio request; direction remains ACTIVE/HIGH and queued need does not count as advancing work |
-| CADC | LEARNED/RR both finished exit0 (195s/180s) at source22e009c93; terminal facts delivered | Original DM collects/accepts complete pair, publishes scientific intake/preservation and scoped cleanup; no retry/extra arm |
+| CADC | B01 accepted ADVERSE at main9111b9b1e/363bda2a0: LEARNED−RR net −.0133549213,10positive/22adverse; archives retained | Original DM performs only four-target scoped cleanup and returns the next-use need; no retry/extra arm/successor |
 | Portfolio | ACVC/FOLR/RCLE/FSD K/E/L/U response completed and archived exactly once at mainde02dc94d | Designated DM checks and intakes four distinct investment/lifecycle decisions; no grant or stop inferred before intake |
 
 Actual advancing directions5: CADC has active accountable DM intake; the complete Portfolio K/E/L/U
