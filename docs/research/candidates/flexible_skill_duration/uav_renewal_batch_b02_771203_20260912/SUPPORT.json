@@ -120,15 +120,64 @@
     {
       "purpose": "single actionable I launch Relay handoff",
       "wall_seconds": 0.143
+    },
+    {
+      "purpose": "actual I goal adoption record and commit",
+      "wall_seconds": 0.820552
+    },
+    {
+      "purpose": "actual I adoption push and clean-state read",
+      "wall_seconds": 4.2829603
+    },
+    {
+      "purpose": "paired terminal card/source/intake-method read",
+      "wall_seconds": 0.2590802
+    },
+    {
+      "purpose": "paired terminal primary owner/relay/audit read",
+      "wall_seconds": 0.4872049
+    },
+    {
+      "purpose": "I raw collection and terminal receipt publication",
+      "wall_seconds": 0.8523515
+    },
+    {
+      "purpose": "read recorded component/diagnostic shapes",
+      "wall_seconds": 0.2059195
+    },
+    {
+      "purpose": "read actual paired source return and prior analysis surface",
+      "wall_seconds": 0.2008773
+    },
+    {
+      "purpose": "I/pair technical intake, predeclared reduction and independent-run descriptive summary",
+      "wall_seconds": 0.5573203
+    },
+    {
+      "purpose": "read-only four-target cleanup inventory and22 raw byte matches",
+      "wall_seconds": 1.0502245
+    },
+    {
+      "purpose": "paired component and support arithmetic",
+      "wall_seconds": 0.2308374
+    },
+    {
+      "purpose": "read existing supervisor time boundaries for elapsed-path analysis",
+      "wall_seconds": 0.2457446
+    },
+    {
+      "purpose": "final E0/intake/execution/audit/owner trace, brief and link checks",
+      "wall_seconds": 0.507665
     }
   ],
-  "known_support_wall_seconds": 56.043227599999994,
+  "known_support_wall_seconds": 65.7439651,
   "counting": "Each known enclosing invoked command once. Initial batched output had one unavailable command wall; apply_patch, current owner-card preparation and later operations are recorded where measured or explicit unknown. Agent/provider/calendar time separate.",
   "unknown": [
     "one initial batched read command wall unavailable in truncated output",
-    "apply_patch execution interval where tool reports rounded zero",
-    "future Monitor/relay/client and Root integration terms",
-    "current actual-adoption record publication and later integration until measured"
+    "apply_patch execution intervals where tool reports rounded zero",
+    "Monitor command cost not included in terminal receipts; no extra observation query",
+    "Relay service/client and send interval rounding",
+    "Root integrations and final publication/cleanup until attributed"
   ],
   "source_delivery_transactions": 1,
   "scientific_submissions": 2,
@@ -139,6 +188,13 @@
     "nested_not_readded": true
   },
   "native_wall_seconds": {
-    "D0": 475.03
-  }
+    "D0": 475.03,
+    "I": 1042.92
+  },
+  "native_pair_wall_seconds": 1517.95,
+  "aggregate_cpu_seconds": 5999.42,
+  "claim": "Native arm and sum caps pass; no observed breach. Support/complete total remains partially unmeasured, not certified from subtotal.",
+  "known_native_plus_support_seconds": 1583.6939651,
+  "supervisor_study_elapsed_seconds": 1798.0,
+  "study_elapsed_boundary": "D0 supervisor start to I terminal log; one-second timestamp resolution, includes inter-arm collection/publication gap; not summed native wall or a study cap."
 }
