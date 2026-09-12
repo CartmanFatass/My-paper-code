@@ -1,0 +1,323 @@
+{
+  "checked_at_utc": "2026-09-12T16:06:31.767507+00:00",
+  "request_id": "2026-09-12-post-sa-marginal-investment-01",
+  "input_sha": "1f567596389eab00f48be2a10bb981cee785dca4",
+  "reference_count": 30,
+  "fixed_references": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/SCIENCE_BRIEF.md",
+      "effective_sha": "1f567596389eab00f48be2a10bb981cee785dca4",
+      "bytes": 22001,
+      "sha256": "9e2b33834f722007ad5630223e73f070ae04a9467c2306fc4e9ad51ed6743a88",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/FACTS.json",
+      "effective_sha": "1f567596389eab00f48be2a10bb981cee785dca4",
+      "bytes": 17456,
+      "sha256": "04819bb85e96839d1ceac83ab138035f50dd499fcfe871853f7c180d98be6dbf",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/PREPARATION_INTAKE.md",
+      "effective_sha": "1f567596389eab00f48be2a10bb981cee785dca4",
+      "bytes": 4612,
+      "sha256": "4fdeab866f80235609bf458f5ee7648d07d5e80141913abe37a5b24850096dad",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/ORACLE_RECOMMENDATIONS_20260911.md",
+      "effective_sha": "1f567596389eab00f48be2a10bb981cee785dca4",
+      "bytes": 17035,
+      "sha256": "bba2547b8093c161828ffec198e19c8f7eebeeff25be4ea4963a53f9c3e398e7",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/OWNER_PACKET.json",
+      "effective_sha": "1f567596389eab00f48be2a10bb981cee785dca4",
+      "bytes": 4484,
+      "sha256": "3c55e1e1b61f8b8cd583169ab9cacf223404b7b0d6a453af480d9c6b00c03385",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/ISSUE_SNAPSHOT.json",
+      "effective_sha": "1f567596389eab00f48be2a10bb981cee785dca4",
+      "bytes": 29184,
+      "sha256": "9d2c9847db70c23d1393027876ef9063e976d14cdeddc2a99b14304746e71bf1",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 45124,
+      "sha256": "89fee75557747ee3f70ab9bd6842fc388ac6c901fab9f320807deb79b2643ff1",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 12989,
+      "sha256": "5f135cd7fe7dfd22bcd1a56e2444da3c54321a1ff3603c4afc0f514bb87d14dd",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 11428,
+      "sha256": "fb3ccd5f74c44a1f14e3de638dbc4b4fa7087fc79deacd2b84951760ad3d6c36",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 9585,
+      "sha256": "7693dd442fd18f6db35ae64f9e495689e664670405bd68d7c3d8b00fc38ee2b1",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 4490,
+      "sha256": "d9dcbfff31ccf0699562b93f65a2eefa4a3dea6b000870b938796785240e8cec",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/INTAKE.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 10821,
+      "sha256": "c3ab550a70d4ee23049928a9aba5d04649bb03e5e0caa3605a02ea4ae45a06ba",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 18863,
+      "sha256": "87a558c1086f9bf6da496751a18d1fb31cd7ee65aaa5252a377c999d3f057e7e",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 30523,
+      "sha256": "74a63c8dc7ab4f31e01d5c77ffd1849bca692d8ed5e5351d7cb2f6af5d7239c9",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_PUBLIC_STREAM_B_SCIENCE_CARD_20260912.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 11213,
+      "sha256": "b5ae2f93f83c85c441da03541aff478f26f3b28906273a8fdf568f2f77f01d10",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_S_READINESS_INTAKE_20260912.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 10237,
+      "sha256": "69ced8bd9fc8060c3ab7ec99b7b3c55f493e82907bad045b699b7b0b2585c141",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_S_FACTS_20260912.json",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 2306,
+      "sha256": "c1bab355e483dfc3c7699ee4abd34d27f91bf8073c2e7e780f56cea22bc911ee",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_CHANNEL_NORMALIZATION_CONVERGENCE_INTAKE_20260912.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 17815,
+      "sha256": "6293744f2aa6102ceadfe81341515442490ee6d9c411de17d623d1e5cf663bcd",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 16984,
+      "sha256": "746fb3f7feebbcb3ece119ff83f4bbf6299ba84203b1e2a9bdba9370dba4cae0",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 12341,
+      "sha256": "d05b5042a4be39cea9c00c37c505e6d2974b11f86f4cc3c90c5db12ea0f6e1e7",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 37709,
+      "sha256": "8182e6155be27f59c327907a7ad3c2eb507884863c77791c4fd89ffffb27e74b",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md",
+      "effective_sha": "e71dc18f6204c929992144d3a9c746b04d28638e",
+      "bytes": 8266,
+      "sha256": "3fd40f455a3f02f37bd4caf3e93c87ebdf0d1efd6e5028ce7d6ad91467f6ae76",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/archive/RESPONSE.md",
+      "effective_sha": "86428c9e87fc4c61888b5638781603038c39399d",
+      "bytes": 61049,
+      "sha256": "4df3f15cc8d052bc179ced28ce443f7fe0c8b7c87b24927e1f5f89cab754ce7e",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/archive/RESPONSE.md",
+      "effective_sha": "4d50f9a6a2d125e373b414499d580f875c1fc61c",
+      "bytes": 36101,
+      "sha256": "8cd3e390ddf738759b2ccd5a0dda7740fff65b36959aeb3839139e5ceed88428",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260911_channel_normalization_convergence/archive/RESPONSE.md",
+      "effective_sha": "02e8973fa06931d363fa4b096ba63c1f82b18e2d",
+      "bytes": 41605,
+      "sha256": "1dc39fa0cb88d1042bee07ff1d29bd242abdb29c49a658385deab3b93c34d4f6",
+      "observed_published_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    }
+  ],
+  "scientific_exposure": 0,
+  "provider_sends": 0,
+  "status": "ALL_EXACT_PATHS_EXIST_AND_COMMITS_REACH_OBSERVED_PUBLISHED_REFS"
+}
