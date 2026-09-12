@@ -1,0 +1,531 @@
+{
+  "recorded_utc": "2026-09-12T23:32:56.138508+00:00",
+  "state": "DECISION_READY_AUTHOR_RECOMMENDATIONS_NOT_GRANTED",
+  "assignment": "Root next clean Portfolio question after complete K/E/L/U intake; ACPS, CADC, MGTAP and FSD separately refreshed",
+  "author": "/root/dm_a_mx_portfolio_resume",
+  "author_uuid": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+  "source_manifest": [
+    {
+      "group": "ACPS",
+      "sha": "bc4abbe937297f466406800aba607c421cc8398c",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_CONTINUATION_NEED_20260912.md",
+      "git_bytes": 2659,
+      "sha256": "1da435d20e1e2c9e5524ce3e6abc3abdefab8809a294624d69f2dc7e65506e38"
+    },
+    {
+      "group": "ACPS",
+      "sha": "bc4abbe937297f466406800aba607c421cc8398c",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_INTAKE_20260912.md",
+      "git_bytes": 7281,
+      "sha256": "a94b7772cdefc8354dfc57991caeea530d43c02e16ce829dc36ce3c254ebe803"
+    },
+    {
+      "group": "ACPS",
+      "sha": "bc4abbe937297f466406800aba607c421cc8398c",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_RESULT_EVIDENCE_20260912.md",
+      "git_bytes": 6182,
+      "sha256": "96ca990b1a39ecc190f22a4d2cb07ef771d3d9035da12408ad0878e865256b6a"
+    },
+    {
+      "group": "ACPS",
+      "sha": "bc4abbe937297f466406800aba607c421cc8398c",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_SCIENCE_CARD_20260912.md",
+      "git_bytes": 11352,
+      "sha256": "f1215cb85d96dd6b28d687e4190baa7f486a9884e1c180db60500783c566b930"
+    },
+    {
+      "group": "ACPS",
+      "sha": "bc4abbe937297f466406800aba607c421cc8398c",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/DIRECTION.md",
+      "git_bytes": 4888,
+      "sha256": "8853f5e4156a7aa652e3b4f130a9311ff334c1c5c772196a2bd0f134ea081e31"
+    },
+    {
+      "group": "CADC",
+      "sha": "6ce0966c957c7420024b67834617e122caf874de",
+      "path": "docs/research/candidates/contention_aware_decentralized_communication/CADC_B01_INTAKE.md",
+      "git_bytes": 8943,
+      "sha256": "b981725a22d0dfb86886e04d331795fe7e71a5d3048e840bfc937f2e1a6ef0f6"
+    },
+    {
+      "group": "CADC",
+      "sha": "6ce0966c957c7420024b67834617e122caf874de",
+      "path": "docs/research/candidates/contention_aware_decentralized_communication/CADC_B01_RESULT.md",
+      "git_bytes": 4948,
+      "sha256": "fdfb4562dca3aa1acee8d9cfecfc36158072d622a0909ca40ef1a74efce23512"
+    },
+    {
+      "group": "CADC",
+      "sha": "6ce0966c957c7420024b67834617e122caf874de",
+      "path": "docs/research/candidates/contention_aware_decentralized_communication/CADC_B01_CARD.md",
+      "git_bytes": 12655,
+      "sha256": "f82105d386d31234f630f6273b479e5c1e4f016c5d78d58304b7db39e507f7e5"
+    },
+    {
+      "group": "CADC",
+      "sha": "6ce0966c957c7420024b67834617e122caf874de",
+      "path": "docs/research/candidates/contention_aware_decentralized_communication/DIRECTION.md",
+      "git_bytes": 5579,
+      "sha256": "c31d10d12003d32dfd1f9aead54ef62222a1dd5d4acd1f4ae3e537009030592a"
+    },
+    {
+      "group": "CADC",
+      "sha": "6ce0966c957c7420024b67834617e122caf874de",
+      "path": "docs/research/candidates/contention_aware_decentralized_communication/CADC_B01_CLEANUP.md",
+      "git_bytes": 3546,
+      "sha256": "84b9b4dbae025b16baf1254e53134cb2c49520d1e5173c85d8824315eedb35f0"
+    },
+    {
+      "group": "MGTAP_current",
+      "sha": "8e2c19542adb01ad2525460fa7e6e4ddfe4b8382",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_TOP_QUERY_B01_INTAKE_20260912.md",
+      "git_bytes": 10681,
+      "sha256": "aa965de8e075a7c9c1ff3ecdf3162cb299236bebebaffd495e3570a18bc0fb50"
+    },
+    {
+      "group": "MGTAP_current",
+      "sha": "8e2c19542adb01ad2525460fa7e6e4ddfe4b8382",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "git_bytes": 55287,
+      "sha256": "c83c7f162c098fad6dcdb3e6d4b564ea5df3b73a501a45fb8e9c748cc7ab027f"
+    },
+    {
+      "group": "FSD",
+      "sha": "bc8d619db494bbbb23d32a70c846dee92fbfb083",
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_POST_FIVE_PAIR_DECISION_INPUT_20260912.md",
+      "git_bytes": 10510,
+      "sha256": "02359bc808ab9b7a2ff410d9251659dc32900a8ae3e4585ef21ab491cfe6005e"
+    },
+    {
+      "group": "FSD",
+      "sha": "bc8d619db494bbbb23d32a70c846dee92fbfb083",
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+      "git_bytes": 10798,
+      "sha256": "5405a6ba05dc2d5c613a6aa0bc1ca0989dbcbc8f33d4e4bff072947310ace4e5"
+    },
+    {
+      "group": "FSD",
+      "sha": "bc8d619db494bbbb23d32a70c846dee92fbfb083",
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "git_bytes": 55343,
+      "sha256": "7c0ea28b8865181d5f3df8cefe43ef5923c13cd8bfaa40e3de4daa6c087d4998"
+    },
+    {
+      "group": "current_control",
+      "sha": "f9c320b4e98f3677fd2a617218b447da17afd1a7",
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "git_bytes": 12156,
+      "sha256": "aa5a456da448362f20899509e6d97454bc1daf485982a5acafb2e248bc5f84f1"
+    },
+    {
+      "group": "current_control",
+      "sha": "f9c320b4e98f3677fd2a617218b447da17afd1a7",
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "git_bytes": 4044,
+      "sha256": "d6a0591fe2176f0b3e46f9832c43b5ecf0464107f678e212736e314251f39739"
+    },
+    {
+      "group": "accepted_KELU",
+      "sha": "1c970ce99fbb0497b437f523e5951e03a07452b3",
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/INTAKE.md",
+      "git_bytes": 12788,
+      "sha256": "10b947d3d37aa3c34ffa3f38bf78e19e77c755deb32bb8848aaac317d8e71d6c"
+    },
+    {
+      "group": "accepted_KELU",
+      "sha": "1c970ce99fbb0497b437f523e5951e03a07452b3",
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/EXECUTION_MAPPING.md",
+      "git_bytes": 12042,
+      "sha256": "2d36e1dc8fe8ce9d0382067a3a446da42640dd8a91080563a51aa42c4e599cb6"
+    },
+    {
+      "group": "accepted_KELU",
+      "sha": "1c970ce99fbb0497b437f523e5951e03a07452b3",
+      "path": "docs/research/portfolio/decisions/2026-09-12-existing-four-direction-investment.md",
+      "git_bytes": 4050,
+      "sha256": "1c9ec88b7832ce911c6262600205e67b3893a7faed25185a7075a4e704decb88"
+    },
+    {
+      "group": "MGTAP_next_use",
+      "sha": "e854bd6f11b3ca0b95783fbd6fc49c75b6095ed3",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md",
+      "git_bytes": 9396,
+      "sha256": "825359aacb14fb0c815d474dab0e0f3dec72733a6da4954aa75d1c0421bf7337"
+    },
+    {
+      "group": "MGTAP_next_use",
+      "sha": "e854bd6f11b3ca0b95783fbd6fc49c75b6095ed3",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/next_use_20260912/EXPOSURE_AND_COST.json",
+      "git_bytes": 1793,
+      "sha256": "9a6a9dc682cc294f1fa09b4ea455f158244f20d6aa8cab3a189c72fd239831ae"
+    }
+  ],
+  "registry": [
+    {
+      "direction": "active_post_churn_population_flow_identification",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "actuator_conditioned_partial_sharing",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "acvc",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "capability_bound_semantic_currentness",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "contention_aware_decentralized_communication",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "commitment_residual_triggered_options",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "cross_play_compatible_population_learning",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "degraded_incumbent_shadow_handover",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "ec4g_r1",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "eociv_lite",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "expressibility_gated_renewal_credit_relay",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "finite_resource_relational_inductive_efficiency",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "flexible_skill_duration",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "learned_counterfactual_agent_credit",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "metric_ground_transport_allocation",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "orbit_shadow_read",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "recct_lite",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "roster_consistent_latent_exploration",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "scope_1s",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "semigroup_consistent_duration_model_policy",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "tail_return_distributional_learning",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "ucope",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "vap_folr_core",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "variable_n_fleet_churn",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "vsp_02",
+      "lifecycle": "ACTIVE",
+      "priority": "LOW"
+    },
+    {
+      "direction": "vsp_03",
+      "lifecycle": "ACTIVE",
+      "priority": "LOW"
+    },
+    {
+      "direction": "vsp_c1",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    }
+  ],
+  "current_control_read": {
+    "source_sha": "f9c320b4e98f3677fd2a617218b447da17afd1a7",
+    "reported_actual_directions": [
+      "ACVC K",
+      "FOLR E",
+      "RCLE L",
+      "FSD U",
+      "MGTAP authoring"
+    ],
+    "not_a_live_handle_observation": true,
+    "stale_overview_excluded": "Root removed the superseded overview at this fixed published revision. Reported preparation snapshot, not a live-handle observation.",
+    "rule": "Five is a rolling actual-direction target, not number of new grants; no ended allocation implies lifecycle stop."
+  },
+  "ACPS": {
+    "lifecycle": "ACTIVE",
+    "priority": "HIGH",
+    "recasts": 0,
+    "DM": "/root/dm_acps_start",
+    "checkout": "C:/Projects/HMASD-worktrees/codex-acps",
+    "branch": "codex/acps",
+    "observed_delta_J": -0.03680814181453545,
+    "conditional_SE": 0.011388491823247962,
+    "positive_worlds": 7,
+    "adverse_worlds": 25,
+    "trained_pairs": 1,
+    "reading": "ADVERSE; informed SHARED preferred for observed pair only",
+    "observed_native_seconds": 361.04,
+    "future_cap_offer": "NONE/UNKNOWN",
+    "future_native_support_complete_forecast": "UNKNOWN",
+    "headroom": "matching tuned same-information heterogeneous host record absent",
+    "original_DM_refresh": "Prefer one fresh unscreened unchanged pair if Portfolio buys more evidence; preserve all32 J contrasts and strong informed SHARED. Alternative: current SHARED use and no new exact-recipe spending; no accepted distinct-use design. No new master/object/cap selected.",
+    "scientific_runtime_sha": "2302072e2dcb7aa0c4ee2f71572ef8ca67cd9a46",
+    "remote_closeout_sha": "bc4abbe937297f466406800aba607c421cc8398c",
+    "local_scratch": "creator-owned policy-restricted scratch remains per Root retention instruction; separate from valid result and completed remote cleanup"
+  },
+  "CADC": {
+    "lifecycle": "ACTIVE",
+    "priority": "HIGH",
+    "recasts": 0,
+    "DM": "/root/dm_cadc_start",
+    "checkout": "C:/Projects/HMASD-worktrees/codex-cadc",
+    "branch": "codex/cadc",
+    "observed_net_delta_J": -0.01335492130082991,
+    "observed_physical_delta_J": -0.012099183996142408,
+    "observed_extra_charge_per_H": 0.001255737304687501,
+    "conditional_SE": 0.007814793458,
+    "positive_worlds": 10,
+    "adverse_worlds": 22,
+    "trained_pairs": 1,
+    "reading": "ADVERSE; strongest attained legal reference RR",
+    "observed_native_seconds": 375.34,
+    "future_cap_offer": "NONE/UNKNOWN",
+    "future_native_support_peak_cost": "UNKNOWN",
+    "headroom": "matching tuned same-information new channel/reward host record absent",
+    "original_DM_refresh": "Explicitly recommend no fresh unchanged CADC-B01 pair now: no new concrete use makes another training-history observation change current action. Broad communication unlearnability and a collision cause are not established; no distinct new B is ready. Portfolio alone decides any design investment or lifecycle.",
+    "scientific_runtime_sha": "22e009c9387f2507aab6ebab4555d92e27f5070e",
+    "remote_closeout_sha": "6ce0966c957c7420024b67834617e122caf874de",
+    "local_scratch": "creator-owned policy-restricted synthetic scratch remains; no effect on valid paired primary"
+  },
+  "MGTAP": {
+    "lifecycle": "ACTIVE",
+    "priority": "MEDIUM",
+    "recasts": "preserve existing history; no new recast, not reinitialized",
+    "DM": "/root/dm_mgtap_m_pair",
+    "checkout": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904",
+    "branch": "codex/mgtap",
+    "TOP_delta_J": -0.0684509798102144,
+    "TOP_conditional_SE": 0.009502685781897066,
+    "positive_worlds": 4,
+    "adverse_worlds": 28,
+    "TOP_pairs": 1,
+    "prior_mean_COND_points": [
+      0.005761321371348559,
+      -0.02246957345594415,
+      0.02447811898058116
+    ],
+    "observed_TOP_native_seconds": 377.11,
+    "headroom": "matching tuned same-information native host record absent; older coordinate diagnostics remain separate",
+    "default": "DENSE",
+    "current_original_DM_refresh": "Published e854bd6f: one new original-Convergence use/design decision and full intake to select or refuse deliberate COND512/intact-DENSE768. No empirical purchase. Complete documentary cost UNKNOWN. No TOP repeat, fourth unchanged COND, query search or new host option.",
+    "future_consultation_cost": "UNKNOWN; one question and complete intake only",
+    "new_numerical_cap_offer": "NONE; future B unselected and unfunded"
+  },
+  "FSD": {
+    "lifecycle": "ACTIVE",
+    "priority": "HIGH",
+    "recasts": "preserve existing history; no new recast, not reinitialized",
+    "DM": "/root/dm_fsd_d_pair",
+    "checkout": "C:/Projects/HMASD-worktrees/codex-fsd",
+    "branch": "codex/fsd",
+    "five_separate_deltas_J": [
+      0.05697746721968016,
+      0.206285904082309,
+      -0.012430430599850807,
+      0.012554805665750726,
+      0.0737976491890039
+    ],
+    "latest_D0_I_native_seconds": [
+      458.8,
+      987.99
+    ],
+    "headroom": "matching tuned same-information renewal UAV host record absent; older conditional diagnostics remain separate",
+    "current_U": "One original-Convergence use judgment/full intake funded by K/E/L/U; no empirical allowance. Do not duplicate it or require B-LONG-D0 before it.",
+    "new_proposal": "One fresh I1280-five-update vs authentic D0-long-ten-update pair, sole32-world final per arm, MEI .01 J",
+    "new_offer_not_granted": {
+      "D0_long_arm_seconds": 1800,
+      "I_arm_seconds": 1800,
+      "native_sum_seconds": 3600,
+      "support_seconds": 300,
+      "complete_seconds": 3900,
+      "single_delivery_seconds_within_support": 45
+    },
+    "forecast": "D0-long wall, future I/complete support UNKNOWN; ten updates not exact equal time",
+    "new_code_ready": false,
+    "latest_original_DM_refresh": "Direct native reply 2026-09-12: retain B-LONG-D0 this round while already-purchased U identifies a concrete use decision. A marginal-value recommendation, not mandatory consultation-first or a B launch gate. U and other directions continue.",
+    "current_author_recommendation": "No new LONG investment this round; preserve candidate and already-funded U. Revisit if actual optional-use decision is sensitive to extra ordinary training."
+  },
+  "prospective_configuration_arithmetic": {
+    "ACPS_replication_if_selected": {
+      "fits": 2,
+      "train_episodes_per_arm": 512,
+      "final_episodes_per_arm": 32,
+      "horizon": 256,
+      "team_ticks": 278528,
+      "adam": 2048,
+      "collection_eval_actor_rows": 1392640,
+      "replay_actor_rows": 5242880,
+      "adapter_parameters": 1340,
+      "search_candidates": 0
+    },
+    "CADC_unchanged_replication_counteroption_if_selected": {
+      "fits": 2,
+      "train_episodes_per_arm": 512,
+      "final_episodes_per_arm": 32,
+      "horizon": 256,
+      "team_ticks": 278528,
+      "adam": 2048,
+      "sender_tick_opportunity_upper": 1392640,
+      "not_recommended_by_original_DM": true,
+      "search_candidates": 0
+    },
+    "FSD_LONG_if_selected": {
+      "fits": 2,
+      "constructors": 4,
+      "rollout_updates": 15,
+      "train_team_ticks": 120000,
+      "final_team_ticks": 32000,
+      "total_team_ticks": 152000,
+      "agent_opportunities": 912000,
+      "batched_controller_calls": 8500,
+      "D0_coordinator_optimizer_steps": 1050,
+      "I_coordinator_optimizer_upper": 525,
+      "search_candidates": 0
+    },
+    "MGTAP_unselected_example": {
+      "purpose": "Intentional COND512 versus intact DENSE768 use-of-training comparison, not equal-budget comparison, no unchanged repeat",
+      "arms": {
+        "COND512": {
+          "train_episodes": 512,
+          "final_episodes": 32,
+          "train_team_ticks": 131072,
+          "final_team_ticks": 8192,
+          "rollouts": 256,
+          "adam_calls": 1024,
+          "actor_row_uses": 3317760,
+          "train_reset_offsets": [
+            1000,
+            1511
+          ],
+          "final_reset_offsets": [
+            2000,
+            2031
+          ]
+        },
+        "DENSE768": {
+          "train_episodes": 768,
+          "final_episodes": 32,
+          "train_team_ticks": 196608,
+          "final_team_ticks": 8192,
+          "rollouts": 384,
+          "adam_calls": 1536,
+          "actor_row_uses": 4956160,
+          "train_reset_offsets": [
+            1000,
+            1767
+          ],
+          "final_reset_offsets": [
+            2000,
+            2031
+          ]
+        }
+      },
+      "pair": {
+        "episodes": 1344,
+        "team_ticks": 344064,
+        "adam_calls": 2560,
+        "actor_row_uses": 8273920
+      },
+      "numerical_native_support_complete_costs": "UNKNOWN; no models, pilot, per-step rate or numerical budget inferred",
+      "fresh_master": "unassigned"
+    }
+  },
+  "author_exposure": {
+    "scientific_invocations": 0,
+    "model_or_rng": 0,
+    "raw_outcome_analysis": 0,
+    "training": 0,
+    "evaluation": 0,
+    "tests_or_profiling": 0,
+    "Pro_Send": 0,
+    "operations": "document reading and integer configuration arithmetic only",
+    "complete_support": "UNKNOWN"
+  },
+  "owner_reviews": [],
+  "no_current_allocation_or_lifecycle_decision": true,
+  "integer_arithmetic_checked": true,
+  "author_recommendations": {
+    "ACPS": "one fresh unscreened same-comparison B if Portfolio accepts newly explicit full caps; no existing cap offer or grant",
+    "CADC": "no unchanged repeat; recommend explicit reversible Portfolio PARK, versus one bounded no-numerical design or ACTIVE/no addition",
+    "MGTAP": "one original-node use/design question and complete intake; no B grant",
+    "FSD": "retain LONG without present additional funding; already-funded U continues"
+  },
+  "author_recommendations_are_not_dispositions": true,
+  "input_sync_commits_not_for_root_cherry_pick": [
+    "32afc7b7e2b37176adf5776482221b3ebafebbd8",
+    "4245225a08646a3842f23c72a599fec4e580365f",
+    "f2d7d5b82e34a1e073fc78b69a1f602e2b7f64f2"
+  ],
+  "mechanical_issue": "One overlong Windows exec command rejected before acceptance with os error206 (filename or extension too long); split writes used, no scientific exposure or scope change.",
+  "owner_item": "20260912-root-019",
+  "owner_item_state": "P2 planned author recommendations; auto_applied absent"
+}
