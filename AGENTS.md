@@ -530,8 +530,7 @@ appendix and completed historical tasks remain unchanged.
 
 
 - Native custom subagents are registered in `.codex/config.toml`: Direction Manager,
-  Implementer, Scout, Reviewer, Critic, Verifier and Operator. Root defaults to
-  `gpt-5.6-sol/low`; DM to `gpt-6-astra/max`; Implementer to `gpt-5.6-sol/medium`;
+  Implementer, Scout, Reviewer, Critic, Verifier and Operator. Root follows the Codex app model/effort selection; DM defaults to `gpt-6-astra/max`; Implementer to `gpt-5.6-sol/medium`;
   Reviewer to `gpt-6-astra/high` with read-only access. Other specialist model settings
   are unchanged. CM, Routine Implementer and the dedicated Terra/high workflow-outsource
   path are retired. Configurations take effect after restart; Codex App provides native

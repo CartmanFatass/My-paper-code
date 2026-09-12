@@ -1,0 +1,35 @@
+{
+  "source_sha": "d76d96cbe3df9b598e0db695a8b39deb23e7bdb1",
+  "command": [
+    "/usr/bin/timeout",
+    "--signal=KILL",
+    "20s",
+    "/home/wu/.venvs/hmasd/bin/python",
+    "-X",
+    "faulthandler",
+    "-m",
+    "pytest",
+    "-q",
+    "-s",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912/temp/directions/variable_n_fleet_churn/test/owned-mean-20260912",
+    "tests/experiments/candidates/variable_n_fleet_churn_bpcr_r09/test_owned_exact_mean.py"
+  ],
+  "env": {
+    "PYTHONMALLOC": "debug",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "python_version": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+  "returncode": 0,
+  "stdout": "{\"completed_forward_backward_applications\": 256, \"retained_input_sha256\": \"b75af3ba32ead6bfc5d08069ff579658643c2cc301818f2493703c3abde87a7a\", \"mean_sha256\": \"92e005521234d95c422df6e3e9800874fa2b552ab2c79606099f50b6d5811bd7\", \"input_shape\": [24, 7, 64], \"optimizer_steps\": 0, \"model_instances\": 0, \"environment_instances\": 0, \"scientific_rng_calls\": 0, \"torch\": \"2.7.0+cu118\", \"numpy\": \"1.26.3\", \"threads\": 1}\n.\n1 passed in 2.60s\n",
+  "stderr": "",
+  "complete_process_elapsed_seconds": 3.1772158649982885,
+  "scientific_submissions": 0,
+  "test_scratch_absent": true,
+  "test_cleanup_seconds": 0.00010737206321209669,
+  "retained_receipt": "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912/temp/directions/variable_n_fleet_churn/exp/owned_mean_check_20260912.json"
+}

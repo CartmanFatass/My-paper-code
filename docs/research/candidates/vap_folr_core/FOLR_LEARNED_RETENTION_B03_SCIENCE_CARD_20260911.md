@@ -21,6 +21,13 @@ checkout at the original source SHA. Materialize the original ten files plus
 Static import closure and scoped source materialization are the changed contract.
 See [resumption facts](evidence/2026-09-12-folr-learned-retention-b03-resumption.json).
 
+Final update 2026-09-12: both original arms completed and passed technical
+acceptance. The unchanged rule gives **RETAIN_ABOVE_MEI**, d_LR = -1.215546875.
+The DM's low-confidence WITHIN_MEI prediction missed; owner prediction was not
+taken. Both terminal notices reached Root and the Monitor goal completed.
+The [final intake](FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md#final-technical-and-scientific-intake--2026-09-12)
+ends this finite allocation without an automatic successor or family disposition.
+
 ## Authority, question and finite unit
 
 Portfolio response `f4bbe6cae2d351b4c80c5e0d9d66690d337749ce` selects F+U,
@@ -158,9 +165,10 @@ Complete current support and cost remain unknown until measured; no cost pilot
 or new gate follows. A concrete integrity/resource/cost limitation stops dependent
 work and preserves narrower facts, without replacement, retuning or retry.
 
-For each accepted handle send MONITOR_ADD directly to live primary Monitor
-`01a087e5-2044-7301-abb6-7a1709a98197`, explicitly requiring actual unfinished-goal
-and handle adoption. Dispatch receipt and adoption are distinct. After adoption
+For each accepted handle read `C:/Projects/HMASD/.codex/hmasd-monitor.toml`
+and send MONITOR_ADD directly to its current Monitor, explicitly requiring actual
+unfinished-goal and handle adoption. Historical endpoints are not current routing.
+Dispatch receipt and adoption are distinct. After adoption
 stop routine polling and return pending collection; Root routes terminal facts
 to this DM. Check exact source/arm/seeds/counts, complete finite128-return arrays,
 means and checkpoint optimizer/target/finite gate inclusion before the primary

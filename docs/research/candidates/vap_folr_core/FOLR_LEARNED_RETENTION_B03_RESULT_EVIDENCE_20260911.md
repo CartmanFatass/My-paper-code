@@ -1,10 +1,108 @@
-# FOLR learned-retention B03 — E0 technical prelaunch stop
+# FOLR learned-retention B03 — E0 result
 
-Current status: **OWNER_DIRECT resumes the original unsubmitted pair; support300
-is a reference**. The [current intake amendment](FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md#owner-directed-continuation-and-engineering-review--2026-09-12)
-and [resumption facts](evidence/2026-09-12-folr-learned-retention-b03-resumption.json)
-control continuation. The following account preserves the earlier prelaunch stop
-and its zero-exposure/no-performance-result meaning.
+Current status: **valid B / EXPLORE, RETAIN_ABOVE_MEI; both arms technically
+accepted; Monitor observation complete; this finite allocation ends**.
+The original source and finite question were continued under the
+[owner resumption](../../portfolio/decisions/2026-09-12-windows-root-resumption.md).
+Support300 is a reference. Historical preparation remains charged and has no
+retrospective performance polarity.
+
+## Final E0 — 2026-09-12
+
+Rule applied verbatim:
+
+> d_LR >= 1: LEARNED_EVENT_ABOVE_MEI; d_LR <= -1: RETAIN_ABOVE_MEI; otherwise: WITHIN_MEI. An incomplete or untrustworthy primary has no paired performance polarity; preserve independently trustworthy facts.
+
+| Quantity | RETAIN | LEARNED_EVENT |
+| --- | ---: | ---: |
+| Final mean native return | 0.947578125 | -0.267968750 |
+| Training episodes / ticks / optimizer steps | 5000 / 100000 / 4969 | 5000 / 100000 / 4969 |
+| Final evaluation episodes / ticks | 128 / 2560 | 128 / 2560 |
+| Conditional final-episode SD | 5.704316606 | 5.383641650 |
+| Changing-policy training mean | -5.272626000 | -5.046892000 |
+| Complete native wall seconds | 851.85 | 898.96 |
+| Whole-process peak RSS, KiB | 650828 | 649284 |
+
+The sole primary d_LR = **-1.2155468750000002** selects **RETAIN_ABOVE_MEI**.
+The independent unit is one matched-initialization training pair (two fits),
+seed7811 with final seed107811. Ordered finite arrays are retained in
+[analysis](evidence/2026-09-12-folr-learned-retention-b03-analysis.json).
+Conditional difference SEM0.693287151 assumes independent final episodes given
+the two fitted policies; it is neither a training-seed-population uncertainty
+estimate nor a matched post-action-traffic-world estimate. The card's absolute
+MEI1 is a practical reading threshold, not a significance or equivalence margin.
+The point lies0.215546875 beyond the adverse threshold. No stable harm follows.
+
+Both summaries bind source `89035d8f1e3f44a07e80c08e3140283c03592efb`, the exact
+arms/seeds and complete counts. Literal commands remain those published at
+`e3ac72da5750821e3ea67cbad98c27252161929d`. Two fresh adjacent admissions passed;
+both supervisor witnesses ended exit0, at21:48:47 and21:49:34 +08:00 with rounded
+durations852/899 seconds. The Monitor's actual unbudgeted goal adoption and both
+accepted terminal deliveries are distinct facts; Root then reported
+MONITOR_GOAL_COMPLETE, active_set=[], no pending notice (tracking `ccd2b9225`).
+
+Exactly two read-only checkpoint loads verified finite FP32 actor/mixer/target
+states, online/target equality, finite optimizer states at4969 and expected gate
+inclusion. The learned gate's129 coefficients moved L2=1.705675840 from their
+declared initialization; training/evaluation recorded45704/1192 survivor
+attenuations, with no full survivor resets. This supports exposure and a trained
+package, not useful-memory selection or a causal explanation. No new model,
+optimizer, environment, rollout, diagnostic trajectory or test was run to accept
+the result. The run-level tool uses one endpoint per arm/seed, n=1 per arm;
+its paired descriptive result is not a new primary or a population estimate.
+
+Complete native wall sums to **1750.81 seconds**, passing1350 per arm and2700
+sum. Aggregate native CPU is1752.76 seconds; overlapping native elapsed is about
+899 seconds. Inner runner818.712/864.776 seconds omit33.138/34.184 seconds already
+included by whole-process timing. No profiling or replay was needed. Historical
+and named support through collected analysis is at least329.186872800 seconds;
+known native plus support is at least2079.996872800 seconds. Unitemized support,
+final publication/integration and cleanup remain unmeasured. Full conformance to
+the complete3000 cap is therefore unverified; no complete-cap breach is observed.
+Enclosing clocks subsume nested work; the old274.81-second Git parent replaces
+the55-second client timeout. The support300 reference is not a failure rule.
+
+The byte-preserved [native archive](evidence/2026-09-12-folr-learned-retention-b03-native-results.tar.gz)
+contains20 original summary/checkpoint/admission/time/supervisor files,
+8,466,991 bytes, SHA256
+`41d7e2fbe703d31186bd57f44d8dc263d1ec42aa1e390990de1db721cf8b57d3`.
+[Current facts](evidence/2026-09-12-folr-learned-retention-b03-resumption.json)
+record collection, terminal witnesses, costs and scoped cleanup inventory.
+Engineering Scope §4 additions: none; source/test §5 breach: none.
+
+The DM prediction WITHIN_MEI (low confidence) missed; owner prediction was not
+taken. Generic event-aware RETAIN remains default. B01+1.763359375 and
+B02-1.76953125 remain separate, with B02 still the strongest contradictory point.
+B03 is another bounded adverse observation, not a vote or pooled replacement
+primary. The [final intake](FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md#final-technical-and-scientific-intake--2026-09-12)
+records decisions and limits; no fourth pair, retuning, diagnosis, automatic Pro
+question, C claim, transfer claim or local family disposition follows this grant.
+
+### Terminal preservation and reclamation
+
+Result/evidence commit `33a5acb2109e9ce6a956c11d15e8d769660ecc8f` was pushed
+before cleanup. The11 original source files match the published SHA and all20
+native/supervisor originals match the committed archive. The remote checkout
+and both supervisor roots were then removed; disk absence and Git worktree
+registration absence were verified. The shared authoring checkout remains.
+
+The local three archived duplicate roots contain35 files/19,035,544 bytes.
+Their scoped PowerShell deletion was rejected before process creation with
+`blocked by policy`; all three were subsequently observed present. They remain
+retained, without an alternate deletion attempt. This runtime restriction does
+not affect scientific acceptance or Monitor closure. The
+[cleanup receipt](evidence/2026-09-12-folr-learned-retention-b03-cleanup.json)
+records exact paths, preservation, remote absence and the local rejection.
+Additional named publication/cleanup work is12.8158305 seconds; known support
+through that snapshot is342.002703300 and known native plus support is at least
+**2092.812703300 seconds**. Unitemized support and final integration remain
+unmeasured; full complete3000-cap conformance remains unverified.
+
+## Historical prelaunch stop — superseded continuation authority
+
+The following account preserves the earlier prelaunch stop and its then-zero
+exposure. Its original hard-support-cap and HANDOFF-only instructions were
+superseded by the owner resumption above; its measurements remain evidence.
 The [prospective card](FOLR_LEARNED_RETENTION_B03_SCIENCE_CARD_20260911.md)
 remains the selected, unchanged finite question. Root confirmed termination,
 evidence publication and scoped closeout only after the concrete cap stop.

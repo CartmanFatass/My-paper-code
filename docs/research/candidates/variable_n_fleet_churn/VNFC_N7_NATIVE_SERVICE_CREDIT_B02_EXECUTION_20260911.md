@@ -466,3 +466,120 @@ within its publication cost. These receipts remain separate from the new900-seco
 scientific allowance; no diagnostic cost is hidden in that allowance. The assessment
 write/restoration/audit command added0.3643131s; final checks/publication are returned
 separately. No complete aggregate support measurement is claimed.
+
+
+## Windows recovery: owned mean boundary — 2026-09-12
+
+Root explicitly resumed the existing engineering responsibility, separate from the
+unlaunched conditional fresh pair. Its later same-turn instruction authorizes one
+new maintenance check of at most20 seconds if independent static review finds it
+relevant. This allowance is neither an inference from the earlier incompletely
+measured120-second maintenance account nor a debit from the scientific900-second
+allocation. There is no second diagnostic fixture, old-path rerun or automatic retry.
+
+Backend probe directly observed Windows10.0.26200, PowerShell Core7.6.4 and
+`C:/Program Files/Git/cmd/git.exe`. Starting checkout was clean at `c922b2544`.
+The two remote WSL migration commits were retained by fast-forward to `4c3f871aa`;
+`2980c7fae` then copied the needed Windows main `0f37c4cbd` control inputs by exact
+path and was pushed. The retained WSL inventories are historical. No main edit or
+scientific source change was part of that synchronization. Runtime routes are read
+from current `C:/Projects/HMASD/.codex`, never this older direction snapshot.
+
+L0: deliver a bounded, technically assessed alternative at the whole exact pooling
+boundary. DM owns `models.py::_exact_binary64_column_means` and its NumPy wrapper,
+`torch_models.py::_ExactRosterMean`, their one mirrored retained-input test, and this
+record in the designated `codex/vnfc` checkout. The source now copies detached CPU
+float64 values into private Python lists, uses the previously reviewed exact-integer
+ratio arithmetic, and constructs private CPU float64 Torch output. The NumPy-facing
+model uses the same helper. Fraction construction and local Torch/NumPy shared-storage
+conversions are absent from this boundary. Preserve exact sum/one rounding, roster
+order independence, finite/nonempty matrix and zero-column behavior, shapes, input
+ownership and backward `g/N`. Both arms retain identical architectures and numerics;
+no model, comparator, reward, information, RNG, optimizer, checkpoint or native law
+changes. No Engineering Scope section4 item is added.
+
+Independent read-only Astra/high reviewer `review_a_h_vnfc_alternative` found this
+whole-boundary proposal a credible same-meaning candidate with a relevant finite
+check, while retaining the material limit of any pass. Its first static review cost
+1.8918168 seconds across six commands; no numerical work occurred. The recorded
+isolated allocator failure already occurred without the native environment or model,
+so the relevant check need not reconstruct full training history. Arithmetic-only
+and former-constructor-exclusion tests alone remain insufficient. The new actual
+source diff receives independent review before executing the one check.
+
+Exact check input is the existing `repair_primitive_check.json` in
+`evidence/b02_credit_20260911_01/`: file SHA256
+`edfb24771ab20af26949fe4dc29155d1cdb69ec83ed3fb3815ba67854d33cb47`,
+decoded7x64 binary64 input SHA256
+`b75af3ba32ead6bfc5d08069ff579658643c2cc301818f2493703c3abde87a7a`,
+retained64-value mean SHA256
+`92e005521234d95c422df6e3e9800874fa2b552ab2c79606099f50b6d5811bd7`.
+Use24 copies and256 complete forward/backward applications:256x24x7x64 =
+2,752,512 scalar inputs across the changed bridge, plus one448-value NumPy-wrapper
+readback. This is fixed small engineering coverage, not sampled trajectories,
+independent training evidence or a search. No nn.Module, environment, optimizer,
+scientific RNG master, checkpoint or scientific result is constructed.
+
+After exact committed-source staging to
+`/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912`, the single command is:
+
+```sh
+cd /home/wu/hmasd-worktrees/vnfc-owned-mean-20260912
+PYTHONMALLOC=debug PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /usr/bin/timeout --signal=KILL 20s /home/wu/.venvs/hmasd/bin/python -X faulthandler -m pytest -q -s -p no:cacheprovider --basetemp temp/directions/variable_n_fleet_churn/test/owned-mean-20260912 tests/experiments/candidates/variable_n_fleet_churn_bpcr_r09/test_owned_exact_mean.py
+```
+
+Expected: one test passes after exactly256 forward/backward completions, retained
+exact output agreement, shaped `g/N`, unchanged inputs, declared versions/thread
+count and normal interpreter teardown. Retain stderr and actual outer elapsed time.
+The20-second ceiling includes interpreter imports, assertions, output and exit;
+source transfer/receipt collection/creator scratch cleanup are separately measured
+maintenance. A timeout, abnormal exit, incomplete count or mismatch gives no pass
+and no automatic alternative fixture. All test scratch is owned by this invocation
+and removed after preserving the needed receipt; the temporary detached checkout
+is an integration/retention dependency until Root accepts its reclamation.
+
+A pass plus actual source/ownership review may support this bounded alternative
+under Portfolio6c32ade32 section6 and empirical11.8.7. It cannot identify the old
+writer, resolve the saved40-versus32-byte discrepancy, certify general interpreter
+safety, establish complete-pair cost or supply a final scientific primary. No
+scientific launch or Monitor handle is asserted by this technical check plan.
+
+Actual-source independent review completed before publication: no material finding;
+source/consumer/import and test scope accepted for the single check. Its additional
+five read commands took1.6770806 seconds. [Full bounded review](evidence/b02_credit_20260911_01/repair_owned_boundary_review_20260912.md)
+retains the counterargument and post-exit evidence requirement. Three changed Python
+files passed AST parsing only; no scientific imports or numeric execution occurred locally.
+
+
+### Actual check and technical acceptance
+
+Published source `d76d96cbe3df9b598e0db695a8b39deb23e7bdb1` was staged once through
+the existing binary-stdin/network-context source helper. All four declared source/input
+readbacks matched. Interpreter digest `ca420bd4614ae7757b4cd4938b3c663e98d2b631bda518610071d9a4ca0b509e`
+matched the retained exact build. The recorded zsh initialization warnings did not
+prevent staging; its receipt preserves them. Staging local elapsed6.407 seconds
+contains remote5.629739329 seconds, not an additional scientific cost.
+
+The sole check ran on CPython3.10.21/Clang22.1.3, Torch2.7.0+cu118, NumPy1.26.3,
+CPU float64, one compute thread and allocator debug. It completed256/256 real
+forward/backward applications; exact retained mean, `g/N` and unchanged input checks
+passed. Pytest reports1 passed/2.60s. External normal exit0, empty stderr and
+3.177215865-second complete process establish teardown. Local SSH/control3.89s
+includes that process and the0.000107372-second scratch cleanup. No rerun occurred.
+
+The same independent reviewer accepted these actual receipts with no material gap.
+DM **technically accepts this bounded same-meaning alternative** under Portfolio§6.
+It supports normal preparation of the independently funded fresh pair; it is neither
+a historical writer attribution nor evidence that the primary scientific run succeeded.
+The original40-versus32-byte fact and B02 quarantine remain unchanged.
+
+[Acceptance and cost scope](evidence/b02_credit_20260911_01/repair_owned_boundary_acceptance_20260912.json)
+links source staging, actual check and review. The selected complete outer maintenance
+components total14.0399196 seconds (remote nested clocks excluded); other reads/edits/
+Git/integration work is not comprehensively measured. The new20-second check cap passed;
+no claim of full historical120/300/900-second cost conformance follows. This maintenance
+was explicitly separate from the unused fresh scientific allowance.
+
+Creator test scratch is absent. The exact-source technical checkout and its one JSON
+receipt remain only through Root integration/retention acceptance; DM owns their later
+reclamation. Historical evidence roots/cores and the shared authoring checkout remain.

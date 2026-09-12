@@ -1,0 +1,6 @@
+{
+  "returncode": 0,
+  "stderr": "",
+  "seconds": 0.6399999999557622,
+  "purpose": "one exact admission-receipt collection; no supervisor status or log polling"
+}

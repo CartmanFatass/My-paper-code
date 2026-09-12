@@ -6,13 +6,12 @@
 ## 当前22方向状态 — 2026-09-12 Windows恢复
 
 本表是当前控制面状态。登记为15 ACTIVE、7 PARKED，
-未作新的生命周期、优先级或科学裁决。原Oracle建议是固定版本审阅；指定Portfolio DM正在
-核对并追加日期明确的建议，不把旧文当实时运行表。
+未作新的生命周期、优先级或科学裁决。Oracle建议当前版已接受并发布main a607eefb3；Portfolio DM继续准备必要的新投入选择。
 
-当前三条方向DM链推进：ACVC后续问题材料、FOLR同一B03恢复、VNFC条件任务的有限工程恢复。
-RCLE由新Windows Transport接手准备，旧执行者已确认停止且零新Send；目前无已接受的运行中实验。
+当前三个方向实际推进：FOLR同一B03运行、VNFC条件fresh pair连续准备、RCLE同一Pro请求生成。ACVC后续问题材料已完成，不再按在途计数。
+RCLE由新Windows Transport接手准备，旧执行者已确认停止且零新Send；FOLR原定两个arm已实际运行并由新Monitor采用。
 因此方向工作集为3/5，两个空槽待就绪任务补入；这不是三个运行中实验。Portfolio DM的跨方向核对不另计方向槽位。
-新Monitor与Relay已亲自回报Windows可用；Monitor实际goal=null、无待送/活动句柄。新Transport已验证Windows及CUA工具，同请求恢复已授权。
+新Monitor与Relay已亲自回报Windows可用；Monitor已建立非空未完成goal，持有两个FOLR运行句柄。新Transport已验证Windows及CUA工具，同请求恢复已授权。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
 “待选择”是尚未分配的未来工作，不能冒充已运行，也不是永久禁入。
@@ -20,7 +19,7 @@ RCLE由新Windows Transport接手准备，旧执行者已确认停止且零新Se
 | 方向 | 最新证据/科学状态 | 当前实际工作 | 下一步及边界 |
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
-| [ACVC](../candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#owner-directed-handoff) | 五个fit完整，冻结计算qualified JOINT_ABOVE_MEI；14288810c完整交接已合入main8cfd0d92f并随合并推送。 | 最终科学intake/DIRECTION/预测已接受集成77c17d111；DM正为Portfolio提供原Convergence下一问题材料，无实验。 | 接受最终验收与保留清单；C已满足消费条件，无第六fit或自动successor。 |
+| [ACVC](../candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#owner-directed-handoff) | 五个fit完整，冻结计算qualified JOINT_ABOVE_MEI；最终科学intake/DIRECTION已接受集成77c17d111。 | 后续问题材料已接受/main e85cb3a95并交Portfolio DM；无新fit或活动执行，候选预算尚未批准。 | Portfolio若投资，再由原`em:acvc:convergence`选择是否比较“训练through F”与“训练C、部署F”；无第六fit或自动successor。 |
 | [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_P47_TECHNICAL_UNBLOCKING_INTAKE_20260911.md) | P47技术intake完成；retained52源码/AST核对完成，未建立可归因修复，retained52未运行。 | 无；Portfolio DM核对候选续行。 | 具体最小修复或可信替代执行路径及所需科学选择；不把完整历史根因重建当通用门槛。现有source-only授权不含retained52运行。 |
 | [CRTO](../candidates/commitment_residual_triggered_options/DIRECTION.md) | P72 PRO_FINAL保留B08测试的selected-panel family PARK；finite-zero修复已集成。 | 无 | 新的具体方向选择；没有自动successor。 |
 | [DISH](../candidates/degraded_incumbent_shadow_handover/DIRECTION.md) | **更新：B08 HALF_RETAIN−REPLACE为−6.5 ticks，WITHIN；REPLACE默认。post-B08已PARK retained-A03 arrival-bridge retention家族。** P62/DIRECT只是更早历史。 | 无 | 具体receipt-to-control研究问题或对独立pair不确定性的实际决策需求；新选择才续行，不要求完整机制证明。 |
@@ -32,12 +31,12 @@ RCLE由新Windows Transport接手准备，旧执行者已确认停止且零新Se
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 最新8213 COND−DENSE−0.022469573456，5正/27负；完整intake，DENSE默认、no-addition保留。 | 无 | 必要的新投资选择；旧1200秒pair不能自动追加。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
-| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B06有效，Delta_ref−0.00575764973958，八个nearest-reference cells全负；结果/远端清理已集成。 | **新Transport就绪核对中**；同一channel-normalization请求，无新Send确认；无实验。 | 同request reconcile→允许时修复Send→归档→DM intake；unknown acceptance只观察，不新增/重复问题。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B06有效且八个nearest-reference cells全负；最新PRO_FINAL/main2f80926ae保留exact equal-unit候选，供以后单独资助的single fit，own-init/attained-nearest且无joint100臂。 | 无活动执行；咨询结束，当前实现/数值额度为零。 | 未来具体Portfolio投资；不得从close-call直接启动fit或再发咨询。 |
 | [scope_1s](../candidates/scope_1s/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [UCOPE](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | **更新：最新是post8801 PRO_FINAL PARK进一步8801-L continue/end-credit经验投入，保留unchanged-L spending stop。** 8601/8602、8701是更早证据。 | 无 | 有具体新选择才继续；不再凭旧8701 closeout pending造任务。其余renewal/ordinary-feedback议程未被整体关闭。 |
-| [FOLR](decisions/2026-09-12-windows-root-resumption.md) | B03准备记录308.8422538秒=274.81 Git父事务+34.0322538其他命令；零科学暴露。**Owner明确300秒是参考，本次轻微超出不再作为硬阻塞。** | DM /root/dm_a_mx_folr_cap_review 已核对无原活进程/handle，正最小化检出并恢复同一未执行pair；尚无launch接受。 | 原1350/arm、2700 native及科学范围不变；必要完整成本透明记录，fresh admission后逐arm执行并实际Monitor adoption。无替换配对/自动successor。 |
-| [VNFC](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_INTAKE_20260911.md#portfolio-conditioned-static-intake--2026-09-11) | B02 exit139、无final primary，未评分。最新静态证据显示40-byte构造公式与32-byte记录边界不符，offset32的False本身合法；来源未明、workaround未采用。另有尚未使用的条件fresh-pair拨款。 | DM /root/dm_a_mx_vnfc_recovery 正审查最小修复/同义替代路径；无新数值调用。 | 有限工程修复/可信路径及当前科学授权核对；不把全面allocator考古变成通用先决条件，不盲目复跑原故障路径。 |
+| [FOLR](../candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md) | B03 final/main47d75d7f9：RETAIN0.947578125、LEARNED_EVENT−0.267968750，d_LR−1.215546875，冻结规则`RETAIN_ABOVE_MEI`；native1750.81秒在上限内。 | 无活动科学工作；有限grant结束，仅剩已终止副本清理。 | 无自动successor或family处置；新的科学问题需proper decision/funding。 |
+| [VNFC](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md) | B03 final incomplete/main7125f368b：每臂35 rounds、合计13,440 transitions/2,240 updates，104.89秒后SIGSEGV/exit139；无final primary，不能评分。 | allocation结束；仅剩两条已命名detached checkout清理。 | 无自动retry/诊断；未来须新的可归因修复和proper funding。 |
 | [VSP02](../candidates/vsp_02/DIRECTION.md) | P19结束已测试fixed-member family/configuration。 | 无 | 具体新方向选择；无successor/UAV allocation。 |
 | [VSP03](../candidates/vsp_03/DIRECTION.md) | B07 final G−R0+0.01156738、G−R+0.01307617、Q−0.00160645；post-B07及9/11 fallback保留相同narrow pause，未分配新fit。 | 无 | 将来有决策价值的同配方B仍合法，但当前未选择；不从旧continuous512文字推断运行。 |
 | [VSP-C1](../candidates/vsp_c1/DIRECTION.md#tested-intact-body-plus-gate-package-ends-2026-09-09) | P81结束B13-tested intact-body-plus-gate package；B13−0.0320685805，保留旧正值与有限样本限制。 | 无 | 具体新方向/投资选择；没有successor，亦非整个K4或hold-value方向被关闭。 |
