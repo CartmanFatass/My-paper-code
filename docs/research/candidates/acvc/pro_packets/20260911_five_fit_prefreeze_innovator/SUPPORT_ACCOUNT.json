@@ -1,10 +1,10 @@
 {
   "allocation": "Portfolio Assignment 2; same complete ACVC five-new-fit chain",
   "allocation_source_sha": "05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
-  "cutoff_utc": "2026-09-12T03:23:37.730Z",
-  "cutoff_phase": "Innovator scientific inputs, before publication",
+  "cutoff_utc": "2026-09-12T03:31:57.188Z",
+  "cutoff_phase": "bound Innovator handoff immediately before final publication",
   "native_invoked_s": 0,
-  "known_measured_support_command_wall_s": 89.04323249999999,
+  "known_measured_support_command_wall_s": 109.9224346,
   "caps_s": {
     "per_complete_native_unit": 270,
     "native_sum": 1350,
@@ -99,7 +99,7 @@
     },
     {
       "phase": "completion of request source mapping/render command",
-      "wall_s": 0.0000024,
+      "wall_s": 2.4e-06,
       "measurement": "additional tool wait; elapsed gap while asynchronous command ran is unmeasured"
     },
     {
@@ -232,6 +232,42 @@
     {
       "phase": "publish original Innovator Issue context once and verify preserved discussion",
       "wall_s": 6.7249177
+    },
+    {
+      "phase": "check Innovator scientific input files and explicit commit metadata",
+      "wall_s": 0.4949233
+    },
+    {
+      "phase": "publish original Innovator scientific and authority inputs",
+      "wall_s": 5.489213
+    },
+    {
+      "phase": "author original Innovator request, verify all exact published references and render TASK",
+      "wall_s": 6.0679802
+    },
+    {
+      "phase": "inspect rendered Innovator question and exact original-node/source manifest",
+      "wall_s": 0.4391719
+    },
+    {
+      "phase": "verify actual rendered path/full-SHA fields and original Innovator route",
+      "wall_s": 0.2428739
+    },
+    {
+      "phase": "publish immutable Innovator TASK and bind fixed-link HANDOFF",
+      "wall_s": 5.4457711
+    },
+    {
+      "phase": "fresh fixed Innovator TASK readback and bound publication facts",
+      "wall_s": 1.908462
+    },
+    {
+      "phase": "final Innovator boundary owner review",
+      "wall_s": 0.4221971
+    },
+    {
+      "phase": "final bound packet check and single Root-action relay contract",
+      "wall_s": 0.3686096
     }
   ],
   "unknowns": [
@@ -239,8 +275,12 @@
     "Earlier asynchronous reference-publication command ran across a tool-yield gap not measured by its two tool receipts.",
     "One earlier editing-tool duration was not measured; provider generation/queue and deliberation remain separately qualified.",
     "Root/Transport preparation, delivery, observation, receipt-correction and integration command contributions have not been supplied; do not assert zero or unconditional complete-cap conformance.",
-    "This snapshot precedes its own writing/publication and remaining TASK/HANDOFF/relay; measured tails continue in the later snapshot."
+    "This snapshot precedes its own writing/final publication and the completion relay; those measured tails are returned explicitly and carried into the next intake, without creating an endless series of accounting commits."
   ],
   "interpretation": "Known subtotal is a lower bound for the support account, not a new allowance or proof of unconditional total conformance. No observed overrun in known work. Native and support caps remain separate. Count commands once; nested wall clocks do not add work.",
-  "historical": "Earlier 8951/8961 and 270/330/600 allocations remain ended. Historical cost anchors do not contribute credit."
+  "historical": "Earlier 8951/8961 and 270/330/600 allocations remain ended. Historical cost anchors do not contribute credit.",
+  "pinned_pro_account_snapshot": {
+    "commit_sha": "dbe2c5a70a374911eb24bf02c5ca28b6ce2a0251",
+    "meaning": "TASK deliberately cites the earlier exact cutoff at the scientific-input commit; this current descendant extends the same account without changing that pinned evidence."
+  }
 }
