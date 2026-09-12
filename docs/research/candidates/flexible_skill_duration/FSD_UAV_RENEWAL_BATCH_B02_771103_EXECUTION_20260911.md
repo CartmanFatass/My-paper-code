@@ -177,3 +177,20 @@ published D0 archive. Current I/source/input dependencies remain retained.
 No local temporary extraction was created by D0 collection; the older 771003
 duplicate remains outside this allocation. Full preservation and permitted
 scoped reclamation follow terminal collection, with Root accepting retention.
+
+## Actionable I return
+
+D0 collection/acceptance 581bef523c8df7d026fd5a1fcf2785c09569d745 is already
+integrated and pushed by Root as main a755d804f. I launch and actual active-goal
+Monitor adoption are published in 11848dfc985853520a283174645a56d8f29c6f68.
+Root's reported current FSD-only inspection/integration/conflict-resolution/push
+wall was conservatively at most 6.8 s (0.7 + 0.7 + 5.4), charged once in addition
+to the earlier 9.1 s contribution; unmeasured client/message overhead is unknown.
+
+Exactly one HMASD_ROOT_HANDOFF event for this I handover was sent through the
+live relay. The API accepted delivery (isError false); I_HANDOVER_RELAY_RECEIPT.json
+retains its full prompt and receipt. No second event is sent for this receipt
+publication. Authoritative owner reviews returned [] at the final I boundary.
+The DM returns pending I terminal collection, full paired intake/Chinese brief
+and preservation/cleanup. No new allocation, retry or source transaction follows
+from this handover.
