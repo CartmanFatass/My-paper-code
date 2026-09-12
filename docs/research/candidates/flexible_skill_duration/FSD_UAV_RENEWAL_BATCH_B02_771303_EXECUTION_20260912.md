@@ -1,7 +1,7 @@
 # FSD B02 / 771303 — execution
 
-State: D0 complete/exit0 and technically accepted; I preselected and unlaunched.
-D0 Monitor goal complete with terminal delivered and active_set empty.
+State: D0 complete/exit0 and technically accepted; preselected I accepted once.
+D0 Monitor goal complete. I Monitor ADD accepted; actual goal adoption pending.
 Seven pure binding checks and independent review passed; no material finding.
 DM /root/dm_fsd_d_pair, C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd.
 Input merge dd4c829d93acf12b0f487ee9ff0d31ff005535d8 brings main0c0648bd0
@@ -107,3 +107,21 @@ facts. Paired polarity is unavailable until I; D0 score does not select I.
 The original D0 summary remains I's source-bound companion. The DM accepts it
 and proceeds only with the already allocated I under fresh adjacent admission,
 new actual Monitor goal/adoption and the original1800s whole-command cap.
+
+## Preselected I accepted launch
+
+D0 original archive/own-arm technical acceptance were committed and pushed at
+956c17a1ca6324be8659a7398141bfc007419dfd before I. I's committed command at
+source8ea629595da592dfce9b7774341863a7115c7cef was submitted once at
+2026-09-12T21:15:41.364242+00:00. Its D0 companion digest matched the retained
+summary before submission. Handle fsd-uav-renewal-batch-b02-771303-I-20260912
+was accepted return0 in session agent_fsd-uav-renewal-batch-b02-771303-I-20260912;
+source/cwd/output use the correct771303 path. No second source delivery occurred.
+Fresh admission is inside the complete1800s native command.
+
+Direct I Monitor ADD delivery was accepted. The payload requires get_goal,
+new unbudgeted goal if the prior D0 goal is complete, actual unfinished-goal
+adoption, terminal delivery and empty-goal completion. I_MONITOR_ADD.json is
+the delivery receipt; actual MONITOR_ADOPTED remains pending. DM retains
+same-handle handover, terminal collection, the frozen paired reduction/intake
+and scoped cleanup. No routine D0 observation, duplicate ADD or launch.

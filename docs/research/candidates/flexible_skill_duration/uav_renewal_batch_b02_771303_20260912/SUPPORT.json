@@ -120,9 +120,33 @@
     {
       "purpose": "complete D0 technical acceptance and decision record",
       "wall_seconds": 0.3444452
+    },
+    {
+      "purpose": "D0 archive/acceptance publication and immediate push",
+      "wall_seconds": 4.8253531
+    },
+    {
+      "purpose": "sole preselected I supervisor submission and companion readback",
+      "wall_seconds": 0.800097
+    },
+    {
+      "purpose": "direct I Monitor ADD delivery",
+      "wall_seconds": 0.149
+    },
+    {
+      "purpose": "I launch record and owner trace preparation",
+      "wall_seconds": 0.4784916
+    },
+    {
+      "purpose": "post-context current checkout and live route read",
+      "wall_seconds": 0.2511852
+    },
+    {
+      "purpose": "I receipt and publication diff review",
+      "wall_seconds": 0.3319081
     }
   ],
-  "known_support_wall_seconds": 44.61436460000001,
+  "known_support_wall_seconds": 51.45039960000001,
   "counting": "Each known enclosing invoked command once; nested SSH not readded. Prior readiness overlap conservatively included, old D spending never reused.",
   "unknown": [
     "earlier readiness command walls unavailable in truncated outputs",
@@ -131,7 +155,7 @@
     "provider and agent cost not numerically attributed"
   ],
   "source_delivery_transactions": 1,
-  "scientific_submissions": 1,
+  "scientific_submissions": 2,
   "native_wall_seconds": {
     "D0": 458.8
   },
@@ -143,7 +167,7 @@
     "within45": true,
     "nested_not_readded": true
   },
-  "actual_Monitor_adoption": "D0_MONITOR_ADOPTION.json; unfinished goal confirmed by Root; no duplicate observation",
+  "actual_Monitor_adoption": "D0 accepted/goal complete; I message delivered, actual goal-adoption receipt pending",
   "aggregate_cpu_seconds": 1804.26,
-  "known_native_plus_support_seconds": 503.4143646
+  "known_native_plus_support_seconds": 510.25039960000004
 }
