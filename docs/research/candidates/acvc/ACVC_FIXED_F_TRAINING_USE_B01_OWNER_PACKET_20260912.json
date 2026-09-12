@@ -1,0 +1,11 @@
+{
+  "question": "Portfolio 已投入的一对训练：固定 F 进入训练，是否比仅部署 F 更有用？",
+  "changes_if_approved": [{"target": "ACVC_FIXED_F_TRAINING_USE_B01", "from": "原方向已选定但此前未投入", "to": "按新 Portfolio F=yes 执行两次训练与同一组 F 评估"}],
+  "if_refused": "在下一可停边界应用异步指令；保留已发生的结果和费用，不擅自改卡或重跑。",
+  "evidence_for": [{"path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_SCIENCE_CARD_20260912.md", "quote": "The latter remains the competent current reference.", "why": "比较直接检验训练时加入纠偏的增量用途。"}],
+  "evidence_against": [{"path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_SCIENCE_CARD_20260912.md", "quote": "This is one comparative training replication.", "why": "单对结果无法支持稳定胜出或跨任务推广。"}],
+  "uncertainty": ["训练中 F 的实际新增耗时尚未知，不能用旧测试时间冒充实测。", "当前主机上调优的同信息比较器 headroom 仍缺失；recasts:2 的最低争用顺序保持。"],
+  "cost": {"compute": "新未来额度：每完整臂 270 秒、原生合计 540 秒、完整支持 660 秒、合计 1200 秒；历史 A 费用另保留且有未知部分。", "owner_time": "无需答复即可继续现有授权", "reversibility": "costly", "waits_on_this": "nothing"},
+  "verdict_text": "Claim tested: on the fixed native task and learning budget, training through fixed F improves final common-F native return over training C by more than .01 J.",
+  "source": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_SCIENCE_CARD_20260912.md"
+}
