@@ -1,0 +1,107 @@
+{
+  "id": "20260912-root-001",
+  "created": "2026-09-12T06:52:56-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "恢复独立科研链：CBSC/ACVC最小投入、MGTAP备选与保持投入",
+  "context": "Root已接受Oracle22行现状；当前FOLR/VNFC/RCLE三条推进，ACVC材料完成。本项记录作者建议，Pro投资尚未选择。",
+  "options": [
+    {
+      "key": "keep",
+      "label": "保留作者建议S准备+A咨询",
+      "consequence": "将现有具体方案交同一Portfolio决定，不自动给实验预算。"
+    },
+    {
+      "key": "refuse",
+      "label": "建议暂不新增投入H",
+      "consequence": "现有三条链继续，保留参考资产；未来新事实再判断。"
+    },
+    {
+      "key": "amend",
+      "label": "调整为M或条件B等明确组合",
+      "consequence": "须写清用途、原节点科学边界与新成本，不能以空槽自动拨款。"
+    }
+  ],
+  "recommended": "keep",
+  "auto_applied": null,
+  "dm_reason": "CBSC缺当前完整比较，ACVC有强null和具体用途；S准备成本风险、M健康路径与H保守价值均保留。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/SCIENCE_BRIEF.md",
+    "docs/research/portfolio/ORACLE_RECOMMENDATIONS_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L9",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "在 FOLR、VNFC、RCLE 已独立推进而 ACVC 材料已完成时，是否新投入 CBSC 一次有限准备和 ACVC 一次原方向咨询，或选择健康 MGTAP 的一个新配对/保持投入？",
+    "changes_if_approved": [
+      {
+        "target": "CBSC",
+        "from": "当前机会信用包缺完整 RAW/STRUCT 对照，旧 source-only 分配已结束",
+        "to": "建议 S：一次完整 B 卡/L0 与可信路径候选，新的 invoked-support≤600秒、参考300；零模型/测试/轨迹。S+B 可另行明确选择：fresh pair native≤600/arm、≤1200总和，support≤600含S，complete≤1800。"
+      },
+      {
+        "target": "ACVC",
+        "from": "C01 consumed，具体下一问题材料完成，无新咨询或 fit",
+        "to": "建议 A：只买一次原 Convergence 及完整 intake，比较训练 through-F 与 train-C→deploy-F。A+B 独立可选且需原节点选择：两 fresh fits，native≤270/arm、≤540总和，完整support≤660、complete≤1200；当前尚无训练F实现。"
+      },
+      {
+        "target": "MGTAP 与实际槽位",
+        "from": "旧两配对已结束，DENSE 默认；工作集3/5",
+        "to": "M 为实质备选：新一pair完整≤1200秒；建议暂缓。每个选项独立说明价值，实际启动才计方向，不将五槽变成五笔新预算。"
+      }
+    ],
+    "if_refused": "H保持当前三条独立授权链与已有参考资产，无新科研款；也可改选M或明确选择S+B/A+B。所有新投资仍由同一Portfolio Pro决定，原方向节点负责相应科学选择，不新增owner批准层。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_SCIENCE_CARD_20260906.md",
+        "quote": "Does local sampled credit permit a useful STRUCT-versus-RAW return difference,",
+        "why": "是当前已打开、缺完整primary的实际学习比较；source-only不自动证明新路径。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/SCIENCE_BRIEF.md",
+        "quote": "The use is to decide whether F should remain a deployment correction or whether proposal and partner adaptation to actual corrected actions is worth learning.",
+        "why": "原DM提供了明确用途与强null，建议仅让原节点判断下一对象，不能自动资助fit。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/SCIENCE_BRIEF.md",
+        "quote": "Mere preparation can consume effort without creating an empirical observation.",
+        "why": "CBSC旧零差/RAW输简单rule及未知恢复成本，使M或H值得选择。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_POST_C01_DIRECTION_QUESTION_20260912.md",
+        "quote": "The candidate is therefore **not launch-ready**.",
+        "why": "PPO proposal-density与actual-sent feedback尚未实现；C01部署收益不能当作训练F收益。"
+      }
+    ],
+    "uncertainty": [
+      "本轮全22方向的匹配当前宿主调优headroom均缺完整记录，不作停止阈值。",
+      "新路径完整成本未知，建议ceiling不是forecast；旧余额不转移。",
+      "一训练pair只增加一次有限B观察，episode不是训练replicate；没有额外cost experiment、完整因果重建或枚举前置。",
+      "Root最新实际状态固定于c8ed4714c；未来完成独立更新槽位，不改变本次科学输入。"
+    ],
+    "cost": {
+      "compute": "本次零新科学暴露。S拟≤600 invoked-support；M拟≤450/arm、≤900native、complete≤1200；A只一咨询、全成本未知。S+B和A+B是独立未选条件拨款；S成本包含于S+B，不重复加。",
+      "owner_time": "无需逐项批准；可异步覆盖Portfolio最终处置。",
+      "reversibility": "costly",
+      "waits_on_this": "只有尚未资助的新动作；FOLR、VNFC、RCLE继续，不等待本包。"
+    },
+    "verdict_text": "Author recommendation only: S preparation + A consultation; hold M and both optional empirical tranches. No Portfolio selection executed.",
+    "source": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T14:48:56+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-12-resume-independent-chains.md",
+      "state": "planned",
+      "summary": "原建议已由完整Portfolio决定S+A收束；原作者规范核对通过，当前执行/费用边界见新决定和最终owner item。Root集成与实际派发待记录；没有owner批准等待。"
+    }
+  ]
+}

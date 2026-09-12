@@ -1,0 +1,22 @@
+{
+  "checked_at_utc": "2026-09-12T14:05:10.241311+00:00",
+  "request_id": "2026-09-12-resume-independent-chains-portfolio-01",
+  "task_commit": "5fbb533b40189912e293f37e3ce884438c60e4b8",
+  "task_path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/delivery_ready/TASK.md",
+  "task_sha256": "4505ae160788ecd1e8963a9cce5e39758fe4e5f0a9f5887bbb7247a4aea086f1",
+  "fixed_task_url": "https://github.com/CartmanFatass/My-paper-code/blob/5fbb533b40189912e293f37e3ce884438c60e4b8/docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/delivery_ready/TASK.md",
+  "task_remote_publication_verified": true,
+  "reference_paths_published": 37,
+  "scientific_input_sha": "a548c240118cbee149dae74ec13356e3e091f6a0",
+  "source_thread_id": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "operator_thread_id": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "dispatch_state": "READY_TO_DISPATCH",
+  "dispatch_performed_by_author": false,
+  "provider_Send_performed_by_author": false,
+  "actual_provider_acceptance_for_this_request": "unsent",
+  "native_return_target": "/root/dm_a_mx_portfolio_resume",
+  "superseded_draft": "delivery/DRAFT_ONLY.md; never bound/dispatched/accepted",
+  "authority": "Root dispatches exact handoff once; author awaits routed full immutable response for conformance/intake"
+}

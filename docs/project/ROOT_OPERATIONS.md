@@ -1,6 +1,17 @@
 # Research execution responsibilities
 
-OWNER_DIRECT 2026-09-10: the existing Root task is the execution coordinator; DM owns direction
+## Current Windows control endpoints
+
+OWNER_DIRECT2026-09-12: use Windows C:/Projects/HMASD and PowerShell. Root task is
+01a095b7-850f-7401-ad4e-5e4320d285f1. Current independent endpoints are Transport
+01a095ca-7b4a-7940-8acf-fca1b52c784d, Monitor01a095d0-21ee-7c02-9d97-3681b5678200,
+and Relay01a095ca-8676-74e1-b78c-ea459d41e905. Their live .codex/hmasd-*.toml files
+are the executable routing source. New work and successor recovery receipts use these
+endpoints; historical fixed request metadata is not a live routing instruction.
+Keep current tracking free of obsolete snapshots and endpoints. Consult Git for history.
+No browser Send may overlap a retired executor: reconcile its stopped/acceptance receipt first.
+
+The current Root task is the execution coordinator; DM owns direction
 science and the former CM engineering responsibilities. Portfolio is the persistent Pro node,
 not a native session. Authority, budgets and owner pause/stop instructions remain in AGENTS.md.
 The current consolidation record is `docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md`.
@@ -84,7 +95,7 @@ facts where needed. The author uses `hmasd-portfolio-task` and Prompt Author, pr
 references and contrary evidence. If unavailable, Root explicitly transfers the remaining work
 to another relevant DM; Root does not take over scientific drafting.
 
-For a new request the actual author is source, the unchanged Root task is parent and the existing
+For a new request the actual author is source, the current Root task is parent and the existing
 Transport is operator. `caller_role=portfolio` selects the Pro node, not a native Root identity.
 Root checks published artifact/route facts and dispatches the exact handoff. It returns substantive
 omissions to the author instead of rewriting the packet. Transport receipts still go only to Root;

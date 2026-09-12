@@ -34,6 +34,7 @@ sys.path.insert(0, str(ROOT))
 from experiments.candidates.acvc.native_link_loss_b01.learner import collect
 from experiments.candidates.acvc.native_link_loss_b01.model import load_base
 from experiments.candidates.acvc.native_link_loss_b01.report import reading, write_json
+from experiments.candidates.acvc.training_use_b01.protocol import FixedF, final_F_panel
 from experiments.candidates.metric_ground_transport_allocation.mgtap_native_ground_geometry_b01.geometry import (
     DENSE,
     NativeGeometryActor,
@@ -133,7 +134,7 @@ def final_panel(rows, expected):
 def run(output, launch_sha, process_start, execution_seconds, make_env=make_real,
         train_episodes=512, horizon=256, eval_episodes=64, *, master=MASTER,
         evaluation_namespace=EVALUATION_NAMESPACE, object_name=OBJECT, card_path=CARD,
-        mode="UAV_B_EXPLORE", allocation_seconds=None):
+        mode="UAV_B_EXPLORE", allocation_seconds=None, train_rule="C", eval_arms=ARMS):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     counts = _counts()
@@ -185,6 +186,15 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
         },
     }
     rows = []
+    train_filter = None
+    if train_rule != "C" or eval_arms != ARMS:
+        summary["configuration"].update(training_rule=train_rule, evaluation_order=list(eval_arms))
+        summary["cost_law"] = (
+            f"imports+constructors + {train_episodes * horizon} training team steps + "
+            f"{2 * train_episodes} full-rollout replay/backward/Adam calls + "
+            f"{len(eval_arms)} checkpoint loads + {len(eval_arms) * eval_episodes * horizon} "
+            f"evaluation team steps + publication/readback/exit; fixed F in training={train_rule == 'F'}"
+        )
     actor = critic = initial = None
     old_handler = None
     alarm_installed = False
@@ -209,6 +219,8 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
             update_path.open("w", encoding="utf-8") as update_file:
         def emit_training(row):
             published = dict(row, base=master, rule="DENSE_fit", S=row["reward_sum"])
+            if train_filter is not None:
+                published.update(rule="DENSE_fit_through_F", **train_filter.counts)
             rows.append(published)
             episode_file.write(json.dumps(published, allow_nan=False) + "\n")
             episode_file.flush()
@@ -236,6 +248,7 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
                 episode_ids = []
                 for offset in (0, 1):
                     episode_index = 2 * rollout_index + offset
+                    train_filter = FixedF() if train_rule == "F" else None
                     before_recurrent = counts["recurrent_observations"]
                     try:
                         episode = collect_episode(
@@ -248,8 +261,14 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
                             real=True, diagnostics=False, ratio_grouping="agent_compound",
                             value_moments=None, renewal=False, duration_support=(1, 4),
                             velocity_mode="sampled",
+                            **({"execution_filter": train_filter} if train_filter is not None else {}),
                         )
                     finally:
+                        if train_filter is not None:
+                            summary["last_training_F_episode"] = {
+                                "episode": episode_index, **train_filter.counts,
+                                "scope": "Actual filter calls, including any incomplete final episode; do not add to complete-row totals.",
+                            }
                         actor_forwards = counts["recurrent_observations"] - before_recurrent
                         counts["base_agent_forwards"] += actor_forwards
                         counts["train_actor_agent_forwards"] += actor_forwards
@@ -315,7 +334,8 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
             summary["checkpoint_complete"] = True
             check()
 
-            for arm, arm_index in zip(ARMS, (2, 3, 4)):
+            for arm in eval_arms:
+                arm_index = {"C": 2, "F": 3, "dwell": 4}[arm]
                 panel_start = time.monotonic()
                 base = load_base(checkpoint, evaluation_namespace)
                 counts["post_fit_loads"] += 1
@@ -381,7 +401,8 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
                     "exact replayed actor-agent steps across the interrupted update",
                     "exact critic update rows across the interrupted update",
                 ]
-            summary["primary"] = final_panel(rows, eval_episodes)
+            summary["primary"] = (final_panel(rows, eval_episodes) if eval_arms == ARMS
+                                  else final_F_panel(rows, eval_episodes))
             if scientific_path_complete and summary["primary"]["complete"]:
                 summary["status"] = "complete"
             if initial is not None and actor is not None and critic is not None:
@@ -398,8 +419,13 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
                              if row.get("phase") == "eval" and row.get("arm") == arm)
                     for key in ("opportunities", "retrace", "dwell", "apply", "distinguishable")
                 }
-                for arm in ARMS
+                for arm in eval_arms
             }
+            if train_rule == "F":
+                summary["training_F_exposure"] = {
+                    key: sum(row.get(key, 0) for row in rows if row.get("phase") == "train")
+                    for key in ("training_F_agent_ticks", "training_F_opportunities", "training_F_retrace")
+                }
             summary["process_wall_s_to_summary"] = time.monotonic() - process_start
             summary["timing_boundary"] = (
                 "Runner timing starts before imports and is sampled immediately before summary "

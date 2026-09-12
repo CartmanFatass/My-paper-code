@@ -1,0 +1,49 @@
+{
+  "status": "PRESERVED_AWAITING_ROOT_RETENTION_AND_SCOPED_CLEANUP",
+  "owner": "/root/dm_a_mx_rcle_intake",
+  "authoring_checkout": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906",
+  "branch": "codex/rcle",
+  "preserved": [
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/b07-equal-unit-collection/terminal.tar.gz",
+      "bytes": 879559,
+      "sha256": "0c02cad9bf6483832fd3f00c6df2f3b886a90fa6cbf0efbcb8cf95a980184a8e",
+      "contains": "all17 original output/supervisor files"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/b07-equal-unit-collection/raw",
+      "manifest": "b07_equal_unit_20260912/PARTIAL_ANALYSIS.json"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/b07-equal-unit-preparation/source.bundle",
+      "bytes": 5921795,
+      "sha256": "196cb885a22bc558e776539be401c82dc3c3855abde3756da95f353a19b2b8d1"
+    }
+  ],
+  "remote_targets": [
+    {
+      "path": "/home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912",
+      "bytes": 48669048,
+      "registered": true,
+      "sha": "1652c44ac65ed6e686610c3cfcff67dab1a0fc6b",
+      "status": "terminal source/output copy; retained until Root accepts preservation and reference-only continuation input no longer depends on it"
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/rcle-b07-equal-unit-s27-20260912",
+      "bytes": 6801354,
+      "status": "contains preserved source.bundle and terminal.tar.gz; Root retention and follow-up input mapping pending"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/rcle-b07-equal-unit-s27-20260912",
+      "bytes": 3918,
+      "status": "terminal supervisor root preserved in archive; retain until Root accepts scoped removal"
+    }
+  ],
+  "keep": [
+    "shared authoring checkout",
+    "local raw/archives and published science/evidence",
+    "shared /tmp/hmasd_rcle_tbcfv_native cache",
+    "all unrelated worktrees"
+  ],
+  "deletion_performed": false
+}

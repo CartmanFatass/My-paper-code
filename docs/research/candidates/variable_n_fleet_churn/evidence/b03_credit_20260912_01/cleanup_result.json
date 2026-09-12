@@ -1,0 +1,74 @@
+{
+  "recorded_at": "2026-09-12T14:21:00.338822+00:00",
+  "local_command_seconds": 0.4721241999650374,
+  "transport_returncode": 0,
+  "transport_stderr": "",
+  "transport_stdout": "{\"removals\": [{\"path\": \"/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01\", \"command\": [\"git\", \"-C\", \"/home/wu/projects/HMASD\", \"worktree\", \"remove\", \"--force\", \"--\", \"/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01\"], \"returncode\": 0, \"stdout\": \"\", \"stderr\": \"\"}, {\"path\": \"/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912\", \"command\": [\"git\", \"-C\", \"/home/wu/projects/HMASD\", \"worktree\", \"remove\", \"--force\", \"--\", \"/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912\"], \"returncode\": 0, \"stdout\": \"\", \"stderr\": \"\"}], \"verification\": [{\"path\": \"/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01\", \"disk_absent\": true, \"git_registration_absent\": true}, {\"path\": \"/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912\", \"disk_absent\": true, \"git_registration_absent\": true}], \"git_list_returncode\": 0, \"git_list_stderr\": \"\", \"preserved_outside_targets\": {\"core_exists\": true, \"core_bytes\": 641089536, \"supervisor_directory_exists\": true, \"supervisor_files\": {\"exit_code\": true, \"pid\": true, \"runner.sh\": true, \"start_time\": true, \"status\": true, \"task.log\": true}}, \"complete\": true}\n",
+  "scientific_submissions": 0,
+  "diagnostic_invocations": 0,
+  "root_acceptance": "main efa676ac2 / 60ba92104 / 57da33f0c / 7125f368b; exact two-path reclamation assignment",
+  "result": {
+    "removals": [
+      {
+        "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01",
+        "command": [
+          "git",
+          "-C",
+          "/home/wu/projects/HMASD",
+          "worktree",
+          "remove",
+          "--force",
+          "--",
+          "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912",
+        "command": [
+          "git",
+          "-C",
+          "/home/wu/projects/HMASD",
+          "worktree",
+          "remove",
+          "--force",
+          "--",
+          "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "verification": [
+      {
+        "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01",
+        "disk_absent": true,
+        "git_registration_absent": true
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912",
+        "disk_absent": true,
+        "git_registration_absent": true
+      }
+    ],
+    "git_list_returncode": 0,
+    "git_list_stderr": "",
+    "preserved_outside_targets": {
+      "core_exists": true,
+      "core_bytes": 641089536,
+      "supervisor_directory_exists": true,
+      "supervisor_files": {
+        "exit_code": true,
+        "pid": true,
+        "runner.sh": true,
+        "start_time": true,
+        "status": true,
+        "task.log": true
+      }
+    },
+    "complete": true
+  }
+}

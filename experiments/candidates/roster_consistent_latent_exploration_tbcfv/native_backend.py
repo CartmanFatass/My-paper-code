@@ -1229,7 +1229,12 @@ class NativeBatch:
         for lane, snapshot in enumerate(self._snapshots):
             count = len(snapshot.positions)
             if len(previous_claims[lane]) != count or len(survivors[lane]) != count:
-                raise ValueError("scripted action roster columns do not align")
+                raise ValueError(
+                    "scripted action roster columns do not align: "
+                    f"lane={lane} tick={snapshot.tick} positions={count} "
+                    f"keys={len(snapshot.transport_keys)} previous={len(previous_claims[lane])} "
+                    f"survivors={len(survivors[lane])} raw_count={int(self._raw_snapshots[lane].agent_count)}"
+                )
             previous[lane, :count] = np.asarray(previous_claims[lane], dtype=np.int32)
             survivor[lane, :count] = np.asarray(survivors[lane], dtype=np.uint8)
         first = np.ascontiguousarray(first_or_epoch, dtype=np.uint8)

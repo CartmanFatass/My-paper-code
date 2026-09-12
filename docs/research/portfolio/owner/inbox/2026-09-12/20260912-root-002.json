@@ -1,0 +1,101 @@
+{
+  "id": "20260912-root-002",
+  "created": "2026-09-12T07:48:55-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "PRO_FINAL：CBSC单次准备与ACVC原Convergence，零新训练",
+  "context": "完整235行/61049bytes Pro答复已通过原作者规范核对。S+A已选；M/S+B/A+B未拨款。Root当前0/5，两个真实启动后只计2/5。",
+  "options": [
+    {
+      "key": "keep",
+      "label": "保留并独立落实S+A",
+      "consequence": "CBSC一次600秒内候选准备，ACVC一次原咨询/full intake；无新训练，不等待同批完成。"
+    },
+    {
+      "key": "refuse",
+      "label": "异步覆盖相应未开始工作",
+      "consequence": "依据真实owner指令调整未开始的相应工作，保留已花成本/证据与Pro原文。"
+    },
+    {
+      "key": "amend",
+      "label": "提出具体修改",
+      "consequence": "写清要改变的处置及成本；遵守对应节点权限，不把旧提案金额当备用款。"
+    }
+  ],
+  "recommended": "keep",
+  "auto_applied": "keep",
+  "dm_reason": "Pro最终选择与原问题/当前规范一致，S和A有独立用途与有限终点；强备选M+A/H和未知成本均保留。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/archive/RESPONSE.md",
+    "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L20",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Portfolio 已最终选择 S+A；现在独立接续 CBSC 一次候选准备和 ACVC 一次原 Convergence，其他经验款保持未分配。",
+    "changes_if_approved": [
+      {
+        "target": "CBSC S",
+        "from": "旧source-only任务结束，无新投入",
+        "to": "已选一次prospective B卡/L0与supported路径候选或no-ready；complete invoked-support≤600s、300参考，零runtime/model/test/学习；S+B不拨款。"
+      },
+      {
+        "target": "ACVC A",
+        "from": "C01 consumed，下一问题材料完成，无咨询额度",
+        "to": "已选一次原Convergence+完整intake，full documentary/provider cost未知；零代码/数值，A+B不拨款。"
+      },
+      {
+        "target": "实际容量",
+        "from": "Root当前0/5，FOLR/VNFC/RCLE科学边界已关闭",
+        "to": "S/A实际独立启动后仅2/5；不以三个空槽创建备用款、重试或批次等待。"
+      }
+    ],
+    "if_refused": "这是已形成且通过规范核对的Pro决定；owner可异步覆盖。已花成本和证据保留，未开始的相应工作按真实新指令调整，不伪造已执行或owner回复。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/archive/RESPONSE.md",
+        "quote": "The two purchases address different unresolved choices.",
+        "why": "CBSC缺当前完整primary，ACVC有具体训练用途和强null，适合各一次有限判断。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/archive/RESPONSE.md",
+        "quote": "S and A may proceed independently as soon as their original/reassigned owners actually take up the work.",
+        "why": "Root可分别派发，无需等待另一方向或owner逐项批准。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/archive/RESPONSE.md",
+        "quote": "The strongest empirical alternative is M, particularly M+A instead of S+A.",
+        "why": "M有已运行的健康真实学习路径；S准备可能仍无结果，A也可能只选参考资产。"
+      }
+    ],
+    "uncertainty": [
+      "S候选是否足够支持后续B及完整费用未知；不能靠源码重写声称runtime独立。",
+      "A总文档/provider成本未知且不借A+B额度；下一对象仍由原方向节点决定。",
+      "当前0/5是输入后实际完成事实；Pro明确允许计数下降，S+A并不保证五条当前并行。"
+    ],
+    "cost": {
+      "compute": "新增科研invocation=0。仅S invoked-support≤600s；A一次完整咨询费用未知。M/S+B/A+B均不拨款。",
+      "owner_time": "无逐项批准等待；可异步覆盖最终处置。",
+      "reversibility": "costly",
+      "waits_on_this": "S/A已独立就绪；Root实际派发/集成。其余方向不等待此二者同批完成。"
+    },
+    "verdict_text": "PRO_FINAL / OWNER_DELEGATED: S+A; hold M; no S+B; no A+B. Original-author conformance ACCEPTED; Root integration and actual dispatch pending.",
+    "source": "docs/research/portfolio/decisions/2026-09-12-resume-independent-chains.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T14:48:56+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-12-resume-independent-chains.md",
+      "state": "applied",
+      "summary": "Root已集成并独立派发S/A：CBSC接任DM与ACVC原DM均实际开始；M与两经验tranche不拨款。"
+    }
+  ]
+}

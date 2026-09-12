@@ -1,5 +1,11 @@
 # Native agents and Transport communication
 
+OWNER_DIRECT2026-09-12: Current control uses Windows C:/Projects/HMASD and PowerShell.
+Read live task endpoints from that checkout's .codex/hmasd-*.toml and
+docs/project/ROOT_OPERATIONS.md. Superseded task/path literals in fixed evidence are
+not dispatch routes. Keep current control documents free of obsolete state snapshots.
+
+
 Root coordinates execution within accepted decisions. Use native `collaboration` tools for its agent
 tree and `send_message_to_thread` for the independent Transport task in `.codex/hmasd-transport.toml`.
 ROOT_OPERATIONS.md defines responsibility and observation. Root handles operational replacement and integration; the designated DM prepares Portfolio
