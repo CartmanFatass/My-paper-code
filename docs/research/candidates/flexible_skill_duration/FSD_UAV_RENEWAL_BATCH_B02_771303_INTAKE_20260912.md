@@ -77,13 +77,12 @@ probe is needed to report the intact performance observation. Endpoint durations
 and tuned same-information headroom remain unmeasured.
 
 Claim ceiling: useful same-host optional-package evidence on this learning
-history within mixed separate results. Whether this package should be used as
-an optional learning route, given the cost and outcome variation, remains the
-next practical decision. A proper direction-level continuation should choose
-what concrete use decision the next bounded work would change; a sixth identical
-pair or exhaustive mechanism enumeration is not implied by this intake. This
-is direction-local advice for Root's next scoped handoff, not a local Portfolio
-investment, family disposition or unrequested Pro Send.
+history within mixed separate results. The subsequent, separately selected U
+has now resolved its limited optional use, with authentic D0 remaining default
+and cost/outcome variation explicit; see the current use section below. Any
+future work still needs a concrete decision-changing use and lawful selection;
+this result supplies no sixth identical pair, exhaustive mechanism enumeration,
+Portfolio investment or automatic Pro consultation.
 
 ## Prediction and owner boundary
 
@@ -155,6 +154,8 @@ evidence persist. No local test/extraction scratch was created. Both Monitor
 goals are complete; no run, observation, collection or cleanup remains in N.
 This completed allocation makes no direction-stop decision.
 
-## Direction-local input to the current Portfolio author
+## Current direction-use decision after this pair
 
-The current three-choice input is [FSD_POST_FIVE_PAIR_DECISION_INPUT_20260912.md](FSD_POST_FIVE_PAIR_DECISION_INPUT_20260912.md). Root requested a more concrete next-use comparison after cleanup; it recommends one fresh I5/D0-long10 B proposal, retains the evidence-only USE judgment and investment HOLD as alternatives, and names all changed comparator/cost meanings. The author then confirmed that K/E/L/U had already been fixed at TASK b52ed2e045841659953abfe9a76b55c69adcce5d (READY_HANDOFF 0a04cb44f). Its U remains unchanged; the new B comparator is retained for the next clean request boundary, informed by that U outcome, with no duplicate USE question. No funding, lifecycle, new Pro Send, code or scientific invocation is selected by this intake. The five accepted results and completed N allocation are unchanged.
+The separately selected Portfolio U was completed by the original Convergence node and accepted in [the full U intake](pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md), response812ad330e012d757cf34686bd416cf1a2b4894a2. The exact full I1280 recipe is now a limited optional learning scheme under the same tested host/recipe/five-rollout conditions, with authentic D0 retained as default/reference and all observed costs and adverse outcomes included. This updates the earlier open use question; it changes no result, MEI branch or claim ceiling.
+
+No new experiment, implementation, reanalysis or consultation follows. The earlier B-LONG-D0 proposal remains a separate unallocated future investment input, absent from U and unnecessary for its now-complete judgment. FSD remains ACTIVE; this pair's N grant and U's finite documentary allowance are complete. Current scientific use is recorded in DIRECTION; Root owns the live Portfolio working-set record.
