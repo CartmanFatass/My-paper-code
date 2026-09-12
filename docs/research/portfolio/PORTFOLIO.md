@@ -6,12 +6,12 @@
 ## 当前22方向状态 — 2026-09-12 Windows恢复
 
 本表登记15 ACTIVE、7 PARKED，生命周期、priority、recasts与UAV字段不变。
-最新 [Portfolio决定](decisions/2026-09-12-post-sa-marginal-investments.md) 已由原作者完整核对：**新资助CBSC C、RCLE R、ACVC F三条完整B链；M不追加。**
+最新 [Portfolio决定](decisions/2026-09-12-two-remaining-chains.md) 已由原作者完整核对：**FSD D与FOLR P独立获选，MGTAP不追加。**
 
-Root当前实际工作集1/5：RCLE在同一对象内处理一个已归因入口的技术停止。ACVC与CBSC的已购pair均已完整验收并释放槽位；跨方向作者、Transport和cleanup不计槽位。
-C新native600/arm、1200合计+support600=1800；R900native含nearest+support600=1500；F270/arm、540合计+support660=1200秒。每项均含完整实现/检查/review/实验/intake/清理。
-新款明确是未来工作，旧S/A费用保留一次且未知尾部不填零。三个真正启动后为3/5，剩余两槽没有自动备用款。见 [独立执行映射](pro_packets/20260912_post_sa_marginal_investment/EXECUTION_MAPPING.md)。
-Monitor当前无活动句柄；ACVC两臂与CBSC均terminal exit0，RCLE在338秒以exit2技术停止，三个对应Monitor goal均已完成。剩余两槽的新Portfolio问题已由当前Transport核对绑定并完成唯一一次Send，provider正在生成；尚未形成的新决定不计槽位。
+Root当前实际工作集3/5：RCLE正在完成同一对象的reference-only最终intake，FSD与FOLR新DM链已独立启动。ACVC与CBSC的已购pair均已完整验收并释放槽位；跨方向cleanup不计槽位。
+FSD为一对I1280/authentic-D0，D0≤900、I≤1800、native≤2700、support≤300、完整≤3000秒；FOLR仅一次原节点post-B03 Convergence及完整intake，零实验额度、完整成本未知。MGTAP1200未分配。
+最新两项真正派发后为3/5，另两槽进入下一次滚动Portfolio边界；不把旧余额或未选候选当自动授权。见 [独立执行映射](pro_packets/20260912_two_remaining_chains/EXECUTION_MAPPING.md)。
+Monitor当前无活动句柄；RCLE reference completion已在11秒exit0且goal完成。Transport本轮响应已归档并intake，当前无待观察Pro generation。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
 “待选择”是尚未分配的未来工作，不能冒充已运行，也不是永久禁入。
