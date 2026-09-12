@@ -18,6 +18,10 @@ Live primary Monitor `01a095d0-21ee-7c02-9d97-3681b5678200` received both direct
 
 Both live execution outputs and unique future checkpoints remain in the exact remote checkout. The source bundle/local preparation are retained for this accepted pair; creator test scratch remains under the documented policy rejection. No inherited evidence or another worktree was deleted. No additional fit, test, panel, consultation or successor is implied by waiting for completion.
 
+### Terminal collection supersedes the preceding pending state
+
+Root routed C finished/exit0 at2026-09-13T01:24:55+08:00 (157s integer duration), then F finished/exit0 at01:25:34+08:00 (174s), and Monitor empty-goal completion after both terminal deliveries. Both tars were collected/byte-verified and all original count/identity/checkpoint/admission/terminal checks passed. C's completed_arm F label is the selected final deployment panel, resolved against its C training configuration/512 DENSE_fit rows; F training has the distinct F rule and60928 correction events. The [E0 result](ACVC_FIXED_F_TRAINING_USE_B01_RESULT_EVIDENCE_20260912.md) records complete technical acceptance separately from the [one-pair DOWN intake](ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md). Empirical work is finished. Precise local retention and six remote reclamation targets remain in the facts; Root integration/retention acceptance and policy-permitted cleanup are the only unfinished execution obligations.
+
 ## Exact execution method and cost
 
 New source `experiments/candidates/acvc/training_use_b01/launch.sh` is the short accepted-style admission wrapper: validate C/F, refuse pre-existing output, fresh actual-node `admit-memory` followed by `&& exec` of the single-arm runner. The inner process limit260s and enclosing TERM267s/KILL+1s preserve the complete270s arm cap, including admission, imports, fit, final panel, serialization/readback and exit. No allocation clock is restarted per episode or panel. Exact source SHA, two supervisor commands and source preparation receipt will be bound before either submission in `ACVC_FIXED_F_TRAINING_USE_B01_EXECUTION_FACTS_20260912.json`.
