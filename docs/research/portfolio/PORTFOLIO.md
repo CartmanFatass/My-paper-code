@@ -8,17 +8,17 @@ advancing` or pending-request sentence is not a current scheduling instruction.
 
 | Direction/work | Actual state and accountable owner | Next action and wake |
 | --- | --- | --- |
-| ACVC C01 | First three component intakes integrated through `73586502d`, completed native charge519s; unit4 accepted05:07:36 UTC and Monitor adopted05:08:00 UTC. | Monitor returns unit4 terminal; Root resumes the same DM for collection and fixed final unit5 within existing caps. Full five-unit primary remains pending; no interim efficacy gate or extra fit. |
-| FOLR new unchanged pair | Original DM published B03 card/source89035d8f1 and commands e3ac72da5. One source-only staging transaction timed out after55s without receipt; no scientific submission was in that script and no run is accepted. | Same DM is performing one bounded read-only remote reconciliation before any continuation; preserve timeout and remaining support budget, no blind staging retry or new seed. Original 1350/2700/300/3000 caps and independent continuation remain. |
+| ACVC C01 | First three component intakes integrated through `73586502d`; unit4 ended exit0 at05:10:23 UTC/whole166.65s and DM confirms complete collection, charge169s/completed sum688s. | Same DM publishes unit4 component intake and proceeds to fixed final unit5 with fresh admission/adoption. Full five-unit primary remains pending; no interim efficacy gate or extra fit. |
+| FOLR new unchanged pair | Prelaunch stop: owned remote preparation outlived the55s client timeout; parent git274.81s raises known support lower bound308.8422538s above300. No scientific submission/state or accepted handle. | Original DM verifies termination of identified owned preparation processes, preserves receipts and publishes technical intake/closeout. No stagingretry, launch, automatic top-up or scientific polarity; any future funded continuation requires its proper decision. |
 | RCLE Convergence | Original request remains unaccepted, with two ineffective clicks. Independent Transport owns recovery; fresh original-Edge selection still returns `Browser is not available: 2`. | Restore the original Edge connection, then Transport resumes the same request's reviewed preflight and repaired submission. No replacement question, hidden new Send, or advancing-slot count. |
 | FSD / MGTAP / UCOPE / VSP03 | Named allocations and intakes are complete; no successor is selected by those completions. | Preserve results and boundaries. A future scientific investment requires its proper decision; these are not unattended live jobs. |
 | VNFC / CBSC / FRRIE | Prior bounded technical work is complete; an attributable runtime repair/new funded scientific invocation remains absent. | Keep the recorded concrete readiness/authority boundaries; no routine polling or unallocated retry. |
 
-At this snapshot **two direction chains actually advance (ACVC and FOLR), three
-working-set slots are vacant**. FOLR's actual original-DM continuation is confirmed;
-it is distinct from its completed Portfolio publication and from a future native
-launch. Vacancies create no numerical allowance. Lifecycle, priority and recast
-fields remain unchanged.
+At this snapshot **one research chain advances (ACVC), four working-set slots are
+vacant**. FOLR's prelaunch grant is stopped; its original DM's remaining technical
+closeout is explicitly owned and not counted as an available empirical continuation.
+Vacancies create no numerical allowance. Lifecycle, priority and recast fields
+remain unchanged.
 
 Root checked owner-console reviews: no unapplied instructions. Monitor delivered
 ACVC unit-1 terminal and then `MONITOR_GOAL_COMPLETE` with an empty active set;

@@ -55,7 +55,16 @@ Older pending/zero-active paragraphs below are dated evidence, not current statu
   Same-request recovery is owned by Transport, with original connection restoration
   as its explicit prerequisite. No accepted generation is counted.
 
-Actual direction count: 2; vacancies: 3. Published intentions, completed returns,
+FOLR reconciliation subsequently established a prelaunch stop: parent preparation
+git elapsed274.81s, known support lower bound308.8422538s>300, no accepted scientific
+handle/state. Original DM owns termination verification, receipt preservation and
+technical intake; no stagingretry or launch is permitted under the exhausted grant.
+ACVC unit4 terminal05:10:23Zexit0/whole166.65s was routed immediately; DM confirms
+complete component with fullsummary162.05238466197625s and charge169s/completed688s,
+and is publishing before fixedfinalunit5. Monitor closed its empty active set.
+
+Actual advancing research count: 1; vacancies: 4. FOLR technical closeout remains
+owned separately. Published intentions, completed returns,
 cross-direction authoring and unresolved browser waits are excluded. No pending
 Monitor handle is orphaned at this snapshot. Later changed events update this
 section or the current Portfolio snapshot rather than silently inheriting old counts.
