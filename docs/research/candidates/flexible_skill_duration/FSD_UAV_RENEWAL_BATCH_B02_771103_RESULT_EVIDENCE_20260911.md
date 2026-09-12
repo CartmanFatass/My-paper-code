@@ -150,5 +150,12 @@ outputs, four admission/time receipts and twelve supervisor files. Overlapping
 D0 receipt copies agree. The cleanup inventory confirms all bytes match, both
 supervisors are terminal without tmux sessions, and the execution checkout has
 only six known ignored outputs. No local temporary extraction was created.
-Final scoped cleanup and retention state is in the intake and CLEANUP_FACTS.json
-when the authorized removal completes.
+All four owned remote paths are now removed, with disk and worktree-registration
+absence verified in CLEANUP_FACTS.json. The intake records the complete current
+cleanup scope; shared authoring and the older duplicate remain retained.
+
+Final preservation commit b30bf53384c89127560b6cc2a77f0671b36b36f1 retains all original bytes and both
+score tables. Root integrated the paired evidence and tables as main 14fdaa63c
+and cf5dccaa6. Cleanup completed at 2026-09-12T03:32:22.190448+00:00.
+Root's additional approximate 10.8 s integration contribution is charged once;
+partial support telemetry still prevents a complete-cost certificate.

@@ -116,9 +116,8 @@ is made. This ordinary intake creates no additional P1/P2 item.
    from the result. Recommend/execute (a). The next measurement is unallocated.
 4. **Preservation/cleanup, technical.** Options: (a) publish all unique source/
    evidence, then remove the four terminal owned remote paths; (b) retain only
-   for an actual live or unique-state dependency. Recommend (a) under Root's
-   assigned closeout. Evidence/inventory are ready; removal is pending this
-   publication. Shared authoring stays in use; no new local scratch exists.
+   for an actual live or unique-state dependency. Recommend/execute (a) under Root's assigned closeout. All four remote
+   paths are removed and verified absent. Shared authoring stays in use; no new local scratch exists.
 
 **Owner-delegated decision (unattended, 2026-09-03 instruction): (a),
 `opposite_sign`, (a), and (a), respectively, at the execution states stated.**
@@ -146,14 +145,40 @@ files; both supervisors are finished/exit0 with no active tmux session.
 
 | Owned terminal remote path | Observed bytes | Cleanup event |
 | --- | ---: | --- |
-| /home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911 | 43885122 | remove after published preservation |
-| /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911 | 1209 | remove after published preservation |
-| /home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-D0-20260911 | 2311 | remove after published preservation |
-| /home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-I-20260911 | 2300 | remove after published preservation |
+| /home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911 | 43885122 | removed; disk absence verified |
+| /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911 | 1209 | removed; disk absence verified |
+| /home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-D0-20260911 | 2311 | removed; disk absence verified |
+| /home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-I-20260911 | 2300 | removed; disk absence verified |
 
 CLEANUP_INVENTORY.json records containment, byte matches and terminal facts.
 No local temporary extraction tree was created. The older 771003 duplicate
 and its existing policy restriction are outside this allocation and remain
 unchanged. Shared source/control checkouts stay intact. Root accepts integration,
-retention and reclamation. Final disk/worktree-registration absence will be
-recorded before declaring this allocation's cleanup complete.
+retention and reclamation. Final disk/worktree-registration absence is verified; this allocation's
+assigned cleanup is complete.
+
+### Final preservation and reclamation
+
+Complete preservation is published in b30bf53384c89127560b6cc2a77f0671b36b36f1, after
+918f58e9005b89b0d12e993041a9e40a59757fd5 published the paired intake and both
+raw archives. Root integrated/pushed these as main 14fdaa63c and cf5dccaa6.
+Both archive Git blobs were read back, their original-byte hashes verified,
+and source 5b15e536806d3b54dc693e7b4b911eba53ff643c confirmed as an ancestor.
+All 22 raw files still matched immediately before removal.
+
+At 2026-09-12T03:32:22.190448+00:00, all four inventoried remote paths were absent on
+disk and the detached worktree was absent from Git registration. Both terminal
+supervisors had no tmux session before removal. CLEANUP_FACTS.json retains the
+operation and verified absence. Shared remote/local authoring checkouts remain;
+the new local collection directory is absent and no extraction scratch was
+created. All cleanup assigned to this 771103 allocation is complete. The older
+771003 duplicate remains untouched under its prior restriction outside this
+scope; no workaround removal was attempted.
+
+Primary owner reviews returned [] again at closeout. Root's newly reported
+paired-intake/table inspection, integration/conflict resolution and two pushes
+add approximately 10.8 s once, alongside the earlier 21.2 s. Monitor command
+cost is explicitly unavailable in the terminal receipts; Root will not make
+an extra accounting query. SUPPORT.json retains known charges, final publication
+charges as measured, and unresolved relay/client/observation attribution.
+The primary and its opposite_sign reading are unchanged.

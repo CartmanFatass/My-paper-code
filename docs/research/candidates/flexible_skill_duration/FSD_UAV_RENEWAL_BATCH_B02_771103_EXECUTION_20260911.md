@@ -1,8 +1,8 @@
 # FSD UAV renewal batch B02 / 771103 — exact execution record
 
-**State:** both arms terminal and technically accepted; complete paired
-B/EXPLORE result is opposite_sign. Scientific intake and preservation are
-prepared; scoped terminal cleanup follows publication.
+**State:** complete valid opposite_sign B/EXPLORE; intake, raw preservation
+and all cleanup assigned to the 771103 allocation are complete. Final Root
+handover/publication records follow; no successor is allocated.
 Owner: FSD DM /root/dm_fsd_i1280_implementation. Authoring checkout
 C:/Projects/HMASD-worktrees/codex-fsd, branch codex/fsd. Root owns main integration
 and accepts retained evidence/reclamation. Assignment 1 and card §8 control this
@@ -230,3 +230,24 @@ preserved, no tracked/untracked changes and only six known ignored outputs.
 Publish this evidence before the already authorized scoped removal, then
 record disk/worktree-registration absence. Shared authoring and the old local
 771003 duplicate remain outside removal.
+
+## Final cleanup acceptance
+
+Published paired preservation b30bf53384c89127560b6cc2a77f0671b36b36f1 was read back from
+Git before deletion; both archives retain all 22 original raw files, and the
+launch source is preserved in its ancestry. Root integrated/pushed paired
+intake and ordered/run tables as main 14fdaa63c and cf5dccaa6.
+
+At 2026-09-12T03:32:22.190448+00:00, the exact execution worktree, input directory and
+both supervisor directories were absent; worktree registration was absent.
+CLEANUP_FACTS.json records the scoped operation, file matches and absence.
+The new local collection directory is absent and no temporary extraction
+was created. Shared remote/local checkouts remain. The older 771003 local
+duplicate is outside this allocation and was untouched. Current cleanup is
+complete; Root accepts integration, retention and reclamation.
+
+Owner reviews were [] again at closeout. Root's reported 10.8 s paired
+publication/integration work is charged once in addition to prior 21.2 s.
+Monitor observation command cost is unavailable in receipts; no additional
+query is made. Final handover/publication and unknown relay/client terms remain
+explicit, with no observed cap breach and no complete-cost certificate.
