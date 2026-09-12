@@ -132,10 +132,24 @@ must be charged once inside600s; full deliberation/client overhead is unmeasured
 Old S cost and older cumulative unknown tails remain historical once, outside C's
 new future allowance. No native saving transfers to support.
 
-Cleanup inventory: this one terminal detached worktree, one supervisor root, the
-local/remote30MB source bundle and two remote result/supervisor transport archives.
-Full original runtime and supervisor bytes are preserved in committed direction
-evidence archives with matching remote/local SHA256 and19 result-member digests.
-Root integration/retention/reclamation acceptance remains the removal boundary;
-DM owns its execution. Shared authoring checkout remains in use. The finite pair
-is scientifically complete; no second S/retry or other numerical remainder exists.
+## Accepted reclamation completed — 2026-09-12T17:37:38Z
+
+Root integrated/pushed the complete C chain through main9ca150856 and explicitly
+resumed this DM for only the listed cleanup. Local mainc012ab3e0 contains that
+acceptance; both retained archives match the published result/supervisor SHA256.
+Before removal, the terminal supervisor was finished/exit0/tmux_active=false,
+the detached source remained2717796 and Git status was clean. Every19 result
+member and6 supervisor members matched the retained archives, with no extra
+runtime or supervisor files. Exact resolved paths were within the named inventory.
+
+Removed the one detached worktree via Git and verified both disk and worktree
+registration absence; removed its terminal supervisor root, remote source bundle
+and two remote result/supervisor transport archives. PowerShell verified the
+exact local source-bundle path/digest, removed it and confirmed absence.
+All six named filesystem targets are absent; no assigned cleanup remains.
+Full native artifacts and current direction evidence stay on main/codex/cbsc;
+the shared Windows authoring checkout remains in use. No scientific invocation,
+test, retry, successor or policy change occurred during reclamation.
+Exact proof: evidence/public-stream-b01-20260912/cleanup-receipt.json.
+Measured C support prefix through physical cleanup=139.127725s; final
+publication/Root/Monitor/client tail is separate and not asserted zero.

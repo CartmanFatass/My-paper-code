@@ -82,9 +82,12 @@ Root may integrate this accepted result, close the finite slot and sequence anot
 independently authorized direction. Direction lifecycle/priority remains Root's
 current Portfolio record; this is no local PARK or family closure.
 
-Preservation ready: original result and supervisor archives with matching local/
-remote SHA256 plus all19 result-member hashes. Reclaim only this terminal detached
-worktree/supervisor and named source/result transport copies after Root confirms
-integration/retention acceptance. Shared codex/cbsc authoring checkout remains live.
-Measured support and unknown remaining Root/Monitor/client tail are explicitly
-reported in E0; unspent native budget never funds support or a successor.
+Preservation and reclamation complete: Root integrated/pushed through main9ca150856
+and accepted the exact inventory. All19 original result members and6 supervisor
+members were matched against retained archives before removal. The one terminal
+worktree is absent from disk and Git registration; its supervisor and named local/
+remote transport copies are absent. See the execution record and
+evidence/public-stream-b01-20260912/cleanup-receipt.json. Shared codex/cbsc
+authoring checkout and published source/evidence remain live. No cleanup or
+scientific continuation remains in this C grant. Measured support and unknown
+Root/Monitor/client tail are explicit; unspent native budget funds no successor.
