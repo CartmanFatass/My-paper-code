@@ -28,8 +28,10 @@ the frozen provisional single-task C-BENCH rule. F-C is +0.095915968685 J with i
 [0.038286385582, 0.091981152413]. Both lower bounds strictly exceed .01 J. Coverage is
 qualified by the prespecified iid-normal complete-fit-panel model; actual neural-training
 calibration remains unestablished. The [final intake](ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#final-scientific-intake-2026-09-12)
-accepts this bounded package result and records the frozen C as consumed, without a repeat
-or a selected next object. Three fresh development fits and the older E01 observations
+accepts this bounded package result and records the frozen C as consumed, without a repeat.
+The subsequent original-Convergence decision selects one bounded common-F deployment
+comparison of training through fixed F versus training C. That next B remains unfunded;
+train-C→deploy-F stays the current reference. Three fresh development fits and the older E01 observations
 on two selected retained bases remain development evidence, outside C01. The learned selective-retrace
 package stays ended: both learned gates improved over C, but F was stronger in both
 instances and the structured gate's advantage over the generic gate did not recur.
@@ -81,8 +83,11 @@ explicit working model. The claim remains tied to five complete independent fit-
 units, final-only evaluation and the exact native task/learner law. Its adverse individual
 worlds preclude universal benefit, and unequal private interventions leave motion
 suppression plus recurrent/teammate trajectory feedback as a surviving explanation.
-No next empirical discriminator is locally selected after this consumed C; that decision
-belongs to the original Convergence node, with any further allocation separately grounded.
+The original Convergence node has selected the next discriminator: one fresh matched
+training pair, train-through-F versus train-C, both evaluated through F. It tests whether
+changing training adds useful return to the established deployment-only package, with
+one-pair B scope and a .01 J practical margin. No new result, card or implementation is
+accepted; the complete empirical/support investment remains separately unallocated.
 
 Exact binding remains a useful protocol primitive. Neither historical learner object nor the
 new native comparisons support adaptive ACVC superiority over their strongest competent fixed control.
@@ -486,11 +491,50 @@ handoff affected writing, not scientific meaning. The [E0](ACVC_FRESH_DENSE_PACK
 and [final intake](ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#final-scientific-intake-2026-09-12)
 preserve the direct observations, model limit, predictions and costs. Native inclusive
 work was 855 s; incomplete support coverage does not support a full-budget efficiency
-claim. The next object requires original-Convergence authority; no sixth fit, new object,
+claim. At that C01 boundary the next object required original-Convergence authority; no sixth fit,
 transfer claim or formal UAV entry is inferred from this result. This synthesis changes
 no historical family closure, recast count or Portfolio disposition.
 
+### Post-C01 training-use Convergence — accepted 2026-09-12
+
+The original node's complete [response](pro_packets/20260912_post_c01_training_use_convergence/archive/RESPONSE.md)
+at `4d50f9a6a2d125e373b414499d580f875c1fc61c` selects one specific B/EXPLORE next object:
+train through the unchanged fixed F execution rule versus train C, with both final policies
+deployed through F. The [full intake](pro_packets/20260912_post_c01_training_use_convergence/INTAKE.md)
+accepts the conforming direction decision. Two fresh fits form one matched training pair;
+each retains 512 training episodes/1,024 Adam calls and one final 64-world F panel. The
+primary signed common-F mean uses .01 J = 2.56 S as practical margin; conditional final-world
+spread does not measure training-population variability. No new scientific result exists.
+
+The practical question is whether the proposer and partners should learn from the corrected
+motion and private feedback they will encounter at deployment. The native path is local
+retained-user loss/proposed away-motion → owned F rule → actual motion → joint service and
+private recurrent/teammate feedback → learning exposure → final native return. C01's qualified
+gain supports using train-C→deploy-F as the strong null. Its adverse worlds and useful dwell
+remain contrary evidence; training through F may suppress exploration or teach unhelpful
+proposals, and deployment-only F may already be sufficient. The new comparison cannot isolate
+pure retracing, actor versus partner adaptation or history necessity.
+
+The selected proposal-as-action formulation preserves the sampled proposal and stored old
+density in recurrent PPO, while actual F-sent commands feed the recorded subsequent history.
+Faithful rollout/storage/replay/reset and final common-F measurement are later implementation
+dependencies. Their specification is not acceptance of the currently absent F-training path
+or a proof of learning improvement. Shared UCOPE defaults and legal actor information remain.
+
+Portfolio bought only the now-complete question and intake. This next B, all source/check/run
+work, its card and identities remain unfunded and uncreated; no 270/540/660/1200 offer is renewed.
+The complete changed-path cost and this consultation's documentary/provider cost remain unknown.
+Retain train-C→deploy-F as the current same-host reference while a proper Portfolio investment
+considers the exact faithful pair and full support. No automatic recurrence fit, extra panel,
+cost pilot or Innovator follows. The next observation would be the complete paired common-F
+endpoint, not more C01 evaluation. Recasts:2, lowest-contention status and the ended T/G and
+uncertain/delayed families remain; no Portfolio lifecycle change or formal UAV entry occurs.
+
 ## Evidence set
+
+- `docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/archive/RESPONSE.md`
+- `docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE.md`
+- `docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE_FACTS.json`
 
 - `docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md`
 - `docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_RESULT_EVIDENCE_20260911.md`
