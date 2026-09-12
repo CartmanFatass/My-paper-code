@@ -67,3 +67,12 @@ auto-applied to the prospective card, not an asserted launch. Audit143 records
 fresh identity selection and144 records reuse of accepted checks. Current primary
 owner reviews were empty. Known support is a scoped sum in the summary; two early
 read-command clocks and unitemized terms remain unknown, never imputed zero.
+
+## Published source and exact command binding
+
+Source/card commit: 89035d8f1e3f44a07e80c08e3140283c03592efb. The summary records both literal agent-task
+commands, fresh handles/results/admission/time paths, Linux CPU1/1 route and
+1340s TERM plus5s teardown timeout inside each1350s complete cap. Commands will
+be committed/pushed before the single published-source staging transaction and
+submission. No new scientific invocation is accepted at this preparation point.
+The local control directory contains only exact LF staging text and later receipts.
