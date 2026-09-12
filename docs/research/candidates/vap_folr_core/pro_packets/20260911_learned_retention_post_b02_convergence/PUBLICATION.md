@@ -88,3 +88,10 @@ absent. Preserve ordinary RETAIN, old narrow pauses and every bounded observatio
 
 One readiness relay to Root will bind this publication and the exact handoff.
 Its accepted result is recorded separately; no ACK wait or second dispatch follows.
+
+The READY publication was pushed as
+`f5c651b842edd966cac524be602cb78446c76889`. One handoff to the live configured
+Root relay was app-accepted; RELAY_RECEIPT.json retains its exact event, payload
+and tool result. This establishes relay delivery, not Root integration, Transport
+dispatch or provider Send. No duplicate or acknowledgement wait is added. The
+native final is the source's completion record for this same ready event.
