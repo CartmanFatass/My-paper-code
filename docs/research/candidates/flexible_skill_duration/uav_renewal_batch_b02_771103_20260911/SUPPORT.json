@@ -229,9 +229,13 @@
     {
       "purpose": "write terminal execution/audit/support record and applied result trace on existing owner card",
       "wall_seconds": 0.3877923
+    },
+    {
+      "purpose": "publish accepted adverse pair, raw preservation, intake/brief/owner/audit and current science",
+      "wall_seconds": 5.5026969
     }
   ],
-  "known_support_wall_seconds": 83.63270969999998,
+  "known_support_wall_seconds": 89.13540659999998,
   "counting": "Each outer invoked support interval once; nested clocks are not additive. Intake writing/publication, cleanup and final relay/publication are charged as measured in subsequent records.",
   "new_scientific_submissions": 2,
   "new_source_delivery_transactions": 1,
@@ -251,7 +255,7 @@
     "limit_seconds": 45,
     "status": "successful single transaction; nested helper clock not added again"
   },
-  "known_native_plus_support_seconds": 1578.8827097,
+  "known_native_plus_support_seconds": 1584.3854066,
   "Root_integration": {
     "source_main": "31e9cc05a",
     "D0_handover_main": "0e7bb1e83",
