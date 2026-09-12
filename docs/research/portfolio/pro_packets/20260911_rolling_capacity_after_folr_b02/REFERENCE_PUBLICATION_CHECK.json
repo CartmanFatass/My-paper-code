@@ -1,0 +1,813 @@
+{
+  "checked_utc": "2026-09-12T01:03:22.979853+00:00",
+  "repository": "CartmanFatass/My-paper-code",
+  "request_id": "2026-09-11-rolling-capacity-after-b02-portfolio-01",
+  "reference_count": 48,
+  "full_input_sha": "9755931f892990e4555faf0b276ed713579c81f9",
+  "remote_heads": [
+    [
+      "29b57b8b84c7407b7ba6e9c32f3688e0a6cde88e",
+      "refs/heads/codex/acvc"
+    ],
+    [
+      "c56bd0e88d3ae5f0e5260d2a7e25a4bfc7a97fff",
+      "refs/heads/codex/cbsc"
+    ],
+    [
+      "656c316d0871bdfcb2dd4d27a44d23e1240bb5b0",
+      "refs/heads/codex/crto"
+    ],
+    [
+      "3fd5fed2babca330865b89cea2a7d8f51d6e00a4",
+      "refs/heads/codex/direction-vsp_c1"
+    ],
+    [
+      "bf29ec0fa8218efc56a4d46480bc0179d3b395b0",
+      "refs/heads/codex/frrie"
+    ],
+    [
+      "35bf2d3e1c2965d90cff6fbc0ef343f3f7300559",
+      "refs/heads/codex/fsd"
+    ],
+    [
+      "c284bd177c4a4a10d0bc4dd7de8e0a45cc1d4124",
+      "refs/heads/codex/mgtap"
+    ],
+    [
+      "9755931f892990e4555faf0b276ed713579c81f9",
+      "refs/heads/codex/portfolio"
+    ],
+    [
+      "3151cb405e6d36a42c5102056f2eedb18daf7103",
+      "refs/heads/codex/pro-dish-post-b06-20260907"
+    ],
+    [
+      "5a335eaff0f2242c515f6867e22d04bdd8d832ef",
+      "refs/heads/codex/pro-rcle-post-a02-20260906"
+    ],
+    [
+      "4715e912cb926368db050f5440e5cc4957ebb90f",
+      "refs/heads/codex/pro-rcle-tbcfv-first-b-20260906"
+    ],
+    [
+      "25b73b91a25e3b11835de81cd690ac6232d94044",
+      "refs/heads/codex/pro-vnfc-b01-two-seed-convergence-20260905"
+    ],
+    [
+      "e130c1cdabae114ab98948f28f437167847e9a9e",
+      "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906"
+    ],
+    [
+      "a7265e9733873e3dd16de76861c75f3634302095",
+      "refs/heads/codex/pro-vspc1-k4-three-seed-20260905"
+    ],
+    [
+      "640d018f0e2a374cd95b0cbae9f5f2e705b22aaa",
+      "refs/heads/codex/rcle"
+    ],
+    [
+      "92a3508741a6e23de941e7c620a2ccae5b54152c",
+      "refs/heads/codex/scdmp"
+    ],
+    [
+      "5accfc0d6c5f8f8e9bf91de759bc457070675eed",
+      "refs/heads/codex/ucope"
+    ],
+    [
+      "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "refs/heads/codex/vap-folr"
+    ],
+    [
+      "c922b254476d551a8fc8f41849c998c16b400066",
+      "refs/heads/codex/vnfc"
+    ],
+    [
+      "6488595c063ac3844e72125f0dd48e88e527dd4d",
+      "refs/heads/codex/vsp02"
+    ],
+    [
+      "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "refs/heads/main"
+    ]
+  ],
+  "references": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/SCIENCE_BRIEF.md",
+      "commit_sha": "9755931f892990e4555faf0b276ed713579c81f9",
+      "bytes": 36755,
+      "sha256": "c0f2323d5c0adbe5b1eda56399167dbb39ebe7574c92a44de3f16c6edb152ffe",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/PREPARATION_INTAKE.md",
+      "commit_sha": "9755931f892990e4555faf0b276ed713579c81f9",
+      "bytes": 12457,
+      "sha256": "1abb14ec81e059eeebf216046fdd8b07d45f9775893095306554a74561d33f9a",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/FACTS.json",
+      "commit_sha": "9755931f892990e4555faf0b276ed713579c81f9",
+      "bytes": 19806,
+      "sha256": "5e3fa8c1f4a68fe98a99595c3d980d593d41305c263b82ea0f24b3759ae230c0",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/ISSUE_SNAPSHOT.json",
+      "commit_sha": "9755931f892990e4555faf0b276ed713579c81f9",
+      "bytes": 18539,
+      "sha256": "b3943d75c32ea1e77a2da0860e75028394d08fdfc850cf2685951be708915353",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        }
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 44084,
+      "sha256": "f5f1e601be267d5881f05e0f46cc9a66aac99175fa9c91783f7688f1914687bd",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 11577,
+      "sha256": "c5a6deca6277702bc7777eaae02bfdf2c74381873efd75881e0c425683422667",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 11428,
+      "sha256": "fb3ccd5f74c44a1f14e3de638dbc4b4fa7087fc79deacd2b84951760ad3d6c36",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 62942,
+      "sha256": "f01b9f8385202e82e67ae58b4d6bfc48ada8a208723c20581d89e2ddbdcbee75",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "commit_sha": "50703c1bd1a4411c31a0b211d3ec8aff88fa0d0f",
+      "bytes": 66565,
+      "sha256": "1dc62ab2a10aef042c4a3ca3ba53b26daecbea0529e653359167cc03ecb76752",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-11-post-program-vacancies.md",
+      "commit_sha": "9755931f892990e4555faf0b276ed713579c81f9",
+      "bytes": 23278,
+      "sha256": "a3da321f42cf494ef4440b1a3e75795d2cd5c294f5dd2be6dea73e8bf2144bfb",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/archive/RESPONSE.md",
+      "commit_sha": "67b9ab3a794d026cf95ade7dfa770037dc786528",
+      "bytes": 34049,
+      "sha256": "de211e40dd6c07fdba22cd9d3801b565cf5e758d20c66c53d01503f2adcbdec2",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/acvc",
+          "head": "29b57b8b84c7407b7ba6e9c32f3688e0a6cde88e"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_THREE_FRESH_CONVERGENCE_INTAKE_20260911.md",
+      "commit_sha": "29b57b8b84c7407b7ba6e9c32f3688e0a6cde88e",
+      "bytes": 17415,
+      "sha256": "6db6620845f69349a86907b9f9fa8ed84667c73b280ab99a236882824d16b52f",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/acvc",
+          "head": "29b57b8b84c7407b7ba6e9c32f3688e0a6cde88e"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 43535,
+      "sha256": "d52891c39dc300ad83449226962f98cd913eff9891b6d046e918b8742e04e599",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 11212,
+      "sha256": "d3a7b5bcae1b573d2029b615c714913733426ae63c06c0ff3cb680e8ac3d08db",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_SCIENCE_CARD_20260911.md",
+      "commit_sha": "2b22270b3b076df60f4afd3203c3f09aeab3b98b",
+      "bytes": 10265,
+      "sha256": "e4f57ac40095b2fa513c25b57c1d6ff77bd56daa583b51be123526b6532464f0",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "5a09c770169bd85dcdc5f48f8930235073ea2c0e"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "bytes": 18060,
+      "sha256": "0216763afc49223d5bc6f156b749696f612af29b1e05602c2a109dfcb023845f",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "5a09c770169bd85dcdc5f48f8930235073ea2c0e"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "bytes": 5529,
+      "sha256": "7822524bf0de8691e3afc1bdd0b453d747af7447c25c3055c1a724d640a35f78",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "5a09c770169bd85dcdc5f48f8930235073ea2c0e"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md",
+      "commit_sha": "8da607b4b7fb415b4212e0e20d74f9dc9c20a32e",
+      "bytes": 19895,
+      "sha256": "54f9eb1a539b29c3260dbae4ae5af9768a41f9620be5be03bb565ac804f4fa77",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "5a09c770169bd85dcdc5f48f8930235073ea2c0e"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 22261,
+      "sha256": "e0fa494e475cf3e2fe4f5a6baf686707f986cb637a868ee8b4cffd27c21d6281",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771003_INTAKE_20260911.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 11632,
+      "sha256": "6073df0789406f31828d3d723b6ab6845aade316bb5d5cfbf569555d9560f762",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771003_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 8514,
+      "sha256": "2bd6c804890b2ab08453a1ea7a7a3c9f06f73dc0d3c75d2679d3740e01b47154",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771003_20260911/SUPPORT.json",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 10121,
+      "sha256": "403b622296e592ad11bb0504882055f093a769167a0abc0dd8d66fe0e8396a7f",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 16984,
+      "sha256": "746fb3f7feebbcb3ece119ff83f4bbf6299ba84203b1e2a9bdba9370dba4cae0",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 12341,
+      "sha256": "d05b5042a4be39cea9c00c37c505e6d2974b11f86f4cc3c90c5db12ea0f6e1e7",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260911_channel_normalization_convergence/TRANSPORT_BLOCKER_INTAKE.md",
+      "commit_sha": "640d018f0e2a374cd95b0cbae9f5f2e705b22aaa",
+      "bytes": 7376,
+      "sha256": "1accba1571578c1ece267e9bca3680e5331703de94d5a987996ebd30e2ad8a99",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/rcle",
+          "head": "640d018f0e2a374cd95b0cbae9f5f2e705b22aaa"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_INTAKE_20260911.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 12981,
+      "sha256": "fc3d75fc48f5f33a2b4759d906e62769dd4127a245f99766ab9c3e2dfe5295c6",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_P47_TECHNICAL_UNBLOCKING_INTAKE_20260911.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 12119,
+      "sha256": "202048abd52475a258c83565a9a84730f279c44b962441eb8fbba441bdea17e9",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 10425,
+      "sha256": "9fe8b6dfbd681f4f96eee27148c6b2bfb891af66a3342bc9245147a7d65dab87",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 32052,
+      "sha256": "345a00a174f3830aa9b2d6fcdeff4bea02f0fb786b1f8a26da0cc21cbd731fe8",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 32087,
+      "sha256": "9a59b0c716a6a1ea3bc98b09789a6d6e3d049c65442620cd8b6a097a54f84123",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 53389,
+      "sha256": "3522f67f1ed92078b6ba4954cc94ae1985d52a1a3b43fd5e59b36069f71d8ad2",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 84081,
+      "sha256": "08e5a85acb2fb73205022211c4ee35baa6107502b60da72c989b389d35019090",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 38169,
+      "sha256": "c056718e634bfea0825fb55b54b974e6e4fb78145feff28751483a21656cdba9",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 48187,
+      "sha256": "ffec6f452195bc8c60ee31eca6c25203d81443af927f8741832dae2887a31343",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 51066,
+      "sha256": "9f6dd82d1f9035e8093c3cd9882fea5ee5baa781182d85ce4c6343ad5b4c00d1",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 52543,
+      "sha256": "895476dcacf024a251f4902cec7f8168b9b68e04f659a66c14193fabf5b40744",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 54871,
+      "sha256": "eaf079ddba94cd33bb7b2d385c5fa7caf4339deb2477e4eec1b3a73e6df91e16",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/ucope/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 160313,
+      "sha256": "2be254a9501ae8de51df3b3c4a2d361a3e9c58424008e7a70f7a9c55c90566d2",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 45965,
+      "sha256": "d288e527b7304af8caddf0d501e0186d5e6923c3fff1e70e132bf9edbb8117f8",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 30428,
+      "sha256": "9639d9f76a06300f1bc1ab3b867420e8827c15edd933c4b04832955ca96ba8fa",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vsp_02/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 10794,
+      "sha256": "9f12835000b6e29662bc23265eebd49b4a9f4a237e8d36e90b76d3b6c0c323e5",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 37002,
+      "sha256": "666f324eb0b109a06c3f73135da68bb6333a8f045014ca645b112d5f697d75ae",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 63630,
+      "sha256": "063d9291faba212941c75a7ab0e14f69c741bcfbc0c4cdca95573d8b9a88020b",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "9755931f892990e4555faf0b276ed713579c81f9"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "scope": "Read-only path/version/publication check; proves published Git objects, not Pro connector access."
+}

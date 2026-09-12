@@ -29,7 +29,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "b",
   "dm_reason": "两项缺失的独立学习观察和两个具体方向判断有不同决策价值，但MGTAP负结果使少投成为实质备选。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/SCIENCE_BRIEF.md",
@@ -113,6 +113,16 @@
       "record": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
       "state": "planned",
       "summary": "Root在TASK发布前追加已接受FOLR正向结果：差值+1.763359375。原A/B/C/D四项建议不变，FOLR第五位P/Q/R另立条目；当前预算没有自动续期。投资尚未执行。"
+    },
+    {
+      "at": "2026-09-11T23:40:21+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-11-post-program-vacancies.md",
+      "state": "applied",
+      "summary": "完整50703c1bd1a4411c31a0b211d3ec8aff88fa0d0f回复经全文及44固定引用核对合规，Pro选B而非作者A：Root已派发FSD新3000秒比较及RCLE、ACVC各一个零实现零数值原Convergence问题。FSD771003的D0已启动并确认Monitor接管，结果尚未接受。MGTAP不增第三对但未关闭方向；VNFC原900秒条件排队且无新修复经费。实际中文裁决和反证见同目录INTAKE_OWNER_PACKET.json。",
+      "correction": "当前实际选择行是docs/research/portfolio/audit/2026-09-11.md#L108；原L95为历史准备记录，原A推荐不改写。"
     }
-  ]
+  ],
+  "approval_correction": "当前实际选择行是docs/research/portfolio/audit/2026-09-11.md#L108；原L95为历史准备记录，原A推荐不改写。"
 }

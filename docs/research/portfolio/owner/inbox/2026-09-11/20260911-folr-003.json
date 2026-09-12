@@ -1,0 +1,92 @@
+{
+  "id": "20260911-folr-003",
+  "created": "2026-09-11T16:30:43-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FOLR 第二个不改方案的学习保留配对",
+  "context": "新 B02 测量首个学习保留收益能否在全新训练经历中再次出现；绑定结构为部分可观测环境中的真实成员更替。保持129参数事件保留门和相同信息 GRU 比较器。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按已获 Portfolio 选择的新预算执行7810/107810配对并完整入库；不增加后继。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "依所有者新覆盖停止尚未执行的本次工作，保留此前全部结果。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "只按明确的新覆盖修订尚未执行部分，保留冻结历史和预算边界。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "直接观察第二次训练结果；同一机制已获打开且实现与检查均可复用。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_SCIENCE_CARD_20260911.md",
+    "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L105",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "执行已获 Portfolio 选择的第二个学习保留配对，以新训练经历观察首个收益是否再次出现。",
+    "changes_if_approved": [
+      {
+        "target": "FOLR learned-retention B02",
+        "from": "B01 完成，只有一个学习配对",
+        "to": "按原方案执行一次全新7810/107810配对并完成入库"
+      }
+    ],
+    "if_refused": "保留已有全部结果和固定半保留暂停；按明确的所有者新指令处理尚未执行的本次工作。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+        "quote": "P buys the direct next observation: **one new independent training pair with unchanged LEARNED_EVENT and event-aware RETAIN**.",
+        "why": "直接观察另一次训练后的收益，不需重开已选机制。"
+      },
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md",
+        "quote": "LEARNED_EVENT_ABOVE_MEI",
+        "why": "首个有效配对差值+1.763359375，超过预先声明的1分尺度。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md",
+        "quote": "B01 remains one accepted+1.763359375 native gain, forecast WITHIN_MEI missed.",
+        "why": "一次收益不代表稳定优势；比较器已能利用相同局部历史和事件。"
+      }
+    ],
+    "uncertainty": [
+      "新配对可能收益缩小或反向。",
+      "相同评估序号不是动作后相同交通世界。",
+      "结果不能区分初始化、额外参数和伙伴共同适应的贡献。",
+      "新的完整辅助成本尚未测得。"
+    ],
+    "cost": {
+      "compute": "每臂完整1800秒、原生总3600秒、辅助300秒、完整3900秒；各臂5000训练及128最终回合。",
+      "owner_time": "无需等待；可异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing; existing Portfolio allocation applies"
+    },
+    "verdict_text": "Recommend and execute(a). Owner-delegated decision (unattended,2026-09-03 instruction): (a).",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_SCIENCE_CARD_20260911.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T00:09:32+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "已完整执行新7810配对并接受原生结果：学习门减保留=-1.76953125，进入RETAIN_ABOVE_MEI；保留首轮正结果，本次不追加后继。清理按入库记录执行。"
+    }
+  ]
+}

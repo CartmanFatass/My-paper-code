@@ -110,10 +110,13 @@ projection uses the runner's complete per-arm law. Relevant post-learner publica
 follows the empirical/runtime specs and the actual dependent claim, not blanket historical replay.
 
 After acceptance, DM/Operator directly adds the handle to the shared Monitor, using the live
-primary-control configuration, not frozen or stale direction copies. Keep adoption pending until
-the Monitor reports it; do not start a second status-polling loop. Root forwards terminal facts to
+primary-control configuration, not frozen or stale direction copies. The `MONITOR_ADD` payload
+must require `get_goal` and continuation of the matching unfinished goal or `create_goal` without
+a token budget. Keep adoption pending until the Monitor reports both direct handle state and the
+actual unfinished goal state; app delivery alone proves neither. Do not start a second status-polling loop. Root forwards terminal facts to
 the original collection owner, then DM completes technical acceptance and separate scientific
-intake. Uncertain process or message acceptance is reconciled on the same identity, never retried
+intake. Root also receives `MONITOR_GOAL_COMPLETE` after the final terminal notice is delivered and
+the active set is empty. Uncertain process or message acceptance is reconciled on the same identity, never retried
 as a fresh invocation merely because an observation was lost.
 
 ## Current records, integration and cleanup

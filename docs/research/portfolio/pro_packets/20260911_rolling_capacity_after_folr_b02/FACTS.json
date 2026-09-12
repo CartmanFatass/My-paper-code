@@ -1,0 +1,535 @@
+{
+  "created_utc": "2026-09-12T00:56:00.703206+00:00",
+  "question": "Rolling capacity after accepted FOLR/FSD B02 and ACVC claim design",
+  "authority": "Preparation and recommendation only; Portfolio has not selected this request",
+  "root_snapshot_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+  "authoring_input_sync_sha": "ea7536fc9f4d23dc96cd5974dd0f64a6975f452c",
+  "current_advancing_directions": 0,
+  "current_vacancies": 5,
+  "advancing": [],
+  "completed_new_boundaries": [
+    "vap_folr_core B02",
+    "acvc one Convergence question/intake",
+    "flexible_skill_duration B02 771003"
+  ],
+  "parked_pre_submission": [
+    "roster_consistent_latent_exploration: zero Pro generation"
+  ],
+  "queued_not_ready": [
+    "variable_n_fleet_churn conditional900"
+  ],
+  "portfolio_authoring_counted_as_direction": false,
+  "actual_author_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "policy_search_candidates": 0,
+    "profiling": 0,
+    "source_implementation_edits": 0,
+    "source_or_numerical_tests": 0,
+    "new_raw_result_analysis": 0,
+    "provider_sends": 0,
+    "transport_dispatches": 0
+  },
+  "machine_generated_exposure_line": "NEW EXPOSURE: scientific_invocations=0, models=0, checkpoint_loads=0, environments=0, scientific_rng_masters=0, training_episodes=0, native_ticks=0, optimizer_steps=0, evaluation_episodes=0, diagnostic_trajectories=0, policy_search_candidates=0, profiling=0, source_implementation_edits=0, source_or_numerical_tests=0, new_raw_result_analysis=0, provider_sends=0, transport_dispatches=0. Configuration arithmetic and documentary retrieval only.",
+  "configuration_arithmetic_only": true,
+  "future_acvc_one_unit": {
+    "independent_fits": 1,
+    "training_episodes": 512,
+    "training_ticks": 131072,
+    "evaluation_panels": 3,
+    "evaluation_episodes": 192,
+    "evaluation_ticks": 49152,
+    "adam_steps": 1024,
+    "collection_actor_rows": 655360,
+    "replay_actor_rows": 2621440,
+    "critic_update_rows": 524288,
+    "evaluation_actor_rows": 245760,
+    "top_level_model_constructions": 9,
+    "post_fit_loads": 3,
+    "coordinate_pair_checks_upper_inherited": 6553600,
+    "total_episodes": 704,
+    "total_ticks": 180224
+  },
+  "future_acvc_five_units": {
+    "independent_fits": 5,
+    "training_episodes": 2560,
+    "training_ticks": 655360,
+    "evaluation_panels": 15,
+    "evaluation_episodes": 960,
+    "evaluation_ticks": 245760,
+    "adam_steps": 5120,
+    "collection_actor_rows": 3276800,
+    "replay_actor_rows": 13107200,
+    "critic_update_rows": 2621440,
+    "evaluation_actor_rows": 1228800,
+    "top_level_model_constructions": 45,
+    "post_fit_loads": 15,
+    "coordinate_pair_checks_upper_inherited": 32768000,
+    "total_episodes": 3520,
+    "total_ticks": 901120
+  },
+  "future_folr_Q": {
+    "independent_pairs": 1,
+    "real_fits": 2,
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "final_episodes": 256,
+    "final_ticks": 5120,
+    "replay_gru_rows": 66783360,
+    "acting_rows": 1076880,
+    "learned_arm_gate_forward_rows": 33930120,
+    "total_ticks": 205120
+  },
+  "future_mgtap_M": {
+    "independent_pairs": 1,
+    "real_fits": 2,
+    "training_episodes": 1024,
+    "training_ticks": 262144,
+    "final_episodes": 64,
+    "final_ticks": 16384,
+    "adam_steps": 2048,
+    "top_level_models": 6,
+    "actor_rows": 6635520,
+    "total_episodes": 1088,
+    "total_ticks": 278528
+  },
+  "new_proposed_caps_seconds": {
+    "ACVC_A": {
+      "per_complete_native_fit": 270,
+      "number_fits": 5,
+      "native_sum": 1350,
+      "invoked_support": 1650,
+      "complete": 3000,
+      "promotion_questions": 1,
+      "innovator_questions": 1,
+      "empirical_release": "conditional on proper-node promotion, Innovator and conforming freeze"
+    },
+    "FOLR_Q": {
+      "per_arm": 1800,
+      "native_sum": 3600,
+      "invoked_support": 300,
+      "complete": 3900
+    },
+    "MGTAP_M": {
+      "per_arm": 450,
+      "native_sum": 900,
+      "invoked_support": 300,
+      "complete": 1200
+    },
+    "FSD_S": {
+      "D0": 900,
+      "I": 1800,
+      "native": 2700,
+      "support": 300,
+      "complete": 3000,
+      "one_source_delivery_transaction_within_support": 45
+    }
+  },
+  "new_question_only_options": {
+    "ACVC_B": {
+      "maximum_promotion_questions": 1,
+      "maximum_innovator_questions": 1,
+      "implementation_and_numerical_allowance": 0,
+      "complete_effort": "unknown; no source/model/scientific RNG/execution input freeze"
+    },
+    "FOLR_P": {
+      "questions": 1,
+      "implementation_and_numerical_allowance": 0,
+      "complete_effort": "unknown, not free"
+    },
+    "FSD_T": {
+      "questions": 1,
+      "implementation_and_numerical_allowance": 0,
+      "complete_effort": "unknown, not free"
+    }
+  },
+  "recommended": "S+A+P+N",
+  "selected": null,
+  "proposed_new_direction_tasks_recommended": 3,
+  "remaining_vacancies_if_only_recommended_tasks_actually_advance": 2,
+  "largest_listed_new_numeric_sum_seconds": 11100,
+  "retained_not_new_caps_seconds": {
+    "VNFC_conditional": {
+      "native": 600,
+      "support": 300,
+      "complete": 900,
+      "additional_repair_funding": 0
+    }
+  },
+  "historical_anchor_seconds": {
+    "ACVC_whole_native_per_fit": [
+      "168.37",
+      "166.05",
+      "175.58"
+    ],
+    "ACVC_five_native_min": "830.25",
+    "ACVC_five_native_max": "877.90",
+    "ACVC_five_conservative_min": 845,
+    "ACVC_five_conservative_max": 890,
+    "ACVC8961_known_support": "72.304424",
+    "ACVC8961_native_plus_known": "250.304424",
+    "FOLR_B01_native_sum": "1703.12",
+    "FOLR_B02_native_RETAIN": "895.43",
+    "FOLR_B02_native_LEARNED_EVENT": "920.56",
+    "FOLR_B02_native_sum": "1815.99",
+    "FOLR_B02_published_known_support": "47.6054458",
+    "FOLR_B02_later_DM_measured_support": "54.8407131",
+    "FOLR_B02_study_elapsed": "981",
+    "FOLR_B02_native_CPU_sum": "1818.45",
+    "MGTAP8212_native": "364.79",
+    "MGTAP8213_native": "358.11",
+    "FSD_B01_D0": "519.94",
+    "FSD_B01_I": "1020.68",
+    "FSD_B01_native_sum": "1540.62",
+    "FSD_B02_D0": "538.66",
+    "FSD_B02_I": "1069.26",
+    "FSD_B02_native_sum": "1607.92",
+    "FSD_B02_known_support": "97.6635319",
+    "FSD_B02_native_plus_known": "1705.5835319",
+    "FSD_B02_study_elapsed": 3000,
+    "FSD_B02_aggregate_CPU": "6361.64"
+  },
+  "historical_scope_limits": [
+    "Each anchor is its own recorded window, not a forecast or new allowance.",
+    "FOLR B02 full support300/complete3900 remains unknown, native caps pass.",
+    "ACVC earlier Monitor deviation and qualified later support remain.",
+    "One 1.0s FSD/FOLR terminal query remains unsplit and globally counted once.",
+    "Earlier 0.9s shared query is one enclosing operation, not multiple additive global charges.",
+    "Provider generation, queuing, deliberation and currency costs are separate unknowns, not covered by a native-time forecast.",
+    "FSD B02 is complete and its caps ended; full support300/complete3000 remain unknown. Final publication/relay/observation terms absent from the subtotal are not zero."
+  ],
+  "directions": [
+    {
+      "direction": "acvc",
+      "current_blob": "99d6c19164587941e747c996e5fb00dadb325037",
+      "changed_since_previous_default_input": true,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "capability_bound_semantic_currentness",
+      "current_blob": "5240dee225eed22df74858e185198c170cbd5248",
+      "changed_since_previous_default_input": false,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "commitment_residual_triggered_options",
+      "current_blob": "b76a4878f065703b4766fad75a4db9ade0e33d86",
+      "changed_since_previous_default_input": false,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "degraded_incumbent_shadow_handover",
+      "current_blob": "64a77d8d5a64b2128810e1ecaed46a57add6fcc7",
+      "changed_since_previous_default_input": false,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "finite_resource_relational_inductive_efficiency",
+      "current_blob": "63d8ad18850cfb20f013dd6cc5510d7aef2e08eb",
+      "changed_since_previous_default_input": false,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "flexible_skill_duration",
+      "current_blob": "d447d70103290261d3a945b5768f778c40291034",
+      "changed_since_previous_default_input": true,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "metric_ground_transport_allocation",
+      "current_blob": "63505af336ec6e32442978d7000b592e279390ee",
+      "changed_since_previous_default_input": true,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "roster_consistent_latent_exploration",
+      "current_blob": "f58161a07320600a3412173f0d8d6d13a377db0e",
+      "changed_since_previous_default_input": false,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "semigroup_consistent_duration_model_policy",
+      "current_blob": "9a792835701d1601e427f1466ab9ee3226c43ec4",
+      "changed_since_previous_default_input": false,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "ucope",
+      "current_blob": "73bc001298f5ca42bb980e89415979fa5d269501",
+      "changed_since_previous_default_input": false,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/ucope/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "vap_folr_core",
+      "current_blob": "7c8f0cc9755702870d52d4e069325047c25c2f95",
+      "changed_since_previous_default_input": true,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "variable_n_fleet_churn",
+      "current_blob": "bb2aaa74aaa6fafd566a4d5244a54965b783f86b",
+      "changed_since_previous_default_input": false,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "vsp_02",
+      "current_blob": "f61e397fb1e8e52fe33f6a920ae6bc57f6a28eb1",
+      "changed_since_previous_default_input": false,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/vsp_02/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "vsp_03",
+      "current_blob": "e21a974a2be9f0cb779c2a93f9837a6c51c95f6c",
+      "changed_since_previous_default_input": false,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/vsp_03/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    },
+    {
+      "direction": "vsp_c1",
+      "current_blob": "b08e8d63134b74b359234e97ffc7ab88e386981e",
+      "changed_since_previous_default_input": false,
+      "lifecycle": "ACTIVE",
+      "current_matching_tuned_headroom_record": "absent",
+      "path": "docs/research/candidates/vsp_c1/DIRECTION.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be"
+    }
+  ],
+  "measured_preparation_command_subset": [
+    {
+      "operation": "portfolioRolling_read1:0",
+      "wall_seconds": 0.1949832,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolioRolling_read1:1",
+      "wall_seconds": 0.4399729,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolioRolling_read1:2",
+      "wall_seconds": 0.3315989,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read2:0",
+      "wall_seconds": 0.263413,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read2:1",
+      "wall_seconds": 0.3428044,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read2:2",
+      "wall_seconds": 0.3671221,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read3:0",
+      "wall_seconds": 0.2588489,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read3:1",
+      "wall_seconds": 0.245192,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read3:2",
+      "wall_seconds": 0.43133,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read4:0",
+      "wall_seconds": 0.1993592,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read4:1",
+      "wall_seconds": 0.202237,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read5:0",
+      "wall_seconds": 0.2855552,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read5:1",
+      "wall_seconds": 0.2415976,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read6:0",
+      "wall_seconds": 0.2167337,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read6:1",
+      "wall_seconds": 0.2459687,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read7:0",
+      "wall_seconds": 0.2328037,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read7:1",
+      "wall_seconds": 0.253268,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read8:0",
+      "wall_seconds": 0.2464976,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read8:1",
+      "wall_seconds": 0.4699666,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read9:0",
+      "wall_seconds": 2.2891325,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read9:1",
+      "wall_seconds": 0.2144329,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read10:0",
+      "wall_seconds": 1.959851,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read10:1",
+      "wall_seconds": 0.5044338,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read11:0",
+      "wall_seconds": 0.2483516,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_read11:1",
+      "wall_seconds": 0.2329125,
+      "unit": "enclosing exec_command wall; read/source retrieval only"
+    },
+    {
+      "operation": "portfolio_sync_merge",
+      "wall_seconds": 0.6581247,
+      "unit": "enclosing exec_command wall"
+    },
+    {
+      "operation": "portfolio_merge_resolution",
+      "wall_seconds": 0.8970891,
+      "unit": "enclosing exec_command wall"
+    },
+    {
+      "operation": "portfolio_sync_push",
+      "wall_seconds": 4.2384099,
+      "unit": "enclosing exec_command wall"
+    },
+    {
+      "operation": "portfolio_direction_catalog",
+      "wall_seconds": 2.471546,
+      "unit": "enclosing exec_command wall"
+    }
+  ],
+  "known_subset_wall_seconds": "19.1835367",
+  "complete_preparation_cost": "unknown; subset excludes unrecorded commands, GitHub tool timing, deliberation, publication and Root work",
+  "arithmetic_provenance": [
+    "ACVC accepted one-unit counts multiplied by five; coordinate upper is inherited from the accepted response, not rederived from source.",
+    "FOLR formulas use 5000/20/4969/32/21/5/2/128 from unchanged B02 card.",
+    "MGTAP formulas use 2 arms/512 train/256 ticks/4 epochs/5 agents/32 final.",
+    "Decimal addition/multiplication only for published cost windows; no empirical intervals or extra return aggregation.",
+    "FSD uses fixed 2 arms/5 rollouts/16 train lanes/32 final lanes/H500/6 agents/15 coordinator epochs, not actual future row realization or empirical reanalysis."
+  ],
+  "previous_unsent_material_sha": "e731229ddd9db0b99d27b9615689059ab5efa555",
+  "future_fsd_S": {
+    "independent_pairs": 1,
+    "real_fits": 2,
+    "model_constructions": 4,
+    "training_rollouts_per_arm": 5,
+    "training_lanes": 16,
+    "horizon": 500,
+    "final_episodes_per_arm": 32,
+    "training_team_steps": 80000,
+    "training_episodes": 160,
+    "update_stages": 10,
+    "evaluation_team_steps": 32000,
+    "evaluation_episodes": 64,
+    "total_native_team_steps": 112000,
+    "D0_coordinator_chunks": 525,
+    "I_coordinator_chunks_upper": 525,
+    "checkpoint_loads": 0,
+    "agent_observations": 672000,
+    "batched_controller_calls": 6000,
+    "I_cost_law": "15 * sum ceil(M_r/1280), five M_r <= 8000; all row/decoder/recurrent/lower PPO work retained"
+  },
+  "ended_caps_seconds": {
+    "FSD771003": {
+      "D0": 900,
+      "I": 1800,
+      "native": 2700,
+      "support": 300,
+      "complete": 3000
+    }
+  },
+  "recommended_numeric_caps_sum_seconds": 6000
+}
