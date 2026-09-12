@@ -21,6 +21,10 @@ checkout at the original source SHA. Materialize the original ten files plus
 Static import closure and scoped source materialization are the changed contract.
 See [resumption facts](evidence/2026-09-12-folr-learned-retention-b03-resumption.json).
 
+Execution update13:35 UTC: both original commands accepted, both fresh memory
+admissions passed, and Root confirmed the actual Monitor's active unbudgeted
+goal adoption. Terminal collection and scientific intake remain with this DM.
+
 ## Authority, question and finite unit
 
 Portfolio response `f4bbe6cae2d351b4c80c5e0d9d66690d337749ce` selects F+U,

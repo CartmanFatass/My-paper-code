@@ -30,14 +30,17 @@
     "new_changed_risk": "fresh identity, exact source and command/publication binding only"
   },
   "object": "FOLR-LEARNED-RETENTION-B03",
-  "state": "OWNER_DIRECT_RESUMED_PREPARATION",
+  "state": "RUNNING_MONITOR_ADOPTED_PENDING_COLLECTION",
   "historical_prelaunch_state": "prelaunch_stop_support_cap_breach_no_scientific_result",
   "resumption": {
     "authority": "docs/research/portfolio/decisions/2026-09-12-windows-root-resumption.md",
     "current_facts": "evidence/2026-09-12-folr-learned-retention-b03-resumption.json",
     "support_reference_seconds": 300,
     "original_pair_and_other_caps_preserved": true,
-    "new_scientific_invocations_at_binding": 0
+    "new_scientific_invocations_at_binding": 0,
+    "accepted_native_commands": 2,
+    "actual_terminal_counts": "pending",
+    "monitor_adoption": "confirmed; actual active unbudgeted goal; details in current_facts"
   },
   "bound_utc": "2026-09-12T05:00:56.643449+00:00",
   "authority_sha": "f4bbe6cae2d351b4c80c5e0d9d66690d337749ce",
@@ -148,7 +151,8 @@
       "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_whole_time.txt",
       "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1340s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7811 --evaluation-seed 107811 --launch-sha 89035d8f1e3f44a07e80c08e3140283c03592efb --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain'",
       "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b03-retain-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1340s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7811 --evaluation-seed 107811 --launch-sha 89035d8f1e3f44a07e80c08e3140283c03592efb --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain'\"'\"''",
-      "status": "never_submitted_support_cap_stop"
+      "status": "accepted_running_at_2026-09-12T13:34:35Z",
+      "accepted_pid": 3368237
     },
     {
       "arm": "LEARNED_EVENT",
@@ -159,7 +163,8 @@
       "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_whole_time.txt",
       "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1340s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7811 --evaluation-seed 107811 --launch-sha 89035d8f1e3f44a07e80c08e3140283c03592efb --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event'",
       "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b03-learned-event-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1340s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7811 --evaluation-seed 107811 --launch-sha 89035d8f1e3f44a07e80c08e3140283c03592efb --out temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event'\"'\"''",
-      "status": "never_submitted_support_cap_stop"
+      "status": "accepted_running_at_2026-09-12T13:34:35Z",
+      "accepted_pid": 3368272
     }
   ],
   "source_check_limitation": "Initial raw-byte assertion stopped on Windows test file CRLF only: published accepted/current Git bytes identical,9 production/admission files exact in checkout, test normalized text identical; remote execution must match all10 exact Git bytes. No source edit or scientific invocation.",

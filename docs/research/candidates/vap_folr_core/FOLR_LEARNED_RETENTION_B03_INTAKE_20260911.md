@@ -1,8 +1,8 @@
 # FOLR learned-retention B03: technical prelaunch-stop intake
 
-Current status: OWNER_DIRECT resumes the original unsubmitted pair; support300
-is a reference. At this binding there are still zero scientific invocations and
-no paired performance result. The earlier closed-allocation record below is
+Current status: both original B03 arms accepted/running, actual Monitor goal
+adoption confirmed, terminal collection pending. Support300 is a reference;
+no paired performance result has been collected. The earlier prelaunch record is
 historical; final technical intake and actual effects follow it.
 Root applied Portfolio F+U at main `deb2e5e1e` and assigned this DM the complete
 finite pair. The [B03 card](FOLR_LEARNED_RETENTION_B03_SCIENCE_CARD_20260911.md)
@@ -304,3 +304,49 @@ Root's routed readiness without restaging or adding an invocation. Root integrat
 these documentary/source-preparation facts and routes continuation. The accepted
 source, existing local control and shared direction checkout are retained for
 that named dependency, with DM collection/cleanup ownership after terminal.
+
+## Launch acceptance and observation transfer — 2026-09-12
+
+Root resolved the control dependency with actual Monitor READY and published
+main80d2bf545. The live primary configuration was read immediately before launch:
+Monitor01a095d0-21ee-7c02-9d97-3681b5678200, Root01a095b7-850f-7401-ad4e-5e4320d285f1.
+The preceding pending-readiness return is superseded; no source staging repeated.
+
+At13:34:35 UTC both original supervisor commands from e3ac72da5 were submitted
+unchanged against source89035d8f1. RETAIN handle
+`folr-learned-retention-b03-retain-20260911` returned accepted and directly running,
+pid3368237. LEARNED_EVENT handle
+`folr-learned-retention-b03-learned-event-20260911` returned accepted and directly
+running, pid3368272. Both tmux sessions were active with no exit code. Each bound
+command performed fresh adjacent admission before its learner: both physical
+and effective4GiB floors passed, with available15621128192/15625678848 bytes.
+The original CPU FP32, Torch1/1, 5000/128, seeds7811/107811 and native timeout
+remain. No observed endpoint selected either submission; no fit was repeated.
+
+One direct MONITOR_ADD was accepted by the actual current task for both handles,
+explicitly requiring get_goal, an unbudgeted goal, retained handle ownership
+through accepted terminal delivery, and MONITOR_GOAL_COMPLETE to Root before
+empty-goal completion. Root then forwarded actual MONITOR_ADOPTED: get_goal=null,
+create_goal established an active goal covering both handles;13:35 UTC direct
+status remained running with matching source/cwd/PIDs. This is actual adoption,
+separate from message delivery. No duplicate MONITOR_ADD or routine status poll
+follows. The admission readback was one technical receipt collection, not a
+second status-observation loop. Goal ID was not supplied; no ID is invented.
+
+The literal launch, direct status and memory receipts are retained in the
+[resumption facts](evidence/2026-09-12-folr-learned-retention-b03-resumption.json).
+Two accepted result-bearing commands and two passing admissions are established;
+actual fit/update/episode counts and primary await terminal collection. Named
+resume support is3.5064397 seconds plus the old315.263732 lower bound, giving
+318.7701717 known seconds; unitemized reading/edit/Git/provider/monitor work is
+still unmeasured. This lower bound is not a full total or a reset. Native and
+complete-work caps remain1350/2700/3000, with actual whole-arm timing pending.
+
+**Technical decision:** accept these two launches and confirmed observation
+transfer, retain collection/intake/cleanup here. **Owner-delegated decision
+(unattended,2026-09-03 instruction): accept launch and Monitor adoption.** Root
+integrates the named documentary commits and updates current tracking, then
+routes each terminal fact to this same DM. The exact sparse source checkout and
+private output roots remain live dependencies until accepted collection and
+assigned cleanup. Claim ceiling, strongest B01 support/B02 contradiction, RETAIN
+default and the original next discriminator remain as stated above.
