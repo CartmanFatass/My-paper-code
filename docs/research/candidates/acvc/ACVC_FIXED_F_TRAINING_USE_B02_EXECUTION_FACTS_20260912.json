@@ -121,12 +121,32 @@
       {
         "label": "Reconcile rejected documentation patch context",
         "wall_s": 0.2397553
+      },
+      {
+        "label": "Full B02 intake/evidence/DIRECTION/owner/audit publication",
+        "wall_s": 6.2260503
+      },
+      {
+        "label": "Root-accepted B02 retention state and exact six-target cleanup binding",
+        "wall_s": 0.5857345
+      },
+      {
+        "label": "B02 exact six remote targets removed and disk/registration absence verified",
+        "wall_s": 0.9197304
+      },
+      {
+        "label": "Read accepted B02 cleanup publication context and current Relay",
+        "wall_s": 0.2203941
+      },
+      {
+        "label": "Read final receipt insertion lines",
+        "wall_s": 0.1227771
       }
     ],
-    "known_reported_seconds": 47.66332360004519,
+    "known_reported_seconds": 55.738010000045186,
     "full_coverage": false,
-    "limits": "Provider/client/deliberation and yet-unreceived Monitor/Root/closing costs remain unknown; all future needed work counts once. B01/old A costs are separate history, not rebilled.",
-    "known_native_plus_support": 390.6633236000452
+    "limits": "Provider/client/deliberation and actual Monitor/Root costs remain unknown. The closing publication command is reported in the cleanup handoff after this snapshot. Known commands include scoped remote cleanup once and do not certify full 300s support/840s future coverage. B01/old A costs remain separate history, not rebilled.",
+    "known_native_plus_support": 398.73801000004516
   },
   "arms": [
     {
@@ -326,7 +346,7 @@
   ],
   "stop": "Both original outcomes/full intake/assigned cleanup; no third pair/retry/tuning/extra panel/consultation/successor",
   "retention": {
-    "owner": "ACVC DM; Root integrates and accepts retained unique archives before remote reclamation",
+    "owner": "Root accepted integration/retention at main89910ecd7; ACVC DM completed the exact six remote cleanup targets",
     "preserve_local": [
       "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/training_use_b02_20260912_collection/arm_C.tar.gz",
       "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/training_use_b02_20260912_collection/arm_F.tar.gz"
@@ -344,14 +364,23 @@
     "shared_authoring_checkout_retained": true,
     "B01_C01_untouched": true,
     "B02_test_scratch_created": false,
-    "pending_remote_cleanup": [
+    "pending_remote_cleanup": [],
+    "root_retention_accepted": "main89910ecd7, complete intake including terminal logs and both unique local checkpoint archives",
+    "removed_remote_targets": [
       "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6",
       "/home/wu/hmasd-inputs/acvc-training-use-b02-ac64769f6.bundle",
       "/home/wu/hmasd-inputs/acvc-training-use-b02-C-ac64769f6.tar.gz",
       "/home/wu/hmasd-inputs/acvc-training-use-b02-F-ac64769f6.tar.gz",
       "/home/wu/.agent-tasks/acvc-training-use-b02-c-ac64769f6",
       "/home/wu/.agent-tasks/acvc-training-use-b02-f-ac64769f6"
-    ]
+    ],
+    "remote_cleanup_complete": true,
+    "cleanup_receipt": "docs/research/candidates/acvc/training_use_b02_20260912/remote_cleanup.json",
+    "all_six_absent_on_disk": true,
+    "worktree_absent_from_git_registration": true,
+    "shared_remote_repo_retained": true,
+    "local_archives_still_present_at_cleanup": true,
+    "preservation_check": "Accepted original hashes retained; local archive existence/sizes checked. No rehash or cleanup of C01/B01 evidence."
   },
   "status": "valid_complete_B_DOWN",
   "analysis": "docs/research/candidates/acvc/training_use_b02_20260912/paired_analysis.json",

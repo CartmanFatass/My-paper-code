@@ -53,3 +53,8 @@ All readable original evidence, explicitly tracked supervisor logs and launch/co
 |F|411972 / `9e77e9acf6b9bb429db5a9f8ee3990179923afd60d6b969648d09360dbe44109`|`7f3356fbcfeb12471e7dce70c99f4349775829a5f6214c57bd47d678aaf9bea5`|
 
 Remote/local archive hashes match. Root accepts unique local retention/integration before ACVC DM reclaims the six exact remote B02 worktree/bundle/tar/supervisor targets in facts. Shared authoring checkout and B01/C01 evidence remain. No B02 test scratch was created; prior B01 local-policy rejection remains distinct. No deletion or completed reclamation is claimed before its receipt.
+
+
+## Root-accepted cleanup completed — 2026-09-12
+
+Root integrated the complete B02 intake and terminal logs through main89910ecd7 and accepted retention of both unique local checkpoint archives. The [cleanup receipt](training_use_b02_20260912/remote_cleanup.json) supersedes the pending-cleanup state above: all six exact remote targets were removed, all six are absent on disk, and the B02 worktree is absent from Git registration. Preflight confirmed the exact source, clean tracked files, expected output inventory and two inactive terminal supervisors. Local archives remain present; shared authoring/remote repositories and C01/B01 evidence were outside the removal scope. No B02 test scratch existed. This closes the additional A allocation; no third pair, successor or Pro request is authorized.

@@ -64,3 +64,8 @@ Both direct MONITOR_ADD assignments included the required goal contract. Root re
 ## 9. Terminal result and intake (prospective rule unchanged)
 
 Root routed both finished/exit0/tmux-inactive terminal events and Monitor GOAL_COMPLETE with empty active set/no pending. Both complete original arms pass source/identity/count/checkpoint/admission checks. The [full intake](ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md) applies the sole frozen primary once: DOWN, mean−0.05734219575429114J, conditionalSE0.009421918606720191,50/64 adverse worlds. Native inclusive164/179s total343 pass270/540. New predictions score categorical Brier.38 and completion.01; owner prediction not taken. Full support coverage remains qualified in facts. This additional empirical pair is complete with no third pair or successor. New unique archives are preserved pending Root-accepted scoped remote cleanup; B01/C01 remain unchanged.
+
+
+## Root-accepted cleanup completed — 2026-09-12
+
+Root integrated the complete B02 intake and terminal logs through main89910ecd7 and accepted retention of both unique local checkpoint archives. The [cleanup receipt](training_use_b02_20260912/remote_cleanup.json) supersedes the pending-cleanup state above: all six exact remote targets were removed, all six are absent on disk, and the B02 worktree is absent from Git registration. Preflight confirmed the exact source, clean tracked files, expected output inventory and two inactive terminal supervisors. Local archives remain present; shared authoring/remote repositories and C01/B01 evidence were outside the removal scope. No B02 test scratch existed. This closes the additional A allocation; no third pair, successor or Pro request is authorized.
