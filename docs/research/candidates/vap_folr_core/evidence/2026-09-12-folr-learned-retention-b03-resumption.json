@@ -1,6 +1,6 @@
 {
   "object": "FOLR-LEARNED-RETENTION-B03",
-  "status": "running_monitor_adopted_pending_terminal_collection",
+  "status": "VALID_B_RETAIN_ABOVE_MEI_ALLOCATION_ENDED",
   "owner_instruction_record": "docs/research/portfolio/decisions/2026-09-12-windows-root-resumption.md",
   "root_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
   "native_owner": "/root/dm_a_mx_folr_cap_review",
@@ -92,8 +92,8 @@
   "relay_thread_id": "01a095ca-8676-74e1-b78c-ea459d41e905",
   "retention": {
     "remote_checkout": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
-    "purpose": "Accepted sparse source for the original authorized pair; no scientific output or supervisor handle exists at source acceptance.",
-    "owner_event": "Same FOLR DM resumes on routed terminal facts; owns collection, technical/scientific intake and assigned cleanup. Both accepted handles retain this exact source checkout.",
+    "purpose": "Both original arms terminal and raw evidence collected; source/output checkout retained only until preservation and scoped cleanup reconciliation.",
+    "owner_event": "same FOLR DM for exact terminal B03 paths after preservation reconciliation; Root confirms integration/retention and accepts reclamation",
     "local_control": "temp/directions/vap_folr_core/exp/learned_retention_b03_resume_control_20260912",
     "shared_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-vap-folr",
     "shared_authoring_branch": "codex/vap-folr"
@@ -234,6 +234,308 @@
     }
   },
   "accepted_native_commands": 2,
-  "terminal_counts": "pending collection; no fitted-model, optimizer-step or endpoint counts inferred from accepted launch",
-  "machine_generated_launch_exposure_line": "B03 continuation: 2 original native commands accepted; 2 fresh memory admissions passed; both direct statuses running; actual terminal learner/evaluation counts and primary pending."
+  "terminal_counts": {
+    "real_training_fits": 2,
+    "independent_training_pairs": 1,
+    "training_episodes": 10000,
+    "training_team_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_team_ticks": 5120,
+    "total_team_ticks": 205120,
+    "analysis_checkpoint_loads": 2,
+    "analysis_new_fits_rollouts_updates": 0,
+    "diagnostic_trajectories": 0,
+    "new_test_invocations": 0,
+    "new_source_or_training_changes": 0
+  },
+  "machine_generated_launch_exposure_line": "B03 continuation: 2 original native commands accepted; 2 fresh memory admissions passed; both direct statuses running; actual terminal learner/evaluation counts and primary pending.",
+  "terminal_receipts": [
+    {
+      "arm": "RETAIN",
+      "handle": "folr-learned-retention-b03-retain-20260911",
+      "pid": 3368237,
+      "status": "finished",
+      "exit_code": 0,
+      "tmux_active": false,
+      "supervisor_duration_seconds": 852,
+      "supervisor_exit_time": "2026-09-12T21:48:47+08:00",
+      "source_sha": "89035d8f1e3f44a07e80c08e3140283c03592efb",
+      "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
+      "receipt_source": "Root forwarded actual MONITOR_TERMINAL; original supervisor bytes collected once"
+    },
+    {
+      "arm": "LEARNED_EVENT",
+      "handle": "folr-learned-retention-b03-learned-event-20260911",
+      "pid": 3368272,
+      "status": "finished",
+      "exit_code": 0,
+      "tmux_active": false,
+      "supervisor_duration_seconds": 899,
+      "supervisor_exit_time": "2026-09-12T21:49:34+08:00",
+      "source_sha": "89035d8f1e3f44a07e80c08e3140283c03592efb",
+      "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
+      "receipt_source": "Root forwarded actual MONITOR_TERMINAL; original supervisor bytes collected once"
+    }
+  ],
+  "collection": {
+    "utc": "2026-09-12T13:52:16.863950+00:00",
+    "scope": "one terminal collection for both original handles; no scientific or status call",
+    "elapsed_seconds": 3.062161499983631,
+    "archive_bytes": 8466991,
+    "archive_sha256": "41d7e2fbe703d31186bd57f44d8dc263d1ec42aa1e390990de1db721cf8b57d3",
+    "members": [
+      {
+        "name": "RETAIN/summary.json",
+        "bytes": 4184
+      },
+      {
+        "name": "RETAIN/final.pt",
+        "bytes": 4662779
+      },
+      {
+        "name": "RETAIN/learned_retention_b03_seed7811_retain_memory.json",
+        "bytes": 504
+      },
+      {
+        "name": "RETAIN/learned_retention_b03_seed7811_retain_whole_time.txt",
+        "bytes": 1239
+      },
+      {
+        "name": "RETAIN/supervisor/exit_code",
+        "bytes": 2
+      },
+      {
+        "name": "RETAIN/supervisor/pid",
+        "bytes": 8
+      },
+      {
+        "name": "RETAIN/supervisor/runner.sh",
+        "bytes": 1810
+      },
+      {
+        "name": "RETAIN/supervisor/start_time",
+        "bytes": 11
+      },
+      {
+        "name": "RETAIN/supervisor/status",
+        "bytes": 9
+      },
+      {
+        "name": "RETAIN/supervisor/task.log",
+        "bytes": 6023
+      },
+      {
+        "name": "LEARNED_EVENT/summary.json",
+        "bytes": 4163
+      },
+      {
+        "name": "LEARNED_EVENT/final.pt",
+        "bytes": 4666395
+      },
+      {
+        "name": "LEARNED_EVENT/learned_retention_b03_seed7811_learned_event_memory.json",
+        "bytes": 504
+      },
+      {
+        "name": "LEARNED_EVENT/learned_retention_b03_seed7811_learned_event_whole_time.txt",
+        "bytes": 1260
+      },
+      {
+        "name": "LEARNED_EVENT/supervisor/exit_code",
+        "bytes": 2
+      },
+      {
+        "name": "LEARNED_EVENT/supervisor/pid",
+        "bytes": 8
+      },
+      {
+        "name": "LEARNED_EVENT/supervisor/runner.sh",
+        "bytes": 1901
+      },
+      {
+        "name": "LEARNED_EVENT/supervisor/start_time",
+        "bytes": 11
+      },
+      {
+        "name": "LEARNED_EVENT/supervisor/status",
+        "bytes": 9
+      },
+      {
+        "name": "LEARNED_EVENT/supervisor/task.log",
+        "bytes": 6013
+      }
+    ],
+    "stderr": "",
+    "durable_archive": "evidence/2026-09-12-folr-learned-retention-b03-native-results.tar.gz",
+    "enclosing_wall_seconds": 3.3269962,
+    "durable_digest_reverified": true,
+    "technical_analysis": "evidence/2026-09-12-folr-learned-retention-b03-analysis.json",
+    "run_level_summary": "evidence/2026-09-12-folr-learned-retention-b03-run-summary.json",
+    "scores": "evidence/2026-09-12-folr-learned-retention-b03-scores.csv",
+    "new_scientific_execution": 0
+  },
+  "primary": {
+    "RETAIN_mean": 0.9475781249999999,
+    "LEARNED_EVENT_mean": -0.26796875000000037,
+    "d_LR": -1.2155468750000002,
+    "reading_rule": "d_LR >= 1: LEARNED_EVENT_ABOVE_MEI; d_LR <= -1: RETAIN_ABOVE_MEI; otherwise: WITHIN_MEI. An incomplete or untrustworthy primary has no paired performance polarity; preserve independently trustworthy facts.",
+    "branch": "RETAIN_ABOVE_MEI",
+    "absolute_MEI": 1,
+    "training_seed": 7811,
+    "evaluation_seed": 107811,
+    "independent_training_pairs": 1,
+    "ordered_arrays_and_conditional_spreads": "evidence/2026-09-12-folr-learned-retention-b03-analysis.json",
+    "conditional_difference_sem": 0.6932871505718186,
+    "conditional_sem_limit": "Assumes independent final episodes conditional on each fitted policy; not a training-seed-population or matched-traffic-world standard error."
+  },
+  "terminal_cost_accounting": {
+    "native_arms": {
+      "RETAIN": {
+        "complete_native_wall_seconds": 851.85,
+        "inner_runner_wall_seconds": 818.712196848006,
+        "difference_outside_inner_runner_seconds": 33.137803151994035,
+        "user_cpu_seconds": 835.39,
+        "system_cpu_seconds": 17.09,
+        "whole_peak_rss_kib": 650828
+      },
+      "LEARNED_EVENT": {
+        "complete_native_wall_seconds": 898.96,
+        "inner_runner_wall_seconds": 864.776470418903,
+        "difference_outside_inner_runner_seconds": 34.18352958109699,
+        "user_cpu_seconds": 867.57,
+        "system_cpu_seconds": 32.71,
+        "whole_peak_rss_kib": 649284
+      }
+    },
+    "whole_native_sum_seconds": 1750.81,
+    "aggregate_native_cpu_seconds": 1752.7600000000002,
+    "native_elapsed_critical_path_seconds_approx": 899,
+    "native_elapsed_scope": "Concurrent launches at 13:34:35 UTC through final supervisor exit 13:49:34 UTC; not study-wide elapsed or native wall sum.",
+    "per_arm_1350_pass": true,
+    "native_sum_2700_pass": true,
+    "support_reference_seconds": 300,
+    "support_reference_is_hard_cap": false,
+    "support_known_lower_bound_seconds": 329.18687280007987,
+    "known_native_plus_support_lower_bound_seconds": 2079.99687280008,
+    "complete_invoked_hard_cap_seconds": 3000,
+    "complete_cap_conformance": "unverified because some support is unmeasured; no observed complete-cap breach",
+    "support_collection_named_measurements": [
+      {
+        "operation": "collection-entry state/card/owner-review read",
+        "wall_seconds": 0.5886322
+      },
+      {
+        "operation": "one enclosing terminal collection and archive operation",
+        "wall_seconds": 3.3269962
+      },
+      {
+        "operation": "whole-time/source read",
+        "wall_seconds": 0.2969487
+      },
+      {
+        "operation": "direction/supervisor-log read",
+        "wall_seconds": 0.2376368
+      },
+      {
+        "operation": "two-checkpoint analysis including imports",
+        "wall_seconds": 5.2988931
+      },
+      {
+        "operation": "run-level summarizer and source/card read",
+        "wall_seconds": 0.3370836
+      },
+      {
+        "operation": "durable fact copies and JSON read",
+        "wall_seconds": 0.3305105
+      }
+    ],
+    "double_count_rule": "Use enclosing collection exec 3.3269962 rather than adding inner collection 3.0621615; checkpoint analysis 5.2988931 includes imports and inner 0.1916344. Whole native time subsumes runner and timeout; supervisor rounded durations are witnesses, not additional work. Historical parent 274.81 replaces client timeout55 and nested Git clocks.",
+    "unmeasured": "Unitemized reading/edit/Git/tool/provider/Monitor work, this final writing/check/publication, Root integration and pending cleanup. The known amount is a lower bound, not a certified total, reset or new allowance."
+  },
+  "monitor_closure": {
+    "state": "goal_complete",
+    "receipt_source": "Root native forwarded MONITOR_GOAL_COMPLETE",
+    "actual_active_set": [],
+    "pending_observation_or_notification": false,
+    "both_terminal_notices_accepted_by_Root": true,
+    "root_tracking_commit": "ccd2b9225",
+    "monitor_thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+    "historical_adoption": {
+      "state": "confirmed",
+      "transport_send": "accepted by send_message_to_thread to actual current Monitor",
+      "receipt_source": "Root native message to /root/dm_a_mx_folr_cap_review",
+      "observation_utc": "2026-09-12T13:35:00Z (minute precision supplied by Root)",
+      "get_goal_result": "null",
+      "create_goal_result": "new active goal without token budget, covers both exact B03 handles through accepted terminal delivery",
+      "actual_unfinished_goal_state": "active",
+      "handles_running": true,
+      "retain_pid": 3368237,
+      "learned_event_pid": 3368272,
+      "goal_complete_protocol": "Monitor sends MONITOR_GOAL_COMPLETE to Root before finishing when active set and pending terminal notices are empty",
+      "collection_owner": "/root/dm_a_mx_folr_cap_review"
+    }
+  },
+  "cleanup": {
+    "status": "evidence preserved; assigned DM reclaims exact terminal copies after publication, Root confirms integration/retention and accepts reclamation",
+    "archive": "evidence/2026-09-12-folr-learned-retention-b03-native-results.tar.gz",
+    "archive_sha256": "41d7e2fbe703d31186bd57f44d8dc263d1ec42aa1e390990de1db721cf8b57d3",
+    "remote_checkout": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
+    "remote_supervisor_roots": [
+      "/home/wu/.agent-tasks/folr-learned-retention-b03-retain-20260911",
+      "/home/wu/.agent-tasks/folr-learned-retention-b03-learned-event-20260911"
+    ],
+    "local_collection_root": "temp/directions/vap_folr_core/exp/learned_retention_b03_collection_20260912",
+    "local_resume_control_root": "temp/directions/vap_folr_core/exp/learned_retention_b03_resume_control_20260912",
+    "historical_local_control_root": "temp/directions/vap_folr_core/exp/learned_retention_b03_control_20260911",
+    "shared_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-vap-folr",
+    "shared_authoring_branch": "codex/vap-folr",
+    "shared_retention_reason": "DM authoring and Root integration dependency; Root owns eventual direction-checkout reclamation",
+    "cleanup_owner": "same FOLR DM performs assigned exact terminal cleanup after evidence publication; Root confirms integration/retention and accepts reclamation",
+    "removed_this_intake": false,
+    "older_restricted_B01_B02_duplicates": "untouched; outside assignment"
+  },
+  "machine_generated_final_exposure_line": "B03 FINAL ACTUAL EXPOSURE: real_training_fits=2; independent_training_pairs=1; training_episodes=10000; training_team_ticks=200000; optimizer_steps=9938; evaluation_episodes=256; evaluation_team_ticks=5120; total_team_ticks=205120; analysis_checkpoint_loads=2; analysis_new_fits_rollouts_updates=0; diagnostic_trajectories=0; new_test_invocations=0.",
+  "control_receipt_preservation": {
+    "path": "evidence/2026-09-12-folr-learned-retention-b03-control-receipts.zip",
+    "bytes": 2914,
+    "sha256": "0b49bff862434443a4fac9038cf0e8812c58829a105e9e0b9479851a805a2edf",
+    "members": [
+      {
+        "name": "resume/admissions.json",
+        "bytes": 1151,
+        "sha256": "2075e2ae90e1a06f73d5a24bdb7c8017307cb2afdb0742d447557aceb0a45b4b"
+      },
+      {
+        "name": "resume/launch.json",
+        "bytes": 1780,
+        "sha256": "aea3c462566742a22c0c8e57c8e5770d7e96a8b11a0678487c4f61d84cedf36c"
+      },
+      {
+        "name": "resume/reconciliation.json",
+        "bytes": 595,
+        "sha256": "7f1b1fa40132c99babc23ec89db49ce10495478ccd514393eff59a302599bdef"
+      },
+      {
+        "name": "resume/staging.json",
+        "bytes": 776,
+        "sha256": "40540ce8f1fd48de7b59b4f798bccfde298e5478c5d7f8b5c970e9ef3b25a279"
+      },
+      {
+        "name": "collection/collection.json",
+        "bytes": 2113,
+        "sha256": "0a4174ac586fd6ea33f96f919643a2d1b9768bcb2dbfea4c0969b662da1f4a47"
+      }
+    ]
+  },
+  "final_documentary_check": {
+    "status": "PASS",
+    "literal_executable_commands_unchanged": true,
+    "historical_zero_exposure_and_null_primary_preserved": true,
+    "current_primary_exposure_and_monitor_closure_consistent": true,
+    "native_archive_digest_pass": true,
+    "links_pass": true,
+    "brief_characters": 358,
+    "new_scientific_execution": 0
+  }
 }
