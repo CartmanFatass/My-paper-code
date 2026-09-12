@@ -10,11 +10,11 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | FOLR post-B03 P | Portfolio P=yes/mainbd5fd849a; new DM independently owns one original-node Convergence question and complete intake. Zero implementation/numerical/experiment allowance; complete cost unknown | Author and route exact question once through current Transport, then intake the complete response; no fourth pair |
 | FSD D | Portfolio D=yes/mainbd5fd849a; new DM independently owns one unchanged I1280/authentic-D0 pair through acceptance | Reuse codex-fsd; D0<=900,I<=1800,native<=2700,support<=300,total<=3000; remote-first detached launch and Monitor adoption, no repeat/extra panel |
 | VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
-| RCLE R | Partial intake at main8bfa6c4d8 preserves one1000-update fit (`G_U=-0.000205485`, interval crosses zero); reference panel missing after roster-column TECHNICAL_STOP. Reference-only inputs bound at main71198147e | Same DM runs one fresh-admitted detached reference completion inside the original logical invocation; unchanged900/600/1500, no fit/training/semantic addition |
+| RCLE R | Complete intake accepted at main2a53388b8: `Delta_ref=-0.00884196` with negative CI and8/8 reference losses; `G_U=-0.000205485` interval crosses zero. One fit plus reference-only completion, native343.43s; allocation ended | Six scoped remote terminal-path cleanups only; no retry, new fit, Pro or active scientific work |
 | Portfolio two remaining chains | Final response archived/intaken at mainbd5fd849a: D=yes, P=yes, M=no; exact execution mapping published | ROOT_INTEGRATED; FSD and FOLR dispatched independently, no common wait |
 
-Direction chains3/5: RCLE R final intake, FSD D, and FOLR P advance independently. ACVC F and CBSC C
-completed and released their slots. Two vacancies remain for the next rolling Portfolio decision;
+Direction chains2/5: FSD D and FOLR P advance independently. RCLE R, ACVC F and CBSC C completed
+and released their slots. Three vacancies remain for the next rolling Portfolio decision;
 no queued intention, Transport session, or cleanup is counted as another direction.
 
 ## Current routing
