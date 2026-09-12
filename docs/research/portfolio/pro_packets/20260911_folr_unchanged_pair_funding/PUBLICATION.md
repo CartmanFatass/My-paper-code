@@ -127,3 +127,11 @@ item010 retains its historical recommendation and links this formed decision.
 The first literal-substring quotation check failed on two Markdown wrapping
 newlines; the source and quoted words were unchanged, and the corrected focused
 check passed. This was a documentary-check assumption, not an evidence defect.
+
+The complete intake and execution mapping were committed/pushed as
+`b2b10851844b567741e06fe9ff4bd8b8a8c724b4`. One completion relay for that exact
+event was accepted by the configured app endpoint; `INTAKE_RELAY_RECEIPT.json`
+preserves its payload/result. This receipt is neither Root integration nor an
+actual new FOLR launch. No duplicate relay, provider Send or acknowledgement
+wait follows. The receipt-only publication commit is supplied in the native
+final alongside the deliverable; input-sync merges are not cherry-picks.
