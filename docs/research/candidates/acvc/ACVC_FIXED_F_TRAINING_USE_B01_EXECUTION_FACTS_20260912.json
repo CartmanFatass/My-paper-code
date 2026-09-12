@@ -199,17 +199,33 @@
       {
         "label": "Read existing one-shot analysis for final evidence index",
         "seconds": 0.1610824
+      },
+      {
+        "label": "Paired final intake/evidence/audit/owner commit push",
+        "seconds": 6.5575568
+      },
+      {
+        "label": "Preserve explicitly owned supervisor logs excluded by generic ignore",
+        "seconds": 4.3822226
+      },
+      {
+        "label": "Accepted-retention cleanup assignment state and archive presence",
+        "seconds": 0.6118846
+      },
+      {
+        "label": "Root-accepted six-target remote cleanup and absence verification",
+        "seconds": 0.9579787
       }
     ],
-    "known_reported_seconds": 77.0326463999715,
+    "known_reported_seconds": 89.5422890999715,
     "complete_coverage": false,
     "limits": [
       "Initial interrupted SSH object query whole lifetime not measured;10.00301s returned segment is included, remaining tail unknown.",
       "Provider, client and remaining Monitor/Root integration/cleanup costs not certified zero; append actual receipts once.",
       "Prior A is historical and not charged again against future660; no lifetime total certification."
     ],
-    "known_native_plus_support": 413.0326463999715,
-    "note": "Known coverage lower bound, not full660/1200 certification; final publication/integration/cleanup charges append after this snapshot. No known overrun."
+    "known_native_plus_support": 425.5422890999715,
+    "note": "Known receipts through remote cleanup, before this receipt's publication. Root/Monitor and client/provider/initial-query unknowns stay explicit; no full660/1200 certification."
   },
   "tests": {
     "passed": 14,
@@ -425,21 +441,13 @@
   "sequence": "C and F each submitted once independently; no intermediate efficacy selection",
   "stop": "Complete pair intake or concrete dependent limitation; no retry, sixth C01 fit, extra panels or successor",
   "retention": {
-    "live_remote_checkout": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee",
     "remote_bundle": "/home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle",
     "local_preparation": "temp/directions/acvc/preparation/training-use-b01-20260912",
     "local_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
     "cleanup_owner": "ACVC DM; Root confirms integration/retention before reclaiming unique scientific evidence or execution checkout",
     "event": "Both terminal results collected, preserved and accepted; active shared checkout remains",
     "C01": "Existing accepted inventory and unique checkpoints/evidence unchanged; do not rehash or delete for this pair",
-    "pending_remote_cleanup": [
-      "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee",
-      "/home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle",
-      "/home/wu/hmasd-inputs/acvc-training-use-b01-C-a4c24e4ee.tar.gz",
-      "/home/wu/hmasd-inputs/acvc-training-use-b01-F-a4c24e4ee.tar.gz",
-      "/home/wu/.agent-tasks/acvc-training-use-b01-c-a4c24e4ee",
-      "/home/wu/.agent-tasks/acvc-training-use-b01-f-a4c24e4ee"
-    ],
+    "pending_remote_cleanup": [],
     "preserve_unique_local": "temp/directions/acvc/training_use_b01_20260912_collection/arm_C.tar.gz and arm_F.tar.gz, extracted checkpoints, original receipts; remote/local archive SHA256 verified once",
     "test_scratch": [
       {
@@ -453,7 +461,19 @@
         "bytes": 68325
       }
     ],
-    "integration_and_reclamation": "Pending Root integration/retention acceptance; no removal claimed; DM retains exact cleanup ownership. Existing scoped PowerShell deletion rejection must not be bypassed."
+    "integration_and_reclamation": "All six allocated remote targets absent on disk; execution worktree absent from Git registration. Shared authoring checkout and C01 untouched. Previously rejected local test scratch remains outside this six-target cleanup.",
+    "removed_remote_targets": [
+      "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee",
+      "/home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle",
+      "/home/wu/hmasd-inputs/acvc-training-use-b01-C-a4c24e4ee.tar.gz",
+      "/home/wu/hmasd-inputs/acvc-training-use-b01-F-a4c24e4ee.tar.gz",
+      "/home/wu/.agent-tasks/acvc-training-use-b01-c-a4c24e4ee",
+      "/home/wu/.agent-tasks/acvc-training-use-b01-f-a4c24e4ee"
+    ],
+    "former_remote_checkout": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee",
+    "root_integration_and_retention_accepted": "Root direct assignment: main f6bf9e467, two unique local checkpoint archives and published evidence accepted",
+    "remote_cleanup_receipt": "docs/research/candidates/acvc/training_use_b01_20260912/remote_cleanup.json",
+    "remote_cleanup_complete": true
   },
   "status": "valid_complete_B_DOWN",
   "analysis": "docs/research/candidates/acvc/training_use_b01_20260912/paired_analysis.json",
