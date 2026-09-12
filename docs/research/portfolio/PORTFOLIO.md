@@ -11,7 +11,7 @@
 Root当前实际工作集5/5：ACVC、MGTAP、FSD、RCLE、FOLR五个ACTIVE方向的原DM均已恢复，继续下一有界对象或方向判断。最近有限对象已完成，但没有Portfolio决定停止这些方向；cleanup与Transport不另占槽位。
 FSD为一对I1280/authentic-D0，D0≤900、I≤1800、native≤2700、support≤300、完整≤3000秒；FOLR仅一次原节点post-B03 Convergence及完整intake，零实验额度、完整成本未知。MGTAP1200未分配。
 N/R选择已经intake；FSD进入新pair执行流程，RCLE进入一次原节点问题起草。新的方向发现/注册及独立MGTAP T投入请求已由provider exact-once接受并生成中；该请求已用各方向最新handoff、DIRECTION和intake刷新旧方向事实。
-FSD预选I臂已远端运行并获Monitor goal接管；ACVC与FOLR进入原DM响应intake，RCLE在provider生成，MGTAP有Portfolio投入路由。严格推进计数5/5，不以排队意图补槽。
+FSD预选I臂已远端运行并获Monitor goal接管；ACVC、FOLR与RCLE进入原DM响应intake，MGTAP有Portfolio投入路由。严格推进计数5/5，不以排队意图补槽。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
 “待选择”是尚未分配的未来工作，不能冒充已运行，也不是永久禁入。
@@ -31,7 +31,7 @@ FSD预选I臂已远端运行并获Monitor goal接管；ACVC与FOLR进入原DM响
 | [MGTAP](../candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/CONVERGENCE_INTAKE_20260912.md) | 原Convergence已选一个fresh TOP/intact-DENSE B：用masked最高本地SINR row0替代mean visible-partner；8213负、8214正证据分别保留，DENSE默认不变。 | intake已集成main6f506e474；整对象投入需求已交Portfolio，方向保持ACTIVE。 | Portfolio决定450秒/臂、1200秒完整上限的投入与排序；拨款前不实施或启动实验。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
-| [RCLE](../candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONTINUATION_READINESS_20260912.md) | B07 `Delta_ref=-0.00884196`且区间为负；`G_U`区间跨零，只支持本次对象。 | post-B07原节点请求已由provider exact-once接受，生成中；Pro尚未决。 | Transport观察自然完成并回原DM完整intake；零实施/数值/实验，不重复B07或新增fit。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONTINUATION_READINESS_20260912.md) | B07 `Delta_ref=-0.00884196`且区间为负；`G_U`区间跨零，只支持本次对象。 | 完整响应已集成main7d9434fe5，原DM正在科学/spec intake。 | 发布合规方向决定；零未授权实施/数值/实验，不重复B07或新增fit。 |
 | [scope_1s](../candidates/scope_1s/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [UCOPE](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | **更新：最新是post8801 PRO_FINAL PARK进一步8801-L continue/end-credit经验投入，保留unchanged-L spending stop。** 8601/8602、8701是更早证据。 | 无 | 有具体新选择才继续；不再凭旧8701 closeout pending造任务。其余renewal/ordinary-feedback议程未被整体关闭。 |
