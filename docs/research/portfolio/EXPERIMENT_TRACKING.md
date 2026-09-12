@@ -7,7 +7,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | --- | --- | --- |
 | ACVC post-C01 materials | Direction input accepted/main e85cb3a95 and delivered to Portfolio DM; recommends one original-Convergence question, with all fit and1200-second figures explicitly unapproved | Portfolio investment decision, then original Convergence selection if funded; no active ACVC execution now |
 | FOLR B03 | Both arms terminal exit0: RETAIN852s supervisor/818.712s logged work; learned-event899s/864.776s. Monitor delivered both notices and completed its goal with active_set empty; original DM collecting | Complete two-arm technical acceptance, paired scientific intake and full cost accounting |
-| VNFC conditional fresh pair | Owned-value pooling boundary repair accepted/main91c16cb06 after independent256/256 allocator-debug check; /root/dm_a_mx_vnfc_recovery continues the selected conditional fresh pair;900-second fresh grant unused | Bind fresh namespace/card, pass admission, then launch without another scheduling approval |
+| VNFC conditional fresh pair | Fresh invocation `vnfc-b03-credit-20260912-01` ran to round35/192 transitions/32 optimizer steps, then terminal exit139 after105s; no final primary. Monitor delivered notice and completed its goal; original DM collecting/quarantining | Technical acceptance and bounded relevant diagnosis; no scientific score or automatic retry |
 | RCLE original Convergence request | Same request accepted by provider as `WEB:34cdbc67-caba-4b09-8430-473bdf66af5d`; Pro generation active under Windows Transport | Observe same conversation, archive complete response, then direction-DM intake; no duplicate Send |
 | Portfolio readiness/Oracle | /root/dm_a_mx_portfolio_resume; latest22-direction evidence and concrete next-slot choices | Ready-now actions immediately; necessary Portfolio packet via existing Pro node |
 
@@ -22,7 +22,7 @@ current decision must supply ready independent replacements for the two open slo
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
 | Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; FOLR goal completed after both terminal notices, active_set empty |
+| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; latest VNFC goal completed after exit139 notice, active_set empty |
 | Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
 Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the
