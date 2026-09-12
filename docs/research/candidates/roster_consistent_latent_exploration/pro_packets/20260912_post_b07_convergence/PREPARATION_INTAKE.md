@@ -43,6 +43,14 @@ Transport owns Send/observation/reconciliation/archive; this author performs no
 browser action. The new request changes no accepted Portfolio or earlier RCLE
 request. A complete downloadable Markdown fallback stays the same request.
 
+Before the first TASK publication, the author narrowed two generic renderer
+sentences: the Convergence role now asks the selected two-option recipe decision,
+and the method paragraph assesses the existing comparison rather than requesting
+an implemented method. REQUEST carries the same explicit scope constraint.
+These are author edits to an unsent documentary task; no renderer, specification,
+accepted request or scientific evidence was changed. All source mappings and
+scoped GitHub delivery instructions remain intact.
+
 ## Decisions this preparation produces
 
 Object technical choice: publish the exact selected current-evidence question
