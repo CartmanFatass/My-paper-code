@@ -716,3 +716,45 @@ References:
 - FOLR_LEARNED_RETENTION_B02_RESULT_SUMMARY_20260911.json
 - FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md
 - FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md
+
+## Accepted learned-retention post-B02 Convergence — 2026-09-11
+
+**Conclusion and bounded claim.** Original Convergence selects A: recommend one
+future separately allocated unchanged LEARNED_EVENT/RETAIN B pair at the existing
+easy public-lifecycle host and 5000-training/128-final endpoint. This continues
+the existing in-family opening; it is neither a new OPEN nor RECAST. No immediate
+narrow learned-recipe hold is selected. Generic event-aware RETAIN remains the
+usable default. The current documentary allocation supplies no implementation,
+seed, experiment, cap, C freeze or automatic further question.
+
+**Strongest support.** The actual learned package's B01 gain +1.763359375 gives
+one trustworthy practical benefit. Another independent unchanged pair can inform
+whether to keep this optional computation as a candidate for same-host development
+or conduct that development with RETAIN alone. This is a qualitative decision-value
+judgment, not a requirement for a third seed or stable population proof.
+
+**Strongest contradiction and surviving alternative.** B02's −1.769531250 loss
+against its own matched RETAIN remains intact. RETAIN already has adaptive GRU
+gates and the same legal information. A narrow hold is the strong alternative,
+and the author's prior unexecuted C recommendation is preserved as a close call.
+No particular gate modification, useful-memory cause, equivalence, stable harm or
+population advantage is established. All older fixed-half and blanket-clear pauses
+and results remain separate; matching tuned headroom is still absent.
+
+**Next discriminator.** If later separately funded, one fresh unscreened unchanged
+pair, sole RETAIN comparator, all 128 final outcomes and inclusive absolute MEI1
+can add recurrence information. A practical gain supports retaining candidacy;
+a loss or inside-MEI point makes a narrow hold more attractive, without a vote
+rule, equivalence claim or automatic fourth pair. Its full work is 205120 native
+ticks and 9938 updates plus recurrent/replay and support work; future complete cost
+and cap remain unknown. No ablation, diagnosis or cost pilot is a prerequisite.
+Portfolio disposition, recast count and C/UAV status remain unchanged.
+
+References:
+
+- `pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md`
+  at `ed882448bda9b3f240addf88bde1921cebc24397`
+- `FOLR_LEARNED_RETENTION_POST_B02_QUESTION_20260911.md`
+- `FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md`

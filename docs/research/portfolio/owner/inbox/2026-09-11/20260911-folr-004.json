@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "c",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "反向结果与已自适应的同信息空模型削弱当前边际价值；第一对收益使暂停与再测仍是近似选择，由原节点裁决。",
   "evidence": [
     "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_QUESTION_20260911.md"
@@ -82,6 +82,16 @@
       "record": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/PREPARATION_INTAKE.md",
       "state": "planned",
       "summary": "Portfolio只委托一次问题/完整接收；C为未执行建议，原Convergence未裁决。强比较器是已有自适应GRU的RETAIN；零新增实现或数值工作。"
+    },
+    {
+      "at": "2026-09-12T03:17:35+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md@ed882448bda9b3f240addf88bde1921cebc24397",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "已应用A作为未来一对原样B的方向建议；不是已执行训练。保留第一对正结果、第二对反结果及RETAIN默认。当前一次文档问题/完整接收结束，零实现或数值额度。",
+      "correction": "原C是未执行的近似建议，完整Pro选A后保留此历史并应用A；当前决定及中文上下文见20260911-folr-005与APPLICATION_OWNER_PACKET.json。"
     }
-  ]
+  ],
+  "approval_correction": "原C是未执行的近似建议，完整Pro选A后保留此历史并应用A；当前决定及中文上下文见20260911-folr-005与APPLICATION_OWNER_PACKET.json。"
 }
