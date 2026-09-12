@@ -3,6 +3,24 @@ Binding MARL structure: agent-count scaling or roster change; physical-trip turn
 
 # FOLR-LEARNED-RETENTION-B03 — B / EXPLORE
 
+## Owner-directed continuation — 2026-09-12
+
+[OWNER_DIRECT Windows resumption](../../portfolio/decisions/2026-09-12-windows-root-resumption.md)
+clarifies that **300 seconds of support is a reference, not a hard launch stop**.
+The observed 308.8422538-second preparation remains recorded. Continue the same
+unsubmitted B03 pair with the original source, two fits, 7811/107811 identities,
+5000/128 episodes and literal native commands. The **1350-second native arm,
+2700 native sum and 3000 complete invoked-work caps remain**. Record actual work
+and unknown terms; do not restart the cost ledger. Earlier ceiling/ended-allocation
+wording below describes the superseded instruction, not current authority.
+
+One-time staging now uses a detached no-checkout worktree and ordinary Git sparse
+checkout at the original source SHA. Materialize the original ten files plus
+`scripts/hmasd_platform.py`, an existing required admission import: 11 files,
+85,364 published bytes. No scientific code, passing test or experiment changes.
+Static import closure and scoped source materialization are the changed contract.
+See [resumption facts](evidence/2026-09-12-folr-learned-retention-b03-resumption.json).
+
 ## Authority, question and finite unit
 
 Portfolio response `f4bbe6cae2d351b4c80c5e0d9d66690d337749ce` selects F+U,
