@@ -10,8 +10,8 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | FSD | Fifth pair and cleanup complete; original DM actively prepares a bounded distinct next-object/lifecycle decision input from all five pairs | Deliver 2–3 concrete choices to Portfolio; no automatic sixth pair/S/implementation/experiment |
 | RCLE | Original-node intake accepted at main8973c0515: HOLD only tested equal-unit/.99-prior/FLEX/final1000 spending; direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice from refreshed evidence; no repeated recipe, fit or consultation |
 | FOLR | Entity-history family OPEN; original DM actively prepares exact implementation/resource readiness, no empirical grant | Deliver bounded cost/readiness input to Portfolio without changing old package H or repeating consultation |
-| ACPS | Newly registered ACTIVE/HIGH; accountable DM active on ACPS-B01 source/card/implementation readiness | One matched pair under450s/arm,900native,900support,1800complete after fresh admission |
-| CADC | Newly registered ACTIVE/HIGH; accountable DM active on CADC-B01 source/card/implementation readiness | One matched pair under600s/arm,1200native,900support,2100complete after T→ACPS→CADC contention order |
+| ACPS | ACPS-B01 card/source and 7 focused checks integrated at main6d42661be; no scientific invocation yet | DM publishes exact wrappers, stages/readbacks and performs fresh admission for one pair under1800complete |
+| CADC | CADC-B01 card/source and 9 focused checks integrated at main1d68daff9; no scientific invocation yet | DM publishes exact wrappers, stages/readbacks and performs fresh admission for one pair under2100complete, respecting actual contention order |
 | Portfolio | New-direction/MGTAP-T decision accepted at main2492dcb06; separate ACVC/FOLR/RCLE/FSD round is being authored | Apply T/ACPS/CADC independently and prepare the four distinct later choices without batch waits |
 
 Strict advancing direction-DM chains5/5: MGTAP, ACPS, CADC, FSD and FOLR each have an active
