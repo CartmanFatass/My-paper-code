@@ -7,14 +7,19 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | --- | --- | --- |
 | ACVC F | Complete intake accepted at mainf6bf9e467: train-F minus train-C on common-F evaluation −0.0260962 J,43/64 adverse, DOWN; both arms/terminal logs complete and local archives retained; purchased pair ended | Six scoped remote cleanup targets only; no retry, extra panel, consultation or active scientific work |
 | CBSC C | Complete intake accepted at main9ca150856: RAW=STRUCT11.15, exact-zero32/32, WITHIN_MEI and below REQUEST_ONLY12.45; native90.27s, evidence preserved, purchased pair ended | Scoped reclamation only; no retry, second S or active scientific work |
-| FOLR B03 | Final paired intake accepted/main47d75d7f9: RETAIN0.947578125, LEARNED_EVENT−0.267968750, d_LR−1.215546875 ⇒ RETAIN_ABOVE_MEI; native1750.81s within cap; finite grant ended. Remote roots removed; three archived local duplicates retained after PowerShell policy rejection | No successor or active scientific work; local retention is an engineering restriction, not a scientific blocker |
+| FOLR post-B03 P | Complete response/intake accepted through main79397ac52: PRO_FINAL H reversibly holds further spending on tested LEARNED_EVENT package and retains event-aware RETAIN; P ended | No fourth pair, successor or active work; re-entry needs a renewed optional-use decision |
+| FSD D | Complete paired intake accepted at main42a483997: I-D0 +0.0125548 J,19 positive/13 adverse, SE0.0125068, ABOVE_MEI by only0.00255; native1517.95s, both goals complete, grant ended | Four scoped remote cleanup targets only; no fifth pair, successor or active scientific work |
 | VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
-| RCLE R | Partial intake at main8bfa6c4d8 preserves one1000-update fit (`G_U=-0.000205485`, interval crosses zero); reference panel missing after roster-column TECHNICAL_STOP. Reference-only inputs bound at main71198147e | Same DM runs one fresh-admitted detached reference completion inside the original logical invocation; unchanged900/600/1500, no fit/training/semantic addition |
-| Portfolio two remaining chains | Exact request at main13d604c4d bound to current Portfolio conversation; Transport verified bytes/binding and provider accepted the unique Send, generation in progress. D+P, renewed M and no-addition remain options; no grant yet | Transport observes/archives once; original Portfolio DM checks the complete response |
+| RCLE R | Complete intake accepted at main2a53388b8: `Delta_ref=-0.00884196` with negative CI and8/8 reference losses; `G_U=-0.000205485` interval crosses zero. One fit plus reference-only completion, native343.43s; allocation ended | Six scoped remote terminal-path cleanups only; no retry, new fit, Pro or active scientific work |
+| Portfolio two remaining chains | Final response archived/intaken at mainbd5fd849a: D=yes, P=yes, M=no; exact execution mapping published | ROOT_INTEGRATED; FSD and FOLR dispatched independently, no common wait |
+| ACVC A | Complete B02 intake accepted at main89910ecd7: train-F minus train-C −0.0573422 J, SE0.00942192,50/64 adverse, DOWN; both arms exit0, native338.10s, grant ended | Six scoped remote cleanup targets only; no third pair, retry, panel or active scientific work |
+| MGTAP M | Complete intake accepted at main3c5f5471f: COND−DENSE+0.0244781 J,SE0.00465816,26/32 positive, COND_ABOVE_MEI; one handle exit0/native361.85s, grant ended | Four scoped duplicate cleanup targets only; no fourth pair, consultation or active scientific work |
+| Portfolio post-CFR vacancies | Final response/intake accepted at maincf7bd424f: A=yes,M=yes,Q=no; execution mapping published | A/M dispatched independently; three remaining vacancies move to the next rolling Portfolio question |
 
-Direction chains1/5: RCLE R remains active in bounded engineering repair. ACVC F and CBSC C completed
-and released their slots. The in-flight Portfolio request can select at most two chains; the remaining
-two vacancies are recorded for the next rolling decision. No queued intention or cleanup is counted.
+Direction chains5/5: ACVC, MGTAP, FSD, RCLE and FOLR DMs have resumed their next bounded object or
+proper-node direction step. Their latest allocations completed, but no Portfolio decision stopped
+these ACTIVE directions. The N/S/R generation supplies concrete FSD/RCLE choices; new-direction
+drafting first refreshes all affected old-direction facts from the current DMs.
 
 ## Current routing
 

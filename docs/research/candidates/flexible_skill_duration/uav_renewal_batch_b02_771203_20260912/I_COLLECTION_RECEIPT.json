@@ -1,0 +1,72 @@
+{
+  "transport_returncode": 0,
+  "inner_collection_wall_seconds": 0.5779999999795109,
+  "archive_bytes": 17993,
+  "archive_sha256": "5258371b2e9d36467439f5b290a53563321781388d671c0ac0001626a0cf5d6e",
+  "archive_path": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771203_20260912/I_collection.tar.gz",
+  "metadata": {
+    "collected_utc": "2026-09-12T18:59:23.350349+00:00",
+    "source_sha": "9eb99f8b68dd2863212c10693b911746a6d24354",
+    "run_root": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912/temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/I",
+    "input_root": "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771203-20260912",
+    "handle": "fsd-uav-renewal-batch-b02-771203-I-20260912",
+    "actual_worktree": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912",
+    "supervisor_references_actual_worktree": true,
+    "run_relative_files": [
+      "summary.json",
+      "training.jsonl",
+      "manifest.json"
+    ],
+    "files": {
+      "I/manifest.json": {
+        "bytes": 1612,
+        "sha256": "e95d941ef497565c981f5b30bb468f9289da6bca61fd35e08640049250e82899"
+      },
+      "I/summary.json": {
+        "bytes": 51313,
+        "sha256": "0749b3c99d611b0e0af2b849c15045fe78fb6699c388041666fdcaa6b7dfb9b5"
+      },
+      "I/training.jsonl": {
+        "bytes": 22439,
+        "sha256": "0049f0e0132d85d567edde93e8474107a0c1a9113937a28242f99e26eaf81d7a"
+      },
+      "inputs/I_admission.json": {
+        "bytes": 504,
+        "sha256": "88f16758b91823aaad50a3790c987e9db8906d08a4437371a457d1ebdd9b933b"
+      },
+      "inputs/I_process_time.txt": {
+        "bytes": 101,
+        "sha256": "f307ef408bed85208b04da8e0e1db93f36e1959775d35c38cd6f607c0f2df25c"
+      },
+      "supervisor_I/exit_code": {
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "supervisor_I/pid": {
+        "bytes": 8,
+        "sha256": "d660359eccdff8c8121b2ff294a65038fb3850450f62964734b59318059a1873"
+      },
+      "supervisor_I/runner.sh": {
+        "bytes": 1487,
+        "sha256": "0efb0b42cf8d51fb6cdc872a91a96d99cac07f5bdda36c0ff802d8f23cd62b2e"
+      },
+      "supervisor_I/start_time": {
+        "bytes": 11,
+        "sha256": "1fca4dc1c50584ae95424f8e79dc4665182668ebea0fd686d7dd5e6f68ced290"
+      },
+      "supervisor_I/status": {
+        "bytes": 9,
+        "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+      },
+      "supervisor_I/task.log": {
+        "bytes": 783,
+        "sha256": "31224541997f5544bd4af3f2790395187384ee3199615a7995354463a92d179e"
+      }
+    }
+  },
+  "raw_file_count": 11,
+  "all_raw_bytes_verified": true,
+  "local_temp_created": false,
+  "new_scientific_invocations": 0,
+  "remote_stderr": ""
+}

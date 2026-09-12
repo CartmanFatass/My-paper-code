@@ -1,0 +1,111 @@
+{
+  "id": "20260912-root-010",
+  "created": "2026-09-12T12:47:37-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "Portfolio新N/R建议：A/M后剩余容量，不自动补满",
+  "context": "当前A/M两条独立链已开始，三个空位。作者建议新FSD原样第五pair N加RCLE一次原Convergence R；FSD仅咨询S、较小子集及H是实质反方。N/S互斥，本包最多两个方向，尚无新拨款。",
+  "options": [
+    {
+      "key": "nr",
+      "label": "新买FSD N与RCLE R",
+      "consequence": "N新增3000 future invoked秒，R完整成本未知且零数值；两方向独立，至少一个空位仍在。"
+    },
+    {
+      "key": "sr",
+      "label": "FSD仅咨询S加RCLE R",
+      "consequence": "两项各一次原节点判断和完整intake，费用未知且零数值；N不买，任何候选仍未资助。"
+    },
+    {
+      "key": "smaller",
+      "label": "只买一个适用选项",
+      "consequence": "Portfolio明确N、S或R单项；未选无授权，N/S互斥，实际空位按开始计。"
+    },
+    {
+      "key": "h",
+      "label": "不追加H",
+      "consequence": "所有新项不买，既有A/M独立继续，保留空位和全部正负证据。"
+    }
+  ],
+  "recommended": "nr",
+  "auto_applied": null,
+  "dm_reason": "FSD新小增益仍可能改变可选包用途，RCLE已完成原区分观察可作窄判断；未知咨询费用及已有不投入状态支持较小子集或H。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L55",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "A/M已独立推进后，对三个空位是否新买FSD N加RCLE R，或选FSD仅咨询S、较小子集或不追加H？本包最多两个独立方向，不自动补满。",
+    "changes_if_approved": [
+      {
+        "target": "FSD N或S（互斥）",
+        "from": "第四I1280/authentic-D0 pair完整结束，无第五pair或咨询余额",
+        "to": "N新一原样第五B pair：D0 whole900/I1800/native2700/support300/完整future invoked3000秒；或S仅一次原Convergence及完整intake，成本未知、零数值，保留候选仍不获资助。"
+      },
+      {
+        "target": "RCLE新R",
+        "from": "原equal-unit/.99-prior/final1000 B07及reference完整结束，无successor",
+        "to": "仅一次原Convergence及完整intake，判断窄hold已测包或保留一未资助原样fresh-fit候选；完整成本未知，零实现、数值或后续实验款。"
+      },
+      {
+        "target": "当前并行容量与既有A/M",
+        "from": "实际A/M两方向推进，三个空位",
+        "to": "A/M范围保持；N/S同属FSD，R属RCLE，最多两个新方向在真正开始后计入，至少一个空位仍在。"
+      }
+    ],
+    "if_refused": "不追加相应投入，保留所有证据和已结束边界；A/M独立继续，Root如实保留空位。Q=no和旧余额不转作备用，不把hold扩为整个方向PARK。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/SCIENCE_BRIEF.md",
+        "quote": "The fourth complete pair,771203, gives **+.012554805665750726 J**,19 positive/\n13 adverse final worlds, conditional SE.01250683666255726.",
+        "why": "FSD新小增益与早前分歧并存；再一个真实观察可能改变可选包用途，但不是五seed门槛。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/SCIENCE_BRIEF.md",
+        "quote": "B07's exactly implemented equal-unit manager/claim-gradient combination and\n.99-nearest initialization now have a complete final1000 fit and reference.",
+        "why": "RCLE之前选定的区分观察已完整，可以对这个具体已测包作一次原节点发展判断。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/SCIENCE_BRIEF.md",
+        "quote": "Still,\nthe existing ended allocation already prevents new spending, and a retained\nunchanged candidate may have little value given weak service/learning.",
+        "why": "RCLE咨询可能重复已有效的不投入状态，不能把未知费用称为便宜。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/SCIENCE_BRIEF.md",
+        "quote": "The current mixed record can already\njustify conserving; N is one discretionary observation, not a five-seed quota.",
+        "why": "FSD最新13负和较高whole cost支持只咨询或不追加，已有混合记录可能已足够作实际用途判断。"
+      }
+    ],
+    "uncertainty": [
+      "FSD条件world误差不是训练总体不确定性，三次above-MEI及一次负点不判稳定优势或分量因果。",
+      "N3000是新报价上限，不是已知最低成本或未来预测；S/R完整agent/provider/command费用未知。",
+      "N/S不能同时购买或组成先咨询后自动B；任何保留候选仍未资助。",
+      "没有第三个已具体化的边际任务，不反复读FRRIE静态栈或借Q=no填空；未来独立修复不要求复原每个历史原因。"
+    ],
+    "cost": {
+      "compute": "N+R：新N3000 future invoked秒加未知R成本；N内D0 900、I1800、support300及一次source delivery45含于support。S+R两项完整成本均未知、零数值款。旧成本保留一次，不产生余额。",
+      "owner_time": "异步可见，不等待逐项批准；Portfolio Pro按现有委托最终选择。",
+      "reversibility": "costly",
+      "waits_on_this": "仅新N/S/R投入；当前ACVC A/M不等本问题或彼此结果。"
+    },
+    "verdict_text": "Author recommendation only: newly buy **N**, one unchanged FSD fifth training\npair, and **R**, one original RCLE post-B07 Convergence with complete intake.\n**S**, one FSD Convergence instead of N, and smaller subsets/**H** are substantive\nalternatives. N and S concern the same direction and are mutually exclusive in\nthis decision. Portfolio Pro chooses; this preparation grants or runs nothing.",
+    "source": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T19:55:22+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "本记录只追溯既有A/M裁决的实际后果：A每分支结束条件已由main89910ecd7完整DOWN intake满足，现仅M推进1/5、四空位。旧A/M响应没有选择本项N/S/R/H；当前建议仍未授权且最多两新方向，没有auto_applied。原收件项2/5是准备时快照，当前source/packet与本记录取代该容量快照。"
+    }
+  ]
+}

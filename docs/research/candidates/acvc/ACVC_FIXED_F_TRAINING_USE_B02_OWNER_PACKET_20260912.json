@@ -1,0 +1,11 @@
+{
+  "question": "已有一次负向结果，再观察一对不改方法的新训练，是否改变继续开发训练 F 的建议？",
+  "changes_if_approved": [{"target": "ACVC_FIXED_F_TRAINING_USE_B02", "from": "前一对结束且没有后继额度", "to": "新 Portfolio A=yes 单独投入一对，身份20319/30319，结束后不自动再开"}],
+  "if_refused": "在下一个可停边界应用异步指令，保留已发生的结果和费用，不改写前一对。",
+  "evidence_for": [{"path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md", "quote": "Today's decision is to fund exactly one further observation.", "why": "Portfolio 已明确购买一次新的重复观察，允许直接执行。"}],
+  "evidence_against": [{"path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_SCIENCE_CARD_20260912.md", "quote": "Train-C→deploy-F remains the useful competent reference.", "why": "已有完整负向证据和可用参考；新增观察不保证收益。"}],
+  "uncertainty": ["单对结果只描述这一对训练，不建立总体胜负。", "当前主机调优同信息 headroom 仍缺失，最低争用顺序保持。"],
+  "cost": {"compute": "全新未来额度：每完整臂270秒、原生合计540秒、支持300秒、合计840秒；旧费用不重算为余额。", "owner_time": "无需答复即可继续既有授权", "reversibility": "costly", "waits_on_this": "nothing"},
+  "verdict_text": "Claim tested: one further fresh training-through-F pair improves final common-F native return over training C by more than .01 J.",
+  "source": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_SCIENCE_CARD_20260912.md"
+}

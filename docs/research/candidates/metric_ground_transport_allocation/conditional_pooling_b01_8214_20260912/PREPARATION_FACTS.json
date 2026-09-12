@@ -1,0 +1,48 @@
+{
+  "master": 8214,
+  "base": 821400000,
+  "independent_matched_training_units": 1,
+  "learning_instances": 2,
+  "factory_calls": 1,
+  "top_level_models": 6,
+  "train_episodes_per_arm": 512,
+  "train_team_steps_per_arm": 131072,
+  "adam_per_arm": 1024,
+  "final_episodes_per_arm": 32,
+  "final_team_steps_per_arm": 8192,
+  "pair_team_steps": 278528,
+  "pair_adam": 2048,
+  "pair_episodes": 1088,
+  "actor_rows_per_fit": 3317760,
+  "pair_actor_rows": 6635520,
+  "additional_training_or_evaluation": 0,
+  "source_changes_only": [
+    "MASTER",
+    "CARD metadata"
+  ],
+  "accepted_reuse_surfaces_byte_unchanged": [
+    "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/conditional_pooling.py",
+    "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+    "scripts/hmasd_resource_preflight.py",
+    "scripts/run_mgtap_conditional_pooling_b01.py"
+  ],
+  "learner_drift": "Only default execution_filter=None and conditional hook from accepted ACVC; MGTAP supplies no hook; AST with only disabled addition removed equals accepted learner.",
+  "command_diff_only_master_namespace": true,
+  "command_bytes": 968,
+  "command_sha256": "c89e5a54b31b39a8df7059a9b896c8e58ff421e993b50c11bef751162e2bae0f",
+  "scientific_execution_in_checks": 0,
+  "caps_seconds": {
+    "COND": 450,
+    "DENSE": 450,
+    "native": 900,
+    "support": 300,
+    "complete": 1200
+  },
+  "stub_success_case_passed": true,
+  "stub_test_wall_seconds": 0.17,
+  "stub_scratch_absent": true,
+  "initial_static_assertion": "Stopped before stub/scientific execution on accepted optional execution_filter drift; reconciled by AST default-path equivalence."
+}

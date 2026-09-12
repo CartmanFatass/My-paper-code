@@ -1,0 +1,30 @@
+{
+  "event_id": "mgtap-cond-b01-8214-20260912-exit0",
+  "handle": "mgtap-cond-b01-8214-20260912",
+  "source_sha": "10ea737f0f9210ee2c126ad1e095734f21d4fcbc",
+  "status": "finished",
+  "exit_code": 0,
+  "pid": 3393092,
+  "pid_exists_at_collection": false,
+  "tmux_active": false,
+  "supervisor_duration_seconds": 362,
+  "native_time_seconds": 361.85,
+  "peak_rss_kib": 560596,
+  "runtime_cwd": "/home/wu/hmasd-worktrees/mgtap-cond-b01-8214-20260912",
+  "output_root": "/home/wu/hmasd-worktrees/mgtap-cond-b01-8214-20260912/temp/directions/metric_ground_transport_allocation/exp/conditional_pooling_b01_20260912_8214",
+  "supervisor_root": "/home/wu/.agent-tasks/mgtap-cond-b01-8214-20260912",
+  "monitor_goal": {
+    "adoption": "Root-routed actual fresh matching unfinished goal",
+    "terminal": "delivered to Root; Root resumed same DM for collection",
+    "completion": "Root confirms MONITOR_GOAL_COMPLETE",
+    "active_set": [],
+    "pending_observation": false
+  },
+  "technical_acceptance": "Both ordered COND and DENSE accepted from the one native invocation",
+  "scientific_reading": "COND_ABOVE_MEI",
+  "delta": 0.02447811898058116,
+  "conditional_se": 0.004658159652932406,
+  "new_scientific_invocations_after_terminal": 0,
+  "cleanup": "complete: all four assigned duplicate targets absent; evidence/shared authoring/cache retained",
+  "cleanup_receipt": "CLEANUP_RECEIPT.json"
+}

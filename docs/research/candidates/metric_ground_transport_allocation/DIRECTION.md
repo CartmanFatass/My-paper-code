@@ -12,6 +12,33 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Conditional pooling fresh8214 local gain — 2026-09-12
+
+The newly Portfolio-funded third unchanged COND/DENSE pair is a complete valid
+B/EXPLORE **COND_ABOVE_MEI** observation: COND meanJ0.20802816765678933 versus
+intact same-information DENSE0.1835500486762082, difference
+**+0.02447811898058116 J**, conditional SE0.004658159652932406,26 positive/6
+adverse final worlds. Both native512-train/32-final fits completed1024 Adam calls
+with actual own-arm/branch movement, one matched training unit and no extra panel.
+
+This is the package's strongest direct native support and first above-MEI point.
+The strongest direct contradiction remains unchanged8213−0.02246957345594415;
+earlier8212+0.005761321371348559 was inside MEI. Preserve each trained-pair
+observation separately without historical pooling or stable-superiority wording.
+Generic DENSE adaptation, finite training/evaluation variation and usefulness on
+only some trajectories remain alternatives. No attention, geometry or individual
+causal-credit mechanism is identified. Tuned native headroom remains absent;
+DENSE remains the generic default.
+
+The complete new M allocation ends with this pair/intake and scoped closeout;
+both previous M=no facts remain, and no fourth pair or consultation is funded by
+this result. A later discriminator requires a separately allocated consequential
+optional-use question informed by all three retained histories. No family,
+lifecycle, priority or formal UAV-entry decision follows locally.
+[Fresh8214 E0](MGTAP_CONDITIONAL_POOLING_B01_8214_RESULT_20260912.md),
+[intake](MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md),
+[card](MGTAP_CONDITIONAL_POOLING_B01_8214_SCIENCE_CARD_20260912.md).
+
 ## Conditional pooling fresh8213 adverse result — 2026-09-11
 
 The separately Portfolio-selected unchanged COND/DENSE follow-up is a valid

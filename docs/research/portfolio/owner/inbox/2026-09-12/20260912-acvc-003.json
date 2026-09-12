@@ -1,0 +1,84 @@
+{
+  "id": "20260912-acvc-003",
+  "created": "2026-09-12T12:34:45-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "固定 F 训练用途的第二对观察",
+  "context": "新 Portfolio A=yes 已投入一对不改方法的重复观察；前一对 DOWN 保留，主比较仍是两种训练都部署F。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行新的一对，所有结果保留，结束后不开第三对。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在可停边界终止未执行部分，保留已发生证据与费用。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "核对异步变更的科学范围后处理，不改写历史。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "原方法直接复用，只绑定新身份和新额度。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_SCIENCE_CARD_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L27",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "已有一次负向结果，再观察一对不改方法的新训练，是否改变继续开发训练 F 的建议？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC_FIXED_F_TRAINING_USE_B02",
+        "from": "前一对结束且没有后继额度",
+        "to": "新 Portfolio A=yes 单独投入一对，身份20319/30319，结束后不自动再开"
+      }
+    ],
+    "if_refused": "在下一个可停边界应用异步指令，保留已发生的结果和费用，不改写前一对。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md",
+        "quote": "Today's decision is to fund exactly one further observation.",
+        "why": "Portfolio 已明确购买一次新的重复观察，允许直接执行。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_SCIENCE_CARD_20260912.md",
+        "quote": "Train-C→deploy-F remains the useful competent reference.",
+        "why": "已有完整负向证据和可用参考；新增观察不保证收益。"
+      }
+    ],
+    "uncertainty": [
+      "单对结果只描述这一对训练，不建立总体胜负。",
+      "当前主机调优同信息 headroom 仍缺失，最低争用顺序保持。"
+    ],
+    "cost": {
+      "compute": "全新未来额度：每完整臂270秒、原生合计540秒、支持300秒、合计840秒；旧费用不重算为余额。",
+      "owner_time": "无需答复即可继续既有授权",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Claim tested: one further fresh training-through-F pair improves final common-F native return over training C by more than .01 J.",
+    "source": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_SCIENCE_CARD_20260912.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T19:49:35+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/EXECUTION_MAPPING.md",
+      "record": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "新 A 完整结束：B02再次DOWN，保留部署F参考及所有结果；不自动投入第三对。唯一归档待Root接受后清理远端副本。"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "event": "fsd-uav-renewal-batch-b02-771203-D0-20260912-exit0",
+  "route": "Root native terminal fact",
+  "handle": "fsd-uav-renewal-batch-b02-771203-D0-20260912",
+  "status": "finished",
+  "exit_code": 0,
+  "pid": 3381323,
+  "tmux_active": false,
+  "supervisor_duration_seconds": 475,
+  "reported_terminal_time": "2026-09-13T02:35:27+08:00",
+  "reported_cwd": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-20260912",
+  "adoption_cwd": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912",
+  "reconciliation": "Raw supervisor command, exact source readback and collected output all bind actual worktree with771203. Receipt pathname discrepancy is documentary; no new invocation.",
+  "goal_completion": "Root subsequently reported active_set empty and terminal delivered; I must establish a fresh unfinished monitoring goal."
+}
