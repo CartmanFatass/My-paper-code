@@ -1,0 +1,85 @@
+{
+  "id": "20260912-acvc-005",
+  "created": "2026-09-12T16:20:26-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "ACVC cluster B01：一次新 C 训练，比较三种部署方式",
+  "context": "K 已独立拨款。固定新实例、主指标和 600/600/1200 秒上限；卡已应用，真实运行仍须完成代码检查/评审和新鲜 admission。",
+  "options": [
+    {
+      "key": "a",
+      "label": "按已拨款的新卡推进",
+      "consequence": "完成窄改动与评审后执行一次完整 fit 加三个最终面板，保留所有结果。"
+    },
+    {
+      "key": "b",
+      "label": "按明确覆盖指令调整",
+      "consequence": "记录 owner 的具体覆盖指令，保留已经发生的费用和证据，不自动重试。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "原方向节点选择用途，Portfolio K 已给出新独立额度；本地只固定实例与实现。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_SCIENCE_CARD_20260912.md",
+    "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/EXECUTION_MAPPING.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L116",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按已接受的 K 独立额度，推进聚集用户场景的一次 C 训练及最终 C/F/dwell 比较。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_SCIENCE_CARD_20260912.md",
+        "from": "方向对象已选择，尚未绑定新实例",
+        "to": "固定 master21457/namespace31457、一次训练和三最终面板，进入针对性检查与评审后的远端执行。"
+      }
+    ],
+    "if_refused": "保留既有证据与已发生费用，按 owner 明确指令调整当前对象；不自动重复历史训练 F 比较或删除结果。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/EXECUTION_MAPPING.md",
+        "quote": "Train C on cluster512 episodes/256 rollouts/1,024 Adam, then final checkpoint C→F→own-dwell64 worlds each.",
+        "why": "K 已给出独立的新 600 native/600 support/1200 complete 额度。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_SCIENCE_CARD_20260912.md",
+        "quote": "Claim: test whether fixed F improves deployment return over C and own-predicate dwell on one newly C-trained policy under the existing cluster user law.",
+        "why": "同时保留普通执行和有用的简单规则比较器，直接判断这一用途。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md",
+        "quote": "There is no observed increase in saturation, trigger rate or return under cluster.",
+        "why": "cluster 实际收益未知，C 或 dwell 可能已经足够。"
+      }
+    ],
+    "uncertainty": [
+      "一个训练实例只支持其条件部署比较；不支持总体稳定优势。",
+      "新场景实际耗时与触发次数未知，按新硬额度执行。"
+    ],
+    "cost": {
+      "compute": "一个完整 native 调用≤600s，完整 support≤600s，总 invoked≤1200s；180224 team steps，1024Adam，三个最终64-world面板。",
+      "owner_time": "异步查看，现有授权下继续。",
+      "reversibility": "no after compute; documentary binding remains reversible",
+      "waits_on_this": "nothing; 不等待 owner 答复"
+    },
+    "verdict_text": "Bind and execute the selected fresh cluster deployment-use B under independent Portfolio K.",
+    "source": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/EXECUTION_MAPPING.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T23:20:26+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/EXECUTION_MAPPING.md",
+      "record": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_SCIENCE_CARD_20260912.md",
+      "state": "applied",
+      "summary": "已应用新卡21457/31457及K600/600/1200；代码/检查/评审仍在本次赋权流程内，尚无真实启动。"
+    }
+  ]
+}
