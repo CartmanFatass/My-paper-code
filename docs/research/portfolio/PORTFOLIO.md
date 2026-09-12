@@ -8,7 +8,7 @@
 本表登记15 ACTIVE、7 PARKED，生命周期、priority、recasts与UAV字段不变。
 最新 [Portfolio决定](decisions/2026-09-12-two-remaining-chains.md) 已由原作者完整核对：**FSD D与FOLR P独立获选，MGTAP不追加。**
 
-Root当前实际工作集0/5：FSD D与FOLR P均已完整intake并释放槽位；RCLE、ACVC与CBSC的已购对象也已验收。跨方向cleanup与Portfolio生成不计方向槽位。
+Root当前实际工作集2/5：ACVC A与MGTAP M已分别派发给独立DM。FSD D、FOLR P、RCLE R及上一轮ACVC/CBSC对象已完整intake；cleanup与Portfolio准备不计槽位。
 FSD为一对I1280/authentic-D0，D0≤900、I≤1800、native≤2700、support≤300、完整≤3000秒；FOLR仅一次原节点post-B03 Convergence及完整intake，零实验额度、完整成本未知。MGTAP1200未分配。
 补位Portfolio请求已由provider接受并正在生成，最终至多选择三项，至少仍会留下两个槽位。不把旧余额或未选候选当自动授权。
 Monitor当前无活动目标；FSD与FOLR均已完成。Transport正在观察post-CFR Portfolio generation。
@@ -19,7 +19,7 @@ Monitor当前无活动目标；FSD与FOLR均已完成。Transport正在观察pos
 | 方向 | 最新证据/科学状态 | 当前实际工作 | 下一步及边界 |
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
-| [ACVC](../candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md) | B pair完整验收为DOWN：train-F相对train-C的共同F评估−0.0260962 J，43/64 adverse；C01结论不变，保留train-C/deploy-F参考。 | 证据与终端日志已保全至mainf6bf9e467；已购pair结束，无活动科学工作。 | 仅完成六个已列明远端副本/监督器清理；无retry、额外panel、咨询或自动successor。 |
+| [ACVC](../candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md) | 上一pair为DOWN：train-F相对train-C共同F评估−0.0260962 J，43/64 adverse；保留train-C/deploy-F参考。 | **新A已派发**：同一DM负责一对新的unchanged train-F vs train-C、双方deploy-F对象。 | 270/arm、540native、300support、840完整上限；fresh identity/admission/Monitor/intake，禁止额外panel、retry或successor。 |
 | [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md) | C pair完整验收为WITHIN_MEI：RAW=STRUCT=11.15、32/32零差，均低于REQUEST_ONLY12.45；只支持本对象的局部零差异。 | 已购pair结束，证据已保全至main9ca150856；无活动科学工作。 | 仅完成已列明的scoped reclamation；无retry、第二个S或自动successor。 |
 | [CRTO](../candidates/commitment_residual_triggered_options/DIRECTION.md) | P72 PRO_FINAL保留B08测试的selected-panel family PARK；finite-zero修复已集成。 | 无 | 新的具体方向选择；没有自动successor。 |
 | [DISH](../candidates/degraded_incumbent_shadow_handover/DIRECTION.md) | **更新：B08 HALF_RETAIN−REPLACE为−6.5 ticks，WITHIN；REPLACE默认。post-B08已PARK retained-A03 arrival-bridge retention家族。** P62/DIRECT只是更早历史。 | 无 | 具体receipt-to-control研究问题或对独立pair不确定性的实际决策需求；新选择才续行，不要求完整机制证明。 |
@@ -28,7 +28,7 @@ Monitor当前无活动目标；FSD与FOLR均已完成。Transport正在观察pos
 | [expressibility_gated_renewal_credit_relay](../candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
 | [FRRIE](../candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md) | P59已intake；P63 source-only九frame映射完成，factory fault仍未归因，P63未运行。 | 无；本轮没有新增拨款。 | 可信最小观察/替代执行路径及必要拨款。旧故障未完全定位不自动禁止不同可信路径；不重跑旧P63。 |
 | [FSD](../candidates/flexible_skill_duration/DIRECTION.md#accepted-native-uav-renewal-batch-adverse-pair-b02771103-2026-09-11) | 771103 pair−0.0124304306、16/16 signs；既有正值保留，分配结束，四个远端路径已清理。 | 无 | 具体use/successor/claim-choice投资选择；无已分配第四pair或C promotion。 |
-| [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 最新8213 COND−DENSE−0.022469573456，5正/27负；完整intake，DENSE默认、no-addition保留。 | 无 | 必要的新投资选择；旧1200秒pair不能自动追加。 |
+| [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 最新8213 COND−DENSE−0.022469573456，5正/27负；DENSE默认及两次M=no历史保留。 | **新M已派发**：独立DM负责一对unchanged COND/DENSE对象。 | 450/arm、900native、300support、1200完整上限；fresh identity/admission/Monitor/intake，禁止额外panel、retry或successor。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
 | [RCLE](../candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md) | B07完整结果：`Delta_ref=-0.00884196`且区间为负，八个reference场景均落后；`G_U=-0.000205485`且区间跨零。只支持本次对象局部结论。 | 原fit与reference-only完成均验收，native343.43秒；分配结束，无活动科学工作。 | 仅清理六个已列明远端终态路径；无retry、新fit、Pro或自动successor。 |

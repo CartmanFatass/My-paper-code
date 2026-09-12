@@ -12,11 +12,13 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
 | RCLE R | Complete intake accepted at main2a53388b8: `Delta_ref=-0.00884196` with negative CI and8/8 reference losses; `G_U=-0.000205485` interval crosses zero. One fit plus reference-only completion, native343.43s; allocation ended | Six scoped remote terminal-path cleanups only; no retry, new fit, Pro or active scientific work |
 | Portfolio two remaining chains | Final response archived/intaken at mainbd5fd849a: D=yes, P=yes, M=no; exact execution mapping published | ROOT_INTEGRATED; FSD and FOLR dispatched independently, no common wait |
-| Portfolio post-CFR vacancies | Up-to-three A/M/Q/H question fixed at main03f5b496c and exact HANDOFF at maincb3f539a7; queued to current Transport after active FOLR observation | Reconcile and Send at most once after FOLR archival; author intakes immutable response, no inferred grants |
+| ACVC A | PRO_FINAL A=yes/maincf7bd424f; existing ACVC DM resumed for one fresh unchanged train-F vs train-C pair, both deploy-F | 270/arm,540native,300support,840 complete; remote-first, Monitor adoption and paired intake, no retry/extra panel |
+| MGTAP M | PRO_FINAL M=yes/maincf7bd424f; independent MGTAP DM started for one fresh unchanged COND/DENSE pair | 450/arm,900native,300support,1200 complete; remote-first, Monitor adoption and paired intake, no retry/extra panel |
+| Portfolio post-CFR vacancies | Final response/intake accepted at maincf7bd424f: A=yes,M=yes,Q=no; execution mapping published | A/M dispatched independently; three remaining vacancies move to the next rolling Portfolio question |
 
-Direction chains0/5: FSD D, FOLR P, RCLE R, ACVC F and CBSC C completed and released their slots.
-The active post-CFR Portfolio generation can select at most three new chains, so at least two more
-vacancies will remain; no queued intention, Transport session, or cleanup is counted as a direction.
+Direction chains2/5: ACVC A and MGTAP M are independently active. FSD D, FOLR P, RCLE R and prior
+ACVC/CBSC objects completed and released their slots. Three vacancies remain for the next rolling
+Portfolio question; no queued intention, Transport session, or cleanup is counted as a direction.
 
 ## Current routing
 
