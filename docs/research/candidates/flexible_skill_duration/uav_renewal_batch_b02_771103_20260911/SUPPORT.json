@@ -1,6 +1,6 @@
 {
   "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
-  "recorded_utc": "2026-09-12T02:52:33.075473+00:00",
+  "recorded_utc": "2026-09-12T02:54:20.157395+00:00",
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -137,10 +137,26 @@
     {
       "purpose": "direct I Monitor handover dispatch requiring actual unfinished-goal adoption",
       "wall_seconds": 0.155
+    },
+    {
+      "purpose": "publish I launch and active Monitor adoption plus scoped terminal cleanup inventory",
+      "wall_seconds": 5.2214325
+    },
+    {
+      "purpose": "Root reported current FSD D0 inspection, integration/conflict resolution and push; conservative enclosing bound 0.7 + 0.7 + 5.4 s",
+      "wall_seconds": 6.8
+    },
+    {
+      "purpose": "single actionable I accepted/adopted handover through live Root relay",
+      "wall_seconds": 0.232
+    },
+    {
+      "purpose": "authoritative owner review read at accepted I clean handover boundary",
+      "wall_seconds": 0.4394353
     }
   ],
-  "known_support_wall_seconds": 54.970524299999994,
-  "counting": "Each outer invoked support interval once; nested clocks are not additive. This collection-publication command will be charged in the next snapshot.",
+  "known_support_wall_seconds": 67.6633921,
+  "counting": "Each outer invoked support interval once; nested clocks are not additive. This final I receipt/publication command is not measurable within its own snapshot; it is returned separately and charged at collection.",
   "new_scientific_submissions": 2,
   "new_source_delivery_transactions": 1,
   "unknown": [
@@ -161,11 +177,14 @@
     "limit_seconds": 45,
     "status": "successful single transaction; nested helper clock not added again"
   },
-  "known_native_plus_support_seconds": 526.7905243,
+  "known_native_plus_support_seconds": 539.4833921,
   "Root_integration": {
     "source_main": "31e9cc05a",
     "D0_handover_main": "0e7bb1e83",
     "charged_reported_seconds": 9.1,
-    "exactness": "approximately 0.6 + 8.5 s; client/message overhead unknown"
+    "exactness": "approximately 0.6 + 8.5 s; client/message overhead unknown",
+    "D0_collection_main": "a755d804f",
+    "D0_collection_reported_support_bound_seconds": 6.8,
+    "counting": "Earlier approximate 9.1 s plus this conservative <=6.8 s contribution are charged once each; client/message overhead remains unknown."
   }
 }
