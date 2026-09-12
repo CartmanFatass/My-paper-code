@@ -1,6 +1,6 @@
 {
   "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
-  "recorded_utc": "2026-09-12T02:35:22.352273+00:00",
+  "recorded_utc": "2026-09-12T02:39:21.318744+00:00",
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -69,16 +69,48 @@
     {
       "purpose": "freeze fresh card owner packet/audit and initial support record",
       "wall_seconds": 0.3976958
+    },
+    {
+      "purpose": "publish exact fresh source/card/commands, owner/audit and preparation evidence",
+      "wall_seconds": 4.9006801
+    },
+    {
+      "purpose": "single allocated source delivery transaction and its complete-command receipt",
+      "wall_seconds": 7.6788293
+    },
+    {
+      "purpose": "submit the sole exact D0 handle and persist acceptance with live Monitor/relay configuration",
+      "wall_seconds": 0.6606675
+    },
+    {
+      "purpose": "direct D0 Monitor handover dispatch with unfinished-goal requirement",
+      "wall_seconds": 0.888
+    },
+    {
+      "purpose": "persist source acceptance, D0 launch and direct Monitor dispatch",
+      "wall_seconds": 0.2680543
     }
   ],
-  "known_support_wall_seconds": 12.3352267,
+  "known_support_wall_seconds": 26.7314579,
   "counting": "Each outer invoked support interval once; nested clocks are explanatory, not additive. This file's own write and later publication/execution are charged at the next record.",
-  "new_scientific_submissions": 0,
-  "new_source_delivery_transactions": 0,
+  "new_scientific_submissions": 1,
+  "new_source_delivery_transactions": 1,
   "unknown": [
-    "future native realization",
-    "future support including integration, observation, collection and cleanup",
-    "any unmeasured external contribution is not zero"
+    "D0 and I native realization",
+    "Monitor invoked observation wall pending routed accounting",
+    "Root FSD-only integration/support wall pending routed accounting",
+    "future collection, publication and preservation/cleanup",
+    "unmeasured external contribution is not zero"
   ],
-  "claim": "Prospective partial support accounting; not a final cap certificate."
+  "claim": "Prospective partial support accounting; not a final cap certificate.",
+  "native_wall_seconds": {
+    "D0": null,
+    "I": null
+  },
+  "source_transaction": {
+    "outer_tool_wall_seconds": 7.6788293,
+    "complete_helper_wall_seconds": 7.437999999994645,
+    "limit_seconds": 45,
+    "status": "successful single transaction; nested helper clock not added again"
+  }
 }
