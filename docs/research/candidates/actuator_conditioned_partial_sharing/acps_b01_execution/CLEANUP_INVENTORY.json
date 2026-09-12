@@ -4,14 +4,46 @@
   "owner": "/root/dm_acps_start",
   "source_sha": "2302072e2dcb7aa0c4ee2f71572ef8ca67cd9a46",
   "retention": "ACPS_B01_9101_RAW.tar.gz: all14 raw files; ACPS_B01_SUPERVISOR.tar.gz: both complete terminal supervisor roots, 12 files. Every member verified against remote and archive.",
-  "root_integration_retention": "pending for complete paired intake/archive",
+  "root_integration_retention": "accepted by Root on main e97f8cfa1; cleanup assigned to the original DM",
   "remote_targets": [
-    {"path": "/home/wu/hmasd-worktrees/acps-b01-9101-20260912", "kind": "terminal detached exact-source worktree", "action": "unregister with git worktree remove after retention"},
-    {"path": "/home/wu/hmasd-inputs/acps-b01-9101-20260912", "kind": "two committed exact launch payloads", "action": "remove exact owned staging directory after retention"},
-    {"path": "/home/wu/.agent-tasks/acps-b01-shared-9101-20260912", "kind": "terminal SHARED supervisor root", "action": "remove exact owned terminal task root after log/status retention"},
-    {"path": "/home/wu/.agent-tasks/acps-b01-acps-9101-20260912", "kind": "terminal ACPS supervisor root", "action": "remove exact owned terminal task root after log/status retention"}
+    {
+      "path": "/home/wu/hmasd-worktrees/acps-b01-9101-20260912",
+      "kind": "terminal detached exact-source worktree",
+      "action": "unregister with git worktree remove after retention",
+      "completed": true,
+      "disk_absent": true,
+      "registration_absent": true
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/acps-b01-9101-20260912",
+      "kind": "two committed exact launch payloads",
+      "action": "remove exact owned staging directory after retention",
+      "completed": true,
+      "disk_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/acps-b01-shared-9101-20260912",
+      "kind": "terminal SHARED supervisor root",
+      "action": "remove exact owned terminal task root after log/status retention",
+      "completed": true,
+      "disk_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/acps-b01-acps-9101-20260912",
+      "kind": "terminal ACPS supervisor root",
+      "action": "remove exact owned terminal task root after log/status retention",
+      "completed": true,
+      "disk_absent": true
+    }
   ],
   "local_retained_test_scratch": "C:/Projects/HMASD-worktrees/codex-acps/temp/directions/actuator_conditioned_partial_sharing/test/acps-b01-20260912",
   "local_cleanup_status": "runtime rejected recursive removal before execution; preserve without bypass",
-  "preserve": ["C:/Projects/HMASD-worktrees/codex-acps authoring checkout and codex/acps", "/home/wu/projects/HMASD shared repo", "all scientific source/evidence", "all unrelated live worktrees and Monitor/MGTAP state"]
+  "preserve": [
+    "C:/Projects/HMASD-worktrees/codex-acps authoring checkout and codex/acps",
+    "/home/wu/projects/HMASD shared repo",
+    "all scientific source/evidence",
+    "all unrelated live worktrees and Monitor/MGTAP state"
+  ],
+  "remote_cleanup_status": "complete: four exact paths absent on disk; owned execution worktree absent from git worktree list",
+  "remote_cleanup_receipt": "CLEANUP_RECEIPT.json"
 }
