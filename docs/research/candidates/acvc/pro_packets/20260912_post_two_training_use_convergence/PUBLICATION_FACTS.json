@@ -132,5 +132,14 @@
   "issue_readback_reconciliation": "Initial literal old-body substring assertion differed after Windows CRLF body-file serialization; fresh actual body equals the submitted body modulo CR normalization. Current prefix and prior discussion/comment content preserved; no second edit or provider Send.",
   "science_or_runtime_exposure": 0,
   "provider_access": "not independently observed; Pro must report actual access",
-  "task_publication": "TASK_NOT_PUBLISHED at this pre-publication check"
+  "task_publication": "READY_TO_DISPATCH; not yet dispatched by DM",
+  "task_sha": "86c4daafe55507ddac9c0b04833c90307f32af30",
+  "task_path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/TASK.md",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/86c4daafe55507ddac9c0b04833c90307f32af30/docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/TASK.md",
+  "task_sha256": "d562e3e9ba64ef4cb7d23092c6edab5a1d2808a3b0a07fbc4d05e1714ad19cf1",
+  "task_bytes": 26881,
+  "committed_task_matches_normalized_worktree": true,
+  "route_verified_after_binding": true,
+  "binding_reconciliation": "Use primary root for live rendering configuration, then actual shared authoring checkout root for TASK-relative Git binding; no TASK or route change.",
+  "scientific_selection": "pending original node"
 }
