@@ -1,5 +1,9 @@
 # RCLE B07 execution and technical acceptance
 
+Current boundary: one detached supervisor submission is accepted. Monitor dispatch
+is accepted; actual unfinished-goal adoption and terminal collection remain pending.
+There is no accepted scientific result or successor.
+
 The [card](RCLE_B07_EQUAL_UNIT_SCIENCE_CARD_20260912.md) binds fresh
 RCLE-TBCFV-B07-EQUAL-UNIT/master27 and exactly one final1000 fit with three
 required panels. Funding is Portfolio response268d2b4df7f31df8a27466ddfbb3bcef6ba587a4,
@@ -95,3 +99,23 @@ owner-item add/trace commands .2572291/.2615827 s. Including the recorded .27914
 local documentary check, known support through staging is24.0828232 s; an
 unreported review-read timing, tool tails and later work remain unmeasured.
 No scientific model, admission or native episode ran during staging.
+
+## Actual single submission and pending observation
+
+Command commit e6325dcdb50e97eda62adaf5ce8c844b7735501f was pushed and its
+immutable command bytes were submitted once; the source surface guard passed
+despite the later documentation commit. agent-task returned exit0 and confirmed
+tmux agent_rcle-b07-equal-unit-s27-20260912, with empty stderr. Source remains
+1652c44ac65ed6e686610c3cfcff67dab1a0fc6b. Enclosing submission .6987168 s includes
+the embedded SSH .389725 s; these are not two charges.
+
+[LAUNCH_RECEIPT.json](b07_equal_unit_20260912/LAUNCH_RECEIPT.json) records the exact
+receipt and direct Monitor dispatch to the live01a095d0-21ee-7c02-9d97-3681b5678200.
+Main owner reviews were empty immediately before submission. The payload explicitly
+requires get_goal/continue-or-create without budget, retention through accepted
+terminal delivery, actual unfinished-goal MONITOR_ADOPTED and final
+MONITOR_GOAL_COMPLETE. App delivery was accepted. Actual adoption, destination
+admission and terminal evidence remain pending; no duplicate polling/submission
+is commissioned. Root forwards the actual goal receipt and resumes this same
+DM for collection on the terminal event. Source and command are ready for Root
+integration without touching the active exact-source checkout.
