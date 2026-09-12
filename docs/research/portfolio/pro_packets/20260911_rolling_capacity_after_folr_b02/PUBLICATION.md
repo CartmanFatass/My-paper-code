@@ -138,3 +138,11 @@ trace, two audit appends and this publication append. Accepted REQUEST/TASK/
 HANDOFF, preparation materials and RESPONSE are unchanged. A separate accepted
 completion-relay receipt will bind the new publication commit; this is a new
 intake handoff, not a duplicate of the earlier READY request dispatch.
+
+The intake was committed and pushed as
+`e1c3c4f15524027ba7baad1074ab49ca3fe22940`. One COMPLETE handoff to the live
+configured Root relay was app-accepted; its exact event, payload and result
+are in INTAKE_RELAY_RECEIPT.json. It names the three original DM dispatches
+and the independent Transport bookkeeping correction. This confirms relay
+delivery, not Root integration or task starts. No duplicate or ACK wait follows;
+the native final remains the source completion record for that same event.
