@@ -7,7 +7,7 @@ import argparse
 import json
 import subprocess
 import sys
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from typing import Any, Sequence
 
 try:
@@ -76,6 +76,18 @@ def doctor(item: dict[str, Any]) -> dict[str, Any]:
         result["observed"]["reason"] = "catalog status is unavailable"
         return result
     entrypoint = Path(item["entrypoint"])
+    if sys.platform == "linux" and PureWindowsPath(item["entrypoint"]).is_absolute():
+        # The catalog still describes the installed Windows environment; WSL only
+        # translates its executable path for the observation-only version probe.
+        try:
+            translated = subprocess.run(
+                ["wslpath", "-u", item["entrypoint"]], check=True,
+                capture_output=True, text=True, timeout=5,
+            )
+        except (OSError, subprocess.SubprocessError) as exc:
+            result["observed"]["reason"] = f"Windows entrypoint unavailable from this Linux host: {exc}"
+            return result
+        entrypoint = Path(translated.stdout.strip())
     environment = ROOT / item["environment"]
     if not entrypoint.is_file():
         result["observed"]["reason"] = f"entrypoint is absent: {entrypoint}"

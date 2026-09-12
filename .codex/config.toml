@@ -46,6 +46,6 @@ description = "Optional Sol/medium implementation task owned and accepted by DM 
 config_file = "./agents/hmasd-implementer.toml"
 
 [mcp_servers.agentify-desktop]
-command = "node"
+command = "/mnt/c/Program Files/nodejs/node.exe"
 args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
 tool_timeout_sec = 2700
