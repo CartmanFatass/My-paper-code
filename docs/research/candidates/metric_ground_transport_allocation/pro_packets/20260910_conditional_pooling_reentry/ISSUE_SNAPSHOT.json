@@ -1,0 +1,209 @@
+{
+  "observed_at": "2026-09-11T01:50:06.1012925Z",
+  "source_command": "gh issue view 5 --repo CartmanFatass/My-paper-code --json number,title,url,state,body,comments",
+  "scope": "Complete readback of the existing mixed Issue; only the three MGTAP delivery comments are relevant historical discussion. VSP-C1 content is not MGTAP evidence or authority. No comment or Issue body was changed.",
+  "issue": {
+    "body": "这是 DM 对完整实测的综合与下一方向问题，不是 Pro 原文。\n\n同信息、同交互和更新预算的 FACTOR/GENERIC 比较已完成三个独立训练种子，每臂每种子 128 次真实更新。FACTOR 终点差依次为 −0.041667、+0.083333、+0.083333；固定全曲线 AUC 差依次为 −0.028646、+0.033854、+0.023438。三种子平均终点差 +0.041667，平均 AUC 差 +0.009549。首个负结果保留；这只支持训练实例敏感的小幅 B/EXPLORE 信号，不能证明稳定优势或通用 MARL 效果。\n\n当前问题：继续这一公开固定伙伴计划的小 toy 家族，实施一个有决策价值的有限真实学习比较，还是停在已有结论、转向明确定义的新问题？请比较新增训练随机性信息、改变训练预算和更改宿主/比较器的价值与实际工作量。精确参考、全面因果解释或政策搜索不是默认前置要求。\n\n固定证据：\n\n- [完整三种子 intake](https://github.com/CartmanFatass/My-paper-code/blob/d7ea795e67a52eadf1cfab2fb95dc3bcbfd25305/docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B01_SEED12_INTAKE_20260905.md)\n- [完整结果、原始包、曲线与实际成本](https://github.com/CartmanFatass/My-paper-code/blob/d7ea795e67a52eadf1cfab2fb95dc3bcbfd25305/docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B01_SEED12_RESULT_EVIDENCE_20260905.md)\n- [当前科学边界](https://github.com/CartmanFatass/My-paper-code/blob/d7ea795e67a52eadf1cfab2fb95dc3bcbfd25305/docs/research/candidates/vsp_c1/DIRECTION.md)\n\n六次调用合计 17.00 秒完整 wall、14.47 CPU 秒、150048 联合步和 768 更新，均已完成。公开固定伙伴使该任务可还原为单控制器问题；GENERIC 同样共享隐藏特征，两个周期列上的四维嵌入也不构成严格低秩瓶颈。旧 A01 缺失 headroom 和旧 D6 停止边界不变。\n\n下一轮将通过本问题的固定任务文件与独立响应分支交付完整 Convergence 原文。此时未选择新实验，也未改变 Portfolio 生命周期或优先级。",
+    "comments": [
+      {
+        "id": "IC_kwDOO8trO88AAAABSykerw",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "Pro 三种子收敛答复交付：[完整 RESPONSE.md](https://github.com/CartmanFatass/My-paper-code/blob/a7265e9733873e3dd16de76861c75f3634302095/docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence/archive/RESPONSE.md)。固定证据版本为4cb615bbe75a3b2ddf1f6ffb8788e2c66199adb7。文件已由本会话直接创建并通过GitHub读回；本轮仅交付完整方向决定，未执行新实验、修改科研代码或更新科学状态。",
+        "createdAt": "2026-09-06T01:02:47Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5555953327",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABSz0wwQ",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "VSP-C1 三种子收敛 r02 的独立完整答复已交付：[RESPONSE.md（固定提交）](https://github.com/CartmanFatass/My-paper-code/blob/d650cd966869852b122c2426ecf0e2584116ae43/docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence_r02/archive/RESPONSE.md)。答复使用固定证据版本 4cb615bbe75a3b2ddf1f6ffb8788e2c66199adb7，已通过 GitHub 完整分段读回；提交仅新增指定答复文件。未执行实验、修改科研代码或更新科学状态；先前另一目标的交付保持原样。",
+        "createdAt": "2026-09-06T05:46:22Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5557268673",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABS2gqbg",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "VSP-C1 post-B02 收敛的完整决定已交付：[RESPONSE.md（固定提交）](https://github.com/CartmanFatass/My-paper-code/blob/0b04b166d449ea17d470dfe1c68254d190d0bfa2/docs/research/candidates/vsp_c1/pro_packets/20260906_post_b02_convergence/archive/RESPONSE.md)。结论为结束当前六步公开固定伙伴玩具族的新增投入，保留全部正负性能与曲线事实；不关闭 K4，不同时选择新宿主 B 或改变 Portfolio 状态。证据版本为 b7efcb9ce7e5c378f0442af79d5b99915eb11eca。提交仅新增指定响应文件，已完整分段读回，并核对指定分支及单文件差异；未执行实验或修改科研代码、规范和科学状态。",
+        "createdAt": "2026-09-06T15:02:00Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5560085102",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABS7Q2Kg",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "VSP-C1 reactive queues 收敛的完整决定已交付：[RESPONSE.md（固定提交）](https://github.com/CartmanFatass/My-paper-code/blob/67f4d3837c78749cb7f7369083ecbc3ffa4b133d/docs/research/candidates/vsp_c1/pro_packets/20260906_reactive_queues_convergence/archive/RESPONSE.md)。决定开放这一新家族，选择 FACTOR / GENERIC 双臂、seed 401、每臂 256 更新的有限 B/EXPLORE，并保留旧公开计划家族的结束边界。科学证据版本为 ecf810463a94bd54c3b9bc662e5e03bb1078f8bb。文件已通过连接器完整分段读回；已核对指定分支及基线以上唯一单文件新增。未执行代码或实验，未修改科研代码、规范或 Portfolio 状态；本交付不等于源码接受或实验启动。",
+        "createdAt": "2026-09-07T04:32:52Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5565068842",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABTA3cTQ",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "DM update for the next independent duration-value question (preparation only).\r\n\r\nThe reactive two-queue B01 pair is complete: FACTOR minus GENERIC endpoint -0.000325521, full AUC +0.000254313, one paired training instance. Both signs remain; no added B01 invocation is selected. Its recorded-tape supply upper leaves only 0.013997396 above the observed GENERIC, not tuned population headroom.\r\n\r\nI am asking Convergence whether a single three-queue/two-worker allocation task is a useful next question, comparing the same factorized and fully conditioned value learners with a fixed same-information queue-greedy policy reference. The proposal tests allocation under scarce simultaneous coverage. It is not a task sweep, frozen card, transferred unused budget, launch or lifecycle decision. The strongest objection is that a greedy policy may again leave too little useful learning opportunity.\r\n\r\nFixed evidence:\r\n- [Completed B01 intake](https://github.com/CartmanFatass/My-paper-code/blob/effad6eb709e2a143dba78438a004aa7898d26c9/docs/research/candidates/vsp_c1/VSPC1_K4_REACTIVE_QUEUES_B01_INTAKE_20260906.md)\r\n- [Concrete question and alternatives](https://github.com/CartmanFatass/My-paper-code/blob/87ff10e37aecd07c8b53e1ed6b878e11439d3bc3/docs/research/candidates/vsp_c1/VSPC1_K4_SERVICE_ALLOCATION_QUESTION_20260907.md)\r\n- [Zero new exposure and prospective counts](https://github.com/CartmanFatass/My-paper-code/blob/87ff10e37aecd07c8b53e1ed6b878e11439d3bc3/docs/research/candidates/vsp_c1/VSPC1_K4_SERVICE_ALLOCATION_PREPARATION_COUNTS_20260907.json)\r\n\r\nA new fixed TASK and separate response path will carry this direction-tier question. Previous requests, responses and the ended public-plan family remain unchanged.\r\n",
+        "createdAt": "2026-09-07T12:54:43Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5570944077",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABTBG_1A",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "VSP-C1 service allocation 收敛的完整决定已交付：[RESPONSE.md（固定提交）](https://github.com/CartmanFatass/My-paper-code/blob/2347dbf2fea870cdcd02aa2eb8b3cbaff147ec34/docs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_convergence/archive/RESPONSE.md)。选择固定三队列/两工人、FACTOR 与 GENERIC、seed 402、每臂 256 更新的有限 B/EXPLORE；一次合法 LQ-EXCLUDE 参照评价及配对发布包含在第二个完整调用范围内。双队列 B01 不增加调用，旧公开计划家族不重开。科学证据版本为 b043e05d3b3af2b60ebfef3255e7f060aca4683c。响应已通过连接器完整分段读回；已核对基线以上只有该文件的一次新增提交。未执行代码、实验或资源准入，未修改科研源码、规范或 Portfolio 状态；本次交付是科学选择，不是源码接受或启动。",
+        "createdAt": "2026-09-07T13:15:42Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5571198932",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABTC9BfQ",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "VSP-C1 service-allocation completion amendment 的完整答复已交付：[RESPONSE.md（固定提交）](https://github.com/CartmanFatass/My-paper-code/blob/99151a4a0f2da264a2c13695591a56867e1add3c/docs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_completion_amendment/archive/RESPONSE.md)。选择 A：仅为既有 seed402 比较明确允许一次 120 秒规则专用补测，复用全部原定 tapes 和保存的学习器结果；原 GENERIC 失败历史及低于 MEI 的 Δ 不改写。固定科学证据版本为 5bf466820a2d17c07388a8499913aa265383d838。聚焦修复与一次合成验证范围见正文；本会话未实施修复、运行验证或启动实验。响应已完整分段读回，提交仅新增指定答复文件；本次科学修订不是源码接受或 Root 执行命令。",
+        "createdAt": "2026-09-07T15:59:45Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5573132669",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABTR5RVA",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "VSP-C1 native hold-value 收敛的完整决定已交付：[RESPONSE.md（固定提交）](https://github.com/CartmanFatass/My-paper-code/blob/7ac8ccb01543f82715f38ad33d846c2ec649ecc2/docs/research/candidates/vsp_c1/pro_packets/20260908_native_hold_value_convergence/archive/RESPONSE.md)。选择同一时长可选演员、同信息及 agent_compound PPO 下 GATED-V 对完整 MLP-V 的单对 B/EXPLORE，master 8101，每臂 512 个训练回合和 1,024 次 Adam，最终各 32 个采样回合，另保留同布局零速度 H；完整上限 1,800 秒/臂、3,600 秒/对。文档证据版本为 14c3cdb9f2677539b4fd4b34f169e2c7e635d04d，明确列出的代码证据版本为 6374063408208ba67b8cb7c69ebc0babb0f00259。响应已通过连接器完整分段读回，核对新增提交仅增加指定文件并保留共享方向分支已有内容。未执行代码、测试或实验，未修改科研源码、规范或 Portfolio 状态；该科学选择不是源码接受、进程启动或正式 UAV 进入认定。",
+        "createdAt": "2026-09-08T16:56:18Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5588799828",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABTSZJ-w",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "MGTAP native geometry convergence (20260908_native_geometry_convergence): the complete [RESPONSE.md at immutable delivery commit 5128344dea067a449dd16eb4245848d009ddd679](https://github.com/CartmanFatass/My-paper-code/blob/5128344dea067a449dd16eb4245848d009ddd679/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260908_native_geometry_convergence/archive/RESPONSE.md) is delivered.\n\nThe decision is PARK_CURRENT_ALLOCATION_COORDINATE_FAMILY, reversibly, with the native source-to-learner yield and a specific re-entry condition. This is not a direction-wide impossibility or efficacy finding; no new native comparison, recast, implementation, execution, Portfolio change or UAV-entry count is selected. The response preserves the old B/C meanings and corrects the source binding to at most one UAV per user and up to ten users per UAV.\n\nTask revision: 2dee7f41fd2ac4c5b27d3186f04a4d7e7f044a24. Scientific evidence revision: 6374063408208ba67b8cb7c69ebc0babb0f00259. All fifteen listed scientific paths and this issue's pre-delivery discussion were inspected. The response was read back in full at the delivery commit; the commit adds only the specified response file on codex/mgtap, preserving the existing branch history. No research code, test, model, environment, learner, evaluator or scientific state was executed or changed by this delivery.",
+        "createdAt": "2026-09-08T17:38:58Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5589322235",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABTZTAxw",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "MGTAP native geometry re-entry (20260908_native_geometry_reentry): the complete [RESPONSE.md at immutable delivery commit 12a3764e8dded6c1927e67e7beeddb2ff8b573f0](https://github.com/CartmanFatass/My-paper-code/blob/12a3764e8dded6c1927e67e7beeddb2ff8b573f0/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260908_native_geometry_reentry/archive/RESPONSE.md) is delivered.\n\nThe formed decision is CONTINUE_B_NATIVE_GROUND_GEOMETRY: one typed relation-residual REL versus full-information dense residual DENSE comparison, both in no-duration primitive G mode under common B02 per-agent PPO. The response specifies matched 69,079-parameter learners, prospective paired masters 8201/8202, complete sampled native return, work factors, unmeasured incremental costs and all-outcome readings. These are scientific comparison definitions, not implementation, compute, execution, Portfolio or UAV-entry authorization. The old allocation family remains parked and all historical counterevidence, including B02/P47 DOWN, is retained.\n\nTerminology clarification for §5: the unchanged B02 likelihood ratio is **new/old**, r_i = exp(ell_i,new − ell_i,old), with min(r_i*A, clip(r_i,.8,1.2)*A), summed over agents before the primitive-row mean. The phrase “old/new ratio” there denotes the two stored/current densities, not an instruction to invert the source ratio or exponentiate an already formed ratio. No credit amendment is selected.\n\nFixed task: 5264e5b051d6f36a108dd237ac76e94c0f20fe11. Fixed scientific evidence: d726acf63f8db47bd2e93e43cac8bbd27529d8ad. All fourteen listed scientific paths and this issue's discussion were accessed. The response has been read back in full; comparison with the pre-write branch HEAD confirms one commit adding only the specified response file. No source, test, model, simulation, training, evaluation, profiling or scientific-state change was performed. The preceding native-geometry response/comment were preserved.",
+        "createdAt": "2026-09-09T05:58:25Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5596561607",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABTcFaFg",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "MGTAP post-B01 convergence (20260909_post_b01_convergence): the complete [RESPONSE.md at immutable delivery commit 251bffbc4bb58cce3f10f8622a1a615fd8e48acb](https://github.com/CartmanFatass/My-paper-code/blob/251bffbc4bb58cce3f10f8622a1a615fd8e48acb/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260909_post_b01_convergence/archive/RESPONSE.md) is delivered.\n\nThe formed decision is PARK_NATIVE_GROUND_GEOMETRY_FAMILY, reversibly, with a precise source-compatible re-entry condition and no new object. The response preserves P75's complete adverse aggregate and inside-MEI second master, distinguishes valid untuned DENSE from tuned competence, and separates absorbable mean-to-sum rescaling from a potentially substantive count-conditioned operation. It does not infer stable superiority, equivalence or failure of all geometry-aware actors. The old allocation-coordinate family remains parked; Portfolio lifecycle, priority and investment state are unchanged.\n\nFixed task revision: 6931057f24af06a4aa97bef6f4db074a9ca0d41e. Fixed scientific evidence revision: d9723c7bdd91d44a97cc34365891c42b2a41772e. All eleven listed scientific paths and this issue's discussion were accessed. The response was read back in full at the delivery commit; comparison with the pre-write branch HEAD confirms one commit adding only the specified response file on codex/mgtap. No scientific code, model, training, evaluation, simulation, diagnostic, profiling or cost-probe work was executed; no scientific-state file or prior delivery was modified.",
+        "createdAt": "2026-09-09T09:18:43Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5599484438",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABTeGg_A",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "VSP-C1 native hold-value post-B12 收敛完整答复已交付：[RESPONSE.md（固定提交）](https://github.com/CartmanFatass/My-paper-code/blob/77687230cb1f3898e55c21d23c05ba1840d820ea/docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b12_convergence/archive/RESPONSE.md)。决定继续同家族的一个有限 B：两臂均保留完整 136→128→133→1 普通体，仅处理臂添加现有 640 参数门；一个全新配对训练实例，各训练 768 回合，仅最终 32 回合评价及同布局 H，保持四环境隔离，417792 团队步、3072 次 Adam、1800 秒/臂及 3600 秒/对。不选第四个原双面板比较，不作 RECAST；保留全部旧正负、H 损失和条件不确定性。固定科学证据版本为 a35611b5f43e9bcb72045bb896bf3f09b0285000。响应已通过连接器完整分段读回；已核对本次提交仅新增指定文件，保留共享方向分支其他内容。未执行模型、代码、测试或实验，未修改科研源码、规范或 Portfolio 状态；本交付是科学选择，不是实现接受或进程启动。",
+        "createdAt": "2026-09-09T12:10:12Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5601599740",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABTfhSWw",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "VSP-C1 native hold-value post-B13 收敛完整答复已交付：[RESPONSE.md（固定提交）](https://github.com/CartmanFatass/My-paper-code/blob/f5f053f5f271785c83cac735bc69d641fad3be5f/docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b13_convergence/archive/RESPONSE.md)。决定结束 B13 已测试的完整普通体附加剩余持有门实例在当前宿主、学习器及 768 回合预算下的继续投入，本轮不选择后继 B；保留一般持有价值假设、全部历史正负结果、原生/H 损失与单对条件不确定性。另一个独立匹配 B 仍合法但未选择，不新增种子数、机制证明或成本探针前置。不作 RECAST、方向整体 PARK/CLOSE、Portfolio 生命周期/优先级或正式 UAV 进入处置。固定科学证据版本为 e23e7e47ae8994aa13bc6af8a32fd12d6462bc27。响应已通过连接器完整分段读回；核对本次提交仅新增指定文件，保留共享方向分支其他内容。未运行源码、测试、模型或实验，未修改科研源码、规范或科学状态；本交付是范围性方向决定，不是实验启动。",
+        "createdAt": "2026-09-09T13:58:06Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5603086939",
+        "viewerDidAuthor": true
+      }
+    ],
+    "number": 5,
+    "state": "OPEN",
+    "title": "VSP-C1 K4：三种子混合结果后，当前跨周期价值学习 toy 的下一步",
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/5"
+  }
+}

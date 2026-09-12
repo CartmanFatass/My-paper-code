@@ -1,0 +1,182 @@
+# B02 incomplete-attempt intake — 2026-09-11
+
+B02 did not answer whether temporal native-service credit improves recovery. The sole
+accepted invocation crashed before the final comparison. Accept the preserved partial
+learner-execution and cost facts; assign no performance branch. The named allocation
+ends, with no retry, workaround invocation, extra test or successor authorized.
+
+## What I checked and the rule applied
+
+I read the [card](VNFC_N7_NATIVE_SERVICE_CREDIT_B02_SCIENCE_CARD_20260911.md), the selected
+Convergence decision and the complete [E0 record](VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_EVIDENCE_20260911.md)
+against the supervisor log/status/exit, admission, outer timer and all 11 retained archive
+members. Remote/local raw archive SHA256 matched. I parsed all 15 completed-round progress
+lines, inspected the bound collector/update/publication order, compared the four changed
+source surfaces against launch `76d4afca664f988fbaabca2923a0c891f8a784ff` (no difference),
+and checked the published branch was aligned before editing. Initial checkpoints/native
+library were hashed and preserved without execution. No new primary was manufactured.
+
+Card rule applied verbatim: "Any invalid primary limits only its dependent claim; credible
+partial facts remain. All outcomes end this allocation."
+Evidence specification §11.8.7: "A damaged primary measurement cannot support its
+dependent performance claim; independently trustworthy narrower facts remain reportable."
+No final64-world measurement exists, so neither a MEI comparison nor the adverse/small/
+mixed/usable-signal branches is readable. Evidence-spec §6.1 gives B no consumption
+state; the existing one-accepted-invocation limit supplies the allocation boundary.
+
+## Observation, technical acceptance and claim ceiling
+
+Direct: supervisor exit139 and outer signal11 at77.84 s; no midpoint/final checkpoint
+or summary/episode/curve JSON; eight logged INTERVAL rounds and seven TERMINAL rounds.
+The log records2,880 joint transitions and480 optimizer steps with nonzero parameter
+displacement. The source and logs imply480 completed training episodes plus192 initial/
+reference episodes, hence at least672 complete episodes /161,280 native ticks. That
+inference does not recover scores, exact total exposure, gradient arrays or counter rows.
+Full card training/primary publication is not technically accepted. Earlier focused
+checks and source review remain valid at their tested scope.
+
+The complete scientific run cost77.84 s lies below its600 s cap. Partial support receipts
+and unmeasured components remain in the E0 accounting; full300/900 s cost conformance is
+unestablished. Missing timing does not erase independently trustworthy progress facts.
+There is no valid result for a per-result efficiency ratio. Prior scratch deletion was
+rejected with `blocked by policy`; it remains retained and has no scientific polarity.
+
+Scientific-reading use: reuse the card's RL/credit assumptions and current
+`FOUNDATIONS.md` §6, supplemented by `topic-notes/04_EMPIRICAL.md`. The concrete
+assumption is that flushed progress records correspond to completed calls in the bound
+execution order; this supports narrow count/movement inferences. Parameter movement
+does not imply improved return, and neither incomplete rounds nor repeated evaluations
+are independent completed training pairs. No selected endpoint score exists to pass
+to `summarize_runs.py`; no seed-level analysis or uncertainty estimate is performed.
+No new mechanism or comparator is selected, so this mechanical failure requires no
+new literature claim or search. The prior verified retrieval remains in the re-entry intake.
+
+Strongest support for a narrower statement: both real learners reached repeated actual
+PPO updates and changed parameters, with readable nonzero records. Strongest limit:
+the missing final policies and scores prevent even a one-pair performance statement.
+The temporal-credit hypothesis and containing TERMINAL null remain unseparated. A
+historical B01 formal01 also recorded signal11, but this run supplies no stack or object
+identity that would establish a shared cause. The present crash does not establish
+ineffective credit, native harm, equivalence, stability, causal credit attribution or transfer.
+
+## Predictions and owner flags
+
+DM prediction was that both arms learning is more plausible than an INTERVAL recovery
+advantage≥.02 without native cost, with low confidence in the primary sign. **Performance
+prediction unscored**: nonzero parameter movement is insufficient to count as the predicted
+return gain, and no final comparison survives. Owner prediction: **not taken (unattended)**.
+Primary-control `item.py reviews --json` returned `[]`; current VNFC audit owner cells
+were blank. No owner override or prediction reply was fabricated or requires marking answered.
+
+Owner flags: incomplete primary; root cause undetermined; full support cost unestablished;
+creator scratch cleanup blocked by runtime policy. These are ordinary technical facts,
+not a new P1/P2 scientific decision or close call. Existing new-card/direction-selection
+items retain their actual accepted decisions. The [Chinese brief](../../portfolio/owner/briefs/variable_n_fleet_churn/2026-09-11_B02_INCOMPLETE.md)
+describes this incomplete attempt and is not labelled a valid-result brief.
+
+## Decisions this intake produces
+
+| Object-tier technical option | Recommendation and consequence |
+| --- | --- |
+| A. Retain independent partial execution/cost facts; classify the primary incomplete | Recommended and selected. Preserves the failed attempt without inventing performance polarity. |
+| B. Suppress every fact because the primary is missing | Not selected. Discards trustworthy progress that does not depend on final publication. |
+
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (A) accept the bounded
+partial execution/cost record and keep the primary incomplete.** The audit row records
+this technical classification. No source repair or result-bearing invocation is selected.
+
+End the already allocated execution under the card and Root's terminal assignment;
+this is not a direction-family closure, a Portfolio disposition or C consumption.
+`ACTIVE/HIGH`, recasts2/lowest contention priority, old architecture/deployment pauses,
+E01 stops and historical quarantines keep their meaning. No mechanism-level update is
+added to `DIRECTION.md` from a crash.
+
+Root integrates the named evidence/intake commit and confirms preservation/retention;
+the DM then completes the authorized cleanup that the runtime permits and returns exact
+remaining blockers. Source and evidence are already recoverable in the retained archives.
+If a later authorized decision returns to this question, the missing discriminator is
+still the final INTERVAL−TERMINAL recovery and full-native tradeoff comparison; a defect
+threatening that path must be repaired or checked under §11.8.7. This intake allocates
+neither that investigation nor a repeat and sends no new Pro request.
+
+## Owner-directed technical investigation intake — 2026-09-11
+
+Root subsequently authorized a bounded non-scientific repair investigation, then
+instructed its closeout on the existing evidence with no further diagnostic. The
+[execution record](VNFC_N7_NATIVE_SERVICE_CREDIT_B02_EXECUTION_20260911.md#technical-investigation-closeout--2026-09-11)
+contains the L0, raw receipts, independent review, costs, tool rejections and retention.
+I checked the original/synthetic core findings, stored-input function-check outcomes,
+static ABI evidence and the review against that assignment. The controlling acceptance
+phrase was: "Implement the smallest source fix only if the failure is attributable
+and the semantics stay unchanged; otherwise return the exact missing diagnostic with
+a bounded non-result-bearing method."
+
+The saved allocator-abort core detects changed trailing bytes in a 32-byte CPython
+call-argument block during Fraction construction, before the current mean's NumPy
+output exists. Neither saved stack identifies the writer or establishes an array-buffer
+overrun. Pure and autograd primitive passes, six matching ABI sizes and a numerically
+equivalent replacement do not supply that missing ownership/instruction history.
+The traced bridge timeout and two Root-reported service rejections produced no such
+evidence. This is an unresolved technical defect, with no scientific polarity.
+
+Technical status: **not ready; attributable repair not established**. Production
+source remains unchanged. The exact-integer candidate is preserved as an unadopted
+patch; independent review accepted its numerical equivalence, not its curative effect.
+The final acceptance exit condition is evidence locating the first invalid write and
+its ownership/extent, or a defensible minimal boundary correction, followed by a faithful
+bounded synthetic check and review. A future diagnostic method is specified in the
+execution record, not invoked by this intake. A later scientific attempt needs a separate
+allocation. No new learner, environment, optimizer, RNG master, training, evaluation,
+trajectory or scientific invocation occurred during this repair assignment.
+
+Decisions this technical intake produces: (A) retain the evidence/candidate with production
+unchanged and readiness unresolved; (B) adopt the candidate as a proven repair. Recommend
+and execute **A under OWNER_DIRECT, Root's 2026-09-11 closeout instruction**; B is unsupported.
+This is not a direction/Portfolio decision, new object selection or reopened B02 budget.
+The earlier partial-result reading and unscored predictions remain unchanged. No new
+valid result exists, so the earlier Chinese incomplete-attempt brief remains applicable.
+Root receives the committed evidence/intake and the precise remaining technical gap.
+
+## Portfolio-conditioned static intake — 2026-09-11
+
+Portfolio response `6c32ade3216c374ecf2f5179b15d559729cd45c9` prospectively selects a
+new fresh pair, conditional on relevant repair acceptance; it does not renew B02.
+I checked its complete VNFC §6, the exact-build static artifact published at
+`06fc94e6268072a3be02abc78738d32813b950f0`, the prepared source/regression diff and the
+independent review against the current technical assignment. Rule applied verbatim:
+"The existing technical DM must demonstrate a supported repair of the affected path,
+or a credible same-meaning alternative whose independence from the corruption is
+established by relevant focused evidence."
+
+The new [static assessment](evidence/b02_credit_20260911_01/repair_fraction_path_assessment.json)
+shows that the exact interpreter formula already provides40 bytes for the expected
+constructor call. The saved tail is precisely the expected `False` keyword at offset32,
+which is legitimate within40 bytes but outside the recorded32-byte metadata boundary.
+That discrepancy is established. Its origin is not: actual allocation-time counts and
+size were not captured. Neither a missing-slot formula nor a particular corrupting
+instruction is demonstrated. The strongest support is the exact-build source/symbol
+mapping; the strongest limit is the missing allocation-time/history fact.
+
+Independent review found the candidate mathematically equivalent and its proposed
+tests useful for numerical/gradient behavior and path exclusion. It found a material
+gap if these alone were used to satisfy corruption independence. I accept that finding:
+the original implementation's passing isolated checks already coexist with allocator
+failure. The prepared two-test draft is preserved unrun in the candidate patch, and
+production is restored unchanged. No new test, debugger, dynamic fixture or scientific
+workload ran in this continuation. [Execution and review disposition](VNFC_N7_NATIVE_SERVICE_CREDIT_B02_EXECUTION_20260911.md#static-mapping-review-and-disposition)
+records costs, provenance and retention.
+
+Decisions this intake produces: (A) retain the exact static evidence and unadopted draft
+while reporting NOT READY; (B) accept Fraction-path avoidance as sufficient readiness.
+Recommend A: B would silently weaken Portfolio §6. **Owner-delegated decision
+(unattended, 2026-09-03 instruction): (A) decline unsupported adoption and retain the
+precise technical gap.** The ordinary object-tier technical audit row records this
+choice; the review finding was accepted, not overruled. No new P1/P2 scientific item,
+Portfolio disposition or Pro request is produced locally.
+
+The next technical discriminator remains the actual allocation request/counts versus
+subsequent metadata, or relevant evidence that a same-meaning alternative is independent
+of the corruption. No further method is dispatched by this intake. Scientific funding
+is selected but unused, its acceptance condition remains unmet, and historical B02
+results/predictions retain their prior reading. The earlier Chinese incomplete-result
+brief remains applicable; this is not a new valid scientific result.

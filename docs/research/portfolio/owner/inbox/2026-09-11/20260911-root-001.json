@@ -1,0 +1,111 @@
+{
+  "id": "20260911-root-001",
+  "created": "2026-09-11T02:13:28-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "下一笔投入：FSD复现与MGTAP首次原生比较",
+  "context": "上一轮已结束。FSD首个I1280配对收益为正，MGTAP仅技术接受。建议同时投入两个独立B，保留任一单独或零投入选项；本地未分配。RCLE无新概率方案，UCOPE保留原账户访问阻塞。",
+  "options": [
+    {
+      "key": "a",
+      "label": "两条独立B",
+      "consequence": "FSD新配对完整3000秒，MGTAP新入口及首次配对完整1200秒；无自动后续。"
+    },
+    {
+      "key": "b",
+      "label": "仅FSD",
+      "consequence": "只申请FSD一次新配对，MGTAP保持未分配。"
+    },
+    {
+      "key": "c",
+      "label": "仅MGTAP",
+      "consequence": "只申请MGTAP首次COND/DENSE配对，FSD保留现有结果。"
+    },
+    {
+      "key": "d",
+      "label": "零投入",
+      "consequence": "无新工作，保留证据和待决机会。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "FSD独立复现与MGTAP首次真实效果分别回答具体问题；旧损失和成本未知仍构成反对理由。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L29",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "已完成上一轮后，下一笔投入应同时做 FSD 独立复现和 MGTAP 首次真实配对，还是只做其中之一或暂不投入？目前均未分配。",
+    "changes_if_approved": [
+      {
+        "target": "下一轮独立推进任务",
+        "from": "FSD首次新包收益已完成；MGTAP仅技术接受；没有后续实验预算",
+        "to": "建议两条真实B：FSD同包独立配对，MGTAP最小原生入口加一次COND/DENSE配对；不填充其余空位"
+      }
+    ],
+    "if_refused": "保留仅FSD、仅MGTAP或零投入选项；不自动延长RCLE、重发UCOPE或重启其他暂停家族。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+        "quote": "The next useful discriminator would be one separately allocated fresh matched I1280/D0 training pair with the same final endpoint, preserving every sign.",
+        "why": "首次新包收益值得用新的训练随机性检验，仍保留所有旧损失。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_IMPLEMENTATION_INTAKE_20260911.md",
+        "quote": "The next *empirical* discriminator remains the already eligible, separately allocated one-pair native COND/DENSE final-return comparison described by the Convergence decision.",
+        "why": "缺失的编码运算已通过一次有限技术测试；下一步可直接包含必要入口工程和真实学习。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/SCIENCE_BRIEF.md",
+        "quote": "Eight endpoint losses, higher altitude penalty, lower first-two training means, almost2× D0 wall and the older I−D0 losses",
+        "why": "FSD一个收益不能说明稳定优势；MGTAP旧REL比较为负、原生入口与成本仍未知。"
+      }
+    ],
+    "uncertainty": [
+      "新FSD同包效果可能转号；没有匹配的调优基线余量。",
+      "MGTAP测试只验证编码器和读出，不证明完整学习会成功或能在预算内结束。",
+      "UCOPE账户浏览器阻塞保留原请求；当前Portfolio节点的浏览器访问未由作者测试。"
+    ],
+    "cost": {
+      "compute": "建议FSD完整3000秒（900/1800/300），MGTAP完整1200秒（450/450/300）。合计4200秒为分离上限，不是预测或可互借余额。",
+      "owner_time": "不等所有者逐项批准；完整合规Portfolio Pro决定回传后由Root应用。",
+      "reversibility": "costly",
+      "waits_on_this": "仅这次新的投入；已有独立授权工作继续。"
+    },
+    "verdict_text": "DM recommendation only: A, two independent real B chains—one fresh same-package FSD I1280/D0 repetition and one first native MGTAP COND/DENSE pair.",
+    "source": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T09:24:28+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md#3-blocker-rule",
+      "record": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/BLOCKER_INTAKE.md",
+      "state": "blocked",
+      "summary": "Portfolio请求在发送前被账户浏览器访问阻塞；Transport记录Send0、未接受生成、输入框未触碰，原绑定不变。按AGENTS第3节保留同一待发请求，不作本地决定；A/B/C/D均未分配，auto_applied仍为null。此OWNER_DIRECT仅表示既有阻塞处理规则，不是所有者选择了某项投入。恢复由Root/Transport在原账户表面可用时处理。"
+    },
+    {
+      "at": "2026-09-11T16:13:44+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/9a2789640f3e5663b4cd72736ba953bfa809095d/docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-11-post-option-a-execution-refill.md",
+      "state": "planned",
+      "summary": "完整218行回应与固定TASK、26项引用、Transport及Issue回执一致，合规接受Pro的A：FSD一次新同包配对完整3000秒，MGTAP最小入口及首次配对完整1200秒；其余三槽未分配。旧浏览器阻塞已归档，当前所有者登录状态规则保留。Root实际派发待执行，作者未发起实验，auto_applied仍为null。中文决定包：docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/INTAKE_OWNER_PACKET.json；完整任务映射同目录EXECUTION_MAPPING.md。"
+    },
+    {
+      "at": "2026-09-11T16:18:33+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/EXECUTION_MAPPING.md; Root dispatch on main d5a45a4da",
+      "state": "applied",
+      "summary": "Root integrated the conforming Portfolio option A at main d5a45a4da and dispatched the exact bounded FSD and MGTAP assignments to their existing DMs. FSD owns one fresh unchanged I1280/D0 pair; MGTAP owns the minimal native driver and first COND/DENSE pair. Three slots remain unallocated by this decision; no extra numerical validation, retry or successor was added."
+    }
+  ]
+}

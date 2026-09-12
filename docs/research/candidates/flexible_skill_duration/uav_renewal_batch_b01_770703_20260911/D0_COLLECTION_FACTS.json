@@ -1,0 +1,116 @@
+{
+  "status": "accepted complete own-arm D0; paired primary pending I1280",
+  "basis": "recorded-byte primary and dependent comparison checks; zero models, environments or extra evaluations",
+  "checks": {
+    "all_numeric_measurements_finite": true,
+    "complete_identity_source": true,
+    "fixed_rng_and_precision": true,
+    "independent_training_log_matches_summary": true,
+    "rollout_0_full_learning": true,
+    "rollout_0_d0_coordinator_law": true,
+    "rollout_1_full_learning": true,
+    "rollout_1_d0_coordinator_law": true,
+    "rollout_2_full_learning": true,
+    "rollout_2_d0_coordinator_law": true,
+    "rollout_3_full_learning": true,
+    "rollout_3_d0_coordinator_law": true,
+    "rollout_4_full_learning": true,
+    "rollout_4_d0_coordinator_law": true,
+    "complete_own_arm_exposure": true,
+    "learner_config_declared_construction": true,
+    "evaluation_config_declared_construction": true,
+    "only_complete_final_endpoint": true,
+    "retained_unscaled_and_scaled_returns": true,
+    "actual_optimizer_counters": true,
+    "passing_destination_memory": true,
+    "complete_exit_and_arm_cap": true
+  },
+  "counts": {
+    "model_constructions": 2,
+    "training_starts": 1,
+    "checkpoint_loads": 0,
+    "training_transitions": 40000,
+    "stored_training_transitions": 40000,
+    "training_episodes": 80,
+    "update_stages": 5,
+    "training_agent_step_batches": 2500,
+    "evaluation_steps": 16000,
+    "evaluation_episodes": 32,
+    "evaluation_agent_step_batches": 500
+  },
+  "optimizer_calls": {
+    "coordinator": 525,
+    "discoverer_actor": 11250,
+    "discoverer_critic": 11250,
+    "team_discriminator": 75,
+    "individual_discriminator": 300
+  },
+  "evaluation_optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 0,
+    "discoverer_critic": 0,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "D0_final_mean_U": 34.689537544953524,
+  "D0_final_mean_J": 0.4162744505394423,
+  "D0_final_sample_sd_J": 0.11349368648111476,
+  "D0_final_conditional_se_J": 0.020063038833164057,
+  "D0_training_rollout_mean_U": [
+    21.027556027459486,
+    19.935021122827845,
+    13.190409450386142,
+    17.81496071952134,
+    15.784987941354814
+  ],
+  "relative_initialization_displacement_final": {
+    "coordinator": 0.042214461382935886,
+    "discoverer_actor": 0.40391436880732556,
+    "discoverer_critic": 0.1600676771072308,
+    "team_discriminator": 0.02708519427179745,
+    "individual_discriminator": 0.05007107184818438
+  },
+  "process_time": {
+    "elapsed_seconds": 519.94,
+    "peak_rss_kib": 1620164.0,
+    "user_seconds": 2025.59,
+    "system_seconds": 17.98,
+    "exit_status": 0.0
+  },
+  "aggregate_cpu_seconds": 2043.57,
+  "admission": {
+    "assessed_at": "2026-09-11T08:05:13.283863Z",
+    "available_physical_bytes": 15634173952,
+    "captured_at": "2026-09-11T08:05:13.283538Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15634173952,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "sha256": {
+    "D0/manifest.json": "70a41d2fc586d7c8617fc07c3b28ee6a0352f9bdd7183f5bab595e89f029c51d",
+    "D0/summary.json": "cfd24b9fee9b51d91f3c71df9e731e375d5ae9685c74ba2605a1634f07eb5fe1",
+    "D0/training.jsonl": "23661bb010998cea24ec7a5b85fb6cfe31ebc31c08e847f3262b5f24a3ee4274",
+    "D0_receipts/D0_admission.json": "5cabac9b0476ceffad0037f4b89601db8c0c036d23d0588da0cb1f681bc8b0b3",
+    "D0_receipts/D0_process_time.txt": "12b0767c17fc6477bed4e82f7ed95e1d80ef754e8cee36aa44cc78219e1ee100",
+    "D0_supervisor/exit_code": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "D0_supervisor/pid": "4566f2011fe059dd1a76982290b0e9073582a386821d1de1c9a8b7b0f57baafd",
+    "D0_supervisor/runner.sh": "238ba45b93e7770b4b5817a81ab9fefc2a900604a72afe0642fa5b8ebe93c51c",
+    "D0_supervisor/start_time": "4f1f955e7f0a7bac2d027e6cd02f50f6621eb68328c16cf1c383cd69ab658333",
+    "D0_supervisor/status": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+    "D0_supervisor/task.log": "c8fb9e93d93723e2b1c45176262e6719409bcc3033b9ec62d0d2b9178f97fe08"
+  },
+  "limits": [
+    "One completed control fit is not a paired polarity or reliability claim.",
+    "Manifest is the initialization-time publication; final configuration and learning are in summary/training.",
+    "Shared Monitor cumulative1.423s includes another handle; only known FSD final query0.598s is currently attributed, with adoption overhead unknown."
+  ],
+  "primary_and_admission_time_copy_verified": true
+}

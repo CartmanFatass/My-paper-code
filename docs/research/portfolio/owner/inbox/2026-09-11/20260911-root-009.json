@@ -1,0 +1,122 @@
+{
+  "id": "20260911-root-009",
+  "created": "2026-09-11T19:14:49-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "Portfolio已选FSD原样B、ACVC条件五次训练、FOLR家族问题",
+  "context": "完整231行Pro回应通过当前规范检查，选择S+A+P+N。三项实际开始后留两空位；ACVC资金不是晋级或冻结。当前只记录裁决和派发映射，Root实际派发尚待记录；无需逐项批准。",
+  "options": [
+    {
+      "key": "keep",
+      "label": "retain the formed Pro disposition",
+      "consequence": "保留已形成的S+A+P+N裁决，Root按边界独立派发并记录真实执行。"
+    },
+    {
+      "key": "refuse",
+      "label": "override the Pro disposition at the next clean boundary",
+      "consequence": "在下一干净边界停止尚未执行的受影响新增投入，保留历史与已执行事实，不隐含回滚。"
+    },
+    {
+      "key": "amend",
+      "label": "override the Pro disposition per the comment at the next clean boundary",
+      "consequence": "按所有者明确修改影响后续投入；实际科学或范围冲突走原节点，不扩大预算。"
+    }
+  ],
+  "recommended": "keep",
+  "auto_applied": "keep",
+  "dm_reason": "同意原Portfolio的有界投入选择；完整检查未发现科学或规范冲突，保留强反证和成本未知。",
+  "evidence": [
+    "docs/research/portfolio/decisions/2026-09-11-rolling-capacity-after-b02.md",
+    "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L124",
+  "brief": "docs/research/portfolio/owner/briefs/portfolio/2026-09-11_rolling_capacity_after_b02.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Portfolio已选择S+A+P+N并通过完整符合性检查；是否异步保留或修改这一投入安排？无需逐项批准才执行。",
+    "changes_if_approved": [
+      {
+        "target": "FSD下一项投入",
+        "from": "771003第二对完成，无后继额度",
+        "to": "新原样I1280/D0一对；完整3000秒，其中D0 900、I 1800、支持300，唯一45秒交付计入支持"
+      },
+      {
+        "target": "ACVC下一项投入",
+        "from": "只有未来五次训练的主张设计，未晋级或冻结",
+        "to": "条件完整3000秒：至多原Convergence晋级、原Innovator各一次；仅符合原设计后冻结、最小实现和五个新完整单元"
+      },
+      {
+        "target": "FOLR下一项投入",
+        "from": "学习门第一对正、第二对负，无后继额度",
+        "to": "仅一次原Convergence家族问题和完整接收；零实现及数值工作"
+      },
+      {
+        "target": "MGTAP及其余容量",
+        "from": "没有新的MGTAP观察；RCLE原请求受阻、VNFC条件900未就绪",
+        "to": "MGTAP不追加；保留RCLE原恢复和VNFC原条件队列；三项实际开始后仍留两空位，所有方向状态与优先级不变"
+      }
+    ],
+    "if_refused": "所有者异步拒绝或修改会在下一干净边界覆盖后续投入；已执行事实和历史保留，不隐含回滚、重跑、补额度或本地替代裁决。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md",
+        "quote": "**Select S for FSD, A for ACVC, P for FOLR, and N for MGTAP.**",
+        "why": "原Portfolio节点明确选择；完整231行已读，预算与当前规范符合。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md",
+        "quote": "FSD now has two credible same-package gains but substantial variation in its D0 endpoints: another unchanged training pair directly tests recurrence.",
+        "why": "支持不同方向购买不同的下一条信息，避免把空位当作名额任务。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md",
+        "quote": "The strongest conservative alternative is **S+B+P+N**: purchase ACVC preparation only and defer its numerical commitment.",
+        "why": "ACVC总体命名规则尚待前瞻冻结，小样本模型与完整支持成本仍不确定。"
+      },
+      {
+        "path": "docs/research/portfolio/decisions/2026-09-11-rolling-capacity-after-b02.md",
+        "quote": "D0 endpoint variability, early training disadvantage and nearly **1.98504×** I/D0 wall oppose a confident investment claim.",
+        "why": "FSD收益不是稳定优势，成本也不是优势；第三对仍须保存所有结果。"
+      }
+    ],
+    "uncertainty": [
+      "ACVC两比较的联合区间只在明确的iid-normal训练单元均值模型下具有所述覆盖率；五次训练不证明该模型。",
+      "FOLR反向结果不是稳定伤害，也不禁止有理由的第三对B；本次只买家族问题。",
+      "全部方向当前匹配的调优同信息余量记录仍缺失；不能填零或作为B启动门。",
+      "Transport元数据用了额外folr字样且缺少一个声明的facts文件；实际提示、回应和绑定完全一致，单独交原Transport修复，不重发。"
+    ],
+    "cost": {
+      "compute": "新FSD完整3000秒、新ACVC条件完整3000秒互不转移；FOLR零数值额度，咨询成本未知；VNFC900是原条件额度。",
+      "owner_time": "无需等待答复；可异步看本项并修改未来执行。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing；Root按已形成且符合规范的裁决派发，记录真实开始与完成。"
+    },
+    "verdict_text": "**Select S for FSD, A for ACVC, P for FOLR, and N for MGTAP.** Purchase one new unchanged FSD I1280/authentic-D0 B pair with a complete 3,000-second cap; conditionally fund ACVC's complete five-new-fit claim-design path with a separate complete 3,000-second cap; commission one original FOLR Convergence family question and full intake with zero implementation or numerical allowance; and make no new MGTAP allocation. ACVC funding does **not** constitute promotion, a C freeze, source acceptance or permission to begin its five fits now. Its actual original-Convergence promotion decision and original Innovator review must precede a conforming freeze and the dependent implementation/execution. Preserve the existing RCLE request's recovery and VNFC's unused conditional 900-second queue without purchasing either again. [TASK, requested choices and additional constraints][task]; [SCIENCE_BRIEF, independent options and execution boundaries][brief].",
+    "source": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md@05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+    "application_record": "docs/research/portfolio/decisions/2026-09-11-rolling-capacity-after-b02.md",
+    "application_state": "planned: Portfolio choice recorded; actual Root integration and direction dispatches not yet observed in this intake; no new scientific execution."
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T02:15:18+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md@05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+      "record": "docs/research/portfolio/decisions/2026-09-11-rolling-capacity-after-b02.md",
+      "state": "planned",
+      "summary": "完整符合性检查PASS；S+A+P+N已记入决定与Portfolio摘要。Root整合和三个方向的实际派发待其记录；本接收零新增数值工作。"
+    },
+    {
+      "at": "2026-09-12T02:20:42+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md@05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+      "record": "docs/research/portfolio/decisions/2026-09-11-rolling-capacity-after-b02.md@e83bbfc7c",
+      "state": "applied",
+      "summary": "Root integrated the conforming decision as e83bbfc7c and accepted three native starts: FSD one fresh unchanged pair, ACVC conditional original-node path, and FOLR one original Convergence family question. Two vacancies remain; MGTAP receives no addition. Transport metadata correction is separate and authorizes no Send."
+    }
+  ]
+}

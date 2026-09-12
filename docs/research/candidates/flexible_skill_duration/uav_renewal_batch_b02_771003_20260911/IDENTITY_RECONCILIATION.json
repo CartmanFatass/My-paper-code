@@ -1,0 +1,42 @@
+{
+  "chosen_utc": "2026-09-11T23:28:26.613374+00:00",
+  "training_seed": 771003,
+  "evaluation_seed": 781003,
+  "training_lanes": [
+    771003,
+    771018
+  ],
+  "evaluation_lanes": [
+    781003,
+    781034
+  ],
+  "local_search": [
+    "rg",
+    "-n",
+    "--pcre2",
+    "(?<![0-9])(?:771003|771004|771005|771006|771007|771008|771009|771010|771011|771012|771013|771014|771015|771016|771017|771018|781003|781004|781005|781006|781007|781008|781009|781010|781011|781012|781013|781014|781015|781016|781017|781018|781019|781020|781021|781022|781023|781024|781025|781026|781027|781028|781029|781030|781031|781032|781033|781034)(?![0-9])",
+    "docs\\research\\candidates\\flexible_skill_duration",
+    "docs/research/portfolio",
+    "scripts",
+    "-g",
+    "run_fsd_*.py",
+    "-g",
+    "*.md",
+    "-g",
+    "*.json",
+    "-g",
+    "*.txt",
+    "-g",
+    "*.sh"
+  ],
+  "local_search_returncode": 1,
+  "remote_paths_exist": {
+    "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771003-20260911": false,
+    "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771003-20260911": false,
+    "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771003-D0-20260911": false,
+    "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771003-I-20260911": false
+  },
+  "remote_command_wall_seconds": 0.6710000000020955,
+  "remote_stderr": "",
+  "scope": "Fresh unscreened identity; named current records and actual paths checked, not all historical RNG consumption. No source delivery, admission or scientific construction."
+}

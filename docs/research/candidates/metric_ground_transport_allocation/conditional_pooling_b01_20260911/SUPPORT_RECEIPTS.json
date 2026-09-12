@@ -1,0 +1,430 @@
+{
+  "recorded_utc": "2026-09-11T17:27:28.855Z",
+  "accounted_support_seconds": 212.88761259999998,
+  "bound_component_seconds": 142,
+  "approximate_monitor_observation_seconds": 2.3,
+  "native_complete_seconds": 364.79,
+  "native_plus_accounted_support_seconds": 577.6776126,
+  "unknown_components": [
+    "Unitemized Monitor/other invoked support work, if any; approximately reported Monitor command timings are not exact.",
+    "Final receipt publication and commit/push wall are returned separately after completion."
+  ],
+  "cap_certification": "Native450/450/900 caps pass. Full support300/complete1200 caps remain uncertified from this accounted subtotal; no breach inferred from unknown precision/terms.",
+  "receipts": [
+    {
+      "phase": "initial_read_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.3844585,
+      "exit_code": 0
+    },
+    {
+      "phase": "initial_read_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.3703873,
+      "exit_code": 0
+    },
+    {
+      "phase": "reconcile_read_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.6531182,
+      "exit_code": 0
+    },
+    {
+      "phase": "reconcile_read_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.5328773,
+      "exit_code": 0
+    },
+    {
+      "phase": "reconcile_push",
+      "status": "fulfilled",
+      "wall_seconds": 6.4745376,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_contract_read_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.3501527,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_contract_read_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.8584673,
+      "exit_code": 0
+    },
+    {
+      "phase": "world_and_count_source_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.2302204,
+      "exit_code": 0
+    },
+    {
+      "phase": "world_and_count_source_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.2025973,
+      "exit_code": 0
+    },
+    {
+      "phase": "resumed_contract_read",
+      "status": "fulfilled",
+      "wall_seconds": 0.4363601,
+      "exit_code": 1
+    },
+    {
+      "phase": "native_authoring_read_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.1538305,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_authoring_read_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.2649603,
+      "exit_code": 0
+    },
+    {
+      "phase": "world_binding_read",
+      "status": "fulfilled",
+      "wall_seconds": 0.2205364,
+      "exit_code": 0
+    },
+    {
+      "phase": "pre_edit_contract",
+      "status": "fulfilled",
+      "wall_seconds": 0.2423641,
+      "exit_code": 1
+    },
+    {
+      "phase": "pre_edit_contract_corrected",
+      "status": "fulfilled",
+      "wall_seconds": 0.3335032,
+      "exit_code": 0
+    },
+    {
+      "phase": "small_contract_read",
+      "status": "fulfilled",
+      "wall_seconds": 0.302608,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_source_authoring",
+      "status": "fulfilled",
+      "wall_seconds": 0.017,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_test_and_card_authoring",
+      "status": "fulfilled",
+      "wall_seconds": 0.02,
+      "exit_code": 0
+    },
+    {
+      "phase": "first_allowed_checks_0",
+      "status": "rejected",
+      "wall_seconds": null,
+      "exit_code": null,
+      "blocker": "blocked by policy; no command process accepted"
+    },
+    {
+      "phase": "first_allowed_checks_1",
+      "status": "fulfilled",
+      "wall_seconds": 3.5014514,
+      "exit_code": 0
+    },
+    {
+      "phase": "safer_test_cleanup_authoring",
+      "status": "fulfilled",
+      "wall_seconds": 0.014,
+      "exit_code": 0
+    },
+    {
+      "phase": "allowed_static_stub_check",
+      "status": "fulfilled",
+      "wall_seconds": 0.8720097,
+      "exit_code": 0
+    },
+    {
+      "phase": "launch_identity_prepare_0",
+      "status": "fulfilled",
+      "wall_seconds": 1.9130599,
+      "exit_code": 0
+    },
+    {
+      "phase": "launch_identity_prepare_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.70213,
+      "exit_code": 0
+    },
+    {
+      "phase": "command_and_owner_packet_authoring",
+      "status": "fulfilled",
+      "wall_seconds": 0.014,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_owner_selection_and_source_comparison",
+      "status": "fulfilled",
+      "wall_seconds": 0.4799485,
+      "exit_code": 0
+    },
+    {
+      "phase": "independent_review_total",
+      "status": "fulfilled",
+      "wall_seconds": 2.1652907,
+      "exit_code": 0
+    },
+    {
+      "phase": "review_and_preparation_evidence_publication",
+      "status": "fulfilled",
+      "wall_seconds": 0.021,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_source_commit_push",
+      "status": "fulfilled",
+      "wall_seconds": 5.3252409,
+      "exit_code": 0
+    },
+    {
+      "phase": "exact_remote_staging_0",
+      "status": "fulfilled",
+      "wall_seconds": 0,
+      "exit_code": null,
+      "accounted_by": "fetch_preparation_enclosing_bound",
+      "measured_wait_seconds": 10.0031989
+    },
+    {
+      "phase": "exact_remote_staging_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.4825289,
+      "exit_code": 0
+    },
+    {
+      "phase": "remote_staging_completion",
+      "status": "fulfilled",
+      "wall_seconds": 0,
+      "exit_code": null,
+      "accounted_by": "fetch_preparation_enclosing_bound",
+      "measured_wait_seconds": 5.0097821
+    },
+    {
+      "phase": "bounded_staging_inspection",
+      "status": "fulfilled",
+      "wall_seconds": 0.7854457,
+      "exit_code": 0
+    },
+    {
+      "phase": "stop_owned_stuck_fetch",
+      "status": "fulfilled",
+      "wall_seconds": 0.520434,
+      "exit_code": 0
+    },
+    {
+      "phase": "fetch_terminal_bundle_base_0",
+      "status": "fulfilled",
+      "wall_seconds": 0,
+      "exit_code": 1,
+      "accounted_by": "fetch_preparation_enclosing_bound",
+      "measured_wait_seconds": 0.000002
+    },
+    {
+      "phase": "fetch_terminal_bundle_base_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.7268522,
+      "exit_code": 0
+    },
+    {
+      "phase": "committed_source_bundle_creation",
+      "status": "fulfilled",
+      "wall_seconds": 0.2903541,
+      "exit_code": 128
+    },
+    {
+      "phase": "committed_source_bundle_named_ref",
+      "status": "fulfilled",
+      "wall_seconds": 1.847208,
+      "exit_code": 0
+    },
+    {
+      "phase": "bundle_transfer_and_exact_checkout",
+      "status": "fulfilled",
+      "wall_seconds": 6.4945728,
+      "exit_code": 0
+    },
+    {
+      "phase": "fetch_preparation_enclosing_bound",
+      "status": "fulfilled",
+      "wall_seconds": 142,
+      "exit_code": 1
+    },
+    {
+      "phase": "exact_launch_binding_authoring",
+      "status": "fulfilled",
+      "wall_seconds": 0.018,
+      "exit_code": 0
+    },
+    {
+      "phase": "prelaunch_publication_boundary_0",
+      "status": "fulfilled",
+      "wall_seconds": 4.6170619,
+      "exit_code": 0
+    },
+    {
+      "phase": "prelaunch_publication_boundary_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.4058138,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_detached_launch_dispatch",
+      "status": "fulfilled",
+      "wall_seconds": 0.7920257,
+      "exit_code": 0
+    },
+    {
+      "phase": "monitor_add_dispatch",
+      "status": "fulfilled",
+      "wall_seconds": 0.827,
+      "exit_code": 0
+    },
+    {
+      "phase": "launch_and_adoption_receipt_publication",
+      "status": "fulfilled",
+      "wall_seconds": 0.021,
+      "exit_code": 0
+    },
+    {
+      "phase": "launch_receipt_commit_push",
+      "status": "fulfilled",
+      "wall_seconds": 4.7219857,
+      "exit_code": 0
+    },
+    {
+      "phase": "monitor_total_observation_work",
+      "status": "fulfilled",
+      "wall_seconds": 2.3,
+      "exit_code": 0
+    },
+    {
+      "phase": "terminal_collection_initial_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.3048582,
+      "exit_code": 0
+    },
+    {
+      "phase": "terminal_collection_initial_1",
+      "status": "fulfilled",
+      "wall_seconds": 1.1646477,
+      "exit_code": 0
+    },
+    {
+      "phase": "terminal_preserve_and_intake_read_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.4292559,
+      "exit_code": 0
+    },
+    {
+      "phase": "terminal_preserve_and_intake_read_1",
+      "status": "fulfilled",
+      "wall_seconds": 1.8210551000000001,
+      "exit_code": 0
+    },
+    {
+      "phase": "closed_artifact_preservation_and_analysis",
+      "status": "fulfilled",
+      "wall_seconds": 0.5976371,
+      "exit_code": 0
+    },
+    {
+      "phase": "intake_current_authority_and_endpoint_read",
+      "status": "fulfilled",
+      "wall_seconds": 0.6024907,
+      "exit_code": 0
+    },
+    {
+      "phase": "valid_result_scientific_intake_authoring",
+      "status": "fulfilled",
+      "wall_seconds": 0.023,
+      "exit_code": 0
+    },
+    {
+      "phase": "terminal_metadata_and_preservation_inventory",
+      "status": "fulfilled",
+      "wall_seconds": 0.9528248,
+      "exit_code": 0
+    },
+    {
+      "phase": "supervisor_unique_metadata_preservation",
+      "status": "fulfilled",
+      "wall_seconds": 1.3627072,
+      "exit_code": 0
+    },
+    {
+      "phase": "receipt_patch_rejected_before_write",
+      "status": "fulfilled",
+      "wall_seconds": 0,
+      "exit_code": 1
+    },
+    {
+      "phase": "receipt_shell_write_rejected_before_execution",
+      "status": "fulfilled",
+      "wall_seconds": 0,
+      "exit_code": 1
+    },
+    {
+      "phase": "support_receipt_data_read",
+      "status": "fulfilled",
+      "wall_seconds": 0.1940648,
+      "exit_code": 0
+    },
+    {
+      "phase": "terminal_intake_receipts_patch_publication",
+      "status": "fulfilled",
+      "wall_seconds": 0.023,
+      "exit_code": 0
+    },
+    {
+      "phase": "intake_audit_and_document_checks",
+      "status": "fulfilled",
+      "wall_seconds": 0.3424112,
+      "exit_code": 1
+    },
+    {
+      "phase": "utf8_brief_and_diff_check",
+      "status": "fulfilled",
+      "wall_seconds": 0.3868097,
+      "exit_code": 0
+    },
+    {
+      "phase": "valid_result_preservation_intake_commit_push",
+      "status": "fulfilled",
+      "wall_seconds": 7.5824332,
+      "exit_code": 0
+    },
+    {
+      "phase": "git_blob_preservation_verified_before_cleanup",
+      "status": "fulfilled",
+      "wall_seconds": 1.0081365,
+      "exit_code": 0
+    },
+    {
+      "phase": "root_integrated_bytes_verified_before_removal",
+      "status": "fulfilled",
+      "wall_seconds": 0.8878731,
+      "exit_code": 0
+    },
+    {
+      "phase": "authorized_remote_duplicate_cleanup",
+      "status": "fulfilled",
+      "wall_seconds": 0.9565585,
+      "exit_code": 0
+    },
+    {
+      "phase": "authorized_local_duplicate_archive_cleanup",
+      "status": "fulfilled",
+      "wall_seconds": 0.3414558,
+      "exit_code": 0
+    }
+  ]
+}

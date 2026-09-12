@@ -533,3 +533,190 @@ work remain visible. The next discriminator is a traceback-equipped, separately 
 completion attempt using the intact W1 control, or the actual failure location if it
 stops again. No cause is assigned to the error or linked to the historical signal11;
 no family/lifecycle/class decision or automatic retry follows.
+
+## Seed22 native comparison completion selected — 2026-09-10
+
+The next object-tier discriminator is one fresh-initialization W100 seed22 fit at
+the same1000 endpoint, with the verified completed W1 control and reference on success:
+`RCLE_B03_FRESH1000_S22_RECOVERY_SCIENCE_CARD_20260910.md`. The original failed attempt
+remains incomplete; its favorable training curve supplies no paired effect. This
+selection preserves the same law, information, reference and reading rules, includes
+the accepted ordinary traceback reporting, and consumes a separate900s complete cap.
+It tests the missing native contrast or records a concrete failure location; neither
+a second independent seed sample from repetition nor a crash-cure claim follows.
+S21 is still the only complete same1000 pair at selection. Prior reference/recovery
+deficits and all failed exposure remain visible. No family/class/lifecycle change.
+
+## Seed22 recovered: large native signal across two1000 roots — 2026-09-10
+
+`RCLE_B03_FRESH1000_S22_RECOVERY_RESULT_INTAKE_20260910.md` accepts a complete
+new W1001000/reference sequence against the exact retained W1 control. New W100
+starts at matching fresh seed22 initial tensors/zero baselines and records1000
+nonzero joint updates. Delta_U+.3678243001 and W100 initialization gain+.3717814128
+exceed.05; all512 primary scenarios and all8 U/Y/F means favor W100. This completes
+seed22's comparison while preserving its old983-block failed attempt and costs.
+S21 and recoveredS22 are two completed training roots, with descriptive mean
+Delta+.3734842936; the repeated22 invocation is not an additional independent seed.
+
+The strongest support is the intact native learning/contrast recurring at the fixed
+endpoint. The strongest competence contradiction remains: reference U is lower in
+every cell (primary gap+.0568258), and2037/2048 W100 recovery scores remain40.
+The full joint law still changes shared features, plans, baselines and visitation;
+pure actor-credit causality, tuned headroom, stable superiority and transfer remain
+unidentified. The successful attempt does not diagnose or cure prior exceptions.
+
+The next discriminator recommended for separate selection is another independent
+matched pair at the same endpoint, retaining every outcome; it can measure additional
+training variation but cannot alone establish competence against the reference.
+Current allocation closes after preserved cleanup; no successor/card/budget, family
+change, C promotion or Portfolio disposition follows automatically.
+
+## Third independent same1000 root selected as a close call — 2026-09-10
+
+`RCLE_B03_FRESH1000_S23_SCIENCE_CARD_20260910.md` selects one fresh matched seed23
+pair at the unchanged1000 endpoint under object-tier delegation. Two completed roots
+support a large whole-law native signal; another independent root can expose training
+variation or contradiction. Ending unchanged-law spending is the close runner-up because
+reference/recovery deficits persist and further recurrence cannot establish competence.
+Seed21 and recovered22 remain the two prior units; the failed/repeated22 exposure and
+recovery adaptivity are retained. This finite next discriminator changes no family,
+lifecycle, priority or class and grants no automatic subsequent pair.
+
+## Third same1000 root: service signal with fragmentation loss — 2026-09-10
+
+`RCLE_B03_FRESH1000_S23_RESULT_INTAKE_20260910.md` accepts a complete fresh seed23
+pair. Delta_U +.3033203125 and W100 initialization gain +.3080179850 exceed .05;
+all512 primary scenarios and all8 U/Y means favor W100. This supports recurrence
+of native service learning under the whole normalized law, with smaller magnitude
+than roots21/22. Three-root descriptive mean Delta +.3500963 (sample SD .0409027)
+retains outcome-informed selection and recovered22 as one root.
+
+The strongest new contradiction is fragmentation: all8 F means worsen, primary
+increase +.015234375, reversing the prior two roots' favorable F pattern. Reference
+U is still better in every cell, primary deficit .1162374; W1002045/2048 recovery
+scores remain failure-coded40. No unqualified nonharm branch or all-native improvement
+is claimed. A post-hoc F threshold is not supplied. Pure actor-credit causality,
+tuned headroom, stable superiority and transfer remain unidentified; whole-law
+feature/plan/baseline/visitation changes survive as alternatives, with no explanation
+assigned to the F reversal or historical failures.
+
+The next discriminator recommended for separate selection is a competence comparison
+addressing absolute U/reference deficit with explicit fragmentation consequences,
+rather than another immediate unchanged-law replica. Current allocation ends after
+preserved closeout; no new card, seed, budget, family/lifecycle/priority disposition or
+C promotion is selected. Evidence: the S23 E0/readback and three-root analysis.
+
+## Competence comparison designed, with no numerical allocation — 2026-09-10
+
+The accepted Portfolio design assignment is completed in
+RCLE_SERVICE_COMPARISON_DESIGN_INTAKE_20260910.md. Its proposed next discriminator
+is one fresh nearest-guided FLEX fit at 200 updates versus its untrained initialization
+and the attained deterministic INDEPENDENT-NEAREST reference. A fixed action preference
+uses the already legal candidate-distance feature; the learner may override it using
+the same native Y and FLEX state/information path. The primary is absolute post-churn
+U improvement over the reference, with all F/recovery consequences retained.
+
+This is a source-grounded object-design recommendation, not a performance result,
+frozen card, new family or numerical allocation. Proposed complete work is 18,944
+episodes/1,212,416 ticks/200 updates, within a requested 300 s including all runtime support
+and Monitor work. Current new exposure is zero. The prior can itself harm service and
+the learner may not improve it; old seed23 service gains, all-eight F harm, reference
+deficit and failure-coded recovery remain the strongest support and contradiction.
+No fourth unchanged same 1000 root, F exchange rate, headroom or causal claim is added.
+Root receives the concrete design and separate allocation need; ACTIVE/MEDIUM persists.
+
+## Nearest-prior200: attained-reference deficit with almost unchanged service — 2026-09-10
+
+`RCLE_B04_NEAREST_PRIOR_RESULT_INTAKE_20260910.md` accepts one fresh B04/master24
+fit under the subsequently allocated300s comparison. Final U=.336995442708 remains
+above nearest.279846191406; primary reference-minus-final is−.0571492513021,
+conditional SE.00425400925. All eight final U means lose to nearest. Initialization
+gain+.000144449870 has conditional95% interval[−.00262017032,+.00290907006], with
+one active cross-roster path improving and the other worsening. The prior/learner
+combination did not establish the intended service advantage at200 updates.
+
+Strongest support: five of eight U cell means improve from initialization, and the
+small aggregate gain and all-cell Y increase remain direct facts. Strongest
+contradiction: all-cell nearest deficit, F worsening against nearest in6/8 cells
+and2,034/2,048 final tau scores still coded40. All-cell F also worsens slightly from
+initialization. No scalar tradeoff, reference competence, stable superiority or
+isolated actor-credit claim follows. Native chain81.78s includes200 nonzero updates,
+18,944 complete episodes and1,212,416 primitive ticks; supporting costs are separate.
+
+The legal prior adds a starting preference rather than information. Exploration
+mass, finite exposure and the whole normalized learning package survive as
+alternative limitations; none is diagnosed by the almost-flat outcome or measured
+parameter displacement. B03 history and its seed23 F harm keep their original
+meaning. This result bounds one fixed200 recipe, not the family or representable
+policy class. Tuned headroom remains absent.
+
+This allocation ends at preserved closeout. A possible next separately allocated
+discriminator is one fresh final1000 comparison of the same prior against its own
+initialization and nearest, asking longer-budget performance rather than budget
+causality. No successor, new seed/card, family/lifecycle/priority change or C claim
+is selected here. References: B04 card, E0, retained-data analysis and full intake.
+
+## Fresh nearest-prior1000: reference deficit persists — 2026-09-11
+
+The separately allocated B05/master25 is VALID_COMPLETE_B_EXPLORE under
+RCLE_B05_NEAREST_PRIOR1000_RESULT_INTAKE_20260911.md. Final1000 primary U.3379089355
+remains above attained nearest.2838907878; Delta_ref−.0540181478, conditional
+SE.0041478589. All8 final U means lose to nearest. Initialization gain+.0013387044
+has conditional95% interval[−.0021551607,+.0048325696] and opposite active-path signs.
+This one fit did not establish competent-reference service superiority.
+
+Strongest direct support:4/8 initialization U gains, active8→12 gain+.0057779948
+and all-cell native Y gain+.0018723806. Strongest contradiction: all8 reference U
+losses, active12→8 initialization U loss.0031005859, F worsening in6/8 cells versus
+both initialization and nearest, and2036/2048 final tau40 outcomes. All-cell F and
+failure-coded tau worsen from initialization despite small favorable primary means.
+No scalar tradeoff, general recovery or unqualified nonharm follows.
+
+The recorded1000 nonzero updates moved26,161 FP64 parameters by.8522123003 from
+fresh norm21.0707719761, along total normalized path20. Those exposure facts do
+not diagnose why service changes are small. Initial action-law exploration,
+finite learnability, normalized update allocation and partner co-adaptation remain
+surviving explanations. This fresh root and B04/master24 have different endpoints;
+their observations retain separate meaning and do not isolate training-budget
+causality or constitute matched1000 replication. Tuned headroom remains absent.
+
+This allocation ends at intake and preserved closeout. If further investment is
+selected, a possible discriminator is a specifically changed initial action law
+tested against its own initialization and the same attained nearest, with all
+F/recovery consequences. A lower exploratory mass is an unallocated option, not
+an established cause or selected successor. No new probability, seed, card, budget,
+family/lifecycle/priority disposition or C claim is created. References: B05 card,
+E0, compact summaries, retained-data analysis and full intake.
+
+## Nearest99-prior1000: no aggregate learning gain, reference deficit — 2026-09-11
+
+RCLE_B06_NEAREST99_PRIOR1000_RESULT_INTAKE_20260911.md accepts one fresh
+B06/master26 B. Final primary U=.287479654948 remains above attained nearest
+.281722005208, Delta_ref−.005757649740. Initialization gain is−.000107828776,
+with conditional95% interval[−.000743939284,+.000528281732]. All eight final
+service means lose to nearest;504/512 primary initialization comparisons tie in U.
+These are score ties, not policy/action identity or an equivalence result.
+
+The strongest direct support is four initialization U cell gains, including
+active8→12 +.000260416667. Strongest contradiction is all-cell reference deficit,
+active12→8 initialization loss.000476074219, five reference F losses and2012/2048
+final tau40 failure codes. The raw five-positive initial F count includes a
++3.25e−19 contrast with identical displayed endpoint means; preserve its precision
+qualification rather than describing five substantive harms. All-cell Y declines
+slightly and all-cell mean failure-coded tau improves slightly; neither supplies
+a general recovery/nonharm or learned-competence claim.
+
+One thousand nonzero .02 updates move the26,161 FP64 state by.714670178467 from
+fresh norm21.1477941906 along path20. That establishes exposure, not why competent
+service barely changes. The stronger legal prior adds a starting preference rather
+than information. Its own initialization was already close to nearest; cross-root
+comparison with the .9-prior B04/B05 results cannot isolate probability causality.
+Finite learning exposure, credit/update allocation and partner co-adaptation remain
+surviving limitations. Tuned same-information headroom is still absent.
+
+This named allocation ends at intake and preserved closeout. No probability sweep,
+longer training, new seed, family/lifecycle/priority change or automatic successor
+is selected. A separately allocated next discriminator would need actual learning
+from competent behavior while overcoming the attained legal null; no method or
+budget is chosen here. References: B06 card, E0, compact summaries, full preserved
+block/endpoint evidence, parameter facts and scientific intake.

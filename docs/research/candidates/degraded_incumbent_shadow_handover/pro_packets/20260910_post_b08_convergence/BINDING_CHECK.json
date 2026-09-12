@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-09-10T22:27:45.310054+00:00",
+  "request_id": "2026-09-10-dish-post-b08-convergence-01",
+  "task_commit": "a96cfa7a52bf22e89bbd6d255eb1953a7af2fafb",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/a96cfa7a52bf22e89bbd6d255eb1953a7af2fafb/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/TASK.md",
+  "task_github_blob": "6d624ff6c23bf255ab74acc7fb0fbb59e43d4d47",
+  "task_sha256": "5aa9ae04ff2062b1b4212eac5a4e75e32c0436345f7fba59bd80c44c66d3a84f",
+  "remote_task_matches_committed_bytes": true,
+  "observed_delivery_branch_head": "a96cfa7a52bf22e89bbd6d255eb1953a7af2fafb",
+  "response_target_absent_at_observed_head": true,
+  "source_thread_id": "01a08d61-df0e-7892-9beb-9d32b110453c",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "provider_conversation": "6a9bec54-df00-83e8-9840-46440458f316",
+  "dispatch_state": "READY_TO_DISPATCH",
+  "dispatch_count": 0,
+  "send_count": 0,
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-10/20260910-dish-003.json",
+  "owner_reviews_at_clean_boundary": {
+    "C:\\Projects\\HMASD-worktrees\\dm-dish-b06-scientific-intake-20260907": [],
+    "C:\\Projects\\HMASD": []
+  },
+  "native_return_target": "/root/dm_dish_restart_recovery",
+  "document_check_correction": "The first readback attempt confirmed TASK bytes, then rejected an incorrect local assertion that the dispatch wrapper contains the provider prompt inline. Current renderer dispatches HANDOFF path; the provider prompt is in transport_request.prompt. That check assumption was corrected; no TASK or scientific bytes changed.",
+  "scope": "Publication and route checked; no Pro or native scientific execution, no family disposition. Root dispatches the exact HANDOFF prompt once through the configured Transport and forwards the full immutable response to this DM."
+}

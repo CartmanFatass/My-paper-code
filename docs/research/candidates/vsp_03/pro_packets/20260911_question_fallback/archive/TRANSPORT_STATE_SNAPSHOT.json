@@ -1,0 +1,72 @@
+{
+  "observed_utc": "2026-09-11T06:15:09.410573+00:00",
+  "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\registry.json",
+  "binding_key": "em:vsp_03:convergence",
+  "selected_fields": {
+    "request_id": "2026-09-11-vsp03-question-fallback-01",
+    "state": "ARCHIVED",
+    "archive_status": "ARCHIVED",
+    "conversation_id": "6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+    "tab_id": null,
+    "tab_lifecycle": "CLOSED",
+    "response_sha256": "c6f806e3d83a5b3dfddd41a4afab010c73f7f36c43433d81d330c6b3a22aafeb",
+    "send_evidence": {
+      "send_click_count": 1,
+      "send_attempted": true,
+      "url_observed": true,
+      "user_node_observed": true,
+      "user_node_exact": true,
+      "attachment_observed": false,
+      "paste_mode": true,
+      "prompt_sha256": "b211b49f91489fe4a1165a1d5f78fb755d9d1e685072a3bdd7d18fdcb04fd4fc",
+      "prompt_link_resource_pill_observed": true,
+      "prompt_link": "https://github.com/CartmanFatass/My-paper-code/blob/a0bd913a4bd1d10270171586cca8ed2a2d792281/docs/research/candidates/vsp_03/pro_packets/20260910_post_b07_convergence/TASK.md",
+      "provider_url_observed": "https://chatgpt.com/c/6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+      "binding_match": true,
+      "user_message_id": "today-current-round|TASK.md@cddc0be2dabf8728e4c5199be89794c228192b03|user-node",
+      "user_node_dom_identity": "today-12:24|TASK.md@a0bd913a4bd1d10270171586cca8ed2a2d792281|current-round-user-node"
+    },
+    "return_receipt": {
+      "required": true,
+      "source_thread_id": "01a08ee9-1223-7bf2-bf21-8c35033cd3ad",
+      "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+      "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+      "status": "SENT",
+      "attempt_count": 1,
+      "message_key": "2026-09-11-vsp03-question-fallback-01|vsp_03|6a9cbb9d-374c-83e8-b600-23d3a8033a69|c6f806e3d83a5b3dfddd41a4afab010c73f7f36c43433d81d330c6b3a22aafeb",
+      "retry_allowed": false,
+      "routing_mode": "PARENT_SESSION",
+      "delivery_mode": "bounded_single_attempt",
+      "return_control_after_attempt": true,
+      "archive_paths": {
+        "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\PROMPT_BODY.md",
+        "github_response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\GITHUB_RESPONSE.md",
+        "chat_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\CHAT_RECEIPT.md",
+        "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\PACKET_MANIFEST.json",
+        "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\TRANSPORT_FACTS.json",
+        "github_response_sha256": "c6f806e3d83a5b3dfddd41a4afab010c73f7f36c43433d81d330c6b3a22aafeb",
+        "delivery_commit": "00315dc9f1bfd9e58167696d7e53be881d685459",
+        "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/00315dc9f1bfd9e58167696d7e53be881d685459/docs/research/candidates/vsp_03/pro_packets/20260911_question_fallback/archive/RESPONSE.md",
+        "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/6#issuecomment-5630245166"
+      },
+      "response_sha256": "c6f806e3d83a5b3dfddd41a4afab010c73f7f36c43433d81d330c6b3a22aafeb",
+      "staged_at": "2026-09-11T06:11:04Z",
+      "fallback_enabled": false,
+      "delivery_status": "accepted",
+      "updated_at": "2026-09-11T06:11:33Z",
+      "sent_at": "2026-09-11T06:11:33Z"
+    },
+    "archive": {
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\PROMPT_BODY.md",
+      "github_response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\GITHUB_RESPONSE.md",
+      "chat_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\CHAT_RECEIPT.md",
+      "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\PACKET_MANIFEST.json",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\TRANSPORT_FACTS.json",
+      "github_response_sha256": "c6f806e3d83a5b3dfddd41a4afab010c73f7f36c43433d81d330c6b3a22aafeb",
+      "delivery_commit": "00315dc9f1bfd9e58167696d7e53be881d685459",
+      "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/00315dc9f1bfd9e58167696d7e53be881d685459/docs/research/candidates/vsp_03/pro_packets/20260911_question_fallback/archive/RESPONSE.md",
+      "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/6#issuecomment-5630245166"
+    }
+  },
+  "interpretation": "Current prompt hash/user_message_id and archived TRANSPORT_FACTS identify the cddc0be2 task; registry send_evidence.prompt_link and user_node_dom_identity retain the old a0bd913a task. Preserve those stale fields as historical residuals, not current message identity. DM does not alter the registry."
+}

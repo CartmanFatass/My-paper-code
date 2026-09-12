@@ -55,8 +55,18 @@ paste transport request. Send its short fixed task link verbatim, no attachment,
 read-only preamble or copied evidence. Dispatch only a bound READY_TO_DISPATCH task;
 TASK_NOT_PUBLISHED has no provider payload. This mode authorizes Pro's named file
 and comment; Transport does not write them. Archive the complete short chat reply
-and actual URLs unchanged. The designated DM retrieves the full file for scientific intake after Root receipt forwarding;
-a delivery receipt alone is not a formed Pro decision. Repeated/uncertain receipt
+and actual URLs unchanged. If the accepted prompt's GitHub-write fallback produces a
+downloadable Markdown document, download that exact `.md`, verify it belongs to the paired
+assistant response, record its provider filename, bytes and SHA-256, and preserve it first as the Transport attempt artifact `<archive_id>__02_RESPONSE.md`, then
+retain the same exact bytes in the repository as the request-sidecar
+`archive/CHAT_FALLBACK_RESPONSE.md`. The GitHub target `archive/RESPONSE.md` remains reserved for
+actual GitHub delivery and is never synthesized or overwritten by Transport. Retain the distinct
+short provider receipt as `<archive_id>__04_CHAT_RECEIPT.md`; it never occupies the response
+artifact. If GitHub `RESPONSE.md` and the downloaded sidecar both exist, preserve both and compare
+their hashes. Different bytes are an `ARCHIVE_CONFLICT`, never an overwrite. Do not send a new prompt, rewrite its contents or
+report GitHub delivery. The designated DM retrieves the full committed or downloaded file for
+scientific intake after Root receipt forwarding; a delivery receipt alone is not a formed Pro
+decision. Repeated/uncertain receipt
 handling observes existing state, never repeats Send. Keep request-scoped existing
 waiting and cleanup, provider binding and parent model unchanged. The singleton endpoint is
 the independent task in `.codex/hmasd-transport.toml` under OWNER_DIRECT 2026-09-07;
@@ -150,6 +160,12 @@ before either path; preserve accepted-send facts and never invent a provider ID.
 An ordinary bad answer, model mismatch, timeout or uncertain Send does not authorize reset.
 
 ## Browser and model preflight
+
+OWNER_DIRECT 2026-09-11: a browser is an interaction surface, not an authority boundary.
+Do not classify a Root-owned, Transport-owned or other task-scoped tab as a permission blocker.
+Use any browser surface accessible to Transport when the target ChatGPT session is actually
+logged in. Send readiness is established by that login state, the exact persisted conversation
+and request binding, the provider/model checks below, and reconciliation of accepted-send state.
 
 Use the existing in-app-browser binding. Claim an explicitly mentioned user tab by
 exact title/URL/provider identity; otherwise create one agent tab and retain its
@@ -249,7 +265,9 @@ control, and a complete assistant message in the same conversation. Capture the
 assistant node paired with this request's recorded user message, not the first or
 last unscoped assistant/copy control in a long conversation. `Worked for ...` with
 response actions and no active generation is a completed status. Partial streamed
-text is not an archive.
+text is not an archive. A provider-generated `.md` link or file control belongs to the paired
+assistant response: download it only after natural completion, verify its Markdown bytes and
+retain the provider-visible filename and node association.
 
 ## Archive and tab lifecycle
 

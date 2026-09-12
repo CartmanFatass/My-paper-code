@@ -1,0 +1,105 @@
+{
+  "id": "20260910-root-004",
+  "created": "2026-09-10T15:49:01-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "四个空位的滚动投入：FOLR复现、UCOPE/RCLE新问题、ACVC新拟合",
+  "context": "FOLR完整训练对超过1分尺度；UCOPE与RCLE的现有额度结束且各有原生表现限制。DISH方向问题继续。DM建议最多四条具体推进链，Portfolio Pro决定，当前不自动执行选项。",
+  "options": [
+    {
+      "key": "a",
+      "label": "建议四链投入",
+      "consequence": "FOLR一新独立对；UCOPE/RCLE各准备一个具体比较；ACVC按最低争用顺位申请一新拟合。"
+    },
+    {
+      "key": "b",
+      "label": "三链及候补",
+      "consequence": "保留前三项，第四空位等待明确有价值的候补；不制造阻塞链。"
+    },
+    {
+      "key": "c",
+      "label": "改选其他明确首步",
+      "consequence": "Portfolio依据固定证据指定其他ACTIVE方向的具体动作和预算，保留停用家族边界。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "FOLR与ACVC有明确复现问题；UCOPE/RCLE需让下一项观察回答原生表现缺口，不能机械再跑。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L121",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "FOLR、UCOPE、RCLE和SCDMP本次额度结束后，在DISH方向问题继续期间，接下来最多投入哪四条方向链，候补顺序是什么？",
+    "changes_if_approved": [
+      {
+        "target": "下一组滚动推进方向",
+        "from": "本次完成额度不自动续跑；仅DISH方向问题继续",
+        "to": "建议FOLR独立新训练对、UCOPE与RCLE各一份有明确问题的新卡准备，以及最低争用顺位的ACVC独立新拟合；最终由Portfolio Pro裁决"
+      }
+    ],
+    "if_refused": "保持已结束家族和历史结果，执行Pro指定的其他明确首步或较少方向；不以阻塞等待填满名额。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B01_INTAKE_20260910.md",
+        "quote": "**d_HR=+1.56546875 → HALF_EVENT_ABOVE_MEI**.",
+        "why": "真实训练后超过本卡1分尺度，另一独立训练对可检查是否再现。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_INTAKE_20260910.md",
+        "quote": "The next scientific discriminator, **if separately selected and allocated**, is another\nprospectively chosen independent DENSE fit with the same C/F/dwell endpoint comparison.",
+        "why": "同一明确比较可直接减少训练实例差异的不确定性。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S23_RESULT_INTAKE_20260910.md",
+        "quote": "The strongest new contradiction to a broader claim is F: primary .28175456→.29698893,\nan adverse **+.015234375**, with losses in every cell including all final-roster-12\ncells.",
+        "why": "服务改善伴随碎片化损失，不能把大收益写成无条件整体改善。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_INTAKE_20260910.md",
+        "quote": "Complete≤360 s and support≤30 s conformance is unestablished\nif Monitor observation is included; that retained lower bound alone is above 30 s.",
+        "why": "旧成本账不得补写通过；新额度明确把Monitor计入总支持。"
+      }
+    ],
+    "uncertainty": [
+      "FOLR只有一个半保留训练对，历史全清空结果反转仍在。",
+      "UCOPE和RCLE尚缺具体新算法；此次建议只拨明确问题准备，不拨数值调用。",
+      "所有候选都缺当前宿主的调优同信息headroom；ACVC还须保持二次recast最低争用顺位。"
+    ],
+    "cost": {
+      "compute": "本轮咨询零科学调用；建议FOLR一训练对总上限3900秒、ACVC一拟合总上限360秒，均待Pro裁决；其余两项仅准备。",
+      "owner_time": "异步查看即可；无需等待或逐项批准。",
+      "reversibility": "reversible",
+      "waits_on_this": "下一批新增投入等待Portfolio形成裁决；DISH及已授权收尾继续。"
+    },
+    "verdict_text": "**A — recommended:** allocate one new independent matched FOLR HALF_EVENT/RETAIN pair; give UCOPE and RCLE one bounded, concrete successor-design assignment each, in that order after FOLR, and allocate one additional independent fresh-DENSE C/F/dwell B to ACVC as the fourth chain if the prospective complete-cost boundary below is accepted. UCOPE's question is whether a specific change in learned continue/end credit can produce a useful native gain over the attained fixed-short comparator; RCLE's is whether a competent learned service comparison can reduce the attained reference deficit while retaining fragmentation as a native consequence. Their DMs must select the smallest real-training comparison within the accepted mechanism, or return the precise direction-node question if the needed change opens a family. These are not invitations to implement unnamed algorithms, search for exact maxima, or repeat the old recipe. This request releases **zero numerical invocations** for those two design assignments. Their concrete cards and numerical allowance remain separately selected; completed design cannot stay counted indefinitely.",
+    "source": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-10T23:27:40+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/DELIVERY_STATUS.md#recovery-authority-and-later-observation",
+      "record": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/DELIVERY_STATUS.md",
+      "state": "blocked",
+      "summary": "保留首个终止回执：确认发送一次后报告GitHub交付不可用，未形成当时可用裁决。Root曾授权同绑定精确恢复；本条是历史状态，不是本地临时Portfolio决定。"
+    },
+    {
+      "at": "2026-09-10T23:27:40+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-10-rolling-successor-allocation.md",
+      "state": "planned",
+      "summary": "完整回答已核对并符合规范：依次FOLR一独立训练对总3900秒、UCOPE与RCLE各一具体设计且零数值额度、ACVC一拟合270+90=360秒；Root按实际空位执行，最多四项且未产生第五项。交付已ARCHIVED，无新增发送；实际派发尚未声称。",
+      "correction": "保留RCLE现有ACTIVE/MEDIUM；旧简报HIGH是笔误。ACVC按256个双episode rollout各四epoch更新，并非每episode后更新两次。旧支持成本下界>52.3964878秒超过30秒，旧完整360秒是否通过仍未知；新270/90仅向前适用。"
+    }
+  ],
+  "approval_correction": "保留RCLE现有ACTIVE/MEDIUM；旧简报HIGH是笔误。ACVC按256个双episode rollout各四epoch更新，并非每episode后更新两次。旧支持成本下界>52.3964878秒超过30秒，旧完整360秒是否通过仍未知；新270/90仅向前适用。"
+}

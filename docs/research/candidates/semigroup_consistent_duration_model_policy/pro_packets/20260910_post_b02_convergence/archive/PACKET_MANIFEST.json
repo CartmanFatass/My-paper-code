@@ -1,0 +1,34 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-10-scdmp-post-b02-family-convergence-01--semigroup_consistent_duration_model_policy",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-10-scdmp-post-b02-family-convergence-01",
+  "direction_id": "semigroup_consistent_duration_model_policy",
+  "direction_ids": [
+    "semigroup_consistent_duration_model_policy"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:semigroup_consistent_duration_model_policy:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-10-scdmp-post-b02-family-convergence-01--semigroup_consistent_duration_model_policy__00_PROMPT.md",
+    "bytes": 1274,
+    "sha256": "ab3f09e3cba4ab79c281fdb134775b0b4598f97d0db510239e2e6753623aabec",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-scdmp-post-b02-family-convergence-01\\2026-09-10-scdmp-post-b02-family-convergence-01--semigroup_consistent_duration_model_policy__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-scdmp-post-b02-family-convergence-01\\2026-09-10-scdmp-post-b02-family-convergence-01--semigroup_consistent_duration_model_policy__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-scdmp-post-b02-family-convergence-01\\2026-09-10-scdmp-post-b02-family-convergence-01--semigroup_consistent_duration_model_policy__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "ab3f09e3cba4ab79c281fdb134775b0b4598f97d0db510239e2e6753623aabec",
+    "references": []
+  }
+}

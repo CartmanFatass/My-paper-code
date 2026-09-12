@@ -1,5 +1,120 @@
 # HMASD experiment tracking
 
+## Open-direction program dispatched; VNFC investigation closed — 2026-09-11
+
+The fixed Portfolio program packet is integrated through `dec302a92` and was dispatched exactly
+once to the configured Transport singleton for request
+`2026-09-11-open-directions-research-program-portfolio-01`. App delivery accepted the message while
+Transport was completing an earlier queued reconciliation; provider Send is not yet inferred.
+The designated Portfolio DM remains the full-response conformance checker.
+
+VNFC's bounded investigation is integrated at `f68fcb952` with status NOT READY. Preserved core and
+static evidence locate changed padding in a 32-byte CPython call-argument block during `Fraction`
+construction but do not identify the writer or prove the candidate integer-ratio substitution is a
+repair. Production source is unchanged. Both proposed dynamic diagnostic turns were rejected by the
+service before any reported command effect; the events are retained as technical tool facts rather
+than scientific exclusions. No B02 retry, model, environment, training or new allocation occurred.
+The current direction-chain count is zero while Portfolio selection and independent technical
+readiness work proceed.
+
+Root subsequently resumed the original CBSC and FRRIE DMs on their shared direction checkouts for
+bounded technical readiness work. CBSC owns exact P47/retained52 observation-path reconciliation;
+FRRIE owns exact P59/P63 factory-observation reconciliation. Static and tiny synthetic source-only
+checks are permitted, but no model, environment, optimizer, RNG, training, evaluation or
+result-bearing invocation is allocated. The actual advancing direction-chain count is therefore
+two while the Portfolio request remains queued behind Transport's confirmed-live prior
+reconciliation.
+
+CBSC returned and Root accepted its source-only readiness evidence at `929f95c37`. The 0.084374-second
+check reconstructed all six saved edits with exact text and AST equality without importing research
+code or constructing scientific state. The historical rejection still names no tool/payload/full
+event, so no restriction-specific repair is attributable; retained52 remains unrun and unallocated.
+A separate guarded cleanup command was rejected before process creation, leaving the DM's five-file
+scratch preserved without affecting scientific readiness. FRRIE is now the sole advancing technical
+chain.
+
+FRRIE subsequently returned and Root accepted its source-only observation through `77028e93b`, with
+the two audit rows integrated through `6903e5d66`. The 76-line AST reader mapped all nine P59 frames
+across six unchanged files in two checks totaling 0.535 seconds without workload imports. The
+traceback line is a function declaration and the retained dump contains no attributable native fault
+context, so production source remains unchanged. A combined wrapper was rejected before execution;
+the narrower direct read-only method succeeded. P63 remains unrun and no old allowance was reused.
+The direction-local advancing count returns to zero pending Portfolio's decision.
+
+Root also delivered the owner's current Transport instruction to the configured singleton: retry the
+same exact payload after resolving a failure only when authoritative state proves non-acceptance/no
+external effect, and process the resulting receipt itself. An uncertain or accepted Send is first
+reconciled on the same request/conversation and is never blindly duplicated. The queued Portfolio
+request and its one-dispatch record remain unchanged.
+
+## FSD source-delivery repair accepted — 2026-09-11
+
+The complete direction-local repair series is accepted and integrated through `20258e5ef`.
+Finite binary stdin and the configured network context now cover fetch, sparse checkout and exact
+readback for the remote partial clone. The accepted check matched all nine required committed
+paths, passed both shell checks and completed in 5.672 seconds; the owned temporary checkout is
+absent from disk and Git registration. No admission, model, RNG, training, evaluation or scientific
+retry occurred. B02 remains ended with zero exposure and any future pair requires a separate
+Portfolio allocation. VNFC is the one remaining advancing technical repair chain.
+
+## ACVC input-transport repair accepted — 2026-09-11
+
+The direction-local repair is accepted and integrated at `88f9e87d5`. The attributable Windows
+text-mode stdin path is replaced by LF-normalized, residual-CR-rejecting bytes that pass a local
+Bash syntax check before remote effects and are then sent through binary SSH stdin. Static and stub
+checks reproduced the old translation, rejected malformed input and read back all 975 bytes
+unchanged. No shared scientific code changed, no 8951 retry or numerical work occurred, and a
+future fit still requires a separate allocation. VNFC and FSD technical repair chains remain
+advancing; the designated Portfolio DM is preparing the broader forward recommendation.
+
+## Four-slot decision checked; execution mapping returned — 2026-09-11
+
+The complete Portfolio response `1ea43d8fbc846807d71d4d894136f357f65551b6`
+and direct Issue17 delivery comment5629259208 are verified. The designated DM's
+[full conformance intake](decisions/2026-09-10-four-slot-rolling-refill.md)
+applies option A: UCOPE L/F3300 seconds, RCLE nearest-prior300, FOLR one
+zero-numerical original Convergence question/intake and ACVC one fresh fit360.
+The [execution mapping](pro_packets/20260910_four_slot_rolling_refill/EXECUTION_MAPPING.md)
+returns exact scientific/cost/stop boundaries and existing checkouts to Root.
+No new source acceptance, scientific handle, Monitor adoption or current advancing
+count is claimed here; Root integration and original-DM dispatch are next.
+
+The downloaded47134-byte Markdown and separately archived sidecar are byte-equal
+to the immutable GitHub response. Earlier attempts and capability-gap/404 facts
+remain preserved at their observation times. The old raw Transport binding still
+reads BLOCKED despite actual delivery; Root routes its ordinary archival/readiness
+reconciliation without another four-slot Send. The disjoint fifth-slot FSD/MGTAP
+implementation question is unchanged/unselected and gains no allowance here.
+
+VSP03 question-only then VSPC1 source/design-only are finite fallbacks, activated
+once in order only on specified primary blockage/no-ready facts. Completion alone
+does not release another investment. All four directions roll independently;
+ACVC retains second-recast lowest contention, and lifecycle/priority/recasts/UAV
+entry are unchanged. This supersedes older operational descriptions below.
+
+## 2026-09-10 rolling execution update
+
+The app restart was reconciled against persisted repository and supervisor state; no completed
+object was replayed and no uncertain Pro Send was duplicated. UCOPE 8703 is accepted WITHIN and
+fully preserved/closed through `28c15dd3e`: final T-G `+0.0001930852`, T-F
+`-0.0110732137`; 8701's DOWN did not recur, while T again trails F. RCLE seed23 is accepted and
+closed through `a84313d7e`: Delta_U `+0.3033203125`, but all eight fragmentation cells worsen,
+reference U remains better by `0.1162374`, and no stable or unqualified nonharm claim follows.
+SCDMP narrowly PARKS only the fixed opening t1-3->t4/full-MC/coefficient1 package through
+`6801a5cd8`. DISH parks only the tested arrival-bridge retention family through `c4449cfa2`. FOLR
+accepts one preliminary HALF_EVENT advantage, `+1.56546875` above MEI1, and is fully preserved and
+closed through `462bff4c1`; historical reversals and the one-instance ceiling remain. None has an
+authorized successor.
+
+All five direction slots are vacant at this boundary. The exact zero-exposure
+`portfolio:cross_direction` request `2026-09-10-rolling-successor-allocation-portfolio-01` is
+Transport-owned through `9caa25608` and can select at most four ordered replacement chains and
+fallbacks. Its bytes predate FOLR closeout and DISH's applied PARK and therefore are not rewritten;
+a fifth-vacancy decision will use the same Portfolio node after this response is intaken so it can
+avoid duplicate selections. CBSC and FRRIE still have no permitted executable next action; VNFC
+retains `SEND_UNCERTAIN` with no blind resend. Scheduling changes no lifecycle, priority, recast
+count or scientific meaning. No owner review is pending at this boundary.
+
 ## 2026-09-10 research restart and Portfolio selection
 
 OWNER_DIRECT: “开始研究”. Root resumed the research loop under the consolidated control plane.
@@ -776,3 +891,272 @@ accepted, Monitor-adopted and integrated through `2482db440`; no extra selection
 was added. SCDMP Transport is active on its fixed request. VNFC and DISH have independently entered
 zero-exposure re-entry analysis to replace completed VSP03 and RCLE chains, restoring five advancing
 directions without changing Portfolio lifecycle or priority.
+
+## Rolling state after terminal recovery and direction decisions
+
+FOLR TIMING-B03 is complete and closed through `9d94e0880`. EVENT − RETAIN is
+`-5.44609375`, so the frozen `WITHIN_MEI` forecast missed and the result is
+`RETAIN_ABOVE_MEI`. All 2,706 archived members matched the originals before scoped remote removal.
+The three-instance timing-family Convergence handoff is integrated through `f067ca463` and is now at
+the original Pro node; its narrow-pause recommendation applies no local family decision or compute.
+
+UCOPE8702 ended incomplete, and the bounded A01 replay then completed the entire retained T prefix
+without reproducing the failure. Every one of the 1,866 historical episode rows and 869 historical
+rollout rows matched the replay prefix byte-for-byte. A01 therefore records bounded nonrecurrence,
+not a cause repair or performance sample; its intake and verified closeout are integrated through
+`b43d73a40`. UCOPE independently selected a fresh same-recipe master8703 T/F/G comparison next; its
+card, review and launch remain direction-local work.
+
+RCLE's separately selected seed22 W100 recovery completed 1,000 nonzero updates and reference.
+Against the retained W1 endpoint, `Delta_U=+0.36782430013020834`; all 512 paired scenarios and all
+eight U/Y/F means favor W100, while the reference remains better. Roots21/22 are only two descriptive
+training roots, and the failed seed22 attempt remains preserved. Result and verified closeout are
+integrated through `38d2edd1a`; a further independent same1000 pair is a new, separately selected rung.
+
+SCDMP Convergence selected one unchanged independent B02 pair and declined immediate narrow PARK.
+The conforming response, fixed card and reviewed binding are integrated through `6fb30cbaa`; the exact
+B02 handle is Monitor-adopted at source `f079c7530`, with terminal result intake in progress. DISH
+Convergence independently selected one HALF_RETAIN versus REPLACE B08 pair; response, card and
+independently reviewed implementation are integrated through `da1d3041a`, with launch preparation
+remaining inside the fixed 2,100-second complete envelope.
+
+VNFC's one Send remains `SEND_UNCERTAIN`. Read-only reconciliation found no current-round user node or
+assistant response in the bound conversation, so no decision or archive exists and no resend is
+permitted while acceptance is unresolved. The same fixed request remains queued; its blocker record is
+integrated through `73d4ef889`. This parked direction does not hold any sibling chain.
+
+## 2026-09-11 rolling refill after completed allocations
+
+The complete `portfolio:cross_direction` response for request
+`2026-09-11-five-chain-refill-portfolio-01` is preserved at delivery commit `ed0c4e1c3` and was
+transported with exactly one accepted Send, natural completion after 29m45s, and no generation
+control or retry. The designated Portfolio DM verified all 35 fixed references and found the
+response scientifically and specification conforming. PRO_FINAL option A and its exact execution
+mapping are integrated through `5bbae6d90`.
+
+Four direction chains now advance independently. FSD owns one fresh I1280/D0 B pair inside the
+900/1,800-second arm caps, 300-second support cap and 3,000-second complete cap. RCLE owns one
+separately bound final1000 nearest-prior fit/reference inside 600/10-second execution caps,
+140-second support cap and 750-second complete cap. MGTAP owns the exact COND implementation and
+one encoder-only fixture capped at 60 seconds, with full policy, environment, training and future B
+work unallocated. UCOPE owns one original-node post8801 direction question and intake with zero
+numerical or implementation work. All four were dispatched to their existing direction checkouts;
+each DM retains technical/scientific acceptance and its own Monitor handoff where a real B is
+accepted. The fifth direction slot remains explicitly unallocated, and no paused or blocked family
+was revived to fill it.
+
+## Post-option-A execution refill applied
+
+Transport archived request `2026-09-11-post-a-execution-refill-portfolio-01` after one accepted
+Send and natural completion; response `4bf41fd519d5df6ae20beaa27c90f0b581285c0ad254ff74107f2f79348b552d`
+is delivered at `9a2789640`. The designated Portfolio DM verified the complete 218-line response,
+all 26 fixed references, TASK and Issue delivery, accepted conforming option A at `b6e4a4d9d`, and
+Root integrated it through `d5a45a4da`.
+
+Root actually dispatched the exact complete FSD and MGTAP assignments to their existing DMs. FSD
+now owns one prospectively fresh unchanged I1280/D0 pair inside 900/1800-second arm, 300-second
+support and 3000-second complete limits. MGTAP now owns a minimal native driver and one first
+COND/DENSE pair inside 450/450-second arm, 300-second support and 1200-second complete limits. Both
+must publish exact source before remote admission/launch and obtain shared Monitor adoption; neither
+has an accepted experiment handle at this record boundary. No numerical smoke, retry, third/second
+pair or automatic successor was added.
+
+UCOPE's existing post8801 Convergence request was separately resumed through the configured
+singleton Transport and has one confirmed Send on the original binding; Pro generation is active.
+These are three advancing direction chains. The Portfolio response left three execution slots
+unallocated, so Root returned a new refill question to the designated Portfolio DM for proper-node
+selection rather than choosing another direction locally. Existing pauses, no-successor boundaries,
+lifecycle, priority, recasts and contrary evidence remain unchanged.
+
+## Remaining-capacity refill pending after completed post-A work
+
+The post-A allocations have reached independent clean boundaries. FSD B02 performed no admission,
+fit, model construction or evaluation because its pre-execution support projection exceeded the
+300-second support cap; its question therefore remains unobserved, with no retry or successor.
+UCOPE's complete direction response selected the narrow PARK of further 8801-L empirical spending
+with no numerical successor. MGTAP's accepted 8212 COND/DENSE pair is valid and complete:
+`COND-DENSE=+0.005761321371348559`, conditional SE `0.00888326841451271`, with 19 positive and
+13 negative worlds. The result is `INSIDE_MEI`; DENSE remains the generic choice, and the named
+allocation ends without a retry or automatic successor. Native arm walls 192.93299/171.85701 seconds
+pass the 450-second arm and 900-second native caps; the full support/complete cost remains uncertified
+because unitemized support is unknown. The result and intake are integrated through `811f35338`.
+
+The canonical singleton Transport archived request
+`2026-09-11-remaining-capacity-refill-portfolio-01` after exactly one accepted Send and natural
+completion. The designated Portfolio DM verified the complete 247-line response, fixed TASK,
+Transport/GitHub bytes and references, found no scientific/specification conflict, and accepted
+PRO_FINAL option A. Decision and execution mapping are integrated through `bb40797dc`.
+
+Root actually dispatched three independent chains to their existing DMs and shared direction
+checkouts: RCLE one fresh `.99/.002` final1000 B under 600/10/140/750-second component/support/
+complete limits; ACVC one new unscreened unchanged fit and C/F/dwell64 panels under270/330/600;
+and FOLR one learned-retention candidate plus original Convergence question/full intake with zero
+implementation and zero numerical allowance. MGTAP cleanup is complete and integrated through
+`084775b84`; no MGTAP successor was selected. Three chains now advance and two target slots remain
+vacant. Owner item `20260911-root-002` records option A as actually auto-applied.
+
+Subsequent independent execution changed the live count. RCLE B06/master26 source `baf63642a` and
+launch/adoption receipt `944358c34` are integrated through `d8f2d3913`; handle
+`rcle-b06-nearest99-s26-20260911` is running under the configured Monitor after destination
+admission passed. ACVC8951 ended at a precise preparation no-ready: CRLF in SSH stdin made the one
+bounded remote preparation fail before checkout creation, admission, supervisor, model or scientific
+exposure. Its preserved zero-exposure closeout is integrated through `ece2de702`; no retry or
+successor was selected.
+
+VNFC's delayed original-request delivery was reconciled without a new Send. Verified response
+`10bb08476`, 31,994 bytes, and Issue1 comment5637667527 match; the original DM read option(a), one
+native-service-credit B02 pair under600 native/300 support/900 complete seconds, and is performing
+conformance/card/minimal implementation on the existing chain. The response is integrated through
+`df042c4ac`. FOLR's fixed learned-retention question is integrated through `36b7b546c` and has one
+confirmed Send with `WAITING_GENERATION`; Transport remains its sole observer. These are the three
+current advancing directions.
+
+The next current-vacancies Portfolio handoff is integrated through `99c9fd935`, recommends zero
+eligible additions under the named exclusions, and awaits serial Transport dispatch after FOLR
+clears. It records two vacancies after ACVC closeout; it does not itself select science or fill them.
+
+## VNFC B02 accepted execution
+
+VNFC B02 source `76d4afca6`, exact command `8dc043f2f` and accepted-handle receipt `4f443d381`
+are integrated through `f6fb5606b`. The sole selected handle
+`vnfc-b02-credit-20260911-01` runs from the declared exact-source checkout on `hmasd-wsl-node`.
+The adjacent destination admission passed with 15,636,619,264 physical and effective bytes
+available against the 4 GiB floor. The configured shared Monitor confirmed adoption while the
+supervisor was running; its initial observation command wall is 1.0 second. A remote HTTPS fetch
+timed out during preparation, after which the exact 89,959-byte Git bundle was staged and imported;
+this changed neither source nor scientific-attempt identity and caused no retry. The DM retains
+terminal collection, technical acceptance, scientific intake and scoped cleanup, with routine
+polling stopped.
+
+The rolling count remains three distinct directions: RCLE's adopted B06 run, VNFC's adopted B02
+run and FOLR's full-response scientific intake. FOLR archived after natural completion with exactly
+one Send; its verified 34,159-byte response is delivered at `a2a47f1d7` with SHA-256
+`ed976d34511bad25061ccfe368390f88d085862d1ce434cf51bf383648cbd48b` and is routed to its original
+DM. Once that serial binding cleared, Root dispatched the fixed current-vacancies Portfolio handoff
+to the canonical Transport. The handoff passed direction verification and has one confirmed provider
+Send in `WAITING_GENERATION`; no retry or local replacement investment has been selected.
+
+The shared Monitor then returned one 1.3-second joint observation query covering both adopted
+handles; that wall is recorded once and is not divided between directions. RCLE B06 finished with
+exit 0 at 2026-09-12T02:12:38+08:00 after 336 seconds and reports a complete reference. VNFC B02
+failed with exit 139 at 2026-09-12T02:28:09+08:00 after 78 seconds when the monitored command dumped
+core. Root routed each terminal fact to its original DM for separate artifact collection, technical
+acceptance, scientific intake and cleanup. No retry or successor follows from either terminal fact.
+FOLR's complete response subsequently passed conformance. PRO_FINAL opens only the specified narrow
+learned-retention question as an in-family extension, retains RETAIN as sole comparator, preserves the
+fixed-half pause, and supplies zero present implementation or numerical allowance. The response and
+intake are integrated through `66eb1f550`; no successor was selected. The counted set is therefore
+two directions, RCLE collection/intake and VNFC failure collection/intake. The current-vacancies
+Portfolio generation remains cross-direction work and is not counted as another direction.
+
+## Current-vacancies Portfolio decision and completed returns
+
+RCLE B06 is accepted as one valid single-fit result: `Delta_ref=-0.00575764973958`, initialization-
+relative `G_U=-0.000107828776042`, and all eight nearest-reference comparisons lose. Four
+initialization cells improve, so the result does not establish stable inferiority or direction-family
+failure. Its result intake and verified remote cleanup are integrated through `758dfdbdc`; no
+successor is selected. Known native wall is335.86 seconds and final recorded known support is
+86.7963743 seconds, while missing timing components keep full cap conformance unestablished.
+
+VNFC B02 preserves an incomplete primary: exit139/signal11 after77.84 seconds, 15 logged arm rounds
+and480 optimizer steps, with no final summary, midpoint/final checkpoint or performance polarity.
+Its preserved intake and remote cleanup are integrated through `0ab9a5d86`; no retry or successor is
+selected. Automatic approval review rejected the exact local duplicate/source cleanup before
+execution, so those copies and the earlier scratch remain preserved without a bypass.
+
+Transport archived the complete current-vacancies response at `a9adb7f00` after one Send and natural
+completion. The designated Portfolio DM verified all29 fixed references plus TASK and response bytes,
+found no conflict, and accepted `PRO_FINAL / OWNER_DELEGATED` option A: zero additional assignments or
+allowance. The decision and execution mapping are integrated through `c14e08a59`. FOLR's narrow OPEN
+with zero present allowance, RCLE's valid bounded adverse aggregate, VNFC's incomplete primary,
+ACVC's zero-exposure closeout and every other explicit exclusion remain unchanged.
+
+All four chains in the fixed snapshot have completed their named allocations and executable
+closeouts. The current advancing-direction count is zero. No lifecycle, priority, recast or formal-UAV
+state changes; no cap transfers, retries, new source/check tasks, repeated empty-set consultation or
+automatic successors are selected. A future refill requires a concrete attributable eligibility
+change and a specific ready task under the then-applicable authority.
+
+## Owner-directed non-scientific blocker repair and new Portfolio advice
+
+The owner explicitly directed that non-scientific blockers must not block research and requested a
+new Portfolio recommendation over the existing open directions. This current instruction expands
+beyond the completed fixed-vacancy question. Root resumed the designated Portfolio DM to prepare an
+evidence-grounded program that separates scientific selection/budget from technical readiness and
+assigns each repair an owner, bounded action, verification and exit condition.
+
+Root also actually resumed three original direction DMs for independent technical unblocking. ACVC
+owns a minimal CRLF/SSH-input preparation repair and LF/readback readiness proof. VNFC owns bounded
+exit139 diagnosis and, if attributable without changing semantics, a minimal reviewed fix. FSD owns
+deterministic remote staging/readback and a prospective bounded support path. Each retains its ended
+scientific attempt, no-retry/no-successor record, original comparator/estimand/MEI and caps. The
+assignments permit no result-bearing launch, model/environment construction, new RNG master, training
+or evaluation. A repair makes a direction technically ready for later selection; it does not itself
+allocate a scientific invocation.
+
+These three direction chains now advance once each. Portfolio authoring is not another direction
+slot. Unknown timing terms and VNFC's policy-blocked retained duplicate/scratch files remain explicit
+limitations but are not counted as scientific blockers. CBSC, FRRIE and other missing-operation rows
+will be classified in the Portfolio packet as mechanical repair versus scientific-method choice;
+only the latter remains with its proper scientific decision tier.
+
+## Open-directions program execution and post-program vacancies
+
+The complete open-directions Portfolio response selected five separate fresh B units and was
+accepted as `PRO_FINAL / OWNER_DELEGATED`; its decision, full conformance intake and execution
+mapping are integrated through `5c9794087`. Root dispatched all five named chains. FSD770903 ended
+at its single bounded source-delivery transaction before checkout, admission or scientific
+submission: remote Git returned fetch128 with a GnuTLS decode error and early EOF. The zero-exposure
+limitation and cleanup evidence are integrated through `9c70b4286`; no retry or successor was
+selected. VNFC's exact-build static mapping established a required 40-byte CPython argument vector
+against the saved 32-byte allocator header, but did not establish the allocation-time origin or an
+independent repaired path. Production remained unchanged, the conditional900-second allocation was
+unused, and the NOT READY intake is integrated through `d1199ce0d`.
+
+Three selected numerical units were accepted by the configured shared Monitor. MGTAP8213 completed
+valid `COND_ADVERSE`: `COND-DENSE=-0.02246957345594415`, conditional SE
+`0.004312411137154014`, with 5 positive and 27 adverse worlds. Native wall358.11 seconds passes the
+native caps; full support/complete certification remains qualified by unitemized timing. Its intake
+and exact retained evidence are integrated through `5321b69fd`; no successor was selected. ACVC8961
+completed valid `UP` against both controls: `F-C=+0.1414322041` (SE `0.0079158399`) and
+`F-dwell=+0.0944113176` (SE `0.0082975516`), with `dwell-C=+0.0470208865`. Conservative native
+wall178 seconds passes its270-second cap. Its intake and readable evidence are integrated through
+`7c2873dd3`; the unique checkpoint and full archive remain at the retained local runtime root, and
+no successor or Portfolio disposition was inferred. Both owning DMs retain scoped cleanup and cost
+closeout.
+
+FOLR's RETAIN and learned-event arms, source `8d518ff30`, remain running and Monitor-adopted under
+handles `folr-learned-retention-b01-retain-20260911` and
+`folr-learned-retention-b01-learned-event-20260911`; source, checks, exact commands and adoption
+evidence are integrated through `02d61f605`. Routine observation remains with the shared Monitor.
+
+The accepted Portfolio response contains no automatic replacement rule. The designated Portfolio
+DM is preparing a new fixed question over the actual post-program vacancy set, using the published
+FSD/VNFC limitations and MGTAP/ACVC outcomes. It will ask for concrete independent replacement units
+or an explicit vacant-capacity choice while preserving live FOLR and queued conditional VNFC. No
+local cross-direction selection, promotion, lifecycle change, cap transfer or new result-bearing
+launch is implied by that pending request.
+
+## Five-vacancy Portfolio request dispatched
+
+FOLR subsequently completed technical and scientific intake: LEARNED_EVENT mean `1.60328125`
+versus RETAIN `-0.160078125`, a `+1.763359375` difference and
+`LEARNED_EVENT_ABOVE_MEI` under the prospective inclusive plus/minus1 rule. Both5000-episode arms,
+4969 updates per arm and128 final worlds per arm passed; whole native wall totaled1703.12 seconds.
+The result supports one-pair gain only, and no successor was selected. Intake, E0, brief and scoped
+closeout are integrated through `bc78a6bf8`. All five program allocations are therefore terminal,
+with no automatically authorized successor.
+
+The designated Portfolio DM published request
+`2026-09-11-post-program-vacancies-portfolio-01` and its READY handoff through `3dbc336b0`. The
+fixed question exposes all five vacancies and separately offers new FSD, MGTAP and FOLR B pairs,
+RCLE and ACVC zero-numerical direction questions, and explicit vacant-capacity alternatives; the
+recommended `A+P` package projects8100 seconds of new nontransferable caps. Root delivered the exact
+bound prompt to the configured Transport task without model or thinking overrides. The Transport
+task remained attached to an older interrupted turn, so three same-task handoff recoveries were
+attempted; Git transfer steps completed each time, but destination-thread switching failed. The
+configured task and requested Pro conversation showed fresh app activity, while fresh GitHub reads
+still showed no new response commit or Issue17 comment. The request is therefore in uncertain
+acceptance/delivery state: no resend, local scientific substitute or replacement launch is allowed
+until Transport or immutable delivery state resolves it. Worktree `C:/Users/fires/.codex/worktrees/4947/HMASD`
+was created/reused by the handoff recovery and is retained as a live recovery dependency.

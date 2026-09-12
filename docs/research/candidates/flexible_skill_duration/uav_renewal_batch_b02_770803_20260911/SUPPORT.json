@@ -1,0 +1,170 @@
+{
+  "object_id": "FSD_UAV_RENEWAL_BATCH_B02",
+  "status": "closed_zero_exposure_execution_limit",
+  "accounting_unit": "Each actually invoked support command/tool execution wall charged once; summed independent commands, not a study calendar span.",
+  "charges": [
+    {
+      "label": "new_assignment_checkout_live_control_owner_read",
+      "seconds": 0.6868672
+    },
+    {
+      "label": "reused_source_current_intake_and_instruction_diff_read",
+      "seconds": 0.3136765
+    },
+    {
+      "label": "fresh_binding_scope_and_skill_refresh",
+      "seconds": 0.4594083
+    },
+    {
+      "label": "integrate_required_accepted_inputs_and_push",
+      "seconds": 5.2429845
+    },
+    {
+      "label": "fresh_binding_focused_read_0",
+      "seconds": 0.1278892
+    },
+    {
+      "label": "fresh_binding_focused_read_1",
+      "seconds": 1.9130103
+    },
+    {
+      "label": "prospective_identity_and_changed_contract_read_0",
+      "seconds": 1.1482385
+    },
+    {
+      "label": "prospective_identity_and_changed_contract_read_1",
+      "seconds": 0.8913437
+    },
+    {
+      "label": "corrected_prospective_search_and_focused_contract_read",
+      "seconds": 0.3682921
+    },
+    {
+      "label": "write_fresh_entry_card_exact_commands_and_owner_packet",
+      "seconds": 0.021
+    },
+    {
+      "label": "one_in_memory_stub_AST_and_count_publication_live_monitor_read",
+      "seconds": 0.4525386
+    },
+    {
+      "label": "independent_changed_binding_review_four_read_only_commands",
+      "seconds": 1.3121286
+    },
+    {
+      "label": "record_changed_binding_acceptance_support_and_identity_facts",
+      "seconds": 0.018
+    },
+    {
+      "label": "freeze_new_card_owner_item_audit_and_cost_snapshot",
+      "seconds": 0.4117251
+    },
+    {
+      "label": "correct_support_schema_and_freeze_new_owner_card_audit",
+      "seconds": 0.586004
+    },
+    {
+      "label": "publish_fresh_bound_source_card_and_exact_commands",
+      "seconds": 5.220254
+    },
+    {
+      "label": "bounded_required_staging_effect_reconciliation",
+      "seconds": 0.8977319
+    },
+    {
+      "label": "closeout_owner_instructions_trace_help_and_status",
+      "seconds": 0.6889401
+    },
+    {
+      "label": "final_scoped_disk_and_registration_absence",
+      "seconds": 0.6424158
+    },
+    {
+      "label": "write_zero_exposure_execution_limitation_intake",
+      "seconds": 0.021
+    },
+    {
+      "label": "calculate_nonduplicated_cost_record_and_trace_execution_limit",
+      "seconds": 0.6280614
+    },
+    {
+      "label": "clarify_static_acceptance_limit_and_complete_command_cost",
+      "seconds": 0.013
+    }
+  ],
+  "support_cap_seconds": 300,
+  "complete_cap_seconds": 3000,
+  "unknown_attribution": [
+    "Remote staging execution/service time and reason for silence were not returned.",
+    "Lifecycle spans approximate complete local command wall; they retain pending remote waiting, not a scientific run.",
+    "Unreported tool/native-message overhead and final publication are not zero."
+  ],
+  "exclusions": [
+    "Agent authoring and reasoning",
+    "Pro time",
+    "Idle calendar waiting"
+  ],
+  "validation": "No numerical fixture, model smoke, native validation or profiling.",
+  "interpretation": "Return the projected support overrun before any scientific launch. The estimate exceeds300s before remaining execution work. No claim of fully measured actual cost or scientific polarity; no retry/transfer/replacement.",
+  "partial_session_tool_waits_not_added_again": [
+    {
+      "label": "stage_exact_published_source_and_check_shell_bytes",
+      "seconds": 10.0083488
+    },
+    {
+      "label": "complete_existing_source_staging_session",
+      "seconds": 5.0150399
+    },
+    {
+      "label": "complete_existing_source_staging_session_2",
+      "seconds": 5.0041788
+    },
+    {
+      "label": "complete_existing_source_staging_session_3",
+      "seconds": 5.0067313
+    },
+    {
+      "label": "resolve_slow_source_staging_state_read_only",
+      "seconds": 10.0127649
+    },
+    {
+      "label": "complete_existing_source_staging_session_4",
+      "seconds": 5.0133536
+    },
+    {
+      "label": "complete_slow_staging_state_session",
+      "seconds": 5.01328
+    },
+    {
+      "label": "interrupt_same_pending_preparation_sessions",
+      "seconds": 0.0274248
+    }
+  ],
+  "reconstructed_complete_session_spans": [
+    {
+      "label": "staging_complete_local_command_lifecycle",
+      "seconds": 203.312009,
+      "start_utc": "2026-09-11T16:32:39.569925Z",
+      "stop_utc": "2026-09-11T16:36:02.881934Z",
+      "method": "approximate observed open-command span; remote execution/service time not returned"
+    },
+    {
+      "label": "concurrent_read_only_reconciliation_complete_local_command_lifecycle",
+      "seconds": 81.155013,
+      "start_utc": "2026-09-11T16:34:41.726921Z",
+      "stop_utc": "2026-09-11T16:36:02.881934Z",
+      "method": "approximate observed open-command span; remote execution/service time not returned"
+    }
+  ],
+  "observed_tool_wait_subtotal_seconds": 67.1656319,
+  "other_support_command_seconds": 22.064509800000003,
+  "reconstructed_pending_command_seconds": 284.467022,
+  "estimated_complete_support_seconds": 306.5315318,
+  "actual_scientific_submissions": 0,
+  "actual_training_fits": 0,
+  "actual_model_constructions": 0,
+  "actual_native_steps": 0,
+  "complete_support_cost_certified": false,
+  "known_projected_support_overrun": true,
+  "snapshot_boundary": "Includes recorded closeout edits through this update; this persistence and final commit/push command are additional support, reported in final handoff rather than recursively backfilled."
+}

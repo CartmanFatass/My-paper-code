@@ -3,7 +3,7 @@ Binding MARL structure: (d) multi-agent partial observability: each UAV uses its
 
 # ACVC fresh DENSE reuse B01 — science card
 
-Date: 2026-09-10. **B/EXPLORE; the sole allocated scientific result is complete.**
+Date: 2026-09-10. **B/EXPLORE; original8921 and separately allocated8931 results complete.**
 Section8 records the later Portfolio allocation. The original design-stage statements in
 §§1,6–7 below remain historical; §8 supersedes their no-execution boundary prospectively.
 The [design intake](ACVC_FRESH_DENSE_REUSE_B01_DESIGN_INTAKE_20260910.md) records the decision;
@@ -311,3 +311,302 @@ unestablished if Monitor observation is included; the intake records this budget
 deviation without changing the scientific rule or exempting the Monitor surface.
 All raw evidence and the checkpoint are preserved; scoped remote closeout is complete.
 No retry, successor, T/G restart, C promotion, disposition or additional budget follows.
+
+## 10. Prospectively bound independent follow-up 8931
+
+The [rolling Portfolio allocation](../../portfolio/decisions/2026-09-10-rolling-successor-allocation.md)
+at main `674f246a2` selects exactly one new unscreened fit under this accepted recipe.
+Root assigned the complete batch on 2026-09-10. This section supersedes the earlier
+no-successor boundary only for that new allocation; §§1–9 and the 8921 evidence remain
+historical. There is no retry or successor after this new allowance.
+
+Select training master **8931** and evaluation namespace **8932** before constructing
+any new learner, RNG master or native episode. Replace m/q in §§3–4 with these values;
+all other scientific quantities, constructor/draw ordering and private streams stay
+unchanged. The source remains `scripts/run_acvc_fresh_dense_reuse_b01.py` and its shell
+wrapper. The [8931 facts](ACVC_FRESH_DENSE_REUSE_B01_8931_PROSPECTIVE_FACTS_20260910.json)
+expand the seeds and complete count/cost law. Prior namespaces include 8921/8922;
+8931/8932 had no occurrence in the owned ACVC card/facts/intake records when selected.
+
+The unchanged endpoint is 256 sequential two-episode rollouts, four full-rollout PPO
+epochs each: 512 episodes, 1,024 Adam/backward calls, final checkpoint and C→F→dwell
+64-episode panels. All 69,079 actor/critic parameters can move under nonzero-lr,
+loss-dependent Adam. Always apply proposals during training. No initial/H/T/G panel,
+retained-base substitution, screening, replacement, additional evaluation or early
+best-checkpoint selection is allowed. A weak intact fit receives every final panel.
+
+Apply §5 separately and verbatim: **UP** if mean difference >0.01 J; **DOWN** if
+<−0.01 J; otherwise **WITHIN**, retaining sign. Thus both exact MEI boundaries are
+included in WITHIN. F−C and F−dwell remain separate primaries; dwell−C is secondary.
+New pre-output predictions: P(F−C is UP)=.75; P(F−dwell is UP)=.65. Owner prediction:
+**not taken (unattended)**. The prior fit's predictions remain already scored.
+
+This question buys one further independent training realization with the same conditional
+paired panel reading. Scientific-reading mode used FOUNDATIONS §6 and 04_EMPIRICAL:
+the complete fit is the independent training unit; common initial worlds justify these
+conditional pairs, while divergent own histories and private proposal streams remain
+part of the packages. Even a second favorable fresh fit does not establish training-
+population uncertainty or isolate a retrace component. Existing 8921 support (+.12293 J
+F−C, +.08772 J F−dwell) coexists with five adverse F−dwell worlds and dwell's +.03522 J
+gain. No tuned native headroom record exists. The §5 interpretation narrative and
+stopped learned T/G package continue unchanged; recasts remain two.
+
+The new caps are **270 s whole supervised native task**, **90 s all additional runtime
+support including Monitor**, **360 s total**, with no savings transfer between task and
+support. Support includes required checks, observation, collection/readback, numerical
+analysis, preservation and closeout. Existing 8921 costs are not reclassified: its old
+inclusive support is >52.3964878 s with exact aggregate/full 360 s conformance unknown.
+The retained 172 s conservative native task and the older 222.200 s projection support
+feasibility, not a guarantee for new trajectories or contention. Proposed support is
+30 s DM plus 60 s Monitor within the inclusive 90 s; actual components must be retained.
+No profiler or accounting experiment is added. Cap failure preserves partial evidence
+and required terminal facts, without replacement, budget transfer or negative polarity.
+
+Engineering-scope §4: **none needed**. The existing CPU FP32 Torch1/1 route, joined
+destination admission, supervisor, checkpoint and summary paths suffice. L0, exact
+source, focused check, independent review, actual handle and Monitor adoption are in
+the [8931 execution record](ACVC_FRESH_DENSE_REUSE_B01_8931_EXECUTION_20260910.md).
+Existing source/runner/test budgets are inherited, not reset.
+
+Object-tier options: (a) bind the one allocated fit to fresh 8931/8932 with the unchanged
+law; (b) substitute a retained or screened base; (c) alter panels or seek another law.
+Recommend/select (a), the only conforming realization of the Portfolio allocation.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+
+## 11. Completed independent fit8931
+
+The §10 binding completed once at dfee6e8a3cecfde866da07fef60ffcdd319956b5.
+All512 training episodes,1024 updates and192 final evaluations are intact. F−C
++.0915279844J and F−dwell +.0638998669J are UP; dwell−C +.0276281175J is UP.
+Four F−C and eleven F−dwell adverse worlds remain. The new predictions are scored
+in the [8931 intake](ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md); prospective
+probabilities and the older result above remain unchanged.
+
+The169s conservative native charge passes270s. The inclusive90s support/360s total
+bill is not fully established because Monitor measured only part of its work; the
+known components and missing overhead are explicit in the new collection/intake.
+This does not rewrite the old8921 accounting deviation or the new valid primaries.
+The new numerical allocation is finished; no retry or successor is authorized.
+
+## 12. Prospectively bound independent follow-up 8941
+
+The [four-slot Portfolio mapping, ACVC](../../portfolio/pro_packets/20260910_four_slot_rolling_refill/EXECUTION_MAPPING.md#acvc-one-further-unscreened-fresh-dense-fit-360-seconds)
+allocates exactly one further unscreened fresh fit under §§2–5,10–11, with the
+complete conforming response at1ea43d8fbc846807d71d4d894136f357f65551b6. Root assigned
+this batch to the replacement DM on2026-09-10. This allocation supersedes only
+the earlier no-successor boundary for this new fit; no fourth fresh fit follows.
+
+Select training master **8941** and evaluation namespace **8942** before any new
+learner/RNG/native output. Replace m/q in §§3–4; all other quantities, draw order,
+native semantics and fixed final endpoint remain unchanged. Existing8921/8922 and
+8931/8932 are historical. The [8941 prospective facts](ACVC_FRESH_DENSE_REUSE_B01_8941_PROSPECTIVE_FACTS_20260910.json)
+expand the seed ranges, count law, movable parameters and retained cost projections.
+No retained checkpoint, screened initialization or best-of-many endpoint is used.
+
+Exactly512 training episodes,256 sequential two-episode rollouts and1024 Adam/
+backward calls fit all69079 parameters under the existing nonzero-lr learner.
+Always apply proposals while fitting, then preserve the final checkpoint and
+evaluate C→F→dwell64 episodes each, including an intact weak fit. There are704
+scored episodes/180224 team steps, plus four unscored constructor resets. Intrinsic
+dominant factors remain512×256×5 collection,256×4 updates replaying2×256×5 agent
+steps each, and3×64×256×5 evaluation forwards. No nested search or extra panel.
+
+Apply the unchanged rule separately to F−C, F−dwell and secondary dwell−C:
+**UP** if mean difference >0.01 J; **DOWN** if <−0.01 J; otherwise **WITHIN**,
+retaining the sign. Both exact boundaries remain WITHIN. MEI.01J is the retained
+native practical margin. New pre-output predictions: **P(F−C is UP)=.75;
+P(F−dwell is UP)=.65**. Owner prediction: **not taken (unattended)**. These forecasts
+remain distinct from the already scored8921/8931 forecasts.
+
+Scientific-reading mode used FOUNDATIONS§6 and04_EMPIRICAL: the entire fit is the
+independent training unit; paired initial worlds support only checkpoint-conditional
+SEs because private streams, histories, commands and reactive teammates diverge.
+A third favorable fit would extend the observed package support, not establish
+stable superiority, pure retrace causality or transfer. Above the MEI against both
+comparators supports continued consideration of this package; a competitive dwell
+or opposite sign weakens that recommendation; within the MEI does not prove
+equivalence. All outcomes survive. The two preceding fresh observations remain
+separate from selected8201/8202 assets and the ended learned T/G losses. Their
+F−dwell gains coexist with5 and11 adverse worlds and positive dwell−C means.
+No new comparator/mechanism or unresolved source claim needs another corpus search.
+Tuned same-information native headroom remains absent; F is attained, not an upper.
+
+Caps remain **270s complete supervised native chain +90s all additional runtime
+support, including Monitor =360s complete**, with no transfer, retry, replacement,
+resumed slice, panel reduction, T/G reopening or automatic successor. Earlier
+accounting gaps remain historical. Native CPU FP32/Torch1/1, remote-first routing,
+committed exact source, joined destination admission and detached execution persist.
+Engineering-scope §4: **none needed**. Existing source/runner/test budgets are not
+renewed. L0, acceptance, exact launch and accounting belong in the
+[8941 execution record](ACVC_FRESH_DENSE_REUSE_B01_8941_EXECUTION_20260910.md).
+
+Object-tier options: (a) bind the one allocated unchanged fit to fresh8941/8942;
+(b) substitute retained/screened data; (c) alter fitting or panels. Recommend/select
+(a), the conforming realization. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).** Recasts2 and lowest contention remain unchanged.
+
+## 13. 8941 preparation stop with no scientific output
+
+The §12 source/card/prediction binding was published atcafef130c9d4d89febda8fd788ad9458b6985aca
+and independently reviewed without a material finding. The one remote source-
+preparation command then exceeded the inclusive90s support cap: its matching
+local transport was stopped after102.1040615s without output. Root confirmed
+technical no-ready and one bounded read-only reconciliation; that12.0324544s
+call reached a remote shell but returned no Git/path fact before timeout.
+Remote preparation effects remain unknown and are preserved without another query.
+
+No synthetic target, admission, scientific submission, model/RNG construction,
+training/update/evaluation or Monitor assignment occurred. The forecast stays
+unscored, and no8941 primary or polarity exists. The
+[technical intake](ACVC_FRESH_DENSE_REUSE_B01_8941_INTAKE_20260910.md) records the
+support breach and exact no-ready return. This allocation ends; no retry,
+replacement, budget transfer or new fit is authorized. All previous scientific
+results and their limits remain unchanged.
+
+The later, separately assigned [technical recovery](ACVC_FRESH_DENSE_REUSE_B01_8941_INTAKE_20260910.md#6-separately-assigned-remote-effect-recovery)
+verified the exact remote checkout absent/unregistered and stopped the directly
+identified abandoned reconciliation tree. The remaining recorded helper tree was
+also absent at the final read; its initially uncertain origin stays explicit.
+No named cleanup dependency, scientific output or new execution allowance remains.
+
+## 14. New allocation: unscreened fit8951 with explicit preparation support
+
+The [2026-09-11 Portfolio mapping, ACVC](../../portfolio/pro_packets/20260911_remaining_capacity_refill/EXECUTION_MAPPING.md#acvc--one-new-unchanged-fresh-fit-explicit-preparation-investment),
+complete response0dbbcbf807509ccc34a3a1de353114be88896897 and Root assignment
+allocate one new unchanged fit. The failed8941 allocation stays ended and unscored.
+Select training master **8951** and evaluation namespace **8952** before any new
+scientific output; neither appeared as a binding in the scoped ACVC cards/intakes/
+facts searched at selection. This is an unscreened choice, not a global registry claim.
+
+Use §§2–5 unchanged with m=8951/q=8952: one DENSE fit,512 training episodes,
+256 sequential two-episode rollouts,1024 Adam/backward calls, all69079 actor/critic
+parameters eligible for nonzero-lr loss-dependent updates, and only the final
+checkpoint. Evaluate C→F→dwell64 episodes each even for an intact weak fit.
+Intrinsic work is512×256×5 collection actor rows,256×4 updates replaying2×256×5
+agent rows, and3×64×256×5 evaluation rows:704 scored episodes/180224 team steps.
+There are nine top-level model constructions,3 post-fit loads and4 unscored
+constructor resets. No numerical fixture, smoke, pilot, profiling or added panel.
+The [prospective facts](ACVC_FRESH_DENSE_REUSE_B01_8951_PROSPECTIVE_FACTS_20260911.json)
+calculate the full seed/count/cost law without constructing a model or RNG.
+
+Read F−C and F−dwell separately, with dwell−C secondary: **UP** if mean>+.01J,
+**DOWN** if mean<−.01J, otherwise **WITHIN**, retaining sign and both boundaries.
+MEI.01J retains the native practical-margin rationale. Pre-output predictions are
+**P(F−C is UP)=.75; P(F−dwell is UP)=.65**; owner prediction **not taken (unattended)**.
+The independent learning unit is the whole fit. SD/sqrt64 describes conditional
+paired initial worlds, not training-population uncertainty. Scientific-reading
+mode reuses FOUNDATIONS§6 and04_EMPIRICAL: divergent own histories/private streams
+are part of the compared packages; no pure-retrace or matched-dose claim follows.
+
+Above the MEI against both comparators extends the observed package support;
+inside it is not equivalence; an opposite sign or competitive dwell weakens further
+investment. Every intact outcome and adverse world is retained. Existing8921/8931
+F−dwell gains coexist with5/11 adverse worlds and positive dwell−C means. No tuned
+same-information native headroom record exists; F is attained performance, not an
+upper reference. No unresolved mechanism or comparator change needs new retrieval.
+Recasts2, lowest contention and the ended learned T/G package remain unchanged.
+
+This allocation fixes **270s complete native chain +330s all invoked support =600s
+complete**, with no transfer. Support includes source preparation, actual review/check
+commands, Monitor, collection/reduction/preservation/publication and Root integration,
+charged once. Every preparation command receives a whole-lifetime bound; connection
+timeout alone is insufficient. Existing169/172s native observations and the retained
+222.1996846s projection are analogies, not guaranteed new costs. Unknown components
+remain unknown. No repeated preparation, retry, replacement, resumed slice or successor.
+Cap/technical failure preserves evidence without scientific polarity.
+
+Engineering-scope§4: **none needed**. CPU FP32/Torch1/1, exact committed source,
+joined destination memory admission and detached remote execution remain. Existing
+engineering/test budgets are not reset. The [execution record](ACVC_FRESH_DENSE_REUSE_B01_8951_EXECUTION_20260911.md)
+contains L0, changed-risk review, one allowed static/stub publication check, exact
+command, actual Monitor adoption, full collection and cleanup ownership.
+
+Object-tier options: (a) bind the allocated unchanged fit to fresh8951/8952;
+(b) use a retained/screened identity; (c) alter learning or panels. Recommend/select
+(a), the conforming realization. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).**
+
+## 15. 8951 technical no-ready boundary
+
+Published sourcee61facdff70091cd9cdd33bc231a149ed9106d35 passed actual changed-risk
+review and the single allowed stub publication check. Full source bundling and
+transfer succeeded once; the one bounded remote preparation exited128 because
+Windows text-mode shell input carried carriage returns in commands and paths.
+No memory admission, scientific submission, model/RNG construction, training or
+evaluation occurred. The exact checkout and registration were later directly
+verified absent during scoped closeout; the staged duplicate was preserved then
+removed. The [8951 intake](ACVC_FRESH_DENSE_REUSE_B01_8951_INTAKE_20260911.md)
+records the rule, receipts and accounting limits. Forecasts stay unscored.
+
+The allocation ends without repeating preparation or launching a substitute.
+This supplies no new performance evidence and changes no prior scientific result,
+mechanism conclusion, lifecycle or priority. Unused native time grants no retry.
+
+## 16. New Portfolio allocation: fresh8961 fit and8962 final panels
+
+The new [Portfolio response §§1,5,7,9](../../portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md),
+immutable source6c32ade3216c374ecf2f5179b15d559729cd45c9, selects one new unchanged
+ACVC unit under PRO_FINAL / OWNER_DELEGATED. Root assigned it on2026-09-11.
+This does not retry8951 or reuse its preparation, learner state, namespace or cap.
+Its separately accepted LF/binary-input repair supplies the preparation method.
+
+Select unscreened training master **8961** and evaluation namespace **8962** before
+any scientific output; the scoped ACVC card/facts/intake search found no previous
+binding for either. This is a direction-local identity check, not a global registry.
+Use §§2–5 with m=8961/q=8962 and otherwise unchanged law:512×256 training,
+256 sequential two-episode rollouts,1024 full-rollout Adam/backward calls,
+final checkpoint, then C→F→dwell64 episodes each, including an intact weak fit.
+The [prospective facts](ACVC_FRESH_DENSE_REUSE_B01_8961_PROSPECTIVE_FACTS_20260911.json)
+calculate every seed and count without model/RNG/native execution.
+
+The Portfolio clarification is binding: **C always sends the sampled proposal**.
+**Dwell sends zero only on its own evolving history's accepted predicate, otherwise
+its sampled proposal**. It borrows neither F's event times nor dose. F retains
+`binding.py`'s prior unambiguous lowest-SINR anchor, loss/away-motion cue and clipped
+reversal of its own preceding actual displacement/30. Every arm advances private
+recurrence each tick and receives its own actual command. Current code already
+implements these facts; no comparator, binding or native learner change is needed.
+C cue counters remain unmeasured incidence. The erroneous shorthand in the old
+Portfolio brief supplies no alternative controller law.
+
+Read F−C and F−dwell separately, dwell−C secondary: **UP** if mean>+.01J,
+**DOWN** if mean<−.01J, otherwise **WITHIN**, retaining sign and both boundaries.
+MEI.01J=2.56S retains the native practical-margin rationale. New pre-output
+predictions: **P(F−C is UP)=.75; P(F−dwell is UP)=.65**. Owner prediction:
+**not taken (unattended)**. Historical forecasts remain separately scored/unscored.
+
+Scientific-reading mode reuses FOUNDATIONS§6 and04_EMPIRICAL: the complete fit is
+the independent learning unit. Paired initial worlds support conditional SD/SE,
+not training-population uncertainty; private proposals, histories and intervention
+opportunities diverge. A third above-MEI fresh-fit observation would extend bounded
+package support. Competitive dwell, within-MEI differences or reversal weaken
+further spending; inside does not prove equivalence. Preserve every adverse world
+and all final rules. No pure-retrace, matched-dose, stable-superiority, headroom,
+transfer, C or formal UAV-entry claim follows. No unresolved new mechanism or
+comparator question requires another corpus search. Tuned native headroom remains
+absent; prior positive means and5/11 F−dwell adverse worlds remain separate.
+
+This fresh allocation caps **the whole native chain at270s**, **all additional
+invoked support at330s**, and **complete work at600s**. The three panels share the
+270s native cap. No transfer, pilot, numerical fixture, extra panel, screening,
+retry/replacement, old namespace/state or automatic successor is authorized.
+Intrinsic work remains704 scored episodes/180224 team steps,655360 collection
+actor rows,2621440 replay actor rows,524288 critic-update rows,245760 evaluation
+actor rows,9 top-level constructions,3 loads and4 unscored constructor resets;
+up to6553600 coordinate-pair checks belong to the algorithm. Prior172/169s native
+observations and222.1996846s projection are planning anchors, not new timing facts.
+Source preparation/review/check, Monitor, collection/reduction/publication,
+integration and scoped cleanup are charged once to support. Unknowns remain unknown.
+
+Engineering-scope§4: **none needed**. Preserve CPU FP32/Torch1/1, remote exact
+published source, joined destination memory admission and detached execution.
+Reuse the LF helper/sender with local syntax checking before new remote effects;
+do not repeat its unchanged byte-echo test. The [execution record](ACVC_FRESH_DENSE_REUSE_B01_8961_EXECUTION_20260911.md)
+holds L0, review, exact command, actual Monitor adoption and collection/cleanup.
+Recasts2/lowest contention persist; ready HIGH VNFC precedes ready ACVC, while
+unready VNFC creates no hold. Root coordinates contention.
+
+Object-tier options: (a) realize the allocated unchanged unit with fresh8961/8962;
+(b) reuse a failed identity/state; (c) alter training or the comparator/panels.
+Recommend/select **(a)**. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).**

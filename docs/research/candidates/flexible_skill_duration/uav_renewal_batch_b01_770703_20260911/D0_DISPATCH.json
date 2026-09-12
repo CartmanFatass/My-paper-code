@@ -1,0 +1,25 @@
+{
+  "recorded_at_utc": "2026-09-11T08:07:41.457Z",
+  "arm": "D0",
+  "source_sha": "c70f01ea30d6c4d063dcc46d8499b26bfe037da8",
+  "node": "hmasd-wsl-node",
+  "worktree": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b01-770703-20260911",
+  "handle": "fsd-uav-renewal-batch-b01-770703-D0-20260911",
+  "supervisor_accepted": true,
+  "admission_and_scientific_status": "not observed by DM after supervisor acceptance; Monitor owns observation",
+  "supervisor_receipt": "Task 'fsd-uav-renewal-batch-b01-770703-D0-20260911' started in tmux session 'agent_fsd-uav-renewal-batch-b01-770703-D0-20260911'. Output: /home/wu/.agent-tasks/fsd-uav-renewal-batch-b01-770703-D0-20260911/task.log\n",
+  "monitor_thread": "01a087e5-2044-7301-abb6-7a1709a98197",
+  "monitor_dispatch_response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a087e5-2044-7301-abb6-7a1709a98197\"}"
+      }
+    ],
+    "isError": false
+  },
+  "monitor_adoption": "pending",
+  "root_thread": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "dm_native_task": "/root/dm_fsd_i1280_implementation",
+  "next_arm": "I1280 preselected, unlaunched, after routed D0 terminal and primary collection"
+}

@@ -12,6 +12,12 @@ wait, failed admission or closeout affects only that direction. Root integrates 
 work continuously; a prior `no successor` closes only its named allocation. Cross-direction choices
 still use Portfolio authority while independent authorized work continues.
 
+OWNER_DIRECT 2026-09-11: once Root has dispatched all currently ready independent work, it ends
+the turn if only long-running DM, accepted legacy CM, Monitor or Transport dependencies remain.
+The independent relay wakes Root for actionable native completion; Monitor and Transport retain
+their direct Root receipt routes. Root does not keep the dispatch turn open with native/app waits,
+timers or status polling. Each wake re-enters the normal ready-work pass.
+
 ## Maintained sources
 
 | Rule | Maintained source |
@@ -74,6 +80,15 @@ Root checks published artifact/route facts and dispatches the exact handoff. It 
 omissions to the author instead of rewriting the packet. Transport receipts still go only to Root;
 Root forwards the complete response to the designated DM using `followup_task`.
 
+New GitHub-delivery prompts include an in-turn downloadable Markdown fallback. If Pro cannot
+expose or complete its scoped GitHub writes after checking actual state, it finishes the review
+and attaches the full `RESPONSE.md` in chat. Transport downloads it, binds it to the accepted request and paired response, records its byte
+count and SHA-256, stores `<archive_id>__02_RESPONSE.md`, and retains the same bytes as repository
+sidecar `archive/CHAT_FALLBACK_RESPONSE.md`. The GitHub `archive/RESPONSE.md` remains reserved for
+actual connector delivery.
+Root forwards that artifact to the designated DM for the same conformance intake. This fallback
+does not assert a GitHub commit/comment and does not authorize another Send.
+
 The DM reads the full response and checks the bound question, current owner/spec constraints,
 scientific meaning and evidence. It returns the actual decision and operational mapping, or a
 concrete conflict for the same Pro node. It does not locally overrule or add approval to a formed
@@ -95,10 +110,13 @@ projection uses the runner's complete per-arm law. Relevant post-learner publica
 follows the empirical/runtime specs and the actual dependent claim, not blanket historical replay.
 
 After acceptance, DM/Operator directly adds the handle to the shared Monitor, using the live
-primary-control configuration, not frozen or stale direction copies. Keep adoption pending until
-the Monitor reports it; do not start a second status-polling loop. Root forwards terminal facts to
+primary-control configuration, not frozen or stale direction copies. The `MONITOR_ADD` payload
+must require `get_goal` and continuation of the matching unfinished goal or `create_goal` without
+a token budget. Keep adoption pending until the Monitor reports both direct handle state and the
+actual unfinished goal state; app delivery alone proves neither. Do not start a second status-polling loop. Root forwards terminal facts to
 the original collection owner, then DM completes technical acceptance and separate scientific
-intake. Uncertain process or message acceptance is reconciled on the same identity, never retried
+intake. Root also receives `MONITOR_GOAL_COMPLETE` after the final terminal notice is delivered and
+the active set is empty. Uncertain process or message acceptance is reconciled on the same identity, never retried
 as a fresh invocation merely because an observation was lost.
 
 ## Current records, integration and cleanup

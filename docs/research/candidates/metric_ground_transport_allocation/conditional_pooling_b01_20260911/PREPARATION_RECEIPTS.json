@@ -1,0 +1,170 @@
+{
+  "recorded_utc": "2026-09-11T16:36:45Z",
+  "measured_invoked_support_seconds": 21.7098694,
+  "accounting": "Sum each invoked command wall once; separate reviewer command work included. Rejected test command had no process effect and no command wall. Agent reasoning/authoring calendar excluded. This preparation subtotal does not certify final support or complete caps.",
+  "receipts": [
+    {
+      "phase": "initial_read_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.3844585,
+      "exit_code": 0
+    },
+    {
+      "phase": "initial_read_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.3703873,
+      "exit_code": 0
+    },
+    {
+      "phase": "reconcile_read_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.6531182,
+      "exit_code": 0
+    },
+    {
+      "phase": "reconcile_read_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.5328773,
+      "exit_code": 0
+    },
+    {
+      "phase": "reconcile_push",
+      "status": "fulfilled",
+      "wall_seconds": 6.4745376,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_contract_read_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.3501527,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_contract_read_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.8584673,
+      "exit_code": 0
+    },
+    {
+      "phase": "world_and_count_source_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.2302204,
+      "exit_code": 0
+    },
+    {
+      "phase": "world_and_count_source_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.2025973,
+      "exit_code": 0
+    },
+    {
+      "phase": "resumed_contract_read",
+      "status": "fulfilled",
+      "wall_seconds": 0.4363601,
+      "exit_code": 1
+    },
+    {
+      "phase": "native_authoring_read_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.1538305,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_authoring_read_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.2649603,
+      "exit_code": 0
+    },
+    {
+      "phase": "world_binding_read",
+      "status": "fulfilled",
+      "wall_seconds": 0.2205364,
+      "exit_code": 0
+    },
+    {
+      "phase": "pre_edit_contract",
+      "status": "fulfilled",
+      "wall_seconds": 0.2423641,
+      "exit_code": 1
+    },
+    {
+      "phase": "pre_edit_contract_corrected",
+      "status": "fulfilled",
+      "wall_seconds": 0.3335032,
+      "exit_code": 0
+    },
+    {
+      "phase": "small_contract_read",
+      "status": "fulfilled",
+      "wall_seconds": 0.302608,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_source_authoring",
+      "status": "fulfilled",
+      "wall_seconds": 0.017,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_test_and_card_authoring",
+      "status": "fulfilled",
+      "wall_seconds": 0.02,
+      "exit_code": 0
+    },
+    {
+      "phase": "first_allowed_checks_0",
+      "status": "rejected",
+      "wall_seconds": null,
+      "exit_code": null,
+      "blocker": "exec_command failed: CreateProcess { message: \"Rejected(\\\"`\\\\\\\"C:\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\fires\\\\\\\\\\\\\\\\.cache\\\\\\\\\\\\\\\\codex-runtimes\\\\\\\\\\\\\\\\codex-primary-runtime\\\\\\\\\\\\\\\\dependencies\\\\\\\\\\\\\\\\native\\\\\\\\\\\\\\\\powershell\\\\\\\\\\\\\\\\pwsh.exe\\\\\\\" -Command '$nativeTestRoot = [IO.Path]::GetFullPath('\\\\\\\"'C:/Projects/HMASD-worktrees/dm-n5-continue-20260904/temp/directions/metric_ground_transport_allocation/test/native_binding_8212'); \\\\\\\"'$nativeTempBoundary = [IO.Pa…419 chars truncated…= '\\\\\\\"'1'; try { python tests/experiments/candidates/metric_ground_transport_allocation/mgtap_conditional_pooling_b01/test_native_binding.py; \\\\\\\"'$nativeTestExit = $LASTEXITCODE } finally { if (Test-Path -LiteralPath $nativeTestRoot) { Remove-Item -LiteralPath $nativeTestRoot -Recurse -Force }; Write-Output ('\\\\\\\"'scratch_absent=' + (-not (Test-Path -LiteralPath \\\\\\\"'$nativeTestRoot))) }; exit $nativeTestExit'` rejected: blocked by policy\\\")\" }"
+    },
+    {
+      "phase": "first_allowed_checks_1",
+      "status": "fulfilled",
+      "wall_seconds": 3.5014514,
+      "exit_code": 0
+    },
+    {
+      "phase": "safer_test_cleanup_authoring",
+      "status": "fulfilled",
+      "wall_seconds": 0.014,
+      "exit_code": 0
+    },
+    {
+      "phase": "allowed_static_stub_check",
+      "status": "fulfilled",
+      "wall_seconds": 0.8720097,
+      "exit_code": 0
+    },
+    {
+      "phase": "launch_identity_prepare_0",
+      "status": "fulfilled",
+      "wall_seconds": 1.9130599,
+      "exit_code": 0
+    },
+    {
+      "phase": "launch_identity_prepare_1",
+      "status": "fulfilled",
+      "wall_seconds": 0.70213,
+      "exit_code": 0
+    },
+    {
+      "phase": "command_and_owner_packet_authoring",
+      "status": "fulfilled",
+      "wall_seconds": 0.014,
+      "exit_code": 0
+    },
+    {
+      "phase": "native_owner_selection_and_source_comparison",
+      "status": "fulfilled",
+      "wall_seconds": 0.4799485,
+      "exit_code": 0
+    },
+    {
+      "phase": "independent_review_total",
+      "status": "fulfilled",
+      "wall_seconds": 2.1652907,
+      "exit_code": 0
+    }
+  ]
+}

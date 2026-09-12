@@ -1,0 +1,25 @@
+# Rolling successor Portfolio delivery and recovery
+
+This record preserves the first attempt's blocker separately from the later immutable response. Accepted REQUEST, TASK and HANDOFF bytes are unchanged. There was no local provisional Portfolio decision, new request or Send by this author.
+
+## First terminal receipt — no decision then available
+
+Transport records one confirmed Send in `portfolio:cross_direction`, conversation `6a9c109e-b264-83e8-a78b-f9ea1b767b7b`, followed by natural completion after **12m19s**. At 2026-09-10T23:14:51Z its final read found branch HEAD `b86e670546c8dbaaa868ce336b7382721e7a8d94`, response-path404 and no matching Issue17 comment. The receipt says no write was attempted and scientific review remained incomplete: **BLOCKED / GITHUB_DELIVERY_UNAVAILABLE**. This is a transport/evidence limitation, not negative science.
+
+The exact 639-byte [blocker receipt](archive/ATTEMPT1_BLOCKER.md) has SHA256 `8c232cf46cf2055e5ff217c1a40c09c0feab24fd114fa67e4498ef8f527ad0e9`, verified against the Root-forwarded digest. [Original Transport facts](archive/ATTEMPT1_TRANSPORT_FACTS.json) preserve Send identity, state, timestamps, absence findings and the first receipt route. The original Transport archive remains in its own local runtime directory; this author removes none of it.
+
+## Recovery authority and later observation
+
+OWNER_DIRECT 2026-09-09 / AGENTS §1 requires recovery of failed-effect Pro delivery after reconciling actual acceptance and delivery, while preserving accepted prompt/binding/scope. Under that standing instruction, Root explicitly authorized the existing Transport **one exact recovery retry in the same conversation after confirmed absence**, and assigned this DM only truthful recording followed by immutable-response intake. The author did not dispatch or Send this retry. No recovery Send was ultimately made: final reconciliation below resolved the existing delivery. The original one-Send count is retained; no count is inferred from the later commit alone.
+
+During the assigned record operation, a fresh fetch found published commit **`b4d71be60f789e97bf1f4c7130bb9995fc84f387`**, adding only this round's `archive/RESPONSE.md`. The clean shared Portfolio checkout was fast-forwarded to it. [Delivery observation](archive/DELIVERY_OBSERVATION.json) records this later file without erasing the first 404. The response is **45,614 bytes /45,387 Unicode characters /178 lines**, SHA256 **`2425ab285bc8f1d026fed880045bd92b75868a0fc85774ea2e77312a74590142`**, read directly from the immutable Git object.
+
+Root independently integrated/pushed that response as main **`31af8b408a9a6df8422a25fde5a1cebbc6cbd2b8`** and explicitly directed complete §4.8 conformance/intake from those bytes while Transport reconciles the delivery history. A direct Issue17 read then found the matching [comment5626718531](https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5626718531), created **2026-09-10T23:16:52Z**, linking both this response commit and the original TASK134f9aaa4. Its JSON is retained as [DELIVERY_COMMENT.json](archive/DELIVERY_COMMENT.json).
+
+Final Transport reconciliation at **2026-09-10T23:24:30Z**, receipt sent **23:25:17Z**, is **ARCHIVED / VERIFIED_BY_EXTERNAL_GITHUB_READBACK** for the same response commit/hash and Issue comment, with **no new Send or provider action**. [Reconciled facts](archive/RECONCILED_TRANSPORT_FACTS.json), [response bytes](archive/RECONCILED_TRANSPORT_RESPONSE.md) and [manifest](archive/RECONCILED_TRANSPORT_MANIFEST.json) are preserved, with exact original CRLF facts/manifest bytes in [the metadata ZIP](archive/RECONCILED_TRANSPORT_METADATA.zip) and canonical-LF JSON views in Git. The full response bytes are unchanged. The facts retain the earlier blocker fields as history and explicitly supersede current status through their reconciliation section. The one original Send remains recorded; the authorized recovery did not need another. No receipt gap remains. The separate [scientific conformance and decision](../../decisions/2026-09-10-rolling-successor-allocation.md) records the complete-answer check and planned application without rewriting either historical observation.
+
+## Preserved bindings and exposure
+
+Request `2026-09-10-rolling-successor-allocation-portfolio-01`; TASK `134f9aaa4e1f82af05a61f291a796f373ceebfb9`; HANDOFF `b86e670546c8dbaaa868ce336b7382721e7a8d94`; default scientific/method source `fad4c006887addfa675404b047a6c9e6157c531e`; new brief/facts snapshot `d4817584a06715c277ff761ade28e37c58919796`. The response keeps all30 exact evidence mappings and the original up-to-four maximum. Late FOLR closeout and DISH PARK create no fifth allocation.
+
+Source author `01a08d61-b3cc-7940-bd3c-c2ea0b90cfa2`, Root parent `01a07249-b095-7821-8ce2-e9c32ba85267`, existing Transport `01a087a3-4f12-7021-9a4d-6da9da2bafcc`. Author scientific/model/native/test/profiling invocations and Sends remain **zero**. Owner item004 keeps the original recommendation and the CLI appends the actual blocker/recovery and conformance/application traces; no owner reply is invented.

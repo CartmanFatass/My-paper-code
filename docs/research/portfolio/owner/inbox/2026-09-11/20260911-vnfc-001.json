@@ -1,0 +1,94 @@
+{
+  "id": "20260911-vnfc-001",
+  "created": "2026-09-11T11:11:06-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "VNFC B02：一个原生服务时间信用训练对",
+  "context": "同一MAPR的新训练对，比较六段原生服务信用与终点回报。成员损失后的团队恢复是绑定结构；全目标和执行信息不变，有限GAE标签有意不同。Pro已选择，零新增实验结果。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按卡执行一次比较，保留所有结果，无自动重试或后继"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "保留原证据，在下个边界停止尚未发生的工作"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按明确新约束修订尚未执行部分，不改已见结果"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "完整Pro选择符合B证据类和现行规范；同构真实训练对照能直接反驳这一时间信用配方。",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_SCIENCE_CARD_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L6",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按已形成的 Pro 决定执行唯一 B02 时间信用训练对；可异步拒绝或修改卡片。",
+    "changes_if_approved": [
+      {
+        "target": "VNFC-N7-NATIVE-SERVICE-CREDIT-B02",
+        "from": "提案未执行",
+        "to": "绑定新训练对，完成最小实现、独立审阅及一次原生运行；全部旧暂停保持"
+      }
+    ],
+    "if_refused": "在下个干净边界应用异步覆盖；保留已发生事实和预算，不推断重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md",
+        "quote": "The proposal needs their six differences, not counterfactual trajectories, a new controller, an extra rollout or a native ABI change.",
+        "why": "已有接口能给出明确、低额外工作的时间信用处理，解决上轮未定义估计器的问题。"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_POST_DEPMODE_CONVERGENCE_INTAKE_20260906.md",
+        "quote": "Reopening conditions: a new learning proposal that selects one information, representation, credit or optimization intervention on the existing reusable path",
+        "why": "重新提问符合已形成的窄暂停重开条件；并非原样补 seed。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md",
+        "quote": "There are only six decisions, so the original lambda weighting at the earliest decision is .95^5 = .7737809375, not a very long delayed-reward chain.",
+        "why": "原方法已能学习，新标签不保证降低方差；可能没有足够新的决策价值。"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md",
+        "quote": "Both final learners remain below BCRH on all four metrics in both zones.",
+        "why": "既有收益不支持 MAPR 特有效益，BCRH 差距也没有被定位为时间信用问题。"
+      }
+    ],
+    "uncertainty": [
+      "尚无新效果测量或当前完整成本测量。",
+      "一个训练对仅支持局部信号；服务发生时间不等于个体因果贡献。"
+    ],
+    "cost": {
+      "compute": "已选一次训练对：native600秒、全部支持300秒、总900秒；无自动重试、加臂或后继。",
+      "owner_time": "无需逐项批准；可异步覆盖。",
+      "reversibility": "reversible",
+      "waits_on_this": "没有owner回复等待；仅正式运行所需的科学完整性和资源准入。"
+    },
+    "verdict_text": "选择（a）：仅开放 VNFC-N7-NATIVE-SERVICE-CREDIT-B02 的一次新训练对，比较 INTERVAL 与 TERMINAL；完整机器工作最多900秒。",
+    "source": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260910_native_service_credit_reentry/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T18:12:19+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260910_native_service_credit_reentry/archive/RESPONSE.md",
+      "record": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_SCIENCE_CARD_20260911.md",
+      "state": "applied",
+      "summary": "已绑定一个新训练对，尚未执行；packet的verdict_text为DM执行摘要，非Pro逐字引文，全文以10bb08476为准。"
+    }
+  ]
+}

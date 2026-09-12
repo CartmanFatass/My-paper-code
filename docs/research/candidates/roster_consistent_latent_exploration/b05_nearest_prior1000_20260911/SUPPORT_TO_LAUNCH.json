@@ -1,0 +1,78 @@
+{
+  "components": [
+    {
+      "name": "initial assignment/status/card reads",
+      "charged_s": 3,
+      "kind": "conservative command-wall allowance"
+    },
+    {
+      "name": "input fast-forward/push and skill reads",
+      "measured_s": 4.4970322,
+      "charged_s": 4.4970322
+    },
+    {
+      "name": "focused instructions/config/source read",
+      "charged_s": 0.0000047
+    },
+    {
+      "name": "focused instructions/config/source read",
+      "charged_s": 0.2298883
+    },
+    {
+      "name": "focused instructions/config/source read",
+      "charged_s": 0.1672678
+    },
+    {
+      "name": "scope/evidence/testing focused reads",
+      "charged_s": 0.2071085
+    },
+    {
+      "name": "live configuration/reviews/owner route read",
+      "charged_s": 0.3724381
+    },
+    {
+      "name": "binding/exposure/current science read",
+      "charged_s": 0.2415526
+    },
+    {
+      "name": "learner/reading/identity/Monitor route",
+      "charged_s": 1.0840579
+    },
+    {
+      "name": "identity and analysis assumptions",
+      "charged_s": 0.2357005
+    },
+    {
+      "name": "configuration exposure calculation",
+      "charged_s": 0.2236061
+    },
+    {
+      "name": "one changed-binding supplied-tensor/stub check",
+      "charged_s": 3.1091643
+    },
+    {
+      "name": "independent changed-contract review",
+      "charged_s": 1.1534143
+    },
+    {
+      "name": "owner item/reviews, scratch inventory and diff readback",
+      "charged_s": 0.4997325
+    },
+    {
+      "name": "owner item/reviews, scratch inventory and diff readback",
+      "charged_s": 0.3154755
+    },
+    {
+      "name": "card/source/owner audit publication",
+      "charged_s": 5.0743308
+    },
+    {
+      "name": "source bundle and exact detached remote checkout/shell syntax",
+      "charged_s": 2.8261416
+    }
+  ],
+  "charged_support_so_far_s": 23.236915699999997,
+  "support_cap_s": 140,
+  "known_native_cost": "unmeasured;600/10 complete caps",
+  "scope": "New B05 only; command publication/submission, Monitor and terminal work added on receipt"
+}

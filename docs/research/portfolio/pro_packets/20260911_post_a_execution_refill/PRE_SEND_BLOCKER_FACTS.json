@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-11-post-a-execution-refill-portfolio-01",
+  "workflow_node": "portfolio_decision",
+  "direction_id": "portfolio",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "state": "OWNER_CORRECTED_BROWSER_SCOPE_NOT_PERMISSION_BLOCKER",
+  "send_click_count": 0,
+  "provider_send_accepted": false,
+  "composer_text_entered": false,
+  "prompt_sha256": "b462bfe7f9dffaa01f7add0f13d7089c292b11ac78cf9ea3ee3789ea0f3f8379",
+  "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-11-post-a-execution-refill-portfolio-01\\2026-09-11-post-a-execution-refill-portfolio-01--portfolio__PACKET_MANIFEST.json",
+  "registry_preflight": {
+    "previous_request_id": "2026-09-11-five-chain-refill-portfolio-01",
+    "previous_state": "ARCHIVED",
+    "binding_conversation_matches": true,
+    "active_binding_mutated": false
+  },
+  "browser_observation": "Root restored and marked the authenticated Portfolio in-app tab in the Root task, with the exact bound conversation/title and empty composer. Dedicated Transport cannot inventory or getTab that Root-scoped tab across tasks; an explicit tab mention resolves but no usable browser ID is available within Transport.",
+  "delivery_preflight": {
+    "remote_branch_head": "84ea5030f63a243da5ee1e201479023a29b5b1f2",
+    "response_path_status": "ABSENT",
+    "matching_issue_comment": null
+  },
+  "recovery_route": "Use any browser surface accessible to Transport when the target ChatGPT session is actually logged in; preserve the unchanged conversation/request binding and reconcile provider Send state before the sole Send. Browser ownership by a Codex task is irrelevant to authority.",
+  "recorded_at": "2026-09-11T09:21:26Z",
+  "scientific_conformance": "NOT_ASSESSED_BY_TRANSPORT",
+  "initial_transport_receipt": {
+    "commit_sha": "7c29e330b0ef86073a93199e41ba7bf977db81fd",
+    "path": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/PRE_SEND_BLOCKER_FACTS.json",
+    "bytes": 1625,
+    "sha256": "66ea5da47d0f45aa140981e0d5ee8b8abbf78bea6cdaa60d791aa51b8ae737c0",
+    "recorded_at": "2026-09-11T09:21:26Z",
+    "state": "BLOCKED_PRE_SEND_BROWSER_SURFACE_UNAVAILABLE",
+    "browser_observation": "Only Edge Profile 1 is exposed; the owning in-app browser is absent. Per exact assignment, no alternate account or conversation was opened.",
+    "recovery_route": "Resume this exact unsent request only when the in-app browser account owning the bound conversation is available."
+  },
+  "recovery_update": {
+    "recorded_at_utc": "2026-09-11T15:20:34.115052+00:00",
+    "source": "Root-routed fresh recovery/scope fact and exact recording assignment, 2026-09-11; no browser operation or independent browser observation by this DM",
+    "root_tab": {
+      "providerTabId": "browser-use:206f56ee-35ff-46d5-adfb-18308f0b4c47",
+      "codexSessionId": "01a07249-b095-7821-8ce2-e9c32ba85267",
+      "authenticated_owning_account": true,
+      "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+      "conversation_and_title_match_reported": true,
+      "composer_empty": true
+    },
+    "dedicated_transport": {
+      "thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+      "root_tab_inventory_or_getTab_available": false,
+      "explicit_tab_mention_resolves": true,
+      "usable_browser_id": null,
+      "usable_tab_binding_established": false
+    },
+    "send_click_count": 0,
+    "provider_send_accepted": false,
+    "composer_text_entered": false,
+    "alternate_account_or_conversation_used": false,
+    "portfolio_binding_mutated": false,
+    "portfolio_decision_formed": false,
+    "allocation_applied": null,
+    "required_next_fact": "Owning authenticated IAB is opened/exposed within the dedicated Transport task, on the unchanged bound conversation."
+  },
+  "owner_correction": {
+    "date": "2026-09-11",
+    "provenance": "OWNER_DIRECT",
+    "rule": "Browser/task ownership neither grants nor blocks Pro Send authority. Readiness follows actual target ChatGPT login state, exact conversation/request binding, provider/model state, and one-Send reconciliation.",
+    "supersedes_current_effect_of": [
+      "ROOT_SCOPED_IAB_NOT_TRANSFERABLE",
+      "owning_authenticated_IAB_must_be_exposed_within_dedicated_transport_task"
+    ],
+    "historical_facts_preserved": true
+  }
+}

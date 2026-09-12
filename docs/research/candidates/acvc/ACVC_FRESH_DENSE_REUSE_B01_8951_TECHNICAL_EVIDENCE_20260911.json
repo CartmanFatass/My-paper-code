@@ -1,0 +1,213 @@
+{
+  "object": "ACVC_FRESH_DENSE_REUSE_B01",
+  "binding": 8951,
+  "evaluation_namespace": 8952,
+  "status": "TECHNICAL_NO_READY_BEFORE_SCIENTIFIC_LAUNCH",
+  "authority_main_sha": "bb40797dc5312641ac640664cbf7c2bd174d9815",
+  "authority_response_sha": "0dbbcbf807509ccc34a3a1de353114be88896897",
+  "source_sha": "e61facdff70091cd9cdd33bc231a149ed9106d35",
+  "local_checkout": "C:\\Projects\\HMASD-worktrees\\codex-acvc",
+  "branch": "codex/acvc",
+  "source_review": "Independent actual changed-risk review: no material findings; unchanged DENSE constructor/RNG and UCOPE default credit path",
+  "check": "One permitted stub orchestration/publication target and static shell syntax passed; no real model/native exposure",
+  "new_scientific_exposure": {
+    "scientific_submissions": 0,
+    "accepted_scientific_handles": 0,
+    "admissions": 0,
+    "real_model_constructions": 0,
+    "model_loads": 0,
+    "scientific_rng_constructions": 0,
+    "training_episodes": 0,
+    "adam_calls": 0,
+    "backward_calls": 0,
+    "evaluation_episodes": 0,
+    "native_steps": 0
+  },
+  "new_stub_targets": 1,
+  "monitor_dispatches": 0,
+  "monitor_adoptions": 0,
+  "preparation_evidence": "ACVC_FRESH_DENSE_REUSE_B01_8951_PREPARATION_20260911.json",
+  "cleanup_evidence": "ACVC_FRESH_DENSE_REUSE_B01_8951_CLEANUP_20260911.json",
+  "direct_observation": "One remote preparation exited128 in0.265s; shell option failed and all seven Git calls rejected CR-suffixed paths. Later closeout directly verified intended checkout disk/registration and supervisor-root absence.",
+  "cause_inference": "Windows text=True stdin translates LF to CRLF. Retained producer script has CRLF and observed errors agree; actual SSH stdin bytes were not independently captured.",
+  "allocated_caps_s": {
+    "native": 270,
+    "inclusive_support": 330,
+    "complete": 600
+  },
+  "known_nonoverlapping_support_components": [
+    {
+      "label": "assignment/checkout/config/owner reads",
+      "s": 1.1764585
+    },
+    {
+      "label": "dependent-source and stub read",
+      "s": 0.622816
+    },
+    {
+      "label": "synchronize accepted bb40797dc inputs",
+      "s": 5.0871036
+    },
+    {
+      "label": "inspect changed shared consumers and reusable source transport",
+      "s": 0.3396433
+    },
+    {
+      "label": "additional known transport evidence reads",
+      "s": 0.693412
+    },
+    {
+      "label": "resumed checkout and live mapping/Monitor reads",
+      "s": 0.5714043
+    },
+    {
+      "label": "read precise current bindings and prior card appendices",
+      "s": 0.2694625
+    },
+    {
+      "label": "read reused frozen facts/L0/owner packet/test procedure",
+      "s": 0.2611968
+    },
+    {
+      "label": "confirm current allocation and exact minimal review scope",
+      "s": 0.2737368
+    },
+    {
+      "label": "prospective seed/count/cost arithmetic and document publication",
+      "s": 0.2951513
+    },
+    {
+      "label": "owner-card insertion and existing transport lookup",
+      "s": 0.4571733
+    },
+    {
+      "label": "single allowed stub and shell syntax, including test scratch cleanup",
+      "s": 6.4170143
+    },
+    {
+      "label": "independent changed-risk review commands",
+      "s": 1.2674209
+    },
+    {
+      "label": "source-object size and live owner/compute facts",
+      "s": 0.6863074
+    },
+    {
+      "label": "publish source-review/check acceptance and inspect scoped diff",
+      "s": 0.501607
+    },
+    {
+      "label": "reconcile uncertain source-commit timeout without repeating preparation",
+      "s": 0.6141075
+    },
+    {
+      "label": "push accepted e61facdf source after commit state reconciliation",
+      "s": 4.14000000001397
+    },
+    {
+      "label": "read accepted supervisor/Monitor command and current transport configuration",
+      "s": 0.2574895
+    },
+    {
+      "label": "single full-history source bundle",
+      "s": 5.265999999974156
+    },
+    {
+      "label": "one source-bundle transfer",
+      "s": 8.844000000011874
+    },
+    {
+      "label": "one bounded offline remote preparation",
+      "s": 0.264999999984866
+    },
+    {
+      "label": "source commit client timeout lower bound; accepted commit later read directly (partial exec waits not added)",
+      "s": 15
+    },
+    {
+      "label": "read existing no-ready intake structure",
+      "s": 0.2506582
+    },
+    {
+      "label": "preserve preparation bytes/receipts before scoped cleanup",
+      "s": 0.3321978
+    },
+    {
+      "label": "single scoped remote closeout and preserved stage removal",
+      "s": 0.5150000000139698
+    },
+    {
+      "label": "clean-boundary owner trace/review and technical-intake anchors",
+      "s": 0.7130565
+    },
+    {
+      "label": "technical facts/intake audit publication and own duplicate cleanup",
+      "s": 0.2781969
+    },
+    {
+      "label": "owner blocked-execution trace and final scoped diff read",
+      "s": 0.5108013
+    },
+    {
+      "label": "live-primary terminal owner review",
+      "s": 0.4317382
+    }
+  ],
+  "known_support_lower_bound_s": 56.33815389999883,
+  "exact_complete_support_s": null,
+  "native_scientific_runtime_s": 0,
+  "accounting_limits": [
+    "Commit client timed out at15s after acceptance; its complete startup/add/hook time is unavailable, so15s is a lower bound, not an exact total. Partial exec wait durations are not added again.",
+    "Independent review command wall is retained, but tool/client overhead was not measured.",
+    "Some authoring/tool overhead is not independently measured. Deliberation and idle intervals are not runtime.",
+    "Final publication and Root integration runtime remain charged separately to this same330s support; no cost transfer."
+  ],
+  "cap_reading": "No measured cap breach; exact330/600s conformance not certified.",
+  "predictions": {
+    "F_minus_C_UP": 0.75,
+    "F_minus_dwell_UP": 0.65,
+    "status": "unscored; no8951 scientific output",
+    "owner": "not taken (unattended)"
+  },
+  "scientific_polarity": "none",
+  "engineering_scope_section4": "none",
+  "engineering_budget_breach": false,
+  "cumulative_directory_test_s": 35.88558149997951,
+  "runner_lines": 432,
+  "decision": "End named allocation at precise bounded no-ready; no preparation retry, scientific retry, replacement, substitution, successor or local direction/Portfolio disposition.",
+  "cleanup": "Remote worktree disk/registration and supervisor root absent; preserved stage removed/absent; local duplicate preparation and test scratch removed/absent; shared authoring checkout retained.",
+  "accounting_snapshot": "Before terminal commit/push; its measured receipt is returned to Root for the same account, together with Root integration. No recursive accounting-only commit required.",
+  "terminal_owner_reviews": "Live-primary query returned[]; no unapplied instruction or prediction reply.",
+  "post_snapshot_publication_support_s": 4.579316900008615,
+  "root_integration": {
+    "main_sha": "ece2de702",
+    "source_and_closeout_through": "d5fce9f06a195d6df5bb45fdb9eae48713cefceb",
+    "exact_components": [
+      {
+        "label": "Root preintegration inspection",
+        "s": 0.1301621
+      },
+      {
+        "label": "Root merge attempt",
+        "s": 0.4898842
+      },
+      {
+        "label": "Root conflict inspection",
+        "s": 1.5919898
+      },
+      {
+        "label": "Root resolve/commit/push",
+        "s": 4.8355802
+      }
+    ],
+    "exact_component_sum_s": 7.0476163,
+    "separate_approximate_component": {
+      "label": "Root conflict patch tool wall",
+      "approximately_s": 0.1
+    },
+    "preservation": "Root reports all ACVC rows and both RCLE/FOLR main audit rows retained."
+  },
+  "final_known_support_lower_bound_s_excluding_approximate_patch": 67.96508710000744,
+  "final_approximate_support_plus_patch_s": 68.06508710000743,
+  "final_accounting_limit": "Known quantified subtotal plus approximately0.1s Root patch; missing earlier command/client overhead remains. No exact full-cap conformance claim. The later OWNER_DIRECT technical repair is separately budgeted and does not refund, relaunch or alter8951."
+}

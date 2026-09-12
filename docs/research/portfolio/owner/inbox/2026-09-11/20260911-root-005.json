@@ -1,0 +1,128 @@
+{
+  "id": "20260911-root-005",
+  "created": "2026-09-11T14:54:48-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "decision",
+  "title": "开放方向新结果后的四个空位投入建议",
+  "context": "FSD源获取失败且零科研暴露；MGTAP新对为负、ACVC第三次新训练为正；FOLR仍运行，VNFC原条件预算未用。向原Portfolio节点提出新的有限投入选择，未本地执行投资或升级。",
+  "options": [
+    {
+      "key": "a",
+      "label": "两对训练和两个方向问题",
+      "consequence": "新FSD3000与MGTAP1200各一对，RCLE及ACVC各一个无数值额度的问题，四项独立结束。"
+    },
+    {
+      "key": "b",
+      "label": "FSD和两个方向问题",
+      "consequence": "新FSD3000及两个无数值额度的问题，MGTAP空位保留。"
+    },
+    {
+      "key": "c",
+      "label": "仅两个方向问题",
+      "consequence": "RCLE、ACVC各问一次；FSD、MGTAP保留空位，新增数值额度为零。"
+    },
+    {
+      "key": "d",
+      "label": "四个空位暂不投入",
+      "consequence": "本轮不增任务或预算，保留FOLR和条件排队VNFC，并给出复议事实。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "b",
+  "dm_reason": "两项缺失的独立学习观察和两个具体方向判断有不同决策价值，但MGTAP负结果使少投成为实质备选。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/SCIENCE_BRIEF.md",
+    "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L95",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "当前四个空位应投入两个新训练比较和两个方向问题，还是少投并保留空位？",
+    "changes_if_approved": [
+      {
+        "target": "本轮新增研究投入",
+        "from": "FSD已结束；MGTAP和ACVC完成本轮收尾；VNFC未就绪；FOLR仍运行",
+        "to": "建议新增FSD3000秒、MGTAP1200秒各一个完整比较，并各给RCLE、ACVC一个无数值额度的原Convergence问题"
+      }
+    ],
+    "if_refused": "按Pro实际选择保留相应空位；继续FOLR并完成已有收尾。VNFC原900秒建议仍条件排队，不挪作修复或其他方向预算。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_770903_EXECUTION_LIMITATION_INTAKE_20260911.md",
+        "quote": "There is no new test of whether I1280's final gain recurs.",
+        "why": "最新传输失败没有检验已有收益是否复现；可以明确选择一次新的有限投入。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md",
+        "quote": "This supports a repeated bounded package signal across these three completed fresh\nrealizations of an outcome-informed recipe.",
+        "why": "第三次新训练仍有收益，值得原方向节点决定下一层主张，但不等于已经稳定优越或应自动升级。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md",
+        "quote": "The small first positive sign did not recur in this independently trained\nunchanged pair.",
+        "why": "新一次损失超过0.01，第三次不变比较的价值可能低于直接留空。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_SCIENCE_CARD_20260911.md",
+        "quote": "The observation asks whether this selected less exploratory prior plus 1000 real\nupdates beats nearest while improving its own initialization.",
+        "why": "该目标尚未达到；新的梯度分配只是待原节点判断的候选，并无已经修好学习器的证据。"
+      }
+    ],
+    "uncertainty": [
+      "FSD下一次源获取能否成功未知；建议仅一次45秒以内事务，纳入新300秒支持上限。",
+      "MGTAP仅两个方向相反的训练历史；新第三对不是寻找阳性，也不是统计充分性门槛。",
+      "ACVC三次收益不证明纯回撤机制；较简单dwell也有收益，仍有负样本。",
+      "VNFC缺少分配时参数和后续元数据的事实，等价计算候选不足以证明不受旧损坏影响。"
+    ],
+    "cost": {
+      "compute": "建议新增上限4200秒：FSD3000、MGTAP1200各自独立，不是共享池；两个方向问题零实现及数值额度。完整成本的未知部分保留。",
+      "owner_time": "无需等待所有者逐项回复；可异步覆盖Pro的合规决定。",
+      "reversibility": "costly",
+      "waits_on_this": "只有新增四项投入等待Portfolio决定；FOLR和已有收尾独立继续。"
+    },
+    "verdict_text": "建议A：新选FSD与MGTAP各一个完整比较，并各选RCLE、ACVC一个原Convergence问题；保留VNFC条件排队。尚未执行任何本轮投资选项。",
+    "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T22:01:38+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "record": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "按Root拓宽后的准备任务发布建议，投资尚未执行。MGTAP和ACVC科学intake及远端收尾均已完成，本地重复件因执行前策略拒绝而保留，不占科研链。现仅FOLR运行，VNFC条件排队，四个空位；A/B/C/D仍由Portfolio决定。"
+    },
+    {
+      "at": "2026-09-11T22:05:41+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "record": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "TASK首次仅生成未发布草稿时Root追加FOLR双臂终态：结果仍由原DM收集和接受，未推断正负。当前四空位在FOLR intake后成为五个；原A/B/C/D四项建议不变，另请Pro明确第五位留空或仅给FOLR一个零数值额度的原Convergence问题。本轮投资尚未执行。"
+    },
+    {
+      "at": "2026-09-11T22:18:13+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "record": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "Root在TASK发布前追加已接受FOLR正向结果：差值+1.763359375。原A/B/C/D四项建议不变，FOLR第五位P/Q/R另立条目；当前预算没有自动续期。投资尚未执行。"
+    },
+    {
+      "at": "2026-09-11T23:40:21+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-11-post-program-vacancies.md",
+      "state": "applied",
+      "summary": "完整50703c1bd1a4411c31a0b211d3ec8aff88fa0d0f回复经全文及44固定引用核对合规，Pro选B而非作者A：Root已派发FSD新3000秒比较及RCLE、ACVC各一个零实现零数值原Convergence问题。FSD771003的D0已启动并确认Monitor接管，结果尚未接受。MGTAP不增第三对但未关闭方向；VNFC原900秒条件排队且无新修复经费。实际中文裁决和反证见同目录INTAKE_OWNER_PACKET.json。",
+      "correction": "当前实际选择行是docs/research/portfolio/audit/2026-09-11.md#L108；原L95为历史准备记录，原A推荐不改写。"
+    }
+  ],
+  "approval_correction": "当前实际选择行是docs/research/portfolio/audit/2026-09-11.md#L108；原L95为历史准备记录，原A推荐不改写。"
+}

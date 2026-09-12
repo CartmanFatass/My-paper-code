@@ -12,6 +12,105 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Conditional pooling fresh8213 adverse result — 2026-09-11
+
+The separately Portfolio-selected unchanged COND/DENSE follow-up is a valid
+complete B/EXPLORE observation. COND meanJ0.19342135238526614 versus intact
+same-information DENSE0.21589092584121028 gives **−0.02246957345594415** over
+all32 ordered final differences, conditional SE0.004312411137154014, with5
+positive and27 adverse worlds. It is below the card's−0.01 threshold:
+COND adverse; DENSE remains generic. Both native fits completed the same
+512×256 training/1024 Adam calls and32×256 sampled final steps, with nonzero
+own-arm and conditional-branch movement.
+
+The strongest support for COND remains the first8212 point+0.005761321371348559,
+inside MEI. This new complete below-MEI loss is the strongest direct contradiction
+to recurrence of that package signal. Keep the two trained-pair observations
+separate; they have opposing signs and do not establish a training-population
+effect or stable superiority. Older REL adverse results remain a different
+package's evidence. Generic DENSE adaptation, finite training/evaluation variation
+and conditional usefulness on only some trajectories remain live alternatives;
+no attention, geometry or causal-credit mechanism is identified. Tuned native
+same-information headroom is still absent.
+
+This allowance ends after its one pair/intake/cleanup; no third pair, diagnostic,
+recast, family closure or Portfolio change is selected. A later discriminator
+would need a separately authorized consequential question informed by both
+training histories; no such next task is opened by this result.
+[Fresh result](MGTAP_CONDITIONAL_POOLING_B01_8213_RESULT_20260911.md),
+[intake](MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md),
+[card§6](MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md#6-new-portfolio-allocation--master8213-2026-09-11).
+
+## Conditional pooling native B01 result — 2026-09-11
+
+The sole allocated COND/DENSE native pair8212 is complete and intaken as a valid
+B/EXPLORE package observation. Mean final J is0.16707705881756274 for COND and
+0.1613157374462142 for intact same-information DENSE. The mean of all32 ordered
+paired differences is **+0.005761321371348559**, conditional evaluation
+SE0.00888326841451271, with19 positive and13 negative worlds. It is inside the
+card's inclusive±0.01 band: retain the positive sign; DENSE remains the generic
+choice. Both real fits completed the declared512×256 training and32×256 final
+sampled episodes, with nonzero actor/critic/recurrent/branch movement.
+
+The strongest support is this positive complete native package observation;
+the strongest contradiction is that it does not reach the declared MEI, retains
+13 negative worlds including a−0.1396754570 difference, and sits alongside the
+separate old REL adverse aggregate−0.02396310430506595 (including its inside-MEI
+second master). Shared legal information allows generic DENSE adaptation; finite
+training variation and conditional pooling that helps some worlds but harms
+others remain live alternatives. Movement does not isolate attention causality.
+One trained pair supplies no training-population uncertainty or stable-superiority
+claim; tuned same-information native headroom is still absent.
+
+The named allocation ends here without another seed, evaluation, retry or automatic
+successor. A possible future discriminator is a separately allocated independent
+matched training pair assessing this small positive sign across training variation;
+none is selected here. No direction/Portfolio disposition, historical family
+boundary or recast count changes. Evidence:
+[card](MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md),
+[complete result](MGTAP_CONDITIONAL_POOLING_B01_RESULT_20260911.md),
+[scientific and technical intake](MGTAP_CONDITIONAL_POOLING_B01_INTAKE_20260911.md).
+
+## Conditional user-pooling eligibility — 2026-09-10
+
+The complete original Convergence response at
+`319c51a5fdc411eaaf1a47557d032f23ed269265` is intaken as conforming and final:
+**reopen only the named COND/DENSE question's scientific eligibility for later,
+separately allocated B work**. This creates one narrow exception to the native
+actor-family PARK recorded below. It does not select a card, implementation,
+test, master, numerical invocation or machine-time allowance. The old
+balanced-allocation-coordinate family remains PARKed; P75's ended allocation,
+all historical C meanings, recast count and Portfolio state remain unchanged.
+
+The accepted hypothesis uses learned visible-UAV context to change relative
+user weights before pooling, with the exact existing row maps and projection.
+COND and DENSE both retain all 108 raw local components, own recurrent history,
+the primitive velocity action and unchanged native reward/PPO credit path.
+Unlike a constant mean-to-sum rescaling, the specified interaction can change
+relative user emphasis at fixed user rows/counts when observed partner geometry
+changes. Its proposed value is finite-learning use of that context, not new
+information or a proved larger policy class.
+
+The strongest support is this specific computation and plausible native
+event-to-velocity consequence. The strongest contrary evidence remains P75's
+REL−DENSE aggregate `-0.02396310430506595`, including its inside-MEI second
+master, against intact same-information DENSE. A cancelling or unhelpful UAV
+summary, partner co-adaptation and generic DENSE learning remain live
+alternatives. COND is source/design ready only: benefit, runtime, activation
+memory and support cost remain unknown; the tuned native-headroom record is absent.
+
+The next empirical discriminator, only if separately allocated, is one fresh
+COND/DENSE training pair with the complete sampled native-return difference,
+proposed absolute MEI `0.01`, and the exposure/limitations in the source return
+§6. It can supply one realized package observation, not stable superiority or
+attention/geometry/credit causality. No positive pilot, count census, baseline
+qualification or exact upper is a prerequisite. No independent implementation
+or numerical continuation is currently allocated.
+
+Evidence: [full decision and conformance intake](pro_packets/20260910_conditional_pooling_reentry/CONVERGENCE_INTAKE.md),
+[immutable response](https://github.com/CartmanFatass/My-paper-code/blob/319c51a5fdc411eaaf1a47557d032f23ed269265/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/archive/RESPONSE.md),
+and [source/design return](MGTAP_CONDITIONAL_POOLING_SOURCE_DESIGN_RETURN_20260910.md).
+
 ## Native ground-geometry B01 P75 result — 2026-09-09
 
 The accepted P75 native execution and scientific intake are now part of the

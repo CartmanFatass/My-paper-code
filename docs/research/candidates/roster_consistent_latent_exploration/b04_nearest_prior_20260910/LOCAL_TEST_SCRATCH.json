@@ -1,0 +1,9 @@
+{
+  "path": "C:\\Projects\\HMASD-worktrees\\dm-rcle-a02-20260906\\temp\\directions\\roster_consistent_latent_exploration\\test\\b04-nearest-prior-20260910",
+  "exists": true,
+  "files": 7,
+  "bytes": 724042,
+  "reason": "three cleanup attempts rejected before process creation as blocked by policy",
+  "cleanup_owner": "/root/dm_rcle_restart_recovery2",
+  "next_event": "next permitted creator cleanup boundary; no further alternate deletion route attempted"
+}

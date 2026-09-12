@@ -1,0 +1,117 @@
+{
+  "prepared_at_utc": "2026-09-10T22:48:25.760162+00:00",
+  "current_input_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+  "authoring_head": "bb202d69a958f22790fe8066669a3c623da0cfce",
+  "author_thread_id": "01a08d61-b3cc-7940-bd3c-c2ea0b90cfa2",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+  "active_direction_ids": [
+    "acvc",
+    "capability_bound_semantic_currentness",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "finite_resource_relational_inductive_efficiency",
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation",
+    "roster_consistent_latent_exploration",
+    "semigroup_consistent_duration_model_policy",
+    "ucope",
+    "vap_folr_core",
+    "variable_n_fleet_churn",
+    "vsp_02",
+    "vsp_03",
+    "vsp_c1"
+  ],
+  "active_count": 15,
+  "parked_count": 7,
+  "working_set_target": 5,
+  "continuing_direction_question": [
+    "degraded_incumbent_shadow_handover"
+  ],
+  "replacement_max": 4,
+  "folr_status": "Complete positive pair; own preservation/closeout pending; no successor selected. Root update before publication included.",
+  "zero_exposure": {
+    "scientific_invocations": 0,
+    "new_fits": 0,
+    "model_constructions/loads": 0,
+    "training_team_steps": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "native_steps": 0,
+    "scientific_tests": 0,
+    "performance_probes": 0,
+    "provider_sends_by_author": 0,
+    "local_portfolio_allocations": 0
+  },
+  "exposure_line": "EXPOSURE consultation-only: scientific_invocations=0; new_fits=0; model_constructions/loads=0; training_team_steps=0; optimizer_updates=0; evaluation_episodes=0; native_steps=0; scientific_tests=0; performance_probes=0; provider_sends_by_author=0; local_portfolio_allocations=0.",
+  "prospective_advice_only": {
+    "folr": {
+      "independent_training_pairs": 1,
+      "fits": 2,
+      "training_episodes": 10000,
+      "training_native_ticks": 200000,
+      "rmsprop_steps": 9938,
+      "final_episodes": 256,
+      "final_native_ticks": 5120,
+      "total_native_ticks": 205120,
+      "complete_arm_cap_seconds": 1800,
+      "summed_pair_cap_seconds": 3600,
+      "additional_runtime_support_including_monitor_seconds": 300,
+      "complete_allocation_cap_seconds": 3900,
+      "previous_arm_walls_seconds": [
+        753.1,
+        760.14
+      ],
+      "previous_summed_arm_wall_seconds": 1513.24,
+      "not_new_measured_projection": true
+    },
+    "ucope": {
+      "new_numerical_invocations": 0,
+      "bounded_next_action": "One concrete real-learning credit-comparison card or precise proper-node question; no unnamed algorithm launch.",
+      "new_algorithm_cost": null
+    },
+    "rcle": {
+      "new_numerical_invocations": 0,
+      "bounded_next_action": "One concrete competence/reference/fragmentation comparison card or precise proper-node question.",
+      "new_algorithm_cost": null,
+      "historical_same1000_all_attempt_seconds": 3444.38,
+      "historical_complete_roots": 3,
+      "historical_seconds_per_complete_root": 1148.1266666666668
+    },
+    "acvc": {
+      "fits": 1,
+      "training_episodes": 512,
+      "training_native_ticks": 131072,
+      "adam_steps": 1024,
+      "final_panels": 3,
+      "episodes_per_final_panel": 64,
+      "final_native_ticks": 49152,
+      "total_native_ticks": 180224,
+      "complete_cap_seconds": 360,
+      "native_subcap_seconds": 270,
+      "all_additional_runtime_support_including_monitor_seconds": 90,
+      "old_native_task_plus_dm_subtotal_seconds": 180.0564878,
+      "old_monitor_wall_lower_bound_seconds_exclusive": 44.34,
+      "old_monitor_exact_aggregate_seconds": null,
+      "old_complete_cost_conformance": "unestablished if Monitor included; lower bound alone exceeds old 30s support cap",
+      "new_complete_cost_projection_seconds": null,
+      "per_panel_cost_law": "one shared fit and common support plus each panel of 64 episodes; no triple counting or panel clock reset"
+    }
+  },
+  "provider_binding_observed": {
+    "conversation_binding_key": "portfolio:cross_direction",
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "request_id": "2026-09-10-acvc-fresh-dense-allocation-portfolio-01",
+    "state": "ARCHIVED",
+    "visible_model": "6 Pro",
+    "tab_lifecycle": "CLOSED"
+  },
+  "reviews_unapplied": [],
+  "decision_state": "DM_RECOMMENDATION_ONLY; no local Portfolio selection or Pro Send",
+  "dish_prepublication_update": {
+    "root_integrated_response_main": "015e2d5af",
+    "designated_dm_conformance_intake": "pending",
+    "applied_disposition": null,
+    "capacity_rule": "up to four ordered replacements/fallbacks, instantiated only for actual vacancies; no wait or inferred DISH outcome"
+  }
+}

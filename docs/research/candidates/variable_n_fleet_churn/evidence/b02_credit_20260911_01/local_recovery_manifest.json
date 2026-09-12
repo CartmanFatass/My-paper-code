@@ -1,0 +1,29 @@
+{
+  "archive": "local_recovery.tgz",
+  "bytes": 104742,
+  "sha256": "4fe161e1b8ba0a4eeb8a61b2c4c44b1e1d7c876fadb49c1dd73ee2ad81e4c8a4",
+  "files": [
+    {
+      "path": "temp/directions/variable_n_fleet_churn/pro_authoring/20260910_native_service_credit_draft01/HANDOFF.json",
+      "bytes": 3104,
+      "sha256": "8feae2ae5f04f3d2c77c31fb50e15eda73031b10c67ae9d0debd239fb8f43079"
+    },
+    {
+      "path": "temp/directions/variable_n_fleet_churn/pro_authoring/20260910_native_service_credit_draft01/TASK.md",
+      "bytes": 24972,
+      "sha256": "40a12c6b1f9b6138b51fd11d71c9d8ee8cdc7e98aed0ba837665545fb5998261"
+    },
+    {
+      "path": "temp/directions/variable_n_fleet_churn/source_staging/b02_76d4afca6.bundle",
+      "bytes": 89959,
+      "sha256": "141e50a9a1e3d508cc77c4be5c281f4f0878f99f89553c0bc754b02a80980259"
+    },
+    {
+      "path": "temp/directions/variable_n_fleet_churn/test/b02_credit_20260911_01/test_primary_round_tradeoffs_p0/summary.json",
+      "bytes": 34477,
+      "sha256": "a3c974137b1a7b48857d387d60ca2f93a4d536448fb53f1a15a31c3e51cd3601"
+    }
+  ],
+  "purpose": "Preserve unique unpublished authoring draft, exact Git source-staging bundle and synthetic test output before any authorized cleanup. Draft was never submitted; test summary is synthetic and not scientific evidence.",
+  "cleanup": "No source file removed; test scratch remains policy-blocked."
+}

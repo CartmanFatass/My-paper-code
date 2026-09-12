@@ -1,0 +1,76 @@
+{
+  "source_sha": "72c6287b7bbf721d1e031ae5a9b28b92cab8a9bd",
+  "handle": "rcle-b04-nearest-prior-s24-20260910",
+  "remote_worktree": "/home/wu/hmasd-worktrees/rcle-b04-nearest-prior-s24-20260910",
+  "remote_staging": "/home/wu/hmasd-inputs/rcle-b04-nearest-prior-s24-20260910",
+  "native_exposure": 0,
+  "focused_check": {
+    "passed": 6,
+    "pytest_seconds": 2.84,
+    "whole_subprocess_seconds": 3.987027,
+    "synthetic_models": 3,
+    "real_tensor_backwards": 1,
+    "native_episodes": 0,
+    "supplied_update_calls": 200
+  },
+  "review": {
+    "result": "PASS",
+    "reviewer": "/root/dm_rcle_restart_recovery2/rv_ah_rcle_b04",
+    "read_only_wall_seconds": 3.476438
+  },
+  "cleanup": {
+    "status": "policy_rejected_before_execution",
+    "scratch": "temp/directions/roster_consistent_latent_exploration/test/b04-nearest-prior-20260910",
+    "attempts": [
+      "combined test/finally",
+      "exact literal recursive deletion",
+      "verified nonrecursive deletion"
+    ],
+    "no_alternate_shell_used": true
+  },
+  "support_so_far": [
+    {
+      "phase": "preparation before measured collection",
+      "charged_s": 30,
+      "note": "Conservative charge for recovery reads, input sync/push and source/card plumbing; authoring effort separate."
+    },
+    {
+      "phase": "exposure generation",
+      "wall_s": 0.3116938
+    },
+    {
+      "phase": "focused tensor and publication check",
+      "wall_s": 4.181481
+    },
+    {
+      "phase": "owner item and scratch inspection",
+      "wall_s": 0.3929833
+    },
+    {
+      "phase": "independent review",
+      "wall_s": 3.476438
+    },
+    {
+      "phase": "source/card/owner publication",
+      "wall_s": 8.9915819
+    },
+    {
+      "phase": "scope/diff and audit checks",
+      "wall_s": 0.4848982
+    },
+    {
+      "phase": "source bundle staging and exact detached checkout",
+      "wall_s": 8.7155167
+    }
+  ],
+  "remaining_support_includes": [
+    "launch binding publication",
+    "submission",
+    "Monitor",
+    "collection",
+    "analysis",
+    "publication",
+    "preservation",
+    "closeout"
+  ]
+}

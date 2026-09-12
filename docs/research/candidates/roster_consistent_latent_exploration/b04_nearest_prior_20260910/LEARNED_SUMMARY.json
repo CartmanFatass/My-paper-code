@@ -1,0 +1,293 @@
+{
+  "action_law": {
+    "distance_field": 76,
+    "nearest_probability": 0.9,
+    "other_probability": 0.02,
+    "pointer_output_initially_zero": true,
+    "tie": "first candidate"
+  },
+  "actor_score_weight": 100,
+  "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b04-nearest-prior-s24-20260910/temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/learned-admission.json",
+  "allocations": {
+    "models": 7,
+    "training_instances": 1,
+    "untrained_helpers": 6
+  },
+  "arm": "learned",
+  "block_digest_hex": "8c524cc6cfc76b54446e3cc6f5c2442a600bf0e1dfeb8b319ef334cc3f607e4b",
+  "cells": {
+    "12_to_12.ACTIVE_CONTINUATION": {
+      "40U_mean": 12.109700520833332,
+      "F_mean": 0.24947916666666667,
+      "U_mean": 0.3027425130208333,
+      "Y_mean": 0.6947580973307291,
+      "episodes": 256,
+      "tau40_count": 256,
+      "tau40_fraction": 1.0,
+      "tau_mean": 40.0
+    },
+    "12_to_12.NEW_EPOCH": {
+      "40U_mean": 12.501627604166668,
+      "F_mean": 0.24469401041666666,
+      "U_mean": 0.3125406901041667,
+      "Y_mean": 0.6927744547526041,
+      "episodes": 256,
+      "tau40_count": 256,
+      "tau40_fraction": 1.0,
+      "tau_mean": 40.0
+    },
+    "12_to_8.ACTIVE_CONTINUATION": {
+      "40U_mean": 15.044921875,
+      "F_mean": 0.327734375,
+      "U_mean": 0.376123046875,
+      "Y_mean": 0.6513468424479166,
+      "episodes": 256,
+      "tau40_count": 254,
+      "tau40_fraction": 0.9921875,
+      "tau_mean": 39.78515625
+    },
+    "12_to_8.NEW_EPOCH": {
+      "40U_mean": 15.42724609375,
+      "F_mean": 0.32529296875,
+      "U_mean": 0.38568115234375,
+      "Y_mean": 0.6462783813476562,
+      "episodes": 256,
+      "tau40_count": 251,
+      "tau40_fraction": 0.98046875,
+      "tau_mean": 39.36328125
+    },
+    "8_to_12.ACTIVE_CONTINUATION": {
+      "40U_mean": 11.914713541666668,
+      "F_mean": 0.24342447916666668,
+      "U_mean": 0.2978678385416667,
+      "Y_mean": 0.6726353963216146,
+      "episodes": 256,
+      "tau40_count": 255,
+      "tau40_fraction": 0.99609375,
+      "tau_mean": 39.9140625
+    },
+    "8_to_12.NEW_EPOCH": {
+      "40U_mean": 12.259440104166668,
+      "F_mean": 0.24270833333333333,
+      "U_mean": 0.3064860026041667,
+      "Y_mean": 0.6669133504231771,
+      "episodes": 256,
+      "tau40_count": 256,
+      "tau40_fraction": 1.0,
+      "tau_mean": 40.0
+    },
+    "8_to_8.ACTIVE_CONTINUATION": {
+      "40U_mean": 15.24951171875,
+      "F_mean": 0.32998046875,
+      "U_mean": 0.38123779296875,
+      "Y_mean": 0.6221237182617188,
+      "episodes": 256,
+      "tau40_count": 253,
+      "tau40_fraction": 0.98828125,
+      "tau_mean": 39.71875
+    },
+    "8_to_8.NEW_EPOCH": {
+      "40U_mean": 15.5439453125,
+      "F_mean": 0.32783203125,
+      "U_mean": 0.3885986328125,
+      "Y_mean": 0.612274169921875,
+      "episodes": 256,
+      "tau40_count": 253,
+      "tau40_fraction": 0.98828125,
+      "tau_mean": 39.84765625
+    }
+  },
+  "counts": {
+    "backward_step_calls": 200,
+    "final_episodes": 2048,
+    "init_episodes": 2048,
+    "nonzero_steps": 200,
+    "training_episodes": 12800
+  },
+  "eight_cell_mean": {
+    "40U_mean": 13.756388346354168,
+    "F_mean": 0.28639322916666665,
+    "U_mean": 0.3439097086588542,
+    "Y_mean": 0.6573880513509115,
+    "cells": [
+      "8_to_8.ACTIVE_CONTINUATION",
+      "8_to_8.NEW_EPOCH",
+      "12_to_12.ACTIVE_CONTINUATION",
+      "12_to_12.NEW_EPOCH",
+      "8_to_12.ACTIVE_CONTINUATION",
+      "8_to_12.NEW_EPOCH",
+      "12_to_8.ACTIVE_CONTINUATION",
+      "12_to_8.NEW_EPOCH"
+    ],
+    "tau40_fraction": 0.9931640625,
+    "tau_mean": 39.82861328125
+  },
+  "final_baselines": [
+    0.6129437408427193,
+    0.6047968909857635,
+    0.6531435390588515,
+    0.647120982420843,
+    0.6380330481695897,
+    0.6378637311111137,
+    0.626234327916615,
+    0.6232896655356761
+  ],
+  "final_displacement": 0.3547500315203446,
+  "initial_parameter_norm": 21.123809703210224,
+  "initialization_summary": {
+    "cells": {
+      "12_to_12.ACTIVE_CONTINUATION": {
+        "40U_mean": 12.212890625,
+        "F_mean": 0.2511067708333333,
+        "U_mean": 0.305322265625,
+        "Y_mean": 0.6930440266927084,
+        "episodes": 256,
+        "tau40_count": 255,
+        "tau40_fraction": 0.99609375,
+        "tau_mean": 39.8671875
+      },
+      "12_to_12.NEW_EPOCH": {
+        "40U_mean": 12.575846354166666,
+        "F_mean": 0.24596354166666667,
+        "U_mean": 0.31439615885416666,
+        "Y_mean": 0.6913960774739584,
+        "episodes": 256,
+        "tau40_count": 255,
+        "tau40_fraction": 0.99609375,
+        "tau_mean": 39.84375
+      },
+      "12_to_8.ACTIVE_CONTINUATION": {
+        "40U_mean": 14.99462890625,
+        "F_mean": 0.326513671875,
+        "U_mean": 0.37486572265625,
+        "Y_mean": 0.6517206827799479,
+        "episodes": 256,
+        "tau40_count": 254,
+        "tau40_fraction": 0.9921875,
+        "tau_mean": 39.72265625
+      },
+      "12_to_8.NEW_EPOCH": {
+        "40U_mean": 15.478515625,
+        "F_mean": 0.325439453125,
+        "U_mean": 0.386962890625,
+        "Y_mean": 0.6445414225260416,
+        "episodes": 256,
+        "tau40_count": 251,
+        "tau40_fraction": 0.98046875,
+        "tau_mean": 39.421875
+      },
+      "8_to_12.ACTIVE_CONTINUATION": {
+        "40U_mean": 11.9765625,
+        "F_mean": 0.24524739583333333,
+        "U_mean": 0.2994140625,
+        "Y_mean": 0.6712646484375,
+        "episodes": 256,
+        "tau40_count": 255,
+        "tau40_fraction": 0.99609375,
+        "tau_mean": 39.84765625
+      },
+      "8_to_12.NEW_EPOCH": {
+        "40U_mean": 12.125000000000002,
+        "F_mean": 0.24020182291666667,
+        "U_mean": 0.30312500000000003,
+        "Y_mean": 0.6683273315429688,
+        "episodes": 256,
+        "tau40_count": 255,
+        "tau40_fraction": 0.99609375,
+        "tau_mean": 39.97265625
+      },
+      "8_to_8.ACTIVE_CONTINUATION": {
+        "40U_mean": 15.27197265625,
+        "F_mean": 0.329931640625,
+        "U_mean": 0.38179931640625,
+        "Y_mean": 0.6214752197265625,
+        "episodes": 256,
+        "tau40_count": 253,
+        "tau40_fraction": 0.98828125,
+        "tau_mean": 39.6953125
+      },
+      "8_to_8.NEW_EPOCH": {
+        "40U_mean": 15.42236328125,
+        "F_mean": 0.3259765625,
+        "U_mean": 0.38555908203125,
+        "Y_mean": 0.61370849609375,
+        "episodes": 256,
+        "tau40_count": 254,
+        "tau40_fraction": 0.9921875,
+        "tau_mean": 39.875
+      }
+    },
+    "eight_cell_mean": {
+      "40U_mean": 13.757222493489582,
+      "F_mean": 0.286297607421875,
+      "U_mean": 0.34393056233723956,
+      "Y_mean": 0.6569347381591797,
+      "cells": [
+        "8_to_8.ACTIVE_CONTINUATION",
+        "8_to_8.NEW_EPOCH",
+        "12_to_12.ACTIVE_CONTINUATION",
+        "12_to_12.NEW_EPOCH",
+        "8_to_12.ACTIVE_CONTINUATION",
+        "8_to_12.NEW_EPOCH",
+        "12_to_8.ACTIVE_CONTINUATION",
+        "12_to_8.NEW_EPOCH"
+      ],
+      "tau40_fraction": 0.9921875,
+      "tau_mean": 39.78076171875
+    }
+  },
+  "launch_sha": "72c6287b7bbf721d1e031ae5a9b28b92cab8a9bd",
+  "native": {
+    "abi": {
+      "abi_version": 2,
+      "event_input_size": 64,
+      "fixture_input_size": 224,
+      "fixture_magic": 5927665395199787847,
+      "snapshot_size": 464,
+      "step_input_size": 64
+    },
+    "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+    "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+    "load_seconds": 0.005577247939072549,
+    "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+    "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+    "runtime_abi": {
+      "byteorder": "little",
+      "cache_tag": "cpython-310",
+      "event_input_size": 64,
+      "fixture_input_size": 224,
+      "implementation": "cpython",
+      "machine": "x86_64",
+      "pointer_bits": 64,
+      "python_version": [
+        3,
+        10,
+        21
+      ],
+      "snapshot_size": 464,
+      "step_input_size": 64
+    },
+    "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+    "toolchain": {
+      "compile_flags": [
+        "-std=c++17",
+        "-O2",
+        "-fexceptions",
+        "-shared",
+        "-fPIC",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fno-unsafe-math-optimizations"
+      ],
+      "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+      "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+    }
+  },
+  "object": "RCLE-TBCFV-B04-NEAREST-PRIOR",
+  "peak_rss_bytes": 587751424,
+  "root_key_hex": "909b49b5b37718cbc34db529c56de9b7a7ebd25d44e01cb8aee6d10ceeed5058",
+  "seed": 24,
+  "status": "COMPLETE",
+  "updates_per_fit": 200,
+  "wall_seconds": 77.11628186202142
+}

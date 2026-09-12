@@ -1,0 +1,58 @@
+{
+  "question": "Portfolio已选择四个独立滚动投入，现记录实际裁决和执行边界；所有者可异步覆盖，无须逐项批准。",
+  "changes_if_approved": [
+    {
+      "target": "四个独立投入与有限候补",
+      "from": "此前只有建议，四位请求曾遇交付阻塞",
+      "to": "完整Pro裁决选A并通过DM核对：UCOPE新L/F比较3300秒、RCLE最近点先验比较300秒、FOLR一次零数值收敛问题、ACVC一次新拟合360秒。当前已应用投入记录，具体执行待Root分派。"
+    }
+  ],
+  "if_refused": "所有者可按既有流程异步覆盖；保留已经发生的实际工作和原始结果。当前无需等待回复，未获分配的第五位实现不会自动开始。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "quote": "The decisive change is that UCOPE and RCLE have returned actual learning designs, rather than requests to keep unspecified design work active.",
+      "why": "两个下一步已有具体学习规则和已达到的比较器，可用有界真实训练回答新问题。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "quote": "Both fresh instances support fixed-package interest at MEI0.01, but the selected older8201/8202 assets remain development context rather than two additional prospective samples.",
+      "why": "ACVC两次新拟合支持再观察一次，但旧选中资产不冒充独立新训练。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "quote": "**This is the closest allocation tradeoff.** HALF_B01 gave HALF_EVENT−RETAIN **+1.56546875**, above MEI1.",
+      "why": "FOLR后一次为−4.293046875；符号反转支持先问最窄家族投入是否值得，不证明全方向无效。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "quote": "B07’s native fit took 8.927880 seconds.",
+      "why": "VSP03最终收益均正，另一个便宜同配方训练是实质竞争项；Pro权衡后没有分配该拟合。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+      "quote": "F−dwell still loses in **11/64** worlds on8931, F−C in4/64, and dwell itself is useful.",
+      "why": "均值为正不保证每个场景获益，也不能隔离纯回溯机制。"
+    }
+  ],
+  "uncertainty": [
+    "UCOPE新增信用/基线和RCLE新先验尚待实现验收；未来完整开销未知。",
+    "旧FOLR/ACVC支持账不完整，保留该限制，不追认全额度合规，也不否定原生结果。",
+    "每个新B只是一对或一个独立训练实例，评价行不能代替训练总体不确定性。",
+    "候补只在真实无法开始、范围/执行依赖或无就绪结果时各用一次；正常完成不自动触发。",
+    "第五位FSD/MGTAP实现仍未选择，原绑定需Transport归档对账；四位裁决不替它选项。"
+  ],
+  "cost": {
+    "compute": "新上限3960秒分别封顶且不互借：UCOPE1800+1200+300；RCLE150+10+140；ACVC270+90。支持包括Monitor和收集/归档。FOLR及VSP03/VSPC1候补零数值。此次DM核对零实验、模型、环境、训练、测试和发送。",
+    "owner_time": "可异步查看或覆盖；无需等待逐项批准。作者、Pro与沟通投入未测量。",
+    "reversibility": "costly",
+    "waits_on_this": "裁决记录已应用；Root可独立分派四个原DM。第五位只等待原绑定事实对账与后续独立裁决。"
+  },
+  "verdict_text": "**Select option A: UCOPE’s specified L/F learning comparison, RCLE’s specified nearest-prior learning comparison, one zero-numerical FOLR post-HALF-B02 Convergence question and intake, then one further fresh ACVC fit.** Release the exact complete allocations of **3,300, 300, 0 and 360 seconds**, respectively. The finite fallback order is **VSP03’s zero-numerical Convergence question, then VSPC1’s zero-numerical source/design return**. FSD’s already assigned work and its sole MGTAP fallback remain separate and untouched. These are at most four additional rolling investments, not a simultaneous-launch requirement or a renewable queue. [Brief §§1–3][brief]; [FACTS, options and allocation arithmetic][facts]; [existing fifth-vacancy decision and mapping][fifth-decision][fifth-mapping].",
+  "source": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+  "immutable_source_commit": "1ea43d8fbc846807d71d4d894136f357f65551b6",
+  "application_record": "docs/research/portfolio/decisions/2026-09-10-four-slot-rolling-refill.md",
+  "application_state": "Allocation records applied; Root integration and original-DM execution dispatch pending at this intake boundary; no new scientific invocation performed."
+}

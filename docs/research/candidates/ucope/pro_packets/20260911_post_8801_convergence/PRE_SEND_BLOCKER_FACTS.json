@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-11-ucope-post8801-convergence-01",
+  "workflow_node": "em_convergence",
+  "direction_id": "ucope",
+  "conversation_binding_key": "em:ucope:convergence",
+  "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "provider_url": "https://chatgpt.com/c/6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "state": "BLOCKED_PRE_SEND_BROWSER_ACCOUNT_MISMATCH",
+  "send_click_count": 0,
+  "provider_send_accepted": false,
+  "composer_text_entered": false,
+  "prompt_sha256": "843daecccc51634379991b62bc92d1810ecd0c13a7eb1083a093e6cf71ec59fe",
+  "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-11-ucope-post8801-convergence-01\\2026-09-11-ucope-post8801-convergence-01--ucope__PACKET_MANIFEST.json",
+  "registry_preflight": {
+    "previous_request_id": "2026-09-09-ucope-post-mean-velocity-b01-convergence-01",
+    "previous_state": "ARCHIVED",
+    "binding_conversation_matches": true,
+    "active_binding_mutated": false
+  },
+  "browser_observations": [
+    "In-app browser surface was unavailable after completion/closure of the preceding request.",
+    "Only Edge Profile 1 was exposed; exact bound URL returned 'You don’t have access to this conversation'.",
+    "After Root queued exact URL restoration and CUA was reset, inventory still exposed only Edge and no in-app browser.",
+    "A second explicit in-app browser create attempt returned unavailable."
+  ],
+  "recovery_route": "Resume this exact unsent request only on a browser surface authenticated to the owning account; preserve the same conversation and prompt.",
+  "recorded_at": "2026-09-11T08:17:08Z",
+  "scientific_conformance": "NOT_ASSESSED_BY_TRANSPORT"
+}

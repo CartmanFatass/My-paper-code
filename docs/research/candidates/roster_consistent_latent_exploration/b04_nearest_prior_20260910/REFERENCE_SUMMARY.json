@@ -1,0 +1,405 @@
+{
+  "Y_note": "ScriptedEpisodeResult has no Y; Y is unavailable",
+  "action_law": {
+    "distance_field": 76,
+    "nearest_probability": 0.9,
+    "other_probability": 0.02,
+    "pointer_output_initially_zero": true,
+    "tie": "first candidate"
+  },
+  "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b04-nearest-prior-s24-20260910/temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/reference-admission.json",
+  "allocations": {
+    "models": 0,
+    "training_instances": 0
+  },
+  "arm": "reference",
+  "block_digest_hex": "8c524cc6cfc76b54446e3cc6f5c2442a600bf0e1dfeb8b319ef334cc3f607e4b",
+  "cells": {
+    "12_to_12.ACTIVE_CONTINUATION": {
+      "40U_mean": 9.609375000000002,
+      "F_mean": 0.240234375,
+      "U_mean": 0.24023437500000006,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 256,
+      "tau40_fraction": 1.0,
+      "tau_mean": 40.0
+    },
+    "12_to_12.NEW_EPOCH": {
+      "40U_mean": 9.995117187500002,
+      "F_mean": 0.2294921875,
+      "U_mean": 0.24987792968750006,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 255,
+      "tau40_fraction": 0.99609375,
+      "tau_mean": 39.84765625
+    },
+    "12_to_8.ACTIVE_CONTINUATION": {
+      "40U_mean": 12.6875,
+      "F_mean": 0.3171875,
+      "U_mean": 0.3171875,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 252,
+      "tau40_fraction": 0.984375,
+      "tau_mean": 39.625
+    },
+    "12_to_8.NEW_EPOCH": {
+      "40U_mean": 13.78466796875,
+      "F_mean": 0.32744140625,
+      "U_mean": 0.34461669921875,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 251,
+      "tau40_fraction": 0.98046875,
+      "tau_mean": 39.44921875
+    },
+    "8_to_12.ACTIVE_CONTINUATION": {
+      "40U_mean": 9.700195312500002,
+      "F_mean": 0.240234375,
+      "U_mean": 0.24250488281250004,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 254,
+      "tau40_fraction": 0.9921875,
+      "tau_mean": 39.69921875
+    },
+    "8_to_12.NEW_EPOCH": {
+      "40U_mean": 10.138020833333336,
+      "F_mean": 0.23893229166666669,
+      "U_mean": 0.2534505208333334,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 255,
+      "tau40_fraction": 0.99609375,
+      "tau_mean": 39.84765625
+    },
+    "8_to_8.ACTIVE_CONTINUATION": {
+      "40U_mean": 12.8828125,
+      "F_mean": 0.3220703125,
+      "U_mean": 0.3220703125,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 246,
+      "tau40_fraction": 0.9609375,
+      "tau_mean": 39.25
+    },
+    "8_to_8.NEW_EPOCH": {
+      "40U_mean": 13.9677734375,
+      "F_mean": 0.33369140625,
+      "U_mean": 0.3491943359375,
+      "Y_mean": null,
+      "episodes": 256,
+      "tau40_count": 250,
+      "tau40_fraction": 0.9765625,
+      "tau_mean": 39.53125
+    }
+  },
+  "comparison": {
+    "cells": {
+      "12_to_12.ACTIVE_CONTINUATION": {
+        "Delta_ref": -0.0625081380208333,
+        "G_U": 0.0025797526041666597,
+        "SE": 0.00555452422155789,
+        "final_U": 0.3027425130208333,
+        "final_minus_initial": {
+          "F": -0.0016276041666666665,
+          "U": -0.0025797526041666597,
+          "tau": 0.1328125
+        },
+        "final_minus_reference": {
+          "F": 0.009244791666666653,
+          "U": 0.0625081380208333,
+          "tau": 0.0
+        },
+        "initial_U": 0.30532226562500003,
+        "n": 256,
+        "reference_U": 0.24023437500000006,
+        "reference_gap": 0.0625081380208333
+      },
+      "12_to_12.NEW_EPOCH": {
+        "Delta_ref": -0.06266276041666662,
+        "G_U": 0.0018554687500000003,
+        "SE": 0.005603631755645573,
+        "final_U": 0.3125406901041667,
+        "final_minus_initial": {
+          "F": -0.001269531250000002,
+          "U": -0.0018554687500000003,
+          "tau": 0.15625
+        },
+        "final_minus_reference": {
+          "F": 0.015201822916666649,
+          "U": 0.06266276041666662,
+          "tau": 0.15234375
+        },
+        "initial_U": 0.31439615885416666,
+        "n": 256,
+        "reference_U": 0.24987792968750006,
+        "reference_gap": 0.06266276041666662
+      },
+      "12_to_8.ACTIVE_CONTINUATION": {
+        "Delta_ref": -0.058935546874999994,
+        "G_U": -0.00125732421875,
+        "SE": 0.006135874698718491,
+        "final_U": 0.37612304687500003,
+        "final_minus_initial": {
+          "F": 0.0012207031250000004,
+          "U": 0.00125732421875,
+          "tau": 0.0625
+        },
+        "final_minus_reference": {
+          "F": 0.010546874999999999,
+          "U": 0.058935546874999994,
+          "tau": 0.16015625
+        },
+        "initial_U": 0.37486572265625007,
+        "n": 256,
+        "reference_U": 0.3171875,
+        "reference_gap": 0.058935546874999994
+      },
+      "12_to_8.NEW_EPOCH": {
+        "Delta_ref": -0.041064453125,
+        "G_U": 0.0012817382812500009,
+        "SE": 0.0062008461948405555,
+        "final_U": 0.38568115234375,
+        "final_minus_initial": {
+          "F": -0.00014648437500000078,
+          "U": -0.0012817382812500009,
+          "tau": -0.05859375
+        },
+        "final_minus_reference": {
+          "F": -0.002148437500000004,
+          "U": 0.041064453125,
+          "tau": -0.0859375
+        },
+        "initial_U": 0.386962890625,
+        "n": 256,
+        "reference_U": 0.34461669921875,
+        "reference_gap": 0.041064453125
+      },
+      "8_to_12.ACTIVE_CONTINUATION": {
+        "Delta_ref": -0.05536295572916664,
+        "G_U": 0.0015462239583333367,
+        "SE": 0.0058938459852321086,
+        "final_U": 0.2978678385416667,
+        "final_minus_initial": {
+          "F": -0.001822916666666665,
+          "U": -0.0015462239583333367,
+          "tau": 0.06640625
+        },
+        "final_minus_reference": {
+          "F": 0.0031901041666666558,
+          "U": 0.05536295572916664,
+          "tau": 0.21484375
+        },
+        "initial_U": 0.2994140625,
+        "n": 256,
+        "reference_U": 0.24250488281250004,
+        "reference_gap": 0.05536295572916664
+      },
+      "8_to_12.NEW_EPOCH": {
+        "Delta_ref": -0.05303548177083329,
+        "G_U": -0.003361002604166671,
+        "SE": 0.004995721235984128,
+        "final_U": 0.3064860026041667,
+        "final_minus_initial": {
+          "F": 0.0025065104166666647,
+          "U": 0.003361002604166671,
+          "tau": 0.02734375
+        },
+        "final_minus_reference": {
+          "F": 0.0037760416666666524,
+          "U": 0.05303548177083329,
+          "tau": 0.15234375
+        },
+        "initial_U": 0.303125,
+        "n": 256,
+        "reference_U": 0.2534505208333334,
+        "reference_gap": 0.05303548177083329
+      },
+      "8_to_8.ACTIVE_CONTINUATION": {
+        "Delta_ref": -0.05916748046874999,
+        "G_U": 0.0005615234374999987,
+        "SE": 0.006715666319421767,
+        "final_U": 0.38123779296875,
+        "final_minus_initial": {
+          "F": 4.882812500000048e-05,
+          "U": -0.0005615234374999987,
+          "tau": 0.0234375
+        },
+        "final_minus_reference": {
+          "F": 0.007910156249999996,
+          "U": 0.05916748046874999,
+          "tau": 0.46875
+        },
+        "initial_U": 0.38179931640625,
+        "n": 256,
+        "reference_U": 0.32207031249999996,
+        "reference_gap": 0.05916748046874999
+      },
+      "8_to_8.NEW_EPOCH": {
+        "Delta_ref": -0.039404296874999994,
+        "G_U": -0.00303955078125,
+        "SE": 0.006371428519194565,
+        "final_U": 0.3885986328125,
+        "final_minus_initial": {
+          "F": 0.0018554687500000008,
+          "U": 0.00303955078125,
+          "tau": -0.02734375
+        },
+        "final_minus_reference": {
+          "F": -0.0058593750000000035,
+          "U": 0.039404296874999994,
+          "tau": 0.31640625
+        },
+        "initial_U": 0.38555908203125,
+        "n": 256,
+        "reference_U": 0.3491943359375,
+        "reference_gap": 0.039404296874999994
+      }
+    },
+    "primary": {
+      "Delta_ref": -0.057149251302083315,
+      "G_U": 0.00014444986979166832,
+      "MEI_U": 0.05,
+      "SE": 0.004254009250577929,
+      "active_paths": [
+        {
+          "Delta_ref": -0.05536295572916664,
+          "G_U": 0.0015462239583333367,
+          "SE": 0.0058938459852321086,
+          "cell": "8_to_12.ACTIVE_CONTINUATION",
+          "final_U": 0.2978678385416667,
+          "final_minus_initial": {
+            "F": -0.001822916666666665,
+            "U": -0.0015462239583333367,
+            "tau": 0.06640625
+          },
+          "final_minus_reference": {
+            "F": 0.0031901041666666558,
+            "U": 0.05536295572916664,
+            "tau": 0.21484375
+          },
+          "initial_U": 0.2994140625,
+          "n": 256,
+          "reference_U": 0.24250488281250004,
+          "reference_gap": 0.05536295572916664
+        },
+        {
+          "Delta_ref": -0.058935546874999994,
+          "G_U": -0.00125732421875,
+          "SE": 0.006135874698718491,
+          "cell": "12_to_8.ACTIVE_CONTINUATION",
+          "final_U": 0.37612304687500003,
+          "final_minus_initial": {
+            "F": 0.0012207031250000004,
+            "U": 0.00125732421875,
+            "tau": 0.0625
+          },
+          "final_minus_reference": {
+            "F": 0.010546874999999999,
+            "U": 0.058935546874999994,
+            "tau": 0.16015625
+          },
+          "initial_U": 0.37486572265625007,
+          "n": 256,
+          "reference_U": 0.3171875,
+          "reference_gap": 0.058935546874999994
+        }
+      ],
+      "approximate_95_interval": [
+        -0.06548710943321606,
+        -0.048811393170950575
+      ],
+      "final_U": 0.33699544270833337,
+      "initial_U": 0.33713989257812504,
+      "positive_favors": "learned final",
+      "reference_U": 0.27984619140625,
+      "reference_gap": 0.057149251302083315,
+      "uncertainty": "conditional scenario Monte Carlo, one training instance; distinct cell RNG domains"
+    }
+  },
+  "counts": {
+    "backward_step_calls": 0,
+    "final_episodes": 2048,
+    "init_episodes": 0,
+    "nonzero_steps": 0,
+    "training_episodes": 0
+  },
+  "eight_cell_mean": {
+    "40U_mean": 11.595682779947918,
+    "F_mean": 0.28116048177083336,
+    "U_mean": 0.28989206949869795,
+    "Y_mean": null,
+    "cells": [
+      "8_to_8.ACTIVE_CONTINUATION",
+      "8_to_8.NEW_EPOCH",
+      "12_to_12.ACTIVE_CONTINUATION",
+      "12_to_12.NEW_EPOCH",
+      "8_to_12.ACTIVE_CONTINUATION",
+      "8_to_12.NEW_EPOCH",
+      "12_to_8.ACTIVE_CONTINUATION",
+      "12_to_8.NEW_EPOCH"
+    ],
+    "tau40_fraction": 0.98583984375,
+    "tau_mean": 39.65625
+  },
+  "launch_sha": "72c6287b7bbf721d1e031ae5a9b28b92cab8a9bd",
+  "native": {
+    "abi": {
+      "abi_version": 2,
+      "event_input_size": 64,
+      "fixture_input_size": 224,
+      "fixture_magic": 5927665395199787847,
+      "snapshot_size": 464,
+      "step_input_size": 64
+    },
+    "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+    "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+    "load_seconds": 0.0020831109723076224,
+    "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+    "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+    "runtime_abi": {
+      "byteorder": "little",
+      "cache_tag": "cpython-310",
+      "event_input_size": 64,
+      "fixture_input_size": 224,
+      "implementation": "cpython",
+      "machine": "x86_64",
+      "pointer_bits": 64,
+      "python_version": [
+        3,
+        10,
+        21
+      ],
+      "snapshot_size": 464,
+      "step_input_size": 64
+    },
+    "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+    "toolchain": {
+      "compile_flags": [
+        "-std=c++17",
+        "-O2",
+        "-fexceptions",
+        "-shared",
+        "-fPIC",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fno-unsafe-math-optimizations"
+      ],
+      "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+      "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+    }
+  },
+  "object": "RCLE-TBCFV-B04-NEAREST-PRIOR",
+  "peak_rss_bytes": 401719296,
+  "reading": [
+    "learning from prior with reference deficit",
+    "mixed native consequences"
+  ],
+  "root_key_hex": "909b49b5b37718cbc34db529c56de9b7a7ebd25d44e01cb8aee6d10ceeed5058",
+  "seed": 24,
+  "status": "COMPLETE",
+  "wall_seconds": 2.318955483031459
+}

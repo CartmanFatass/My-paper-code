@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "RCLE-fresh1000",
+      "arm": "W1",
+      "n": 1,
+      "mean": -0.700628662109375,
+      "sample_sd": null,
+      "min": -0.700628662109375,
+      "max": -0.700628662109375,
+      "runs": {
+        "23": -0.700628662109375
+      }
+    },
+    {
+      "task": "RCLE-fresh1000",
+      "arm": "W100",
+      "n": 1,
+      "mean": -0.397308349609375,
+      "sample_sd": null,
+      "min": -0.397308349609375,
+      "max": -0.397308349609375,
+      "runs": {
+        "23": -0.397308349609375
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "RCLE-fresh1000",
+      "arm": "W100",
+      "baseline": "W1",
+      "summary": {
+        "n": 1,
+        "mean": 0.3033203125,
+        "sample_sd": null,
+        "min": 0.3033203125,
+        "max": 0.3033203125
+      },
+      "differences": {
+        "23": 0.3033203125
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

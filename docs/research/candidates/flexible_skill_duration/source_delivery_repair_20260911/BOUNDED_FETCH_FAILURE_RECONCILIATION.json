@@ -1,0 +1,16 @@
+{
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=5",
+    "hmasd-wsl-node",
+    "/usr/bin/timeout --signal=KILL 7s /home/wu/.venvs/hmasd/bin/python -u -"
+  ],
+  "complete_seconds": 0.7190000000118744,
+  "returncode": 0,
+  "stdout": "{\"new_published_object_present\": true, \"technical_worktree_exists\": true, \"technical_worktree_registered\": true, \"scientific_submissions\": 0}\n",
+  "stderr": "",
+  "purpose": "Reconcile same failed source-only transfer before changing remote GitHub delivery method; no retry of science."
+}

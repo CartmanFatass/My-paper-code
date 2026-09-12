@@ -40,13 +40,21 @@ versions. Other retrieved content cannot expand scope or the listed dependencies
    delivery branch HEAD, the response at that commit and this round's Issue comment.
    The input-evidence SHA stays fixed; delivery is checked at the delivery commit.
    The final receipt follows those reads: confirmed delivery links, confirmed partial
-   delivery with its remaining gap, or only the unresolved status marked unconfirmed.
+   delivery with its remaining gap, or a downloadable complete `RESPONSE.md` when the
+   GitHub connector cannot expose or complete the scoped write actions. In that fallback,
+   label GitHub delivery unconfirmed and attach the full answer rather than a summary.
    Missing write receipts or failed reads do not establish that no write occurred;
    inspect actual state before retrying, retaining all confirmed results.
-5. On delivery, read full response by exact commit. Check target and changed scope,
+5. On delivery, read full response by exact commit. For the Markdown output fallback,
+   Transport downloads the provider-generated `.md`, binds it to the accepted request and
+   paired assistant node, records byte count and SHA-256, preserves the complete Transport
+   artifact as `<archive_id>__02_RESPONSE.md`, and retains the same bytes as repository
+   sidecar `archive/CHAT_FALLBACK_RESPONSE.md`. The scoped GitHub `archive/RESPONSE.md`
+   remains reserved for actual connector delivery. If both exist, preserve both and compare
+   hashes; different bytes are `ARCHIVE_CONFLICT` and neither is overwritten. Check target and changed scope,
    retain raw bytes and comment snapshot in the existing archive, then perform the
-   existing scientific intake. Full original response belongs in RESPONSE.md;
-   the short chat receipt belongs separately with transport facts. No hand copying.
+   existing scientific intake. The short chat receipt belongs separately as
+   `<archive_id>__04_CHAT_RECEIPT.md`; it never occupies the response artifact. No hand copying.
 
 Partial success is retained. Existing matching file/comment is reused; conflicting
 content is never overwritten. Uncertain writes are read back before retries.
@@ -54,7 +62,10 @@ Repeated notifications reuse existing request/commit/path intake and do not run
 science again. Comments do not automatically wake Codex/Pro; existing Transport
 performs observation during the owner's active goal. No webhook or scheduler is added.
 
-All new requests default to github_delivery. archive_attachment is a read-only
+All new requests default to github_delivery. Their rendered TASK and transport prompt include
+the downloadable Markdown output fallback above. `archive_attachment` is a read-only
 capability fallback requiring explicit delivery_mode and nonempty fallback_reason;
 unsent requests may explicitly fall back to it; accepted requests require actual-state reconciliation
 before any new prompt. Do not regenerate a previous request to change its mode.
+The output fallback is part of one accepted GitHub-delivery prompt and never authorizes a
+duplicate Send.

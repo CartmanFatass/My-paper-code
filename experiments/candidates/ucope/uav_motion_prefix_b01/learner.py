@@ -6,7 +6,7 @@ import torch
 
 from .environment import (AGENTS, HoldState, actor_features, critic_features,
                           local_indices, own_positions, team_reward)
-from .policy import joint_terms, sample
+from .policy import joint_terms, sample, separate_terms
 
 
 def returns_to_go(rewards):
@@ -29,7 +29,7 @@ def clipped_policy_loss(new_logp, old_logp, advantage, velocity_mask=None):
 def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, duration_rng,
                     metadata, check, counts, emit_episode, emit_diagnostic, limits,
                     real=False, diagnostics=False, ratio_grouping="joint", value_moments=None, renewal=False,
-                    duration_support=(1, 4), velocity_mode="sampled"):
+                    duration_support=(1, 4), velocity_mode="sampled", credit_baseline=None):
     """Counts survive an exception; only a complete episode emits a scored row."""
     check()
     obs, info = env.reset(seed=reset_seed)
@@ -40,6 +40,9 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
     hidden = torch.zeros(1, 5, 64)
     storage = {key: [] for key in ("obs", "hidden", "critic", "u", "durations",
                                    "velocity_mask", "duration_mask", "logp", "value", "reward")}
+    if credit_baseline is not None:
+        storage.update({key: [] for key in ("velocity_logp", "duration_logp", "credit_mask",
+                                            "baseline_input", "residual_old")})
     rewards, commands, services = [], [], []
     first_position = own_positions(obs)
     prefix_position = first_position.copy()
@@ -83,9 +86,23 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
                                  velocity_rng, duration_rng, **sample_options)
             selected_steps = np.where(duration.numpy() == 1, duration_support[1], duration_support[0])
             sent, active = hold.decide(t, u.tanh().numpy(), selected_steps)
-            logp, _ = joint_terms(actor, mean, recurrent, u, duration,
-                                  torch.from_numpy(active), torch.from_numpy(duration_mask),
-                                  ratio_grouping)
+            if credit_baseline is None:
+                logp, _ = joint_terms(actor, mean, recurrent, u, duration,
+                                      torch.from_numpy(active), torch.from_numpy(duration_mask),
+                                      ratio_grouping)
+            else:
+                velocity_lp, duration_lp = separate_terms(actor, mean, recurrent, u, duration,
+                    torch.from_numpy(active), torch.from_numpy(duration_mask))
+                logp = velocity_lp + duration_lp
+                credit_mask = torch.from_numpy(duration_mask & (t < horizon - 1))
+                baseline_input = torch.cat((recurrent, u.detach().tanh()), -1).detach()
+                residual = torch.zeros(5)
+                residual[credit_mask] = credit_baseline(baseline_input[credit_mask]).squeeze(-1)
+                for key, item in (("velocity_logp", velocity_lp), ("duration_logp", duration_lp),
+                                  ("credit_mask", credit_mask), ("baseline_input", baseline_input),
+                                  ("residual_old", residual)):
+                    storage[key].append(item.detach().clone())
+                counts["duration_credit_rows"] += int(credit_mask.sum())
             if not torch.isfinite(logp).all():
                 raise FloatingPointError("nonfinite sampled density")
         frames = []

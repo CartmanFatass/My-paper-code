@@ -144,21 +144,21 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
     code = module.run(output, "synthetic", time.monotonic(), 20.0,
                       make_env=fake_env, train_episodes=4, horizon=8, eval_episodes=3)
     assert code == 0
-    assert calls["templates"] == [8921]
-    assert calls["dense"][0][1:] == (module.DENSE, 892100012)
+    assert calls["templates"] == [8961]
+    assert calls["dense"][0][1:] == (module.DENSE, 896100012)
     assert [item["constructor_seed"] for item in calls["envs"]] == [
-        892101000, 892200062, 892200063, 892200064,
+        896101000, 896200062, 896200063, 896200064,
     ]
-    assert [item[1] for item in calls["loads"]] == [8922, 8922, 8922]
+    assert [item[1] for item in calls["loads"]] == [8962, 8962, 8962]
     assert [item[2] for item in calls["evaluation"]] == [
         arm for arm in ("C", "F", "dwell") for _episode in range(3)
     ]
     assert [item["reset_seed"] for item in calls["training"]] == [
-        892101000, 892101001, 892101002, 892101003,
+        896101000, 896101001, 896101002, 896101003,
     ]
     assert len({id(item["velocity_rng"]) for item in calls["training"]}) == 1
     assert [item["duration_rng"]["seed"] for item in calls["training"]] == [
-        892104000, 892104001, 892104002, 892104003,
+        896104000, 896104001, 896104002, 896104003,
     ]
     assert all(item["options"] == {
         "real": True, "diagnostics": False,
@@ -174,6 +174,12 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
 
     saved = json.loads((output / "summary.json").read_text(encoding="utf-8"))
     assert saved["status"] == "complete"
+    assert saved["master"] == 8961 and saved["evaluation_namespace"] == 8962
+    assert saved["allocation_seconds"] == {
+        "whole_supervised_task": 270,
+        "cumulative_runtime_support": 330,
+        "complete_charge": 600,
+    }
     assert saved["fit_complete"] and saved["checkpoint_complete"]
     assert saved["training_rows"] == 4 and saved["evaluation_rows"] == 9
     assert saved["counts"]["team_steps"] == 104

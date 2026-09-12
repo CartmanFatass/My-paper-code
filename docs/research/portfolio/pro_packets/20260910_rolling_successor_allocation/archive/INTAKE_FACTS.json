@@ -1,0 +1,37 @@
+{
+  "checked_at_utc": "2026-09-10T23:26:34.432070+00:00",
+  "response_commit": "b4d71be60f789e97bf1f4c7130bb9995fc84f387",
+  "response_sha256": "2425ab285bc8f1d026fed880045bd92b75868a0fc85774ea2e77312a74590142",
+  "response_bytes": 45614,
+  "response_characters": 45387,
+  "response_lines": 178,
+  "reference_pairs_match": 30,
+  "decision": "A",
+  "conformance": "complete and conforming; no specification exception",
+  "application": "planned, Root dispatch not yet claimed",
+  "transport": "final ARCHIVED reconciliation, no new Pro Send/action",
+  "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5626718531",
+  "comment_created_at": "2026-09-10T23:16:52Z",
+  "arithmetic": {
+    "folr_replay_rows": 66783360,
+    "folr_acting_rows": 1076880,
+    "acvc_updates": 1024,
+    "acvc_replay_actor_agent_steps": 2621440,
+    "acvc_evaluation_actor_agent_steps": 245760,
+    "acvc_coordinate_checks_upper": 6553600,
+    "old_acvc_support_lower_bound_exclusive": 52.3964878
+  },
+  "author_scientific_invocations": 0,
+  "author_sends": 0,
+  "current_method_surface_diff_from_fad4_to_31af8": [],
+  "owner_reviews_unapplied": [],
+  "raw_transport_metadata_archive": {
+    "path": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RECONCILED_TRANSPORT_METADATA.zip",
+    "sha256": "2009be0559cab315e28c0bfd64026993fb121fa5379f06dc4bc3cd66535d863c",
+    "members": {
+      "RECONCILED_TRANSPORT_FACTS.json": "b752a61bc220e8efdf065fa6ffc541b02ec96610d7aba61b0ad45c1b9e7a4263",
+      "RECONCILED_TRANSPORT_MANIFEST.json": "53e5a92e906c15fd78f12b1a3ad5ddfec02ab3f53cb17446d7eb4cafcda28cd8"
+    },
+    "reason": "Git canonicalizes text JSON line endings; ZIP retains exact original CRLF bytes, JSON views use canonical LF."
+  }
+}

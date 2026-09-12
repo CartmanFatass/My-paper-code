@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-11-vsp03-question-fallback-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vsp_03:convergence",
+  "direction_id": "vsp_03",
+  "direction_ids": [
+    "vsp_03"
+  ],
+  "conversation_id": "6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+  "provider_url": "https://chatgpt.com/c/6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+  "user_message_id": "today-current-round|TASK.md@cddc0be2dabf8728e4c5199be89794c228192b03|user-node",
+  "assistant_message_id": "today-current-round|Response — immutable commit|current-round-assistant-node",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "prompt_sha256": "b211b49f91489fe4a1165a1d5f78fb755d9d1e685072a3bdd7d18fdcb04fd4fc",
+  "response_sha256": "c6f806e3d83a5b3dfddd41a4afab010c73f7f36c43433d81d330c6b3a22aafeb",
+  "response_bytes": 30288,
+  "response_characters": 16393,
+  "send_click_count": 1,
+  "natural_completion_observed": "Worked for 12m 32s; response and delivery links present; no active generation control",
+  "github_delivery": {
+    "commit": "00315dc9f1bfd9e58167696d7e53be881d685459",
+    "response_path": "docs/research/candidates/vsp_03/pro_packets/20260911_question_fallback/archive/RESPONSE.md",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/00315dc9f1bfd9e58167696d7e53be881d685459/docs/research/candidates/vsp_03/pro_packets/20260911_question_fallback/archive/RESPONSE.md",
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/6#issuecomment-5630245166",
+    "issue_comment_id": 5630245166,
+    "http_status": 200
+  },
+  "archive_paths": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\PROMPT_BODY.md",
+    "github_response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\GITHUB_RESPONSE.md",
+    "chat_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\CHAT_RECEIPT.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-11-vsp03-question-fallback-01\\TRANSPORT_FACTS.json",
+    "github_response_sha256": "c6f806e3d83a5b3dfddd41a4afab010c73f7f36c43433d81d330c6b3a22aafeb",
+    "delivery_commit": "00315dc9f1bfd9e58167696d7e53be881d685459",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/00315dc9f1bfd9e58167696d7e53be881d685459/docs/research/candidates/vsp_03/pro_packets/20260911_question_fallback/archive/RESPONSE.md",
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/6#issuecomment-5630245166"
+  },
+  "captured_at": "2026-09-11T06:10:24Z",
+  "identity_validation": "PASS_WITH_DOM_ID_UNAVAILABLE",
+  "notes": [
+    "GitHub response bytes downloaded and hash verified.",
+    "No second Send or generation control used."
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "20260911-fsd-001",
+  "created": "2026-09-11T09:31:17-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FSD第二个独立I1280/D0配对卡",
+  "context": "新训练770803与评估780803检验不变I1280组合能否再次超过完整D0；绑定结构是个体异步续约改变共享协调器的有效学习行。Portfolio已分配两个完整训练，零数值附加检查；卡片不等待回复。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保持已分配的一次新配对、全符号读法和完整成本边界。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "按明确覆盖指令处理尚未执行部分，保留已执行事实，不自行替换或重试。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "仅对可执行且不改变既定分配的具体问题修正，冲突返回原节点。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "最近相同组合的一次局部收益支持这次已分配的独立观察，不能证明稳定优越或批量因果。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+    "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/EXECUTION_MAPPING.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L33",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否干预已获Portfolio分配的第二个独立I1280/D0配对及其全符号读法？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+        "from": "前一配对已完成清理",
+        "to": "新训练770803/评估780803，两个完整训练与各32集终点评估"
+      }
+    ],
+    "if_refused": "按所有者具体覆盖指令处理未执行部分，保留已完成事实；不自行换种子、追加或重试。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/EXECUTION_MAPPING.md",
+        "quote": "FSD — one fresh unchanged I1280/D0 pair",
+        "why": "Portfolio已分配这一次新配对，原有机制与比较器不变。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+        "quote": "+.05697746721968016",
+        "why": "最近相同组合有一次局部收益，值得观察它是否在新训练身份重复。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+        "quote": "and8 negative values.",
+        "why": "单次结果包含八个不利终点；旧I的两次损失仍保留，不支持稳定优越或单独批量因果。"
+      }
+    ],
+    "uncertainty": [
+      "新配对的符号、实际有效行数和完整成本未知；32集不是32个独立训练种子。",
+      "旧配对的部分Monitor成本未测；新配对不从小计推断完整上限合规。"
+    ],
+    "cost": {
+      "compute": "D0≤900秒，I1280≤1800秒，支持≤300秒，完整≤3000秒；两次训练，无额外数值检查。",
+      "owner_time": "可异步阅读卡片并覆盖；不等待回复。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+    "source": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T16:42:47+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_EXECUTION_LIMITATION_INTAKE_20260911.md",
+      "state": "blocked",
+      "summary": "Source/card freeze completed at2b8bd8f70; silent preparation-command wall exhausts support before any admission or scientific submission. Return zero-exposure execution limitation; exact four prospective paths/registration absent. No retry, result polarity or lifecycle change."
+    }
+  ]
+}

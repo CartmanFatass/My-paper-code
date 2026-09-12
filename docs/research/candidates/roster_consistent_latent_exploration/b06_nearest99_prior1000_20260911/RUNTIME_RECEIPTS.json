@@ -1,0 +1,82 @@
+{
+  "admissions": {
+    "learned": {
+      "assessed_at": "2026-09-11T18:07:02.312754Z",
+      "available_physical_bytes": 15634583552,
+      "captured_at": "2026-09-11T18:07:02.312507Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15634583552,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "reference": {
+      "assessed_at": "2026-09-11T18:12:35.680968Z",
+      "available_physical_bytes": 15638777856,
+      "captured_at": "2026-09-11T18:12:35.680697Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15638777856,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    }
+  },
+  "timing_text": {
+    "chain-time.txt": "wall_s=335.86,peak_rss_kib=595300,exit=0",
+    "learned-time.txt": "wall_s=333.40 peak_rss_kib=595300 exit=0",
+    "reference-time.txt": "wall_s=2.45 peak_rss_kib=430516 exit=0"
+  },
+  "timing": {
+    "chain-time.txt": {
+      "wall_s": 335.86,
+      "peak_rss_kib": 595300.0,
+      "exit": 0.0
+    },
+    "learned-time.txt": {
+      "wall_s": 333.4,
+      "peak_rss_kib": 595300.0,
+      "exit": 0.0
+    },
+    "reference-time.txt": {
+      "wall_s": 2.45,
+      "peak_rss_kib": 430516.0,
+      "exit": 0.0
+    }
+  },
+  "supervisor": {
+    "exit_code": "0",
+    "pid": "3347308",
+    "start_time": "1789150022",
+    "status": "finished"
+  },
+  "monitor_adoption_command_wall_s": 0.9,
+  "monitor_shared_terminal_query": {
+    "whole_wall_s": 1.3,
+    "participants": [
+      "RCLE B06",
+      "VNFC"
+    ],
+    "charged_once_to": "RCLE; no split or duplicate"
+  },
+  "monitor_other_observation_wall_s": null,
+  "monitor_terminal_timestamp": "2026-09-12T02:12:38+08:00",
+  "supervisor_coarse_duration_s": 336,
+  "native_chain_s": 335.86,
+  "learned_complete_s": 333.4,
+  "reference_complete_s": 2.45,
+  "native_complete_caps_pass": true,
+  "peak_rss_kib": 595300.0,
+  "resource_limit": "resources_unmeasured: other Monitor observation components and yielded terminal-input push tail; full support/cap conformance is not certified"
+}

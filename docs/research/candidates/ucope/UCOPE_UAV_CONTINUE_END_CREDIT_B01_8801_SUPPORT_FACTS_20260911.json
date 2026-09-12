@@ -1,0 +1,220 @@
+{
+  "as_of": "native result and scoped remote cleanup complete; final receipt publication covered by existing40s charge",
+  "initial_recovery_conservative_charge_s": 60,
+  "failed_fetch_conservative_charge_s": 45,
+  "failed_fetch_returned_wait_intervals_s": 15.0119164,
+  "independent_review": {
+    "subprocess_wall_s": 3.9007485,
+    "enclosing_tool_wall_approx_s": 10.1,
+    "charged_s": 12
+  },
+  "monitor_add_delivery_charge_s": 0.5,
+  "subsequent_support_commands": [
+    {
+      "label": "read reused helpers",
+      "seconds": 0.2900064
+    },
+    {
+      "label": "write card and opt-in collection",
+      "seconds": 0.019
+    },
+    {
+      "label": "implement separate-credit learner and final-only study",
+      "seconds": 0.02
+    },
+    {
+      "label": "add focused semantic and publication tests",
+      "seconds": 0.403
+    },
+    {
+      "label": "focused synthetic suite",
+      "seconds": 6.6831561
+    },
+    {
+      "label": "read exact supervisor and prior command facts",
+      "seconds": 0.8433707
+    },
+    {
+      "label": "write exact native wrapper and prelaunch intake",
+      "seconds": 0.164
+    },
+    {
+      "label": "read bound UCOPE allocation exact cost text",
+      "seconds": 0.240795
+    },
+    {
+      "label": "read bound UCOPE native/support cost scope",
+      "seconds": 0.2015052
+    },
+    {
+      "label": "read explicit support and stop terms",
+      "seconds": 0.2334315
+    },
+    {
+      "label": "compute prospective facts and publish owner new-card item",
+      "seconds": 0.406642
+    },
+    {
+      "label": "record independent review and source acceptance",
+      "seconds": 0.015
+    },
+    {
+      "label": "inspect final diff and record support/audit",
+      "seconds": 0.4729231
+    },
+    {
+      "label": "publish accepted source/card/check evidence",
+      "seconds": 5.7638037
+    },
+    {
+      "label": "reconcile failed fetch on authoritative remote state",
+      "seconds": 0.91113
+    },
+    {
+      "label": "transfer published committed Git object pack",
+      "seconds": 4.7952612,
+      "session_id": null
+    },
+    {
+      "label": "import exact committed objects and prepare verified detached destination",
+      "seconds": 2.2537812,
+      "session_id": null
+    },
+    {
+      "label": "bind prepared exact command and publish launch facts",
+      "seconds": 4.8024503
+    },
+    {
+      "label": "verify protected environment/current source and fresh owner boundary",
+      "seconds": 0.5119728
+    },
+    {
+      "label": "submit exact detached native chain once",
+      "seconds": 0.9457795
+    },
+    {
+      "label": "one acceptance and adjacent admission readback",
+      "seconds": 0.6812577
+    }
+  ],
+  "subsequent_command_wall_s": 30.6582664,
+  "final_handoff_publication_conservative_charge_s": 10,
+  "charged_preterminal_support_s": 158.1582664,
+  "cap_s": 300,
+  "monitor": {
+    "measured_query_wall_s": 16.479,
+    "query_provenance": "Root forwarded Monitor bill: prior10.452 plus13 queries totaling6.027",
+    "later_query_wall_s": [
+      0.503,
+      0.588,
+      0.521,
+      0.437,
+      0.6,
+      0.418,
+      0.365,
+      0.409,
+      0.607,
+      0.454,
+      0.418,
+      0.356,
+      0.351
+    ],
+    "charged_s": 45,
+    "unmeasured_overhead": "Adoption/message/publication overhead was not individually measured. The28.521s remainder is a conservative charge, not observed elapsed time."
+  },
+  "native": {
+    "outer_wall_s": 1384.14,
+    "peak_rss_kib": 564872,
+    "L_charged_s": 686.7479011937976,
+    "F_charged_s": 697.3920988062025,
+    "internal_pair_wall_s": 1357.488374052802,
+    "outer_minus_internal_s": 26.651625947198,
+    "all_native_caps_pass": true,
+    "outer_precision_s": 0.01,
+    "aggregate_CPU": "unmeasured"
+  },
+  "limits": "Initial recovery/fetch/review/delivery/handoff are conservative charges, separate from measured command walls. Nested actual suite wall6.4265742 and review3.9007485 are not added again. The10s handoff charge bounds the current document/Git publication command; compare with its returned actual time.",
+  "terminal_collection_commands_before_closeout": [
+    {
+      "label": "restart state and owner check",
+      "seconds": 0.5032752
+    },
+    {
+      "label": "exact terminal summary readback",
+      "seconds": 0.7683972
+    },
+    {
+      "label": "archive exact native output/supervisor/admission and verify collection digest",
+      "seconds": 2.2897551
+    },
+    {
+      "label": "extract collected archive and inspect endpoint reduction/source retention",
+      "seconds": 0.5090078
+    },
+    {
+      "label": "validate collected rows/checkpoints/counts and compute declared-unit analysis",
+      "seconds": 2.2013623
+    },
+    {
+      "label": "resume_current_records",
+      "seconds": 0.3297634
+    },
+    {
+      "label": "card_and_scientific_routing",
+      "seconds": 0.137249
+    },
+    {
+      "label": "owner_routing_and_cleanup_scope",
+      "seconds": 0.2192062
+    },
+    {
+      "label": "evidence_and_direction_context",
+      "seconds": 0.2048751
+    },
+    {
+      "label": "focused owner cleanup evidence and current direction context",
+      "seconds": 0.2669291
+    },
+    {
+      "label": "locate exact remote access and accepted evidence format; review owner boundary",
+      "seconds": 1.9945581
+    },
+    {
+      "label": "verify all original artifacts against preserved archive and inventory remote checkout",
+      "seconds": 1.2090832
+    },
+    {
+      "label": "locate prior contrast evidence and attribution for durable intake",
+      "seconds": 0.2321693
+    },
+    {
+      "label": "read collected per-arm exposure for evidence table",
+      "seconds": 0.2113088
+    },
+    {
+      "label": "inspect final summary publication fields",
+      "seconds": 0.197749
+    }
+  ],
+  "terminal_collection_command_wall_s": 11.2746888,
+  "final_closeout_conservative_charge_s": 40,
+  "final_closeout_charge_scope": "Includes both the partial cleanup delivery and its reconciled completion, local redundant-pack removal, receipt checks and publication. Actual pre-receipt command wall plus15s publication charge is within40; no charge is added twice.",
+  "charged_complete_support_s": 254.4329552,
+  "charged_complete_allocation_s": 1638.5729552,
+  "cap_assessment": {
+    "L_native": true,
+    "F_native": true,
+    "native_total": true,
+    "support_charged": true,
+    "complete_charged": true
+  },
+  "resources_unmeasured": [
+    "aggregate_CPU_work",
+    "exact_complete_support_elapsed_including_unmeasured_Monitor_overhead"
+  ],
+  "interpretation": "Native complete wall is measured. Support and complete-allocation compliance use measured commands plus disclosed conservative charges; no measured or charged breach. These charges do not establish exact physical support elapsed.",
+  "final_closeout_command_wall_before_receipt_s": 11.9792466,
+  "remaining_receipt_publication_charge_inside_existing40_s": 15,
+  "final_closeout_observed_plus_remaining_charge_s": 26.9792466,
+  "final_closeout_receipt": "UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_CLEANUP_FACTS_20260911.json"
+}

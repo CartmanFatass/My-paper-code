@@ -53,8 +53,8 @@ from experiments.candidates.ucope.uav_motion_prefix_b01.study import clean_json
 
 OBJECT = "ACVC_FRESH_DENSE_REUSE_B01"
 CARD = "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md"
-MASTER = 8921
-EVALUATION_NAMESPACE = 8922
+MASTER = 8961
+EVALUATION_NAMESPACE = 8962
 ARMS = ("C", "F", "dwell")
 
 
@@ -177,9 +177,9 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
             "steps + C/F/dwell checks + publication and process exit"
         ),
         "allocation_seconds": {
-            "whole_supervised_task": 330,
-            "cumulative_runtime_support": 30,
-            "complete_charge": 360,
+            "whole_supervised_task": 270,
+            "cumulative_runtime_support": 330,
+            "complete_charge": 600,
         },
     }
     rows = []

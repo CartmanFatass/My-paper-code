@@ -1,0 +1,42 @@
+{
+  "question": "是否干预已获Portfolio分配的第二个独立I1280/D0配对及其全符号读法？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+      "from": "前一配对已完成清理",
+      "to": "新训练770803/评估780803，两个完整训练与各32集终点评估"
+    }
+  ],
+  "if_refused": "按所有者具体覆盖指令处理未执行部分，保留已完成事实；不自行换种子、追加或重试。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/EXECUTION_MAPPING.md",
+      "quote": "FSD — one fresh unchanged I1280/D0 pair",
+      "why": "Portfolio已分配这一次新配对，原有机制与比较器不变。"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+      "quote": "+.05697746721968016",
+      "why": "最近相同组合有一次局部收益，值得观察它是否在新训练身份重复。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+      "quote": "and8 negative values.",
+      "why": "单次结果包含八个不利终点；旧I的两次损失仍保留，不支持稳定优越或单独批量因果。"
+    }
+  ],
+  "uncertainty": [
+    "新配对的符号、实际有效行数和完整成本未知；32集不是32个独立训练种子。",
+    "旧配对的部分Monitor成本未测；新配对不从小计推断完整上限合规。"
+  ],
+  "cost": {
+    "compute": "D0≤900秒，I1280≤1800秒，支持≤300秒，完整≤3000秒；两次训练，无额外数值检查。",
+    "owner_time": "可异步阅读卡片并覆盖；不等待回复。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md"
+}

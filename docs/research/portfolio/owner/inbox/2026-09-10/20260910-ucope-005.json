@@ -1,0 +1,76 @@
+{
+  "id": "20260910-ucope-005",
+  "created": "2026-09-10T14:09:04-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "close-call",
+  "title": "UCOPE 8703：再取一次独立完整比较还是结束同配方投入",
+  "context": "8701三个T/G与T/F检查点都为负，但仍是唯一完整精确配方比较。8702不完整，A01未复现旧错误却不是修复或独立样本。选一次新8703直接检验负结果是否重现；与现在结束投入接近取舍边界。",
+  "options": [
+    {
+      "key": "a",
+      "label": "一次新独立T/F/G比较8703",
+      "consequence": "花一次固定额度得到新比较或保留不完整结果；不自动追加。"
+    },
+    {
+      "key": "b",
+      "label": "现在结束同配方投入",
+      "consequence": "不再花此预算，保留当前单组完整负结果；不自动关闭方向。"
+    },
+    {
+      "key": "c",
+      "label": "另选续约信用分配问题",
+      "consequence": "另定科学问题、比较和预算后再实施；不会混作同配方重现。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "需要判断独立训练实例间的负结果重现；改变机制或再次原路径重放都不能提供这个比较。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_SCIENCE_CARD_20260910.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_INTAKE_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L29",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留这次接近取舍边界的独立同配方比较8703及其新卡？",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE learned-short /8703",
+        "from": "只有8701一组完整比较且为负；8702不完整，A01只是重放诊断",
+        "to": "独立新种子8703完成一次T/F/G训练，各2048回合，保留所有固定评估；不自动追加"
+      }
+    ],
+    "if_refused": "在下一清洁边界应用明确异议，保留已发生支出和全部结果；停止剩余额度，不改旧结果。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_8702_FAILURE_LOCATION_A01_SCIENCE_CARD_20260910.md",
+        "quote": "No recurrence within this repeated prefix; historical cause remains unresolved. Consider the fresh independent T/F/G discriminator without making another replay obligatory.",
+        "why": "A01没有补上独立性能比较；直接新训练能回答负结果是否再次出现，不要求继续追查旧故障。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/DIRECTION.md",
+        "quote": "All512/1024/2048 T−G and T−F\npoints are DOWN.",
+        "why": "原配方目前三个检查点都不利，已花3307.12秒原生执行；现在停止同配方投入也是合理选择。"
+      }
+    ],
+    "uncertainty": [
+      "未知8702旧错误的原因，A01不是修复；8703也可能无法完成。",
+      "新一组即使完整，也不能证明稳定增益、稳定伤害或特定机制原因。",
+      "同信息调优基线余量缺失，悬停不是性能上界。"
+    ],
+    "cost": {
+      "compute": "一次3个fit，共6144训练回合、12288 Adam、640评估、1736704原生步；1800秒/完整fit，5100秒科学部分，5400秒整体含最多300秒支持。前例2111.61秒仅作参考。",
+      "owner_time": "异步复审，不等待答复或其他方向。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a), under Root's 2026-09-10 independent continuation after A01 closeout.",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_INTAKE_20260910.md"
+  },
+  "starred": true
+}

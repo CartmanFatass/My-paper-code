@@ -26,6 +26,15 @@ remains dated provenance under the controlling evidence specification section 11
 - Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
 - Latest direction-tier decision:
+  **2026-09-11 PRO_FINAL / PARK**, limited to further empirical continuation of
+  the instantiated continue/end-credit L recipe tested on 8801: fixed-five-UAV,
+  own-expiry physical {1,2}, final2048 comparison against freshly trained F.
+  Retain the unchanged-L spending stop; no successor is selected. This changes
+  no all-renewal or ordinary-feedback disposition, Portfolio lifecycle/priority,
+  formal UAV entry or C status. Recasts remain **1** and the older
+  retained-policy/root-residual PARK stays separate. See the
+  [complete response and applied conformance intake](pro_packets/20260911_post_8801_convergence/INTAKE.md).
+- Previous direction-tier decision and subsequent object history:
   **2026-09-09 PRO_FINAL / CONTINUE**, bounded current-host comparator
   development inside the existing renewal family. Select one future B question
   comparing training-only scalar value-target normalization in legal feedback G
@@ -241,7 +250,115 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-10 learned short renewal loses to both comparators on8701
+## Current scientific position — 2026-09-11 instantiated continue/end-credit L continuation is parked
+
+**Conclusion and bounded claim.** The complete original Convergence response
+selects a narrow **PRO_FINAL / PARK** of further empirical continuation of the
+specific L recipe tested on8801, retaining the unchanged-L spending stop.
+Its boundary is fixed-five-UAV, one/two-tick own-expiry control and final2048
+comparison against fresh trained fixed-law F. No successor is selected.
+This is a reversible spending decision under uncertainty; it does not establish
+population inferiority or close the renewal/credit family.
+
+**Strongest support.**8801 is VALID COMPLETE/DOWN, L−F
+**−0.024105609431490836**, beyond its0.01 MEI, after both learners moved and
+L's duration head/residual were exercised.40 of64 worlds favor competent F.
+The earlier two T histories also have adverse T−F panels; those different
+recipes are relevant caution, not additional L replications.
+
+**Strongest contradiction and surviving alternative.** Only one L/F training
+pair exists and24 worlds favor L. A second unchanged pair could alter the
+comparison. Earlier8703 native/H improvement and fixed-short gains remain
+separate positive evidence. Pro accepts an independent pair as a legitimate
+B option but finds its marginal decision value insufficient to select it now;
+no positive-first, novelty or complete-cause condition is imposed. Finite
+optimization, regression/gradient allocation and partner co-adaptation remain
+unresolved; a sound first-step ordering argument does not guarantee a learning gain.
+
+**Next discriminator and ceiling.** None is selected or funded. A future
+separately authorized decision can reconsider the same recipe for a concrete
+decision-value reason while preserving every outcome. No current L−G/L−H,
+stable ranking, component cause, exact headroom, transfer or deployment claim
+is available. Recasts1 and absent tuned headroom remain; the older
+retained-policy/root-residual PARK and Portfolio state are unchanged.
+
+See the [immutable full response](pro_packets/20260911_post_8801_convergence/archive/RESPONSE.md)
+at81d5d48a648427674684909d641b7d90f18c87c0 and
+[conformance, application and strongest alternative](pro_packets/20260911_post_8801_convergence/INTAKE.md).
+
+## Previous scientific position — 2026-09-11 separate continue/end credit loses to fixed-law F on8801
+
+**Conclusion and bounded claim.** One fresh L/F pair is VALID COMPLETE/DOWN
+at the fixed2048-episode endpoint: L−F **−0.024105609431490836**, conditional
+paired-world SE0.009287231174029437, MEI0.01. L changes the complete training
+package to separately clipped velocity/duration credit with a conditional suffix
+residual; F retains the frozen half/half{1,2} law and old compound learner.
+This does not identify a component effect or replace the earlier T comparisons.
+
+**Strongest support.** Native means are L0.23611295495996004 and
+F0.26021856439145086;40 of64 common worlds favor F. Both policies learn,
+and L's duration head and residual move. At each owned expiry, private per-tick
+history drives sampled velocity and one/two-tick holding, changing later
+primitive action exposure and native joint reward while partners co-adapt.
+The prespecified complete-return point is adverse despite this real learning.
+
+**Strongest contradiction and surviving alternative.**24 worlds favor L and
+there is only one training pair. Earlier8703 T improves above hover and reaches
+T−G WITHIN, while both earlier complete T instances have adverse T−F panels.
+None of those facts uniquely diagnoses duration credit. Conditional on sampled
+velocity, duration still cannot change the first sent velocity; a structural
+suffix argument is not a guarantee for clipped finite learning. Optimization,
+training/evaluation variation and partner co-adaptation remain live explanations.
+
+**Next discriminator and ceiling.** End this allocated pair and recommend no
+unchanged L spending. No successor or new scientific question is selected;
+a future learning/credit alternative must be separately decided against
+competent F. No stable ranking, component cause, family closure, recast,
+C promotion, formal UAV-validation advancement or Portfolio disposition follows.
+Recasts1; tuned host headroom absent and F is not an optimum. Native execution
+is technically accepted,1384.14s; unmeasured support overhead and retained
+policy-blocked test scratch are separate engineering limits.
+
+See [8801 E0 and all outcomes](UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_RESULT_EVIDENCE_20260911.md)
+and [intake/current decisions](UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_INTAKE_20260911.md#decisions-this-intake-produces).
+
+## Previous scientific position — 2026-09-10 learned short renewal ends DOWN/WITHIN across two complete instances
+
+**Conclusion and bounded claim.** Fresh8703 completes the exact learned-short
+T/F/G recipe and is VALID COMPLETE/WITHIN: final2048 T−G
+**+0.00019308516986599905**, conditional evaluation SE0.007538303464769532,
+against MEI0.01.8701's final DOWN−0.0433782967180869 does not recur. Neither
+complete instance shows a final useful point gain; WITHIN is not equivalence.
+
+**Strongest support.** T trails frozen-head F on all three panels of both
+complete instances. Final T−F is−0.03097854039363236/−0.01107321367085382
+for8701/8703; both learned heads moved. Own expiry/private history leads to
+held velocity/duration, primitive-row credit and native joint reward while
+partners co-adapt. This is bounded adverse secondary package evidence, not
+a causal identification of duration learning or stable harm.
+
+**Strongest contradiction and surviving alternative.**8703 finishes near G
+and above hover: T−H+0.062103492173288755, with11 adverse worlds. F−G flips
+from8701−0.012399756324454534 to8703+0.01126629884071982; all8703 final
+learned means exceed hover. Training/evaluation variation, optimization and
+co-adaptation remain unresolved. Retain8703's earlier T/G1024 DOWN and512
+hover loss. Two-run mean T−G−0.02159260577411045 is descriptive, not a new
+decision rule.8702 stays incomplete; A01's repeated prefix neither repairs
+its unexplained crash nor adds an independent performance sample.
+
+**Next discriminator and ceiling.** End8703's allocated comparison and scoped
+closeout with no automatic successor. A later real comparison of a distinct
+learning/credit question is unallocated advice. No family/lifecycle/priority,
+recast or C disposition follows; recasts1, tuned headroom absent. No stable,
+causal, transfer, safety, deployment or formal UAV-validation advancement claim.
+8703 completes1736704 native steps/12288 Adam/640 evaluations in2108.73s;
+technical conformance is separate from its WITHIN scientific reading.
+
+See [all outcomes/E0](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_RESULT_EVIDENCE_20260910.md),
+[intake§§5–8](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_INTAKE_20260910.md#5-terminal-technical-acceptance-and-scientific-intake),
+and [full vectors and two-run descriptive summary](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_RESULT_SUMMARY_20260910.json).
+
+## Previous scientific position — 2026-09-10 learned short renewal loses to both comparators on8701
 
 **Conclusion and bounded claim.** One fresh matched T/F/G training instance
 completed2048 episodes per fit. Learned physical{1,2} renewal is VALID

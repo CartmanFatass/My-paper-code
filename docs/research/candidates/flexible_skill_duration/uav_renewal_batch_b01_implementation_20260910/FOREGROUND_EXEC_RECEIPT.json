@@ -1,0 +1,14 @@
+{
+  "synthetic_fixture": true,
+  "source_sha": "0207d0b3cf307f656b5f46b298b74efa438608b8",
+  "cwd": "C:/Projects/HMASD-worktrees/codex-fsd",
+  "command": "& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' -B tests/experiments/candidates/flexible_skill_duration/uav_renewal_batch_b01/test_binding.py --report docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b01_implementation_20260910",
+  "measurement": "Foreground exec_command result; wall includes imports, primary and internal-receipt publication, scratch cleanup, stdout and process exit.",
+  "result": {
+    "chunk_id": "ee6d9b",
+    "wall_time_seconds": 4.8851396000000005,
+    "exit_code": 0,
+    "original_token_count": 207,
+    "output": "{\"synthetic_fixture\": true, \"status\": \"pass\", \"actual_exposure\": {\"fixture_commands\": 1, \"configuration_objects\": 4, \"buffers\": 1, \"valid_joint_rows\": 1281, \"sampler_traversals\": 2, \"paired_readouts\": 4, \"models\": 0, \"checkpoint_loads\": 0, \"environments\": 0, \"environment_steps\": 0, \"training_starts\": 0, \"optimizer_calls\": 0, \"real_endpoint_evaluations\": 0, \"replay\": 0, \"profiling\": 0, \"support_search\": 0, \"scientific_invocations\": 0}}\r\n{\"synthetic_fixture\": true, \"fixture_commands\": 1, \"wall_cap_seconds\": 60, \"status\": \"pass\", \"failure\": null, \"scratch_path\": \"C:\\\\Projects\\\\HMASD-worktrees\\\\codex-fsd\\\\temp\\\\directions\\\\flexible_skill_duration\\\\test\\\\i1280_binding_9pxdob0x\", \"scratch_absent\": true, \"wall_through_imports_primary_publication_cleanup_seconds\": 4.2995930000033695, \"within_wall_cap_before_exit\": true}\r\n"
+  }
+}

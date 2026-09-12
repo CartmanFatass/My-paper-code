@@ -181,6 +181,13 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   CLI 1.0.5 已验证无头模式；分 A 只读侦察与第二评审、B 机械修改、C 低风险语义实现三层，
   启动、传输和科学判断不交；调用形状、围栏、附录 C 提案、三次试点与五个待决项）。
 
+- `CODEX_WSL_AGENT_CONFIG_FIXES_20260910.md` — 切到 WSL agent environment 前要改的 Codex
+  配置。五处失效点，其中项目信任条目一条会**静默失效**：51 条信任条目全部以 Windows
+  盘符为键，WSL 下项目路径变成 `/mnt/c/...` 匹配不上，而文档规定未信任的项目不加载
+  任何项目级 `.codex/` 层，于是本仓库的七个 agent 定义与 agentify MCP 一并失效。
+  给出可直接写的 profile 覆盖层，以及两处需 owner 决定的（项目级 agentify-desktop
+  条目、没有 `enabled` 键的 marketplaces）。依据全部引自官方配置文档，附本机配置快照。
+
 ### environment_design/
 
 - `TOY_HOST_AND_UAV_ENV_DESIGN_ADVICE_20260901.md` — inventory of the five first-wave hosts and

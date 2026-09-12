@@ -206,3 +206,169 @@ One 900 s scientific /1000 s complete diagnostic is allocated; no accepted
 retry, F/G/H collection, new independent seed or successor follows implicitly.
 All direct launch/adoption receipts are retained in the
 [launch facts](UCOPE_UAV_8702_FAILURE_LOCATION_A01_LAUNCH_FACTS_20260910.json).
+
+
+## 4. Terminal result and scientific intake
+
+Root's 2026-09-10 terminal instruction resumed this DM for the bounded A result,
+receipt/count/source/timing verification, preservation and scoped remote
+closeout, explicitly excluding T/F/G performance inference and automatic fresh
+comparison allocation. Intake started from clean branch codex/ucope at
+**5982703122e523c9aaf374c4134b78629877c98f** in the existing checkout.
+Only the new computed result summary preceded this writing. No overlapping
+source writer or new scientific call is involved.
+
+### What was checked and the rule applied
+
+Checked the [E0 result](UCOPE_UAV_8702_FAILURE_LOCATION_A01_RESULT_EVIDENCE_20260910.md) and raw summary
+against frozen card b1 §§2–5: T-only repeated8702 prefix, original512/1024
+panels and RNG ordering,1740 training episodes,3480 Adam calls and 478208
+native ticks. Direct collection verifies all 11 native/supervisor file hashes
+and 14 declared source/test hashes at clean exact launch HEAD. Offline analysis
+checks every 1868 episode/870 rollout row and all 3480 finite epoch records,
+reward normalization, chronological resets, counters, evaluation freeze and
+absent comparators; all 25 checks pass. The computed summary retains their names,
+receipts, full T vectors and actual exposure. No learner or native execution
+was repeated for verification.
+
+Card §3 applied verbatim:
+
+| Direct observation | A-level reading and recommended next object-tier choice |
+| --- | --- |
+| All 1740 T training episodes and both panels complete | No recurrence within this repeated prefix; historical cause remains unresolved. Consider the fresh independent T/F/G discriminator without making another replay obligatory. |
+
+**VALID COMPLETE A/RECON, bounded nonrecurrence** follows. T completed 1740
+episodes and both 64-world panels without an exception or cap. The primary
+diagnostic result is complete even though comparison status remains INCOMPLETE,
+as prospectively required for T-only A01. No F/G/H data or 2048 endpoint exists.
+The final 1740 T checkpoint is preserved by verified bytes; no model reload is
+needed to substantiate completion. No unique actionable source location was
+found, so the location MEI is not met. This is not an algorithm-negative result.
+
+### Support, contradiction and scientific interpretation
+
+**Strongest support:** all 1866 old episode rows and all 869 old rollout rows
+are byte-identical to the corresponding A01 prefix, after which A01 completes
+the previously failing episode 1738, episode 1739 and their ordinary update.
+This weakens the specific expectation of recurrence on this recorded path.
+**Strongest limit/contrary evidence:** historical 8702 did fail, and its failing
+frame/actions/state were not retained. Equal recorded rows cannot establish
+all hidden-state equality or identify why that old call failed. No cause was
+repaired or uniquely excluded by nonrecurrence.
+
+One repeated original history adds zero independent training instances. The
+T-only512/1024 means 0.10497156306673558/0.1498504958382924 are the same old
+panels and have no comparator. Neither the final duration-head displacement
+1.3016825914382935 nor successful execution is a mechanism-value observation.
+The independent 8702 attempt's INCOMPLETE classification and 8701's sole complete
+exact-recipe DOWN remain unchanged. DIRECTION.md's accepted mechanism-level
+position is therefore unchanged; this diagnostic evidence stays in its A card,
+E0 and intake. Headroom remains absent, recasts 1, claim ceiling A path fact.
+
+Evidence Spec §§4,5.1,11.8.1,11.8.3,11.8.5–7 govern this reading. Reuse the
+existing scientific-tools/Foundations §6 empirical reading: repeated evaluations
+and RNG history are not independent learning units; reproduction/localization
+and statistical replication answer different questions. No changed comparator
+or mechanism claim requires another literature search. Nonrecurrence does not
+make exact causal closure a prerequisite for the next B.
+
+### Cost, prediction and owner flags
+
+Whole 592.44s and peak RSS 560896KiB match the supervisor log; summary elapsed
+592.076381453895s is nested. Full100s support-reserve charging gives 692.44s
+inside the 1000s complete cap, and the 900s science cap is respected. No Scope §5
+budget breach is recorded. Aggregate CPU/cgroup telemetry is
+resources_unmeasured. The Monitor's inconsistent local-observation timezone
+label is retained literally and excluded from duration arithmetic. All counters,
+actual-node passing admission and collection/analysis timings appear in E0.
+
+P(recurrence)=0.70 was on record before launch. The event is false and its
+computed Brier loss is 0.49. Owner prediction is **not taken**; main and direction
+owner-review commands returned `[]` at this boundary, so no review reference or
+overriding instruction exists. Owner flag **none**. This ordinary result and
+technical decision require no separate P1/P2 item; the existing new-card item
+20260910-ucope-004 remains the card publication, with no invented owner reply.
+The [Chinese brief](../../portfolio/owner/briefs/ucope/2026-09-10_failure-location-a01.md)
+records the bounded result in under 600 characters.
+
+## 5. Decisions this terminal intake produces
+
+1. **Reading:** (a) accept bounded nonrecurrence and preserve the unresolved
+   historical cause; (b) claim the old cause is fixed; (c) treat this as a new
+   performance result. Recommend/select(a), because the frozen completed-prefix
+   branch and preserved records support exactly that scope.
+   **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+2. **This allocation:** (a) end the used one-invocation A01 allowance, preserve
+   artifacts/source and complete Root-authorized scoped remote closeout;
+   (b) repeat the diagnostic; (c) automatically launch fresh T/F/G. Recommend/
+   select(a). No directly supported repair or new allowance follows from this
+   result; Root's terminal instruction explicitly excludes automatic(c).
+   **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+
+Both decisions are object-tier technical, owner flag none. There is no Pro
+blocker, direction-tier decision, Portfolio disposition or C consumption state.
+The separate next object-tier boundary can weigh a fresh complete independent
+T/F/G comparison against ending unchanged spending or a concretely justified
+within-mechanism change. The next scientific discriminator remains that complete
+independent final comparison; another original-path replay is not obligatory.
+This terminal assignment selects and launches no successor.
+
+
+## 6. Verified preservation and completed scoped remote closeout
+
+The E0/intake/summary/Chinese brief and audit were committed and pushed as
+**24059c8ef43789d35bab968698f96f918019af0b**. Under Root's existing terminal instruction,
+options were (a) reclaim this completed execution's four paths after verified
+preservation or (b) retain them for an actual live dependency. Recommend/select
+(a): the execution is terminal and the artifacts/source are preserved.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** This
+technical closeout follows Root's explicit 2026-09-10T20:41Z assignment; it
+requires no additional approval and invents no Root integration acceptance.
+Owner flag none. Main and direction review queries again returned `[]`.
+
+Preservation created a **38-member**, **995723-byte** recovery ZIP at
+`temp/directions/ucope/closeout/ucope-uav-8702-failure-location-a01-20260910/ucope-a01-recovery.zip`.
+Every member was read back and checked by length/SHA256, including all native
+rows, summary, diagnostic final_T.pt, supervisor evidence, source pack, exact
+wrapper and launch/check/analysis scripts and receipts. Archive SHA256:
+`2958bd29b759ca2287d711985a2cc1e14522b7e2ab87f1d263f1da0c9648d4bb`.
+The remote source reference `refs/hmasd-recovery/ucope-a01-20260910`
+was created and verified at **b1d347ef303083824a72dd259c2fbb54e2b5ef75**.
+The original local evidence and separate historical 8702 archive remain intact.
+
+Before removal, the remote command verified all four resolved literal targets
+and their non-symlink boundaries, exact clean launch HEAD, terminal finished/
+exit0, absent recorded PID3100625 and exact tmux session, all **13** retained
+artifact/input hashes and the source recovery reference. At
+**2026-09-10T20:53:46.421950+00:00**, these exact targets were absent on disk:
+
+- `/home/wu/hmasd-worktrees/ucope-uav-8702-failure-location-a01-20260910`
+- `/home/wu/.agent-tasks/ucope-uav-8702-failure-location-a01-20260910`
+- `/home/wu/hmasd-inputs/ucope-uav-8702-failure-location-a01-20260910.sh`
+- `/home/wu/hmasd-inputs/ucope-8702-failure-location-a01-source.pack`
+
+The cwd is also absent from the Git worktree registry. Recorded PID3100625 and
+the exact tmux session remain absent; the recovery reference still resolves to
+b1d347ef3. All 38 original local members were hash-verified again after removal,
+and the ZIP digest is unchanged. The shared authoring checkout and unrelated
+paths were not removal targets. No live A01 observation dependency remains.
+
+Preservation took 0.9233357000048272s through record
+construction; the complete outer command took 1.154264s. The remote cleanup
+subprocess took 0.7225977999914903s within
+0.7414841999998316s local execution /0.9819721s outer
+command. These times are nested. One local preparation snippet had an
+unterminated-string SyntaxError before any file write or SSH call; it took
+0.1870096s and was corrected locally. The remote cleanup command itself was
+accepted exactly once, completed with exit0 and empty stderr, and made
+**zero scientific invocations**. This routine preparation correction has no
+relation to the historical native step error. Measured support fits within
+the conservatively charged 100s reserve; the E0 complete cost bound remains
+692.44s with no budget breach.
+
+The [preservation record](UCOPE_UAV_8702_FAILURE_LOCATION_A01_PRESERVATION_20260910.json) holds archive
+members, source-reference receipt, exact inventory and full cleanup readback.
+All work for the terminal assignment is complete. Root integrates the result
+and closeout commits; the next object-tier scientific choice remains separate
+and unallocated. No fresh comparison, diagnostic retry, family disposition or
+performance interpretation was introduced during closeout.

@@ -1,0 +1,25 @@
+{
+  "provenance": "Root-reported service events, forwarded to the DM during the 2026-09-11 technical closeout; the DM does not claim direct command receipts for these rejected requests.",
+  "events": [
+    {
+      "method": "bounded synthetic-only corrupting-writer attribution",
+      "requested_scope": "Identify the writer from saved evidence and tiny fixtures without constructing the scientific workload.",
+      "rejection": "Agent errored: This content was flagged for possible cybersecurity risk. If this seems wrong, try rephrasing your request. To get authorized for security work, join the Trusted Access for Cyber program: https://chatgpt.com/cyber",
+      "following_message": "This agent's turn failed. If you still need this agent, use the available collaboration tools to give it another task.",
+      "reported_command_or_tool_effect": "none; rejected before any reported effect",
+      "diagnostic_executed": false
+    },
+    {
+      "method": "ordinary array-buffer ownership diagnostic",
+      "requested_scope": "Identify which local extension or array operation changed bytes outside its owned buffer using conventional locally available checks.",
+      "rejection": "Agent errored: This content was flagged for possible cybersecurity risk. If this seems wrong, try rephrasing your request. To get authorized for security work, join the Trusted Access for Cyber program: https://chatgpt.com/cyber",
+      "following_message": "This agent's turn failed. If you still need this agent, use the available collaboration tools to give it another task.",
+      "reported_command_or_tool_effect": "none; rejected before any reported effect",
+      "diagnostic_executed": false
+    }
+  ],
+  "disposition": "Root ordered closeout on existing saved/static findings with no further diagnostic. No bypass, scientific rerun, new allocation or local-copy cleanup follows.",
+  "scientific_polarity": "none",
+  "command_cost_seconds": null,
+  "cost_note": "No command execution was reported; do not invent a measured zero-duration check or add an unobserved runtime."
+}

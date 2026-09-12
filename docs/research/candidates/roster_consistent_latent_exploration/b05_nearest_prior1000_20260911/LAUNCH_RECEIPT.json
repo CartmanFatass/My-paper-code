@@ -1,0 +1,111 @@
+{
+  "handle": "rcle-b05-nearest-prior1000-s25-20260911",
+  "command": "cd /home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911 && mkdir -p temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911 && HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python /usr/bin/time -f wall_s=%e,peak_rss_kib=%M,exit=%x -o temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911/chain-time.txt timeout 610 bash scripts/run_rcle_b05_nearest_prior1000.sh 3ffa65cb4e1a67182b90dce3822d0018ac623c72 /home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911/temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911",
+  "exit_code": 0,
+  "stdout": "Task 'rcle-b05-nearest-prior1000-s25-20260911' started in tmux session 'agent_rcle-b05-nearest-prior1000-s25-20260911'. Output: /home/wu/.agent-tasks/rcle-b05-nearest-prior1000-s25-20260911/task.log\n",
+  "stderr": "",
+  "submission_wall_s": 0.31655019999016076,
+  "source_sha": "3ffa65cb4e1a67182b90dce3822d0018ac623c72",
+  "command_commit": "7d29c9fd10812d11b945ec1118a314a971085825",
+  "node": "wsl_4070",
+  "cwd": "/home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911",
+  "output": "/home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911/temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911",
+  "monitor_dispatch": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "root_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "original_dm": "/root/dm_rcle_restart_recovery2",
+    "accepted": true,
+    "actual_adoption": "pending"
+  },
+  "support_components": [
+    {
+      "name": "initial assignment/status/card reads",
+      "charged_s": 3,
+      "kind": "conservative command-wall allowance"
+    },
+    {
+      "name": "input fast-forward/push and skill reads",
+      "measured_s": 4.4970322,
+      "charged_s": 4.4970322
+    },
+    {
+      "name": "focused instructions/config/source read",
+      "charged_s": 0.0000047
+    },
+    {
+      "name": "focused instructions/config/source read",
+      "charged_s": 0.2298883
+    },
+    {
+      "name": "focused instructions/config/source read",
+      "charged_s": 0.1672678
+    },
+    {
+      "name": "scope/evidence/testing focused reads",
+      "charged_s": 0.2071085
+    },
+    {
+      "name": "live configuration/reviews/owner route read",
+      "charged_s": 0.3724381
+    },
+    {
+      "name": "binding/exposure/current science read",
+      "charged_s": 0.2415526
+    },
+    {
+      "name": "learner/reading/identity/Monitor route",
+      "charged_s": 1.0840579
+    },
+    {
+      "name": "identity and analysis assumptions",
+      "charged_s": 0.2357005
+    },
+    {
+      "name": "configuration exposure calculation",
+      "charged_s": 0.2236061
+    },
+    {
+      "name": "one changed-binding supplied-tensor/stub check",
+      "charged_s": 3.1091643
+    },
+    {
+      "name": "independent changed-contract review",
+      "charged_s": 1.1534143
+    },
+    {
+      "name": "owner item/reviews, scratch inventory and diff readback",
+      "charged_s": 0.4997325
+    },
+    {
+      "name": "owner item/reviews, scratch inventory and diff readback",
+      "charged_s": 0.3154755
+    },
+    {
+      "name": "card/source/owner audit publication",
+      "charged_s": 5.0743308
+    },
+    {
+      "name": "source bundle and exact detached remote checkout/shell syntax",
+      "charged_s": 2.8261416
+    },
+    {
+      "name": "exact command publication",
+      "charged_s": 4.70613
+    },
+    {
+      "name": "single detached launch submission",
+      "charged_s": 0.5118815
+    },
+    {
+      "name": "live Monitor and owner read at dispatch",
+      "charged_s": 0.317019
+    },
+    {
+      "name": "Monitor dispatch",
+      "charged_s": 1,
+      "kind": "conservative"
+    }
+  ],
+  "charged_support_to_receipt_s": 29.7719462,
+  "no_second_submission": true
+}

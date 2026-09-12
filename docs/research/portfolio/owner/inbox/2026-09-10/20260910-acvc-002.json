@@ -1,0 +1,74 @@
+{
+  "id": "20260910-acvc-002",
+  "created": "2026-09-10T16:37:55-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "ACVC新训练8931：沿用固定C/F/dwell比较",
+  "context": "事前绑定一次新DENSE训练8931和评价8932；完整原生270秒、含Monitor支持90秒、总360秒。保持单拟合与条件比较上限。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按既有Portfolio分配执行这一绑定。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "按明确覆盖停止尚未执行部分，保留历史证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "只按新指示修改后续绑定，不自动增加预算。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "这是已获分配的同方法独立训练观察，无筛选或额外控制。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L127",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "记录已获分配的一次新DENSE训练8931及固定C/F/dwell比较；是否异步改变尚未执行的选择？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC卡§10",
+        "from": "8921结果已完成",
+        "to": "只新增8931训练、8932评价，完整270秒加含Monitor支持90秒"
+      }
+    ],
+    "if_refused": "按所有者明确覆盖处理尚未执行的工作，保留已有证据；不自动替换或重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+        "quote": "Select training master **8931** and evaluation namespace **8932** before constructing",
+        "why": "事前固定新训练实例，沿用原生学习和终点评价。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_INTAKE_20260910.md",
+        "quote": "The strongest direct countercase is five adverse F−dwell worlds",
+        "why": "停留控制也有收益；原有条件均值不证明稳定优势或纯回撤因果。"
+      }
+    ],
+    "uncertainty": [
+      "新实例可能弱或反向；仍保留全部三组评价。",
+      "旧Monitor精确总账未知；新任务明确纳入支持上限。"
+    ],
+    "cost": {
+      "compute": "一次704回合、180224团队步、1024 Adam；原生270秒、全部支持90秒、总360秒。",
+      "owner_time": "无需等待回复",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+    "source": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md"
+  },
+  "starred": false
+}

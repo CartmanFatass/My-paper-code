@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-10-four-slot-rolling-refill-01",
+  "event": "OWNER_DIRECT_ROOT_CALLER_RESEND_TERMINAL",
+  "observed_at_utc": "2026-09-11T03:48:31.0030398+00:00",
+  "executor_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "paired_user_node_time_label": "今天 20:34",
+  "natural_completion": {
+    "worked_for": "12m 16s",
+    "active_generation_control_present": false,
+    "response_actions_present": true,
+    "assistant_text_path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/OWNER_DIRECT_RESEND_RESPONSE.md",
+    "classification": "COMPLETE_TRANSPORT_CAPABILITY_GAP_NO_SCIENTIFIC_DECISION"
+  },
+  "send_count_this_owner_direct_event": 1,
+  "retry_or_generation_control_used": false,
+  "archive_status": "BLOCKED_TERMINAL_CAPABILITY_GAP",
+  "scientific_decision_formed": false,
+  "further_send_authorized": false,
+  "fresh_delivery_observations": [
+    {
+      "branch": "codex/portfolio",
+      "branch_head": "77b9d573aa609bac253544ca9d4429b39b3a0adb",
+      "response_path_status": 404,
+      "issue_number": 17,
+      "matching_preparation_comment_id": 5627828518,
+      "matching_delivery_comment": null,
+      "observed_at_utc": "2026-09-11T03:48:31.0030398+00:00"
+    },
+    {
+      "branch": "codex/portfolio",
+      "branch_head": "77b9d573aa609bac253544ca9d4429b39b3a0adb",
+      "response_path_status": 404,
+      "issue_number": 17,
+      "matching_preparation_comment_id": 5627828518,
+      "matching_delivery_comment": null,
+      "observed_at_utc": "2026-09-11T03:50:35.2353441+00:00",
+      "reason": "delayed independent readback after owner warning that Pro may falsely report no upload"
+    }
+  ],
+  "delivery_truth_rule": "Classify upload/delivery from fresh authoritative branch-path and issue-comment readback, never from the provider self-report alone."
+}

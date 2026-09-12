@@ -1,0 +1,466 @@
+{
+  "checked_utc": "2026-09-12T02:05:51.122260+00:00",
+  "scope": "Documentary response/binding/source verification only; no new experiment, source implementation or statistical reanalysis. Currentness compares normalized checkout text with committed Git text, not commit identity.",
+  "request_id": "2026-09-11-rolling-capacity-after-b02-portfolio-01",
+  "transport_request_alias": "2026-09-11-rolling-capacity-after-folr-b02-portfolio-01",
+  "response": {
+    "sha": "05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+    "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md",
+    "bytes": 62241,
+    "lines": 231,
+    "sha256": "85c1148a070bc53e5cbe7c7783fd938b71a74768c964a528e239fba35de13443",
+    "git_blob_sha": "0bd8c09a4047e0c8ffe137f5189859944bbaa46a",
+    "github_blob_identity_matches": true,
+    "full_response_read": "All 231 lines including all reference definitions read; response completeness and scientific conformance assessed in decision record.",
+    "changed_paths": [
+      "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md"
+    ],
+    "parent": "0e06b09ba60973879d2053faefed7483bbd7458d"
+  },
+  "task_sha": "56de8d1072c55b16116a6fe14890927b346e4a66",
+  "handoff_sha": "12fb818813e2cd87d5832dbf29c3d611211618c1",
+  "authoring_input_sync_sha": "66aa7edb3d7416d4c224a2e55b60aa2b4405bb73",
+  "root_integrated_input_sha": "a1b2646e29a340ddce4137fa01251d2d54d0e6ca",
+  "references": [
+    {
+      "commit_sha": "9755931f892990e4555faf0b276ed713579c81f9",
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/SCIENCE_BRIEF.md",
+      "bytes": 36755,
+      "sha256": "c0f2323d5c0adbe5b1eda56399167dbb39ebe7574c92a44de3f16c6edb152ffe",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "9755931f892990e4555faf0b276ed713579c81f9",
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/PREPARATION_INTAKE.md",
+      "bytes": 12457,
+      "sha256": "1abb14ec81e059eeebf216046fdd8b07d45f9775893095306554a74561d33f9a",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "9755931f892990e4555faf0b276ed713579c81f9",
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/FACTS.json",
+      "bytes": 19806,
+      "sha256": "5e3fa8c1f4a68fe98a99595c3d980d593d41305c263b82ea0f24b3759ae230c0",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "9755931f892990e4555faf0b276ed713579c81f9",
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/ISSUE_SNAPSHOT.json",
+      "bytes": 18539,
+      "sha256": "b3943d75c32ea1e77a2da0860e75028394d08fdfc850cf2685951be708915353",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "AGENTS.md",
+      "bytes": 44084,
+      "sha256": "f5f1e601be267d5881f05e0f46cc9a66aac99175fa9c91783f7688f1914687bd",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "bytes": 11577,
+      "sha256": "c5a6deca6277702bc7777eaae02bfdf2c74381873efd75881e0c425683422667",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "bytes": 11428,
+      "sha256": "fb3ccd5f74c44a1f14e3de638dbc4b4fa7087fc79deacd2b84951760ad3d6c36",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "bytes": 62942,
+      "sha256": "f01b9f8385202e82e67ae58b4d6bfc48ada8a208723c20581d89e2ddbdcbee75",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "50703c1bd1a4411c31a0b211d3ec8aff88fa0d0f",
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "bytes": 66565,
+      "sha256": "1dc62ab2a10aef042c4a3ca3ba53b26daecbea0529e653359167cc03ecb76752",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "9755931f892990e4555faf0b276ed713579c81f9",
+      "path": "docs/research/portfolio/decisions/2026-09-11-post-program-vacancies.md",
+      "bytes": 23278,
+      "sha256": "a3da321f42cf494ef4440b1a3e75795d2cd5c294f5dd2be6dea73e8bf2144bfb",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "67b9ab3a794d026cf95ade7dfa770037dc786528",
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/archive/RESPONSE.md",
+      "bytes": 34049,
+      "sha256": "de211e40dd6c07fdba22cd9d3801b565cf5e758d20c66c53d01503f2adcbdec2",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "29b57b8b84c7407b7ba6e9c32f3688e0a6cde88e",
+      "path": "docs/research/candidates/acvc/ACVC_POST_THREE_FRESH_CONVERGENCE_INTAKE_20260911.md",
+      "bytes": 17415,
+      "sha256": "6db6620845f69349a86907b9f9fa8ed84667c73b280ab99a236882824d16b52f",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+      "bytes": 43535,
+      "sha256": "d52891c39dc300ad83449226962f98cd913eff9891b6d046e918b8742e04e599",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md",
+      "bytes": 11212,
+      "sha256": "d3a7b5bcae1b573d2029b615c714913733426ae63c06c0ff3cb680e8ac3d08db",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "2b22270b3b076df60f4afd3203c3f09aeab3b98b",
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_SCIENCE_CARD_20260911.md",
+      "bytes": 10265,
+      "sha256": "e4f57ac40095b2fa513c25b57c1d6ff77bd56daa583b51be123526b6532464f0",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md",
+      "bytes": 18060,
+      "sha256": "0216763afc49223d5bc6f156b749696f612af29b1e05602c2a109dfcb023845f",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md",
+      "bytes": 5529,
+      "sha256": "7822524bf0de8691e3afc1bdd0b453d747af7447c25c3055c1a724d640a35f78",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "8da607b4b7fb415b4212e0e20d74f9dc9c20a32e",
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md",
+      "bytes": 19895,
+      "sha256": "54f9eb1a539b29c3260dbae4ae5af9768a41f9620be5be03bb565ac804f4fa77",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+      "bytes": 22261,
+      "sha256": "e0fa494e475cf3e2fe4f5a6baf686707f986cb637a868ee8b4cffd27c21d6281",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771003_INTAKE_20260911.md",
+      "bytes": 11632,
+      "sha256": "6073df0789406f31828d3d723b6ab6845aade316bb5d5cfbf569555d9560f762",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771003_RESULT_EVIDENCE_20260911.md",
+      "bytes": 8514,
+      "sha256": "2bd6c804890b2ab08453a1ea7a7a3c9f06f73dc0d3c75d2679d3740e01b47154",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771003_20260911/SUPPORT.json",
+      "bytes": 10121,
+      "sha256": "403b622296e592ad11bb0504882055f093a769167a0abc0dd8d66fe0e8396a7f",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md",
+      "bytes": 16984,
+      "sha256": "746fb3f7feebbcb3ece119ff83f4bbf6299ba84203b1e2a9bdba9370dba4cae0",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md",
+      "bytes": 12341,
+      "sha256": "d05b5042a4be39cea9c00c37c505e6d2974b11f86f4cc3c90c5db12ea0f6e1e7",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "640d018f0e2a374cd95b0cbae9f5f2e705b22aaa",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260911_channel_normalization_convergence/TRANSPORT_BLOCKER_INTAKE.md",
+      "bytes": 7376,
+      "sha256": "1accba1571578c1ece267e9bca3680e5331703de94d5a987996ebd30e2ad8a99",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_INTAKE_20260911.md",
+      "bytes": 12981,
+      "sha256": "fc3d75fc48f5f33a2b4759d906e62769dd4127a245f99766ab9c3e2dfe5295c6",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_P47_TECHNICAL_UNBLOCKING_INTAKE_20260911.md",
+      "bytes": 12119,
+      "sha256": "202048abd52475a258c83565a9a84730f279c44b962441eb8fbba441bdea17e9",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md",
+      "bytes": 10425,
+      "sha256": "9fe8b6dfbd681f4f96eee27148c6b2bfb891af66a3342bc9245147a7d65dab87",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "bytes": 32052,
+      "sha256": "345a00a174f3830aa9b2d6fcdeff4bea02f0fb786b1f8a26da0cc21cbd731fe8",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
+      "bytes": 32087,
+      "sha256": "9a59b0c716a6a1ea3bc98b09789a6d6e3d049c65442620cd8b6a097a54f84123",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md",
+      "bytes": 53389,
+      "sha256": "3522f67f1ed92078b6ba4954cc94ae1985d52a1a3b43fd5e59b36069f71d8ad2",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md",
+      "bytes": 84081,
+      "sha256": "08e5a85acb2fb73205022211c4ee35baa6107502b60da72c989b389d35019090",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/DIRECTION.md",
+      "bytes": 38169,
+      "sha256": "c056718e634bfea0825fb55b54b974e6e4fb78145feff28751483a21656cdba9",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "bytes": 48187,
+      "sha256": "ffec6f452195bc8c60ee31eca6c25203d81443af927f8741832dae2887a31343",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "bytes": 51066,
+      "sha256": "9f6dd82d1f9035e8093c3cd9882fea5ee5baa781182d85ce4c6343ad5b4c00d1",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "bytes": 52543,
+      "sha256": "895476dcacf024a251f4902cec7f8168b9b68e04f659a66c14193fabf5b40744",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+      "bytes": 54871,
+      "sha256": "eaf079ddba94cd33bb7b2d385c5fa7caf4339deb2477e4eec1b3a73e6df91e16",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/ucope/DIRECTION.md",
+      "bytes": 160313,
+      "sha256": "2be254a9501ae8de51df3b3c4a2d361a3e9c58424008e7a70f7a9c55c90566d2",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "bytes": 45965,
+      "sha256": "d288e527b7304af8caddf0d501e0186d5e6923c3fff1e70e132bf9edbb8117f8",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
+      "bytes": 30428,
+      "sha256": "9639d9f76a06300f1bc1ab3b867420e8827c15edd933c4b04832955ca96ba8fa",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/vsp_02/DIRECTION.md",
+      "bytes": 10794,
+      "sha256": "9f12835000b6e29662bc23265eebd49b4a9f4a237e8d36e90b76d3b6c0c323e5",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/vsp_03/DIRECTION.md",
+      "bytes": 37002,
+      "sha256": "666f324eb0b109a06c3f73135da68bb6333a8f045014ca645b112d5f697d75ae",
+      "matches_published_reference_check": true
+    },
+    {
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "path": "docs/research/candidates/vsp_c1/DIRECTION.md",
+      "bytes": 63630,
+      "sha256": "063d9291faba212941c75a7ab0e14f69c741bcfbc0c4cdca95573d8b9a88020b",
+      "matches_published_reference_check": true
+    }
+  ],
+  "reference_count": 48,
+  "distinct_reference_shas": 9,
+  "expected_task_plus_reference_links": 49,
+  "response_contains_all_bound_reference_links": true,
+  "missing_reference_links": [],
+  "current_method_surface_checks": [
+    {
+      "path": "AGENTS.md",
+      "bound_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "current_worktree_same_bytes": true
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "bound_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "current_worktree_same_bytes": true
+    },
+    {
+      "path": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "bound_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "current_worktree_same_bytes": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "bound_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "current_worktree_same_bytes": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "bound_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "current_worktree_same_bytes": true
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "bound_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "current_worktree_same_bytes": true
+    }
+  ],
+  "transport_archive": {
+    "directory": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-11-rolling-capacity-after-folr-b02-portfolio-01--portfolio--attempt-01",
+    "files_observed": [
+      {
+        "name": "2026-09-11-rolling-capacity-after-folr-b02-portfolio-01--portfolio--attempt-01__00_PROMPT.md",
+        "bytes": 1923,
+        "sha256": "b60a78947ab72b0c20277495e95cb1c82b859c74af468dc86ba657ece43ac59d"
+      },
+      {
+        "name": "2026-09-11-rolling-capacity-after-folr-b02-portfolio-01--portfolio--attempt-01__02_RESPONSE.md",
+        "bytes": 62241,
+        "sha256": "85c1148a070bc53e5cbe7c7783fd938b71a74768c964a528e239fba35de13443"
+      },
+      {
+        "name": "2026-09-11-rolling-capacity-after-folr-b02-portfolio-01--portfolio--attempt-01__04_CHAT_RECEIPT.md",
+        "bytes": 474,
+        "sha256": "ae3dba15028e07dd4e2f975c8a05fe348d663923449a3c14b34d90b3020dee2d"
+      },
+      {
+        "name": "2026-09-11-rolling-capacity-after-folr-b02-portfolio-01--portfolio--attempt-01__PACKET_MANIFEST.json",
+        "bytes": 2292,
+        "sha256": "9718747a231ad2413e60b07d8b96f950440700b8c3a1162f71a16ca84879d187"
+      }
+    ],
+    "prompt_bytes": 1923,
+    "prompt_sha256": "b60a78947ab72b0c20277495e95cb1c82b859c74af468dc86ba657ece43ac59d",
+    "prompt_matches_bound_handoff_exactly": true,
+    "response_matches_immutable_git_exactly": true,
+    "missing_declared_facts_file": true,
+    "declared_facts_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-11-rolling-capacity-after-folr-b02-portfolio-01--portfolio--attempt-01/2026-09-11-rolling-capacity-after-folr-b02-portfolio-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+    "manifest_direction_ids_match": true,
+    "manifest_binding": "portfolio:cross_direction",
+    "alias_disposition": "Preserve both strings; exact accepted prompt/TASK, response SHA and source/parent/operator binding identify one request. No rebinding or resend."
+  },
+  "author_new_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "policy_search_candidates": 0,
+    "profiling": 0,
+    "source_implementation_edits": 0,
+    "source_or_numerical_tests": 0,
+    "new_raw_result_analysis": 0,
+    "provider_sends": 0,
+    "transport_dispatches": 0
+  },
+  "selected_portfolio_options": {
+    "FSD": "S",
+    "ACVC": "A",
+    "FOLR": "P",
+    "MGTAP": "N"
+  },
+  "selected_future_numeric_caps_seconds": {
+    "FSD_new_complete": 3000,
+    "ACVC_new_conditional_complete": 3000,
+    "sum_nonfungible": 6000,
+    "VNFC_retained_conditional": 900
+  },
+  "actual_new_scientific_invocations_at_intake": 0,
+  "claim_note": "No new empirical observation; all scientific claims remain bounded by existing direction evidence."
+}
