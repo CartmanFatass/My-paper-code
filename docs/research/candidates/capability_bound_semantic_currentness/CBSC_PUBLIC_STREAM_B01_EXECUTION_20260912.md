@@ -93,23 +93,37 @@ updates/checkpoints/rule context are retained. Supervisor root:
 
 ## Launch and observation
 
-Prelaunch publication: this record defines the exact accepted source and commands;
-no accepted scientific handle yet at this commit.
-Use live C:/Projects/HMASD/.codex/hmasd-monitor.toml, Monitor
+Exact commands/technical acceptance were published in7628c76c525d69c8705c0632a9ceca8ff6fa40b7
+before launch. Source/RAW/STRUCT/handle and both test-scratch absence checks returned
+exit0 at2717796. Supervisor accepted at2026-09-12T17:20:45.9621478Z:
+running, pid3376051, tmux_active=true, exit=null. This is one accepted command-list
+handle; it does not assert that both sequential arms were simultaneously running.
+
+Actual RAW admission at17:20:45.601435Z passed: physical/effective available
+15632343040 bytes versus4294967296-byte floor; /proc/meminfo, no cgroup limit
+reported. Receipt: evidence/public-stream-b01-20260912/raw-admission.json.
+STRUCT's separate adjacent admission remains part of its committed command.
+
+Used live C:/Projects/HMASD/.codex/hmasd-monitor.toml, Monitor
 01a095d0-21ee-7c02-9d97-3681b5678200, Root01a095b7-850f-7401-ad4e-5e4320d285f1.
-Send MONITOR_ADD immediately after actual supervisor acceptance; require get_goal,
-continue matching unfinished goal or create_goal without token budget, retain this
-handle through accepted terminal delivery, actual unfinished goal in MONITOR_ADOPTED,
-then MONITOR_GOAL_COMPLETE before an empty goal completes. Dispatch≠adoption.
-DM preserves collection/intake and does not run a parallel polling loop after handover.
+Direct MONITOR_ADD send was accepted by the app, with all required goal/terminal
+instructions. Root then forwarded actual MONITOR_ADOPTED: a fresh unbudgeted goal
+is active, same supervisor running at2026-09-12T17:21Z, pid3376051,
+tmux_active=true, uptime approximately34s, exit=null. **Adoption confirmed.**
+The monitor retains this handle through accepted terminal delivery and sends
+MONITOR_GOAL_COMPLETE before completing an empty goal. DM stopped routine polling;
+terminal collection/intake is pending and remains with /root/dm_a_mx_cbsc_s.
 
 ## Cost and cleanup obligations
 
 Support includes published card/code/review/checks/Git/staging/adoption/collection/
 intake/integration/cleanup once. Failed fetch74.517201s and both test commands
 2.546811+1.490381s are included, not scientific runtime or reused S allocation.
-New C support has ample room under600s at this prelaunch boundary; final evidence
-will report the measured invoked prefix and unknown client/Root tail honestly.
+Measured C support prefix through actual RAW admission/readback is
+119.923281s: per-command stopwatch (or command wall when absent), plus5.9s
+Reviewer enclosing tool wall once. Nested waits/reviewer command walls are not
+added again. Remaining publication/Monitor/collection/intake/Root/cleanup support
+must be charged once inside600s; full deliberation/client overhead is unmeasured.
 Old S cost and older cumulative unknown tails remain historical once, outside C's
 new future allowance. No native saving transfers to support.
 
@@ -119,4 +133,3 @@ digests and receive Root integration/retention/reclamation acceptance before rem
 scientific roots. Shared authoring checkout remains in use. Terminal result ends
 the finite pair; DM returns its bounded scientific reading or concrete dependent
 limitation and explicit unexecuted remainder. No second S/retry is authorized.
-
