@@ -1,0 +1,28 @@
+{
+  "sha": "8ea629595da592dfce9b7774341863a7115c7cef",
+  "destination": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771303-20260912",
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=8",
+    "-o",
+    "ServerAliveInterval=3",
+    "-o",
+    "ServerAliveCountMax=1",
+    "hmasd-wsl-node",
+    "/usr/bin/timeout --signal=KILL 35.0s zsh -lic 'exec /home/wu/.venvs/hmasd/bin/python -u -'"
+  ],
+  "network_context": "zsh -lic",
+  "payload_bytes": 3206,
+  "cr_bytes": 0,
+  "requested_outer_limit_seconds": 45.0,
+  "remote_limit_seconds": 35.0,
+  "scientific_submissions": 0,
+  "returncode": 0,
+  "stdout": "{\"boundary\": \"payload_received\", \"destination\": \"/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771303-20260912\"}\n{\"status\": \"ready\", \"sha\": \"8ea629595da592dfce9b7774341863a7115c7cef\", \"worktree\": \"/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771303-20260912\", \"readback_paths\": [\"scripts/run_fsd_uav_renewal_batch_b02.py\", \"scripts/run_fsd_uav_individual_renewal_b01.py\", \"scripts/run_flexible_skill_duration_e0.py\", \"hmasd/agent.py\", \"hmasd/utils.py\", \"configs/config_1.py\", \"envs/pettingzoo/scenario1.py\", \"docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771303_20260912/D0.sh\", \"docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771303_20260912/I.sh\"], \"scientific_submissions\": 0, \"remote_wall_seconds\": 5.4081133239669725}\n",
+  "stderr": "(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\n",
+  "local_wall_before_receipt_seconds": 6.25,
+  "timing_limit": "External caller measures startup, receipt publication and exit."
+}

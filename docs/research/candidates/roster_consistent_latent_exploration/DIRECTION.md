@@ -19,59 +19,72 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 ## Current scientific question
 
-Can a fresh FLEX learner, retaining the legal .99-nearest prior and full native
-roster-change task, improve its own initialization and exceed attained
-INDEPENDENT-NEAREST at final1000 when complete manager/claim score gradients are
-separately normalized and combined with equal weight? This is a finite whole-recipe
-service question. An advantage over joint100, identified gradient conflict,
-variance reduction, stable superiority and transfer are outside this comparison.
+How can jointly learned behavior improve useful native service through physical
+roster changes under legal information and a competent service reference? RCLE's
+multi-agent credit question remains scientifically open. The completed post-B07
+Convergence judgment holds further development spending only on the tested
+equal-unit/.99-prior/FLEX/final1000 recipe and no longer recommends its unchanged
+fresh-fit candidate. It preserves attained INDEPENDENT-NEAREST and the direction's
+continuing scientific ownership. It does not select another mechanism or object.
 
 ## Current position
 
-The original Convergence response of 2026-09-12 retains the exact equal-unit
-manager/claim candidate for a later separately funded, one-fit service B, as a
-close call against holding this named route. The complete response and its
-scientific/specification check are accepted in
-[RCLE_CHANNEL_NORMALIZATION_CONVERGENCE_INTAKE_20260912.md](RCLE_CHANNEL_NORMALIZATION_CONVERGENCE_INTAKE_20260912.md).
-It selects own initialization and attained nearest as comparators, without a
-fresh joint100 arm. Portfolio response `268d2b4df7f31df8a27466ddfbb3bcef6ba587a4`
-subsequently funds the exact one-fit service B in
-[RCLE_B07_EQUAL_UNIT_SCIENCE_CARD_20260912.md](RCLE_B07_EQUAL_UNIT_SCIENCE_CARD_20260912.md):
-final1000 with own-init/final/nearest panels, 900 s total native including reference,
-600 s support and 1500 s complete future invoked work. This new allocation does
-not reinterpret the consultation's former zero numerical allowance, B06 evidence,
-Portfolio lifecycle, priority or recast count.
+The accepted [post-B07 Convergence intake](RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md)
+applies response903aa067cee2833a81e6758ddc0abf593ad8b4b6: a reversible hold on
+further development spending for this exact tested recipe. Its intended service
+observation is complete. The prior candidate recommendation and separately funded
+B07 remain valid historical decisions; the new recommendation follows that
+observation and does not rewrite it. RCLE remains ACTIVE under current owner
+continuity. No whole-direction park/closure, Portfolio priority/capacity change,
+recast, new fit or consultation follows from this narrow judgment.
 
-The selected rule is `d = u(g_M) + u(g_C)`, then `theta -= .02*u(d)` when d is
-nonzero; exact cancellation leaves parameters fixed. Both derivatives use the
-same 64-episode graph and complete 26,161-scalar FP64 inventory; shared tensors
-receive both contributions once, and the ordinary baseline update follows.
-There is no factor 100. Near cancellation or a weak noisy channel can receive
-the full step, so the tested recipe remains an allocation heuristic without an
-identified conflict-repair or unbiased-reformulation claim. Native reward, available information, physical
-survivor/newcomer/departure ownership and four-tick claims remain protected.
+The tested rule was d=u(g_M)+u(g_C), followed once by theta-=.02*u(d) for a nonzero
+direction; exact zero/cancellation leaves parameters fixed. Both stopped full-return
+derivatives use the same 64-episode graph/parameter state and the complete ordered
+26,161-scalar CPU FP64 inventory. The baseline update follows. There is no factor100,
+epsilon rejection, projection, second update or extra rollout. The .99 nearest prior,
+public tick24 physical roster event, entity-owned survivor/newcomer/departure FLEX
+state and four-tick claims remain the tested laws. Weak-channel noise or near
+cancellation could affect this heuristic, but no such cause is identified.
 
-B06 remains one valid fit with Delta_ref=-.00575764973958 and
-G_U=-.000107828776042, eight reference U deficits, mixed local learning signs,
-five reference F harms and 2012/2048 failure-coded tau40 outcomes. Earlier W100/W1
-native learning and four B06 initialization-cell gains are the strongest support
-against a broad unlearnability claim. Supplied-prior competence, finite exposure,
-update allocation and partner co-adaptation remain alternatives; no current cause
-is identified. B07 now supplies the complete one-fit final1000 comparison:
-Delta_ref=-.008841959635417 (conditional95%[-.012610153128903,-.005073766141930])
-and G_U=-.000205485026042 (conditional interval spans zero). Both primary paths
-and all eight reference U cells are negative; six reference F cells and two
-failure-coded tau cells worsen. Three cells improve over initialization, while
-five U/four F/one tau cells worsen. The [complete E0](RCLE_B07_EQUAL_UNIT_RESULT_EVIDENCE_20260912.md)
-and [intake](RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md) accept a local reference deficit,
-no positive aggregate learning claim and mixed native consequences under the .05 U
-MEI. This is one training realization, without normalization-vs-joint100 attribution,
-stable superiority/degradation, equivalence or a family verdict. Tuned headroom
-remains absent. The original reference-column failure is retained separately; one
-authorized eager-reference completion supplies the fixed missing panel, without
-identifying a fault cause or global cure. That discriminator is complete and the
-named allocation ends; no further discriminator or successor is allocated here.
-The historical sections below preserve the earlier objects and their own limits.
+The [complete B07 E0](RCLE_B07_EQUAL_UNIT_RESULT_EVIDENCE_20260912.md) and
+[empirical intake](RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md) preserve Delta_ref
+-0.008841959635417 (conditional 95% [-0.012610153128903,-0.005073766141930]) and
+G_U -0.000205485026042 (conditional interval across zero). Both primary paths and
+all eight reference U comparisons are negative. Against nearest, six F/two
+failure-coded tau cells worsen; against initialization, five U/four F/one tau
+cells worsen while three U cells improve. Favorable F/tau/Y observations remain.
+The .05 U MEI is unchanged. This n=1 comparison supports the bounded service
+reading and development judgment, not stable degradation/equivalence or an
+identified normalization-vs-joint100 effect. Tuned headroom remains absent.
+
+B06 stays separate: Delta_ref -0.00575764973958, G_U -0.000107828776042, eight
+reference U deficits, four local initialization gains and mixed native harms.
+It is neither a fresh joint100 control nor a second fit of the exact B07 recipe.
+Earlier W100/W1 native learning and the surviving local B06/B07 gains are the
+strongest support against broad RCLE unlearnability. The completed B07 attained-
+reference deficit and lack of positive aggregate initialization learning are the
+strongest contradiction to maintaining this unchanged candidate recommendation.
+The training-history variation of the exact recipe remains unmeasured; Pro
+accepts the risk of foregoing a favorable repetition without declaring it absent.
+Supplied-prior competence, finite exposure, update allocation and partner
+co-adaptation remain alternatives rather than identified explanations.
+
+The historical reference-column failure and its unknown unreturned work remain
+preserved. The authorized eager-reference completion supplies the intact missing
+panel without identifying a writer or establishing a global cure. No historical
+reproduction or diagnostic is required for the accepted development judgment.
+
+The next discriminator for reconsidering this recipe is a concrete changed use
+or credible new evidence affecting its service value/cost: state how another
+observation would alter inclusion of the optional learned path. It need not be
+positive, an exact optimum or a complete causal explanation. This is a revisit
+condition, not today's retained fit, new algorithm or automatic consultation.
+The broader direction remains open; a subsequent object needs its own scoped
+selection. [Current continuation](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md)
+records the completed documentary unit and continuing DM ownership.
+
+The historical sections below preserve earlier objects and their own limits.
 
 ## Portfolio recast — 2026-08-30
 

@@ -1,0 +1,37 @@
+{
+  "question": "在已有MGTAP TOP/DENSE科学选择上，是否独立资助完整第一组新B？它不是新注册方向。",
+  "changes_if_approved": [
+    {
+      "target": "MGTAP T",
+      "from": "TOP科学对象已PRO_FINAL、实现和实验未分配",
+      "to": "若Portfolio选yes，原DM实施唯一query修改、完整一pair/检查review/Monitor/intake/closeout，新450/arm900native1200complete；300support口径由Pro明说"
+    }
+  ],
+  "if_refused": "保留TOP科学选择、DENSE默认和ACTIVE方向，返回实际投资决定；不自行改选、重发方向问题或借旧M余额。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/CONVERGENCE_INTAKE_20260912.md",
+      "quote": "The scientific shape is decided.",
+      "why": "原节点已选择下一有界观察，不需要另一轮方向咨询来重新选择。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/INVESTMENT_NEED.md",
+      "quote": "Radio prominence may not identify the service-relevant partner; mean context, intact DENSE adaptation, rank switching and training variation can defeat TOP.",
+      "why": "历史COND正值不是TOP证据，投入可能不值得新实现和整pair成本。"
+    }
+  ],
+  "uncertainty": [
+    "新TOP率、内存、完整support/provider成本未知。",
+    "旧Convergence300support为planning reference，Root当前offer写上限；要求Pro明确新条款，不改历史科学有效性。"
+  ],
+  "cost": {
+    "compute": "450秒/whole arm、900native、1200complete future invoked；完整支持300的参考/硬分项状态需Pro明确。零额外arm/search/timing/unchanged fourthpair。",
+    "owner_time": "无需逐项确认。",
+    "reversibility": "costly",
+    "waits_on_this": "T实施与实验等待明确投资；其他五链和新方向发现不等T结果。"
+  },
+  "verdict_text": "Author recommends T=yes for the complete selected TOP/DENSE object, with explicitly chosen new cost terms; this recommendation is not funding or a new direction registration.",
+  "source": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/MGTAP_T_INVESTMENT.md"
+}

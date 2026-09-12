@@ -1,0 +1,44 @@
+{
+  "question": "FSD下一投入选择：一组I5/D0-long10新比较、仅用途判断，还是暂缓本包新投入？当前只提交建议，科学与Portfolio选择尚未执行。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/flexible_skill_duration/FSD_POST_FIVE_PAIR_DECISION_INPUT_20260912.md",
+      "from": "五组均为I/D0各五轮学习，是否值得额外费用仍未决",
+      "to": "若选B，仅一组I五轮与同信息D0十轮；若选USE只判断已有证据的有限用途；HOLD不给本包新投入"
+    }
+  ],
+  "if_refused": "按实际Portfolio决定采用USE/HOLD或其合规替代；不自动重复第六组，不把本包投资暂缓记为FSD方向停止。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_POST_FIVE_PAIR_DECISION_INPUT_20260912.md",
+      "quote": "The unresolved practical choice is whether to spend that\nadditional learning cost on I or on more ordinary fixed-period learning.",
+      "why": "更强的普通学习比较器回答新的使用/费用问题，避免原样重复。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_POST_FIVE_PAIR_DECISION_INPUT_20260912.md",
+      "quote": "Ten updates are a coarse design choice, not an\nestimate of an exact equal-time maximum.",
+      "why": "新实验并非严格等时，完整耗时仍未知；低费用用途判断是强反选项。"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_POST_FIVE_PAIR_DECISION_INPUT_20260912.md",
+      "quote": "These remain five separate original results, with single-pair limitations and\nno newly pooled primary.",
+      "why": "既有正负和单pair限制保持，新的单pair仍不能证明稳定优势。"
+    }
+  ],
+  "uncertainty": [
+    "未测过D0十轮完整耗时，I费用也受真实信用行和竞争影响。",
+    "新对照改变训练量，比较整套学习方案，不能解释单组件因果。",
+    "主机调优同信息headroom仍缺；不是零也不是启动门槛。",
+    "当前K/E/L/U已固定为TASK b52ed2e045841659953abfe9a76b55c69adcce5d；新B仅供下一干净请求边界，不覆盖既定U或触发重复咨询。"
+  ],
+  "cost": {
+    "compute": "提议而非获批：D0-long≤1800s，I≤1800s，native≤3600s，support≤300s，完整≤3900s；一次≤45s投递计入support。USE完整咨询费用未知；HOLD无新投入。",
+    "owner_time": "异步查看；不逐项等待确认。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing; current task only publishes the proposal"
+  },
+  "verdict_text": "Recommend B-LONG-D0, subject to the proper investment decision.",
+  "source": "docs/research/candidates/flexible_skill_duration/FSD_POST_FIVE_PAIR_DECISION_INPUT_20260912.md"
+}

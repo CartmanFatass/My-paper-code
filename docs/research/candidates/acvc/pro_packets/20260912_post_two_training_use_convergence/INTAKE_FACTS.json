@@ -1,0 +1,81 @@
+{
+  "request_id": "2026-09-12-acvc-post-two-training-use-convergence-01",
+  "response": {
+    "source_commit": "15c56cc40c56d2edb6e8c9a1a217a994f30cb3fc",
+    "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md",
+    "bytes": 31907,
+    "lines": 149,
+    "sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+    "changed_paths": [
+      "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md"
+    ],
+    "initial_root_transcription_match": false,
+    "corrected_root_receipt_match": true,
+    "transport_archive_byte_equal": true,
+    "line_feeds": 149,
+    "crlf_pairs": 0,
+    "initial_variant_status": "nonauthoritative external transcription; reconciled by Root and Transport"
+  },
+  "task_sha": "86c4daafe55507ddac9c0b04833c90307f32af30",
+  "input_sha": "5d756f3b16ba724115bcd03233f2f5f4cd6d7533",
+  "fifteen_effective_reference_mappings_match": true,
+  "actual_pinned_links": 16,
+  "all_fifteen_accessed": "Pro reports direct access; DM verifies citations and substantive correspondence, not every connector call",
+  "delivery_comment": "https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5648661785",
+  "original_binding_preserved": true,
+  "current_control_sha": "fa3ad35a87ca820a693a16dee00bc7b8b1df3e82",
+  "current_method_difference": "Only AGENTS owner-continuation clarification changed since task method f938006f; empirical/scope/foundational sections unchanged. New instruction agrees with selected continuing direction.",
+  "selected_direction_object": "one fresh C-trained DENSE cluster-law fit; one final checkpoint; C/F/own-dwell64 private panels",
+  "decision_provenance": "PRO_FINAL / OWNER_DELEGATED under OWNER_DIRECT continuous ACVC instruction",
+  "empirical_allocation": false,
+  "card_or_scientific_identity_created": false,
+  "implementation_or_runtime_allowance": false,
+  "current_scientific_exposure": 0,
+  "counts_recomputed": false,
+  "historical_cost_correction": {
+    "C01_itemized_native_s": [
+      170,
+      171,
+      178,
+      169,
+      167
+    ],
+    "accepted_sum_s": 855,
+    "accepted_raw_sum_s": 841.92,
+    "complete_itemized_range_s": [
+      167,
+      178
+    ],
+    "effect": "Correct author shorthand170-178 to exact accepted list; no scientific, budget or forecast change."
+  },
+  "predictions": {
+    "owner": "not taken",
+    "DM": "no pre-result consultation forecast; none invented"
+  },
+  "owner_reviews": [],
+  "science_conformance": "accepted; no concrete conflict or extra consultation",
+  "cost": "complete documentary/provider/intake and future cluster native/support costs unknown; no old cap or savings renewed",
+  "transport_prompt": {
+    "exactly_matches_bound_handoff": true,
+    "bytes": 1922,
+    "sha256": "75ba6621d0073019e06f59abc2f6094f567396261cf19c3be677107ab8793370"
+  },
+  "intake_completed_utc": "2026-09-12T21:24:52.541548+00:00",
+  "owner_review_check": {
+    "primary_control_checkout": "C:/Projects/HMASD",
+    "pending_instructions": [],
+    "relevant_acvc_ledger_owner_overrides": [],
+    "observed_utc": "2026-09-12T21:24:52.541548+00:00"
+  },
+  "owner_item": {
+    "id": "20260912-acvc-004",
+    "path": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-acvc-004.json",
+    "priority": 2,
+    "auto_applied": "a",
+    "scope": "direction selection documentary application only; future empirical work unallocated"
+  },
+  "audit_rows": [
+    "docs/research/portfolio/audit/2026-09-12.md#L73",
+    "docs/research/portfolio/audit/2026-09-12.md#L74"
+  ]
+}

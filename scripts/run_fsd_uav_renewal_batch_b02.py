@@ -5,9 +5,9 @@ caps are D0 900s and I1280 1800s, including the sole final endpoint/publication.
 """
 import run_fsd_uav_individual_renewal_b01 as shared
 
-TRAINING_SEED, EVALUATION_SEED = 771203, 781203
-OBJECT_ID = "FSD_UAV_RENEWAL_BATCH_B02_771203"
-CARD = "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_SCIENCE_CARD_20260912.md"
+TRAINING_SEED, EVALUATION_SEED = 771303, 781303
+OBJECT_ID = "FSD_UAV_RENEWAL_BATCH_B02_771303"
+CARD = "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_SCIENCE_CARD_20260912.md"
 CAPS = {"D0": 900., "I": 1800.}
 
 

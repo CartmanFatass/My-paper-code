@@ -1,0 +1,32 @@
+{
+  "cleanup": "CADC-B01 four exact remote terminal targets",
+  "verified_at": "2026-09-12T15:59:47.604552-07:00",
+  "owner": "/root/dm_cadc_start",
+  "root_retention_commits": [
+    "9111b9b1e",
+    "363bda2a0"
+  ],
+  "source_sha": "22e009c9387f2507aab6ebab4555d92e27f5070e",
+  "pre_removal_checks": {
+    "all_exact_paths_resolved_without_symlinks": true,
+    "source_clean_at_exact_sha": true,
+    "both_supervisors_finished_exit0": true,
+    "both_recorded_pids_absent": true,
+    "both_tmux_sessions_inactive": true,
+    "raw_output_files_equal_all8_preserved_archive_members": true,
+    "both_remote_archive_digests_equal_verified_main_blobs": true
+  },
+  "on_disk_absent": {
+    "/home/wu/hmasd-worktrees/cadc-b01-9302-20260912": true,
+    "/home/wu/hmasd-inputs/cadc-b01-9302-20260912": true,
+    "/home/wu/.agent-tasks/cadc-b01-9302-learned-20260912": true,
+    "/home/wu/.agent-tasks/cadc-b01-9302-rr-20260912": true
+  },
+  "runtime_worktree_registration_absent": true,
+  "shared_remote_repo_retained": true,
+  "removal_count": 4,
+  "additional_scientific_invocations": 0,
+  "receipt_recovery": "Removal batch executed once. Final heredoc delimiter was consumed as Python and raised NameError after absence checks; this separate read-only verification recovered publication. No removal retry.",
+  "local_test_scratch": "untouched; separately pending prior runtime-policy rejection with creator responsibility",
+  "lifecycle": "CADC remains ACTIVE/HIGH, recasts0"
+}

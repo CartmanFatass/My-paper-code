@@ -1,0 +1,89 @@
+{
+  "transport_returncode": 0,
+  "inner_collection_wall_seconds": 0.75,
+  "archive_bytes": 16977,
+  "archive_sha256": "6c31c63a700f91691f00c395faa25d26640d16d1bec9704d5ad8343913c1b5ff",
+  "archive_path": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771303_20260912/D0_collection.tar.gz",
+  "metadata": {
+    "collected_utc": "2026-09-12T21:11:45.164856+00:00",
+    "source_sha": "8ea629595da592dfce9b7774341863a7115c7cef",
+    "run_root": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771303-20260912/temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771303/D0",
+    "input_root": "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771303-20260912",
+    "handle": "fsd-uav-renewal-batch-b02-771303-D0-20260912",
+    "actual_worktree": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771303-20260912",
+    "actual_resolved_worktree": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771303-20260912",
+    "supervisor_references_actual_worktree": true,
+    "source_readbacks_match": [
+      "scripts/run_fsd_uav_renewal_batch_b02.py",
+      "scripts/run_fsd_uav_individual_renewal_b01.py",
+      "scripts/run_flexible_skill_duration_e0.py",
+      "scripts/hmasd_resource_preflight.py",
+      "hmasd/agent.py",
+      "hmasd/utils.py",
+      "configs/config_1.py",
+      "envs/pettingzoo/scenario1.py",
+      "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771303_20260912/D0.sh"
+    ],
+    "run_relative_files": [
+      "manifest.json",
+      "summary.json",
+      "training.jsonl"
+    ],
+    "empty_log_directories": [
+      "learner_logs",
+      "evaluation_logs"
+    ],
+    "files": {
+      "D0/manifest.json": {
+        "bytes": 1612,
+        "sha256": "7084d9aedcf8fbfc7c2bf38f24007e990892fc14b64a2c9a8d8f9f272445c027"
+      },
+      "D0/summary.json": {
+        "bytes": 49539,
+        "sha256": "87264248d0fe6c734fce29d0957fd76e924af7964468efdad2903800680c0ff8"
+      },
+      "D0/training.jsonl": {
+        "bytes": 22343,
+        "sha256": "3c328a9f5a835b278de15c268afeb9a05c18d110c5ae516c12d60bdd5474bab7"
+      },
+      "inputs/D0_admission.json": {
+        "bytes": 504,
+        "sha256": "71d076127c13e8fa906c551d7239b47c14a86c64fed3258769dc6759779c9b32"
+      },
+      "inputs/D0_process_time.txt": {
+        "bytes": 100,
+        "sha256": "7d6668b271371450139a1db34a049a169344328d6fdb11a75d12afe45c4c6451"
+      },
+      "supervisor_D0/exit_code": {
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "supervisor_D0/pid": {
+        "bytes": 8,
+        "sha256": "4e341352c5eac5773c55a94c0d2ed16577fda05774b9739ca7538686aec307b6"
+      },
+      "supervisor_D0/runner.sh": {
+        "bytes": 1497,
+        "sha256": "0622bd81fc84a80c0071462be4d5279666fd154060d5c1a1d46117da1b06b2cc"
+      },
+      "supervisor_D0/start_time": {
+        "bytes": 11,
+        "sha256": "480c7c2083afba05ab1f769dc06b49e7dff9a0c8b9fe3560caf34dd2e0b1658d"
+      },
+      "supervisor_D0/status": {
+        "bytes": 9,
+        "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+      },
+      "supervisor_D0/task.log": {
+        "bytes": 784,
+        "sha256": "38a1b3f23b4035667721fec3ff7b2bf9b892f2ac5272560d463eeb776caf8922"
+      }
+    }
+  },
+  "raw_file_count": 11,
+  "all_raw_bytes_verified": true,
+  "local_temp_created": false,
+  "new_scientific_invocations": 0,
+  "remote_stderr": "",
+  "mechanical_collection_resolution": "First file-set assertion counted two empty log directories. Corrected to recursive files, confirming original three raw outputs only. No run/source/result modification."
+}
