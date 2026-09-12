@@ -1,0 +1,17 @@
+{
+  "source": "experiments\\candidates\\actuator_conditioned_partial_sharing\\acps_b01\\study.py",
+  "master": 9101,
+  "horizon": 256,
+  "training_episodes_per_arm": 512,
+  "final_episodes_per_arm": 32,
+  "rollouts_per_arm": 256,
+  "adam_per_arm": 1024,
+  "team_ticks_per_arm": 139264,
+  "pair_team_ticks": 278528,
+  "pair_adam": 2048,
+  "collection_eval_actor_rows": 1392640,
+  "replay_actor_rows": 5242880,
+  "adapter_parameters": 1340,
+  "nominal_lr_step_sum": 0.3072,
+  "pair_total_actor_rows": 6635520
+}

@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "CADC-B01",
+      "arm": "LEARNED",
+      "n": 1,
+      "mean": 0.17452297765877586,
+      "sample_sd": null,
+      "min": 0.17452297765877586,
+      "max": 0.17452297765877586,
+      "runs": {
+        "9302": 0.17452297765877586
+      }
+    },
+    {
+      "task": "CADC-B01",
+      "arm": "RR",
+      "n": 1,
+      "mean": 0.18787789895960577,
+      "sample_sd": null,
+      "min": 0.18787789895960577,
+      "max": 0.18787789895960577,
+      "runs": {
+        "9302": 0.18787789895960577
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "CADC-B01",
+      "arm": "LEARNED",
+      "baseline": "RR",
+      "summary": {
+        "n": 1,
+        "mean": -0.013354921300829908,
+        "sample_sd": null,
+        "min": -0.013354921300829908,
+        "max": -0.013354921300829908
+      },
+      "differences": {
+        "9302": -0.013354921300829908
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

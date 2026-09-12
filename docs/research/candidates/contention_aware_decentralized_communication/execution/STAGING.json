@@ -1,0 +1,25 @@
+{
+  "source_sha": "22e009c9387f2507aab6ebab4555d92e27f5070e",
+  "command_commit": "e05d99efe",
+  "node": "hmasd-wsl-node",
+  "runtime_cwd": "/home/wu/hmasd-worktrees/cadc-b01-9302-20260912",
+  "input_root": "/home/wu/hmasd-inputs/cadc-b01-9302-20260912",
+  "remote_head_matches": true,
+  "remote_status_porcelain": "",
+  "commands": {
+    "LEARNED": {"bytes":854,"sha256":"04ca4c04fa949eadd7007ee28d1208282a59b1323709ee6765c9e41b339dd9b8","crlf_pairs":0,"local_matches_git_blob":true,"remote_sha256_matches":true},
+    "RR": {"bytes":834,"sha256":"b5b138bcfdc51b163ddcf4260002a1864d86c27c4c6fd306a42f13dda8ebff37","crlf_pairs":0,"local_matches_git_blob":true,"remote_sha256_matches":true}
+  },
+  "bash_syntax_exit": 0,
+  "command_review": {"reviewer":"/root/dm_cadc_start/rv_a_h_cadc_b01","material_findings":0,"command_wall_seconds":0.277637,"unverified":"actual accepted handle, admission, runtime topology and complete whole-chain cost"},
+  "transport_attempts": [
+    {"operation":"git fetch in non-login shell","fact":"Observed own fetch process at100s; canceled owned fetch/HTTPS helpers before any downstream staging or scientific execution. Exact complete attempt wall remains unknown.","scientific_invocation":false},
+    {"operation":"fetch in configured zsh -lic network shell","exit":0,"enclosing_termination_and_fetch_command_seconds":4.1367383},
+    {"operation":"worktree add in non-login shell","fact":"Partial-clone checkout required a promisor remote fetch; own worktree process observed at76s then its failed network children canceled. Git returned signal15/promisor fetch failure. Exact partial worktree and Git registration were both absent afterward. No scientific root/model/run existed.","scientific_invocation":false},
+    {"operation":"worktree and command materialization in configured zsh -lic","exit":0,"command_seconds":6.3633807,"fact":"Detached source checked out, Git-blob commands materialized, bash -n passed, both SHA256 values and clean HEAD read back."}
+  ],
+  "prelaunch_resource_observation": {"mgtap_top_pid":3403691,"mgtap_top_cpu_percent":99.6,"mgtap_top_rss_kib":522116,"physical_available_bytes":15318622208,"admission":false,"fact":"T already active; this read-only inventory does not substitute for each adjacent destination admission."},
+  "owner_reviews_at_prelaunch": [],
+  "scientific_invocations_accepted":0,
+  "support_coverage":"Partial. Failed network operation time is charged to this support grant, not native compute; no scientific retry or cap enlargement follows. Unknown tails remain unknown. Shared one-time Portfolio registration/application cost belongs to ACPS only."
+}
