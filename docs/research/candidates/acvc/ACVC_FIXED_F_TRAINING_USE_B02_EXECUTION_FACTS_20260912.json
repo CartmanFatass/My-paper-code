@@ -77,9 +77,21 @@
       {
         "label": "Complete offline source bundle/transfer/exact-checkout helper, nested phases counted once",
         "wall_s": 18.671926800045185
+      },
+      {
+        "label": "B02 reviewed source/commands/owner/audit publication",
+        "wall_s": 4.4300043
+      },
+      {
+        "label": "Fresh live Monitor read and C accepted submission",
+        "wall_s": 1.3313474
+      },
+      {
+        "label": "F accepted submission helper",
+        "wall_s": 0.683984
       }
     ],
-    "known_reported_seconds": 30.881866300045182,
+    "known_reported_seconds": 37.32720200004518,
     "full_coverage": false,
     "limits": "Provider/client/deliberation and yet-unreceived Monitor/Root/closing costs remain unknown; all future needed work counts once. B01/old A costs are separate history, not rebilled."
   },
@@ -91,7 +103,19 @@
       "output": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6/temp/directions/acvc/exp/training_use_b02_20260912/arm_C",
       "admission": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6/temp/directions/acvc/training_use_b02_C_admission.json",
       "timing": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6/temp/directions/acvc/training_use_b02_C_task_time.txt",
-      "submission": "not_submitted"
+      "submission": "accepted_once",
+      "submitted_utc": "2026-09-12T19:36:18.609890+00:00",
+      "command_publication_sha": "07d561a1a036cac8ca4517f10af1b4db56f9a73b",
+      "uncertain": false,
+      "local_submission_receipt": "temp/directions/acvc/preparation/training-use-b02-20260912/launch_C.json",
+      "monitor": {
+        "thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+        "dispatch": "accepted",
+        "adoption": "actual_running_handle_in_one_unfinished_goal; Root MONITOR_ADOPTED native receipt",
+        "pid": 3392070,
+        "exit": null,
+        "tmux_active": true
+      }
     },
     {
       "arm": "F",
@@ -100,9 +124,22 @@
       "output": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6/temp/directions/acvc/exp/training_use_b02_20260912/arm_F",
       "admission": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6/temp/directions/acvc/training_use_b02_F_admission.json",
       "timing": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6/temp/directions/acvc/training_use_b02_F_task_time.txt",
-      "submission": "not_submitted"
+      "submission": "accepted_once",
+      "submitted_utc": "2026-09-12T19:36:52.641089+00:00",
+      "command_publication_sha": "07d561a1a036cac8ca4517f10af1b4db56f9a73b",
+      "uncertain": false,
+      "local_submission_receipt": "temp/directions/acvc/preparation/training-use-b02-20260912/launch_F.json",
+      "monitor": {
+        "thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+        "dispatch": "accepted",
+        "adoption": "actual_running_handle_in_one_unfinished_goal; Root MONITOR_ADOPTED native receipt",
+        "pid": 3392119,
+        "exit": null,
+        "tmux_active": true
+      }
     }
   ],
   "stop": "Both original outcomes/full intake/assigned cleanup; no third pair/retry/tuning/extra panel/consultation/successor",
-  "retention": "ACVC DM preserves both unique checkpoint archives and all readable evidence before Root-accepted scoped duplicate/worktree cleanup; shared authoring checkout and all B01/C01 evidence retained."
+  "retention": "ACVC DM preserves both unique checkpoint archives and all readable evidence before Root-accepted scoped duplicate/worktree cleanup; shared authoring checkout and all B01/C01 evidence retained.",
+  "status": "both_accepted_and_actually_monitored_pending_terminal_collection"
 }
