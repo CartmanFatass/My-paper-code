@@ -1,0 +1,82 @@
+{
+  "object": "FSD_UAV_RENEWAL_BATCH_B02_771303",
+  "caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "native_sum": 2700,
+    "support": 300,
+    "complete": 3000,
+    "one_source_delivery": 45
+  },
+  "charges": [
+    {
+      "purpose": "conditional readiness overlap conservatively charged once",
+      "wall_seconds": 7.3791712
+    },
+    {
+      "purpose": "N initial source and exact command read",
+      "wall_seconds": 0.2363955
+    },
+    {
+      "purpose": "selected decision, mapping and live control read",
+      "wall_seconds": 0.2003514
+    },
+    {
+      "purpose": "selected mapping, owner clarification and relevant code instructions",
+      "wall_seconds": 0.2522689
+    },
+    {
+      "purpose": "input merge attempt",
+      "wall_seconds": 0.8879203
+    },
+    {
+      "purpose": "audit merge conflict read",
+      "wall_seconds": 0.304252
+    },
+    {
+      "purpose": "audit preservation subset check",
+      "wall_seconds": 0.3331923
+    },
+    {
+      "purpose": "resolved all unique audit rows and published input merge",
+      "wall_seconds": 5.2029036
+    },
+    {
+      "purpose": "fresh identity/source reconciliation and command binding",
+      "wall_seconds": 1.7703927
+    },
+    {
+      "purpose": "source helper and owner boundary read",
+      "wall_seconds": 0.4789906
+    },
+    {
+      "purpose": "actual publication source read",
+      "wall_seconds": 0.2218363
+    },
+    {
+      "purpose": "seven pure binding checks",
+      "wall_seconds": 0.2839984
+    },
+    {
+      "purpose": "independent high-risk reviewer two read-only commands",
+      "wall_seconds": 0.7388016
+    },
+    {
+      "purpose": "technical acceptance, card owner item and support publication preparation",
+      "wall_seconds": 0.5459366
+    }
+  ],
+  "known_support_wall_seconds": 18.8364114,
+  "counting": "Each known enclosing invoked command once; nested SSH not readded. Prior readiness overlap conservatively included, old D spending never reused.",
+  "unknown": [
+    "earlier readiness command walls unavailable in truncated outputs",
+    "rounded apply_patch and cross-task delivery intervals",
+    "Monitor/Relay/client/Root integration and final publication until attributed",
+    "provider and agent cost not numerically attributed"
+  ],
+  "source_delivery_transactions": 0,
+  "scientific_submissions": 0,
+  "native_wall_seconds": {},
+  "claim": "No observed budget breach; partial known support is not certification of full300/3000 compliance.",
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-fsd-003.json"
+}
