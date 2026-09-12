@@ -1,0 +1,189 @@
+{
+  "object": "ACVC_FIXED_F_TRAINING_USE_B01",
+  "source_sha": "a4c24e4eef4eb290d5026596a0a49ba4f4f9ce4f",
+  "author_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+  "branch": "codex/acvc",
+  "execution_node": "wsl_4070",
+  "remote_worktree": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee",
+  "remote_interpreter": "/home/wu/.venvs/hmasd/bin/python",
+  "master": 20261,
+  "evaluation_namespace": 30261,
+  "caps_seconds": {
+    "whole_supervised_arm": 270,
+    "native_sum": 540,
+    "future_support": 660,
+    "future_complete": 1200
+  },
+  "source_review": {
+    "reviewer": "/root/dm_a_mx_acvc_resume/training_f_semantic_review",
+    "verdict": "No material findings; scientific source and admission wrapper",
+    "command_wall_s": 2.8481445
+  },
+  "preparation": {
+    "complete": true,
+    "source_bundle_bytes": 119365875,
+    "whole_helper_wall_s": 17.826921099971514,
+    "local_path": "temp/directions/acvc/preparation/training-use-b01-20260912",
+    "remote_bundle": "/home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle",
+    "LF_binary_stdin": true,
+    "offline_checkout_exact": true,
+    "tracked_status_empty": true,
+    "wrapper_syntax_pass": true
+  },
+  "support": {
+    "commands": [
+      {
+        "label": "Initial direction state and AGENTS read",
+        "wall_s": 2.2101887
+      },
+      {
+        "label": "Current primary routes/allocation/owner review read",
+        "wall_s": 0.6453735
+      },
+      {
+        "label": "F mapping and owned implementation source reads",
+        "wall_s": 0.3362515
+      },
+      {
+        "label": "Current allocation, high-risk review and monitor contract",
+        "wall_s": 0.3792351
+      },
+      {
+        "label": "Complete shared rollout/update and ACVC F collector source read",
+        "wall_s": 0.1733504
+      },
+      {
+        "label": "Training runner, feedback ownership, fixed predicate and focused test source",
+        "wall_s": 0.3530124
+      },
+      {
+        "label": "Exact allocation source, existing runner CLI/tests/scope and identity reuse check",
+        "wall_s": 1.3181377
+      },
+      {
+        "label": "Existing stub publication checks and exact funding/engineering rules",
+        "wall_s": 0.2921305
+      },
+      {
+        "label": "Reuse five already accepted panel timing facts for prospective full-arm planning",
+        "wall_s": 0.2002447
+      },
+      {
+        "label": "Resume state and policy focused read",
+        "seconds": 0.3130802
+      },
+      {
+        "label": "Focused fixtures and owner CLI reuse",
+        "seconds": 0.2056546
+      },
+      {
+        "label": "Focused learner/runner source followup",
+        "seconds": 0.1810696
+      },
+      {
+        "label": "Focused tests invocation1",
+        "seconds": 3.3116223
+      },
+      {
+        "label": "Focused tests corrected fixtures and handoff/card read",
+        "seconds": 2.8804454
+      },
+      {
+        "label": "Prior accepted supervisor and attribution",
+        "seconds": 0.3842827
+      },
+      {
+        "label": "Source/card/tests commit and push",
+        "seconds": 4.9367812
+      },
+      {
+        "label": "Launch interface and owner reviews",
+        "seconds": 3.2255953
+      },
+      {
+        "label": "Exact prior launch and remote source presence",
+        "seconds": 10.00301
+      },
+      {
+        "label": "New card owner record CLI",
+        "seconds": 0.277895
+      },
+      {
+        "label": "Accepted prior wrapper receipt read",
+        "seconds": 0.1456159
+      },
+      {
+        "label": "Owner item update interface",
+        "seconds": 0.3479359
+      },
+      {
+        "label": "Owner citation correction interface and offline remote read",
+        "seconds": 1.2034499
+      },
+      {
+        "label": "CLI correction supported fields",
+        "seconds": 0.1992284
+      },
+      {
+        "label": "Independent semantic reviewer eight commands",
+        "seconds": 2.6916601
+      },
+      {
+        "label": "Acceptance owner/audit/wrapper commit push",
+        "seconds": 4.5275554
+      },
+      {
+        "label": "Reviewer launch-only read",
+        "seconds": 0.1564844
+      },
+      {
+        "label": "Offline full source bundle/transfer/checkout helper (nested phases not added twice)",
+        "seconds": 17.826921099971514
+      },
+      {
+        "label": "Preparation receipt and live Relay read",
+        "seconds": 0.2317283
+      }
+    ],
+    "known_reported_seconds": 58.95794019997152,
+    "complete_coverage": false,
+    "limits": [
+      "Initial interrupted SSH object query whole lifetime not measured;10.00301s returned segment is included, remaining tail unknown.",
+      "Provider, client and remaining Monitor/Root integration/cleanup costs not certified zero; append actual receipts once.",
+      "Prior A is historical and not charged again against future660; no lifetime total certification."
+    ]
+  },
+  "tests": {
+    "passed": 14,
+    "pytest_seconds": 1.93,
+    "first_attempt_failed_fixture_assertions": 3,
+    "no_scientific_fit": true,
+    "scratch_retained": [
+      "temp/directions/acvc/test/training-use-f01",
+      "temp/directions/acvc/test/training-use-f02"
+    ],
+    "cleanup_rejection": "combined scoped PowerShell test/Remove-Item command rejected before execution: blocked by policy; no bypass"
+  },
+  "arms": [
+    {
+      "arm": "C",
+      "handle": "acvc-training-use-b01-c-a4c24e4ee",
+      "command": "cd /home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/training_use_b01_C_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/training_use_b01/launch.sh a4c24e4eef4eb290d5026596a0a49ba4f4f9ce4f C",
+      "output": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/exp/training_use_b01_20260912/arm_C",
+      "admission": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/training_use_b01_C_admission.json",
+      "timing": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/training_use_b01_C_task_time.txt",
+      "submission": "not_submitted"
+    },
+    {
+      "arm": "F",
+      "handle": "acvc-training-use-b01-f-a4c24e4ee",
+      "command": "cd /home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/training_use_b01_F_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/training_use_b01/launch.sh a4c24e4eef4eb290d5026596a0a49ba4f4f9ce4f F",
+      "output": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/exp/training_use_b01_20260912/arm_F",
+      "admission": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/training_use_b01_F_admission.json",
+      "timing": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/training_use_b01_F_task_time.txt",
+      "submission": "not_submitted"
+    }
+  ],
+  "sequence": "C and F each submitted once independently; no intermediate efficacy selection",
+  "stop": "Complete pair intake or concrete dependent limitation; no retry, sixth C01 fit, extra panels or successor"
+}
