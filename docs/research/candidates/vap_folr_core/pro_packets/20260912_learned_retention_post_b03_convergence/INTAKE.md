@@ -148,6 +148,15 @@ formed H decision accompanies final publication; accepted TASK,
 request, previous body snapshot, response and delivery comment remain unchanged.
 
 Root accepts this scoped intake/DIRECTION/owner/audit publication and updates
-current Portfolio/tracking. Preserve the shared codex/vap-folr checkout and its
-evidence under the ordinary direction-branch policy; this consultation owns no
-new disposable execution roots. No independent direction waits on this closeout.
+current Portfolio/tracking. The shared codex/vap-folr checkout remains through
+this integration dependency; Root owns any subsequent ordinary branch/worktree
+retention or reclamation after acceptance. Unique evidence stays published, and
+this consultation owns no new disposable execution roots. No independent
+direction waits on this closeout.
+
+Final publication: full intake/DIRECTION/owner application was committed and
+pushed as 99f4df5843a22dc2f019749d44e310e1f6dcda6f. The current Issue15 body
+now links that immutable intake and the original response. Exact GitHub body
+readback is preserved in ISSUE_INTAKE_RECEIPT.json; no additional delivery
+comment or Pro Send was made. Root receives this final scoped closeout together
+with that intake commit.
