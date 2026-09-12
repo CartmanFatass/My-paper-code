@@ -31,6 +31,10 @@ Older pending/zero-active paragraphs below are dated evidence, not current statu
   was the last-panel log. Inclusive unit charge171s, completed sum341s. Fixed unit3
   `acvc-fresh-dense-c01-18150-3fd9062d5` accepted04:59:38.304056Z; direct Monitor
   adoption04:59:50Z confirms running and that exact active handle, forwarded to DM.
+  Unit3 terminal05:02:33Z reports exit0, whole175.29s, last-panel log169.74978735507466s
+  (not full-summary process wall), peak550036KiB. Monitor delivered empty-set goal
+  completion; Root resumed the original DM via `followup_task` for full unit3
+  collection and fixed unit4 `(12604,21030)` then unit5, without an efficacy gate.
 - Main accepted card/source/commands/launch as `0d3bc3257`, `0451da37a`,
   `3ed01fb83`, `2fadb1ddc`. Existing 12 focused checks and independent no-material-
   finding review are reused; no repeat scientific or verification invocation.
