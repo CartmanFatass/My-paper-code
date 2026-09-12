@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "canonical_request_id": "2026-09-11-rolling-capacity-after-b02-portfolio-01",
+  "transport_request_alias": "2026-09-11-rolling-capacity-after-folr-b02-portfolio-01",
+  "relationship": "same_accepted_request",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "send_click_count": 1,
+  "response_sha256": "85c1148a070bc53e5cbe7c7783fd938b71a74768c964a528e239fba35de13443",
+  "source_transport_facts_sha256": "00b7f5f84120a829c89c44071a196ced79ec228d6de913ad1e042df4e5cd0787",
+  "source_transport_facts_bytes": 8495,
+  "source_transport_facts_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-11-rolling-capacity-after-folr-b02-portfolio-01--portfolio--attempt-01/2026-09-11-rolling-capacity-after-folr-b02-portfolio-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+  "repository_transport_facts_path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/TRANSPORT_FACTS.json",
+  "reconciliation": "The canonical request document omits the direction mnemonic 'folr'; the accepted Transport registry and immutable attempt archive include it. Both spellings identify the same single accepted provider Send and response.",
+  "provider_action_during_reconciliation": "none",
+  "scientific_interpretation": "not_assessed_by_transport"
+}
+
