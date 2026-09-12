@@ -104,15 +104,31 @@
     {
       "purpose": "direct I Monitor ADD delivery",
       "wall_seconds": 0.155
+    },
+    {
+      "purpose": "I launch evidence and support update",
+      "wall_seconds": 0.2803836
+    },
+    {
+      "purpose": "I launch receipt commit",
+      "wall_seconds": 0.5616806
+    },
+    {
+      "purpose": "I receipt push and owner review boundary",
+      "wall_seconds": 4.3004915
+    },
+    {
+      "purpose": "single actionable I launch Relay handoff",
+      "wall_seconds": 0.143
     }
   ],
-  "known_support_wall_seconds": 50.75767189999999,
+  "known_support_wall_seconds": 56.043227599999994,
   "counting": "Each known enclosing invoked command once. Initial batched output had one unavailable command wall; apply_patch, current owner-card preparation and later operations are recorded where measured or explicit unknown. Agent/provider/calendar time separate.",
   "unknown": [
     "one initial batched read command wall unavailable in truncated output",
     "apply_patch execution interval where tool reports rounded zero",
     "future Monitor/relay/client and Root integration terms",
-    "current I launch/adoption publication until measured"
+    "current actual-adoption record publication and later integration until measured"
   ],
   "source_delivery_transactions": 1,
   "scientific_submissions": 2,

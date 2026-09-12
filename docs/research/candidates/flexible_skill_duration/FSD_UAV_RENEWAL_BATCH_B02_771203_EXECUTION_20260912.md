@@ -1,7 +1,7 @@
 # FSD B02 / 771203 â€” execution
 
 State: D0 completed and technically accepted; its preselected I1280 detached
-submission is accepted. Direct Monitor ADD accepted; actual adoption pending. Owner /root/dm_fsd_d_pair, shared authoring checkout
+submission is accepted; actual fresh unfinished Monitor goal adoption confirmed. Owner /root/dm_fsd_d_pair, shared authoring checkout
 C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd. Input sync16930177f includes
 Root-assigned bd5fd849a;14748d304 reconciles auto-merged legacy control-only
 differences back to that current Windows input, preserving old commits in history.
@@ -126,5 +126,9 @@ from source9eb99f8b68dd2863212c10693b911746a6d24354 was submitted once at
 fsd-uav-renewal-batch-b02-771203-I-20260912 accepted with return0; no repeated
 source delivery. Fresh adjacent admission is inside the complete1800s command.
 Direct Monitor_ADD accepted, explicitly requiring an actual unfinished goal
-and keeping771203 in the path. Actual adoption is pending the separate receipt.
+and keeping771203 in the path. Root separately confirmed actual fresh active goal adoption: handle matches,
+running pid3384259,exit null,tmux active,uptime about34s; source/cwd/output all
+use the correct771203 path. I_MONITOR_ADOPTION.json records this fact.
+DM retains collection/intake/cleanup and resumes on terminal facts without
+duplicate routine observation or launch.
 All required source/output/supervisor paths remain retained for I and collection.
