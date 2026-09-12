@@ -186,3 +186,7 @@ Both checkpoints/raw panels and terminal/empty-Monitor-goal evidence are
 preserved. [Final intake](MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md)
 ends scientific execution and returns only scoped cleanup after Root retention.
 Original rule/MEI/comparator/default and both prior outcomes remain unchanged.
+Root retention at main3c5f5471f was accepted; all four assigned duplicate paths
+are now absent on disk and from applicable worktree registration. The
+[cleanup receipt](conditional_pooling_b01_8214_20260912/CLEANUP_RECEIPT.json)
+fully closes this finite grant, preserving evidence/shared authoring/cache.

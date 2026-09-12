@@ -80,3 +80,13 @@ support300/total1200 certification or breach follows from an incomplete subtotal
 There is no observed scientific-integrity or Engineering Scope§5 breach.
 The detailed [DM intake](MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md)
 applies the decisions and names the terminal cleanup inventory.
+
+## Closed allocation
+
+Root accepted main3c5f5471f retention of both archives/all12 raw members. DM
+removed the four named remote/local duplicate targets and verified disk/worktree
+registration absence; see [CLEANUP_RECEIPT.json](conditional_pooling_b01_8214_20260912/CLEANUP_RECEIPT.json).
+Original source/evidence, shared authoring/cache and prior8213 inventory remain.
+No new science or pending reclamation remains in this allocation. Updated
+[support closeout](conditional_pooling_b01_8214_20260912/SUPPORT_CLOSEOUT.json)
+keeps unknown tails qualified; original scientific reading/default are unchanged.
