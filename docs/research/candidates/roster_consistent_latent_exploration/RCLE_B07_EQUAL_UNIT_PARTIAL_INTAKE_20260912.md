@@ -120,3 +120,21 @@ summarizes the partial result. Preserve original terminal evidence before any
 cleanup. Root integrates the repair/intake, reconciles the single reference-only
 continuation boundary or accepts partial closeout, then returns scoped cleanup.
 The shared authoring checkout remains in use; no source/evidence root is deleted.
+
+## Root reconciliation and authorized continuation
+
+After integrating the partial result/repair through main71198147e, Root explicitly
+mapped exactly one reference-only completion to the original R logical invocation:
+Delta_ref remains required and no valid reference panel was produced. This resolves
+decision3 above prospectively. It creates no second fit, changed science/card or new
+budget. Select the exact prepared option(a) under that mapping; keep the original
+failed reference and every replayed operation/cost visible. Fresh destination
+admission and exact source/learned-input/native-kernel binding remain required;
+failure of either ends this completion without a substitute.
+
+Source9eeef867f0adcf6d9a8ca9441781ad4ec2764a30 and command2c4777901c93527415f2adf6ff53232eb3b1cc37
+are unchanged. The exact detached checkout, frozen learned-summary bytes and
+original native C++ digest were verified, and the immutable command passes bash-n.
+[Staging receipt](b07_equal_unit_20260912/REFERENCE_COMPLETION_STAGING.json) records
+these actual checks. The12s complete/10s internal command is a subset of the
+original reference15s and native900s ceilings; no timing pilot or new fit runs.
