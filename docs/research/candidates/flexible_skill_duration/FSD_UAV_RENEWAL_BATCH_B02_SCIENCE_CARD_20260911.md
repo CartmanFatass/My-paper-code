@@ -3,8 +3,9 @@ Binding MARL structure: (b) temporal abstraction or termination; asynchronous in
 
 # FSD renewal batch B02 — fresh unchanged pair
 
-**B/EXPLORE. Ended zero-exposure instances770803/770903 remain preserved; new771003/781003 is frozen in §7.**
-The allocated pair ended unlaunched with a preparation/support-cost limitation;
+**B/EXPLORE. Ended zero-exposure instances770803/770903 remain preserved;
+771003/781003 completed with a valid `above_mei` intake under §7.**
+The original770803 allocation ended unlaunched with a preparation/support-cost limitation;
 see [the execution-limitation intake](FSD_UAV_RENEWAL_BATCH_B02_EXECUTION_LIMITATION_INTAKE_20260911.md).
 The accepted binding and prospective reading below remain unchanged. No retry
 or automatic successor follows. This is a separately identified instance of
