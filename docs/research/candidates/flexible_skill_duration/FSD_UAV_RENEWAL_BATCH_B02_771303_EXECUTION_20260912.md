@@ -1,6 +1,7 @@
 # FSD B02 / 771303 — execution
 
-State: complete pair technically accepted with scientific intake complete as above_mei; scoped cleanup pending Root retention acceptance.
+State: complete pair technically accepted, scientific intake above_mei and scoped cleanup complete.
+Root retained all evidence; no run, observation, collection or cleanup obligation remains in N.
 Both actual Monitor goals are complete, active_set empty and terminal notices delivered.
 Seven pure binding checks and independent review passed; no material finding.
 DM /root/dm_fsd_d_pair, C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd.
@@ -147,8 +148,8 @@ acceptance separately from the scientific intake. The unchanged source pair
 publication and independent ordered reduction agree on +0.0737976491890039 J,
 26 positive/6 adverse contrasts and the frozen above_mei branch. Native wall
 sums to 1446.79 seconds; aggregate CPU is 5718.46 seconds. Partial support
-telemetry remains explicit. CLEANUP_INVENTORY.json names only the four terminal
-remote targets; removal awaits Root's acceptance of retained current archives.
+telemetry remains explicit. CLEANUP_INVENTORY.json names the four terminal
+remote targets now removed after Root accepted the retained current archives.
 
 ## Complete paired intake and retention handoff
 
@@ -157,6 +158,23 @@ all six adverse worlds and prior mixed results, and limit the claim to this
 same-host optional package. The Chinese owner brief, existing card owner trace
 and four audit decisions record the actual result and OWNER_DIRECT continuity.
 Both raw archives and all 22 individual original Git blobs were verified at
-476e2e64a against their collection digests. Root integration/retention acceptance
-precedes the same DM's exact four-target cleanup. No sixth pair, S consultation
-or automatic successor was selected.
+476e2e64a against their collection digests. Root integrated the evidence and
+intake at main 3c0696871/18d7a02f8 and accepted retained source, both archives
+and 22 raw files. The same DM completed the exact four-target cleanup. No sixth
+pair, S consultation or automatic successor was selected.
+
+## Scoped cleanup complete
+
+After accepted-commit archive/22-file readback, each remote raw digest still
+matched. The exact source worktree was clean with only the six retained result
+files; both recorded PIDs and tmux sessions were absent. Literal targets resolved
+inside their authorized parent directories before removal. The worktree was
+unregistered/removed with native Git; input and supervisor roots were removed
+with remote-native Python, with no Windows deletion or broad pruning.
+
+CLEANUP_RECEIPT.json records completion at 2026-09-12T21:51:28.143056+00:00.
+All four paths are absent from disk and Git registrations. Each exact supervisor
+status is not_found and its tmux session absent. The other 163 worktree
+registrations are unchanged; shared local authoring and remote source persist.
+No temporary test/extraction tree was created. N's scientific and technical
+assignment is complete; OWNER_DIRECT FSD continuity remains in force.

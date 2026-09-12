@@ -30,6 +30,8 @@
     "supervisor_I/task.log"
   ],
   "raw_file_count": 22,
-  "root_retention_acceptance": "pending",
-  "remote_cleanup_performed": false
+  "root_retention_acceptance": "18d7a02f8f9f5d41ccf8560c71b5e6d341227a0d",
+  "remote_cleanup_performed": true,
+  "precleanup_accepted_commit_reverification": true,
+  "remote_cleanup_receipt": "CLEANUP_RECEIPT.json"
 }

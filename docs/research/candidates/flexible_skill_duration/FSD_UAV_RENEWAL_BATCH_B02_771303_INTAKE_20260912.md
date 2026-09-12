@@ -113,14 +113,15 @@ result or technical owner item is created; owner flags are none.
    reclaim the four terminal targets after Root retention acceptance, or retain
    an actual live/unique-state dependency. Recommend/select preservation then
    scoped reclaim. Both archives and 22 raw files are published and verified;
-   Root retention acceptance and physical reclamation remain pending.
+   Root accepted retention at main 18d7a02f8 and the four targets were removed
+   with verified disk/Git-registration and supervisor absence.
 
 **Owner-delegated decision (unattended, 2026-09-03 instruction): accept;
 above_mei; finite closeout with OWNER_DIRECT direction continuity; preserve
 then scoped reclaim.** Direction continuity applies the existing owner choice,
 not a new local direction/Portfolio verdict. No historical result is rewritten.
 
-## Costs, retained evidence and remaining cleanup
+## Costs, retained evidence and completed cleanup
 
 D0/I complete walls are 458.80/987.99 seconds, native sum 1446.79, aggregate
 CPU 5718.46, peak RSS 1673964/3492180 KiB. Arm and native caps pass. One source
@@ -138,9 +139,38 @@ D0 archive SHA256 6c31c63a700f91691f00c395faa25d26640d16d1bec9704d5ad8343913c1b5
 I archive SHA256 dc0b3fc50bedca2d617a7c6fad77d7a765c71625880a29df29e7f1badb3eac26.
 RETENTION_CHECK.json and CLEANUP_INVENTORY.json bind preservation to exactly
 four terminal remote targets: the 771303 detached worktree, its input root and
-the two named D0/I supervisor roots. Their current sizes are 44,134,794 / 1,208 /
-2,311 / 2,299 bytes. Source status is clean with only six known ignored outputs.
-Both Monitor goals are complete; no observation is pending. This same DM retains
-scoped cleanup after Root's retention acceptance, with disk/Git-registration
-absence still to be verified. Shared C:/Projects/HMASD-worktrees/codex-fsd,
-shared remote source and all historical evidence remain outside that cleanup.
+the two named D0/I supervisor roots. Their sizes before cleanup were 44,134,794 / 1,208 /
+2,311 / 2,299 bytes. Root accepted retention at main
+18d7a02f8f9f5d41ccf8560c71b5e6d341227a0d. This DM reread both archives and
+all 22 individual raw files from that accepted commit, matched every remote
+digest, and confirmed clean source with exactly six ignored retained outputs.
+Both recorded PIDs and tmux sessions were absent.
+
+At 2026-09-12T21:51:28.143056+00:00 the four exact targets were removed after
+resolved-path containment checks. CLEANUP_RECEIPT.json verifies disk and Git
+registration absence; both exact supervisor status queries return not_found.
+The other 163 worktree registrations are unchanged. Shared
+C:/Projects/HMASD-worktrees/codex-fsd, shared remote source and all historical
+evidence persist. No local test/extraction scratch was created. Both Monitor
+goals are complete; no run, observation, collection or cleanup remains in N.
+This completed allocation makes no direction-stop decision.
+
+## Direction-local input to the current Portfolio author
+
+Root's designated author added FSD to a separate, still-unfrozen Portfolio
+investment packet and requested a concrete next-use recommendation from these
+already accepted facts. The DM recommends at most one new original-Convergence
+use judgment: should this complete I1280 package enter the same-host optional
+learning-scheme set, retaining authentic D0 and explicitly labeling cost/outcome
+variation, or remain exploratory evidence without more unchanged-package spend?
+There is no ready new B object and no extra observation is a prerequisite to
+this limited judgment. A later empirical proposal must name a concrete use
+decision that its observation would change.
+
+The strong alternative is no new use consultation or unchanged-package funding
+in this Portfolio decision, until an actual new use supplies a specific
+comparison question. That avoids repeated investment and does not itself stop
+FSD. Complete consultation cost is unmeasured; it is not described as cheap.
+This is a recommendation to the designated author only: the old S=no provides
+no authority, and no new question, Pro Send, numerical analysis, code or
+scientific invocation was executed. Portfolio retains its decision authority.

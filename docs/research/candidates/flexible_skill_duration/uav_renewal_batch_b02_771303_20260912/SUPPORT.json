@@ -216,9 +216,37 @@
     {
       "purpose": "paired E0/intake/brief/audit and published raw preservation verification",
       "wall_seconds": 1.4654779
+    },
+    {
+      "purpose": "complete paired intake publication and immediate push",
+      "wall_seconds": 4.831489
+    },
+    {
+      "purpose": "complete paired intake Relay handoff",
+      "wall_seconds": 0.144
+    },
+    {
+      "purpose": "accepted retention, exact inventory and clean-boundary owner review read",
+      "wall_seconds": 0.4168937
+    },
+    {
+      "purpose": "exact supervisor registration semantics read for authorized cleanup",
+      "wall_seconds": 1.04532
+    },
+    {
+      "purpose": "accepted-commit preservation readback and four-target remote cleanup/absence verification",
+      "wall_seconds": 2.2232567
+    },
+    {
+      "purpose": "scoped cleanup receipt reduction and unrelated-registration comparison",
+      "wall_seconds": 0.1841898
+    },
+    {
+      "purpose": "completed cleanup receipt, current-state records, audit and owner trace publication preparation",
+      "wall_seconds": 0.5403058
     }
   ],
-  "known_support_wall_seconds": 71.22676770000001,
+  "known_support_wall_seconds": 80.61222270000002,
   "counting": "Each known enclosing invoked command once; nested SSH not readded. Prior readiness overlap conservatively included, old D spending never reused.",
   "unknown": [
     "earlier readiness command walls unavailable in truncated outputs",
@@ -242,6 +270,10 @@
   },
   "actual_Monitor_adoption": "D0 and I actual unfinished goals adopted; both terminal notices delivered and goals complete with active_set empty",
   "aggregate_cpu_seconds": 5718.46,
-  "known_native_plus_support_seconds": 1518.0167677,
-  "study_elapsed_D0_start_to_I_terminal_seconds": 1911
+  "known_native_plus_support_seconds": 1527.4022227,
+  "study_elapsed_D0_start_to_I_terminal_seconds": 1911,
+  "cleanup_complete": true,
+  "root_retention_commit": "18d7a02f8f9f5d41ccf8560c71b5e6d341227a0d",
+  "remaining_scientific_invocations": 0,
+  "remaining_collection_or_cleanup": []
 }
