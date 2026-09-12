@@ -99,3 +99,11 @@ this preparation created no scientific/test scratch and attempted no deletion.
 The shared Portfolio checkout has an actual pending delivery/intake dependency,
 so no reclamation of it is requested.
 
+## Accepted completion relay
+
+One app send to the configured relay was accepted, recorded with the exact
+payload and tool result in RELAY_RECEIPT.json. Its stable event binds this
+request and publication c4464206931e3e80bdd5796af9ba30e1b962562a. This confirms
+delivery to the relay, not Root acceptance, Transport dispatch or Pro generation.
+The native final is the source completion record, not another cross-task send.
+No duplicate relay or acknowledgement wait is added.
