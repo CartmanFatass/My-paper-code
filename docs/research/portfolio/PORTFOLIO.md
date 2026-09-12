@@ -5,13 +5,14 @@
 
 ## 当前22方向状态 — 2026-09-12 Windows恢复
 
-本表是当前控制面状态。登记为15 ACTIVE、7 PARKED，
-未作新的生命周期、优先级或科学裁决。Oracle建议当前版已接受并发布main a607eefb3；Portfolio DM继续准备必要的新投入选择。
+本表登记15 ACTIVE、7 PARKED，生命周期、priority、recasts与UAV字段不变。
+最新 [Portfolio决定](decisions/2026-09-12-resume-independent-chains.md) 已由原作者完整核对：**S+A；保持M不追加；S+B/A+B不拨款**。
 
-当前三个方向实际推进：FOLR同一B03运行、VNFC条件fresh pair连续准备、RCLE同一Pro请求生成。ACVC后续问题材料已完成，不再按在途计数。
-RCLE由新Windows Transport接手准备，旧执行者已确认停止且零新Send；FOLR原定两个arm已实际运行并由新Monitor采用。
-因此方向工作集为3/5，两个空槽待就绪任务补入；这不是三个运行中实验。Portfolio DM的跨方向核对不另计方向槽位。
-新Monitor与Relay已亲自回报Windows可用；Monitor已建立非空未完成goal，持有两个FOLR运行句柄。新Transport已验证Windows及CUA工具，同请求恢复已授权。
+Root在本次intake入口报告实际工作集0/5：FOLR、VNFC和RCLE已完成其科学分配，剩余cleanup不计研究推进。
+新选CBSC S与ACVC A分别就绪，Root实际派发后按真实活动计数；两项启动只达到2/5，未执行任务和Portfolio作者不计槽位。
+CBSC只买一次候选准备（complete invoked-support≤600秒、300参考），ACVC只买一次原Convergence与完整intake（成本未知）；都没有新增数值额度。
+两项互不等待，剩余三个空槽也没有自动备用款。详细直接任务见 [独立执行映射](pro_packets/20260912_resume_five_independent_chains/EXECUTION_MAPPING.md)。
+Monitor当前没有活动实验目标，原terminal notices已送达；Transport本轮Portfolio答复已完整归档。实际新派发由Root持续更新。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
 “待选择”是尚未分配的未来工作，不能冒充已运行，也不是永久禁入。
@@ -19,14 +20,14 @@ RCLE由新Windows Transport接手准备，旧执行者已确认停止且零新Se
 | 方向 | 最新证据/科学状态 | 当前实际工作 | 下一步及边界 |
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
-| [ACVC](../candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#owner-directed-handoff) | 五个fit完整，冻结计算qualified JOINT_ABOVE_MEI；最终科学intake/DIRECTION已接受集成77c17d111。 | 后续问题材料已接受/main e85cb3a95并交Portfolio DM；无新fit或活动执行，候选预算尚未批准。 | Portfolio若投资，再由原`em:acvc:convergence`选择是否比较“训练through F”与“训练C、部署F”；无第六fit或自动successor。 |
-| [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_P47_TECHNICAL_UNBLOCKING_INTAKE_20260911.md) | P47技术intake完成；retained52源码/AST核对完成，未建立可归因修复，retained52未运行。 | 无；Portfolio DM核对候选续行。 | 具体最小修复或可信替代执行路径及所需科学选择；不把完整历史根因重建当通用门槛。现有source-only授权不含retained52运行。 |
+| [ACVC](../candidates/acvc/ACVC_POST_C01_DIRECTION_QUESTION_20260912.md) | C01五fit完整并consumed，qualified JOINT_ABOVE_MEI限制保持；具体train-through-F强null建议已完成。 | **A已选、独立就绪**：当前ACVC DM的一次原Convergence+完整intake；实际派发待Root记录。 | 选择训练through F vs训练C/部署F，或只留参考；完整咨询成本未知，零实现/fit；A+B未拨款，recasts2排序保持。 |
+| [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_SCIENCE_CARD_20260906.md) | 当前机会信用包缺完整STRUCT primary；旧source-only已完成且不等于production修复。 | **S已选、独立就绪**：一次prospective B卡/L0+supported路径候选或具体no-ready；实际派发待Root记录。 | 新complete invoked-support≤600秒、300参考；零target import/model/test/runtime验证/学习。只买候选描述，S+B不拨款；不要求全历史归因。 |
 | [CRTO](../candidates/commitment_residual_triggered_options/DIRECTION.md) | P72 PRO_FINAL保留B08测试的selected-panel family PARK；finite-zero修复已集成。 | 无 | 新的具体方向选择；没有自动successor。 |
 | [DISH](../candidates/degraded_incumbent_shadow_handover/DIRECTION.md) | **更新：B08 HALF_RETAIN−REPLACE为−6.5 ticks，WITHIN；REPLACE默认。post-B08已PARK retained-A03 arrival-bridge retention家族。** P62/DIRECT只是更早历史。 | 无 | 具体receipt-to-control研究问题或对独立pair不确定性的实际决策需求；新选择才续行，不要求完整机制证明。 |
 | [ec4g_r1](../candidates/ec4g_r1/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [eociv_lite](../candidates/eociv_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
 | [expressibility_gated_renewal_credit_relay](../candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
-| [FRRIE](../candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md) | P59已intake；P63 source-only九frame映射完成，factory fault仍未归因，P63未运行。 | 无；Portfolio DM核对候选续行。 | 可信最小观察/替代执行路径及必要拨款。旧故障未完全定位不自动禁止不同可信路径；不重跑旧P63。 |
+| [FRRIE](../candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md) | P59已intake；P63 source-only九frame映射完成，factory fault仍未归因，P63未运行。 | 无；本轮没有新增拨款。 | 可信最小观察/替代执行路径及必要拨款。旧故障未完全定位不自动禁止不同可信路径；不重跑旧P63。 |
 | [FSD](../candidates/flexible_skill_duration/DIRECTION.md#accepted-native-uav-renewal-batch-adverse-pair-b02771103-2026-09-11) | 771103 pair−0.0124304306、16/16 signs；既有正值保留，分配结束，四个远端路径已清理。 | 无 | 具体use/successor/claim-choice投资选择；无已分配第四pair或C promotion。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 最新8213 COND−DENSE−0.022469573456，5正/27负；完整intake，DENSE默认、no-addition保留。 | 无 | 必要的新投资选择；旧1200秒pair不能自动追加。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
@@ -35,8 +36,8 @@ RCLE由新Windows Transport接手准备，旧执行者已确认停止且零新Se
 | [scope_1s](../candidates/scope_1s/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [UCOPE](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | **更新：最新是post8801 PRO_FINAL PARK进一步8801-L continue/end-credit经验投入，保留unchanged-L spending stop。** 8601/8602、8701是更早证据。 | 无 | 有具体新选择才继续；不再凭旧8701 closeout pending造任务。其余renewal/ordinary-feedback议程未被整体关闭。 |
-| [FOLR](../candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md) | B03 final/main47d75d7f9：RETAIN0.947578125、LEARNED_EVENT−0.267968750，d_LR−1.215546875，冻结规则`RETAIN_ABOVE_MEI`；native1750.81秒在上限内。 | 无活动科学工作；有限grant结束，仅剩已终止副本清理。 | 无自动successor或family处置；新的科学问题需proper decision/funding。 |
-| [VNFC](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md) | B03 final incomplete/main7125f368b：每臂35 rounds、合计13,440 transitions/2,240 updates，104.89秒后SIGSEGV/exit139；无final primary，不能评分。 | allocation结束；仅剩两条已命名detached checkout清理。 | 无自动retry/诊断；未来须新的可归因修复和proper funding。 |
+| [FOLR](../candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md) | B03 final/main47d75d7f9：RETAIN0.947578125、LEARNED_EVENT−0.267968750，d_LR−1.215546875，冻结规则`RETAIN_ABOVE_MEI`；native1750.81秒在上限内。 | 无活动科学工作；有限grant结束，远端清理已验收；三份已保全本地副本因实际policy拒绝保留。 | 无自动successor或family处置；新的科学问题需proper decision/funding。 |
+| [VNFC](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md) | B03 final incomplete/main7125f368b：每臂35 rounds、合计13,440 transitions/2,240 updates，104.89秒后SIGSEGV/exit139；无final primary，不能评分。 | allocation/diagnosis结束；两条已命名detached checkout已清理，证据保留。 | 无自动retry/诊断；未来须具体支持的最小修复或有相关证据的同义路径及新投资；不要求完整历史归因。 |
 | [VSP02](../candidates/vsp_02/DIRECTION.md) | P19结束已测试fixed-member family/configuration。 | 无 | 具体新方向选择；无successor/UAV allocation。 |
 | [VSP03](../candidates/vsp_03/DIRECTION.md) | B07 final G−R0+0.01156738、G−R+0.01307617、Q−0.00160645；post-B07及9/11 fallback保留相同narrow pause，未分配新fit。 | 无 | 将来有决策价值的同配方B仍合法，但当前未选择；不从旧continuous512文字推断运行。 |
 | [VSP-C1](../candidates/vsp_c1/DIRECTION.md#tested-intact-body-plus-gate-package-ends-2026-09-09) | P81结束B13-tested intact-body-plus-gate package；B13−0.0320685805，保留旧正值与有限样本限制。 | 无 | 具体新方向/投资选择；没有successor，亦非整个K4或hold-value方向被关闭。 |

@@ -93,5 +93,15 @@
     "verdict_text": "Author recommendation only: S preparation + A consultation; hold M and both optional empirical tranches. No Portfolio selection executed.",
     "source": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T14:48:56+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-12-resume-independent-chains.md",
+      "state": "planned",
+      "summary": "原建议已由完整Portfolio决定S+A收束；原作者规范核对通过，当前执行/费用边界见新决定和最终owner item。Root集成与实际派发待记录；没有owner批准等待。"
+    }
+  ]
 }
