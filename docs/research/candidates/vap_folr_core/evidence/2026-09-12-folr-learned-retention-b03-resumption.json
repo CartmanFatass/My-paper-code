@@ -1,0 +1,104 @@
+{
+  "object": "FOLR-LEARNED-RETENTION-B03",
+  "status": "source_preparation_ready_no_scientific_submission",
+  "owner_instruction_record": "docs/research/portfolio/decisions/2026-09-12-windows-root-resumption.md",
+  "root_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "native_owner": "/root/dm_a_mx_folr_cap_review",
+  "input_sync_commit": "84b7c496b",
+  "scope": "Same unsubmitted two-fit pair; no added seed, panel, scientific retry, diagnostic or policy search.",
+  "timing_review": {
+    "known_support_at_old_stop_seconds": 308.8422538000558,
+    "remote_parent_elapsed_seconds": 274.8100000000559,
+    "other_invoked_wall_seconds": 34.03225379999992,
+    "client_timeout_seconds": 55,
+    "client_clock_subsumed": true,
+    "over_reference_seconds": 8.842253800055783,
+    "over_reference_percent": 2.9474179333519337,
+    "parent_share_percent": 88.98070021790724,
+    "unit": "sum of named invoked wall clocks; lower bound; not aggregate CPU or study elapsed",
+    "known_historical_support_through_closeout_seconds": 315.26373200005565,
+    "limits": [
+      "Initial timeout stdout/stderr missing; network/proxy root cause not established.",
+      "Some setup, authoring, integration and later support unmeasured; no full-cost certification."
+    ]
+  },
+  "budget": {
+    "support_reference_seconds": 300,
+    "support_is_hard_gate": false,
+    "native_arm_hard_cap_seconds": 1350,
+    "native_sum_hard_cap_seconds": 2700,
+    "complete_invoked_hard_cap_seconds": 3000,
+    "prior_largest_native_pair_seconds": 1815.99,
+    "prior_anchor_plus_known_historical_support_seconds": 2131.2537320000556,
+    "projection_limit": "Historical complete-arm observations are planning anchors, not forecasts or allowance transfers; new support and native costs remain in total work."
+  },
+  "reconciliation": {
+    "utc": "2026-09-12T13:17:25.987087+00:00",
+    "elapsed_seconds": 0.7440104999695905,
+    "cwd_exists": false,
+    "registered": false,
+    "supervisor_roots_exist": false,
+    "active_related_processes": [],
+    "git_version": "2.43.0",
+    "source_commit_exists": true,
+    "worktree_config": true,
+    "control_receipt": "temp/directions/vap_folr_core/exp/learned_retention_b03_resume_control_20260912/reconciliation.json"
+  },
+  "source_sha": "89035d8f1e3f44a07e80c08e3140283c03592efb",
+  "command_commit": "e3ac72da5750821e3ea67cbad98c27252161929d",
+  "source_paths": [
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py",
+    "scripts/hmasd_resource_preflight.py",
+    "scripts/run_folr_public_lifecycle_b01.py",
+    "tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py",
+    "scripts/hmasd_platform.py"
+  ],
+  "required_dependency_correction": {
+    "path": "scripts/hmasd_platform.py",
+    "reason": "Unconditional import by unchanged admit-memory helper; include in sparse dependency closure.",
+    "git_blob": "eb54e7c31170ad14c903ba87e55b1a479416b51b",
+    "bytes": 2599,
+    "code_changed": false
+  },
+  "staging_script": "set -eu\ngit -C /home/wu/projects/HMASD worktree add --detach --no-checkout /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 89035d8f1e3f44a07e80c08e3140283c03592efb\ngit -C /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 sparse-checkout set --no-cone --stdin <<'FOLR_PATHS'\n/experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py\n/experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py\n/experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py\n/experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py\n/experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py\n/experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py\n/experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py\n/scripts/hmasd_resource_preflight.py\n/scripts/run_folr_public_lifecycle_b01.py\n/tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py\n/scripts/hmasd_platform.py\nFOLR_PATHS\ngit -C /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 checkout --detach 89035d8f1e3f44a07e80c08e3140283c03592efb\ngit -C /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 diff --exit-code 89035d8f1e3f44a07e80c08e3140283c03592efb -- experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py scripts/hmasd_resource_preflight.py scripts/run_folr_public_lifecycle_b01.py tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py scripts/hmasd_platform.py\n/home/wu/.venvs/hmasd/bin/python - <<'FOLR_SOURCE_CHECK'\nfrom pathlib import Path\nimport json,subprocess\nroot=Path('/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1')\npaths=[\"experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py\",\"experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py\",\"experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py\",\"experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py\",\"experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py\",\"experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py\",\"experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py\",\"scripts/hmasd_resource_preflight.py\",\"scripts/run_folr_public_lifecycle_b01.py\",\"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py\",\"scripts/hmasd_platform.py\"]\nassert all((root/p).is_file() for p in paths)\nassert subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip()=='89035d8f1e3f44a07e80c08e3140283c03592efb'\nprint(json.dumps({'source_files_present':len(paths),'source_bytes':sum((root/p).stat().st_size for p in paths),'scientific_invocations':0}))\nFOLR_SOURCE_CHECK\n",
+  "staging_transport": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "hmasd-wsl-node",
+    "/usr/bin/timeout --signal=TERM --kill-after=5s 40s zsh -lic 'bash -s'"
+  ],
+  "staging_client_timeout_seconds": 50,
+  "staging_status": "not_executed",
+  "commands_source": "FOLR_LEARNED_RETENTION_B03_RESULT_SUMMARY_20260911.json commands at e3ac72da5750821e3ea67cbad98c27252161929d",
+  "commands_unchanged": true,
+  "monitor_thread_id": null,
+  "monitor_route_note": "Root is replacing control-task entry points. Read its published live Windows Monitor configuration and readiness before new MONITOR_ADD; never use the historical B03 endpoint.",
+  "monitor_adoption": "not_submitted",
+  "scope_4_additions": "none; ordinary Git sparse staging replaces prior one-time full checkout; no production source change or service",
+  "validation": {
+    "kind": "static import closure and accepted source/command reuse; no module execution",
+    "eleven_published_sources_ast_pass": true,
+    "literal_commands_equal_published_e3ac72da5": true,
+    "historical_command_status_only_differences": "never_submitted_support_cap_stop versus committed_plan_not_submitted; execution strings and identities equal",
+    "remote_bash_syntax_exit": 0,
+    "remote_bash_syntax_wall_seconds": 0.5970167000195943,
+    "source_paths": 11,
+    "source_bytes": 85364,
+    "new_models": 0,
+    "new_tests": 0,
+    "new_scientific_invocations": 0
+  },
+  "support_resume": {
+    "named_measurements": [],
+    "unmeasured": "Some review/edit/Git/tool/provider effort remains unmeasured. Historical 315.263732 lower bound is not a reset."
+  }
+}
