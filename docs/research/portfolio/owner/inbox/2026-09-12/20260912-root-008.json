@@ -1,0 +1,95 @@
+{
+  "id": "20260912-root-008",
+  "created": "2026-09-12T11:32:35-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "C F R结束后至多三项边际投入：A M Q 或H",
+  "context": "当前FSD与FOLR独立推进2/5。作者建议新ACVC A与MGTAP M两个直接B；CBSC Q单次咨询为实质备选。三个空位不是三笔授予，旧M=no和所有已购边界保持。",
+  "options": [
+    {
+      "key": "am",
+      "label": "建议A加M",
+      "consequence": "仅建议新A840秒和M1200秒两独立B，2040未来invoked caps，完整agent/provider成本未知。"
+    },
+    {
+      "key": "amq",
+      "label": "A M加Q",
+      "consequence": "三个明确新单位：2040加未知Q成本，Q零数值实现；不是自动填槽。"
+    },
+    {
+      "key": "subset",
+      "label": "较小或不同子集",
+      "consequence": "Pro逐项选择A M Q任意其他子集，明确所选款额和边界。"
+    },
+    {
+      "key": "h",
+      "label": "不追加H",
+      "consequence": "无新投入，当前D P独立继续，不触发备用或生命周期停放。"
+    }
+  ],
+  "recommended": "am",
+  "auto_applied": null,
+  "dm_reason": "两个已验收配方提供直接有限观察，Q可能仅重述no-spend；M的新比较不再挤掉已资助D P，但没有新经验。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L42",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "FSD/FOLR已独立推进、C/F/R本笔投入完成后，是否另外资助至多三项：ACVC A一对、MGTAP M一对、CBSC Q一次方向咨询，或不追加H？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC A",
+        "from": "训练F相对训练C的第一pair为DOWN，本笔F结束；新A未拨款",
+        "to": "明确新270每臂/540native/300support/840完整future秒，原样fresh pair；不借旧660/1200。"
+      },
+      {
+        "target": "MGTAP M",
+        "from": "两次Portfolio M=no，无新M经验；COND仅保留候选，DENSE默认",
+        "to": "明确重议新450每臂/900native/300support/1200完整future秒；只有本次Pro选定才执行。"
+      },
+      {
+        "target": "CBSC Q与H",
+        "from": "公开流pair全REFRESH零差且低于REQUEST_ONLY；现无successor",
+        "to": "Q是一次原Convergence/full intake、完整成本未知、零数值/实现的实质备选；H或任何子集均可。"
+      }
+    ],
+    "if_refused": "现有D/P按各自资金独立继续。新A/M/Q无实验、准备或咨询款；三个空位不产生后备、新余额或强制三笔授予。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/SCIENCE_BRIEF.md",
+        "quote": "One fresh unscreened matched pair asks whether that adverse observation recurs\nenough to affect **optional training-F development versus deployment-only F**.",
+        "why": "A买一个能改变同host可选开发建议的真实观察，不把一次负点当稳定结论。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/SCIENCE_BRIEF.md",
+        "quote": "The actual opportunity set has changed: a new M would no longer displace funded\nD or P. **No M empirical result has changed.**",
+        "why": "重议的是当前边际选择，既不抹去原M=no，也不制造新证据。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/SCIENCE_BRIEF.md",
+        "quote": "A's adverse point and M's\nwithin/adverse history are strong reasons to conserve; the two additions are a\nclose marginal recommendation, not a claim of positive expected return or cost\noptimality.",
+        "why": "已有强参考可能已经足够；H、单项或换Q均可能优于追加两次原样训练。"
+      }
+    ],
+    "uncertainty": [
+      "A/M新结果未必改变实用选择，不要求最少seed数或先positive。",
+      "Q可能有方向边界价值，也可能只重述现有no-spend；完整咨询成本未知。",
+      "全22方向缺匹配调优headroom，ACVC recasts2最低ACTIVE争用次序不变；不新增exact upper或故障全还原关卡。"
+    ],
+    "cost": {
+      "compute": "建议A840+M1200=2040新future invoked caps；agent/provider deliberation与历史完整成本仍未知。加Q为2040加未知Q。D/P原独立拨款与所有旧款不可互转。",
+      "owner_time": "无需逐项批准，原作者完整核对Pro后由Root执行；owner可异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "仅本次尚未分配的A/M/Q；已选D/P不等此问。"
+    },
+    "verdict_text": "Author recommendation only: newly fund A and M, one unchanged ACVC and one\nunchanged MGTAP B pair; do not buy Q by default. Q, smaller subsets and H are\nsubstantive alternatives. Portfolio Pro decides each unit; no investment is\nselected or implemented by this recommendation.",
+    "source": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/SCIENCE_BRIEF.md"
+  },
+  "starred": true
+}
