@@ -1,0 +1,17 @@
+{
+  "handle": "mgtap-top-b01-8221-20260912",
+  "source_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+  "execution_node": "hmasd-wsl-node",
+  "status": "finished",
+  "exit_code": 0,
+  "pid": 3403683,
+  "pid_exists": false,
+  "tmux_active": false,
+  "supervisor_duration_seconds": 377,
+  "terminal_witness_at": "2026-09-13T06:36:02+08:00",
+  "native_wall_seconds": 377.11,
+  "peak_rss_kib": 562380,
+  "log": "/home/wu/.agent-tasks/mgtap-top-b01-8221-20260912/task.log",
+  "monitor_terminal": "Root forwarded authoritative MONITOR_TERMINAL after actual goal adoption; terminal accepted for collection. CADC handles remain in Monitor goal; no empty-goal completion is claimed for this event.",
+  "collection": "Both arms and all12 native/supervisor members preserved and digest-checked; scientific intake is separate from exit0."
+}
