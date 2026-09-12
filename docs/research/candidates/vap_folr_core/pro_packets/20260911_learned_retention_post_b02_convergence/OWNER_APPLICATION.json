@@ -1,0 +1,132 @@
+{
+  "recorded_at_utc": "2026-09-12T03:15:53.824145+00:00",
+  "intake_path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md",
+  "audit_path": "docs/research/portfolio/audit/2026-09-11.md",
+  "technical_row": 128,
+  "direction_row": 129,
+  "owner_packet": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/APPLICATION_OWNER_PACKET.json",
+  "old_item": "20260911-folr-004",
+  "application": "direction recommendation A only; zero empirical allocation",
+  "raw_receipt_hash": "87bb4552f2dfe473c39e8cd036580d5ef557e5e68b0fdf66e23fdd7c38716e2a",
+  "full_response_hash": "a5ffd43de9407597c60ca1a3b7ee8b057800c6ab39950d2331665c349f0d2eb8",
+  "new_item": "20260911-folr-005",
+  "new_item_path": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-folr-005.json",
+  "add_receipt": {
+    "action": "item.py add",
+    "subprocess_exit_code": 0,
+    "actual_effect": "Created exactly20260911-folr-005 at2026-09-11T20:16:45-07:00; all requested fields read back",
+    "wrapper_error": "JSONDecodeError: CLI stdout was not JSON; parse failed after successful creation. Original stdout was not retained.",
+    "reconciliation": "Read exact item title,packet,recommended/auto_applied and source/ledger/brief fields. No second add call."
+  },
+  "trace_receipts": [
+    {
+      "item_id": "20260911-folr-005",
+      "argv": [
+        "trace",
+        "20260911-folr-005",
+        "--authority",
+        "PRO_FINAL / OWNER_DELEGATED",
+        "--source",
+        "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md@ed882448bda9b3f240addf88bde1921cebc24397",
+        "--record",
+        "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md",
+        "--state",
+        "applied",
+        "--auto-applied",
+        "a",
+        "--summary",
+        "已应用A作为未来一对原样B的方向建议；不是已执行训练。保留第一对正结果、第二对反结果及RETAIN默认。当前一次文档问题/完整接收结束，零实现或数值额度。"
+      ],
+      "stdout": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-folr-005.json\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "item_id": "20260911-folr-004",
+      "argv": [
+        "trace",
+        "20260911-folr-004",
+        "--authority",
+        "PRO_FINAL / OWNER_DELEGATED",
+        "--source",
+        "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md@ed882448bda9b3f240addf88bde1921cebc24397",
+        "--record",
+        "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md",
+        "--state",
+        "applied",
+        "--auto-applied",
+        "a",
+        "--summary",
+        "已应用A作为未来一对原样B的方向建议；不是已执行训练。保留第一对正结果、第二对反结果及RETAIN默认。当前一次文档问题/完整接收结束，零实现或数值额度。",
+        "--correction",
+        "原C是未执行的近似建议，完整Pro选A后保留此历史并应用A；当前决定及中文上下文见20260911-folr-005与APPLICATION_OWNER_PACKET.json。"
+      ],
+      "stdout": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-folr-004.json\n",
+      "stderr": "",
+      "exit_code": 0
+    }
+  ],
+  "completed_at_utc": "2026-09-12T03:17:35.175608+00:00",
+  "clean_boundary_owner_check": {
+    "recorded_at_utc": "2026-09-12T03:19:53.970474+00:00",
+    "unapplied_reviews_primary_control": [],
+    "unapplied_reviews_direction_checkout": [],
+    "existing_owner_column_entries": [
+      {
+        "path": "docs/research/portfolio/audit/2026-09-04.md",
+        "line": 214,
+        "direction": "portfolio",
+        "owner": "Direct conversation: 我们开始推进自动研究流程"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-04.md",
+        "line": 259,
+        "direction": "portfolio",
+        "owner": "Direct conversation: dedicated luna-xhigh sibling to record, track and remind DMs"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 22,
+        "direction": "vap_folr_core",
+        "owner": "ratify (20260904-folr-010)"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 357,
+        "direction": "portfolio",
+        "owner": "Current Root chat: 同意; owner/reviews/2026-09-05.md#20260905-root-001"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 397,
+        "direction": "portfolio",
+        "owner": "那么我批准了这个更改了 我们修改一下边界 就是这些重要改动按照Pro6的回复继续, 但是需要在Dashboard中星标标出 方便我追溯"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 398,
+        "direction": "portfolio",
+        "owner": "current explicit instruction above; prior ratification row is not proof of earlier authorization"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 420,
+        "direction": "portfolio",
+        "owner": "我明确批准这里涉及的修改  包括后续对各个subagent的delegation 都在我的批准范围内 我批准对后续研究方向的修改 且批准策略B 先前的授权也已经得到我的确认 这个修改符合我的本意"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 421,
+        "direction": "portfolio",
+        "owner": "我已经批准FSD的恢复 当前这个设置已经满足要求了 继续即可"
+      },
+      {
+        "path": "docs/research/portfolio/audit/2026-09-05.md",
+        "line": 434,
+        "direction": "portfolio",
+        "owner": "这符合我的本意 我的同意就是全面批准 不是什么模糊的误解"
+      }
+    ],
+    "application": "Nine historical entries on2026-09-04/05; existing authorizations/role history remain represented in current AGENTS and accepted direction history. No contemporary override of this request or prediction reply; no handled item to mark answered. This creates no new owner reply."
+  }
+}

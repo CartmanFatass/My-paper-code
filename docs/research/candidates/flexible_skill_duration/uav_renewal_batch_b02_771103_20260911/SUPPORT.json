@@ -1,6 +1,6 @@
 {
   "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
-  "recorded_utc": "2026-09-12T02:54:20.157395+00:00",
+  "recorded_utc": "2026-09-12T03:41:54.2612783Z",
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -153,23 +153,149 @@
     {
       "purpose": "authoritative owner review read at accepted I clean handover boundary",
       "wall_seconds": 0.4394353
+    },
+    {
+      "purpose": "publish sole I relay receipt and final handover support snapshot",
+      "wall_seconds": 4.8911139
+    },
+    {
+      "purpose": "Root reported I launch/adoption inspection, integration and push; approximate 0.7 + 4.6 s",
+      "wall_seconds": 5.3
+    },
+    {
+      "purpose": "read current frozen card and scientific intake routing at I terminal; confirm preserved checkout state",
+      "wall_seconds": 0.3461173
+    },
+    {
+      "purpose": "read existing paired collection/publication surface and scientific-reading reference",
+      "wall_seconds": 0.3450327
+    },
+    {
+      "purpose": "authoritative owner reviews on routed paired terminal entry",
+      "wall_seconds": 0.3899392
+    },
+    {
+      "purpose": "collect terminal I raw outputs and all current receipts into durable archive; no temporary extraction",
+      "wall_seconds": 0.8755428
+    },
+    {
+      "purpose": "read frozen primary reducer and recorded I array/diagnostic shapes for focused integrity check",
+      "wall_seconds": 0.2263225
+    },
+    {
+      "purpose": "single full I/paired integrity check and predeclared reduction; run-level one-pair summary",
+      "wall_seconds": 0.4225114
+    },
+    {
+      "purpose": "read current direction conclusion and existing E0/intake shape for bounded adverse result",
+      "wall_seconds": 0.2561916
+    },
+    {
+      "purpose": "read existing owner item trace application interface",
+      "wall_seconds": 0.2896122
+    },
+    {
+      "purpose": "native reward decomposition and existing exposure/segment description for bounded adverse intake",
+      "wall_seconds": 0.2966191
+    },
+    {
+      "purpose": "correct diagnostic field mapping and read current authority/resource-uncertainty rule",
+      "wall_seconds": 0.2811701
+    },
+    {
+      "purpose": "prepare terminal four-path cleanup inventory against all 22 preserved raw files",
+      "wall_seconds": 1.0016725
+    },
+    {
+      "purpose": "read current card status, immutable Portfolio authority pointer and relevant owner audit overrides",
+      "wall_seconds": 0.2359013
+    },
+    {
+      "purpose": "intake write command rejected before process creation by Windows command-length limit (OS 206); enclosing tool reported 0.1 s",
+      "wall_seconds": 0.1
+    },
+    {
+      "purpose": "write bounded adverse E0 record directly after command-length rejection",
+      "wall_seconds": 0.015
+    },
+    {
+      "purpose": "write full scientific intake with decisions, uncertainty, history and pending preservation/cleanup",
+      "wall_seconds": 0.015
+    },
+    {
+      "purpose": "write six-heading owner brief and accepted card/direction result boundary; verify direct-written records",
+      "wall_seconds": 0.2937787
+    },
+    {
+      "purpose": "write terminal execution/audit/support record and applied result trace on existing owner card",
+      "wall_seconds": 0.3877923
+    },
+    {
+      "purpose": "publish accepted adverse pair, raw preservation, intake/brief/owner/audit and current science",
+      "wall_seconds": 5.5026969
+    },
+    {
+      "purpose": "publish explicitly ignored ordered/run score CSVs and verify dependent result/intake evidence links",
+      "wall_seconds": 5.1159536
+    },
+    {
+      "purpose": "read back published original archives and remove/verify four terminal owned remote paths",
+      "wall_seconds": 1.5739085
+    },
+    {
+      "purpose": "authoritative owner reviews at completed current-allocation cleanup boundary",
+      "wall_seconds": 0.4089284
+    },
+    {
+      "purpose": "Root reported paired intake/table inspection, integration/conflict resolution and two pushes; approximate 0.6 + 0.7 + 9.5 s",
+      "wall_seconds": 10.8
+    },
+    {
+      "purpose": "publish verified current-allocation cleanup completion and honest final cost limitations",
+      "wall_seconds": 5.0524937
+    },
+    {
+      "purpose": "recover final clean-boundary state, live relay contract and published cost snapshot",
+      "wall_seconds": 0.5055619
+    },
+    {
+      "purpose": "resolve exact published closeout evidence paths and primary-control relay identity",
+      "wall_seconds": 0.2292705
+    },
+    {
+      "purpose": "read final intake, current support schema and accepted prior relay receipt for terminal publication",
+      "wall_seconds": 0.2237943
+    },
+    {
+      "purpose": "single actionable terminal-intake and verified-cleanup handoff through live Root relay",
+      "wall_seconds": 0.59
+    },
+    {
+      "purpose": "persist accepted sole terminal Root relay with exact event and original substantive return",
+      "wall_seconds": 0.016
+    },
+    {
+      "purpose": "Root reported final cleanup closeout inspection, integration and push; approximate 0.6 + 4.5 s",
+      "wall_seconds": 5.1
+    },
+    {
+      "purpose": "record Root accepted closure, integrated cleanup and final terminal receipt/support snapshot",
+      "wall_seconds": 0.5275054
     }
   ],
-  "known_support_wall_seconds": 67.6633921,
-  "counting": "Each outer invoked support interval once; nested clocks are not additive. This final I receipt/publication command is not measurable within its own snapshot; it is returned separately and charged at collection.",
+  "known_support_wall_seconds": 119.27882289999997,
+  "counting": "Each enclosing invoked support interval once, through final receipt preparation and Root cleanup acceptance. This final publication command wall is reported in native completion after measurement; no recursive accounting-only commit. Nested clocks and cumulative Root confirmations are not added again.",
   "new_scientific_submissions": 2,
   "new_source_delivery_transactions": 1,
   "unknown": [
-    "D0 and I native realization",
-    "Monitor invoked observation wall pending routed accounting",
-    "Root FSD-only integration/support wall pending routed accounting",
-    "future collection, publication and preservation/cleanup",
-    "unmeasured external contribution is not zero"
+    "Monitor command cost absent from terminal receipts; no extra query",
+    "relay-service and client/message overhead",
+    "final receipt publication command wall until measured and any later Root integration"
   ],
-  "claim": "D0 accepted within its cap; I accepted and actively monitored. Remaining native/support and unknown attribution prevent a final total certificate.",
+  "claim": "Both complete native arms and their sum pass. Support/complete totals are partially unmeasured; no observed breach. Primary is valid.",
   "native_wall_seconds": {
     "D0": 471.82,
-    "I": null
+    "I": 1023.43
   },
   "source_transaction": {
     "outer_tool_wall_seconds": 7.6788293,
@@ -177,7 +303,7 @@
     "limit_seconds": 45,
     "status": "successful single transaction; nested helper clock not added again"
   },
-  "known_native_plus_support_seconds": 539.4833921,
+  "known_native_plus_support_seconds": 1614.5288229,
   "Root_integration": {
     "source_main": "31e9cc05a",
     "D0_handover_main": "0e7bb1e83",
@@ -185,6 +311,16 @@
     "exactness": "approximately 0.6 + 8.5 s; client/message overhead unknown",
     "D0_collection_main": "a755d804f",
     "D0_collection_reported_support_bound_seconds": 6.8,
-    "counting": "Earlier approximate 9.1 s plus this conservative <=6.8 s contribution are charged once each; client/message overhead remains unknown."
-  }
+    "counting": "Earlier approximate 9.1 s plus this conservative <=6.8 s contribution are charged once each; client/message overhead remains unknown.",
+    "paired_intake_main": "14fdaa63c",
+    "tables_main": "cf5dccaa6",
+    "paired_reported_support_seconds": 10.8,
+    "I_handover_main": "ced17727e",
+    "I_handover_reported_support_seconds": 5.3,
+    "cleanup_main": "be2eb581d",
+    "cleanup_reported_support_seconds": 5.1
+  },
+  "native_pair_wall_seconds": 1495.25,
+  "current_cleanup_complete": true,
+  "root_pair_acceptance": "Root accepted the bounded pair and ended its allocation without successor; cleanup closeout integrated/pushed as main be2eb581d."
 }
