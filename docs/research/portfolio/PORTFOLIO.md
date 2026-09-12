@@ -8,7 +8,7 @@
 本表登记15 ACTIVE、7 PARKED，生命周期、priority、recasts与UAV字段不变。
 最新 [Portfolio决定](decisions/2026-09-12-resume-independent-chains.md) 已由原作者完整核对：**S+A；保持M不追加；S+B/A+B不拨款**。
 
-Root当前实际工作集0/5：ACVC A与CBSC S均已完成；Portfolio作者正在准备下一边际投资问题，但不计方向槽位。
+Root当前实际工作集0/5：ACVC A与CBSC S均已完成；post-S/A Portfolio请求已被provider接受并生成中，但跨方向决策不计方向槽位。
 CBSC只买一次候选准备（complete invoked-support≤600秒、300参考），ACVC只买一次原Convergence与完整intake（成本未知）；都没有新增数值额度。
 两项互不等待，剩余三个空槽也没有自动备用款。详细直接任务见 [独立执行映射](pro_packets/20260912_resume_five_independent_chains/EXECUTION_MAPPING.md)。
 Monitor当前没有活动实验目标，原terminal notices已送达；Transport本轮Portfolio答复已完整归档。实际新派发由Root持续更新。
