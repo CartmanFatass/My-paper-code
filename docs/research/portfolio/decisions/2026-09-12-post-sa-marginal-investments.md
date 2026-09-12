@@ -1,7 +1,7 @@
 # 2026-09-12 — C/R/F 三条独立完整 B 投入
 
-**PRO_FINAL / OWNER_DELEGATED：C=yes、R=yes、F=yes、M=no，H未选。**
-原Portfolio作者完整核对通过。Root集成/实际派发待记录，无需逐项owner再批准。
+**PRO_FINAL / OWNER_DELEGATED / ROOT_INTEGRATED：C=yes、R=yes、F=yes、M=no，H未选。**
+原Portfolio作者完整核对通过；Root已独立恢复三个原DM，无需逐项owner再批准。
 
 来源为[完整答复](../pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md)，
 不可变提交268d2b4df7f31df8a27466ddfbb3bcef6ba587a4，263行、62954 bytes，
@@ -29,11 +29,11 @@ future额度买较健康的路径；H可节约所有新增成本。Pro接受C/R�
 测得信息价值、速度优势或未来正收益。保留CBSC旧零差/RAW输rule、RCLE负aggregate/噪声、
 ACVC adverse worlds/C01模型限定及M正负两点；各自只形成一次B，缺primary无极性。
 
-三个DM均可现在独立接任完整实现任务，源代码接受/身份/命令/资源准入/Monitor adoption
-尚属其实际执行责任，不是本文件已完成的事实。当前0/5；三个真正启动后为3/5，仍余两槽。
+三个DM已独立接任完整实现任务，源代码接受/身份/命令/资源准入/Monitor adoption
+仍属各自实际执行责任。当前3/5，仍余两槽。
 CBSC HIGH、RCLE MEDIUM、ACVC MEDIUM且recasts2最低ACTIVE争用顺序保持；不等同伴、
 cleanup或凑满五条。不新增S/A、cost试验、full-model smoke、历史根因普查或hidden endpoint。
 
 每项到完整结果/intake或具体依赖限制为止；没有自动retry、备用M、新咨询或successor。
 全部22方向生命周期/priority/recasts/headroom/UAV/窄家族边界保持。FOLR、VNFC、旧RCLE
-分配已结束；cleanup不占科研槽。Root负责发布与实际派发，不重写该科学选择。
+分配已结束；cleanup不占科研槽。Root已发布并实际派发，不重写该科学选择。

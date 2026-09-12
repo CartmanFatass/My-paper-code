@@ -2,7 +2,7 @@
 
 Authority: complete response268d2b4df7f31df8a27466ddfbb3bcef6ba587a4,
 accepted by original-author [INTAKE](INTAKE.md).
-**PRO_FINAL / OWNER_DELEGATED; Root integration/actual dispatch pending.**
+**PRO_FINAL / OWNER_DELEGATED / ROOT_INTEGRATED.** Root resumed the three named DMs independently on 2026-09-12; each owns its complete implementation-to-intake assignment below.
 All three rows are independently ready for the complete implementation-to-intake
 task. None asserts technical launch acceptance or an actual running experiment.
 
@@ -158,8 +158,8 @@ does not alter the new caps. Each unit ends at its complete result/intake or
 concrete dependent limitation; no extension, repeat consultation or fallback.
 
 M and all other unselected directions receive zero new work. FOLR/VNFC/old RCLE
-allocations remain completed, cleanup is not research. Three actual independent
-starts can make3/5, leaving two unallocated slots. No common batch, sibling
+allocations remain completed, cleanup is not research. The three actual independent
+starts make3/5, leaving two unallocated slots. No common batch, sibling
 result/intake or owner-ratification wait. A unit's completion/failure neither
 stops nor enlarges another. Root handles any remaining concrete investment need
 through the proper node, not an automatic fifth grant.
