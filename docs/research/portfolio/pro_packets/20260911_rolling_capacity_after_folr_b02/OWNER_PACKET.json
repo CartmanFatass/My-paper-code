@@ -1,0 +1,31 @@
+{
+  "question": "FOLR第二对结果反向、ACVC已提出未来五次训练的主张设计后，四个实际空位应投入哪些下一步？",
+  "changes_if_approved": [
+    {"target": "ACVC下一项投入", "from": "已接受未来设计，尚无C晋级、冻结或资金", "to": "建议A：新3000秒完整机器工作上限；先取得原Convergence的晋级决定和Innovator审查，符合原五次训练设计后才冻结、实现和执行"},
+    {"target": "FOLR下一项投入", "from": "学习门两对结果一正一负，B02额度结束", "to": "建议P：仅一次原Convergence家族问题及完整接收，零实现和数值额度"},
+    {"target": "其余容量", "from": "FSD仍推进；RCLE提交前停泊；VNFC有条件900秒未就绪", "to": "保留这些实际状态，MGTAP不追加；推荐实施后仍明确保留两个空位，不能把意向计为推进"}
+  ],
+  "if_refused": "可选择仅准备ACVC、另买一对原样FOLR，或继续保留空位。已有结果、家族边界和资金不被改写；本地作者不代替Portfolio作选择。",
+  "evidence_for": [
+    {"path": "docs/research/candidates/acvc/ACVC_POST_THREE_FRESH_CONVERGENCE_INTAKE_20260911.md", "quote": "The strongest support is repeated benefit above the useful dwell comparator; the strongest contradiction is dwell's own gains and **5/11/5 F-dwell adverse worlds**, including -.0793154814 J in 8961.", "why": "三次新训练都超过有用的dwell比较器，使一个有限、明确但仍临时性的总体问题值得考虑。"},
+    {"path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_SCIENCE_CARD_20260911.md", "quote": "The independent unit is one matched-initialization training pair.", "why": "B02的-1.7695与B01的+1.7634属于两次训练观察；不能把128个评估回合当作训练重复。"}
+  ],
+  "evidence_against": [
+    {"path": "docs/research/candidates/acvc/ACVC_POST_THREE_FRESH_CONVERGENCE_INTAKE_20260911.md", "quote": "Training-policy means need not be normal; 64 episodes cannot make the cross-training distribution normal, and five units cannot validate its tails.", "why": "即使五次新训练通过，也只支持预先指定小样本模型下的单任务临时结论；完整未来支持成本仍未知。"},
+    {"path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/SCIENCE_BRIEF.md", "quote": "Q is a serious alternative: two opposite histories leave training variation unresolved, and one more fully preselected B is legitimate without a mechanism diagnosis.", "why": "再做一对原样FOLR仍然合法且可能有用；建议讨论家族而非直接再做，是投入判断，不是两次结果的停止规则。"}
+  ],
+  "uncertainty": [
+    "ACVC尚需真正的Convergence晋级决定和冻结前Innovator；只做Innovator会漏掉现有权限边界。",
+    "新ACVC每完整fit最多270秒，五次原生合计1350，所有已调用支持最多1650，总计3000；这些是建议新上限而非预测或旧额度续期。",
+    "FOLR第三对备选需新3900秒；MGTAP第三对备选需新1200秒；各项不能互相转移。",
+    "FSD后续结果、RCLE原请求恢复或VNFC真正就绪会改变实际容量，但不会自动释放这里未选的后继。"
+  ],
+  "cost": {
+    "compute": "当前准备零模型、环境、科学RNG、训练和评估。建议A仅在必要方向决定后执行5个新fit：901120原生步、5120次Adam，机器工作新上限3000秒；P仅一问题，数值额度零。Pro生成、等待及作者时间另记且总量未知。",
+    "owner_time": "无需逐项批准；可异步改变建议。",
+    "reversibility": "costly",
+    "waits_on_this": "只有尚未获资助的新投入等Portfolio决定；FSD及已有请求恢复独立继续。"
+  },
+  "verdict_text": "建议A+P+N：有条件资助ACVC完整五次训练路径，另给FOLR一次零数值家族问题，MGTAP维持不追加。当前只是建议，尚无本地Portfolio选择。",
+  "source": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/SCIENCE_BRIEF.md"
+}
