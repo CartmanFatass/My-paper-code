@@ -1,0 +1,243 @@
+{
+  "checked_at_utc": "2026-09-12T02:31:55.670056+00:00",
+  "observed_remote_heads": {
+    "refs/heads/codex/acvc": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+    "refs/heads/codex/portfolio": "440fb6c4efdaa4d3e8e94031db9b4a111b345774",
+    "refs/heads/main": "cbec1bea043e7ced03d60a69de5f14b0571dd245"
+  },
+  "references": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/SCIENCE_BRIEF.md",
+      "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+      "bytes": 15396,
+      "sha256": "58c92c6d89af380596b26906b317109149180dc099889bcc8f68523561f5704c",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/FACTS.json",
+      "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+      "bytes": 13705,
+      "sha256": "948e6af990c1406c6ca891fdef703dda3c912d9939d2176171e04841e655dd5e",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/EXECUTION_MAPPING.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "bytes": 15037,
+      "sha256": "58983c0a0c6b3f6cca5afc18bee4aa850e4ce22f88ffc3783b6ce1070f652cb3",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        },
+        {
+          "remote_ref": "refs/heads/main",
+          "observed_head": "cbec1bea043e7ced03d60a69de5f14b0571dd245"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md",
+      "commit_sha": "05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+      "bytes": 62241,
+      "sha256": "85c1148a070bc53e5cbe7c7783fd938b71a74768c964a528e239fba35de13443",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/portfolio",
+          "observed_head": "440fb6c4efdaa4d3e8e94031db9b4a111b345774"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/archive/RESPONSE.md",
+      "commit_sha": "67b9ab3a794d026cf95ade7dfa770037dc786528",
+      "bytes": 34049,
+      "sha256": "de211e40dd6c07fdba22cd9d3801b565cf5e758d20c66c53d01503f2adcbdec2",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_THREE_FRESH_CONVERGENCE_INTAKE_20260911.md",
+      "commit_sha": "29b57b8b84c7407b7ba6e9c32f3688e0a6cde88e",
+      "bytes": 17415,
+      "sha256": "6db6620845f69349a86907b9f9fa8ed84667c73b280ab99a236882824d16b52f",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+      "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+      "bytes": 43535,
+      "sha256": "d52891c39dc300ad83449226962f98cd913eff9891b6d046e918b8742e04e599",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md",
+      "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+      "bytes": 11212,
+      "sha256": "d3a7b5bcae1b573d2029b615c714913733426ae63c06c0ff3cb680e8ac3d08db",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/FACTS.json",
+      "commit_sha": "3c7f0976e1116b43e3e42a06ca03c25a8045225c",
+      "bytes": 12473,
+      "sha256": "3aa134859f50ee97c0fc30b724e2c653688d1f64c92a9f5b21ed65ecb14cf2ac",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+      "bytes": 32052,
+      "sha256": "345a00a174f3830aa9b2d6fcdeff4bea02f0fb786b1f8a26da0cc21cbd731fe8",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        },
+        {
+          "remote_ref": "refs/heads/main",
+          "observed_head": "cbec1bea043e7ced03d60a69de5f14b0571dd245"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        },
+        {
+          "remote_ref": "refs/heads/main",
+          "observed_head": "cbec1bea043e7ced03d60a69de5f14b0571dd245"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        },
+        {
+          "remote_ref": "refs/heads/main",
+          "observed_head": "cbec1bea043e7ced03d60a69de5f14b0571dd245"
+        }
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        },
+        {
+          "remote_ref": "refs/heads/main",
+          "observed_head": "cbec1bea043e7ced03d60a69de5f14b0571dd245"
+        }
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "bytes": 44084,
+      "sha256": "f5f1e601be267d5881f05e0f46cc9a66aac99175fa9c91783f7688f1914687bd",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        },
+        {
+          "remote_ref": "refs/heads/main",
+          "observed_head": "cbec1bea043e7ced03d60a69de5f14b0571dd245"
+        }
+      ]
+    },
+    {
+      "path": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "bytes": 11428,
+      "sha256": "fb3ccd5f74c44a1f14e3de638dbc4b4fa7087fc79deacd2b84951760ad3d6c36",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        },
+        {
+          "remote_ref": "refs/heads/main",
+          "observed_head": "cbec1bea043e7ced03d60a69de5f14b0571dd245"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/ISSUE_INPUT_SNAPSHOT.json",
+      "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+      "bytes": 21032,
+      "sha256": "d96f36c146df2a791ca94749d7a32579f96eb0256fa62c1c19390e78c504d54d",
+      "published_descendants": [
+        {
+          "remote_ref": "refs/heads/codex/acvc",
+          "observed_head": "6cfba2c690e55ea5266f34090cb9465088b404a9"
+        }
+      ]
+    }
+  ],
+  "limit": "Git object existence and published reachability only; not a claim that Pro has accessed them."
+}

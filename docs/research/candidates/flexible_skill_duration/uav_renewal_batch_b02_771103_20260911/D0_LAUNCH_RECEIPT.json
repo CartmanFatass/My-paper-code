@@ -1,0 +1,21 @@
+{
+  "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
+  "arm": "D0",
+  "source_sha": "5b15e536806d3b54dc693e7b4b911eba53ff643c",
+  "transport_command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=8",
+    "hmasd-wsl-node",
+    "/home/wu/.venvs/hmasd/bin/python -u -"
+  ],
+  "returncode": 0,
+  "stdout": "{\"command\": [\"/usr/local/bin/agent-task\", \"run\", \"fsd-uav-renewal-batch-b02-771103-D0-20260911\", \"/usr/bin/time -f elapsed_seconds=%e,peak_rss_kib=%M,user_seconds=%U,system_seconds=%S,exit_status=%x -o /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911/D0_process_time.txt /usr/bin/timeout --signal=KILL 900s /bin/bash /home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911/docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771103_20260911/D0.sh\"], \"cwd\": \"/home/wu/projects/HMASD\", \"source_sha\": \"5b15e536806d3b54dc693e7b4b911eba53ff643c\", \"input_root\": \"/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911\", \"returncode\": 0, \"stdout\": \"Task 'fsd-uav-renewal-batch-b02-771103-D0-20260911' started in tmux session 'agent_fsd-uav-renewal-batch-b02-771103-D0-20260911'. Output: /home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-D0-20260911/task.log\\n\", \"stderr\": \"\", \"remote_submission_wall_seconds\": 0.02660017099697143, \"utc\": \"2026-09-12T02:37:10.936128+00:00\"}\n",
+  "stderr": "",
+  "submission_command_wall_seconds": 0.4370000000053551,
+  "recorded_utc": "2026-09-12T02:37:11.094952+00:00",
+  "scientific_submissions_requested": 1,
+  "admission": "Destination-adjacent admit-memory && runner in committed D0.sh; receipt belongs to this invocation. No DM progress poll."
+}
