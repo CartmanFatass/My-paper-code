@@ -100,7 +100,7 @@
     "status",
     "task.log"
   ],
-  "worktree_registered": true,
+  "worktree_registered": false,
   "local_duplicate_files": {
     "COMMAND.sh": {
       "bytes": 937,
@@ -111,7 +111,7 @@
       "sha256": "c610478a215dbd68c029db6cbdb68509c59ba6254c72c496adc6ac3c3ab7372e"
     }
   },
-  "removal_state": "pending Root integration/retention acceptance; no target removed",
+  "removal_state": "all four named targets removed; disk and applicable Git registrations verified absent after Root mainb47e6c2f9 retention",
   "owned_targets": [
     "/home/wu/hmasd-worktrees/mgtap-top-b01-8221-20260912",
     "/home/wu/hmasd-inputs/mgtap-top-b01-8221-20260912",
@@ -120,5 +120,6 @@
   ],
   "cleanup_owner": "/root/dm_mgtap_m_pair",
   "retained": "Published exact source; native.tar.gz/supervisor.tar.gz and all12 raw/checkpoint/terminal members in this evidence directory; shared codex/mgtap authoring checkout and caches; all older accepted evidence.",
-  "cleanup_event": "Root confirms main integration/retention of these verified archives; DM rechecks only exact targets, removes duplicates and verifies disk/worktree-registration absence."
+  "cleanup_event": "completed after Root accepted b47e6c2f9556bd43f5f4e036074d31758dd9a36e",
+  "cleanup_receipt": "CLEANUP_RECEIPT.json"
 }

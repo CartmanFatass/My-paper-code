@@ -138,13 +138,28 @@ its proper tier with its own concrete question and budget; no new consultation,
 replacement mechanism, exhaustive enumeration or experiment is opened by this
 intake. Root can advance independent work while routing that need.
 
-## 5. Preservation and exact cleanup boundary
+## 5. Completed preservation and exact cleanup
 
-Published exact source and two local archives retain all12 original raw/checkpoint/
-terminal members, each verified against remote bytes. The inventory contains
-only the terminal worktree/output, staging, supervisor and the local two-file
-source-staging duplicate. Source is clean; PID/tmux absent; the six ignored native
-files are accounted for. Root confirms main integration/retention, then this DM
-removes those four exact targets and verifies disk/worktree-registration absence.
-No removal has occurred at this publication boundary. Shared codex/mgtap authoring
-checkout, caches, both archives and all prior scientific evidence remain retained.
+Root integrated and accepted both complete archives/all12 original members on
+mainb47e6c2f9556bd43f5f4e036074d31758dd9a36e. Their Git blobs exactly match local
+archive bytes and accepted digests. Before removal, the terminal execution source
+remained clean/exact, PID3403683 absent and tmux inactive; all12 raw members,
+four staged files and six ignored native files matched the inventory.
+
+Exactly three remote directories were removed: detached worktree/output, staging
+and terminal supervisor. The execution checkout is absent from disk and Git
+worktree registration. The local two-file source-staging duplicate was separately
+hash-checked and deleted through literal, nonrecursive PowerShell paths; both
+its disk path and any registration are absent. No other path was removed.
+[Remote](top_query_b01_20260912_8221/REMOTE_CLEANUP.json),
+[local](top_query_b01_20260912_8221/LOCAL_CLEANUP.json) and
+[combined receipt](top_query_b01_20260912_8221/CLEANUP_RECEIPT.json) retain the checks.
+
+Both original archives, unique source/evidence, shared codex/mgtap authoring
+checkout, caches and unrelated scientific records remain intact. Owner reviews
+returned[] at cleanup entry. No rejected operation, experiment, retry, extra
+arm/panel/consultation or successor occurred. The
+[support closeout](top_query_b01_20260912_8221/SUPPORT_CLOSEOUT.json) includes known
+cleanup commands while keeping unmeasured Root/Monitor/client/provider tails
+qualified. T is fully closed; the accepted TOP_ADVERSE result, DENSE default,
+missed/not-taken predictions and ACTIVE MGTAP lifecycle remain unchanged.

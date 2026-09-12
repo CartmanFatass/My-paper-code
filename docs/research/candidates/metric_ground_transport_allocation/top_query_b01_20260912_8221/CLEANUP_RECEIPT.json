@@ -1,0 +1,22 @@
+{
+  "status": "COMPLETE",
+  "retention_main": "b47e6c2f9556bd43f5f4e036074d31758dd9a36e",
+  "cleanup_owner": "/root/dm_mgtap_m_pair",
+  "disk_absence": {
+    "/home/wu/hmasd-worktrees/mgtap-top-b01-8221-20260912": true,
+    "/home/wu/hmasd-inputs/mgtap-top-b01-8221-20260912": true,
+    "/home/wu/.agent-tasks/mgtap-top-b01-8221-20260912": true,
+    "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904/temp/directions/metric_ground_transport_allocation/exp/top_query_b01_20260912_8221_source": true
+  },
+  "execution_worktree_registered": false,
+  "local_duplicate_registered": false,
+  "archive_blobs_equal_accepted_main": true,
+  "preserved_raw_members": 12,
+  "retained": "Both native.tar.gz/supervisor.tar.gz in published evidence; exact source Git objects, shared authoring checkout/cache and unrelated paths. No branch retirement or unrelated path removal.",
+  "source_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+  "new_scientific_invocations": 0,
+  "allocation": "T closed; MGTAP ACTIVE lifecycle and accepted TOP_ADVERSE/DENSE default unchanged",
+  "remote_receipt": "REMOTE_CLEANUP.json",
+  "local_receipt": "LOCAL_CLEANUP.json",
+  "scientific_followup": "No experiment/retry/extra arm/panel/consultation/successor was started."
+}
