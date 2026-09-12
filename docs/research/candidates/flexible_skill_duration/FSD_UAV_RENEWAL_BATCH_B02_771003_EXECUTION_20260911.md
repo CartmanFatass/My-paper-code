@@ -1,7 +1,7 @@
 # FSD new771003 pair execution
 
-D0 detached command accepted and running; actual memory admission and Monitor
-adoption confirmed by Root. Collection is pending its routed terminal fact.
+D0 is terminal, collected and technically accepted. The preselected I arm is
+ready for its single submission with fresh adjacent admission; the pair is incomplete.
 New B allocation under card§7 and Root's conformance-PASS dispatch.
 Reused authoring checkout C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd;
 reconciled base37d180f91621f065eaef19a194157f88826cebf2. The DM
@@ -103,3 +103,26 @@ Event: /root/dm_fsd_i1280_implementation|FSD_B02_771003_D0_launch|6ccb35c2cf4b64
 The event described adoption as pending at dispatch; Root's later direct receipt
 above resolves it. This is the same handover, with no second relay send. The
 accepted API result and exact message are preserved in D0_HANDOFF_RECEIPT.json.
+
+## D0 terminal collection and acceptance
+
+Root routed Monitor's complete/exit0 fact after its persistence repair. The DM
+collected all D0 outputs, actual admission/process and supervisor records without
+re-execution. D0 is accepted as the fresh companion: two model constructions,
+one fit,40000 stored training ticks/80 episodes/five updates,16000 final ticks/
+32 deterministic episodes, finite nonzero displacement in every learner module,
+and zero evaluator optimizer calls. Source/object/seeds/configuration, all raw
+returns and J scaling match the card; training.jsonl matches the summary.
+D0_TECHNICAL_ACCEPTANCE.json records the machine checks and complete observations.
+
+Complete D0 command wall538.66s (supervisor539s) is within900s; aggregate user+
+system CPU2119.87s and peak RSS1667448KiB are separate quantities. Actual physical
+and effective admission were both15641456640 bytes against4294967296. D0 final
+mean J is0.2617101876076477; this is an own-arm fact, not a paired outcome or a
+criterion for selecting I. The next action remains the already selected I at
+source5250c43536d8520d4005eed3f613226ec4bc6e73 with fresh adjacent admission.
+
+Root supplied0.7s FSD adoption observation, charged once. The later1.0s query
+covered FSD and two FOLR handles: preserve it as one unallocated shared cost,
+without splitting it or charging it fully to each direction. Integration and
+other unmeasured attribution remain unknown. No new source transaction occurs.
