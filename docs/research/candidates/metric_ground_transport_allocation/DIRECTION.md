@@ -36,9 +36,11 @@ The next empirical discriminator is one fresh TOP/DENSE native training pair,
 each512-train/32-final episodes and1024 Adam calls, with all32 final native-J
 differences and.01J reading. It can show one realized package outcome; omitting
 mean COND gives up direct query attribution, and no stable superiority, attention/
-geometry/causal-credit, transfer or formal UAV claim follows. TOP is unimplemented
-and untested. Its new450s/arm,900native,1200complete envelope is a Portfolio
-investment recommendation, not a grant;300support is a planning reference.
+geometry/causal-credit, transfer or formal UAV claim follows. Portfolio T=yes now
+funds this discriminator with hard450s/whole arm,900native,300support and1200complete
+limits. Fresh8221 is bound in the [TOP card](MGTAP_TOP_QUERY_B01_SCIENCE_CARD_20260912.md)
+and its implementation/focused checks are accepted. No TOP scientific result has
+yet been intaken; the complete native primary remains the next discriminator.
 The direction remains advancing under current owner instruction. Old M funds,
 coordinate-family PARK, historical C meanings and recast count are unchanged.
 No fourth unchanged pair or automatic successor is selected.

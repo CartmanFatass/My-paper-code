@@ -1,0 +1,38 @@
+{
+  "exact_observed_selected_command_seconds": {
+    "focused_tests_initial": 2.5547823,
+    "focused_test_setup_correction": 6.5936993,
+    "independent_source_review": 2.5134,
+    "independent_command_review": 0.277637,
+    "exposure_arithmetic": 0.1783775,
+    "owner_card_item": 0.2178761,
+    "source_commit_push": 4.8681395,
+    "command_commit_push": 4.3232085,
+    "command_blob_readback": 0.2612011,
+    "configured_fetch_and_owned_helper_termination": 4.1367383,
+    "successful_complete_staging": 6.3633807,
+    "staging_commit_push": 4.5779428,
+    "learned_submit": 0.471965,
+    "learned_initial_status_and_admission": 0.467894,
+    "rr_submit": 0.4929342,
+    "rr_initial_status_and_admission": 0.5493575,
+    "admission_receipts_collection": 1.0292282
+  },
+  "selected_command_sum_seconds": 39.877762,
+  "additional_canceled_network_operation_observed_lower_bounds_seconds": {
+    "non_login_git_fetch": 100,
+    "non_login_promisor_checkout": 76
+  },
+  "known_support_lower_bound_seconds": 215.877762,
+  "coverage": "partial lower bound; canceled command terminal tails and other read/edit/Git/agent/provider/Monitor/Root integration/collection/cleanup costs are not fully measured; overlap with different invoked commands is not elapsed critical-path addition",
+  "hard_support_cap_seconds": 900,
+  "hard_native_cap_seconds": 1200,
+  "hard_complete_cap_seconds": 2100,
+  "certified_full_support_compliance": false,
+  "observed_support_breach": false,
+  "shared_registration_application": "charged once to ACPS, excluded from CADC; CADC-specific Root integration remains CADC support",
+  "scientific_invocations_accepted": 2,
+  "scientific_invocations_completed": 0,
+  "native_cost": "both arm terminals/wall receipts pending; no savings available for support or successor",
+  "pending_cleanup": "owned local synthetic scratch deletion rejected before execution by runtime policy; no bypass"
+}
