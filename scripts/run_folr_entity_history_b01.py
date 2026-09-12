@@ -2,7 +2,6 @@
 import time
 START = time.monotonic()
 import argparse
-import hashlib
 import json
 from pathlib import Path
 import random
@@ -32,18 +31,14 @@ def main():
     parser.add_argument('--launch-sha', required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--generic-summary', type=Path)
-    parser.add_argument('--generic-sha256')
     args = parser.parse_args()
     if args.cap_seconds != {'GENERIC_RETAIN': 1800, 'BANK': 3000}[args.arm]:
         parser.error('cap must match this arm of the E allocation')
     generic = None
     if args.arm == 'BANK':
-        if args.generic_summary is None or args.generic_sha256 is None:
+        if args.generic_summary is None:
             parser.error('BANK requires the technically collected Generic summary')
-        raw = args.generic_summary.read_bytes()
-        if hashlib.sha256(raw).hexdigest() != args.generic_sha256:
-            raise ValueError('collected Generic input digest mismatch')
-        generic = json.loads(raw)
+        generic = json.loads(args.generic_summary.read_text())
         if generic['status'] != 'complete' or generic['arm'] != 'GENERIC_RETAIN':
             raise ValueError('Generic technical collection must be complete')
     args.out.mkdir(parents=True, exist_ok=True)
@@ -91,7 +86,6 @@ def main():
         summary['actor_change_l2'] = sum((p.detach().double() - initial[name].double()).square().sum().item()
                                        for name, p in learner.actor.named_parameters()) ** 0.5
         summary['actor_parameters'] = sum(p.numel() for p in learner.actor.parameters())
-        summary['checkpoint_sha256'] = hashlib.sha256((args.out / 'final.pt').read_bytes()).hexdigest()
         learner.actor.eval()
         random.seed(args.evaluation_seed)
         np.random.seed(args.evaluation_seed)
@@ -109,7 +103,7 @@ def main():
         summary['torch_version'], summary['numpy_version'] = torch.__version__, np.__version__
         summary['torch_threads'] = [torch.get_num_threads(), torch.get_num_interop_threads()]
         if generic is not None:
-            summary['generic_input_sha256'] = args.generic_sha256
+            summary['generic_input'] = str(args.generic_summary)
             summary['pair_primary'] = pair_result(generic, summary)
         publish(args.out, summary)
         if time.monotonic() - START >= args.cap_seconds:

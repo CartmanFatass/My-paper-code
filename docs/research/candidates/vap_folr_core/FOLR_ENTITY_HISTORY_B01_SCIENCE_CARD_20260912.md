@@ -135,6 +135,15 @@ Generic bytes. Replay recurrent positions are33391680 Generic and at most1669584
 BANK; acting positions538440 and at most2692200. Width/row ratios are not wall rates.
 Native2700s is an investigation reference, not another cap or a reason for a pilot.
 
+The committed [Generic command](entity_history_b01_781201/GENERIC.sh) and
+[BANK command](entity_history_b01_781201/BANK.sh) enclose adjacent admission,
+runner import/construction, full training/evaluation/checkpoint, required pair
+publication/readback and child exit in one timeout. TERM occurs at cap minus6s,
+with at most5s KILL grace and a1s wrapper margin; no episode count is shortened.
+Prepared output directories and command staging are charged once to support.
+`INVOCATION_TIME.json` reports enclosed wall/CPU/peak RSS; the supervisor's full
+command record remains alongside it, with any uncovered prefix/tail explicit.
+
 Support includes card/source, focused tests and review/corrections, Git/staging,
 Monitor coordination, collection/reduction/intake, Root integration, preservation
 and scoped cleanup once. Record invoked support separately; uncovered components

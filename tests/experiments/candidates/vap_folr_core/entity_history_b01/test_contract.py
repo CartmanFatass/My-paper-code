@@ -103,6 +103,13 @@ def test_bank_lifetimes_unseen_carry_and_gradients():
 @pytest.mark.parametrize('arm', ['GENERIC_RETAIN', 'BANK'])
 def test_collection_unroll_and_real_learner_checkpoint(arm, tmp_path):
     batch = observations(21)
+    # Native replay contains inactive slots; preserve that reachable mixer boundary.
+    batch['entity_mask'][:, :, 4] = True
+    for key in ('visible', 'seen'):
+        batch[key][:, :, 4] = False
+        batch[key][:, :, :, 4] = False
+    batch['age'][:, :, 4] = 0
+    batch['age'][:, :, :, 4] = 0
     torch.manual_seed(912)
     learner = Learner(arm)
     full_q, full_h = learner.actor(batch)
@@ -119,6 +126,7 @@ def test_collection_unroll_and_real_learner_checkpoint(arm, tmp_path):
     batch['terminated'][:, -1] = 1
     loss = learner.update(batch, 200)
     assert np.isfinite(loss) and learner.updates == 1
+    assert all(torch.isfinite(p).all() for p in learner.params)
     assert not torch.equal(before, learner.actor.rnn.weight_ih)
     torch.testing.assert_close(learner.actor.rnn.weight_ih, learner.target_actor.rnn.weight_ih)
     checkpoint = tmp_path / (arm + '.pt')
