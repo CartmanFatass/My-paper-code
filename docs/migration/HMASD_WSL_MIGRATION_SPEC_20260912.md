@@ -1,21 +1,19 @@
 # HMASD Windows-to-WSL project migration specification
 
-Owner authorization: 2026-09-12, detailed migration specification and parallel Luna/xhigh execution.
+Owner authorization: 2026-09-12, project migration. Latest owner override cancels all Luna assignments; Root executes the remaining migration personally.
 Coordinator: current task 01a094b3-67ae-7653-9b4d-49fd9d7f1ccb. ALL migration reports go only to this task (native parent /root). The research Root 01a07249-b095-7821-8ce2-e9c32ba85267 in repository configs is NOT this migration parent. Do not send any migration messages to research Root, Relay, Monitor, or Transport. This is infrastructure migration, not authorization to resume research.
 
 ## L0 and completion target
 
-Move daily HMASD authoring to /home/fires/projects/HMASD on native Linux storage, retain Windows Desktop and its existing task identities, preserve scientific assets and every source recovery path. Windows source /mnt/c/Projects/HMASD and its sibling/app worktrees remain intact for rollback. Existing WSL trial is updated, not discarded. Remote execution node, scientific meanings, invocation budgets, Pro bindings, monitor/relay IDs and paused research state remain unchanged.
+Move daily HMASD authoring to /home/fires/projects/HMASD on native Linux storage, retain Windows Desktop and its existing task identities, preserve scientific assets and every source recovery path. Windows source /mnt/c/Projects/HMASD and its sibling/app worktrees remain intact for rollback. The previous WSL trial and worktrees are sealed under /home/fires/migration-backups/hmasd-before-root-redo-20260912T020931. Root rebuilds the destination from committed objects and copies assets directly from Windows; no previous trial working files are accepted by default. Remote execution node, scientific meanings, invocation budgets, Pro bindings, monitor/relay IDs and paused research state remain unchanged.
 
 Completion means: latest committed source state and real uncommitted changes preserved; ignored evidence copied; source refs and worktree states accounted for; Linux control-plane dependencies and configuration verified; Desktop project/task path cutover prepared and applied through a supported interface or a stopped-app operation, with any pending user restart reported explicitly. Do not claim the running task moved merely because a directory was copied.
 
 ## Ownership and sequencing
 
-1. repo (Luna/xhigh): exclusive target Git/index/refs and working files except root temp/. Reconcile source and target history, preserve target config before syncing, carry real source changes while separating CRLF-only checkout differences. Own sibling target /home/fires/projects/HMASD-worktrees and migration of currently registered authoring/app worktrees. Retain snapshots/refs for any incompatible target state. Commit nothing; report ready for Root integration. Coordinate any final worktree registration within this same owner.
-2. evidence (Luna/xhigh): exclusive target root temp/. Copy all source temp content, including hidden and ignored data, preserving bytes/symlinks and relative paths. Never treat temp as disposable. No delete, no overwrite of a differing target file without a retained conflict backup. Source stays unchanged. Record exclusions (normally none), counts/bytes, missing/error/conflict paths and content verification.
-3. runtime (Luna/xhigh): own isolated /home/fires/.venvs/hmasd-control and records/runtime/. Read configs/scripts, prepare exact minimal patches outside target until repo owner finishes. Inventory old Windows path references in active control-plane entrypoints; preserve historic evidence literals and Windows Agentify arguments. Verify Linux Git/Python/Node, config TOML and seven agent files, SSH alias and read-only remote access. No experiments, browser Send, package upgrades of global/shared environments, or live monitor rebinding. Propose dependency set from repository declarations, install only needed local control-plane dependencies in isolated env, record versions and limits.
-4. desktop (Luna/xhigh): own records/desktop/. Inspect actual installed Desktop project/task storage and documented supported path-edit mechanisms. Prepare reversible project + task cwd cutover for this HMASD project only, preserving project ID, conversations, model/config overrides and sibling endpoints. Never directly modify live SQLite or global state. Do not restart/terminate Desktop. Provide an exact offline cutover procedure/script with backups, recovery, validation, and clearly scoped mappings; no broad string replacement or unrelated user config edits. Report whether UI-supported mutation is available.
-5. Root: specification, coordination, accept results, apply runtime patches after repo handback, commit explicit approved paths and push checked-out branch immediately, write final receipt, decide/apply supported Desktop cutover and record any restart boundary. Only Root finalizes repository commits. Workers are not alone; preserve others' work and avoid root temp for migration reports.
+Root alone owns all remaining migration operations. All four Luna assignments are canceled and must not be resumed. Their receipts remain historical diagnostics, not final acceptance. No migration message is sent to the separate research Root, Monitor, Relay or Transport.
+
+Root rebuilds Git and the 19 current worktrees, verifies source states, copies ignored assets with per-file SHA-256 and source-stability checks, verifies the control environment and SSH, and records Desktop path constraints separately. Original Windows data and the sealed former WSL candidate remain recovery sources. No deletion is required to redo the migration.
 
 ## Data and Git rules
 
@@ -36,7 +34,7 @@ Completion means: latest committed source state and real uncommitted changes pre
 
 ## Acceptance and rollback
 
-Each worker produces a concise JSON/Markdown receipt in its records subdirectory: actual actions, source/destination, preserved/excluded/conflicting items, commands/check outcomes, artifacts/digests as relevant, unresolved limitations, and handback state. Root verifies material evidence and integration changes without repeating expensive successful checks.
+Root maintains a concise JSON/Markdown receipt in /home/fires/migration-records/hmasd-wsl-20260912: actual actions, source/destination, preserved/excluded/conflicting items, commands/check outcomes, artifacts/digests as relevant, unresolved limitations, and handback state. Root verifies material evidence and integration changes without repeating expensive successful checks.
 
 Acceptance checks: Git history/refs/recoverability and status delta; no remaining accidental Windows Git linkage in runnable Linux worktrees; evidence reconciliation; TOML/config and seven agents; minimal imports + one meaningful control-plane check; SSH routing; Windows bridge read-only handshake only if needed; Desktop actual project root and task cwd after cutover.
 

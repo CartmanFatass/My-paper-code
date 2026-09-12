@@ -1,6 +1,6 @@
 # HMASD 正式迁移说明（2026-09-12）
 
-本次仅迁移基础设施，不恢复已暂停的研究，不新增实验或 Pro 请求。完整执行约束见同目录 MIGRATION_SPEC.md。
+本次仅迁移基础设施，不恢复已暂停的研究，不新增实验或 Pro 请求。完整执行约束见同目录 HMASD_WSL_MIGRATION_SPEC_20260912.md。
 
 ## 目标布局
 
@@ -14,9 +14,11 @@
 | 远端实验节点 | 继续使用现有 hmasd-wsl-node / wsl_4070，/home/wu 路径不改变 |
 | Windows 原仓库及工作树 | 保留，作为明确的回退来源；切换后不再双边同时日常写入 |
 
-## 并行分工
+## 执行责任（用户最新指令）
 
-四个执行者均为 Luna/xhigh：仓库与工作树、完整 temp 证据、运行环境、Desktop 切换准备。前两者分别写目标的非 temp 与 temp 路径；后两者在独立目录制作方案/补丁。Root 统一验收、应用配置、提交推送。
+四个 Luna 任务已全部取消。后续由当前迁移任务的 Root 亲自执行、核对和收尾；不唤醒研究 Root。
+
+Windows 原项目及工作树保持原样。之前的 WSL 候选仓库和工作树已整体重命名封存在 `/home/fires/migration-backups/hmasd-before-root-redo-20260912T020931/`，随后重新创建目标。此备份保全的是取消时的候选状态，不代表迁移开始前曾有完整 WSL 备份，也不证明所有 Windows 文件已复制。
 
 ## 数据保全规则
 
@@ -38,8 +40,10 @@
 
 保留 Windows 副本和 Desktop 路径备份。需要回退时先保全迁移后新增的 Linux 提交、修改和证据，再在 Desktop 退出状态恢复明确的路径记录。已成功启用的 WSL Agent 开关无需因项目迁移而关闭。
 
-## 在 Windows Desktop 中找到目标
+## Desktop 入口尚未切换
 
-添加项目的文件选择器中按 Ctrl+L，输入 `\\wsl.localhost\Ubuntu-24.04\home\fires\projects\HMASD`，或 `\\wsl$\Ubuntu-24.04\home\fires\projects\HMASD`。Root 已从 Windows Node 验证两个路径均能读取目录和 .git/HEAD。此项不等于 Desktop 已完成切换，旧任务 cwd 仍需独立核对。
+Windows 文件选择器可以读取 `\\wsl.localhost\Ubuntu-24.04\home\fires\projects\HMASD`，但当前安装版创建项目时，Linux 后端拒绝该 UNC 路径，错误为 `AbsolutePathBuf deserialized without a base path`。Root 在隔离配置目录复现了 UNC 失败、原生 `/home/fires/projects/HMASD` 成功。仅换成另一种 UNC 写法不能视为修复。
+
+尚未改写正在运行的 Desktop 项目、会话数据库或已有任务 cwd。原生 Linux 后端接受路径，不等于 Windows Desktop 全流程已验证；文件迁移与入口切换分别记账。迁移记录目录中的旧 staging 脚本不具备已验证的完整切换能力，不应当作可直接安装的修复运行。
 
 WSL agent 访问 /mnt/c 上的仓库有跨文件系统开销，尤其是大量小文件和 Git 操作；把 agent 切到 WSL 不会自动把项目文件迁入 Linux 文件系统。模型生成速度和远端实验计算速度不因此直接改变。
