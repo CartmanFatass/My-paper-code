@@ -32,8 +32,11 @@ accepts this bounded package result and records the frozen C as consumed, withou
 The subsequent original-Convergence comparison of training through fixed F versus training C,
 both deployed through F, received Portfolio F funding and is now complete as one matched B pair.
 It yields **DOWN**, treatment−control−0.026096212471464608J (conditional SE0.007136541708512396;
-43/64 adverse worlds). Train-C→deploy-F stays the current reference for this bounded use.
-This is one training replication; no stable cross-training effect or mechanism diagnosis follows.
+43/64 adverse worlds). A separately funded unchanged B02 pair also gives **DOWN**,
+−0.05734219575429114J (conditionalSE0.009421918606720191;50/64 adverse worlds).
+These are two separate pair observations, not a pooled primary or stable population effect.
+Train-C→deploy-F stays the reference; another adverse instance strengthens advice against
+more unchanged training-F spending without closing ACVC or diagnosing its mechanism.
 The [training-use intake](ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md) preserves all outcomes.
 Three fresh development fits and the older E01 observations
 on two selected retained bases remain development evidence, outside C01. The learned selective-retrace
@@ -87,15 +90,20 @@ explicit working model. The claim remains tied to five complete independent fit-
 units, final-only evaluation and the exact native task/learner law. Its adverse individual
 worlds preclude universal benefit, and unequal private interventions leave motion
 suppression plus recurrent/teammate trajectory feedback as a surviving explanation.
-The original Convergence node's selected training-use discriminator is now a complete
-one-pair B result under the .01J practical margin. Final common-F mean J is0.2975423661208032
+The original Convergence node's selected training-use discriminator first completed as a
+one-pair B result under the .01J practical margin. Final common-F mean J was0.2975423661208032
 after C training versus0.27144615364933855 after F training, so the fixed training change
 does not add useful return on this pair. Strongest support for retaining the reference is
-the complete real-learning comparison with43 adverse worlds;21 favorable worlds and only
-one training replication bound any broad negative. Unequal own-history interventions and
-actor/recurrent/teammate feedback remain inseparable explanations. The allocation ends here,
-with no retry, new consultation or successor. An independently funded matched recurrence
-could later test repeatability if the proper node selects it; none is selected locally.
+the complete real-learning comparison with43 adverse worlds;21 favorable worlds bounded
+any broad negative. New Portfolio A then funded exactly one unchanged recurrence pair:
+control0.26573916727242164 versus treatment0.20839697151813052J,50 adverse/14 favorable worlds.
+The second DOWN point supports the same bounded reference recommendation, while only two
+training pairs and favorable worlds preclude stable/general harm. No historical pooling,
+vote rule or family/Portfolio disposition is applied. Unequal own-history interventions
+and actor/recurrent/teammate feedback remain inseparable explanations. The new allocation
+ends with complete intake and scoped cleanup; no third pair, consultation or successor.
+A materially different future discriminator requires proper selection/investment; none is
+designed here. See the [B02 intake](ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md).
 
 Exact binding remains a useful protocol primitive. Neither historical learner object nor the
 new native comparisons support adaptive ACVC superiority over their strongest competent fixed control.
@@ -542,6 +550,10 @@ uncertain/delayed families remain; no Portfolio lifecycle change or formal UAV e
 
 - `docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/archive/RESPONSE.md`
 - `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_SCIENCE_CARD_20260912.md`
+- `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_SCIENCE_CARD_20260912.md`
+- `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_RESULT_EVIDENCE_20260912.md`
+- `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md`
+- `docs/research/candidates/acvc/training_use_b02_20260912/paired_analysis.json`
 - `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_RESULT_EVIDENCE_20260912.md`
 - `docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md`
 - `docs/research/candidates/acvc/training_use_b01_20260912/paired_analysis.json`

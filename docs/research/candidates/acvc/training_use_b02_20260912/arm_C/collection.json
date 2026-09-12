@@ -1,0 +1,35 @@
+{
+  "arm": "C",
+  "started_utc": "2026-09-12T19:42:04.019976+00:00",
+  "phases": [
+    {
+      "name": "terminal collection archive",
+      "wall_s": 0.6282070000306703,
+      "exit_code": 0,
+      "stdout": "{\"handle\": \"acvc-training-use-b02-c-ac64769f6\", \"archive\": \"/home/wu/hmasd-inputs/acvc-training-use-b02-C-ac64769f6.tar.gz\", \"bytes\": 410043, \"sha256\": \"9b7d95f3730e66f155d5a6a31b372df888e16a7544579e4da2903e7f9d98538d\", \"tmux_active\": false, \"status\": \"finished\", \"exit_code\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "name": "archive transfer",
+      "wall_s": 0.6283401999971829,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "remote": {
+    "handle": "acvc-training-use-b02-c-ac64769f6",
+    "archive": "/home/wu/hmasd-inputs/acvc-training-use-b02-C-ac64769f6.tar.gz",
+    "bytes": 410043,
+    "sha256": "9b7d95f3730e66f155d5a6a31b372df888e16a7544579e4da2903e7f9d98538d",
+    "tmux_active": false,
+    "status": "finished",
+    "exit_code": 0
+  },
+  "archive_sha256_verified": true,
+  "local_archive": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\training_use_b02_20260912_collection\\arm_C.tar.gz",
+  "extracted": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\training_use_b02_20260912_collection\\arm_C",
+  "checkpoint_sha256": "4d219a94d0338d7a5903768729528f9801f272bf59ce3784e0e1e6e6e535005f",
+  "whole_helper_wall_s": 1.2913663999643177,
+  "complete": true
+}

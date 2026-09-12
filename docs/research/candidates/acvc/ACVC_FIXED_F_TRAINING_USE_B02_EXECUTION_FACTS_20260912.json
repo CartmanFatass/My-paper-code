@@ -89,11 +89,44 @@
       {
         "label": "F accepted submission helper",
         "wall_s": 0.683984
+      },
+      {
+        "label": "B02 actual launch/adoption publication",
+        "wall_s": 4.325076
+      },
+      {
+        "label": "Terminal assignment state and exact collection/analysis binding reuse",
+        "wall_s": 0.2145997
+      },
+      {
+        "label": "B02 C full terminal collection/archive transfer",
+        "wall_s": 1.5058142
+      },
+      {
+        "label": "B02 F full terminal collection/archive transfer",
+        "wall_s": 1.31285
+      },
+      {
+        "label": "B02 full count/identity/checkpoint acceptance and sole primary reduction; owner review",
+        "wall_s": 2.3278273
+      },
+      {
+        "label": "Read immutable reduced facts for evidence index",
+        "wall_s": 0.1426942
+      },
+      {
+        "label": "Preserve B02 raw readable evidence/analysis source",
+        "wall_s": 0.2675049
+      },
+      {
+        "label": "Reconcile rejected documentation patch context",
+        "wall_s": 0.2397553
       }
     ],
-    "known_reported_seconds": 37.32720200004518,
+    "known_reported_seconds": 47.66332360004519,
     "full_coverage": false,
-    "limits": "Provider/client/deliberation and yet-unreceived Monitor/Root/closing costs remain unknown; all future needed work counts once. B01/old A costs are separate history, not rebilled."
+    "limits": "Provider/client/deliberation and yet-unreceived Monitor/Root/closing costs remain unknown; all future needed work counts once. B01/old A costs are separate history, not rebilled.",
+    "known_native_plus_support": 390.6633236000452
   },
   "arms": [
     {
@@ -114,8 +147,82 @@
         "adoption": "actual_running_handle_in_one_unfinished_goal; Root MONITOR_ADOPTED native receipt",
         "pid": 3392070,
         "exit": null,
-        "tmux_active": true
-      }
+        "tmux_active": true,
+        "terminal_exit": 0,
+        "terminal_tmux_active": false,
+        "collection": "Both original terminal events delivered; Root reports GOAL_COMPLETE empty active set/no pending"
+      },
+      "technical_acceptance": {
+        "accepted": true,
+        "identity": "train-C / deploy-F",
+        "training_episodes": 512,
+        "final_F_episodes": 64,
+        "adam_records": 1024,
+        "expected_counts_matched": {
+          "environment_constructors": 2,
+          "unscored_constructor_resets": 2,
+          "explicit_resets": 576,
+          "step_calls": 147456,
+          "team_steps": 147456,
+          "train_team_steps": 131072,
+          "eval_team_steps": 16384,
+          "completed_episode_steps": 147456,
+          "train_episodes": 512,
+          "eval_episodes": 64,
+          "rollouts": 256,
+          "optimizer_steps": 1024,
+          "backward_calls": 1024,
+          "update_records": 1024,
+          "train_actor_agent_forwards": 655360,
+          "eval_actor_agent_forwards": 81920,
+          "replayed_actor_agent_steps": 2621440,
+          "critic_update_rows": 524288,
+          "duration_decisions": 0,
+          "scientific_uav_calls": 147456,
+          "post_fit_loads": 1,
+          "new_fits": 1,
+          "final_checkpoints": 1
+        },
+        "parameter_counts": {
+          "actor": 34902,
+          "critic": 34177
+        },
+        "checkpoint_sha256": "4d219a94d0338d7a5903768729528f9801f272bf59ce3784e0e1e6e6e535005f",
+        "whole_command_wall_s": 161.96,
+        "supervisor_duration_s": 162,
+        "inclusive_native_charge_s": 164,
+        "inclusive_charge_rule": "max(ceil(whole_command_wall_s), integer supervisor duration)+2s for enclosing integer-boundary/exit slack; not added to inner timing",
+        "process_wall_s_to_summary": 158.5610727360472,
+        "peak_rss_kib": 552752,
+        "admission": {
+          "assessed_at": "2026-09-12T19:36:19.573388Z",
+          "available_physical_bytes": 15631462400,
+          "captured_at": "2026-09-12T19:36:19.573120Z",
+          "cgroup_headroom_bytes": null,
+          "cgroup_memory_current_bytes": null,
+          "cgroup_memory_max_bytes": null,
+          "effective_available_bytes": 15631462400,
+          "effective_floor_pass": true,
+          "failure_reasons": [],
+          "measurement_source": "/proc/meminfo",
+          "minimum_available_bytes": 4294967296,
+          "passed": true,
+          "physical_floor_pass": true,
+          "schema_version": 1
+        },
+        "final_F_mean_J": 0.26573916727242164,
+        "final_F_mean_S": 68.02922682173994,
+        "training_F_exposure": "C bypasses F; incidence unmeasured",
+        "final_F_interventions": {
+          "opportunities": 7351,
+          "retrace": 7351,
+          "dwell": 0,
+          "apply": 0,
+          "distinguishable": 7351
+        },
+        "resources": "resources_unmeasured"
+      },
+      "raw_evidence_directory": "docs/research/candidates/acvc/training_use_b02_20260912/arm_C"
     },
     {
       "arm": "F",
@@ -135,11 +242,130 @@
         "adoption": "actual_running_handle_in_one_unfinished_goal; Root MONITOR_ADOPTED native receipt",
         "pid": 3392119,
         "exit": null,
-        "tmux_active": true
-      }
+        "tmux_active": true,
+        "terminal_exit": 0,
+        "terminal_tmux_active": false,
+        "collection": "Both original terminal events delivered; Root reports GOAL_COMPLETE empty active set/no pending"
+      },
+      "technical_acceptance": {
+        "accepted": true,
+        "identity": "train-F / deploy-F",
+        "training_episodes": 512,
+        "final_F_episodes": 64,
+        "adam_records": 1024,
+        "expected_counts_matched": {
+          "environment_constructors": 2,
+          "unscored_constructor_resets": 2,
+          "explicit_resets": 576,
+          "step_calls": 147456,
+          "team_steps": 147456,
+          "train_team_steps": 131072,
+          "eval_team_steps": 16384,
+          "completed_episode_steps": 147456,
+          "train_episodes": 512,
+          "eval_episodes": 64,
+          "rollouts": 256,
+          "optimizer_steps": 1024,
+          "backward_calls": 1024,
+          "update_records": 1024,
+          "train_actor_agent_forwards": 655360,
+          "eval_actor_agent_forwards": 81920,
+          "replayed_actor_agent_steps": 2621440,
+          "critic_update_rows": 524288,
+          "duration_decisions": 0,
+          "scientific_uav_calls": 147456,
+          "post_fit_loads": 1,
+          "new_fits": 1,
+          "final_checkpoints": 1
+        },
+        "parameter_counts": {
+          "actor": 34902,
+          "critic": 34177
+        },
+        "checkpoint_sha256": "7f3356fbcfeb12471e7dce70c99f4349775829a5f6214c57bd47d678aaf9bea5",
+        "whole_command_wall_s": 176.14,
+        "supervisor_duration_s": 177,
+        "inclusive_native_charge_s": 179,
+        "inclusive_charge_rule": "max(ceil(whole_command_wall_s), integer supervisor duration)+2s for enclosing integer-boundary/exit slack; not added to inner timing",
+        "process_wall_s_to_summary": 172.94984761509113,
+        "peak_rss_kib": 556496,
+        "admission": {
+          "assessed_at": "2026-09-12T19:36:52.986746Z",
+          "available_physical_bytes": 15323058176,
+          "captured_at": "2026-09-12T19:36:52.986356Z",
+          "cgroup_headroom_bytes": null,
+          "cgroup_memory_current_bytes": null,
+          "cgroup_memory_max_bytes": null,
+          "effective_available_bytes": 15323058176,
+          "effective_floor_pass": true,
+          "failure_reasons": [],
+          "measurement_source": "/proc/meminfo",
+          "minimum_available_bytes": 4294967296,
+          "passed": true,
+          "physical_floor_pass": true,
+          "schema_version": 1
+        },
+        "final_F_mean_J": 0.20839697151813052,
+        "final_F_mean_S": 53.349624708641414,
+        "training_F_exposure": {
+          "training_F_agent_ticks": 655360,
+          "training_F_opportunities": 57353,
+          "training_F_retrace": 57353
+        },
+        "final_F_interventions": {
+          "opportunities": 7065,
+          "retrace": 7065,
+          "dwell": 0,
+          "apply": 0,
+          "distinguishable": 7065
+        },
+        "resources": "resources_unmeasured"
+      },
+      "raw_evidence_directory": "docs/research/candidates/acvc/training_use_b02_20260912/arm_F"
     }
   ],
   "stop": "Both original outcomes/full intake/assigned cleanup; no third pair/retry/tuning/extra panel/consultation/successor",
-  "retention": "ACVC DM preserves both unique checkpoint archives and all readable evidence before Root-accepted scoped duplicate/worktree cleanup; shared authoring checkout and all B01/C01 evidence retained.",
-  "status": "both_accepted_and_actually_monitored_pending_terminal_collection"
+  "retention": {
+    "owner": "ACVC DM; Root integrates and accepts retained unique archives before remote reclamation",
+    "preserve_local": [
+      "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/training_use_b02_20260912_collection/arm_C.tar.gz",
+      "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/training_use_b02_20260912_collection/arm_F.tar.gz"
+    ],
+    "archive_sha256": {
+      "C": "9b7d95f3730e66f155d5a6a31b372df888e16a7544579e4da2903e7f9d98538d",
+      "F": "9e77e9acf6b9bb429db5a9f8ee3990179923afd60d6b969648d09360dbe44109"
+    },
+    "archive_bytes": {
+      "C": 410043,
+      "F": 411972
+    },
+    "remote_local_hashes_verified": true,
+    "keep_extracted_checkpoints_and_original_receipts": true,
+    "shared_authoring_checkout_retained": true,
+    "B01_C01_untouched": true,
+    "B02_test_scratch_created": false,
+    "pending_remote_cleanup": [
+      "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6",
+      "/home/wu/hmasd-inputs/acvc-training-use-b02-ac64769f6.bundle",
+      "/home/wu/hmasd-inputs/acvc-training-use-b02-C-ac64769f6.tar.gz",
+      "/home/wu/hmasd-inputs/acvc-training-use-b02-F-ac64769f6.tar.gz",
+      "/home/wu/.agent-tasks/acvc-training-use-b02-c-ac64769f6",
+      "/home/wu/.agent-tasks/acvc-training-use-b02-f-ac64769f6"
+    ]
+  },
+  "status": "valid_complete_B_DOWN",
+  "analysis": "docs/research/candidates/acvc/training_use_b02_20260912/paired_analysis.json",
+  "primary": {
+    "reading": "DOWN",
+    "mean_J": -0.05734219575429114,
+    "conditional_SE_J": 0.009421918606720191,
+    "adverse_worlds": 50,
+    "n_training_pairs": 1,
+    "n_worlds": 64
+  },
+  "native_cost": {
+    "whole_command_sum_s": 338.1,
+    "inclusive_charge_sum_s": 343,
+    "per_arm_and_sum_cap_pass": true
+  }
 }
