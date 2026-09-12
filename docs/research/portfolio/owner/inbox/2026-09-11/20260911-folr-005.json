@@ -1,0 +1,92 @@
+{
+  "id": "20260911-folr-005",
+  "created": "2026-09-11T20:16:45-07:00",
+  "direction": "vap_folr_core",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "学习门原样再测建议已形成，当前零训练额度",
+  "context": "原Convergence完整答复选择A，替代DM未执行的C建议。两对差值+1.763359375和−1.76953125均保留。建议未来另拨一对原样B，当前只记录方向建议，RETAIN仍为默认，不新开家族、不重铸或暂停。",
+  "options": [
+    {
+      "key": "a",
+      "label": "记录未来一对原样B的建议",
+      "consequence": "只应用Pro方向建议；未来训练须另拨完整额度，本次零种子绑定、实现或数值工作。"
+    },
+    {
+      "key": "b",
+      "label": "改为一个具体家族内方案",
+      "consequence": "需给出具体合法操作及最小比较；本次Pro未选改法，没有立即实现或搜索预算。"
+    },
+    {
+      "key": "c",
+      "label": "暂停当前学习门配方",
+      "consequence": "仅窄暂停当前配方，保留两次结果及RETAIN；不关闭整个方向或声称稳定伤害。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "第一对实际收益使再测可直接影响是否保留额外计算为候选；第二对反向和强RETAIN使其仍为近似判断，按原节点合规决定应用。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md",
+    "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md@ed882448bda9b3f240addf88bde1921cebc24397"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L129",
+  "brief": "docs/research/portfolio/owner/briefs/vap_folr_core/2026-09-11_learned_retention_post_b02_convergence.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "原Convergence已选A：保留学习门为同一主机上的候选，建议未来另拨一次原样训练对；当前只应用这一方向建议。",
+    "changes_if_approved": [
+      {
+        "target": "vap_folr_core/DIRECTION.md 当前学习门配方建议",
+        "from": "原C暂停建议尚未执行；原节点待裁决",
+        "to": "应用A：未来一对原样LEARNED_EVENT/RETAIN的建议；不新开家族、不重铸、不暂停、不分配数值工作"
+      }
+    ],
+    "if_refused": "C窄暂停仍是强替代，可由所有者异步覆盖；若改选B须明确实际改法。保留已经发生的两次结果和本次Pro决定，不改写历史或自动重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md@ed882448bda9b3f240addf88bde1921cebc24397",
+        "quote": "A new independent training history would directly inform whether to keep this particular additional computation in same-host development or leave that development RETAIN-only.",
+        "why": "第一对实际学习门有实用尺度收益，再一对原样观察可直接影响是否保留该额外计算为候选；不需要先证明总体赢家。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md@ed882448bda9b3f240addf88bde1921cebc24397",
+        "quote": "B02 is the strongest direct evidence against an unqualified benefit: the unchanged package lost against its matching RETAIN at essentially the same practical scale.",
+        "why": "第二对同信息RETAIN获胜且差距同样越过MEI，已有自适应GRU是不加门的强替代；暂停仍合理。"
+      }
+    ],
+    "uncertainty": [
+      "两对+1.763359375/−1.76953125均保留，不得相消成等价或稳定伤害。",
+      "原样再测的价值是近似判断，不是第三种子门或多数票，也不保证值得无限追加。",
+      "未解释记忆选择、初始化、容量、优化和共同适应的作用；不要求本次先消融。",
+      "当前同信息调优余量缺失，未来完整费用和新额度未定。",
+      "87bb摘要属于401字节链接回执；完整Git答复34927字节，摘要a5ffd43d。旧registry顶层交付字段保留，不能当本轮缺失或重复发送理由。"
+    ],
+    "cost": {
+      "compute": "当前零实现/模型/RNG/训练/评估/诊断。未来建议2个真实学习器、205120原生团队步、9938更新，完整费用与新额度未分配；文档与Pro用时也未完整计量。",
+      "owner_time": "无需等回复；可异步覆盖。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；本次问题/完整接收已完成，Root记录边界并继续其他授权工作。"
+    },
+    "verdict_text": "**Final decision: A, one future separately allocated unchanged learned-event/RETAIN B pair, as an in-family continuation recommendation.** RETAIN remains the generic default; no new operation or immediate narrow learned-recipe hold is selected. Both signed learned results and all older pauses remain intact. Today's allocation still authorizes only this complete direction answer and its intake, with zero implementation, models, scientific RNG, training, evaluation, replay, checkpoints, diagnostics, profiling or automatic further question. The surviving uncertainty concerns recurrence, population performance, the causes of the signs and complete future cost—not a missing prerequisite proof. No stable winner, harm, equivalence, useful-memory/timing causality, tuned headroom, original-CAMA superiority, C/UAV or Portfolio disposition follows.",
+    "source": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md@ed882448bda9b3f240addf88bde1921cebc24397",
+    "application_state": "A recommendation applied in direction intake and DIRECTION; future execution remains unallocated",
+    "application_record": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md",
+    "historical_proposal_item": "20260911-folr-004",
+    "authority": "PRO_FINAL / OWNER_DELEGATED; AGENTS2, original em:vap_folr_core:convergence; no Portfolio decision"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T03:17:34+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md@ed882448bda9b3f240addf88bde1921cebc24397",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "已应用A作为未来一对原样B的方向建议；不是已执行训练。保留第一对正结果、第二对反结果及RETAIN默认。当前一次文档问题/完整接收结束，零实现或数值额度。"
+    }
+  ]
+}

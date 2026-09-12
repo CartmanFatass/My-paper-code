@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "request_id": "folr-learned-retention-post-b02-convergence-20260911",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vap_folr_core:convergence",
+  "direction_id": "vap_folr_core",
+  "direction_ids": [
+    "vap_folr_core"
+  ],
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "provider_url": "https://chatgpt.com/c/6aa18137-9d88-83e8-a01f-46630813faf8",
+  "user_message_id": "today-current-round|TASK.md@683b5a20aaf4bd474aaadf449102cd87fc803a7e|user-node",
+  "assistant_message_id": "today-current-round|Worked for 11m 31s|assistant-node",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "ab14fb724274e74fca8d7adc0df1336946fd3b57401bbbd0b3713cb39a7696c1",
+  "response_sha256": "87bb4552f2dfe473c39e8cd036580d5ef557e5e68b0fdf66e23fdd7c38716e2a",
+  "response_characters": 401,
+  "response_bytes": 401,
+  "send_click_count": 1,
+  "send_evidence": {
+    "send_click_count": 1,
+    "send_attempted": true,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "today-current-round|TASK.md@683b5a20aaf4bd474aaadf449102cd87fc803a7e|user-node",
+    "provider_url_observed": "https://chatgpt.com/c/6aa18137-9d88-83e8-a01f-46630813faf8",
+    "binding_match": true,
+    "paste_mode": true,
+    "prompt_sha256": "ab14fb724274e74fca8d7adc0df1336946fd3b57401bbbd0b3713cb39a7696c1"
+  },
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+    "user_message_id": "today-current-round|TASK.md@683b5a20aaf4bd474aaadf449102cd87fc803a7e|user-node",
+    "assistant_message_id": "today-current-round|Worked for 11m 31s|assistant-node"
+  },
+  "identity_observed": {
+    "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+    "user_message_id": "today-current-round|TASK.md@683b5a20aaf4bd474aaadf449102cd87fc803a7e|user-node",
+    "assistant_message_id": "today-current-round|Worked for 11m 31s|assistant-node"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-learned-retention-post-b02-convergence-20260911\\folr-learned-retention-post-b02-convergence-20260911--vap_folr_core--attempt-01__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-learned-retention-post-b02-convergence-20260911\\folr-learned-retention-post-b02-convergence-20260911--vap_folr_core__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-learned-retention-post-b02-convergence-20260911\\folr-learned-retention-post-b02-convergence-20260911--vap_folr_core--attempt-01__02_RESPONSE.md",
+    "chat_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-learned-retention-post-b02-convergence-20260911\\folr-learned-retention-post-b02-convergence-20260911--vap_folr_core--attempt-01__04_CHAT_RECEIPT.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-learned-retention-post-b02-convergence-20260911\\folr-learned-retention-post-b02-convergence-20260911--vap_folr_core--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "87bb4552f2dfe473c39e8cd036580d5ef557e5e68b0fdf66e23fdd7c38716e2a",
+    "github_response_file": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md@ed882448bda9b3f240addf88bde1921cebc24397",
+    "github_response_url": "https://github.com/CartmanFatass/My-paper-code/blob/ed882448bda9b3f240addf88bde1921cebc24397/docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md",
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5643014223",
+    "github_commit": "ed882448bda9b3f240addf88bde1921cebc24397"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 11m 31s; complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Current-round scoped Copy response control via CUA clipboard.readText; raw UTF-8 response preserved",
+  "archive_status": "ARCHIVED",
+  "timestamps": {
+    "completed_at": "2026-09-12T03:00:57Z",
+    "captured_at": "2026-09-12T03:00:57Z",
+    "archived_at": "2026-09-12T03:00:57Z"
+  },
+  "scientific_decision_formed": false,
+  "github_delivery": {
+    "commit": "ed882448bda9b3f240addf88bde1921cebc24397",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/ed882448bda9b3f240addf88bde1921cebc24397/docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md",
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5643014223",
+    "verified": true
+  },
+  "return_receipt": {
+    "status": "SENT",
+    "attempt_count": 1,
+    "delivery_status": "accepted",
+    "message_key": "folr-learned-retention-post-b02-convergence-20260911|vap_folr_core|6aa18137-9d88-83e8-a01f-46630813faf8|87bb4552f2dfe473c39e8cd036580d5ef557e5e68b0fdf66e23fdd7c38716e2a",
+    "sent_at": "2026-09-12T03:01:50Z"
+  }
+}
