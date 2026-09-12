@@ -12,6 +12,40 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## TOP single-partner query selected for a new B — 2026-09-12
+
+The original Convergence response at10ad0d09fda138f49b117cbcf7231c09bfdd50a4
+is fully intaken as conforming **PRO_FINAL**: select one new TOP/intact-DENSE
+B/EXPLORE scientific object. TOP replaces only COND's mean visible-partner query
+with the mapped source-delivered highest-local-SINR visible row, retaining all
+raw108 information, all-partner context, parameter blocks, private recurrence,
+native primitive action/reward and PPO. Empty partner/query and user masks retain
+defined behavior. This explicitly extends the former COND-only native-family
+eligibility to this one computation; it does not reopen a general search.
+
+The strongest direct support for considering conditional-pooling work remains
+8214+.02447811898058116; the strongest direct contradiction remains
+8213-.02246957345594415, with8212+.005761321371348559 inside MEI. All three
+remain separate mean-COND observations, not TOP evidence. Avoiding a mean's
+cancellation is plausible, but strongest radio link need not identify the
+service-relevant partner; rank switching, lost query context and intact DENSE
+learning remain serious alternatives. DENSE remains the generic default and tuned
+same-information native headroom is absent.
+
+The next empirical discriminator is one fresh TOP/DENSE native training pair,
+each512-train/32-final episodes and1024 Adam calls, with all32 final native-J
+differences and.01J reading. It can show one realized package outcome; omitting
+mean COND gives up direct query attribution, and no stable superiority, attention/
+geometry/causal-credit, transfer or formal UAV claim follows. TOP is unimplemented
+and untested. Its new450s/arm,900native,1200complete envelope is a Portfolio
+investment recommendation, not a grant;300support is a planning reference.
+The direction remains advancing under current owner instruction. Old M funds,
+coordinate-family PARK, historical C meanings and recast count are unchanged.
+No fourth unchanged pair or automatic successor is selected.
+[Complete intake](pro_packets/20260912_post8214_top_query/CONVERGENCE_INTAKE_20260912.md),
+[new investment need](pro_packets/20260912_post8214_top_query/INVESTMENT_NEED.md),
+[original response](pro_packets/20260912_post8214_top_query/archive/RESPONSE.md).
+
 ## Conditional pooling fresh8214 local gain — 2026-09-12
 
 The newly Portfolio-funded third unchanged COND/DENSE pair is a complete valid
