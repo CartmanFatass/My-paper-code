@@ -1,0 +1,34 @@
+# Portfolio preparation intake — 2026-09-12
+
+Prepared by native /root/dm_a_mx_portfolio_resume (actual source01a095c2-e06a-7a92-984f-2dca23d77d57), assigned by current Root01a095b7-850f-7401-ad4e-5e4320d285f1. This records preparation and proposed choices, not a formed Portfolio decision.
+
+## Assignment, current reads and concrete effect
+
+Owner resumed independent research and asked for a current22-direction report and five advancing slots. Root owns main PORTFOLIO/EXPERIMENT_TRACKING/control files; this author owns current Oracle and this packet, continuing the existing Portfolio node. Oracle was replaced in commitb912ca737c042ed465fb011cd34c533b4b06eb7c and sent via the current relay; its old body is retained in Git, not duplicated in the current report. Main80d2bf545 and accepted ACVC/FOLR inputs are integrated in24f5504aa35cbf027270420c8c966f690b3136af. No unrelated source was altered. Shared checkout C:/Projects/HMASD-worktrees/codex-portfolio, branchcodex/portfolio; Windows PowerShell7.6.4 was directly verified. Prior independent history was merged and preserved. Root should integrate named author commits, not input-sync merges.
+
+Read current assignment, applicable AGENTS/docs instructions, all22 latest DIRECTION and relevant latest intakes, evidence-spec§§7–8.1,11.4,11.7–11.10, relevant Root/engineering/runtime ownership and Github delivery, scientific-tools scientific-reading mode, FOUNDATIONS§§3–6 and04_EMPIRICAL. Reused accepted current science instead of raw reruns or historical recursive reading. Current owner-console reviews returned[]; no owner prediction was taken. Pro author/Portfolio/owner-item skills were applied. The later ACVC note's exact likelihood-risk question reused its verified local-library coverage; this author also checked PPO arXiv:1707.06347v2 §§2–3 at https://arxiv.org/pdf/1707.06347. The old/new ratio supports the stated sampled-action constraint, not a theorem for ACVC F or a new performance claim. No new mechanism or novelty verdict was inferred.
+
+The concrete assumption is that an accepted intake accurately describes its bound execution at its stated limits. Independent evidence remains complete fits/pairs, not episodes/checkpoints or native children. This author did not repeat raw-return arithmetic, observe provider Send or audit all remote process state. Original-DM ACVC proposal is explicitly advice, not an accepted next-object decision. The exact missing training-F hook and proposal-versus-action PPO requirement limit that option. CBSC's missing treatment primary supports a specific question but does not certify a healthy path. These assumptions and limits change the proposal and are preserved in SCIENCE_BRIEF.
+
+Current control/evidence updates were directly read from published Git c8ed4714c90af7879dc4d315e036186cde438b93; ACVC's complete original-DM note was read at c717996f3f2654e044fac05f9dc6a5d87d5b1369. The current publication does not preserve the earlier no-Send/empty-Monitor snapshot as live state.
+
+## What was checked
+
+Latest facts replace stale labels: UCOPEpost8801 narrower spending park; DISHB08 WITHIN/REPLACE default and retainedA03-family pause; SCDMPpostB02 narrow package park; ACVCfinal five-fit C consumed; FOLR300 support-reference override and same unexecuted pair; VNFC40-byte formula versus32-byte record, expectedFalse@32, unadopted workaround and unused conditional new-pair grant. FRRIE and CBSC source-only returns establish their observed operation only, not an all-methods ban or a scientific negative. The seven parked lifecycle rows remain parked even where a direction document has an older ACTIVE header.
+
+Machine-generated FACTS reconciles22=15ACTIVE+7PARKED, latest Root-reported3 advancing/2vacancies (FOLR/VNFC/RCLE, ACVC authoring complete), zero new exposure, all per-direction headroom absence at matching tuned current-host scope and candidate dominant counts. Oracle's local relative evidence links were checked present. Git pinned references will be verified before TASK publication; this proves repository publication, not future Pro connector access. Current root/transport/monitor/relay facts are separately configured, not historical science defaults.
+
+## Decisions this preparation produces
+
+- Technical/object: publish current Oracle, exact proposed Portfolio question and machine arithmetic; no empirical or lifecycle selection. Owner-delegated decision (unattended, 2026-09-03 instruction): prepare the assigned concrete packet under OWNER_DIRECT2026-09-12 resumption. An audit row records publication as technical.
+- Portfolio: recommend S preparation+A original ACVC consultation; retain M as a substantive healthy-path alternative and H as a strong conservative alternative. Optional conditional scientific tranches are priced and explicitly unselected. Only portfolio:cross_direction decides investments; Root applies a conforming complete response after author intake.
+- Direction: ACVC next object remains with its original Convergence. No completed or paused family is reopened locally, no second recast erased, and no formal UAV entry claimed from a host name. CBSC/MGTAP are optional same-mechanism B allocations, not direction closures.
+- Engineering: ordinary card/L0 and relevant technical evidence protect the chosen claim; no exhaustive cause reconstruction, extra cost experiment, historical fixture or mandatory preceding A. Unresolved dependent facts stop only affected work. Five-slot scheduling is not a grant.
+
+## Publication, return and remaining risk
+
+New Transport01a095ca-7b4a-7940-8acf-fca1b52c784d and Relay01a095ca-8676-74e1-b78c-ea459d41e905 are current Root-reported READY. Portfolio conversation6a9c109e-b264-83e8-a78b-f9ea1b767b7b is preserved. This author prepares only; Root loads the exact published HANDOFF and dispatches once, Transport returns to Root, which resumes this same native author with the immutable complete response. No Pro Send or new experiment was performed. FOLR launch/Monitor and RCLE generation acceptance are explicitly Root-reported at current mainc8ed4714c, not independently observed by this author. The new Portfolio request remains unsent.
+
+A full Pro response must be checked against this question and current owner/spec requirements. A concrete conflict returns unchanged to the same node; it does not transfer authority locally. Later direction returns can change actual capacity without rebinding this question. Resource forecasts for changed paths and complete documentary effort remain unknown; suggested ceilings are new prospective asks, not evidence that an invocation will fit. Shared active checkout and original raw evidence remain retained; no new experiment/test scratch was created by this preparation.
+
+Prepared at 2026-09-12T13:48:08.326767+00:00.
