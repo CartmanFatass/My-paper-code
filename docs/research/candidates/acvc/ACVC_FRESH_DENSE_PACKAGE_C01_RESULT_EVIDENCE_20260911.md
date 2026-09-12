@@ -7,7 +7,7 @@ The frozen reading is: “For each primary use exactly `mean_r ± scipy.stats.t.
 | Unit | m / q | State | F-C mean J | F-dwell mean J | dwell-C mean J | Complete command wall | Inclusive native charge |
 |---|---|---|---:|---:|---:|---:|---:|
 | 1 | 12794 / 23947 | complete, preserved, technically accepted | 0.093662236170 | 0.072263725773 | 0.021398510397 | 167.06 s | 170 s |
-| 2 | 11477 / 24930 | fixed, unsubmitted | — | — | — | — | — |
+| 2 | 11477 / 24930 | accepted, monitored; collection pending | — | — | — | — | — |
 | 3 | 18150 / 21370 | fixed, unsubmitted | — | — | — | — | — |
 | 4 | 12604 / 21030 | fixed, unsubmitted | — | — | — | — | — |
 | 5 | 14295 / 23946 | fixed, unsubmitted | — | — | — | — | — |
