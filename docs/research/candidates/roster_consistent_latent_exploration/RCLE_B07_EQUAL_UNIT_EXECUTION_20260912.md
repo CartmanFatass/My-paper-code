@@ -75,3 +75,23 @@ Prepare a cleanup inventory and preserve unique evidence before Root-accepted
 reclamation; verify disk and Git-registration absence. The shared authoring
 checkout remains. One fit/reference/intake ends the allocation, with no
 automatic successor, joint100 control, second fit or consultation.
+
+## Published source and committed command
+
+Exact source/card/check/review commit1652c44ac65ed6e686610c3cfcff67dab1a0fc6b
+is pushed. The incremental5921795-byte Git bundle has SHA256
+196cb885a22bc558e776539be401c82dc3c3855abde3756da95f353a19b2b8d1,
+with the already-present3ffa65cb4e1a67182b90dce3822d0018ac623c72 prerequisite.
+The detached sparse remote checkout reads back that exact source SHA, its
+experiments/scripts surface has no diff, and bash-n passes the new entry.
+[Staging facts](b07_equal_unit_20260912/STAGING_FACTS.json) retain command receipts;
+staging command wall totals3.5623876 s, added once to support.
+
+[LAUNCH_COMMAND.txt](b07_equal_unit_20260912/LAUNCH_COMMAND.txt) is the literal
+single supervisor payload, with the source SHA substituted and outer900 around
+both admission-plus-runner arms. The independent outer-boundary review applies
+to these unchanged command tokens. Source publication took5.1359862 s and the
+owner-item add/trace commands .2572291/.2615827 s. Including the recorded .2791446 s
+local documentary check, known support through staging is24.0828232 s; an
+unreported review-read timing, tool tails and later work remain unmeasured.
+No scientific model, admission or native episode ran during staging.
