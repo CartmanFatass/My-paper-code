@@ -1,0 +1,19 @@
+{
+  "status": "pass",
+  "checks": [
+    "entry differs only in new seed/object/card bindings",
+    "real CLI forwards unchanged argv and exact seeds/object/card/batching/complete caps",
+    "authentic D0 configuration is forwarded unchanged",
+    "pair publication forwards exact new companion identity",
+    "actual unchanged publisher rejects prior allocation before counts/numeric access; finite helper stubbed for this identity check only",
+    "both LF wrappers bind adjacent admission, correct namespace and only I companion",
+    "two preselected detached whole-cap commands; receipt directory precedes time output"
+  ],
+  "check_count": 7,
+  "entry_sha256": "6ba185d69eef32b14a59932a65c5b1c8e217ad92c480634f27c11f32362eee74",
+  "new_models": 0,
+  "new_rng_masters": 0,
+  "scientific_submissions": 0,
+  "test_scratch_created": false,
+  "limit": "Pure identity/AST/stub/command checks. Shared numerical evidence reused; no new model or numeric execution."
+}
