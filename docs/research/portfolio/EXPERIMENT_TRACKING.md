@@ -12,12 +12,12 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
 | RCLE R | Complete intake accepted at main2a53388b8: `Delta_ref=-0.00884196` with negative CI and8/8 reference losses; `G_U=-0.000205485` interval crosses zero. One fit plus reference-only completion, native343.43s; allocation ended | Six scoped remote terminal-path cleanups only; no retry, new fit, Pro or active scientific work |
 | Portfolio two remaining chains | Final response archived/intaken at mainbd5fd849a: D=yes, P=yes, M=no; exact execution mapping published | ROOT_INTEGRATED; FSD and FOLR dispatched independently, no common wait |
-| ACVC A | B02 C/F handles `acvc-training-use-b02-{c,f}-ac64769f6` both running and actually adopted in one Monitor goal; sourceac64769f6, fresh identities20319/30319 | Terminal collection and paired intake;270/arm,540native,300support,840 complete, no retry/extra panel |
+| ACVC A | Complete B02 intake accepted at main89910ecd7: train-F minus train-C −0.0573422 J, SE0.00942192,50/64 adverse, DOWN; both arms exit0, native338.10s, grant ended | Six scoped remote cleanup targets only; no third pair, retry, panel or active scientific work |
 | MGTAP M | Single accepted handle `mgtap-cond-b01-8214-20260912` runs the complete ordered COND→DENSE pair and is actually adopted by Monitor, pid3393092, source10ea737f0 | Same handle completes both arms under450/arm,900native,300support,1200 total; terminal collection/paired intake, no second process/retry |
 | Portfolio post-CFR vacancies | Final response/intake accepted at maincf7bd424f: A=yes,M=yes,Q=no; execution mapping published | A/M dispatched independently; three remaining vacancies move to the next rolling Portfolio question |
 
-Direction chains2/5: ACVC A and MGTAP M are independently active. FSD D, FOLR P, RCLE R and prior
-ACVC/CBSC objects completed and released their slots. Three vacancies remain for the next rolling
+Direction chains1/5: MGTAP M remains active in terminal collection/intake. ACVC A, FSD D, FOLR P,
+RCLE R and prior objects completed and released their slots. Four vacancies remain for the next rolling
 Portfolio question; no queued intention, Transport session, or cleanup is counted as a direction.
 
 ## Current routing
