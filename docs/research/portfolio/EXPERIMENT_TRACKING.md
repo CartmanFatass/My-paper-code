@@ -5,16 +5,16 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC post-C01 materials | Direction input accepted/main e85cb3a95 and delivered to Portfolio DM; recommends one original-Convergence question, with all fit and1200-second figures explicitly unapproved | Portfolio investment decision, then original Convergence selection if funded; no active ACVC execution now |
+| ACVC A | Portfolio S+A accepted/main efeb1e737; original DM `/root/dm_a_mx_acvc_resume` actively preparing one original Convergence/full intake; zero implementation or fit allowance | Publish exact handoff for Root one-Send Transport dispatch, then complete same-DM intake |
+| CBSC S | Portfolio S+A accepted/main efeb1e737; replacement DM `/root/dm_a_mx_cbsc_s` actively preparing one prospective B card/L0 and supported candidate or no-ready return | Finish the single≤600s support cycle; zero runtime/test/model/scientific exposure and no S+B release |
 | FOLR B03 | Final paired intake accepted/main47d75d7f9: RETAIN0.947578125, LEARNED_EVENT−0.267968750, d_LR−1.215546875 ⇒ RETAIN_ABOVE_MEI; native1750.81s within cap; finite grant ended. Remote roots removed; three archived local duplicates retained after PowerShell policy rejection | No successor or active scientific work; local retention is an engineering restriction, not a scientific blocker |
 | VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
 | RCLE original Convergence request | Final intake accepted/main2f80926ae: retain exact equal-unit candidate for a later separately funded single fit; no current implementation/numerical allowance | Future Portfolio investment only; consultation complete and no active RCLE work |
 | Portfolio marginal investment | Complete61,049-byte response archived/main b0ce16514 after one Send; original Portfolio author performing scientific/spec conformance and execution mapping | Apply conforming PRO_FINAL decisions and dispatch each ready independent direction immediately |
 
-Direction chains0/5: FOLR, VNFC and RCLE have all reached accepted clean scientific boundaries;
-their remaining scoped cleanup does not count as research advancement. ACVC authoring is also
-complete. The accepted Portfolio generation is cross-direction work and not an extra direction;
-its decision must provide the next ready independent working set.
+Direction chains2/5: CBSC S and ACVC A are independently active. FOLR, VNFC and RCLE have reached
+accepted scientific boundaries; cleanup does not count. Three vacancies remain without automatic
+grants and require concrete Portfolio investment while S and A continue.
 
 ## Current routing
 

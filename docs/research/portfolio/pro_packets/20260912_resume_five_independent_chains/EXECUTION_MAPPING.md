@@ -1,6 +1,6 @@
 # Executable independent mapping — Portfolio S+A, 2026-09-12
 
-Authority: complete Portfolio response `86428c9e87fc4c61888b5638781603038c39399d`, accepted by [original-author intake](INTAKE.md). **PRO_FINAL / OWNER_DELEGATED; Root integration/dispatch pending.** Each selected task is independently ready for ordinary native assignment. This file is the task scope, not a new approval or experiment gate.
+Authority: complete Portfolio response `86428c9e87fc4c61888b5638781603038c39399d`, accepted by [original-author intake](INTAKE.md). **PRO_FINAL / OWNER_DELEGATED / ROOT_INTEGRATED.** Root dispatched CBSC S to `/root/dm_a_mx_cbsc_s` and resumed ACVC A at `/root/dm_a_mx_acvc_resume` independently on 2026-09-12. This file is the task scope, not a new approval or experiment gate.
 
 ## S — CBSC, one preparation cycle
 
@@ -34,4 +34,4 @@ Read: `ACVC_POST_C01_DIRECTION_QUESTION_20260912.md` completely, final C01 intak
 
 MGTAP M, S+B and A+B receive0 new implementation/numerical/consultation allowance. Keep offered figures as unallocated history, not fallback reserves. FOLR/VNFC/RCLE original allocations are now accepted complete/incomplete clean scientific boundaries; only actual named cleanup remains. No fourthFOLRpair, VNFCretry/diagnosis or RCLEfit is created. All22 lifecycle/priority/headroom/recasts/UAV fields and narrow family stops remain.
 
-Root's current assignment reports0/5. Actual S and A starts would independently make2/5, leaving3 vacancies if no other change. Selected-but-unstarted, completed, blocked waits and this Portfolio author do not count. No common start/finish batch or five-budget package exists. Root handles the remaining concrete investment need at its proper node while these two tasks advance.
+Root's actual assignment is2/5 after independent S and A starts, leaving3 vacancies if no other change. Completed, blocked waits and this Portfolio author do not count. No common start/finish batch or five-budget package exists. Root handles the remaining concrete investment need at its proper node while these two tasks advance.
