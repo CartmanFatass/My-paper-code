@@ -77,3 +77,25 @@ The old locator test required the literal phrases forbidding any second DOM clic
 and making uncertainty terminal. Removed that obsolete prose-matching test; the
 replacement coverage is executable recovery/receipt tests plus independent
 four-scenario review, including uncertain Send and unbound first submission.
+
+## Published procedure and live recovery
+
+Repair code, instructions and acceptance checks were published on main at
+`8bf1269e5`. Root dispatched the same RCLE request to the existing independent
+Transport; active ACVC/FOLR DMs received the corrected intake/recovery instructions.
+
+Transport's fresh recovery pass found the original Edge connection unavailable.
+The prior inspection had located original tab `507083308`, browser `2`, at the
+logged-in home page with 6 Pro and no message/generation. After bounded inventory
+refresh, only IAB browser `1` with zero tabs remained. Exact documented calls
+`cua.getTab('507083308',{browser:'2'})` and `cua.browsers.get('2')` both returned
+`Error: Browser is not available: 2`. URL-based browser selection exposed only IAB.
+Transport created no replacement tab, performed no navigation and made no new click.
+
+Actual remaining prerequisite is restoration of the original Edge application/extension
+connection. The two historical ineffective clicks and raw blocker remain preserved;
+no successful provider submission is claimed. Transport retains same-request recovery
+and the already authorized repaired preflight/submission once the original surface
+is callable. This external prerequisite is distinct from the repaired local click cap,
+round-state contamination and archive/receipt defects; no scientific decision or
+new request was substituted.
