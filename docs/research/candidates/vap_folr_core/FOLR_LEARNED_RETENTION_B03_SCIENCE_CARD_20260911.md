@@ -158,9 +158,10 @@ Complete current support and cost remain unknown until measured; no cost pilot
 or new gate follows. A concrete integrity/resource/cost limitation stops dependent
 work and preserves narrower facts, without replacement, retuning or retry.
 
-For each accepted handle send MONITOR_ADD directly to live primary Monitor
-`01a087e5-2044-7301-abb6-7a1709a98197`, explicitly requiring actual unfinished-goal
-and handle adoption. Dispatch receipt and adoption are distinct. After adoption
+For each accepted handle read `C:/Projects/HMASD/.codex/hmasd-monitor.toml`
+and send MONITOR_ADD directly to its current Monitor, explicitly requiring actual
+unfinished-goal and handle adoption. Historical endpoints are not current routing.
+Dispatch receipt and adoption are distinct. After adoption
 stop routine polling and return pending collection; Root routes terminal facts
 to this DM. Check exact source/arm/seeds/counts, complete finite128-return arrays,
 means and checkpoint optimizer/target/finite gate inclusion before the primary

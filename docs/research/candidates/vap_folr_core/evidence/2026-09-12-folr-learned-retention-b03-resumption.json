@@ -1,6 +1,6 @@
 {
   "object": "FOLR-LEARNED-RETENTION-B03",
-  "status": "source_preparation_ready_no_scientific_submission",
+  "status": "source_accepted_awaiting_current_monitor_route",
   "owner_instruction_record": "docs/research/portfolio/decisions/2026-09-12-windows-root-resumption.md",
   "root_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
   "native_owner": "/root/dm_a_mx_folr_cap_review",
@@ -77,7 +77,7 @@
     "/usr/bin/timeout --signal=TERM --kill-after=5s 40s zsh -lic 'bash -s'"
   ],
   "staging_client_timeout_seconds": 50,
-  "staging_status": "not_executed",
+  "staging_status": "accepted",
   "commands_source": "FOLR_LEARNED_RETENTION_B03_RESULT_SUMMARY_20260911.json commands at e3ac72da5750821e3ea67cbad98c27252161929d",
   "commands_unchanged": true,
   "monitor_thread_id": null,
@@ -98,7 +98,30 @@
     "new_scientific_invocations": 0
   },
   "support_resume": {
-    "named_measurements": [],
+    "named_measurements": [
+      {
+        "operation": "same-identity reconciliation",
+        "wall_seconds": 0.7440104999695905
+      },
+      {
+        "operation": "remote syntax-only check",
+        "wall_seconds": 0.5970167000195943
+      },
+      {
+        "operation": "one actual scoped source staging",
+        "wall_seconds": 0.6539146000286564
+      }
+    ],
     "unmeasured": "Some review/edit/Git/tool/provider effort remains unmeasured. Historical 315.263732 lower bound is not a reset."
-  }
+  },
+  "staging_receipt": {
+    "exit_code": 0,
+    "stdout": "{\"source_files_present\": 11, \"source_bytes\": 85364, \"scientific_invocations\": 0}\n",
+    "stderr": "(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\nPreparing worktree (detached HEAD 89035d8f1)\nHEAD is now at 89035d8f1 Bind fresh unchanged FOLR learned-retention B03 pair\n",
+    "utc": "2026-09-12T13:27:41.327488+00:00",
+    "elapsed_seconds": 0.6539146000286564,
+    "preparation_commit": "044b42fb4",
+    "scientific_invocations": 0
+  },
+  "source_acceptance": "All11 required files present at original89035d8f1; Git diff exit0; no source/scientific change."
 }
