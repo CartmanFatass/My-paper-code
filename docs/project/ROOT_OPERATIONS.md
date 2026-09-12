@@ -68,6 +68,16 @@ gaps rather than inventing another authority layer.
 
 ## Portfolio material and response route
 
+OWNER_DIRECT 2026-09-11: resolve recurring Pro transport stalls. Transport retains
+ownership through same-request recovery, complete-response archival and actual
+parent delivery. Root dispatches a concrete recovery action when a recoverable
+blocker returns; it does not leave a failed click as an indefinite direction park.
+Uncertain acceptance permits reconciliation only. Proven nonacceptance permits
+an exact-payload retry after interaction repair under the Transport skill, with
+all prior attempts preserved. A complete verified Git response is routed to its
+DM while receipt-label corrections proceed independently. No new Pro question,
+scientific budget, provider binding or scheduler follows from this repair.
+
 Root chooses a relevant recently active DM with the current evidence, and names the question,
 scope and original sources. One DM authors the complete Portfolio packet; other DMs contribute
 facts where needed. The author uses `hmasd-portfolio-task` and Prompt Author, preserving exact
