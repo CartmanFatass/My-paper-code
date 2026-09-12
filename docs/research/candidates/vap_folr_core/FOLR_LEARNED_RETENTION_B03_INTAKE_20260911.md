@@ -517,3 +517,45 @@ now complete. No next experiment or Pro question is authorized here. A future
 concrete use decision can consider the three separate points and RETAIN default
 through the appropriate authority; full causal explanation or exact replay is
 not a prerequisite for interpreting this completed B.
+
+### Terminal cleanup closeout — 2026-09-12
+
+Published and pushed result/evidence `33a5acb2109e9ce6a956c11d15e8d769660ecc8f`
+before removing any execution copy. A focused preservation comparison verified
+all11 remote source files against the bound published bytes and all20 original
+native/supervisor files against the committed archive. Only the Git registration
+pointer and generated admission bytecode were nonunique metadata. All35 files
+across the three local roots were also byte-verified against published archives
+or derived analysis before the attempted cleanup.
+
+The exact remote source/output checkout and both terminal supervisor roots were
+removed at14:20:17 UTC. Both old PIDs and tmux sessions were absent before
+removal; the returned witness verifies all three paths absent and the checkout
+absent from Git worktree registration. No new process or scientific execution
+was started. Source and unique evidence remain in the published commits.
+
+Local PowerShell cleanup was **rejected before process creation**, with
+`CreateProcess ... Rejected ... blocked by policy`. The attempted command used
+resolved exact paths, preservation/inventory checks and `Remove-Item
+-LiteralPath`; no deletion occurred. A read-only follow-up observed the6-file
+old control copy,4-file resume copy and25-file collection copy still present:
+19,035,544 bytes total. A subsequent command intended only to record these facts
+was also rejected; the permitted file-edit tool recorded them without performing
+deletion. No alternate deletion tool, retry or escalation followed.
+
+The [cleanup receipt](evidence/2026-09-12-folr-learned-retention-b03-cleanup.json)
+names every retained/removed path and the actual blocker. The selected technical
+option is to accept verified remote reclamation and retain the preserved local
+copies under this restriction, rather than claim full cleanup. **Owner-delegated
+decision (unattended,2026-09-03 instruction): preserve evidence, accept verified
+remote cleanup and report policy-rejected local retention.** Root accepts
+integration/retention and records this remaining engineering limitation; it
+creates no scientific polarity, new budget or successor. The shared authoring
+checkout remains present and registered; old B01/B02 paths were untouched.
+
+Additional named enclosing publication/cleanup clocks total12.8158305 seconds,
+bringing known support to342.002703300 and known native plus support to at least
+**2092.812703300 seconds**. Nested SSH/mutation clocks are not charged twice.
+Other unitemized work and final publication/integration remain unmeasured; no
+full complete-cap certification is claimed. Both technical acceptance and the
+frozen scientific reading remain as above.
