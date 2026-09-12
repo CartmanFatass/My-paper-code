@@ -87,7 +87,7 @@
       "output": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_11477",
       "admission": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_11477_admission.json",
       "time": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_11477_task_time.txt",
-      "state": "accepted; Root-confirmed Monitor adoption; terminal collection pending",
+      "state": "complete, collected and technically accepted; retained as second final-population unit",
       "launch_receipt": {
         "handle": "acvc-fresh-dense-c01-11477-3fd9062d5",
         "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
@@ -112,8 +112,32 @@
           "acvc-fresh-dense-c01-11477-3fd9062d5"
         ],
         "reported_status": "running",
-        "owner": "Monitor retains until terminal notice delivered to Root; DM stopped remote polling"
-      }
+        "owner": "Monitor retains until terminal notice delivered to Root; DM stopped remote polling",
+        "terminal_delivered": true,
+        "goal_complete_after_terminal": true,
+        "terminal_active_set": []
+      },
+      "technical_acceptance": {
+        "accepted": true,
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "whole_command_wall_s": 168.51,
+        "summary_process_wall_s": 164.04166260396596,
+        "last_panel_log_wall_s": 164.04035623092204,
+        "supervisor_duration_s": 169,
+        "inclusive_native_charge_s": 171,
+        "charge_method": "ceil(max(command wall, integer supervisor interval)+1 second timestamp granularity+recorded 1 second final sleep), submission charged once separately to support",
+        "peak_rss_kib": 548684,
+        "admission_physical_effective_bytes": 15634452480,
+        "resource_flag": "resources_unmeasured",
+        "terminal_event_id": "acvc-fresh-dense-c01-11477-3fd9062d5@2026-09-12T12:55:04+08:00",
+        "monitor_command_wall_s": null,
+        "monitor_limit": "precise per-handle total not supplied; no rerun/profile reconstruction",
+        "checkpoint_sha256": "2e2572882e18fe563f8ac58cc4c1d7397d5ee023b5210260cfa9fc66fa71e145",
+        "archive_sha256": "56340bcb1ebe44126b439b38a64cf68f78f5a3003f717dd2791df117816897ac",
+        "archive_bytes": 415817,
+        "scope": "complete component unit only; no interim population interval or efficacy decision; C01 not consumed"
+      },
+      "evidence": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_11477/"
     },
     {
       "order": 3,
@@ -179,7 +203,7 @@
       "future_python": "-B; scientific source and native results unchanged"
     }
   },
-  "next_action": "Collect unit 2 on its routed terminal fact, then continue fixed unit 3 (18150,21370) unless a concrete dependent integrity/resource/envelope limitation applies; no interim efficacy decision.",
+  "next_action": "Execute fixed unit 3 (18150,21370) from the published command with fresh admission/Monitor adoption; no interim efficacy decision.",
   "current_consumption": "C01 not consumed; no complete five-unit scientific result yet",
   "owner_instruction_applied": "Root forwarded Transport operational correction at main 8bf1269e5: a short/status receipt does not establish no formed decision; ACVC already verified the full immutable Innovator response and preserved separate receipt roles. Accepted engineering continues unchanged."
 }
