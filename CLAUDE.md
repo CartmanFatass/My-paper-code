@@ -22,6 +22,10 @@ work follows the second system's conventions even when the edit lands in the fir
 
 ## Environment
 
+Daily control-plane checks use `/home/fires/.venvs/hmasd-control/bin/python` on native
+WSL/Linux. This environment intentionally contains only the control-plane dependencies;
+the scientific examples below retain their host-specific interpreter requirements.
+
 The project runs on a conda environment that is **not** the `python` on PATH (a bare system
 Python 3.11 without torch). Use the explicit interpreter:
 
