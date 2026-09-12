@@ -8,10 +8,10 @@
 本表登记15 ACTIVE、7 PARKED，生命周期、priority、recasts与UAV字段不变。
 最新 [Portfolio决定](decisions/2026-09-12-post-sa-marginal-investments.md) 已由原作者完整核对：**新资助CBSC C、RCLE R、ACVC F三条完整B链；M不追加。**
 
-Root当前实际工作集3/5；C/R/F均已独立派发给原DM。跨方向作者/cleanup不计槽位。
+Root当前实际工作集3/5：ACVC与CBSC正在独立完成终端结果intake，RCLE已有被Monitor实际接管的远端运行。跨方向作者、Transport和cleanup不计槽位。
 C新native600/arm、1200合计+support600=1800；R900native含nearest+support600=1500；F270/arm、540合计+support660=1200秒。每项均含完整实现/检查/review/实验/intake/清理。
 新款明确是未来工作，旧S/A费用保留一次且未知尾部不填零。三个真正启动后为3/5，剩余两槽没有自动备用款。见 [独立执行映射](pro_packets/20260912_post_sa_marginal_investment/EXECUTION_MAPPING.md)。
-Monitor当前没有活动实验目标，原terminal notices已送达；Transport本轮Portfolio答复已完整归档。实际新派发由Root持续更新。
+Monitor当前目标仅持有RCLE句柄；ACVC两臂与CBSC均已terminal exit0并完成对应Monitor goal。剩余两槽的新Portfolio问题已一次派发至当前Transport，尚未形成的新决定不计槽位。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
 “待选择”是尚未分配的未来工作，不能冒充已运行，也不是永久禁入。
@@ -19,7 +19,7 @@ Monitor当前没有活动实验目标，原terminal notices已送达；Transport
 | 方向 | 最新证据/科学状态 | 当前实际工作 | 下一步及边界 |
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
-| [ACVC](../candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE.md) | C01 qualified JOINT_ABOVE_MEI/consumed保持；原节点已选train-through-F vs train-C、双方deployF，当前参考保留。 | sourcea4c24e4e两臂均运行并被同一Monitor goal收养：C pid3376424、F pid3376599。 | 两臂独立terminal后原DM paired intake；270/arm、540native、660support、1200future，无额外panel/咨询。 |
+| [ACVC](../candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE.md) | C01 qualified JOINT_ABOVE_MEI/consumed保持；原节点已选train-through-F vs train-C、双方deployF，当前参考保留。 | sourcea4c24e4e两臂均terminal exit0，Monitor goal完成；原DM已核对C为train-C/deploy-F、F为train-through-F/deploy-F，正在发布paired intake。 | 接受并集成完整intake/成本/清理；不得因输出标签或已结束tmux状态自动retry。 |
 | [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_PUBLIC_STREAM_B_SCIENCE_CARD_20260912.md) | S已形成owned17-byte public-row/FP32与EpisodeTape候选；runtime independence/crash repair未证明。 | C实验terminal exit0/90s，RAW/STRUCT/paired summaries存在；Monitor goal已完成，原DM正在收集intake。 | 技术/科学验收、成本/保全/清理；即时tmux残留标志仅做工程核对，无自动retry。 |
 | [CRTO](../candidates/commitment_residual_triggered_options/DIRECTION.md) | P72 PRO_FINAL保留B08测试的selected-panel family PARK；finite-zero修复已集成。 | 无 | 新的具体方向选择；没有自动successor。 |
 | [DISH](../candidates/degraded_incumbent_shadow_handover/DIRECTION.md) | **更新：B08 HALF_RETAIN−REPLACE为−6.5 ticks，WITHIN；REPLACE默认。post-B08已PARK retained-A03 arrival-bridge retention家族。** P62/DIRECT只是更早历史。 | 无 | 具体receipt-to-control研究问题或对独立pair不确定性的实际决策需求；新选择才续行，不要求完整机制证明。 |
@@ -31,7 +31,7 @@ Monitor当前没有活动实验目标，原terminal notices已送达；Transport
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 最新8213 COND−DENSE−0.022469573456，5正/27负；完整intake，DENSE默认、no-addition保留。 | 无 | 必要的新投资选择；旧1200秒pair不能自动追加。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
-| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B06八个nearest-reference cells全负；原节点已选exact equal-unit单fit服务B，own-init/attained-nearest、无joint100臂。 | **R已启动**：当前接任DM持有完整实现到intake任务。 | 相关检查/review、一个final1000 fit和完整intake；900native含nearest、600support、1500future；不再咨询。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B06八个nearest-reference cells全负；原节点已选exact equal-unit单fit服务B，own-init/attained-nearest、无joint100臂。 | **R已启动并实际在途**：handle `rcle-b07-equal-unit-s27-20260912`由新Monitor goal接管，pid3377723，source1652c44ac。 | terminal后回到同一DM完成收集/intake/清理；900native含nearest、600support、1500future；不再咨询或追加fit。 |
 | [scope_1s](../candidates/scope_1s/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [UCOPE](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | **更新：最新是post8801 PRO_FINAL PARK进一步8801-L continue/end-credit经验投入，保留unchanged-L spending stop。** 8601/8602、8701是更早证据。 | 无 | 有具体新选择才继续；不再凭旧8701 closeout pending造任务。其余renewal/ordinary-feedback议程未被整体关闭。 |
