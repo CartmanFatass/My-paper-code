@@ -4,9 +4,17 @@ Current boundary: complete B07 result accepted after the original fit and the
 single Root-authorized reference completion (exit0). Actual Monitor goal adoption,
 accepted terminal delivery and empty completed goal are confirmed. Frozen
 Delta_ref=−.008841959635417 and G_U=−.000205485026042; native343.43s.
-The named allocation ends. Final publication/Root retention and scoped remote
-cleanup remain; no fit, budget, retry or successor is added. See the
+The named allocation is closed out. Root integrated/retained the complete result
+through main2a53388b8, and all six assigned terminal remote copies are reclaimed
+with disk/registration absence verified. No fit, budget, retry or successor is added. See the
 [complete intake](RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md).
+
+[Cleanup receipt](b07_equal_unit_20260912/CLEANUP_RECEIPT.json): at2026-09-12T18:24:31Z
+both exact detached source worktrees, both input staging directories and both
+supervisor roots are absent. All26 retained output/supervisor files and both
+archive/source-bundle pairs matched before removal; both PIDs and tmux sessions
+were absent, both tracked trees clean. Unrelated registrations, shared authoring,
+local evidence and the shared native cache remain. Zero new scientific invocations.
 
 The [card](RCLE_B07_EQUAL_UNIT_SCIENCE_CARD_20260912.md) binds fresh
 RCLE-TBCFV-B07-EQUAL-UNIT/master27 and exactly one final1000 fit with three

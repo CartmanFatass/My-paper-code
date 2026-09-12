@@ -127,5 +127,7 @@ contains17 files; completion17564B SHA256f93dd0b5299e3f579db518fc0ee0abab8606692
 contains9 files. Manifests cover every output/supervisor member; both exact source
 bundles are retained. [Cleanup inventory](b07_equal_unit_20260912/CLEANUP_INVENTORY.json)
 names only the two terminal remote worktrees, staging directories and supervisor
-roots. Root integration/retention acceptance precedes their scoped reclamation;
-the same DM owns it. Shared authoring, evidence and native cache remain.
+roots. Root confirmed integration/retention through main2a53388b8 and accepted
+those six removals. The [cleanup receipt](b07_equal_unit_20260912/CLEANUP_RECEIPT.json)
+verifies all six paths and both worktree registrations absent at18:24:31Z;
+shared authoring, evidence and native cache remain. This allocation is closed out.

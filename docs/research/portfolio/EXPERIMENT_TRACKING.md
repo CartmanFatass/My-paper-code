@@ -7,15 +7,16 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | --- | --- | --- |
 | ACVC F | Complete intake accepted at mainf6bf9e467: train-F minus train-C on common-F evaluation −0.0260962 J,43/64 adverse, DOWN; both arms/terminal logs complete and local archives retained; purchased pair ended | Six scoped remote cleanup targets only; no retry, extra panel, consultation or active scientific work |
 | CBSC C | Complete intake accepted at main9ca150856: RAW=STRUCT11.15, exact-zero32/32, WITHIN_MEI and below REQUEST_ONLY12.45; native90.27s, evidence preserved, purchased pair ended | Scoped reclamation only; no retry, second S or active scientific work |
-| FOLR post-B03 P | Portfolio P=yes/mainbd5fd849a; new DM independently owns one original-node Convergence question and complete intake. Zero implementation/numerical/experiment allowance; complete cost unknown | Author and route exact question once through current Transport, then intake the complete response; no fourth pair |
-| FSD D | Portfolio D=yes/mainbd5fd849a; new DM independently owns one unchanged I1280/authentic-D0 pair through acceptance | Reuse codex-fsd; D0<=900,I<=1800,native<=2700,support<=300,total<=3000; remote-first detached launch and Monitor adoption, no repeat/extra panel |
+| FOLR post-B03 P | Complete response/intake accepted through main79397ac52: PRO_FINAL H reversibly holds further spending on tested LEARNED_EVENT package and retains event-aware RETAIN; P ended | No fourth pair, successor or active work; re-entry needs a renewed optional-use decision |
+| FSD D | Complete paired intake accepted at main42a483997: I-D0 +0.0125548 J,19 positive/13 adverse, SE0.0125068, ABOVE_MEI by only0.00255; native1517.95s, both goals complete, grant ended | Four scoped remote cleanup targets only; no fifth pair, successor or active scientific work |
 | VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
 | RCLE R | Complete intake accepted at main2a53388b8: `Delta_ref=-0.00884196` with negative CI and8/8 reference losses; `G_U=-0.000205485` interval crosses zero. One fit plus reference-only completion, native343.43s; allocation ended | Six scoped remote terminal-path cleanups only; no retry, new fit, Pro or active scientific work |
 | Portfolio two remaining chains | Final response archived/intaken at mainbd5fd849a: D=yes, P=yes, M=no; exact execution mapping published | ROOT_INTEGRATED; FSD and FOLR dispatched independently, no common wait |
+| Portfolio post-CFR vacancies | Up-to-three A/M/Q/H question fixed at main03f5b496c and exact HANDOFF at maincb3f539a7; queued to current Transport after active FOLR observation | Reconcile and Send at most once after FOLR archival; author intakes immutable response, no inferred grants |
 
-Direction chains2/5: FSD D and FOLR P advance independently. RCLE R, ACVC F and CBSC C completed
-and released their slots. Three vacancies remain for the next rolling Portfolio decision;
-no queued intention, Transport session, or cleanup is counted as another direction.
+Direction chains0/5: FSD D, FOLR P, RCLE R, ACVC F and CBSC C completed and released their slots.
+The active post-CFR Portfolio generation can select at most three new chains, so at least two more
+vacancies will remain; no queued intention, Transport session, or cleanup is counted as a direction.
 
 ## Current routing
 

@@ -1,0 +1,63 @@
+{
+  "observed_utc": "2026-09-12T19:02:17.528344+00:00",
+  "source_sha": "9eb99f8b68dd2863212c10693b911746a6d24354",
+  "tracked_status": "",
+  "ignored_files": [
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/D0/manifest.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/D0/summary.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/D0/training.jsonl",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/I/manifest.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/I/summary.json",
+    "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/I/training.jsonl"
+  ],
+  "retained_files_match": 22,
+  "supervisors": {
+    "D0": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3381323,
+      "pid_exists": false,
+      "tmux_returncode": 1
+    },
+    "I": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3384259,
+      "pid_exists": false,
+      "tmux_returncode": 1
+    }
+  },
+  "targets": {
+    "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912": {
+      "exists": true,
+      "resolved": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912",
+      "bytes": 44083042,
+      "files": 2557,
+      "cleanup": "pending Root retention acceptance; no removal executed"
+    },
+    "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771203-20260912": {
+      "exists": true,
+      "resolved": "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771203-20260912",
+      "bytes": 1209,
+      "files": 4,
+      "cleanup": "pending Root retention acceptance; no removal executed"
+    },
+    "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771203-D0-20260912": {
+      "exists": true,
+      "resolved": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771203-D0-20260912",
+      "bytes": 2311,
+      "files": 6,
+      "cleanup": "pending Root retention acceptance; no removal executed"
+    },
+    "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771203-I-20260912": {
+      "exists": true,
+      "resolved": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771203-I-20260912",
+      "bytes": 2300,
+      "files": 6,
+      "cleanup": "pending Root retention acceptance; no removal executed"
+    }
+  },
+  "local_archives": "D0_collection.tar.gz and I_collection.tar.gz,22 original files, pending publication/Root retention acceptance",
+  "removed": false,
+  "inner_wall_seconds": 0.7809999999590218
+}

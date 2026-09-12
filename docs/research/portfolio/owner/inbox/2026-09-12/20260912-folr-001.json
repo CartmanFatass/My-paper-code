@@ -1,0 +1,82 @@
+{
+  "id": "20260912-folr-001",
+  "created": "2026-09-12T11:24:31-07:00",
+  "direction": "vap_folr_core",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "FOLR第三对后：建议收口当前learned-event配方，原节点裁决",
+  "context": "Portfolio只资助一次原节点问题和完整intake。B01有实用尺度增益，B02与B03为不利点；作者建议窄H，U保留原样候选是强备选。两者尚未在本地执行，均不资助第四对。",
+  "options": [
+    {
+      "key": "H",
+      "label": "收口当前配方，保留普通RETAIN",
+      "consequence": "原节点若选择H，停止本配方后续投入，保留全部证据与具体重入可能。"
+    },
+    {
+      "key": "U",
+      "label": "仅保留一个未资助原样B候选",
+      "consequence": "原节点若选择U，须指出下一观察会改变的实际可选使用判断；本次仍无新训练或预算。"
+    }
+  ],
+  "recommended": "H",
+  "auto_applied": "H",
+  "dm_reason": "新增B03未提供所期待的实际收益再现，普通GRU已是合格同信息比较器；收口有吸引力但不是稳定伤害或投票结论。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B03_QUESTION_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L41",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "第三对结果已到达：是否收口当前 learned-event/5000训练/128最终评价配方，还是仅保留一项以后另行资助的原样B候选？",
+    "changes_if_approved": [
+      {
+        "target": "FOLR原Convergence节点",
+        "from": "第三对观察完成，尚未做post-B03方向判断",
+        "to": "一次窄H/U决策；作者倾向H，未执行"
+      }
+    ],
+    "if_refused": "原节点仍可选择保留一个未资助候选；任何方向决定都不在本咨询中启动第四对或扩大预算。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md",
+        "quote": "RETAIN0.947578125 versus LEARNED_EVENT-0.267968750 gives d_LR=-1.215546875, hence RETAIN_ABOVE_MEI.",
+        "why": "此前为观察实际收益是否再现而选择的第三对现已提供不利结果；普通RETAIN仍是可用参照。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md",
+        "quote": "Final means1.603281250 versus−0.160078125 give d_LR+1.763359375.",
+        "why": "首对有真实实用尺度增益，三对不能证明稳定伤害；再一训练历史仍可能改变可选方案建议。"
+      }
+    ],
+    "uncertainty": [
+      "不以二比一投票、显著性或固定seed门槛裁决。",
+      "B03条件评价波动较大；完整成本与训练总体不确定性仍未确定。",
+      "当前P只买一次咨询和完整intake，零实现与数值工作。"
+    ],
+    "cost": {
+      "compute": "一次既有证据咨询；文档、调用、provider、agent完整成本明确接受未知；零新实验和分析",
+      "owner_time": "无需回复，按授权继续",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; 原节点独立作决定"
+    },
+    "verdict_text": "DM recommendation, not executed: H, a close call.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B03_QUESTION_20260912.md"
+  },
+  "starred": true,
+  "approval_correction": "原建议阶段的未执行文字已由本次完整Pro决定和intake取代；H已按standing delegation应用，无需owner再次批准，未新增实验。",
+  "execution_history": [
+    {
+      "at": "2026-09-12T18:58:43+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260912_learned_retention_post_b03_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/pro_packets/20260912_learned_retention_post_b03_convergence/INTAKE.md",
+      "state": "applied",
+      "summary": "原节点完整答复已核对，现应用H：可逆暂停当前LEARNED_EVENT/5000训练/128最终评价配方后续开发投入，保留普通RETAIN与全部三对结果；不再保留原样第四对为当前推荐候选，无RECAST或Portfolio变更。",
+      "correction": "原建议阶段的未执行文字已由本次完整Pro决定和intake取代；H已按standing delegation应用，无需owner再次批准，未新增实验。"
+    }
+  ]
+}

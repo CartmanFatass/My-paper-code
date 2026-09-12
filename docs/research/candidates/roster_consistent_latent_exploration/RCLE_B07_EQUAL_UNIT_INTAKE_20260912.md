@@ -59,7 +59,9 @@ evidence; full historical writer reconstruction is not this intake's prerequisit
    named remote copies for Root integration/retention acceptance and same-DM cleanup;
    (b) retain entire detached checkouts indefinitely. Recommend/select(a).
    Owner-delegated decision (unattended,2026-09-03 instruction): (a). Actual removal
-   follows Root's acceptance; the unique archives/source/evidence stay preserved.
+   followed Root's integration/retention acceptance through main2a53388b8. All six
+   named paths and both worktree registrations are now absent; the unique
+   archives/source/evidence stay preserved in the [cleanup receipt](b07_equal_unit_20260912/CLEANUP_RECEIPT.json).
 
 These are ordinary object/technical records in the [audit ledger](../../portfolio/audit/2026-09-12.md).
 No new direction-tier or Portfolio decision was selected, so no additional P1/P2
@@ -82,5 +84,6 @@ The selected missing discriminator—the exact reference against this retained f
 is now complete. No further scientific discriminator is allocated. A later question
 would require its proper scientific allocation; this intake recommends no new
 mechanism, experiment or family disposition. Root can accept/integrate these records
-and advance independent authorized chains immediately. The same DM retains scoped
-remote cleanup responsibility. [Chinese brief](../../portfolio/owner/briefs/roster_consistent_latent_exploration/2026-09-12_RCLE_B07_FINAL.md).
+and advance independent authorized chains immediately. The same DM completed all
+six Root-accepted remote reclamations; no execution or cleanup work remains for
+this allocation. [Chinese brief](../../portfolio/owner/briefs/roster_consistent_latent_exploration/2026-09-12_RCLE_B07_FINAL.md).
