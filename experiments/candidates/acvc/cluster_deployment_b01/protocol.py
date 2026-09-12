@@ -38,7 +38,7 @@ def final_panel(rows):
                           key=lambda r: r["episode"])
         complete = len(selected) == 64 and [r["episode"] for r in selected] == list(range(64))
         complete = complete and all(
-            r["master"] == MASTER and r["evaluation_namespace"] == EVALUATION_NAMESPACE
+            r["base"] == MASTER and r["evaluation_namespace"] == EVALUATION_NAMESPACE
             and r["reset_seed"] == 100000 * EVALUATION_NAMESPACE + 2000 + r["episode"]
             and r["steps"] == 256 and r["S"] is not None and r["J"] is not None
             and math.isfinite(r["S"]) and math.isfinite(r["J"]) and r["J"] == r["S"] / 256
