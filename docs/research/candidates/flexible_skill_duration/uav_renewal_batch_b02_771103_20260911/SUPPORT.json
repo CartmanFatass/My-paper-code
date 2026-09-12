@@ -1,6 +1,6 @@
 {
   "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
-  "recorded_utc": "2026-09-12T02:39:21.318744+00:00",
+  "recorded_utc": "2026-09-12T02:41:15.015152+00:00",
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -89,10 +89,22 @@
     {
       "purpose": "persist source acceptance, D0 launch and direct Monitor dispatch",
       "wall_seconds": 0.2680543
+    },
+    {
+      "purpose": "publish distinct D0 launch/source receipts and confirmed active Monitor adoption",
+      "wall_seconds": 4.9332481999999995
+    },
+    {
+      "purpose": "single actionable D0 accepted/adopted handover through live Root relay",
+      "wall_seconds": 0.229
+    },
+    {
+      "purpose": "authoritative owner reviews at adopted D0 clean handover boundary",
+      "wall_seconds": 0.4013125
     }
   ],
-  "known_support_wall_seconds": 26.7314579,
-  "counting": "Each outer invoked support interval once; nested clocks are explanatory, not additive. This file's own write and later publication/execution are charged at the next record.",
+  "known_support_wall_seconds": 32.2950186,
+  "counting": "Each outer invoked support interval once; nested clocks are not additive. This final receipt/publication command is not yet measurable inside its own snapshot and is returned separately, then charged at collection.",
   "new_scientific_submissions": 1,
   "new_source_delivery_transactions": 1,
   "unknown": [

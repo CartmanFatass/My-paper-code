@@ -111,3 +111,15 @@ Root routed MONITOR_ADOPTED with reported time 2026-09-12T02:37:10.936128Z.
 No additional acknowledgment loop or DM observation query is added. Resume this
 DM on the routed D0 terminal fact for collection, acceptance and the existing
 preselected I command; that command requires its own fresh destination admission.
+
+## Actionable D0 return
+
+Source/card/commands are published at 5b15e536806d3b54dc693e7b4b911eba53ff643c;
+D0 launch/adoption handover at 3adfb5709759b8cceca6df3be6a3fa283c84ec7c.
+Exactly one HMASD_ROOT_HANDOFF event for this D0 acceptance was sent through
+live relay 01a08456-2cf3-7f02-8595-42d84ba41a4c. The API accepted delivery
+(isError false); D0_HANDOVER_RELAY_RECEIPT.json retains the complete event and
+receipt. This does not infer Root integration. No second relay is sent merely
+for this receipt publication. Authoritative owner reviews were [] again at the
+adopted-run return boundary. All new execution/source paths remain retained for
+the active run, collection and preselected companion; no current cleanup is due.
