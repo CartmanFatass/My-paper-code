@@ -1,5 +1,7 @@
 # CADC-B01 exact execution inputs
 
+Current state: both preselected arms accepted once, adjacent memory passed, and actual Monitor goal adoption confirmed by Root. [Launch](execution/LAUNCH_RECEIPT.json), [adoption](execution/MONITOR_ADOPTION.json); original DM awaits routed terminal facts for collection. No routine polling or repeated ADD remains.
+
 Source SHA: `22e009c9387f2507aab6ebab4555d92e27f5070e`, independent review and focused tests accepted in [TECHNICAL](CADC_B01_TECHNICAL.md). Source is published on `codex/cadc`; Root integrated unchanged code at main `1d68daff9`. Fixed card/master9302 and LEARNED/RR companion remain unchanged. Shared source and authoring paths are not execution outputs.
 
 Host: configured `hmasd-wsl-node`, interpreter `/home/wu/.venvs/hmasd/bin/python`, CPU FP32/one thread. Detached runtime checkout `/home/wu/hmasd-worktrees/cadc-b01-9302-20260912` at the exact source SHA. Frozen command input directory `/home/wu/hmasd-inputs/cadc-b01-9302-20260912`. [LEARNED.sh](execution/LEARNED.sh) and [RR.sh](execution/RR.sh) are separately staged Git-blob LF bytes and syntax-checked without executing scientific payloads.
