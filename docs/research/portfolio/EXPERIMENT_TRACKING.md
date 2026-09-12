@@ -16,9 +16,10 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | MGTAP M | Complete intake accepted at main3c5f5471f: COND−DENSE+0.0244781 J,SE0.00465816,26/32 positive, COND_ABOVE_MEI; one handle exit0/native361.85s, grant ended | Four scoped duplicate cleanup targets only; no fourth pair, consultation or active scientific work |
 | Portfolio post-CFR vacancies | Final response/intake accepted at maincf7bd424f: A=yes,M=yes,Q=no; execution mapping published | A/M dispatched independently; three remaining vacancies move to the next rolling Portfolio question |
 
-Direction chains0/5: MGTAP M, ACVC A, FSD D, FOLR P, RCLE R and prior objects completed and released
-their slots. The active N/S/R Portfolio generation can select at most two new chains; at least three
-vacancies will remain. Transport sessions and cleanup do not count as directions.
+Direction chains5/5: ACVC, MGTAP, FSD, RCLE and FOLR DMs have resumed their next bounded object or
+proper-node direction step. Their latest allocations completed, but no Portfolio decision stopped
+these ACTIVE directions. The N/S/R generation supplies concrete FSD/RCLE choices; new-direction
+drafting first refreshes all affected old-direction facts from the current DMs.
 
 ## Current routing
 

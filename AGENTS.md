@@ -278,6 +278,15 @@ and replaces work continuously. A prior `no successor` closes only the named all
 no synchronization barrier. Cross-direction choices remain Portfolio-tier decisions, while
 independent authorized work continues during their preparation and resolution.
 
+OWNER_DIRECT 2026-09-12: a finite object, grant, cleanup or `no automatic successor` ends only
+that named allocation. Root must not pause, stop, remove or mark the containing ACTIVE direction
+as released on that basis. The DM continues the direction with its next bounded object or authors
+the focused direction/capacity task. A direction stops advancing only after that DM sends the task
+and Portfolio returns the stopping, parking or replacement decision, unless the owner directly
+orders the disposition. Before drafting a capacity or new-direction question, the designated
+Portfolio DM refreshes every affected old direction from its current DM handoff, `DIRECTION.md`
+and latest intake; Root status shorthand and ended allocations are not lifecycle evidence.
+
 Root applies the `hmasd-loop-dispatch` skill's stable next-action trigger at goal-turn entry,
 native return, Transport receipt and before blocking waits. Check owner pause/stop instructions
 first. A workflow edit or status question does not resume paused research.

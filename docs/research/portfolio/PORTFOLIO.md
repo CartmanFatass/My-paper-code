@@ -8,10 +8,10 @@
 本表登记15 ACTIVE、7 PARKED，生命周期、priority、recasts与UAV字段不变。
 最新 [Portfolio决定](decisions/2026-09-12-two-remaining-chains.md) 已由原作者完整核对：**FSD D与FOLR P独立获选，MGTAP不追加。**
 
-Root当前实际工作集0/5：MGTAP M与ACVC A均已完整intake并释放槽位；FSD D、FOLR P、RCLE R及更早对象也已验收。cleanup与Portfolio生成不计槽位。
+Root当前实际工作集5/5：ACVC、MGTAP、FSD、RCLE、FOLR五个ACTIVE方向的原DM均已恢复，继续下一有界对象或方向判断。最近有限对象已完成，但没有Portfolio决定停止这些方向；cleanup与Transport不另占槽位。
 FSD为一对I1280/authentic-D0，D0≤900、I≤1800、native≤2700、support≤300、完整≤3000秒；FOLR仅一次原节点post-B03 Convergence及完整intake，零实验额度、完整成本未知。MGTAP1200未分配。
-补位Portfolio请求已由provider接受并正在生成，最终至多选择三项，至少仍会留下两个槽位。不把旧余额或未选候选当自动授权。
-Monitor当前无活动目标；FSD与FOLR均已完成。Transport正在观察post-CFR Portfolio generation。
+当前N/S/R Portfolio请求仍按固定绑定生成，用于FSD/RCLE的具体下一选择，不决定其他ACTIVE方向停止。新的方向发现/注册问题必须先由起草DM用各方向最新handoff、DIRECTION和intake更新旧方向事实。
+Monitor当前无活动实验目标；五条链处于DM准备、方向问题或已接受Portfolio generation阶段。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
 “待选择”是尚未分配的未来工作，不能冒充已运行，也不是永久禁入。
