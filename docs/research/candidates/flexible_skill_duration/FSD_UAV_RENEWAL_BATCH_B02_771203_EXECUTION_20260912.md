@@ -1,8 +1,10 @@
-# FSD B02 / 771203 â€” execution
+# FSD B02 / 771203 — execution
 
 State: both arms complete and technically accepted; scientific intake above_mei.
-Both Monitor goals completed. Four remote cleanup targets await retained-evidence
-acceptance; no successor allocation. Owner /root/dm_fsd_d_pair, shared authoring checkout
+Both Monitor goals completed. Root accepted retention at main42a483997; all four
+terminal remote targets are removed with disk/Git-registration absence verified.
+The allocation is complete; no successor allocation. Owner /root/dm_fsd_d_pair,
+shared authoring checkout
 C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd. Input sync16930177f includes
 Root-assigned bd5fd849a;14748d304 reconciles auto-merged legacy control-only
 differences back to that current Windows input, preserving old commits in history.
@@ -147,8 +149,15 @@ D0/I native475.03/1042.92s,sum1517.95s; aggregate CPU5999.42s. Supervisor
 elapsed path1798s includes the inter-arm collection gap. Native caps pass;
 partial support measurement does not certify complete300/3000s compliance.
 Both actual Monitor goals completed with terminal delivery and active_set empty.
-D0 and I raw archives retain all22 original files and match current remote bytes.
-The exact source worktree is clean except six known ignored result files; both
-terminal PIDs/tmux are absent. CLEANUP_INVENTORY.json identifies this worktree,
-input root and two supervisor roots for DM removal after Root retention
-acceptance. Shared authoring and old evidence are outside cleanup.
+D0 and I raw archives retain all22 original files and matched remote bytes
+before removal. The exact source worktree was clean except six known ignored
+result files; both terminal PIDs/tmux were absent. CLEANUP_INVENTORY.json identifies this worktree,
+input root and two supervisor roots. Root accepted both archives and all22 raw
+files at main42a483997. At 2026-09-12T19:15:28Z, the DM rechecked exact source,
+clean tracked state, the six known ignored outputs, both finished/exit0 supervisors,
+absent PIDs/tmux and all22 retained digests. The exact worktree was unregistered
+and removed; the input and two supervisor roots were removed. All four paths
+are absent on disk and from Git registration; other registered worktrees and
+shared remote/local authoring checkouts remain. CLEANUP_RECEIPT.json records
+these actual facts. No new invocation or local scratch was created.
+The finite allocation is closed; Root integrates this cleanup receipt.

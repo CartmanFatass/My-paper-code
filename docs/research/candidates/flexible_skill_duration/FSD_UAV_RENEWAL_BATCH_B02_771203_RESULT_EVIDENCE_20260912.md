@@ -101,16 +101,18 @@ supervisor/source/output bytes; it was not an execution or science defect.
 | Sum | 1517.95 | 5999.42 | — |
 
 Native arm and sum caps pass. The source helper took6.063s, within its sole45s
-transaction. Known support snapshot64.7597181s excludes explicitly unmeasured
-terms and future publication/cleanup; SUPPORT.json maintains subsequent known
-charges. Partial support telemetry is `resources_unmeasured`, not zero or full
+transaction. SUPPORT.json maintains known support charges through cleanup and
+publication, with explicitly unmeasured terms preserved. Partial support
+telemetry is `resources_unmeasured`, not zero or full
 300/3000s certification. No observed cap or Scope §5 breach; no new §4 machinery.
 
 D0_collection.tar.gz and I_collection.tar.gz preserve22 original raw files,
-matching current remote digests. The clean exact-SHA worktree has only six
-known ignored output files. Four exact terminal remote targets are inventoried
-in CLEANUP_INVENTORY.json; removal awaits Root's retention acceptance. Shared
-authoring and old evidence stay intact. The allocated pair ends at full
+accepted at main42a483997. The archived files and all remote digests matched
+before cleanup; the exact-SHA worktree was clean with only six known ignored
+outputs. All four targets in CLEANUP_INVENTORY.json were removed after Root
+retention acceptance; CLEANUP_RECEIPT.json verifies disk/Git-registration absence.
+Shared authoring, other worktree registrations and old evidence stay intact.
+The allocated pair ends at full
 intake/closeout: no retry, fifth pair, extra panel, consultation or successor.
 
 Supervisor timestamps put the D0-start→I-terminal elapsed path at1798s

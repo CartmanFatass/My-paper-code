@@ -85,6 +85,14 @@
       "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md",
       "state": "applied",
       "summary": "唯一新训练对完成：I−D0 +.0125548，略过.01门槛；19正13负，保留条件不确定性。完整原生1517.95秒，支持计时仍不完整。有限分配结束，清理待保全接收。"
+    },
+    {
+      "at": "2026-09-12T19:17:45+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "原始证据已在 main42a483997 接收并逐字节核验；四个终端远端路径已回收，磁盘与 Git 登记均不存在，共享工作树保留。结果与费用限制不变，有限分配完成，无后继实验。"
     }
   ]
 }
