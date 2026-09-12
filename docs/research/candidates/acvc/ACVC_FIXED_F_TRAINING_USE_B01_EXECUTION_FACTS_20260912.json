@@ -143,9 +143,25 @@
       {
         "label": "Preparation receipt and live Relay read",
         "seconds": 0.2317283
+      },
+      {
+        "label": "Exact command binding commit push",
+        "seconds": 4.5613388
+      },
+      {
+        "label": "C submission helper complete and Monitor live read",
+        "seconds": 0.7383943
+      },
+      {
+        "label": "F submission helper complete",
+        "seconds": 0.6218078
+      },
+      {
+        "label": "Read original launch receipts and existing E0 layout",
+        "seconds": 0.2181528
       }
     ],
-    "known_reported_seconds": 58.95794019997152,
+    "known_reported_seconds": 65.09763389997151,
     "complete_coverage": false,
     "limits": [
       "Initial interrupted SSH object query whole lifetime not measured;10.00301s returned segment is included, remaining tail unknown.",
@@ -172,7 +188,21 @@
       "output": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/exp/training_use_b01_20260912/arm_C",
       "admission": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/training_use_b01_C_admission.json",
       "timing": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/training_use_b01_C_task_time.txt",
-      "submission": "not_submitted"
+      "submission": "accepted_once",
+      "submitted_utc": "2026-09-12T17:22:19.690568+00:00",
+      "uncertain": false,
+      "command_publication_sha": "7d14db67a2c802892fee4216512680cef21654ad",
+      "submission_receipt": "temp/directions/acvc/preparation/training-use-b01-20260912/launch_C.json",
+      "monitor": {
+        "thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+        "dispatch": "accepted",
+        "adoption": "actual_running_handle_in_active_unbudgeted_goal",
+        "receipt_source": "Root native message in this assignment",
+        "reported_pid": 3376424,
+        "reported_exit": null,
+        "reported_tmux_active": true,
+        "collection": "DM pending terminal route; no routine polling"
+      }
     },
     {
       "arm": "F",
@@ -181,9 +211,32 @@
       "output": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/exp/training_use_b01_20260912/arm_F",
       "admission": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/training_use_b01_F_admission.json",
       "timing": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee/temp/directions/acvc/training_use_b01_F_task_time.txt",
-      "submission": "not_submitted"
+      "submission": "accepted_once",
+      "submitted_utc": "2026-09-12T17:22:41.553473+00:00",
+      "uncertain": false,
+      "command_publication_sha": "7d14db67a2c802892fee4216512680cef21654ad",
+      "submission_receipt": "temp/directions/acvc/preparation/training-use-b01-20260912/launch_F.json",
+      "monitor": {
+        "thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+        "dispatch": "accepted",
+        "adoption": "actual_running_handle_in_active_unbudgeted_goal",
+        "receipt_source": "Root native message in this assignment",
+        "reported_pid": 3376599,
+        "reported_exit": null,
+        "reported_tmux_active": true,
+        "collection": "DM pending terminal route; no routine polling"
+      }
     }
   ],
   "sequence": "C and F each submitted once independently; no intermediate efficacy selection",
-  "stop": "Complete pair intake or concrete dependent limitation; no retry, sixth C01 fit, extra panels or successor"
+  "stop": "Complete pair intake or concrete dependent limitation; no retry, sixth C01 fit, extra panels or successor",
+  "retention": {
+    "live_remote_checkout": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee",
+    "remote_bundle": "/home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle",
+    "local_preparation": "temp/directions/acvc/preparation/training-use-b01-20260912",
+    "local_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+    "cleanup_owner": "ACVC DM; Root confirms integration/retention before reclaiming unique scientific evidence or execution checkout",
+    "event": "Both terminal results collected, preserved and accepted; active shared checkout remains",
+    "C01": "Existing accepted inventory and unique checkpoints/evidence unchanged; do not rehash or delete for this pair"
+  }
 }
