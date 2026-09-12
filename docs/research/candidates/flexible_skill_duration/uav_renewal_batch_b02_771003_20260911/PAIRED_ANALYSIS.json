@@ -1,0 +1,191 @@
+{
+  "object_id": "FSD_UAV_RENEWAL_BATCH_B02_771003",
+  "training_seed": 771003,
+  "evaluation_seed": 781003,
+  "source_sha": "5250c43536d8520d4005eed3f613226ec4bc6e73",
+  "independent_training_pairs": 1,
+  "episode_panel_size": 32,
+  "mean_difference_J": 0.206285904082309,
+  "sample_sd_differences": 0.06959975951164188,
+  "conditional_se_differences": 0.01230361547990872,
+  "positive": 32,
+  "negative": 0,
+  "zero": 0,
+  "minimum": 0.07188282716047284,
+  "maximum": 0.3261207593992471,
+  "relative_difference_vs_D0": 0.7882226747380962,
+  "card_reading": "above_mei",
+  "arms": {
+    "D0": {
+      "mean_U": 21.809182300637307,
+      "mean_J": 0.2617101876076477,
+      "component_means": {
+        "coverage_reward": 0.4413774999999998,
+        "quality_reward": 0.11897960388380786,
+        "energy_penalty": 0.08294794355749495,
+        "total_reward": 0.2617101876076477
+      },
+      "training_mean_J": [
+        0.24853785960688798,
+        0.20418279084128974,
+        0.2252226325610327,
+        0.24064533899054863,
+        0.2494322608179417
+      ],
+      "training_gap_causes": 0,
+      "training_joint_rows": [
+        800,
+        800,
+        800,
+        800,
+        800
+      ],
+      "training_individual_segment_mean": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ],
+      "training_coordinator_calls": [
+        105,
+        105,
+        105,
+        105,
+        105
+      ],
+      "final_relative_displacement": {
+        "coordinator": 0.04470412879200881,
+        "discoverer_actor": 0.41209481620651106,
+        "discoverer_critic": 0.16063828919893297,
+        "team_discriminator": 0.026414674896479272,
+        "individual_discriminator": 0.054394295281804866
+      },
+      "endpoint_causes": {
+        "reset": 32,
+        "team_gap": 0,
+        "team_cap": 1568,
+        "gap": 0,
+        "cap": 0
+      },
+      "endpoint_segments": {
+        "agent": {
+          "count": 0,
+          "total_length": 0,
+          "min": null,
+          "max": null,
+          "mean": null
+        },
+        "team": {
+          "count": 0,
+          "total_length": 0,
+          "min": null,
+          "max": null,
+          "mean": null
+        }
+      }
+    },
+    "I": {
+      "mean_U": 38.99967430749639,
+      "mean_J": 0.46799609168995665,
+      "component_means": {
+        "coverage_reward": 0.5925612500000003,
+        "quality_reward": 0.1829233264932113,
+        "energy_penalty": 0.0016737812580067905,
+        "total_reward": 0.46799609168995654
+      },
+      "training_mean_J": [
+        0.24475276742390006,
+        0.19678483932471688,
+        0.23960805361441334,
+        0.2588700322783764,
+        0.30331822634692707
+      ],
+      "training_gap_causes": 44697,
+      "training_joint_rows": [
+        4957,
+        4838,
+        5605,
+        5568,
+        5524
+      ],
+      "training_individual_segment_mean": [
+        3.7287345607084594,
+        3.8025825873405688,
+        3.4205088006841016,
+        3.300556968988517,
+        3.282051282051282
+      ],
+      "training_coordinator_calls": [
+        60,
+        60,
+        75,
+        75,
+        75
+      ],
+      "final_relative_displacement": {
+        "coordinator": 0.04356839281466031,
+        "discoverer_actor": 0.42823809853963624,
+        "discoverer_critic": 0.1629312328535469,
+        "team_discriminator": 0.027099147701741575,
+        "individual_discriminator": 0.04219039221423455
+      },
+      "endpoint_causes": {
+        "reset": 32,
+        "team_gap": 0,
+        "team_cap": 1568,
+        "gap": 9,
+        "cap": 0
+      },
+      "endpoint_segments": {
+        "agent": {
+          "count": 0,
+          "total_length": 0,
+          "min": null,
+          "max": null,
+          "mean": null
+        },
+        "team": {
+          "count": 0,
+          "total_length": 0,
+          "min": null,
+          "max": null,
+          "mean": null
+        }
+      }
+    }
+  },
+  "component_differences": {
+    "coverage_reward": 0.15118375000000045,
+    "quality_reward": 0.06394372260940344,
+    "energy_penalty": -0.08127416229948815,
+    "total_reward": 0.20628590408230885
+  },
+  "weighted_component_contributions": {
+    "coverage": 0.10582862500000031,
+    "quality": 0.01918311678282103,
+    "altitude_penalty": 0.08127416229948815
+  },
+  "native_wall_seconds": 1607.92,
+  "native_arm_cost": {
+    "D0": {
+      "elapsed_seconds": 538.66,
+      "peak_rss_kib": 1667448.0,
+      "user_seconds": 2094.18,
+      "system_seconds": 25.69,
+      "exit_status": 0.0
+    },
+    "I": {
+      "elapsed_seconds": 1069.26,
+      "peak_rss_kib": 3444284.0,
+      "user_seconds": 4191.74,
+      "system_seconds": 50.03,
+      "exit_status": 0.0
+    }
+  },
+  "native_aggregate_cpu_seconds": 6361.639999999999,
+  "I_to_D0_wall_ratio": 1.985036943526529,
+  "study_elapsed_supervisor_start_to_final_exit_seconds": 3000.0,
+  "complete_cost_certified": false,
+  "limits": "Episode SD/SE is conditional on this one learned pair, not training-seed uncertainty. No pooling or causal batch/renewal attribution. All cost unknowns retained separately."
+}

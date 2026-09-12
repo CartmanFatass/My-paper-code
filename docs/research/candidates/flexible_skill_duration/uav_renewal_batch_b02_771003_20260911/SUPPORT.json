@@ -128,9 +128,70 @@
     {
       "purpose": "one required I handover relay API elapsed, forwarding cost separate",
       "wall_seconds": 0.189
+    },
+    {
+      "purpose": "publish accepted single I relay receipt and recoverable pending state",
+      "wall_seconds": 4.8932263
+    },
+    {
+      "purpose": "read current paired intake card and scientific tool route",
+      "wall_seconds": 0.2578521
+    },
+    {
+      "purpose": "read collected artifact contract and relevant scientific evidence locations",
+      "wall_seconds": 0.2684297
+    },
+    {
+      "purpose": "read class-correct scientific intake rules and retained literature assumptions",
+      "wall_seconds": 0.2221855
+    },
+    {
+      "purpose": "read prior accepted evidence format and I publication endpoint",
+      "wall_seconds": 0.2333185
+    },
+    {
+      "purpose": "collect complete I and dependent pair outputs without numerical re-execution",
+      "wall_seconds": 0.9345724,
+      "session_id": null
+    },
+    {
+      "purpose": "inspect full paired primary, I learner movement and resource receipts",
+      "wall_seconds": 0.2263876
+    },
+    {
+      "purpose": "Root-reported FSD-only integration/push enclosing commands, charged once",
+      "wall_seconds": 28.5
+    },
+    {
+      "purpose": "accept I and paired publication; compute ordered primary and independent-run summary",
+      "wall_seconds": 0.3965673
+    },
+    {
+      "purpose": "read bounded scientific interpretation and established intake/preservation format",
+      "wall_seconds": 0.2160305
+    },
+    {
+      "purpose": "read owner boundary and current Portfolio acceptance provenance",
+      "wall_seconds": 0.4725348
+    },
+    {
+      "purpose": "read exact cleanup ownership, Portfolio response identity and trace interface",
+      "wall_seconds": 0.3327163
+    },
+    {
+      "purpose": "preserve original byte archives and inventory the four terminal owned cleanup paths",
+      "wall_seconds": 1.3844699999999999
+    },
+    {
+      "purpose": "write complete E0 result from accepted analysis using bounded local command",
+      "wall_seconds": 0.2523231
+    },
+    {
+      "purpose": "write bounded scientific intake, decisions and six-heading Chinese brief",
+      "wall_seconds": 0.2459957
     }
   ],
-  "known_support_seconds": 50.698237999999996,
+  "known_support_seconds": 89.53484780000001,
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -149,7 +210,7 @@
     "returncode": 0,
     "count": 1
   },
-  "pending": "I terminal observation, actual I native cost and full-pair collection/intake; further publication/integration and cleanup. Shared observation attribution and unmeasured support remain unknown. This snapshot excludes its own publication command, retained for the next record.",
+  "pending": "Final preservation/publication/integration and cleanup, plus unmeasured I terminal observation and relay-service attribution; shared query remains unallocated. This snapshot excludes its own command, retained for final closeout.",
   "shared_observation": {
     "reported_by": "Root D0 terminal handoff",
     "wall_seconds": 1,
@@ -158,8 +219,27 @@
   },
   "native_wall_seconds": {
     "D0": 538.66,
-    "I": null
+    "I": 1069.26
   },
-  "native_wall_sum_observed_seconds": 538.66,
-  "support_plus_native_known_seconds": 589.3582379999999
+  "native_wall_sum_observed_seconds": 1607.92,
+  "support_plus_native_known_seconds": 1697.4548478000002,
+  "root_support_receipt": {
+    "reported_by": "Root at I terminal collection",
+    "integration_enclosing_wall_seconds": 28.5,
+    "adoption_0_8_seconds_already_charged": true,
+    "terminal_observation_command_wall_seconds": null,
+    "relay_service_delivery_wall_seconds": null,
+    "shared_prior_query": "1.0 second across FSD D0 and two FOLR handles remains unallocated"
+  },
+  "document_write_blocker": {
+    "action": "write intake/result/brief/records in one local shell invocation",
+    "outcome": "rejected before process creation",
+    "error": "Failed to create unified exec process: The filename or extension is too long. (os error 206)",
+    "external_effect": false,
+    "resolution": "split the same authorized local document writes into smaller invocations",
+    "measured_command_wall_seconds": null,
+    "scientific_effect": false
+  },
+  "resource_measurement_status": "resources_unmeasured for incomplete support attribution only",
+  "observed_cap_breach": false
 }
