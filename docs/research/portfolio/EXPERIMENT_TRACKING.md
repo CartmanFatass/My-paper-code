@@ -6,12 +6,12 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACVC | Cluster-law readiness packet integrated at main180e18763; 180,224 team steps, native/support unknown, no empirical grant | Portfolio decides investment from the fixed readiness input; no implementation, repeat consultation or third training-F pair |
-| MGTAP | Ordered TOP→DENSE handle `mgtap-top-b01-8221-20260912` running remotely at sourceaae3b8ce4 with confirmed Monitor adoption | Monitor terminal delivery then DM collection/intake/cleanup under1200complete; no retry/extra arm |
+| MGTAP | Ordered TOP→DENSE handle finished exit0 in377s at sourceaae3b8ce4; Monitor terminal delivered | Original DM collects/accepts the pair, publishes scientific intake/preservation and scoped cleanup under1200complete; no retry/extra arm |
 | FSD | Fifth pair and cleanup complete; original DM actively prepares a bounded distinct next-object/lifecycle decision input from all five pairs | Deliver 2–3 concrete choices to Portfolio; no automatic sixth pair/S/implementation/experiment |
 | RCLE | Original-node intake accepted at main8973c0515: HOLD only tested equal-unit/.99-prior/FLEX/final1000 spending; direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice from refreshed evidence; no repeated recipe, fit or consultation |
 | FOLR | Entity-history readiness integrated at main3bc742a85; fixed205120ticks/9938updates, new costs unknown | Bound Portfolio E decision is in accepted provider generation; no implementation before grant |
 | ACPS | SHARED/ACPS both finished exit0 (165s/196s) at source2302072e2; both terminal facts delivered | Original DM collects/accepts the complete pair, publishes scientific intake/preservation and scoped cleanup; no retry/extra arm |
-| CADC | CADC-B01 card/source and 9 focused checks integrated at main1d68daff9; no scientific invocation yet | DM publishes exact wrappers, stages/readbacks and performs fresh admission for one pair under2100complete, respecting actual contention order |
+| CADC | LEARNED and RR handles running remotely at source22e009c93 with confirmed Monitor adoption; fresh admission allowed parallel execution | Monitor terminal delivery then DM complete-pair collection/intake/cleanup under2100complete; no retry/extra arm |
 | Portfolio | Separate ACVC/FOLR/RCLE/FSD K/E/L/U request accepted once by provider; generation active | Transport observes natural completion; designated DM intakes four distinct investment/lifecycle decisions |
 
 Actual advancing directions7: MGTAP, ACPS and CADC have active accountable DM work; the accepted
@@ -29,7 +29,7 @@ each direction still counts its own implementation-through-cleanup and later Roo
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
 | Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; ACPS terminals delivered, active goal retains running MGTAP handle |
+| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; MGTAP terminal delivered, active goal retains both running CADC handles |
 | Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
 Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the
