@@ -1,10 +1,11 @@
 # FSD B02 / 771303 — execution
 
-State: N source/card/commands technically accepted; zero scientific submissions.
+State: D0 accepted once by the detached supervisor; I preselected and unlaunched.
+Monitor ADD delivery accepted; actual unfinished-goal adoption is pending.
 Seven pure binding checks and independent review passed; no material finding.
 DM /root/dm_fsd_d_pair, C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd.
 Input merge dd4c829d93acf12b0f487ee9ff0d31ff005535d8 brings main0c0648bd0
-and preserves all audit rows. Source SHA is filled by the published launch receipt.
+and preserves all audit rows. Published launch source8ea629595da592dfce9b7774341863a7115c7cef.
 
 The [card](FSD_UAV_RENEWAL_BATCH_B02_771303_SCIENCE_CARD_20260912.md) binds
 the unchanged native package, exact identity, exposure, primary, budgets and
@@ -59,3 +60,25 @@ INDEPENDENT_REVIEW.md records no material finding and0.7388016s reviewer command
 wall. DM accepts the exact identity-only change. Actual staging/admission/run
 observations remain future facts. Primary owner reviews returned[]; new-card
 item is asynchronous and does not hold launch.
+
+## Accepted source delivery and D0 launch
+
+Source/card/commands were committed and pushed at8ea629595da592dfce9b7774341863a7115c7cef.
+The sole source delivery completed in6.344s helper wall (6.5979921s enclosing
+command charged once); nine source/shell readbacks and both remote LF/syntax
+checks passed. Nonfatal Zsh gitstatus initialization diagnostics did not change
+the successful source receipt; no retry/configuration edit occurred. Published
+preflight and command bytes were separately read back before sole submission.
+
+D0 handle fsd-uav-renewal-batch-b02-771303-D0-20260912 was accepted at
+2026-09-12T21:00:18.658686+00:00, supervisor return0, with actual tmux session
+agent_fsd-uav-renewal-batch-b02-771303-D0-20260912. Source/worktree/output and
+owned receipt-directory binding agree. D0_LAUNCH_RECEIPT.json retains the exact
+command. Fresh adjacent admission is enclosed in that native command; its
+measured receipt and complete learning are future collection facts.
+
+Direct Monitor ADD delivery was accepted, requiring actual get_goal/create_goal
+and unfinished-goal adoption. D0_MONITOR_ADD.json distinguishes that delivery
+from the pending MONITOR_ADOPTED receipt. The DM retains same-handle handover,
+terminal collection/acceptance and preselected I. No duplicate launch or I
+invocation occurred. All four remote targets are retained for active execution.
