@@ -32,7 +32,7 @@
     "unknown_rates_no_calibration_required": true
   },
   "support": {
-    "known_invoked_seconds": 7.2642474,
+    "known_invoked_seconds": 46.80909970009022,
     "known_components": [
       {
         "stage": "grant read/fetch",
@@ -49,18 +49,109 @@
       {
         "stage": "input synchronization push",
         "seconds": 3.8983039
+      },
+      {
+        "stage": "initial card publication and diff check",
+        "seconds": 0.6511786
+      },
+      {
+        "stage": "initial source explicit stage",
+        "seconds": 0.1841789
+      },
+      {
+        "stage": "initial source commit",
+        "seconds": 0.496311
+      },
+      {
+        "stage": "initial source push",
+        "seconds": 4.4861023
+      },
+      {
+        "stage": "initial source revision read",
+        "seconds": 0.1621099
+      },
+      {
+        "stage": "initial route receipt read with harmless metadata-shape error",
+        "seconds": 0.2771586
+      },
+      {
+        "stage": "prior setup helper read",
+        "seconds": 0.1663452
+      },
+      {
+        "stage": "actual producer and prior full command read",
+        "seconds": 0.2853658
+      },
+      {
+        "stage": "review corrections diff/stage/commit",
+        "seconds": 0.6092188
+      },
+      {
+        "stage": "corrected source push/revision",
+        "seconds": 4.1448489
+      },
+      {
+        "stage": "independent initial and correction review, combined once",
+        "seconds": 1.1021165
+      },
+      {
+        "stage": "source setup phases through failed fixture, combined once",
+        "seconds": 25.637403300090227
+      },
+      {
+        "stage": "fixture parent repair and publication-only check, outer command once",
+        "seconds": 0.7818883
+      },
+      {
+        "stage": "current routing read",
+        "seconds": 0.1169454
+      },
+      {
+        "stage": "current facts/card read",
+        "seconds": 0.1663651
+      },
+      {
+        "stage": "command and ownership read",
+        "seconds": 0.0646443
+      },
+      {
+        "stage": "owner review and current audit read",
+        "seconds": 0.2126714
       }
     ],
-    "coverage": "Known returned command walls only; other read/edit/client/provider/deliberation tails are unmeasured. No complete cost claim or zero fill."
+    "coverage": "Nonoverlapping known command/phase walls only. Preparation parent overhead after fixture error, unreturned edit/read time, client/provider/deliberation tails and future integration/collection/cleanup are unmeasured or pending. Nested check/review walls are not counted again. No complete cost claim or zero fill."
   },
-  "source_sha": null,
-  "acceptance": "pending focused checks and independent high-risk review",
-  "remote_worktree": null,
+  "source_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+  "acceptance": "ACCEPTED for the single planned original invocation; no scientific output created during checks",
+  "remote_worktree": "/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f",
   "launch": null,
   "monitor_adoption": null,
-  "status": "card bound and implementation prepared; no scientific invocation accepted",
+  "status": "Source/checks/review accepted; exact command published prospectively; launch not submitted",
   "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-acvc-005.json",
   "audit_row": "docs/research/portfolio/audit/2026-09-12.md#L116",
   "stop": "one original invocation only; no retry/extra fit/panel/consultation",
-  "retention": "previous C01/B01/B02 evidence and shared checkout preserved; collect unique new checkpoint before scoped cleanup"
+  "retention": "previous C01/B01/B02 evidence and shared checkout preserved; collect unique new checkpoint before scoped cleanup",
+  "remote_bundle": "/home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f.bundle",
+  "engineering_evidence": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/ENGINEERING_CHECKS.json",
+  "source_bundle_bytes": 120288727,
+  "protected_source_currentness": "Shared UCOPE/native/model/Binding/reuse source matched accepted main665f704f7; changed source only the new cluster wrapper/protocol/tests. Working source surface unchanged at command publication.",
+  "owner_review": "Current main owner/reviews query shows no new ACVC override; historical answered second-recast remains applied.",
+  "planned_launch": {
+    "handle": "acvc-cluster-b01-e06b3d63f",
+    "execution_node": "hmasd-wsl-node",
+    "command": "cd /home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 BLIS_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/cluster_deployment_b01_task_time.txt timeout --signal=TERM --kill-after=1 595 bash experiments/candidates/acvc/cluster_deployment_b01/launch.sh e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+    "output": "temp/directions/acvc/exp/cluster_deployment_b01_20260912",
+    "supervisor": "/home/wu/.agent-tasks/acvc-cluster-b01-e06b3d63f",
+    "adjacent_admission": "temp/directions/acvc/cluster_deployment_b01_admission.json",
+    "whole_command_time": "temp/directions/acvc/cluster_deployment_b01_task_time.txt",
+    "deadline": {
+      "inner_s": 580,
+      "outer_TERM_s": 595,
+      "KILL_after_TERM_s": 1,
+      "native_cap_s": 600
+    },
+    "acceptance": "one unique submission; uncertain effect is reconciled on this handle without duplicate launch"
+  },
+  "monitor_dispatch": null,
+  "updated_utc": "2026-09-12T23:32:46.434846+00:00"
 }
