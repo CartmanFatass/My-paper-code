@@ -106,6 +106,18 @@ def test_adapter_bits_tensor_ownership_and_episode_reset(arm, reference):
     emitted, work = adapter_rows(direct.public_rows, arm)
     assert emitted == tuple(row.packed for row in expected)
     assert work == expected_adapter.total_work
+    changed = tokens[:8] + (
+        PrimitiveToken(EventKind.OWNER, subject_receiver=0, owner_old=16, owner_new=18,
+                       opportunity_index=0, event_order_position=0),
+        PrimitiveToken(EventKind.SEMANTIC, subject_receiver=1, epoch_old=21, epoch_new=22,
+                       opportunity_index=0, event_order_position=1, old_need=True),
+        tokens[12], tokens[18],
+    )
+    updated_reference = reference()
+    updated_expected = tuple(updated_reference.process(token).packed for token in changed)
+    updated_actual, updated_work = adapter_rows(tuple(pack_public(t) for t in changed), arm)
+    assert updated_actual == updated_expected
+    assert updated_work == updated_reference.total_work
     # Projection receives only public rows: there is no evaluator attribute to read.
     public_only = SimpleNamespace(public_rows=direct.public_rows)
     actual, panel_work = project_panel((public_only,) * 8, arm)
