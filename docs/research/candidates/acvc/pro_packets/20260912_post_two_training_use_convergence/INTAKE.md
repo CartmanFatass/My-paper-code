@@ -1,0 +1,77 @@
+# ACVC post-two-training-use Convergence — complete scientific intake
+
+**Accept the conforming original-node decision: continue ACVC with one cluster-law deployment-use B/EXPLORE object, using a freshly C-trained DENSE policy and its final C/F/own-dwell panels.** This selects the next scientific object; the complete implementation/experiment remains a precise future investment need. ACVC stays ACTIVE/MEDIUM, recasts: 2 and lowest-contention treatment. The two prior DOWN pairs and consumed positive C01 are preserved.
+
+## Complete response, source and receipt checks
+
+Read all **149 lines / 31,907 immutable Git bytes** of [RESPONSE.md](archive/RESPONSE.md) at source delivery commit `15c56cc40c56d2edb6e8c9a1a217a994f30cb3fc`. SHA-256 is **`78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb`**. The preserved Transport `GITHUB_RESPONSE.md` matches those bytes exactly. The commit adds only the scoped response and descends from published handoff `c4e8200f210df3765ff1174e969b1bb0f51c68fd`; the shared direction checkout fast-forwarded cleanly. Root integrated that source through main `fa3ad35a87ca820a693a16dee00bc7b8b1df3e82`.
+
+The fixed TASK is `86c4daafe55507ddac9c0b04833c90307f32af30`; question/FACTS/snapshot input is `5d756f3b16ba724115bcd03233f2f5f4cd6d7533`. All fifteen effective reference path/SHA pairs, plus the fixed TASK reference, match the response's citation map. Scientific sources remain at `8f05e0d01ff829c8704f4ee08e29e451259ad237`, methods at `f938006f1733365ce82b522a7be98d22f298554c`. Pro reports direct access to all fifteen prescribed paths and correctly attributes the unlisted runner factory and library observations to the DM. The DM verifies citation/substantive correspondence, without claiming independent visibility into every provider retrieval.
+
+The actual Transport binding preserves `em:acvc:convergence`, conversation `6aa12e74-8e54-83e8-95f6-001681b456f7`, user node `cbd324f2-37a1-4975-a026-1880cee17529`, assistant node `4edf6a43-14e6-414c-91aa-5075005364ba`, ARCHIVED, one confirmed Send, natural completion and one accepted parent receipt. The [fresh Issue delivery snapshot](archive/ISSUE_DELIVERY_SNAPSHOT.json) finds exactly one [matching comment](https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5648661785) pointing to the same commit/path. [Transport binding](archive/TRANSPORT_BINDING_SNAPSHOT.json), [transport facts](archive/TRANSPORT_FACTS_SNAPSHOT.json) and [short chat receipt](archive/CHAT_RECEIPT.md) are separate from the full response. The short receipt retains its received literal formatting, 388 bytes and SHA-256 `4a32206bba1c466f5ac9cd1c0ba575cfbbb3014d1150e08c81c48e7d0c54fac2`.
+
+The initial Root transcription gave 31,932 bytes / `b179fae665eab1977543f0514a2a192b74d1786cc560386294143a151e01bc0e`. It matched neither immutable Git nor the actual archive/registry; CRLF conversion alone did not explain it. DM checked the actual sources and Root/Transport subsequently confirmed the authoritative 31,907-byte identity. Preserve the former values only as the **nonauthoritative external transcription variant**, together with the correction in [ROOT_TRANSPORT_RECEIPT.json](archive/ROOT_TRANSPORT_RECEIPT.json). No response-content conflict, second Send, replacement question or scientific exception follows. Windows working copies are 32,056 CRLF bytes; those are not the immutable-response digest.
+
+Transport timestamp fields are not a reliable complete-duration record: one snapshot places completed/captured time after its archived time, while the transport-fact snapshot gives equal sent/completed/captured times despite a reported nonzero generation duration. Preserve these values rather than reconstructing provider timing. The direct binding, complete bytes and matching delivery remain trustworthy; full documentary/provider cost stays unknown.
+
+## Rule applied verbatim and decision
+
+The full response states:
+
+> Continue ACVC by selecting the proposed cluster-law deployment-use B/EXPLORE object: one freshly C-trained DENSE policy, followed by C, fixed F and own-predicate dwell on its single final checkpoint, with 64 paired initial worlds per panel.
+
+It separately states:
+
+> This is an actual direction-tier next-object selection, not an empirical investment or launch authorization.
+
+Apply that actual direction decision now. The alternative in the question was one specifically better justified distinct bounded object compatible with owner-directed continuation; the node selects the concrete cluster candidate and does not introduce another object or recast. Historical no-successor language ends its original allocations, not this ACTIVE direction. The current owner continuation clarification added to AGENTS after the TASK's method snapshot is consistent with this response; relevant empirical, engineering and foundational requirements otherwise have no difference through main `fa3ad35a8`.
+
+## Scientific/specification conformance
+
+| Checked contract | Acceptance |
+|---|---|
+| Current authority and continuity | Actual original-node choice continues ACVC. No local lifecycle/investment disposition or new approval requirement; no third unchanged training-F pair. |
+| Evidence and class | C01 remains consumed and model-qualified. B01/B02 stay two separate DOWN observations; no pooling, stable harm, positive-only selection or erased deployment benefit. The new object is one-fit B, not C confirmation. |
+| Distinct use and native path | Fresh C training and all final panels use existing cluster, with unchanged five/fifty/H256 and legal native reward/action/information. This is within-law learning/deployment exploration, not zero-shot transfer or an online shift. |
+| Competent controls | One final checkpoint supplies C/F/own-dwell. C prevents claiming useful correction when both corrected policies lose to ordinary execution; dwell retains the strongest supplied simpler alternative. No additional training arm is implied. |
+| Private information and recurrence | Fixed F and own-dwell keep their own episode state, proposals, anchor history and actual-command feedback; no borrowed mask/timing/dose, cluster labels or critic information reaches the actor. Previous realized displacement is retraced. |
+| Primary and uncertainty | Separate signed F-C and F-dwell means, J=S/256, all absolute scores/differences and adverse extremes; SD and SE are descriptive conditional on one fitted endpoint. Three panels and many worlds are not independent training fits. |
+| B reading | Each mean strictly >+.01 is UP, inclusive [−.01,+.01] is WITHIN with its sign and no equivalence, strictly <−.01 is DOWN. No C01 t/Bonferroni or joint certification is imported. Partial integrity failure limits its dependent contrast under §11.8.7. |
+| Proportional implementation | One direction-local cluster factory, supplied at construction to train and every panel, preserves shared uniform defaults and fixed dimensions. Reuse unchanged learner/F/dwell checks; later focused construction/reset/pairing/feedback/publication checks and independent review follow the actual changed risk. No causal census or extra consultation is a gate. |
+| Complete work and funding | One real fit and three 64-world panels; no initial panel, checkpoint search, fourth panel, replacement fit or nested search. Full future native and support costs remain unknown and unallocated. |
+
+No concrete scientific/specification conflict was found. Adding descriptive sample SD alongside the already proposed conditional SE uses the same final differences and adds no panel, training sample or stronger inference. The selected panel order C/F/dwell, construction-time law binding and retention of partial trustworthy facts are conforming refinements of the asked B. The full response neither accepts unseen wiring nor demands an unrequested stronger class, so no correction consultation is needed.
+
+Scientific-reading mode reuses the current question's actual source inspection, FOUNDATIONS §§2–4 and6, and the empirical topic's task, replication and package-attribution passages. Concrete assumption: a fixed private-history rule can change actions without parameter learning, and separate private deployment trajectories of one fitted endpoint support a conditional package comparison. Neither a GRU nor shared parameters guarantees sufficient information, coordination or learning quality. The cluster law is directly available, but increased list saturation, trigger incidence or improved return is a hypothesis. A locally lost anchor can be a useful team handoff rather than known global failure. These limits support a direct B return comparison instead of a full reconstruction.
+
+## Bounded evidence and next discriminator
+
+Strongest support is C01's accepted F-C +0.095915968685 J and F-dwell +0.065133768997 J, both frozen lower bounds >.01 under the declared iid-normal complete-fit-panel model. Strongest contrary evidence remains 46/320 adverse F-dwell worlds, useful dwell-C +0.030782199688 J, unequal histories/doses and the two later common-F training-use losses (−0.026096212471464608 and −0.05734219575429114 J). Those facts favor using a freshly C-trained reference while leaving fixed correction's clustered use untested. No historical result was recalculated.
+
+Concentration could change what the private predicate sees or whether preserving a local association benefits the team. Five generator centers do not assign five UAV roles, and a full local list suppresses current loss eligibility without necessarily invalidating the next anchor. Ordinary C or dwell may be sufficient on the new law. A future good or adverse result remains local to its fitted endpoint; no pure retrace, history necessity, tuned headroom, universal benefit, stable transfer or formal UAV validation follows.
+
+The selected next observation is the complete fresh cluster C-fit with three final private 64-world panels. Both UP means would support considering repeatability of useful F deployment on that law, not certify a joint population claim. F-C UP with F-dwell WITHIN/DOWN preserves only the demonstrated C-relative gain; a loss to C favors C for this observed use even if F remains valuable under uniform. Every pattern retains the existing direction's evidence and leads to a later proper bounded decision, not an automatic experiment or direction stop.
+
+## Exact future investment need
+
+The node selects **one complete chain**, not three fitted arms:
+
+- One fresh unscreened C-trained DENSE fit: five UAVs/fifty users, existing cluster generator, H256, CPU FP32/thread1, private GRU64/training-only critic, 512 complete train episodes, 256 rollouts and 1,024 Adam calls.
+- One final checkpoint, C/F/own-dwell in three separate 64-world panels with prospectively paired initial worlds and private streams; no initial policy evaluation, extra fit or extra panel.
+- Supplied intrinsic work: 180,224 native team steps (131,072 train +49,152 eval), 655,360 training actor rows, 2,621,440 replay actor rows, 245,760 evaluation actor rows, 163,840 combined F/dwell predicate opportunities. These remain copied previously computed counts; opportunities are not predicted triggers.
+- Minimal factory/wiring/configuration publication; applicable focused checks and independent changed-risk review; exact remote source and fresh admission; detached launch/actual Monitor adoption; complete collection/reduction/technical acceptance/scientific intake; integration, preservation and scoped cleanup. All required initialization, learning, checkpoint, final evaluation, publication and exit belong to its complete native chain; additional support is counted once.
+
+No numerical envelope is supplied. The answer correctly clarifies the author's historical C01 shorthand: the accepted itemized charges are **170/171/178/169/167 s**, totaling **855 s**, with **841.92 s** raw command wall. Thus the full itemized range is 167–178, not 170–178. This corrects the new author summary only; the frozen response/TASK and historical C01 ledger are not rewritten, and none of these times forecasts the cluster chain. Old 270/540/300/660/840/1200 offers and unused balances remain ended. Current question/provider/intake cost and future cluster native/support costs are unknown.
+
+Direction-local advice is to fund this exact complete one-fit use test and its necessary support for its new decision value, with investment and sequencing left to Portfolio under the existing owner instruction. No future code, card, RNG identity, model, test or run is started by this intake. Root receives a decision-ready investment need and advances its appropriate route; an unallocated experiment does not become a stopped direction or a cross-direction waiting condition.
+
+## Decisions this intake produces
+
+1. **Direction — PRO_FINAL / OWNER_DELEGATED.** Options: (a) the proposed cluster-law deployment-use B; (b) one better justified distinct bounded object under continued ACVC. The original node recommends/selects(a). Apply the next-object record in DIRECTION and owner/audit surfaces. No new recast or lifecycle/priority change occurs.
+2. **Object technical intake.** Options: (a) accept the complete conforming formed answer; (b) return a concrete conflict to the same node. Recommend/select(a). **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** The reconciled external transcription and historical timing shorthand are documentary corrections, not scientific conflicts or reasons for another Send.
+3. **Portfolio investment — next required authority.** Options for that node are the exact full-path investment or an explicit funding/sequencing alternative consistent with continued ACTIVE work. Direction-local recommendation favors the one-fit complete comparison; no local cap/allocation or existing-request amendment is made. Root routes the need to its designated Portfolio author.
+4. **Preservation and owner state.** Keep all prior unique checkpoints/archives, accepted evidence, this response and the shared checkout. No cleanup is performed. Owner reviews returned `[]`; owner prediction **not taken**, and no consultation forecast was recorded prospectively. No post-answer prediction or empirical-result brief is invented. A P2 direction-decision item records the actual documentary application without waiting for ratification.
+
+The audit input is the published main ledger at `fa3ad35a87ca820a693a16dee00bc7b8b1df3e82`, synchronized separately in `e94d40bb55b669402c0a5a3a145c07b14942aa6c`; exclude that input-only commit from Root cherry-picks. This intake appends only its new direction selection and technical acceptance. Publish the artifacts, send one Relay handoff for Root integration and the next investment route, and retain original-DM ownership of the selected ACVC continuation.
+
+Applied owner item: [20260912-acvc-004](../../../../portfolio/owner/inbox/2026-09-12/20260912-acvc-004.json), P2, option(a), documentary direction application only. Audit rows: `docs/research/portfolio/audit/2026-09-12.md#L73` and `#L74`. Latest primary-control owner reviews returned `[]`; relevant ACVC ledger owner columns contain no unapplied override. The archived 1,922-byte Send prompt exactly matches the bound HANDOFF prompt (SHA-256 `75ba6621d0073019e06f59abc2f6094f567396261cf19c3be677107ab8793370`).
