@@ -1,0 +1,31 @@
+{
+  "object": "FSD_UAV_RENEWAL_BATCH_B02_771203",
+  "caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "native_sum": 2700,
+    "support": 300,
+    "complete": 3000,
+    "one_source_delivery": 45
+  },
+  "charges": [
+    {
+      "purpose": "known DM preparation/read/reconciliation/check commands; separate command walls, no nested SSH/reviewer double count",
+      "wall_seconds": 21.676732899999998
+    },
+    {
+      "purpose": "independent reviewer8 read-only commands",
+      "wall_seconds": 2.6005197
+    }
+  ],
+  "known_support_wall_seconds": 24.277252599999997,
+  "counting": "Each known enclosing invoked command once. Initial batched output had one unavailable command wall; apply_patch, current owner-card preparation and later operations are recorded where measured or explicit unknown. Agent/provider/calendar time separate.",
+  "unknown": [
+    "one initial batched read command wall unavailable in truncated output",
+    "apply_patch execution interval where tool reports rounded zero",
+    "current owner-card preparation/publication until measured",
+    "future Monitor/relay/client and Root integration terms"
+  ],
+  "source_delivery_transactions": 0,
+  "scientific_submissions": 0
+}

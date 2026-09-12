@@ -1,0 +1,80 @@
+{
+  "id": "20260912-fsd-001",
+  "created": "2026-09-12T11:26:11-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FSD 新拨款第四组原样 I1280/D0 学习对",
+  "context": "一组新训练历史观察 I1280 是否超过真实 D0；时间抽象/终止结构。唯一两臂，保留全部正负结果。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "launch as carded"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "do not launch"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "revise before launch"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "Portfolio D已接受，新身份和原包定义已绑定。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_SCIENCE_CARD_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L41",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "记录新拨款的第四组 771203 原样 I1280/D0 学习对；卡片绑定已按现行委托执行，异步审阅不阻塞。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_SCIENCE_CARD_20260912.md",
+        "from": "上一组已结束，新 Portfolio D 待绑定",
+        "to": "训练771203、终评781203；唯一原样学习对，完成后结束"
+      }
+    ],
+    "if_refused": "在下一个干净边界应用修改并保留已发生的证据和费用，不重写历史或自选替代实验。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/EXECUTION_MAPPING.md",
+        "quote": "one fresh unchanged I1280/authentic-D0 B pair",
+        "why": "完整新拨款已覆盖两臂、接收和清理。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_SCIENCE_CARD_20260912.md",
+        "quote": "package gains +.0569774672 and +.2062859041.",
+        "why": "此前两次本地增益使新训练历史对可选方案建议有价值。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_SCIENCE_CARD_20260912.md",
+        "quote": "latest unchanged-package −.0124304306 (16 positive/16 adverse contrasts)",
+        "why": "最新结果不利，I 接近两倍耗时；不保证稳定优势。"
+      }
+    ],
+    "uncertainty": [
+      "一对训练是独立单位，32局误差只条件于已学得策略。",
+      "仍无调优同信息余量；不同训练历史和实际工作量未知。",
+      "不能单独归因于批大小或在线续期。"
+    ],
+    "cost": {
+      "compute": "D0≤900秒，I≤1800，原生合计≤2700；支持≤300含唯一45秒投递；完整≤3000。",
+      "owner_time": "可异步审阅，无需逐步批准。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommend/select(a), with the stated boundary.",
+    "source": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_SCIENCE_CARD_20260912.md"
+  },
+  "starred": false
+}
