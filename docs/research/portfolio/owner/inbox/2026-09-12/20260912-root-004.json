@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "keep",
-  "auto_applied": null,
+  "auto_applied": "keep",
   "dm_reason": "完整答复决定了请求的问题且符合现行规范；强反方F+M/H及实际成本未知均保留。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md"
@@ -100,7 +100,7 @@
       "source": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md",
       "record": "docs/research/portfolio/decisions/2026-09-12-post-sa-marginal-investments.md",
       "state": "planned",
-      "summary": "完整响应已接受，C/R/F各自就绪；Root集成/实际派发尚未记录，不声称已运行。新future额度及累计旧成本未知保持，M无款。"
+      "summary": "完整响应已接受并由Root集成；C/R/F三个原DM已独立开始完整任务。新future额度及累计旧成本未知保持，M无款。"
     }
   ]
 }

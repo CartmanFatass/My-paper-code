@@ -5,16 +5,15 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC A | Final intake accepted/maince92d9791: PRO_FINAL selects one future train-through-F vs train-C pair, both deployF; current reference retained; zero implementation/fit exposure and A+B unallocated | Future Portfolio investment for faithful implementation, checks, two fresh fits and full support; A complete |
-| CBSC S | Single preparation accepted/main3e4292ea4: concrete owned17-byte public-row/FP32 projection candidate with explicit EpisodeTape boundary; runtime independence/crash repair unproved; zero runtime/test/model/scientific exposure | Future Portfolio investment discriminator; S complete and S+B remains unallocated |
+| ACVC F | Portfolio F=yes/main2667cfc79; original DM actively owns faithful implementation, review, one fresh two-fit pair and intake;270/arm,540native,660support,1200total | Bind accepted source/identity/commands, launch remote-first with Monitor adoption, collect/intake once |
+| CBSC C | Portfolio C=yes/main2667cfc79; original S DM actively owns implementation, review, one fresh RAW/STRUCT pair and intake;600/arm,1200native,600support,1800total | Bind accepted source/identity/commands, launch remote-first with Monitor adoption, collect/intake once |
 | FOLR B03 | Final paired intake accepted/main47d75d7f9: RETAIN0.947578125, LEARNED_EVENT−0.267968750, d_LR−1.215546875 ⇒ RETAIN_ABOVE_MEI; native1750.81s within cap; finite grant ended. Remote roots removed; three archived local duplicates retained after PowerShell policy rejection | No successor or active scientific work; local retention is an engineering restriction, not a scientific blocker |
 | VNFC conditional fresh pair | Final incomplete intake accepted/main7125f368b:35 rounds per arm/13,440 transitions/2,240 updates, SIGSEGV/exit139 after104.89s, no primary; allocation ended | Two named detached-checkout cleanups only; no retry, diagnosis or active scientific work |
-| RCLE original Convergence request | Final intake accepted/main2f80926ae: retain exact equal-unit candidate for a later separately funded single fit; no current implementation/numerical allowance | Future Portfolio investment only; consultation complete and no active RCLE work |
-| Portfolio post-S/A investment | Complete62,954-byte response archived/main06ce2a1e0 after one Send; original author actively performing scientific/spec conformance and execution mapping | Dispatch each conforming funded direction independently after exact intake; unselected options remain unfunded |
+| RCLE R | Portfolio R=yes/main2667cfc79; original replacement DM actively owns exact equal-unit implementation, review, one final1000 fit and intake;900native incl nearest,600support,1500total | Bind accepted source/identity/commands, launch remote-first with Monitor adoption, collect/intake once |
+| Portfolio post-S/A investment | Final intake accepted/main2667cfc79: C/R/F funded independently, M=no; total4500 nonfungible future ceilings | ROOT_INTEGRATED; three DMs active, no common wait or automatic retry |
 
-Direction chains0/5: ACVC A and CBSC S are complete and do not count. The Portfolio author is
-actively preparing the next marginal investment question from both concrete unfunded needs, but
-cross-direction preparation is not a direction slot.
+Direction chains3/5: ACVC F, CBSC C and RCLE R are independently active. Two vacancies remain
+without automatic grants; M and all other unselected work stay unfunded.
 
 ## Current routing
 
