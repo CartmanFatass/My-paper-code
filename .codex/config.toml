@@ -1,9 +1,8 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
-# Project defaults for the existing Root execution coordinator; effective after restart.
-model = "gpt-5.6-sol"
-model_reasoning_effort = "low"
-# Individual named agent configurations override these defaults.
+# New chats use the model and reasoning effort selected in the Codex app.
+# Root role preference remains Sol/low; select it per task.
+# Individual named agent configurations retain their own defaults.
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
@@ -46,6 +45,6 @@ description = "Optional Sol/medium implementation task owned and accepted by DM 
 config_file = "./agents/hmasd-implementer.toml"
 
 [mcp_servers.agentify-desktop]
-command = "/mnt/c/Program Files/nodejs/node.exe"
+command = "node"
 args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
 tool_timeout_sec = 2700
