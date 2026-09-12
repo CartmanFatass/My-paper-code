@@ -2,6 +2,7 @@
 import importlib.util
 import json
 import math
+import os
 from pathlib import Path
 import sys
 import time
@@ -69,6 +70,29 @@ def test_cli_binds_exact_single_fit_three_panels_and_new_caps(monkeypatch):
     assert error.value.code == 2 and len(calls) == 1
 
 
+def test_cli_sets_thread_environment_before_protocol_import(monkeypatch):
+    names = ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS",
+             "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "BLIS_NUM_THREADS")
+    for name in names:
+        monkeypatch.setenv(name, "7")
+    monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "0")
+    observed = []
+    fake = types.ModuleType(p.__name__)
+
+    def protocol_attribute(name):
+        assert all(os.environ[k] == "1" for k in names)
+        assert os.environ["CUDA_VISIBLE_DEVICES"] == ""
+        observed.append(name)
+        return getattr(p, name)
+
+    fake.__getattr__ = protocol_attribute
+    monkeypatch.setitem(sys.modules, p.__name__, fake)
+    script = Path(__file__).resolve().parents[5] / "scripts/run_acvc_cluster_deployment_b01.py"
+    spec = importlib.util.spec_from_file_location("cluster_import_order", script)
+    spec.loader.exec_module(importlib.util.module_from_spec(spec))
+    assert "make_cluster" in observed
+
+
 def rows():
     result = []
     for arm in p.ARMS:
@@ -76,13 +100,14 @@ def rows():
             baseline = episode / 64
             delta = 0 if arm == "C" else .007 if arm == "dwell" else .02 + (.04 if episode % 2 else -.04)
             score = baseline + delta
-            result.append(dict(phase="eval", arm=arm, episode=episode, master=p.MASTER,
+            result.append(dict(phase="eval", arm=arm, rule=arm, episode=episode, base=p.MASTER,
                                evaluation_namespace=p.EVALUATION_NAMESPACE, steps=256,
                                reset_seed=3145702000 + episode, J=score, S=score * 256))
     return result
 
 
 def test_full_primary_keeps_dispersion_adverse_worlds_and_absolute_scores():
+    assert all("master" not in r and r["base"] == p.MASTER for r in rows())
     result = p.final_panel(rows())
     assert result["complete"] and result["primaries"] == ["F-C", "F-dwell"]
     fc = result["contrasts"]["F-C"]

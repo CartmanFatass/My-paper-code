@@ -4,6 +4,15 @@ import time
 
 PROCESS_START = time.monotonic()
 
+import os
+
+for _name in (
+    "OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS",
+    "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "BLIS_NUM_THREADS",
+):
+    os.environ[_name] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
 import argparse
 from pathlib import Path
 import sys
