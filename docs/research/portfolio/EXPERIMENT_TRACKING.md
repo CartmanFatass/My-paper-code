@@ -62,6 +62,11 @@ technical intake; no stagingretry or launch is permitted under the exhausted gra
 ACVC unit4 terminal05:10:23Zexit0/whole166.65s was routed immediately; DM confirms
 complete component with fullsummary162.05238466197625s and charge169s/completed688s,
 and is publishing before fixedfinalunit5. Monitor closed its empty active set.
+Four-unit complete evidence/intake and the fourth-unit launch history are integrated
+through `19cc47bb5` (direction0c797c30e including preceding62cb66d2e facts). Final
+unit5 `acvc-fresh-dense-c01-14295-3fd9062d5` accepted05:13:28.312209Z; actual
+Monitor adoption05:13:40Z confirms running and the exact active handle, forwarded
+to original DM. Five-unit primary remains pending; no additional fit is selected.
 
 Actual advancing research count: 1; vacancies: 4. FOLR technical closeout remains
 owned separately. Published intentions, completed returns,
