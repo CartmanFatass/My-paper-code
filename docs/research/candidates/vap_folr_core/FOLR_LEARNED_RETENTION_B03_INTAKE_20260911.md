@@ -282,3 +282,13 @@ control current execution; the prior archive describes the historical stop.
 The combined PowerShell document-writing call was rejected before execution
 with `CreateProcess ... blocked by policy`; focused file patches replace it.
 No effect, budget use or scientific polarity is inferred from that rejection.
+
+The one authorized source-staging operation at13:27:41 UTC completed with exit0
+in0.6539146 seconds. All11 files/85364 bytes are present at89035d8f1 and the
+scoped Git diff passes. The configured interactive zsh emitted gitstatus-option
+warnings; required Git/Python commands nevertheless completed. The warnings are
+preserved without changing shell configuration. This is a source-preparation
+fact, not an experiment or controlled speedup comparison: cache/network state
+and other environmental changes prevent a unique cause attribution to the old
+274.81-second wait. No old failure was replayed. Scientific submissions remain0
+at source acceptance; the new live Monitor route is pending Root's READY receipt.
