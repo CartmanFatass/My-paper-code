@@ -4,8 +4,8 @@ This is the approved second-batch routing, not a requirement to install every li
 
 | Need | First implementation source | Integration boundary |
 | --- | --- | --- |
-| New PyTorch MARL benchmark | C:/Projects/ref-lib/reports/BenchMARL/CORE_EVIDENCE.md and ROOT_RETURN.md; official BenchMARL/TorchRL | Select compatible algorithm/task API in a separate environment. Fixed BenchMARL1.5.2 study uses TorchRL0.11; do not assume the project's older TorchRL snapshot is compatible. |
-| Cooperative baseline/PPO details | C:/Projects/ref-lib/reports/epymarl/ and on-policy/ plus their fixed source links | Trace observation, centralized critic, masks, recurrent state, terminal/truncation, optimizer and actual update counts. Reuse accepted code, not a library name as competence proof. |
+| New PyTorch MARL benchmark | /mnt/c/Projects/ref-lib/reports/BenchMARL/CORE_EVIDENCE.md and ROOT_RETURN.md; official BenchMARL/TorchRL | Select compatible algorithm/task API in a separate environment. Fixed BenchMARL1.5.2 study uses TorchRL0.11; do not assume the project's older TorchRL snapshot is compatible. |
+| Cooperative baseline/PPO details | /mnt/c/Projects/ref-lib/reports/epymarl/ and on-policy/ plus their fixed source links | Trace observation, centralized critic, masks, recurrent state, terminal/truncation, optimizer and actual update counts. Reuse accepted code, not a library name as competence proof. |
 | Graph connectivity/path calculation | Existing NetworkX3.2.1; source skill networkx when useful | Use a suitable algorithm, avoid all-path/all-subset enumeration by default. Graph metric is not task return. |
 | GNN batching/message passing | Local torch-geometric skill and official version-matched PyG docs | Install only for an actual GNN task; confirm Torch/CUDA/wheel compatibility. Do not substitute newer skill examples into pinned2.6.1 silently. |
 | PettingZoo adapter | https://pettingzoo.farama.org/content/environment_tests/ | Use api_test or parallel_api_test for the actual interface, within its focused test scope. Interface tests do not prove reward or information correctness. No forced rewrite of VNFC's native API. |

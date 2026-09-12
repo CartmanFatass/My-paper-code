@@ -22,31 +22,22 @@ work follows the second system's conventions even when the edit lands in the fir
 
 ## Environment
 
-Daily control-plane checks use `/home/fires/.venvs/hmasd-control/bin/python` on native
-WSL/Linux. This environment intentionally contains only the control-plane dependencies;
-the scientific examples below retain their host-specific interpreter requirements.
-
-The project runs on a conda environment that is **not** the `python` on PATH (a bare system
-Python 3.11 without torch). Use the explicit interpreter:
-
-```powershell
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe        # main env: Python 3.10, torch 2.7.0+cpu, pytest 9
-C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe  # isolated analysis env (Python 3.11, no torch)
-```
-
-The second environment is declared in `configs/scientific-capabilities-v1.toml`
-(`python scripts/hmasd_science_capabilities.py list|show|doctor`). Never install into either
-environment to satisfy an analysis need; report the capability as unavailable and let the owner
-decide. Neither environment has CUDA.
+Daily WSL control-plane checks use `/home/fires/.venvs/hmasd-control/bin/python`.
+This environment contains pytest and jsonschema, without torch. Read `tests/AGENTS.md`
+for invocation-local scratch and cleanup. Scientific checks use the assigned node and
+interpreter in `.codex/hmasd-compute.toml`; the preserved Windows conda environments
+are Windows-only fallbacks. The scientific capability catalog records those environments
+in `configs/scientific-capabilities-v1.toml`; it does not declare a native Linux science stack.
+Never install or upgrade packages in an existing scientific environment for a migration check.
 
 ## Commands
 
-```powershell
+```bash
 # tests (pytest.ini sets testpaths and both file patterns; see tests/AGENTS.md)
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q tests/experiments/candidates/ucope/
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q tests/hmasd_run_test.py::test_name
+python -m pytest -q --basetemp temp/directions/ucope/test/<run-tag> tests/experiments/candidates/ucope/  # on the assigned science node
+/home/fires/.venvs/hmasd-control/bin/python -m pytest -q --basetemp temp/tests/<run-tag> tests/hmasd_run_test.py::test_name
 # evidence-bearing test runs isolate their temp dir under the direction's scratch root
-... -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD/temp/directions/<direction-id>/test/<run-tag>
+... -m pytest -q -p no:cacheprovider --basetemp temp/directions/<direction-id>/test/<run-tag>
 
 # original HMASD/UAV route
 python experiments/launchers/main.py --mode train --scenario 1 --n_uavs 5 --n_users 50
