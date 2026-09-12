@@ -1,0 +1,57 @@
+{
+  "owner": "/root/dm_a_mx_acvc_resume",
+  "state": "PROPOSED; no removal before Root integration/retention acceptance",
+  "retain": [
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\retained\\cluster_deployment_b01_20260912\\native_output.tar.gz",
+      "bytes": 416876,
+      "sha256": "ff33a922936ad9664f46afb487dc8afb07764d573b3c2910320d4ebe7ff40fc2",
+      "meaning": "one byte-verified full native archive, including the unique final DENSE checkpoint and terminal sources"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/",
+      "meaning": "published readable native data, terminal sources, engineering/collection/intake receipts and analysis"
+    },
+    {
+      "path": "C:/Projects/HMASD-worktrees/codex-acvc",
+      "meaning": "shared active authoring checkout; all C01/B01/B02 evidence and accepted prior archives remain"
+    }
+  ],
+  "unique_checkpoint": {
+    "bytes": 282957,
+    "sha256": "f7cf6e8d6829aa26838c7911728d46012b090f281393dac34f391fc6cb308611"
+  },
+  "cleanup_targets": [
+    {
+      "node": "hmasd-wsl-node",
+      "path": "/home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f-output.tar.gz",
+      "kind": "file",
+      "reason": "verified duplicate of retained local archive"
+    },
+    {
+      "node": "hmasd-wsl-node",
+      "path": "/home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f.bundle",
+      "kind": "file",
+      "reason": "published source bundle duplicate; full source ancestry retained on codex/acvc"
+    },
+    {
+      "node": "hmasd-wsl-node",
+      "path": "/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f",
+      "kind": "git_worktree",
+      "reason": "terminal exact-source execution checkout; all unique outputs preserved"
+    },
+    {
+      "node": "hmasd-wsl-node",
+      "path": "/home/wu/.agent-tasks/acvc-cluster-b01-e06b3d63f",
+      "kind": "directory",
+      "reason": "terminal supervisor state; original log/runner published, all files retained in archive"
+    },
+    {
+      "node": "local_windows",
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\cluster-deployment-b01-20260912",
+      "kind": "directory",
+      "reason": "finished K preparation helpers/source-bundle/extracted duplicates; scientific source, receipts and unique archive retained outside target"
+    }
+  ],
+  "verification_after_acceptance": "Check literal resolved roots, terminal state and protected retained archive; unregister only this exact remote worktree, remove exact listed targets, then verify all disk absences and worktree-registration absence. Preserve remote shared repository and every historical direction archive."
+}
