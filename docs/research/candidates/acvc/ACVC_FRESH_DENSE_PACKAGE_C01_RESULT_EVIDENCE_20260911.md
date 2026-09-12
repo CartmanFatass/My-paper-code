@@ -1,6 +1,6 @@
 # ACVC C01 — accumulating final-population evidence
 
-Status: **two of five complete units collected; the C01 primary result is not complete and the object is not consumed.** Exact source and primary-analysis source: `3fd9062d5456a6b61a132a16ebd33a7099810143`. The [frozen card](ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md) and [execution facts](ACVC_FRESH_DENSE_PACKAGE_C01_EXECUTION_FACTS_20260911.json) retain the full five-unit selection, commands, exposure and caps. No development fit occupies a final slot.
+Status: **three of five complete units collected; the C01 primary result is not complete and the object is not consumed.** Exact source and primary-analysis source: `3fd9062d5456a6b61a132a16ebd33a7099810143`. The [frozen card](ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md) and [execution facts](ACVC_FRESH_DENSE_PACKAGE_C01_EXECUTION_FACTS_20260911.json) retain the full five-unit selection, commands, exposure and caps. No development fit occupies a final slot.
 
 The frozen reading is: “For each primary use exactly `mean_r ± scipy.stats.t.ppf(.9875,4) * s_r/sqrt(5)`.” Joint support requires: “Both lower bounds **strictly greater than .01 J**.” These are qualified iid-normal complete fit-panel intervals; actual neural-training calibration is not established. No five-unit interval is computed from the currently incomplete population. Unit means and paired episode SEs below are descriptive components, with no interim efficacy/futility decision.
 
@@ -8,7 +8,7 @@ The frozen reading is: “For each primary use exactly `mean_r ± scipy.stats.t.
 |---|---|---|---:|---:|---:|---:|---:|
 | 1 | 12794 / 23947 | complete, preserved, technically accepted | 0.093662236170 | 0.072263725773 | 0.021398510397 | 167.06 s | 170 s |
 | 2 | 11477 / 24930 | complete, preserved, technically accepted | 0.110783589817 | 0.084918936207 | 0.025864653610 | 168.51 s | 171 s |
-| 3 | 18150 / 21370 | accepted, monitored; collection pending | — | — | — | — | — |
+| 3 | 18150 / 21370 | complete, preserved, technically accepted | 0.096548149142 | 0.058262606480 | 0.038285542662 | 175.29 s | 178 s |
 | 4 | 12604 / 21030 | fixed, unsubmitted | — | — | — | — | — |
 | 5 | 14295 / 23946 | fixed, unsubmitted | — | — | — | — | — |
 
@@ -29,3 +29,11 @@ The [second complete unit](fresh_dense_package_c01_20260911/unit_11477/) passed 
 Actual adjacent memory admission passed at 15,634,452,480 physical/effective bytes. Whole command 168.51 s; full-summary process 164.04166260396596 s, separately from last-panel log 164.04035623092204 s; supervisor 169 s; inclusive native charge 171 s; peak RSS 548,684 KiB. Exit is zero, supervisor finished and tmux absent. Two-unit completed native charge is 341 s, with no per-unit breach. `resources_unmeasured` and unavailable precise Monitor command time remain explicit; no reconstruction measurement is made.
 
 All 12 raw files are preserved in runtime `collection/unit_11477.tar.gz`, 415,817 bytes, remote/local SHA256 `56340bcb1ebe44126b439b38a64cf68f78f5a3003f717dd2791df117816897ac`. Checkpoint SHA256 `2e2572882e18fe563f8ac58cc4c1d7397d5ee023b5210260cfa9fc66fa71e145` remains in the archive and extracted unit. Readable artifacts and collection/technical records are published. The same execution checkout remains needed by units 3–5; no retained evidence or blocked cleanup target was removed.
+
+## Unit 3: direct facts and technical acceptance
+
+The [third complete unit](fresh_dense_package_c01_20260911/unit_18150/) passed the frozen reader and direct technical checks with no issues: 512 H256 training episodes, 1,024 ordered Adam/update records, all 192 final evaluation episodes and 180,224 native ticks; exact m18150/q21370 resets, source, CPU FP32/Torch1/1, final checkpoint and parameter counts. Every training return and paired world remains. Conditional episode SEs F-C/F-dwell/dwell-C are 0.006767669735/0.007988272264/0.007159382475 J; adverse worlds 3/13/13 of64; minima -0.031253358253/-0.071569313161/-0.140810165658 J. No interim population interval or efficacy decision is formed.
+
+Adjacent admission passed with physical/effective memory both 15,636,324,352 bytes. Whole command 175.29 s, actual full-summary 169.75113218510523 s versus separate last-panel 169.74978735507466 s, supervisor 175 s, inclusive charge 178 s and peak RSS 550,036 KiB. Exit zero/finished/tmux absent are verified. Completed native charge totals 519 s; no per-unit cap breach. `resources_unmeasured` and unavailable precise Monitor command time remain qualified separately.
+
+All 12 raw files are preserved locally in `collection/unit_18150.tar.gz`, 415,719 bytes, verified remote/local SHA256 `d0c9eaa015c7037b4a25b7acec403696835e632ea9024365fce33e1b87f5588a`. The checkpoint SHA256 is `801f810a9f060e8af5679e02fc6ca469ba55c9ead9f6b1d280188c3844361fb0`; checkpoint bytes remain in the archive/extracted runtime unit and readable evidence is published. The shared execution checkout remains needed by units 4–5; no scientific evidence or blocked cleanup target was removed.
