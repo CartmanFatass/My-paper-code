@@ -1,16 +1,16 @@
 {
   "object": "ACVC_FRESH_DENSE_PACKAGE_C01",
   "allocation": "single funded complete five-fit chain, including the two original-node consultations",
-  "cutoff_utc": "2026-09-12T04:39:13.587Z",
+  "cutoff_utc": "2026-09-12T04:42:29.156636+00:00",
   "caps_s": {
     "per_native_unit": 270,
     "native_sum": 1350,
     "all_invoked_support": 1650,
     "complete": 3000
   },
-  "known_DM_and_review_support_s": 191.5827034000054,
-  "native_invocations_at_cutoff": 0,
-  "native_sum_s_at_cutoff": 0,
+  "known_DM_and_review_support_s": 198.8772008000054,
+  "native_invocations_at_cutoff": 1,
+  "native_sum_s_at_cutoff": null,
   "components": [
     {
       "phase": "initial checkout read",
@@ -99,7 +99,7 @@
     },
     {
       "phase": "completion of request source mapping/render command",
-      "wall_s": 0.0000024,
+      "wall_s": 2.4e-06,
       "measurement": "additional tool wait; elapsed gap while asynchronous command ran is unmeasured"
     },
     {
@@ -430,7 +430,7 @@
     },
     {
       "phase": "focused suite final result wait",
-      "wall_s": 0.0000025
+      "wall_s": 2.5e-06
     },
     {
       "phase": "read live destination/routing and reused exact execution method",
@@ -487,8 +487,31 @@
       "phase": "freeze complete reviewed source and all exact commands in current C01 card",
       "wall_s": 0.021,
       "measurement": "enclosing apply_patch call"
+    },
+    {
+      "phase": "final execution-binding audit/owner check and live Monitor/Relay routing refresh",
+      "wall_s": 0.5789002
+    },
+    {
+      "phase": "publish complete C01 technical acceptance, exact five commands and continuing support/audit before launch",
+      "wall_s": 4.8460661
+    },
+    {
+      "phase": "single accepted submission of fixed C01 unit 1 handle",
+      "wall_s": 1.3396316
+    },
+    {
+      "phase": "direct Monitor assignment for accepted C01 unit 1",
+      "wall_s": 0.203,
+      "measurement": "enclosing app call"
+    },
+    {
+      "phase": "record accepted C01 unit 1 and Root-confirmed actual Monitor adoption, apply operational owner correction",
+      "wall_s": 0.3268995
     }
   ],
   "coverage_limit": "Measured DM tool/command wall plus reported independent-review command wall through this cutoff, not complete client/provider/deliberation/Root/Transport/Monitor coverage. Overlapping phase timers are counted once as described. Publication of this snapshot and later launch/observation/collection/integration/cleanup are not yet included. Unknown stays unknown; this is not an unconditional complete-cap certificate.",
-  "native_cost_reading": "Each full native unit includes adjacent admission, imports/setup, all 512 training and 192 evaluation episodes, optimizer/checkpoint/publication and actual process exit. Native savings do not extend the support envelope or fund another object."
+  "native_cost_reading": "Each full native unit includes adjacent admission, imports/setup, all 512 training and 192 evaluation episodes, optimizer/checkpoint/publication and actual process exit. Native savings do not extend the support envelope or fund another object.",
+  "native_status": "one accepted running complete-unit command; actual exposure, completion and wall pending terminal collection",
+  "monitor": "Root-confirmed actual adoption; Monitor observation wall not yet returned"
 }

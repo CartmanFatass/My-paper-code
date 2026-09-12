@@ -24,7 +24,35 @@
       "output": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/exp/fresh_dense_package_c01_20260911/unit_12794",
       "admission": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_12794_admission.json",
       "time": "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5/temp/directions/acvc/fresh_dense_package_c01_12794_task_time.txt",
-      "state": "not submitted"
+      "state": "accepted; Root-confirmed Monitor adoption; terminal collection pending",
+      "launch_receipt": {
+        "handle": "acvc-fresh-dense-c01-12794-3fd9062d5",
+        "source_sha": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+        "command_publication_sha": "f8fb97ac48f9bfe94b70785424f8862b44be252d",
+        "command": "cd /home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/fresh_dense_package_c01_12794_task_time.txt timeout --signal=TERM --kill-after=1 267 bash experiments/candidates/acvc/fresh_dense_package_c01/launch.sh 3fd9062d5456a6b61a132a16ebd33a7099810143 12794",
+        "submitted_utc": "2026-09-12T04:40:37.079656+00:00",
+        "wall_s": 1.005340999981854,
+        "exit_code": 0,
+        "uncertain": false,
+        "accepted": true,
+        "stdout": "Task 'acvc-fresh-dense-c01-12794-3fd9062d5' started in tmux session 'agent_acvc-fresh-dense-c01-12794-3fd9062d5'. Output: /home/wu/.agent-tasks/acvc-fresh-dense-c01-12794-3fd9062d5/task.log\n",
+        "stderr": "",
+        "monitor_thread_id_from_live_primary": "01a087e5-2044-7301-abb6-7a1709a98197"
+      },
+      "monitor": {
+        "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+        "dispatch": "accepted app delivery, no model/effort overrides",
+        "adoption": "confirmed by Root from actual MONITOR_ADOPTED",
+        "adopted_at_utc": "2026-09-12T04:41:00Z",
+        "active_set": [
+          "acvc-fresh-dense-c01-12794-3fd9062d5"
+        ],
+        "reported_status": "running",
+        "pid": 3364324,
+        "uptime_s": 30,
+        "tmux_active": true,
+        "owner": "Monitor retains through delivered terminal notice; DM stopped remote polling"
+      }
     },
     {
       "order": 2,
@@ -86,5 +114,8 @@
     "authoring_checkout": "shared active codex/acvc; retain",
     "test_scratch": "creator removed, absent",
     "historical_blocked_preparation": "outside this allocation, untouched"
-  }
+  },
+  "next_action": "Collect unit 1 on the routed terminal fact, then run fixed unit 2 (11477,24930) unless a concrete dependent integrity/resource/envelope limitation applies; no interim efficacy decision.",
+  "current_consumption": "C01 not consumed; no complete five-unit scientific result yet",
+  "owner_instruction_applied": "Root forwarded Transport operational correction at main 8bf1269e5: a short/status receipt does not establish no formed decision; ACVC already verified the full immutable Innovator response and preserved separate receipt roles. Accepted engineering continues unchanged."
 }
