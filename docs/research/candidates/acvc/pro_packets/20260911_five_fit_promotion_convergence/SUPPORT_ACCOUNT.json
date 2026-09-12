@@ -108,18 +108,93 @@
     {
       "phase": "fresh GitHub fixed-TASK readback, bound route and owner review",
       "wall_s": 2.4553545
+    },
+    {
+      "phase": "final ready-handoff/account publication and immediate push/readback",
+      "wall_s": 6.4957071
+    },
+    {
+      "phase": "ready handoff relay app delivery",
+      "wall_s": 0.193,
+      "measurement": "enclosing app call"
+    },
+    {
+      "phase": "promotion return: actual checkout and published branch reconciliation",
+      "wall_s": 2.3467841
+    },
+    {
+      "phase": "promotion return: current Transport artifact locations and owner reviews",
+      "wall_s": 0.5155909
+    },
+    {
+      "phase": "fast-forward and full immutable promotion response read",
+      "wall_s": 0.6972787
+    },
+    {
+      "phase": "locate raw promotion receipt and compare current methods",
+      "wall_s": 0.3080878
+    },
+    {
+      "phase": "promotion GitHub/comment/scope and byte-form reconciliation",
+      "wall_s": 3.3658405
+    },
+    {
+      "phase": "bounded current Transport archive discovery",
+      "wall_s": 0.3088517
+    },
+    {
+      "phase": "promotion exact terminal-byte form hypothesis",
+      "wall_s": 0.3732385
+    },
+    {
+      "phase": "bounded raw receipt path lookup",
+      "wall_s": 0.7056654
+    },
+    {
+      "phase": "read exact raw promotion transport facts and compare full response byte forms",
+      "wall_s": 0.3267822
+    },
+    {
+      "phase": "preserve exact promotion artifacts, full Git response and source/prompt/comment conformance facts",
+      "wall_s": 5.4060168
+    },
+    {
+      "phase": "write complete promotion scientific intake, owner brief and accepted direction position",
+      "wall_s": 0.023,
+      "measurement": "enclosing apply_patch call"
+    },
+    {
+      "phase": "current owner CLI fields and existing audit append point",
+      "wall_s": 0.3706135
+    },
+    {
+      "phase": "reconcile newly published Transport correction paths before local intake publication",
+      "wall_s": 2.4986497
+    },
+    {
+      "phase": "preserve published Transport correction in direction branch and immediate push",
+      "wall_s": 4.5497612
+    },
+    {
+      "phase": "intake verified published receipt-label correction without changing raw evidence",
+      "wall_s": 0.4600035
+    },
+    {
+      "phase": "publish promotion decisions to audit and maintained owner item via CLI",
+      "wall_s": 0.4205645
     }
   ],
-  "known_support_s": 41.56571279999999,
+  "known_support_s": 70.93114889999998,
   "known_native_s": 0,
-  "cutoff": "Through fixed-TASK GitHub readback and final owner review, before this account update/ready-handoff publication and relay; final publication tail returned to Root once for later append",
+  "cutoff": "Through complete promotion intake, preserved receipt-label correction and owner item; before this account publication and the later allocated Innovator preparation",
   "unknown_costs": [
-    "provider generation/queue",
+    "provider generation/queue (reported natural promotion generation label 11m 11s; not a measured support-command bill)",
     "deliberation",
     "unmeasured client/message and enclosing support overhead",
-    "elapsed gap while the reference-verification command completed asynchronously",
-    "support-account/preparation-record editing tool time not independently measured"
+    "elapsed gap while first reference-verification command completed asynchronously",
+    "one support/preparation editing-tool interval not independently measured",
+    "Root/Transport actual invoked integration/delivery/receipt-correction contributions not yet supplied"
   ],
-  "counting_rule": "Every invoked command/review/observation counted once; retain shared enclosing query costs without duplicate direction charges. Known sums are lower bounds, not unconditional complete-cap conformance. No historical allowance supplies credit.",
-  "next_owner": "Original ACVC DM continues the account at full promotion response intake; Root/Transport provide actual invoked support contributions for this same allocation"
+  "counting_rule": "Count invoked commands/reviews/observations once, including required preparation and closeout. Keep nested and shared enclosing clocks distinct. Known sums are lower bounds, not unconditional complete-cap conformance. Historical allocations supply no credit.",
+  "continuation": "Same original DM owns one allocated Innovator review/intake and, only if conforming, the fixed five-unit complete path. No additional question, altered design, sixth/replacement fit or top-up."
 }
