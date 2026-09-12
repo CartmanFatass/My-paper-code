@@ -23,6 +23,11 @@ collects both (`pytest.ini`). Two flattened research test directories exist from
 `conftest.py` exists only under `finite_resource_relational_inductive_efficiency/` (fixtures
 only). No lint, format, or type tooling is configured; do not add any.
 
+For an assigned short local CPU check, activate `/home/fires/.venvs/hmasd-linux-cpu`
+or use its `bin/python`. Activation also exposes Ninja for native extension builds.
+`environments/README.md` records the CPU and separate analysis environments. Their
+installation does not accept frozen Windows-specific tests on a new host.
+
 ## Commands
 
 ```bash
