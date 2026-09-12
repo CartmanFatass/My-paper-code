@@ -11,7 +11,7 @@ endpoints; historical fixed request metadata is not a live routing instruction.
 Keep current tracking free of obsolete snapshots and endpoints. Consult Git for history.
 No browser Send may overlap a retired executor: reconcile its stopped/acceptance receipt first.
 
-OWNER_DIRECT 2026-09-10: the existing Root task is the execution coordinator; DM owns direction
+The current Root task is the execution coordinator; DM owns direction
 science and the former CM engineering responsibilities. Portfolio is the persistent Pro node,
 not a native session. Authority, budgets and owner pause/stop instructions remain in AGENTS.md.
 The current consolidation record is `docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md`.

@@ -5,10 +5,10 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC C01 final intake | /root/dm_a_mx_acvc_resume; all five original handles terminal, full preserved calculation available; no sixth fit | Final scientific intake, DIRECTION/prediction records and retention inventory to Root |
-| FOLR B03 | /root/dm_a_mx_folr_cap_review; original pair never submitted, original processes/handles absent; minimal sparse source preparation being repaired | Published exact invocation, fresh admission, then new Monitor confirmed goal adoption |
+| ACVC post-C01 materials | Final scientific intake accepted/main77c17d111; /root/dm_a_mx_acvc_resume supplies next-question facts to Portfolio author; no new fit | Concrete proper-node question/investment option; retention inventory is recorded |
+| FOLR B03 | /root/dm_a_mx_folr_cap_review; original pair never submitted, original processes/handles absent; minimal sparse preparation accepted/main3821a65d1; original pair launch authorized using ready new Monitor | Published exact invocation, fresh admission, then new Monitor confirmed goal adoption |
 | VNFC conditional fresh pair | /root/dm_a_mx_vnfc_recovery; bounded engineering recovery only; selected new600-native/300-support/900-complete grant remains unused/conditional | Supported same-meaning repair or alternative with relevant focused evidence, before any fresh scientific invocation |
-| RCLE original Convergence request | New Windows Transport readiness/reconciliation; previous executor confirmed stopped and zero new Send | Exact same-request successor dispatch after actual tool readiness; accepted generation then archive and DM intake |
+| RCLE original Convergence request | Windows Transport personally READY with CUA; same-request recovery dispatched after exclusive ownership confirmation | Provider-state reconciliation, permitted repaired Send, accepted generation then archive and DM intake |
 | Portfolio readiness/Oracle | /root/dm_a_mx_portfolio_resume; latest22-direction evidence and concrete next-slot choices | Ready-now actions immediately; necessary Portfolio packet via existing Pro node |
 
 Direction chains3/5; no accepted live scientific handles at this snapshot. Portfolio preparation
