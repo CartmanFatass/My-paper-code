@@ -57,3 +57,19 @@ records the selected binding. [Support prelaunch](SUPPORT_PRELAUNCH.json) is an
 incomplete invoked-work subtotal; later delivery/integration/observation/collection
 and cleanup are recorded separately. Unknown provider/tool and early command
 tails are retained as unknown, not charged zero or used to certify1200.
+
+## Accepted launch and pending observation adoption
+
+The sole supervisor submission returned exit0 with started tmux session
+agent_mgtap-cond-b01-8214-20260912. Direct MONITOR_ADD to live task
+01a095d0-21ee-7c02-9d97-3681b5678200 was accepted. Its full payload explicitly
+requires the actual unfinished goal operation/receipt and terminal-goal delivery;
+see [launch receipt](LAUNCH_RECEIPT.json). Actual MONITOR_ADOPTED is pending
+Root's routed receipt at this boundary. DM has no routine second status poll.
+The run's actual admission, learner counts/outcomes and complete native costs
+remain subject to terminal collection, with no scientific polarity yet.
+
+Root should integrate source10ea737f0, bindingf59b99d4a and this launch record,
+track the accepted handle and forward actual adoption/terminal facts to
+/root/dm_mgtap_m_pair. Preserve all active paths. No sibling result, cleanup
+or Portfolio response is a dependency of this accepted M invocation.
