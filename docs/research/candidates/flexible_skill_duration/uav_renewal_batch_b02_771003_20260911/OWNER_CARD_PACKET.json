@@ -1,0 +1,42 @@
+{
+  "question": "用新的独立额度执行一次原样I1280与D0训练对，观察已有收益是否再次出现。",
+  "changes_if_approved": [
+    {
+      "target": "FSD B02卡§7",
+      "from": "770803和770903均已结束且无科学曝光",
+      "to": "新增771003/781003实例和最多45秒的一次源码交付；完整训练、评估和读取规则不变"
+    }
+  ],
+  "if_refused": "执行明确的所有者异议并保留已发生事实，不改写旧结果或返还旧额度。",
+  "evidence_for": [
+    {
+      "path": "docs\\research\\candidates\\flexible_skill_duration\\FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+      "quote": "+0.05697746721968016",
+      "why": "已有一个真实I1280训练对的最终收益。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "quote": "One fresh unchanged I1280/authentic-D0 pair",
+      "why": "Portfolio已明确选择新独立投入。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+      "quote": "−.049670563167111874 and−.035312725297886094",
+      "why": "旧batch128中断包两次亏损；新I1280仍只有一个训练对。"
+    }
+  ],
+  "uncertainty": [
+    "交付可能再次失败；仅一次事务，失败即结束。",
+    "即使有新结果，回合标准误仍不表示训练总体不确定性，也不分离纯中断与批量效应。"
+  ],
+  "cost": {
+    "compute": "D0≤900秒、I≤1800秒、原生≤2700秒、支持≤300秒、总计≤3000秒；一次交付≤45秒已计入支持。",
+    "owner_time": "无需等待回复。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md#7"
+}
