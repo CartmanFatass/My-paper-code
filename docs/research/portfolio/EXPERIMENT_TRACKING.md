@@ -5,11 +5,11 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC K | Remote handle `acvc-cluster-b01-e06b3d63f` running at sourcee06b3d63f; Monitor goal established and adopted | Monitor delivers terminal once; original DM collects/intakes/preserves/cleans up under native≤600/support≤600/complete≤1200 |
+| ACVC K | Sole handle finished exit0 in166s at sourcee06b3d63f; C/F/dwell witness delivered and Monitor goal complete | Original DM collects, verifies primaries/counts/caps, publishes scientific intake/preservation and scoped cleanup; no retry |
 | MGTAP | Post-T A/U/P next-use input published at main843f64bd0; recommends one bounded use/design judgment, zero native, complete cost UNKNOWN | Portfolio DM authors the next clean request from the fixed input; no option funded, no implementation/run, lifecycle unchanged |
 | FSD U | Fixed handoff integrated at main7b94b325c and accepted exactly once by provider; B-LONG-D0 explicitly excluded | Transport observes natural completion, then Root returns the full response to the original DM for intake; zero numerical work |
 | RCLE L | PRO_FINAL one-design grant integrated at main665f704f7; documentary complete cost UNKNOWN accepted | Original DM returns at most one distinct B design or concrete no-candidate; zero implementation/numerical/Pro work |
-| FOLR E | PRO_FINAL BANK-vs-Generic grant integrated at main665f704f7;5000/128 each, Generic≤1800/BANK≤3000/complete≤6000 | Original DM implements/reviews thin interfaces and executes Generic first then BANK through remote admission, Monitor, intake and cleanup |
+| FOLR E | Generic handle `folr-entity-history-b01-781201-generic` running at source922a461f and adopted by Monitor | Collect Generic terminal technically, then execute the preselected BANK once; Generic≤1800/BANK≤3000/complete≤6000 |
 | ACPS | B01 accepted ADVERSE; four-target cleanup accepted at main3d3ef453c, archives retained and no run remains | Continuation need is retained for the next clean Portfolio request; direction remains ACTIVE/HIGH and queued need does not count as advancing work |
 | CADC | B01 accepted ADVERSE; four-target cleanup accepted at main60ed6a98e, archives retained and no run remains | Next-use need is retained for the next clean Portfolio boundary; no retry/extra arm/successor and queued need does not count as advancing work |
 | Portfolio | K/E/L/U response archived at mainde02dc94d and conforming intake/mapping integrated at main665f704f7 | Four original DMs execute independently; E precedes K only under actual contention, with no sibling batch wait |
