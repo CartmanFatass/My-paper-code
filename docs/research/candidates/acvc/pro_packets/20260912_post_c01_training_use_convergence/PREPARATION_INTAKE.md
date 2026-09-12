@@ -31,3 +31,9 @@ The full verified response returns through Root to this same DM. Read it at its 
 ## Retention and boundary
 
 The exact existing inventory remains `ACVC_FRESH_DENSE_PACKAGE_C01_EXECUTION_FACTS_20260911.json.finalization_20260912`. No unique checkpoint, evidence archive, historical intake or shared checkout was deleted or rehashed. The DM retains its scoped cleanup responsibility; this question does not wait for CBSC or reclamation. Packet publication verification is documentary handling, not an experimental test. Full authoring/provider cost remains unknown even where individual tool walls are visible.
+
+## Ready handoff publication
+
+The exact TASK is published at `97b913c9582c628f67535b2e24d3c78cd377e430`; default scientific input is `c4082f54f8e2deb44d3ed8e839bc3d362b0bf213`. All 17 effective path/SHA pairs exist and were reachable from the actually observed published `main`, `codex/acvc` or `codex/portfolio` refs, as recorded in `PUBLICATION_FACTS.json`. The rendered manifest matches REQUEST. The bind operation compared committed TASK bytes; a fresh GitHub blob read also matched the complete local TASK bytes. TASK scientific content has not changed after publication.
+
+HANDOFF is now `READY_TO_DISPATCH`, with the original Convergence conversation, current Root parent and current Transport operator preserved. Root must read this exact committed HANDOFF, dispatch its supplied short fixed-link prompt once and later return the complete verified response to `/root/dm_a_mx_acvc_resume` for intake. Author-side provider Send and Transport dispatch counts are zero. This is a ready request, not accepted generation or a formed scientific decision. The current Relay is read again when delivering the Root handoff; accepted relay delivery needs no acknowledgment wait. The scientific allocation and unknown complete cost remain exactly those above.
