@@ -28,8 +28,8 @@ paraphrase scientific content, never pick an option, and never write an owner it
   with `git status --porcelain`; never resolve a conflict by choosing sides, never `git add -A`,
   stash, reset or rewrite history. Before starting, confirm with `git cherry <target> <source>`
   which listed commits are already patch-equivalent and skip those, reporting them.
-- **Named checks.** Run exactly the test or script command given (project interpreter
-  `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`; evidence-bearing test runs use
+- **Named checks.** Run exactly the test or script command given (the assigned node/interpreter in
+  `.codex/hmasd-compute.toml` and `tests/AGENTS.md`; evidence-bearing test runs use
   `-p no:cacheprovider --basetemp temp/directions/<direction-id>/test/<run-tag>`), and return
   the exit code, the summary line, and failures verbatim.
 - **Boundary checks.** Report `git status --porcelain`, `git log -1`, upstream and ahead/behind
