@@ -1,6 +1,6 @@
 {
   "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
-  "recorded_utc": "2026-09-12T03:36:38.139665+00:00",
+  "recorded_utc": "2026-09-12T03:41:54.2612783Z",
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -249,16 +249,48 @@
     {
       "purpose": "Root reported paired intake/table inspection, integration/conflict resolution and two pushes; approximate 0.6 + 0.7 + 9.5 s",
       "wall_seconds": 10.8
+    },
+    {
+      "purpose": "publish verified current-allocation cleanup completion and honest final cost limitations",
+      "wall_seconds": 5.0524937
+    },
+    {
+      "purpose": "recover final clean-boundary state, live relay contract and published cost snapshot",
+      "wall_seconds": 0.5055619
+    },
+    {
+      "purpose": "resolve exact published closeout evidence paths and primary-control relay identity",
+      "wall_seconds": 0.2292705
+    },
+    {
+      "purpose": "read final intake, current support schema and accepted prior relay receipt for terminal publication",
+      "wall_seconds": 0.2237943
+    },
+    {
+      "purpose": "single actionable terminal-intake and verified-cleanup handoff through live Root relay",
+      "wall_seconds": 0.59
+    },
+    {
+      "purpose": "persist accepted sole terminal Root relay with exact event and original substantive return",
+      "wall_seconds": 0.016
+    },
+    {
+      "purpose": "Root reported final cleanup closeout inspection, integration and push; approximate 0.6 + 4.5 s",
+      "wall_seconds": 5.1
+    },
+    {
+      "purpose": "record Root accepted closure, integrated cleanup and final terminal receipt/support snapshot",
+      "wall_seconds": 0.5275054
     }
   ],
-  "known_support_wall_seconds": 107.03419709999997,
-  "counting": "Each enclosing invoked support interval once. Current cleanup is complete; this cleanup-publication command and final relay/receipt publication will be returned or added when measured. Nested clocks and Root's cumulative confirmations are not added again.",
+  "known_support_wall_seconds": 119.27882289999997,
+  "counting": "Each enclosing invoked support interval once, through final receipt preparation and Root cleanup acceptance. This final publication command wall is reported in native completion after measurement; no recursive accounting-only commit. Nested clocks and cumulative Root confirmations are not added again.",
   "new_scientific_submissions": 2,
   "new_source_delivery_transactions": 1,
   "unknown": [
     "Monitor command cost absent from terminal receipts; no extra query",
     "relay-service and client/message overhead",
-    "remaining final publication/integration command wall until measured"
+    "final receipt publication command wall until measured and any later Root integration"
   ],
   "claim": "Both complete native arms and their sum pass. Support/complete totals are partially unmeasured; no observed breach. Primary is valid.",
   "native_wall_seconds": {
@@ -271,7 +303,7 @@
     "limit_seconds": 45,
     "status": "successful single transaction; nested helper clock not added again"
   },
-  "known_native_plus_support_seconds": 1602.2841971,
+  "known_native_plus_support_seconds": 1614.5288229,
   "Root_integration": {
     "source_main": "31e9cc05a",
     "D0_handover_main": "0e7bb1e83",
@@ -282,8 +314,13 @@
     "counting": "Earlier approximate 9.1 s plus this conservative <=6.8 s contribution are charged once each; client/message overhead remains unknown.",
     "paired_intake_main": "14fdaa63c",
     "tables_main": "cf5dccaa6",
-    "paired_reported_support_seconds": 10.8
+    "paired_reported_support_seconds": 10.8,
+    "I_handover_main": "ced17727e",
+    "I_handover_reported_support_seconds": 5.3,
+    "cleanup_main": "be2eb581d",
+    "cleanup_reported_support_seconds": 5.1
   },
   "native_pair_wall_seconds": 1495.25,
-  "current_cleanup_complete": true
+  "current_cleanup_complete": true,
+  "root_pair_acceptance": "Root accepted the bounded pair and ended its allocation without successor; cleanup closeout integrated/pushed as main be2eb581d."
 }
