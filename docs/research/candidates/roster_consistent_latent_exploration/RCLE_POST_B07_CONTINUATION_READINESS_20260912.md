@@ -1,26 +1,28 @@
 # RCLE post-B07 continuation readiness
 
-R has since been selected and integrated through main0c0648bd0. The same DM is
-executing exactly the original-node documentary allocation in
+R is selected and integrated through main0c0648bd0. The same DM has published the
+original-node documentary question in
 [post-B07 preparation](pro_packets/20260912_post_b07_convergence/PREPARATION_INTAKE.md).
-The conditional preparation below preserves its bound scope and evidence.
+The fixed TASK is at fcb4381a666a8df9bba88c8278f01bbcfbc1baf1; its bound
+[HANDOFF](pro_packets/20260912_post_b07_convergence/delivery/HANDOFF.json) is ready
+for Root dispatch through current Transport after already queued ACVC/FOLR work.
+No provider Send or formed response is claimed by this preparation receipt.
 
 OWNER_DIRECT2026-09-12, forwarded by Root: RCLE remains scientifically valuable
 and continues as a research direction. The same DM remains responsible in
 `C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906`, branch `codex/rcle`.
 B07's completed finite allocation does not stop the direction. This record
-prepares the current continuation; it grants no experiment or new consultation.
+tracks the selected documentary continuation; it grants no experiment.
 
-## Exact pending R and ready question
+## Accepted R and published question
 
-The in-flight Portfolio request is `2026-09-12-post-am-remaining-capacity-01`.
-Its immutable TASK is
-`docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/delivery_current/TASK.md`
-at `8e026779f3711bc345bcce77791b7cfe6d23dcc8`:37,819 bytes,
-SHA256`433e945471d0fc41ec245bc3413fb71d821fb8ca4587747884b35283645bf900`.
-The exact blob's requested decision and additional R constraint were checked;
-the current Portfolio SCIENCE_BRIEF's R section supplies the matching definition.
-No accepted request, prompt, binding, delivery or Send is changed here.
+Portfolio request `2026-09-12-post-am-remaining-capacity-01` formed its complete
+response at ba7ab4d20cd171916ee28f5d7157d64ff24d6f77. Its original author checked
+R against current owner instructions/specifications; the accepted R execution
+mapping is integrated at 0c0648bd06d96c8839bcfaa72f469c7f339a0405 in
+`docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/EXECUTION_MAPPING.md`.
+The exact grant is one original-node question and full intake. No accepted request,
+prompt, binding, delivery or Send is changed here.
 
 R is a new documentary investment: exactly one original
 `em:roster_consistent_latent_exploration:convergence` question and complete
@@ -68,14 +70,13 @@ Root and delivery tails remain unmeasured, so this is not a full-cost certificat
 B06's own native335.86s remains a separate historical window. No incurred work
 or unused old cap pays for R, and no future-fit runtime is inferred from either.
 
-## Immediate continuation on the routed Portfolio decision
+## Current delivery and response intake
 
-If the Portfolio author accepts R as selected, Root forwards that full decision
-and mapping to this same DM. Proceed immediately with the single original-node
-packet on the shared branch: use the current Prompt Author GitHub delivery route,
-pin these accepted sources and applicable spec sections, publish the exact TASK,
-then return its ready handoff to Root/current Transport. Transport owns the single
-Send/reconciliation/archive. On the full bound response, this DM checks exact
+The selected single original-node packet is published on the shared branch through
+the current Prompt Author GitHub delivery route, with fixed accepted sources and
+applicable spec sections. Root receives its ready handoff and routes the exact
+request once. Transport owns the single Send/reconciliation/archive. On the full
+bound response, this DM checks exact
 question/class/specification conformance, intakes the choice and publishes the
 direction decision/audit/required owner item without a per-item owner approval.
 
@@ -87,23 +88,21 @@ Documentary/provider/agent cost remains unknown and is explicitly part of R's
 investment decision. A retained fresh-fit candidate remains a proposal until a
 later allocation; no B07 replay or new fit is started by this readiness record.
 
-If R is not selected, preserve that exact Portfolio decision and return it to
-Root under the owner's continuing RCLE instruction. Do not treat an unpurchased
-documentary unit as whole-direction retirement or invent a replacement request.
-Root's routed decision is the next event; no duplicate Portfolio/Transport polling,
-new browser Send or idle wait loop is created. DM ownership persists across the
-clean turn boundary and is resumed on that event.
+The next scientific event is Root's routed complete original-node response.
+No duplicate Portfolio/Transport polling, new browser Send or idle wait loop is
+created. DM ownership persists across the clean turn boundary and resumes on
+that event; this documentary allocation's end does not retire the direction.
 
 ## Decision and current work boundary
 
 Object technical choice: (a) prepare this exact evidence/continuation mapping and
 retain the original DM; (b) recycle ended B07 allowances or select a new mechanism.
 Recommend/select(a). Owner-delegated decision (unattended,2026-09-03 instruction):
-(a), applying the current OWNER_DIRECT continuation. No local R yes/no or direction
-disposition is selected. The last accepted Convergence and B07 scopes contain no
-other distinct uncompleted scientific action; ordinary documentary preparation is
-complete. Pending R selection is not an engineering impossibility or owner-approval
-gate, and assigned ownership is distinct from an accepted running experiment.
+(a), applying the current OWNER_DIRECT continuation and the selected PRO_FINAL R.
+The local recommendation in the published question is not the node's verdict.
+The last accepted Convergence and B07 scopes contain no other distinct uncompleted
+scientific action. This documentary preparation is complete and ready for dispatch;
+assigned ownership is distinct from an accepted running experiment or Pro generation.
 
 Preparation adds zero implementation, experiments, models, RNG roots, numerical
 result analysis, tests or Pro Sends. It reuses published counts and observations;
