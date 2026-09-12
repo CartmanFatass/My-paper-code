@@ -1,7 +1,7 @@
 # FSD B02 / 771203 â€” execution
 
-State: exact source delivered once; D0 detached submission accepted and actual
-unfinished-goal Monitor adoption confirmed. No I submission. Owner /root/dm_fsd_d_pair, shared authoring checkout
+State: D0 completed and technically accepted; preselected I is next under fresh
+adjacent admission. D0 Monitor goal completed; I has not yet been submitted. Owner /root/dm_fsd_d_pair, shared authoring checkout
 C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd. Input sync16930177f includes
 Root-assigned bd5fd849a;14748d304 reconciles auto-merged legacy control-only
 differences back to that current Windows input, preserving old commits in history.
@@ -97,3 +97,22 @@ uptime about33s. Source/cwd/output/supervisor bindings agree. DM relinquishes
 routine observation and retains terminal collection/acceptance and preselected
 I continuation. Scientific outcome/resource admission are not yet collected.
 All four new remote paths remain needed for active execution and collection.
+
+## D0 terminal collection and companion acceptance
+
+D0 finished exit0 in475.03s whole-command wall, with
+five full real updates and32 final episodes; all module displacements are
+nonzero, evaluator optimizer calls zero. Original summaries/training, admission,
+process time and supervisor bytes are preserved in D0_collection.tar.gz; all11
+raw digests match. Native own-arm mean J=0.322450441576; no paired
+polarity is available. The intended771203 worktree and source match the raw
+supervisor runner and nine source readbacks. The shortened cwd in the terminal
+chat receipt does not exist: documentary discrepancy, no rerun or science defect.
+
+Root reported D0 Monitor goal complete and active_set empty; I requires fresh
+unfinished-goal adoption in the same Monitor task. Technical options were accept
+complete correctly bound companion or retain a dependent gap; DM selects accept
+under the standing delegation. D0 score does not select I. Owner reviews [] at
+this boundary. Source delivery remains one; I uses the already published exact
+command and original D0 summary on the retained worktree. All four remote roots
+remain necessary for I and paired collection.

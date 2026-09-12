@@ -48,15 +48,47 @@
     {
       "purpose": "receipt preparation read failed on Windows default cp1252; no scientific effect",
       "wall_seconds": 0.2870528
+    },
+    {
+      "purpose": "previous D0 adopted-receipt preparation",
+      "wall_seconds": 0.2746345
+    },
+    {
+      "purpose": "previous D0 adopted-receipt commit",
+      "wall_seconds": 0.5637016
+    },
+    {
+      "purpose": "previous receipt push and owner boundary read",
+      "wall_seconds": 4.4606463
+    },
+    {
+      "purpose": "sole actionable D0 Relay handoff",
+      "wall_seconds": 0.15
+    },
+    {
+      "purpose": "current D0 terminal acceptance input read",
+      "wall_seconds": 0.1113166
+    },
+    {
+      "purpose": "current primary owner/config boundary read",
+      "wall_seconds": 0.453036
+    },
+    {
+      "purpose": "raw D0 collection and source/path reconciliation",
+      "wall_seconds": 0.9379817
+    },
+    {
+      "purpose": "read collected measurement shapes",
+      "wall_seconds": 0.2424675
     }
   ],
-  "known_support_wall_seconds": 37.218382899999995,
+  "known_support_wall_seconds": 44.41216709999999,
   "counting": "Each known enclosing invoked command once. Initial batched output had one unavailable command wall; apply_patch, current owner-card preparation and later operations are recorded where measured or explicit unknown. Agent/provider/calendar time separate.",
   "unknown": [
     "one initial batched read command wall unavailable in truncated output",
     "apply_patch execution interval where tool reports rounded zero",
     "future Monitor/relay/client and Root integration terms",
-    "current launch-receipt write/commit/push until measured"
+    "current D0 acceptance/publication until measured"
   ],
   "source_delivery_transactions": 1,
   "scientific_submissions": 1,
@@ -65,5 +97,8 @@
     "enclosing_tool_seconds": 6.3134795,
     "within45": true,
     "nested_not_readded": true
+  },
+  "native_wall_seconds": {
+    "D0": 475.03
   }
 }
