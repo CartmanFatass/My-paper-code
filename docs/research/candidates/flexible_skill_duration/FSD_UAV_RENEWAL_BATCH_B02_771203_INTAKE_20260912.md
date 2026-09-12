@@ -102,35 +102,41 @@ introduce discretionary reclassification or a separate close-call item.
 4. **Preservation/cleanup, technical.** Options: publish unique source/evidence
    and reclaim the four terminal remote targets after Root retention acceptance,
    or retain for an actual live/unique-state dependency. Recommend/select the
-   former; original archives and inventory are prepared, removal not yet executed.
+   former. Root accepted both archives and22 raw files at main42a483997; the
+   four terminal targets were removed with verified disk/Git-registration absence.
 
 **Owner-delegated decision (unattended,2026-09-03 instruction): accept;
 above_mei; end; preserve then scoped reclaim, at the actual states above.**
 Owner flags:none. No historical quarantine or wider lifecycle is changed.
 
-## Costs, preservation and remaining cleanup
+## Costs, preservation and completed cleanup
 
 D0/I complete wall475.03/1042.92s, native sum1517.95s, aggregate CPU5999.42s,
 peak RSS1663808/3476952KiB. Native caps pass. Exactly one source delivery took
-6.063s complete helper wall within45s. Known support at preparation is64.7597181s;
-SUPPORT.json records later known intervals once. Initial missing command wall,
+6.063s complete helper wall within45s. SUPPORT.json records all known invoked
+support intervals once through the cleanup/publication snapshot. Initial missing command wall,
 rounded patch/send intervals, Monitor/client/Root attribution and publication
 tails remain explicit. `resources_unmeasured` limits complete-cost certification;
 no observed cap or engineering-scope breach. Validity is not inferred from cost.
 
-All22 original raw files in two archives match their remote bytes. The exact
-source worktree is clean apart from six known ignored outputs; both PIDs and
-tmux sessions are absent and supervisors finished/exit0. The shortened D0
+All22 original raw files in two archives matched their remote bytes before
+removal. The exact source worktree was clean apart from six known ignored
+outputs; both PIDs/tmux were absent and supervisors finished/exit0. The shortened D0
 terminal receipt cwd was resolved from raw runner/source evidence to the correct
 771203 path; it was documentary and created no retry. Both Monitor goals ended
 with terminal delivered and active_set empty. There is no unfinished observation.
 
-CLEANUP_INVENTORY.json names the sole worktree44,083,042 bytes, input root1209,
-D0 supervisor2311 and I supervisor2300. These are retained only through Root's
-confirmation of published preservation, then this DM performs scoped removal
-and verifies disk/worktree-registration absence. Shared codex/fsd authoring and
-shared remote repository stay intact. No local scratch or extraction tree exists;
-older duplicate/evidence paths are outside this grant.
+CLEANUP_INVENTORY.json names the four removed targets and their prior sizes:
+worktree44,083,042 bytes, input root1209, D0 supervisor2311 and I supervisor2300.
+Root accepted retained source/evidence at main42a483997. Before removal, both
+archives were read from that accepted commit and all22 raw file digests matched
+the terminal remote files. CLEANUP_RECEIPT.json records exact containment, clean
+source, absent PIDs/tmux, removal at 2026-09-12T19:15:28Z and verified disk/Git
+registration absence for all four targets. Other prior worktree registrations,
+shared codex/fsd authoring and shared remote repository remain intact. No local
+scratch or extraction tree exists; older duplicate/evidence paths are outside
+this grant. Primary owner reviews returned[] at this clean boundary. No run,
+observation, collection or cleanup obligation remains for this finite allocation.
 
 Supervisor timestamps put the D0-start→I-terminal elapsed path at1798s
 (one-second resolution), including inter-arm collection/publication. This is

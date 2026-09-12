@@ -143,5 +143,7 @@ low-confidence prediction is correct; owner prediction not taken. This is
 another small local package gain with partial support telemetry, not stable
 advantage. [Result](FSD_UAV_RENEWAL_BATCH_B02_771203_RESULT_EVIDENCE_20260912.md)
 and [intake](FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md) preserve all
-outcomes and the finite no-successor boundary. Cleanup follows retained-evidence
-acceptance; no extra measurement is allocated.
+outcomes and the finite no-successor boundary. Root accepted retention at
+main42a483997; all four terminal remote targets were removed with disk/Git
+registration absence verified in CLEANUP_RECEIPT.json. The allocation is complete;
+no extra measurement is allocated.

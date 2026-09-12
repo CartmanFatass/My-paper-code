@@ -1,0 +1,146 @@
+{
+  "retention_verification": {
+    "D0": {
+      "commit": "42a483997",
+      "path": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771203_20260912/D0_collection.tar.gz",
+      "sha256": "381ea7bf108f0f9d6f4fe8583aa924ae934aede60fa0e434601b3bb3720900e4",
+      "verified_raw_files": 11
+    },
+    "I": {
+      "commit": "42a483997",
+      "path": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771203_20260912/I_collection.tar.gz",
+      "sha256": "5258371b2e9d36467439f5b290a53563321781388d671c0ac0001626a0cf5d6e",
+      "verified_raw_files": 11
+    }
+  },
+  "transport_returncode": 0,
+  "ssh_wall_seconds": 1.0929999999934807,
+  "stderr": "",
+  "remote": {
+    "started_utc": "2026-09-12T19:15:28.307729+00:00",
+    "root_retention_commit": "42a483997",
+    "source_sha": "9eb99f8b68dd2863212c10693b911746a6d24354",
+    "authorized_targets": [
+      "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912",
+      "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771203-20260912",
+      "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771203-D0-20260912",
+      "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771203-I-20260912"
+    ],
+    "actions": [
+      {
+        "target": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912",
+        "method": "git worktree remove --force",
+        "completed": true
+      },
+      {
+        "target": "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771203-20260912",
+        "method": "shutil.rmtree exact root",
+        "completed": true
+      },
+      {
+        "target": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771203-D0-20260912",
+        "method": "shutil.rmtree exact root",
+        "completed": true
+      },
+      {
+        "target": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771203-I-20260912",
+        "method": "shutil.rmtree exact root",
+        "completed": true
+      }
+    ],
+    "new_scientific_invocations": 0,
+    "preconditions": {
+      "source_and_clean_tracked_tree": true,
+      "ignored_files": [
+        "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/D0/manifest.json",
+        "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/D0/summary.json",
+        "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/D0/training.jsonl",
+        "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/I/manifest.json",
+        "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/I/summary.json",
+        "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/I/training.jsonl"
+      ],
+      "terminal_supervisors": {
+        "D0": {
+          "status": "finished",
+          "exit_code": 0,
+          "pid": 3381323,
+          "pid_exists": false,
+          "matching_tmux_sessions": []
+        },
+        "I": {
+          "status": "finished",
+          "exit_code": 0,
+          "pid": 3384259,
+          "pid_exists": false,
+          "matching_tmux_sessions": []
+        }
+      },
+      "verified_retained_raw_files": [
+        "D0/manifest.json",
+        "D0/summary.json",
+        "D0/training.jsonl",
+        "inputs/D0_admission.json",
+        "inputs/D0_process_time.txt",
+        "supervisor_D0/exit_code",
+        "supervisor_D0/pid",
+        "supervisor_D0/runner.sh",
+        "supervisor_D0/start_time",
+        "supervisor_D0/status",
+        "supervisor_D0/task.log",
+        "I/manifest.json",
+        "I/summary.json",
+        "I/training.jsonl",
+        "inputs/I_admission.json",
+        "inputs/I_process_time.txt",
+        "supervisor_I/exit_code",
+        "supervisor_I/pid",
+        "supervisor_I/runner.sh",
+        "supervisor_I/start_time",
+        "supervisor_I/status",
+        "supervisor_I/task.log"
+      ],
+      "exact_target_containment": true,
+      "no_unretained_input_or_supervisor_files": true
+    },
+    "postconditions": {
+      "targets": {
+        "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912": {
+          "disk_exists": false,
+          "symlink_exists": false,
+          "git_registered": false
+        },
+        "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771203-20260912": {
+          "disk_exists": false,
+          "symlink_exists": false,
+          "git_registered": false
+        },
+        "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771203-D0-20260912": {
+          "disk_exists": false,
+          "symlink_exists": false,
+          "git_registered": false
+        },
+        "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771203-I-20260912": {
+          "disk_exists": false,
+          "symlink_exists": false,
+          "git_registered": false
+        }
+      },
+      "other_prior_git_registrations_preserved": true,
+      "shared_remote_repo_exists": true,
+      "shared_remote_repo_registered": true
+    },
+    "complete": true,
+    "finished_utc": "2026-09-12T19:15:28.503451+00:00",
+    "inner_wall_seconds": 0.19576127699110657
+  },
+  "local_shared_authoring": {
+    "path": "C:/Projects/HMASD-worktrees/codex-fsd",
+    "branch": "codex/fsd",
+    "exists": true,
+    "preserved": true
+  },
+  "owner_reviews_at_clean_boundary": {
+    "source": "C:/Projects/HMASD",
+    "unapplied": []
+  }
+}
