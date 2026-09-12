@@ -1,0 +1,106 @@
+{
+  "id": "20260912-root-003",
+  "created": "2026-09-12T09:02:45-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "完成S/A后的独立完整B边际投资建议",
+  "context": "当前0/5；ACVC/RCLE未来B已选，CBSC候选已成，均未获实现/实验款。建议C/R/F三条完整有限链；M或不追加是实质备选。由同一Portfolio最终决定，未auto-apply。",
+  "options": [
+    {
+      "key": "crf",
+      "label": "建议 C+R+F",
+      "consequence": "若Portfolio选择，独立新资助三条完整B链，future invoked-work合计≤4500秒，累计旧S/A未知保留一次。"
+    },
+    {
+      "key": "fm",
+      "label": "较小 F+M",
+      "consequence": "若Portfolio选择，只资助训练F pair与MGTAP unchanged pair，future合计≤2400秒，其他无自动款。"
+    },
+    {
+      "key": "hold",
+      "label": "全部不追加",
+      "consequence": "不增加实现/检查/fit或咨询款，保留现有参考与全部证据。"
+    },
+    {
+      "key": "amend",
+      "label": "明确其他子集/额度",
+      "consequence": "Portfolio写明具体子集、全部必要工作和新的成本口径/上限，不能从空槽推出额度。"
+    }
+  ],
+  "recommended": "crf",
+  "auto_applied": null,
+  "dm_reason": "已形成的具体比较比重复准备更有决策用途；共享故障、噪声和完整成本未知使M/H仍是强备选。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L24",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "S/A 都已完成且科研工作集为0/5时，是否新资助 CBSC 完整实现+pair、RCLE 单fit、ACVC 训练F pair，或改选MGTAP/不追加？",
+    "changes_if_approved": [
+      {
+        "target": "CBSC C",
+        "from": "17-byte候选已完成；没有实现、测试或实验款",
+        "to": "建议新买完整实现/相关检查与独立review/一fresh pair/intake；新future native600/arm、1200总和，support600，future invoked-work1800秒。"
+      },
+      {
+        "target": "RCLE R",
+        "from": "原方向已选exact equal-unit single fit；实现/数值为零",
+        "to": "建议新买完整实现/检查/review与一个fit，own-init/attained-nearest比较；native900、support600、future invoked-work1500秒。"
+      },
+      {
+        "target": "ACVC F",
+        "from": "原Convergence已选训练through-F vs训练C、两边deployF；A结束",
+        "to": "建议新买faithful PPO实现、检查/review和一pair；native270/arm、540总和，support660、future invoked-work1200秒；recasts2争用排序保持。"
+      },
+      {
+        "target": "MGTAP 与成本口径",
+        "from": "M曾被保持不追加；旧S+B/A+B数字从未拨款，S/A完整花费未知",
+        "to": "M保持为真实备选：新一pair future invoked-work1200秒。C/R/F仅建议三条独立链、future合计4500秒；必须由Portfolio明确接受新边际口径，累计保留旧S/A实际成本一次、未知仍未知。"
+      }
+    ],
+    "if_refused": "H不追加，保留现有参考与全部证据；可改选更小F+M或任意明确子集。拒绝/工程失败都不自动释放备用M或第五款，不新增准备/咨询循环。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/SCIENCE_BRIEF.md",
+        "quote": "A further round of the same preparation or\nconsultation would repeat a completed decision rather than buy its observation.",
+        "why": "CBSC候选和ACVC/RCLE方向选择已形成，下一有用投入是完整有限比较。"
+      },
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_S_READINESS_INTAKE_20260912.md",
+        "quote": "The strongest support is the actual small interface closure: finish receives\nfully generated public tokens plus separate evaluator truth;",
+        "why": "有具体替换边界，不能把未购买的runtime验证当作没有候选。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/SCIENCE_BRIEF.md",
+        "quote": "C/R/F may all fail to change a useful decision;\nengineering costs and one-unit uncertainty make H credible.",
+        "why": "一pair/fit不是稳定结论，CBSC共享故障面和RCLE归一化噪声仍可能吞掉预算。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/SCIENCE_BRIEF.md",
+        "quote": "M is held in the recommendation, never an automatic fallback or a reserve.",
+        "why": "M健康路径及旧358.11秒native是强备选，但新一pair用途要与已有inside/adverse结果一起衡量。"
+      }
+    ],
+    "uncertainty": [
+      "旧S的53秒只是已知support前缀；A完整耗时与provider成本未知，不能宣称旧余额或完整lifetime上限。",
+      "改变后的CBSC/RCLE/训练F运行率未知；新数字是有限投入ceiling，不是forecast或自动launch。",
+      "所有22方向当前匹配宿主调优headroom缺完整记录；不增加先求exact upper、全故障归因或cost实验门槛。",
+      "五槽是并行目标，当前准备不占槽；全部选C/R/F也只有三条方向。"
+    ],
+    "cost": {
+      "compute": "本包零新科学/Send暴露。建议新future invoked-work C1800+R1500+F1200=4500秒；M备选1200。全部未来实现/检查/review/Monitor/收集/intake/清理在款内；累计旧费用另记一次且未知不填零。",
+      "owner_time": "无需逐项批准；完整同节点决定核对后执行，owner可异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "只有尚未资助的新工作；没有运行中的direction/实验，cleanup不占槽。"
+    },
+    "verdict_text": "Author recommendation only: newly fund C (CBSC), R (RCLE) and F (ACVC) as three independent complete B chains; hold M (MGTAP) for now. No Portfolio selection executed.",
+    "source": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/SCIENCE_BRIEF.md"
+  },
+  "starred": true
+}
