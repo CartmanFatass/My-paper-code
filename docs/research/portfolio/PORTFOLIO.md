@@ -1,6 +1,37 @@
 # HMASD Research Portfolio
 
-## Current execution ownership — 2026-09-12 04:45 UTC
+OWNER_DIRECT 2026-09-12: Windows control and research are resumed under new Root.
+See [current recovery record](decisions/2026-09-12-windows-root-resumption.md) for routing,
+actual assignments and the FOLR support-reference clarification. It supersedes the
+handoff-only pause and older execution counts below; scientific limits remain scoped.
+
+
+## Owner handoff-only boundary — 2026-09-11 PDT
+
+**OWNER_DIRECT: “后续不要再开启新的DM 现有DM进入handoff”.** Root stops new DM
+creation and research continuation dispatch. The two remaining active DMs, ACVC
+and FOLR, were instructed through `followup_task` to preserve/publish their current
+work and precise remaining actions, return a recoverable handoff, and stop.
+Completed historical DMs remain stopped. No replacement chain, successor, new
+experiment or Pro question is started. Later status/receipt processing does not
+resume research without a new owner instruction.
+
+All five ACVC scientific handles are already terminal; its final complete analysis
+was reported before this boundary and is being preserved with its exact completion
+state. FOLR is preserving its zero-exposure prelaunch-cap stop and verified remote
+termination/absence facts. Root only accepts/integrates these existing handoffs.
+Monitor has an empty active set; Transport preserves unaccepted RCLE for handoff
+and holds new Sends. Prior working-set counts below are pre-handoff snapshots,
+not dispatch instructions or vacant slots to refill.
+
+FOLR's handoff is now accepted and integrated through `51bbbdbb9`; its DM has
+stopped. Root verified the committed control archive and all six retained local
+files byte-for-byte (1,190,184 bytes). The preserved terminal receipt records no
+owned remote processes, checkout/registration or supervisor roots. Shared/local
+evidence remains retained under the owner handoff instruction. ACVC's final
+handoff is still being prepared; no research continuation is dispatched.
+
+## Current execution ownership — 2026-09-12 04:52 UTC
 
 This current snapshot supersedes the operational counts/waits in older dated sections
 below. Those sections retain their historical allocations and evidence; an old `zero
@@ -8,17 +39,17 @@ advancing` or pending-request sentence is not a current scheduling instruction.
 
 | Direction/work | Actual state and accountable owner | Next action and wake |
 | --- | --- | --- |
-| ACVC C01 | Unit 1 finished normally; original DM `dm_acvc_restart_successor2` is actually running on the routed terminal return. Source/card/commands/launch integrated through `2fadb1ddc`. | Same DM collects unit 1 and executes fixed units 2–5 within the existing caps, with fresh admission and actual Monitor adoption each time. No interim efficacy gate or extra fit. |
-| FOLR new unchanged pair | Complete Portfolio response is integrated at `a9c6ba2bf`; designated DM reports F+U conformance PASS and is publishing the decision/mapping. This Portfolio publication is not a new empirical start. | Root integrates the published mapping and resumes the original FOLR DM for the selected pair; native completion relay wakes Root. No dependency on ACVC or RCLE. |
+| ACVC C01 | Final fixed unit5 ended exit0 at05:16:12 UTC, whole164.41s; all five submitted handles are terminal. Monitor closed empty active set and Root resumed the original DM. | Same DM completes final collection, frozen five-unit primary, scientific intake and scoped preservation/closeout. Terminal exits alone are not C01 acceptance; no sixth fit or automatic successor. |
+| FOLR new unchanged pair | Prelaunch stop: owned remote preparation outlived the55s client timeout; parent git274.81s raises known support lower bound308.8422538s above300. No scientific submission/state or accepted handle. | Original DM verifies termination of identified owned preparation processes, preserves receipts and publishes technical intake/closeout. No stagingretry, launch, automatic top-up or scientific polarity; any future funded continuation requires its proper decision. |
 | RCLE Convergence | Original request remains unaccepted, with two ineffective clicks. Independent Transport owns recovery; fresh original-Edge selection still returns `Browser is not available: 2`. | Restore the original Edge connection, then Transport resumes the same request's reviewed preflight and repaired submission. No replacement question, hidden new Send, or advancing-slot count. |
 | FSD / MGTAP / UCOPE / VSP03 | Named allocations and intakes are complete; no successor is selected by those completions. | Preserve results and boundaries. A future scientific investment requires its proper decision; these are not unattended live jobs. |
 | VNFC / CBSC / FRRIE | Prior bounded technical work is complete; an attributable runtime repair/new funded scientific invocation remains absent. | Keep the recorded concrete readiness/authority boundaries; no routine polling or unallocated retry. |
 
-At this snapshot **one direction chain actually advances (ACVC), four working-set
-slots are vacant**; FOLR Portfolio intake/publication is separately owned and not
-counted as a direction start. Vacancies create no numerical allowance. The current
-FOLR mapping will update that count when its original DM actually starts the funded
-continuation. Lifecycle, priority and recast fields remain unchanged.
+At this snapshot **one research chain advances (ACVC), four working-set slots are
+vacant**. FOLR's prelaunch grant is stopped; its original DM's remaining technical
+closeout is explicitly owned and not counted as an available empirical continuation.
+Vacancies create no numerical allowance. Lifecycle, priority and recast fields
+remain unchanged.
 
 Root checked owner-console reviews: no unapplied instructions. Monitor delivered
 ACVC unit-1 terminal and then `MONITOR_GOAL_COMPLETE` with an empty active set;

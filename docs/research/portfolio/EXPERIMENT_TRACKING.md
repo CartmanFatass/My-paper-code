@@ -1,6 +1,31 @@
 # HMASD experiment tracking
 
-## Current rolling handoffs — 2026-09-12 04:45 UTC
+OWNER_DIRECT 2026-09-12: Windows control and research are resumed under new Root.
+See [current recovery record](decisions/2026-09-12-windows-root-resumption.md) for routing,
+actual assignments and the FOLR support-reference clarification. It supersedes the
+handoff-only pause and older execution counts below; scientific limits remain scoped.
+
+
+## OWNER_DIRECT: existing DMs enter handoff
+
+The owner instructed: “后续不要再开启新的DM 现有DM进入handoff”. No new DM or
+research continuation is dispatched. ACVC/FOLR are the only remaining active DMs
+and have received explicit handoff-only instructions; all other native DMs are
+already completed and remain stopped. All five ACVC handles are terminal and
+Monitor reports an empty active set. Remaining work is evidence/ready-result
+publication, precise recovery inventories and Root acceptance of existing handoffs.
+Transport holds unaccepted RCLE recovery without further Send or repeated browser
+checks. The rolling status below is historical relative to this owner boundary.
+
+FOLR B03 handoff accepted: source/card89035d8f1→`f227552b7`, commandse3ac72da5→
+`13299d89c`, technicalhandoff31a5b81c7→`51bbbdbb9`. Zero scientific exposure/null
+primary; support breach308.8422538s at stop, later known lower bound321.5195587s
+plus unmeasured publication/relay/integration. Six local files/committed ZIP match;
+archiveSHA25671a64ec6e0dc52f9956fa7ab02520a2ce7a56698a555c139079fd8415341f7d8.
+Terminal absence receipt05:11:49.332649Z is preserved. DM stopped; remaining local
+retention is intentional and owned by Root, with no new removal or continuation.
+
+## Current rolling handoffs — 2026-09-12 04:52 UTC
 
 Current execution ownership is recorded at the top of [PORTFOLIO.md](PORTFOLIO.md).
 Older pending/zero-active paragraphs below are dated evidence, not current status.
@@ -18,19 +43,63 @@ Older pending/zero-active paragraphs below are dated evidence, not current statu
   1024 updates, 192 final episodes and 180224 ticks are complete; fixed unit 2 is
   proceeding. Monitor's per-handle observation command-wall total is unavailable,
   remains an explicit support-account unknown, and is not reconstructed by rerunning.
+  Unit1 component intake/evidence is integrated at `03053c42f`. Unit2
+  `acvc-fresh-dense-c01-11477-3fd9062d5` was accepted at04:52:15.804337Z;
+  direct Monitor adoption at04:52:30Z confirms running with that exact singleton
+  active set. Root forwarded adoption to the same DM; no terminal result is yet claimed.
+  Subsequent unit2 terminal at04:55:04Z reports exit0, whole168.51s, reported process
+  164.04035623092204s and peak548684KiB. Root immediately used `followup_task` for
+  full collection/acceptance and fixed unit3 `(18150,21370)`; precise summary timing
+  remains for collection verification. Monitor then confirmed empty-set goal completion.
+  Complete unit2 intake is now integrated at `e3f726244`: all required records and
+  12 raw files match; full-summary wall164.04166260396596s, earlier164.04035623092204s
+  was the last-panel log. Inclusive unit charge171s, completed sum341s. Fixed unit3
+  `acvc-fresh-dense-c01-18150-3fd9062d5` accepted04:59:38.304056Z; direct Monitor
+  adoption04:59:50Z confirms running and that exact active handle, forwarded to DM.
+  Unit3 terminal05:02:33Z reports exit0, whole175.29s, last-panel log169.74978735507466s
+  (not full-summary process wall), peak550036KiB. Monitor delivered empty-set goal
+  completion; Root resumed the original DM via `followup_task` for full unit3
+  collection and fixed unit4 `(12604,21030)` then unit5, without an efficacy gate.
+  Unit3 complete intake is integrated at `73586502d`, fullsummary169.75113218510523s,
+  charge178s and completed sum519s. All required counts/panels and12rawfiles match.
+  Unit4 `acvc-fresh-dense-c01-12604-3fd9062d5` accepted05:07:36.853166Z and actual
+  Monitor adoption05:08:00Z confirms running; Root forwarded adoption to original DM.
 - Main accepted card/source/commands/launch as `0d3bc3257`, `0451da37a`,
   `3ed01fb83`, `2fadb1ddc`. Existing 12 focused checks and independent no-material-
   finding review are reused; no repeat scientific or verification invocation.
-- FOLR's designated DM is actively publishing the conforming F+U Portfolio mapping
-  from the complete response already integrated at `a9c6ba2bf`; Root owns immediate
-  integration and dispatch when that handoff arrives. No empirical start is yet
-  claimed by this snapshot.
+- FOLR's F+U mapping/publication are integrated at `deb2e5e1e`/`5f0cbde26` from the
+  full response `a9c6ba2bf`. Root resumed the original DM using `followup_task`,
+  and the DM confirmed switching to the funded pair on the shared direction branch.
+  It is an actual preparation/execution chain, with no native launch claimed yet.
+  DM then published B03 card/source89035d8f1 and commandse3ac72da5, fresh7811/107811.
+  Single source-only staging timed out55s before receipt, with no scientific command
+  in that transaction. Same DM actively reconciles remote checkout/namespace once,
+  preserving uncertain staging effects and existing support budget; no run accepted.
 - RCLE Transport rechecked original Edge browser 2/tab 507083308 and received
   `Browser is not available: 2`; original count 2 and exact request remain intact.
   Same-request recovery is owned by Transport, with original connection restoration
   as its explicit prerequisite. No accepted generation is counted.
 
-Actual direction count: 1; vacancies: 4. Published intentions, completed returns,
+FOLR reconciliation subsequently established a prelaunch stop: parent preparation
+git elapsed274.81s, known support lower bound308.8422538s>300, no accepted scientific
+handle/state. Original DM owns termination verification, receipt preservation and
+technical intake; no stagingretry or launch is permitted under the exhausted grant.
+ACVC unit4 terminal05:10:23Zexit0/whole166.65s was routed immediately; DM confirms
+complete component with fullsummary162.05238466197625s and charge169s/completed688s,
+and is publishing before fixedfinalunit5. Monitor closed its empty active set.
+Four-unit complete evidence/intake and the fourth-unit launch history are integrated
+through `19cc47bb5` (direction0c797c30e including preceding62cb66d2e facts). Final
+unit5 `acvc-fresh-dense-c01-14295-3fd9062d5` accepted05:13:28.312209Z; actual
+Monitor adoption05:13:40Z confirms running and the exact active handle, forwarded
+to original DM. Five-unit primary remains pending; no additional fit is selected.
+Finalunit5 terminal05:16:12Z reports exit0, whole164.41s,last-panel159.80775067897048s,
+peak548600KiB. Monitor then delivered empty-set goalcompletion; Root immediately
+resumed sameDM via `followup_task` for finalcollection, completefivereduction,
+scientificintake andscopedpreservation/closeout. Allfivehandles are terminal;
+completeprimary/C01disposition is not yet inferred.
+
+Actual advancing research count: 1; vacancies: 4. FOLR technical closeout remains
+owned separately. Published intentions, completed returns,
 cross-direction authoring and unresolved browser waits are excluded. No pending
 Monitor handle is orphaned at this snapshot. Later changed events update this
 section or the current Portfolio snapshot rather than silently inheriting old counts.

@@ -136,3 +136,21 @@ At `2026-09-12T04:40:37.079656+00:00`, the supervisor accepted exactly one submi
 The live primary Monitor `01a087e5-2044-7301-abb6-7a1709a98197` accepted direct MONITOR_ADD. Root then confirmed actual MONITOR_ADOPTED: adopted `2026-09-12T04:41:00Z`, active set exactly this handle, supervisor running, PID 3364324, uptime 30 s and active tmux. The Monitor retains the handle until its terminal notice is delivered to Root. DM has stopped remote polling and retains collection/technical acceptance. Launch and adoption facts are preserved in the execution facts above; accepted delivery and actual adoption are distinct.
 
 On the routed terminal fact, DM collects and preserves this complete unit, checks its dependent integrity/counts and cost, then continues fixed unit 2 `(11477,24930)` without an efficacy/futility gate. Units 2–5 remain unsubmitted, with their commands already fixed. No complete five-unit result exists and C01 is not consumed. Root's active Transport correction from main `8bf1269e5` is applied: full immutable response evidence controls intake, and a short transport receipt does not imply no decision. ACVC's complete Innovator acceptance already followed that rule; its accepted source needs no correction.
+
+## 12. First component preserved; fixed unit 2 adopted
+
+Unit 1 collection and technical acceptance are published at `694ce0cd1320f144efcddc1ca9f509893712b71e`, with complete counts, every native outcome and checkpoint/archive preservation. Its inclusive native charge is 170 s; its completed component does not consume C01. See the accumulating E0 and component intake for the conditional observations and explicit unknown Monitor time/cleanup limitation.
+
+The unchanged fixed unit 2 `(11477,24930)` command was accepted once at `2026-09-12T04:52:15.804337+00:00`, handle `acvc-fresh-dense-c01-11477-3fd9062d5`, same frozen source, execution checkout and original five-command binding. Fresh adjacent actual-node admission precedes its full learner/panel path. Direct Monitor dispatch succeeded, and Root confirmed actual adoption at `2026-09-12T04:52:30Z`, active set exactly that running handle. DM stopped remote polling and retains collection. Unit 2 terminal collection, followed by fixed unit 3 `(18150,21370)`, remains pending; no efficacy/futility decision, additional check run or scientific change was introduced.
+
+## 13. Second component preserved; fixed unit 3 adopted
+
+Unit 2 collection and technical acceptance are published at `c669a3fd2c4d77539590f31512a90dabe8b05018`, including every outcome, complete counts and actual summary/last-panel timing roles. Its inclusive native charge is 171 s; two-unit completed native charge is 341 s. The unchanged fixed unit 3 `(18150,21370)` was accepted once at `2026-09-12T04:59:38.304056+00:00`, handle `acvc-fresh-dense-c01-18150-3fd9062d5`, from the same frozen source/checkout/command list and with fresh adjacent admission.
+
+Direct Monitor dispatch succeeded; Root confirmed actual adoption at `2026-09-12T04:59:50Z`, active set exactly that running handle. DM stopped remote polling and retains terminal collection and fixed unit 4 `(12604,21030)` continuation. Units 4–5 remain unsubmitted. No population result, C consumption, interim efficacy decision, repeated check or extra scientific invocation was introduced.
+
+## 14. Owner-directed handoff after complete data and calculation
+
+All five preselected units are complete, collected and technically accepted. The frozen source3fd9062d5456a6b61a132a16ebd33a7099810143 primary ran once over all five and returned JOINT_ABOVE_MEI under exactly §4’s qualification. The valid complete C meets its consumption condition; no repeat/successor is allocated. [E0](ACVC_FRESH_DENSE_PACKAGE_C01_RESULT_EVIDENCE_20260911.md) preserves all outcomes.
+
+OWNER_DIRECT now requires existing DMs to enter HANDOFF. Full final scientific intake and DIRECTION synthesis remain unfinished, as specified in the [intake handoff](ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#owner-directed-handoff). All scientific handles are terminal; final Monitor goal is complete/empty; source, evidence and checkouts are retained. No further research or discretionary cleanup proceeds. This status appendix changes no frozen rule or historical fact.

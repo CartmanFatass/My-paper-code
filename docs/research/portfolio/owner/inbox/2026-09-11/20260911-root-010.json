@@ -29,7 +29,7 @@
     }
   ],
   "recommended": "f_u",
-  "auto_applied": null,
+  "auto_applied": "f_u",
   "dm_reason": "直接观测原样FOLR有具体决策用途且已知完整原生成本；持有空位仍是接近备选，FSD问题不因零学习就被当作便宜。",
   "evidence": [
     "docs\\research\\portfolio\\pro_packets\\20260911_folr_unchanged_pair_funding\\SCIENCE_BRIEF.md",
@@ -108,6 +108,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-11-folr-unchanged-pair-funding.md",
       "state": "planned",
       "summary": "完整Pro最终F+U通过指定DM核对；新FOLR一对1350/2700/300/3000，FSD无新问题或后继。准备项由最终项20260911-root-011承接；Root真实应用待记录，未声称实验启动。"
+    },
+    {
+      "at": "2026-09-12T04:52:49+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/root-log/2026-09-11.md",
+      "state": "applied",
+      "summary": "Root integrated deb2e5e1e/5f0cbde26 and resumed original FOLR DM; DM confirmed funded pair continuation. FSD U retained. Native launch remains pending."
     }
   ]
 }
