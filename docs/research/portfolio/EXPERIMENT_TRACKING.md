@@ -5,19 +5,23 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC | Original-node cluster-law object selected; original DM actively prepares exact implementation/resource readiness, no empirical grant | Deliver bounded cost/readiness input to Portfolio; no implementation, repeat consultation or third training-F pair |
+| ACVC | Cluster-law readiness packet integrated at main180e18763; 180,224 team steps, native/support unknown, no empirical grant | Portfolio decides investment from the fixed readiness input; no implementation, repeat consultation or third training-F pair |
 | MGTAP | Portfolio T=yes at main2492dcb06; original DM resumed for the selected TOP/intact-DENSE B | Execute one pair under 450s/arm,900native,300support,1200complete through Monitor/intake/cleanup |
-| FSD | Fifth pair accepted ABOVE_MEI; four-target scoped cleanup verified complete at main0603d31c1, finite N fully closed, direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice; no automatic sixth pair/S/successor |
+| FSD | Fifth pair and cleanup complete; original DM actively prepares a bounded distinct next-object/lifecycle decision input from all five pairs | Deliver 2–3 concrete choices to Portfolio; no automatic sixth pair/S/implementation/experiment |
 | RCLE | Original-node intake accepted at main8973c0515: HOLD only tested equal-unit/.99-prior/FLEX/final1000 spending; direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice from refreshed evidence; no repeated recipe, fit or consultation |
 | FOLR | Entity-history family OPEN; original DM actively prepares exact implementation/resource readiness, no empirical grant | Deliver bounded cost/readiness input to Portfolio without changing old package H or repeating consultation |
 | ACPS | Newly registered ACTIVE/HIGH; accountable DM active on ACPS-B01 source/card/implementation readiness | One matched pair under450s/arm,900native,900support,1800complete after fresh admission |
 | CADC | Newly registered ACTIVE/HIGH; accountable DM active on CADC-B01 source/card/implementation readiness | One matched pair under600s/arm,1200native,900support,2100complete after T→ACPS→CADC contention order |
 | Portfolio | New-direction/MGTAP-T decision accepted at main2492dcb06; separate ACVC/FOLR/RCLE/FSD round is being authored | Apply T/ACPS/CADC independently and prepare the four distinct later choices without batch waits |
 
-Strict advancing direction-DM chains5/5: MGTAP, ACPS, CADC, ACVC and FOLR each have an active
-accountable DM with concrete current work. FSD and RCLE remain ACTIVE in the separate Portfolio
+Strict advancing direction-DM chains5/5: MGTAP, ACPS, CADC, FSD and FOLR each have an active
+accountable DM with concrete current work. ACVC and RCLE remain ACTIVE in the separate Portfolio
 round; they are not used to fill the five count. Temporary overlap drains at each direction's clean
 boundary, and no ended allocation is interpreted as a direction stop.
+
+One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
+to ACPS support only, unknown unless directly measured. MGTAP T and CADC exclude that shared item;
+each direction still counts its own implementation-through-cleanup and later Root integration once.
 
 ## Current routing
 

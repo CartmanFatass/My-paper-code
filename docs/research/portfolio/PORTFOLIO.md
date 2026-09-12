@@ -8,7 +8,7 @@
 本表登记17 ACTIVE、10 PARKED。新注册ACPS、CADC为ACTIVE/HIGH；TRDL、CPCP、LCAC为PARKED/MEDIUM。原22方向生命周期、priority、recasts与UAV字段不变。
 最新 [Portfolio决定](decisions/2026-09-12-two-remaining-chains.md) 已由原作者完整核对：**FSD D与FOLR P独立获选，MGTAP不追加。**
 
-Root当前严格推进DM链5/5：MGTAP、ACPS、CADC、ACVC、FOLR均有实际DM工作。FSD与RCLE仍ACTIVE并在后续Portfolio轮中，不用于补足该计数；临时重叠按各方向clean boundary自然收敛。
+Root当前严格推进DM链5/5：MGTAP、ACPS、CADC、FSD、FOLR均有实际DM工作。ACVC与RCLE仍ACTIVE并在后续Portfolio轮中，不用于补足该计数；临时重叠按各方向clean boundary自然收敛。
 FSD为一对I1280/authentic-D0，D0≤900、I≤1800、native≤2700、support≤300、完整≤3000秒；FOLR仅一次原节点post-B03 Convergence及完整intake，零实验额度、完整成本未知。MGTAP1200未分配。
 新方向发现/注册及独立MGTAP T投入决定已完整intake并集成main2492dcb06：T=yes，ACPS/CADC获有限starter投入，另三项仅注册停放。
 FSD第五pair已完整intake且scoped cleanup完成，现由Portfolio独立起草接续；ACVC、FOLR与RCLE也分别进入同轮独立投入/生命周期起草，MGTAP有在途Portfolio投入裁决。严格推进计数5/5，不以有限分配结束推断停向。
@@ -20,7 +20,7 @@ FSD第五pair已完整intake且scoped cleanup完成，现由Portfolio独立起�
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
 | [ACPS](../candidates/actuator_conditioned_partial_sharing/DIRECTION.md) | 新注册ACTIVE/HIGH；固定异质速度倍率下，比较同信息的actuator-conditioned residual sharing与完整共享DENSE/GRU64。 | 新任DM正在准备ACPS-B01卡、实现、审查和远端准入；尚无handle。 | 一组matched pair，450秒/臂、900native、900support、1800complete；无额外arm/retry/successor。 |
-| [ACVC](../candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE.md) | 原节点选择一个fresh cluster-law C-fit，同一checkpoint做C/F/own-dwell三组64-world panel；历史正负证据均保留。 | intake已集成main4ac951c14，完整投入未知且尚未拨款；Portfolio DM正在起草独立投资请求。 | Portfolio决定成本上限、投入与排序；不重复咨询、不做第三个training-F pair。 |
+| [ACVC](../candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE.md) | 原节点选择一个fresh cluster-law C-fit，同一checkpoint做C/F/own-dwell三组64-world panel；历史正负证据均保留。 | readiness已集成main180e18763：180224 team steps，native/support未知，无拨款；Portfolio DM起草独立投资请求。 | Portfolio决定成本上限、投入与排序；不重复咨询、不做第三个training-F pair。 |
 | [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md) | C pair完整验收为WITHIN_MEI：RAW=STRUCT=11.15、32/32零差，均低于REQUEST_ONLY12.45；只支持本对象的局部零差异。 | 已购pair结束，证据已保全至main9ca150856；无活动科学工作。 | 仅完成已列明的scoped reclamation；无retry、第二个S或自动successor。 |
 | [CADC](../candidates/contention_aware_decentralized_communication/DIRECTION.md) | 新注册ACTIVE/HIGH；显式GOOD/BAD信道、时延与碰撞下，比较学习发送与同信息round-robin发送。 | 新任DM正在准备CADC-B01通道/观察adapter、实现、审查和准入；尚无handle。 | 一组matched pair，600秒/臂、1200native、900support、2100complete；争用顺序T→ACPS→CADC。 |
 | [CPCP](../candidates/cross_play_compatible_population_learning/DIRECTION.md) | 新注册PARKED/MEDIUM；保留跨策略族兼容学习的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
@@ -30,7 +30,7 @@ FSD第五pair已完整intake且scoped cleanup完成，现由Portfolio独立起�
 | [eociv_lite](../candidates/eociv_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
 | [expressibility_gated_renewal_credit_relay](../candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
 | [FRRIE](../candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md) | P59已intake；P63 source-only九frame映射完成，factory fault仍未归因，P63未运行。 | 无；本轮没有新增拨款。 | 可信最小观察/替代执行路径及必要拨款。旧故障未完全定位不自动禁止不同可信路径；不重跑旧P63。 |
-| [FSD](../candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md) | 第五pair有效ABOVE_MEI：I−D0+.0737976492J、26/32正、条件SE.01305278；单pair不代表稳定优势。 | intake与四目标cleanup已完整集成main0603d31c1；Portfolio DM起草独立接续选择，方向ACTIVE。 | Portfolio决定下一投入/生命周期；无自动第六pair、S咨询、额外panel、retry或successor。 |
+| [FSD](../candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md) | 第五pair有效ABOVE_MEI：I−D0+.0737976492J、26/32正、条件SE.01305278；单pair不代表稳定优势。 | intake与cleanup完整；原DM正从全部五pair准备2–3个有界接续选择供Portfolio，方向ACTIVE。 | Portfolio决定下一投入/生命周期；无自动第六pair、S咨询、额外panel、retry或successor。 |
 | [LCAC](../candidates/learned_counterfactual_agent_credit/DIRECTION.md) | 新注册PARKED/MEDIUM；保留learned counterfactual agent credit的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/CONVERGENCE_INTAKE_20260912.md) | 原Convergence已选一个fresh TOP/intact-DENSE B：用masked最高本地SINR row0替代mean visible-partner；8213负、8214正证据分别保留，DENSE默认不变。 | intake已集成main6f506e474；整对象投入需求已交Portfolio，方向保持ACTIVE。 | Portfolio决定450秒/臂、1200秒完整上限的投入与排序；拨款前不实施或启动实验。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
