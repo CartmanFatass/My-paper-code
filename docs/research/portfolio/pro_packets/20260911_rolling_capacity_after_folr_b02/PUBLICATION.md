@@ -99,3 +99,42 @@ this preparation created no scientific/test scratch and attempted no deletion.
 The shared Portfolio checkout has an actual pending delivery/intake dependency,
 so no reclamation of it is requested.
 
+## Accepted completion relay
+
+One app send to the configured relay was accepted, recorded with the exact
+payload and tool result in RELAY_RECEIPT.json. Its stable event binds this
+request and publication c4464206931e3e80bdd5796af9ba30e1b962562a. This confirms
+delivery to the relay, not Root acceptance, Transport dispatch or Pro generation.
+The native final is the source completion record, not another cross-task send.
+No duplicate relay or acknowledgement wait is added.
+
+## Full response intake and ready execution mapping — 2026-09-11
+
+The preceding READY publication is historical. Root dispatched the bound request
+once; Transport archived and returned the complete response at
+`05c24bcd85f92efc26fb2a9cb2152bed51dd90e9`. The designated DM read all231 lines/
+62241 bytes and records **conformance PASS** in
+[the decision/intake](../../decisions/2026-09-11-rolling-capacity-after-b02.md).
+Pro selects **S+A+P+N**, under `PRO_FINAL / OWNER_DELEGATED`.
+[EXECUTION_MAPPING.md](EXECUTION_MAPPING.md) supplies the original FSD, ACVC
+and FOLR assignments; root009, the Chinese brief and audit rows123–124 record
+the decision and actual planned application. No new scientific exposure or Send
+was created by the intake. Root integration and actual dispatch remain to be
+recorded by Root, independently for each direction.
+
+Exact response/prompt equality,49 TASK/source links and current method checks
+are in INTAKE_FACTS.json; fresh GitHub readback and scoped Transport registry
+receipt are retained separately. The Transport label adds `folr` to the bound
+request name, while all accepted bytes and binding identities match. Its named
+`__03_TRANSPORT_FACTS.json` is absent from the current four-file archive. Root
+was notified to route the bookkeeping correction to existing Transport; no
+scientific correction round or resend is required. The input-sync merge
+`66aa7edb3d7416d4c224a2e55b60aa2b4405bb73` reconciles maina1b2646e29 and the
+response; do not cherry-pick that broad merge as a new deliverable.
+
+New deliverables are the decision, mapping, current Portfolio summary, three
+intake receipt/fact JSON files, final owner packet/item/brief, historical008
+trace, two audit appends and this publication append. Accepted REQUEST/TASK/
+HANDOFF, preparation materials and RESPONSE are unchanged. A separate accepted
+completion-relay receipt will bind the new publication commit; this is a new
+intake handoff, not a duplicate of the earlier READY request dispatch.
