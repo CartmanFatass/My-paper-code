@@ -79,6 +79,14 @@
       "record": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md",
       "state": "applied",
       "summary": "已接受并绑定原样B03卡7811/107811及四个新上限；Root已应用Portfolio F。当前仍无新模型或运行，实际启动与接收另记。"
+    },
+    {
+      "at": "2026-09-12T05:19:47+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "f4bbe6cae2d351b4c80c5e0d9d66690d337749ce:docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md",
+      "state": "blocked",
+      "summary": "原样卡已接受，但源码准备在本地55秒超时后继续，已知支持308.8422538秒超过300秒。零实验、零模型、无性能结果；远端进程和检出已确认消失。依所有者HANDOFF指令保留本地记录，发布交接后停止；无重试、补时或自动新问题。"
     }
   ]
 }
