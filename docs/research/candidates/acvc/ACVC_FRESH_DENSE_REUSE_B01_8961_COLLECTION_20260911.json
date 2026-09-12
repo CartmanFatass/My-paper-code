@@ -1,0 +1,196 @@
+{
+  "phases": [
+    {
+      "label": "terminal source verification and complete archive",
+      "wall_s": 0.47415730002103373,
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout": "{\"head\": \"62d7eae7dedf5560171d636e845286108a4bc528\", \"git_status\": \"\", \"tmux_absent\": true, \"archive\": \"/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d-collected.tar.gz\", \"archive_sha256\": \"aa2dfd36a1b648733be449c435aaecd7150920e353b5aa9828513d20c1493ea1\", \"archive_bytes\": 415943}\n",
+      "stderr": ""
+    },
+    {
+      "label": "complete archive transfer",
+      "wall_s": 0.8294133999734186,
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "local_root": "temp\\directions\\acvc\\exp\\fresh_dense_reuse_b01_8961_20260911_collection",
+  "remote_archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d-collected.tar.gz",
+  "remote_receipt": {
+    "head": "62d7eae7dedf5560171d636e845286108a4bc528",
+    "git_status": "",
+    "tmux_absent": true,
+    "archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d-collected.tar.gz",
+    "archive_sha256": "aa2dfd36a1b648733be449c435aaecd7150920e353b5aa9828513d20c1493ea1",
+    "archive_bytes": 415943
+  },
+  "local_archive_sha256": "aa2dfd36a1b648733be449c435aaecd7150920e353b5aa9828513d20c1493ea1",
+  "remote_local_match": true,
+  "source_sha": "62d7eae7dedf5560171d636e845286108a4bc528",
+  "handle": "acvc-fresh-dense-b01-8961-62d7eae7d",
+  "local_full_archive": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\exp\\fresh_dense_reuse_b01_8961_20260911_collection\\collected.tar.gz",
+  "local_checkpoint": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\exp\\fresh_dense_reuse_b01_8961_20260911_collection\\raw\\scientific\\final_DENSE.pt",
+  "checkpoint_sha256": "069b6594b8ec3222c7412627c1f32338b6a29ffa2e2484ffa3b1af5d8a2a8318",
+  "inventory": [
+    {
+      "path": "scientific/episodes.jsonl",
+      "bytes": 410227,
+      "sha256": "5f4026327549b57491d8a7ff30d8d6aafff65ef87453e5b603c5072636a0a95f"
+    },
+    {
+      "path": "scientific/final_DENSE.pt",
+      "bytes": 282957,
+      "sha256": "069b6594b8ec3222c7412627c1f32338b6a29ffa2e2484ffa3b1af5d8a2a8318"
+    },
+    {
+      "path": "scientific/summary.json",
+      "bytes": 15954,
+      "sha256": "27065de0de9a9aafc80bf92204f39cc5f96b501bb81a6fa49b57683bcec738c9"
+    },
+    {
+      "path": "scientific/updates.jsonl",
+      "bytes": 236017,
+      "sha256": "f7716c4999de0c2c81ff7d9266ef42beda17286dc86b6f8ac5ae9b2d1eab025b"
+    },
+    {
+      "path": "supervisor/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "supervisor/pid",
+      "bytes": 8,
+      "sha256": "03af4ea10392749aca1286cc024856cc4ed848e987528a0969c8d9fadd680997"
+    },
+    {
+      "path": "supervisor/runner.sh",
+      "bytes": 1548,
+      "sha256": "d057d440bd2fad7e898a73a7594f6ac193591a7f2cbd5dcf0820512ee7b18f7e"
+    },
+    {
+      "path": "supervisor/start_time",
+      "bytes": 11,
+      "sha256": "0c8f4099a6de494741356694dcf75141d18aff74f9b9680cc357d02b416daa77"
+    },
+    {
+      "path": "supervisor/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "supervisor/task.log",
+      "bytes": 2652,
+      "sha256": "8439e389f7784ce2a58be05042d54c74ab48808450ac6051adcfae34c76bf8d3"
+    },
+    {
+      "path": "support/admission.json",
+      "bytes": 504,
+      "sha256": "329f0431a67dfcef06d94743dc224ec36a213ef227ed283225a46c6ab55405f7"
+    },
+    {
+      "path": "support/task_time.txt",
+      "bytes": 60,
+      "sha256": "62ba1b794e8dd983310ba1c73588baac0eb34ce4aab30e4778b68fdebac0ad2f"
+    }
+  ],
+  "durable_readable_evidence": "docs/research/candidates/acvc/fresh_dense_reuse_b01_8961_20260911",
+  "analysis_source_retained": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\exp\\fresh_dense_reuse_b01_8961_20260911_collection\\analyze.py",
+  "technical_acceptance": "complete native training/final-checkpoint/primary evidence accepted; full-cost conformance qualified separately",
+  "scientific_intake": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md",
+  "monitor_receipts": {
+    "source": "Root-routed native messages",
+    "adoption_query_s": 0.7,
+    "terminal_shared_four_handle_query_s": 0.9,
+    "split_shared_query": false,
+    "reported_terminal": "finished/exit0/duration176s",
+    "unmeasured_message_overhead": null
+  },
+  "cleanup": {
+    "status": "remote complete; local preparation duplicate blocked before process creation",
+    "owner": "/root/dm_acvc_restart_successor2",
+    "targets": [
+      "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8961-62d7eae7d",
+      "/home/wu/.agent-tasks/acvc-fresh-dense-b01-8961-62d7eae7d",
+      "/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d.bundle",
+      "/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d-collected.tar.gz",
+      "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\8961-20260911"
+    ],
+    "retained": [
+      "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\exp\\fresh_dense_reuse_b01_8961_20260911_collection",
+      "C:/Projects/HMASD-worktrees/codex-acvc",
+      "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\8961-20260911"
+    ],
+    "test_scratch_absent": "temp/directions/acvc/test/8961-stub-20260911",
+    "root_preservation_integration": "7c2873dd3 on main, reported by Root after integrating6a24944011e1f11f105e7bd045700cd0ece90094",
+    "remote": {
+      "label": "preserved exact remote checkout/supervisor/staging cleanup",
+      "wall_s": 0.611828199995216,
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout": "{\"removed_paths_absent\": {\"/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8961-62d7eae7d\": true, \"/home/wu/.agent-tasks/acvc-fresh-dense-b01-8961-62d7eae7d\": true, \"/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d.bundle\": true, \"/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d-collected.tar.gz\": true}, \"worktree_unregistered\": true, \"tmux_absent\": true, \"source_sha\": \"62d7eae7dedf5560171d636e845286108a4bc528\"}\n",
+      "stderr": ""
+    },
+    "remote_absence": {
+      "removed_paths_absent": {
+        "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8961-62d7eae7d": true,
+        "/home/wu/.agent-tasks/acvc-fresh-dense-b01-8961-62d7eae7d": true,
+        "/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d.bundle": true,
+        "/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d-collected.tar.gz": true
+      },
+      "worktree_unregistered": true,
+      "tmux_absent": true,
+      "source_sha": "62d7eae7dedf5560171d636e845286108a4bc528"
+    },
+    "local": {
+      "status": "blocked before process creation; no removal occurred",
+      "blocker": "CreateProcess Rejected: guarded native PowerShell Remove-Item -LiteralPath of exact owned preparation path rejected: blocked by policy",
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\8961-20260911",
+      "path_still_present": true,
+      "files": [
+        {
+          "name": "launch_submission.json",
+          "bytes": 1084
+        },
+        {
+          "name": "preparation.json",
+          "bytes": 1571
+        },
+        {
+          "name": "preparation.sh",
+          "bytes": 888
+        },
+        {
+          "name": "prepare.py",
+          "bytes": 4227
+        },
+        {
+          "name": "source.bundle",
+          "bytes": 115509172
+        }
+      ],
+      "retained_bytes": 115516942,
+      "preserved_input_hash_matches": {
+        "prepare.py": true,
+        "preparation.sh": true,
+        "preparation.json": true,
+        "launch_submission.json": true
+      },
+      "local_archive_sha256": "aa2dfd36a1b648733be449c435aaecd7150920e353b5aa9828513d20c1493ea1",
+      "local_checkpoint_sha256": "069b6594b8ec3222c7412627c1f32338b6a29ffa2e2484ffa3b1af5d8a2a8318",
+      "test_scratch_absent": true,
+      "owner": "/root/dm_acvc_restart_successor2",
+      "resume_condition": "same authorized target when runtime policy permits; no alternative-shell/executor bypass or escalation request"
+    }
+  },
+  "durable_log_rename": {
+    "archive_path": "supervisor/task.log",
+    "tracked_path": "supervisor/task_log.txt",
+    "sha256": "8439e389f7784ce2a58be05042d54c74ab48808450ac6051adcfae34c76bf8d3",
+    "reason": "*.log is ignored; original bytes preserved"
+  },
+  "root_checkpoint_retention_clarification": "origin/main has readable evidence and hashes; actual final_DENSE.pt/full archive remain in retained local runtime collection root",
+  "closeout_recorded_utc": "2026-09-11T21:56:20.214018+00:00"
+}

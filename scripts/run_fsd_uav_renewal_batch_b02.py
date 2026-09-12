@@ -1,13 +1,13 @@
 """Fresh allocated I1280/D0 pair; CLI/summary arm I means I1280.
 
-Only identities change from the accepted batch B01 binding. Complete command
+New Portfolio post-program allocation; earlier instances remain ended. Complete command
 caps are D0 900s and I1280 1800s, including the sole final endpoint/publication.
 """
 import run_fsd_uav_individual_renewal_b01 as shared
 
-TRAINING_SEED, EVALUATION_SEED = 770803, 780803
-OBJECT_ID = "FSD_UAV_RENEWAL_BATCH_B02"
-CARD = "docs/research/candidates/flexible_skill_duration/" + OBJECT_ID + "_SCIENCE_CARD_20260911.md"
+TRAINING_SEED, EVALUATION_SEED = 771003, 781003
+OBJECT_ID = "FSD_UAV_RENEWAL_BATCH_B02_771003"
+CARD = "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md"
 CAPS = {"D0": 900., "I": 1800.}
 
 

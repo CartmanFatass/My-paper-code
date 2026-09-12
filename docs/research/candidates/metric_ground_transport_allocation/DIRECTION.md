@@ -12,6 +12,35 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Conditional pooling fresh8213 adverse result — 2026-09-11
+
+The separately Portfolio-selected unchanged COND/DENSE follow-up is a valid
+complete B/EXPLORE observation. COND meanJ0.19342135238526614 versus intact
+same-information DENSE0.21589092584121028 gives **−0.02246957345594415** over
+all32 ordered final differences, conditional SE0.004312411137154014, with5
+positive and27 adverse worlds. It is below the card's−0.01 threshold:
+COND adverse; DENSE remains generic. Both native fits completed the same
+512×256 training/1024 Adam calls and32×256 sampled final steps, with nonzero
+own-arm and conditional-branch movement.
+
+The strongest support for COND remains the first8212 point+0.005761321371348559,
+inside MEI. This new complete below-MEI loss is the strongest direct contradiction
+to recurrence of that package signal. Keep the two trained-pair observations
+separate; they have opposing signs and do not establish a training-population
+effect or stable superiority. Older REL adverse results remain a different
+package's evidence. Generic DENSE adaptation, finite training/evaluation variation
+and conditional usefulness on only some trajectories remain live alternatives;
+no attention, geometry or causal-credit mechanism is identified. Tuned native
+same-information headroom is still absent.
+
+This allowance ends after its one pair/intake/cleanup; no third pair, diagnostic,
+recast, family closure or Portfolio change is selected. A later discriminator
+would need a separately authorized consequential question informed by both
+training histories; no such next task is opened by this result.
+[Fresh result](MGTAP_CONDITIONAL_POOLING_B01_8213_RESULT_20260911.md),
+[intake](MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md),
+[card§6](MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md#6-new-portfolio-allocation--master8213-2026-09-11).
+
 ## Conditional pooling native B01 result — 2026-09-11
 
 The sole allocated COND/DENSE native pair8212 is complete and intaken as a valid

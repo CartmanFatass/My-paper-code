@@ -1,0 +1,77 @@
+diff --git a/experiments/candidates/variable_n_fleet_churn_bpcr_r09/models.py b/experiments/candidates/variable_n_fleet_churn_bpcr_r09/models.py
+index 2152a24af..f2fbb0325 100644
+--- a/experiments/candidates/variable_n_fleet_churn_bpcr_r09/models.py
++++ b/experiments/candidates/variable_n_fleet_churn_bpcr_r09/models.py
+@@ -10 +9,0 @@ from dataclasses import dataclass
+-from fractions import Fraction
+@@ -106,5 +105,8 @@ def exact_binary64_mean(rows: np.ndarray) -> np.ndarray:
+-    return np.array(
+-        [float(sum((Fraction.from_float(float(x)) for x in values[:, j]), Fraction()) / values.shape[0])
+-         for j in range(values.shape[1])],
+-        dtype=np.float64,
+-    )
++    means = []
++    for column in values.T:
++        ratios = [float(value).as_integer_ratio() for value in column]
++        # Binary64 denominators are powers of two, so their maximum is a common denominator.
++        denominator = max(den for _, den in ratios)
++        numerator = sum(num * (denominator // den) for num, den in ratios)
++        means.append(numerator / (denominator * values.shape[0]))
++    return np.asarray(means, dtype=np.float64)
+diff --git a/tests/experiments/candidates/variable_n_fleet_churn_bpcr_r09/test_exact_mean.py b/tests/experiments/candidates/variable_n_fleet_churn_bpcr_r09/test_exact_mean.py
+new file mode 100644
+--- /dev/null
++++ b/tests/experiments/candidates/variable_n_fleet_churn_bpcr_r09/test_exact_mean.py
+@@ -0,0 +1,52 @@
++"""Tiny arithmetic/bridge checks; no scientific model, optimizer or random fixture."""
++
++from fractions import Fraction
++
++import numpy as np
++import torch
++
++from experiments.candidates.variable_n_fleet_churn_bpcr_r09 import models
++from experiments.candidates.variable_n_fleet_churn_bpcr_r09.torch_models import _ExactRosterMean
++
++
++def test_exact_mean_matches_rational_reference_bitwise():
++    small = np.nextafter(0.0, 1.0)
++    largest = np.finfo(np.float64).max
++    rows = np.array([
++        [1e16, largest, -small, -0.0, 1.0],
++        [1.0, largest, 0.0, 0.0, 1.0 + 2.0 ** -52],
++        [-1e16, largest, 0.0, -0.0, 1.0],
++        [2.0, largest, 0.0, 0.0, 1.0],
++        [3.0, largest, 0.0, -0.0, 1.0],
++        [4.0, largest, 0.0, 0.0, 1.0],
++        [5.0, largest, 0.0, -0.0, 1.0],
++    ], dtype=np.float64)
++    before = rows.tobytes()
++    expected = np.array([
++        float(sum((Fraction.from_float(float(x)) for x in column), Fraction()) / len(rows))
++        for column in rows.T
++    ], dtype=np.float64)
++    for order in [np.arange(7), np.array([2, 0, 6, 3, 1, 5, 4])]:
++        result = models.exact_binary64_mean(rows[order])
++        assert result.dtype == np.float64 and result.tobytes() == expected.tobytes()
++    assert rows.tobytes() == before
++
++
++def test_autograd_mean_excludes_fraction_constructor(monkeypatch):
++    class ForbiddenFraction:
++        def __new__(cls, *args, **kwargs):
++            raise AssertionError("the replaced Fraction constructor path was used")
++
++        @classmethod
++        def from_float(cls, value):
++            raise AssertionError("the replaced Fraction conversion path was used")
++
++    monkeypatch.setattr(models, "Fraction", ForbiddenFraction, raising=False)
++    array = np.arange(2 * 7 * 4, dtype=np.float64).reshape(2, 7, 4)
++    rows = torch.from_numpy(array.copy()).requires_grad_()
++    result = _ExactRosterMean.apply(rows)
++    expected = torch.tensor([[12., 13., 14., 15.], [40., 41., 42., 43.]], dtype=torch.float64)
++    assert torch.equal(result, expected)
++    result.sum().backward()
++    assert torch.equal(rows.grad, torch.full_like(rows, 1.0 / 7.0))
++    assert np.array_equal(rows.detach().numpy(), array)

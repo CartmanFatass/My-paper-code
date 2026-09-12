@@ -98,3 +98,85 @@ If a later authorized decision returns to this question, the missing discriminat
 still the final INTERVAL−TERMINAL recovery and full-native tradeoff comparison; a defect
 threatening that path must be repaired or checked under §11.8.7. This intake allocates
 neither that investigation nor a repeat and sends no new Pro request.
+
+## Owner-directed technical investigation intake — 2026-09-11
+
+Root subsequently authorized a bounded non-scientific repair investigation, then
+instructed its closeout on the existing evidence with no further diagnostic. The
+[execution record](VNFC_N7_NATIVE_SERVICE_CREDIT_B02_EXECUTION_20260911.md#technical-investigation-closeout--2026-09-11)
+contains the L0, raw receipts, independent review, costs, tool rejections and retention.
+I checked the original/synthetic core findings, stored-input function-check outcomes,
+static ABI evidence and the review against that assignment. The controlling acceptance
+phrase was: "Implement the smallest source fix only if the failure is attributable
+and the semantics stay unchanged; otherwise return the exact missing diagnostic with
+a bounded non-result-bearing method."
+
+The saved allocator-abort core detects changed trailing bytes in a 32-byte CPython
+call-argument block during Fraction construction, before the current mean's NumPy
+output exists. Neither saved stack identifies the writer or establishes an array-buffer
+overrun. Pure and autograd primitive passes, six matching ABI sizes and a numerically
+equivalent replacement do not supply that missing ownership/instruction history.
+The traced bridge timeout and two Root-reported service rejections produced no such
+evidence. This is an unresolved technical defect, with no scientific polarity.
+
+Technical status: **not ready; attributable repair not established**. Production
+source remains unchanged. The exact-integer candidate is preserved as an unadopted
+patch; independent review accepted its numerical equivalence, not its curative effect.
+The final acceptance exit condition is evidence locating the first invalid write and
+its ownership/extent, or a defensible minimal boundary correction, followed by a faithful
+bounded synthetic check and review. A future diagnostic method is specified in the
+execution record, not invoked by this intake. A later scientific attempt needs a separate
+allocation. No new learner, environment, optimizer, RNG master, training, evaluation,
+trajectory or scientific invocation occurred during this repair assignment.
+
+Decisions this technical intake produces: (A) retain the evidence/candidate with production
+unchanged and readiness unresolved; (B) adopt the candidate as a proven repair. Recommend
+and execute **A under OWNER_DIRECT, Root's 2026-09-11 closeout instruction**; B is unsupported.
+This is not a direction/Portfolio decision, new object selection or reopened B02 budget.
+The earlier partial-result reading and unscored predictions remain unchanged. No new
+valid result exists, so the earlier Chinese incomplete-attempt brief remains applicable.
+Root receives the committed evidence/intake and the precise remaining technical gap.
+
+## Portfolio-conditioned static intake — 2026-09-11
+
+Portfolio response `6c32ade3216c374ecf2f5179b15d559729cd45c9` prospectively selects a
+new fresh pair, conditional on relevant repair acceptance; it does not renew B02.
+I checked its complete VNFC §6, the exact-build static artifact published at
+`06fc94e6268072a3be02abc78738d32813b950f0`, the prepared source/regression diff and the
+independent review against the current technical assignment. Rule applied verbatim:
+"The existing technical DM must demonstrate a supported repair of the affected path,
+or a credible same-meaning alternative whose independence from the corruption is
+established by relevant focused evidence."
+
+The new [static assessment](evidence/b02_credit_20260911_01/repair_fraction_path_assessment.json)
+shows that the exact interpreter formula already provides40 bytes for the expected
+constructor call. The saved tail is precisely the expected `False` keyword at offset32,
+which is legitimate within40 bytes but outside the recorded32-byte metadata boundary.
+That discrepancy is established. Its origin is not: actual allocation-time counts and
+size were not captured. Neither a missing-slot formula nor a particular corrupting
+instruction is demonstrated. The strongest support is the exact-build source/symbol
+mapping; the strongest limit is the missing allocation-time/history fact.
+
+Independent review found the candidate mathematically equivalent and its proposed
+tests useful for numerical/gradient behavior and path exclusion. It found a material
+gap if these alone were used to satisfy corruption independence. I accept that finding:
+the original implementation's passing isolated checks already coexist with allocator
+failure. The prepared two-test draft is preserved unrun in the candidate patch, and
+production is restored unchanged. No new test, debugger, dynamic fixture or scientific
+workload ran in this continuation. [Execution and review disposition](VNFC_N7_NATIVE_SERVICE_CREDIT_B02_EXECUTION_20260911.md#static-mapping-review-and-disposition)
+records costs, provenance and retention.
+
+Decisions this intake produces: (A) retain the exact static evidence and unadopted draft
+while reporting NOT READY; (B) accept Fraction-path avoidance as sufficient readiness.
+Recommend A: B would silently weaken Portfolio §6. **Owner-delegated decision
+(unattended, 2026-09-03 instruction): (A) decline unsupported adoption and retain the
+precise technical gap.** The ordinary object-tier technical audit row records this
+choice; the review finding was accepted, not overruled. No new P1/P2 scientific item,
+Portfolio disposition or Pro request is produced locally.
+
+The next technical discriminator remains the actual allocation request/counts versus
+subsequent metadata, or relevant evidence that a same-meaning alternative is independent
+of the corruption. No further method is dispatched by this intake. Scientific funding
+is selected but unused, its acceptance condition remains unmet, and historical B02
+results/predictions retain their prior reading. The earlier Chinese incomplete-result
+brief remains applicable; this is not a new valid scientific result.

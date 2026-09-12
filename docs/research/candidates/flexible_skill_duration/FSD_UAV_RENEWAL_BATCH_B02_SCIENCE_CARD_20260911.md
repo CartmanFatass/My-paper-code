@@ -3,7 +3,7 @@ Binding MARL structure: (b) temporal abstraction or termination; asynchronous in
 
 # FSD renewal batch B02 — fresh unchanged pair
 
-**B/EXPLORE; prospective training770803/evaluation780803; zero empirical exposure.**
+**B/EXPLORE. Ended zero-exposure instances770803/770903 remain preserved; new771003/781003 is frozen in §7.**
 The allocated pair ended unlaunched with a preparation/support-cost limitation;
 see [the execution-limitation intake](FSD_UAV_RENEWAL_BATCH_B02_EXECUTION_LIMITATION_INTAKE_20260911.md).
 The accepted binding and prospective reading below remain unchanged. No retry
@@ -177,3 +177,154 @@ resource or cost gap if found. Recommended/selected(a), with the named gap rule.
 **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
 The allocation itself is Portfolio PRO_FINAL; this identity/binding is object
 tier. Owner flag:none. Read relevant owner instructions at every clean boundary.
+
+## 6. Fresh allocated instance770903 — prospective freeze2026-09-11
+
+This section instantiates the unchanged question, protected scientific package,
+primary, MEI, all-sign reading rule and limits in §§1–5 for a separately funded
+pair. It does not reopen or spend the ended770803/780803 allocation. The old
+source2b8bd8f7094b7023a892fcf92ab49dc6421fc8f0 and its exact commands/evidence
+remain historical, unrun bytes. No prior namespace or state is reused.
+
+**Authority:** Portfolio PRO_FINAL / OWNER_DELEGATED, immutable response
+6c32ade3216c374ecf2f5179b15d559729cd45c9,
+[§§1–2 and9](../../portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md).
+Root assigned this fresh pair after accepting the separately completed delivery
+repair. Input reconciliation merged current main2bfe94789 into the reused
+codex/fsd checkout at a235697babcfff9fdc19a1f475f9995fd770a33b, preserving every
+audit row. No source or scientific-result conflict was found. Applicable
+§11.4/§11.8 and the current response preserve exactly this bounded B question;
+no scientific/specification exception is needed.
+
+**Fresh binding:** object FSD_UAV_RENEWAL_BATCH_B02_770903; training770903,
+evaluation780903. Training lanes770903–770918 and evaluation lanes780903–780934
+were selected without output screening. Exact-token searches found no use in
+FSD/Portfolio records or FSD entry points; the named remote checkout, input
+directory and two supervisor handles were absent. This is the bounded check in
+[uav_renewal_batch_b02_770903_20260911/IDENTITY_RECONCILIATION.json](uav_renewal_batch_b02_770903_20260911/IDENTITY_RECONCILIATION.json),
+not a census of every historical RNG draw.
+
+**L0:** the DM owns the existing29-line B02 entry's new object/card/seed binding,
+this appendix, this instance's commands/evidence/intake/brief and audit/owner
+record, in C:/Projects/HMASD-worktrees/codex-fsd on codex/fsd. The published old
+entry remains recoverable at its old SHA. Shared learner, host, recurrence,
+segment credit, PPO, return scaling, deterministic evaluator and strict pair
+publication remain unchanged. Each new summary and companion must match this
+new object and both bases. Section4 machinery needed: **none**. Root owns main
+integration and accepts preserved evidence/reclamation.
+
+Acceptance is the single nonnumerical in-memory binding/AST check and an
+independent Astra/high read-only review of changed identity, its consumers and
+exact commands. Reuse accepted numerical/source checks and the accepted
+fsd_stage_source.py helper unchanged. No pilot, fixture repeat, new profiler,
+optional duration diagnostic, timing investigation or repair retry is selected.
+A concrete necessary defect/admission failure or known projected overrun returns
+this unit's limitation; it does not select another source/identity or shrink
+learning/evaluation. Required preservation/closeout still occurs and is charged.
+
+**Exposure and cost:** both arms retain five16-lane H500 rollouts and32 final
+deterministic episodes: two fits/four models,80000 training and32000 evaluation
+team ticks,112000 total, with all original component/context readings. The
+[computed counts](uav_renewal_batch_b02_770903_20260911/PROSPECTIVE_COUNTS.json)
+retain the complete work law in §5. Previous519.94/1020.68s arm walls are planning
+anchors, not new measured coefficients. Fresh component caps are D0≤900s,
+I≤1800s, native sum≤2700s, additional invoked support≤300s, complete≤3000s.
+Every invoked preparation, review/check, staging, Monitor, collection/reduction,
+publication/integration and preservation/cleanup is charged once. Nested clocks
+are not double-counted; authoring/Pro/idle calendar time remain separate.
+Unknown terms remain unknown, never a zero-cost or full-cap certificate.
+
+**Prediction before output:** above_mei, low confidence, for the same reasons in
+§4; the unlaunched old instance did not test that prediction. Owner prediction:
+not taken (unattended). Above+.01 strengthens the observed package history;
+inside inclusive±.01 preserves the sign without equivalence; below−.01 is an
+adverse new history. No branch releases another pair. This new independent
+training unit is reported separately from the one positive I1280 pair and both
+old batch128 losses. Headroom remains absent. Scientific-reading and verified
+local-library reuse in §4 remain applicable: the trained pair is the independent
+unit; episode SE is conditional on its learned policies, with no pure renewal
+or batching-effect attribution.
+
+Object-tier options: (a) execute this new prospectively bound pair under its
+separate caps; (b) return a concrete binding/admission/cost limitation if found.
+Recommended and selected(a), with that bounded return rule.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+Owner flag:none. Live owner reviews were empty at preparation. Exact node,
+source, commands, accepted handles, Monitor and collection status are in
+[FSD_UAV_RENEWAL_BATCH_B02_770903_EXECUTION_20260911.md](FSD_UAV_RENEWAL_BATCH_B02_770903_EXECUTION_20260911.md).
+
+**Instance770903 boundary:** one bounded source staging failed before admission/science.
+[The limitation intake](FSD_UAV_RENEWAL_BATCH_B02_770903_EXECUTION_LIMITATION_INTAKE_20260911.md)
+preserves exact receipts, unscored prediction and original reading rule. No retry followed.
+
+## 7. New allocation771003 — prospective freeze2026-09-11
+
+**Authority:** Root's new conformance-PASS dispatch applies Portfolio B for FSD
+in the post-program-vacancies response, read from immutable main copy
+41c46303f66005f74a18dccf45974d99771b155b,
+[§§1–2,9](../../portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md).
+This is one new B/EXPLORE pair with separate limits. Ended770803 and770903,
+their failures, source/commands and costs remain unchanged. No old state or
+namespace is reused. Main84ae51da0 was reconciled into the clean reused direction
+checkout at37d180f91621f065eaef19a194157f88826cebf2 with every audit row retained.
+
+**L0 and new binding:** the FSD DM owns the existing29-line entry's seed/object
+literals, this card appendix, new commands/evidence/intake/brief and audit/owner
+records in C:/Projects/HMASD-worktrees/codex-fsd on codex/fsd. Object identity is
+FSD_UAV_RENEWAL_BATCH_B02_771003; training771003, evaluation781003; lanes
+771003–771018 and781003–781034. Before binding, exact-token FSD/Portfolio/entry
+search found no prior use and all four named remote paths were absent, recorded
+in uav_renewal_batch_b02_771003_20260911/IDENTITY_RECONCILIATION.json. This is
+unscreened prospective selection and bounded reconciliation, not an all-history
+RNG census. Root integrates and accepts scoped preservation/reclamation.
+
+The scientific question and all protected science in §§2–5 are unchanged:
+six UAVs/fifty users, scenario1 uniform/free-space, H500, CPU FP32/four threads;
+k/kmax/kZ10, age off, team threshold infinity; I individual.25/batch1280 versus
+authentic D0 individual infinity/batch128. Primitive velocity remains reactive
+under held skills. Private recurrence, reset/survivor state, original rewards,
+primitive discount, segment credit and PPO/replay/evaluator laws are retained.
+Shared source and the accepted delivery helper are unchanged. Section4 machinery
+needed: **none**. A single in-memory check and required independent read-only
+review cover only the new binding/command/publication risk; accepted numerical
+checks are reused. No new diagnostic, pilot, smoke or TLS investigation is added.
+
+Two arms×five16-lane H500 rollouts plus two32×500 final deterministic panels
+remain two fits/four models,80000 training and32000 evaluation team ticks,
+112000 total. Computed counts and complete work factors are in
+uav_renewal_batch_b02_771003_20260911/PROSPECTIVE_COUNTS.json. Ten update stages
+are not ten optimizer steps. Real learner movement and all optimizer/endpoint
+counts are read at intake. Prior519.94/1020.68s native walls are planning anchors,
+not new timing coefficients. Headroom remains absent.
+
+Fresh caps: D0≤900s, I≤1800s, native≤2700s, support≤300s, complete≤3000s.
+**Exactly one source-delivery transaction≤45s is included in support300.** Bind
+the accepted fsd_stage_source.py transaction through the new STAGE_COMMAND.ps1:
+one ordinary Git acquisition of the published exact SHA, detached checkout,
+source/shell readback and closed receipt. No second transaction or implicit
+fallback follows a rejected, failed or uncertain effect; reconcile the same
+transaction's actual state and end on a concrete failure. All invoked checks,
+review, delivery, Monitor, collection/reduction, publication/integration and
+preservation/cleanup are charged once; nested clocks and idle calendar time are
+separate. Unknown attribution is not zero or full cap certification.
+
+The sole primary and §4 reading rule remain all32 ordered I−D0 differences in
+J=6U/500: >+.01 above_mei; inclusive[-.01,+.01] small_or_resolution_limited;
+<−.01 opposite_sign; damaged primary gives no dependent paired polarity. Retain
+components, adverse episodes and existing training rows. **DM prediction before
+output: above_mei, low confidence; owner prediction not taken (unattended).**
+The only prior I1280 pair gained+.0569774672, while the two older batch128 pairs
+lost; unlaunched instances added no learning evidence. Above MEI adds one local
+recurrence; inside retains sign without equivalence; opposite weakens investment
+in this package. One new fitted pair is the independent unit, with conditional
+episode SE only. Card§4 scientific-reading/local-library reuse still applies;
+no pure renewal/batching causality, stable superiority or tuned-headroom claim.
+
+Every branch ends this allocation at full intake/closeout or a bounded failure.
+No extra fit, endpoint, replacement, retry, automatic successor or C freeze.
+Object options: (a) execute the prospectively bound pair under the new limits;
+(b) return its concrete necessary delivery/admission/primary/cost limitation.
+Recommended/selected(a), with the stated stop. **Owner-delegated decision
+(unattended, 2026-09-03 instruction): (a).** Owner flag:none. Live owner reviews
+were empty at preparation. Exact source/command and handover status:
+[FSD_UAV_RENEWAL_BATCH_B02_771003_EXECUTION_20260911.md](FSD_UAV_RENEWAL_BATCH_B02_771003_EXECUTION_20260911.md).

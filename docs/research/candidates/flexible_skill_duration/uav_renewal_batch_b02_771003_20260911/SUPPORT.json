@@ -1,0 +1,165 @@
+{
+  "allocation": "New post-program Portfolio FSD771003/781003",
+  "charges": [
+    {
+      "purpose": "new allocation authority, live control and relay contract",
+      "wall_seconds": 0.7810774
+    },
+    {
+      "purpose": "current direction source and bounded card",
+      "wall_seconds": 0.5003182
+    },
+    {
+      "purpose": "resolve exact new Portfolio allocation and required Git input reconciliation",
+      "wall_seconds": 0.3190966
+    },
+    {
+      "purpose": "read selected immutable FSD transaction and reconcile current inputs",
+      "wall_seconds": 0.9914863
+    },
+    {
+      "purpose": "preserve integrated audit rows and publish required-input merge",
+      "wall_seconds": 4.6989595
+    },
+    {
+      "purpose": "select unscreened identity, compute counts and bind fresh card/source/commands",
+      "wall_seconds": 1.071092
+    },
+    {
+      "purpose": "single binding/command check and card owner/audit publication preparation",
+      "wall_seconds": 0.5296597
+    },
+    {
+      "purpose": "independent reviewer three bounded read commands",
+      "wall_seconds": 0.8934921
+    },
+    {
+      "purpose": "record technical acceptance, owner boundary and publish exact source/commands",
+      "wall_seconds": 5.3834134
+    },
+    {
+      "purpose": "single accepted implementation source-delivery transaction",
+      "wall_seconds": 7.5772148,
+      "session_id": null
+    },
+    {
+      "purpose": "prepare receipt path and submit exact detached D0 command",
+      "wall_seconds": 1.1716084,
+      "session_id": null
+    },
+    {
+      "purpose": "direct Monitor assignment API elapsed, excluding Monitor observation work",
+      "wall_seconds": 0.184
+    },
+    {
+      "purpose": "persist exact D0 handover/receipts and publish pending collection",
+      "wall_seconds": 4.7307724
+    },
+    {
+      "purpose": "one required D0 handover relay API elapsed, forwarding cost separate",
+      "wall_seconds": 0.221
+    },
+    {
+      "purpose": "publish actual Monitor adoption and accepted single relay receipt",
+      "wall_seconds": 4.7326534
+    },
+    {
+      "purpose": "D0 terminal assignment current checkout and live I control read",
+      "wall_seconds": 0.6397051
+    },
+    {
+      "purpose": "Monitor prior FSD adoption query reported by Root",
+      "wall_seconds": 0.7
+    },
+    {
+      "purpose": "collect closed D0 artifacts and receipts without re-execution",
+      "wall_seconds": 1.1009481,
+      "session_id": null
+    },
+    {
+      "purpose": "inspect D0 learner movement, endpoint and complete resource receipts",
+      "wall_seconds": 0.2650061
+    },
+    {
+      "purpose": "accept complete D0 companion and preserve all closed own-arm measurements",
+      "wall_seconds": 0.378194
+    },
+    {
+      "purpose": "apply new owner-directed Monitor goal persistence handoff",
+      "wall_seconds": 0.2557405
+    },
+    {
+      "purpose": "resume exact D0 publication and frozen I command",
+      "wall_seconds": 0.4038265
+    },
+    {
+      "purpose": "read pending D0 acceptance for publication",
+      "wall_seconds": 0.1991927
+    },
+    {
+      "purpose": "read live control configuration for I handover",
+      "wall_seconds": 0.1685711
+    },
+    {
+      "purpose": "publish D0 complete technical acceptance and retained evidence",
+      "wall_seconds": 5.0639748
+    },
+    {
+      "purpose": "submit the preselected detached I command once at frozen source",
+      "wall_seconds": 0.7752384,
+      "session_id": null
+    },
+    {
+      "purpose": "direct I Monitor assignment API elapsed, observation work separate",
+      "wall_seconds": 0.185
+    },
+    {
+      "purpose": "read owner reviews and current FSD audit at I handover boundary",
+      "wall_seconds": 0.5052632
+    },
+    {
+      "purpose": "Monitor actual I adoption observation reported by Root",
+      "wall_seconds": 0.8
+    },
+    {
+      "purpose": "publish exact I launch and actual goal-persistent Monitor handover",
+      "wall_seconds": 5.2827333
+    },
+    {
+      "purpose": "one required I handover relay API elapsed, forwarding cost separate",
+      "wall_seconds": 0.189
+    }
+  ],
+  "known_support_seconds": 50.698237999999996,
+  "caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "native": 2700,
+    "support": 300,
+    "complete": 3000,
+    "one_source_transaction": 45
+  },
+  "scientific_submissions": 2,
+  "accounting": "Each invoked command is charged once. Nested process, runner, staging and SSH durations are not additional charges. Study calendar duration and aggregate CPU work are different quantities. The shared 1.0-second observation remains explicitly unallocated. Authoring/Pro/idle calendar time excluded; unknown attribution stays unknown.",
+  "complete_cost_certified": false,
+  "source_transaction": {
+    "complete_helper_wall_seconds": 7.35899999999674,
+    "enclosing_command_wall_seconds": 7.5772148,
+    "remote_wall_seconds": 6.490008224034682,
+    "returncode": 0,
+    "count": 1
+  },
+  "pending": "I terminal observation, actual I native cost and full-pair collection/intake; further publication/integration and cleanup. Shared observation attribution and unmeasured support remain unknown. This snapshot excludes its own publication command, retained for the next record.",
+  "shared_observation": {
+    "reported_by": "Root D0 terminal handoff",
+    "wall_seconds": 1,
+    "scope": "one shared query across FSD D0 and two FOLR handles",
+    "attribution": "unallocated shared observation; not split, duplicated or included in FSD exclusive subtotal"
+  },
+  "native_wall_seconds": {
+    "D0": 538.66,
+    "I": null
+  },
+  "native_wall_sum_observed_seconds": 538.66,
+  "support_plus_native_known_seconds": 589.3582379999999
+}

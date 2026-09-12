@@ -1,0 +1,27 @@
+{
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=8",
+    "hmasd-wsl-node",
+    "/usr/bin/timeout --signal=KILL 8s /home/wu/.venvs/hmasd/bin/python -"
+  ],
+  "returncode": 0,
+  "inner_command_wall_seconds": 0.6410000000032596,
+  "stdout": "{\"observed_utc\": \"2026-09-11T21:19:16.622859+00:00\", \"paths_exist\": {\"/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-770903-20260911\": false, \"/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-770903-20260911\": false, \"/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-770903-D0-20260911\": false, \"/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-770903-I-20260911\": false}, \"execution_worktree_registered\": false, \"removal_performed\": false, \"scientific_submissions\": 0}\n",
+  "stderr": "",
+  "local_shared_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-fsd",
+  "local_checkout_retained": true,
+  "observed_utc": "2026-09-11T21:19:16.622859+00:00",
+  "paths_exist": {
+    "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-770903-20260911": false,
+    "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-770903-20260911": false,
+    "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-770903-D0-20260911": false,
+    "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-770903-I-20260911": false
+  },
+  "execution_worktree_registered": false,
+  "removal_performed": false,
+  "scientific_submissions": 0
+}

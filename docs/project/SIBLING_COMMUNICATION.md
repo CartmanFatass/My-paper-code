@@ -85,6 +85,14 @@ uncertain state. On uncertain send, inspect Root for that same event ID before a
 without decisive evidence, report the uncertainty without resending the substantive event.
 Accepted app delivery needs no Root ACK. No ACK loop, timer or unchanged polling is added.
 
+After Root has delivered all ready work, it ends the current turn while actionable DM or legacy-CM
+work remains outstanding. It does not keep that turn alive with `wait_agent`, `wait_threads`, a
+timer or status polling. The native owner sends the completed Root-action handoff through this
+relay after publishing its artifacts and before emitting its native final. Its final records the
+relay send as accepted or uncertain; it must not silently omit the wake. Accepted relay delivery
+wakes Root in a new turn. This is the required completion behavior for DM work and for already
+accepted legacy CM closeout work.
+
 If the relay is unavailable and no forwarding was accepted, the native sender uses one direct
 cross-task send to Root with the same envelope and reports the relay failure. If forwarding
 is uncertain, reconcile the same event first; do not use fallback to duplicate an uncertain
@@ -100,6 +108,12 @@ original native owner with `followup_task` when collection/intake remains, dedup
 already completed native work. Cross-task messages omit model/effort overrides. A terminal
 notification's accepted app delivery is distinct from DM technical or scientific acceptance.
 
+Every `MONITOR_ADD` explicitly instructs the task to call `get_goal`, continue the matching
+unfinished goal or create a new unbudgeted goal, and keep the handle active through accepted
+terminal delivery. `MONITOR_ADOPTED` reports that actual goal state. After the final terminal
+notice, the monitor sends `MONITOR_GOAL_COMPLETE` with an empty active set to Root before marking
+the goal complete. Cross-task send acceptance alone never proves these goal operations occurred.
+
 ## Independent Transport (existing receipt route)
 
 App messages omit `model` and `thinking` to preserve the recipient's settings. Native DM
@@ -111,6 +125,9 @@ New requests name the actual author as source, Root as parent and Transport as o
 The designated Portfolio DM is the actual source for new Portfolio questions; Root remains
 parent and dispatches the handoff. Transport returns one
 factual receipt to the declared parent; source is not a fallback receipt destination.
+After dispatching the exact request, Root ends its turn once other ready independent work is
+exhausted. Transport observes the long provider generation and its direct factual receipt wakes
+Root; Root does not poll Transport or the provider merely to keep its dispatch turn active.
 Root forwards direction evidence to its direction DM and Portfolio evidence to the designated
 author/checking DM with `followup_task`. The DM returns conformance/intake and the operational
 mapping; Root implements the conforming Pro decision, not another scientific verdict. Preserve unknown Send state and reconcile the original
