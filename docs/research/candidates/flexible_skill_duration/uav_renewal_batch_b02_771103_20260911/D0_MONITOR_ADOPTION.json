@@ -1,0 +1,17 @@
+{
+  "handle": "fsd-uav-renewal-batch-b02-771103-D0-20260911",
+  "source_sha": "5b15e536806d3b54dc693e7b4b911eba53ff643c",
+  "reported_adoption_utc": "2026-09-12T02:37:10.936128Z",
+  "recorded_utc": "2026-09-12T02:39:21.318744+00:00",
+  "source": "Root routed native MONITOR_ADOPTED; distinct from app dispatch receipt",
+  "active_goal_confirmed": true,
+  "reported_goal_status": "active",
+  "active_set": [
+    "fsd-uav-renewal-batch-b02-771103-D0-20260911"
+  ],
+  "goal_objective": "Not transcribed in the routed Root message; no objective text invented.",
+  "routed_message": "MONITOR_ADOPTED confirmed for handle fsd-uav-renewal-batch-b02-771103-D0-20260911 at 2026-09-12T02:37:10.936128Z. Monitor goal is active and active_set contains exactly this handle. Record actual adoption separately from launch dispatch and continue your assigned batch; I-arm remains its own fresh admission/launch boundary. Return accepted launch/adoption commits and any next actionable handoff to Root.",
+  "observation_owner": "live configured Monitor 01a087e5-2044-7301-abb6-7a1709a98197",
+  "collection_owner": "/root/dm_fsd_i1280_implementation",
+  "DM_routine_polling": false
+}
