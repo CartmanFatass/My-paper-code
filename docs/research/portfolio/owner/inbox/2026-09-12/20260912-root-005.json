@@ -97,5 +97,15 @@
     "verdict_text": "Author recommendation only: newly fund D (one unchanged FSD I1280/authentic-D0\ntraining pair) and P (one original FOLR post-B03 Convergence plus complete intake);\nhold renewed M (one unchanged MGTAP COND/DENSE pair). H makes no additions.",
     "source": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T18:13:06+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-12-two-remaining-chains.md",
+      "state": "planned",
+      "summary": "原作者完整核对D/P选择通过；D新900/1800/2700/300/3000含45delivery，P一次原咨询/full intake未知成本零数值；M无款。Root集成/实际派发待记录，当前1/5，另存Q/A/H未选。"
+    }
+  ]
 }
