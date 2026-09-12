@@ -6,14 +6,6 @@ Directory conventions live beside the code in one `AGENTS.md` per area (`experim
 `ha_ctse_process/`, `envs/`, `tests/`, `scripts/`, `docs/`), each imported by a one-line `CLAUDE.md`;
 `docs/project/PROJECT_MAP.md` indexes them. Nearest file wins on a conflict.
 
-OWNER_DIRECT 2026-09-12 — local WSL paths: daily authoring uses the current native
-checkout under `/home/fires/projects/`; resolve its root with `git rev-parse --show-toplevel`.
-The live primary control checkout is `/home/fires/projects/HMASD`; read current task endpoints
-there when an assignment requests them. Windows originals are rollback copies. Remote
-`/home/wu/` execution paths and historical evidence literals keep their original meaning.
-Current OS boundaries are listed in `/home/fires/projects/HMASD/docs/migration/WSL_PATHS_20260912.md`.
-This infrastructure migration does not resume paused research.
-
 ## 1. Operating model
 
 The current owner request, together with system and developer instructions, is the authority for
@@ -183,8 +175,16 @@ none of it is a §11.4 launch condition, and ladders already open continue.
 
 ## 3. Blocker rule
 
-A connector, evidence, or transport blocker means no Pro decision was formed. It never transfers
-final authority to a local model, and it must not stall the loop:
+A connector, evidence, or transport status alone does not establish whether a Pro decision was
+formed. Reconcile the bound request and full response first; a verified complete response goes
+to its designated DM for intake even if a chat receipt or local status reports a blocker.
+If no decision was formed, the blocker never transfers final authority to a local model:
+
+Transport retains recovery of the same request, prompt and binding. Proven ineffective clicks
+permit a concrete repaired attempt under the Transport skill; uncertain acceptance stops Send,
+not reconciliation or observation. Preserve prior attempts and blocker receipts, and clear
+previous-round observations when binding a successor. Root advances independent work and routes
+the eventual complete response; a blocker return does not close the recovery assignment.
 
 - **Object tier**: the DM takes the recommended option as a provisional decision labelled
   `PRO_BLOCKED / LOCAL_PROVISIONAL`, restricted to reversible actions, queues the round for retry,
@@ -276,6 +276,13 @@ Root applies the `hmasd-loop-dispatch` skill's stable next-action trigger at goa
 native return, Transport receipt and before blocking waits. Check owner pause/stop instructions
 first. A workflow edit or status question does not resume paused research.
 
+OWNER_DIRECT 2026-09-11: after Root has dispatched every currently ready independent action,
+it ends its turn when the remaining work is long-running DM, legacy CM, Monitor or Transport work.
+Root does not hold the turn open with native waits, app-task waits, timers or status polling. The
+independent completion relay wakes Root for actionable native DM/legacy-CM returns; Monitor and
+Transport use their existing direct Root receipt routes. A wake starts the stable next-action pass
+again. This turn boundary changes no ownership, acceptance requirement or experiment observation.
+
 While research is authorized to advance, Root plans and maintains five advancing direction
 chains until five formally enter UAV validation, traced to their direction decisions and UAV
 cards. Count active native work, accepted running experiments and accepted Pro generation once
@@ -329,9 +336,15 @@ Resume model: commit and push before every launch; launch every result-bearing r
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
 configured `agent-task` supervisor; OWNER_DIRECT 2026-09-09 assigns accepted-experiment observation
 to one reusable independent Luna/low task with a goal covering its multiple adopted experiments.
-DM/Operator directly notifies that monitor after launch acceptance; the monitor establishes or
-continues its goal, while the DM stops routine polling and retains collection and technical acceptance.
-Record dispatch and actual adoption separately; failed delivery returns for same-handle recovery.
+DM/Operator directly notifies that monitor after launch acceptance. Every `MONITOR_ADD` assignment
+explicitly requires the monitor to read `get_goal`, continue the matching unfinished goal or call
+`create_goal` without a token budget, and keep the accepted handle in that goal until its terminal
+notice reaches Root. The monitor reports the actual goal state in `MONITOR_ADOPTED`; message delivery
+alone is not goal establishment or adoption. DM stops routine polling only after that confirmation
+and retains collection and technical acceptance. When the last handle and pending notice leave the
+active set, the monitor sends `MONITOR_GOAL_COMPLETE` to Root before completing the goal. Record
+dispatch and actual adoption separately; failed delivery or missing goal confirmation returns for
+same-handle recovery.
 Independent Transport observes Pro requests
 (`docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).

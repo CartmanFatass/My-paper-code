@@ -13,7 +13,7 @@ DM and Root do not maintain parallel status-polling loops. Independent Transport
 separate and observes Pro requests.
 
 Read the endpoint from the live primary control checkout (currently
-`/home/fires/projects/HMASD/.codex/hmasd-monitor.toml`, supplied in the handoff), not a stale direction
+`C:/Projects/HMASD/.codex/hmasd-monitor.toml`, supplied in the handoff), not a stale direction
 checkout or the frozen remote scientific SHA. Endpoint currentness does not change scientific
 source bindings. Root carries this exact live configuration path in new DM assignments.
 
@@ -39,12 +39,17 @@ by scanning historical handles or create a task/worktree per experiment.
 After launch acceptance, DM/Operator sends `MONITOR_ADD` directly to the configured monitor
 with the exact handle facts and original owners. This direct dispatch is authorized by
 OWNER_DIRECT 2026-09-09; it does not wait for Root to forward the launch or create another goal.
-The monitor itself creates or continues its set-scoped goal. A runtime without the cross-task
+The assignment itself must tell the monitor to call `get_goal`, continue the matching unfinished
+goal or call `create_goal` without a token budget, add the handle to that goal's active set, and
+retain it until its terminal notice is delivered to Root. A sender must not shorten this to a
+one-shot status query. The monitor itself executes that goal operation; DM/Operator cannot infer
+it from successful cross-task message delivery. A runtime without the cross-task
 tool returns the exact routing gap and handle to Root for forwarding; it must not invent a
 message API or silently substitute a second observer. DM records the accepted dispatch
 and returns pending collection; it does not continue a routine remote-status polling loop.
 The monitor checks the same supervisor and sends `MONITOR_ADOPTED` directly to Root with its
-actual task ID, goal state, observation time and direct status. Root confirms adoption to the
+actual task ID, observed `get_goal`/`create_goal` result, unfinished goal state, observation time
+and direct status. Root confirms adoption to the
 original execution/DM owner. A dispatched message alone is not adoption: until confirmed, record adoption
 as pending; a rejected/unavailable dispatch or reported observation loss returns promptly to
 Root for the same-handle recovery. This pending boundary is not a second DM polling loop.
@@ -64,7 +69,10 @@ children by inventing app IDs. Record accepted or uncertain message delivery. Re
 uncertain terminal send by the same event ID before retrying; do not finish the goal with an
 undelivered notification. Accepted app delivery does not require a Root ACK loop. Before goal
 completion, reconcile newly received additions and ensure the active set and pending notices
-are empty. Completed entries are retained as receipts, not polled again.
+are empty. Then send one `MONITOR_GOAL_COMPLETE` directly to Root with the completed goal result,
+the terminal event IDs delivered in that goal and `active_set=[]`; only after that accepted send
+may the monitor mark the goal complete. Completed entries are retained as receipts, not polled
+again. A later nonempty `MONITOR_ADD` starts a new goal in the same reusable task.
 
 ## Multiple experiments and bounded observation
 
