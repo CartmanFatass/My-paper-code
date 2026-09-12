@@ -6,12 +6,12 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACVC post-C01 materials | Final scientific intake accepted/main77c17d111; /root/dm_a_mx_acvc_resume supplies next-question facts to Portfolio author; no new fit | Concrete proper-node question/investment option; retention inventory is recorded |
-| FOLR B03 | /root/dm_a_mx_folr_cap_review; original pair never submitted, original processes/handles absent; minimal sparse preparation accepted/main3821a65d1; original pair launch authorized using ready new Monitor | Published exact invocation, fresh admission, then new Monitor confirmed goal adoption |
+| FOLR B03 | Both original arms running, actual new Monitor goal adoption confirmed at approximately2026-09-12T13:35Z; owner /root/dm_a_mx_folr_cap_review | Independent terminal notices, then same-DM collection and scientific intake |
 | VNFC conditional fresh pair | /root/dm_a_mx_vnfc_recovery; bounded engineering recovery only; selected new600-native/300-support/900-complete grant remains unused/conditional | Supported same-meaning repair or alternative with relevant focused evidence, before any fresh scientific invocation |
 | RCLE original Convergence request | Windows Transport personally READY with CUA; same-request recovery dispatched after exclusive ownership confirmation | Provider-state reconciliation, permitted repaired Send, accepted generation then archive and DM intake |
 | Portfolio readiness/Oracle | /root/dm_a_mx_portfolio_resume; latest22-direction evidence and concrete next-slot choices | Ready-now actions immediately; necessary Portfolio packet via existing Pro node |
 
-Direction chains3/5; no accepted live scientific handles at this snapshot. Portfolio preparation
+Direction chains3/5; two accepted live scientific handles belong to one FOLR direction. Portfolio preparation
 is not an extra direction. A pending or blocked provider request is not an accepted generation.
 
 ## Current routing
@@ -20,7 +20,7 @@ is not an extra direction. A pending or blocked provider request is not an accep
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
 | Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; no assigned handles |
+| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; active unbudgeted goal, two FOLR handles adopted |
 | Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
 Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the
@@ -29,3 +29,19 @@ come directly to Root. Do not send new work to a retired task or a historical pa
 FOLR's300-second support value is an owner-clarified reference: recorded308.8422538 is not
 by itself a hard stop. Native/scientific scope and remaining explicit complete-work limits persist.
 Historical run roots, fixed SHAs and complete data remain in their scientific evidence records.
+
+## Accepted FOLR B03 observation
+
+Monitor01a095d0-21ee-7c02-9d97-3681b5678200 directly reported MONITOR_ADOPTED:
+get_goal initially returned null, then create_goal established an unbudgeted unfinished
+goal covering both handles through terminal delivery. This confirms actual adoption,
+not just dispatch. Root informed the owning DM; no duplicate observation loop.
+
+| Handle | Direct adoption status | Node/source/cwd |
+| --- | --- | --- |
+| folr-learned-retention-b03-retain-20260911 | running, exit_code=null, tmux_active=true, pid3368237 | hmasd-wsl-node; source89035d8f1e3f44a07e80c08e3140283c03592efb; /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 |
+| folr-learned-retention-b03-learned-event-20260911 | running, exit_code=null, tmux_active=true, pid3368272 | same accepted node/source/cwd |
+
+Observation time approximately2026-09-12T13:35Z. Both reported uptime approximately42s.
+Actual launch/admission receipt integration is pending the owning DM's published return;
+Monitor process facts do not replace technical or scientific acceptance.

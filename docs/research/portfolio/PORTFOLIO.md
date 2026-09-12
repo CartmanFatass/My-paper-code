@@ -6,12 +6,12 @@
 ## 当前22方向状态 — 2026-09-12 Windows恢复
 
 本表是当前控制面状态。登记为15 ACTIVE、7 PARKED，
-未作新的生命周期、优先级或科学裁决。指定Portfolio DM正将Oracle建议全文更新为当前版；不叠加旧快照。
+未作新的生命周期、优先级或科学裁决。Oracle建议当前版已接受并发布main a607eefb3；Portfolio DM继续准备必要的新投入选择。
 
 当前三条方向DM链推进：ACVC后续问题材料、FOLR同一B03恢复、VNFC条件任务的有限工程恢复。
-RCLE由新Windows Transport接手准备，旧执行者已确认停止且零新Send；目前无已接受的运行中实验。
+RCLE由新Windows Transport接手准备，旧执行者已确认停止且零新Send；FOLR原定两个arm已实际运行并由新Monitor采用。
 因此方向工作集为3/5，两个空槽待就绪任务补入；这不是三个运行中实验。Portfolio DM的跨方向核对不另计方向槽位。
-新Monitor与Relay已亲自回报Windows可用；Monitor实际goal=null、无待送/活动句柄。新Transport已验证Windows及CUA工具，同请求恢复已授权。
+新Monitor与Relay已亲自回报Windows可用；Monitor已建立非空未完成goal，持有两个FOLR运行句柄。新Transport已验证Windows及CUA工具，同请求恢复已授权。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
 “待选择”是尚未分配的未来工作，不能冒充已运行，也不是永久禁入。
@@ -35,7 +35,7 @@ RCLE由新Windows Transport接手准备，旧执行者已确认停止且零新Se
 | [scope_1s](../candidates/scope_1s/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [UCOPE](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | **更新：最新是post8801 PRO_FINAL PARK进一步8801-L continue/end-credit经验投入，保留unchanged-L spending stop。** 8601/8602、8701是更早证据。 | 无 | 有具体新选择才继续；不再凭旧8701 closeout pending造任务。其余renewal/ordinary-feedback议程未被整体关闭。 |
-| [FOLR](decisions/2026-09-12-windows-root-resumption.md) | B03准备记录308.8422538秒=274.81 Git父事务+34.0322538其他命令；零科学暴露。**Owner明确300秒是参考，本次轻微超出不再作为硬阻塞。** | DM /root/dm_a_mx_folr_cap_review 已核对无原活进程/handle，正最小化检出并恢复同一未执行pair；尚无launch接受。 | 原1350/arm、2700 native及科学范围不变；必要完整成本透明记录，fresh admission后逐arm执行并实际Monitor adoption。无替换配对/自动successor。 |
+| [FOLR](decisions/2026-09-12-windows-root-resumption.md) | B03准备记录308.8422538秒=274.81 Git父事务+34.0322538其他命令；零科学暴露。**Owner明确300秒是参考，本次轻微超出不再作为硬阻塞。** | 原两arm已running；新Monitor本人建立活动goal并确认adoption；/root/dm_a_mx_folr_cap_review持有收集验收责任。 | 原1350/arm、2700 native及科学范围不变；必要完整成本透明记录，fresh admission后逐arm执行并实际Monitor adoption。无替换配对/自动successor。 |
 | [VNFC](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_INTAKE_20260911.md#portfolio-conditioned-static-intake--2026-09-11) | B02 exit139、无final primary，未评分。最新静态证据显示40-byte构造公式与32-byte记录边界不符，offset32的False本身合法；来源未明、workaround未采用。另有尚未使用的条件fresh-pair拨款。 | DM /root/dm_a_mx_vnfc_recovery 正审查最小修复/同义替代路径；无新数值调用。 | 有限工程修复/可信路径及当前科学授权核对；不把全面allocator考古变成通用先决条件，不盲目复跑原故障路径。 |
 | [VSP02](../candidates/vsp_02/DIRECTION.md) | P19结束已测试fixed-member family/configuration。 | 无 | 具体新方向选择；无successor/UAV allocation。 |
 | [VSP03](../candidates/vsp_03/DIRECTION.md) | B07 final G−R0+0.01156738、G−R+0.01307617、Q−0.00160645；post-B07及9/11 fallback保留相同narrow pause，未分配新fit。 | 无 | 将来有决策价值的同配方B仍合法，但当前未选择；不从旧continuous512文字推断运行。 |
