@@ -1,0 +1,70 @@
+{
+  "status": "accepted_complete_D0_companion",
+  "accepted_utc": "2026-09-12T02:48:51.117879+00:00",
+  "source_sha": "5b15e536806d3b54dc693e7b4b911eba53ff643c",
+  "counts": {
+    "model_constructions": 2,
+    "training_starts": 1,
+    "checkpoint_loads": 0,
+    "training_transitions": 40000,
+    "stored_training_transitions": 40000,
+    "training_episodes": 80,
+    "update_stages": 5,
+    "training_agent_step_batches": 2500,
+    "evaluation_steps": 16000,
+    "evaluation_episodes": 32,
+    "evaluation_agent_step_batches": 500
+  },
+  "optimizer_calls": {
+    "coordinator": 525,
+    "discoverer_actor": 11250,
+    "discoverer_critic": 11250,
+    "team_discriminator": 75,
+    "individual_discriminator": 300
+  },
+  "evaluation_optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 0,
+    "discoverer_critic": 0,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "all_summary_training_measurements_finite": true,
+  "training_jsonl_matches_summary": true,
+  "initial_relative_displacement_final": {
+    "coordinator": 0.05972113171968028,
+    "discoverer_actor": 0.41498707300328463,
+    "discoverer_critic": 0.16375267432420468,
+    "team_discriminator": 0.027479335135139393,
+    "individual_discriminator": 0.051588032579255524
+  },
+  "mean_final_J": 0.4072901252402493,
+  "conditional_episode_sd": 0.07838802738942552,
+  "conditional_episode_se": 0.0138571764327249,
+  "train_mean_J": [
+    0.22037918606132867,
+    0.1741151888203456,
+    0.21750179407987838,
+    0.3277102105207622,
+    0.3437423214544069
+  ],
+  "process_cost": {
+    "elapsed_seconds": 471.82,
+    "peak_rss_kib": 1632916.0,
+    "user_seconds": 1846.01,
+    "system_seconds": 14.72,
+    "exit_status": 0.0
+  },
+  "aggregate_cpu_seconds": 1860.73,
+  "admission_bytes": {
+    "physical": 15628304384,
+    "effective": 15628304384,
+    "floor": 4294967296
+  },
+  "raw_archive": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771103_20260911/D0_collection.tar.gz",
+  "raw_archive_sha256": "8539d21d1e70f78f8b6431479471a32d9d707ea857297f3f729b2737a40303a2",
+  "raw_file_count": 11,
+  "rule": "Accept only a complete, correctly bound D0 companion; then submit the already selected I once with fresh adjacent admission. No score-based selection.",
+  "decision": "Owner-delegated decision (unattended, 2026-09-03 instruction): accept complete D0 and proceed to preselected I.",
+  "claim_limit": "One complete own-arm endpoint; paired primary remains unavailable until I completes. No extra experiment or numerical replay."
+}
