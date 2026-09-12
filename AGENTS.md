@@ -1,5 +1,11 @@
 # HMASD collaboration and authority
 
+OWNER_DIRECT2026-09-12: Current control uses Windows C:/Projects/HMASD and PowerShell.
+Read live task endpoints from that checkout's .codex/hmasd-*.toml and
+docs/project/ROOT_OPERATIONS.md. Superseded task/path literals in fixed evidence are
+not dispatch routes. Keep current control documents free of obsolete state snapshots.
+
+
 This file governs repository work on every agent runtime the owner uses (Codex, Claude Code, or
 another). The body is runtime-neutral. Runtime-specific mechanics are in the two appendices.
 Directory conventions live beside the code in one `AGENTS.md` per area (`experiments/`,
@@ -183,8 +189,16 @@ none of it is a §11.4 launch condition, and ladders already open continue.
 
 ## 3. Blocker rule
 
-A connector, evidence, or transport blocker means no Pro decision was formed. It never transfers
-final authority to a local model, and it must not stall the loop:
+A connector, evidence, or transport status alone does not establish whether a Pro decision was
+formed. Reconcile the bound request and full response first; a verified complete response goes
+to its designated DM for intake even if a chat receipt or local status reports a blocker.
+If no decision was formed, the blocker never transfers final authority to a local model:
+
+Transport retains recovery of the same request, prompt and binding. Proven ineffective clicks
+permit a concrete repaired attempt under the Transport skill; uncertain acceptance stops Send,
+not reconciliation or observation. Preserve prior attempts and blocker receipts, and clear
+previous-round observations when binding a successor. Root advances independent work and routes
+the eventual complete response; a blocker return does not close the recovery assignment.
 
 - **Object tier**: the DM takes the recommended option as a provisional decision labelled
   `PRO_BLOCKED / LOCAL_PROVISIONAL`, restricted to reversible actions, queues the round for retry,
@@ -516,13 +530,12 @@ appendix and completed historical tasks remain unchanged.
 
 
 - Native custom subagents are registered in `.codex/config.toml`: Direction Manager,
-  Implementer, Scout, Reviewer, Critic, Verifier and Operator. Root defaults to
-  `gpt-5.6-sol/low`; DM to `gpt-6-astra/max`; Implementer to `gpt-5.6-sol/medium`;
+  Implementer, Scout, Reviewer, Critic, Verifier and Operator. Root follows the Codex app model/effort selection; DM defaults to `gpt-6-astra/max`; Implementer to `gpt-5.6-sol/medium`;
   Reviewer to `gpt-6-astra/high` with read-only access. Other specialist model settings
   are unchanged. CM, Routine Implementer and the dedicated Terra/high workflow-outsource
   path are retired. Configurations take effect after restart; Codex App provides native
   task/message lifecycle behavior. Do not add reload probes, delivery test services or timers.
-- The existing Root task remains the execution coordinator and sole receipt parent.
+- The current Root task in live configuration is the execution coordinator and sole receipt parent.
   Transport uses Luna/high; the shared experiment monitor and completion Relay retain
   Luna/low. Read their existing `.codex/hmasd-*.toml` endpoints; never replace or rebind
   accepted work merely because the role structure changed.

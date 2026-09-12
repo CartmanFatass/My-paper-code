@@ -79,7 +79,7 @@ Write the exact prompt bytes to
 - `idempotencyKey`: `<request_id>`;
 - `promptPath`: the file above; `promptSha256`: its hash;
 - `responsePath`: the same archive directory,
-  `<request_id>--<direction_id>--attempt-01__02_RESPONSE.md`;
+  `<request_id>--<direction_id>--attempt-01__04_CHAT_RECEIPT.md`;
 - `timeoutMs`: the hub's window, at most 45 minutes.
 
 Interpret the receipt literally. `SENT_WAITING` means the user turn is confirmed and generation
@@ -93,7 +93,12 @@ if `sendAttempted` is `true`, the only permitted next call is the identical requ
 `false` and no user turn is visible in the conversation, report `NOT_SENT` with the error and
 stop; do not retry on your own. A different payload, a new idempotency key,
 a second conversation, Retry, Continue, Stop, or Answer now are forbidden. If the receipt reports
-an uncertain or mismatched send, record it as terminal `SENT_UNCERTAIN` and stop.
+an uncertain or mismatched send, record `SENT_UNCERTAIN` and stop submission, retaining
+same-request reconciliation and observation. Report the recovery owner and next action to the
+hub. Never infer nonacceptance from a timeout or an empty composer alone. A concrete repair
+after proved nonacceptance follows the shared skill and the provider's same-key idempotency
+contract; inability of that provider to resume safely is an exact technical blocker, not
+permission to create a replacement key or conversation.
 
 ## After `COMPLETE`
 
@@ -131,7 +136,8 @@ an uncertain or mismatched send, record it as terminal `SENT_UNCERTAIN` and stop
 ## Return
 
 Transport facts only, in this order: mode, request id, binding key, conversation id and URL,
-matched model labels, send state and click count (0 or 1), wait status, short-receipt path and
+matched model labels, send state and actual click count (separate from the one accepted
+submission), wait status, short-receipt path and
 sha256, full-response path and sha256 with the GitHub commit and comment URL, registry result,
 tab lifecycle, and any limitation or stop reason with the exact tool error. No scientific
 summary, no recommendation.
@@ -155,10 +161,15 @@ for both loops. After the archive and readback are verified and the tabs are clo
 record to `ARCHIVED` with the contract's own validated transitions:
 
 ```
-PYTHONUTF8=1 python .agents/skills/hmasd-chatgpt-pro-transport/scripts/archive_delivered_claude_request.py --registry temp/sessions/hmasd-chatgpt-pro-transport/registry.json --binding-key <key> --request-id <request id recorded on the key> --user-message-id <providerUserMessageId> --assistant-message-id <providerAssistantMessageId> --prompt-file <__00_PROMPT.md> --short-receipt <__02_RESPONSE.md> --transport-facts <__03_TRANSPORT_FACTS.json> --github-response <GITHUB_RESPONSE.md> --github-commit <sha> --send-attempted-at <epoch ms> --completed-at <epoch ms> --note "<one line>"
+PYTHONUTF8=1 python .agents/skills/hmasd-chatgpt-pro-transport/scripts/archive_delivered_claude_request.py --registry temp/sessions/hmasd-chatgpt-pro-transport/registry.json --binding-key <key> --request-id <request id recorded on the key> --user-message-id <providerUserMessageId> --assistant-message-id <providerAssistantMessageId> --prompt-file <__00_PROMPT.md> --short-receipt <__04_CHAT_RECEIPT.md> --transport-facts <__03_TRANSPORT_FACTS.json> --github-response <GITHUB_RESPONSE.md> --github-commit <sha> --send-attempted-at <epoch ms> --completed-at <epoch ms> --note "<one line>"
 ```
 
-It changes no conversation id and rebinds nothing. When the key's record still names an
+It changes no conversation id and rebinds nothing. Preserve each request's own observations
+and receipt delivery history.
+The canonical response path/hash refer to full Git response bytes; short-receipt fields
+refer to chat bytes. Caller-direct archival stages a receipt; it does not claim the hub has
+received it. Preserve historical archive bytes rather than silently rewriting them.
+When the key's record still names an
 earlier request (a previous bind was refused), archive that earlier request with its own
 archive files first, then bind the current one and archive it. Report the before and after
 `state` of the record. Items of the Codex skill that have no Claude counterpart and are not

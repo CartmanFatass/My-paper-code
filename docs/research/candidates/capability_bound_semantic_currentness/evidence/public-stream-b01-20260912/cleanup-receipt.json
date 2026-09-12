@@ -1,0 +1,47 @@
+{
+  "root_acceptance": "main9ca150856",
+  "source": "2717796fb4f38cdb7059cd9d17e1dfb2f19abd47",
+  "result_members_preserved": 19,
+  "supervisor_members_preserved": 6,
+  "result_archive_sha256": "b56e5d6fe6453478ade30c03625be39ae0b0341dc765e95afdbf64fe45adad70",
+  "supervisor_archive_sha256": "170fde57677afd02546c64d2867278e05276df88165981d9018e27146f639caa",
+  "remote_paths_exist": {
+    "/home/wu/hmasd-worktrees/cbsc-public-stream-b01-20260912": false,
+    "/home/wu/.agent-tasks/cbsc-public-stream-b01-20260912": false,
+    "/home/wu/hmasd-inputs/cbsc-public-stream-b01-20260912.bundle": false,
+    "/home/wu/hmasd-inputs/cbsc-public-stream-b01-20260912-results.tar.gz": false,
+    "/home/wu/hmasd-inputs/cbsc-public-stream-b01-20260912-supervisor.tar.gz": false
+  },
+  "worktree_registered": false,
+  "scientific_invocations": 0,
+  "completed_at": "2026-09-12T17:37:38.9788093Z",
+  "root_instruction": "Root integrated and pushed the complete CBSC chain through main9ca150856. Proceed with only the already-scoped reclamation inventory/cleanup, preserving archives and current direction evidence.",
+  "verified_main_head": "c012ab3e0af0e7d1d440e1196ab366dce464613b",
+  "main_contains_acceptance": true,
+  "local_source_bundle": "C:/Projects/HMASD-worktrees/dm-cbsc-next-20260906/temp/cbsc-public-stream-b01-20260912.bundle",
+  "local_source_bundle_exists": false,
+  "source_bundle_sha256_before_removal": "c78e613ae6815607de5cb6fe87c2a047229fb14d08f50ce1570b22312d613511",
+  "retained": [
+    "C:/Projects/HMASD/docs/research/candidates/capability_bound_semantic_currentness/evidence/public-stream-b01-20260912/original-results.tar.gz",
+    "C:/Projects/HMASD/docs/research/candidates/capability_bound_semantic_currentness/evidence/public-stream-b01-20260912/original-supervisor.tar.gz",
+    "current CBSC source/card/E0/intake/brief/audit on main and codex/cbsc",
+    "C:/Projects/HMASD-worktrees/dm-cbsc-next-20260906 authoring checkout"
+  ],
+  "remaining_cleanup": "none in assigned inventory",
+  "support": {
+    "cleanup_entry_local_seconds": 0.2684821,
+    "cleanup_entry_remote_seconds": 0.669398,
+    "remote_preservation_and_cleanup_seconds": 0.7080603,
+    "local_bundle_cleanup_seconds": 0.1155913,
+    "C_measured_support_prefix_through_cleanup_seconds": 139.12772539999997,
+    "final_publication_root_monitor_client_tail": "not included in this prefix; charge observed invoked work once, unknown is not zero"
+  },
+  "native": {
+    "scientific_invocations_in_cleanup": 0,
+    "pair_wall_sum_seconds": 90.27,
+    "RAW_whole_seconds": 45.61,
+    "STRUCT_whole_seconds": 44.66
+  },
+  "remote_receipt": "{\n  \"root_acceptance\": \"main9ca150856\",\n  \"source\": \"2717796fb4f38cdb7059cd9d17e1dfb2f19abd47\",\n  \"result_members_preserved\": 19,\n  \"supervisor_members_preserved\": 6,\n  \"result_archive_sha256\": \"b56e5d6fe6453478ade30c03625be39ae0b0341dc765e95afdbf64fe45adad70\",\n  \"supervisor_archive_sha256\": \"170fde57677afd02546c64d2867278e05276df88165981d9018e27146f639caa\",\n  \"remote_paths_exist\": {\n    \"/home/wu/hmasd-worktrees/cbsc-public-stream-b01-20260912\": false,\n    \"/home/wu/.agent-tasks/cbsc-public-stream-b01-20260912\": false,\n    \"/home/wu/hmasd-inputs/cbsc-public-stream-b01-20260912.bundle\": false,\n    \"/home/wu/hmasd-inputs/cbsc-public-stream-b01-20260912-results.tar.gz\": false,\n    \"/home/wu/hmasd-inputs/cbsc-public-stream-b01-20260912-supervisor.tar.gz\": false\n  },\n  \"worktree_registered\": false,\n  \"scientific_invocations\": 0\n}\nCLEANUP_COMMAND_EXIT=0\r\nSUPPORT_SECONDS=0.7080603\r\n",
+  "local_receipt": "LOCAL_SOURCE_BUNDLE_ABSENT=C:\\Projects\\HMASD-worktrees\\dm-cbsc-next-20260906\\temp\\cbsc-public-stream-b01-20260912.bundle\r\n2026-09-12T17:37:38.9788093Z\r\nSUPPORT_SECONDS=0.1155913\r\n"
+}

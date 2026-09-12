@@ -1,0 +1,199 @@
+{
+  "created_utc": "2026-09-12T03:47:12.320189+00:00",
+  "question": "New allocation for the unchanged FOLR pair after accepted direction recommendation A; current FSD family-question alternative",
+  "local_date": "2026-09-11",
+  "authority": "Preparation/recommendation only; no Portfolio selection or empirical allocation applied",
+  "main_science_and_closeout_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+  "authoring_input_sync_sha": "605d764b25659071ce4dad02b4931effd9586dcb",
+  "operational_snapshot": {
+    "observed_utc": "2026-09-12T03:47:12.320189+00:00",
+    "confirmed_advancing_direction_count": 1,
+    "vacancies": 4,
+    "advancing_directions": [
+      "acvc"
+    ],
+    "source": "Primary-control Transport registry matching exact current TASK plus current Root accepted FSD/FOLR completion messages and native live-agent snapshot",
+    "acvc_attributed_transport_record": {
+      "request_id": "2026-09-11-acvc-five-fit-prefreeze-innovator-01",
+      "conversation_binding_key": "em:acvc:innovator",
+      "conversation_id": "6aa4c897-0b0c-83e8-9606-5916b52b1a75",
+      "state": "WAITING_GENERATION",
+      "send_click_count": 1,
+      "send_confirmed_at": "2026-09-12T03:36:38Z",
+      "generation_started_at": "2026-09-12T03:36:38Z",
+      "updated_at": "2026-09-12T03:36:38Z",
+      "monitor": {
+        "identity_key": "2026-09-11-acvc-five-fit-prefreeze-innovator-01|em:acvc:innovator|6aa4c897-0b0c-83e8-9606-5916b52b1a75|https://chatgpt.com/c/6aa4c897-0b0c-83e8-9606-5916b52b1a75",
+        "provider_url": "https://chatgpt.com/c/6aa4c897-0b0c-83e8-9606-5916b52b1a75",
+        "last_observed_url": "https://chatgpt.com/c/6aa4c897-0b0c-83e8-9606-5916b52b1a75",
+        "last_observed_state": "SEND_CONFIRMED; concrete URL and exact current-round user TASK node observed; Pro thinking active",
+        "last_observed_at": "2026-09-12T03:36:38Z",
+        "cursor": null
+      },
+      "send_evidence": {
+        "send_click_count": 1,
+        "send_attempted": true,
+        "url_observed": true,
+        "user_node_observed": true,
+        "user_node_exact": true,
+        "user_message_id": "today-current-round|TASK.md@a2960298fcf3c44dd5b67bce8974536a789376c1|user-node",
+        "provider_url_observed": "https://chatgpt.com/c/6aa4c897-0b0c-83e8-9606-5916b52b1a75",
+        "binding_match": true,
+        "paste_mode": true,
+        "prompt_sha256": "598d86380745a5e7f6dc6912fa17fdf3f9187c1f2c4f27e3aa1b820f87ca5b0b"
+      },
+      "observed_page_state": "Pro thinking; Stop answering visible; no completed assistant response"
+    },
+    "completed_allocations": [
+      "FOLR one original Convergence question and full intake accepted/main1817115bf",
+      "FSD771103 pair/intake and verified remote closeout accepted/mainbe2eb581d"
+    ],
+    "excluded_from_direction_count": [
+      "Portfolio authoring",
+      "Root",
+      "Transport executor",
+      "completed native DMs",
+      "technical cleanup",
+      "RCLE unresolved existing pre-submission recovery",
+      "VNFC queued unready conditional allocation"
+    ],
+    "conditional_actual_start_counts_if_acvc_still_advances": {
+      "F_U": [
+        2,
+        3
+      ],
+      "H_T": [
+        2,
+        3
+      ],
+      "F_T": [
+        3,
+        2
+      ],
+      "H_U": [
+        1,
+        4
+      ]
+    },
+    "later_independent_events": "Root updates actual status without altering fixed science or automatically allocating a replacement"
+  },
+  "actual_author_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "policy_search_candidates": 0,
+    "profiling": 0,
+    "source_implementation_edits": 0,
+    "source_or_numerical_tests": 0,
+    "raw_return_reanalyses": 0,
+    "provider_sends": 0,
+    "transport_dispatches": 0
+  },
+  "machine_generated_exposure_line": "NEW EXPOSURE: scientific_invocations=0, models=0, checkpoint_loads=0, environments=0, scientific_rng_masters=0, training_episodes=0, native_ticks=0, optimizer_steps=0, evaluation_episodes=0, diagnostic_trajectories=0, policy_search_candidates=0, profiling=0, source_implementation_edits=0, source_or_numerical_tests=0, raw_return_reanalyses=0, provider_sends=0, transport_dispatches=0. Configuration arithmetic and documentary retrieval only.",
+  "future_F_work": {
+    "independent_training_pairs": 1,
+    "real_fits": 2,
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_calls": 9938,
+    "final_episodes": 256,
+    "final_ticks": 5120,
+    "replay_gru_rows": 66783360,
+    "acting_gru_rows": 1076880,
+    "learned_arm_gate_forward_rows": 33930120,
+    "search_candidates": 0,
+    "additional_diagnostic_trajectories": 0,
+    "total_native_ticks": 205120
+  },
+  "future_F_new_caps": {
+    "complete_native_each_s": 1350,
+    "complete_native_sum_s": 2700,
+    "all_invoked_support_s": 300,
+    "complete_invoked_work_s": 3000
+  },
+  "future_F_planning_ratios": {
+    "native_each_cap_over_largest_observed_arm": "1.466498652993829842704440775",
+    "native_sum_cap_over_largest_observed_pair": "1.486792328151586737812432888"
+  },
+  "historical_folr_complete_native_and_partial_support_windows": [
+    {
+      "object": "B01",
+      "retain_s": "835.33",
+      "learned_s": "867.79",
+      "native_sum_s": "1703.12",
+      "published_support_window_s": "72.7315400",
+      "native_plus_this_known_window_s": "1775.8515400"
+    },
+    {
+      "object": "B02",
+      "retain_s": "895.43",
+      "learned_s": "920.56",
+      "native_sum_s": "1815.99",
+      "published_support_window_s": "47.6054458",
+      "native_plus_this_known_window_s": "1863.5954458"
+    }
+  ],
+  "historical_folr_support_limits": [
+    "B02 later DM54.8407131 is a different window; neither add blindly to47.6054458 nor call it complete",
+    "Shared one-second FSD/FOLR operation charged once globally",
+    "Old full3900 and support300 conformance unknown; no measured total breach or invalid primary inferred"
+  ],
+  "new_fsd_accepted_observation": {
+    "training_pair": "771103/781103",
+    "native_I_minus_D0": -0.012430430599850807,
+    "conditional_episode_SE": 0.01926754789685166,
+    "episode_signs": {
+      "positive": 16,
+      "negative": 16
+    },
+    "original_branch": "opposite_sign",
+    "native_D0_s": 471.82,
+    "native_I1280_s": 1023.43,
+    "native_sum_s": 1495.25,
+    "prior_unchanged_package_gains": [
+      0.05697746721968016,
+      0.206285904082309
+    ],
+    "claim_ceiling": "One fresh adverse pair, close to MEI; no stable harm or isolated mechanism result",
+    "complete_support_cost": "resources_unmeasured; partial support record, no complete-cost certificate",
+    "allocation": "Complete; no fourth pair or automatic successor",
+    "known_native_plus_support_subtotal_s": 1602.2841971,
+    "known_support_scope": "SUPPORT.json at mainbe2eb581d; remaining final publication/integration and Monitor/relay/client attribution unknown"
+  },
+  "future_T": {
+    "question_count": 1,
+    "node": "em:flexible_skill_duration:convergence",
+    "deliverable": "One original family question and full intake after the accepted third pair",
+    "implementation_and_all_scientific_exposure": 0,
+    "future_empirical_budget": "deferred/unallocated",
+    "complete_documentary_provider_intake_effort": "unknown, not zero; not presumed cheaper than F",
+    "stop": "Complete one question/intake; no extra question, identity, model, measurement or automatic successor"
+  },
+  "other_retained_routes": {
+    "acvc": "Existing conditional five-fit270/1350/1650/3000 path; only original Innovator currently generating",
+    "mgtap": "N/no new addition; generic DENSE retained",
+    "rcle": "Existing exact blocked request recovery; no duplicate question/budget",
+    "vnfc": "Existing unused conditional900=600native+300support, queued/unready; no repair funding",
+    "other_directions": "Retain exact narrow units from accepted S+A+P+N mapping; no filler"
+  },
+  "headroom": {
+    "vap_folr_core": "matching tuned same-information headroom absent",
+    "flexible_skill_duration": "matching tuned same-information native headroom absent",
+    "acvc": "matching tuned same-information native headroom absent",
+    "metric_ground_transport_allocation": "matching tuned same-information host headroom absent"
+  },
+  "author_recommendation": {
+    "folr": "F",
+    "fsd": "U",
+    "portfolio_choice_executed": false,
+    "owner_flag": "close-call"
+  },
+  "cost_qualification": "Caps are prospective nonfungible invoked-work ceilings, not forecasts. Current documentary/provider costs and future full attribution remain unknown. No historical or future empirical allowance spent now."
+}

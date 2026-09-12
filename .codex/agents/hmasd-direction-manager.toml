@@ -162,9 +162,13 @@ current owner instructions and applicable specs. A complete answer does not auth
 exception: cite a concrete conflict and return it to the same node before executing the affected
 requirement; continue independent conforming work, without inventing a replacement decision.
 Explicit spec-change proposals follow the existing appropriate authority. Execute conforming
-decisions without local override. If Pro returns a
-connector, evidence or transport blocker, no decision exists: the direction stays parked at this
-tier. If the answer rejects the object solely for lacking an unrequested stronger class, that is a
+decisions without local override. A connector or transport status is not proof that no decision
+exists: ask Root to reconcile the bound full response through Transport. A verified complete
+response enters ordinary intake even when the short chat receipt claims a delivery failure.
+If no decision was formed, dependent direction work waits at its clean boundary while Transport
+retains same-request recovery; do not author a replacement request solely to escape a transport
+blocker or perform browser Send.
+If the answer rejects the object solely for lacking an unrequested stronger class, that is a
 methodology mismatch, not a negative; preserve the question and seek a class-corrected answer. A DM
 may attach an engineering dissent naming a missing fact; the node is re-opened with it.
 

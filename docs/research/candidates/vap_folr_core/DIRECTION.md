@@ -716,3 +716,80 @@ References:
 - FOLR_LEARNED_RETENTION_B02_RESULT_SUMMARY_20260911.json
 - FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md
 - FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md
+
+## Accepted learned-retention post-B02 Convergence — 2026-09-11
+
+**Conclusion and bounded claim.** Original Convergence selects A: recommend one
+future separately allocated unchanged LEARNED_EVENT/RETAIN B pair at the existing
+easy public-lifecycle host and 5000-training/128-final endpoint. This continues
+the existing in-family opening; it is neither a new OPEN nor RECAST. No immediate
+narrow learned-recipe hold is selected. Generic event-aware RETAIN remains the
+usable default. The current documentary allocation supplies no implementation,
+seed, experiment, cap, C freeze or automatic further question.
+
+**Strongest support.** The actual learned package's B01 gain +1.763359375 gives
+one trustworthy practical benefit. Another independent unchanged pair can inform
+whether to keep this optional computation as a candidate for same-host development
+or conduct that development with RETAIN alone. This is a qualitative decision-value
+judgment, not a requirement for a third seed or stable population proof.
+
+**Strongest contradiction and surviving alternative.** B02's −1.769531250 loss
+against its own matched RETAIN remains intact. RETAIN already has adaptive GRU
+gates and the same legal information. A narrow hold is the strong alternative,
+and the author's prior unexecuted C recommendation is preserved as a close call.
+No particular gate modification, useful-memory cause, equivalence, stable harm or
+population advantage is established. All older fixed-half and blanket-clear pauses
+and results remain separate; matching tuned headroom is still absent.
+
+**Next discriminator.** If later separately funded, one fresh unscreened unchanged
+pair, sole RETAIN comparator, all 128 final outcomes and inclusive absolute MEI1
+can add recurrence information. A practical gain supports retaining candidacy;
+a loss or inside-MEI point makes a narrow hold more attractive, without a vote
+rule, equivalence claim or automatic fourth pair. Its full work is 205120 native
+ticks and 9938 updates plus recurrent/replay and support work; future complete cost
+and cap remain unknown. No ablation, diagnosis or cost pilot is a prerequisite.
+Portfolio disposition, recast count and C/UAV status remain unchanged.
+
+References:
+
+- `pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md`
+  at `ed882448bda9b3f240addf88bde1921cebc24397`
+- `FOLR_LEARNED_RETENTION_POST_B02_QUESTION_20260911.md`
+- `FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md`
+
+## Accepted learned-retention B03 — 2026-09-12
+
+**Conclusion and bounded claim.** The allocated third unchanged pair produced
+RETAIN0.947578125 and LEARNED_EVENT-0.267968750, d_LR=-1.215546875:
+**RETAIN_ABOVE_MEI** under the original inclusive absolute MEI1 rule. Both real
+fits completed5000 training and128 final episodes with4969 updates each. This
+is one adverse training-pair observation; generic event-aware RETAIN remains
+the usable default. The DM's low-confidence WITHIN_MEI prediction missed.
+
+**Strongest support and contradiction.** B01+1.763359375 remains the strongest
+direct supporting point. B02-1.76953125 remains the strongest contrary point,
+with B03 adding-1.215546875. The three results stay separate: no pooled new
+primary or vote rule. Conditional final-episode variation and a point only
+0.215546875 beyond the MEI do not establish stable harm or equivalence.
+
+**Surviving alternative.** The learned gate trained and was exercised, but this
+does not identify useful-memory selection. RETAIN already has adaptive recurrent
+gates; extra parameters, finite optimization, partner co-adaptation and traffic
+draws remain alternatives. Matching tuned headroom is absent. No causal,
+original CAMA-baseline, transfer or UAV-readiness claim is added.
+
+**Next discriminator.** The selected unchanged-pair observation is complete and
+every branch ends the finite grant. This adverse point makes a narrow hold more
+attractive as direction-local advice, without implementing a family disposition.
+A future concrete use or investment choice belongs to the appropriate node;
+no fourth pair, tuning, diagnostic or automatic question follows this intake.
+Existing lifecycle, priority, recast and C/UAV status are unchanged.
+
+References:
+
+- `FOLR_LEARNED_RETENTION_B03_SCIENCE_CARD_20260911.md`
+- `FOLR_LEARNED_RETENTION_B03_RESULT_EVIDENCE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B03_RESULT_SUMMARY_20260911.json`
+- `FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md`

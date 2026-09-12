@@ -1,0 +1,38 @@
+{
+  "question": "已获 Portfolio 新预算的 RCLE 单次训练卡是否需要你异步改写？流程按已授权的方案执行，不等待回复。",
+  "changes_if_approved": [
+    {
+      "target": "RCLE 当前科研卡",
+      "from": "方向保留等单位候选，旧咨询不含数值运行预算",
+      "to": "新 B07/master27，1000次更新的一次新训练；自身初始化、最终策略和确定性最近参考三组评估"
+    }
+  ],
+  "if_refused": "在下一干净边界应用你的指令；保留已发生的执行与不利证据，不自动补跑或更换比较器。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/EXECUTION_MAPPING.md",
+      "quote": "One fresh final1000 fit with init/final/nearest panels.900native TOTAL including reference,600support,1500future total.",
+      "why": "完整实现到 intake 的新拨款已形成，比较和成本边界明确。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_CHANNEL_NORMALIZATION_CONVERGENCE_INTAKE_20260912.md",
+      "quote": "Delta_ref=-.00575764973958",
+      "why": "B06 对参考仍有差距；新的归一化可能放大弱通道噪声，收益尚未观察。"
+    }
+  ],
+  "uncertainty": [
+    "只有一个独立训练样本；场景区间不代表训练稳定性。",
+    "此比较无法归因归一化优于 joint100，也不证明冲突消除或跨环境迁移。",
+    "保留所有八格 U/F/失败编码恢复代价；没有事后标量取舍。"
+  ],
+  "cost": {
+    "compute": "一份新拨款：本地聚焦检查、审查、发布等支持最多600秒；远端训练连同参考900秒；合计1500秒。旧成本不重置。",
+    "owner_time": "无需回复即可继续；可异步修改卡。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Object-tier selection: (a) execute this exact separately funded B; (b) change or defer it. Recommend/select(a).",
+  "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_SCIENCE_CARD_20260912.md"
+}

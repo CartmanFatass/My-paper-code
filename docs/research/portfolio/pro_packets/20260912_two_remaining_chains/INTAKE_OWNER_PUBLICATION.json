@@ -1,0 +1,20 @@
+{
+  "created_at_utc": "2026-09-12T18:13:06.226530+00:00",
+  "decision_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-007.json",
+  "proposal_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-005.json",
+  "unapplied_reviews": [],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L40",
+  "actual_application_state": "planned; no new DM start claimed",
+  "auto_applied": null,
+  "trace_outputs": [
+    {
+      "id": "20260912-root-005",
+      "tool_stdout": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-005.json"
+    },
+    {
+      "id": "20260912-root-007",
+      "tool_stdout": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-007.json"
+    }
+  ],
+  "post_CF_item_006": "unchanged, future proposal not selected"
+}

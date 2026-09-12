@@ -1,0 +1,37 @@
+=== Task 'acvc-fresh-dense-c01-18150-3fd9062d5' started at 2026-09-12T12:59:38+08:00 ===
+{
+  "assessed_at": "2026-09-12T04:59:38.580930Z",
+  "available_physical_bytes": 15636324352,
+  "captured_at": "2026-09-12T04:59:38.580645Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15636324352,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"rollouts": 16, "training_episodes": 32, "optimizer_steps": 64, "process_wall_s": 9.776373606990092}
+{"rollouts": 32, "training_episodes": 64, "optimizer_steps": 128, "process_wall_s": 17.826671740040183}
+{"rollouts": 48, "training_episodes": 96, "optimizer_steps": 192, "process_wall_s": 25.82104672305286}
+{"rollouts": 64, "training_episodes": 128, "optimizer_steps": 256, "process_wall_s": 34.0054874609923}
+{"rollouts": 80, "training_episodes": 160, "optimizer_steps": 320, "process_wall_s": 42.0853388980031}
+{"rollouts": 96, "training_episodes": 192, "optimizer_steps": 384, "process_wall_s": 50.0629462050274}
+{"rollouts": 112, "training_episodes": 224, "optimizer_steps": 448, "process_wall_s": 58.093169628991745}
+{"rollouts": 128, "training_episodes": 256, "optimizer_steps": 512, "process_wall_s": 66.26590616500471}
+{"rollouts": 144, "training_episodes": 288, "optimizer_steps": 576, "process_wall_s": 74.60233365709428}
+{"rollouts": 160, "training_episodes": 320, "optimizer_steps": 640, "process_wall_s": 82.89987845008727}
+{"rollouts": 176, "training_episodes": 352, "optimizer_steps": 704, "process_wall_s": 90.91008195106406}
+{"rollouts": 192, "training_episodes": 384, "optimizer_steps": 768, "process_wall_s": 99.07822569203563}
+{"rollouts": 208, "training_episodes": 416, "optimizer_steps": 832, "process_wall_s": 107.41789117909502}
+{"rollouts": 224, "training_episodes": 448, "optimizer_steps": 896, "process_wall_s": 115.77909634402022}
+{"rollouts": 240, "training_episodes": 480, "optimizer_steps": 960, "process_wall_s": 124.36344813206233}
+{"rollouts": 256, "training_episodes": 512, "optimizer_steps": 1024, "process_wall_s": 132.95672922499944}
+{"completed_arm": "C", "evaluation_episodes": 64, "process_wall_s": 143.8659011250129}
+{"completed_arm": "F", "evaluation_episodes": 128, "process_wall_s": 156.84509456099477}
+{"completed_arm": "dwell", "evaluation_episodes": 192, "process_wall_s": 169.74978735507466}
+=== Task 'acvc-fresh-dense-c01-18150-3fd9062d5' exited with code 0 at 2026-09-12T13:02:33+08:00 (Duration: 175s) ===

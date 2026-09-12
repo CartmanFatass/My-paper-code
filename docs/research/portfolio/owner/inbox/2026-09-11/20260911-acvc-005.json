@@ -1,0 +1,75 @@
+{
+  "id": "20260911-acvc-005",
+  "created": "2026-09-11T21:08:03-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "ACVC原Innovator同意有限五次训练方案，进入前瞻冻结",
+  "context": "完整原Innovator答复同意不变的有限方案，已核对原问题、规则、所有者授权及来源。尚未冻结新卡、抽取编号或运行科学对象；依赖正态模型的限制、有益停留和不利场景保留。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "执行已形成的原Innovator同意",
+      "consequence": "先绑定规则、五组编号、卡及代码分析，再按原上限验收并执行五次完整拟合；不增问、不补样。"
+    },
+    {
+      "key": "refuse",
+      "label": "异步覆盖并停止后续",
+      "consequence": "在下个干净边界停止相关后续，保留已有事实；不变成科学负结果或Portfolio处置。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "原节点完整、符合规范地同意了这一有限问题，重复增益支持其决策价值，模型和比较器局限不被掩盖。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_FIVE_FIT_PREFREEZE_INNOVATOR_INTAKE_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L128",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "原Innovator已同意这个有限五次全新训练方案；现按完整裁决执行前瞻冻结与既定后续。所有者可异步覆盖。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC DIRECTION及五次全新训练链",
+        "from": "实际晋级已接受，等待原Innovator完整裁决",
+        "to": "原Innovator同意已接受；开始前瞻编号规则、卡、代码与分析绑定，再做最小实现和技术验收"
+      }
+    ],
+    "if_refused": "在下一个干净边界应用所有者覆盖，保留已经发生的事实；不会自动增加问题、替代拟合或改变Portfolio状态。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/archive/RESPONSE.md",
+        "quote": "Accept the unchanged, expressly qualified five-new-fit proposal for subsequent prospective binding and freeze.",
+        "why": "原节点作出明确的冻结前同意，完整答复通过既定问题、授权和规范核对。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FIVE_FIT_PREFREEZE_INNOVATOR_INTAKE_20260911.md",
+        "quote": "Strongest support: all three fresh development fits improve over both attained controls, with F-dwell +.0877164686/+.0638998669/+.0944113176 J.",
+        "why": "三次真实新训练在两个已有比较器上重复出现有意义的均值增益，值得做固定总体问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/archive/RESPONSE.md",
+        "quote": "Model qualification cannot convert an untested distributional assumption into an observed fact.",
+        "why": "五次训练不能验证罕见坏结果或多峰分布；有益停留、5/11/5不利场景和不等干预次数继续限制解释。"
+      }
+    ],
+    "uncertainty": [
+      "尚无新增训练或总体优势结论；技术实现尚待验收。",
+      "联合统计结论依赖五个完整训练面板均值的正态模型，实际校准未建立。",
+      "完整成本仍有未测部分，已知小计不能证明无条件符合总上限。"
+    ],
+    "cost": {
+      "compute": "沿用每完整训练单元270秒、原生合计1350秒、全部调用支持1650秒、完整调用3000秒；两次问题/入库已计入同一支持账。",
+      "owner_time": "无需逐项回复；可异步覆盖。",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待所有者回复；先完成前瞻绑定与技术验收。"
+    },
+    "verdict_text": "Accept the unchanged, expressly qualified five-new-fit proposal for subsequent prospective binding and freeze.",
+    "source": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/archive/RESPONSE.md"
+  },
+  "starred": true
+}

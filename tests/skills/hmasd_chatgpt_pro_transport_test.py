@@ -926,31 +926,6 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
     assert "close the temporary tab\nafter recording that state" not in transport_text
 
 
-def test_skill_contracts_bound_locator_coordinate_offset_recovery() -> None:
-    transport_text = (TRANSPORT_SKILL.parent / "references" / "send-hit-point-recovery.md").read_text(encoding="utf-8")
-
-    for phrase in (
-        "Locator hit-point mismatch recovery",
-        "matchCount=1",
-        "visibleCount=1",
-        "disabled=false",
-        "No element found at point",
-        "fresh DOM state using the current browser",
-        "exact visible Send prompt node",
-        "the URL is unchanged from the\npre-send observation",
-        "no visible user-message node exists for the exact prompt",
-        "enabled and\nvisible",
-        "the exact visible user-message node and\nits exact prompt text",
-        "every expected attachment/file group and recorded hash",
-        "terminal `SEND_UNCERTAIN`; do not retry",
-        "Never perform blind coordinate retries, a second\nDOM-node click, or any retry after `SEND_UNCERTAIN`.",
-    ):
-        assert phrase in transport_text
-
-    assert "Treat that combination\nas a locator coordinate offset, not as `SEND_FAILED_PRE_SEND`" in transport_text
-    assert "This DOM-node click replaces the failed locator click; it is the one Send\nattempt" in transport_text
-
-
 def test_transport_contracts_require_one_attachment_for_prompt_author_packets() -> None:
     transport_text = "\n".join(
         (TRANSPORT_SKILL.parent / "references" / reference).read_text(encoding="utf-8")

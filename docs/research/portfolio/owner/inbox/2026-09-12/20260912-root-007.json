@@ -1,0 +1,106 @@
+{
+  "id": "20260912-root-007",
+  "created": "2026-09-12T11:13:05-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "Portfolio最终选择FSD一pair与FOLR原问题",
+  "context": "完整219行答复已由原作者核对通过：D/P yes、M no。当前实际1/5，D/P各自就绪；完整成本与未知边界清楚，既有Q/A/H仍未资助。",
+  "options": [
+    {
+      "key": "keep",
+      "label": "保留Pro最终决定",
+      "consequence": "Root独立派发D/P并记录实际状态；不需逐项owner批准。"
+    },
+    {
+      "key": "refuse",
+      "label": "覆盖并拒绝后续未执行投入",
+      "consequence": "保留已执行证据/成本，只按实际覆盖处理未执行范围；无自动后备或新Send。"
+    },
+    {
+      "key": "amend",
+      "label": "明确提出范围修订",
+      "consequence": "按具体owner指令与适当node处理，不静默扩cap或改科学含义。"
+    }
+  ],
+  "recommended": "keep",
+  "auto_applied": null,
+  "dm_reason": "完整同节点答复在绑定问题、证据类与现行owner/spec范围内；保留D+M/D alone/H强反方与未知P成本。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L40",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Portfolio已最终选择FSD D与FOLR P；是否异步保留或覆盖这两项独立投入及其明确成本边界？",
+    "changes_if_approved": [
+      {
+        "target": "D / FSD",
+        "from": "当前I1280三pair完成，原grant结束",
+        "to": "PRO_FINAL新一unchanged I1280/D0 pair及完整接续；D0≤900、I≤1800、native2700、support300、future3000，单次delivery≤45在support内。"
+      },
+      {
+        "target": "P / FOLR",
+        "from": "B03完成，原节点尚未形成post-B03方向决定",
+        "to": "PRO_FINAL一次原Convergence/full intake；完整成本接受未知、零实现/数值，保留候选仍未资助。"
+      },
+      {
+        "target": "M / 当前容量",
+        "from": "M仍无新经验，CBSC/ACVC原pair均完成、实际1/5",
+        "to": "M继续no且无备用；D/P各自实际开始后至多3/5，Q/A/H仍未发送未资助。"
+      }
+    ],
+    "if_refused": "按实际owner异步覆盖处理受影响尚未执行部分，保留已花成本和全部证据；不自动选择M、Q/A/H或重发既有请求，不阻止其他符合范围的独立工作。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md",
+        "quote": "D is worth one more bounded observation because the currently open I1280 package has two separately observed practical gains and one near-margin adverse outcome against fresh authentic D0.",
+        "why": "当前同包复现能影响是否继续保留为可选学习方案；并非seed数量门槛。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md",
+        "quote": "P is worth one bounded judgment because the original FOLR node explicitly recommended the unchanged comparison that B03 has now completed; its new adverse result can inform the previously unresolved narrow package disposition.",
+        "why": "明确只买原节点所需的新结果之后的窄判断，不购买第四pair。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md",
+        "quote": "D+M would purchase two native observations using exercised paths, whereas P might merely restate the already effective no-new-spend boundary.",
+        "why": "P边际收益可能很小，M健康且native更便宜；Pro保留这个反方后仍选D/P。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md",
+        "quote": "H remains a credible conservation alternative: neither a fourth FSD pair nor a FOLR consultation is guaranteed to change useful practice.",
+        "why": "空槽不证明科学价值；选择不是测得最优或保证正收益。"
+      }
+    ],
+    "uncertainty": [
+      "D再来一个独立pair仍无法给训练总体稳定性、孤立renewal或batch因果。",
+      "P完整纪录/命令/provider/agent成本未知，D+P不能说总共3000秒；历史support未知不填零。",
+      "答复3/5是固定输入快照；CBSC/ACVC已完成，实际仅RCLE技术工作，后续真派发再计数。",
+      "RCLE缺reference的调用边界由原DM/Root核对，本次不增新fit/reference重试。"
+    ],
+    "cost": {
+      "compute": "已选D新900/1800/native2700/support300/total3000含单次delivery45；P一次原问题/full intake未知总价、零数值。M1200与Q/A/H未分配。",
+      "owner_time": "无需逐项批准；这是PRO_FINAL/OWNER_DELEGATED，Root按符合规范的原决定独立执行，owner可异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing for owner ratification；D/P各自就绪，Root实际派发尚待记录，其他方向不等。"
+    },
+    "verdict_text": "Final decision: D=yes, P=yes, M=no; H is not selected.",
+    "source": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T18:13:06+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-12-two-remaining-chains.md",
+      "state": "planned",
+      "summary": "原作者完整核对D/P选择通过；D新900/1800/2700/300/3000含45delivery，P一次原咨询/full intake未知成本零数值；M无款。Root集成/实际派发待记录，当前1/5，另存Q/A/H未选。"
+    }
+  ]
+}

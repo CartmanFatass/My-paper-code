@@ -180,3 +180,67 @@ of the corruption. No further method is dispatched by this intake. Scientific fu
 is selected but unused, its acceptance condition remains unmet, and historical B02
 results/predictions retain their prior reading. The earlier Chinese incomplete-result
 brief remains applicable; this is not a new valid scientific result.
+
+
+## Owned-boundary recovery intake — 2026-09-12
+
+I checked the actual `d76d96cbe` source and dependent encoder/checkpoint path,
+the independent design/source/receipt reviews, exact staging/readbacks and one
+complete retained-input check against Portfolio6c32ade32 section6. Rule applied
+verbatim: "The existing technical DM must demonstrate a supported repair of the
+affected path, or a credible same-meaning alternative whose independence from the
+corruption is established by relevant focused evidence."
+
+The new implementation removes the *whole local* Fraction plus Torch/NumPy shared
+storage boundary, using owned Python scalar values, shared exact-integer arithmetic
+and owned CPU float64 output. Both arms keep exact pooling and backward `g/N`.
+The original isolated allocator failure supplied a relevant context without a native
+environment or scientific model. The single new allocator-debug check on the same
+interpreter and retained7x64 input×24 completed256 forward/backward applications,
+passed exact output/gradient/input checks, exited0 with empty stderr in3.177215865s,
+and cleaned its scratch. This is direct finite evidence, not a reproduced B02 run.
+
+**Technical acceptance: supported bounded same-meaning alternative; the relevant
+Portfolio integrity dependency is satisfied.** Scientific acceptance remains separate:
+zero new learners, optimizers, environments, scientific RNG masters, training/evaluation
+or scientific submissions occurred. There is still no B02 primary or performance
+branch. Its old failure, unscored prediction and quarantine remain unchanged.
+
+Strongest support: the whole changed boundary eliminates the implicated construction
+and local shared-storage dependencies, preserves exact computation/gradient by source
+review, and completes the finite allocator-debug context that previously failed.
+Strongest contradiction/limit: altered allocation patterns also change detection
+opportunities; a pass cannot identify the old writer, resolve expected40 versus saved32
+bytes, certify all interpreter states or predict full-training cost/primary success.
+The prior arithmetic-only refusal was correct for its evidence; the new whole-boundary
+implementation and executed check add the missing relevant evidence prospectively.
+
+Scientific-reading use: empirical11.8.6–.7 and FOUNDATIONS§6/04_EMPIRICAL distinguish
+a finite implementation check from an independent learning observation. The concrete
+assumption is that source-level removal of these local dependencies plus completion of
+the demonstrated isolated context supports this alternative at a bounded ceiling.
+It does not prove universal memory safety or improve the temporal-credit hypothesis.
+No new mechanism/comparator/literature claim is selected. Predictions are not scored
+from a technical fixture. Primary-control owner reviews returned[] at this boundary.
+
+### Decisions this intake produces
+
+(A) Accept the bounded owned-boundary alternative and prepare the already selected
+fresh pair under its existing900-second allocation. (B) Keep NOT READY until every
+historical write is uniquely localized. (C) Adopt the old Fraction-only candidate
+without relevant execution. Recommend and select A: B adds an unnecessary cause-first
+condition; C lacks the evidence required by Portfolio§6.
+
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (A) accept the bounded
+same-meaning alternative.** Root's explicit2026-09-12 resumption and single20-second
+maintenance check supply the engineering authorization; this decision adds no scientific
+budget, object family or Portfolio disposition. Record the ordinary technical audit row;
+no critic dissent was overruled and no new technical owner-console item is required.
+
+Next discriminator: the already funded fresh INTERVAL−TERMINAL final recovery/native
+tradeoff comparison, with new identities, unchanged complete600-native/300-support/
+900-total ceilings and ordinary destination admission. No B02 rerun follows. Root
+integrates the named repair/acceptance commits while DM prepares that independent
+allocation. [Acceptance evidence and cleanup ownership](evidence/b02_credit_20260911_01/repair_owned_boundary_acceptance_20260912.json)
+retain all precise receipts, limits and cost scopes. The existing incomplete-result
+Chinese brief remains applicable; this technical return creates no valid scientific result.
