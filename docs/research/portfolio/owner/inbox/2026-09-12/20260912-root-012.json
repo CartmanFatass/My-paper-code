@@ -76,5 +76,15 @@
     "verdict_text": "Author recommendation: Portfolio should propose and compare genuinely new research directions, register the justified set, and explicitly select bounded starter investments where warranted. Build a ranked set sufficient to sustain five independent advancing chains.",
     "source": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T21:07:50+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/PREPARATION_INTAKE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/PUBLICATION_FACTS.json",
+      "state": "planned",
+      "summary": "Root已授权的一个当前Portfolio问题已固定发布：新方向发现/登记/首轮投资与既有MGTAP T投资分开决策；59refs精确核验，等待Root一次派发当前Transport。无本地registration/grant或author Send。"
+    }
+  ]
 }
