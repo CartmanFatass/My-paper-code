@@ -102,5 +102,15 @@
     "verdict_text": "Author recommendation only: newly fund C (CBSC), R (RCLE) and F (ACVC) as three independent complete B chains; hold M (MGTAP) for now. No Portfolio selection executed.",
     "source": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T16:52:58+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-12-post-sa-marginal-investments.md",
+      "state": "planned",
+      "summary": "完整响应已接受，C/R/F各自就绪；Root集成/实际派发尚未记录，不声称已运行。新future额度及累计旧成本未知保持，M无款。"
+    }
+  ]
 }
