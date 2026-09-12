@@ -1,0 +1,197 @@
+{
+  "prepared_utc": "2026-09-12T22:14:39.371023+00:00",
+  "assignment": "Root direction-local implementation/resource readiness only; no implementation, model, RNG output, test, launch, extra panel, consultation or Portfolio disposition",
+  "accepted_intake_main_commits": [
+    "4ac951c14bd77f5872104d2a1a9ac0ba62956eda",
+    "be68d2a18ff2323be4c19b69ff8763812dbd2a53"
+  ],
+  "scientific_source_response": "15c56cc40c56d2edb6e8c9a1a217a994f30cb3fc",
+  "source_comparison_main_sha": "ddc833fe91572d6f805e631be779d0d2c75f23a0",
+  "compared_surface_paths": [
+    "scripts/run_acvc_fresh_dense_reuse_b01.py",
+    "scripts/run_acvc_fresh_dense_package_c01.py",
+    "experiments/candidates/acvc/native_link_loss_b01",
+    "experiments/candidates/acvc/training_use_b01/protocol.py",
+    "experiments/candidates/ucope/uav_motion_prefix_b01",
+    "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py",
+    "envs/pettingzoo/uav_env.py",
+    "envs/pettingzoo/env_adapter.py",
+    "scripts/hmasd_resource_preflight.py",
+    "docs/research/candidates/acvc/DIRECTION.md",
+    "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE.md"
+  ],
+  "source_surface_differences": [],
+  "method": "stdlib configuration arithmetic plus existing JSON/timing reads; no target module imported and no scientific RNG drawn",
+  "counts": {
+    "fits": 1,
+    "training_episodes": 512,
+    "horizon": 256,
+    "agents": 5,
+    "rollouts": 256,
+    "ppo_epochs_per_rollout": 4,
+    "optimizer_steps": 1024,
+    "backward_calls": 1024,
+    "training_team_steps": 131072,
+    "training_actor_rows": 655360,
+    "replayed_actor_rows": 2621440,
+    "critic_update_rows": 524288,
+    "final_panels": 3,
+    "episodes_per_panel": 64,
+    "team_steps_per_panel": 16384,
+    "actor_rows_per_panel": 81920,
+    "evaluation_episodes": 192,
+    "evaluation_team_steps": 49152,
+    "evaluation_actor_rows": 245760,
+    "F_predicate_agent_ticks": 81920,
+    "dwell_predicate_agent_ticks": 81920,
+    "total_team_steps": 180224,
+    "environment_constructors": 4,
+    "unscored_constructor_resets": 4,
+    "explicit_resets": 704,
+    "final_checkpoints": 1,
+    "post_fit_loads": 3,
+    "rollout_episodes_in_memory": 2,
+    "rollout_team_steps_in_memory": 512,
+    "recurrent_chunk_length": 32,
+    "chunks_per_rollout": 16,
+    "agent_sequences_per_replay_batch": 80,
+    "nested_candidate_trajectory_or_controller_searches": 0
+  },
+  "historical_uniform_runtime_reference": [
+    {
+      "unit": "unit_11477",
+      "summary_path": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_11477/summary.json",
+      "time_path": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_11477/support/task_time.txt",
+      "whole_command_wall_s": 168.51,
+      "peak_rss_kib": 548684,
+      "process_wall_s_to_summary": 164.04166260396596,
+      "panel_wall_s": {
+        "C": 10.216891804011539,
+        "F": 12.259350646985695,
+        "dwell": 12.176805682945997
+      }
+    },
+    {
+      "unit": "unit_12604",
+      "summary_path": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_12604/summary.json",
+      "time_path": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_12604/support/task_time.txt",
+      "whole_command_wall_s": 166.65,
+      "peak_rss_kib": 548880,
+      "process_wall_s_to_summary": 162.05238466197625,
+      "panel_wall_s": {
+        "C": 10.327556662959978,
+        "F": 12.622181943035685,
+        "dwell": 12.509352563065477
+      }
+    },
+    {
+      "unit": "unit_12794",
+      "summary_path": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_12794/summary.json",
+      "time_path": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_12794/support/task_time.txt",
+      "whole_command_wall_s": 167.06,
+      "peak_rss_kib": 546928,
+      "process_wall_s_to_summary": 162.43909501598682,
+      "panel_wall_s": {
+        "C": 10.021898344042711,
+        "F": 12.096704325056635,
+        "dwell": 11.908388320007361
+      }
+    },
+    {
+      "unit": "unit_14295",
+      "summary_path": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_14295/summary.json",
+      "time_path": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_14295/support/task_time.txt",
+      "whole_command_wall_s": 164.41,
+      "peak_rss_kib": 548600,
+      "process_wall_s_to_summary": 159.809225467965,
+      "panel_wall_s": {
+        "C": 10.150511796935461,
+        "F": 11.945290167001076,
+        "dwell": 11.814609366934747
+      }
+    },
+    {
+      "unit": "unit_18150",
+      "summary_path": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_18150/summary.json",
+      "time_path": "docs/research/candidates/acvc/fresh_dense_package_c01_20260911/unit_18150/support/task_time.txt",
+      "whole_command_wall_s": 175.29,
+      "peak_rss_kib": 550036,
+      "process_wall_s_to_summary": 169.75113218510523,
+      "panel_wall_s": {
+        "C": 10.907070399960503,
+        "F": 12.979176976019517,
+        "dwell": 12.904675756930374
+      }
+    }
+  ],
+  "historical_uniform_ranges": {
+    "whole_command_wall_s": [
+      164.41,
+      175.29
+    ],
+    "whole_command_wall_sum_s": 841.92,
+    "peak_rss_kib": [
+      546928,
+      550036
+    ],
+    "max_reported_rss_gib": 0.5245552062988281,
+    "panel_wall_s": {
+      "C": [
+        10.021898344042711,
+        10.907070399960503
+      ],
+      "F": [
+        11.945290167001076,
+        12.979176976019517
+      ],
+      "dwell": [
+        11.814609366934747,
+        12.904675756930374
+      ]
+    }
+  },
+  "historical_native_charges_s": [
+    170,
+    171,
+    178,
+    169,
+    167
+  ],
+  "historical_native_charge_sum_s": 855,
+  "future_runtime_projection": {
+    "complete_native_s": null,
+    "complete_support_s": null,
+    "complete_future_s": null,
+    "training_C_s": null,
+    "evaluation_C_s": null,
+    "evaluation_F_s": null,
+    "evaluation_dwell_s": null,
+    "reason": "Exact loop counts known; cluster per-step/reset and changed publication costs not measured. Uniform timings and memory are historical references, not a new-law forecast or cap.",
+    "law": "T_admission+T_start/import/construct+131072*c_train_cluster+1024*c_full_rollout_update+T_checkpoint+sum_a(T_load_a+64*c_reset_cluster_a+16384*c_eval_cluster_a)+T_required_checks/publication/exit",
+    "overlap_rule": "c_train includes amortized complete training resets/collection and actor/critic forwards; each c_eval includes actor/native step and its arm private predicate. Do not add those same forwards/predicate work twice."
+  },
+  "admission_policy": {
+    "physical_available_floor_gib": 4,
+    "effective_available_floor_gib": 4,
+    "device": "cpu",
+    "dtype": "float32",
+    "intraop_threads": 1,
+    "interop_threads": 1,
+    "processes": 1,
+    "GPU_required": false,
+    "fresh_admission_per_complete_invocation": true,
+    "actual_current_remote_admission": null
+  },
+  "support_components": [
+    "card and fresh prospective identity after grant",
+    "narrow factory/wrapper and publication adaptation",
+    "one focused changed-contract suite and independent semantic review",
+    "Git/source transfer and detached exact-SHA setup",
+    "launch acceptance and Monitor goal adoption",
+    "collection/reduction/technical and scientific intake",
+    "Root integration, unique preservation and scoped cleanup"
+  ],
+  "current_owner_reviews": [],
+  "direction_status": "ACTIVE/MEDIUM; recasts 2; lowest sequencing priority among ACTIVE under contention",
+  "allocation": null
+}
