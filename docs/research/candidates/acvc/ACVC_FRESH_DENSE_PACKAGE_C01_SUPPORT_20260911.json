@@ -1,16 +1,16 @@
 {
   "object": "ACVC_FRESH_DENSE_PACKAGE_C01",
   "allocation": "single funded complete five-fit chain, including the two original-node consultations",
-  "cutoff_utc": "2026-09-12T04:53:41.600468+00:00",
+  "cutoff_utc": "2026-09-12T04:58:53.145043+00:00",
   "caps_s": {
     "per_native_unit": 270,
     "native_sum": 1350,
     "all_invoked_support": 1650,
     "complete": 3000
   },
-  "known_DM_and_review_support_s": 214.6443573000054,
+  "known_DM_and_review_support_s": 222.5231358000054,
   "native_invocations_at_cutoff": 2,
-  "native_sum_s_at_cutoff": 170,
+  "native_sum_s_at_cutoff": 341,
   "components": [
     {
       "phase": "initial checkout read",
@@ -564,12 +564,29 @@
       "phase": "direct Monitor assignment for accepted C01 unit 2",
       "wall_s": 0.187,
       "measurement": "enclosing app call"
+    },
+    {
+      "phase": "publish accepted unit 2 and actual Monitor adoption with accumulating E0/support",
+      "wall_s": 4.931439
+    },
+    {
+      "phase": "unit 1 evidence and unit 2 pending-collection handoff via Root Relay",
+      "wall_s": 0.536,
+      "measurement": "enclosing app call"
+    },
+    {
+      "phase": "unit 2 terminal return: clean checkout and owner review boundary",
+      "wall_s": 0.5593317
+    },
+    {
+      "phase": "unit 2 complete terminal collection, frozen reader/receipt technical acceptance and durable evidence",
+      "wall_s": 1.8520078
     }
   ],
   "coverage_limit": "Measured DM tool/command wall plus reported independent-review command wall through this cutoff, not complete client/provider/deliberation/Root/Transport/Monitor coverage. Overlapping phase timers are counted once as described. Publication of this snapshot and later launch/observation/collection/integration/cleanup are not yet included. Unknown stays unknown; this is not an unconditional complete-cap certificate.",
   "native_cost_reading": "Each full native unit includes adjacent admission, imports/setup, all 512 training and 192 evaluation episodes, optimizer/checkpoint/publication and actual process exit. Native savings do not extend the support envelope or fund another object.",
-  "native_status": "unit 1 complete with 170 s inclusive charge; unit 2 accepted and running; later units fixed/unsubmitted; running cost pending",
+  "native_status": "units 1 and 2 complete and accepted; units 3\u20135 fixed/unsubmitted",
   "monitor": "precise unit 1 command-wall total unavailable, confirmed by Root; no reconstruction measurement",
-  "native_completed_units": 1,
-  "native_raw_command_wall_sum_s": 167.06
+  "native_completed_units": 2,
+  "native_raw_command_wall_sum_s": 335.57
 }
