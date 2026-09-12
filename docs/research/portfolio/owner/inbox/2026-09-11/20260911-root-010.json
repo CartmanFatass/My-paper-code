@@ -99,5 +99,15 @@
     "verdict_text": "**Author recommendation: F + U.** Fund one FOLR pair within a new complete 3,000-second invoked-work cap; do not add a FSD consultation now.",
     "source": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T04:48:56+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "f4bbe6cae2d351b4c80c5e0d9d66690d337749ce:docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-11-folr-unchanged-pair-funding.md",
+      "state": "planned",
+      "summary": "完整Pro最终F+U通过指定DM核对；新FOLR一对1350/2700/300/3000，FSD无新问题或后继。准备项由最终项20260911-root-011承接；Root真实应用待记录，未声称实验启动。"
+    }
+  ]
 }
