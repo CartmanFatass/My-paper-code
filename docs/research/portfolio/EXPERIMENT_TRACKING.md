@@ -7,7 +7,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | --- | --- | --- |
 | ACVC | Focused uniform→cluster deployment-correction Convergence request accepted once by provider on the bound original conversation; generation active | Transport observes natural completion; original DM intakes next distinct object, no third unchanged pair |
 | MGTAP | Original Convergence response accepted: one fresh TOP/intact-DENSE B selected; intake integrated at main6f506e474, direction remains ACTIVE | Portfolio decides the pending whole-object investment (450s/arm, 1200s complete); no experiment before allocation |
-| FSD | Fresh fifth-pair D0 handle `fsd-uav-renewal-batch-b02-771303-D0-20260912` running remotely at source8ea629595; Monitor goal has adopted it | Monitor delivers terminal notice to Root/DM, then DM advances the bound I arm under native2700/support300/complete3000; no retry/sixth pair |
+| FSD | Fresh fifth-pair D0 finished exit0 in459s at source8ea629595; Monitor delivered terminal receipt and closed its empty goal | Original DM collects and technically accepts D0, then advances the preselected I arm if valid under native2700/support300/complete3000; no retry/sixth pair |
 | RCLE | PRO_FINAL R=yes/main0c0648bd0; original DM dispatched for one post-B07 Convergence question/full intake | Zero implementation/numeric work; one exact Transport Send, no repeated B07 or added fit |
 | FOLR | Distinct entity-history continuity request accepted once by provider on its bound conversation; generation active alongside ACVC observation | Transport observes natural completion; original DM intakes the response without undoing package-level H or repeating the pair |
 | Portfolio | N/R selections are integrated; designated DM is preparing new-direction discovery/registration and now includes MGTAP's fresh investment need | Return exact Portfolio handoff to Root, then Transport sends it once; Portfolio decides registration/investment/priority |
@@ -27,7 +27,7 @@ used to fill this count.
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
 | Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; unfinished goal owns FSD D0 handle through accepted terminal delivery |
+| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; FSD D0 terminal delivered, active_set empty and goal complete; ready for I adoption |
 | Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
 Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the
