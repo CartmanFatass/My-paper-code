@@ -35,6 +35,10 @@ Older pending/zero-active paragraphs below are dated evidence, not current statu
   (not full-summary process wall), peak550036KiB. Monitor delivered empty-set goal
   completion; Root resumed the original DM via `followup_task` for full unit3
   collection and fixed unit4 `(12604,21030)` then unit5, without an efficacy gate.
+  Unit3 complete intake is integrated at `73586502d`, fullsummary169.75113218510523s,
+  charge178s and completed sum519s. All required counts/panels and12rawfiles match.
+  Unit4 `acvc-fresh-dense-c01-12604-3fd9062d5` accepted05:07:36.853166Z and actual
+  Monitor adoption05:08:00Z confirms running; Root forwarded adoption to original DM.
 - Main accepted card/source/commands/launch as `0d3bc3257`, `0451da37a`,
   `3ed01fb83`, `2fadb1ddc`. Existing 12 focused checks and independent no-material-
   finding review are reused; no repeat scientific or verification invocation.
@@ -42,6 +46,10 @@ Older pending/zero-active paragraphs below are dated evidence, not current statu
   full response `a9c6ba2bf`. Root resumed the original DM using `followup_task`,
   and the DM confirmed switching to the funded pair on the shared direction branch.
   It is an actual preparation/execution chain, with no native launch claimed yet.
+  DM then published B03 card/source89035d8f1 and commandse3ac72da5, fresh7811/107811.
+  Single source-only staging timed out55s before receipt, with no scientific command
+  in that transaction. Same DM actively reconciles remote checkout/namespace once,
+  preserving uncertain staging effects and existing support budget; no run accepted.
 - RCLE Transport rechecked original Edge browser 2/tab 507083308 and received
   `Browser is not available: 2`; original count 2 and exact request remain intact.
   Same-request recovery is owned by Transport, with original connection restoration
