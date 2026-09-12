@@ -5,8 +5,8 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC | Original DM resumed after two common-F DOWN pairs; authoring a focused uniform→cluster deployment-correction Convergence question | Original node selects the next distinct bounded object; no third unchanged pair |
-| MGTAP | Original DM resumed after mixed COND/DENSE results; authoring a focused highest-local-SINR partner-query Convergence question | Original node selects the next distinct bounded object; no fourth unchanged pair |
+| ACVC | Focused uniform→cluster deployment-correction Convergence task fixed at main71e29e181 and HANDOFF integrated at main725442231; queued after current MGTAP observation | Transport sends exact request once; original node selects next distinct bounded object, no third unchanged pair |
+| MGTAP | Highest-local-SINR partner-query Convergence task integrated at main235f202ca; exact prompt verified and unique Send accepted by provider | Transport observes natural completion; original DM intakes next-object decision, no fourth unchanged pair |
 | FSD | Original DM resumed with four-pair evidence and exact N/S continuation readiness | Apply the in-flight Portfolio N or S decision immediately; no unselected fifth pair |
 | RCLE | Original DM resumed; current readiness at main2ad4898c3 preserves B06/B07 evidence and exact pending-R scope | Apply R immediately if selected; no repeated B07 or added fit |
 | FOLR | Original DM resumed outside the held LEARNED_EVENT/5000/128 package | Prepare a distinct direction question without undoing package-level H or repeating the pair |
