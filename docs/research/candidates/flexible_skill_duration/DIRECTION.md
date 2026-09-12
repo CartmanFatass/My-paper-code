@@ -26,10 +26,21 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 
 ## Position
 
-- Scheme ladder D0 to D8 and the B-class experiment ladder E0 to E6 are fixed in
-  `docs/Claude_docs/plans/FLEXIBLE_SKILL_DURATION_PLAN_20260902.md` (§3, §5, §11). The first object is D2 (policy-based interruption); D0 (fixed `k`) is the comparator; D1 (age-conditioned discriminator at fixed `k`) is the control arm; D8 (the `(z, k)` menu) is kept only as a comparator.
-- Theory ceiling (evidence spec §11.2): a suboptimality bound for the implemented rule against the best fixed `k` on the corridor host, stated with its assumptions; no invariance proof, no semigroup claim.
-- Claim ceiling now: B — EXPLORE. Promotion to C-BENCH only after E3 or E4 repeats across three to five seeds (plan §5).
+- Current claim ceiling is B — EXPLORE. The complete native I1280/authentic-D0
+  package has four separate observations: three above-MEI and one opposite-sign.
+  It remains a valuable optional learning route to investigate under the owner's
+  2026-09-12 continuation instruction; the fourth pair's finite grant end does
+  not stop the direction. Stable advantage and renewal/batching attribution
+  remain unresolved. The current question and exact conditional continuation are
+  in [the post-four-pair intake](FSD_POST_FOUR_PAIR_CONTINUATION_INTAKE_20260912.md).
+- C-BENCH requires the evidence and prior Innovator decision appropriate to its
+  actual claim. Evidence §11.8 supplies no fixed seed-count or all-positive
+  prerequisite, and no C promotion is selected here.
+- The earlier D0–D8 / E0–E6 corridor ladder and its conditional fixed-k theory
+  target remain historical provenance in
+  `docs/Claude_docs/plans/FLEXIBLE_SKILL_DURATION_PLAN_20260902.md` (§3, §5, §11).
+  They create no proof or automatic advancement requirement for the current
+  native package question.
 
 ## Accepted mechanism-level science (2026-09-05)
 
