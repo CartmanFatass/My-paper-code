@@ -3,10 +3,11 @@
 **A meaningful Portfolio choice remains:** the new accepted ACVC claim design
 can receive a complete conditional investment, preparation only, or no funding;
 FOLR's new learned-gate reversal changes the relative value of a further pair,
-one family decision, or leaving its vacancy open. The recommendation is A+P+N
-in SCIENCE_BRIEF. It has not been selected or executed. Current actual capacity
-is one advancing FSD chain/four vacancies at the bound snapshot; the completed
-FOLR/ACVC allocations and parked RCLE request are not counted.
+one family decision, or leaving its vacancy open. FSD's newly accepted second
+I1280 gain adds a fresh unchanged B versus question-only/vacancy choice. The
+recommendation is S+A+P+N in SCIENCE_BRIEF. It has not been selected or executed.
+Current actual capacity is zero advancing chains/five vacancies at maind4c135a06;
+completed FSD/FOLR/ACVC allocations and the parked RCLE request are not counted.
 
 ## Assignment, owned checkout and L0
 
@@ -58,11 +59,32 @@ Root then supplied the superseding ACVC fact:
 > ACVC Convergence conformance PASS is integrated/pushed as main9993d3870. PRO_FINAL selected only provisional five-new-fit C-BENCH claim design; no card, C promotion/freeze, funding, fit, implementation or new consultation is authorized. ACVC commissioned question/intake is complete and now presents an unfunded future-design boundary.
 
 I read the complete ACVC intake directly, relevant response/card sections and
-the updated DIRECTION section. Thus ACVC now counts zero, while the allocated
-FSD chain still counts one. The current native inventory shows the original FSD
-DM active, with no full-pair intake on the bound main snapshot. Its last
-published execution record supplies D0 acceptance and I's actual adoption. No
-paired sign or fresh supervisor state is inferred by this author.
+the updated DIRECTION section. That intermediate snapshot had ACVC zero and
+FSD one. The initial unsent materials were published at e731229ddd; no TASK,
+READY handoff or provider Send existed. Root then reported the superseding
+FSD full-pair acceptance on main282f518d08fe42da1608ff23d30a95c4748e6586 and
+remote closeout on d4c135a068dc51ec85af988f02bf9609bce9e4be. I read the complete
+new FSD intake/E0, relevant frozen card, prospective counts and support record.
+Thus the final current count is zero/five; the earlier one/four is only dated
+preparation history. No experiment/Monitor was polled by this author.
+
+The reused Portfolio checkout merged those committed inputs at
+ea7536fc9f4d23dc96cd5974dd0f64a6975f452c and pushed immediately. Its single audit
+append conflict was resolved by retaining both branches' complete line
+multisets, including original proposal row117 and all four new FSD rows.
+Root should integrate only named new material/publication commits, not this
+broad input-sync merge. No live author overlap or scientific conflict exists.
+
+FSD's primary +.206285904082309 is one independent new pair and a second local
+same-package gain. Its previous +.0569774672 and two older batch128 losses
+remain separate. The complete future law supplies a minimal unchanged B option,
+not causal attribution or promotion. The author recommends S over question-only
+T because another fresh learning instance directly probes recurrence with the
+observed D0 variability; I's nearly doubled native wall and two existing local
+gains are the strongest reason to prefer a new question or defer. The proposal
+adds new3000 funding with all old subcaps as prospective limits; it reuses no
+ended allowance or old random state. All support unknowns and the creator's
+policy-blocked local duplicate remain documented. No FSD result was reanalyzed.
 
 The original ACVC DM supplied a bounded factual clarification from its existing
 accepted records, with no new calculation, source review, implementation or Pro
@@ -86,8 +108,9 @@ pooling or interval was computed for this packet.
 
 I read current relevant DIRECTION passages across all15 ACTIVE rows, the prior
 Portfolio choice/brief and the latest CBSC/FRRIE/VNFC technical intakes. Git blob
-comparisons found only ACVC/FOLR/MGTAP DIRECTION changes against the prior
-default input; the other12 direction records are byte-identical. Their relevant
+comparisons initially found only ACVC/FOLR/MGTAP DIRECTION changes against the prior
+default input; the final FSD update makes four changed and eleven byte-identical.
+Their relevant
 current passages were read, not treated as a new allocation. MGTAP's new
 DIRECTION paragraph records the already accepted8213 result, not a third
 observation; its strongest support/opposition therefore does not change again.
@@ -117,7 +140,7 @@ retrieval; the verified CAMA passages already cited by the FOLR card are reused
 only at their original scope.
 
 No Pro decision exists for this new packet. The author makes only the bounded
-recommendation A+P+N; no local Portfolio choice or provisional disposition is
+recommendation S+A+P+N; no local Portfolio choice or provisional disposition is
 applied. Direction decisions later use their proper nodes. The complete Pro
 answer must decide this investment question at its stated class and current
 limits, with concrete conflicts returned to the same node rather than a local
@@ -130,7 +153,11 @@ unattended authorization continues; no owner prediction or approval is invented.
 P1 Portfolio proposal item20260911-root-007 was created through item.py with
 the Chinese decision packet, options/recommendation and evidence. auto_applied
 remains unset because no investment has run. Its correct newly appended audit
-row is117. The initial item creation mistakenly supplied row115; an item.py
+row is117. This was the intermediate one/four proposal before Root's FSD update.
+The final zero/five and S+A+P+N recommendation receives a superseding proposal
+item through the same CLI; the old item's trace links that change without
+altering its historical options or inventing an owner response.
+The initial item creation mistakenly supplied row115; an item.py
 trace preserves and explicitly corrects that pointer to117, without editing
 an owner reply or claiming a Pro decision. Its publication never waits for a reply. Historical
 valid-result briefs and prediction misses remain in the original intakes.
@@ -155,3 +182,8 @@ HANDOFF commit/path, mapping checks and accepted single Root relay. Accepted
 older requests are never regenerated or resent. Existing policy-blocked local
 duplicate cleanup remains with its original creators, with verified retained
 evidence; this authoring task attempts no deletion or alternative executor.
+
+Final superseding proposal item: **20260911-root-008**, audit row122.
+Its recommendation is S+A+P+N and auto_applied is unset. Item007 remains
+historical; its CLI trace points to008 and the current record. Primary owner
+reviews were[] again after the FSD input reconciliation.
