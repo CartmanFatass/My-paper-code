@@ -1,8 +1,8 @@
 # FSD UAV renewal batch B02 / 771103 — exact execution record
 
-**State:** D0 accepted detached at 2026-09-12T02:37:10.936128+00:00;
-D0 is now collected and technically accepted. I is the preselected companion,
-not yet submitted; its launch requires fresh destination admission.
+**State:** D0 collected and technically accepted; I accepted detached at
+2026-09-12T02:50:17.756743Z and adopted by the active-goal Monitor. I terminal
+collection and the full paired scientific intake remain pending.
 Owner: FSD DM /root/dm_fsd_i1280_implementation. Authoring checkout
 C:/Projects/HMASD-worktrees/codex-fsd, branch codex/fsd. Root owns main integration
 and accepts retained evidence/reclamation. Assignment 1 and card §8 control this
@@ -152,3 +152,28 @@ new source transaction. All original caps remain in force. Owner reviews were
 [] on terminal entry. Root previously supplied approximately 9.1 s of FSD-only
 source/handover inspection and integration, charged once in SUPPORT.json;
 Monitor observation and unmeasured message/client cost remain unknown.
+
+## I launch acceptance and actual observation transfer
+
+D0's complete raw archive and technical acceptance are published in
+581bef523c8df7d026fd5a1fcf2785c09569d745. The sole preselected I command was then
+accepted once at 2026-09-12T02:50:17.756743Z, on the same detached worktree and
+source 5b15e536806d3b54dc693e7b4b911eba53ff643c. I_LAUNCH_RECEIPT.json preserves
+the exact committed command, fresh destination-adjacent admission path, 1800 s
+whole-command timeout and supervisor handle
+fsd-uav-renewal-batch-b02-771103-I-20260911. No source transaction was repeated.
+
+The direct MONITOR_ADD to live configured Monitor was accepted, and Root then
+routed actual MONITOR_ADOPTED: goal status active and active set exactly this
+I handle, with reported time 2026-09-12T02:50:17.756743Z. Dispatch and actual
+adoption are separate JSON records. DM has no routine observation and resumes
+only on Root's routed I terminal fact for full pair collection and intake.
+The known complete D0 wall is 471.82 s; all I, native-sum, support and complete
+caps remain unchanged. I's admission/output have not yet been collected, so
+launch acceptance provides no paired result or scientific polarity.
+
+CLEANUP_INVENTORY.json records all four owned remote paths and the already
+published D0 archive. Current I/source/input dependencies remain retained.
+No local temporary extraction was created by D0 collection; the older 771003
+duplicate remains outside this allocation. Full preservation and permitted
+scoped reclamation follow terminal collection, with Root accepting retention.
