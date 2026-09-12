@@ -48,3 +48,12 @@ contains the literal supervisor command, new identities,69 source paths and all
 time/admission boundaries. The conservative import closure includes optional code
 only as source; it launches no extra component and imposes no extra science condition.
 The source set is about1.31MB locally. No prelaunch scientific construction occurred.
+
+### Exact source staging
+
+The single scoped staging command succeeded: all69 source readbacks match bound
+`b93329b3c44ea9d0cf5622c00f5ca6eea0740dac`; detached worktree is the namedB03 root.
+The exact committed supervisor string passed Bash syntax-only checking. No scientific
+command was executed by staging. Local elapsed5.468s includes remote4.563541363s;
+zsh initialization warnings are preserved in `evidence/b03_credit_20260912_01/source_staging.json`.
+They did not prevent source delivery. Existing scientific source is unchanged since binding.
