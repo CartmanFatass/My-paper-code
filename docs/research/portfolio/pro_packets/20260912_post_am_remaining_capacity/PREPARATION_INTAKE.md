@@ -2,9 +2,11 @@
 
 Root designated this same Portfolio DM to prepare the next minimal question
 after it accepted A/M at maincf7bd424f and dispatched both independently.
-Current activity2/5 is published in main9be8873d1. Older control headings still
-describe D/P or the prior generation; the current actual-start row and accepted
-A/M decision control the new packet, not those historical fragments.
+Before TASK binding, Root accepted complete ACVC A at main89910ecd7 and
+reported M alone1/5/four vacancies. Read the full new B02 card/E0/intake and
+current DIRECTION section: second DOWN,50/64 adverse, no successor. This
+supersedes initial main9be A/M2/5 and remaining stale live control rows; neither
+A cleanup nor the new Portfolio author counts. N/S/R/H offers remain unchanged.
 
 Reused clean codex/portfolio atfe577e8931d2a8c0043b1631cbd72909495fecd8,
 C:/Projects/HMASD-worktrees/codex-portfolio. Required published scientific inputs
@@ -44,12 +46,14 @@ or infer old grants/three budgets/change active A/M. Owner-delegated decision
 (unattended,2026-09-03 instruction): prepare/publish the requested question only.
 No local N/S/R/H disposition. Author advice is N+R; S+R, smaller subsets and H
 are serious alternatives. N/S are mutually exclusive and only two additional
-direction chains are offered, leaving a real third vacancy rather than a
-fabricated scientific package. The all22 queue remains admitted as recorded.
+direction chains are offered, leaving at least two real vacancies rather than
+fabricated scientific packages. The all22 queue remains admitted as recorded.
 
 New N3000 is explicitly prospective; S/R each request one consultation/full
 intake at unknown complete cost and zero numerical/implementation allowance.
-The existing Q=no, FOLR narrow H and every ended/failed allocation remain.
+The existing Q=no, FOLR narrow H and every ended/failed allocation remain;
+ACVC A is now included among those completed allocations, with343 inclusive
+native seconds and fullcost unknown. No third ACVC pair is offered.
 Live owner reviews[]; prediction not taken; P1 advice is asynchronous and not
 auto-applied science. Publish exact fixed TASK/HANDOFF for current Root/Transport,
 then Relay Root once. Zero author experiment/numerical analysis/Send; no new
