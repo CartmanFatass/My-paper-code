@@ -6,10 +6,7 @@
 ## 当前27方向状态 — 2026-09-12 Windows恢复
 
 本表登记17 ACTIVE、10 PARKED。新注册ACPS、CADC为ACTIVE/HIGH；TRDL、CPCP、LCAC为PARKED/MEDIUM。原22方向生命周期、priority、recasts与UAV字段不变。
-最新 [Portfolio决定](decisions/2026-09-12-two-remaining-chains.md) 已由原作者完整核对：**FSD D与FOLR P独立获选，MGTAP不追加。**
-
-当前实际推进覆盖5个方向：ACVC K、FOLR E、RCLE L、FSD U的PRO_FINAL已完成intake并分别派回原DM执行；MGTAP原DM正在从已接受TOP_ADVERSE与DENSE默认准备一个有界下一用途/投资输入。ACPS、CADC与MGTAP的已购pair及限定清理均已完成；只有MGTAP新分配的实际authoring工作计槽。当前达到五槽目标，不以有限分配结束推断停向。
-FSD为一对I1280/authentic-D0，D0≤900、I≤1800、native≤2700、support≤300、完整≤3000秒；FOLR仅一次原节点post-B03 Convergence及完整intake，零实验额度、完整成本未知。MGTAP1200未分配。
+当前实际推进覆盖5个方向：ACVC K、FOLR E、RCLE L、FSD U的PRO_FINAL已完成intake并分别派回原DM执行；MGTAP的有界A/U/P下一用途输入已固定，指定Portfolio DM正在起草下一干净请求。ACPS、CADC与MGTAP的已购pair及限定清理均已完成；只有MGTAP当前实际request-authoring工作计槽。当前达到五槽目标，不以有限分配结束推断停向。
 新方向发现/注册及独立MGTAP T投入决定已完整intake并集成main2492dcb06：T=yes，ACPS/CADC获有限starter投入，另三项仅注册停放。
 FSD第五pair已完整intake且scoped cleanup完成；ACVC、FOLR、RCLE与FSD的K/E/L/U已完整intake并形成独立执行映射。MGTAP的T pair与ACPS的B01 pair均已完成科学intake和限定清理并交回下一决策需求。当前严格推进计数5，达到五槽目标；不以有限分配结束推断停向。
 
@@ -32,7 +29,7 @@ FSD第五pair已完整intake且scoped cleanup完成；ACVC、FOLR、RCLE与FSD�
 | [FRRIE](../candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md) | P59已intake；P63 source-only九frame映射完成，factory fault仍未归因，P63未运行。 | 无；本轮没有新增拨款。 | 可信最小观察/替代执行路径及必要拨款。旧故障未完全定位不自动禁止不同可信路径；不重跑旧P63。 |
 | [FSD](../candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md) | 第五pair有效ABOVE_MEI；U已获PRO_FINAL一次原节点用途判断，B-LONG-D0仍未获拨款。 | 原DM已接收U：起草一次固定GitHub用途问题，经Root/Transport一次发送并完整intake；成本UNKNOWN获接受。 | 零实现、数值重分析、fit/eval/profiling；B-LONG-D0只留下一独立投资问题。 |
 | [LCAC](../candidates/learned_counterfactual_agent_credit/DIRECTION.md) | 新注册PARKED/MEDIUM；保留learned counterfactual agent credit的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
-| [MGTAP](../candidates/metric_ground_transport_allocation/MGTAP_TOP_QUERY_B01_INTAKE_20260912.md) | T的完整pair验收为TOP_ADVERSE：TOP−DENSE −0.0684509798 J，4/32正、28/32负；DENSE保持默认，方向仍ACTIVE。 | 科学intake、归档与清理已接受；原DM正在准备独立的有界下一用途/投资输入。 | 将固定输入交下一干净Portfolio请求；不由Root选择生命周期或研究对象，无retry、额外arm/panel。 |
+| [MGTAP](../candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md) | T的完整pair为TOP_ADVERSE，DENSE保持默认；新的A/U/P下一用途输入已固定，任何选项均未获拨款。 | 指定Portfolio DM正在把固定输入纳入下一干净请求；A至多购买一次用途/设计判断，零native、成本UNKNOWN。 | 等待Portfolio裁决A/U/P；不由Root选择生命周期或研究对象，无retry、额外arm/panel。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
 | [RCLE](../candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md) | L已获PRO_FINAL一次当前证据设计；已测配方HOLD，RCLE仍ACTIVE/MEDIUM。 | 原DM已接收L：产出至多一个真正不同的B候选或具体no-candidate；完整documentary成本UNKNOWN获接受。 | 零实现、数值重分析、模型/RNG、测试、实验或Pro；未来投资需求回原层级。 |
