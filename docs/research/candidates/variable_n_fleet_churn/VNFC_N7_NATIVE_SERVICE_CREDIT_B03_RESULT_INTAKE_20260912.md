@@ -107,3 +107,14 @@ cleanup inventory. The DM remains cleanup owner through disk/registration verifi
 The external core, small supervisor history and shared authoring checkout remain.
 This return leaves no running scientific handle, no pending primary collection and no
 new Pro request. Independent directions can continue under their existing decisions.
+
+
+## Root acceptance and completed scoped reclamation
+
+Root integrated the source/input/staging/intake at main `efa676ac2` / `60ba92104` /
+`57da33f0c` / `7125f368b` and assigned both exact terminal checkouts for reclamation.
+The [execution closeout](VNFC_N7_NATIVE_SERVICE_CREDIT_B03_EXECUTION_20260912.md#root-acceptance-and-actual-cleanup--2026-09-12)
+records successful removal and verified disk/Git-registration absence for both. Raw
+archive, external core, supervisor history, B01/B02 evidence and shared authoring
+checkout remain. No diagnosis, test or scientific invocation was added. This completes
+the accepted cleanup responsibility without changing the scientific intake or budget.
