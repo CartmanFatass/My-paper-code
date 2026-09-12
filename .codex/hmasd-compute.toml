@@ -12,6 +12,16 @@ project_root = "/home/fires/projects/HMASD"
 python = "/home/fires/.venvs/hmasd-control/bin/python"
 result_memory_floor_gib = 4
 
+[nodes.local_linux_cpu]
+role = "local_cpu_engineering_and_authorized_portable_fallback"
+project_root = "/home/fires/projects/HMASD"
+python = "/home/fires/.venvs/hmasd-linux-cpu/bin/python"
+path_prefix = "/home/fires/.venvs/hmasd-linux-cpu/bin"
+environment = "environments/hmasd-linux-cpu/manifest.json"
+python_version = "3.10.20"
+torch_version = "2.7.0+cpu"
+result_memory_floor_gib = 4
+
 [nodes.local_windows]
 role = "control_plane_and_fallback_compute"
 project_root = "C:/Projects/HMASD"
