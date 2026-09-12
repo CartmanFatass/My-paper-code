@@ -1,0 +1,250 @@
+{
+  "generated_at_utc": "2026-09-12T13:32:17.339222+00:00",
+  "evidence_sha": "1c50e6857f5b0e89c149efcd12fc297dc4a52aa4",
+  "author_native_name": "/root/dm_a_mx_portfolio_resume",
+  "author_thread_id": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "directions": [
+    {
+      "direction_id": "active_post_churn_population_flow_identification",
+      "lifecycle": "PARKED",
+      "priority": "LOW",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/active_post_churn_population_flow_identification/DIRECTION.md"
+    },
+    {
+      "direction_id": "acvc",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/acvc/DIRECTION.md"
+    },
+    {
+      "direction_id": "capability_bound_semantic_currentness",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md"
+    },
+    {
+      "direction_id": "commitment_residual_triggered_options",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md"
+    },
+    {
+      "direction_id": "degraded_incumbent_shadow_handover",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md"
+    },
+    {
+      "direction_id": "ec4g_r1",
+      "lifecycle": "PARKED",
+      "priority": "LOW",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/ec4g_r1/DIRECTION.md"
+    },
+    {
+      "direction_id": "eociv_lite",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/eociv_lite/DIRECTION.md"
+    },
+    {
+      "direction_id": "expressibility_gated_renewal_credit_relay",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md"
+    },
+    {
+      "direction_id": "finite_resource_relational_inductive_efficiency",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/DIRECTION.md"
+    },
+    {
+      "direction_id": "flexible_skill_duration",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md"
+    },
+    {
+      "direction_id": "metric_ground_transport_allocation",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md"
+    },
+    {
+      "direction_id": "orbit_shadow_read",
+      "lifecycle": "PARKED",
+      "priority": "LOW",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/orbit_shadow_read/DIRECTION.md"
+    },
+    {
+      "direction_id": "recct_lite",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/recct_lite/DIRECTION.md"
+    },
+    {
+      "direction_id": "roster_consistent_latent_exploration",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md"
+    },
+    {
+      "direction_id": "scope_1s",
+      "lifecycle": "PARKED",
+      "priority": "LOW",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/scope_1s/DIRECTION.md"
+    },
+    {
+      "direction_id": "semigroup_consistent_duration_model_policy",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md"
+    },
+    {
+      "direction_id": "ucope",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/ucope/DIRECTION.md"
+    },
+    {
+      "direction_id": "vap_folr_core",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/vap_folr_core/DIRECTION.md"
+    },
+    {
+      "direction_id": "variable_n_fleet_churn",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md"
+    },
+    {
+      "direction_id": "vsp_02",
+      "lifecycle": "ACTIVE",
+      "priority": "LOW",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/vsp_02/DIRECTION.md"
+    },
+    {
+      "direction_id": "vsp_03",
+      "lifecycle": "ACTIVE",
+      "priority": "LOW",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/vsp_03/DIRECTION.md"
+    },
+    {
+      "direction_id": "vsp_c1",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM",
+      "matching_current_host_tuned_headroom": "absent",
+      "evidence_path": "docs/research/candidates/vsp_c1/DIRECTION.md"
+    }
+  ],
+  "counts": {
+    "registered": 22,
+    "active": 15,
+    "parked": 7,
+    "target_independent_chains": 5,
+    "root_reported_advancing_native_directions": [
+      "acvc",
+      "vap_folr_core",
+      "variable_n_fleet_churn"
+    ],
+    "root_reported_accepted_running_experiments": 0,
+    "accepted_rcle_generation": false,
+    "vacancies_at_root_report": 2,
+    "additional_execution_ready_existing_scientific_allocations_found": 0
+  },
+  "new_scientific_exposure": {
+    "result_bearing_invocations": 0,
+    "models": 0,
+    "training_seeds": 0,
+    "training_episodes": 0,
+    "environment_steps": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "exposure_line": "This Portfolio preparation adds 0 result-bearing invocations, 0 models, 0 training seeds/episodes/environment steps/optimizer steps/evaluations. Documentary and provider work is not measured as zero cost.",
+  "proposed_mgtap_one_fresh_pair": {
+    "evidence_class": "B/EXPLORE",
+    "independent_training_pairs": 1,
+    "arms": 2,
+    "training_episodes_per_arm": 512,
+    "horizon": 256,
+    "training_ticks": 262144,
+    "final_evaluation_episodes_per_arm": 32,
+    "evaluation_ticks": 16384,
+    "total_native_ticks": 278528,
+    "adam_steps": 2048,
+    "added_validation_or_search_invocations": 0,
+    "mei_native_J": 0.01,
+    "suggested_new_native_whole_arm_cap_seconds": 450,
+    "suggested_new_native_sum_cap_seconds": 900,
+    "suggested_new_support_reference_seconds": 300,
+    "suggested_new_complete_cap_seconds": 1200,
+    "existing_8213_native_wall_seconds": 358.11,
+    "future_runtime_forecast": null,
+    "authority": "proposal only, not selected or an old cap balance"
+  },
+  "proposed_cbsc_preparation": {
+    "object": "one complete bounded B card and credible direct-public-stream execution design under the already opened opportunity-credit comparison",
+    "scientific_calls": 0,
+    "future_fit_allocation": null,
+    "preparation_complete_cost": null,
+    "stop": "one complete card/L0 with focused dependency and known-cost map, or one concrete no-ready return; no recurrent architecture audit, target import, retained52/P63 run, fresh test/model/learner or same-request research loop"
+  },
+  "existing_cbsc_recipe_if_later_funded": {
+    "status": "unfunded counts only; old B04 seed/allowance not reused",
+    "learner_count": 2,
+    "training_episodes": 768,
+    "training_ticks": 116736,
+    "adam_steps": 1536,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 19456,
+    "native_total_ticks": 136192,
+    "fixed_rule_existing_tape_passes": 96,
+    "fixed_rule_action_scores": 2304,
+    "nested_policy_search": 0,
+    "mei_native_episode_return": 0.25
+  },
+  "known_uav_entry_verified_this_reading": [
+    {
+      "direction_id": "ucope",
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md",
+      "section": "9; direction decision + accepted actual scientific invocation + native execution"
+    }
+  ],
+  "limits": [
+    "Snapshot counts are Root-routed mechanical facts, not direct remote/browser observations by this author.",
+    "No result is recalculated or reclassified. One accepted intake is assumed to describe its bound execution at its stated limits.",
+    "No five-entry claim: using a native UAV host is not an entry decision.",
+    "Per-result costs stay in original units and windows; complete histories/unknown overhead are not reconstructed."
+  ],
+  "local_link_check_missing": [],
+  "later_scientific_input": {
+    "acvc_final_intake_commit": "48b278091",
+    "main_integration": "77c17d111",
+    "source": "direct ACVC DM return",
+    "state": "final intake complete; preparing one concrete original-Convergence question/use, no new scientific grant or Pro dispatch selected"
+  }
+}
