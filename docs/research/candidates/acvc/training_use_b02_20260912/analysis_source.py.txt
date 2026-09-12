@@ -1,0 +1,99 @@
+"""Read preserved bytes, verify each complete arm, then apply the card once."""
+import hashlib
+import json
+import math
+from pathlib import Path
+import re
+import sys
+import time
+
+start=time.perf_counter()
+work=Path('C:/Projects/HMASD-worktrees/codex-acvc')
+sys.path.insert(0,str(work))
+import numpy as np
+import torch
+from experiments.candidates.acvc.training_use_b02.protocol import OBJECT, MASTER, EVALUATION_NAMESPACE
+from experiments.candidates.acvc.training_use_b01.protocol import paired_primary
+
+root=work/'temp/directions/acvc/training_use_b02_20260912_collection'
+out=root/'paired_analysis.json'
+assert not out.exists(), 'Preserve existing analysis; do not repeat silently.'
+result={'object':OBJECT,'source_sha':'ac64769f6403e4495a00673e2230d100edb7a02b','arms':{}}
+rows_by_arm={}
+expected={'environment_constructors':2,'unscored_constructor_resets':2,'explicit_resets':576,
+    'step_calls':147456,'team_steps':147456,'train_team_steps':131072,'eval_team_steps':16384,
+    'completed_episode_steps':147456,'train_episodes':512,'eval_episodes':64,'rollouts':256,
+    'optimizer_steps':1024,'backward_calls':1024,'update_records':1024,'train_actor_agent_forwards':655360,
+    'eval_actor_agent_forwards':81920,'replayed_actor_agent_steps':2621440,'critic_update_rows':524288,
+    'duration_decisions':0,'scientific_uav_calls':147456,'post_fit_loads':1,'new_fits':1,'final_checkpoints':1}
+for arm in ['C','F']:
+    d=root/('arm_'+arm)
+    s=json.loads((d/'output/summary.json').read_text())
+    rows=[json.loads(x) for x in (d/'output/episodes.jsonl').read_text().splitlines()]
+    updates=[json.loads(x) for x in (d/'output/updates.jsonl').read_text().splitlines()]
+    admission=json.loads((d/'admission.json').read_text())
+    ckpt=torch.load(d/'output/final_DENSE.pt',map_location='cpu',weights_only=False)
+    assert s['status']=='complete' and s['fit_complete'] and s['checkpoint_complete']
+    assert s['launch_sha']==result['source_sha'] and s['object']==OBJECT
+    assert s['master']==MASTER and s['evaluation_namespace']==EVALUATION_NAMESPACE
+    cfg=s['configuration']
+    assert cfg['training_rule']==arm and cfg['evaluation_order']==['F']
+    assert cfg['chunk']==32 and cfg['device']=='cpu' and cfg['dtype']=='float32'
+    assert cfg['intraop_threads']==cfg['interop_threads']==1 and cfg['ratio_grouping']=='agent_compound'
+    assert all(s['counts'][key]==value for key,value in expected.items())
+    train=[r for r in rows if r['phase']=='train']; evaluation=[r for r in rows if r['phase']=='eval']
+    assert len(rows)==576 and len(train)==512 and len(evaluation)==64
+    for e,r in enumerate(train):
+        assert r['episode']==e and r['reset_seed']==100000*MASTER+1000+e and r['master']==MASTER
+        assert r['rule']==('DENSE_fit' if arm=='C' else 'DENSE_fit_through_F') and r['arm']=='DENSE'
+        assert r['steps']==256 and math.isfinite(r['J']) and abs(r['S']/256-r['J'])<1e-12
+    for e,r in enumerate(evaluation):
+        assert r['episode']==e and r['reset_seed']==100000*EVALUATION_NAMESPACE+2000+e and r['arm']=='F'
+        assert r['steps']==256 and math.isfinite(r['J']) and abs(r['S']/256-r['J'])<1e-12
+    assert len(updates)==1024
+    for k,r in enumerate(updates):
+        assert r['master']==MASTER and r['rollout']==k//4 and r['epoch']==k%4
+        assert r['episodes']==[2*(k//4),2*(k//4)+1]
+        assert all(math.isfinite(r[key]) for key in ['loss','policy_loss','value_loss','entropy','grad_norm'])
+    assert ckpt['master']==MASTER and ckpt['object']==OBJECT
+    parameter_counts={key:sum(t.numel() for t in ckpt[key].values()) for key in ['actor','critic']}
+    assert parameter_counts=={'actor':34902,'critic':34177}
+    assert all(t.dtype==torch.float32 and torch.isfinite(t).all() for key in parameter_counts for t in ckpt[key].values())
+    assert admission['passed'] and admission['effective_available_bytes']>=4294967296
+    assert admission['available_physical_bytes']>=4294967296
+    timing=dict(line.split('=',1) for line in (d/'task_time.txt').read_text().splitlines())
+    assert timing['exit_code']=='0' and (d/'supervisor/exit_code').read_text().strip()=='0'
+    supervisor_seconds=int(re.search(r'Duration: (\d+)s',(d/'supervisor/task.log').read_text()).group(1))
+    whole=float(timing['whole_command_wall_s'])
+    charge=max(math.ceil(whole),supervisor_seconds)+2
+    assert charge<=270
+    if arm=='C':
+        assert 'training_F_exposure' not in s and not any('training_F_retrace' in r for r in train)
+    else:
+        assert s['training_F_exposure']['training_F_agent_ticks']==655360
+        assert s['training_F_exposure']['training_F_retrace']==sum(r['training_F_retrace'] for r in train)
+    rows_by_arm[arm]=rows
+    result['arms'][arm]={'accepted':True,'identity':f'train-{arm} / deploy-F',
+        'training_episodes':len(train),'final_F_episodes':len(evaluation),'adam_records':len(updates),
+        'expected_counts_matched':expected,'parameter_counts':parameter_counts,
+        'checkpoint_sha256':hashlib.sha256((d/'output/final_DENSE.pt').read_bytes()).hexdigest(),
+        'whole_command_wall_s':whole,'supervisor_duration_s':supervisor_seconds,'inclusive_native_charge_s':charge,
+        'inclusive_charge_rule':'max(ceil(whole_command_wall_s), integer supervisor duration)+2s for enclosing integer-boundary/exit slack; not added to inner timing',
+        'process_wall_s_to_summary':s['process_wall_s_to_summary'],'peak_rss_kib':int(timing['peak_rss_kib']),
+        'admission':admission,'final_F_mean_J':float(np.mean([r['J'] for r in evaluation])),
+        'final_F_mean_S':float(np.mean([r['S'] for r in evaluation])),
+        'training_F_exposure':s.get('training_F_exposure','C bypasses F; incidence unmeasured'),
+        'final_F_interventions':s['intervention_by_rule']['F'],'resources':'resources_unmeasured'}
+assert result['arms']['C']['checkpoint_sha256']!=result['arms']['F']['checkpoint_sha256']
+result['primary']=paired_primary(rows_by_arm['C'],rows_by_arm['F'])
+assert result['primary']['complete']
+result['whole_command_native_sum_s']=sum(v['whole_command_wall_s'] for v in result['arms'].values())
+result['inclusive_native_sum_s']=sum(v['inclusive_native_charge_s'] for v in result['arms'].values())
+probabilities={'UP':.20,'WITHIN':.30,'DOWN':.50}; observed=result['primary']['reading']
+result['prediction']={'probabilities':probabilities,'observed':observed,
+    'categorical_Brier_sum':sum((p-int(k==observed))**2 for k,p in probabilities.items()),
+    'completion_prediction':.90,'completion_observed':True,'completion_Brier':(.90-1)**2,'owner':'not taken'}
+result['analysis_wall_s']=time.perf_counter()-start
+out.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n',encoding='utf-8')
+print(json.dumps({'primary':result['primary'],'prediction':result['prediction'],
+    'native_sum':result['inclusive_native_sum_s'],'analysis_wall_s':result['analysis_wall_s']}),flush=True)

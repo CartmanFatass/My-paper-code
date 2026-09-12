@@ -70,5 +70,15 @@
     "verdict_text": "Claim tested: one further fresh training-through-F pair improves final common-F native return over training C by more than .01 J.",
     "source": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_SCIENCE_CARD_20260912.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T19:49:35+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/EXECUTION_MAPPING.md",
+      "record": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "新 A 完整结束：B02再次DOWN，保留部署F参考及所有结果；不自动投入第三对。唯一归档待Root接受后清理远端副本。"
+    }
+  ]
 }
