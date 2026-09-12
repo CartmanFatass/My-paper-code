@@ -164,9 +164,61 @@
     {
       "purpose": "I adoption clean-boundary owner review read",
       "wall_seconds": 0.386631
+    },
+    {
+      "purpose": "I actual adoption record publication and immediate push",
+      "wall_seconds": 4.5930774
+    },
+    {
+      "purpose": "I actual adoption Relay handoff",
+      "wall_seconds": 0.148
+    },
+    {
+      "purpose": "I terminal current card and collection record read",
+      "wall_seconds": 0.2668968
+    },
+    {
+      "purpose": "paired publication and analysis contract read",
+      "wall_seconds": 0.1964156
+    },
+    {
+      "purpose": "I original file collection and four-target inventory",
+      "wall_seconds": 0.90544
+    },
+    {
+      "purpose": "I source publication and technical acceptance contract read",
+      "wall_seconds": 0.205997
+    },
+    {
+      "purpose": "I actual result schema and relevant scientific reading",
+      "wall_seconds": 0.2736287
+    },
+    {
+      "purpose": "I technical acceptance, source paired publication and independent/run-level analysis",
+      "wall_seconds": 0.4910823
+    },
+    {
+      "purpose": "paired intake primary owner review and current Portfolio read",
+      "wall_seconds": 0.2673385
+    },
+    {
+      "purpose": "E0 format, continuation and reward-accounting source read",
+      "wall_seconds": 0.204586
+    },
+    {
+      "purpose": "reward weights and publication inventory check",
+      "wall_seconds": 0.2684432
+    },
+    {
+      "purpose": "I original/technical/paired evidence publication and immediate push",
+      "wall_seconds": 4.5749619
+    },
+    {
+      "purpose": "paired E0/intake/brief/audit and published raw preservation verification",
+      "wall_seconds": 1.4654779
     }
   ],
-  "known_support_wall_seconds": 57.36542240000001,
+  "known_support_wall_seconds": 71.22676770000001,
   "counting": "Each known enclosing invoked command once; nested SSH not readded. Prior readiness overlap conservatively included, old D spending never reused.",
   "unknown": [
     "earlier readiness command walls unavailable in truncated outputs",
@@ -177,7 +229,8 @@
   "source_delivery_transactions": 1,
   "scientific_submissions": 2,
   "native_wall_seconds": {
-    "D0": 458.8
+    "D0": 458.8,
+    "I": 987.99
   },
   "claim": "No observed budget breach; partial known support is not certification of full300/3000 compliance.",
   "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-fsd-003.json",
@@ -187,7 +240,8 @@
     "within45": true,
     "nested_not_readded": true
   },
-  "actual_Monitor_adoption": "D0 accepted/goal complete; I actual unfinished goal adoption confirmed via Root",
-  "aggregate_cpu_seconds": 1804.26,
-  "known_native_plus_support_seconds": 516.1654224
+  "actual_Monitor_adoption": "D0 and I actual unfinished goals adopted; both terminal notices delivered and goals complete with active_set empty",
+  "aggregate_cpu_seconds": 5718.46,
+  "known_native_plus_support_seconds": 1518.0167677,
+  "study_elapsed_D0_start_to_I_terminal_seconds": 1911
 }

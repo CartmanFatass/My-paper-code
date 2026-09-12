@@ -1,5 +1,9 @@
 # FSD after four package observations — continuation intake
 
+This four-pair readiness is complete. The selected N fifth pair is now accepted;
+current science and continuation are in the [771303 intake](FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md).
+The rationale and preparation below record the completed earlier boundary.
+
 **FSD continues under OWNER_DIRECT 2026-09-12.** The completed fourth-pair
 allocation ends only its two-arm grant. Its cleanup is complete; it is neither
 a direction stop nor a requirement for another permission exchange. This record

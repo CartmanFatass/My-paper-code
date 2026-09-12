@@ -1,7 +1,7 @@
 # FSD B02 / 771303 — execution
 
-State: D0 complete/exit0 and technically accepted; preselected I accepted once.
-D0 Monitor goal complete. I actual unfinished Monitor goal adoption confirmed.
+State: complete pair technically accepted with scientific intake complete as above_mei; scoped cleanup pending Root retention acceptance.
+Both actual Monitor goals are complete, active_set empty and terminal notices delivered.
 Seven pure binding checks and independent review passed; no material finding.
 DM /root/dm_fsd_d_pair, C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd.
 Input merge dd4c829d93acf12b0f487ee9ff0d31ff005535d8 brings main0c0648bd0
@@ -130,3 +130,33 @@ e73c50ced and 5cf2fb4a1. The primary owner review command returned no unapplied
 instruction at this clean boundary. DM retains terminal collection, the frozen
 paired reduction/intake and scoped cleanup; Monitor owns observation. No
 duplicate ADD, routine polling, retry or sixth pair.
+
+## I terminal collection and complete pair technical acceptance
+
+Root delivered I finished/exit 0, supervisor duration 988 seconds, pid 3395436,
+tmux inactive, complete witness/failure null and the exact source/cwd/output.
+The Monitor goal is complete with active_set empty and terminal receipt delivered.
+I_MONITOR_TERMINAL.json records that fact. I collection preserved 11 original
+files, source readbacks and the unchanged D0 companion in I_collection.tar.gz.
+No source delivery, scientific invocation or routine observation was repeated.
+
+I's complete 987.99-second command passed fresh adjacent admission, five full
+learning updates and all 32 final episodes; every learner module moved and
+evaluator optimizer calls remained zero. I_TECHNICAL_ACCEPTANCE.json records
+acceptance separately from the scientific intake. The unchanged source pair
+publication and independent ordered reduction agree on +0.0737976491890039 J,
+26 positive/6 adverse contrasts and the frozen above_mei branch. Native wall
+sums to 1446.79 seconds; aggregate CPU is 5718.46 seconds. Partial support
+telemetry remains explicit. CLEANUP_INVENTORY.json names only the four terminal
+remote targets; removal awaits Root's acceptance of retained current archives.
+
+## Complete paired intake and retention handoff
+
+The E0 result and scientific intake accept the frozen above_mei branch, retain
+all six adverse worlds and prior mixed results, and limit the claim to this
+same-host optional package. The Chinese owner brief, existing card owner trace
+and four audit decisions record the actual result and OWNER_DIRECT continuity.
+Both raw archives and all 22 individual original Git blobs were verified at
+476e2e64a against their collection digests. Root integration/retention acceptance
+precedes the same DM's exact four-target cleanup. No sixth pair, S consultation
+or automatic successor was selected.

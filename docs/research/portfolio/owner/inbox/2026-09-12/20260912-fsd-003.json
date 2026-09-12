@@ -84,6 +84,14 @@
       "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_EXECUTION_20260912.md",
       "state": "applied",
       "summary": "D0正常完成并验收，完整458.80秒、五轮真实更新及32局终评；原始证据已推送保全。预选I已唯一提交，Monitor新目标接管中；尚无配对结果，不追加实验。"
+    },
+    {
+      "at": "2026-09-12T21:44:47+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "第五组有效完成：I−D0 +.07380J，26正6负，超过.01；两臂完整1446.79秒，I约2.15倍D0耗时。混合历史和训练中段劣势保留，不宣称稳定优势。原始证据已保全，等待Root接收后执行四处清理；本次拨款结束不停止FSD，不自动追加第六组。"
     }
   ]
 }

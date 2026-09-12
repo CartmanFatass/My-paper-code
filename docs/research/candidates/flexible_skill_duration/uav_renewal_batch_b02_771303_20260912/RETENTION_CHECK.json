@@ -1,0 +1,35 @@
+{
+  "verified_utc": "2026-09-12T21:44:47.496691+00:00",
+  "evidence_commit": "476e2e64a67c23b5f4da8b7311e131502667adcd",
+  "archives": {
+    "D0": "6c31c63a700f91691f00c395faa25d26640d16d1bec9704d5ad8343913c1b5ff",
+    "I": "dc0b3fc50bedca2d617a7c6fad77d7a765c71625880a29df29e7f1badb3eac26"
+  },
+  "published_original_files_match_archive_and_collection_digests": [
+    "D0/manifest.json",
+    "D0/summary.json",
+    "D0/training.jsonl",
+    "inputs/D0_admission.json",
+    "inputs/D0_process_time.txt",
+    "supervisor_D0/exit_code",
+    "supervisor_D0/pid",
+    "supervisor_D0/runner.sh",
+    "supervisor_D0/start_time",
+    "supervisor_D0/status",
+    "supervisor_D0/task.log",
+    "I/manifest.json",
+    "I/summary.json",
+    "I/training.jsonl",
+    "inputs/I_admission.json",
+    "inputs/I_process_time.txt",
+    "supervisor_I/exit_code",
+    "supervisor_I/pid",
+    "supervisor_I/runner.sh",
+    "supervisor_I/start_time",
+    "supervisor_I/status",
+    "supervisor_I/task.log"
+  ],
+  "raw_file_count": 22,
+  "root_retention_acceptance": "pending",
+  "remote_cleanup_performed": false
+}
