@@ -78,6 +78,26 @@ primary. The [final intake](FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md#final-
 records decisions and limits; no fourth pair, retuning, diagnosis, automatic Pro
 question, C claim, transfer claim or local family disposition follows this grant.
 
+### Terminal preservation and reclamation
+
+Result/evidence commit `33a5acb2109e9ce6a956c11d15e8d769660ecc8f` was pushed
+before cleanup. The11 original source files match the published SHA and all20
+native/supervisor originals match the committed archive. The remote checkout
+and both supervisor roots were then removed; disk absence and Git worktree
+registration absence were verified. The shared authoring checkout remains.
+
+The local three archived duplicate roots contain35 files/19,035,544 bytes.
+Their scoped PowerShell deletion was rejected before process creation with
+`blocked by policy`; all three were subsequently observed present. They remain
+retained, without an alternate deletion attempt. This runtime restriction does
+not affect scientific acceptance or Monitor closure. The
+[cleanup receipt](evidence/2026-09-12-folr-learned-retention-b03-cleanup.json)
+records exact paths, preservation, remote absence and the local rejection.
+Additional named publication/cleanup work is12.8158305 seconds; known support
+through that snapshot is342.002703300 and known native plus support is at least
+**2092.812703300 seconds**. Unitemized support and final integration remain
+unmeasured; full complete3000-cap conformance remains unverified.
+
 ## Historical prelaunch stop — superseded continuation authority
 
 The following account preserves the earlier prelaunch stop and its then-zero

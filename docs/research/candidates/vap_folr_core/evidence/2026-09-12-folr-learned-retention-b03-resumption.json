@@ -92,8 +92,8 @@
   "relay_thread_id": "01a095ca-8676-74e1-b78c-ea459d41e905",
   "retention": {
     "remote_checkout": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
-    "purpose": "Both original arms terminal and raw evidence collected; source/output checkout retained only until preservation and scoped cleanup reconciliation.",
-    "owner_event": "same FOLR DM for exact terminal B03 paths after preservation reconciliation; Root confirms integration/retention and accepts reclamation",
+    "purpose": "Remote terminal source/output and supervisor roots reclaimed after evidence publication; three archived local duplicate roots remain because deletion was rejected before execution.",
+    "owner_event": "same FOLR DM completed remote cleanup and reports local policy rejection; Root accepts integration/remote reclamation and records retained local copies",
     "local_control": "temp/directions/vap_folr_core/exp/learned_retention_b03_resume_control_20260912",
     "shared_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-vap-folr",
     "shared_authoring_branch": "codex/vap-folr"
@@ -417,6 +417,10 @@
     "support_reference_seconds": 300,
     "support_reference_is_hard_cap": false,
     "support_known_lower_bound_seconds": 329.18687280007987,
+    "additional_named_publication_cleanup_seconds": 12.8158305,
+    "known_support_through_cleanup_lower_bound_seconds": 342.00270330007993,
+    "known_native_plus_support_through_cleanup_lower_bound_seconds": 2092.8127033000806,
+    "cleanup_cost_receipt": "evidence/2026-09-12-folr-learned-retention-b03-cleanup.json",
     "known_native_plus_support_lower_bound_seconds": 2079.99687280008,
     "complete_invoked_hard_cap_seconds": 3000,
     "complete_cap_conformance": "unverified because some support is unmeasured; no observed complete-cap breach",
@@ -477,7 +481,14 @@
     }
   },
   "cleanup": {
-    "status": "evidence preserved; assigned DM reclaims exact terminal copies after publication, Root confirms integration/retention and accepts reclamation",
+    "status": "REMOTE_CLEANUP_VERIFIED_LOCAL_REMOVAL_POLICY_REJECTED_RETAINED",
+    "cleanup_receipt": "evidence/2026-09-12-folr-learned-retention-b03-cleanup.json",
+    "evidence_publication_commit": "33a5acb2109e9ce6a956c11d15e8d769660ecc8f",
+    "remote_disk_and_registration_absent": true,
+    "local_duplicate_roots_retained": 3,
+    "local_duplicate_bytes": 19035544,
+    "local_removal_blocker": "CreateProcess policy rejection: blocked by policy; no alternate deletion or retry",
+    "shared_authoring_registered": true,
     "archive": "evidence/2026-09-12-folr-learned-retention-b03-native-results.tar.gz",
     "archive_sha256": "41d7e2fbe703d31186bd57f44d8dc263d1ec42aa1e390990de1db721cf8b57d3",
     "remote_checkout": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
@@ -491,8 +502,8 @@
     "shared_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-vap-folr",
     "shared_authoring_branch": "codex/vap-folr",
     "shared_retention_reason": "DM authoring and Root integration dependency; Root owns eventual direction-checkout reclamation",
-    "cleanup_owner": "same FOLR DM performs assigned exact terminal cleanup after evidence publication; Root confirms integration/retention and accepts reclamation",
-    "removed_this_intake": false,
+    "cleanup_owner": "same FOLR DM completed remote cleanup and reports local policy rejection; Root accepts integration/remote reclamation and records retained local copies",
+    "removed_this_intake": "remote checkout and both supervisor roots only; local deletion rejected before execution",
     "older_restricted_B01_B02_duplicates": "untouched; outside assignment"
   },
   "machine_generated_final_exposure_line": "B03 FINAL ACTUAL EXPOSURE: real_training_fits=2; independent_training_pairs=1; training_episodes=10000; training_team_ticks=200000; optimizer_steps=9938; evaluation_episodes=256; evaluation_team_ticks=5120; total_team_ticks=205120; analysis_checkpoint_loads=2; analysis_new_fits_rollouts_updates=0; diagnostic_trajectories=0; new_test_invocations=0.",
@@ -535,7 +546,8 @@
     "current_primary_exposure_and_monitor_closure_consistent": true,
     "native_archive_digest_pass": true,
     "links_pass": true,
-    "brief_characters": 358,
+    "brief_characters": 379,
+    "reported_cleanup_state_contract": "PASS: verified remote absence; observed policy-rejected local retention; primary unchanged",
     "new_scientific_execution": 0
   }
 }
