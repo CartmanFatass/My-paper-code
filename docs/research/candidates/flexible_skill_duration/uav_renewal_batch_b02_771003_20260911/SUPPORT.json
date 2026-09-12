@@ -205,9 +205,17 @@
     {
       "purpose": "record exact local policy cleanup blocker and read owner boundary",
       "wall_seconds": 0.4818482
+    },
+    {
+      "purpose": "publish verified remote closeout and explicit local policy retention limitation",
+      "wall_seconds": 5.0166339
+    },
+    {
+      "purpose": "one required terminal-intake relay API elapsed, service forwarding separate",
+      "wall_seconds": 0.19
     }
   ],
-  "known_support_seconds": 97.66353190000001,
+  "known_support_seconds": 102.87016580000001,
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -226,7 +234,7 @@
     "returncode": 0,
     "count": 1
   },
-  "pending": "This final closeout publication, required terminal relay and its receipt publication/integration; unmeasured I terminal observation, relay service and rejected-command review overhead; unallocated shared 1.0-second query. Native pair and four-path remote cleanup are complete; local duplicate removal was policy-rejected.",
+  "pending": "This final receipt publication and subsequent Root result/closeout integration; unmeasured I terminal observation, relay service and rejected-command review overhead; earlier shared 1.0-second query remains unallocated. Both scientific arms and four-path remote cleanup are complete. Local duplicate deletion was policy-rejected. Known snapshot excludes its own publication command, reported in the native return.",
   "shared_observation": {
     "reported_by": "Root D0 terminal handoff",
     "wall_seconds": 1,
@@ -238,7 +246,7 @@
     "I": 1069.26
   },
   "native_wall_sum_observed_seconds": 1607.92,
-  "support_plus_native_known_seconds": 1705.5835319,
+  "support_plus_native_known_seconds": 1710.7901658,
   "root_support_receipt": {
     "reported_by": "Root at I terminal collection",
     "integration_enclosing_wall_seconds": 28.5,
