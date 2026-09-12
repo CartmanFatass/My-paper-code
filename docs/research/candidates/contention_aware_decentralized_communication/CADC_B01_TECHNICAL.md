@@ -1,6 +1,6 @@
 # CADC-B01 technical acceptance and pending execution
 
-DM: `/root/dm_cadc_start`; checkout `C:/Projects/HMASD-worktrees/codex-cadc`, branch `codex/cadc`, source base `2492dcb06`. The exact scientific contract is [CARD](CADC_B01_CARD.md). Current milestone: implementation and focused synthetic checks accepted; native execution is not yet accepted or observed.
+DM: `/root/dm_cadc_start`; checkout `C:/Projects/HMASD-worktrees/codex-cadc`, branch `codex/cadc`, source base `2492dcb06`. The exact scientific contract is [CARD](CADC_B01_CARD.md). Implementation and focused synthetic checks are accepted. Both exact-source arms subsequently passed adjacent admission and were accepted running; actual Monitor adoption is separately confirmed in [LAUNCH_RECEIPT](execution/LAUNCH_RECEIPT.json) and [MONITOR_ADOPTION](execution/MONITOR_ADOPTION.json). Native primary/intake remains pending terminal delivery.
 
 ## Independent high-risk review
 
@@ -24,4 +24,4 @@ Own scratch is exactly `C:/Projects/HMASD-worktrees/codex-cadc/temp/directions/c
 
 Known invoked-command subtotal from the selected test invocations and independent reviewer is11.6618816s. Additional read/edit/worktree/Git/model-tool/provider and future staging/Monitor/collection/intake/integration/cleanup coverage is incomplete; it is not zero. Worktree creation's observed tool elapsed was7.9s, not interchangeable with a verified command-only total. Complete support/grant compliance remains uncertified from this subtotal. Root's shared registration/application attribution is once to ACPS support, unknown unless measured; CADC excludes that shared item and includes its own later Root integration once. Native savings cannot increase support.
 
-No native scientific model/RNG/environment/result root, no accepted supervisor handle, no native training/evaluation, no Monitor ADD and no Pro Send has occurred. The synthetic engineering checks above did instantiate their disposable private models/RNG. Native launch uses the live configured remote destination and fresh memory admission under actual T→ACPS→CADC resource sequence.
+At the source-publication milestone no native scientific model/RNG/environment/result root or handle existed; only the synthetic engineering checks had instantiated disposable private models/RNG. Subsequent [staging](execution/STAGING.json) and launch receipts record the actual remote-first execution and successful admission. Both arms are now Monitor-owned running work, with no interpretation, retry, extra arm or Pro Send.
