@@ -1,0 +1,87 @@
+{
+  "id": "20260911-folr-004",
+  "created": "2026-09-11T19:32:56-07:00",
+  "direction": "vap_folr_core",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "学习保留门B02反向后的家族问题",
+  "context": "已授权一次原Convergence文档问题和完整接收。B01+1.763359375，B02−1.76953125，均为真实原样学习对。建议C暂停窄配方，是未执行的近似选择；A第三对仍有直接价值，B须提出一个具体合法改动。当前无实现或数值额度。",
+  "options": [
+    {
+      "key": "a",
+      "label": "建议未来一对原样B",
+      "consequence": "仅形成下一次独立训练对的科学理由和比较，当前仍无第三对额度或种子绑定。"
+    },
+    {
+      "key": "b",
+      "label": "提出一个具体家族内改动",
+      "consequence": "本次答复给出确切动作/信息/学习路径、强比较器和最小未来比较；不执行改动，不做架构搜索。"
+    },
+    {
+      "key": "c",
+      "label": "暂停当前学习门配方投入",
+      "consequence": "保留普通RETAIN、所有历史结果和未来具体再入条件；不关闭整个FOLR或宣称稳定伤害。"
+    }
+  ],
+  "recommended": "c",
+  "auto_applied": null,
+  "dm_reason": "反向结果与已自适应的同信息空模型削弱当前边际价值；第一对收益使暂停与再测仍是近似选择，由原节点裁决。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_QUESTION_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L125",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "学习门两次独立训练一正一负后，原Convergence应建议再测原样B、一个具体的家族内改动，还是暂停当前配方投入？DM建议暂停，是尚未执行的近似选择。",
+    "changes_if_approved": [
+      {
+        "target": "当前学习门配方的下一步",
+        "from": "两对完成，当前未选第三对或家族暂停",
+        "to": "建议C：仅暂停当前learned-event/easy-host/5000训练/128终点评价配方；普通RETAIN保留；原节点尚未裁决"
+      }
+    ],
+    "if_refused": "A仍可作为有理由的新一对B建议；B必须在同一答复中给出一个具体、合法的信息/动作/学习路径改动。当前只问一次，三者都没有立即实现或数值额度。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_QUESTION_20260911.md",
+        "quote": "The second native loss and lower changing-policy training mean are the strongest evidence against an unqualified gain; training means are context, not pre/post improvement estimates.",
+        "why": "第二对反向削弱未经限定的优势陈述；同信息GRU是强替代，结果未指向某个必改原因。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_QUESTION_20260911.md",
+        "quote": "The first gain is the strongest evidence against immediately holding the recipe.",
+        "why": "第一对+1.763359375是真实本地增益，第三对B仍合法且可以直接补充是否再现的信息；不能把两对当停止门。"
+      }
+    ],
+    "uncertainty": [
+      "B01+1.763359375与B02−1.76953125均保留；不合并成等价或稳定伤害结论。",
+      "学习门变化、事件次数不证明选择了有用记忆；因果解释不是性能B前提。",
+      "没有当前同信息调优余量记录；旧B3上界不能代填。",
+      "若原节点选择B，须在本次答复给出一个实际改动与最小比较，而不是笼统的新架构任务。"
+    ],
+    "cost": {
+      "compute": "当前恰好一次文档/Pro问题及完整接收，零实现/模型/RNG/诊断/训练/评估。未来A一对205120ticks、9938更新、66783360回放GRU行；历史native1703.12/1815.99秒仅为锚点，未来额度未选。",
+      "owner_time": "不等待回复；可异步修改建议。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；Root派发已授权的原节点问题，任何未来数值投资另行决定。"
+    },
+    "verdict_text": "DM recommendation: C, an unexecuted close call; A is the strongest alternative.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_QUESTION_20260911.md",
+    "application_state": "proposal only; no direction disposition or scientific execution"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T02:33:34+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md@05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+      "record": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "Portfolio只委托一次问题/完整接收；C为未执行建议，原Convergence未裁决。强比较器是已有自适应GRU的RETAIN；零新增实现或数值工作。"
+    }
+  ]
+}
