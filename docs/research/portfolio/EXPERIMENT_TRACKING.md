@@ -67,6 +67,11 @@ through `19cc47bb5` (direction0c797c30e including preceding62cb66d2e facts). Fin
 unit5 `acvc-fresh-dense-c01-14295-3fd9062d5` accepted05:13:28.312209Z; actual
 Monitor adoption05:13:40Z confirms running and the exact active handle, forwarded
 to original DM. Five-unit primary remains pending; no additional fit is selected.
+Finalunit5 terminal05:16:12Z reports exit0, whole164.41s,last-panel159.80775067897048s,
+peak548600KiB. Monitor then delivered empty-set goalcompletion; Root immediately
+resumed sameDM via `followup_task` for finalcollection, completefivereduction,
+scientificintake andscopedpreservation/closeout. Allfivehandles are terminal;
+completeprimary/C01disposition is not yet inferred.
 
 Actual advancing research count: 1; vacancies: 4. FOLR technical closeout remains
 owned separately. Published intentions, completed returns,
