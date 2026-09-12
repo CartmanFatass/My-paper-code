@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "new_finite",
-  "auto_applied": null,
+  "auto_applied": "new_finite",
   "dm_reason": "新方向必须有可改变native行动或回报的有界观察，并在完整成本下逐项被Pro选择；现有五DM不断链。",
   "evidence": [
     "docs\\research\\portfolio\\pro_packets\\20260912_new_direction_discovery\\SCIENCE_BRIEF.md"
@@ -85,6 +85,14 @@
       "record": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/PUBLICATION_FACTS.json",
       "state": "planned",
       "summary": "Root已授权的一个当前Portfolio问题已固定发布：新方向发现/登记/首轮投资与既有MGTAP T投资分开决策；59refs精确核验，等待Root一次派发当前Transport。无本地registration/grant或author Send。"
+    },
+    {
+      "at": "2026-09-12T22:03:06+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/INTAKE.md",
+      "state": "applied",
+      "summary": "已完整intake并应用明确科学登记/投资记录；ACPS1800/CADC2100与独立T1200(hard300support)，其余3只登记；Root派发和未来技术验收尚未声称完成。"
     }
   ]
 }
