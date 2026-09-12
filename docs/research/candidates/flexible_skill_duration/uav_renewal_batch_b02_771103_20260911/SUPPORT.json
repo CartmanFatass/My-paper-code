@@ -1,0 +1,190 @@
+{
+  "object": "FSD_UAV_RENEWAL_BATCH_B02_771103",
+  "recorded_utc": "2026-09-12T02:54:20.157395+00:00",
+  "caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "native_sum": 2700,
+    "support": 300,
+    "one_source_delivery_transaction": 45,
+    "complete": 3000
+  },
+  "charges": [
+    {
+      "purpose": "read new accepted Assignment 1 and live control settings",
+      "wall_seconds": 0.3961478
+    },
+    {
+      "purpose": "read reused FSD source, exact transaction and complete work law",
+      "wall_seconds": 0.351979
+    },
+    {
+      "purpose": "check current authority differences, Portfolio row and owner reviews",
+      "wall_seconds": 0.512121
+    },
+    {
+      "purpose": "read changed-contract review, owned source area and unchanged delivery helper",
+      "wall_seconds": 0.2631468
+    },
+    {
+      "purpose": "reconcile current committed authority in reused direction checkout",
+      "wall_seconds": 0.8765088
+    },
+    {
+      "purpose": "preserve every audit row and publish required-input reconciliation merge",
+      "wall_seconds": 4.5744856
+    },
+    {
+      "purpose": "prospectively reconcile and bind fresh 771103 identities with exact unchanged commands/counts",
+      "wall_seconds": 2.6121851
+    },
+    {
+      "purpose": "write fresh card appendix and complete execution/handover contract",
+      "wall_seconds": 0.2042468
+    },
+    {
+      "purpose": "independent Astra/high reviewer three bounded read commands",
+      "wall_seconds": 0.8423783
+    },
+    {
+      "purpose": "single new-binding forwarding/AST/command check and independent review acceptance",
+      "wall_seconds": 0.2469108
+    },
+    {
+      "purpose": "recover accepted preparation state and owner-item insertion contract",
+      "wall_seconds": 0.3151998
+    },
+    {
+      "purpose": "read accepted new card, exact commands and append location",
+      "wall_seconds": 0.188951
+    },
+    {
+      "purpose": "read authoritative owner reviews before new card freeze",
+      "wall_seconds": 0.3543611
+    },
+    {
+      "purpose": "complete accepted new card and command read with UTF-8 output",
+      "wall_seconds": 0.198909
+    },
+    {
+      "purpose": "freeze fresh card owner packet/audit and initial support record",
+      "wall_seconds": 0.3976958
+    },
+    {
+      "purpose": "publish exact fresh source/card/commands, owner/audit and preparation evidence",
+      "wall_seconds": 4.9006801
+    },
+    {
+      "purpose": "single allocated source delivery transaction and its complete-command receipt",
+      "wall_seconds": 7.6788293
+    },
+    {
+      "purpose": "submit the sole exact D0 handle and persist acceptance with live Monitor/relay configuration",
+      "wall_seconds": 0.6606675
+    },
+    {
+      "purpose": "direct D0 Monitor handover dispatch with unfinished-goal requirement",
+      "wall_seconds": 0.888
+    },
+    {
+      "purpose": "persist source acceptance, D0 launch and direct Monitor dispatch",
+      "wall_seconds": 0.2680543
+    },
+    {
+      "purpose": "publish distinct D0 launch/source receipts and confirmed active Monitor adoption",
+      "wall_seconds": 4.9332481999999995
+    },
+    {
+      "purpose": "single actionable D0 accepted/adopted handover through live Root relay",
+      "wall_seconds": 0.229
+    },
+    {
+      "purpose": "authoritative owner reviews at adopted D0 clean handover boundary",
+      "wall_seconds": 0.4013125
+    },
+    {
+      "purpose": "publish sole D0 relay receipt and final handover support snapshot",
+      "wall_seconds": 5.2884728
+    },
+    {
+      "purpose": "Root reported FSD-only source/handover inspection, integrations and pushes; 0.6 + 8.5 s, approximate",
+      "wall_seconds": 9.1
+    },
+    {
+      "purpose": "read prior accepted collection contract and preselected I command",
+      "wall_seconds": 0.222927
+    },
+    {
+      "purpose": "owner reviews on routed D0 terminal boundary",
+      "wall_seconds": 0.3940172
+    },
+    {
+      "purpose": "collect closed D0 raw bytes, receipts and supervisor once into durable archive without temporary duplicate",
+      "wall_seconds": 0.9391812
+    },
+    {
+      "purpose": "single D0 acceptance over all collected training/endpoint/identity/admission/cost records",
+      "wall_seconds": 0.3408051
+    },
+    {
+      "purpose": "publish preserved D0 raw archive, technical acceptance and partial native/support accounting",
+      "wall_seconds": 5.261379
+    },
+    {
+      "purpose": "submit the one preselected I companion after accepted published D0; no new source transaction",
+      "wall_seconds": 0.9737234
+    },
+    {
+      "purpose": "direct I Monitor handover dispatch requiring actual unfinished-goal adoption",
+      "wall_seconds": 0.155
+    },
+    {
+      "purpose": "publish I launch and active Monitor adoption plus scoped terminal cleanup inventory",
+      "wall_seconds": 5.2214325
+    },
+    {
+      "purpose": "Root reported current FSD D0 inspection, integration/conflict resolution and push; conservative enclosing bound 0.7 + 0.7 + 5.4 s",
+      "wall_seconds": 6.8
+    },
+    {
+      "purpose": "single actionable I accepted/adopted handover through live Root relay",
+      "wall_seconds": 0.232
+    },
+    {
+      "purpose": "authoritative owner review read at accepted I clean handover boundary",
+      "wall_seconds": 0.4394353
+    }
+  ],
+  "known_support_wall_seconds": 67.6633921,
+  "counting": "Each outer invoked support interval once; nested clocks are not additive. This final I receipt/publication command is not measurable within its own snapshot; it is returned separately and charged at collection.",
+  "new_scientific_submissions": 2,
+  "new_source_delivery_transactions": 1,
+  "unknown": [
+    "D0 and I native realization",
+    "Monitor invoked observation wall pending routed accounting",
+    "Root FSD-only integration/support wall pending routed accounting",
+    "future collection, publication and preservation/cleanup",
+    "unmeasured external contribution is not zero"
+  ],
+  "claim": "D0 accepted within its cap; I accepted and actively monitored. Remaining native/support and unknown attribution prevent a final total certificate.",
+  "native_wall_seconds": {
+    "D0": 471.82,
+    "I": null
+  },
+  "source_transaction": {
+    "outer_tool_wall_seconds": 7.6788293,
+    "complete_helper_wall_seconds": 7.437999999994645,
+    "limit_seconds": 45,
+    "status": "successful single transaction; nested helper clock not added again"
+  },
+  "known_native_plus_support_seconds": 539.4833921,
+  "Root_integration": {
+    "source_main": "31e9cc05a",
+    "D0_handover_main": "0e7bb1e83",
+    "charged_reported_seconds": 9.1,
+    "exactness": "approximately 0.6 + 8.5 s; client/message overhead unknown",
+    "D0_collection_main": "a755d804f",
+    "D0_collection_reported_support_bound_seconds": 6.8,
+    "counting": "Earlier approximate 9.1 s plus this conservative <=6.8 s contribution are charged once each; client/message overhead remains unknown."
+  }
+}

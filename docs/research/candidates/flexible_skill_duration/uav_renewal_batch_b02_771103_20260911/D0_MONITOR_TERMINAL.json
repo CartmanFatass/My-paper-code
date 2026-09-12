@@ -1,0 +1,17 @@
+{
+  "handle": "fsd-uav-renewal-batch-b02-771103-D0-20260911",
+  "terminal_event_id": "fsd-uav-renewal-batch-b02-771103-D0-20260911:exit:0:2026-09-12T10:45:02+08:00",
+  "route": "Root native MONITOR_TERMINAL",
+  "reported_status": "finished",
+  "reported_exit": 0,
+  "reported_complete": true,
+  "reported_supervisor_duration_seconds": 472,
+  "collected_process_cost": {
+    "elapsed_seconds": 471.82,
+    "peak_rss_kib": 1632916.0,
+    "user_seconds": 1846.01,
+    "system_seconds": 14.72,
+    "exit_status": 0.0
+  },
+  "Monitor_observation_support_seconds": null
+}
