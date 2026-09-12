@@ -1,5 +1,53 @@
 # HMASD Research Portfolio
 
+## Current rolling allocation after FSD/FOLR B02 — 2026-09-11
+
+The complete Portfolio response at `05c24bcd85f92efc26fb2a9cb2152bed51dd90e9`
+passes the designated DM's full scientific/specification check and selects
+**S+A+P+N**, under `PRO_FINAL / OWNER_DELEGATED`. The
+[decision/intake](decisions/2026-09-11-rolling-capacity-after-b02.md) and
+[execution mapping](pro_packets/20260911_rolling_capacity_after_folr_b02/EXECUTION_MAPPING.md)
+are ready for Root integration and independent dispatch to the original DMs.
+This section records the newest bound investments; older dated allocation and
+runtime paragraphs below retain historical scope. No new scientific invocation
+or actual direction start is observed by this intake.
+
+| Direction | Current selected investment | Separate finite limit and next action |
+| --- | --- | --- |
+| flexible_skill_duration, ACTIVE/HIGH | S: one new unchanged I1280/authentic-D0 B pair; both previous same-package gains and older batch128 losses survive. | New D0≤900/I≤1800/native≤2700/support≤300/complete≤3000 s, one≤45 s source transaction inside support. Original DM binds fresh identities and exact inputs; no fourth pair or C promotion. |
+| acvc, ACTIVE/MEDIUM, recasts2 | A: conditional complete five-new-fit path. The existing direction response is claim design only. | New each≤270/native≤1350/support≤1650/complete≤3000 s. At most one actual original-Convergence promotion question and one Innovator intake precede any conforming C freeze; material redesign, rejection, blocker or unmet envelope ends dependent work. |
+| vap_folr_core, ACTIVE/MEDIUM | P: one original learned-recipe Convergence family question/full intake after B01+1.763359375 and B02−1.76953125. | Zero implementation/numerical allowance; future empirical budget deferred. No third pair, changed gate or compulsory diagnostic. |
+| metric_ground_transport_allocation, ACTIVE/MEDIUM | N: no addition; preserve COND outcomes and generic DENSE choice. | No new1200-second pair, preparation or consultation; not an automatic fallback. |
+| roster_consistent_latent_exploration, ACTIVE/MEDIUM | Preserve the existing pre-submission-blocked request/recovery; no formed method decision at the bound snapshot. | No new question or numerical/implementation allowance; existing Root/Transport and original DM retain its exact route. |
+| variable_n_fleet_churn, ACTIVE/HIGH, recasts2 | Retain the unused conditional pair as queued/unready. | Existing900=600 whole native pair/reference+300 support; no extra repair/diagnostic funding. |
+
+The bound snapshot is zero advancing/five vacancies. Three actual selected starts
+would leave two vacancies; funding, authoring, completed returns and retained
+cleanup are not starts. The6000-second sum is two nonfungible numerical caps,
+not a forecast or reserve; FOLR consultation effort remains unknown. FSD HIGH/
+non-second-recast work sequences ahead under contention; ACVC/VNFC/SCDMP retain
+their second-recast rule. All15 lifecycle/Priority/recasts/MEI/formal-UAV fields
+remain unchanged. Every direction advances independently from its own boundary.
+
+FSD's newest pair is +.206285904082309 J at1607.92 native seconds. Its later
+accepted support subtotal102.8701658 gives1710.7901658 native-plus-known seconds;
+complete support/total cost is still unmeasured. Previous timing windows are
+preserved in the intake. Two gains do not establish stable superiority.
+ACVC's prospective five equal fit-panel means and two .01 J margins retain the
+explicit iid-normal fit-mean qualification. All matching tuned same-information
+headroom records in this packet remain absent, not zero or a launch stop.
+
+DISH's current **B08** record also remains controlling: HALF_RETAIN−REPLACE
+−6.5 service ticks inside±24, lower energy and four added invalid commits;
+ordinary CAS remains zero. Preserve the accepted retained-A03 arrival-bridge
+family pause and REPLACE default. This corrects the preparation brief's omission
+of newer pinned evidence; it selects no new DISH work. The other unselected
+directions keep the precise narrow boundaries in RESPONSE §6 and the mapping.
+
+The Transport request-name alias and one absent declared facts file are recorded
+as bookkeeping gaps. Exact accepted prompt/response bytes and all binding
+identities match; the gap does not hold the three conforming assignments.
+
 ## Owner-directed technical unblocking and forward recommendation — 2026-09-11
 
 The owner directed that non-scientific blockers must not block research and asked Portfolio for

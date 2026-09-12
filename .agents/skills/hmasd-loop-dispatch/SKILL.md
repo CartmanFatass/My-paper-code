@@ -33,9 +33,13 @@ At goal-turn entry, a return or receipt, and before waiting:
    for scientific/specification checking, then Root applies the conforming decision. Never hold a
    ready direction for peer completion or to assemble a multi-direction result bundle.
 5. Check that each accepted experiment has confirmed adoption by the independent Luna/low
-   monitor under EXPERIMENT_MONITOR.md. DM/Operator directly adds new accepted handles to its shared active set;
-   a dispatched message alone is not adoption. Route each terminal notice to its original
+   monitor under EXPERIMENT_MONITOR.md. DM/Operator's `MONITOR_ADD` must require the recipient to
+   read/continue its unfinished goal or create an unbudgeted goal. Confirmed adoption includes the
+   monitor's actual unfinished goal state and handle membership; a dispatched message alone is not
+   adoption. Route each terminal notice to its original
    DM for remaining collection/intake using followup_task, without waiting for other runs.
+   Reconcile `MONITOR_GOAL_COMPLETE` only after its active set is empty and every terminal notice
+   was delivered to Root.
    Read supervisor state only for handles Root actually owns or is reconciling after lost
    observation. Route terminal evidence promptly. If Transport is idle with a pending request,
    reconcile its persisted state and resume that same observation/recovery route. App dispatch

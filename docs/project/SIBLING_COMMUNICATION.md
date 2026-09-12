@@ -108,6 +108,12 @@ original native owner with `followup_task` when collection/intake remains, dedup
 already completed native work. Cross-task messages omit model/effort overrides. A terminal
 notification's accepted app delivery is distinct from DM technical or scientific acceptance.
 
+Every `MONITOR_ADD` explicitly instructs the task to call `get_goal`, continue the matching
+unfinished goal or create a new unbudgeted goal, and keep the handle active through accepted
+terminal delivery. `MONITOR_ADOPTED` reports that actual goal state. After the final terminal
+notice, the monitor sends `MONITOR_GOAL_COMPLETE` with an empty active set to Root before marking
+the goal complete. Cross-task send acceptance alone never proves these goal operations occurred.
+
 ## Independent Transport (existing receipt route)
 
 App messages omit `model` and `thinking` to preserve the recipient's settings. Native DM

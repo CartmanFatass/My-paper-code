@@ -679,3 +679,40 @@ References:
 - `FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md`
 - `FOLR_LEARNED_RETENTION_B01_RESULT_SUMMARY_20260911.json`
 - `FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md`
+
+## Accepted second learned-retention B result — 2026-09-11
+
+**Conclusion and bounded claim.** The fresh unchanged B02 pair is valid and reverses
+B01: LEARNED_EVENT4.521015625 versus RETAIN6.290546875, d_LR-1.769531250, meets the
+prospective RETAIN_ABOVE_MEI branch. The first learned gain did not recur across
+this new training history. Two observed pairs now have opposite signs; this supports
+neither a stable learned-rule advantage nor stable harm or equivalence.
+
+**Strongest support.** B01 remains a complete+1.763359375 LEARNED_EVENT_ABOVE_MEI.
+The unchanged129-coefficient law is trainable and exercised in both runs. In B02,
+all4969 updates/full128-return endpoints and actor/target/optimizer/checkpoint paths
+pass; its gate movesL2 1.275477253 and acts at48158 training/1451 final survivor events.
+
+**Strongest contradiction.** B02's-1.769531250 native loss and changing-policy training
+difference-0.516890 favor the same-information event-aware GRU null. The latter is
+separate context, not a pre/post improvement estimate. Adaptive null gates, initial0.99
+scaling, extra coefficients and partner/trajectory co-adaptation remain possible
+contributors. Gate movement or event opportunity counts do not identify useful memory
+or explain the sign reversal. Fixed-half+1.56546875/-4.293046875 stays separate
+different-law context with its narrow pause unchanged. Tuned headroom is still absent.
+
+**Surviving alternative and next discriminator.** Ordinary RETAIN remains competent.
+Additional independently trained same-recipe evidence could further measure recurrence
+if separately selected, but opposite signs create no compulsory repeat or causal audit.
+This allocated pair ends at full intake/closeout; no third fit, consultation, family
+pause/recast, Portfolio action, C or UAV entry is selected. Both original primaries
+remain fixed. Whole native B02 wall1815.99s passes native caps; incomplete support
+accounting limits full-cost claims without changing the accepted native comparison.
+
+References:
+
+- FOLR_LEARNED_RETENTION_B02_SCIENCE_CARD_20260911.md
+- FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md
+- FOLR_LEARNED_RETENTION_B02_RESULT_SUMMARY_20260911.json
+- FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md
+- FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md

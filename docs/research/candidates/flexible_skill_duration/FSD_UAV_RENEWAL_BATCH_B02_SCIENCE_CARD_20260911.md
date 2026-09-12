@@ -3,8 +3,9 @@ Binding MARL structure: (b) temporal abstraction or termination; asynchronous in
 
 # FSD renewal batch B02 — fresh unchanged pair
 
-**B/EXPLORE. Ended zero-exposure instances770803/770903 remain preserved; new771003/781003 is frozen in §7.**
-The allocated pair ended unlaunched with a preparation/support-cost limitation;
+**B/EXPLORE. Ended zero-exposure instances770803/770903 remain preserved;
+771003/781003 completed with a valid `above_mei` intake under §7.**
+The original770803 allocation ended unlaunched with a preparation/support-cost limitation;
 see [the execution-limitation intake](FSD_UAV_RENEWAL_BATCH_B02_EXECUTION_LIMITATION_INTAKE_20260911.md).
 The accepted binding and prospective reading below remain unchanged. No retry
 or automatic successor follows. This is a separately identified instance of
@@ -328,3 +329,9 @@ Recommended/selected(a), with the stated stop. **Owner-delegated decision
 (unattended, 2026-09-03 instruction): (a).** Owner flag:none. Live owner reviews
 were empty at preparation. Exact source/command and handover status:
 [FSD_UAV_RENEWAL_BATCH_B02_771003_EXECUTION_20260911.md](FSD_UAV_RENEWAL_BATCH_B02_771003_EXECUTION_20260911.md).
+
+**771003 result boundary:** both selected arms completed; the unchanged reading
+rule gives `above_mei` at +.206285904082309. The [result evidence](FSD_UAV_RENEWAL_BATCH_B02_771003_RESULT_EVIDENCE_20260911.md)
+and [intake](FSD_UAV_RENEWAL_BATCH_B02_771003_INTAKE_20260911.md) preserve all raw outcomes, prediction scoring and
+partial support telemetry. This allocation ends without a successor; the frozen
+question, source, budgets and earlier zero-exposure instances remain unchanged.
