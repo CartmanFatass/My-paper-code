@@ -1,0 +1,84 @@
+{
+  "id": "20260911-folr-006",
+  "created": "2026-09-11T22:00:57-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FOLR B03：原样一对7811/107811，新完整3000秒",
+  "context": "Portfolio已最终选择并被Root应用。新卡保持学习门与RETAIN完整5000/128，在两次一正一负之后再观察一个训练对，RETAIN仍默认。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "接受卡并执行已选一对",
+      "consequence": "固定未筛选7811/107811，原生每臂1350/合计2700、支持300、完整3000；仅此一对及接收清理。"
+    },
+    {
+      "key": "reject",
+      "label": "异步拒绝未执行部分",
+      "consequence": "停止尚未执行部分，保留已发生效果和证据，不自动重跑或替换。"
+    },
+    {
+      "key": "revise",
+      "label": "异步提出卡修改",
+      "consequence": "在干净边界核对具体修改与原资金科学范围，不默改冻结意义。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "最终F授权已形成；当前仅普通新身份绑定，原样来源和通过的检查可复用。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_SCIENCE_CARD_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L143",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Portfolio最终F已由Root应用；接受这一对原样FOLR的新卡与未筛选7811/107811身份，随后完成执行接收清理。",
+    "changes_if_approved": [
+      {
+        "target": "FOLR B03卡",
+        "from": "已有方向A和资金F，尚无新卡身份或运行",
+        "to": "绑定7811/107811；每臂5000训练/128评估；每完整原生臂1350秒、原生合计2700、支持300、完整3000，仅此一对"
+      }
+    ],
+    "if_refused": "在干净边界应用异步覆盖并保留已发生效果；不推导重跑、替换或新预算。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/decisions/2026-09-11-folr-unchanged-pair-funding.md",
+        "quote": "Fund exactly one fresh unchanged LEARNED_EVENT/RETAIN B pair, with 5,000 training and 128 final episodes per arm.",
+        "why": "最终资金决定已通过核对；本卡只绑定普通对象细节。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md",
+        "quote": "The first learned gain did not recur.",
+        "why": "两次结果一正一负，新一对也不证明稳定赢家，RETAIN仍默认。"
+      }
+    ],
+    "uncertainty": [
+      "新一对只增加一个训练实例，128回合不是128个训练种子。",
+      "未来完整成本未知；所有结果分支结束本额度，无第四对、诊断、问题或晋级。"
+    ],
+    "cost": {
+      "compute": "2个fit/1对，205120原生团队步，9938次优化；原生每臂1350/合计2700、支持300、完整3000秒。当前零实验，复用10项已通过检查。",
+      "owner_time": "无需逐项批准；可异步覆盖，未取预测。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing; 原DM按已有授权推进，不等ACVC或运输元数据。"
+    },
+    "verdict_text": "Accept the prospectively bound unchanged FOLR B03 card within the final Portfolio F allocation.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_SCIENCE_CARD_20260911.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T05:01:54+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "f4bbe6cae2d351b4c80c5e0d9d66690d337749ce:docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "已接受并绑定原样B03卡7811/107811及四个新上限；Root已应用Portfolio F。当前仍无新模型或运行，实际启动与接收另记。"
+    }
+  ]
+}

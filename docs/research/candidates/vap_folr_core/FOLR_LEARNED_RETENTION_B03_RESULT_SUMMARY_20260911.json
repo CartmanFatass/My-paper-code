@@ -1,0 +1,405 @@
+{
+  "prospective_exposure": {
+    "real_training_fits": 2,
+    "matched_initialization_pairs": 1,
+    "training_episodes": 10000,
+    "training_team_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_team_ticks": 5120,
+    "total_team_ticks": 205120,
+    "replay_gru_rows": 66783360,
+    "acting_rows": 1076880,
+    "learned_gate_forward_rows": 33930120,
+    "new_validation_model_fixture_test_invocations": 0
+  },
+  "acceptance_reuse": {
+    "independent_review": {
+      "agent": "learned_retention_review",
+      "model": "Astra/high",
+      "read_only": true,
+      "material_findings": 0,
+      "review_command_seconds": 2.2064189,
+      "consumer_question": "complete finite arrays must be checked before learned_primary",
+      "consumer_plan_accepted": true,
+      "runtime_acceptance_asserted": false
+    },
+    "accepted_focused_cases": 10,
+    "accepted_check_source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+    "rerun_count": 0,
+    "new_changed_risk": "fresh identity, exact source and command/publication binding only"
+  },
+  "object": "FOLR-LEARNED-RETENTION-B03",
+  "state": "prospective_card_bound_no_launch",
+  "bound_utc": "2026-09-12T05:00:56.643449+00:00",
+  "authority_sha": "f4bbe6cae2d351b4c80c5e0d9d66690d337749ce",
+  "authority_path": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md",
+  "authority_response_sha256": "a80571571b323bf937adee9875969d67356db121ff0c6de4b5de9b3483e3dabf",
+  "root_application_commit": "deb2e5e1e",
+  "root_conformance": "PASS; Root applied final F+U and assigned this pair",
+  "accepted_source_reused": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+  "source_sha": null,
+  "source_compared_current_head": "f41f59543c8ed7945afbd1092f9f868d19dc515b",
+  "source_surface": [
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+      "git_blob": "1509a32ad88912263c60d63bd7eba2e1da6d932c",
+      "sha256": "775e598921ee7b09721b205624c7e7ac30e1ace177bdcb720b9120c5f4443fa3",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+      "git_blob": "77c2fda3f3f6132ec0e9605413f569f9c029898d",
+      "sha256": "0b95da626bab87c1cab7d38886b53291fd1a5167b66bfabf9e0dc33d5e81ed03",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+      "git_blob": "50b1b72d4888aa3014189c8a3a05a82f767d73d0",
+      "sha256": "29dc8e1a18426a42f3cf01f0eba03f6bfa44eeeefddeec684d6458c7139b774c",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py",
+      "git_blob": "006bb0573f4c4bcfbdd709ed191d30b4d7e972ed",
+      "sha256": "ae141219443ad169c5b7f58608e6785eadbd60a8de63c2d9366716ddd19fed9a",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+      "git_blob": "250fe41e2631335930998116c519dcc530cf0695",
+      "sha256": "01770613528bc8e1f3b86c4cafa934dda98c9639490733a123b101c48723e54a",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "git_blob": "afc1f521464019800baf3d01a0b74cf4dff43993",
+      "sha256": "3936fd69b99d1b65c7644821848e419a9e3118120efbcc57667fba5ef5db3dc1",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py",
+      "git_blob": "f1a5e40a3008aed1ef2d8c49298a87c2acf9e4da",
+      "sha256": "dc342eefc74af9be788b006dfc70ef471088380543a3d005af19b0309d57fc86",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "scripts/hmasd_resource_preflight.py",
+      "git_blob": "4127cd22d2e0c4cc1ad6df85aafeb7131c3d07b2",
+      "sha256": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "scripts/run_folr_public_lifecycle_b01.py",
+      "git_blob": "51c2d81317df75d25a80a0d913a2c09746832aa5",
+      "sha256": "30d021557e10c25638cdc313274cae4e13cdacd75832c58ebafa87b4dad8026c",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": true,
+      "working_text_equal_after_newline_normalization": true
+    },
+    {
+      "path": "tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py",
+      "git_blob": "c12963e53b321f15045fbfcb819170f889df92aa",
+      "sha256": "faf58e6103cbf234a711e6870481b9145b1705a0ebc3a6578efa2ad85bff4d29",
+      "git_same_as_accepted": true,
+      "working_bytes_equal": false,
+      "working_text_equal_after_newline_normalization": true
+    }
+  ],
+  "training_seed": 7811,
+  "evaluation_seed": 107811,
+  "identity_selection": "Next unused sequential identities after7809/107809 and7810/107810, without sampling or screening",
+  "arms": [
+    "RETAIN",
+    "LEARNED_EVENT"
+  ],
+  "primary": null,
+  "commands": [],
+  "source_check_limitation": "Initial raw-byte assertion stopped on Windows test file CRLF only: published accepted/current Git bytes identical,9 production/admission files exact in checkout, test normalized text identical; remote execution must match all10 exact Git bytes. No source edit or scientific invocation.",
+  "caps_seconds": {
+    "each_whole_arm": 1350,
+    "native_sum": 2700,
+    "invoked_support": 300,
+    "complete": 3000
+  },
+  "outer_timeout": {
+    "TERM_after_seconds": 1340,
+    "KILL_grace_seconds": 5,
+    "whole_arm_cap_seconds": 1350,
+    "scope": "admission/startup through publication/exit; reserve teardown inside1350; actual whole wall checked",
+    "runner_internal1800_label": "historical internal label; not current authority"
+  },
+  "actual_binding_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "source_edits": 0,
+    "new_test_invocations": 0
+  },
+  "cost_projection": {
+    "basis": "same fixed complete runner cost law and B01/B02 whole-arm observations; no profile or guaranteed future forecast",
+    "RETAIN": {
+      "historical_whole_seconds": [
+        835.33,
+        895.43
+      ],
+      "latest_anchor_seconds": 895.43,
+      "cap_seconds": 1350
+    },
+    "LEARNED_EVENT": {
+      "historical_whole_seconds": [
+        867.79,
+        920.56
+      ],
+      "latest_anchor_seconds": 920.56,
+      "cap_seconds": 1350
+    },
+    "latest_anchor_sum_seconds": 1815.9899999999998,
+    "native_sum_cap_seconds": 2700,
+    "current_wall_rss_and_complete_support": "unknown"
+  },
+  "prediction": {
+    "DM": "WITHIN_MEI",
+    "confidence": "low",
+    "owner": "not taken (unattended)",
+    "score": "pending"
+  },
+  "monitor": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "configuration_source": "live primary config/Root assignment",
+    "dispatch": "not yet",
+    "adoption": "not yet",
+    "goal_requirement": "get_goal; continue matching unfinished goal or create an unbudgeted goal; actual handle adoption required"
+  },
+  "support": {
+    "measured_invoked_commands": [
+      {
+        "label": "initial direction Git status",
+        "seconds": 0.3374394,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "initial direction log",
+        "seconds": 0.2769673,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B02 frozen card read",
+        "seconds": 0.2363653,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "primary compute Monitor and scientific-tools read",
+        "seconds": 0.2304601,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "owned B02 document inventory",
+        "seconds": 0.2351168,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "fetch accepted Portfolio source",
+        "seconds": 2.2768994,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "input merge attempted; audit conflict",
+        "seconds": 0.9874388,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "audit multiset preservation check",
+        "seconds": 0.3695179,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "ignored runtime filename search returned none",
+        "seconds": 0.1780418,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "accepted runner read",
+        "seconds": 0.2115116,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "fresh identity string search",
+        "seconds": 1.0283984,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "resolve audit with verified incoming superset",
+        "seconds": 0.2112466,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "input sync commit",
+        "seconds": 0.5381674,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "immediate input-sync push",
+        "seconds": 4.0352897,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B02 summary search (overbroad output narrowed subsequently)",
+        "seconds": 0.1889008,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B02 intake selected passages",
+        "seconds": 0.203351,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "experiments AGENTS current read",
+        "seconds": 0.3073363,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "scripts AGENTS current read",
+        "seconds": 0.250857,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "tests AGENTS current read",
+        "seconds": 0.2924694,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "scientific-reading reference",
+        "seconds": 0.2525499,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "prior accepted source/acceptance extraction",
+        "seconds": 0.3688574,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "prior local control filenames",
+        "seconds": 0.2577926,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "reuse exact LF staging method",
+        "seconds": 0.2060021,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "prior execution and staging semantics",
+        "seconds": 0.2196565,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "current direction accepted scientific boundary",
+        "seconds": 0.2026475,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "write B03 prospective card and intake",
+        "seconds": 0.021,
+        "source": "tool request elapsed"
+      },
+      {
+        "label": "compute B03 counts verify exact source and write prospective summary owner/audit",
+        "seconds": 1.9302669,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B03 clean-boundary primary owner reviews",
+        "seconds": 0.4406329,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "inspect focused test source difference",
+        "seconds": 0.2031959,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "distinguish test Git bytes from checkout newline representation",
+        "seconds": 0.3579811,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "complete B03 prospective summary owner/audit after test CRLF distinction",
+        "seconds": 1.9359799,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "B03 new-card item CLI",
+        "seconds": 0.3638849,
+        "source": "exec_command wall_time_seconds"
+      },
+      {
+        "label": "record B03 prospective source and owner facts",
+        "seconds": 0.014,
+        "source": "tool request elapsed"
+      },
+      {
+        "label": "trace B03 card application without asserting launch",
+        "seconds": 0.3429085,
+        "source": "exec_command wall_time_seconds"
+      }
+    ],
+    "known_seconds_through_snapshot": 19.513131099999995,
+    "native_clocks_not_in_support": true,
+    "unmeasured_terms": [
+      "two early read-command clocks not retained in truncated output",
+      "unitemized tool/authoring effort",
+      "Monitor until receipts",
+      "Root integration until reported",
+      "later publication/cleanup"
+    ],
+    "full_budget_conformance": "pending; unknown terms not zero"
+  },
+  "cleanup": {
+    "shared_checkout": "retain for direction authoring/integration",
+    "new_roots": "none yet",
+    "old_B01_B02_restricted_local_duplicates": "preserved; outside this allocation; no cleanup attempted"
+  },
+  "execution_plan": {
+    "node": "wsl_4070",
+    "ssh_target": "hmasd-wsl-node",
+    "repo": "/home/wu/projects/HMASD",
+    "cwd": null,
+    "python": "/home/wu/.venvs/hmasd/bin/python",
+    "device": "cpu",
+    "dtype": "float32",
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "supervisor": "/usr/local/bin/agent-task",
+    "portability": "Linux CPU native publication only; no Windows fallback",
+    "staging": "one exact published source worktree; binary LF control transport"
+  },
+  "machine_generated_exposure_line": "B03 BINDING EXPOSURE: scientific_invocations=0, models=0, checkpoint_loads=0, environments=0, scientific_rng_masters=0, training_episodes=0, optimizer_steps=0, evaluation_episodes=0, diagnostic_trajectories=0, source_edits=0, new_test_invocations=0. Both fits preselected; no outcome screening.",
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-folr-006.json",
+  "owner_reviews_at_binding": {
+    "surface": "primary-control owner_console reviews --json",
+    "unapplied": []
+  }
+}
