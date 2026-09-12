@@ -12,14 +12,6 @@ Directory conventions live beside the code in one `AGENTS.md` per area (`experim
 `ha_ctse_process/`, `envs/`, `tests/`, `scripts/`, `docs/`), each imported by a one-line `CLAUDE.md`;
 `docs/project/PROJECT_MAP.md` indexes them. Nearest file wins on a conflict.
 
-OWNER_DIRECT 2026-09-12 — local WSL paths: daily authoring uses the current native
-checkout under `/home/fires/projects/`; resolve its root with `git rev-parse --show-toplevel`.
-The live primary control checkout is `/home/fires/projects/HMASD`; read current task endpoints
-there when an assignment requests them. Windows originals are rollback copies. Remote
-`/home/wu/` execution paths and historical evidence literals keep their original meaning.
-Current OS boundaries are listed in `/home/fires/projects/HMASD/docs/migration/WSL_PATHS_20260912.md`.
-This infrastructure migration does not resume paused research.
-
 ## 1. Operating model
 
 The current owner request, together with system and developer instructions, is the authority for
