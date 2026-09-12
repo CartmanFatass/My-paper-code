@@ -9,8 +9,9 @@ question, evidence or specification conflict.
 
 Read the [immutable complete response](https://github.com/CartmanFatass/My-paper-code/blob/65be91e1cecc4317a751964afd1fd16432de0b5f/docs/research/candidates/vap_folr_core/pro_packets/20260912_learned_retention_post_b03_convergence/archive/RESPONSE.md)
 and [fixed TASK](https://github.com/CartmanFatass/My-paper-code/blob/02c1cde2736938fd1f2e07feadf8afe02c4caef2/docs/research/candidates/vap_folr_core/pro_packets/20260912_learned_retention_post_b03_convergence/delivery/TASK.md).
-The complete intake and accepted DIRECTION consequence are published on the same
-shared direction branch and returned to Root for main integration.
+The [complete author intake](https://github.com/CartmanFatass/My-paper-code/blob/99f4df5843a22dc2f019749d44e310e1f6dcda6f/docs/research/candidates/vap_folr_core/pro_packets/20260912_learned_retention_post_b03_convergence/INTAKE.md)
+and accepted DIRECTION consequence are published on the same shared direction
+branch and returned to Root for main integration.
 
 Three accepted independent training-pair observations remain separate:
 B01 +1.763359375, B02 -1.769531250 and B03 -1.215546875 native learned-minus-RETAIN
