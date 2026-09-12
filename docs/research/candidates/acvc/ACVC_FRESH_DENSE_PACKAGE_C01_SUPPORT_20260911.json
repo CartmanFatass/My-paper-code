@@ -1,15 +1,15 @@
 {
   "object": "ACVC_FRESH_DENSE_PACKAGE_C01",
   "allocation": "single funded complete five-fit chain, including the two original-node consultations",
-  "cutoff_utc": "2026-09-12T05:06:39.768625+00:00",
+  "cutoff_utc": "2026-09-12T05:09:40.527069+00:00",
   "caps_s": {
     "per_native_unit": 270,
     "native_sum": 1350,
     "all_invoked_support": 1650,
     "complete": 3000
   },
-  "known_DM_and_review_support_s": 238.16116720000542,
-  "native_invocations_at_cutoff": 3,
+  "known_DM_and_review_support_s": 245.3220449000054,
+  "native_invocations_at_cutoff": 4,
   "native_sum_s_at_cutoff": 519,
   "components": [
     {
@@ -611,11 +611,24 @@
     {
       "phase": "unit 3 complete terminal collection, frozen reader/receipt technical acceptance and durable evidence",
       "wall_s": 1.550544
+    },
+    {
+      "phase": "publish unit 3 complete evidence/component intake/brief/audit and support before fixed unit 4",
+      "wall_s": 6.2547837
+    },
+    {
+      "phase": "single accepted submission of fixed C01 unit 4 handle",
+      "wall_s": 0.715094
+    },
+    {
+      "phase": "direct Monitor assignment for accepted C01 unit 4",
+      "wall_s": 0.191,
+      "measurement": "enclosing app call"
     }
   ],
   "coverage_limit": "Measured DM tool/command wall plus reported independent-review command wall through this cutoff, not complete client/provider/deliberation/Root/Transport/Monitor coverage. Overlapping phase timers are counted once as described. Publication of this snapshot and later launch/observation/collection/integration/cleanup are not yet included. Unknown stays unknown; this is not an unconditional complete-cap certificate.",
   "native_cost_reading": "Each full native unit includes adjacent admission, imports/setup, all 512 training and 192 evaluation episodes, optimizer/checkpoint/publication and actual process exit. Native savings do not extend the support envelope or fund another object.",
-  "native_status": "units 1\u20133 complete and accepted; units 4\u20135 fixed/unsubmitted",
+  "native_status": "units 1\u20133 complete with 519 s inclusive charge; unit 4 accepted/running; unit 5 fixed/unsubmitted; running cost pending",
   "monitor": "precise unit 1 command-wall total unavailable, confirmed by Root; no reconstruction measurement",
   "native_completed_units": 3,
   "native_raw_command_wall_sum_s": 510.86
