@@ -69,13 +69,15 @@ MONITOR_ADOPTED: fresh matching unfinished goal, running PID3393092, exit null,
 tmux active, uptime30s, exact source/cwd/output matched. The
 [adoption receipt](MONITOR_ADOPTION.json) records this actual handover.
 DM has no routine second status poll.
-The run's actual admission, learner counts/outcomes and complete native costs
-remain subject to terminal collection, with no scientific polarity yet.
+The complete native pair has now been collected and accepted: both512-train/
+32-final arms, native361.85s, COND−DENSE+.02447811898058116 J, above MEI.
+All raw rows/checkpoints and terminal evidence are retained; see the
+[final intake](../MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md).
 
-Root should integrate source10ea737f0, bindingf59b99d4a and this launch record,
-track the accepted handle and forward actual adoption/terminal facts to
-/root/dm_mgtap_m_pair. Preserve all active paths. No sibling result, cleanup
-or Portfolio response is a dependency of this accepted M invocation.
+Root has routed the terminal and Monitor empty-goal completion. It should now
+integrate final evidence/intake, accept retention and return the exact four
+cleanup targets to /root/dm_mgtap_m_pair. Scientific work is complete and no
+successor remains; shared authoring/cache and retained archives stay intact.
 
 The single accepted handle contains COND then DENSE under one adjacent admission,
 as fixed in the original cost law. Root's forwarded text called it COND and
