@@ -1,7 +1,7 @@
 # FSD B02 / 771303 — execution
 
-State: D0 accepted once by the detached supervisor; I preselected and unlaunched.
-Monitor actual unfinished-goal adoption confirmed; D0 running at that receipt.
+State: D0 complete/exit0 and technically accepted; I preselected and unlaunched.
+D0 Monitor goal complete with terminal delivered and active_set empty.
 Seven pure binding checks and independent review passed; no material finding.
 DM /root/dm_fsd_d_pair, C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd.
 Input merge dd4c829d93acf12b0f487ee9ff0d31ff005535d8 brings main0c0648bd0
@@ -87,3 +87,23 @@ source/card and launch at main3cbfae297/c5b9d1e1d. Observation now belongs to
 Monitor; DM does not poll or repeat ADD and resumes collection/technical
 acceptance on the routed terminal fact. I remains preselected and unlaunched.
 All four remote targets remain required for execution and collection.
+
+## D0 terminal acceptance and preselected I
+
+Root's corrected authoritative terminal receipt is finished/exit0,459s supervisor
+span,pid3394294,tmux inactive, exact source/cwd/output. Its Monitor goal is now
+complete, active_set empty and terminal delivered. D0 collection verified nine
+source paths and preserved11 original raw files in D0_collection.tar.gz.
+An initial collection assertion counted empty learner_logs/evaluation_logs
+as extra files. The corrected recursive file inventory found only the three
+original data files; no scientific run/source/result was altered or repeated.
+
+D0's full458.80s command passed fresh admission and completed all five actual
+updates/40,000train ticks and32 final worlds/16,000eval ticks. Every learner
+module moved; evaluator optimization remained zero. Manifest/summary seed/card/
+source and original config/source laws conform. D0_TECHNICAL_ACCEPTANCE.json
+records the separate technical acceptance and independently reportable own-arm
+facts. Paired polarity is unavailable until I; D0 score does not select I.
+The original D0 summary remains I's source-bound companion. The DM accepts it
+and proceeds only with the already allocated I under fresh adjacent admission,
+new actual Monitor goal/adoption and the original1800s whole-command cap.

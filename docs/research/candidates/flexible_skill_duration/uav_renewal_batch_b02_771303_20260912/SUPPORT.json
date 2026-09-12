@@ -88,9 +88,41 @@
     {
       "purpose": "D0 receipt formatting/staging/commit and immediate push",
       "wall_seconds": 4.4665198
+    },
+    {
+      "purpose": "single same-handle handover task-state read",
+      "wall_seconds": 0.036
+    },
+    {
+      "purpose": "D0 accepted launch Relay handoff",
+      "wall_seconds": 0.144
+    },
+    {
+      "purpose": "actual D0 adoption record/commit/push",
+      "wall_seconds": 4.4595636
+    },
+    {
+      "purpose": "initial D0 terminal collection empty-directory assertion",
+      "wall_seconds": 0.9564442
+    },
+    {
+      "purpose": "D0 mechanical file-inventory reconciliation",
+      "wall_seconds": 0.6079165
+    },
+    {
+      "purpose": "D0 corrected raw collection/byte preservation",
+      "wall_seconds": 1.0499717
+    },
+    {
+      "purpose": "D0 receipt and config schema read",
+      "wall_seconds": 0.2289406
+    },
+    {
+      "purpose": "complete D0 technical acceptance and decision record",
+      "wall_seconds": 0.3444452
     }
   ],
-  "known_support_wall_seconds": 36.7870828,
+  "known_support_wall_seconds": 44.61436460000001,
   "counting": "Each known enclosing invoked command once; nested SSH not readded. Prior readiness overlap conservatively included, old D spending never reused.",
   "unknown": [
     "earlier readiness command walls unavailable in truncated outputs",
@@ -100,7 +132,9 @@
   ],
   "source_delivery_transactions": 1,
   "scientific_submissions": 1,
-  "native_wall_seconds": {},
+  "native_wall_seconds": {
+    "D0": 458.8
+  },
   "claim": "No observed budget breach; partial known support is not certification of full300/3000 compliance.",
   "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-fsd-003.json",
   "source_transaction": {
@@ -109,5 +143,7 @@
     "within45": true,
     "nested_not_readded": true
   },
-  "actual_Monitor_adoption": "D0_MONITOR_ADOPTION.json; unfinished goal confirmed by Root; no duplicate observation"
+  "actual_Monitor_adoption": "D0_MONITOR_ADOPTION.json; unfinished goal confirmed by Root; no duplicate observation",
+  "aggregate_cpu_seconds": 1804.26,
+  "known_native_plus_support_seconds": 503.4143646
 }
