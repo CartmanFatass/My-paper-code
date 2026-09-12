@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-09-12T14:00:49.439695+00:00",
+  "checked_at_utc": "2026-09-12T14:03:41.540651+00:00",
   "observed_remote_refs": [
     {
       "sha": "c717996f3f2654e044fac05f9dc6a5d87d5b1369",
@@ -17,42 +17,42 @@
   "references": [
     {
       "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/SCIENCE_BRIEF.md",
-      "sha": "bffe89d0394151dba3221f40a44d1822e8e30872",
+      "sha": "a548c240118cbee149dae74ec13356e3e091f6a0",
       "published_remote_refs": [
         "refs/heads/codex/portfolio"
       ]
     },
     {
       "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/PREPARATION_INTAKE.md",
-      "sha": "bffe89d0394151dba3221f40a44d1822e8e30872",
+      "sha": "a548c240118cbee149dae74ec13356e3e091f6a0",
       "published_remote_refs": [
         "refs/heads/codex/portfolio"
       ]
     },
     {
       "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/FACTS.json",
-      "sha": "bffe89d0394151dba3221f40a44d1822e8e30872",
+      "sha": "a548c240118cbee149dae74ec13356e3e091f6a0",
       "published_remote_refs": [
         "refs/heads/codex/portfolio"
       ]
     },
     {
       "path": "docs/research/portfolio/ORACLE_RECOMMENDATIONS_20260911.md",
-      "sha": "bffe89d0394151dba3221f40a44d1822e8e30872",
+      "sha": "a548c240118cbee149dae74ec13356e3e091f6a0",
       "published_remote_refs": [
         "refs/heads/codex/portfolio"
       ]
     },
     {
       "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/ISSUE_SNAPSHOT.json",
-      "sha": "bffe89d0394151dba3221f40a44d1822e8e30872",
+      "sha": "a548c240118cbee149dae74ec13356e3e091f6a0",
       "published_remote_refs": [
         "refs/heads/codex/portfolio"
       ]
     },
     {
       "path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/OWNER_PACKET.json",
-      "sha": "bffe89d0394151dba3221f40a44d1822e8e30872",
+      "sha": "a548c240118cbee149dae74ec13356e3e091f6a0",
       "published_remote_refs": [
         "refs/heads/codex/portfolio"
       ]
@@ -275,5 +275,9 @@
       ]
     }
   ],
-  "limit": "Exact Git publication only; Pro connector access/Send not observed."
+  "limit": "Exact Git publication only; Pro connector access/Send not observed.",
+  "updated_input_remote": {
+    "sha": "a548c240118cbee149dae74ec13356e3e091f6a0",
+    "ref": "refs/heads/codex/portfolio"
+  }
 }
