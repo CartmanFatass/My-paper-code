@@ -328,3 +328,9 @@ Recommended/selected(a), with the stated stop. **Owner-delegated decision
 (unattended, 2026-09-03 instruction): (a).** Owner flag:none. Live owner reviews
 were empty at preparation. Exact source/command and handover status:
 [FSD_UAV_RENEWAL_BATCH_B02_771003_EXECUTION_20260911.md](FSD_UAV_RENEWAL_BATCH_B02_771003_EXECUTION_20260911.md).
+
+**771003 result boundary:** both selected arms completed; the unchanged reading
+rule gives `above_mei` at +.206285904082309. The [result evidence](FSD_UAV_RENEWAL_BATCH_B02_771003_RESULT_EVIDENCE_20260911.md)
+and [intake](FSD_UAV_RENEWAL_BATCH_B02_771003_INTAKE_20260911.md) preserve all raw outcomes, prediction scoring and
+partial support telemetry. This allocation ends without a successor; the frozen
+question, source, budgets and earlier zero-exposure instances remain unchanged.

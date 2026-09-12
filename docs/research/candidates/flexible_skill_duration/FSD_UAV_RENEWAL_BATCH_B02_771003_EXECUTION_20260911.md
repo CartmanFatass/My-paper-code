@@ -1,7 +1,8 @@
 # FSD new771003 pair execution
 
-D0 is terminal, collected and technically accepted. I is accepted and running;
-actual admission and Monitor goal adoption are confirmed. Pair collection is pending.
+Both selected arms are terminal, collected and accepted with a valid paired
+intake. All four remote paths are removed; one local duplicate remains after
+an explicit policy rejection. No successor is selected.
 New B allocation under card§7 and Root's conformance-PASS dispatch.
 Reused authoring checkout C:/Projects/HMASD-worktrees/codex-fsd, codex/fsd;
 reconciled base37d180f91621f065eaef19a194157f88826cebf2. The DM
@@ -163,3 +164,45 @@ relay after publication of 933aa3269db146d5243a495c7843db9a74b6ee99. Its event i
 I_HANDOFF_RECEIPT.json contains the exact prompt and accepted API result.
 This receipt update creates no second relay send or additional launch. Root can
 integrate the published evidence while Monitor continues observing I.
+
+## I terminal collection and full pair intake
+
+Root routed terminal event
+fsd-uav-renewal-batch-b02-771003-I-20260911:exit:0:2026-09-12T08:22:28+08:00,
+complete/finished/exit0 with no failure. Monitor retained active-set membership
+until Root accepted delivery. No DM observation loop or new launch followed.
+Collection at2026-09-12T00:24:42.919373Z retained complete I outputs, adjacent
+admission/time and supervisor records. Source remains5250c4353. I full wall is
+1069.26s (supervisor1070s), RSS3444284KiB, user4191.74s/system50.03s. Actual
+physical/effective admission15628656640 bytes exceeds4294967296.
+
+I acceptance covers all five training stages,32 final episodes, nonzero training
+and module movement,zero evaluator updates, intact source/identity/configuration,
+raw/native/component accounting and the full ordered D0 comparison. The paired
+result is above_mei at+.206285904082309,32 positive contrasts; scientific meaning
+and limitations are recorded in the result/intake. Root reported28.5s FSD-only
+enclosing integration commands, charged once. I adoption.8s was already charged;
+the older shared1.0s query stays unallocated and terminal-observation/relay service
+durations are unknown. Both collection archives and all22 matching raw files are
+preserved. The four-path inventory is ready for cleanup after publication.
+
+A local document-writing command was rejected before process creation by Windows
+with `The filename or extension is too long. (os error 206)`. The same authorized
+document writes were split into smaller local operations and completed. This
+changed no source delivery, native invocation, result, budget or scientific sign.
+
+## Closeout: remote absence and local retention blocker
+
+Result/data/intake/brief and both raw archives were published in
+522b7ba2bb9b7fb759d92604ad8fc37d345cbb69. At2026-09-12T00:42:47.610048Z,
+after all22 raw files and source preservation were verified, the four exact
+remote paths were removed and disk/worktree-registration absence confirmed.
+CLEANUP_FACTS.json records this. No active/shared checkout was removed.
+
+The subsequent native PowerShell removal of the local collection duplicate was
+rejected before execution by tool policy: `blocked by policy`. No alternate
+removal route was attempted. The creator-owned collection directory under
+`temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003_collection`
+remains26 files/190929 bytes, already preserved in the published archives. DM
+retains the cleanup gap pending a permitted route or Root retention disposition.
+This does not change the valid above_mei result or release another invocation.

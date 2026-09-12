@@ -128,9 +128,86 @@
     {
       "purpose": "one required I handover relay API elapsed, forwarding cost separate",
       "wall_seconds": 0.189
+    },
+    {
+      "purpose": "publish accepted single I relay receipt and recoverable pending state",
+      "wall_seconds": 4.8932263
+    },
+    {
+      "purpose": "read current paired intake card and scientific tool route",
+      "wall_seconds": 0.2578521
+    },
+    {
+      "purpose": "read collected artifact contract and relevant scientific evidence locations",
+      "wall_seconds": 0.2684297
+    },
+    {
+      "purpose": "read class-correct scientific intake rules and retained literature assumptions",
+      "wall_seconds": 0.2221855
+    },
+    {
+      "purpose": "read prior accepted evidence format and I publication endpoint",
+      "wall_seconds": 0.2333185
+    },
+    {
+      "purpose": "collect complete I and dependent pair outputs without numerical re-execution",
+      "wall_seconds": 0.9345724,
+      "session_id": null
+    },
+    {
+      "purpose": "inspect full paired primary, I learner movement and resource receipts",
+      "wall_seconds": 0.2263876
+    },
+    {
+      "purpose": "Root-reported FSD-only integration/push enclosing commands, charged once",
+      "wall_seconds": 28.5
+    },
+    {
+      "purpose": "accept I and paired publication; compute ordered primary and independent-run summary",
+      "wall_seconds": 0.3965673
+    },
+    {
+      "purpose": "read bounded scientific interpretation and established intake/preservation format",
+      "wall_seconds": 0.2160305
+    },
+    {
+      "purpose": "read owner boundary and current Portfolio acceptance provenance",
+      "wall_seconds": 0.4725348
+    },
+    {
+      "purpose": "read exact cleanup ownership, Portfolio response identity and trace interface",
+      "wall_seconds": 0.3327163
+    },
+    {
+      "purpose": "preserve original byte archives and inventory the four terminal owned cleanup paths",
+      "wall_seconds": 1.3844699999999999
+    },
+    {
+      "purpose": "write complete E0 result from accepted analysis using bounded local command",
+      "wall_seconds": 0.2523231
+    },
+    {
+      "purpose": "write bounded scientific intake, decisions and six-heading Chinese brief",
+      "wall_seconds": 0.2459957
+    },
+    {
+      "purpose": "record accepted mechanism science, owner trace, audit and support state",
+      "wall_seconds": 0.6036828
+    },
+    {
+      "purpose": "check scientific record boundaries and publish complete evidence/intake before cleanup",
+      "wall_seconds": 5.6075314
+    },
+    {
+      "purpose": "verify published byte preservation and remove four exact terminal remote paths",
+      "wall_seconds": 1.4356217
+    },
+    {
+      "purpose": "record exact local policy cleanup blocker and read owner boundary",
+      "wall_seconds": 0.4818482
     }
   ],
-  "known_support_seconds": 50.698237999999996,
+  "known_support_seconds": 97.66353190000001,
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -149,7 +226,7 @@
     "returncode": 0,
     "count": 1
   },
-  "pending": "I terminal observation, actual I native cost and full-pair collection/intake; further publication/integration and cleanup. Shared observation attribution and unmeasured support remain unknown. This snapshot excludes its own publication command, retained for the next record.",
+  "pending": "This final closeout publication, required terminal relay and its receipt publication/integration; unmeasured I terminal observation, relay service and rejected-command review overhead; unallocated shared 1.0-second query. Native pair and four-path remote cleanup are complete; local duplicate removal was policy-rejected.",
   "shared_observation": {
     "reported_by": "Root D0 terminal handoff",
     "wall_seconds": 1,
@@ -158,8 +235,39 @@
   },
   "native_wall_seconds": {
     "D0": 538.66,
-    "I": null
+    "I": 1069.26
   },
-  "native_wall_sum_observed_seconds": 538.66,
-  "support_plus_native_known_seconds": 589.3582379999999
+  "native_wall_sum_observed_seconds": 1607.92,
+  "support_plus_native_known_seconds": 1705.5835319,
+  "root_support_receipt": {
+    "reported_by": "Root at I terminal collection",
+    "integration_enclosing_wall_seconds": 28.5,
+    "adoption_0_8_seconds_already_charged": true,
+    "terminal_observation_command_wall_seconds": null,
+    "relay_service_delivery_wall_seconds": null,
+    "shared_prior_query": "1.0 second across FSD D0 and two FOLR handles remains unallocated"
+  },
+  "document_write_blocker": {
+    "action": "write intake/result/brief/records in one local shell invocation",
+    "outcome": "rejected before process creation",
+    "error": "Failed to create unified exec process: The filename or extension is too long. (os error 206)",
+    "external_effect": false,
+    "resolution": "split the same authorized local document writes into smaller invocations",
+    "measured_command_wall_seconds": null,
+    "scientific_effect": false
+  },
+  "resource_measurement_status": "resources_unmeasured for incomplete support attribution only",
+  "observed_cap_breach": false,
+  "local_cleanup_blocker": {
+    "action": "Remove the creator-owned local collection duplicate with native PowerShell Remove-Item -LiteralPath",
+    "path": "C:/Projects/HMASD-worktrees/codex-fsd/temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003_collection",
+    "outcome": "rejected before process creation",
+    "error": "exec_command failed: CreateProcess ... rejected: blocked by policy",
+    "attempts": 1,
+    "alternate_deletion_route_attempted": false,
+    "scientific_effect": false,
+    "measured_command_wall_seconds": null,
+    "cleanup_owner": "FSD DM",
+    "resume_event": "a permitted cleanup route or Root-approved retention disposition; no same-payload approval request made"
+  }
 }
