@@ -246,7 +246,8 @@
     "Snapshot counts are Root-routed mechanical facts, not direct remote/browser observations by this author.",
     "No result is recalculated or reclassified. One accepted intake is assumed to describe its bound execution at its stated limits.",
     "No five-entry claim: using a native UAV host is not an entry decision.",
-    "Per-result costs stay in original units and windows; complete histories/unknown overhead are not reconstructed."
+    "Per-result costs stay in original units and windows; complete histories/unknown overhead are not reconstructed.",
+    "Latest VNFC responsible-DM return clarifies that192 transitions/32 optimizer is a per-round row, not the complete invocation. Totals are lower bounds from35 completed rounds per arm; no new primary or final scientific intake is inferred."
   ],
   "local_link_check_missing": [],
   "later_scientific_input": {
@@ -257,7 +258,7 @@
     "acvc_question_note_commit": "c717996f3f2654e044fac05f9dc6a5d87d5b1369",
     "acvc_question_note_path": "docs/research/candidates/acvc/ACVC_POST_C01_DIRECTION_QUESTION_20260912.md",
     "vnfc_accepted_repair_main_commit": "91c16cb06",
-    "vnfc_actual_state": "Fresh vnfc-b03-credit-20260912-01 at b93329b3 terminal exit139 after105s, round35/192 transitions/32 optimizer steps reported, no final primary or score. Same DM collecting/quarantining and bounded relevant diagnosis; no automatic retry. Earlier repair acceptance remains a historical technical fact.",
+    "vnfc_actual_state": "Fresh B03 source b93329b3c44ea9d0cf5622c00f5ca6eea0740dac terminal SIGSEGV/supervisor139 after104.89s. Both arms35 complete logged rounds; at least2240optimizer steps/13440joint transitions. Nofinalprimary/no scientific polarity. Sole allocation ends/no automaticretry; original DM collection/finite diagnosis remains active only while actually undertaken.",
     "folr_terminal_fact": {
       "retain": {
         "exit_code": 0,
@@ -273,16 +274,21 @@
       "monitor": "terminal notices delivered, active set empty, goal completed"
     },
     "vnfc_terminal_fact": {
-      "execution_source_short_sha": "b93329b3",
+      "execution_source_sha": "b93329b3c44ea9d0cf5622c00f5ca6eea0740dac",
       "handle": "vnfc-b03-credit-20260912-01",
       "exit_code": 139,
-      "reported_wall_seconds": 105,
-      "reported_round": 35,
-      "reported_transitions": 192,
-      "reported_optimizer_steps": 32,
+      "reported_wall_seconds": 104.89,
+      "complete_logged_rounds_per_arm": 35,
+      "reported_optimizer_steps_lower_bound": 2240,
+      "reported_joint_transitions_lower_bound": 13440,
+      "per_round_optimizer_steps": 32,
+      "per_round_joint_transitions": 192,
+      "initial_midpoint_checkpoints_retained": 4,
       "final_primary": null,
       "scientific_score": null,
-      "automatic_retry": false
+      "automatic_retry": false,
+      "allocation_state": "ended, no automatic successor",
+      "source": "Direct responsible VNFC DM return /root/dm_a_mx_vnfc_recovery; formal E0/intake pending, correction of interpreting the last row as invocation totals"
     }
   },
   "prepared_at_utc": "2026-09-12T13:48:08.326767+00:00",
