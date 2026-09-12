@@ -1,16 +1,16 @@
 {
   "object": "ACVC_FRESH_DENSE_PACKAGE_C01",
   "allocation": "single funded complete five-fit chain, including the two original-node consultations",
-  "cutoff_utc": "2026-09-12T05:14:37.165426+00:00",
+  "cutoff_utc": "2026-09-12T05:23:38.605338+00:00",
   "caps_s": {
     "per_native_unit": 270,
     "native_sum": 1350,
     "all_invoked_support": 1650,
     "complete": 3000
   },
-  "known_DM_and_review_support_s": 261.9432827000054,
+  "known_DM_and_review_support_s": 277.6832906000054,
   "native_invocations_at_cutoff": 5,
-  "native_sum_s_at_cutoff": 688,
+  "native_sum_s_at_cutoff": 855,
   "components": [
     {
       "phase": "initial checkout read",
@@ -693,12 +693,64 @@
     {
       "phase": "final-unit adoption schema and cleanup/frozen-source limits read",
       "wall_s": 0.3049663
+    },
+    {
+      "phase": "publish accepted final unit 5 and actual Monitor adoption with accumulating E0/support",
+      "wall_s": 5.0432595
+    },
+    {
+      "phase": "unit 4 evidence and final unit 5 pending-collection handoff via Root Relay",
+      "wall_s": 0.182,
+      "measurement": "enclosing app call"
+    },
+    {
+      "phase": "final unit 5 complete terminal collection, frozen reader/receipt technical acceptance and durable evidence",
+      "wall_s": 4.9145157
+    },
+    {
+      "phase": "single complete frozen-source five-unit primary analysis",
+      "wall_s": 1.2174407
+    },
+    {
+      "phase": "full-result owner boundary and empirical-reading reference lookup",
+      "wall_s": 0.5911714
+    },
+    {
+      "phase": "full-result scientific interpretation assumptions and exact counts provenance",
+      "wall_s": 0.2253495
+    },
+    {
+      "phase": "full-result live primary owner review and Portfolio row",
+      "wall_s": 0.4553173
+    },
+    {
+      "phase": "full-population descriptive counts/prediction arithmetic and five raw training-curve exports",
+      "wall_s": 2.0027145
+    },
+    {
+      "phase": "handoff visual readback of already generated raw training curves",
+      "wall_s": 0.04,
+      "measurement": "enclosing view_image call"
+    },
+    {
+      "phase": "handoff existing evidence/state/live relay readback",
+      "wall_s": 0.3215958
+    },
+    {
+      "phase": "handoff exact local preservation inventory and ignored readable-output paths",
+      "wall_s": 0.3959975
+    },
+    {
+      "phase": "handoff existing preparation receipt and authoring registration facts",
+      "wall_s": 0.350646
     }
   ],
   "coverage_limit": "Measured DM tool/command wall plus reported independent-review command wall through this cutoff, not complete client/provider/deliberation/Root/Transport/Monitor coverage. Overlapping phase timers are counted once as described. Publication of this snapshot and later launch/observation/collection/integration/cleanup are not yet included. Unknown stays unknown; this is not an unconditional complete-cap certificate.",
   "native_cost_reading": "Each full native unit includes adjacent admission, imports/setup, all 512 training and 192 evaluation episodes, optimizer/checkpoint/publication and actual process exit. Native savings do not extend the support envelope or fund another object.",
-  "native_status": "units 1\u20134 complete with 688 s inclusive charge; final unit 5 accepted/running and actually adopted; cost pending; no population analysis yet",
-  "monitor": "precise prior per-handle command-wall totals unavailable, confirmed by Root; no reconstruction measurement",
-  "native_completed_units": 4,
-  "native_raw_command_wall_sum_s": 677.51
+  "native_status": "all five terminal, collected and technically accepted; frozen primary complete; OWNER_DIRECT handoff with final scientific intake/DIRECTION/cleanup unfinished",
+  "monitor": "All five terminal delivered; Root reports final goal complete and active_set=[]; precise per-handle command-wall totals unavailable; no reconstruction measurement",
+  "native_completed_units": 5,
+  "native_raw_command_wall_sum_s": 841.92,
+  "known_native_plus_support_lower_bound_s": 1132.6832906000054,
+  "handoff": "No successor, new Pro, fit, diagnostic, child or discretionary deletion. This publication and relay follow the measured cutoff."
 }

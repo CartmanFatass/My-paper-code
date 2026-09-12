@@ -148,3 +148,9 @@ The unchanged fixed unit 2 `(11477,24930)` command was accepted once at `2026-09
 Unit 2 collection and technical acceptance are published at `c669a3fd2c4d77539590f31512a90dabe8b05018`, including every outcome, complete counts and actual summary/last-panel timing roles. Its inclusive native charge is 171 s; two-unit completed native charge is 341 s. The unchanged fixed unit 3 `(18150,21370)` was accepted once at `2026-09-12T04:59:38.304056+00:00`, handle `acvc-fresh-dense-c01-18150-3fd9062d5`, from the same frozen source/checkout/command list and with fresh adjacent admission.
 
 Direct Monitor dispatch succeeded; Root confirmed actual adoption at `2026-09-12T04:59:50Z`, active set exactly that running handle. DM stopped remote polling and retains terminal collection and fixed unit 4 `(12604,21030)` continuation. Units 4–5 remain unsubmitted. No population result, C consumption, interim efficacy decision, repeated check or extra scientific invocation was introduced.
+
+## 14. Owner-directed handoff after complete data and calculation
+
+All five preselected units are complete, collected and technically accepted. The frozen source3fd9062d5456a6b61a132a16ebd33a7099810143 primary ran once over all five and returned JOINT_ABOVE_MEI under exactly §4’s qualification. The valid complete C meets its consumption condition; no repeat/successor is allocated. [E0](ACVC_FRESH_DENSE_PACKAGE_C01_RESULT_EVIDENCE_20260911.md) preserves all outcomes.
+
+OWNER_DIRECT now requires existing DMs to enter HANDOFF. Full final scientific intake and DIRECTION synthesis remain unfinished, as specified in the [intake handoff](ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#owner-directed-handoff). All scientific handles are terminal; final Monitor goal is complete/empty; source, evidence and checkouts are retained. No further research or discretionary cleanup proceeds. This status appendix changes no frozen rule or historical fact.

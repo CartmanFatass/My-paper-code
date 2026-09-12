@@ -1,8 +1,8 @@
-# ACVC C01 — accumulating final-population evidence
+# ACVC C01 — complete result preserved at owner-directed handoff
 
-Status: **four of five complete units collected; the C01 primary result is not complete and the object is not consumed.** Exact source and primary-analysis source: `3fd9062d5456a6b61a132a16ebd33a7099810143`. The [frozen card](ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md) and [execution facts](ACVC_FRESH_DENSE_PACKAGE_C01_EXECUTION_FACTS_20260911.json) retain the full five-unit selection, commands, exposure and caps. No development fit occupies a final slot.
+Status: **all five complete units collected and technically accepted; frozen primary calculation complete. Final scientific intake and DIRECTION synthesis unfinished at OWNER_DIRECT handoff.** The valid complete result meets the frozen C-consumption condition and supplies no repeat or successor. Exact source and primary-analysis source: `3fd9062d5456a6b61a132a16ebd33a7099810143`. The [frozen card](ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md) and [execution facts](ACVC_FRESH_DENSE_PACKAGE_C01_EXECUTION_FACTS_20260911.json) retain the full five-unit selection, commands, exposure and caps. No development fit occupies a final slot.
 
-The frozen reading is: “For each primary use exactly `mean_r ± scipy.stats.t.ppf(.9875,4) * s_r/sqrt(5)`.” Joint support requires: “Both lower bounds **strictly greater than .01 J**.” These are qualified iid-normal complete fit-panel intervals; actual neural-training calibration is not established. No five-unit interval is computed from the currently incomplete population. Unit means and paired episode SEs below are descriptive components, with no interim efficacy/futility decision.
+The frozen reading is: “For each primary use exactly `mean_r ± scipy.stats.t.ppf(.9875,4) * s_r/sqrt(5)`.” Joint support requires: “Both lower bounds **strictly greater than .01 J**.” These are qualified iid-normal complete fit-panel intervals; actual neural-training calibration is not established. The five-unit calculation ran once after all five units were complete. Unit means and paired episode SEs remain descriptive components; no interim efficacy/futility decision occurred.
 
 | Unit | m / q | State | F-C mean J | F-dwell mean J | dwell-C mean J | Complete command wall | Inclusive native charge |
 |---|---|---|---:|---:|---:|---:|---:|
@@ -10,7 +10,7 @@ The frozen reading is: “For each primary use exactly `mean_r ± scipy.stats.t.
 | 2 | 11477 / 24930 | complete, preserved, technically accepted | 0.110783589817 | 0.084918936207 | 0.025864653610 | 168.51 s | 171 s |
 | 3 | 18150 / 21370 | complete, preserved, technically accepted | 0.096548149142 | 0.058262606480 | 0.038285542662 | 175.29 s | 178 s |
 | 4 | 12604 / 21030 | complete, preserved, technically accepted | 0.103648259406 | 0.070756277866 | 0.032891981540 | 166.65 s | 169 s |
-| 5 | 14295 / 23946 | accepted, monitored; collection pending | — | — | — | — | — |
+| 5 | 14295 / 23946 | complete, preserved, technically accepted | 0.074937608893 | 0.039467298661 | 0.035470310232 | 164.41 s | 167 s |
 
 ## Unit 1: direct facts and technical acceptance
 
@@ -45,3 +45,34 @@ The [fourth complete unit](fresh_dense_package_c01_20260911/unit_12604/) passed 
 Actual adjacent admission passed with physical/effective memory both 15,620,947,968 bytes. Whole command 166.65 s, actual full-summary 162.05238466197625 s versus separate last-panel 162.05118205701 s, supervisor 166 s, inclusive charge 169 s and peak RSS 548,880 KiB. Exit zero/finished/tmux absent are verified. Completed native charge totals 688 s with no per-unit cap breach. Root reported the Monitor goal complete and empty active set after terminal delivery; final-unit adoption will use the live configured Monitor and establish its goal for that handle. `resources_unmeasured` and unavailable precise Monitor command time remain qualified separately.
 
 All 12 raw files are preserved locally in `collection/unit_12604.tar.gz`, 417,331 bytes, verified remote/local SHA256 `93a0967a91fe032e87c6f12fda0b26dc255541d47c1a3558ff9958300e53361a`. Checkpoint SHA256 `edc5de41007dd681b63c70883df5d6a2b8af2ad793ffc94dfbf6892001b4fe3a` remains in the archive/extracted runtime unit and readable evidence is published. The shared execution checkout remains needed by fixed final unit 5; no scientific evidence or blocked cleanup target was removed.
+
+## Unit 5: direct facts preserved at handoff
+
+The [fifth unit](fresh_dense_package_c01_20260911/unit_14295/) passed the frozen source/reader/count/reset/receipt checks with no issues: one new fit, 512 H256 training episodes, 1,024 ordered Adam/update records, all 192 final evaluation episodes, 180,224 native ticks, exact m14295/q23946, CPU FP32/Torch1/1, final checkpoint and 34,902/34,177 actor/critic parameters. F-C/F-dwell/dwell-C conditional episode SEs are 0.007830595864/0.007031101464/0.007003689077 J, adverse worlds 7/13/16 of 64 and minima -0.091679017845/-0.113308313985/-0.070547070353 J. All remain included.
+
+Actual adjacent physical/effective memory admission passed at 15,628,738,560 bytes. Whole command 164.41 s; actual full-summary 159.809225467965 s versus separate last-panel 159.80775067897048 s; supervisor 164 s, inclusive native charge 167 s, peak RSS 548,600 KiB. Exit zero, finished and tmux absent are verified. Root reported final Monitor goal complete and active_set=[] after terminal delivery.
+
+The complete remote/local byte-verified archive is 417,171 bytes, SHA256 bf20f6c08f13c234408c743e33cc598a044d3ad70137645ad96e54b82400f365. Checkpoint SHA256 bfdc650fa2ebc827fd29d7c3c6aea0cc0177e60791d09acaa055f049a1948b33 remains in the archive and extracted runtime unit. All local and remote copies remain intact.
+
+## Completed frozen calculation
+
+The [full population JSON](fresh_dense_package_c01_20260911/population_analysis.json) applies immutable source 3fd9062d5456a6b61a132a16ebd33a7099810143 once to all five complete fit-plus-panel units, equally weighted, t(.9875,4)=3.495405932516977, with no episode noise added/subtracted and no world or fit excluded.
+
+| Primary | Mean J | Qualified interval | Frozen reading |
+|---|---:|---:|---|
+| F-C | +0.095915968685 | [0.074850455698, 0.116981481673] | lower strictly above .01 |
+| F-dwell | +0.065133768997 | [0.038286385582, 0.091981152413] | lower strictly above .01 |
+
+Machine reading: **JOINT_ABOVE_MEI**. Coverage is 97.5% two-sided marginal and at least 95% simultaneous only under the prespecified iid-normal model for complete fit-panel means; actual neural-training calibration is unestablished. This supports the qualified single-task complete-package expected-gain target. Stable or distribution-free superiority, pure retrace/history necessity, matched-cue causality, transfer, tuned headroom and formal UAV entry remain outside the claim.
+
+The [computed summary](fresh_dense_package_c01_20260911/result_summary.json) preserves selection, counts, all primary quantities and prediction arithmetic. Descriptive F-C/F-dwell adverse pairs are 17/46 of 320; minima -0.091679017845/-0.113308313985 J. Dwell-C is +0.030782199688 J, with 83 adverse pairs and minimum -0.177107177395 J. F/dwell intervention counts 37,100/25,949 arise on unequal private histories; C cue incidence is unmeasured.
+
+Totals: five new fits, 2,560 training and 960 evaluation episodes, 901,120 native ticks, 5,120 Adam/backward/update records, five final checkpoints and 15 post-fit loads. No development fit entered the final population, and no sixth/replacement fit, extra panel or diagnostic occurred. Preserve [all raw training returns](fresh_dense_package_c01_20260911/training_returns.csv), the [unit table](fresh_dense_package_c01_20260911/unit_table.csv) and [five learning curves](fresh_dense_package_c01_20260911/training_curves.png). All 512 returns per fit are shown; 32-episode block means are visual only and select no endpoint.
+
+Prespecified pass probabilities .80/.65/.60 for F-C/F-dwell/joint each observed event 1; computed Brier scores .04/.1225/.16, mean .1075, are saved without a calibration claim. Owner prediction: not taken (unattended). Full final intake integration is unfinished.
+
+Raw command wall sums to 841.92 s; inclusive native charges 170/171/178/169/167 s sum to **855 s**. No per-unit or native-sum breach; peak recorded RSS 550,036 KiB. The original 270/1350/1650/3000 s caps and unknown support coverage remain in the [support account](ACVC_FRESH_DENSE_PACKAGE_C01_SUPPORT_20260911.json). Missing precise Monitor/Root/Transport/client/provider/deliberation totals and resources_unmeasured are not zero or complete-cap conformance.
+
+## Owner-directed stop boundary
+
+The owner ordered HANDOFF after collection, primary calculation and descriptive artifacts were complete. The [intake handoff](ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md#owner-directed-handoff) records unfinished final scientific intake/DIRECTION/cleanup, preservation and next owner. Earlier component sections retain their historical time-local states. No discretionary deletion or research continuation occurs.
