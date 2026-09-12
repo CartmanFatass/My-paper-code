@@ -29,7 +29,7 @@
     }
   ],
   "recommended": "f_u",
-  "auto_applied": null,
+  "auto_applied": "f_u",
   "dm_reason": "Pro最终F+U通过科学与规范核对；H是接近备选，但一次原样观察可影响具体候选用途。",
   "evidence": [
     "docs/research/portfolio/decisions/2026-09-11-folr-unchanged-pair-funding.md",
@@ -97,6 +97,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-11-folr-unchanged-pair-funding.md",
       "state": "planned",
       "summary": "最终决定与有限映射已完成，交Root整合并直接恢复原FOLR DM；当前无新数值暴露。FSD不追加，ACVC独立沿原额度继续；无需逐项批准。"
+    },
+    {
+      "at": "2026-09-12T04:52:50+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/root-log/2026-09-11.md",
+      "state": "applied",
+      "summary": "F+U integrated and original FOLR chain actually resumed; separate 1350/2700/300/3000 caps preserved; no FSD successor or native-launch claim."
     }
   ]
 }

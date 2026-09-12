@@ -1,6 +1,6 @@
 # HMASD experiment tracking
 
-## Current rolling handoffs — 2026-09-12 04:45 UTC
+## Current rolling handoffs — 2026-09-12 04:52 UTC
 
 Current execution ownership is recorded at the top of [PORTFOLIO.md](PORTFOLIO.md).
 Older pending/zero-active paragraphs below are dated evidence, not current status.
@@ -21,16 +21,16 @@ Older pending/zero-active paragraphs below are dated evidence, not current statu
 - Main accepted card/source/commands/launch as `0d3bc3257`, `0451da37a`,
   `3ed01fb83`, `2fadb1ddc`. Existing 12 focused checks and independent no-material-
   finding review are reused; no repeat scientific or verification invocation.
-- FOLR's designated DM is actively publishing the conforming F+U Portfolio mapping
-  from the complete response already integrated at `a9c6ba2bf`; Root owns immediate
-  integration and dispatch when that handoff arrives. No empirical start is yet
-  claimed by this snapshot.
+- FOLR's F+U mapping/publication are integrated at `deb2e5e1e`/`5f0cbde26` from the
+  full response `a9c6ba2bf`. Root resumed the original DM using `followup_task`,
+  and the DM confirmed switching to the funded pair on the shared direction branch.
+  It is an actual preparation/execution chain, with no native launch claimed yet.
 - RCLE Transport rechecked original Edge browser 2/tab 507083308 and received
   `Browser is not available: 2`; original count 2 and exact request remain intact.
   Same-request recovery is owned by Transport, with original connection restoration
   as its explicit prerequisite. No accepted generation is counted.
 
-Actual direction count: 1; vacancies: 4. Published intentions, completed returns,
+Actual direction count: 2; vacancies: 3. Published intentions, completed returns,
 cross-direction authoring and unresolved browser waits are excluded. No pending
 Monitor handle is orphaned at this snapshot. Later changed events update this
 section or the current Portfolio snapshot rather than silently inheriting old counts.
