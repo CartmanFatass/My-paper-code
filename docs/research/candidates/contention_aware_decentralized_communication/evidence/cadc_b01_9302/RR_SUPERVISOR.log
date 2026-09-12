@@ -1,0 +1,19 @@
+=== Task 'cadc-b01-9302-rr-20260912' started at 2026-09-13T06:35:15+08:00 ===
+{
+  "assessed_at": "2026-09-12T22:35:15.184438Z",
+  "available_physical_bytes": 15008534528,
+  "captured_at": "2026-09-12T22:35:15.184136Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15008534528,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"status": "COMPLETE", "counts": {"train_episodes": 512, "eval_episodes": 32, "train_team_steps": 131072, "eval_team_steps": 8192, "team_steps": 139264, "optimizer_steps": 1024, "rollouts": 256, "explicit_resets": 544, "motion_decisions": 696320, "send_decisions": 0, "attempts": 139264, "constructors": 1}, "elapsed_wall": 180.05246645933948}
+=== Task 'cadc-b01-9302-rr-20260912' exited with code 0 at 2026-09-13T06:38:15+08:00 (Duration: 180s) ===

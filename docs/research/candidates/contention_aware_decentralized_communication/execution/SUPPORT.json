@@ -28,14 +28,18 @@
     "supervisor_inventory_control_read": 0.8174066,
     "supervisor_archive_collection": 1.0931076,
     "reducer_skill_wall_read": 0.1855668,
-    "raw_reward_rng_packet_accounting": 0.2160469
+    "raw_reward_rng_packet_accounting": 0.2160469,
+    "intake_accounting_document_check": 0.4060635,
+    "root_integration_read": 0.2428229,
+    "result_intake_commit_push": 5.1116084,
+    "retained_evidence_ignore_inventory": 0.229588
   },
-  "selected_command_sum_seconds": 53.2492211,
+  "selected_command_sum_seconds": 59.2393039,
   "additional_canceled_network_operation_observed_lower_bounds_seconds": {
     "non_login_git_fetch": 100,
     "non_login_promisor_checkout": 76
   },
-  "known_support_lower_bound_seconds": 229.2492211,
+  "known_support_lower_bound_seconds": 235.2393039,
   "coverage": "Partial support lower bound. Canceled-command terminal tails and additional read/edit/Git/agent/provider/Monitor/Root integration/final publication/cleanup costs are unknown or not fully measured; do not treat omissions as zero. Sum of invoked command wall is not elapsed study critical path.",
   "hard_support_cap_seconds": 900,
   "hard_native_cap_seconds": 1200,
