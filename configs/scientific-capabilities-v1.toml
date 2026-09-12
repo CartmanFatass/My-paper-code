@@ -4,17 +4,17 @@ version = 1
 [[capability]]
 capability = "scientific-python"
 status = "active"
-purpose = "Deterministic symbolic, numerical, tabular, statistical, and plotting probes in the isolated native Linux CPU analysis environment."
-entrypoint = "/home/fires/.venvs/hmasd-linux-science-tools/bin/python"
-environment = "environments/hmasd-linux-science-tools/manifest.json"
+purpose = "Deterministic symbolic, numerical, tabular, statistical, and plotting probes in the isolated Windows CPU environment."
+entrypoint = "C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"
+environment = "environments/hmasd-science-tools/manifest.json"
 allowed_effects = ["local-read", "direction-temp-write"]
 
 [[capability]]
 capability = "networkx"
 status = "active"
 purpose = "Graph construction, invariants, counterexamples, and reference algorithms using the isolated scientific Python environment."
-entrypoint = "/home/fires/.venvs/hmasd-linux-science-tools/bin/python"
-environment = "environments/hmasd-linux-science-tools/manifest.json"
+entrypoint = "C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"
+environment = "environments/hmasd-science-tools/manifest.json"
 allowed_effects = ["local-read", "direction-temp-write"]
 
 [[capability]]
