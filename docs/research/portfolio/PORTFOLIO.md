@@ -10,7 +10,7 @@
 
 Root当前实际工作集5/5：ACVC、MGTAP、FSD、RCLE、FOLR五个ACTIVE方向的原DM均已恢复，继续下一有界对象或方向判断。最近有限对象已完成，但没有Portfolio决定停止这些方向；cleanup与Transport不另占槽位。
 FSD为一对I1280/authentic-D0，D0≤900、I≤1800、native≤2700、support≤300、完整≤3000秒；FOLR仅一次原节点post-B03 Convergence及完整intake，零实验额度、完整成本未知。MGTAP1200未分配。
-N/R选择已经intake；FSD进入新pair执行流程，RCLE进入一次原节点问题起草。新的方向发现/注册及独立MGTAP T投入请求已由provider exact-once接受并生成中；该请求已用各方向最新handoff、DIRECTION和intake刷新旧方向事实。
+N/R选择已经intake。新的方向发现/注册及独立MGTAP T投入完整响应已集成mainc869ecbb9，指定DM正在完整Portfolio intake；该请求已用各方向最新handoff、DIRECTION和intake刷新旧方向事实。
 FSD第五pair已完整intake并由原DM做scoped cleanup，同时进入独立Portfolio接续起草；ACVC、FOLR与RCLE也分别进入同轮独立投入/生命周期起草，MGTAP有在途Portfolio投入裁决。严格推进计数5/5，不以有限分配结束推断停向。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。

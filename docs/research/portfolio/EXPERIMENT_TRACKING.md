@@ -10,7 +10,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | FSD | Fifth pair accepted ABOVE_MEI at main18d7a02f8: I−D0 +.0737976492 J, 26/32 positive; finite N ended, direction remains ACTIVE | Original DM performs four-target scoped cleanup while Portfolio DM prepares a distinct next investment/lifecycle choice; no automatic sixth pair/S/successor |
 | RCLE | Original-node intake accepted at main8973c0515: HOLD only tested equal-unit/.99-prior/FLEX/final1000 spending; direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice from refreshed evidence; no repeated recipe, fit or consultation |
 | FOLR | Original-node intake accepted at main2e2549d3c: new entity-history-before-aggregation B family OPEN; direction ACTIVE, old package H retained, no empirical grant | Portfolio DM prepares its finite implementation-plus-one-pair investment as a distinct item; no repeat consultation or inferred grant |
-| Portfolio | New-direction discovery plus separate MGTAP T investment request accepted once by provider on the bound Portfolio conversation; generation active | Transport observes natural completion; designated DM intakes registration/investment/priority without treating T as new |
+| Portfolio | Complete immutable new-direction discovery plus separate MGTAP T response integrated at mainc869ecbb9; designated DM is performing full Portfolio intake | Apply conforming registration/investment/priority decisions while keeping MGTAP T separate from genuinely new directions |
 
 Direction chains5/5: ACVC, MGTAP, FSD, RCLE and FOLR DMs have resumed their next bounded object or
 proper-node direction step. Their latest allocations completed, but no Portfolio decision stopped
