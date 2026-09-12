@@ -18,6 +18,10 @@ Older pending/zero-active paragraphs below are dated evidence, not current statu
   1024 updates, 192 final episodes and 180224 ticks are complete; fixed unit 2 is
   proceeding. Monitor's per-handle observation command-wall total is unavailable,
   remains an explicit support-account unknown, and is not reconstructed by rerunning.
+  Unit1 component intake/evidence is integrated at `03053c42f`. Unit2
+  `acvc-fresh-dense-c01-11477-3fd9062d5` was accepted at04:52:15.804337Z;
+  direct Monitor adoption at04:52:30Z confirms running with that exact singleton
+  active set. Root forwarded adoption to the same DM; no terminal result is yet claimed.
 - Main accepted card/source/commands/launch as `0d3bc3257`, `0451da37a`,
   `3ed01fb83`, `2fadb1ddc`. Existing 12 focused checks and independent no-material-
   finding review are reused; no repeat scientific or verification invocation.
