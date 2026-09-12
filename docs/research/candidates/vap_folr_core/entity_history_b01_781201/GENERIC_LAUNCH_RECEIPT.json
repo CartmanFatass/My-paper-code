@@ -1,0 +1,33 @@
+{
+  "source_sha": "922a461fde867a8efe23a1563a969e6d2d08e258",
+  "execution_checkout": "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304",
+  "handle": "folr-entity-history-b01-781201-generic",
+  "prepared_at": "2026-09-12T23:37:05.265622+00:00",
+  "command_delivery": "PowerShell Git blob extraction at fixed922a then scp; initial remote lazy-blob read terminated before any scientific launch.",
+  "prior_status": {
+    "task": "folr-entity-history-b01-781201-generic",
+    "status": "not_found"
+  },
+  "command": [
+    "/usr/local/bin/agent-task",
+    "run",
+    "folr-entity-history-b01-781201-generic",
+    "/bin/bash",
+    "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_support/GENERIC.sh",
+    "922a461fde867a8efe23a1563a969e6d2d08e258",
+    "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304",
+    "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_generic"
+  ],
+  "launch_attempted_once": true,
+  "launch_exit": 0,
+  "launch_output": "Task 'folr-entity-history-b01-781201-generic' started in tmux session 'agent_folr-entity-history-b01-781201-generic'. Output: /home/wu/.agent-tasks/folr-entity-history-b01-781201-generic/task.log\n",
+  "after_status": {
+    "task": "folr-entity-history-b01-781201-generic",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3409032,
+    "uptime_seconds": 0,
+    "tmux_active": true
+  },
+  "support_command_wall_seconds": 0.0355804719729349
+}

@@ -1,0 +1,222 @@
+{
+  "object": "ACVC_CLUSTER_DEPLOYMENT_B01",
+  "grant": {
+    "main": "665f704f7",
+    "mapping": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/EXECUTION_MAPPING.md",
+    "item": "K"
+  },
+  "author_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+  "branch": "codex/acvc",
+  "input_sync_commit_exclude_from_root_cherry_pick": "a78ea1f3c338f507440063e2619b8098206e2210",
+  "master": 21457,
+  "evaluation_namespace": 31457,
+  "caps_seconds": {
+    "whole_supervised_task": 600,
+    "cumulative_runtime_support": 600,
+    "complete_charge": 1200
+  },
+  "planned_counts": {
+    "training_episodes": 512,
+    "rollouts": 256,
+    "optimizer_steps": 1024,
+    "training_team_steps": 131072,
+    "evaluation_episodes": 192,
+    "evaluation_team_steps": 49152,
+    "total_team_steps": 180224
+  },
+  "exposure_line": "One real DENSE actor/critic initialization, 655360 training actor rows and 1024 full-rollout Adam calls are admitted; retain machine-produced final parameter displacement relative to initialization scale. Zero initial/extra evaluation or training-F exposure.",
+  "projection": {
+    "native_seconds": null,
+    "support_seconds": null,
+    "law_record": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_READINESS_20260912.md#runner-law-projection-and-support",
+    "unknown_rates_no_calibration_required": true
+  },
+  "support": {
+    "known_invoked_seconds": 52.78188300009022,
+    "known_components": [
+      {
+        "stage": "grant read/fetch",
+        "seconds": 2.4233954
+      },
+      {
+        "stage": "focused rules/source and old-route read",
+        "seconds": 0.328311
+      },
+      {
+        "stage": "input synchronization commit",
+        "seconds": 0.6142371
+      },
+      {
+        "stage": "input synchronization push",
+        "seconds": 3.8983039
+      },
+      {
+        "stage": "initial card publication and diff check",
+        "seconds": 0.6511786
+      },
+      {
+        "stage": "initial source explicit stage",
+        "seconds": 0.1841789
+      },
+      {
+        "stage": "initial source commit",
+        "seconds": 0.496311
+      },
+      {
+        "stage": "initial source push",
+        "seconds": 4.4861023
+      },
+      {
+        "stage": "initial source revision read",
+        "seconds": 0.1621099
+      },
+      {
+        "stage": "initial route receipt read with harmless metadata-shape error",
+        "seconds": 0.2771586
+      },
+      {
+        "stage": "prior setup helper read",
+        "seconds": 0.1663452
+      },
+      {
+        "stage": "actual producer and prior full command read",
+        "seconds": 0.2853658
+      },
+      {
+        "stage": "review corrections diff/stage/commit",
+        "seconds": 0.6092188
+      },
+      {
+        "stage": "corrected source push/revision",
+        "seconds": 4.1448489
+      },
+      {
+        "stage": "independent initial and correction review, combined once",
+        "seconds": 1.1021165
+      },
+      {
+        "stage": "source setup phases through failed fixture, combined once",
+        "seconds": 25.637403300090227
+      },
+      {
+        "stage": "fixture parent repair and publication-only check, outer command once",
+        "seconds": 0.7818883
+      },
+      {
+        "stage": "current routing read",
+        "seconds": 0.1169454
+      },
+      {
+        "stage": "current facts/card read",
+        "seconds": 0.1663651
+      },
+      {
+        "stage": "command and ownership read",
+        "seconds": 0.0646443
+      },
+      {
+        "stage": "owner review and current audit read",
+        "seconds": 0.2126714
+      },
+      {
+        "stage": "technical acceptance publication and source-surface check",
+        "seconds": 0.4050799
+      },
+      {
+        "stage": "acceptance explicit commit",
+        "seconds": 0.6063044
+      },
+      {
+        "stage": "acceptance push/revision",
+        "seconds": 3.7287725
+      },
+      {
+        "stage": "original supervisor submission, outer local command once",
+        "seconds": 0.7677489
+      },
+      {
+        "stage": "read adjacent native admission once",
+        "seconds": 0.4648776
+      }
+    ],
+    "coverage": "Nonoverlapping known command/phase walls only. Preparation parent overhead after fixture error, unreturned edit/read time, client/provider/deliberation tails and future integration/collection/cleanup are unmeasured or pending. Nested check/review walls are not counted again. No complete cost claim or zero fill."
+  },
+  "source_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+  "acceptance": "ACCEPTED for the single planned original invocation; no scientific output created during checks",
+  "remote_worktree": "/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f",
+  "launch": {
+    "handle": "acvc-cluster-b01-e06b3d63f",
+    "execution_node": "hmasd-wsl-node",
+    "command": "cd /home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 BLIS_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/cluster_deployment_b01_task_time.txt timeout --signal=TERM --kill-after=1 595 bash experiments/candidates/acvc/cluster_deployment_b01/launch.sh e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+    "output": "temp/directions/acvc/exp/cluster_deployment_b01_20260912",
+    "supervisor": "/home/wu/.agent-tasks/acvc-cluster-b01-e06b3d63f",
+    "adjacent_admission": "temp/directions/acvc/cluster_deployment_b01_admission.json",
+    "whole_command_time": "temp/directions/acvc/cluster_deployment_b01_task_time.txt",
+    "deadline": {
+      "inner_s": 580,
+      "outer_TERM_s": 595,
+      "KILL_after_TERM_s": 1,
+      "native_cap_s": 600
+    },
+    "acceptance": "one unique submission; uncertain effect is reconciled on this handle without duplicate launch",
+    "source_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+    "command_publication_sha": "085dcd3c3daa58630fac2e64ee644af9d1a7d86c",
+    "submitted_utc": "2026-09-12T23:33:38.484298+00:00",
+    "uncertain": false,
+    "accepted": true,
+    "exit_code": 0,
+    "stdout": "Task 'acvc-cluster-b01-e06b3d63f' started in tmux session 'agent_acvc-cluster-b01-e06b3d63f'. Output: /home/wu/.agent-tasks/acvc-cluster-b01-e06b3d63f/task.log\n",
+    "stderr": "",
+    "wall_s": 0.5581011999747716
+  },
+  "monitor_adoption": null,
+  "status": "Original supervisor launch accepted once and adjacent memory admission passed; Monitor goal adoption pending; no terminal result accepted",
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-acvc-005.json",
+  "audit_row": "docs/research/portfolio/audit/2026-09-12.md#L116",
+  "stop": "one original invocation only; no retry/extra fit/panel/consultation",
+  "retention": "previous C01/B01/B02 evidence and shared checkout preserved; collect unique new checkpoint before scoped cleanup",
+  "remote_bundle": "/home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f.bundle",
+  "engineering_evidence": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/ENGINEERING_CHECKS.json",
+  "source_bundle_bytes": 120288727,
+  "protected_source_currentness": "Shared UCOPE/native/model/Binding/reuse source matched accepted main665f704f7; changed source only the new cluster wrapper/protocol/tests. Working source surface unchanged at command publication.",
+  "owner_review": "Current main owner/reviews query shows no new ACVC override; historical answered second-recast remains applied.",
+  "planned_launch": {
+    "handle": "acvc-cluster-b01-e06b3d63f",
+    "execution_node": "hmasd-wsl-node",
+    "command": "cd /home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 BLIS_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/cluster_deployment_b01_task_time.txt timeout --signal=TERM --kill-after=1 595 bash experiments/candidates/acvc/cluster_deployment_b01/launch.sh e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+    "output": "temp/directions/acvc/exp/cluster_deployment_b01_20260912",
+    "supervisor": "/home/wu/.agent-tasks/acvc-cluster-b01-e06b3d63f",
+    "adjacent_admission": "temp/directions/acvc/cluster_deployment_b01_admission.json",
+    "whole_command_time": "temp/directions/acvc/cluster_deployment_b01_task_time.txt",
+    "deadline": {
+      "inner_s": 580,
+      "outer_TERM_s": 595,
+      "KILL_after_TERM_s": 1,
+      "native_cap_s": 600
+    },
+    "acceptance": "one unique submission; uncertain effect is reconciled on this handle without duplicate launch"
+  },
+  "monitor_dispatch": {
+    "thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+    "tool": "send_message_to_thread",
+    "delivery": "accepted",
+    "instructions": "get_goal; continue matching unfinished goal or create without token budget; retain handle through accepted terminal delivery; actual goal state in MONITOR_ADOPTED; MONITOR_GOAL_COMPLETE to Root before empty-goal completion"
+  },
+  "updated_utc": "2026-09-12T23:35:05.765966+00:00",
+  "adjacent_admission": {
+    "assessed_at": "2026-09-12T23:33:38.792548Z",
+    "available_physical_bytes": 15627849728,
+    "captured_at": "2026-09-12T23:33:38.792237Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15627849728,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  }
+}
