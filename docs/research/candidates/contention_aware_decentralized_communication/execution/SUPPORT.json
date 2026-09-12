@@ -16,15 +16,27 @@
     "learned_initial_status_and_admission": 0.467894,
     "rr_submit": 0.4929342,
     "rr_initial_status_and_admission": 0.5493575,
-    "admission_receipts_collection": 1.0292282
+    "admission_receipts_collection": 1.0292282,
+    "launch_adoption_commit_push": 4.3850243,
+    "terminal_archive_collection": 0.8207094,
+    "terminal_evidence_download": 2.5917561,
+    "raw_checkpoint_paired_analysis": 2.0948497,
+    "intake_current_artifact_read": 0.3044503,
+    "intake_direction_technical_read": 0.267915,
+    "intake_live_control_read": 0.0895141,
+    "independent_unit_summary_owner_reviews": 0.5051123,
+    "supervisor_inventory_control_read": 0.8174066,
+    "supervisor_archive_collection": 1.0931076,
+    "reducer_skill_wall_read": 0.1855668,
+    "raw_reward_rng_packet_accounting": 0.2160469
   },
-  "selected_command_sum_seconds": 39.877762,
+  "selected_command_sum_seconds": 53.2492211,
   "additional_canceled_network_operation_observed_lower_bounds_seconds": {
     "non_login_git_fetch": 100,
     "non_login_promisor_checkout": 76
   },
-  "known_support_lower_bound_seconds": 215.877762,
-  "coverage": "partial lower bound; canceled command terminal tails and other read/edit/Git/agent/provider/Monitor/Root integration/collection/cleanup costs are not fully measured; overlap with different invoked commands is not elapsed critical-path addition",
+  "known_support_lower_bound_seconds": 229.2492211,
+  "coverage": "Partial support lower bound. Canceled-command terminal tails and additional read/edit/Git/agent/provider/Monitor/Root integration/final publication/cleanup costs are unknown or not fully measured; do not treat omissions as zero. Sum of invoked command wall is not elapsed study critical path.",
   "hard_support_cap_seconds": 900,
   "hard_native_cap_seconds": 1200,
   "hard_complete_cap_seconds": 2100,
@@ -32,7 +44,14 @@
   "observed_support_breach": false,
   "shared_registration_application": "charged once to ACPS, excluded from CADC; CADC-specific Root integration remains CADC support",
   "scientific_invocations_accepted": 2,
-  "scientific_invocations_completed": 0,
-  "native_cost": "both arm terminals/wall receipts pending; no savings available for support or successor",
-  "pending_cleanup": "owned local synthetic scratch deletion rejected before execution by runtime policy; no bypass"
+  "scientific_invocations_completed": 2,
+  "native_cost": {
+    "LEARNED": 195.0,
+    "RR": 180.34,
+    "measured_sum_seconds": 375.34,
+    "whole_chain_evidence": "GNU time from adjacent admission through child exit; supervisor terminal spans195s/180s at integer-second precision; final outer wrapper tails not separately resolved",
+    "cap_breach_observed": false,
+    "savings_fungible": false
+  },
+  "pending_cleanup": "Four exact remote terminal roots await Root integration/retention before scoped removal. Local creator synthetic scratch deletion rejected by runtime policy; no bypass."
 }
