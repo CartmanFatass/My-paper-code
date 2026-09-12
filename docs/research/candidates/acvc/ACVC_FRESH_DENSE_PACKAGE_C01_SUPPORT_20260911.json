@@ -752,5 +752,98 @@
   "native_completed_units": 5,
   "native_raw_command_wall_sum_s": 841.92,
   "known_native_plus_support_lower_bound_s": 1132.6832906000054,
-  "handoff": "No successor, new Pro, fit, diagnostic, child or discretionary deletion. This publication and relay follow the measured cutoff."
+  "handoff": "No successor, new Pro, fit, diagnostic, child or discretionary deletion. This publication and relay follow the measured cutoff.",
+  "resumed_finalization_20260912": {
+    "recorded_commands": [
+      {
+        "phase": "initial actual backend/default shell read",
+        "wall_s": 0.2327512
+      },
+      {
+        "phase": "initial clean direction checkout/Git and AGENTS read",
+        "wall_s": 0.1920709
+      },
+      {
+        "phase": "docs ownership, remote migration history and current-card path read",
+        "wall_s": 0.3148016
+      },
+      {
+        "phase": "scientific/owner skills and specification index read",
+        "wall_s": 0.3318955
+      },
+      {
+        "phase": "frozen card and intake read",
+        "wall_s": 0.2246753
+      },
+      {
+        "phase": "complete prior handoff intake read",
+        "wall_s": 0.1829569
+      },
+      {
+        "phase": "E0 and frozen source-acceptance record read",
+        "wall_s": 0.1910352
+      },
+      {
+        "phase": "accepted direction and evidence class/consumption passages",
+        "wall_s": 0.2289533
+      },
+      {
+        "phase": "fast-forward preserved published migration descendants",
+        "wall_s": 0.5871097
+      },
+      {
+        "phase": "read stored result summary and prior support account",
+        "wall_s": 0.0395837
+      },
+      {
+        "phase": "proportionality and engineering ownership passages",
+        "wall_s": 0.2372698
+      },
+      {
+        "phase": "scientific reading, communication and preservation pointers",
+        "wall_s": 0.2921344
+      },
+      {
+        "phase": "frozen inference foundations and already computed table",
+        "wall_s": 0.262778
+      },
+      {
+        "phase": "primary owner review, audit and route boundary",
+        "wall_s": 0.5906513
+      },
+      {
+        "phase": "read existing complete-primary flags and exact local retention inventory",
+        "wall_s": 0.4539493
+      },
+      {
+        "phase": "final receipt schema, mechanism synthesis insertion and current main identity",
+        "wall_s": 0.3387379
+      },
+      {
+        "phase": "verify retained archive/checkpoint digests and publish final execution metadata and audit rows",
+        "wall_s": 0.6701067
+      },
+      {
+        "phase": "write lower-bound resumed documentation support snapshot",
+        "wall_s": 0.1869466
+      },
+      {
+        "phase": "documentation/diff checks; final stdout cp1252 print failed after assertions",
+        "wall_s": 0.8524865
+      },
+      {
+        "phase": "bounded documentation check with UTF-8 stdout and final intake diff readback",
+        "wall_s": 0.3760646
+      }
+    ],
+    "known_recorded_command_wall_s": 6.7869584,
+    "coverage": "Sum of the listed tool-reported command wall, counted once. This is a selected measurable lower bound, not all resumed support: unlisted initial read/tool wall, patch tool elapsed, communication/provider/client/deliberation, prior handoff publication tail, this snapshot publication and later commit/push/relay/integration/cleanup remain outside this cutoff and are not zero. No new scientific or analysis invocation.",
+    "new_scientific_invocations": 0,
+    "new_primary_reductions": 0,
+    "new_test_invocations": 0,
+    "cutoff_utc": "2026-09-12T13:26:33.706537+00:00",
+    "known_native_plus_prior_support_plus_listed_resume_lower_bound_s": 1139.4702490000054,
+    "prior_cutoff_preserved": "2026-09-12T05:23:38.605338+00:00",
+    "finalization_authority": "OWNER_DIRECT 2026-09-12, explicit Root assignment of existing final intake and retention inventory; no new scientific work or budget."
+  }
 }

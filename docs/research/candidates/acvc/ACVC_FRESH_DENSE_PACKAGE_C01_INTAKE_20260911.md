@@ -1,6 +1,6 @@
-# ACVC C01 — component intakes and owner-directed handoff
+# ACVC C01 — final scientific intake and preserved component history
 
-**Current status:** All five units are collected/technically accepted, and the full frozen primary is complete with qualified JOINT_ABOVE_MEI. OWNER_DIRECT then stopped continuation. Full final scientific intake, decisions and DIRECTION synthesis remain unfinished. The valid complete frozen C meets its consumption condition; no repeat or successor follows. Earlier component text below is historical.
+**Current status, 2026-09-12:** Final scientific intake, prediction scoring and DIRECTION synthesis are complete under Root's explicit reassignment of the remaining C01 documentation. All five complete units support qualified **JOINT_ABOVE_MEI** under the unchanged frozen rule; C01 is consumed. No new fit, panel, primary reduction or Pro request was made. Root integration/retention and scoped cleanup remain pending. See the [final intake](#final-scientific-intake-2026-09-12) and [current Chinese brief](../../portfolio/owner/briefs/acvc/2026-09-12_fresh_dense_package_c01.md). The component intakes and owner-directed handoff below preserve their historical states.
 
 The historical component intake accepts **the first four units as complete components** of the frozen five-unit population. It does not accept or reject the C01 hypothesis and does not consume C01. [Result evidence](ACVC_FRESH_DENSE_PACKAGE_C01_RESULT_EVIDENCE_20260911.md) gives the actual rows, counts, receipts, adverse outcomes and preservation hashes against card §§2–7. The [Chinese owner brief](../../portfolio/owner/briefs/acvc/2026-09-11_fresh_dense_package_c01.md) reports the same incomplete state.
 
@@ -56,3 +56,91 @@ Local temp/directions/acvc/preparation/c01-20260911/ retains source.bundle (117,
 **Live state and costs:** All five handles are terminal/exit zero/tmux absent in collection receipts; Root reported final Monitor goal complete with active_set=[]. No live scientific process or launch remains; no additional polling/Monitor job is needed. Native inclusive charges sum855 s; raw command sum841.92 s. All native caps pass. The support account’s measured DM/review cutoff is partial, and subsequent publication/relay are separate; precise Monitor and other unknown costs are not reconstructed or set to zero. Full 1650/3000 s conformance is not certified. No saved allowance funds continuation.
 
 **Next owner/action:** Root integrates and accepts this preservation handoff, then determines any later assignment. Remaining steps are full intake from these existing results, DIRECTION/final-record updates and retention reconciliation before authorized cleanup. The original DM retains responsibility for preserved evidence and its five blocked bytecode targets; current owner instruction leaves all checkouts/evidence intact. No automatic restart, new Pro, fit or discretionary deletion follows.
+
+## Final scientific intake 2026-09-12
+
+### Authority, scope and what was checked
+
+OWNER_DIRECT 2026-09-12 authorized the new Root to resume coordination. Root explicitly transferred the original DM's unfinished C01 acceptance/records to `/root/dm_a_mx_acvc_resume`, in the existing Windows checkout `C:/Projects/HMASD-worktrees/codex-acvc`, branch `codex/acvc`. This completes the named five-unit result; it allocates no sixth fit, repeat, new object, consultation or deletion. The former stop and original incomplete-writing facts above remain historical. The direction branch was clean at `14288810ca7f9302064991281ae84a184bb7adf1` and advanced without rewriting history to its two already-published migration descendants, ending at `505d595e4`. The actual local backend is Windows/PowerShell 7.6.4, with Windows Git. Current receipt routing is read from Root's primary Windows checkout, not this branch's historical migration configuration.
+
+L0: complete the final English intake, accepted mechanism synthesis, existing prediction/owner records and retention inventory using the already-produced evidence. Owned paths are the C01 direction documents, this direction's Chinese brief and audit additions. Frozen source, endpoints, information, RNG, comparison, counts, intervals, budgets and raw outcomes are unchanged. Acceptance is an internally consistent final reading against card §§2–7 and evidence-spec §§4, 5.3, 6.2–6.3 and 11.8–11.10; stop after publication and Root handoff. Engineering Scope §4: **none needed**; no source or tests are added.
+
+The [E0](ACVC_FRESH_DENSE_PACKAGE_C01_RESULT_EVIDENCE_20260911.md), all five unit/collection records, [population analysis](fresh_dense_package_c01_20260911/population_analysis.json), [computed summary](fresh_dense_package_c01_20260911/result_summary.json) and [unit table](fresh_dense_package_c01_20260911/unit_table.csv) agree on complete status, no reported integrity issue, all five prospectively drawn m/q pairs and all 15 final panels. Frozen execution/reduction source is `3fd9062d5456a6b61a132a16ebd33a7099810143`; exact command publication is `f8fb97ac48f9bfe94b70785424f8862b44be252d`. Existing acceptance checked 512 training episodes, 1,024 ordered update records, the final checkpoint, C/F/dwell64 reset pairing, J=S/256 publication and full learner exposure per unit. Each preserved actual-node admission passed; each supervisor finished exit zero with tmux absent at collection. The local five archives and extracted final checkpoints remain available; the execution facts carry the present retention inventory and digest readback.
+
+Source acceptance and scientific acceptance are separate. The recorded source review found no material findings, and the 12 focused stub/synthetic checks passed before execution. The changed binding, frozen complete-fit reduction and dependent publication path were covered there. This final documentation task reuses those checks and the one already-completed primary analysis; it does not rerun the learner, native evaluation, analysis or tests. No issue found in the current records threatens reward, information, training, comparison or either primary measurement.
+
+### Frozen rule and complete observation
+
+The applied rule is verbatim from card §4:
+
+> For each primary use exactly `mean_r ± scipy.stats.t.ppf(.9875,4) * s_r/sqrt(5)`.
+
+> Both lower bounds **strictly greater than .01 J**: joint provisional support for both expected practical gains under the working model.
+
+The independent observation is **one fresh complete training fit plus its finite three-rule panel**. All five observations receive equal weight. The first outcome-blind iid namespace draw with replacement was retained without rejection, substitution, screening or redraw; all development fits remain outside this population. Within-unit paired worlds support the contrasts, while 64 evaluation episodes per arm do not create 64 independent training fits. Finite-panel noise is already in the across-unit variance; none was added twice or subtracted. The original analysis used t(.9875,4)=3.495405932516977 once, after all five units were complete.
+
+| Unit, m/q | F-C mean J | F-dwell mean J |
+|---|---:|---:|
+| 1, 12794/23947 | +0.093662236170 | +0.072263725773 |
+| 2, 11477/24930 | +0.110783589817 | +0.084918936207 |
+| 3, 18150/21370 | +0.096548149142 | +0.058262606480 |
+| 4, 12604/21030 | +0.103648259406 | +0.070756277866 |
+| 5, 14295/23946 | +0.074937608893 | +0.039467298661 |
+
+| Primary | Equal-fit mean J | Prespecified interval | Component reading |
+|---|---:|---|---|
+| F-C | +0.095915968685 | [0.074850455698, 0.116981481673] | ABOVE_MEI |
+| F-dwell | +0.065133768997 | [0.038286385582, 0.091981152413] | ABOVE_MEI |
+
+Both lower bounds strictly exceed the .01 J margin, so the complete reading is **JOINT_ABOVE_MEI**. This is provisional, model-dependent support for expected practical gains of the complete F execution package over both attained comparators, on the fixed five-UAV/fifty-user H256 task under the prespecified fresh-DENSE training/evaluation law. The intervals have 97.5% two-sided marginal and at least 95% simultaneous coverage **only under the declared iid-normal model for complete fit-panel means**. Five fits do not establish that model's calibration for the actual neural-training population. No stronger stable, distribution-free, transfer, safety or formal UAV-entry claim is accepted. The valid complete observation consumes this explicitly frozen C object; the prior delay in writing neither changes the rule nor grants a repeat.
+
+### Mechanism reading, strongest support and contradiction
+
+Native local loss of an unambiguous retained low-SINR user anchor, together with a proposed away-motion, can trigger an altered actual action. Each UAV uses its own permitted observation/history and recurrent proposal. F reverses its own prior realized displacement; dwell suppresses motion on its own predicate; C sends its own proposal. Subsequent joint geometry changes service/interference and later private observations. The centralized critic participates only in training. This is a complete execution-package comparison after one fixed learner path per fit, not independently trained F and dwell policies or information supplied to execution by the critic.
+
+The strongest support is the prespecified complete-population gain over **both** C and a useful simpler dwell, including all five intact fits and the weaker fifth fit. Mean C/F/dwell J is 0.159028125625/0.254944094311/0.189810325314. Dwell-C is descriptively +0.030782199688 J, so stopping motion itself remains useful; it does not attain F's observed mean. This narrows the simple explanation that this own-predicate dwell package attains the same expected practical benefit under the working model.
+
+The strongest direct counterexamples remain 17/320 adverse F-C pairs and **46/320 adverse F-dwell pairs**, with minima -0.091679017845 and **-0.113308313985 J**. Dwell-C has 83 adverse pairs, minimum -0.177107177395 J. These are retained observations, not exclusions or independent population replicates. F and dwell applied interventions 37,100 and 25,949 times on unequal private histories. The shared predicate definition therefore does not match cue timing or dose; C's zero cue counters are unmeasured incidence. The surviving alternative is a mixture of motion suppression, retrace displacement and ensuing recurrent/teammate trajectory feedback. This result does not isolate pure retrace, prove history necessity, or identify an optimal controller. No tuned same-information headroom record exists.
+
+Scientific-reading use: FOUNDATIONS §6 and `topic-notes/04_EMPIRICAL.md` (randomness hierarchy and complete-method versus mechanism passages) support the chosen complete-fit-panel unit and this package-level wording. Concrete assumption: independent outcome-blind namespace draws and separate training-state lifetimes implement the declared sampling law; numeric seed labels alone are not proof of physical independence. Concrete limit: the normal working model is unvalidated, and private cues/trajectories differ between rules. This preserves the frozen inference and narrows attribution without demanding a normality pilot, cue-matching prerequisite, stronger class or new literature search. No new mechanism/comparator/source choice is made.
+
+### Predictions, exposure, costs and owner flags
+
+The stored prospective forecasts are scored against the frozen strict-pass events, using the arithmetic already saved in `result_summary.json`:
+
+| Event | Prior probability | Observed event | Brier score |
+|---|---:|---:|---:|
+| F-C strict pass | .80 | 1 | .04 |
+| F-dwell strict pass | .65 | 1 | .1225 |
+| Joint strict pass | .60 | 1 | .16 |
+
+Mean Brier is .1075. These are three related forecasts of one study, not three independent calibration observations; no calibration claim follows. Owner prediction: **not taken (unattended)**. The live primary owner-console `reviews --json` returned `[]` at this finalization boundary; the audit's ACVC rows contain no unapplied owner override. No owner reply is invented or marked answered. This ordinary valid-result intake needs no new P1/P2 item; existing promotion, pre-freeze and card items remain historical and available.
+
+The machine-derived exposure line is retained in the execution facts: **5 fits; 2,560 training episodes; 960 evaluation episodes; 901,120 native team steps; 5,120 optimizer/backward/update calls; 5 final checkpoints; 15 post-fit loads; 0 new fits/episodes/primary reductions in this finalization.** All 512 training returns per fit and five curves are published. Visual 32-episode means select no endpoint. No extra model, calibration, evaluation panel, fit or primary analysis was invoked after the handoff.
+
+Raw command wall sums to 841.92 s; complete inclusive native charges are 170/171/178/169/167 s, totaling **855 s**. Every unit is below its 270 s cap and the sum is below 1,350 s; peak recorded RSS is 550,036 KiB. The pre-handoff measured DM/review support lower bound was 277.6832906000054 s; the [support account](ACVC_FRESH_DENSE_PACKAGE_C01_SUPPORT_20260911.json) separately appends known resumed-documentation command wall. It remains incomplete for precise Monitor, Root, Transport, client/provider and deliberation work, including the later integration/cleanup tail. **Full 1,650 s support and 3,000 s complete-cap conformance is unestablished.** Unknown work stays unknown and `resources_unmeasured` stays visible. Missing cost coverage does not invalidate this non-resource primary under §11.8.7. No source-budget breach was recorded; the original five misplaced bytecode files remain a distinct cleanup defect. Native savings fund no further work.
+
+### Decisions this final intake produces
+
+1. **Technical acceptance, object tier.** Options: (a) accept all five intact components and their preserved complete primary; (b) return a concrete dependent integrity defect. Recommend/select (a): the required quantities and receipts agree, and no dependent defect is found. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** Incomplete resource accounting remains an engineering limitation, not a new measurement failure.
+2. **Frozen scientific reading, object tier.** Options: (a) accept qualified JOINT_ABOVE_MEI and record C01 consumed; (b) substitute a stronger stable/causal claim; (c) change the rule or repeat this C. Recommend/select (a), applying the verbatim rule to every fixed unit. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** Raw data, adverse worlds, predictions and historical handoff stay unchanged.
+3. **Record completion and retention, object tier.** Options: (a) finish the existing records and return the exact inventory to Root with all evidence/checkouts intact; (b) delete before retention reconciliation or infer new allocation. Recommend/select (a), as expressly assigned. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** Scientific intake is complete; operational closeout awaits Root acceptance/integration and a scoped removal assignment. The historical policy rejection is neither retried nor bypassed.
+4. **Next object, direction tier; allocation/lifecycle, Portfolio tier.** No local disposition or next object is selected. The original `em:acvc:convergence` node is the authority for a next object after consumed C; any new investment/capacity/lifecycle decision belongs to `portfolio:cross_direction`. The two consultations in C01's named allocation are already used, so this documentation assignment prepares no replacement request and dispatches no Pro. Root receives the completed evidence and this decision-ready need. ACVC's recasts2/lowest-contention status and lifecycle are unchanged. The next empirical discriminator must be selected and funded at the proper node; C01 does not itself require an extra diagnostic or authorize a sixth fit.
+
+Owner flags: model-qualified inference, adverse native outcomes and attribution alternatives, absent tuned headroom, unestablished inclusive support conformance, and retained cleanup residue. No material critic dissent, close-call, new recast or Portfolio recommendation is manufactured. The [2026-09-12 audit](../../portfolio/audit/2026-09-12.md) records the three ordinary object-tier decisions.
+
+### Exact retention and cleanup handoff
+
+The [execution facts](ACVC_FRESH_DENSE_PACKAGE_C01_EXECUTION_FACTS_20260911.json), field `finalization_20260912`, enumerate current local paths/bytes/digest matches and every recorded remote archive/supervisor. Local existence and archive/checkpoint digests were read for retention; no scientific rerun or remote polling was needed. Remote retained status is the last accepted collection/handoff observation, not a new remote inventory. No deletion was attempted in this assignment.
+
+| Surface | Retention and prospective removal boundary |
+|---|---|
+| `C:/Projects/HMASD-worktrees/codex-acvc`, `codex/acvc` | Retain the shared authoring checkout and all published source/evidence. It is the active DM publication/acceptance checkout; not a disposable execution copy. Root owns later direction-worktree consolidation. |
+| `temp/directions/acvc/exp/fresh_dense_package_c01_20260911_collection/` under that checkout | Retain the five `collection/unit_<m>.tar.gz` archives (m=12794,11477,18150,12604,14295), extracted `unit_<m>/final_DENSE.pt`, full raw results, receipt/unit records and the already-computed population JSON. Checkpoints are not in the readable Git evidence directory. Before any removal, Root/assigned DM must preserve and verify a durable recovery archive containing these unique bytes. |
+| `temp/directions/acvc/preparation/c01-20260911/` | Retain `source.bundle` (117,759,064 bytes), `preparation.sh` (878 bytes), `prepare.py`, `preparation.json`, `handoff_support_components.json` and five `launch_unit_<m>.json` receipts until Root confirms recovery preservation. The published-source bundle is then a candidate for duplicate removal; source/evidence references must survive. |
+| `/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5` | Recorded detached source/execution checkout, all units terminal. Candidate for Root-authorized removal only after source, checkpoints, results and receipts are independently preserved; confirm both disk and Git registration absence when actually removed. |
+| `/home/wu/hmasd-inputs/acvc-fresh-dense-c01-3fd9062d5.bundle` and `/home/wu/hmasd-inputs/acvc-fresh-dense-c01-<m>-3fd9062d5-collected.tar.gz` | Recorded source bundle and five exact archives. Preserve unique evidence first; later scoped duplicate removal may accompany the execution checkout. |
+| `/home/wu/.agent-tasks/acvc-fresh-dense-c01-<m>-3fd9062d5` for those same five m values | Five recorded terminal supervisor directories. Preserve terminal/admission/time/source receipts before scoped removal; no accepted live handle remains and no Monitor adoption is requested. |
+| Five generated `.pyc` paths named in `cleanup.generated_bytecode.paths` | All five are still locally present. The original runtime rejected removal before process creation: `CreateProcess Rejected(... rejected: blocked by policy)`. Current DM has inherited this creator-cleanup responsibility, without changing the rejection record or trying an alternate executor. The test's separate owned scratch was previously removed. |
+
+Current DM owns these retained ACVC evidence/creator-cleanup obligations through Root's integration/retention reconciliation and later named cleanup event. No historical blocked preparation, other direction, shared source or evidence root is in a deletion batch. Root acceptance, preserved unique bytes and actual absence checks remain necessary to call cleanup complete; they do not reopen C01 or extend its scientific budget.
