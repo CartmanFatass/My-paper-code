@@ -10,7 +10,7 @@ Read current assignment, applicable AGENTS/docs instructions, all22 latest DIREC
 
 The concrete assumption is that an accepted intake accurately describes its bound execution at its stated limits. Independent evidence remains complete fits/pairs, not episodes/checkpoints or native children. This author did not repeat raw-return arithmetic, observe provider Send or audit all remote process state. Original-DM ACVC proposal is explicitly advice, not an accepted next-object decision. The exact missing training-F hook and proposal-versus-action PPO requirement limit that option. CBSC's missing treatment primary supports a specific question but does not certify a healthy path. These assumptions and limits change the proposal and are preserved in SCIENCE_BRIEF.
 
-Current control/evidence updates were directly read from published Git c8ed4714c90af7879dc4d315e036186cde438b93; ACVC's complete original-DM note was read at c717996f3f2654e044fac05f9dc6a5d87d5b1369. The current publication does not preserve the earlier no-Send/empty-Monitor snapshot as live state.
+Current control/evidence updates were directly read from published Git cc7191717b5bdeb6e7d47f16d96357ba9e61cb60; ACVC's complete original-DM note was read at c717996f3f2654e044fac05f9dc6a5d87d5b1369. The current publication records FOLR two exit0 terminals with pending DM intake, VNFC fresh exit139/no primary with current DM collection/diagnosis, RCLE accepted generation, and Monitor terminal delivery/empty completed goal. Earlier no-Send or still-running claims are not live state.
 
 ## What was checked
 
@@ -27,7 +27,7 @@ Machine-generated FACTS reconciles22=15ACTIVE+7PARKED, latest Root-reported3 adv
 
 ## Publication, return and remaining risk
 
-New Transport01a095ca-7b4a-7940-8acf-fca1b52c784d and Relay01a095ca-8676-74e1-b78c-ea459d41e905 are current Root-reported READY. Portfolio conversation6a9c109e-b264-83e8-a78b-f9ea1b767b7b is preserved. This author prepares only; Root loads the exact published HANDOFF and dispatches once, Transport returns to Root, which resumes this same native author with the immutable complete response. No Pro Send or new experiment was performed. FOLR launch/Monitor and RCLE generation acceptance are explicitly Root-reported at current mainc8ed4714c, not independently observed by this author. The new Portfolio request remains unsent.
+New Transport01a095ca-7b4a-7940-8acf-fca1b52c784d and Relay01a095ca-8676-74e1-b78c-ea459d41e905 are current Root-reported READY. Portfolio conversation6a9c109e-b264-83e8-a78b-f9ea1b767b7b is preserved. This author prepares only; Root loads the exact published HANDOFF and dispatches once, Transport returns to Root, which resumes this same native author with the immutable complete response. No Pro Send or new experiment was performed. FOLR/VNFC terminal/Monitor facts and RCLE generation acceptance are explicitly Root-reported at current maincc7191717, not independently observed by this author. The new Portfolio request remains unsent.
 
 A full Pro response must be checked against this question and current owner/spec requirements. A concrete conflict returns unchanged to the same node; it does not transfer authority locally. Later direction returns can change actual capacity without rebinding this question. Resource forecasts for changed paths and complete documentary effort remain unknown; suggested ceilings are new prospective asks, not evidence that an invocation will fit. Shared active checkout and original raw evidence remain retained; no new experiment/test scratch was created by this preparation.
 

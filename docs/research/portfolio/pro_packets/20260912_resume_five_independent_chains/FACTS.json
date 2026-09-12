@@ -169,11 +169,11 @@
       "vap_folr_core",
       "variable_n_fleet_churn"
     ],
-    "root_reported_accepted_running_experiments": 2,
+    "root_reported_accepted_running_experiments": 0,
     "accepted_rcle_generation": true,
     "vacancies_at_root_report": 2,
     "additional_execution_ready_existing_scientific_allocations_found": 0,
-    "snapshot_source": "Root latest direct return and published main c8ed4714c; FOLR two Monitor-adopted running handles count once, VNFC accepted repair/continuation, RCLE accepted generation; ACVC authoring complete no longer counts",
+    "snapshot_source": "Root direct return and published main cc7191717: FOLR two exit0 terminals under original-DM collection, VNFC fresh terminal exit139 under original-DM collection/bounded diagnosis, RCLE accepted generation;3 active direction chains only while those actual activities persist",
     "root_reported_advancing_pro_directions": [
       "roster_consistent_latent_exploration"
     ],
@@ -257,7 +257,33 @@
     "acvc_question_note_commit": "c717996f3f2654e044fac05f9dc6a5d87d5b1369",
     "acvc_question_note_path": "docs/research/candidates/acvc/ACVC_POST_C01_DIRECTION_QUESTION_20260912.md",
     "vnfc_accepted_repair_main_commit": "91c16cb06",
-    "vnfc_actual_state": "Root accepted owned-value repair after relevant independent256/256 allocator-debug check; existing conditional fresh pair continuing; no new primary received"
+    "vnfc_actual_state": "Fresh vnfc-b03-credit-20260912-01 at b93329b3 terminal exit139 after105s, round35/192 transitions/32 optimizer steps reported, no final primary or score. Same DM collecting/quarantining and bounded relevant diagnosis; no automatic retry. Earlier repair acceptance remains a historical technical fact.",
+    "folr_terminal_fact": {
+      "retain": {
+        "exit_code": 0,
+        "supervisor_wall_seconds": 852,
+        "logged_work_seconds": 818.712
+      },
+      "learned_event": {
+        "exit_code": 0,
+        "supervisor_wall_seconds": 899,
+        "logged_work_seconds": 864.776
+      },
+      "state": "Original DM collection/scientific intake pending; terminal exit0 is not technical/scientific acceptance",
+      "monitor": "terminal notices delivered, active set empty, goal completed"
+    },
+    "vnfc_terminal_fact": {
+      "execution_source_short_sha": "b93329b3",
+      "handle": "vnfc-b03-credit-20260912-01",
+      "exit_code": 139,
+      "reported_wall_seconds": 105,
+      "reported_round": 35,
+      "reported_transitions": 192,
+      "reported_optimizer_steps": 32,
+      "final_primary": null,
+      "scientific_score": null,
+      "automatic_retry": false
+    }
   },
   "prepared_at_utc": "2026-09-12T13:48:08.326767+00:00",
   "current_input_integration_sha": "24f5504aa35cbf027270420c8c966f690b3136af",
@@ -303,5 +329,5 @@
       "condition": "separately selected by original Convergence; valid proposal-versus-executed-action PPO semantics and relevant independent review; no new cost experiment"
     }
   },
-  "current_control_sha": "c8ed4714c90af7879dc4d315e036186cde438b93"
+  "current_control_sha": "cc7191717b5bdeb6e7d47f16d96357ba9e61cb60"
 }
