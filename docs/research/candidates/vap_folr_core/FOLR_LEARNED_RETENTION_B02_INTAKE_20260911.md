@@ -2,8 +2,10 @@
 
 ## Current state and assignment
 
-Both arms are accepted, running and separately Monitor-adopted; final results and intake
-remain pending. No performance polarity is assigned. Root forwards Portfolio
+Both arms are complete and technically accepted. The unchanged primary is -1.76953125,
+RETAIN_ABOVE_MEI. The first learned gain did not recur. Remote cleanup is complete;
+preserved local duplicates remain policy-blocked.
+Earlier preparation and launch sections below preserve their historical state. Root forwards Portfolio
 conformance PASS for option P at response `41c46303f66005f74a18dccf45974d99771b155b`,
 `docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md`
 §§1,3. The exact source-grounded new [B02 card](FOLR_LEARNED_RETENTION_B02_SCIENCE_CARD_20260911.md)
@@ -108,3 +110,156 @@ or repeat a run without terminal evidence; reject it. Owner-delegated decision
 (unattended,2026-09-03 instruction): accept the handover. Root integrates these published
 records; neither launch nor adoption is scientific acceptance. The next action is terminal
 collection of the same handles, not a new invocation or consultation.
+
+## Completed result against the card
+
+Both original handles finished with exit0. Root forwarded the terminal facts after
+Monitor persistence repair; this altered neither source nor invocation identity.
+Collection compared20 raw file digests (9356264 bytes) and read the committed command,
+source2b22270b3b076df60f4afd3203c3f09aeab3b98b, actual summaries, supervisor records,
+adjacent memory/time receipts and saved checkpoints. Both exact arms/seeds7810/107810,
+5000 full training episodes/100000 ticks,4969 RMSprop steps and128 final episodes/
+2560 ticks match the card. Each ordered128-return array is finite and its NumPy mean
+exactly matches the publication. The unchanged source path retains CPU FP32; both runtime records retain Torch1/1,
+Torch2.7.0+cu118 and NumPy1.26.3. Source was unchanged from the accepted law.
+
+Saved actor/mixer/target/optimizer tensors are finite, each optimizer state reaches4969,
+and final actor/mixer targets equal their online copies at episode5000. RETAIN has
+100614 actor coefficients; LEARNED_EVENT has100743, including the declared129 gate
+coefficients. Gate parameter displacement from zero/log99 isL2 1.275477253; its weight
+norm is1.259445931 and bias moves4.595119953 to4.796709061. Both gate optimizer states
+contain4969 steps and nonzero square averages. These are readback facts, not proof
+that useful history was selected. The law received48158 training/1451 final survivor-event
+operations, with no full survivor reset. Their gate-factor distribution was not measured.
+All collection analysis reads recorded bytes; it constructs no actor, native trajectory
+or optimizer and performs no additional training or evaluation.
+
+### Primary rule, verbatim
+
+> d_LR >= 1: LEARNED_EVENT_ABOVE_MEI; d_LR <= -1: RETAIN_ABOVE_MEI; otherwise: WITHIN_MEI. An incomplete or untrustworthy primary has no paired performance polarity; preserve independently trustworthy facts.
+
+| Quantity | RETAIN | LEARNED_EVENT |
+| --- | ---: | ---: |
+| Mean of all128 final native returns |6.290546875|4.521015625|
+| Conditional episode SD |7.001416427|8.289538121|
+| Changing-policy mean over5000 training episodes |-3.255350000|-3.772240000|
+| Training survivor-event operations |0|48158|
+| Final survivor-event operations |0|1451|
+
+**d_LR=-1.769531250**, so the prospective inclusive absolute1 rule returns
+**RETAIN_ABOVE_MEI**. The changing-policy training mean also favors RETAIN by0.516890;
+it is separate context, not the final-policy estimand or a pre/post learning gain.
+The result is a native learned-package comparison; no local/proxy gain substitutes for it.
+
+One matched-initialization training pair is this object's independent unit. The current
+scientific-tools helper received exactly two endpoint rows for training seed7810 and
+returns one difference with null training-run SD. The128 evaluation rows are conditional
+samples, not128 fits; equal labels do not establish matched post-action traffic worlds.
+No paired-world causal interval or seed-population standard error is inferred.
+
+### Bounded interpretation and previous evidence
+
+The first learned pair remains+1.763359375 LEARNED_EVENT_ABOVE_MEI; this second pair
+is-1.769531250 RETAIN_ABOVE_MEI. The first gain did not recur in the new training
+history. Opposite signs weaken an unqualified learned-retention advantage; they neither
+establish stable harm nor prove equivalence, including by numerical cancellation.
+There is no positive-seed quota, required further pair or retrospective change to either
+card. Both complete outcomes remain available for a later investment decision.
+
+Generic event-aware RETAIN already has the same legal local input/history and adaptive
+GRU gates. The extra gate may alter finite optimization and partner/trajectory co-adaptation,
+but these two outcomes do not isolate adaptation from0.99 initialization, added capacity
+or useful-memory attenuation. Gate movement and event counts do not identify that cause.
+Old fixed-half+1.56546875/-4.293046875 are different-law context, not two more replications
+of the learned gate. Their narrow pause is unchanged. No tuned same-information headroom,
+original-CAMA superiority, transfer, C or UAV conclusion follows.
+
+### Predictions, cost and scientific reading
+
+B02's WITHIN_MEI/low-confidence forecast is **missed**; owner prediction remains
+**not taken**, with no unapplied review or audit owner override at this boundary.
+The valid-result Chinese brief is linked below.
+
+Whole GNU-time admission-through-exit clocks are895.43s RETAIN and920.56s LEARNED_EVENT,
+sum1815.99s; both1800s arm caps and native3600s pass. Nested runner clocks
+895.005742964/920.181053391 and coarse supervisor895/920s are overlapping measures,
+not extra work. Supervisor status uptime continues increasing after finish and is not
+terminal duration. The overlapping study spans981s; summed native user/system CPU
+work is1818.45s. Whole peak RSS664164/671944KiB and runner peaks644428/647244KiB describe
+different windows. The25.13s arm-wall gap is not an isolated gate-overhead measurement.
+
+Known invoked support is recorded in the machine summary. It includes0.7s for each
+adoption and one **unsplit1.0s terminal query covering both FOLR arms plus FSD**.
+That shared query must not be added again when combining direction accounts.
+Unitemized authoring, interim Monitor/persistence repair, Root integration and later
+publication/cleanup remain unknown. Native caps pass; complete support300/total3900
+conformance is not certified, and missing telemetry does not establish a breach.
+resources_unmeasured applies to complete support, not the trustworthy native return facts.
+No new Section4 machinery or source/test Section5 breach was found.
+
+Current Evidence Spec and scientific-reading sources match the accepted versions.
+Reuse FOUNDATIONS §§2-4,6 and the empirical topic, plus verified CAMA source passages
+already cited by the card. The concrete assumption is that additional same-information
+gating can change finite joint optimization; the valid opposing result limits its
+observed recurrence. The evidence does not identify a new mechanism or a cause for
+the sign reversal, so no unsupported explanation or extra literature audit is substituted.
+
+## Decisions this intake produces — completed result
+
+1. **Object / acceptance.** Options:(a) accept the complete trustworthy B and apply
+the unchanged RETAIN_ABOVE_MEI branch; (b) quarantine a demonstrated dependent defect;
+(c) declare stable harm or equivalence. Recommend and execute(a): technical PASS and
+a bounded second-pair native loss for the gate. Owner-delegated decision
+(unattended,2026-09-03 instruction): (a). Owner flags: opposing learned-pair signs and
+incomplete support accounting; neither invalidates a trustworthy B primary.
+2. **Object / closeout.** Options:(a) preserve unique source, terminal and control/
+analysis evidence, then remove exact completed execution and redundant owned scratch;
+(b) retain only for an actual preservation or live-use dependency. Recommend(a), applying
+verified preservation before removal. Root accepts integration/retention and reclamation;
+the shared authoring checkout stays in use. Actual cleanup receipts follow below.
+Owner-delegated decision (unattended,2026-09-03 instruction): (a).
+3. **Allocation boundary.** The newly selected one-pair allocation ends at this full
+intake/closeout. No third pair, seed search, control, top-up, retry, consultation or
+successor is selected. The learned family remains opened; there is no local family
+PARK/recast or Portfolio disposition. A later separately selected independent unchanged
+pair could further measure recurrence, but these opposing signs do not require one.
+The next investment choice belongs to its proper node, without changing this result.
+
+[Chinese owner brief](../../portfolio/owner/briefs/vap_folr_core/2026-09-11_FOLR_LEARNED_RETENTION_B02.md)
+
+## Preserved evidence, actual cleanup and final boundary
+
+The exact20-file terminal archive has8499381 bytes and SHA256
+65598d924da86f34edab66197f45bc3873cbfaf6847ee0531b81fd05feac39cc.
+The separate17-member control/analysis archive has19429 bytes. Both archives and all
+member digests were verified before removal; preservation_receipt.json records the
+full member maps. Source2b22270b3b076df60f4afd3203c3f09aeab3b98b is retained in local
+and remote refs/archive/folr-learned-retention-b02-20260911. Retained evidence is under
+temp/directions/vap_folr_core/exp/learned_retention_b02_retained_20260911 in the shared
+direction checkout, including raw checkpoints, returns, analysis and actual receipts.
+
+The remote cleanup inventory found8 noncache runtime files, all preserved, one
+regenerable cache, clean tracked source and both finished/exit0 supervisors without
+live sessions. All20 source-file digests matched again before removal. The exact remote
+execution checkout and both completed supervisor directories were removed at
+2026-09-12T00:11:39Z; disk absence of all3 and worktree-registration absence are verified.
+No other checkout or task root was targeted.
+
+Automatic approval review rejected the guarded native PowerShell removal of these
+two redundant local B02 directories before CreateProcess with “blocked by policy”:
+temp/directions/vap_folr_core/exp/learned_retention_b02_collected_20260911 and
+temp/directions/vap_folr_core/exp/learned_retention_b02_control_20260911.
+No shell command in that rejected request executed. Both directories remain present
+and preserved; no alternate method or second removal attempt was used. The rejection
+changes neither scientific polarity nor exposure. Old B01 policy-blocked paths were
+not targeted. This DM retains the exact B02 cleanup responsibility if the restriction
+changes; Root accepts integration/retention and the completed remote reclamation.
+The shared authoring checkout remains through Root's integration/retention event.
+
+The final known support snapshot is 47.6054458 seconds, for one valid B02 result;
+native1815.99 seconds plus known support is 1863.5954458 seconds. It includes the
+unsplit shared Monitor query once; unitemized terms remain unknown, so the complete
+300/3900 certificate is unavailable. Later publication work is not claimed free.
+The P2 card item20260911-folr-003 is traced through the owner CLI to the actual
+PRO_FINAL / OWNER_DELEGATED allocation and applied intake, without an invented owner reply.
+No new fit, control, top-up, consultation, family disposition or Portfolio action is selected.

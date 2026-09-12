@@ -78,5 +78,15 @@
     "verdict_text": "Recommend and execute(a). Owner-delegated decision (unattended,2026-09-03 instruction): (a).",
     "source": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_SCIENCE_CARD_20260911.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T00:09:32+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "已完整执行新7810配对并接受原生结果：学习门减保留=-1.76953125，进入RETAIN_ABOVE_MEI；保留首轮正结果，本次不追加后继。清理按入库记录执行。"
+    }
+  ]
 }
