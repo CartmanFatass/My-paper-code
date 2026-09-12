@@ -222,3 +222,10 @@ investment route; whole FOLR continuity remains active.
 Owner trace applied E in item 20260912-folr-002; current branch audit rows are
 67 (conformance), 68 (PRO_FINAL OPEN) and 69 (routed investment need).
 These rows select no Portfolio allocation.
+
+The acceptance/application stage was published and pushed at
+2d95d09b74f311c52122ebd0abc991ac261d5eb4. Issue15 now identifies the accepted
+OPEN, exact immutable response and this full intake; ISSUE_INTAKE_RECEIPT.json
+confirms direct readback of the scoped current body. No response or delivery
+comment was overwritten. This closes documentary intake and hands the named
+investment need to Root; it does not end FOLR direction continuity.
