@@ -15,6 +15,7 @@
 | `pytest.ini`、`tests/AGENTS.md`、`CLAUDE.md` | 测试入口使用明确环境与本次调用的独立临时目录；原 pytest 发现规则和禁用 cache 设置不变。 |
 | `.claude/settings.json` | 现有规则使用相对路径，保留原内容。 |
 | Git 项目配置 | 未发现 `core.worktree`、`core.hooksPath`、`core.sshCommand` 或 include 路径覆盖；所有工作树的 Git 元数据已指向 native main。 |
+| Git 换行读取 | 收尾时在 native 仓库本地设置 `core.autocrlf=input`，24 份日志的 Git blob 与磁盘字节均未改变，纯 CRLF/LF diff 已清除；见 `WSL_COPY_AND_GIT_20260912.md`。 |
 | `environments/`、`requirements/` | 新 Linux 环境有独立版本清单和重建命令；旧 Windows/GPU 导出及 win-64 conda lock 保留其原始用途。 |
 
 18 个维护中的 checkout 共解析 243 份 `.codex` 与能力目录 TOML，均成功；所有新入口
