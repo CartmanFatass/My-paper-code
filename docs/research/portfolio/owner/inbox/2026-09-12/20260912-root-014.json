@@ -29,7 +29,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "原作者建议，Portfolio 决定，未执行投资或停放。",
   "evidence": [
     "docs\\research\\portfolio\\pro_packets\\20260912_cluster_entity_investment\\SCIENCE_BRIEF.md"
@@ -99,6 +99,14 @@
       "record": "docs\\research\\portfolio\\pro_packets\\20260912_cluster_entity_investment\\PREPARATION_INTAKE.md",
       "state": "planned",
       "summary": "Root指定作者准备当前独立Portfolio问题；建议未成为拨款/生命周期决定，不等待owner回复。"
+    },
+    {
+      "at": "2026-09-12T23:04:56+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/INTAKE.md",
+      "state": "applied",
+      "summary": "完整PRO_FINAL已验收并记录K/E新投入：K600 native/600 hard support/1200complete；E Generic1800/BANK3000/native4800/support1200/complete6000、每臂5000/128和±1。拨款决定已记录，Root派发和DM代码/实验验收仍是独立后续事实；无历史余额。"
     }
   ]
 }
