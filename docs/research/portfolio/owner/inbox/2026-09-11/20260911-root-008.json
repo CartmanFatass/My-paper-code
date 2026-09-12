@@ -117,5 +117,15 @@
     "verdict_text": "建议S+A+P+N：FSD新做一对原样B，有条件资助ACVC完整五次训练路径，FOLR一次零数值家族问题，MGTAP维持不追加。当前只是建议，无本地Portfolio选择。",
     "source": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T02:15:18+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md@05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+      "record": "docs/research/portfolio/decisions/2026-09-11-rolling-capacity-after-b02.md",
+      "state": "planned",
+      "summary": "此提案已由同一绑定请求的完整Pro裁决解决：S+A+P+N。最终决定项20260911-root-009承接实际应用记录；保留本项历史，不虚构owner回复或派发。"
+    }
+  ]
 }
