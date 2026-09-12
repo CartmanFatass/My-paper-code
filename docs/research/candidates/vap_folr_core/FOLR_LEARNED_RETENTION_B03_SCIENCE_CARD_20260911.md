@@ -21,9 +21,12 @@ checkout at the original source SHA. Materialize the original ten files plus
 Static import closure and scoped source materialization are the changed contract.
 See [resumption facts](evidence/2026-09-12-folr-learned-retention-b03-resumption.json).
 
-Execution update13:35 UTC: both original commands accepted, both fresh memory
-admissions passed, and Root confirmed the actual Monitor's active unbudgeted
-goal adoption. Terminal collection and scientific intake remain with this DM.
+Final update 2026-09-12: both original arms completed and passed technical
+acceptance. The unchanged rule gives **RETAIN_ABOVE_MEI**, d_LR = -1.215546875.
+The DM's low-confidence WITHIN_MEI prediction missed; owner prediction was not
+taken. Both terminal notices reached Root and the Monitor goal completed.
+The [final intake](FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md#final-technical-and-scientific-intake--2026-09-12)
+ends this finite allocation without an automatic successor or family disposition.
 
 ## Authority, question and finite unit
 

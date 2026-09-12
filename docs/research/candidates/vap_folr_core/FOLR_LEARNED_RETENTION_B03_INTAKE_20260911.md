@@ -1,9 +1,13 @@
-# FOLR learned-retention B03: technical prelaunch-stop intake
+# FOLR learned-retention B03: final technical and scientific intake
 
-Current status: both original B03 arms accepted/running, actual Monitor goal
-adoption confirmed, terminal collection pending. Support300 is a reference;
-no paired performance result has been collected. The earlier prelaunch record is
-historical; final technical intake and actual effects follow it.
+Current status: **valid B / EXPLORE; RETAIN_ABOVE_MEI, d_LR=-1.215546875;
+both arms technically accepted; Monitor goal complete; finite allocation ended**.
+Support300 is a reference. See the [final intake](#final-technical-and-scientific-intake--2026-09-12)
+for actual results, cost limits and decisions. Earlier prelaunch and launch
+sections retain their original chronological facts and superseded instructions.
+
+## Historical preparation and launch record
+
 Root applied Portfolio F+U at main `deb2e5e1e` and assigned this DM the complete
 finite pair. The [B03 card](FOLR_LEARNED_RETENTION_B03_SCIENCE_CARD_20260911.md)
 binds one unchanged LEARNED_EVENT/RETAIN pair, new7811/107811 identities and
@@ -350,3 +354,166 @@ routes each terminal fact to this same DM. The exact sparse source checkout and
 private output roots remain live dependencies until accepted collection and
 assigned cleanup. Claim ceiling, strongest B01 support/B02 contradiction, RETAIN
 default and the original next discriminator remain as stated above.
+
+## Final technical and scientific intake — 2026-09-12
+
+**Decision and bounded result.** Accept both original executions as a valid
+finite B pair. RETAIN0.947578125 versus LEARNED_EVENT-0.267968750 gives
+d_LR=-1.215546875, hence **RETAIN_ABOVE_MEI**. The unchanged question now has
+its allocated observation. This is an adverse point for the learned package on
+one training pair, not stable harm, equivalence or a family disposition.
+
+### What was checked
+
+The current card and Portfolio F+U mapping were applied with the owner amendment
+that support300 is a reference. Reading rule applied verbatim:
+
+> d_LR >= 1: LEARNED_EVENT_ABOVE_MEI; d_LR <= -1: RETAIN_ABOVE_MEI; otherwise: WITHIN_MEI. An incomplete or untrustworthy primary has no paired performance polarity; preserve independently trustworthy facts.
+
+Both original supervisors finished exit0. One terminal collection retained both
+summaries, final checkpoints, memory admissions, whole-process timing and
+supervisor bytes. Exact source89035d8f1, arm identities and7811/107811 labels
+match the published commands at e3ac72da5. Each summary contains5000 training
+episodes,100000 training ticks,4969 actual RMSprop updates,128 complete final
+episodes and2560 final ticks. All256 ordered returns are finite; direct NumPy
+means exactly equal both published means. No endpoint or fit was discarded.
+
+Exactly two read-only `torch.load(weights_only=True, map_location='cpu')` calls
+checked saved arm/update identities, finite FP32 actor/mixer/target tensors,
+online/target equality and all optimizer states at4969. The optimizer parameter
+state counts41/43 and actor counts100614/100743 match the extra129 learned gate
+coefficients. The learned gate moved L2=1.705675840 from initialization and was
+exercised45704 times in training and1192 in evaluation; neither arm used full
+survivor resets. These facts establish the trained and exercised package. They
+do not identify a causal memory mechanism. No individual gate-state gradient
+statistic or complete causal diagnosis was required or inferred.
+
+No new model/optimizer/environment construction, RNG experiment, training,
+evaluation, test or diagnostic occurred during acceptance. The already accepted
+scientific source and tests were reused; no high-risk semantic change occurred.
+Engineering Scope §4 additions: none; production/test §5 breach: none.
+Analysis used local Torch2.7.0+cpu and NumPy1.26.3 only to read recorded bytes;
+execution retained CPU FP32 with Torch2.7.0+cu118, NumPy1.26.3 and1/1 threads.
+
+The [E0 result](FOLR_LEARNED_RETENTION_B03_RESULT_EVIDENCE_20260911.md#final-e0--2026-09-12),
+[analysis](evidence/2026-09-12-folr-learned-retention-b03-analysis.json),
+[run-level summary](evidence/2026-09-12-folr-learned-retention-b03-run-summary.json)
+and [current receipts](evidence/2026-09-12-folr-learned-retention-b03-resumption.json)
+are the acceptance evidence. The scientific-tools summarizer received exactly
+two rows, one final endpoint per arm at training seed7811, with `--paired
+--baseline RETAIN`. Its n=1 per arm and paired n=1 are descriptive; sample SD
+over training seeds is unavailable. The DM applies the rule, not the tool.
+
+### Scientific reading, prediction and limits
+
+Reused scientific-reading mode after the current card and evidence-spec §11.8:
+FOUNDATIONS §§4,6 and the empirical topic support a bounded learner/comparator
+observation with an explicit independent unit. The concrete assumption is that
+the unchanged host, legal information and learner budget permit this finite
+package comparison. The limit is two jointly trained policies from one matched
+initialization pair. Equal final RNG labels do not give matched post-action
+traffic worlds, and128 evaluation episodes do not replace training seeds.
+No new literature/novelty or mechanism-selection claim needed another retrieval.
+
+Conditional episode SD is5.704316606 for RETAIN and5.383641650 for learned;
+conditional difference SEM0.693287151 assumes independent episodes given each
+fitted policy. It is not a seed-population standard error. The primary is only
+0.215546875 beyond the practical adverse MEI; preserve the inclusive rule
+without a significance claim or post-result threshold change. Changing-policy
+training means were-5.272626 and-5.046892, a learned-minus-retain difference of
++0.225734. That descriptive training average has the opposite sign from the
+final primary; it is not a before/after improvement or a substitute endpoint.
+
+DM prediction **WITHIN_MEI, low confidence: miss**. Owner prediction **not taken
+(unattended)**. The clean-boundary owner-review query returned `[]`; no owner
+reply is invented. The existing card item is traced to actual execution/intake;
+ordinary acceptance does not create a new P1/P2 item. The required
+[Chinese brief](../../portfolio/owner/briefs/vap_folr_core/2026-09-12_FOLR_LEARNED_RETENTION_B03.md)
+reports the result in plain language.
+
+Strongest support remains B01+1.763359375. Strongest contradiction remains
+B02-1.76953125; B03 adds-1.215546875. All three remain separate observations,
+with no new pooled primary or two-of-three vote. Generic event-aware RETAIN is
+the usable default and already has adaptive GRU gates. Extra parameterization,
+finite optimization, partner co-adaptation and traffic draws remain alternatives
+to useful-memory selection. Matching tuned headroom remains absent, not zero.
+No stable superiority/harm, equivalence, original CAMA-baseline superiority,
+causal retention mechanism, transfer or UAV-readiness conclusion follows.
+
+### Complete work and observation closure
+
+Actual exposure: two real fits, one independent training pair,10000 training
+episodes/200000 ticks/9938 updates and256 final episodes/5120 ticks:205120 total
+native team ticks. Acceptance added two checkpoint loads and zero new scientific
+executions, diagnostic trajectories or tests. Dominant work stayed the declared
+two arms ×5000 training episodes ×20 ticks plus128 final episodes ×20 ticks,
+with the frozen replay/optimizer work. No candidate or trajectory enumeration,
+extra cost pilot, reconstruction exercise or precondition was added.
+
+Original `/usr/bin/time -v` gives whole native RETAIN851.85 and learned898.96
+seconds, **1750.81 summed**, each below1350 and the sum below2700. CPU work is
+1752.76 seconds; concurrently elapsed native time is approximately899 seconds.
+Rounded supervisor852/899 seconds witness the same runs and are not added.
+Inner runner818.712/864.776 seconds exclude33.138/34.184 seconds already inside
+whole timing. Their cause is not diagnosed; no profile is needed to accept the
+complete-wall measurement.
+
+Known support through this collection/analysis snapshot is at least329.186872800
+seconds, including the historical315.263732000 lower bound and named resume/
+collection clocks. Known native plus support is at least**2079.996872800**.
+Enclosing clocks subsume nested operations, including the historical274.81 Git
+parent replacing55 client seconds. The resumption JSON itemizes measured terms;
+unitemized editing, tool/provider/Monitor work, final checking/publication,
+integration and cleanup remain unmeasured. Therefore full complete3000-cap
+conformance is **unverified**, with no observed complete-cap breach. This is an
+accounting limitation, not a negative scientific result or a reason to discard
+the independently trustworthy primary. Support300 is the owner's reference,
+not the superseded hard stop. No budget reset or new experiment allowance occurs.
+
+Root forwarded each actual terminal notice from Monitor
+`01a095d0-21ee-7c02-9d97-3681b5678200`, then MONITOR_GOAL_COMPLETE: both notices
+accepted, active_set=[], no pending observation or notification. Root records
+this at main `ccd2b9225`. This closes the actual adopted unbudgeted goal; the
+earlier accepted MONITOR_ADD alone was never treated as adoption. Collection
+used recorded output, without duplicate launch or routine status polling.
+
+### Decisions this intake produces
+
+| Tier / decision | Options and recommendation | Selection and authority |
+| --- | --- | --- |
+| Object / technical acceptance | Accept the complete trustworthy pair (recommended); quarantine a specific integrity failure if established. None was found. | **Accept. Owner-delegated decision (unattended,2026-09-03 instruction): accept B03 technical result and apply the frozen rule.** |
+| Object / reading and prediction | Apply RETAIN_ABOVE_MEI and score the miss (recommended); rewrite the threshold, substitute training averages or count episodes as seeds. The alternatives conflict with the card. | **Apply the original rule; prediction miss.** No new selection of a treatment, seed or budget. |
+| Existing allocation boundary | Finish this grant with evidence and cleanup (recommended); add a fourth pair, retuning, diagnostic or automatic Pro question. The latter options are not funded. | **End the named allocation**, as Portfolio F+U requires for every branch. A/B objects have no consumption state. |
+| Direction / Portfolio | Preserve current authority and return a bounded recommendation (recommended); locally hold/recast/close the family or allocate a successor. | **No local disposition.** This adverse point makes the previously discussed narrow hold more attractive as direction-local advice only. Any future concrete family/use/investment choice belongs to its proper node. |
+
+Owner flags: none. There is no new material critic dissent, second recast or
+Portfolio recommendation in this technical intake. The result's proximity to
+the MEI limits confidence; the frozen branch itself is unambiguous.
+
+### Preservation and cleanup boundary
+
+The complete20-file native archive is8,466,991 bytes, SHA256
+`41d7e2fbe703d31186bd57f44d8dc263d1ec42aa1e390990de1db721cf8b57d3`,
+at [native results](evidence/2026-09-12-folr-learned-retention-b03-native-results.tar.gz).
+It preserves both final checkpoints and every collected original receipt.
+All derived analysis and the two-row input are published alongside it. The
+older six-file preparation ZIP and its prior hash remain unchanged.
+The five original resume/collection JSON receipts are also preserved in the
+[2,914-byte control archive](evidence/2026-09-12-folr-learned-retention-b03-control-receipts.zip),
+SHA256 `0b49bff862434443a4fac9038cf0e8812c58829a105e9e0b9479851a805a2edf`.
+
+The exact cleanup inventory in current resumption facts names the terminal
+source/output checkout, two supervisor roots, local collection and resume
+control roots, and the old retained B03 control copy. Unique evidence is
+preserved before removal. The same DM performs assigned terminal cleanup after
+evidence publication; Root confirms main integration/retention and accepts
+reclamation. No deletion is claimed at this first result publication. The shared
+`codex/vap-folr` authoring checkout remains for
+integration and future authorized direction work; older restricted B01/B02
+duplicates stay outside this assignment.
+
+**Next discriminator:** this grant's predeclared unchanged-pair observation is
+now complete. No next experiment or Pro question is authorized here. A future
+concrete use decision can consider the three separate points and RETAIN default
+through the appropriate authority; full causal explanation or exact replay is
+not a prerequisite for interpreting this completed B.
