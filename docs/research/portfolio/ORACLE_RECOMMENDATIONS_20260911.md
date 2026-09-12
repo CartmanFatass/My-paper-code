@@ -2,17 +2,17 @@
 
 作者：Root 指定的 Portfolio 材料与科学核对 DM，`/root/dm_a_mx_portfolio_resume`。本次按 owner 要求覆盖当前建议页；旧版由 Git 保存。本文是科学建议，不是 Portfolio 决定、实验卡或新增运行预算。
 
-**当前实际推进为 FOLR 原 B03 运行、VNFC 已接受修复后的条件新配对准备，以及 RCLE 同一请求的已接受 Pro 生成；ACVC 的下一问题材料已完成，不再按在途计数。Root 最新报告为 3/5，两个空槽需要具体独立投入。五个槽位不是五笔新预算，Portfolio 作者和已完成材料不另计方向。**
+**当前实际推进为 FOLR 原 B03 两臂终止后的 collection、VNFC 新配对失败后的 collection/有限诊断，以及 RCLE 同一请求的已接受 Pro 生成；ACVC 的下一问题材料已完成，不再按在途计数。Root 最新报告为 3/5，两个空槽需要具体独立投入。五个槽位不是五笔新预算，Portfolio 作者和已完成材料不另计方向。**
 
-本次逐一核对 22 个 DIRECTION 的相关当前段落、最新结果/技术 intake 和适用决定。最新控制与接受事实固定于 main `c8ed4714c90af7879dc4d315e036186cde438b93`；ACVC 原 DM 的具体后续建议固定于 `c717996f3f2654e044fac05f9dc6a5d87d5b1369`。未重跑、重算原始实验，未独立检查远端运行或浏览器；运行与 provider 接受是 Root 回执事实。后续数量与入口以 [PORTFOLIO](PORTFOLIO.md)、[EXPERIMENT_TRACKING](EXPERIMENT_TRACKING.md) 和主控配置为准。
+本次逐一核对 22 个 DIRECTION 的相关当前段落、最新结果/技术 intake 和适用决定。最新控制与接受事实固定于 main `cc7191717b5bdeb6e7d47f16d96357ba9e61cb60`；ACVC 原 DM 的具体后续建议固定于 `c717996f3f2654e044fac05f9dc6a5d87d5b1369`。未重跑、重算原始实验，未独立检查远端运行或浏览器；运行与 provider 接受是 Root 回执事实。后续数量与入口以 [PORTFOLIO](PORTFOLIO.md)、[EXPERIMENT_TRACKING](EXPERIMENT_TRACKING.md) 和主控配置为准。
 
 ## 当前就绪判断
 
-FOLR 两个原定 arm 已运行并由新 Monitor 的真实非空未完成目标采用，按一个方向计；VNFC 已接受相关 owned-value 边界修复及独立 256/256 focused 检查，继续现有新条件配对；RCLE 同请求已被 provider 接受并生成。Transport、Monitor、Relay 的新 Windows 路由已实际建立；本文不复制会过期的会话 ID。
+FOLR 两个原定 arm 均 exit0，由原 DM 收集和科学 intake；VNFC 新配对 source b93329b3 在报告 round35/192 transitions/32 optimizer steps 后105秒 exit139，无 final primary，原 DM 收集/隔离并做有限相关诊断，没有自动重试；RCLE 同请求已被 provider 接受并生成。Monitor 已送达 terminal 并完成空集合目标，当前无已确认运行中实验。两个原 DM 仅在实际工作期间各计一个方向。Transport、Monitor、Relay 的新 Windows 路由已实际建立；本文不复制会过期的会话 ID。
 
 - **ACVC：**五个完整训练单位的冻结 qualified JOINT_ABOVE_MEI 已最终验收，C01 consumed。新建议已完成：原 Convergence 判断是否让同一 DENSE/PPO 在训练期也执行固定 F，以“训练 C→部署 F”为强 null；没有新咨询/fit 预算，保持 recasts 2 最低争用顺序。
-- **FOLR：**继续原 B03 两臂；owner 明确 300 秒 support 是参考，308.8422538 秒不能单独挡住恢复。原每臂 native 1350 秒、两臂 2700 秒与科学定义保持，RETAIN 是有 GRU 历史适应的合法强对照。
-- **VNFC：**原条件新配对为 native 总计 600 秒（含参考）、support 300 秒、complete 900 秒；旧失败 B02 不复活。当前已接受的有限修复支持继续绑定/准入，未收到新 primary；不据此改写旧故障，也不要求完整还原历史。
+- **FOLR：**原 B03 两臂 terminal exit0，科学结果尚待 intake；owner 明确 300 秒 support 是参考，308.8422538 秒不能单独挡住恢复。原每臂 native 1350 秒、两臂 2700 秒与科学定义保持，RETAIN 是有 GRU 历史适应的合法强对照。
+- **VNFC：**原条件新配对为 native 总计 600 秒（含参考）、support 300 秒、complete 900 秒；旧失败 B02 不复活。原条件调用已经运行并失败，无新 primary；此前有限修复的接受不代表整个新调用成功。继续相关有限 collection/诊断，不复活旧 B02、不自动 retry，也不要求完整还原历史。
 - **RCLE：**仅原 channel-normalization 请求已被接受并生成，保持 one-Send 和原节点；完成后仍须完整答复的科学 intake。
 
 除此之外，本次没有发现另一份已接受、无实质依赖且可直接执行的现成研究分配。Root 应持续派出实际就绪工作；不足部分需要具体新投资选择，不能把“上一个分配结束”扩大成永久无研究价值，也不能反过来把空位当新预算。
@@ -24,8 +24,8 @@ FOLR 两个原定 arm 已运行并由新 Monitor 的真实非空未完成目标�
 | 方向 / Priority | 最新直接证据与最强限制 | 当前动作；未来真正能区分什么 |
 | --- | --- | --- |
 | [ACVC / MEDIUM](../candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md) | 五 fit 的 F−C 为 +0.09591597，区间 [0.07485046, 0.11698148]；F−dwell 为 +0.06513377，[0.03828639, 0.09198115]，两个下界均超过 MEI .01。区间只按预设 iid-normal fit-panel 模型成立，实际神经训练校准未证明；46/320 个 F−dwell world 差为负。 | 最终 intake 与具体下一问题材料均完成，当前无在途 ACVC 执行。支持固定完整执行方案的限定收益，不支持 learned selector、纯 retrace、等剂量或一般历史必要性。recasts 2，保持最低争用排序。 |
-| [FOLR / MEDIUM](../candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md) | learned retention gate−RETAIN 的两次完整差为 +1.763359375 / −1.769531250，MEI 1，方向相反。gate 移动不能解释收益；普通 GRU 已能适应。 | 原 B03 已在运行。一次原样新配对可改变是否保留可选 gate 作为同宿主开发候选；不设置第三次必须阳性、全机制归因或自动第四对。 |
-| [VNFC / HIGH](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_INTAKE_20260911.md#portfolio-conditioned-static-intake--2026-09-11) | B02 exit139，480 次已记录更新、无最终 primary，预测未评分。精确解释器公式需 40 字节，offset32 的 False 合法；与保存的 32-byte 元数据矛盾，尚未证明写坏者。 | 有限修复已接受，继续原条件新配对准备。若路径可信，首次完整 INTERVAL−TERMINAL recovery（MEI .02）及全 J/分区代价可回答时间信用问题。相关 focused 证据即可；科学款不是调试费。recasts 2。 |
+| [FOLR / MEDIUM](../candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md) | learned retention gate−RETAIN 的两次完整差为 +1.763359375 / −1.769531250，MEI 1，方向相反。gate 移动不能解释收益；普通 GRU 已能适应。 | 原 B03 两臂已 terminal，待完整 paired intake。一次原样新配对可改变是否保留可选 gate 作为同宿主开发候选；不设置第三次必须阳性、全机制归因或自动第四对。 |
+| [VNFC / HIGH](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_INTAKE_20260911.md#portfolio-conditioned-static-intake--2026-09-11) | B02 exit139，480 次已记录更新、无最终 primary，预测未评分。精确解释器公式需 40 字节，offset32 的 False 合法；与保存的 32-byte 元数据矛盾，尚未证明写坏者。 | 新条件调用 exit139、无 primary；有限 collection/诊断在做，无自动重试。若路径可信，首次完整 INTERVAL−TERMINAL recovery（MEI .02）及全 J/分区代价可回答时间信用问题。相关 focused 证据即可；科学款不是调试费。recasts 2。 |
 | [RCLE / MEDIUM](../candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_RESULT_INTAKE_20260911.md) | B06 reference contrast −.00575765，八个 service cell 全输 attained nearest；相对自身初始化 −.00010783。旧 W100/W1 的真实大幅学习收益保留，不能替代 reference 缺口。 | 同请求 Pro 已接受并生成。后续应区分在有竞争力的起点上新增的学习收益，保留 nearest 与 fragmentation；不是概率扫描或“更多参数移动”证明。 |
 | [FSD / HIGH](../candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md) | I1280−authentic D0 三次为 +.05697747 / +.20628590 / −.01243043，MEI .01；最新 16 正/16 负且无额外 endpoint individual-gap，I 约为 D0 的 2.17 倍 wall。旧 batch128 负值另列。 | 分配完成；F+U 明确不增 FSD 问题或实验。未来问题需说明要改变哪项实际使用/研究选择；完整方案复现与 isolated renewal/批量因果不是一回事。 |
 | [MGTAP / MEDIUM](../candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md) | COND−intact DENSE 为 +.00576132 / −.02246957；第二次 5 正/27 负，MEI .01。真实 branch 更新没有挽救负 native primary；两次不能推出稳定劣势。 | 两配对完成，DENSE 保持；无第三对、诊断或咨询分配。健康的既有执行路径使未来有限 B 可具体定价，但第三次原样结果是否会改变选择仍需论证。 |
