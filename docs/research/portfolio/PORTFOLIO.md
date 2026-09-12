@@ -8,7 +8,7 @@
 本表登记15 ACTIVE、7 PARKED，生命周期、priority、recasts与UAV字段不变。
 最新 [Portfolio决定](decisions/2026-09-12-post-sa-marginal-investments.md) 已由原作者完整核对：**新资助CBSC C、RCLE R、ACVC F三条完整B链；M不追加。**
 
-Root当前实际工作集2/5：ACVC正在完成终端结果intake，RCLE在同一对象内处理一个已归因入口的技术停止。CBSC的已购pair已完整验收并释放槽位；跨方向作者、Transport和cleanup不计槽位。
+Root当前实际工作集1/5：RCLE在同一对象内处理一个已归因入口的技术停止。ACVC与CBSC的已购pair均已完整验收并释放槽位；跨方向作者、Transport和cleanup不计槽位。
 C新native600/arm、1200合计+support600=1800；R900native含nearest+support600=1500；F270/arm、540合计+support660=1200秒。每项均含完整实现/检查/review/实验/intake/清理。
 新款明确是未来工作，旧S/A费用保留一次且未知尾部不填零。三个真正启动后为3/5，剩余两槽没有自动备用款。见 [独立执行映射](pro_packets/20260912_post_sa_marginal_investment/EXECUTION_MAPPING.md)。
 Monitor当前无活动句柄；ACVC两臂与CBSC均terminal exit0，RCLE在338秒以exit2技术停止，三个对应Monitor goal均已完成。剩余两槽的新Portfolio问题已由当前Transport核对绑定并完成唯一一次Send，provider正在生成；尚未形成的新决定不计槽位。
@@ -19,7 +19,7 @@ Monitor当前无活动句柄；ACVC两臂与CBSC均terminal exit0，RCLE在338�
 | 方向 | 最新证据/科学状态 | 当前实际工作 | 下一步及边界 |
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
-| [ACVC](../candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE.md) | C01 qualified JOINT_ABOVE_MEI/consumed保持；原节点已选train-through-F vs train-C、双方deployF，当前参考保留。 | sourcea4c24e4e两臂均terminal exit0，Monitor goal完成；原DM已核对C为train-C/deploy-F、F为train-through-F/deploy-F，正在发布paired intake。 | 接受并集成完整intake/成本/清理；不得因输出标签或已结束tmux状态自动retry。 |
+| [ACVC](../candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md) | B pair完整验收为DOWN：train-F相对train-C的共同F评估−0.0260962 J，43/64 adverse；C01结论不变，保留train-C/deploy-F参考。 | 证据与终端日志已保全至mainf6bf9e467；已购pair结束，无活动科学工作。 | 仅完成六个已列明远端副本/监督器清理；无retry、额外panel、咨询或自动successor。 |
 | [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md) | C pair完整验收为WITHIN_MEI：RAW=STRUCT=11.15、32/32零差，均低于REQUEST_ONLY12.45；只支持本对象的局部零差异。 | 已购pair结束，证据已保全至main9ca150856；无活动科学工作。 | 仅完成已列明的scoped reclamation；无retry、第二个S或自动successor。 |
 | [CRTO](../candidates/commitment_residual_triggered_options/DIRECTION.md) | P72 PRO_FINAL保留B08测试的selected-panel family PARK；finite-zero修复已集成。 | 无 | 新的具体方向选择；没有自动successor。 |
 | [DISH](../candidates/degraded_incumbent_shadow_handover/DIRECTION.md) | **更新：B08 HALF_RETAIN−REPLACE为−6.5 ticks，WITHIN；REPLACE默认。post-B08已PARK retained-A03 arrival-bridge retention家族。** P62/DIRECT只是更早历史。 | 无 | 具体receipt-to-control研究问题或对独立pair不确定性的实际决策需求；新选择才续行，不要求完整机制证明。 |
