@@ -1,6 +1,6 @@
 # CADC-B01 exact execution inputs
 
-Current state: both preselected arms accepted once, adjacent memory passed, and actual Monitor goal adoption confirmed by Root. [Launch](execution/LAUNCH_RECEIPT.json), [adoption](execution/MONITOR_ADOPTION.json); original DM awaits routed terminal facts for collection. No routine polling or repeated ADD remains.
+Current state: both preselected arms completed once, exit0/COMPLETE, and original DM technically/scientifically accepted the full pair after Root routed terminal facts. Native wall195.00s/180.34s; [result](CADC_B01_RESULT.md), [intake](CADC_B01_INTAKE.md), [terminal collection](evidence/cadc_b01_9302/TERMINAL_COLLECTION.json). Prior [launch](execution/LAUNCH_RECEIPT.json) and actual [adoption](execution/MONITOR_ADOPTION.json) remain factual evidence. The [scoped cleanup inventory](CADC_B01_CLEANUP.md) awaits Root integration/retention, with no duplicate ADD, polling, retry or successor.
 
 Source SHA: `22e009c9387f2507aab6ebab4555d92e27f5070e`, independent review and focused tests accepted in [TECHNICAL](CADC_B01_TECHNICAL.md). Source is published on `codex/cadc`; Root integrated unchanged code at main `1d68daff9`. Fixed card/master9302 and LEARNED/RR companion remain unchanged. Shared source and authoring paths are not execution outputs.
 
