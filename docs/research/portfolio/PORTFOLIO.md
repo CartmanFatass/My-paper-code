@@ -3,11 +3,11 @@
 控制面仅保留当前有效状态。运行/回报入口见[执行职责](../../project/ROOT_OPERATIONS.md)，
 详细科学依据在各方向记录；历史操作快照从Git查询。
 
-## 当前27方向状态 — 2026-09-12 Windows恢复
+## 当前27方向状态 — 2026-09-13 Windows/PowerShell 控制面
 
 本表登记16 ACTIVE、11 PARKED。2026-09-12 post-KELU Portfolio PRO_FINAL仅将CADC可逆改为PARKED/HIGH；其余生命周期、priority、recasts与UAV字段不变。
-并行目标为4个方向。现有记录列出5个在途方向，保留其已接受工作，随正式方向处置自然收敛；不新增第五个槽位：ACPS执行新unchanged pair；MGTAP与RCLE各自起草一个原Convergence节点问题；ACVC与FOLR各自起草一个原方向节点的下一对象/用途问题。五个任务均已派发给原DM，彼此独立。已完成的Portfolio intake、FSD U、CADC处置、旧实验和cleanup均不计槽位。
-新方向发现/注册及独立MGTAP T投入决定已完整intake并集成main2492dcb06：T=yes，ACPS/CADC获有限starter投入，另三项仅注册停放。
+标准并行目标为4个方向；当前保留5条已有 ACTIVE 链（ACPS、MGTAP、RCLE、ACVC、FOLR）的既有重叠工作，不新增第五个方向。MGTAP 唯一授权 pair 已完成并 intaken，RCLE/ACVC/FOLR 保持方向内 continuation 或 native wait，ACPS 的 Q 保留在同一 pre-Send 修复路径。DM 完成、阻塞或 ACTIVE-idle 回报都会触发一次稳定 Root 调度检查；对象完成、cleanup、Pro wait 或 child 完成均不释放方向槽位。
+当前 Portfolio/方向决定和 Transport/实验归档均已在本控制面合并；旧请求、旧 hash 和旧起草快照不作为当前路由。
 有限分配结束不推断停向；只有Portfolio/owner生命周期决定改变ACTIVE/PARKED。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
