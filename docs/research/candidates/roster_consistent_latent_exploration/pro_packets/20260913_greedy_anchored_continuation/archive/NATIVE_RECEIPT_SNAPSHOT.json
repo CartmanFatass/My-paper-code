@@ -1,0 +1,61 @@
+{
+  "request_id": "2026-09-13-rcle-greedy-anchored-continuation-01",
+  "conversation_binding_key": "em:roster_consistent_latent_exploration:convergence",
+  "conversation_id": "6aa55611-bf80-83e8-b018-70e30a95b28a",
+  "state": "ARCHIVED",
+  "native_state": "RECEIPT",
+  "send_click_count": 1,
+  "timestamps": {
+    "send_attempted_at": "2026-09-13T18:49:05Z",
+    "completed_at": "2026-09-13T19:02:35Z",
+    "captured_at": "2026-09-13T19:02:35Z",
+    "archived_at": "2026-09-13T19:03:29Z"
+  },
+  "actual_native_parent": "/root/dm_rcle_resume",
+  "actual_native_operator": "/root/dm_rcle_resume/tr_l_h_rcle",
+  "native_receipt": {
+    "message_key": "2026-09-13-rcle-greedy-anchored-continuation-01|COMPLETE|5e26b956e5f4c27cfa0b98677bb4d7ef80948e825b57ee71d11ab8a37958ef0a|/root/dm_rcle_resume",
+    "destination": "/root/dm_rcle_resume",
+    "status": "SENT",
+    "boundary": "COMPLETE",
+    "archive": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-greedy-anchored-continuation-01\\GITHUB_RESPONSE.md",
+      "sha256": "5e26b956e5f4c27cfa0b98677bb4d7ef80948e825b57ee71d11ab8a37958ef0a",
+      "size_bytes": 37104
+    },
+    "message": "Assignment: Execute exact request 2026-09-13-rcle-greedy-anchored-continuation-01 once under the committed HANDOFF.. Status: Complete full response archived; native parent receipt delivered.. Request: 2026-09-13-rcle-greedy-anchored-continuation-01; binding: em:roster_consistent_latent_exploration:convergence. Evidence: C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-greedy-anchored-continuation-01\\GITHUB_RESPONSE.md sha256=5e26b956e5f4c27cfa0b98677bb4d7ef80948e825b57ee71d11ab8a37958ef0a bytes=37104; paired user=51bc38d5-04fe-453f-88d1-d5fe02a0b803 assistant=16923e1d-1e1d-4831-8602-1cabcc59ad92; GitHub commit=5b04f22e844b74df5c12a0dfd334b3ff08f32634; Issue #8 comment=5655390355 verified.. Next: DM reads the complete response and performs conformance intake.",
+    "transport": "collaboration.send_message"
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "/root/dm_rcle_resume",
+    "parent_thread_id": "/root/dm_rcle_resume",
+    "destination_thread_id": "/root/dm_rcle_resume",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-13-rcle-greedy-anchored-continuation-01|roster_consistent_latent_exploration|6aa55611-bf80-83e8-b018-70e30a95b28a|5e26b956e5f4c27cfa0b98677bb4d7ef80948e825b57ee71d11ab8a37958ef0a",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "blocked_at": "2026-09-13T19:03:29Z",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-greedy-anchored-continuation-01\\PROMPT_BODY.md",
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-greedy-anchored-continuation-01\\GITHUB_RESPONSE.md",
+      "short_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-greedy-anchored-continuation-01\\RESPONSE.md",
+      "short_receipt_sha256": "8726c1190bf18407e45e59d6705491eabcc44729d38379afacd44c1303574af3",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-greedy-anchored-continuation-01\\TRANSPORT_FACTS.json",
+      "github_response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-greedy-anchored-continuation-01\\GITHUB_RESPONSE.md",
+      "github_response_sha256": "5e26b956e5f4c27cfa0b98677bb4d7ef80948e825b57ee71d11ab8a37958ef0a",
+      "github_commit": "5b04f22e844b74df5c12a0dfd334b3ff08f32634",
+      "response_sha256": "5e26b956e5f4c27cfa0b98677bb4d7ef80948e825b57ee71d11ab8a37958ef0a"
+    },
+    "response_sha256": "5e26b956e5f4c27cfa0b98677bb4d7ef80948e825b57ee71d11ab8a37958ef0a",
+    "staged_at": "2026-09-13T19:04:13Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "sent_at": "2026-09-13T19:04:13Z",
+    "canonical_destination_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+    "native_tool_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1"
+  }
+}
