@@ -1,5 +1,7 @@
 {
-  "state": "PRESERVED_AWAITING_ROOT_INTEGRATION_RETENTION_FACT",
+  "state": "COMPLETE_RETAINED_AND_TWO_TERMINAL_ROOTS_RECLAIMED",
+  "prior_state": "PRESERVED_AWAITING_ROOT_INTEGRATION_RETENTION_FACT",
+  "completion_receipt": "CLEANUP_RECEIPT.json",
   "targets": [
     {
       "path": "/home/wu/hmasd-worktrees/rcle-b09-38a29c7e3",
@@ -13,7 +15,7 @@
   "only_terminal_owned_targets": true,
   "supervisor_finished_exit0": true,
   "published_source": "38a29c7e3ee55cfb6fa732bdb02a271e835b45b5",
-  "registered_execution_worktree": true,
+  "registered_execution_worktree": false,
   "unique_evidence_retained": {
     "raw_archive_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b09-collected-38a29\\b09-evidence.tgz",
     "raw_bytes": 204105,

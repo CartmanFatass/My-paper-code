@@ -1,13 +1,21 @@
 {
   "object_id": "RCLE-TBCFV-B09-GREEDY-ANCHORED-PHASE",
-  "as_of": "complete valid native result, collection/analysis/E0/intake/unique preservation before result publication and scoped cleanup",
+  "as_of": "complete valid native result, preserved publication and verified two-target cleanup 2026-09-13T23:29:14Z; invoked invoice tail still partially unavailable",
   "native_cap_s": 180,
   "additional_invoked_support_cap_s": 600,
   "complete_invoked_cap_s": 780,
   "whole_native_wall_s": 47.13,
-  "known_support_charged_s": 50.6884626,
-  "known_complete_invoked_s": 97.8184626,
+  "known_support_charged_s": 51.6534893,
+  "known_complete_invoked_s": 98.7834893,
   "rows": [
+    {
+      "operation": "final exact-target pre-cleanup retention hash read",
+      "wall_s": 0.2217987
+    },
+    {
+      "operation": "terminal two-target cleanup and disk-registration absence verification",
+      "wall_s": 0.743228
+    },
     {
       "operation": "initial_read_0",
       "wall_s": 0.034392
@@ -117,9 +125,8 @@
   ],
   "accounting_complete": false,
   "unmeasured_support_components": [
-    "result and final closeout publication commands not yet in this snapshot",
-    "Root invoked main integration/retention time unavailable",
-    "assigned two-target terminal cleanup still pending"
+    "result and final closeout publication commands incompletely covered in this invoice",
+    "Root/Clerk invoked main integration/retention time unavailable"
   ],
   "provider_agent_lifetime_cost": "UNKNOWN explicitly accepted for this finite unit",
   "documentary_investment_intake": "separate UNKNOWN through88e39c358",

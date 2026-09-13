@@ -59,3 +59,10 @@ service comparison under its own finite 300/600/900-second card. This preserves 
 its original caps and both narrow HOLDs; no ended invocation is revived. B09 two-target
 technical closeout remains separate. Clerk's f4ccead4b archive-integration receipt is a
 retention fact, not scientific approval or a B10 gate. No automatic Portfolio request is sent.
+
+B09 closeout completed at 23:29:14 UTC: exact terminal remote worktree and supervisor roots
+were reclaimed after the preserved raw/source digests and source identity were checked.
+[Cleanup receipt](b09_greedy_anchored_phase_20260913/CLEANUP_RECEIPT.json) verifies disk and
+Git-registration absence. Authoring, retained raw/source and all shared/sibling roots remain.
+The known complete invoked cost is 98.7834893 s; unavailable publication/integration tails
+remain UNKNOWN, not unfinished scientific work or a fictitious dependency.

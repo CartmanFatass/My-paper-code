@@ -18,7 +18,24 @@ This authority preserves the direction's source-grounded scientific question, ev
 - Stable direction ID: `roster_consistent_latent_exploration`
 - This DM owns direction-local research, family adjustments, continuation, parking and ending under the owner's 2026-09-13 instruction. Clerk records these decisions in the Portfolio report; only owner-triggered cross-direction adjustments/consultations follow. This grants no control over other directions or extra resource commitments.
 
-## Current continuation — 2026-09-13 B10
+## Current DM position — 2026-09-13 after B10: PARKED
+
+DM reversibly PARKS current RCLE research advancement, with reasons and alternatives in the
+[B10 intake](RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md). B10 is COMPLETE: G_U +.061531575521,
+D_n +.154589843750, D_g -.019075520833, all eight U cells retaining these signs. Real learning
+and nearest benefit coexist with a greedy deficit and mixed recovery. No sufficiently useful
+next native-service question is currently selected; this is a direction decision, not an ended
+allocation or support timeout automatically releasing it. No general learning impossibility,
+permanent CLOSE or other-direction adjustment follows. Both narrow recipe HOLDs remain.
+
+Independent scientific Convergence review of B10 design, evidence, interpretation and next-plan
+reasoning remains genuine closeout work. DM resolves material findings and owns the final
+direction decision; no Pro/Portfolio lifecycle approval is requested. Reopen for a concrete
+defensible use/method discriminator or material review finding, with finite cost and comparator
+meaning stated. No positive-result/customer/headroom prerequisite is imposed. Clerk records this
+PARKED decision and actual closeout work; no automatic vacancy replacement is authorized.
+
+## B10 preparation decision — historical immediate predecessor
 
 DM selects one ordinary [B10](RCLE_B10_GREEDY_ANCHORED_1024_SCIENCE_CARD_20260913.md):
 fresh seed 30, unchanged greedy-anchored package, exactly 1024 updates and four 512-row
@@ -29,7 +46,7 @@ One started invocation, native/support/complete caps 300/600/900 seconds, preser
 resource limits. DM proceeds through implementation, independent review, committed remote
 execution and intake; no new Portfolio purchase or lifecycle approval is required.
 
-RCLE continues ACTIVE with actual B10 preparation. B09 historical idle/no-successor text
+At B10 selection RCLE continued ACTIVE with actual B10 preparation. B09 historical idle/no-successor text
 describes its completed allocation, not revocation of standing research authority. Both
 tested-recipe HOLDs remain; no family change or other-direction resource choice is made.
 Clerk receives this decision and evidence as report input, not an automatic Portfolio proposal.
