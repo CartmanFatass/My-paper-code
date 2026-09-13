@@ -41,3 +41,11 @@ to E. Generic prefix timing and the cell-count ratio are not a known BANK cap
 projection. No new scientific invocation or budget was proposed by review.
 Additional reviewer read-command wall was0.432s; no numerical probe ran. Actual
 code-diff review follows the committed correction.
+
+Actual-diff review of5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4: no material finding.
+The reviewer confirmed selected-arm/seed checks accept incomplete Generic, own
+BANK completion/panel is retained with a null pair and explicit explanation, and
+unchanged strict pair_result still protects a claimed complete comparison.
+Training, RNG, model, exposure and caps are unchanged; the new regression covers
+publication/readback and incomplete-pair rejection. Read-command wall0.285s; no
+reviewer tests, models or probes. DM accepted after the separate remote check.
