@@ -183,6 +183,7 @@ def test_owner_replacement_preserves_real_history_and_binds_one_observed_send(tm
     assert binder.bind(_bind_args(registry, **common, conversation_id=old_id, request_id="old-review")) == 0
     data = json.loads(registry.read_text())
     prior = data["bindings"][key]
+    prior["agentify_stable_key"] = "original-agentify-key"
     prior.update(state=prior_state, send_click_count=1, archive={"response_sha256": "a" * 64, "actual_repository_paths_read": 17})
     registry.write_text(json.dumps(data))
     evidence = {"previous_request_id": "old-review", "reset_authority": "OWNER_DIRECT", "owner_instruction": "Open a new conversation for 6 Pro."}
@@ -193,6 +194,9 @@ def test_owner_replacement_preserves_real_history_and_binds_one_observed_send(tm
     assert registry.read_bytes() == original
     binder.prepare_context_reset(registry, **kwargs)
     pending = registry.read_bytes()
+    pending_binding = json.loads(pending)["bindings"][key]
+    assert pending_binding["agentify_stable_key"] == binder._agentify_generation_key(key, "new-review")
+    assert pending_binding["request_history"][-1]["agentify_stable_key"] == "original-agentify-key"
     binder.prepare_context_reset(registry, **kwargs)
     assert registry.read_bytes() == pending
     with pytest.raises(ValueError, match="different replacement"):
@@ -210,6 +214,7 @@ def test_owner_replacement_preserves_real_history_and_binds_one_observed_send(tm
     assert accepted["state"] == "SEND_CONFIRMED"
     assert accepted["send_click_count"] == 1
     assert accepted["conversation_id"] == new_id
+    assert accepted["agentify_stable_key"] == binder._agentify_generation_key(key, "new-review")
     assert accepted["request_history"][-1]["request_id"] == "old-review"
     assert binder.bind(next_args) == 0
     assert json.loads(registry.read_text())["bindings"][key]["send_click_count"] == 1
@@ -333,12 +338,14 @@ def test_persistent_binding_allows_next_round_only_after_archive(tmp_path: Path)
 
     value = json.loads(registry.read_text(encoding="utf-8"))
     value["bindings"]["em:alpha:innovator"]["state"] = "ARCHIVED"
+    value["bindings"]["em:alpha:innovator"]["agentify_stable_key"] = "existing-generation"
     value["directions"]["alpha"]["state"] = "ARCHIVED"
     registry.write_text(json.dumps(value), encoding="utf-8")
 
     assert binder.bind(second) == 0
     current = json.loads(registry.read_text(encoding="utf-8"))["bindings"]["em:alpha:innovator"]
     assert current["conversation_id"] == conversation_id
+    assert current["agentify_stable_key"] == "existing-generation"
     assert current["request_id"] == "alpha-innovator-02"
     assert current["state"] == "DIRECTION_VERIFIED"
     assert current["request_history"][-1]["request_id"] == "alpha-innovator-01"

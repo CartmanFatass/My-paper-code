@@ -21,8 +21,9 @@ results or measured HMASD speedups. Archived draft and historical measurements r
 ## General requirements
 
 OWNER_DIRECT 2026-09-10 prospective responsibility mapping: in the general requirements below,
-CM engineering duties belong to the DM; semantic/routine implementer names denote the optional
-unified Implementer. AGENTS and ENGINEERING_SCOPE_SPEC §7 control current role and acceptance
+CM engineering duties belong to the DM. OWNER_DIRECT 2026-09-12 temporarily assigns all
+implementation and self-checks to DM; semantic/routine implementers are suspended, while independent
+Reviewer review remains required for high-risk changes. AGENTS and ENGINEERING_SCOPE_SPEC §7 control current role and acceptance
 methods. This mapping changes no scientific requirement, frozen object appendix (including
 VNFC E01), numerical boundary, execution budget or historical assignment.
 
@@ -109,7 +110,7 @@ $$
 
 ### 8．既有角色和执行边界
 
-CM在原任务中记录完整工作／成本律、实际热点、参考模式、shape／拓扑、保护语义、资源范围、验证和停止条件；semantic implementer实现这个最小完整路径；routine implementer不自行选择或修改batch、native backend、并行、reduction、资源核算及数值语义；既有独立reviewer检查整个变更、消费者、完整科学量与成本覆盖。
+DM在同一任务中记录完整工作／成本律、实际热点、参考模式、shape／拓扑、保护语义、资源范围、验证和停止条件，实现最小完整路径，并自检整个变更、消费者、完整科学量与成本覆盖；高风险变更仍交独立Reviewer审查，由DM修复并验收。batch、native backend、并行、reduction、资源核算及数值语义仍遵守原任务约束；不派发CM或Implementer。
 
 没有具体超预算或待判性能问题的对象，不增加固定profiling任务。需要新测量时，既有链条明确选定一次有界任务；不新增角色或审批层。实际缺口返回原责任节点，不能用更小科学问题替换工程问题。
 

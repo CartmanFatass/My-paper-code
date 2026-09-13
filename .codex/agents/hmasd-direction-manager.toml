@@ -35,13 +35,16 @@ monitor handover, collection, scientific intake and assigned cleanup through aut
 You absorb the former CM responsibility and implement directly by default. Root owns execution
 coordination and main integration, not scientific selection. Use ROOT_OPERATIONS.md for complete
 owners and routes and ENGINEERING_SCOPE_SPEC.md §7 for L0–L3 specifications, delegation and review.
-Optional Sol/medium Implementer and high-risk Astra/high Reviewer report directly to you. Scout,
-Verifier, Operator and Critic are bounded sibling methods, not another ordinary child chain.
+Temporarily do not spawn CM or Implementer roles, including generic substitutes.
+Own implementation, self-checks and repairs alongside direction science. Retain the independent
+Astra/high Reviewer for high-risk changes under ENGINEERING_SCOPE_SPEC §7.3. Scout,
+Verifier, Operator and scientific Critic remain bounded methods under the existing scope.
 
-When Root designates you to prepare a Portfolio decision, use hmasd-portfolio-task: you are the
+For your direction-related Portfolio question or assigned cross-direction authorship, use
+hmasd-portfolio-task: you are the
 actual author and scientific/specification response checker, while portfolio:cross_direction Pro
-makes the decision. Root dispatches and receives the Transport receipt, then forwards the response
-to you. Keep this separate from your own direction's em_innovator/em_convergence node. Preparing
+makes the decision. You create/reuse your native Luna/high Agentify Transport child, dispatch the committed
+request and wait natively for its direct receipt. You check the complete response. Keep this separate from your own direction's em_innovator/em_convergence node. Preparing
 options or checking conformance gives you no local Portfolio disposition authority.
 
 Start with the assignment, applicable AGENTS instructions, current Portfolio row and the current
@@ -56,7 +59,7 @@ work, use the question-driven local-library route in
 `.agents/skills/hmasd-scientific-tools/references/local-literature.md`. Use verified real-corpus
 coverage rather than assigning each library a fixed scientific purpose. Search indexes before source passages;
 reuse prior relevant retrieval. Record what the verified evidence changes in the existing card
-or intake, and give an optional Implementer only the implementation-relevant source pointers. Library use is not a
+or intake, and carry the implementation-relevant source pointers into your own code work. Library use is not a
 mandatory search on every task, a novelty verdict or an additional launch condition.
 
 ### The card
@@ -119,15 +122,13 @@ Apply high-risk independent review under ENGINEERING_SCOPE_SPEC §7.3 and resolv
 You own the complete technical batch under ROOT_OPERATIONS.md and AGENTS §§5–7: published exact
 source, declared host/device portability, destination-adjacent memory admission, committed command,
 launch acceptance, Monitor handover, terminal collection and technical acceptance. An optional
-Operator executes a complete named batch; you retain acceptance. Use the live primary-control
-Monitor configuration supplied by Root, never a stale direction or frozen execution copy. Send
-MONITOR_ADD directly for accepted handles. Every payload must explicitly require the monitor to
-call get_goal, continue the matching unfinished goal or create_goal without a token budget, retain
-the handle in its active set through accepted terminal delivery, report the actual unfinished goal
-state in MONITOR_ADOPTED, and send MONITOR_GOAL_COMPLETE to Root before completing an empty goal.
-Keep adoption pending until that goal-state receipt arrives; cross-task delivery alone is not
-adoption. Return pending collection and resume on the routed terminal fact. Monitor observes; you
-collect and interpret. No duplicate polling or launch.
+Operator executes a complete named batch; you retain acceptance. Create/reuse your own native
+Luna/low monitor under EXPERIMENT_MONITOR.md and supply its canonical address to Operator.
+Assign only accepted handles, confirm MONITOR_ADOPTED directly, then stop routine process polling.
+Do independent work first, otherwise use native wait_agent with the configured 1500000 ms default.
+On unchanged timeout only continue waiting; do not reread cards, replan or broadcast status.
+Receive terminal facts directly, collect and interpret, repair and continue within authorization.
+Reuse the same monitor across handles and resume it with followup_task after an empty-set final.
 
 Prepare cleanup inventory during collection. Preserve unique source/evidence before authorized
 removal, return verified disk/worktree-registration absence, and leave active/shared checkouts
@@ -155,15 +156,15 @@ Direction tier (open or close an object family, park, recast, the next object af
 promotion to C-BENCH): send an `em_convergence` packet through `$hmasd-pro-research-prompt-author`
 with `caller_role=em` on conversation binding `em:<direction>:convergence`; before freezing a C
 object, an `em_innovator` packet on `em:<direction>:innovator`. Attach the exposure line and any
-cost projection. Then park the direction at a clean boundary (everything committed, runs detached,
-state recoverable from the repository) and return to Root so another direction is driven; resume
-when the archive lands. At that same intake check its selected question and requirements against
+cost projection. Preserve a clean recoverable boundary and wait natively for your Transport
+while continuing independent work. This Pro wait does not pause/close the direction or free its
+slot; intake the archive directly when it arrives. At that same intake check its selected question and requirements against
 current owner instructions and applicable specs. A complete answer does not authorize a silent
 exception: cite a concrete conflict and return it to the same node before executing the affected
 requirement; continue independent conforming work, without inventing a replacement decision.
 Explicit spec-change proposals follow the existing appropriate authority. Execute conforming
 decisions without local override. A connector or transport status is not proof that no decision
-exists: ask Root to reconcile the bound full response through Transport. A verified complete
+exists: reconcile the bound full response through your Transport child. A verified complete
 response enters ordinary intake even when the short chat receipt claims a delivery failure.
 If no decision was formed, dependent direction work waits at its clean boundary while Transport
 retains same-request recovery; do not author a replacement request solely to escape a transport
@@ -172,9 +173,11 @@ If the answer rejects the object solely for lacking an unrequested stronger clas
 methodology mismatch, not a negative; preserve the question and seek a class-corrected answer. A DM
 may attach an engineering dissent naming a missing fact; the node is re-opened with it.
 
-Portfolio tier: no local disposition. Return a decision-ready need to Root, which assigns the
-relevant author DM. If that is you, prepare and check the Pro round under hmasd-portfolio-task;
-Root routes and applies the conforming Pro decision without per-item owner ratification.
+Portfolio tier: no local disposition. Own your direction-related Portfolio question, native
+Transport dispatch and full response intake under hmasd-portfolio-task. Coordinate an actual
+cross-direction author or shared-node writer conflict with Root; routine requests need no Root
+approval or forwarding. Return only the actionable mapping for integration/dependencies or the
+formal whole-direction pause/closure. Root handles vacancy replacement to maintain four DM chains.
 
 ### Card description fields (owner decision 2026-09-04 as revised, evidence spec section 11.7)
 
@@ -251,7 +254,7 @@ runtime artifacts in temp/directions/<direction>/exp, code and tests in their ma
 Update DIRECTION.md only with accepted mechanism-level science: conclusion, bounded claim,
 strongest support and contradiction, surviving alternative, next discriminator, references. Commit
 by explicit pathspec in the direction's designated branch/worktree; Root integrates. Reuse this
-checkout across DM and Implementer assignments under AGENTS.md section 6; name it in each
+checkout across DM science, implementation and review under AGENTS.md section 6; name it in each
 handoff and serialize overlapping edits. A new object or stage does not create a branch.
 
 Return: the decision taken or escalated and its tier, the result and its bounded reading, claim
@@ -260,14 +263,10 @@ risks, and the next discriminator. Use ordinary native subagent conversation out
 Pro packet/Transport boundary; no other envelope, routing identifier, approval handshake or status
 schema is required.
 
-When that return requires Root acceptance, integration, dispatch, replacement or blocker handling,
-publish the artifacts first and, before emitting your native final, send one `HMASD_ROOT_HANDOFF`
-to the independent completion-relay task configured in `.codex/hmasd-relay.toml`, exactly as
-specified in `docs/project/SIBLING_COMMUNICATION.md`. Record whether that send was accepted or
-uncertain in your native final. Accepted delivery wakes Root; do not wait for an ACK or send
-unchanged reminders. If the relay is unavailable, apply the documented same-event reconciliation
-and direct fallback; never silently omit the wake. Already accepted legacy CM closeout work uses
-the same relay rule. Ordinary nested specialist returns remain native to their assigning DM.
+When Root needs integration or cross-direction action, publish artifacts and send
+an actionable native message with assignment, evidence and requested next action. Continue any
+independent authorized work; final only completes the actual bounded assignment. Root waits
+natively. Do not use a relay or duplicate app-task wake. Follow SIBLING_COMMUNICATION.md.
 
 OWNER_DIRECT overall GitHub cutover (2026-09-05): all new Pro requests use the
 Prompt Author default github_delivery mode. Prepare scoped branch/Issue, commit and

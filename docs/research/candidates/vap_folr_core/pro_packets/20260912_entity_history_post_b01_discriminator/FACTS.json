@@ -1,0 +1,141 @@
+{
+  "prepared_at": "2026-09-13T01:54:14.247618+00:00",
+  "request_id": "folr-entity-history-post-b01-discriminator-20260912",
+  "author_native": "/root/dm_folr_post_b03",
+  "source_thread_id": "01a096d5-6991-7611-892d-f1a1fa910761",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "scientific_input_sha": "be6505326d2536603205c3d835ab02af79ce0668",
+  "method_input_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+  "observed_remote_main": "0fda32925379cb80bc1ef59b8917c9920b1b5d3c",
+  "assignment": "Root resumes ACTIVE FOLR for exactly one proper original direction-node question and full intake: select the next useful finite same-information discriminator/use versus declining further allocation. No local science choice, inferred PARK, Generic retry, profiling pilot, experiment, historical full reconstruction or empirical budget.",
+  "local_scientific_selection": null,
+  "new_author_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "policy_search_candidates": 0,
+    "profiling": 0,
+    "source_implementation_edits": 0,
+    "source_or_numerical_tests": 0,
+    "new_raw_result_analysis": 0,
+    "provider_sends": 0,
+    "transport_dispatches": 0
+  },
+  "machine_generated_exposure_line": "NEW AUTHOR EXPOSURE: scientific_invocations=0, models=0, checkpoint_loads=0, environments=0, scientific_rng_masters=0, training_episodes=0, native_ticks=0, optimizer_steps=0, evaluation_episodes=0, diagnostic_trajectories=0, policy_search_candidates=0, profiling=0, source_implementation_edits=0, source_or_numerical_tests=0, new_raw_result_analysis=0, provider_sends=0, transport_dispatches=0.",
+  "accepted_E": {
+    "status": "BANK_OWN_ARM_ACCEPTED_PAIR_PRIMARY_UNAVAILABLE",
+    "generic": {
+      "status": "incomplete",
+      "exit_code": 124,
+      "counts": {
+        "training_episodes": 4253,
+        "training_ticks": 85060,
+        "optimizer_steps": 4221,
+        "evaluation_episodes": 0,
+        "evaluation_ticks": 0
+      },
+      "native_panel": null,
+      "source_sha": "922a461fde867a8efe23a1563a969e6d2d08e258",
+      "wall_seconds": 1795.06
+    },
+    "bank": {
+      "status": "complete",
+      "exit_code": 0,
+      "counts": {
+        "training_episodes": 5000,
+        "training_ticks": 100000,
+        "optimizer_steps": 4969,
+        "evaluation_episodes": 128,
+        "evaluation_ticks": 2560
+      },
+      "native_panel": {
+        "mean": -4.32609375,
+        "sample_sd": 2.8547342180505457,
+        "conditional_episode_se": 0.2523252405086021,
+        "minimum": -12.529999999999998,
+        "maximum": 1.5100000000000007,
+        "n": 128
+      },
+      "source_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+      "wall_seconds": 1762.22
+    },
+    "actual_completed_counts": {
+      "training_episodes": 9253,
+      "training_ticks": 185060,
+      "optimizer_steps": 9190,
+      "evaluation_episodes": 128,
+      "evaluation_ticks": 2560
+    },
+    "pair_primary": null,
+    "pair_rule": null,
+    "independent_training_instances_with_final_endpoint": 1,
+    "mei_for_missing_contrast": 1.0,
+    "claim": "One fitted BANK policy only; no comparative sign, causal memory benefit, stable superiority, matched capacity or new headroom."
+  },
+  "retention": {
+    "complete": true,
+    "source_and_archives_retained": true,
+    "bank_checkpoint": "BANK_RAW.tar.gz member final.pt; not loaded in this request",
+    "generic_checkpoint": null,
+    "live_remote_handle": null,
+    "authoring_checkout": "C:/Projects/HMASD-worktrees/codex-vap-folr",
+    "branch": "codex/vap-folr"
+  },
+  "costs": {
+    "observed_native_seconds": {
+      "generic_incomplete": 1795.06,
+      "bank_complete": 1762.22,
+      "sum": 3557.28
+    },
+    "published_support_lower_bound_seconds": 213.7327064,
+    "published_native_plus_support_lower_bound_seconds": 3771.0127064,
+    "additional_final_cleanup_publication_seconds_in_accepted_relay": 9.1041944,
+    "full_support_and_complete_cost": "UNKNOWN beyond observed lower bounds; no full compliance claim or retroactive change",
+    "historical_E_caps_seconds": {
+      "generic": 1800,
+      "bank": 3000,
+      "native_sum": 4800,
+      "hard_support": 1200,
+      "complete": 6000
+    },
+    "new_consultation_complete_cost": "UNKNOWN; documentary/provider/agent effort is not free",
+    "new_empirical_allowance": 0,
+    "future_cost_projection": "UNKNOWN until exact selected work is specified and investment supplied; no profiling pilot."
+  },
+  "documentary_source_sizing_not_new_card_or_allocation": {
+    "meaning": "If a future selected question reused full E sizing; not a locally chosen successor.",
+    "arms": 2,
+    "training_seeds_per_arm": 1,
+    "train_episodes_per_arm": 5000,
+    "final_episodes_per_arm": 128,
+    "native_ticks_per_arm": 102560,
+    "native_ticks_two_full_arms": 205120,
+    "updates_per_arm": 4969,
+    "updates_two_full_arms": 9938,
+    "generic_replay_online_target_positions": 33391680,
+    "bank_replay_online_target_positions_upper": 166958400,
+    "generic_acting_positions": 538440,
+    "bank_acting_positions_upper": 2692200,
+    "cost_law": "startup + Ntrain*collection + max(0,Ntrain-31)*replay_update + final_checkpoint + Neval*evaluation + publication/readback/exit; support/validation separate.",
+    "limit": "Different widths/attention/projections/backward/mixer/optimizer costs mean cell ratios are not timing predictions. The Generic prefix is not full runtime or same-endpoint comparison."
+  },
+  "scientific_reading": {
+    "reused": "Current card/intake, prior verified CAMA/local-information reading; FOUNDATIONS2/4/6 and04_EMPIRICAL for legal history, finite learning, evaluation and independent units.",
+    "assumption": "128 reset-evaluation episodes describe one BANK fit; Generic has no endpoint. A useful next observation must change a named competent action/use/investment decision against the strongest legal same-information null.",
+    "effect": "No training-return, old-host RETAIN or missing-checkpoint substitute for the comparison. If the node uses retained BANK, label outcome-informed reuse and do not call it independent replication.",
+    "limit": "No new library access, literature/novelty verdict, architecture selection or empirical result; accepted mechanism/comparator justification reused."
+  },
+  "boundaries": [
+    "Keep ACTIVE FOLR and existing OPEN family pending the proper verdict; no inferred whole-direction PARK from ended E.",
+    "Preserve old scalar LEARNED_EVENT/5000/128 H, B01-B03 signs, B04 Generic competence and older narrow pauses.",
+    "Same full public per-slot activity/birth/departure and local visibility/seen/age interface; no unseen physical values or another actor hidden memory.",
+    "Only original em:vap_folr_core:convergence / conversation6aa18137-9d88-83e8-a01f-46630813faf8; one new question, no duplicate Send or conversation replacement."
+  ]
+}

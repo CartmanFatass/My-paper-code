@@ -1,22 +1,13 @@
 schema_version = 1
-mode = "singleton"
+mode = "dm_native"
 status = "active"
-
-# OWNER_DIRECT 2026-09-07: one independent reusable Transport task.
-# OWNER_DIRECT 2026-09-09: replace owner-archived stalled endpoint; keep Luna/high and provider bindings.
-# Root dispatches and receives native-direction receipts; Transport owns Pro observation.
-# No scheduled automation; preserve request-specific bindings, archives and receipt state.
-thread_id = "01a095ca-7b4a-7940-8acf-fca1b52c784d"
-task_title = "HMASD Windows Pro Transport"
-execution_owner = "transport"
-root_thread_id = "01a095b7-850f-7401-ad4e-5e4320d285f1"
-project_id = "177ab8d8-53ae-448c-9a9e-aaa2fecd2498"
+backend = "agentify"
+registry_path = "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/registry.json"
 environment = "local"
 model = "gpt-5.6-luna"
 reasoning_effort = "high"
 
-# Owner request 2026-09-04: use 6 Pro for provider research reviews.
-# This is independent of the Codex Transport executor model above.
+# Native task identities are request-bound, never global endpoints.
 [provider]
 model = "GPT-6 Astra"
 mode = "Pro"

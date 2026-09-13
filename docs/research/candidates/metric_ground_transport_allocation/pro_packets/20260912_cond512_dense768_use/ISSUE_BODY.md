@@ -1,0 +1,17 @@
+MGTAP 当前唯一用途问题：选择一次新的 mean-COND512 / 完整 DENSE768 B，或拒绝该具体延续方案。
+
+Portfolio 已购买一次原 Convergence 判断及完整 intake；没有代码、模型、测量、训练或评价额度，完整文档与调用成本明确接受 UNKNOWN。若选中 B，原 DM 只返回完整的新实验投资需求。MGTAP 保持 ACTIVE/MEDIUM，DENSE 保持默认。
+
+已接受的 mean-COND 三次 J 差为 +0.005761321371348559、−0.02246957345594415、+0.02447811898058116；TOP8221 为 −0.0684509798102144（4 正 / 28 负）。保留每次独立训练配对、全部负例及条件评价不确定性；不作新的合并结果或稳定优势判断。TOP 已完成并清理，不再是待判断候选。
+
+唯一新候选保持原 mean-COND 和完整 DENSE，只让后者获得 768 而非 512 回合普通训练。拟议一对新训练、各 32 个最终评价世界；原生团队回报 J 和 0.01 J 效应尺度不变。更多训练不保证 DENSE 提升，这是有意不同数据量和成本的用途比较，不是等预算、等时间或查询因果比较。
+
+不得第四次不变 COND 配对、TOP 重跑、额外 arm/panel、训练长度或架构搜索、七 UAV 替代、新分析或成本探测。拒绝这一候选不会自动 PARK 方向；本次不另选替代家族。
+
+固定输入：
+
+- [最新 Portfolio 授权与精确映射](https://github.com/CartmanFatass/My-paper-code/blob/814139558ccb28502b2e23da6800897b4d7af4b3/docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/EXECUTION_MAPPING.md)
+- [原 DM 用途与成本依据](https://github.com/CartmanFatass/My-paper-code/blob/e854bd6f11b3ca0b95783fbd6fc49c75b6095ed3/docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md)
+- [完整 TOP 负向 intake](https://github.com/CartmanFatass/My-paper-code/blob/bf175fafbe916b174e553801a01c6378597f094c/docs/research/candidates/metric_ground_transport_allocation/MGTAP_TOP_QUERY_B01_INTAKE_20260912.md)
+
+本轮仅允许在共享 codex/mgtap 的 docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md 交付完整答案及一个交付链接评论。固定 TASK 由原 DM 发布并绑定后交 Root → 当前 Transport。既有评论及旧 TASK/RESPONSE 保留各自历史含义，不是本轮输入或追加授权。

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import hashlib
 import json
 import os
 import re
@@ -268,11 +269,16 @@ def _binding_fields(record: dict) -> dict:
 
     fields = (
         "conversation_binding_key", "workflow_node", "direction_id",
-        "decision_authority", "conversation_id", "provider_url",
+        "decision_authority", "conversation_id", "provider_url", "agentify_stable_key",
         "request_history", "quarantined_provider_conversations",
         "pending_context_reset", "last_provider_context_reset",
     )
     return {key: copy.deepcopy(record[key]) for key in fields if key in record}
+
+
+def _agentify_generation_key(binding_key: str, request_id: str) -> str:
+    identity = json.dumps([binding_key, request_id], ensure_ascii=True, separators=(",", ":"))
+    return "hmasd-gen:" + hashlib.sha256(identity.encode("utf-8")).hexdigest()
 
 
 def _archived_direction_mirror(
@@ -429,6 +435,7 @@ def prepare_context_reset(
                 "packet_id": None,
                 "packet": None,
                 "state": "CONTEXT_RESET_PENDING",
+                "agentify_stable_key": _agentify_generation_key(conversation_binding_key, replacement_request_id),
                 "request_history": history,
                 "quarantined_provider_conversations": quarantined,
                 "pending_context_reset": {

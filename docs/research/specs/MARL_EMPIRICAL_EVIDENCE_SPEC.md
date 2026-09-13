@@ -300,7 +300,8 @@ EM MUST:
 6. preserve every valid result at its original meaning while permitting explicitly new follow-up
    objects;
 7. implement and technically accept the performance/instrumentation path required by the selected
-   class, optionally using a bounded Implementer, not unrelated proof machinery; and
+   class, with DM implementing and reviewing directly during the temporary code-subagent suspension,
+   not unrelated proof machinery; and
 8. recommend lifecycle consequences at the smallest supported unit and state what evidence would
    justify promotion, parking, recasting, or closure.
 
