@@ -90,6 +90,24 @@
       "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/PREPARATION.md",
       "state": "applied",
       "summary": "Portfolio814139558已选择一次原Convergence用途问题及完整intake，文档全成本UNKNOWN；原DM现已执行authoring/Issue准备。没有任何代码、模型、测量或B拨款，B若被选中另返完整投资需求。"
+    },
+    {
+      "at": "2026-09-13T04:55:30+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_kelu_unused/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INTAKE.md",
+      "state": "applied",
+      "summary": "已完成一次原节点判断和原DM完整intake；该文档款闭合，新B只作为完整投资需求返回，零实验开销。"
+    },
+    {
+      "at": "2026-09-13T04:55:53+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INTAKE.md",
+      "state": "applied",
+      "summary": "已完成既有Portfolio购买的一次原Convergence判断及完整intake；新B仅返回全部投资需求，无新实验。原资金来源仍为post-KELU Portfolio决定814139558。",
+      "correction": "上一条trace的source目录笔误为cond512_kelu_unused，该路径不存在；本条更正为真实完整原节点RESPONSE.md，保留误记历史，不改变授权或实际动作。"
     }
-  ]
+  ],
+  "approval_correction": "上一条trace的source目录笔误为cond512_kelu_unused，该路径不存在；本条更正为真实完整原节点RESPONSE.md，保留误记历史，不改变授权或实际动作。"
 }

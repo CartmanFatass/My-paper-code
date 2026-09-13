@@ -16,7 +16,7 @@
 | 方向 | 最新证据/科学状态 | 当前实际工作 | 下一步及边界 |
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
-| [ACPS](../candidates/actuator_conditioned_partial_sharing/ACPS_B01_INTAKE_20260912.md) | B01为ADVERSE；Portfolio已购买一个fresh unchanged ACPS/SHARED pair，ACPS仍ACTIVE/HIGH。 | 原DM已接收完整450秒/臂、900 native、600 support、1500 complete边界，正在绑定并执行完整链。 | 经检查、准入、两arm、Monitor、intake与cleanup完成本pair；无第三arm、retry或自动successor。 |
+| [ACPS](../candidates/actuator_conditioned_partial_sharing/ACPS_B02_INTAKE_20260912.md) | B02完整配对为INSIDE_MEI负向：ACPS−SHARED −0.0051864274 J，12/32正、20/32负；不构成等价或稳定结论，ACTIVE/HIGH。 | 完整intake、归档与四目标远端cleanup均已接受；Portfolio DM正在起草一次有界后续投资/设计/生命周期问题。 | 等待Portfolio原节点判断；无本地停向、第三pair、retry或自动successor。 |
 | [ACVC](../candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md) | K两项primary均UP；该有限分配结束，ACVC仍ACTIVE/MEDIUM、second-recast最低争用。 | 原DM已接收一个原方向节点下一对象/用途问题的起草与后续intake任务。 | 经Transport取得原节点决定；决定前无K重跑、实验或新经验预算。 |
 | [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md) | C pair完整验收为WITHIN_MEI：RAW=STRUCT=11.15、32/32零差，均低于REQUEST_ONLY12.45；只支持本对象的局部零差异。 | 已购pair结束，证据已保全至main9ca150856；无活动科学工作。 | 仅完成已列明的scoped reclamation；无retry、第二个S或自动successor。 |
 | [CADC](../candidates/contention_aware_decentralized_communication/CADC_B01_INTAKE.md) | B01为ADVERSE；post-KELU Portfolio明确可逆PARKED/HIGH、recasts0并保留RR与全部证据。 | 原DM正在应用方向本地处置记录；无科研在途。 | 仅在具体新用途/证据/成本事实下经proper authority重入；无新设计、实验或咨询。 |

@@ -12,6 +12,41 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Selected unequal-exposure COND512/DENSE768 use question — 2026-09-12
+
+Original Convergence selects exactly one fresh mean-COND512 versus intact-DENSE768
+B/EXPLORE use comparison. This scientific selection retains the original mean
+query, raw108/legal local information/private GRU/PPO/native team-J path; only
+DENSE receives the specified extra ordinary training. It has no empirical
+allocation yet. DENSE remains default and MGTAP ACTIVE/MEDIUM.
+
+The question is whether the conditional learning procedure retains a local
+optional-development role against this particular longer-trained generic
+procedure. More DENSE training is not known to improve return, and768 is not an
+optimal or equal-time choice. A future one-pair/all32-final-world difference
+J(COND512)−J(DENSE768), with own MEI.01J, would support only its realized package
+reading. No stable, equal-budget, sample-efficiency-curve or query/extra-training
+causal claim follows. All result branches preserve DENSE default.
+
+Strongest direct conditional-pooling support remains8214+.02447811898058116J;
+8213−.02246957345594415 contradicts consistent benefit, and8212+.005761321371348559
+was inside MEI. TOP8221−.0684509798102144 is a separate adverse query package.
+These observations are not pooled. Finite training variation, partner
+co-adaptation and competent generic learning remain alternatives; tuned
+same-information headroom remains absent.
+
+Declining the new empirical investment remains a serious alternative given two
+fits, unknown full cost and a necessarily local result. The next discriminator
+is this exact single pair only if separately funded:344064 team ticks/2560Adam,
+plus its complete required support chain. No numerical cap, new identity or run
+is assigned. The finished documentary allowance creates no extra question,
+fourth unchanged pair, TOP repeat, extra arm, host change, recast or lifecycle
+disposition. All previous scientific/family/C/UAV boundaries remain.
+
+[Complete original response](pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md),
+[conforming intake](pro_packets/20260912_cond512_dense768_use/INTAKE.md),
+[complete new empirical need](pro_packets/20260912_cond512_dense768_use/INVESTMENT_NEED.md).
+
 ## TOP single-partner query fresh8221 adverse result — 2026-09-12
 
 The selected and Portfolio-funded TOP/intact-DENSE B is a complete valid
