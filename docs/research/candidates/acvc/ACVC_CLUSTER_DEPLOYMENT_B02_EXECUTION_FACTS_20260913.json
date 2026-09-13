@@ -38,9 +38,22 @@
     "acceptance": "one original submission; reconcile this exact handle before any action on uncertain acceptance"
   },
   "launch": {
-    "accepted": false,
-    "submitted_utc": null,
-    "command_publication_sha": null
+    "accepted": true,
+    "submitted_utc": "2026-09-13T23:34:29Z",
+    "command_publication_sha": "92d8a2297ed8a7baae122bed497ee169e3e71610",
+    "receipt": "Task 'acvc-cluster-b02-be76f696c' started in tmux session 'agent_acvc-cluster-b02-be76f696c'. Output: /home/wu/.agent-tasks/acvc-cluster-b02-be76f696c/task.log\n",
+    "supervisor_handle": "acvc-cluster-b02-be76f696c",
+    "terminal": {
+      "status": "failed",
+      "exit_code": 125,
+      "duration_s": 0,
+      "pid": 3430348,
+      "event": "acvc-cluster-b02-be76f696c-exit125",
+      "log": "/usr/bin/time: temp/directions/acvc/cluster_deployment_b02_task_time.txt: No such file or directory"
+    },
+    "admission_present": false,
+    "scientific_output_present": false,
+    "result_bearing_invocations": 0
   },
   "engineering": {
     "reviewer": "/root/acvc_b02_review",
@@ -98,7 +111,25 @@
     "role": "Convergence independent scientific Reviewer",
     "plan": "Reuse unchanged reviewed same-law comparison; review this new endpoint, evidence interpretation, conclusions and next plan at intake. DM resolves findings and makes direction decision; no Portfolio approval."
   },
-  "status": "Published source technically accepted for the one declared original invocation; adjacent admission and actual supervisor acceptance still pending.",
+  "status": "Original supervisor failed before any scientific invocation; DM diagnosed argv-join/cwd error and is publishing one bounded pre-execution repair. Original failure retained. No scientific retry or cap change.",
   "stop": "No scientific retry/replacement, extra panel, checkpoint selection or automatic successor.",
-  "updated_utc": "2026-09-13T23:32:33Z"
+  "updated_utc": "2026-09-13T23:32:33Z",
+  "monitor": {
+    "native": "/root/acvc_monitor",
+    "adopted": true,
+    "terminal_delivered": true,
+    "active_set": []
+  },
+  "preexecution_repair": {
+    "diagnosis": "agent-task joins cmd argv with $* then eval. Original extra bash -lc loses command argument grouping, so cd executes in a child and following time executes from supervisor home; time fails before invoking timeout/launch.sh/admission/Python.",
+    "original_preserved": true,
+    "scientific_effect": "no launch.sh, admission, fit, checkpoint or panel; pending original scientific invocation remains unexecuted",
+    "planned_handle": "acvc-cluster-b02-be76f696c-launch2",
+    "command": "cd /home/wu/hmasd-worktrees/acvc-cluster-b02-be76f696c && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 BLIS_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/cluster_deployment_b02_task_time.txt timeout --signal=TERM --kill-after=1 595 bash experiments/candidates/acvc/cluster_deployment_b02/launch.sh be76f696cb773f2e5db8f4d55ebff1f3b6335ae6",
+    "submission": "agent-task run <new unique handle> '<complete command>' with no bash -lc layer",
+    "source_unchanged": true,
+    "cap_unchanged": true,
+    "allowed_repaired_submissions": 1,
+    "accepted": false
+  }
 }
