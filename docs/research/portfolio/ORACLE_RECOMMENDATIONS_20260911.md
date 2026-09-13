@@ -2,15 +2,15 @@
 
 作者：Root指定Portfolio材料与完整科学核对DM，`/root/dm_a_mx_portfolio_resume`。当前正文替换旧状态，历史由Git保存。
 
-**最新五项 Portfolio PRO_FINAL 已完整验收：ACPS获一个新unchanged pair，CADC明确可逆PARK，MGTAP获一次原节点用途判断，FSD本轮不买LONG，RCLE获一次家族选择并条件承诺唯一B。** [完整intake](pro_packets/20260912_post_kelu_continuation/INTAKE.md)核对248行/65519 Git bytes、37个固定来源和Issue17本轮交付；[决定](decisions/2026-09-12-post-kelu-marginal-investment.md)与[执行映射](pro_packets/20260912_post_kelu_continuation/EXECUTION_MAPPING.md)给出新上限、原DM和完整边界。CADC是唯一生命周期变更，Root应用后27项＝16 ACTIVE+11 PARKED；作者已记录决定，Root主表应用与各DM派发以真实回执为准。
+最近五项Portfolio决定已应用，CADC明确可逆PARK；ACPS由此购买的B02现已完整intake并清理。当前仅ACPS提出[新的边际投入/设计/生命周期问题](pro_packets/20260912_acps_post_b02_investment/SCIENCE_BRIEF.md)，尚未形成Pro决定；原DM与作者建议一次有界原节点用途判断，保留不追加/明确PARK/新独立pair反选。其余四项原节点工作保持各自范围。登记仍27＝16 ACTIVE+11 PARKED，没有由此次配对结束新增停放。
 
-原DM持续负责ACTIVE方向，有限pair、咨询或cleanup结束只结束分配。ACPS新pair、MGTAP一次判断、RCLE家族选择可以独立推进；本作者和已完成返回不能算多个科研链。真正争用时新ACPS在RCLE前，无兄弟结果门槛；headroom及ACVC/VNFC/SCDMP第二次recast最低ACTIVE争用规则保留。K与E已有最新完整intake，不把旧scope重开为新额度；五链目标不等于五笔自动拨款。
+原DM持续负责ACTIVE方向，有限pair、咨询或cleanup结束只结束分配。MGTAP/RCLE/ACVC/FOLR各自下一原节点TASK已固定ready，实际provider接受以真实回执为准；ACPS当前是独立Portfolio准备。完成返回、清理和同一Portfolio作者不冒充多条链。headroom与ACVC/VNFC/SCDMP第二次recast最低ACTIVE争用规则保留，五链目标不等于五笔自动拨款。
 
 ## 五个新登记方向
 
 | 方向 | 不同的科学问题、强null与primary | 当前投入及限制 |
 | --- | --- | --- |
-| [ACPS](../candidates/actuator_conditioned_partial_sharing/DIRECTION.md) | 首pair ACPS−同信息SHARED −.03680814181453545 J，7正25负，ADVERSE；informed SHARED支持限于该学习实例，不是稳定伤害。 | ACTIVE/HIGH/recasts0；Pro新选一组unscreened unchanged pair，2×512train/32final H256；新hard450/whole arm、900native、600support、1500complete秒。原DM绑定/适用验收后独立执行，当前未新launch；无第三arm、retry、额外panel或新咨询。 |
+| [ACPS](../candidates/actuator_conditioned_partial_sharing/ACPS_B02_INTAKE_20260912.md) | B01−.03680814181453545 J为ADVERSE；新B02−.005186427396033822 J为INSIDE_MEI/负，12正20负，条件SE.0054588475。两pair分别保留，informed SHARED为实测用途默认。 | ACTIVE/HIGH/recasts0；B02两次调用、完整intake和四目标清理结束，native348.12秒，support全账未知。当前[独立Portfolio问题](pro_packets/20260912_acps_post_b02_investment/SCIENCE_BRIEF.md)建议仅一次原节点用途/设计判断；不同B与新cap UNKNOWN，无第三pair、咨询或生命周期本地授权。 |
 | [CADC](../candidates/contention_aware_decentralized_communication/CADC_B01_INTAKE.md) | 净差−.01335492130082991、physical差−.012099183996142408 J，10正22负；已训练RR为强合法null，碰撞差不是原因证明。 | **本轮Portfolio明确可逆PARKED/HIGH/recasts0**；没有新实验、设计、数值重分析或咨询。保全全部证据和现有RR用途；具体新用途/可信证据/成本事实可触发适当重入判断，不是通信不可学习结论。 |
 | [TRDL](../candidates/tail_return_distributional_learning/DIRECTION.md) | 相同lower-tail目标下distributional与scalar baseline；两臂各自最差64/256均值之差，非paired差的tail。 | PARKED/MEDIUM；具体B设计保留，3000complete offer未分配，零实现/数值/咨询。 |
 | [CPCP](../candidates/cross_play_compatible_population_learning/DIRECTION.md) | population mixing vs matched-exposure self-play；两独立population的固定8composition跨play均值。 | PARKED/MEDIUM；一method-bundle pair而非8次replication，5100complete offer未分配，零branch/model/实验。 |
@@ -60,7 +60,7 @@ UAV 计数需要方向决定、卡和真实执行三者相连。本轮核实了 
 
 ## 当前完整成本、后续问题与科学限制
 
-本轮新ACPS 450/whole arm、900native、600hard support、1500complete；条件RCLE 900whole-native、900hard support、1800complete。若条件生效，两者3300秒仅为非互换的future invoked上限之和，不是共享余额、预测或全生命周期账单。MGTAP与RCLE各一次完整咨询/归档/intake的成本分别接受UNKNOWN；RCLE选择成本明确与B分开，不能隐藏在1800总额外或占用B的900support。所有必要定义/实现/检查/独立review/source/准入/Monitor/intake/保全cleanup按所属链计一次，未知尾部不计零。
+ACPS B02的450/whole arm、900native、600support、1500complete只属已结束的两次调用，任何未来cap和完整咨询费用UNKNOWN。RCLE已接受的900native+900support=1800complete条件B及其另计UNKNOWN家族选择成本保持，不由本ACPS问题改写；MGTAP原判断也无经验拨款。历史费用不变新预测/余额，未知尾部不计零。
 
 [本轮五项答复](pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md)完整回答唯一固定问题；旧四项HANDOFF因事前确认从未派发而已退役，无改写或重发任何已接受请求。当前实际作者/Root控制为Windows PowerShell；固定输入中后已撤销的WSL段落是历史，不是派发路由。本轮无新注册、融合、C或UAV晋级；CADC之外所有生命周期保留。
 

@@ -1,0 +1,13 @@
+# ACPS post-B02 Portfolio preparation — 2026-09-12
+
+Root assigned this clean marginal Portfolio question after accepting complete ACPS-B02. Actual author is `/root/dm_a_mx_portfolio_resume` (`01a095c2-e06a-7a92-984f-2dca23d77d57`), shared `codex/portfolio` at `C:/Projects/HMASD-worktrees/codex-portfolio`. Root remains parent and current Transport remains the only Send owner. This is a new question after the previous five-item response was fully intaken and applied, not an amendment or resend of that request or any direction request.
+
+The author read current ACPS B02 need/card/full intake/E0/counts/DIRECTION and retained B01's separate record; read applicable Portfolio/evidence sections and reused current knowledge; refreshed published registry, existing independent task handoffs and original-DM facts. Main`0e01c19424d08e99c7f6906b282926c4012b6814` already integrates B02 despite its stale running-table row. This was verified from the actual path and Git record, correcting an initial table-based currentness inference without holding preparation. Latest DM`f45a4dd675b73ce2013fe7f2844ed033c38f398d` changes cleanup/current status only and is separately pinned.
+
+Options Q/R/N/P and the Q recommendation are proposals to Portfolio, not local disposition. Original DM ranking and UNKNOWN new-object/cost fields are explicitly recorded. No new object, model, numerical analysis, test, experiment, source implementation or Pro Send is commissioned by preparation; machine integer workload and fixed-byte checks only. Owner reviews returned no unapplied instruction; prediction not taken. Owner proposal item records no auto-applied scientific choice.
+
+Required published main inputs were merged into the same branch with every distinct audit row preserved; this synchronization is not a new scientific decision. Fixed evidence remains pinned while normal descendant commits are preserved. Root owns main/control/index; this author owns the new packet, current Oracle science, associated owner proposal and audit. No unrelated main files or live direction source are edited.
+
+When ready, publish exact TASK, bind its full pushed SHA, commit/push one HANDOFF and send READY_HANDOFF via current Relay for Root→Transport. Its complete response returns to this original author for full scientific/spec intake. No invitation to a second approval layer, batch wait, automatic new B or lifecycle stop is created.
+
+Owner proposal `20260912-root-022` has no auto-applied option. Its initial CLI ledger pointer was mistyped; the CLI application trace corrects it to `docs/research/portfolio/audit/2026-09-12.md#L158`, also bound in FACTS. This is a documentary correction, not an owner reply or scientific choice.
