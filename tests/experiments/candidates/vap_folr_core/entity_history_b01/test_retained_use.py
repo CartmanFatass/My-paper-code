@@ -1,5 +1,4 @@
 """Synthetic support fixtures only; no selected scientific seed or endpoint run."""
-import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -54,12 +53,12 @@ def fixture_checkpoint(tmp_path):
     actor = Actor('BANK')
     checkpoint = tmp_path/'synthetic_actor_fixture.pt'
     torch.save(dict(arm='BANK', updates=4969, actor=actor.state_dict()), checkpoint)
-    return actor, checkpoint, hashlib.sha256(checkpoint.read_bytes()).hexdigest()
+    return actor, checkpoint
 
 
 def test_fixed_loader_exact_weights_and_lifetime_reset(tmp_path):
-    original, checkpoint, digest = fixture_checkpoint(tmp_path)
-    loaded = use.load_retained_bank(checkpoint, digest)
+    original, checkpoint = fixture_checkpoint(tmp_path)
+    loaded = use.load_retained_bank(checkpoint)
     assert not loaded.training and all(not p.requires_grad for p in loaded.parameters())
     for key, tensor in original.state_dict().items():
         torch.testing.assert_close(loaded.state_dict()[key], tensor, rtol=0, atol=0)
@@ -73,19 +72,16 @@ def test_fixed_loader_exact_weights_and_lifetime_reset(tmp_path):
     torch.testing.assert_close(q_empty, q_old)
     torch.testing.assert_close(h_empty, h_old)
     assert all(p.grad is None for p in loaded.parameters())
-    with pytest.raises(ValueError, match='checkpoint bytes differ'):
-        use.load_retained_bank(checkpoint, '0'*64)
 
 
 def test_bank_runner_no_learner_and_truthful_publication(tmp_path, monkeypatch):
-    _, checkpoint, digest = fixture_checkpoint(tmp_path)
+    _, checkpoint = fixture_checkpoint(tmp_path)
     generic, _ = summaries()
     generic_file = tmp_path/'synthetic_generic_summary.json'
     generic_file.write_text(json.dumps(generic))
     from experiments.candidates.vap_folr_core.entity_history_b01 import learner
     from experiments.candidates.vap_folr_core.entity_history_b01 import environment
     from experiments.candidates.vap_folr_core.public_lifecycle_b01 import collection
-    monkeypatch.setattr(use, 'BANK_CHECKPOINT_SHA256', digest)
     monkeypatch.setattr(learner, 'Learner', lambda *a: pytest.fail('BANK must not construct a learner'))
     monkeypatch.setattr(collection, 'collect', lambda *a: ({}, 2.0, {}))
     monkeypatch.setattr(environment, 'EntityHistoryEnv', lambda **kw: object())
@@ -108,7 +104,7 @@ def test_bank_runner_no_learner_and_truthful_publication(tmp_path, monkeypatch):
     assert result['status'] == 'complete' and result['training_seed'] is None
     assert result['training_episodes'] == result['optimizer_steps'] == result['actor_change_l2'] == 0
     assert result['use_primary']['d_use'] == 2.0 and 'pair_primary' not in result
-    assert result['retained_checkpoint_sha256'] == digest
+    assert result['retained_checkpoint'] == str(checkpoint)
     assert not (out/'final.pt').exists()
     assert seed_calls == [(lib, seed) for seed in (use.BANK_TRAINING_SEED, use.BANK_EVALUATION_SEED)
                           for lib in ('python', 'numpy', 'torch')]

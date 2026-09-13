@@ -5,19 +5,13 @@ from .publication import arm_result
 USE_OBJECT = 'FOLR_RETAINED_REFERENCE_USE_B01_781301'
 GENERIC_SEED, GENERIC_EVALUATION_SEED = 781301, 1781301
 BANK_TRAINING_SEED, BANK_EVALUATION_SEED = 781201, 2781301
-BANK_CHECKPOINT_SHA256 = '2385b6ea0f03b36fd4e0f05006acbe64922a8dd9c2c8fa7d0cd396d5ed090989'
 
 
-def load_retained_bank(path, expected_sha256):
-    import hashlib
-    import io
+def load_retained_bank(path):
     import torch
     from .model import Actor
 
-    raw = path.read_bytes()
-    if hashlib.sha256(raw).hexdigest() != expected_sha256:
-        raise ValueError('retained checkpoint bytes differ from the fixed input')
-    saved = torch.load(io.BytesIO(raw), map_location='cpu', weights_only=True)
+    saved = torch.load(path, map_location='cpu', weights_only=True)
     if saved['arm'] != 'BANK' or saved['updates'] != 4969:
         raise ValueError('retained input must be the accepted final BANK checkpoint')
     actor = Actor('BANK')

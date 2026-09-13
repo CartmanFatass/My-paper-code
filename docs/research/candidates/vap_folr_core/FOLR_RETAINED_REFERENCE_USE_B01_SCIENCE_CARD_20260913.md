@@ -75,7 +75,8 @@ do not reconstruct or choose a different checkpoint. Loading strictly requires
 BANK arm and4969 recorded updates with the accepted actor shape/state keys.
 The preserved member is4,532,819 bytes, SHA256
 `2385b6ea0f03b36fd4e0f05006acbe64922a8dd9c2c8fa7d0cd396d5ed090989`;
-the loader hashes the exact bytes it deserializes and rejects a different input.
+the author verifies the transferred fixed input at staging. The loader strictly
+loads the accepted actor state; no new runtime provenance predicate is added.
 
 Primary: `d_use = mean(new fixed-BANK returns) - mean(new Generic returns)`.
 Apply verbatim: **strict >+1 OPTIONAL_BANK_REFERENCE; inclusive [-1,+1]

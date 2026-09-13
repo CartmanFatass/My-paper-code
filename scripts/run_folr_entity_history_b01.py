@@ -98,11 +98,9 @@ def main():
         np.random.seed(args.seed)
         torch.manual_seed(args.seed)
         if fixed_bank:
-            from experiments.candidates.vap_folr_core.entity_history_b01.retained_use import (
-                load_retained_bank, BANK_CHECKPOINT_SHA256)
-            actor = load_retained_bank(args.retained_checkpoint, BANK_CHECKPOINT_SHA256)
+            from experiments.candidates.vap_folr_core.entity_history_b01.retained_use import load_retained_bank
+            actor = load_retained_bank(args.retained_checkpoint)
             summary['retained_checkpoint'] = str(args.retained_checkpoint)
-            summary['retained_checkpoint_sha256'] = BANK_CHECKPOINT_SHA256
             initial = {name: p.detach().clone() for name, p in actor.named_parameters()}
         else:
             learner = Learner(args.arm)
