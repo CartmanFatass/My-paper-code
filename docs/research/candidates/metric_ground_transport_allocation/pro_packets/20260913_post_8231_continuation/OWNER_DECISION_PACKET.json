@@ -1,0 +1,41 @@
+{
+  "question": "8231 的负向用途观察后，是否现在再准备一对不变的等暴露 mean-COND/DENSE 提案？",
+  "changes_if_approved": [
+    {
+      "target": "MGTAP DIRECTION.md 与 post-8231 INTAKE.md",
+      "from": "已完成8231，下一准备选择待原方向节点裁决",
+      "to": "执行 Pro 的 R：保留 mean-COND 科学资格和 DENSE 默认，当前不再准备不变配对；保持 ACTIVE/MEDIUM"
+    }
+  ],
+  "if_refused": "若改选 B，先说明这个新配对会改变哪项具体开发决定，再按新的实际范围准备提案；不自动发起实验、分配 master 或复用旧额度。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_post_8231_continuation/archive/RESPONSE.md",
+      "quote": "R nevertheless wins at this boundary because it preserves that possibility without preparing another same-procedure spending request whose intended practical effect remains underdefined.",
+      "why": "拒绝当前准备步骤的理由是新增决定价值不足，而不是要求稳定阳性、完整成本证明或因果解释。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_post_8231_continuation/archive/RESPONSE.md",
+      "quote": "The fact that all three result categories have already occurred does not make further independent training evidence redundant.",
+      "why": "Pro 修正了原 DM 的过强理由。8214 的正例和训练变动仍使一个有具体用途的新配对可能有价值；因此 R 是可逆近似取舍。"
+    }
+  ],
+  "uncertainty": [
+    "8231 只有一个实际训练配对，32个终点评价世界不是32次独立训练。",
+    "等暴露 mean-COND 的益处是否复现、队友共同适应以及优化变动仍未识别。",
+    "旧 support900/complete2400 比较和未来完整调用成本仍是 UNKNOWN；原生600/900/1500限额已通过。",
+    "重审例子是一个真实同宿主、512回合限制的待决开发用途；尚未观察到该用途，未购买任何新工作。"
+  ],
+  "cost": {
+    "compute": "本次没有新科学执行、模型、训练、评价或分析。文档/Pro/Transport及intake完整调用成本 UNKNOWN，旧额度不复用。",
+    "owner_time": "可异步查看或改判；当前执行不等待所有者回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "无额外批准关卡；当前只有结果整合，后续任何新用途/投资问题需自身实际范围。"
+  },
+  "verdict_text": "Select **R: retain mean-COND's existing scientific eligibility and DENSE as the generic default, but decline preparing another unchanged equal-exposure empirical proposal now.** The completed 8231 comparison is adverse for its stated unequal-exposure procedures. Returning to COND512/DENSE512 would answer a replication question about a comparison that already has positive-within-MEI, adverse and above-MEI observations. That replication could add information, but the present proposal does not identify a sufficiently consequential additional development choice that the next isolated result would resolve. This is a judgment about this proposal's marginal decision value, not a finding that further learning is impossible or that another independent pair would be scientifically invalid.",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_post_8231_continuation/archive/RESPONSE.md",
+  "source_commit": "3abb76592596f7f8c30b4c41fce58632f007452d",
+  "application_state": "applied by original DM as PRO_FINAL / OWNER_DELEGATED; no lifecycle or empirical allocation change"
+}

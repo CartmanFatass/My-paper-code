@@ -12,6 +12,30 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Unchanged proposal declined; mean-COND eligibility retained — 2026-09-13
+
+Post-8231 Convergence selects reversible preparation option R: retain mean-COND's
+scientific eligibility and DENSE default, but do not prepare another unchanged
+equal-exposure empirical proposal now. This does not park, close or recast the family
+or direction, and creates no successor, master, numerical allowance or experiment.
+
+The accepted reason is the current proposal's underdefined additional development
+consequence, not proof that replication has no information value. Another independent
+pair could inform recurrence despite all three result signs already having occurred.
+Mean8214 +.02447811898058116 J remains the strongest support; equal-exposure8213
+−.02246957345594415 and the separate unequal-exposure8231 adverse use result remain
+contrary evidence. No pooled result, causal account or stable ordering follows.
+
+The next discriminator is a concrete same-host development decision limited to512
+episodes per fit where fresh useful COND evidence would enable a specified non-default
+development commitment. This is an illustrative revisit fact, not an observed workload,
+mandatory qualification or funded activity. Native headroom and complete future costs
+remain unknown; neither becomes a prerequisite. Legal DENSE processing, finite learning,
+partner co-adaptation and trajectory-dependent usefulness remain live alternatives.
+
+[Complete Pro response](pro_packets/20260913_post_8231_continuation/archive/RESPONSE.md),
+[full DM intake and limits](pro_packets/20260913_post_8231_continuation/INTAKE.md).
+
 ## Unequal-exposure COND512/DENSE768 adverse use result — 2026-09-13
 
 The selected and funded sole master8231 pair is complete and valid: COND512 mean
