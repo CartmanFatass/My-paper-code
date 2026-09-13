@@ -32,7 +32,7 @@
     "unknown_rates_no_calibration_required": true
   },
   "support": {
-    "known_invoked_seconds": 68.78930770008107,
+    "known_invoked_seconds": 75.29171340009022,
     "known_components": [
       {
         "stage": "grant read/fetch",
@@ -213,6 +213,38 @@
       {
         "stage": "immutable native-byte publication check inner command wall",
         "seconds": 0.30603169999085367
+      },
+      {
+        "stage": "immutable publication-check outer tail excluding already charged inner work",
+        "seconds": 0.2925598000091464
+      },
+      {
+        "stage": "publication receipt commit",
+        "seconds": 0.5031318
+      },
+      {
+        "stage": "publication receipt push/revision",
+        "seconds": 3.7633531
+      },
+      {
+        "stage": "accepted cleanup inventory/checkout read",
+        "seconds": 0.3249661
+      },
+      {
+        "stage": "live Relay and owner-review read",
+        "seconds": 0.5041437
+      },
+      {
+        "stage": "retained archive and exact local path preflight",
+        "seconds": 0.2227073
+      },
+      {
+        "stage": "four-target remote cleanup and disk/Git verification, outer command once",
+        "seconds": 0.6738369
+      },
+      {
+        "stage": "read-only local rejection-effect verification and receipt",
+        "seconds": 0.217707
       }
     ],
     "coverage": "Nonoverlapping known command/phase walls only. Missing provider/deliberation/client, some authoring/read tails, Monitor/tool delivery and Root integration/closing costs remain UNKNOWN; closing publication/cleanup not yet charged. No inference of zero, whole-support certification or budget breach from missing coverage. Adjacent admission/evaluation/publication are already inside native time and not support-charged twice."
@@ -260,7 +292,7 @@
     "runtime_cwd": "/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f",
     "output_root": "/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f/temp/directions/acvc/exp/cluster_deployment_b01_20260912"
   },
-  "status": "Complete native result collected and technically/scientifically accepted; Root integration/retention and exact scoped cleanup pending; no successor allocation",
+  "status": "Scientific K intake and remote cleanup complete; exact fifth local preparation target remains after pre-execution policy rejection. Root blocker handling required; no successor authorized; ACVC ACTIVE.",
   "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-acvc-005.json",
   "audit_row": "docs/research/portfolio/audit/2026-09-12.md#L116",
   "stop": "one original invocation only; no retry/extra fit/panel/consultation",
@@ -292,7 +324,7 @@
     "delivery": "accepted",
     "instructions": "get_goal; continue matching unfinished goal or create without token budget; retain handle through accepted terminal delivery; actual goal state in MONITOR_ADOPTED; MONITOR_GOAL_COMPLETE to Root before empty-goal completion"
   },
-  "updated_utc": "2026-09-12T23:44:45.131127+00:00",
+  "updated_utc": "2026-09-12T23:59:31.170975+00:00",
   "adjacent_admission": {
     "assessed_at": "2026-09-12T23:33:38.792548Z",
     "available_physical_bytes": 15627849728,
@@ -316,8 +348,8 @@
     "native_charge_basis": "Retain the full recorded supervisor duration, which encloses the measured165.33s admission-through-process-exit chain; do not add nested panel/fit timers.",
     "native_cap_s": 600,
     "native_cap_pass": true,
-    "known_support_s": 68.78930770008107,
-    "known_native_plus_support_s": 234.78930770008105,
+    "known_support_s": 75.29171340009022,
+    "known_native_plus_support_s": 241.2917134000902,
     "support_cap_s": 600,
     "complete_cap_s": 1200,
     "complete_support_cap_certified": false,
@@ -363,5 +395,16 @@
     "immutable_native_bytes_verified": true,
     "receipt": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/PUBLICATION_CHECK.json",
     "closing_receipt_commit_push_and_Root_integration_cleanup": "pending or unmeasured; not zero"
+  },
+  "cleanup": {
+    "receipt": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/CLEANUP_RECEIPT.json",
+    "root_retention_accepted": "main2a59af854 and main011e3b1b9",
+    "remote_targets_removed": 4,
+    "remote_worktree_registration_absent": true,
+    "local_target_removed": false,
+    "local_blocker": "exec_command CreateProcess rejected before execution: blocked by policy; no specific reason supplied",
+    "local_target": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\cluster-deployment-b01-20260912",
+    "retained_archive_present": true,
+    "complete": false
   }
 }
