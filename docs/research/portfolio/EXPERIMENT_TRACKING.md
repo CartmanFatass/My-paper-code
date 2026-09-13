@@ -1,6 +1,8 @@
 # HMASD current execution tracking
 
 Updated 2026-09-13. Windows control checkout: C:/Projects/HMASD; PowerShell.
+Owner pause 2026-09-13：MGTAP、RCLE、ACVC、FOLR 均已在干净边界暂停；无运行中实验、Transport 或等待循环。50-minute Heartbeat 已暂停，恢复需 owner 明确指令。
+
 Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears here.
 
 | Work | Actual owner/state | Next event |

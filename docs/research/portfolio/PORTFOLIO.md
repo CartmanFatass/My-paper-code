@@ -4,6 +4,8 @@
 详细科学依据在各方向记录；历史操作快照从Git查询。
 
 ## 当前27方向状态 — 2026-09-13 Windows/PowerShell 控制面
+Owner pause 2026-09-13：四个 ACTIVE DM 均已在干净边界暂停；不再进行无效 idle、Transport、实验或新请求。已完成证据与 ACTIVE/PARKED 生命周期保留，恢复需 owner 明确指令。
+
 
 本表登记15 ACTIVE、12 PARKED。2026-09-13 ACPS Portfolio PRO_FINAL 已将 ACPS 可逆改为 PARKED/HIGH；其余生命周期、priority、recasts与UAV字段不变。
 标准并行目标为4个方向；当前四条 ACTIVE 链为 MGTAP、RCLE、ACVC、FOLR。DM 完成、阻塞或 ACTIVE-idle 回报都会触发一次稳定 Root 调度检查；对象完成、cleanup、Pro wait 或 child 完成均不释放方向槽位，只有正式 Portfolio/owner lifecycle 决定释放槽位。
