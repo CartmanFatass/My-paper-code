@@ -1,5 +1,5 @@
 {
-  "status": "RECOVERY_HANDOFF_PREPARED_UNSENT",
+  "status": "ARCHIVED; COMPLETE_Q_INTAKE",
   "authority": "OWNER_DIRECT",
   "control_commit": "83cb93c52",
   "owner_instruction_via_root": "用户已授权 unrecoverable-conversation fallback，且控制面已落地（commit 83cb93c52）。原 Q operation b7f00c5e… 已确认 sendAttempted=false、无 provider IDs，支持的 runtime load 不存在，因此可安全 rebind：1) 保留旧 HANDOFF/tab/operation/receipts，标记 VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE；2) 用完全相同的冻结 prompt、inputs、科学范围创建新 conversation/handoff/idempotency；3) 链接新旧记录，执行一次正常 preflight/Send。不得把旧请求重发、不得改变模型/科学含义、不得修改旧 receipts。完成或阻塞时向 Root 主动回报并更新 intake/skill 引用。",
@@ -48,7 +48,7 @@
   ],
   "replacement_request_id": "2026-09-13-acps-post-b02-use-rebind-01",
   "replacement_handoff_path": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/delivery/RECOVERY_HANDOFF_20260913.json",
-  "replacement_handoff_commit": "recorded in native dispatch and subsequent intake",
+  "replacement_handoff_commit": "c36369d105169e608a7dee4a4c42f5c45710f370",
   "agentify_stable_key": "hmasd-gen:7e64af7eba4439ec6a7221062db586ecd104dc58caaf80a481d114f8e5c728d8",
   "same_prompt": true,
   "prompt_bytes": 1942,
@@ -81,7 +81,7 @@
   "unbound_registry_facts": "Canonical bindings/directions contain no ACPS entry; existing archived-conversation reset is inapplicable. Reviewed helper reserves a linked first-binding generation without fabricating a UUID.",
   "native_transport": "/root/dm_acps_resume/transport_lh_acps",
   "current_model_alias_condition": "Visibly verify current GPT-6 Astra 6 Pro composer identity and Pro effort before new operation creation; the canonical provider_requirement is unchanged.",
-  "new_send_count": 0,
+  "new_send_count": 1,
   "scientific_exposure": "zero new learner/model/RNG/raw-analysis/profile/test/training/evaluation; provider-free control-plane repair tests are separately recorded",
   "skill_reference": ".agents/skills/hmasd-chatgpt-pro-transport/SKILL.md#unrecoverable-conversation-fallback",
   "published_prior_audit": {
@@ -90,5 +90,10 @@
     "sha256": "e7bb8f9a2bdd17c504310a748f5adfcca5e3e7221e9013460e98d59723edd068",
     "size_bytes": 4906
   },
-  "helper_acceptance": "DM accepted after31 focused tests and independent Reviewer found no material finding; see PUBLICATION.md"
+  "helper_acceptance": "DM accepted after31 focused tests and independent Reviewer found no material finding; see PUBLICATION.md",
+  "new_operation_id": "c827876f-c617-4299-9cee-1ee205673cd5",
+  "new_conversation_id": "6aa68713-08c0-83e8-819c-1bf4e8ee5cea",
+  "full_response_commit": "f842439457bfaad8f9c57f1e3974d0f4bf22e9fd",
+  "full_response_sha256": "b51e6815c3423ab36a19636e3fb03a9dff07c13b0035134c8c4bebe6294e7f7f",
+  "intake_path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_POST_B02_USE_INTAKE_20260913.md"
 }

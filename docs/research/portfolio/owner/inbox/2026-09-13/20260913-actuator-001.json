@@ -1,0 +1,94 @@
+{
+  "id": "20260913-actuator-001",
+  "created": "2026-09-13T04:47:49-07:00",
+  "direction": "actuator_conditioned_partial_sharing",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "ACPS 用途判断完成：只可逆暂停已测方案当前用途",
+  "context": "已购 Q 的完整 Pro 答复选择无候选，并仅暂停已测能力残差方案在当前固定训练量、最终原生服务用途上的继续推进。保留完整共享策略；整个 ACPS 仍 ACTIVE/HIGH，重构0，无新增实验预算。",
+  "options": [
+    {
+      "key": "p",
+      "label": "可逆暂停精确定义的已测用途",
+      "consequence": "执行 Pro 的窄用途判断；保留 SHARED 与全部观察，不改变整个方向生命周期。"
+    },
+    {
+      "key": "c",
+      "label": "继续当前已测用途",
+      "consequence": "需要实际异步指令或原节点修订，不能用本轮零预算自动追加实验。"
+    },
+    {
+      "key": "x",
+      "label": "关闭更广机制家族",
+      "consequence": "会扩张到两次探索不能支持的广泛关闭，当前未执行。"
+    },
+    {
+      "key": "r",
+      "label": "选择实际重构",
+      "consequence": "需要实际不同科学家族或用途；本答复未选择，也不增加重构次数。"
+    }
+  ],
+  "recommended": "p",
+  "auto_applied": "p",
+  "dm_reason": "完整 Convergence 回答符合原 Q 范围；当前无行动价值明确的新用途，同时保留有限学习的不确定性。",
+  "evidence": [
+    "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_POST_B02_USE_INTAKE_20260913.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L18",
+  "brief": "docs/research/portfolio/owner/briefs/actuator_conditioned_partial_sharing/2026-09-13_ACPS_POST_B02_USE.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "已执行的方向判断：只可逆暂停已测 ACPS 方案在当前终点服务用途上的继续推进，是否需要异步改写？",
+    "changes_if_approved": [
+      {
+        "target": "ACPS DIRECTION.md 的当前已测用途",
+        "from": "等待一次用途判断",
+        "to": "无候选；已测方案当前用途可逆暂停，完整共享策略为默认。整个方向仍 ACTIVE/HIGH，重构次数0。"
+      }
+    ],
+    "if_refused": "保存全部既有观察与原 Pro 决定，在下一边界按所有者实际指令处理；不自动追加实验或改动旧结果。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/archive/RESPONSE.md",
+        "quote": "Return no candidate and reversibly park further advancement of the exact tested ACPS package for its present fixed-budget, final native-service use. Retain fully informed SHARED for that measured use.",
+        "why": "这是原 Convergence 节点对已购用途问题的完整裁决。"
+      },
+      {
+        "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_POST_B02_USE_INTAKE_20260913.md",
+        "quote": "B01 ADVERSE; B02 INSIDE_MEI, negative.",
+        "why": "两个独立学习实例没有提供超过原实用幅度的 ACPS 总体收益；它们仍分别报告。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/archive/RESPONSE.md",
+        "quote": "The strongest objection to no-candidate is genuine: capability-indexed learning may be helpful under finite data or optimization even when shared learning is expressive enough.",
+        "why": "保留有限学习和其他重要资源目标可能改变建议的不确定性；不据此关闭整个机制。"
+      }
+    ],
+    "uncertainty": [
+      "现有观测不能证明稳定损害、等价或专属学习无效。",
+      "若出现具体运行/训练资源要求或相关可靠证据，可重新考虑当前用途判断；不要求先有正向结果。"
+    ],
+    "cost": {
+      "compute": "无新实验、模型、随机流或测量预算；本轮完整文书成本明确接受 UNKNOWN。",
+      "owner_time": "无需回复才能执行；可异步介入。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "**Return no candidate and reversibly park further advancement of the exact tested ACPS package for its present fixed-budget, final native-service use. Retain fully informed SHARED for that measured use. No different finite purpose or actual RECAST is selected.** The two accepted comparisons supply no above-margin aggregate ACPS benefit, while the shared recurrent controller already has the information and nonlinear representation needed for capability-dependent behavior. A different learning-resource benefit remains possible, but the supplied evidence does not make one sufficiently consequential to select now. This is a bounded family/use judgment, not a finding that specialization cannot work and not a Portfolio PARK of ACPS. [BRIEF, purchased question and protected evidence][brief]; [DIRECTION, latest result and next discriminator][direction].",
+    "source": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T11:48:10+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "f842439457bfaad8f9c57f1e3974d0f4bf22e9fd:docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/archive/RESPONSE.md",
+      "record": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_POST_B02_USE_INTAKE_20260913.md",
+      "state": "applied",
+      "summary": "Convergence exact tested-use park applied; no actual RECAST or whole-direction Portfolio disposition. Q complete; ACTIVE/HIGH/recasts0 and zero new funding preserved."
+    }
+  ]
+}
