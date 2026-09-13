@@ -5,7 +5,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACPS | New unchanged pair active; SHARED handle `acps-b02-shared-9102-20260912` accepted running at source `dd91ea3d8` | Monitor formally adopted the handle; original DM retains collection, acceptance, paired-arm sequencing, intake and cleanup |
+| ACPS | New unchanged pair active; SHARED finished exit0/165s and companion `acps-b02-acps-9102-20260912` is accepted running at source `dd91ea3d8` | Monitor formally adopted the companion; original DM retains collection, pair intake and cleanup |
 | MGTAP | Portfolio funds one original Convergence COND512/intact-DENSE768-or-decline judgment, zero empirical spend | Original DM actively authors the exact question and owns Transport handoff plus full intake |
 | RCLE | Portfolio funds one original Convergence family/use selection; conforming selection conditionally funds one B | Original DM actively authors the exact question; zero implementation/experiment until selection |
 | ACVC | K complete and both frozen primaries accepted UP; ACTIVE/MEDIUM | Original DM actively prepares one proper direction-node next-object/use question; no K retry or empirical spend |
@@ -26,7 +26,7 @@ each direction still counts its own implementation-through-cleanup and later Roo
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
 | Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; goal active with `acps-b02-shared-9102-20260912` adopted until terminal Root delivery |
+| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; companion `acps-b02-acps-9102-20260912` adopted until terminal Root delivery |
 | Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
 Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the
