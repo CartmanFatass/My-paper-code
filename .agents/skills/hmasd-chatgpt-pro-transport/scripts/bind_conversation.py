@@ -347,6 +347,106 @@ def _reconcile_archived_binding_mirror(
     return reconciled
 
 
+def prepare_unaccepted_first_binding_rebind(
+    registry_path: Path, *, request: dict, prior: dict,
+) -> dict:
+    """Reserve an owner-authorized generation for an unbound, never-sent operation.
+
+    The Transport supplies its fresh authoritative operation audit. This helper
+    neither contacts the provider nor treats a missing operation as nonacceptance.
+    Existing concrete bindings continue through prepare_context_reset instead.
+    """
+
+    evidence = validate_provider_context_reset_evidence(request.get("provider_context_reset_evidence"))
+    if request.get("reset_invalid_provider_context") is not True or evidence.get("reset_authority") != "OWNER_DIRECT":
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: explicit owner recovery is required")
+    previous_id = evidence["previous_request_id"]
+    replacement_id = request.get("request_id")
+    if not isinstance(replacement_id, str) or not replacement_id.strip() or replacement_id == previous_id:
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: replacement requires a distinct request_id")
+    direction = request.get("direction_id")
+    node = request.get("workflow_node")
+    key = request.get("conversation_binding_key")
+    if key != _expected_binding_key(node, direction, request.get("direction_ids", [])):
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: decision binding mismatch")
+    if request.get("requested_conversation_id") is not None:
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: no replacement provider identity may be supplied")
+    operation = prior.get("old_operation", {})
+    null_effect_fields = (
+        "sendAttemptedAt", "providerUserMessageId", "providerAssistantMessageId",
+        "observedConversationUrl", "observedConversationId", "archive",
+    )
+    if (
+        prior.get("status") != "VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE"
+        or operation.get("sendAttempted") is not False
+        or any(field not in operation or operation[field] is not None for field in null_effect_fields)
+        or operation.get("conversationUrl") != "https://chatgpt.com/"
+        or operation.get("conversationId") != "__new__"
+        or operation.get("provider") != "chatgpt"
+        or not UUID_RE.fullmatch(str(operation.get("operationId", "")))
+        or operation.get("operationId") != prior.get("old_operation_id")
+        or operation.get("idempotencyKey") != previous_id
+        or prior.get("request_id") != previous_id
+        or operation.get("stableKey") != prior.get("stableKey")
+        or operation.get("stableKey") != key
+    ):
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: exact never-sent operation evidence is required")
+    tab = prior.get("old_tab", {})
+    if (
+        tab.get("protected") is not False or tab.get("preserved") is not True
+        or not _tab_handle(tab.get("tab_id")) or tab.get("stable_key") != operation["stableKey"]
+        or prior.get("old_operation_mutated") is not False
+        or not prior.get("durable_prior_receipts")
+    ):
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: preserved old tab/operation/receipts are required")
+    prompt = request.get("prompt")
+    prompt_hash = hashlib.sha256(prompt.encode("utf-8")).hexdigest() if isinstance(prompt, str) else None
+    product = request.get("provider_requirement", {})
+    if (
+        not prompt or prompt_hash != operation.get("promptSha256")
+        or prompt_hash != prior.get("old_handoff", {}).get("prompt_sha256")
+        or product.get("model") != operation.get("productModel")
+        or product.get("mode") != operation.get("reasoningEffort")
+    ):
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: frozen prompt/model/effort changed")
+    pending = {
+        "replacement_request_id": replacement_id,
+        "evidence": evidence,
+        "unaccepted_first_binding_rebind": copy.deepcopy(prior),
+        "frozen_prompt_sha256": prompt_hash,
+        "provider_requirement": copy.deepcopy(product),
+    }
+    resolved_path = registry_path.resolve()
+    with registry_lock(resolved_path):
+        registry = _load(resolved_path)
+        current = registry["bindings"].get(key)
+        if isinstance(current, dict) and current.get("state") == "CONTEXT_RESET_PENDING" and current.get("pending_context_reset") == pending:
+            return current
+        if current is not None or registry["directions"].get(direction) is not None:
+            raise ValueError("UNBOUND_REBIND_UNAVAILABLE: an existing binding or direction record requires reconciliation")
+        old_round = {
+            "request_id": previous_id,
+            "state": "VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE",
+            "agentify_stable_key": operation["stableKey"],
+            "recovery_audit": copy.deepcopy(prior),
+        }
+        record = {
+            "schema_version": SCHEMA_VERSION,
+            "conversation_binding_key": key, "workflow_node": node,
+            "direction_id": direction, "direction_ids": copy.deepcopy(request["direction_ids"]),
+            "decision_authority": request["decision_authority"],
+            "conversation_id": None, "provider_url": None, "request_id": None,
+            "state": "CONTEXT_RESET_PENDING", "send_click_count": 0,
+            "agentify_stable_key": _agentify_generation_key(key, replacement_id),
+            "request_history": [old_round], "pending_context_reset": pending,
+            "tab_id": None, "tab_lifecycle": "HANDOFF", "archive": None,
+        }
+        registry["bindings"][key] = record
+        registry["directions"][direction] = record
+        _atomic_write(resolved_path, registry)
+        return record
+
+
 def prepare_context_reset(
     registry_path: Path,
     *,
@@ -677,6 +777,16 @@ def bind(args: argparse.Namespace) -> int:
                     {"bound": False, "state": "CONVERSATION_UNVERIFIED", "error": "replacement must be observed after successful send"},
                     3,
                 )
+            if pending_reset.get("unaccepted_first_binding_rebind") is not None:
+                product = pending_reset["provider_requirement"]
+                if (
+                    args.prompt_sha256 != pending_reset["frozen_prompt_sha256"]
+                    or args.underlying_model != product["model"]
+                    or args.thinking_effort != product["mode"]
+                ):
+                    return _result(
+                        {"bound": False, "state": "BINDING_CONFLICT", "error": "unbound recovery changed frozen prompt/model/effort"}, 3,
+                    )
             packet_names = packet_artifacts(
                 args.request_id,
                 args.direction_id,

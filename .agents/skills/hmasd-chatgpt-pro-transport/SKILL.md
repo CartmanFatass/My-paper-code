@@ -11,6 +11,38 @@ and decides scientific/specification conformance. The current native assignment 
 direct return parent. Preserve frozen HANDOFF IDs as provenance when recovering an older request.
 No singleton app task, relay, ACK loop, new scientific prompt or science selection belongs here.
 
+## DM-local repair default
+
+Transport failures that are engineering defects (selector/model aliasing, tab binding,
+preflight state, receipt handling or workflow sequencing) are owned by the author DM by default.
+The DM may patch its direction-owned Transport helpers, fixtures and related skill/control
+instructions in place, run proportional focused tests and independent review, and recover the
+same unchanged operation when the effect is verified nonacceptance. Preserve the original
+operation, prompt hash, idempotency key, binding and all failure receipts. Do not create a
+replacement request or alter scientific meaning. Escalate to Root only when the repair requires a
+shared application runtime/load, a cross-direction resource or a scientific/Portfolio decision;
+Root then coordinates that dependency while the DM retains Transport acceptance.
+
+## Unrecoverable-conversation fallback
+
+If the original conversation cannot be recovered after the supported same-request repair path,
+the author DM may use a new conversation only when the old operation is positively verified as
+`sendAttempted=false` with no provider pairing or accepted effect. Record the old operation as
+`VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE` and preserve its HANDOFF, prompt hash,
+idempotency key, tab facts and receipts. Then create a new handoff/conversation and idempotency
+key carrying the identical scientific prompt and frozen inputs, bind it as a new operation, and
+link both records. This is a recovery rebind, not a resend of an uncertain effect. Never use this
+fallback when `sendAttempted=true`, acceptance is unknown, or any provider pairing may exist; in
+those cases observe and reconcile the original operation only.
+
+For a failed initial homepage operation with no registry binding, use
+`bind_conversation.prepare_unaccepted_first_binding_rebind` with the validated replacement
+request and the fresh preserved operation audit. It reserves one deterministic generation,
+retains the prior audit in request history, and admits only explicit OWNER_DIRECT recovery with
+identical prompt/model/effort. It does not invent or quarantine a conversation UUID. Then use
+normal firstBinding and bind only the actual post-Send URL with the same reset evidence.
+An existing binding requires its own reconciliation or concrete-context replacement route.
+
 ## One preflight, one action, one return
 
 ```text
@@ -80,6 +112,13 @@ READY_UNSENT --strict query--> SEND_ATTEMPTED
    retain both candidates and return the conflict. Delivery failure alone does not erase a formed
    decision. Never synthesize a missing GitHub response.
 
+   On strict pairing/archive failure, check the fixed GitHub response scope and its delivery
+   comment; check again at natural completion if the earlier target was absent. Page absence is
+   not GitHub absence. Read response bytes at the observed full commit, verify the Git blob/hash/
+   size and comment pairing to the exact fixed TASK. `verify_github_pairing` tests this route.
+   A complete task-bound GitHub response can be archived/returned with provider IDs still null;
+   retain the strict mismatch instead of inventing IDs or waiting on a stale page after delivery.
+
 4. **Return once.** Verify the full archive, stage `native_receipt` for the current direct parent,
    then send one factual `collaboration.send_message` with request/binding, effect, operation,
    paired IDs, full archive source/hash/size, cleanup and missing facts. Record the actual tool
@@ -87,3 +126,15 @@ READY_UNSENT --strict query--> SEND_ATTEMPTED
    delivery receipt may recover to the same parent. Native final closes this same assignment,
    not a second dispatch. No ACK is required. Close only owned non-protected tabs after the
    archive or exact recoverable conversation is secured. The parent performs full scientific intake.
+
+   At completion, a material conflict, or no-current-work while the direction remains ACTIVE,
+   send one direct native action message before ending: assignment, status, evidence/commit and
+   next step. `stage_native_receipt` supports COMPLETE, CONFLICT and NO_CURRENT_WORK; only COMPLETE
+   requires the full archive. UNCHANGED_WAIT stages nothing. Preserve earlier boundary receipts
+   when a later changed boundary occurs. Active generation is ongoing work, not a reason to end
+   as blocked. The author DM sends the same concise action update to Root at its own boundary;
+   ordinary unchanged waits remain silent. A missing archive never prevents reporting a real conflict.
+   If this runtime lacks `collaboration.send_message`, return those same actionable fields once
+   in native final, which reaches the assigning parent directly. Record `transport=native_final`
+   and the actual native outcome; do not invent a tool success, create an app relay or require
+   another handshake. Tool availability does not hold a verified full answer away from its author.

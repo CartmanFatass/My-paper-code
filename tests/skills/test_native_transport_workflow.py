@@ -131,12 +131,14 @@ def test_other_node_cannot_claim_same_conversation(preflight, tmp_path):
     assert path.read_bytes() == before
 
 
-def test_mirror_only_archive_is_retained_as_conflict(preflight, tmp_path):
+@pytest.mark.parametrize('mirror_update', [
+    {'state': 'ARCHIVED', 'response_sha256': 'a' * 64, 'archive': {'response_file': 'unique-full-answer.md'}},
+    {'github_delivery': {'status': 'VERIFIED_GITHUB_FULL_RESPONSE', 'delivery_commit': 'f' * 40}}])
+def test_mirror_only_archive_is_retained_as_conflict(preflight, tmp_path, mirror_update):
     path = tmp_path / 'registry.json'
     n.claim_binding(path, preflight)
     data = json.loads(path.read_text())
-    data['directions']['portfolio'].update(state='ARCHIVED', response_sha256='a' * 64,
-                                          archive={'response_file': 'unique-full-answer.md'})
+    data['directions']['portfolio'].update(mirror_update)
     path.write_text(json.dumps(data), encoding='utf-8')
     before = path.read_bytes()
     with pytest.raises(ValueError, match='mirror effect/receipt differs'):
@@ -241,12 +243,12 @@ def test_full_archive_and_one_current_parent_receipt(record, tmp_path, outcome):
     receipt = n.stage_native_receipt(record, archive)
     assert receipt['destination'] == ROUTE['parent_thread_id']
     assert n.stage_native_receipt(record, archive) is receipt
-    n.finish_native_receipt(record, outcome)
+    n.finish_native_receipt(receipt, outcome)
     if outcome == 'REJECTED_BEFORE_DELIVERY':
-        n.finish_native_receipt(record, 'SENT')
+        n.finish_native_receipt(receipt, 'SENT')
     else:
         with pytest.raises(ValueError, match='already delivered or uncertain'):
-            n.finish_native_receipt(record, 'SENT')
+            n.finish_native_receipt(receipt, 'SENT')
     assert record['return_receipt'] == old
     path.write_bytes(b'different answer')
     with pytest.raises(ValueError, match='ARCHIVE_CONFLICT'):
@@ -265,3 +267,139 @@ def test_real_agentify_implementation_dry_run(tmp_path, preflight):
     assert report['sends'] == 2  # separate nonacceptance and uncertain-effect fixtures, never UI Send
     assert report['same_operation_after_repair'] and report['uncertain_observe_only']
     assert report['archive_exact'] and report['conflict_preserved']
+
+
+@pytest.mark.parametrize('boundary', ['CONFLICT', 'NO_CURRENT_WORK'])
+def test_nonarchive_boundary_returns_action_directly_without_claiming_completion(record, boundary):
+    record.update(state='SEND_UNCERTAIN', native_state='OBSERVE')
+    facts = dict(boundary=boundary, status='Direction remains ACTIVE; specific prerequisite unresolved',
+                 evidence='Exact operation receipt at evidence.json', next_action='Retain same-request observation ownership.')
+    receipt = n.stage_native_receipt(record, **facts)
+    assert receipt['archive'] is None and receipt['destination'] == ROUTE['parent_thread_id']
+    for text in (ROUTE['assignment'], facts['status'], facts['evidence'], facts['next_action']):
+        assert text in receipt['message']
+    assert record['state'] == 'SEND_UNCERTAIN' and record['native_state'] == 'OBSERVE'
+    n.finish_native_receipt(receipt, 'SENT')
+    assert n.stage_native_receipt(record, **facts) is receipt
+    later = n.stage_native_receipt(record, **{**facts, 'evidence': 'Changed concrete evidence at second.json'})
+    assert later is not receipt and record['native_receipt_history'] == [receipt]
+    assert n.stage_native_receipt(record, **facts)['status'] == 'SENT'
+
+
+def test_unchanged_wait_is_silent_and_missing_archive_allows_only_factual_return(record):
+    before = copy.deepcopy(record)
+    assert n.stage_native_receipt(record, boundary='UNCHANGED_WAIT') is None
+    assert record == before
+    with pytest.raises(ValueError, match='full archive'):
+        n.stage_native_receipt(record)
+    with pytest.raises(ValueError, match='status, evidence and next action'):
+        n.stage_native_receipt(record, boundary='CONFLICT', status='Specific conflict')
+
+
+def test_old_completed_native_receipt_is_not_duplicated(record, tmp_path):
+    path = tmp_path / 'answer.md'
+    path.write_bytes(b'full answer')
+    archive = n.verify_archive(path, n.digest(path.read_bytes()), path.stat().st_size)
+    record.update(state='ARCHIVED', user_message_id='user', assistant_message_id='assistant', response_sha256=archive['sha256'])
+    old = {'message_key': '|'.join((record['request_id'], archive['sha256'], ROUTE['parent_thread_id'])), 'status': 'SENT'}
+    record['native_receipt'] = old
+    assert n.stage_native_receipt(record, archive) is old
+
+
+def test_historical_delivery_outcome_updates_that_receipt_only(record):
+    facts = dict(boundary='CONFLICT', status='Concrete prerequisite', evidence='first.json', next_action='Recover same request')
+    first = n.stage_native_receipt(record, **facts)
+    n.finish_native_receipt(first, 'REJECTED_BEFORE_DELIVERY')
+    second = n.stage_native_receipt(record, **{**facts, 'evidence': 'second.json'})
+    returned_first = n.stage_native_receipt(record, **facts)
+    n.finish_native_receipt(returned_first, 'SENT')
+    assert record['native_receipt_history'][0]['status'] == 'SENT'
+    assert second['status'] == 'PENDING'
+    with pytest.raises(ValueError, match='already delivered'):
+        n.finish_native_receipt(returned_first, 'SENT')
+
+
+@pytest.mark.parametrize('legacy', [False, True])
+def test_complete_conflict_survives_intervening_nonarchive_boundary(record, tmp_path, legacy):
+    first_path = tmp_path / 'first.md'
+    first_path.write_bytes(b'first full answer')
+    first = n.verify_archive(first_path, n.digest(first_path.read_bytes()), first_path.stat().st_size)
+    record.update(state='ARCHIVED', user_message_id='user', assistant_message_id='assistant', response_sha256=first['sha256'])
+    complete = n.stage_native_receipt(record, first)
+    if legacy:
+        complete.pop('boundary')
+        complete['message_key'] = '|'.join((record['request_id'], first['sha256'], ROUTE['parent_thread_id']))
+    n.finish_native_receipt(complete, 'SENT')
+    n.stage_native_receipt(record, boundary='CONFLICT', status='Different candidate', evidence='conflict.json', next_action='Author reconciles candidates')
+    second_path = tmp_path / 'second.md'
+    second_path.write_bytes(b'second full answer')
+    second = n.verify_archive(second_path, n.digest(second_path.read_bytes()), second_path.stat().st_size)
+    record['response_sha256'] = second['sha256']
+    before = copy.deepcopy(record)
+    with pytest.raises(ValueError, match='identity conflict'):
+        n.stage_native_receipt(record, second)
+    assert record == before
+
+
+def test_fixed_github_delivery_completes_despite_strict_pairing_failure(record, tmp_path):
+    path = tmp_path / 'github-response.md'
+    raw = b'Complete response for the fixed task, preserved exactly.\n'
+    path.write_bytes(raw)
+    archive = n.verify_archive(path, n.digest(raw), len(raw))
+    commit = 'f' * 40
+    response_path = record['github_delivery']['response_path']
+    repository = record['task']['url'].split('/blob/')[0]
+    response_url = f'{repository}/blob/{commit}/{response_path}'
+    pairing = dict(commit_sha=commit, response_path=response_path, response_url=response_url,
+                   blob_sha=n.hashlib.sha1(f'blob {len(raw)}\0'.encode() + raw).hexdigest(),
+                   comment_url=record['github_delivery']['issue_url'] + '#issuecomment-123',
+                   comment_body=f"Fixed task: {record['task']['url']}\nDelivered: {response_url}")
+    record.update(state='ARCHIVED', response_sha256=archive['sha256'], user_message_id=None,
+                  assistant_message_id=None, github_response_pairing=pairing,
+                  operation={'sendAttempted': True, 'error': {'code': 'USER_MESSAGE_CONTENT_MISMATCH'}})
+    n.verify_github_pairing(record, archive, pairing)
+    receipt = n.stage_native_receipt(record, archive)
+    assert receipt['boundary'] == 'COMPLETE' and response_url in receipt['message']
+    assert record['user_message_id'] is None and record['operation']['sendAttempted'] is True
+    for field in ('commit_sha', 'response_path', 'response_url', 'blob_sha', 'comment_url', 'comment_body'):
+        with pytest.raises(ValueError):
+            n.verify_github_pairing(record, archive, {**pairing, field: 'wrong'})
+
+
+def test_claim_keeps_observed_github_delivery_separate_from_frozen_scope(preflight, tmp_path):
+    path = tmp_path / 'registry.json'
+    observed = {'status': 'VERIFIED_GITHUB_FULL_RESPONSE', 'delivery_commit': 'f' * 40,
+                'sha256': 'c' * 64, 'providerUserMessageId': None}
+    prior = {'request_id': preflight['request_id'], 'github_delivery': observed, 'task': None}
+    path.write_text(json.dumps({'bindings': {preflight['conversation_binding_key']: prior}}), encoding='utf-8')
+    claimed = n.claim_binding(path, preflight)
+    assert claimed['github_delivery'] == observed and claimed['task'] is None
+    assert claimed['frozen_github_delivery'] == preflight['github_delivery']
+    assert claimed['frozen_task'] == preflight['task']
+
+
+def test_missing_native_message_tool_uses_direct_final_without_app_relay(record):
+    receipt = n.stage_native_receipt(record, boundary='CONFLICT', status='Concrete missing fact',
+        evidence='receipt.json', next_action='Parent reconciles same request', native_delivery='native_final')
+    assert receipt['transport'] == 'native_final' and receipt['destination'] == ROUTE['parent_thread_id']
+    n.finish_native_receipt(receipt, 'SENT')
+    with pytest.raises(ValueError, match='never an app-task relay'):
+        n.stage_native_receipt(record, boundary='CONFLICT', status='x', evidence='x', next_action='x', native_delivery='app_task')
+
+
+@pytest.mark.parametrize('status', ['PENDING', 'REJECTED_BEFORE_DELIVERY', 'SENT', 'UNCERTAIN'])
+def test_same_boundary_native_method_switch_preserves_actual_effect(record, status):
+    facts = dict(boundary='CONFLICT', status='Known missing tool', evidence='capability.json', next_action='Direct parent final')
+    receipt = n.stage_native_receipt(record, **facts)
+    if status != 'PENDING':
+        n.finish_native_receipt(receipt, status)
+    if status == 'PENDING':
+        with pytest.raises(ValueError, match='non-delivery evidence'):
+            n.stage_native_receipt(record, **facts, native_delivery='native_final')
+    returned = n.stage_native_receipt(record, **facts, native_delivery='native_final', verified_no_delivery=True)
+    assert returned is receipt
+    if status in {'SENT', 'UNCERTAIN'}:
+        assert returned['transport'] == 'collaboration.send_message' and returned['status'] == status
+    else:
+        assert returned['transport'] == 'native_final'
+        assert returned['delivery_method_history'] == [{'transport': 'collaboration.send_message', 'status': status}]

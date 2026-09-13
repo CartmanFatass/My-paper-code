@@ -141,3 +141,134 @@ Live continuation is separate from repair acceptance. The native child will reus
 MGTAP HANDOFF and operation after final review/publication, reconcile current effects once,
 and take its unique branch. No new performance observation or Portfolio decision has formed
 in this engineering work; MGTAP remains ACTIVE and fresh cap/cost fields remain unassigned/unknown.
+
+## 2026-09-13 visibility follow-up and live effect
+
+Root relayed the owner's added requirement: before ending a bounded assignment at completion,
+a material conflict or no-current-work/ACTIVE, send one direct native action message containing
+assignment, status, evidence/commit and next step. The skill, role and sibling communication
+instructions now state this. Nonarchive boundary messages no longer require a completed answer;
+they preserve the request's existing effect state and earlier return history. Unchanged waits
+produce no message. Active Pro generation is ongoing work, not a terminal prerequisite merely
+because several bounded calls time out.
+
+Focused follow-up coverage: 56 workflow tests passed in 4.03 s. It covers nonarchive actionable
+messages, current direct destination, unchanged-wait silence, old receipt deduplication, delivering
+a historical pending receipt without changing a newer one, and refusing a second COMPLETE answer
+across an intervening conflict. Independent Reviewer found the latter two edge cases; DM repaired
+them and the Reviewer independently replayed both corrected cases with no material finding. DM
+accepts this visibility follow-up. Additional retained scratch: `mgtap-transport-boundary-01`
+and `mgtap-transport-boundary-review-01`, under the same recorded cleanup restriction.
+
+The actual live preflight passed at `NATIVE_PREFLIGHT.json` under main's existing runtime archive
+`temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-12-mgtap-unequal-exposure-investment-01/`.
+The unchanged operation `19ca18f5-1683-418c-b204-e03873309af7` made one Send attempt, then strict
+Agentify returned `USER_MESSAGE_CONTENT_MISMATCH`. Persisted `sendAttempted=true`/click count 1
+means UNCERTAIN_EFFECT, permanently observation-only while acceptance remains possible. The
+dedicated tab displayed the exact conversation, empty composer and active Stop answering.
+No paired current provider IDs or full response was yet available at this record boundary.
+The original mismatch and subsequent bounded observations remain in
+`AGENTIFY_OPERATION_19ca18f5-1683-418c-b204-e03873309af7_FINAL_OBSERVATION.json` and
+`..._IMPASSE_OBSERVATION.json`. Those filenames are historical operator labels; active generation
+was not accepted as a terminal impasse. The DM resumed the same child's non-sending observation
+and sent Root one action update. No second Send, new idempotency key, scientific invocation or
+Portfolio decision was created. Full-response intake remains the dependent outstanding work.
+
+## Actual full-delivery recovery and final technical acceptance
+
+The live exercise ultimately exposed a further workflow defect: the leaf inferred missing output
+from strict/UI pairing failure without reading the fixed GitHub response target. Its completion
+conflict record at 08:24:19 UTC was not proof that no decision existed. DM checked that target and
+found the complete response already delivered at 07:01:37 UTC. Full immutable commit
+`f1897441ce560dbca01a834dd72e035c63c68e0a`, Git blob `78a9810d52dedefc881009ea2672dbce36c49cc3`,
+Issue17 comment5651823362 and the original fixed TASK jointly establish this request's delivery.
+The exact185-line/37775-byte full file has SHA-256
+`cb533e36190e03444fc963d2f639338b5ec9f19defc7713d6547d819fd425391`.
+It was preserved in Git via `cd609fd307a316b39d127e3d664c2d668ddc7a30`, a single-file cherry-pick
+of the actual Pro delivery. The native child then collected the same full bytes at its separate
+`__05_FULL_RESPONSE.md`. The original strict response path remains unused, and its mismatch/IDs
+are preserved rather than renamed or fabricated.
+
+The repaired route checks the fixed GitHub scope on strict failure and again at completion if
+previously absent. It verifies the full immutable response URL/path, Git blob/hash/size and exact
+TASK/response pairing in the designated delivery comment. This independent source binding can
+complete archival when provider IDs remain null. Frozen delivery scope/task are separate from
+observed `github_delivery` facts; same-request claims and mirror reconciliation preserve all
+earlier evidence. The child's observed metadata used the Issue URL in `fixed_task_url`; the
+correct frozen TASK URL is retained separately and the metadata discrepancy is explicit.
+
+The child also reported that `collaboration.send_message` is not callable in its runtime.
+Its actionable native final did return directly to this DM. The workflow now records that
+actual native capability instead of requiring an unavailable call, inventing success or adding
+an app relay. Same-boundary method changes require demonstrated non-delivery and preserve the
+prior method; delivered or uncertain receipts are never resent. This creates no additional
+parent permission or ACK step.
+
+Final focused result: **64 workflow tests passed in5.24s**, in addition to the already passing
+207 unchanged native/recovery/compatibility tests. Independent Reviewer verified the real GitHub
+comment/blob/bytes pairing with null provider IDs, then reviewed corrections for preserving
+observed scope, native-method recovery and mirror-only GitHub evidence; no material finding remains.
+DM accepts the final engineering workflow. This does not establish that the Agentify page pairing
+defect itself is repaired; the scoped immutable GitHub recovery path handles the actual delivery.
+
+Additional retained owned test scratch under the same cleanup restriction:
+`mgtap-transport-github-recovery-01`, `mgtap-transport-github-review-01`,
+`mgtap-transport-native-final-01`, `mgtap-transport-final-recovery-01`.
+No further recursive deletion was attempted. The DM's exact full-file read copy at
+`temp/directions/metric_ground_transport_allocation/mgtap-delivery-f1897441.md` is retained as
+collection evidence. No unique scientific evidence or shared checkout was removed.
+
+The complete [scientific intake](pro_packets/20260912_cond512_dense768_use/PORTFOLIO_INTAKE_20260913.md)
+records Portfolio B and its new600/900/1500/900/2400s limits, plus two concrete current-spec
+conflicts requiring the same-node correction: five-chain target and independent Monitor goal.
+No implementation, experiment or new Pro request is part of this completed bounded assignment.
+MGTAP remains ACTIVE/MEDIUM; the next science is the already selected funded pair, not a vacancy.
+
+DM exercised the reviewed archival recovery on the actual immutable file and comment. The shared
+registry and mirror are now ARCHIVED, full-response SHA/size verified, and native receipt SENT
+with `transport=native_final`; `NATIVE_ARCHIVE_ACCEPTANCE.json` records this application. Original
+strict operation/send uncertainty, null IDs, observed-delivery facts and corrected frozen TASK
+metadata remain. The owned tab was closed. ACPS was notified that the shared binding is free;
+Root receives the full intake and the same-node correction dependency. This completes the actual
+one-attempt lifecycle without another Send.
+
+## Authorized conformance follow-up: successful paired delivery — 2026-09-13
+
+After the original full decision was archived and intaken, Root's coordinated continuation
+retained this DM's authorship of the two-clause Portfolio correction. This distinct authorized
+request is not a retry of the original uncertain operation. The committed HANDOFF
+`c585a70234e9bd6a61f20ba3252ebda33333d12c` binds the fixed TASK at
+`755d8fcedceaf83d0ea9d67462ee631c1093ec58`, current parent/child, the same Portfolio conversation
+and shared direction branch. The existing reviewed workflow was used without new code changes.
+
+The [operation receipt](../../portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/TRANSPORT_OPERATION.json)
+records the initial TAB_KEY_MISMATCH before any persisted Send operation and repair of the
+dedicated tab key. This positively observed pre-Send failure permitted the same unchanged
+request after repair. Operation `c30e5aae-2de6-484a-aed0-37510c55d908`, idempotency key
+`2026-09-13-mgtap-portfolio-conformance-correction-01`, used Latest/Pro and the same prompt hash,
+binding, conversation and responsePath. It then recorded one Send at08:58:38 UTC with user
+`a8238013-f2ea-4b4e-9044-a69a2ad86281` and assistant `f66dc4c3-ea5d-48fa-a522-fc12dbdad722`.
+The final strict operation has no error. No duplicate Send or extra parent confirmation occurred.
+
+The96-byte strict chat receipt was archived separately. The complete task-bound amendment is
+the41-line/6860-byte [RESPONSE.md](../../portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/RESPONSE.md)
+at `3a69ae2b02f16ac815d1e41ea2fff3a46f3bb0c2`, Git blob
+`c7c59ae3da5a190acb6d4efe4b6de7198ed90256`, SHA-256
+`330bfaa59c0e30d26fdb946a4f4d0327932af12adb9bf5810569d73f032c19fd`.
+The [delivery facts](../../portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/GITHUB_DELIVERY_FACTS.json)
+and preserved [Issue comment](../../portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/DELIVERY_COMMENT.md)
+bind exact TASK and response URLs. DM compared all immutable Git bytes with the child's full
+runtime archive, inspected the single-file commit and actual comment, and read the full answer.
+
+The child returned one actionable native final; both registry views are identical and
+ARCHIVED/RECEIPT, with actual native_final receipt SENT. Its owned tab is closed. ACPS received
+the explicit shared-binding release. This covers the successful accepted/pairing path in live
+use, in addition to the original request's live uncertain/GitHub-recovery path and the focused
+dry-run branch coverage. It does not retroactively change the original strict mismatch.
+
+The amendment resolves both procedural conflicts without changing science, caps or lifecycle.
+See intake §5. No extra engineering suite was rerun for this document/receipt closeout; the
+accepted 64 focused workflow and207 compatibility checks remain the applicable code evidence.
+No new empirical experiment or implementation began. Root's next action is integration and
+the existing DM's funded continuation; MGTAP remains ACTIVE/MEDIUM. The prior cleanup restriction
+and retained scratch inventory remain explicit; no new deletion attempt was made.

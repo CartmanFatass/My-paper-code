@@ -1,0 +1,70 @@
+{
+  "archive": {
+    "bytes": 1135296,
+    "sha256": "2e9be88fd64c7825c5bfda5388be75f03444e68dc3add41b36ba9ce19c6253a1"
+  },
+  "files": {
+    "summary.json": {
+      "bytes": 1253721,
+      "sha256": "1adb33e755d191becfe94c79eabec65c412c9f78c58feca7d75357d684a5d0a3"
+    },
+    "resource_admission.json": {
+      "bytes": 504,
+      "sha256": "fdd5e1eddf3f9de809b9bdf0504818c8075511eaee1815ad392ed688fe31afd2"
+    },
+    "native_time.txt": {
+      "bytes": 1273,
+      "sha256": "bbf8552dce78b76140e59b81d40980cfec2fa3612832aa221f39865b6482b56a"
+    },
+    "episodes.jsonl": {
+      "bytes": 943816,
+      "sha256": "dc23eea0c2eb8ff5a026b97da5324079ac8b02fd9fedc8f6e411ce20846f6005"
+    },
+    "final_DENSE.pt": {
+      "bytes": 282893,
+      "sha256": "e05b8bd86c76dbf21b7843ee66f4dcca1427503420a4d3c8e104ed6f9253fd65"
+    },
+    "rollouts.jsonl": {
+      "bytes": 526421,
+      "sha256": "a259908d9aee806d8397b66c51551883f8f97b6d5a928fbd6b99b960fcd32d67"
+    },
+    "final_COND.pt": {
+      "bytes": 282869,
+      "sha256": "addcd6b5f3bea99e7948f15cad438e9af06e84f1c1753bce9ca18558922d216f"
+    },
+    "supervisor/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "supervisor/pid": {
+      "bytes": 8,
+      "sha256": "f1dbb9f01194d7e70e15d2b0d5fb90edb115c88f915b095d1f68c3f79d07ac2f"
+    },
+    "supervisor/runner.sh": {
+      "bytes": 1948,
+      "sha256": "e5c1e58695bd87b442eb3b6655aefa39c33c6d8d114888c90315458eac925539"
+    },
+    "supervisor/start_time": {
+      "bytes": 11,
+      "sha256": "f26c649fc1013f68ef50c6e342acad1412762af74bf6d7078150f05804ed63aa"
+    },
+    "supervisor/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "supervisor/task.log": {
+      "bytes": 3399,
+      "sha256": "93af56440cc22aba1a0a31a04c733faa6e6519a71d167ea45c836005c4c81f36"
+    },
+    "analyze_intake.py": {
+      "bytes": 8572,
+      "sha256": "7d2dfbe1d7e0ed5858798f165f44e14ebb0816b52df9ee4a8764fc213e104b76"
+    }
+  },
+  "native_remote_hash_match": true,
+  "member_readback_hash_match": true,
+  "remote_output": "/home/wu/hmasd-worktrees/mgtap-unequal-8231-ecf40e0ad/temp/directions/metric_ground_transport_allocation/exp/unequal_exposure_b01_8231_20260913",
+  "no_source_or_evidence_removed": true,
+  "supervisor_remote_hash_match": true,
+  "all_13_remote_members_match": true
+}

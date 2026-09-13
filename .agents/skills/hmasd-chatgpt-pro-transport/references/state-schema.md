@@ -38,8 +38,15 @@ across successor requests, and never bind the same conversation to two scientifi
 
 After the full answer is source-bound and hash/size verified, `state=ARCHIVED` releases that
 request for a successor. The independent `native_receipt` preserves current-parent delivery:
-PENDING -> SENT, UNCERTAIN or REJECTED_BEFORE_DELIVERY. `stage_native_receipt` requires the full
-archive and paired provider IDs. `finish_native_receipt` records the tool outcome once. A new
+PENDING -> SENT, UNCERTAIN or REJECTED_BEFORE_DELIVERY. COMPLETE requires the full archive and
+paired provider IDs, or a verified `github_response_pairing` supplying the fixed TASK/immutable
+response commit/path/Git blob and exact delivery comment when strict provider IDs are unavailable.
+CONFLICT and NO_CURRENT_WORK require assignment/status/evidence/next action without claiming a
+completed archive. UNCHANGED_WAIT stages nothing. `native_receipt_history`
+preserves returns from earlier changed boundaries; identical boundaries reuse the same receipt.
+`finish_native_receipt(receipt, status)` records the tool outcome on the exact staged receipt
+object returned by `stage_native_receipt`, including a historical return. Completion conflicts
+are checked across all receipt history. A new
 request moves this record into request_history; timeout, pre-Send failure or missing receipt
 does not release the conversation. The legacy schema below is evidence compatibility, not a
 mandatory checklist, scheduler or current return route.
@@ -169,6 +176,17 @@ and parent coincide. Otherwise it uses the validated parent and existing outbox 
 Preserve delivered or uncertain receipts; never infer permission to resend from recovery.
 
 ## Explicit provider-conversation replacement
+
+An owner-authorized unrecoverable initial homepage operation may have no binding at all.
+`prepare_unaccepted_first_binding_rebind(registry_path, request=<validated transport_request>,
+prior=<fresh operation audit>)` supports that case only. The audit preserves explicit false Send,
+explicit null pairing/observed-conversation/archive fields, the original operation and tab,
+prompt hash, and receipt paths. It refuses missing or possible acceptance, changed prompt/model/
+effort, or an existing binding/direction record. Admission reserves `CONTEXT_RESET_PENDING`
+with the distinct deterministic Agentify key, the complete audit in `request_history`, and no
+fabricated quarantined UUID. Repeating the same preparation is idempotent. Normal observed
+post-Send binding retains this history and additionally checks the frozen prompt/model/effort.
+The Transport establishes the fresh external facts; this local helper performs no provider call.
 
 An owner-directed new conversation uses `reset_invalid_provider_context=true`
 with `provider_context_reset_evidence={previous_request_id, reset_authority:

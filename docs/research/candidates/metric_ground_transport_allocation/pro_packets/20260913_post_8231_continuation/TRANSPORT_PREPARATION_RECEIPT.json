@@ -1,0 +1,39 @@
+{
+  "received_at": "2026-09-13 11:14:09 UTC",
+  "assignment": "MGTAP post-8231 continuation preparation check",
+  "request_id": "2026-09-13-mgtap-post-8231-continuation-01",
+  "status": "PREPARED_UNSENT",
+  "transport": "native_final",
+  "received_directly": true,
+  "parent": "/root/dm_mgtap_resume",
+  "operator": "/root/dm_mgtap_resume/tr_lh_mgtap",
+  "handoff_commit": "ca1090531e109a279e303111aa53daa1691190ee",
+  "handoff_path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_post_8231_continuation/delivery_v2/HANDOFF.json",
+  "task_commit": "7ad38aa48460d581b6eb9b79d1e9735dca9d350f",
+  "task_bytes": 23363,
+  "provider_prompt_sha256": "293ade999ac8f413b5fd8340fcc7ff204116ca077f03c040ee48b328b62522ce",
+  "provider_prompt_utf8_bytes": 1953,
+  "native_facts": [
+    "Pinned HANDOFF validated successfully.",
+    "Fixed TASK validated; canonical manifest validated in memory.",
+    "Native parent/operator route and GPT-6 Astra/Pro requirement via Latest validated.",
+    "One current registry read found the prior Convergence request archived, tab closed.",
+    "No provider operation, Send, registry claim/write or runtime artifact created."
+  ],
+  "task_hash_receipt_note": {
+    "native_reported_sha256": "f4b61dd4275d6f07819ce8398098dfbbc8c23c826c380ec884fc373aef2af8d",
+    "native_reported_length": 63,
+    "source_verified_sha256": "f4b61dd4275d6f07819ce8398098dfbbc8c23c826c380ec884fc373aef2af8d0",
+    "source_verified_length": 64,
+    "authority": "Exact Git TASK bytes hashed in PUBLICATION.json at ca1090531; native short receipt omitted the final hexadecimal character. Preserve both; use the fixed-source full SHA256 as task byte identity.",
+    "provider_acceptance_or_archive_implication": "none; no request was sent and this is not a Pro response archive."
+  },
+  "provider_operation_id": null,
+  "provider_user_message_id": null,
+  "provider_assistant_message_id": null,
+  "provider_send_attempted": false,
+  "pro_decision_formed": false,
+  "scientific_invocations": 0,
+  "dm_acceptance": "Accept published preparation and direct non-Sending Transport check. R remains a DM recommendation; no direction choice or empirical proposal is executed.",
+  "next": "Report ACTIVE-idle to Root with exact fixed TASK/HANDOFF, preserve the same prepared request for a later authorized runtime-ready dispatch, and return to native wait. No successor, pair or lifecycle change."
+}

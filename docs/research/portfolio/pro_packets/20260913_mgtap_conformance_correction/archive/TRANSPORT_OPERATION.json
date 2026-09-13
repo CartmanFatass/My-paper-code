@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 4,
+  "operationId": "c30e5aae-2de6-484a-aed0-37510c55d908",
+  "idempotencyKey": "2026-09-13-mgtap-portfolio-conformance-correction-01",
+  "requestFingerprint": "340b233f8eee42c1eacfea685dbf3d75259ce7636fc554247baedbc12b901330",
+  "stableKey": "portfolio:cross_direction",
+  "provider": "chatgpt",
+  "productModel": "Latest",
+  "reasoningEffort": "Pro",
+  "conversationUrl": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "conversationId": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "promptSha256": "f3385277eb7afcd228ea653f71f0ece4a92df24e1bb59a6a6a4b84294dd47939",
+  "responsePath": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-mgtap-portfolio-conformance-correction-01\\2026-09-13-mgtap-portfolio-conformance-correction-01--portfolio--attempt-01__02_RESPONSE.md",
+  "sendAttempted": true,
+  "sendAttemptedAt": "2026-09-13T08:58:38Z",
+  "providerUserMessageId": "a8238013-f2ea-4b4e-9044-a69a2ad86281",
+  "providerAssistantMessageId": "f66dc4c3-ea5d-48fa-a522-fc12dbdad722",
+  "observedConversationUrl": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "observedConversationId": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "archive": {
+    "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-mgtap-portfolio-conformance-correction-01\\2026-09-13-mgtap-portfolio-conformance-correction-01--portfolio--attempt-01__02_RESPONSE.md",
+    "sha256": "e6cfb323d2de98efced03ef50284a9f01cee68188e8fb688a7b678f5e91fe988",
+    "sizeBytes": 96,
+    "projection": "exact"
+  },
+  "error": null,
+  "initial_pre_send_failure": {
+    "code": "TAB_KEY_MISMATCH",
+    "operation_persisted": false,
+    "repaired_tab_id": "d2e73a4a-2848-44d9-8ab2-ddeed051fd7c",
+    "repair": "dedicated tab key changed to portfolio:cross_direction; all other request arguments unchanged"
+  },
+  "full_github_archive": {
+    "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-mgtap-portfolio-conformance-correction-01\\2026-09-13-mgtap-portfolio-conformance-correction-01--portfolio--attempt-01__05_FULL_RESPONSE.md",
+    "sha256": "330bfaa59c0e30d26fdb946a4f4d0327932af12adb9bf5810569d73f032c19fd",
+    "sizeBytes": 6860,
+    "source_commit": "3a69ae2b02f16ac815d1e41ea2fff3a46f3bb0c2",
+    "source_blob_sha": "c7c59ae3da5a190acb6d4efe4b6de7198ed90256",
+    "source_path": "docs/research/portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/RESPONSE.md",
+    "comment_id": 5652359237,
+    "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5652359237"
+  },
+  "captured_at": "2026-09-13T09:09:06.459321Z"
+}

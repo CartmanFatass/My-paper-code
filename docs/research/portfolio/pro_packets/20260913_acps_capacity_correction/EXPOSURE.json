@@ -1,0 +1,14 @@
+{
+  "prepared_at": "2026-09-13T09:18:46.412451+00:00",
+  "scope": "same-node capacity conformance only",
+  "scientific_invocations": 0,
+  "models_or_loads": 0,
+  "scientific_rng": 0,
+  "training": 0,
+  "evaluation": 0,
+  "raw_numerical_analysis": 0,
+  "tests_profiling": 0,
+  "new_scientific_purpose": 0,
+  "documentary_complete_cost": "UNKNOWN",
+  "provider_sends_before_dispatch": 0
+}

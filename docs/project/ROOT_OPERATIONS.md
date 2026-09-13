@@ -39,6 +39,37 @@ Root dispatches ready work and waits natively while DM work remains. DM waits na
 monitor or Reviewer after exhausting independent work. Use configured long waits; unchanged
 timeouts only continue waiting. Process the changed direction without a global reread or sibling
 barrier. SIBLING_COMMUNICATION.md owns event semantics. DM also waits natively for its Transport; Pro archives return directly to DM. Owner pause/stop remains controlling.
+An unchanged timeout remains silent. At completion of a bounded assignment, a material blocker or
+scope conflict, or entry into an idle state while the direction is still ACTIVE, the DM sends one
+proactive parent action message naming the assignment, state, evidence/commit and next action or
+dependency before native final/idle wait. This is an event handoff, not a periodic keepalive.
+Each completion or ACTIVE-idle event is also a stable Root dispatch point: integrate the returned
+evidence, recount running/reserved directions, and resume the same DM's next authorized bounded
+work when available. Keep an ACTIVE direction occupied through an object/allocation, cleanup, Pro
+wait or child completion; release a slot only for an explicit Portfolio/owner lifecycle pause or
+closure.
+
+Authorization is inherited from the current card, accepted Pro decision and published handoff.
+When those records fix the next object or proper-node question, the owning DM dispatches at once;
+Root/owner approval, ACKs and artificial wait intervals are not additional gates. A prepared
+direction/Portfolio question may be sent when its scope is fixed, while its response gates only
+science, budget or lifecycle changes. Wait only for an actual external dependency, an unformed
+proper-node decision or a concrete blocker; completion of the prior object alone is not a wait
+condition.
+
+Transport/selector/workflow defects default to local repair by the author DM. The DM may edit its
+owned helpers, fixtures and related skill/control instructions, run focused tests and review, and
+recover the same unchanged operation after verified nonacceptance. Preserve operation, prompt,
+binding, idempotency and failure receipts; never create a replacement request or change science.
+Root is involved only for a shared runtime/load, cross-direction dependency or a
+scientific/Portfolio decision, while the DM retains Transport acceptance.
+
+When a same-request Transport repair cannot recover its original conversation, the author DM may
+rebind the identical frozen prompt to a new conversation only after proving the old operation was
+never sent (`sendAttempted=false`, no provider IDs or accepted effect). The DM archives the old
+operation as `VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE`, preserves all receipts, then
+creates and links a new handoff/idempotency. This fallback is forbidden for uncertain or possibly
+accepted effects and does not change scientific meaning.
 
 ## Maintained sources
 
@@ -99,7 +130,9 @@ recounts before dispatch, so repeated returns cannot duplicate a request or DM. 
 above four drains without interrupting live work. Object/allocation completion, Pro waits and
 temporary blockers do not release a direction slot. Use hmasd-portfolio-task for both author routes.
 
-DM retains recovery of its request through its native Transport child. Uncertain Send permits
+DM retains recovery of its request through its native Transport child. At every bounded-assignment
+completion, material conflict or ACTIVE-idle boundary it proactively reports one actionable event
+to its parent; unchanged waits remain quiet. Uncertain Send permits
 observation/reconciliation only; proven nonacceptance permits the exact authorized Send after
 repair. Complete immutable responses go straight to DM intake while metadata corrections proceed.
 Transport follows one exact preflight, one effect branch, bounded observation/archive and one

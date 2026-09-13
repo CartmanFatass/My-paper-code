@@ -1,0 +1,74 @@
+{
+  "caller_role": "portfolio",
+  "workflow_node": "portfolio_decision",
+  "request_id": "2026-09-13-acps-portfolio-capacity-correction-01",
+  "direction_ids": [
+    "actuator_conditioned_partial_sharing"
+  ],
+  "source_thread_id": "/root/dm_acps_resume",
+  "parent_thread_id": "/root/dm_acps_resume",
+  "operator_thread_id": "/root/dm_acps_resume/transport_lh_acps",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "decision_authority": "pro_final",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "9fef1bc5d664f978ea8feadc2995b14ff85ad806",
+  "delivery_mode": "github_delivery",
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/17"
+  ],
+  "scientific_question": "Correct only the isolated capacity conflict in your already formed ACPS post-B02 response f63980ab1acdcf9fad0ec8b1ac9770c864a6b988 §6: it says the rolling target remains five advancing direction chains, while current owner AGENTS §5 and ROOT_OPERATIONS require four with existing overlap draining, and Pro/recovery waits do not release an occupied ACTIVE slot. Return the precise conforming replacement/clarification while preserving the complete independent Q decision and all evidence. Do not redecide ACPS science or investment.",
+  "deliverable": "Return one concise amendment to the original ACPS response: identify its exact affected sentence(s), replace five with the current four-target/overlap rule and distinguish actual advancing execution from occupied ACTIVE chains awaiting Pro/recovery. Affirm that Q once, UNKNOWN complete documentary cost accepted, zero empirical/conditional allocation, ACTIVE/HIGH/recasts0 and informed SHARED remain unchanged; no extra direction, new research question, empirical grant, lifecycle mutation or vacancy is created. Preserve the original response as historical bytes. State no broader clause is amended. Deliver only the named new amendment file/comment or full same-turn Markdown fallback.",
+  "claim_ceiling": "Narrow same-node specification conformance of an existing Portfolio response. No new scientific or investment selection, empirical claim, new capacity rule, specification-change proposal or lifecycle disposition.",
+  "github_delivery": {
+    "branch": "codex/acps",
+    "base_sha": "9fef1bc5d664f978ea8feadc2995b14ff85ad806",
+    "response_path": "docs/research/portfolio/pro_packets/20260913_acps_capacity_correction/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/17"
+  },
+  "constraints": [
+    "Author already read all149lines/35568bytes of the original response and applied its independent conforming Q. Full original response SHA2560e654363ff33c2dc8316f7cf4682bf5b30ee98662216ce63fb6e4c2d576443da. Original accepted prompt and response are never resent or overwritten; this is the explicit same-node conclusion correction with a new output path required by current conformance procedure.",
+    "This correction does not buy a second ACPS direction scientific purpose. The separate original Q request2026-09-13-acps-post-b02-use-01 uses only the ACPS Convergence binding and is unchanged. No code, model/load/RNG, raw-outcome analysis, measurement, test/profiling, training or evaluation is authorized. Machine exposure for this documentary correction is zero for every scientific quantity; complete documentary/provider/agent cost is UNKNOWN, not claimed free or measured.",
+    "Only current AGENTS §§2,4.8,5 and ROOT_OPERATIONS named sections are required for this mechanical conformance question. No fresh scientific reading, result reanalysis, literature retrieval or empirically stronger evidence is necessary. The generic Portfolio methodology prompt does not enlarge this exact correction or create new investment choices.",
+    "MGTAP has completed and archived its own correction and explicitly released portfolio:cross_direction to this ACPS author. Its ownership wait in the historical exact-return document is no longer current. Preserve all existing node history and all other direction grants; do not modify MGTAP or apply its independent B grant to ACPS.",
+    "Current direct author/source/parent is /root/dm_acps_resume and executor /root/dm_acps_resume/transport_lh_acps. Use fixed GitHub evidence, existing serial Portfolio conversation and scoped codex/acps response only. No main/control/registry/source edits by Pro. No claim of current provider acceptance from a queued or published task."
+  ],
+  "reference_files": [
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_acps_post_b02_investment/archive/RESPONSE.md",
+      "commit_sha": "f63980ab1acdcf9fad0ec8b1ac9770c864a6b988",
+      "purpose": "Read complete existing Q decision; correct only §6 capacity/slot sentences while retaining every independent investment/scientific boundary.",
+      "provenance": "Published exact source. This is narrow conformance of the formed ACPS decision; historical text is preserved and current owner control prevails."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_acps_post_b02_investment/CAPACITY_CONFORMANCE_RETURN.md",
+      "commit_sha": "9fef1bc5d664f978ea8feadc2995b14ff85ad806",
+      "purpose": "Exact already-recorded original-response conflict. The historical MGTAP writer dependency is now released as stated in TASK; no scientific redecision.",
+      "provenance": "Published exact source. This is narrow conformance of the formed ACPS decision; historical text is preserved and current owner control prevails."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_POST_B02_PORTFOLIO_INTAKE_20260912.md",
+      "commit_sha": "9fef1bc5d664f978ea8feadc2995b14ff85ad806",
+      "purpose": "Complete author conformance: Q independently applies, no empirical funds or lifecycle change; only capacity conflict returned.",
+      "provenance": "Published exact source. This is narrow conformance of the formed ACPS decision; historical text is preserved and current owner control prevails."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "AGENTS.md",
+      "commit_sha": "9fef1bc5d664f978ea8feadc2995b14ff85ad806",
+      "purpose": "Only §§2,4.8,5: same-node conformance, owner-delegated finality, current four target, existing overlap and occupied waiting chains.",
+      "provenance": "Published exact source. This is narrow conformance of the formed ACPS decision; historical text is preserved and current owner control prevails."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "9fef1bc5d664f978ea8feadc2995b14ff85ad806",
+      "purpose": "Current control and Portfolio material/response route: target four, formal disposition only releases a slot, author-owned correction/native Transport.",
+      "provenance": "Published exact source. This is narrow conformance of the formed ACPS decision; historical text is preserved and current owner control prevails."
+    }
+  ]
+}

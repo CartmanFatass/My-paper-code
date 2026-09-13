@@ -1,0 +1,46 @@
+{
+  "state": "remote_complete_local_policy_blocked",
+  "source_sha": "ecf40e0ade4576fd75ffb0eab09425cb5c4ce059",
+  "preserved_archive": "C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904\\docs\\research\\candidates\\metric_ground_transport_allocation\\unequal_exposure_b01_8231_20260913\\NATIVE_EVIDENCE.zip",
+  "archive_sha256": "2e9be88fd64c7825c5bfda5388be75f03444e68dc3add41b36ba9ce19c6253a1",
+  "archive_bytes": 1135296,
+  "targets": [
+    {
+      "node": "hmasd-wsl-node",
+      "path": "/home/wu/hmasd-worktrees/mgtap-unequal-8231-ecf40e0ad",
+      "bytes_du_sb": 45866778,
+      "kind": "detached_exact_source_worktree_with_completed_output"
+    },
+    {
+      "node": "hmasd-wsl-node",
+      "path": "/home/wu/.agent-tasks/mgtap-unequal-8231-ecf40e0ad",
+      "bytes_du_sb": 5377,
+      "kind": "completed_supervisor"
+    },
+    {
+      "node": "hmasd-wsl-node",
+      "path": "/home/wu/hmasd-inputs/mgtap-unequal-8231-readiness",
+      "bytes_du_sb": 27242,
+      "kind": "published_source_readiness_copies"
+    },
+    {
+      "node": "local",
+      "path": "C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904\\temp\\directions\\metric_ground_transport_allocation\\exp\\unequal_exposure_b01_8231_20260913",
+      "file_bytes": 3310354,
+      "kind": "collected_duplicate_raw_support"
+    }
+  ],
+  "protected": [
+    "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904",
+    "/home/wu/projects/HMASD",
+    "all historical evidence and other live/shared paths"
+  ],
+  "root_retention_integration": "48e6f98a8",
+  "removed": [
+    "/home/wu/hmasd-worktrees/mgtap-unequal-8231-ecf40e0ad",
+    "/home/wu/.agent-tasks/mgtap-unequal-8231-ecf40e0ad",
+    "/home/wu/hmasd-inputs/mgtap-unequal-8231-readiness"
+  ],
+  "remaining": ["C:/Projects/HMASD-worktrees/dm-n5-continue-20260904/temp/directions/metric_ground_transport_allocation/exp/unequal_exposure_b01_8231_20260913"],
+  "next": "Local recursive deletion was rejected by automatic approval review. Retain directory; no alternate deletion route. Root reconciles the concrete runtime restriction; no scientific successor."
+}
