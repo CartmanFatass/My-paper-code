@@ -1,48 +1,17 @@
-# RCLE current continuation — selected quota-phase family, exact B activated
+# RCLE current continuation after B08 — 2026-09-12
 
-RCLE remains **ACTIVE/MEDIUM**, owned by **/root/dm_rcle_resume** in
-**C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906**, branch **codex/rcle**.
-The original Convergence response at8aa3f7bd7 (main31472f0b2) selects the offered
-joint-quota-phase family unchanged. [Complete intake](RCLE_JOINT_QUOTA_PHASE_FAMILY_INTAKE_20260912.md)
-checks the full response, current specs, fixed proposal and prior Portfolio
-commitment. The conditional B is **ACTIVE**, with no second Portfolio vote.
+RCLE remains **ACTIVE/MEDIUM**, with the same DM **/root/dm_rcle_resume** in **C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906**, branch **codex/rcle**. The exact original Convergence response8aa3f7bd7 (main31472f0b2) selected the offered joint-quota-phase family unchanged; the [full intake](RCLE_JOINT_QUOTA_PHASE_FAMILY_INTAKE_20260912.md) activated Portfolioe9f097ed85d554352df95fc97ec4c3f303ac8f5e's conditional one-B commitment. No duplicate Send or second vote occurred.
 
-The new family is explicitly not a direction RECAST. The tested
-equal-unit/.99-prior/FLEX/final1000 recipe remains HOLD. All historical native
-learning, local gains, reference deficits, failed-reference work and one-fit
-limits remain unchanged. No whole-direction pause, priority/recast change,
-UAV/C promotion or empirical result follows from this decision.
+The allocated **B08 seed28 has completed**: source012a8bce2c90cbe54459437dba01d3f171c9e063, published command a690406c1, remote supervisor rcle-b08-s28-012a8bce2, exit0 and45.39s whole native. Native Monitor adopted directly and returned terminal/empty active set. Six focused checks and independent review preceded launch. One fit completed256 updates,16,384 training episodes and four512-episode panels, total18,432 episodes/1,179,648 native ticks. [Technical record](RCLE_B08_JOINT_QUOTA_PHASE_EXECUTION_20260912.md), [E0](RCLE_B08_JOINT_QUOTA_PHASE_RESULT_EVIDENCE_20260912.md), [scientific intake](RCLE_B08_JOINT_QUOTA_PHASE_INTAKE_20260912.md).
 
-## Selected responsibility and boundary
+D_g=−.533040365, D_n=−.370141602 and G_U=+.048152669. Both primary paths and all eight U cells favor each fixed service rule over final256, while all eight improve from initialization. The card reads no endpoint advantage in this fit, preserving actual learning and mixed F/recovery consequences. Quota F=0 is structural. No stable, causal-component, communication-parity, scalable-transfer or C/UAV claim follows. Tuned headroom remains absent.
 
-Portfolio responsee9f097ed85d554352df95fc97ec4c3f303ac8f5e and its
-[RCLE mapping](../../portfolio/pro_packets/20260912_post_kelu_continuation/EXECUTION_MAPPING.md)
-commit one whole native invocation≤900s, all additional invoked support≤900s,
-complete invoked≤1,800s. The completed original question/response/intake and
-normal publication have separately accepted UNKNOWN documentary/provider/agent/
-invoked cost. They neither use Bsupport nor enlarge1,800. Rates, graph memory,
-complete support coverage and provider/agent lifetime bill remain UNKNOWN.
+The new family is explicitly not a RECAST; existing historical recasts remain. The old equal-unit/.99-prior/FLEX/final1000 recipe remains on its separate narrow HOLD. Neither this negative B nor completion of its finite allocation pauses/closes RCLE or releases its occupied direction slot.
 
-The DM now owns the exact Bcard/L0, fresh seed/domain/source/command, direct
-implementation, focused changed-contract checks and independent high-risk
-review; remote staging/admission/detached launch, native Monitor adoption,
-collection, technical/scientific intake and assigned retention/cleanup follow.
-Current C:/Projects/HMASD configs and instructions supply live routes. No
-duplicate Send, replacement question, fit/panel shortening or automatic retry.
+## Current responsibility and recoverable boundary
 
-Retain one fresh256-update/16,384-episode fit, all four512-episode endpoints
-(initialization, final256, greedy quota phase and attained nearest), total
-18,432episodes/1,179,648ticks. D_g/D_n equally weight the two ACTIVE_CONTINUATION
-8↔12 paths with .025U MEI each; G_U and all eight native outcome cells remain.
-One public phase/team/clock is sampled and scored once; public rank maps current
-physical entities to demand-list targets. Native host, full Y, Adam/baseline
-law, Linux CPU FP64/thread1 remain the selected laws. F=0 is a structural
-claim-count consequence, never the service endpoint. No stable performance,
-causal credit/correlation, communication parity or scalability claim.
+The original limits remain900native/900additional invoked support/1800complete, with no transfer or successor carryover. [Support account](b08_joint_quota_phase_20260912/SUPPORT_ACCOUNT.json) includes failed staging and observed support, with incomplete integration/retention/cleanup tails and provider/agent lifetime separately UNKNOWN. The completed original family question/response/intake has separately accepted UNKNOWN documentary cost, outside B support. Actual native45.39s and peak613,072KiB are now observed; they do not establish scalability or a full lifetime invoice.
 
-At intake acceptance there are zero new empirical models/RNGs, episodes,
-gradients/updates, evaluations, numerical reanalyses, tests, profilers or
-Monitor handles. Activation is scientific/investment application; code,
-command, admission, run and result acceptance remain future facts. A concrete
-semantic/cap/measurement blocker limits its affected work and returns to Root;
-it does not stop RCLE or create a substitute scientific decision.
+Unique raw scientific/test/control and complete supervisor archives plus a verified source bundle are preserved in the shared authoring checkout. [Cleanup inventory](b08_joint_quota_phase_20260912/CLEANUP_INVENTORY.json) names the terminal remote execution checkout and supervisor root only; the failed staging root is already absent/unregistered. Root integrates/accepts retention, then the same DM reclaims those copies and returns verified absence. Shared authoring and evidence remain.
+
+Root should update the current execution row to B08 complete/continuing RCLE, integrate the accepted commits and resolve the next authorized direction/capacity task with this DM. The completed observation favors the fixed rules for this tested optional-service use. A later proposal must identify how its next bounded observation would change that choice; no replacement object, second fit or consultation series is created here. Current control continues through the Windows checkout/configured native routes. There is no outstanding transport acceptance uncertainty for the original selected response.

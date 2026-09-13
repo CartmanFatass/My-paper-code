@@ -1,11 +1,13 @@
 {
   "object_id": "RCLE-TBCFV-B08-JOINT-QUOTA-PHASE",
-  "as_of": "prelaunch technical acceptance",
+  "as_of": "complete native/result intake; final publication, Root integration and cleanup tails pending",
   "native_cap_s": 900,
   "additional_invoked_support_cap_s": 900,
   "complete_invoked_cap_s": 1800,
-  "known_support_charged_s": 386.33831879999997,
-  "interpretation": "Sum of complete observed command windows and two explicitly conservative failed-process bounds; session polling chunks replaced, not added. This is a support accounting bound, not elapsed critical path or aggregate CPU. Future required tails not yet complete.",
+  "whole_native_wall_s": 45.39,
+  "known_support_charged_s": 407.1529049,
+  "known_complete_invoked_s": 452.5429049,
+  "interpretation": "Sum of complete observed command windows and two conservative failed-process bounds, once. Monitor3.7s approximate charged4s. Session polling chunks replaced. Not elapsed critical path or aggregate CPU. Final publication/integration/cleanup tails appended when observed; unmeasured components remain UNKNOWN.",
   "provider_agent_lifetime_cost": "UNKNOWN",
   "documentary_family_selection": "separately accepted UNKNOWN, not charged to B",
   "first_fetch_bound": {
@@ -155,6 +157,115 @@
     {
       "operation": "independent correction and launch-command review",
       "wall_s": 0.3005823
+    },
+    {
+      "operation": "prelaunch source/read-review check and accepted command commit",
+      "wall_s": 0.9438716
+    },
+    {
+      "operation": "accepted command publication push",
+      "wall_s": 4.0362757
+    },
+    {
+      "operation": "control-only receipt directory and exact-handle absence readback",
+      "wall_s": 0.7232333
+    },
+    {
+      "operation": "read exact published launch command",
+      "wall_s": 0.163927
+    },
+    {
+      "operation": "detached supervisor launch and acceptance receipt",
+      "wall_s": 0.7367085
+    },
+    {
+      "operation": "launch record preparation read 0",
+      "wall_s": 0.1556426
+    },
+    {
+      "operation": "launch record preparation read 1",
+      "wall_s": 0.2297015
+    },
+    {
+      "operation": "launch record preparation read 2",
+      "wall_s": 0.2329372
+    },
+    {
+      "operation": "card/ledger launch-boundary read",
+      "wall_s": 0.2217022
+    },
+    {
+      "operation": "Monitor invoked reads (3.7s approximately, rounded up)",
+      "wall_s": 4,
+      "bound": true
+    },
+    {
+      "operation": "terminal receipts and complete evidence archive creation",
+      "wall_s": 0.9034069
+    },
+    {
+      "operation": "evidence transfer digest verification and extracted result read",
+      "wall_s": 0.8493025
+    },
+    {
+      "operation": "primary publication source and analysis reference read",
+      "wall_s": 0.2874541
+    },
+    {
+      "operation": "result intake grounding read 0",
+      "wall_s": 0.2095334
+    },
+    {
+      "operation": "result intake grounding read 1",
+      "wall_s": 0.2442595
+    },
+    {
+      "operation": "E0 intake format and scientific reading reuse",
+      "wall_s": 0.0623792
+    },
+    {
+      "operation": "canonical execution HEAD binding reconciliation",
+      "wall_s": 0.6507715
+    },
+    {
+      "operation": "read-only retained result/checkpoint analysis",
+      "wall_s": 2.4844532
+    },
+    {
+      "operation": "result retention/current continuity and owner-boundary read 0",
+      "wall_s": 0.1222911
+    },
+    {
+      "operation": "result retention/current continuity and owner-boundary read 1",
+      "wall_s": 0.5030573
+    },
+    {
+      "operation": "current scientific-position and retention scope read",
+      "wall_s": 0.2257965
+    },
+    {
+      "operation": "exact cleanup inventory and complete supervisor archival",
+      "wall_s": 1.1986445
+    },
+    {
+      "operation": "complete supervisor transfer and exact-source bundle preservation/verification",
+      "wall_s": 0.600292
+    },
+    {
+      "operation": "source bundle from named branch and supervisor payload readback",
+      "wall_s": 0.5457063
+    },
+    {
+      "operation": "machine intake data for durable tables",
+      "wall_s": 0.1687486
+    },
+    {
+      "operation": "publication editing read RCLE_POST_B07_CONTINUATION_READINESS_20260912.md",
+      "wall_s": 0.1622465
+    },
+    {
+      "operation": "current direction scientific-position edit read",
+      "wall_s": 0.1522434
     }
   ]
 }
