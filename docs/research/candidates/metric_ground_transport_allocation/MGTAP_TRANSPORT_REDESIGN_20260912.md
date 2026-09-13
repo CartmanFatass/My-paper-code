@@ -141,3 +141,35 @@ Live continuation is separate from repair acceptance. The native child will reus
 MGTAP HANDOFF and operation after final review/publication, reconcile current effects once,
 and take its unique branch. No new performance observation or Portfolio decision has formed
 in this engineering work; MGTAP remains ACTIVE and fresh cap/cost fields remain unassigned/unknown.
+
+## 2026-09-13 visibility follow-up and live effect
+
+Root relayed the owner's added requirement: before ending a bounded assignment at completion,
+a material conflict or no-current-work/ACTIVE, send one direct native action message containing
+assignment, status, evidence/commit and next step. The skill, role and sibling communication
+instructions now state this. Nonarchive boundary messages no longer require a completed answer;
+they preserve the request's existing effect state and earlier return history. Unchanged waits
+produce no message. Active Pro generation is ongoing work, not a terminal prerequisite merely
+because several bounded calls time out.
+
+Focused follow-up coverage: 56 workflow tests passed in 4.03 s. It covers nonarchive actionable
+messages, current direct destination, unchanged-wait silence, old receipt deduplication, delivering
+a historical pending receipt without changing a newer one, and refusing a second COMPLETE answer
+across an intervening conflict. Independent Reviewer found the latter two edge cases; DM repaired
+them and the Reviewer independently replayed both corrected cases with no material finding. DM
+accepts this visibility follow-up. Additional retained scratch: `mgtap-transport-boundary-01`
+and `mgtap-transport-boundary-review-01`, under the same recorded cleanup restriction.
+
+The actual live preflight passed at `NATIVE_PREFLIGHT.json` under main's existing runtime archive
+`temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-12-mgtap-unequal-exposure-investment-01/`.
+The unchanged operation `19ca18f5-1683-418c-b204-e03873309af7` made one Send attempt, then strict
+Agentify returned `USER_MESSAGE_CONTENT_MISMATCH`. Persisted `sendAttempted=true`/click count 1
+means UNCERTAIN_EFFECT, permanently observation-only while acceptance remains possible. The
+dedicated tab displayed the exact conversation, empty composer and active Stop answering.
+No paired current provider IDs or full response was yet available at this record boundary.
+The original mismatch and subsequent bounded observations remain in
+`AGENTIFY_OPERATION_19ca18f5-1683-418c-b204-e03873309af7_FINAL_OBSERVATION.json` and
+`..._IMPASSE_OBSERVATION.json`. Those filenames are historical operator labels; active generation
+was not accepted as a terminal impasse. The DM resumed the same child's non-sending observation
+and sent Root one action update. No second Send, new idempotency key, scientific invocation or
+Portfolio decision was created. Full-response intake remains the dependent outstanding work.
