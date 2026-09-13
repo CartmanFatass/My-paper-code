@@ -30,6 +30,12 @@ development-spending HOLD under the [post-B08 Convergence intake](pro_packets/20
 The family remains open. The separate tested equal-unit/.99-prior/FLEX/final1000
 recipe remains on its earlier narrow spending HOLD.
 
+The complete [greedy-anchored Convergence intake](pro_packets/20260913_greedy_anchored_continuation/INTAKE.md)
+now retains one changed policy-package question for later finite B object/investment
+specification: exact greedy log-prior plus the existing learned phase scorer.
+This close-call candidate decision selects no fit, card, seed or budget and leaves
+both tested-recipe HOLDs intact.
+
 ## Current position
 
 The accepted [post-B07 Convergence intake](RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md)
@@ -123,9 +129,38 @@ The reason may use negative or mixed facts; no positive pilot, exact optimum or
 complete diagnosis is required. This condition commissions no prior diagnostic,
 search for a reason or automatic consultation. The family remains open.
 [Current continuation](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md) retains
-the same DM and ACTIVE/MEDIUM direction and returns the distinct continuation/
-capacity need. B08 retention and cleanup are complete; neither its ended finite
-allocation nor this narrow recipe HOLD is a whole-direction disposition.
+the same DM and direction responsibility. B08 retention and cleanup are complete;
+neither its ended finite allocation nor this narrow recipe HOLD is a
+whole-direction disposition.
+
+The complete Convergence response5b04f22e844b74df5c12a0dfd334b3ff08f32634
+[selects A](pro_packets/20260913_greedy_anchored_continuation/INTAKE.md):
+retain only the explicitly offered epsilon=.1 greedy-anchored learned-correction
+question for later finite B object/investment specification. Its law is
+q(s given x)=.9*1[s=exact greedy(x)]+.1/N and
+pi_theta=softmax(log q+z_theta), recomputed on every public phase snapshot.
+It preserves native roster/action/information semantics and asks whether learning
+adds useful service beside fixed greedy and attained nearest. It neither reopens
+the unchanged B08 recipe nor establishes a changed use/cost fact.
+
+The strongest support is B08's real initialization learning plus a specific legal
+competent reference for an incremental package question. The strongest opposition
+is greedy's large attained service advantage: an anchor can import rule competence
+without learned value, and sampled departures can harm native trajectories.
+The node explicitly calls this a close-call against retaining no new empirical
+candidate. The new initialization, learned increment and complete cost are all
+unknown. The .9 greedy action preference is no native-return mixture or
+post-training safety guarantee; historical prior failures remain cautionary
+rather than matched controls.
+
+A separately specified/allocated real-learning comparison against the candidate's
+own new initialization, fixed greedy and nearest would be the next discriminator,
+retaining positive, small, mixed and adverse U/F/recovery consequences. It would
+test package service, not isolate an anchor cause. Candidate retention selects
+no fit, seed, card, numerical cap or automatic consultation; both HOLDs and the
+open-family boundary remain. Exact integer greedy ties and scoring the actually
+sampled combined distribution are future implementation constraints recorded in
+the intake, not newly implemented evidence.
 
 The historical sections below preserve earlier objects and their own limits.
 
