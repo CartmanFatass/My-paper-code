@@ -4,8 +4,11 @@ Status: **DM technically accepts source5dce539ed54afd4334d09db9dcd94df38c52c2fc*
 The sole new Generic invocation was accepted on2026-09-13 at20:07:19Z and its
 native Monitor adopted the handle at20:09:12Z. DM now accepts its complete
 5000-training/4969-update/128-final endpoint, collected after exit0 at20:43:15Z.
-The fixed BANK128 dependency is satisfied; the exact prepared panel follows
-fresh adjacent admission. [Launch facts](GENERIC_LAUNCH.json),
+The dependent fixed BANK128 then passed its own admission and completed with
+exit0 at20:48:33Z. Both endpoints and the unchanged published primary are now
+accepted; [combined E0](../FOLR_RETAINED_REFERENCE_USE_B01_RESULT_EVIDENCE_20260913.md)
+and [scientific intake](../FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md)
+apply the Generic-only use rule. [Launch facts](GENERIC_LAUNCH.json),
 [adjacent admission](GENERIC_ADMISSION.json) and [fixed input staging](BANK_STAGING.json)
 preserve the exact execution. Baseline8768f0f83, first source0bd5c477b. This record remains
 separate from the scientific Portfolio intake and later scientific result.
@@ -181,3 +184,27 @@ reviews returned[] at this boundary; owner prediction remains not taken. The
 combined primary and scientific use disposition remain pending BANK completion.
 The new BANK handle/command are pinned in BANK_LAUNCH_PLAN.json before submission;
 native Monitor adoption follows acceptance. No further Pro question is open.
+
+## Fixed BANK completion and combined technical closure
+
+The sole dependent task `folr-ref-use-bank-781301-5dce539ed54a` was accepted after
+Generic intake, PID3427261, with15,627,558,912 physical/effective bytes available
+at its own adjacent admission. The same Monitor returned ADOPTED and TERMINAL
+together because BANK was finished on its first query: exit0, inactive tmux,
+native supervisor duration3s. Complete GNU wall3.18s includes startup/admission,
+load, evaluation, original primary publication and child exit. PeakRSS394876KiB.
+
+Full recorded BANK output has0 new training episodes/ticks/optimizer steps,
+actor displacement0, the fixed historical seed781201 and the new evaluation
+seed2781301, with all128 final episodes/2560 ticks. It uses the exact staged
+checkpoint and source5dce; no new learner or checkpoint was constructed. Both
+full arrays reproduce native statistics and `d_use=-5.932421875` with the exact
+GENERIC_ONLY_BANK_WORSE branch. DM accepts technical execution and publication
+separately from the bounded use inference in the combined scientific intake.
+
+Combined native wall2159.85s is within2700/300/native3000 limits. No new tests or
+scientific replay were needed at this terminal boundary. Original bytes from
+both panels, the new Generic final weights and20 support/supervisor files are
+preserved; CLEANUP_INVENTORY.json records terminal paths without deleting them.
+No live native experiment remains. The direction stays ACTIVE/MEDIUM; no pending
+Pro request or scientific approval remains for F.

@@ -34,18 +34,19 @@ with native mean return -4.32609375. The equally informed Generic arm timed out
 before final evaluation, so BANK-minus-Generic and its MEI rule are unavailable.
 This is an accepted own-arm observation, not evidence of a bank advantage.
 
-The legal entity-history-to-action path now has a complete trained native
-execution, while equally informed Generic sufficiency remains a surviving
-alternative. B04 generic competence retains its own host/information scope as
-contrary evidence. Accepted post-E Convergence selects a narrower use question:
-compare this retained BANK controller with one genuinely new, equally informed
-Generic fit on fresh native panels, to decide whether BANK merits an optional
-development-reference role. This outcome-informed retained/new comparison is
-not a fresh matched training pair or BANK-learning replication. Its finite
-investment remains a separate decision; the completed E allocation funds no retry.
+The separately selected and funded retained-reference use comparison is now
+complete: one fresh equally informed Generic64 has mean1.055 and the fixed
+historical BANK's new panel has mean-4.877421875, giving d_use=-5.932421875. The
+strict<-1 rule selects Generic-only for this named optional development-reference
+use. Generic sufficiency now has direct support on the exact public-information
+host. This outcome-informed retained/new comparison is not a fresh matched
+training pair or BANK-learning replication; it does not repair E's unavailable
+primary or close the still-open family. The named finite F allocation supplies
+no retry or automatic successor. B04 remains contrary context on its own host.
 See [E0 result](FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md) and
 [final intake](FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md), and the
-[post-B01 use decision intake](pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md).
+[post-B01 use decision intake](pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md),
+and [completed reference-use intake](FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md).
 
 The accepted post-B03 H still holds the exact tested LEARNED_EVENT/5000-training/
 128-final package, retaining event-aware RETAIN and no currently recommended
@@ -989,3 +990,40 @@ References:
 - `pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md`, delivery `d6a29b287612f21fd5ddbb0cc19fbae4e8c1fb12`, integrated identical bytes `7ab178ad8fbf94ffa4c5da5b4812d632db2fdb9b`
 - `pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md`
 - `pro_packets/20260912_entity_history_post_b01_discriminator/INVESTMENT_READINESS.md`
+
+## Accepted retained-reference use result — 2026-09-13
+
+**Conclusion and bounded claim.** The exact fixed BANK is not retained as an
+optional executable development reference on the current public-information
+Traffic Junction host. One new full Generic64 fit and its128 new final episodes
+give mean1.055; the historical BANK16's128 new episodes give-4.877421875. Their
+nonpaired d_use=-5.932421875 selects the prespecified strict<-1
+GENERIC_ONLY_BANK_WORSE branch. This resolves the purchased use observation,
+without replacing the missing original E contrast.
+
+**Strongest support and contradiction.** Both native endpoints are complete,
+equally informed and technically accepted at the fixed source and exposure.
+Generic is now directly competent on this exact host, beyond B04's different-host
+context. Against a broad negative, BANK is one outcome-informed historical policy
+and Generic one new fit; their capacities/histories are not matched. Episode
+SEs0.533175147760 and0.289917604837 remain conditional; no training-population or
+component-memory inference follows. Generic's62 negative-return episodes and
+range[-13.46,22.16] coexist with its higher mean; BANK has125 negative episodes
+and range[-19.80,1.46]. No adverse outcome is dropped.
+
+**Surviving alternative and next discriminator.** Generic recurrence with the full
+common lifecycle table suffices for this concrete use. A distinct entity-history
+use under a changed decision-relevant information/lifetime context is not ruled
+out, but no such next object or investment is selected here. Repeating the same
+retained-reference question would reuse the completed Generic-only decision.
+Reconsider when a concrete new fact or proposal changes the action choice;
+no automatic fit, panel, consultation, family closure or whole-direction stop
+follows from this completed allocation. Matching tuned headroom remains absent;
+earlier scalar H, signs, smaller holds and recast history remain unchanged.
+
+References:
+
+- `FOLR_RETAINED_REFERENCE_USE_B01_SCIENCE_CARD_20260913.md`
+- `FOLR_RETAINED_REFERENCE_USE_B01_RESULT_EVIDENCE_20260913.md`
+- `FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md`
+- `retained_reference_use_b01_781301/RESULT_SUMMARY.json`
