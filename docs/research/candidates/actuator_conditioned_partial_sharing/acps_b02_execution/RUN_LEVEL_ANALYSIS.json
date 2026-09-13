@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "ACPS-B02",
+      "arm": "ACPS",
+      "n": 1,
+      "mean": 0.05326012758454275,
+      "sample_sd": null,
+      "min": 0.05326012758454275,
+      "max": 0.05326012758454275,
+      "runs": {
+        "9102": 0.05326012758454275
+      }
+    },
+    {
+      "task": "ACPS-B02",
+      "arm": "SHARED",
+      "n": 1,
+      "mean": 0.05844655498057657,
+      "sample_sd": null,
+      "min": 0.05844655498057657,
+      "max": 0.05844655498057657,
+      "runs": {
+        "9102": 0.05844655498057657
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "ACPS-B02",
+      "arm": "ACPS",
+      "baseline": "SHARED",
+      "summary": {
+        "n": 1,
+        "mean": -0.005186427396033817,
+        "sample_sd": null,
+        "min": -0.005186427396033817,
+        "max": -0.005186427396033817
+      },
+      "differences": {
+        "9102": -0.005186427396033817
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

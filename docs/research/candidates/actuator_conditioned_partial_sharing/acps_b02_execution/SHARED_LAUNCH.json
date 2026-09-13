@@ -1,0 +1,40 @@
+{
+  "arm": "SHARED",
+  "object": "ACPS-B02",
+  "master": 9102,
+  "source_sha": "dd91ea3d81970485a8d562db47e30c70ed063524",
+  "node": "hmasd-wsl-node",
+  "worktree": "/home/wu/hmasd-worktrees/acps-b02-9102-20260912",
+  "output": "/home/wu/hmasd-worktrees/acps-b02-9102-20260912/temp/directions/actuator_conditioned_partial_sharing/exp/acps_b02_9102/SHARED",
+  "handle": "acps-b02-shared-9102-20260912",
+  "supervisor_root": "/home/wu/.agent-tasks/acps-b02-shared-9102-20260912",
+  "argv": [
+    "/usr/local/bin/agent-task",
+    "run",
+    "acps-b02-shared-9102-20260912",
+    "/usr/bin/time",
+    "-q",
+    "-f",
+    "%e",
+    "-o",
+    "/home/wu/hmasd-worktrees/acps-b02-9102-20260912/temp/directions/actuator_conditioned_partial_sharing/exp/acps_b02_9102/SHARED/process_wall_seconds.txt",
+    "bash",
+    "/home/wu/hmasd-inputs/acps-b02-9102-20260912/run_shared.sh"
+  ],
+  "submitted_utc": "2026-09-13T01:52:47.882481+00:00",
+  "ssh_wall_seconds": 0.6238911999971606,
+  "transport_exit_code": 0,
+  "stdout": "Task 'acps-b02-shared-9102-20260912' started in tmux session 'agent_acps-b02-shared-9102-20260912'. Output: /home/wu/.agent-tasks/acps-b02-shared-9102-20260912/task.log\n",
+  "stderr": "",
+  "monitor_dispatch": "accepted by live Monitor app task 01a095d0-21ee-7c02-9d97-3681b5678200",
+  "actual_monitor_adoption": "Root forwarded MONITOR_ADOPTED: running at exact source on hmasd-wsl-node; actual Monitor goal retains handle through terminal Root delivery; no routine DM polling",
+  "initial_status": {
+    "task": "acps-b02-shared-9102-20260912",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3417087,
+    "uptime_seconds": 28,
+    "tmux_active": true
+  },
+  "root_adoption_receipt": "Monitor receipt received: MONITOR_ADOPTED for acps-b02-shared-9102-20260912, running on hmasd-wsl-node at source dd91ea3d81970485a8d562db47e30c70ed063524; monitor goal explicitly retains handle through terminal Root delivery. Continue DM-owned collection/acceptance flow; no routine polling needed."
+}
