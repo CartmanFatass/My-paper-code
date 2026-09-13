@@ -55,6 +55,17 @@ blocker/scope conflict, or ACTIVE direction entering idle must produce one proac
 message before native final/idle return. Include assignment, state, evidence or commit, and the
 next action/dependency; this is not a periodic keepalive or an extra dispatch.
 
+## Authorization gate
+
+At each dispatch point, distinguish an already-authorized next state from a new scientific choice.
+If the current card, accepted Pro decision or published handoff fixes the next object, question,
+inputs, comparator and budget, the owning DM dispatches it immediately; no extra Root/owner
+approval, ACK or waiting interval is required. A prepared question for the proper direction or
+Portfolio node is itself dispatchable when its scope is fixed; only the returned decision gates
+execution that would change science, budget or lifecycle. Wait only for an actual external
+dependency, an unformed proper-node decision, or a concrete blocker. A running DM with an
+authorized next state must never remain in native wait merely because the prior object completed.
+
 ## Bounded assignments
 
 Use ENGINEERING_SCOPE_SPEC §7.1 for L0 and optional L1–L3 detail. Include the existing

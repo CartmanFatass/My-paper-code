@@ -36,6 +36,11 @@ an idle child with unfinished authorized work is resumed once with followup_task
 a timeout as failed execution, a new invocation budget or permission to retry scientific work.
 Owner pause/stop boundaries take precedence. No-work completion is not a reason to loop forever.
 
+Do not add an authorization wait when the next state is already fixed by the current card, Pro
+decision or published handoff. The owning DM dispatches that bounded work or proper-node question
+directly. Only an unformed scientific/budget/lifecycle choice, actual dependency or concrete
+blocker requires waiting; no ACK or parent approval is an extra gate.
+
 DM sends Root only actionable integration, cross-direction dependency, formal direction disposition,
 scope-conflict, or bounded-assignment completion/ACTIVE-idle facts, with assignment identity,
 commits/evidence, requested next action and uncertain effects.

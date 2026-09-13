@@ -49,6 +49,14 @@ work when available. Keep an ACTIVE direction occupied through an object/allocat
 wait or child completion; release a slot only for an explicit Portfolio/owner lifecycle pause or
 closure.
 
+Authorization is inherited from the current card, accepted Pro decision and published handoff.
+When those records fix the next object or proper-node question, the owning DM dispatches at once;
+Root/owner approval, ACKs and artificial wait intervals are not additional gates. A prepared
+direction/Portfolio question may be sent when its scope is fixed, while its response gates only
+science, budget or lifecycle changes. Wait only for an actual external dependency, an unformed
+proper-node decision or a concrete blocker; completion of the prior object alone is not a wait
+condition.
+
 Transport/selector/workflow defects default to local repair by the author DM. The DM may edit its
 owned helpers, fixtures and related skill/control instructions, run focused tests and review, and
 recover the same unchanged operation after verified nonacceptance. Preserve operation, prompt,
