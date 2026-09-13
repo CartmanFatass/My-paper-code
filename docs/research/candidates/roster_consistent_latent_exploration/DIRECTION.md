@@ -35,11 +35,18 @@ now retains one changed policy-package question for later finite B object/invest
 specification: exact greedy log-prior plus the existing learned phase scorer.
 This close-call candidate decision itself selected no fit or budget. The subsequent
 [conforming finite-investment intake](pro_packets/20260913_greedy_anchored_investment/INTAKE.md)
-now allocates one fresh seed29 B09 at256 updates and four complete native panels,
-with180/600/780 s native/support/complete invoked caps. Its next discriminator is
-learned service beyond both attained rules and positive learning beyond its own new
-initialization, preserving these independent quantities. This is selected science,
-not new efficacy evidence; both tested-recipe HOLDs remain intact.
+allocated one fresh seed29 B09 at256 updates and four complete native panels,
+with180/600/780 s native/support/complete invoked caps. Its [complete B09 intake](RCLE_B09_GREEDY_ANCHORED_PHASE_INTAKE_20260913.md)
+now preserves G_U+.05126953125 and D_n+.1460205078125, with D_g−.0317708333333.
+Both primary paths/all8 U means improve from new initialization and beat nearest,
+yet lose to greedy. Positive learning is not erased by the rule deficit. This
+one-fit result favors fixed greedy for the observed U use; recovery worsens in3/8
+cells versus initialization and5/8 versus greedy despite all8 gains over nearest.
+No stable superiority, causal anchor attribution, headroom or broad direction
+failure follows. Both tested-recipe HOLDs remain intact and no new HOLD is applied.
+The finite unit ends after preserved closeout, with no automatic fit or consultation.
+A new discriminator requires a concrete changed use or observation with a stated
+consequence for the learned-versus-greedy development choice; none is allocated here.
 
 ## Current position
 
