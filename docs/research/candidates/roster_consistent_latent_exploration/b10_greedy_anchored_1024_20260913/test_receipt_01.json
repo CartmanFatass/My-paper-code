@@ -1,0 +1,10 @@
+{
+  "source_sha": "e5fd439735bcc52d7f4cba9943b8c5c5138e21c2",
+  "exit_code": 4,
+  "test_wall_s": 0.12711753090843558,
+  "stdout": "no tests ran in 0.00s",
+  "stderr": "ERROR: file or directory not found: tests/experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/test_contract.py",
+  "scratch_absent": true,
+  "cause": "Test invoked while exact checkout still populating; no scientific exposure. After staging was repaired and completed, the unchanged focused selection passed in invocation02.",
+  "changed_test_source": false
+}

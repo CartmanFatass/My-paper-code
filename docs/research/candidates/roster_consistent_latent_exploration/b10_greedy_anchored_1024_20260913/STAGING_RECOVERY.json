@@ -1,0 +1,50 @@
+{
+  "terminated_owned_staging_processes": [
+    {
+      "pid": 3428720,
+      "elapsed_s": 279,
+      "command": "zsh -c git -C /home/wu/projects/HMASD fetch origin codex/rcle && git -C /home/wu/projects/HMASD worktree add --detach /home/wu/hmasd-worktrees/rcle-b10-e5fd43973 e5fd439735bcc52d7f4cba9943b8c5c5138e21c2 && /usr/local/bin/agent-task --help"
+    },
+    {
+      "pid": 3428721,
+      "elapsed_s": 279,
+      "command": "git -C /home/wu/projects/HMASD fetch origin codex/rcle"
+    },
+    {
+      "pid": 3428722,
+      "elapsed_s": 279,
+      "command": "/usr/lib/git-core/git remote-https origin https://github.com/CartmanFatass/My-paper-code.git"
+    },
+    {
+      "pid": 3428723,
+      "elapsed_s": 279,
+      "command": "/usr/lib/git-core/git-remote-https origin https://github.com/CartmanFatass/My-paper-code.git"
+    },
+    {
+      "pid": 3428880,
+      "elapsed_s": 109,
+      "command": "git -C /home/wu/projects/HMASD worktree add --detach /home/wu/hmasd-worktrees/rcle-b10-e5fd43973 e5fd439735bcc52d7f4cba9943b8c5c5138e21c2"
+    },
+    {
+      "pid": 3428883,
+      "elapsed_s": 109,
+      "command": "/usr/lib/git-core/git reset --hard --no-recurse-submodules"
+    },
+    {
+      "pid": 3428884,
+      "elapsed_s": 109,
+      "command": "/usr/lib/git-core/git -c fetch.negotiationAlgorithm=noop fetch origin --no-tags --no-write-fetch-head --recurse-submodules=no --filter=blob:none --stdin"
+    },
+    {
+      "pid": 3428885,
+      "elapsed_s": 109,
+      "command": "/usr/lib/git-core/git remote-https origin https://github.com/CartmanFatass/My-paper-code.git"
+    },
+    {
+      "pid": 3428886,
+      "elapsed_s": 109,
+      "command": "/usr/lib/git-core/git-remote-https origin https://github.com/CartmanFatass/My-paper-code.git"
+    }
+  ],
+  "scientific_invocations": 0
+}
