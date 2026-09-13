@@ -6,7 +6,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; Portfolio Q intake and zero-exposure preparation published; ACTIVE/HIGH | Wait for Transport redesign validation, then publish/bind the original Q once; no old-request resend or empirical successor |
-| MGTAP | COND512/intact-DENSE768 use judgment selected; Transport redesign b480ef406 integrated; live request click1 USER_MESSAGE_CONTENT_MISMATCH is effect-uncertain | Observe/archive same request only; no resend. Complete workflow repair and direct receipt before any new scientific spend |
+| MGTAP | Portfolio B 已完整 intake：一次 fresh pair 使用 COND 600s、DENSE 900s、native 1500s、support 900s、complete 2400s；MGTAP ACTIVE/MEDIUM。响应两条程序性条款与当前规范冲突，已返回同一 Portfolio 节点修正 | 保留原 request click1/USER_MESSAGE_CONTENT_MISMATCH 的效果不确定事实，继续只观察/归档，绝不重发；等待修正后再按新 caps 做资源检查与单次启动 |
 | RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Family remains open; only revisit exact recipe when a decision-relevant use or new service/cost evidence appears; no automatic fit successor |
 | ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Prepare next direction-node use/no-addition question; no new fit or K retry before proper decision |
 | FOLR | BANK −4.3261 retained; Generic no final, no paired primary; finite investment readiness published but unfunded; ACTIVE/MEDIUM | Keep material ready behind shared Portfolio writer; no Generic retry, model load or experiment |
