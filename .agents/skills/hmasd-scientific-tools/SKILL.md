@@ -12,8 +12,9 @@ only the mode needed now; this is not a launch checklist or new review layer.
 - **Scientific reading:** for DM/Claude hub mechanism/card/comparator/estimand choices,
   intake or scientific Pro questions, the designated DM's Portfolio material preparation and Pro-response conformance, and a
   critic's reviewed claim, use [scientific-reading.md](references/scientific-reading.md).
-  Implementer/reviewer use it only for affected reward, information, termination, duration or
-  inference semantics. Start from the current assignment and relevant spec sections.
+  During implementation and review, DM and independent Reviewer use this mode for affected reward, information,
+  termination, duration or inference semantics; do not create an Implementer task.
+  Start from the current assignment and relevant spec sections.
   Formatting, Git, receipts and accepted technical collection do not trigger this mode.
 - **DM/Root literature:** for a concrete mechanism, comparator, unexpected-result or
   related-work question, start with the two local libraries using

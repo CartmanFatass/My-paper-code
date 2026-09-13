@@ -63,8 +63,12 @@ At goal-turn entry, a return or receipt, and before waiting:
 
 Use ENGINEERING_SCOPE_SPEC §7.1 for L0 and optional L1–L3 detail. Include the existing
 branch/checkout and known collection, integration, intake, cleanup and selected follow-on work.
-DM carries the engineering and scientific batch through completion; no separate CM or new
-planning handoff is required for ordinary implementation steps.
+DM carries science, implementation, self-checks, repairs and acceptance through completion in
+the same task. Under OWNER_DIRECT 2026-09-12, do not dispatch CM or Implementer
+subagents, including generic implementation substitutes. Retain independent Reviewer review for
+high-risk changes under ENGINEERING_SCOPE_SPEC §7.3; DM resolves findings and accepts.
+Accepted legacy assignments close on their original routes without
+successors; other specialist and independent-task routes are unchanged.
 
 Native work uses `followup_task`; `send_message` only conveys information requiring no
 new work. Retain actual dispatch outcomes and reconcile uncertain delivery before retrying.
