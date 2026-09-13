@@ -1,0 +1,164 @@
+{
+  "collected_at": "2026-09-13T01:02:08.470098+00:00",
+  "handle": "folr-entity-history-b01-781201-bank",
+  "source_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+  "status": "COMPLETE_TECHNICAL_COLLECTION_OF_COMPLETE_OWN_ARM",
+  "terminal_exit": 0,
+  "archives": [
+    {
+      "name": "BANK_RAW.tar.gz",
+      "bytes": 4149375,
+      "sha256": "f4d2726f98ae2b05157fd3b06b5cfc2f9c3c8c4fa0cc891bb41874f0c2b1595b",
+      "members": [
+        {
+          "name": "ADMISSION.json",
+          "bytes": 504,
+          "sha256": "66e999606a6338f306181cbe7b9bffa8e1a65626add1ecc5ff70ae7bc20c6737"
+        },
+        {
+          "name": "INVOCATION_TIME.json",
+          "bytes": 108,
+          "sha256": "759e857bf5b45520fca9e59080a2973ac4c63b4c6ec324062e2a5f2ff9a8290e"
+        },
+        {
+          "name": "final.pt",
+          "bytes": 4532819,
+          "sha256": "2385b6ea0f03b36fd4e0f05006acbe64922a8dd9c2c8fa7d0cd396d5ed090989"
+        },
+        {
+          "name": "summary.json",
+          "bytes": 102138,
+          "sha256": "31c10262442f364d70046113acbecbacc360abdaceca96a795f4fae291f31dbb"
+        }
+      ]
+    },
+    {
+      "name": "BANK_SUPERVISOR.tar.gz",
+      "bytes": 1766,
+      "sha256": "888c165c9c05ab8caa0c50a87a8f8bf104270b69c6a64e1280d33295e84da3e1",
+      "members": [
+        {
+          "name": "exit_code",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        {
+          "name": "pid",
+          "bytes": 8,
+          "sha256": "a2e67cf8f04e4b2f92f947774de3a83c5144f0d4daa3a85bf2439e3053ef6673"
+        },
+        {
+          "name": "runner.sh",
+          "bytes": 1559,
+          "sha256": "a46b34c8c66490f7be9d9b97d7471b85a3ee8f8df3b21ec75c226246c25fdefa"
+        },
+        {
+          "name": "start_time",
+          "bytes": 11,
+          "sha256": "e50dc7e1ef5fee5d73dedeb73e84c9d5a1b5c4fce87e95e0b70ec999139acdb8"
+        },
+        {
+          "name": "status",
+          "bytes": 9,
+          "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+        },
+        {
+          "name": "task.log",
+          "bytes": 2681,
+          "sha256": "ae522f4bcd2f6cbdff40fe6050df8614efe599fab7d06052b56e0b432e244a6c"
+        }
+      ]
+    }
+  ],
+  "observed_counts": {
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560
+  },
+  "native_panel_recomputed": {
+    "mean": -4.32609375,
+    "sample_sd": 2.8547342180505457,
+    "conditional_episode_se": 0.2523252405086021,
+    "minimum": -12.529999999999998,
+    "maximum": 1.5100000000000007,
+    "n": 128
+  },
+  "checkpoint": {
+    "updates": 4969,
+    "arm": "BANK",
+    "state_groups": {
+      "actor": {
+        "tensor_count": 17,
+        "state_element_count": 89599,
+        "all_finite_fp32": true
+      },
+      "mixer": {
+        "tensor_count": 32,
+        "state_element_count": 284292,
+        "all_finite_fp32": true
+      },
+      "target_actor": {
+        "tensor_count": 17,
+        "state_element_count": 89599,
+        "all_finite_fp32": true
+      },
+      "target_mixer": {
+        "tensor_count": 32,
+        "state_element_count": 284292,
+        "all_finite_fp32": true
+      }
+    },
+    "actor_parameters": 89573,
+    "actor_buffer_elements": 26,
+    "online_target_equal_at_final_5000": true,
+    "optimizer_state_entries": 43,
+    "optimizer_step_values": [
+      4969.0
+    ],
+    "rnn_input_shape": [
+      48,
+      128
+    ],
+    "rnn_recurrent_shape": [
+      48,
+      16
+    ],
+    "actor_initial_l2_published": 20.884466885940498,
+    "actor_change_l2_published": 30.487625488436745,
+    "reconstruction": "Weights-only CPU checkpoint reads; no model, optimizer, environment, evaluation or initial-state recreation."
+  },
+  "invocation_time": {
+    "wall_seconds": 1762.22,
+    "user_seconds": 1343.35,
+    "system_seconds": 418.51,
+    "peak_rss_kib": 754692,
+    "exit_code": 0
+  },
+  "native_sum_wall_seconds": 3557.2799999999997,
+  "native_sum_cpu_seconds": 3556.5699999999997,
+  "pair_primary": null,
+  "comparison_unavailable": "Collected Generic arm is incomplete; no BANK-minus-Generic estimate or MEI branch.",
+  "scientific_invocations_in_collection": 0,
+  "checkpoint_loads": 3,
+  "collection_correction": "Initial collector wrongly equated89599 state elements with89573 parameters, including25 label-buffer and1 attention-scale-buffer elements. A targeted second read and source inspection identified the mismatch; corrected count agrees. Third read completed remaining verification. No checkpoint or scientific defect, no new fit.",
+  "cleanup_inventory": {
+    "worktree": "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304",
+    "worktree_registered": true,
+    "source_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+    "tracked_source_clean": true,
+    "scientific_output_roots": [
+      "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_generic",
+      "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_bank"
+    ],
+    "support_root": "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_support",
+    "supervisor_roots": [
+      "/home/wu/.agent-tasks/folr-entity-history-b01-781201-generic",
+      "/home/wu/.agent-tasks/folr-entity-history-b01-781201-bank"
+    ],
+    "retention_state": "Pending Root integration/retention acceptance before assigned reclamation; no deletion in this collection",
+    "shared_authoring": "C:/Projects/HMASD-worktrees/codex-vap-folr retained"
+  },
+  "support_command_wall_seconds": 0.9293795250123367
+}
