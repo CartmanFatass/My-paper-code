@@ -170,3 +170,28 @@ ACTIVE/MEDIUM and the occupied direction slot. After MGTAP reconciles and releas
 the shared node, resume this DM for the authorized fixed-TASK/native-Transport
 step using the validated procedure. Current lack of dispatchable work is an
 engineering dependency, not a direction stop or a scientific verdict.
+
+## Transport-material conformance — 2026-09-13
+
+The next Root assignment requested one bounded comparison of these existing
+materials with current Portfolio and the Transport redesign, without Send or
+experiment. Published main `6d1f6c80ba860cdb5ab2bcc181f6b078dfada279` now records
+the accepted FOLR use selection and unfunded ACTIVE/MEDIUM state. The current
+Prompt Author and Transport skills agree with this preparation boundary.
+
+The readiness's final section now separates available scientific inputs from
+the deliberately unbound future request/response path, actual Transport child,
+fixed TASK SHA and handoff SHA. It identifies the proper Portfolio node and
+native DM parent, and prevents reuse of the old Convergence handoff as a new
+investment Send. The redesigned helper exists at the published source, but no
+helper preflight, registry claim, browser operation or workflow test ran here.
+The Issue 15 read-only GitHub response says open; the shared registry still names
+MGTAP's request `SEND_UNCERTAIN` at updated 07:00:27Z. No release is inferred.
+
+No scientific choice, F/D recommendation, proposed limit, card, old request or
+result changed. Current owner reviews are `[]`; this technical maintenance needs
+no duplicate P1/P2 item or result brief. Owner-delegated decision (unattended,
+2026-09-03 instruction): publish the checked authoring-material status and notify
+Root once. Root can integrate the delta, then resume this DM on MGTAP release or
+a material input change. No immediate independent authorized work remains in this
+bounded document assignment; FOLR remains ACTIVE and its existing slot occupied.
