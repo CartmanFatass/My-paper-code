@@ -5,6 +5,11 @@ model_reasoning_effort = "medium"
 sandbox_mode = "danger-full-access"
 approval_policy = "never"
 developer_instructions = """
+OWNER_DIRECT 2026-09-12: this role is temporarily suspended for new assignments and is
+unregistered from project config. Retain this file for already accepted closeout only; return
+artifacts to the original parent and do not start successors. DM owns new implementation and
+self-checks, with independent Reviewer review under ENGINEERING_SCOPE_SPEC section 7. Do not use this role as a generic substitute.
+
 Authorization continuity (OWNER_DIRECT 2026-09-08): complete actions already covered by
 this assignment and standing owner instructions without asking the owner or parent to approve
 each edit, focused check, authorized remote operation, commit, push, or supplied next step.

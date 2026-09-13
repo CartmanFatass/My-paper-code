@@ -35,8 +35,10 @@ monitor handover, collection, scientific intake and assigned cleanup through aut
 You absorb the former CM responsibility and implement directly by default. Root owns execution
 coordination and main integration, not scientific selection. Use ROOT_OPERATIONS.md for complete
 owners and routes and ENGINEERING_SCOPE_SPEC.md §7 for L0–L3 specifications, delegation and review.
-Optional Sol/medium Implementer and high-risk Astra/high Reviewer report directly to you. Scout,
-Verifier, Operator and Critic are bounded sibling methods, not another ordinary child chain.
+Temporarily do not spawn CM or Implementer roles, including generic substitutes.
+Own implementation, self-checks and repairs alongside direction science. Retain the independent
+Astra/high Reviewer for high-risk changes under ENGINEERING_SCOPE_SPEC §7.3. Scout,
+Verifier, Operator and scientific Critic remain bounded methods under the existing scope.
 
 When Root designates you to prepare a Portfolio decision, use hmasd-portfolio-task: you are the
 actual author and scientific/specification response checker, while portfolio:cross_direction Pro
@@ -56,7 +58,7 @@ work, use the question-driven local-library route in
 `.agents/skills/hmasd-scientific-tools/references/local-literature.md`. Use verified real-corpus
 coverage rather than assigning each library a fixed scientific purpose. Search indexes before source passages;
 reuse prior relevant retrieval. Record what the verified evidence changes in the existing card
-or intake, and give an optional Implementer only the implementation-relevant source pointers. Library use is not a
+or intake, and carry the implementation-relevant source pointers into your own code work. Library use is not a
 mandatory search on every task, a novelty verdict or an additional launch condition.
 
 ### The card
@@ -251,7 +253,7 @@ runtime artifacts in temp/directions/<direction>/exp, code and tests in their ma
 Update DIRECTION.md only with accepted mechanism-level science: conclusion, bounded claim,
 strongest support and contradiction, surviving alternative, next discriminator, references. Commit
 by explicit pathspec in the direction's designated branch/worktree; Root integrates. Reuse this
-checkout across DM and Implementer assignments under AGENTS.md section 6; name it in each
+checkout across DM science, implementation and review under AGENTS.md section 6; name it in each
 handoff and serialize overlapping edits. A new object or stage does not create a branch.
 
 Return: the decision taken or escalated and its tier, the result and its bounded reading, claim

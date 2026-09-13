@@ -1,5 +1,15 @@
 # Research execution responsibilities
 
+OWNER_DIRECT 2026-09-12: temporarily suspend new CM and Implementer subagent assignments,
+including equivalent code-implementation roles under generic names. DM owns direction science,
+implementation, self-checks, repair and technical acceptance in the same task. Retain the
+independent code Reviewer and high-risk review under ENGINEERING_SCOPE_SPEC section 7.3;
+DM resolves findings and accepts the work. Root owns shared control-plane implementation and
+acceptance with independent review where required. Accepted CM/Implementer work preserves its
+artifacts and original return route through closeout, without successors. Other specialists,
+Monitor and Transport are unchanged. Scientific budgets and Pro authority are unchanged.
+
+
 ## Current Windows control endpoints
 
 OWNER_DIRECT2026-09-12: use Windows C:/Projects/HMASD and PowerShell. Root task is
@@ -62,10 +72,10 @@ Historical decisions, snapshots and benchmark materials remain evidence, not com
 | Owner | Deliverable |
 | --- | --- |
 | Root | Ready-work dispatch within existing decisions; dependencies and working-set replacement; main integration, current tracking, exact Pro dispatch/receipt forwarding and operational application |
-| Direction DM | Card/predictions, object decisions, direct implementation or optional Implementer assignment, review disposition, published inputs, bounded execution, monitor handover, collection, technical acceptance, scientific intake, cleanup and continuation |
+| Direction DM | Card/predictions, object decisions, direct implementation, code self-review and repair, published inputs, bounded execution, monitor handover, collection, technical acceptance, scientific intake, cleanup and continuation |
 | Designated Portfolio DM | Decision materials grounded in Portfolio principles/specs/experience, complete Pro-response conformance and intake, execution mapping or exact conflict returned to Pro |
-| Implementer | One owned code/check deliverable to DM; no scientific selection, Git/index work or result-bearing launch |
-| Reviewer | Independent high-risk engineering evidence, with findings returned to the engineering owner |
+| Implementer | Temporarily suspended for new work; preserve accepted closeout evidence and return routes |
+| Reviewer | Independent high-risk code review under section 7.3; DM resolves findings and accepts |
 | Scout / Verifier / Critic | One bounded factual, runtime or scientific-criticism question directly for the parent; no new child chain |
 | Operator, when useful | Exact launch/handover/collection or cleanup batch from accepted inputs; DM retains acceptance |
 | Independent Monitor | Observe adopted accepted handles; send adoption/terminal facts to Root, without collecting full results or interpreting science |
@@ -78,7 +88,7 @@ retype DM launch commands, repeat its tests or redo its scientific intake. Neith
 completion nor a Monitor exit-zero receipt is technical/scientific acceptance.
 
 For shared control-plane engineering without a direction owner, Root owns the edit/check/review
-and acceptance batch, optionally using an Implementer and high-risk Reviewer directly. A shared
+and acceptance batch directly, including repairs and independent high-risk Reviewer review. A shared
 scientific-code change is assigned to one existing relevant DM, with affected DMs supplying their
 constraints. Only the assigning owner resolves out-of-scope decisions; specialists return precise
 gaps rather than inventing another authority layer.

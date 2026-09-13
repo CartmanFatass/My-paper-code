@@ -45,10 +45,6 @@ config_file = "./agents/hmasd-experiment-operator.toml"
 description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"
 
-[agents.HMASDImplementer]
-description = "Optional Sol/medium implementation task owned and accepted by DM or Root."
-config_file = "./agents/hmasd-implementer.toml"
-
 [mcp_servers.agentify-desktop]
 command = "node"
 args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]

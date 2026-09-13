@@ -1,5 +1,15 @@
 # Native agents and Transport communication
 
+OWNER_DIRECT 2026-09-12: temporarily suspend new CM and Implementer subagent assignments,
+including equivalent code-implementation roles under generic names. DM owns direction science,
+implementation, self-checks, repair and technical acceptance in the same task. Retain the
+independent code Reviewer and high-risk review under ENGINEERING_SCOPE_SPEC section 7.3;
+DM resolves findings and accepts the work. Root owns shared control-plane implementation and
+acceptance with independent review where required. Accepted CM/Implementer work preserves its
+artifacts and original return route through closeout, without successors. Other specialists,
+Monitor and Transport are unchanged. Scientific budgets and Pro authority are unchanged.
+
+
 OWNER_DIRECT2026-09-12: Current control uses Windows C:/Projects/HMASD and PowerShell.
 Read live task endpoints from that checkout's .codex/hmasd-*.toml and
 docs/project/ROOT_OPERATIONS.md. Superseded task/path literals in fixed evidence are

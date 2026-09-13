@@ -14,6 +14,16 @@ Directory conventions live beside the code in one `AGENTS.md` per area (`experim
 
 ## 1. Operating model
 
+OWNER_DIRECT 2026-09-12: temporarily suspend new CM and Implementer subagent assignments,
+including equivalent code-implementation roles under generic names. DM owns direction science,
+implementation, self-checks, repair and technical acceptance in the same task. Retain the
+independent code Reviewer and high-risk review under ENGINEERING_SCOPE_SPEC section 7.3;
+DM resolves findings and accepts the work. Root owns shared control-plane implementation and
+acceptance with independent review where required. Accepted CM/Implementer work preserves its
+artifacts and original return route through closeout, without successors. Other specialists,
+Monitor and Transport are unchanged. Scientific budgets and Pro authority are unchanged.
+
+
 The current owner request, together with system and developer instructions, is the authority for
 repository work. Repository documents describe methods and record evidence; they do not create a
 separate identity, permission, approval, or blocking system.
@@ -27,8 +37,8 @@ materials and checks its complete response against the question, owner instructi
 Root routes the request/response and implements the conforming decision with the affected DMs.
 
 OWNER_DIRECT 2026-09-10: DM absorbs the former CM's engineering responsibilities and implements
-directly by default. Optional implementation and independent high-risk review stay directly
-under DM; specialists do not create another ordinary child chain. Codex model defaults and
+directly. Under the temporary 2026-09-12 owner instruction, DM performs implementation and self-checks;
+CM and Implementer receive no new work; independent Reviewer remains available. Other specialists do not create another ordinary child chain. Codex model defaults and
 restart behavior are in Appendix A. Migration authority and historical boundaries:
 `docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md`.
 
@@ -57,8 +67,8 @@ owns a browser surface. Browser/task scope is not a permission blocker. Transpor
 readiness from the actual target ChatGPT session login state, exact conversation/request binding,
 provider state and one-Send reconciliation, and may use any accessible logged-in browser surface.
 Each DM owns its card, predictions, implementation, technical acceptance, result collection,
-scientific intake and authorized continuation. Scout, Implementer, Reviewer, Critic, Verifier and
-Operator are optional working methods, not additional authorities. Legacy CM tasks retain only
+scientific intake and authorized continuation. Scout, scientific Critic, Verifier and Operator
+remain optional working methods, not additional authorities. Implementer is suspended; independent Reviewer remains available. Legacy CM tasks retain only
 their already accepted assignments and return paths through closeout; no new CM assignment starts.
 
 Scientific meaning lives in `docs/research/candidates/<direction>/DIRECTION.md` and its cited
@@ -79,10 +89,9 @@ Root owns the main checkout and index. Commit ready explicit paths and push imme
 coordinate only actual overlapping writers or index operations. Scientific decisions, budgets
 and existing unattended delegation remain binding.
 
-DM implements its bounded engineering objective directly by default. Implementer children are
-optional for independent parallel work or substantial context isolation; scientific/semantic risk
-sets review needs, not a mandatory implementation handoff. Preserve independent review for the
-high-risk changes defined in ENGINEERING_SCOPE_SPEC §7. Models follow Appendix A.
+DM implements, reviews and repairs its bounded engineering objective directly. Scientific/semantic
+risk sets review coverage under ENGINEERING_SCOPE_SPEC §7, including independent Reviewer
+review for high-risk changes. No new Implementer handoff starts during the temporary suspension. Models follow Appendix A.
 
 Existing authorization and unattended object-tier delegation persist until the owner changes them.
 An owner question or status request alone is not a takeover of each pending object decision.
@@ -122,7 +131,7 @@ still current. Relevant owner overrides and frozen scientific requirements remai
 Every code task, including direct implementation, uses the concise L0 specification in
 `docs/project/ENGINEERING_SCOPE_SPEC.md` §7.1. Add L1–L3 details only for the task's actual risks;
 reuse accessible card sections rather than copying history or producing another contract.
-That specification also maintains delegation, independent review and engineering acceptance.
+That specification also maintains delegation, independent review and DM engineering acceptance.
 `ROOT_OPERATIONS.md` assigns the accountable owner and Git/integration responsibilities.
 A child's completion is evidence for that owner, not acceptance or scientific authority.
 
@@ -311,7 +320,7 @@ assigned direction through scientific/technical acceptance. Temporary overlap dr
 boundaries of the affected directions; there is no global clean boundary. Scheduling alone changes
 no lifecycle, scientific meaning, priority or budget.
 
-There is no fixed limit on concurrent implementers or result-bearing runs within the direction
+There is no fixed limit on result-bearing runs within the direction
 working set. Root plans from actual runtime capacity and dependencies; DM apply the fresh
 per-invocation resource check in section 7. Failed admission returns to the same DM for bounded
 technical resolution while Root advances independent work. Runtime thread limits are implementation
@@ -375,14 +384,14 @@ Several sessions commit to the primary target concurrently. Rules for all of the
   creator resumes its own cleanup at the next boundary; Root does not become a routine
   garbage collector. Never remove another running invocation's scratch or scientific evidence.
 - OWNER_DIRECT 2026-09-07: reuse one designated authoring branch and local worktree per
-  research direction across DM and implementer assignments. Create it on demand only when
+  research direction across DM science, implementation and review. Create it on demand only when
   that direction has actual authoring work; inactive directions get no placeholder branch.
   Main and these needed direction branches are the ordinary maintained branches. A new task, object, stage or
   agent does not create a new branch. Name the existing checkout and owned paths in each handoff.
   At a clean boundary, bring required committed inputs into that checkout before dispatch,
   preserving existing work; record the resulting revision and any starting changes.
   Keep one editing owner through edit/check/commit for overlapping work; serialize shared index
-  operations and preserve unrelated work. Independent review remains independent. Root integrates
+  operations and preserve unrelated work. DM self-review is recorded as self-review; historical independent reviews retain their provenance. Root integrates
   named accepted commits, checking what is already integrated. Root maintains control-plane
   files on main in the existing checkout. Branch reuse never combines
   scientific objects, budgets, RNG state, outputs or frozen SHAs. Remote execution uses detached
@@ -531,8 +540,9 @@ appendix and completed historical tasks remain unchanged.
 
 
 - Native custom subagents are registered in `.codex/config.toml`: Direction Manager,
-  Implementer, Scout, Reviewer, Critic, Verifier and Operator. Root follows the Codex app model/effort selection; DM defaults to `gpt-6-astra/max`; Implementer to `gpt-5.6-sol/medium`;
-  Reviewer to `gpt-6-astra/high` with read-only access. Other specialist model settings
+  Scout, Reviewer, Critic, Verifier and Operator. Root follows the Codex app model/effort selection; DM defaults
+  to `gpt-6-astra/max`. Implementer registration is temporarily removed; its
+  role file remains for recovery of accepted work. Reviewer remains Astra/high with read-only access. Other specialist model settings
   are unchanged. CM, Routine Implementer and the dedicated Terra/high workflow-outsource
   path are retired. Configurations take effect after restart; Codex App provides native
   task/message lifecycle behavior. Do not add reload probes, delivery test services or timers.
@@ -563,7 +573,7 @@ appendix and completed historical tasks remain unchanged.
   shortest unambiguous alias for specialists; model codes `a/l/t/s` (Astra/Luna/Terra/Sol), effort codes
   `l/m/h/xh/mx`; lowercase letters, digits, and underscores only.
 - Root owns engineering acceptance for shared control-plane work without a direction DM;
-  optional Implementer and high-risk Reviewer report directly to Root for that bounded task.
+  Root implements that bounded task directly and retains independent high-risk Reviewer review.
 - Run Git push with the current runtime's supported permissions. With Full Access and
   escalation disabled, push directly and omit `sandbox_permissions`. When a sandbox is active
   and the runtime supports escalation, use its supported outside-sandbox route: the sandboxed
@@ -576,7 +586,7 @@ appendix and completed historical tasks remain unchanged.
   repo-specific working rules; it is tracked.
 - Deliverables of a Claude session (reviews, plans, experiment designs and results outside the
   research authority tree) live under `docs/Claude_docs/<category>/`, indexed by its README.
-- Implementer subagents reuse the direction checkout under section 6; do not request automatic
+- DM reuses the direction checkout under section 6; do not request automatic
   per-agent worktree/branch isolation. The reviewer session is Root for integration. Commits end with the `Co-Authored-By` and `Claude-Session` trailers the runtime
   supplies.
 - Claude's current control-plane roles, capacity and Pro transport are defined in `CLAUDE.md`
