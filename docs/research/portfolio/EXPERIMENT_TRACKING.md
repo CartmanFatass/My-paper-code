@@ -26,12 +26,11 @@ each direction still counts its own implementation-through-cleanup and later Roo
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
 | Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; ACPS B02 terminal receipts delivered, active_set empty and goal complete |
-| Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
-Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the
-Windows main checkout. Native completions go through Relay; experiment and Pro receipts
-come directly to Root. Do not send new work to a retired task or a historical packet address.
+Read live .codex/hmasd-transport.toml for independent Pro routing. Root and DM use native
+long waits; each DM resolves and records its own reusable native Luna/low monitor identity on
+adoption. Experiment events return directly to DM. Root-action completions remain native.
+Historical packet addresses are not new dispatch routes.
 FOLR's300-second support value is an owner-clarified reference: recorded308.8422538 is not
 by itself a hard stop. Native/scientific scope and remaining explicit complete-work limits persist.
 Historical run roots, fixed SHAs and complete data remain in their scientific evidence records.

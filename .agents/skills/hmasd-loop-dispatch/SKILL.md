@@ -13,7 +13,10 @@ intake, cleanup or completion barrier between directions.
 
 ## Stable next-action trigger
 
-At goal-turn entry, a return or receipt, and before waiting:
+At goal-turn entry, an actionable return or receipt, and before the first wait after useful work:
+
+An unchanged wait timeout is not a new dispatch pass. Honor any newly arrived owner pause/stop
+instruction, then continue waiting directly; do not repeat steps 1–5 or recheck all adoptions.
 
 1. Apply current owner instructions and pause/stop boundaries first. Control-plane edits
    and status questions do not resume research. During a pause, perform only authorized
@@ -32,32 +35,21 @@ At goal-turn entry, a return or receipt, and before waiting:
    designated DM to the proper Pro node. Portfolio responses return to their designated DM
    for scientific/specification checking, then Root applies the conforming decision. Never hold a
    ready direction for peer completion or to assemble a multi-direction result bundle.
-5. Check that each accepted experiment has confirmed adoption by the independent Luna/low
-   monitor under EXPERIMENT_MONITOR.md. DM/Operator's `MONITOR_ADD` must require the recipient to
-   read/continue its unfinished goal or create an unbudgeted goal. Confirmed adoption includes the
-   monitor's actual unfinished goal state and handle membership; a dispatched message alone is not
-   adoption. Route each terminal notice to its original
-   DM for remaining collection/intake using followup_task, without waiting for other runs.
-   Reconcile `MONITOR_GOAL_COMPLETE` only after its active set is empty and every terminal notice
-   was delivered to Root.
-   Read supervisor state only for handles Root actually owns or is reconciling after lost
-   observation. Route terminal evidence promptly. If Transport is idle with a pending request,
-   reconcile its persisted state and resume that same observation/recovery route. App dispatch
-   acceptance is not provider Send acceptance.
-   A failed-effect Send, uncertain acceptance, archive-label defect or receipt
-   failure gets an explicit same-request Transport recovery assignment at this
-   boundary. Route an already available complete immutable response to its DM
-   immediately; metadata correction proceeds independently. Before ending the
-   Root turn, establish that pending recovery is actively owned or record its
-   concrete unavailable prerequisite. A reported blocker or exhausted click count
-   is not a completed request, and queued recovery does not count as advancement.
-6. After every currently ready independent action is dispatched, end the Root turn when the
-   remaining dependencies are long-running DM, legacy CM, Monitor or Transport work. Do not use
-   `wait_agent`, `wait_threads`, timers or status polling to hold that turn open. The independent
-   completion relay wakes Root for actionable native returns; Monitor and Transport use their
-   existing direct Root receipt routes. On that wake, process and dispatch the waking direction
-   before ending the new turn. A batch never creates a completion barrier; unresolved waits do
-   not fill available direction slots.
+5. Confirm each accepted experiment has adoption by its DM-owned native Luna/low monitor under
+   EXPERIMENT_MONITOR.md. Adoption and terminal facts go directly to that DM; Root does not forward
+   routine experiment receipts or poll handles owned by the monitor. DM collects and accepts.
+   For Transport receipts, route a complete immutable response immediately to its author/checking
+   DM. Reconcile uncertain Send state before recovery; resume the same Transport request when a
+   concrete recovery action is ready. No second Send follows from a routing problem.
+6. After dispatching ready independent work, use native collaboration.wait_agent while DM work
+   remains. Use the configured 1500000 ms default/minimum; on unchanged timeout, briefly continue
+   waiting without rereading cards, polling task status or repeating work. Process each new event
+   and its ready continuation without waiting for sibling directions. The owner accepts periodic
+   context reuse and brief continuation as the cache-preservation design premises.
+   If only independent Transport work remains, its existing receipt can wake Root after turn end.
+   Honor owner pause/stop first; a workflow edit does not resume research. Do not wait indefinitely
+   for an idle/unassigned child: reconcile the actual dependency and resume authorized work once
+   or record its concrete blocker. No-work completion ends the turn.
 
 ## Bounded assignments
 

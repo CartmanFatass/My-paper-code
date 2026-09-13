@@ -37,6 +37,10 @@ config_file = "./agents/hmasd-reviewer.toml"
 description = "Optional focused runtime-observation method."
 config_file = "./agents/hmasd-verifier.toml"
 
+[agents.HMASDExperimentMonitor]
+description = "Reusable Luna/low native experiment observer owned by one DM."
+config_file = "./agents/hmasd-experiment-monitor.toml"
+
 [agents.HMASDExperimentOperator]
 description = "Optional executor for a bounded launch, observation and collection batch."
 config_file = "./agents/hmasd-experiment-operator.toml"

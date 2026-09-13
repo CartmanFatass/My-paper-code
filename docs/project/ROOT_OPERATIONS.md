@@ -7,19 +7,15 @@ independent code Reviewer and high-risk review under ENGINEERING_SCOPE_SPEC sect
 DM resolves findings and accepts the work. Root owns shared control-plane implementation and
 acceptance with independent review where required. Accepted CM/Implementer work preserves its
 artifacts and original return route through closeout, without successors. Other specialists,
-Monitor and Transport are unchanged. Scientific budgets and Pro authority are unchanged.
+Transport is unchanged. Each DM owns its native experiment monitor. Scientific budgets and Pro authority are unchanged.
 
 
-## Current Windows control endpoints
+## Current control
 
-OWNER_DIRECT2026-09-12: use Windows C:/Projects/HMASD and PowerShell. Root task is
-01a095b7-850f-7401-ad4e-5e4320d285f1. Current independent endpoints are Transport
-01a095ca-7b4a-7940-8acf-fca1b52c784d, Monitor01a095d0-21ee-7c02-9d97-3681b5678200,
-and Relay01a095ca-8676-74e1-b78c-ea459d41e905. Their live .codex/hmasd-*.toml files
-are the executable routing source. New work and successor recovery receipts use these
-endpoints; historical fixed request metadata is not a live routing instruction.
-Keep current tracking free of obsolete snapshots and endpoints. Consult Git for history.
-No browser Send may overlap a retired executor: reconcile its stopped/acceptance receipt first.
+Use Windows C:/Projects/HMASD and PowerShell. Resolve native task IDs from runtime results and
+independent Transport from .codex/hmasd-transport.toml. Current routing overrides historical
+operational literals in fixed packets; scientific input bindings and evidence remain unchanged.
+No browser Send may overlap another executor; reconcile actual acceptance before recovery.
 
 The current Root task is the execution coordinator; DM owns direction
 science and the former CM engineering responsibilities. Portfolio is the persistent Pro node,
@@ -39,11 +35,11 @@ direction/capacity task; only the resulting Portfolio decision or a direct owner
 that direction. The Portfolio drafter must refresh affected old-direction facts from the current DM
 records before recommending continuation, replacement or new-direction registration.
 
-OWNER_DIRECT 2026-09-11: once Root has dispatched all currently ready independent work, it ends
-the turn if only long-running DM, accepted legacy CM, Monitor or Transport dependencies remain.
-The independent relay wakes Root for actionable native completion; Monitor and Transport retain
-their direct Root receipt routes. Root does not keep the dispatch turn open with native/app waits,
-timers or status polling. Each wake re-enters the normal ready-work pass.
+Root dispatches ready work and waits natively while DM work remains. DM waits natively for its
+monitor or Reviewer after exhausting independent work. Use configured long waits; unchanged
+timeouts only continue waiting. Process the changed direction without a global reread or sibling
+barrier. SIBLING_COMMUNICATION.md owns event semantics. Only independent Transport receipts retain
+an app-task wake route when no native work remains. Owner pause/stop remains controlling.
 
 ## Maintained sources
 
@@ -78,7 +74,7 @@ Historical decisions, snapshots and benchmark materials remain evidence, not com
 | Reviewer | Independent high-risk code review under section 7.3; DM resolves findings and accepts |
 | Scout / Verifier / Critic | One bounded factual, runtime or scientific-criticism question directly for the parent; no new child chain |
 | Operator, when useful | Exact launch/handover/collection or cleanup batch from accepted inputs; DM retains acceptance |
-| Independent Monitor | Observe adopted accepted handles; send adoption/terminal facts to Root, without collecting full results or interpreting science |
+| DM-owned native Monitor | Luna/low; observe adopted handles and send adoption/terminal facts directly to DM; no scientific collection or interpretation |
 | Independent Transport | Execute exact authored Pro requests, observe and archive, return one factual receipt to the bound Root parent |
 | Portfolio Pro | Final decision on the bound cross-direction question within current owner/specification constraints |
 
@@ -146,15 +142,11 @@ admission adjacent to each invocation, and no extra invocation from a repair or 
 projection uses the runner's complete per-arm law. Relevant post-learner publication coverage
 follows the empirical/runtime specs and the actual dependent claim, not blanket historical replay.
 
-After acceptance, DM/Operator directly adds the handle to the shared Monitor, using the live
-primary-control configuration, not frozen or stale direction copies. The `MONITOR_ADD` payload
-must require `get_goal` and continuation of the matching unfinished goal or `create_goal` without
-a token budget. Keep adoption pending until the Monitor reports both direct handle state and the
-actual unfinished goal state; app delivery alone proves neither. Do not start a second status-polling loop. Root forwards terminal facts to
-the original collection owner, then DM completes technical acceptance and separate scientific
-intake. Root also receives `MONITOR_GOAL_COMPLETE` after the final terminal notice is delivered and
-the active set is empty. Uncertain process or message acceptance is reconciled on the same identity, never retried
-as a fresh invocation merely because an observation was lost.
+After acceptance, DM/Operator assigns the exact handle to that DM's reusable native Luna/low
+monitor. Follow EXPERIMENT_MONITOR.md: dispatch is distinct from direct adoption, terminal events
+return to DM, and DM retains collection and scientific intake. Root does not forward experiment
+status or duplicate observation. Keep handle/native-owner mappings in existing execution records.
+Uncertain acceptance is reconciled on the same identity and never retried as a fresh invocation.
 
 ## Current records, integration and cleanup
 

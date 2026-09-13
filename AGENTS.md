@@ -21,7 +21,8 @@ independent code Reviewer and high-risk review under ENGINEERING_SCOPE_SPEC sect
 DM resolves findings and accepts the work. Root owns shared control-plane implementation and
 acceptance with independent review where required. Accepted CM/Implementer work preserves its
 artifacts and original return route through closeout, without successors. Other specialists,
-Monitor and Transport are unchanged. Scientific budgets and Pro authority are unchanged.
+Independent Transport and scientific budgets/Pro authority are unchanged. Experiment observation
+uses DM-owned native monitors under EXPERIMENT_MONITOR.md.
 
 
 The current owner request, together with system and developer instructions, is the authority for
@@ -42,17 +43,14 @@ CM and Implementer receive no new work; independent Reviewer remains available. 
 restart behavior are in Appendix A. Migration authority and historical boundaries:
 `docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md`.
 
-OWNER_DIRECT 2026-09-08: the independent Luna/low completion relay wakes Root for actionable
-native handoffs only, under `docs/project/SIBLING_COMMUNICATION.md` and
-`.codex/hmasd-relay.toml`. Ordinary native traffic and nested parent acceptance stay native.
-Cross-session messages omit model and reasoning-effort overrides; configured models persist.
+Root and DM use native long waits under SIBLING_COMMUNICATION.md. Each DM owns one reusable
+Luna/low native experiment monitor; adoption and terminal facts return directly to that DM.
+Root receives actionable direction handoffs natively. Transport retains its independent app route.
 
 OWNER_DIRECT 2026-09-09: recover unstable Pro delivery under the existing research
 request; do not leave research blocked solely on failed-effect sends. Reconcile actual
 acceptance/delivery before retrying, observe already accepted generations, and preserve
-the original prompt, failed-attempt facts and binding. Root personally completed the
-FOLR/SCDMP recovery and confirmed normal sending. The owner's subsequent instruction
-returns all later Pro Send, observation, reconciliation, archival and receipts to the
+the original prompt, failed-attempt facts and binding. All Pro Send, observation, reconciliation, archival and receipts belong to the
 dedicated Transport session. Root dispatches and accepts its returns. Recovery changes
 neither scientific authority, evidence meaning nor experiment budgets.
 
@@ -297,15 +295,17 @@ Portfolio DM refreshes every affected old direction from its current DM handoff,
 and latest intake; Root status shorthand and ended allocations are not lifecycle evidence.
 
 Root applies the `hmasd-loop-dispatch` skill's stable next-action trigger at goal-turn entry,
-native return, Transport receipt and before blocking waits. Check owner pause/stop instructions
+actionable native return, Transport receipt and before the first wait after useful work. An
+unchanged timeout resumes waiting without a new dispatch pass. Check owner pause/stop instructions
 first. A workflow edit or status question does not resume paused research.
 
-OWNER_DIRECT 2026-09-11: after Root has dispatched every currently ready independent action,
-it ends its turn when the remaining work is long-running DM, legacy CM, Monitor or Transport work.
-Root does not hold the turn open with native waits, app-task waits, timers or status polling. The
-independent completion relay wakes Root for actionable native DM/legacy-CM returns; Monitor and
-Transport use their existing direct Root receipt routes. A wake starts the stable next-action pass
-again. This turn boundary changes no ownership, acceptance requirement or experiment observation.
+After dispatching ready independent work, Root waits natively while DM work remains. DM does
+independent work first and otherwise waits natively for monitor/Reviewer events. Use the configured
+1500000 ms default/minimum; unchanged timeouts only continue waiting, without status broadcasts,
+replanning or full-record rereads. The owner accepts periodic context reuse and brief continuation
+as the cache-preservation premises. Process individual events without a sibling barrier. End only
+when no native work remains (Transport can wake Root separately), or owner pause/stop requires it.
+Concrete blockers and idle unfinished assignments require reconciliation, not indefinite waiting.
 
 While research is authorized to advance, Root plans and maintains five advancing direction
 chains until five formally enter UAV validation, traced to their direction decisions and UAV
@@ -358,17 +358,13 @@ or launch gates, and never override a stricter original cap.
 
 Resume model: commit and push before every launch; launch every result-bearing run detached from
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
-configured `agent-task` supervisor; OWNER_DIRECT 2026-09-09 assigns accepted-experiment observation
-to one reusable independent Luna/low task with a goal covering its multiple adopted experiments.
-DM/Operator directly notifies that monitor after launch acceptance. Every `MONITOR_ADD` assignment
-explicitly requires the monitor to read `get_goal`, continue the matching unfinished goal or call
-`create_goal` without a token budget, and keep the accepted handle in that goal until its terminal
-notice reaches Root. The monitor reports the actual goal state in `MONITOR_ADOPTED`; message delivery
-alone is not goal establishment or adoption. DM stops routine polling only after that confirmation
-and retains collection and technical acceptance. When the last handle and pending notice leave the
-active set, the monitor sends `MONITOR_GOAL_COMPLETE` to Root before completing the goal. Record
-dispatch and actual adoption separately; failed delivery or missing goal confirmation returns for
-same-handle recovery.
+configured `agent-task` supervisor. DM creates/reuses its native Luna/low monitor and supplies
+its canonical name to Operator. Assign accepted handles with followup_task; confirm direct
+MONITOR_ADOPTED before stopping routine polling. DM receives terminal facts directly, collects,
+checks and interprets, retaining technical/scientific acceptance. EXPERIMENT_MONITOR.md owns the
+compact handle record, bounded observation, terminal delivery and empty-set reuse. Do not create
+independent monitor goals, Root receipt forwarding or duplicate observers. Transfer existing
+observation only after same-handle reconciliation and confirmed replacement adoption.
 Independent Transport observes Pro requests
 (`docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).
@@ -540,16 +536,16 @@ appendix and completed historical tasks remain unchanged.
 
 
 - Native custom subagents are registered in `.codex/config.toml`: Direction Manager,
-  Scout, Reviewer, Critic, Verifier and Operator. Root follows the Codex app model/effort selection; DM defaults
+  Scout, Reviewer, Critic, Verifier, Experiment Monitor and Operator. Root follows the Codex app model/effort selection; DM defaults
   to `gpt-6-astra/max`. Implementer registration is temporarily removed; its
   role file remains for recovery of accepted work. Reviewer remains Astra/high with read-only access. Other specialist model settings
   are unchanged. CM, Routine Implementer and the dedicated Terra/high workflow-outsource
   path are retired. Configurations take effect after restart; Codex App provides native
   task/message lifecycle behavior. Do not add reload probes, delivery test services or timers.
-- The current Root task in live configuration is the execution coordinator and sole receipt parent.
-  Transport uses Luna/high; the shared experiment monitor and completion Relay retain
-  Luna/low. Read their existing `.codex/hmasd-*.toml` endpoints; never replace or rebind
-  accepted work merely because the role structure changed.
+- Root coordinates native DM chains. Independent Transport uses Luna/high and returns Pro receipts
+  to Root via .codex/hmasd-transport.toml. Each DM creates/reuses a native Luna/low Experiment Monitor
+  with minimal assignment context; resolve canonical names from runtime results. Experiment
+  adoption/terminal facts return directly to DM. No shared Monitor or completion Relay endpoint.
 - The relevant recently active DM selected by Root authors both Portfolio materials and
   their scientific/specification intake using `hmasd-portfolio-task`. `caller_role=portfolio`
   describes the decision node, not the author's native role. The same DM still uses
