@@ -1,0 +1,37 @@
+{
+  "question": "执行 Portfolio 新购的 ACPS 第二个独立训练配对：原先不利的能力残差方法，在全新未筛选种子上是否仍然不利？",
+  "changes_if_approved": [
+    {
+      "target": "ACPS-B02",
+      "from": "新拨款已生效，尚未运行",
+      "to": "冻结 master9102，完成原比较的两次独立拟合与各32个最终评价"
+    }
+  ],
+  "if_refused": "在下一干净边界应用明确异步指令，保留已产生的证据，不自行重跑或改变方向生命周期。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/EXECUTION_MAPPING.md",
+      "quote": "Exactly one new unscreened master, two fresh fits with distinct owned model/optimizer states, one ACPS and one intact SHARED.",
+      "why": "Portfolio 已明确购买一次新的不变比较，检验另一个学习实例。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_INTAKE_20260912.md",
+      "quote": "Strongest contradiction is the negative mean beyond the selected MEI and25 adverse worlds.",
+      "why": "首个配对不支持收益，同等信息共享策略是强替代。"
+    }
+  ],
+  "uncertainty": [
+    "新配对的结果、运行速率及完整支持成本仍未知。",
+    "两次学习实例仍不足以证明稳定优势或失败原因。"
+  ],
+  "cost": {
+    "compute": "新的450秒/完整臂，900秒native合计，600秒support，1500秒完整投入；旧成本不抵扣、不作预测。",
+    "owner_time": "无需等待回复；保留异步干预。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "按新 Portfolio 决策冻结 master9102，执行一次不变 ACPS/SHARED 配对；保持全部结果和原判读，最多两个科学调用，不追加实验。",
+  "source": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B02_SCIENCE_CARD_20260912.md"
+}
