@@ -1,0 +1,94 @@
+{
+  "status": "RECOVERY_HANDOFF_PREPARED_UNSENT",
+  "authority": "OWNER_DIRECT",
+  "control_commit": "83cb93c52",
+  "owner_instruction_via_root": "用户已授权 unrecoverable-conversation fallback，且控制面已落地（commit 83cb93c52）。原 Q operation b7f00c5e… 已确认 sendAttempted=false、无 provider IDs，支持的 runtime load 不存在，因此可安全 rebind：1) 保留旧 HANDOFF/tab/operation/receipts，标记 VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE；2) 用完全相同的冻结 prompt、inputs、科学范围创建新 conversation/handoff/idempotency；3) 链接新旧记录，执行一次正常 preflight/Send。不得把旧请求重发、不得改变模型/科学含义、不得修改旧 receipts。完成或阻塞时向 Root 主动回报并更新 intake/skill 引用。",
+  "original_request_id": "2026-09-13-acps-post-b02-use-01",
+  "original_handoff_commit": "aaf0b977de1f547794ac0a540480be9778f1524e",
+  "original_handoff_path": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/delivery/HANDOFF.json",
+  "old_operation_id": "b7f00c5e-8e41-4ad1-805d-65cebf1ec763",
+  "old_status": "VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE",
+  "old_tab_preserved": {
+    "tab_id": "4cd5b361-b097-48cc-95cc-a10dfcdf5ddf",
+    "protected": false,
+    "url": "https://chatgpt.com/",
+    "stable_key": "em:actuator_conditioned_partial_sharing:convergence",
+    "preserved": true
+  },
+  "old_operation_mutated": false,
+  "prior_audit_source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\CONVERSATION_UNRECOVERABLE_RECOVERY_AUDIT.json",
+  "prior_audit_sha256": "9d0f3a6a463ba40e24e1e142f6249592fd1ce50897c7d3619fd8ec0de58adc5a",
+  "prior_audit_size_bytes": 4979,
+  "prior_receipts": [
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--operation-receipt.json",
+      "size_bytes": 2044,
+      "sha256": "80cf346125b24c4109f5b6381a3aa6b0132204568a70915c39e805a522735605"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--error-01.json",
+      "size_bytes": 488,
+      "sha256": "69d3a4bbcec9f5b53c9ceec1f08130807987b451fb957a428e5126ccf6ec9b06"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--error-02.json",
+      "size_bytes": 616,
+      "sha256": "28a404981b6659d0a0eb9b309ffc4c427691ea3f0bb12953f8035660735b234e"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--error-03.json",
+      "size_bytes": 460,
+      "sha256": "c6940ba053f54e1b21fdfffd22a28b978fe79e5b6b85d6693c0f47874849ff54"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--transport-facts.json",
+      "size_bytes": 1689,
+      "sha256": "f198b932d37720bdc04c3a8904b0895d6ae7305078afc77a3a3a1f503925d2d0"
+    }
+  ],
+  "replacement_request_id": "2026-09-13-acps-post-b02-use-rebind-01",
+  "replacement_handoff_path": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/delivery/RECOVERY_HANDOFF_20260913.json",
+  "replacement_handoff_commit": "recorded in native dispatch and subsequent intake",
+  "agentify_stable_key": "hmasd-gen:7e64af7eba4439ec6a7221062db586ecd104dc58caaf80a481d114f8e5c728d8",
+  "same_prompt": true,
+  "prompt_bytes": 1942,
+  "prompt_sha256": "bee9b6e037f7b68e37143d152dd004cfefd10a9904d5c13bb648750ee9a2ab84",
+  "same_fixed_task_url": "https://github.com/CartmanFatass/My-paper-code/blob/c32e6e241b9fa6942482f554524659d943fa8163/docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/delivery/TASK.md",
+  "same_frozen_input_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+  "same_github_delivery": {
+    "branch": "codex/acps",
+    "base_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+    "response_path": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/19"
+  },
+  "same_provider_requirement": {
+    "model": "GPT-6 Astra",
+    "mode": "Pro",
+    "label": "6 Pro",
+    "selector_hint": "Latest"
+  },
+  "allowed_handoff_differences": [
+    "/dispatch_handoff_path",
+    "/dispatch_prompt",
+    "/provider_context_reset_evidence",
+    "/recovery_rebind",
+    "/request_id",
+    "/reset_invalid_provider_context",
+    "/transport_request/provider_context_reset_evidence",
+    "/transport_request/request_id",
+    "/transport_request/reset_invalid_provider_context"
+  ],
+  "unbound_registry_facts": "Canonical bindings/directions contain no ACPS entry; existing archived-conversation reset is inapplicable. Reviewed helper reserves a linked first-binding generation without fabricating a UUID.",
+  "native_transport": "/root/dm_acps_resume/transport_lh_acps",
+  "current_model_alias_condition": "Visibly verify current GPT-6 Astra 6 Pro composer identity and Pro effort before new operation creation; the canonical provider_requirement is unchanged.",
+  "new_send_count": 0,
+  "scientific_exposure": "zero new learner/model/RNG/raw-analysis/profile/test/training/evaluation; provider-free control-plane repair tests are separately recorded",
+  "skill_reference": ".agents/skills/hmasd-chatgpt-pro-transport/SKILL.md#unrecoverable-conversation-fallback",
+  "published_prior_audit": {
+    "path": "recovery/PRIOR_OPERATION_AUDIT.json",
+    "projection": "unchanged JSON data with LF repository line endings; authoritative original bytes remain at prior_audit_source",
+    "sha256": "e7bb8f9a2bdd17c504310a748f5adfcca5e3e7221e9013460e98d59723edd068",
+    "size_bytes": 4906
+  },
+  "helper_acceptance": "DM accepted after31 focused tests and independent Reviewer found no material finding; see PUBLICATION.md"
+}
