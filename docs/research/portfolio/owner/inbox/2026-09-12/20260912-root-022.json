@@ -107,6 +107,14 @@
       "record": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_POST_B02_PORTFOLIO_INTAKE_20260912.md",
       "state": "applied",
       "summary": "完整读取Q裁决并开始唯一原Convergence问题：文档全过程费用UNKNOWN，零实证/条件B；ACTIVE/HIGH与SHARED不变。Q对N为近似权衡。五方向误句隔离，四方向规则继续；原Portfolio纠正待MGTAP共享绑定释放。审计行158-159。"
+    },
+    {
+      "at": "2026-09-13T09:48:16+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260913_acps_capacity_correction/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260913_acps_capacity_correction/INTAKE.md",
+      "state": "applied",
+      "summary": "原Portfolio明确修正两句容量文字：四方向目标、保留既有重叠，Pro/恢复等待不释放占用槽位；Q全部资金/科学/生命周期不变。原Q仍确认未Send，精确model-selector修复由Root交MGTAP。"
     }
   ]
 }

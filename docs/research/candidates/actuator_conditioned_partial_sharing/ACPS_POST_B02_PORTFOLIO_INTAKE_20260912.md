@@ -1,6 +1,6 @@
 # ACPS post-B02 Portfolio intake
 
-**Apply Q once: one ACPS Convergence use/design question, complete answer and DM intake/publication, with its complete documentary cost explicitly accepted UNKNOWN.** There is zero empirical or conditional allocation. Keep ACPS ACTIVE/HIGH, recasts: 0, and fully informed SHARED as the measured-use default. The response's separate five-chain capacity sentence conflicts with the current four-direction owner rule and is returned for correction; it is not applied. The independent Q purchase conforms and continues.
+**Apply Q once: one ACPS Convergence use/design question, complete answer and DM intake/publication, with its complete documentary cost explicitly accepted UNKNOWN.** There is zero empirical or conditional allocation. Keep ACPS ACTIVE/HIGH, recasts: 0, and fully informed SHARED as the measured-use default. The response's separate five-chain capacity sentence was returned rather than applied. On 2026-09-13 the complete same-node [amendment intake](../../portfolio/pro_packets/20260913_acps_capacity_correction/INTAKE.md) resolves it at `e99cdb113f24b030c7f18b7a3b84257b5a500d0c`; the original response and the initial conflict facts below remain preserved. The independent Q purchase conforms and continues.
 
 ## Complete response, binding and checks
 
