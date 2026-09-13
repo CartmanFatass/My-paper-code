@@ -1,0 +1,106 @@
+{
+  "status": "remote_cleanup_complete",
+  "started_utc": "2026-09-13T02:15:46.592684+00:00",
+  "finished_utc": "2026-09-13T02:15:46.662609+00:00",
+  "remote_cleanup_wall_seconds": 0.06992446503136307,
+  "root_retention_confirmed_intake_commit": "93bc53a09d1628ddbd689387b28b80d3d4b0c47f",
+  "root_retention_receipt": "Root received complete ACPS-B02 intake and explicitly confirmed the retained archives/evidence listed in commit93bc53a09; assigned only these four remote cleanup targets.",
+  "source_sha": "dd91ea3d81970485a8d562db47e30c70ed063524",
+  "resolved_non_symlink_targets_verified": true,
+  "source_clean": true,
+  "verified_retained_files": 26,
+  "terminal_states": [
+    {
+      "task": "acps-b02-shared-9102-20260912",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3417087,
+      "uptime_seconds": 1378,
+      "tmux_active": false
+    },
+    {
+      "task": "acps-b02-acps-9102-20260912",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3417871,
+      "uptime_seconds": 953,
+      "tmux_active": false
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "-C",
+        "/home/wu/projects/HMASD",
+        "worktree",
+        "remove",
+        "/home/wu/hmasd-worktrees/acps-b02-9102-20260912"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "rm",
+        "-r",
+        "--",
+        "/home/wu/hmasd-inputs/acps-b02-9102-20260912"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "rm",
+        "-r",
+        "--",
+        "/home/wu/.agent-tasks/acps-b02-shared-9102-20260912"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "rm",
+        "-r",
+        "--",
+        "/home/wu/.agent-tasks/acps-b02-acps-9102-20260912"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "targets": [
+    {
+      "path": "/home/wu/hmasd-worktrees/acps-b02-9102-20260912",
+      "disk_absent": true
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/acps-b02-9102-20260912",
+      "disk_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/acps-b02-shared-9102-20260912",
+      "disk_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/acps-b02-acps-9102-20260912",
+      "disk_absent": true
+    }
+  ],
+  "worktree_registration_absent": true,
+  "other_registration_snapshot_unchanged": true,
+  "other_registration_count": 163,
+  "shared_repo_exists": true,
+  "new_scientific_invocations": 0,
+  "ssh_invocation_wall_seconds": 0.9579628000501543,
+  "local_archives_verified_before_cleanup": true,
+  "shared_authoring_checkout_retained": true,
+  "b01_restricted_scratch_retained": true,
+  "local_archives_verified_after_cleanup": true
+}
