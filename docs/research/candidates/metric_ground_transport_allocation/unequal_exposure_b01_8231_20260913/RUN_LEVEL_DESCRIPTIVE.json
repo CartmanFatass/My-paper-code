@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "MGTAP-UNEQUAL-EXPOSURE-B01",
+      "arm": "COND",
+      "n": 1,
+      "mean": 0.16574499572521276,
+      "sample_sd": null,
+      "min": 0.16574499572521276,
+      "max": 0.16574499572521276,
+      "runs": {
+        "8231": 0.16574499572521276
+      }
+    },
+    {
+      "task": "MGTAP-UNEQUAL-EXPOSURE-B01",
+      "arm": "DENSE",
+      "n": 1,
+      "mean": 0.19507936796417658,
+      "sample_sd": null,
+      "min": 0.19507936796417658,
+      "max": 0.19507936796417658,
+      "runs": {
+        "8231": 0.19507936796417658
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "MGTAP-UNEQUAL-EXPOSURE-B01",
+      "arm": "COND",
+      "baseline": "DENSE",
+      "summary": {
+        "n": 1,
+        "mean": -0.02933437223896382,
+        "sample_sd": null,
+        "min": -0.02933437223896382,
+        "max": -0.02933437223896382
+      },
+      "differences": {
+        "8231": -0.02933437223896382
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

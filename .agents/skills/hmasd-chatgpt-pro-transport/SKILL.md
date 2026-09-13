@@ -11,6 +11,30 @@ and decides scientific/specification conformance. The current native assignment 
 direct return parent. Preserve frozen HANDOFF IDs as provenance when recovering an older request.
 No singleton app task, relay, ACK loop, new scientific prompt or science selection belongs here.
 
+## DM-local repair default
+
+Transport failures that are engineering defects (selector/model aliasing, tab binding,
+preflight state, receipt handling or workflow sequencing) are owned by the author DM by default.
+The DM may patch its direction-owned Transport helpers, fixtures and related skill/control
+instructions in place, run proportional focused tests and independent review, and recover the
+same unchanged operation when the effect is verified nonacceptance. Preserve the original
+operation, prompt hash, idempotency key, binding and all failure receipts. Do not create a
+replacement request or alter scientific meaning. Escalate to Root only when the repair requires a
+shared application runtime/load, a cross-direction resource or a scientific/Portfolio decision;
+Root then coordinates that dependency while the DM retains Transport acceptance.
+
+## Unrecoverable-conversation fallback
+
+If the original conversation cannot be recovered after the supported same-request repair path,
+the author DM may use a new conversation only when the old operation is positively verified as
+`sendAttempted=false` with no provider pairing or accepted effect. Record the old operation as
+`VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE` and preserve its HANDOFF, prompt hash,
+idempotency key, tab facts and receipts. Then create a new handoff/conversation and idempotency
+key carrying the identical scientific prompt and frozen inputs, bind it as a new operation, and
+link both records. This is a recovery rebind, not a resend of an uncertain effect. Never use this
+fallback when `sendAttempted=true`, acceptance is unknown, or any provider pairing may exist; in
+those cases observe and reconcile the original operation only.
+
 ## One preflight, one action, one return
 
 ```text

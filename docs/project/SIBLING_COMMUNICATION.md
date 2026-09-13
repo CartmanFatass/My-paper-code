@@ -77,6 +77,15 @@ the prior return and sends its own update once; this is not an ACK or forwarding
 If a leaf runtime lacks collaboration.send_message, its actionable native final is the direct
 parent return. Record that actual capability/method; never fabricate tool delivery or add an app relay.
 
+Pure Transport engineering defects default to local repair by the author DM, including focused
+helper/fixture and skill updates with proportional review. Keep the same operation and immutable
+receipts; involve Root only for a shared runtime/load, cross-direction dependency or scientific
+decision. If the original conversation remains unrecoverable after supported same-request repair,
+the author DM may rebind the identical frozen prompt to a new conversation only with verified
+pre-Send nonacceptance (`sendAttempted=false`, no provider pairing). Preserve and close the old
+operation as `CONVERSATION_UNRECOVERABLE`, link the new handoff/idempotency, and never apply this
+fallback to uncertain or possibly accepted effects.
+
 ## Recoverable ownership
 
 Record active native names, assignments, accepted handles and pending actions in existing direction
