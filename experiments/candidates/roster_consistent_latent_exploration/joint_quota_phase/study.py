@@ -13,8 +13,8 @@ from experiments.candidates.roster_consistent_latent_exploration_tbcfv.empirical
 )
 from experiments.candidates.roster_consistent_latent_exploration_tbcfv.inference import TRAINING_CELLS, HELDOUT_CELLS
 from experiments.candidates.roster_consistent_latent_exploration_tbcfv.native_backend import (
-    StepInput, bind_native_backend, native_materialize_fixtures_compact,
-    native_semantic_uniform_words, reset_native_batch,
+    StepInput, bind_native_backend, materialize_fixtures_compact as native_materialize_fixtures_compact,
+    semantic_uniform_words as native_semantic_uniform_words, reset_native_batch,
 )
 from .policy import PhasePolicy, adam_update, flat_parameters, greedy_phase, sampled_phase
 
