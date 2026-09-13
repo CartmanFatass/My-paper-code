@@ -49,3 +49,24 @@ The [exact return](../../portfolio/pro_packets/20260912_acps_post_b02_investment
 4. **Integration:** Root records Q authoring/accepted status from its actual handoff, preserves ACTIVE/HIGH/recasts0, SHARED and all other direction grants, and does not free a slot at Q completion. A purpose selection or no-candidate answer completes this Q through its own full intake and returns its actual new investment or lifecycle need. It does not fund another consultation or experiment by itself.
 
 Owner flags: Portfolio and close call (Q versus N), plus the isolated capacity conformance return. Preserve B01/B02 prediction misses; B02 predicted ADVERSE but observed INSIDE_MEI. Owner prediction was not taken, and `item.py reviews --json` returned `[]` at this boundary. Existing item `20260912-root-022` receives the actual Pro source/application trace; no owner reply is fabricated. [Chinese brief](../../portfolio/owner/briefs/actuator_conditioned_partial_sharing/2026-09-12_ACPS_POST_B02_PORTFOLIO.md).
+
+## Q Transport recovery boundary, 2026-09-13
+
+Q had no accepted Send or formed answer: strict operation `b7f00c5e-8e41-4ad1-805d-65cebf1ec763`
+retains explicit `sendAttempted=false`, no provider pairing and no observed conversation.
+Its old handoff/tab/operation/error receipts are unchanged. The selector source repair was
+accepted independently, but the shared application cannot load it through a supported current
+route. Root supplied the owner-authorized unrecoverable-conversation fallback at `83cb93c52`.
+Under the current [Transport skill](../../../../.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md),
+the [linked recovery handoff](pro_packets/20260912_post_b02_use/delivery/RECOVERY_HANDOFF_20260913.json)
+uses a distinct routing request/idempotency and generation, with the identical frozen TASK,
+1,942-byte prompt, inputs, model/effort and scientific scope.
+
+Decision (object/technical, OWNER_DIRECT): execute that verified-nonacceptance recovery route;
+other options were continued wait for an unavailable loader or alteration of the immutable
+operation. The selected route preserves both generations and permits one normal preflight/Send
+for the same finite Q purchase. A bounded provider-free helper repair supplies the previously
+missing unbound registry reservation; check/review/cleanup facts remain in [publication](pro_packets/20260912_post_b02_use/PUBLICATION.md).
+This engineering state has no scientific polarity. ACTIVE/HIGH, recasts 0, SHARED default,
+unknown documentary cost and zero empirical grant remain intact. The next scientific
+discriminator is still the full original use/design answer or reasoned no-candidate and its intake.

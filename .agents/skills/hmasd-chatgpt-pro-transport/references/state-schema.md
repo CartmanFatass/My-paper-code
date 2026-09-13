@@ -177,6 +177,17 @@ Preserve delivered or uncertain receipts; never infer permission to resend from 
 
 ## Explicit provider-conversation replacement
 
+An owner-authorized unrecoverable initial homepage operation may have no binding at all.
+`prepare_unaccepted_first_binding_rebind(registry_path, request=<validated transport_request>,
+prior=<fresh operation audit>)` supports that case only. The audit preserves explicit false Send,
+explicit null pairing/observed-conversation/archive fields, the original operation and tab,
+prompt hash, and receipt paths. It refuses missing or possible acceptance, changed prompt/model/
+effort, or an existing binding/direction record. Admission reserves `CONTEXT_RESET_PENDING`
+with the distinct deterministic Agentify key, the complete audit in `request_history`, and no
+fabricated quarantined UUID. Repeating the same preparation is idempotent. Normal observed
+post-Send binding retains this history and additionally checks the frozen prompt/model/effort.
+The Transport establishes the fresh external facts; this local helper performs no provider call.
+
 An owner-directed new conversation uses `reset_invalid_provider_context=true`
 with `provider_context_reset_evidence={previous_request_id, reset_authority:
 "OWNER_DIRECT", owner_instruction: "<exact owner instruction>"}`. It requires a
