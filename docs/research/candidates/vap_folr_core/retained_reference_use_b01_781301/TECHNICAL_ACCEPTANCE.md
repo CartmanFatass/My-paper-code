@@ -1,7 +1,7 @@
 # FOLR retained-reference use — implementation and technical acceptance
 
-Status: focused verification and independent review in progress; no result-bearing
-invocation accepted. Baseline8768f0f83, first source0bd5c477b. This record remains
+Status: **DM technically accepts source5dce539ed54afd4334d09db9dcd94df38c52c2fc**.
+No result-bearing invocation is accepted yet. Baseline8768f0f83, first source0bd5c477b. This record remains
 separate from the scientific Portfolio intake and later scientific result.
 
 DM self-review traced the new explicit mode through source/RNG construction,
@@ -44,3 +44,44 @@ Current exact known check wall lower account is2.90s; command/staging/Git/review
 intake/other attributable support must also remain in the same1200s budget.
 Unmeasured total provider/agent cost stays UNKNOWN, not zero. Final acceptance,
 launch source/commands and actual-node admission are still pending.
+
+## Final focused acceptance and next exact invocation
+
+The narrow source correction at5dce539ed passed both affected loader/reset and
+runner/no-learner/publication/failure checks:2 passed in0.83s, enclosing test1.07s,
+user1.24/system1.53s, peakRSS397748KiB, native exit0. Earlier four unchanged rule
+cases remain valid. **Cumulative measured test wall3.97s**, including failed setup;
+within180s focused and300s directory limits. All three exact scratch paths are
+absent. The old0bd5 test checkout is absent from disk and worktree registration;
+current5dce detached checkout is retained for this accepted execution. See
+[CHECK_RESULTS.json](CHECK_RESULTS.json) for native output/time and scope.
+
+The earlier enclosing SSH return1 is not a scientific test failure: retained pytest
+and GNU-time native exits are0 with complete outputs and cleanup. A focused text-
+mode stdin probe showed CRLF corruption of Bash's numeric exit argument. Binary
+UTF8 stdin to `ssh hmasd-wsl-node bash -s` exited0, as did direct collection of all
+check receipts. That method is used for subsequent control commands, without
+replaying successful checks. No claim of unique cause beyond this observed probe.
+
+[Independent review](INDEPENDENT_REVIEW.md) closed the corrected diff with no
+material residual. DM accepts the exact code/card/scientific semantics and
+proportionate checks. The one fixed Generic learner path, BANK actor-only load,
+reset/no-learning and truthful nonpaired publication are ready. This does not
+certify future completion, resource admission or scientific polarity.
+
+Launch source is5dce539ed54afd4334d09db9dcd94df38c52c2fc, already published; exact
+GENERIC.sh/BANK.sh at that commit retain all exposures and2700/300/native3000 caps.
+Remote checkout `/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a` is detached at
+that SHA. First task name is `folr-ref-use-generic-781301-5dce539ed54a`; new Generic
+output is `/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/GENERIC`.
+The sole Generic command encloses actual-node admission before any model/RNG.
+No fixed BANK evaluation is dispatched before complete Generic technical acceptance.
+The BANK archive/member identity is pinned; actual transferred bytes must be
+checked at staging before its dependent invocation. New authoring commits that
+only record acceptance do not move the accepted launch-source binding.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): accept this faithful
+implementation and the one exact funded Generic invocation after its adjacent
+admission, recommended over changing science or requesting another ACK. Current
+owner reviews are empty. No alternative source, retry, cap transfer or successor
+is selected. DM retains technical/scientific intake and native Monitor handover.
