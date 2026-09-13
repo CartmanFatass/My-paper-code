@@ -21,7 +21,7 @@ MASTER, HORIZON, TRAIN_EPISODES, EVAL_EPISODES = 9101, 256, 512, 32
 CARD = "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_SCIENCE_CARD_20260912.md"
 
 
-def primary(summaries):
+def primary(summaries, *, master=MASTER):
     """The sole final panel, never available-case selection or seed pooling."""
     arms, errors = {}, []
     expected_counts = dict(train_episodes=512, train_team_steps=131072,
@@ -33,14 +33,14 @@ def primary(summaries):
             errors.append("unexpected or duplicate arm")
             continue
         values = [row for row in summary.get("rows", []) if row.get("phase") == "eval"]
-        if (summary.get("seed") != MASTER or not summary.get("complete")
+        if (summary.get("seed") != master or not summary.get("complete")
                 or any(summary.get("counts", {}).get(k) != v for k, v in expected_counts.items())
                 or [row.get("episode") for row in values] != list(range(32))):
             errors.append(f"{arm}: incomplete fit or ordered final panel")
         for e, row in enumerate(values):
-            if (row.get("reset_seed") != 100000 * MASTER + 2000 + e
+            if (row.get("reset_seed") != 100000 * master + 2000 + e
                     or row.get("steps") != 256 or row.get("arm") != arm
-                    or row.get("pair_master") != MASTER
+                    or row.get("pair_master") != master
                     or not isinstance(row.get("J"), (int, float))
                     or not math.isfinite(row["J"])):
                 errors.append(f"{arm}/{e}: final binding or primary invalid")
@@ -58,7 +58,7 @@ def primary(summaries):
                 reading="ABOVE_MEI" if mean > .01 else "ADVERSE" if mean < -.01 else "INSIDE_MEI")
 
 
-def run_arm(arm, seed, output, start):
+def run_arm(arm, seed, output, start, *, object_id="ACPS-B01", card=CARD):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     deadline = Deadline(start, 450., 450., first_arm=arm)
@@ -121,7 +121,7 @@ def run_arm(arm, seed, output, start):
             complete = True
         except Exception as error:
             limits.append(f"{type(error).__name__}: {error}")
-    summary = dict(object="ACPS-B01", card=CARD, arm=arm, seed=seed, launch_sha=source,
+    summary = dict(object=object_id, card=card, arm=arm, seed=seed, launch_sha=source,
                    scientific_invocation=True, fit_complete=fit_complete, complete=complete,
                    counts=counts, rows=rows, limits=limits,
                    configuration=dict(horizon=256, train_episodes=512, final_episodes=32,
