@@ -41,3 +41,10 @@ unchanged recommendation; no duplicate owner item is needed at preparation.
 Owner-delegated decision (unattended, 2026-09-03 instruction): publish and dispatch
 this scoped proper-node question under the current Root assignment. This is
 object-tier technical execution; F/D investment remains Portfolio's decision.
+
+Renderer preflight rejected the initially proposed direction-local response path
+because Portfolio responses require the Portfolio node archive root. Before any
+TASK publication or provider operation, the response-only write scope was corrected
+to `docs/research/portfolio/pro_packets/20260913_folr_retained_reference_investment/archive/RESPONSE.md`.
+The request, F/D science, direction branch and exact scientific source mappings are
+unchanged; the rejected preflight receipt is retained.
