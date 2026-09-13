@@ -97,3 +97,23 @@ not backend attestation; this limit remains explicit. The direct parent action i
 or reconcile application runtime loading without destroying the Q tab/key/operation, then
 return that changed fact to the ACPS author/Transport. No scientific decision, budget,
 request identity or lifecycle changes follow from this engineering acceptance.
+
+## Supported runtime loading boundary
+
+Root integrated source/acceptance as `6afa93073` / `e64c40c80` and assigned supported loading
+only, expressly preserving the exact Q tab/operation and excluding a shared restart or
+replacement. The 10:25 UTC [supported-load check](SUPPORTED_LOAD_CHECK.json) found no such
+capability in the enabled Agentify tools or current HTTP/controller management code.
+The existing tab caches its controller; main statically imports its class. Startup creates
+fresh tab maps and UUIDs. Live status also confirms this Chrome was launched by Agentify,
+whose disposal path kills its managed browser, so a restart would destroy this tab.
+
+The exact Q tab/key remains present, non-protected, on the new-conversation URL, with no
+active query. The entire persisted operation still equals the frozen repair receipt:
+`sendAttempted=false`, null provider IDs, unchanged fingerprint/model/prompt. No loading,
+restart, new tab, operation edit, additional preflight or Send ran during this assignment.
+The concrete missing fact is an available supported in-place controller-loading method.
+Record **NO_SUPPORTED_RUNTIME_LOAD / VERIFIED_NONACCEPTANCE** and retain the original Q.
+The next action belongs to application runtime engineering; ACPS's scientific request remains
+unsent until that capability or supported runtime state changes. This is a technical boundary,
+not an uncertain-effect lock or a direction disposition.

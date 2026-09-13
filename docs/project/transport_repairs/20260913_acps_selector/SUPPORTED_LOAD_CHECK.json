@@ -1,0 +1,112 @@
+{
+  "observed_at": "2026-09-13T10:25:33Z",
+  "assignment": "Supported runtime loading only; preserve exact ACPS tab and operation; no shared restart or replacement",
+  "result": "NO_SUPPORTED_RUNTIME_LOAD",
+  "root_integrated_source_commits": [
+    "6afa93073",
+    "e64c40c80"
+  ],
+  "source_patch_sha256": "3478d5499b3f0138064890e5a9d29537adafcebeb64cfd5da9e68ffeed7c4e58",
+  "controller_sha256": "c57264e72050e17c0905972304d29a80cb259614885fe4a85088b3899b734084",
+  "management_interface": {
+    "enabled_tool_catalog": "No Agentify controller/runtime refresh, reload or replacement operation is exposed; agentify_status is read-only.",
+    "source_root": "C:/Projects/agentify-desktop",
+    "static_import": "main.mjs:18",
+    "cached_constructor": "main.mjs:236",
+    "cached_tab_controller": "tab-manager.mjs:107",
+    "controller_getter": "tab-manager.mjs:242",
+    "http_routes": "http-api.mjs current route inventory includes status/readiness/preflight/operator/query/navigation/creation/closure/shutdown; no controller refresh or dynamic import route.",
+    "startup_tab_ids": "tab-manager.mjs:66 uses fresh Maps; tab-manager.mjs:86 generates a UUID per new tab.",
+    "restart_effect": "chrome-cdp-backend.mjs dispose kills Chrome when launched by Agentify; live status confirms launchedByAgentify=true. A shared restart would not preserve this exact tab.",
+    "missing_capability": "A supported method in the current runtime to replace the cached controller in place while retaining the existing page, logical tab ID and key."
+  },
+  "exact_operation_unchanged": true,
+  "operation_id": "b7f00c5e-8e41-4ad1-805d-65cebf1ec763",
+  "effect_branch": "VERIFIED_NONACCEPTANCE",
+  "sendAttempted": false,
+  "providerUserMessageId": null,
+  "providerAssistantMessageId": null,
+  "live_status": {
+    "ok": true,
+    "tabId": "4cd5b361-b097-48cc-95cc-a10dfcdf5ddf",
+    "url": "https://chatgpt.com/",
+    "blocked": false,
+    "promptVisible": true,
+    "kind": null,
+    "indicators": {
+      "hasTurnstile": false,
+      "hasArkose": false,
+      "hasVerifyButton": false,
+      "looks403": false,
+      "accessBlocked": false,
+      "loginLike": false,
+      "rawPromptVisible": true,
+      "sendVisible": true
+    },
+    "browser": {
+      "kind": "chrome-cdp",
+      "debugPort": 9222,
+      "userDataDir": "C:\\Users\\fires\\.agentify-desktop\\chrome-user-data",
+      "profileMode": "isolated",
+      "profileName": "Default",
+      "browserProduct": "Chrome/153.0.8010.36",
+      "attachedToExisting": false,
+      "managedProfile": true,
+      "launchedByAgentify": true
+    },
+    "tabs": [
+      {
+        "id": "4cd5b361-b097-48cc-95cc-a10dfcdf5ddf",
+        "key": "em:actuator_conditioned_partial_sharing:convergence",
+        "name": "em:actuator_conditioned_partial_sharing:convergence",
+        "vendorId": "chatgpt",
+        "vendorName": "ChatGPT",
+        "url": "https://chatgpt.com/",
+        "browser": {
+          "kind": "chrome-cdp",
+          "browserProduct": "Chrome/153.0.8010.36",
+          "debugPort": 9222,
+          "attachedToExisting": false,
+          "launchedByAgentify": true,
+          "strictTransportEligible": true
+        },
+        "protectedTab": false,
+        "createdAt": 1789291184247,
+        "lastUsedAt": 1789295111949
+      },
+      {
+        "id": "a4c04bcf-7999-48a9-bfd3-de69d915945b",
+        "key": "default",
+        "name": "default",
+        "vendorId": "chatgpt",
+        "vendorName": "ChatGPT",
+        "url": "https://chatgpt.com/",
+        "browser": {
+          "kind": "chrome-cdp",
+          "browserProduct": "Chrome/153.0.8010.36",
+          "debugPort": 9222,
+          "attachedToExisting": false,
+          "launchedByAgentify": true,
+          "strictTransportEligible": true
+        },
+        "protectedTab": true,
+        "createdAt": 1789217240583,
+        "lastUsedAt": 1789295111945
+      }
+    ],
+    "activeQuery": null,
+    "runtime": {
+      "activeQueries": [],
+      "lastOutcomes": []
+    }
+  },
+  "actions": {
+    "runtime_loads": 0,
+    "restarts": 0,
+    "replacement_tabs": 0,
+    "operation_writes": 0,
+    "new_live_preflights": 0,
+    "external_sends": 0
+  },
+  "next": "Q remains pre-Send unsent. Root/application owner must supply a supported way to load the accepted controller while preserving the exact tab/key/operation; this bounded assignment cannot substitute a restart, replacement or runtime injection. ACPS Transport resumes only after that runtime fact changes."
+}
