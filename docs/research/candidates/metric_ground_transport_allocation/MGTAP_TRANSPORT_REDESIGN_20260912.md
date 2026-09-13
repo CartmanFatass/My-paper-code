@@ -231,3 +231,44 @@ strict operation/send uncertainty, null IDs, observed-delivery facts and correct
 metadata remain. The owned tab was closed. ACPS was notified that the shared binding is free;
 Root receives the full intake and the same-node correction dependency. This completes the actual
 one-attempt lifecycle without another Send.
+
+## Authorized conformance follow-up: successful paired delivery — 2026-09-13
+
+After the original full decision was archived and intaken, Root's coordinated continuation
+retained this DM's authorship of the two-clause Portfolio correction. This distinct authorized
+request is not a retry of the original uncertain operation. The committed HANDOFF
+`c585a70234e9bd6a61f20ba3252ebda33333d12c` binds the fixed TASK at
+`755d8fcedceaf83d0ea9d67462ee631c1093ec58`, current parent/child, the same Portfolio conversation
+and shared direction branch. The existing reviewed workflow was used without new code changes.
+
+The [operation receipt](../../portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/TRANSPORT_OPERATION.json)
+records the initial TAB_KEY_MISMATCH before any persisted Send operation and repair of the
+dedicated tab key. This positively observed pre-Send failure permitted the same unchanged
+request after repair. Operation `c30e5aae-2de6-484a-aed0-37510c55d908`, idempotency key
+`2026-09-13-mgtap-portfolio-conformance-correction-01`, used Latest/Pro and the same prompt hash,
+binding, conversation and responsePath. It then recorded one Send at08:58:38 UTC with user
+`a8238013-f2ea-4b4e-9044-a69a2ad86281` and assistant `f66dc4c3-ea5d-48fa-a522-fc12dbdad722`.
+The final strict operation has no error. No duplicate Send or extra parent confirmation occurred.
+
+The96-byte strict chat receipt was archived separately. The complete task-bound amendment is
+the41-line/6860-byte [RESPONSE.md](../../portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/RESPONSE.md)
+at `3a69ae2b02f16ac815d1e41ea2fff3a46f3bb0c2`, Git blob
+`c7c59ae3da5a190acb6d4efe4b6de7198ed90256`, SHA-256
+`330bfaa59c0e30d26fdb946a4f4d0327932af12adb9bf5810569d73f032c19fd`.
+The [delivery facts](../../portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/GITHUB_DELIVERY_FACTS.json)
+and preserved [Issue comment](../../portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/DELIVERY_COMMENT.md)
+bind exact TASK and response URLs. DM compared all immutable Git bytes with the child's full
+runtime archive, inspected the single-file commit and actual comment, and read the full answer.
+
+The child returned one actionable native final; both registry views are identical and
+ARCHIVED/RECEIPT, with actual native_final receipt SENT. Its owned tab is closed. ACPS received
+the explicit shared-binding release. This covers the successful accepted/pairing path in live
+use, in addition to the original request's live uncertain/GitHub-recovery path and the focused
+dry-run branch coverage. It does not retroactively change the original strict mismatch.
+
+The amendment resolves both procedural conflicts without changing science, caps or lifecycle.
+See intake §5. No extra engineering suite was rerun for this document/receipt closeout; the
+accepted 64 focused workflow and207 compatibility checks remain the applicable code evidence.
+No new empirical experiment or implementation began. Root's next action is integration and
+the existing DM's funded continuation; MGTAP remains ACTIVE/MEDIUM. The prior cleanup restriction
+and retained scratch inventory remain explicit; no new deletion attempt was made.

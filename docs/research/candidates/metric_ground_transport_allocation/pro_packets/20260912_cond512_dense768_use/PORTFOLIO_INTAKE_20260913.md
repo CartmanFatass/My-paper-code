@@ -9,10 +9,11 @@ and complete future invoked work 2400 s. Costs/rates remain UNKNOWN; these are w
 invest ceilings, not forecasts or renewed historical balances. DENSE remains default in every
 branch. MGTAP remains ACTIVE/MEDIUM; there is no new empirical result, C promotion or lifecycle change.
 
-The funding/exact-comparison decision conforms. Two procedural clauses do not conform to current
-owner instructions and require correction at the same Portfolio node before their affected
-application (§4 below). This bounded DM assignment performs intake and returns the operational
-mapping; it starts no card implementation, experiment, new identity or further Pro request.
+The funding/exact-comparison decision conforms. Two procedural clauses initially required
+correction at the same Portfolio node (§4 below). The coordinated amendment is now complete and
+conforming (§5), preserving the original grant. The original bounded intake started no card
+implementation, experiment, new identity or further Pro request; the later correction continuation
+performed only the named same-node consultation and its intake.
 
 ## 1. Complete source and receipts checked
 
@@ -132,3 +133,64 @@ or ratification is invented. See [owner brief](../../../../portfolio/owner/brief
 Next scientific discriminator remains exactly the funded one-master COND512/DENSE768 pair,
 subject to the current assigned continuation and correction of affected requirements. Its future
 signed result and actual complete cost, not the existence of this grant, inform later development.
+
+## 5. Completed same-node correction — 2026-09-13
+
+The coordinated author continuation published correction request
+`2026-09-13-mgtap-portfolio-conformance-correction-01`, exact HANDOFF
+`c585a70234e9bd6a61f20ba3252ebda33333d12c` and fixed TASK
+`755d8fcedceaf83d0ea9d67462ee631c1093ec58`. It used the same Portfolio conversation and this DM's
+reusable native Transport; the archived original request was not resent. The author/parent and
+operator were bound to their current native identities, separately from historical routing.
+
+Read **all41 lines** of the [complete amendment](../../../../portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/RESPONSE.md)
+at immutable Pro commit `3a69ae2b02f16ac815d1e41ea2fff3a46f3bb0c2`, which directly follows
+`c585a70234e9bd6a61f20ba3252ebda33333d12c` and adds only the authorized response file. Git blob
+`c7c59ae3da5a190acb6d4efe4b6de7198ed90256`; 6860 UTF-8 bytes; SHA-256
+`330bfaa59c0e30d26fdb946a4f4d0327932af12adb9bf5810569d73f032c19fd`. Tool comparison proved that
+the direct native child's full archive and immutable Git bytes are identical. The actual
+[Issue17 comment5652359237](https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5652359237)
+posted at09:05:45 UTC pairs the exact fixed TASK with that response. Source-reported evidence
+access remains a Pro report; this DM's intake reads and byte verification are direct observations.
+
+Strict operation `c30e5aae-2de6-484a-aed0-37510c55d908` records one Send at08:58:38 UTC,
+provider user `a8238013-f2ea-4b4e-9044-a69a2ad86281` and assistant
+`f66dc4c3-ea5d-48fa-a522-fc12dbdad722`, with no terminal strict error. Preserve the earlier
+verified pre-Send TAB_KEY_MISMATCH and repaired dedicated-tab evidence. The96-byte strict chat
+receipt is separate from the6860-byte full answer. The child returned directly by native final;
+registry and Portfolio mirror are equal, ARCHIVED/RECEIPT with receipt SENT via native_final.
+The owned tab is closed and ACPS was directly notified that the shared binding is released.
+
+Apply the same AGENTS §2 rule quoted above. The amendment replaces only the two identified
+clauses, applying existing authority rather than changing a specification:
+
+- Section1 sets **four concurrently advancing top-level DM chains**, preserving ACTIVE queue,
+  occupied/reserved slot distinctions, formal disposition and existing-overlap behavior.
+- Section2 retains the actual accepted handle, native observation and direct **MONITOR_ADOPTED**,
+  while explicitly removing independent app-task goal, goal-adoption handshake and Root relay.
+- Section3 preserves B once, all exact science and final panels, every reading branch and all
+  five600/900/1500/900/2400-second caps. Actual costs/rates remain UNKNOWN, DENSE default and
+  MGTAP ACTIVE/MEDIUM. It adds no approval, experiment, technical acceptance or stronger claim.
+
+Both conflicts are resolved within their stated scope. No B/N reselection, scientific invocation,
+new master or claim is produced. The original signed mean-COND/TOP evidence and its strongest
+support/contradiction in §2 remain unchanged. This is a procedural correction; reuse the existing
+scientific-reading assumption and limit, with no new mechanism/comparator/literature inference.
+Machine-generated amendment scientific exposure remains the zero vector in its published TASK;
+the amendment used one Pro Send, with provider/agent cost separately UNKNOWN. Neither that fact
+nor the workflow engineering checks enlarge the empirical budget or repeat an earlier charge.
+
+### Decisions this correction intake produces
+
+| Decision | Options and recommendation | Applied/returned choice |
+| --- | --- | --- |
+| Conformance correction |Apply the exact amendment; retain obsolete clauses; invent a local substitute. Recommend exact amendment.|PRO_FINAL / OWNER_DELEGATED: apply both replacements alongside the immutable original.|
+| Funding and science |Preserve the already-funded pair and limits; reopen the investment. Recommend preservation.|B and all original scientific/budget terms remain; no new empirical allocation or invocation.|
+| Operational boundary |Release archived shared binding and return integration/continuation mapping; hold a finished request. Recommend release and mapping.|ACPS notified free. Root integrates; the existing MGTAP DM continues the funded pair under its assigned execution scope.|
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): apply the exact conforming amendment,
+preserve the original grant and return the actionable continuation mapping. Owner prediction:
+**not taken (unattended)**. Live owner-console `reviews --json` returned `[]` at this boundary.
+The existing P1 item and Chinese brief are updated; no additional owner approval is required.
+This completes the narrow correction assignment. MGTAP remains ACTIVE/MEDIUM, no slot is released,
+and the next scientific discriminator remains the single funded COND512/DENSE768 pair.

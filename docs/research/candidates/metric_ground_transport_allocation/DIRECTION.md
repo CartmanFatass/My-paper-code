@@ -41,8 +41,9 @@ Declining the new empirical investment remains a serious alternative given two
 fits, unknown full cost and a necessarily local result. The next discriminator
 is this exact single funded pair:344064 team ticks/2560Adam plus its complete
 required support chain. New caps are COND600s/DENSE900s/native1500s/support900s/
-complete2400s, with rates still unknown. Two obsolete procedural clauses require
-same-node correction; no new identity or run is assigned in this intake.
+complete2400s, with rates still unknown. The same-node amendment at `3a69ae2b0`
+resolved both obsolete procedural clauses (four chains; native handle adoption
+without an independent monitor goal); no new identity or run is assigned in this intake.
 The finished documentary allowance creates no extra question,
 fourth unchanged pair, TOP repeat, extra arm, host change, recast or lifecycle
 disposition. All previous scientific/family/C/UAV boundaries remain.

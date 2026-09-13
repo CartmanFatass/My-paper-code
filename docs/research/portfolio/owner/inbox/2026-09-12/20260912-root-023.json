@@ -89,6 +89,14 @@
       "state": "applied",
       "summary": "Portfolio selected B once with new COND600/DENSE900/native1500/support900/complete2400 second ceilings. Funding record applied; no implementation or experiment here. Five-chain and Monitor-goal clauses require same-node correction; MGTAP remains ACTIVE/MEDIUM.",
       "correction": "Current owner target is four DM chains; native Monitor needs accepted handle adoption, not an independent unfinished goal. Preserve complete Pro response and independent conforming investment."
+    },
+    {
+      "at": "2026-09-13T09:16:59+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/PORTFOLIO_INTAKE_20260913.md",
+      "state": "applied",
+      "summary": "Portfolio同一节点已纠正四链目标和Monitor无独立目标两条要求；完整41行答复3a69ae2b0已验收，原B科学方案及600/900/1500/900/2400秒上限保留，未启动实现或实验；共享绑定已释放，交Root集成并安排原DM继续。"
     }
   ]
 }
