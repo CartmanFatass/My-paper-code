@@ -77,3 +77,36 @@ instruction): accept and dispatch Generic.** No unresolved material finding
 remains. Native validity, actual cost and scientific polarity await collection.
 No owner prediction/review was pending at the card boundary; item20260912-folr-003
 records the new card without waiting for a reply.
+
+## Incomplete Generic correction accepted; BANK ready
+
+Accepted source/commands: `5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4`. This replaces
+only the runner's Generic-success refusal and dependent comparison publication.
+Collected Generic4253/4221/zero-final exit124 is admitted as a selected input; a
+completed BANK publishes its own panel and an explicit unavailable pair. The
+model, learner, native path, seed reset,5000/128 endpoint and3000s cap are unchanged.
+The existing strict pair_result is unchanged and still rejects incomplete pairs.
+
+The same independent reviewer returned no material finding on the actual diff.
+At the committed source on `hmasd-wsl-node`, the single new focused publication
+regression passed:1 passed in1.23s, wrapper1.684901184s, outer command2.2170882s.
+It constructs no learner/model and runs no training or native pilot. The new
+test's owned scratch was removed and absence verified. Retain
+[log](entity_history_b01_781201/checks/CHECK_PARTIAL_GENERIC_LOG.txt),
+[receipt](entity_history_b01_781201/checks/CHECK_PARTIAL_GENERIC_RECEIPT.json), and
+[check admission](entity_history_b01_781201/checks/CHECK_PARTIAL_GENERIC_ADMISSION.json).
+This reuses the11 already accepted changed-path cases for unchanged numerical
+contracts; no full suite or repeated experiment was added.
+
+Live primary `item.py reviews --json` returned[] at this clean boundary; there
+was no unapplied owner instruction. Ordinary technical correction is recorded
+in the intake/audit, without a new owner-console item or funding request.
+
+DM accepts the corrected publication contract and original E BANK readiness
+under its own launch-adjacent admission and cap. This acceptance does not invent
+a Generic final result or claim a full paired estimate. The terminal intake
+records the dependency rule, UNKNOWN BANK rate and exact remaining caps. A first
+combined transfer/recursive-cleanup command was rejected before process creation
+with `blocked by policy`; permitted separate transfer and explicit nonrecursive
+removal completed, and the local command-staging directory is verified absent.
+No scientific invocation occurred in that rejected command.

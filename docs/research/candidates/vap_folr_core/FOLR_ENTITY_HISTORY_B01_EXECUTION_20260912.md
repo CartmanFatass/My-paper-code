@@ -90,3 +90,28 @@ DM continues the preselected BANK under its unchanged5000/128 and3000s cap after
 correcting incomplete-Generic publication handling, focused acceptance and fresh
 adjacent admission. Its launch/Monitor adoption will be recorded separately.
 The shared authoring checkout and detached checkout needed for BANK are retained.
+
+## BANK exact accepted command; launch receipt pending
+
+Source/commands `5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4` were committed and pushed,
+then fetched into the existing now-Generic-terminal detached checkout. The
+Generic raw/supervisor bytes were archived and verified before its source update.
+The committed722-byte LF BANK.sh was extracted with local Git, scp-delivered to
+the owned support directory, and its local staging file/directory removed.
+
+```bash
+/usr/local/bin/agent-task run folr-entity-history-b01-781201-bank \
+  /bin/bash /home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_support/BANK.sh \
+  5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4 \
+  /home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304 \
+  /home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_bank \
+  /home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_generic/summary.json
+```
+
+The selected Generic input is the collected incomplete summary preserved in
+GENERIC_RAW.tar.gz. BANK's source reads it only for publication; its fresh planned
+RNG and model are independent. The command encloses actual-node admission and the
+full arm using2994s soft TERM,5s kill grace and1s margin for the3000s ceiling.
+Prepare only the empty BANK output directory before this single supervisor call;
+accept actual launch and goal-state adoption separately. No result is asserted by
+this command record.

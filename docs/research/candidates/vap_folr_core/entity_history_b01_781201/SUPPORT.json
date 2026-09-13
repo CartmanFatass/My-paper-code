@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-09-13T00:21:36.948829+00:00",
+  "recorded_at": "2026-09-13T00:26:15.042159+00:00",
   "hard_support_cap_seconds": 1200,
   "native_caps_seconds": {
     "generic": 1800,
@@ -84,10 +84,42 @@
     {
       "component": "Generic terminal collection SSH and SCP, including inner archival",
       "seconds": 2.1708673999999997
+    },
+    {
+      "component": "terminal intake/correction record writes",
+      "seconds": 0.3391869
+    },
+    {
+      "component": "partial-result source/evidence commit and immediate push",
+      "seconds": 4.8575519
+    },
+    {
+      "component": "exact BANK source fetch/detached checkout update",
+      "seconds": 4.7482958
+    },
+    {
+      "component": "owner review/read checks",
+      "seconds": 0.5684283
+    },
+    {
+      "component": "independent actual-diff review read",
+      "seconds": 0.285
+    },
+    {
+      "component": "new publication regression outer SSH including inner check",
+      "seconds": 2.2170882
+    },
+    {
+      "component": "publication check artifact transfer",
+      "seconds": 1.6259476
+    },
+    {
+      "component": "exact BANK command staging/transfer and explicit cleanup",
+      "seconds": 0.9023749
     }
   ],
-  "known_support_seconds": 62.41873940000001,
-  "accounting": "Outer command elapsed covers inner pytest/admission once; do not add 3.346657243/2.834894535 again.",
+  "known_support_seconds": 77.962613,
+  "accounting": "Outer command elapsed covers inner pytest/admission once; do not add 3.346657243/2.834894535 again. New regression outer2.2170882 includes inner1.684901184 once. Rejected combined command created no process; approval-service overhead unknown.",
   "uncovered": "Other short document/source reads, apply_patch/control service overhead, future integration/collection/cleanup and provider/agent costs are not measured here; no zero or complete-total assertion.",
   "scientific_invocations_so_far": 1,
   "native_spend_so_far": "Generic complete technical collection:1795.06s enclosed wall, exit124; BANK unlaunched; supervisor1795s coarse whole-chain duration.",
