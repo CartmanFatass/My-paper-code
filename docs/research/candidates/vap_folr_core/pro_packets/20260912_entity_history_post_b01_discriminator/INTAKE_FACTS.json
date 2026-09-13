@@ -176,5 +176,40 @@
       "transport_dispatches": 0
     },
     "next_root_action": "Integrate maintenance; refresh FOLR Portfolio readiness wording; keep ACTIVE/MEDIUM. Resume this DM after MGTAP shared-node release using validated Transport procedure."
+  },
+  "transport_material_review_20260913": {
+    "checked_at": "2026-09-13T07:32:42.204445+00:00",
+    "published_control_sha": "6d1f6c80ba860cdb5ab2bcc181f6b078dfada279",
+    "scope": "document comparison only; no native_transport preflight, registry claim, workflow test, browser operation, Send or scientific work",
+    "portfolio": "current row confirms accepted use selection, unfunded ACTIVE/MEDIUM",
+    "issue_read": {
+      "tool": "gh api repos/CartmanFatass/My-paper-code/issues/15",
+      "number": 15,
+      "state": "open",
+      "updated_at": "2026-09-13T03:07:19Z"
+    },
+    "registry_read": {
+      "checked_at": "2026-09-13T07:30:13.679928+00:00",
+      "request_id": "2026-09-12-mgtap-unequal-exposure-investment-01",
+      "state": "SEND_UNCERTAIN",
+      "updated_at": "2026-09-13T07:00:27Z",
+      "release_observed": false
+    },
+    "deliberately_unbound": [
+      "new request ID",
+      "new response path",
+      "actual native Transport child ID",
+      "fixed TASK SHA",
+      "committed HANDOFF SHA"
+    ],
+    "unchanged": [
+      "F/D choices and recommendation",
+      "scientific unit and claim ceiling",
+      "all proposed limits",
+      "accepted Convergence request and response",
+      "zero new empirical/model/checkpoint/Send exposure"
+    ],
+    "owner_reviews": [],
+    "next_action": "Root integrates documentary delta and resumes this DM on reconciled MGTAP shared-node release or material input change; no repeated check for an unchanged wait."
   }
 }

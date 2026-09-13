@@ -110,13 +110,26 @@ none; §5's 2,000-line attempt/600-line runner limits remain. Published exact so
 remote-first execution and each invocation's adjacent memory admission still apply.
 No implementation or source/numerical test is part of this document assignment.
 
-Root can integrate this tightened readiness record now. The later author/receipt
-parent remains `/root/dm_folr_resume`, using its native Transport and fixed GitHub
-TASK delivery on the existing direction branch/Issue 15 after the shared writer
-is reconciled. No new REQUEST/TASK/HANDOFF or provider binding is created now.
-The live registry read on 2026-09-13 UTC names
-`2026-09-12-mgtap-unequal-exposure-investment-01`, state `SEND_UNCERTAIN`, updated
-`2026-09-13T06:56:48Z`. This is MGTAP's active delivery dependency, not a FOLR
-scientific negative. Use MGTAP's validated recovery procedure and confirmed release
-before considering FOLR Transport. No Send, Generic retry or experiment is allowed
-in the meantime; the direction remains ACTIVE at this documentary boundary.
+## Authoring inputs before a later permitted Transport assignment
+
+The current Portfolio row already records the accepted use selection and unfunded
+ACTIVE/MEDIUM status. These materials preserve F/D and all proposed limits. The
+workflow review uses published main `6d1f6c80ba860cdb5ab2bcc181f6b078dfada279`:
+Prompt Author/GitHub delivery plus the redesigned native Transport skill. This
+document review does not run Transport's preflight or claim its registry.
+
+| Input | Current status and the next concrete operation |
+| --- | --- |
+| Scientific question and sources | Ready here and in INTAKE/INTAKE_FACTS; preserved response and E source pins remain fixed. No scientific redesign or extra reading campaign is needed. |
+| Correct node and authors | Future `caller_role=portfolio`, `workflow_node=portfolio_decision`, `direction_ids=[vap_folr_core]`, binding `portfolio:cross_direction`. Source/receipt parent is the actual native DM `/root/dm_folr_resume`; resolve its reusable native Transport child's actual ID when assigned. No old app UUID or invented operator ID. |
+| GitHub scope | Existing `codex/vap-folr` branch; Issue 15 was read directly as open on 2026-09-13 (GitHub updated 03:07:19Z). A new scoped response path and request ID remain unbound. |
+| Fixed delivery bytes | No new REQUEST/TASK/HANDOFF exists. After a permitted authoring/dispatch assignment, render the fixed TASK, commit/push it, bind its full SHA, then commit/push the native handoff. The archived Convergence READY_HANDOFF/REQUEST is evidence for its old request and must never be dispatched as this investment question. |
+| Transport operation | The assigned child uses the current one-preflight/effect-branch procedure, full handoff SHA/path, current native parent/operator and the live absolute registry. Proven pre-Send failure repairs the same input; uncertain effects permit observation only. Full immutable response returns directly to DM for intake. No parallel workflow test, repeated preflight or ACK is added. |
+
+At the 2026-09-13T07:30:13Z read, the shared registry names
+`2026-09-12-mgtap-unequal-exposure-investment-01`, `SEND_UNCERTAIN`, updated
+`2026-09-13T07:00:27Z`; no release is observed. MGTAP owns that delivery dependency.
+The next useful trigger is its reconciled release, an actual material change, or
+a new bounded assignment. Current Root scope permits this document check only:
+no Send, Generic retry, model load or experiment. Report completion once to Root;
+the completed check does not stop ACTIVE FOLR or release its direction slot.
