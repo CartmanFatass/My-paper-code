@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-09-13T00:30:10.828013+00:00",
+  "recorded_at": "2026-09-13T01:05:26.687075+00:00",
   "hard_support_cap_seconds": 1200,
   "native_caps_seconds": {
     "generic": 1800,
@@ -132,14 +132,35 @@
     {
       "component": "BANK receipts commit/push with interrupted text update; encoding inspection",
       "seconds": 4.8256646
+    },
+    {
+      "component": "BANK execution record commit/push",
+      "seconds": 4.6707784
+    },
+    {
+      "component": "terminal/current-card/reading-mode/owner review and source reads",
+      "seconds": 2.5652156999999995
+    },
+    {
+      "component": "initial checkpoint collection count assertion and targeted state read",
+      "seconds": 3.1238441000000003
+    },
+    {
+      "component": "corrected final collection and archival outer SSH",
+      "seconds": 1.8466178
+    },
+    {
+      "component": "BANK archives/receipt transfer and local verification/run-level analysis",
+      "seconds": 3.5309175
     }
   ],
-  "known_support_seconds": 88.8190247,
-  "accounting": "Outer command elapsed covers inner pytest/admission once; do not add 3.346657243/2.834894535 again. New regression outer2.2170882 includes inner1.684901184 once. Rejected combined command created no process; approval-service overhead unknown.",
+  "known_support_seconds": 104.5563982,
+  "accounting": "Outer command elapsed covers inner pytest/admission once; do not add 3.346657243/2.834894535 again. New regression outer2.2170882 includes inner1.684901184 once. Rejected combined command created no process; approval-service overhead unknown. Final collection outer1.8466178 includes inner0.929379525 once; failed count assertion and targeted read are retained support.",
   "uncovered": "Other short document/source reads, apply_patch/control service overhead, future integration/collection/cleanup and provider/agent costs are not measured here; no zero or complete-total assertion.",
   "scientific_invocations_so_far": 2,
-  "native_spend_so_far": "Generic terminal1795.06s enclosed wall, exit124; BANK accepted and running, no terminal time yet. No Generic retry.",
-  "rates": "Generic incomplete prefix observed; BANK full native wall/peak remain UNKNOWN; no pilot or ratio-to-time forecast.",
-  "remaining_scope": "Monitor goal-state confirmation then BANK terminal collection/own-arm intake and preservation/cleanup; pair primary unavailable because Generic incomplete; no extra arm or replacement allocation.",
-  "additional_observed_support_lower_bound_seconds": 97
+  "native_spend_so_far": "Generic1795.06s exit124 + BANK1762.22s exit0 =3557.28s enclosed native wall. Both arms terminal; two scientific invocations, no retry.",
+  "rates": "BANK completed5000/128 in1762.22s; Generic incomplete4253/zero-final in1795.06s. Observed runs only, not a same-endpoint runtime comparison or projected future guarantee.",
+  "remaining_scope": "Final result publication/integration and scoped reclamation after Root retention acceptance; no live scientific run, successor, retry, extra arm or search.",
+  "additional_observed_support_lower_bound_seconds": 97,
+  "resource_status": "Native timing and peak RSS measured; resources_unmeasured for unitemized support and complete total. No observed cap breach; full hard-support/complete conformance unverified."
 }

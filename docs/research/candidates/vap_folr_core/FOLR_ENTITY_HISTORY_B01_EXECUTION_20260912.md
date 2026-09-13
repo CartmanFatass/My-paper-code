@@ -2,6 +2,10 @@
 
 Owner `/root/dm_folr_post_b03`, authoring checkout
 `C:/Projects/HMASD-worktrees/codex-vap-folr`, branch `codex/vap-folr`.
+Current state: both allocated arms are terminal and technically collected; BANK
+own-arm intake is accepted, the pair primary is unavailable, and Root retention
+acceptance precedes assigned reclamation. No experiment or Monitor goal remains
+live for this batch. Exact launch commands below are execution provenance.
 Card: [FOLR_ENTITY_HISTORY_B01_SCIENCE_CARD_20260912.md](FOLR_ENTITY_HISTORY_B01_SCIENCE_CARD_20260912.md).
 Implementation acceptance:
 [FOLR_ENTITY_HISTORY_B01_TECHNICAL_ACCEPTANCE_20260912.md](FOLR_ENTITY_HISTORY_B01_TECHNICAL_ACCEPTANCE_20260912.md).
@@ -44,7 +48,8 @@ Use the live primary `.codex/hmasd-monitor.toml`. After accepted launch, direct
 MONITOR_ADD must establish/continue an unbudgeted unfinished goal and retain the
 handle through accepted terminal delivery. An app-message receipt alone is not
 adoption. DM stops routine polling only after actual MONITOR_ADOPTED goal state.
-Root resumes this DM for complete technical collection, then BANK readiness.
+Root routed both terminal results to this DM; complete technical collection
+and final intake are now published below.
 
 During collection preserve summary, checkpoint, admission, full invocation time,
 supervisor runner/log/status/exit and exact source before any removal. Inventory
@@ -85,10 +90,11 @@ zero final evaluation and no final checkpoint. Whole invocation time1795.06s,
 exit124; no scientific pair primary. See the [terminal intake and BANK readiness](FOLR_ENTITY_HISTORY_B01_GENERIC_INTAKE_20260912.md)
 and [collection receipt](entity_history_b01_781201/GENERIC_COLLECTION.json).
 
-DM continues the preselected BANK under its unchanged5000/128 and3000s cap after
-correcting incomplete-Generic publication handling, focused acceptance and fresh
-adjacent admission. Its launch/Monitor adoption will be recorded separately.
-The shared authoring checkout and detached checkout needed for BANK are retained.
+The preselected BANK then ran under unchanged5000/128 and3000s after the scoped
+publication correction, focused acceptance and fresh adjacent admission. Its
+accepted launch and now-completed collection are recorded below. The detached
+checkout is retained only until Root accepts preservation and DM reclaims it;
+shared authoring remains in use.
 
 ## BANK exact command and accepted launch
 
@@ -124,19 +130,39 @@ The arm's own adjacent
 [BANK_ADMISSION.json](entity_history_b01_781201/BANK_ADMISSION.json) passed at
 00:26:48.592946Z with15627026432 physical/effective available bytes against the
 4294967296-byte floor. This is BANK's actual launch admission, not reused test or
-Generic admission. BANK runtime/output are now live and are not cleanup targets.
+Generic admission. BANK is now terminal; output remains retained until Root
+accepts integration/preservation and DM performs assigned reclamation.
 
 MONITOR_ADD was sent directly to the live primary Monitor
 `01a095d0-21ee-7c02-9d97-3681b5678200` and the app send was accepted. It explicitly
 requires get_goal, continuation of the matching unfinished goal or unbudgeted
 goal creation, retention through accepted terminal delivery, actual unfinished
 goal-state MONITOR_ADOPTED to Root, and MONITOR_GOAL_COMPLETE before completing
-an empty goal. **Actual goal-state adoption remains pending** until that receipt;
-app-message acceptance is not adoption. Root confirms/routes the receipt to this
-DM; no duplicate experiment or routine status loop is introduced.
+an empty goal. Root has now delivered the exact BANK terminal, and live primary
+EXPERIMENT_TRACKING.md records its Monitor goal completed. Observation is closed;
+DM collection/intake is separate and now complete as recorded below. No duplicate
+experiment or routine status loop was introduced.
 
 DM returns this published boundary through Relay for Root integration/current
 tracking and retains BANK terminal collection, own-arm scientific intake, final
 resource/preservation/cleanup and a decision-ready next need. Generic's missing
 primary remains explicit throughout; there is no Generic retry or reconstructed
 comparison. FOLR stays ACTIVE and original package H is unchanged.
+
+## Both arms terminal; final intake and retention readiness
+
+Root routed BANK event `folr-entity-history-b01-781201-bank-exit0`: finished,
+PID3413041, tmux inactive, source5b3ae6b98, duration1762s, exit0 at
+2026-09-13T08:56:10+08:00. Direct collection matched these supervisor bytes and
+validated the complete5000/4969/128 checkpoint/panel. Native BANK wall1762.22s;
+Generic1795.06s exit124 remains incomplete. Native total3557.28s. The Monitor goal
+is complete in current primary tracking; no live handle remains in this batch.
+
+[E0 result](FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md),
+[final intake](FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md) and the
+[collection/inventory receipt](entity_history_b01_781201/BANK_COLLECTION.json)
+record technical acceptance, own-arm mean-4.32609375, unavailable pair, resource
+coverage and byte-verified archives. Complete support/total remain unverified;
+no cap is enlarged. Root integrates/accepts retention, then DM reclaims the
+terminal detached checkout plus two supervisor roots and verifies disk/worktree
+absence. No deletion is claimed yet; shared authoring remains in use.
