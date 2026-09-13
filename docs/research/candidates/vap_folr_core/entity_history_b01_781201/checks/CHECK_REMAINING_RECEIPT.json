@@ -1,0 +1,22 @@
+{
+  "source_sha": "922a461fde867a8efe23a1563a969e6d2d08e258",
+  "kind": "focused_check_fixture_setup_correction",
+  "reason": "First invocation lacked the pytest basetemp parent; rerun only six unexecuted fixture-dependent cases.",
+  "scientific_invocations": 0,
+  "admission_exit": 0,
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "--basetemp",
+    "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/test/entity_history_b01_remaining_922a461fd",
+    "tests/experiments/candidates/vap_folr_core/entity_history_b01/test_contract.py",
+    "-k",
+    "collection_unroll or primary"
+  ],
+  "pytest_exit": 0,
+  "scratch_absent": true,
+  "support_wall_seconds": 2.834894535015337,
+  "exit_code": 0
+}

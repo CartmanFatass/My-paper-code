@@ -1,0 +1,42 @@
+{
+  "source_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+  "execution_node": "hmasd-wsl-node",
+  "command_wall_seconds": 1.8398227999999999,
+  "exit_code": 0,
+  "status": "PASS",
+  "scientific_invocation": false,
+  "standalone_encoders": 2,
+  "forwards": {
+    "TOP": 2,
+    "DENSE": 1
+  },
+  "supplied_loss_backwards": {
+    "TOP": 1,
+    "DENSE": 0
+  },
+  "fixed_rows": 6,
+  "full_actors": 0,
+  "critics": 0,
+  "checkpoint_loads": 0,
+  "environments": 0,
+  "trajectories": 0,
+  "train_steps": 0,
+  "eval_steps": 0,
+  "optimizer_steps": 0,
+  "synthetic_primary_readouts": 4,
+  "gradient_norms": {
+    "raw.weight": 0.03967512398958206,
+    "raw.bias": 0.03261018544435501,
+    "user_map.weight": 0.0005327736726030707,
+    "uav_map.weight": 0.0008014886407181621,
+    "context.weight": 0.0027078583370894194
+  },
+  "reading_cases": {
+    "above": "TOP_ABOVE_MEI",
+    "inside": "INSIDE_MEI",
+    "adverse": "TOP_ADVERSE",
+    "damaged": "INCOMPLETE"
+  },
+  "global_rng_unchanged_by_construction": true,
+  "scratch_removed": true
+}

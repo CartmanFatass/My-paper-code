@@ -77,13 +77,12 @@ probe is needed to report the intact performance observation. Endpoint durations
 and tuned same-information headroom remain unmeasured.
 
 Claim ceiling: useful same-host optional-package evidence on this learning
-history within mixed separate results. Whether this package should be used as
-an optional learning route, given the cost and outcome variation, remains the
-next practical decision. A proper direction-level continuation should choose
-what concrete use decision the next bounded work would change; a sixth identical
-pair or exhaustive mechanism enumeration is not implied by this intake. This
-is direction-local advice for Root's next scoped handoff, not a local Portfolio
-investment, family disposition or unrequested Pro Send.
+history within mixed separate results. The subsequent, separately selected U
+has now resolved its limited optional use, with authentic D0 remaining default
+and cost/outcome variation explicit; see the current use section below. Any
+future work still needs a concrete decision-changing use and lawful selection;
+this result supplies no sixth identical pair, exhaustive mechanism enumeration,
+Portfolio investment or automatic Pro consultation.
 
 ## Prediction and owner boundary
 
@@ -155,22 +154,8 @@ evidence persist. No local test/extraction scratch was created. Both Monitor
 goals are complete; no run, observation, collection or cleanup remains in N.
 This completed allocation makes no direction-stop decision.
 
-## Direction-local input to the current Portfolio author
+## Current direction-use decision after this pair
 
-Root's designated author added FSD to a separate, still-unfrozen Portfolio
-investment packet and requested a concrete next-use recommendation from these
-already accepted facts. The DM recommends at most one new original-Convergence
-use judgment: should this complete I1280 package enter the same-host optional
-learning-scheme set, retaining authentic D0 and explicitly labeling cost/outcome
-variation, or remain exploratory evidence without more unchanged-package spend?
-There is no ready new B object and no extra observation is a prerequisite to
-this limited judgment. A later empirical proposal must name a concrete use
-decision that its observation would change.
+The separately selected Portfolio U was completed by the original Convergence node and accepted in [the full U intake](pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md), response812ad330e012d757cf34686bd416cf1a2b4894a2. The exact full I1280 recipe is now a limited optional learning scheme under the same tested host/recipe/five-rollout conditions, with authentic D0 retained as default/reference and all observed costs and adverse outcomes included. This updates the earlier open use question; it changes no result, MEI branch or claim ceiling.
 
-The strong alternative is no new use consultation or unchanged-package funding
-in this Portfolio decision, until an actual new use supplies a specific
-comparison question. That avoids repeated investment and does not itself stop
-FSD. Complete consultation cost is unmeasured; it is not described as cheap.
-This is a recommendation to the designated author only: the old S=no provides
-no authority, and no new question, Pro Send, numerical analysis, code or
-scientific invocation was executed. Portfolio retains its decision authority.
+No new experiment, implementation, reanalysis or consultation follows. The earlier B-LONG-D0 proposal remains a separate unallocated future investment input, absent from U and unnecessary for its now-complete judgment. FSD remains ACTIVE; this pair's N grant and U's finite documentary allowance are complete. Current scientific use is recorded in DIRECTION; Root owns the live Portfolio working-set record.

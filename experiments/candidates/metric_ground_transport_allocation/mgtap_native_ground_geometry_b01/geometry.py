@@ -11,6 +11,7 @@ from experiments.candidates.ucope.uav_motion_prefix_b01.policy import snapshot, 
 
 REL = "REL"
 COND = "COND"
+TOP = "TOP"
 DENSE = "DENSE"
 INPUT_SIZE = 108
 HIDDEN_SIZE = 64
@@ -66,6 +67,9 @@ class DenseResidualEncoder(nn.Module):
 class ConditionalResidualEncoder(RelationResidualEncoder):
     """Visible-UAV-conditioned user pooling, with the intact raw affine path."""
 
+    def _partner_query(self, uav_embeddings, uav_count):
+        return uav_embeddings[..., :20].sum(dim=1) / uav_count.clamp_min(1)
+
     def forward(self, observations):
         flat = observations.reshape(-1, INPUT_SIZE)
         users = flat[:, 3:63].reshape(-1, USER_ROWS, USER_WIDTH)
@@ -76,7 +80,7 @@ class ConditionalResidualEncoder(RelationResidualEncoder):
         uav_embeddings = torch.tanh(self.uav_map(uavs)) * uav_mask[..., None]
         user_count = user_mask.sum(dim=1, keepdim=True)
         uav_count = uav_mask.sum(dim=1, keepdim=True)
-        query = uav_embeddings[..., :20].sum(dim=1) / uav_count.clamp_min(1)
+        query = self._partner_query(uav_embeddings, uav_count)
         scores = (user_embeddings * query[:, None, :]).sum(dim=-1) / math.sqrt(20)
         scores = scores.masked_fill(~user_mask, -torch.inf)
         # Empty rows use a harmless finite softmax input, then exactly zero weights.
@@ -89,9 +93,17 @@ class ConditionalResidualEncoder(RelationResidualEncoder):
         return (self.raw(flat) + residual).reshape(observations.shape[:-1] + (HIDDEN_SIZE,))
 
 
+class TopResidualEncoder(ConditionalResidualEncoder):
+    """Use the source-ranked first visible partner; retain all-partner context."""
+
+    def _partner_query(self, uav_embeddings, uav_count):
+        # Embeddings are already masked; native packing puts visible rows first.
+        return uav_embeddings[:, 0, :20]
+
+
 def make_encoder(kind, branch_seed, raw_state):
     """Build only the selected encoder, preserving the B01 private RNG law."""
-    if kind not in (REL, COND, DENSE):
+    if kind not in (REL, COND, TOP, DENSE):
         raise ValueError(f"unknown native geometry actor kind: {kind}")
     with torch.random.fork_rng(devices=[]):
         torch.manual_seed(branch_seed)
@@ -99,9 +111,11 @@ def make_encoder(kind, branch_seed, raw_state):
             encoder = RelationResidualEncoder()
         elif kind == COND:
             encoder = ConditionalResidualEncoder()
+        elif kind == TOP:
+            encoder = TopResidualEncoder()
         else:
             encoder = DenseResidualEncoder()
-        if kind in (REL, COND):
+        if kind in (REL, COND, TOP):
             _fan_in_uniform(encoder.user_map, USER_WIDTH)
             _fan_in_uniform(encoder.uav_map, UAV_WIDTH)
             _fan_in_uniform(encoder.context, 41)
@@ -135,7 +149,7 @@ class NativeGeometryActor(nn.Module):
 
     @property
     def branch_parameters(self):
-        if self.kind in (REL, COND):
+        if self.kind in (REL, COND, TOP):
             return (self.encoder.user_map.weight,
                     self.encoder.uav_map.weight,
                     self.encoder.context.weight)

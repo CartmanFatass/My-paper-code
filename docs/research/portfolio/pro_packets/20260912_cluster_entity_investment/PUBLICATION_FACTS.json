@@ -1,0 +1,88 @@
+{
+  "recorded_utc": "2026-09-12T22:24:26.657892+00:00",
+  "request_id": "2026-09-12-existing-four-direction-investment-01",
+  "state": "READY_TO_DISPATCH",
+  "delivery_mode": "github_delivery",
+  "input_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+  "task": {
+    "sha": "b52ed2e045841659953abfe9a76b55c69adcce5d",
+    "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/delivery_ready/TASK.md",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/b52ed2e045841659953abfe9a76b55c69adcce5d/docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/delivery_ready/TASK.md",
+    "git_bytes": 40993,
+    "sha256": "bf3de5037a7a3a50ef522c0b5eee534c28cdad254743b598e1ff746d4494ced0"
+  },
+  "short_prompt": {
+    "field": "transport_request.prompt",
+    "utf8_bytes": 1923,
+    "sha256": "8e75e10eab825ae46ff78f077d2c298ff25e16aaf39c49a5c92bfc2e61153341",
+    "paste_exactly_once_by": "configured independent Transport after Root dispatch",
+    "no_input_upload": true
+  },
+  "final_handoff_path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/delivery_ready/HANDOFF.json",
+  "source_thread_id": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "operator_thread_id": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+  "relay_thread_id": "01a095ca-8676-74e1-b78c-ea459d41e905",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/17",
+  "response_path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/archive/RESPONSE.md",
+  "reference_check": "REFERENCE_CHECK.json",
+  "fixed_reference_count": 34,
+  "author_commits_for_root_integration": [
+    "f2bcfb716376b0e84d5e86aa8ea98e682b31313a",
+    "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+    "b52ed2e045841659953abfe9a76b55c69adcce5d"
+  ],
+  "exclude_input_sync_merges": [
+    "8415aff78",
+    "ce9f9e7d4",
+    "f7cc23538",
+    "309046f94",
+    "2a49dbdac"
+  ],
+  "remote_task_head_verified": {
+    "branch": "codex/portfolio",
+    "sha": "b52ed2e045841659953abfe9a76b55c69adcce5d"
+  },
+  "preserved_first_render": {
+    "directory": "delivery",
+    "state": "UNBOUND_UNPUBLISHED_DRAFT_NOT_FOR_DISPATCH",
+    "reason": "Renderer refused overwriting an existing packet; fresh delivery_ready was used before binding. No Send or provider acceptance occurred for the draft."
+  },
+  "owner_items_planned": [
+    "20260912-root-014",
+    "20260912-root-015",
+    "20260912-root-017"
+  ],
+  "scientific_scope": "Separate K ACVC cluster B, E FOLR entity-history B, L RCLE bounded design or explicit Portfolio PARK, U FSD one original-node use judgment. Recommendations are not allocations. Each has its own no-addition alternative; no old balance or ended-allocation lifecycle inference.",
+  "post_task_acvc_readiness": {
+    "sha": "596e62253b7127b7d78c9d5c93b917ad1cf3f0dd",
+    "root_integrated_main": "180e18763",
+    "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_READINESS_20260912.md",
+    "git_bytes": 14766,
+    "sha256": "72679747ea4397bb5334f36a429a82433e7d16b179f03c225fe8cd21ce8c70ac",
+    "status": "Read in full after TASK publication; matches the original-DM facts already frozen in the question. Fixed implementation-handover supplement, not an altered question or new cost observation.",
+    "unchanged_facts": [
+      "one C fit with three private 64-world panels",
+      "180224 total team steps: 131072 train plus 49152 evaluation",
+      "1024 Adam updates",
+      "make_env reuse and explicit override of legacy allocation defaults",
+      "complete native and support costs UNKNOWN",
+      "future actual-node memory admission and CPU FP32/thread1 preserved"
+    ],
+    "reference_status": "Supplemental post-TASK evidence; not one of the fixed 34 prompt references."
+  },
+  "current_request_author_exposure": {
+    "experiment_invocations": 0,
+    "numeric_outcome_reanalysis": 0,
+    "training_fits": 0,
+    "evaluation_episodes": 0,
+    "pro_sends": 0
+  },
+  "completed_discovery_separate": {
+    "intake_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+    "root_integrated_main": "2492dcb06da495aed2cd4436342e81dec9507975",
+    "unchanged": "T/ACPS/CADC allocations, five registrations, 27-direction registry and existing lifecycles remain as accepted; this future request neither replaces nor adds to their grants."
+  }
+}

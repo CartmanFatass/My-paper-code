@@ -12,39 +12,45 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
-## TOP single-partner query selected for a new B — 2026-09-12
+## TOP single-partner query fresh8221 adverse result — 2026-09-12
 
-The original Convergence response at10ad0d09fda138f49b117cbcf7231c09bfdd50a4
-is fully intaken as conforming **PRO_FINAL**: select one new TOP/intact-DENSE
-B/EXPLORE scientific object. TOP replaces only COND's mean visible-partner query
-with the mapped source-delivered highest-local-SINR visible row, retaining all
-raw108 information, all-partner context, parameter blocks, private recurrence,
-native primitive action/reward and PPO. Empty partner/query and user masks retain
-defined behavior. This explicitly extends the former COND-only native-family
-eligibility to this one computation; it does not reopen a general search.
+The selected and Portfolio-funded TOP/intact-DENSE B is a complete valid
+**TOP_ADVERSE** observation: TOP meanJ0.10615334230466392 versus
+DENSE0.1746043221148783, difference **−0.0684509798102144 J**, conditional
+SE0.009502685781897066,4 positive/28 adverse final worlds. Both native
+512-train/32-final fits completed1024 Adam calls with nonzero own-arm movement.
 
-The strongest direct support for considering conditional-pooling work remains
-8214+.02447811898058116; the strongest direct contradiction remains
-8213-.02246957345594415, with8212+.005761321371348559 inside MEI. All three
-remain separate mean-COND observations, not TOP evidence. Avoiding a mean's
-cancellation is plausible, but strongest radio link need not identify the
-service-relevant partner; rank switching, lost query context and intact DENSE
-learning remain serious alternatives. DENSE remains the generic default and tuned
-same-information native headroom is absent.
+This first TOP observation is direct local evidence against unchanged TOP
+carry-forward at this exposure. Prior mean-COND8214+.02447811898058116 remains
+the strongest direct support for conditional-pooling development;8213
+−.02246957345594415 remains its strongest prior contradiction, and8212
++.005761321371348559 was inside MEI. Those are distinct mean-query packages
+and fitted identities, not TOP replicates or a direct TOP-versus-mean comparison.
+No pooled primary or reclassified history is introduced.
 
-The next empirical discriminator is one fresh TOP/DENSE native training pair,
-each512-train/32-final episodes and1024 Adam calls, with all32 final native-J
-differences and.01J reading. It can show one realized package outcome; omitting
-mean COND gives up direct query attribution, and no stable superiority, attention/
-geometry/causal-credit, transfer or formal UAV claim follows. TOP is unimplemented
-and untested. Its new450s/arm,900native,1200complete envelope is a Portfolio
-investment recommendation, not a grant;300support is a planning reference.
-The direction remains advancing under current owner instruction. Old M funds,
-coordinate-family PARK, historical C meanings and recast count are unchanged.
-No fourth unchanged pair or automatic successor is selected.
-[Complete intake](pro_packets/20260912_post8214_top_query/CONVERGENCE_INTAKE_20260912.md),
-[new investment need](pro_packets/20260912_post8214_top_query/INVESTMENT_NEED.md),
-[original response](pro_packets/20260912_post8214_top_query/archive/RESPONSE.md).
+TOP replaced only the mean visible-partner query with the mapped delivered
+highest-local-SINR row while preserving raw108/all-partner context, private
+recurrence, primitive action/reward and PPO. Strongest-link irrelevance, rank
+switching, lost query-context usefulness, finite training variation, partner
+co-adaptation and competent DENSE adaptation remain alternatives; the loss does
+not identify any one mechanism. Claim ceiling is this realized package outcome,
+not stable inferiority, general geometry/attention/credit failure, scaling/churn,
+transfer or formal UAV validation. DENSE remains default and tuned native
+same-information headroom remains absent.
+
+The accepted Convergence negative branch recommends against carrying this TOP
+package forward unchanged. This one T grant ends at result/intake/scoped cleanup;
+no second pair, search, causal/timing panel, fourth unchanged COND pair or
+consultation is funded by it. MGTAP remains ACTIVE and advancing under the current
+owner instruction. The next discriminator is a properly selected distinct bounded
+use question informed by mixed mean-COND and adverse TOP evidence, with its own
+investment; none is locally opened here. Old coordinate-family PARK, C meanings,
+recast count and both earlier M=no facts remain unchanged.
+
+[TOP E0 result](MGTAP_TOP_QUERY_B01_RESULT_20260912.md),
+[technical/scientific intake](MGTAP_TOP_QUERY_B01_INTAKE_20260912.md),
+[card](MGTAP_TOP_QUERY_B01_SCIENCE_CARD_20260912.md),
+[original Convergence intake](pro_packets/20260912_post8214_top_query/CONVERGENCE_INTAKE_20260912.md).
 
 ## Conditional pooling fresh8214 local gain — 2026-09-12
 

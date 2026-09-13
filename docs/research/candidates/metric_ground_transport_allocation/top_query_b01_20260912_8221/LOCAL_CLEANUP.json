@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-12T22:52:05.2563913Z",
+  "retention_main": "b47e6c2f9556bd43f5f4e036074d31758dd9a36e",
+  "removed_target": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904/temp/directions/metric_ground_transport_allocation/exp/top_query_b01_20260912_8221_source",
+  "disk_absent": true,
+  "worktree_registered": false,
+  "verified_files": 2,
+  "operation": "Native PowerShell literal nonrecursive removal of two verified files and empty duplicate directory",
+  "shared_authoring_exists": true,
+  "new_scientific_invocations": 0
+}

@@ -5,21 +5,24 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC | Original-node intake accepted at main4ac951c14: one fresh cluster-law C-fit with C/F/own-dwell panels selected; direction ACTIVE, no empirical grant | Portfolio DM prepares a separate investment request after the in-flight Portfolio round; no repeat consultation or third training-F pair |
-| MGTAP | Original Convergence response accepted: one fresh TOP/intact-DENSE B selected; intake integrated at main6f506e474, direction remains ACTIVE | Portfolio decides the pending whole-object investment (450s/arm, 1200s complete); no experiment before allocation |
-| FSD | Fifth pair accepted ABOVE_MEI; four-target scoped cleanup verified complete at main0603d31c1, finite N fully closed, direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice; no automatic sixth pair/S/successor |
-| RCLE | Original-node intake accepted at main8973c0515: HOLD only tested equal-unit/.99-prior/FLEX/final1000 spending; direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice from refreshed evidence; no repeated recipe, fit or consultation |
-| FOLR | Original-node intake accepted at main2e2549d3c: new entity-history-before-aggregation B family OPEN; direction ACTIVE, old package H retained, no empirical grant | Portfolio DM prepares its finite implementation-plus-one-pair investment as a distinct item; no repeat consultation or inferred grant |
-| Portfolio | Complete immutable new-direction discovery plus separate MGTAP T response integrated at mainc869ecbb9; designated DM is performing full Portfolio intake | Apply conforming registration/investment/priority decisions while keeping MGTAP T separate from genuinely new directions |
+| ACVC K | Both frozen primaries accepted UP at main2a59af854; four remote cleanup targets removed, one local duplicate remains after policy rejection | Scientific allocation complete; local cleanup blocker is operational only, ACVC remains ACTIVE and no retry/successor is inferred |
+| MGTAP | Post-T A/U/P input is one of five choices in the archived Portfolio response at main54b2a6d33 | Designated Portfolio DM performs conformance intake; no option funded or lifecycle change inferred locally |
+| FSD | U completed at main038666aa8/6805ca7be with limited optional I1280 and D0 default; LONG remains a separate Portfolio alternative | Designated Portfolio DM intakes the new five-item response; zero numerical work unless a conforming new decision grants it |
+| RCLE | L completed with one joint-quota-phase B proposal; it is one of five choices in the archived response at main54b2a6d33 | Designated Portfolio DM performs selection/investment/PARK conformance intake; no current implementation/experiment grant |
+| FOLR E | Final intake accepted at main0f8452d6c: Generic no final; BANK mean−4.32609 over128 finals, no pair primary/MEI | Original DM performs only named terminal checkout+two-supervisor cleanup; FOLR remains ACTIVE, no retry/extra arm/successor |
+| ACPS | B01 ADVERSE and cleanup complete; continuation is one of five choices in the archived response at main54b2a6d33 | Designated Portfolio DM performs conformance intake; ACPS remains ACTIVE/HIGH until a conforming decision says otherwise |
+| CADC | B01 ADVERSE and cleanup complete; lifecycle/design alternatives are in the archived five-item response | Designated Portfolio DM performs conformance intake; no unchanged repeat or local PARK inference |
+| Portfolio | Five-item ACPS/CADC/MGTAP/FSD/RCLE response archived exactly once at main54b2a6d33 | Designated DM performs full conformance intake and maps each decision independently |
 
-Direction chains5/5: ACVC, MGTAP, FSD, RCLE and FOLR DMs have resumed their next bounded object or
-proper-node direction step. Their latest allocations completed, but no Portfolio decision stopped
-these ACTIVE directions. The N/S/R generation supplies concrete FSD/RCLE choices; new-direction
-drafting first refreshes all affected old-direction facts from the current DMs.
+Actual advancing directions6: the complete five-item Portfolio response is under designated-DM intake,
+counted once for ACPS, CADC, MGTAP, FSD and RCLE; FOLR E has active bounded cleanup after accepted intake.
+ACVC's remaining policy-rejected local duplicate is operational only and does not fill a research slot.
+No queued intention or ended allocation is used to fill the count, and no direction is stopped to
+manufacture capacity.
 
-Strict advancing count5/5: ACVC and FOLR have separately accepted provider generations, FSD and
-RCLE have active DM work, and MGTAP has active Portfolio investment routing. No queued intention is
-used to fill this count.
+One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
+to ACPS support only, unknown unless directly measured. MGTAP T and CADC exclude that shared item;
+each direction still counts its own implementation-through-cleanup and later Root integration once.
 
 ## Current routing
 
@@ -27,7 +30,7 @@ used to fill this count.
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
 | Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; FSD I terminal delivered, active_set empty and goal complete |
+| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; ACPS, MGTAP and CADC terminal receipts delivered, active_set empty and goal complete |
 | Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
 Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the
@@ -36,19 +39,3 @@ come directly to Root. Do not send new work to a retired task or a historical pa
 FOLR's300-second support value is an owner-clarified reference: recorded308.8422538 is not
 by itself a hard stop. Native/scientific scope and remaining explicit complete-work limits persist.
 Historical run roots, fixed SHAs and complete data remain in their scientific evidence records.
-
-## Accepted FOLR B03 observation
-
-Monitor01a095d0-21ee-7c02-9d97-3681b5678200 directly reported MONITOR_ADOPTED:
-get_goal initially returned null, then create_goal established an unbudgeted unfinished
-goal covering both handles through terminal delivery. This confirms actual adoption,
-not just dispatch. Root informed the owning DM; no duplicate observation loop.
-
-| Handle | Direct adoption status | Node/source/cwd |
-| --- | --- | --- |
-| folr-learned-retention-b03-retain-20260911 | running, exit_code=null, tmux_active=true, pid3368237 | hmasd-wsl-node; source89035d8f1e3f44a07e80c08e3140283c03592efb; /home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1 |
-| folr-learned-retention-b03-learned-event-20260911 | running, exit_code=null, tmux_active=true, pid3368272 | same accepted node/source/cwd |
-
-Observation time approximately2026-09-12T13:35Z. Both reported uptime approximately42s.
-Actual launch/admission receipt integration is pending the owning DM's published return;
-Monitor process facts do not replace technical or scientific acceptance.

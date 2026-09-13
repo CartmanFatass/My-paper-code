@@ -1,0 +1,42 @@
+{
+  "arms": [
+    "GENERIC_RETAIN_GRU64",
+    "BANK_GRU16_OBSERVER_SUBJECT"
+  ],
+  "matched_training_pairs": 1,
+  "training_episodes_per_arm": 5000,
+  "final_episodes_per_arm": 128,
+  "ticks_per_episode": 20,
+  "controller_positions_per_episode_including_terminal": 21,
+  "replay_batch_episodes": 32,
+  "online_and_target_unroll_passes": 2,
+  "slots_and_observers": 5,
+  "optimizer_updates_per_arm": 4969,
+  "optimizer_updates_pair": 9938,
+  "train_ticks_per_arm": 100000,
+  "final_ticks_per_arm": 2560,
+  "native_ticks_pair": 205120,
+  "generic_replay_recurrent_positions": 33391680,
+  "bank_replay_recurrent_positions_dense_upper": 166958400,
+  "generic_acting_recurrent_positions": 538440,
+  "bank_acting_recurrent_positions_dense_upper": 2692200,
+  "pair_recurrent_positions_dense_upper": 203580720,
+  "generic_current_state_payload_bytes": 1280,
+  "bank_current_state_payload_bytes": 1600,
+  "generic_batch_hidden_history_payload_bytes": 860160,
+  "bank_batch_hidden_history_payload_bytes": 1075200,
+  "payload_limit": "Logical FP32 tensor payload only; not process peak or resource prediction; excludes autograd/gates/projections/critic/optimizer/targets/replay/Python objects.",
+  "status": "GRANTED_AND_CARD_BOUND",
+  "training_seed": 781201,
+  "evaluation_seed": 1781201,
+  "caps_seconds": {
+    "generic": 1800,
+    "bank": 3000,
+    "native_sum": 4800,
+    "hard_support": 1200,
+    "complete_invoked": 6000
+  },
+  "exposure_line": "Each arm: 100000 native train ticks; 4969 nonzero-lr RMSprop actor/mixer steps at .0005; 128 final episodes/2560 native ticks; no checkpoint selection. Actor movement is permitted and will be reported relative to initial L2.",
+  "complete_rate_projection": "UNKNOWN for each new arm; no timing pilot",
+  "current_native_invocations": 0
+}

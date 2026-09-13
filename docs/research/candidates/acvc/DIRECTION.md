@@ -38,6 +38,11 @@ These are two separate pair observations, not a pooled primary or stable populat
 Train-C→deploy-F stays the reference; another adverse instance strengthens advice against
 more unchanged training-F spending without closing ACVC or diagnosing its mechanism.
 The [training-use intake](ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md) preserves all outcomes.
+The subsequently selected cluster-law C-trained deployment-use B is now complete: F−C
+is +0.12407302446321236J and F−own-dwell is +0.07674096500501802J, both UP on one fresh
+endpoint and its three final panels. Its [intake](ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md)
+supports bounded usefulness under that law, with1/64 and8/64 adverse worlds respectively;
+it supplies no training-population replication or pooled uniform/cluster claim.
 Three fresh development fits and the older E01 observations
 on two selected retained bases remain development evidence, outside C01. The learned selective-retrace
 package stays ended: both learned gates improved over C, but F was stronger in both
@@ -103,8 +108,9 @@ vote rule or family/Portfolio disposition is applied. Unequal own-history interv
 and actor/recurrent/teammate feedback remain inseparable explanations. The new allocation
 ends with complete intake and scoped cleanup; no third pair, consultation or successor.
 That allocation boundary is preserved in the [B02 intake](ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md).
-The subsequent original Convergence decision selects the distinct cluster-law deployment-use B
-described below; its complete empirical investment remains the next required authority.
+The subsequent original Convergence decision selected the distinct cluster-law deployment-use B
+described below. Its separately funded complete result supports observed use; independently
+funded repeatability is now the next proposed discriminator, not an automatic successor.
 
 Exact binding remains a useful protocol primitive. Neither historical learner object nor the
 new native comparisons support adaptive ACVC superiority over their strongest competent fixed control.
@@ -556,7 +562,8 @@ one distinct cluster-law deployment-use B: a freshly C-trained DENSE endpoint fo
 by C, fixed F and own-predicate dwell on three private 64-world final panels. Both training
 and evaluation use the existing cluster generator while five UAVs/fifty users, H256,
 private GRU64, legal information/reward/action and the 512-episode/1,024-Adam exposure remain.
-This is a selected next object and precise future investment need; no new result exists.
+At that selection boundary this was a precise future investment need with no new result.
+The subsequently funded complete cluster result is recorded below without changing that history.
 
 The practical question is whether the useful local deployment correction remains useful
 under concentrated service geometry. C01's qualified positive package comparison supports
@@ -572,15 +579,47 @@ three panels do not create independent training replications. The complete three
 pattern decides bounded usefulness on this fitted instance. No pure-retrace attribution,
 history necessity, zero-shot transfer, stable/general benefit or formal UAV entry follows.
 
-The next discriminator is this one real cluster C-fit plus its final three panels after
-actual full-path investment and technical acceptance. A small direction-local factory must
+The selected discriminator was this one real cluster C-fit plus its final three panels after
+actual full-path investment and technical acceptance. Its small direction-local factory must
 preserve shared uniform defaults and feed every train/evaluation construction. No census,
 matched-dose reconstruction, new learning objective, third unchanged training-F pair or
 automatic extra consultation is selected. The current direction continues under OWNER_DIRECT;
 completed allocations did not stop it. The response makes no new recast, family reopening,
 Portfolio lifecycle/priority change, numeric grant or unseen implementation acceptance.
 
+### Cluster deployment B01 — accepted 2026-09-12
+
+One fresh C-trained DENSE endpoint under the existing concentrated-user law completed the
+selected C/F/own-dwell64 panels. Both frozen .01J primary readings are UP: F−C
++0.12407302446321236J (conditionalSE0.008490426540329714) and F−own-dwell
++0.07674096500501802J (conditionalSE0.010170152134996446). Absolute C/F/dwell means are
+0.19723740813395618/0.32131043259716857/0.24456946759215054J. The strongest support is
+the intact real-learning/native-use comparison exceeding the practical margin against both
+required controls on this instance, as accepted in the [intake](ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md).
+
+Strongest contradiction and limits: F loses on1/64 C comparisons and8/64 dwell comparisons,
+with worst differences−0.024574273874233443J and−0.12128082288171904J. Own-dwell itself
+gains+0.04733205945819434J over C descriptively. Its4,546 interventions differ from
+F's6,623, preserving motion suppression, private-history/feedback and team consequences
+as coupled alternatives. There is only one independent training instance; all final
+worlds and all adverse outcomes remain. A changed saturation rate or isolated retrace
+mechanism was not measured. Training and evaluation both use cluster, so this is observed
+within-law use, not zero-shot transfer, stable superiority, tuned headroom or formal UAV entry.
+
+The bounded conclusion is that the fixed deployment package remains useful relative to
+both C and own-dwell on this observed cluster endpoint. Uniform C01 and both training-F DOWN
+pairs retain their separate meanings. The next useful discriminator would be one independently
+funded fresh cluster C-fit with the same three final panels, to see whether the use signal
+recurs. This is direction-local advice to Portfolio; current K supplies no extra fit, panel,
+consultation or automatic successor. ACTIVE continuity and recasts:2 are unchanged.
+
 ## Evidence set
+
+- `docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_SCIENCE_CARD_20260912.md`
+- `docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_RESULT_EVIDENCE_20260912.md`
+- `docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md`
+- `docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/summary.json`
+- `docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/INTAKE_ANALYSIS.json`
 
 - `docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md`
 - `docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE.md`
