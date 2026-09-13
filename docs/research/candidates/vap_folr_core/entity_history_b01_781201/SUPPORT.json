@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-09-13T01:05:26.687075+00:00",
+  "recorded_at": "2026-09-13T01:18:55.192170+00:00",
   "hard_support_cap_seconds": 1200,
   "native_caps_seconds": {
     "generic": 1800,
@@ -152,15 +152,31 @@
     {
       "component": "BANK archives/receipt transfer and local verification/run-level analysis",
       "seconds": 3.5309175
+    },
+    {
+      "component": "post-snapshot final analysis/authoring/result publication (from accepted handoff)",
+      "seconds": 8.6000145
+    },
+    {
+      "component": "cleanup assignment/current control and preservation inventory reads",
+      "seconds": 1.2117138
+    },
+    {
+      "component": "Root-accepted preservation verification and scoped cleanup outer command",
+      "seconds": 1.8584793
+    },
+    {
+      "component": "independent post-cleanup disk and parsed worktree-record verification",
+      "seconds": 0.5061006
     }
   ],
-  "known_support_seconds": 104.5563982,
-  "accounting": "Outer command elapsed covers inner pytest/admission once; do not add 3.346657243/2.834894535 again. New regression outer2.2170882 includes inner1.684901184 once. Rejected combined command created no process; approval-service overhead unknown. Final collection outer1.8466178 includes inner0.929379525 once; failed count assertion and targeted read are retained support.",
-  "uncovered": "Other short document/source reads, apply_patch/control service overhead, future integration/collection/cleanup and provider/agent costs are not measured here; no zero or complete-total assertion.",
+  "known_support_seconds": 116.7327064,
+  "accounting": "Outer command elapsed covers inner pytest/admission once; do not add 3.346657243/2.834894535 again. New regression outer2.2170882 includes inner1.684901184 once. Rejected combined command created no process; approval-service overhead unknown. Final collection outer1.8466178 includes inner0.929379525 once; failed count assertion and targeted read are retained support. Cleanup outer1.8584793 includes local manifest construction, inner outer-support1.671 and remote0.140009809 once; post-cleanup exact-record verification separate0.5061006.",
+  "uncovered": "Other unitemized source/control reads, approval/service overhead, Root integration, Monitor/provider/agent costs and final cleanup publication are not fully measured; no zero or complete-total assertion.",
   "scientific_invocations_so_far": 2,
   "native_spend_so_far": "Generic1795.06s exit124 + BANK1762.22s exit0 =3557.28s enclosed native wall. Both arms terminal; two scientific invocations, no retry.",
   "rates": "BANK completed5000/128 in1762.22s; Generic incomplete4253/zero-final in1795.06s. Observed runs only, not a same-endpoint runtime comparison or projected future guarantee.",
-  "remaining_scope": "Final result publication/integration and scoped reclamation after Root retention acceptance; no live scientific run, successor, retry, extra arm or search.",
+  "remaining_scope": "No owned remote runtime/supervisor roots remain. Cleanup publication and Root final integration only; shared authoring retained, no successor/retry/extra arm/search.",
   "additional_observed_support_lower_bound_seconds": 97,
   "resource_status": "Native timing and peak RSS measured; resources_unmeasured for unitemized support and complete total. No observed cap breach; full hard-support/complete conformance unverified."
 }

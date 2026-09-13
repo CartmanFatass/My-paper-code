@@ -121,3 +121,23 @@ raw/supervisor archives and incomplete intake remain unchanged. The collection
 receipt lists the one terminal detached checkout, both output roots, support
 root and two terminal supervisor roots for reclamation after Root accepts
 integration/retention. No deletion has occurred at this boundary.
+
+## Accepted preservation and completed reclamation
+
+Root accepted archives/intake at main`0f8452d6caba7a807a1aff2b9371225f789b7334`.
+Immediately before removal, both handles were terminal with inactive tmux; the
+source checkout was clean at5b3ae6b98. All38 original result/supervisor/support
+files matched the accepted archive members or committed bytes, and no other
+`temp/` evidence was present. The one detached checkout and both supervisor
+roots were removed. A separate direct check confirmed all three disk absences
+and absence of the exact parsed Git worktree record; shared authoring and remote
+main remain. [CLEANUP.json](entity_history_b01_781201/CLEANUP.json) records the
+exact targets, command, preservation checks and verified completion. No new
+scientific invocation occurred.
+
+Known support through cleanup is116.7327064s plus the existing97s lower-bound
+component: at least213.7327064s support and3771.0127064s native plus observed support.
+Unitemized components, final cleanup publication and Root integration remain
+unknown; full support1200/complete6000 conformance is still unverified, with no
+observed breach or invented zero. Native spend3557.28s and scientific reading
+are unchanged. No owned remote cleanup remains; no retry or successor follows.

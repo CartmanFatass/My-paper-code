@@ -2,7 +2,7 @@
   "object": "FOLR_ENTITY_HISTORY_B01_781201",
   "evidence_class": "B/EXPLORE",
   "status": "BANK_OWN_ARM_ACCEPTED_PAIR_PRIMARY_UNAVAILABLE",
-  "recorded_at": "2026-09-13T01:05:26.687075+00:00",
+  "recorded_at": "2026-09-13T01:18:55.192170+00:00",
   "generic": {
     "status": "incomplete",
     "exit_code": 124,
@@ -63,10 +63,10 @@
   "cost": {
     "native_wall_seconds": "3557.28",
     "native_cpu_seconds": "3556.57",
-    "known_support_seconds": "104.5563982",
+    "known_support_seconds": "116.7327064",
     "additional_support_lower_bound_seconds": 97,
-    "support_observed_lower_bound_seconds": "201.5563982",
-    "complete_observed_lower_bound_seconds": "3758.8363982",
+    "support_observed_lower_bound_seconds": "213.7327064",
+    "complete_observed_lower_bound_seconds": "3771.0127064",
     "hard_support_cap_seconds": 1200,
     "complete_cap_seconds": 6000,
     "full_support_and_complete_total": "UNKNOWN",
@@ -74,20 +74,21 @@
   },
   "claim": "One trained BANK policy has the reported128-episode native return panel; no BANK-minus-Generic performance polarity, stable advantage, causal entity-memory benefit, capacity-matched claim or transfer inference.",
   "cleanup": {
-    "worktree": "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304",
-    "worktree_registered": true,
-    "source_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
-    "tracked_source_clean": true,
-    "scientific_output_roots": [
-      "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_generic",
-      "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_bank"
-    ],
-    "support_root": "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_support",
-    "supervisor_roots": [
+    "status": "COMPLETE",
+    "receipt": "CLEANUP.json",
+    "root_retention_accepted_main": "0f8452d6caba7a807a1aff2b9371225f789b7334",
+    "removed_targets": [
+      "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304",
       "/home/wu/.agent-tasks/folr-entity-history-b01-781201-generic",
       "/home/wu/.agent-tasks/folr-entity-history-b01-781201-bank"
     ],
-    "retention_state": "Pending Root integration/retention acceptance before assigned reclamation; no deletion in this collection",
-    "shared_authoring": "C:/Projects/HMASD-worktrees/codex-vap-folr retained"
+    "disk_absent": {
+      "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304": true,
+      "/home/wu/.agent-tasks/folr-entity-history-b01-781201-generic": true,
+      "/home/wu/.agent-tasks/folr-entity-history-b01-781201-bank": true
+    },
+    "worktree_registration_absent": true,
+    "shared_authoring_retained": true,
+    "scientific_invocations": 0
   }
 }

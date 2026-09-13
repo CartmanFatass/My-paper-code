@@ -84,10 +84,10 @@ was a documented buffer-count assumption error, with no result/source mutation.
 Old scalar H and all B01–B04 evidence/polarities remain intact.
 
 Authoring remains `C:/Projects/HMASD-worktrees/codex-vap-folr`, branch
-`codex/vap-folr`. Root integrates this result/intake/brief/audit and accepts retained
-archives; DM then carries assigned reclamation of the one terminal detached
-execution checkout and both supervisor roots. Exact inventory is in
-[collection receipt](entity_history_b01_781201/BANK_COLLECTION.json). No active
-experiment remains, and the Monitor goal has completed according to current
-primary tracking. Shared authoring stays available for direction continuity.
-Root receives one actionable READY_HANDOFF through the configured Relay.
+`codex/vap-folr`. Root accepted this result/intake/brief/audit and retained archives at
+main0f8452d6c. DM completed the explicitly assigned reclamation of the one terminal
+detached execution checkout and both supervisor roots after verifying preservation
+of38 files. [Cleanup receipt](entity_history_b01_781201/CLEANUP.json) confirms disk
+and exact Git registration absence. No active experiment, Monitor goal or owned
+remote cleanup remains. Shared authoring stays available for direction continuity.
+Root receives the committed COMPLETE closeout through the configured Relay.
