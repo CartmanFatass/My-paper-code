@@ -10,24 +10,71 @@ and native waits. DM owns routine Monitor/Transport receipts and full scientific
 formal direction pause/closure leaving fewer than four occupied slots triggers Root's Portfolio
 replacement request through its own Transport. Preserve existing overlap without forced stops.
 
+## Published control-plane baseline
+
+The migration is committed and pushed on main through `08a6372ae`:
+
+- DM owns science, implementation, self-checks, repairs and acceptance. New CM/Implementer
+  assignments are suspended; independent Astra/high Reviewer remains available.
+- Each DM owns a reusable Luna/low native Monitor and Luna/high native Agentify Transport.
+  Adoption, terminal facts and full Pro archives return directly to the owning DM.
+- Root normally logs changed events, integrates accepted work, resolves actual dependencies and
+  waits natively. Ordinary Portfolio authoring/intake stays with DM. Root authors/intakes only
+  its vacancy-replacement request through its own Transport; Pro selects science/investment.
+- The working-set target is four. Current tracking records five existing direction assignments:
+  ACPS, MGTAP, RCLE, ACVC and FOLR. This is a recovery inventory, not a fresh runtime liveness
+  assertion. Preserve accepted overlap and let it drain at formal direction dispositions.
+  Object/allocation completion, temporary blockers and Pro waits do not release direction slots.
+  Record pending replacement requests/reserved slots and recount before creating a new DM.
+- Native wait min/default is 1,500,000 ms, maximum 3,600,000 ms. Unchanged timeout continues
+  waiting without a full-record reread, polling sweep or new Portfolio request. Empty/idle
+  assignments need reconciliation; they are not a reason for endless waits.
+- Agentify uses one active writer per exact provider conversation and one shared Portfolio
+  binding. Preserve request idempotency and immutable archives. Ordinary rounds retain their
+  Agentify key; admitted conversation replacement uses the bounded deterministic generation key.
+
+Current procedures are maintained in ROOT_OPERATIONS.md, SIBLING_COMMUNICATION.md,
+EXPERIMENT_MONITOR.md and the six HMASD skills. Role/config changes need a runtime that loads the
+new configuration; publication does not prove existing tasks have reloaded it. The migration
+passed 164 focused tests, all six skill validators, role/config TOML validation and independent
+review. No scientific launch, Pro Send, lifecycle disposition or research resumption occurred.
+
 ## Resume and recovery
 
-A workflow edit or restart does not resume paused research. Apply owner instructions first.
-The inventory below preserves the last reported recovery facts, not verified current pending work
-or executable dispatch orders. Reconcile named commits with current HEAD, subsequent DM intake
-and the shared request registry before any authorized continuation. Do not replay completed work.
-Accepted historical packets retain their input/binding/effect facts; if work remains, establish
-its actual owner and same-request native recovery route before observation or delivery. Unknown
-Send acceptance permits observation only. Preserve unrelated working-tree changes.
+This handoff update is documentation work only. Apply the latest owner pause/stop/resume
+instructions first; a workflow edit or restart does not resume paused research.
+
+1. Read the current control entrypoints above and inspect the actual checkout/index. Preserve
+   unrelated work. Resolve original DM assignments from native runtime facts before dispatch.
+2. Reconcile only the affected recovery rows below with current HEAD, subsequent DM intake and
+   the shared registry. Check equivalent/cherry-picked content as well as commit ancestry before
+   integrating anything. An old receipt or task alias is not a current dispatch instruction.
+3. If authorized work remains, integrate accepted response artifacts as needed and return their
+   complete bytes to the original direction's DM for intake/continuation. Do not re-Send an
+   archived request. The existing MGTAP Portfolio request remains its author DM's responsibility;
+   it is not Root's vacancy-replacement question.
+4. Accepted historical handoffs retain their input, provider binding and effect facts. Establish
+   actual executor and same-request native recovery before observation/delivery. Unknown Send
+   acceptance permits observation only. Do not rewrite accepted packets to fit current defaults.
+5. Update changed Portfolio/tracking rows from the resulting facts. Continue the original DM
+   while its direction owns a slot. Only formal pause/closure leaving fewer than four occupied
+   slots triggers a deduplicated Root Portfolio replacement request. Then use native waiting.
+
+At this update, the four response requests below are `ARCHIVED` with `SENT` receipts in the
+shared registry. Their listed response commits and the three MGTAP author commits are not
+confirmed ancestors of the inspected main baseline. This does not establish whether equivalent
+content was integrated or intake happened elsewhere; reconcile before applying or repeating it.
+No MGTAP investment request was found as the active Portfolio registry record; that absence alone
+does not prove it was never sent. Current runtime ownership/liveness was not revalidated here.
 
 ## Response recovery inventory
 
-| Direction | Request | Immutable response commit | Response SHA-256 | Restart action |
+| Direction | Request | Immutable response commit | Response SHA-256 | Recovery after reconciliation |
 | --- | --- | --- | --- | --- |
-| ACPS | `2026-09-12-acps-post-b02-investment-01` | `f63980ab1acdcf9fad0ec8b1ac9770c864a6b988` | `0e654363ff33c2dc8316f7cf4682bf5b30ee98662216ce63fb6e4c2d576443da` | Integrate; wake `/root/dm_a_mx_portfolio_resume` for Portfolio intake and execution mapping. |
-| ACVC | `2026-09-12-acvc-post-cluster-use-convergence-01` | `d9a1426af03c42bdcbb8e4f84413f94493a58ebf` | `4deb7f4c27dafdcd6634b898722aa3e2e667e4334335fad72bfa368095f78816` | Integrate; wake `/root/dm_a_mx_acvc_resume` for direction intake and conforming continuation. |
-| RCLE | `2026-09-12-rcle-joint-quota-phase-family-01` | `8aa3f7bd764ecf9bb7704ccab98c1bd990afd6c0` | `de03b11d82bfbd7e1bed120ae1f1d079130d69c86797f53b2dde858e731119d3` | Integrate; wake `/root/dm_a_mx_rcle_intake`; activate conditional B only if the exact offered family was selected. |
-| FOLR | `folr-entity-history-post-b01-discriminator-20260912` | `d6a29b287612f21fd5ddbb0cc19fbae4e8c1fb12` | `3d2f63f5beb9221e2206b24c491bb01130437185d6b6d499b27455513125fb74` | Integrate; wake `/root/dm_folr_post_b03` for direction intake; no Generic retry without an explicit decision. |
+| ACPS | `2026-09-12-acps-post-b02-investment-01` | `f63980ab1acdcf9fad0ec8b1ac9770c864a6b988` | `0e654363ff33c2dc8316f7cf4682bf5b30ee98662216ce63fb6e4c2d576443da` | Owning author DM performs complete Portfolio intake; Root integrates any required accepted mapping. |
+| ACVC | `2026-09-12-acvc-post-cluster-use-convergence-01` | `d9a1426af03c42bdcbb8e4f84413f94493a58ebf` | `4deb7f4c27dafdcd6634b898722aa3e2e667e4334335fad72bfa368095f78816` | Original ACVC DM performs direction intake and conforming continuation. |
+| RCLE | `2026-09-12-rcle-joint-quota-phase-family-01` | `8aa3f7bd764ecf9bb7704ccab98c1bd990afd6c0` | `de03b11d82bfbd7e1bed120ae1f1d079130d69c86797f53b2dde858e731119d3` | Original RCLE DM checks selection; conditional B requires the exact offered family and conforming intake. |
+| FOLR | `folr-entity-history-post-b01-discriminator-20260912` | `d6a29b287612f21fd5ddbb0cc19fbae4e8c1fb12` | `3d2f63f5beb9221e2206b24c491bb01130437185d6b6d499b27455513125fb74` | Original FOLR DM performs direction intake; no Generic retry without an explicit decision. |
 
 MGTAP's earlier use response `71baa4a814fb8cb5d0cd2944deb0548b8fc644b2` and its DM intake
 `e4aa3566ff1f5b3163a168225dc0d6172e2a093e` are already integrated. It selected one fresh
@@ -71,3 +118,10 @@ historical cap or balance may be reused, and there is no current implementation 
 The last published current tables may lag these newly discovered archived responses. Use
 the shared Transport registry, immutable response commits and subsequent DM intakes to reconcile this inventory; then
 replace the table rows with the resulting current facts rather than retaining stale prose.
+
+## Remaining maintenance
+
+Migration test scratch remains under `temp/tests/dm-native-transport-20260913-*` after the cleanup
+command was rejected by execution policy. It is not scientific evidence or active research work.
+The creating migration task owns cleanup; do not turn it into a Root research-loop obligation or
+remove another invocation's files. No configuration rollback or permission escalation is implied.
