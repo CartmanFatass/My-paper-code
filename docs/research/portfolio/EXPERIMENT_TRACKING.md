@@ -5,11 +5,11 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; four remote targets reclaimed after verified retention | Portfolio DM actively prepares one bounded ACPS investment/design/lifecycle question; ACTIVE/HIGH, no local stop or empirical successor |
-| MGTAP | Portfolio funds one original Convergence COND512/intact-DENSE768-or-decline judgment, zero empirical spend | Original DM actively authors the exact question and owns Transport handoff plus full intake |
-| RCLE | Portfolio funds one original Convergence family/use selection; conforming selection conditionally funds one B | Original DM actively authors the exact question; zero implementation/experiment until selection |
-| ACVC | K complete and both frozen primaries accepted UP; ACTIVE/MEDIUM | Original DM actively prepares one proper direction-node next-object/use question; no K retry or empirical spend |
-| FOLR | E complete: Generic no final, BANK complete, no pair primary; ACTIVE/MEDIUM | Original DM actively prepares one proper direction-node finite same-information discriminator/use question; no Generic retry |
+| ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; Portfolio Q intake and zero-exposure preparation published; ACTIVE/HIGH | Wait for Transport redesign validation, then publish/bind the original Q once; no old-request resend or empirical successor |
+| MGTAP | COND512/intact-DENSE768 use judgment selected; Transport redesign b480ef406 integrated; live request click1 USER_MESSAGE_CONTENT_MISMATCH is effect-uncertain | Observe/archive same request only; no resend. Complete workflow repair and direct receipt before any new scientific spend |
+| RCLE | B08 complete and valid: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; terminal monitor facts returned | Complete scoped remote cleanup after retention; B08 allocation ends, RCLE remains ACTIVE/MEDIUM with no automatic successor |
+| ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Prepare next direction-node use/no-addition question; no new fit or K retry before proper decision |
+| FOLR | BANK −4.3261 retained; Generic no final, no paired primary; finite investment readiness published but unfunded; ACTIVE/MEDIUM | Keep material ready behind shared Portfolio writer; no Generic retry, model load or experiment |
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
 | FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 
