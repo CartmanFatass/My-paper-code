@@ -21,6 +21,17 @@ One-time Portfolio discovery intake/registration/control-plane application overh
 to ACPS support only, unknown unless directly measured. MGTAP T and CADC exclude that shared item;
 each direction still counts its own implementation-through-cleanup and later Root integration once.
 
+## Request audit — 2026-09-13
+
+当前没有开放的 proper-node 请求等待回执。FOLR 的 Portfolio F 已归档并完成 intake；Generic64
+正在由 DM 监控，技术验收后由同一 DM 直接启动已批准的 BANK128。ACVC、RCLE、MGTAP 的最近
+请求均已完成 intake，当前没有选定的新实验或未形成的决策。
+
+实验属于 DM object tier：只要 accepted card、Pro decision 或 finite grant 已固定对象、输入、
+比较器和 cap，DM 直接完成 admission、launch、collection 与 acceptance，不再向 Portfolio
+申请重复批准。Portfolio 只处理新的 investment、capacity、lifecycle、fusion/separation、
+registration 或 vacancy replacement；没有具体科学后果时不创建高频咨询。
+
 ## Current routing
 
 | Role | Task | Runtime |
