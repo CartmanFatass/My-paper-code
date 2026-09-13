@@ -27,12 +27,21 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
-The latest accepted scope is the 2026-09-12 OPEN of one observer-owned entity-
-history-before-aggregation B family against equally informed generic RETAIN on
-an explicitly lifecycle-identity-visible native Traffic Junction variant. This
-selects a concrete new question, not a direction RECAST or empirical result.
-The next need is a finite implementation-and-one-pair investment through the
-proper route; current scope does not itself fund implementation or an experiment.
+The observer-owned entity-history-before-aggregation B family remains OPEN on
+the lifecycle-identity-visible native Traffic Junction variant. Its allocated
+E batch produced one complete BANK policy (5000 train/4969 updates/128 final),
+with native mean return -4.32609375. The equally informed Generic arm timed out
+before final evaluation, so BANK-minus-Generic and its MEI rule are unavailable.
+This is an accepted own-arm observation, not evidence of a bank advantage.
+
+The legal entity-history-to-action path now has a complete trained native
+execution, while equally informed Generic sufficiency remains a surviving
+alternative. B04 generic competence retains its own host/information scope as
+contrary evidence. The next scientific discriminator remains an intact
+same-information finite-learning comparison; choosing/funding future work is a
+separate decision, and the completed E allocation authorizes no retry or successor.
+See [E0 result](FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md) and
+[final intake](FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md).
 
 The accepted post-B03 H still holds the exact tested LEARNED_EVENT/5000-training/
 128-final package, retaining event-aware RETAIN and no currently recommended

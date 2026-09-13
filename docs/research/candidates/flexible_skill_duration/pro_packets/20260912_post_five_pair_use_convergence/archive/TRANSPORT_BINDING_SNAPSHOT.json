@@ -1,0 +1,65 @@
+{
+  "observed_at": "2026-09-12T23:44:59.648372+00:00",
+  "source": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/registry.json",
+  "matching_current_records": [
+    {
+      "request_id": "2026-09-12-fsd-post-five-pair-use-convergence-01",
+      "conversation_binding_key": "em:flexible_skill_duration:convergence",
+      "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+      "provider_url": "https://chatgpt.com/c/6a9c2865-14a8-83e8-b556-e7f5836d9236",
+      "state": "ARCHIVED",
+      "source_thread_id": "01a096d5-4a4b-7543-8e06-66977d1ef754",
+      "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+      "operator_thread_id": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+      "send_click_count": 1,
+      "send_evidence": null,
+      "timestamps": {
+        "send_attempted_at": "2026-09-12T23:00:00Z",
+        "completed_at": "2026-09-12T23:09:00Z",
+        "captured_at": "2026-09-12T23:09:00Z",
+        "archived_at": "2026-09-12T23:38:51Z"
+      },
+      "archive": {
+        "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-12-fsd-post-five-pair-use-convergence-01\\PROMPT_BODY.md",
+        "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-12-fsd-post-five-pair-use-convergence-01\\GITHUB_RESPONSE.md",
+        "short_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-12-fsd-post-five-pair-use-convergence-01\\RESPONSE.md",
+        "short_receipt_sha256": "d4c0f2811567197184cdcc961188297fd69fa7a4d60bdab7fb360edfa1a4e7fe",
+        "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-12-fsd-post-five-pair-use-convergence-01\\TRANSPORT_FACTS.json",
+        "github_response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-12-fsd-post-five-pair-use-convergence-01\\GITHUB_RESPONSE.md",
+        "github_response_sha256": "f8ab4d5cd4b942fbbb8bba2b6876f877a7edfbc86b96596dc5f8913d60dd2a60",
+        "github_commit": "812ad330e012d757cf34686bd416cf1a2b4894a2",
+        "response_sha256": "f8ab4d5cd4b942fbbb8bba2b6876f877a7edfbc86b96596dc5f8913d60dd2a60"
+      },
+      "return_receipt": {
+        "required": true,
+        "source_thread_id": "01a096d5-4a4b-7543-8e06-66977d1ef754",
+        "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+        "destination_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+        "status": "SENT",
+        "attempt_count": 1,
+        "message_key": "2026-09-12-fsd-post-five-pair-use-convergence-01|flexible_skill_duration|6a9c2865-14a8-83e8-b556-e7f5836d9236|f8ab4d5cd4b942fbbb8bba2b6876f877a7edfbc86b96596dc5f8913d60dd2a60",
+        "retry_allowed": false,
+        "routing_mode": "PARENT_SESSION",
+        "delivery_mode": "bounded_single_attempt",
+        "return_control_after_attempt": true,
+        "archive_paths": {
+          "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-12-fsd-post-five-pair-use-convergence-01\\PROMPT_BODY.md",
+          "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-12-fsd-post-five-pair-use-convergence-01\\GITHUB_RESPONSE.md",
+          "short_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-12-fsd-post-five-pair-use-convergence-01\\RESPONSE.md",
+          "short_receipt_sha256": "d4c0f2811567197184cdcc961188297fd69fa7a4d60bdab7fb360edfa1a4e7fe",
+          "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-12-fsd-post-five-pair-use-convergence-01\\TRANSPORT_FACTS.json",
+          "github_response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-12-fsd-post-five-pair-use-convergence-01\\GITHUB_RESPONSE.md",
+          "github_response_sha256": "f8ab4d5cd4b942fbbb8bba2b6876f877a7edfbc86b96596dc5f8913d60dd2a60",
+          "github_commit": "812ad330e012d757cf34686bd416cf1a2b4894a2",
+          "response_sha256": "f8ab4d5cd4b942fbbb8bba2b6876f877a7edfbc86b96596dc5f8913d60dd2a60"
+        },
+        "response_sha256": "f8ab4d5cd4b942fbbb8bba2b6876f877a7edfbc86b96596dc5f8913d60dd2a60",
+        "staged_at": "2026-09-12T23:38:51Z",
+        "fallback_enabled": false,
+        "delivery_status": "accepted_by_codex_app",
+        "updated_at": "2026-09-12T23:39:07Z",
+        "sent_at": "2026-09-12T23:39:07Z"
+      }
+    }
+  ]
+}

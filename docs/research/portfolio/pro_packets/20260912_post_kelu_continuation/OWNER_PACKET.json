@@ -1,0 +1,90 @@
+{
+  "question": "下一干净 Portfolio 轮如何分别处理 ACPS、CADC、MGTAP、FSD 和 RCLE 的当前投入、排序及明确生命周期？",
+  "changes_if_approved": [
+    {
+      "target": "ACPS 当前投入",
+      "from": "B01 完整 ADVERSE，无新拨款",
+      "to": "如 Pro 选定则一组新 fresh pair，明确新 whole-native/support/complete 上限"
+    },
+    {
+      "target": "CADC 当前生命周期/投入",
+      "from": "ACTIVE/HIGH，无具体下一 B",
+      "to": "建议 Pro 明确可逆 PARK；一次有限设计或 ACTIVE 不追加是真实替代"
+    },
+    {
+      "target": "MGTAP 下一用途",
+      "from": "T 完成且 DENSE 默认，A/U/P 未获选择",
+      "to": "建议一次原 Convergence 用途/设计及 intake，完整费用 UNKNOWN，零实验"
+    },
+    {
+      "target": "FSD LONG 投入",
+      "from": "新候选未获拨款，U 已购买",
+      "to": "建议本轮不追加 LONG；已完成 U 选择有限可选 I1280/D0默认，没有新 wider-budget 用途或LONG授权。"
+    },
+    {
+      "target": "RCLE 新 joint-quota-phase 提案",
+      "from": "L设计完成，ACTIVE/MEDIUM；未选家族、Pro或实验",
+      "to": "建议一次原节点家族/用途选择，并由Portfolio明确是否条件投入唯一B的新900native+900support=1800完整offer；选择-only/不追加/PARK为替代。"
+    }
+  ],
+  "if_refused": "Portfolio可逐项选择列明替代；现有K/E工作与已经形成的U用途不被撤销，L不重新购买。无默认停向、旧余额或作者替代科学决定。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md",
+      "quote": "The author modestly favors one replication because this new physically heterogeneous host has only one learning instance and no invalidating measurement defect.",
+      "why": "ACPS 的实际收益不确定性可能改变是否继续使用该包，但不保证第二对会改变行动。"
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md",
+      "quote": "Recommend A: one bounded original-node use/design decision and complete intake; zero numerical exposure.",
+      "why": "可直接选择一个普通学习投入的真实替代用途，未购买其 B。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md",
+      "quote": "Original DM explicitly recommends no unchanged fresh same-comparison pair now.",
+      "why": "CADC 当前没有使原样复测改变已训练 RR 行动的具体用途；生命周期仍仅由 Portfolio 选择。"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_JOINT_QUOTA_PHASE_B_PROPOSAL_20260912.md",
+      "quote": "The competent greedy joint null prevents crediting learning for whatever benefit the hand-specified allocation structure supplies.",
+      "why": "唯一提案能区分结构分配与学到的服务增益，并保留已达到的nearest，当前仍只是待选择提案。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_INTAKE_20260912.md",
+      "quote": "ADVERSE",
+      "why": "ACPS 首对 −.0368081418 J，25/32 不利；再买一对可能仍不改变 SHARED 的当前用途。"
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md",
+      "quote": "The strongest alternative is no addition this round.",
+      "why": "三次 mean-COND 混合且 TOP 强负向，咨询也可能没有足够边际价值。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md",
+      "quote": "Finite training may still be insufficient for a useful different coordination policy; one pair does not disprove communication learning.",
+      "why": "CADC PARK 是可逆相对投入判断，不能写成整个方向不可学习。"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_JOINT_QUOTA_PHASE_B_PROPOSAL_20260912.md",
+      "quote": "Lower claim shortfall is not a sufficient reason to expect lower physical unmet demand.",
+      "why": "F=0只是代数对齐，可能增加实际行程；N²×16时钟的计算及全部新支持费用未知。"
+    }
+  ],
+  "uncertainty": [
+    "ACPS 与 CADC 的全部未来成本和新上限未知，历史 native 耗时只作规模参照。",
+    "MGTAP 一次咨询完整 documentary/provider/agent 成本 UNKNOWN，不认为它免费或廉价。",
+    "FSD U已完整选择已测五轮下有限可选I1280，未提出新更长预算用途；LONG仍可能有不同价值，但不自动续款。",
+    "Registry 仍 27=17 ACTIVE+10 PARKED；若 Pro 明确 PARK 才改变对应行，准备快照不是永久运行数。",
+    "RCLE one-fit候选含1179648native ticks，greedy服务/图峰值/native与选择咨询全成本未知；900/900/1800为新offer不是预测。"
+  ],
+  "cost": {
+    "compute": "作者新科学exposure=0。ACPS未来278528ticks/2048Adam无cap；MGTAP一次咨询成本UNKNOWN、无B；FSD LONG旧提案3900未获拨款；RCLE拟onefit1179648ticks/256Adam，新900native+900support=1800未分配，所需原节点选择费用须明确包含或另行透明分配。",
+    "owner_time": "无需逐项批准；可异步覆盖。",
+    "reversibility": "costly",
+    "waits_on_this": "仅这些尚未分配的选择；现有K/E及已经完成的L/U不等待或重复。"
+  },
+  "verdict_text": "保留四项建议：ACPS新独立配对并由Portfolio新定完整cap，CADC不复测且提请明确可逆PARK，MGTAP仅一次用途判断，FSD本轮不新增LONG。加入RCLE一次原节点家族/用途选择，并让Portfolio明确是否条件资助其唯一joint-quota-phase B及全部完整成本；保留选择-only/不追加/PARK。均为作者提案，零本地投资或生命周期应用。",
+  "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md"
+}
