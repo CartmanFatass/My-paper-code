@@ -1,0 +1,91 @@
+{
+  "id": "20260912-folr-002",
+  "created": "2026-09-12T13:27:14-07:00",
+  "direction": "vap_folr_core",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "FOLR continues with an entity-history question",
+  "context": "H applies only to the tested scalar-gate recipe. Root directed a distinct bounded next FOLR question. The proposed entity-history bank explicitly gives both arms the same public lifetime facts and compares against learned generic RETAIN; old generic competence is the strongest opposition.",
+  "options": [
+    {
+      "key": "E",
+      "label": "Select bounded entity-history question",
+      "consequence": "Convergence selects a new direction question; no experiment or implementation allocated"
+    },
+    {
+      "key": "Q",
+      "label": "Narrow or select one better grounded question",
+      "consequence": "Preserve H and generic RETAIN while selecting a concrete alternative; no direction stop or experiment"
+    }
+  ],
+  "recommended": "E",
+  "auto_applied": "E",
+  "dm_reason": "Separate ownership of observed partner histories tests a different native action path from whole-state scalar attenuation, but generic sufficiency remains plausible.",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_CONTINUITY_QUESTION_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L78",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "FOLR 保留旧包 H 后，下一问题是否应研究按实体生命周期保存局部历史，而不是继续调整整块记忆的保留比例？",
+    "changes_if_approved": [
+      {
+        "target": "FOLR 下一科学问题",
+        "from": "H 只暂停已测 learned-event 包；新问题尚未选定",
+        "to": "由原 Convergence 节点选定一个范围明确的新问题；建议比较实体历史记忆与同信息通用 RETAIN"
+      }
+    ],
+    "if_refused": "保持 RETAIN、H 和全部 B01–B03 证据，原节点收窄或选择一个更有决策价值的新问题；不据此停止 FOLR，也不启动实验。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_CONTINUITY_QUESTION_20260912.md",
+        "quote": "The inspected current actor embeds entity features/previous actions, aggregates them with local attention, then advances one 64-coordinate GRU for each acting trip.",
+        "why": "把各伙伴的历史分别保存，是与旧整块门控不同的记忆组织问题，可能影响遮挡与换人之后的原生动作。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_INTAKE_20260904.md",
+        "quote": "The comparison shows learned use of surviving information, and little measured incremental mask benefit at this budget.",
+        "why": "通用学习器在旧简化宿主已能忽略过期输入；新结构不保证有用，20 步交通宿主也可能缺少额外历史价值。"
+      }
+    ],
+    "uncertainty": [
+      "当前演员没有完整伙伴生命周期公开接口；新变体必须让两臂得到同样的信息，不能暗用内部掩码。",
+      "新问题的 tuned headroom、收益、实现时间和完整运行成本均未知。",
+      "一对真实训练只能支持有界探索，不能证明稳定优势或某个记忆组件的因果作用。"
+    ],
+    "cost": {
+      "compute": "当前只有一次问题与完整 intake；零新增实验/模型/测试。未来两臂一对仅是测量建议，尚无拨款，完整成本未知。",
+      "owner_time": "无需等待回复；仅供异步纠正",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing: original Convergence chooses the direction question; owner response is not a gate"
+    },
+    "verdict_text": "DM recommends the entity-history question as an unexecuted close call. Preserve H and RETAIN; ask the original Convergence node to select one bounded next question, with no new empirical allocation or direction stop.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_CONTINUITY_QUESTION_20260912.md"
+  },
+  "starred": true,
+  "approval_correction": "The earlier E proposal is now superseded by the complete PRO_FINAL narrow OPEN, including GRU16, direct current-feature path and common public metadata; no implementation/experiment or Portfolio disposition is applied. Current intake audit rows are docs/research/portfolio/audit/2026-09-12.md lines 67, 68, 69; the earlier initial line78 pointer remains a documented author typo.",
+  "execution_history": [
+    {
+      "at": "2026-09-12T20:27:48+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_CONTINUITY_QUESTION_20260912.md",
+      "record": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "Owner directed FOLR continuity; original Convergence will select the next bounded question. No direction choice or empirical allocation is applied.",
+      "correction": "The preparation audit row is docs/research/portfolio/audit/2026-09-12.md#L66; the initial #L78 field was an author transcription error. E remains unexecuted advice, not an owner decision."
+    },
+    {
+      "at": "2026-09-12T21:27:31+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/INTAKE.md",
+      "state": "applied",
+      "summary": "Accepted OPEN of the observer-owned entity-history family; both arms receive the same public lifecycle interface. H and old evidence remain, no RECAST or direction stop. Root receives the finite implementation-and-one-pair investment need; complete cost unknown and no current empirical grant.",
+      "correction": "The earlier E proposal is now superseded by the complete PRO_FINAL narrow OPEN, including GRU16, direct current-feature path and common public metadata; no implementation/experiment or Portfolio disposition is applied. Current intake audit rows are docs/research/portfolio/audit/2026-09-12.md lines 67, 68, 69; the earlier initial line78 pointer remains a documented author typo."
+    }
+  ]
+}

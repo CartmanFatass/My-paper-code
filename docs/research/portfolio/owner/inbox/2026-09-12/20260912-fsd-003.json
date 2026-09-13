@@ -1,0 +1,105 @@
+{
+  "id": "20260912-fsd-003",
+  "created": "2026-09-12T13:58:33-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FSD N已选：第五组原样 I1280/D0",
+  "context": "一组新训练历史观察原生差值是否超过.01J；时间抽象/终止结构，唯一新对，保留全部结果。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "launch as carded"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "do not launch"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "revise before launch"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "新 N投入已接受，纯绑定检查与独立复核无实质问题。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_SCIENCE_CARD_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L73",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "记录并执行已选 N：第五组原样 I1280/D0 学习对，不请求重新批准。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_SCIENCE_CARD_20260912.md",
+        "from": "第四组已完成，N/S准备就绪",
+        "to": "N已选，训练 771303、评价 781303；唯一原样新学习对"
+      }
+    ],
+    "if_refused": "下一干净边界应用实际 owner 覆盖，保留已发生的证据和费用。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/INTAKE.md",
+        "quote": "PRO_FINAL / OWNER_DELEGATED: N=yes, new documentary R=yes, S=no; H not selected.",
+        "why": "原作者已完整检查新投入，Root已指派。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_SCIENCE_CARD_20260912.md",
+        "quote": "Four separate\npackage points are +.0569774672, +.2062859041, −.0124304306, +.0125548057.",
+        "why": "混合信号支持有限观察可选方案，不自动说明稳定增益。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_SCIENCE_CARD_20260912.md",
+        "quote": "latest13 adverse worlds,\ntraining deficits and about2.20× D0 wall",
+        "why": "最新幅度小且不一致，再一对也可能不改变具体使用建议。"
+      }
+    ],
+    "uncertainty": [
+      "一对训练是独立单位，32局误差只条件于已学策略。",
+      "真实工作量与未测支持耗时未知，旧费用不抵新拨款。"
+    ],
+    "cost": {
+      "compute": "D0≤900秒，I≤1800，原生≤2700，支持≤300，完整≤3000；唯一≤45秒源码投递包含在支持内。",
+      "owner_time": "异步审阅，不逐步等批准。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended,2026-09-03 instruction): (a).",
+    "source": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_SCIENCE_CARD_20260912.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T21:17:18+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_EXECUTION_20260912.md",
+      "state": "applied",
+      "summary": "D0正常完成并验收，完整458.80秒、五轮真实更新及32局终评；原始证据已推送保全。预选I已唯一提交，Monitor新目标接管中；尚无配对结果，不追加实验。"
+    },
+    {
+      "at": "2026-09-12T21:44:47+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "第五组有效完成：I−D0 +.07380J，26正6负，超过.01；两臂完整1446.79秒，I约2.15倍D0耗时。混合历史和训练中段劣势保留，不宣称稳定优势。原始证据已保全，等待Root接收后执行四处清理；本次拨款结束不停止FSD，不自动追加第六组。"
+    },
+    {
+      "at": "2026-09-12T21:55:11+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "Root已保全两份归档及22份原始文件；本组四处终态目录完成清理，磁盘与worktree注册均不存在，两项supervisor返回not_found。共享检出与其他163项注册保留。本组有效增益+.07380及限制不变，N收尾完成，FSD继续。"
+    }
+  ]
+}

@@ -1,15 +1,21 @@
 # Research execution responsibilities
 
-## Current Windows control endpoints
+OWNER_DIRECT 2026-09-12: temporarily suspend new CM and Implementer subagent assignments,
+including equivalent code-implementation roles under generic names. DM owns direction science,
+implementation, self-checks, repair and technical acceptance in the same task. Retain the
+independent code Reviewer and high-risk review under ENGINEERING_SCOPE_SPEC section 7.3;
+DM resolves findings and accepts the work. Root owns shared control-plane implementation and
+acceptance with independent review where required. Accepted CM/Implementer work preserves its
+artifacts and original return route through closeout, without successors.
+Each DM owns its native experiment monitor and native Agentify Transport. Scientific budgets and Pro authority are unchanged.
 
-OWNER_DIRECT2026-09-12: use Windows C:/Projects/HMASD and PowerShell. Root task is
-01a095b7-850f-7401-ad4e-5e4320d285f1. Current independent endpoints are Transport
-01a095ca-7b4a-7940-8acf-fca1b52c784d, Monitor01a095d0-21ee-7c02-9d97-3681b5678200,
-and Relay01a095ca-8676-74e1-b78c-ea459d41e905. Their live .codex/hmasd-*.toml files
-are the executable routing source. New work and successor recovery receipts use these
-endpoints; historical fixed request metadata is not a live routing instruction.
-Keep current tracking free of obsolete snapshots and endpoints. Consult Git for history.
-No browser Send may overlap a retired executor: reconcile its stopped/acceptance receipt first.
+
+## Current control
+
+Use Windows C:/Projects/HMASD and PowerShell. Resolve native task IDs from runtime results and
+Agentify/provider settings from .codex/hmasd-transport.toml. Current routing overrides historical
+operational literals in fixed packets; scientific input bindings and evidence remain unchanged.
+No browser Send may overlap another executor; reconcile actual acceptance before recovery.
 
 The current Root task is the execution coordinator; DM owns direction
 science and the former CM engineering responsibilities. Portfolio is the persistent Pro node,
@@ -23,11 +29,16 @@ wait, failed admission or closeout affects only that direction. Root integrates 
 work continuously; a prior `no successor` closes only its named allocation. Cross-direction choices
 still use Portfolio authority while independent authorized work continues.
 
-OWNER_DIRECT 2026-09-11: once Root has dispatched all currently ready independent work, it ends
-the turn if only long-running DM, accepted legacy CM, Monitor or Transport dependencies remain.
-The independent relay wakes Root for actionable native completion; Monitor and Transport retain
-their direct Root receipt routes. Root does not keep the dispatch turn open with native/app waits,
-timers or status polling. Each wake re-enters the normal ready-work pass.
+OWNER_DIRECT 2026-09-12: Root cannot turn an ended allocation into a direction pause, stop or
+working-set release. The direction DM continues with a bounded next object or sends the applicable
+direction/capacity task; only the resulting Portfolio decision or a direct owner instruction stops
+that direction. The Portfolio drafter must refresh affected old-direction facts from the current DM
+records before recommending continuation, replacement or new-direction registration.
+
+Root dispatches ready work and waits natively while DM work remains. DM waits natively for its
+monitor or Reviewer after exhausting independent work. Use configured long waits; unchanged
+timeouts only continue waiting. Process the changed direction without a global reread or sibling
+barrier. SIBLING_COMMUNICATION.md owns event semantics. DM also waits natively for its Transport; Pro archives return directly to DM. Owner pause/stop remains controlling.
 
 ## Maintained sources
 
@@ -55,15 +66,15 @@ Historical decisions, snapshots and benchmark materials remain evidence, not com
 
 | Owner | Deliverable |
 | --- | --- |
-| Root | Ready-work dispatch within existing decisions; dependencies and working-set replacement; main integration, current tracking, exact Pro dispatch/receipt forwarding and operational application |
-| Direction DM | Card/predictions, object decisions, direct implementation or optional Implementer assignment, review disposition, published inputs, bounded execution, monitor handover, collection, technical acceptance, scientific intake, cleanup and continuation |
+| Root | Brief changed-event log; necessary main integration and cross-direction dependencies; native waiting; Portfolio vacancy request/intake and new DM creation when formal direction pause/closure leaves fewer than four slots |
+| Direction DM | Card/predictions, object decisions, direct implementation, code self-review and repair, published inputs, bounded execution, monitor handover, collection, technical acceptance, scientific intake, cleanup and continuation |
 | Designated Portfolio DM | Decision materials grounded in Portfolio principles/specs/experience, complete Pro-response conformance and intake, execution mapping or exact conflict returned to Pro |
-| Implementer | One owned code/check deliverable to DM; no scientific selection, Git/index work or result-bearing launch |
-| Reviewer | Independent high-risk engineering evidence, with findings returned to the engineering owner |
+| Implementer | Temporarily suspended for new work; preserve accepted closeout evidence and return routes |
+| Reviewer | Independent high-risk code review under section 7.3; DM resolves findings and accepts |
 | Scout / Verifier / Critic | One bounded factual, runtime or scientific-criticism question directly for the parent; no new child chain |
 | Operator, when useful | Exact launch/handover/collection or cleanup batch from accepted inputs; DM retains acceptance |
-| Independent Monitor | Observe adopted accepted handles; send adoption/terminal facts to Root, without collecting full results or interpreting science |
-| Independent Transport | Execute exact authored Pro requests, observe and archive, return one factual receipt to the bound Root parent |
+| DM-owned native Monitor | Luna/low; observe adopted handles and send adoption/terminal facts directly to DM; no scientific collection or interpretation |
+| DM-owned native Transport | Luna/high Agentify Pro Send/observation/archive; factual receipt directly to DM |
 | Portfolio Pro | Final decision on the bound cross-direction question within current owner/specification constraints |
 
 DM may use optional specialists when a complete independent task saves work or enables useful
@@ -72,34 +83,32 @@ retype DM launch commands, repeat its tests or redo its scientific intake. Neith
 completion nor a Monitor exit-zero receipt is technical/scientific acceptance.
 
 For shared control-plane engineering without a direction owner, Root owns the edit/check/review
-and acceptance batch, optionally using an Implementer and high-risk Reviewer directly. A shared
+and acceptance batch directly, including repairs and independent high-risk Reviewer review. A shared
 scientific-code change is assigned to one existing relevant DM, with affected DMs supplying their
 constraints. Only the assigning owner resolves out-of-scope decisions; specialists return precise
 gaps rather than inventing another authority layer.
 
 ## Portfolio material and response route
 
-OWNER_DIRECT 2026-09-11: resolve recurring Pro transport stalls. Transport retains
-ownership through same-request recovery, complete-response archival and actual
-parent delivery. Root dispatches a concrete recovery action when a recoverable
-blocker returns; it does not leave a failed click as an indefinite direction park.
-Uncertain acceptance permits reconciliation only. Proven nonacceptance permits
-an exact-payload retry after interaction repair under the Transport skill, with
-all prior attempts preserved. A complete verified Git response is routed to its
-DM while receipt-label corrections proceed independently. No new Pro question,
-scientific budget, provider binding or scheduler follows from this repair.
+The working-set target is four direction DM chains. Ordinary direction-related Portfolio replies
+remain with their author DM. A formal direction pause/closure that leaves fewer than four occupied
+slots triggers Root to author a bounded replacement question, dispatch through its own reusable
+Luna/high native Agentify Transport, read/check the complete response and create the Pro-selected
+new DM. Pro chooses science and investment. Root records pending requests/reserved slots and
+recounts before dispatch, so repeated returns cannot duplicate a request or DM. Existing overlap
+above four drains without interrupting live work. Object/allocation completion, Pro waits and
+temporary blockers do not release a direction slot. Use hmasd-portfolio-task for both author routes.
 
-Root chooses a relevant recently active DM with the current evidence, and names the question,
-scope and original sources. One DM authors the complete Portfolio packet; other DMs contribute
-facts where needed. The author uses `hmasd-portfolio-task` and Prompt Author, preserving exact
-references and contrary evidence. If unavailable, Root explicitly transfers the remaining work
-to another relevant DM; Root does not take over scientific drafting.
+DM retains recovery of its request through its native Transport child. Uncertain Send permits
+observation/reconciliation only; proven nonacceptance permits the exact authorized Send after
+repair. Complete immutable responses go straight to DM intake while metadata corrections proceed.
 
-For a new request the actual author is source, the current Root task is parent and the existing
-Transport is operator. `caller_role=portfolio` selects the Pro node, not a native Root identity.
-Root checks published artifact/route facts and dispatches the exact handoff. It returns substantive
-omissions to the author instead of rewriting the packet. Transport receipts still go only to Root;
-Root forwards the complete response to the designated DM using `followup_task`.
+For ordinary direction-related Portfolio work, a relevant DM authors the full
+packet, creates/reuses its Transport child, publishes exact inputs and dispatches natively. DM is
+both source and receipt parent, including Portfolio. The child uses Agentify and returns the full
+archive directly. Root neither rewrites science nor forwards provider receipts. DM checks
+conformance and returns the operational mapping for Root integration. Serialize the single
+Portfolio binding; a new author does not supersede accepted execution without reconciliation.
 
 New GitHub-delivery prompts include an in-turn downloadable Markdown fallback. If Pro cannot
 expose or complete its scoped GitHub writes after checking actual state, it finishes the review
@@ -107,7 +116,7 @@ and attaches the full `RESPONSE.md` in chat. Transport downloads it, binds it to
 count and SHA-256, stores `<archive_id>__02_RESPONSE.md`, and retains the same bytes as repository
 sidecar `archive/CHAT_FALLBACK_RESPONSE.md`. The GitHub `archive/RESPONSE.md` remains reserved for
 actual connector delivery.
-Root forwards that artifact to the designated DM for the same conformance intake. This fallback
+Transport returns that artifact directly to its author parent for conformance intake. This fallback
 does not assert a GitHub commit/comment and does not authorize another Send.
 
 The DM reads the full response and checks the bound question, current owner/spec constraints,
@@ -130,15 +139,11 @@ admission adjacent to each invocation, and no extra invocation from a repair or 
 projection uses the runner's complete per-arm law. Relevant post-learner publication coverage
 follows the empirical/runtime specs and the actual dependent claim, not blanket historical replay.
 
-After acceptance, DM/Operator directly adds the handle to the shared Monitor, using the live
-primary-control configuration, not frozen or stale direction copies. The `MONITOR_ADD` payload
-must require `get_goal` and continuation of the matching unfinished goal or `create_goal` without
-a token budget. Keep adoption pending until the Monitor reports both direct handle state and the
-actual unfinished goal state; app delivery alone proves neither. Do not start a second status-polling loop. Root forwards terminal facts to
-the original collection owner, then DM completes technical acceptance and separate scientific
-intake. Root also receives `MONITOR_GOAL_COMPLETE` after the final terminal notice is delivered and
-the active set is empty. Uncertain process or message acceptance is reconciled on the same identity, never retried
-as a fresh invocation merely because an observation was lost.
+After acceptance, DM/Operator assigns the exact handle to that DM's reusable native Luna/low
+monitor. Follow EXPERIMENT_MONITOR.md: dispatch is distinct from direct adoption, terminal events
+return to DM, and DM retains collection and scientific intake. Root does not forward experiment
+status or duplicate observation. Keep handle/native-owner mappings in existing execution records.
+Uncertain acceptance is reconciled on the same identity and never retried as a fresh invocation.
 
 ## Current records, integration and cleanup
 
@@ -148,6 +153,9 @@ for overlapping work. Independent paths can proceed concurrently; every authoriz
 immediately. Do not hold an accepted commit for a sibling result or batch merge. A role migration
 does not create a new branch or a new scientific object.
 
+Root normally writes only a brief changed-event log with evidence and any action. It updates
+shared records when disposition, accepted integration or a dependency actually changes, without
+mirroring DM receipt traffic or issuing approval for routine continuation.
 Root maintains `docs/research/portfolio/PORTFOLIO.md` as the current disposition/readiness snapshot
 and `EXPERIMENT_TRACKING.md` as accepted handles, owners, terminal facts and pending work. Scientific
 statements cite DM intake/Pro authority; Root integration is not another verdict. Batch useful

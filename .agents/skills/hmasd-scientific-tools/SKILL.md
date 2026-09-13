@@ -10,10 +10,11 @@ calculate and measure facts instead of repeatedly deriving them in prose. Select
 only the mode needed now; this is not a launch checklist or new review layer.
 
 - **Scientific reading:** for DM/Claude hub mechanism/card/comparator/estimand choices,
-  intake or scientific Pro questions, the designated DM's Portfolio material preparation and Pro-response conformance, and a
+  intake or scientific Pro questions, Portfolio material preparation and Pro-response conformance by its author (DM, or Root for vacancy replacement), and a
   critic's reviewed claim, use [scientific-reading.md](references/scientific-reading.md).
-  Implementer/reviewer use it only for affected reward, information, termination, duration or
-  inference semantics. Start from the current assignment and relevant spec sections.
+  During implementation and review, DM and independent Reviewer use this mode for affected reward, information,
+  termination, duration or inference semantics; do not create an Implementer task.
+  Start from the current assignment and relevant spec sections.
   Formatting, Git, receipts and accepted technical collection do not trigger this mode.
 - **DM/Root literature:** for a concrete mechanism, comparator, unexpected-result or
   related-work question, start with the two local libraries using
@@ -55,7 +56,8 @@ do not upgrade the live research interpreter. Frozen experiments keep their cont
 New tools do not authorize new arms, altered reward/information or changed dtypes.
 
 Keep compact tool-produced tables/timings and relevant source snippets in the normal
-intake/engineering record. DM/Pro judge scientific implications within their respective decision scopes; reviewers name
+intake/engineering record. DM/Pro judge scientific implications within their respective decision scopes; Root checks its
+vacancy response against scope/specifications without locally selecting science; reviewers name
 concrete risks to actual measurements. Do not add generic power, normality, p-value,
 exactness or all-seeds-positive prerequisites. One seed remains a local observation.
 

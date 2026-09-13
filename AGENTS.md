@@ -14,51 +14,59 @@ Directory conventions live beside the code in one `AGENTS.md` per area (`experim
 
 ## 1. Operating model
 
+OWNER_DIRECT 2026-09-12: temporarily suspend new CM and Implementer subagent assignments,
+including equivalent code-implementation roles under generic names. DM owns direction science,
+implementation, self-checks, repair and technical acceptance in the same task. Retain the
+independent code Reviewer and high-risk review under ENGINEERING_SCOPE_SPEC section 7.3;
+DM resolves findings and accepts the work. Root owns shared control-plane implementation and
+acceptance with independent review where required. Accepted CM/Implementer work preserves its
+artifacts and original return route through closeout, without successors. Other specialists,
+Scientific budgets/Pro authority are unchanged. DM owns native Agentify Transport. Experiment observation
+uses DM-owned native monitors under EXPERIMENT_MONITOR.md.
+
+
 The current owner request, together with system and developer instructions, is the authority for
 repository work. Repository documents describe methods and record evidence; they do not create a
 separate identity, permission, approval, or blocking system.
 
 **Root** is the primary execution coordinator. It owns working-set readiness, dependencies,
 sequencing and replacement within authorized priorities, delegation, main integration and current
-tracking. It does not select Portfolio science or prepare scientific decision materials.
+tracking. Its ordinary work is a brief changed-event log, necessary integration and native waiting.
+When a direction formally pauses/closes and fewer than four direction slots are occupied, Root
+authors and intakes a Portfolio replacement request through its own native Transport, then creates
+the DM selected by the complete conforming Pro decision. Root does not select the new science itself.
 **Portfolio** is the persistent `portfolio:cross_direction` Pro decision node, not a native
-agent. A relevant, recently active **Direction Manager (DM)** designated by Root authors its
-materials and checks its complete response against the question, owner instructions and specs.
-Root routes the request/response and implements the conforming decision with the affected DMs.
+agent. Direction-related Portfolio materials and full-response intake belong to a relevant
+**Direction Manager (DM)**. Root handles only its vacancy-replacement question; ordinary
+Portfolio responses remain with their author DM. Each author checks the bound question, owner
+instructions and specs before applying the complete Pro decision.
+The author DM dispatches and intakes through its native Transport; Root implements the
+conforming decision with the affected DMs.
 
 OWNER_DIRECT 2026-09-10: DM absorbs the former CM's engineering responsibilities and implements
-directly by default. Optional implementation and independent high-risk review stay directly
-under DM; specialists do not create another ordinary child chain. Codex model defaults and
+directly. Under the temporary 2026-09-12 owner instruction, DM performs implementation and self-checks;
+CM and Implementer receive no new work; independent Reviewer remains available. Other specialists do not create another ordinary child chain. Codex model defaults and
 restart behavior are in Appendix A. Migration authority and historical boundaries:
 `docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md`.
 
-OWNER_DIRECT 2026-09-08: the independent Luna/low completion relay wakes Root for actionable
-native handoffs only, under `docs/project/SIBLING_COMMUNICATION.md` and
-`.codex/hmasd-relay.toml`. Ordinary native traffic and nested parent acceptance stay native.
-Cross-session messages omit model and reasoning-effort overrides; configured models persist.
+Root and DM use native long waits under SIBLING_COMMUNICATION.md. Each DM owns one reusable
+Luna/low native experiment monitor; adoption and terminal facts return directly to that DM.
+Root receives actionable direction handoffs natively. DM also owns native Agentify Transport and receives Pro archives directly.
 
-OWNER_DIRECT 2026-09-09: recover unstable Pro delivery under the existing research
-request; do not leave research blocked solely on failed-effect sends. Reconcile actual
-acceptance/delivery before retrying, observe already accepted generations, and preserve
-the original prompt, failed-attempt facts and binding. Root personally completed the
-FOLR/SCDMP recovery and confirmed normal sending. The owner's subsequent instruction
-returns all later Pro Send, observation, reconciliation, archival and receipts to the
-dedicated Transport session. Root dispatches and accepts its returns. Recovery changes
-neither scientific authority, evidence meaning nor experiment budgets.
-
-The independent **Transport** session (Luna/high) owns Pro browser Send, observation,
-reconciliation, archival and parent receipts. Root receives receipts and forwards them to the
-designated DM for scientific/specification checking and intake, including Portfolio responses.
-Transport never selects science. Root uses `hmasd-loop-dispatch` for execution; the designated DM
-uses `hmasd-portfolio-task` for cross-direction materials and Pro intake. Procedure ownership is
-indexed in `docs/project/ROOT_OPERATIONS.md`.
+Each DM owns one reusable native Luna/high Agentify Transport child for exact Pro Send,
+observation, reconciliation, archive and direct native receipts. DM authors and publishes the
+request, dispatches to its child, waits natively and checks the complete response. Root uses the
+same parent/child route for vacancy replacement only and integrates conforming decisions; it does not forward routine transport
+receipts. Recover uncertain effects on the same request before another Send. Pro authority and
+frozen input/provider bindings are unchanged. The Transport skill owns current Agentify APIs;
+ROOT_OPERATIONS.md and SIBLING_COMMUNICATION.md own native collaboration.
 OWNER_DIRECT 2026-09-11: Transport Send readiness is independent of which Codex task opened or
 owns a browser surface. Browser/task scope is not a permission blocker. Transport determines
 readiness from the actual target ChatGPT session login state, exact conversation/request binding,
 provider state and one-Send reconciliation, and may use any accessible logged-in browser surface.
 Each DM owns its card, predictions, implementation, technical acceptance, result collection,
-scientific intake and authorized continuation. Scout, Implementer, Reviewer, Critic, Verifier and
-Operator are optional working methods, not additional authorities. Legacy CM tasks retain only
+scientific intake and authorized continuation. Scout, scientific Critic, Verifier and Operator
+remain optional working methods, not additional authorities. Implementer is suspended; independent Reviewer remains available. Legacy CM tasks retain only
 their already accepted assignments and return paths through closeout; no new CM assignment starts.
 
 Scientific meaning lives in `docs/research/candidates/<direction>/DIRECTION.md` and its cited
@@ -79,10 +87,9 @@ Root owns the main checkout and index. Commit ready explicit paths and push imme
 coordinate only actual overlapping writers or index operations. Scientific decisions, budgets
 and existing unattended delegation remain binding.
 
-DM implements its bounded engineering objective directly by default. Implementer children are
-optional for independent parallel work or substantial context isolation; scientific/semantic risk
-sets review needs, not a mandatory implementation handoff. Preserve independent review for the
-high-risk changes defined in ENGINEERING_SCOPE_SPEC §7. Models follow Appendix A.
+DM implements, reviews and repairs its bounded engineering objective directly. Scientific/semantic
+risk sets review coverage under ENGINEERING_SCOPE_SPEC §7, including independent Reviewer
+review for high-risk changes. No new Implementer handoff starts during the temporary suspension. Models follow Appendix A.
 
 Existing authorization and unattended object-tier delegation persist until the owner changes them.
 An owner question or status request alone is not a takeover of each pending object decision.
@@ -122,7 +129,7 @@ still current. Relevant owner overrides and frozen scientific requirements remai
 Every code task, including direct implementation, uses the concise L0 specification in
 `docs/project/ENGINEERING_SCOPE_SPEC.md` §7.1. Add L1–L3 details only for the task's actual risks;
 reuse accessible card sections rather than copying history or producing another contract.
-That specification also maintains delegation, independent review and engineering acceptance.
+That specification also maintains delegation, independent review and DM engineering acceptance.
 `ROOT_OPERATIONS.md` assigns the accountable owner and Git/integration responsibilities.
 A child's completion is evidence for that owner, not acceptance or scientific authority.
 
@@ -146,7 +153,7 @@ where it is recorded, and its provenance label.
 
 A complete archived Pro response that decides the posed question at its declared evidence class
 and within current owner instructions and applicable specifications is final for its node.
-Completeness alone does not authorize a silent specification exception. The designated DM checks this in
+Completeness alone does not authorize a silent specification exception. The author parent (DM, or Root for vacancy replacement) checks this in
 the existing intake: cite any concrete conflict, preserve the response, and return that conflict
 to the same node for correction before executing the affected requirement. Execute independent
 conforming work meanwhile; do not invent a replacement decision or add an approval layer.
@@ -171,10 +178,11 @@ card's own result branches. Each direction has a recast budget of one: a second 
 lowest sequencing priority among ACTIVE directions and the DM flags a digest row `second-recast`;
 the owner may PARK it asynchronously. Sequencing never becomes a lifecycle disposition: every
 `ACTIVE` direction remains admitted to the research queue, while Root plans a target working
-set of five concurrently advancing top-level DM chains (owner clarification 2026-09-04). A queued
+set of four concurrently advancing top-level DM chains. A queued
 `ACTIVE` direction is not `PARKED`; entering or leaving the working set changes no lifecycle,
-priority, scientific meaning, or evidence polarity. At a free slot, Root selects and dispatches the ready candidate within current authority. Root drains temporary
-overlap without interrupting live work. Five is an execution-parallelism target, not a direction-count or fusion target. Directions
+priority, scientific meaning, or evidence polarity. After a formal direction pause/closure leaves fewer than four occupied slots, Root asks Portfolio
+for the next new direction and dispatches its DM from the complete conforming decision. Root drains temporary
+overlap without interrupting live work. Four is an execution-parallelism target, not a direction-count or fusion target. Directions
 share assets without fusing; fusion is proposed on demand only when their question, comparator,
 estimand, and next object are materially the same. Nothing in this paragraph waits for the owner,
 none of it is a §11.4 launch condition, and ladders already open continue.
@@ -183,21 +191,23 @@ none of it is a §11.4 launch condition, and ladders already open continue.
 
 A connector, evidence, or transport status alone does not establish whether a Pro decision was
 formed. Reconcile the bound request and full response first; a verified complete response goes
-to its designated DM for intake even if a chat receipt or local status reports a blocker.
+to its author parent for intake even if a chat receipt or local status reports a blocker.
 If no decision was formed, the blocker never transfers final authority to a local model:
 
 Transport retains recovery of the same request, prompt and binding. Proven ineffective clicks
 permit a concrete repaired attempt under the Transport skill; uncertain acceptance stops Send,
 not reconciliation or observation. Preserve prior attempts and blocker receipts, and clear
-previous-round observations when binding a successor. Root advances independent work and routes
+previous-round observations when binding a successor. Independent work continues while the author parent intakes
 the eventual complete response; a blocker return does not close the recovery assignment.
 
 - **Object tier**: the DM takes the recommended option as a provisional decision labelled
   `PRO_BLOCKED / LOCAL_PROVISIONAL`, restricted to reversible actions, queues the round for retry,
   and lists the item first in the audit ledger. The archived Pro decision, when it arrives,
   supersedes the provisional one at the next clean boundary.
-- **Direction and Portfolio tiers**: the direction parks at a clean boundary (everything
-  committed, runs detached, state recoverable from the repository) and Root advances independent authorized work. Nothing is decided provisionally at these tiers.
+- **Direction and Portfolio tiers**: only dependent work waits at a recoverable clean boundary
+  (committed inputs, detached runs, recorded state); independent authorized work continues.
+  This wait is not a lifecycle PARK/closure and does not free a direction slot. Nothing is decided
+  provisionally at these tiers.
 
 ## 4. Unattended operation
 
@@ -259,7 +269,8 @@ When the owner is absent the loop keeps running under a standing delegation (own
 8. **Portfolio Pro finality (OWNER_DIRECT 2026-09-10).** A complete archived response from
    `portfolio:cross_direction` decides the bound investment, priority, lifecycle, capacity,
    fusion/separation or registration question within current owner instructions and specifications.
-   The designated DM checks scientific/specification conformance; Root implements and records the
+   The author DM checks scientific/specification conformance; for its vacancy request Root checks
+   the complete decision against the bound scope and specifications. Root implements and records the
    decision without per-item owner ratification. Preserve asynchronous owner overrides and actual
    application states using the existing owner console. `PRO_FINAL / OWNER_DELEGATED` traces the
    Pro decision under this standing delegation; `ROOT_INTEGRATED` describes publication, not a
@@ -283,26 +294,33 @@ that named allocation. Root must not pause, stop, remove or mark the containing 
 as released on that basis. The DM continues the direction with its next bounded object or authors
 the focused direction/capacity task. A direction stops advancing only after that DM sends the task
 and Portfolio returns the stopping, parking or replacement decision, unless the owner directly
-orders the disposition. Before drafting a capacity or new-direction question, the designated
-Portfolio DM refreshes every affected old direction from its current DM handoff, `DIRECTION.md`
+orders the disposition. Before drafting a capacity or new-direction question, its author
+(DM for direction questions; Root for vacancy replacement) refreshes every affected old direction from its current DM handoff, `DIRECTION.md`
 and latest intake; Root status shorthand and ended allocations are not lifecycle evidence.
 
 Root applies the `hmasd-loop-dispatch` skill's stable next-action trigger at goal-turn entry,
-native return, Transport receipt and before blocking waits. Check owner pause/stop instructions
+actionable native return and before the first wait after useful work. An
+unchanged timeout resumes waiting without a new dispatch pass. Check owner pause/stop instructions
 first. A workflow edit or status question does not resume paused research.
 
-OWNER_DIRECT 2026-09-11: after Root has dispatched every currently ready independent action,
-it ends its turn when the remaining work is long-running DM, legacy CM, Monitor or Transport work.
-Root does not hold the turn open with native waits, app-task waits, timers or status polling. The
-independent completion relay wakes Root for actionable native DM/legacy-CM returns; Monitor and
-Transport use their existing direct Root receipt routes. A wake starts the stable next-action pass
-again. This turn boundary changes no ownership, acceptance requirement or experiment observation.
+After dispatching ready independent work, Root waits natively while DM work remains. DM does
+independent work first and otherwise waits natively for monitor/Reviewer events. Use the configured
+1500000 ms default/minimum; unchanged timeouts only continue waiting, without status broadcasts,
+replanning or full-record rereads. The owner accepts periodic context reuse and brief continuation
+as the cache-preservation premises. Process individual events without a sibling barrier. End only
+when no native work remains (including DM-owned Transport), or owner pause/stop requires it.
+Concrete blockers and idle unfinished assignments require reconciliation, not indefinite waiting.
 
-While research is authorized to advance, Root plans and maintains five advancing direction
-chains until five formally enter UAV validation, traced to their direction decisions and UAV
-cards. Count active native work, accepted running experiments and accepted Pro generation once
-per direction. Completed returns, unresolved waits and queued intentions do not count. Root,
-Transport, specialists and detached processes do not each consume another direction slot.
+While research is authorized to advance, the working-set target is four parallel direction DM
+chains. Keep any existing overlap intact and let it drain at formal direction dispositions; do not
+add a fifth direction. A running experiment or Pro wait remains part of its owning direction.
+An idle, blocked or ended object is a recovery/continuation issue for that DM, not a vacancy.
+Only a formal direction pause/closure (or explicit owner disposition) releases its slot. If fewer
+than four slots remain, Root submits one bounded Portfolio replacement request, recording pending
+request/slot identities so repeated events cannot duplicate the request or create duplicate DMs.
+Recount occupied and reserved slots before dispatch. Root, Transport, monitors, Reviewers and
+detached processes do not consume separate direction slots. Report actual advancing work separately
+from occupied slots; a queued intention alone is not active execution.
 
 The loop skill owns per-direction event ordering and rolling dispatch. ROOT_OPERATIONS.md maps complete
 deliverables to Root, DM and optional Operator; EXPERIMENT_MONITOR.md owns observation
@@ -311,7 +329,7 @@ assigned direction through scientific/technical acceptance. Temporary overlap dr
 boundaries of the affected directions; there is no global clean boundary. Scheduling alone changes
 no lifecycle, scientific meaning, priority or budget.
 
-There is no fixed limit on concurrent implementers or result-bearing runs within the direction
+There is no fixed limit on result-bearing runs within the direction
 working set. Root plans from actual runtime capacity and dependencies; DM apply the fresh
 per-invocation resource check in section 7. Failed admission returns to the same DM for bounded
 technical resolution while Root advances independent work. Runtime thread limits are implementation
@@ -349,18 +367,14 @@ or launch gates, and never override a stricter original cap.
 
 Resume model: commit and push before every launch; launch every result-bearing run detached from
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
-configured `agent-task` supervisor; OWNER_DIRECT 2026-09-09 assigns accepted-experiment observation
-to one reusable independent Luna/low task with a goal covering its multiple adopted experiments.
-DM/Operator directly notifies that monitor after launch acceptance. Every `MONITOR_ADD` assignment
-explicitly requires the monitor to read `get_goal`, continue the matching unfinished goal or call
-`create_goal` without a token budget, and keep the accepted handle in that goal until its terminal
-notice reaches Root. The monitor reports the actual goal state in `MONITOR_ADOPTED`; message delivery
-alone is not goal establishment or adoption. DM stops routine polling only after that confirmation
-and retains collection and technical acceptance. When the last handle and pending notice leave the
-active set, the monitor sends `MONITOR_GOAL_COMPLETE` to Root before completing the goal. Record
-dispatch and actual adoption separately; failed delivery or missing goal confirmation returns for
-same-handle recovery.
-Independent Transport observes Pro requests
+configured `agent-task` supervisor. DM creates/reuses its native Luna/low monitor and supplies
+its canonical name to Operator. Assign accepted handles with followup_task; confirm direct
+MONITOR_ADOPTED before stopping routine polling. DM receives terminal facts directly, collects,
+checks and interprets, retaining technical/scientific acceptance. EXPERIMENT_MONITOR.md owns the
+compact handle record, bounded observation, terminal delivery and empty-set reuse. Do not create
+independent monitor goals, Root receipt forwarding or duplicate observers. Transfer existing
+observation only after same-handle reconciliation and confirmed replacement adoption.
+DM-owned native Agentify Transport observes Pro requests
 (`docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).
 
@@ -375,14 +389,14 @@ Several sessions commit to the primary target concurrently. Rules for all of the
   creator resumes its own cleanup at the next boundary; Root does not become a routine
   garbage collector. Never remove another running invocation's scratch or scientific evidence.
 - OWNER_DIRECT 2026-09-07: reuse one designated authoring branch and local worktree per
-  research direction across DM and implementer assignments. Create it on demand only when
+  research direction across DM science, implementation and review. Create it on demand only when
   that direction has actual authoring work; inactive directions get no placeholder branch.
   Main and these needed direction branches are the ordinary maintained branches. A new task, object, stage or
   agent does not create a new branch. Name the existing checkout and owned paths in each handoff.
   At a clean boundary, bring required committed inputs into that checkout before dispatch,
   preserving existing work; record the resulting revision and any starting changes.
   Keep one editing owner through edit/check/commit for overlapping work; serialize shared index
-  operations and preserve unrelated work. Independent review remains independent. Root integrates
+  operations and preserve unrelated work. DM self-review is recorded as self-review; historical independent reviews retain their provenance. Root integrates
   named accepted commits, checking what is already integrated. Root maintains control-plane
   files on main in the existing checkout. Branch reuse never combines
   scientific objects, budgets, RNG state, outputs or frozen SHAs. Remote execution uses detached
@@ -531,21 +545,22 @@ appendix and completed historical tasks remain unchanged.
 
 
 - Native custom subagents are registered in `.codex/config.toml`: Direction Manager,
-  Implementer, Scout, Reviewer, Critic, Verifier and Operator. Root follows the Codex app model/effort selection; DM defaults to `gpt-6-astra/max`; Implementer to `gpt-5.6-sol/medium`;
-  Reviewer to `gpt-6-astra/high` with read-only access. Other specialist model settings
+  Scout, Reviewer, Critic, Verifier, Experiment Monitor, Transport and Operator. Root follows the Codex app model/effort selection; DM defaults
+  to `gpt-6-astra/max`. Implementer registration is temporarily removed; its
+  role file remains for recovery of accepted work. Reviewer remains Astra/high with read-only access. Other specialist model settings
   are unchanged. CM, Routine Implementer and the dedicated Terra/high workflow-outsource
   path are retired. Configurations take effect after restart; Codex App provides native
   task/message lifecycle behavior. Do not add reload probes, delivery test services or timers.
-- The current Root task in live configuration is the execution coordinator and sole receipt parent.
-  Transport uses Luna/high; the shared experiment monitor and completion Relay retain
-  Luna/low. Read their existing `.codex/hmasd-*.toml` endpoints; never replace or rebind
-  accepted work merely because the role structure changed.
-- The relevant recently active DM selected by Root authors both Portfolio materials and
-  their scientific/specification intake using `hmasd-portfolio-task`. `caller_role=portfolio`
+- Root coordinates native DM chains. Each DM owns a reusable Luna/high Agentify Transport
+  and receives its native Pro receipts; .codex/hmasd-transport.toml contains no global endpoint. Each DM creates/reuses a native Luna/low Experiment Monitor
+  with minimal assignment context; resolve canonical names from runtime results. Experiment
+  adoption/terminal facts return directly to DM. No shared Monitor or completion Relay endpoint.
+- Direction-related Portfolio materials and scientific/specification intake stay with the author
+  DM using `hmasd-portfolio-task`; Root authors/intakes only vacancy replacement to maintain four
+  direction chains through its own reusable native Luna/high Transport. `caller_role=portfolio`
   describes the decision node, not the author's native role. The same DM still uses
-  `caller_role=em` for direction nodes. Source is the actual author, parent is Root and
-  operator is the existing Transport. Root dispatches the committed handoff and forwards
-  each full response to its designated DM before operational application.
+  `caller_role=em` for direction nodes. Source and receipt parent are the author (DM, or Root for vacancy replacement); operator is its native Transport child. DM
+  dispatches and checks the full response, then returns the operational mapping to Root.
   All app messages omit model/effort overrides. Existing source/parent/operator IDs, request
   bytes, provider bindings, accepted generations and receipt destinations stay unchanged.
   Keep legacy native return routes until their accepted work closes; do not duplicate Sends.
@@ -559,11 +574,11 @@ appendix and completed historical tasks remain unchanged.
   `agent-task`, exact-sha worktrees, the shared project virtual environment, and request-specific
   output roots. A node is execution capacity, never a DM authority, Transport endpoint, or
   provider-conversation binding.
-- Task names: `<agent-alias>_<model><effort>_<direction>_<task>` with aliases `dm`, `cm`, and the
+- Task names: `<agent-alias>_<model><effort>_<direction>_<task>` with alias `dm` and the
   shortest unambiguous alias for specialists; model codes `a/l/t/s` (Astra/Luna/Terra/Sol), effort codes
   `l/m/h/xh/mx`; lowercase letters, digits, and underscores only.
 - Root owns engineering acceptance for shared control-plane work without a direction DM;
-  optional Implementer and high-risk Reviewer report directly to Root for that bounded task.
+  Root implements that bounded task directly and retains independent high-risk Reviewer review.
 - Run Git push with the current runtime's supported permissions. With Full Access and
   escalation disabled, push directly and omit `sandbox_permissions`. When a sandbox is active
   and the runtime supports escalation, use its supported outside-sandbox route: the sandboxed
@@ -576,7 +591,7 @@ appendix and completed historical tasks remain unchanged.
   repo-specific working rules; it is tracked.
 - Deliverables of a Claude session (reviews, plans, experiment designs and results outside the
   research authority tree) live under `docs/Claude_docs/<category>/`, indexed by its README.
-- Implementer subagents reuse the direction checkout under section 6; do not request automatic
+- DM reuses the direction checkout under section 6; do not request automatic
   per-agent worktree/branch isolation. The reviewer session is Root for integration. Commits end with the `Co-Authored-By` and `Claude-Session` trailers the runtime
   supplies.
 - Claude's current control-plane roles, capacity and Pro transport are defined in `CLAUDE.md`
