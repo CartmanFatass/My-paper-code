@@ -3,7 +3,7 @@
   "direction": "actuator_conditioned_partial_sharing",
   "owner": "/root/dm_acps_start",
   "source_sha": "dd91ea3d81970485a8d562db47e30c70ed063524",
-  "status": "retain: companion currently running; complete paired archive/intake and Root retention acceptance required before assigned removal",
+  "status": "both handles terminal and technically accepted; complete paired raw/supervisor archives verified; pending Root integration/retention acceptance before assigned removal",
   "remote_targets": [
     {
       "path": "/home/wu/hmasd-worktrees/acps-b02-9102-20260912",
@@ -32,5 +32,10 @@
     "all unique scientific evidence",
     "all unrelated paths and live tasks",
     "the previously policy-rejected local B01 test scratch; no new cleanup attempt"
-  ]
+  ],
+  "retention": {
+    "raw": "RETENTION.json",
+    "supervisor": "SUPERVISOR_RETENTION.json",
+    "root_confirmation": "pending"
+  }
 }
