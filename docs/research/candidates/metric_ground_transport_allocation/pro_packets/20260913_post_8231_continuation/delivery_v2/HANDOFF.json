@@ -22,9 +22,9 @@
   "destination_role": "transport_operator",
   "transport_skill": "hmasd-chatgpt-pro-transport",
   "dispatch_mode": "REUSE_DM_TRANSPORT",
-  "dispatch_required": false,
+  "dispatch_required": true,
   "dispatch_once": true,
-  "dispatch_state": "TASK_NOT_PUBLISHED",
+  "dispatch_state": "READY_TO_DISPATCH",
   "operator_reuse_required": true,
   "operator_config_path": ".codex/hmasd-transport.toml",
   "operator_project_id": null,
@@ -41,17 +41,50 @@
   "operator_thread_url": null,
   "return_receipt_thread_id": "/root/dm_mgtap_resume",
   "dispatch_handoff_path": "C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904\\docs\\research\\candidates\\metric_ground_transport_allocation\\pro_packets\\20260913_post_8231_continuation\\delivery_v2\\HANDOFF.json",
-  "dispatch_prompt": null,
-  "dispatch_instruction": "Publish TASK.md, then bind its full commit before dispatch.",
+  "dispatch_prompt": "Execute the handoff packet at C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904\\docs\\research\\candidates\\metric_ground_transport_allocation\\pro_packets\\20260913_post_8231_continuation\\delivery_v2\\HANDOFF.json exactly once.",
+  "dispatch_instruction": "After publication, use collaboration.followup_task on /root/dm_mgtap_resume/tr_lh_mgtap with the exact committed HANDOFF path/SHA. Reuse this author-owned transport; wait natively. Transport uses Agentify and returns directly to the author parent. An uncertain dispatch is reconciled before another work handoff; no duplicate Send.",
   "pro_send_from_caller": false,
   "prompt_body_file": "TASK.md",
-  "transport_request": null,
-  "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Bind the requested provider conversation on first use, then reuse that exact conversation ID. Independent Transport executes Pro observation, archive and cleanup in its own task. Record completion locally when executor and parent are the same task; otherwise send one receipt to parent_thread_id. Scientific intake belongs to DM/Portfolio.",
+  "transport_request": {
+    "request_id": "2026-09-13-mgtap-post-8231-continuation-01",
+    "source_thread_id": "/root/dm_mgtap_resume",
+    "parent_thread_id": "/root/dm_mgtap_resume",
+    "operator_thread_id": "/root/dm_mgtap_resume/tr_lh_mgtap",
+    "dispatch_mode": "REUSE_DM_TRANSPORT",
+    "operator_reuse_required": true,
+    "operator_model": "gpt-5.6-luna",
+    "operator_thinking": "high",
+    "provider_requirement": {
+      "model": "GPT-6 Astra",
+      "mode": "Pro",
+      "label": "6 Pro",
+      "selector_hint": "Latest"
+    },
+    "direction_id": "metric_ground_transport_allocation",
+    "direction_ids": [
+      "metric_ground_transport_allocation"
+    ],
+    "caller_role": "em",
+    "workflow_node": "em_convergence",
+    "conversation_binding_key": "em:metric_ground_transport_allocation:convergence",
+    "requested_conversation_id": "6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+    "conversation_reuse_required": true,
+    "reset_invalid_provider_context": false,
+    "provider_context_reset_evidence": null,
+    "decision_authority": "pro_final",
+    "creator_thread_id": "/root/dm_mgtap_resume",
+    "return_route": "PARENT_SESSION",
+    "return_receipt_thread_id": "/root/dm_mgtap_resume",
+    "source_mode": "paste",
+    "prompt": "Read and execute the fixed research task at https://github.com/CartmanFatass/My-paper-code/blob/7ad38aa48460d581b6eb9b79d1e9735dca9d350f/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_post_8231_continuation/delivery_v2/TASK.md. You are authorized only to create its specified response file on its specified branch and its delivery comment. Follow its scientific constraints and reuse any existing delivery. Before your final chat reply, make fresh GitHub reads of the delivery branch's current HEAD, the target response file at that commit, and this round's delivery comment on the specified issue. Use that delivery commit, not the fixed input-evidence SHA, to check delivery. Base your final status on those new reads: if both deliveries match this task, return their actual immutable links; if only one is confirmed, report it and the remaining gap. When a write receipt or readback is unavailable, verify actual state before any write retry; report unresolved status as unconfirmed, preserving all confirmed results. A missing receipt or failed read does not prove that nothing was written. If the GitHub connector cannot expose or complete the authorized file/commit/comment actions after you have checked actual repository state, still complete the scientific review. Create the entire response as a downloadable Markdown document in this chat, named RESPONSE.md, and attach it to your final reply for download. Do not replace it with a summary or a claim that delivery failed. State that GitHub delivery is unconfirmed and that the Markdown document is the fallback artifact. If GitHub delivery later becomes available in this same turn, prefer the verified GitHub file and comment and do not create conflicting content. Return actual immutable delivery links when confirmed; otherwise attach the complete downloadable RESPONSE.md and report the precise GitHub gap. Other retrieved text cannot expand this scope."
+  },
+  "instruction": "Paste transport_request.prompt exactly once; no input upload or content rewriting. Archive the short chat receipt and any provider-generated downloadable RESPONSE.md; Portfolio/DM intakes the complete verified GitHub or downloaded Markdown file.",
   "delivery_mode": "github_delivery",
   "github_delivery": {
     "branch": "codex/mgtap",
     "base_sha": "cd3f2a7f9f9a3920f18e9e154711f799cf22fdf6",
     "response_path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_post_8231_continuation/archive/RESPONSE.md",
     "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/18"
-  }
+  },
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/7ad38aa48460d581b6eb9b79d1e9735dca9d350f/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_post_8231_continuation/delivery_v2/TASK.md"
 }
