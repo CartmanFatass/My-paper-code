@@ -139,5 +139,40 @@
     "next_trigger": "actual named same-law fresh-policy default-use event or concrete owner/proper Portfolio instruction",
     "audit_row": "docs/research/portfolio/audit/2026-09-13.md#L10",
     "direction_status": "ACTIVE/MEDIUM/recasts 2; native event wait"
+  },
+  "idle_wait_audit_v1": {
+    "utc": "2026-09-13T20:27:20.972847+00:00",
+    "current_primary_commit": "7357fdb884e07a939c0b7d92534139b1f0a1bc83",
+    "current_author_commit_before_audit": "e5457ae9aaefe1dd8aebebfe6c65cf81d860f77a",
+    "new_policy_or_receiving_object_or_default_event": null,
+    "open_proper_node_requests": 0,
+    "accepted_experiment_or_monitor_handles": 0,
+    "pending_external_event_producers": 0,
+    "completed_native_children": [
+      "tr_lh_acvc_next_use",
+      "rv_acvc_pairing"
+    ],
+    "current_only_active_assignment": "this bounded administrative audit",
+    "original_request_state": "ARCHIVED / RECEIPT / COMPLETE/SENT",
+    "original_request_send_count": 1,
+    "routine_experiment_waiting_for_portfolio_approval": false,
+    "owner_reviews": [],
+    "unproductive_wait_source": [
+      "ACTIVE slot and native assignment confused with advancing research",
+      "completed no-addition answer leaves no selected current object",
+      "repeated readiness inputs do not supply a receiver/default decision or event producer"
+    ],
+    "minimal_recommendation": "Replace the ACVC next-event sentence with explicit no pending external dependency and reuse of the accepted decision on unchanged inputs; original DM acts on an actual changed use/owner/proper-node input.",
+    "administrator_authority_v1": "Clarify existing DM execution/admission/collection/repair and permitted object-tier authority; retain proper-node control of substantive new science/use and new investment/lifecycle.",
+    "minimum_report_proposed": "One ordinary native paragraph: assignment/actual work state; evidence and real event producer or none; executed authority/limit; next action and owner. Reuse existing intake/audit.",
+    "proposal_application": "not applied as governance; documentary suggestion only",
+    "new_requests": 0,
+    "new_sends": 0,
+    "new_experiments_or_k_retries": 0,
+    "new_runtime_tests": 0,
+    "audit_row": "docs/research/portfolio/audit/2026-09-13.md#L11",
+    "lifecycle": "ACTIVE",
+    "priority": "MEDIUM",
+    "recasts": 2
   }
 }
