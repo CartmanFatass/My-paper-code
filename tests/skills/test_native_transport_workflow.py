@@ -241,12 +241,12 @@ def test_full_archive_and_one_current_parent_receipt(record, tmp_path, outcome):
     receipt = n.stage_native_receipt(record, archive)
     assert receipt['destination'] == ROUTE['parent_thread_id']
     assert n.stage_native_receipt(record, archive) is receipt
-    n.finish_native_receipt(record, outcome)
+    n.finish_native_receipt(receipt, outcome)
     if outcome == 'REJECTED_BEFORE_DELIVERY':
-        n.finish_native_receipt(record, 'SENT')
+        n.finish_native_receipt(receipt, 'SENT')
     else:
         with pytest.raises(ValueError, match='already delivered or uncertain'):
-            n.finish_native_receipt(record, 'SENT')
+            n.finish_native_receipt(receipt, 'SENT')
     assert record['return_receipt'] == old
     path.write_bytes(b'different answer')
     with pytest.raises(ValueError, match='ARCHIVE_CONFLICT'):
@@ -265,3 +265,75 @@ def test_real_agentify_implementation_dry_run(tmp_path, preflight):
     assert report['sends'] == 2  # separate nonacceptance and uncertain-effect fixtures, never UI Send
     assert report['same_operation_after_repair'] and report['uncertain_observe_only']
     assert report['archive_exact'] and report['conflict_preserved']
+
+
+@pytest.mark.parametrize('boundary', ['CONFLICT', 'NO_CURRENT_WORK'])
+def test_nonarchive_boundary_returns_action_directly_without_claiming_completion(record, boundary):
+    record.update(state='SEND_UNCERTAIN', native_state='OBSERVE')
+    facts = dict(boundary=boundary, status='Direction remains ACTIVE; specific prerequisite unresolved',
+                 evidence='Exact operation receipt at evidence.json', next_action='Retain same-request observation ownership.')
+    receipt = n.stage_native_receipt(record, **facts)
+    assert receipt['archive'] is None and receipt['destination'] == ROUTE['parent_thread_id']
+    for text in (ROUTE['assignment'], facts['status'], facts['evidence'], facts['next_action']):
+        assert text in receipt['message']
+    assert record['state'] == 'SEND_UNCERTAIN' and record['native_state'] == 'OBSERVE'
+    n.finish_native_receipt(receipt, 'SENT')
+    assert n.stage_native_receipt(record, **facts) is receipt
+    later = n.stage_native_receipt(record, **{**facts, 'evidence': 'Changed concrete evidence at second.json'})
+    assert later is not receipt and record['native_receipt_history'] == [receipt]
+    assert n.stage_native_receipt(record, **facts)['status'] == 'SENT'
+
+
+def test_unchanged_wait_is_silent_and_missing_archive_allows_only_factual_return(record):
+    before = copy.deepcopy(record)
+    assert n.stage_native_receipt(record, boundary='UNCHANGED_WAIT') is None
+    assert record == before
+    with pytest.raises(ValueError, match='full archive'):
+        n.stage_native_receipt(record)
+    with pytest.raises(ValueError, match='status, evidence and next action'):
+        n.stage_native_receipt(record, boundary='CONFLICT', status='Specific conflict')
+
+
+def test_old_completed_native_receipt_is_not_duplicated(record, tmp_path):
+    path = tmp_path / 'answer.md'
+    path.write_bytes(b'full answer')
+    archive = n.verify_archive(path, n.digest(path.read_bytes()), path.stat().st_size)
+    record.update(state='ARCHIVED', user_message_id='user', assistant_message_id='assistant', response_sha256=archive['sha256'])
+    old = {'message_key': '|'.join((record['request_id'], archive['sha256'], ROUTE['parent_thread_id'])), 'status': 'SENT'}
+    record['native_receipt'] = old
+    assert n.stage_native_receipt(record, archive) is old
+
+
+def test_historical_delivery_outcome_updates_that_receipt_only(record):
+    facts = dict(boundary='CONFLICT', status='Concrete prerequisite', evidence='first.json', next_action='Recover same request')
+    first = n.stage_native_receipt(record, **facts)
+    n.finish_native_receipt(first, 'REJECTED_BEFORE_DELIVERY')
+    second = n.stage_native_receipt(record, **{**facts, 'evidence': 'second.json'})
+    returned_first = n.stage_native_receipt(record, **facts)
+    n.finish_native_receipt(returned_first, 'SENT')
+    assert record['native_receipt_history'][0]['status'] == 'SENT'
+    assert second['status'] == 'PENDING'
+    with pytest.raises(ValueError, match='already delivered'):
+        n.finish_native_receipt(returned_first, 'SENT')
+
+
+@pytest.mark.parametrize('legacy', [False, True])
+def test_complete_conflict_survives_intervening_nonarchive_boundary(record, tmp_path, legacy):
+    first_path = tmp_path / 'first.md'
+    first_path.write_bytes(b'first full answer')
+    first = n.verify_archive(first_path, n.digest(first_path.read_bytes()), first_path.stat().st_size)
+    record.update(state='ARCHIVED', user_message_id='user', assistant_message_id='assistant', response_sha256=first['sha256'])
+    complete = n.stage_native_receipt(record, first)
+    if legacy:
+        complete.pop('boundary')
+        complete['message_key'] = '|'.join((record['request_id'], first['sha256'], ROUTE['parent_thread_id']))
+    n.finish_native_receipt(complete, 'SENT')
+    n.stage_native_receipt(record, boundary='CONFLICT', status='Different candidate', evidence='conflict.json', next_action='Author reconciles candidates')
+    second_path = tmp_path / 'second.md'
+    second_path.write_bytes(b'second full answer')
+    second = n.verify_archive(second_path, n.digest(second_path.read_bytes()), second_path.stat().st_size)
+    record['response_sha256'] = second['sha256']
+    before = copy.deepcopy(record)
+    with pytest.raises(ValueError, match='identity conflict'):
+        n.stage_native_receipt(record, second)
+    assert record == before

@@ -87,3 +87,11 @@ READY_UNSENT --strict query--> SEND_ATTEMPTED
    delivery receipt may recover to the same parent. Native final closes this same assignment,
    not a second dispatch. No ACK is required. Close only owned non-protected tabs after the
    archive or exact recoverable conversation is secured. The parent performs full scientific intake.
+
+   At completion, a material conflict, or no-current-work while the direction remains ACTIVE,
+   send one direct native action message before ending: assignment, status, evidence/commit and
+   next step. `stage_native_receipt` supports COMPLETE, CONFLICT and NO_CURRENT_WORK; only COMPLETE
+   requires the full archive. UNCHANGED_WAIT stages nothing. Preserve earlier boundary receipts
+   when a later changed boundary occurs. Active generation is ongoing work, not a reason to end
+   as blocked. The author DM sends the same concise action update to Root at its own boundary;
+   ordinary unchanged waits remain silent. A missing archive never prevents reporting a real conflict.

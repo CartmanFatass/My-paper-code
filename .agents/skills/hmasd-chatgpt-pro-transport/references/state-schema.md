@@ -38,8 +38,13 @@ across successor requests, and never bind the same conversation to two scientifi
 
 After the full answer is source-bound and hash/size verified, `state=ARCHIVED` releases that
 request for a successor. The independent `native_receipt` preserves current-parent delivery:
-PENDING -> SENT, UNCERTAIN or REJECTED_BEFORE_DELIVERY. `stage_native_receipt` requires the full
-archive and paired provider IDs. `finish_native_receipt` records the tool outcome once. A new
+PENDING -> SENT, UNCERTAIN or REJECTED_BEFORE_DELIVERY. COMPLETE requires the full archive and
+paired provider IDs. CONFLICT and NO_CURRENT_WORK require assignment/status/evidence/next action,
+without claiming a completed archive. UNCHANGED_WAIT stages nothing. `native_receipt_history`
+preserves returns from earlier changed boundaries; identical boundaries reuse the same receipt.
+`finish_native_receipt(receipt, status)` records the tool outcome on the exact staged receipt
+object returned by `stage_native_receipt`, including a historical return. Completion conflicts
+are checked across all receipt history. A new
 request moves this record into request_history; timeout, pre-Send failure or missing receipt
 does not release the conversation. The legacy schema below is evidence compatibility, not a
 mandatory checklist, scheduler or current return route.

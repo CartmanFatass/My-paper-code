@@ -68,6 +68,12 @@ Verified nonacceptance permits same-request repair and continuation without a pa
 Transport sends one direct archive receipt and records its actual native delivery outcome; no
 ACK, Root forwarding or duplicate app-task wake follows. Its final closes that same assignment.
 Historical HANDOFF IDs stay immutable; an assigned native recovery route is recorded separately.
+At completion, material conflict or no-current-work while its direction remains ACTIVE, each
+bounded assignment sends one direct action message to its assigning parent before final:
+assignment, status, evidence/commit and next step. DM sends its actionable boundary to Root;
+Transport sends to DM. A factual conflict needs no completed archive. Active generation remains
+ongoing work and unchanged waits require no broadcasts. A later changed boundary preserves
+the prior return and sends its own update once; this is not an ACK or forwarding chain.
 
 ## Recoverable ownership
 

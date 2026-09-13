@@ -20,6 +20,9 @@ change an operation's immutable inputs or idempotency key to escape failure. Kee
 HANDOFF routes unchanged and record the actual native parent/operator separately on recovery.
 Do not repeat preflight, DOM/model checks, unchanged progress, receipt relays or ACK loops.
 The parent waits natively. Empty work completes; later requests reuse this child.
+Before final at completion, material conflict or no-current-work/ACTIVE, send one direct native
+action message: assignment, status, evidence/commit, next step. Missing full archive does not
+prevent a factual conflict return. Active generation is ongoing work; unchanged waits stay silent.
 Serialize each exact provider conversation, including the shared Portfolio node. Never use a
 protected/default tab for Send, change another writer's model, or overwrite immutable archives.
 Pause/stop instructions and frozen budgets persist; workflow migration does not authorize a Send.

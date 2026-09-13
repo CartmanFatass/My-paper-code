@@ -228,32 +228,61 @@ def verify_archive(path: Path, sha256: str, size_bytes: int) -> dict:
     return dict(path=str(path), sha256=sha256, size_bytes=size_bytes)
 
 
-def stage_native_receipt(record: dict, archive: dict) -> dict:
-    """One current-parent receipt; the legacy return_receipt remains provenance."""
-    verified = verify_archive(Path(archive['path']), archive['sha256'], archive['size_bytes'])
-    if (record.get('state') != 'ARCHIVED' or not record.get('user_message_id')
-            or not record.get('assistant_message_id') or record.get('response_sha256') != archive['sha256']):
-        raise ValueError('receipt requires the archived full answer and its paired provider identities')
+def stage_native_receipt(record: dict, archive: dict | None = None, *, boundary: str = 'COMPLETE',
+                         status: str = '', evidence: str = '', next_action: str = '') -> dict | None:
+    """One direct action message per changed boundary; unchanged waits produce none."""
+    if boundary == 'UNCHANGED_WAIT':
+        return None
+    if boundary not in {'COMPLETE', 'CONFLICT', 'NO_CURRENT_WORK'}:
+        raise ValueError('native return requires a concrete assignment boundary')
+    verified = None
+    if boundary == 'COMPLETE':
+        if archive is None:
+            raise ValueError('completion requires its full archive')
+        verified = verify_archive(Path(archive['path']), archive['sha256'], archive['size_bytes'])
+        if (record.get('state') != 'ARCHIVED' or not record.get('user_message_id')
+                or not record.get('assistant_message_id') or record.get('response_sha256') != archive['sha256']):
+            raise ValueError('receipt requires the archived full answer and its paired provider identities')
+        status = status or 'Complete full response archived'
+        evidence = evidence or f"{verified['path']} sha256={verified['sha256']} bytes={verified['size_bytes']}; paired user={record['user_message_id']} assistant={record['assistant_message_id']}"
+        next_action = next_action or 'Author reads the complete response and performs conformance intake.'
+    elif archive is not None:
+        raise ValueError('noncompletion return must not imply a completed archive')
+    if not all(isinstance(value, str) and value.strip() for value in (status, evidence, next_action)):
+        raise ValueError('native action message requires status, evidence and next action')
     route = execution_route(**dict(parent=record['execution_route']['parent_thread_id'],
                                   operator=record['execution_route']['operator_thread_id'],
                                   assignment=record['execution_route']['assignment']))
-    key = '|'.join((record['request_id'], archive['sha256'], route['parent_thread_id']))
+    identity = archive['sha256'] if verified else digest((status + '\n' + evidence + '\n' + next_action).encode('utf-8'))
+    key = '|'.join((record['request_id'], boundary, identity, route['parent_thread_id']))
+    legacy_key = '|'.join((record['request_id'], identity, route['parent_thread_id'])) if verified else None
     existing = record.get('native_receipt')
+    prior_receipts = ([existing] if existing else []) + record.get('native_receipt_history', [])
+    if boundary == 'COMPLETE' and any(prior.get('boundary', 'COMPLETE') == 'COMPLETE'
+            and prior.get('message_key') not in {key, legacy_key} for prior in prior_receipts):
+        raise ValueError('native receipt identity conflict')
+    for prior in prior_receipts:
+        if prior.get('message_key') == key or (legacy_key and prior.get('message_key') == legacy_key):
+            return prior
     if existing:
-        if existing['message_key'] != key:
-            raise ValueError('native receipt identity conflict')
-        return existing
+        record.setdefault('native_receipt_history', []).append(copy.deepcopy(existing))
+    message = (f"Assignment: {route['assignment']}. Status: {status}. "
+               f"Request: {record['request_id']}; binding: {record['conversation_binding_key']}. "
+               f"Evidence: {evidence}. Next: {next_action}")
     receipt = dict(message_key=key, destination=route['parent_thread_id'], status='PENDING',
-                   archive=verified, transport='collaboration.send_message')
+                   boundary=boundary, archive=verified, message=message, transport='collaboration.send_message')
     record['native_receipt'] = receipt
-    record['native_state'] = 'RECEIPT'
+    if boundary == 'COMPLETE':
+        record['native_state'] = 'RECEIPT'
     return receipt
 
 
-def finish_native_receipt(record: dict, status: str) -> None:
+def finish_native_receipt(receipt: dict, status: str) -> None:
+    """Update the exact staged receipt object, including a retained historical return."""
     if status not in {'SENT', 'UNCERTAIN', 'REJECTED_BEFORE_DELIVERY'}:
         raise ValueError('receipt requires its actual native tool outcome')
-    receipt = record['native_receipt']
+    if not receipt.get('message_key'):
+        raise ValueError('delivery outcome requires the exact staged receipt')
     if receipt['status'] not in {'PENDING', 'REJECTED_BEFORE_DELIVERY'}:
         raise ValueError('receipt already delivered or uncertain; reconcile without repeating it')
     receipt['status'] = status
