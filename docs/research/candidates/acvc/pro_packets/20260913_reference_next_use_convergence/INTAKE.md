@@ -1,0 +1,73 @@
+# ACVC retained-reference next-use Convergence — full intake
+
+**Accept the conforming final decision: unchanged qualified observed reference retention and no addition.** No receiving-use or empirical-result delta was supplied; no concrete new reuse artifact, documentary study, receiver search or empirical successor was selected. Complete this intake and preserve the existing use boundary. ACVC remains ACTIVE/MEDIUM, recasts: 2, at its existing lowest ACTIVE contention priority; this finite conclusion does not release its slot or change lifecycle, funding or ownership.
+
+## Full answer, binding and technical facts
+
+The complete [RESPONSE.md](archive/RESPONSE.md) is 65 lines and **12,325 immutable Git bytes**, SHA-256 `2811543c44166c5ca52fe56980c5c59dacde70dc2ee9ca0c4d861d28b83fce9a`, at commit `98208469a9fd922c3390c63e7eaf53680fc2122b`, Git blob `0528219db60db8fd16b877514bef5543ebf1de53`. The delivery's parent is the published HANDOFF commit `dd31c09278ba5386b4ea10ef346b5cc72ffcc73a`; its entire diff adds only the scoped response file. The immutable Git blob, native Transport archive and checkout copy matched exactly. The author fast-forwarded `C:/Projects/HMASD-worktrees/codex-acvc` on `codex/acvc`, preserving its independently prepared mapping edit.
+
+Request `2026-09-13-acvc-reference-next-use-convergence-01` used the original `em:acvc:convergence` conversation `6aa12e74-8e54-83e8-95f6-001681b456f7`. Fixed TASK SHA is `5ccfd1e67d71f5214c55ce2a575001e5af985837`; scientific question/FACTS input SHA is `3d0921ee071a2e21ea32250d9dac7b971547b17e`. Source/receipt parent is `/root/dm_acvc_resume`; executor is its direct native child `/root/dm_acvc_resume/tr_lh_acvc_next_use`. The current Root assignment authorized this single consultation after the earlier preparation-only assignment. No prior request was regenerated or resent.
+
+Transport records one Send click and natural provider completion, followed by verified GitHub delivery. Provider user/assistant message IDs were not observed; no operation object/file was persisted. Earlier target-menu and strict user-message mismatch facts remain in the original Transport record. The [delivery comment](https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5655462085) names the exact TASK SHA and response URL. It omits the full TASK URL, which is present in the verified response itself. The old helper therefore emitted `ARCHIVE_CONFLICT` and a direct native-final `CONFLICT/SENT` receipt. This was a format-dependent pairing gap, not conflicting response content or proof that no decision existed. The original comment, full answer and conflict facts remain unchanged. [TRANSPORT_PAIRING_REPAIR.md](TRANSPORT_PAIRING_REPAIR.md) separates the narrow same-request engineering repair and independent review from this scientific intake; no second Send or registry override follows.
+
+Pro reports all seventeen listed paths available at their specified versions: fourteen freshly read documentary/method paths, with identical pinned summary, execution facts and Binding source reads reused. The author checked every response path/SHA citation against the TASK manifest and relevant source facts. That verifies source correspondence, not the provider's internal retrieval history. [INTAKE_FACTS.json](INTAKE_FACTS.json) records identity, binding, source checks, exposure and actual application facts.
+
+The reviewed repair and dependent same-record reconciliation are complete at main commits `68bc2a9a6299af5ab14125e518f5261bcbfbabc6` and `2d88562607f32b6034e54f6daf7fd2c0050bf5ae`. Actual native completion is [ARCHIVED / COMPLETE/SENT](archive/NATIVE_ARCHIVE_COMPLETION.json), with original CONFLICT/SENT history and one Send retained. The source's `/30` clarification and this Transport repair are separately checked facts; neither changes scientific polarity or authorizes empirical continuation.
+
+## Decision rule and scientific/specification conformance
+
+The complete answer's final decision is:
+
+> Final decision: unchanged reference retention and no addition.
+
+Its present consequence is explicit:
+
+> Beyond completing this intake and preserving that boundary, no additional documentary study or reuse artifact remains to be commissioned.
+
+The frozen cluster reading is unchanged:
+
+> strictly >+0.01 J is UP; inclusive [−0.01,+0.01] is WITHIN, retaining its sign and without equivalence; strictly <−0.01 is DOWN.
+
+| Requirement checked | Result and limit |
+| --- | --- |
+| Current bound question | The response chooses the requested no-addition alternative on the stated absence of a receiving/default decision or new result. It does not manufacture a use, reopen the prior decision, or treat this commissioned consultation as new science. |
+| Empirical §§3–4, 5.2, 11.4 and 11.8–11.10 | The accepted one-fit B remains useful within its ceiling. Another fit could inform a fresh-policy decision, but no such decision is supplied here. This is the prior particular marginal-use reasoning, not a universal customer requirement, replication prohibition, significance gate, exact diagnostic or stronger-class prerequisite. |
+| Independent unit and comparison | One real fit with its C/F/own-dwell panels remains the learning unit; paired worlds describe conditional deployment variation. Both signed primaries retain their original separate .01 J readings and every adverse outcome. |
+| Population, mechanism and history | The result is cluster train-and-evaluate under fixed five-UAV/fifty-user law. It establishes neither fresh-policy default value, stable superiority, isolated retrace/history necessity, tuned headroom, zero-shot transfer nor formal UAV validation. Uniform C01 and both training-F DOWN observations remain separate. |
+| Direction versus Portfolio authority | Reference retention/no-addition is the bounded original-node answer. No lifecycle/priority/capacity/funding action is selected. The generic Convergence menu is constrained by the task; ACTIVE/MEDIUM/recasts 2 stays unchanged. No new recast is recorded. |
+| Work and engineering proportionality | No empirical grant, diagnostic, receiver search, source implementation or new artifact family is imposed. The future alternative's known intrinsic work and unknown support/caps remain explicit. The current repair affects receipt identity only; technical acceptance and scientific conformance are separate facts. |
+
+No concrete scientific/specification conflict was found. The statement that only this intake/preservation remains closes this named consultation; it neither revokes standing owner continuation nor PARKs the containing ACTIVE direction. A subsequent concrete receiving-use, owner instruction or proper Portfolio action can supply a new event. A timeout or empty work queue does not supply that event or justify another unchanged Send.
+
+## Bounded observation and mechanism
+
+The accepted counts remain one real C fit, 512 training episodes, 1,024 optimizer updates, one final checkpoint, three private loads/panels, 192 evaluations and 180,224 team ticks. This consultation creates none of that exposure anew.
+
+| Existing contrast | Mean J | Conditional SE J | Adverse worlds | Frozen reading |
+| --- | ---: | ---: | ---: | --- |
+| F−C | +0.12407302446321236 | 0.008490426540329714 | 1/64 | UP |
+| F−own-dwell | +0.07674096500501802 | 0.010170152134996446 | 8/64 | UP |
+
+F's increment over useful own-dwell is strongest support. Eight adverse F−dwell worlds, including −0.12128082288171904 J, are strongest direct contradiction to unrestricted use; F−C also has minimum −0.024574273874233443 J. Dwell itself gains descriptively +0.04733205945819434 J over C, and F/dwell intervention totals 6,623/4,546 belong to different private histories. Motion suppression, recurrence and teammate consequences remain coupled alternatives to isolated retrace attribution.
+
+The source clarification is exact: `Binding.observe` first computes `(position - previous_position) / 30`, then `np.clip(-displacement, -1, 1)`. The previous prose's “clipped negative previous realized displacement” is shorthand for this scaled action-space quantity. No algorithm or historical result changes. The path remains own retained-user loss with the 1–19-visible-row guard and an away proposal → private anchor/history → the UAV's correction action → actual motion, private recurrent and teammate feedback → native team return. A local loss can be a useful teammate handoff; source inspection is not evidence of increased saturation or a uniquely causal retrace effect.
+
+Scientific-reading mode reuses FOUNDATIONS §6 and the empirical topic's first three sections. The concrete assumption is one complete fit per independent learning unit; conditional paired-world spread does not estimate a training population, and an end-to-end package contrast does not isolate components. This preserves the current reference while explaining the possible value of a future fresh policy. No new mechanism/comparator/novelty claim or unresolved literature fact requires another library sweep.
+
+Uniform C01 retains separate means +0.095915968685/+0.065133768997 J under its prespecified iid-normal five-fit-panel model, whose neural-training calibration remains unestablished. Common-F deployment after training F rather than C retains the two separate DOWN observations −0.026096212471464608 and −0.05734219575429114 J. No pooling, sixth C01, old K/master21457/eval31457 rerun, training-F retry or ended-family reopening follows. Tuned same-information cluster headroom remains absent, not zero or a launch gate.
+
+## Cost, prediction and next discriminator
+
+The strongest rejected alternative remains one fresh unchanged cluster C fit with final C/F/own-dwell panels. Its possible benefit, inside-margin increment or adverse return could change an actual fresh-policy recommendation; no such receiving decision is supplied now. The concrete revisit is **an actual named same-law receiving use proposing F as the default for a newly trained cluster policy**, with the relevant host/information/action/budget match identified. This is a decision-value explanation and future separately selected/funded B candidate, not an investigation instruction or grant.
+
+Its intrinsic work remains one fit ×512×256 training ticks, 256×4 Adam calls and 3×64×256 evaluations: 180,224 team ticks, 1,024 updates and one checkpoint. No initial panel, search, diagnostic or validation arm is added. Necessary support is separate and counted once; future complete native/support cost and caps remain UNKNOWN/unallocated. Historical K's 165.33-second command, 166-second charge, 0.5314903259277344-GiB peak RSS and known 75.29171340009022-second support are observations only. Full support coverage remains incomplete without an observed breach, and old 600/600/1200 caps are not balances. The earlier retained local cleanup target remains outside this assignment.
+
+New scientific exposure is zero: no fits, scientific model/RNG instances, training/evaluation/native steps, optimizer calls, profiling or diagnostics. Parameter displacement is inapplicable. The separately assigned offline Transport fixture tests exercise documentary identity only and are accounted in the repair record, not as new scientific measurements. Provider/full documentary cost is UNKNOWN. Owner prediction is **not taken**; no empirical prediction is rescored and no new empirical-result brief is created. The existing [K Chinese brief](../../../../portfolio/owner/briefs/acvc/2026-09-12_ACVC_CLUSTER_DEPLOYMENT_B01.md) remains the valid-result brief. Current primary-control owner review query returned `[]`; prior second-recast/continue-low-priority instructions remain applied.
+
+## Decisions this intake produces
+
+1. **Direction selection:** (a) unchanged reference retention/no addition, or (b) one actual concrete documentary next use. The complete response recommends/selects (a), **PRO_FINAL / OWNER_DELEGATED**. Apply it without inventing a use or redeciding the earlier empirical purchase. No extra documentary study or receiver search is selected; lifecycle and recasts do not change.
+2. **Object conformance intake:** (a) accept the complete bound conforming answer while separately repairing the observed metadata validator, or (b) return a concrete scientific/scope conflict to the same node. Recommend/select (a). **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** The trustworthy full response is not blocked by the short Transport conflict receipt. The independent review and focused checks separately control acceptance of the pairing repair.
+3. **Root integration/continuation:** integrate this full intake, scientific clarification, updated mapping and owner/audit application trace. Record “intake complete; no new use/result/empirical object; ACTIVE-idle with original DM ownership,” retaining ACTIVE/MEDIUM/recasts 2 and its occupied slot. There is no empirical or additional consultation handoff. A concrete receiving-use/default decision, owner instruction or proper Portfolio event is the next trigger; no unchanged timer-driven work is implied.
+
+The [Chinese owner packet](OWNER_PACKET.json) and [P2 direction item 20260913-acvc-001](../../../../portfolio/owner/inbox/2026-09-13/20260913-acvc-001.json), option (a) actually applied, preserve the options, executed choice, evidence and asynchronous override route. Direction/technical audit rows are `docs/research/portfolio/audit/2026-09-13.md#L7`, `#L8` and `#L9` in this direction publication. No owner approval is awaited. The final documentary acceptance and technical repair evidence are linked in INTAKE_FACTS.json and TRANSPORT_PAIRING_REPAIR.md; prior requests, scientific source/result bytes and the delivered response remain unchanged.
