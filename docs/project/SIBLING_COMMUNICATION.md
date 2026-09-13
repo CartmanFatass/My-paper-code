@@ -56,6 +56,10 @@ vacancy replacement after formal pause/closure leaves fewer than four occupied d
 those archives return directly to Root for complete intake and Pro-selected DM creation. Existing uncertain or accepted requests
 require same-request reconciliation, never a new Send after changing executor. Transport skill
 owns exact Agentify arguments and immutable archival. Experiment monitor never operates Pro.
+Verified nonacceptance permits same-request repair and continuation without a parent handshake.
+Transport sends one direct archive receipt and records its actual native delivery outcome; no
+ACK, Root forwarding or duplicate app-task wake follows. Its final closes that same assignment.
+Historical HANDOFF IDs stay immutable; an assigned native recovery route is recorded separately.
 
 ## Recoverable ownership
 
