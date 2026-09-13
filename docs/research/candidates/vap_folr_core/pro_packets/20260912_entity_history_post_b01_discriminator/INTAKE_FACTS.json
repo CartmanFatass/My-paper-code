@@ -106,32 +106,32 @@
     },
     {
       "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
-      "commit_sha": "7b28017bfcfa90cd791d5d3c8ba4ffbd7571f726",
+      "commit_sha": "22bcdb29d2c60f4f219e396248d7c3fde1fd5d28",
       "use": "sections 4,5.2,6.1,7,8.1,11.4,11.7-11.10"
     },
     {
       "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
-      "commit_sha": "7b28017bfcfa90cd791d5d3c8ba4ffbd7571f726",
+      "commit_sha": "22bcdb29d2c60f4f219e396248d7c3fde1fd5d28",
       "use": "sections 4,5,7.1-7.3"
     },
     {
       "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
-      "commit_sha": "7b28017bfcfa90cd791d5d3c8ba4ffbd7571f726",
+      "commit_sha": "22bcdb29d2c60f4f219e396248d7c3fde1fd5d28",
       "use": "sections 2,4,6"
     },
     {
       "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
-      "commit_sha": "7b28017bfcfa90cd791d5d3c8ba4ffbd7571f726",
+      "commit_sha": "22bcdb29d2c60f4f219e396248d7c3fde1fd5d28",
       "use": "comparison target, randomness levels, whole method versus component cause"
     },
     {
       "path": "AGENTS.md",
-      "commit_sha": "7b28017bfcfa90cd791d5d3c8ba4ffbd7571f726",
+      "commit_sha": "22bcdb29d2c60f4f219e396248d7c3fde1fd5d28",
       "use": "sections 2,4,5; native author/Transport and evidence boundaries"
     },
     {
       "path": "docs/research/portfolio/PORTFOLIO.md",
-      "commit_sha": "7b28017bfcfa90cd791d5d3c8ba4ffbd7571f726",
+      "commit_sha": "22bcdb29d2c60f4f219e396248d7c3fde1fd5d28",
       "use": "FOLR ACTIVE/MEDIUM snapshot; refresh at later actual dispatch"
     }
   ],
@@ -140,5 +140,41 @@
     "attempted_authority": "DM_RECOMMENDATION_ONLY; Root preparation-only assignment 2026-09-12",
     "error": "invalid choice; choose OWNER_DIRECT or PRO_FINAL / OWNER_DELEGATED",
     "resolution": "retain accepted proposal item with no applied option or funding trace; packet and audit carry recommendation"
+  },
+  "readiness_maintenance_20260913": {
+    "checked_at": "2026-09-13T07:02:43.448922+00:00",
+    "assignment": "Root: tighten/check existing minimum Portfolio materials; no Send/request/Generic retry/experiment",
+    "starting_sha": "cd082f7a879e81670ef520a6df6fe2b700a3b743",
+    "starting_changes": [],
+    "synchronized_inputs_sha": "22bcdb29d2c60f4f219e396248d7c3fde1fd5d28",
+    "owner_reviews": [],
+    "unchanged": "F/D options, recommendation, scientific unit, 2700/300/3000/1200/4200 proposed limits; no allocation",
+    "portfolio_binding_observation": {
+      "request_id": "2026-09-12-mgtap-unequal-exposure-investment-01",
+      "state": "SEND_UNCERTAIN",
+      "registry_updated_at": "2026-09-13T06:56:48Z",
+      "release_observed": false,
+      "source": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/registry.json"
+    },
+    "new_exposure": {
+      "scientific_invocations": 0,
+      "models": 0,
+      "checkpoint_loads": 0,
+      "environments": 0,
+      "scientific_rng_masters": 0,
+      "training_episodes": 0,
+      "native_ticks": 0,
+      "optimizer_steps": 0,
+      "evaluation_episodes": 0,
+      "diagnostic_trajectories": 0,
+      "policy_search_candidates": 0,
+      "profiling": 0,
+      "source_implementation_edits": 0,
+      "source_or_numerical_tests": 0,
+      "new_raw_result_analysis": 0,
+      "provider_sends": 0,
+      "transport_dispatches": 0
+    },
+    "next_root_action": "Integrate maintenance; refresh FOLR Portfolio readiness wording; keep ACTIVE/MEDIUM. Resume this DM after MGTAP shared-node release using validated Transport procedure."
   }
 }
