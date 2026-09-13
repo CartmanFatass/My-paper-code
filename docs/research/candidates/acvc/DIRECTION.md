@@ -1,21 +1,52 @@
 # Direction acvc: ACVC
 
-## Research organization — 2026-09-04
+## Research organization — current OWNER_DIRECT, 2026-09-13
 
-This source is a callable research reserve. Its independent investment and re-entry condition
-are recorded in Portfolio; retained evidence may serve a named receiving object without restarting
-a separate management chain.
-See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
-Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
-older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
-second-recast counts and stopped object-family boundaries remain unchanged.
+The ACVC DM owns the complete admitted direction: research/family/object choices, implementation,
+execution, scientific intake, continuation and lifecycle decisions. The standing delegation is
+not an unused balance from a completed Portfolio grant. Finite cards, real resource limits,
+frozen scientific meaning and contrary evidence remain binding. DM records decisions here or in
+the current intake and sends actual outcomes to Clerk; no Portfolio/Root/Clerk approval is required.
 
-This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
+Direction Pro Convergence is the independent scientific Reviewer of experimental design,
+evidence/comparisons, conclusions and successor plans. DM reads the full review, responds to
+material findings, repairs concrete defects or limits affected claims, and owns the final decision.
+Review is neither optional conversation nor funding/lifecycle/scheduling permission. New review
+packets use main's current renderer/Transport contract with `dm_owned_scientific_review`.
+
+Portfolio is the user-readable report. Clerk coordinates mechanically and records the DM's
+actual lifecycle state; only an explicit owner request initiates cross-direction adjustment,
+new direction/resource commitments or Portfolio consultation. The dated historical decisions
+below retain their original evidence and authority at their own boundaries; their old funding,
+approval, reserve or re-entry wording is not a current dispatch or permission requirement.
 
 ## Authority
 
 - Stable direction ID: `acvc`
-- Current lifecycle, priority, and owner are held only by `docs/research/portfolio/PORTFOLIO.md`; this file records only the direction's scientific authority and provenance.
+- Current lifecycle: ACTIVE, DM-owned. Existing owner priority MEDIUM/recasts 2 and lowest-ACTIVE contention order remain until the owner changes cross-direction ordering. Portfolio reports rather than approves this state.
+- Current authoring checkout/branch: `C:/Projects/HMASD-worktrees/codex-acvc`, `codex/acvc`; live task endpoints come from main `.codex/hmasd-dm-sessions.toml`.
+
+## Current execution — cluster B02
+
+DM selected the one independent same-law C-fit and C/F/own-dwell64 observation in
+[B02's card](ACVC_CLUSTER_DEPLOYMENT_B02_SCIENCE_CARD_20260913.md), master21493/eval31493,
+under ordinary direction discretion. The unchanged reviewed comparison asks whether K's useful
+F increment appears on this new endpoint; it is not K renewal, a scientific retry, a customer
+search or a new family. Native600/support600/complete1200 bounds and the one-fit stop remain.
+
+Source `be76f696cb773f2e5db8f4d55ebff1f3b6335ae6` passed independent code review and18 remote
+synthetic checks. The first supervisor submission failed before admission/Python because of
+shell argument joining; its exit125/duration0/logs are preserved. One reviewed pre-execution
+repair, published at `f48be7c9fc5b83d923cf4350ed66a0636d79be10`, left scientific inputs/caps
+unchanged. The exact repaired handle `acvc-cluster-b02-be76f696c-launch2` was accepted on the
+configured remote node at23:38:16 UTC and passed adjacent memory admission. The DM-owned native
+Monitor actually adopted its running PID3430922 and returned terminal exit0. Full native wall
+164.53s; one fit/1024 updates/192 evaluations/180224 ticks and the original checkpoint are accepted.
+F−C +0.10459355901545042 J and F−dwell +0.06070900770904247 J are both separately UP, with4/64
+and11/64 adverse worlds. This is a second separately observed cluster endpoint, not a pooled or
+stable training-population finding. [Complete intake](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md)
+records the proposed bounded synthesis and no-immediate-third-fit plan for independent Convergence
+review. DM responds to findings and makes the lifecycle decision; no Portfolio Send is pending.
 
 ## Scientific question
 
@@ -110,8 +141,9 @@ ends with complete intake and scoped cleanup; no third pair, consultation or suc
 That allocation boundary is preserved in the [B02 intake](ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md).
 The subsequent original Convergence decision selected the distinct cluster-law deployment-use B
 described below. Its separately funded complete result supports observed use. The subsequent
-post-cluster Convergence retains that observed reference and recommends no extra empirical
-allocation now; fresh-policy repeatability is a conditional revisit, not a selected successor.
+post-cluster Convergence retained that observed reference and recommended no extra empirical
+allocation at its historical named-use boundary. The current DM-owned B02 above prospectively
+addresses a useful independent development endpoint without rewriting that answer.
 
 Exact binding remains a useful protocol primitive. Neither historical learner object nor the
 new native comparisons support adaptive ACVC superiority over their strongest competent fixed control.
@@ -545,14 +577,13 @@ Faithful rollout/storage/replay/reset and final common-F measurement are later i
 dependencies. Their specification is not acceptance of the currently absent F-training path
 or a proof of learning improvement. Shared UCOPE defaults and legal actor information remain.
 
-Portfolio bought only the now-complete question and intake. This next B, all source/check/run
-work, its card and identities remain unfunded and uncreated; no 270/540/660/1200 offer is renewed.
-The complete changed-path cost and this consultation's documentary/provider cost remain unknown.
-Retain train-C→deploy-F as the current same-host reference while a proper Portfolio investment
-considers the exact faithful pair and full support. No automatic recurrence fit, extra panel,
-cost pilot or Innovator follows. The next observation would be the complete paired common-F
-endpoint, not more C01 evaluation. Recasts:2, lowest-contention status and the ended T/G and
-uncertain/delayed families remain; no Portfolio lifecycle change or formal UAV entry occurs.
+At that historical question boundary Portfolio had bought only the question/intake; the future
+pair's card/source/identities and allowance had not yet been created. The two later completed
+training-use pairs are recorded above. Historical offers were not renewed by the consultation,
+whose complete documentary/provider cost remains unknown. Train-C→deploy-F remained the reference;
+the next proposed observation was the paired common-F endpoint, not more C01 evaluation. This
+paragraph preserves that historical sequence, not a current Portfolio funding or lifecycle gate.
+Recasts2, contrary results and ended T/G/uncertain-delay family evidence remain intact.
 
 ### Post-two-training-use Convergence — accepted 2026-09-12
 
