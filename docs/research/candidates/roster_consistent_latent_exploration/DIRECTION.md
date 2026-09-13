@@ -20,12 +20,12 @@ This authority preserves the direction's source-grounded scientific question, ev
 ## Current scientific question
 
 How can jointly learned behavior improve useful native service through physical
-roster changes under legal information and a competent service reference? RCLE's
-multi-agent credit question remains scientifically open. The completed post-B07
-Convergence judgment holds further development spending only on the tested
-equal-unit/.99-prior/FLEX/final1000 recipe and no longer recommends its unchanged
-fresh-fit candidate. It preserves attained INDEPENDENT-NEAREST and the direction's
-continuing scientific ownership. It does not select another mechanism or object.
+roster changes under legal information and a competent service reference? The
+accepted [joint-quota-phase family decision](RCLE_JOINT_QUOTA_PHASE_FAMILY_INTAKE_20260912.md)
+selects one learned public common-phase controller against GREEDY-QUOTA-PHASE,
+attained INDEPENDENT-NEAREST and its own initialization. This new family directly
+tests the existing roster-service question. The separate tested
+equal-unit/.99-prior/FLEX/final1000 recipe remains on its narrow spending HOLD.
 
 ## Current position
 
@@ -80,17 +80,24 @@ or credible new evidence affecting its service value/cost: state how another
 observation would alter inclusion of the optional learned path. It need not be
 positive, an exact optimum or a complete causal explanation. This is a revisit
 condition, not today's retained fit, new algorithm or automatic consultation.
-The broader direction remains open; a subsequent object needs its own scoped
-selection. Portfolio L's [accepted documentary intake](RCLE_L_DESIGN_INTAKE_20260912.md)
-returned one joint-quota-phase proposal. The new Portfolio commitment funds its
-original-node family/use question and conditionally its exact B; **family
-selection remains pending and B remains inactive**. The proposal asks
-whether real learning of a common public joint choice improves physical U over
-both greedy joint choice and attained nearest; claim-count matching alone is
-not service evidence. This is a proposed surviving use, not an accepted new
-mechanism or empirical finding. [Current continuation](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md)
-records the published original-family task, conditional boundary and continuing
-DM ownership. The tested recipe HOLD remains separate.
+The broader direction remains open. Portfolio L's [accepted documentary intake](RCLE_L_DESIGN_INTAKE_20260912.md)
+returned one joint-quota-phase proposal; Convergence's complete response8aa3f7bd7,
+integrated31472f0b2 and [conformingly intaken](RCLE_JOINT_QUOTA_PHASE_FAMILY_INTAKE_20260912.md),
+selects it unchanged as a new object family, explicitly not a direction RECAST.
+This activates the previously committed single B900native/900support/1800complete
+invoked allocation. The selected question is whether learning a common public
+quota phase improves physical U over both greedy joint choice and attained
+nearest, with positive own-initialization learning. One fresh fit has256 updates
+and four512-episode endpoints. Separate D_g/D_n use .025U each, with all paths,
+native harms and conditional one-fit uncertainty retained. Claim-count F=0 is
+structural, not service evidence. Ideal public dispatch is explicit and differs
+from nearest's communication requirement; the N-phase class need not contain
+useful temporary over-allocation. Greedy may capture its entire useful benefit,
+and O(N²) scoring cost, memory and training sufficiency are unknown. There is no
+new efficacy result, stable or component-causal claim, historical recast reset,
+or C/UAV promotion. [Current continuation](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md)
+records the activated scope and continuing DM ownership; technical execution
+acceptance remains separate. The tested recipe HOLD remains intact.
 
 The historical sections below preserve earlier objects and their own limits.
 
