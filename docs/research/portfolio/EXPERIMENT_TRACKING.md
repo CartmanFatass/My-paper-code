@@ -5,20 +5,20 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC K | Sole handle finished exit0 in166s at sourcee06b3d63f; C/F/dwell witness delivered and Monitor goal complete | Original DM collects, verifies primaries/counts/caps, publishes scientific intake/preservation and scoped cleanup; no retry |
-| MGTAP | Post-T A/U/P next-use input published at main843f64bd0; recommends one bounded use/design judgment, zero native, complete cost UNKNOWN | Portfolio DM authors the next clean request from the fixed input; no option funded, no implementation/run, lifecycle unchanged |
-| FSD U | Fixed handoff integrated at main7b94b325c and accepted exactly once by provider; B-LONG-D0 explicitly excluded | Transport observes natural completion, then Root returns the full response to the original DM for intake; zero numerical work |
-| RCLE | L completed at mainc6fd4d8f0 with one distinct joint-quota-phase B proposal; no implementation/experiment/Pro grant | Portfolio DM adds its selection/investment/PARK alternatives while replacing the unsent next request; RCLE remains ACTIVE/MEDIUM |
-| FOLR E | Generic handle `folr-entity-history-b01-781201-generic` running at source922a461f and adopted by Monitor | Collect Generic terminal technically, then execute the preselected BANK once; Generic≤1800/BANK≤3000/complete≤6000 |
-| ACPS | B01 accepted ADVERSE; four-target cleanup accepted at main3d3ef453c, archives retained and no run remains | Continuation need is retained for the next clean Portfolio request; direction remains ACTIVE/HIGH and queued need does not count as advancing work |
-| CADC | B01 accepted ADVERSE; four-target cleanup accepted at main60ed6a98e, archives retained and no run remains | Next-use need is retained for the next clean Portfolio boundary; no retry/extra arm/successor and queued need does not count as advancing work |
-| Portfolio | K/E/L/U response archived at mainde02dc94d and conforming intake/mapping integrated at main665f704f7 | Four original DMs execute independently; E precedes K only under actual contention, with no sibling batch wait |
+| ACVC K | Both frozen primaries accepted UP at main2a59af854; four remote cleanup targets removed, one local duplicate remains after policy rejection | Scientific allocation complete; local cleanup blocker is operational only, ACVC remains ACTIVE and no retry/successor is inferred |
+| MGTAP | Post-T A/U/P input is one of five choices in the archived Portfolio response at main54b2a6d33 | Designated Portfolio DM performs conformance intake; no option funded or lifecycle change inferred locally |
+| FSD | U completed at main038666aa8/6805ca7be with limited optional I1280 and D0 default; LONG remains a separate Portfolio alternative | Designated Portfolio DM intakes the new five-item response; zero numerical work unless a conforming new decision grants it |
+| RCLE | L completed with one joint-quota-phase B proposal; it is one of five choices in the archived response at main54b2a6d33 | Designated Portfolio DM performs selection/investment/PARK conformance intake; no current implementation/experiment grant |
+| FOLR E | Final intake accepted at main0f8452d6c: Generic no final; BANK mean−4.32609 over128 finals, no pair primary/MEI | Original DM performs only named terminal checkout+two-supervisor cleanup; FOLR remains ACTIVE, no retry/extra arm/successor |
+| ACPS | B01 ADVERSE and cleanup complete; continuation is one of five choices in the archived response at main54b2a6d33 | Designated Portfolio DM performs conformance intake; ACPS remains ACTIVE/HIGH until a conforming decision says otherwise |
+| CADC | B01 ADVERSE and cleanup complete; lifecycle/design alternatives are in the archived five-item response | Designated Portfolio DM performs conformance intake; no unchanged repeat or local PARK inference |
+| Portfolio | Five-item ACPS/CADC/MGTAP/FSD/RCLE response archived exactly once at main54b2a6d33 | Designated DM performs full conformance intake and maps each decision independently |
 
-Actual advancing directions5: ACVC K has active terminal intake, FOLR E has an adopted Generic run,
-and FSD U has active original-DM response intake. MGTAP and RCLE each contribute fixed current inputs
-to the Portfolio DM's actively revised next request. ACPS and CADC finished finite cleanup and no longer
-fill a slot. No queued intention or ended allocation is used to fill the count, and no direction is
-stopped to manufacture capacity.
+Actual advancing directions6: the complete five-item Portfolio response is under designated-DM intake,
+counted once for ACPS, CADC, MGTAP, FSD and RCLE; FOLR E has active bounded cleanup after accepted intake.
+ACVC's remaining policy-rejected local duplicate is operational only and does not fill a research slot.
+No queued intention or ended allocation is used to fill the count, and no direction is stopped to
+manufacture capacity.
 
 One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
 to ACPS support only, unknown unless directly measured. MGTAP T and CADC exclude that shared item;

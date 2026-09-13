@@ -6,7 +6,7 @@
 ## 当前27方向状态 — 2026-09-12 Windows恢复
 
 本表登记17 ACTIVE、10 PARKED。新注册ACPS、CADC为ACTIVE/HIGH；TRDL、CPCP、LCAC为PARKED/MEDIUM。原22方向生命周期、priority、recasts与UAV字段不变。
-当前实际推进覆盖5个方向：ACVC K正在终态intake，FOLR E的Generic在途，FSD U正在原DM intake；MGTAP与RCLE的最新固定输入均由指定Portfolio DM纳入正在重定稿的下一请求。ACPS、CADC与MGTAP的已购pair及限定清理均已完成；当前只计算实际intake、运行和请求authoring，不计算排队意图。当前达到五槽目标，不以有限分配结束推断停向。
+当前实际推进覆盖6个方向：ACPS、CADC、MGTAP、FSD、RCLE的五项Portfolio响应已完整归档并由指定DM逐项intake，按方向各计一次；FOLR E完成科学intake后正在限定清理。ACVC K已完成科学intake，剩余一个本地策略拒绝的清理副本不计科研槽。当前超过五槽目标并按clean boundary自然收敛，不以有限分配结束推断停向。
 新方向发现/注册及独立MGTAP T投入决定已完整intake并集成main2492dcb06：T=yes，ACPS/CADC获有限starter投入，另三项仅注册停放。
 FSD第五pair已完整intake且scoped cleanup完成；ACVC、FOLR、RCLE与FSD的K/E/L/U已完整intake并形成独立执行映射。MGTAP的T pair与ACPS的B01 pair均已完成科学intake和限定清理并交回下一决策需求。当前严格推进计数5，达到五槽目标；不以有限分配结束推断停向。
 
@@ -37,7 +37,7 @@ FSD第五pair已完整intake且scoped cleanup完成；ACVC、FOLR、RCLE与FSD�
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [TRDL](../candidates/tail_return_distributional_learning/DIRECTION.md) | 新注册PARKED/MEDIUM；保留tail-return distributional learning的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
 | [UCOPE](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | **更新：最新是post8801 PRO_FINAL PARK进一步8801-L continue/end-credit经验投入，保留unchanged-L spending stop。** 8601/8602、8701是更早证据。 | 无 | 有具体新选择才继续；不再凭旧8701 closeout pending造任务。其余renewal/ordinary-feedback议程未被整体关闭。 |
-| [FOLR](../candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/INTAKE.md) | E为GRU16 BANK对同公开信息GRU64 Generic，5000 train/128 final，MEI为±1 native return；旧包H和反证保留。 | Generic首臂已在source`922a461f`远端运行并由Monitor接管；BANK等待Generic完整技术收集后按既定选择执行。 | Generic终态收集后执行一次BANK，再完成paired intake/cleanup；无pilot、score gate、width search、extra arm或缩短暴露。 |
+| [FOLR](../candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md) | Generic无final；BANK完成5000训练/4969更新/128评估，单臂均值−4.32609，不能构造配对primary或MEI判定。 | 科学intake与Generic/BANK归档已由Root接受；原DM正在终态checkout与两个supervisor的限定清理。 | 清理后返回缺失同公开信息finite-learning对照的下一判别需求；无retry、额外arm或successor。 |
 | [VNFC](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md) | B03 final incomplete/main7125f368b：每臂35 rounds、合计13,440 transitions/2,240 updates，104.89秒后SIGSEGV/exit139；无final primary，不能评分。 | allocation/diagnosis结束；两条已命名detached checkout已清理，证据保留。 | 无自动retry/诊断；未来须具体支持的最小修复或有相关证据的同义路径及新投资；不要求完整历史归因。 |
 | [VSP02](../candidates/vsp_02/DIRECTION.md) | P19结束已测试fixed-member family/configuration。 | 无 | 具体新方向选择；无successor/UAV allocation。 |
 | [VSP03](../candidates/vsp_03/DIRECTION.md) | B07 final G−R0+0.01156738、G−R+0.01307617、Q−0.00160645；post-B07及9/11 fallback保留相同narrow pause，未分配新fit。 | 无 | 将来有决策价值的同配方B仍合法，但当前未选择；不从旧continuous512文字推断运行。 |

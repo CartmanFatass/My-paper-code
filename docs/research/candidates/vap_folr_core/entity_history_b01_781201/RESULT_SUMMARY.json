@@ -1,0 +1,93 @@
+{
+  "object": "FOLR_ENTITY_HISTORY_B01_781201",
+  "evidence_class": "B/EXPLORE",
+  "status": "BANK_OWN_ARM_ACCEPTED_PAIR_PRIMARY_UNAVAILABLE",
+  "recorded_at": "2026-09-13T01:05:26.687075+00:00",
+  "generic": {
+    "status": "incomplete",
+    "exit_code": 124,
+    "counts": {
+      "training_episodes": 4253,
+      "training_ticks": 85060,
+      "optimizer_steps": 4221,
+      "evaluation_episodes": 0,
+      "evaluation_ticks": 0
+    },
+    "native_panel": null,
+    "source_sha": "922a461fde867a8efe23a1563a969e6d2d08e258",
+    "wall_seconds": 1795.06
+  },
+  "bank": {
+    "status": "complete",
+    "exit_code": 0,
+    "counts": {
+      "training_episodes": 5000,
+      "training_ticks": 100000,
+      "optimizer_steps": 4969,
+      "evaluation_episodes": 128,
+      "evaluation_ticks": 2560
+    },
+    "native_panel": {
+      "mean": -4.32609375,
+      "sample_sd": 2.8547342180505457,
+      "conditional_episode_se": 0.2523252405086021,
+      "minimum": -12.529999999999998,
+      "maximum": 1.5100000000000007,
+      "n": 128
+    },
+    "source_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+    "wall_seconds": 1762.22
+  },
+  "actual_completed_counts": {
+    "training_episodes": 9253,
+    "training_ticks": 185060,
+    "optimizer_steps": 9190,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560
+  },
+  "granted_per_arm_counts": {
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560
+  },
+  "independent_training_instances_with_final_endpoint": 1,
+  "pair_primary": null,
+  "pair_rule": null,
+  "mei_applies_only_to_unavailable_difference": 1.0,
+  "prediction": {
+    "dm": "not scorable: comparison missing",
+    "owner": "not taken (unattended)"
+  },
+  "cost": {
+    "native_wall_seconds": "3557.28",
+    "native_cpu_seconds": "3556.57",
+    "known_support_seconds": "104.5563982",
+    "additional_support_lower_bound_seconds": 97,
+    "support_observed_lower_bound_seconds": "201.5563982",
+    "complete_observed_lower_bound_seconds": "3758.8363982",
+    "hard_support_cap_seconds": 1200,
+    "complete_cap_seconds": 6000,
+    "full_support_and_complete_total": "UNKNOWN",
+    "resource_status": "Native timing and peak RSS measured; resources_unmeasured for unitemized support and complete total. No observed cap breach; full hard-support/complete conformance unverified."
+  },
+  "claim": "One trained BANK policy has the reported128-episode native return panel; no BANK-minus-Generic performance polarity, stable advantage, causal entity-memory benefit, capacity-matched claim or transfer inference.",
+  "cleanup": {
+    "worktree": "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304",
+    "worktree_registered": true,
+    "source_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+    "tracked_source_clean": true,
+    "scientific_output_roots": [
+      "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_generic",
+      "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_bank"
+    ],
+    "support_root": "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_support",
+    "supervisor_roots": [
+      "/home/wu/.agent-tasks/folr-entity-history-b01-781201-generic",
+      "/home/wu/.agent-tasks/folr-entity-history-b01-781201-bank"
+    ],
+    "retention_state": "Pending Root integration/retention acceptance before assigned reclamation; no deletion in this collection",
+    "shared_authoring": "C:/Projects/HMASD-worktrees/codex-vap-folr retained"
+  }
+}

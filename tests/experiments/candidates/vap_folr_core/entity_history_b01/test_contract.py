@@ -201,3 +201,26 @@ def test_primary_and_dependent_publication(delta, rule, tmp_path):
     bank['status'] = 'incomplete'
     with pytest.raises(ValueError):
         pair_result(generic, bank)
+
+
+def test_incomplete_generic_preserves_completed_bank_without_pair(tmp_path):
+    generic = dict(status='incomplete', arm='GENERIC_RETAIN', training_episodes=4253,
+                   optimizer_steps=4221, evaluation_episodes=0, training_seed=781201,
+                   evaluation_seed=1781201, evaluation_returns=[],
+                   error='TimeoutError: 1800-second complete arm cap')
+    bank = dict(generic, status='complete', arm='BANK', training_episodes=5000,
+                optimizer_steps=4969, evaluation_episodes=128, evaluation_returns=[2.] * 128)
+    bank.pop('error')
+    module_path = Path(__file__).resolve().parents[5] / 'scripts/run_folr_entity_history_b01.py'
+    spec = importlib.util.spec_from_file_location('folr_entity_partial_test', module_path)
+    runner = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(runner)
+    runner.add_bank_comparison(bank, generic)
+    runner.publish(tmp_path, bank)
+    actual = json.loads((tmp_path / 'summary.json').read_text())
+    assert actual['status'] == 'complete' and actual['evaluation_episodes'] == 128
+    assert actual['pair_primary'] is None
+    assert actual['pair_primary_unavailable'] == 'Collected Generic arm is incomplete; no BANK-minus-Generic estimate or MEI branch.'
+    assert actual['evaluation_returns'] == [2.] * 128
+    with pytest.raises(ValueError):
+        pair_result(generic, bank)

@@ -80,6 +80,14 @@
       "record": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_SCIENCE_CARD_20260912.md",
       "state": "applied",
       "summary": "已应用新卡21457/31457及K600/600/1200；代码/检查/评审仍在本次赋权流程内，尚无真实启动。"
+    },
+    {
+      "at": "2026-09-12T23:48:53+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/EXECUTION_MAPPING.md",
+      "record": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "K唯一原始调用已完整验收：一C fit、180224 ticks、1024 Adam、三组64世界；两项UP，保留全部不利结果。实际Monitor goal接管及终态已核实，唯一检查点存档留存；等待Root集成与限定cleanup，无新额度。"
     }
   ]
 }
