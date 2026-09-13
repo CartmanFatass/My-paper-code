@@ -1,5 +1,7 @@
 # Exact capacity correction for the same Portfolio node
 
+Resolved 2026-09-13 by complete amendment `e99cdb113f24b030c7f18b7a3b84257b5a500d0c`; [intake](../20260913_acps_capacity_correction/INTAKE.md). The original return and its historical unsent/shared-writer state below are retained. Only the two capacity/slot sentences are corrected; Q and all scientific/investment fields remain unchanged.
+
 Return to `portfolio:cross_direction` for request `2026-09-12-acps-post-b02-investment-01`, preserving its complete response at `f63980ab1acdcf9fad0ec8b1ac9770c864a6b988`. This is conformance of that formed decision, not another ACPS scientific purpose or a resend of its accepted prompt.
 
 Response §6 says: **"The rolling target remains five advancing direction chains"**. Current AGENTS §5 says: **"the working-set target is four parallel direction DM chains"** and continues **"Keep any existing overlap intact and let it drain at formal direction dispositions; do not add a fifth direction."** ROOT_OPERATIONS, "Portfolio material and response route", also fixes four. The input SCIENCE_BRIEF's five-target wording was stale and is retained as provenance. It supplies no current authority.

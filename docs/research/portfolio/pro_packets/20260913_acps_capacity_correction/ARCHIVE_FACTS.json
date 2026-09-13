@@ -1,0 +1,32 @@
+{
+  "checked_at_utc": "2026-09-13T09:48:15.935538+00:00",
+  "request_id": "2026-09-13-acps-portfolio-capacity-correction-01",
+  "source_commit": "e99cdb113f24b030c7f18b7a3b84257b5a500d0c",
+  "path": "docs/research/portfolio/pro_packets/20260913_acps_capacity_correction/archive/RESPONSE.md",
+  "bytes": 6202,
+  "lines": 33,
+  "sha256": "2637c27ced9cccfa6e579d0b7c8fa8d2afd7619bce213631c90166071750cb53",
+  "full_temp_archive": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-acps-portfolio-capacity-correction-01\\2026-09-13-acps-portfolio-capacity-correction-01--portfolio--attempt-01__05_FULL_RESPONSE.md",
+  "exact_archive_matches_git": true,
+  "changed_paths": [
+    "docs/research/portfolio/pro_packets/20260913_acps_capacity_correction/archive/RESPONSE.md"
+  ],
+  "issue_comment": {
+    "id": "IC_kwDOO8trO88AAAABUOouFw",
+    "author": {
+      "login": "CartmanFatass"
+    },
+    "authorAssociation": "OWNER",
+    "body": "Delivered the complete ACPS capacity conformance amendment:\nhttps://github.com/CartmanFatass/My-paper-code/blob/e99cdb113f24b030c7f18b7a3b84257b5a500d0c/docs/research/portfolio/pro_packets/20260913_acps_capacity_correction/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/e8eb000d3ee54ad56cb7bc90112e6110bc1d4629/docs/research/portfolio/pro_packets/20260913_acps_capacity_correction/delivery/TASK.md\n\nThe amendment replaces only the two adjacent capacity/slot sentences in §6 of the original f63980ab1acdcf9fad0ec8b1ac9770c864a6b988 response. It applies the current four-chain target, preserves existing overlap and distinguishes active execution from occupied ACTIVE chains awaiting Pro/recovery. Q once, explicitly accepted UNKNOWN complete documentary cost, zero empirical/conditional allocation, ACTIVE/HIGH/recasts0 and informed SHARED remain unchanged. No broader clause is amended.\n\nThe complete 33-line file, including references, was read back. Comparison with b5ed3422eaeccee0fb3f2939527a6f4a5c4d17b5 confirms that commit e99cdb113f24b030c7f18b7a3b84257b5a500d0c adds only the authorized response path on codex/acps. No main, control/registry, scientific source/state, original response or other branch was modified; no experiment or browser Send was executed.",
+    "createdAt": "2026-09-13T09:39:09Z",
+    "includesCreatedEdit": false,
+    "isMinimized": false,
+    "minimizedReason": "",
+    "reactionGroups": [],
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5652491799",
+    "viewerDidAuthor": true
+  },
+  "native_transport_return": "one Send; operation c95914cb-ce66-4904-88ff-70c65800de72; user16560ad6-4092-4433-a214-dfbf6b61c2d5/assistant3c351ad3-de31-45bb-86ae-245d208f3320; archived/receipt SENT; correction tab closed",
+  "scientific_work": 0,
+  "documentary_readback_note": "gh JSON required explicit UTF-8 on Windows; corrected only subprocess decoding, no provider retry or output change"
+}
