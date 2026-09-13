@@ -223,3 +223,11 @@ records Portfolio B and its new600/900/1500/900/2400s limits, plus two concrete 
 conflicts requiring the same-node correction: five-chain target and independent Monitor goal.
 No implementation, experiment or new Pro request is part of this completed bounded assignment.
 MGTAP remains ACTIVE/MEDIUM; the next science is the already selected funded pair, not a vacancy.
+
+DM exercised the reviewed archival recovery on the actual immutable file and comment. The shared
+registry and mirror are now ARCHIVED, full-response SHA/size verified, and native receipt SENT
+with `transport=native_final`; `NATIVE_ARCHIVE_ACCEPTANCE.json` records this application. Original
+strict operation/send uncertainty, null IDs, observed-delivery facts and corrected frozen TASK
+metadata remain. The owned tab was closed. ACPS was notified that the shared binding is free;
+Root receives the full intake and the same-node correction dependency. This completes the actual
+one-attempt lifecycle without another Send.
