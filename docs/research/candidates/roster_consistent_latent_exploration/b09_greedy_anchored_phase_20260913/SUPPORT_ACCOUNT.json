@@ -1,22 +1,21 @@
 {
   "object_id": "RCLE-TBCFV-B09-GREEDY-ANCHORED-PHASE",
-<<<<<<< HEAD
-  "as_of": "complete valid native result, collection/analysis/E0/intake/unique preservation before result publication and scoped cleanup",
+  "as_of": "complete valid native result, preserved publication and verified two-target cleanup 2026-09-13T23:29:14Z; invoked invoice tail still partially unavailable",
   "native_cap_s": 180,
   "additional_invoked_support_cap_s": 600,
   "complete_invoked_cap_s": 780,
   "whole_native_wall_s": 47.13,
-  "known_support_charged_s": 50.6884626,
-  "known_complete_invoked_s": 97.8184626,
-=======
-  "as_of": "source and focused test acceptance; independent review/command publication and all future tails pending",
-  "native_cap_s": 180,
-  "additional_invoked_support_cap_s": 600,
-  "complete_invoked_cap_s": 780,
-  "whole_native_wall_s": null,
-  "known_support_charged_s": 25.992669600000003,
->>>>>>> 39e2c6b2c (Publish RCLE B09 focused checks and exact bounded launch command)
+  "known_support_charged_s": 51.6534893,
+  "known_complete_invoked_s": 98.7834893,
   "rows": [
+    {
+      "operation": "final exact-target pre-cleanup retention hash read",
+      "wall_s": 0.2217987
+    },
+    {
+      "operation": "terminal two-target cleanup and disk-registration absence verification",
+      "wall_s": 0.743228
+    },
     {
       "operation": "initial_read_0",
       "wall_s": 0.034392
@@ -68,7 +67,6 @@
     {
       "operation": "test_collection_and_exact_command_technical_record",
       "wall_s": 1.1596502
-<<<<<<< HEAD
     },
     {
       "operation": "support_snapshot_and_diff_counts",
@@ -123,26 +121,14 @@
     {
       "operation": "E0_scientific_intake_brief_current_position_audit",
       "wall_s": 0.2958321
-=======
->>>>>>> 39e2c6b2c (Publish RCLE B09 focused checks and exact bounded launch command)
     }
   ],
   "accounting_complete": false,
   "unmeasured_support_components": [
-<<<<<<< HEAD
-    "result and final closeout publication commands not yet in this snapshot",
-    "Root invoked main integration/retention time unavailable",
-    "assigned two-target terminal cleanup still pending"
+    "result and final closeout publication commands incompletely covered in this invoice",
+    "Root/Clerk invoked main integration/retention time unavailable"
   ],
   "provider_agent_lifetime_cost": "UNKNOWN explicitly accepted for this finite unit",
   "documentary_investment_intake": "separate UNKNOWN through88e39c358",
   "interpretation": "Known invoked support charged once; parent tool envelopes replace nested shell/subcommand times; two test invocations and native Monitor read bound preserved. No observed cap breach; incomplete tail coverage is not zero or proof of a complete invoice. Native47.13s separate; no transfer, rollover or automatic successor."
-=======
-    "independent reviewer invoked reads not returned yet",
-    "subsequent publication/admission/monitor/collection/intake/integration/retention/cleanup"
-  ],
-  "provider_agent_lifetime_cost": "UNKNOWN accepted for this finite unit",
-  "documentary_investment_intake": "separate UNKNOWN through88e39c358; no B09 empirical exposure",
-  "test_scope": "synthetic TEST-only; no scientific seed29 master/model or fit"
->>>>>>> 39e2c6b2c (Publish RCLE B09 focused checks and exact bounded launch command)
 }

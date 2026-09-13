@@ -1,0 +1,47 @@
+{
+  "object_id": "RCLE-TBCFV-B10-GREEDY-ANCHORED-1024",
+  "as_of": "technical source acceptance before launch; partial retrospective accounting",
+  "native_cap_s": 300,
+  "additional_invoked_support_cap_s": 600,
+  "complete_invoked_cap_s": 900,
+  "whole_native_wall_s": "NOT_STARTED",
+  "known_support_charged_s": 437,
+  "rows": [
+    {
+      "operation": "two stalled own remote staging invocations including termination rounding",
+      "wall_s": 395,
+      "bound": true,
+      "evidence": "STAGING_RECOVERY.json",
+      "method": "279 s plus 109 s observed process lifetimes rounded up jointly; descendants not added"
+    },
+    {
+      "operation": "other preparation, source publication, source/contract reads and repaired network sparse staging to test01",
+      "wall_s": 29,
+      "bound": true,
+      "method": "conservative enclosing tool-command sum; excludes stalled processes and B09 closeout"
+    },
+    {
+      "operation": "focused test02 enclosing remote invocation",
+      "wall_s": 4.1,
+      "bound": true
+    },
+    {
+      "operation": "independent engineering Reviewer",
+      "wall_s": 8.8,
+      "approximate": true
+    },
+    {
+      "operation": "rounding remainder",
+      "wall_s": 0.1,
+      "bound": true
+    }
+  ],
+  "accounting_complete": false,
+  "unmeasured_support_components": [
+    "later command/review publication",
+    "launch and Monitor reads",
+    "collection, analysis, scientific review invocation, intake, integration and cleanup"
+  ],
+  "provider_agent_lifetime_cost": "UNKNOWN; not zero",
+  "interpretation": "Charges actual invoked support and conservative bounds once; no experimental invocation yet. Approximately 163 s of support ceiling remains before later charges; incomplete accounting is not a complete invoice."
+}
