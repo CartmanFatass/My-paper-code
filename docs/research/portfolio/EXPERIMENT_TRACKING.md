@@ -1,15 +1,15 @@
 # HMASD current execution tracking
 
-Updated 2026-09-12. Windows control checkout: C:/Projects/HMASD; PowerShell.
+Updated 2026-09-13. Windows control checkout: C:/Projects/HMASD; PowerShell.
 Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears here.
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; Q recovery intaken. Portfolio PRO_FINAL applied reversible whole-direction PARKED/HIGH; SHARED/default and all evidence retained; old operation remains unsent record | No active work. Re-entry requires a changed operating/training-resource requirement or trustworthy relevant evidence/cost fact and a new Portfolio/owner decision |
-| MGTAP | Portfolio B 与 conformance amendment 已完整 intake；唯一 master pair 完成：COND512 0.16574499572521276 J、DENSE768 0.19507936796417658 J、delta −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026、7/25 worlds；ACTIVE/MEDIUM | 终端/哈希/cleanup 已核验；post-8231 direction question 已绑定 delivery_v2 `PREPARED_UNSENT`，无 Pro 决策或 Send。无自动 successor，保持占位 |
-| RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Greedy-anchored continuation question prepared/bound but recommendation unapplied; zero Send/fit. Await same direction-node decision; no automatic successor |
-| ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Prepare next direction-node use/no-addition question; no new fit or K retry before proper decision |
-| FOLR | BANK −4.3261 retained; Generic no final, no paired primary; finite investment readiness published but unfunded; ACTIVE/MEDIUM | Keep material ready behind shared Portfolio writer; no Generic retry, model load or experiment |
+| MGTAP | Portfolio B 与 conformance amendment 已完整 intake；唯一 master pair 完成：COND512 0.16574499572521276 J、DENSE768 0.19507936796417658 J、delta −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026、7/25 worlds；ACTIVE/MEDIUM | post-8231 Convergence R 已完整 intake；保留 mean-COND eligibility 与 DENSE default，当前 proposal 不追加 pair/successor/lifecycle。Transport 原 request 为 UNCERTAIN_EFFECT 且绝不重发；当前 ACTIVE-idle，等待具体开发后果或 proper-node 决定 |
+| RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Greedy-anchored continuation 已完整 intake并应用 A：仅保留 epsilon .1 exact-greedy 问题；零 fit/seed/cap，当前 ACTIVE-idle，等待有限 B/investment specification |
+| ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Next-use/no-addition Convergence 已完整 intake：保留 qualified reference/no addition；无新 fit/K retry，当前 ACTIVE-idle，等待具体 owner/proper-node 触发 |
+| FOLR | Portfolio F 已完整 intake：Generic64 → 技术验收 → retained BANK128；caps 与顺序固定，当前源代码/资源 admission，ACTIVE/MEDIUM | DM 正在实现并做 admission；未启动实验，不重试旧 Generic、不做 transfer/renewal |
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
 | FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 
@@ -35,3 +35,4 @@ Historical packet addresses are not new dispatch routes.
 FOLR's300-second support value is an owner-clarified reference: recorded308.8422538 is not
 by itself a hard stop. Native/scientific scope and remaining explicit complete-work limits persist.
 Historical run roots, fixed SHAs and complete data remain in their scientific evidence records.
+
