@@ -82,3 +82,13 @@ proposal independently and sends it to the registered Clerk; this is management 
 claim of new experiments. Clerk Luna/high bootstrap completed; main writer remains Root until
 MAIN_WRITER_RELEASED. The existing 50-minute heartbeat is ACTIVE on Clerk as recovery only.
 Root is the user entry. Pending Portfolio state is COLLECTING_PROPOSALS, no new accepted request yet.
+
+## Ordinary research authority correction
+
+All four DMs read their original allocation decisions and withdrew the inference that exhausted
+old allocation means no authority for any new A/B. Actual state: ACVC is selecting an independent-fit
+B, RCLE a longer-training B, MGTAP a descriptive outcome-informed A; FOLR identified a fresh-training
+B option but scientifically favors a whole-direction Portfolio comparison. These are preparation/
+management facts, not launched experiments. Ordinary A/B need DM finite budgets and existing
+constraints, not per-object Portfolio purchase. Clerk forwards only genuine global capacity/
+lifecycle/resource choices. The original frozen allocations remain closed on their actual scope.

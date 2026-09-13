@@ -14,6 +14,9 @@ integrates explicitly accepted commits. Pro owns overall science/investment/life
 DM owns its direction management, scientific conformance, engineering and execution. Clerk does not
 rewrite recommendations, rank research on its own, expand a cap or interpret result polarity.
 Missing scientific content goes to the relevant DM as a concrete question, without blocking others.
+Ordinary new A/B objects are DM-authorized under standing delegation, with DM-declared finite
+budgets. A prior allocation ending is not an exhausted direction-wide budget. Do not package every
+ordinary experiment as a Portfolio permission request; see AGENTS section 2 for actual boundaries.
 Clerk may create a replacement Astra/max DM only from an explicit conforming Portfolio/owner
 assignment and actual capacity mapping; it must not invent that assignment or release an idle slot.
 

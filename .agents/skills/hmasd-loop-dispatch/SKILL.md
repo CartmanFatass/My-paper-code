@@ -5,6 +5,13 @@ description: Use when HMASD Clerk checks direction progress, processes a DM/Port
 
 # HMASD research dispatch
 
+Ordinary new A/B objects within an admitted direction's accepted open mechanism are DM decisions
+under AGENTS.md section 2, "Ordinary direction research belongs to DM". DM declares finite object
+budget/cost/stop conditions and proceeds under standing delegation; an ended prior allocation or
+unselected successor does not make the entire direction's budget zero. Portfolio is required for
+actual cross-direction/cumulative-resource or lifecycle choices, not every experiment. Explicit
+frozen limits, scoped prohibitions and direction-node decisions remain at their actual scope.
+
 Root is the user entry; the independent Clerk performs only delegated mechanical coordination.
 Read docs/project/CLERK_OPERATIONS.md for event handling and writes. DM/Pro retain scientific
 judgment. Clerk routes missing science or complex engineering repair to the relevant Astra DM;
@@ -50,9 +57,9 @@ only for missing evidence. Native children return to their actual DM; Clerk does
 
 | Observation | Action |
 | --- | --- |
-| Accepted/standing object delegation covers the useful object and remaining budget | DM selects and completes implementation, proportional checks/review, exact publication, fresh admission, detached launch/Monitor, collection/intake and authorized continuation. No repeat Portfolio vote. |
+| Useful ordinary A/B is covered by standing object delegation; DM declares its finite budget | DM selects and completes implementation, proportional checks/review, exact publication, fresh admission, detached launch/Monitor, collection/intake and authorized continuation. No repeat Portfolio vote. |
 | Next decision changes direction-tier science | DM develops the concrete proposal and uses its Innovator/Convergence node. No Clerk scope approval. |
-| No executable continuation/real producer; capacity/lifecycle is unasked | DM assesses surviving options and submits its proposal to Clerk for the overall Portfolio agenda. A no-addition scientific answer does not decide unasked occupancy. |
+| No scientifically useful autonomous object/real producer, or actual Portfolio scope is unasked | DM assesses surviving options and submits its proposal to Clerk for the overall Portfolio agenda. A no-addition scientific answer does not decide unasked occupancy. |
 | Real accepted request/handle/review/resource producer | DM names owner/identity/event and waits after independent work. Clerk records it as actual work. |
 | Explicit Portfolio/owner deferral/disposition already covers the boundary | Apply its scope/capacity treatment and revisit condition/owner. End unnecessary agent waiting; report non-advancing honestly. |
 | Complete bound Pro answer with unresolved receipt metadata | DM intakes the full answer; Transport reconciles the same request. Metadata does not erase a formed decision. |

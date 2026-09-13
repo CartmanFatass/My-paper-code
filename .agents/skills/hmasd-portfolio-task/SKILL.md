@@ -5,6 +5,13 @@ description: Use when the independent Portfolio Pro session plans the overall re
 
 # HMASD Portfolio materials and Pro intake
 
+Ordinary new A/B objects within an admitted direction's accepted open mechanism are DM decisions
+under AGENTS.md section 2, "Ordinary direction research belongs to DM". DM declares finite object
+budget/cost/stop conditions and proceeds under standing delegation; an ended prior allocation or
+unselected successor does not make the entire direction's budget zero. Portfolio is required for
+actual cross-direction/cumulative-resource or lifecycle choices, not every experiment. Explicit
+frozen limits, scoped prohibitions and direction-node decisions remain at their actual scope.
+
 Root is the user entry; the independent Clerk performs only delegated mechanical coordination.
 Read docs/project/CLERK_OPERATIONS.md for event handling and writes. DM/Pro retain scientific
 judgment. Clerk routes missing science or complex engineering repair to the relevant Astra DM;
@@ -42,8 +49,9 @@ and its initial assignment, Clerk applies that mapping after the formal release 
 Portfolio request. Ask only for genuinely unresolved choice/investment.
 
 Portfolio may authorize a coherent bounded direction program instead of requiring a new purchase
-for every internal step. Such discretion must be explicit in the actual decision; this workflow
-creates no new grant. DMs design/execute ordinary objects within that scope. A/B experiments have
+for every internal step. Additional program discretion may be explicit in a Portfolio decision; ordinary A/B authority
+already comes from standing DM delegation and needs no per-object grant. DMs design/execute within
+actual direction-wide constraints. A/B experiments have
 no universal Portfolio launch gate. Direction-tier scientific changes use Innovator/Convergence.
 
 Clerk records the latest accepted overall-plan reference and its actual application in PORTFOLIO.md,

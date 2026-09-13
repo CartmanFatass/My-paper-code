@@ -150,6 +150,37 @@ A child's completion is evidence for that owner, not acceptance or scientific au
 
 ## 2. Decision ladder
 
+### Ordinary direction research belongs to DM
+
+OWNER_DIRECT 2026-09-13 authority correction: the DM manages research in its admitted direction,
+including selection of useful new ordinary A/B objects within an accepted, open mechanism. Standing
+object delegation is their authority; the card records the object and budget, not an application
+for permission. DM declares a finite invocation count, proportionate cost/resource bound and stop
+condition before execution, then implements, checks, launches, intakes and selects useful follow-up.
+Ordinary object choices and engineering within existing compute capacity do not require Portfolio
+grants, Root/Clerk ACK, a new customer or a new positive result.
+
+An ended allocation or a decision that selects no successor only describes that allocation/answer.
+It does not revoke direction-wide standing delegation. An undeclared direction cumulative budget
+must not be interpreted as zero remaining permission; nor does it imply unlimited compute. Actual
+direction-wide cumulative caps, device constraints and resource limits still apply. DM accounts
+for cumulative cost and justifies the next bounded object proportionately under evidence-spec 11.8.
+New training seeds, training scale or comparisons may be justified follow-ups within an open
+mechanism; they do not automatically require a new Portfolio investment decision.
+
+Preserve a frozen object's exact budget and meaning, and explicit no-retry/package/family stops at
+their actual scope. Do not evade a prohibition by renaming the same attempt. Conversely, a statement
+that a consultation bought no experiment is not a blanket ban on all other ordinary experiments.
+Family opening/closure, recast, post-consumed-C direction choices and C-BENCH promotion retain the
+direction-node authority below. Portfolio handles overall priority, capacity, lifecycle and real
+resource expansion (such as exceeding an explicit direction cumulative cap, changing cross-direction
+capacity allocation or making a new resource commitment), not each ordinary card or invocation.
+
+When no useful object remains, the DM makes that scientific assessment and proposes the unresolved
+direction/lifecycle decision. It neither waits for blanket permission nor manufactures low-value
+experiments to keep an ACTIVE label. Clerk forwards genuine Portfolio questions and reports progress;
+it cannot impose additional research gates or decide scientific value.
+
 Evidence-spec §11.8 controls default scientific burdens and ordinary research engineering
 checks over conflicting older direction, template or role wording. It does not retroactively
 reinterpret historical results or rewrite the current named VNFC E01 task. Consultation exposure
@@ -162,7 +193,7 @@ where it is recorded, and its provenance label.
 
 | Tier | Decides | Who | Record and label |
 | --- | --- | --- | --- |
-| Object | next rung of a ladder, card wording, treatment and comparator inside an accepted mechanism, dropping an arm, budget deviation inside the cap, quarantine of an attempt after reproduction | the DM, locally, under §4 when the owner is absent | intake section: options, recommendation, selection, `OWNER_DIRECT` or `OWNER_DELEGATED` |
+| Object | useful new ordinary A/B objects in an accepted open mechanism with DM-declared finite budgets, next rung of a ladder, card wording, treatment and comparator inside an accepted mechanism, dropping an arm, budget deviation inside the cap, quarantine of an attempt after reproduction | the DM, locally, under §4 when the owner is absent | intake section: options, recommendation, selection, `OWNER_DIRECT` or `OWNER_DELEGATED` |
 | Direction | open or close an object family, park, recast, the next object after a consumed C, promotion to C-BENCH | `em:<direction>:convergence` (or `:innovator` before a C freeze); the owner directly when present | decision record, `PRO_FINAL` or `OWNER_DIRECT` |
 | Portfolio | priority, capacity, lifecycle, fusion, separation, registration, investment | `portfolio:cross_direction` decides within the standing delegation in §4.8; the owner may override asynchronously | `docs/research/portfolio/decisions/<date>-<slug>.md`, `PRO_FINAL / ROOT_INTEGRATED` or `OWNER_DIRECT` |
 
@@ -342,7 +373,7 @@ and the new fact or concrete proposal relative to the last complete decision, in
 card/intake; no new form or universal customer, positive-result or diagnostic prerequisite follows.
 Direction-tier scientific changes use the original Convergence/Innovator routes in §2; a frozen
 meaning conflict returns to its proper authority. Portfolio handles new investment (including
-additional grant/invocations or caps outside existing delegation), priority/capacity, lifecycle,
+real resource expansion beyond ordinary object delegation or explicit direction-wide caps), priority/capacity, lifecycle,
 fusion/separation, registration and vacancy replacement. Ordinary within-cap object choices and
 card-fixed experiments remain with DM. A new card, failed attempt, unused time or ACTIVE label
 does not create grant or retry authority. Clerk coordinates real shared writers/runtime and other

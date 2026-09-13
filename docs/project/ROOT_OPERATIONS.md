@@ -1,5 +1,12 @@
 # Research execution responsibilities
 
+Ordinary new A/B objects within an admitted direction's accepted open mechanism are DM decisions
+under AGENTS.md section 2, "Ordinary direction research belongs to DM". DM declares finite object
+budget/cost/stop conditions and proceeds under standing delegation; an ended prior allocation or
+unselected successor does not make the entire direction's budget zero. Portfolio is required for
+actual cross-direction/cumulative-resource or lifecycle choices, not every experiment. Explicit
+frozen limits, scoped prohibitions and direction-node decisions remain at their actual scope.
+
 OWNER_DIRECT 2026-09-13: Root is the user entry point and accepts shared control-plane changes.
 Clerk is the independent Luna/high mechanical coordinator; DMs remain Astra/max direction managers.
 Use [Clerk operations](CLERK_OPERATIONS.md) for its delegated writes, event handling and escalation.
@@ -117,9 +124,9 @@ current intake/handoff to complete the following transition. Owner pause always 
 
 | Actual boundary | Next action and owner |
 | --- | --- |
-| Useful next object/step fits standing object delegation and remaining scope/budget | DM selects, records and executes through intake. A/B work has no universal Pro launch gate; specific frozen prohibitions/caps still bind. |
+| Useful ordinary new A/B or next step fits the accepted open mechanism and actual direction-wide constraints | DM selects, records and executes through intake. A/B work has no universal Pro launch gate; specific frozen prohibitions/caps still bind. |
 | Next choice changes direction-tier science | DM develops options and recommendation, then sends to the existing Innovator/Convergence node without Clerk approval. |
-| No executable continuation/real producer; investment, occupancy or lifecycle is unresolved | DM assesses surviving opportunities and submits a Portfolio proposal via Clerk's planning agenda: continued investment, explicit deferral, or formal parking/closure. An honest no-investment recommendation is valid. |
+| No scientifically useful autonomous object/real producer, or actual cross-direction resource/lifecycle choice is unresolved | DM assesses surviving opportunities and submits a Portfolio proposal via Clerk's planning agenda: continued investment, explicit deferral, or formal parking/closure. An honest no-investment recommendation is valid. |
 | Real request/run/review/shared-resource producer is pending | Name identity, owner and awaited event; do independent work, then wait for the direct return. |
 | Portfolio/owner already explicitly decided deferral/disposition for this boundary | Apply it, record scope, revisit condition and responsible event/review owner; end unnecessary agent waiting. Only explicit decisions change lifecycle/slot occupancy. |
 | Engineering/Transport failure | DM repairs in scope; Clerk resolves shared dependencies or unavailable executors. A timeout alone does not scientifically stop a direction. |

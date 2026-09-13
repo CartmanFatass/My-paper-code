@@ -46,3 +46,27 @@ Astra/max DM tasks: ACVC, MGTAP, RCLE and FOLR are active and independently prep
 post-allocation management proposals. No proposal was yet delivered to Clerk in this snapshot;
 the next mechanical consequence is to assemble and publish the ready overall Portfolio agenda as
 proposals arrive, without an all-DM barrier.
+
+## Owner correction: research authority, not faster permission forwarding
+
+The owner identified that DMs were asking Portfolio for every action. RCLE, ACVC and MGTAP each
+checked their full original sources and explicitly corrected "no remaining research authority" to
+"the old named allocation has no remaining invocations". Their cited decisions ended only named
+allocations or selected no new object; they did not prohibit the whole direction's ordinary A/B.
+RCLE identified a useful longer-training B, ACVC an independent-fit B within its accepted mechanism,
+and MGTAP an outcome-informed descriptive A as direction-local work. These are DM proposals, not
+Root's scientific selections or a claim of executed results.
+
+Root clarifies standing ordinary A/B authority in AGENTS section 2 and its actual entrypoints:
+DM selects and declares finite object budget/cost/stop conditions; no per-object Portfolio grant.
+Existing explicit cumulative caps and scoped frozen/no-retry/family decisions stay intact. Real
+cross-direction capacity/resource expansion and lifecycle remain Portfolio. The independent
+Reviewer endorsed this separation with these scope distinctions; no synthetic invocation was run.
+Clerk reported no new Portfolio Send/binding, preserved the archived old RCLE request, published
+accepted RCLE integration at d5c13206d and returned main clean to Root for this owner correction.
+
+FOLR subsequently confirmed the same scope error: the old F TASK and full Portfolio answer stop
+renewal/additional fits inside F, not every new B in the still-open entity-history family. It
+identified a fresh-training B alternative but retains PARK as its scientific recommendation for
+relative investment, explicitly separating that judgment from permission. No Root selection of
+those alternatives is implied.
