@@ -28,23 +28,28 @@ An unchanged timeout stays quiet. When a bounded assignment reaches completion, 
 blocker or scope conflict, or has no immediate authorized work while its direction remains ACTIVE,
 the DM must send one proactive action message to its parent before returning a native final or
 entering idle wait. That message names the assignment, state, evidence or commit, and next action
-or dependency. This is an event handoff, not a keepalive; it does not authorize periodic status
-broadcasts or duplicate the final message.
+or dependency and its owner (or none), including the executed decision's authority and limit.
+Use ordinary prose and existing evidence records, not a new schema or approval item. Root treats
+message/final copies at the same assignment/evidence revision as one event, without an ACK.
 
-Wait only for an actual active dependency. A concrete blocker returns to its accountable owner;
-an idle child with unfinished authorized work is resumed once with followup_task. Never interpret
-a timeout as failed execution, a new invocation budget or permission to retry scientific work.
-Owner pause/stop boundaries take precedence. No-work completion is not a reason to loop forever.
+If accepted card/Pro/grant scope fixes the work, the same DM completes implementation, checks and
+required review, publication, fresh admission, launch/Monitor, collection, technical acceptance,
+scientific intake, preservation and assigned cleanup, then its authorized dependent continuation.
+Neither an additional Root dispatch nor integration/ACK nor a repeat Portfolio vote is needed.
+An idle child with such unfinished work is resumed once with followup_task; an already running DM
+continues directly. Actual shared-writer/runtime conflicts go to Root for execution coordination.
+New scientific meaning or investment/budget choices go to the proper node, authored and intaken
+by the DM under AGENTS §2; Root is not an intermediate scientific approver.
 
-Do not add an authorization wait when the next state is already fixed by the current card, Pro
-decision or published handoff. The owning DM dispatches that bounded work or proper-node question
-directly. Only an unformed scientific/budget/lifecycle choice, actual dependency or concrete
-blocker requires waiting; no ACK or parent approval is an extra gate.
-
-The DM owns the full bounded continuation and may dispatch it directly once its card, accepted
-decision or handoff fixes the scope. Root receives the resulting action event for integration; it
-does not issue a second authorization. Waiting is reserved for a real dependency, blocker or new
-scientific/budget/lifecycle choice.
+Distinguish a pending external dependency from ACTIVE-idle with none. A real dependency names its
+request/handle/producer and required event; after independent work, wait for that direct return.
+If no authorized work or concrete unresolved question exists, record the missing fact and revisit
+condition once, send ACTIVE-idle once, and remain available in native event wait. A possible future
+use or instruction is a condition, not a promised outside result. Root does not reassign the same
+assessment on unchanged facts. A concrete new proposal can be prepared and sent by the original DM
+without Root inventing or approving its scope; repeated inputs/options/consequence reuse the last
+complete answer. A timeout supplies neither a new fact nor permission to retry, request an audit,
+Send again or change lifecycle. Owner pause/stop boundaries still take precedence.
 
 DM sends Root only actionable integration, cross-direction dependency, formal direction disposition,
 scope-conflict, or bounded-assignment completion/ACTIVE-idle facts, with assignment identity,
@@ -66,6 +71,9 @@ Root receives the resulting actionable direction handoff, not every experiment s
 Each DM creates/reuses one native Luna/high Transport child with minimal context. DM authors and
 publishes the exact handoff, dispatches via followup_task, and waits natively for the complete
 archive. Transport owns Agentify Send, observation, one-Send reconciliation and direct DM receipt.
+A verified complete bound response goes directly to conformance intake even while short receipt
+or metadata reconciliation remains unresolved. An uncertain effect forbids another Send; it does
+not turn that complete decision into a pending scientific answer.
 Root receives the DM's conformance/decision mapping and integrates it. Root and DM continue native
 waits while these dependencies run; there is no independent app-task wake branch.
 Different provider bindings may proceed concurrently. Serialize each exact conversation and the

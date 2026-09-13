@@ -6,30 +6,36 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; Q recovery intaken. Portfolio PRO_FINAL applied reversible whole-direction PARKED/HIGH; SHARED/default and all evidence retained; old operation remains unsent record | No active work. Re-entry requires a changed operating/training-resource requirement or trustworthy relevant evidence/cost fact and a new Portfolio/owner decision |
-| MGTAP | Portfolio B 与 conformance amendment 已完整 intake；唯一 master pair 完成：COND512 0.16574499572521276 J、DENSE768 0.19507936796417658 J、delta −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026、7/25 worlds；ACTIVE/MEDIUM | post-8231 Convergence R 已完整 intake；保留 mean-COND eligibility 与 DENSE default，当前 proposal 不追加 pair/successor/lifecycle。Transport 原 request 为 UNCERTAIN_EFFECT 且绝不重发；当前 ACTIVE-idle，等待具体开发后果或 proper-node 决定 |
-| RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Greedy-anchored continuation 已完整 intake并应用 A：仅保留 epsilon .1 exact-greedy 问题；零 fit/seed/cap，当前 ACTIVE-idle，等待有限 B/investment specification |
-| ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Next-use/no-addition Convergence 已完整 intake：保留 qualified reference/no addition；无新 fit/K retry，当前 ACTIVE-idle，等待具体 owner/proper-node 触发 |
-| FOLR | Portfolio F 已完整 intake：Generic64 已按固定源通过 admission 并运行，native Monitor 已接管；技术验收后 → retained BANK128，caps 与顺序固定，ACTIVE/MEDIUM | DM 正在完成 Generic64 技术验收；之后自主启动 BANK128。不得重试旧 Generic、做 transfer/renewal |
+| MGTAP | Portfolio B 与 conformance amendment 已完整 intake；唯一 master pair 完成：COND512 0.16574499572521276 J、DENSE768 0.19507936796417658 J、delta −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026、7/25 worlds；ACTIVE/MEDIUM | post-8231 R 已完整 intake；mean-COND eligibility 与 DENSE default 保留。ACTIVE-idle，无在途外部依赖/新 pair；旧 UNCERTAIN_EFFECT 不阻挡已完成 intake 且绝不重发。有具体新研究开发后果时原 DM 自主准备或执行授权内工作；未变事实复用现有 R |
+| RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Greedy-anchored A 仅保留 epsilon .1 exact-greedy 候选；新 finite-investment TASK 0cf002c3 / HANDOFF 53cc0311 已发布、绑定并分派原 Transport 一次。等待直接 provider/完整响应事实，尚不能记 SENT；grant NONE/no fit，两项 HOLD 保留 |
+| ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Next-use/no-addition 已完整 intake，Transport ARCHIVED；无新 fit/K retry 或在途外部依赖。科学 ACTIVE-idle；无新策略/接收/默认部署事实或改变范围的指令时复用已有判断，变化到来由原 DM 自主执行授权内工作或准备具体 proper-node 问题，不重复审计/咨询 |
+| FOLR | Portfolio F 已完整 intake；新 Generic64 完成/技术接受 e617175e（5000/4969/128、exit0、native2156.67s），随后固定 BANK128 一次 admission/提交 db935e57；同一 Monitor 回 ADOPTED+TERMINAL exit0/n128/duration3s，ACTIVE/MEDIUM | DM 正在 BANK collection/combined scientific intake，尚无最终 use 结论、无运行中实验或新 Pro 请求。Generic→BANK 顺序和五 caps 保持，无 Root ACK/再审批、旧 Generic retry 或 transfer/renewal |
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
 | FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 
 Working-set target: **4**; existing overlap drains without interruption or fifth-slot admission.
-Recorded advancing directions: **4** — MGTAP, RCLE, ACVC and FOLR. Each has an active assignment
-with its original DM. Completed Portfolio intake, CADC disposition, FSD U, old experiments and cleanup
-do not fill a slot. CADC is PARKED only because the complete Portfolio decision explicitly selected it.
+Occupied direction slots: **4** — MGTAP, RCLE, ACVC and FOLR, with their original DMs.
+Actual current work is FOLR's BANK collection/combined intake and RCLE's dispatched new-investment
+Transport assignment; its provider acceptance is pending. ACVC's separate owner-directed governance
+update is administrative work, not an experiment or new scientific allocation. ACVC/MGTAP science
+is ACTIVE-idle with no pending external producer. Occupancy is not a claim of four advancing runs;
+completion or idle state does not release an ACTIVE slot. CADC and ACPS are PARKED only through
+their explicit Portfolio dispositions. See [autonomy application](decisions/2026-09-13-dm-autonomy-consolidation.md).
 One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
 to ACPS support only, unknown unless directly measured. MGTAP T and CADC exclude that shared item;
 each direction still counts its own implementation-through-cleanup and later Root integration once.
 
 ## Request audit — 2026-09-13
 
-当前没有开放的 proper-node 请求等待回执。FOLR 的 Portfolio F 已归档并完成 intake；Generic64
-正在由 DM 监控，技术验收后由同一 DM 直接启动已批准的 BANK128。ACVC、RCLE、MGTAP 的最近
-请求均已完成 intake，当前没有选定的新实验或未形成的决策。
+唯一新 proper-node 在途 assignment 为 RCLE 的 `2026-09-13-rcle-greedy-anchored-investment-01`：
+TASK `0cf002c3913f7536a6db8064e234958e973fbc09`、HANDOFF
+`53cc0311df035e63817668b442d4bd760784c4d7` 已发布/绑定并交原 Transport，provider acceptance
+尚待直接事实；不把 native dispatch 记成 Send。它问是否购买一项 seed29/256-update B，当前
+grant NONE/no fit，属于真实新投资。完整合规投资决定若获配，DM 直接执行，不再询问运行批准。
 
-RCLE 正在准备且尚未发布/发送一个单一的 finite-investment 问题（seed29、256-update
-greedy-anchored B）；这是一次新的投资选择，不能被当作实验审批或重复咨询。若该问题获批，
-实验本身仍由 RCLE DM 在既定预算内直接 admission 和 launch。
+FOLR 的 Portfolio F 已归档/intake，没有开放投资审批；Generic64 已完整技术接受，DM 随即直接
+执行已拨款 BANK128，Monitor 已回终态，当前 collection/combined intake。ACVC 与 MGTAP 最近请求已完整 intake，没有新的未决
+答复。各自保留的 no-addition 与 uncertain-effect 事实不会凭 timeout 变为新请求。
 
 实验属于 DM object tier：只要 accepted card、Pro decision 或 finite grant 已固定对象、输入、
 比较器和 cap，DM 直接完成 admission、launch、collection 与 acceptance，不再向 Portfolio

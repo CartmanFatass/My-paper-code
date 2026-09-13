@@ -1,13 +1,13 @@
 # DM 方向研究管理员扩权建议汇总 — 2026-09-13
 
-状态：`PROPOSAL_ONLY`。本文件汇总四个当前 ACTIVE DM 的独立建议，不改变现有科学权限、预算、生命周期或 Portfolio 决策边界。
+原始状态：`PROPOSAL_ONLY`。四份独立建议原文保持提案归因；随后所有者明确指定 ACVC 收敛并实施指定控制面，见 [OWNER_DIRECT 应用记录](2026-09-13-dm-autonomy-consolidation.md)。本汇总不伪称新的 Pro 裁决，不改变科学选择、预算或生命周期。
 
 ## 当前请求审计
 
-- **FOLR**：Portfolio F 已完整 intake；Generic64 已 admission/launch，Monitor 在途。技术验收后由 FOLR DM 直接执行已批准的 BANK128。没有待批准 Portfolio 请求。
+- **FOLR**：Portfolio F 已完整 intake；Generic64 完成/技术接受 e617175e 后，DM 已直接一次 admission/提交 BANK128（db935e57），原 Monitor 返回 ADOPTED+TERMINAL。当前 collection/combined intake，无最终 use 结论、运行中实验或待批准 Portfolio 请求。
 - **ACVC**：最近 next-use 请求已 ARCHIVED/intake；没有开放请求、实验或外部依赖。DM 已记录空白等待审计，不重复提交条件性问题。
 - **MGTAP**：post-8231 R 已 ARCHIVED/intake；没有开放请求或已批准的后续 pair。当前只保留具体开发后果出现后的 proper-node 入口。
-- **RCLE**：greedy-anchored Convergence 已 ARCHIVED/intake；正在准备单一 finite-investment 问题，尚未发布/发送。若获批，实验执行仍由 DM 负责。
+- **RCLE**：greedy-anchored Convergence 已 ARCHIVED/intake；单一 finite-investment 问题 TASK `0cf002c3` / HANDOFF `53cc0311` 已发布、绑定并分派原 Transport 一次，provider acceptance 尚待直接事实，不能写成 SENT；grant NONE/no fit。若完整合规投资决定获配，实验执行由 DM 直接负责。
 
 常规实验不进入 Portfolio 审批队列。只要 accepted card、Pro decision 或 finite grant 已固定对象、输入、比较器和 cap，DM 直接完成 admission、launch、monitor、collection 和 intake。Portfolio 只处理新的 investment、capacity、lifecycle、fusion/separation、registration 或 vacancy replacement。
 
@@ -24,4 +24,4 @@
 
 ## 后续处理
 
-Root 暂不把 `PROPOSAL_ONLY` 自动提升为新的 Portfolio 决策。现有 `AGENTS.md`、`ROOT_OPERATIONS.md` 和 `hmasd-loop-dispatch` 中的 DM 自主执行标准继续生效；若需要统一改写治理条文，应由 owner/proper node 形成明确的 specification decision 后再落地。
+四提案的共同边界已按后续明确 `OWNER_DIRECT` 收敛到指定控制入口；采用内容、未扩张权限、验证与实际应用见上述记录。MGTAP 的有限方向任务包仍只是未来 Portfolio 可选的真实投资形式，本次不向任何方向发放任务包。已接受实验直接闭环，实际新增科学/预算/生命周期仍走原 proper node。

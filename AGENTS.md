@@ -291,10 +291,10 @@ independent authorized work continues during their preparation and resolution.
 
 OWNER_DIRECT 2026-09-12: a finite object, grant, cleanup or `no automatic successor` ends only
 that named allocation. Root must not pause, stop, remove or mark the containing ACTIVE direction
-as released on that basis. The DM continues the direction with its next bounded object or authors
-the focused direction/capacity task. A direction stops advancing only after that DM sends the task
-and Portfolio returns the stopping, parking or replacement decision, unless the owner directly
-orders the disposition. Before drafting a capacity or new-direction question, its author
+as released on that basis. The DM directly continues an authorized bounded object or authors a
+concrete unresolved direction/capacity question. If neither exists, the direction remains
+ACTIVE-idle under the changed-event rule below. Only Portfolio's formal stopping, parking or
+replacement decision, or a direct owner disposition, releases the direction. Before drafting a capacity or new-direction question, its author
 (DM for direction questions; Root for vacancy replacement) refreshes every affected old direction from its current DM handoff, `DIRECTION.md`
 and latest intake; Root status shorthand and ended allocations are not lifecycle evidence.
 
@@ -303,23 +303,41 @@ actionable native return and before the first wait after useful work. An
 unchanged timeout resumes waiting without a new dispatch pass. Check owner pause/stop instructions
 first. A workflow edit or status question does not resume paused research.
 
-OWNER_DIRECT 2026-09-13: DM autonomous dispatch is the default. Root authorization is not a gate
-for bounded work already fixed by the current card, accepted decision or published handoff. The
-owning DM may publish and send a scope-fixed direction/Portfolio question, execute an admitted
-authorized object, repair Transport locally, collect/intake results and continue its direction
-without waiting for Root approval or an ACK. Root integrates evidence and handles only shared
-runtime/cross-direction dependencies, formal lifecycle application and vacancy replacement.
-Wait only for an actual external dependency, a new scientific/budget/lifecycle choice or a concrete
-blocker; a DM must not remain idle merely because Root has not separately authorized an already
-fixed next state.
+OWNER_DIRECT 2026-09-13: the [four-DM autonomy consolidation](docs/research/portfolio/decisions/2026-09-13-dm-autonomy-consolidation.md)
+applies continuous DM ownership to each accepted allocation. When the accepted card, Pro decision
+or finite grant fixes the object, inputs, comparator, allowed invocations and cap, the same DM
+completes execution bindings, implementation/repair, proportionate checks and required independent
+review, commit/push, fresh admission, detached launch, Monitor adoption, collection, technical
+acceptance, scientific intake, preservation and assigned cleanup. It directly takes the next step
+already covered by that allocation or standing object-tier delegation. Root ACK, integration,
+another Portfolio vote and a separate dispatch at each step are not execution gates. Existing
+source, host/device, integrity, review, invocation and cap requirements still apply.
 
-OWNER_DIRECT 2026-09-13: Routine result-bearing experiments are DM object-tier work. When an
-accepted card, Pro decision or finite grant fixes the object, inputs, comparator and cap, the DM
-performs fresh resource admission and launches, collects and accepts it without a new Portfolio
-request. Portfolio is required only for a genuinely new investment, capacity, lifecycle,
-fusion/separation or registration choice (or a vacancy replacement); it is not an experiment
-launch approval queue. A DM must not send repeated Portfolio questions merely to obtain an ACK for
-an already authorized run.
+The DM may also prepare, publish, bind and send a concrete unresolved proper-node question through
+its native Transport without Root approval. The question states the actual choice it would change
+and the new fact or concrete proposal relative to the last complete decision, in the existing
+card/intake; no new form or universal customer, positive-result or diagnostic prerequisite follows.
+Direction-tier scientific changes use the original Convergence/Innovator routes in §2; a frozen
+meaning conflict returns to its proper authority. Portfolio handles new investment (including
+additional grant/invocations or caps outside existing delegation), priority/capacity, lifecycle,
+fusion/separation, registration and vacancy replacement. Ordinary within-cap object choices and
+card-fixed experiments remain with DM. A new card, failed attempt, unused time or ACTIVE label
+does not create grant or retry authority. Root coordinates real shared writers/runtime and other
+cross-direction dependencies and applies accepted dispositions; it does not select new science.
+
+At bounded completion, a material blocker/scope conflict, or entry into ACTIVE-idle, the DM sends
+one proactive native action message: assignment and actual state; evidence/commit and decision
+boundary; next DM action or specific dependency and its owner (or none). Reuse existing
+card/intake/audit and required P1/P2 surfaces; ordinary operations do not create repeated decisions
+or approval items. Root deduplicates message/final copies by assignment and evidence revision.
+When a named request, accepted handle or other actual producer is pending, wait for that event
+after independent work. When no authorized work or defensible new question remains, record the
+missing fact and revisit condition once, report ACTIVE-idle with no pending external dependency,
+and remain available in native event wait. A future possible fact is not an unfinished outside
+task. Unchanged waits reuse the completed decision and produce no new audit, assignment, request
+or Send. Changed facts restart the original DM's bounded preparation directly. Occupied direction
+slots, actual research/engineering/preparation and ACTIVE-idle are recorded separately; four slots
+do not require four continuous experiments or consultations.
 
 After dispatching ready independent work, Root waits natively while DM work remains. DM does
 independent work first and otherwise waits natively for monitor/Reviewer events. Use the configured
