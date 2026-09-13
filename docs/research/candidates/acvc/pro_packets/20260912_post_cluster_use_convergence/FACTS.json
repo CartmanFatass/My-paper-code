@@ -1,0 +1,161 @@
+{
+  "assignment": "One original direction-node question/full response intake under current Root continuation; no empirical budget",
+  "science_source_sha": "f569a80bc28bb9c679884da36824613652b414f0",
+  "cost_cleanup_source_sha": "d8bb4b2b049f87989cb138181b598e9ada496a22",
+  "current_method_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+  "current_exposure": {
+    "new_fits": 0,
+    "model_initializations": 0,
+    "scientific_rng_instances": 0,
+    "training_steps": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "native_steps": 0,
+    "runtime_tests": 0,
+    "profiling_or_diagnostic_invocations": 0,
+    "parameter_displacement": null
+  },
+  "machine_generated_exposure_line": "This documentary question creates zero fits, model/RNG instances, train/eval/native steps, optimizer calls, runtime tests and diagnostic invocations; parameter displacement is not applicable. The merely proposed future unchanged repetition is one new fit,512×256 train ticks,256×4 Adam calls and3×64×256 final evaluation ticks =180224 total team ticks.",
+  "copied_accepted_K": {
+    "independent_training_units": 1,
+    "arm_means": {
+      "C": {
+        "complete": true,
+        "available_episodes": 64,
+        "mean_S": 50.49277648229278,
+        "mean_J": 0.19723740813395618
+      },
+      "F": {
+        "complete": true,
+        "available_episodes": 64,
+        "mean_S": 82.25547074487515,
+        "mean_J": 0.32131043259716857
+      },
+      "dwell": {
+        "complete": true,
+        "available_episodes": 64,
+        "mean_S": 62.60978370359054,
+        "mean_J": 0.24456946759215054
+      }
+    },
+    "contrasts": {
+      "F-C": {
+        "complete": true,
+        "n_joint_episodes": 64,
+        "mean_J": 0.12407302446321236,
+        "mean_S": 31.762694262582365,
+        "sample_SD_J": 0.06792341232263771,
+        "conditional_SE_J": 0.008490426540329714,
+        "minimum_J": -0.024574273874233443,
+        "maximum_J": 0.2872394106868815,
+        "adverse": 1,
+        "favorable": 63,
+        "zero": 0,
+        "reading": "UP",
+        "sign": "positive"
+      },
+      "F-dwell": {
+        "complete": true,
+        "n_joint_episodes": 64,
+        "mean_J": 0.07674096500501802,
+        "mean_S": 19.645687041284614,
+        "sample_SD_J": 0.08136121707997157,
+        "conditional_SE_J": 0.010170152134996446,
+        "minimum_J": -0.12128082288171904,
+        "maximum_J": 0.3118432101753501,
+        "adverse": 8,
+        "favorable": 56,
+        "zero": 0,
+        "reading": "UP",
+        "sign": "positive"
+      },
+      "dwell-C": {
+        "complete": true,
+        "n_joint_episodes": 64,
+        "mean_J": 0.04733205945819434,
+        "mean_S": 12.11700722129775,
+        "sample_SD_J": 0.08934190816136366,
+        "conditional_SE_J": 0.011167738520170457,
+        "minimum_J": -0.16330757013389058,
+        "maximum_J": 0.2918203407035302,
+        "adverse": 23,
+        "favorable": 41,
+        "zero": 0,
+        "reading": "UP",
+        "sign": "positive"
+      }
+    },
+    "interventions": {
+      "C": {
+        "opportunities": 0,
+        "retrace": 0,
+        "dwell": 0,
+        "apply": 0,
+        "distinguishable": 0
+      },
+      "F": {
+        "opportunities": 6623,
+        "retrace": 6623,
+        "dwell": 0,
+        "apply": 0,
+        "distinguishable": 6623
+      },
+      "dwell": {
+        "opportunities": 4546,
+        "retrace": 0,
+        "dwell": 4546,
+        "apply": 0,
+        "distinguishable": 4546
+      }
+    },
+    "cost": {
+      "native_whole_command_wall_s": 165.33,
+      "supervisor_duration_s": 166,
+      "native_charge_s": 166,
+      "native_charge_basis": "Retain the full recorded supervisor duration, which encloses the measured165.33s admission-through-process-exit chain; do not add nested panel/fit timers.",
+      "native_cap_s": 600,
+      "native_cap_pass": true,
+      "known_support_s": 75.29171340009022,
+      "known_native_plus_support_s": 241.2917134000902,
+      "support_cap_s": 600,
+      "complete_cap_s": 1200,
+      "complete_support_cap_certified": false,
+      "complete_cost_certified": false,
+      "observed_breach": false,
+      "peak_rss_kib": 557308,
+      "peak_rss_gib": 0.5314903259277344,
+      "resources": "resources_unmeasured",
+      "qualification": "Whole wall and peak RSS are measured; complete resource/CPU and support coverage is not. No overrun observed, no complete total certification."
+    }
+  },
+  "proposed_repetition_counts": {
+    "fits": 1,
+    "training_episodes": 512,
+    "horizon": 256,
+    "rollouts": 256,
+    "adam_calls": 1024,
+    "training_team_steps": 131072,
+    "final_panels": 3,
+    "evaluation_episodes_per_panel": 64,
+    "evaluation_team_steps": 49152,
+    "total_team_steps": 180224
+  },
+  "future_cost_projection": {
+    "complete_path": "admission/import/construction +131072 train team ticks +1024 replay/backward/Adam calls +checkpoint +3 loads/49152 evaluation ticks +publication/readback/exit",
+    "observed_previous_whole_native_s": 165.33,
+    "observed_previous_supervisor_charge_s": 166,
+    "future_native_seconds": null,
+    "future_support_seconds": null,
+    "empirical_allocation": null,
+    "support_components": [
+      "necessary binding/card/source currentness",
+      "affected focused check/review only",
+      "Git/staging/admission/Monitor handling",
+      "collection/intake/integration/preservation/cleanup"
+    ],
+    "qualification": "One completed cluster invocation is an observed cost reference, not a future guarantee; spent K600/600/1200 caps are not renewed. No calibration pilot."
+  },
+  "current_documentary_cost": "UNKNOWN; distinct from completed K and not empirical allocation",
+  "state": "question prepared, original-node decision pending; ACVC ACTIVE/MEDIUM/recasts2; no local science selection",
+  "issue_preparation_known_invoked_s": 6.376768600021023
+}

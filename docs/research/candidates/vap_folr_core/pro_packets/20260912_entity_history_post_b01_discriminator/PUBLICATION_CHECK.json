@@ -1,0 +1,198 @@
+{
+  "request_id": "folr-entity-history-post-b01-discriminator-20260912",
+  "observed_at": "2026-09-13T02:04:04.650467+00:00",
+  "repository": "CartmanFatass/My-paper-code",
+  "default_scientific_input_sha": "3e2d8d725d63d33d47fcee4774c20ef412f56332",
+  "observed_remote_refs": {
+    "refs/heads/codex/vap-folr": "3e2d8d725d63d33d47fcee4774c20ef412f56332",
+    "refs/heads/main": "2732f048e99b4225da1b74f9f45df505cbd32517"
+  },
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/FACTS.json",
+      "commit_sha": "3e2d8d725d63d33d47fcee4774c20ef412f56332",
+      "bytes": 7095,
+      "sha256": "ee5e7c5a97203bb465e74d30143356148bc605ec1e03818df8cb36eb185b2841",
+      "published_ref_witnesses": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3e2d8d725d63d33d47fcee4774c20ef412f56332"
+        }
+      ],
+      "task_manifest_mapping_exact": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md",
+      "commit_sha": "be6505326d2536603205c3d835ab02af79ce0668",
+      "bytes": 6277,
+      "sha256": "a1fe18e60852401a6c7e08a3000448d01ed78eb218e54aea8e42b95752876554",
+      "published_ref_witnesses": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3e2d8d725d63d33d47fcee4774c20ef412f56332"
+        }
+      ],
+      "task_manifest_mapping_exact": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "be6505326d2536603205c3d835ab02af79ce0668",
+      "bytes": 8998,
+      "sha256": "c4d19ed48330185ec72558b900e3a9b70a521fe90e6df44a52edc1e53cc35b49",
+      "published_ref_witnesses": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3e2d8d725d63d33d47fcee4774c20ef412f56332"
+        }
+      ],
+      "task_manifest_mapping_exact": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_SCIENCE_CARD_20260912.md",
+      "commit_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+      "bytes": 11323,
+      "sha256": "a5813f399ef4f7c99cb73ed464d072c6dd222d973aa5a338f2e78db132951d96",
+      "published_ref_witnesses": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3e2d8d725d63d33d47fcee4774c20ef412f56332"
+        }
+      ],
+      "task_manifest_mapping_exact": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "be6505326d2536603205c3d835ab02af79ce0668",
+      "bytes": 59779,
+      "sha256": "717d10f2fa4c05f26d95c7df540dc70c7136e25c2cd36f206dcc00cc32d0c030",
+      "published_ref_witnesses": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3e2d8d725d63d33d47fcee4774c20ef412f56332"
+        }
+      ],
+      "task_manifest_mapping_exact": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/EXECUTION_MAPPING.md",
+      "commit_sha": "665f704f74980bb3e0fb10f1fee540e43b35063c",
+      "bytes": 12042,
+      "sha256": "2d36e1dc8fe8ce9d0382067a3a446da42640dd8a91080563a51aa42c4e599cb6",
+      "published_ref_witnesses": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3e2d8d725d63d33d47fcee4774c20ef412f56332"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "2732f048e99b4225da1b74f9f45df505cbd32517"
+        }
+      ],
+      "task_manifest_mapping_exact": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "published_ref_witnesses": [
+        {
+          "ref": "refs/heads/main",
+          "head": "2732f048e99b4225da1b74f9f45df505cbd32517"
+        }
+      ],
+      "task_manifest_mapping_exact": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "published_ref_witnesses": [
+        {
+          "ref": "refs/heads/main",
+          "head": "2732f048e99b4225da1b74f9f45df505cbd32517"
+        }
+      ],
+      "task_manifest_mapping_exact": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "published_ref_witnesses": [
+        {
+          "ref": "refs/heads/main",
+          "head": "2732f048e99b4225da1b74f9f45df505cbd32517"
+        }
+      ],
+      "task_manifest_mapping_exact": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "published_ref_witnesses": [
+        {
+          "ref": "refs/heads/main",
+          "head": "2732f048e99b4225da1b74f9f45df505cbd32517"
+        }
+      ],
+      "task_manifest_mapping_exact": true
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "bytes": 45889,
+      "sha256": "6933e35eb254a2247e4a6b5f00067da90f4bf4e482ee16a555e52e43158efd09",
+      "published_ref_witnesses": [
+        {
+          "ref": "refs/heads/main",
+          "head": "2732f048e99b4225da1b74f9f45df505cbd32517"
+        }
+      ],
+      "task_manifest_mapping_exact": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/ISSUE_SNAPSHOT.json",
+      "commit_sha": "3e2d8d725d63d33d47fcee4774c20ef412f56332",
+      "bytes": 6312,
+      "sha256": "2bb3353c3f8eda76ba596e0f933487f4b2f2d86acfbff3d7a134abab3cb0f4d7",
+      "published_ref_witnesses": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3e2d8d725d63d33d47fcee4774c20ef412f56332"
+        }
+      ],
+      "task_manifest_mapping_exact": true
+    }
+  ],
+  "current_delivery_directory": "delivery_ready",
+  "task_bytes": 26144,
+  "task_sha256": "f76783e754b53a1b30ed2d5195543ea5e6bbb4fa369a13f91cabdb95860a6621",
+  "prepublication_author_edit": "Scoped the generated generic Convergence sentence to the exact assigned finite discriminator/use versus smallest-unit no-further-allocation question before publication/readiness. The original node, evidence, authorized delivery and source renderer are unchanged. REQUEST deliverable and Root assignment supply the scope. No READY, accepted or uncertain packet was changed.",
+  "renderer_rejection_and_permitted_alternative": "Renderer rejected reuse of initial output directory: use a fresh output directory; preserve existing packet and send state. Used fresh delivery_ready. Initial TASK_NOT_PUBLISHED files are preserved byte-for-byte in UNPUBLISHED_DRAFT.zip, which is provenance only and not a dispatch route.",
+  "unpublished_draft_archive": {
+    "path": "UNPUBLISHED_DRAFT.zip",
+    "bytes": 11382,
+    "sha256": "dfb7a1a010eb012a366fdc9a2e186a961b54b6369e3eed347dd39d57964c0b98",
+    "members": [
+      {
+        "name": "TASK.md",
+        "bytes": 25919,
+        "sha256": "e69b8b54246e896ae8c4e4d44bd5a10764ee93b7a0d6388d67d092ed798d902b"
+      },
+      {
+        "name": "HANDOFF.json",
+        "bytes": 3097,
+        "sha256": "50b13bb976503cbfabb820c2dd705fa3ef76ff20457c5b643c0fbff565e6c325"
+      }
+    ]
+  },
+  "local_reference_validation_only": "Git-object existence and published reachability do not certify provider access.",
+  "scientific_invocations": 0,
+  "provider_sends": 0,
+  "transport_dispatches": 0
+}

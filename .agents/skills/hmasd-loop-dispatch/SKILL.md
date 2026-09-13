@@ -1,70 +1,53 @@
 ---
 name: hmasd-loop-dispatch
-description: Use when HMASD Root plans or advances the research working set, handles native returns or Transport receipts, replaces an available direction slot, or is about to wait.
+description: Use when HMASD Root plans or advances the research working set, handles native direction returns, replaces an available direction slot, or is about to wait.
 ---
 
 # HMASD research loop
 
-Root coordinates execution within accepted decisions. ROOT_OPERATIONS.md owns responsibilities
-and routing. Assign a relevant recently active DM to prepare Portfolio Pro materials and check
-its response under `hmasd-portfolio-task`; Root does not draft or select Portfolio science.
-Directions are independent rolling chains. A batch name is provenance only and never a dispatch,
-intake, cleanup or completion barrier between directions.
+Root maintains four parallel direction DM chains. DM owns ordinary science, code, Pro intake,
+monitor adoption, collection and continuation. Root records changed events, integrates accepted
+commits and resolves actual cross-direction dependencies. ROOT_OPERATIONS.md owns routing.
 
 ## Stable next-action trigger
 
-At goal-turn entry, a return or receipt, and before waiting:
+At entry, an actionable native return, and before the first wait after useful work:
 
-1. Apply current owner instructions and pause/stop boundaries first. Control-plane edits
-   and status questions do not resume research. During a pause, perform only authorized
-   closeout, evidence preservation and the requested non-research work.
-2. Make a short pass over each direction's changed event stream and current tracking. Identify ready continuations,
-   completed deliveries needing integration and actionable vacancies. Read only the affected
-   current Portfolio row and original evidence. Count actual advancing directions under AGENTS §5.
-3. Dispatch already-ready independent work before lengthy acceptance, integration or planning.
-   Do not dispatch a dependent launch until its own inputs are accepted and published. Short
-   routing of another direction's result to its existing DM need not wait for that integration.
-4. Accept one bounded delivery or resolve one vacancy from current evidence and authorized
-   priorities, then dispatch its ready continuation and return to step 2. For a lengthy operation,
-   service other ready work at its next recoverable boundary. Keep scientific intake with DM
-   and the complete technical batch with the same DM, optionally using an Operator under ROOT_OPERATIONS.md. Root selects
-   replacements within accepted priorities; an unresolved scientific choice goes through the
-   designated DM to the proper Pro node. Portfolio responses return to their designated DM
-   for scientific/specification checking, then Root applies the conforming decision. Never hold a
-   ready direction for peer completion or to assemble a multi-direction result bundle.
-5. Check that each accepted experiment has confirmed adoption by the independent Luna/low
-   monitor under EXPERIMENT_MONITOR.md. DM/Operator's `MONITOR_ADD` must require the recipient to
-   read/continue its unfinished goal or create an unbudgeted goal. Confirmed adoption includes the
-   monitor's actual unfinished goal state and handle membership; a dispatched message alone is not
-   adoption. Route each terminal notice to its original
-   DM for remaining collection/intake using followup_task, without waiting for other runs.
-   Reconcile `MONITOR_GOAL_COMPLETE` only after its active set is empty and every terminal notice
-   was delivered to Root.
-   Read supervisor state only for handles Root actually owns or is reconciling after lost
-   observation. Route terminal evidence promptly. If Transport is idle with a pending request,
-   reconcile its persisted state and resume that same observation/recovery route. App dispatch
-   acceptance is not provider Send acceptance.
-   A failed-effect Send, uncertain acceptance, archive-label defect or receipt
-   failure gets an explicit same-request Transport recovery assignment at this
-   boundary. Route an already available complete immutable response to its DM
-   immediately; metadata correction proceeds independently. Before ending the
-   Root turn, establish that pending recovery is actively owned or record its
-   concrete unavailable prerequisite. A reported blocker or exhausted click count
-   is not a completed request, and queued recovery does not count as advancement.
-6. After every currently ready independent action is dispatched, end the Root turn when the
-   remaining dependencies are long-running DM, legacy CM, Monitor or Transport work. Do not use
-   `wait_agent`, `wait_threads`, timers or status polling to hold that turn open. The independent
-   completion relay wakes Root for actionable native returns; Monitor and Transport use their
-   existing direct Root receipt routes. On that wake, process and dispatch the waking direction
-   before ending the new turn. A batch never creates a completion barrier; unresolved waits do
-   not fill available direction slots.
+1. Apply owner pause/stop boundaries. Workflow edits and status questions do not resume research.
+2. Process only changed direction events. Write a brief existing-log entry with direction, event,
+   evidence/commit and any Root action. DM handles routine Monitor/Transport receipts directly;
+   Root does not poll their handles, recheck adoption or repeat scientific intake.
+3. Integrate ready accepted work and resolve concrete dependencies when needed. Direction-local
+   continuation remains with the original DM without a new Root approval or dispatch per object.
+4. A formal direction pause/closure releases its slot. When occupied slots fall below four,
+   Root uses hmasd-portfolio-task to author and dispatch a bounded replacement question to
+   portfolio:cross_direction through its own reusable native Luna/high Agentify Transport child.
+   Root reads the complete response, checks scope/specification conformance, records the Pro
+   decision and creates the selected new direction's DM with its bounded starting assignment.
+   Pro selects the direction and investment. Ordinary direction-related Portfolio questions and
+   responses remain with their author DMs. Preserve the shared node's single-writer binding.
+5. Record pending replacement request IDs and reserved slots in existing tracking. Repeated events
+   or timeouts reuse the same request; recount occupied/reserved slots before creating a DM.
+   An experiment/object/allocation ending, temporary blocker, Pro wait or idle child is not a
+   direction vacancy. Resume the same DM's authorized continuation/recovery when necessary.
+   Existing overlap above four drains without interrupting live directions; no fifth admission.
+6. After useful independent work, wait natively for DM events or Root's own replacement Transport.
+   Use the configured 1500000 ms default/minimum. An unchanged timeout briefly continues waiting
+   without a new dispatch pass, full-record reread, status polling or Portfolio request. The owner
+   accepts periodic context reuse and brief continuation as the cache-preservation premises.
+   Reconcile an idle/unassigned child rather than waiting indefinitely. Owner pause/stop and
+   no-work completion end the turn. Never impose a sibling or batch barrier.
 
 ## Bounded assignments
 
 Use ENGINEERING_SCOPE_SPEC §7.1 for L0 and optional L1–L3 detail. Include the existing
 branch/checkout and known collection, integration, intake, cleanup and selected follow-on work.
-DM carries the engineering and scientific batch through completion; no separate CM or new
-planning handoff is required for ordinary implementation steps.
+DM carries science, implementation, self-checks, repairs and acceptance through completion in
+the same task. Under OWNER_DIRECT 2026-09-12, do not dispatch CM or Implementer
+subagents, including generic implementation substitutes. Retain independent Reviewer review for
+high-risk changes under ENGINEERING_SCOPE_SPEC §7.3; DM resolves findings and accepts.
+Accepted legacy assignments close on their original routes without
+successors; other specialist and independent-task routes are unchanged.
 
 Native work uses `followup_task`; `send_message` only conveys information requiring no
 new work. Retain actual dispatch outcomes and reconcile uncertain delivery before retrying.
@@ -75,7 +58,7 @@ Root maintains PORTFOLIO.md, EXPERIMENT_TRACKING.md and useful evidence in the e
 root-log. Combine routine record edits only when they are already ready together; never delay a
 direction to manufacture a multi-direction update. Push every commit immediately.
 Coordinate only actual overlapping file/index work. Follow SIBLING_COMMUNICATION.md for
-native tool addressing and independent Transport receipts.
+native tool addressing and DM-owned Transport receipts.
 
 Owner delegation, scientific caps, exact-source execution, memory admission and uncertain
 Send rules remain binding. A repaired wrapper does not authorize another scientific attempt.

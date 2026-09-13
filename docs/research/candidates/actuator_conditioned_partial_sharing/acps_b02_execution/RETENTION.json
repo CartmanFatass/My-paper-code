@@ -1,0 +1,79 @@
+{
+  "archive": "docs/research/candidates/actuator_conditioned_partial_sharing/acps_b02_execution/ACPS_B02_9102_RAW.tar.gz",
+  "archive_bytes": 1035876,
+  "archive_sha256": "d287e2b9c718c27881c951269e7ff08d91df323f372fef69422e881baef9676b",
+  "files": [
+    {
+      "path": "ACPS/admission.json",
+      "bytes": 504,
+      "sha256": "f43379fff7780732395b61a5f00ab25c9e3241efd22c8e41123e65f3287ea835"
+    },
+    {
+      "path": "ACPS/episodes.jsonl",
+      "bytes": 405930,
+      "sha256": "1efc79f9aecd5349a5be8c6629ceaebb52fd20949ed731e57da4e0c1e1cf37e1"
+    },
+    {
+      "path": "ACPS/final.pt",
+      "bytes": 290803,
+      "sha256": "a8cdd76110030f32920afa2ec54488996ef43c253778e88c75968076b252f826"
+    },
+    {
+      "path": "ACPS/process_wall_seconds.txt",
+      "bytes": 7,
+      "sha256": "4353f63eb311010a764fa851bebd440bc1707047aeb7c1800d6cf78ab72230d3"
+    },
+    {
+      "path": "ACPS/rollouts.jsonl",
+      "bytes": 187880,
+      "sha256": "e5d69f0ca99595c6004d6fe2c7fa4098c43182acb196ba9ff4c84148f81f89ac"
+    },
+    {
+      "path": "ACPS/summary.json",
+      "bytes": 558323,
+      "sha256": "d7f88a2a0952db7800849fe0252dc1d2658813f2b0482e3a4da009f99b1e9943"
+    },
+    {
+      "path": "ACPS/supervisor.log",
+      "bytes": 1447,
+      "sha256": "337d59abfce8a63226b46a46c77e5b5abf5b97a529f5e3d32d4884bab5d1a3fb"
+    },
+    {
+      "path": "SHARED/admission.json",
+      "bytes": 504,
+      "sha256": "516d0a39b9bf578bafad11ba0b9c6eeb372e9c2d636bd2e10bfca20ada5cfad4"
+    },
+    {
+      "path": "SHARED/episodes.jsonl",
+      "bytes": 407213,
+      "sha256": "c306bb5dcdc57c421d938ff6bd3e8c35b217cce241f9fa99f90384009be4411f"
+    },
+    {
+      "path": "SHARED/final.pt",
+      "bytes": 285053,
+      "sha256": "8f3cd86c59acdcabf69096eba0c3d651f7733688a5eba98691bba8bc2a0c86d8"
+    },
+    {
+      "path": "SHARED/process_wall_seconds.txt",
+      "bytes": 7,
+      "sha256": "53ce8543247a0619a9077f6c7a2544ad598c8dcc30ef46d920941aec207742da"
+    },
+    {
+      "path": "SHARED/rollouts.jsonl",
+      "bytes": 187858,
+      "sha256": "28392b3b3f66ac8542f55d781c20a6532b0bf3a5e097df0db09467f463aa5ab8"
+    },
+    {
+      "path": "SHARED/summary.json",
+      "bytes": 559192,
+      "sha256": "1e26d3ee9e9cd4c63bfc24738dcf7acfaae6a168f80a14752dd336761a12180d"
+    },
+    {
+      "path": "SHARED/supervisor.log",
+      "bytes": 1454,
+      "sha256": "9c7e9a369088099be5a3d5f8a0753ff34d0e8eefaf86c58cd63cbeef87ecab83"
+    }
+  ],
+  "archive_readback_matches": true,
+  "remote_sha256_matches": true
+}

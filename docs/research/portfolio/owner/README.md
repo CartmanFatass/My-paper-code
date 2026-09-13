@@ -33,7 +33,7 @@ python tools/owner_console/item.py trace <id> --authority "PRO_FINAL / OWNER_DEL
 
 ## 2026-09-10 Portfolio 裁决与异步覆盖
 
-按 AGENTS §4.8，新 Portfolio Pro 裁决由指定 DM 完整读取并检查适用规范，Root 执行符合范围的裁决，不等逐项 ratify。
+按 AGENTS §4.8，普通 Portfolio Pro 裁决由作者 DM 完整读取并检查适用规范；Root 自己的空位补位请求由 Root 完整读取、检查并执行。Root 执行符合范围的裁决，不等逐项 ratify。
 新默认选项为 keep/refuse/amend；keep 或 agree 只表示已阅，不增加运行授权。
 refuse/amend 在下一个干净边界覆盖后续执行，保留已执行效果和历史，不隐含重跑或回滚。
 旧 ratify 条目与回复保留原语义；自定义选项保留其实际含义。执行状态仍用 trace 的 planned/applied/blocked，
