@@ -43,6 +43,11 @@ An unchanged timeout remains silent. At completion of a bounded assignment, a ma
 scope conflict, or entry into an idle state while the direction is still ACTIVE, the DM sends one
 proactive parent action message naming the assignment, state, evidence/commit and next action or
 dependency before native final/idle wait. This is an event handoff, not a periodic keepalive.
+Each completion or ACTIVE-idle event is also a stable Root dispatch point: integrate the returned
+evidence, recount running/reserved directions, and resume the same DM's next authorized bounded
+work when available. Keep an ACTIVE direction occupied through an object/allocation, cleanup, Pro
+wait or child completion; release a slot only for an explicit Portfolio/owner lifecycle pause or
+closure.
 
 ## Maintained sources
 
