@@ -1,0 +1,28 @@
+{
+  "collected_at": "2026-09-13T20:50:23.154098+00:00",
+  "source_sha": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+  "remote": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/BANK",
+  "task": "folr-ref-use-bank-781301-5dce539ed54a",
+  "archive_sha256": "efd538cfdb19ba402ec08859bc85309b1e5f7dfd66233ebd6c8bbf614cf31402",
+  "archive_bytes": 2235,
+  "members": [
+    {
+      "path": "summary.json",
+      "bytes": 5221,
+      "sha256": "ae302602f8469d3d8334b982c1f42c7f4f35b819131f7316c7eb64abc0713a79"
+    },
+    {
+      "path": "ADMISSION.json",
+      "bytes": 504,
+      "sha256": "4744bc4bda1b004e22ca500676b5ca4bfc6761a4707d5faecc1c3b5d15d6f9b8"
+    },
+    {
+      "path": "INVOCATION_TIME.json",
+      "bytes": 100,
+      "sha256": "ed72c86117f76cc8de986f24858ea570c8eec249a1d13fcc2e94724b851fe405"
+    }
+  ],
+  "collection_control_wall_seconds": 0.8900000000139698,
+  "model_loads": 0,
+  "scientific_invocations": 0
+}

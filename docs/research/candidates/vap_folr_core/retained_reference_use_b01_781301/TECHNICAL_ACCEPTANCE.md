@@ -2,9 +2,13 @@
 
 Status: **DM technically accepts source5dce539ed54afd4334d09db9dcd94df38c52c2fc**.
 The sole new Generic invocation was accepted on2026-09-13 at20:07:19Z and its
-native Monitor adopted the handle at20:09:12Z. No scientific endpoint is accepted
-at this boundary; fixed BANK evaluation remains dependent on complete Generic
-technical acceptance. [Launch facts](GENERIC_LAUNCH.json),
+native Monitor adopted the handle at20:09:12Z. DM now accepts its complete
+5000-training/4969-update/128-final endpoint, collected after exit0 at20:43:15Z.
+The dependent fixed BANK128 then passed its own admission and completed with
+exit0 at20:48:33Z. Both endpoints and the unchanged published primary are now
+accepted; [combined E0](../FOLR_RETAINED_REFERENCE_USE_B01_RESULT_EVIDENCE_20260913.md)
+and [scientific intake](../FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md)
+apply the Generic-only use rule. [Launch facts](GENERIC_LAUNCH.json),
 [adjacent admission](GENERIC_ADMISSION.json) and [fixed input staging](BANK_STAGING.json)
 preserve the exact execution. Baseline8768f0f83, first source0bd5c477b. This record remains
 separate from the scientific Portfolio intake and later scientific result.
@@ -125,3 +129,82 @@ supervisor handle and native observation transfer, recommended over a duplicate
 launch or parent polling. FOLR remains ACTIVE/MEDIUM. The next scientific action
 is terminal collection and Generic technical acceptance, then the fixed BANK
 panel if the required endpoint is complete.
+
+## Generic terminal intake and dependent BANK selection — 2026-09-13
+
+Native Monitor returned the exact Generic terminal handle with exit0, inactive
+tmux and integer duration2156s. Its event identifier is preserved in
+[GENERIC_ACCEPTANCE_FACTS.json](GENERIC_ACCEPTANCE_FACTS.json); the identifier's
+embedded clock is not used as the exit time. The full collected supervisor log
+records20:43:15Z exit, and complete GNU time is2156.67s. Full output and final.pt
+are retained in GENERIC_RAW.tar.gz with member digests in GENERIC_COLLECTION.json;
+summary and native time/admission/log bytes are also directly readable here.
+Collection used no model load, new RNG or scientific invocation.
+
+Against the fixed card, DM checked exact object/source/arm/seeds, CPU Torch1/1,
+5000 finite training returns/100000 native ticks/4969 optimizer steps, nonzero
+actor movement32.96180604013214, one published final checkpoint, and128 finite
+final returns/2560 ticks. Executable arithmetic reproduced every published panel
+statistic from the complete final return array. PeakRSS769632KiB is measured;
+native wall2156.67s (user2041.50/system114.43) includes adjacent admission through
+publication/exit and is below2700s. The process did not time out. No integrity or
+source-budget conflict was found; the native lifecycle and host semantics remain
+the accepted tested path, without a new replay requirement.
+
+Direct own-policy observation: mean1.055, sampleSD6.032188200660601, conditional
+episodeSE0.5331751477600736, range[-13.46,22.16], n128. This is one fitted Generic,
+not128 training replicas and not a comparative result. Scientific-reading reuse
+from FOUNDATIONS §6/04_EMPIRICAL remains applicable: episode uncertainty is
+conditional on this policy, while historical BANK selection remains outcome-
+informed. No training-population, memory-cause or stable-superiority inference.
+The old E Generic failure and its missing comparison are unchanged.
+
+Rule applied verbatim from the current card: “Only after DM technical acceptance
+of this complete fit and panel does the historical BANK run **128 new
+episodes/2560 ticks**, regardless of Generic’s score.” The required complete
+endpoint is accepted. Generic's positive mean does not screen or cancel BANK.
+
+Collection adds measured control wall3.203s to the known support lower account,
+now141.662s including failed preparation and focused checks. Full attributable
+support/provider cost coverage remains UNKNOWN; this is not a full compliance
+estimate or an excluded-cost allowance. Native2156.67s plus the unchanged BANK
+cap300s is at most2456.67s, inside native3000s without any cap transfer.
+All five granted caps, failed-work accounting and no-retry boundaries remain.
+
+### Decisions this intake produces
+
+| Tier / decision | Options and recommendation | Selection |
+| --- | --- | --- |
+| Object technical / Generic acceptance | Accept full trustworthy endpoint (recommended); withhold BANK on a concrete missing endpoint | Accept complete Generic and retain its own-policy facts |
+| Object / fixed dependent panel | Execute exact BANK128 after its new admission regardless of Generic score (recommended); change panel or seek another approval | Execute original funded panel; no changed seed, policy, exposure or cap |
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): accept Generic and
+execute the exact fixed BANK128 under the already final Portfolio F. Live owner
+reviews returned[] at this boundary; owner prediction remains not taken. The
+combined primary and scientific use disposition remain pending BANK completion.
+The new BANK handle/command are pinned in BANK_LAUNCH_PLAN.json before submission;
+native Monitor adoption follows acceptance. No further Pro question is open.
+
+## Fixed BANK completion and combined technical closure
+
+The sole dependent task `folr-ref-use-bank-781301-5dce539ed54a` was accepted after
+Generic intake, PID3427261, with15,627,558,912 physical/effective bytes available
+at its own adjacent admission. The same Monitor returned ADOPTED and TERMINAL
+together because BANK was finished on its first query: exit0, inactive tmux,
+native supervisor duration3s. Complete GNU wall3.18s includes startup/admission,
+load, evaluation, original primary publication and child exit. PeakRSS394876KiB.
+
+Full recorded BANK output has0 new training episodes/ticks/optimizer steps,
+actor displacement0, the fixed historical seed781201 and the new evaluation
+seed2781301, with all128 final episodes/2560 ticks. It uses the exact staged
+checkpoint and source5dce; no new learner or checkpoint was constructed. Both
+full arrays reproduce native statistics and `d_use=-5.932421875` with the exact
+GENERIC_ONLY_BANK_WORSE branch. DM accepts technical execution and publication
+separately from the bounded use inference in the combined scientific intake.
+
+Combined native wall2159.85s is within2700/300/native3000 limits. No new tests or
+scientific replay were needed at this terminal boundary. Original bytes from
+both panels, the new Generic final weights and20 support/supervisor files are
+preserved; CLEANUP_INVENTORY.json records terminal paths without deleting them.
+No live native experiment remains. The direction stays ACTIVE/MEDIUM; no pending
+Pro request or scientific approval remains for F.
