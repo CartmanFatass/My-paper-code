@@ -1,5 +1,11 @@
 # MGTAP Portfolio conformance return — 2026-09-13
 
+Completed: full amendment `3a69ae2b02f16ac815d1e41ea2fff3a46f3bb0c2` resolves both clauses;
+the author read all 41 lines and recorded conformance in the existing
+[intake §5](../../../candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/PORTFOLIO_INTAKE_20260913.md#5-completed-same-node-correction--2026-09-13).
+The shared binding is ARCHIVED and released. The preparation boundary below records the
+original authoring sequence, not a pending Send instruction.
+
 The existing author returns two exact nonconforming clauses to the same Portfolio node.
 The original full investment decision remains preserved at Pro commit
 `f1897441ce560dbca01a834dd72e035c63c68e0a`; author intake is published at
