@@ -20,12 +20,15 @@ This authority preserves the direction's source-grounded scientific question, ev
 ## Current scientific question
 
 How can jointly learned behavior improve useful native service through physical
-roster changes under legal information and a competent service reference? RCLE's
-multi-agent credit question remains scientifically open. The completed post-B07
-Convergence judgment holds further development spending only on the tested
-equal-unit/.99-prior/FLEX/final1000 recipe and no longer recommends its unchanged
-fresh-fit candidate. It preserves attained INDEPENDENT-NEAREST and the direction's
-continuing scientific ownership. It does not select another mechanism or object.
+roster changes under legal information and a competent service reference? The
+accepted [joint-quota-phase family decision](RCLE_JOINT_QUOTA_PHASE_FAMILY_INTAKE_20260912.md)
+selects one learned public common-phase controller against GREEDY-QUOTA-PHASE,
+attained INDEPENDENT-NEAREST and its own initialization. This new family directly
+tests the existing roster-service question. Following its complete B08 observation,
+the exact tested joint-quota-phase/256-update Adam/final256 recipe is on a reversible
+development-spending HOLD under the [post-B08 Convergence intake](pro_packets/20260913_post_b08_development/INTAKE.md).
+The family remains open. The separate tested equal-unit/.99-prior/FLEX/final1000
+recipe remains on its earlier narrow spending HOLD.
 
 ## Current position
 
@@ -80,17 +83,49 @@ or credible new evidence affecting its service value/cost: state how another
 observation would alter inclusion of the optional learned path. It need not be
 positive, an exact optimum or a complete causal explanation. This is a revisit
 condition, not today's retained fit, new algorithm or automatic consultation.
-The broader direction remains open; a subsequent object needs its own scoped
-selection. Portfolio L's [accepted documentary intake](RCLE_L_DESIGN_INTAKE_20260912.md)
-returned one joint-quota-phase proposal. The new Portfolio commitment funds its
-original-node family/use question and conditionally its exact B; **family
-selection remains pending and B remains inactive**. The proposal asks
-whether real learning of a common public joint choice improves physical U over
-both greedy joint choice and attained nearest; claim-count matching alone is
-not service evidence. This is a proposed surviving use, not an accepted new
-mechanism or empirical finding. [Current continuation](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md)
-records the published original-family task, conditional boundary and continuing
-DM ownership. The tested recipe HOLD remains separate.
+The broader direction remains open. Portfolio L's [accepted documentary intake](RCLE_L_DESIGN_INTAKE_20260912.md)
+returned one joint-quota-phase proposal; Convergence's complete response8aa3f7bd7,
+integrated31472f0b2 and [conformingly intaken](RCLE_JOINT_QUOTA_PHASE_FAMILY_INTAKE_20260912.md),
+selects it unchanged as a new object family, explicitly not a direction RECAST.
+That commitment funded [B08's complete one-fit comparison](RCLE_B08_JOINT_QUOTA_PHASE_INTAKE_20260912.md).
+The final learned quota phase improves U from its own initialization by.048152669,
+with256 nonzero Adam updates and all eight initialization cells improved. It
+nevertheless trails greedy quota phase by.533040365 U and attained nearest
+by.370141602 U on the prespecified two-path mean; both paths and all eight
+reference-service cells are adverse. The card's no-endpoint-advantage reading
+favors the fixed rules for this observed optional-service use. F=0 remains
+structural; favorable nearest-relative F/recovery and the mixed greedy recovery
+paths do not erase the native service deficits.
+
+This is the strongest present contradiction to the tested learned allocator,
+while actual learning remains support against a broad unlearnability claim.
+Finite training, policy-gradient signal quality and representation remain
+unidentified alternatives. Ideal public dispatch is shared with greedy and
+differs from nearest's communication requirement; no isolated correlation/credit/
+optimizer cause or equal-communication conclusion follows. The full invocation
+took45.39s with613,072KiB peak RSS; this bounded observation does not establish
+scalability, stable performance or C/UAV transfer. Historical recasts and the
+old recipe HOLD remain intact.
+
+The selected one-fit discriminator is complete. The conformingly accepted
+[post-B08 Convergence response](pro_packets/20260913_post_b08_development/INTAKE.md),
+immutable e4fd016e1612d0d4ad6a18a9a2eb4ac2f06478a0, now places only this tested
+joint-quota-phase/256-update Adam/final256 recipe on reversible development HOLD.
+The attained service deficits outweigh the current case for unchanged candidacy,
+while positive learning, short native execution and unknown training-history
+variation remain the strongest opposition. This qualitative development judgment
+does not establish stable inferiority or a class limit and selects no second fit.
+
+Revisit this exact recipe when an actual authorized use makes keeping it beside
+greedy a real development choice and another training history could change that
+choice, or credible new service-value/complete-cost facts change the judgment.
+The reason may use negative or mixed facts; no positive pilot, exact optimum or
+complete diagnosis is required. This condition commissions no prior diagnostic,
+search for a reason or automatic consultation. The family remains open.
+[Current continuation](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md) retains
+the same DM and ACTIVE/MEDIUM direction and returns the distinct continuation/
+capacity need. B08 retention and cleanup are complete; neither its ended finite
+allocation nor this narrow recipe HOLD is a whole-direction disposition.
 
 The historical sections below preserve earlier objects and their own limits.
 

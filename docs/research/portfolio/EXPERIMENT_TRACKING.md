@@ -5,11 +5,11 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; four remote targets reclaimed after verified retention | Portfolio DM actively prepares one bounded ACPS investment/design/lifecycle question; ACTIVE/HIGH, no local stop or empirical successor |
-| MGTAP | Portfolio funds one original Convergence COND512/intact-DENSE768-or-decline judgment, zero empirical spend | Original DM actively authors the exact question and owns Transport handoff plus full intake |
-| RCLE | Portfolio funds one original Convergence family/use selection; conforming selection conditionally funds one B | Original DM actively authors the exact question; zero implementation/experiment until selection |
-| ACVC | K complete and both frozen primaries accepted UP; ACTIVE/MEDIUM | Original DM actively prepares one proper direction-node next-object/use question; no K retry or empirical spend |
-| FOLR | E complete: Generic no final, BANK complete, no pair primary; ACTIVE/MEDIUM | Original DM actively prepares one proper direction-node finite same-information discriminator/use question; no Generic retry |
+| ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; Portfolio Q intake and zero-exposure preparation published; ACTIVE/HIGH | Wait for Transport redesign validation, then publish/bind the original Q once; no old-request resend or empirical successor |
+| MGTAP | Portfolio B 与同节点 conformance amendment 已完整 intake；一次 master pair（COND512 / intact-DENSE768）获 caps COND600s、DENSE900s、native1500s、support900s、complete2400s；ACTIVE/MEDIUM | 原 request 仍是 effect-uncertain 且永不重发；修正已归档并释放 binding。DM 进行 fresh exact-source/resource admission，获准后仅运行该 pair |
+| RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Family remains open; only revisit exact recipe when a decision-relevant use or new service/cost evidence appears; no automatic fit successor |
+| ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Prepare next direction-node use/no-addition question; no new fit or K retry before proper decision |
+| FOLR | BANK −4.3261 retained; Generic no final, no paired primary; finite investment readiness published but unfunded; ACTIVE/MEDIUM | Keep material ready behind shared Portfolio writer; no Generic retry, model load or experiment |
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
 | FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 

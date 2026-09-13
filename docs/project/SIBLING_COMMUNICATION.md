@@ -24,13 +24,21 @@ waiting: no rereading all cards, status census, repeated assignment or progress 
 The owner accepts periodic context reuse/cache refresh and brief continuation as design premises.
 No per-DM keepalive messages, ACK loops, timers or separate relay are needed.
 
+An unchanged timeout stays quiet. When a bounded assignment reaches completion, hits a material
+blocker or scope conflict, or has no immediate authorized work while its direction remains ACTIVE,
+the DM must send one proactive action message to its parent before returning a native final or
+entering idle wait. That message names the assignment, state, evidence or commit, and next action
+or dependency. This is an event handoff, not a keepalive; it does not authorize periodic status
+broadcasts or duplicate the final message.
+
 Wait only for an actual active dependency. A concrete blocker returns to its accountable owner;
 an idle child with unfinished authorized work is resumed once with followup_task. Never interpret
 a timeout as failed execution, a new invocation budget or permission to retry scientific work.
 Owner pause/stop boundaries take precedence. No-work completion is not a reason to loop forever.
 
-DM sends Root only actionable integration, cross-direction dependency, formal direction disposition or scope-conflict
-facts, with assignment identity, commits/evidence, requested next action and uncertain effects.
+DM sends Root only actionable integration, cross-direction dependency, formal direction disposition,
+scope-conflict, or bounded-assignment completion/ACTIVE-idle facts, with assignment identity,
+commits/evidence, requested next action and uncertain effects.
 Continue independent authorized direction work after a partial handoff. Root handles the changed
 direction without waiting for siblings or routinely reloading the whole portfolio. Deduplicate
 message and final copies by source, assignment and evidence revision. Root accepts artifacts;

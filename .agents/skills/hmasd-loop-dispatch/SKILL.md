@@ -9,9 +9,21 @@ Root maintains four parallel direction DM chains. DM owns ordinary science, code
 monitor adoption, collection and continuation. Root records changed events, integrates accepted
 commits and resolves actual cross-direction dependencies. ROOT_OPERATIONS.md owns routing.
 
+## Completion as a stable dispatch point
+
+A DM bounded-assignment completion, material blocker/scope conflict, or ACTIVE-idle event is an
+actionable native return. Root immediately runs the stable next-action trigger at that boundary:
+integrate the named evidence/commit, recount actual running and reserved direction slots, and
+resume the same direction's next authorized bounded assignment when one exists. If no immediate
+action is authorized, keep the direction ACTIVE and occupied, retain its prepared
+materials/dependency, and leave the DM in a native wait after one proactive parent event. An object,
+allocation, cleanup, Pro wait or child completion never releases a direction slot. Only an explicit
+Portfolio or owner lifecycle pause/closure releases it and can trigger vacancy replacement.
+
 ## Stable next-action trigger
 
-At entry, an actionable native return, and before the first wait after useful work:
+At goal-turn entry, every bounded-assignment completion or actionable native return, and before
+the first wait after useful work:
 
 1. Apply owner pause/stop boundaries. Workflow edits and status questions do not resume research.
 2. Process only changed direction events. Write a brief existing-log entry with direction, event,
@@ -37,6 +49,11 @@ At entry, an actionable native return, and before the first wait after useful wo
    accepts periodic context reuse and brief continuation as the cache-preservation premises.
    Reconcile an idle/unassigned child rather than waiting indefinitely. Owner pause/stop and
    no-work completion end the turn. Never impose a sibling or batch barrier.
+
+DM event visibility: unchanged waits remain quiet, but a bounded assignment completion, material
+blocker/scope conflict, or ACTIVE direction entering idle must produce one proactive parent action
+message before native final/idle return. Include assignment, state, evidence or commit, and the
+next action/dependency; this is not a periodic keepalive or an extra dispatch.
 
 ## Bounded assignments
 
