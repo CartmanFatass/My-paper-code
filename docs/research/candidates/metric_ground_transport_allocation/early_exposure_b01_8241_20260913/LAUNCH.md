@@ -9,7 +9,8 @@ Node hmasd-wsl-node (LAPTOP-U9TDKC8A, Ubuntu WSL), configured interpreter
 `/home/wu/.venvs/hmasd/bin/python`, CPU FP32/thread1 and no GPU.
 Detached exact-SHA checkout: `/home/wu/hmasd-worktrees/mgtap-early-8241-20260913`.
 Source comes only from the published Git object, not copied uncommitted bytes.
-The checkout includes the named committed command directory in its sparse view.
+The checkout retains the configured source-only sparse view; the single named
+COMMAND.sh is restored directly from the same Git commit outside that view.
 
 Unique supervisor identity: `mgtap-early-8241-20260913`.
 Read-only supervisor check at2026-09-13T23:47:09Z returned not_found; no invocation
@@ -46,3 +47,22 @@ Independent Convergence design review has been dispatched under request
 not Pro funding/lifecycle authority. Design/claim findings receive a full DM
 response before affected conclusions are accepted. The run remains the DM's
 finite ordinary B, not a Pro launch-permission question.
+
+## Source preparation receipt, before launch
+
+At2026-09-13T23:52:19.8698721Z the exact detached HEAD0d161633e3bb6884b56ef57a0200060b659c56a8,
+clean git status, bash -n of COMMAND.sh, Python3.10.21 and supervisor not_found
+were verified. Zero scientific invocations had occurred.
+
+Node SSH was healthy but its GitHub HTTPS fetch stalled. The known owned fetch
+was terminated; no experiment was involved. A local Git bundle from published
+branch2cdd0680e7a5ca0d5adac1a17e827c021bebb093 above the node's existing
+ecf40e0ade4576fd75ffb0eab09425cb5c4ce059 transferred only committed objects.
+Size1,565,819 bytes, SHA256
+b80af857b1b5e953cc0ebc92feda2d1542d972c1f57fc1cede93cc59d754a6de,
+matched locally/remotely; remote git bundle verify passed all prerequisites.
+The bundle supplied the exact launch SHA with no scientific source change.
+An attempted docs cone expansion triggered another stalled lazy HTTPS fetch;
+its verified owned process group was terminated. Sparse rules remained unchanged.
+Restoring only COMMAND.sh from the exact Git object succeeded without lazy fetch.
+No uncommitted source copy, global Git change, scientific retry or probe occurred.
