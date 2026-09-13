@@ -36,6 +36,9 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
   The accepted use and its bounds are in [the complete U intake](pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md).
   FSD remains ACTIVE under owner instruction; finite N/U completion creates no
   direction stop, sixth pair, default/C/UAV promotion or automatic consultation.
+  Latest Portfolio selects **no current addition** while preserving ACTIVE/HIGH:
+  no LONG or repeated U purchase, sixth pair, code, analysis or experiment.
+  [Applied Portfolio boundary](FSD_POST_U_PORTFOLIO_APPLICATION_20260912.md).
 - C-BENCH requires the evidence and prior Innovator decision appropriate to its
   actual claim. Evidence §11.8 supplies no fixed seed-count or all-positive
   prerequisite, and no C promotion is selected here.
@@ -700,8 +703,10 @@ The use question is answered; no new scientific discriminator is selected by U.
 A concrete changed use, budget/host/information/recipe, later lawful evidence or
 primary-dependent defect may motivate a future properly scoped question. These
 are revisit conditions, not an experiment or consultation schedule. B-LONG-D0
-is absent from U and remains separately unallocated; current direction continuity
-and all earlier family boundaries remain. Complete U cost is accepted UNKNOWN.
+is absent from U; the latest Portfolio explicitly selects no current LONG or
+repeated-U purchase and leaves that offer unallocated. ACTIVE/HIGH and all earlier
+family boundaries remain. Complete U cost is accepted UNKNOWN; the no-addition
+application is linked in Position and is not a direction stop.
 Evidence: [full response](pro_packets/20260912_post_five_pair_use_convergence/archive/RESPONSE.md)
 and [original-DM intake](pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md).
 

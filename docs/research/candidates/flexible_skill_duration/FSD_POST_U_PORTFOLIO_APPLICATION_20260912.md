@@ -1,0 +1,15 @@
+# FSD — post-U Portfolio application
+
+**Applied: no current addition; retain limited optional I1280, authentic D0 default and ACTIVE/HIGH.**
+
+Authority is PRO_FINAL / OWNER_DELEGATED Portfolio response `e9f097ed85d554352df95fc97ec4c3f303ac8f5e`, accepted by the designated original Portfolio author and published at main `814139558ccb28502b2e23da6800897b4d7af4b3`. Read the [current decision's FSD row](https://github.com/CartmanFatass/My-paper-code/blob/814139558ccb28502b2e23da6800897b4d7af4b3/docs/research/portfolio/decisions/2026-09-12-post-kelu-marginal-investment.md) and [FSD execution mapping](https://github.com/CartmanFatass/My-paper-code/blob/814139558ccb28502b2e23da6800897b4d7af4b3/docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/EXECUTION_MAPPING.md). Main's published remote ref was observed at that exact commit. Root assigned this bounded direction-local documentary application.
+
+The accepted decision leaves completed U and its narrow same-host/recipe/five-rollout use intact. There is no current LONG or repeated U purchase, sixth pair, code, numerical reanalysis, fit/evaluation, profiling or new experiment. LONG's prior 3900-second offer remains unallocated; an offer and retained candidate are not pending execution authority. No new scientific discriminator is selected. No-addition changes no scientific polarity, priority, lifecycle or recast, and does not stop the ACTIVE direction. A later concrete changed-use/investment decision must use the existing proper route; no automatic request is created here.
+
+Applied current wording in [DIRECTION.md](DIRECTION.md). The [complete U intake](pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md), all five positive/negative pair records, authentic D0, costs and conditional uncertainty remain unchanged. This DM applies the accepted Portfolio mapping and does not reselect its disposition or re-intake the Portfolio node.
+
+Decision record: object-tier technical options were apply the supplied mapping or reconcile a concrete current-state conflict. Recommend/select application; no concrete conflict found. **Owner-delegated decision (unattended, 2026-09-03 instruction): apply the conforming Portfolio no-addition mapping.** The Portfolio decision has its existing owner item; this technical application adds no new owner decision. Owner reviews at this boundary returned [].
+
+Shared checkout C:/Projects/HMASD-worktrees/codex-fsd, branch codex/fsd, was clean at entry d44e7545b8799c01198c910d248a1bcda0edfdb9; remote codex/fsd matched. Only DIRECTION, this receipt and one audit row are changed, preserving concurrent/main work. No source, frozen request/response or numerical evidence is edited. No model/RNG, analysis, test, remote handle or cleanup operation occurred. Engineering Scope §4: none. Documentary time is unmetered; no previous scientific balance is reused.
+
+Root's remaining action is integration of this receipt/current wording and maintenance of its primary Portfolio tracking. This completed documentary application is not an additional live research chain or a direction stop.
