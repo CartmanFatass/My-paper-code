@@ -1,0 +1,26 @@
+{
+  "request_id": "2026-09-13-rcle-b10-scientific-review-01",
+  "decision_authority": "dm_owned_scientific_review",
+  "handoff_commit": "f6f4ab063cd22689a046bc94810ac3fc48b88077",
+  "task_commit": "34c7ad37324453a87e809222ed8849e0644c0b82",
+  "parent": "/root",
+  "operator": "/root/tr_rcle",
+  "binding": "em:roster_consistent_latent_exploration:convergence",
+  "conversation_id": "6aa55611-bf80-83e8-b018-70e30a95b28a",
+  "operation_id": "094a6cba-6f76-4140-860b-1358e15b6cd9",
+  "effect": "ACCEPTED_ONCE",
+  "sendAttempted": true,
+  "provider_user_message_id": "48359fbe-0414-4524-b36c-4734c76f3eb0",
+  "provider_assistant_message_id": null,
+  "state": "GENERATING_AT_NATIVE_BOUNDARY_NO_COMPLETE_REVIEW_YET",
+  "native_receipt": "exact request accepted after strict repair; Stop answering active; no Stop/Continue/Regenerate/new Send",
+  "active_transport_report": {
+    "strict_repair_wall_s": 46.7,
+    "approximate": true,
+    "bounded_observation_wait_s": 10,
+    "preparation_wall_s": "UNKNOWN"
+  },
+  "remaining_action": "Observe the same accepted operation and archive full answer when bounded closeout support is available; no rebind or resend. DM retains review response and final direction responsibility.",
+  "scientific_acceptance": "Not complete; no full response/claim-resolution has been read. DM reversible PARK decision stands with its review-pending limits.",
+  "cost_boundary": "Known charged support approximately591.003s before final boundary publication, versus600s original cap, with Monitor/Transport preparation and other tails UNKNOWN. Request owner authority for at most60s supplemental active documentary closeout; no new science/fit/seed/source run, no original cap reset."
+}

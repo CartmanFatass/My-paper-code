@@ -1,11 +1,11 @@
 {
   "object_id": "RCLE-TBCFV-B10-GREEDY-ANCHORED-1024",
-  "as_of": "technical source acceptance before launch; partial retrospective accounting",
+  "as_of": "full B10 intake/PARK published a3114f9e7 and scientific review HANDOFF dispatched f6f4ab063, before Transport result and final cleanup",
   "native_cap_s": 300,
   "additional_invoked_support_cap_s": 600,
   "complete_invoked_cap_s": 900,
-  "whole_native_wall_s": "NOT_STARTED",
-  "known_support_charged_s": 437,
+  "whole_native_wall_s": 161.35,
+  "known_support_charged_s": 533.5210191,
   "rows": [
     {
       "operation": "two stalled own remote staging invocations including termination rounding",
@@ -34,14 +34,41 @@
       "operation": "rounding remainder",
       "wall_s": 0.1,
       "bound": true
+    },
+    {
+      "operation": "command/source acceptance publication, launch, read-only intake/collection/recovery and scientific review publication through f6f4ab063",
+      "wall_s": 96.5210191,
+      "breakdown": [
+        4.9941867,
+        0.8040261,
+        0.6777381,
+        0.6946478,
+        0.5492744,
+        0.3182782,
+        0.7,
+        0.7188638,
+        3.3906573,
+        55,
+        7.636629,
+        3.4958976,
+        0.2669506,
+        0.2819426,
+        5.1036497,
+        2.5666389,
+        4.6575895,
+        4.6640488
+      ],
+      "method": "Enclosing tool walls replace nested command times.55s bounds the observed53s failed source-bundle job; pack/fetch descendants not added. Explicit recovery query/kill costs separate, including conservative overlap."
     }
   ],
   "accounting_complete": false,
   "unmeasured_support_components": [
-    "later command/review publication",
-    "launch and Monitor reads",
-    "collection, analysis, scientific review invocation, intake, integration and cleanup"
+    "Monitor invoked observation reads returned UNKNOWN",
+    "Transport preparation invoked reads returned UNKNOWN; read-only is not free",
+    "small documentary/raw-copy tails not measured in this checkpoint",
+    "pending active Transport operations, scientific review intake, publication/integration and cleanup"
   ],
-  "provider_agent_lifetime_cost": "UNKNOWN; not zero",
-  "interpretation": "Charges actual invoked support and conservative bounds once; no experimental invocation yet. Approximately 163 s of support ceiling remains before later charges; incomplete accounting is not a complete invoice."
+  "provider_agent_lifetime_cost": "UNKNOWN; natural provider generation and agent lifetime are not measured active work",
+  "interpretation": "Known charged work at checkpoint is below600s support and900s complete; missing coverage prevents a complete compliance invoice. Original caps remain, no retry/rollover. Nominal measured support headroom66.479s; Transport active work bound near45s reserves about15s for DM closeout, with unknown prior reads explicit.",
+  "known_complete_invoked_s": 694.8710191
 }
