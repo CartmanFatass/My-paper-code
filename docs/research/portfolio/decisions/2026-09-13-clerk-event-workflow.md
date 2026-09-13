@@ -33,3 +33,16 @@ unconditional vacancy consultation and a Portfolio intake sequence incorrectly a
 perform scientific conformance before delivering sources to DMs. The targeted recheck confirmed
 those repairs and found one user-entry name typo, also corrected before publication. Root accepts
 this control-plane implementation; live event consequences are separately observed below.
+
+## MAIN_WRITER_RELEASED activation — 2026-09-13
+
+Root released the shared main writer under event `clerk-activate-20260913-01` after publishing
+control-plane commit `f6763abc42a859cb9e89ad20194456210412fbbe`. Clerk task
+`01a09cfe-1614-7da1-8445-323658edcc70`, new turn
+`01a09d02-7942-71a2-a1d7-5c3705a434a3`, verified `C:/Projects/HMASD` at that HEAD and clean,
+then changed `.codex/hmasd-dm-sessions.toml` to `main_writer = "clerk"` and
+`clerk.state = "active"`. The first observable action was a compact snapshot of all four registered
+Astra/max DM tasks: ACVC, MGTAP, RCLE and FOLR are active and independently preparing their
+post-allocation management proposals. No proposal was yet delivered to Clerk in this snapshot;
+the next mechanical consequence is to assemble and publish the ready overall Portfolio agenda as
+proposals arrive, without an all-DM barrier.
