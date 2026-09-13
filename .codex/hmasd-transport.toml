@@ -1,6 +1,6 @@
 schema_version = 1
 mode = "dm_native"
-# Native parent-child transport: DM for direction nodes; Root for new Portfolio agendas.
+# Native parent-child transport: DM for direction nodes; Clerk for new Portfolio agendas.
 status = "active"
 backend = "agentify"
 registry_path = "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/registry.json"

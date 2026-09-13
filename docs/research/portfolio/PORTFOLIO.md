@@ -1,15 +1,15 @@
 # HMASD Research Portfolio
 
-Current workflow: event-driven Root and four accepted independent Astra/max DM tasks; research remains paused. See [workflow repair](decisions/2026-09-13-direction-management-workflow.md) and `.codex/hmasd-dm-sessions.toml`. On resume each DM resolves any unasked continuation/capacity/lifecycle decision; exhausted objects do not complete direction management.
+Current workflow: owner resumed research on 2026-09-13. Root is the user entry; independent Luna/high Clerk coordinates four Astra/max DMs and the independent Portfolio Pro. Live dispatch/producer facts are maintained below and in .codex/hmasd-dm-sessions.toml.
 控制面仅保留当前有效状态。运行/回报入口见[执行职责](../../project/ROOT_OPERATIONS.md)，
 详细科学依据在各方向记录；历史操作快照从Git查询。
 
 ## 当前27方向状态 — 2026-09-13 Windows/PowerShell 控制面
-Owner pause 2026-09-13：四个 ACTIVE DM 均已在干净边界暂停；不再进行无效 idle、Transport、实验或新请求。已完成证据与 ACTIVE/PARKED 生命周期保留，恢复需 owner 明确指令。
+Owner resumed research and Portfolio planning on 2026-09-13 under existing science/budget authority. Clerk activation and DM proposal dispatch are being established; no new grant or run is inferred.
 
 
 本表登记15 ACTIVE、12 PARKED。2026-09-13 ACPS Portfolio PRO_FINAL 已将 ACPS 可逆改为 PARKED/HIGH；其余生命周期、priority、recasts与UAV字段不变。
-标准并行目标为4个方向；当前四条 ACTIVE 链为 MGTAP、RCLE、ACVC、FOLR。DM 完成、阻塞或 ACTIVE-idle 回报都会触发一次稳定 Root 调度检查；对象完成、cleanup、Pro wait 或 child 完成均不释放方向槽位，只有正式 Portfolio/owner lifecycle 决定释放槽位。
+标准并行目标为4个方向；当前四条 ACTIVE 链为 MGTAP、RCLE、ACVC、FOLR。DM 完成、阻塞或 ACTIVE-idle 回报都会触发一次稳定 Clerk 调度检查；对象完成、cleanup、Pro wait 或 child 完成均不释放方向槽位，只有正式 Portfolio/owner lifecycle 决定释放槽位。
 占位与实际工作分开：FOLR 固定 Generic→BANK allocation 与 combined intake 已完成，RCLE B09 已完成并 intake，ACVC/MGTAP 无科研在途；四个独立 Astra/max DM 已完成治理验收。见 [当前工作流](decisions/2026-09-13-direction-management-workflow.md)，未变 timeout 不产生新请求或重复派工。
 当前 Portfolio/方向决定和 Transport/实验归档均已在本控制面合并；旧请求、旧 hash 和旧起草快照不作为当前路由。
 有限分配结束不推断停向；只有Portfolio/owner生命周期决定改变ACTIVE/PARKED。
@@ -21,7 +21,7 @@ Owner pause 2026-09-13：四个 ACTIVE DM 均已在干净边界暂停；不再�
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
 | [ACPS](../candidates/actuator_conditioned_partial_sharing/ACPS_POST_Q_PORTFOLIO_INTAKE_20260913.md) | B02完整配对为INSIDE_MEI负向：ACPS−SHARED −0.0051864274 J，12/32正、20/32负；Q recovery 已完整 intake。Portfolio PRO_FINAL 已将 whole direction 可逆 PARKED/HIGH，SHARED 与全部证据保留。 | 无在途工作；旧未发送 operation 与新 conversation receipts 保留。 | 只有新的明确 re-entry discriminator/Portfolio owner 决定才恢复；当前不追加 Q、资金或 successor。 |
-| [ACVC](../candidates/acvc/pro_packets/20260913_reference_next_use_convergence/INTAKE.md) | 保留 train-C→deploy-F 的合格 cluster reference；F−C +0.124073 J、F−dwell +0.076741 J，8/64 adverse dwell，ACTIVE/MEDIUM、recasts2。 | 完整 next-use Convergence 已归档/intake，Transport ARCHIVED；无新经验拨款、K 重跑或在途外部依赖。OWNER_PAUSED，槽位保持占用。 | 暂停中仅迁移治理；恢复后 DM 核对完整答复是否已决定方向容量/生命周期，未决定则承担该管理提案，不等待新客户/实验才提问。 |
+| [ACVC](../candidates/acvc/pro_packets/20260913_reference_next_use_convergence/INTAKE.md) | 保留 train-C→deploy-F 的合格 cluster reference；F−C +0.124073 J、F−dwell +0.076741 J，8/64 adverse dwell，ACTIVE/MEDIUM、recasts2。 | 完整 next-use Convergence 已归档/intake，Transport ARCHIVED；无新经验拨款、K 重跑或在途外部依赖。OWNER_RESUMED，槽位保持占用。 | 现由 DM 核对完整答复是否已决定方向容量/生命周期，未决定则承担该管理提案，不等待新客户/实验才提问。 |
 | [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md) | C pair完整验收为WITHIN_MEI：RAW=STRUCT=11.15、32/32零差，均低于REQUEST_ONLY12.45；只支持本对象的局部零差异。 | 已购pair结束，证据已保全至main9ca150856；无活动科学工作。 | 仅完成已列明的scoped reclamation；无retry、第二个S或自动successor。 |
 | [CADC](../candidates/contention_aware_decentralized_communication/CADC_B01_INTAKE.md) | B01为ADVERSE；post-KELU Portfolio明确可逆PARKED/HIGH、recasts0并保留RR与全部证据。 | 原DM正在应用方向本地处置记录；无科研在途。 | 仅在具体新用途/证据/成本事实下经proper authority重入；无新设计、实验或咨询。 |
 | [CPCP](../candidates/cross_play_compatible_population_learning/DIRECTION.md) | 新注册PARKED/MEDIUM；保留跨策略族兼容学习的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
@@ -33,22 +33,22 @@ Owner pause 2026-09-13：四个 ACTIVE DM 均已在干净边界暂停；不再�
 | [FRRIE](../candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md) | P59已intake；P63 source-only九frame映射完成，factory fault仍未归因，P63未运行。 | 无；本轮没有新增拨款。 | 可信最小观察/替代执行路径及必要拨款。旧故障未完全定位不自动禁止不同可信路径；不重跑旧P63。 |
 | [FSD](../candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md) | U已完整intake：I1280为有限可选方案，authentic D0默认；方向仍ACTIVE/HIGH。 | Portfolio本轮不追加LONG或重复U；无科研在途。 | 有真实较长普通D0用途时再走proper decision；当前无新代码、分析或实验。 |
 | [LCAC](../candidates/learned_counterfactual_agent_credit/DIRECTION.md) | 新注册PARKED/MEDIUM；保留learned counterfactual agent credit的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
-| [MGTAP](../candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md) | Portfolio B 与同节点程序性修正均已完整 intake；唯一 master pair（COND512 / intact-DENSE768）已完成，COND−DENSE = −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026，7/25 worlds；MGTAP 仍 ACTIVE/MEDIUM。 | 结果/cleanup 与 post-8231 Convergence R 已完整 intake；保留 mean-COND eligibility 与 DENSE default，拒绝当前 unchanged proposal，不追加 pair/successor/lifecycle。原 request 效果不确定且绝不重发；本地 raw 删除被审批策略拒绝，事实已记录。 | OWNER_PAUSED，无科研 producer；恢复后 DM 复用 R 的科学结论并解决尚未决定的方向接续/容量问题，不重发旧请求。 |
+| [MGTAP](../candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md) | Portfolio B 与同节点程序性修正均已完整 intake；唯一 master pair（COND512 / intact-DENSE768）已完成，COND−DENSE = −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026，7/25 worlds；MGTAP 仍 ACTIVE/MEDIUM。 | 结果/cleanup 与 post-8231 Convergence R 已完整 intake；保留 mean-COND eligibility 与 DENSE default，拒绝当前 unchanged proposal，不追加 pair/successor/lifecycle。原 request 效果不确定且绝不重发；本地 raw 删除被审批策略拒绝，事实已记录。 | OWNER_RESUMED，无科研 producer；DM 复用 R 的科学结论并解决尚未决定的方向接续/容量问题，不重发旧请求。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
-| [RCLE](../candidates/roster_consistent_latent_exploration/pro_packets/20260913_post_b08_development/INTAKE.md) | B08 后 Convergence 已形成 PRO_FINAL：对 exact tested recipe 做可逆 development HOLD；family open，whole RCLE ACTIVE/MEDIUM。 | greedy-anchored A 仅保留 epsilon .1 exact-greedy 候选；Portfolio B09 已完整 intake，seed29/256-update/four-panel 完成（native47.13s、exit0），G_U +.0512695、D_n +.1460205、D_g -.0317708；当前 OWNER_PAUSED，无运行中实验。 | B09 已由 DM 完成 card/source/review/admission/launch/monitor/collection/intake；不自动追加 fit/cap 或改变两项 HOLD，方向槽位保持占用；恢复后 DM 负责下一管理决定。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/pro_packets/20260913_post_b08_development/INTAKE.md) | B08 后 Convergence 已形成 PRO_FINAL：对 exact tested recipe 做可逆 development HOLD；family open，whole RCLE ACTIVE/MEDIUM。 | greedy-anchored A 仅保留 epsilon .1 exact-greedy 候选；Portfolio B09 已完整 intake，seed29/256-update/four-panel 完成（native47.13s、exit0），G_U +.0512695、D_n +.1460205、D_g -.0317708；当前 OWNER_RESUMED，无运行中实验。 | B09 已由 DM 完成 card/source/review/admission/launch/monitor/collection/intake；不自动追加 fit/cap 或改变两项 HOLD，方向槽位保持占用；DM 负责下一管理决定。 |
 | [scope_1s](../candidates/scope_1s/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [TRDL](../candidates/tail_return_distributional_learning/DIRECTION.md) | 新注册PARKED/MEDIUM；保留tail-return distributional learning的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
 | [UCOPE](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | **更新：最新是post8801 PRO_FINAL PARK进一步8801-L continue/end-credit经验投入，保留unchanged-L spending stop。** 8601/8602、8701是更早证据。 | 无 | 有具体新选择才继续；不再凭旧8701 closeout pending造任务。其余renewal/ordinary-feedback议程未被整体关闭。 |
-| [FOLR](../candidates/vap_folr_core/pro_packets/20260913_retained_reference_investment/INTAKE.md) | 历史 BANK −4.3261 own-policy result 与旧 Generic 无 paired primary/MEI 保留；固定 reference-use 已完成 combined intake，Generic-only 结论已记录；FOLR ACTIVE/MEDIUM。 | Portfolio F 已完整 intake；新 Generic64 完成/技术接受 e617175e 后，DM 直接一次 admission/提交固定 BANK128（db935e57）；同一 Monitor 回 ADOPTED+TERMINAL exit0/n128/duration3s，caps 与顺序固定。 | OWNER_PAUSED；固定 allocation 已完整 intake。恢复后 DM 核对并处理未决方向接续/容量，不从旧 cap 自动追加实验。 |
+| [FOLR](../candidates/vap_folr_core/pro_packets/20260913_retained_reference_investment/INTAKE.md) | 历史 BANK −4.3261 own-policy result 与旧 Generic 无 paired primary/MEI 保留；固定 reference-use 已完成 combined intake，Generic-only 结论已记录；FOLR ACTIVE/MEDIUM。 | Portfolio F 已完整 intake；新 Generic64 完成/技术接受 e617175e 后，DM 直接一次 admission/提交固定 BANK128（db935e57）；同一 Monitor 回 ADOPTED+TERMINAL exit0/n128/duration3s，caps 与顺序固定。 | OWNER_RESUMED；固定 allocation 已完整 intake。DM 核对并处理未决方向接续/容量，不从旧 cap 自动追加实验。 |
 | [VNFC](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md) | B03 final incomplete/main7125f368b：每臂35 rounds、合计13,440 transitions/2,240 updates，104.89秒后SIGSEGV/exit139；无final primary，不能评分。 | allocation/diagnosis结束；两条已命名detached checkout已清理，证据保留。 | 无自动retry/诊断；未来须具体支持的最小修复或有相关证据的同义路径及新投资；不要求完整历史归因。 |
 | [VSP02](../candidates/vsp_02/DIRECTION.md) | P19结束已测试fixed-member family/configuration。 | 无 | 具体新方向选择；无successor/UAV allocation。 |
 | [VSP03](../candidates/vsp_03/DIRECTION.md) | B07 final G−R0+0.01156738、G−R+0.01307617、Q−0.00160645；post-B07及9/11 fallback保留相同narrow pause，未分配新fit。 | 无 | 将来有决策价值的同配方B仍合法，但当前未选择；不从旧continuous512文字推断运行。 |
 | [VSP-C1](../candidates/vsp_c1/DIRECTION.md#tested-intact-body-plus-gate-package-ends-2026-09-09) | P81结束B13-tested intact-body-plus-gate package；B13−0.0320685805，保留旧正值与有限样本限制。 | 无 | 具体新方向/投资选择；没有successor，亦非整个K4或hold-value方向被关闭。 |
 
 下一次更新以实际DM返回、Transport provider接受/完整回执或Monitor新handle adoption为准。
-四槽独立滚动目标；普通续行由原DM负责。正式暂停/关闭留下空位后，Root向Portfolio请求新方向并按完整决定建立DM；不等待多个方向一起完成。
+四槽独立滚动目标；普通续行由原DM负责。正式暂停/关闭留下空位后，Clerk优先应用完整Portfolio计划中已有的明确选择和拨款，仅对未决选择提问；不等待多个方向一起完成。
 
 
 ## Lifecycle与优先级
@@ -92,12 +92,12 @@ ACVC、VNFC、SCDMP保留second-recast最低争用排序；其余recast、MEI与
 ## Overall Portfolio planning
 
 Portfolio is the independent persistent Pro research planner for the entire registered program.
-DMs provide current direction evidence/opportunities and proposals. Root transmits the global
+DMs provide current direction evidence/opportunities and proposals. Clerk transmits the global
 agenda, records the full plan and schedules its handoffs; new Portfolio requests share this one
 entry. Direction-node science and ordinary delegated experiments remain DM-owned. Existing
 accepted Portfolio packets preserve their original closeout routes.
 
-New overall plan under the revised role: **NOT_REQUESTED / OWNER_PAUSED**. The four DM target-model
+New overall plan under the revised role: **COLLECTING_PROPOSALS / OWNER_RESUMED**. The four DM target-model
 handoffs identify unresolved post-allocation management questions; they are inputs to the next
-explicitly resumed/commissioned global planning event, not four granted experiments or already
+current global planning event, not four granted experiments or already
 formed Portfolio decisions. Prior accepted scientific and lifecycle records remain effective.

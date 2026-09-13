@@ -1,5 +1,12 @@
 # Research execution responsibilities
 
+OWNER_DIRECT 2026-09-13: Root is the user entry point and accepts shared control-plane changes.
+Clerk is the independent Luna/high mechanical coordinator; DMs remain Astra/max direction managers.
+Use [Clerk operations](CLERK_OPERATIONS.md) for its delegated writes, event handling and escalation.
+Current research state and all live task routes come only from `.codex/hmasd-dm-sessions.toml`.
+No routine Clerk action requires a Root ACK. Scientific authority remains with DM/Pro.
+
+
 OWNER_DIRECT 2026-09-12: temporarily suspend new CM and Implementer subagent assignments,
 including equivalent code-implementation roles under generic names. DM owns direction science,
 implementation, self-checks, repair and technical acceptance in the same task. Retain the
@@ -17,30 +24,30 @@ Agentify/provider settings from .codex/hmasd-transport.toml. Current routing ove
 operational literals in fixed packets; scientific input bindings and evidence remain unchanged.
 No browser Send may overlap another executor; reconcile actual acceptance before recovery.
 
-The current Root task is the event-driven recorder/integrator and scheduler at Portfolio/shared
+The current Clerk task is the event-driven recorder/integrator and scheduler at Portfolio/shared
 dependency boundaries; DM owns direction science, management continuity and engineering. Independent
-DMs notify Root via send_message_to_thread; Root handles the event and can end its turn. The existing
+DMs notify Clerk via send_message_to_thread; Clerk handles the event and can end its turn. The existing
 50-minute heartbeat is only an enabled recovery backstop, never the normal progress driver. Portfolio is the persistent Pro node,
 not a native session. Authority, budgets and owner pause/stop instructions remain in AGENTS.md.
-The current workflow repair is [direction management and independent tasks](../research/portfolio/decisions/2026-09-13-direction-management-workflow.md).
+The workflow provenance is [direction management and independent tasks](../research/portfolio/decisions/2026-09-13-direction-management-workflow.md).
 The 2026-09-10 control-plane consolidation remains the role-migration provenance.
 
 OWNER_DIRECT 2026-09-10: directions run as independent rolling chains. A direction advances from
 its own evidence, decision, dependencies and resource admission without waiting for a named batch,
 Portfolio bundle, sibling result/intake/cleanup or global stage boundary. Its result, blocker, Pro
-wait, failed admission or closeout affects only that direction. Root integrates and replaces ready
+wait, failed admission or closeout affects only that direction. Clerk integrates and replaces ready
 work continuously; a prior `no successor` closes only its named allocation. Cross-direction choices
 still use Portfolio authority while independent authorized work continues.
 
-OWNER_DIRECT 2026-09-12: Root cannot turn an ended allocation into a direction pause, stop or
+OWNER_DIRECT 2026-09-12: Clerk cannot turn an ended allocation into a direction pause, stop or
 working-set release. The direction DM continues an authorized bounded object or prepares a
 concrete unresolved direction/capacity question, completing the management transition below. Only a
 formal Portfolio lifecycle decision or direct owner disposition releases the direction.
 The Portfolio drafter must refresh affected old-direction facts from the current DM
 records before recommending continuation, replacement or new-direction registration.
 
-For unmigrated native DM chains Root uses native returns/waits; registered independent DMs use
-event messages under SIBLING_COMMUNICATION.md and do not require a continuously waiting Root. DM waits for its
+Unmigrated native DM chains retain their actual parent and native returns/waits; registered independent DMs use
+event messages under SIBLING_COMMUNICATION.md and do not require a continuously waiting Clerk. DM waits for its
 monitor or Reviewer after exhausting independent work. Use configured long waits; unchanged
 timeouts only continue waiting. Process the changed direction without a global reread or sibling
 barrier. SIBLING_COMMUNICATION.md owns event semantics. DM also waits natively for its Transport; Pro archives return directly to DM. Owner pause/stop remains controlling.
@@ -48,7 +55,7 @@ An unchanged timeout remains silent. At completion of a bounded assignment, a ma
 scope conflict, or entry into an idle state while the direction is still ACTIVE, the DM sends one
 proactive parent action message naming the assignment, state, evidence/commit and next action or
 dependency before native final/idle wait. This is an event handoff, not a periodic keepalive.
-Each completion or ACTIVE-idle event is also a stable Root dispatch point: integrate the returned
+Each completion or ACTIVE-idle event is also a stable Clerk dispatch point: integrate the returned
 evidence, distinguish occupied/reserved slots from actual work, and resume the same DM only if
 execution or direction-management work is unfinished and not already continuing. Keep an ACTIVE direction occupied through an object/allocation, cleanup, Pro
 wait or child completion; release a slot only for an explicit Portfolio/owner lifecycle pause or
@@ -58,16 +65,16 @@ An accepted card, Pro decision or finite grant delegates the whole bounded objec
 execution bindings, implementation/repair, focused checks and required independent review,
 publication, fresh admission, detached launch, Monitor handover, collection, technical acceptance,
 scientific intake, preservation and assigned cleanup. The DM directly continues any already
-authorized dependent step or delegated object-tier choice. Root integration/ACK and repeated
+authorized dependent step or delegated object-tier choice. Clerk integration/ACK and repeated
 Portfolio approval are not gates. The actual permitted invocations, comparators, frozen meaning,
 host/device constraints and caps remain binding; a prepared card or unused cap creates no budget.
 
 The DM also owns new question preparation: state the concrete unresolved action and the changed
 fact or proposal relative to the last complete answer in the existing card/intake, then publish,
-bind and dispatch to the proper node without a Root handshake. Direction-tier science and frozen
+bind and dispatch to the proper node without a Clerk handshake. Direction-tier science and frozen
 meaning conflicts use the original direction authority; Portfolio decides new investment or
 additional grant/cap outside delegation, priority/capacity, lifecycle, fusion/separation,
-registration and vacancy replacement. Root coordinates actual shared writers/runtime and other
+registration and vacancy replacement. Clerk coordinates actual shared writers/runtime and other
 cross-direction dependencies and applies accepted decisions; it does not choose new science.
 An operational/development consequence suffices; no universal deployment-customer or positive-B
 prerequisite is added. A new title or date with unchanged inputs/options/consequence is the old
@@ -81,9 +88,9 @@ priorities/investment/capacity/lifecycle and an executable plan; it is not a DM 
 A global plan may precede vacancies. New admissions still follow explicit capacity/slot decisions.
 
 DMs own direction science and prepare current evidence, recommendations and unresolved management
-choices. They send Portfolio proposals to Root as events. Root is the single coordinator for **new**
+choices. They send Portfolio proposals to Clerk as events. Clerk is the single coordinator for **new**
 Portfolio request publication/Transport and full-plan recording, using its own native Transport.
-Root transmits the agenda without scientific preselection or approval; Pro owns the plan. Other
+Clerk transmits the agenda without scientific preselection or approval; Pro owns the plan. Other
 Innovator/Convergence requests remain DM-owned. Historical accepted Portfolio packets retain their
 original parent/closeout route; no migration resend or binding rewrite.
 
@@ -91,16 +98,16 @@ Trigger overall planning on a real management/capacity/priority event or an owne
 not every experiment step. Include the latest accepted plan, current portfolio index, changed DM
 handoffs and unresolved choices. Pro's result states direction composition, priorities/dependencies,
 selected bounded programs/discretion, continue/defer/park decisions, action owners and revisit events.
-Root records the full plan and sends each affected DM its exact consequences. DMs check scientific
+Clerk records the full plan and sends each affected DM its exact consequences. DMs check scientific
 conformance and independently execute valid parts; specific conflicts return to the same Pro node.
-This is not a second approval, unanimous ratification or new experiment launch gate. Root handles
+This is not a second approval, unanimous ratification or new experiment launch gate. Clerk handles
 registration/assignment handoffs and integration, then ends the event turn. The shared Portfolio
 queue tracks pending proposals and the current exact request, not four disconnected approval loops.
 
 Current session binding is resolved from .codex/hmasd-transport.toml's registry; the planning role is
 recorded alongside DM task routes. A persistent Pro session needs an explicit new request to run;
 changing these instructions does not itself generate a plan. Owner pause prevents new Pro planning
-sends until resumed/explicitly commissioned. No new Portfolio decision is claimed by this repair.
+sends until resumed/explicitly commissioned. Only an actual archived decision establishes a new Portfolio plan.
 
 ## Direction management at an object boundary
 
@@ -111,11 +118,11 @@ current intake/handoff to complete the following transition. Owner pause always 
 | Actual boundary | Next action and owner |
 | --- | --- |
 | Useful next object/step fits standing object delegation and remaining scope/budget | DM selects, records and executes through intake. A/B work has no universal Pro launch gate; specific frozen prohibitions/caps still bind. |
-| Next choice changes direction-tier science | DM develops options and recommendation, then sends to the existing Innovator/Convergence node without Root approval. |
-| No executable continuation/real producer; investment, occupancy or lifecycle is unresolved | DM assesses surviving opportunities and submits a Portfolio proposal via Root's planning agenda: continued investment, explicit deferral, or formal parking/closure. An honest no-investment recommendation is valid. |
+| Next choice changes direction-tier science | DM develops options and recommendation, then sends to the existing Innovator/Convergence node without Clerk approval. |
+| No executable continuation/real producer; investment, occupancy or lifecycle is unresolved | DM assesses surviving opportunities and submits a Portfolio proposal via Clerk's planning agenda: continued investment, explicit deferral, or formal parking/closure. An honest no-investment recommendation is valid. |
 | Real request/run/review/shared-resource producer is pending | Name identity, owner and awaited event; do independent work, then wait for the direct return. |
 | Portfolio/owner already explicitly decided deferral/disposition for this boundary | Apply it, record scope, revisit condition and responsible event/review owner; end unnecessary agent waiting. Only explicit decisions change lifecycle/slot occupancy. |
-| Engineering/Transport failure | DM repairs in scope; Root resolves shared dependencies or unavailable executors. A timeout alone does not scientifically stop a direction. |
+| Engineering/Transport failure | DM repairs in scope; Clerk resolves shared dependencies or unavailable executors. A timeout alone does not scientifically stop a direction. |
 
 A rejected pair or conditional-use answer need not decide continued direction occupancy. Check the
 complete prior answer's scope: reuse it where it answers this choice; otherwise ask the missing
@@ -130,23 +137,23 @@ request/handle/commit if present; and the next state-changing event. Use existin
 new form or ACK gate. Bounded task completion is not direction completion. An unhandled management
 transition is explicitly unfinished work, even when the last scientific allocation is complete.
 
-Root integrates evidence and checks that execution or management has someone actually taking the
+Clerk integrates evidence and checks that execution or management has someone actually taking the
 next step. Resume an idle DM once with the missing deliverable through its registered route. If
 the same transition returns unhandled, reconcile the blocker and assignment/context and repair or
 transfer the same role/scope when unavailable. Identical reminders indefinitely are not recovery.
-Formal releases let Root apply an already selected/funded replacement in the complete Pro plan;
+Formal releases let Clerk apply an already selected/funded replacement in the complete Pro plan;
 only an unresolved replacement choice needs a new Portfolio question. Pro selects new science. Four
 occupied slots alone do not meet the advancing-work target.
 
-The shared Portfolio binding has one Root-coordinated request and waiting DM proposals recorded
-in existing tracking. Root forwards ready agendas without approval or a sibling barrier; DMs
+The shared Portfolio binding has one Clerk-coordinated request and waiting DM proposals recorded
+in existing tracking. Clerk forwards ready agendas without approval or a sibling barrier; DMs
 retain scientific conformance/application and ordinary experimental autonomy.
 
-Transport/selector/workflow defects default to local repair by the actual parent (DM for direction requests, Root for new Portfolio requests). The DM may edit its
+Transport/selector/workflow defects are repaired by the direction DM; Clerk assigns a Portfolio defect to a relevant Astra DM while retaining its native receipt parent. The DM may edit its
 owned helpers, fixtures and related skill/control instructions, run focused tests and review, and
 recover the same unchanged operation after verified nonacceptance. Preserve operation, prompt,
 binding, idempotency and failure receipts; never create a replacement request or change science.
-Root is involved only for a shared runtime/load, cross-direction dependency or a
+Clerk is involved only for a shared runtime/load, cross-direction dependency or a
 scientific/Portfolio decision, while the DM retains Transport acceptance.
 
 When a same-request Transport repair cannot recover its original conversation, the actual parent may
@@ -182,7 +189,7 @@ Historical decisions, snapshots and benchmark materials remain evidence, not com
 
 | Owner | Deliverable |
 | --- | --- |
-| Root | Brief changed-event log; necessary main integration and cross-direction dependencies; cross-task event handling; Portfolio vacancy request/intake and new DM creation when formal direction pause/closure leaves fewer than four slots |
+| Clerk | Brief changed-event log; necessary main integration and cross-direction dependencies; cross-task event handling; Portfolio vacancy request/intake and new DM creation when formal direction pause/closure leaves fewer than four slots |
 | Direction DM | Card/predictions, object decisions, direct implementation, code self-review and repair, published inputs, bounded execution, monitor handover, collection, technical acceptance, scientific intake, cleanup and continuation |
 | Direction DM as Portfolio proposer | Current scientific evidence/options and recommendation; conformance/application of its part of the overall plan; precise conflict if present |
 | Implementer | Temporarily suspended for new work; preserve accepted closeout evidence and return routes |
@@ -194,7 +201,7 @@ Historical decisions, snapshots and benchmark materials remain evidence, not com
 | Portfolio Pro | Independent overall research plan and final investment/priority/capacity/lifecycle choices within current owner/specification constraints |
 
 DM may use optional specialists when a complete independent task saves work or enables useful
-parallelism. It does not rebuild a CM layer or delegate individual shell steps. Root does not
+parallelism. It does not rebuild a CM layer or delegate individual shell steps. Clerk does not
 retype DM launch commands, repeat its tests or redo its scientific intake. Neither a child's
 completion nor a Monitor exit-zero receipt is technical/scientific acceptance.
 
@@ -206,12 +213,12 @@ gaps rather than inventing another authority layer.
 
 ## Portfolio material and response route
 
-The working-set target is four direction DM chains. New Portfolio replies return to Root for
+The working-set target is four direction DM chains. New Portfolio replies return to Clerk for
 full-plan recording; affected DMs own scientific conformance/application. Legacy accepted replies
 retain their original parent. A formal direction pause/closure that leaves fewer than four occupied
-slots triggers Root to apply an existing complete conforming plan's explicit replacement/investment
-and initial assignment. Only an unresolved choice requires a bounded question through Root's native
-Transport. Read/check the complete response and reserve the slot before creating the Pro-selected DM. Pro chooses science and investment. Root records pending requests/reserved slots and
+slots triggers Clerk to apply an existing complete conforming plan's explicit replacement/investment
+and initial assignment. Only an unresolved choice requires a bounded question through Clerk's native
+Transport. Read/check the complete response and reserve the slot before creating the Pro-selected DM. Pro chooses science and investment. Clerk records pending requests/reserved slots and
 recounts before dispatch, so repeated returns cannot duplicate a request or DM. Existing overlap
 above four drains without interrupting live work. Object/allocation completion, Pro waits and
 temporary blockers do not release a direction slot. Use hmasd-portfolio-task for global planning and direction proposals through the unified entry.
@@ -227,10 +234,10 @@ request without another confirmation. A clear screenshot can supply current page
 DOM/model/identity checks, ACKs and status relays are not additional conditions. Frozen legacy
 routes remain evidence; recovery records the actual native child/parent separately.
 
-For new Portfolio work, DMs supply decision materials to Root; Root publishes/dispatches the
+For new Portfolio work, DMs supply decision materials to Clerk; Clerk publishes/dispatches the
 planning agenda through its own native Transport and preserves the entire Pro plan. DM-owned
 Transport continues for direction nodes. Historical accepted Portfolio packets close on their
-original routes. Root maps the plan to affected DMs for scientific conformance/application and
+original routes. Clerk maps the plan to affected DMs for scientific conformance/application and
 handles cross-direction handoffs. Preserve one shared binding and exact accepted request identities.
 
 New GitHub-delivery prompts include an in-turn downloadable Markdown fallback. If Pro cannot
@@ -245,7 +252,7 @@ does not assert a GitHub commit/comment and does not authorize another Send.
 The DM reads the full response and checks the bound question, current owner/spec constraints,
 scientific meaning and evidence. It returns the actual decision and operational mapping, or a
 concrete conflict for the same Pro node. It does not locally overrule or add approval to a formed
-conforming decision. Root applies the conforming decision, updates Portfolio/tracking and assigns
+conforming decision. Clerk applies the conforming decision, updates Portfolio/tracking and assigns
 follow-on work within the existing limits. Unresolved questions do not block independent work.
 Apply Portfolio consequences direction by direction as each affected path becomes ready.
 
@@ -264,32 +271,32 @@ follows the empirical/runtime specs and the actual dependent claim, not blanket 
 
 After acceptance, DM/Operator assigns the exact handle to that DM's reusable native Luna/low
 monitor. Follow EXPERIMENT_MONITOR.md: dispatch is distinct from direct adoption, terminal events
-return to DM, and DM retains collection and scientific intake. Root does not forward experiment
+return to DM, and DM retains collection and scientific intake. Clerk does not forward experiment
 status or duplicate observation. Keep handle/native-owner mappings in existing execution records.
 Uncertain acceptance is reconciled on the same identity and never retried as a fresh invocation.
 
 ## Current records, integration and cleanup
 
-Root owns main and its index, and integrates named accepted commits after checking what is already
+Clerk owns main and its index, and integrates named accepted commits after checking what is already
 integrated. DM owns its direction branch/checkout and code publication. Preserve one editing owner
 for overlapping work. Independent paths can proceed concurrently; every authorized commit pushes
 immediately. Do not hold an accepted commit for a sibling result or batch merge. A role migration
 does not create a new branch or a new scientific object.
 
-Root normally writes only a brief changed-event log with evidence and any action. It updates
+Clerk normally writes only a brief changed-event log with evidence and any action. It updates
 shared records when disposition, accepted integration or a dependency actually changes, without
 mirroring DM receipt traffic or issuing approval for routine continuation.
-Root maintains `docs/research/portfolio/PORTFOLIO.md` as the current disposition/readiness snapshot
+Clerk maintains `docs/research/portfolio/PORTFOLIO.md` as the current disposition/readiness snapshot
 and `EXPERIMENT_TRACKING.md` as accepted handles, owners, terminal facts and pending work. Scientific
-statements cite DM intake/Pro authority; Root integration is not another verdict. Batch useful
+statements cite DM intake/Pro authority; Clerk integration is not another verdict. Batch useful
 routine record edits only when they are already ready together; never wait for multiple directions
 to manufacture a combined update. Apply actual owner overrides at the affected direction's clean
 boundary via hmasd-owner-item.
 
 DM prepares its exact cleanup inventory during collection. Assigned executors preserve unique
-source/evidence and verify removed paths absent from disk and worktree registration; Root confirms
+source/evidence and verify removed paths absent from disk and worktree registration; Clerk confirms
 main integration/retention and accepts reclamation. Shared authoring and active delivery checkouts
-remain while used. A creator cleans its own test scratch under tests/AGENTS.md; Root is not a
+remain while used. A creator cleans its own test scratch under tests/AGENTS.md; Clerk is not a
 routine garbage collector. Never remove live work, evidence or another invocation's scratch.
 
 Existing CM assignments retain their original parent/accepted scope until closeout; the receiving

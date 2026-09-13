@@ -5,8 +5,13 @@ description: "Use when an author-owned native Transport executes or recovers an 
 
 # Native Agentify Pro Transport
 
+Root is the user entry; the independent Clerk performs only delegated mechanical coordination.
+Read docs/project/CLERK_OPERATIONS.md for event handling and writes. DM/Pro retain scientific
+judgment. Clerk routes missing science or complex engineering repair to the relevant Astra DM;
+it never turns a helper failure into a scientific stop or adds a Root ACK gate.
+
 The actual parent owns one reusable native Luna/high leaf Transport: DM for direction nodes,
-Root for new overall Portfolio planning/decision requests. Execute the assigned request; the parent
+Clerk for new overall Portfolio planning/decision requests. Execute the assigned request; the parent
 preserves the full answer, with DM scientific conformance for its affected scope. The current native assignment supplies the
 direct return parent. Preserve frozen HANDOFF IDs as provenance when recovering an older request.
 No singleton app task, relay, ACK loop, new scientific prompt or science selection belongs here.
@@ -15,13 +20,13 @@ No singleton app task, relay, ACK loop, new scientific prompt or science selecti
 
 Transport failures that are engineering defects (selector/model aliasing, tab binding,
 preflight state, receipt handling or workflow sequencing) belong to the actual parent: direction
-DM for its request, Root for its Portfolio request. That parent may patch its owned helpers, fixtures and related skill/control
+DM for its request; Clerk routes a Portfolio defect to a relevant Astra DM while retaining native receipt ownership. The accountable DM may patch its owned helpers, fixtures and related skill/control
 instructions in place, run proportional focused tests and independent review, and recover the
 same unchanged operation when the effect is verified nonacceptance. Preserve the original
 operation, prompt hash, idempotency key, binding and all failure receipts. Do not create a
-replacement request or alter scientific meaning. A direction DM escalates to Root when repair requires a
+replacement request or alter scientific meaning. A direction DM escalates to Clerk when repair requires a
 shared application runtime/load, a cross-direction resource or a scientific/Portfolio decision;
-Root coordinates shared dependencies; the actual parent retains Transport acceptance.
+Clerk coordinates shared dependencies; the actual parent retains Transport acceptance.
 
 ## Unrecoverable-conversation fallback
 
@@ -132,7 +137,7 @@ READY_UNSENT --strict query--> SEND_ATTEMPTED
    next step. `stage_native_receipt` supports COMPLETE, CONFLICT and NO_CURRENT_WORK; only COMPLETE
    requires the full archive. UNCHANGED_WAIT stages nothing. Preserve earlier boundary receipts
    when a later changed boundary occurs. Active generation is ongoing work, not a reason to end
-   as blocked. The author DM sends the same concise action update to Root at its own boundary;
+   as blocked. The author DM sends the same concise action update to Clerk at its own boundary;
    ordinary unchanged waits remain silent. A missing archive never prevents reporting a real conflict.
    If this runtime lacks `collaboration.send_message`, return those same actionable fields once
    in native final, which reaches the assigning parent directly. Record `transport=native_final`
