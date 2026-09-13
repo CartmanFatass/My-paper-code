@@ -38,7 +38,7 @@ L0：交付是下面的权限收敛、指定控制入口和必要当前摘要。
 四个占用槽位仍为 MGTAP、RCLE、ACVC、FOLR，均 ACTIVE/MEDIUM；ACVC recasts2 及最低争用排序保留，其他生命周期/priority/recasts/UAV 字段不变。ACPS 已正式 PARKED/HIGH，不再保留过时的“五条当前链”摘要。
 
 - FOLR 在本次提交前收到实质变化，Root 与原 DM 直接回报一致：固定源 `5dce539ed54afd4334d09db9dcd94df38c52c2fc` 的 Generic64 已完成并技术接受于 `e617175ecc764cf137f8d8a91d7cba4056a57a40`（5000/4969/128、exit0、native2156.67s）；原 DM 随即一次 admission/提交已拨款 BANK128，receipt 为 `db935e57b12692cb8dc5236b3c08c32e56a01f2f`。同一 native Monitor 回 ADOPTED+TERMINAL exit0/n128/duration3s。当前 BANK collection/combined scientific intake 进行中，无运行中实验/新 Pro 请求，尚无最终 use 结论；不把 Monitor exit0 或粗 duration 代替完整科学/成本 intake。Generic2700/BANK300/native3000/support1200/invoked4200 秒、顺序及无 retry/续投保持，治理任务未操作 handle，也未加 Root ACK/审批。
-- RCLE DM 报告提案之后的实质更新：TASK `0cf002c3913f7536a6db8064e234958e973fbc09`、HANDOFF `53cc0311df035e63817668b442d4bd760784c4d7` 已发布/绑定；`2026-09-13-rcle-greedy-anchored-investment-01` 已向原 native Transport 分派一次。此刻 provider acceptance 尚待直接事实，不能记成 SENT。它是一个真实新投资问题，grant NONE/no fit；两项 HOLD 和候选保留 A 不变，不是对已批准实验再审批。
+- RCLE DM 报告提案之后的实质更新：`2026-09-13-rcle-greedy-anchored-investment-01` 已完成一次 Send 与完整 Portfolio intake（响应 fbd3c7c5a，intake 88e39c358）。B09 seed29/256-update/four-panel 获配，native180/support600/complete780s；DM 直接进入 card/source/review/admission/execution。两项 HOLD 和候选保留 A 不变，不是对已批准实验再审批。
 - ACVC full next-use intake 与同记录 Transport repair 已完成；no-addition、合格 train-C→deploy-F reference、零新 fit/K 保持。除本次治理任务外，没有在途外部依赖。MGTAP 完整 R/no-addition 判断与 DENSE default 保持，无新 pair/在途 proper-node；旧 uncertain effect 保留且不重发。
 
 因此记录分别显示四个占位、一条已接受实验链在 collection/combined intake、一项新投资 Transport 分派在等真实回执、本次 ACVC 有界治理工作，以及没有具体新工作的科学 ACTIVE-idle。治理任务完成不能把 ACVC 写成仍有实验推进，也不释放其方向。
@@ -51,7 +51,7 @@ L0：交付是下面的权限收敛、指定控制入口和必要当前摘要。
 | `docs/project/ROOT_OPERATIONS.md` | 将重复许可段落合为完整 DM 交付；Root 只处理实际集成/依赖；分清未来条件与 pending producer。 |
 | `docs/project/SIBLING_COMMUNICATION.md` | 普通原生事件内容/去重、已授权链直接继续、没有新事实时不再唤醒同一空任务、完整响应不被旧 effect 挡 intake。 |
 | `.agents/skills/hmasd-loop-dispatch/SKILL.md` | 用可观察条件决定直接执行、proper-node、intake、真实等待或 ACTIVE-idle；修正 occupied/advancing 区分。 |
-| `docs/research/portfolio/EXPERIMENT_TRACKING.md`, `PORTFOLIO.md` | 实际工作/请求/下一事件一致；FOLR handle 链与四方向 disposition 保持；RCLE 分派不误记 SENT。 |
+| `docs/research/portfolio/EXPERIMENT_TRACKING.md`, `PORTFOLIO.md` | 实际工作/请求/下一事件一致；FOLR handle 链与四方向 disposition 保持；RCLE B09 获配后的 DM 执行链保持独立。 |
 | `docs/research/portfolio/ROOT_HANDOFF.md` | 用当前路由及 intake 后事实替换旧五向/待 intake/无拨款 recovery snapshot；历史仍在 Git，不改原始 packet。 |
 | `docs/research/portfolio/decisions/2026-09-13-dm-authority-proposals.md` | 保留提案原有归因，链接本次明确 OWNER_DIRECT 应用，更新已变化的 RCLE 请求事实。 |
 | 原 P1 `20260910-root-001`、当日 audit/root-log、本记录 | 通过 owner CLI 追加实际治理应用 trace；保留旧回复、选项和历史，无新增批准请求。 |

@@ -27,11 +27,7 @@ each direction still counts its own implementation-through-cleanup and later Roo
 
 ## Request audit — 2026-09-13
 
-唯一新 proper-node 在途 assignment 为 RCLE 的 `2026-09-13-rcle-greedy-anchored-investment-01`：
-TASK `0cf002c3913f7536a6db8064e234958e973fbc09`、HANDOFF
-`53cc0311df035e63817668b442d4bd760784c4d7` 已发布/绑定并交原 Transport，provider acceptance
-尚待直接事实；不把 native dispatch 记成 Send。它问是否购买一项 seed29/256-update B，当前
-grant NONE/no fit，属于真实新投资。完整合规投资决定若获配，DM 直接执行，不再询问运行批准。
+RCLE 的 `2026-09-13-rcle-greedy-anchored-investment-01` 已完成 Portfolio intake；B09 seed29/256-update/four-panel 获配，DM 正在按 native180/support600/complete780s 执行。该投资请求已闭环，不再等待 ACK，也不创建后续请求。
 
 FOLR 的 Portfolio F 已归档/intake，没有开放投资审批；Generic64 已完整技术接受，DM 随即直接
 执行已拨款 BANK128，Monitor 已回终态，当前 collection/combined intake。ACVC 与 MGTAP 最近请求已完整 intake，没有新的未决
