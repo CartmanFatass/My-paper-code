@@ -23,6 +23,11 @@ The parent waits natively. Empty work completes; later requests reuse this child
 Before final at completion, material conflict or no-current-work/ACTIVE, send one direct native
 action message: assignment, status, evidence/commit, next step. Missing full archive does not
 prevent a factual conflict return. Active generation is ongoing work; unchanged waits stay silent.
+For GitHub delivery, strict pairing/archive failure triggers a read of the fixed response target
+and delivery comment. Verify immutable Git bytes/task pairing before claiming no answer exists;
+provider IDs may remain null when that independently verified full delivery is returned.
+If collaboration.send_message is unavailable, the actionable native final is the direct parent
+return; record that capability fact and actual delivery method, with no app relay or extra handshake.
 Serialize each exact provider conversation, including the shared Portfolio node. Never use a
 protected/default tab for Send, change another writer's model, or overwrite immutable archives.
 Pause/stop instructions and frozen budgets persist; workflow migration does not authorize a Send.

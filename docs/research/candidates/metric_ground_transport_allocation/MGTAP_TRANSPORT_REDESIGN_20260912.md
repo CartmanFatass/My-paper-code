@@ -173,3 +173,53 @@ The original mismatch and subsequent bounded observations remain in
 was not accepted as a terminal impasse. The DM resumed the same child's non-sending observation
 and sent Root one action update. No second Send, new idempotency key, scientific invocation or
 Portfolio decision was created. Full-response intake remains the dependent outstanding work.
+
+## Actual full-delivery recovery and final technical acceptance
+
+The live exercise ultimately exposed a further workflow defect: the leaf inferred missing output
+from strict/UI pairing failure without reading the fixed GitHub response target. Its completion
+conflict record at 08:24:19 UTC was not proof that no decision existed. DM checked that target and
+found the complete response already delivered at 07:01:37 UTC. Full immutable commit
+`f1897441ce560dbca01a834dd72e035c63c68e0a`, Git blob `78a9810d52dedefc881009ea2672dbce36c49cc3`,
+Issue17 comment5651823362 and the original fixed TASK jointly establish this request's delivery.
+The exact185-line/37775-byte full file has SHA-256
+`cb533e36190e03444fc963d2f639338b5ec9f19defc7713d6547d819fd425391`.
+It was preserved in Git via `cd609fd307a316b39d127e3d664c2d668ddc7a30`, a single-file cherry-pick
+of the actual Pro delivery. The native child then collected the same full bytes at its separate
+`__05_FULL_RESPONSE.md`. The original strict response path remains unused, and its mismatch/IDs
+are preserved rather than renamed or fabricated.
+
+The repaired route checks the fixed GitHub scope on strict failure and again at completion if
+previously absent. It verifies the full immutable response URL/path, Git blob/hash/size and exact
+TASK/response pairing in the designated delivery comment. This independent source binding can
+complete archival when provider IDs remain null. Frozen delivery scope/task are separate from
+observed `github_delivery` facts; same-request claims and mirror reconciliation preserve all
+earlier evidence. The child's observed metadata used the Issue URL in `fixed_task_url`; the
+correct frozen TASK URL is retained separately and the metadata discrepancy is explicit.
+
+The child also reported that `collaboration.send_message` is not callable in its runtime.
+Its actionable native final did return directly to this DM. The workflow now records that
+actual native capability instead of requiring an unavailable call, inventing success or adding
+an app relay. Same-boundary method changes require demonstrated non-delivery and preserve the
+prior method; delivered or uncertain receipts are never resent. This creates no additional
+parent permission or ACK step.
+
+Final focused result: **64 workflow tests passed in5.24s**, in addition to the already passing
+207 unchanged native/recovery/compatibility tests. Independent Reviewer verified the real GitHub
+comment/blob/bytes pairing with null provider IDs, then reviewed corrections for preserving
+observed scope, native-method recovery and mirror-only GitHub evidence; no material finding remains.
+DM accepts the final engineering workflow. This does not establish that the Agentify page pairing
+defect itself is repaired; the scoped immutable GitHub recovery path handles the actual delivery.
+
+Additional retained owned test scratch under the same cleanup restriction:
+`mgtap-transport-github-recovery-01`, `mgtap-transport-github-review-01`,
+`mgtap-transport-native-final-01`, `mgtap-transport-final-recovery-01`.
+No further recursive deletion was attempted. The DM's exact full-file read copy at
+`temp/directions/metric_ground_transport_allocation/mgtap-delivery-f1897441.md` is retained as
+collection evidence. No unique scientific evidence or shared checkout was removed.
+
+The complete [scientific intake](pro_packets/20260912_cond512_dense768_use/PORTFOLIO_INTAKE_20260913.md)
+records Portfolio B and its new600/900/1500/900/2400s limits, plus two concrete current-spec
+conflicts requiring the same-node correction: five-chain target and independent Monitor goal.
+No implementation, experiment or new Pro request is part of this completed bounded assignment.
+MGTAP remains ACTIVE/MEDIUM; the next science is the already selected funded pair, not a vacancy.

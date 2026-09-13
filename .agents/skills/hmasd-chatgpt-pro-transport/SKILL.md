@@ -80,6 +80,13 @@ READY_UNSENT --strict query--> SEND_ATTEMPTED
    retain both candidates and return the conflict. Delivery failure alone does not erase a formed
    decision. Never synthesize a missing GitHub response.
 
+   On strict pairing/archive failure, check the fixed GitHub response scope and its delivery
+   comment; check again at natural completion if the earlier target was absent. Page absence is
+   not GitHub absence. Read response bytes at the observed full commit, verify the Git blob/hash/
+   size and comment pairing to the exact fixed TASK. `verify_github_pairing` tests this route.
+   A complete task-bound GitHub response can be archived/returned with provider IDs still null;
+   retain the strict mismatch instead of inventing IDs or waiting on a stale page after delivery.
+
 4. **Return once.** Verify the full archive, stage `native_receipt` for the current direct parent,
    then send one factual `collaboration.send_message` with request/binding, effect, operation,
    paired IDs, full archive source/hash/size, cleanup and missing facts. Record the actual tool
@@ -95,3 +102,7 @@ READY_UNSENT --strict query--> SEND_ATTEMPTED
    when a later changed boundary occurs. Active generation is ongoing work, not a reason to end
    as blocked. The author DM sends the same concise action update to Root at its own boundary;
    ordinary unchanged waits remain silent. A missing archive never prevents reporting a real conflict.
+   If this runtime lacks `collaboration.send_message`, return those same actionable fields once
+   in native final, which reaches the assigning parent directly. Record `transport=native_final`
+   and the actual native outcome; do not invent a tool success, create an app relay or require
+   another handshake. Tool availability does not hold a verified full answer away from its author.

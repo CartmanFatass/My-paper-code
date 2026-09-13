@@ -114,7 +114,8 @@ def claim_binding(registry_path: Path, preflight: dict) -> dict:
         effect_fields = ('conversation_id', 'agentify_stable_key', 'prompt_sha256', 'state',
                          'send_click_count', 'send_evidence', 'user_message_id', 'assistant_message_id',
                          'response_sha256', 'archive', 'return_receipt', 'native_receipt', 'timestamps',
-                         'send_reconciliation_history', 'execution_route', 'operation')
+                         'send_reconciliation_history', 'execution_route', 'operation', 'github_delivery',
+                         'github_response_pairing', 'frozen_github_delivery', 'frozen_task')
         if mirror and any(mirror.get(k) != prior.get(k) for k in effect_fields):
             raise ValueError('BINDING_CONFLICT: Portfolio mirror effect/receipt differs; preserve both records')
         same_request = prior.get('request_id') == preflight['request_id']
@@ -143,6 +144,8 @@ def claim_binding(registry_path: Path, preflight: dict) -> dict:
         record.update({k: copy.deepcopy(preflight[k]) for k in
                        ('request_id', 'conversation_binding_key', 'conversation_id', 'prompt_sha256',
                         'prompt_bytes', 'frozen_handoff', 'frozen_routing', 'execution_route', 'manifest')})
+        record['frozen_github_delivery'] = copy.deepcopy(preflight['github_delivery'])
+        record['frozen_task'] = copy.deepcopy(preflight['task'])
         record.setdefault('native_state', 'READY_UNSENT')
         record.setdefault('state', 'DIRECTION_VERIFIED')
         record.setdefault('provider_url', f"https://chatgpt.com/c/{preflight['conversation_id']}")
@@ -228,23 +231,56 @@ def verify_archive(path: Path, sha256: str, size_bytes: int) -> dict:
     return dict(path=str(path), sha256=sha256, size_bytes=size_bytes)
 
 
+def verify_github_pairing(record: dict, archive: dict, pairing: dict) -> None:
+    """Verify exact bytes against observed GitHub commit/comment facts, without inventing UI IDs."""
+    task_url = (record.get('frozen_task') or record['task'])['url']
+    scope = record.get('frozen_github_delivery') or record['github_delivery']
+    repository_url = task_url.split('/blob/', 1)[0]
+    commit = pairing.get('commit_sha', '')
+    response_path = scope['response_path']
+    url = f'{repository_url}/blob/{commit}/{response_path}'
+    if (not re.fullmatch(r'[0-9a-f]{40}', commit) or pairing.get('response_url') != url
+            or pairing.get('response_path') != response_path):
+        raise ValueError('GitHub pairing must use the immutable scoped response')
+    issue = scope['issue_url']
+    if not re.fullmatch(re.escape(issue) + r'#issuecomment-[0-9]+', pairing.get('comment_url', '')):
+        raise ValueError('GitHub pairing requires the specified delivery issue comment')
+    if task_url not in pairing.get('comment_body', '') or url not in pairing.get('comment_body', ''):
+        raise ValueError('GitHub delivery comment must pair the exact fixed TASK and response')
+    verified = verify_archive(Path(archive['path']), archive['sha256'], archive['size_bytes'])
+    raw = Path(verified['path']).read_bytes()
+    blob = hashlib.sha1(f'blob {len(raw)}\0'.encode('ascii') + raw).hexdigest()
+    if blob != pairing.get('blob_sha'):
+        raise ValueError('GitHub response bytes differ from the observed Git blob')
+
+
 def stage_native_receipt(record: dict, archive: dict | None = None, *, boundary: str = 'COMPLETE',
-                         status: str = '', evidence: str = '', next_action: str = '') -> dict | None:
+                         status: str = '', evidence: str = '', next_action: str = '',
+                         native_delivery: str = 'collaboration.send_message',
+                         verified_no_delivery: bool = False) -> dict | None:
     """One direct action message per changed boundary; unchanged waits produce none."""
     if boundary == 'UNCHANGED_WAIT':
         return None
     if boundary not in {'COMPLETE', 'CONFLICT', 'NO_CURRENT_WORK'}:
         raise ValueError('native return requires a concrete assignment boundary')
+    if native_delivery not in {'collaboration.send_message', 'native_final'}:
+        raise ValueError('return must use a direct native capability, never an app-task relay')
     verified = None
     if boundary == 'COMPLETE':
         if archive is None:
             raise ValueError('completion requires its full archive')
         verified = verify_archive(Path(archive['path']), archive['sha256'], archive['size_bytes'])
-        if (record.get('state') != 'ARCHIVED' or not record.get('user_message_id')
-                or not record.get('assistant_message_id') or record.get('response_sha256') != archive['sha256']):
+        paired_ids = record.get('user_message_id') and record.get('assistant_message_id')
+        if record.get('github_response_pairing'):
+            verify_github_pairing(record, archive, record['github_response_pairing'])
+        elif not paired_ids:
+            raise ValueError('receipt requires the archived full answer and its paired provider identities')
+        if record.get('state') != 'ARCHIVED' or record.get('response_sha256') != archive['sha256']:
             raise ValueError('receipt requires the archived full answer and its paired provider identities')
         status = status or 'Complete full response archived'
-        evidence = evidence or f"{verified['path']} sha256={verified['sha256']} bytes={verified['size_bytes']}; paired user={record['user_message_id']} assistant={record['assistant_message_id']}"
+        source = (record['github_response_pairing']['response_url'] if record.get('github_response_pairing')
+                  else f"paired user={record['user_message_id']} assistant={record['assistant_message_id']}")
+        evidence = evidence or f"{verified['path']} sha256={verified['sha256']} bytes={verified['size_bytes']}; source={source}"
         next_action = next_action or 'Author reads the complete response and performs conformance intake.'
     elif archive is not None:
         raise ValueError('noncompletion return must not imply a completed archive')
@@ -263,6 +299,11 @@ def stage_native_receipt(record: dict, archive: dict | None = None, *, boundary:
         raise ValueError('native receipt identity conflict')
     for prior in prior_receipts:
         if prior.get('message_key') == key or (legacy_key and prior.get('message_key') == legacy_key):
+            if prior.get('transport') and prior['transport'] != native_delivery and prior['status'] in {'PENDING', 'REJECTED_BEFORE_DELIVERY'}:
+                if prior['status'] == 'PENDING' and verified_no_delivery is not True:
+                    raise ValueError('receipt method change requires actual non-delivery evidence')
+                prior.setdefault('delivery_method_history', []).append(dict(transport=prior['transport'], status=prior['status']))
+                prior['transport'] = native_delivery
             return prior
     if existing:
         record.setdefault('native_receipt_history', []).append(copy.deepcopy(existing))
@@ -270,7 +311,7 @@ def stage_native_receipt(record: dict, archive: dict | None = None, *, boundary:
                f"Request: {record['request_id']}; binding: {record['conversation_binding_key']}. "
                f"Evidence: {evidence}. Next: {next_action}")
     receipt = dict(message_key=key, destination=route['parent_thread_id'], status='PENDING',
-                   boundary=boundary, archive=verified, message=message, transport='collaboration.send_message')
+                   boundary=boundary, archive=verified, message=message, transport=native_delivery)
     record['native_receipt'] = receipt
     if boundary == 'COMPLETE':
         record['native_state'] = 'RECEIPT'
