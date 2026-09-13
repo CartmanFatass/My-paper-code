@@ -102,6 +102,11 @@ temporary blockers do not release a direction slot. Use hmasd-portfolio-task for
 DM retains recovery of its request through its native Transport child. Uncertain Send permits
 observation/reconciliation only; proven nonacceptance permits the exact authorized Send after
 repair. Complete immutable responses go straight to DM intake while metadata corrections proceed.
+Transport follows one exact preflight, one effect branch, bounded observation/archive and one
+direct native receipt under its skill. Verified pre-Send failures recover the same unchanged
+request without another confirmation. A clear screenshot can supply current page facts; repeated
+DOM/model/identity checks, ACKs and status relays are not additional conditions. Frozen legacy
+routes remain evidence; recovery records the actual native child/parent separately.
 
 For ordinary direction-related Portfolio work, a relevant DM authors the full
 packet, creates/reuses its Transport child, publishes exact inputs and dispatches natively. DM is

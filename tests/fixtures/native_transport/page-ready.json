@@ -1,0 +1,17 @@
+{
+  "screenshot": "page-ready.png",
+  "screenshot_sha256": "1a26fb1cb814c69278bb02ee4f1d144d09640d294cc363b80ff280ddd270510a",
+  "provenance": "DM CUA screenshot of the exact Portfolio conversation on 2026-09-12; inspected visually, sidebar collapsed. Inspection tab was closed without Send.",
+  "limits": "Annotated human reading, not OCR. Screenshot shows a ready empty 6 Pro composer and an older response. Hidden tab key/protection and selected Latest come from the existing Agentify repaired-tab/preflight receipt. These facts do not establish current-request acceptance or nonacceptance.",
+  "historical_receipt_visible": true,
+  "page": {
+    "url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "tab_key": "portfolio:cross_direction",
+    "protected": false,
+    "logged_in": true,
+    "composer_ready": true,
+    "product_model": "Latest",
+    "reasoning_effort": "Pro",
+    "current_generation_active": false
+  }
+}
