@@ -56,3 +56,9 @@ result −0.02933437223896382J. Complete native432.30s passes all native caps; s
 compliance remains UNKNOWN. Evidence is archived with hashes; Root integration/retention
 precedes scoped duplicate reclamation. No active experiment or scientific successor remains
 in this allocation, and MGTAP stays ACTIVE/MEDIUM.
+
+Root retention/integration48e6f98a8 accepted the full archive. The three exact remote
+duplicates were removed and disk/worktree-registration absence verified. Local duplicate
+removal was rejected before execution by automatic approval review (`blocked by policy`);
+the directory remains and no deletion retry follows. See the intake's cleanup boundary
+and REMOTE_CLEANUP.json / LOCAL_CLEANUP.json for the actual partial closeout.
