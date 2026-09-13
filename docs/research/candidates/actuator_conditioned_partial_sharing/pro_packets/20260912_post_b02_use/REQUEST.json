@@ -1,0 +1,165 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-13-acps-post-b02-use-01",
+  "direction_id": "actuator_conditioned_partial_sharing",
+  "source_thread_id": "/root/dm_acps_resume",
+  "parent_thread_id": "/root/dm_acps_resume",
+  "operator_thread_id": "/root/dm_acps_resume/transport_lh_acps",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+  "decision_authority": "pro_final",
+  "delivery_mode": "github_delivery",
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/19"
+  ],
+  "scientific_question": "After separately accepted ACPS B01 ADVERSE and B02 INSIDE_MEI/negative, is there at most one concrete different finite use of capability-specialized learning whose outcome would change current informed-SHARED control or training-resource advice? Select and explain that one purpose within the original ACPS Convergence node scope if justified; otherwise return a reasoned no-candidate with the smallest supported tested-family/use boundary. This is the single Q purchased by Portfolio, not a permission consultation before an already selected B, and no different object or empirical funding is presently ready.",
+  "deliverable": "Return a conclusion-first original-direction decision: one action-changing finite purpose/proposal or a reasoned no-candidate. State the decision changed, decisive grounds, competent equally informed SHARED alternative, strongest opposing evidence and inferential limits. For a substantive proposed object state its environment-event/entity/information/action-or-credit/learner/native-consequence path, minimal real-learning comparison, estimand, own practical margin/reason, independent learning unit, result interpretation, dominant intrinsic and added-support work, honest readiness and complete new investment need. Unknown fields stay unknown; do not require a separate design campaign to populate them. State explicit family/use disposition only in this node scope, including whether an actual RECAST is selected; no implicit whole-direction Portfolio lifecycle change. Full conformance/intake of either branch completes Q; no positive proposal is required. Preserve both observations, current SHARED use and the one-question zero-empirical funding boundary. Make only the named GitHub response/comment or same-turn full Markdown fallback.",
+  "claim_ceiling": "Documentary direction-purpose/family judgment grounded in two separate B/EXPLORE instances. No new empirical result, pooled primary, equivalence, stable harm/advantage, cause or equal-capacity effect, exact optimum/headroom, novelty, transfer, C promotion, formal-UAV entry or Portfolio lifecycle/capacity decision. A purpose selection does not authorize implementation or empirical work.",
+  "github_delivery": {
+    "branch": "codex/acps",
+    "base_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+    "response_path": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/19"
+  },
+  "constraints": [
+    "Q is one complete preparation/request/answer/intake/publication unit at explicitly accepted UNKNOWN complete documentary/provider/agent cost. Zero implementation/model/load/RNG/measurement/raw numerical analysis/test/profiling/training/evaluation or conditional B. No third unchanged pair, preliminary native design, second scientific question or reserve. Same-request conformance/delivery recovery is preserved.",
+    "Both historical actors have identical 118 legal public/history inputs; fully informed nonlinear SHARED is competent in principle. ACPS has 1340 extra capacity/representation parameters. Do not weaken the null by hiding capability/identity/history or infer useful specialization from movement. Preserve actual command feedback versus likelihood proposal versus physical displacement.",
+    "B01 -0.03680814181453545 J remains ADVERSE; B02 -0.005186427396033822 J remains inside inclusive ±.01 with negative sign. Each is one matched fresh learning pair and 32 conditional final worlds; no pooling, recovery/equivalence or world-as-fit inference. A new purpose needs its own meaningful observable/margin, not inherited frozen thresholds.",
+    "Any exact diagnosis/search must have its own decision value against minimal real B; do not impose an optimum/census/positive-pilot/cause prerequisite. Describe arms/seeds/steps/evaluations and nested candidate/trajectory/controller factors, separate actual algorithm from added verification. Historical counts/walls/caps are not forecasts, grants or balances; unknown cost is not zero and funds no pilot.",
+    "Current target is four direction chains with existing overlap draining; ACTIVE Pro/recovery waits do not vacate slots. Preserve ACPS ACTIVE/HIGH/recasts0 unless this node explicitly selects an in-scope family/recast decision; whole-direction Portfolio disposition is outside Q. Prior response §6 five-target clause is isolated for a separate same-Portfolio correction; it does not change Q or this task.",
+    "Root held Q publication during Transport repair; that historical hold in BRIEF/FACTS is now released after MGTAP correction archival3a69ae2b02f16ac815d1e41ea2fff3a46f3bb0c2. Current author/source/parent is native /root/dm_acps_resume and Transport child /root/dm_acps_resume/transport_lh_acps; delivery uses current Windows config and repaired workflowb480ef406/3f7bc889. Historical runtime routes in old scientific records remain provenance only.",
+    "Local ADMN source use in BRIEF is explicitly attributed DM reading, not Pro direct access or efficacy on this host. No local code or external library run was made. Pro reads only the fixed listed GitHub sources and Issue19, applies named spec sections directly and preserves unavailable facts as limitations.",
+    "The generic convergence guidance applies only within this bound family/use question. A whole-direction PARK/CLOSE can be advice returned to Portfolio, not an applied lifecycle disposition here. A family CLOSE_OBJECT/RECAST, if selected, must be explicit and no broader than supported; neither releases empirical funding."
+  ],
+  "reference_files": [
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/BRIEF.md",
+      "commit_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+      "purpose": "Read the complete funded one-purpose/no-candidate question, legal null, workload/unknowns, direct knowledge and bounded local-source interpretation.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/FACTS.json",
+      "commit_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+      "purpose": "Machine-generated zero new scientific exposure and historical configuration counts; preparation/no-Send facts are historical and updated by TASK current route constraints.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/DIRECTION.md",
+      "commit_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+      "purpose": "Current accepted mechanism, separate results, strongest null and surviving alternative; Q investment and claim ceiling.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_POST_B02_PORTFOLIO_INTAKE_20260912.md",
+      "commit_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+      "purpose": "Complete response conformance, Q once at unknown documentary cost, isolated capacity return, zero empirical allocation and prediction history.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B02_SCIENCE_CARD_20260912.md",
+      "commit_sha": "f45a4dd675b73ce2013fe7f2844ed033c38f398d",
+      "purpose": "Protected five-UAV H256 native capability law, information/recurrent PPO, same-information comparison, own MEI, counts and old finite limits.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B02_INTAKE_20260912.md",
+      "commit_sha": "f45a4dd675b73ce2013fe7f2844ed033c38f398d",
+      "purpose": "Accepted inside-MEI negative B02; counts/receipt checks, prediction miss, conditional evaluation and bounded SHARED default.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B02_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "f45a4dd675b73ce2013fe7f2844ed033c38f398d",
+      "purpose": "Complete B02 E0 evidence and cost/measurement limits; no raw archive read or numerical reanalysis.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B02_COUNTS_20260912.json",
+      "commit_sha": "f45a4dd675b73ce2013fe7f2844ed033c38f398d",
+      "purpose": "Already-computed historical law, no future budget or rate forecast.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_INTAKE_20260912.md",
+      "commit_sha": "f45a4dd675b73ce2013fe7f2844ed033c38f398d",
+      "purpose": "Preserve separate adverse B01 and favorable conditional worlds without pooling; no stable-harm claim.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_acps_post_b02_investment/archive/RESPONSE.md",
+      "commit_sha": "f63980ab1acdcf9fad0ec8b1ac9770c864a6b988",
+      "purpose": "Read the complete Q investment, especially §§1,3–5 and final: one question/intake, UNKNOWN full cost explicitly accepted, zero empirical/conditional scope; §6 five-target sentence is a preserved conflict and not current authority.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "AGENTS.md",
+      "commit_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+      "purpose": "Current owner authority §§2,4.7–4.8,5 and native ownership: four target, overlap drains, no slot release from ended allocation or Pro wait.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+      "purpose": "Current DM/Root/native Transport ownership and conformance/integration routes; no historical task literal as live route.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+      "purpose": "Applicable §§3–5.2,7–8.2,11.4,11.7–11.10: lowest sufficient class, family/lifecycle scope, own MEI, independent units, question value and proportional real-learning burden.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+      "purpose": "Read §§2–4 and6 directly: legal information, shared conditional behavior, finite competence and evaluation/learning hierarchy. Explanatory knowledge only.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "commit_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+      "purpose": "Read information/CTDE/parameter sharing and nonstationarity; shared inputs can induce different actions and a central critic is not causal credit proof.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+      "purpose": "Read comparison unit, randomness hierarchy, complete-method versus mechanism and resource/return claim scope; no fixed seed or positivity quota.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+      "purpose": "Only §§4–5,7.1,7.3 for honest future implementation/check/review needs if a purpose is proposed. No implementation or new machinery is funded.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "2071fb09b5570b88b81f83d748723dd53f53ab64",
+      "purpose": "Only §§1–3: whole invocation and necessary support costs, dominant work, empirical caps versus engineering thresholds; unknown rates do not require a profiling pilot.",
+      "provenance": "Published repository evidence; named scope only. Historical states do not override current owner instructions."
+    }
+  ]
+}
