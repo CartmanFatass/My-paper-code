@@ -27,6 +27,10 @@ each direction still counts its own implementation-through-cleanup and later Roo
 正在由 DM 监控，技术验收后由同一 DM 直接启动已批准的 BANK128。ACVC、RCLE、MGTAP 的最近
 请求均已完成 intake，当前没有选定的新实验或未形成的决策。
 
+RCLE 正在准备且尚未发布/发送一个单一的 finite-investment 问题（seed29、256-update
+greedy-anchored B）；这是一次新的投资选择，不能被当作实验审批或重复咨询。若该问题获批，
+实验本身仍由 RCLE DM 在既定预算内直接 admission 和 launch。
+
 实验属于 DM object tier：只要 accepted card、Pro decision 或 finite grant 已固定对象、输入、
 比较器和 cap，DM 直接完成 admission、launch、collection 与 acceptance，不再向 Portfolio
 申请重复批准。Portfolio 只处理新的 investment、capacity、lifecycle、fusion/separation、
