@@ -2,9 +2,9 @@
 
 作者：Root指定Portfolio材料与完整科学核对DM，`/root/dm_a_mx_portfolio_resume`。当前正文替换旧状态，历史由Git保存。
 
-最近五项Portfolio决定已应用，CADC明确可逆PARK；ACPS由此购买的B02现已完整intake并清理。当前仅ACPS提出[新的边际投入/设计/生命周期问题](pro_packets/20260912_acps_post_b02_investment/SCIENCE_BRIEF.md)，尚未形成Pro决定；原DM与作者建议一次有界原节点用途判断，保留不追加/明确PARK/新独立pair反选。其余四项原节点工作保持各自范围。登记仍27＝16 ACTIVE+11 PARKED，没有由此次配对结束新增停放。
+最近五项Portfolio决定已应用，CADC明确可逆PARK；ACPS由此购买的B02现已完整intake并清理。ACPS已提出[新的边际投入/设计/生命周期问题](pro_packets/20260912_acps_post_b02_investment/SCIENCE_BRIEF.md)，已观察到独立不可变响应，完整回执/原作者intake作为另一事件保留；原DM与作者原建议一次有界原节点用途判断，保留不追加/明确PARK/新独立pair反选。MGTAP原节点已完整选择COND512/DENSE768 B，当前单独提出[新的经验投入问题](pro_packets/20260912_mgtap_unequal_exposure_investment/SCIENCE_BRIEF.md)；其他原节点工作保持各自范围。登记仍27＝16 ACTIVE+11 PARKED，没有由此次配对结束新增停放。
 
-原DM持续负责ACTIVE方向，有限pair、咨询或cleanup结束只结束分配。MGTAP/RCLE/ACVC/FOLR各自下一原节点TASK已固定ready，实际provider接受以真实回执为准；ACPS当前是独立Portfolio准备。完成返回、清理和同一Portfolio作者不冒充多条链。headroom与ACVC/VNFC/SCDMP第二次recast最低ACTIVE争用规则保留，五链目标不等于五笔自动拨款。
+原DM持续负责ACTIVE方向，有限pair、咨询或cleanup结束只结束分配。MGTAP原节点intake完整且经验额度未分配；RCLE/ACVC/FOLR各自原节点TASK已固定ready，实际provider接受以真实回执为准；ACPS独立Portfolio响应已保全，后续intake不与MGTAP混合。完成返回、清理和同一Portfolio作者不冒充多条链。headroom与ACVC/VNFC/SCDMP第二次recast最低ACTIVE争用规则保留，五链目标不等于五笔自动拨款。
 
 ## 五个新登记方向
 
@@ -29,7 +29,7 @@
 | [VNFC / HIGH](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md) | B03新调用104.89秒SIGSEGV；每臂35rounds、1120updates，合计13440transitions/2240updates直接记录，无final primary。有限owned-boundary检查不能证明全路径修复，topstack未证明writer或共同原因。 | 完整incomplete intake已接受，分配/diagnosis结束，无retry或剩余额度。时间信用与TERMINAL强null仍未分离；未来具体可信路径与投资不要求全史复原。recasts2。 |
 | [RCLE / MEDIUM](../candidates/roster_consistent_latent_exploration/RCLE_L_DESIGN_INTAKE_20260912.md) | L唯一joint-quota-phase提案明确公共共同相位、greedy-joint与attained nearest；F=0并非物理服务成功。旧B07双负与全部局部收益/代价保留。 | Pro购买一次原Convergence家族选择，完整咨询成本另行接受UNKNOWN；只有同一方案合规获选才激活唯一B新900native+900support=1800complete。1fit/1179648ticks/256Adam，Dg/Dn各.025U；在选择前零实现/实验，拒绝或实质更改不激活资金。 |
 | [FSD / HIGH](../candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md) | U完整PRO_FINAL：同宿主/配方/五轮预算下完整I1280为有限可选方案，authentic D0默认；五点混合、负值和较高费用保留，无稳定优势。 | 本轮Pro不追加LONG或重复U；LONG的3900complete offer未资助，无新代码/分析/fit/eval。以后真实较长普通D0预算用途可重新提出，但当前可选定位本身不买下一实验，方向仍ACTIVE/HIGH。 |
-| [MGTAP / MEDIUM](../candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md) | TOP−.0684509798102144 J、4正28负；三次mean-COND混合值分别保留，DENSE默认，TOP不是COND复现。 | Pro购买一次原Convergence的COND512/intact-DENSE768-or-decline用途判断及完整intake，全部documentary/provider/agent成本明确UNKNOWN；零实现/数值/实验。若节点选B须返回新经验投入需求，本轮没有条件B承诺或第四unchanged pair。 |
+| [MGTAP / MEDIUM](../candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INVESTMENT_NEED.md) | 原Convergence完整PRO_FINAL选唯一mean-COND512/intact-DENSE768用途B；三COND实例+.00576132/−.02246957/+.02447812与TOP−.06845098分别保留，DENSE默认。 | [新独立Portfolio投资问题](pro_packets/20260912_mgtap_unequal_exposure_investment/SCIENCE_BRIEF.md)建议仅购买已选一pair，N不购买为真实反选；344064团队ticks/2560Adam加全部支持，费用UNKNOWN、各新cap UNASSIGNED。原咨询已结束；没有第四unchanged pair、实现/实验或重复咨询拨款，ACTIVE/MEDIUM保持。 |
 | [UCOPE / HIGH](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | 最新 8801 L−F = −.02410561，MEI .01，40/64 world 负；完整 native 1384.14 秒。只有一个 L/F 配对；旧固定短 F 的收益和 8703 的原生/H 改善保留。 | post8801 已窄 PARK 此固定五 UAV、own-expiry {1,2}、final2048 的 continue/end-credit L 配方，无 successor。不是所有 renewal/ordinary feedback 停放；不能继续沿旧 8701 状态派发。 |
 | [SCDMP / HIGH](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | B01 +.00673741、B02 +.00365806，均 WITHIN .01；真实 residual 非零，B02 MLP−H 为 −.00065955。两正点和条件不确定性保留。 | post-B02 已窄 PARK opening t1–3→同 episode t4、full-MC、系数 1 包，无第三对/修改/诊断。具体新 loss/credit 或有用途的复现仍可提案，recasts 2。 |
 | [DISH / MEDIUM](../candidates/degraded_incumbent_shadow_handover/DISH_POST_B08_CONVERGENCE_INTAKE_20260910.md) | B08 HALF_RETAIN−REPLACE 为 −6.5 service ticks，WITHIN ±24；四条件 −15/0/−8/−3，额外四个 invalid commit，能耗较低。ordinary CAS 为零，source-origin 效果未估计。 | REPLACE 默认；retained-A03 arrival-bridge retention 家族窄 PARK，无 successor。未来要有具体 receipt→控制→native-service 问题，不能用旧 P62 DIRECT 代替当前方案。 |
@@ -60,7 +60,7 @@ UAV 计数需要方向决定、卡和真实执行三者相连。本轮核实了 
 
 ## 当前完整成本、后续问题与科学限制
 
-ACPS B02的450/whole arm、900native、600support、1500complete只属已结束的两次调用，任何未来cap和完整咨询费用UNKNOWN。RCLE已接受的900native+900support=1800complete条件B及其另计UNKNOWN家族选择成本保持，不由本ACPS问题改写；MGTAP原判断也无经验拨款。历史费用不变新预测/余额，未知尾部不计零。
+ACPS B02的450/whole arm、900native、600support、1500complete只属已结束的两次调用，任何未来cap和完整咨询费用UNKNOWN。RCLE已接受的900native+900support=1800complete条件B及其另计UNKNOWN家族选择成本保持，不由本ACPS问题改写；MGTAP原判断已完整选择B，但该新经验投资的whole arm/native/support/complete各cap仍UNASSIGNED、完整费用UNKNOWN。历史费用不变新预测/余额，未知尾部不计零。
 
 [本轮五项答复](pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md)完整回答唯一固定问题；旧四项HANDOFF因事前确认从未派发而已退役，无改写或重发任何已接受请求。当前实际作者/Root控制为Windows PowerShell；固定输入中后已撤销的WSL段落是历史，不是派发路由。本轮无新注册、融合、C或UAV晋级；CADC之外所有生命周期保留。
 
