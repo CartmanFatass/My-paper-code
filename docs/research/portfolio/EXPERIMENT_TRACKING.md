@@ -9,7 +9,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | MGTAP | Portfolio B 与 conformance amendment 已完整 intake；唯一 master pair 完成：COND512 0.16574499572521276 J、DENSE768 0.19507936796417658 J、delta −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026、7/25 worlds；ACTIVE/MEDIUM | post-8231 Convergence R 已完整 intake；保留 mean-COND eligibility 与 DENSE default，当前 proposal 不追加 pair/successor/lifecycle。Transport 原 request 为 UNCERTAIN_EFFECT 且绝不重发；当前 ACTIVE-idle，等待具体开发后果或 proper-node 决定 |
 | RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Greedy-anchored continuation 已完整 intake并应用 A：仅保留 epsilon .1 exact-greedy 问题；零 fit/seed/cap，当前 ACTIVE-idle，等待有限 B/investment specification |
 | ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Next-use/no-addition Convergence 已完整 intake：保留 qualified reference/no addition；无新 fit/K retry，当前 ACTIVE-idle，等待具体 owner/proper-node 触发 |
-| FOLR | Portfolio F 已完整 intake：Generic64 → 技术验收 → retained BANK128；caps 与顺序固定，当前源代码/资源 admission，ACTIVE/MEDIUM | DM 正在实现并做 admission；未启动实验，不重试旧 Generic、不做 transfer/renewal |
+| FOLR | Portfolio F 已完整 intake：Generic64 已按固定源通过 admission 并运行，native Monitor 已接管；技术验收后 → retained BANK128，caps 与顺序固定，ACTIVE/MEDIUM | DM 正在完成 Generic64 技术验收；之后自主启动 BANK128。不得重试旧 Generic、做 transfer/renewal |
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
 | FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 
@@ -35,4 +35,5 @@ Historical packet addresses are not new dispatch routes.
 FOLR's300-second support value is an owner-clarified reference: recorded308.8422538 is not
 by itself a hard stop. Native/scientific scope and remaining explicit complete-work limits persist.
 Historical run roots, fixed SHAs and complete data remain in their scientific evidence records.
+
 

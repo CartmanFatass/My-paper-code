@@ -37,7 +37,7 @@
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [TRDL](../candidates/tail_return_distributional_learning/DIRECTION.md) | 新注册PARKED/MEDIUM；保留tail-return distributional learning的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
 | [UCOPE](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | **更新：最新是post8801 PRO_FINAL PARK进一步8801-L continue/end-credit经验投入，保留unchanged-L spending stop。** 8601/8602、8701是更早证据。 | 无 | 有具体新选择才继续；不再凭旧8701 closeout pending造任务。其余renewal/ordinary-feedback议程未被整体关闭。 |
-| [FOLR](../candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md) | BANK −4.3261 own-policy result retained; Generic contrast unavailable, so no paired primary/MEI; FOLR ACTIVE/MEDIUM。 | Portfolio F 已完整 intake：先运行一项 fresh Generic64，技术验收后再运行 retained BANK128；其余 caps 固定，当前仍在源代码/资源 admission，尚未启动实验。 | 按已形成 Portfolio F 继续实现与 admission；不得重试旧 Generic、做转移/续投或改动 caps。 |
+| [FOLR](../candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md) | BANK −4.3261 own-policy result retained; Generic contrast unavailable, so no paired primary/MEI; FOLR ACTIVE/MEDIUM。 | Portfolio F 已完整 intake；Generic64 已按固定源 5dce539e 通过 admission 并启动，native Monitor 已接管；技术验收后才运行 retained BANK128，其余 caps 与顺序固定。 | 按已形成 Portfolio F 继续完成 Generic64 技术验收，再自主启动 BANK128；不得重试旧 Generic、做转移/续投或改动 caps。 |
 | [VNFC](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md) | B03 final incomplete/main7125f368b：每臂35 rounds、合计13,440 transitions/2,240 updates，104.89秒后SIGSEGV/exit139；无final primary，不能评分。 | allocation/diagnosis结束；两条已命名detached checkout已清理，证据保留。 | 无自动retry/诊断；未来须具体支持的最小修复或有相关证据的同义路径及新投资；不要求完整历史归因。 |
 | [VSP02](../candidates/vsp_02/DIRECTION.md) | P19结束已测试fixed-member family/configuration。 | 无 | 具体新方向选择；无successor/UAV allocation。 |
 | [VSP03](../candidates/vsp_03/DIRECTION.md) | B07 final G−R0+0.01156738、G−R+0.01307617、Q−0.00160645；post-B07及9/11 fallback保留相同narrow pause，未分配新fit。 | 无 | 将来有决策价值的同配方B仍合法，但当前未选择；不从旧continuous512文字推断运行。 |
@@ -81,4 +81,5 @@
 
 ACVC、VNFC、SCDMP保留second-recast最低争用排序；其余recast、MEI与formal-UAV状态沿用各方向已接受记录，本次无修改。
 匹配当前宿主的调优同信息headroom尚缺，缺失不是零或启动门槛；具体成本以各对象intake计量窗口为准。
+
 
