@@ -1,0 +1,75 @@
+{
+  "id": "20260913-folr-003",
+  "created": "2026-09-13T16:34:44-07:00",
+  "direction": "vap_folr_core",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "FOLR：DM 已决定可逆 PARK，独立科学评审与证据收尾继续",
+  "context": "最新 owner 授权由 DM 管理整个方向生命周期；Portfolio 为报告，不作逐项审批。旧 proposal 002 转为历史报告输入。",
+  "options": [
+    {
+      "key": "P",
+      "label": "可逆 PARK/MEDIUM（已执行）",
+      "consequence": "释放仅 FOLR 的研究占位，保留当前固定用途结论和开放科学问题；不自动替补方向或承诺资源。"
+    },
+    {
+      "key": "C",
+      "label": "开展最小 fresh-learning B：两份新训练",
+      "consequence": "普通 DM 对象选择，不需 Portfolio 许可；当前按边际信息价值未选。最小风险封顶 6900 秒。"
+    },
+    {
+      "key": "D",
+      "label": "明确期限的研究推迟",
+      "consequence": "没有具体外部 producer；仅按日期推迟不增加信息。"
+    }
+  ],
+  "recommended": "P",
+  "auto_applied": "P",
+  "dm_reason": "固定用途已解决；目前短 H20 同信息宿主上的额外训练价值有限，但现有条件性证据不足以永久否定整个方向。保留 Convergence 独立科学评审，DM 处理具体发现后仍负最终决策责任。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md#dm-lifecycle-decision--2026-09-13-full-direction-delegation"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md:35",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "DM 已依最新全方向生命周期授权将 FOLR 可逆 PARK/MEDIUM；本项记录独立决定及可异步纠正的理由，不请求 Portfolio/Root 审批。",
+    "changes_if_approved": [
+      {
+        "target": "FOLR 当前方向状态（DM 已应用；Clerk 报表同步）",
+        "from": "ACTIVE/MEDIUM，占用执行槽位",
+        "to": "可逆 PARKED/MEDIUM，解除本方向占位，不选择其他方向或新增资源"
+      }
+    ],
+    "if_refused": "Owner 可异步纠正本方向决定；DM 也负责因具体科学审查意见、新的有用方案或资源事实重新评估。普通研究无需逐项 Portfolio 许可。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md",
+        "quote": "P applied: whole FOLR is reversibly PARKED/MEDIUM by its DM.",
+        "why": "固定用途已完整解决；DM 比较最小 fresh-learning 方案后，判断当前边际信息价值不值得投入。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md",
+        "quote": "The potential learning variability and untested contexts make reversible PARK appropriate; they prevent a general algorithm-negative or permanent CLOSED conclusion.",
+        "why": "当前只有一份历史 BANK 和一次新 Generic；不能宣称全方向不可能有价值。"
+      }
+    ],
+    "uncertainty": [
+      "Convergence 保留独立科学 Reviewer 职责，审查实验设计、比较/证据、结论与后续方案；DM 处理具体缺陷并拥有最终决定。",
+      "最小新 B 两 fresh fits 可研究训练变异；未因缺授权拒绝，而是当前价值判断不选择。",
+      "累计完整成本未知，历史 E/F 账户分别保留；本次不承诺新的资源。"
+    ],
+    "cost": {
+      "compute": "0 新科研调用；原技术保全/清理继续。PARK 不等待科学 Reviewer 作经费或生命周期批准。",
+      "owner_time": "无需 ACK；异步覆盖保留。",
+      "reversibility": "reversible",
+      "waits_on_this": "生命周期已由 DM 决定；Clerk 报表/保全整合与 DM 科学审查、技术收尾仍有实际交付。"
+    },
+    "verdict_text": "P applied: whole FOLR is reversibly PARKED/MEDIUM by its DM.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md"
+  },
+  "starred": true
+}

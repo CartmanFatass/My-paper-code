@@ -7,6 +7,10 @@ therefore keeps Generic only. This is an object-tier application of the already
 accepted card and Portfolio F, not a new investment or direction disposition.
 FOLR remains ACTIVE/MEDIUM and its entity-history family remains OPEN.
 
+The preceding lifecycle sentence records the result-time boundary. The current
+DM disposition is reversible PARKED/MEDIUM; see the final DM lifecycle section
+below. The empirical result and its original interpretation have not changed.
+
 ## What was checked and the rule applied
 
 Read both complete summaries and native terminal/timing/admission evidence against
@@ -143,6 +147,10 @@ shared `C:/Projects/HMASD-worktrees/codex-vap-folr` checkout/branch remains the 
 direction workspace. [Chinese owner brief](../../portfolio/owner/briefs/vap_folr_core/2026-09-13_FOLR_RETAINED_REFERENCE_USE_B01_781301.md).
 
 ## Post-F direction-management proposal — 2026-09-13 owner resume
+
+This proposal was published at `80daa6ab0320ea39b6a2e4749005bf0da5386b79` before
+the owner's full-lifecycle delegation. It now serves as a report input; the final
+DM decision below supersedes its proposed Portfolio approval/re-entry routes.
 
 **DM recommends P: reversibly PARK the whole FOLR direction at MEDIUM priority,
 preserve its evidence and open scientific questions, and release its occupied
@@ -382,3 +390,65 @@ at `a726ffbfe4efb532a0ea84ea602071e5f5c09009`. Clerk owns that integration/reten
 consequence. After its concrete preservation handoff, DM can finish the exact assigned
 remote reclamation within the original technical scope. No deletion, remote rerun or
 new budget follows here, and this preservation issue does not hold overall planning.
+
+## DM lifecycle decision — 2026-09-13 full direction delegation
+
+**P applied: whole FOLR is reversibly PARKED/MEDIUM by its DM.**
+Provenance is `DM_DECISION / OWNER_DELEGATED`, using the owner's latest instruction
+relayed from task `01a095b7-850f-7401-ad4e-5e4320d285f1`:
+“你负责整个方向生命周期（方向内研究计划/实验/迭代/对象和family调整/继续、停放、结束及对应结论），不再把生命周期或每次下一研究选择交Portfolio审批。”
+The same instruction makes Portfolio a user-readable report and reserves automatic
+cross-direction changes/new resource commitments from this direction decision.
+The owner delegated the choice; **the DM selected P**, not the owner or Pro.
+The owner-console [direction decision item](../../portfolio/owner/inbox/2026-09-13/20260913-folr-003.json)
+records P as `auto_applied`; its [packet](retained_reference_use_b01_781301/POST_F_DM_LIFECYCLE_DECISION_PACKET.json)
+and audit row preserve C/D and the reason. Item 002 retains the original proposal
+and an owner-authority routing correction trace, without an invented owner reply.
+
+The reason and substantive alternatives are those compared above: fixed-use
+Generic-only is accepted; a new fresh-learning block is executable and within
+ordinary DM selection authority, but its expected incremental information does
+not currently justify the work on the unchanged H20/common-information host.
+P is preferred to both that 6900-second complete-risk first block and indefinite
+producer-free occupancy. The potential learning variability and untested contexts
+make reversible PARK appropriate; they prevent a general algorithm-negative or
+permanent CLOSED conclusion. Missing headroom and an expired F grant are not
+the reasons for this selection.
+
+| Decision | Applied scope and owner |
+| --- | --- |
+| Direction lifecycle | DM applies reversible PARKED/MEDIUM, ends current research advancement and releases FOLR's execution occupancy. No replacement direction or cross-direction resource change is selected. Clerk records the fact. |
+| Scientific conclusions | Preserve GENERIC_ONLY_BANK_WORSE for this exact fixed use, E's unavailable original contrast, all signed outcomes, scalar H and narrower historical holds; broader entity-history value is not ruled out. |
+| Research alternative C | Not selected on scientific marginal-value grounds. No first B needs routine Pro/Portfolio permission; no new fit, seed, card or resource commitment has been made here. |
+| Former Portfolio proposal | Convert `folr-post-f-management-v1` to report input; no new automatic consultation is needed. Any request already accepted elsewhere retains its real identity and observation route. |
+| Revisit | This DM owns reconsideration when a concrete information/lifetime context, learning-performance comparison or cost fact makes a useful bounded object worth doing, or the owner requests reconsideration. A new deployment customer or positive result is unnecessary. In-scope research/lifecycle choices are local; cross-direction adjustment or new resources follow the owner's actual constraints. No date-only recurring experiment or empty wait is installed. |
+
+At the lifecycle decision there were no FOLR live experiments or accepted open
+scientific requests. The owner's subsequent clarification preserves Convergence as
+the **independent scientific Reviewer**, covering experimental design, comparison/
+evidence quality, interpretation, conclusions and successor plans. The DM reads
+its complete review, responds to specific findings, repairs concrete defects or
+limits the dependent claim, and owns the final direction decision. Scientific
+review is distinct from finance, lifecycle and scheduling approval.
+
+DM is preparing one bounded post-F scientific review through native child
+`/root/transport_folr` on the existing Convergence binding. It examines the new
+complete F evidence, conditional fixed-use interpretation and scientific merits/
+limits of the fresh-learning alternative, without deciding PARK or purchasing
+another experiment. Preparation is not a provider Send; an accepted handle will
+be recorded when real. The prior suggestion that this role was merely optional
+advice is withdrawn. No Monitor or new empirical invocation has been created.
+The report-route change and selected P were sent to Clerk as
+`folr-portfolio-report-route-v1`; the published decision follows as
+`folr-dm-park-decision-v1`, with no ACK requirement.
+
+Technical closeout is still separate unfinished work. A single read-only remote
+check found all five inventoried paths present, both handles finished/exit0,
+neither recorded PID live, and the detached worktree still at source `5dce539ed`.
+Its [preflight receipt](retained_reference_use_b01_781301/POST_F_REMOTE_CLEANUP_PREFLIGHT.json)
+records 0.7560686 s of local command wall, not a full resource bill; it adds no
+scientific invocation. Main `469e85fe794e3b2aaff3a2acd65b22ade9493ed7` still lacked
+the accepted Generic raw archive at the subsequent read. Clerk owns the explicitly
+requested integration/retention fact; DM owns the already assigned exact reclamation.
+No remote data has been deleted at this boundary, and this technical dependency
+neither delays PARK nor restarts research.
