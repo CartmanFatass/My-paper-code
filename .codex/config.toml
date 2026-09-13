@@ -7,8 +7,13 @@ approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
 [features]
-multi_agent_v2 = true
 hooks = false
+
+[features.multi_agent_v2]
+enabled = true
+min_wait_timeout_ms = 1500000
+default_wait_timeout_ms = 1500000
+max_wait_timeout_ms = 3600000
 
 [agents]
 # Research capacity is repository-unbounded under AGENTS.md section 5. This knob limits only the
