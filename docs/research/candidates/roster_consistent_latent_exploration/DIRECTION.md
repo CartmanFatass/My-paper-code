@@ -33,8 +33,13 @@ recipe remains on its earlier narrow spending HOLD.
 The complete [greedy-anchored Convergence intake](pro_packets/20260913_greedy_anchored_continuation/INTAKE.md)
 now retains one changed policy-package question for later finite B object/investment
 specification: exact greedy log-prior plus the existing learned phase scorer.
-This close-call candidate decision selects no fit, card, seed or budget and leaves
-both tested-recipe HOLDs intact.
+This close-call candidate decision itself selected no fit or budget. The subsequent
+[conforming finite-investment intake](pro_packets/20260913_greedy_anchored_investment/INTAKE.md)
+now allocates one fresh seed29 B09 at256 updates and four complete native panels,
+with180/600/780 s native/support/complete invoked caps. Its next discriminator is
+learned service beyond both attained rules and positive learning beyond its own new
+initialization, preserving these independent quantities. This is selected science,
+not new efficacy evidence; both tested-recipe HOLDs remain intact.
 
 ## Current position
 
