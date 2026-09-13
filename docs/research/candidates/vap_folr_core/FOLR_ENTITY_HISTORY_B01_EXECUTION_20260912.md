@@ -1,4 +1,4 @@
-# FOLR E entity-history B01 â€” execution ownership
+# FOLR E entity-history B01 — execution ownership
 
 Owner `/root/dm_folr_post_b03`, authoring checkout
 `C:/Projects/HMASD-worktrees/codex-vap-folr`, branch `codex/vap-folr`.
@@ -17,9 +17,8 @@ Implementation acceptance:
 - Generic output: checkout plus
   `temp/directions/vap_folr_core/exp/entity_history_b01_781201_generic`.
 - Selected Generic handle name: `folr-entity-history-b01-781201-generic`.
-- BANK remains preselected after complete Generic technical collection regardless
-  of score; its separate adjacent admission, exact collected-input path and
-  accepted handle will be recorded at that later boundary.
+- BANK was launched after Generic technical collection under the original grant;
+  its separate admission, exact input path and accepted handle are recorded below.
 
 Before the first Send to the supervisor, stage `GENERIC.sh`/`BANK.sh` from the
 accepted commit with `git show` and prepare the empty output directory. This is
@@ -91,7 +90,7 @@ correcting incomplete-Generic publication handling, focused acceptance and fresh
 adjacent admission. Its launch/Monitor adoption will be recorded separately.
 The shared authoring checkout and detached checkout needed for BANK are retained.
 
-## BANK exact accepted command; launch receipt pending
+## BANK exact command and accepted launch
 
 Source/commands `5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4` were committed and pushed,
 then fetched into the existing now-Generic-terminal detached checkout. The
@@ -115,3 +114,29 @@ full arm using2994s soft TERM,5s kill grace and1s margin for the3000s ceiling.
 Prepare only the empty BANK output directory before this single supervisor call;
 accept actual launch and goal-state adoption separately. No result is asserted by
 this command record.
+
+At `2026-09-13T00:26:48.544280Z`, the exact BANK handle and output were absent; one
+supervisor run returned exit0. Immediate direct status: running, PID3413041,
+uptime0, tmux active, exit code null.
+[BANK_LAUNCH_RECEIPT.json](entity_history_b01_781201/BANK_LAUNCH_RECEIPT.json)
+retains the exact command, source, cwd, selected Generic path and supervisor root.
+The arm's own adjacent
+[BANK_ADMISSION.json](entity_history_b01_781201/BANK_ADMISSION.json) passed at
+00:26:48.592946Z with15627026432 physical/effective available bytes against the
+4294967296-byte floor. This is BANK's actual launch admission, not reused test or
+Generic admission. BANK runtime/output are now live and are not cleanup targets.
+
+MONITOR_ADD was sent directly to the live primary Monitor
+`01a095d0-21ee-7c02-9d97-3681b5678200` and the app send was accepted. It explicitly
+requires get_goal, continuation of the matching unfinished goal or unbudgeted
+goal creation, retention through accepted terminal delivery, actual unfinished
+goal-state MONITOR_ADOPTED to Root, and MONITOR_GOAL_COMPLETE before completing
+an empty goal. **Actual goal-state adoption remains pending** until that receipt;
+app-message acceptance is not adoption. Root confirms/routes the receipt to this
+DM; no duplicate experiment or routine status loop is introduced.
+
+DM returns this published boundary through Relay for Root integration/current
+tracking and retains BANK terminal collection, own-arm scientific intake, final
+resource/preservation/cleanup and a decision-ready next need. Generic's missing
+primary remains explicit throughout; there is no Generic retry or reconstructed
+comparison. FOLR stays ACTIVE and original package H is unchanged.

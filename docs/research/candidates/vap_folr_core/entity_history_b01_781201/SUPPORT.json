@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-09-13T00:26:15.042159+00:00",
+  "recorded_at": "2026-09-13T00:30:10.828013+00:00",
   "hard_support_cap_seconds": 1200,
   "native_caps_seconds": {
     "generic": 1800,
@@ -116,14 +116,30 @@
     {
       "component": "exact BANK command staging/transfer and explicit cleanup",
       "seconds": 0.9023749
+    },
+    {
+      "component": "BANK technical acceptance/command publication commit and push",
+      "seconds": 4.375556
+    },
+    {
+      "component": "single accepted BANK supervisor launch command",
+      "seconds": 0.6923703
+    },
+    {
+      "component": "BANK launch/admission receipt collection",
+      "seconds": 0.9628208
+    },
+    {
+      "component": "BANK receipts commit/push with interrupted text update; encoding inspection",
+      "seconds": 4.8256646
     }
   ],
-  "known_support_seconds": 77.962613,
+  "known_support_seconds": 88.8190247,
   "accounting": "Outer command elapsed covers inner pytest/admission once; do not add 3.346657243/2.834894535 again. New regression outer2.2170882 includes inner1.684901184 once. Rejected combined command created no process; approval-service overhead unknown.",
   "uncovered": "Other short document/source reads, apply_patch/control service overhead, future integration/collection/cleanup and provider/agent costs are not measured here; no zero or complete-total assertion.",
-  "scientific_invocations_so_far": 1,
-  "native_spend_so_far": "Generic complete technical collection:1795.06s enclosed wall, exit124; BANK unlaunched; supervisor1795s coarse whole-chain duration.",
+  "scientific_invocations_so_far": 2,
+  "native_spend_so_far": "Generic terminal1795.06s enclosed wall, exit124; BANK accepted and running, no terminal time yet. No Generic retry.",
   "rates": "Generic incomplete prefix observed; BANK full native wall/peak remain UNKNOWN; no pilot or ratio-to-time forecast.",
-  "remaining_scope": "Generic then BANK after complete technical collection; no extra pair/arm/width/shortened exposure. Continue support accounting at launch, collection and closeout.",
+  "remaining_scope": "Monitor goal-state confirmation then BANK terminal collection/own-arm intake and preservation/cleanup; pair primary unavailable because Generic incomplete; no extra arm or replacement allocation.",
   "additional_observed_support_lower_bound_seconds": 97
 }
