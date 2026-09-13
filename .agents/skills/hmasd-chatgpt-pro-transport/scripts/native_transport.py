@@ -14,7 +14,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from bind_conversation import _atomic_write
-from transport_contract import canonical_packet_manifest, registry_lock, validate_parent_thread_id, validate_source_thread_id
+from transport_contract import canonical_packet_manifest, registry_lock, utc_now, validate_parent_thread_id, validate_source_thread_id
 from validate_request import validate
 
 
@@ -264,6 +264,37 @@ def verify_github_pairing(record: dict, archive: dict, pairing: dict) -> None:
                               raw.decode('utf-8'))
         if not exact_sha or not exact_url:
             raise ValueError('GitHub delivery comment must pair the exact fixed TASK and response')
+
+
+def reconcile_github_archive(record: dict, archive: dict) -> dict:
+    """Resolve a pairing-only conflict over the same recorded GitHub archive.
+
+    Generic terminal transitions remain closed. This performs no registry write,
+    Send or receipt delivery; the caller persists the checked record under its lock.
+    """
+    if record.get('state') not in {'ARCHIVE_CONFLICT', 'ARCHIVED'}:
+        raise ValueError('GitHub archive reconciliation requires its prior archive conflict')
+    pairing = record.get('github_response_pairing')
+    stored = record.get('archive', {})
+    if (not isinstance(pairing, dict) or record.get('response_sha256') != archive.get('sha256')
+            or stored.get('response_sha256') != archive.get('sha256')
+            or not stored.get('response_file')
+            or Path(stored['response_file']).resolve() != Path(archive['path']).resolve()
+            or stored.get('github_commit') != pairing.get('commit_sha')):
+        raise ValueError('GitHub archive reconciliation cannot replace the recorded response')
+    verify_github_pairing(record, archive, pairing)
+    if record['state'] == 'ARCHIVED':
+        return record
+    history = record.get('archive_reconciliation_history', [])
+    if not isinstance(history, list):
+        raise ValueError('archive reconciliation history must be preserved as a list')
+    now = utc_now()
+    record['archive_reconciliation_history'] = history + [dict(
+        from_state='ARCHIVE_CONFLICT', to_state='ARCHIVED', observed_at=now,
+        response_sha256=archive['sha256'], response_url=pairing['response_url'],
+        reason='Existing exact GitHub archive and fixed TASK pairing verified')]
+    record.update(state='ARCHIVED', native_state='ARCHIVE', updated_at=now)
+    return record
 
 
 def stage_native_receipt(record: dict, archive: dict | None = None, *, boundary: str = 'COMPLETE',

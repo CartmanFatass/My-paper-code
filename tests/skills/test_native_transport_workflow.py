@@ -420,14 +420,68 @@ def test_observed_acvc_sha_comment_completes_from_immutable_git_bytes(tmp_path):
     path = tmp_path / 'response.md'
     path.write_bytes(raw)
     archive = n.verify_archive(path, observed['response_sha256'], observed['response_bytes'])
-    record.update(state='ARCHIVED', response_sha256=archive['sha256'], github_response_pairing=pairing,
-                  user_message_id=None, assistant_message_id=None, send_click_count=1)
+    record.update(state='ARCHIVE_CONFLICT', response_sha256=archive['sha256'], github_response_pairing=pairing,
+                  user_message_id=None, assistant_message_id=None, send_click_count=1,
+                  archive=dict(response_file=str(path), response_sha256=archive['sha256'],
+                               github_commit=pairing['commit_sha']))
+    conflict = n.stage_native_receipt(record, boundary='CONFLICT', status='Comment URL-format gap',
+                                     evidence='Immutable ACVC response bytes', next_action='Verify same archive',
+                                     native_delivery='native_final')
+    n.finish_native_receipt(conflict, 'SENT')
     before = copy.deepcopy(record)
     n.verify_github_pairing(record, archive, pairing)
     assert record == before
+    n.reconcile_github_archive(record, archive)
+    assert record['state'] == 'ARCHIVED' and record['native_receipt'] == before['native_receipt']
+    assert record['archive_reconciliation_history'][0]['from_state'] == 'ARCHIVE_CONFLICT'
     receipt = n.stage_native_receipt(record, archive, native_delivery='native_final')
     assert receipt['boundary'] == 'COMPLETE' and pairing['response_url'] in receipt['message']
     assert record['send_click_count'] == 1 and record['user_message_id'] is None
+    assert record['native_receipt_history'] == [conflict] and conflict['status'] == 'SENT'
+    n.finish_native_receipt(receipt, 'SENT')
+    completed = copy.deepcopy(record)
+    n.reconcile_github_archive(record, archive)
+    assert n.stage_native_receipt(record, archive, native_delivery='native_final') is receipt
+    assert record == completed
+
+
+@pytest.mark.parametrize('defect', ['state', 'record_hash', 'stored_hash', 'stored_path', 'stored_commit',
+                                  'pairing', 'archive_bytes', 'history'])
+def test_github_archive_reconciliation_rejects_replacement_without_mutation(record, tmp_path, defect):
+    path = tmp_path / 'response.md'
+    raw = b'Complete response preserved exactly.\n'
+    path.write_bytes(raw)
+    archive = n.verify_archive(path, n.digest(raw), len(raw))
+    response_path = record['github_delivery']['response_path']
+    commit = 'f' * 40
+    task_url = record['task']['url']
+    response_url = f"{task_url.split('/blob/')[0]}/blob/{commit}/{response_path}"
+    pairing = dict(commit_sha=commit, response_path=response_path, response_url=response_url,
+                   blob_sha=n.hashlib.sha1(f'blob {len(raw)}\0'.encode() + raw).hexdigest(),
+                   comment_url=record['github_delivery']['issue_url'] + '#issuecomment-123',
+                   comment_body=f'Fixed task: {task_url}\nDelivered: {response_url}')
+    record.update(state='ARCHIVE_CONFLICT', response_sha256=archive['sha256'], github_response_pairing=pairing,
+                  archive=dict(response_file=str(path), response_sha256=archive['sha256'], github_commit=commit))
+    if defect == 'state':
+        record['state'] = 'SEND_UNCERTAIN'
+    elif defect == 'record_hash':
+        record['response_sha256'] = 'a' * 64
+    elif defect == 'stored_hash':
+        record['archive']['response_sha256'] = 'a' * 64
+    elif defect == 'stored_path':
+        record['archive']['response_file'] = str(tmp_path / 'other.md')
+    elif defect == 'stored_commit':
+        record['archive']['github_commit'] = 'a' * 40
+    elif defect == 'pairing':
+        pairing['comment_url'] = 'https://github.com/other/repository/issues/1#issuecomment-123'
+    elif defect == 'archive_bytes':
+        path.write_bytes(raw + b'changed')
+    else:
+        record['archive_reconciliation_history'] = 'not a list'
+    before = copy.deepcopy(record)
+    with pytest.raises(ValueError):
+        n.reconcile_github_archive(record, archive)
+    assert record == before
 
 
 def test_claim_keeps_observed_github_delivery_separate_from_frozen_scope(preflight, tmp_path):
