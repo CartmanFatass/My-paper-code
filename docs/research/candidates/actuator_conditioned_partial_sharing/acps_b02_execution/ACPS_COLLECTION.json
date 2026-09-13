@@ -1,0 +1,156 @@
+{
+  "object": "ACPS-B02",
+  "arm": "ACPS",
+  "master": 9102,
+  "checks": {
+    "complete": true,
+    "identity": true,
+    "counts": true,
+    "rows_match": true,
+    "train_order": true,
+    "final_order": true,
+    "rollouts": true,
+    "finite_complete_rows": true,
+    "world_rng_binding": true,
+    "paired_reset_capabilities": true,
+    "checkpoint": true,
+    "whole_arm_cap": true
+  },
+  "counts": {
+    "train_team_steps": 131072,
+    "eval_team_steps": 8192,
+    "team_steps": 139264,
+    "optimizer_steps": 1024,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "velocity_decisions": 696320,
+    "duration_decisions": 0,
+    "d4": 0,
+    "recurrent_observations": 696320,
+    "explicit_resets": 544,
+    "constructor_resets": 1,
+    "constructors": 1,
+    "step_calls": 139264,
+    "scientific_uav_calls": 139264,
+    "diagnostic_frames": 0,
+    "completed_episode_steps": 139264,
+    "rollouts": 256
+  },
+  "whole_native_wall_seconds": 183.48,
+  "partial_internal_wall_seconds": 182.265968516469,
+  "J_mean": 0.05326012758454275,
+  "J_final": [
+    0.029845545942066766,
+    0.022156876371504187,
+    0.07814172809990946,
+    0.018185321235386992,
+    0.06445552481098572,
+    0.0605386642226958,
+    0.09554492239117732,
+    0.035091195157492636,
+    0.02486044875768759,
+    0.03795899018178877,
+    0.0677524110168613,
+    0.03721775256171739,
+    0.06260189430809901,
+    0.040709803062385426,
+    0.0634801648864191,
+    0.07223507152934111,
+    0.04878206618438933,
+    0.01891000090031321,
+    0.09640899117555371,
+    0.07117617940169235,
+    0.08424960606064855,
+    0.07556483123857789,
+    0.051660822418289266,
+    0.06562803124912102,
+    0.012869802436095678,
+    0.02448251879894409,
+    0.06712786458627855,
+    0.054792434075502536,
+    0.05821392329677896,
+    0.06979907367300855,
+    0.060030998260989614,
+    0.03385062441366608
+  ],
+  "exposure": {
+    "common_actor": {
+      "parameters": 37042,
+      "initial_norm": 12.827169418334961,
+      "final_norm": 13.31312084197998,
+      "displacement": 3.525306463241577,
+      "relative_displacement": 0.2748312077489643
+    },
+    "critic": {
+      "parameters": 34177,
+      "initial_norm": 9.256773948669434,
+      "final_norm": 10.34286117553711,
+      "displacement": 4.36553955078125,
+      "relative_displacement": 0.47160485661516577
+    },
+    "total": {
+      "parameters": 71219,
+      "initial_norm": 15.81847095489502,
+      "final_norm": 16.858644485473633,
+      "displacement": 5.611212730407715,
+      "relative_displacement": 0.3547253553398173
+    },
+    "adapter_a": {
+      "parameters": 60,
+      "initial_norm": 0.0,
+      "final_norm": 0.11702081561088562,
+      "displacement": 0.11702081561088562,
+      "relative_displacement": null
+    },
+    "adapter_b": {
+      "parameters": 1280,
+      "initial_norm": 2.576777458190918,
+      "final_norm": 2.6317994594573975,
+      "displacement": 0.6788479685783386,
+      "relative_displacement": 0.2634484271897265
+    }
+  },
+  "checkpoint_readback": {
+    "actor_parameters": 37042,
+    "critic_parameters": 34177,
+    "all_finite": true,
+    "no_model_construction": true
+  },
+  "files": [
+    {
+      "path": "admission.json",
+      "bytes": 504,
+      "sha256": "f43379fff7780732395b61a5f00ab25c9e3241efd22c8e41123e65f3287ea835"
+    },
+    {
+      "path": "episodes.jsonl",
+      "bytes": 405930,
+      "sha256": "1efc79f9aecd5349a5be8c6629ceaebb52fd20949ed731e57da4e0c1e1cf37e1"
+    },
+    {
+      "path": "final.pt",
+      "bytes": 290803,
+      "sha256": "a8cdd76110030f32920afa2ec54488996ef43c253778e88c75968076b252f826"
+    },
+    {
+      "path": "process_wall_seconds.txt",
+      "bytes": 7,
+      "sha256": "4353f63eb311010a764fa851bebd440bc1707047aeb7c1800d6cf78ab72230d3"
+    },
+    {
+      "path": "rollouts.jsonl",
+      "bytes": 187880,
+      "sha256": "e5d69f0ca99595c6004d6fe2c7fa4098c43182acb196ba9ff4c84148f81f89ac"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 558323,
+      "sha256": "d7f88a2a0952db7800849fe0252dc1d2658813f2b0482e3a4da009f99b1e9943"
+    },
+    {
+      "path": "supervisor.log",
+      "bytes": 1447,
+      "sha256": "337d59abfce8a63226b46a46c77e5b5abf5b97a529f5e3d32d4884bab5d1a3fb"
+    }
+  ]
+}
