@@ -626,7 +626,8 @@ judgment about this purchase, not a claim that replication is unnecessary.
 Strongest support remains F's observed gain over useful own-dwell. Eight adverse F−dwell worlds,
 one training unit and unequal private interventions bound the reference; motion suppression,
 private recurrence and teammate consequences remain coupled explanations. The inspected action
-is the clipped negative of the UAV's previous realized displacement. No increased saturation,
+is the clipped negative of the UAV's previous realized displacement divided by 30 (the
+existing action-space conversion in `Binding.observe`). No increased saturation,
 isolated retrace effect, tuned cluster headroom or fresh-policy default benefit was measured.
 
 The concrete next discriminator becomes relevant when a named same-law use proposes F as the
@@ -635,7 +636,21 @@ with final C/F/own-dwell panels could change the default. Retain separate signed
 practical scale and conditional uncertainty. This is a revisit condition, not a newly selected
 object, automatic investigation or Portfolio lifecycle/funding disposition.
 
+### Reference next-use Convergence — accepted 2026-09-13
+
+The [complete next-use intake](pro_packets/20260913_reference_next_use_convergence/INTAKE.md)
+accepts the original node's unchanged reference-retention/no-addition decision. No receiving
+use/default decision or new empirical result was supplied, so no additional documentary study,
+reuse artifact, receiver search or empirical object is selected. The existing observed-endpoint
+claim, strongest support and adverse-world contradiction remain exactly those above. The next
+discriminator is still an actual named same-law fresh-policy default decision; the consultation
+does not supply it. ACTIVE status is not evidence of a newly advancing experiment, and this
+finite answer is not a lifecycle disposition or another recast.
+
 ## Evidence set
+
+- `docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/archive/RESPONSE.md`
+- `docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/INTAKE.md`
 
 - `docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/archive/RESPONSE.md`
 - `docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/INTAKE.md`
