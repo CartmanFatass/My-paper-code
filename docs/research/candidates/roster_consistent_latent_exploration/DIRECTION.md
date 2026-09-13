@@ -24,8 +24,11 @@ roster changes under legal information and a competent service reference? The
 accepted [joint-quota-phase family decision](RCLE_JOINT_QUOTA_PHASE_FAMILY_INTAKE_20260912.md)
 selects one learned public common-phase controller against GREEDY-QUOTA-PHASE,
 attained INDEPENDENT-NEAREST and its own initialization. This new family directly
-tests the existing roster-service question. The separate tested
-equal-unit/.99-prior/FLEX/final1000 recipe remains on its narrow spending HOLD.
+tests the existing roster-service question. Following its complete B08 observation,
+the exact tested joint-quota-phase/256-update Adam/final256 recipe is on a reversible
+development-spending HOLD under the [post-B08 Convergence intake](pro_packets/20260913_post_b08_development/INTAKE.md).
+The family remains open. The separate tested equal-unit/.99-prior/FLEX/final1000
+recipe remains on its earlier narrow spending HOLD.
 
 ## Current position
 
@@ -104,14 +107,25 @@ took45.39s with613,072KiB peak RSS; this bounded observation does not establish
 scalability, stable performance or C/UAV transfer. Historical recasts and the
 old recipe HOLD remain intact.
 
-The selected one-fit discriminator is complete. A next bounded question must
-state how its observation would change inclusion of the optional learned path
-given greedy's attained service, without requiring exact optima or full causal
-diagnosis. No next fit or replacement object is selected by this result.
-[Current continuation](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md) keeps
-the same DM and ACTIVE/MEDIUM direction while returning the new scientific/
-capacity need and completing accepted retention/cleanup. The finite allocation
-ending is not a whole-direction disposition.
+The selected one-fit discriminator is complete. The conformingly accepted
+[post-B08 Convergence response](pro_packets/20260913_post_b08_development/INTAKE.md),
+immutable e4fd016e1612d0d4ad6a18a9a2eb4ac2f06478a0, now places only this tested
+joint-quota-phase/256-update Adam/final256 recipe on reversible development HOLD.
+The attained service deficits outweigh the current case for unchanged candidacy,
+while positive learning, short native execution and unknown training-history
+variation remain the strongest opposition. This qualitative development judgment
+does not establish stable inferiority or a class limit and selects no second fit.
+
+Revisit this exact recipe when an actual authorized use makes keeping it beside
+greedy a real development choice and another training history could change that
+choice, or credible new service-value/complete-cost facts change the judgment.
+The reason may use negative or mixed facts; no positive pilot, exact optimum or
+complete diagnosis is required. This condition commissions no prior diagnostic,
+search for a reason or automatic consultation. The family remains open.
+[Current continuation](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md) retains
+the same DM and ACTIVE/MEDIUM direction and returns the distinct continuation/
+capacity need. B08 retention and cleanup are complete; neither its ended finite
+allocation nor this narrow recipe HOLD is a whole-direction disposition.
 
 The historical sections below preserve earlier objects and their own limits.
 
