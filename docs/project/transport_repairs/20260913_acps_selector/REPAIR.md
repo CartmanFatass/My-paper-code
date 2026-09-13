@@ -53,7 +53,7 @@ operation model to its selector hint. Idempotency, Send, archive and receipt cod
 
 ## Focused evidence and remaining runtime prerequisite
 
-The focused unittest passed in1.843s: twelve identity cases; actual controller preflight
+The focused unittest passed in 1.843s: twelve identity cases; actual controller preflight
 browser expressions against a visible DOM fixture; independent Pro rejection; frozen
 ACPS HANDOFF/prompt/parent/operator checks; actual v4 operation persistence through pre-Send
 failure→same-operation repair; model-argument conflict preserved; uncertain effect→observation;
@@ -75,3 +75,25 @@ Transport performs one non-sending Astra/Pro preflight and continues the origina
 once only if it still proves nonacceptance. The current unique next action is runtime
 deployment/reconciliation, not repeating the failed preflight or changing the request.
 This is VERIFIED_NONACCEPTANCE; no uncertain-effect lock is invented.
+
+## Independent review and DM acceptance
+
+The direct native Astra/high Reviewer `/root/dm_mgtap_resume/rv_ah_transport` returned
+no material findings for patch `3478d5499b3f0138064890e5a9d29537adafcebeb64cfd5da9e68ffeed7c4e58`
+and controller `c57264e72050e17c0905972304d29a80cb259614885fe4a85088b3899b734084`.
+It verified the source/patch hashes, reverse applicability and Node syntax; traced the
+closed composer, unique product selection and separate Pro slider through both preflight
+and query before `onSendAttempted`; and independently checked the alias positive plus six
+negative probes, including duplicate unselected Latest and explicit unselected Astra.
+It reviewed the actual DOM/v4 fixtures and confirmed that operation identity, Send effects,
+uncertain recovery and archive code remain unchanged. It made no source, UI, runtime or
+operation writes and sent no request.
+
+DM technical acceptance on 2026-09-13: accept the bounded source repair and its focused
+regression evidence, published in `e7baaf528`. Live runtime readiness is **not accepted**:
+the preserved operation still requires the tested controller to be loaded and one changed-
+runtime preflight. Current `6Pro` plus selected Latest is a configured UI identity mapping,
+not backend attestation; this limit remains explicit. The direct parent action is to assign
+or reconcile application runtime loading without destroying the Q tab/key/operation, then
+return that changed fact to the ACPS author/Transport. No scientific decision, budget,
+request identity or lifecycle changes follow from this engineering acceptance.
