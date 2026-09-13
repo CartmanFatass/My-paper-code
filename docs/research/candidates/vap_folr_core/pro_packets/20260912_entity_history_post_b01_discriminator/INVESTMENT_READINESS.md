@@ -1,156 +1,122 @@
-# FOLR retained-BANK use — finite Portfolio investment materials
+# FOLR retained-BANK use — minimum Portfolio investment materials
 
-Preparation only. The original direction-node response has passed
-[conformance intake](INTAKE.md); this document is the DM's recommendation to
-Portfolio, not a spending decision, frozen science card, new request binding or
-authority to implement/evaluate. Root currently permits preparation while the
-shared Portfolio writer is reconciled. No Send is prepared for execution here.
+Preparation only; no request, funding, scientific seed or experiment is bound.
+The complete direction decision passed [conformance intake](INTAKE.md). This is
+its finite investment question for `portfolio:cross_direction`; FOLR remains
+ACTIVE/MEDIUM and the entity-history family OPEN.
 
-## Decision, options and recommendation
+## Decision ready for the proper node
 
-Should Portfolio fund exactly one new full Generic fit and a conditional fresh
-panel of the accepted fixed BANK, to decide whether that BANK controller belongs
-in the optional executable reference set for development on this exact host?
+Should Portfolio purchase one new full Generic fit and a fresh panel of the
+accepted fixed BANK to decide whether that BANK merits inclusion as an optional
+executable development reference on this exact public-information host?
 
-**Recommend option F: one finite B use comparison**, with the proposed new limits
-below and no renewal. **Option D: decline further spending on this particular
-retained-reference inclusion question** is the substantive alternative. D does
-not delete evidence, negate BANK's own result, close the entity-history family or
-park FOLR. Any wider lifecycle decision would need an explicitly grounded
-Portfolio question. Neither option authorizes a different fresh pair, shorter
-Generic endpoint, diagnostic/menu or unbudgeted successor.
+| Option | Consequence | DM recommendation |
+| --- | --- | --- |
+| F — one finite comparison | Fund the complete selected unit and explicit new ceilings below, with no renewal. | Recommend F: a competent equally informed Generic endpoint can change this concrete use choice without purchasing another BANK training history. |
+| D — decline this unit | Spend no more on this particular retained-BANK reference-inclusion question. Preserve evidence and existing family/direction status. | Substantive alternative: BANK has no demonstrated comparative value, and conservation may dominate this conditional use question. |
 
-F supplies a competent same-public-information alternative at a real native
-endpoint, using one available BANK policy without buying another BANK history.
-Its value is conditional reference choice, not general algorithm selection.
-D conserves nontrivial compute when no BANK advantage has been demonstrated;
-the short horizon, public cues and older B04 Generic competence support that
-opposition. The recommendation is a close call and qualitative: no probability
-of improvement or measured information-per-second ranking is available.
+The recommendation is a close call and qualitative: no probability of improvement
+or measured information-per-second ranking is available. The completed BANK is
+support for feasibility of the reference; the short horizon, common public cues
+and older B04 Generic competence are the strongest opposition. B04 is a different
+host/information comparison and cannot supply this missing endpoint. Matching
+tuned headroom is absent, not zero. Missing comparison and sunk cost do not create
+an entitlement to spend. Evidence-spec §§7–8.1 and 11.7–11.10 support the smallest
+useful empirical unit and distinguish its investment from direction lifecycle.
 
-Evidence-spec §8.1 favors the lowest sufficient class and real empirical
-discrimination, but neither missing data nor sunk cost creates an entitlement
-to finish a comparison. Sections 7 and 11.7 separate unit spending, lifecycle,
-headroom and capacity. Sections 11.8–11.10 permit the transparent retained/new
-exploratory unit and honest unknown cost without a pilot or exact causal census.
-Matching tuned headroom is absent; older baselines differ in information/host and
-cannot substitute. Current Portfolio records FOLR ACTIVE/MEDIUM; this request
-would affect only FOLR's named unit, not other directions' priority or allocation.
+Portfolio should select F or D, state its decisive reason, uncertainty and revisit
+condition, and give explicit per-arm/native-sum/support/complete limits if F.
+Changed limits are an investment choice; a changed scientific question must be
+identified rather than silently substituted. Neither option asks for a whole-
+direction disposition, different fresh pair, shorter endpoint or diagnostic menu.
 
-## Exact selected unit and result-dependent use
+## Complete scientific unit and honest outcome reading
 
-The already selected scientific design is response §§3–5: one unscreened fresh
-Generic GRU64 RETAIN learner, 5,000 training episodes/4,969 RMSprop updates and
-128 new final episodes. After technical acceptance, evaluate the fixed historical
-BANK GRU16 on 128 new episodes, regardless of Generic's score. No fresh BANK fit.
-Both use easy five-slot H20 Traffic Junction, vision 1, five actions, native reward,
-CPU FP32/Torch 1/1, equal full public lifecycle metadata and own local visibility.
-Preserve lifetime-owned recurrence and each policy's own closed-loop trajectories.
+Use response §§3–5 unchanged: one unscreened, genuinely new Generic GRU64 RETAIN
+fit, 5,000 episodes/4,969 RMSprop updates and 128 fresh final episodes. After
+technical acceptance of that fit and panel, evaluate the fixed historical BANK
+GRU16 for 128 new episodes regardless of Generic's score. BANK contributes zero
+new training. Its exact final actor is `entity_history_b01_781201/BANK_RAW.tar.gz`,
+member `final.pt`, source `5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4`.
 
-Historical BANK identity is training 781201, source
-`5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4`, final actor in the retained archive.
-New scientific seeds and result namespaces are unbound. Generic starts from fresh
-parameters, replay, optimizer and RNG; it does not resume the failed E prefix.
-New BANK evaluation loads weights only and resets episode state; it never learns.
-The old BANK panel is neither reused nor pooled with the new panel.
+Preserve easy five-slot H20 Traffic Junction, vision 1, five actions, native
+reward/RNG, CPU FP32/Torch 1/1, the complete equal public lifecycle table and own
+local physical visibility. Generic starts fresh parameters/optimizer/replay/RNG;
+BANK loads fixed weights and resets lifetime-owned state each episode. New seeds
+remain unbound. The old Generic prefix is not resumed and the old BANK panel is
+not pooled. The accepted [intake](INTAKE.md) supplies detailed legal state ownership.
 
-Primary: `d_use = new fixed-BANK mean − new Generic mean`. The later card would
-declare absolute MEI 1 on the unchanged native reward scale, for the practical
-reference-inclusion decision: strict >+1 favors retaining optional BANK; inclusive
-[−1,+1] preserves sign and favors Generic-only use without an equivalence claim;
-strict <−1 favors Generic-only use. Report both means, conditional episode SD/SE,
-extremes and adverse outcomes. Separate fresh and retained policy identities; no
-paired-episode or training-population inference. This cannot repair E's null primary.
+Primary `d_use = new fixed-BANK mean − new Generic mean`; proposed absolute MEI 1
+on the unchanged reward scale. Strict >+1 supports optional BANK inclusion;
+inclusive [−1,+1] preserves sign and favors Generic-only use; strict <−1 favors
+Generic-only use. Report both means, conditional episode SD/SE, extremes and
+adverse outcomes. This is an outcome-informed fixed-reference comparison against
+one new training realization, with no paired-episode inference, BANK-learning
+replication, training-population uncertainty, equivalence, component cause, stable
+superiority, speed, original-CAMA, transfer or C/UAV claim. E's primary stays null.
 
-Generic failure ends this dependent unit before the BANK panel; faithful-load or
-BANK endpoint failure preserves trustworthy Generic facts without replacement.
-All failures/spend count. No branch automatically grants another fit, panel,
-consultation, family closure, C promotion or UAV entry. A failed allocation leaves
-FOLR's continuing proper-node need explicit rather than inferring a lifecycle stop.
+Generic failure ends this dependent unit before BANK evaluation. BANK load/panel
+failure preserves trustworthy Generic facts without a replacement BANK fit.
+All outcomes and spend remain; no branch grants another fit/panel/consultation
+or changes the family/direction lifecycle. Old scalar H and all signed evidence
+retain their original scope. Scientific-reading assumptions from the completed
+intake remain current: dynamic recurrent behavior need not update weights, and
+more evaluation episodes do not add training instances. No new literature claim.
 
-## Per-arm work and proposed finite limits
+## Actual work and proposed new finite limits
 
-The [machine facts](INTAKE_FACTS.json) reproduce accepted loop arithmetic without
-constructing a model, environment or scientific RNG. Work is one new fit, one
-retained fit, 5,000 training episodes, 256 new evaluation episodes, 4,969 updates
-and 105,120 new team ticks. Controller position 21 is not a twenty-first action.
+[Machine facts](INTAKE_FACTS.json) calculate one new fit, 4,969 updates, 5,000
+training episodes and 256 evaluation episodes: **105,120 new team ticks**.
+Controller position 21 adds no twenty-first native action. No policy/trajectory
+search or separate diagnostic is part of the algorithm or a prerequisite.
 
-| Arm | Intrinsic work and complete law | Proposed new ceiling |
+| Arm/quantity | Complete work law and necessary multipliers | Proposed cap |
 | --- | --- | ---: |
-| Fresh Generic | 102,560 native ticks; 33,391,680 replay recurrent positions (4,969 × 32 × 21 × 5 × online/target), 538,440 acting positions. Admission/startup + 5,000 collection episodes + 4,969 learner updates + checkpoint + 128 evaluation episodes + publication/readback/exit. Mixer, backward, optimizer and movement costs included. | 2,700 s |
-| Fixed BANK | 2,560 native ticks; at most 67,200 acting cell positions (128 × 21 × 5 × 5), zero replay/updates. Admission/startup + actor construction/load + 128 evaluation episodes + full comparison publication/readback/exit. Projection, local attention, bookkeeping and environment included. | 300 s |
-| Native sum | Both complete invocation chains, serial and dependent as above; no transfer between arm ceilings. | 3,000 s |
-| Hard support | Source/binding preparation, focused changed-path check/review/correction, Git/staging, observation, collection/intake, integration and preservation/cleanup, charged once. | 1,200 s |
-| Complete invoked work | Native plus all invoked support, including failed work and publication/timing tails. | 4,200 s |
+| New Generic | Admission/startup + 5,000 collection episodes + 4,969 batch32/T21 online-target learner updates + checkpoint + 128 evaluation episodes + publication/readback/exit. 102,560 ticks; 33,391,680 replay GRU positions; 538,440 acting positions. Mixer/backward/optimizer/movement included. | 2,700 s |
+| Fixed BANK | Admission/startup + actor construction/load + 128 evaluation episodes + comparison publication/readback/exit. 2,560 ticks; at most 67,200 acting cell positions; zero replay/updates. Attention/projection/bookkeeping/environment included. | 300 s |
+| Native sum | Both complete serial chains; no transfer between arm caps. | 3,000 s |
+| Hard support | Source/binding work, changed-path checks/review/correction, Git/staging, observation, collection/intake, integration and preservation/cleanup once. | 1,200 s |
+| Complete invoked work | All native and invoked support, failed work and necessary publication/timing tails. | 4,200 s |
 
-These are **proposed risk limits, not measured projections or existing authority**.
-Generic's historical 1,795.06 s prefix reached 4,253 episodes/4,221 updates;
-stationary episode/update scaling gives about 2,110.35/2,113.16 s before missing
-final-stage terms. This assumption-dependent arithmetic motivates room beyond
-the old 1,800 s cap, without predicting completion or diagnosing its timeout.
-The proposed 2,700 s cap accepts finite remaining rate/contention risk. BANK's
-300 s limit is a proposed evaluation-only ceiling with no measured stage rate;
-its old complete-training wall cannot price this panel. Portfolio may decline
-the risk or select different explicit limits while preserving the full question.
+These are proposed risk limits, not measured completion forecasts or existing
+authority. Generic's 1,795.06 s incomplete prefix reached 4,253 episodes/4,221
+updates; stationary episode/update scaling gives about 2,110.35/2,113.16 s before
+missing final stages. Future rates and contention are unknown. BANK's 300 s
+ceiling has no measured evaluation-only rate. All future per-arm memory, full
+support and provider/agent cost remain UNKNOWN; no cost experiment is requested.
 
-All stage coefficients, future memory, full support and provider/agent cost remain
-UNKNOWN. No profiling/calibration experiment is requested. Historical native walls
-1,795.06/1,762.22 s and RSS 761,828/754,692 KiB describe different completed work,
-not same-endpoint speed or future memory admission. Historical E native sum
-3,557.28 s, support lower bound 213.7327064 s and native-plus-support lower bound
-3,771.0127064 s retain uncovered tails; later 9.1041944 s relay/publication has
-its separate window. Old hard support/complete compliance remains unverified,
-with no observed breach asserted. Those old limits/balances do not transfer.
+Historical E native wall totals 3,557.28 s. Support and native-plus-support lower
+bounds are 213.7327064 s and 3,771.0127064 s; later 9.1041944 s publication has a
+separate window. Full old support/complete compliance remains unverified with no
+observed breach asserted. Different completed workloads supply no speed claim
+or future admission; old budgets do not transfer. The unselected two-new-fit
+design would add 5,000 BANK training episodes, 4,969 updates and up to 166,958,400
+replay positions, buying broader training evidence than this selected use needs.
 
-The two-fresh-fit alternative would additionally buy 5,000 BANK training episodes,
-4,969 updates and up to 166,958,400 replay bank positions. It answers a different
-training question and is not requested. A retained-BANK-only memory statistic or
-ablation cannot supply Generic's native endpoint. No search, candidate cross-product,
-beam, best-of-many or diagnostic prerequisite is present.
+## Bounded implementation need and next action
 
-## Future engineering scope and acceptance, only if funded
+If funded, the DM directly owns the existing `C:/Projects/HMASD-worktrees/codex-vap-folr`
+checkout/`codex/vap-folr` and FOLR entry points
+`scripts/run_folr_entity_history_b01.py` and
+`experiments/candidates/vap_folr_core/entity_history_b01/`. L0 deliverable is a
+faithful retained-weight evaluation path and truthful retained/new publication,
+reusing the accepted Generic learner. Preserve the accepted numerical/information/
+RNG/recurrence contract; focus checks on load/reset/no-learning, new namespaces
+and the nonpaired primary. Reuse unchanged checks and retain independent high-risk
+review for the actual checkpoint/RNG/publication diff. The proposed ≤180 s focused
+check stays inside support and the directory's ≤300 s total. Engineering §4 needs
+none; §5's 2,000-line attempt/600-line runner limits remain. Published exact source,
+remote-first execution and each invocation's adjacent memory admission still apply.
+No implementation or source/numerical test is part of this document assignment.
 
-L0 deliverable: faithfully evaluate the retained actor and publish the new
-retained/new comparison using the accepted Generic learner. The direction DM
-owns the existing `codex/vap-folr` checkout and FOLR code/test/record surfaces;
-entry points are `scripts/run_folr_entity_history_b01.py` and
-`experiments/candidates/vap_folr_core/entity_history_b01/`. Prefer a small new
-use entry point/reuse of the accepted learner; old frozen E outputs and rules
-remain unchanged. No implementation has been performed for this proposal.
-
-Preserve native reward/actions/information, CPU FP32, Torch 1/1, constructor and
-action-selector RNG semantics, complete-episode online/target recurrence,
-optimizer settings, and retained BANK identity. Focus acceptance on faithful
-weight loading, per-episode state reset, no evaluation learning, new namespaces,
-the equal public interface and truthful nonpaired primary publication. Reuse
-unchanged trustworthy checks; retain independent Astra/high review for the actual
-checkpoint/RNG/publication diff under engineering §7.3. Proposed one focused check
-envelope ≤180 s is inside support, with the directory's existing ≤300 s total;
-corrections require a concrete failure, not routine repeated smoke.
-
-Engineering §4 additions needed: **none**. A direct weights-only evaluation entry
-point adds no resume/retry orchestration, registry or cache. Section 5's 2,000-line
-attempt and 600-line runner limits remain. Source publication precedes remote-first
-exact-SHA execution; each actual invocation needs its own destination-adjacent
-memory admission. The finite caps enclose required initialization through exit;
-no shortened exposure or outside-cap finishing tail. No new telemetry system,
-resource benchmark or historical checkpoint reconstruction is requested.
-
-## Publication route and remaining dependency
-
-This is documentary readiness, with zero new empirical/source-test exposure and
-zero provider Sends. The actual author is `/root/dm_folr_resume`; Root owns main
-integration. A future authorized request uses `portfolio:cross_direction`, the
-existing direction branch and Issue 15, fixed GitHub TASK delivery, then this DM's
-native Transport and complete conformance intake. No provider ID is prebound here.
-
-Before dispatch, reconcile the shared accepted request and competing writer with
-Root, refresh the relevant Portfolio row from its live source, and publish/bind
-the final allowed TASK. The current native Root instruction explicitly withholds
-new FOLR Send while ACPS's archived binding and MGTAP's next operation are being
-reconciled. This dependency is concrete and leaves the direction ACTIVE. No local
-Portfolio choice or newly invented scientific permission follows from its resolution.
-Root's subsequent broadcast assigns MGTAP the complete Transport workflow test/fix;
-FOLR uses the validated procedure after that return. No parallel workflow test or
-Send is part of this preparation. Delivery readiness is an engineering dependency,
-not a scientific negative or reason to release the direction.
+Root can integrate this tightened readiness record now. The later author/receipt
+parent remains `/root/dm_folr_resume`, using its native Transport and fixed GitHub
+TASK delivery on the existing direction branch/Issue 15 after the shared writer
+is reconciled. No new REQUEST/TASK/HANDOFF or provider binding is created now.
+The live registry read on 2026-09-13 UTC names
+`2026-09-12-mgtap-unequal-exposure-investment-01`, state `SEND_UNCERTAIN`, updated
+`2026-09-13T06:56:48Z`. This is MGTAP's active delivery dependency, not a FOLR
+scientific negative. Use MGTAP's validated recovery procedure and confirmed release
+before considering FOLR Transport. No Send, Generic retry or experiment is allowed
+in the meantime; the direction remains ACTIVE at this documentary boundary.

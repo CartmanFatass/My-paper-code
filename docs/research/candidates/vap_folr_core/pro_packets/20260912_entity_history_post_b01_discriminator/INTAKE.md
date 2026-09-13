@@ -144,3 +144,29 @@ instructed FOLR to use the validated procedure on return, with no Send meanwhile
 That is an engineering delivery dependency. It changes neither the accepted
 scientific question nor FOLR lifecycle, and it warrants no parallel FOLR workflow
 test or retry of Generic. The accepted Convergence request/binding remain intact.
+
+## Readiness maintenance — 2026-09-13
+
+Root resumed this DM to finish the existing investment materials. The tightened
+readiness retains the same F/D options, recommendation, complete scientific unit,
+claim ceiling and proposed 2,700/300/3,000/1,200/4,200-second limits. It now states
+the proper node's exact requested choice and removes repeated background. This
+is object-tier documentary maintenance; the Portfolio recommendation is unchanged
+and unfunded. Owner-delegated decision (unattended, 2026-09-03 instruction): publish
+the minimum ready materials and report the actual delivery dependency to Root.
+
+The live registry read names MGTAP's
+`2026-09-12-mgtap-unequal-exposure-investment-01` as `SEND_UNCERTAIN`, updated
+2026-09-13T06:56:48Z; the former ACPS request is now history. No release is observed.
+MGTAP owns reconciliation. FOLR created no new request/binding, Send, source edit,
+scientific seed, checkpoint load, test or experiment. Current owner reviews again
+returned `[]`. Existing owner items and the prior brief remain sufficient; no
+duplicate result or decision item is created. Arithmetic/relative links and the
+unchanged archived request/response were checked as documents only.
+
+Root next action: integrate this maintenance commit and refresh the stale FOLR
+readiness wording in Portfolio to the accepted retained-reference question. Keep
+ACTIVE/MEDIUM and the occupied direction slot. After MGTAP reconciles and releases
+the shared node, resume this DM for the authorized fixed-TASK/native-Transport
+step using the validated procedure. Current lack of dispatchable work is an
+engineering dependency, not a direction stop or a scientific verdict.
