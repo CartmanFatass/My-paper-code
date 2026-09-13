@@ -87,7 +87,12 @@ How the result will be interpreted: above MEI suggests a bounded independent
 follow-up; inside MEI favors the simpler Generic for this observation while keeping
 the sign; an adverse effect favors Generic on this native package. None funds a
 successor or closes FOLR. A missing/damaged primary limits that contrast. Generic
-technical completion permits preselected BANK **regardless of Generic score**.
+completed technical collection permits preselected BANK **regardless of Generic
+score or incomplete-arm termination**, subject to BANK's own actual integrity,
+admission and cap limits. A completed BANK may publish its own panel when Generic
+is incomplete; the pair primary is explicitly unavailable and no MEI branch is
+graded. This clarifies the original E mapping, without replacing Generic or
+changing either arm's exposure or cap.
 
 Prediction: close call, with Generic competence a strong possibility; the short
 host and new common event table may erase the useful advantage of explicit history.
