@@ -74,6 +74,8 @@ assignment, status, evidence/commit and next step. DM sends its actionable bound
 Transport sends to DM. A factual conflict needs no completed archive. Active generation remains
 ongoing work and unchanged waits require no broadcasts. A later changed boundary preserves
 the prior return and sends its own update once; this is not an ACK or forwarding chain.
+If a leaf runtime lacks collaboration.send_message, its actionable native final is the direct
+parent return. Record that actual capability/method; never fabricate tool delivery or add an app relay.
 
 ## Recoverable ownership
 
