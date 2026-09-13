@@ -7,7 +7,7 @@
 
 本表登记15 ACTIVE、12 PARKED。2026-09-13 ACPS Portfolio PRO_FINAL 已将 ACPS 可逆改为 PARKED/HIGH；其余生命周期、priority、recasts与UAV字段不变。
 标准并行目标为4个方向；当前四条 ACTIVE 链为 MGTAP、RCLE、ACVC、FOLR。DM 完成、阻塞或 ACTIVE-idle 回报都会触发一次稳定 Root 调度检查；对象完成、cleanup、Pro wait 或 child 完成均不释放方向槽位，只有正式 Portfolio/owner lifecycle 决定释放槽位。
-占位与实际工作分开：FOLR 正在已拨款 Generic→BANK 的 collection/combined intake，RCLE 有新投资 Transport 分派，ACVC/MGTAP 科学 ACTIVE-idle；有界治理/准备工作按实记录。见 [OWNER_DIRECT 自主执行收敛](decisions/2026-09-13-dm-autonomy-consolidation.md)，未变 timeout 不产生新请求或重复派工。
+占位与实际工作分开：FOLR 固定 Generic→BANK allocation 已完成并完成 combined intake，RCLE 有新投资 Transport 分派，ACVC/MGTAP 科学 ACTIVE-idle；有界治理/准备工作按实记录。见 [OWNER_DIRECT 自主执行收敛](decisions/2026-09-13-dm-autonomy-consolidation.md)，未变 timeout 不产生新请求或重复派工。
 当前 Portfolio/方向决定和 Transport/实验归档均已在本控制面合并；旧请求、旧 hash 和旧起草快照不作为当前路由。
 有限分配结束不推断停向；只有Portfolio/owner生命周期决定改变ACTIVE/PARKED。
 
@@ -38,7 +38,7 @@
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [TRDL](../candidates/tail_return_distributional_learning/DIRECTION.md) | 新注册PARKED/MEDIUM；保留tail-return distributional learning的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
 | [UCOPE](../candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md) | **更新：最新是post8801 PRO_FINAL PARK进一步8801-L continue/end-credit经验投入，保留unchanged-L spending stop。** 8601/8602、8701是更早证据。 | 无 | 有具体新选择才继续；不再凭旧8701 closeout pending造任务。其余renewal/ordinary-feedback议程未被整体关闭。 |
-| [FOLR](../candidates/vap_folr_core/pro_packets/20260913_retained_reference_investment/INTAKE.md) | 历史 BANK −4.3261 own-policy result 与旧 Generic 无 paired primary/MEI 保留；新 reference-use 结论尚待 combined intake；FOLR ACTIVE/MEDIUM。 | Portfolio F 已完整 intake；新 Generic64 完成/技术接受 e617175e 后，DM 直接一次 admission/提交固定 BANK128（db935e57）；同一 Monitor 回 ADOPTED+TERMINAL exit0/n128/duration3s，caps 与顺序固定。 | DM 正在 BANK collection/combined intake，无运行中实验或开放 Pro 请求。既有授权链无需 Root ACK/再审批；不得重试旧 Generic、做转移/续投或改动 caps。 |
+| [FOLR](../candidates/vap_folr_core/pro_packets/20260913_retained_reference_investment/INTAKE.md) | 历史 BANK −4.3261 own-policy result 与旧 Generic 无 paired primary/MEI 保留；固定 reference-use 已完成 combined intake，Generic-only 结论已记录；FOLR ACTIVE/MEDIUM。 | Portfolio F 已完整 intake；新 Generic64 完成/技术接受 e617175e 后，DM 直接一次 admission/提交固定 BANK128（db935e57）；同一 Monitor 回 ADOPTED+TERMINAL exit0/n128/duration3s，caps 与顺序固定。 | 固定 allocation 已完成，DM 已完成 collection/combined intake；无运行中实验或开放 Pro 请求。既有授权链无需 Root ACK/再审批；不得重试旧 Generic、做转移/续投或改动 caps。 |
 | [VNFC](../candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md) | B03 final incomplete/main7125f368b：每臂35 rounds、合计13,440 transitions/2,240 updates，104.89秒后SIGSEGV/exit139；无final primary，不能评分。 | allocation/diagnosis结束；两条已命名detached checkout已清理，证据保留。 | 无自动retry/诊断；未来须具体支持的最小修复或有相关证据的同义路径及新投资；不要求完整历史归因。 |
 | [VSP02](../candidates/vsp_02/DIRECTION.md) | P19结束已测试fixed-member family/configuration。 | 无 | 具体新方向选择；无successor/UAV allocation。 |
 | [VSP03](../candidates/vsp_03/DIRECTION.md) | B07 final G−R0+0.01156738、G−R+0.01307617、Q−0.00160645；post-B07及9/11 fallback保留相同narrow pause，未分配新fit。 | 无 | 将来有决策价值的同配方B仍合法，但当前未选择；不从旧continuous512文字推断运行。 |
@@ -82,5 +82,6 @@
 
 ACVC、VNFC、SCDMP保留second-recast最低争用排序；其余recast、MEI与formal-UAV状态沿用各方向已接受记录，本次无修改。
 匹配当前宿主的调优同信息headroom尚缺，缺失不是零或启动门槛；具体成本以各对象intake计量窗口为准。
+
 
 

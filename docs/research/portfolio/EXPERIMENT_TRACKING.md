@@ -9,7 +9,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | MGTAP | Portfolio B 与 conformance amendment 已完整 intake；唯一 master pair 完成：COND512 0.16574499572521276 J、DENSE768 0.19507936796417658 J、delta −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026、7/25 worlds；ACTIVE/MEDIUM | post-8231 R 已完整 intake；mean-COND eligibility 与 DENSE default 保留。ACTIVE-idle，无在途外部依赖/新 pair；旧 UNCERTAIN_EFFECT 不阻挡已完成 intake 且绝不重发。有具体新研究开发后果时原 DM 自主准备或执行授权内工作；未变事实复用现有 R |
 | RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Greedy-anchored A 仅保留 epsilon .1 exact-greedy 候选；新 finite-investment TASK 0cf002c3 / HANDOFF 53cc0311 已发布、绑定并分派原 Transport 一次。等待直接 provider/完整响应事实，尚不能记 SENT；grant NONE/no fit，两项 HOLD 保留 |
 | ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Next-use/no-addition 已完整 intake，Transport ARCHIVED；无新 fit/K retry 或在途外部依赖。科学 ACTIVE-idle；无新策略/接收/默认部署事实或改变范围的指令时复用已有判断，变化到来由原 DM 自主执行授权内工作或准备具体 proper-node 问题，不重复审计/咨询 |
-| FOLR | Portfolio F 已完整 intake；新 Generic64 完成/技术接受 e617175e（5000/4969/128、exit0、native2156.67s），随后固定 BANK128 一次 admission/提交 db935e57；同一 Monitor 回 ADOPTED+TERMINAL exit0/n128/duration3s，ACTIVE/MEDIUM | DM 正在 BANK collection/combined scientific intake，尚无最终 use 结论、无运行中实验或新 Pro 请求。Generic→BANK 顺序和五 caps 保持，无 Root ACK/再审批、旧 Generic retry 或 transfer/renewal |
+| FOLR | Portfolio F 已完整 intake；新 Generic64 完成/技术接受 e617175e（5000/4969/128、exit0、native2156.67s），随后固定 BANK128 一次 admission/提交 db935e57；同一 Monitor 回 ADOPTED+TERMINAL exit0/n128/duration3s，ACTIVE/MEDIUM | DM 已完成 BANK collection/combined scientific intake，结论为该固定用途中 Generic-only（BANK worse）；无运行中实验或新 Pro 请求。Generic→BANK 顺序和五 caps 保持，无 Root ACK/再审批、旧 Generic retry 或 transfer/renewal |
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
 | FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 
@@ -56,5 +56,6 @@ Historical packet addresses are not new dispatch routes.
 FOLR's300-second support value is an owner-clarified reference: recorded308.8422538 is not
 by itself a hard stop. Native/scientific scope and remaining explicit complete-work limits persist.
 Historical run roots, fixed SHAs and complete data remain in their scientific evidence records.
+
 
 
