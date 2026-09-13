@@ -1,0 +1,39 @@
+{
+  "question": "FOLR 已完成固定参照用途后，在总体计划中应可逆 PARK、继续有界 fresh-learning 研究，还是明确暂缓？DM 推荐 P，尚未形成或应用 Portfolio 决定。",
+  "changes_if_approved": [
+    {
+      "target": "PORTFOLIO.md · vap_folr_core（若最终选择 P）",
+      "from": "ACTIVE/MEDIUM，占用一个执行槽位",
+      "to": "可逆 PARKED/MEDIUM，明确释放槽位；保留家族问题、证据与原对象边界"
+    }
+  ],
+  "if_refused": "Portfolio 可保留 C 连续研究方案或 D 明确暂缓，也可提出其他总体计划。普通新 A/B 的 DM 自主选择不以逐项 Portfolio 购买为条件；本轮不从 F 结束推断全方向禁令。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md",
+      "quote": "Accept the complete use comparison and apply GENERIC_ONLY_BANK_WORSE.",
+      "why": "固定用途已由完整原规则解决；继续占位应有新的方向投入理由。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md",
+      "quote": "Strongest limit to a broad negative is the conditional, outcome-informed BANK selection and one new Generic realization.",
+      "why": "训练变异尚未解决；fresh BANK/Generic 的新学习比较是实质替代方案，不能把当前结果扩大为整个算法负面。"
+    }
+  ],
+  "uncertainty": [
+    "短 H20 与公共生命周期线索可能使 Generic 足够，但不是已证明的记忆因果解释。",
+    "匹配的 tuned headroom 缺失，不是零，也不是 PARK 的必要理由。",
+    "全 provider/agent 成本及新工作阶段速率未知；不能据此宣称信息/秒跨方向排名。",
+    "P 的复审由 Portfolio/owner 对具体信息/生命周期、学习性能或成本方案触发，Clerk 负责路由。"
+  ],
+  "cost": {
+    "compute": "P/D：0 新科研调用。C 规划上限：2 新训练区组、4 fits、410240 team ticks；Generic 每次2700秒、BANK每次3000秒、native合计11400秒、support2400秒、complete invoked13800秒。这是规划风险报价，不是第一普通B审批门槛或旧F续拨。",
+    "owner_time": "异步审阅；不等所有者逐项确认。",
+    "reversibility": "reversible",
+    "waits_on_this": "全方向占位/生命周期规划未决；没有已接受科研 producer。技术保全/整合独立进行。"
+  },
+  "verdict_text": "DM recommends P: reversibly PARK the whole FOLR direction at MEDIUM priority, preserve its evidence and open scientific questions, and release its occupied execution slot only through the explicit Portfolio plan.",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md"
+}
