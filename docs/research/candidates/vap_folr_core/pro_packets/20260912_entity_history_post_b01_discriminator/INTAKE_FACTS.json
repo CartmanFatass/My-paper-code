@@ -1,0 +1,144 @@
+{
+  "prepared_at": "2026-09-13T06:10:43.244750+00:00",
+  "author_native": "/root/dm_folr_resume",
+  "boundary": "direction response accepted; finite Portfolio materials only; no request/seed/invocation bound",
+  "response": {
+    "delivery_commit": "d6a29b287612f21fd5ddbb0cc19fbae4e8c1fb12",
+    "integrated_commit": "7ab178ad8fbf94ffa4c5da5b4812d632db2fdb9b",
+    "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md",
+    "bytes": 33393,
+    "lines": 139,
+    "sha256": "3d2f63f5beb9221e2206b24c491bb01130437185d6b6d499b27455513125fb74",
+    "same_integrated_bytes": true
+  },
+  "new_author_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "policy_search_candidates": 0,
+    "profiling": 0,
+    "source_implementation_edits": 0,
+    "source_or_numerical_tests": 0,
+    "new_raw_result_analysis": 0,
+    "provider_sends": 0,
+    "transport_dispatches": 0
+  },
+  "prospective_configuration_arithmetic": {
+    "source": "accepted E card Exposure, RNG and native endpoint; archived response section 6",
+    "scope": "counts only; no model/environment/RNG constructed",
+    "fresh_generic_fits": 1,
+    "retained_historical_bank_fits": 1,
+    "new_bank_fits": 0,
+    "new_generic_training_episodes": 5000,
+    "new_generic_training_ticks": 100000,
+    "new_generic_optimizer_steps": 4969,
+    "new_generic_final_episodes": 128,
+    "new_bank_final_episodes": 128,
+    "new_generic_total_ticks": 102560,
+    "new_bank_total_ticks": 2560,
+    "new_total_native_ticks": 105120,
+    "new_generic_replay_gru_positions": 33391680,
+    "new_generic_acting_positions": 538440,
+    "new_bank_acting_cell_positions_upper": 67200,
+    "additional_replay_positions_for_unselected_fresh_bank_fit_upper": 166958400
+  },
+  "historical_prefix_sizing_only": {
+    "generic_incomplete_wall_seconds": 1795.06,
+    "observed_training_episodes": 4253,
+    "observed_optimizer_steps": 4221,
+    "stationary_episode_scaled_seconds": 2110.345638372913,
+    "stationary_update_scaled_seconds": 2113.161132433073,
+    "limit": "not a measured completion time or lower bound; missing checkpoint/evaluation/publication stages and all stage rates unknown"
+  },
+  "dm_proposed_limits_not_allocation_seconds": {
+    "generic_complete_invocation": 2700,
+    "fixed_bank_complete_invocation": 300,
+    "native_sum": 3000,
+    "hard_support": 1200,
+    "complete_invoked": 4200
+  },
+  "future_costs": {
+    "generic_full_wall": "UNKNOWN",
+    "fixed_bank_full_wall": "UNKNOWN",
+    "per_arm_memory": "UNKNOWN",
+    "full_support": "UNKNOWN",
+    "provider_agent_complete": "UNKNOWN"
+  },
+  "owner_review": {
+    "live_primary": "C:/Projects/HMASD",
+    "unapplied_reviews": []
+  },
+  "shared_portfolio_dependency": {
+    "source": "native Root instruction to /root/dm_folr_resume",
+    "current_request_reported_by_root": "2026-09-12-acps-post-b02-investment-01",
+    "next_reconciliation": "MGTAP",
+    "allowed_now": "prepare finite investment materials only; no Send",
+    "subsequent_root_instruction": "MGTAP owns complete Transport workflow test/fix; FOLR uses validated procedure after return; no Send or Generic retry in the meantime. Engineering delivery dependency, not scientific polarity."
+  },
+  "machine_generated_exposure_line": "NEW AUTHOR EXPOSURE: scientific_invocations=0, models=0, checkpoint_loads=0, environments=0, scientific_rng_masters=0, training_episodes=0, native_ticks=0, optimizer_steps=0, evaluation_episodes=0, diagnostic_trajectories=0, policy_search_candidates=0, profiling=0, source_implementation_edits=0, source_or_numerical_tests=0, new_raw_result_analysis=0, provider_sends=0, transport_dispatches=0.",
+  "published_source_mappings": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md",
+      "commit_sha": "d6a29b287612f21fd5ddbb0cc19fbae4e8c1fb12",
+      "use": "complete selected question; no empirical allocation"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_SCIENCE_CARD_20260912.md",
+      "commit_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+      "use": "frozen host, information, E primary and source cost law; old budget ended"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md",
+      "commit_sha": "be6505326d2536603205c3d835ab02af79ce0668",
+      "use": "accepted E own-policy and failure-dependent comparison ceiling"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "be6505326d2536603205c3d835ab02af79ce0668",
+      "use": "counts, recorded costs, checkpoint identity and preservation"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "7b28017bfcfa90cd791d5d3c8ba4ffbd7571f726",
+      "use": "sections 4,5.2,6.1,7,8.1,11.4,11.7-11.10"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "7b28017bfcfa90cd791d5d3c8ba4ffbd7571f726",
+      "use": "sections 4,5,7.1-7.3"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "7b28017bfcfa90cd791d5d3c8ba4ffbd7571f726",
+      "use": "sections 2,4,6"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "7b28017bfcfa90cd791d5d3c8ba4ffbd7571f726",
+      "use": "comparison target, randomness levels, whole method versus component cause"
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "7b28017bfcfa90cd791d5d3c8ba4ffbd7571f726",
+      "use": "sections 2,4,5; native author/Transport and evidence boundaries"
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "7b28017bfcfa90cd791d5d3c8ba4ffbd7571f726",
+      "use": "FOLR ACTIVE/MEDIUM snapshot; refresh at later actual dispatch"
+    }
+  ],
+  "owner_trace_limitation": {
+    "item": "20260912-folr-005",
+    "attempted_authority": "DM_RECOMMENDATION_ONLY; Root preparation-only assignment 2026-09-12",
+    "error": "invalid choice; choose OWNER_DIRECT or PRO_FINAL / OWNER_DELEGATED",
+    "resolution": "retain accepted proposal item with no applied option or funding trace; packet and audit carry recommendation"
+  }
+}
