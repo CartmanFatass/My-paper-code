@@ -1,6 +1,6 @@
 # HMASD current execution tracking
 
-Current workflow: event-driven Root and independent DM task rollout; research remains paused. See [workflow repair](decisions/2026-09-13-direction-management-workflow.md) and `.codex/hmasd-dm-sessions.toml`. On resume each DM resolves any unasked continuation/capacity/lifecycle decision; exhausted objects do not complete direction management.
+Current workflow: event-driven Root and four accepted independent Astra/max DM tasks; research remains paused. See [workflow repair](decisions/2026-09-13-direction-management-workflow.md) and `.codex/hmasd-dm-sessions.toml`. On resume each DM resolves any unasked continuation/capacity/lifecycle decision; exhausted objects do not complete direction management.
 Updated 2026-09-13. Windows control checkout: C:/Projects/HMASD; PowerShell.
 Owner pause 2026-09-13：MGTAP、RCLE、ACVC、FOLR 均已在干净边界暂停；无运行中实验、Transport 或等待循环。50-minute Heartbeat 已暂停，恢复需 owner 明确指令。
 
@@ -17,13 +17,18 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 
 Working-set target: **4**; existing overlap drains without interruption or fifth-slot admission.
-Occupied direction slots: **4** — MGTAP, RCLE, ACVC and FOLR, with their original DMs.
-No scientific work is running: RCLE B09 and FOLR fixed allocations are fully intaken; ACVC/MGTAP have no external producer. Independent DM migration is the only current governance work; rollout state is in .codex/hmasd-dm-sessions.toml. Occupancy is not a claim of four advancing runs;
+Occupied direction slots: **4** — MGTAP, RCLE, ACVC and FOLR, with their registered independent Astra/max DMs; legacy native DMs are retired/paused.
+No scientific work is running: RCLE B09 and FOLR fixed allocations are fully intaken; ACVC/MGTAP have no external producer. Independent DM migration passed target-model acceptance; current routing is in .codex/hmasd-dm-sessions.toml. Occupancy is not a claim of four advancing runs;
 completion or idle state does not release an ACTIVE slot. CADC and ACPS are PARKED only through
 their explicit Portfolio dispositions. See [current workflow](decisions/2026-09-13-direction-management-workflow.md).
 One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
 to ACPS support only, unknown unless directly measured. MGTAP T and CADC exclude that shared item;
 each direction still counts its own implementation-through-cleanup and later Root integration once.
+
+Technical closeout retained at migration: FOLR removal_executed=false; RCLE cleanup inventory
+still awaits integration/retention reconciliation; MGTAP has a recorded local cleanup restriction.
+No remote deletion is verified by these static receipts. Their DMs own scoped follow-through after
+explicit resume; these are not active scientific producers and do not settle direction lifecycle.
 
 ## Request audit — 2026-09-13
 
@@ -55,3 +60,16 @@ Historical run roots, fixed SHAs and complete data remain in their scientific ev
 
 
 
+
+## Overall Portfolio planning
+
+Portfolio is the independent persistent Pro research planner for the entire registered program.
+DMs provide current direction evidence/opportunities and proposals. Root transmits the global
+agenda, records the full plan and schedules its handoffs; new Portfolio requests share this one
+entry. Direction-node science and ordinary delegated experiments remain DM-owned. Existing
+accepted Portfolio packets preserve their original closeout routes.
+
+New overall plan under the revised role: **NOT_REQUESTED / OWNER_PAUSED**. The four DM target-model
+handoffs identify unresolved post-allocation management questions; they are inputs to the next
+explicitly resumed/commissioned global planning event, not four granted experiments or already
+formed Portfolio decisions. Prior accepted scientific and lifecycle records remain effective.

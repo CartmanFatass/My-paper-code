@@ -7,8 +7,10 @@ Control: C:/Projects/HMASD, Windows PowerShell. Research and Pro sends remain OW
 
 Root is an event-driven recorder/integrator and scheduler at Portfolio/shared-dependency boundaries.
 DM owns the complete direction, including its research plan, execution and next management decision.
-Portfolio remains the persistent Pro investment/capacity/lifecycle node. Independent DM tasks are
-being introduced with an ACVC pilot first, then the other three after validation. Actual task IDs,
+Portfolio is the independent persistent Pro overall research planner. DMs submit evidence/proposals
+to Root, the single coordinator of new Portfolio agendas and full-plan records; affected DMs own
+scientific conformance/application. Independent DM migration is complete after all four passed
+Astra/max evidence and management-scenario checks. Actual task IDs,
 unique authoring checkouts, legacy pause state and migration state are in
 [C:/Projects/HMASD/.codex/hmasd-dm-sessions.toml](../../../.codex/hmasd-dm-sessions.toml).
 Use SIBLING_COMMUNICATION.md's independent-task route where registered; no native reparenting is
@@ -28,6 +30,9 @@ running in these four chains. ACPS is already formally PARKED/HIGH.
 | FOLR | Generic64 and BANK128 combined intake a726ffbfe complete: Generic-only for fixed use, BANK worse | DM completes next direction-management transition; no new run/Pro request exists merely from the ended allocation |
 
 Details remain in PORTFOLIO.md and EXPERIMENT_TRACKING.md; no scientific re-intake is claimed here.
+Technical closeout is separate: FOLR/RCLE cleanup inventories still need retention/application
+reconciliation and do not prove remote deletion; MGTAP retains its recorded local cleanup restriction.
+These static follow-ups are not running producers or extra scientific invocations.
 
 ## Resume and event handling
 
@@ -35,12 +40,22 @@ Apply owner pause first. Load current roles and routes from main rather than obs
 instructions. Once research is explicitly resumed, each DM carries its own transition under
 ROOT_OPERATIONS.md. No executable continuation/producer and no decided deferral means unfinished
 management, not indefinite ACTIVE-idle. Reuse answered science; ask only the unresolved direction or
-Portfolio choice. Root records/applies actual decisions and resolves shared handoffs. Only formal
-slot release permits Root's Portfolio replacement request; no fifth slot or local scientific choice.
+Portfolio choice. Root records/applies actual decisions and resolves shared handoffs. After formal
+slot release, apply a replacement already selected/funded by the complete plan; ask Portfolio only
+for unresolved replacement choices. No fifth slot or local scientific selection.
 
 Migration creates no new experiment/provider ownership. Accepted old request/handle identities and
-historical native returns stay preserved. Old DMs remain paused and are retired as current executors
-only after their replacement verifies handoff and Root registers sole ownership. Independent DM tasks explicitly use gpt-6-astra/max per owner correction; no automatic
+historical native returns stay preserved. Old DMs remain paused and are retired as current executors; all four replacements verified
+handoff and are registered as sole owners. Independent DM tasks explicitly use gpt-6-astra/max per owner correction; no automatic
 custom-role configuration inheritance is claimed.
 
 See [workflow repair and validation](decisions/2026-09-13-direction-management-workflow.md).
+
+## Next Portfolio planning event
+
+The registered Pro session is independent of every DM. Root may transmit an overall planning
+agenda before any vacancy, using the current complete portfolio index and changed DM proposals.
+Pro decides direction composition, priorities, bounded programs, capacity and lifecycle; Root
+records/applies handoffs without preselecting science. Existing accepted narrow decisions retain
+their scope. New overall planning under this revised role has NOT been requested while paused.
+No new Pro plan, grant, direction selection or lifecycle disposition is claimed by migration.

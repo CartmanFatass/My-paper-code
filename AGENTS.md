@@ -33,16 +33,26 @@ separate identity, permission, approval, or blocking system.
 sequencing and replacement within authorized priorities, delegation, main integration and current
 tracking. It records changed DM events, integrates accepted work and schedules Portfolio handoffs.
 Independent DM tasks notify Root across tasks; Root can end a handled event turn.
-When a direction formally pauses/closes and fewer than four direction slots are occupied, Root
-authors and intakes a Portfolio replacement request through its own native Transport, then creates
-the DM selected by the complete conforming Pro decision. Root does not select the new science itself.
-**Portfolio** is the persistent `portfolio:cross_direction` Pro decision node, not a native
-agent. Direction-related Portfolio materials and full-response intake belong to a relevant
-**Direction Manager (DM)**. Root handles only its vacancy-replacement question; ordinary
-Portfolio responses remain with their author DM. Each author checks the bound question, owner
-instructions and specs before applying the complete Pro decision.
-The author DM dispatches and intakes through its native Transport; Root implements the
-conforming decision with the affected DMs.
+When a formal disposition leaves a slot available, Root first applies any complete conforming
+Portfolio plan that already selects/funds the replacement and its initial assignment. If that choice
+is unresolved, Root requests it through Portfolio. Record reservations before creating the selected
+DM; applying an existing plan never requires another vote. Root does not select new science.
+**Portfolio** is the independent persistent `portfolio:cross_direction` Pro session responsible
+for the overall research plan: direction composition, priorities, investment, capacity, continuation,
+recast/fusion/separation proposals and lifecycle within its authority. It is not a DM's convergence
+step or an additional native manager. Direction Innovator/Convergence nodes retain direction-tier
+science and DM retains object-tier execution. Portfolio need not wait for a vacancy to plan.
+
+DMs supply current accepted evidence, surviving opportunities and recommendations. Root assembles
+changed cross-direction facts and the planning agenda without choosing the science, dispatches the
+global planning question through its own Transport, records the complete Pro plan and schedules its
+handoffs. DMs prepare direction-specific Portfolio proposals and send them to Root as planning inputs;
+Root is the single transport/intake coordinator for new Portfolio requests in that persistent
+session. This forwarding is not scientific approval. Existing accepted requests retain their
+original DM author/parent through closeout. For global responses Root owns
+full-response recording/scope checks and operational mapping; affected DMs check their scientific
+requirements and execute conforming work without a second approval. A concrete conflict returns to
+the same Pro node. Root neither replaces Pro's choices nor adds per-object ratification.
 
 OWNER_DIRECT 2026-09-10: DM absorbs the former CM's engineering responsibilities and implements
 directly. Under the temporary 2026-09-12 owner instruction, DM performs implementation and self-checks;
@@ -57,7 +67,8 @@ Root receives actionable direction handoffs natively. DM also owns native Agenti
 Each DM owns one reusable native Luna/high Agentify Transport child for exact Pro Send,
 observation, reconciliation, archive and direct native receipts. DM authors and publishes the
 request, dispatches to its child, waits natively and checks the complete response. Root uses the
-same parent/child route for vacancy replacement only and integrates conforming decisions; it does not forward routine transport
+same parent/child route for overall Portfolio planning, cross-direction decisions and vacancy
+replacement, and integrates conforming decisions; it does not forward routine transport
 receipts. Recover uncertain effects on the same request before another Send. Pro authority and
 frozen input/provider bindings are unchanged. The Transport skill owns current Agentify APIs;
 ROOT_OPERATIONS.md and SIBLING_COMMUNICATION.md own native collaboration.
@@ -154,7 +165,7 @@ where it is recorded, and its provenance label.
 
 A complete archived Pro response that decides the posed question at its declared evidence class
 and within current owner instructions and applicable specifications is final for its node.
-Completeness alone does not authorize a silent specification exception. The author parent (DM, or Root for vacancy replacement) checks this in
+Completeness alone does not authorize a silent specification exception. The author parent (DM, or Root for overall Portfolio planning/replacement) checks this in
 the existing intake: cite any concrete conflict, preserve the response, and return that conflict
 to the same node for correction before executing the affected requirement. Execute independent
 conforming work meanwhile; do not invent a replacement decision or add an approval layer.
@@ -181,8 +192,9 @@ the owner may PARK it asynchronously. Sequencing never becomes a lifecycle dispo
 `ACTIVE` direction remains admitted to the research queue, while Root plans a target working
 set of four concurrently advancing top-level DM chains. A queued
 `ACTIVE` direction is not `PARKED`; entering or leaving the working set changes no lifecycle,
-priority, scientific meaning, or evidence polarity. After a formal direction pause/closure leaves fewer than four occupied slots, Root asks Portfolio
-for the next new direction and dispatches its DM from the complete conforming decision. Root drains temporary
+priority, scientific meaning, or evidence polarity. After a formal direction pause/closure leaves fewer than four occupied slots, Root applies the
+existing complete Portfolio replacement/investment mapping; only an unresolved replacement choice
+requires a new question. Dispatch the selected DM from the conforming decision. Root drains temporary
 overlap without interrupting live work. Four is an execution-parallelism target, not a direction-count or fusion target. Directions
 share assets without fusing; fusion is proposed on demand only when their question, comparator,
 estimand, and next object are materially the same. Nothing in this paragraph waits for the owner,
@@ -270,7 +282,7 @@ When the owner is absent the loop keeps running under a standing delegation (own
 8. **Portfolio Pro finality (OWNER_DIRECT 2026-09-10).** A complete archived response from
    `portfolio:cross_direction` decides the bound investment, priority, lifecycle, capacity,
    fusion/separation or registration question within current owner instructions and specifications.
-   The author DM checks scientific/specification conformance; for its vacancy request Root checks
+   The author DM checks scientific/specification conformance; for its global Portfolio request Root checks
    the complete decision against the bound scope and specifications. Root implements and records the
    decision without per-item owner ratification. Preserve asynchronous owner overrides and actual
    application states using the existing owner console. `PRO_FINAL / OWNER_DELEGATED` traces the
@@ -310,7 +322,7 @@ object work, develop a direction proposal, or obtain the unresolved Portfolio ca
 decision. No executable continuation and no real producer is an unfinished management transition,
 not a terminal ACTIVE-idle state. Scientific no-addition does not answer an unasked lifecycle question. Only Portfolio's formal stopping, parking or
 replacement decision, or a direct owner disposition, releases the direction. Before drafting a capacity or new-direction question, its author
-(DM for direction questions; Root for vacancy replacement) refreshes every affected old direction from its current DM handoff, `DIRECTION.md`
+(DM for direction questions; Root for global planning/replacement) refreshes every affected old direction from its current DM handoff, `DIRECTION.md`
 and latest intake; Root status shorthand and ended allocations are not lifecycle evidence.
 
 Root applies the `hmasd-loop-dispatch` skill's stable next-action trigger at goal-turn entry,
@@ -362,8 +374,9 @@ chains. Keep any existing overlap intact and let it drain at formal direction di
 add a fifth direction. A running experiment or Pro wait remains part of its owning direction.
 An idle, blocked or ended object is a recovery/continuation issue for that DM, not a vacancy.
 Only a formal direction pause/closure (or explicit owner disposition) releases its slot. If fewer
-than four slots remain, Root submits one bounded Portfolio replacement request, recording pending
-request/slot identities so repeated events cannot duplicate the request or create duplicate DMs.
+than four slots remain, apply the existing conforming plan's selected/funded replacement or request
+the unresolved choice once. Record pending request/slot reservations so repeated events cannot
+duplicate requests or DMs.
 Recount occupied and reserved slots before dispatch. Root, Transport, monitors, Reviewers and
 detached processes do not consume separate direction slots. Report actual advancing work separately
 from occupied slots; a queued intention alone is not active execution.
@@ -604,13 +617,14 @@ appendix and completed historical tasks remain unchanged.
   and receives its native Pro receipts; .codex/hmasd-transport.toml contains no global endpoint. Each DM creates/reuses a native Luna/low Experiment Monitor
   with minimal assignment context; resolve canonical names from runtime results. Experiment
   adoption/terminal facts return directly to DM. No shared Monitor or completion Relay endpoint.
-- Direction-related Portfolio materials and scientific/specification intake stay with the author
-  DM using `hmasd-portfolio-task`; Root authors/intakes only vacancy replacement to maintain four
-  direction chains through its own reusable native Luna/high Transport. `caller_role=portfolio`
+- Direction-related Portfolio proposals and scientific conformance stay with the responsible
+  DM using `hmasd-portfolio-task`; Root owns new Portfolio request transport and full-plan recording; Root assembles global planning/cross-direction/replacement agendas and records complete
+  Portfolio responses through its reusable native Luna/high Transport; Pro owns overall planning. `caller_role=portfolio`
   describes the decision node, not the author's native role. The same DM still uses
-  `caller_role=em` for direction nodes. Source and receipt parent are the author (DM, or Root for vacancy replacement); operator is its native Transport child. DM
+  `caller_role=em` for direction nodes. Source and receipt parent are the author (DM, or Root for overall Portfolio planning/replacement); operator is its native Transport child. DM
   dispatches and checks the full response, then returns the operational mapping to Root.
-  All app messages omit model/effort overrides. Existing source/parent/operator IDs, request
+  Independent DM creation/resume explicitly selects gpt-6-astra/max per owner; other messages
+  preserve their current model/effort unless the owner specifies a change. Existing source/parent/operator IDs, request
   bytes, provider bindings, accepted generations and receipt destinations stay unchanged.
   Keep legacy native return routes until their accepted work closes; do not duplicate Sends.
 - Reuse each node's current verified 6 Pro conversation. Apply the provider-exclusion policy

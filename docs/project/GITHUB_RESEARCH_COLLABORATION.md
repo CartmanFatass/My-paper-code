@@ -1,9 +1,10 @@
 # GitHub research collaboration
 
-DM authors and intakes direction-related Pro questions, including ordinary Portfolio questions.
-Root authors/intakes only Portfolio vacancy replacement under ROOT_OPERATIONS.md. Each author
-dispatches its own native Luna/high Agentify Transport and receives its complete archive directly.
-Root also integrates accepted commits.
+DM authors/intakes its direction Innovator/Convergence questions and supplies Portfolio proposals.
+Root assembles all new Portfolio agendas for the independent overall-planning Pro session, owns
+its native Transport/full-response record, and maps the plan to DMs for scientific conformance and
+execution. Root does not approve science. Accepted historical requests retain their author/parent
+through closeout; no migration resend. ROOT_OPERATIONS.md owns the current responsibility split.
 Use `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md` to create a fixed GitHub
 task and `.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md` for Transport operations.
 Scientific authority, experiment admission and Git rules remain in AGENTS.md.
@@ -51,7 +52,7 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
    that the fixed TASK is published and that the delivery branch and Issue exist.
    Commit and push the updated internal handoff.
 3. Send the rendered handoff via followup_task to its native Agentify Transport.
-   Source and parent are the author (DM, or Root for Portfolio vacancy replacement); operator is its actual reusable child.
+   Source and parent are the author (DM for direction nodes, Root for new Portfolio agendas); operator is its actual reusable child.
    Legacy requests retain their frozen metadata; assigned recovery records the actual native
    parent/child separately. Transport runs one exact preflight and the appropriate effect branch,
    then bounded observation/archive and one direct receipt. Verified pre-Send nonacceptance permits
@@ -91,7 +92,8 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
 Transport handles Pro observation and parent receipts under ROOT_OPERATIONS.md. Issue comments
 do not themselves establish automatic wakeup. Completion goes to the declared parent;
 Transport returns archives directly to its author parent. For ordinary DM questions Root receives
-only the checked operational mapping; it directly intakes its own vacancy response.
+only the checked operational mapping; it records/maps the full new Portfolio plan and affected
+DMs check their scientific requirements.
 Repeated notifications reuse the existing request/commit/path intake.
 
 ## Partial success and uncertainty

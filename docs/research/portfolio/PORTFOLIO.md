@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Current workflow: event-driven Root and independent DM task rollout; research remains paused. See [workflow repair](decisions/2026-09-13-direction-management-workflow.md) and `.codex/hmasd-dm-sessions.toml`. On resume each DM resolves any unasked continuation/capacity/lifecycle decision; exhausted objects do not complete direction management.
+Current workflow: event-driven Root and four accepted independent Astra/max DM tasks; research remains paused. See [workflow repair](decisions/2026-09-13-direction-management-workflow.md) and `.codex/hmasd-dm-sessions.toml`. On resume each DM resolves any unasked continuation/capacity/lifecycle decision; exhausted objects do not complete direction management.
 控制面仅保留当前有效状态。运行/回报入口见[执行职责](../../project/ROOT_OPERATIONS.md)，
 详细科学依据在各方向记录；历史操作快照从Git查询。
 
@@ -10,7 +10,7 @@ Owner pause 2026-09-13：四个 ACTIVE DM 均已在干净边界暂停；不再�
 
 本表登记15 ACTIVE、12 PARKED。2026-09-13 ACPS Portfolio PRO_FINAL 已将 ACPS 可逆改为 PARKED/HIGH；其余生命周期、priority、recasts与UAV字段不变。
 标准并行目标为4个方向；当前四条 ACTIVE 链为 MGTAP、RCLE、ACVC、FOLR。DM 完成、阻塞或 ACTIVE-idle 回报都会触发一次稳定 Root 调度检查；对象完成、cleanup、Pro wait 或 child 完成均不释放方向槽位，只有正式 Portfolio/owner lifecycle 决定释放槽位。
-占位与实际工作分开：FOLR 固定 Generic→BANK allocation 与 combined intake 已完成，RCLE B09 已完成并 intake，ACVC/MGTAP 无科研在途；当前仅进行独立 DM 迁移治理。见 [当前工作流](decisions/2026-09-13-direction-management-workflow.md)，未变 timeout 不产生新请求或重复派工。
+占位与实际工作分开：FOLR 固定 Generic→BANK allocation 与 combined intake 已完成，RCLE B09 已完成并 intake，ACVC/MGTAP 无科研在途；四个独立 Astra/max DM 已完成治理验收。见 [当前工作流](decisions/2026-09-13-direction-management-workflow.md)，未变 timeout 不产生新请求或重复派工。
 当前 Portfolio/方向决定和 Transport/实验归档均已在本控制面合并；旧请求、旧 hash 和旧起草快照不作为当前路由。
 有限分配结束不推断停向；只有Portfolio/owner生命周期决定改变ACTIVE/PARKED。
 
@@ -88,3 +88,16 @@ ACVC、VNFC、SCDMP保留second-recast最低争用排序；其余recast、MEI与
 
 
 
+
+## Overall Portfolio planning
+
+Portfolio is the independent persistent Pro research planner for the entire registered program.
+DMs provide current direction evidence/opportunities and proposals. Root transmits the global
+agenda, records the full plan and schedules its handoffs; new Portfolio requests share this one
+entry. Direction-node science and ordinary delegated experiments remain DM-owned. Existing
+accepted Portfolio packets preserve their original closeout routes.
+
+New overall plan under the revised role: **NOT_REQUESTED / OWNER_PAUSED**. The four DM target-model
+handoffs identify unresolved post-allocation management questions; they are inputs to the next
+explicitly resumed/commissioned global planning event, not four granted experiments or already
+formed Portfolio decisions. Prior accepted scientific and lifecycle records remain effective.

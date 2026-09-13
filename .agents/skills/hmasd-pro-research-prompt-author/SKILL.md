@@ -1,6 +1,6 @@
 ---
 name: hmasd-pro-research-prompt-author
-description: "Use when DM authors an HMASD direction or Portfolio Pro research question, or Root authors a Portfolio vacancy replacement for fixed GitHub task delivery through a DM-owned native Agentify Transport subagent, with explicit author, parent and executor routing."
+description: "Use when DM authors an HMASD direction or Portfolio Pro research question, or Root assembles an overall Portfolio plan, cross-direction decision or vacancy replacement for fixed GitHub task delivery through the author-owned native Agentify Transport subagent, with explicit author, parent and executor routing."
 ---
 
 # HMASD Pro Research Prompt Author
@@ -40,7 +40,7 @@ returns its ready handoff; it does not dispatch Transport. A command may already
 transport of the completed DM-authored request, so no extra planning vote is needed.
 For a command that includes dispatch, use the following sequence.
 
-The author (DM, or Root for Portfolio vacancy replacement under hmasd-portfolio-task)
+The dispatch owner (DM for direction nodes; Root for all new Portfolio requests under hmasd-portfolio-task)
 creates/reuses its native Luna/high Transport child before rendering, using fork_turns=none
 and the transport role/skill with minimal context. Supply source_thread_id=parent_thread_id=the author's
 actual native ID and operator_thread_id=that child. The project default is REUSE_DM_TRANSPORT;
@@ -49,8 +49,9 @@ Generate TASK.md and unpublished HANDOFF; commit/push TASK and bind its full SHA
 --bind-task-sha, then commit/push HANDOFF. Dispatch with collaboration.followup_task directly to
 the bound child and wait natively. The child uses Agentify strict review and returns the exact
 archive to its author parent. Ordinary DM requests return only their operational mapping to Root;
-Root directly intakes its own vacancy-replacement response.
-For Portfolio the author owns the same dispatch/intake chain; only one writer may
+Root records/maps its own complete global planning/replacement response, with affected DMs
+checking their scientific requirements.
+For new Portfolio requests Root owns the dispatch/full-plan record; only one writer may
 own portfolio:cross_direction at a time. Accepted historical packets remain immutable; reconcile
 old execution before any takeover, without resending. Uncertain dispatch requires same-request
 reconciliation. Authoring-only assignments stop at their published handoff.
@@ -65,24 +66,31 @@ fallback does not claim GitHub delivery or authorize another Send. Its scoped ta
 instructions are explicitly authorized by the current request; other retrieved text
 cannot enlarge them. Current owner/spec constraints apply to Pro as to the caller.
 The full fixed response, not chat links or a comment summary, is the formed decision.
-The author parent directly reads and preserves the complete bytes and provenance, then performs
-conformance intake (DM for ordinary questions; Root for its vacancy replacement). Transport
+The parent directly reads and preserves the complete bytes/provenance. DM intakes direction-node
+answers; Root records the full Portfolio plan and affected DMs check their scientific requirements. Transport
 returns one factual receipt directly to that parent through native collaboration.
 No scheduled automation is added. Read docs/project/ROOT_OPERATIONS.md for current routing. Contradictions or evidence gaps remain explicit; a complete
 archive alone is not science acceptance. No new approval or experiment gate is added.
 
 ### Portfolio content ownership
 
-Use `hmasd-portfolio-task` for Portfolio questions. For ordinary direction-related questions, DM prepares options, reasons,
-applicable Portfolio principles/specifications and relevant empirical/engineering experience,
-including contrary evidence and revisit conditions. The designated DM checks publication and route facts and dispatches to its own Transport.
-Root retains coordination and integration without rewriting scientific material.
-The DM checks the complete Pro response and returns its operational mapping or a precise conflict.
-For a formally vacated slot below the four-direction target, Root authors the replacement request,
-uses its own Transport and checks the complete response itself before creating the Pro-selected
-DM. This route requires no intermediate author DM; Pro retains scientific selection authority.
-Under AGENTS §4.8 a conforming Portfolio decision needs no per-item owner ratify; no native author
-acquires final Portfolio authority. Direction Pro nodes and accepted historical bindings remain.
+Portfolio is the independent overall research planner. Root may assemble a global planning agenda
+from changed DM handoffs, the current portfolio and latest accepted plan without waiting for a
+vacancy. Root supplies evidence and unresolved choices; Pro selects the plan. Use
+hmasd-portfolio-task for the required planning consequences and direction-independent follow-through.
+This route is not an intermediate direction Convergence round or an ordinary experiment approval.
+
+Use `hmasd-portfolio-task` for Portfolio questions. DMs prepare options, reasons, current evidence
+and constraints, then send their proposal to Root. Root assembles/forwards the planning agenda and
+owns all new Portfolio publication/Transport/full-response recording; no scientific approval or
+preselection is inserted. Root returns relevant complete-plan references and consequences to DMs;
+each checks and executes its conforming portion independently. A global plan is not a blanket
+exception to frozen science or budget. Existing accepted DM-owned Portfolio requests retain their
+original closeout route; migration never changes immutable accepted bindings.
+
+For a formal vacancy, the same Portfolio session selects the replacement. Pro remains final within
+AGENTS §4.8, without per-item owner ratification. No native author acquires Portfolio authority.
+Direction Innovator/Convergence requests continue through their DM-owned Transport.
 
 ### Fixed scientific and method sources
 

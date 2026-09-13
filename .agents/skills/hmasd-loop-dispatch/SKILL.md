@@ -6,7 +6,8 @@ description: Use when HMASD Root checks direction progress, processes a DM/Portf
 # HMASD research dispatch
 
 Root is an event-driven lightweight recorder/integrator and Portfolio-boundary scheduler. DM owns a direction's
-research plan, execution, specialist children, intake and next decisions. ROOT_OPERATIONS.md owns
+research plan, execution, specialist children, intake and next decisions. The independent persistent
+Portfolio Pro session owns the overall plan; Root coordinates its new requests from DM proposals. ROOT_OPERATIONS.md owns
 the direction-management contract; SIBLING_COMMUNICATION.md and .codex/hmasd-dm-sessions.toml own
 native versus independent-task routes. Four occupied directions and actual advancing work are
 reported separately. Owner pause is checked first; governance/migration does not resume research.
@@ -26,12 +27,15 @@ only for missing evidence. Native children return to their actual DM; Root does 
 3. Evaluate the actual next boundary using the table below. Resume the same idle DM only for
    unfinished execution or management, through its registered task route. A DM already progressing
    owns its next steps without Root ACK, integration or per-step dispatch.
-4. Apply formal Portfolio/owner lifecycle decisions. Recount occupied and reserved slots; below
-   four, author one bounded vacancy-replacement request via Root's Transport and Portfolio skill.
-   Keep pending request/reservation identities, intake the full conforming answer and create the
-   selected DM. Root does not select science or infer vacancies from ended allocations.
-5. Release shared Portfolio access to its next queued author when the current binding clears.
-   This is writer coordination, not experiment approval. Other directions proceed independently.
+4. Apply formal Portfolio/owner lifecycle decisions. Recount occupied/reserved slots; first use a
+   complete conforming Portfolio plan that already selects/funds a replacement and initial assignment.
+   Reserve the released slot and create that DM without asking the same question again. Only an
+   unresolved replacement choice/investment needs a bounded Portfolio request. Preserve pending
+   request/reservation identities; no local science selection or inferred object-ending vacancy.
+5. When a real planning/management event occurs, assemble the changed DM proposals and current
+   overall-plan/portfolio references into the next Portfolio agenda. Root owns new Portfolio
+   Transport/full-plan recording; Pro selects the plan. Release the next queued agenda when the
+   binding clears. Do not wait for a vacancy to plan, for every DM to finish, or approve experiments.
 6. End the event pass after useful work. Independent DMs keep their own execution turns and
    specialist waits; Root need not wait for all of them. While a bounded migration test or Root's
    own Transport is outstanding, use the relevant supported wait. No unchanged status broadcasts,
@@ -43,7 +47,7 @@ only for missing evidence. Native children return to their actual DM; Root does 
 | --- | --- |
 | Accepted/standing object delegation covers the useful object and remaining budget | DM selects and completes implementation, proportional checks/review, exact publication, fresh admission, detached launch/Monitor, collection/intake and authorized continuation. No repeat Portfolio vote. |
 | Next decision changes direction-tier science | DM develops the concrete proposal and uses its Innovator/Convergence node. No Root scope approval. |
-| No executable continuation/real producer; capacity/lifecycle is unasked | DM assesses surviving options and submits that Portfolio decision once. A no-addition scientific answer does not decide unasked occupancy. |
+| No executable continuation/real producer; capacity/lifecycle is unasked | DM assesses surviving options and submits its proposal to Root for the overall Portfolio agenda. A no-addition scientific answer does not decide unasked occupancy. |
 | Real accepted request/handle/review/resource producer | DM names owner/identity/event and waits after independent work. Root records it as actual work. |
 | Explicit Portfolio/owner deferral/disposition already covers the boundary | Apply its scope/capacity treatment and revisit condition/owner. End unnecessary agent waiting; report non-advancing honestly. |
 | Complete bound Pro answer with unresolved receipt metadata | DM intakes the full answer; Transport reconciles the same request. Metadata does not erase a formed decision. |

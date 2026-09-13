@@ -20,6 +20,10 @@ wait for Root ACK/integration between those steps. Root need not stay alive wait
   registered task. DM sends a concise actionable cross-task message to Root when integration,
   shared Portfolio access, a real cross-direction blocker or formal disposition needs action.
   A task's final does not automatically deliver its content to another independent task.
+  Ordinary event messages are a short delta (about 5–10 lines): event identity, accepted result or
+  decision, evidence/commit link, next action/owner, and the concrete Root action if any. Keep full
+  scientific reasoning in the DM intake/task. A fact-only event needs recording, not a reply; send
+  a follow-up only when new work is actually required. This prevents ACK and self-wake loops.
 - DM reports completed intake and actionable changed boundaries once; ordinary intermediate work
   stays local. Root uses compact
   wait_threads snapshots with stored cursors (up to eight tasks); read_thread only for missing facts.
@@ -29,8 +33,8 @@ wait for Root ACK/integration between those steps. Root need not stay alive wait
   backstop, not the normal scheduler. DM-to-Root send_message_to_thread is the primary event route.
   It may end while independent DM tasks continue. It stays quiet on unchanged/non-actionable state.
   Explicit owner pause keeps research and the heartbeat paused; migration/testing does not resume.
-- A shared Portfolio queue lives in existing tracking: current author/request plus waiting authors.
-  When the binding is cleared, notify the next author through its registered task. Preparation,
+- A shared Portfolio queue lives in existing tracking: Root's current request plus waiting DM proposals.
+  Root transmits the next ready planning agenda when the binding clears. Preparation,
   unrelated direction nodes and experiments proceed independently. Queue access is not approval.
 
 Migration: stop/retain the old DM, give the new task a bounded read-only handoff, verify its actual
@@ -124,9 +128,10 @@ not turn that complete decision into a pending scientific answer.
 Root receives the DM's conformance/decision mapping and integrates it. Root and DM continue native
 waits while these dependencies run; there is no independent app-task wake branch.
 Different provider bindings may proceed concurrently. Serialize each exact conversation and the
-shared Portfolio node under its current author. Root uses its own native Transport only for
-vacancy replacement after formal pause/closure leaves fewer than four occupied direction slots;
-those archives return directly to Root for complete intake and Pro-selected DM creation. Existing uncertain or accepted requests
+independent Portfolio session under Root for all new requests. DMs send proposals/evidence to Root;
+Root assembles global planning agendas without scientific approval, publishes through its own native
+Transport and records the full plan. Affected DMs check/apply their parts; Root schedules handoffs.
+Accepted historical DM-owned Portfolio packets retain their original parent until closeout. Existing uncertain or accepted requests
 require same-request reconciliation, never a new Send after changing executor. Transport skill
 owns exact Agentify arguments and immutable archival. Experiment monitor never operates Pro.
 Verified nonacceptance permits same-request repair and continuation without a parent handshake.
@@ -142,11 +147,11 @@ the prior return and sends its own update once; this is not an ACK or forwarding
 If a leaf runtime lacks collaboration.send_message, its actionable native final is the direct
 parent return. Record that actual capability/method; never fabricate tool delivery or add an app relay.
 
-Pure Transport engineering defects default to local repair by the author DM, including focused
+Pure Transport engineering defects default to local repair by the actual parent (DM for direction requests, Root for new Portfolio requests), including focused
 helper/fixture and skill updates with proportional review. Keep the same operation and immutable
 receipts; involve Root only for a shared runtime/load, cross-direction dependency or scientific
 decision. If the original conversation remains unrecoverable after supported same-request repair,
-the author DM may rebind the identical frozen prompt to a new conversation only with verified
+the actual parent may rebind the identical frozen prompt to a new conversation only with verified
 pre-Send nonacceptance (`sendAttempted=false`, no provider pairing). Preserve and close the old
 operation as `CONVERSATION_UNRECOVERABLE`, link the new handoff/idempotency, and never apply this
 fallback to uncertain or possibly accepted effects.

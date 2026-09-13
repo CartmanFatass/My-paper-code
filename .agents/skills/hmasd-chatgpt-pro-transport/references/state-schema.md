@@ -367,7 +367,7 @@ each request's recorded observation facts without rewriting another request's st
 
 ## Automatic return outbox
 
-New records use REUSE_DM_TRANSPORT: author and receipt parent are the owning author (DM, or Root for Portfolio vacancy replacement), operator is
+New records use REUSE_DM_TRANSPORT: author and receipt parent are the owning author (DM for direction nodes, Root for new Portfolio planning/decision requests), operator is
 its actual native Transport child. execution_thread_id records actual recovery ownership without
 rewriting immutable accepted historical metadata. No app-task self-dispatch or Root forwarding.
 Existing attempted/uncertain delivery evidence is never restaged during recovery.

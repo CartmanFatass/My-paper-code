@@ -5,28 +5,28 @@ description: "Use when an author-owned native Transport executes or recovers an 
 
 # Native Agentify Pro Transport
 
-The author DM owns one reusable native Luna/high leaf Transport. Root uses this route for its
-own Portfolio vacancy request. Execute the assigned request; the author reads the full answer
-and decides scientific/specification conformance. The current native assignment supplies the
+The actual parent owns one reusable native Luna/high leaf Transport: DM for direction nodes,
+Root for new overall Portfolio planning/decision requests. Execute the assigned request; the parent
+preserves the full answer, with DM scientific conformance for its affected scope. The current native assignment supplies the
 direct return parent. Preserve frozen HANDOFF IDs as provenance when recovering an older request.
 No singleton app task, relay, ACK loop, new scientific prompt or science selection belongs here.
 
-## DM-local repair default
+## Parent-local repair default
 
 Transport failures that are engineering defects (selector/model aliasing, tab binding,
-preflight state, receipt handling or workflow sequencing) are owned by the author DM by default.
-The DM may patch its direction-owned Transport helpers, fixtures and related skill/control
+preflight state, receipt handling or workflow sequencing) belong to the actual parent: direction
+DM for its request, Root for its Portfolio request. That parent may patch its owned helpers, fixtures and related skill/control
 instructions in place, run proportional focused tests and independent review, and recover the
 same unchanged operation when the effect is verified nonacceptance. Preserve the original
 operation, prompt hash, idempotency key, binding and all failure receipts. Do not create a
-replacement request or alter scientific meaning. Escalate to Root only when the repair requires a
+replacement request or alter scientific meaning. A direction DM escalates to Root when repair requires a
 shared application runtime/load, a cross-direction resource or a scientific/Portfolio decision;
-Root then coordinates that dependency while the DM retains Transport acceptance.
+Root coordinates shared dependencies; the actual parent retains Transport acceptance.
 
 ## Unrecoverable-conversation fallback
 
 If the original conversation cannot be recovered after the supported same-request repair path,
-the author DM may use a new conversation only when the old operation is positively verified as
+the actual parent may use a new conversation only when the old operation is positively verified as
 `sendAttempted=false` with no provider pairing or accepted effect. Record the old operation as
 `VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE` and preserve its HANDOFF, prompt hash,
 idempotency key, tab facts and receipts. Then create a new handoff/conversation and idempotency

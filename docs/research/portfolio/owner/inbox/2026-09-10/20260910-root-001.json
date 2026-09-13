@@ -83,6 +83,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-13-direction-management-workflow.md",
       "state": "applied",
       "summary": "Event-driven Root and independent DM control contract applied; research paused; all four tasks Astra/max, migration acceptance pending."
+    },
+    {
+      "at": "2026-09-13T22:38:47+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-13-direction-management-workflow.md",
+      "record": "docs/research/portfolio/decisions/2026-09-13-direction-management-workflow.md",
+      "state": "applied",
+      "summary": "Four independent Astra/max DMs accepted; event-driven Root and independent overall Portfolio planning route applied. All science and heartbeat paused; no new Pro planning request."
     }
   ]
 }

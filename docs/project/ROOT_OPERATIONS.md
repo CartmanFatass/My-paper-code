@@ -73,6 +73,35 @@ An operational/development consequence suffices; no universal deployment-custome
 prerequisite is added. A new title or date with unchanged inputs/options/consequence is the old
 question and reuses its complete decision.
 
+## Independent Portfolio Pro and overall planning
+
+Portfolio is an independent persistent Pro planning session, `portfolio:cross_direction`, spanning
+the entire research program. It compares current directions and new opportunities, selects overall
+priorities/investment/capacity/lifecycle and an executable plan; it is not a DM convergence substep.
+A global plan may precede vacancies. New admissions still follow explicit capacity/slot decisions.
+
+DMs own direction science and prepare current evidence, recommendations and unresolved management
+choices. They send Portfolio proposals to Root as events. Root is the single coordinator for **new**
+Portfolio request publication/Transport and full-plan recording, using its own native Transport.
+Root transmits the agenda without scientific preselection or approval; Pro owns the plan. Other
+Innovator/Convergence requests remain DM-owned. Historical accepted Portfolio packets retain their
+original parent/closeout route; no migration resend or binding rewrite.
+
+Trigger overall planning on a real management/capacity/priority event or an owner planning request,
+not every experiment step. Include the latest accepted plan, current portfolio index, changed DM
+handoffs and unresolved choices. Pro's result states direction composition, priorities/dependencies,
+selected bounded programs/discretion, continue/defer/park decisions, action owners and revisit events.
+Root records the full plan and sends each affected DM its exact consequences. DMs check scientific
+conformance and independently execute valid parts; specific conflicts return to the same Pro node.
+This is not a second approval, unanimous ratification or new experiment launch gate. Root handles
+registration/assignment handoffs and integration, then ends the event turn. The shared Portfolio
+queue tracks pending proposals and the current exact request, not four disconnected approval loops.
+
+Current session binding is resolved from .codex/hmasd-transport.toml's registry; the planning role is
+recorded alongside DM task routes. A persistent Pro session needs an explicit new request to run;
+changing these instructions does not itself generate a plan. Owner pause prevents new Pro planning
+sends until resumed/explicitly commissioned. No new Portfolio decision is claimed by this repair.
+
 ## Direction management at an object boundary
 
 DM owns the direction's research plan, current evidence, authority/budget and next decision. At
@@ -83,7 +112,7 @@ current intake/handoff to complete the following transition. Owner pause always 
 | --- | --- |
 | Useful next object/step fits standing object delegation and remaining scope/budget | DM selects, records and executes through intake. A/B work has no universal Pro launch gate; specific frozen prohibitions/caps still bind. |
 | Next choice changes direction-tier science | DM develops options and recommendation, then sends to the existing Innovator/Convergence node without Root approval. |
-| No executable continuation/real producer; investment, occupancy or lifecycle is unresolved | DM assesses surviving opportunities and submits one Portfolio choice: continued investment, explicit deferral, or formal parking/closure. An honest no-investment recommendation is valid. |
+| No executable continuation/real producer; investment, occupancy or lifecycle is unresolved | DM assesses surviving opportunities and submits a Portfolio proposal via Root's planning agenda: continued investment, explicit deferral, or formal parking/closure. An honest no-investment recommendation is valid. |
 | Real request/run/review/shared-resource producer is pending | Name identity, owner and awaited event; do independent work, then wait for the direct return. |
 | Portfolio/owner already explicitly decided deferral/disposition for this boundary | Apply it, record scope, revisit condition and responsible event/review owner; end unnecessary agent waiting. Only explicit decisions change lifecycle/slot occupancy. |
 | Engineering/Transport failure | DM repairs in scope; Root resolves shared dependencies or unavailable executors. A timeout alone does not scientifically stop a direction. |
@@ -105,22 +134,22 @@ Root integrates evidence and checks that execution or management has someone act
 next step. Resume an idle DM once with the missing deliverable through its registered route. If
 the same transition returns unhandled, reconcile the blocker and assignment/context and repair or
 transfer the same role/scope when unavailable. Identical reminders indefinitely are not recovery.
-Only formal releases trigger Root's Portfolio vacancy request; Pro selects new science. Four
+Formal releases let Root apply an already selected/funded replacement in the complete Pro plan;
+only an unresolved replacement choice needs a new Portfolio question. Pro selects new science. Four
 occupied slots alone do not meet the advancing-work target.
 
-The shared Portfolio binding has one current author/request and waiting authors recorded in
-existing tracking. Root coordinates access, not approval. Preparation is independent; cleared
-binding/archived response releases the next queued author. Intake/application remains with each
-author. There is no sibling batch barrier and no new gate for ordinary experiments.
+The shared Portfolio binding has one Root-coordinated request and waiting DM proposals recorded
+in existing tracking. Root forwards ready agendas without approval or a sibling barrier; DMs
+retain scientific conformance/application and ordinary experimental autonomy.
 
-Transport/selector/workflow defects default to local repair by the author DM. The DM may edit its
+Transport/selector/workflow defects default to local repair by the actual parent (DM for direction requests, Root for new Portfolio requests). The DM may edit its
 owned helpers, fixtures and related skill/control instructions, run focused tests and review, and
 recover the same unchanged operation after verified nonacceptance. Preserve operation, prompt,
 binding, idempotency and failure receipts; never create a replacement request or change science.
 Root is involved only for a shared runtime/load, cross-direction dependency or a
 scientific/Portfolio decision, while the DM retains Transport acceptance.
 
-When a same-request Transport repair cannot recover its original conversation, the author DM may
+When a same-request Transport repair cannot recover its original conversation, the actual parent may
 rebind the identical frozen prompt to a new conversation only after proving the old operation was
 never sent (`sendAttempted=false`, no provider IDs or accepted effect). The DM archives the old
 operation as `VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE`, preserves all receipts, then
@@ -155,14 +184,14 @@ Historical decisions, snapshots and benchmark materials remain evidence, not com
 | --- | --- |
 | Root | Brief changed-event log; necessary main integration and cross-direction dependencies; cross-task event handling; Portfolio vacancy request/intake and new DM creation when formal direction pause/closure leaves fewer than four slots |
 | Direction DM | Card/predictions, object decisions, direct implementation, code self-review and repair, published inputs, bounded execution, monitor handover, collection, technical acceptance, scientific intake, cleanup and continuation |
-| Designated Portfolio DM | Decision materials grounded in Portfolio principles/specs/experience, complete Pro-response conformance and intake, execution mapping or exact conflict returned to Pro |
+| Direction DM as Portfolio proposer | Current scientific evidence/options and recommendation; conformance/application of its part of the overall plan; precise conflict if present |
 | Implementer | Temporarily suspended for new work; preserve accepted closeout evidence and return routes |
 | Reviewer | Independent high-risk code review under section 7.3; DM resolves findings and accepts |
 | Scout / Verifier / Critic | One bounded factual, runtime or scientific-criticism question directly for the parent; no new child chain |
 | Operator, when useful | Exact launch/handover/collection or cleanup batch from accepted inputs; DM retains acceptance |
 | DM-owned native Monitor | Luna/low; observe adopted handles and send adoption/terminal facts directly to DM; no scientific collection or interpretation |
 | DM-owned native Transport | Luna/high Agentify Pro Send/observation/archive; factual receipt directly to DM |
-| Portfolio Pro | Final decision on the bound cross-direction question within current owner/specification constraints |
+| Portfolio Pro | Independent overall research plan and final investment/priority/capacity/lifecycle choices within current owner/specification constraints |
 
 DM may use optional specialists when a complete independent task saves work or enables useful
 parallelism. It does not rebuild a CM layer or delegate individual shell steps. Root does not
@@ -177,14 +206,15 @@ gaps rather than inventing another authority layer.
 
 ## Portfolio material and response route
 
-The working-set target is four direction DM chains. Ordinary direction-related Portfolio replies
-remain with their author DM. A formal direction pause/closure that leaves fewer than four occupied
-slots triggers Root to author a bounded replacement question, dispatch through its own reusable
-Luna/high native Agentify Transport, read/check the complete response and create the Pro-selected
-new DM. Pro chooses science and investment. Root records pending requests/reserved slots and
+The working-set target is four direction DM chains. New Portfolio replies return to Root for
+full-plan recording; affected DMs own scientific conformance/application. Legacy accepted replies
+retain their original parent. A formal direction pause/closure that leaves fewer than four occupied
+slots triggers Root to apply an existing complete conforming plan's explicit replacement/investment
+and initial assignment. Only an unresolved choice requires a bounded question through Root's native
+Transport. Read/check the complete response and reserve the slot before creating the Pro-selected DM. Pro chooses science and investment. Root records pending requests/reserved slots and
 recounts before dispatch, so repeated returns cannot duplicate a request or DM. Existing overlap
 above four drains without interrupting live work. Object/allocation completion, Pro waits and
-temporary blockers do not release a direction slot. Use hmasd-portfolio-task for both author routes.
+temporary blockers do not release a direction slot. Use hmasd-portfolio-task for global planning and direction proposals through the unified entry.
 
 DM retains recovery of its request through its native Transport child. At every bounded-assignment
 completion, material conflict or ACTIVE-idle boundary it proactively reports one actionable event
@@ -197,12 +227,11 @@ request without another confirmation. A clear screenshot can supply current page
 DOM/model/identity checks, ACKs and status relays are not additional conditions. Frozen legacy
 routes remain evidence; recovery records the actual native child/parent separately.
 
-For ordinary direction-related Portfolio work, a relevant DM authors the full
-packet, creates/reuses its Transport child, publishes exact inputs and dispatches natively. DM is
-both source and receipt parent, including Portfolio. The child uses Agentify and returns the full
-archive directly. Root neither rewrites science nor forwards provider receipts. DM checks
-conformance and returns the operational mapping for Root integration. Serialize the single
-Portfolio binding; a new author does not supersede accepted execution without reconciliation.
+For new Portfolio work, DMs supply decision materials to Root; Root publishes/dispatches the
+planning agenda through its own native Transport and preserves the entire Pro plan. DM-owned
+Transport continues for direction nodes. Historical accepted Portfolio packets close on their
+original routes. Root maps the plan to affected DMs for scientific conformance/application and
+handles cross-direction handoffs. Preserve one shared binding and exact accepted request identities.
 
 New GitHub-delivery prompts include an in-turn downloadable Markdown fallback. If Pro cannot
 expose or complete its scoped GitHub writes after checking actual state, it finishes the review
