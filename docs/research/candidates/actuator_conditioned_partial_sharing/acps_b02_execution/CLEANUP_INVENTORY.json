@@ -3,27 +3,36 @@
   "direction": "actuator_conditioned_partial_sharing",
   "owner": "/root/dm_acps_start",
   "source_sha": "dd91ea3d81970485a8d562db47e30c70ed063524",
-  "status": "both handles terminal and technically accepted; complete paired raw/supervisor archives verified; pending Root integration/retention acceptance before assigned removal",
+  "status": "complete: Root confirmed paired retention at93bc53a09; all four exact remote targets absent on disk and owned execution worktree absent from Git registration",
   "remote_targets": [
     {
       "path": "/home/wu/hmasd-worktrees/acps-b02-9102-20260912",
       "kind": "detached exact-source worktree",
-      "method": "git worktree remove after retention"
+      "method": "git worktree remove after retention",
+      "completed": true,
+      "disk_absent": true,
+      "registration_absent": true
     },
     {
       "path": "/home/wu/hmasd-inputs/acps-b02-9102-20260912",
       "kind": "committed launch payload staging",
-      "method": "remove exact owned path after retention"
+      "method": "remove exact owned path after retention",
+      "completed": true,
+      "disk_absent": true
     },
     {
       "path": "/home/wu/.agent-tasks/acps-b02-shared-9102-20260912",
       "kind": "SHARED supervisor root",
-      "method": "retain complete terminal root before exact scoped removal"
+      "method": "retain complete terminal root before exact scoped removal",
+      "completed": true,
+      "disk_absent": true
     },
     {
       "path": "/home/wu/.agent-tasks/acps-b02-acps-9102-20260912",
       "kind": "ACPS supervisor root",
-      "method": "retain complete terminal root before exact scoped removal"
+      "method": "retain complete terminal root before exact scoped removal",
+      "completed": true,
+      "disk_absent": true
     }
   ],
   "preserve": [
@@ -36,6 +45,7 @@
   "retention": {
     "raw": "RETENTION.json",
     "supervisor": "SUPERVISOR_RETENTION.json",
-    "root_confirmation": "pending"
-  }
+    "root_confirmation": "explicitly confirmed by Root for93bc53a09d1628ddbd689387b28b80d3d4b0c47f"
+  },
+  "cleanup_receipt": "CLEANUP_RECEIPT.json"
 }
