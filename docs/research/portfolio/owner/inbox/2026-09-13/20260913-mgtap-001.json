@@ -69,5 +69,15 @@
     "verdict_text": "按已接受投资执行一次精确比较，DENSE始终默认，MGTAP保持ACTIVE/MEDIUM。",
     "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_SCIENCE_CARD_20260913.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T09:51:28+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md",
+      "state": "applied",
+      "summary": "一次8231比较完成且不利；DENSE默认，ACTIVE/MEDIUM保留；原生432.30秒上限通过，支持和全链费用未知，无额外调用。"
+    }
+  ]
 }

@@ -24,9 +24,9 @@ or all-in cost compliance is claimed from partial clocks: author/provider and in
 call components remain UNKNOWN where unmeasured. The caps remain900 support/2400 complete;
 unrelated ACPS selector repair is a separate Root engineering assignment, excluded from this B.
 
-Publication boundary: no process accepted yet. Launch exactly once using the committed command;
-then record the actual supervisor/admission facts here, assign the accepted handle to one native
-DM-owned monitor and retain every eventual outcome. No prior Transport request is resent.
+At the command publication boundary no process was accepted. The launch/adoption/terminal facts
+below close that historical boundary. The committed command was executed once; no prior Transport
+request was resent and no new invocation follows from this record.
 
 
 Launch accepted at09:33:48 UTC: supervisor `mgtap-unequal-8231-ecf40e0ad`, PID3422734,
@@ -41,3 +41,18 @@ Direct native MONITOR_ADOPTED received: adoption09:34:31 UTC / observation09:36:
 same handle/source and PID3422734 running. DM stops routine polling. The monitor returned adoption
 in native final; the same child was resumed once for its still-active terminal-observation scope,
 without another adoption or goal. Its compact record stays under the output directory.
+
+
+Terminal received directly from the same Monitor: event
+`mgtap-unequal-8231-ecf40e0ad:complete:20260913T094101Z`, finished/exit0 at09:41:01 UTC.
+DM confirmed finished/exit0, tmux inactive and collected all13 remote native/supervisor files.
+Several earlier healthy-running finals were unfinished observation turns, resumed on the
+same handle without another adoption, goal or launch. The terminal native final is actually
+received; its historical pending-delivery label is superseded by TERMINAL_RECEIPT.json.
+
+[Complete E0](MGTAP_UNEQUAL_EXPOSURE_B01_RESULT_20260913.md) and
+[DM intake](MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md) accept the bounded adverse
+result −0.02933437223896382J. Complete native432.30s passes all native caps; support/complete
+compliance remains UNKNOWN. Evidence is archived with hashes; Root integration/retention
+precedes scoped duplicate reclamation. No active experiment or scientific successor remains
+in this allocation, and MGTAP stays ACTIVE/MEDIUM.

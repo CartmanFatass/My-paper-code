@@ -12,45 +12,42 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
-## Selected unequal-exposure COND512/DENSE768 use question — 2026-09-12
+## Unequal-exposure COND512/DENSE768 adverse use result — 2026-09-13
 
-Original Convergence selects exactly one fresh mean-COND512 versus intact-DENSE768
-B/EXPLORE use comparison. This scientific selection retains the original mean
-query, raw108/legal local information/private GRU/PPO/native team-J path; only
-DENSE receives the specified extra ordinary training. Portfolio now funds this
-single pair under new complete limits recorded in the
-[2026-09-13 intake](pro_packets/20260912_cond512_dense768_use/PORTFOLIO_INTAKE_20260913.md).
-DENSE remains default and MGTAP ACTIVE/MEDIUM. No new result or run is accepted.
+The selected and funded sole master8231 pair is complete and valid: COND512 mean
+native J0.16574499572521276 versus intact-DENSE768 J0.19507936796417658;
+**COND−DENSE −0.02933437223896382 J**, conditional SE0.009856726660478026,
+7 positive/25 adverse final worlds. The card's below−.01 branch is adverse for
+this exact procedure choice. Both real fits and all32 endpoints completed;
+DENSE remains default and MGTAP remains ACTIVE/MEDIUM.
 
-The question is whether the conditional learning procedure retains a local
-optional-development role against this particular longer-trained generic
-procedure. More DENSE training is not known to improve return, and768 is not an
-optimal or equal-time choice. A future one-pair/all32-final-world difference
-J(COND512)−J(DENSE768), with own MEI.01J, would support only its realized package
-reading. No stable, equal-budget, sample-efficiency-curve or query/extra-training
-causal claim follows. All result branches preserve DENSE default.
+This question compares two expressly unequal-exposure learning procedures.
+The result supplies no beyond-MEI support for optional COND development in this
+realized pair. It does not identify the effect of extra DENSE training, a query
+mechanism, optimal training length, equal-time performance or stable superiority/
+inferiority. The32 worlds condition on one trained pair, not32 independent fits.
 
-Strongest direct conditional-pooling support remains8214+.02447811898058116J;
-8213−.02246957345594415 contradicts consistent benefit, and8212+.005761321371348559
-was inside MEI. TOP8221−.0684509798102144 is a separate adverse query package.
-These observations are not pooled. Finite training variation, partner
-co-adaptation and competent generic learning remain alternatives; tuned
-same-information headroom remains absent.
+Prior equal-exposure mean-COND8214+.02447811898058116J remains the strongest
+conditional-pooling support;8213−.02246957345594415 contradicts consistent benefit,
+and8212+.005761321371348559 was inside MEI. The new8231 result is the direct
+adverse evidence for the unequal-exposure use procedure. TOP8221−.0684509798102144
+is a separate query package. These observations are not pooled or relabelled.
+Finite training variation, partner co-adaptation, trajectory-dependent usefulness
+and competent generic learning remain alternatives. Tuned same-information
+native headroom remains absent; no new mechanism explanation is asserted.
 
-Declining the new empirical investment remains a serious alternative given two
-fits, unknown full cost and a necessarily local result. The next discriminator
-is this exact single funded pair:344064 team ticks/2560Adam plus its complete
-required support chain. New caps are COND600s/DENSE900s/native1500s/support900s/
-complete2400s, with rates still unknown. The same-node amendment at `3a69ae2b0`
-resolved both obsolete procedural clauses (four chains; native handle adoption
-without an independent monitor goal); no new identity or run is assigned in this intake.
-The finished documentary allowance creates no extra question,
-fourth unchanged pair, TOP repeat, extra arm, host change, recast or lifecycle
-disposition. All previous scientific/family/C/UAV boundaries remain.
+The exact pair completed344064 native ticks/2560Adam in432.30s; its native
+600/900/1500s caps pass. Support900/complete2400s compliance remains UNKNOWN with
+unmeasured tails included in scope. This allocation ends without an extra fit,
+master, panel or automatic successor. The next scientific discriminator requires
+a newly selected bounded direction question; this intake creates no new run or
+Portfolio lifecycle choice. Preserve the ACTIVE slot while the evidence is
+integrated and duplicate retention/cleanup closes.
 
-[Complete original response](pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md),
-[conforming intake](pro_packets/20260912_cond512_dense768_use/INTAKE.md),
-[complete new empirical need](pro_packets/20260912_cond512_dense768_use/INVESTMENT_NEED.md).
+[Card](MGTAP_UNEQUAL_EXPOSURE_B01_SCIENCE_CARD_20260913.md),
+[complete E0](MGTAP_UNEQUAL_EXPOSURE_B01_RESULT_20260913.md),
+[DM intake](MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md),
+[funding and conforming amendment](pro_packets/20260912_cond512_dense768_use/PORTFOLIO_INTAKE_20260913.md).
 
 ## TOP single-partner query fresh8221 adverse result — 2026-09-12
 
