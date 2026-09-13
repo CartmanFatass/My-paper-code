@@ -1,5 +1,5 @@
 {
-  "status": "PRESERVED_AWAITING_ROOT_RETENTION_INTEGRATION",
+  "status": "COMPLETE_RECLAIMED_EVIDENCE_RETAINED",
   "owner": "/root/dm_rcle_resume",
   "authoring_checkout": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906",
   "branch": "codex/rcle",
@@ -7,26 +7,50 @@
   "remote_targets": [
     {
       "path": "/home/wu/hmasd-worktrees/rcle-b08-012a8bce2",
-      "exists": true,
+      "exists": false,
       "files": 2404,
       "file_bytes": 43244575,
-      "registered": true,
+      "registered": false,
       "sha": "012a8bce2c90cbe54459437dba01d3f171c9e063",
-      "tracked_status": ""
+      "tracked_status": "",
+      "before_cleanup": {
+        "exists": true,
+        "files": 2404,
+        "file_bytes": 43244575,
+        "registered": true
+      },
+      "disk_absence_verified": true,
+      "registration_absence_verified": true
     },
     {
       "path": "/home/wu/hmasd-worktrees/rcle-b08-check-8761274f9",
       "exists": false,
       "files": 0,
       "file_bytes": 0,
-      "registered": false
+      "registered": false,
+      "before_cleanup": {
+        "exists": false,
+        "files": 0,
+        "file_bytes": 0,
+        "registered": false
+      },
+      "disk_absence_verified": true,
+      "registration_absence_verified": true
     },
     {
       "path": "/home/wu/.agent-tasks/rcle-b08-s28-012a8bce2",
-      "exists": true,
+      "exists": false,
       "files": 6,
       "file_bytes": 2535,
-      "registered": false
+      "registered": false,
+      "before_cleanup": {
+        "exists": true,
+        "files": 6,
+        "file_bytes": 2535,
+        "registered": false
+      },
+      "disk_absence_verified": true,
+      "registration_absence_verified": true
     }
   ],
   "supervisor_archive": {
@@ -79,7 +103,7 @@
     "prerequisite": "4f0dbf75a99e13af6e79be269d415fa98ae47910",
     "verified_by": "git bundle verify"
   },
-  "deletion_performed": false,
+  "deletion_performed": true,
   "requested_targets": [
     "/home/wu/hmasd-worktrees/rcle-b08-012a8bce2",
     "/home/wu/.agent-tasks/rcle-b08-s28-012a8bce2"
@@ -91,5 +115,9 @@
     "all unrelated worktrees/supervisors/bundles",
     "shared native cache"
   ],
-  "unique_evidence_preserved": true
+  "unique_evidence_preserved": true,
+  "root_integration": "main941a04808",
+  "root_scoped_cleanup_instruction": "Native /root continuation after scoped cleanup, reinforced by current Portfolio two-terminal-copy mapping",
+  "verified_at_utc": "2026-09-13T07:30:54.734095+00:00",
+  "cleanup_receipt": "b08_joint_quota_phase_20260912/CLEANUP_RECEIPT.json"
 }

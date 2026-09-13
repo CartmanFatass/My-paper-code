@@ -1,13 +1,13 @@
 {
   "object_id": "RCLE-TBCFV-B08-JOINT-QUOTA-PHASE",
-  "as_of": "complete native/result intake; final publication, Root integration and cleanup tails pending",
+  "as_of": "native/intake/retention and two-target cleanup complete; last closeout-publication and Root integration measurement gaps retained",
   "native_cap_s": 900,
   "additional_invoked_support_cap_s": 900,
   "complete_invoked_cap_s": 1800,
   "whole_native_wall_s": 45.39,
-  "known_support_charged_s": 407.1529049,
-  "known_complete_invoked_s": 452.5429049,
-  "interpretation": "Sum of complete observed command windows and two conservative failed-process bounds, once. Monitor3.7s approximate charged4s. Session polling chunks replaced. Not elapsed critical path or aggregate CPU. Final publication/integration/cleanup tails appended when observed; unmeasured components remain UNKNOWN.",
+  "known_support_charged_s": 415.0217324000001,
+  "known_complete_invoked_s": 460.41173240000006,
+  "interpretation": "Conservative observed invoked support ledger; failed process bounds replace polls and Monitor approximate3.7s charged4s, each once. Native45.39s and cleanup are complete. Known work shows no cap breach; missing integration/publication coverage remains UNKNOWN, not zero or inferred overrun. Provider/agent lifetime is not this invoked account.",
   "provider_agent_lifetime_cost": "UNKNOWN",
   "documentary_family_selection": "separately accepted UNKNOWN, not charged to B",
   "first_fetch_bound": {
@@ -266,6 +266,61 @@
     {
       "operation": "current direction scientific-position edit read",
       "wall_s": 0.1522434
+    },
+    {
+      "operation": "publication editing read LAUNCH_ACCEPTANCE.json",
+      "wall_s": 0.1554849
+    },
+    {
+      "operation": "publication editing read SUPPORT_ACCOUNT.json",
+      "wall_s": 0.1543541
+    },
+    {
+      "operation": "intake audit append read",
+      "wall_s": 0.181188
+    },
+    {
+      "operation": "intake diff/status validation",
+      "wall_s": 0.3647347
+    },
+    {
+      "operation": "complete result E0/intake/retention publication commit",
+      "wall_s": 0.6573273
+    },
+    {
+      "operation": "complete result publication push",
+      "wall_s": 4.450909
+    },
+    {
+      "operation": "Root integration/owner-boundary read for B08 cleanup",
+      "wall_s": 0.4117266
+    },
+    {
+      "operation": "exact two-target terminal reclamation and disk/registration absence verification",
+      "wall_s": 0.8565811
+    },
+    {
+      "operation": "closeout record update read CLEANUP_INVENTORY.json",
+      "wall_s": 0.1582912
+    },
+    {
+      "operation": "closeout record update read RCLE_B08_JOINT_QUOTA_PHASE_INTAKE_20260912.md",
+      "wall_s": 0.1686264
+    },
+    {
+      "operation": "closeout record update read RCLE_POST_B07_CONTINUATION_READINESS_20260912.md",
+      "wall_s": 0.1481961
+    },
+    {
+      "operation": "closeout record update read RCLE_B08_JOINT_QUOTA_PHASE_RESULT_EVIDENCE_20260912.md",
+      "wall_s": 0.1614081
     }
-  ]
+  ],
+  "unmeasured_support_components": [
+    "Root main integration invoked wall unavailable",
+    "last closeout publication commands not yet recorded in this snapshot"
+  ],
+  "accounting_complete": false,
+  "resources_unmeasured": true,
+  "new_post_B08_question": "separate Root preparation-only assignment; not charged to or funded from B08 leftover allowance"
 }
