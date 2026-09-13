@@ -7,7 +7,7 @@
 
 本表登记15 ACTIVE、12 PARKED。2026-09-13 ACPS Portfolio PRO_FINAL 已将 ACPS 可逆改为 PARKED/HIGH；其余生命周期、priority、recasts与UAV字段不变。
 标准并行目标为4个方向；当前四条 ACTIVE 链为 MGTAP、RCLE、ACVC、FOLR。DM 完成、阻塞或 ACTIVE-idle 回报都会触发一次稳定 Root 调度检查；对象完成、cleanup、Pro wait 或 child 完成均不释放方向槽位，只有正式 Portfolio/owner lifecycle 决定释放槽位。
-占位与实际工作分开：FOLR 固定 Generic→BANK allocation 已完成并完成 combined intake，RCLE B09 已获配并进入 DM 执行，ACVC/MGTAP 科学 ACTIVE-idle；有界治理/准备工作按实记录。见 [OWNER_DIRECT 自主执行收敛](decisions/2026-09-13-dm-autonomy-consolidation.md)，未变 timeout 不产生新请求或重复派工。
+占位与实际工作分开：FOLR 固定 Generic→BANK allocation 与 combined intake 已完成，RCLE B09 已完成并 intake，ACVC/MGTAP 科学 ACTIVE-idle；有界治理/准备工作按实记录。见 [OWNER_DIRECT 自主执行收敛](decisions/2026-09-13-dm-autonomy-consolidation.md)，未变 timeout 不产生新请求或重复派工。
 当前 Portfolio/方向决定和 Transport/实验归档均已在本控制面合并；旧请求、旧 hash 和旧起草快照不作为当前路由。
 有限分配结束不推断停向；只有Portfolio/owner生命周期决定改变ACTIVE/PARKED。
 
@@ -33,7 +33,7 @@
 | [MGTAP](../candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md) | Portfolio B 与同节点程序性修正均已完整 intake；唯一 master pair（COND512 / intact-DENSE768）已完成，COND−DENSE = −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026，7/25 worlds；MGTAP 仍 ACTIVE/MEDIUM。 | 结果/cleanup 与 post-8231 Convergence R 已完整 intake；保留 mean-COND eligibility 与 DENSE default，拒绝当前 unchanged proposal，不追加 pair/successor/lifecycle。原 request 效果不确定且绝不重发；本地 raw 删除被审批策略拒绝，事实已记录。 | ACTIVE-idle，无在途外部依赖；当前缺具体 additional-pair consequence。具体新研究开发后果到来由原 DM 自主准备，未变事实复用 R；方向槽位保持占用。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
-| [RCLE](../candidates/roster_consistent_latent_exploration/pro_packets/20260913_post_b08_development/INTAKE.md) | B08 后 Convergence 已形成 PRO_FINAL：对 exact tested recipe 做可逆 development HOLD；family open，whole RCLE ACTIVE/MEDIUM。 | greedy-anchored A 仅保留 epsilon .1 exact-greedy 候选；Portfolio B09 已完整 intake，获配 seed29/256-update/four-panel，native180/support600/complete780s；当前由 DM 执行。 | B09 已获配，DM 按新标准直接完成 card/source/review/admission/launch/monitor/collection/intake；不自动追加 fit/cap 或改变两项 HOLD，方向槽位保持占用。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/pro_packets/20260913_post_b08_development/INTAKE.md) | B08 后 Convergence 已形成 PRO_FINAL：对 exact tested recipe 做可逆 development HOLD；family open，whole RCLE ACTIVE/MEDIUM。 | greedy-anchored A 仅保留 epsilon .1 exact-greedy 候选；Portfolio B09 已完整 intake，seed29/256-update/four-panel 完成（native47.13s、exit0），G_U +.0512695、D_n +.1460205、D_g -.0317708；当前 ACTIVE-idle。 | B09 已由 DM 完成 card/source/review/admission/launch/monitor/collection/intake；不自动追加 fit/cap 或改变两项 HOLD，方向槽位保持占用。 |
 | [scope_1s](../candidates/scope_1s/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [TRDL](../candidates/tail_return_distributional_learning/DIRECTION.md) | 新注册PARKED/MEDIUM；保留tail-return distributional learning的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
