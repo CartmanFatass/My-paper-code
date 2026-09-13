@@ -45,3 +45,15 @@ direction's lifecycle, priority, claim meaning or result.
 At the preparation boundary the DM sends one direct ACTIVE-idle action event with the
 full HANDOFF commit, fixed TASK URL, request identity and actual Transport dependency,
 then returns to native wait. No repeated unchanged polling or owner approval loop is added.
+
+## Unpublished render correction
+
+The generic Convergence template includes continue/park/close/recast wording. The current
+REQUEST adds an explicit scope tie-breaker limiting it to R/B preparation without lifecycle
+or family changes. The renderer rejected reuse of the existing output directory; a chained
+shell command nevertheless committed the first unbound draft at 2548ca19d. Its
+delivery/HANDOFF.json remains TASK_NOT_PUBLISHED, with no provider payload or dispatch.
+No accepted/READY packet was edited. The final matching REQUEST is rendered into the fresh
+delivery_v2 directory, which is the only handoff to bind and return for this request. The
+first draft and rejection are preserved as authoring provenance, not a second request or
+Send attempt. This mechanical correction changed no option, result, budget or science.
