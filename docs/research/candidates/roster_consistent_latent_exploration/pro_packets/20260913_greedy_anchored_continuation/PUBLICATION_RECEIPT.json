@@ -1,0 +1,16 @@
+{
+  "request_id": "2026-09-13-rcle-greedy-anchored-continuation-01",
+  "task_commit": "d3e7bb76082c891178f911a8ceb97d20dd02a319",
+  "task_bytes": 26646,
+  "task_sha256": "433182d93298585f334a1fc9745aae260acb74f9727661d96f63cdaedffcb0d8",
+  "fixed_task_url": "https://github.com/CartmanFatass/My-paper-code/blob/d3e7bb76082c891178f911a8ceb97d20dd02a319/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_continuation/delivery/TASK.md",
+  "handoff_path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_continuation/delivery/HANDOFF.json",
+  "technical_publication_state": "READY_TO_DISPATCH",
+  "actual_authority": "PREPARATION_ONLY",
+  "transport_dispatched": false,
+  "pro_sends": 0,
+  "new_empirical_grant": "NONE",
+  "native_parent": "/root/dm_rcle_resume",
+  "native_transport": "/root/dm_rcle_resume/tr_l_h_rcle",
+  "binding_method": "Current main renderer, authoring checkout project root for TASK-relative Git binding; initial main-root bind returned path-not-subpath before mutation and was corrected without regenerating TASK or provider activity."
+}
