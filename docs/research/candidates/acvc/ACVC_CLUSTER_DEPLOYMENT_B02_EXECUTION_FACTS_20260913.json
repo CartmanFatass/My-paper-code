@@ -96,29 +96,68 @@
       {
         "stage": "bundle transfer/verify/fetch/worktree local outer command",
         "seconds": 1.7201174
+      },
+      {
+        "stage": "acceptance publication commit/push",
+        "seconds": 4.6258118
+      },
+      {
+        "stage": "first supervisor submission outer command",
+        "seconds": 0.4400917
+      },
+      {
+        "stage": "pre-execution repair publication commit/push",
+        "seconds": 4.5158087
+      },
+      {
+        "stage": "repaired supervisor submission outer command",
+        "seconds": 0.8234271
+      },
+      {
+        "stage": "collection/archive remote outer command",
+        "seconds": 0.7727117
+      },
+      {
+        "stage": "archive transfer/extraction local outer command",
+        "seconds": 1.1260628
+      },
+      {
+        "stage": "native-byte evidence copy/hash outer command",
+        "seconds": 0.4192936
+      },
+      {
+        "stage": "recorded-byte analysis outer command including inner0.062s",
+        "seconds": 0.3183762
       }
     ],
     "stalled_sync_observations": {
       "direct_fetch_elapsed_s_at_sample": 182,
       "lazy_fetch_diagnostic_elapsed_s_at_sample": 41
     },
-    "coverage": "Partial known invoked command time only; stalled synchronization durations are lower-bound observations, not final exact times. Earlier preparation/review/authoring, provider/deliberation/client, Monitor and closing costs remain unmeasured. No whole-support certification or zero-cost assumption. Sampling and simultaneous phases are not automatically summed as study elapsed.",
+    "coverage": "Partial known invoked command time only; stalled synchronization durations are lower-bound observations, not final exact times. Earlier preparation/review/authoring, provider/deliberation/client, Monitor and closing costs remain unmeasured. No whole-support certification or zero-cost assumption. Sampling and simultaneous phases are not automatically summed as study elapsed. Known phases plus the two elapsed observations give only a lower bound of summed invoked walls; all original stalled-operation tails and provider cost remain unknown.",
     "support_cap_s": 600,
     "complete_cap_s": 1200,
-    "complete_support_certified": false
+    "complete_support_certified": false,
+    "known_exact_seconds": 15.4410049,
+    "observed_invoked_wall_lower_bound_s": 238.4410049
   },
   "science_review": {
     "role": "Convergence independent scientific Reviewer",
     "plan": "Reuse unchanged reviewed same-law comparison; review this new endpoint, evidence interpretation, conclusions and next plan at intake. DM resolves findings and makes direction decision; no Portfolio approval."
   },
-  "status": "Original supervisor failed before any scientific invocation; DM diagnosed argv-join/cwd error and is publishing one bounded pre-execution repair. Original failure retained. No scientific retry or cap change.",
+  "status": "VALID COMPLETE B/EXPLORE technical intake; frozen F-C and F-dwell both UP on one independent new endpoint. Full new-evidence Convergence review being prepared; no automatic successor or lifecycle disposition applied yet.",
   "stop": "No scientific retry/replacement, extra panel, checkpoint selection or automatic successor.",
-  "updated_utc": "2026-09-13T23:32:33Z",
+  "updated_utc": "2026-09-13T23:44:53Z",
   "monitor": {
     "native": "/root/acvc_monitor",
     "adopted": true,
+    "adopted_handle": "acvc-cluster-b02-be76f696c-launch2",
+    "adoption_observed_utc": "2026-09-13T23:39Z",
+    "adoption_status": "running",
+    "pid": 3430922,
     "terminal_delivered": true,
-    "active_set": []
+    "active_set": [],
+    "note": "An adoption-only final with live handle was resumed on the same Monitor; no observation identity changed."
   },
   "preexecution_repair": {
     "diagnosis": "agent-task joins cmd argv with $* then eval. Original extra bash -lc loses command argument grouping, so cd executes in a child and following time executes from supervisor home; time fails before invoking timeout/launch.sh/admission/Python.",
@@ -130,6 +169,63 @@
     "source_unchanged": true,
     "cap_unchanged": true,
     "allowed_repaired_submissions": 1,
-    "accepted": false
+    "accepted": true,
+    "command_publication_sha": "f48be7c9fc5b83d923cf4350ed66a0636d79be10",
+    "submitted_utc": "2026-09-13T23:38:16Z",
+    "receipt": "Task 'acvc-cluster-b02-be76f696c-launch2' started in tmux session 'agent_acvc-cluster-b02-be76f696c-launch2'. Output: /home/wu/.agent-tasks/acvc-cluster-b02-be76f696c-launch2/task.log\n",
+    "actual_stored_command_verified": true
+  },
+  "terminal": {
+    "event": "acvc-cluster-b02-be76f696c-launch2-finished-0",
+    "handle": "acvc-cluster-b02-be76f696c-launch2",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3430922,
+    "tmux_active": false,
+    "supervisor_duration_s": 164,
+    "ended_utc": "2026-09-13T23:41:01Z",
+    "monitor_delivery": "native final received by DM; active_set=[]"
+  },
+  "adjacent_admission": {
+    "passed": true,
+    "assessed_at": "2026-09-13T23:38:17.402456Z",
+    "available_physical_bytes": 15609135104,
+    "effective_available_bytes": 15609135104,
+    "minimum_available_bytes": 4294967296,
+    "receipt": "docs/research/candidates/acvc/evidence/cluster_deployment_b02_20260913/cluster_deployment_b02_admission.json"
+  },
+  "actual_counts": {
+    "training_episodes": 512,
+    "rollouts": 256,
+    "optimizer_steps": 1024,
+    "training_team_steps": 131072,
+    "evaluation_episodes": 192,
+    "evaluation_team_steps": 49152,
+    "total_team_steps": 180224,
+    "scientific_invocations": 1,
+    "final_checkpoints": 1,
+    "post_fit_loads": 3
+  },
+  "cost": {
+    "native_whole_command_wall_s": 164.53,
+    "supervisor_integer_duration_s": 164,
+    "native_charge_s": 164.53,
+    "native_charge_basis": "Larger enclosing observation; do not add nested fit/panel/publication clocks. Original pre-execution failure duration rounds to0; subsecond tail unknown.",
+    "native_cap_pass": true,
+    "peak_rss_kib": 551908,
+    "peak_rss_gib": 0.5263404846191406,
+    "complete_support_certified": false,
+    "resources": "resources_unmeasured"
+  },
+  "result_evidence": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_RESULT_EVIDENCE_20260913.md",
+  "intake": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md",
+  "retention": {
+    "archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/retained/cluster_deployment_b02_20260913/native_output.tar.gz",
+    "bytes": 420438,
+    "sha256": "be32ec3b31643d310fbdba780feb7d64f964cbe4df1fdc8b10a58b521b0849c0",
+    "remote_local_match": true,
+    "checkpoint_bytes": 282957,
+    "checkpoint_sha256": "23cde1b6ffe6cce1f7482bfc54ff73d2a95f277aedc750263c6882675af7e34b",
+    "cleanup_performed": false
   }
 }

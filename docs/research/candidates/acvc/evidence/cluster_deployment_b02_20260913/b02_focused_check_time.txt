@@ -1,0 +1,4 @@
+Command exited with non-zero status 2
+check_wall_s=0.17
+peak_rss_kib=46148
+exit_code=2
