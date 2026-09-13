@@ -1,0 +1,15 @@
+{
+  "staged_at": "2026-09-13T20:09:19.447372+00:00",
+  "source_sha": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+  "frozen_archive_sha256": "f4d2726f98ae2b05157fd3b06b5cfc2f9c3c8c4fa0cc891bb41874f0c2b1595b",
+  "member": "final.pt",
+  "remote_checkpoint": "/home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301/BANK_final.pt",
+  "checkpoint_bytes": 4532819,
+  "checkpoint_sha256": "2385b6ea0f03b36fd4e0f05006acbe64922a8dd9c2c8fa7d0cd396d5ed090989",
+  "remote_command": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/prepared/BANK.sh",
+  "command_sha256": "d6122f0d9b9f907f57f89714e6f5731ac796324ec7f37cfed14f4e635c9f3b47",
+  "local_temporary_extraction_removed": true,
+  "checkpoint_torch_loads": 0,
+  "bank_evaluations": 0,
+  "authority": "prepare exact frozen inputs only; BANK invocation remains dependent on Generic full technical acceptance"
+}

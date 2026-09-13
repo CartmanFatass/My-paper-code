@@ -1,7 +1,12 @@
 # FOLR retained-reference use — implementation and technical acceptance
 
 Status: **DM technically accepts source5dce539ed54afd4334d09db9dcd94df38c52c2fc**.
-No result-bearing invocation is accepted yet. Baseline8768f0f83, first source0bd5c477b. This record remains
+The sole new Generic invocation was accepted on2026-09-13 at20:07:19Z and its
+native Monitor adopted the handle at20:09:12Z. No scientific endpoint is accepted
+at this boundary; fixed BANK evaluation remains dependent on complete Generic
+technical acceptance. [Launch facts](GENERIC_LAUNCH.json),
+[adjacent admission](GENERIC_ADMISSION.json) and [fixed input staging](BANK_STAGING.json)
+preserve the exact execution. Baseline8768f0f83, first source0bd5c477b. This record remains
 separate from the scientific Portfolio intake and later scientific result.
 
 DM self-review traced the new explicit mode through source/RNG construction,
@@ -30,8 +35,8 @@ LAPTOP-U9TDKC8A, Python3.10/TorchCPU:
   Scratch removed. The enclosing SSH tool reported1 despite retained native exit0;
   an independent read-only SSH exit0 probe succeeded. Native test output and time
   remain the verification evidence; no scientific invocation was involved.
-- The loader-call correction will receive only its affected focused checks at
-  the corrected committed source; prior primary rule cases remain valid.
+- At this initial check boundary, the loader-call correction required only its
+  affected checks at the corrected committed source; their closure follows below.
 
 Test logs/timing are retained at remote control root under
 `temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/support/`.
@@ -40,12 +45,13 @@ intercepted and scoring is mocked in runner-publication tests. The reset test
 uses its own support seed and no native transitions. No selected learner,
 training/evaluation panel, profile or timing pilot has run.
 
-Current exact known check wall lower account is2.90s; command/staging/Git/review/
+At that initial boundary the known check wall lower account was2.90s; command/staging/Git/review/
 intake/other attributable support must also remain in the same1200s budget.
 Unmeasured total provider/agent cost stays UNKNOWN, not zero. Final acceptance,
-launch source/commands and actual-node admission are still pending.
+launch source/commands and actual-node admission were then pending; later sections
+record their completion.
 
-## Final focused acceptance and next exact invocation
+## Final focused acceptance and exact invocation binding
 
 The narrow source correction at5dce539ed passed both affected loader/reset and
 runner/no-learner/publication/failure checks:2 passed in0.83s, enclosing test1.07s,
@@ -85,3 +91,37 @@ implementation and the one exact funded Generic invocation after its adjacent
 admission, recommended over changing science or requesting another ACK. Current
 owner reviews are empty. No alternative source, retry, cap transfer or successor
 is selected. DM retains technical/scientific intake and native Monitor handover.
+
+## Accepted launch and observation transfer — 2026-09-13T20:13:40Z
+
+The exact committed GENERIC.sh was accepted once by remote `agent-task` as
+`folr-ref-use-generic-781301-5dce539ed54a`, PID3424844, tmux active. Its adjacent
+admission passed with15,630,262,272 physical/effective available bytes against
+the4GiB floor. Source, command SHA256, checkout, output and native receipt are
+in GENERIC_LAUNCH.json. No earlier supervisor task or model/RNG execution was
+accepted: the preceding remote sparse Git command-blob fetch failed after a
+134.489s connection wait, before supervision/admission. The bounded repair
+transferred the exact locally committed command bytes and verified the remote
+SHA256. This is failed attributable support, not a scientific retry or polarity.
+Known check wall3.97s plus this connection wait gives a support lower bound of
+138.459s; other attributable support is not thereby zero or excluded from1200s.
+Total invoked support/provider coverage remains incomplete and is not claimed
+as a full measured compliance result.
+
+Native Monitor `/root/dm_folr_resume/monitor_folr` directly reported adoption at
+20:09:12Z with running PID3424844, tmux true and uptime105s. DM acknowledged that
+receipt and returned the same child to terminal observation; DM routine process
+polling stopped. No second observer or replacement handle was created.
+
+The preserved BANK archive's exact final.pt member was transferred and its
+4,532,819 bytes and SHA256 verified remotely. BANK.sh also matches source5dce.
+Staging performed zero Torch loads and zero evaluations; local extraction scratch
+was removed. One new BANK panel may follow only a trustworthy full Generic
+5000/4969/128 endpoint under the original caps. A missing endpoint ends this
+dependent finite unit; it does not pause FOLR or create a retry.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): accept the exact
+supervisor handle and native observation transfer, recommended over a duplicate
+launch or parent polling. FOLR remains ACTIVE/MEDIUM. The next scientific action
+is terminal collection and Generic technical acceptance, then the fixed BANK
+panel if the required endpoint is complete.
