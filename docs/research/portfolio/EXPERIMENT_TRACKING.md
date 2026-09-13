@@ -15,10 +15,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 Working-set target: **4**; existing overlap drains without interruption or fifth-slot admission.
 Occupied direction slots: **4** — MGTAP, RCLE, ACVC and FOLR, with their original DMs.
-Actual current work is FOLR's BANK collection/combined intake and RCLE's dispatched new-investment
-Transport assignment; its provider acceptance is pending. ACVC's separate owner-directed governance
-update is administrative work, not an experiment or new scientific allocation. ACVC/MGTAP science
-is ACTIVE-idle with no pending external producer. Occupancy is not a claim of four advancing runs;
+Actual current work is RCLE's B09 execution. FOLR's fixed allocation is fully intaken; ACVC/MGTAP science is ACTIVE-idle with no pending external producer. ACVC's governance update is administrative work, not an experiment or new scientific allocation. Occupancy is not a claim of four advancing runs;
 completion or idle state does not release an ACTIVE slot. CADC and ACPS are PARKED only through
 their explicit Portfolio dispositions. See [autonomy application](decisions/2026-09-13-dm-autonomy-consolidation.md).
 One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
