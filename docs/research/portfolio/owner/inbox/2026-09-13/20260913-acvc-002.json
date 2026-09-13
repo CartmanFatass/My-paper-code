@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "C",
-  "auto_applied": null,
+  "auto_applied": "C",
   "dm_reason": "K的可信增量和已验收路径支持一次经济独立观察；旧allocation结束不是方向研究禁令。",
   "evidence": [
     "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/INTAKE.md"
@@ -71,5 +71,15 @@
     "verdict_text": "建议 ACVC 继续有限的同分布部署开发，先由 DM 自主选择并准备一个独立 C fit 加 C/F/own-dwell 三面板的普通 B；Portfolio 处理总体优先级、连续研究范围及确有必要的容量或生命周期变化，不逐个批准普通实验。可逆 PARK 和有期限暂缓是整体规划的替代选项，当前均未执行。",
     "source": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/INTAKE.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T23:23:56+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/INTAKE.md",
+      "record": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/INTAKE.md",
+      "state": "applied",
+      "summary": "最新owner委托DM全方向生命周期；DM选择继续并执行已成卡B02。原自动Portfolio提案改用户报告输入，不触发咨询；不调动其他方向，尚未实验launch。"
+    }
+  ]
 }

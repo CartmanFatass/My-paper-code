@@ -30,7 +30,7 @@ def make_cluster(seed, base_class=None, adapter_class=None):
     return make_real(seed, base_class=cluster_constructor, adapter_class=adapter_class)
 
 
-def final_panel(rows):
+def final_panel(rows, *, master=MASTER, evaluation_namespace=EVALUATION_NAMESPACE):
     panels = {}
     values = {}
     for arm in ARMS:
@@ -38,8 +38,8 @@ def final_panel(rows):
                           key=lambda r: r["episode"])
         complete = len(selected) == 64 and [r["episode"] for r in selected] == list(range(64))
         complete = complete and all(
-            r["base"] == MASTER and r["evaluation_namespace"] == EVALUATION_NAMESPACE
-            and r["reset_seed"] == 100000 * EVALUATION_NAMESPACE + 2000 + r["episode"]
+            r["base"] == master and r["evaluation_namespace"] == evaluation_namespace
+            and r["reset_seed"] == 100000 * evaluation_namespace + 2000 + r["episode"]
             and r["steps"] == 256 and r["S"] is not None and r["J"] is not None
             and math.isfinite(r["S"]) and math.isfinite(r["J"]) and r["J"] == r["S"] / 256
             for r in selected
@@ -78,13 +78,13 @@ def final_panel(rows):
     }
 
 
-def publish(output, process_start):
+def publish(output, process_start, *, master=MASTER, evaluation_namespace=EVALUATION_NAMESPACE):
     output = Path(output)
     path = output / "summary.json"
     summary = json.loads(path.read_text(encoding="utf-8"))
     rows = [json.loads(line) for line in (output / "episodes.jsonl").read_text(encoding="utf-8").splitlines()]
     summary["configuration"].update(user_distribution="cluster", training_rule="C")
-    summary["primary"] = final_panel(rows)
+    summary["primary"] = final_panel(rows, master=master, evaluation_namespace=evaluation_namespace)
     if not summary["primary"]["complete"]:
         summary["status"] = "incomplete"
     summary["process_wall_s_to_cluster_publication"] = time.monotonic() - process_start
