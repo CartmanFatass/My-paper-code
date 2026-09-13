@@ -1,32 +1,35 @@
 # State, packet, lease, and evidence schema
 
-The registry is JSON at a caller-supplied path (default project-local path:
-`temp/sessions/hmasd-chatgpt-pro-transport/registry.json`). Keep one record per
+The shared registry is JSON at the absolute registry_path in live
+`C:/Projects/HMASD/.codex/hmasd-transport.toml`, currently
+`C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/registry.json`.
+All direction worktrees use this same path and file lock; no worktree-local default. Keep one record per
 `conversation_binding_key`; do not overwrite a binding with a different
 `conversation_id`. The exact keys are `em:<direction>:innovator`,
 `em:<direction>:convergence`, and `portfolio:cross_direction`. Thus one direction
 has two independent EM conversations and Portfolio has one conversation reused
 across changing multi-direction scopes. Only one request may be active per key;
 archive it before sending the next turn in that same conversation. Browser tab
-handles, goal-driven observation passes, and executor turns remain ephemeral observations. The
-registry is shared across all requests handled by independent Transport;
+handles, native observation passes, and executor turns remain ephemeral observations. The
+registry is shared across all requests handled by author-owned transports;
 its operator UUID never selects a provider conversation.
 
 ```json
 {
   "schema_version": 4,
-  "conversation_binding_key": "em:finite_resource_relational_inductive_efficiency:innovator",
+  "conversation_binding_key": "em:example_direction:innovator",
   "workflow_node": "em_innovator",
-  "direction_id": "finite_resource_relational_inductive_efficiency",
-  "direction_ids": ["finite_resource_relational_inductive_efficiency"],
+  "agentify_stable_key": "em:example_direction:innovator",
+  "direction_id": "example_direction",
+  "direction_ids": ["example_direction"],
   "decision_authority": "pro_final",
-  "request_id": "portfolio-frrie-r02-exact-law-20260831-01",
-  "packet_id": "portfolio-frrie-r02-exact-law-20260831-01--finite_resource_relational_inductive_efficiency",
-  "source_thread_id": "01a...",
-  "creator_thread_id": "01a...",
-  "parent_thread_id": "01p...",
-  "operator_thread_id": "01b...",
-  "operator_mode": "PROJECT_SINGLETON",
+  "request_id": "example-review-01",
+  "packet_id": "example-review-01--example_direction",
+  "source_thread_id": "/root/dm_example",
+  "creator_thread_id": "/root/dm_example",
+  "parent_thread_id": "/root/dm_example",
+  "operator_thread_id": "/root/dm_example/transport",
+  "operator_mode": "DM_NATIVE",
   "operator_model": "gpt-5.6-luna",
   "operator_thinking": "high",
   "return_route": "PARENT_SESSION",
@@ -88,7 +91,7 @@ its operator UUID never selects a provider conversation.
     "response_file": null,
     "transport_fact_file": null,
     "provider_context_reset_facts": {
-      "request_id": "portfolio-frrie-r02-exact-law-20260831-01",
+      "request_id": "example-review-01",
       "decision_outcome": "DECISION_NOT_FORMED|BLOCKED|<actual formed outcome>",
       "repository_paths_read": 0,
       "provider_context_contamination_acknowledged": false,
@@ -97,8 +100,8 @@ its operator UUID never selects a provider conversation.
   },
   "return_receipt": {
     "required": true,
-    "source_thread_id": "01a...",
-    "parent_thread_id": "01p...",
+    "source_thread_id": "/root/dm_example",
+    "parent_thread_id": "/root/dm_example",
     "destination_thread_id": "01p...",
     "status": "PENDING",
     "message_key": null,
@@ -144,7 +147,7 @@ distinct replacement request ID, preserves the complete prior record (including
 unfinished/accepted-send state), and records `reason=owner_requested_new_conversation`.
 It does not require or fabricate a blocked answer, zero retrieved paths, or
 contamination. Close or transfer the affected request's observation under the owner
-instruction; preserve other pending records under the active goal.
+instruction; preserve other pending records under their native assignments.
 The `quarantined_conversations` map stores the excluded provider ID without
 assigning scientific polarity. Repeating the same pending replacement preparation
 is idempotent; a different pending replacement is refused.
@@ -163,7 +166,9 @@ zero-mutation refusals. On admission, move the prior round to
 reason, and evidence, and persist that ID in the registry-root
 `quarantined_conversations` map. Set the binding to `CONTEXT_RESET_PENDING` with
 `conversation_id=null` and `provider_url=null`; it has no active provider
-conversation during this interval.
+conversation during this interval. The reset helper records a distinct deterministic
+agentify_stable_key for that admitted generation and preserves the old key in request_history;
+ordinary next-round binding carries the current key forward. See agentify.md.
 
 Only a new concrete webpage `/c/<uuid>` URL observed after successful send may
 replace that empty binding. Bind it with `observed_after_successful_send=true`; reject
@@ -200,12 +205,15 @@ as `provider_filename`; it never changes the canonical filename or reference ord
 
 ## State vocabulary and transitions
 
-The normal sequence is:
+The normal GitHub-delivery sequence is:
 
 `RECEIVED` → `DIRECTION_VERIFIED` → `TAB_OPEN` → `PAGE_READY` → `PRO_VERIFIED` →
-`PROMPT_READY` → `UPLOAD_PENDING`/`UPLOAD_CONFIRMED` → `SEND_ATTEMPTED` →
-`SEND_CONFIRMED` → `WAITING_GENERATION` → `WAITING_HEARTBEAT` →
+`PROMPT_READY` → `SEND_ATTEMPTED` →
+`SEND_CONFIRMED` → `WAITING_GENERATION` →
 `NATURAL_COMPLETION` → `ARCHIVE_PENDING` → `ARCHIVED`.
+
+`UPLOAD_PENDING`/`UPLOAD_CONFIRMED` apply only to explicit attachment-input contracts.
+`WAITING_HEARTBEAT` is a retained legacy label, not a scheduler or required new transition.
 
 `WAITING_UNKNOWN` and `WAITING_TIMEOUT` are recoverable attention states, not send
 failures. Terminal or attention states are `SEND_UNCERTAIN`, `SENT_INPUT_MISMATCH`,
@@ -291,9 +299,9 @@ binding against the captured node with `validate_response_identity`; missing DOM
 IDs require documented manual pairing against the exact question. Preserve and
 re-inspect a mismatched capture on the same page, never repair it with a new Send.
 
-## Goal-driven asynchronous processing
+## Native asynchronous processing
 
-Independent Transport observes current Pro requests while Root continues experiment/direction work.
+Each author-owned Agentify Transport observes its assigned requests while its parent waits natively.
 Each due conversation gets one bounded read in serial; avoid busy polling and do not create
 scheduled automations. A pass observes the existing request, never resends it or changes provider identity. Natural
 completion archives the paired response; timeout retains the same conversation for recovery.
@@ -306,23 +314,19 @@ identity. The recovered tab remains active while the conversation is pending.
 Transport may own overlapping provider generations. Tab leases, outbox entries, archives and
 idempotency keys remain request-scoped. Legacy scheduling metadata grants no authority to
 recreate the removed automation. Request completion clears only that request's pending
-observation; other pending work remains recoverable within the owner's goal. Preserve
+observation; other pending work remains recoverable within the assigned native task. Preserve
 each request's recorded observation facts without rewriting another request's state.
 
 ## Automatic return outbox
 
-`REUSE_SINGLETON` identifies the configured Transport endpoint. If the author is that endpoint,
-the renderer selects `CALLER_DIRECT` with the owner instruction and no app self-dispatch.
-New records name independent Transport in `operator_thread_id`. `execution_thread_id` records actual
-execution ownership separately from immutable request metadata.
-When actual executor equals parent, `stage_receipt` or `stage_blocker_receipt` creates
-`required=false`, `status=LOCAL`, `routing_mode=LOCAL`, `destination_thread_id=null` and zero
-message attempts. Root forwards the scientific work to the DM. No app self-receipt is sent.
+New records use REUSE_DM_TRANSPORT: author and receipt parent are the owning author (DM, or Root for Portfolio vacancy replacement), operator is
+its actual native Transport child. execution_thread_id records actual recovery ownership without
+rewriting immutable accepted historical metadata. No app-task self-dispatch or Root forwarding.
 Existing attempted/uncertain delivery evidence is never restaged during recovery.
 The following external-parent procedure applies only when executor differs from parent.
 
 After `ARCHIVED`, call `stage_receipt` from `scripts/transport_contract.py` before
-using `send_message_to_thread` exactly once on the validated parent task. The deterministic `message_key` remains
+using native `collaboration.send_message` to the validated waiting author parent (DM or Root). The deterministic `message_key` remains
 `request_id|direction_id|conversation_id|response_sha256`. The outbox transitions
 from `PENDING` to `SENT`, `UNCERTAIN`, `FAILED`, or `BLOCKED` and records the exact
 parent destination, timestamp, attempt count, delivery status, and error.

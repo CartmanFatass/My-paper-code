@@ -5,21 +5,18 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACVC | Cluster-law readiness packet integrated at main180e18763; 180,224 team steps, native/support unknown, no empirical grant | Portfolio decides investment from the fixed readiness input; no implementation, repeat consultation or third training-F pair |
-| MGTAP | TOP8221 accepted TOP_ADVERSE; four-target cleanup accepted at main65c07ad61, archives retained and no run remains | Original DM is authoring one bounded next-use/investment input for the next clean Portfolio request; no implementation or run |
-| FSD | Three-choice post-five-pair input integrated at main5474d95de; B-LONG-D0 is only a future proposal, not part of the frozen current U request | Current provider U decides evidence use only; preserve B-LONG-D0/USE/HOLD for a later clean Portfolio request, no launch |
-| RCLE | Original-node intake accepted at main8973c0515: HOLD only tested equal-unit/.99-prior/FLEX/final1000 spending; direction remains ACTIVE | Portfolio DM prepares a distinct next investment/lifecycle choice from refreshed evidence; no repeated recipe, fit or consultation |
-| FOLR | Entity-history readiness integrated at main3bc742a85; fixed205120ticks/9938updates, new costs unknown | Bound Portfolio E decision is in accepted provider generation; no implementation before grant |
-| ACPS | B01 accepted ADVERSE; four-target cleanup accepted at main3d3ef453c, archives retained and no run remains | Continuation need is retained for the next clean Portfolio request; direction remains ACTIVE/HIGH and queued need does not count as advancing work |
-| CADC | B01 accepted ADVERSE; four-target cleanup accepted at main60ed6a98e, archives retained and no run remains | Next-use need is retained for the next clean Portfolio boundary; no retry/extra arm/successor and queued need does not count as advancing work |
-| Portfolio | ACVC/FOLR/RCLE/FSD K/E/L/U response completed and archived exactly once at mainde02dc94d | Designated DM checks and intakes four distinct investment/lifecycle decisions; no grant or stop inferred before intake |
+| ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; four remote targets reclaimed after verified retention | Portfolio DM actively prepares one bounded ACPS investment/design/lifecycle question; ACTIVE/HIGH, no local stop or empirical successor |
+| MGTAP | Portfolio funds one original Convergence COND512/intact-DENSE768-or-decline judgment, zero empirical spend | Original DM actively authors the exact question and owns Transport handoff plus full intake |
+| RCLE | Portfolio funds one original Convergence family/use selection; conforming selection conditionally funds one B | Original DM actively authors the exact question; zero implementation/experiment until selection |
+| ACVC | K complete and both frozen primaries accepted UP; ACTIVE/MEDIUM | Original DM actively prepares one proper direction-node next-object/use question; no K retry or empirical spend |
+| FOLR | E complete: Generic no final, BANK complete, no pair primary; ACTIVE/MEDIUM | Original DM actively prepares one proper direction-node finite same-information discriminator/use question; no Generic retry |
+| CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
+| FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 
-Actual advancing directions5: the complete Portfolio K/E/L/U response is with the designated DM for
-separate ACVC, FOLR, RCLE and FSD intake, counted once per direction; MGTAP has active accountable
-DM authoring for one bounded next-use input. ACPS and CADC finished finite cleanup and no longer fill
-a slot. No queued intention or ended allocation is used to fill the count, and no direction is stopped
-to manufacture capacity.
-
+Working-set target: **4**; existing overlap drains without interruption or fifth-slot admission.
+Recorded advancing directions: **5** — ACPS, MGTAP, RCLE, ACVC and FOLR. Each has an active assignment
+with its original DM. Completed Portfolio intake, CADC disposition, FSD U, old experiments and cleanup
+do not fill a slot. CADC is PARKED only because the complete Portfolio decision explicitly selected it.
 One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
 to ACPS support only, unknown unless directly measured. MGTAP T and CADC exclude that shared item;
 each direction still counts its own implementation-through-cleanup and later Root integration once.
@@ -29,13 +26,12 @@ each direction still counts its own implementation-through-cleanup and later Roo
 | Role | Task | Runtime |
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
-| Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
-| Monitor | 01a095d0-21ee-7c02-9d97-3681b5678200 | Independent Luna/low; ACPS, MGTAP and CADC terminal receipts delivered, active_set empty and goal complete |
-| Relay | 01a095ca-8676-74e1-b78c-ea459d41e905 | Independent Luna/low; Windows READY, dedup inherited |
 
-Read live .codex/hmasd-transport.toml, hmasd-monitor.toml and hmasd-relay.toml from the
-Windows main checkout. Native completions go through Relay; experiment and Pro receipts
-come directly to Root. Do not send new work to a retired task or a historical packet address.
+Read .codex/hmasd-transport.toml for Agentify/provider configuration. Each DM creates/reuses
+its native Transport, binds its exact ID in new handoffs, and receives archives directly. Root and DM use native
+long waits; each DM resolves and records its own reusable native Luna/low monitor identity on
+adoption. Experiment events return directly to DM. Root-action completions remain native.
+Historical packet addresses are not new dispatch routes.
 FOLR's300-second support value is an owner-clarified reference: recorded308.8422538 is not
 by itself a hard stop. Native/scientific scope and remaining explicit complete-work limits persist.
 Historical run roots, fixed SHAs and complete data remain in their scientific evidence records.

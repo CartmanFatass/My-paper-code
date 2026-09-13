@@ -1,0 +1,122 @@
+{
+  "id": "20260912-root-021",
+  "created": "2026-09-12T18:34:34-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "五项Pro最终投资：ACPS配对、CADC停放、两项咨询及条件RCLE B",
+  "context": "原作者完整核对248行/65519 Git bytes和37固定来源，无具体规范冲突。Pro选择ACPS1500秒新pair、CADC明确可逆PARK、MGTAP一次UNKNOWN成本判断、FSD本轮不LONG，RCLE另行UNKNOWN咨询及条件1800秒B；作者已记录决定，Root集成/实际执行待交接。",
+  "options": [
+    {
+      "key": "keep",
+      "label": "retain the formed Pro disposition",
+      "consequence": "保留并执行完整Pro五项裁决及非互换上限；仅CADC改变生命周期，RCLE B仅在同方案原家族合规获选后生效。"
+    },
+    {
+      "key": "refuse",
+      "label": "override the Pro disposition at the next clean boundary",
+      "consequence": "作为异步覆盖限制相应尚未执行投入；保全已发生效果，不推断删除、重跑或其他方向停放。"
+    },
+    {
+      "key": "amend",
+      "label": "override the Pro disposition per the comment at the next clean boundary",
+      "consequence": "只修改明确指向的分项与范围，保留独立已接受工作和完整证据，按实际授权处理后续。"
+    }
+  ],
+  "recommended": "keep",
+  "auto_applied": "keep",
+  "dm_reason": "完整原节点决定已在问题/owner/spec范围内形成；无需逐项owner批准，RCLE选择-only仍保留为close-call反选。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L142",
+  "brief": "docs/research/portfolio/owner/briefs/portfolio/2026-09-12_POST_KELU_INVESTMENT.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "记录并执行完整Pro五项裁决：ACPS新配对、CADC明确PARK、MGTAP一次判断、FSD不追加、RCLE家族选择及条件B；无需逐项批准，可异步覆盖。",
+    "changes_if_approved": [
+      {
+        "target": "ACPS新对象投入",
+        "from": "B01结束，无新额度",
+        "to": "1新unchanged pair；450/whole arm、900native、600hard support、1500complete；无额外arm/retry/咨询"
+      },
+      {
+        "target": "CADC生命周期",
+        "from": "ACTIVE/HIGH/recasts0",
+        "to": "明确可逆PARKED/HIGH/recasts0；Root主表应用后27=16ACTIVE+11PARKED；不作科学证伪"
+      },
+      {
+        "target": "MGTAP下一用途",
+        "from": "A/U/P提案未选择",
+        "to": "1原Convergence COND512/DENSE768-or-decline判断及完整intake；完整成本UNKNOWN，零B"
+      },
+      {
+        "target": "FSD当前投入",
+        "from": "U完成，LONG未资助",
+        "to": "本轮不买LONG/重复U；有限可选I1280与D0默认、ACTIVE/HIGH保留"
+      },
+      {
+        "target": "RCLE家族选择及条件投入",
+        "from": "L只有单一提案，无新家族/实验资金",
+        "to": "1原节点家族选择、完整咨询成本另行UNKNOWN；只有原方案合规获选才激活900native+900support=1800complete的1fit/4roles B"
+      }
+    ],
+    "if_refused": "依实际异步覆盖停止相应尚未执行的投入或调整所指条目；保留已经发生的成本/证据，不推断重跑、删除或其他方向生命周期。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+        "quote": "For ACPS, select **new hard limits of 450 seconds per whole native arm, 900 seconds summed native, 600 seconds additional invoked support and 1,500 seconds complete future invoked work**.",
+        "why": "Pro明确给ACPS新配对上限，作者已完整核对，没有从旧款提取余额。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+        "quote": "**Only CADC's lifecycle changes: ACTIVE to PARKED, retaining HIGH priority and recasts 0 as recorded attributes.**",
+        "why": "CADC生命周期由本次Portfolio明示决定，Root不是由对象结束推断停向。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+        "quote": "ACPS replication and CADC PARK are not selected by ranking their two negative point estimates or counting favorable worlds. ACPS's original DM identifies a concrete training-history question for continued mixed-fleet development. CADC's latest refresh explicitly recommends no unchanged repetition and supplies no different decision-ready use; its main competing purchase is further design rather than a selected learning object.",
+        "why": "ACPS与CADC不同选择依据具体下一用途，不是用两个负均值排序。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+        "quote": "The strongest smaller investment is **the same four ACPS/CADC/MGTAP/FSD choices with RCLE selection only**, leaving its B uncommitted. It avoids uncertain implementation and quadratic phase-scoring work while retaining the proper family decision.",
+        "why": "RCLE只买选择是真实更小反选；条件B的实现与N²工作可能无有效primary，属于明确close-call。"
+      },
+      {
+        "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_INTAKE_20260912.md",
+        "quote": "ADVERSE",
+        "why": "ACPS首对25/32不利；新增一个pair可能仍不改变SHARED当前用途，也不建立稳定性。"
+      }
+    ],
+    "uncertainty": [
+      "新ACPS/RCLE实际native速率和完整支持成本未知；数字为新hard cap，旧耗时不是预测或余额。",
+      "两项原节点咨询完整documentary/invoked/provider/agent成本分别接受UNKNOWN，不假称便宜。",
+      "RCLE原节点拒绝或实质改变候选则条件B不激活，不能换方案继续花。",
+      "CADC PARK可逆且非不可学习；具体新用途、可信证据或成本事实可触发新判断。",
+      "Root工作集须逐方向核对真实推进；本Portfolio作者、完成返回和清理不冒充独立链。"
+    ],
+    "cost": {
+      "compute": "ACPS1500s；RCLE仅条件生效后1800s，非互换合3300s；MGTAP与RCLE两项完整咨询各UNKNOWN另计；作者新科学exposure=0。",
+      "owner_time": "无需逐项确认；可异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "完整Pro决定已形成；Root整合与独立派发。RCLE B只等原家族选择及实际技术/资源准入。"
+    },
+    "verdict_text": "**Final disposition:** ACPS one unchanged pair at450/arm,900 native,600 hard support,1,500 complete future invoked seconds; CADC reversible PARK/HIGH with no new research purchase; MGTAP one original-node judgment/full intake at explicitly unknown complete documentary cost and zero empirical grant; FSD no present LONG or repeated U, preserving limited optional I1280 and D0 default; RCLE one family/use selection at separately accepted unknown complete documentary cost, with exact900-native/900-support/1,800-complete B funding conditional on conforming selection. The strongest smaller choice is RCLE selection only. Revisit on a concrete changed use, the selected new observation/decision or a material cost/readiness fact—not an automatic quota, favorable-result search or extra approval cycle. No specification exception, new registration, fusion, C promotion, formal UAV entry or other lifecycle change is selected.",
+    "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T01:35:29+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/INTAKE.md",
+      "state": "applied",
+      "summary": "作者已完成整份答复conformance并将五项决定、实际caps、CADC显式PARK、RCLE条件及未知独立咨询成本写入decision/owner/audit/Oracle。Root main应用及原DM后续执行尚待该已发布交接；未声明实验/Pro已启动。"
+    }
+  ]
+}

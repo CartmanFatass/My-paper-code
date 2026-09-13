@@ -1,0 +1,152 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-12-mgtap-cond512-dense768-use-01",
+  "source_thread_id": "01a09717-83a6-7132-8488-53e0070bf8ad",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "direction_id": "metric_ground_transport_allocation",
+  "conversation_id": "6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "59d441e25fb5623596b042f5f319cbd75a176c3e",
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/mgtap",
+    "base_sha": "59d441e25fb5623596b042f5f319cbd75a176c3e",
+    "response_path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/18"
+  },
+  "scientific_question": "For MGTAP after three mixed mean-COND/DENSE observations and the adverse TOP8221 result, make exactly one original-node use/design decision: select one fresh mean-COND512 versus intact-DENSE768 B/EXPLORE as a consequential next use question, or decline this specific conditional-pooling carry-forward now. The intended native fork is whether keeping the mean-conditioned representation at512 training episodes merits further development when the same-information intact DENSE instead receives768 ordinary training episodes. Extra DENSE training is not known to improve return. This deliberately unequal-data/unequal-cost package comparison is not an equal-time, equal-budget, sample-efficiency-curve or query-causal comparison. Portfolio has purchased this one judgment and full intake at UNKNOWN complete documentary cost, with zero code/model/measurement/empirical funding. DENSE remains default and MGTAP ACTIVE/MEDIUM.",
+  "deliverable": "Return one explicit final scientific selection between this exact COND512/intact-DENSE768 candidate and declining it, grounded in what its next observation would change. Explain the strongest opposition and why the runner-up loses; challenge the author's assumed decision value. Do not infer the unobserved sign from old results. If selecting B, state the smallest sufficient real-learning object, unchanged host/legal information/comparator, one-pair/all32 native-J primary, own MEI/result reading, claim ceiling and complete empirical investment need for a separate Portfolio decision. Include dominant per-arm work and all necessary future implementation/check/review/source/command/Git/staging/admission/Monitor/collection/intake/integration/retention/cleanup once, with actual rates and full costs UNKNOWN where unmeasured; any proposed new cap is a recommendation, not an allocation or reuse of M/T. If declining, explain why this bounded comparison does not presently justify its observation and state a concrete fact that could make this same use question worth revisiting; do not invent a substitute design/consultation or decide Portfolio lifecycle. One complete answer and original-DM intake end the documentary allowance. No implementation, numerical analysis, model/import, test, probe, experiment or second question is requested.",
+  "claim_ceiling": "Direction-tier selection or refusal of this one bounded use/design question. A selected future B could establish only its realized learned-package native outcome at the stated exposures on this fixed host; one training pair cannot estimate training-population stability. Retain every prior sign and historical rule without a pooled primary or direct TOP-versus-mean contrast. No causal geometry/attention/credit result, guaranteed longer-training benefit, transfer/scaling/churn, exact maximum, headroom certificate, new family alternative, recast, C/UAV promotion or Portfolio investment/priority/lifecycle follows.",
+  "reference_files": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/EXECUTION_MAPPING.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "purpose": "Read only the MGTAP row and MGTAP paragraph in the bounded-application section. Adopt this exact one-question/full-intake documentary allocation and zero empirical grant. Other directions and their conditional investments are outside this question.",
+      "provenance": "Conforming Portfolio investment applied by Root at this version. UNKNOWN complete documentary cost is accepted; there is no MGTAP conditional B."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md",
+      "commit_sha": "e854bd6f11b3ca0b95783fbd6fc49c75b6095ed3",
+      "purpose": "Read sections2,3,5 and section4 no-addition rationale for the one COND512/DENSE768 use proposal, accepted contrary evidence and source-grounded work/cost limits. The current TASK supersedes its pre-investment state: A is now purchased. U/P are historical Portfolio alternatives; the seven-UAV paragraph is excluded from the current question.",
+      "provenance": "Original DM proposal, not a final direction verdict. Existing retrieval supplies no DENSE768 efficacy or novelty finding; training-length benefit is unknown."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/next_use_20260912/EXPOSURE_AND_COST.json",
+      "commit_sha": "e854bd6f11b3ca0b95783fbd6fc49c75b6095ed3",
+      "purpose": "Read prospective one-pair counts only: COND512/DENSE768, H256/32 final per arm,344064 team ticks/2560 Adam/8273920 actor-row uses. Retain unknown rates/costs and unassigned master.",
+      "provenance": "Static source-derived integer arithmetic from prior documentary readiness; not an executed B, measured timing, allocation or balance."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_TOP_QUERY_B01_INTAKE_20260912.md",
+      "commit_sha": "bf175fafbe916b174e553801a01c6378597f094c",
+      "purpose": "Read sections1-3 for accepted TOP_ADVERSE, fixed rule/counts, same-host limits and complete native377.11s. The ended T boundary supplies no current allowance.",
+      "provenance": "Complete original-DM technical/scientific intake. TOP is not a mean-COND replicate; no new raw-data reanalysis is requested."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md",
+      "commit_sha": "6561056ed6f2f51d57801d315af2ca8749cee6d2",
+      "purpose": "Read sections1-3 for three separately preserved mean-COND fitted-pair outcomes, uncertainty, DENSE comparator and complete native361.85s. Its no-consultation/no-successor language belongs to the ended M grant.",
+      "provenance": "Accepted original-DM intake; original source/counts/private-stream/primary checks remain evidence. No pooled primary or historical rule is rewritten."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "bf175fafbe916b174e553801a01c6378597f094c",
+      "purpose": "Read only the TOP fresh8221 adverse and conditional pooling fresh8214 conclusion sections for accepted mechanism-level support/contradiction, DENSE default, absent headroom and retained old family boundaries.",
+      "provenance": "Accepted direction science. Historical execution/lifecycle text is provenance; current Portfolio mapping and TASK control the new allowance."
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_conditional_pooling_b01/study.py",
+      "commit_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+      "purpose": "Read constants, phase/reset mapping, fit/rollout/update loops and binding_errors. Both arms currently hardcode512; source counts and checks need an ordinary future adaptation only if science and new empirical investment are later selected. Old8214 identity and450/900 constants are not the new object.",
+      "provenance": "Published source evidence, not executed by this question. Its whole cost chain includes construction, collection, replay, final evaluation, publication/readback and exit; DENSE768 is unimplemented."
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/conditional_pooling.py",
+      "commit_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+      "purpose": "Read the mean-COND/intact-DENSE pair construction, protected common/private parameter semantics and all32 paired native-J primary. No TOP arm is selected for this question.",
+      "provenance": "Accepted implementation evidence for the retained mean-query package and competent DENSE, not a guarantee that additional DENSE exposure improves return."
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py",
+      "commit_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+      "purpose": "Read DenseResidualEncoder and the original mean-query ConditionalResidualEncoder only: raw108, legal masked partner/user features, all-partner context, projection. TOP definitions are historical counterevidence, not another candidate.",
+      "provenance": "Concrete source-grounded information/action-path evidence. The geometric representation is not a causal or optimal-transport claim."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "commit_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+      "purpose": "Read make_real, critic_features, HoldState and team-reward publication for the actual fixed5UAV/50uniformusers/H256 host and native J law. No seven-UAV/cardinality or duration object is authorized.",
+      "provenance": "Mapped real native environment/critic/return wrapper reused by MGTAP. Common host and legal actor information are preserved; no added communication or privileged input."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "commit_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+      "purpose": "Read collector/PPO/recurrent state and optimizer exposure used by this MGTAP path; preserve CPU FP32/thread1, own trajectories and fresh owned learner states in any later candidate. No imported scientific module or learner runs now.",
+      "provenance": "Accepted reusable learner path. Five actors and four PPO replays are algorithm work, not independent training units or validation dimensions."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "purpose": "Adopt sections3-5.2,11.4,11.7-11.10: B/EXPLORE/common integrity, independent units, MEI/headroom, proportionate scientific question and checks. Section11 controls.",
+      "provenance": "Current normative evidence requirements. No causal localization, full support, replay, exact upper, significance threshold or stronger C burden is added."
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "purpose": "Adopt sections4-5 and7.1,7.3 for minimal necessary engineering scope, eventual concise L0 and independent review only for actual high-risk changes. Current documentary task needs none of section4.",
+      "provenance": "Current engineering authority; no code, test, verification probe or empirical launch is authorized by this question."
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "purpose": "Adopt sections1-4 for original-node selection/standing delegation and Portfolio separation, section6 for the shared branch, and section7 only if discussing a future invocation. This TASK and the exact MGTAP Portfolio mapping bound the current purchase.",
+      "provenance": "Current Windows control and owner authority. An ended finite grant does not stop an ACTIVE direction; no local Portfolio lifecycle, priority, registration or capacity selection follows."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "purpose": "Read sections2-4 and6 for legal own history, multi-agent partial observability/co-adaptation, finite learning and uncertainty level.",
+      "provenance": "Explanatory knowledge, not extra authority or a universal launch requirement."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "purpose": "Read complete-method-versus-component comparison, randomness hierarchy and return/cost interpretation. Unequal training exposure is part of the two complete procedures.",
+      "provenance": "Explanatory knowledge: one fitted pair with32 final worlds gives conditional evaluation uncertainty, not training-population stability."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/EXPOSURE.json",
+      "commit_sha": "59d441e25fb5623596b042f5f319cbd75a176c3e",
+      "purpose": "Read current documentary allowance and zero code/model/RNG/train/eval/checkpoint/reanalysis/test exposure; complete author/provider/invoked cost UNKNOWN.",
+      "provenance": "Machine-recorded author preparation facts. One question is authored and no provider Send is made by the DM; future provider acceptance belongs to Transport."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/ISSUE_SNAPSHOT.json",
+      "commit_sha": "59d441e25fb5623596b042f5f319cbd75a176c3e",
+      "purpose": "Read the refreshed Issue18 body snapshot. The sole older comment is historical TOP delivery, not a current request/decision. The fixed TASK/manifest is the scientific scope; mutable Issue delivery readback only establishes actual new delivery.",
+      "provenance": "Direct gh Issue18 readback, body matched authored current scope. No old prompt, current route or extra authorization is inferred from discussion history."
+    }
+  ],
+  "constraints": [
+    "The exact accepted Portfolio mapping chooses one original convergence question COND512/intact-DENSE768 or decline. Its documentary/invoked/provider/agent complete cost is expressly UNKNOWN. There is zero empirical grant, including no conditional B. Existing mean-COND-family eligibility and the current scientific choice are distinct from new empirical investment; no old M/T balance or no-successor clause is reused to fund or obstruct this authorized judgment. The generic node continue/park/close/recast wording is narrowed by this exact assignment: no lifecycle PARK/CLOSE, new recast or alternative family is requested.",
+    "Preserve separately mean-COND8212 +.005761321371348559 J (SE.00888326841451271,19positive/13adverse),8213 -.02246957345594415 (SE.004312411137154014,5/27),8214 +.02447811898058116 (SE.004658159652932406,26/6), and TOP8221 -.0684509798102144 (SE.009502685781897066,4/28). The one above-MEI mean-COND point is strongest support; the adverse mean-COND pair contradicts consistent benefit. TOP concerns a different query and no causal explanation of its loss is known. All old REL negatives, earlier M=no facts, family boundaries, recast count and formal C/UAV state remain.",
+    "Sole candidate: retain the accepted original mean-visible-partner COND computation and intact DENSE, raw108 legal local information, all-partner context, private GRU64 and recurrent PPO/optimizer/native primitive velocity/reward. Keep fixed5UAV/50uniformusers/H256 native law, CPU FP32/thread1. Both fresh arms learn their own trajectories; same-information DENSE is competent but untuned. Matching tuned headroom is absent, not zero or a preliminary study requirement. No actor/critic information expansion, communication, ID/roster/host change or seven-UAV alternative.",
+    "Prospective only: one unscreened matched master and two fresh fits; COND512 train /DENSE768 train,32 final worlds per arm, H256. First512 reset addresses can be matched while trajectories/private streams remain own-arm. Current train offsets1000-1767 and final2000-2031 are disjoint; duration-only unused stream addresses4000-4767 versus5000-5031 remain disjoint. No new master is bound now; no checkpoint is continued. Existing512-only loops and binding checks cannot be invoked unchanged as768.",
+    "Candidate primary is mean of all32 ordered final J(COND512)-J(DENSE768), J=sum native team rewards/256, with all raw arm and paired values, dispersion and conditional paired SE. Suggested absolute MEI.01J uses the inherited .014 coverage contribution of one continuously connected user as scale. Strict above+.01 supports only a local package signal; inclusive[-.01,+.01] retains sign without equivalence or beyond-MEI gain; strict below-.01 is adverse for the exact package. Incomplete/damaged primary has no paired polarity. DENSE remains default in every outcome; no automatic successor, stability or component attribution.",
+    "This single768 alternative is a moderate predeclared exposure choice, not an empirically calibrated rate or a training-length search. There is no DENSE512 third arm, TOP/H/causal arm, extra endpoint/panel, fourth unchanged COND pair, TOP repeat, tuning, best-seed/checkpoint selection, changed primary or search grid. Without a contemporaneous DENSE512 arm the new result cannot identify the effect of longer DENSE training; that stronger attribution is not this use question.",
+    "Supplied static counts: COND131072 training ticks,256 two-episode rollouts,1024 Adam; DENSE196608 training ticks,384 rollouts,1536 Adam; each8192 final ticks. Total1344 episodes,344064 team ticks,2560 Adam,8273920 actor-row collection/evaluation/replay uses. Dominant multipliers are two learners,5 actors,256 ticks/episode and4 PPO replay epochs; no candidate/trajectory/controller search dimension. One matched trained pair is the independent unit;32 final worlds are not32 training seeds.",
+    "Whole-arm cost is initialization+collection+recurrent PPO/Adam replay+sole final evaluation+checkpoint/primary publication/readback+exit. Historical complete native8214 pair361.85s (COND198.38539502117783,DENSE163.4646049788222) andTOP8221 pair377.11s (TOP207.89017485710792,DENSE169.2198251428921) are anchors only. No identified DENSE768 component rates, complete new support/peak-memory cost or numerical cap is available. Multiplying old total wall by1.5 is not a measured complete projection. Unknown is not zero; no profiling pilot/full cost reconstruction is purchased.",
+    "Current authoring exposure is zero models/RNG/environment instances/train/eval/optimizer/checkpoint loads/numerical reanalysis/tests/cost probes. One Pro question/full intake is the entire documentary allowance; provider Send is exclusively Root-routed Transport. The author reuses accepted intakes and prior static arithmetic, with no new measured result. Scientific source files are read-only evidence; do not import or run them.",
+    "Apply evidence-spec11.8-11.10 to selecting this observation. A useful bounded B uses real training and sampled native returns; no exact policy maximum, exhaustive/beam/best-of-many search-before-learning, full support/history/causal reconstruction, stronger C burden, fixed seed quota or positive-first gate. If the proposed use question is unpersuasive or too costly, decline it on that basis rather than adding another prerequisite A, cost study or broader design cycle.",
+    "Scientific reading assumption: data and optimization exposure are part of a complete method; unequal exposures can address a stated finite use choice while forfeiting equal-budget and component-causal readings. Existing local source/library reading supports representation motivation only, not DENSE768 efficacy or exhaustive novelty coverage. Use only the listed knowledge passages and fixed evidence, not unlisted linked histories or current execution snapshots. The present scope overrides old consultation/no-successor and pre-investment state in historical sources without rewriting their science.",
+    "A selected candidate still returns for new Portfolio empirical investment after original-DM intake; do not claim that this answer grants compute. Decline closes this proposed carry-forward only and leaves current ACTIVE/MEDIUM/DENSE default in force. No alternative query, host, family, extra consultation, silent science override or new approval layer is selected."
+  ],
+  "response_schema": [
+    "One conclusion-first final choice: the specified bounded B use question or decline, with its concrete action-changing rationale and strongest alternative.",
+    "Exact existing evidence supporting/opposing that choice, observation versus inference, independent unit, and retained scientific/lifecycle limits.",
+    "If B selected, its complete proposed empirical need, exposure/comparator/primary/MEI/reading, necessary future support once, cost unknowns and proposed limits clearly separated from any actual grant; if declined, bounded reason and meaningful revisit fact without a substitute task.",
+    "Actual fixed source access and any material gap. Conforming selection or a precise inability to decide, never a speculative empirical verdict."
+  ]
+}

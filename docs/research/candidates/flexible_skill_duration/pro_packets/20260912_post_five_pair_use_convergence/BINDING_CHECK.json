@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-09-12T23:24:25.792464+00:00",
+  "request_id": "2026-09-12-fsd-post-five-pair-use-convergence-01",
+  "task_commit": "a8a5a4decf1e006c9723a29a40dd1fbb64be8a36",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/a8a5a4decf1e006c9723a29a40dd1fbb64be8a36/docs/research/candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/TASK.md",
+  "task_bytes": 24937,
+  "task_sha256": "733bac91fca40f1391143177aa8169f0b630d95ec583e321ce2b7bef7c8cf690",
+  "observed_remote": "a8a5a4decf1e006c9723a29a40dd1fbb64be8a36\trefs/heads/codex/fsd",
+  "committed_TASK_equals_bound_working_bytes": true,
+  "fixed_reference_count": 14,
+  "dispatch_state": "READY_TO_DISPATCH",
+  "actual_browser_send_count_by_author": 0,
+  "actual_Transport_dispatch": "not yet; Root action",
+  "source_thread_id": "01a096d5-4a4b-7543-8e06-66977d1ef754",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "operator_thread_id": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+  "check_correction": "An initial local assertion expected the TASK SHA in dispatch_prompt, which is the app-facing local-handoff instruction. Correct check uses transport_request.prompt, the rendered provider payload; exact task/binding bytes unchanged."
+}

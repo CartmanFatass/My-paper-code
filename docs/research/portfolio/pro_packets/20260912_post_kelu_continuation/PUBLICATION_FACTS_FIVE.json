@@ -1,0 +1,412 @@
+{
+  "recorded_utc": "2026-09-13T00:03:34.574203+00:00",
+  "state": "ONLY_READY_HANDOFF_FIVE_NOT_SENT_BY_AUTHOR",
+  "request_id": "2026-09-12-post-kelu-marginal-investment-01",
+  "direction_ids": [
+    "actuator_conditioned_partial_sharing",
+    "contention_aware_decentralized_communication",
+    "metric_ground_transport_allocation",
+    "flexible_skill_duration",
+    "roster_consistent_latent_exploration"
+  ],
+  "source_thread_id": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "operator_thread_id": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+  "relay_thread_id": "01a095ca-8676-74e1-b78c-ea459d41e905",
+  "binding": "portfolio:cross_direction",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "branch": "codex/portfolio",
+  "checkout": "C:/Projects/HMASD-worktrees/codex-portfolio",
+  "input_sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+  "task_sha": "4def7b403881ad336393c64da18776d1172090e8",
+  "task_path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/delivery_five/TASK.md",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/4def7b403881ad336393c64da18776d1172090e8/docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/delivery_five/TASK.md",
+  "task_git_bytes": 44982,
+  "task_sha256": "aa10756cf3d7fe41c4753b96102427b1dc856b79665fb1aefa291b45b70de974",
+  "prompt_utf8_bytes": 1919,
+  "prompt_sha256": "dc097823e7bdb2d46f8dbb91ecc12d81a77fdf27dc0635924ed74f6085262810",
+  "reference_count": 37,
+  "reference_manifest": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md",
+      "sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+      "git_bytes": 27308,
+      "sha256": "aa6ff47741f96c0e58a99492cbe849c1a6e9e396c87ef5c0d732cd335a1e6652",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/FACTS.json",
+      "sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+      "git_bytes": 28327,
+      "sha256": "d56780875abb434201c43bd59ca23e25cf7ae69a7659762b87f37caeeb0ba403",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/PREPARATION_INTAKE.md",
+      "sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+      "git_bytes": 5087,
+      "sha256": "e5f64169986088eec01fb0100983cc4aa5bbc8ffa8798101211778e29d9aeb91",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_CONTINUATION_NEED_20260912.md",
+      "sha": "bc4abbe937297f466406800aba607c421cc8398c",
+      "git_bytes": 2659,
+      "sha256": "1da435d20e1e2c9e5524ce3e6abc3abdefab8809a294624d69f2dc7e65506e38",
+      "observed_published_refs": [
+        "origin/codex/acps"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_INTAKE_20260912.md",
+      "sha": "bc4abbe937297f466406800aba607c421cc8398c",
+      "git_bytes": 7281,
+      "sha256": "a94b7772cdefc8354dfc57991caeea530d43c02e16ce829dc36ce3c254ebe803",
+      "observed_published_refs": [
+        "origin/codex/acps"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_SCIENCE_CARD_20260912.md",
+      "sha": "bc4abbe937297f466406800aba607c421cc8398c",
+      "git_bytes": 11352,
+      "sha256": "f1215cb85d96dd6b28d687e4190baa7f486a9884e1c180db60500783c566b930",
+      "observed_published_refs": [
+        "origin/codex/acps"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/DIRECTION.md",
+      "sha": "bc4abbe937297f466406800aba607c421cc8398c",
+      "git_bytes": 4888,
+      "sha256": "8853f5e4156a7aa652e3b4f130a9311ff334c1c5c772196a2bd0f134ea081e31",
+      "observed_published_refs": [
+        "origin/codex/acps"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/contention_aware_decentralized_communication/CADC_B01_INTAKE.md",
+      "sha": "6ce0966c957c7420024b67834617e122caf874de",
+      "git_bytes": 8943,
+      "sha256": "b981725a22d0dfb86886e04d331795fe7e71a5d3048e840bfc937f2e1a6ef0f6",
+      "observed_published_refs": [
+        "origin/codex/cadc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/contention_aware_decentralized_communication/CADC_B01_CARD.md",
+      "sha": "6ce0966c957c7420024b67834617e122caf874de",
+      "git_bytes": 12655,
+      "sha256": "f82105d386d31234f630f6273b479e5c1e4f016c5d78d58304b7db39e507f7e5",
+      "observed_published_refs": [
+        "origin/codex/cadc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/contention_aware_decentralized_communication/DIRECTION.md",
+      "sha": "6ce0966c957c7420024b67834617e122caf874de",
+      "git_bytes": 5579,
+      "sha256": "c31d10d12003d32dfd1f9aead54ef62222a1dd5d4acd1f4ae3e537009030592a",
+      "observed_published_refs": [
+        "origin/codex/cadc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_TOP_QUERY_B01_INTAKE_20260912.md",
+      "sha": "8e2c19542adb01ad2525460fa7e6e4ddfe4b8382",
+      "git_bytes": 10681,
+      "sha256": "aa965de8e075a7c9c1ff3ecdf3162cb299236bebebaffd495e3570a18bc0fb50",
+      "observed_published_refs": [
+        "origin/codex/mgtap",
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "sha": "8e2c19542adb01ad2525460fa7e6e4ddfe4b8382",
+      "git_bytes": 55287,
+      "sha256": "c83c7f162c098fad6dcdb3e6d4b564ea5df3b73a501a45fb8e9c748cc7ab027f",
+      "observed_published_refs": [
+        "origin/codex/mgtap",
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_POST_FIVE_PAIR_DECISION_INPUT_20260912.md",
+      "sha": "bc8d619db494bbbb23d32a70c846dee92fbfb083",
+      "git_bytes": 10510,
+      "sha256": "02359bc808ab9b7a2ff410d9251659dc32900a8ae3e4585ef21ab491cfe6005e",
+      "observed_published_refs": [
+        "origin/codex/fsd",
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+      "sha": "7dbbc9e6b9453eac32f9ff8212fe897fc8ccbbcc",
+      "git_bytes": 10850,
+      "sha256": "5dc98b7b08550dd49cd09ff7f87eaceb2a7861485b064dbeb7ca038355c52ff5",
+      "observed_published_refs": [
+        "origin/codex/fsd",
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "sha": "7dbbc9e6b9453eac32f9ff8212fe897fc8ccbbcc",
+      "git_bytes": 57584,
+      "sha256": "c2a5e735d29924ee2dda379ff7df0925f96cb8d54fd41c5ba718f7dc130e0df0",
+      "observed_published_refs": [
+        "origin/codex/fsd",
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "sha": "d6c3a0eec00d7cb647a8313d1d3500f4fb365a51",
+      "git_bytes": 12187,
+      "sha256": "20fce943209587cbeed10ca357ed5a1544008ab3cedd46c722e8520aa8ecb17a",
+      "observed_published_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "sha": "d6c3a0eec00d7cb647a8313d1d3500f4fb365a51",
+      "git_bytes": 4070,
+      "sha256": "98932c7f521c4ab4459697a72ca80cde94bba1c48289bd5fa3d0d2c4f8d619c4",
+      "observed_published_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/EXECUTION_MAPPING.md",
+      "sha": "1c970ce99fbb0497b437f523e5951e03a07452b3",
+      "git_bytes": 12042,
+      "sha256": "2d36e1dc8fe8ce9d0382067a3a446da42640dd8a91080563a51aa42c4e599cb6",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-12-existing-four-direction-investment.md",
+      "sha": "1c970ce99fbb0497b437f523e5951e03a07452b3",
+      "git_bytes": 4050,
+      "sha256": "1c9ec88b7832ce911c6262600205e67b3893a7faed25185a7075a4e704decb88",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md",
+      "sha": "e854bd6f11b3ca0b95783fbd6fc49c75b6095ed3",
+      "git_bytes": 9396,
+      "sha256": "825359aacb14fb0c815d474dab0e0f3dec72733a6da4954aa75d1c0421bf7337",
+      "observed_published_refs": [
+        "origin/codex/mgtap",
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/next_use_20260912/EXPOSURE_AND_COST.json",
+      "sha": "e854bd6f11b3ca0b95783fbd6fc49c75b6095ed3",
+      "git_bytes": 1793,
+      "sha256": "9a6a9dc682cc294f1fa09b4ea455f158244f20d6aa8cab3a189c72fd239831ae",
+      "observed_published_refs": [
+        "origin/codex/mgtap",
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+      "git_bytes": 46507,
+      "sha256": "17ddbecea8d2ad5f29b899d2d672322b36b893b343b8d7518fa75e6a031c41a6",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+      "git_bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+      "git_bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+      "git_bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+      "git_bytes": 13467,
+      "sha256": "c13c9e7687026048a1712e1c8d56a659a8da71c905c4e3a8a690b1d13671b2a3",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+      "git_bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+      "git_bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/RCLE_ITEM.md",
+      "sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+      "git_bytes": 11140,
+      "sha256": "326f9fb9d68de9112760d38b019fde9a124d807c0ef5107a187ef7bae247009b",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_L_DESIGN_INTAKE_20260912.md",
+      "sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "git_bytes": 11291,
+      "sha256": "cf086a50573e812e97cca45e59abd2aa7da6d761aa019d336b448e73a79a40f0",
+      "observed_published_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_JOINT_QUOTA_PHASE_B_PROPOSAL_20260912.md",
+      "sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "git_bytes": 22762,
+      "sha256": "6282faf6b2025d8f9e246d909a0f487cbd94d1286ab72e3007e9e1c747006c0d",
+      "observed_published_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/l_design_20260912/WORK_AND_SCOPE.json",
+      "sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "git_bytes": 3569,
+      "sha256": "dbe31be4c87e36f47bc35a5ce985a2accd3a00ff5e8bf335ec3ec76d727091be",
+      "observed_published_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/l_design_20260912/LITERATURE_SCOPE.json",
+      "sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "git_bytes": 3216,
+      "sha256": "cb5d5f6c8a233cced3863ef775556484302a0a88a2517d34297e99c378ea6d68",
+      "observed_published_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "git_bytes": 55391,
+      "sha256": "eed8f96249f7f9d99723cf134bf3629b1a7a54cb36f574c5621de87d1020856a",
+      "observed_published_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TARGET_BOUND_COMMITMENT_FRAGMENTATION_VALUE_SCIENCE_CARD.md",
+      "sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "git_bytes": 42923,
+      "sha256": "1c48d25b365e4d1d0d251a301c6f66ffc8102bae315d8c1b4b29780ec1b48bd8",
+      "observed_published_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md",
+      "sha": "7dbbc9e6b9453eac32f9ff8212fe897fc8ccbbcc",
+      "git_bytes": 11535,
+      "sha256": "71a034aa9aad2ddc4554548b29b0e2d5a81f7628252720aa628d051f733edddf",
+      "observed_published_refs": [
+        "origin/codex/fsd",
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "sha": "c49d20ac71a9cbc511252a2ea4f7f65306824d6b",
+      "git_bytes": 4038,
+      "sha256": "4dae3729dc54db39599a689712fa1f6ccdb80d5fd2f08e96757bcf8686e6e0b9",
+      "observed_published_refs": [
+        "origin/codex/portfolio"
+      ]
+    }
+  ],
+  "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/17",
+  "response_path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+  "supersession": {
+    "handoff_sha": "b24d93b30b72ae353827ee56eb5a6337d19399c4",
+    "task_sha": "fb2a219df180ef29419d65e635b70eb985502729",
+    "relay_received": true,
+    "root_fact": "Root explicitly confirmed no Transport dispatch and no provider acceptance before replacement",
+    "status": "SUPERSEDED_UNSENT_DO_NOT_DISPATCH",
+    "replacement_folder": "delivery_five"
+  },
+  "root_action": "Integrate exact author five-input c49d20ac7, five-TASK4def7b403 and final HANDOFF commit, with old author path prerequisites d902f132d/fb2a219df/b24d93b30 only if not already integrated. Do not dispatch any old4 artifact. Only delivery_five/HANDOFF at the new final commit is ready. Use existing Transport once and return full response to original author.",
+  "input_only_merges_excluded": [
+    "32afc7b7e2b37176adf5776482221b3ebafebbd8",
+    "4245225a08646a3842f23c72a599fec4e580365f",
+    "f2d7d5b82e34a1e073fc78b69a1f602e2b7f64f2",
+    "34f7c19954fffc7b6fe1bc3fba8df03818a52eab",
+    "fc8a2a9080a9f70acd29eef13656ea704a748f17"
+  ],
+  "author_scientific_exposure": 0,
+  "author_pro_send": 0,
+  "owner_item": "20260912-root-020",
+  "superseded_owner_item": "20260912-root-019",
+  "no_auto_applied_investment": true,
+  "currentness": "RCLE L design complete c6fd4d8f0; FSD U full original-DM intake7dbbc9e6 completed before replacement binding and included in37 refs. No new RCLE family/implementation/Pro/experiment or FSD LONG allowance. Source-control snapshot is not a verified current independent-chain count."
+}

@@ -1,0 +1,68 @@
+{
+  "source_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+  "preparation": {
+    "source_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+    "remote_worktree": "/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f",
+    "remote_bundle": "/home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f.bundle",
+    "started_utc": "2026-09-12T23:26:29.870812+00:00",
+    "phases": [
+      {
+        "label": "source bundle",
+        "wall_s": 6.676949699991383,
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "label": "source transfer",
+        "wall_s": 13.453588300035335,
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "label": "offline exact checkout and wrapper syntax",
+        "wall_s": 4.793923100049142,
+        "exit_code": 0,
+        "stdout": "The bundle contains this ref:\ne06b3d63f7e9f77c13fd327dba0270d80e74d819 HEAD\nThe bundle records a complete history.\nThe bundle uses this hash algorithm: sha1\ne06b3d63f7e9f77c13fd327dba0270d80e74d819\n",
+        "stderr": "/home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f.bundle is okay\nFrom /home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f.bundle\n * branch                  HEAD       -> FETCH_HEAD\nPreparing worktree (detached HEAD e06b3d63f7)\nHEAD is now at e06b3d63f7 Match ACVC evaluation metadata and early thread limits\n"
+      },
+      {
+        "label": "focused remote suite and creator cleanup",
+        "wall_s": 0.7129422000143677,
+        "exit_code": 1,
+        "stdout": "{\"source_sha\": \"e06b3d63f7e9f77c13fd327dba0270d80e74d819\", \"test_scratch\": \"/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f/temp/directions/acvc/test/cluster-b01-e06b3d63f\", \"exit_code\": 1, \"stdout\": \"..............E                                                          [100%]\\n==================================== ERRORS ====================================\\n_ ERROR at setup of test_final_publication_preserves_existing_training_facts_and_partial_dependency _\\n\\nself = PosixPath('/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f/temp/directions/acvc/test/cluster-b01-e06b3d63f')\\nmode = 448, parents = False, exist_ok = False\\n\\n    def mkdir(self, mode=0o777, parents=False, exist_ok=False):\\n        \\\"\\\"\\\"\\n        Create a new directory at this given path.\\n        \\\"\\\"\\\"\\n        try:\\n>           self._accessor.mkdir(self, mode)\\nE           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f/temp/directions/acvc/test/cluster-b01-e06b3d63f'\\n\\n../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError\\n=========================== short test summary info ============================\\nERROR tests/experiments/candidates/acvc/cluster_deployment_b01/test_protocol.py::test_final_publication_preserves_existing_training_facts_and_partial_dependency\\n14 passed, 1 error in 0.12s\\n\", \"stderr\": \"\", \"wall_s\": 0.24753659998532385, \"scratch_absent\": true}\n",
+        "stderr": ""
+      }
+    ],
+    "source_bundle_bytes": 120288727
+  },
+  "publication_fixture_recovery": {
+    "wall_s": 0.5756011999910697,
+    "exit_code": 0,
+    "completed_utc": "2026-09-12T23:31:00.494528+00:00",
+    "stdout": "{\"source_sha\": \"e06b3d63f7e9f77c13fd327dba0270d80e74d819\", \"test_scratch\": \"/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f/temp/directions/acvc/test/cluster-b01-publication-e06b3d63f\", \"exit_code\": 0, \"stdout\": \".                                                                        [100%]\\n1 passed in 0.05s\\n\", \"stderr\": \"\", \"wall_s\": 0.14649026200640947, \"scratch_absent\": true}\n",
+    "stderr": ""
+  },
+  "review": {
+    "reviewer": "/root/dm_a_mx_acvc_resume/training_f_semantic_review",
+    "mode": "independent high-risk read-only semantic review; no runtime or scientific exposure",
+    "initial_source": "6fbf011f0163152893f62cc03c708f577878bc0a",
+    "accepted_source": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+    "findings": [
+      {
+        "severity": "P1",
+        "finding": "New reducer and initial synthetic fixtures used master, but the unchanged real producer emits base.",
+        "resolution": "Reducer validates base; fixture matches producer base/rule and explicitly excludes master. Fixed before any science at e06b3d63."
+      },
+      {
+        "finding": "Verify effective thread limits before protocol/NumPy imports.",
+        "resolution": "Six CPU thread limits and CUDA visibility are assigned before importing protocol; focused import-order check retained."
+      }
+    ],
+    "final_verdict": "Both review items are resolved in e06b3d63; no material finding remains in inspected corrections. Shared producer and protected core unchanged.",
+    "known_command_wall_s": 1.1021165,
+    "unmeasured": "provider/deliberation/client tails"
+  },
+  "acceptance": "14 original tests passed; only blocked publication fixture rerun and passed; all 15 checks covered, both scratch targets absent."
+}

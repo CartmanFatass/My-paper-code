@@ -81,8 +81,16 @@ observation would alter inclusion of the optional learned path. It need not be
 positive, an exact optimum or a complete causal explanation. This is a revisit
 condition, not today's retained fit, new algorithm or automatic consultation.
 The broader direction remains open; a subsequent object needs its own scoped
-selection. [Current continuation](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md)
-records the completed documentary unit and continuing DM ownership.
+selection. Portfolio L's [accepted documentary intake](RCLE_L_DESIGN_INTAKE_20260912.md)
+returned one joint-quota-phase proposal. The new Portfolio commitment funds its
+original-node family/use question and conditionally its exact B; **family
+selection remains pending and B remains inactive**. The proposal asks
+whether real learning of a common public joint choice improves physical U over
+both greedy joint choice and attained nearest; claim-count matching alone is
+not service evidence. This is a proposed surviving use, not an accepted new
+mechanism or empirical finding. [Current continuation](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md)
+records the published original-family task, conditional boundary and continuing
+DM ownership. The tested recipe HOLD remains separate.
 
 The historical sections below preserve earlier objects and their own limits.
 

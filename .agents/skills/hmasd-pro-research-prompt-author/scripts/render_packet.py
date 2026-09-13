@@ -12,7 +12,8 @@ import subprocess
 from pathlib import Path
 
 
-DISPATCH_MODE = "REUSE_SINGLETON"
+DISPATCH_MODE = "REUSE_SINGLETON"  # Compatibility for frozen legacy packets.
+NATIVE_DISPATCH_MODE = "REUSE_DM_TRANSPORT"
 OPERATOR_MODEL = "gpt-5.6-luna"
 OPERATOR_THINKING = "high"
 TRANSPORT_CONFIG_RELATIVE_PATH = Path(".codex") / "hmasd-transport.toml"
@@ -185,7 +186,7 @@ def _optional_conversation_id(value: object) -> str | None:
 
 def _thread_id(value: object, field: str) -> str:
     thread_id = _text(value, field)
-    if not re.fullmatch(SOURCE_THREAD_ID_RE, thread_id):
+    if not (re.fullmatch(SOURCE_THREAD_ID_RE, thread_id) or re.fullmatch(r"/root(?:/[a-z0-9_]+)*", thread_id)):
         raise PacketInputError(
             f"{field} must be an exact Codex task UUID",
             field=field,
@@ -228,6 +229,15 @@ def _singleton_transport_config(project_root: Path, *, caller_direct: bool = Fal
         key: _text(provider[key], f"provider.{key}")
         for key in ("model", "mode", "label", "selector_hint") if key in provider
     }
+    if config.get("mode") == "dm_native" and not caller_direct:
+        if (config.get("status") != "active" or config.get("model") != OPERATOR_MODEL
+                or config.get("reasoning_effort") != OPERATOR_THINKING
+                or config.get("environment") != "local" or config.get("backend") != "agentify"):
+            raise PacketInputError("DM transport must pin local Agentify and Luna/high")
+        return {"thread_id": None, "model": OPERATOR_MODEL, "thinking": OPERATOR_THINKING,
+                "environment": "local", "project_id": None,
+                "config_path": TRANSPORT_CONFIG_RELATIVE_PATH.as_posix(),
+                "provider_requirement": provider_requirement, "native": True}
     if caller_direct:
         return {
             "thread_id": None, "model": None, "thinking": None,
@@ -332,12 +342,25 @@ def validate(data: dict, project_root: Path) -> dict:
     source_thread_id = _source_thread_id(data.get("source_thread_id"))
     parent_thread_id = _parent_thread_id(data.get("parent_thread_id"))
     execution_mode = data.get("execution_mode", DISPATCH_MODE)
-    if execution_mode not in {DISPATCH_MODE, "CALLER_DIRECT"}:
-        raise PacketInputError("execution_mode must be REUSE_SINGLETON or CALLER_DIRECT", field="execution_mode")
+    if execution_mode not in {DISPATCH_MODE, NATIVE_DISPATCH_MODE, "CALLER_DIRECT"}:
+        raise PacketInputError("execution_mode must be REUSE_DM_TRANSPORT, legacy REUSE_SINGLETON or explicit CALLER_DIRECT", field="execution_mode")
     owner_execution_instruction = None
     if execution_mode == "CALLER_DIRECT":
         owner_execution_instruction = _text(data.get("owner_execution_instruction"), "owner_execution_instruction")
     transport_singleton = _singleton_transport_config(project_root, caller_direct=execution_mode == "CALLER_DIRECT")
+    if transport_singleton.get("native"):
+        if "execution_mode" in data and execution_mode != NATIVE_DISPATCH_MODE:
+            raise PacketInputError("new requests require REUSE_DM_TRANSPORT in dm_native mode")
+        execution_mode = NATIVE_DISPATCH_MODE
+        operator = _thread_id(data.get("operator_thread_id"), "operator_thread_id")
+        if parent_thread_id != source_thread_id or operator == parent_thread_id:
+            raise PacketInputError("DM transport requires author=parent and a distinct operator")
+        if operator.startswith("/root/") and source_thread_id.startswith("/root"):
+            if operator.rsplit("/", 1)[0] != source_thread_id:
+                raise PacketInputError("operator must be a direct child of the author parent")
+        transport_singleton["thread_id"] = operator
+    elif execution_mode == NATIVE_DISPATCH_MODE:
+        raise PacketInputError("REUSE_DM_TRANSPORT requires dm_native project configuration")
     if execution_mode == DISPATCH_MODE and source_thread_id == transport_singleton["thread_id"]:
         # The configured operator is already the executor; never enqueue work to itself.
         execution_mode = "CALLER_DIRECT"
@@ -507,6 +530,19 @@ GITHUB_DELIVERY_MARKDOWN_FALLBACK = (
 )
 
 
+def _native_handoff(h: dict) -> None:
+    """Use native addresses, never app URLs, for an author-owned transport."""
+    if h.get("dispatch_mode") != NATIVE_DISPATCH_MODE:
+        return
+    h["operator_thread_url"] = None
+    h["dispatch_instruction"] = (
+        f"After publication, use collaboration.followup_task on {h['operator_thread_id']} "
+        "with the exact committed HANDOFF path/SHA. Reuse this author-owned transport; "
+        "wait natively. Transport uses Agentify and returns directly to the author parent. "
+        "An uncertain dispatch is reconciled before another work handoff; no duplicate Send."
+    )
+
+
 def prepare_github_delivery(data: dict, project_root: Path, out_dir: Path) -> dict:
     """Render the existing scientific body, then scope delivery to one new file."""
     if any((out_dir / name).exists() for name in ("TASK.md", "HANDOFF.json", "PROMPT_BODY.md")):
@@ -624,6 +660,7 @@ def bind_github_task(handoff_path: Path, sha: str, project_root: Path) -> dict:
             "Transport executes the complete Pro lifecycle in its own task. "
             "Do not call create_thread or dispatch to yourself."
         )
+    _native_handoff(h)
     handoff_path.write_text(json.dumps(h, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {"task_url": url, "dispatch_state": h["dispatch_state"], "dispatch_required": h["dispatch_required"]}
 
@@ -833,7 +870,7 @@ not change the task class or silently fallback.
         "commit_or_ref": packet["commit_or_ref"],
         "destination_role": "transport_operator",
         "transport_skill": "hmasd-chatgpt-pro-transport",
-        "dispatch_mode": DISPATCH_MODE,
+        "dispatch_mode": packet["execution_mode"],
         "dispatch_required": True,
         "dispatch_once": True,
         "dispatch_state": "READY_TO_DISPATCH",
@@ -864,7 +901,7 @@ not change the task class or silently fallback.
             "creator_thread_id": packet["source_thread_id"],
             "parent_thread_id": packet["parent_thread_id"],
             "operator_thread_id": packet["operator_thread_id"],
-            "dispatch_mode": DISPATCH_MODE,
+            "dispatch_mode": packet["execution_mode"],
             "operator_reuse_required": True,
             "operator_model": packet["operator_model"],
             "operator_thinking": packet["operator_thinking"],
@@ -901,12 +938,13 @@ not change the task class or silently fallback.
             "dispatch_mode": "CALLER_DIRECT", "operator_reuse_required": False,
             "owner_execution_instruction": packet["owner_execution_instruction"],
         })
+    _native_handoff(handoff)
     (out_dir / "HANDOFF.json").write_text(json.dumps(handoff, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     result = {
         "valid": True,
         "output_dir": str(out_dir.resolve()),
         "files": ["PROMPT_BODY.md", "HANDOFF.json"],
-        "dispatch_mode": DISPATCH_MODE,
+        "dispatch_mode": packet["execution_mode"],
         "dispatch_state": "READY_TO_DISPATCH",
         "operator_reuse_required": True,
         "operator_config_path": packet["operator_config_path"],
@@ -940,23 +978,32 @@ not change the task class or silently fallback.
     }
     for key in ("dispatch_mode", "dispatch_state", "dispatch_required", "dispatch_once",
                 "operator_reuse_required", "dispatch_prompt", "dispatch_instruction",
-                "pro_send_from_caller", "provider_requirement"):
+                "pro_send_from_caller", "provider_requirement", "operator_thread_url"):
         result[key] = handoff[key]
     return result
 
 
 def record_operator_thread_id(handoff_path: Path, operator_thread_id: object) -> dict:
-    """Idempotently confirm the configured singleton UUID on an already-rendered handoff."""
+    """Idempotently confirm the bound operator on an already-rendered handoff."""
 
     thread_id = _text(operator_thread_id, "operator_thread_id")
-    if not re.fullmatch(SOURCE_THREAD_ID_RE, thread_id):
+    if not (re.fullmatch(SOURCE_THREAD_ID_RE, thread_id) or re.fullmatch(r"/root(?:/[a-z0-9_]+)*", thread_id)):
         raise PacketInputError(
-            "operator_thread_id must be the configured canonical Transport singleton task UUID",
+            "operator_thread_id must be a canonical Transport task UUID or native path",
             field="operator_thread_id",
         )
     if not handoff_path.is_file():
         raise PacketInputError(f"HANDOFF.json not found: {handoff_path}", field="handoff_path")
     handoff = json.loads(handoff_path.read_text(encoding="utf-8"))
+    if isinstance(handoff, dict) and handoff.get("dispatch_mode") == NATIVE_DISPATCH_MODE:
+        nested = handoff.get("transport_request", {})
+        if (handoff.get("operator_thread_id") != thread_id
+                or nested.get("operator_thread_id") != thread_id
+                or handoff.get("parent_thread_id") != handoff.get("source_thread_id")
+                or any(nested.get(k) != handoff.get(k) for k in
+                       ("source_thread_id", "parent_thread_id", "return_receipt_thread_id"))):
+            raise PacketInputError("native handoff routing mismatch; never rebind a rendered request")
+        return handoff
     if not isinstance(handoff, dict) or handoff.get("dispatch_mode") != DISPATCH_MODE:
         raise PacketInputError(
             "HANDOFF.json is not a REUSE_SINGLETON packet",

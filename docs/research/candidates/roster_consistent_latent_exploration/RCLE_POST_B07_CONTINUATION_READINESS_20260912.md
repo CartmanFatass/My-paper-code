@@ -1,59 +1,56 @@
-# RCLE current continuation — post-B07 decision accepted
+# RCLE current continuation — original family task ready, conditional B inactive
 
-RCLE remains **ACTIVE**, with original DM **/root/dm_a_mx_rcle_intake** in
+RCLE remains **ACTIVE/MEDIUM**, owned by **/root/dm_a_mx_rcle_intake** in
 **C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906**, branch **codex/rcle**.
-The selected one-question documentary R has a complete conforming answer and
-[intake](RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md). No Pro response, experiment
-collection, Monitor adoption or remote cleanup is outstanding for this unit.
+One original Convergence family/use question has been authored and published
+for Root→current Transport. Provider acceptance and scientific selection are
+not established by this preparation return.
 
-## Applied scientific decision
+## Current selected responsibility
 
-Original-node response **903aa067cee2833a81e6758ddc0abf593ad8b4b6** chooses to hold
-further development spending on only the tested equal-unit/.99-prior/FLEX/final1000
-recipe. It no longer recommends the unchanged fresh-fit candidate from that
-round. Attained nearest and all native evidence remain; the whole direction,
-priority, recast count and UAV state are unchanged. This is PRO_FINAL under the
-standing delegation, not a local provisional choice or a new statistical result.
+Portfolio response **e9f097ed85d554352df95fc97ec4c3f303ac8f5e**, conformingly
+integrated at main **814139558ccb28502b2e23da6800897b4d7af4b3**, buys exactly
+one original-family question/full original-DM intake. Complete documentary,
+invoked, provider and agent cost is separately accepted UNKNOWN. Its
+[RCLE mapping](../../portfolio/pro_packets/20260912_post_kelu_continuation/EXECUTION_MAPPING.md)
+also commits one conditional B; it has not selected the family itself.
 
-The strongest adverse observation is B07 Delta_ref=-0.008841959635417 with
-all eight reference U cells negative and G_U=-0.000205485026042. The strongest
-counteroption retains local U/Y/F/tau gains and unmeasured training-history
-variation; earlier W100/W1 native learning supports broader RCLE value. The
-[complete intake](RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md) records every
-scope, failure, one-fit and native-consequence limit. No cause or family failure
-is identified, and no missing tuned headroom becomes an exclusion threshold.
+[Fixed TASK](pro_packets/20260912_joint_quota_phase_family/delivery/TASK.md)
+asks whether to select the completed L joint-quota-phase proposal or decline it.
+[Preparation intake](pro_packets/20260912_joint_quota_phase_family/PREPARATION_INTAKE.md)
+and [publication receipt](pro_packets/20260912_joint_quota_phase_family/PUBLICATION_RECEIPT.json)
+record the exact published inputs and route. Root dispatches the bound HANDOFF
+once through live Transport; the same original conversation is reused. The DM
+will read and conform the complete immutable response when Root forwards it.
+No duplicate question, provider Send or independent response polling by this DM.
 
-## Completed allocation and actual next owner
+## Conditional empirical boundary
 
-Portfolio R at main0c0648bd0 bought exactly one original Convergence question,
-full original-DM intake and normal documentary publication. Its complete
-invoked/provider/agent cost was explicitly accepted UNKNOWN. Implementation,
-models/RNG/tapes, numerical reanalysis, tests/profilers and experiments were zero.
-The immutable TASK remains fcb4381a666a8df9bba88c8278f01bbcfbc1baf1; original
-conversation6aa55611-bf80-83e8-b018-70e30a95b28a received one Send and natural
-completion per Root's Transport receipt. Response bytes match the integrated
-main7d9434fe5 exactly. No replacement request or Send is needed.
+**Inactive until exact conforming family/comparison selection.** If selected,
+the separate commitment enables one complete native invocation≤900 s plus
+all additional invoked support≤900 s, complete≤1,800 s. No second Portfolio
+vote over that same commitment is required; fresh card/source/identity/command,
+focused checks/high-risk review and actual-node admission still belong to DM.
+The selection round neither consumes this900support nor enlarges its cap.
 
-The original DM has applied the narrow decision in DIRECTION and published its
-owner/audit/brief records. Root next integrates this intake and carries the current
-direction need through its existing coordination/proper-node route. The next
-scientific object is not selected by this R response; it grants no new fit,
-implementation, numerical work, redesign or successor consultation. B07's ended
-900/600/1500 allowance has no usable balance here. Its six remote cleanup paths
-were already verified absent, and shared source/evidence remain retained.
+Retain one fresh256-update fit,16,384 training episodes and four512-episode
+endpoints: own initialization, final256, greedy joint quota-phase and attained
+nearest. Total18,432episodes/1,179,648ticks; O(N²) assignment work at claim clocks.
+Separate D_g/D_n continuation primaries each use .025 U MEI, with G_U and all
+native outcomes preserved. Rates, memory and complete provider/agent cost are
+unknown; Linux CPU FP64/thread1 is fixed. No model/RNG, code, numerical analysis,
+test, profiler, experiment, admission or Monitor handle exists at this boundary.
 
-Owner continuity keeps RCLE admitted and owned across this clean boundary.
-This completed return is not an in-flight run or accepted Pro generation, and
-completion must not be treated as a whole-direction release or parking decision.
-No sibling result/intake/cleanup or owner approval gates the published consequence.
+Refusal or material mechanism/information/comparator/primary/exposure/budget
+change leaves B inactive. Complete the one intake and return its concrete need;
+no substitute fit, design repeat or additional consultation is funded.
 
-## Next scientific need
+## Continuing science and ownership
 
-The broader question is useful joint learning through physical roster changes
-under legal information and a competent native service comparison. No new
-mechanism is inferred locally. For the held recipe, reconsideration needs a
-concrete changed use or credible new value/cost evidence and an explanation of
-what a further observation would decide. This requires neither positive pilot,
-fixed seed quota, exact maximum nor complete cause. It selects no fit or automatic
-consultation. Root receives this bounded current need with continuing same-DM
-ownership for the next properly scoped allocation.
+The tested equal-unit/.99-prior/FLEX/final1000 recipe remains HOLD. B07's
+Delta_ref=-.008841959635417 and G_U=-.000205485026042, all8 reference U deficits,
+local gains, native harms, failure/one-fit limits and early real learning remain.
+F=0 for proposed quota claims is structural, not evidence of physical service.
+The whole direction's lifecycle, priority, recast history and UAV status stay
+unchanged. This completed authoring return is not an accepted generation or
+experiment, and does not release the original DM or stop RCLE.

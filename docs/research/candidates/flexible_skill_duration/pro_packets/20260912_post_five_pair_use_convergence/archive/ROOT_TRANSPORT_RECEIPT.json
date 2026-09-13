@@ -1,0 +1,18 @@
+{
+  "provenance": "Authoritative Root-forwarded Transport completion receipt; fields transcribed without browser observation by DM",
+  "request_id": "2026-09-12-fsd-post-five-pair-use-convergence-01",
+  "fixed_TASK": "a8a5a4decf1e006c9723a29a40dd1fbb64be8a36",
+  "response_commit": "812ad330e012d757cf34686bd416cf1a2b4894a2",
+  "response_path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/archive/RESPONSE.md",
+  "response_bytes": 27270,
+  "response_sha256": "f8ab4d5cd4b942fbbb8bba2b6876f877a7edfbc86b96596dc5f8913d60dd2a60",
+  "root_integration": "e8b2734638e950cc88eaf9436b132eefe6f0138b",
+  "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+  "provider_user_id": "3d9eb2a7-82d2-4543-a787-38fe9f0d5669",
+  "provider_assistant_id": "7c6facb4-1936-4987-8a2c-d0c5be0e47c4",
+  "send_count": 1,
+  "completion": "natural",
+  "generation_time_as_reported": "8m37s",
+  "issue_comment_id": 5649431037,
+  "scientific_intake_not_implied_by_transport": true
+}

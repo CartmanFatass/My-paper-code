@@ -7,12 +7,17 @@ approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
 [features]
-multi_agent_v2 = true
 hooks = false
 
+[features.multi_agent_v2]
+enabled = true
+min_wait_timeout_ms = 1500000
+default_wait_timeout_ms = 1500000
+max_wait_timeout_ms = 3600000
+
 [agents]
-# Research capacity is repository-unbounded under AGENTS.md section 5. This knob limits only the
-# runtime's fan-out; DM implements directly, with optional specialist siblings.
+# The research working-set target is four direction DMs under AGENTS.md section 5.
+# This runtime fan-out also accommodates their monitors, transports and independent reviewers.
 max_concurrent_threads_per_session = 40
 interrupt_message = true
 
@@ -32,6 +37,14 @@ config_file = "./agents/hmasd-reviewer.toml"
 description = "Optional focused runtime-observation method."
 config_file = "./agents/hmasd-verifier.toml"
 
+[agents.HMASDTransport]
+description = "Reusable author-owned Luna/high Agentify Pro transport; direct native receipts."
+config_file = "./agents/hmasd-transport.toml"
+
+[agents.HMASDExperimentMonitor]
+description = "Reusable Luna/low native experiment observer owned by one DM."
+config_file = "./agents/hmasd-experiment-monitor.toml"
+
 [agents.HMASDExperimentOperator]
 description = "Optional executor for a bounded launch, observation and collection batch."
 config_file = "./agents/hmasd-experiment-operator.toml"
@@ -39,10 +52,6 @@ config_file = "./agents/hmasd-experiment-operator.toml"
 [agents.HMASDResearchCritic]
 description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"
-
-[agents.HMASDImplementer]
-description = "Optional Sol/medium implementation task owned and accepted by DM or Root."
-config_file = "./agents/hmasd-implementer.toml"
 
 [mcp_servers.agentify-desktop]
 command = "/mnt/c/Program Files/nodejs/node.exe"
