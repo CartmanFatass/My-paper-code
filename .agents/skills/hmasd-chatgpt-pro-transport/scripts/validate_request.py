@@ -59,7 +59,7 @@ def _singleton_thread_id(project_root: Path) -> str:
     return validate_source_thread_id(config.get("thread_id"))
 
 
-def validate(request: dict, project_root: Path) -> dict:
+def validate(request: dict, project_root: Path, *, frozen_routing: bool = False) -> dict:
     forbidden_route_fields = sorted(
         field
         for field in (
@@ -276,7 +276,9 @@ def validate(request: dict, project_root: Path) -> dict:
             raise ValueError("REUSE_SINGLETON requires operator_reuse_required=true")
         if operator_model != "gpt-5.6-luna" or operator_thinking != "high":
             raise ValueError("Transport singleton must use gpt-5.6-luna with high reasoning")
-        if operator_thread_id != _singleton_thread_id(project_root):
+        # Immutable historical metadata is validated as provenance by the native
+        # handoff reader. It must not be compared with today's execution endpoint.
+        if not frozen_routing and operator_thread_id != _singleton_thread_id(project_root):
             raise ValueError("operator_thread_id does not match the configured project Transport singleton")
 
     packet = packet_artifacts(

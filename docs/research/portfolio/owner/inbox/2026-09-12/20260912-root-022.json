@@ -29,7 +29,7 @@
     }
   ],
   "recommended": "q",
-  "auto_applied": null,
+  "auto_applied": "q",
   "dm_reason": "在强共享null与两次非正结果后，先买一次能选择下一实际用途的判断；不追加/停放是真实强反选，UNKNOWN费用不假称便宜。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260912_acps_post_b02_investment/SCIENCE_BRIEF.md"
@@ -99,6 +99,14 @@
       "state": "planned",
       "summary": "Root授权准备一个当前ACPS Portfolio问题，Q/R/N/P均未执行；正确准备审计行为L158。主表应用与任何投资待完整Pro决定。",
       "correction": "初次CLI参数把ledger_row误写成L183；实际新增准备行是同日audit的L158，FACTS和本application record给出正确位置。没有改变提案或虚构owner答复。"
+    },
+    {
+      "at": "2026-09-13T06:10:47+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_acps_post_b02_investment/archive/RESPONSE.md",
+      "record": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_POST_B02_PORTFOLIO_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "完整读取Q裁决并开始唯一原Convergence问题：文档全过程费用UNKNOWN，零实证/条件B；ACTIVE/HIGH与SHARED不变。Q对N为近似权衡。五方向误句隔离，四方向规则继续；原Portfolio纠正待MGTAP共享绑定释放。审计行158-159。"
     }
   ]
 }

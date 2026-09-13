@@ -1,0 +1,165 @@
+{
+  "request_id": "2026-09-12-acvc-post-cluster-use-convergence-01",
+  "intake_utc": "2026-09-13T06:10:36.669683+00:00",
+  "pro_delivery_commit": "d9a1426af03c42bdcbb8e4f84413f94493a58ebf",
+  "root_integrated_response_commit": "f67e385937fd787df44e693728e86cdfa98c5766",
+  "response_path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/archive/RESPONSE.md",
+  "response_git_bytes": 13107,
+  "response_lines": 65,
+  "response_sha256": "4deb7f4c27dafdcd6634b898722aa3e2e667e4334335fad72bfa368095f78816",
+  "published_main_response_equal": true,
+  "fixed_task_commit": "4ebcd0f610ea9e15e8f48c30ec3f1f147d272913",
+  "input_commit": "0791b04744549d6f16d65d07a287156f9a4b1f1a",
+  "listed_reference_count": 15,
+  "response_citations_match_all_listed_path_versions": true,
+  "reference_mappings": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_CLUSTER_USE_DIRECTION_QUESTION_20260912.md",
+      "commit_sha": "0791b04744549d6f16d65d07a287156f9a4b1f1a"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/FACTS.json",
+      "commit_sha": "0791b04744549d6f16d65d07a287156f9a4b1f1a"
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/summary.json",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_EXECUTION_FACTS_20260912.json",
+      "commit_sha": "d8bb4b2b049f87989cb138181b598e9ada496a22"
+    },
+    {
+      "path": "experiments/candidates/acvc/cluster_deployment_b01/protocol.py",
+      "commit_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819"
+    },
+    {
+      "path": "scripts/run_acvc_cluster_deployment_b01.py",
+      "commit_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819"
+    },
+    {
+      "path": "experiments/candidates/acvc/native_link_loss_b01/binding.py",
+      "commit_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/ISSUE_INPUT_SNAPSHOT.json",
+      "commit_sha": "0791b04744549d6f16d65d07a287156f9a4b1f1a"
+    }
+  ],
+  "provider_access": "Pro reports all fifteen listed paths accessed; DM verifies citation/source correspondence, not the provider retrieval internals.",
+  "accepted_summary_vs_question_copy": {
+    "arms": true,
+    "contrasts": true,
+    "interventions": true
+  },
+  "accepted_training_units": 1,
+  "accepted_counts": {
+    "train_episodes": 512,
+    "optimizer_steps": 1024,
+    "final_checkpoints": 1,
+    "post_fit_loads": 3,
+    "eval_episodes": 192,
+    "team_steps": 180224
+  },
+  "accepted_primaries": {
+    "F-C": {
+      "mean_J": 0.12407302446321236,
+      "conditional_SE_J": 0.008490426540329714,
+      "adverse": 1,
+      "minimum_J": -0.024574273874233443,
+      "reading": "UP"
+    },
+    "F-dwell": {
+      "mean_J": 0.07674096500501802,
+      "conditional_SE_J": 0.010170152134996446,
+      "adverse": 8,
+      "minimum_J": -0.12128082288171904,
+      "reading": "UP"
+    }
+  },
+  "proposed_only_counts_from_existing_configuration": {
+    "train_team_ticks": 131072,
+    "evaluation_team_ticks": 49152,
+    "total_team_ticks": 180224,
+    "adam_calls": 1024,
+    "independent_training_units": 1,
+    "status": "rejected purchase now; conditional revisit only"
+  },
+  "current_exposure": {
+    "new_fits": 0,
+    "model_initializations": 0,
+    "scientific_rng_instances": 0,
+    "training_steps": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "native_steps": 0,
+    "runtime_tests": 0,
+    "profiling_or_diagnostic_invocations": 0,
+    "parameter_displacement": null
+  },
+  "current_documentary_cost": "UNKNOWN; separate from completed K",
+  "selected_direction_action": "retain qualified observed train-C -> deploy-F cluster reference",
+  "portfolio_recommendation": "no additional empirical allocation now; no funding or lifecycle disposition applied",
+  "selected_new_empirical_object": null,
+  "new_empirical_budget": null,
+  "lifecycle": "ACTIVE",
+  "priority": "MEDIUM",
+  "recasts": 2,
+  "revisit": "A named same-law use proposes F as the default for a newly trained cluster policy; separately consider one fresh C-fit with final C/F/own-dwell64 panels.",
+  "scientific_specification_conformance": "accepted; no concrete conflict",
+  "new_source_changes": 0,
+  "new_runtime_tests": 0,
+  "scientific_reading": {
+    "foundations": "section 6",
+    "empirical_topic": "first three sections",
+    "assumption": "one complete fit is the independent learning unit; paired worlds describe conditional deployment spread; package contrasts do not isolate causal components",
+    "limit": "fresh-policy variation, pure retrace, tuned headroom and transfer remain unestablished"
+  },
+  "source_wording_correction": "Binding.observe computes clip(-displacement,-1,1); original question shorthand omitted reversal; no algorithm change.",
+  "current_controls_read_main": "85267cb68642283dba98235bbdfe1d780ec9ce6e",
+  "owner_reviews": [],
+  "historical_owner_instruction": "20260904-acvc-009 continue-low-priority already applied; audit/2026-09-05.md line 20",
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-acvc-006.json",
+  "audit_rows": [
+    "docs/research/portfolio/audit/2026-09-12.md#L123",
+    "docs/research/portfolio/audit/2026-09-12.md#L124"
+  ],
+  "owner_item_application": "P2 direction decision, option a, applied documentary state; no Portfolio disposition",
+  "documentary_self_check": {
+    "local_links": "PASS",
+    "json_and_verbatim_packet_quotes": "PASS",
+    "audit_references": "PASS",
+    "source_request_response_preserved": "PASS",
+    "git_diff_check": "PASS",
+    "scientific_runtime_tests": 0,
+    "independent_review": "not required for documentary application; DM self-check only"
+  }
+}

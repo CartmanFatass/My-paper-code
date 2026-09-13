@@ -1,0 +1,72 @@
+# ACVC post-cluster-use Convergence — complete scientific intake
+
+**Accept the original node's conforming decision: retain train-C → deploy-F as the qualified observed cluster reference and recommend no additional empirical allocation now.** No next empirical object was selected. This replaces the earlier direction-local suggestion to buy an unchanged repetition by default. ACVC remains ACTIVE/MEDIUM, recasts: 2, with its existing lowest ACTIVE contention treatment; this direction decision creates no Portfolio funding, lifecycle disposition or released slot.
+
+## Complete response and source checks
+
+Read the complete [RESPONSE.md](archive/RESPONSE.md): 65 lines and 13,107 immutable Git bytes at delivery commit `d9a1426af03c42bdcbb8e4f84413f94493a58ebf`, SHA-256 `4deb7f4c27dafdcd6634b898722aa3e2e667e4334335fad72bfa368095f78816`. Its bytes equal the response integrated by Root at `f67e385937fd787df44e693728e86cdfa98c5766`. The designated `C:/Projects/HMASD-worktrees/codex-acvc` checkout was clean at `bd440710c7ce692faaa66675ad6e0dfbf2ca3732` and fast-forwarded to the published delivery before authoring this intake. No accepted request, TASK, HANDOFF or response was rewritten and no Send was repeated.
+
+The bound request is `2026-09-12-acvc-post-cluster-use-convergence-01`, original `em:acvc:convergence` conversation `6aa12e74-8e54-83e8-95f6-001681b456f7`. The fixed TASK is `4ebcd0f610ea9e15e8f48c30ec3f1f147d272913`; question/FACTS input is `0791b04744549d6f16d65d07a287156f9a4b1f1a`. Root's direct native assignment supplies the intake return route. Old packet task endpoints remain historical binding evidence, not dispatch instructions under the current native-owner route.
+
+Pro reports access to all fifteen listed paths at their specified versions, the Issue and prior delivery, with no decision-critical gap. The DM checks the complete answer, its citation mapping and the actual decision-relevant source facts, without claiming independent visibility into each provider retrieval. The immutable complete Git response is the scientific source; no new provider-status or delivery-comment check is needed to manufacture a second decision. [INTAKE_FACTS.json](INTAKE_FACTS.json) records the file identity, selected counts, citation check and read-only comparison with the accepted summary.
+
+## Rule applied verbatim and conformance
+
+The response's final decision is:
+
+> Final decision: retain the qualified observed cluster reference and recommend no additional empirical allocation now, with the concrete fresh-policy-use revisit above.
+
+The frozen cluster card's reading remains:
+
+> strictly >+0.01 J is UP; inclusive [−0.01,+0.01] is WITHIN, retaining its sign and without equivalence; strictly <−0.01 is DOWN.
+
+Both existing primaries remain separately UP. The node does not rerun, replace or strengthen that reading. It answers the bound choice between another independently trained unchanged observation, a better bounded object/use, and retaining the reference without more spending. Its reason is the marginal decision value of this purchase at the retained claim's narrow scope, not a scientific negative or a requirement for a customer before ordinary B research.
+
+| Contract checked | Conformance and limit |
+| --- | --- |
+| Evidence class and useful follow-up, empirical §§3–6 and 11.8.1–3 | A trustworthy one-fit B can support follow-up, but a positive does not entitle an unlimited continuation. The response recognizes the counterexample value of a second fit and declines this purchase because no specified present use changes. It does not require significance, stable superiority, a positive pilot or full mechanism identification. |
+| Comparators and independent unit | The complete C fit and final C/F/own-dwell panels remain one fit-plus-panel unit. The 64 paired initial worlds describe conditional spread, not 64 independent learners. Useful dwell and every adverse world remain visible. |
+| Population and claims | Both training and evaluation use cluster. The result supports this observed endpoint under the declared evaluation law, not zero-shot transfer, stable training-population benefit, formal UAV entry or unconditional installation on future policies. |
+| Historical evidence | The consumed uniform C01 remains model-qualified and separate; both training-F common-F-deployment DOWN pairs remain separate contrary observations. Ended learned-gate and uncertain/delayed families are not reopened. Tuned cluster headroom remains absent, not zero. |
+| Question and cost, empirical §§11.7–11.9 | The response compares the minimal fresh C-fit/three-panel B against reference retention, including the known dominant work and unknown future costs. It adds no finite diagnostic, exact maximum, support census, profiling pilot or hidden prerequisite A. |
+| Current authority | Retaining the reference is a direction-level scientific decision. No-additional-allocation advice is a recommendation to Portfolio, not a locally enacted spending or lifecycle disposition. An ended allocation/request is not PARK or a vacancy under current AGENTS §5. |
+| Engineering Scope §§4, 7.1 and 7.3 | This intake changes documentary interpretation only. No research source, reward, RNG, recurrence, checkpoint, comparator or publication code changes; no new independent code review or runtime check is required. A later funded implementation would need its own affected checks and review. |
+
+The methods changes since the TASK's `814139558ccb28502b2e23da6800897b4d7af4b3` snapshot, inspected through main `85267cb68642283dba98235bbdfe1d780ec9ce6e`, consolidate code responsibility in the DM and suspend new implementation children. They change no applicable evidence rule or this decision. Current native Transport/Monitor ownership is used prospectively; historical packet endpoints are not reused as live routes. No concrete scientific/specification conflict was found, and no corrective consultation is required.
+
+The response's statement that this request releases no new object, card or consultation closes its named allocation. It does not revoke standing owner continuation or decide ACVC's lifecycle. This intake does not commission a replacement question or infer empirical authority from an ACTIVE label. Any later capacity/funding disposition belongs to the separate Portfolio route, grounded in this current DM handoff.
+
+## Bounded result and mechanism reading
+
+The accepted summary, question FACTS and response agree on one new C fit, 512 training episodes, 1,024 ordered updates, one final checkpoint, three loads, 192 final evaluations and 180,224 team ticks. The existing actor/critic relative parameter displacements are 0.2228857880896177/0.7185870324226092. These are retained execution facts establishing real learning, not new exposure created by this intake. The [original technical/scientific intake](../../ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md) remains the acceptance of the native chain; a Pro decision is not implementation acceptance.
+
+| Existing cluster contrast | Mean J | Conditional SE J | Adverse worlds | Original reading |
+| --- | ---: | ---: | ---: | --- |
+| F−C | +0.12407302446321236 | 0.008490426540329714 | 1/64 | UP |
+| F−own-dwell | +0.07674096500501802 | 0.010170152134996446 | 8/64 | UP |
+
+Strongest support is F's additional observed value over useful own-dwell, as well as over C. Strongest contradiction to unrestricted use is eight F−dwell losses, with minimum −0.12128082288171904 J; F−C also loses on one world, minimum −0.024574273874233443 J. Dwell's descriptive gain over C is +0.04733205945819434 J. F/dwell's 6,623/4,546 interventions occur on different private histories. Their gains and counts do not isolate retrace from motion suppression, recurrent feedback or teammate consequences.
+
+Source inspection confirms the response's wording correction: `Binding.observe` computes `np.clip(-displacement, -1, 1)`. The earlier question's phrase “by its previous realized displacement” omitted the reversal; the accepted algorithm never changed. The path is local retained-user loss and an away-pointing proposal → the observing UAV's private retained anchor and 1–19-row loss guard → reversal of its prior realized displacement → actual motion and private recurrent/teammate feedback → native team return. The loss can represent a useful teammate handoff, and retrace need not recover service. Current guard/anchor behavior is inspected source; increased saturation or a causal contribution under cluster was not measured. Correct the scientific shorthand here without rewriting the frozen question or changing source.
+
+Scientific-tools reading used current FOUNDATIONS §6 and the empirical topic's first three sections. Concrete assumption: one complete independently generated fit determines the learned proposer; its paired worlds estimate only conditional deployment variation. An end-to-end package comparison can support bounded use without identifying a component's cause. These facts support reference retention at the observed ceiling and leave fresh-policy variation unresolved. The accepted source grounding is unchanged; no new mechanism, comparator or novelty claim requires another local-library search or external paper retrieval.
+
+Uniform C01's separate F−C/F−dwell means remain +0.095915968685/+0.065133768997 J under its prespecified iid-normal complete-fit-panel model, whose neural-training calibration is unestablished. The two separate training-use DOWN means remain −0.026096212471464608/−0.05734219575429114 J. None is pooled with cluster or converted into stable benefit/harm.
+
+## Costs, prediction and revisit
+
+The strongest rejected alternative is one fresh unchanged cluster C-fit with three final panels. Its possible positive or adverse result could change advice about F for a newly trained proposer. The accepted narrower recommendation concerns the already observed endpoint, so the node judges that another positive currently leaves the same practical advice and a negative mainly reinforces its explicit limit. This is a particular marginal-value decision, not a prohibition on replication or a new B launch condition.
+
+The concrete revisit is a named same-law use proposing F as the default for a newly trained cluster policy. Then an independently funded fresh C-fit/three-panel B can change the default between F, dwell and C. The same separate signed means and .01 J practical scale remain the proposed reading: UP supports local use, inclusive ±.01 is WITHIN without equivalence, and DOWN weighs against the named contrast. This condition authorizes no investigation, new identity, fit or panel now.
+
+The discussed future work remains one fit ×512×256 train ticks, 256×4 Adam calls and 3×64×256 evaluation ticks: 180,224 team ticks and 1,024 updates, with no initial panel, search or added diagnostic. Future complete native/support costs and caps are unassigned. K's 165.33-second whole command, 166-second charge and 0.5314903259277344-GiB peak RSS are observed references only; known support is 75.29171340009022 seconds, complete coverage unestablished, with no observed breach. Its old 600/600/1200 caps are not balances. Four remote cleanup targets were verified removed; the historical fifth local target remains after pre-execution `blocked by policy`. This intake neither retries that rejected deletion nor changes its recorded preservation boundary.
+
+Current exposure: zero new fits, model/RNG instances, native training/evaluation steps, optimizer calls, runtime tests or diagnostics; parameter displacement is not applicable. Documentary/provider cost remains unknown and separate from K. This is a decision intake, not a new valid empirical result: the existing [Chinese result brief](../../../../portfolio/owner/briefs/acvc/2026-09-12_ACVC_CLUSTER_DEPLOYMENT_B01.md) and original Brier scores (.305/.455; completion .0025) are retained without rescore. Owner prediction is **not taken**. Current primary-control `item.py reviews --json` returned `[]`; the only nonempty ACVC ledger owner column is the already applied historical `continue-low-priority (20260904-acvc-009)` instruction. No new owner override or material critic dissent was found.
+
+## Decisions this intake produces
+
+1. **Direction use decision.** Options: (a) retain the qualified observed reference and recommend no additional empirical allocation now; (b) recommend one unchanged independent cluster B now; (c) select another bounded object/use. Recommend and apply (a), the complete original-node **PRO_FINAL / OWNER_DELEGATED** decision. The response did not select an empirical successor. No new recast is recorded.
+2. **Object technical/documentary acceptance.** Options: (a) accept the complete conforming response and preserve original result/rule/source; (b) return a concrete scope or scientific conflict to the same node. Recommend/select (a). **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** This is DM self-check and scientific conformance intake, separate from the historical independent source review and native technical acceptance.
+3. **Root integration and dependency.** Publish this intake, the DIRECTION scientific update, historical-intake addendum and owner/audit application record. Root should replace the pending-Convergence shorthand with the retained-reference/no-additional-allocation recommendation; keep ACVC ACTIVE/MEDIUM, recasts 2 and its occupied slot. No execution handoff or empirical budget is available. Only a separately scoped Portfolio decision or direct owner instruction can change investment/lifecycle; no such disposition is claimed here.
+
+The [Chinese owner packet](OWNER_PACKET.json) records the direction decision and its Portfolio-facing recommendation in [P2 item 20260912-acvc-006](../../../../portfolio/owner/inbox/2026-09-12/20260912-acvc-006.json), option (a), with its actual applied documentary state. Audit rows are `docs/research/portfolio/audit/2026-09-12.md#L123` and `#L124` in this direction commit. DM documentary self-check passed local links, JSON, verbatim packet quotes, audit references and preservation of source/request/response; `git diff --check` passed. These are read-only document checks, not a scientific runtime test. No owner reply is required or invented. The bounded assignment completes with full intake and publication; original-DM ownership and the concrete fresh-policy-use revisit remain recoverable from these records.
