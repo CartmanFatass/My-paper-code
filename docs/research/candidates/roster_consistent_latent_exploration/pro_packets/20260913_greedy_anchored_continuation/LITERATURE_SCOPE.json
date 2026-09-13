@@ -1,0 +1,55 @@
+{
+  "question": "Does existing control-plus-learning knowledge support proposing a learned correction around a competent fixed rule, and what does it fail to establish for discrete public quota phases through roster changes?",
+  "My_lib": {
+    "accessed": [
+      "C:/Projects/My-lib/README.md",
+      "C:/Projects/My-lib/collections/README.md"
+    ],
+    "coverage": "No verified real allow-list established from the visible collection entries; exclude synthetic-core. No index construction or synthetic result used.",
+    "limitation": "Bounded file enumeration returned Access is denied for .pytest_cache, an unrelated cache; no bypass or corpus-wide absence inference."
+  },
+  "Inst_sci": {
+    "catalog": "C:\\Projects\\Inst-sci\\papers\\MyLib\\llm-index\\catalog.v2.jsonl",
+    "sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0",
+    "records": 190,
+    "queries": [
+      {
+        "term": "residual",
+        "hits": 0
+      },
+      {
+        "term": "prior policy",
+        "hits": 0
+      },
+      {
+        "term": "policy prior",
+        "hits": 0
+      }
+    ],
+    "limit": "Exact bounded term recall over title/abstract/metadata snapshot, not novelty or complete coverage. No matching substantive residual/anchor passage verified locally; unrelated imitation hits not treated as support."
+  },
+  "external_primary_gap_fill": [
+    {
+      "title": "Residual Policy Learning",
+      "authors": "Tom Silver, Kelsey Allen, Josh Tenenbaum, Leslie Kaelbling",
+      "version": "arXiv:1812.06298v2 (2019-01-03)",
+      "url": "https://arxiv.org/abs/1812.06298v2",
+      "accessed": "Official arXiv abstract and version metadata, 2026-09-13; no PDF/full-paper/equation claim.",
+      "short_quote": "a simple method for improving nondifferentiable policies using model-free deep reinforcement learning",
+      "source_scope": "Robotic manipulation with available initial controllers; reported results are source claims in those tasks, not RCLE evidence.",
+      "design_effect": "Motivates asking about learned correction of a fixed competent rule instead of spending another unchanged random-start fit; it does not choose a categorical prior or establish a benefit here."
+    },
+    {
+      "title": "Residual Reinforcement Learning for Robot Control",
+      "authors": "Tobias Johannink et al.",
+      "version": "arXiv:1812.03201v2 (2018-12-18)",
+      "url": "https://arxiv.org/abs/1812.03201v2",
+      "accessed": "Official arXiv abstract and version metadata, 2026-09-13; no PDF/full-paper/equation claim.",
+      "short_quote": "The final control policy is a superposition of both control signals.",
+      "source_scope": "Continuous robot feedback control with a learned residual and real block assembly; not discrete multi-agent assignment.",
+      "design_effect": "Keep learned correction distinct from inherited controller competence. The proposed categorical log-prior construction is DM inference, not this paper's reproduced algorithm or guarantee."
+    }
+  ],
+  "scientific_reading": "Reuse Foundations sections3-4,6, MARL information/coordination and empirical independent-unit/package passages. The fixed greedy calculation uses existing public inputs; adding its log-prior changes the policy package rather than the information set or reward.",
+  "limit": "No novelty claim, theorem transfer, full-paper implementation recipe, proof of learnability or new empirical evidence. The selected Convergence node may reject the offered question on development value without requiring a stronger evidence class."
+}

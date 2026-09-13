@@ -3,11 +3,11 @@
 控制面仅保留当前有效状态。运行/回报入口见[执行职责](../../project/ROOT_OPERATIONS.md)，
 详细科学依据在各方向记录；历史操作快照从Git查询。
 
-## 当前27方向状态 — 2026-09-12 Windows恢复
+## 当前27方向状态 — 2026-09-13 Windows/PowerShell 控制面
 
-本表登记16 ACTIVE、11 PARKED。2026-09-12 post-KELU Portfolio PRO_FINAL仅将CADC可逆改为PARKED/HIGH；其余生命周期、priority、recasts与UAV字段不变。
-并行目标为4个方向。现有记录列出5个在途方向，保留其已接受工作，随正式方向处置自然收敛；不新增第五个槽位：ACPS执行新unchanged pair；MGTAP与RCLE各自起草一个原Convergence节点问题；ACVC与FOLR各自起草一个原方向节点的下一对象/用途问题。五个任务均已派发给原DM，彼此独立。已完成的Portfolio intake、FSD U、CADC处置、旧实验和cleanup均不计槽位。
-新方向发现/注册及独立MGTAP T投入决定已完整intake并集成main2492dcb06：T=yes，ACPS/CADC获有限starter投入，另三项仅注册停放。
+本表登记15 ACTIVE、12 PARKED。2026-09-13 ACPS Portfolio PRO_FINAL 已将 ACPS 可逆改为 PARKED/HIGH；其余生命周期、priority、recasts与UAV字段不变。
+标准并行目标为4个方向；当前四条 ACTIVE 链为 MGTAP、RCLE、ACVC、FOLR。DM 完成、阻塞或 ACTIVE-idle 回报都会触发一次稳定 Root 调度检查；对象完成、cleanup、Pro wait 或 child 完成均不释放方向槽位，只有正式 Portfolio/owner lifecycle 决定释放槽位。
+当前 Portfolio/方向决定和 Transport/实验归档均已在本控制面合并；旧请求、旧 hash 和旧起草快照不作为当前路由。
 有限分配结束不推断停向；只有Portfolio/owner生命周期决定改变ACTIVE/PARKED。
 
 “完成”只指最后分配，不表示方向永久结束；“家族停放”与Portfolio生命周期分开。
@@ -16,7 +16,7 @@
 | 方向 | 最新证据/科学状态 | 当前实际工作 | 下一步及边界 |
 | --- | --- | --- | --- |
 | [active_post_churn_population_flow_identification](../candidates/active_post_churn_population_flow_identification/DIRECTION.md) | PARKED/LOW；原储备边界未变。 | 无 | 有具体新问题时按原决策层级重入；不自动启动。 |
-| [ACPS](../candidates/actuator_conditioned_partial_sharing/ACPS_POST_B02_PORTFOLIO_INTAKE_20260912.md) | B02完整配对为INSIDE_MEI负向：ACPS−SHARED −0.0051864274 J，12/32正、20/32负；不构成等价或稳定结论，ACTIVE/HIGH。 | Portfolio Q intake 与零暴露准备已完成；原请求未重发，待 Transport 流程修复后再发布/绑定 Q。 | 保持 SHARED 默认；无第三pair、retry或生命周期改变。 |
+| [ACPS](../candidates/actuator_conditioned_partial_sharing/ACPS_POST_Q_PORTFOLIO_INTAKE_20260913.md) | B02完整配对为INSIDE_MEI负向：ACPS−SHARED −0.0051864274 J，12/32正、20/32负；Q recovery 已完整 intake。Portfolio PRO_FINAL 已将 whole direction 可逆 PARKED/HIGH，SHARED 与全部证据保留。 | 无在途工作；旧未发送 operation 与新 conversation receipts 保留。 | 只有新的明确 re-entry discriminator/Portfolio owner 决定才恢复；当前不追加 Q、资金或 successor。 |
 | [ACVC](../candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/INTAKE.md) | 保留 train-C→deploy-F 的合格 cluster reference；F−C +0.124073 J、F−dwell +0.076741 J，8/64 adverse dwell，ACTIVE/MEDIUM、recasts2。 | 原方向 intake 完成，正在准备下一方向节点问题；无新经验拨款或 K 重跑。 | 继续同法新用途/无新增选择；经 proper node 决定后再考虑实验。 |
 | [CBSC](../candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md) | C pair完整验收为WITHIN_MEI：RAW=STRUCT=11.15、32/32零差，均低于REQUEST_ONLY12.45；只支持本对象的局部零差异。 | 已购pair结束，证据已保全至main9ca150856；无活动科学工作。 | 仅完成已列明的scoped reclamation；无retry、第二个S或自动successor。 |
 | [CADC](../candidates/contention_aware_decentralized_communication/CADC_B01_INTAKE.md) | B01为ADVERSE；post-KELU Portfolio明确可逆PARKED/HIGH、recasts0并保留RR与全部证据。 | 原DM正在应用方向本地处置记录；无科研在途。 | 仅在具体新用途/证据/成本事实下经proper authority重入；无新设计、实验或咨询。 |
@@ -29,10 +29,10 @@
 | [FRRIE](../candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md) | P59已intake；P63 source-only九frame映射完成，factory fault仍未归因，P63未运行。 | 无；本轮没有新增拨款。 | 可信最小观察/替代执行路径及必要拨款。旧故障未完全定位不自动禁止不同可信路径；不重跑旧P63。 |
 | [FSD](../candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md) | U已完整intake：I1280为有限可选方案，authentic D0默认；方向仍ACTIVE/HIGH。 | Portfolio本轮不追加LONG或重复U；无科研在途。 | 有真实较长普通D0用途时再走proper decision；当前无新代码、分析或实验。 |
 | [LCAC](../candidates/learned_counterfactual_agent_credit/DIRECTION.md) | 新注册PARKED/MEDIUM；保留learned counterfactual agent credit的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
-| [MGTAP](../candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/PORTFOLIO_INTAKE_20260913.md) | Portfolio B 及同节点程序性修正均已完整 intake：接受一次 master pair（COND512 / intact-DENSE768），caps 为 COND 600s、DENSE 900s、native 1500s、support 900s、complete 2400s；MGTAP 仍 ACTIVE/MEDIUM。 | 原 request 的 click1/USER_MESSAGE_CONTENT_MISMATCH 效果不确定事实保留且不重发；修正 Transport 已归档并释放共享 binding。DM 现执行 fresh exact-source/resource admission，随后按授权 pair 运行。 | 仅推进这一个已拨款 pair；不改科学含义、不追加 successor，任何完成或阻塞都由 DM 作为稳定事件回报并触发 Root 调度。 |
+| [MGTAP](../candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md) | Portfolio B 与同节点程序性修正均已完整 intake；唯一 master pair（COND512 / intact-DENSE768）已完成，COND−DENSE = −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026，7/25 worlds；MGTAP 仍 ACTIVE/MEDIUM。 | 结果/cleanup 已核验；方向节点后续问题已准备并绑定为 delivery_v2 `PREPARED_UNSENT`（无 Pro 决策、无 Send）。原 request 效果不确定且绝不重发；本地 raw 删除被审批策略拒绝，事实已记录。 | 等待方向节点授权回执；不自动追加 pair 或 successor，方向槽位保持占用。 |
 | [orbit_shadow_read](../candidates/orbit_shadow_read/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [recct_lite](../candidates/recct_lite/DIRECTION.md) | PARKED/MEDIUM。 | 无 | 具体Portfolio/owner重入决定。 |
-| [RCLE](../candidates/roster_consistent_latent_exploration/pro_packets/20260913_post_b08_development/INTAKE.md) | B08 后 Convergence 已形成 PRO_FINAL：对 exact tested recipe 做可逆 development HOLD；family open，whole RCLE ACTIVE/MEDIUM。 | 新响应已完成一次 accepted Send、完整归档和 intake；无新 fit/cap/consultation。 | 仅在真实决策价值或可信 service/cost 事实变化时重新评估；不自动追加 fit。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/pro_packets/20260913_post_b08_development/INTAKE.md) | B08 后 Convergence 已形成 PRO_FINAL：对 exact tested recipe 做可逆 development HOLD；family open，whole RCLE ACTIVE/MEDIUM。 | 原响应已归档/intake；greedy-anchored continuation question 已准备并绑定，推荐未应用，零 Transport Send/fit。 | 等待同一 direction node 的授权回执；不自动追加 fit/cap 或改变 HOLD，方向槽位保持占用。 |
 | [scope_1s](../candidates/scope_1s/DIRECTION.md) | PARKED/LOW。 | 无 | 具体Portfolio/owner重入决定。 |
 | [SCDMP](../candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md) | **更新：B01+0.006737407456及B02+0.003658055973均WITHIN；post-B02 PRO_FINAL已PARK固定opening-held residual-MC package。** ACTIVE/HIGH、recasts2和最低争用排序保留。 | 无 | 具体loss/credit假设或有决策价值的独立训练变异问题，需另行选择；无第三pair/自动successor。 |
 | [TRDL](../candidates/tail_return_distributional_learning/DIRECTION.md) | 新注册PARKED/MEDIUM；保留tail-return distributional learning的独立问题、比较器和estimand。 | 仅登记，无拨款、DM执行或工作树。 | 需要新的具体用途/成本投资决定；不得从登记自动启动。 |
@@ -52,7 +52,7 @@
 | 方向 | Lifecycle | Priority |
 | --- | --- | --- |
 | active_post_churn_population_flow_identification | PARKED | LOW |
-| actuator_conditioned_partial_sharing | ACTIVE | HIGH |
+| actuator_conditioned_partial_sharing | PARKED | HIGH |
 | acvc | ACTIVE | MEDIUM |
 | capability_bound_semantic_currentness | ACTIVE | HIGH |
 | contention_aware_decentralized_communication | PARKED | HIGH |

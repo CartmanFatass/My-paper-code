@@ -49,6 +49,34 @@ work when available. Keep an ACTIVE direction occupied through an object/allocat
 wait or child completion; release a slot only for an explicit Portfolio/owner lifecycle pause or
 closure.
 
+Authorization is inherited from the current card, accepted Pro decision and published handoff.
+When those records fix the next object or proper-node question, the owning DM dispatches at once;
+Root/owner approval, ACKs and artificial wait intervals are not additional gates. A prepared
+direction/Portfolio question may be sent when its scope is fixed, while its response gates only
+science, budget or lifecycle changes. Wait only for an actual external dependency, an unformed
+proper-node decision or a concrete blocker; completion of the prior object alone is not a wait
+condition.
+
+DMs operate autonomously within those bounds. They do not wait for a separate Root authorization
+or ACK to send a scope-fixed proper-node question, execute an admitted object, repair Transport,
+collect/intake a result or continue direction-local work. Root integrates their changed-event
+returns and handles shared dependencies, formal lifecycle/vacancy actions and genuinely new
+scientific or budget choices only.
+
+Transport/selector/workflow defects default to local repair by the author DM. The DM may edit its
+owned helpers, fixtures and related skill/control instructions, run focused tests and review, and
+recover the same unchanged operation after verified nonacceptance. Preserve operation, prompt,
+binding, idempotency and failure receipts; never create a replacement request or change science.
+Root is involved only for a shared runtime/load, cross-direction dependency or a
+scientific/Portfolio decision, while the DM retains Transport acceptance.
+
+When a same-request Transport repair cannot recover its original conversation, the author DM may
+rebind the identical frozen prompt to a new conversation only after proving the old operation was
+never sent (`sendAttempted=false`, no provider IDs or accepted effect). The DM archives the old
+operation as `VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE`, preserves all receipts, then
+creates and links a new handoff/idempotency. This fallback is forbidden for uncertain or possibly
+accepted effects and does not change scientific meaning.
+
 ## Maintained sources
 
 | Rule | Maintained source |
