@@ -1,0 +1,18 @@
+{
+  "calculation_kind": "static Python integer arithmetic from inspected accepted runner/card constants",
+  "source_start_commit": "1878f8f1d6dd54ac6a5e2f9f78dba8ef920572b8",
+  "source_runner_blob": "c230572d208a9d61e7a1c4ce49fb02c5935c30ab",
+  "configuration": {"actors": 5, "horizon": 256, "final_episodes_per_fit": 32, "episodes_per_rollout": 2, "ppo_epochs": 4},
+  "selected_256_pair": {"fresh_fits": 2, "matched_training_units": 1, "training_episodes": 512, "final_episodes": 64, "native_team_ticks": 147456, "rollouts": 256, "adam_calls": 1024, "actor_row_uses": 3358720},
+  "per_256_fit": {"training_episodes": 256, "final_episodes": 32, "native_team_ticks": 73728, "rollouts": 128, "adam_calls": 512, "actor_row_uses": 1679360},
+  "illustrative_two_512_pair_planning_ceiling_not_selected_sequence": {"fresh_fits": 4, "matched_training_units": 2, "training_episodes": 2048, "final_episodes": 128, "native_team_ticks": 557056, "rollouts": 1024, "adam_calls": 4096, "actor_row_uses": 13271040},
+  "selected_B_DM_caps_seconds": {"per_arm_native": 450, "pair_native": 900, "invoked_support": 2700, "complete_invoked": 3600},
+  "per_arm_cost_law": "initialization + 65536 collection ticks + 512 complete recurrent Adam calls + 8192 final ticks + assigned checkpoint/publication/readback/exit",
+  "unit_rates_and_future_complete_cost": "UNKNOWN; declared caps are not forecasts",
+  "current_new_fits_at_proposal": 0,
+  "current_new_numerical_reanalysis": 1,
+  "current_A_calculation_wall_seconds": 0.1189499,
+  "exposure_line": "Current proposal: zero new model/RNG/environment constructions, fits, training transitions/updates or evaluations; one outcome-informed static reanalysis of six accepted endpoints. Selected ordinary B256 is not launched at this publication. Historical 8231 exposure and uncertain costs retain their original scope.",
+  "new_Pro_sends_by_DM": 0,
+  "direction_lifetime_cost": "UNKNOWN, not zero; no undeclared cumulative cap is inferred"
+}

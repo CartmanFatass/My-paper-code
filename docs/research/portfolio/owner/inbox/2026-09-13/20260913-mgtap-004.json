@@ -1,0 +1,74 @@
+{
+  "id": "20260913-mgtap-004",
+  "created": "2026-09-13T16:20:56-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "MGTAP mean-COND256/DENSE256 早期学习B",
+  "context": "同一开放mean-COND机制的新256/256普通B；master8241，一次pair，2fits，已由DM standing delegation选择，尚未启动。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按卡完成工程与一对真实训练、完整32-world primary及intake"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一安全边界停止新依赖工作并保留已产生证据"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "先按owner具体意见修订尚未执行的对象，保护冻结历史"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B01_SCIENCE_CARD_20260913.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L31",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "已由 DM standing delegation 选择的 mean-COND256/DENSE256 单个 B 是否需要所有者异步覆盖？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B01_SCIENCE_CARD_20260913.md",
+        "from": "仅有已结束的 512/512 与 512/768 观察",
+        "to": "执行一个新 master8241 的 256/256 ordinary B；不重跑旧对象"
+      }
+    ],
+    "if_refused": "在下一个安全边界应用 reject/revise；保存实际已执行效果，不自动撤销或重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B01_SCIENCE_CARD_20260913.md",
+        "quote": "It tests an unobserved common learning exposure within the accepted open mean-COND mechanism, using exercised source at low work.",
+        "why": "双方训练减半，探查结构在较少学习下的具体原生结果；保持公平信息与完整32-world primary。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_8231_MANAGEMENT_20260913.md",
+        "quote": "The strongest objection is that changing exposure could produce another noisy local point and cause continued weak-result chasing.",
+        "why": "低暴露不保证改善，故限定一个 pair，保持所有不利结果，后续必须重新做有价值的对象判断。"
+      }
+    ],
+    "uncertainty": [
+      "预测符号不确定，最可能 inside-MEI；没有稳定排序或因果效率曲线结论。",
+      "450/450/900/2700/3600 秒为新 DM 有限上限，非旧 grant 延续；新调用未知成本保留。"
+    ],
+    "cost": {
+      "compute": "1 matched master / 2 fresh fits / 147456 team ticks / 1024 Adam；最高 native900 + support2700 = complete3600 s。",
+      "owner_time": "无需回复；DM 直接负责工程、独立高风险 review、准入、执行、观察和 intake。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing; standing object delegation is the authority"
+    },
+    "verdict_text": "Owner-delegated decision (2026-09-03 standing instruction and 2026-09-13 correction): execute this one B.",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B01_SCIENCE_CARD_20260913.md"
+  },
+  "starred": false
+}
