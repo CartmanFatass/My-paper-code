@@ -96,6 +96,14 @@
       "record": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/INTAKE.md",
       "state": "applied",
       "summary": "已完整验收并记录原节点的保留参考决定与当前不追加投入建议；未选择新经验对象、执行实验或作出 Portfolio 生命周期处置。ACVC 仍 ACTIVE/MEDIUM、recasts 2。"
+    },
+    {
+      "at": "2026-09-13T07:02:22+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/NEXT_ACTION_MAPPING.md",
+      "state": "applied",
+      "summary": "Root 续行任务的文档映射已完成：复用原 no-addition 选择，保留出现具体同法新策略用途时的问题草稿；未新增方向裁决、实验或 Pro Send，ACVC 仍 ACTIVE。"
     }
   ]
 }
