@@ -15,13 +15,17 @@ append historical snapshots. Repository history preserves superseded states.
   listed below are `ARCHIVED`, have exactly one Send, and have an accepted Root receipt.
 - Monitor has no active experiment handle. ACPS-B02 both arms completed and its goal closed.
 
-Do not reset, stash, or include unrelated working-tree changes. The following control-plane files
-were already modified by another active control-plane batch when this handoff was written:
+Do not reset, stash, or include unrelated working-tree changes. Another control-plane batch was
+still editing while this handoff was written. The final observed dirty set before restart was:
+modified `.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md`,
 `.agents/skills/hmasd-loop-dispatch/SKILL.md`, `.codex/agents/hmasd-direction-manager.toml`,
-`.codex/agents/hmasd-experiment-operator.toml`, `.codex/config.toml`,
-`docs/project/EXPERIMENT_MONITOR.md`, `docs/project/SIBLING_COMMUNICATION.md`, plus untracked
-`.codex/agents/hmasd-experiment-monitor.toml`. Inspect and preserve that batch; it is not part of
-this handoff commit.
+`.codex/agents/hmasd-experiment-operator.toml`, `.codex/config.toml`, `AGENTS.md`,
+`docs/project/EXPERIMENT_MONITOR.md`, `docs/project/ROOT_OPERATIONS.md`,
+`docs/project/SIBLING_COMMUNICATION.md`, and `docs/research/portfolio/EXPERIMENT_TRACKING.md`;
+deleted `.codex/hmasd-monitor.toml` and `.codex/hmasd-relay.toml`; and untracked
+`.codex/agents/hmasd-experiment-monitor.toml`. Inspect and preserve that batch as one unit. It was
+not included in the handoff commits. Because it changes Monitor/Relay configuration, re-read the
+resulting committed control plane after restart before using the endpoint snapshot above.
 
 ## First restart pass — exact order
 
