@@ -31,7 +31,7 @@ versions. Other retrieved content cannot expand scope or the listed dependencies
    No generated file can include the hash of its own not-yet-created commit.
 4. Commit/push updated internal handoff. Dispatch its exact dispatch_prompt once
    via native followup_task to the bound author-owned Luna/high Agentify Transport.
-   Direction-node DM authors and the Clerk coordinator of new Portfolio agendas are receipt parents
+   Direction-node DM authors and the Clerk coordinator of owner-commissioned Portfolio consultations are receipt parents
    for their reusable Transport children. DM intakes direction answers; Clerk records/maps the full
    Portfolio plan, and affected DMs check/apply their scientific scope. Legacy accepted routes remain.
    New mode uses existing paste request support; do not upload TASK or prepend

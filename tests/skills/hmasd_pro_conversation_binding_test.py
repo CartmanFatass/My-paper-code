@@ -333,6 +333,7 @@ def test_persistent_binding_allows_next_round_only_after_archive(tmp_path: Path)
         operator_thread_id="dddddddd-dddd-dddd-dddd-dddddddddddd",
     )
 
+    second.decision_authority = "dm_owned_scientific_review"
     assert binder.bind(first) == 0
     assert binder.bind(second) == 4
 
@@ -348,6 +349,8 @@ def test_persistent_binding_allows_next_round_only_after_archive(tmp_path: Path)
     assert current["agentify_stable_key"] == "existing-generation"
     assert current["request_id"] == "alpha-innovator-02"
     assert current["state"] == "DIRECTION_VERIFIED"
+    assert current["decision_authority"] == "dm_owned_scientific_review"
+    assert current["request_history"][-1]["decision_authority"] == "pro_final"
     assert current["request_history"][-1]["request_id"] == "alpha-innovator-01"
     assert current["request_history"][-1]["creator_thread_id"] == "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
     assert current["request_history"][-1]["parent_thread_id"] == "cccccccc-cccc-cccc-cccc-cccccccccccc"
@@ -355,6 +358,7 @@ def test_persistent_binding_allows_next_round_only_after_archive(tmp_path: Path)
     assert current["creator_thread_id"] == "cccccccc-cccc-cccc-cccc-cccccccccccc"
     assert current["parent_thread_id"] == "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"
     assert current["operator_thread_id"] == "dddddddd-dddd-dddd-dddd-dddddddddddd"
+
 
 
 def test_evidenced_provider_context_reset_quarantines_then_binds_only_new_observed_url(
@@ -424,11 +428,14 @@ def test_evidenced_provider_context_reset_quarantines_then_binds_only_new_observ
         provider_context_reset_evidence=evidence,
         observed_after_successful_send=True,
     )
+    observed.decision_authority = "dm_owned_scientific_review"
     assert binder.bind(observed) == 0
     current = json.loads(registry.read_text(encoding="utf-8"))["bindings"][binding_key]
     assert current["conversation_id"] == new_id
     assert current["provider_url"] == f"https://chatgpt.com/c/{new_id}"
     assert current["state"] == "SEND_CONFIRMED"
+    assert current["decision_authority"] == "dm_owned_scientific_review"
+    assert current["request_history"][-1]["decision_authority"] == "pro_final"
     assert current["send_click_count"] == 1
     assert current["send_evidence"]["post_send_replacement"] is True
     with pytest.raises(ValueError, match="invalid transport transition"):

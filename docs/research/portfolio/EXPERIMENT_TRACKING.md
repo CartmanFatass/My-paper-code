@@ -1,10 +1,9 @@
 # HMASD current execution tracking
 
-Current workflow: owner resumed research on 2026-09-13. Root is the user entry; independent Luna/high Clerk coordinates four Astra/max DMs and the independent Portfolio Pro. Live dispatch/producer facts are maintained below and in .codex/hmasd-dm-sessions.toml.
-Updated 2026-09-13. Windows control checkout: C:/Projects/HMASD; PowerShell.
-Owner resumed research and Portfolio planning on 2026-09-13 under existing science/budget authority. Clerk activation and DM proposal dispatch are being established; no new grant or run is inferred.
-
-Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears here.
+OWNER_RESUMED. DM owns its entire direction lifecycle; direction Pro Convergence is independent
+scientific Reviewer. Clerk coordinates/records; Portfolio is the user report. Only explicit owner
+requests trigger cross-direction adjustments or Portfolio consultation. No automatic replacement.
+Current endpoints/main writer: .codex/hmasd-dm-sessions.toml. Update only from actual DM events.
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
@@ -16,79 +15,13 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
 | FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 
-Working-set target: **4**; existing overlap drains without interruption or fifth-slot admission.
-Occupied direction slots: **4** — MGTAP, RCLE, ACVC and FOLR, with their registered independent Astra/max DMs; legacy native DMs are retired/paused.
-At the pre-dispatch boundary there are no scientific handles: RCLE B09 and FOLR fixed allocations are fully intaken; ACVC/MGTAP have no external producer. Independent DM migration passed target-model acceptance; current routing is in .codex/hmasd-dm-sessions.toml. Occupancy is not a claim of four advancing runs;
-completion or idle state does not release an ACTIVE slot. CADC and ACPS are PARKED only through
-their explicit Portfolio dispositions. See [current workflow](decisions/2026-09-13-direction-management-workflow.md).
-One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
-to ACPS support only, unknown unless directly measured. MGTAP T and CADC exclude that shared item;
-each direction still counts its own implementation-through-cleanup and later Root integration once.
 
-Technical closeout retained at migration: FOLR removal_executed=false; RCLE cleanup inventory
-still awaits integration/retention reconciliation; MGTAP has a recorded local cleanup restriction.
-No remote deletion is verified by these static receipts. Their DMs own scoped follow-through after
-the current resume; these are not active scientific producers and do not settle direction lifecycle.
+The four registered DMs remain their direction owners until a recorded handoff. Report actual
+running work separately from occupancy; a DM can decide PARK/CLOSE without Portfolio approval.
+Clerk records any released capacity and does not fill it automatically. Scientific conclusions and
+new objects stay with their DM and independent review, not a mechanical coordinator.
 
-## Request audit — 2026-09-13
-
-RCLE 的 `2026-09-13-rcle-greedy-anchored-investment-01` 已完成 Portfolio intake 与 B09 执行（seed29/256/four-panel，exit0）；投资请求已闭环，当前 OWNER_RESUMED，不等待 ACK；由 DM 判断仍未解决的方向管理问题。
-
-FOLR 的 Portfolio F 已归档/intake，没有开放投资审批；Generic64 已完整技术接受，DM 随即直接
-执行已拨款 BANK128，Monitor 已回终态，combined intake 已完成，固定用途中 Generic-only（BANK worse）。ACVC 与 MGTAP 最近请求已完整 intake，没有新的未决
-答复。各自保留的 no-addition 与 uncertain-effect 事实不会凭 timeout 变为新请求。
-
-实验属于 DM object tier：只要 accepted card、Pro decision 或 finite grant 已固定对象、输入、
-比较器和 cap，DM 直接完成 admission、launch、collection 与 acceptance，不再向 Portfolio
-申请重复批准。Portfolio 只处理新的 investment、capacity、lifecycle、fusion/separation、
-registration 或 vacancy replacement；没有具体科学后果时不创建高频咨询。
-
-## Current routing
-
-| Role | Task | Runtime |
-| --- | --- | --- |
-| Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
-
-Read .codex/hmasd-transport.toml for Agentify/provider configuration. Each DM creates/reuses
-its native Transport, binds its exact ID in new handoffs, and receives archives directly. Root and DM use native
-long waits; each DM resolves and records its own reusable native Luna/low monitor identity on
-adoption. Experiment events return directly to DM. Root-action completions remain native.
-Historical packet addresses are not new dispatch routes.
-FOLR's300-second support value is an owner-clarified reference: recorded308.8422538 is not
-by itself a hard stop. Native/scientific scope and remaining explicit complete-work limits persist.
-Historical run roots, fixed SHAs and complete data remain in their scientific evidence records.
-
-
-
-
-## Overall Portfolio planning
-
-Portfolio is the independent persistent Pro research planner for the entire registered program.
-DMs provide current direction evidence/opportunities and proposals. Clerk transmits the global
-agenda, records the full plan and schedules its handoffs; new Portfolio requests share this one
-entry. Direction-node science and ordinary delegated experiments remain DM-owned. Existing
-accepted Portfolio packets preserve their original closeout routes.
-
-New overall plan under the revised role: **COLLECTING_PROPOSALS / OWNER_RESUMED**. The four DM target-model
-handoffs identify unresolved post-allocation management questions; they are inputs to the next
-current global planning event, not four granted experiments or already
-formed Portfolio decisions. Prior accepted scientific and lifecycle records remain effective.
-
-## Resume event and current mechanical coordination
-
-Owner event `2026-09-13-resume-with-independent-clerk`: four registered Astra/max DMs have received
-actual research-management continuation messages. Each prepares its outstanding post-allocation
-proposal independently and sends it to the registered Clerk; this is management execution, not a
-claim of new experiments. Clerk Luna/high bootstrap completed; main writer remains Root until
-MAIN_WRITER_RELEASED. The existing 50-minute heartbeat is ACTIVE on Clerk as recovery only.
-Root is the user entry. Pending Portfolio state is COLLECTING_PROPOSALS, no new accepted request yet.
-
-## Ordinary research authority correction
-
-All four DMs read their original allocation decisions and withdrew the inference that exhausted
-old allocation means no authority for any new A/B. Actual state: ACVC is selecting an independent-fit
-B, RCLE a longer-training B, MGTAP a descriptive outcome-informed A; FOLR identified a fresh-training
-B option but scientifically favors a whole-direction Portfolio comparison. These are preparation/
-management facts, not launched experiments. Ordinary A/B need DM finite budgets and existing
-constraints, not per-object Portfolio purchase. Clerk forwards only genuine global capacity/
-lifecycle/resource choices. The original frozen allocations remain closed on their actual scope.
+The unsent automatic overall-planning packet was retained as report material at 469e85fe7.
+It creates no live Pro request or authority. Existing accepted requests retain their own archive
+and return route. Review pending facts from current DM events rather than treating an old allocation
+as the direction's entire future permission. The 50-minute heartbeat is event-recovery only.

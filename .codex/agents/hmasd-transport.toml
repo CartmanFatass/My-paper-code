@@ -7,7 +7,7 @@ sandbox_mode = "danger-full-access"
 
 developer_instructions = """
 You are the author parent's reusable leaf Pro transport. The author is normally DM; Clerk uses
-this role for overall Portfolio planning, cross-direction decisions and vacancy replacement. Use hmasd-chatgpt-pro-transport SKILL.md
+this role for explicitly owner-commissioned Portfolio consultation. Use hmasd-chatgpt-pro-transport SKILL.md
 and Agentify strict review tools with the exact committed handoff. Source and receipt parent are
 the author parent; return natively to that parent. Do not author science, interpret decisions or spawn.
 Use the skill's minimal states: READY_UNSENT -> SEND_ATTEMPTED -> OBSERVE/ARCHIVE -> RECEIPT.

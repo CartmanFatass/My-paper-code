@@ -21,7 +21,7 @@ independent code Reviewer and high-risk review under ENGINEERING_SCOPE_SPEC sect
 DM resolves findings and accepts the work. Root owns shared control-plane implementation and
 acceptance with independent review where required. Accepted CM/Implementer work preserves its
 artifacts and original return route through closeout, without successors. Other specialists,
-Scientific budgets/Pro authority are unchanged. DM owns native Agentify Transport. Experiment observation
+Frozen scientific budgets remain; current DM/reviewer/report authority is defined below. DM owns native Agentify Transport. Experiment observation
 uses DM-owned native monitors under EXPERIMENT_MONITOR.md.
 
 
@@ -29,33 +29,29 @@ The current owner request, together with system and developer instructions, is t
 repository work. Repository documents describe methods and record evidence; they do not create a
 separate identity, permission, approval, or blocking system.
 
-**Root** is the user's workflow entry point. It interprets owner instructions, controls pause/resume,
-accepts shared control-plane changes and resolves exceptions requiring owner interaction. It does
-not approve ordinary DM actions or sit in the routine message path.
-**Clerk** is one independent `gpt-5.6-luna/high` task, registered in
-`.codex/hmasd-dm-sessions.toml`. OWNER_DIRECT 2026-09-13 delegates mechanical coordination to it:
-receive DM events, record changed facts, publish exact Portfolio agendas from DM proposals,
-own new Portfolio Transport/archive, distribute complete decisions, maintain execution tracking,
-integrate explicitly accepted commits and dispatch already selected assignments. It cannot choose
-science, alter budgets/lifecycle, reinterpret evidence or reject DM recommendations on merit.
-Root retains shared control-plane engineering acceptance. Remaining Root coordination/integration
-references in this document operate through this Clerk delegation; policy changes and semantic
-conflicts still belong to Root or the relevant DM. See docs/project/CLERK_OPERATIONS.md for exact
-write ownership and event handling. There is no additional ACK or approval gate.
-**Portfolio** is the independent persistent `portfolio:cross_direction` Pro session responsible
-for the overall research plan: composition, priorities, bounded programs, investment, capacity and
-lifecycle. It may plan before vacancies and propose new directions. DM owns direction science,
-management and execution, including Innovator/Convergence and object-tier choices. DMs submit
-current evidence/options to Clerk; Clerk transmits them without scientific preselection, preserves
-the complete plan and dispatches affected portions. DMs check scientific conformance and proceed
-independently; a concrete conflict returns to the same Pro node without holding conforming siblings.
-Existing accepted requests retain their original parent through closeout. Apply an already funded
-replacement at formal slot release without asking Portfolio the same question again.
+**Root** is the user entry and workflow-control owner. It applies owner instructions, handles
+exceptions and accepts shared control-plane engineering; it does not approve each research step.
+**DM** (independent Astra/max task) owns its complete direction lifecycle: research plan, objects,
+family changes, recast, C promotion, engineering, results, continue/defer/PARK/CLOSE and reopening.
+DM records evidence, reasons, uncertainty and next actions, and sends changed decisions to Clerk.
+**Direction Pro Convergence** is the independent scientific Reviewer. It reviews design, evidence,
+interpretation, conclusions and successor plans. DM responds to findings, corrects concrete defects
+or limits claims, and owns the final direction decision. Review is not investment, lifecycle or
+scheduling approval. Preserve its substantive review role; do not reduce it to a generic chat helper.
+**Clerk** (independent Luna/high task) coordinates events/resources under existing instructions,
+integrates accepted work and records DM decisions. Its writes and event handling are defined in
+`docs/project/CLERK_OPERATIONS.md`. It cannot judge scientific value or add approval gates.
+**Portfolio** is the user-facing overall research report. It summarizes DM-owned conclusions,
+lifecycle, actual work, costs, uncertainty and options. It is no longer a standing Pro decision
+node. Portfolio consultation and cross-direction adjustment occur only when explicitly requested
+by the owner. Reports/recommendations do not themselves authorize execution. No automatic request,
+new direction, replacement or revival follows a vacancy or a DM decision.
 
-Current owner instruction explicitly resumes research and Pro planning under existing science
-and budget authority. The single current operational state and live endpoints are in
-`.codex/hmasd-dm-sessions.toml`; historical pauses and old task IDs are not current dispatch rules.
-A later owner pause immediately suspends dependent dispatch and is delivered to all actual owners.
+OWNER_DIRECT 2026-09-13: this full-lifecycle DM delegation and report-only Portfolio replace older
+mandatory Portfolio/Pro finality and automatic replacement rules prospectively. Specific owner
+stops and actual resource limits remain. Preserve accepted external requests through archive;
+new advice does not automatically change global layout. Current research is resumed, with live
+state/endpoints in `.codex/hmasd-dm-sessions.toml`. Historical pauses/routes are not current rules.
 
 OWNER_DIRECT 2026-09-10: DM absorbs the former CM's engineering responsibilities and implements
 directly. Under the temporary 2026-09-12 owner instruction, DM performs implementation and self-checks;
@@ -70,10 +66,10 @@ Clerk receives independent DM handoffs through app messages. DM also owns native
 Each DM owns one reusable native Luna/high Agentify Transport child for exact Pro Send,
 observation, reconciliation, archive and direct native receipts. DM authors and publishes the
 request, dispatches to its child, waits natively and checks the complete response. Clerk uses the
-same parent/child route for overall Portfolio planning, cross-direction decisions and vacancy
-replacement, and integrates conforming decisions; it does not forward routine transport
-receipts. Recover uncertain effects on the same request before another Send. Pro authority and
-frozen input/provider bindings are unchanged. The Transport skill owns current Agentify APIs;
+same parent/child route only for explicitly owner-commissioned Portfolio consultation,
+preserving its advisory or expressly authorized scope; it does not forward routine transport
+receipts. Recover uncertain effects on the same request before another Send. Scientific review responsibility and
+frozen input/provider bindings remain explicit. The Transport skill owns current Agentify APIs;
 ROOT_OPERATIONS.md and SIBLING_COMMUNICATION.md own native collaboration.
 OWNER_DIRECT 2026-09-11: Transport Send readiness is independent of which Codex task opened or
 owns a browser surface. Browser/task scope is not a permission blocker. Transport determines
@@ -94,8 +90,8 @@ more. `docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a req
 Clerk follows each direction handoff through its DM acceptance and authorized continuation. Resume
 its original DM for direction-local science and implementation/repair. Dispatch, forwarding
 and a child's completion alone are not completion. Clerk resolves working-set replacements and
-execution dependencies within existing decisions; new scientific choices go to the proper Pro
-node through the designated DM. Record useful execution evidence
+execution dependencies within existing decisions; new scientific/lifecycle choices belong to the
+DM, with independent direction Pro scientific review and recorded responses to findings. Record useful execution evidence
 in existing tracking; planning and execution happen in the same session.
 
 Clerk owns the main checkout and index. Commit ready explicit paths and push immediately;
@@ -148,123 +144,70 @@ That specification also maintains delegation, independent review and DM engineer
 `ROOT_OPERATIONS.md` assigns the accountable owner and Git/integration responsibilities.
 A child's completion is evidence for that owner, not acceptance or scientific authority.
 
-## 2. Decision ladder
+## 2. Decision ownership
 
-### Ordinary direction research belongs to DM
+OWNER_DIRECT 2026-09-13: DM owns the entire lifecycle of its admitted direction. Its standing
+delegation covers useful ordinary A/B and C work, opening/closing families, recast, post-C choices,
+C-BENCH promotion, continuing, deferring, parking, closing and reopening its own direction. Review
+and evidence requirements follow the actual claim; there is no mandatory Pro approval tier.
 
-OWNER_DIRECT 2026-09-13 authority correction: the DM manages research in its admitted direction,
-including selection of useful new ordinary A/B objects within an accepted, open mechanism. Standing
-object delegation is their authority; the card records the object and budget, not an application
-for permission. DM declares a finite invocation count, proportionate cost/resource bound and stop
-condition before execution, then implements, checks, launches, intakes and selects useful follow-up.
-Ordinary object choices and engineering within existing compute capacity do not require Portfolio
-grants, Root/Clerk ACK, a new customer or a new positive result.
+| Scope | Accountable decision owner | Record |
+| --- | --- | --- |
+| Direction research and lifecycle | DM, subject to specific owner overrides | Existing card/intake/DIRECTION.md, reasons/evidence/next condition, OWNER_DELEGATED |
+| Independent scientific review | Direction Pro Convergence; DM responds and resolves findings | Full review, DM response/corrections and accepted claim limits |
+| Mechanical coordination/reporting | Clerk | Actual events, accepted integration, current report and pending consequences |
+| Cross-direction layout, new directions or new resource commitments | Owner through Root on an explicit request | Owner instruction and actual application; requested advice remains advice |
 
-An ended allocation or a decision that selects no successor only describes that allocation/answer.
-It does not revoke direction-wide standing delegation. An undeclared direction cumulative budget
-must not be interpreted as zero remaining permission; nor does it imply unlimited compute. Actual
-direction-wide cumulative caps, device constraints and resource limits still apply. DM accounts
-for cumulative cost and justifies the next bounded object proportionately under evidence-spec 11.8.
-New training seeds, training scale or comparisons may be justified follow-ups within an open
-mechanism; they do not automatically require a new Portfolio investment decision.
+DM declares finite invocation/cost/resource bounds and stopping conditions before execution.
+Standing delegation is the authority; a card records work rather than requests permission. An ended
+allocation or unselected successor does not make direction-wide authority zero. Actual cumulative
+caps and specific owner constraints apply; no unlimited compute follows. Use empirical-spec 11.8
+for proportionate work and cost reasoning. New seeds/scales/comparisons need scientific reasons,
+not evidence of an entirely new mechanism or a Portfolio grant.
 
-Preserve a frozen object's exact budget and meaning, and explicit no-retry/package/family stops at
-their actual scope. Do not evade a prohibition by renaming the same attempt. Conversely, a statement
-that a consultation bought no experiment is not a blanket ban on all other ordinary experiments.
-Family opening/closure, recast, post-consumed-C direction choices and C-BENCH promotion retain the
-direction-node authority below. Portfolio handles overall priority, capacity, lifecycle and real
-resource expansion (such as exceeding an explicit direction cumulative cap, changing cross-direction
-capacity allocation or making a new resource commitment), not each ordinary card or invocation.
+Preserve frozen objects, completed C rules and historical results. A prospective DM decision may
+revise an earlier Pro family/lifecycle recommendation with explicit reasons; it cannot rewrite
+history or disguise a new object as a compliant retry of the old frozen allocation. DM may not
+change another direction or make new resource commitments. If no useful work remains, DM makes
+the lifecycle decision rather than waiting for permission or manufacturing low-value experiments.
 
-When no useful object remains, the DM makes that scientific assessment and proposes the unresolved
-direction/lifecycle decision. It neither waits for blanket permission nor manufactures low-value
-experiments to keep an ACTIVE label. Clerk forwards genuine Portfolio questions and reports progress;
-it cannot impose additional research gates or decide scientific value.
+Direction Pro remains an independent scientific Reviewer, using Innovator/Convergence bindings as
+appropriate to the review question. DM arranges meaningful review proportionate to scientific risk,
+reads the full answer and records responses to material findings; concrete design/integrity/claim
+problems are repaired or bounded before dependent claims are accepted. Neither blind acceptance of
+Pro nor dismissal of findings by invoking autonomy meets this responsibility. Review completion is
+not a grant or lifecycle veto. A/B launch conditions remain empirical-spec 11.4, and C keeps its
+actual evidence burden. Current specifications may not be silently relaxed to avoid findings.
 
-Evidence-spec §11.8 controls default scientific burdens and ordinary research engineering
-checks over conflicting older direction, template or role wording. It does not retroactively
-reinterpret historical results or rewrite the current named VNFC E01 task. Consultation exposure
-may cite existing execution records and state zero new exposure; no new exposure experiment is
-required. Protecting frozen scientific meaning does not prohibit a properly selected new B or
-explicitly labelled outcome-informed reanalysis under the existing decision ladder.
+Portfolio report comparisons retain honest claim ceilings, headroom/MEI, costs, contrary results
+and recast history. Existing owner priority/resource ordering remains until changed by owner.
+A new recast is DM's decision and report fact, not an automatic global priority change. Four is a
+working-set target, not automatic replacement authority. Report vacancies and continue independent
+work; only an explicit owner adjustment admits replacements or changes cross-direction priorities.
 
-Every decision that selects what to run next belongs to one tier. The tier fixes who decides,
-where it is recorded, and its provenance label.
+## 3. Scientific gaps and external-effect recovery
 
-| Tier | Decides | Who | Record and label |
-| --- | --- | --- | --- |
-| Object | useful new ordinary A/B objects in an accepted open mechanism with DM-declared finite budgets, next rung of a ladder, card wording, treatment and comparator inside an accepted mechanism, dropping an arm, budget deviation inside the cap, quarantine of an attempt after reproduction | the DM, locally, under §4 when the owner is absent | intake section: options, recommendation, selection, `OWNER_DIRECT` or `OWNER_DELEGATED` |
-| Direction | open or close an object family, park, recast, the next object after a consumed C, promotion to C-BENCH | `em:<direction>:convergence` (or `:innovator` before a C freeze); the owner directly when present | decision record, `PRO_FINAL` or `OWNER_DIRECT` |
-| Portfolio | priority, capacity, lifecycle, fusion, separation, registration, investment | `portfolio:cross_direction` decides within the standing delegation in §4.8; the owner may override asynchronously | `docs/research/portfolio/decisions/<date>-<slug>.md`, `PRO_FINAL / ROOT_INTEGRATED` or `OWNER_DIRECT` |
+A real missing scientific fact or unresolved review finding can hold only the work/claim depending
+on it. The DM owns resolution; lack of a Portfolio decision is not a direction blocker. Scientific
+review is not replaced by a local fabricated Pro verdict. Record the DM's actual decision and
+reasoning while independent work continues.
 
-A complete archived Pro response that decides the posed question at its declared evidence class
-and within current owner instructions and applicable specifications is final for its node.
-Completeness alone does not authorize a silent specification exception. The author parent (DM, or Clerk for overall Portfolio planning/replacement) checks this in
-the existing intake: cite any concrete conflict, preserve the response, and return that conflict
-to the same node for correction before executing the affected requirement. Execute independent
-conforming work meanwhile; do not invent a replacement decision or add an approval layer.
-An explicit specification-change proposal must identify the rule, necessity and scope and use
-the existing appropriate-node authority under §4.7. Clerk and DM execute conforming decisions. A Pro
-round is never a launch condition for an A or B object (§11.4). Every Pro packet carries the
-machine-generated exposure line and, for a sweep, the per-arm cost projection (§5). A DM may
-attach an engineering dissent (`*_ENGINEERING_DISSENT_<date>.md`) naming a missing fact; the
-node is re-opened with that document rather than a new round.
-
-Portfolio decisions use §4.8; specification changes use §4.7. Neither delegates Portfolio scientific selection to Clerk.
-
-**Investment fields** (owner decision 2026-09-04 as revised the same day, evidence spec §11.7).
-Headroom, the gap between a stated upper reference and a tuned same-information baseline on the
-direction's host, is a diagnostic and sequencing input, not an investment threshold: every
-Portfolio proposal states each direction's headroom record or its absence, and when compute is
-contended a direction with a record sequences ahead of one without. Each card declares its own
-minimum effect of interest (absolute, relative, or both) with the DM's reason; there is no
-repository-wide number, and the declared value informs Portfolio comparison without rewriting the
-card's own result branches. Each direction has a recast budget of one: a second Convergence
-`RECAST` still executes (the Pro decision is final for its node), but the direction drops to the
-lowest sequencing priority among ACTIVE directions and the DM flags a digest row `second-recast`;
-the owner may PARK it asynchronously. Sequencing never becomes a lifecycle disposition: every
-`ACTIVE` direction remains admitted to the research queue, while Clerk plans a target working
-set of four concurrently advancing top-level DM chains. A queued
-`ACTIVE` direction is not `PARKED`; entering or leaving the working set changes no lifecycle,
-priority, scientific meaning, or evidence polarity. After a formal direction pause/closure leaves fewer than four occupied slots, Clerk applies the
-existing complete Portfolio replacement/investment mapping; only an unresolved replacement choice
-requires a new question. Dispatch the selected DM from the conforming decision. Clerk drains temporary
-overlap without interrupting live work. Four is an execution-parallelism target, not a direction-count or fusion target. Directions
-share assets without fusing; fusion is proposed on demand only when their question, comparator,
-estimand, and next object are materially the same. Nothing in this paragraph waits for the owner,
-none of it is a §11.4 launch condition, and ladders already open continue.
-
-## 3. Blocker rule
-
-A connector, evidence, or transport status alone does not establish whether a Pro decision was
-formed. Reconcile the bound request and full response first; a verified complete response goes
-to its author parent for intake even if a chat receipt or local status reports a blocker.
-If no decision was formed, the blocker never transfers final authority to a local model:
-
-Transport retains recovery of the same request, prompt and binding. Proven ineffective clicks
-permit a concrete repaired attempt under the Transport skill; uncertain acceptance stops Send,
-not reconciliation or observation. Preserve prior attempts and blocker receipts, and clear
-previous-round observations when binding a successor. Independent work continues while the author parent intakes
-the eventual complete response; a blocker return does not close the recovery assignment.
-
-- **Object tier**: the DM takes the recommended option as a provisional decision labelled
-  `PRO_BLOCKED / LOCAL_PROVISIONAL`, restricted to reversible actions, queues the round for retry,
-  and lists the item first in the audit ledger. The archived Pro decision, when it arrives,
-  supersedes the provisional one at the next clean boundary.
-- **Direction and Portfolio tiers**: only dependent work waits at a recoverable clean boundary
-  (committed inputs, detached runs, recorded state); independent authorized work continues.
-  This wait is not a lifecycle PARK/closure and does not free a direction slot. Nothing is decided
-  provisionally at these tiers.
+Preserve accepted request/prompt/binding and full response. Transport recovers the same request;
+verified nonacceptance permits repaired Send, uncertain effects permit observation/reconciliation.
+A transport status alone does not erase a verified complete response. No automatic repeated
+consultation follows a timeout. Old Portfolio answers are retained as report/advice, with global
+application only within a new explicit owner instruction. Direction reviews return to the DM for
+scientific response and decision; there is no PRO_BLOCKED provisional-authority ladder.
 
 ## 4. Unattended operation
 
 When the owner is absent the loop keeps running under a standing delegation (owner instruction
 2026-09-03 13:58 PDT, `docs/research/portfolio/decisions/2026-09-03-unattended-delegation.md`):
 
-1. At every object-tier decision the DM lists the options and the recommendation, selects the
+1. At every direction research/lifecycle decision the DM lists the options and the recommendation, selects the
    recommended option, and records `Owner-delegated decision (unattended, <date> instruction): (x)`.
 2. Predict-then-verify continues; the owner's prediction slot is marked `not taken (unattended)`.
-3. Excluded from ordinary object-tier delegation: Portfolio-tier decisions outside §4.8; changes to frozen scientific meaning;
+3. Excluded from direction delegation: cross-direction adjustments/new resource commitments without an owner request; retroactive changes to frozen scientific meaning;
    history rewrites, deletion of evidence roots, or any other irreversible action outside the
    ordinary research loop. Governance/specification edits, including this file, `.codex/`,
    `.agents/`, and `CLAUDE.md`, follow the explicit delegation in §4.7 rather than a blanket exclusion.
@@ -300,126 +243,41 @@ When the owner is absent the loop keeps running under a standing delegation (own
      valid result, written at intake beside and linked from the English intake document.
 6. The delegation lasts until the owner revokes it.
 
-7. **Pro-directed specification changes.** The owner delegates specification plans within
-   the proper Pro node's scope under the recorded standing delegation. After initiating
-   the appropriate Pro request, read and archive its complete formed decision, then implement
-   the exact specification plan and the Portfolio updates explicitly included in that plan
-   without another per-item owner approval. This covers engineering/governance specifications
-   and their implementing instruction files; it does not authorize unrelated dispositions,
-   an incomplete or out-of-scope Pro proposal, evidence deletion or history rewrites. Scientific
-   requirements and the node's scope remain explicit; a rule change does not itself accept code
-   or launch an experiment. At application, use the owner's console to highlight the existing
-   P1/P2 item and trace the actual owner delegation, exact Pro source, affected files and actual
-   application state. Preserve contrary evidence and asynchronous owner overrides; never invent
-   an owner reply. Record: `docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md`.
-
-8. **Portfolio Pro finality (OWNER_DIRECT 2026-09-10).** A complete archived response from
-   `portfolio:cross_direction` decides the bound investment, priority, lifecycle, capacity,
-   fusion/separation or registration question within current owner instructions and specifications.
-   The author DM checks scientific/specification conformance; for its global Portfolio request Clerk checks
-   the complete decision against the bound scope and specifications. Clerk implements and records the
-   decision without per-item owner ratification. Preserve asynchronous owner overrides and actual
-   application states using the existing owner console. `PRO_FINAL / OWNER_DELEGATED` traces the
-   Pro decision under this standing delegation; `ROOT_INTEGRATED` describes publication, not a
-   second scientific verdict. This does not enlarge a frozen invocation budget, rewrite history,
-   or retroactively apply an old unratified proposal. An explicit specification change still uses
-   §4.7. Material disagreement or a concrete conflict returns to the same Pro node, never a local
-   substitute. The current decision record supersedes older ratification requirements prospectively.
+7. **Specification and control changes.** Root owns shared policy/control engineering and its
+   acceptance; DM owns direction implementation and scoped procedures. The current owner instruction
+   authorizes this workflow change. Scientific evidence requirements remain controlling; a review
+   recommendation alone does not amend them. Trace the real authority, exact change and application
+   using existing records; never invent owner replies or silently convert a recommendation to policy.
+8. **Portfolio reporting and owner-requested adjustment.** The former standing Portfolio Pro finality
+   is withdrawn prospectively. Maintain a user-readable report from DM decisions and evidence.
+   Only an explicit owner request starts a Portfolio consultation or cross-direction adjustment;
+   a request for reporting/advice alone does not authorize implementation. Preserve historical
+   PRO_FINAL records as provenance and ongoing accepted requests through archive, without automatic
+   new dispositions or replacement launches. Owner instructions remain the source of global changes.
 
 ## 5. Capacity and resume
 
-OWNER_DIRECT 2026-09-13: research and Pro planning are resumed. Four independent Astra/max DM
-migrations are accepted. Clerk is the independent Luna/high event coordinator and Root is the
-user entry; current routes/state are in .codex/hmasd-dm-sessions.toml. The 50-minute heartbeat is
-only recovery, not the normal trigger. Independent DMs message Clerk at actionable boundaries;
-native children retain their actual DM parent. Accepted evidence/request bindings are unchanged.
+Research is resumed under current owner instructions. Four independent Astra/max DMs own their
+admitted directions; Clerk coordinates and records, Root is the user entry. Each direction advances
+independently through useful research, scientific review and DM lifecycle decisions. No sibling
+batch, Portfolio vote, Root/Clerk ACK or allocation-renewal handshake is required.
 
-OWNER_DIRECT 2026-09-10: directions advance as independent rolling chains. Each direction proceeds
-from its own accepted evidence, decision, dependencies and fresh resource admission; it never waits
-for a named batch, Portfolio bundle, sibling result/intake/cleanup or a global stage boundary. A
-result, blocker, failed admission, Pro wait or closeout affects only that direction. Clerk integrates
-and replaces work continuously. A prior `no successor` closes only the named allocation; it creates
-no synchronization barrier. Cross-direction choices remain Portfolio-tier decisions, while
-independent authorized work continues during their preparation and resolution.
+At a result, review, material defect or lifecycle boundary, DM sends Clerk one actionable app
+message with evidence/revision, actual decision, next owner/action and real producer if any. Clerk
+deduplicates delivery while completing unfinished consequences, integrates accepted records and
+reports changed facts. Native children return to their actual DM. No unchanged status/ACK loop.
 
-OWNER_DIRECT 2026-09-12: a finite object, grant, cleanup or `no automatic successor` ends only
-that named allocation. Clerk must not pause, stop, remove or mark the containing ACTIVE direction
-as released on that basis. DM manages the direction beyond a finite assignment: select delegated
-object work, develop a direction proposal, or obtain the unresolved Portfolio capacity/lifecycle
-decision. No executable continuation and no real producer is an unfinished management transition,
-not a terminal ACTIVE-idle state. Scientific no-addition does not answer an unasked lifecycle question. Only Portfolio's formal stopping, parking or
-replacement decision, or a direct owner disposition, releases the direction. Before drafting a capacity or new-direction question, its author
-(DM for direction questions; Clerk for global planning/replacement) refreshes every affected old direction from its current DM handoff, `DIRECTION.md`
-and latest intake; Clerk status shorthand and ended allocations are not lifecycle evidence.
+DM PARK/CLOSE/defer applies at a safe boundary with live runs/requests reconciled and a recorded
+reason/revisit condition. Clerk records released capacity and tells the user; it does not automatically
+seek Portfolio replacement, create a new direction or revive another direction. Existing admitted
+DMs manage their own reopening within actual owner scope and resource capacity. The four-direction
+target cannot override a scientifically justified DM stop or authorize new global investment.
 
-Clerk applies the `hmasd-loop-dispatch` skill's stable next-action trigger at goal-turn entry,
-actionable native return and before the first wait after useful work. An
-unchanged timeout resumes waiting without a new dispatch pass. Check owner pause/stop instructions
-first. A workflow edit or status question does not resume paused research.
-
-OWNER_DIRECT 2026-09-13: the [four-DM autonomy consolidation](docs/research/portfolio/decisions/2026-09-13-dm-autonomy-consolidation.md)
-applies continuous DM ownership to each accepted allocation. When the accepted card, Pro decision
-or finite grant fixes the object, inputs, comparator, allowed invocations and cap, the same DM
-completes execution bindings, implementation/repair, proportionate checks and required independent
-review, commit/push, fresh admission, detached launch, Monitor adoption, collection, technical
-acceptance, scientific intake, preservation and assigned cleanup. It directly takes the next step
-already covered by that allocation or standing object-tier delegation. Clerk ACK, integration,
-another Portfolio vote and a separate dispatch at each step are not execution gates. Existing
-source, host/device, integrity, review, invocation and cap requirements still apply.
-
-The DM may also prepare, publish, bind and send a concrete unresolved proper-node question through
-its native Transport without Clerk approval. The question states the actual choice it would change
-and the new fact or concrete proposal relative to the last complete decision, in the existing
-card/intake; no new form or universal customer, positive-result or diagnostic prerequisite follows.
-Direction-tier scientific changes use the original Convergence/Innovator routes in §2; a frozen
-meaning conflict returns to its proper authority. Portfolio handles new investment (including
-real resource expansion beyond ordinary object delegation or explicit direction-wide caps), priority/capacity, lifecycle,
-fusion/separation, registration and vacancy replacement. Ordinary within-cap object choices and
-card-fixed experiments remain with DM. A new card, failed attempt, unused time or ACTIVE label
-does not create grant or retry authority. Clerk coordinates real shared writers/runtime and other
-cross-direction dependencies and applies accepted dispositions; it does not select new science.
-
-At completed intake, a material blocker/scope conflict or Portfolio boundary, DM sends one
-proactive event via its registered route: actual state, evidence/commit and decision scope, next
-action/owner and concrete dependency if present. Clerk deduplicates event identity and records the
-resulting action separately from message delivery. Ordinary intermediate steps stay direction-local.
-When a real request/handle/producer is pending, DM waits after independent work. With no continuation
-or producer and no explicit deferral decision, DM resolves the management transition under
-ROOT_OPERATIONS.md. A future possible fact is not a promised outside result. Explicit deferrals
-record capacity treatment, revisit condition and responsible owner; do not keep empty native waits.
-
-Independent DMs keep their own execution turns/child waits; Clerk is event-driven and ends after
-handling its messages. The existing enabled heartbeat only recovers missed events/interruption.
-For unmigrated native chains or Clerk's own Transport, use supported native waits while a real
-producer is outstanding, with no unchanged status broadcast or full-record reread. Runtime tool
-limits and active higher-priority communication rules control wait duration. Concrete blockers
-and idle unfinished management require recovery, not indefinite waiting. Owner pause ends research
-work and keeps both native and independent DMs from launching/consulting until explicit resume.
-
-While research is authorized to advance, the working-set target is four parallel direction DM
-chains. Keep any existing overlap intact and let it drain at formal direction dispositions; do not
-add a fifth direction. A running experiment or Pro wait remains part of its owning direction.
-An idle, blocked or ended object is a recovery/continuation issue for that DM, not a vacancy.
-Only a formal direction pause/closure (or explicit owner disposition) releases its slot. If fewer
-than four slots remain, apply the existing conforming plan's selected/funded replacement or request
-the unresolved choice once. Record pending request/slot reservations so repeated events cannot
-duplicate requests or DMs.
-Recount occupied and reserved slots before dispatch. Clerk, Transport, monitors, Reviewers and
-detached processes do not consume separate direction slots. Report actual advancing work separately
-from occupied slots; a queued intention alone is not active execution.
-
-The loop skill owns per-direction event ordering and rolling dispatch. ROOT_OPERATIONS.md maps complete
-deliverables to Clerk, DM and optional Operator; EXPERIMENT_MONITOR.md owns observation
-transfer. Clerk resolves readiness and cross-direction dependencies while DM carries its
-assigned direction through scientific/technical acceptance. Temporary overlap drains at clean
-boundaries of the affected directions; there is no global clean boundary. Scheduling alone changes
-no lifecycle, scientific meaning, priority or budget.
-
-There is no fixed limit on result-bearing runs within the direction
-working set. Clerk plans from actual runtime capacity and dependencies; DM apply the fresh
-per-invocation resource check in section 7. Failed admission returns to the same DM for bounded
-technical resolution while Clerk advances independent work. Runtime thread limits are implementation
-constraints, not research-capacity policy.
+Clerk uses hmasd-loop-dispatch for changed events; the enabled 50-minute heartbeat recovers missed
+or interrupted consequences only. A real run/review/request has an owner/identity/event and retains
+observation. An ACTIVE-idle direction without work or a lifecycle decision goes back to its DM for
+that missing decision; no indefinite empty waits or forced low-value experiments. Specific owner
+pause/stop overrides ordinary autonomy, and workflow questions alone do not pause research.
 
 Result-bearing and other compute-intensive execution is **remote-first** (owner, 2026-09-04). The
 active node and exact access, checkout, interpreter, GPU, and task-supervisor facts are declared in
@@ -643,16 +501,13 @@ appendix and completed historical tasks remain unchanged.
   and receives its native Pro receipts; .codex/hmasd-transport.toml contains no global endpoint. Each DM creates/reuses a native Luna/low Experiment Monitor
   with minimal assignment context; resolve canonical names from runtime results. Experiment
   adoption/terminal facts return directly to DM. No shared Monitor or completion Relay endpoint.
-- Direction-related Portfolio proposals and scientific conformance stay with the responsible
-  DM using `hmasd-portfolio-task`; Clerk owns new Portfolio request transport and full-plan recording; Clerk assembles global planning/cross-direction/replacement agendas and records complete
-  Portfolio responses through its reusable native Luna/high Transport; Pro owns overall planning. `caller_role=portfolio`
-  describes the decision node, not the author's native role. The same DM still uses
-  `caller_role=em` for direction nodes. Source and receipt parent are the author (DM, or Clerk for overall Portfolio planning/replacement); operator is its native Transport child. DM
-  dispatches and checks the full response, then returns the operational mapping to Clerk.
-  Independent DM creation/resume explicitly selects gpt-6-astra/max per owner; other messages
-  preserve their current model/effort unless the owner specifies a change. Existing source/parent/operator IDs, request
-  bytes, provider bindings, accepted generations and receipt destinations stay unchanged.
-  Keep legacy native return routes until their accepted work closes; do not duplicate Sends.
+- Each independent DM uses Astra/max and owns its full lifecycle. Direction Pro Convergence is
+  its independent scientific Reviewer, served by its own reusable native Transport. Source/parent
+  are the actual DM; operator is its child. Review responses inform DM decisions, not grants.
+- Portfolio is a user-facing report. Only an explicit owner-commissioned consultation uses a new
+  Portfolio request with Clerk as source/parent and its native Transport as operator. Preserve old
+  accepted source/parent/provider IDs through archival; no automatic global application or resend.
+  Clerk task creation/resume explicitly selects gpt-5.6-luna/high. App messages keep these settings.
 - Reuse each node's current verified 6 Pro conversation. Apply the provider-exclusion policy
   recorded by `.codex/hmasd-transport.toml`; the observed-ID inventory is not exhaustive.
   Never navigate, prebind or Send to an excluded conversation. An unbound node creates and records a verified conversation without inventing

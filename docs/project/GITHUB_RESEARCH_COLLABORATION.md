@@ -1,13 +1,9 @@
 # GitHub research collaboration
 
-DM authors/intakes its direction Innovator/Convergence questions and supplies Portfolio proposals.
-Clerk assembles all new Portfolio agendas for the independent overall-planning Pro session, owns
-its native Transport/full-response record, and maps the plan to DMs for scientific conformance and
-execution. Clerk does not approve science. Accepted historical requests retain their author/parent
-through closeout; no migration resend. ROOT_OPERATIONS.md owns the current responsibility split.
-Use `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md` to create a fixed GitHub
-task and `.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md` for Transport operations.
-Scientific authority, experiment admission and Git rules remain in AGENTS.md.
+DM authors and intakes direction Pro scientific reviews, responding to findings and retaining
+research/lifecycle decisions. Portfolio is the user report. Clerk publishes a Portfolio Pro packet
+only on an explicit owner commission, preserving its advice/implementation scope; recommendations
+do not automatically authorize global changes. Accepted old request bindings remain immutable.
 
 ## Task and delivery scope
 
@@ -131,8 +127,7 @@ ROOT_OPERATIONS.md, “Current records, integration and cleanup”. Request-spec
 Send and archive fields belong to that request; carrying a prior round's fields into a new
 current record is not delivery evidence. Preserve them in their original request history.
 
-For ordinary Portfolio requests DM is author/source, parent and dispatcher; its native Agentify
-Transport is operator. For vacancy replacement Clerk instead owns those author/parent duties and
-receives its own child Transport archive. The author checks complete
-responses for conformance, then Clerk applies the resulting decisions. Existing
-request identities and delivery clauses are unchanged; no new protocol or duplicate Send follows.
+For owner-commissioned Portfolio consultation Clerk is author/source/parent and its native
+Transport is operator. Direction scientific-review packets remain DM-owned. Preserve accepted
+request identities and archive full answers; DM responds to scientific findings, and Portfolio
+advice enters the user report rather than automatically changing the research layout.

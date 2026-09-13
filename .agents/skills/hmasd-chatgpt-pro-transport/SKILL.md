@@ -11,7 +11,7 @@ judgment. Clerk routes missing science or complex engineering repair to the rele
 it never turns a helper failure into a scientific stop or adds a Root ACK gate.
 
 The actual parent owns one reusable native Luna/high leaf Transport: DM for direction nodes,
-Clerk for new overall Portfolio planning/decision requests. Execute the assigned request; the parent
+Clerk for explicitly owner-commissioned Portfolio consultation. Execute the assigned request; the parent
 preserves the full answer, with DM scientific conformance for its affected scope. The current native assignment supplies the
 direct return parent. Preserve frozen HANDOFF IDs as provenance when recovering an older request.
 No singleton app task, relay, ACK loop, new scientific prompt or science selection belongs here.
