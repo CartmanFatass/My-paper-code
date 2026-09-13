@@ -1,5 +1,7 @@
 # ACPS post-B02 Portfolio intake
 
+**Completion update, 2026-09-13:** the purchased Q is fully delivered and intaken at [ACPS_POST_B02_USE_INTAKE_20260913.md](ACPS_POST_B02_USE_INTAKE_20260913.md). Convergence returns no candidate and a reversible park of only the tested package/current use; whole ACPS remains ACTIVE/HIGH/recasts0. The historical original investment and recovery facts below remain provenance. Q releases no successor funds or direction slot.
+
 **Apply Q once: one ACPS Convergence use/design question, complete answer and DM intake/publication, with its complete documentary cost explicitly accepted UNKNOWN.** There is zero empirical or conditional allocation. Keep ACPS ACTIVE/HIGH, recasts: 0, and fully informed SHARED as the measured-use default. The response's separate five-chain capacity sentence was returned rather than applied. On 2026-09-13 the complete same-node [amendment intake](../../portfolio/pro_packets/20260913_acps_capacity_correction/INTAKE.md) resolves it at `e99cdb113f24b030c7f18b7a3b84257b5a500d0c`; the original response and the initial conflict facts below remain preserved. The independent Q purchase conforms and continues.
 
 ## Complete response, binding and checks

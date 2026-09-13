@@ -115,6 +115,14 @@
       "record": "docs/research/portfolio/pro_packets/20260913_acps_capacity_correction/INTAKE.md",
       "state": "applied",
       "summary": "原Portfolio明确修正两句容量文字：四方向目标、保留既有重叠，Pro/恢复等待不释放占用槽位；Q全部资金/科学/生命周期不变。原Q仍确认未Send，精确model-selector修复由Root交MGTAP。"
+    },
+    {
+      "at": "2026-09-13T11:47:50+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "f842439457bfaad8f9c57f1e3974d0f4bf22e9fd:docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/archive/RESPONSE.md",
+      "record": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_POST_B02_USE_INTAKE_20260913.md",
+      "state": "applied",
+      "summary": "Original Q completed: full115-line no-candidate response intaken; reversible exact tested-use park only, SHARED default, whole ACPS ACTIVE/HIGH/recasts0, zero empirical/conditional funding. Verified never-Send rebind lineage preserved."
     }
   ]
 }

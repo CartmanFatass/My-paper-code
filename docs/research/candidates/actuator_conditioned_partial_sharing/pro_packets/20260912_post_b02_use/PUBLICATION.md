@@ -56,3 +56,19 @@ Transport must establish those external facts and verify the new `Latest` operat
 means the unchanged GPT-6 Astra / Pro requirement. The repository audit sidecar preserves
 identical JSON data with LF line endings; RECOVERY_RECORD separately records its hash and
 the preserved original raw receipt hash. This is no rewrite of the old receipt.
+
+## Completed Q and recovery
+
+The linked operation `c827876f-c617-4299-9cee-1ee205673cd5` made one Send and completed the
+original fixed question. Full response `f842439457bfaad8f9c57f1e3974d0f4bf22e9fd` has 115 lines /
+27,467 bytes, SHA-256 `b51e6815c3423ab36a19636e3fb03a9dff07c13b0035134c8c4bebe6294e7f7f`.
+The complete raw archive equals Git; [response facts](RESPONSE_FACTS_20260913.json) retain the
+separate strict short receipt, exact operation arguments, provider pairing, delivery comment
+and recovery history. Registry is ARCHIVED; direct native-final receipt is SENT. New tab closed;
+old tab and never-sent operation remain preserved. Transport removed its temporary marker only.
+
+The [complete scientific intake](../../ACPS_POST_B02_USE_INTAKE_20260913.md) applies no candidate
+and a reversible exact tested-use park, preserving informed SHARED and whole-direction
+ACTIVE/HIGH/recasts0. No new empirical or second scientific question grant exists. The prior
+runtime dependency is closed by the authorized rebind; subsequent investment/lifecycle belongs
+to the ordinary Portfolio route. Old failed-operation receipts remain historical facts.
