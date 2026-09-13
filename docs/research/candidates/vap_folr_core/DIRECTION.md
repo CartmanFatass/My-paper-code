@@ -980,7 +980,9 @@ Generic-only use. No equivalence, stable superiority, component-memory cause,
 original-CAMA, speed, transfer or C/UAV claim follows. Generic technical completion
 precedes the new BANK panel, whose acquisition is independent of Generic's score.
 A missing endpoint leaves the dependent contrast unavailable with no automatic
-replacement. This finite investment is not supplied by the direction decision.
+replacement. The direction decision did not supply investment; Portfolio has
+now funded this same finite use once, with no change to its scientific ceiling
+([investment intake](pro_packets/20260913_retained_reference_investment/INTAKE.md)).
 
 References:
 
