@@ -57,3 +57,25 @@ No accepted/READY packet was edited. The final matching REQUEST is rendered into
 delivery_v2 directory, which is the only handoff to bind and return for this request. The
 first draft and rejection are preserved as authoring provenance, not a second request or
 Send attempt. This mechanical correction changed no option, result, budget or science.
+
+## Direct Transport return and preparation acceptance
+
+The existing native Transport returned PREPARED_UNSENT directly after its one read-only
+check of handoff ca1090531e109a279e303111aa53daa1691190ee, fixed TASK
+7ad38aa48460d581b6eb9b79d1e9735dca9d350f, canonical manifest and native route. Its one
+registry read found the prior Convergence request ARCHIVED with its tab closed. No new
+registry claim/write, browser action, provider operation, Send or runtime artifact exists.
+[The direct receipt](TRANSPORT_PREPARATION_RECEIPT.json) preserves these facts and a short-
+receipt transcription issue: its TASK hash omitted the final hex character; the complete
+fixed-source hash already computed in PUBLICATION.json remains the byte identity. This
+has no external-effect uncertainty and creates no extra confirmation or Send step.
+
+DM accepts the bounded preparation and non-Sending handoff check. Provider model readiness
+is still unverified in the changed runtime; no Pro answer or R/B decision has been formed.
+R remains advice to Convergence. The final dispatch target is only delivery_v2/HANDOFF.json
+at the full commit above, with provider prompt SHA256
+293ade999ac8f413b5fd8340fcc7ff204116ca077f03c040ee48b328b62522ce (1953 UTF-8 bytes).
+The generated READY_TO_DISPATCH field describes published input validity; the actual
+preparation-only assignment and missing runtime fact withhold Send. Preserve this same
+request for a later authorized dispatch rather than authoring a replacement to evade that
+technical dependency. MGTAP is ACTIVE-idle/MEDIUM and its slot remains occupied.
