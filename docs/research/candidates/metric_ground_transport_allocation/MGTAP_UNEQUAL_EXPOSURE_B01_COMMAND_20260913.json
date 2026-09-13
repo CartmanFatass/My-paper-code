@@ -1,0 +1,21 @@
+{
+  "assignment": "MGTAP_UNEQUAL_EXPOSURE_B01",
+  "source_sha": "ecf40e0ade4576fd75ffb0eab09425cb5c4ce059",
+  "master": 8231,
+  "node": "wsl_4070",
+  "host": "LAPTOP-U9TDKC8A",
+  "worktree": "/home/wu/hmasd-worktrees/mgtap-unequal-8231-ecf40e0ad",
+  "output": "/home/wu/hmasd-worktrees/mgtap-unequal-8231-ecf40e0ad/temp/directions/metric_ground_transport_allocation/exp/unequal_exposure_b01_8231_20260913",
+  "supervisor": "/usr/local/bin/agent-task",
+  "handle": "mgtap-unequal-8231-ecf40e0ad",
+  "command": "cd /home/wu/hmasd-worktrees/mgtap-unequal-8231-ecf40e0ad && mkdir -p /home/wu/hmasd-worktrees/mgtap-unequal-8231-ecf40e0ad/temp/directions/metric_ground_transport_allocation/exp/unequal_exposure_b01_8231_20260913 && export MGTAP_CHAIN_STARTED_UNIX=$(date +%s.%N) && /usr/bin/time -v -o /home/wu/hmasd-worktrees/mgtap-unequal-8231-ecf40e0ad/temp/directions/metric_ground_transport_allocation/exp/unequal_exposure_b01_8231_20260913/native_time.txt /usr/bin/timeout 1500 /bin/bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/mgtap-unequal-8231-ecf40e0ad/temp/directions/metric_ground_transport_allocation/exp/unequal_exposure_b01_8231_20260913/resource_admission.json && /home/wu/.venvs/hmasd/bin/python -u scripts/run_mgtap_unequal_exposure_b01.py --seed 8231 --out /home/wu/hmasd-worktrees/mgtap-unequal-8231-ecf40e0ad/temp/directions/metric_ground_transport_allocation/exp/unequal_exposure_b01_8231_20260913'",
+  "run_budget": {
+    "COND_seconds": 600,
+    "DENSE_seconds": 900,
+    "native_seconds": 1500,
+    "invoked_support_seconds": 900,
+    "complete_invoked_seconds": 2400
+  },
+  "remote_process_accepted": false,
+  "monitor_parent": "/root/dm_mgtap_resume"
+}

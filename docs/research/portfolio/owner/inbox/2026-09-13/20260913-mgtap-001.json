@@ -1,0 +1,73 @@
+{
+  "id": "20260913-mgtap-001",
+  "created": "2026-09-13T02:31:54-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "MGTAP已购买的512/768比较绑定主种子8231",
+  "context": "Portfolio已购买一次精确B，Root已分派继续；新卡只落实原科学定义、单种子和上限。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按已接受投资执行一次；保留DENSE默认和ACTIVE。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "执行所有者新指令，保留已发生事实，不自行换方案。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "仅按具体修订在原范围处理，不扩大科学调用。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "原投资和当前Root执行分派已授权；卡只绑定未筛选主种子及已选择的比较。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_SCIENCE_CARD_20260913.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "执行Portfolio已经购买的一对COND512/DENSE768，并将新主种子8231及完整上限写入B卡。",
+    "changes_if_approved": [
+      {
+        "target": "MGTAP unequal-exposure B01",
+        "from": "已购买、尚未绑定执行",
+        "to": "主种子8231，原COND512与DENSE768，单一顺序调用和全部最终32世界"
+      }
+    ],
+    "if_refused": "保留已接受投资和全部证据，不擅自换种子、训练长度或新增调用；按所有者新指令处理。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260913_mgtap_conformance_correction/archive/RESPONSE.md",
+        "quote": "B once remains funded",
+        "why": "完整同节点修订保留科学定义和五个上限；当前Root已分派执行。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/PORTFOLIO_INTAKE_20260913.md",
+        "quote": "8213 −.02246957345594415",
+        "why": "历史结果混合，不能预期稳定优越或更多DENSE训练的因果效应。"
+      }
+    ],
+    "uncertainty": [
+      "真实运行成本、峰值内存和新pair结果未知；只有一个独立学习对。"
+    ],
+    "cost": {
+      "compute": "COND600、DENSE900、原生1500、支持900、完整2400秒硬上限；实际完整成本尚未知。",
+      "owner_time": "无需等待回复。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "按已接受投资执行一次精确比较，DENSE始终默认，MGTAP保持ACTIVE/MEDIUM。",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_SCIENCE_CARD_20260913.md"
+  },
+  "starred": false
+}
