@@ -303,6 +303,16 @@ actionable native return and before the first wait after useful work. An
 unchanged timeout resumes waiting without a new dispatch pass. Check owner pause/stop instructions
 first. A workflow edit or status question does not resume paused research.
 
+OWNER_DIRECT 2026-09-13: DM autonomous dispatch is the default. Root authorization is not a gate
+for bounded work already fixed by the current card, accepted decision or published handoff. The
+owning DM may publish and send a scope-fixed direction/Portfolio question, execute an admitted
+authorized object, repair Transport locally, collect/intake results and continue its direction
+without waiting for Root approval or an ACK. Root integrates evidence and handles only shared
+runtime/cross-direction dependencies, formal lifecycle application and vacancy replacement.
+Wait only for an actual external dependency, a new scientific/budget/lifecycle choice or a concrete
+blocker; a DM must not remain idle merely because Root has not separately authorized an already
+fixed next state.
+
 After dispatching ready independent work, Root waits natively while DM work remains. DM does
 independent work first and otherwise waits natively for monitor/Reviewer events. Use the configured
 1500000 ms default/minimum; unchanged timeouts only continue waiting, without status broadcasts,

@@ -66,6 +66,12 @@ execution that would change science, budget or lifecycle. Wait only for an actua
 dependency, an unformed proper-node decision, or a concrete blocker. A running DM with an
 authorized next state must never remain in native wait merely because the prior object completed.
 
+DM autonomy is the operating default: Root need not re-authorize a card-fixed object, a scope-fixed
+proper-node question, an admitted run, Transport repair, collection, intake or direction-local
+continuation. The DM dispatches and carries that work through its own acceptance, then reports the
+changed boundary for Root integration. Root involvement is reserved for shared dependencies,
+formal lifecycle/vacancy work or a genuinely new scientific, budget or lifecycle choice.
+
 ## Bounded assignments
 
 Use ENGINEERING_SCOPE_SPEC §7.1 for L0 and optional L1–L3 detail. Include the existing

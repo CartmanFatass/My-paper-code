@@ -57,6 +57,12 @@ science, budget or lifecycle changes. Wait only for an actual external dependenc
 proper-node decision or a concrete blocker; completion of the prior object alone is not a wait
 condition.
 
+DMs operate autonomously within those bounds. They do not wait for a separate Root authorization
+or ACK to send a scope-fixed proper-node question, execute an admitted object, repair Transport,
+collect/intake a result or continue direction-local work. Root integrates their changed-event
+returns and handles shared dependencies, formal lifecycle/vacancy actions and genuinely new
+scientific or budget choices only.
+
 Transport/selector/workflow defects default to local repair by the author DM. The DM may edit its
 owned helpers, fixtures and related skill/control instructions, run focused tests and review, and
 recover the same unchanged operation after verified nonacceptance. Preserve operation, prompt,

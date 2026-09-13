@@ -41,6 +41,11 @@ decision or published handoff. The owning DM dispatches that bounded work or pro
 directly. Only an unformed scientific/budget/lifecycle choice, actual dependency or concrete
 blocker requires waiting; no ACK or parent approval is an extra gate.
 
+The DM owns the full bounded continuation and may dispatch it directly once its card, accepted
+decision or handoff fixes the scope. Root receives the resulting action event for integration; it
+does not issue a second authorization. Waiting is reserved for a real dependency, blocker or new
+scientific/budget/lifecycle choice.
+
 DM sends Root only actionable integration, cross-direction dependency, formal direction disposition,
 scope-conflict, or bounded-assignment completion/ACTIVE-idle facts, with assignment identity,
 commits/evidence, requested next action and uncertain effects.
