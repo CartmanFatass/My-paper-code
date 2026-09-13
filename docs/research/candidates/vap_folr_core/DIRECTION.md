@@ -37,11 +37,15 @@ This is an accepted own-arm observation, not evidence of a bank advantage.
 The legal entity-history-to-action path now has a complete trained native
 execution, while equally informed Generic sufficiency remains a surviving
 alternative. B04 generic competence retains its own host/information scope as
-contrary evidence. The next scientific discriminator remains an intact
-same-information finite-learning comparison; choosing/funding future work is a
-separate decision, and the completed E allocation authorizes no retry or successor.
+contrary evidence. Accepted post-E Convergence selects a narrower use question:
+compare this retained BANK controller with one genuinely new, equally informed
+Generic fit on fresh native panels, to decide whether BANK merits an optional
+development-reference role. This outcome-informed retained/new comparison is
+not a fresh matched training pair or BANK-learning replication. Its finite
+investment remains a separate decision; the completed E allocation funds no retry.
 See [E0 result](FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md) and
-[final intake](FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md).
+[final intake](FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md), and the
+[post-B01 use decision intake](pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md).
 
 The accepted post-B03 H still holds the exact tested LEARNED_EVENT/5000-training/
 128-final package, retaining event-aware RETAIN and no currently recommended
@@ -942,3 +946,44 @@ References:
 - `pro_packets/20260912_entity_history_continuity/INTAKE.md`
 - `FOLR_ENTITY_HISTORY_CONTINUITY_QUESTION_20260912.md`
 - `pro_packets/20260912_entity_history_continuity/FACTS.json`
+
+## Accepted post-B01 retained-reference use selection — 2026-09-12
+
+**Conclusion and bounded claim.** Convergence selects one future B use comparison
+within the still-open entity-history family: the accepted final BANK weights
+against one genuinely new Generic GRU64 RETAIN fit, followed by fresh 128-episode
+panels for each. The decision is whether this particular BANK belongs in an
+optional executable reference set for development on the same public-information
+host. It is outcome-informed and conditional on one completed historical BANK;
+it neither repairs E's unavailable primary nor adds BANK training replication.
+This is no new family OPEN, direction RECAST or Portfolio disposition.
+
+**Mechanism and legal alternative.** The five-slot H20 native host, full common
+public lifecycle table, observer-local physical information and lifetime-owned
+GRU16 bank remain. Each evaluation episode resets recurrent records. Generic
+retains its adaptive own-trip GRU64 and identical public information, with the
+accepted full 5,000-episode learning exposure. New Generic parameters, optimizer,
+replay and RNG are fresh; the failed E prefix supplies no checkpoint or endpoint.
+
+**Strongest support and contradiction.** One executable BANK exists, so one new
+competent Generic fit could change the stated reference-use choice without another
+BANK training history. BANK has still shown no comparative value. The short
+horizon/common cues and B04's competent Generic on its different host preserve
+Generic sufficiency as the strongest alternative. The negative BANK raw return
+is not a contrast. Matching tuned headroom is absent; all old scalar signs, H,
+pauses and recast history remain under their own scope.
+
+**Next discriminator.** Fresh BANK-reference mean minus fresh Generic mean,
+with the proposed absolute MEI 1: strict >+1 supports optional BANK inclusion;
+inclusive [−1,+1] preserves sign and favors Generic-only use; strict <−1 favors
+Generic-only use. No equivalence, stable superiority, component-memory cause,
+original-CAMA, speed, transfer or C/UAV claim follows. Generic technical completion
+precedes the new BANK panel, whose acquisition is independent of Generic's score.
+A missing endpoint leaves the dependent contrast unavailable with no automatic
+replacement. This finite investment is not supplied by the direction decision.
+
+References:
+
+- `pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md`, delivery `d6a29b287612f21fd5ddbb0cc19fbae4e8c1fb12`, integrated identical bytes `7ab178ad8fbf94ffa4c5da5b4812d632db2fdb9b`
+- `pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md`
+- `pro_packets/20260912_entity_history_post_b01_discriminator/INVESTMENT_READINESS.md`
