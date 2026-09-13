@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "B",
-  "auto_applied": null,
+  "auto_applied": "B",
   "dm_reason": "该新比较可改变COND512的有限可选用途判断，推荐一对真实B；完整成本未知且旧证据混合，因此不购买仍是真实反选。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260912_mgtap_unequal_exposure_investment/SCIENCE_BRIEF.md",
@@ -78,5 +78,17 @@
     "verdict_text": "作者建议 B：由 Portfolio 明确分配全链条新上限后购买唯一已选配对；这是 close call，无新购买 N 是真实反选。原作者没有给出数值报价或作出投资处分。",
     "source": "docs/research/portfolio/pro_packets/20260912_mgtap_unequal_exposure_investment/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "approval_correction": "Current owner target is four DM chains; native Monitor needs accepted handle adoption, not an independent unfinished goal. Preserve complete Pro response and independent conforming investment.",
+  "execution_history": [
+    {
+      "at": "2026-09-13T08:41:43+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_mgtap_unequal_exposure_investment/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/PORTFOLIO_INTAKE_20260913.md",
+      "state": "applied",
+      "summary": "Portfolio selected B once with new COND600/DENSE900/native1500/support900/complete2400 second ceilings. Funding record applied; no implementation or experiment here. Five-chain and Monitor-goal clauses require same-node correction; MGTAP remains ACTIVE/MEDIUM.",
+      "correction": "Current owner target is four DM chains; native Monitor needs accepted handle adoption, not an independent unfinished goal. Preserve complete Pro response and independent conforming investment."
+    }
+  ]
 }
