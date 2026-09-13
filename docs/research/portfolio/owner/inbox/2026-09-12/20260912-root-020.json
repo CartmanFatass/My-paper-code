@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "由真实用途区分新的学习证据与无行动价值重复，保留强null、未知成本、原节点权限及独立五链目标。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md",
@@ -124,5 +124,15 @@
     "verdict_text": "保留四项建议：ACPS新独立配对并由Portfolio新定完整cap，CADC不复测且提请明确可逆PARK，MGTAP仅一次用途判断，FSD本轮不新增LONG。加入RCLE一次原节点家族/用途选择，并让Portfolio明确是否条件资助其唯一joint-quota-phase B及全部完整成本；保留选择-only/不追加/PARK。均为作者提案，零本地投资或生命周期应用。",
     "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T01:34:34+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/INTAKE.md",
+      "state": "applied",
+      "summary": "完整五项Pro答复已核对并记录，与提案a对应；实际新caps与CADC明确PARK见intake/decision。此trace表示Pro决定已记录，Root主表应用和各DM实际执行仍待本次交接，非已launch。"
+    }
+  ]
 }
