@@ -77,6 +77,11 @@ the prior return and sends its own update once; this is not an ACK or forwarding
 If a leaf runtime lacks collaboration.send_message, its actionable native final is the direct
 parent return. Record that actual capability/method; never fabricate tool delivery or add an app relay.
 
+Pure Transport engineering defects default to local repair by the author DM, including focused
+helper/fixture and skill updates with proportional review. Keep the same operation and immutable
+receipts; involve Root only for a shared runtime/load, cross-direction dependency or scientific
+decision.
+
 ## Recoverable ownership
 
 Record active native names, assignments, accepted handles and pending actions in existing direction

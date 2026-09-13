@@ -11,6 +11,18 @@ and decides scientific/specification conformance. The current native assignment 
 direct return parent. Preserve frozen HANDOFF IDs as provenance when recovering an older request.
 No singleton app task, relay, ACK loop, new scientific prompt or science selection belongs here.
 
+## DM-local repair default
+
+Transport failures that are engineering defects (selector/model aliasing, tab binding,
+preflight state, receipt handling or workflow sequencing) are owned by the author DM by default.
+The DM may patch its direction-owned Transport helpers, fixtures and related skill/control
+instructions in place, run proportional focused tests and independent review, and recover the
+same unchanged operation when the effect is verified nonacceptance. Preserve the original
+operation, prompt hash, idempotency key, binding and all failure receipts. Do not create a
+replacement request or alter scientific meaning. Escalate to Root only when the repair requires a
+shared application runtime/load, a cross-direction resource or a scientific/Portfolio decision;
+Root then coordinates that dependency while the DM retains Transport acceptance.
+
 ## One preflight, one action, one return
 
 ```text

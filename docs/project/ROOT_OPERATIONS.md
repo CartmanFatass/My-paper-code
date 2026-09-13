@@ -49,6 +49,13 @@ work when available. Keep an ACTIVE direction occupied through an object/allocat
 wait or child completion; release a slot only for an explicit Portfolio/owner lifecycle pause or
 closure.
 
+Transport/selector/workflow defects default to local repair by the author DM. The DM may edit its
+owned helpers, fixtures and related skill/control instructions, run focused tests and review, and
+recover the same unchanged operation after verified nonacceptance. Preserve operation, prompt,
+binding, idempotency and failure receipts; never create a replacement request or change science.
+Root is involved only for a shared runtime/load, cross-direction dependency or a
+scientific/Portfolio decision, while the DM retains Transport acceptance.
+
 ## Maintained sources
 
 | Rule | Maintained source |
