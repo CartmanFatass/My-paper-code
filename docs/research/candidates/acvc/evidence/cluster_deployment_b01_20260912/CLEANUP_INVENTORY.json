@@ -1,6 +1,6 @@
 {
   "owner": "/root/dm_a_mx_acvc_resume",
-  "state": "PROPOSED; no removal before Root integration/retention acceptance",
+  "state": "Root accepted all five targets after main2a59af854/main011e3b1b9. Four remote targets are verified absent; fifth local target remains because automatic approval review rejected its PowerShell removal before execution.",
   "retain": [
     {
       "path": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\retained\\cluster_deployment_b01_20260912\\native_output.tar.gz",
@@ -53,5 +53,6 @@
       "reason": "finished K preparation helpers/source-bundle/extracted duplicates; scientific source, receipts and unique archive retained outside target"
     }
   ],
-  "verification_after_acceptance": "Check literal resolved roots, terminal state and protected retained archive; unregister only this exact remote worktree, remove exact listed targets, then verify all disk absences and worktree-registration absence. Preserve remote shared repository and every historical direction archive."
+  "verification_after_acceptance": "Check literal resolved roots, terminal state and protected retained archive; unregister only this exact remote worktree, remove exact listed targets, then verify all disk absences and worktree-registration absence. Preserve remote shared repository and every historical direction archive.",
+  "cleanup_receipt": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/CLEANUP_RECEIPT.json"
 }
