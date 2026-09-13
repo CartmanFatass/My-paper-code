@@ -245,13 +245,25 @@ def verify_github_pairing(record: dict, archive: dict, pairing: dict) -> None:
     issue = scope['issue_url']
     if not re.fullmatch(re.escape(issue) + r'#issuecomment-[0-9]+', pairing.get('comment_url', '')):
         raise ValueError('GitHub pairing requires the specified delivery issue comment')
-    if task_url not in pairing.get('comment_body', '') or url not in pairing.get('comment_body', ''):
+    comment = pairing.get('comment_body', '')
+    if url not in comment:
         raise ValueError('GitHub delivery comment must pair the exact fixed TASK and response')
     verified = verify_archive(Path(archive['path']), archive['sha256'], archive['size_bytes'])
     raw = Path(verified['path']).read_bytes()
     blob = hashlib.sha1(f'blob {len(raw)}\0'.encode('ascii') + raw).hexdigest()
     if blob != pairing.get('blob_sha'):
         raise ValueError('GitHub response bytes differ from the observed Git blob')
+    if task_url not in comment:
+        # A full fixed TASK SHA in the same delivery comment is sufficient only
+        # when the hash-verified response also contains the exact TASK URL.
+        task_sha = task_url.partition('/blob/')[2].partition('/')[0]
+        exact_sha = (re.fullmatch(r'[0-9a-f]{40}', task_sha)
+                     and re.search(rf'(?<![0-9A-Za-z]){re.escape(task_sha)}(?![0-9A-Za-z])', comment))
+        url_boundary = r"""[\s<>"'\[\]`()]"""
+        exact_url = re.search(rf'(?:^|{url_boundary}){re.escape(task_url)}(?=$|{url_boundary})',
+                              raw.decode('utf-8'))
+        if not exact_sha or not exact_url:
+            raise ValueError('GitHub delivery comment must pair the exact fixed TASK and response')
 
 
 def stage_native_receipt(record: dict, archive: dict | None = None, *, boundary: str = 'COMPLETE',

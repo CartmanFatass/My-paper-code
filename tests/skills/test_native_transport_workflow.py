@@ -341,9 +341,12 @@ def test_complete_conflict_survives_intervening_nonarchive_boundary(record, tmp_
     assert record == before
 
 
-def test_fixed_github_delivery_completes_despite_strict_pairing_failure(record, tmp_path):
+@pytest.mark.parametrize('comment_form', ['task_url', 'task_sha'])
+def test_fixed_github_delivery_completes_despite_strict_pairing_failure(record, tmp_path, comment_form):
     path = tmp_path / 'github-response.md'
-    raw = b'Complete response for the fixed task, preserved exactly.\n'
+    task_url = record['task']['url']
+    raw = (f'Complete response for the fixed task, preserved exactly.\n[task]: {task_url}\n'
+           if comment_form == 'task_sha' else 'Complete response for the fixed task, preserved exactly.\n').encode()
     path.write_bytes(raw)
     archive = n.verify_archive(path, n.digest(raw), len(raw))
     commit = 'f' * 40
@@ -353,7 +356,7 @@ def test_fixed_github_delivery_completes_despite_strict_pairing_failure(record, 
     pairing = dict(commit_sha=commit, response_path=response_path, response_url=response_url,
                    blob_sha=n.hashlib.sha1(f'blob {len(raw)}\0'.encode() + raw).hexdigest(),
                    comment_url=record['github_delivery']['issue_url'] + '#issuecomment-123',
-                   comment_body=f"Fixed task: {record['task']['url']}\nDelivered: {response_url}")
+                   comment_body=f"Fixed task: {task_url if comment_form == 'task_url' else record['task']['sha']}\nDelivered: {response_url}")
     record.update(state='ARCHIVED', response_sha256=archive['sha256'], user_message_id=None,
                   assistant_message_id=None, github_response_pairing=pairing,
                   operation={'sendAttempted': True, 'error': {'code': 'USER_MESSAGE_CONTENT_MISMATCH'}})
@@ -364,6 +367,67 @@ def test_fixed_github_delivery_completes_despite_strict_pairing_failure(record, 
     for field in ('commit_sha', 'response_path', 'response_url', 'blob_sha', 'comment_url', 'comment_body'):
         with pytest.raises(ValueError):
             n.verify_github_pairing(record, archive, {**pairing, field: 'wrong'})
+
+
+@pytest.mark.parametrize('defect', ['no_task_url_in_response', 'other_task_path', 'task_path_suffix',
+                                  'nested_task_url', 'short_sha', 'longer_sha', 'other_sha'])
+def test_sha_comment_requires_fixed_response_binding(record, tmp_path, defect):
+    task_url = record['task']['url']
+    task_sha = record['task']['sha']
+    response_path = record['github_delivery']['response_path']
+    commit = 'f' * 40
+    response_url = f"{task_url.split('/blob/')[0]}/blob/{commit}/{response_path}"
+    bound_url = task_url
+    if defect == 'no_task_url_in_response':
+        bound_url = ''
+    elif defect == 'other_task_path':
+        bound_url = task_url.replace('/TASK.md', '/OTHER_TASK.md')
+    elif defect == 'task_path_suffix':
+        bound_url += '.backup'
+    elif defect == 'nested_task_url':
+        bound_url = 'https://example.invalid/?redirect=' + bound_url
+    elif defect == 'short_sha':
+        task_sha = task_sha[:12]
+    elif defect == 'longer_sha':
+        task_sha += 'a'
+    else:
+        task_sha = 'a' * 40
+    raw = f'Complete answer\n[task]: {bound_url}\n'.encode()
+    path = tmp_path / 'response.md'
+    path.write_bytes(raw)
+    archive = n.verify_archive(path, n.digest(raw), len(raw))
+    pairing = dict(commit_sha=commit, response_path=response_path, response_url=response_url,
+                   blob_sha=n.hashlib.sha1(f'blob {len(raw)}\0'.encode() + raw).hexdigest(),
+                   comment_url=record['github_delivery']['issue_url'] + '#issuecomment-123',
+                   comment_body=f'Fixed task: {task_sha}\nDelivered: {response_url}')
+    with pytest.raises(ValueError, match='pair the exact fixed TASK'):
+        n.verify_github_pairing(record, archive, pairing)
+    record.update(state='ARCHIVED', response_sha256=archive['sha256'], github_response_pairing=pairing,
+                  user_message_id=None, assistant_message_id=None)
+    before = copy.deepcopy(record)
+    with pytest.raises(ValueError, match='pair the exact fixed TASK'):
+        n.stage_native_receipt(record, archive)
+    assert record == before
+
+
+def test_observed_acvc_sha_comment_completes_from_immutable_git_bytes(tmp_path):
+    observed = json.loads((FIXTURE / 'acvc-github-task-sha-pairing.json').read_text(encoding='utf-8'))
+    route = n.execution_route('/root/dm_acvc_resume', '/root/dm_acvc_resume/tr_lh_acvc_next_use',
+                              'Read-only replay of ACVC GitHub archive binding')
+    record = n.read_handoff(ROOT, observed['handoff_sha'], observed['handoff_path'], route)
+    pairing = observed['pairing']
+    raw = subprocess.check_output(['git', 'show', f"{pairing['commit_sha']}:{pairing['response_path']}"], cwd=ROOT)
+    path = tmp_path / 'response.md'
+    path.write_bytes(raw)
+    archive = n.verify_archive(path, observed['response_sha256'], observed['response_bytes'])
+    record.update(state='ARCHIVED', response_sha256=archive['sha256'], github_response_pairing=pairing,
+                  user_message_id=None, assistant_message_id=None, send_click_count=1)
+    before = copy.deepcopy(record)
+    n.verify_github_pairing(record, archive, pairing)
+    assert record == before
+    receipt = n.stage_native_receipt(record, archive, native_delivery='native_final')
+    assert receipt['boundary'] == 'COMPLETE' and pairing['response_url'] in receipt['message']
+    assert record['send_click_count'] == 1 and record['user_message_id'] is None
 
 
 def test_claim_keeps_observed_github_delivery_separate_from_frozen_scope(preflight, tmp_path):
