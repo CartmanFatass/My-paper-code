@@ -1,0 +1,48 @@
+{
+  "question": "是否投资原节点已选中的单对COND512/DENSE768，并明确分配全链条数值上限；还是本轮不追加？",
+  "changes_if_approved": [
+    {
+      "target": "MGTAP新实验投资",
+      "from": "科学已选中，实验资金与数值上限未分配",
+      "to": "仅一对新的512/768训练及各32最终评价，连同完整实现、检查、观测、收取和清理链；须由Portfolio明确单臂/native/support/总上限"
+    }
+  ],
+  "if_refused": "本轮零新增实验、代码或咨询；保留DENSE默认、ACTIVE/MEDIUM与全部证据，不自行改小曝光或更换候选。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md",
+      "quote": "The proposed observation changes a concrete comparator procedure and can alter the case for retaining the optional COND512 procedure.",
+      "why": "这是原节点选择的实际用途分叉，避免新架构或先做复杂诊断。"
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INVESTMENT_NEED.md",
+      "quote": "Primary is the mean of **all32 ordered final** differences",
+      "why": "两项真实训练直接产生用途比较所需原生回报，无第三arm或搜索维度。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md",
+      "quote": "There is only one above-MEI mean-COND point among the three retained observations, and no demonstrated reason that changing only DENSE's endpoint to 768 will reduce variability or produce a more useful conditional representation.",
+      "why": "新投资没有稳定效果保证，也不能把更多DENSE训练当作一定更强的比较器。"
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INVESTMENT_NEED.md",
+      "quote": "All numerical allowances are",
+      "why": "新费用未测、上限未分配；旧M/T限额不能挪用。"
+    }
+  ],
+  "uncertainty": [
+    "完整支持、native运行速率、DENSE768峰值内存、agent/provider成本均UNKNOWN。",
+    "一对训练仅支持其实现的局部程序比较；无训练总体置信度。",
+    "不提供伪造预算；Portfolio需明确新限额后才能启动。"
+  ],
+  "cost": {
+    "compute": "COND131072train ticks/1024Adam；DENSE196608/1536；各8192final ticks，合计344064ticks/2560Adam/8273920actor-row uses。另含全部新card/L0/code/check/review/Git/staging/admission/Monitor/collection/intake/Root integration/retention/cleanup一次。完整成本与各数值额度UNKNOWN/UNASSIGNED；已有咨询成本单独记账。",
+    "owner_time": "无需owner逐项批准；由Portfolio在竞争用途和完整需求间决定。",
+    "reversibility": "costly",
+    "waits_on_this": "实际新B实现/测试/运行依赖新的明确资金；其他方向不等待。"
+  },
+  "verdict_text": "DM recommends presenting the selected single pair as the sole empirical investment candidate; Portfolio decides purchase and explicit whole-chain limits. No additional empirical purchase is the strongest alternative.",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INVESTMENT_NEED.md"
+}
