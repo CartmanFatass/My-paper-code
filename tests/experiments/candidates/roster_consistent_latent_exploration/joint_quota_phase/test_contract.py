@@ -147,3 +147,69 @@ def test_four_role_paired_publication_and_all_reading_branches(tmp_path):
         ((.03,0,.01),'local_increment_nearest_deficit'), ((0,0,.01),'no_endpoint_advantage'),
         ((.03,.03,0),'no_positive_own_initialization_learning')]:
         assert expected in study.reading(*values)
+
+
+def test_b09_exact_snapshot_anchor_reuses_integer_distances_and_combined_score(monkeypatch):
+    model = policy.PhasePolicy(greedy_anchored=True)
+    model.initialize(lambda name, count: np.linspace(.13, .89, count))
+    original = policy.quota_arrays
+    calls = []
+    def counted(public):
+        calls.append(len(public))
+        return original(public)
+    monkeypatch.setattr(policy, 'quota_arrays', counted)
+    for public in (public_fixture(), replace(public_fixture(), positions=(0,) * 8),
+                   replace(public_fixture(), positions=tuple(range(0, 120, 10)),
+                           angular_ranks=tuple(range(12)), newcomers=(False,) * 12,
+                           demands=(2,) * 6)):
+        n = len(public.positions)
+        arrays = original([public])
+        greedy = int(np.abs(arrays[-1][0]).sum(-1).argmin())
+        expected = torch.full((1, n), .1 / n, dtype=torch.float64)
+        expected[0, greedy] += .9
+        before = len(calls)
+        logp, targets = policy.phase_log_probabilities(model, [public])
+        assert len(calls) == before + 1
+        torch.testing.assert_close(logp.exp(), expected, rtol=1e-14, atol=1e-15)
+        assert targets.tolist() == arrays[3].tolist()
+        cdf = expected[0].numpy().cumsum()
+        for phase in range(n):
+            u = (cdf[phase] + (cdf[phase - 1] if phase else 0)) / 2
+            before = len(calls)
+            action, score, chosen = policy.sampled_phase(model, [public], [u])
+            assert len(calls) == before + 1
+            assert chosen.tolist() == [phase]
+            assert action.tolist() == arrays[3][:, phase].tolist()
+            assert float(score) == pytest.approx(math.log(float(expected[0, phase])))
+    # A learned residual is normalized with q, and its derivative scores that same law.
+    logits = torch.linspace(-.7, .6, 8, dtype=torch.float64).reshape(1, 8).requires_grad_()
+    monkeypatch.setattr(model, 'forward', lambda features, context: logits)
+    public = public_fixture()
+    greedy = int(np.abs(original([public])[-1][0]).sum(-1).argmin())
+    q = torch.full((1, 8), .1 / 8, dtype=torch.float64)
+    q[0, greedy] += .9
+    probability = (q * logits.detach().exp())
+    probability /= probability.sum()
+    _, score, phases = policy.sampled_phase(model, [public], [.04])
+    phase = int(phases[0])
+    assert float(score) == pytest.approx(math.log(float(probability[0, phase])))
+    score.sum().backward()
+    expected_gradient = -probability.clone()
+    expected_gradient[0, phase] += 1
+    torch.testing.assert_close(logits.grad, expected_gradient, rtol=1e-13, atol=1e-15)
+
+
+def test_b09_fresh_identity_rejects_crossed_seed_before_scientific_construction(tmp_path, monkeypatch):
+    def forbidden(*args, **kwargs):
+        raise AssertionError('scientific construction reached on an invalid identity')
+    monkeypatch.setattr(study.hashlib, 'sha256', forbidden)
+    monkeypatch.setattr(study, 'PhasePolicy', forbidden)
+    with pytest.raises(ValueError, match='seed must match'):
+        study.run(tmp_path, 'TEST', seed=28, greedy_anchored=True)
+    with pytest.raises(ValueError, match='seed must match'):
+        study.run(tmp_path, 'TEST', seed=29, greedy_anchored=False)
+    assert study.B09_OBJECT != study.OBJECT
+    # Failing a competent rule must never erase an independent positive learning observation.
+    flags = study.reading(-.1, -.05, .02)
+    assert 'no_endpoint_advantage' in flags
+    assert 'no_positive_own_initialization_learning' not in flags
