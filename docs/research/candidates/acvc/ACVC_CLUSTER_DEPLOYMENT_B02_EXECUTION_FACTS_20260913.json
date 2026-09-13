@@ -128,6 +128,38 @@
       {
         "stage": "recorded-byte analysis outer command including inner0.062s",
         "seconds": 0.3183762
+      },
+      {
+        "stage": "complete result/owner trace publication commit/push",
+        "seconds": 6.2484658
+      },
+      {
+        "stage": "original supervisor log publication",
+        "seconds": 4.5274943
+      },
+      {
+        "stage": "review TASK publication",
+        "seconds": 4.6211975
+      },
+      {
+        "stage": "review HANDOFF binding and publication",
+        "seconds": 4.7545621
+      },
+      {
+        "stage": "byte-publication verification plus remote retention preflight outer command",
+        "seconds": 1.7976786
+      },
+      {
+        "stage": "retention publication/fetch/push outer command",
+        "seconds": 6.7037838
+      },
+      {
+        "stage": "four-target remote cleanup",
+        "seconds": 0.5459374
+      },
+      {
+        "stage": "post-cleanup local archive check",
+        "seconds": 0.2179906
       }
     ],
     "stalled_sync_observations": {
@@ -138,16 +170,22 @@
     "support_cap_s": 600,
     "complete_cap_s": 1200,
     "complete_support_certified": false,
-    "known_exact_seconds": 15.4410049,
-    "observed_invoked_wall_lower_bound_s": 238.4410049
+    "known_exact_seconds": 44.858115000000005,
+    "observed_invoked_wall_lower_bound_s": 267.858115
   },
   "science_review": {
     "role": "Convergence independent scientific Reviewer",
-    "plan": "Reuse unchanged reviewed same-law comparison; review this new endpoint, evidence interpretation, conclusions and next plan at intake. DM resolves findings and makes direction decision; no Portfolio approval."
+    "plan": "Reuse unchanged reviewed same-law comparison; review this new endpoint, evidence interpretation, conclusions and next plan at intake. DM resolves findings and makes direction decision; no Portfolio approval.",
+    "request_id": "2026-09-13-acvc-cluster-b02-scientific-review-01",
+    "task_sha": "28ae2fe7b76a78c73cc39d4d0ece4df3497fb775",
+    "handoff_sha": "24d45f49d0d633d19a1bfa1de172839253a151bb",
+    "native_transport": "/root/acvc_transport",
+    "decision_authority": "dm_owned_scientific_review",
+    "status": "Native Transport dispatched; observed shared request READY_UNSENT/DIRECTION_VERIFIED, provider acceptance not yet asserted."
   },
-  "status": "VALID COMPLETE B/EXPLORE technical intake; frozen F-C and F-dwell both UP on one independent new endpoint. Full new-evidence Convergence review being prepared; no automatic successor or lifecycle disposition applied yet.",
+  "status": "One valid complete B/EXPLORE accepted with both primaries UP; original files/checkpoint preserved and scoped remote cleanup complete. Actual native Convergence review producer remains; DM findings response and lifecycle decision pending, no further empirical object selected.",
   "stop": "No scientific retry/replacement, extra panel, checkpoint selection or automatic successor.",
-  "updated_utc": "2026-09-13T23:44:53Z",
+  "updated_utc": "2026-09-13 23:58:27 UTC",
   "monitor": {
     "native": "/root/acvc_monitor",
     "adopted": true,
@@ -226,6 +264,13 @@
     "remote_local_match": true,
     "checkpoint_bytes": 282957,
     "checkpoint_sha256": "23cde1b6ffe6cce1f7482bfc54ff73d2a95f277aedc750263c6882675af7e34b",
-    "cleanup_performed": false
+    "cleanup_performed": true,
+    "cleanup_receipt": "docs/research/candidates/acvc/evidence/cluster_deployment_b02_20260913/CLEANUP_RECEIPT.json",
+    "local_preparation_retained": true
+  },
+  "publication": {
+    "native_bytes_sha": "d0d6055387a01b545c4c1f7fee01dac9f57ec046",
+    "native_files_verified": 19,
+    "receipt": "docs/research/candidates/acvc/evidence/cluster_deployment_b02_20260913/PUBLICATION_CHECK.json"
   }
 }
