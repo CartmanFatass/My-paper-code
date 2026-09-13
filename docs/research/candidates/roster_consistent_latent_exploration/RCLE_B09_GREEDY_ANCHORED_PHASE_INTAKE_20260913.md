@@ -47,3 +47,15 @@ Prediction: DM's at-least-one-margin-fails forecast is supported; the competing 
 Publish this valid result and [two-target retention inventory](b09_greedy_anchored_phase_20260913/CLEANUP_INVENTORY.json) for Root integration/retention; source and complete unique raw bytes are already preserved locally. Reclaim only the named terminal remote worktree/supervisor root and verify disk/Git-registration absence. Root integration is not scientific ratification or another run permission.
 
 After closeout no approved empirical object or open proper-node request remains. This grant's exact use question has been answered at its B ceiling; an immediate unchanged request would add no investment consequence. RCLE remains ACTIVE/MEDIUM with its slot occupied. A later discriminator would require a concrete new use or specifically proposed observation whose effect on the greedy-versus-learned development choice is stated; stable performance would require independent training evidence, but no such number/budget is granted here. We do not manufacture an alternative law, stronger-class prerequisite, recurrence series or consultation to keep the slot busy. At this clean boundary the direction reports ACTIVE-idle and waits natively for an actual authorized event, rather than awaiting a fictitious Root/Portfolio ACK.
+
+## Subsequent DM continuation — 2026-09-13
+
+The original paragraph above records B09's allocation-end state. The current owner authority
+correction (main 2cd18ede9) explicitly preserves ordinary new A/B selection under standing DM
+delegation; the later direct instruction assigns the whole direction lifecycle to this DM.
+No new per-object Portfolio grant is required and no undeclared direction budget is zero.
+DM now selects [B10](RCLE_B10_GREEDY_ANCHORED_1024_SCIENCE_CARD_20260913.md), one fresh final1024
+service comparison under its own finite 300/600/900-second card. This preserves B09 evidence,
+its original caps and both narrow HOLDs; no ended invocation is revived. B09 two-target
+technical closeout remains separate. Clerk's f4ccead4b archive-integration receipt is a
+retention fact, not scientific approval or a B10 gate. No automatic Portfolio request is sent.

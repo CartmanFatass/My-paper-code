@@ -6,8 +6,9 @@ This source belongs to route **N3 — 状态保留、重建与迁移**, in the *
 of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
 this does not establish scientific equivalence or pool result polarity.
 See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
-Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
-older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+The owner's 2026-09-13 direct instruction assigns this DM its entire direction lifecycle;
+`docs/research/portfolio/PORTFOLIO.md` is the user-readable cross-direction report maintained
+by Clerk. Older lifecycle/execution authority statements below are historical. Existing cards, technical quarantines,
 second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
@@ -15,7 +16,23 @@ This authority preserves the direction's source-grounded scientific question, ev
 ## Authority
 
 - Stable direction ID: `roster_consistent_latent_exploration`
-- Current lifecycle, priority, and owner are held only by `docs/research/portfolio/PORTFOLIO.md`; this file records only the direction's scientific authority and provenance.
+- This DM owns direction-local research, family adjustments, continuation, parking and ending under the owner's 2026-09-13 instruction. Clerk records these decisions in the Portfolio report; only owner-triggered cross-direction adjustments/consultations follow. This grants no control over other directions or extra resource commitments.
+
+## Current continuation — 2026-09-13 B10
+
+DM selects one ordinary [B10](RCLE_B10_GREEDY_ANCHORED_1024_SCIENCE_CARD_20260913.md):
+fresh seed 30, unchanged greedy-anchored package, exactly 1024 updates and four 512-row
+panels. B09's positive own-initialization learning with a remaining greedy deficit makes
+longer finite-exposure native service a useful unresolved question. This is not a causal
+256-versus-1024 training-budget contrast, a retry of B09, or a rerun of either held recipe.
+One started invocation, native/support/complete caps 300/600/900 seconds, preserves real
+resource limits. DM proceeds through implementation, independent review, committed remote
+execution and intake; no new Portfolio purchase or lifecycle approval is required.
+
+RCLE continues ACTIVE with actual B10 preparation. B09 historical idle/no-successor text
+describes its completed allocation, not revocation of standing research authority. Both
+tested-recipe HOLDs remain; no family change or other-direction resource choice is made.
+Clerk receives this decision and evidence as report input, not an automatic Portfolio proposal.
 
 ## Current scientific question
 
