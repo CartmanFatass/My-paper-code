@@ -6,8 +6,10 @@ This source belongs to route **N3 — 状态保留、重建与迁移**, in the *
 of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
 this does not establish scientific equivalence or pool result polarity.
 See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
-Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
-older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+Current DM lifecycle decisions are recorded in this direction's intake and summarized
+below; `docs/research/portfolio/PORTFOLIO.md` is their reporting index under the
+2026-09-13 owner delegation of the whole direction lifecycle. Older lifecycle/execution
+statements below are historical. Existing cards, technical quarantines,
 second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
@@ -15,7 +17,7 @@ This authority preserves the direction's source-grounded scientific question, ev
 ## Authority
 
 - Stable direction ID: `vap_folr_core`
-- Current lifecycle, priority, and owner are held only by `docs/research/portfolio/PORTFOLIO.md`; this file records only the direction's scientific authority and provenance.
+- The direction DM owns its research and lifecycle under the current owner delegation; the Portfolio index reports the actual decision without another approval.
 
 ## Scientific question
 
@@ -26,6 +28,19 @@ own information interface and comparison; the latest entity-history opening
 below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
+
+**Current lifecycle: reversibly PARKED/MEDIUM by DM decision on 2026-09-13.**
+The fixed reference-use question is resolved. A fresh same-host learning block is
+possible under DM autonomy, but its incremental training-variation information is
+not presently worth the bounded work on this short-horizon/common-cue host. This
+is an investment judgment, not proof against all entity-history methods or a
+consequence of expired permission. No new experiment is selected; the occupied
+execution slot is released without selecting a replacement or new resources.
+DM may revisit a specific useful information/lifetime, learning-performance or cost
+proposal within the owner's actual resource/cross-direction constraints. Portfolio
+consultation is not a re-entry prerequisite. Scientific evidence and narrower holds
+below retain their original meanings; assigned technical preservation/cleanup remains.
+See the [DM lifecycle decision](FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md#dm-lifecycle-decision--2026-09-13-full-direction-delegation).
 
 The observer-owned entity-history-before-aggregation B family remains OPEN on
 the lifecycle-identity-visible native Traffic Junction variant. Its allocated

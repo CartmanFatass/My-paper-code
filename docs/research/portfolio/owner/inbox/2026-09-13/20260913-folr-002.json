@@ -73,5 +73,15 @@
     "verdict_text": "DM recommends P: reversibly PARK the whole FOLR direction at MEDIUM priority, preserve its evidence and open scientific questions, and release its occupied execution slot only through the explicit Portfolio plan.",
     "source": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T23:35:08+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md#dm-lifecycle-decision--2026-09-13-full-direction-delegation",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md#dm-lifecycle-decision--2026-09-13-full-direction-delegation",
+      "state": "applied",
+      "summary": "Owner 最新权限更正已应用：Portfolio proposal 002 仅作为历史报告输入，不再等待或自动请求生命周期批准；DM 自行选择 P 的实际决定见 20260913-folr-003。该 trace 不声称 owner 或 Pro 选择了 P。Convergence 保留独立科学 Reviewer 职责。"
+    }
+  ]
 }
