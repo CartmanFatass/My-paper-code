@@ -1,0 +1,81 @@
+{
+  "observed_at": "2026-09-13T10:12:13.031731+00:00",
+  "assignment": "ACPS same-request pre-Send selector repair",
+  "request_id": "2026-09-13-acps-post-b02-use-01",
+  "handoff_commit": "aaf0b977de1f547794ac0a540480be9778f1524e",
+  "fixed_task_commit": "c32e6e241b9fa6942482f554524659d943fa8163",
+  "parent": "/root/dm_acps_resume",
+  "operator": "/root/dm_acps_resume/transport_lh_acps",
+  "exact_operation_unchanged": true,
+  "operation": {
+    "schemaVersion": 4,
+    "operationId": "b7f00c5e-8e41-4ad1-805d-65cebf1ec763",
+    "idempotencyKey": "2026-09-13-acps-post-b02-use-01",
+    "requestFingerprint": "8aa79746979a145aeabe9293b593ede88e4b7daafb200f73719de465d1e44fe5",
+    "stableKey": "em:actuator_conditioned_partial_sharing:convergence",
+    "provider": "chatgpt",
+    "productModel": "GPT-6 Astra",
+    "reasoningEffort": "Pro",
+    "conversationUrl": "https://chatgpt.com/",
+    "conversationId": "__new__",
+    "promptSha256": "bee9b6e037f7b68e37143d152dd004cfefd10a9904d5c13bb648750ee9a2ab84",
+    "responsePath": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01__02_RESPONSE.md",
+    "sendAttempted": false,
+    "sendAttemptedAt": null,
+    "providerUserMessageId": null,
+    "providerAssistantMessageId": null,
+    "observedConversationUrl": null,
+    "observedConversationId": null,
+    "archive": null,
+    "error": {
+      "code": "CHATGPT_PRODUCT_MODEL_UNAVAILABLE_OR_UNSELECTED"
+    },
+    "createdAt": 1789291242246,
+    "updatedAt": 1789291506899
+  },
+  "tab_id": "4cd5b361-b097-48cc-95cc-a10dfcdf5ddf",
+  "stable_key": "em:actuator_conditioned_partial_sharing:convergence",
+  "ui_sample": {
+    "closed_model_label": "6Pro",
+    "selected_product_row": "Latest",
+    "other_product_rows": [
+      "GPT-5.6 Sol",
+      "GPT-5.5"
+    ],
+    "explicit_astra_row": false,
+    "composer_length": 1942,
+    "composer_sha256": "bee9b6e037f7b68e37143d152dd004cfefd10a9904d5c13bb648750ee9a2ab84",
+    "operator_send_actions": 0,
+    "operator_prompt_insertions": 0
+  },
+  "cua_coverage": "Inventory exposed only an empty Codex IAB; Agentify tab unavailable through CUA. Used purpose-built exact-tab scoped observations.",
+  "source": {
+    "path": "C:\\Projects\\agentify-desktop\\chatgpt-controller.mjs",
+    "base_git_head": "9bb2275",
+    "preexisting_dirty_changes_preserved": true,
+    "before_sha256": "e7150ab27cc70450b873189f04d7791877c03c943c3f1afca552ac39f74c3e6f",
+    "after_sha256": "c57264e72050e17c0905972304d29a80cb259614885fe4a85088b3899b734084",
+    "patch_sha256": "3478d5499b3f0138064890e5a9d29537adafcebeb64cfd5da9e68ffeed7c4e58"
+  },
+  "focused_check": {
+    "command": "python -X utf8 -B -m unittest discover -s tests/skills -p test_acps_selector_repair.py -v",
+    "passed": 1,
+    "seconds": 1.843,
+    "selector_cases": 12,
+    "actual_controller_dom_fixture": true,
+    "same_operation_recovery_and_uncertain_observation": true,
+    "archive_hash_size_and_ids": true,
+    "mock_sends": 2,
+    "external_sends": 0,
+    "scratch_cleaned": true
+  },
+  "live_non_sending_preflight": {
+    "productModel": "GPT-6 Astra",
+    "reasoningEffort": "Pro",
+    "tabId": "4cd5b361-b097-48cc-95cc-a10dfcdf5ddf",
+    "timeoutMs": 10000,
+    "result": "chatgpt_product_model_unavailable_or_unselected",
+    "runtime_ready": false
+  },
+  "next": "Load tested controller into the running Agentify instance while preserving the exact Q tab/key/operation, then one non-sending preflight. No repeat before changed runtime fact; ACPS Transport owns same-operation continuation."
+}
