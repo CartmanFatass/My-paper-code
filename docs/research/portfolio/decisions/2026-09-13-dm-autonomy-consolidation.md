@@ -41,7 +41,7 @@ L0：交付是下面的权限收敛、指定控制入口和必要当前摘要。
 - RCLE DM 报告提案之后的实质更新：`2026-09-13-rcle-greedy-anchored-investment-01` 已完成一次 Send 与完整 Portfolio intake（响应 fbd3c7c5a，intake 88e39c358）。B09 seed29/256-update/four-panel 获配，native180/support600/complete780s；DM 直接进入 card/source/review/admission/execution。两项 HOLD 和候选保留 A 不变，不是对已批准实验再审批。
 - ACVC full next-use intake 与同记录 Transport repair 已完成；no-addition、合格 train-C→deploy-F reference、零新 fit/K 保持。除本次治理任务外，没有在途外部依赖。MGTAP 完整 R/no-addition 判断与 DENSE default 保持，无新 pair/在途 proper-node；旧 uncertain effect 保留且不重发。
 
-因此记录分别显示四个占位、一条已接受实验链在 collection/combined intake、一项新投资 Transport 分派在等真实回执、本次 ACVC 有界治理工作，以及没有具体新工作的科学 ACTIVE-idle。治理任务完成不能把 ACVC 写成仍有实验推进，也不释放其方向。
+因此记录分别显示四个占位、FOLR 与 RCLE 两条已接受实验链均已完成 intake、ACVC/MGTAP 没有具体新工作的科学 ACTIVE-idle，以及本次 ACVC 有界治理工作。治理任务完成不能把 ACVC 写成仍有实验推进，也不释放其方向。
 
 ## 应用路径
 
@@ -70,4 +70,4 @@ L0：交付是下面的权限收敛、指定控制入口和必要当前摘要。
 
 Focused checks：`git diff --check` 通过；loop-dispatch 的 `quick_validate.py` 通过；新增本地 Markdown 引用目标检查通过（17 项、0 缺失）；全部 **27** 条 lifecycle/priority registry 行和 second-recast 排序逐字保持；四个提案与四个最新 FOLR/RCLE 事件的 **8** 个 exact commit 均解析成功；修改集恰为列明的 **12** 个路径，无 direction/card/packet、实验、测试、配置或 registry 路径修改。没有运行无关的 Transport/科研 suite，没有新 test scratch。原 P1 `20260910-root-001` 用 CLI 追加一个 `OWNER_DIRECT / applied` trace；程序比较确认原 packet、选项、status 和完整旧 history 保持。最终 owner reviews 仍为 `[]`；当日 [audit L41](../audit/2026-09-13.md#L41)/root-log 记录这一个变化，不建新请求。
 
-应用结论：按 owner 指令采用上述共同规则，有限任务包仍须未来实际授权；本治理任务零新增科研/Pro/Send/调用预算。下一动作是 Root 使用更新入口处理原方向的真实变化；FOLR combined intake 和 RCLE 原 Transport 回执由各自 DM 闭环，ACVC 治理任务结束后保持科学 ACTIVE-idle。剩余限制是文档与有限场景检查不能证明所有运行时行为，之后若有具体违例由责任 DM 就地修复/回报，不设周期审计。
+应用结论：按 owner 指令采用上述共同规则，有限任务包仍须未来实际授权；本治理任务零新增科研/Pro/Send/调用预算。下一动作是 Root 使用更新入口处理原方向的真实变化；FOLR 与 RCLE 的已接受结果均由各自 DM 闭环，ACVC/MGTAP 在真实新事件前保持科学 ACTIVE-idle。剩余限制是文档与有限场景检查不能证明所有运行时行为，之后若有具体违例由责任 DM 就地修复/回报，不设周期审计。
