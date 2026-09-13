@@ -5,7 +5,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
-| ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; Q recovery intaken; ACTIVE/HIGH. New conversation Send paired/archived; exact tested-use reversible PARK applied, SHARED default retained; old operation remains unsent record. Post-Q Portfolio lifecycle/investment question is dispatched, recommendation unapplied | Await complete same-node Portfolio decision; no lifecycle change, additional scientific Q, funds or automatic fit before its return |
+| ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; Q recovery intaken. Portfolio PRO_FINAL applied reversible whole-direction PARKED/HIGH; SHARED/default and all evidence retained; old operation remains unsent record | No active work. Re-entry requires a changed operating/training-resource requirement or trustworthy relevant evidence/cost fact and a new Portfolio/owner decision |
 | MGTAP | Portfolio B 与 conformance amendment 已完整 intake；唯一 master pair 完成：COND512 0.16574499572521276 J、DENSE768 0.19507936796417658 J、delta −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026、7/25 worlds；ACTIVE/MEDIUM | 终端/哈希/cleanup 已核验；post-8231 direction question 已绑定 delivery_v2 `PREPARED_UNSENT`，无 Pro 决策或 Send。无自动 successor，保持占位 |
 | RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Greedy-anchored continuation question prepared/bound but recommendation unapplied; zero Send/fit. Await same direction-node decision; no automatic successor |
 | ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Prepare next direction-node use/no-addition question; no new fit or K retry before proper decision |
@@ -14,7 +14,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 
 Working-set target: **4**; existing overlap drains without interruption or fifth-slot admission.
-Recorded advancing directions: **5** — ACPS, MGTAP, RCLE, ACVC and FOLR. Each has an active assignment
+Recorded advancing directions: **4** — MGTAP, RCLE, ACVC and FOLR. Each has an active assignment
 with its original DM. Completed Portfolio intake, CADC disposition, FSD U, old experiments and cleanup
 do not fill a slot. CADC is PARKED only because the complete Portfolio decision explicitly selected it.
 One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
