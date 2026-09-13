@@ -72,6 +72,13 @@ continuation. The DM dispatches and carries that work through its own acceptance
 changed boundary for Root integration. Root involvement is reserved for shared dependencies,
 formal lifecycle/vacancy work or a genuinely new scientific, budget or lifecycle choice.
 
+Routine experiment launches are object-tier actions. If the accepted card/Pro decision or finite
+grant fixes the object, inputs, comparator and cap, the DM performs fresh admission and launches,
+collects and accepts it directly. Do not send a Portfolio request or wait for a Root ACK for that
+run. Use Portfolio only for a new investment, capacity, lifecycle, fusion/separation,
+registration or vacancy-replacement choice; suppress repeated approval requests for an already
+authorized experiment.
+
 ## Bounded assignments
 
 Use ENGINEERING_SCOPE_SPEC §7.1 for L0 and optional L1–L3 detail. Include the existing

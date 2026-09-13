@@ -63,6 +63,13 @@ collect/intake a result or continue direction-local work. Root integrates their 
 returns and handles shared dependencies, formal lifecycle/vacancy actions and genuinely new
 scientific or budget choices only.
 
+Routine experiments belong to the DM object tier. Once an accepted card, Pro decision or finite
+grant fixes the object, inputs, comparator and cap, the DM runs fresh admission and launches,
+collects and accepts the experiment directly. No additional Portfolio request or Root ACK is
+needed for that run. Portfolio requests are reserved for genuinely new investment, capacity,
+lifecycle, fusion/separation, registration or vacancy-replacement choices; repeated requests for
+an approval of an already authorized experiment are invalid.
+
 Transport/selector/workflow defects default to local repair by the author DM. The DM may edit its
 owned helpers, fixtures and related skill/control instructions, run focused tests and review, and
 recover the same unchanged operation after verified nonacceptance. Preserve operation, prompt,

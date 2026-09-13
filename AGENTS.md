@@ -313,6 +313,14 @@ Wait only for an actual external dependency, a new scientific/budget/lifecycle c
 blocker; a DM must not remain idle merely because Root has not separately authorized an already
 fixed next state.
 
+OWNER_DIRECT 2026-09-13: Routine result-bearing experiments are DM object-tier work. When an
+accepted card, Pro decision or finite grant fixes the object, inputs, comparator and cap, the DM
+performs fresh resource admission and launches, collects and accepts it without a new Portfolio
+request. Portfolio is required only for a genuinely new investment, capacity, lifecycle,
+fusion/separation or registration choice (or a vacancy replacement); it is not an experiment
+launch approval queue. A DM must not send repeated Portfolio questions merely to obtain an ACK for
+an already authorized run.
+
 After dispatching ready independent work, Root waits natively while DM work remains. DM does
 independent work first and otherwise waits natively for monitor/Reviewer events. Use the configured
 1500000 ms default/minimum; unchanged timeouts only continue waiting, without status broadcasts,
