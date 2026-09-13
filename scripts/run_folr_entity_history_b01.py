@@ -22,6 +22,15 @@ def publish(out, summary):
         raise IOError('summary publication/readback mismatch')
 
 
+def add_bank_comparison(summary, generic):
+    from experiments.candidates.vap_folr_core.entity_history_b01.publication import pair_result
+    if generic['status'] == 'incomplete':
+        summary['pair_primary'] = None
+        summary['pair_primary_unavailable'] = 'Collected Generic arm is incomplete; no BANK-minus-Generic estimate or MEI branch.'
+    else:
+        summary['pair_primary'] = pair_result(generic, summary)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--arm', choices=['GENERIC_RETAIN', 'BANK'], required=True)
@@ -39,8 +48,10 @@ def main():
         if args.generic_summary is None:
             parser.error('BANK requires the technically collected Generic summary')
         generic = json.loads(args.generic_summary.read_text())
-        if generic['status'] != 'complete' or generic['arm'] != 'GENERIC_RETAIN':
-            raise ValueError('Generic technical collection must be complete')
+        if generic['status'] not in ('complete', 'incomplete') or generic['arm'] != 'GENERIC_RETAIN':
+            raise ValueError('BANK requires the technically collected selected Generic arm')
+        if (generic['training_seed'], generic['evaluation_seed']) != (args.seed, args.evaluation_seed):
+            raise ValueError('different selected seed binding')
     args.out.mkdir(parents=True, exist_ok=True)
     summary = dict(object='FOLR_ENTITY_HISTORY_B01_781201', arm=args.arm,
                    training_seed=args.seed, evaluation_seed=args.evaluation_seed,
@@ -58,7 +69,7 @@ def main():
         import torch
         from experiments.candidates.vap_folr_core.entity_history_b01.environment import EntityHistoryEnv
         from experiments.candidates.vap_folr_core.entity_history_b01.learner import Learner
-        from experiments.candidates.vap_folr_core.entity_history_b01.publication import arm_result, pair_result
+        from experiments.candidates.vap_folr_core.entity_history_b01.publication import arm_result
         from experiments.candidates.vap_folr_core.public_lifecycle_b01.collection import collect, sample, epsilon_at
         torch.set_num_threads(1)
         torch.set_num_interop_threads(1)
@@ -104,7 +115,7 @@ def main():
         summary['torch_threads'] = [torch.get_num_threads(), torch.get_num_interop_threads()]
         if generic is not None:
             summary['generic_input'] = str(args.generic_summary)
-            summary['pair_primary'] = pair_result(generic, summary)
+            add_bank_comparison(summary, generic)
         publish(args.out, summary)
         if time.monotonic() - START >= args.cap_seconds:
             raise TimeoutError('runner publication exceeded the complete arm cap')

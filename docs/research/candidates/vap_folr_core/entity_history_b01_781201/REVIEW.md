@@ -29,3 +29,15 @@ was certified by review. No tests, models, experiments or timing probes ran in
 the reviewer. Read-command wall was approximately2.509s total; agent/provider time
 was not included. DM accepts after the focused checks documented in technical
 acceptance; reviewer evidence is not separate authorization.
+
+## Incomplete Generic dependency review
+
+After the cap terminal, the same reviewer independently read the frozen E mapping
+and full response: complete technical collection is distinct from successful
+Generic training. BANK consumes no Generic weights, data or RNG; incomplete
+Generic limits only the paired comparison. A narrow publication correction that
+keeps strict pair validation and honestly publishes BANK's own endpoint conforms
+to E. Generic prefix timing and the cell-count ratio are not a known BANK cap
+projection. No new scientific invocation or budget was proposed by review.
+Additional reviewer read-command wall was0.432s; no numerical probe ran. Actual
+code-diff review follows the committed correction.

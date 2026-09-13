@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-09-12T23:40:43.890208+00:00",
+  "recorded_at": "2026-09-13T00:21:36.948829+00:00",
   "hard_support_cap_seconds": 1200,
   "native_caps_seconds": {
     "generic": 1800,
@@ -68,14 +68,30 @@
     {
       "component": "Generic launch/admission receipt collection",
       "seconds": 1.034821
+    },
+    {
+      "component": "Generic launch boundary commit/push",
+      "seconds": 4.4021762
+    },
+    {
+      "component": "terminal source/decision reads and local archive/member verification",
+      "seconds": 2.4614678
+    },
+    {
+      "component": "independent incomplete-Generic dependency review read",
+      "seconds": 0.432
+    },
+    {
+      "component": "Generic terminal collection SSH and SCP, including inner archival",
+      "seconds": 2.1708673999999997
     }
   ],
-  "known_support_seconds": 52.952228000000005,
+  "known_support_seconds": 62.41873940000001,
   "accounting": "Outer command elapsed covers inner pytest/admission once; do not add 3.346657243/2.834894535 again.",
   "uncovered": "Other short document/source reads, apply_patch/control service overhead, future integration/collection/cleanup and provider/agent costs are not measured here; no zero or complete-total assertion.",
   "scientific_invocations_so_far": 1,
-  "native_spend_so_far": "Generic running/uncollected; no complete time yet. BANK unlaunched.",
-  "rates": "Both new full native arm rates and process peaks UNKNOWN; no pilot",
+  "native_spend_so_far": "Generic complete technical collection:1795.06s enclosed wall, exit124; BANK unlaunched; supervisor1795s coarse whole-chain duration.",
+  "rates": "Generic incomplete prefix observed; BANK full native wall/peak remain UNKNOWN; no pilot or ratio-to-time forecast.",
   "remaining_scope": "Generic then BANK after complete technical collection; no extra pair/arm/width/shortened exposure. Continue support accounting at launch, collection and closeout.",
   "additional_observed_support_lower_bound_seconds": 97
 }
