@@ -18,6 +18,7 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 - Stable direction ID: `vap_folr_core`
 - The direction DM owns its research and lifecycle under the current owner delegation; the Portfolio index reports the actual decision without another approval.
+- Convergence is the independent scientific Reviewer of design, evidence, interpretation, conclusions and successor plans. DM reads the full review, resolves concrete findings or limits claims, and owns the final decision. Review is not funding/lifecycle approval.
 
 ## Scientific question
 
@@ -952,9 +953,10 @@ support considering bounded independent follow-up; inside/adverse evidence
 would favor the generic package at that observation's scope. No branch funds
 an automatic successor or stops FOLR. Complete implementation, per-arm wall,
 support, memory and agent/provider costs are unknown; no old cap transfers.
-The present OPEN authorizes no implementation, scientific identity, test or
-experiment. Root receives the decision-ready finite investment need through
-the existing Portfolio route, without another Convergence consultation.
+At that historical decision the OPEN did not itself allocate implementation or
+an experiment; its named investment request subsequently produced E. That old
+route is not current authority: DM now owns useful bounded research and lifecycle
+decisions with independent scientific review, and Clerk reports them.
 
 References:
 

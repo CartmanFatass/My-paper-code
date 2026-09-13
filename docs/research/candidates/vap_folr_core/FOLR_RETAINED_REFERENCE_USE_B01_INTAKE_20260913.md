@@ -117,32 +117,28 @@ bounded result, execute its Generic-only use rule and publish closeout evidence.
 The object-level use choice follows existing final authority; it is not a local
 Portfolio substitute. No A/B consumption state is created.
 
-## Next discriminator and actionable Root mapping
+## Post-F next scope and current coordination
 
-The missing observation purchased by F is now resolved. Repeating that retained-
-BANK use question, another Generic fit or another panel would add no authorized
-work. The missing next fact is a concrete decision-changing use/proposal beyond
-this fixed reference, or new evidence that changes the completed comparison's
-meaning. For example, a motivated information/lifetime context could change what
-legal history must inform an action; none is selected merely to continue running.
-No defensible next fixed object or investment is currently established by this
-intake. Exact mechanism/family choices remain with the appropriate existing tier;
-new investment or lifecycle choices belong to Portfolio. This is a revisit
-condition, not a universal customer, positive-result or diagnostic prerequisite.
+F's fixed-reference use is resolved and does not itself allocate another fit or
+panel. A useful fresh-learning B remains an ordinary DM choice, including on the
+unchanged host; alternative C below is real, not prohibited. A changed lifetime/
+information context is another possible scientific reason, not a required new
+mechanism or customer. DM owns object/family/research/lifecycle choices with
+meaningful independent scientific review; Clerk reports the decision. Actual
+owner resource/cross-direction constraints remain. The final DM PARK decision
+below is a marginal-value judgment, not missing-permission inference.
 
-Root can integrate this intake/E0/brief and mark the named F allocation complete
-with Generic-only use, preserving FOLR ACTIVE/MEDIUM and the occupied direction
-slot. No open Pro request or live experiment remains. DM owns the next bounded
-continuation when a changed fact or concrete authorized proposal arrives. Research
-state is ACTIVE-idle with **no pending external scientific dependency**; no future
-possible observation is represented as an unfinished outside task. Unchanged
-native waits create no new assignment, audit or request. Allocation end is not
-a direction stop or a request for another approval of F.
+Clerk integrates accepted evidence and records the actual DM decision: F is
+complete with Generic-only use; FOLR is reversibly PARKED/MEDIUM by the separate
+lifecycle decision below. The original result-time ACTIVE-idle boundary had no
+pending scientific producer. Current review preparation is identified below and
+becomes an accepted producer only on actual Send. No experiment is live.
+Allocation end alone is neither a direction stop nor a request for approval.
 
 [Cleanup inventory](retained_reference_use_b01_781301/CLEANUP_INVENTORY.json)
 preserves unique final weights, both panels, source and20 support/supervisor files.
 The exact five terminal remote paths total57836KiB at inventory; removal has not
-run. Root confirms integrated retention and accepts assigned reclamation; the
+run. Clerk supplies the integration/retention fact; DM completes assigned reclamation. The
 shared `C:/Projects/HMASD-worktrees/codex-vap-folr` checkout/branch remains the DM's
 direction workspace. [Chinese owner brief](../../portfolio/owner/briefs/vap_folr_core/2026-09-13_FOLR_RETAINED_REFERENCE_USE_B01_781301.md).
 
@@ -152,11 +148,11 @@ This proposal was published at `80daa6ab0320ea39b6a2e4749005bf0da5386b79` before
 the owner's full-lifecycle delegation. It now serves as a report input; the final
 DM decision below supersedes its proposed Portfolio approval/re-entry routes.
 
-**DM recommends P: reversibly PARK the whole FOLR direction at MEDIUM priority,
-preserve its evidence and open scientific questions, and release its occupied
-execution slot only through the explicit Portfolio plan.** This is a proposal,
-not an applied disposition. The serious alternative C is a bounded fresh-learning
-program below. No new experiment has been selected or accepted at this boundary.
+**P: reversibly PARK FOLR/MEDIUM, preserve evidence and open scientific questions,
+and release only FOLR occupancy.** Originally a proposal, P is now applied by DM
+below. Superseded approval wording is retained at the original immutable commit
+and item002. The serious alternative C is a bounded fresh-learning program.
+No new experiment has been selected or accepted.
 
 The owner resumed research through the independent Clerk on 2026-09-13. Current
 control is `C:/Projects/HMASD` at `8d7cb0020b55be3d4c2db2ba8643cf9275d314a6`,
@@ -164,10 +160,11 @@ with the follow-on control snapshot `f6763abc42a859cb9e89ad20194456210412fbbe`
 observed during preservation checks. The current DM task is
 `01a09cd8-6767-7760-aef6-559aa1c263aa`; authoring remains
 `C:/Projects/HMASD-worktrees/codex-vap-folr`, branch `codex/vap-folr`, from accepted
-science HEAD `a726ffbfe4efb532a0ea84ea602071e5f5c09009`. New Portfolio proposals
-go to Clerk `01a09cfe-1614-7da1-8445-323658edcc70`, which owns the overall agenda,
-Transport and complete-plan recording. Direction Innovator/Convergence and this
-direction's scientific conformance remain with this DM. No Root ACK is needed.
+science HEAD `a726ffbfe4efb532a0ea84ea602071e5f5c09009`. Decisions/report inputs
+go to Clerk `01a09cfe-1614-7da1-8445-323658edcc70` for mechanical integration/
+reporting. No automatic Portfolio consultation or replacement follows. DM owns
+science and its native independent scientific-review request/response route.
+No Root ACK is needed.
 
 **Authority correction after the owner's same-turn question:** F's no-transfer,
 no-renewal and no-retry clauses constrain that old allocation. They do not forbid
@@ -212,9 +209,9 @@ needed to ask that question. No current external scientific producer is pending.
 
 | Option | Scientific opportunity and investment | Capacity, owner and next event |
 | --- | --- | --- |
-| **P — reversible PARK, recommended** | No new empirical grant. Keep Generic-only for the fixed use, all adverse/positive evidence, the unresolved broader entity-history question and original H/other narrow holds. This is an investment judgment, not closure or proof of generic dominance. | Portfolio explicitly sets FOLR PARKED/MEDIUM and releases one occupied slot; Clerk applies the exact plan and any separately selected replacement. This DM retains evidence/assigned closeout. Re-entry is owned by Portfolio/owner when a specified information/lifetime, learning-performance or cost proposal makes new discrimination worth investment; Clerk routes that event to the DM. No empty agent wait or automatic experiment. |
-| **C — bounded fresh-learning program, strongest alternative** | Retain the current-host research strategy below, with estimated demand of at most two independently generated training blocks and four result-bearing invocations. It asks whether fresh BANK learning merits continued same-host research; it does not re-evaluate the fixed reference. | Keep ACTIVE/MEDIUM and its occupied slot for the planning horizon, with explicit overall resource limits if Portfolio sets them. DM owns ordinary object choices and execution without another purchase at every step. Completion, an earlier information-based stop or a material scope conflict produces one management update through Clerk. |
-| **D — explicit short deferral** | Zero new empirical grant. Preserve the current scientific boundaries while Portfolio evaluates other opportunities. This is not the recommended use of scarce occupancy. | Explicitly retain ACTIVE/MEDIUM and its occupied slot, recorded as non-advancing, until the next material overall-plan review or seven calendar days after the decision, whichever is first. Clerk owns the review event; Portfolio then decides continue/defer/park. No timer or waiting producer exists yet merely because this option is proposed. |
+| **P — reversible PARK, recommended and applied** | Zero new empirical invocation; preserve Generic-only use, signed evidence, broader entity-history uncertainty and narrower H/holds. Marginal-value judgment, not general dominance. | DM applies PARKED/MEDIUM and releases only FOLR occupancy; Clerk records it without replacement or other-direction change. DM owns reconsideration of useful information/lifetime, learning-performance or cost proposals and assigned closeout. |
+| **C — bounded fresh-learning program, strongest alternative** | At most two independent training blocks/four fits study fresh BANK learning on the same host, not reuse of the old fixed reference. | If DM selects C, retain ACTIVE/MEDIUM and declare finite bounds within actual owner constraints. Ordinary DM execution needs no per-object approval. Completion or a real conflict produces one Clerk update. Not selected here. |
+| **D — explicit short deferral** | Zero new empirical invocation; no concrete external producer would add information. | If DM selects D, retain ACTIVE/MEDIUM non-advancing until a material fact or the proposed seven-day revisit; DM decides the next state. No timer or producer was created. Not selected here. |
 
 P is preferred because the only concrete purchased use is settled and the strongest
 current same-information Generic directly beats the available BANK by 5.932421875
@@ -223,7 +220,7 @@ sufficiency a credible explanation, already preserved in the accepted decision.
 Further current-host training would buy learning-variation information, at nontrivial
 complete cost, without an identified architectural/information change that presently
 makes it the best use of this slot. This is a relative investment recommendation
-for Portfolio to compare against all other directions, not a measured cross-direction
+for the user-facing Portfolio report, not a measured cross-direction
 return-per-second ranking. Historical scalar H and B04 provide context at their own
 hosts; their signs are not pooled into a current-host training sample.
 
@@ -234,8 +231,9 @@ C is therefore feasible research rather than a prohibited retry or a token alter
 P remains reversible because no structural impossibility, equivalence or comprehensive
 negative has been established. Absent tuned same-information headroom is reported as
 **absent, not zero**; under evidence-spec section 11.7 it is not the reason to PARK.
-Permanent CLOSED is not recommended. Pro may choose another coherent program or
-portfolio composition; these options do not constrain its overall planning authority.
+Permanent CLOSED is not recommended. The independent scientific Reviewer may
+challenge this reasoning and recommend corrections or a useful successor; DM
+responds and decides. No portfolio composition change follows.
 
 ### C: coherent continuation scope and DM discretion, if selected
 
@@ -264,7 +262,7 @@ sign, and below -1 favors Generic at that observation's scope. Two blocks remain
 too small for a stable population or memory-causal claim. A missing primary limits
 only its dependent comparison; complete independent arm facts remain reportable.
 
-If the overall plan retains C, record the program horizon and any aggregate constraints;
+If DM selects C, record the program horizon and actual aggregate constraints;
 ordinary DM object authority already exists without one approval per step. DM may
 bind the unscreened seeds and actual source, select one
 or both blocks according to marginal information value, decide execution order and
@@ -274,8 +272,9 @@ does not mechanically prohibit a useful independent second block; nor does a gai
 require spending the remaining allowance. Failures count as accepted invocations,
 with no replacement outside the maximum four; no fifth fit, same-arm retry, width/
 hyperparameter sweep, extra panel or transfer between per-arm caps is authorized.
-New scientific family/information/reward/estimand changes return to the original
-direction Pro, and new investment/lifecycle choices return through Clerk to Portfolio.
+DM owns prospective scientific family/information/reward/estimand and lifecycle
+choices, preserving frozen history and meaningful independent scientific review.
+Cross-direction changes or new resource commitments need the owner's actual scope.
 Execution never waits for Root/Clerk ACK or an unrelated sibling.
 
 The accepted module `experiments/candidates/vap_folr_core/entity_history_b01/`
@@ -367,19 +366,20 @@ records P as a recommendation only; no lifecycle option is auto-applied. Live ow
 review query returned `[]`. [P1 proposal item](../../portfolio/owner/inbox/2026-09-13/20260913-folr-002.json)
 was created through the owner-console tool with `auto_applied=null`; it is not a
 request for per-item ratification. Publication is authorized by the owner-resume assignment
-and standing delegation; Portfolio retains the new investment/lifecycle choice.
+and standing delegation. The later owner instruction makes DM the direction
+decision owner and this proposal a historical report input only.
 NEW AUTHOR EXPOSURE: scientific_invocations=0; models=0; checkpoint_loads=0;
 environments=0; scientific_rng_masters=0; training_episodes=0; native_ticks=0;
 optimizer_steps=0; evaluation_episodes=0; source_implementation_edits=0;
 scientific_tests=0; provider_sends=0. Only documentary/configuration arithmetic
 and Git-preservation inspection occurred.
 
-DM sends the published proposal/commit to Clerk for its ready overall agenda without
-waiting for other DMs or main-writer ACK. Clerk supplies the whole portfolio/latest
-plan and preserves the full Pro answer; this DM will check its FOLR scope and apply
-conforming consequences. A specific scientific conflict returns through Clerk to the
-same Portfolio node. This submission is not itself a provider request or accepted
-experiment; record actual request/handle identity when Clerk supplies it.
+DM sent the proposal and actual decision to Clerk without a sibling/ACK barrier.
+Clerk records DM conclusions in the Portfolio report. No automatic Portfolio Send
+is authorized; already accepted historical requests retain their identity and
+full response as report input. Direction scientific review returns directly to
+this DM for findings and response. Report delivery is not an accepted provider
+request or experiment.
 
 Assigned cleanup remains independent technical work. Its exact five-path inventory
 still records `removal_executed=false`. The new recheck finds the unique Generic raw
