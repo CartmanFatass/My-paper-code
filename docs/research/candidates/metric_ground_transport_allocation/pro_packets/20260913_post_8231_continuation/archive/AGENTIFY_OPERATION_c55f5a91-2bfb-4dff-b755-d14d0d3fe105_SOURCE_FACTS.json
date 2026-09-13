@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-13T19:08:30Z",
+  "source_path": "C:\\Users\\fires\\.agentify-desktop\\review-transport.json",
+  "source_sha256": "1ad688c7a15a60e8c2b2caad21ec4c8c9cacd8ce48d1c0bad4796b9b5a77be2c",
+  "source_bytes": 75432,
+  "request_id": "2026-09-13-mgtap-post-8231-continuation-01",
+  "operation_id": "c55f5a91-2bfb-4dff-b755-d14d0d3fe105",
+  "operation_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\metric_ground_transport_allocation\\2026-09-13-mgtap-post-8231-continuation-01\\AGENTIFY_OPERATION_c55f5a91-2bfb-4dff-b755-d14d0d3fe105_ARGS_RECEIPT.json",
+  "operation_sha256": "e9d19a6fe8c050c7f321d352aee5fe1c5c0e2892fd81701eec3837cf3ff69108"
+}
