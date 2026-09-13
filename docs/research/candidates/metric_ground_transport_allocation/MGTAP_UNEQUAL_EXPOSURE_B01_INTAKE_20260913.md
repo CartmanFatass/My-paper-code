@@ -92,3 +92,15 @@ remain. See [CLEANUP_INVENTORY.json](unequal_exposure_b01_8231_20260913/CLEANUP_
 
 The [Chinese brief](../../portfolio/owner/briefs/metric_ground_transport_allocation/2026-09-13_MGTAP_UNEQUAL_EXPOSURE_B01_8231.md)
 and existing new-card item20260913-mgtap-001 carry the owner trace. No routine P3/P4 item is added.
+
+## Cleanup changed boundary
+
+Root integrated result/archive at48e6f98a8 and confirmed retention. DM removed the exact
+remote execution worktree, completed supervisor and readiness inputs; disk absence and
+execution-worktree registration absence are verified in
+[REMOTE_CLEANUP.json](unequal_exposure_b01_8231_20260913/REMOTE_CLEANUP.json).
+Automatic approval review rejected the exact PowerShell recursive local raw-directory
+deletion with `blocked by policy`. The local directory remains; no deletion retry or
+alternate method was attempted. [LOCAL_CLEANUP.json](unequal_exposure_b01_8231_20260913/LOCAL_CLEANUP.json)
+records the concrete remaining restriction. MGTAP remains ACTIVE/MEDIUM with no active
+scientific handle or successor allocation. Cleanup does not change result polarity.
