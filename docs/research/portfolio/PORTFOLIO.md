@@ -6,7 +6,7 @@
 ## 当前27方向状态 — 2026-09-12 Windows恢复
 
 本表登记16 ACTIVE、11 PARKED。2026-09-12 post-KELU Portfolio PRO_FINAL仅将CADC可逆改为PARKED/HIGH；其余生命周期、priority、recasts与UAV字段不变。
-当前严格推进5个方向：ACPS执行新unchanged pair；MGTAP与RCLE各自起草一个原Convergence节点问题；ACVC与FOLR各自起草一个原方向节点的下一对象/用途问题。五个任务均已派发给原DM，彼此独立。已完成的Portfolio intake、FSD U、CADC处置、旧实验和cleanup均不计槽位。
+并行目标为4个方向。现有记录列出5个在途方向，保留其已接受工作，随正式方向处置自然收敛；不新增第五个槽位：ACPS执行新unchanged pair；MGTAP与RCLE各自起草一个原Convergence节点问题；ACVC与FOLR各自起草一个原方向节点的下一对象/用途问题。五个任务均已派发给原DM，彼此独立。已完成的Portfolio intake、FSD U、CADC处置、旧实验和cleanup均不计槽位。
 新方向发现/注册及独立MGTAP T投入决定已完整intake并集成main2492dcb06：T=yes，ACPS/CADC获有限starter投入，另三项仅注册停放。
 有限分配结束不推断停向；只有Portfolio/owner生命周期决定改变ACTIVE/PARKED。
 
@@ -44,7 +44,7 @@
 | [VSP-C1](../candidates/vsp_c1/DIRECTION.md#tested-intact-body-plus-gate-package-ends-2026-09-09) | P81结束B13-tested intact-body-plus-gate package；B13−0.0320685805，保留旧正值与有限样本限制。 | 无 | 具体新方向/投资选择；没有successor，亦非整个K4或hold-value方向被关闭。 |
 
 下一次更新以实际DM返回、Transport provider接受/完整回执或Monitor新handle adoption为准。
-五槽独立滚动目标继续；不等待多个方向一起完成再派发已就绪动作。
+四槽独立滚动目标；普通续行由原DM负责。正式暂停/关闭留下空位后，Root向Portfolio请求新方向并按完整决定建立DM；不等待多个方向一起完成。
 
 
 ## Lifecycle与优先级

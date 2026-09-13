@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Pro Research Prompt Author"
   short_description: "Compose research delivery packets"
-  default_prompt: "Use $hmasd-pro-research-prompt-author to create a fixed GitHub research task for Root to dispatch to independent Transport."
+  default_prompt: "Use $hmasd-pro-research-prompt-author to create a fixed GitHub research task for the author parent (DM or Root vacancy request) to dispatch to its native Agentify Transport child."

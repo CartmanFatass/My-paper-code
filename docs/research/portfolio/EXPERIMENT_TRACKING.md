@@ -13,7 +13,8 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
 | FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 
-Actual advancing directions: **5** — ACPS, MGTAP, RCLE, ACVC and FOLR. Each has an active assignment
+Working-set target: **4**; existing overlap drains without interruption or fifth-slot admission.
+Recorded advancing directions: **5** — ACPS, MGTAP, RCLE, ACVC and FOLR. Each has an active assignment
 with its original DM. Completed Portfolio intake, CADC disposition, FSD U, old experiments and cleanup
 do not fill a slot. CADC is PARKED only because the complete Portfolio decision explicitly selected it.
 One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
@@ -25,9 +26,9 @@ each direction still counts its own implementation-through-cleanup and later Roo
 | Role | Task | Runtime |
 | --- | --- | --- |
 | Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
-| Transport | 01a095ca-7b4a-7940-8acf-fca1b52c784d | Independent Luna/high |
 
-Read live .codex/hmasd-transport.toml for independent Pro routing. Root and DM use native
+Read .codex/hmasd-transport.toml for Agentify/provider configuration. Each DM creates/reuses
+its native Transport, binds its exact ID in new handoffs, and receives archives directly. Root and DM use native
 long waits; each DM resolves and records its own reusable native Luna/low monitor identity on
 adoption. Experiment events return directly to DM. Root-action completions remain native.
 Historical packet addresses are not new dispatch routes.

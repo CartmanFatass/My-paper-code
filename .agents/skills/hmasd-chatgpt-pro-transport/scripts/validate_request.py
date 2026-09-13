@@ -236,11 +236,11 @@ def validate(request: dict, project_root: Path) -> dict:
     if operator_thread_id is not None:
         operator_thread_id = validate_source_thread_id(operator_thread_id)
     if operator_thread_id is None:
-        raise ValueError("canonical handoff requires the configured Transport singleton operator_thread_id")
+        raise ValueError("canonical handoff requires the bound Transport operator_thread_id")
     dispatch_mode = request.get("dispatch_mode")
-    if dispatch_mode not in {None, "REUSE_SINGLETON", "CALLER_DIRECT"}:
-        raise ValueError("dispatch_mode=REUSE_SINGLETON or owner-directed CALLER_DIRECT is required")
-    if dispatch_mode not in {"REUSE_SINGLETON", "CALLER_DIRECT"}:
+    if dispatch_mode not in {None, "REUSE_SINGLETON", "REUSE_DM_TRANSPORT", "CALLER_DIRECT"}:
+        raise ValueError("dispatch_mode=REUSE_DM_TRANSPORT, legacy REUSE_SINGLETON or owner-directed CALLER_DIRECT is required")
+    if dispatch_mode not in {"REUSE_SINGLETON", "REUSE_DM_TRANSPORT", "CALLER_DIRECT"}:
         raise ValueError("new canonical handoffs require an explicit dispatch_mode")
     owner_execution_instruction = request.get("owner_execution_instruction")
     if dispatch_mode == "CALLER_DIRECT":
@@ -258,6 +258,19 @@ def validate(request: dict, project_root: Path) -> dict:
         for key, value in provider_requirement.items()
     ):
         raise ValueError("provider_requirement must contain non-empty provider selection fields")
+    if dispatch_mode == "REUSE_DM_TRANSPORT":
+        if source_thread_id != parent_thread_id or operator_thread_id == parent_thread_id:
+            raise ValueError("DM transport requires author=parent and a distinct operator")
+        if operator_thread_id.startswith("/root/") and source_thread_id.startswith("/root"):
+            if operator_thread_id.rsplit("/", 1)[0] != source_thread_id:
+                raise ValueError("operator must be a direct child of the author parent")
+        if operator_reuse_required is not True or operator_model != "gpt-5.6-luna" or operator_thinking != "high":
+            raise ValueError("DM transport requires reusable Luna/high")
+        with (project_root / ".codex" / "hmasd-transport.toml").open("rb") as stream:
+            config = tomllib.load(stream)
+        if (config.get("mode") != "dm_native" or config.get("status") != "active"
+                or config.get("backend") != "agentify"):
+            raise ValueError("DM transport requires active dm_native Agentify configuration")
     if dispatch_mode == "REUSE_SINGLETON":
         if operator_reuse_required is not True:
             raise ValueError("REUSE_SINGLETON requires operator_reuse_required=true")

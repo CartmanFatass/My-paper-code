@@ -1,8 +1,9 @@
 # GitHub research collaboration
 
-The designated DM authors research questions and intakes complete Pro responses,
-including Portfolio questions and scientific/specification conformance. Independent Luna/high Transport owns Pro browser work and delivery receipts;
-Root dispatches handoffs, forwards native returns and integrates accepted commits.
+DM authors and intakes direction-related Pro questions, including ordinary Portfolio questions.
+Root authors/intakes only Portfolio vacancy replacement under ROOT_OPERATIONS.md. Each author
+dispatches its own native Luna/high Agentify Transport and receives its complete archive directly.
+Root also integrates accepted commits.
 Use `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md` to create a fixed GitHub
 task and `.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md` for Transport operations.
 Scientific authority, experiment admission and Git rules remain in AGENTS.md.
@@ -42,16 +43,15 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
 
 ## Normal sequence
 
-1. The designated DM renders TASK.md and HANDOFF.json with `delivery_mode=github_delivery`.
+1. The author parent renders TASK.md and HANDOFF.json with `delivery_mode=github_delivery`.
    TASK_NOT_PUBLISHED is preparation state and has no provider payload. Follow the
    normal worktree/integration rules. Root maintains control-plane files on main;
    Pro response delivery uses the scoped non-main branch.
 2. Commit and push TASK.md, then bind its full commit SHA using the renderer. Confirm
    that the fixed TASK is published and that the delivery branch and Issue exist.
    Commit and push the updated internal handoff.
-3. Send the rendered handoff once to the independent configured Transport endpoint,
-   omitting app model/thinking overrides. Native DM authors normally hand it to Root
-   for this dispatch, with source=actual author, parent=Root, operator=Transport.
+3. Send the rendered handoff via followup_task to its native Agentify Transport.
+   Source and parent are the author (DM, or Root for Portfolio vacancy replacement); operator is its actual reusable child.
    Accepted legacy Root-authored requests retain their bound route. Transport verifies 6 Pro and the
    exact conversation, sends the supplied short prompt once, observes and archives.
    Preserve accepted request content and migration evidence under ROOT_OPERATIONS.md;
@@ -79,7 +79,7 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
    `archive/RESPONSE.md`. The distinct short chat receipt is stored as
    `<archive_id>__04_CHAT_RECEIPT.md`. If GitHub and fallback response artifacts both exist,
    preserve both and compare their hashes; differing bytes are an archive conflict, not an
-   overwrite. The designated DM
+   overwrite. The author parent
    reads the complete response at its fixed commit, preserves original bytes and the
    comment snapshot, or reads the hash-verified downloaded artifact, and performs
    specification-conformance and scientific intake.
@@ -88,7 +88,8 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
 
 Transport handles Pro observation and parent receipts under ROOT_OPERATIONS.md. Issue comments
 do not themselves establish automatic wakeup. Completion goes to the declared parent;
-Transport returns native-direction receipts to Root, which forwards them to the original DM.
+Transport returns archives directly to its author parent. For ordinary DM questions Root receives
+only the checked operational mapping; it directly intakes its own vacancy response.
 Repeated notifications reuse the existing request/commit/path intake.
 
 ## Partial success and uncertainty
@@ -104,7 +105,7 @@ Repeated notifications reuse the existing request/commit/path intake.
 | Shared direction branch advances | Add only the scoped response on current descendant HEAD, retaining fixed evidence and unrelated files. Reconcile the remote commit before local pushes; report non-descendant history or target conflicts. |
 | Accepted legacy TASK forbids branch-base changes | Preserve its exact Send and reply. New workflow wording does not amend the accepted TASK. Root arranges a bounded delivery correction after reconciling actual file/comment state; use a distinct request and response path, unchanged scientific evidence unless explicitly authorized. |
 | Cleanup removed or renamed a delivery target | Reconcile the affected request and recovery ref before further writes. Correct unsent handoffs and publish/bind their new TASK; preserve accepted/uncertain handoffs and Root resolves restoration or explicit correction. Branch cleanup alone never authorizes a replacement conversation or another Send. |
-| Main advances after input was bound | Keep each original effective input path/SHA mapping. The designated DM assesses material scientific changes at intake; unrelated commits do not invalidate the response. |
+| Main advances after input was bound | Keep each original effective input path/SHA mapping. The author assesses scope/specification conformance at intake; unrelated commits do not invalidate the response. |
 | Provider access is unavailable | Record the precise unreadable paths or unavailable action and any confirmed partial delivery. A local tool's access does not establish Pro access. |
 | GitHub write actions are unavailable after actual-state readback | Complete the review in the same accepted turn and attach the full answer as downloadable `RESPONSE.md`. Transport downloads and hash-archives it; do not send a second scientific prompt merely to change delivery mode. |
 | A conclusion needs correction | Ask the same node a new explicit question with a new output path and links to the prior response; preserve the original answer. |
@@ -126,7 +127,8 @@ ROOT_OPERATIONS.md, “Current records, integration and cleanup”. Request-spec
 Send and archive fields belong to that request; carrying a prior round's fields into a new
 current record is not delivery evidence. Preserve them in their original request history.
 
-OWNER_DIRECT 2026-09-10: for new Portfolio requests the designated DM is the actual author/source,
-Root remains parent and dispatcher, and Transport remains operator. Root forwards complete responses
-to that DM for scientific/specification checking, then applies conforming decisions. Existing
+For ordinary Portfolio requests DM is author/source, parent and dispatcher; its native Agentify
+Transport is operator. For vacancy replacement Root instead owns those author/parent duties and
+receives its own child Transport archive. The author checks complete
+responses for conformance, then Root applies the resulting decisions. Existing
 request identities and delivery clauses are unchanged; no new protocol or duplicate Send follows.

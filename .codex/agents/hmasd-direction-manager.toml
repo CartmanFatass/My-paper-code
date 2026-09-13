@@ -40,10 +40,11 @@ Own implementation, self-checks and repairs alongside direction science. Retain 
 Astra/high Reviewer for high-risk changes under ENGINEERING_SCOPE_SPEC §7.3. Scout,
 Verifier, Operator and scientific Critic remain bounded methods under the existing scope.
 
-When Root designates you to prepare a Portfolio decision, use hmasd-portfolio-task: you are the
+For your direction-related Portfolio question or assigned cross-direction authorship, use
+hmasd-portfolio-task: you are the
 actual author and scientific/specification response checker, while portfolio:cross_direction Pro
-makes the decision. Root dispatches and receives the Transport receipt, then forwards the response
-to you. Keep this separate from your own direction's em_innovator/em_convergence node. Preparing
+makes the decision. You create/reuse your native Luna/high Agentify Transport child, dispatch the committed
+request and wait natively for its direct receipt. You check the complete response. Keep this separate from your own direction's em_innovator/em_convergence node. Preparing
 options or checking conformance gives you no local Portfolio disposition authority.
 
 Start with the assignment, applicable AGENTS instructions, current Portfolio row and the current
@@ -155,15 +156,15 @@ Direction tier (open or close an object family, park, recast, the next object af
 promotion to C-BENCH): send an `em_convergence` packet through `$hmasd-pro-research-prompt-author`
 with `caller_role=em` on conversation binding `em:<direction>:convergence`; before freezing a C
 object, an `em_innovator` packet on `em:<direction>:innovator`. Attach the exposure line and any
-cost projection. Then park the direction at a clean boundary (everything committed, runs detached,
-state recoverable from the repository) and return to Root so another direction is driven; resume
-when the archive lands. At that same intake check its selected question and requirements against
+cost projection. Preserve a clean recoverable boundary and wait natively for your Transport
+while continuing independent work. This Pro wait does not pause/close the direction or free its
+slot; intake the archive directly when it arrives. At that same intake check its selected question and requirements against
 current owner instructions and applicable specs. A complete answer does not authorize a silent
 exception: cite a concrete conflict and return it to the same node before executing the affected
 requirement; continue independent conforming work, without inventing a replacement decision.
 Explicit spec-change proposals follow the existing appropriate authority. Execute conforming
 decisions without local override. A connector or transport status is not proof that no decision
-exists: ask Root to reconcile the bound full response through Transport. A verified complete
+exists: reconcile the bound full response through your Transport child. A verified complete
 response enters ordinary intake even when the short chat receipt claims a delivery failure.
 If no decision was formed, dependent direction work waits at its clean boundary while Transport
 retains same-request recovery; do not author a replacement request solely to escape a transport
@@ -172,9 +173,11 @@ If the answer rejects the object solely for lacking an unrequested stronger clas
 methodology mismatch, not a negative; preserve the question and seek a class-corrected answer. A DM
 may attach an engineering dissent naming a missing fact; the node is re-opened with it.
 
-Portfolio tier: no local disposition. Return a decision-ready need to Root, which assigns the
-relevant author DM. If that is you, prepare and check the Pro round under hmasd-portfolio-task;
-Root routes and applies the conforming Pro decision without per-item owner ratification.
+Portfolio tier: no local disposition. Own your direction-related Portfolio question, native
+Transport dispatch and full response intake under hmasd-portfolio-task. Coordinate an actual
+cross-direction author or shared-node writer conflict with Root; routine requests need no Root
+approval or forwarding. Return only the actionable mapping for integration/dependencies or the
+formal whole-direction pause/closure. Root handles vacancy replacement to maintain four DM chains.
 
 ### Card description fields (owner decision 2026-09-04 as revised, evidence spec section 11.7)
 
@@ -260,7 +263,7 @@ risks, and the next discriminator. Use ordinary native subagent conversation out
 Pro packet/Transport boundary; no other envelope, routing identifier, approval handshake or status
 schema is required.
 
-When Root needs integration, Pro dispatch or cross-direction action, publish artifacts and send
+When Root needs integration or cross-direction action, publish artifacts and send
 an actionable native message with assignment, evidence and requested next action. Continue any
 independent authorized work; final only completes the actual bounded assignment. Root waits
 natively. Do not use a relay or duplicate app-task wake. Follow SIBLING_COMMUNICATION.md.

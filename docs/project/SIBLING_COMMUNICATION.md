@@ -1,7 +1,7 @@
 # Task collaboration
 
 Control runs on Windows C:/Projects/HMASD with PowerShell. Resolve native IDs from runtime
-results; resolve the independent Transport endpoint from .codex/hmasd-transport.toml.
+results; read Agentify/provider settings from .codex/hmasd-transport.toml.
 Historical task IDs are evidence, not dispatch routes.
 
 ## Native task tree
@@ -29,7 +29,7 @@ an idle child with unfinished authorized work is resumed once with followup_task
 a timeout as failed execution, a new invocation budget or permission to retry scientific work.
 Owner pause/stop boundaries take precedence. No-work completion is not a reason to loop forever.
 
-DM sends Root only actionable integration, cross-direction dependency, Pro handoff or scope-conflict
+DM sends Root only actionable integration, cross-direction dependency, formal direction disposition or scope-conflict
 facts, with assignment identity, commits/evidence, requested next action and uncertain effects.
 Continue independent authorized direction work after a partial handoff. Root handles the changed
 direction without waiting for siblings or routinely reloading the whole portfolio. Deduplicate
@@ -43,14 +43,19 @@ monitor address supplied by DM and cannot create another child. Adoption and ter
 to DM. DM collects results and completes scientific intake without Root forwarding terminal events.
 Root receives the resulting actionable direction handoff, not every experiment status.
 
-## Independent Transport
+## DM-owned Agentify Transport
 
-Root sends the exact committed Pro assignment to the independent Transport using app-task
-messaging. Transport retains one-Send reconciliation, observation, archive and direct Root receipts.
-Cross-task messages omit model/effort overrides. Root forwards the full response to the original
-DM for scientific/specification intake using followup_task. Native waits continue while native
-work remains; if only Transport work remains, Root may end the turn and its receipt wakes Root.
-No native agent or experiment monitor performs Pro browser operations.
+Each DM creates/reuses one native Luna/high Transport child with minimal context. DM authors and
+publishes the exact handoff, dispatches via followup_task, and waits natively for the complete
+archive. Transport owns Agentify Send, observation, one-Send reconciliation and direct DM receipt.
+Root receives the DM's conformance/decision mapping and integrates it. Root and DM continue native
+waits while these dependencies run; there is no independent app-task wake branch.
+Different provider bindings may proceed concurrently. Serialize each exact conversation and the
+shared Portfolio node under its current author. Root uses its own native Transport only for
+vacancy replacement after formal pause/closure leaves fewer than four occupied direction slots;
+those archives return directly to Root for complete intake and Pro-selected DM creation. Existing uncertain or accepted requests
+require same-request reconciliation, never a new Send after changing executor. Transport skill
+owns exact Agentify arguments and immutable archival. Experiment monitor never operates Pro.
 
 ## Recoverable ownership
 

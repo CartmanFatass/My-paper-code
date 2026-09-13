@@ -1,49 +1,26 @@
-# HMASD Root restart handoff — 2026-09-12
+# HMASD Root restart handoff
 
-This is the sole current Root restart handoff. Replace this file at the next Root handoff; do not
-append historical snapshots. Repository history preserves superseded states.
+Use the current owner request, AGENTS.md, ROOT_OPERATIONS.md and hmasd-loop-dispatch for control.
+Control checkout is C:/Projects/HMASD on Windows PowerShell. Resolve native owners from runtime
+results and actual direction assignments; no historical singleton Transport/Monitor/Relay endpoint
+is a dispatch route. Shared Agentify registry location comes from .codex/hmasd-transport.toml.
 
-## Restart entry state
+Root keeps a four-direction target, brief changed-event logs, necessary integration/dependencies
+and native waits. DM owns routine Monitor/Transport receipts and full scientific intake. Only a
+formal direction pause/closure leaving fewer than four occupied slots triggers Root's Portfolio
+replacement request through its own Transport. Preserve existing overlap without forced stops.
 
-- Control checkout: `C:/Projects/HMASD`, Windows PowerShell.
-- Current integrated main at handoff preparation: `34382425abd4bdda9bcb71847c0f016d9af9483a`.
-- Root task: `01a095b7-850f-7401-ad4e-5e4320d285f1`.
-- Transport: `01a095ca-7b4a-7940-8acf-fca1b52c784d`.
-- Monitor: `01a095d0-21ee-7c02-9d97-3681b5678200`.
-- Relay: `01a095ca-8676-74e1-b78c-ea459d41e905`.
-- Transport registry is the effect authority. At this handoff all four recently queued responses
-  listed below are `ARCHIVED`, have exactly one Send, and have an accepted Root receipt.
-- Monitor has no active experiment handle. ACPS-B02 both arms completed and its goal closed.
+## Resume and recovery
 
-Do not reset, stash, or include unrelated working-tree changes. Another control-plane batch was
-still editing while this handoff was written. The final observed dirty set before restart was:
-modified `.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md`,
-`.agents/skills/hmasd-loop-dispatch/SKILL.md`, `.codex/agents/hmasd-direction-manager.toml`,
-`.codex/agents/hmasd-experiment-operator.toml`, `.codex/config.toml`, `AGENTS.md`,
-`docs/project/EXPERIMENT_MONITOR.md`, `docs/project/ROOT_OPERATIONS.md`,
-`docs/project/SIBLING_COMMUNICATION.md`, and `docs/research/portfolio/EXPERIMENT_TRACKING.md`;
-deleted `.codex/hmasd-monitor.toml` and `.codex/hmasd-relay.toml`; and untracked
-`.codex/agents/hmasd-experiment-monitor.toml`. Inspect and preserve that batch as one unit. It was
-not included in the handoff commits. Because it changes Monitor/Relay configuration, re-read the
-resulting committed control plane after restart before using the endpoint snapshot above.
+A workflow edit or restart does not resume paused research. Apply owner instructions first.
+The inventory below preserves the last reported recovery facts, not verified current pending work
+or executable dispatch orders. Reconcile named commits with current HEAD, subsequent DM intake
+and the shared request registry before any authorized continuation. Do not replay completed work.
+Accepted historical packets retain their input/binding/effect facts; if work remains, establish
+its actual owner and same-request native recovery route before observation or delivery. Unknown
+Send acceptance permits observation only. Preserve unrelated working-tree changes.
 
-## First restart pass — exact order
-
-1. Run the `hmasd-loop-dispatch` stable next-action trigger and re-read current owner instructions.
-2. Integrate each response commit below if it is not already an ancestor of `HEAD`, then immediately
-   wake the named original DM with the immutable response for complete conformance/scientific intake.
-   These responses already exist; do not Send or reconcile them again.
-3. Integrate the three ready MGTAP Portfolio-investment author commits in order and dispatch their
-   exact HANDOFF once through Transport. Check the current `portfolio:cross_direction` registry
-   binding first because the preceding ACPS request is already archived.
-4. Apply each DM intake as it returns. A finite allocation ending does not stop or release an ACTIVE
-   direction. Only an explicit Portfolio/owner lifecycle decision may change ACTIVE/PARKED.
-5. Refresh `PORTFOLIO.md` and `EXPERIMENT_TRACKING.md` from actual DM/provider/handle states. Do not
-   count completed responses, cleanup, queued intentions, Transport, Monitor, or Root as directions.
-   Restore five independent advancing direction chains by dispatching ready continuations and proper
-   node questions; do not invent local science to fill a slot.
-
-## Completed responses awaiting Root integration and DM intake
+## Response recovery inventory
 
 | Direction | Request | Immutable response commit | Response SHA-256 | Restart action |
 | --- | --- | --- | --- | --- |
@@ -57,15 +34,15 @@ MGTAP's earlier use response `71baa4a814fb8cb5d0cd2944deb0548b8fc644b2` and its 
 mean-COND512/intact-DENSE768 scientific comparison but granted no experiment. MGTAP remains
 ACTIVE/MEDIUM and DENSE remains default.
 
-## Ready MGTAP Portfolio investment handoff
+## MGTAP Portfolio handoff recovery inventory
 
-Integrate these commits in order, excluding any sync-only commits named by the DM:
+Previously reported author commits; check actual integration and current request state:
 
 1. `e0196a1e1c9aa53c2dc3e978ab199c4adfe84eac`
 2. `a52d4dcb43625dc5ef1f009c9f578a20089c5d14`
 3. `ada5eade08d7c849f6111d6ea6eca72ad03734bb`
 
-Then execute exactly once:
+Recorded handoff location (resolve its current owner and effect state; not a Send instruction):
 
 `C:\Projects\HMASD-worktrees\codex-portfolio\docs\research\portfolio\pro_packets\20260912_mgtap_unequal_exposure_investment\delivery\HANDOFF.json`
 
@@ -74,7 +51,7 @@ fresh mean-COND512/intact-DENSE768 pair or buy nothing. The proposed workload is
 and 2,560 Adam updates plus all required support. New costs and caps are UNKNOWN/UNASSIGNED; no
 historical cap or balance may be reused, and there is no current implementation or experiment grant.
 
-## Current scientific control facts
+## Last reported scientific recovery facts
 
 - ACPS: ACTIVE/HIGH. B01 was ADVERSE `-0.0368081418 J`; B02 was negative INSIDE_MEI
   `-0.0051864274 J`, conditional SE `0.00545885`, 12 positive/20 adverse. B02 intake and four-target
@@ -91,6 +68,6 @@ historical cap or balance may be reused, and there is no current implementation 
 - FOLR: ACTIVE/MEDIUM. BANK completed, Generic had no final, so no paired primary or polarity exists.
   Its new direction response is complete but not yet intaken.
 
-The last published current tables may lag these newly discovered archived responses. Treat this file,
-the Transport registry, immutable response commits, and subsequent DM intakes as restart inputs; then
+The last published current tables may lag these newly discovered archived responses. Use
+the shared Transport registry, immutable response commits and subsequent DM intakes to reconcile this inventory; then
 replace the table rows with the resulting current facts rather than retaining stale prose.

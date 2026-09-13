@@ -6,14 +6,14 @@ implementation, self-checks, repair and technical acceptance in the same task. R
 independent code Reviewer and high-risk review under ENGINEERING_SCOPE_SPEC section 7.3;
 DM resolves findings and accepts the work. Root owns shared control-plane implementation and
 acceptance with independent review where required. Accepted CM/Implementer work preserves its
-artifacts and original return route through closeout, without successors. Other specialists,
-Transport is unchanged. Each DM owns its native experiment monitor. Scientific budgets and Pro authority are unchanged.
+artifacts and original return route through closeout, without successors.
+Each DM owns its native experiment monitor and native Agentify Transport. Scientific budgets and Pro authority are unchanged.
 
 
 ## Current control
 
 Use Windows C:/Projects/HMASD and PowerShell. Resolve native task IDs from runtime results and
-independent Transport from .codex/hmasd-transport.toml. Current routing overrides historical
+Agentify/provider settings from .codex/hmasd-transport.toml. Current routing overrides historical
 operational literals in fixed packets; scientific input bindings and evidence remain unchanged.
 No browser Send may overlap another executor; reconcile actual acceptance before recovery.
 
@@ -38,8 +38,7 @@ records before recommending continuation, replacement or new-direction registrat
 Root dispatches ready work and waits natively while DM work remains. DM waits natively for its
 monitor or Reviewer after exhausting independent work. Use configured long waits; unchanged
 timeouts only continue waiting. Process the changed direction without a global reread or sibling
-barrier. SIBLING_COMMUNICATION.md owns event semantics. Only independent Transport receipts retain
-an app-task wake route when no native work remains. Owner pause/stop remains controlling.
+barrier. SIBLING_COMMUNICATION.md owns event semantics. DM also waits natively for its Transport; Pro archives return directly to DM. Owner pause/stop remains controlling.
 
 ## Maintained sources
 
@@ -67,7 +66,7 @@ Historical decisions, snapshots and benchmark materials remain evidence, not com
 
 | Owner | Deliverable |
 | --- | --- |
-| Root | Ready-work dispatch within existing decisions; dependencies and working-set replacement; main integration, current tracking, exact Pro dispatch/receipt forwarding and operational application |
+| Root | Brief changed-event log; necessary main integration and cross-direction dependencies; native waiting; Portfolio vacancy request/intake and new DM creation when formal direction pause/closure leaves fewer than four slots |
 | Direction DM | Card/predictions, object decisions, direct implementation, code self-review and repair, published inputs, bounded execution, monitor handover, collection, technical acceptance, scientific intake, cleanup and continuation |
 | Designated Portfolio DM | Decision materials grounded in Portfolio principles/specs/experience, complete Pro-response conformance and intake, execution mapping or exact conflict returned to Pro |
 | Implementer | Temporarily suspended for new work; preserve accepted closeout evidence and return routes |
@@ -75,7 +74,7 @@ Historical decisions, snapshots and benchmark materials remain evidence, not com
 | Scout / Verifier / Critic | One bounded factual, runtime or scientific-criticism question directly for the parent; no new child chain |
 | Operator, when useful | Exact launch/handover/collection or cleanup batch from accepted inputs; DM retains acceptance |
 | DM-owned native Monitor | Luna/low; observe adopted handles and send adoption/terminal facts directly to DM; no scientific collection or interpretation |
-| Independent Transport | Execute exact authored Pro requests, observe and archive, return one factual receipt to the bound Root parent |
+| DM-owned native Transport | Luna/high Agentify Pro Send/observation/archive; factual receipt directly to DM |
 | Portfolio Pro | Final decision on the bound cross-direction question within current owner/specification constraints |
 
 DM may use optional specialists when a complete independent task saves work or enables useful
@@ -91,27 +90,25 @@ gaps rather than inventing another authority layer.
 
 ## Portfolio material and response route
 
-OWNER_DIRECT 2026-09-11: resolve recurring Pro transport stalls. Transport retains
-ownership through same-request recovery, complete-response archival and actual
-parent delivery. Root dispatches a concrete recovery action when a recoverable
-blocker returns; it does not leave a failed click as an indefinite direction park.
-Uncertain acceptance permits reconciliation only. Proven nonacceptance permits
-an exact-payload retry after interaction repair under the Transport skill, with
-all prior attempts preserved. A complete verified Git response is routed to its
-DM while receipt-label corrections proceed independently. No new Pro question,
-scientific budget, provider binding or scheduler follows from this repair.
+The working-set target is four direction DM chains. Ordinary direction-related Portfolio replies
+remain with their author DM. A formal direction pause/closure that leaves fewer than four occupied
+slots triggers Root to author a bounded replacement question, dispatch through its own reusable
+Luna/high native Agentify Transport, read/check the complete response and create the Pro-selected
+new DM. Pro chooses science and investment. Root records pending requests/reserved slots and
+recounts before dispatch, so repeated returns cannot duplicate a request or DM. Existing overlap
+above four drains without interrupting live work. Object/allocation completion, Pro waits and
+temporary blockers do not release a direction slot. Use hmasd-portfolio-task for both author routes.
 
-Root chooses a relevant recently active DM with the current evidence, and names the question,
-scope and original sources. One DM authors the complete Portfolio packet; other DMs contribute
-facts where needed. The author uses `hmasd-portfolio-task` and Prompt Author, preserving exact
-references and contrary evidence. If unavailable, Root explicitly transfers the remaining work
-to another relevant DM; Root does not take over scientific drafting.
+DM retains recovery of its request through its native Transport child. Uncertain Send permits
+observation/reconciliation only; proven nonacceptance permits the exact authorized Send after
+repair. Complete immutable responses go straight to DM intake while metadata corrections proceed.
 
-For a new request the actual author is source, the current Root task is parent and the existing
-Transport is operator. `caller_role=portfolio` selects the Pro node, not a native Root identity.
-Root checks published artifact/route facts and dispatches the exact handoff. It returns substantive
-omissions to the author instead of rewriting the packet. Transport receipts still go only to Root;
-Root forwards the complete response to the designated DM using `followup_task`.
+For ordinary direction-related Portfolio work, a relevant DM authors the full
+packet, creates/reuses its Transport child, publishes exact inputs and dispatches natively. DM is
+both source and receipt parent, including Portfolio. The child uses Agentify and returns the full
+archive directly. Root neither rewrites science nor forwards provider receipts. DM checks
+conformance and returns the operational mapping for Root integration. Serialize the single
+Portfolio binding; a new author does not supersede accepted execution without reconciliation.
 
 New GitHub-delivery prompts include an in-turn downloadable Markdown fallback. If Pro cannot
 expose or complete its scoped GitHub writes after checking actual state, it finishes the review
@@ -119,7 +116,7 @@ and attaches the full `RESPONSE.md` in chat. Transport downloads it, binds it to
 count and SHA-256, stores `<archive_id>__02_RESPONSE.md`, and retains the same bytes as repository
 sidecar `archive/CHAT_FALLBACK_RESPONSE.md`. The GitHub `archive/RESPONSE.md` remains reserved for
 actual connector delivery.
-Root forwards that artifact to the designated DM for the same conformance intake. This fallback
+Transport returns that artifact directly to its author parent for conformance intake. This fallback
 does not assert a GitHub commit/comment and does not authorize another Send.
 
 The DM reads the full response and checks the bound question, current owner/spec constraints,
@@ -156,6 +153,9 @@ for overlapping work. Independent paths can proceed concurrently; every authoriz
 immediately. Do not hold an accepted commit for a sibling result or batch merge. A role migration
 does not create a new branch or a new scientific object.
 
+Root normally writes only a brief changed-event log with evidence and any action. It updates
+shared records when disposition, accepted integration or a dependency actually changes, without
+mirroring DM receipt traffic or issuing approval for routine continuation.
 Root maintains `docs/research/portfolio/PORTFOLIO.md` as the current disposition/readiness snapshot
 and `EXPERIMENT_TRACKING.md` as accepted handles, owners, terminal facts and pending work. Scientific
 statements cite DM intake/Pro authority; Root integration is not another verdict. Batch useful

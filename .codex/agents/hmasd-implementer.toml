@@ -1,5 +1,5 @@
 name = "hmasd-implementer"
-description = "Optional implementation worker for one DM-owned bounded change."
+description = "Suspended for new assignments; accepted historical work closeout only."
 model = "gpt-5.6-sol"
 model_reasoning_effort = "medium"
 sandbox_mode = "danger-full-access"
