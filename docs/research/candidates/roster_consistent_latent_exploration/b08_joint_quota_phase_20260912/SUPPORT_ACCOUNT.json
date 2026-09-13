@@ -1,0 +1,160 @@
+{
+  "object_id": "RCLE-TBCFV-B08-JOINT-QUOTA-PHASE",
+  "as_of": "prelaunch technical acceptance",
+  "native_cap_s": 900,
+  "additional_invoked_support_cap_s": 900,
+  "complete_invoked_cap_s": 1800,
+  "known_support_charged_s": 386.33831879999997,
+  "interpretation": "Sum of complete observed command windows and two explicitly conservative failed-process bounds; session polling chunks replaced, not added. This is a support accounting bound, not elapsed critical path or aggregate CPU. Future required tails not yet complete.",
+  "provider_agent_lifetime_cost": "UNKNOWN",
+  "documentary_family_selection": "separately accepted UNKNOWN, not charged to B",
+  "first_fetch_bound": {
+    "start_upper": "2026-09-13T06:25:26Z",
+    "end_lower": "2026-09-13T06:28:50Z",
+    "charged_upper_s": 205,
+    "meaning": "source commit before fetch started; terminal collection before clock06:28:50; conservative complete-fetch charge, replaces polling durations"
+  },
+  "first_checkout_bound": {
+    "start": "2026-09-13T06:28:50Z",
+    "end_utc": "2026-09-13T06:31:10.240Z",
+    "charged_upper_s": 141,
+    "meaning": "complete failed staging upper bound; replaces staging session chunk durations"
+  },
+  "rows": [
+    {
+      "operation": "initial source read 0",
+      "wall_s": 0.3135826
+    },
+    {
+      "operation": "initial source read 1",
+      "wall_s": 0.3132826
+    },
+    {
+      "operation": "native RNG and reference dependency reading",
+      "wall_s": 0.2609058
+    },
+    {
+      "operation": "existing study RNG and lifecycle reading",
+      "wall_s": 0.3347694
+    },
+    {
+      "operation": "fresh initialization and native semantics",
+      "wall_s": 0.2460463
+    },
+    {
+      "operation": "native compact interface details",
+      "wall_s": 0.3379508
+    },
+    {
+      "operation": "B08 card and L0 editing",
+      "wall_s": 0.019
+    },
+    {
+      "operation": "joint policy, study and thin entry implementation",
+      "wall_s": 0.031
+    },
+    {
+      "operation": "test/build ownership preparation",
+      "wall_s": 0.3337978
+    },
+    {
+      "operation": "native test oracle selection",
+      "wall_s": 0.3466731
+    },
+    {
+      "operation": "focused scientific contract tests and actual counts",
+      "wall_s": 0.015
+    },
+    {
+      "operation": "finite-gradient test refinement",
+      "wall_s": 0.018
+    },
+    {
+      "operation": "static exposure, card packet and AST check",
+      "wall_s": 0.2515988
+    },
+    {
+      "operation": "owner card/audit publication preparation",
+      "wall_s": 0.4584187
+    },
+    {
+      "operation": "source/card commit",
+      "wall_s": 0.7766515
+    },
+    {
+      "operation": "source/card push",
+      "wall_s": 4.5245406
+    },
+    {
+      "operation": "remote execution/supervisor inventory",
+      "wall_s": 0.7290041
+    },
+    {
+      "operation": "pending staging/supervisor syntax reconciliation",
+      "wall_s": 0.6949735
+    },
+    {
+      "operation": "stop owned stalled fetch; no checkout accepted",
+      "wall_s": 0.4840091
+    },
+    {
+      "operation": "fetch through declared network login shell",
+      "wall_s": 4.5328289999999996,
+      "session_id": null
+    },
+    {
+      "operation": "review import repair commit",
+      "wall_s": 0.5651088
+    },
+    {
+      "operation": "review repair push",
+      "wall_s": 3.8698483
+    },
+    {
+      "operation": "exact pending checkout dependency reconciliation",
+      "wall_s": 0.7263493
+    },
+    {
+      "operation": "cancel stalled owned lazy-blob checkout",
+      "wall_s": 0.5149513
+    },
+    {
+      "operation": "exact published source fetch via declared network shell without stale tracking ref",
+      "wall_s": 4.4871562
+    },
+    {
+      "operation": "exact sparse worktree staging via network shell",
+      "wall_s": 3.0021471
+    },
+    {
+      "operation": "failed initial non-login fetch (conservative complete-window bound)",
+      "wall_s": 205,
+      "bound": true
+    },
+    {
+      "operation": "failed lazy-blob checkout (conservative complete-window bound)",
+      "wall_s": 141,
+      "bound": true
+    },
+    {
+      "operation": "complete remote test invocation including SSH transport",
+      "wall_s": 7.2727572
+    },
+    {
+      "operation": "independent initial review read/static invocations",
+      "wall_s": 3.1892893
+    },
+    {
+      "operation": "technical acceptance and exact command authoring",
+      "wall_s": 0.016
+    },
+    {
+      "operation": "test receipt/log collection",
+      "wall_s": 1.3720953
+    },
+    {
+      "operation": "independent correction and launch-command review",
+      "wall_s": 0.3005823
+    }
+  ]
+}
