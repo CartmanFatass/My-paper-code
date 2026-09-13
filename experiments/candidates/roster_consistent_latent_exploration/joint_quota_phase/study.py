@@ -1,4 +1,4 @@
-"""One fit and four full native endpoints for the selected quota-phase B08."""
+"""One fit and four full native endpoints for the selected quota-phase B08 or greedy-anchored B09."""
 import hashlib
 import json
 import math
@@ -20,6 +20,7 @@ from .policy import PhasePolicy, adam_update, flat_parameters, greedy_phase, sam
 
 OBJECT = "RCLE-TBCFV-B08-JOINT-QUOTA-PHASE"
 SEED = 28
+B09_OBJECT = "RCLE-TBCFV-B09-GREEDY-ANCHORED-PHASE"
 PRIMARY = ("8_to_12.ACTIVE_CONTINUATION", "12_to_8.ACTIVE_CONTINUATION")
 ROLES = ("initialization", "final256", "greedy", "nearest")
 
@@ -149,13 +150,17 @@ def evaluate(model, role, key, binding, out):
     return rows
 
 
-def run(out, launch_sha, seed=SEED):
+def run(out, launch_sha, seed=SEED, *, greedy_anchored=False):
+    object_id = B09_OBJECT if greedy_anchored else OBJECT
+    if seed != (29 if greedy_anchored else SEED):
+        raise ValueError("seed must match the selected fixed B08/B09 object")
+    action_law = "softmax(log(q)+z); q=.9*exact_greedy+.1/N" if greedy_anchored else "softmax(z)"
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
-    key = hashlib.sha256(f"{OBJECT}/seed/{seed}".encode("ascii")).digest()
+    key = hashlib.sha256(f"{object_id}/seed/{seed}".encode("ascii")).digest()
     binding = bind_native_backend(build_root=out / "native_build")
-    model = PhasePolicy()
+    model = PhasePolicy(greedy_anchored=greedy_anchored)
     def parameter_uniforms(name, count):
         return uniforms(key, binding, [_address(0, parameter_entry=name,
             draw_kind="common-initial-parameter", draw_index=i) for i in range(count)])
@@ -189,11 +194,12 @@ def run(out, launch_sha, seed=SEED):
         if update % 32 == 0:
             print(f"update {update}/256", flush=True)
     torch.save(dict(model=model.state_dict(), optimizer=optimizer.state_dict(), baselines=baselines,
-                    updates=256, seed=seed, object_id=OBJECT, launch_sha=launch_sha), out / "final256.pt")
+                    updates=256, seed=seed, object_id=object_id, action_law=action_law, launch_sha=launch_sha), out / "final256.pt")
     for role in ROLES[1:]:
         panels[role] = evaluate(model, role, key, binding, out)
     comparison = contrasts(panels)
-    summary = dict(status="COMPLETE", object_id=OBJECT, seed=seed, launch_sha=launch_sha,
+    summary = dict(status="COMPLETE", object_id=object_id, seed=seed, launch_sha=launch_sha,
+        action_law=action_law,
         parameters=sum(p.numel() for p in model.parameters()), independent_fits=1,
         training_episodes=sum(c["training_episodes"] for c in curves), training_updates=len(curves),
         backward_calls=sum(c["backward_calls"] for c in curves),
