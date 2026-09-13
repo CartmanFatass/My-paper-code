@@ -1,0 +1,38 @@
+{
+  "question": "MGTAP DM 应继续早期学习探索、明确延期，还是 PARK 本方向？",
+  "changes_if_approved": [
+    {
+      "target": "MGTAP 本方向状态和下一对象",
+      "from": "旧 8231 allocation 已结束；新普通对象未执行",
+      "to": "DM 已选择 CONTINUE ACTIVE/MEDIUM 和一个 256/256 B；Clerk 记录，不提交自动 Portfolio 咨询"
+    }
+  ],
+  "if_refused": "保留全部历史证据；如 owner 异步覆盖，DM 在真实安全边界执行。无 Portfolio 批准或其他方向结果依赖。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B01_SCIENCE_CARD_20260913.md",
+      "quote": "Its question is whether early native development should retain the conditional branch for further bounded learning work.",
+      "why": "256/256 是既有机制内尚未观察的共同训练暴露，已有实现可小幅复用；DM 以有限普通对象推进，无需逐对象购买许可。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md",
+      "quote": "This allocation has no further scientific invocation or automatic successor.",
+      "why": "8231 的 unequal-exposure 结果 adverse，旧 grant 完成；不能把旧余额当新投资，也不能因改暴露自动期待改善。"
+    }
+  ],
+  "uncertainty": [
+    "三个已有等暴露训练实例的描述均差 +0.002590 J、SD 0.023634 J 只描述已观察实例，不是稳定效应。",
+    "256/256 结果、完整新支撑成本与原生 tuned headroom 均未知；positive-first 和新客户不是启动要求。",
+    "DM 负责整个方向及生命周期；Convergence 独立审查设计、证据、结论和后续方案，不承担资金或生命周期批准。"
+  ],
+  "cost": {
+    "compute": "当前 A 计算 0.1189499 秒；B 未启动。新 B 2 fits，native cap 900 s，support 2700 s，complete 3600 s；未来单位成本与方向全生命周期成本 UNKNOWN。",
+    "owner_time": "无需逐项批准；通过既有 owner surface 异步覆盖。",
+    "reversibility": "reversible",
+    "waits_on_this": "无 Portfolio 或 Root/Clerk ACK 依赖；实际待完成事项为执行事实及独立科学 review。"
+  },
+  "verdict_text": "DM selected C: continue ACTIVE/MEDIUM through one ordinary early-exposure B. The unsent automatic Portfolio proposal is now a report input, not a Pro decision or cross-direction reallocation.",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_8231_MANAGEMENT_20260913.md"
+}

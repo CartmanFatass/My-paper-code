@@ -6,13 +6,53 @@ This source belongs to route **N5 — 配置结构与 FREE**, in the **资源配
 of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
 this does not establish scientific equivalence or pool result polarity.
 See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
-Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
-older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
-second-recast counts and stopped object-family boundaries remain unchanged.
+Current direction lifecycle/research decisions belong to this DM and are recorded
+here and in the current card/intake. Portfolio reports them, not approves them.
+Cross-direction layout/resource adjustments require an explicit owner instruction.
+Historical evidence remains unchanged; previous authority wording below is not
+a current dispatch route or Portfolio approval requirement.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
-## Unchanged proposal declined; mean-COND eligibility retained — 2026-09-13
+## DM CONTINUE and early-exposure B — 2026-09-13
+
+Under current AGENTS section2 at main4dfdb5f8f, this DM selects **CONTINUE
+ACTIVE/MEDIUM** through one ordinary mean-COND256/DENSE256 B/EXPLORE, master8241.
+It tests new common early-learning exposure within the eligible mechanism.
+DENSE stays generic default. No sibling allocation, resource commitment,
+old-grant reuse or automatic successor is selected.
+
+The strongest alternative is reversible PARK: historical equal-exposure instances
+have mixed signs, TOP and unequal-exposure8231 are adverse, and another local
+point may not justify weak-result chasing. The concrete256/256 question uses
+modest native work and informs this DM's next useful object or lifecycle decision;
+no external customer is claimed. Completed outcome-informed A/RECON describes
+the three existing pair means: +0.0025899556319951833 J, sample
+SD0.02363397187880618 J. It adds no independent fit, replaces no primary and
+does not establish a population/stable effect.
+
+Convergence remains independent scientific Reviewer of design, evidence,
+conclusions and successor plans. DM reads the full review, responds to findings,
+corrects concrete defects or limits claims, then makes the direction decision.
+This is neither optional generic advice nor funding/lifecycle approval. New
+requests use the main renderer/Transport marker dm_owned_scientific_review;
+accepted/uncertain requests keep exact bytes/routes. No automatic Portfolio
+question is sent; the unsent proposal is now report input. Clerk records the
+actual decision without an ACK gate.
+
+The [management intake](MGTAP_POST_8231_MANAGEMENT_20260913.md) records options,
+contrary evidence and costs. The [card](MGTAP_EARLY_EXPOSURE_B01_SCIENCE_CARD_20260913.md)
+fixes two256-episode fits,32 final worlds per arm, MEI0.01 J and new caps450s/arm,
+900s native,2700s support,3600s complete. Source/static checks are accepted;
+engineering review has no material finding. Actual source binding, admission,
+detached launch, Monitor adoption and full result/intake remain DM work. No
+scientific invocation has yet run under this card.
+
+All dated sections below retain historical results and then-current dispositions,
+not current approval requirements. Frozen objects/results remain unchanged;
+any later family/lifecycle revision is a prospective DM decision.
+
+## Historical unchanged proposal declined; mean-COND eligibility retained — 2026-09-13
 
 Post-8231 Convergence selects reversible preparation option R: retain mean-COND's
 scientific eligibility and DENSE default, but do not prepare another unchanged
