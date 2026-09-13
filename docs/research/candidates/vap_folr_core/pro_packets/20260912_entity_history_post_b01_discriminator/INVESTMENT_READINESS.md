@@ -1,6 +1,7 @@
 # FOLR retained-BANK use — minimum Portfolio investment materials
 
-Preparation only; no request, funding, scientific seed or experiment is bound.
+The scoped F/D Portfolio question is now being published under the current
+autonomous DM assignment. No funding, scientific seed or experiment is bound.
 The complete direction decision passed [conformance intake](INTAKE.md). This is
 its finite investment question for `portfolio:cross_direction`; FOLR remains
 ACTIVE/MEDIUM and the entity-history family OPEN.
@@ -110,26 +111,35 @@ none; §5's 2,000-line attempt/600-line runner limits remain. Published exact so
 remote-first execution and each invocation's adjacent memory admission still apply.
 No implementation or source/numerical test is part of this document assignment.
 
-## Authoring inputs before a later permitted Transport assignment
+## Current publication and native Transport continuation — 2026-09-13
 
-The current Portfolio row already records the accepted use selection and unfunded
-ACTIVE/MEDIUM status. These materials preserve F/D and all proposed limits. The
-workflow review uses published main `6d1f6c80ba860cdb5ab2bcc181f6b078dfada279`:
-Prompt Author/GitHub delivery plus the redesigned native Transport skill. This
-document review does not run Transport's preflight or claim its registry.
+The fixed new request is `2026-09-13-folr-retained-reference-investment-01` in
+[`../20260913_retained_reference_investment/`](../20260913_retained_reference_investment/PREPARATION.md).
+The current Root assignment authorizes publication, one native dispatch and full
+Portfolio intake under current method revision
+`6459a2ff51cb45274d7f0cf7c1b4de9e0ffb0622`; no Root ACK is a dependency.
+The already archived Convergence question and its accepted inputs stay unchanged.
 
-| Input | Current status and the next concrete operation |
-| --- | --- |
-| Scientific question and sources | Ready here and in INTAKE/INTAKE_FACTS; preserved response and E source pins remain fixed. No scientific redesign or extra reading campaign is needed. |
-| Correct node and authors | Future `caller_role=portfolio`, `workflow_node=portfolio_decision`, `direction_ids=[vap_folr_core]`, binding `portfolio:cross_direction`. Source/receipt parent is the actual native DM `/root/dm_folr_resume`; resolve its reusable native Transport child's actual ID when assigned. No old app UUID or invented operator ID. |
-| GitHub scope | Existing `codex/vap-folr` branch; Issue 15 was read directly as open on 2026-09-13 (GitHub updated 03:07:19Z). A new scoped response path and request ID remain unbound. |
-| Fixed delivery bytes | No new REQUEST/TASK/HANDOFF exists. After a permitted authoring/dispatch assignment, render the fixed TASK, commit/push it, bind its full SHA, then commit/push the native handoff. The archived Convergence READY_HANDOFF/REQUEST is evidence for its old request and must never be dispatched as this investment question. |
-| Transport operation | The assigned child uses the current one-preflight/effect-branch procedure, full handoff SHA/path, current native parent/operator and the live absolute registry. Proven pre-Send failure repairs the same input; uncertain effects permit observation only. Full immutable response returns directly to DM for intake. No parallel workflow test, repeated preflight or ACK is added. |
+Use `caller_role=portfolio`, `workflow_node=portfolio_decision`,
+`direction_ids=[vap_folr_core]`, and `portfolio:cross_direction`. The actual author
+and direct receipt parent are `/root/dm_folr_resume`; the reused native Transport
+is `/root/dm_folr_resume/transport_lh_folr`, READY_UNSENT after read-only setup.
+The delivery scope remains branch `codex/vap-folr`, Issue 15, and one new response
+path under the named request. Authoring occurs in the existing
+`C:/Projects/HMASD-worktrees/codex-vap-folr` checkout.
 
-At the 2026-09-13T07:30:13Z read, the shared registry names
-`2026-09-12-mgtap-unequal-exposure-investment-01`, `SEND_UNCERTAIN`, updated
-`2026-09-13T07:00:27Z`; no release is observed. MGTAP owns that delivery dependency.
-The next useful trigger is its reconciled release, an actual material change, or
-a new bounded assignment. Current Root scope permits this document check only:
-no Send, Generic retry, model load or experiment. Report completion once to Root;
-the completed check does not stop ACTIVE FOLR or release its direction slot.
+The current shared binding's preceding request
+`2026-09-13-acps-post-q-lifecycle-01` is archived. Previous MGTAP uncertainty is
+historical and no longer this request's dependency. Transport still reconciles
+and atomically claims actual current ownership from the live main registry at
+its exact preflight; an intervening live writer would be a concrete conflict.
+Publish/push TASK, bind its full SHA, publish/push HANDOFF, then dispatch that exact
+handoff once. The current Transport owns same-request repair, uncertainty
+reconciliation and complete immutable archival. The author performs full
+conformance intake. Neither publication nor Send grants empirical spending.
+
+The bounded scientific F/D question and all limits above remain unchanged. All
+new empirical work waits for a conforming Portfolio decision; FOLR remains
+ACTIVE/MEDIUM and occupies its direction slot throughout this continuation.
+The dated earlier readiness review remains preserved in the intake/audit and Git
+history; its transport snapshots are not current routing instructions.
