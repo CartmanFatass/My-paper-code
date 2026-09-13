@@ -1,0 +1,70 @@
+{
+  "root_retention_accepted_main": "0f8452d6caba7a807a1aff2b9371225f789b7334",
+  "source_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+  "targets": [
+    "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304",
+    "/home/wu/.agent-tasks/folr-entity-history-b01-781201-generic",
+    "/home/wu/.agent-tasks/folr-entity-history-b01-781201-bank"
+  ],
+  "started_at": "2026-09-12T18:16:16.022678-07:00",
+  "scientific_invocations": 0,
+  "status": "COMPLETE",
+  "terminal_checks": [
+    {
+      "task": "folr-entity-history-b01-781201-generic",
+      "status": "failed",
+      "exit_code": 124,
+      "pid": 3409032,
+      "uptime_seconds": 5951,
+      "tmux_active": false
+    },
+    {
+      "task": "folr-entity-history-b01-781201-bank",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3413041,
+      "uptime_seconds": 2968,
+      "tmux_active": false
+    }
+  ],
+  "preservation_verified_file_count": 38,
+  "preservation": "Every original Generic/BANK output and supervisor member matches its Root-accepted archive; all support files match Root-accepted committed bytes; tracked source is clean at retained source SHA; no other temp evidence present.",
+  "worktree_remove": {
+    "command": [
+      "git",
+      "-C",
+      "/home/wu/projects/HMASD",
+      "worktree",
+      "remove",
+      "--force",
+      "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "disk_absent": {
+    "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304": true,
+    "/home/wu/.agent-tasks/folr-entity-history-b01-781201-generic": true,
+    "/home/wu/.agent-tasks/folr-entity-history-b01-781201-bank": true
+  },
+  "worktree_registration_absent": true,
+  "support_command_wall_seconds": 0.14000980905257165,
+  "finished_at": "2026-09-12T18:16:16.162615-07:00",
+  "outer_support_wall_seconds": 1.6709999999729916,
+  "ssh_exit_code": 0,
+  "ssh_stderr": "",
+  "shared_authoring_retained": true,
+  "invocation_manifest_sha256": "3bd3cab454b06ca67050222cdde269a2145b03c4433aa355d0a763dd522d6102",
+  "post_cleanup_verification": {
+    "verified_at": "2026-09-12T18:17:02.74228-07:00",
+    "disk_absent": {
+      "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304": true,
+      "/home/wu/.agent-tasks/folr-entity-history-b01-781201-generic": true,
+      "/home/wu/.agent-tasks/folr-entity-history-b01-781201-bank": true
+    },
+    "worktree_registration_absent": true,
+    "registration_check": "Exact worktree record comparison after splitlines",
+    "shared_remote_repo_present": true
+  }
+}

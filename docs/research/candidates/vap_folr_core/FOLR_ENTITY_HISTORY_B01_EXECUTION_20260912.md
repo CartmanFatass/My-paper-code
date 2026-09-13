@@ -2,10 +2,11 @@
 
 Owner `/root/dm_folr_post_b03`, authoring checkout
 `C:/Projects/HMASD-worktrees/codex-vap-folr`, branch `codex/vap-folr`.
-Current state: both allocated arms are terminal and technically collected; BANK
-own-arm intake is accepted, the pair primary is unavailable, and Root retention
-acceptance precedes assigned reclamation. No experiment or Monitor goal remains
-live for this batch. Exact launch commands below are execution provenance.
+Current state: both allocated arms are collected, BANK own-arm intake is accepted,
+and the pair primary is unavailable. Root accepted retention at main0f8452d6c;
+the terminal detached checkout and both supervisor roots have been removed with
+verified disk/Git registration absence. No experiment, Monitor goal or owned remote
+cleanup remains. Exact launch commands below are execution provenance.
 Card: [FOLR_ENTITY_HISTORY_B01_SCIENCE_CARD_20260912.md](FOLR_ENTITY_HISTORY_B01_SCIENCE_CARD_20260912.md).
 Implementation acceptance:
 [FOLR_ENTITY_HISTORY_B01_TECHNICAL_ACCEPTANCE_20260912.md](FOLR_ENTITY_HISTORY_B01_TECHNICAL_ACCEPTANCE_20260912.md).
@@ -93,8 +94,8 @@ and [collection receipt](entity_history_b01_781201/GENERIC_COLLECTION.json).
 The preselected BANK then ran under unchanged5000/128 and3000s after the scoped
 publication correction, focused acceptance and fresh adjacent admission. Its
 accepted launch and now-completed collection are recorded below. The detached
-checkout is retained only until Root accepts preservation and DM reclaims it;
-shared authoring remains in use.
+checkout has now been reclaimed after Root accepted preservation; shared
+authoring remains in use.
 
 ## BANK exact command and accepted launch
 
@@ -130,8 +131,8 @@ The arm's own adjacent
 [BANK_ADMISSION.json](entity_history_b01_781201/BANK_ADMISSION.json) passed at
 00:26:48.592946Z with15627026432 physical/effective available bytes against the
 4294967296-byte floor. This is BANK's actual launch admission, not reused test or
-Generic admission. BANK is now terminal; output remains retained until Root
-accepts integration/preservation and DM performs assigned reclamation.
+Generic admission. BANK is terminal; the accepted archives preserve its outputs
+and the original remote output/supervisor paths have now been reclaimed.
 
 MONITOR_ADD was sent directly to the live primary Monitor
 `01a095d0-21ee-7c02-9d97-3681b5678200` and the app send was accepted. It explicitly
@@ -163,6 +164,9 @@ is complete in current primary tracking; no live handle remains in this batch.
 [collection/inventory receipt](entity_history_b01_781201/BANK_COLLECTION.json)
 record technical acceptance, own-arm mean-4.32609375, unavailable pair, resource
 coverage and byte-verified archives. Complete support/total remain unverified;
-no cap is enlarged. Root integrates/accepts retention, then DM reclaims the
-terminal detached checkout plus two supervisor roots and verifies disk/worktree
-absence. No deletion is claimed yet; shared authoring remains in use.
+no cap is enlarged. Root accepted integration/retention at main0f8452d6c. DM verified38 original
+files against accepted archive/commit bytes and removed only the one terminal
+detached checkout and two supervisor roots. [Cleanup receipt](entity_history_b01_781201/CLEANUP.json)
+confirms all three disk absences and absence of the exact Git worktree record;
+shared authoring and the remote main repository remain. No new scientific
+invocation occurred.
