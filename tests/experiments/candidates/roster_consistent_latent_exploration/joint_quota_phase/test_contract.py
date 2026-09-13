@@ -14,7 +14,7 @@ from experiments.candidates.roster_consistent_latent_exploration_tbcfv.host_orac
 )
 from experiments.candidates.roster_consistent_latent_exploration_tbcfv.empirical_runner import _compact_coordinate_columns
 from experiments.candidates.roster_consistent_latent_exploration_tbcfv.native_backend import (
-    bind_native_backend, native_materialize_fixtures_compact,
+    bind_native_backend, materialize_fixtures_compact as native_materialize_fixtures_compact,
 )
 
 
