@@ -27,3 +27,17 @@ unrelated ACPS selector repair is a separate Root engineering assignment, exclud
 Publication boundary: no process accepted yet. Launch exactly once using the committed command;
 then record the actual supervisor/admission facts here, assign the accepted handle to one native
 DM-owned monitor and retain every eventual outcome. No prior Transport request is resent.
+
+
+Launch accepted at09:33:48 UTC: supervisor `mgtap-unequal-8231-ecf40e0ad`, PID3422734,
+status running/tmux active; exact remote HEAD `ecf40e0ade4576fd75ffb0eab09425cb5c4ce059`,
+clean checkout. Adjacent admission at09:33:49 UTC passed physical/effective15624224768 bytes.
+The one committed command at `1df130fca9a04ea0ede066f7e8f05620153db004` was executed once.
+Native monitor `/root/dm_mgtap_resume/mon_ll_mgtap` is assigned this accepted handle;
+adoption receipt remains pending at this recording boundary. Output and supervisor log paths
+are fixed in COMMAND.json. No second launch is authorized by this running observation.
+
+Direct native MONITOR_ADOPTED received: adoption09:34:31 UTC / observation09:36:04 UTC,
+same handle/source and PID3422734 running. DM stops routine polling. The monitor returned adoption
+in native final; the same child was resumed once for its still-active terminal-observation scope,
+without another adoption or goal. Its compact record stays under the output directory.
