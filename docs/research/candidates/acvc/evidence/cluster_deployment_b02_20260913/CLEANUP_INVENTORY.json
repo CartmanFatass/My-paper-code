@@ -1,0 +1,45 @@
+{
+  "object": "ACVC_CLUSTER_DEPLOYMENT_B02",
+  "owner": "ACVC DM /root",
+  "decision": "DM accepts immutable native publication and retained checkpoint; reclaim only the four ended remote temporary targets below.",
+  "retained_local_archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/retained/cluster_deployment_b02_20260913/native_output.tar.gz",
+  "retained_archive_sha256": "be32ec3b31643d310fbdba780feb7d64f964cbe4df1fdc8b10a58b521b0849c0",
+  "publication_sha": "d0d6055387a01b545c4c1f7fee01dac9f57ec046",
+  "publication_receipt": "docs/research/candidates/acvc/evidence/cluster_deployment_b02_20260913/PUBLICATION_CHECK.json",
+  "targets": [
+    {
+      "path": "/home/wu/hmasd-worktrees/acvc-cluster-b02-be76f696c",
+      "purpose": "detached exact-source execution checkout plus redundant original output and synthetic fixture scratch",
+      "source_sha": "be76f696cb773f2e5db8f4d55ebff1f3b6335ae6"
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/acvc-cluster-b02-20260913",
+      "purpose": "already transferred verified source bundle/native archive"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/acvc-cluster-b02-be76f696c",
+      "purpose": "ended original pre-execution supervisor; all files published/archived"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/acvc-cluster-b02-be76f696c-launch2",
+      "purpose": "ended original scientific supervisor; all files published/archived"
+    }
+  ],
+  "preflight": {
+    "realpaths_match": true,
+    "tracked_worktree_clean": true,
+    "original_exit": 125,
+    "repaired_exit": 0,
+    "tmux_active": false,
+    "archive_remote_local_match": true,
+    "exact_native_git_files": 19
+  },
+  "preserve": [
+    "Shared authoring checkout and branch codex/acvc",
+    "Shared remote /home/wu/projects/HMASD and other directions",
+    "Local unique checkpoint/archive and small B02 preparation scripts/evidence",
+    "All K/historical evidence, including prior refused K local scratch"
+  ],
+  "scientific_effect": "none; no replay, fit, reanalysis or scientific disposition",
+  "created_utc": "2026-09-13T23:55:18Z"
+}
