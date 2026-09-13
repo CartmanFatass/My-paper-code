@@ -190,3 +190,9 @@ DM behavior; a new overall Pro plan and an ended-Root wake experiment have not b
 Current outcome: independent Astra/max DMs, event-driven Root, independent overall-planning Pro
 session with a unified new-request entry. All science and heartbeat remain OWNER_PAUSED. Latest
 new overall-plan state is NOT_REQUESTED; future planning requires explicit resume/commission.
+
+The final overall-Portfolio standard published at `4d79e697f` was then delivered to all four
+independent DM tasks using Astra/max. ACVC, MGTAP, RCLE and FOLR each completed a read-only
+confirmation of the current Root/Sibling sections and adopted the unified new-Portfolio route,
+direction-local responsibility and pause boundary. These were finite governance notices, without
+another Root-message/ACK loop, new scientific work or a new Portfolio request.
