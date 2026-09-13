@@ -11,6 +11,22 @@ direction pause/closure leaves fewer than four occupied slots. Pro selects the n
 bounded investment; Root creates its DM from the complete conforming decision. ROOT_OPERATIONS.md maintains this
 responsibility split. Existing Direction Pro nodes remain separate.
 
+## Direction-management trigger
+
+When an ACTIVE direction has exhausted its executable work with no real producer, its DM owns
+resolution of the outstanding investment/capacity/lifecycle question. A complete scientific
+no-addition answer may be reused without treating it as an unasked lifecycle verdict. Read its
+actual scope first; ask only the missing management choice, once. Explicit prior Portfolio/owner
+deferral/disposition is applied, not repeatedly consulted. ROOT_OPERATIONS.md owns this transition.
+
+Ask for a selected option and consequences: continued bounded investment, explicit deferral with
+revisit condition/responsible owner and capacity treatment, or formal parking/closure. Do not
+require new experiment facts to discuss occupancy, or invent a deployment customer as a universal
+prerequisite. Preserve complete scientific answers and seek same-node correction only for a
+specific unanswered/conflicting part of the posed decision. Routine delegated objects stay local.
+For registered independent DM tasks, Root handoffs use SIBLING_COMMUNICATION.md's cross-task route;
+Transport remains the author's native child. Shared Portfolio queue access is scheduling only.
+
 ## Ground the question
 
 Start with the assigned question and current affected Portfolio rows/intakes. Read only relevant

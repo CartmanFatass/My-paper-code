@@ -17,10 +17,12 @@ Agentify/provider settings from .codex/hmasd-transport.toml. Current routing ove
 operational literals in fixed packets; scientific input bindings and evidence remain unchanged.
 No browser Send may overlap another executor; reconcile actual acceptance before recovery.
 
-The current Root task is the execution coordinator; DM owns direction
-science and the former CM engineering responsibilities. Portfolio is the persistent Pro node,
+The current Root task is the event-driven recorder/integrator and scheduler at Portfolio/shared
+dependency boundaries; DM owns direction science, management continuity and engineering. Independent
+DMs notify Root via send_message_to_thread; Root handles the event and can end its turn. The existing
+50-minute heartbeat is only an enabled recovery backstop, never the normal progress driver. Portfolio is the persistent Pro node,
 not a native session. Authority, budgets and owner pause/stop instructions remain in AGENTS.md.
-The current autonomy clarification is [the 2026-09-13 four-DM consolidation](../research/portfolio/decisions/2026-09-13-dm-autonomy-consolidation.md).
+The current workflow repair is [direction management and independent tasks](../research/portfolio/decisions/2026-09-13-direction-management-workflow.md).
 The 2026-09-10 control-plane consolidation remains the role-migration provenance.
 
 OWNER_DIRECT 2026-09-10: directions run as independent rolling chains. A direction advances from
@@ -32,12 +34,13 @@ still use Portfolio authority while independent authorized work continues.
 
 OWNER_DIRECT 2026-09-12: Root cannot turn an ended allocation into a direction pause, stop or
 working-set release. The direction DM continues an authorized bounded object or prepares a
-concrete unresolved direction/capacity question; otherwise it reports ACTIVE-idle once. Only a
+concrete unresolved direction/capacity question, completing the management transition below. Only a
 formal Portfolio lifecycle decision or direct owner disposition releases the direction.
 The Portfolio drafter must refresh affected old-direction facts from the current DM
 records before recommending continuation, replacement or new-direction registration.
 
-Root dispatches ready work and waits natively while DM work remains. DM waits natively for its
+For unmigrated native DM chains Root uses native returns/waits; registered independent DMs use
+event messages under SIBLING_COMMUNICATION.md and do not require a continuously waiting Root. DM waits for its
 monitor or Reviewer after exhausting independent work. Use configured long waits; unchanged
 timeouts only continue waiting. Process the changed direction without a global reread or sibling
 barrier. SIBLING_COMMUNICATION.md owns event semantics. DM also waits natively for its Transport; Pro archives return directly to DM. Owner pause/stop remains controlling.
@@ -47,7 +50,7 @@ proactive parent action message naming the assignment, state, evidence/commit an
 dependency before native final/idle wait. This is an event handoff, not a periodic keepalive.
 Each completion or ACTIVE-idle event is also a stable Root dispatch point: integrate the returned
 evidence, distinguish occupied/reserved slots from actual work, and resume the same DM only if
-authorized work is unfinished and not already continuing. Keep an ACTIVE direction occupied through an object/allocation, cleanup, Pro
+execution or direction-management work is unfinished and not already continuing. Keep an ACTIVE direction occupied through an object/allocation, cleanup, Pro
 wait or child completion; release a slot only for an explicit Portfolio/owner lifecycle pause or
 closure.
 
@@ -70,15 +73,45 @@ An operational/development consequence suffices; no universal deployment-custome
 prerequisite is added. A new title or date with unchanged inputs/options/consequence is the old
 question and reuses its complete decision.
 
-At a changed boundary, use one native paragraph with assignment/state, evidence/commit, actual
-decision/limit and next action/owner. Keep ordinary facts and selections in their existing
-records; retain required owner items without a new approval surface. If no authorized work or
-defensible question exists, record the missing fact/revisit condition once and report ACTIVE-idle,
-explicitly distinguishing no pending external dependency from a real named request/handle waiting
-on its producer. The DM remains available for changed events; Root does not repeatedly resume it
-for the same empty state. Unchanged timeouts cause no new audit, assignment or Pro request. Four
-occupied directions need not be four advancing experiments; record preparation, engineering,
-actual result waits and idle state honestly, with no lifecycle change inferred from any of them.
+## Direction management at an object boundary
+
+DM owns the direction's research plan, current evidence, authority/budget and next decision. At
+result intake, a complete Pro answer, an exhausted allocation or a material blocker, use the
+current intake/handoff to complete the following transition. Owner pause always takes precedence.
+
+| Actual boundary | Next action and owner |
+| --- | --- |
+| Useful next object/step fits standing object delegation and remaining scope/budget | DM selects, records and executes through intake. A/B work has no universal Pro launch gate; specific frozen prohibitions/caps still bind. |
+| Next choice changes direction-tier science | DM develops options and recommendation, then sends to the existing Innovator/Convergence node without Root approval. |
+| No executable continuation/real producer; investment, occupancy or lifecycle is unresolved | DM assesses surviving opportunities and submits one Portfolio choice: continued investment, explicit deferral, or formal parking/closure. An honest no-investment recommendation is valid. |
+| Real request/run/review/shared-resource producer is pending | Name identity, owner and awaited event; do independent work, then wait for the direct return. |
+| Portfolio/owner already explicitly decided deferral/disposition for this boundary | Apply it, record scope, revisit condition and responsible event/review owner; end unnecessary agent waiting. Only explicit decisions change lifecycle/slot occupancy. |
+| Engineering/Transport failure | DM repairs in scope; Root resolves shared dependencies or unavailable executors. A timeout alone does not scientifically stop a direction. |
+
+A rejected pair or conditional-use answer need not decide continued direction occupancy. Check the
+complete prior answer's scope: reuse it where it answers this choice; otherwise ask the missing
+capacity/lifecycle question once. A new empirical result is not required to ask that distinct
+management question. Conversely an already explicit deferral is not grounds for the same repeated
+request. Deferral must state its revisit condition/owner and capacity treatment; report it as
+non-advancing. If those posed questions are unanswered, preserve valid conclusions and return the
+specific omission to the same node. Do not bounce unchanged questions between nodes.
+
+A DM handoff states the accepted conclusion; next action or decision/tier; who is acting now;
+request/handle/commit if present; and the next state-changing event. Use existing records, not a
+new form or ACK gate. Bounded task completion is not direction completion. An unhandled management
+transition is explicitly unfinished work, even when the last scientific allocation is complete.
+
+Root integrates evidence and checks that execution or management has someone actually taking the
+next step. Resume an idle DM once with the missing deliverable through its registered route. If
+the same transition returns unhandled, reconcile the blocker and assignment/context and repair or
+transfer the same role/scope when unavailable. Identical reminders indefinitely are not recovery.
+Only formal releases trigger Root's Portfolio vacancy request; Pro selects new science. Four
+occupied slots alone do not meet the advancing-work target.
+
+The shared Portfolio binding has one current author/request and waiting authors recorded in
+existing tracking. Root coordinates access, not approval. Preparation is independent; cleared
+binding/archived response releases the next queued author. Intake/application remains with each
+author. There is no sibling batch barrier and no new gate for ordinary experiments.
 
 Transport/selector/workflow defects default to local repair by the author DM. The DM may edit its
 owned helpers, fixtures and related skill/control instructions, run focused tests and review, and
@@ -120,7 +153,7 @@ Historical decisions, snapshots and benchmark materials remain evidence, not com
 
 | Owner | Deliverable |
 | --- | --- |
-| Root | Brief changed-event log; necessary main integration and cross-direction dependencies; native waiting; Portfolio vacancy request/intake and new DM creation when formal direction pause/closure leaves fewer than four slots |
+| Root | Brief changed-event log; necessary main integration and cross-direction dependencies; cross-task event handling; Portfolio vacancy request/intake and new DM creation when formal direction pause/closure leaves fewer than four slots |
 | Direction DM | Card/predictions, object decisions, direct implementation, code self-review and repair, published inputs, bounded execution, monitor handover, collection, technical acceptance, scientific intake, cleanup and continuation |
 | Designated Portfolio DM | Decision materials grounded in Portfolio principles/specs/experience, complete Pro-response conformance and intake, execution mapping or exact conflict returned to Pro |
 | Implementer | Temporarily suspended for new work; preserve accepted closeout evidence and return routes |

@@ -4,7 +4,56 @@ Control runs on Windows C:/Projects/HMASD with PowerShell. Resolve native IDs fr
 results; read Agentify/provider settings from .codex/hmasd-transport.toml.
 Historical task IDs are evidence, not dispatch routes.
 
-## Native task tree
+## Independent DM tasks and lightweight Root
+
+For directions registered as independent tasks in `.codex/hmasd-dm-sessions.toml`, this section
+replaces the native Root-to-DM routing below. The registry names the current Root and each unique
+DM task, host, designated authoring checkout/branch and migration state. Resolve actual task IDs
+from app results; a queued clientThreadId is not a usable threadId. Lifecycle stays in PORTFOLIO.md.
+
+Root is an event-driven recorder/integrator and scheduler at Portfolio/shared-dependency boundaries.
+DM runs its direction independently: object decisions, engineering, experiments, specialist
+children, scientific intake, next proposals and direction-related Portfolio intake. DM does not
+wait for Root ACK/integration between those steps. Root need not stay alive waiting on all DMs.
+
+- Root dispatches bounded management or shared-dependency work with send_message_to_thread to the
+  registered task. DM sends a concise actionable cross-task message to Root when integration,
+  shared Portfolio access, a real cross-direction blocker or formal disposition needs action.
+  A task's final does not automatically deliver its content to another independent task.
+- DM reports completed intake and actionable changed boundaries once; ordinary intermediate work
+  stays local. Root uses compact
+  wait_threads snapshots with stored cursors (up to eight tasks); read_thread only for missing facts.
+  Deduplicate direction/assignment/evidence revision and retain any unfinished action separately
+  from delivery status. A successful tool call is not acceptance or an extra approval.
+- The existing owner-authorized 50-minute heartbeat is an interruption/missed-event recovery
+  backstop, not the normal scheduler. DM-to-Root send_message_to_thread is the primary event route.
+  It may end while independent DM tasks continue. It stays quiet on unchanged/non-actionable state.
+  Explicit owner pause keeps research and the heartbeat paused; migration/testing does not resume.
+- A shared Portfolio queue lives in existing tracking: current author/request plus waiting authors.
+  When the binding is cleared, notify the next author through its registered task. Preparation,
+  unrelated direction nodes and experiments proceed independently. Queue access is not approval.
+
+Migration: stop/retain the old DM, give the new task a bounded read-only handoff, verify its actual
+checkout/HEAD and accepted evidence, then register the sole owner. The app-created task worktree is
+session hosting; reuse the existing direction authoring checkout for edits. No duplicate branch,
+writer or automatic new budget. No tool here converts/reparents an old native child: preserve old
+accepted requests/handles and reconcile ownership before replacement. New DM creates its own
+Transport/Monitor only when there is actual work. Native names are local to their parent task tree.
+
+OWNER_DIRECT: independent DMs use gpt-6-astra / max. Explicitly set model and thinking when
+creating/resuming these DM tasks; creation without overrides only uses the app default and is not
+accepted as the required profile. A custom subagent TOML is not automatically applied. The initial
+prompt loads current DM duties/control from C:/Projects/HMASD even when the direction checkout is
+older. Record tool/config evidence for the selected model; do not invent model self-observation.
+
+Pilot acceptance uses a handoff intake, one DM-to-Root factual message and one Root-to-DM follow-up
+with task completion observed via wait_threads. Also require correct management behavior: an unasked
+lifecycle choice with no producer leads to a DM management proposal; an explicit prior deferral is
+reused; a funded dependent object needs no Root ACK; owner pause permits no Send. No Pro Send,
+scientific launch, live child migration
+or timed self-wake is part of this test. Verify the pilot before creating the other three tasks.
+
+## Native task tree (DM-owned specialists and unmigrated legacy DMs)
 
 Root coordinates DM direction chains. Each DM owns science, implementation, self-checks, repairs
 and acceptance, retains independent high-risk Reviewer review, and reuses one Luna/low native
@@ -43,13 +92,11 @@ by the DM under AGENTS §2; Root is not an intermediate scientific approver.
 
 Distinguish a pending external dependency from ACTIVE-idle with none. A real dependency names its
 request/handle/producer and required event; after independent work, wait for that direct return.
-If no authorized work or concrete unresolved question exists, record the missing fact and revisit
-condition once, send ACTIVE-idle once, and remain available in native event wait. A possible future
-use or instruction is a condition, not a promised outside result. Root does not reassign the same
-assessment on unchanged facts. A concrete new proposal can be prepared and sent by the original DM
-without Root inventing or approving its scope; repeated inputs/options/consequence reuse the last
-complete answer. A timeout supplies neither a new fact nor permission to retry, request an audit,
-Send again or change lifecycle. Owner pause/stop boundaries still take precedence.
+Without executable continuation or a real producer, DM resolves the management transition in
+ROOT_OPERATIONS.md. Scientific no-addition does not answer an unasked capacity/lifecycle choice.
+Explicit Portfolio/owner deferral records scope, capacity treatment and revisit condition/owner;
+it ends unnecessary waiting. A possible future use alone is not a producer. Reuse prior decisions
+within their actual scope; a timeout supplies no new scientific fact or retry authority.
 
 DM sends Root only actionable integration, cross-direction dependency, formal direction disposition,
 scope-conflict, or bounded-assignment completion/ACTIVE-idle facts, with assignment identity,
