@@ -1,0 +1,14 @@
+{
+  "observed_at": "2026-09-13T11:11:35.799356+00:00",
+  "operation": "read-only preparation binding check; registry untouched",
+  "request_in_registry": "2026-09-13-rcle-post-b08-development-01",
+  "binding": "em:roster_consistent_latent_exploration:convergence",
+  "conversation_id": "6aa55611-bf80-83e8-b018-70e30a95b28a",
+  "prior_state": "ARCHIVED",
+  "prior_native_receipt": "SENT",
+  "prior_send_click_count": 1,
+  "new_request": "2026-09-13-rcle-greedy-anchored-continuation-01",
+  "new_transport_dispatch": false,
+  "new_send": false,
+  "readiness_limit": "This is prior-request closure/binding evidence, not live provider login/selector readiness or a new Send grant."
+}
