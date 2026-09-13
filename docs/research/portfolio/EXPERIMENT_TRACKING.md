@@ -6,7 +6,7 @@ Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; Portfolio Q intake and zero-exposure preparation published; ACTIVE/HIGH | Wait for Transport redesign validation, then publish/bind the original Q once; no old-request resend or empirical successor |
-| MGTAP | Portfolio B 已完整 intake：一次 fresh pair 使用 COND 600s、DENSE 900s、native 1500s、support 900s、complete 2400s；MGTAP ACTIVE/MEDIUM。响应两条程序性条款与当前规范冲突，已返回同一 Portfolio 节点修正 | 保留原 request click1/USER_MESSAGE_CONTENT_MISMATCH 的效果不确定事实，继续只观察/归档，绝不重发；等待修正后再按新 caps 做资源检查与单次启动 |
+| MGTAP | Portfolio B 与同节点 conformance amendment 已完整 intake；一次 master pair（COND512 / intact-DENSE768）获 caps COND600s、DENSE900s、native1500s、support900s、complete2400s；ACTIVE/MEDIUM | 原 request 仍是 effect-uncertain 且永不重发；修正已归档并释放 binding。DM 进行 fresh exact-source/resource admission，获准后仅运行该 pair |
 | RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Family remains open; only revisit exact recipe when a decision-relevant use or new service/cost evidence appears; no automatic fit successor |
 | ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Prepare next direction-node use/no-addition question; no new fit or K retry before proper decision |
 | FOLR | BANK −4.3261 retained; Generic no final, no paired primary; finite investment readiness published but unfunded; ACTIVE/MEDIUM | Keep material ready behind shared Portfolio writer; no Generic retry, model load or experiment |
