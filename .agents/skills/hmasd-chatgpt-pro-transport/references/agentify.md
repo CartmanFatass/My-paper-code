@@ -11,6 +11,12 @@ mcp-server.mjs and review-transport.mjs; current callable tool schemas prevail o
   inspected tab without Send. Product is GPT-6 Astra or visibly verified Latest; effort is Pro.
   Strict query already performs target preflight. Call this separate tool only to resolve an
   unknown or repaired tab/model fact; do not repeat successful checks for confirmation.
+  Keep a persisted canonical productModel unchanged when the picker calls it Latest. The provider
+  adapter must pair that selected row with the exact composer's current 6 Pro identity, and verify
+  Pro effort separately; Latest alone or an account badge is insufficient. Repair the adapter or
+  missing visible fact, not the operation fingerprint. A source edit is not proof that the running
+  controller loaded it: one failed live preflight names that deployment prerequisite and is not
+  repeated before the runtime changes. Preserve the existing tab/key/effect record during recovery.
 - agentify_review_query({stableKey, provider:"chatgpt", productModel, reasoningEffort:"Pro",
   conversationUrl, conversationId, idempotencyKey, prompt, responsePath, existingTabId,
   timeoutMs:60000}) persists the strict operation and attempts at most one Send. promptPath is an
