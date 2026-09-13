@@ -52,8 +52,10 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
    Commit and push the updated internal handoff.
 3. Send the rendered handoff via followup_task to its native Agentify Transport.
    Source and parent are the author (DM, or Root for Portfolio vacancy replacement); operator is its actual reusable child.
-   Accepted legacy Root-authored requests retain their bound route. Transport verifies 6 Pro and the
-   exact conversation, sends the supplied short prompt once, observes and archives.
+   Legacy requests retain their frozen metadata; assigned recovery records the actual native
+   parent/child separately. Transport runs one exact preflight and the appropriate effect branch,
+   then bounded observation/archive and one direct receipt. Verified pre-Send nonacceptance permits
+   repairing and continuing the same operation; uncertain or accepted effects permit observation only.
    Preserve accepted request content and migration evidence under ROOT_OPERATIONS.md;
    uncertain acceptance is reconciled against the existing message before continuing.
    Identify that handoff by the author's returned full commit and request ID. Read its

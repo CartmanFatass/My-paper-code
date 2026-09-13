@@ -24,13 +24,21 @@ waiting: no rereading all cards, status census, repeated assignment or progress 
 The owner accepts periodic context reuse/cache refresh and brief continuation as design premises.
 No per-DM keepalive messages, ACK loops, timers or separate relay are needed.
 
+An unchanged timeout stays quiet. When a bounded assignment reaches completion, hits a material
+blocker or scope conflict, or has no immediate authorized work while its direction remains ACTIVE,
+the DM must send one proactive action message to its parent before returning a native final or
+entering idle wait. That message names the assignment, state, evidence or commit, and next action
+or dependency. This is an event handoff, not a keepalive; it does not authorize periodic status
+broadcasts or duplicate the final message.
+
 Wait only for an actual active dependency. A concrete blocker returns to its accountable owner;
 an idle child with unfinished authorized work is resumed once with followup_task. Never interpret
 a timeout as failed execution, a new invocation budget or permission to retry scientific work.
 Owner pause/stop boundaries take precedence. No-work completion is not a reason to loop forever.
 
-DM sends Root only actionable integration, cross-direction dependency, formal direction disposition or scope-conflict
-facts, with assignment identity, commits/evidence, requested next action and uncertain effects.
+DM sends Root only actionable integration, cross-direction dependency, formal direction disposition,
+scope-conflict, or bounded-assignment completion/ACTIVE-idle facts, with assignment identity,
+commits/evidence, requested next action and uncertain effects.
 Continue independent authorized direction work after a partial handoff. Root handles the changed
 direction without waiting for siblings or routinely reloading the whole portfolio. Deduplicate
 message and final copies by source, assignment and evidence revision. Root accepts artifacts;
@@ -56,6 +64,18 @@ vacancy replacement after formal pause/closure leaves fewer than four occupied d
 those archives return directly to Root for complete intake and Pro-selected DM creation. Existing uncertain or accepted requests
 require same-request reconciliation, never a new Send after changing executor. Transport skill
 owns exact Agentify arguments and immutable archival. Experiment monitor never operates Pro.
+Verified nonacceptance permits same-request repair and continuation without a parent handshake.
+Transport sends one direct archive receipt and records its actual native delivery outcome; no
+ACK, Root forwarding or duplicate app-task wake follows. Its final closes that same assignment.
+Historical HANDOFF IDs stay immutable; an assigned native recovery route is recorded separately.
+At completion, material conflict or no-current-work while its direction remains ACTIVE, each
+bounded assignment sends one direct action message to its assigning parent before final:
+assignment, status, evidence/commit and next step. DM sends its actionable boundary to Root;
+Transport sends to DM. A factual conflict needs no completed archive. Active generation remains
+ongoing work and unchanged waits require no broadcasts. A later changed boundary preserves
+the prior return and sends its own update once; this is not an ACK or forwarding chain.
+If a leaf runtime lacks collaboration.send_message, its actionable native final is the direct
+parent return. Record that actual capability/method; never fabricate tool delivery or add an app relay.
 
 ## Recoverable ownership
 

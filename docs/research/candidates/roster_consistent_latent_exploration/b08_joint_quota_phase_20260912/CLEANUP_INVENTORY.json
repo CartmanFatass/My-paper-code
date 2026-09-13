@@ -1,0 +1,123 @@
+{
+  "status": "COMPLETE_RECLAIMED_EVIDENCE_RETAINED",
+  "owner": "/root/dm_rcle_resume",
+  "authoring_checkout": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906",
+  "branch": "codex/rcle",
+  "preserved_local_root": "temp/directions/roster_consistent_latent_exploration/exp/b08-collected-012a",
+  "remote_targets": [
+    {
+      "path": "/home/wu/hmasd-worktrees/rcle-b08-012a8bce2",
+      "exists": false,
+      "files": 2404,
+      "file_bytes": 43244575,
+      "registered": false,
+      "sha": "012a8bce2c90cbe54459437dba01d3f171c9e063",
+      "tracked_status": "",
+      "before_cleanup": {
+        "exists": true,
+        "files": 2404,
+        "file_bytes": 43244575,
+        "registered": true
+      },
+      "disk_absence_verified": true,
+      "registration_absence_verified": true
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/rcle-b08-check-8761274f9",
+      "exists": false,
+      "files": 0,
+      "file_bytes": 0,
+      "registered": false,
+      "before_cleanup": {
+        "exists": false,
+        "files": 0,
+        "file_bytes": 0,
+        "registered": false
+      },
+      "disk_absence_verified": true,
+      "registration_absence_verified": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/rcle-b08-s28-012a8bce2",
+      "exists": false,
+      "files": 6,
+      "file_bytes": 2535,
+      "registered": false,
+      "before_cleanup": {
+        "exists": true,
+        "files": 6,
+        "file_bytes": 2535,
+        "registered": false
+      },
+      "disk_absence_verified": true,
+      "registration_absence_verified": true
+    }
+  ],
+  "supervisor_archive": {
+    "path": "/home/wu/hmasd-worktrees/rcle-b08-012a8bce2/temp/directions/roster_consistent_latent_exploration/exp/b08-supervisor.tar.gz",
+    "bytes": 1458,
+    "sha256": "9fd52343519cd18af1e50e6f5747b62c2db4507c9c3ca61230bcd5e22f9bfcf7"
+  },
+  "scientific_archive": {
+    "bytes": 203231,
+    "sha256": "321ad277ac6dc5c4c5b611a2e7dcc028eb1aba528b925337fc46dc9e9c6c2ad0"
+  },
+  "supervisor_files": [
+    {
+      "path": "exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "pid",
+      "bytes": 8,
+      "sha256": "261ccc196ed8485fca6e97257c3381a5129bb2455a30e72723e240f8f42c3e49"
+    },
+    {
+      "path": "runner.sh",
+      "bytes": 1698,
+      "sha256": "1c9dc62e8ec175349f37d9843bfd75fc92fb75795f9340d71a0b2dc435e1fef8"
+    },
+    {
+      "path": "start_time",
+      "bytes": 11,
+      "sha256": "de3e0988a1cead8606c4da5c5b7a8d2f63cefb482b362f2f8c62e764e72dc7ba"
+    },
+    {
+      "path": "status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "task.log",
+      "bytes": 807,
+      "sha256": "a5ef84d0005c12b993617e36ad49429db1bcb2ddc43ed04f8af36939ce8245b8"
+    }
+  ],
+  "source_bundle": {
+    "path": "temp/directions/roster_consistent_latent_exploration/exp/b08-collected-012a/source.bundle",
+    "bytes": 32015,
+    "sha256": "55acc8f03cba87a3aba6b5b9eaee85b785c632edf511e5917d5960385866a052",
+    "contains_tip": "a690406c11d40a7dda66071cbb3badc9c7eb0dc6",
+    "contains_scientific_source": "012a8bce2c90cbe54459437dba01d3f171c9e063",
+    "prerequisite": "4f0dbf75a99e13af6e79be269d415fa98ae47910",
+    "verified_by": "git bundle verify"
+  },
+  "deletion_performed": true,
+  "requested_targets": [
+    "/home/wu/hmasd-worktrees/rcle-b08-012a8bce2",
+    "/home/wu/.agent-tasks/rcle-b08-s28-012a8bce2"
+  ],
+  "keep": [
+    "shared local authoring checkout",
+    "raw local archives/extractions and source bundle",
+    "published source/science/evidence",
+    "all unrelated worktrees/supervisors/bundles",
+    "shared native cache"
+  ],
+  "unique_evidence_preserved": true,
+  "root_integration": "main941a04808",
+  "root_scoped_cleanup_instruction": "Native /root continuation after scoped cleanup, reinforced by current Portfolio two-terminal-copy mapping",
+  "verified_at_utc": "2026-09-13T07:30:54.734095+00:00",
+  "cleanup_receipt": "b08_joint_quota_phase_20260912/CLEANUP_RECEIPT.json"
+}

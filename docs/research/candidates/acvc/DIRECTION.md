@@ -109,8 +109,9 @@ and actor/recurrent/teammate feedback remain inseparable explanations. The new a
 ends with complete intake and scoped cleanup; no third pair, consultation or successor.
 That allocation boundary is preserved in the [B02 intake](ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md).
 The subsequent original Convergence decision selected the distinct cluster-law deployment-use B
-described below. Its separately funded complete result supports observed use; independently
-funded repeatability is now the next proposed discriminator, not an automatic successor.
+described below. Its separately funded complete result supports observed use. The subsequent
+post-cluster Convergence retains that observed reference and recommends no extra empirical
+allocation now; fresh-policy repeatability is a conditional revisit, not a selected successor.
 
 Exact binding remains a useful protocol primitive. Neither historical learner object nor the
 new native comparisons support adaptive ACVC superiority over their strongest competent fixed control.
@@ -608,12 +609,37 @@ within-law use, not zero-shot transfer, stable superiority, tuned headroom or fo
 
 The bounded conclusion is that the fixed deployment package remains useful relative to
 both C and own-dwell on this observed cluster endpoint. Uniform C01 and both training-F DOWN
-pairs retain their separate meanings. The next useful discriminator would be one independently
-funded fresh cluster C-fit with the same three final panels, to see whether the use signal
-recurs. This is direction-local advice to Portfolio; current K supplies no extra fit, panel,
-consultation or automatic successor. ACTIVE continuity and recasts:2 are unchanged.
+pairs retain their separate meanings. The initial intake proposed an independently funded fresh
+cluster C-fit with the same three final panels to test recurrence. The later original-node
+decision below supersedes that recommendation without changing the result or its reading.
+
+### Post-cluster-use Convergence — accepted 2026-09-12
+
+The [complete direction intake](pro_packets/20260912_post_cluster_use_convergence/INTAKE.md)
+accepts the original node's decision to retain train-C → deploy-F as the qualified observed
+cluster reference and recommend no additional empirical allocation now. The strongest rejected
+alternative is one unchanged independent C-fit/three-panel B: it could expose fresh-policy
+variation, but the current retained use concerns the already observed endpoint. Another positive
+would leave that narrow advice unchanged; accepting unresolved recurrence is a marginal-value
+judgment about this purchase, not a claim that replication is unnecessary.
+
+Strongest support remains F's observed gain over useful own-dwell. Eight adverse F−dwell worlds,
+one training unit and unequal private interventions bound the reference; motion suppression,
+private recurrence and teammate consequences remain coupled explanations. The inspected action
+is the clipped negative of the UAV's previous realized displacement. No increased saturation,
+isolated retrace effect, tuned cluster headroom or fresh-policy default benefit was measured.
+
+The concrete next discriminator becomes relevant when a named same-law use proposes F as the
+default for a newly trained cluster policy. At that boundary, a separately funded fresh C fit
+with final C/F/own-dwell panels could change the default. Retain separate signed means, .01 J
+practical scale and conditional uncertainty. This is a revisit condition, not a newly selected
+object, automatic investigation or Portfolio lifecycle/funding disposition.
 
 ## Evidence set
+
+- `docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/archive/RESPONSE.md`
+- `docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/INTAKE.md`
+- `docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/INTAKE_FACTS.json`
 
 - `docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_SCIENCE_CARD_20260912.md`
 - `docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_RESULT_EVIDENCE_20260912.md`

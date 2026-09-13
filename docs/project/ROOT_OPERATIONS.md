@@ -39,6 +39,15 @@ Root dispatches ready work and waits natively while DM work remains. DM waits na
 monitor or Reviewer after exhausting independent work. Use configured long waits; unchanged
 timeouts only continue waiting. Process the changed direction without a global reread or sibling
 barrier. SIBLING_COMMUNICATION.md owns event semantics. DM also waits natively for its Transport; Pro archives return directly to DM. Owner pause/stop remains controlling.
+An unchanged timeout remains silent. At completion of a bounded assignment, a material blocker or
+scope conflict, or entry into an idle state while the direction is still ACTIVE, the DM sends one
+proactive parent action message naming the assignment, state, evidence/commit and next action or
+dependency before native final/idle wait. This is an event handoff, not a periodic keepalive.
+Each completion or ACTIVE-idle event is also a stable Root dispatch point: integrate the returned
+evidence, recount running/reserved directions, and resume the same DM's next authorized bounded
+work when available. Keep an ACTIVE direction occupied through an object/allocation, cleanup, Pro
+wait or child completion; release a slot only for an explicit Portfolio/owner lifecycle pause or
+closure.
 
 ## Maintained sources
 
@@ -99,9 +108,16 @@ recounts before dispatch, so repeated returns cannot duplicate a request or DM. 
 above four drains without interrupting live work. Object/allocation completion, Pro waits and
 temporary blockers do not release a direction slot. Use hmasd-portfolio-task for both author routes.
 
-DM retains recovery of its request through its native Transport child. Uncertain Send permits
+DM retains recovery of its request through its native Transport child. At every bounded-assignment
+completion, material conflict or ACTIVE-idle boundary it proactively reports one actionable event
+to its parent; unchanged waits remain quiet. Uncertain Send permits
 observation/reconciliation only; proven nonacceptance permits the exact authorized Send after
 repair. Complete immutable responses go straight to DM intake while metadata corrections proceed.
+Transport follows one exact preflight, one effect branch, bounded observation/archive and one
+direct native receipt under its skill. Verified pre-Send failures recover the same unchanged
+request without another confirmation. A clear screenshot can supply current page facts; repeated
+DOM/model/identity checks, ACKs and status relays are not additional conditions. Frozen legacy
+routes remain evidence; recovery records the actual native child/parent separately.
 
 For ordinary direction-related Portfolio work, a relevant DM authors the full
 packet, creates/reuses its Transport child, publishes exact inputs and dispatches natively. DM is

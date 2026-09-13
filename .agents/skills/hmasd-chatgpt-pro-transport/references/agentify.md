@@ -4,13 +4,21 @@ Historical basis: parent-frozen request and leaf transport in the pre-bd1ecac2a
 hmasd-agentify-transport skill. Current implementation is C:/Projects/agentify-desktop/
 mcp-server.mjs and review-transport.mjs; current callable tool schemas prevail over old examples.
 
-- agentify_tabs({}) and agentify_status({tabId}) inspect browser provenance and exact tab state.
+- Use one tab inventory plus one scoped screenshot/UI sample when those facts are missing.
+  agentify_tabs({}) and agentify_status({tabId}) expose hidden key/protection and exact tab facts;
+  they are not repeated checkpoints. CUA may clarify the actual composer/current response.
 - agentify_review_preflight({tabId, productModel, reasoningEffort, timeoutMs:60000}) checks the
   inspected tab without Send. Product is GPT-6 Astra or visibly verified Latest; effort is Pro.
+  Strict query already performs target preflight. Call this separate tool only to resolve an
+  unknown or repaired tab/model fact; do not repeat successful checks for confirmation.
 - agentify_review_query({stableKey, provider:"chatgpt", productModel, reasoningEffort:"Pro",
   conversationUrl, conversationId, idempotencyKey, prompt, responsePath, existingTabId,
   timeoutMs:60000}) persists the strict operation and attempts at most one Send. promptPath is an
   alternative UTF-8 text source; never supply both. Optional promptSha256 checks exact input.
+- Persisted `sendAttempted=false` after TAB_KEY_MISMATCH is a pre-Send failure. Repair the
+  dedicated keyed tab and reuse this operation, changing only existingTabId; there is no new
+  request or approval step. Preserve earlier error receipts. A true value is written before
+  the external click and prevents the strict controller from sending again on continuation.
 - A first binding uses provider root URL, conversationId="__new__", firstBinding=true and a
   dedicated clean inspected tab. Preserve these original operation arguments on continuation;
   retain the concrete observed conversation identity separately from first-binding input.
@@ -30,6 +38,9 @@ seconds apart and no Stop/Continue/Retry controls. Verified archive metadata inc
 sha256, sizeBytes and projection=exact. Preserve the returned receipt verbatim. A GitHub task's
 short chat reply is not the full research response. Save the immutable scoped GitHub artifact or
 paired downloadable answer separately.
+These are the single strict completion test, not a reason for another operator stability loop.
+Only current response/composer controls count: sidebar chat titles containing Continue/Stop or
+historical answers do not establish generation or completion for this request.
 
 Agentify serializes per tab/controller, not all tabs sharing a conversation. Enforce one active
 writer per binding in the shared absolute registry_path from the live control-checkout config

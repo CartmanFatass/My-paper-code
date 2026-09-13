@@ -17,8 +17,10 @@ This authority preserves the direction's source-grounded scientific question, ev
 Original Convergence selects exactly one fresh mean-COND512 versus intact-DENSE768
 B/EXPLORE use comparison. This scientific selection retains the original mean
 query, raw108/legal local information/private GRU/PPO/native team-J path; only
-DENSE receives the specified extra ordinary training. It has no empirical
-allocation yet. DENSE remains default and MGTAP ACTIVE/MEDIUM.
+DENSE receives the specified extra ordinary training. Portfolio now funds this
+single pair under new complete limits recorded in the
+[2026-09-13 intake](pro_packets/20260912_cond512_dense768_use/PORTFOLIO_INTAKE_20260913.md).
+DENSE remains default and MGTAP ACTIVE/MEDIUM. No new result or run is accepted.
 
 The question is whether the conditional learning procedure retains a local
 optional-development role against this particular longer-trained generic
@@ -37,9 +39,11 @@ same-information headroom remains absent.
 
 Declining the new empirical investment remains a serious alternative given two
 fits, unknown full cost and a necessarily local result. The next discriminator
-is this exact single pair only if separately funded:344064 team ticks/2560Adam,
-plus its complete required support chain. No numerical cap, new identity or run
-is assigned. The finished documentary allowance creates no extra question,
+is this exact single funded pair:344064 team ticks/2560Adam plus its complete
+required support chain. New caps are COND600s/DENSE900s/native1500s/support900s/
+complete2400s, with rates still unknown. Two obsolete procedural clauses require
+same-node correction; no new identity or run is assigned in this intake.
+The finished documentary allowance creates no extra question,
 fourth unchanged pair, TOP repeat, extra arm, host change, recast or lifecycle
 disposition. All previous scientific/family/C/UAV boundaries remain.
 

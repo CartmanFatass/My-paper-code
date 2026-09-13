@@ -14,6 +14,43 @@ handles, native observation passes, and executor turns remain ephemeral observat
 registry is shared across all requests handled by author-owned transports;
 its operator UUID never selects a provider conversation.
 
+## Native execution overlay
+
+Current native Transport uses `native_state`: READY_UNSENT, SEND_ATTEMPTED, OBSERVE, ARCHIVE,
+RECEIPT. These are the operator's four steps (observation and archival share one step), not
+another required transition through every legacy `state` value below. Preserve legacy evidence.
+`scripts/native_transport.py` reads immutable HANDOFF/TASK bytes and claims the existing binding
+under its brief registry lock. It handles existing-conversation GitHub requests; first-binding
+continues through the existing firstBinding route in agentify.md. `frozen_handoff`, `frozen_routing` and `manifest` identify those
+inputs. `execution_route={parent_thread_id,operator_thread_id,assignment}` identifies the actual
+current native parent/child; it never overwrites frozen or historical receipt IDs. A conflicting
+live executor requires factual same-request transfer, not an automatic route rewrite.
+
+Keep the exact Agentify `operation` (including operationId, responsePath and productModel) and
+effect receipts. `next_step` classifies explicit false plus no acceptance as VERIFIED_NONACCEPTANCE;
+unknown/possible acceptance as UNCERTAIN_EFFECT; paired current user/archive as ACCEPTED. Only
+the first permits repaired same-request Send. False-valued legacy send placeholders are not a
+Send. The native state overlay alone is bookkeeping: a failed pre-Send strict operation can
+return to READY_UNSENT. Accepted history, actual attempt/turn evidence and legacy sent/waiting
+facts cannot be erased by that transition. Screenshot annotations cover page facts; they cannot
+establish operation history. Preserve the same agentify_stable_key for each conversation generation
+across successor requests, and never bind the same conversation to two scientific nodes.
+
+After the full answer is source-bound and hash/size verified, `state=ARCHIVED` releases that
+request for a successor. The independent `native_receipt` preserves current-parent delivery:
+PENDING -> SENT, UNCERTAIN or REJECTED_BEFORE_DELIVERY. COMPLETE requires the full archive and
+paired provider IDs, or a verified `github_response_pairing` supplying the fixed TASK/immutable
+response commit/path/Git blob and exact delivery comment when strict provider IDs are unavailable.
+CONFLICT and NO_CURRENT_WORK require assignment/status/evidence/next action without claiming a
+completed archive. UNCHANGED_WAIT stages nothing. `native_receipt_history`
+preserves returns from earlier changed boundaries; identical boundaries reuse the same receipt.
+`finish_native_receipt(receipt, status)` records the tool outcome on the exact staged receipt
+object returned by `stage_native_receipt`, including a historical return. Completion conflicts
+are checked across all receipt history. A new
+request moves this record into request_history; timeout, pre-Send failure or missing receipt
+does not release the conversation. The legacy schema below is evidence compatibility, not a
+mandatory checklist, scheduler or current return route.
+
 ```json
 {
   "schema_version": 4,
