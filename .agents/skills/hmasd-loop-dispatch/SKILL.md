@@ -38,6 +38,11 @@ At entry, an actionable native return, and before the first wait after useful wo
    Reconcile an idle/unassigned child rather than waiting indefinitely. Owner pause/stop and
    no-work completion end the turn. Never impose a sibling or batch barrier.
 
+DM event visibility: unchanged waits remain quiet, but a bounded assignment completion, material
+blocker/scope conflict, or ACTIVE direction entering idle must produce one proactive parent action
+message before native final/idle return. Include assignment, state, evidence or commit, and the
+next action/dependency; this is not a periodic keepalive or an extra dispatch.
+
 ## Bounded assignments
 
 Use ENGINEERING_SCOPE_SPEC §7.1 for L0 and optional L1–L3 detail. Include the existing
