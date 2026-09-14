@@ -144,3 +144,67 @@ preserve their changes, read current role/engineering entry before editing, and
 return directly to the actual parent App task
 `01a09e16-f7b1-7e60-83a0-ba2a7cd969bc` before native final. DM handles source
 publication, full review response and the later selected complete execution path.
+
+### Common actor implementation return
+
+Event `FOLR_AUGMENTED_ACTOR_COMMON_20260914_COMPLETE_01` returned directly to the
+actual DM parent. The three assigned files contain 136 new non-test lines and
+154 test lines. DM read their complete contents: both recurrent streams and the
+packed state are functional, Generic common modules and downstream constructor
+RNG are preserved, and the independent entity route follows the selected masks
+and lifetime transitions. No existing learner, actor, runner or scientific object
+was changed. This is implementation evidence pending independent review, not
+full-path technical acceptance or an empirical result.
+
+Implementer ran the one focused model suite with the configured scientific Python:
+`python.exe -m pytest -q --basetemp temp/directions/vap_folr_core/test/augmented_actor_common_20260914_impl tests/experiments/candidates/vap_folr_core/entity_history_augmentation_b01/test_model.py`.
+Reported result: **5 passed in 1.99s**, process wall **3.05s**; invocation-owned
+scratch was resolved, removed and confirmed absent. An initial wrapper was
+rejected before process creation; the revised exact-path cleanup wrapper ran
+once. No scientific invocation or result-bearing retry occurred. DM did not
+repeat the unchanged suite merely for receipt confirmation. An independent
+Sol/high Reviewer next checks the published actual diff against this L0.
+
+### Common actor independent review and DM technical acceptance
+
+Independent sibling `/root/folr_augmented_actor_common_review` returned event
+`FOLR_AUGMENTED_ACTOR_COMMON_20260914_REVIEW_01` directly to this DM. It reviewed
+source `550846a863ad7276edf8cab1a556e7d76353df08` against
+`60bcb17067f56db6d89a1b028d347cb27eb5b01f`, the fixed L0 and reachable
+attention/collection/learner consumers. No material correctness, information,
+numerical, recurrent/RNG, regression or scope finding was reported. Its separate
+focused CPU probe confirmed zero gradient to reset incoming Generic state and
+all entity pairs touching a reset slot, nonzero gradient through continuing
+states, and finite active all-masked outputs with forbidden-current NaN sentinels.
+The first probe misindexed a test assertion's feature axis; the corrected probe
+passed without any source edit or scientific invocation. Existing five tests
+were not repeated. Diff whitespace checks passed.
+
+DM accepts the **common persistent actor only** on the defined L0. It preserves
+Generic input/history separately from the entity stream, legal masks, functional
+BPTT and initialization ownership. This is neither complete training-path
+acceptance nor a scientific performance claim. In particular, existing collection
+and checkpoint code expects `actor.arm`, which this actor-only interface does not
+yet supply; its state dictionary is new. The separately defined next integration
+batch must resolve that explicit interface/result identity, construct independent
+online/target/replay/optimizer ownership, and check the final checkpoint path.
+There is no old-checkpoint compatibility promise or reason to modify old results.
+
+DM's constructor-only inspection at the reviewed source counted **192741** actor
+parameters versus the original Generic's **103173**, with no forward/environment
+or optimization execution. If the previously proposed 5000/4969/128 endpoint is
+retained, the existing complete-episode learner implies **33391680** Generic GRU
+replay positions per fit and **166958400** entity GRU replay positions per augmented
+fit, including both online and target unrolls. Acting adds **538440** Generic and
+**2692200** entity positions per augmented fit. These are executable static counts,
+not measured wall time, speedup, selected exposure or equal-capacity evidence.
+
+The later registered Transport queue observation is preserved in
+`CLARIFICATION_DISPATCH_RECEIPT.json`: one Send, user node
+`683bebb0-ddcc-4e04-89b5-1b30fa7ca534`, reported at 14:44 UTC, with the same
+clarification still generating when inspected at 14:50:14 UTC. The full composer/
+accepted-body capture and complete terminal answer remain due from that executor.
+The original App dispatch fact and malformed predecessor evidence remain unchanged.
+Both native common-engineering children are complete; registered Transport owns
+the one live clarification and direct return, and DM owns its full scientific
+intake and the next complete selected integration/execution objective.

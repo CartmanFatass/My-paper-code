@@ -77,12 +77,15 @@ preserves two complete contradictory comparator choices: augmented persistent
 versus fresh unaugmented Generic, and augmented persistent versus augmented
 current-only. Both support CONTINUE/MEDIUM and the common dual-stream redesign;
 neither is treated as a unique final comparator. One focused same-conversation
-clarification was dispatched to registered Transport at 14:40 UTC; App dispatch
-does not yet prove provider acceptance. The original four malformed inputs and
+clarification was dispatched to registered Transport at 14:40 UTC; its queue later
+recorded one Send and an accepted user node at 14:44 UTC. Full terminal answer and
+the complete input capture remain pending. The original four malformed inputs and
 full two-answer archive remain preserved. No scientific retry or third arm follows.
-The actual independent common engineering producer is
-`/root/folr_augmented_actor_common_implementation`, implementing only the persistent
-Generic64 plus entity-history actor and focused state/RNG tests under the intake L0.
+The common persistent Generic64 plus entity-history actor is technically accepted
+at source `550846a863ad7276edf8cab1a556e7d76353df08`, after five focused tests and
+independent Sol/high recurrent/RNG review. Both native engineering children are
+complete. Learner/driver/comparator/checkpoint integration remains the next scoped
+work after full clarification intake; no training-path acceptance is claimed.
 No new empirical card, seed, comparator or invocation is frozen. Current
 ACTIVE/MEDIUM and this direction's existing slot remain in force.
 FOLR continues to occupy one existing slot, with the
