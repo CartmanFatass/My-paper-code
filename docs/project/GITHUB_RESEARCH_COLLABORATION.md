@@ -48,7 +48,7 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
    that the fixed TASK is published and that the delivery branch and Issue exist.
    Commit and push the updated internal handoff.
 3. Send the rendered handoff via followup_task to its native Agentify Transport.
-   Source and parent are the author (DM for direction nodes, Clerk for new Portfolio agendas); operator is its actual reusable child.
+   Source and parent are the author (DM for direction nodes, Clerk for new Portfolio agendas); operator is its actual request-batch child.
    Legacy requests retain their frozen metadata; assigned recovery records the actual native
    parent/child separately. Transport runs one exact preflight and the appropriate effect branch,
    then bounded observation/archive and one direct receipt. Verified pre-Send nonacceptance permits

@@ -46,9 +46,11 @@ transport of the completed DM-authored request, so no extra planning vote is nee
 For a command that includes dispatch, use the following sequence.
 
 The dispatch owner (DM for direction nodes; Clerk for all new Portfolio requests under hmasd-portfolio-task)
-creates/reuses its native Luna/high Transport child before rendering, using fork_turns=none
+creates a new native Luna/high Transport child for an independent request batch before rendering,
+using fork_turns=none; reuse is only for the same request's preparation/recovery/closeout
 and the transport role/skill with minimal context. Supply source_thread_id=parent_thread_id=the author's
-actual native ID and operator_thread_id=that child. The project default is REUSE_DM_TRANSPORT;
+actual native ID and operator_thread_id=that child. The legacy route label REUSE_DM_TRANSPORT means parent-owned native delivery, not
+permission to reuse a child across independent requests;
 no global task UUID is configured. Do not use a generic app-task URL for native IDs.
 Generate TASK.md and unpublished HANDOFF; commit/push TASK and bind its full SHA with
 --bind-task-sha, then commit/push HANDOFF. Dispatch with collaboration.followup_task directly to

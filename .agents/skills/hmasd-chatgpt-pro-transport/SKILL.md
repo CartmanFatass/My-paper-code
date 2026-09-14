@@ -10,10 +10,14 @@ Read docs/project/CLERK_OPERATIONS.md for event handling and writes. DM/Pro reta
 judgment. Clerk routes missing science or complex engineering repair to the relevant Astra DM;
 it never turns a helper failure into a scientific stop or adds a Root ACK gate.
 
-The actual parent owns one reusable native Luna/high leaf Transport: DM for direction nodes,
+The actual parent creates one native Luna/high leaf Transport per request batch: DM for direction nodes,
 Clerk for explicitly owner-commissioned Portfolio consultation. Execute the assigned request; the parent
 preserves the full answer, with DM scientific conformance for its affected scope. The current native assignment supplies the
 direct return parent. Preserve frozen HANDOFF IDs as provenance when recovering an older request.
+Same-request Send, recovery, observation and archival reuse this child; an independent next
+request gets a new child with fork_turns=none and only its required context. A fresh child does
+not require a fresh provider conversation or a changed binding. Preserve live requests through
+closeout; no elapsed-time rotation or cache keepalive. Follow SIBLING_COMMUNICATION.md.
 No singleton app task, relay, ACK loop, new scientific prompt or science selection belongs here.
 
 ## Parent-local repair default
