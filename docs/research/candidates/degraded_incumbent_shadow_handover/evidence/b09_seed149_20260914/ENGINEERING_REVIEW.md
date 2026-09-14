@@ -54,3 +54,30 @@ The plan has not yet been submitted. Technical acceptance does not substitute fo
 memory admission or create a retry. Launch the sole bound pair; attach the accepted handle
 to its new batch-owned Monitor, collect the complete result, then make the scientific
 intake. Keep actual acceptance/runtime/cost gaps separate from this engineering conclusion.
+
+
+## Independent review of submit02 serialization repair
+
+Same native Astra/high Reviewer `/root/rv_ah_dish_b09`, same B09 engineering batch:
+
+> No material finding in the submit02 serialization repair.
+> The recorded supervisor collapses arguments with `COMMAND="$*"` and later executes
+> `eval ${COMMAND@Q}`. Passing the entire shell command as one argument preserves it;
+> the supplied `shlex.join(argv)` quoting correctly protects `$PWD`, `&&`, and the
+> timing-format quotes until evaluation. `cd`, environment setup, admission and runner
+> now execute in the same shell. SHA, seed, interpreter, intended paths and immediate
+> `admission && runner` binding remain unchanged.
+> Submit01's retained wrapper/log establishes exit2 because Python could not open the
+> admission script under `/home/wu/scripts`. The following runner was blocked by `&&`.
+> Absent intended roots and the stray timing-only file corroborate no scientific execution.
+> The fresh `-submit02` handle preserves the failed handle's evidence.
+> Repair costs remain explicitly included in the unchanged estimated180s prelaunch charge,
+> without resetting or double-adding them.
+> Limits: this reviews the planned serialization, not actual submit02 acceptance. Reconcile
+> its returned handle and generated wrapper/log after submission. The180s remains an
+> allocation estimate; complete measured cost still requires closeout accounting.
+
+DM accepts this exact bounded repair. No source change or repeated synthetic test is needed.
+Published failed records and the new plan keep the effects distinguishable. Execute only
+the corrected plan after this record is committed and pushed; then reconcile actual
+acceptance and delegate the exact new handle to the same batch Monitor.

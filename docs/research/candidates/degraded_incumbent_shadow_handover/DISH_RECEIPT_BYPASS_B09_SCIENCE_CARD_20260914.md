@@ -184,3 +184,14 @@ not claimed as measured complete cost. Shared allowance remains900s with120s res
 for external closure. Record actual available postlaunch costs once; provider/agent effort
 and any incomplete coverage stay unknown. This refines accounting within the frozen B09
 plan, without changing a scientific endpoint or transferring an old budget.
+
+
+### Supervisor submission repair before scientific execution
+
+The original handle failed with exit2 before admission/training because the external
+command serialization lost the `bash -lc` argument boundary. Scientific output is absent.
+[Repair and reconciliation](evidence/b09_seed149_20260914/SUBMISSION_REPAIR.md) preserve
+the accepted failed effect, its cost and verified non-execution. DM selects one corrected
+submission through [EXECUTION_PLAN_SUBMIT02.json](evidence/b09_seed149_20260914/EXECUTION_PLAN_SUBMIT02.json),
+a new supervisor handle and the same scientific/source/output/accounting bindings.
+This is the first scientific execution if admitted; no additional exposure is authorized.
