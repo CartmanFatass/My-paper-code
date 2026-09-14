@@ -1,0 +1,11 @@
+{
+  "sha": "133218a8e08c29e833b4d549ffd48f00b204bf2e",
+  "cwd": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3",
+  "exit_code": 1,
+  "enclosing_seconds": 9.311999999976251,
+  "stdout": ".                                                                        [100%]\n1 passed in 1.98s\nusage: hmasd_resource_preflight.py admit-memory [-h] --out OUT\n\noptions:\n  -h, --help  show this help message and exit\n  --out OUT\n",
+  "stderr": "From https://github.com/CartmanFatass/My-paper-code\n * branch                codex/lcac -> FETCH_HEAD\n   26e23ff3a..133218a8e  codex/lcac -> origin/codex/lcac\n",
+  "scratch": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/temp/tests/lcac-b01-publication-check02",
+  "cleanup": "verified removed; earlier remote scratch absent; local restricted scratch untouched",
+  "native_exposure": 0
+}
