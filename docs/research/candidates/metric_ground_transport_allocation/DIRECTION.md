@@ -1,6 +1,12 @@
 # Direction metric_ground_transport_allocation: metric ground transport allocation
 
-## Current boundary — owner-paused after complete current-object closeout, 2026-09-14
+## Current discriminator — fixed-rate later exposure, 2026-09-14
+
+The owner explicitly resumed the direction through the restored native DM. The accepted scientific position remains optional mean-COND within CONTINUE, with DENSE default: fixed1e-4/256 has one useful positive8252 and one similarly sized adverse8253, not a stable ordering. All prior evidence and the complete review below remain.
+
+The selected [late-exposure B01](MGTAP_LATE_EXPOSURE_B01_SCIENCE_CARD_20260914.md) asks about the fixed1e-4/512 configuration, observing256/512 on one fresh learning path. Final512 is primary; no best-checkpoint selection or cross-seed dose attribution. Its strongest alternative is another cheaper256 pair; this close choice prefers learning about a different finite training configuration over further unchanged draws. Missing mechanism attribution or tuned headroom is not a gate. No scientific PARK, default promotion, C reopening or capacity disposition follows.
+
+## Historical owner-pause boundary after complete current-object closeout, 2026-09-14
 
 The selected fixed1e-4 fresh8253 recurrence is now complete: COND−DENSE
 -0.025924927546066238 J, conditional world SE0.002797864052725455,
