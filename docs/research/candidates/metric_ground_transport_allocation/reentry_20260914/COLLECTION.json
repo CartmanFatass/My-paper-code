@@ -90,5 +90,6 @@
   "member_readback_hash_match": true,
   "checkpoint_count": 8,
   "local_source_root": "C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904\\temp\\directions\\metric_ground_transport_allocation\\exp\\lr_selection_b01_8251_8252_20260914",
-  "no_source_or_evidence_removed": true
+  "no_source_or_evidence_removed_at_original_collection": true,
+  "post_publication_cleanup": {"verified_at":"2026-09-14T20:37:00.2310884Z","removed_exact_checkout":"/home/wu/hmasd-worktrees/mgtap-lr-selection-8251-8252-20260914","native_state":"finished/exit0,PID3665484,tmux inactive; no live invocation","launch_sha":"2d351d48604396ce478aa900584bd24b3255def5","tracked_edits_or_unignored_untracked_files":false,"only_ignored_files":"14 original native outputs; fresh hashes all match the20-member verified published archive","archive_fresh_verification_at":"2026-09-14T20:36:27.3066035Z","archive_sha256":"8fa3b022cf32a38c229ebabb0b87caf43952879a9a4194d850588adf9656123d","published_git_blob_exact":true,"all20members_readback_match":true,"disk_absent":true,"git_worktree_registration_absent":true,"retained":"All local originals, published archive and source revision; original remote supervisor files remain","method":"Ordinary git worktree remove; no force, manual recursive delete, policy-denial workaround or experiment"}
 }

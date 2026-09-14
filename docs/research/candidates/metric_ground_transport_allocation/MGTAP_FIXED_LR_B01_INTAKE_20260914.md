@@ -88,6 +88,9 @@ Focused readback at20:23:32.6668545Z confirmed both disk and Git worktree-regist
 absence. All local originals, the published13-member archive and remote supervisor
 files remain; the old LR-selection remote checkout and shared authoring checkout
 were not removed. No scientific evidence is lost; source is recoverable at390aa271.
+The older completed LR-selection checkout was subsequently separately preserved and
+reconciled, then removed with disk/registration absence verified20:37:00.2310884Z;
+see `reentry_20260914/COLLECTION.json`. Its all20archived originals and source remain.
 
 ## Hypothesis update, prediction and decisions produced
 
