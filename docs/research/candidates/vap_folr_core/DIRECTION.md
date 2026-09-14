@@ -47,7 +47,6 @@ runtime-policy change and retains this scientific PARK, independently of any
 wall-time estimate, investigation reference or missing permission. The
 [resume readback](pro_packets/20260913_post_f_scientific_review/INTAKE.md#owner-resume-and-runtime-policy-readback--2026-09-13)
 records the synchronized controls, comparison limits and preservation closeout.
->>>>>>> 0a1b5facc (docs(folr): reopen for one fresh entity-history learning block)
 The fixed reference-use question is resolved. A fresh same-host learning block
 would supply the first complete fresh/fresh comparison here, not just another
 panel of the old BANK. DM currently judges that unresolved comparison insufficiently
