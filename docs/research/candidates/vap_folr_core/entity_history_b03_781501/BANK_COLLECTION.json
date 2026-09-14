@@ -1,0 +1,151 @@
+{
+  "observed_utc": "2026-09-14T09:47:03.523443+00:00",
+  "status": {
+    "task": "folr-b03-781501-bank",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3669107,
+    "uptime_seconds": 2313,
+    "tmux_active": false
+  },
+  "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+  "tracked_source_clean": true,
+  "generic_input_sha256": "d1b46eac0487632de92ba33e22d029a64882e66633b7418f2d50b2c01fe4e2ec",
+  "files": {
+    "BANK/ADMISSION.json": {
+      "bytes": 504,
+      "sha256": "c8de193c7e56d426b6f8d6fcf45cc124f69a2c4d6e78d58728cb72fece74a60a"
+    },
+    "BANK/INVOCATION_TIME.json": {
+      "bytes": 108,
+      "sha256": "de3146c85fc36e95f21f8fad1659b7d306693227c35aa5740b2a1c164b52c811"
+    },
+    "BANK/final.pt": {
+      "bytes": 4532819,
+      "sha256": "10f2ffbfa91ae884305a50f562e917ed8d927e6dc2d00b3c4512744d40ed7401"
+    },
+    "BANK/summary.json": {
+      "bytes": 109599,
+      "sha256": "0d0daac87e5b365ce777e81c2a59033b91b265d3e789d07806d337e3a2fdbf3d"
+    },
+    "SUPERVISOR/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "SUPERVISOR/pid": {
+      "bytes": 8,
+      "sha256": "51b992fbcce725faa57ec59107cb6dff69a5011d50c7fab7d6049fba394b35a1"
+    },
+    "SUPERVISOR/runner.sh": {
+      "bytes": 1418,
+      "sha256": "a100dff35fe542300630f3b454827d8889055d3a720754bf46fb03c25a27b04a"
+    },
+    "SUPERVISOR/start_time": {
+      "bytes": 11,
+      "sha256": "1a60398a00e184526e3bf68328f2f63d9e70c5cfa76615310f971fab93a1c9a9"
+    },
+    "SUPERVISOR/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "SUPERVISOR/task.log": {
+      "bytes": 2659,
+      "sha256": "64c2540ec3e9f2e6c3721d7c5b4f6e8af345df112ef1a4fc970dba2259891060"
+    }
+  },
+  "archive": {
+    "remote_path": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_RAW.tar.gz",
+    "bytes": 4155609,
+    "sha256": "cbfb535cda8dca062e37737e336fd84f8a7b5c0f15d0cc935ebcbb7650a0ca10"
+  },
+  "checkpoint_check": {
+    "keys": [
+      "actor",
+      "arm",
+      "mixer",
+      "optimiser",
+      "target_actor",
+      "target_mixer",
+      "updates"
+    ],
+    "arm": "BANK",
+    "updates": 4969,
+    "tensor_groups": {
+      "actor": {
+        "tensor_count": 17,
+        "elements": 89599,
+        "all_finite": true,
+        "floating_dtypes": [
+          "torch.float32"
+        ]
+      },
+      "mixer": {
+        "tensor_count": 32,
+        "elements": 284292,
+        "all_finite": true,
+        "floating_dtypes": [
+          "torch.float32"
+        ]
+      },
+      "target_actor": {
+        "tensor_count": 17,
+        "elements": 89599,
+        "all_finite": true,
+        "floating_dtypes": [
+          "torch.float32"
+        ]
+      },
+      "target_mixer": {
+        "tensor_count": 32,
+        "elements": 284292,
+        "all_finite": true,
+        "floating_dtypes": [
+          "torch.float32"
+        ]
+      }
+    },
+    "checkpoint_loads": 1,
+    "model_constructions": 0,
+    "new_training_or_evaluation": 0
+  },
+  "remote_support_seconds": 0.18613623292185366,
+  "ssh_stderr": "",
+  "native_timing": {
+    "wall_seconds": 1774.14,
+    "user_seconds": 1347.24,
+    "system_seconds": 425.63,
+    "peak_rss_kib": 751632,
+    "exit_code": 0
+  },
+  "admission": {
+    "assessed_at": "2026-09-14T09:08:30.720233Z",
+    "available_physical_bytes": 15624404992,
+    "captured_at": "2026-09-14T09:08:30.719960Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15624404992,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "computed_panel": {
+    "mean": -1.7107812500000006,
+    "sample_sd": 2.7730425058360044,
+    "conditional_episode_se": 0.24510464504939686,
+    "minimum": -10.139999999999999,
+    "maximum": 7.559999999999999,
+    "n": 128,
+    "negative_episodes": 97
+  },
+  "technical_integrity_passed": true,
+  "all_archive_members_verified": true,
+  "scientific_new_invocations": 0,
+  "local_archive_path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\docs\\research\\candidates\\vap_folr_core\\entity_history_b03_781501\\BANK_RAW.tar.gz",
+  "collection_wall_seconds": 3.4839999999967404,
+  "support_cost_scope": "Measured collection window only; full support/provider cost UNKNOWN"
+}
