@@ -1,0 +1,124 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-13-ucope-reactive-renewal-review-01",
+  "source_thread_id": "/root",
+  "parent_thread_id": "/root",
+  "operator_thread_id": "/root/tr_lh_ucope_reactive_review",
+  "direction_id": "ucope",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "426108309233a756db6574534e1b7585477a1233",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "reset_invalid_provider_context": false,
+  "github_delivery": {
+    "branch": "codex/ucope",
+    "base_sha": "426108309233a756db6574534e1b7585477a1233",
+    "response_path": "docs/research/candidates/ucope/pro_packets/20260913_reactive_renewal_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/11"
+  },
+  "scientific_question": "Independently review the DM proposal to continue UCOPE with one new ordinary B comparison of feedback-conditioned continuation R against freshly trained fixed-short renewal F and ordinary recurrent feedback G, versus reversibly PARKing the direction now. The full concrete proposal, evidence, strongest PARK case and work are in the listed current assessment. Please challenge the recommendation and identify material scientific defects or claim limits. This is scientific review of an outcome-informed successor plan and lifecycle reasoning; DM will respond and owns the final decision.\n\nKeep the 8801-L and unchanged-L spending stops intact. R acts on the fresh, already allowed private observation after one movement tick, choosing keep actual previous velocity for one more tick or end and sample a new velocity for the current tick, with forced renewal after a keep. That differs from old T/L choosing duration before the first movement. No new sensing, fee, roster, reward or L suffix residual is proposed. The action-kernel/optimization differences remain whole-package differences, and R's termination label supplies no causal or novelty claim. In particular, R's keep/end decision can affect the current reward, so do not reuse old L's omitted-first-reward argument.\n\nThe proposed smallest comparison answering the attained-comparator choice is one matched instance, three fresh R/F/G fits at2048 training episodes per fit,256 primitive ticks, two-episode rollouts and four Adam epochs, plus one final64-world panel per learned arm and H. Proposed primary R-F; retain R-G and all learned-H contrasts. Known work is1638400 native team steps,12288 Adam calls and256 evaluation episodes, without nested search. A two-fit R/G/H alternative is1097728 native steps and8192 Adam calls but leaves the specifically attained F comparison unresolved. Complete new cost is unknown; historical8703 native wall2108.73 seconds is not a quote, transferable cap or universal limit. The actual review runs no models or numerical experiments.\n\nThe reviewer may recommend the proposed comparison, a concrete minimal correction/narrower claim, or PARK/defer, explaining the strongest alternative. Please evaluate the value of the observation rather than impose proof, exact headroom, positive-first, exhaustive diagnosis or a special permission prerequisite. Equally, a coherent untested hypothesis does not obligate more work. Preserve all adverse/positive and incomplete history. No changed scientific source, seed, host, cap, actual empirical invocation or automatic successor is allocated by this consultation.",
+  "deliverable": "A complete conclusion-first independent scientific review of the proposal and PARK alternative, with evidence for/against, concrete design or inference findings, minimal necessary corrections if any, uncertainty and decision-value/work assessment. Distinguish your recommendation from the DM decision. Cite exact listed evidence versions, state actual access limits, and deliver only the scoped response plus Issue comment or the complete downloadable Markdown fallback as instructed.",
+  "claim_ceiling": "B/EXPLORE planning and a reversible DM research-value/lifecycle decision under uncertainty. No new empirical result, training-population ranking, component causal effect, theorem, novelty, tuned headroom, transfer, formal UAV entry or C claim.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_REACTIVE_RENEWAL_ASSESSMENT_20260913.md",
+      "purpose": "Read the full present question: preserved stops, recovered outcomes, explicit R timing/credit proposal, R/F/G comparison, PARK alternative, inference limits and finite work. Challenge the DM preference.",
+      "provenance": "New outcome-informed DM proposal; no implementation, card, empirical result or final lifecycle decision."
+    },
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260913_reactive_renewal_convergence/WORK_FACTS.json",
+      "purpose": "Computed dominant work of the three-fit proposal and narrower two-fit alternative; actual new empirical exposure is zero.",
+      "provenance": "Arithmetic from stated proposed episodes/horizon/rollout/epochs/panels, not a timing pilot."
+    },
+    {
+      "path": "docs/research/candidates/ucope/DIRECTION.md",
+      "purpose": "Authority and current 2026-09-11 L-PARK position, previous 8703/8701 positions, and 8601/8602/8501/P85 summaries. Read those ranges, without recursively retrieving links.",
+      "provenance": "Accepted historical synthesis; dated authority wording is superseded prospectively by listed current AGENTS.",
+      "commit_sha": "5accfc0d6c5f8f8e9bf91de759bc457070675eed"
+    },
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260911_post_8801_convergence/archive/RESPONSE.md",
+      "purpose": "Read the complete narrow L scientific review, particularly actual stop boundary, F competence, contrary evidence and unresolved learning variation.",
+      "provenance": "Complete prior independent Convergence review; this new question does not restart or reconsider stopped unchanged-L work.",
+      "commit_sha": "81d5d48a648427674684909d641b7d90f18c87c0"
+    },
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md",
+      "purpose": "Sections 1-5 and decisions/application: accepted review and exact scope, costs, contrary evidence, completed prior request.",
+      "provenance": "Historical DM intake; preserve provenance rather than adopting obsolete PRO_FINAL authority.",
+      "commit_sha": "5accfc0d6c5f8f8e9bf91de759bc457070675eed"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8701_RESULT_EVIDENCE_20260910.md",
+      "purpose": "Sections1-4 and interpretation: original T-G DOWN, all T/F/G/H panels and original cost/exposure.",
+      "provenance": "One complete prior T/F/G instance; not an L replication.",
+      "commit_sha": "5bbae6d90723217336222105366774926084a00c"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_RESULT_EVIDENCE_20260910.md",
+      "purpose": "Sections1-4 and interpretation: T-G WITHIN, adverse T-F, final learned-H gains and F/G sign reversal.",
+      "provenance": "Second complete T/F/G instance; 8702 remains incomplete.",
+      "commit_sha": "5bbae6d90723217336222105366774926084a00c"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_SCIENCE_CARD_20260909.md",
+      "purpose": "Sections2-4: actual F/G information, training, fixed-law and sampled evaluation recipe. Do not import its old master, three checkpoints or allocation.",
+      "provenance": "Historical comparator definition; only the stated aspects motivate a proposed fresh study.",
+      "commit_sha": "5accfc0d6c5f8f8e9bf91de759bc457070675eed"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_two_slot_vacancy_replacement/archive/RESPONSE.md",
+      "purpose": "Opening, section2 UCOPE and section3 task/resource treatment only: assigned responsibility and preserved stops, without inventing scientific readiness.",
+      "provenance": "Owner-delegated staffing selection, not experiment approval or new funds.",
+      "commit_sha": "29c8db0f743a914f79c980a8723ea81a508a5eda"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Sections1-5 and8, AppendixA: current DM full lifecycle responsibility, independent scientific review, resource authority, preserved stops and proportional evidence.",
+      "provenance": "Current owner instructions; historical packet governance does not replace these.",
+      "commit_sha": "fd6519f1f6af6df9d5fece120081251b7e653b27"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections4,5.2,7,8.1,11.4,11.7-11.10: apply integrity, ordinary B, lifecycle meanings, comparison and proportional research burden. No other direction-specific exception applies.",
+      "provenance": "Controlling scientific specification at the published current version.",
+      "commit_sha": "fd6519f1f6af6df9d5fece120081251b7e653b27"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Sections5-6 only: fixed or learned options, separate clocks, independent training units and package inference.",
+      "provenance": "Explanatory knowledge; no study-specific choice or SESSION_CHOICES adoption.",
+      "commit_sha": "fd6519f1f6af6df9d5fece120081251b7e653b27"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md",
+      "purpose": "Option definition, duration/return, asynchronous owner boundaries and distinct clocks.",
+      "provenance": "Conceptual support; no imported algorithm or performance guarantee.",
+      "commit_sha": "fd6519f1f6af6df9d5fece120081251b7e653b27"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Comparison objects, randomness hierarchy and whole-package versus component inference.",
+      "provenance": "Explanatory evidence; no seed/significance gate.",
+      "commit_sha": "fd6519f1f6af6df9d5fece120081251b7e653b27"
+    },
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260913_reactive_renewal_convergence/ISSUE_SNAPSHOT.json",
+      "purpose": "The existing six delivery comments and dated Issue body. They are historical context, not current review instructions.",
+      "provenance": "Read-back before this request publication; preserve its exact content."
+    }
+  ],
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/11"
+  ],
+  "constraints": [
+    "Apply only the named current scientific specification sections and owner instructions. Historical PRO_FINAL text is provenance; independent review does not grant funding or lifecycle authority.",
+    "Read only the listed evidence and explanatory passages. The current assessment reports the author's limited library/official abstract retrieval; do not claim direct access to that local corpus or unlisted sources.",
+    "Keep every existing stop, frozen result, uncertainty and contrary evidence. Do not restart8801-L, turn8702 into a complete sample or count repeated A01/panels as independent training.",
+    "No experiment, source implementation, numerical reanalysis, model/environment creation, checkpoint load, tests, replay or profiling. This request authorizes one scientific response, not follow-up activity.",
+    "Use the existing direction branch and substantive Issue. Preserve unrelated paths and fixed input SHAs while writing the one response on the current descendant delivery HEAD."
+  ]
+}
