@@ -111,3 +111,9 @@ source of truth pending a control-owner repair.
 - Clerk's own session checkout synchronized the same 25 control paths from `origin/main` and
   committed detached `7bb9240682f7f81ead8a9892a802b92c896bf964`; live registries, snapshots,
   science and accepted packets were excluded. The session tree is clean at that receipt.
+- RCLE later completed a second, five-path synchronization for published `d2227e4bd` (AGENTS,
+  the DM role TOML, and three project control files): session commit
+  `64cd253a7632bdae9d40f1ef341a1a6723175706` and authoring commit
+  `9b46cc3d7bdd75c4b4fa420ca37922c16ed2160e` are byte/Git-blob equal and clean, with TOML parse
+  and whitespace checks passing. The other 20 paths and focused suites were not redundantly rerun;
+  live registries, science, source and accepted requests were excluded.
