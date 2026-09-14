@@ -98,6 +98,14 @@
       "record": "docs/research/candidates/vap_folr_core/entity_history_augmentation_b01_781601/EXECUTION.md",
       "state": "applied",
       "summary": "Generic已完整收集保全，均值-0.966484375；原增强臂于19:39:55UTC实际启动并由同批Monitor观察。两臂间控制延迟单独记账；无G重跑、追加实验或A-G最终结论。"
+    },
+    {
+      "at": "2026-09-14T20:49:58+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-14-owner-pause-after-inflight.md",
+      "record": "docs/research/candidates/vap_folr_core/HANDOFF_20260914_OWNER_PAUSE.md",
+      "state": "applied",
+      "summary": "Original two-arm B01 complete: d+5.29640625/AUGMENTED_ABOVE_MEI, no retry; current-result review and final handoff remain before owner pause. Scientific lifecycle and slot unchanged."
     }
   ]
 }

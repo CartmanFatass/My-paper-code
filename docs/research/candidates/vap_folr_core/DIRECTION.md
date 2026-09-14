@@ -30,6 +30,12 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
+**Operational instruction — 2026-09-14 13:23 PDT:** finish the accepted
+augmentation B01 A−G run and required result/review/archival closeout, then write
+the [owner-pause handoff](HANDOFF_20260914_OWNER_PAUSE.md) and await explicit
+resume. The original pair is complete and collected; current-result review/closeout
+remains. No successor object or direction/vacancy work follows. This operational pause does not change the scientific lifecycle below.
+
 **Current lifecycle: ACTIVE / MEDIUM — Portfolio CONTINUE applied on 2026-09-14.**
 The [complete Portfolio decision and DM intake](pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md)
 withdraw the disputed stopping rationale and select the prepared B03 bounded
@@ -100,8 +106,15 @@ G has now completed and been collected:mean-0.966484375,5000/4969/128,
 1178.68s native wall,exit0. Original raw evidence is preserved. The original A
 was accepted19:39:55.755736Z,handle`folr-augmentation-b01-781601-augmented`,
 PID3679958,after fresh admission; the same batch Monitor adopted at19:40:29.085Z.
-No A-G pair result exists yet. The13401.737549s inter-arm control interval remains
-separate from native work; source, endpoints and two-fit bound are unchanged.
+A is now complete exit0 at20:26:32Z and fully collected:mean4.329921875;
+**A−G=+5.29640625, AUGMENTED_ABOVE_MEI**, under the frozen rule. The low-confidence
+Generic-win prediction missed. Both5000/4969/128 endpoints and all raw evidence
+are intact; native3975.48s/CPU3972.96s. [Full result and interpretation](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_INTAKE_20260914.md)
+support this one complete-program increment, without persistence attribution or
+training-population ranking. Old replacement losses remain separate. The
+13401.737549s inter-arm control interval stays outside native work. Necessary
+independent current-result review, its response and owner-pause handoff remain;
+no new empirical successor follows.
 FOLR continues to occupy one existing slot, with the
 same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
 Full support/provider cost remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves
