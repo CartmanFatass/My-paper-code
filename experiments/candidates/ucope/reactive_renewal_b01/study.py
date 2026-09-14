@@ -30,7 +30,7 @@ class Config:
                    watchdog_seconds=180, fixture=True)
 
 
-def final_panel(rows, expected):
+def final_panel(rows, expected, invocation_complete):
     values = {arm: {r["episode"]: r["J"] for r in rows
                     if r["arm"] == arm and r["phase"] == "eval"} for arm in LABELS}
     full = {arm: sorted(value) == list(range(expected)) for arm, value in values.items()}
@@ -48,9 +48,9 @@ def final_panel(rows, expected):
                     tied=sum(x == 0 for x in delta))
         result[f"{first}_minus_{second}"] = item
     primary = result["R_minus_F"]
-    result["complete"] = primary["complete"]
+    result["complete"] = invocation_complete and result["all_panels_complete"]
     result["reading"] = ("UP" if primary["mean"] > .01 else
-                         "DOWN" if primary["mean"] < -.01 else "WITHIN") if primary["complete"] else None
+                         "DOWN" if primary["mean"] < -.01 else "WITHIN") if result["complete"] else None
     return result
 
 
@@ -177,7 +177,7 @@ def run(config, out, start=None, factory=None):
             traceback.print_exc()
             summary["error"] = dict(type=type(error).__name__, message=str(error))
 
-    summary["panel"] = final_panel(rows, config.eval_episodes)
+    summary["panel"] = final_panel(rows, config.eval_episodes, summary["status"] == "COMPLETE")
     keys = {key for record in arms.values() for key in record["counts"]}
     summary["counts"] = {key: sum(record["counts"].get(key, 0) for record in arms.values())
                          for key in sorted(keys)}

@@ -162,3 +162,33 @@ def test_failed_attempt_retains_counts_without_result_polarity(tmp_path):
     assert not result["panel"]["complete"]
     assert result["panel"]["reading"] is None
     assert (tmp_path / "failed/summary.json").is_file()
+
+
+@pytest.mark.parametrize("failure", ("G_constructor", "after_all_panels"))
+def test_late_failure_preserves_partial_primary_without_polarity(tmp_path, failure):
+    constructed = 0
+
+    class LateFailure(SyntheticAdapter):
+        def __init__(self, seed, is_g):
+            super().__init__(seed, 8)
+            self.is_g = is_g
+
+        def close(self):
+            if self.is_g and failure == "after_all_panels":
+                raise RuntimeError("late fixture close failure")
+
+    def factory(seed):
+        nonlocal constructed
+        constructed += 1
+        if constructed == 3 and failure == "G_constructor":
+            raise RuntimeError("late fixture constructor failure")
+        return LateFailure(seed, constructed == 3)
+
+    result = study.run(study.Config.engineering(), tmp_path / failure, factory=factory)
+    assert result["status"] == "INCOMPLETE"
+    panel = result["panel"]
+    assert panel["R_minus_F"]["complete"]
+    assert len(panel["R_minus_F"]["differences"]) == 3
+    assert panel["all_panels_complete"] == (failure == "after_all_panels")
+    assert not panel["complete"]
+    assert panel["reading"] is None
