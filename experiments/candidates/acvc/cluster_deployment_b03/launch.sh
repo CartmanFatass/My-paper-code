@@ -12,7 +12,7 @@ if [[ -e "$output" ]]; then
 fi
 mkdir -p -- "$output"
 "$HMASD_PYTHON" scripts/hmasd_resource_preflight.py admit-memory --out "$output/admission.json" &&
-exec /usr/bin/time -v -o "$output/native_time.txt" \
+exec /usr/bin/time -f 'native_wall_s=%e\npeak_rss_kib=%M\nexit_code=%x' -o "$output/native_time.txt" \
     timeout --signal=TERM --kill-after=10s 1860s \
     "$HMASD_PYTHON" scripts/run_acvc_cluster_deployment_b03.py \
     --seed 21937 --launch-sha "$launch_sha" --output "$output" \
