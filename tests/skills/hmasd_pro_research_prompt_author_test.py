@@ -102,6 +102,24 @@ def _source_packet(renderer, request, project_root, out_dir, mode):
 
 
 @pytest.mark.parametrize("mode", ["github_delivery", "archive_attachment"])
+def test_convergence_packet_is_independent_review_not_lifecycle_authority(
+    project_root: Path, tmp_path: Path, mode: str
+) -> None:
+    body = _source_packet(_renderer(), _request(), project_root, tmp_path / mode, mode)
+    assert "independent scientific Reviewer" in body
+    assert "DM retains the direction decision and lifecycle" in body
+    assert "respond to material findings" in body
+    assert "Return one explicit final decision" not in body
+    assert "provides the final decision" not in body
+
+
+def test_portfolio_contract_is_owner_requested_advice_not_automatic_dispatch() -> None:
+    contract = _renderer()._node_decision_contract("portfolio_decision")
+    assert "explicit owner request" in contract
+    assert "do not authorize execution" in contract
+
+
+@pytest.mark.parametrize("mode", ["github_delivery", "archive_attachment"])
 def test_effective_source_mapping_preserves_science_and_pins_method(project_root, tmp_path, mode):
     renderer = _renderer()
     request = _request()
@@ -289,7 +307,7 @@ def test_omitted_companion_prompt_uses_the_fixed_default(project_root: Path, tmp
     assert packet["companion_prompt"] == (
         "Execute the attached PROMPT_BODY.md exactly. "
         "It contains the complete read-only evidence manifest. "
-        "Return this node's final decision or the exact blocker."
+        "Return the complete scientific review or requested advice, with any exact evidence gap."
     )
     out_dir = tmp_path / "default"
     handoff = _render(renderer, _request(), project_root, out_dir)
@@ -314,8 +332,8 @@ def test_default_companion_is_provider_facing_and_excludes_author_workflow_terms
 
     assert "PROMPT_BODY.md" in companion
     assert "REFERENCE_FILES.md" not in companion
-    assert "final decision" in companion
-    assert "exact blocker" in companion
+    assert "complete scientific review" in companion
+    assert "exact evidence gap" in companion
     assert not any(
         term in companion.lower()
         for term in (
@@ -532,7 +550,7 @@ def test_handoff_reuses_the_project_transport_singleton(
     assert handoff["direction_ids"] == ["demo_direction"]
     assert handoff["conversation_binding_key"] == "em:demo_direction:convergence"
     assert handoff["conversation_reuse_required"] is True
-    assert handoff["decision_authority"] == "pro_final"
+    assert handoff["decision_authority"] == "dm_owned_scientific_review"
     assert handoff["dispatch_handoff_path"] == handoff_path
     assert handoff["dispatch_prompt"] == f"Execute the handoff packet at {handoff_path} exactly once."
     assert "Do not call create_thread" in handoff["dispatch_instruction"]
@@ -838,11 +856,11 @@ def test_em_innovator_and_convergence_use_distinct_persistent_bindings(
     assert innovator["conversation_binding_key"] == "em:demo_direction:innovator"
     assert convergence["conversation_binding_key"] != innovator["conversation_binding_key"]
     body = (tmp_path / "innovator" / "PROMPT_BODY.md").read_text(encoding="utf-8")
-    assert "Select the next scientific object" in body
+    assert "Assess candidate scientific objects" in body
     assert "DECISION_AUTHORITY=" not in body
 
 
-def test_portfolio_uses_one_cross_direction_binding_and_final_decision_authority(
+def test_portfolio_uses_one_cross_direction_binding_and_owner_advice_scope(
     project_root: Path, tmp_path: Path
 ) -> None:
     renderer = _renderer()
@@ -859,12 +877,13 @@ def test_portfolio_uses_one_cross_direction_binding_and_final_decision_authority
     assert handoff["direction_id"] == "portfolio"
     assert handoff["direction_ids"] == ["demo_direction", "second_direction"]
     assert handoff["conversation_binding_key"] == "portfolio:cross_direction"
-    assert handoff["decision_authority"] == "pro_final"
+    assert handoff["decision_authority"] == "owner_requested_advice"
     assert handoff["transport_request"]["conversation_binding_key"] == "portfolio:cross_direction"
     body = (tmp_path / "portfolio" / "PROMPT_BODY.md").read_text(encoding="utf-8")
     assert "REQUEST_CLASS=" not in body
     assert "directions in scope are: demo_direction,second_direction" in body
-    assert "priority, capacity, lifecycle, fusion, separation" in body
+    assert "explicit owner request" in body
+    assert "do not authorize execution" in body
 
 
 @pytest.mark.parametrize(
