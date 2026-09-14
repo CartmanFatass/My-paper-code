@@ -1,0 +1,9 @@
+{
+  "commit": "eeb5da5ae622fbf570e41410ac0ccc95081e22d0",
+  "bytes": 12280,
+  "sha256": "a424a159a7ac56984e4f95dff18c6e5996ebd4ac28a2ae29ccf46e34256a91b5",
+  "git_blob_matches_raw_transport_archive": true,
+  "working_copy_note": "Git checkout may have CRLF; immutable Git blob and raw archive are compared",
+  "native_receipt": "SENT",
+  "full_response_read": true
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 4,
+  "operationId": "4e108e36-b67a-4216-afdd-78318d50c9c7",
+  "idempotencyKey": "lcac-b01-result-review-20260914-01",
+  "requestFingerprint": "dbb35bd536add3973f3c03ee28b1c304174726189fec5ed16ebe1cc13635e57f",
+  "stableKey": "em:learned_counterfactual_agent_credit:convergence",
+  "provider": "chatgpt",
+  "productModel": "GPT-6 Astra",
+  "reasoningEffort": "Pro",
+  "conversationUrl": "https://chatgpt.com/c/6aa757c7-cd08-83e8-9859-b78e2dfaeb90",
+  "conversationId": "6aa757c7-cd08-83e8-9859-b78e2dfaeb90",
+  "promptSha256": "db889aa788db0ae8287eb992d0b57ed7c35fd43fab57ff6199a600d4a9bf435c",
+  "responsePath": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\learned_counterfactual_agent_credit\\lcac-b01-result-review-20260914-01\\RESPONSE.md",
+  "sendAttempted": true,
+  "sendAttemptedAt": 1789356692071,
+  "providerUserMessageId": "06247d44-0154-4899-aca9-fea9a2ebcf94",
+  "providerAssistantMessageId": null,
+  "observedConversationUrl": "https://chatgpt.com/c/6aa757c7-cd08-83e8-9859-b78e2dfaeb90",
+  "observedConversationId": "6aa757c7-cd08-83e8-9859-b78e2dfaeb90",
+  "archive": null,
+  "error": null,
+  "createdAt": 1789356633409,
+  "updatedAt": 1789356692733,
+  "sendClickCount": 1,
+  "tabId": "7f977501-02fd-4c4c-a48b-44c23c717e6e",
+  "sendEvidence": {
+    "urlObserved": true,
+    "userNodeObserved": true,
+    "userNodeExact": true,
+    "userMessageId": "06247d44-0154-4899-aca9-fea9a2ebcf94"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "id": "20260913-learnedc-004",
+  "created": "2026-09-13T20:59:43-07:00",
+  "direction": "learned_counterfactual_agent_credit",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "LCAC-B02：1024训练/32最终评估，分离种子区间",
+  "context": "固定五UAV信用分配；原标量Q/V算法，仅改新master、训练长度和不重叠最终reset区间。原生暴露0。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留已冻结B02并按精确源码及实际节点准入执行一对"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止依赖此卡的新执行，DM在干净边界重新作生命周期判断"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按真实所有者指令前瞻修订；保留旧卡和已经发生的效果"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "采用独立审阅的具体防泄漏修正，固定一次有限比较，不追加诊断",
+  "evidence": [
+    "docs\\research\\candidates\\learned_counterfactual_agent_credit\\LCAC_B02_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L14",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留DM已选择的新B02：一对1024训练/32最终评估，在不改算法的前提下观察更长有限预算的开发价值？无需等待回复。",
+    "changes_if_approved": [
+      {
+        "target": "LCAC DIRECTION.md / LCAC-B02",
+        "from": "B01完成，短预算小负差；较短复现只是工作建议",
+        "to": "CONTINUE，选择新1024/32 master9412 B02，评估重置区间与训练分离，尚未启动"
+      }
+    ],
+    "if_refused": "在下一干净边界应用所有者的替代指令；保留B01、完整独立review和任何已执行效果，不改写旧卡、不自动重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/learned_counterfactual_agent_credit/pro_packets/20260914_b01_result_review/archive/RESPONSE.md",
+        "quote": "I narrowly prefer one fresh, symmetric **1024-train/32-final comparison** over immediately repeating 256/32",
+        "why": "较长有限端点比重复短预算接近结果更可能影响下一步开发选择；这是接近选择，不是训练不足的证明。"
+      },
+      {
+        "path": "docs/research/candidates/learned_counterfactual_agent_credit/LCAC_B01_RESULT_EVIDENCE_20260914.md",
+        "quote": "129.80s wall,569,916KiB peak RSS (556.559MiB)",
+        "why": "已有完整运行成本使一次更长直接比较可合理规划；它不是1024实测上界。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/learned_counterfactual_agent_credit/pro_packets/20260914_b01_result_review/archive/RESPONSE.md",
+        "quote": "The strongest objection is substantial extra work for another single training unit, with no guarantee of more competent policies.",
+        "why": "Q可能本来就不能提供有用差异或外推较差；增加训练未必解决问题。"
+      }
+    ],
+    "uncertainty": [
+      "B01与B02同时改变训练master和最终面板，不能识别训练时长的因果效应。",
+      "没有证明critic充分校准、标量基线收敛或信用方差降低。",
+      "原偏移用于1024回合将泄漏24个评估世界，B02以base+3000前瞻修正；B01无此重叠。",
+      "只有一个新训练对；不合并不同端点，不自动追加seed或C主张。"
+    ],
+    "cost": {
+      "compute": "一对540672 native ticks、4096 Adam、9175040 Q baseline rows；600秒完整pair为4×129.80+80.8的规划，不是实测上界；初始实现support计划300 invoked秒，累计support/provider/lifetime仍UNKNOWN。",
+      "owner_time": "无需回复；可异步选择较短复现或PARK等替代。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-13 instruction): CONTINUE LCAC and select one NEW1024-train/32-final pair B02, master9412, disjoint final resets, otherwise unchanged algorithms. Options:256/32 replication (runner-up),1024/32 (chosen), PARK. This close call revises DM's working preference for the scientific reasons above, not because Pro grants authority. Recasts0; no global layout change.",
+    "source": "docs/research/candidates/learned_counterfactual_agent_credit/LCAC_B01_INTAKE_20260914.md"
+  },
+  "starred": false
+}

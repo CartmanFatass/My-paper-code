@@ -1,0 +1,22 @@
+{
+  "master": 9412,
+  "arms": 2,
+  "train_episodes_per_arm": 1024,
+  "eval_episodes_per_arm": 32,
+  "horizon": 256,
+  "agents": 5,
+  "actions": 7,
+  "rollout_episodes": 2,
+  "epochs": 4,
+  "pair_episodes": 2112,
+  "pair_native_ticks": 540672,
+  "pair_adam_calls": 4096,
+  "q_baseline_rows": 9175040,
+  "total_factual_fit_rows": 2097152,
+  "old_1024_reset_overlap": 24,
+  "selected_reset_overlap": 0,
+  "selected_action_overlap": 0,
+  "pair_wall_plan_seconds": 600,
+  "source_of_plan": "4*129.80+80.80 planning seconds; no measured1024 rate",
+  "native_exposure": 0
+}
