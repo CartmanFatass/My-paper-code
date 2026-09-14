@@ -422,6 +422,47 @@ The real native environment, retained learned recurrent stochastic policy and ev
 
 Report F-C and F-dwell separately for each base, retain dwell-C and all outcomes, and use conditional paired-episode uncertainty. The ceiling is a preliminary native execution-package signal or counterexample conditional on these two selected retained bases and the declared fresh panels, not new learning, training-population superiority, isolated mechanism/history necessity, optimality, tuned headroom or transfer. The named scope retains the proposed 180-second whole-logical-invocation cap, including the proposed 30-second focused-check/readback allowance; this paragraph allocates no execution. It authorizes no additional fit, panel, search, retry or successor and does not reopen the stopped T/G selector. Ordinary B requirements and all other objects remain unchanged; no new class or general Pro-consultation gate is created.
 
+#### 11.4.2 Named exception — RCLE_FIXED_MODAL_REUSE_E01
+
+OWNER_DIRECT 2026-09-14: the owner approved the bounded proposal at direction commit
+`a8e55d8435d7132681fa5b6f856675e2eb56bc57`,
+`docs/research/candidates/roster_consistent_latent_exploration/fixed_modal_reuse_e01_20260914/SPECIFICATION_SCOPE_PROPOSAL.md`,
+after the applicability finding in independent review `ad6e30953c5fd1f78e3f5da6cdee103769a6bfde`.
+This records actual owner approval, not authority inferred from that review.
+
+For RCLE_FIXED_MODAL_REUSE_E01 only, B/EXPLORE may compare the deterministic modes of
+the two frozen B10/seed30 and B12/seed32 final1024 greedy-anchored trained policies against
+their respective preserved fixed-greedy panels without new fitting or training. This is
+an object-limited substitution for real-learner/trainer, nonzero-update and learner-
+movement requirements in §§5.2/11.4 and the corresponding wording of §11.8.6. It applies
+only to the unchanged native 120-sector/six-beacon/H64 host, two 512-episode modal panels,
+original base-specific exogenous addresses and legal combined-logit action law in the
+RCLE_FIXED_MODAL_REUSE_E01_SCIENCE_CARD_20260914.md card at the cited proposal commit.
+The four frozen inputs are identified by that card's INPUT_MANIFEST.json.
+
+The real native environment, retained learned policy and evaluator must execute. The
+machine-produced exposure record must distinguish two retained completed fits from zero
+new fits/training episodes/backward/optimizer calls, report zero parameter displacement
+during evaluation, and report actual new native transitions and evaluation counts. The
+nominal card bound is 1024 new episodes/65536 ticks/32 native32 batches in one started
+serial invocation with no automatic retry. Historical learning is provenance, not new
+exposure. Reusing greedy rows is conditional on unchanged comparator/world/reward semantics;
+an invalidated reuse requires prospective card/count revision, not invented pairing.
+
+All common integrity, fresh actual-node admission, own-trajectory events, information/RNG/
+checkpoint/FP64 semantics, complete favorable/adverse service and recovery, preserved B11
+failure and costs, proportionate technical review and dependency-based failure interpretation
+remain. The claim ceiling is a preliminary post-outcome execution-package observation
+conditional on these two selected completed checkpoints and already observed panels, not
+new learning, trained-population superiority, pure stochasticity mechanism, equivalence,
+general headroom, safety or transfer. Current approximate wall plans retain their ordinary
+adjustable scope; they do not become resource grants or time-based scientific gates.
+
+This wording itself allocates no extra fit/panel/search/retry/successor, changes neither old
+result nor either existing recipe HOLD, creates no new evidence class or general exception,
+and adds no routine Pro/Root approval requirement. DM retains the finite scientific selection,
+technical acceptance, execution and lifecycle responsibility.
+
 ### 11.5 Direction separation for the untying programme
 
 Untying the skill duration k and untying the agent count N are **two separate directions**, not one
