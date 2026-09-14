@@ -62,10 +62,10 @@ Generic4.9259375, BANK-1.71078125, d=-6.63671875, GENERIC_ABOVE_MEI. Both arms
 completed5000/4969/128; summed native wall3779.85s. B02 and B03 are two separate
 whole-learning-and-evaluation realizations, with no pooled population ranking.
 All original outputs/checkpoints/logs and operational failures are preserved.
-No active native producer or additional fit remains selected. [DM intake](FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md)
-favors reviewing a bounded proposal that preserves generic recurrence in both arms
-while testing persistent versus current-only entity state. That comparison is not
-yet selected; the current clarification and common implementation are described below.
+At B03 intake no additional fit had been selected. That [DM intake](FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md)
+proposed preserving generic recurrence in both arms while testing persistent versus
+current-only entity state. The subsequent complete Portfolio clarification changes
+the selected next comparison to A−G, as recorded below.
 The [complete independent result/plan review and DM response](pro_packets/20260914_entity_history_b03_result_plan_review/INTAKE.md)
 are now read and preserved. The review finds no result-invalidating B03 defect and
 favors developing the additive-persistence question over a third unchanged block.
@@ -86,8 +86,12 @@ at source `550846a863ad7276edf8cab1a556e7d76353df08`, after five focused tests a
 independent Sol/high recurrent/RNG review. Both native engineering children are
 complete. The new [augmentation B01 card](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_SCIENCE_CARD_20260914.md)
 selects train781601/eval1781601, two fresh5000/4969/128 fits and strict MEI1.
-Complete learner/driver/checkpoint/primary integration is the current scoped work;
-no full training-path acceptance, native launch or result is yet claimed.
+Complete learner/driver/checkpoint/primary integration is published at
+`cf1efd77ce5c38a33a1d1d283922bc3f13208c7b`, with11 focused synthetic tests passed.
+The exact native time/admission scripts are at`e218a89096b14331b783e7544503210e74be0f89`.
+Native`/root/folr_augmentation_b01_review` owns independent Sol/high full-path
+review; DM processes findings and accepts the exact source before formal remote
+launch. No new native invocation or result is claimed.
 FOLR continues to occupy one existing slot, with the
 same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
 Full support/provider cost remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves

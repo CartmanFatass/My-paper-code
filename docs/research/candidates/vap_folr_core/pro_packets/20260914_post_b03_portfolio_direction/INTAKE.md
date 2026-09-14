@@ -298,3 +298,62 @@ evidence supports one explicit submission and no observed resend. Its original
 wording is retained alongside this correction. Input archival is now complete;
 no FOLR provider generation, observation or capture recovery remains. This did
 not create another question, experiment or approval step.
+
+### Complete augmentation B01 integration returned
+
+Native batch `FOLR_AUGMENTATION_B01_INTEGRATION_20260914` returned from
+`/root/folr_augmentation_b01_integration`. It started at card/source8d219f4;
+documentation-only advancement to4ec6086f56f13ca7d0e9fbddbbaebd761405ff25
+did not overlap its five owned files. DM read every changed/new source and test
+file in full. The batch adds learner, complete two-arm runner, primary publication
+and integration tests, plus the accepted actor's explicit arm identity. Existing
+model math/tests and prior attempt paths remain unchanged.
+
+The returned focused synthetic CPU suite completed11 tests in6.08s under the
+configured local scientific Python. It exercises fresh constructor/RNG/mixer
+alignment, independent target and optimizer ownership, an actual synthetic
+recurrent update/checkpoint, endpoint/strict-MEI handling and complete runner
+control flow with fake environment/collector. It is not a native performance
+result. Creator verified and removed its exact invocation-owned temp scratch.
+DM inspected the real diff and successful check evidence; no unchanged suite
+was repeated. Reported added non-test scope is327 lines, runner209, scope:none.
+
+The implementation is published for independent full-path Sol/high review against
+4ec6086f56f13ca7d0e9fbddbbaebd761405ff25. Required review includes inherited
+update/save/collector consumers, fixed exposure/RNG and final-checkpoint identity,
+complete/incomplete result handling, primary and exact proposed launch argv.
+Review findings and DM technical acceptance remain pending. No B01 result-bearing
+invocation, remote process or monitor adoption has occurred.
+
+### Exact remote launch preparation
+
+DM prepares the two12-line shell invocations in
+`../../entity_history_augmentation_b01_781601/GENERIC.sh` and `AUGMENTED.sh`,
+reusing the previously executed native time/admission wrapper. This scoped support
+adds24 non-test lines (351 with the327-line integration). Each accepts exact
+source SHA, detached checkout and a new output directory; A also accepts the G
+summary path. External control verifies the committed source and unused handle/output
+before one supervisor submission. Its adjacent committed memory preflight must
+pass the existing physical/effective4GiB floor before the runner begins.
+
+The outer native time process covers admission, initialization, training, checkpoint,
+final evaluation, JSON write/readback and process exit. It publishes elapsed wall,
+aggregate user/system CPU, maximum resident KiB and exit code. Runner-internal
+wall/CPU fields are pre-publication snapshots and are not the complete-invocation
+measure. The summary itself is not silently relabeled. No elapsed watchdog is
+selected for this finite5000/128 object; the native monitor observes progress and
+reports concrete failure or exceeded ordinary plan for DM investigation without
+automatic stop/retry. Scientific endpoints and one-arm-at-a-time remain fixed.
+
+The full-path independent Reviewer receives these exact scripts and updated source
+identity in the same bounded review. A final launch SHA/path is recorded after
+review resolution and acceptance, before result-bearing execution. No remote
+worktree or selected-arm process has been created during this preparation.
+
+Review dispatch: native `/root/folr_augmentation_b01_review`, Sol/high, independent
+minimal context, event `FOLR_AUGMENTATION_B01_INTEGRATION_20260914_REVIEW_01`,
+reviews cf1efd77ce5c38a33a1d1d283922bc3f13208c7b plus the exact launch scripts at
+e218a89096b14331b783e7544503210e74be0f89 against4ec6086. It returns directly to
+this original independent DM App task. No Implementer remains active; DM retains
+review consequence and exact-source execution. Actual shell counts are12+12,
+correcting the initial prose count without changing source or scientific work.
