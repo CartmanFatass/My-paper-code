@@ -103,3 +103,38 @@ the already applied Portfolio CONTINUE, not a new lifecycle or budget approval.
 Next: publish exact source, create its named detached remote execution worktree,
 take actual-node admission, start one supervisor handle and secure native monitor
 adoption. No native invocation has started at this acceptance boundary.
+
+## Actual published source, admission and launch
+
+Frozen source and command:390aa2711245a10c13af7fbd0d1a24ff3237d5da, pushed to
+origin/codex/mgtap. Main integration9437e2f6361acc2b67e94834bea273f0ef103748 and
+status/new-card record8cecc6df33c69a59277cca7594149244420f51ee followed; P2 owner
+item20260914-mgtap-002 is asynchronous, not permission to be awaited. The prepared
+state transaction briefly retained its own writer after parsing item.py's plain
+returned path as JSON; the same created item/transaction was reconciled and closed,
+without duplicate item, repeated integration or changes to peer direction fields.
+
+Remote materialization used configured zsh -lic for network/lazy-clone operations.
+Exact new path was absent before creation; detached HEAD now equals the frozen
+source, worktree status is clean and bash -n of COMMAND.sh passed. Noninteractive
+zsh prompt-component warnings did not alter exit0 or scientific source. No native
+smoke or extra learner invocation occurred. Supervisor exact handle was not_found.
+
+DM issued one agent-task run of the committed absolute COMMAND.sh. It was accepted
+at2026-09-14T19:57:46Z as mgtap-fixed-lr-b01-8253-20260914, PID3681084, running,
+tmux_active=true and exit_code=null. Fresh adjacent memory admission assessed at
+19:57:46.134864Z passed physical AND effective15048974336 available bytes against
+4294967296 required, no failure reasons. The cgroup fields were null, not measured
+zeros; source /proc/meminfo. Direct19:58:17Z status remained running at31s uptime.
+This is actual invocation/admission, not completion or new empirical polarity.
+
+Fresh-batch native Luna/low /root/mgtap_fixed_lr_8253_monitor received the accepted
+handle by MONITOR_ADD. Its initial no-handle child final preceded assignment and
+did not adopt anything. Direct adoption event
+adopt-mgtap-fixed-lr-b01-8253-20260914-20260914T195814Z was received from App backing
+01a0a17f-202c-7f81-a185-d523c0d5e1bb; original19:58:14Z receipt preserves its limited
+PID observation and absent guessed status.json. DM supplied the supported exact
+agent-task status CLI and already directly verified current19:58:17Z running facts;
+same monitor continues at45s intervals with actual UTC, no stop/retry authority.
+Local output/MONITOR.json records observation/delivery. DM ends routine polling;
+collection/acceptance remain DM-owned. Independent code Reviewer batch is complete.
