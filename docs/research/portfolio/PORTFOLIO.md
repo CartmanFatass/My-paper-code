@@ -9,7 +9,7 @@
 
 | 方向 | 已知科学位置 | 当前工作与席位 |
 | --- | --- | --- |
-| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B13 实际学习 G_U=+0.072437，nearest 收益+0.154964，greedy 对比-0.019784；先验强度学到1.211991，modal 与 greedy 全512行测量相同，恢复取舍和 B11 缺失保留。 | 占用1席，前次完整 Portfolio CONTINUE 已实际执行为 B13：1,024更新/4,358,144ticks，完整命令163.92s、exit0。291行完整独立审阅已读并实质回应，未发现已证实的失效缺陷。[当前方向报告](../candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md)建议可逆 PARK，并将一个同法则新独立实例列为接近的反方案；仅为建议，未PARK/CLOSE/释放席位。待前序MGTAP会话实际释放后提交新报告。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B13 实际学习 G_U=+0.072437，nearest 收益+0.154964，greedy 对比-0.019784；先验强度学到1.211991，modal 与 greedy 全512行测量相同，恢复取舍和 B11 缺失保留。 | 占用1席，前次完整 Portfolio CONTINUE 已实际执行为 B13：1,024更新/4,358,144ticks，完整命令163.92s、exit0。291行完整独立审阅已读并实质回应，未发现已证实的失效缺陷。[当前方向报告](../candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md)建议可逆 PARK，并将一个同法则新独立实例列为接近的反方案；仅为建议，未PARK/CLOSE/释放席位。MGTAP完整决定/应用后已实际释放会话；RCLE完整全局背景与固定全文已派发给现有Transport，实际全文接受和完整答复待核实。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 对称有限选率双方均选1e-4；全新8252主量+0.023704897713093642 J，COND_ABOVE_MEI。一次选择/一对最终训练，历史混合符号和DENSE默认保持；不声称稳定排序或调参收益。 | 占用1席。8拟合/589824ticks/4096Adam已完成，658.02s、exit0。完整166行结果审查和139行Portfolio裁决已读；[全文与DM回应](../candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md)已应用CONTINUE，下一目标为固定1e-4新配对，尚无新卡/seed/native启动。完整归档18522字节及原错误回执保留；实际提问仅标题，模型自行找到固定报告/材料清单。当前会话已释放给下一作者RCLE；三席不变。 |
 | [FOLR](../candidates/vap_folr_core/DIRECTION.md) | B03完整比较Generic4.92594、BANK-1.71078，差值-6.63672；B02差值-4.83086单独保留。两次完整学习与评估实例均偏向Generic，不声称稳定排名或实体历史普遍无用。 | 占用1席，CONTINUE / MEDIUM。两臂均完成5000训练/4969更新/128最终评估，3779.85s完整调用合计；原始证据已保全，终态远端执行副本已清理，无活动native实验。[科研解释与后继方案](../candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md)已写成固定独立审查任务并派发到现有Transport，实际provider接受/完整答复尚待核实；未选择新拟合或PARK。 |
 
@@ -18,7 +18,7 @@
 RCLE/MGTAP/FOLR 归档表已经过期，不能用来判断现在是否“开始后直接结束”。
 
 RCLE B13 完整审查固定于d45d4bc6ea2012b93d1d044402268520be5eea9a，DM 实质回应和后续方向取舍报告见
-998c4dbde11727b2ed26ced1bebaddc60b164c43；此前 E01 审查、前次 CONTINUE 理由及全部反证保留。MGTAP 当前科学卡/重入依据见
+afb647d0ddf7522ad0e0e99162a54403ede21c43；此前 E01 审查、前次 CONTINUE 理由及全部反证保留。MGTAP 当前科学卡/重入依据见
 3594eafe28ed91b2558fcc064e46ea714edd2e1c；FOLR 的完整裁决、修正及实际应用见
 4776103de4f55beaee610c52506112651bfaed04。这里引用已有 DM 结论，不新增跨方向的数值排序。
 

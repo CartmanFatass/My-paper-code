@@ -1,0 +1,24 @@
+{
+  "event": "RCLE_POST_B13_PORTFOLIO_EXACT_DISPATCH_20260914",
+  "utc": "2026-09-14T10:54:56.222206+00:00",
+  "base_head": "03be1bd7b11213070b91d9b6281c9c58279e1dd4",
+  "source_commit": "afb647d0ddf7522ad0e0e99162a54403ede21c43",
+  "main_previous_acceptance": "09cbc498d493be16f2e5b0ee94d6833c4f5e8f8d",
+  "handoff_commit": "383cd3dd298bf8536ad7db3bab86561a3e0fe8e2",
+  "prompt_commit": "17cb06ae3f1922568c5dc5f8af3c711feba5b952",
+  "paths": [
+    "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/DISPATCH.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/GLOBAL_CONTEXT.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/HANDOFF.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/PREDECESSOR_RELEASE.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/PROMPT.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REFERENCE_PUBLICATION.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/SOURCE_MANIFEST.json"
+  ],
+  "peer_directions_and_capacity_preserved": true,
+  "provider_acceptance": "UNCONFIRMED; App delivery only",
+  "portfolio_active_author": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618"
+}
