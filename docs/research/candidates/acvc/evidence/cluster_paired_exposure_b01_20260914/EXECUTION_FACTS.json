@@ -10,7 +10,7 @@
   "output": "/home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914",
   "monitor": "/root/acvc_paired_exposure_b01_monitor",
   "monitor_record": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914_monitor.json",
-  "state": "complete_native_archived_remote_cleanup_done_scientific_review_pending",
+  "state": "native_complete_scientific_review_author_dispatched",
   "scientific_invocations_accepted": 1,
   "planned_command": "/usr/local/bin/agent-task run acvc-paired-exposure-b01-8fd41b61f env HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 bash /home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/experiments/candidates/acvc/cluster_paired_exposure_b01/launch.sh 8fd41b61f3c8d3c70057492a18e619ef0faeda78 /home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914",
   "preparation": {
@@ -75,5 +75,16 @@
     "preservation": "Verified local837148byte original archive ccd9595e4573cc4ece0a9eb45fa408a7ea4f89a53d1a37769b7365eaffb9fb22; both checkpoints inside,13 published text blobs byte-identical. Every remote native/supervisor file matched archive; tracked source clean, no extra untracked files, supervisor terminal.",
     "cleanup_owner": "ACVC DM",
     "no_live_native_handles": true
+  },
+  "scientific_review": {
+    "request_id": "2026-09-14-acvc-cluster-paired-exposure-b01-scientific-review-01",
+    "author_dispatch_at": "2026-09-14T15:28:27Z",
+    "task_sha": "d17e4f4e5f2710c9af157ae42bde98617a600cc0",
+    "handoff_sha": "6b532decfd860b059764dbb36f0cac5c79a2f2b8",
+    "scientific_input_sha": "ae1ec3632fe59312850e912a7e32890295da4425",
+    "transport_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+    "state": "author_dispatched_provider_acceptance_pending",
+    "send_count": null,
+    "dm_observation": "docs/research/candidates/acvc/pro_packets/20260914_cluster_paired_exposure_b01_scientific_review/DM_TRANSPORT_OBSERVATION.json"
   }
 }
