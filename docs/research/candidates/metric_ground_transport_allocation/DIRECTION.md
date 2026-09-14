@@ -14,6 +14,41 @@ a current dispatch route or Portfolio approval requirement.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Owner execution pause — 2026-09-13
+
+OWNER_DIRECT: research is paused at a clean, recoverable boundary. This is an
+execution pause, not scientific PARK/CLOSE or a change to ACTIVE/MEDIUM and the
+DM's last CONTINUE judgment. No new experiment, Pro Send/review request, object
+or successor starts during the pause.
+
+B01 master8241 is complete and archived; its run and design-review producers
+have ended. All three native children (Reviewer, Monitor, Transport) are
+completed. B02 master8242 was selected, implemented, independently reviewed and
+published at 62c89f9ad915542d4006a51936e6ae29114b1c91 before the pause arrived,
+but **no invocation was accepted**, no execution worktree was staged, and no
+new result-review request was authored or sent. There is no in-flight producer
+or observer awaiting a terminal event. Historical uncertain provider metadata
+is retained with its already archived full response, never resent.
+
+Resume only after an explicit owner research-resume instruction, in this same
+DM task and authoring checkout. The entry is the
+[B02 card](MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md) and its
+[accepted engineering record](early_exposure_b02_8242_20260913/ENGINEERING.md).
+Then reconcile current owner instructions and the still-unaccepted exact8242
+identity, finish the fixed-SHA launch binding/staging, and use fresh admission
+before the sole selected run. This is a recovery entry, not automatic dispatch.
+Local archived B01 raw/test/source-bundle duplicates remain under the documented
+runtime deletion restriction; old8231 is untouched. No cleanup workaround or
+scientific extension follows from the pause.
+
+The already assigned non-scientific d2227e4bd control propagation also reached
+its clean boundary: authoring ba0412f36ce6b1b0b182408f8b7ebf9803e0d0bc (pushed)
+and session 9b0946291348bfe19d3d15659b4047b1227687fa (original detached HEAD,
+local). Exactly AGENTS.md, .codex/agents/hmasd-direction-manager.toml and the
+Clerk/Root/sibling operations documents match the published source. No conflict,
+live runtime registry copy, scientific input change, new branch or restart;
+DM TOML parse passed. Actual pause/sync results are sent to Clerk, not Root ACK.
+
 ## DM CONTINUE and early-exposure B — 2026-09-13
 
 Under current AGENTS section2 at main4dfdb5f8f, this DM selects **CONTINUE
