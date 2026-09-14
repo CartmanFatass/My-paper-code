@@ -110,6 +110,16 @@
       }
     }
   },
-  "remote_cleanup": "Pending exact output/archive/source preservation and publication; owner ACVC DM, event accepted archive and complete collection. No live experiment remains.",
-  "preparation_resolution": "Initial non-login fetch eventually returned SSL timeout, no live fetch retained. Non-login worktree lazy-fetch observed83s was terminated and Git removed its own incomplete worktree; both old preparation directories absent. Configured zsh -lic exact-SHA fetch with --refmap= and worktree creation succeeded; shell init warnings did not alter Git/source results. All happened before adjacent admission/sole scientific invocation."
+  "remote_cleanup": "Completed: exact detached worktree absent on disk/from git; supervisor record and staging archive removed only after all files matched the verified locally retained archive and published evidence. See REMOTE_CLEANUP.json. No live native handle.",
+  "preparation_resolution": "Initial non-login fetch eventually returned SSL timeout, no live fetch retained. Non-login worktree lazy-fetch observed83s was terminated and Git removed its own incomplete worktree; both old preparation directories absent. Configured zsh -lic exact-SHA fetch with --refmap= and worktree creation succeeded; shell init warnings did not alter Git/source results. All happened before adjacent admission/sole scientific invocation.",
+  "scientific_review": {
+    "dispatched_at": "2026-09-14T13:28:21Z",
+    "state": "Author App dispatch accepted; actual provider Send/archive await Transport facts",
+    "task_commit": "c15227abeafa0cd58960750c0c9c47223b9d6a9f",
+    "parent_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+    "handoff_commit": "dd9453b9e3570439d93cd72ef65635d4b633d8ea",
+    "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "request_id": "2026-09-14-acvc-cluster-b03-scientific-review-01",
+    "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480"
+  }
 }
