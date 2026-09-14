@@ -9,8 +9,8 @@
   "app_dispatch_result": {
     "threadId": "01a09ea0-4a86-75b0-826d-6f864efa7480"
   },
-  "provider_state": "READY_TO_SEND",
-  "provider_send_count": 0,
+  "provider_state": "WAITING_GENERATION",
+  "provider_send_count": 1,
   "handoff_sha": "597aff262c84cb8a75d96c1537d41b6fbeca9c60",
   "task_sha": "c1bfee94f78ea3f5531e1fd8a95236e4ae58db90",
   "scientific_input_sha": "6f5788081986ee9f5b06bc236d8f6f1497dd7eb2",
@@ -23,14 +23,14 @@
   "prompt_sha256": "f93780a9b55e899514474cf1dfd63f919a275e813b187153551197aeb4d338f6",
   "prompt_terminal_lf": false,
   "scoped_response_path": "docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/archive/RESPONSE.md",
-  "current_provider_observation": "Actual durable queue now binds the correct active r2 HANDOFF,1915-byte exact prompt and current source versions. State/send_count below are observed, not inferred from App dispatch; preserve one dispatch and reconcile any later Send.",
+  "current_provider_observation": "Exact accepted user node captured by Transport; queued prompt digest matches provider user text after removing the UI-only Show more label. One provider Send, zero manual sends. Actual provider is generating; same request observation/archive continues.",
   "prepublication_history": [
     "Initial NOT_PUBLISHED renderer preserved repository/path/SHA mapping but not per-file URLs. First validation expected literal URLs and stopped before any Send. Fresh r2 adds exact immutable URL in each purpose and prospectively moves only response scope; initial sibling retained as UNSENT_DRAFT.",
     "All36 effective source objects and published reachability verified; final rendered mappings/purposes/provenance and caller science matched exactly.",
     "Initial --bind-task-sha used main-located renderer default project rootC:/Projects/HMASD; it rejected authoring TASK outside that root before binding. Exact retry with supported --project-root C:/Projects/HMASD-worktrees/codex-acvc succeeded; TASK unchanged, no provider effect.",
     "Taskc1bfee94f and bound HANDOFF597aff262 pushed; Issue14 freshly OPEN. Main author claim updated to actual r2 before one App dispatch."
   ],
-  "next_action": "Transport reconciles and accepts at most one exact provider Send, observes/archives full result and returns to original DM. Author follows actual full response, material findings and conforming lifecycle application; no automatic scientific successor or PARK.",
+  "next_action": "Observe/archive this same accepted request without another Send. Original DM reads complete verified decision, responds and applies conforming disposition; no new empirical invocation or pre-applied PARK.",
   "decision_state": "Pending actual Portfolio; current CONTINUE/MEDIUM/recasts2 and one occupied slot remain. Owner proposal009 is not an applied PARK.",
   "provider_queue_snapshot": {
     "request_id": "2026-09-14-acvc-post-fixed-c01-direction-decision-01",
@@ -53,12 +53,26 @@
     "provider_model": "GPT-6 Astra",
     "provider_mode": "Pro",
     "archive_destination": "C:/Projects/HMASD-worktrees/codex-acvc/docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/archive",
-    "state": "READY_TO_SEND",
-    "accepted_user_node_id": null,
+    "state": "WAITING_GENERATION",
+    "accepted_user_node_id": "caca35ed-9351-48c7-b8f1-d06f0cb0b955",
     "assistant_node_id": null,
-    "send_count": 0,
+    "send_count": 1,
     "manual_send_count": 0,
-    "next_action": "Open the bound conversation, paste the exact dispatch prompt once, Send once, observe terminal response, and archive the provider receipt and any generated RESPONSE.md."
+    "send_observed_at": "2026-09-14T20:06:55.6280526Z",
+    "accepted_user_raw_innerText_chars": 1926,
+    "accepted_user_prompt_chars_without_ui_suffix": 1915,
+    "accepted_user_prompt_exact_match_without_ui_suffix": true,
+    "accepted_user_ui_suffix": "\\n\\nShow more",
+    "next_action": "Observe the accepted request to terminal completion; do not send, edit, stop, or regenerate."
   },
-  "provider_read_at": "2026-09-14T20:05:47.240596+00:00"
+  "provider_read_at": "2026-09-14T20:08:02.966676+00:00",
+  "provider_observation_history": [
+    {
+      "state": "READY_TO_SEND",
+      "send_count": 0,
+      "read_at": "2026-09-14T20:05:47.240596+00:00"
+    }
+  ],
+  "accepted_user_node_id": "caca35ed-9351-48c7-b8f1-d06f0cb0b955",
+  "send_observed_at": "2026-09-14T20:06:55.6280526Z"
 }
