@@ -1,41 +1,33 @@
 ---
 name: hmasd-loop-dispatch
-description: Use when Clerk processes direction events, records DM lifecycle decisions, integrates accepted work or recovers an unfinished handoff.
+description: "Use when a DM handles a peer event, updates shared coupling records, integrates accepted work or owns a vacancy handoff."
 ---
 
-# HMASD event coordination
+# Peer DM event handling
 
-DM owns its entire direction lifecycle; Clerk coordinates and records; Root is the user entry.
-Portfolio is a report for the user. Read current routes/state from .codex/hmasd-dm-sessions.toml
-and procedure from docs/project/CLERK_OPERATIONS.md. Owner instructions take precedence.
+Portfolio authority: docs/project/PORTFOLIO_DECISION_PROTOCOL.md now controls direction-level
+CONTINUE/RECAST/PARK/CLOSE/reopening. DM owns innovation, experiments, reports and ordinary
+in-scope execution, and submits lifecycle recommendations to Portfolio. No unilateral DM PARK,
+slot release or archival pending that decision. Existing references to DM lifecycle management
+mean proposal, reporting and execution, not final interpretation. Web Portfolio must receive and
+read the protocol's fixed repository context; local conversation/skill inheritance is not assumed.
 
-Native specialists follow SIBLING_COMMUNICATION.md: same work batch may reuse its child;
-independent new batches use new children, default fork_turns=none. The assigning DM determines
-the batch and preserves in-flight work; Clerk coordinates actual conflicts without approval.
-Do not rotate long-lived independent DM tasks, create cache keepalives or resume owner-paused work.
 
-On an actionable event:
-1. Reconcile the actual owner, newest owner boundary and event/evidence revision.
-2. Integrate accepted facts and complete the unfinished consequence; delivered is not applied.
-3. DM independently selects/executes its next bounded object or records continue/defer/PARK/CLOSE/
-   reopen/recast/family/C-promotion. No Portfolio approval; direction Pro Convergence independently reviews science, with DM responses
-   and corrections recorded. Review does not transfer lifecycle authority.
-4. If an ACTIVE DM has neither work nor a decision, return the specific unfinished management
-   question to that DM. Do not demand a Portfolio permission packet, infer a scientific stop or
-   repeat identical reminders indefinitely.
-5. Record the DM's actual lifecycle and next condition. Report vacancies honestly; never
-   automatically send a Portfolio request, create a replacement or revive another direction.
-6. Update the existing user-facing Portfolio report and notify Root of material changes or a
-   concrete user-control exception. Fact-only updates need no ACK. End the handled event turn.
+Read docs/project/PEER_DM_COORDINATION.md and live .codex/hmasd-dm-sessions.toml. Clerk is retired.
+Each DM owns its full direction and records; there is no standing event coordinator. On a real
+event, resolve the exact owner/decision/revision, perform the next authorized consequence and
+update owned fields in the common record. Send only affected peers an actionable App message.
+No ACK, integration or file-list permission gate. Native specialists retain existing batch rules.
 
-Use app messages between independent tasks; final alone is not delivery. Use compact wait_threads
-only for missing progress facts; native children return to their actual DM. Real provider/run/review
-work has an ID, owner and event. Empty intentions do not count as advancing work. An enabled
-50-minute heartbeat is interruption recovery, not a planning trigger.
+A completed object is not a direction stop. DM chooses useful next work or records reasoned
+PARK/CLOSE with knowledge handoff. The departing DM owns vacancy follow-through or transfers it
+to an accepting peer. An orphan vacancy can be claimed by an active DM using the common-record
+transaction before Send. Count occupied plus reserved to three. Fourth-slot stop does not stop
+third-slot replacement. Preserve exact request/full answer and latest PARK reasoning for Portfolio;
+relevant DMs own direct scientific dialogue. Do not recycle unchanged advice through new tasks.
 
-Portfolio consultation/cross-direction adjustment requires an explicit owner request. Reporting
-or advice alone does not authorize implementation. Preserve accepted old request/handle bindings;
-archive pending answers as advice without automatically applying obsolete global dispositions.
-Ordinary direction work continues independently. Root/Clerk cannot make scientific judgments,
-expand resource commitments or impose approval gates. Actual frozen evidence and resource
-constraints remain; a DM can prospectively revise its direction choices with a reasoned new record.
+DM integrates its accepted commits under shared main transaction ownership and preserves others'
+work. Record real pending producers and next owner/action, not empty intentions. Routine results,
+repair, lifecycle and archive events stay in records/direct peer messages, not Root reports.
+Only user-requested reports or a concrete user choice outside delegation reach Root. No new
+polling service, permission tier, automatic scientific verdict or unconfigured heartbeat coverage.

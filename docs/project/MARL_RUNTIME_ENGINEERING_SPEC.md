@@ -21,9 +21,10 @@ results or measured HMASD speedups. Archived draft and historical measurements r
 ## General requirements
 
 OWNER_DIRECT 2026-09-10 prospective responsibility mapping: in the general requirements below,
-CM engineering duties belong to the DM. OWNER_DIRECT 2026-09-12 temporarily assigns all
-implementation and self-checks to DM; semantic/routine implementers are suspended, while independent
-Reviewer review remains required for high-risk changes. AGENTS and ENGINEERING_SCOPE_SPEC §7 control current role and acceptance
+CM engineering duties belong to the DM. OWNER_DIRECT 2026-09-14 permits an optional direct
+Sol/medium Implementer for complete bounded implementation batches; DM retains scientific choices
+and technical acceptance. Independent Sol/high Reviewer coverage remains required for high-risk
+changes; DM may choose Astra for a concrete difficult review. AGENTS and ENGINEERING_SCOPE_SPEC §7 control current role and acceptance
 methods. This mapping changes no scientific requirement, frozen object appendix (including
 VNFC E01), numerical boundary, execution budget or historical assignment.
 

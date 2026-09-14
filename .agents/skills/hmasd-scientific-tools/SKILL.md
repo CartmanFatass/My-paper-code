@@ -9,11 +9,15 @@ Owner approved adoption batches 1 and 2 on 2026-09-05. Use tools to retrieve,
 calculate and measure facts instead of repeatedly deriving them in prose. Select
 only the mode needed now; this is not a launch checklist or new review layer.
 
+DM role/lifecycle entry is hmasd-direction-management. At scientific decisions this skill supplies
+the focused knowledge method; it does not replace direction ownership or justify a stopping label.
+
 - **Scientific reading:** for DM/Claude hub mechanism/card/comparator/estimand choices,
   intake or scientific Pro questions, user-requested Portfolio analysis and DM responses to independent Pro scientific review, and a
   critic's reviewed claim, use [scientific-reading.md](references/scientific-reading.md).
-  During implementation and review, DM and independent Reviewer use this mode for affected reward, information,
-  termination, duration or inference semantics; do not create an Implementer task.
+  During implementation and review, DM, assigned Implementer and independent Reviewer use this mode for affected reward, information,
+  termination, duration or inference semantics. DM may delegate implementation under scope-spec §7;
+  scientific decisions remain with DM.
   Start from the current assignment and relevant spec sections.
   Formatting, Git, receipts and accepted technical collection do not trigger this mode.
 - **DM/Root literature:** for a concrete mechanism, comparator, unexpected-result or
@@ -57,7 +61,7 @@ New tools do not authorize new arms, altered reward/information or changed dtype
 
 Keep compact tool-produced tables/timings and relevant source snippets in the normal
 intake/engineering record. DM owns scientific decisions and responds to independent Pro review;
-Clerk records outcomes and the user controls cross-direction adjustments. Reviewers name
+Each DM records its outcomes under peer coordination; the user controls other cross-direction adjustments. Reviewers name
 concrete risks to actual measurements. Do not add generic power, normality, p-value,
 exactness or all-seeds-positive prerequisites. One seed remains a local observation.
 
