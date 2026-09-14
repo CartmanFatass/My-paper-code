@@ -10,7 +10,7 @@
   "output": "/home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914",
   "monitor": "/root/acvc_paired_exposure_b01_monitor",
   "monitor_record": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914_monitor.json",
-  "state": "accepted_pending_monitor_adoption",
+  "state": "accepted_adopted_monitor_resumed",
   "scientific_invocations_accepted": 1,
   "planned_command": "/usr/local/bin/agent-task run acvc-paired-exposure-b01-8fd41b61f env HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 bash /home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/experiments/candidates/acvc/cluster_paired_exposure_b01/launch.sh 8fd41b61f3c8d3c70057492a18e619ef0faeda78 /home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914",
   "preparation": {
@@ -20,5 +20,29 @@
     "shell_startup_warnings": "Configured zsh emitted zle/monitor/gitstatus initialization warnings; fetch/worktree commands succeeded with exit0 and full SHA/launcher digest verified."
   },
   "supervisor_acceptance": "Original agent-task run returned exit0 and task started in tmux agent_acvc-paired-exposure-b01-8fd41b61f; no retry",
-  "monitor_metadata": "Preparation-only attempted App route incorrectly included prose prefix App and was rejected. Actual MONITOR_ADD supplies literal parent UUID and corrects routing; no native effect or duplicate observer/launch."
+  "monitor_metadata": "Preparation App-route attempt incorrectly included prose prefix App and was rejected before delivery; literal UUID corrected. First adoption notice used00:00 placeholder, superseded by actual direct query2026-09-14T15:11:48.9306632Z, running pid3672959. Child then prematurely returned final while running; DM immediately resumed same child/handle and explicitly required real observation until terminal. No background coverage is claimed between ended turns, no duplicate run or observer. All earlier erroneous notices retained as operational metadata.",
+  "pid": 3672959,
+  "adoption_event": "ACVC_CLUSTER_PAIRED_EXPOSURE_B01/MONITOR_ADOPTED_CORRECTION",
+  "observation": {
+    "at": "2026-09-14T15:11:48.9306632Z",
+    "state": "running",
+    "tmux_active": true,
+    "exit_code": null
+  },
+  "admission": {
+    "assessed_at": "2026-09-14T15:10:31.646436Z",
+    "available_physical_bytes": 15632191488,
+    "captured_at": "2026-09-14T15:10:31.646174Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15632191488,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  }
 }
