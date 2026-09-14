@@ -1,0 +1,24 @@
+{
+  "object": "ACVC_CLUSTER_DEPLOYMENT_B03",
+  "source_sha": "091c6725b149cd2dfa9665408cabee17b8f958e3",
+  "author_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "node": "hmasd-wsl-node",
+  "handle": "acvc-cluster-b03-091c6725b",
+  "remote_cwd": "/home/wu/hmasd-worktrees/acvc-cluster-b03-091c6725b",
+  "remote_output": "/home/wu/hmasd-worktrees/acvc-cluster-b03-091c6725b/temp/directions/acvc/exp/cluster_deployment_b03_20260914",
+  "supervisor": "/usr/local/bin/agent-task",
+  "supervisor_record": "/home/wu/.agent-tasks/acvc-cluster-b03-091c6725b",
+  "planned_command": "/usr/local/bin/agent-task run acvc-cluster-b03-091c6725b env HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 bash /home/wu/hmasd-worktrees/acvc-cluster-b03-091c6725b/experiments/candidates/acvc/cluster_deployment_b03/launch.sh 091c6725b149cd2dfa9665408cabee17b8f958e3 /home/wu/hmasd-worktrees/acvc-cluster-b03-091c6725b/temp/directions/acvc/exp/cluster_deployment_b03_20260914",
+  "monitor": "/root/acvc_b03_monitor",
+  "launch_state": "planned_not_submitted",
+  "retained_source": "Remote detached worktree HEAD and corrected launch SHA256 verified; bash syntax passed. Configured zsh login shell used for lazy-fetching worktree creation after non-login preparation was terminated. No actual scientific admission/invocation yet.",
+  "watchdogs_s": {
+    "inner": 1800,
+    "kill_grace": 10,
+    "outer": 1860
+  },
+  "scientific_invocations_selected": 1,
+  "native_planning_estimate_s": 300,
+  "support_planning_estimate_s": 1200,
+  "cost_coverage": "Plans are prospectively revisable; full preparation/provider/agent/support cost UNKNOWN. Earlier own non-login fetch and worktree lazy-fetch stalls retained as preparation failures, no scientific invocation."
+}
