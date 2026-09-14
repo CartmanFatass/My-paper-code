@@ -1,10 +1,10 @@
 # LCAC — learned counterfactual agent credit
 
-## Current position — B01 reviewed; B02 selected, 2026-09-14
+## Current position — B01 reviewed; B02 running, 2026-09-14
 
 **CONTINUE; recasts0.** [B01 result](LCAC_B01_RESULT_EVIDENCE_20260914.md): one256/32 master9411 pair, Q−V=−0.00362643, V0.18068077/Q0.17705434,16/32 adverse worlds; all147,456 native ticks/1,024 Adam calls completed. Complete wall129.80s; peak RSS556.56MiB. Both learners changed every rollout. This is a small negative within-MEI finite-package observation, not equivalence, stable superiority, training-population inference or causal credit.
 
-[DM intake](LCAC_B01_INTAKE_20260914.md#final-independent-review-and-dm-decision) records full independent review and substantive response. DM selects one new [1024/32 B02](LCAC_B02_SCIENCE_CARD_20260914.md), master9412, disjoint final resets, unchanged algorithms. The close-call later-budget choice replaces the working short-replication preference for explicit scientific reasons; no causal duration effect or B01 revision follows. Next action is focused entry/seed-binding implementation/review, exact-source remote execution and intake; B02 exposure0 before launch. Current routes/slots belong to the live registry and Clerk; historical ownership language below is not a dispatch route.
+[DM intake](LCAC_B01_INTAKE_20260914.md#final-independent-review-and-dm-decision) records full independent review and substantive response. DM selects one new [1024/32 B02](LCAC_B02_SCIENCE_CARD_20260914.md), master9412, disjoint final resets, unchanged algorithms. The close-call later-budget choice replaces the working short-replication preference for explicit scientific reasons; no causal duration effect or B01 revision follows. Focused implementation/review passed, and DM accepted source25ea4d61c0e1f2484da77f4bc1851e17cdc8eb4a. B02 is running onwsl_4070 under lcac-b02-s9412-25ea4d61-20260914, launched2026-09-14T04:07:01Z; native Monitor /root/lcac_b02_monitor adopted the exact live handle. Endpoint counts remain planned until terminal collection. DM owns collection, interpretation and next decision. Current routes/slots belong to the live registry and Clerk; historical ownership language below is not a dispatch route.
 
 ## Historical accepted registration — 2026-09-12
 
