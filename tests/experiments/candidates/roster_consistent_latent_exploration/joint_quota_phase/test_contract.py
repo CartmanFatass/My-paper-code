@@ -1,4 +1,4 @@
-"""TEST-only fixtures for B08 through B11 public phase, learner and publication."""
+"""TEST-only fixtures for B08 through B12 public phase, learner and publication."""
 from dataclasses import replace
 from types import SimpleNamespace
 import hashlib
@@ -216,29 +216,34 @@ def test_b09_fresh_identity_rejects_crossed_seed_before_scientific_construction(
     assert 'no_positive_own_initialization_learning' not in flags
 
 
-def test_b10_b11_and_legacy_entries_bind_only_their_fixed_identity_and_endpoint(tmp_path, monkeypatch):
+def test_b10_b12_and_legacy_entries_bind_only_their_fixed_identity_and_endpoint(tmp_path, monkeypatch):
     calls = []
     monkeypatch.setattr(study, '_run', lambda *args: calls.append(args))
     study.run(tmp_path, 'TEST', 28)
     study.run(tmp_path, 'TEST', 29, greedy_anchored=True)
     study.run_exposure1024(tmp_path, 'TEST', 30)
     study.run_replication1024(tmp_path, 'TEST', 31)
+    study.run_b12_exposure1024(tmp_path, 'TEST', 32)
     assert [c[2:] for c in calls] == [
         (28, study.OBJECT, 256, False), (29, study.B09_OBJECT, 256, True),
-        (30, study.B10_OBJECT, 1024, True), (31, study.B11_OBJECT, 1024, True)]
+        (30, study.B10_OBJECT, 1024, True), (31, study.B11_OBJECT, 1024, True),
+        (32, study.B12_OBJECT, 1024, True)]
     with pytest.raises(ValueError, match='seed must match'):
         study.run_exposure1024(tmp_path, 'TEST', 29)
     with pytest.raises(ValueError, match='seed must match'):
         study.run_replication1024(tmp_path, 'TEST', 30)
-    assert len(calls) == 4
-    assert study.B11_OBJECT != study.B10_OBJECT
+    with pytest.raises(ValueError, match='seed must match'):
+        study.run_b12_exposure1024(tmp_path, 'TEST', 31)
+    assert len(calls) == 5
+    assert len({study.B10_OBJECT, study.B11_OBJECT, study.B12_OBJECT}) == 3
 
 
 @pytest.mark.parametrize('entry,seed,object_id', [
     (study.run_exposure1024, 30, study.B10_OBJECT),
     (study.run_replication1024, 31, study.B11_OBJECT),
+    (study.run_b12_exposure1024, 32, study.B12_OBJECT),
 ])
-def test_b10_b11_synthetic_driver_reaches1024_and_publishes_the_actual_final_role(
+def test_b10_b12_synthetic_driver_reaches1024_and_publishes_the_actual_final_role(
         tmp_path, monkeypatch, entry, seed, object_id):
     # Wiring fixture only: no native environment, real scientific master or learning.
     original_sha256 = hashlib.sha256

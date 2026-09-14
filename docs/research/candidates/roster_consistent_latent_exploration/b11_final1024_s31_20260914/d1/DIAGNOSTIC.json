@@ -1,0 +1,9 @@
+{
+  "diagnostic": "SYNTHETIC-D1",
+  "status": "COMPLETED_WITHOUT_REPRODUCTION",
+  "updates": 192,
+  "training_episodes": 12288,
+  "native_ticks": 786432,
+  "scientific_results": false,
+  "limitation": "One synthetic diagnostic does not establish B11 validity or runtime safety."
+}
