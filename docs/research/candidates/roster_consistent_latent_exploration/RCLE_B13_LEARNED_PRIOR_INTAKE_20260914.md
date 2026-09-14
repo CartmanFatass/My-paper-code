@@ -1,16 +1,15 @@
 # B13 intake — learning observed, greedy increment not observed
 
-Current review state: complete independent result review read and substantively answered below.
-The complete direction report and exact23,431-byte Portfolio request are published and dispatched
-to registered Transport. Its complete accepted user-node content has been verified by Transport
-with rendering-only whitespace differences; the one Portfolio answer is generating. No new
-PARK/CLOSE, fit or slot release is applied.
+Current state: the complete B13 result review and DM response are finished. Portfolio has
+returned its full post-B13 decision; DM read, verified, responded and applies reversible PARK
+of current direction development. The [full Portfolio intake](pro_packets/20260914_post_b13_portfolio_direction/INTAKE.md)
+and [PARK knowledge](PARK.md) preserve the close fresh-instance alternative. No new fit, CLOSE,
+RECAST, historical rewrite or support-based stop follows. Actual slot/capacity handling is in
+the shared registry; RCLE DM retains the resulting vacancy and record-only closeout responsibility.
 
-The complete B13 invocation answers the concrete objective selected by the full Portfolio
-CONTINUE. The package learned from its own initialization and beat nearest, while sampled
-service/full-Y still trailed greedy and all measured modal/greedy outcomes tied. This is a
-new finite learned-package result, not a reason to erase learning, declare unlearnability,
-or close the direction automatically. RCLE remains ACTIVE under the applied CONTINUE.
+The selected prior CONTINUE was actually fulfilled by the complete B13 programme below. Its
+real learning, adverse greedy comparison, conditional uncertainty and mixed recovery remain
+unchanged; subsequent direction valuation does not change the result's validity or polarity.
 
 ## Technical acceptance and actual execution
 
@@ -262,3 +261,7 @@ Request2026-09-14-rcle-post-b13-direction-decision-01 has final full prompt17cb0
 ### Complete accepted request verified —2026-09-14
 
 Registered Transport returned the actual post-Send readback for userbf84ddba-6465-44c7-8ce4-237e60d26c8c: all non-whitespace content of the23431-character bound prompt matches. The observed body23294characters/23305including Show more differs only through rendered whitespace and UI controls; raw innerText SHA2565d67ac93cf0f1248106f3bd30a2a329366358139718206398f700e36a8910938 is retained separately from the source hash. This is an attributed actual DOM check, not a byte-exact server-envelope claim. See pro_packets/20260914_post_b13_portfolio_direction/ACCEPTED_INPUT_VERIFICATION.json. One Send, no regeneration or resend; Transport continues direct observation to the full final answer. Partial reasoning is not a disposition.
+
+### Complete Portfolio direction decision applied —2026-09-14
+
+Full answer at 05e1fcb7052efd7a11010936105c87f6071e3c6f is151lines/20289bytes/SHA2567ea74e98cdff648cf11cbf84ee907056241ee6b6befddf9f349031f251c63780. DM checked exact original capture, read toEOF, replied substantively in the linked full Portfolio intake and applies reversiblePARK under PRO_FINAL / OWNER_DELEGATED. Same-law fresh fit remains close and informative but is not selected now. No new native work is needed for closure; knowledge/assets and current active peer work are preserved. Actual slot release and the one resulting vacancy transaction are performed under the main shared mutex after publication, not inferred merely from this paragraph.
