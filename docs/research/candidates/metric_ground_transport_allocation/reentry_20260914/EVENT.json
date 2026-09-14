@@ -24,10 +24,15 @@
     "use_existing_reservation": true,
     "vacancy_source": "LCAC_B03_PARK",
     "requested_occupies_slot": true,
-    "occupied_before": 2,
-    "reserved_before": 1,
-    "occupied_after": 3,
-    "reserved_after": 0,
+    "occupancy_delta_for_mgtap": 1,
+    "reservation_delta_for_same_request": -1,
+    "planning_snapshot": {
+      "occupied_before": 2,
+      "reserved_before": 1,
+      "occupied_after_if_other_directions_unchanged": 3,
+      "reserved_after": 0
+    },
+    "application_rule": "Convert only the existing MGTAP reservation; recount live totals and never override another direction's newer lifecycle.",
     "registry_writer_task_id": "01a09d6c-e4e0-7613-ba99-7b0a1b6c540e",
     "registry_write_performed_by_dm": false
   },

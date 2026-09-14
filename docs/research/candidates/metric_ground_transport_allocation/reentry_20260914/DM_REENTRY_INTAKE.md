@@ -54,8 +54,10 @@ toy 不是原生失败原因的证据，三点学习率选择也不是所有 B �
 
 这是实际方向内实现工作，不止资料阅读或重入意向；因此 DM 的生命周期决定已经是
 CONTINUE，应将同一预留转换为 MGTAP 实际占槽。main registry 由 Clerk 集成，
-本 DM 不直接修改 main，也不冒称它已经应用。RCLE/FOLR 不变，转换为
-occupied=3、reserved=0，不增加第四方向。
+本 DM 不直接修改 main。此事件只使 MGTAP 占位+1、同请求预留−1，
+不得覆盖其他方向较新的生命周期；最初的2→3是当时快照，不是强制总数。
+后续已观察到 Clerk 应用本方向占位，同时 FOLR 已 PARK，见
+[容量与运输路由补记](CAPACITY_AND_TRANSPORT_UPDATE.md)。不增加第四方向。
 
 当前没有新原生拟合、评估、实验进程、Monitor 或 Transport。
 新 B 的完整 runner、针对改变行为的独立审查、实际节点准入和启动尚未完成，

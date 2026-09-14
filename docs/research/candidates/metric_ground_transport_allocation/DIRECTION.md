@@ -13,8 +13,11 @@ launched. This is actual implementation work, not a request for another dispatch
 [DM reentry intake](reentry_20260914/DM_REENTRY_INTAKE.md) answers both full
 user-delivered Portfolio texts and preserves the strongest continued-PARK case.
 [The integration event](reentry_20260914/EVENT.json) asks the live Clerk to convert
-the same reservation into occupancy: RCLE/FOLR unchanged, occupied3/reserved0,
-no fourth direction. Main registry application is not claimed before its receipt.
+the same reservation into occupancy, changing only MGTAP (+1 occupied/-1 reserved).
+The initial2→3 totals were a planning snapshot, not an instruction to overwrite
+other directions' newer lifecycle decisions. The later live registry shows MGTAP
+occupied and FOLR PARK; [the update](reentry_20260914/CAPACITY_AND_TRANSPORT_UPDATE.md)
+preserves that distinction. No fourth direction is created.
 No new Portfolio request, old experiment restart or parallel DM is selected.
 
 DENSE remains the generic default; no new empirical advantage is claimed.
