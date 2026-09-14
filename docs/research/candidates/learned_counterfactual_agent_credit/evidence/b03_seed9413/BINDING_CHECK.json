@@ -1,0 +1,36 @@
+{
+  "check": "single import/AST/normalized-source/range/count check; no main/native/torch invocation",
+  "passed": true,
+  "plan": {
+    "seed": 9413,
+    "train_episodes": 1024,
+    "eval_episodes": 32,
+    "eval_reset_offset": 3000,
+    "object_id": "LCAC_B03_1024",
+    "card_path": "docs/research/candidates/learned_counterfactual_agent_credit/LCAC_B03_SCIENCE_CARD_20260914.md"
+  },
+  "old_b02_byte_equal_to_25ea": true,
+  "protected_sources_byte_equal": true,
+  "normalized_new_entry_matches_old": true,
+  "run_pair_passthrough": true,
+  "training_reset_range": [
+    941301000,
+    941302023
+  ],
+  "final_reset_range": [
+    941303000,
+    941303031
+  ],
+  "disjoint": true,
+  "counts": {
+    "pair_episodes": 2112,
+    "pair_native_ticks": 540672,
+    "pair_adam_calls": 4096,
+    "q_baseline_rows": 9175040,
+    "total_factual_fit_rows": 2097152
+  },
+  "script_sha256": "4075ddf6b483e68def97a2cbb644ca12097098896396d2d8cd9851e8b7ac7df4",
+  "wall_seconds": 0.3127138999989256,
+  "native_exposure": 0,
+  "scratch": "none created"
+}
