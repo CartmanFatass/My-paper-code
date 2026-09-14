@@ -145,8 +145,13 @@ def validate(request: dict, project_root: Path, *, frozen_routing: bool = False)
             raise ValueError("provider_context_reset_evidence requires reset_invalid_provider_context=true")
         provider_context_reset_evidence = None
     decision_authority = request.get("decision_authority")
-    if decision_authority != "pro_final":
-        raise ValueError("decision_authority must be pro_final for a Pro decision node")
+    expected_authority = (
+        "owner_requested_advice" if workflow_node == "portfolio_decision"
+        else "dm_owned_scientific_review"
+    )
+    # Preserve frozen legacy requests without granting their old authority to new work.
+    if decision_authority not in {"pro_final", expected_authority}:
+        raise ValueError(f"decision_authority must be {expected_authority} (or frozen legacy pro_final)")
 
     prompt = request.get("prompt")
     prompt_path_value = request.get("prompt_path")

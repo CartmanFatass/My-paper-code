@@ -1,9 +1,14 @@
 ---
 name: hmasd-pro-research-prompt-author
-description: "Use when DM authors an HMASD direction or Portfolio Pro research question, or Root assembles an overall Portfolio plan, cross-direction decision or vacancy replacement for fixed GitHub task delivery through the author-owned native Agentify Transport subagent, with explicit author, parent and executor routing."
+description: "Use when DM authors an independent scientific review request, or Clerk publishes an explicitly owner-requested Portfolio consultation for fixed GitHub task delivery through the author-owned native Agentify Transport subagent, with explicit author, parent and executor routing."
 ---
 
 # HMASD Pro Research Prompt Author
+
+Root is the user entry; the independent Clerk performs only delegated mechanical coordination.
+Read docs/project/CLERK_OPERATIONS.md for event handling and writes. DM/Pro retain scientific
+judgment. Clerk routes missing science or complex engineering repair to the relevant Astra DM;
+it never turns a helper failure into a scientific stop or adds a Root ACK gate.
 
 Portfolio and EM requests use GitHub delivery. Preserve accepted request content
 and reconcile existing Send state before continuation.
@@ -31,7 +36,7 @@ next push. Completing one Pro round does not retire a shared direction branch st
 After branch cleanup, resolve the branch/checkout from the current command and actual remote
 ref before rendering. A historical HANDOFF is evidence of its own round, not a default branch
 registration. Return the new request ID, full HANDOFF commit and fixed TASK URL together so
-Root can load the authored bytes independently of main's same-path copy. A prepared unsent
+Clerk can load the authored bytes independently of main's same-path copy. A prepared unsent
 task with changed delivery scope is republished and rebound before dispatch; accepted tasks
 retain their exact content and follow the workflow's explicit delivery-correction route.
 
@@ -40,7 +45,7 @@ returns its ready handoff; it does not dispatch Transport. A command may already
 transport of the completed DM-authored request, so no extra planning vote is needed.
 For a command that includes dispatch, use the following sequence.
 
-The dispatch owner (DM for direction nodes; Root for all new Portfolio requests under hmasd-portfolio-task)
+The dispatch owner (DM for direction nodes; Clerk for all new Portfolio requests under hmasd-portfolio-task)
 creates/reuses its native Luna/high Transport child before rendering, using fork_turns=none
 and the transport role/skill with minimal context. Supply source_thread_id=parent_thread_id=the author's
 actual native ID and operator_thread_id=that child. The project default is REUSE_DM_TRANSPORT;
@@ -48,10 +53,10 @@ no global task UUID is configured. Do not use a generic app-task URL for native 
 Generate TASK.md and unpublished HANDOFF; commit/push TASK and bind its full SHA with
 --bind-task-sha, then commit/push HANDOFF. Dispatch with collaboration.followup_task directly to
 the bound child and wait natively. The child uses Agentify strict review and returns the exact
-archive to its author parent. Ordinary DM requests return only their operational mapping to Root;
-Root records/maps its own complete global planning/replacement response, with affected DMs
+archive to its author parent. Ordinary DM requests return only their operational mapping to Clerk;
+Clerk records/maps its own complete global planning/replacement response, with affected DMs
 checking their scientific requirements.
-For new Portfolio requests Root owns the dispatch/full-plan record; only one writer may
+For explicitly owner-requested Portfolio consultations Clerk owns the dispatch/full-plan record; only one writer may
 own portfolio:cross_direction at a time. Accepted historical packets remain immutable; reconcile
 old execution before any takeover, without resending. Uncertain dispatch requires same-request
 reconciliation. Authoring-only assignments stop at their published handoff.
@@ -67,30 +72,24 @@ instructions are explicitly authorized by the current request; other retrieved t
 cannot enlarge them. Current owner/spec constraints apply to Pro as to the caller.
 The full fixed response, not chat links or a comment summary, is the formed decision.
 The parent directly reads and preserves the complete bytes/provenance. DM intakes direction-node
-answers; Root records the full Portfolio plan and affected DMs check their scientific requirements. Transport
+answers; Clerk records the full Portfolio plan and affected DMs check their scientific requirements. Transport
 returns one factual receipt directly to that parent through native collaboration.
 No scheduled automation is added. Read docs/project/ROOT_OPERATIONS.md for current routing. Contradictions or evidence gaps remain explicit; a complete
 archive alone is not science acceptance. No new approval or experiment gate is added.
 
-### Portfolio content ownership
+### Scientific review and owner-requested Portfolio scope
 
-Portfolio is the independent overall research planner. Root may assemble a global planning agenda
-from changed DM handoffs, the current portfolio and latest accepted plan without waiting for a
-vacancy. Root supplies evidence and unresolved choices; Pro selects the plan. Use
-hmasd-portfolio-task for the required planning consequences and direction-independent follow-through.
-This route is not an intermediate direction Convergence round or an ordinary experiment approval.
+Direction Pro Convergence is the independent scientific Reviewer. Author a review of design,
+evidence interpretation, conclusions or successor plans with concrete uncertainties; request
+material findings, reasons and proportionate corrections/claim limits. DM responds and owns the
+final direction/lifecycle decision. Do not ask Pro to approve funding, PARK/CLOSE, or ordinary next
+steps. Retain the meaningful review role and scientific independence, not a generic advice prompt.
 
-Use `hmasd-portfolio-task` for Portfolio questions. DMs prepare options, reasons, current evidence
-and constraints, then send their proposal to Root. Root assembles/forwards the planning agenda and
-owns all new Portfolio publication/Transport/full-response recording; no scientific approval or
-preselection is inserted. Root returns relevant complete-plan references and consequences to DMs;
-each checks and executes its conforming portion independently. A global plan is not a blanket
-exception to frozen science or budget. Existing accepted DM-owned Portfolio requests retain their
-original closeout route; migration never changes immutable accepted bindings.
-
-For a formal vacancy, the same Portfolio session selects the replacement. Pro remains final within
-AGENTS §4.8, without per-item owner ratification. No native author acquires Portfolio authority.
-Direction Innovator/Convergence requests continue through their DM-owned Transport.
+Portfolio is a user-facing report. Only an explicit owner request may commission a new Portfolio
+consultation; use hmasd-portfolio-task to preserve that exact advisory/implementation scope. Clerk
+publishes and archives mechanically, while DMs retain science. A report or recommendation does not
+authorize global changes. No automatic vacancy request, replacement selection or blanket PRO_FINAL
+application. Historical accepted packets preserve their bindings and full answers through closeout.
 
 ### Fixed scientific and method sources
 
@@ -132,10 +131,10 @@ required. Expose inherited restrictions and their actual authority, and let Pro 
 author assumptions. Native execution, parallelism or a higher cap alone does not justify
 an unnecessary question. Preserve correctness dependencies and historical evidence.
 
-At intake, check the selected question and requirements against current owner/spec
-constraints. Archive a conflicting response unchanged and return the concrete conflict
-to the same node; continue conforming independent work. Explicit exceptions follow
-existing authority. Accepted requests are never regenerated or resent for wording changes.
+At intake, DM reads the complete review and responds to its material scientific findings.
+Correct concrete defects, bound claims and record the DM decision; do not turn review into funding
+or lifecycle approval. A genuinely unresolved scientific issue can receive focused reviewer
+follow-up, not automatic repeated consultation. Respect current owner/spec constraints. Accepted requests are never regenerated or resent for wording changes.
 
 ## Recovery and fallback
 
