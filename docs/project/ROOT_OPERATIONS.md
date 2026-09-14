@@ -10,7 +10,7 @@ Root is the user's workflow entry: apply owner instructions, resolve workflow ex
 shared control-plane engineering. Clerk is the independent Luna/high coordinator and recorder under
 [Clerk operations](CLERK_OPERATIONS.md). Each independent Astra/max DM owns its entire direction:
 research plan, scientific choices, implementation, proportionate review, execution, intake and
-lifecycle. Portfolio is the user-facing overall report, not an approval or automatic planning node.
+lifecycle. Portfolio supplies user reports and scoped vacancy selection, not ordinary research approval.
 
 An operational exception is first owned by the relevant DM, with Clerk coordinating affected
 tasks. Shared browsers, connection repairs, occupancy discovery, missing receipts and operation
@@ -62,18 +62,19 @@ universal per-step Portfolio permission requirement.
 
 Clerk records and integrates DM outcomes, resolves mechanical resource/order conflicts and reports
 actual occupancy versus work. DM PARK/CLOSE releases its occupied execution slot after live work is
-safely reconciled. Clerk reports the vacancy; it does not automatically ask Portfolio, create a
-replacement or revive another direction. Existing directions continue independently. New direction
-admission and cross-direction reallocation follow an explicit owner adjustment instruction.
+safely reconciled. DM supplies PARK.md and a direct Clerk handoff; Clerk preserves the research
+lessons, archives the task and obtains Portfolio replacement selection up to three occupied/reserved
+slots under CLERK_OPERATIONS.md. Existing directions continue independently.
 
 ## Portfolio report and owner adjustments
 
 Maintain PORTFOLIO.md as a concise Chinese report: direction-owned conclusion/lifecycle, evidence,
 actual work/producer, cost and uncertainty, next DM action, and optional choices for the user.
-Report statements distinguish observed/applied facts from recommendations. No periodic approval
-packet, automatic Pro Send or universal four-slot filling follows.
+Report statements distinguish observed/applied facts from recommendations. Genuine vacancies
+trigger the owner-delegated three-slot replacement workflow, not per-object approval.
 
-Only an explicit owner request starts Portfolio consultation or changes the cross-direction plan.
+Clerk may request and execute scoped Portfolio vacancy selection under the current owner delegation.
+Other cross-direction changes require an explicit owner request.
 A request to see a report or recommendations does not by itself authorize implementation.
 Clerk can prepare factual materials; Root interprets the requested scope and routes the work.
 Preserve existing accepted Pro requests through observation/archive; their new advice does not
@@ -81,7 +82,9 @@ automatically change layout under obsolete Portfolio-finality rules.
 
 ## Engineering, integration and recovery
 
-DM implements and self-checks direction code directly; no new CM/Implementer chain. Independent
+DM owns direction engineering and may use a direct native Sol/medium Implementer for a complete
+bounded batch; CM remains retired. Sol/high code Reviewer is independent; DM can choose Astra
+for a concrete difficult review. Independent
 high-risk Reviewer coverage remains under ENGINEERING_SCOPE_SPEC section 7. Root owns shared policy/
 control code and its acceptance. Clerk integrates only named accepted commits in the registered
 main writer interval, preserving unrelated changes and returning semantic conflicts to the DM.
