@@ -46,12 +46,14 @@ authoring_checkout = "C:/Projects/HMASD-worktrees/codex-acvc"
 authoring_branch = "codex/acvc"
 
 [directions.metric_ground_transport_allocation]
-state = "management_in_progress"
+state = "scientific_park_archived"
+occupies_slot = false
+park_document = "docs/research/candidates/metric_ground_transport_allocation/PARK.md"
 owner_mode = "independent_task"
 accepted_event = "mgtap-session-astra-max-v1"
 accepted_turn = "01a09cd9-d3be-7922-85ec-da2dc1766572"
-last_processed_event = "mgtap-8242-result-intake-20260914-r1"
-next_action = "complete independent B8242 result review, respond, then write PARK.md or continue decision; no active experiment"
+last_processed_event = "mgtap-park-closeout-20260914"
+next_action = "record-only PARK.md integrated and task archived; reopen only on a concrete scientific question"
 thread_id = "01a09cd8-676e-7513-806d-a86b7e104518"
 host_id = "local"
 session_checkout = "C:/Users/fires/.codex/worktrees/d4a4/HMASD"
@@ -101,7 +103,7 @@ automatic_replacement = true
 binding_key = "portfolio:cross_direction"
 transport_config = "C:/Projects/HMASD/.codex/hmasd-transport.toml"
 new_request_coordinator = "clerk"
-planning_state = "two_vacancies_sent_pending_archive"
+planning_state = "three_vacancies_two_replacements_pending_setup"
 reserved_slots = 2
-request_status_commit = "fd8d499b9"
+request_status_commit = "fa1922c37"
 legacy_accepted_routes = "preserve_through_closeout"
