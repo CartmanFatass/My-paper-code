@@ -10,9 +10,10 @@ and first iid training/evaluation draw are now frozen. Final private C/F/own-dwe
 address expected added value under the declared law, with simultaneous df5 working-model
 t intervals and explicit actual-calibration limits. [Current intake](ACVC_CLUSTER_FIXED_RECIPE_C01_INTAKE_20260914.md)
 records the complete Sol/medium implementation return and13 passing focused checks.
-Independent Sol/high review found publication-deadline and CPU-accounting omissions;
-the same Implementer is correcting both before the same-Reviewer correction check.
-Source acceptance and all six original native invocations remain unperformed.
+Independent Sol/high review verified both publication-deadline and CPU-accounting repairs.
+DM accepted source6e8d1b894 and verified its exact remote bytes. Original unit1 is
+running after fresh memory admission and direct batch-monitor adoption; units2–6
+remain preselected/uninvoked. No complete C result exists yet.
 The original independent ACVC DM owns ordinary research, implementation, engineering acceptance,
 launch/observation, scientific intake and reports. Portfolio owns final direction-level
 CONTINUE/recast/PARK/CLOSE/reopening. Direction Pro supplies independent scientific review;
