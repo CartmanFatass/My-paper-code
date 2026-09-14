@@ -73,21 +73,21 @@ DM accepts its prospective findings: unseen current-only entity state must be ze
 both learners retain their own generic recurrent route and two-stream replay; equal
 parameter counts do not match temporal capacity or prove a gain over unaugmented Generic.
 The [full post-B03 Portfolio intake](pro_packets/20260914_post_b03_portfolio_direction/INTAKE.md)
-preserves two complete contradictory comparator choices: augmented persistent
-versus fresh unaugmented Generic, and augmented persistent versus augmented
-current-only. Both support CONTINUE/MEDIUM and the common dual-stream redesign;
-neither is treated as a unique final comparator. One focused same-conversation
-clarification was dispatched to registered Transport at 14:40 UTC; its queue later
-recorded one Send and an accepted user node at 14:44 UTC. Full terminal answer and
-the complete input capture remain pending. The original four malformed inputs and
-full two-answer archive remain preserved. No scientific retry or third arm follows.
+preserves both contradictory comparator decisions and the complete116-line
+clarification resolving them. The applied unique objective is **persistent
+augmented program versus fresh unaugmented Generic64 (A−G)**; the A−Z internal
+persistence comparison is withdrawn for this round. This prioritizes the complete
+program's development increment while forgoing component attribution. CONTINUE/
+MEDIUM, the existing family/slot and all historical negative evidence remain.
+Original malformed inputs and full responses are retained; one read-only input
+capture closeout remains with Transport, without a new Send or scientific review.
 The common persistent Generic64 plus entity-history actor is technically accepted
 at source `550846a863ad7276edf8cab1a556e7d76353df08`, after five focused tests and
 independent Sol/high recurrent/RNG review. Both native engineering children are
-complete. Learner/driver/comparator/checkpoint integration remains the next scoped
-work after full clarification intake; no training-path acceptance is claimed.
-No new empirical card, seed, comparator or invocation is frozen. Current
-ACTIVE/MEDIUM and this direction's existing slot remain in force.
+complete. The new [augmentation B01 card](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_SCIENCE_CARD_20260914.md)
+selects train781601/eval1781601, two fresh5000/4969/128 fits and strict MEI1.
+Complete learner/driver/checkpoint/primary integration is the current scoped work;
+no full training-path acceptance, native launch or result is yet claimed.
 FOLR continues to occupy one existing slot, with the
 same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
 Full support/provider cost remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves

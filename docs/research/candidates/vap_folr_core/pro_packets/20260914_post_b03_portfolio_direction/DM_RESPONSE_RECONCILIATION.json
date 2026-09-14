@@ -24,5 +24,22 @@
     }
   ],
   "dm_verification": "Local raw file/hash/full401line reading plus fresh same-conversation DOM identities/order/headings/closing scopes; no independent raw-provider-byte or source-access certification.",
-  "next_action": "One focused same-request comparator clarification; preserve both complete answers; no new empirical invocation selected from conflict."
+  "next_action": "One focused same-request comparator clarification; preserve both complete answers; no new empirical invocation selected from conflict.",
+  "clarification": {
+    "request_id": "2026-09-14-folr-post-b03-direction-decision-01-clarification-01",
+    "archive_path": "archive/clarification_01/RESPONSE.md",
+    "utf8_bytes": 12282,
+    "characters": 5518,
+    "lines": 116,
+    "sha256": "268a587084181f808f944b65afdfec60848cb8c4568974d6aa95afc82092b497",
+    "terminal_lf": true,
+    "crlf_count": 0,
+    "full_read": true,
+    "dm_intake_at": "2026-09-14T15:06:36.695218+00:00",
+    "reported_assistant_node_id": "de97d8bb-b4f9-4d74-90d6-ebbc473e7a8c",
+    "reported_user_node_id": "683bebb0-ddcc-4e04-89b5-1b30fa7ca534",
+    "archive_representation": "Transport normalized provider Copy-response clipboard; original raw-provider byte identity not claimed",
+    "decision": "Unique A-G; second A-Z execution selection explicitly withdrawn. CONTINUE/MEDIUM, family/slot/history unchanged.",
+    "input_capture_closeout": "Full composer/accepted-body capture not returned with response; one read-only closeout requested, without new Send or holding scientific acceptance."
+  }
 }

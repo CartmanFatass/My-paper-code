@@ -1,5 +1,10 @@
 # Full Portfolio response intake — post B03
 
+**Current application:** the complete clarification has resolved the conflict in
+favor of A−G (persistent augmented actor versus fresh unaugmented Generic).
+CONTINUE/MEDIUM is applied; the new augmentation B01 card is selected below.
+The original conflicting decisions and intermediate dependency remain as history.
+
 ## Original full archive and actual conflict
 
 The complete 401-line `archive/RESPONSE.md` was read, including the small omitted
@@ -208,3 +213,67 @@ The original App dispatch fact and malformed predecessor evidence remain unchang
 Both native common-engineering children are complete; registered Transport owns
 the one live clarification and direct return, and DM owns its full scientific
 intake and the next complete selected integration/execution objective.
+
+## Complete clarification, DM response and applied direction objective
+
+DM read all116 lines of `archive/clarification_01/RESPONSE.md`, including the
+source-access statement and final instruction. Its saved original archive is
+12282 UTF-8 bytes,5518 characters,LF terminated with zero CRLF pairs, SHA256
+`268a587084181f808f944b65afdfec60848cb8c4568974d6aa95afc82092b497`.
+Those independently computed local values match the Transport return. Transport
+identifies final assistant `de97d8bb-b4f9-4d74-90d6-ebbc473e7a8c` after user
+`683bebb0-ddcc-4e04-89b5-1b30fa7ca534`; the file is its normalized Copy-response
+representation, not a claim of raw provider-message byte identity. The original
+composer/accepted-body capture was requested but not included in the full return;
+one read-only archival closeout requests existing original captures or an explicit
+missing-capture limit. No new Send or scientific review is requested by that repair.
+
+The full clarification explicitly acknowledges that the two prior rulings conflict
+and withdraws the second A−Z execution choice. It selects **A−G**: one new
+persistent augmented program and one fresh unaugmented Generic64, with no third
+arm, same5000/4969/128 exposure,strict MEI1 and existing CONTINUE/MEDIUM/family/slot.
+Its conflict explanation is substantive, not inferred from chronology. It does
+not blame the scientific inconsistency on the separately recorded input accident.
+It reports rereading the full fixed REPORT and relevant full-review/DM-response
+sections, reusing the other already read fixed sources; it does not claim another
+31-document read or a new numerical validation. No critical source gap is reported.
+
+DM accepts the selected development priority while retaining the strongest argument
+for the prior internal proposal. A−Z can inform whether persistence is worth keeping
+inside that candidate, even if both programs lose to G; that information is real
+and is not retroactively called scientifically invalid. A−G instead directly
+compares the complete candidate with the existing usable alternative and avoids
+the second entity branch. In the present negative replacement evidence, that
+program-level increment has the more immediate maintenance consequence. DM
+therefore changes the next objective to A−G, not by asserting persistence caused
+the old loss or predicting that this redesign will succeed.
+
+The cost/attribution tradeoff is accepted explicitly. A has more parameters, a
+different head, extra current processing and coadaptation; a gain cannot identify
+persistent memory as the cause, and a loss cannot establish persistence is useless.
+Same native exposure does not match operation count or wall. The scientific unit
+remains one fitted program per arm with conditional evaluation dispersion, not
+128 training replicates. FOUNDATIONS2/4/6 and empirical11.8–11.10 constrain these
+actual claims. Source-level plausibility plus a finite useful comparison supports
+continuing despite two adverse old programs; PARK remains a meaningful alternative,
+not a consequence of incomplete support accounting or completed paperwork.
+
+**Applied direction decision: PRO_FINAL / OWNER_DELEGATED — CONTINUE/MEDIUM,
+existing entity-history family, next sole objective A−G.** No recast, additional
+slot, other-direction adjustment or scalar-family reopening occurs. Original
+report/recommendation, both contradictory responses and all negative/incomplete
+experiments are preserved. Z remains unselected, including any automatic third fit.
+
+DM prospectively selects
+[FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601](../../FOLR_ENTITY_HISTORY_AUGMENTATION_B01_SCIENCE_CARD_20260914.md):
+train781601/eval1781601, two fresh5000/4969/128 fits,205120 ticks/9938 updates;
+prediction GENERIC_ABOVE_MEI with low confidence, owner prediction not taken.
+Labels had no match in current FOLR cards/evidence or registry at selection.
+Ordinary plans become3600s G +5400s A,9000s native plus1800s active-support reference;
+unknown costs and all prior actual costs remain. No launch or result is claimed.
+The accepted common actor is reused; the new card's complete integration L0 owns
+learner/driver/checkpoint/primary work, independent review and subsequent remote
+admission/launch. This carries the decision into a concrete executable objective
+without a new permission packet. Portfolio scientific dialogue can be released;
+the remaining old-input archival closeout is read-only and owns no new conversation
+Send. Original DM retains both that closeout and the selected research work.
