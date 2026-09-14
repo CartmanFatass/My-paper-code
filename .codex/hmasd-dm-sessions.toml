@@ -19,9 +19,9 @@ thread_id = "01a09d6c-e4e0-7613-ba99-7b0a1b6c540e"
 host_id = "local"
 model = "gpt-5.6-luna"
 reasoning_effort = "high"
-state = "handoff_preserved_ready_for_archive"
+state = "archived"
 activated_event = "clerk-activate-20260913-01"
-last_observable_action = "Clerk reports no writer/producer; App turn completed and idle; exact prompt/answer archived and read by MGTAP"
+last_observable_action = "Archive tool confirmed archived=true after preserved handoff and completed idle turn"
 session_checkout = "C:/Projects/HMASD"
 operational_checkout = "C:/Projects/HMASD"
 
@@ -245,7 +245,7 @@ policy = "docs/project/PEER_DM_COORDINATION.md"
 model = "equal_peers_no_standing_coordinator"
 main_mutex = 'Local\HMASD_Main_Transaction'
 retirement_handoff_owner = "metric_ground_transport_allocation"
-retirement_handoff_state = "preserved_no_live_clerk_writer_or_producer; archive_pending"
+retirement_handoff_state = "complete; clerk_archived; no_standing_coordinator"
 
 [coordination.folr_owner_review]
 thread_id = "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc"
@@ -256,7 +256,7 @@ next_action = "FOLR DM submits full report and fixed web context to Portfolio fo
 
 [coordination.clerk_retirement]
 owner_thread_id = "01a09cd8-676e-7513-806d-a86b7e104518"
-state = "preserved_ready_for_archive"
+state = "complete_clerk_archived"
 archive_source_sha = "552f0dce7904e35206b8e32f9180ab85aee822ad"
 archive_path = "docs/research/portfolio/pro_packets/20260914_folr_park_vacancy_retirement"
 local_correlation_id = "folr-park-vacancy-20260914-01"
@@ -269,3 +269,4 @@ response_bytes = 17577
 provider_state = "terminal; full prompt and answer read; current Transport performed no Send"
 old_advice = "DISH selected under earlier context; NOT APPLIED; FOLR third-slot reservation remains"
 next_owner = "FOLR DM authors pending direction report to Portfolio; RCLE coordinates its report directly with FOLR and Transport; MGTAP owns only this handoff and any resulting one-vacancy consequence"
+archived_thread_id = "01a09d6c-e4e0-7613-ba99-7b0a1b6c540e"
