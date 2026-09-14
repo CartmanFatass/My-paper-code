@@ -103,7 +103,9 @@
   "all_members_read_back": true,
   "raw_local_root": "temp\\directions\\metric_ground_transport_allocation\\exp\\late_exposure_b01_8254_20260914",
   "remote_checkout": "/home/wu/hmasd-worktrees/mgtap-late-exposure-b01-8254-20260914",
-  "remote_cleanup": "pending publication verification; DM owned",
+  "remote_cleanup": "complete: ordinary git worktree remove returned0; disk and registration absent at2026-09-14T23:44:05.5411939Z; supervisor and local originals retained",
+  "archive_publication_sha": "26d0ac5d7c2af3ec09eef243197651eafcef41c1",
+  "published_git_blob_matches_archive": true,
   "local_test_scratch": "retained after blocked-by-policy combined deletion command; no workaround",
   "monitor_limit": "MONITOR.json final overwrote initial adoption and uses program-finish log time for terminal adoption. Original adoption23:26:44Z and repeated nonterminal returns remain in native history/ENGINEERING.md. Program finished23:30:56Z; terminal supervisor observation uptime452s. No falsely precise terminal observation UTC is inferred."
 }

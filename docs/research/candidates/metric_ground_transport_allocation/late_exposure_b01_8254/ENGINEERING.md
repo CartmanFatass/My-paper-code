@@ -14,6 +14,12 @@ Independent Astra/high native Reviewer returned no material finding and a4.75s s
 
 DM accepts this engineering implementation within the card's exact limits. Technical review is separate from scientific validity and actual resource admission. Next actions are publication, exact remote materialization, command syntax check and the sole admitted launch; no extra native smoke or fit is allocated.
 
+## Completed preservation and cleanup
+
+All14 remote originals and local Monitor bytes are retained in the15-member archive. The3334990-byte archive was explicitly published at26d0ac5d7c2af3ec09eef243197651eafcef41c1 after detecting its broad ignore rule; reading the actual Git blob reproduced SHA256 a4aa0713a72396e12c593ae92996850d7e4bcda5a600f2ab9c611bc48f33e935. All scientific source and evidence are recoverable from published commits. No native execution was repeated.
+
+Before cleanup, the exact detached checkout had no tracked or ordinary untracked modifications; its only ignored files were the eight preserved native originals. Ordinary `git worktree remove /home/wu/hmasd-worktrees/mgtap-late-exposure-b01-8254-20260914` returned0. At2026-09-14T23:44:05.5411939Z, the path was absent from disk and from the remote repository's worktree registration. The supervisor directory, local originals and active/shared authoring checkout remain retained. Local test scratch remains under the previously recorded rejection; this successful remote checkout cleanup does not authorize a workaround for that separate rejected deletion.
+
 ## Exact launch and Monitor transfer
 
 Source90f835e10357fbbf465cc5d500a93f1e2d4ab226 was pushed before remote materialization. The exact detached checkout was absent before creation; Git reported that source, clean status, and bash -n accepted the committed COMMAND.sh. Known zsh prompt-component warnings did not change the successful fetch/materialization exit. Supervisor exact handle was not_found before the single run command.
