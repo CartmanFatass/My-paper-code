@@ -1,0 +1,52 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "meanCOND256_DENSE256",
+      "arm": "COND",
+      "n": 2,
+      "mean": 0.07220299169645703,
+      "sample_sd": 0.022749698642428505,
+      "min": 0.05611652551644544,
+      "max": 0.08828945787646862,
+      "runs": {
+        "8241": 0.05611652551644544,
+        "8242": 0.08828945787646862
+      }
+    },
+    {
+      "task": "meanCOND256_DENSE256",
+      "arm": "DENSE",
+      "n": 2,
+      "mean": 0.09306051231014448,
+      "sample_sd": 0.07364210867700856,
+      "min": 0.040987677883755035,
+      "max": 0.1451333467365339,
+      "runs": {
+        "8241": 0.040987677883755035,
+        "8242": 0.1451333467365339
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "meanCOND256_DENSE256",
+      "arm": "COND",
+      "baseline": "DENSE",
+      "summary": {
+        "n": 2,
+        "mean": -0.020857520613687442,
+        "sample_sd": 0.050892410034580046,
+        "min": -0.05684388886006529,
+        "max": 0.015128847632690408
+      },
+      "differences": {
+        "8241": 0.015128847632690408,
+        "8242": -0.05684388886006529
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

@@ -25,6 +25,15 @@ all frozen training/evaluation/comparison semantics are unchanged. Actual
 launch, collection and scientific review follow from the accepted object,
 without waiting for Root/Clerk/Portfolio approval or local duplicate cleanup.
 
+B02 is now complete: COND−DENSE−0.05684388886006531 J (COND_ADVERSE),
+one independently fitted pair; complete native190.58s/exit0. The first early
+positive did not recur. DM selects no additional unchanged early256 sampling
+and plans reversible PARK after meaningful actual-result review/preservation.
+This is a development judgment, not established population inferiority or an
+operational permission wait. [B02 E0](MGTAP_EARLY_EXPOSURE_B02_RESULT_20260913.md)
+and [intake](MGTAP_EARLY_EXPOSURE_B02_INTAKE_20260913.md) retain both signs,
+all earlier contrary evidence, costs and the concrete stopping/revisit logic.
+
 ## Historical owner execution pause — 2026-09-13
 
 OWNER_DIRECT: research is paused at a clean, recoverable boundary. This is an

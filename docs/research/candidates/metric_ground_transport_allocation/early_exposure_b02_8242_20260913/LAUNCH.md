@@ -36,3 +36,22 @@ After acceptance create a new batch-scoped Luna/low native Monitor with
 fork_turns=none and supply exact accepted identity. Record MONITOR_ADOPTED
 before stopping DM routine observation; terminal facts return directly to DM.
 Source/native/supervisor evidence must be retained before scoped cleanup.
+
+## Actual source and accepted launch
+
+Published-source bundle SHA256
+9f0562c228ade832a58011797125d4cb4f98eafdacc42da95bceef5cc884e030 matched
+locally/remotely; `git bundle verify` passed required2cdd0680 ancestry.
+It includes publicationde2e19070dc6174cf535782a8c88398b36caea83.
+The remote detached HEAD equals8744085c293288e2c178fbc6d2a97ae9ca053c43;
+source clean, COMMAND bash syntax passed and exact handle remained not_found.
+No HTTPS stall, uncommitted source transfer or extra scientific invocation.
+
+The one `agent-task run` accepted at2026-09-14T00:48:08.6855204Z into tmux
+agent_mgtap-early-8242-20260913; log
+/home/wu/.agent-tasks/mgtap-early-8242-20260913/task.log.
+New experiment-batch native Monitor /root/mgtap_8242_monitor was created using
+the registered Luna/low role and fork_turns=none, then assigned this exact
+accepted handle. Its own MONITOR_RECEIPTS.md records actual adoption/terminal
+facts. Current Agentify/Chrome9222 shared-runtime hold does not affect this
+non-browser run; no new Pro Send/rebind/retry or browser writer occurred.
