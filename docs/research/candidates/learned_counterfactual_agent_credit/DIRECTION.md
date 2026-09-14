@@ -1,12 +1,12 @@
 # LCAC — learned counterfactual agent credit
 
-## Current position — B02 reviewed; B03 selected,2026-09-14
+## Current position — B02 reviewed; B03 running,2026-09-14
 
 **CONTINUE; recasts0.** B01 at256/master9411 gave Q−V−0.00362643 (129.80s runner); B02 at1024/master9412 gave+0.00222263, V0.18844571/Q0.19066834,15/32 adverse (443.91s). Both means within MEI±.01, one trained pair per endpoint; no equivalence, stable effect, causal duration/credit claim. Both runs/monitors terminal; files/models preserved.
 
 The complete [B02 review/DM response](LCAC_B02_INTAKE_20260914.md#full-independent-review-and-actual-dm-decision) reconsidered a working PARK preference. DM narrowly selects [B03](LCAC_B03_SCIENCE_CARD_20260914.md): independent unchanged1024/32 master9413. Its complete-procedure sensitivity question, differentiated B02 diagnostics/world effects and observed runner cost justify this specific continuation. No4096 endpoint or optimizer intervention.
 
-B03 prospectively frozen, not launched. Completed exposure remains B01+B02:688128 ticks/5120 Adam,573.71s runner wall sum, with total support/provider/lifetime UNKNOWN. DM implements/checks/reviews the binding, executes remotely, collects and decides the actual next step. Current routes/slots belong to the live registry/Clerk; historical routes below are not current dispatch.
+B03 source81fec5e1b3a2cee810029f0cd30713a0ea64fce3 technically accepted after focused independent review, then launched onwsl_4070 at2026-09-14T04:55:14Z under lcac-b03-s9413-81fec5e1-20260914. PID3660054, initial running/tmux active; new native /root/lcac_b03_monitor owns assigned observation. Completed counts still refer only to B01+B02:688128 ticks/5120 Adam,573.71s runner wall sum, with total support/provider/lifetime UNKNOWN. B03 planned counts become actual only after terminal collection. DM collects and decides the actual next step. Current routes/slots belong to the live registry/Clerk; historical routes below are not current dispatch.
 
 ## Historical accepted registration — 2026-09-12
 
