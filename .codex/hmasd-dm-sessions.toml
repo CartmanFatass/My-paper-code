@@ -11,18 +11,18 @@ heartbeat_state = "ACTIVE"
 heartbeat_target = "clerk"
 
 main_writer = "clerk"
-main_writer_event = "MAIN_WRITER_RELEASED / runtime-and-batch-policy-20260913"
+main_writer_event = "MAIN_WRITER_RELEASED / clerk-main-migration-and-vacancy-policy-20260913"
 main_writer_turn = "01a095b7-850f-7401-ad4e-5e4320d285f1"
 
 [clerk]
-thread_id = "01a09cfe-1614-7da1-8445-323658edcc70"
+thread_id = "01a09d6c-e4e0-7613-ba99-7b0a1b6c540e"
 host_id = "local"
 model = "gpt-5.6-luna"
 reasoning_effort = "high"
 state = "active"
 activated_event = "clerk-activate-20260913-01"
 last_observable_action = "owner resumed research; heartbeat ACTIVE; control paths synchronized to all four DM session/authoring surfaces; four DM resume messages delivered; accepted FOLR preservation integrated as 8a7c85bea and cc121bc06; shared Agentify/Chrome restarted and verified, DM browser recovery released"
-session_checkout = "C:/Users/fires/.codex/worktrees/6c1c/HMASD"
+session_checkout = "C:/Projects/HMASD"
 operational_checkout = "C:/Projects/HMASD"
 
 [root]
