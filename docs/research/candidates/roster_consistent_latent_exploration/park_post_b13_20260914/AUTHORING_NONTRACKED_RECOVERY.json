@@ -59,5 +59,17 @@
     "all_original_bytes_in_verified_recovery": true,
     "cleanup_owner": "Original RCLE DM; preserve each creator provenance. Resume removal only at an actually permitted boundary, not elapsed time, another tool/agent, or whole-checkout deletion.",
     "scientific_effect": "No scientific occupancy or stop; vacancy and selected-DM research continue independently."
-  }
+  },
+  "source_lineage_finalization": {
+    "recorded_at_utc": "2026-09-14T12:54:07.476154+00:00",
+    "source_checkout": "C:\\Projects\\HMASD-worktrees\\dm-rcle-a02-20260906",
+    "source_head": "7a490382cb469f2a62e276a756a2be32b460cc69",
+    "recovery_ref": "refs/tags/codex/recovery-rcle-park-20260914-7a490382",
+    "remote": "origin",
+    "remote_verified_sha": "7a490382cb469f2a62e276a756a2be32b460cc69",
+    "unique_commits_vs_origin_main": 143,
+    "retirement": "No branch or worktree deleted. Historical rejected paths remain intact."
+  },
+  "current_cleanup_state": "Exact final RCLE source lineage is preserved by a locally and remotely verified recovery tag. Full558-file nontracked recovery remains. No source/scratch/branch/worktree deleted; four historical automatic-review deletion rejections remain a narrow cleanup exception. Scientific occupancy is zero; only original ACVC continuation/application and FOLR release remain before RCLE task closeout.",
+  "current_cleanup_state_recorded_at_utc": "2026-09-14T12:55:36.332862+00:00"
 }

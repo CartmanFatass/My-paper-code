@@ -11,7 +11,7 @@ heartbeat_state = "MISSING"
 heartbeat_target = "unassigned"
 
 main_writer = "unclaimed"
-main_writer_event = "RCLE_ACVC_RESTORED_HANDOFF_RECORDED_RELEASED_20260914"
+main_writer_event = "RCLE_FINAL_SOURCE_REFERENCE_PRESERVED_RELEASED_20260914"
 main_writer_turn = "01a09e10-9d9f-7f82-87c0-d58cbe0c7618"
 
 [retired_clerk]
@@ -218,7 +218,10 @@ portfolio_response_bytes = 20289
 slot_released_at = "2026-09-14T11:32:27.551541+00:00"
 vacancy_owner_thread_id = "01a09e10-9d9f-7f82-87c0-d58cbe0c7618"
 vacancy_request_id = "2026-09-14-rcle-park-vacancy-selection-01"
-checkout_retention_reason = "Actual vacancy Transport/archive/intake/handoff remains. Verified558file recovery at AUTHORING_NONTRACKED_RECOVERY.json also identifies four existing historical policy-rejected scratch paths; no alternate whole-checkout deletion. RCLE owns final source-ref preservation and cleanup at an actually permitted boundary."
+checkout_retention_reason = "Full source preserved by published recovery tag codex/recovery-rcle-park-20260914-7a490382 and558-file nontracked recovery. Four explicitly policy-rejected historical scratch paths prevent whole-checkout deletion; no alternate deletion. Actual ACVC handoff/application and FOLR release remain before task closeout."
+source_recovery_ref = "refs/tags/codex/recovery-rcle-park-20260914-7a490382"
+source_recovery_sha = "7a490382cb469f2a62e276a756a2be32b460cc69"
+cleanup_exception_path = "docs/research/candidates/roster_consistent_latent_exploration/park_post_b13_20260914/AUTHORING_NONTRACKED_RECOVERY.json"
 
 [directions.vap_folr_core]
 state = "active"
