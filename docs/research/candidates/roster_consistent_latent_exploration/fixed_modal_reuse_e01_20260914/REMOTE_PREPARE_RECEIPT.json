@@ -1,0 +1,6 @@
+{
+  "utc": "2026-09-14T06:17:48.303888+00:00",
+  "exit": 0,
+  "stdout": "{\"status\": \"EXACT_SOURCE_PREPARED_NO_NATIVE_EXECUTION\", \"source_sha\": \"5c3ab7b074f185902078452811774e6a8d727a9d\", \"cwd\": \"/home/wu/hmasd-worktrees/rcle-modal-e01-5c3ab7b07\", \"control_exists\": true, \"output_exists\": false, \"runner_sha256\": \"971c67a04a25c905d085b670bb2dfe9eea1fe7778f2f76d7d8f1608c958f4ebe\", \"node_hostname\": \"LAPTOP-U9TDKC8A\"}\n",
+  "stderr": "(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\n"
+}
