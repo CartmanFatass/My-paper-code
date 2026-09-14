@@ -9,7 +9,7 @@
 
 | 方向 | 已知科学位置 | 当前工作与席位 |
 | --- | --- | --- |
-| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B13 实际学习 G_U=+0.072437，nearest 收益+0.154964，greedy 对比-0.019784；先验强度学到1.211991，modal 与 greedy 全512行测量相同，恢复取舍和 B11 缺失保留。 | 占用1席，完整 Portfolio CONTINUE 已读取、回应并应用。选定 B13 已完成1,024更新/4,358,144ticks，完整命令163.92s、exit0；完整原始证据已校验。[结果与 intake](../candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md)。DM 正在发布独立实际结果审阅；未默认追加 seed 或 PARK/CLOSE。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B13 实际学习 G_U=+0.072437，nearest 收益+0.154964，greedy 对比-0.019784；先验强度学到1.211991，modal 与 greedy 全512行测量相同，恢复取舍和 B11 缺失保留。 | 占用1席，完整 Portfolio CONTINUE 已读取、回应并应用。选定 B13 已完成1,024更新/4,358,144ticks，完整命令163.92s、exit0；完整原始证据已校验。[结果与 intake](../candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md)。独立 B13 实际结果审阅已派发，等待完整答复；未默认追加 seed 或 PARK/CLOSE。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 历史混合符号保留，DENSE 仍为通用默认；新问题比较对称学习率选择后的完整学习程序。 | 占用1席。LR-SELECTION-B01 的8拟合/589,824 team ticks/4,096 Adam 是计划工作；独立审查已 intake，07:55:41UTC 已接受一次原生调用，由本方向 Monitor 观察；无本报告可引用的新原生结果。 |
 | [FOLR](../candidates/vap_folr_core/DIRECTION.md) | B02 完整学习比较 BANK−Generic=−4.830859375，有限负面证据保持。Portfolio 已撤回原停止理由，选择 B03 观察新完整学习程序的结果变化；训练与评估变异不能单独分离。 | 占用1席，CONTINUE / MEDIUM。B03 Generic 已于08:24 UTC在固定源码远端分离运行，相邻内存准入通过，专属 native Monitor 已接管；BANK 待 Generic 收集后运行，尚无完整 B03 主比较。[执行记录](../candidates/vap_folr_core/entity_history_b03_781501/EXECUTION.json)。 |
 

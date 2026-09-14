@@ -1,0 +1,13 @@
+{
+  "purpose": "Import already accepted canonical Transport configuration and Root renderer correction for this new request; no new policy or frozen-source change.",
+  "inputs": {
+    ".codex/hmasd-transport.toml": {
+      "source_commit": "bc4dec35273005676a9939a856b09ed0fcc9fb54",
+      "sha256": "c60b57165b7b2b1a192984a24802713e56f8222f01341ebf7cb447459d613289"
+    },
+    ".agents/skills/hmasd-pro-research-prompt-author/scripts/render_packet.py": {
+      "source_commit": "bc4dec35273005676a9939a856b09ed0fcc9fb54",
+      "sha256": "070dac171a864830af4edd196cd8136a3ecb1f167490f353a2a8d07cf9161302"
+    }
+  }
+}
