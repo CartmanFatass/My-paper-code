@@ -64,19 +64,27 @@ whole-learning-and-evaluation realizations, with no pooled population ranking.
 All original outputs/checkpoints/logs and operational failures are preserved.
 No active native producer or additional fit remains selected. [DM intake](FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md)
 favors reviewing a bounded proposal that preserves generic recurrence in both arms
-while testing persistent versus current-only entity state. It is unimplemented and
-not yet selected; stopping, longer learning and a changed host remain real alternatives.
+while testing persistent versus current-only entity state. That comparison is not
+yet selected; the current clarification and common implementation are described below.
 The [complete independent result/plan review and DM response](pro_packets/20260914_entity_history_b03_result_plan_review/INTAKE.md)
 are now read and preserved. The review finds no result-invalidating B03 defect and
 favors developing the additive-persistence question over a third unchanged block.
 DM accepts its prospective findings: unseen current-only entity state must be zero;
 both learners retain their own generic recurrent route and two-stream replay; equal
 parameter counts do not match temporal capacity or prove a gain over unaugmented Generic.
-No new empirical invocation follows from the review. The next actual work is the
-substantive Portfolio direction report, coordinating its same-conversation turn
-after the existing RCLE vacancy author. The earlier Transport coverage gap and
-corrected raw-byte receipt remain preserved; no FOLR provider producer remains.
-Current ACTIVE/MEDIUM remains; no automatic PARK.
+The [full post-B03 Portfolio intake](pro_packets/20260914_post_b03_portfolio_direction/INTAKE.md)
+preserves two complete contradictory comparator choices: augmented persistent
+versus fresh unaugmented Generic, and augmented persistent versus augmented
+current-only. Both support CONTINUE/MEDIUM and the common dual-stream redesign;
+neither is treated as a unique final comparator. One focused same-conversation
+clarification was dispatched to registered Transport at 14:40 UTC; App dispatch
+does not yet prove provider acceptance. The original four malformed inputs and
+full two-answer archive remain preserved. No scientific retry or third arm follows.
+The actual independent common engineering producer is
+`/root/folr_augmented_actor_common_implementation`, implementing only the persistent
+Generic64 plus entity-history actor and focused state/RNG tests under the intake L0.
+No new empirical card, seed, comparator or invocation is frozen. Current
+ACTIVE/MEDIUM and this direction's existing slot remain in force.
 FOLR continues to occupy one existing slot, with the
 same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
 Full support/provider cost remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves
