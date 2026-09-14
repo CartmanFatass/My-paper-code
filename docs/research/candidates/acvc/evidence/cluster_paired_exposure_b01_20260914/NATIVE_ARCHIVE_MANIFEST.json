@@ -1,0 +1,85 @@
+{
+  "archive": "temp/directions/acvc/retained/cluster_paired_exposure_b01_20260914/native_output.tar.gz",
+  "bytes": 837148,
+  "sha256": "ccd9595e4573cc4ece0a9eb45fa408a7ea4f89a53d1a37769b7365eaffb9fb22",
+  "files": {
+    "native/DENSE_episode_1024.pt": {
+      "bytes": 283189,
+      "sha256": "afa40fe225cd059726e1848533174c1da406d672e58aeea70580bbb23c2b7953",
+      "retention": "Inside verified original local archive only; no intake model load."
+    },
+    "native/DENSE_episode_512.pt": {
+      "bytes": 283165,
+      "sha256": "1226b29b0b40288552379fe3d063090031952434205535b56ea4b8a8efdf08ab",
+      "retention": "Inside verified original local archive only; no intake model load."
+    },
+    "native/admission.json": {
+      "bytes": 504,
+      "sha256": "4a4bc5809b03fe64f5e1bde19d33d32af782a39f088c9ba203f922198b8a831b",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/admission.json"
+    },
+    "native/episodes.jsonl": {
+      "bytes": 835555,
+      "sha256": "3bd0abf0f742a8630b26a697baca6ae5e8b4b1f7120e03b292ca96f6293e186d",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/episodes.jsonl"
+    },
+    "native/native_time.txt": {
+      "bytes": 53,
+      "sha256": "a7cfc95810c414cbef15bc8774116d87a61e7d13f779113804131cbbf6f15083",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/native_time.txt"
+    },
+    "native/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/stderr.log"
+    },
+    "native/stdout.log": {
+      "bytes": 4090,
+      "sha256": "00f687929f29430078e4acbdc393a97326b7b6ca7ac1ef7450ccb3c31336ecae",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/stdout.log"
+    },
+    "native/summary.json": {
+      "bytes": 79272,
+      "sha256": "7f2919fb46e703d09f499af4676c78a7c3962afbbe56724d16ed6fc0aa9bb339",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/summary.json"
+    },
+    "native/updates.jsonl": {
+      "bytes": 475663,
+      "sha256": "af88be49bbf86f8ba584e1f51ff480e4179f188269c3baf7b5925d9eb138ee7e",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/updates.jsonl"
+    },
+    "supervisor/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/supervisor_exit_code.txt"
+    },
+    "supervisor/pid": {
+      "bytes": 8,
+      "sha256": "4a9ed58b02c9ece7cffe96432376479c99609e06020505f1c8e81808c9f00b43",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/supervisor_pid.txt"
+    },
+    "supervisor/runner.sh": {
+      "bytes": 1383,
+      "sha256": "91fece16db5a7a50750822ea2b61b5d6636f80f4a640bb991f35ac9750429c65",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/supervisor_runner.sh"
+    },
+    "supervisor/start_time": {
+      "bytes": 11,
+      "sha256": "444884436fa0df1d03acd062b8947d08c9d1d1dea094ead96f1e212ef9c579ec",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/supervisor_start_time.txt"
+    },
+    "supervisor/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/supervisor_status.txt"
+    },
+    "supervisor/task.log": {
+      "bytes": 706,
+      "sha256": "198b9930c7c7f4b399e78b4568cdc112f6d5b6746a40f453a75f11cf8d08a9df",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_paired_exposure_b01_20260914/supervisor_task.log"
+    }
+  },
+  "checkpoint_count": 2,
+  "published_text_file_count": 13,
+  "retention": "Both original immutable checkpoints are retained in original archive; no extra model load or scientific exposure."
+}
