@@ -74,3 +74,30 @@ inside/adverse 结果保留其实际含义，DM 据完整记录决定修改或 P
 来源、旧结果和模型不删除；已被政策拒绝删除的 scratch 不绕过。
 成本与资源为新对象前瞻定义，旧378.77秒仅是已发生 native wall，
 不是本次额度或完整研究成本。支持、模型服务、累计成本和 aggregate CPU 仍 UNKNOWN。
+
+## Peer-DM role mapping and actual continuation boundary
+
+At main control revision9a86963ed (transition c3baaa27b), this independent DM explicitly
+read the complete live `.codex/agents/hmasd-direction-manager.toml` developer_instructions,
+AGENTS.md and PEER_DM_COORDINATION.md. It then applied the newly published canonical
+`hmasd-direction-management/SKILL.md` and completely read its `references/role.md`.
+This loads full lifecycle, implementation/dependency, review-response, execution,
+own-record/integration and direct peer/service responsibilities; an App title alone
+is not role inheritance. The older Clerk-only integration wording above records its
+earlier route and is superseded prospectively: Clerk is retired, main transaction
+ownership is released, and this DM integrates accepted work under the short shared mutex.
+
+Actual next work: the complete eight-fit runner and focused wiring tests are a bounded
+Sol/medium Implementer batch while this DM authors independent scientific design review and
+reconciles the assigned Clerk retirement handoff. No native launch has occurred. The draft
+resource line is prospectively corrected from2GiB to the actual4GiB physical/effective
+admission requirement; exposure, learner semantics and historical evidence are unchanged.
+
+The separate bounded handoff owns only preservation of retiring Clerk's unresolved requests
+and the one possible FOLR vacancy transaction, not authority over peers. Main9a86963ed reserves
+the third slot for the original FOLR DM's explicit owner-requested scientific reconciliation.
+Clerk reports a previously sent Portfolio request in conversation
+6aa7836e-e4a0-83e8-985d-c633d94935b1. Exact Send provenance/full prompt and terminal answer
+are being reconciled with the registered independent Transport; no new Send or replacement
+application is authorized by that report. Current state is recorded only in the shared registry.
+Tool/file/support recovery does not supply scientific polarity or a PARK reason.

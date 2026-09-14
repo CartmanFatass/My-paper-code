@@ -1,5 +1,8 @@
 # MGTAP-LR-SELECTION-B01 — finite symmetric LR selection and fresh holdout
 
+Claim under study: a finitely selected COND learning procedure may provide useful local native return against an equally selected DENSE procedure.
+Binding structure: systems / information flow; both actors use the same legal local information in a partially observed multi-UAV task.
+
 Status: prospective B/EXPLORE protocol selected by DM at the 2026-09-14 reentry.
 Implementation has begun; native runner acceptance and scientific execution are pending.
 No old frozen invocation is resumed. The current development decision is in
@@ -100,7 +103,7 @@ controller, solver or checkpoint search.
 
 DM native working estimate: roughly15–30 minutes, UNMEASURED. The old two-pair
 378.77s sum is a sizing anchor only, not a new hard budget or total-cost guarantee.
-Plan serial CPU/thread1 on the existing execution node, at least2GiB free admission
+Plan serial CPU/thread1 on the existing execution node, at least4GiB physical AND effective available admission
 headroom and no interference with RCLE/FOLR. Fresh actual-node admission precedes
 any invocation; memory and runtime are measured rather than guaranteed by old RSS.
 
@@ -109,6 +112,16 @@ These are DM-adjustable operational watchdogs, not owner caps or scientific endp
 No extra paid capacity or cross-direction resource reassignment is authorized.
 Support, provider, lifecycle total and aggregate CPU remain UNKNOWN; record actual
 startup/review/staging/collection/retention work once. Keep all technical partials.
+
+Engineering-scope §4 items needed by this object: the two-stage serial selection/holdout
+sequence measures the selected procedure; complete evaluation-panel checks bind the
+actual primary to its selected arm/rate/master/endpoint; and a saved selection JSON
+with its byte hash records which rates were fixed before holdout fitting. These are
+scientific measurement/persistence needs, not security guarantees, external approval
+or generic provenance gates. No resume/retry service, lease, new supervisor, worker
+pool, additional telemetry or general-purpose schema framework is selected. The
+4GiB line corrects the draft's2GiB planning text to current AGENTS §7 before any launch;
+it changes no scientific exposure and claims no admission has occurred.
 
 ## 5. Prediction, decisions and verification
 
