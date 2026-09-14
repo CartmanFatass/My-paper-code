@@ -31,6 +31,12 @@ Specific owner stops/resource limits remain controlling. DM cannot dispose of an
 Ordinary objects have finite DM-declared invocations, cost/resource bounds and stopping conditions.
 The card defines work, not permission. An exhausted prior allocation is not zero direction-wide
 authority. Preserve actual cumulative limits, frozen object semantics and resource admission.
+Reasonable runtime estimates and engineering thresholds do not automatically stop launch, review
+Send or execution. DM may prospectively adjust ordinary wall plans/watchdogs, documenting the
+reason and actual cost; only genuine owner/platform constraints or scientific endpoints bind as
+such. MARL_RUNTIME_ENGINEERING_SPEC section 1 defines the distinction. No per-adjustment approval.
+Routine time investigations (toy >5400s; UAV >64800s) stay with DM and are recorded by Clerk;
+neither crossing the reference nor opening an investigation warrants a Root report.
 The DM chooses a useful next object or makes its lifecycle decision; no need to manufacture
 low-value experiments or await an external customer to avoid ACTIVE-idle.
 

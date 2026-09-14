@@ -173,7 +173,10 @@ DM declares finite invocation/cost/resource bounds and stopping conditions befor
 Standing delegation is the authority; a card records work rather than requests permission. An ended
 allocation or unselected successor does not make direction-wide authority zero. Actual cumulative
 caps and specific owner constraints apply; no unlimited compute follows. Use empirical-spec 11.8
-for proportionate work and cost reasoning. New seeds/scales/comparisons need scientific reasons,
+for proportionate work and cost reasoning. A reasonable wall-time estimate or engineering threshold
+is not a hard stop, launch/Send gate or escalation trigger. DM owns prospective revision of ordinary
+wall plans/watchdogs; distinguish real owner/platform limits and frozen scientific endpoints under
+MARL_RUNTIME_ENGINEERING_SPEC section 1. New seeds/scales/comparisons need scientific reasons,
 not evidence of an entirely new mechanism or a Portfolio grant.
 
 Resource authority is determined by the source and scope of the limit. Owner-set cumulative limits,
@@ -184,7 +187,7 @@ support/closeout choices within the existing direction resources, including obse
 review response and publication of an already accepted request. Record the finite additional work,
 reason, stopping condition and cumulative cost/deviation in the existing intake. Preserve the old
 card, unknown costs and actual overruns; do not claim original-cap compliance, reset accounting,
-extend a running frozen experiment or disguise a scientific retry as administrative closeout.
+extend a running frozen scientific exposure/comparison endpoint or disguise a scientific retry as administrative closeout.
 Only a concrete boundary outside this delegation needs escalation, with its exact source and
 affected action. This is decision ownership, not an extra checklist or per-step approval.
 
@@ -321,16 +324,18 @@ byte digest already declared by the card or launch assignment; this does not mak
 code surface runnable.
 
 Before any sweep, the DM records a per-arm cost projection from the runner's own cost law (for
-the coordinator route, `M = num_envs × rollout_length / k`); the machine-time cap applies per arm,
-and an arm whose projection exceeds it is not launched. Usage consumed per valid result is
+the coordinator route, `M = num_envs × rollout_length / k`). An actual hard resource or scientific
+budget applies to its declared scope; a projection exceeding a DM planning estimate calls for DM
+reassessment/plan revision, not automatic refusal or escalation. Usage consumed per valid result is
 recorded per direction and is the ranking currency across directions.
 
-Engineering investigation follows `docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md`: toy >2700s
-and UAV >43200s apply to the complete logical invocation per arm/training seed, or the complete
+Engineering investigation follows `docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md`: toy >5400s
+and UAV >64800s apply to the complete logical invocation per arm/training seed, or the complete
 card invocation for seedless A work. Required initialization, learning, evaluation/checking and
 publication remain one chain across scripts/slices. Distinguish study elapsed critical path,
 sum of invocation wall and aggregate CPU work; these thresholds are not study caps, extra budget,
-or launch gates, and never override a stricter original cap.
+or launch gates. DM handles routine investigation and Clerk records it; the threshold itself never
+triggers a Root report. Actual limits are distinguished from planning estimates under spec section 1.
 
 Resume model: commit and push before every launch; launch every result-bearing run detached from
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the

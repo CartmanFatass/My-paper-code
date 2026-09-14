@@ -488,6 +488,15 @@ the named VNFC E01 appendix.
 
 #### 11.8.1 Claim determines burden
 
+OWNER_DIRECT 2026-09-13: reasonable runtime estimates and engineering investigation thresholds
+are planning inputs, not scientific failure rules, launch/Pro-Send gates or approval triggers.
+DM owns prospective adjustment of ordinary wall-time plans and operational watchdogs under actual
+resource constraints. Distinguish them from explicit owner/platform hard limits and scientific
+exposure/comparison endpoints (steps, updates, samples or an explicitly wall-budgeted comparison).
+Preserve started frozen endpoints and historical outcomes; elapsed-time deviation alone does not
+invalidate evidence. Apply MARL_RUNTIME_ENGINEERING_SPEC section 1 for source, scope and response;
+do not make a new profiling exercise or Root/Portfolio request mandatory merely to revise an estimate.
+
 B exploration asks whether a bounded next investment is worthwhile; a conclusion-bearing comparison
 asks what performance judgment the declared population supports. Ordinary A/B/C-BENCH work does not
 default to extreme tolerances, cross-platform element/bit equality, exhaustive mechanism explanation,
