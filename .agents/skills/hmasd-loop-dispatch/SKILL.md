@@ -23,8 +23,9 @@ On an actionable event:
 4. If an ACTIVE DM has neither work nor a decision, return the specific unfinished management
    question to that DM. Do not demand a Portfolio permission packet, infer a scientific stop or
    repeat identical reminders indefinitely.
-5. Record the DM's actual lifecycle and next condition. Report vacancies honestly; never
-   automatically send a Portfolio request, create a replacement or revive another direction.
+5. Require scientific PARK knowledge handoff in PARK.md and direct DM notification. Preserve
+   closeout, record and safely archive the task; fill genuine vacancies through the Portfolio
+   in-app browser workflow in CLERK_OPERATIONS.md, counting occupied plus reserved slots to four.
 6. Update the existing user-facing Portfolio report and notify Root of material changes or a
    concrete user-control exception. Fact-only updates need no ACK. End the handled event turn.
 
@@ -33,7 +34,8 @@ only for missing progress facts; native children return to their actual DM. Real
 work has an ID, owner and event. Empty intentions do not count as advancing work. An enabled
 50-minute heartbeat is interruption recovery, not a planning trigger.
 
-Portfolio consultation/cross-direction adjustment requires an explicit owner request. Reporting
+The owner delegates four-slot vacancy replacement to Clerk/Portfolio. Other cross-direction
+adjustments require an explicit owner request. Reporting
 or advice alone does not authorize implementation. Preserve accepted old request/handle bindings;
 archive pending answers as advice without automatically applying obsolete global dispositions.
 Ordinary direction work continues independently. Root/Clerk cannot make scientific judgments,

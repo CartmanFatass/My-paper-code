@@ -18,9 +18,10 @@ loops. Clerk can end a handled turn; the next message starts another turn.
 
 DM decides continue/defer/PARK/CLOSE/reopen/recast/family/C work, responds to independent scientific
 review and reports decisions to Clerk directly. Clerk records dispositions without Portfolio or
-Root approval. It reports released slots rather than creating replacements. Only an explicit owner
-request initiates a cross-direction change or Portfolio consultation. Reporting does not authorize
-implementation; no automatic global planning queue or per-object investment request exists.
+Root approval. A scientific PARK includes committed PARK.md and a direct Clerk notification before
+DM ends. Clerk verifies preservation/producer handover, records and archives the task, and applies
+the owner-delegated Portfolio vacancy workflow in CLERK_OPERATIONS.md. This adds no ordinary DM
+approval or Root ACK; other global changes still require owner scope.
 
 DM resolves direction-local engineering, missing facts, Transport recovery and routine cost/closeout
 under its existing authority. Send a needed fact directly to its registered owner; use Clerk to
@@ -40,7 +41,7 @@ the DM retains diagnosis and allowed alternatives, escalating only a concrete re
 
 Clerk uses compact wait_threads/cursors for missing facts and read_thread only where needed. It
 never waits for independent DM messages through collaboration.wait_agent. The 50-minute heartbeat
-is silent recovery for missed/interrupted events, not automatic planning. Owner pause takes priority.
+silently recovers missed/interrupted events, including unfinished owner-delegated vacancy actions. Owner pause takes priority.
 
 ## Native DM specialists and scientific review
 

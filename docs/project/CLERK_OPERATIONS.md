@@ -1,8 +1,8 @@
 # Independent Clerk operations
 
 OWNER_DIRECT 2026-09-13: DM owns its complete direction lifecycle. Portfolio is the user-facing
-research report; global adjustments and Portfolio consultation occur only on an explicit owner
-request. Clerk is an independent gpt-5.6-luna/high mechanical coordinator. Root is the user entry
+research report plus owner-delegated selection of replacements for genuine vacancies up to four
+occupied/reserved independent DM slots. Other global adjustments require explicit owner scope. Clerk is an independent gpt-5.6-luna/high mechanical coordinator. Root is the user entry
 and shared-control engineering owner. Current state and actual endpoints are in
 C:/Projects/HMASD/.codex/hmasd-dm-sessions.toml.
 
@@ -15,11 +15,55 @@ Clerk records the DM's exact decision, reasons/evidence and actual application; 
 research value, require Pro approval, or make a disposition itself. A specific owner instruction
 still overrides a DM decision. Do not change another direction or resource commitments.
 
-Portfolio reports explain current conclusions, actual running work, costs/uncertainty, DM decisions
-and options the user could choose. Recommendations/rankings are advice, not grants or dispatch.
-A request for a report or advice alone does not authorize changes. No automatic Portfolio Send,
-vacancy request, replacement DM creation or revival of another direction follows a report/timeout.
-Report released slots honestly; four is a coordination target, not authority to fill empty slots.
+Portfolio reports preserve DM conclusions. Owner delegates filling genuine PARK/CLOSE vacancies
+up to four occupied/reserved slots through Portfolio selection; no per-step DM research approval.
+Clerk works directly in C:/Projects/HMASD on main, not a separate session worktree. Serialize actual
+Root/Clerk index writers; preserve unrelated changes and do not create a branch per Clerk event.
+
+## PARK, archival and vacancy replacement
+
+On scientific PARK, DM writes docs/research/candidates/<direction>/PARK.md, a concise knowledge
+handoff in Chinese: why stop now and alternatives considered; what the research teaches, supported
+and adverse findings with evidence links; reusable code/data/models and their limits; unresolved
+questions and concrete reopening conditions; producer/closeout state and recovery entry. Link the
+accepted intake rather than copy logs. No new experiment or proof is required to write it.
+DM sends Clerk the committed PARK document and actionable handoff before ending. Final alone does
+not notify an independent task. This preserves knowledge, not a new scientific approval gate.
+Clerk checks the record exists and assets are preserved; scientific acceptance remains with DM.
+For earlier PARKs lacking PARK.md, ask the original DM for a record-only summary, unarchiving the
+same task if necessary; this neither resumes science nor consumes a scientific slot.
+
+Clerk resolves missing notices from current DM records or one focused DM follow-up. Do not infer
+PARK from an idle task, failed experiment, timeout or consumed allocation. Preserve/transfer any
+live producer and its return route; unhanded active work keeps closeout pending. Once PARK.md and
+safe closeout are preserved, call set_thread_archived(archived=true) on the registered DM task and
+record actual success. Keep task/branch/evidence/reopen routes; archival deletes no research asset.
+Do not archive a running DM merely because its lifecycle label says PARK.
+
+Count occupied direction slots plus slots reserved by pending Portfolio requests/new-task setup.
+If fewer than four, Clerk owns one deduplicated vacancy request for the deficit. Record vacant
+identities, request identity, current affected direction facts/PARK links, and pending slot count
+in existing tracking. Independent directions continue; record-only PARK supplements do not impose
+a global barrier. Do not recycle failed families without exposing their prior results/stop reasons.
+
+Clerk may send the Portfolio Pro request directly in the Codex in-app browser using supported CUA
+APIs (iab), inspecting actual login/model/conversation and screenshots where useful. This owner-
+authorized route needs no native Transport, Agentify process, GitHub delivery packet or Root ACK.
+Use current portfolio:cross_direction binding, reconcile prior request effects, and preserve exact
+sent prompt, conversation/response identity and complete answer. If the old conversation is
+unrecoverable, create/rebind one with preserved provenance; never duplicate a possibly accepted
+request. A browser timeout alone is not nonacceptance. Keep one executor per request.
+
+Portfolio selects replacements and supplies rationale, prior evidence, initial useful research
+objective and first DM assignment within the vacant slots/current resources. Clerk reads the full
+answer, records its application and creates those independent tasks via create_thread using the
+HMASD project, model gpt-6-astra and thinking max. Give each DM full lifecycle authority, current
+controls, evidence/PARK lessons and Clerk return route. Follow tool requirements for project lookup
+and setup; reuse direction authoring branches. Pending clientThreadId reserves a slot but is not
+an active route; register actual threadId/host and verify the first concrete action. Recount before
+creation; never create duplicates or exceed four by ignoring pending setup. A deficient answer
+receives focused same-request clarification, not a Clerk-invented scientific choice. Additional
+paid capacity, unrelated reallocation or explicit owner stops stay outside this delegation.
 
 Root delegates main writes for .codex/hmasd-dm-sessions.toml and existing Portfolio/tracking/handoff,
 decision/audit/root-log and supported owner-console records. Lifecycle records cite the accountable
@@ -60,9 +104,9 @@ Use send_message_to_thread between independent tasks. Final text alone is not cr
 Native Monitor/Transport returns to its actual DM parent. Clerk does not poll experiment handles.
 Use compact task snapshots only for missed facts or interrupted work, not repeated approval checks.
 
-## Optional external consultation
+## Other external consultation
 
-No automatic Portfolio consultation is authorized. If the owner explicitly commissions one, Clerk
+Outside the vacancy delegation above, an explicit owner commission is required. Clerk
 mechanically publishes the exact scope using Portfolio/prompt/Transport skills and owns that new
 request's native Transport/archive. Preserve all prior accepted request bindings and complete
 answers. Pending old planning answers are report/advice inputs; do not automatically implement
@@ -74,4 +118,4 @@ and owns corrections and direction decisions. Portfolio reporting does not cance
 relevant Astra DM; Clerk coordinates exact operation/receipt ownership, not code implementation.
 
 The existing 50-minute heartbeat recovers missed/interrupted consequences only, silent when
-unchanged. It cannot initiate Portfolio consultation, fill slots or override a DM/owner decision.
+unchanged. It can recover unfinished vacancy actions under this delegation; it cannot override a DM/owner decision.
