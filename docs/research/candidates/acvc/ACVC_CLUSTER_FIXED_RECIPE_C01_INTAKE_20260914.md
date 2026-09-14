@@ -96,7 +96,7 @@ Each row is a retained component of the frozen six-unit study; the next selected
 | 1 | complete,1024/2048/192 checked | 292.52 | 291.55 / 1.0 | 0.08605236338348182 | 0.04842833140392613 | [unit facts](evidence/cluster_fixed_recipe_c01_20260914/unit_01/UNIT_FACTS.json), [archive](evidence/cluster_fixed_recipe_c01_20260914/unit_01/NATIVE_ARCHIVE_MANIFEST.json) |
 | 2 | complete,1024/2048/192 checked | 287.56 | 287.79 / 0.78 | 0.07448163361961681 | 0.04061844459906548 | [unit facts](evidence/cluster_fixed_recipe_c01_20260914/unit_02/UNIT_FACTS.json), [archive](evidence/cluster_fixed_recipe_c01_20260914/unit_02/NATIVE_ARCHIVE_MANIFEST.json) |
 | 3 | complete,1024/2048/192 checked | 286.1 | 285.72 / 0.33 | 0.10273287413258897 | 0.08741625680587661 | [unit facts](evidence/cluster_fixed_recipe_c01_20260914/unit_03/UNIT_FACTS.json), [archive](evidence/cluster_fixed_recipe_c01_20260914/unit_03/NATIVE_ARCHIVE_MANIFEST.json) |
-| 4 | selected_uninvoked | — | — | — | — | [original identity/status](evidence/cluster_fixed_recipe_c01_20260914/EXECUTION_FACTS.json) |
+| 4 | running_monitor_adopted | — | — | — | — | [original identity/status](evidence/cluster_fixed_recipe_c01_20260914/EXECUTION_FACTS.json) |
 | 5 | selected_uninvoked | — | — | — | — | [original identity/status](evidence/cluster_fixed_recipe_c01_20260914/EXECUTION_FACTS.json) |
 | 6 | selected_uninvoked | — | — | — | — | [original identity/status](evidence/cluster_fixed_recipe_c01_20260914/EXECUTION_FACTS.json) |
 
