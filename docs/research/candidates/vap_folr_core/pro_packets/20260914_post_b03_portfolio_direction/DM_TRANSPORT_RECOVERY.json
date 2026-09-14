@@ -31,5 +31,26 @@
   "provider_observation": "Stop answering visible. Same existing generation states it located pinned report/manifest and is reading full B03 review/DM response/current slots/source context. This is observed progress, not yet verified complete source access or a direction verdict.",
   "recovery_action": "DM accepted bounded same-conversation recovery; Transport released FOLR actions/observation and continues ACVC independently. Observe and fully archive this accepted effect before deciding whether any delivery correction is needed. No DM Send/edit/Stop/Regenerate performed.",
   "decision_ceiling": "Transport failure is not scientific PARK, failed B03 evidence or a new empirical allowance. ACTIVE/MEDIUM and three occupied slots remain. Complete actual answer and access scope must be read before any scientific acceptance.",
-  "cost": "Additional finite recovery observation/archival and intake; no new scientific invocation. Actual full support/provider/cumulative cost UNKNOWN; historical costs preserved."
+  "cost": "Additional finite recovery observation/archival and intake; no new scientific invocation. Actual full support/provider/cumulative cost UNKNOWN; historical costs preserved.",
+  "current_recovery_state": "EXISTING_GENERATION_ARCHIVE_ONLY_ADOPTED_BY_TRANSPORT",
+  "observation_handback": {
+    "adopted_by_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+    "source": "Direct Transport App adoption message; actual queue adoption and same-generation observation explicitly confirmed.",
+    "mode": "ARCHIVE_ONLY",
+    "same_conversation_url": "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1",
+    "current_transport_iab_tab_id": "47",
+    "prior_transport_tab_id": "44",
+    "tab_change_reason": "Prior tab unavailable after handoff; reacquired same conversation URL, observation only.",
+    "last_partial_user_node_id": "97c37b16-ede5-49ae-bb9d-ec4e4b33de0a",
+    "verified_node_array_copied_programmatically_from": "DM_TRANSPORT_RECOVERY.json:actual_observed_user_nodes",
+    "durable_queue": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/pending-requests.json",
+    "exact_full_prompt_accepted": false,
+    "transport_reported_manual_send_count": 0,
+    "actual_partial_user_effect_count": 4,
+    "transport_observed_provider_state": "Stop answering / Pro thinking",
+    "dm_new_send_count": 0,
+    "permitted_next_action": "Observe existing generation to terminal, preserve exact original complete response and raw archive facts, return directly to DM. No new input/Send/edit/Stop/Regenerate.",
+    "awaited_dm_consequence": "Read full actual answer, check original scientific question and accessed full report/manifest/reviews/current context, respond to findings and apply a conforming direction decision or resolve a concrete same-request gap."
+  },
+  "shared_control_followup": "Actual multiline keyboard submission and manual ID-transcription defects reported once to Root with published evidence for focused shared procedure repair. This is not a research approval gate."
 }
