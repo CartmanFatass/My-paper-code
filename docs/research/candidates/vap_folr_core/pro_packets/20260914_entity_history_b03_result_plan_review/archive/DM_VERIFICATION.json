@@ -1,0 +1,36 @@
+{
+  "request_id": "2026-09-14-folr-entity-history-b03-result-plan-review-01",
+  "verified_at_utc": "2026-09-14T12:17:19.090653+00:00",
+  "delivery_commit": "18e03e45d69def09d29c0f2c299bb855891b0f27",
+  "raw_git_blob": {
+    "bytes": 23158,
+    "sha256": "8686d0131e4dea5e78cf31d6b8d797f1c49db065858c00959d264de289910a37",
+    "lines": 107,
+    "ends_with_lf": true
+  },
+  "full_response_read_by_dm": true,
+  "transport_original_local_capture_byte_equal": true,
+  "transport_reported_body": {
+    "bytes": 23157,
+    "sha256": "76c9aa4bd443086e55a968e0a74b5325f3147dff5e2997e3964db71299f51170",
+    "relation_to_raw_blob": "raw Git blob without its one terminal LF; not the original Git file bytes"
+  },
+  "receipt_correction": "Preserve original TRANSPORT_FACTS.json and CHAT_RECEIPT.md. Their original-no-LF/file-digest statements are inaccurate; raw Git and local response are identical, complete and both have LF.",
+  "accepted_prompt": {
+    "logical_body_bytes": 1935,
+    "logical_body_sha256": "85858f370d899d28fc2ebcd8c0d396a67839d33e9f6dde3c7cddede8ef7adeaf",
+    "local_container_bytes": 1936,
+    "local_container_adds_lf": true,
+    "provider_body_check_source": "Transport browser readback; DM independently checks original HANDOFF against archived logical body"
+  },
+  "delivery_scope_verified": "Direct git fetch/log/diff confirms only authorized RESPONSE.md added on descendant of951b66e4d; ff-only integrated",
+  "issue_comment": {
+    "id": 5663487902,
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5663487902",
+    "fresh_dm_gh_api_read": true,
+    "links_same_task_and_delivery": true
+  },
+  "empirical_invocations": 0,
+  "provider_resend": false,
+  "full_support_cost": "UNKNOWN"
+}

@@ -66,13 +66,16 @@ No active native producer or additional fit remains selected. [DM intake](FOLR_E
 favors reviewing a bounded proposal that preserves generic recurrence in both arms
 while testing persistent versus current-only entity state. It is unimplemented and
 not yet selected; stopping, longer learning and a changed host remain real alternatives.
-The independent result/plan review is published. After same-request reconciliation,
-registered browser Transport confirmed one accepted Send and read back the complete
-1935-byte prompt at provider user82d7b17b-3f22-45a6-8d3b-1ed647164bfc.
-The [dispatch receipt](pro_packets/20260914_entity_history_b03_result_plan_review/DISPATCH_RECEIPT.json)
-preserves the earlier coverage gap, exact input digest and current observation owner.
-Pro is generating; the complete answer has not yet been received. Transport owns
-terminal observation/full archival; DM response and a substantive Portfolio report follow.
+The [complete independent result/plan review and DM response](pro_packets/20260914_entity_history_b03_result_plan_review/INTAKE.md)
+are now read and preserved. The review finds no result-invalidating B03 defect and
+favors developing the additive-persistence question over a third unchanged block.
+DM accepts its prospective findings: unseen current-only entity state must be zero;
+both learners retain their own generic recurrent route and two-stream replay; equal
+parameter counts do not match temporal capacity or prove a gain over unaugmented Generic.
+No new empirical invocation follows from the review. The next actual work is the
+substantive Portfolio direction report, coordinating its same-conversation turn
+after the existing RCLE vacancy author. The earlier Transport coverage gap and
+corrected raw-byte receipt remain preserved; no FOLR provider producer remains.
 Current ACTIVE/MEDIUM remains; no automatic PARK.
 FOLR continues to occupy one existing slot, with the
 same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
