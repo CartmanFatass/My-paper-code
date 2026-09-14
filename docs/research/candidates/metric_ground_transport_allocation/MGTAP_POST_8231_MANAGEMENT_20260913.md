@@ -78,6 +78,11 @@ Two positive instances include the original inside-MEI 8212 and above-MEI 8214;
 the adverse 8213 remains. The analysis rejects no original outcome and provides
 no additional independent training evidence. DM accepts this bounded A result.
 
+Convergence's independent review clarifies that the sample SD is spread among
+observed fitted-pair endpoint estimates, including finite final-evaluation noise
+as well as between-fit variation. It is not a training-only variance component
+or a prediction of early256 variability; no extra decomposition is inferred.
+
 ## Current management question and recommendation
 
 **DM selects continued ACTIVE/MEDIUM direction work through the newly selected
@@ -181,10 +186,13 @@ benefit. Neither the A center nor the forthcoming B silently relabels them.
 
 ## Delivery and actual state
 
-This report and A result are DM-accepted documentary evidence; the B is selected
-locally, with reviewed source/static checks accepted and no launch or Monitor
-adoption yet. [Engineering record](early_exposure_b01_8241_20260913/ENGINEERING.md)
-retains independent review and the complete process-timing acceptance rule. Clerk
+This report and A result are DM-accepted documentary evidence; the selected B
+has now completed as COND_ABOVE_MEI, Delta+0.015128847632690413 J, complete native
+188.19s. [E0](MGTAP_EARLY_EXPOSURE_B01_RESULT_20260913.md) and
+[intake](MGTAP_EARLY_EXPOSURE_B01_INTAKE_20260913.md) record full technical facts,
+claim limits, cost unknowns and the complete independent scientific review/intake.
+[Engineering record](early_exposure_b01_8241_20260913/ENGINEERING.md) retains
+independent code review and the complete process-timing acceptance rule. Clerk
 receives one changed event with the exact published commit for recording/integration.
 No automatic Portfolio request is to be prepared or sent from this document.
 DM owns engineering, intake, useful continuation and the entire direction lifecycle;

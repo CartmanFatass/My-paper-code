@@ -95,3 +95,10 @@ same current source revision. Clerk records actual propagation separately from R
   overlap/conflict occurred. Its independently delivered scientific response was preserved in
   the authoring merge; main was not edited for that response. Until a concrete receipt exists,
   message delivery is not counted as synchronization.
+- MGTAP subsequently returned the same concrete 25-path rollout: authoring commit
+  `fea6df33ced6a6cfb2028cb9a9171b70024a0559` (pushed on `codex/mgtap`) and detached session
+  commit `f00416a0cb23efc00cc394f703b80f49c514352d` both match the repaired source; both checkouts
+  are clean, six skill quick-validations and three TOML parses pass, and live registries,
+  portfolio/report state, direction science and fixed packets were excluded. Its B8241 result
+  and full scientific-review intake are separate accepted research evidence, not a control-sync
+  approval or a new Portfolio request.
