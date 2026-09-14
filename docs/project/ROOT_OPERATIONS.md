@@ -63,7 +63,7 @@ universal per-step Portfolio permission requirement.
 Clerk records and integrates DM outcomes, resolves mechanical resource/order conflicts and reports
 actual occupancy versus work. DM PARK/CLOSE releases its occupied execution slot after live work is
 safely reconciled. DM supplies PARK.md and a direct Clerk handoff; Clerk preserves the research
-lessons, archives the task and obtains Portfolio replacement selection up to four occupied/reserved
+lessons, archives the task and obtains Portfolio replacement selection up to three occupied/reserved
 slots under CLERK_OPERATIONS.md. Existing directions continue independently.
 
 ## Portfolio report and owner adjustments
@@ -71,7 +71,7 @@ slots under CLERK_OPERATIONS.md. Existing directions continue independently.
 Maintain PORTFOLIO.md as a concise Chinese report: direction-owned conclusion/lifecycle, evidence,
 actual work/producer, cost and uncertainty, next DM action, and optional choices for the user.
 Report statements distinguish observed/applied facts from recommendations. Genuine vacancies
-trigger the owner-delegated four-slot replacement workflow, not per-object approval.
+trigger the owner-delegated three-slot replacement workflow, not per-object approval.
 
 Clerk may request and execute scoped Portfolio vacancy selection under the current owner delegation.
 Other cross-direction changes require an explicit owner request.

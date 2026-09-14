@@ -47,13 +47,13 @@ cross-task impact alone does not route an issue to Root. Root handles a concrete
 control-code change or actual user choice outside delegation. Follow SIBLING_COMMUNICATION.md;
 routine repair traffic does not need Root messages or acknowledgement.
 **Portfolio** supplies the user-facing report and owner-delegated vacancy selection. It summarizes DM-owned conclusions,
-lifecycle, actual work, costs, uncertainty and options. It does not approve ordinary DM research. OWNER_DIRECT 2026-09-13 delegates filling genuine
-PARK/CLOSE vacancies up to four occupied/reserved independent DM slots: Clerk requests Portfolio
+lifecycle, actual work, costs, uncertainty and options. It does not approve ordinary DM research. OWNER_DIRECT 2026-09-13, clarified 2026-09-14, delegates filling genuine
+PARK/CLOSE vacancies up to three occupied/reserved independent DM slots: Clerk requests Portfolio
 selection directly through the Codex in-app browser, then creates selected Astra/max DM tasks.
 CLERK_OPERATIONS.md governs notification, PARK knowledge records, safe archival and deduplication.
 Other global adjustments require an explicit owner request.
 
-OWNER_DIRECT 2026-09-13: full-lifecycle DM delegation and the scoped four-slot replacement delegation replace
+OWNER_DIRECT 2026-09-13, clarified 2026-09-14: full-lifecycle DM delegation and the scoped three-slot replacement delegation replace
 older blanket Portfolio finality and blanket prohibitions on vacancy replacement prospectively. Specific owner
 stops and actual resource limits remain. Preserve accepted external requests through archive;
 new advice does not automatically change global layout. Current research state and endpoints are
@@ -169,7 +169,7 @@ and evidence requirements follow the actual claim; there is no mandatory Pro app
 | Direction research and lifecycle | DM, subject to specific owner overrides | Existing card/intake/DIRECTION.md, reasons/evidence/next condition, OWNER_DELEGATED |
 | Independent scientific review | Direction Pro Convergence; DM responds and resolves findings | Full review, DM response/corrections and accepted claim limits |
 | Mechanical coordination/reporting | Clerk | Actual events, accepted integration, current report and pending consequences |
-| Vacancy replacement up to four occupied/reserved slots | Portfolio selection, Clerk execution under owner delegation | DM PARK/closeout, request, selected tasks and actual application |
+| Vacancy replacement up to three occupied/reserved slots | Portfolio selection, Clerk execution under owner delegation | DM PARK/closeout, request, selected tasks and actual application |
 | Other cross-direction layout or new resource commitments | Owner through Root on an explicit request | Owner instruction and actual application; requested advice remains advice |
 
 DM declares finite invocation/cost/resource bounds and stopping conditions before execution.
@@ -279,7 +279,7 @@ When the owner is absent the loop keeps running under a standing delegation (own
 8. **Portfolio reporting and owner-requested adjustment.** The former standing Portfolio Pro finality
    is withdrawn prospectively. Maintain a user-readable report from DM decisions and evidence.
    The owner delegates Portfolio selection and Clerk creation of replacement DMs for genuine
-   vacancies up to four occupied/reserved slots. Other consultations/global adjustments require
+   vacancies up to three occupied/reserved slots. Other consultations/global adjustments require
    explicit owner scope. Preserve historical PRO_FINAL provenance and accepted request effects;
    a generic report is not authorization to change other directions.
 
@@ -303,7 +303,7 @@ knowledge preservation, then fills genuine vacancies through Portfolio under CLE
 A record-only closeout does not occupy a scientific slot; do not force low-value work to avoid PARK.
 Reopening an archived direction coordinates slot admission with Clerk and Portfolio to avoid duplicates.
 
-Clerk uses hmasd-loop-dispatch for changed events; the enabled 50-minute heartbeat recovers missed
+Clerk uses hmasd-loop-dispatch for changed events; an actually enabled 50-minute heartbeat recovers missed
 or interrupted consequences only. A real run/review/request has an owner/identity/event and retains
 observation. An ACTIVE-idle direction without work or a lifecycle decision goes back to its DM for
 that missing decision; no indefinite empty waits or forced low-value experiments. Specific owner

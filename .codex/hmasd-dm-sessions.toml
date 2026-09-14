@@ -11,7 +11,7 @@ heartbeat_state = "MISSING"
 heartbeat_target = "clerk"
 
 main_writer = "clerk"
-main_writer_event = "MAIN_WRITER_RELEASED / mgtap-park-closeout-integration"
+main_writer_event = "MAIN_WRITER_RELEASED / three-slot-workflow-owner-correction"
 main_writer_turn = "01a095b7-850f-7401-ad4e-5e4320d285f1"
 
 [clerk]
@@ -21,7 +21,7 @@ model = "gpt-5.6-luna"
 reasoning_effort = "high"
 state = "active"
 activated_event = "clerk-activate-20260913-01"
-last_observable_action = "owner resumed research; shared Agentify/Chrome restarted and verified; RCLE/FOLR PARK.md handoffs integrated (b11da336f plus b327c6e17) and tasks archived; two-slot Portfolio request sent via direct CUA iab, complete plan pending; heartbeat automation lookup returned missing"
+last_observable_action = "three-slot target restored after DISH PARK; current directions and Portfolio continuation are recorded below"
 session_checkout = "C:/Projects/HMASD"
 operational_checkout = "C:/Projects/HMASD"
 
@@ -130,7 +130,7 @@ authoring_branch = "codex/ucope"
 [directions.learned_counterfactual_agent_credit]
 state = "management_in_progress"
 occupies_slot = true
-reserved_by = "portfolio-single-slot-20260914"
+selection_request = "portfolio-single-slot-20260914"
 owner_mode = "independent_task"
 accepted_event = "portfolio-lcac-single-slot-selection-20260914"
 last_processed_event = "LCAC_B01_RESULT_REVIEW_PUBLISHED_20260914"

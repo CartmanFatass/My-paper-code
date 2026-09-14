@@ -6,7 +6,7 @@ description: Use when Clerk prepares Portfolio reports, handles vacancies after 
 # Portfolio reporting and vacancy selection
 
 DM owns the direction lifecycle; Pro Convergence independently reviews its science. Portfolio
-reports current knowledge and selects replacements under the owner's four-slot vacancy delegation.
+reports current knowledge and selects replacements under the owner's three-slot vacancy delegation.
 Follow docs/project/CLERK_OPERATIONS.md for PARK.md, direct DM notification, safe task archival,
 occupied/reserved slot counting, direct Codex in-app browser requests and new Astra/max DM creation.
 
@@ -25,4 +25,6 @@ Clerk does not invent replacement science. Report recommendations and actual app
 
 Other global changes require explicit owner scope. Generic reporting/advice is not additional
 execution authority. No Portfolio approval is needed for routine DM objects, recasts or lifecycle.
-Owner pause overrides replacement. The heartbeat recovers missed events without unchanged chatter.
+Apply owner pauses to their named scope. Stopping a fourth direction does not disable
+replacement below portfolio.target_slots (currently 3); only an explicit workflow/research pause
+suspends the delegated replacement process. The heartbeat recovers missed events without unchanged chatter.

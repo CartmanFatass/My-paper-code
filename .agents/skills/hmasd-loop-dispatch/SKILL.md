@@ -6,7 +6,7 @@ description: Use when Clerk processes direction events, records DM lifecycle dec
 # HMASD event coordination
 
 DM owns its entire direction lifecycle; Clerk coordinates and records; Root is the user entry.
-Portfolio is a report for the user. Read current routes/state from .codex/hmasd-dm-sessions.toml
+Portfolio provides user reports and delegated vacancy selection. Read current routes/state from .codex/hmasd-dm-sessions.toml
 and procedure from docs/project/CLERK_OPERATIONS.md. Owner instructions take precedence.
 
 Native specialists follow SIBLING_COMMUNICATION.md: same work batch may reuse its child;
@@ -25,7 +25,9 @@ On an actionable event:
    repeat identical reminders indefinitely.
 5. Require scientific PARK knowledge handoff in PARK.md and direct DM notification. Preserve
    closeout, record and safely archive the task; fill genuine vacancies through the Portfolio
-   in-app browser workflow in CLERK_OPERATIONS.md, counting occupied plus reserved slots to four.
+   in-app browser workflow in CLERK_OPERATIONS.md, counting occupied plus reserved slots to three.
+   Use portfolio.target_slots (currently 3); a fourth-slot stop is not a Portfolio pause.
+   A released slot leaving two occupied and zero reserved requires one replacement request.
 6. Update the existing user-facing Portfolio report and notify Root of material changes or a
    concrete user-control exception. Fact-only updates need no ACK. End the handled event turn.
 
@@ -34,7 +36,7 @@ only for missing progress facts; native children return to their actual DM. Real
 work has an ID, owner and event. Empty intentions do not count as advancing work. An enabled
 50-minute heartbeat is interruption recovery, not a planning trigger.
 
-The owner delegates four-slot vacancy replacement to Clerk/Portfolio. Other cross-direction
+The owner delegates three-slot vacancy replacement to Clerk/Portfolio. Other cross-direction
 adjustments require an explicit owner request. Reporting
 or advice alone does not authorize implementation. Preserve accepted old request/handle bindings;
 archive pending answers as advice without automatically applying obsolete global dispositions.

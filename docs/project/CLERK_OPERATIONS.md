@@ -1,7 +1,7 @@
 # Independent Clerk operations
 
-OWNER_DIRECT 2026-09-13: DM owns its complete direction lifecycle. Portfolio is the user-facing
-research report plus owner-delegated selection of replacements for genuine vacancies up to four
+OWNER_DIRECT 2026-09-13, capacity clarified 2026-09-14: DM owns its complete direction lifecycle. Portfolio is the user-facing
+research report plus owner-delegated selection of replacements for genuine vacancies up to three
 occupied/reserved independent DM slots. Other global adjustments require explicit owner scope. Clerk is an independent gpt-5.6-luna/high mechanical coordinator. Root is the user entry
 and shared-control engineering owner. Current state and actual endpoints are in
 C:/Projects/HMASD/.codex/hmasd-dm-sessions.toml.
@@ -16,9 +16,39 @@ research value, require Pro approval, or make a disposition itself. A specific o
 still overrides a DM decision. Do not change another direction or resource commitments.
 
 Portfolio reports preserve DM conclusions. Owner delegates filling genuine PARK/CLOSE vacancies
-up to four occupied/reserved slots through Portfolio selection; no per-step DM research approval.
+up to three occupied/reserved slots through Portfolio selection; no per-step DM research approval.
 Clerk works directly in C:/Projects/HMASD on main, not a separate session worktree. Serialize actual
 Root/Clerk index writers; preserve unrelated changes and do not create a branch per Clerk event.
+
+## Capacity target and scoped stops
+
+OWNER_DIRECT 2026-09-14 clarification: maintain three parallel directions. Portfolio vacancy
+selection remains enabled. Read portfolio.target_slots (currently 3) from the live registry;
+deficit = max(0, target_slots - occupied_slots - reserved_slots). A genuine released slot with a
+positive deficit triggers Clerk-owned Portfolio replacement without Root ACK. At zero deficit,
+create no additional direction. An actual pending request/setup reserves its identified slots;
+a stopped request or unselected historical candidate reserves none.
+
+Stopping the fourth direction or its capacity-expansion request does not pause Portfolio, the
+remaining directions, or later replacement within three slots. Apply owner stops only to their
+named scope; suspend all replacement only when the owner explicitly pauses that workflow or
+research. For example, three occupied directions becoming two after DM PARK creates one vacancy.
+Keep the stopped fourth-slot request as evidence; reconcile its effects and bind any replacement
+request to the newly vacant slot rather than silently resuming obsolete expansion.
+
+Slot accounting follows one chain: vacancy -> pending request -> selected DM setup -> actual DM.
+Transfer the same reservation between request and setup; do not count both. Once an actual DM
+adopts the direction, replace the reservation with occupies_slot=true. On confirmed cancellation
+or failed setup, reconcile whether a task was actually created before releasing/recovering the
+reservation. A possibly accepted create or Send remains a reconciliation task, not permission to
+duplicate it. Record the request/setup identity, owner and next action before dispatch; an unsent
+intention is not active execution. A cancelled fourth-slot request cannot reserve a later vacancy.
+
+A handled event includes its necessary next action. If a genuine vacancy remains and no request
+owns it, initiate the delegated request in that event turn. A finished integration, sent message
+or report update alone does not complete replacement. Await a real provider/setup/DM event only
+after its owner and identity exist; otherwise resolve the concrete unfinished step. Keep the
+request through full answer intake, selected-task creation and verification of the first action.
 
 ## PARK, archival and vacancy replacement
 
@@ -41,7 +71,7 @@ record actual success. Keep task/branch/evidence/reopen routes; archival deletes
 Do not archive a running DM merely because its lifecycle label says PARK.
 
 Count occupied direction slots plus slots reserved by pending Portfolio requests/new-task setup.
-If fewer than four, Clerk owns one deduplicated vacancy request for the deficit. Record vacant
+If fewer than three, Clerk owns one deduplicated vacancy request for the deficit. Record vacant
 identities, request identity, current affected direction facts/PARK links, and pending slot count
 in existing tracking. Independent directions continue; record-only PARK supplements do not impose
 a global barrier. Do not recycle failed families without exposing their prior results/stop reasons.
@@ -61,7 +91,7 @@ HMASD project, model gpt-6-astra and thinking max. Give each DM full lifecycle a
 controls, evidence/PARK lessons and Clerk return route. Follow tool requirements for project lookup
 and setup; reuse direction authoring branches. Pending clientThreadId reserves a slot but is not
 an active route; register actual threadId/host and verify the first concrete action. Recount before
-creation; never create duplicates or exceed four by ignoring pending setup. A deficient answer
+creation; never create duplicates or exceed three by ignoring pending setup. A deficient answer
 receives focused same-request clarification, not a Clerk-invented scientific choice. Additional
 paid capacity, unrelated reallocation or explicit owner stops stay outside this delegation.
 
@@ -117,5 +147,8 @@ Preserve scientific review of design, evidence, conclusions and next plans; DM r
 and owns corrections and direction decisions. Portfolio reporting does not cancel this review. A real technical defect goes to the
 relevant Astra DM; Clerk coordinates exact operation/receipt ownership, not code implementation.
 
-The existing 50-minute heartbeat recovers missed/interrupted consequences only, silent when
+When actually enabled, the 50-minute heartbeat recovers missed/interrupted consequences only, silent when
 unchanged. It can recover unfinished vacancy actions under this delegation; it cannot override a DM/owner decision.
+
+Read heartbeat_state from the registry. MISSING is not active coverage; event handoffs continue
+without waiting for automation. Never claim recovery coverage solely because this document names it.

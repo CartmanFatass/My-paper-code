@@ -8,7 +8,7 @@ not inherit automatically from a custom subagent role file.
 ## Independent tasks
 
 Root is the user entry. DM owns its entire direction lifecycle; Clerk coordinates and records.
-Direction Pro Convergence is the independent scientific Reviewer; Portfolio is the user report.
+Direction Pro Convergence is the independent scientific Reviewer; Portfolio supplies user reports and delegated vacancy selection.
 Use send_message_to_thread for actionable DM-to-Clerk and Clerk-to-DM handoffs. A final alone does
 not deliver to another independent task. Messages give event/assignment/evidence revision, actual
 DM decision, next owner/action and real dependency. Keep full science in the intake/review record.
@@ -40,7 +40,7 @@ traffic to Root. Runtime rejection remains a real restriction, never permission 
 the DM retains diagnosis and allowed alternatives, escalating only a concrete required user action.
 
 Clerk uses compact wait_threads/cursors for missing facts and read_thread only where needed. It
-never waits for independent DM messages through collaboration.wait_agent. The 50-minute heartbeat
+never waits for independent DM messages through collaboration.wait_agent. When enabled, the 50-minute heartbeat
 silently recovers missed/interrupted events, including unfinished owner-delegated vacancy actions. Owner pause takes priority.
 
 ## Native DM specialists and scientific review
