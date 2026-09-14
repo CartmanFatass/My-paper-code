@@ -11,17 +11,17 @@ heartbeat_state = "MISSING"
 heartbeat_target = "unassigned"
 
 main_writer = "unclaimed"
-main_writer_event = "RCLE_E01_ACCEPTED_INTEGRATION_20260914_RELEASED"
-main_writer_turn = "01a09e10-9d9f-7f82-87c0-d58cbe0c7618"
+main_writer_event = "MGTAP_CLERK_RETIREMENT_20260914_RELEASED"
+main_writer_turn = "01a09cd8-676e-7513-806d-a86b7e104518"
 
 [retired_clerk]
 thread_id = "01a09d6c-e4e0-7613-ba99-7b0a1b6c540e"
 host_id = "local"
 model = "gpt-5.6-luna"
 reasoning_effort = "high"
-state = "retiring_handoff_requested"
+state = "handoff_preserved_ready_for_archive"
 activated_event = "clerk-activate-20260913-01"
-last_observable_action = "three-slot target restored after DISH PARK; current directions and Portfolio continuation are recorded below"
+last_observable_action = "Clerk reports no writer/producer; App turn completed and idle; exact prompt/answer archived and read by MGTAP"
 session_checkout = "C:/Projects/HMASD"
 operational_checkout = "C:/Projects/HMASD"
 
@@ -58,7 +58,7 @@ owner_mode = "independent_task"
 accepted_event = "mgtap-session-astra-max-v1"
 accepted_turn = "01a09cd9-d3be-7922-85ec-da2dc1766572"
 last_processed_event = "MGTAP_REENTRY_LR_SELECTION_CONTINUE_20260914"
-next_action = "CONTINUE accepted for MGTAP-LR-SELECTION-B01; protocol implementation and 13 synthetic checks complete, with zero native exposure so far; DM owns runner, independent review, admission and launch"
+next_action = "Complete native runner delivered (273 lines), focused checks16 tests+16 subtests passed; independent Sol/high code review active, scientific design review dispatched to independent Transport; no native launch"
 portfolio_selection_archive = "docs/research/portfolio/pro_packets/20260914_lcac_park_vacancy_selection"
 portfolio_response_full_received = true
 portfolio_response_full_source = "C:/Users/fires/.codex/attachments/ff3b2a2c-ffe5-45b9-b634-ed0d368bf037/pasted-text.txt"
@@ -72,6 +72,12 @@ authoring_branch = "codex/mgtap"
 reentry_commit = "304450d6f9f776c2e72fe6d3517a6909e9ee83ae"
 selected_object = "MGTAP-LR-SELECTION-B01"
 selected_object_scope = "three-candidate learning-rate selection plus one fresh selected-program holdout pair; 8 fits; 589824 team ticks; 4096 Adam; no native launch yet"
+review_task_sha = "bceb608c441c7c94ebbded02f011c7eb4d85f675"
+review_handoff_sha = "7f0a2c0b4b0f231f028d12fe12a9b7cd269db9c3"
+code_reviewer = "/root/rv_s_h_mgtap_lr_runner"
+review_send_state = "App dispatch confirmed; provider acceptance not yet returned"
+implementation_batch = "MGTAP_LR_RUNNER_IMPL_20260914; completed; no native exposure"
+review_request = "2026-09-14-mgtap-lr-selection-design-review-01"
 
 [directions.roster_consistent_latent_exploration]
 state = "active_scientific_review"
@@ -239,7 +245,7 @@ policy = "docs/project/PEER_DM_COORDINATION.md"
 model = "equal_peers_no_standing_coordinator"
 main_mutex = 'Local\HMASD_Main_Transaction'
 retirement_handoff_owner = "metric_ground_transport_allocation"
-retirement_handoff_state = "assigned_to_mgtap_peer; clerk_final_handoff_pending"
+retirement_handoff_state = "preserved_no_live_clerk_writer_or_producer; archive_pending"
 
 [coordination.folr_owner_review]
 thread_id = "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc"
@@ -247,3 +253,19 @@ state = "dm_report_for_portfolio_final_interpretation"
 reservation = 1
 reason = "owner challenges repeated post-negative PARK and incomplete direction-role/knowledge mapping"
 next_action = "FOLR DM submits full report and fixed web context to Portfolio for final direction decision; preserve reservation and coordinate outcome with MGTAP"
+
+[coordination.clerk_retirement]
+owner_thread_id = "01a09cd8-676e-7513-806d-a86b7e104518"
+state = "preserved_ready_for_archive"
+archive_source_sha = "552f0dce7904e35206b8e32f9180ab85aee822ad"
+archive_path = "docs/research/portfolio/pro_packets/20260914_folr_park_vacancy_retirement"
+local_correlation_id = "folr-park-vacancy-20260914-01"
+provider_request_id_status = "NOT_VERIFIED; local ID only"
+provider_conversation_id = "6aa7836e-e4a0-83e8-985d-c633d94935b1"
+provider_user_message_id = "5acd92f4-4244-4464-9f5d-976b7c00b70d"
+provider_assistant_message_id = "9f4d8304-d85d-45a7-b3ae-09c344748d64"
+response_sha256 = "9cfc0a010931dd73ad7aa3dd3530e45bb4c8e4d928467fe793c1852279512fac"
+response_bytes = 17577
+provider_state = "terminal; full prompt and answer read; current Transport performed no Send"
+old_advice = "DISH selected under earlier context; NOT APPLIED; FOLR third-slot reservation remains"
+next_owner = "FOLR DM authors pending direction report to Portfolio; RCLE coordinates its report directly with FOLR and Transport; MGTAP owns only this handoff and any resulting one-vacancy consequence"
