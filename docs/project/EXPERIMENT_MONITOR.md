@@ -1,7 +1,7 @@
 # DM-owned experiment observation
 
-Each DM creates one reusable native Luna/low experiment-monitor child on its first accepted
-experiment and reuses it across that direction's handles. Use the registered HMASDExperimentMonitor
+Each DM creates a native Luna/low experiment-monitor child for a new experiment batch
+and reuses it only across handles belonging to that batch. Use the registered HMASDExperimentMonitor
 role with fork_turns=none and only this procedure plus exact handle facts. If an existing runtime has not loaded that role, spawn a default child with explicit
 model gpt-5.6-luna, reasoning_effort low and fork_turns=none, supplying the role instructions
 and this document. Do not inherit the DM's full research conversation merely to monitor handles.
@@ -24,8 +24,8 @@ No independent app-task goal, goal-adoption handshake or Root relay is required.
 ## Observation loop
 
 Keep a compact recoverable handle list in the existing direction execution record or assigned
-output path: handle identity, last observation, next due check and delivery state. Reuse one child
-for multiple handles; batch independent due checks. Use bounded commands and interruptible waits
+output path: handle identity, last observation, next due check and delivery state. Reuse the batch's child
+for its multiple handles; batch independent due checks. Use bounded commands and interruptible waits
 no longer than 60 seconds per tool call, checking at the assignment's useful interval. Longer
 check intervals can span several waits without model-visible progress messages to DM. Do not let
 one inaccessible handle block observation of others. Unchanged healthy status needs no message or
@@ -51,7 +51,9 @@ and continues the authorized direction. Root is involved only for a concrete Roo
 When the active set and pending notices are empty, return a native final with terminal event IDs
 and empty active_set. Do not poll completed handles or keep an empty monitor running. If an Operator owns collection, DM resumes that same Operator
 with followup_task after terminal notice; no parallel collection or polling. A later
-nonempty assignment resumes the same child with followup_task. If observation must transfer,
+nonempty assignment uses followup_task only for the same batch; an independent new batch
+uses spawn_agent with fork_turns=none. Record batch/child identity in the existing execution record.
+A long wait alone neither ends the batch nor calls for cache keepalives. If observation must transfer,
 preserve handles and notices and obtain actual replacement adoption before releasing ownership.
 Owner pause/stop instructions control which observation or closeout is permitted; no new run or
 research resumption follows from a monitor assignment or workflow change.

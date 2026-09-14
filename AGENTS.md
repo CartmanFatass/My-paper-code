@@ -64,11 +64,11 @@ CM and Implementer receive no new work; independent Reviewer remains available. 
 restart behavior are in Appendix A. Migration authority and historical boundaries:
 `docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md`.
 
-DM uses native waits for its children; Clerk uses registered event routes under SIBLING_COMMUNICATION.md. Each DM owns one reusable
+DM uses native waits for its children; Clerk uses registered event routes under SIBLING_COMMUNICATION.md. Each DM owns a batch-scoped
 Luna/low native experiment monitor; adoption and terminal facts return directly to that DM.
 Clerk receives independent DM handoffs through app messages. DM also owns native Agentify Transport and receives Pro archives directly.
 
-Each DM owns one reusable native Luna/high Agentify Transport child for exact Pro Send,
+Each DM creates a native Luna/high Agentify Transport child per request batch for exact Pro Send,
 observation, reconciliation, archive and direct native receipts. DM authors and publishes the
 request, dispatches to its child, waits natively and checks the complete response. Clerk uses the
 same parent/child route only for explicitly owner-commissioned Portfolio consultation,
@@ -91,6 +91,12 @@ evidence. The evidence standard is `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_
 more. `docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a required reading.
 
 ## Workflow calibration (OWNER_DIRECT, 2026-09-06)
+
+OWNER_DIRECT 2026-09-13: native subagents are reused within one bounded work batch; independent
+new batches create new children, default fork_turns=none with minimal relevant assignment context.
+The assigning parent decides the boundary by objective, not time or direction membership. Preserve
+in-flight work through safe closeout; no cache keepalives. DM/Clerk independent tasks and direction
+checkouts remain continuous. SIBLING_COMMUNICATION.md defines role-specific batches and handover.
 
 Clerk follows each direction handoff through its DM acceptance and authorized continuation. Resume
 its original DM for direction-local science and implementation/repair. Dispatch, forwarding
@@ -167,7 +173,10 @@ DM declares finite invocation/cost/resource bounds and stopping conditions befor
 Standing delegation is the authority; a card records work rather than requests permission. An ended
 allocation or unselected successor does not make direction-wide authority zero. Actual cumulative
 caps and specific owner constraints apply; no unlimited compute follows. Use empirical-spec 11.8
-for proportionate work and cost reasoning. New seeds/scales/comparisons need scientific reasons,
+for proportionate work and cost reasoning. A reasonable wall-time estimate or engineering threshold
+is not a hard stop, launch/Send gate or escalation trigger. DM owns prospective revision of ordinary
+wall plans/watchdogs; distinguish real owner/platform limits and frozen scientific endpoints under
+MARL_RUNTIME_ENGINEERING_SPEC section 1. New seeds/scales/comparisons need scientific reasons,
 not evidence of an entirely new mechanism or a Portfolio grant.
 
 Resource authority is determined by the source and scope of the limit. Owner-set cumulative limits,
@@ -178,7 +187,7 @@ support/closeout choices within the existing direction resources, including obse
 review response and publication of an already accepted request. Record the finite additional work,
 reason, stopping condition and cumulative cost/deviation in the existing intake. Preserve the old
 card, unknown costs and actual overruns; do not claim original-cap compliance, reset accounting,
-extend a running frozen experiment or disguise a scientific retry as administrative closeout.
+extend a running frozen scientific exposure/comparison endpoint or disguise a scientific retry as administrative closeout.
 Only a concrete boundary outside this delegation needs escalation, with its exact source and
 affected action. This is decision ownership, not an extra checklist or per-step approval.
 
@@ -315,24 +324,26 @@ byte digest already declared by the card or launch assignment; this does not mak
 code surface runnable.
 
 Before any sweep, the DM records a per-arm cost projection from the runner's own cost law (for
-the coordinator route, `M = num_envs × rollout_length / k`); the machine-time cap applies per arm,
-and an arm whose projection exceeds it is not launched. Usage consumed per valid result is
+the coordinator route, `M = num_envs × rollout_length / k`). An actual hard resource or scientific
+budget applies to its declared scope; a projection exceeding a DM planning estimate calls for DM
+reassessment/plan revision, not automatic refusal or escalation. Usage consumed per valid result is
 recorded per direction and is the ranking currency across directions.
 
-Engineering investigation follows `docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md`: toy >2700s
-and UAV >43200s apply to the complete logical invocation per arm/training seed, or the complete
+Engineering investigation follows `docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md`: toy >5400s
+and UAV >64800s apply to the complete logical invocation per arm/training seed, or the complete
 card invocation for seedless A work. Required initialization, learning, evaluation/checking and
 publication remain one chain across scripts/slices. Distinguish study elapsed critical path,
 sum of invocation wall and aggregate CPU work; these thresholds are not study caps, extra budget,
-or launch gates, and never override a stricter original cap.
+or launch gates. DM handles routine investigation and Clerk records it; the threshold itself never
+triggers a Root report. Actual limits are distinguished from planning estimates under spec section 1.
 
 Resume model: commit and push before every launch; launch every result-bearing run detached from
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
-configured `agent-task` supervisor. DM creates/reuses its native Luna/low monitor and supplies
+configured `agent-task` supervisor. DM creates a native Luna/low monitor for a new experiment batch or reuses that batch's monitor and supplies
 its canonical name to Operator. Assign accepted handles with followup_task; confirm direct
 MONITOR_ADOPTED before stopping routine polling. DM receives terminal facts directly, collects,
 checks and interprets, retaining technical/scientific acceptance. EXPERIMENT_MONITOR.md owns the
-compact handle record, bounded observation, terminal delivery and empty-set reuse. Do not create
+compact handle record, bounded observation, terminal delivery and within-batch reuse. Do not create
 independent monitor goals, Clerk receipt forwarding or duplicate observers. Transfer existing
 observation only after same-handle reconciliation and confirmed replacement adoption.
 DM-owned native Agentify Transport observes Pro requests
@@ -514,12 +525,12 @@ appendix and completed historical tasks remain unchanged.
   do not automatically inherit a custom subagent TOML. Do not add
   reload probes, delivery test services or timers.
 - Clerk coordinates registered independent DM tasks through cross-task events; unmigrated native
-  chains retain their original routes. Each DM owns a reusable Luna/high Agentify Transport
-  and receives its native Pro receipts; .codex/hmasd-transport.toml contains no global endpoint. Each DM creates/reuses a native Luna/low Experiment Monitor
+  chains retain their original routes. Each DM owns a batch-scoped Luna/high Agentify Transport
+  and receives its native Pro receipts; .codex/hmasd-transport.toml contains no global endpoint. Each DM creates a native Luna/low Experiment Monitor per experiment batch
   with minimal assignment context; resolve canonical names from runtime results. Experiment
   adoption/terminal facts return directly to DM. No shared Monitor or completion Relay endpoint.
 - Each independent DM uses Astra/max and owns its full lifecycle. Direction Pro Convergence is
-  its independent scientific Reviewer, served by its own reusable native Transport. Source/parent
+  its independent scientific Reviewer, served by its request-batch native Transport. Source/parent
   are the actual DM; operator is its child. Review responses inform DM decisions, not grants.
 - Portfolio is a user-facing report. Only an explicit owner-commissioned consultation uses a new
   Portfolio request with Clerk as source/parent and its native Transport as operator. Preserve old

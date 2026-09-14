@@ -30,6 +30,10 @@ without per-commit ACK. Root retains policy/skill engineering; Clerk is not an I
 
 ## One changed event
 
+Routine runtime investigation belongs to DM; Clerk records its conclusion/action in existing
+tracking. The toy >5400s and UAV >64800s references are not stops or Root-report triggers.
+Do not forward investigation notices as owner exceptions or introduce a 600-second default gate.
+
 1. Apply the newest owner pause/resume/scope instruction. Deliver it to actual owners and preserve
    accepted work at safe boundaries; do not mistake a status question for a pause.
 2. Record direction/assignment/evidence revision and its unfinished consequence. Receipt is not
