@@ -1,0 +1,150 @@
+{
+  "object": "LCAC_B02_1024",
+  "card": "docs/research/candidates/learned_counterfactual_agent_credit/LCAC_B02_SCIENCE_CARD_20260914.md",
+  "launch_sha": "25ea4d61c0e1f2484da77f4bc1851e17cdc8eb4a",
+  "seed": 9412,
+  "mode": "NATIVE_B_EXPLORE",
+  "seed_offsets": {
+    "actor_init": 11,
+    "critic_init": 12,
+    "train_reset": 1000,
+    "eval_reset": 3000,
+    "train_action": 10000,
+    "eval_action": 20000
+  },
+  "config": {
+    "horizon": 256,
+    "train_episodes": 1024,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "epochs": 4,
+    "dtype": "float32",
+    "device": "cpu",
+    "threads": 1
+  },
+  "timing_scope": "Arm body includes its optimizer/environment, training, checkpoint, evaluation and close. Shared setup and final publication are separate; the enclosing process measurement supplies complete invocation costs.",
+  "arms": {
+    "V": {
+      "counts": {
+        "constructors": 1,
+        "constructor_resets": 1,
+        "explicit_resets": 1056,
+        "step_calls": 270336,
+        "native_transitions": 270336,
+        "train_steps": 262144,
+        "eval_steps": 8192,
+        "train_episodes": 1024,
+        "eval_episodes": 32,
+        "action_draws": 1351680,
+        "rollouts": 512,
+        "optimizer_steps": 2048,
+        "q_baseline_rows": 0,
+        "v_baseline_rows": 262144,
+        "critic_fit_rows": 1048576
+      },
+      "complete": true,
+      "training_exposure": {
+        "actor": {
+          "parameters": 35159,
+          "initial_norm": 12.639944076538086,
+          "displacement": 4.955197811126709,
+          "relative_displacement": 0.392026877739468
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.289542198181152,
+          "displacement": 11.19409465789795,
+          "relative_displacement": 1.2050211322673898
+        }
+      },
+      "arm_body_wall_seconds": 210.37475130707026
+    },
+    "Q": {
+      "counts": {
+        "constructors": 1,
+        "constructor_resets": 1,
+        "explicit_resets": 1056,
+        "step_calls": 270336,
+        "native_transitions": 270336,
+        "train_steps": 262144,
+        "eval_steps": 8192,
+        "train_episodes": 1024,
+        "eval_episodes": 32,
+        "action_draws": 1351680,
+        "rollouts": 512,
+        "optimizer_steps": 2048,
+        "q_baseline_rows": 9175040,
+        "v_baseline_rows": 0,
+        "critic_fit_rows": 1048576
+      },
+      "complete": true,
+      "training_exposure": {
+        "actor": {
+          "parameters": 35159,
+          "initial_norm": 12.639944076538086,
+          "displacement": 5.158395290374756,
+          "relative_displacement": 0.40810269880462735
+        },
+        "critic": {
+          "parameters": 38657,
+          "initial_norm": 9.289542198181152,
+          "displacement": 11.25827407836914,
+          "relative_displacement": 1.2119299141106712
+        }
+      },
+      "arm_body_wall_seconds": 222.51134108006954
+    }
+  },
+  "primary": {
+    "delta": 0.002222628211804524,
+    "differences": [
+      -0.020467620803184428,
+      -0.0040848907451239425,
+      0.026013288581624966,
+      0.04168541694814937,
+      -0.04214385674170314,
+      -0.04313031475220286,
+      -0.1024069848312841,
+      0.12054242586739057,
+      0.03860979589314714,
+      0.007444882499005628,
+      0.024532560070610943,
+      -0.027871214678073908,
+      -0.04839095116417541,
+      0.10297373220248557,
+      0.012475908108357997,
+      -0.052286961237506674,
+      -0.036122273749508466,
+      0.04116504028981635,
+      -0.044133770383438825,
+      0.08498059144147066,
+      0.03829427723914061,
+      0.03145613818500517,
+      0.0009885581517435071,
+      -0.007595584926044632,
+      -0.027380575310960775,
+      -0.01972839392545067,
+      0.015918086481626903,
+      0.012595193891291073,
+      0.005060956840780784,
+      -0.041485530723022135,
+      0.0007141346247429292,
+      -0.017097960566965442
+    ],
+    "paired_worlds": 32,
+    "absolute_means": {
+      "V": 0.18844570785317188,
+      "Q": 0.1906683360649764
+    },
+    "descriptive_sd": 0.046965825987020295,
+    "minimum": -0.1024069848312841,
+    "maximum": 0.12054242586739057,
+    "adverse_worlds": 15,
+    "mei": 0.01,
+    "reading": "WITHIN_MEI",
+    "uncertainty": "one trained pair; descriptive fixed panel; no training-population interval"
+  },
+  "complete": true,
+  "shared_setup_wall_seconds": 0.6796326659386978,
+  "elapsed_to_summary_start_seconds": 433.5660388529068
+}

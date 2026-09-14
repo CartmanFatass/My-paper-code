@@ -1,10 +1,12 @@
 # LCAC — learned counterfactual agent credit
 
-## Current position — B01 reviewed; B02 running, 2026-09-14
+## Current position — B02 complete; lifecycle review, 2026-09-14
 
-**CONTINUE; recasts0.** [B01 result](LCAC_B01_RESULT_EVIDENCE_20260914.md): one256/32 master9411 pair, Q−V=−0.00362643, V0.18068077/Q0.17705434,16/32 adverse worlds; all147,456 native ticks/1,024 Adam calls completed. Complete wall129.80s; peak RSS556.56MiB. Both learners changed every rollout. This is a small negative within-MEI finite-package observation, not equivalence, stable superiority, training-population inference or causal credit.
+**ACTIVE: one bounded result/lifecycle review; recasts 0.** [B01](LCAC_B01_RESULT_EVIDENCE_20260914.md), 256/32 master 9411: Q−V −0.00362643, complete wall 129.80 s. [B02](LCAC_B02_RESULT_EVIDENCE_20260914.md), 1024/32 master 9412: Q−V +0.00222263, V 0.18844571 / Q 0.19066834, 15/32 adverse worlds, complete wall 443.91 s. Both observed means lie within MEI ±0.01. Keep the two endpoints separate; there is one trained pair at each, with no equivalence, stable superiority, causal duration or causal credit claim.
 
-[DM intake](LCAC_B01_INTAKE_20260914.md#final-independent-review-and-dm-decision) records full independent review and substantive response. DM selects one new [1024/32 B02](LCAC_B02_SCIENCE_CARD_20260914.md), master9412, disjoint final resets, unchanged algorithms. The close-call later-budget choice replaces the working short-replication preference for explicit scientific reasons; no causal duration effect or B01 revision follows. Focused implementation/review passed, and DM accepted source25ea4d61c0e1f2484da77f4bc1851e17cdc8eb4a. B02 is running onwsl_4070 under lcac-b02-s9412-25ea4d61-20260914, launched2026-09-14T04:07:01Z; native Monitor /root/lcac_b02_monitor adopted the exact live handle. Endpoint counts remain planned until terminal collection. DM owns collection, interpretation and next decision. Current routes/slots belong to the live registry and Clerk; historical ownership language below is not a dispatch route.
+B02 source 25ea4d61c0e1f2484da77f4bc1851e17cdc8eb4a completed all 540,672 native ticks and 4,096 Adam calls. All raw files/models, seeds/counters/units and complete receipts verified; monitor active_set is empty. B01+B02 whole-run wall sum is 573.71 s, not total research cost. Complete support/provider/lifetime cost remains UNKNOWN.
+
+[Current intake](LCAC_B02_INTAKE_20260914.md) records a working reversible PARK preference, strongest replication/later-budget alternatives, and selection of one independent Pro result/lifecycle review before the actual decision. No new scientific invocation is selected. DM owns full answer intake, substantive response and applied next work or safe PARK. Current routes/slots belong to the live registry and Clerk; historical ownership language below is not a dispatch route.
 
 ## Historical accepted registration — 2026-09-12
 
