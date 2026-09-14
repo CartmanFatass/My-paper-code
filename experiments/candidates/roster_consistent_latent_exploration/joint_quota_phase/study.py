@@ -16,7 +16,7 @@ from experiments.candidates.roster_consistent_latent_exploration_tbcfv.native_ba
     StepInput, bind_native_backend, materialize_fixtures_compact as native_materialize_fixtures_compact,
     semantic_uniform_words as native_semantic_uniform_words, reset_native_batch,
 )
-from .policy import PhasePolicy, adam_update, flat_parameters, greedy_phase, sampled_phase
+from .policy import PhasePolicy, adam_update, flat_parameters, greedy_phase, modal_phase, sampled_phase
 
 OBJECT = "RCLE-TBCFV-B08-JOINT-QUOTA-PHASE"
 SEED = 28
@@ -46,6 +46,8 @@ def phase_uniforms(key, binding, coordinates, tick):
 
 
 def rollout(model, role, key, binding, coordinates, training=False, observe=None):
+    if role == "modal" and training:
+        raise ValueError("fixed-modal evaluation has no training likelihood or update")
     cells, updates, rows = _compact_coordinate_columns(coordinates)
     fixtures = native_materialize_fixtures_compact(key, 0, cells, updates, rows, binding=binding)
     score_terms = [[] for _ in coordinates]
@@ -67,12 +69,14 @@ def rollout(model, role, key, binding, coordinates, training=False, observe=None
                 else:
                     actions = [None] * len(snapshots)
                     phase_u = (phase_uniforms(key, binding, coordinates, tick)
-                               if role != "greedy" else None)
+                               if role not in ("greedy", "modal") else None)
                     for n in sorted({len(s.positions) for s in snapshots}):
                         lanes = [i for i, s in enumerate(snapshots) if len(s.positions) == n]
                         public = [snapshots[i].public_observation() for i in lanes]
                         if role == "greedy":
                             choices = greedy_phase(public)
+                        elif role == "modal":
+                            choices, _ = modal_phase(model, public)
                         else:
                             choices, scores, _ = sampled_phase(model, public, [phase_u[i] for i in lanes])
                             if training:

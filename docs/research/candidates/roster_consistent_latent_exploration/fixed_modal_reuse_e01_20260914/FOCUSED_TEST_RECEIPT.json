@@ -1,0 +1,13 @@
+{
+  "completed_at": "2026-09-14T06:06:44.847219+00:00",
+  "execution_node": "local_windows",
+  "interpreter": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe",
+  "scope": "Six new synthetic modal/loader/publication/failure tests plus four existing B10/B12 and legacy identity/publication cases; no retained scientific roots or native execution.",
+  "result": "10 passed in14.33s",
+  "exit_code": 0,
+  "scratch": "temp/directions/roster_consistent_latent_exploration/test/modal-e01-local-20260914-01",
+  "scratch_removed": true,
+  "scientific_fits": 0,
+  "scientific_native_invocations": 0,
+  "note": "An initial composed PowerShell test/cleanup command was rejected before process creation; replacement used one Python-owned subprocess/cleanup with resolved path checks. No test retry or changed result followed that pre-execution rejection."
+}

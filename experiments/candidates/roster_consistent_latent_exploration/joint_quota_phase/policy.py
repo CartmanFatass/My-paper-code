@@ -91,6 +91,13 @@ def sampled_phase(model, public, uniforms):
     return actions, selected, phases
 
 
+def modal_phase(model, public):
+    """Lowest-index mode of the actual combined policy, without a phase draw."""
+    log_probability, targets = phase_log_probabilities(model, public)
+    phases = log_probability.argmax(dim=-1).detach().numpy()
+    return targets[np.arange(len(public)), phases], phases
+
+
 def greedy_phase(public):
     _, _, _, targets, _, signed = quota_arrays(public)
     phases = np.abs(signed).sum(axis=-1).argmin(axis=-1)  # first/smallest phase on exact tie
