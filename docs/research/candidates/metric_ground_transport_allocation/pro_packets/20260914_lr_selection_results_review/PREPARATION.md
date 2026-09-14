@@ -1,7 +1,8 @@
 # Actual-results review preparation — 2026-09-14
 
 This is a new independent actual-results question, not a resend of the complete
-prospective design review. The eight-fit native object has finished; its source,+all signed results and complete raw/checkpoint archive are published at
+prospective design review. The eight-fit native object has finished; its source,
+all signed results and complete raw/checkpoint archive are published at
 7cfd65834b3b54f18c488706295aac85b86bb531. No new fit, seed, grid extension,
 default change, lifecycle disposition or slot release is authorized by this packet.
 
