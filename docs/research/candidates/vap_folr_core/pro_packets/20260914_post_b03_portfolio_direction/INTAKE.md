@@ -390,3 +390,9 @@ preserved throughout; no repeat launch or duplicate observer was created.
 G is running and A is selected/unlaunched. DM stops routine polling and processes
 the Monitor's terminal consequence, including unconditional-on-G-score A execution
 after collection/admission. No new final B01 result or favorable claim is made.
+
+The Monitor then prematurely finalized with a live handle. DM did not treat its
+final text as continued coverage: same-batch followup resumed actual waiting and
+returned MONITOR_READOPTED at15:42:46.321Z,same PID/source,running. Original error
+and recovery are retained in the execution/adoption record; no new scientific
+process or duplicate observer was created.

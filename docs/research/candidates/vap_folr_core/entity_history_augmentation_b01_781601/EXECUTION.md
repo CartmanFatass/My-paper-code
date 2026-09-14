@@ -41,3 +41,15 @@ launch an automatic third arm. An unusable G permits trustworthy A-only facts.
 Both selected invocations and full scientific intake/review remain the DM's work.
 After preserving evidence, DM owns removal/unregistration of this execution checkout
 and supervisor directories; the live producer is its current retention dependency.
+
+## Same-batch observation recovery
+
+After its original adoption the Monitor incorrectly returned a native final while
+the handle remained live. The claim that it remained active did not preserve an
+observing agent. DM resumed the same batch child through followup_task with actual
+awaited-loop instructions and retained responsibility until its direct
+MONITOR_READOPTED event at2026-09-14T15:42:46.321Z: same handle/source,PID3674297,
+running,1400episodes/1369updates/319.730s progress. Both the premature final and
+readoption are preserved in GENERIC_MONITOR_ADOPTION.json. No new observer, process,
+fit, stop or scientific retry was introduced. The observation deadline remains
+17:36:55.744043Z; actual terminal delivery remains due.

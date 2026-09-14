@@ -29,5 +29,22 @@
   "observation_deadline": "2026-09-14T17:36:55.744043Z",
   "dm_acceptance": "Direct adoption and corrected observation accepted; DM stops routine process polling. Original event and its time inconsistency remain preserved.",
   "active_state_path": "C:/Projects/HMASD/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/MONITOR_STATE.json",
-  "remaining_selected_arm": "AUGMENTED_PERSISTENT; no accepted A handle yet"
+  "remaining_selected_arm": "AUGMENTED_PERSISTENT; no accepted A handle yet",
+  "premature_final": {
+    "native_final": "Monitor remains active for the accepted handle; no terminal event or blocker observed.",
+    "dm_finding": "The native agent actually finalized while its assigned handle remained live. A final assertion is not active observation. DM resumed the same batch child and retained responsibility during recovery; no experiment was stopped or relaunched."
+  },
+  "readoption": {
+    "event_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601:MONITOR_READOPTED:folr-augmentation-b01-781601-generic:20260914T154246Z",
+    "observed_at": "2026-09-14T15:42:46.321Z",
+    "status": "running",
+    "pid": 3674297,
+    "exit_code": null,
+    "episode": 1400,
+    "updates": 1369,
+    "runner_wall_seconds": 319.7302937010536,
+    "deadline": "2026-09-14T17:36:55.744043Z",
+    "monitor_native": "/root/folr_augmentation_b01_monitor",
+    "same_batch_handle_source": true
+  }
 }
