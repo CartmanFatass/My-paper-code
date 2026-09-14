@@ -40,6 +40,28 @@
     "reported_user_node_id": "683bebb0-ddcc-4e04-89b5-1b30fa7ca534",
     "archive_representation": "Transport normalized provider Copy-response clipboard; original raw-provider byte identity not claimed",
     "decision": "Unique A-G; second A-Z execution selection explicitly withdrawn. CONTINUE/MEDIUM, family/slot/history unchanged.",
-    "input_capture_closeout": "Full composer/accepted-body capture not returned with response; one read-only closeout requested, without new Send or holding scientific acceptance."
+    "input_capture_closeout": {
+      "status": "complete",
+      "file": "archive/clarification_01/INPUT_CAPTURES.json",
+      "utf8_bytes": 14240,
+      "sha256": "444adf7cae7b3d95c21ccbfb2b0d8bed6fd9733abb5d6dfe908cb79eec272804",
+      "original_rollout_outputs_independently_checked": [
+        9253,
+        9281
+      ],
+      "body_chars": 1045,
+      "body_utf8_bytes": 2207,
+      "body_sha256": "7ad878962f4781b1fb23aaadbac1f7cbec09954cf5c83f0c886596f10edb3d4f",
+      "authored_difference": "Only final LF represented by one terminal space; all other authored characters match. Both original DOM strings retained with UI suffixes.",
+      "timestamp_correction": "Composer originally observed14:44:24.905Z, accepted body14:44:58.725Z; earlier queue14:44:00 is a reported minute label, not an independently verified exact Send time.",
+      "receipt_limit": "One accepted submission is supported. Transport describes manual_send_count=0 as no resend; preserve that wording without treating it as a count of all submit actions.",
+      "observed_submit_click_tool_call": {
+        "rollout_line": 9271,
+        "call_timestamp": "2026-09-14T14:44:48.946Z",
+        "observed_submit_click_calls": 1,
+        "observed_resends": 0,
+        "scope": "Tool call is one explicit Send click; provider effect confirmed by the subsequent accepted user node."
+      }
+    }
   }
 }

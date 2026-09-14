@@ -277,3 +277,24 @@ admission/launch. This carries the decision into a concrete executable objective
 without a new permission packet. Portfolio scientific dialogue can be released;
 the remaining old-input archival closeout is read-only and owns no new conversation
 Send. Original DM retains both that closeout and the selected research work.
+
+### Original-input archive closeout complete
+
+Transport recovered `archive/clarification_01/INPUT_CAPTURES.json` from its existing
+rollout outputs:14240 bytes/8430 characters,SHA256
+`444adf7cae7b3d95c21ccbfb2b0d8bed6fd9733abb5d6dfe908cb79eec272804`.
+DM independently checked the original operator rollout output lines9253 and9281
+contain the saved full composer and both original user DOM strings. Their body
+views both equal the composer and all authored prompt characters except the final
+LF rendered as one space. UI Show-more/less suffixes remain in the raw strings.
+The body digest is7ad878962f4781b1fb23aaadbac1f7cbec09954cf5c83f0c886596f10edb3d4f;
+it is deliberately not relabeled the authored file's different digest.
+
+Original composer capture is14:44:24.905Z; the one explicit Submit-click tool call
+is rollout line9271 at14:44:48.946Z; accepted-user capture is14:44:58.725Z. The
+earlier queue14:44:00 is a reported minute label, not an exact effect timestamp.
+Transport's manual_send_count=0 was explained as no resend; actual preserved
+evidence supports one explicit submission and no observed resend. Its original
+wording is retained alongside this correction. Input archival is now complete;
+no FOLR provider generation, observation or capture recovery remains. This did
+not create another question, experiment or approval step.

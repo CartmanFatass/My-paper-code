@@ -79,8 +79,8 @@ augmented program versus fresh unaugmented Generic64 (A−G)**; the A−Z intern
 persistence comparison is withdrawn for this round. This prioritizes the complete
 program's development increment while forgoing component attribution. CONTINUE/
 MEDIUM, the existing family/slot and all historical negative evidence remain.
-Original malformed inputs and full responses are retained; one read-only input
-capture closeout remains with Transport, without a new Send or scientific review.
+Original malformed inputs, the full composer/accepted-user captures and all full
+responses are preserved and checked. No FOLR provider or archive recovery remains.
 The common persistent Generic64 plus entity-history actor is technically accepted
 at source `550846a863ad7276edf8cab1a556e7d76353df08`, after five focused tests and
 independent Sol/high recurrent/RNG review. Both native engineering children are
