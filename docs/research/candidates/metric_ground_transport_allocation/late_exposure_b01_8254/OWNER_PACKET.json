@@ -1,0 +1,11 @@
+{
+  "question": "是否采用固定1e-4、训练到512且观察256/512的一对新训练，检验较长训练配置的价值？",
+  "changes_if_approved": [{"target": "MGTAP optional COND B exploration", "from": "固定256结果一正一负", "to": "选择一次新8254配对，512为主要终点，256只作同一路径观察"}],
+  "if_refused": "保留已发生的结果与源码，依所有者具体指示修改尚未执行的工作；不把拒绝写成科学负结果。",
+  "evidence_for": [{"path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LATE_EXPOSURE_B01_SCIENCE_CARD_20260914.md", "quote": "the rate was selected at256, so its behavior later in learning is unobserved", "why": "比机械增加同配置种子多回答一个实际训练配置问题，同时沿用已验证的两臂。"}],
+  "evidence_against": [{"path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_fixed_lr_results_review/archive/RESPONSE.md", "quote": "Another honestly specified fixed pair remains the strongest feasible numerical alternative and could change a real maintenance decision.", "why": "更便宜的256重复仍有价值；较长训练可能同样小幅或不利，本选择接近。"}],
+  "uncertainty": ["只有一个新训练配对；32世界和两个checkpoint不能充当独立训练。", "不能把512与历史256比较说成已识别的训练量因果效果。", "先前两种符号及完整审查均保留；DENSE仍为默认。"],
+  "cost": {"compute": "2 fits；294912 team ticks；2048 Adam；6–10分钟为未测规划，完整支持成本UNKNOWN", "owner_time": "可异步覆盖，无需答复", "reversibility": "costly", "waits_on_this": "nothing"},
+  "verdict_text": "Owner-delegated decision (unattended,2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LATE_EXPOSURE_B01_SCIENCE_CARD_20260914.md"
+}
