@@ -106,6 +106,14 @@
       "record": "docs/research/candidates/vap_folr_core/HANDOFF_20260914_OWNER_PAUSE.md",
       "state": "applied",
       "summary": "Original two-arm B01 complete: d+5.29640625/AUGMENTED_ABOVE_MEI, no retry; current-result review and final handoff remain before owner pause. Scientific lifecycle and slot unchanged."
+    },
+    {
+      "at": "2026-09-14T21:10:25+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-14-owner-pause-after-inflight.md",
+      "record": "docs/research/candidates/vap_folr_core/HANDOFF_20260914_OWNER_PAUSE.md",
+      "state": "applied",
+      "summary": "原始A/G及完整独立复核、实质回应、原始保全和远端回收全部完成；d=+5.29640625，限单次训练比较，旧负结果保留。最终handoff935694878已发布，0存活实验/监控/Pro/归档/审查义务；依所有者指示暂停，科学CONTINUE/MEDIUM及占位不变，无后继。"
     }
   ]
 }
