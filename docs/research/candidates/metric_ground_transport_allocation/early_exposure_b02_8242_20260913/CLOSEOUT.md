@@ -43,19 +43,26 @@ untouched. This explicit retention is not a scientific blocker or failed run.
 Full support/provider/lifetime cost and aggregate CPU remain UNKNOWN; ordinary
 collection and cleanup do not create a new result-bearing allowance.
 
-## Actual remaining producer
+## Completed scientific review and final disposition
 
 The complete two-result scientific review is a separate new question, request
 2026-09-13-mgtap-early256-results-review-02. Published TASK3f9a5641e8c8f3c4d501ea198a4aa030834e7266
 and HANDOFFe63e3b6b4de9eb1d570f9cc19a81b73fe425f53b bind native child
 /root/mgtap_early_results_transport to this MGTAP DM parent /root.
-Native dispatch has occurred; provider Send/receipt facts remain the child's
-responsibility and are not inferred from dispatch. The prior pre-run design
-review remains separate. No numerical successor is selected.
+Operation b7c72164-ea38-4b77-9210-b61c255752d1 completed one accepted Send after
+two verified pre-Send repairs. Native Transport returned COMPLETE, full response
+commit47699fcad5714bbe8cfca43abef78c89a3887b62 and exact24753-byte archive with
+SHA256 a1e2ebd81bbfd20da9ca4e8b23ae44b6a5587711ecef217193cc4164e1a88d73.
+Its dedicated tab is closed; provider user0292d94d-844c-4f03-be9a-81d0e7a5b6ff
+and assistant0a6b822a-6135-40a1-b30f-75a6964efede are preserved.
 
-DM will read the full exact response, respond to material scientific findings
-and record its final lifecycle decision. If PARK remains the DM's judgment,
-the new Chinese PARK.md will retain lessons/assets/limits/reopening conditions
-and be sent directly to the live Clerk before task closeout. Review is not
-lifecycle approval. Current lifecycle is not yet PARK, and this pending native
-Transport must not be abandoned or misreported as idle external speculation.
+DM read all122 lines, verified the raw Git/archive match and actual Issue18
+comment5657732581, and responded in the
+[full intake](../pro_packets/20260913_early256_results_review/INTAKE.md).
+No result correction/new experiment is required; DM applies the important
+marginal-development-value clarification to the stopping rationale and selects
+reversible PARK. The [Chinese knowledge handoff](../PARK.md) retains lessons,
+assets, limits and reopening conditions. Review is not lifecycle approval.
+There is no remaining native producer, numerical successor or uncertain new
+request effect. The committed handoff is sent to the live Clerk before ending;
+Clerk's subsequent task archival is not presumed here.

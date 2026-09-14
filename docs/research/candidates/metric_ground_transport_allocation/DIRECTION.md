@@ -1,5 +1,32 @@
 # Direction metric_ground_transport_allocation: metric ground transport allocation
 
+## Current DM decision — reversible PARK, 2026-09-13
+
+DM has completed the actual-result independent scientific review and selects
+**PARK** under current full-lifecycle delegation. No numerical successor or
+third unchanged early256 pair is selected. Both8241+0.015128847632690413 J and
+8242−0.05684388886006531 J remain valid local B/EXPLORE observations. This is a
+development-value judgment, not stable inferiority, a fixed-two-seed rule,
+an owner pause or a Pro/Root/Clerk approval decision.
+
+The full122-line review47699fcad found no material defect requiring result
+reclassification, recomputation or another experiment. DM accepts its material
+clarification: another pair is declined for insufficient current marginal
+development value, not because it cannot establish mechanism or population
+ordering. A meaningful future recurrence-sensitive decision can make the same
+unchanged comparison worth reopening; no new architecture or customer is required.
+
+[Full review and DM response](pro_packets/20260913_early256_results_review/INTAKE.md)
+and [Chinese PARK knowledge handoff](PARK.md) preserve evidence, contrary findings,
+assets, limitations, costs and reopening conditions. Runs and native Transport
+are complete; there is no pending producer. Archive/source recovery is preserved,
+remote duplicates removed and policy-rejected local duplicates retained. DM sends
+the committed handoff to the live Clerk before ending. Clerk archival is a
+subsequent mechanical action, not claimed as already complete here.
+
+Sections below preserve historical stages and decisions; their CONTINUE/ACTIVE
+or old authority wording does not supersede this current PARK.
+
 ## Research organization — 2026-09-04
 
 This source belongs to route **N5 — 配置结构与 FREE**, in the **资源配置与几何** family
@@ -14,7 +41,7 @@ a current dispatch route or Portfolio approval requirement.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
-## Owner resume and B02 continuation — 2026-09-13
+## Historical owner resume and B02 continuation — 2026-09-13
 
 Owner explicitly resumed after main406804774/1c6ba284e. DM retains CONTINUE
 ACTIVE/MEDIUM and the scientific value of the already selected sole B02
@@ -78,7 +105,7 @@ Clerk/Root/sibling operations documents match the published source. No conflict,
 live runtime registry copy, scientific input change, new branch or restart;
 DM TOML parse passed. Actual pause/sync results are sent to Clerk, not Root ACK.
 
-## DM CONTINUE and early-exposure B — 2026-09-13
+## Historical DM CONTINUE and early-exposure B — 2026-09-13
 
 Under current AGENTS section2 at main4dfdb5f8f, this DM selects **CONTINUE
 ACTIVE/MEDIUM** through one ordinary mean-COND256/DENSE256 B/EXPLORE, master8241.

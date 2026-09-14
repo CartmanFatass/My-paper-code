@@ -1,0 +1,81 @@
+{
+  "id": "20260913-mgtap-006",
+  "created": "2026-09-13T18:35:49-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "MGTAP：实际结果独立审查后可逆PARK",
+  "context": "DM已完整回应实际结果review。8241正、8242负均保留；仅两个训练配对，停止是当前不变采样开发价值有限，不是总体劣势、超时或批准等待。",
+  "options": [
+    {
+      "key": "a",
+      "label": "保留可逆PARK",
+      "consequence": "停止当前数值推进，保全研究知识/资产并安全交接Clerk；有具体用途的新事实或开发选择可重开。"
+    },
+    {
+      "key": "b",
+      "label": "重新考虑一次复现用途",
+      "consequence": "DM先明确又一不变独立配对会改变什么开发选择，再决定最小充分对象；不自动重跑原卡。"
+    },
+    {
+      "key": "c",
+      "label": "准备新的具体开发问题",
+      "consequence": "DM据保留的正反证据准备有实际用途的问题；不强求新架构、客户或事先正结果。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "当前新增不变观察的预期开发贡献不足；复制有信息价值，PARK并非数据唯一推出的处置。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/PARK.md",
+    "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_results_review/INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L42",
+  "brief": "docs/research/portfolio/owner/briefs/metric_ground_transport_allocation/2026-09-13_EARLY_EXPOSURE_B02.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留 DM 已执行的可逆 PARK，或异步要求以具体开发问题重新考虑推进？这是监督入口，不是等待批准。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md / PARK.md",
+        "from": "两个early256配对完成，实际结果review待intake",
+        "to": "DM已回应完整review并可逆PARK；无新数值对象，保留知识/资产/重开入口并安全交接Clerk"
+      }
+    ],
+    "if_refused": "按所有者明确选择，在干净边界重新考虑有实际用途的复制或新开发问题；保留所有结果与冻结卡，不自动重跑旧配对。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_RESULT_20260913.md",
+        "quote": "The early256 signal from8241 (+0.015128847632690413 J) did not recur in this new realized pair.",
+        "why": "第二对完整主差值−0.05684 J与第一对相反，当前再做不变采样的开发价值有限。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_results_review/archive/RESPONSE.md",
+        "quote": "The DM's no-third-unchanged-pair recommendation and proposed reversible PARK are defensible development judgments, but are not uniquely implied by these data.",
+        "why": "独立审查未找到需重算或追加实验的实质缺陷，并保留判断的不确定性。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_results_review/archive/RESPONSE.md",
+        "quote": "A new unscreened matched pair would add independent training evidence about recurrence.",
+        "why": "复制有信息价值，8241与不同曝光8214正向证据仍有效；不能把停止写成总体劣势或零价值证明。"
+      }
+    ],
+    "uncertainty": [
+      "两个early256训练配对且选择受8241结果影响；SD混合训练及有限评估噪声。",
+      "COND自身均值在8242更高，符号反转不是同一策略退化或机制因果证据。",
+      "具体重复性敏感开发选择、新证据或真实成本/可行性变化可改变再测价值；无需新架构、客户或事先正结果。"
+    ],
+    "cost": {
+      "compute": "早期两对原生合计378.77秒；支持/Pro/方向累计成本和aggregateCPU为UNKNOWN。review无新fit/环境步/优化器调用。",
+      "owner_time": "可异步查看，无须立即回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；DM已执行PARK，不等待逐项批准。"
+    },
+    "verdict_text": "DM 在持续授权内选择可逆 PARK，停止当前 MGTAP 方向的数值推进；不再追加不变的 early256 配对。",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/PARK.md"
+  },
+  "starred": true
+}

@@ -19,30 +19,38 @@ causal extra-training, geometry/attention or sample efficiency is accepted.
 
 DM ends numerical execution of this one-pair card and selects **no further
 unchanged early256 pair now**. The strongest continuation alternative is one
-more independent pair to learn about recurrence, but it would not identify
-mechanism or establish stable ordering and risks extending weak-result chasing.
+more independent pair to learn about recurrence, which would add information.
+After full independent review, DM clarifies that inability to identify a
+mechanism or establish stable ordering is not a reason to reject this B option.
+The basis is insufficient current marginal development value: no current
+recurrence-sensitive development choice makes another unchanged draw especially
+worthwhile at this boundary. This is not a fixed-two-seed or zero-value rule.
 The prior favorable point is preserved rather than discounted; the development
 choice is that these mixed early results plus mixed512 history and distinct
 adverseTOP/unequal results supply insufficient current practical reason for
 more unchanged sampling. DENSE remains the generic default.
 
-DM's planned next direction disposition is reversible **PARK** after this
-evidence/claim review and preservation, not a claim of universal COND failure
+DM's final direction disposition after full evidence/claim review and
+preservation is reversible **PARK**, not a claim of universal COND failure
 or a consequence of time, owner pause, allocation labels, missing customer or
 cleanup/runtime defects. No new empirical object is selected. A future concrete
 mechanism/comparator/development question or new evidence can justify reopening
-under DM authority; simply freeing time, changing watchdogs or requesting another
-unchanged favorable draw is not that scientific reason. Other historical family
+under DM authority. A recurrence-sensitive development choice can make the same
+unchanged comparison useful again; no new architecture/customer or positive-first
+result is required. Simply freeing time, changing watchdogs or requesting another
+favorable draw is not itself that reason, although actual cost/feasibility changes
+may affect an already meaningful question's value. Other historical family
 dispositions are not silently reopened.
 
-The already archived Convergence design review saw only pre-run8241 inputs,
-so it cannot be credited with reviewing these actual two results. Arrange one
-new independent review of their integrity-to-claim chain, outcome-informed
-selection, n=2 description and this proposed scientific stopping/revisit logic.
-Ask for material defects, contrary interpretations and minimal corrections,
-not lifecycle/funding/scheduling permission. DM reads its full answer, responds
-to substantive findings and records final direction disposition. Pro review
-does not require additional experiments or a new Portfolio request by default.
+The earlier design review saw only pre-run8241 inputs. The new actual-result
+review at47699fcad5714bbe8cfca43abef78c89a3887b62 covers the two later outcomes,
+selection, n=2 description and stopping/revisit logic. DM read all122 lines and
+responded in the [full review intake](pro_packets/20260913_early256_results_review/INTAKE.md).
+No material defect requires reclassification, recomputation or another experiment;
+the stopping-rationale clarification above is applied. The8242 check was prospectively
+specified inside an adaptive programme, not an unconditional fixed-n two-pair
+population sample. COND's own mean is higher in8242; the sign reversal is not
+deterioration of the same learned policy. No mechanism or population cause follows.
 
 ## Costs, operation and current dependency
 
@@ -66,13 +74,10 @@ Preservation and exact remote duplicate cleanup are complete in the
 duplicate deletion was policy-rejected before process creation; those files
 remain without a workaround. No live experiment remains.
 
-Current pending work is the concrete actual-result scientific review,
-request2026-09-13-mgtap-early256-results-review-02. Its fixed
-[TASK](pro_packets/20260913_early256_results_review/TASK.md) is published at
-3f9a5641e8c8f3c4d501ea198a4aa030834e7266, exact HANDOFF at
-e63e3b6b4de9eb1d570f9cc19a81b73fe425f53b. DM dispatched its request-batch native
-Transport /root/mgtap_early_results_transport; the awaited event is its complete
-paired response archive. Dispatch alone is not a provider Send receipt. The
-fixed evidence input remains201cf6c80, and this current progress update does
-not amend the published question. Final disposition and Chinese PARK knowledge
-handoff follow DM's response to the independent review, without a Root/Clerk ACK.
+The actual-result review request2026-09-13-mgtap-early256-results-review-02 is
+complete and paired to its fixed TASK3f9a5641e and HANDOFFe63e3b6b4. Native
+Transport returned the full exact archive and closed its dedicated tab. There
+is no pending native producer or scientific successor. DM applies reversible
+PARK and sends the committed [Chinese knowledge handoff](PARK.md) to the live
+Clerk for safe archival, without a Root/Clerk ACK. The fixed input201cf6c80 and
+complete prior scientific records remain unchanged at their published commits.
