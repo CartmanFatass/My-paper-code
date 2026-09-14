@@ -95,6 +95,12 @@ same current source revision. Clerk records actual propagation separately from R
   overlap/conflict occurred. Its independently delivered scientific response was preserved in
   the authoring merge; main was not edited for that response. Until a concrete receipt exists,
   message delivery is not counted as synchronization.
+
+The current owner-console interface has one separate traceability gap: `portfolio/owner/README.md`
+recommends `--authority 'OWNER_DELEGATED / DM_DECISION'`, while the current `item.py trace --help`
+accepts only `OWNER_DIRECT` or `PRO_FINAL / OWNER_DELEGATED`. No synthetic Pro/owner decision was
+created to bypass this mismatch; existing owner items and direction intake/audit records remain the
+source of truth pending a control-owner repair.
 - MGTAP subsequently returned the same concrete 25-path rollout: authoring commit
   `fea6df33ced6a6cfb2028cb9a9171b70024a0559` (pushed on `codex/mgtap`) and detached session
   commit `f00416a0cb23efc00cc394f703b80f49c514352d` both match the repaired source; both checkouts
