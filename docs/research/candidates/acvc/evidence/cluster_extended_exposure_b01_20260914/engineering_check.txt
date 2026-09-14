@@ -1,0 +1,6 @@
+Command: python -B -m pytest -q -p no:cacheprovider --basetemp temp/directions/acvc/test/extended_b01_20260914_01 tests/experiments/candidates/acvc/cluster_extended_exposure_b01/
+Exit: 0
+Wall seconds: 6.295
+.........                                                                [100%]
+9 passed in 4.80s
+Creator cleanup attempted for C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/extended_b01_20260914_01 with resolved-path check and native PowerShell Remove-Item. Automatic approval rejected the command before execution: blocked by policy. Directory remains; no alternate deletion tool or whole-tree reclamation attempted.

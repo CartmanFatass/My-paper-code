@@ -1,0 +1,34 @@
+{
+  "object": "ACVC_CLUSTER_EXTENDED_EXPOSURE_B01",
+  "master": 27457,
+  "evaluation_namespace": 37457,
+  "sampling": "fixed new unscreened labels; one fresh programme, not iid draw law",
+  "training_programmes": 1,
+  "training_episodes": 4096,
+  "rollouts": 2048,
+  "optimizer_steps": 8192,
+  "snapshots": [
+    1024,
+    4096
+  ],
+  "snapshot_optimizer_steps": [
+    2048,
+    8192
+  ],
+  "post_fit_loads": 6,
+  "evaluation_episodes": 384,
+  "total_episode_rows": 4480,
+  "train_team_ticks": 1048576,
+  "eval_team_ticks": 98304,
+  "team_ticks": 1146880,
+  "replayed_actor_agent_steps": 20971520,
+  "critic_update_rows": 4194304,
+  "adam_learning_rate": 0.0003,
+  "lr_times_update_opportunities": 2.4576,
+  "exposure_line": "8192 nonzero Adam update opportunities at lr=3e-4, lr*steps=2.4576; actual parameter norms/displacements are measured at both snapshots. This scale is not an Adam displacement bound.",
+  "native_reference_seconds": 1185.2,
+  "native_plan_seconds": 1400,
+  "support_plan_seconds": 3600,
+  "total_plan_seconds": 5000,
+  "complete_cost_law": "imports+initialization + training ticks + full-rollout replay/backward/Adam + two serializations + six loads + eval ticks + all endpoint/change publication/exit; support/provider/agent costs UNKNOWN"
+}
