@@ -7,3 +7,11 @@ E02 found the GNU time output parent absent; `PREP_RECEIPT.json` records explici
 Focused reviewer tests passed 3 cases; remote tests on the committed source passed 4 with 7 deselected (TEST_RECEIPT_02). TEST_RECEIPT_01 retains four setup errors from a missing test parent; repaired before tests and no scientific invocation occurred. Test scratch was removed by the creating invocation. These are contract/publication checks, not empirical evidence.
 
 The DM owns launch acceptance, monitoring adoption, collection and scientific intake. Monitor `/root/monitor_rcle_b11` will receive only the accepted handle. State remains PLANNED_NOT_LAUNCHED until an actual supervisor receipt. Old support600 is historical; the new native/support times are adjustable estimates. One finite started scientific invocation, no automatic retry, unchanged scientific exposure.
+
+## Supervisor transport repair
+
+The first agent-task handle terminated with exit125 before admission or scientific construction: GNU time received no program. The supervisor joins arguments using COMMAND="$*" and evaluates that string. An extra outer bash -lc argument boundary was lost there. LAUNCH_01_PRESTART_FAILURE.json preserves the actual generated wrapper/log and verifies absent scientific output plus empty control folder. Scientific started invocations =0; this is ordinary pre-start engineering repair, not a scientific retry or new seed.
+
+SUPERVISOR_COMMAND_02.txt passes the unchanged reviewed scientific command as one shell-quoted argument to agent-task, so its string join preserves all internal quoting. A distinct launch02 supervisor handle retains the failed supervisor evidence. The science command/source/root/exposure and one-start bound are unchanged. No additional scientific invocation or test is used to debug transport.
+
+Independent E03 correction review (same Sol/high Reviewer) verified exactly four POSIX argv values; the single fourth argument equals unchanged LAUNCH_COMMAND. With the installed supervisor string join/eval, internal quoting is preserved. No material finding, no tests/science. DM accepts this repair and will execute SUPERVISOR_COMMAND_02 as a remote POSIX shell command, adding no wrapper argument layer.
