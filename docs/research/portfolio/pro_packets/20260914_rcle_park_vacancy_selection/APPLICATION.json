@@ -1,0 +1,30 @@
+{
+  "event": "RCLE_ACVC_SINGLE_RESERVATION_20260914",
+  "recorded_at_utc": "2026-09-14T12:43:12.603123+00:00",
+  "main_base": "94ad5914bd00eaf426e84263224ee5b61a7ab620",
+  "response_commit": "7a490382cb469f2a62e276a756a2be32b460cc69",
+  "response_sha256": "3b81868e9065d370f0d2a5430dd81da960d8a4cd3d4be799dff7c98cbd54ceb7",
+  "full_read_and_conformance": true,
+  "request_id": "2026-09-14-rcle-park-vacancy-selection-01",
+  "owner_thread_id": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "selected_direction": "acvc",
+  "selected_dm_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "prior": {
+    "occupied": 2,
+    "reserved": 0,
+    "vacancy": 1
+  },
+  "actual": {
+    "occupied": 2,
+    "reserved": 1,
+    "unreserved_vacancy": 0,
+    "dm_unarchived": false,
+    "handoff_delivered": false,
+    "dm_accepted": false,
+    "object_started": false
+  },
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-14/20260914-root-001.json",
+  "audit_line": 58,
+  "next_action": "Unarchive original DM, deliver full objective and follow actual acceptance/object work; same reservation converts to occupancy; then release Portfolio to FOLR.",
+  "peer_science_preserved": true
+}

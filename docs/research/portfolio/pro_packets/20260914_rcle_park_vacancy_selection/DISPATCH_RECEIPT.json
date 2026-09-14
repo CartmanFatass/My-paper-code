@@ -12,11 +12,11 @@
   "prompt_sha256": "30d4979c76946448b88af9c04044d8fee8b20e57c5720e4e8e7e9ad1bdae035b",
   "actual_provider_send": "Matching request is observed persisted in the bound conversation; exact Send time not asserted; no author-side resend.",
   "actual_provider_user_id": "712fe70b-7b64-4cd9-8589-dc05506fd639",
-  "actual_provider_answer": null,
+  "actual_provider_answer": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md",
   "scientific_invocations": 0,
   "replacement_selected": false,
   "reservations_created": 0,
-  "next_owner": "Transport retains real same-request observation and full input/answer archival with direct App return; original RCLE DM owns complete reading/conformance, one-slot selection/reservation and selected existing-DM actual continuation. Do not archive RCLE or release this pending Portfolio request. FOLR next-author notice follows actual final application/release.",
+  "next_owner": "RCLE applies one reservation and original ACVC DM actual continuation; no provider observation/acquisition remains.",
   "current_peer_delta": "Maine359ce5b5 verified FOLR review acceptance and retained same CONTINUE/no successor. The prompt honestly labels its earlier fixed808 snapshot; no new peer result or lifecycle conclusion occurred.",
   "observation_update": {
     "recorded_at_utc": "2026-09-14T12:24:44.122003+00:00",
@@ -49,5 +49,10 @@
     },
     "provider_state": "Transport revision202 reports same persisted request still processing in read-only second tab; no complete decision yet. Earlier UI stop-control disappearance did not establish terminal completion.",
     "observer": "Registered independent Transport01a09ea0-4a86-75b0-826d-6f864efa7480 remains active and explicitly owns same-request full archival/direct return."
-  }
+  },
+  "terminal_archive_commit": "7a490382cb469f2a62e276a756a2be32b460cc69",
+  "terminal_archive_sha256": "3b81868e9065d370f0d2a5430dd81da960d8a4cd3d4be799dff7c98cbd54ceb7",
+  "actual_assistant_id": "936a224b-a316-40d6-a326-c0803ffdfb8c",
+  "full_actual_user_body_archive": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/ACCEPTED_USER_DOM_BODY.txt",
+  "archive_complete": true
 }
