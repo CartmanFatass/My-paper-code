@@ -79,6 +79,10 @@
     "handoff_sha": "914df64026f04525d0c092140cad652880a8a4e7",
     "scientific_input_sha": "45955bdf7026769f703ae580caf814fdc1655421",
     "transport_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
-    "state": "author_dispatch_accepted_provider_acceptance_and_response_pending"
+    "state": "single_send_accepted_waiting_complete_response",
+    "accepted_user_node_id": "cfaabca5-d5c3-48df-8f67-e73466d726e3",
+    "send_count": 1,
+    "send_observed_at": "2026-09-14T14:23:16.350Z",
+    "dm_observation": "docs/research/candidates/acvc/pro_packets/20260914_cluster_longer_c_b01_scientific_review/DM_TRANSPORT_OBSERVATION.json"
   }
 }
