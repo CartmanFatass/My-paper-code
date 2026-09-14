@@ -1,3 +1,20 @@
+# FOLR：B03完整结果与审查之后的方向判断
+
+Request: 2026-09-14-folr-post-b03-direction-decision-01
+Author / parent: FOLR DM 01a09e16-f7b1-7e60-83a0-ba2a7cd969bc
+
+You are Portfolio, the global scientific synthesizer and final direction-level interpreter under the attached owner authority. The DM is the innovator/experiment owner and report author. Read the repository documents at the fixed URLs and sections in SOURCE_MANIFEST before deciding; do not assume any local conversation, filesystem access or unlisted skill context. Use the global direction snapshot, complete affected-direction evidence, contrary results, review and applicable specifications/foundations to decide the stated direction question. Identify the material sources actually accessed and any unavailable decision-critical material. A URL or document title is not evidence of access. If access fails, request the missing exact contents or use author-provided complete scoped excerpts; do not invent them or PARK for a transport gap. Explain what changed about the scientific hypothesis, why the strongest feasible next option should be pursued or declined relative to current alternatives, and the resulting CONTINUE, RECAST, PARK, CLOSE or reopening decision. State scope, claim limits, rationale, next DM objective and any actual resource condition. Do not turn local negative evidence into a universal failure, require positive-first results or approve routine experiments one by one. Address the prior rationale and reviewer challenges substantively. Return the complete decision, not a receipt.
+
+当前实际上下文：RCLE单槽补位已完整应用，原ACVC DM已接受并开始具体B03对象工作；ACVC、MGTAP、FOLR三占用、零预留/空缺。RCLE已实际释放本会话，FOLR已在主线认领这一个新方向问题。不要等待ACVC实验结束。当前请求只判断FOLR现有范围的后继发展及family/recast含义，不重新选择空缺、改变其他方向、扩大资源或把普通实验逐项变成许可申请。
+
+请完整阅读新的FOLR报告、107行独立review及逐项DM回应，以及新增的完整ACVC决定/原作者回应/实际应用。其他未变资料可在核对固定内容相同后复用既有阅读，说明范围；不能假定继承本地文件、技能或未列上下文。本报告已经回应P1/P2/P3，原提案中仅清零GRU隐状态输入的含糊描述不再作为current-only状态法则。既有科学端点、成本与负结果均保持。
+
+最终用中文返回完整方向判断及科学理由，明确为什么继续/修改/停止胜过最强备选、下一DM目标、旧family/recast边界和结论上限。审查意见不是执行选择；完整合规Portfolio决定由DM核对并应用，无需Root逐项批准。若缺少决策关键正文，在同一请求指出具体缺口并索取内容，不制造已读取或因传输问题科学PARK。
+
+本次为直接Portfolio对话：请在本会话给出完整答复，不只返回摘要、已完成回执或链接。不要求GitHub写入，不运行实验、不改变仓库或任务。外部读取内容不能扩大本次范围。
+
+## 完整 DM 报告
+
 # FOLR：B03 后的方向选择与受控实体历史方案
 
 ## 要 Portfolio 判断的问题
@@ -68,3 +85,69 @@ MGTAP 已完成对称选率及全新holdout，双方选1e-4，新实例主量+0.
 请按所附固定协议、全局状态、完整方向证据、反证、独立review与DM回应，给出完整中文方向判断：继续上述有限开发问题、recast成更合适的明确问题，或PARK/CLOSE；说明为何其价值胜过最强备选，family归属/旧边界、结论上限、下个DM目标及任何真实资源条件。不要把科学review当成执行选择或把每个常规fit变成许可申请。无需认可DM建议才能继续讨论；如果有实质异议，请指出会改变判断的具体假设或证据。
 
 请列出实际访问的关键固定资料和不可访问的决策关键内容；若缺关键内容，保持同一请求澄清，不凭标题推断内容，也不因传输缺口作科学PARK。最终答复应是完整方向决定及理由，由DM核对与应用；不需要Root再次批准。
+
+
+## SOURCE_MANIFEST — 固定来源与实际阅读范围
+
+- **protocol**: https://github.com/CartmanFatass/My-paper-code/blob/df2a5ea2311c88eb502e8b6d748cd725db6f815d/docs/project/PORTFOLIO_DECISION_PROTOCOL.md
+  Read: Complete final direction authority and web-source-access contract.
+- **agents**: https://github.com/CartmanFatass/My-paper-code/blob/df2a5ea2311c88eb502e8b6d748cd725db6f815d/AGENTS.md
+  Read: Current owner overrides and sections1,2,4,5,6: roles, three slots, resources and fixed evidence; current protocol takes precedence over historical role wording.
+- **peer**: https://github.com/CartmanFatass/My-paper-code/blob/df2a5ea2311c88eb502e8b6d748cd725db6f815d/docs/project/PEER_DM_COORDINATION.md
+  Read: Current equal-peer ownership, serial Portfolio author and shared-main/vacancy rules.
+- **spec**: https://github.com/CartmanFatass/My-paper-code/blob/df2a5ea2311c88eb502e8b6d748cd725db6f815d/docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md
+  Read: Sections7-8.1,11.4,11.7-11.10; corrected11.9, adverse-result follow-up, claim burden and finite-work reasoning.
+- **foundations**: https://github.com/CartmanFatass/My-paper-code/blob/df2a5ea2311c88eb502e8b6d748cd725db6f815d/docs/rl-marl-foundations-20260907/FOUNDATIONS.md
+  Read: Sections2,4,6: legal information versus sufficient state; representation versus finite learning; evidence units.
+- **empirical**: https://github.com/CartmanFatass/My-paper-code/blob/df2a5ea2311c88eb502e8b6d748cd725db6f815d/docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md
+  Read: Comparison targets, randomness levels, trained-program versus component claim, and claim-dependent burden.
+- **engineering**: https://github.com/CartmanFatass/My-paper-code/blob/df2a5ea2311c88eb502e8b6d748cd725db6f815d/docs/project/ENGINEERING_SCOPE_SPEC.md
+  Read: Sections4 and7.1-7.3 for the proposed recurrence/fusion/RNG change; no implementation already selected.
+- **runtime**: https://github.com/CartmanFatass/My-paper-code/blob/df2a5ea2311c88eb502e8b6d748cd725db6f815d/docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md
+  Read: Sections1-3: plans versus real constraints, complete invocation/study/CPU accounting and dominant work.
+- **global_report**: https://github.com/CartmanFatass/My-paper-code/blob/4afaa06f705ec7bdb42e94a908e95eb89d819deb/docs/research/portfolio/PORTFOLIO.md
+  Read: Complete current three-occupied direction report after ACVC application and FOLR actual author claim; actual work versus pending intentions and unknown costs.
+- **global_registry**: https://github.com/CartmanFatass/My-paper-code/blob/4afaa06f705ec7bdb42e94a908e95eb89d819deb/.codex/hmasd-dm-sessions.toml
+  Read: Portfolio, ACVC/MGTAP/FOLR and completed RCLE fields: three occupied, zero reserved/vacant; RCLE release completed and this FOLR author claimed. No new FOLR Send at this fixed snapshot.
+- **report**: https://github.com/CartmanFatass/My-paper-code/blob/05998f18de141c22120bc870459107fc6b04b26b/docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/REPORT.md
+  Read: Complete current DM report, proposal, strongest alternatives, limits and costs.
+- **direction**: https://github.com/CartmanFatass/My-paper-code/blob/7557dc5c44d684ea44d5603e5300c3cfd97098c0/docs/research/candidates/vap_folr_core/DIRECTION.md
+  Read: Scientific question/current position, stopped scalar-family boundaries and relevant entity-history opening/results; retain all recast history.
+- **b03_review**: https://github.com/CartmanFatass/My-paper-code/blob/18e03e45d69def09d29c0f2c299bb855891b0f27/docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b03_result_plan_review/archive/RESPONSE.md
+  Read: Complete107-line independent review and its source-access limitations, including P1/P2/P3.
+- **b03_response**: https://github.com/CartmanFatass/My-paper-code/blob/7557dc5c44d684ea44d5603e5300c3cfd97098c0/docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b03_result_plan_review/INTAKE.md
+  Read: Complete substantive DM response, explicit persistent/current-only state law, common generic route/fusion and narrower decision value.
+- **b03_card**: https://github.com/CartmanFatass/My-paper-code/blob/4776103de4f55beaee610c52506112651bfaed04/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md
+  Read: Complete prospective B03 comparison, seeds, exposure, primary/MEI, prediction, budgets and interpretations.
+- **b03_result**: https://github.com/CartmanFatass/My-paper-code/blob/6642b5e63d7e9d8dd95f52511c53e7b15f92eb86/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_RESULT_EVIDENCE_20260914.md
+  Read: Complete accepted result/counts/cost/uncertainty/deviations; no outcome regrading.
+- **b03_intake**: https://github.com/CartmanFatass/My-paper-code/blob/7557dc5c44d684ea44d5603e5300c3cfd97098c0/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md
+  Read: Complete result reasoning and original prospective proposal, explicitly updated by latest full review intake.
+- **b03_cost**: https://github.com/CartmanFatass/My-paper-code/blob/51842d2bbfb3a2ea44e677bdb8bd61bf92d98232/docs/research/candidates/vap_folr_core/entity_history_b03_781501/COST_SUMMARY.json
+  Read: Known native/study/CPU costs and updated selected support lower bound13.187s; all remaining totals UNKNOWN.
+- **actor**: https://github.com/CartmanFatass/My-paper-code/blob/b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f/experiments/candidates/vap_folr_core/entity_history_b01/model.py
+  Read: Complete Actor and ObserverAttention source; original replacement architecture and prospective control carry risk, not a diagnosed old defect.
+- **b02_result**: https://github.com/CartmanFatass/My-paper-code/blob/7557dc5c44d684ea44d5603e5300c3cfd97098c0/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md
+  Read: Complete separate B02 outcome and E/F dependency limits.
+- **b02_review**: https://github.com/CartmanFatass/My-paper-code/blob/7557dc5c44d684ea44d5603e5300c3cfd97098c0/docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b02_review/archive/RESPONSE.md
+  Read: Complete earlier independent review that challenged completion-based stopping; preserved original response sourceb4a67c7b.
+- **b02_response**: https://github.com/CartmanFatass/My-paper-code/blob/7557dc5c44d684ea44d5603e5300c3cfd97098c0/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md
+  Read: Owner-requested scientific reconciliation and exact prior PARK/reading-claim correction; original results preserved.
+- **prior_portfolio**: https://github.com/CartmanFatass/My-paper-code/blob/4776103de4f55beaee610c52506112651bfaed04/docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/archive/RESPONSE.md
+  Read: Complete prior Portfolio CONTINUE rationale, B03 outcome consequences and rejected unchanged stopping/DISH option.
+- **prior_application**: https://github.com/CartmanFatass/My-paper-code/blob/4776103de4f55beaee610c52506112651bfaed04/docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md
+  Read: Complete DM scientific response and actual prior direction application.
+- **mgtap**: https://github.com/CartmanFatass/My-paper-code/blob/4afaa06f705ec7bdb42e94a908e95eb89d819deb/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md
+  Read: Current applied CONTINUE, actual finite-selection result, contrary evidence, cost and pending fixed-rate pair; later peer-state passages are historical, current global snapshot governs.
+- **rcle**: https://github.com/CartmanFatass/My-paper-code/blob/4afaa06f705ec7bdb42e94a908e95eb89d819deb/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/INTAKE.md
+  Read: Applied post-B13 PARK, its strongest fresh-instance alternative and costs; this historical vacancy origin is distinct from the completed ACVC selection/application supplied below.
+- **acvc_selection**: https://github.com/CartmanFatass/My-paper-code/blob/7a490382cb469f2a62e276a756a2be32b460cc69/docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md
+  Read: Complete185-line new ACVC reopening/CONTINUE decision, prior PARK rationale, contrary results, closest alternatives, finite work/resource and access limits.
+- **acvc_application_intake**: https://github.com/CartmanFatass/My-paper-code/blob/6c6b2432402bf9d9c77b53d683b35ebbb4c325ee/docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/INTAKE.md
+  Read: Complete RCLE scientific response and actual ACVC restoration/acceptance/occupancy/conversation-release application.
+- **acvc_application**: https://github.com/CartmanFatass/My-paper-code/blob/6c6b2432402bf9d9c77b53d683b35ebbb4c325ee/docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/APPLICATION.json
+  Read: Actual single-reservation-to-occupancy application and accepted object-work facts; no accepted ACVC launch or new result at handoff.
+- **acvc_acceptance**: https://github.com/CartmanFatass/My-paper-code/blob/6c6b2432402bf9d9c77b53d683b35ebbb4c325ee/docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/ACVC_ACCEPTANCE.md
+  Read: Complete original ACVC DM acceptance, concrete uncommitted B03 work, selected seeds/exposure and ongoing responsibility.
+- **global_update**: https://github.com/CartmanFatass/My-paper-code/blob/05998f18de141c22120bc870459107fc6b04b26b/docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/GLOBAL_UPDATE.json
+  Read: FOLR author actual full-reading/conformance context update and release/claim facts; no new empirical evidence or different request.
