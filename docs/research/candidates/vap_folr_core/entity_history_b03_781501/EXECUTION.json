@@ -9,8 +9,8 @@
   "output_root": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501",
   "supervisor": "/usr/local/bin/agent-task",
   "python": "/home/wu/.venvs/hmasd/bin/python",
-  "native_monitor": "/root/folr_b03_monitor",
-  "monitor_thread_id": "01a09efc-5418-7181-9700-800b9c755b8e",
+  "native_monitor": "/root/folr_b03_monitor_recovery",
+  "monitor_thread_id": "01a09f10-8f6a-7cb3-8de4-cc137ab0b05c",
   "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
   "planned_handles": {
     "GENERIC": "folr-b03-781501-generic",
@@ -48,15 +48,44 @@
         "schema_version": 1
       },
       "monitor_adoption": {
-        "event_id": "FOLR_ENTITY_HISTORY_B03_781501:GENERIC:20260914T082420Z",
-        "sender_thread_id": "01a09efc-5418-7181-9700-800b9c755b8e",
-        "native_identity": "/root/folr_b03_monitor",
-        "received_at_utc": "2026-09-14T08:26:53.719792+00:00",
-        "direct_observation": "running, tmux_active=true, exit_code=null, PID3666806",
-        "state_path": "C:/Projects/HMASD/temp/directions/vap_folr_core/exp/entity_history_b03_781501/MONITOR_STATE.json",
-        "dm_routine_polling": "ended after direct MONITOR_ADOPTED; Monitor delivers terminal facts to this DM"
+        "event_id": "FOLR_B03_GENERIC_MONITOR_RECOVERY_20260914_R1",
+        "sender_thread_id": "01a09f10-8f6a-7cb3-8de4-cc137ab0b05c",
+        "native_identity": "/root/folr_b03_monitor_recovery",
+        "received_at_utc": "2026-09-14T08:40:30.935960+00:00",
+        "direct_observation": {
+          "event_id": "FOLR_B03_GENERIC_MONITOR_RECOVERY_20260914_R1",
+          "handle": "folr-b03-781501-generic",
+          "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+          "expected_pid": 3666806,
+          "observer": "replacement /root/folr_b03_monitor_recovery",
+          "observed_utc": "2026-09-14T08:40:23.116584+00:00",
+          "returncode": 0,
+          "stdout": "{\"task\": \"folr-b03-781501-generic\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3666806, \"uptime_seconds\": 962, \"tmux_active\": true}\n",
+          "stderr": "",
+          "status": {
+            "task": "folr-b03-781501-generic",
+            "status": "running",
+            "exit_code": null,
+            "pid": 3666806,
+            "uptime_seconds": 962,
+            "tmux_active": true
+          }
+        },
+        "state_path": "C:/Projects/HMASD/temp/directions/vap_folr_core/exp/entity_history_b03_781501/MONITOR_RECOVERY_STATE.json",
+        "dm_routine_polling": "ended after replacement direct adoption"
       },
-      "launch_receipt": "GENERIC_LAUNCH_ACCEPTANCE.json"
+      "launch_receipt": "GENERIC_LAUNCH_ACCEPTANCE.json",
+      "monitor_adoption_history": [
+        {
+          "event_id": "FOLR_ENTITY_HISTORY_B03_781501:GENERIC:20260914T082420Z",
+          "sender_thread_id": "01a09efc-5418-7181-9700-800b9c755b8e",
+          "native_identity": "/root/folr_b03_monitor",
+          "received_at_utc": "2026-09-14T08:26:53.719792+00:00",
+          "direct_observation": "running, tmux_active=true, exit_code=null, PID3666806",
+          "state_path": "C:/Projects/HMASD/temp/directions/vap_folr_core/exp/entity_history_b03_781501/MONITOR_STATE.json",
+          "dm_routine_polling": "ended after direct MONITOR_ADOPTED; Monitor delivers terminal facts to this DM"
+        }
+      ]
     }
   },
   "launch_assets": {
@@ -96,5 +125,19 @@
       "LAUNCH_ASSET_PREPARATION.json"
     ]
   },
-  "next_action": "Native Monitor owns Generic observation. On terminal facts DM collects/accepts Generic, then launches selected BANK in this same batch regardless of Generic sign/completeness; both results receive full scientific intake."
+  "next_action": "Native Monitor owns Generic observation. On terminal facts DM collects/accepts Generic, then launches selected BANK in this same batch regardless of Generic sign/completeness; both results receive full scientific intake.",
+  "monitor_transfer": {
+    "reason": "Initial observer finalized three turns with a nonempty running handle set, despite required until-terminal observation. This was execution noncompliance, not a scientific termination or missing rule.",
+    "previous_native": "/root/folr_b03_monitor",
+    "previous_thread_id": "01a09efc-5418-7181-9700-800b9c755b8e",
+    "previous_state_preserved": "MONITOR_INITIAL_STATE.json",
+    "replacement_native": "/root/folr_b03_monitor_recovery",
+    "replacement_thread_id": "01a09f10-8f6a-7cb3-8de4-cc137ab0b05c",
+    "replacement_method": "One awaited functions.exec loop with bounded native status queries and120s observation intervals; direct parent callback on terminal or actual blocker.",
+    "same_handle_adoption": "MONITOR_RECOVERY_ADOPTION.json",
+    "old_observer_release": "interrupt_agent confirmed previous completed status after replacement adoption; no remaining old observation turn",
+    "source_or_science_change": false,
+    "parent_route": "independent DM App task01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+    "support_cost": "UNKNOWN; all prior queries and interruptions remain counted, no reset"
+  }
 }
