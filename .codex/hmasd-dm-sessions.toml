@@ -11,7 +11,7 @@ heartbeat_state = "MISSING"
 heartbeat_target = "unassigned"
 
 main_writer = "unclaimed"
-main_writer_event = "FOLR_ACCEPTED_PREPARATION_INTEGRATION_20260914_RELEASED"
+main_writer_event = "FOLR_PORTFOLIO_ACCEPTED_OBSERVATION_20260914_RELEASED"
 main_writer_turn = "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc"
 
 [retired_clerk]
@@ -118,7 +118,7 @@ owner_mode = "independent_task"
 accepted_event = "folr-session-astra-max-v1"
 accepted_turn = "01a09cd9-d6a0-7500-9d14-f9a3b7bfab38"
 last_processed_event = "FOLR_OWNER_RECONCILIATION_REPORT_PREPARATION_20260914"
-next_action = "Full Portfolio report dispatched to independent Transport on reserved conversation; B03 reviewed source and9 passing focused remote tests accepted; zero native scientific exposure; await full direction decision"
+next_action = "Accepted Portfolio request is generating under independent Transport; B03 technical preparation accepted, zero new native exposure; receive full decision and execute conforming consequence"
 selected_object = "FOLR_ENTITY_HISTORY_B03_781501 (recommended, preparatory engineering)"
 selected_object_exposure = "proposed two fresh5000-train/4969-update/128-final fits;205120ticks; zero B03 exposure"
 selected_object_budget = "DM plans3600s per arm/7200native+1800support; final Portfolio direction decision pending"
@@ -141,6 +141,10 @@ portfolio_request_id = "2026-09-14-folr-portfolio-direction-reconciliation-01"
 portfolio_request_sha = "8ac65986d4a6cd09afbc95a30741d12f9237f5ba"
 accepted_preparation_commit = "27649254a1fa119023d4e3cd0279d63b18fc35cf"
 main_integration_event = "FOLR_B03_PREPARATION_AND_OWNER_RECONCILIATION_INTEGRATED_20260914"
+producer_type = "independent_browser_portfolio_decision"
+producer_thread_id = "01a09ea0-4a86-75b0-826d-6f864efa7480"
+producer_request_id = "2026-09-14-folr-portfolio-direction-reconciliation-01"
+producer_url = "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1"
 
 
 [directions.degraded_incumbent_shadow_handover]
@@ -236,11 +240,12 @@ active_author_thread_id = "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc"
 active_author_direction = "vap_folr_core"
 active_request_id = "2026-09-14-folr-portfolio-direction-reconciliation-01"
 active_conversation_id = "6aa7836e-e4a0-83e8-985d-c633d94935b1"
-active_request_state = "published_ready_for_independent_Transport; no Send claimed"
+active_request_state = "accepted_generating; observed by independent Transport, no full answer yet"
 active_handoff_sha = "8ac65986d4a6cd09afbc95a30741d12f9237f5ba"
-active_next_action = "Independent Transport sends exact fixed PROMPT once on6aa7836e, observes and archives full decision directly to FOLR; RCLE follows terminal/archive/release"
+active_next_action = "Transport observes exact accepted FOLR request and archives complete decision; FOLR intakes/applies then releases binding to RCLE"
 previous_accepted_request_state = "terminal archived by MGTAP at552f0dce7904e35206b8e32f9180ab85aee822ad; old DISH suggestion unapplied"
 active_handoff_path = "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/REQUEST.json"
+active_observation_source = "Transport wait snapshot revision30 / assistantmsg_0c0d38926917bc8a016aa7a4c6182487d090c2f65f00d87396; this is an App observation ID, not provider message ID"
 
 
 [coordination]
