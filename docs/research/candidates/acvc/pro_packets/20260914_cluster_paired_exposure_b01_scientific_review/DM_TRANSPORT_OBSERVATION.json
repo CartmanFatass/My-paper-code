@@ -7,7 +7,7 @@
   "task_sha": "d17e4f4e5f2710c9af157ae42bde98617a600cc0",
   "handoff_sha": "6b532decfd860b059764dbb36f0cac5c79a2f2b8",
   "author_dispatch_at": "2026-09-14T15:28:27Z",
-  "state": "WAITING_GENERATION",
+  "state": "complete_full_response_read_dm_findings_answered",
   "send_count": 1,
   "provider_prompt_bytes": 1934,
   "provider_prompt_sha256": "17e9ac4e18d69a42b58960823b7322622658af0406f8c84c22f5a4b82248676a",
@@ -17,7 +17,7 @@
   ],
   "accepted_user_node_id": "f25bcae8-4dc3-47ca-a5e6-ba636027e79b",
   "send_observed_at": "2026-09-14T15:33:12.5162252Z",
-  "accepted_prompt_readback": "Requested same-node text reconciliation because durable queue mistyped digest; no duplicate Send or changed prompt.",
+  "accepted_prompt_readback": "Producer reopened exact user node f25bcae8-4dc3-47ca-a5e6-ba636027e79b read-only; programmatic .markdown innerText equality to HANDOFF true,1934chars. Bound readback tab closed; no provider mutation or resend.",
   "queue_metadata_errors": [
     {
       "field": "input_reference.task_commit",
@@ -35,5 +35,14 @@
       "meaning": "Still instructed paste/Send despite send_count1 and WAITING_GENERATION; requested observation/archive-only correction."
     }
   ],
-  "metadata_correction_requested_at": "2026-09-14T15:34:46Z"
+  "metadata_correction_requested_at": "2026-09-14T15:34:46Z",
+  "delivery_commit": "68fed46f448312827f38b4b4f9bade36e2aedc35",
+  "response_bytes": 14654,
+  "response_lines": 73,
+  "response_sha256": "98a9fb29fd1c9c610b9ccc2b767fd694ed0e9b3170ad5c5a6e94f3789404d18f",
+  "terminal_assistant_node_id": "a394e176-e2a8-42c1-8e6a-c5bcf733ba77",
+  "delivery_comment_id": 5666688209,
+  "queue_state_observed": "COMPLETED_PROVIDER_DELIVERY_VERIFIED",
+  "queue_remaining_correction": "Resolved by producer programmatic hashlib assignment;64-character digest matches exact HANDOFF. Failed prior63-character correction remains in queue error history.",
+  "provider_request_closed": true
 }

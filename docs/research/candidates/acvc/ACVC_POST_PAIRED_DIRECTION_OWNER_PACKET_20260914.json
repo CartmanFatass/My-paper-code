@@ -1,0 +1,39 @@
+{
+  "question": "是否保留并提交ACVC方向提案：优先CONTINUE一次固定1024配方的未来proposer比较，认真比较保留F参考后的PARK？",
+  "changes_if_approved": [
+    {
+      "target": "ACVC方向发展建议",
+      "from": "配对B01及完整科学审阅已完成；当前CONTINUE/MEDIUM/recasts2，尚无后继实验",
+      "to": "形成并提交Portfolio方向报告，推荐一个有明确总体问题与有限成本的新比较；实际方向处置和新卡仍待完整Portfolio决定"
+    }
+  ],
+  "if_refused": "在下一干净边界按实际owner意见修订或撤回未发送提案；已接受请求先核对状态，保留全部结果和已发文本，不重发、改写历史或自动释放席位。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md",
+      "quote": "F−dwell declines from+0.1191862743 to+0.0687279633J while the later endpoint remains useful by the frozen mean criterion.",
+      "why": "C在共同世界上提高，后期F仍超出有用dwell，未来新proposer的期望增量仍是直接影响是否维护F的具体问题。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_paired_exposure_b01_scientific_review/archive/RESPONSE.md",
+      "quote": "My report preference is discretionary and unquantified.",
+      "why": "保留既有有限参考后PARK也合理；新比较不能凭6个程序就保证校准，严重负向尾部和完整支持成本未知必须保留。"
+    }
+  ],
+  "uncertainty": [
+    "推荐CONTINUE与PARK是接近的定性投入取舍，没有量化净价值排名。",
+    "单次新B也可能改变发展判断，不能因为不能独自解决总体问题就排除。",
+    "六程序只是成本化候选，尚未冻结新卡/seed/统计模型；置信假设不足或结果不确定时必须限缩结论。",
+    "当前三个占用席位不变，不在此轮选择替代方向或调整其他方向优先级。"
+  ],
+  "cost": {
+    "compute": "候选六程序1867776ticks/12288updates/1152终评，旧单程序296.30s给出1777.8s合计参考；native3000s/支持4800s只是候选规划。当前实际仅提交一份方向报告并关闭同次回复，支持1800s可修订计划；完整累计成本仍未知。",
+    "owner_time": "无需等待，所有者可异步介入。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): submit the report with CONTINUE recommendation; no Portfolio disposition or new experiment applied.",
+  "source": "docs/research/candidates/acvc/ACVC_POST_PAIRED_DIRECTION_REPORT_20260914.md"
+}
