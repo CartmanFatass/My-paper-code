@@ -10,8 +10,8 @@ heartbeat_role = "recovery_backstop"
 heartbeat_state = "MISSING"
 heartbeat_target = "unassigned"
 
-main_writer = "root"
-main_writer_event = "peer-dm-control-transition"
+main_writer = "unclaimed"
+main_writer_event = "peer-dm-transition-released"
 main_writer_turn = "01a095b7-850f-7401-ad4e-5e4320d285f1"
 
 [retired_clerk]
@@ -132,7 +132,7 @@ authoring_checkout = "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906"
 authoring_branch = "codex/rcle"
 
 [directions.vap_folr_core]
-state = "scientific_park_archived"
+state = "owner_requested_scientific_reconciliation"
 occupies_slot = false
 park_document = "docs/research/candidates/vap_folr_core/PARK.md"
 owner_mode = "independent_task"
@@ -246,8 +246,8 @@ new_request_coordinator = "metric_ground_transport_allocation"
 coordinator_thread_id = "01a09cd8-676e-7513-806d-a86b7e104518"
 coordination_scope = "only current FOLR vacancy and transferred pending Portfolio exchange; no authority over peers"
 planning_state = "three_direction_target_lcac_vacancy_replacement"
-reserved_slots = 0
-request_status = "mgtap_selection_applied; folr_vacancy_handoff_reconciliation"
+reserved_slots = 1
+request_status = "mgtap_selection_applied; folr_owner_review_reserves_third_slot"
 request_status_commit = "723a4dcb3"
 request_conversation_id = "6aa77158-7194-83e8-8f8a-caf16ae6b84b"
 vacancy_source = "lcac-park-20260914;folr-park-20260914"
@@ -258,7 +258,7 @@ selected_task_id = "01a09cd8-676e-7513-806d-a86b7e104518"
 pending_vacancy_direction = "unselected"
 pending_vacancy_source = "vap_folr_core"
 pending_vacancy_count = 1
-next_action = "MGTAP DM owns current FOLR vacancy reconciliation and one Portfolio selection transaction; preserve any accepted Clerk request before sending. RCLE/MGTAP occupy two slots; target remains three, no fourth direction."
+next_action = "Original FOLR DM re-examines PARK under explicit owner challenge; reserve third slot until actual disposition. MGTAP owns only retiring Clerk handoff and any resulting vacancy transaction. Preserve accepted requests; no duplicate replacement Send. RCLE/MGTAP research continues."
 selection_response_url = "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1"
 legacy_accepted_routes = "preserve_through_closeout"
 candidate_direction = "fourth-slot-portfolio-candidate-unselected"
@@ -269,5 +269,12 @@ owner_stop_event = "2026-09-14-stop-fourth-slot-request-only"
 policy = "docs/project/PEER_DM_COORDINATION.md"
 model = "equal_peers_no_standing_coordinator"
 main_mutex = 'Local\HMASD_Main_Transaction'
-retirement_handoff_owner = "root"
-retirement_handoff_state = "awaiting_clerk_exact_pending_request_and_index_handoff"
+retirement_handoff_owner = "metric_ground_transport_allocation"
+retirement_handoff_state = "assigned_to_mgtap_peer; clerk_final_handoff_pending"
+
+[coordination.folr_owner_review]
+thread_id = "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc"
+state = "requested_in_existing_dm"
+reservation = 1
+reason = "owner challenges repeated post-negative PARK and incomplete direction-role/knowledge mapping"
+next_action = "DM loads complete current role and relevant scientific foundations, revisits direction-level rationale, records decision and concrete action; coordinates slot directly with MGTAP"
