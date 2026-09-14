@@ -1,5 +1,8 @@
 # 科研 Portfolio 报告
 
+> OWNER_DIRECT 2026-09-14：各方向完成手中任务与实验后暂停并写handoff；不停止已接受的运行/审查，不启动后继实验或补位。[当前指令](decisions/2026-09-14-owner-pause-after-inflight.md)。三个席位保持，科学CONTINUE等既有处置与这次运行暂停分别记录。
+
+
 当前目标为三个占用与预留席位。Portfolio 按 [当前决策协议](../../project/PORTFOLIO_DECISION_PROTOCOL.md)
 作方向层面的最终综合判断；DM 负责创新、实验、实现、证据报告和执行，普通实验不逐项申请批准。
 中央 Clerk 已退休，DM 平等协调，Root 是用户入口。以下是已发布证据和当前登记的摘要，

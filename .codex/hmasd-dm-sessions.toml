@@ -2,8 +2,8 @@ schema_version = 1
 mode = "peer_dms"
 dm_model = "gpt-6-astra"
 dm_reasoning_effort = "max"
-research_state = "owner_resumed"
-owner_event = "2026-09-13-resume-after-runtime-batch-correction"
+research_state = "owner_draining_to_pause"
+owner_event = "OWNER_PAUSE_AFTER_INFLIGHT_20260914"
 authority_correction = "2026-09-13-dm-full-lifecycle-pro-scientific-reviewer"
 root_role = "user_entry_and_workflow_control"
 heartbeat_role = "recovery_backstop"
@@ -11,8 +11,12 @@ heartbeat_state = "MISSING"
 heartbeat_target = "unassigned"
 
 main_writer = "unclaimed"
-main_writer_event = "ACVC_POST_C01_POST_INPUT_PEER_FACT_20260914_RELEASED"
+main_writer_event = "OWNER_PAUSE_AFTER_INFLIGHT_20260914_RECORDED_RELEASED"
 main_writer_turn = ""
+owner_instruction = "各方向可以先暂停 手中的任务和实验不要停止 完成后写handoff"
+owner_pause_record = "docs/research/portfolio/decisions/2026-09-14-owner-pause-after-inflight.md"
+new_successor_work_enabled = false
+vacancy_replacement_enabled = false
 
 [retired_clerk]
 thread_id = "01a09d6c-e4e0-7613-ba99-7b0a1b6c540e"
@@ -38,7 +42,7 @@ owner_mode = "independent_task"
 accepted_event = "acvc-session-astra-max-v1"
 accepted_turn = "01a09cd8-cabf-72a2-aed4-3bf5f68fa98a"
 last_processed_event = "ACVC_POST_C01_REVIEW_INTAKEN_REPORT_20260914"
-next_action = "Read complete same-request Portfolio answer and apply conforming decision; assess later MGTAP8253 adverse fact only for actual material dependence. Preserve frozen report6f/global5a inputs and one accepted Send; no new native or applied PARK."
+next_action = "Finish full delivered post-C01 Portfolio verification/intake and write handoff; its future1024/4096 B is deferred by later owner pause and must not start."
 portfolio_exchange_archive = "docs/research/candidates/acvc/pro_packets/20260914_portfolio_vacancy_selection_recovery/archive"
 first_action = "Read complete C01 review/intake and post-C01 report. C01 is consumed and all native handles terminal/reclaimed; preserve all archives and denied local scratch. Current Portfolio author is original ACVC DM."
 first_action_evidence = "docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md; docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_RECIPE_C01_INTAKE_20260914.md"
@@ -114,6 +118,10 @@ post_c01_report_path = "docs/research/candidates/acvc/ACVC_POST_C01_DIRECTION_RE
 fixed_c01_review_response_sha = "9a655b28b5ac33935f88954c32b7a06b84c3252e"
 fixed_c01_review_response_sha256 = "ff6db0b23ae352c1fc43e1ab4b1695a16279ffaff6a97900fc9c6d3a27ed40ed"
 fixed_c01_review_intake_path = "docs/research/candidates/acvc/pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/INTAKE.md"
+owner_pause_event = "OWNER_PAUSE_AFTER_INFLIGHT_20260914"
+operational_state = "draining_current_work_then_owner_paused"
+pause_handoff_state = "requested_not_complete"
+pause_handoff_path = ""
 
 [directions.metric_ground_transport_allocation]
 state = "active"
@@ -123,7 +131,7 @@ owner_mode = "independent_task"
 accepted_event = "mgtap-session-astra-max-v1"
 accepted_turn = "01a09cd9-d3be-7922-85ec-da2dc1766572"
 last_processed_event = "MGTAP_FIXED_LR_B01_8253_COMPLETE_ADVERSE_INTAKE_20260914"
-next_action = "Native8253 complete and accepted COND_ADVERSE; original DM prepares full new Direction Pro results/next-discriminator review, responds to it and reports lifecycle recommendation to Portfolio. No extra seed, PARK or slot release."
+next_action = "Complete the task and experiments already in hand, preserve monitors/accepted provider requests through full current-object intake and archive, then write committed handoff and remain owner-paused. Do not start a successor or vacancy task."
 portfolio_selection_archive = "docs/research/portfolio/pro_packets/20260914_lcac_park_vacancy_selection"
 portfolio_response_full_received = true
 portfolio_response_full_source = "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/archive/RESPONSE.md"
@@ -198,6 +206,10 @@ next_objective_work = "Proposed2fits/147456ticks/1024Adam;3-6minute native estim
 main_integration_event = "MGTAP_PORTFOLIO_FULL_DECISION_APPLIED_RELEASED_20260914"
 portfolio_release_notice_state = "Delivered2026-09-14T10:44:23Z directly to RCLE01a09e10-9d9f-7f82-87c0-d58cbe0c7618 with actual releasee38836b0820eab80e964caa861171c5d48230e18, full responsed03ee1f04f7c0ea9dc2e7ae5ae817b75511a5f80/report/intake sources and input-delivery defect; no ACK requested."
 portfolio_transport_recovery_handoff = "Same-time direct App completion to registered Transport; full exact archive published, old receipts preserved, future actual composer/user-body verification specified; no new Send requested."
+owner_pause_event = "OWNER_PAUSE_AFTER_INFLIGHT_20260914"
+operational_state = "draining_current_work_then_owner_paused"
+pause_handoff_state = "requested_not_complete"
+pause_handoff_path = ""
 
 [directions.roster_consistent_latent_exploration]
 state = "scientific_park_coupling_complete_archive_ready"
@@ -289,7 +301,7 @@ owner_mode = "independent_task"
 accepted_event = "folr-session-astra-max-v1"
 accepted_turn = "01a09cd9-d6a0-7500-9d14-f9a3b7bfab38"
 last_processed_event = "FOLR_AUGMENTATION_B01_G_COLLECTED_A_RUNNING_20260914"
-next_action = "Process exact A Monitor terminal; collect source/count/checkpoint/finite outputs and complete costs, compute original A-G primary, write full scientific intake/Chinese brief and obtain independent scientific review. No additional fit or automatic lifecycle change selected."
+next_action = "Complete the task and experiments already in hand, preserve monitors/accepted provider requests through full current-object intake and archive, then write committed handoff and remain owner-paused. Do not start a successor or vacancy task."
 selected_object = "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601"
 selected_object_exposure = "Original2fits accepted:each selected5000train/4969RMSprop/128final,train781601/eval1781601. G complete with102560ticks;A running,actual final exposure/pair outcome pending."
 selected_object_budget = "Ordinary DM plans G3600s/A5400s,9000summed native+1800active support reference; exact empirical endpoints frozen, real4GiB admission and one FOLR invocation at a time."
@@ -398,6 +410,10 @@ execution_record_path = "docs/research/candidates/vap_folr_core/entity_history_a
 last_peer_event = "ACVC_POST_C01_PORTFOLIO_CONTEXT_20260914"
 last_peer_handoff = "FOLR_PEER_FACTS_FOR_ACVC_20260914 delivered directly to original ACVC01a09dfa-0655-7831-aa3a-9fff2ddd2508 with G intake/B03 full review/Portfolio application,real limits and unknowns;execution update follows actual main integration."
 interarm_control_elapsed_seconds = 13401.737549
+owner_pause_event = "OWNER_PAUSE_AFTER_INFLIGHT_20260914"
+operational_state = "draining_current_work_then_owner_paused"
+pause_handoff_state = "requested_not_complete"
+pause_handoff_path = ""
 
 [directions.degraded_incumbent_shadow_handover]
 state = "scientific_park_archived"
@@ -462,14 +478,14 @@ authoring_branch = "codex/lcac"
 [portfolio]
 role = "global_scientific_interpretation_and_final_direction_decisions"
 consultation_trigger = "direction_lifecycle_or_global_interpretation_or_vacancy_or_owner_request"
-automatic_replacement = true
+automatic_replacement = false
 target_slots = 3
 binding_key = "portfolio:cross_direction"
 transport_config = "C:/Projects/HMASD/.codex/hmasd-transport.toml"
 new_request_coordinator = "acvc"
 coordinator_thread_id = "01a09dfa-0655-7831-aa3a-9fff2ddd2508"
 coordination_scope = "Original ACVC DM owns one post-C01 direction report/decision dialogue. Other DMs retain their work and resources; no new global adjustment or vacancy exists."
-planning_state = "three_occupied_zero_reserved_zero_vacancy"
+planning_state = "three_occupied_owner_draining_to_pause_no_replacement"
 reserved_slots = 0
 request_status = "One exact1915-byte post-C01 Portfolio request accepted at20:06:55.6280526Z; usercaca35ed-9351-48c7-b8f1-d06f0cb0b955,send_count1/manual0. Full answer generating; currentCONTINUE/MEDIUM/recasts2 and3occupied remain."
 request_status_commit = "6f5788081986ee9f5b06bc236d8f6f1497dd7eb2"
@@ -482,7 +498,7 @@ selected_task_id = "01a09dfa-0655-7831-aa3a-9fff2ddd2508"
 pending_vacancy_direction = ""
 pending_vacancy_source = ""
 pending_vacancy_count = 0
-next_action = "ACVC publishes exact fixed TASK/HANDOFF then registered Transport sends once. Author reads full answer, addresses findings and applies conforming direction disposition. No vacancy selection in this round."
+next_action = "Finish already accepted/current-object scientific deliveries and intake; no successor direction work or vacancy selection during owner pause. Preserve current three occupied slots and write handoffs."
 selection_response_url = "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1"
 legacy_accepted_routes = "preserve_through_closeout"
 candidate_direction = "fourth-slot-portfolio-candidate-unselected"
@@ -494,7 +510,7 @@ active_request_id = "2026-09-14-acvc-post-fixed-c01-direction-decision-01"
 active_conversation_id = "6aa7836e-e4a0-83e8-985d-c633d94935b1"
 active_request_state = "accepted_waiting_generation"
 active_handoff_sha = "597aff262c84cb8a75d96c1537d41b6fbeca9c60"
-active_next_action = "Observe/archive the same accepted request and read its full direction decision. At intake assess the separately recorded later MGTAP8253 adverse fact for material effect; no automatic clarification or resend."
+active_next_action = "ACVC finishes the full already-delivered Portfolio response and its handoff, retaining proposed successor for resume only; then releases the completed dialogue without new research Send."
 previous_accepted_request_state = "ACVC exact single-Send request complete; full response, receipt, comment, source checks and material DM response/application preserved. No pending provider recovery."
 active_handoff_path = "docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/HANDOFF.json"
 active_observation_source = "docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/DISPATCH_FACTS.json"
@@ -535,6 +551,7 @@ active_provider_send_count = 1
 post_input_peer_event = "MGTAP_FIXED8253_COMPLETE_ADVERSE_PEER_CONTEXT_20260914"
 post_input_peer_record = "docs/research/candidates/acvc/ACVC_POST_C01_PEER_CONTEXT_20260914.md"
 post_input_peer_record_sha = "0ce183894ce291834ad70cc513b0afba38f7833c"
+owner_pause_event = "OWNER_PAUSE_AFTER_INFLIGHT_20260914"
 
 [coordination]
 policy = "docs/project/PEER_DM_COORDINATION.md"

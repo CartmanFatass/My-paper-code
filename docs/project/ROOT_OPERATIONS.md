@@ -11,6 +11,10 @@ slot release or archival pending that decision. Existing references to DM lifecy
 mean proposal, reporting and execution, not final interpretation. Web Portfolio must receive and
 read the protocol's fixed repository context; local conversation/skill inheritance is not assumed.
 
+## Owner pause after current work — 2026-09-14
+
+Current owner instruction is [pause after current work](../research/portfolio/decisions/2026-09-14-owner-pause-after-inflight.md): finish tasks/experiments already in hand without stopping accepted processes or provider requests, write committed handoffs, then remain operationally paused. No successor experiment, new direction or vacancy replacement starts. Scientific CONTINUE/PARK history and occupied slots remain; this is not a scientific disposition. Original DMs retain collection, current-object review, integration and handoff ownership. A later explicit owner resume is required for new research.
+
 ## Equal direction owners
 
 Independent Astra/max DMs own full direction science, implementation and optional native Sol/medium
