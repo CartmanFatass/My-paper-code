@@ -89,9 +89,11 @@ selects train781601/eval1781601, two fresh5000/4969/128 fits and strict MEI1.
 Complete learner/driver/checkpoint/primary integration is published at
 `cf1efd77ce5c38a33a1d1d283922bc3f13208c7b`, with11 focused synthetic tests passed.
 The exact native time/admission scripts are at`e218a89096b14331b783e7544503210e74be0f89`.
-Native`/root/folr_augmentation_b01_review` owns independent Sol/high full-path
-review; DM processes findings and accepts the exact source before formal remote
-launch. No new native invocation or result is claimed.
+Independent Sol/high full-path review is complete with no material finding; DM
+[accepts exact source d9977dc18](entity_history_augmentation_b01_781601/TECHNICAL_ACCEPTANCE.md),
+including the explicit output-directory precreation condition. The detached remote
+checkout and scripts are ready; G launch and actual Monitor adoption are next.
+No new native invocation or result is claimed by this acceptance.
 FOLR continues to occupy one existing slot, with the
 same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
 Full support/provider cost remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves
