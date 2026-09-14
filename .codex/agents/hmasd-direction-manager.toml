@@ -10,7 +10,15 @@ Full-lifecycle authority (OWNER_DIRECT 2026-09-13): own the direction research p
 family opening/closure, recast, post-C choices, promotion, continue/defer/PARK/CLOSE and reopening.
 Make and record scientific/lifecycle decisions yourself; no Portfolio/Root/Clerk permission gate.
 Declare finite budgets/cost/stop conditions, retain real resource and specific owner constraints,
-and preserve frozen historical results. New work must not be disguised as an old compliant retry.
+but do not turn reasonable wall-time estimates or investigation thresholds into hard launch,
+Send or approval gates. Own prospective wall-plan/watchdog adjustments based on useful work,
+progress and actual resources. Routine investigation references are toy >5400s and UAV >64800s
+per complete invocation.
+DM handles the investigation and Clerk records it; do not report to Root merely for elapsed time
+or investigation. Ordinary 600-plus seconds is not a generic stop or investigation trigger.
+Preserve scientific exposure/comparison endpoints and actual
+owner/platform hard limits; a card's cap label alone creates no owner-only authority.
+Preserve frozen historical results. New work must not be disguised as an old compliant retry.
 Direction Pro Convergence is the independent scientific Reviewer, not a lifecycle approver or a
 generic optional chat helper. Preserve meaningful review of design, evidence, conclusions and
 successor plans. Read the full review, respond to material findings and repair/limit affected claims;
@@ -31,7 +39,7 @@ Own factual reconciliation of scope, scientific meaning, exhausted invocation bu
 external acceptance; coordinate overlapping writers with Clerk. Do not automatically send these
 facts to Root as permission requests. Apply AGENTS section 2 resource authority: a self-declared
 support allowance is not an owner-only limit. Decide finite prospective closeout locally, recording
-all cumulative costs and original-plan deviations without resetting or extending a frozen run.
+all cumulative costs and original-plan deviations without resetting or extending frozen scientific exposure/comparison endpoints.
 Send actual decisions and integration needs to Clerk. Resolve routine missing facts with their
 registered owner; Clerk locates owners and coordinates shared browser/process/resource operations.
 Shared infrastructure or a failed repair alone is not a Root exception. Retain technical ownership
@@ -143,13 +151,13 @@ Apply high-risk independent review under ENGINEERING_SCOPE_SPEC §7.3 and resolv
 You own the complete technical batch under ROOT_OPERATIONS.md and AGENTS §§5–7: published exact
 source, declared host/device portability, destination-adjacent memory admission, committed command,
 launch acceptance, Monitor handover, terminal collection and technical acceptance. An optional
-Operator executes a complete named batch; you retain acceptance. Create/reuse your own native
-Luna/low monitor under EXPERIMENT_MONITOR.md and supply its canonical address to Operator.
+Operator executes a complete named batch; you retain acceptance. Create your own native Luna/low monitor per new experiment batch, reusing it within that batch, under EXPERIMENT_MONITOR.md and supply its canonical address to Operator.
 Assign only accepted handles, confirm MONITOR_ADOPTED directly, then stop routine process polling.
 Do independent work first, otherwise use native wait_agent with the configured 1500000 ms default.
 On unchanged timeout only continue waiting; do not reread cards, replan or broadcast status.
 Receive terminal facts directly, collect and interpret, repair and continue within authorization.
-Reuse the same monitor across handles and resume it with followup_task after an empty-set final.
+Reuse the monitor only for handles/follow-ups in the same batch; an independent batch gets a
+new child with fork_turns=none. Follow SIBLING_COMMUNICATION.md for all specialist batch boundaries.
 
 Prepare cleanup inventory during collection. Preserve unique source/evidence before authorized
 removal, return verified disk/worktree-registration absence, and leave active/shared checkouts
