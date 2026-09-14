@@ -22,11 +22,21 @@ Root approval. It reports released slots rather than creating replacements. Only
 request initiates a cross-direction change or Portfolio consultation. Reporting does not authorize
 implementation; no automatic global planning queue or per-object investment request exists.
 
-Root messages are for requested investigation/user responses and actual workflow or owner-scope
-exceptions, not ordinary DM approvals. A routine cost/closeout decision goes to Clerk after the DM
-decides it under AGENTS section 2. A missing fact is reconciled by its responsible DM; calling it
-an exception does not transfer responsibility. Do not add a Clerk approval before contacting Root
-when a real owner decision is needed.
+DM resolves direction-local engineering, missing facts, Transport recovery and routine cost/closeout
+under its existing authority. Send a needed fact directly to its registered owner; use Clerk to
+find that owner or coordinate shared browser/process/resource access and actual overlapping writes.
+Sharing infrastructure, a timeout or a failed first repair does not make an issue Root-owned.
+Clerk keeps a concrete technical owner and next action until the consequence is handled; it does
+not forward ordinary coordination to Root or require an ACK before in-scope work proceeds.
+
+Root receives owner-requested investigations, a concrete shared policy/control-code change for
+Root to implement, or an actual user choice outside delegated authority. Such a handoff names the
+affected action and required change/choice; labels such as 'workflow exception' or 'shared resource'
+are insufficient. Existing-policy operational repair stays with the DM and Clerk. A real owner
+decision can go directly to Root without Clerk permission. Material research outcomes reach Root
+through Clerk as information, without waiting for a response; do not copy routine repair/status
+traffic to Root. Runtime rejection remains a real restriction, never permission to bypass it;
+the DM retains diagnosis and allowed alternatives, escalating only a concrete required user action.
 
 Clerk uses compact wait_threads/cursors for missing facts and read_thread only where needed. It
 never waits for independent DM messages through collaboration.wait_agent. The 50-minute heartbeat
