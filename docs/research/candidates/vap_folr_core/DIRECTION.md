@@ -30,7 +30,18 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
-**Current lifecycle: reversibly PARKED/MEDIUM by DM decision on 2026-09-13.**
+**Current lifecycle: ACTIVE/MEDIUM; bounded DM re-entry on 2026-09-14.**
+The [new intake](FOLR_REENTRY_INTAKE_20260914.md) prospectively changes the prior
+value judgment: the first complete fresh/fresh learning contrast merits one direct
+observation. DM selects [entity-history B02](FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md),
+one new BANK16/Generic64 training block on the unchanged equally informed H20 host.
+The fixed F reference-use result remains GENERIC_ONLY_BANK_WORSE; E's missing
+contrast stays unavailable. Prior PARK and all negative evidence remain historical
+facts. Portfolio filled the ACVC vacancy; it did not select this scientific object.
+The next boundary is B02's complete result or concrete failure, followed by DM's
+intake/lifecycle choice, without an automatic second block or approval handshake.
+
+**Previous lifecycle judgment (2026-09-13), superseded prospectively above:**
 Owner lifted the later operational pause on 2026-09-13. DM reconsidered the
 runtime-policy change and retains this scientific PARK, independently of any
 wall-time estimate, investigation reference or missing permission. The
@@ -54,7 +65,7 @@ See the [DM lifecycle decision](FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.
 The complete post-F independent scientific review found no result-invalidating
 defect; DM accepts its R1/R2 reporting corrections and R3 judgment clarification
 in the [scientific-review response](pro_packets/20260913_post_f_scientific_review/INTAKE.md).
-No live scientific or Transport producer remains. Clerk completed the four old
+At that PARK closeout no live scientific or Transport producer remained. Clerk completed the four old
 main-preservation gaps and f80 cleanup publication; DM verified the exact accepted
 blobs. Current decision/report integration is separate from scientific execution.
 
