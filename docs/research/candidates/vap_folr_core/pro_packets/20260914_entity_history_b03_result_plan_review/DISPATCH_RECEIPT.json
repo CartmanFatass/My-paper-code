@@ -14,18 +14,20 @@
     "threadId": "01a09ea0-4a86-75b0-826d-6f864efa7480"
   },
   "recorded_at_utc": "2026-09-14T10:09:57.728472+00:00",
-  "provider_send_state": "CONFIRMED_ACCEPTED_BY_TRANSPORT_READBACK; 6 Pro Thinking; full answer not yet received",
-  "updated_at_utc": "2026-09-14T11:43:49Z",
-  "observation_owner": "Registered independent Transport, concurrent observation and full archive directly to this DM",
+  "provider_send_state": "TERMINAL_FULL_GITHUB_DELIVERY_VERIFIED_AND_READ_BY_DM",
+  "updated_at_utc": "2026-09-14T12:23:31.278537+00:00",
+  "observation_owner": "Complete: registered Transport terminal/full return received; no remaining FOLR provider generation",
   "same_request_reconciliation_required": true,
   "scientific_change_from_render_repair": false,
-  "next_action": "Transport reconciles this same request in its bound conversation, sends the original prompt only after verified nonacceptance, and observes/archives the full response; DM reads/responds and forms substantive Portfolio report.",
+  "next_action": "DM complete review response and substantive Portfolio direction report; RCLE owns its current separate vacancy conversation turn.",
   "recovery_followup_20260914": {
     "sent_at_utc": "2026-09-14T11:40:23Z",
     "event": "FOLR_B03_EXISTING_REQUEST_RECOVERY_20260914",
     "observed_gap": "The registered Transport had completed its latest RCLE turn without a B03-specific acceptance or terminal receipt. Its FOLR binding still recorded the old B02 request as ARCHIVED. The B03 target response was absent at the observed remote delivery HEAD 51842d2bbfb3a2ea44e677bdb8bd61bf92d98232. These facts do not establish provider nonacceptance.",
     "action": "Resumed the existing registered Transport on the unchanged bound request, requiring actual same-conversation reconciliation before any Send and full composer/accepted-user-body verification if unsent. Existing provider effects and input bytes remain unchanged.",
-    "app_tool_result": {"threadId": "01a09ea0-4a86-75b0-826d-6f864efa7480"},
+    "app_tool_result": {
+      "threadId": "01a09ea0-4a86-75b0-826d-6f864efa7480"
+    },
     "transport_recovery_turn": "01a09fb7-e236-7db3-9107-a7c991fcfc32",
     "observed_execution": "Transport is active and explicitly reported checking the FOLR bound handoff, delivery branch and existing conversation. This is execution coverage, not provider acceptance.",
     "new_scientific_request": false,
@@ -46,5 +48,18 @@
     "observation_owner": "Registered Transport explicitly continues observation through terminal completion, full archive and direct author return",
     "full_response_received": false,
     "new_scientific_request": false
+  },
+  "terminal_delivery": {
+    "delivery_commit": "18e03e45d69def09d29c0f2c299bb855891b0f27",
+    "provider_assistant_message_id": "a8b6c56a-5ccb-4f67-b9f3-b0b5a42a2d20",
+    "raw_response_bytes": 23158,
+    "raw_response_sha256": "8686d0131e4dea5e78cf31d6b8d797f1c49db065858c00959d264de289910a37",
+    "raw_response_ends_with_lf": true,
+    "full_response_received_and_read": true,
+    "issue_comment_id": 5663487902,
+    "dm_verification": "archive/DM_VERIFICATION.json",
+    "original_transport_receipts_preserved": true,
+    "provider_send_count": 1,
+    "new_empirical_invocation": false
   }
 }

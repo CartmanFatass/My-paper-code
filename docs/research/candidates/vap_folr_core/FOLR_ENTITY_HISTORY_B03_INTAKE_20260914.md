@@ -1,5 +1,13 @@
 # FOLR B03 scientific intake and proposed next question
 
+**Full review update:** the [complete independent review and DM response](pro_packets/20260914_entity_history_b03_result_plan_review/INTAKE.md)
+are now received and read. B03 remains valid at its bounded scope. The proposal below
+is retained as the original review input; the linked intake prospectively replaces
+its ambiguous current-only wording with zero unseen entity state and specifies the
+shared Generic route, two-stream readout, replay ownership and claim limits.
+The review does not select a new fit or lifecycle; the next actual work is a full
+Portfolio direction report, after the current RCLE author releases that conversation.
+
 ## Current acceptance and authority
 
 DM accepts B03's complete native result, GENERIC_ABOVE_MEI at d=-6.63671875,
