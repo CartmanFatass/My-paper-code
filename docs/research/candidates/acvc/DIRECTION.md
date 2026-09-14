@@ -2,9 +2,13 @@
 
 ## Current research ownership — OWNER_DIRECT / Portfolio, 2026-09-14
 
-ACVC is **CONTINUE / reopened**, MEDIUM/recasts2, under the complete conforming
-[Portfolio decision](../../portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md)
-and [author intake](../../portfolio/pro_packets/20260914_rcle_park_vacancy_selection/INTAKE.md).
+ACVC is **CONTINUE**, MEDIUM/recasts2, under the complete conforming
+[post-paired Portfolio decision](../../portfolio/pro_packets/20260914_acvc_post_paired_direction/archive/RESPONSE.md)
+and [full DM response/application](../../portfolio/pro_packets/20260914_acvc_post_paired_direction/INTAKE.md).
+The selected next objective is one prospective six-programme fixed1024 C-only study with
+final private C/F/own-dwell panels. It addresses expected added value under a declared
+training/evaluation law, with assumption-qualified single-task inference. The new science
+card, sampling/seed list, uncertainty method, source and invocation remain to be bound.
 The original independent ACVC DM owns ordinary research, implementation, engineering acceptance,
 launch/observation, scientific intake and reports. Portfolio owns final direction-level
 CONTINUE/recast/PARK/CLOSE/reopening. Direction Pro supplies independent scientific review;
@@ -16,7 +20,7 @@ Reuse `C:/Projects/HMASD-worktrees/codex-acvc`, branch `codex/acvc`. No addition
 fourth slot is created. RCLE completed this reservation's conversion to occupancy at main
 `6c6b2432402bf9d9c77b53d683b35ebbb4c325ee`. The original DM owns research continuation.
 
-## Current research — paired512/1024 exposure after complete longer-C review
+## Completed reopening evidence — B03, longer-C and paired exposure
 
 The DM read the entire 21,323-byte Portfolio answer, SHA256
 `3b81868e9065d370f0d2a5430dd81da960d8a4cd3d4be799dff7c98cbd54ceb7`, and its full intake.
