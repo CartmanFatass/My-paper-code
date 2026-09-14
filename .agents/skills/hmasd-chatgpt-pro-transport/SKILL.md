@@ -75,6 +75,28 @@ unrecoverable coverage gaps to the affected author DM; no routine Root escalatio
    No routine messages to Root. Author reads full answer and owns scientific intake. Archive-only
    work never authorizes a new scientific request.
 
+### Multiline composer input and original UI evidence
+
+Use the current browser API's documented multiline-safe paste/fill operation. When the API
+provides `paste(text, {format: "text"})` for this purpose, use it for multiline prompts. Never
+substitute keyboard `typeText` for multiline text when newlines can act as submit keys. Read the
+current API documentation rather than assuming that similarly named input methods are equivalent.
+
+Before the deliberate Send, read back the whole actual composer and compare it with the exact
+authored prompt. A local source digest proves only local bytes, not UI delivery. Documented
+rendering-only newline differences may be normalized for the comparison while preserving both
+original captures and the original prompt; do not clear correct content or switch to keyboard
+entry merely because CRLF/LF rendering differs. A truncated readback is insufficient to establish
+whole-composer agreement; use a supported complete readback. Repair a real mismatch locally.
+
+If unexpected partial messages were submitted, preserve all actual user nodes and their original
+DOM/tool captures. Extract node IDs, counts and hashes programmatically from those captures;
+never retype identifiers or label another record verified without matching the original source.
+Keep author request identity separate from each actual provider message identity. Reconcile the
+current generation and evidence access with the author DM; incomplete input is not by itself
+permission to Send again, Stop or Regenerate. Honor any adopted ARCHIVE_ONLY continuation.
+Corrections to inaccurate receipts retain the originals and cite the original captured evidence.
+
 ### Archive bytes and receipt accuracy
 
 Compute byte count and SHA256 from the exact saved binary content. For a GitHub file, identify
