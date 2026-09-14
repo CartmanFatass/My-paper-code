@@ -10,13 +10,18 @@
   "dm_task": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
   "monitor": "/root/folr_b02_monitor",
   "order": "GENERIC_RETAIN terminal technical collection, then BANK regardless of Generic score or completeness",
-  "new_result_invocations_accepted": 0,
+  "new_result_invocations_accepted": 1,
   "arms": {
     "GENERIC_RETAIN": {
-      "state": "selected_not_launched",
+      "state": "accepted_running",
       "planned_handle": "folr-b02-generic-781401-82b12d7e0",
       "command_file": "GENERIC.sh",
-      "output": "/home/wu/hmasd-worktrees/folr-entity-history-b02-781401-82b12d7e0/experiments/results/folr_entity_history_b02_781401/GENERIC_RETAIN"
+      "output": "/home/wu/hmasd-worktrees/folr-entity-history-b02-781401-82b12d7e0/experiments/results/folr_entity_history_b02_781401/GENERIC_RETAIN",
+      "accepted_utc": "2026-09-14T04:43:26Z",
+      "supervisor_handle": "folr-b02-generic-781401-82b12d7e0",
+      "supervisor_pid": 3658558,
+      "receipt": "GENERIC_LAUNCH_RECEIPT.json",
+      "acceptance_commit": "5094e1a00297395358bdc310e4014e545fcea2a4"
     },
     "BANK": {
       "state": "selected_not_launched",
