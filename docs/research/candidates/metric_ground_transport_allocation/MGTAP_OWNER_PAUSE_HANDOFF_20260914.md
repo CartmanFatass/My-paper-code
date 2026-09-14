@@ -58,8 +58,16 @@ verified20:23:32.6668545Z. See `fixed_lr_b01_8253/COLLECTION.json` at8fff7c240.
 Remote supervisor files remain at `/home/wu/.agent-tasks/mgtap-fixed-lr-b01-8253-20260914/`.
 Local originals remain under authoring `temp/directions/metric_ground_transport_allocation/exp/fixed_lr_b01_8253_20260914/`.
 The older `/home/wu/hmasd-worktrees/mgtap-lr-selection-8251-8252-20260914` checkout
-was not removed by this new-run cleanup. Original DM owns its separately reconciled
-cleanup at the current full-review closeout; do not infer deletion or live compute.
+was separately reconciled and removed at20:37:00.2310884Z. Its native handle was
+finished/exit0,PID3665484/tmux inactive; no tracked edits or unignored untracked files.
+The only14ignored files were the original native outputs, freshly matched to the
+published20-member6666445-byte archive, SHA256
+8fa3b022cf32a38c229ebabb0b87caf43952879a9a4194d850588adf9656123d. All20members
+and the exact published Git blob were rechecked20:36:27Z. Ordinary Git worktree remove
+(no force or workaround) completed; both disk and registration absence confirmed.
+All local originals, source2d351d486 and remote supervisor files remain. See
+`reentry_20260914/COLLECTION.json` for this separate completed cleanup. Neither
+completed remote checkout remains an obligation; no scientific evidence was lost.
 Preserve the shared authoring checkout for current review delivery and future resume.
 
 ## Sole unfinished current-work obligation
