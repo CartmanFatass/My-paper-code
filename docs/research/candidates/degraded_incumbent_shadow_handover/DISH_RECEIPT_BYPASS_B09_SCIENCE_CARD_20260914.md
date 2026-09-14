@@ -161,3 +161,26 @@ Use a batch-owned native Luna/low monitor and require adoption of the exact acce
   retaining diagnostics. Exact launch SHA/command, technical facts and measured support
   work will be appended before the result-bearing launch; no scientific exposure occurs
   merely from freezing this card.
+
+## 7. Technical acceptance and exact launch binding
+
+DM accepts source `3a749256d2aaf16345308827518283c8d2b91ad7` after all10 focused remote
+synthetic cases passed and independent Astra/high review found no material source or
+launch-plan defect. [Full review/acceptance](evidence/b09_seed149_20260914/ENGINEERING_REVIEW.md)
+preserves the review scope and runtime limits. Test scratch is removed. No B08 scientific
+source at its frozen SHA, study, runner or result was rewritten.
+
+[EXECUTION_PLAN.json](evidence/b09_seed149_20260914/EXECUTION_PLAN.json) binds the sole
+seed149 command to `/home/wu/hmasd-worktrees/dish-b09-3a749256`, output
+`temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01`,
+and handle `dish-b09-s149-3a749256-20260914`. The reviewed command explicitly exports all
+thread limits, performs fresh actual-node admission and then the runner with`&&`, and
+captures external process wall through exit. No process was accepted at this binding step.
+
+Prior shared charge is180s, a conservative prelaunch allocation encompassing setup6.4575352s,
+the enclosing remote focused-check call7.6011197s (not plus its contained test6.8644327s),
+local source/card/read/check/commit/push work and final binding/submission/admission. It is
+not claimed as measured complete cost. Shared allowance remains900s with120s reserved
+for external closure. Record actual available postlaunch costs once; provider/agent effort
+and any incomplete coverage stay unknown. This refines accounting within the frozen B09
+plan, without changing a scientific endpoint or transferring an old budget.
