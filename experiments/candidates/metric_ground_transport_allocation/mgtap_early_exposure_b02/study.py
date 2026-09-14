@@ -27,7 +27,8 @@ MASTER = 8242
 CARD = "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md"
 SOURCE_SHA = "0d161633e3bb6884b56ef57a0200060b659c56a8"
 HORIZON, TRAIN_EPISODES, EVAL_EPISODES = 256, 256, 32
-ARM_CAP, PAIR_CAP = 450.0, 900.0
+# DM operational watchdogs, not owner caps or scientific comparison endpoints.
+ARM_CAP, PAIR_CAP = 1800.0, 3600.0
 
 
 def binding_errors(rows, arms, seed):

@@ -71,5 +71,17 @@
     "verdict_text": "Owner-delegated decision (2026-09-03 standing instruction, as corrected by the 2026-09-13 full-lifecycle delegation): execute this one new B02 pair.",
     "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md"
   },
-  "starred": false
+  "starred": true,
+  "approval_correction": "旧packet中的450/900作为当前硬限表述已被新卡section5前瞻覆盖，保留原packet历史，不编造owner回复。",
+  "execution_history": [
+    {
+      "at": "2026-09-14T00:45:15+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md",
+      "state": "applied",
+      "summary": "Owner明确恢复；仅前瞻修订DM普通wall/watchdog为1800/3600，原450/900计划保留版本，非owner硬限。master8242/256训练/32评估和全部科学语义不变；尚未调用；支持累计UNKNOWN不重置。",
+      "correction": "旧packet中的450/900作为当前硬限表述已被新卡section5前瞻覆盖，保留原packet历史，不编造owner回复。"
+    }
+  ]
 }

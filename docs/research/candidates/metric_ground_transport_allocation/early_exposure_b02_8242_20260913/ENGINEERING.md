@@ -38,3 +38,42 @@ command 38b7a35945e0a85df776a8c1d8ae81efa861c257424571c0e1dfa610df48d5df.
 DM accepts this bounded implementation/self-check/independent review. No
 unresolved source defect remains; exact publication/remote source, admission,
 thread context and complete native receipts are future execution facts.
+
+## Owner-resumed wall-plan correction, before any B02 launch
+
+L0 amendment: current owner runtime standard requires separating ordinary wall
+plans/watchdogs from frozen scientific endpoints. Change only operational
+ARM_CAP/PAIR_CAP to1800/3600 and outer timeout3600; add one static/stub check
+that a1200s supplied clock (beyond the original450/900 plan) does not withhold
+the complete primary. No scientific loop, master, model, RNG, PPO, evaluation,
+reducer or exposure is changed. Card section5 gives the finite window's scope,
+reason and preserved cumulative UNKNOWN costs. Prior source/check/review remains
+provenance; corrective self-check/independent review will record the final bytes.
+
+The corrective static/stub suite passed five tests at
+2026-09-14T00:44:24.5154332Z (pytest0.66 s, command1.2021798 s, exit0),
+including a supplied1200 s clock beyond the old plan. No scientific imports,
+models, RNG, episodes or new timing probe; git diff --check passed.
+Scratch root: temp/directions/metric_ground_transport_allocation/test/b02-wall-20260914t0048.
+
+Clerk completed the owner-assigned18 control-path propagation while this DM
+was checking its clean boundary. Actual authoring43b8d9852170e7ab9995c9f80333e5efe432ba90
+is at origin; sessiondbcafd150 uses the original detached checkout. No index
+collision or science overwrite occurred. Seventeen paths match1c6ba284e;
+AGENTS retains the owner-resumed sentence in its current-state pointer.
+Five role TOMLs and three modified skill frontmatters validate. Live registry
+was not copied. Owner-resume and ordinary fault ownership are current; no ACK.
+
+The same-change Reviewer initially returned a usage-limit error before findings.
+After a fresh account observation established ordinaryUsageAllowed=true, one
+same-batch recovery completed with no material finding. It independently
+confirmed only1800/3600 constants and the matching outer timeout changed runtime
+behavior; all fixed scientific endpoints/streams and primary/partial publication
+are unchanged. The1200 s stub is interface evidence, not numerical validation.
+Final hashes: study fc5dfc157fe119c091f6e8165a5999b14ec0e1ce75cd74aa84271a0b813218cc;
+runner621b0d5beb946594fe399b8f396ad4f1be54faedaa15d3d37741de9ac08f551e;
+tests04b153483c9b94f1bf81b5a948cc0139bd9f22ae9fa96c606117f4eae1a20e02;
+command97af10135afcd7dc9ba5ee14227c7ee9816166890aaf2c152aa3207abe3cbb3b.
+No Reviewer edits/tests/probes/index operations. DM accepts the revised exact
+source and proportionate checks; native completeness/resource facts remain
+subject to the sole real invocation, not inferred from stubs.

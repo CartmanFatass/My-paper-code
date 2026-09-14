@@ -138,3 +138,44 @@ C<=450, W−C<=450, W<=900 for complete native-cap compliance. No time borrowing
 Supply the accepted handle to reusable native Monitor /root/mgtap_monitor;
 confirm direct adoption. Preserve exact source, native and supervisor bytes
 before scoped duplicate cleanup. No Root/Clerk ACK or Portfolio question.
+
+## 5. Prospective execution-only correction after owner resume
+
+The owner explicitly resumed research after the runtime/batch-policy correction
+at main1c6ba284e/406804774. No B02 invocation, model, trajectory or checkpoint
+was accepted before this correction. The original section4 plan above remains
+visible as provenance; this section supersedes only its wall/watchdog and
+specialist-reuse wording. Master8242, both256-episode fits, all32 final worlds,
+PPO/RNG/information/device/thread settings, primary/MEI and result branches
+remain exactly frozen. The DM retains the scientific reason for this one
+independent recurrence pair; explicit operational pause did not PARK the science.
+
+The earlier450/900 numbers were DM planning/watchdog choices, not owner hard
+limits or a wall-budgeted scientific comparison. Revise prospectively to
+**1,800 s per-arm / 3,600 s pair operational watchdogs** for this single run.
+B01's188.19 s is still the direct same-procedure timing anchor, not a promise;
+this window leaves substantial room for transient shared-node slowdown while
+keeping a finite fallback for unattended malfunction. The run remains a
+single-threaded, sub-GiB observed-path two-fit workload with fresh >=4GiB
+admission. No paid/shared capacity commitment, extra seed or profiling study.
+If a planning value is exceeded, DM judges current progress, resource health
+and remaining fixed work; crossing450,600,900 or an investigation reference
+alone is not a reason to stop, invalidate a complete primary, block Pro Send
+or report to Root. Any prospective watchdog revision is recorded with actual
+time/reason; an already terminated run is never disguised as continuing.
+
+Keep full W,C,W−C timing and actual operational termination receipts separate
+from scientific completeness. Complete original-plan compliance is not claimed
+after this correction. Support2700/complete3600 remain historical self-set
+planning allowances, not an owner lifetime limit; cumulative support/provider
+cost and unmeasured tails remain UNKNOWN, without resetting accounting. The
+frozen exposure itself is finite and unchanged. Actual owner/platform limits
+continue to apply.
+
+B02 is a new experiment batch: after acceptance create its own fresh native
+Luna/low Monitor with fork_turns=none, not B01's completed monitor. This same
+B02 change's already assigned Reviewer may finish its corrective review;
+independent later changes and new exact scientific-review requests get fresh
+batch children. No new scientific question or duplicate Send is created by
+operational resume. This card's intended actual-result review remains a future
+new request based on real evidence, not a resend of the archived design review.

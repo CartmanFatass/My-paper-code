@@ -2,7 +2,7 @@
 # Launch only in the exact published-SHA worktree bound in LAUNCH.md.
 set -u
 if [ "${1:-}" != native ]; then
-  exec /usr/bin/time -f 'MGTAP_NATIVE_WALL_SECONDS=%e\nMGTAP_NATIVE_PEAK_RSS_KIB=%M\nMGTAP_NATIVE_EXIT=%x' /usr/bin/timeout 900 bash "$0" native
+  exec /usr/bin/time -f 'MGTAP_NATIVE_WALL_SECONDS=%e\nMGTAP_NATIVE_PEAK_RSS_KIB=%M\nMGTAP_NATIVE_EXIT=%x' /usr/bin/timeout 3600 bash "$0" native
 fi
 cd /home/wu/hmasd-worktrees/mgtap-early-8242-20260913 || exit 1
 export MGTAP_CHAIN_STARTED_UNIX="$(date +%s.%N)"

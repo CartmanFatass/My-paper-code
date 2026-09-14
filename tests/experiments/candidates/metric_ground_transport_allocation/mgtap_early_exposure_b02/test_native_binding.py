@@ -31,7 +31,7 @@ def stdlib_definitions(path, namespace, names=None):
 
 
 class BindingTest(unittest.TestCase):
-    def invoke(self, case, *, damage=False, fail=False, publication_fail=False):
+    def invoke(self, case, *, damage=False, fail=False, publication_fail=False, wall=.1):
         scratch = Path(os.environ["MGTAP_TEST_SCRATCH"]).resolve()
         self.assertTrue(scratch.is_relative_to((ROOT / "temp").resolve()))
         output = scratch / case
@@ -110,7 +110,7 @@ class BindingTest(unittest.TestCase):
             def broken_publish(*args):
                 raise OSError("supplied publication failure")
             ns["publish_summary"] = broken_publish
-        result = ns["run_pair"](8242, output, 0.0, clock=lambda: .1)
+        result = ns["run_pair"](8242, output, 0.0, clock=lambda: wall)
         closed = json.loads((output / "summary.json").read_text(encoding="utf-8"))
         self.assertEqual(closed["status"], result["status"])
         self.assertEqual(calls, [8242])
@@ -141,6 +141,12 @@ class BindingTest(unittest.TestCase):
         self.assertFalse(result["primary"]["complete"])
         self.assertIsNone(result["primary"]["COND_minus_DENSE"]["mean"])
         self.assertEqual(len(result["primary"]["J"]["DENSE"]), 32)
+
+    def test_old_wall_plan_is_not_an_execution_or_primary_gate(self):
+        result, _ = self.invoke("past_old_wall_plan", wall=1200.0)
+        self.assertEqual(result["status"], "COMPLETE")
+        self.assertTrue(result["primary"]["complete"])
+        self.assertFalse(result["cap_breach"])
 
     def test_interrupted_fit_preserves_partial_counts_and_movement(self):
         result, _ = self.invoke("interrupted", fail=True)

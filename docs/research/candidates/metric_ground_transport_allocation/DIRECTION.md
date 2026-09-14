@@ -14,7 +14,18 @@ a current dispatch route or Portfolio approval requirement.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
-## Owner execution pause — 2026-09-13
+## Owner resume and B02 continuation — 2026-09-13
+
+Owner explicitly resumed after main406804774/1c6ba284e. DM retains CONTINUE
+ACTIVE/MEDIUM and the scientific value of the already selected sole B02
+master8242 recurrence check. No B02 process was accepted during the pause.
+The older pause record below is historical, not a current gate. Card section5
+prospectively corrects only DM wall/watchdog and new-batch Monitor bindings;
+all frozen training/evaluation/comparison semantics are unchanged. Actual
+launch, collection and scientific review follow from the accepted object,
+without waiting for Root/Clerk/Portfolio approval or local duplicate cleanup.
+
+## Historical owner execution pause — 2026-09-13
 
 OWNER_DIRECT: research is paused at a clean, recoverable boundary. This is an
 execution pause, not scientific PARK/CLOSE or a change to ACTIVE/MEDIUM and the
