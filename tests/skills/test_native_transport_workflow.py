@@ -341,7 +341,7 @@ def test_complete_conflict_survives_intervening_nonarchive_boundary(record, tmp_
     assert record == before
 
 
-@pytest.mark.parametrize('comment_form', ['task_url', 'task_sha'])
+@pytest.mark.parametrize('comment_form', ['task_url', 'task_sha', 'task_sha_without_task_url_in_response'])
 def test_fixed_github_delivery_completes_despite_strict_pairing_failure(record, tmp_path, comment_form):
     path = tmp_path / 'github-response.md'
     task_url = record['task']['url']
@@ -369,8 +369,8 @@ def test_fixed_github_delivery_completes_despite_strict_pairing_failure(record, 
             n.verify_github_pairing(record, archive, {**pairing, field: 'wrong'})
 
 
-@pytest.mark.parametrize('defect', ['no_task_url_in_response', 'other_task_path', 'task_path_suffix',
-                                  'nested_task_url', 'short_sha', 'longer_sha', 'other_sha'])
+@pytest.mark.parametrize('defect', ['short_sha', 'longer_sha', 'other_sha',
+                                  'other_observed_task_url', 'other_observed_task_sha'])
 def test_sha_comment_requires_fixed_response_binding(record, tmp_path, defect):
     task_url = record['task']['url']
     task_sha = record['task']['sha']
@@ -378,19 +378,11 @@ def test_sha_comment_requires_fixed_response_binding(record, tmp_path, defect):
     commit = 'f' * 40
     response_url = f"{task_url.split('/blob/')[0]}/blob/{commit}/{response_path}"
     bound_url = task_url
-    if defect == 'no_task_url_in_response':
-        bound_url = ''
-    elif defect == 'other_task_path':
-        bound_url = task_url.replace('/TASK.md', '/OTHER_TASK.md')
-    elif defect == 'task_path_suffix':
-        bound_url += '.backup'
-    elif defect == 'nested_task_url':
-        bound_url = 'https://example.invalid/?redirect=' + bound_url
-    elif defect == 'short_sha':
+    if defect == 'short_sha':
         task_sha = task_sha[:12]
     elif defect == 'longer_sha':
         task_sha += 'a'
-    else:
+    elif defect == 'other_sha':
         task_sha = 'a' * 40
     raw = f'Complete answer\n[task]: {bound_url}\n'.encode()
     path = tmp_path / 'response.md'
@@ -400,6 +392,10 @@ def test_sha_comment_requires_fixed_response_binding(record, tmp_path, defect):
                    blob_sha=n.hashlib.sha1(f'blob {len(raw)}\0'.encode() + raw).hexdigest(),
                    comment_url=record['github_delivery']['issue_url'] + '#issuecomment-123',
                    comment_body=f'Fixed task: {task_sha}\nDelivered: {response_url}')
+    if defect == 'other_observed_task_url':
+        pairing['task_url'] = task_url.replace('/TASK.md', '/OTHER_TASK.md')
+    elif defect == 'other_observed_task_sha':
+        pairing['task_sha'] = 'a' * 40
     with pytest.raises(ValueError, match='pair the exact fixed TASK'):
         n.verify_github_pairing(record, archive, pairing)
     record.update(state='ARCHIVED', response_sha256=archive['sha256'], github_response_pairing=pairing,
@@ -521,3 +517,15 @@ def test_same_boundary_native_method_switch_preserves_actual_effect(record, stat
     else:
         assert returned['transport'] == 'native_final'
         assert returned['delivery_method_history'] == [{'transport': 'collaboration.send_message', 'status': status}]
+
+
+def test_observed_acvc_b02_delivery_without_task_url(tmp_path):
+    pairing = json.loads((FIXTURE / 'acvc-b02-github-pairing.json').read_text(encoding='utf-8'))
+    record = dict(task={'url': pairing['task_url']}, github_delivery={
+        'response_path': pairing['response_path'], 'issue_url': pairing['issue_url']})
+    raw = subprocess.check_output(['git', 'show', f"{pairing['commit_sha']}:{pairing['response_path']}"], cwd=ROOT)
+    path = tmp_path / 'original-response.md'
+    path.write_bytes(raw)
+    assert pairing['task_url'] not in raw.decode('utf-8')
+    archive = n.verify_archive(path, pairing['response_sha256'], pairing['size_bytes'])
+    n.verify_github_pairing(record, archive, pairing)
