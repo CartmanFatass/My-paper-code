@@ -4,7 +4,7 @@
 
 The [science card](ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md) and [first prospective draw](ACVC_CLUSTER_FIXED_RECIPE_C01_PROSPECTIVE_FACTS_20260914.json) are frozen at `cc7913a2920a49e15b918def066935e0e95cb334`. The actual bounded implementation batch was assigned to native Sol/medium `/root/acvc_fixed_recipe_c01_implementation`, event `ACVC_CLUSTER_FIXED_RECIPE_C01_IMPL_20260914_01`. It owns only the card's new source/test paths and engineering_check.txt; DM retains the card, interpretation, Git, independent review and acceptance.
 
-The complete implementation and both corrections have returned. The final independent Sol/high exact-byte review found no material finding remaining; DM accepted the source at2026-09-14T18:06:35.530165+00:00. All scientific identities/endpoints remain frozen. Source commit/remote preparation/first launch are next; no scientific unit or result exists yet. The full original findings, corrections and acceptance are retained below and in ENGINEERING_REVIEW.json.
+Exact source6e8d1b8946e1b2eb0e4207cbc9cc9d006ad2abda is accepted/pushed and remotely byte-verified. Original unit1 was accepted at18:10:19Z after fresh4GiB admission and is running under the new batch monitor, directly adopted18:11:17.5553666Z. Units2–6 remain preselected/uninvoked; no final scientific result exists. DM will collect/verify each original before the next fixed-order invocation, then reduce all six and obtain one complete independent scientific review.
 
 ## Applied authority and actual design choice
 
@@ -82,3 +82,9 @@ No source/currentness decision compares mutable authoring commit identities. The
 ## Exact source and prospective remote binding
 
 Accepted source **`6e8d1b8946e1b2eb0e4207cbc9cc9d006ad2abda`** was committed and pushed before remote preparation. [Execution facts](evidence/cluster_fixed_recipe_c01_20260914/EXECUTION_FACTS.json) bind all six original simple-argv commands, indexed output directories and handles, one detached worktree `/home/wu/hmasd-worktrees/acvc-fixed-recipe-c01-6e8d1b894`, the13 direct source surfaces and actual pending state. Each launcher invokes fresh adjacent4GiB admission. No remote preparation or unit acceptance is claimed at this record; monitor creation/adoption is pending actual accepted work.
+
+## First original launch and direct monitor adoption
+
+The configured login-shell exact-SHA fetch and detached worktree creation both exited0; known zsh zle/monitor/gitstatus startup warnings were retained without treating them as Git failure. Remote HEAD and all13 declared byte surfaces match accepted6e8d1b894; tracked source is clean and no original output existed before execution.
+
+Unit1 handle `acvc-fixed-recipe-c01-u01-6e8d1b894` was submitted once at2026-09-14T18:10:19.429443Z and returned accepted at18:10:20.091124Z. Adjacent admission assessed18:10:19.815663Z, physical/effective15,625,986,048bytes, both>=4GiB. The new batch-scoped native Luna/low `/root/acvc_fixed_recipe_c01_monitor`, actual App child01a0a11d-2f13-7411-aecc-c846a2bd8f40, received MONITOR_ADD and directly reported MONITOR_ADOPTED at18:11:17.5553666Z: running,pid3675879,tmux active. DM stops routine process polling after actual adoption; the child observes until terminal and returns directly. Full source/commands/admission/adoption are in EXECUTION_FACTS.json; the compact temp monitor record preserves subsequent observations. There is no duplicate run or observer.
