@@ -1,4 +1,4 @@
-"""One fixed fit and four native endpoints for quota-phase B08 through B12."""
+"""Fixed fits and their native endpoints for quota-phase B08 through B13."""
 import hashlib
 import json
 import math
@@ -24,6 +24,7 @@ B09_OBJECT = "RCLE-TBCFV-B09-GREEDY-ANCHORED-PHASE"
 B10_OBJECT = "RCLE-TBCFV-B10-GREEDY-ANCHORED-1024"
 B11_OBJECT = "RCLE-TBCFV-B11-GREEDY-ANCHORED-1024-REPLICATION"
 B12_OBJECT = "RCLE-TBCFV-B12-GREEDY-ANCHORED-1024-INDEPENDENT"
+B13_OBJECT = "RCLE-TBCFV-B13-LEARNED-PRIOR-STRENGTH-1024"
 PRIMARY = ("8_to_12.ACTIVE_CONTINUATION", "12_to_8.ACTIVE_CONTINUATION")
 ROLES = ("initialization", "final256", "greedy", "nearest")
 
@@ -182,16 +183,25 @@ def run_b12_exposure1024(out, launch_sha, seed=32):
     return _run(out, launch_sha, seed, B12_OBJECT, 1024, True)
 
 
-def _run(out, launch_sha, seed, object_id, updates, greedy_anchored):
+def run_b13_learned_prior1024(out, launch_sha, seed=33):
+    if seed != 33:
+        raise ValueError("seed must match the selected fixed B13 object")
+    return _run(out, launch_sha, seed, B13_OBJECT, 1024, True, learned_prior_strength=True)
+
+
+def _run(out, launch_sha, seed, object_id, updates, greedy_anchored, *, learned_prior_strength=False):
     final_role = f"final{updates}"
     roles = ("initialization", final_role, "greedy", "nearest")
     action_law = "softmax(log(q)+z); q=.9*exact_greedy+.1/N" if greedy_anchored else "softmax(z)"
+    if learned_prior_strength:
+        roles += ("modal",)
+        action_law = "softmax(exp(eta)*log(q)+z); eta0=0; q=.9*exact_greedy+.1/N"
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
     key = hashlib.sha256(f"{object_id}/seed/{seed}".encode("ascii")).digest()
     binding = bind_native_backend(build_root=out / "native_build")
-    model = PhasePolicy(greedy_anchored=greedy_anchored)
+    model = PhasePolicy(greedy_anchored=greedy_anchored, learned_prior_strength=learned_prior_strength)
     def parameter_uniforms(name, count):
         return uniforms(key, binding, [_address(0, parameter_entry=name,
             draw_kind="common-initial-parameter", draw_index=i) for i in range(count)])
@@ -219,13 +229,18 @@ def _run(out, launch_sha, seed, object_id, updates, greedy_anchored):
             agent_claims=sum(r["agent_claims"] for r in episodes),
             per_cell={c: {k: float(np.mean([r[k] for r in episodes[i*8:(i+1)*8]]))
                          for k in ("Y", "U", "F", "tau")} for i, c in enumerate(TRAINING_CELLS)})
+        if learned_prior_strength:
+            curve.update(log_prior_strength=float(model.log_prior_strength.detach()),
+                         prior_strength=float(model.log_prior_strength.detach().exp()))
         curves.append(curve)
         with (out / "curves.jsonl").open("a", encoding="utf8") as f:
             f.write(json.dumps(curve, allow_nan=False) + "\n")
         if update % 32 == 0:
             print(f"update {update}/{updates}", flush=True)
     torch.save(dict(model=model.state_dict(), optimizer=optimizer.state_dict(), baselines=baselines,
-                    updates=updates, seed=seed, object_id=object_id, action_law=action_law, launch_sha=launch_sha), out / (final_role + ".pt"))
+                    updates=updates, seed=seed, object_id=object_id, action_law=action_law, launch_sha=launch_sha,
+                    **({"learned_prior_strength": True} if learned_prior_strength else {})), out / (final_role + ".pt"))
+    before_evaluation = flat_parameters(model).clone() if learned_prior_strength else None
     for role in roles[1:]:
         panels[role] = evaluate(model, role, key, binding, out)
     comparison = contrasts(panels, final_role)
@@ -247,6 +262,16 @@ def _run(out, launch_sha, seed, object_id, updates, greedy_anchored):
         native_Y_source="direct native terminal endpoint for all roles; never inferred from post-event U",
         uncertainty="paired scenario uncertainty conditional on one fit; contrasts share final panel",
         native_source_sha256=binding.source_sha256, study_body_wall_s=time.monotonic() - started)
+    if learned_prior_strength:
+        modal = contrasts(panels, "modal")
+        summary.update(learned_prior_strength=True,
+            prior_strength=dict(initial_log=0.0, initial=1.0,
+                final_log=float(model.log_prior_strength.detach()),
+                final=float(model.log_prior_strength.detach().exp())),
+            modal_comparison={name: modal[name] for name in ("D_g", "D_n")},
+            modal_team_decisions=16 * len(panels["modal"]),
+            evaluation_parameter_displacement=float(torch.linalg.vector_norm(
+                flat_parameters(model) - before_evaluation)))
     write_json(out / "summary.json", summary)
     # The required publication path is exercised inside this invocation.
     published = json.loads((out / "summary.json").read_text(encoding="utf8"))

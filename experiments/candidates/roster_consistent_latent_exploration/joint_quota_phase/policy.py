@@ -8,9 +8,13 @@ from experiments.candidates.roster_consistent_latent_exploration_tbcfv.models im
 
 
 class PhasePolicy(nn.Module):
-    def __init__(self, greedy_anchored=False):
+    def __init__(self, greedy_anchored=False, *, learned_prior_strength=False):
         super().__init__()
+        if learned_prior_strength and not greedy_anchored:
+            raise ValueError("learned prior strength requires the greedy-anchored law")
         self.greedy_anchored = greedy_anchored
+        self.log_prior_strength = (nn.Parameter(torch.zeros((), dtype=torch.float64))
+                                   if learned_prior_strength else None)
         self.row1 = DeterministicZeroLinear(8, 32, dtype=torch.float64)
         self.row2 = DeterministicZeroLinear(32, 32, dtype=torch.float64)
         self.head = DeterministicZeroLinear(36, 32, dtype=torch.float64)
@@ -78,7 +82,10 @@ def phase_log_probabilities(model, public):
         greedy = np.abs(signed).sum(axis=-1).argmin(axis=-1)
         q = torch.full_like(logits, .1 / logits.shape[1])
         q[torch.arange(len(public)), torch.from_numpy(greedy)] += .9
-        logits = logits + q.log()
+        log_prior = q.log()
+        if model.log_prior_strength is not None:
+            log_prior = model.log_prior_strength.exp() * log_prior
+        logits = logits + log_prior
     return torch.log_softmax(logits, dim=-1), targets
 
 
