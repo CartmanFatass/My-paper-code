@@ -17,7 +17,7 @@ This authority preserves the direction's source-grounded scientific question, ev
 ## Authority
 
 - Stable direction ID: `vap_folr_core`
-- OWNER_DIRECT 2026-09-14: DM owns innovation, ordinary experiments/engineering and reports; Portfolio is the final direction-level interpreter under PORTFOLIO_DECISION_PROTOCOL. The owner-challenged disposition is pending, with the third slot reserved.
+- OWNER_DIRECT 2026-09-14: DM owns innovation, ordinary experiments/engineering and reports; Portfolio is the final direction-level interpreter under PORTFOLIO_DECISION_PROTOCOL. The owner-challenged disposition is reconciled by Portfolio CONTINUE, using the same third slot.
 - Convergence independently reviews design/evidence/interpretation and successor plans. DM reads the full review and responds to material findings. Portfolio makes the conforming final direction decision; DM executes it without Root ratification.
 
 ## Scientific question
@@ -30,17 +30,18 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
-**Current lifecycle: pending_portfolio_decision — DM recommends CONTINUE with B03 on 2026-09-14.**
-The [owner-requested reconciliation](FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md#owner-requested-scientific-reconciliation--2026-09-14)
-withdraws the prior stopping rationale and submits the direction judgment to
-Portfolio under the latest owner authority. B02 remains a valid
+**Current lifecycle: ACTIVE / MEDIUM — Portfolio CONTINUE applied on 2026-09-14.**
+The [complete Portfolio decision and DM intake](pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md)
+withdraw the disputed stopping rationale and select the prepared B03 bounded
+comparison under the latest owner authority. B02 remains a valid
 adverse observation: Generic -0.65296875, BANK -5.483828125, d=-4.830859375,
 GENERIC_ABOVE_MEI, one fitted instance per arm. E's missing contrast and F's
 outcome-informed negative fixed-reference use stay separate. There is no population,
 component-causal, competence, convergence, speed or general BANK-negative claim.
 
 The surviving uncertainty is whether the current package's substantial disadvantage
-recurs under a new training realization. The [B03 card](FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md)
+recurs under a new complete learning-and-evaluation realization. This does not
+isolate pure training variance, because both declared random seeds change. The [B03 card](FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md)
 selects new seed781501/eval1781501 with the same legal information, H20 and
 5000-train/4969-update/128-final exposure per arm. A reversal/near tie or further
 adverse observation would change development advice about this exact memory package.
@@ -55,11 +56,13 @@ It tests the intact package, not necessity or a particular component's causal ef
 The full [B02 independent review](pro_packets/20260914_entity_history_b02_review/INTAKE.md)
 challenged the stopping inference; the correction now answers it through selected work.
 
-Implementation has been assigned in this existing DM's authoring checkout; no B03
-scientific run is yet claimed. DM owns review, admission, execution and intake under
-current peer coordination. The third slot stays reserved while Portfolio reviews
-the full report and alternatives; no replacement task is selected. Full support/provider cost
-remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves
+B03 implementation at source b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f is technically
+accepted after independent review and nine focused remote tests; the initial fixture
+setup failure remains recorded. DM proceeds to adjacent admission, detached execution,
+Monitor adoption and intake; scientific exposure is still zero at this decision
+application. The existing third-slot reservation becomes FOLR occupancy, with the
+same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
+Full support/provider cost remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves
 the previous decisions as history, not current lifecycle or dispatch instructions.
 
 **Previous lifecycle judgment (2026-09-13), superseded prospectively above:**

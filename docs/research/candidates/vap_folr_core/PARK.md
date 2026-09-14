@@ -1,15 +1,16 @@
 # FOLR PARK knowledge handoff
 
-## Current disposition — pending Portfolio decision after owner-requested reconciliation
+## Current disposition — CONTINUE / MEDIUM applied from Portfolio on 2026-09-14
 
-The B02 direction PARK below is preserved as history. Its disputed stopping
-rationale is being reconciled under Portfolio final direction interpretation.
-The [scientific reconciliation](FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md#owner-requested-scientific-reconciliation--2026-09-14)
-identifies the unsupported stopping inference and recommends one [B03 fresh-learning
-block](FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md). The broader legal entity-history
-question remains open; B02's negative local result is unchanged. This existing DM
-retains the reserved slot and owns implementation preparation, the full report
-and execution of the eventual conforming Portfolio decision.
+The B02 direction PARK below is preserved as history. The [complete Portfolio
+decision and DM intake](pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md)
+withdraw its disputed stopping rationale and select the prepared [B03 complete
+learning comparison](FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md). B02's adverse
+local result is unchanged; the broader legal entity-history question remains open.
+The original DM executes B03 using the same third slot, with the existing reservation
+converted to occupancy. The old DISH alternative is not applied. B03 engineering,
+independent review and the focused remote test are accepted; scientific exposure is
+zero at this direction-decision application. Actual launches are recorded separately.
 Historical Clerk routes below are evidence only; current coupling is direct with
 MGTAP under the live shared registry. No duplicate replacement request is selected.
 
