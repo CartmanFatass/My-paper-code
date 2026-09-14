@@ -1,0 +1,113 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "dish-lifecycle-review-20260914-01",
+  "source_thread_id": "/root",
+  "parent_thread_id": "/root",
+  "operator_thread_id": "/root/tr_lh_dish_lifecycle_20260914",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "48ec5480e6c9288cb55d2df1aea61faf4217eb6d",
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/pro-dish-post-b06-20260907",
+    "base_sha": "48ec5480e6c9288cb55d2df1aea61faf4217eb6d",
+    "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260914_lifecycle_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4"
+  },
+  "scientific_question": "Independently review DISH's current DM lifecycle reassessment: preserve B08 WITHIN/REPLACE and the retained-A03 arrival-bridge family PARK, and assess whether the proposed reversible whole-direction PARK is scientifically honest after staffing admission. Challenge the strongest alternative explicitly: one fresh receipt-bypass versus freshly trained REPLACE whole-policy native-service pair, with native packet/charge and allowed actor information unchanged. Does that give sufficient distinct decision value now to overturn the DM's nonselection, or simply continue retained-host receipt screening? Also assess the value and limits of a fresh fixed-half-retention pair and a still-unspecified ordinary-source comparison. Identify material factual, inferential or method defects, especially any improper defect-first/positive-first/new-customer prerequisite. The DM owns lifecycle and spending; review reasoning and proposed claim limits rather than approving either.",
+  "deliverable": "Write a focused independent scientific review, preferably 800–1200 words, with a leading assessment, material findings with reasons, strongest contrary case, and concrete corrections or bounded alternative comparison if warranted. Distinguish the old family PARK from the proposed direction PARK and keep unresolved hypotheses open. State whether the source and uncertainty interpretation support the current recommendation, and why the strongest alternative does or does not change it. Cite actual fixed inputs read and any decision-critical access gap. For suggested future empirical work retain the independent unit, native primary, dominant work and unknown cost; do not invent an allocation. The review is substantive evidence for a DM response and decision, not funding or lifecycle permission. Write only the scoped response and delivery comment; return the complete answer through the specified route.",
+  "claim_ceiling": "Current existing-evidence lifecycle/value assessment; historical B08 remains one matched seed137 B/EXPLORE finite-budget whole-policy contrast, -6.5 within ±24 with REPLACE development default. No empirical direction-wide null, equivalence, population inferiority, isolated memory/source value, safety, strict decentralization, optimality, C promotion or formal UAV validation. Zero new project scientific execution.",
+  "constraints": [
+    "Apply current AGENTS sections1–5 and evidence-spec sections7,11.4,11.8–11.10 at the separately pinned method version. Full-lifecycle DM delegation and independent scientific review replace older Pro finality prospectively. Older scientific evidence and responses retain historical provenance; they do not override current authority. No reviewer grant, lifecycle veto, global layout selection or automatic experiment follows.",
+    "Start with the current reassessment. The author recommends PARK but asks you to challenge the receipt-bypass and repeat nonselection. Do not agree merely because a family was parked. No positive pilot, overwrite diagnosis, new external customer, exact upper, source census or fixed seed quota is a general prerequisite. Useful ordinary native service can justify research independently of post-CAS source identification.",
+    "Preserve -6.5, -15/0/-8/-3, lower mean energy and four added final invalid commits, all zero ordinary B08 CAS, missing complete cost, and one-pair learning uncertainty. HALF_RETAIN is not post-CAS RETAIN. No condition bootstrap, energy-weighted re-ranking, pooled B06/B07 replication or resource-induced negative.",
+    "The source comparison uses the actual reset/receipt mask, old history plus 18-field packet bridge, normal GRU and live/replay path. Source reads are limited to the listed regions. A bypass is only a discussed alternative, with no code, exact seed or card selected. It would change information processing/learning and does not isolate message necessity or post-application source value.",
+    "This support batch has zero models, fits, native calls, transitions, updates, evaluation or selection trials. Do not execute code, tests, profiling, extra literature retrieval or experiments. One review through archive and DM response is selected; no new host, pair, cap, algorithm or paid/shared resource commitment. Cost counts in COUNTS are unallocated scale references, not a grant or cost quote.",
+    "Read only listed fixed passages and their declared effective SHAs. Related links are provenance, not extra required inputs. State actual access; a local prior reading does not prove your paper or checkpoint access. Explanatory foundations do not establish effectiveness or authority.",
+    "Reuse the published direction branch and Issue4 for this exact response. Preserve unrelated descendants and all prior requests. No edits to main, science code, DIRECTION, cards, audit/owner records, old responses, PRs or other directions. The fixed TASK's delivery instructions expressly authorize only this response and its comment, with same-turn downloadable complete Markdown fallback if GitHub writes are unavailable after readback."
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_LIFECYCLE_REASSESSMENT_20260914.md",
+      "purpose": "All sections: actual recovery, options, recommendation, limits and finite support scope; critique the alternative-value judgment.",
+      "provenance": "Current DM assessment, not a performed direction PARK or empirical result.",
+      "commit_sha": "48ec5480e6c9288cb55d2df1aea61faf4217eb6d"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260914_lifecycle_review/COUNTS.json",
+      "purpose": "Entire short record: existing arithmetic and unallocated fresh-comparison work law.",
+      "provenance": "Machine-computed recorded-byte reduction; zero new scientific sample.",
+      "commit_sha": "48ec5480e6c9288cb55d2df1aea61faf4217eb6d"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_SCIENCE_CARD_20260910.md",
+      "purpose": "Sections1–4: frozen treatment, information, training/evaluation and original reading rule; later history not needed.",
+      "provenance": "Preserved accepted B08 card; do not rewrite its outcome or semantics.",
+      "commit_sha": "7e00e69145c1f1aed63ce8e931c5a640d666bea1"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_EVIDENCE_20260910.md",
+      "purpose": "Sections1–4: complete primary, all outcome/event rows, actual exposure and incomplete resource accounting.",
+      "provenance": "Accepted E0; no new checkpoint verification or empirical execution claimed.",
+      "commit_sha": "7e00e69145c1f1aed63ce8e931c5a640d666bea1"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B08_CONVERGENCE_INTAKE_20260910.md",
+      "purpose": "Sections2–5: complete prior review response, precise family boundary, surviving alternatives and terminal reconciliation.",
+      "provenance": "Historical scientific intake; later DM-authority policy controls new decisions.",
+      "commit_sha": "3151cb405e6d36a42c5102056f2eedb18daf7103"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/archive/RESPONSE.md",
+      "purpose": "Opening and sections1–6: independent prior family review and concrete reentry distinction.",
+      "provenance": "Full preserved prior independent review, not whole-direction PARK or a current veto.",
+      "commit_sha": "b0fe38d19c7b6245a4ce1d2c4b29c4e9a2fc6599"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_training_engine.py",
+      "purpose": "Lines88–165 only: prepare/advance/replay/promotion separation, history and packet bridge.",
+      "provenance": "Exact accepted B08 source; read only.",
+      "commit_sha": "a01522a6f6cf12e5549b3e03596ce58642b68cf1"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_recurrent_trainer.py",
+      "purpose": "Lines273–386 only: receipt/GRU/actions/heads and native promotion; no execution.",
+      "provenance": "Exact accepted B08 source; read only.",
+      "commit_sha": "a01522a6f6cf12e5549b3e03596ce58642b68cf1"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_two_slot_vacancy_replacement/archive/RESPONSE.md",
+      "purpose": "Opening two paragraphs and section2 DISH subsection only: reason for task staffing and explicit nonselection of an experiment.",
+      "provenance": "Complete delivered staffing response; its qualitative assignment is not a new scientific grant.",
+      "commit_sha": "29c8db0f743a914f79c980a8723ea81a508a5eda"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Apply sections1–5: present DM lifecycle ownership, independent scientific review, source/resource boundaries and PARK closeout. No global selection in this review.",
+      "provenance": "Current owner/control instructions, separately pinned from old scientific authority text.",
+      "commit_sha": "dca374c9ef54ae5368a31b2cf9f7119c84b7f0e6"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply section7 and sections11.4,11.8–11.10: lifecycle scope, direct B, independence, proportional verification, question value and knowledge.",
+      "provenance": "Current controlling method; section11 prevails over stronger obsolete B burdens.",
+      "commit_sha": "dca374c9ef54ae5368a31b2cf9f7119c84b7f0e6"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Only sections2–4 and6: allowed information, memory versus learning, finite learnability and independent units.",
+      "provenance": "Explanatory knowledge, not effectiveness evidence or a gate.",
+      "commit_sha": "dca374c9ef54ae5368a31b2cf9f7119c84b7f0e6"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Comparison, independence, whole-method/causal and claim-strength sections.",
+      "provenance": "Explanatory basis for the precise inference limits.",
+      "commit_sha": "dca374c9ef54ae5368a31b2cf9f7119c84b7f0e6"
+    }
+  ]
+}
