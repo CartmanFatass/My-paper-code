@@ -26,3 +26,11 @@ The original reopening response was read at its delivery object, but that object
 Owner-delegated decision (unattended, 2026-09-03 instruction): retain and submit the formed CONTINUE recommendation with complete contrary evidence; Portfolio disposition pending. Owner items `20260914-acvc-005` (formed proposal) and `20260914-acvc-006` (close-call recommendation) record the actual author action, not an applied new C-BENCH or PARK. The latest clean-boundary owner query found no unapplied instruction; the ACVC audit owner columns were empty.
 
 Full response, material finding response and actual disposition/application remain due. No complete answer or scientific acceptance is inferred from a receipt.
+
+## Actual provider acceptance and metadata repair
+
+Author read the durable queue at 2026-09-14 16:45:42 UTC after Transport's compact App report: this exact request was accepted at 16:42:58.4729002Z as user node `55a7838d-547e-4e39-82fc-8b6b2675baa3`, with one Send, zero manual Sends and WAITING_GENERATION. The 1,909-byte prompt digest and fixed TASK commit match the bound handoff. No completed answer is inferred.
+
+The original queue snapshot is retained in [DM_TRANSPORT_OBSERVATION.json](DM_TRANSPORT_OBSERVATION.json). Its handoff-commit field incorrectly held the scientific-input SHA, and its next action still described the already completed paste/Send. DM sent one same-request metadata correction to Transport: actual HANDOFF `5c4efe014b73085697aaf7f58e5d4dd848a1ffa5`, scientific input retained separately, old values preserved, next action limited to observing/reconciling the accepted node and full archival. No resubmission or scientific-question change was requested; actual metadata correction remains to be observed.
+
+Main publication briefly stopped when the owner-item trace CLI rejected the descriptive authority label `OWNER_DELEGATED / DM_REPORT` before any item mutation. The same pending transaction was completed using the supported `OWNER_DIRECT` label, citing AGENTS and the actual standing author delegation. The trace records only report submission, not a fabricated Portfolio verdict. Main receipt is `4747753d34794a95237d1e54449923f19f7c171e`.
