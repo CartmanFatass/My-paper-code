@@ -3,6 +3,10 @@ Binding structure: systems / information flow; the pooling question arises from 
 
 # MGTAP-FIXED-LR-B01 — fresh fixed-configuration recurrence
 
+Execution update: the sole frozen-source8253 invocation completed on2026-09-14;
+its unchanged rule reads COND_ADVERSE. See [result intake](MGTAP_FIXED_LR_B01_INTAKE_20260914.md).
+The prospective definition and prediction below remain unchanged historical inputs.
+
 Status: prospective B/EXPLORE, selected and prepared by the original DM under the
 already applied Portfolio CONTINUE. No native invocation has started at card creation.
 Authority and strongest opposing case are preserved in

@@ -2,6 +2,20 @@
 
 ## Current boundary — Portfolio CONTINUE applied, 2026-09-14
 
+The selected fixed1e-4 fresh8253 recurrence is now complete: COND−DENSE
+-0.025924927546066238 J, conditional world SE0.002797864052725455,
+2positive/30negative worlds, **COND_ADVERSE**. Both real fits completed with
+finite movement and the frozen147456ticks/1024Adam; full-command wall178.86s.
+[Complete8253 intake](MGTAP_FIXED_LR_B01_INTAKE_20260914.md) preserves the favorable
+8252 and all earlier contrary history. This one fixed-configuration realization
+did not reproduce8252's favorable contrast; it does not establish stable inferiority
+or retrospectively confirm a two-seed study. DENSE stays default. DM owns the
+complete new scientific review and reasoned report comparing useful further work
+against reversible PARK; no third fit, lifecycle change or slot release is selected.
+Native observation is complete; review preparation is actual next work.
+
+The preceding Portfolio application and its preparation boundary follow as history:
+
 MGTAP-LR-SELECTION-B01 completed at source2d351d48604396ce478aa900584bd24b3255def5.
 Both arms independently selected1e-4; the fresh8252 final pair yielded
 COND−DENSE+0.023704897713093642 J, conditional paired-world SE0.004197354694630503,
