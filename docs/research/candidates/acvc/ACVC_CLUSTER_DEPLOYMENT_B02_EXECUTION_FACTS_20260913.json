@@ -197,13 +197,13 @@
     "send_attempted": false,
     "provider_pairing": null,
     "operation_error": "TIMEOUT_WAITING_FOR_PROMPT",
-    "active_native_producer": false,
+    "active_native_producer": true,
     "repair_status": "Exact process recovery command rejected before execution by tool policy; not retried. Read-only check verified both processes and immutable operation/binding bytes unchanged.",
-    "dependency": "Permitted user-managed/shared-runtime reconnection; then original native Transport resumes this same operation/request.",
-    "status": "Full scientific review not formed or archived. Exact unsent operation and all failure receipts preserved; no new request or scientific invocation."
+    "dependency": "Shared restart completed by Root under explicit owner authority; same native Transport now owns dedicated-tab recovery and unchanged strict operation.",
+    "status": "Original review recovery dispatched to original request-batch Transport after fresh persisted sendAttempted=false check. No provider acceptance yet asserted; full scientific review not archived. No new request or scientific invocation."
   },
   "execution_control": {
-    "state": "OWNER_RESUMED_TECHNICAL_DEPENDENCY",
+    "state": "OWNER_RESUMED_REVIEW_RECOVERY_ACTIVE",
     "paused_utc": "2026-09-14T00:30:49Z",
     "resumption_observed_utc": "2026-09-14T00:43:00Z",
     "in_flight_handles": [],
@@ -211,11 +211,22 @@
     "active_observer": null,
     "retained_native_transport": "/root/acvc_transport",
     "scientific_lifecycle": "ACTIVE unchanged; this execution pause is not PARK/CLOSE",
-    "resume_condition": "Owner has explicitly resumed. Current prerequisite is permitted user-managed Agentify reconnection preserving existing Chrome/profile/conversations/operation store; then original request-batch Transport recovers the unchanged unsent operation, full scientific review and DM findings response. Do not bypass prior policy refusal or duplicate Send."
+    "shared_runtime": {
+      "restart_actor": "Root under separate explicit owner restart instruction",
+      "agentify_pid": 14460,
+      "api_port": 49382,
+      "server_id": "1f76bf62-102c-4552-ad6a-0e33419f94bb",
+      "started_at": "2026-09-14T00:48:37.850Z",
+      "chrome_pid": 18144,
+      "cdp_port": 9222,
+      "profile_preserved": true,
+      "dm_repeated_rejected_process_action": false
+    },
+    "resume_condition": "Runtime prerequisite resolved by owner-authorized Root action. Original request-batch Transport is active on same unchanged operation; full scientific review and DM findings response follow. No duplicate Send or new scientific question."
   },
-  "status": "OWNER_RESUMED; valid B02 result/raw evidence/checkpoint retained and remote cleanup complete. No run, generation or observation in flight; unchanged review is explicitly unsent. DM recovery currently needs permitted Agentify reconnection; prior process action was policy-rejected and is not retried/bypassed. Scientific review, findings response and lifecycle judgment remain unfinished. ACTIVE lifecycle unchanged; no third fit selected.",
+  "status": "OWNER_RESUMED; B02 remains accepted/retained. Shared runtime recovered by Root under explicit owner authority; original native Transport now performs same-request review recovery. Fresh persistent operation check was unsent, no provider generation yet asserted. Full scientific review, findings response and lifecycle judgment remain unfinished. ACTIVE lifecycle unchanged; no third fit selected.",
   "stop": "No scientific retry/replacement, extra panel, checkpoint selection or automatic successor.",
-  "updated_utc": "2026-09-14 00:43:00 UTC",
+  "updated_utc": "2026-09-14 00:50:24 UTC",
   "monitor": {
     "native": "/root/acvc_monitor",
     "adopted": true,

@@ -26,7 +26,7 @@ approval, reserve or re-entry wording is not a current dispatch or permission re
 - Current lifecycle: ACTIVE, DM-owned. Existing owner priority MEDIUM/recasts 2 and lowest-ACTIVE contention order remain until the owner changes cross-direction ordering. Portfolio reports rather than approves this state.
 - Current authoring checkout/branch: `C:/Projects/HMASD-worktrees/codex-acvc`, `codex/acvc`; live task endpoints come from main `.codex/hmasd-dm-sessions.toml`.
 
-## Execution control — owner resumed, 2026-09-14 00:43 UTC
+## Execution control — same-review recovery active, 2026-09-14 00:50 UTC
 
 The latest explicit owner instruction lifts the earlier execution pause, whose actual boundary
 remains preserved in the B02 intake. Scientific lifecycle ACTIVE and existing priority are unchanged;
@@ -36,16 +36,16 @@ request`2026-09-13-acvc-cluster-b02-scientific-review-01` remains **unsent**: a 
 operation`38dbacca-f772-43f5-ad16-31dd94ff302d` still shows`sendAttempted=false`, no provider
 pairing/archive. No experiment, provider generation or observation is in flight.
 
-DM has resumed same-request technical recovery under the new runtime/batch controls. The live
-Agentify service still has a stale browser connection, and its earlier process-restart action was
-rejected before execution. That action is not retried or bypassed. No supported non-destructive
-hot-refresh endpoint was available, and a parallel ad-hoc operation-store writer would lack shared
-serialization. The concrete remaining prerequisite is permitted user-managed reconnection of
-Agentify to the existing Chrome surface while retaining its profile, conversations and operation
-store. Clerk coordinates actual shared users; neither time estimates nor Root approval is a gate.
-Original Transport`/root/acvc_transport` is retained for this same request batch, currently inactive.
-Once the permitted connection prerequisite changes, recover the unchanged request and complete
-independent review, full DM findings response and lifecycle judgment. No third fit is selected.
+Root separately received explicit owner authority to restart Agentify and Chrome, completed that
+shared action and returned a healthy runtime handoff. DM did not repeat or bypass its earlier
+rejected process command. New AgentifyPID14460/API49382 and ChromePID18144/CDP9222 use the
+retained profile and immutable operation store; default tab is protected. DM's fresh persistent
+check still found the original operation`sendAttempted=false`, no provider IDs/archive. The same
+request-batch native Transport`/root/acvc_transport` is now active on dedicated-tab recovery and the
+same-operation strict route. Dispatch does not prove provider acceptance. No new question, key,
+conversation or scientific invocation is selected. DM will read the full scientific review,
+respond to findings and make the lifecycle judgment. Neither wall estimates nor another ACK gate
+controls that continuation. No third fit is selected.
 
 ## Current execution — cluster B02
 
