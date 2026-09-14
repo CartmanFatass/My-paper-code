@@ -1,0 +1,49 @@
+# MGTAP 科学 PARK 知识交接
+
+## 当前决定与为什么现在停止
+
+DM 在持续授权内选择可逆 PARK，停止当前 MGTAP 方向的数值推进；不再追加不变的 early256 配对。独立实际结果 review 的全文、DM回应及最终决定见 [review intake](pro_packets/20260913_early256_results_review/INTAKE.md)。这不是 Pro 的生命周期批准，也不是等待 Root/Clerk ACK。
+
+已通过所有者控制台记录P2条目20260913-mgtap-006，推荐项与实际执行项均为PARK；仅供异步介入，无需回复才能完成本次处置。
+
+理由是当前证据没有形成值得继续不变采样的清晰开发收益：early256 一正一负，mean-COND512 三点符号混合，TOP 与不等训练量方案另有不利观察。继续做一对独立训练确实可能增加关于重复性的知识，但当前预计开发价值有限。此判断不要求每个 seed 都正、不宣称稳定劣势，也不把试验结束、时间计划、主人曾暂停、没有客户或清理故障当作科学停止理由。
+
+实际结果 review 未发现需要重新分类、重算或增加实验的实质科学缺陷，但指出不能因第三对不能证明机制/稳定排序而拒绝它。DM接受这一澄清：停止依据是当前新增不变观察的预期开发价值不足，不是给 B 附加更强证明义务；这不是数据唯一推出的处置。若出现明确的重复性敏感开发选择，同一不变比较仍可能值得重开，并不强求新架构或客户。
+
+## 已学到什么，哪些结论不能带走
+
+| 实际比较 | 保留的局部结果与启示 |
+| --- | --- |
+| early256 mean-COND / intact-DENSE | master8241 +0.01513 J；8242 −0.05684 J。第二对没有复现第一对的正向收益，但不能估计总体稳定排序。 |
+| 等量512 mean-COND / DENSE | 8212 +0.00576、8213 −0.02247、8214 +0.02448 J；混合符号与有限训练/评估变异均需保留。 |
+| TOP512 / DENSE512 | 8221 −0.06845 J；只是这个最高本地SINR查询方案的不利观察，不是 TOP 与 mean-query 的直接比较。 |
+| COND512 / DENSE768 | 8231 −0.02933 J；是两种不等训练量完整程序的比较，不能识别“额外训练”的因果效应。 |
+| 原生REL / DENSE | 两个固定配对不利；旧聚合 −0.02396 J 保留其原定义，不能解释成普遍几何失败。 |
+| 更早的分配toy | 等量搜索标量步长后 METRIC−FREE AUC残差仅 +0.000655，FREE自身调参收益约 +0.200873；比较器学习设置是实质性替代解释，而非已证明纯metric因果效应。 |
+
+直接证据：[early B01](MGTAP_EARLY_EXPOSURE_B01_RESULT_20260913.md)、[early B02及intake](MGTAP_EARLY_EXPOSURE_B02_INTAKE_20260913.md)、[mean512已有结果整理](MGTAP_POST_8231_MANAGEMENT_20260913.md)、[TOP](MGTAP_TOP_QUERY_B01_INTAKE_20260912.md)、[不等暴露](MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md)、[REL](MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_INTAKE_20260909.md)、[toy步长控制](MGTAP_B03_MAIN_INTAKE_20260904.md)。
+
+COND自身均值在8242比8241更高；符号反转也伴随DENSE均值变化，不是同一COND策略退化的观察。两次使用不同训练身份和最终面板，不能从这些差值识别单一原因。
+
+每个最终32世界面板都条件于其已训练配对，不是32个训练seed。两次early配对的描述均值 −0.02086 J、样本SD0.05089 J 混合训练变化和有限评估噪声；它不是64世界总体检验或纯训练方差。不同对象不合并为同一估计量。保留MEI0.01的卡内用途，不把阈值变成全仓库投资规则。原生同信息调优headroom仍缺失；这限制解释，不是另设停止/重开门槛。没有学习曲线、样本效率、注意力/几何机制因果、规模迁移或正式UAV部署结论。更早C的结构不可识别终态与已PARK的坐标family均不被改写。
+
+## 可复用资产与使用界限
+
+- [条件池化模块](../../../../experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/conditional_pooling.py)及[原生runner](../../../../experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/runner.py)：同一合法raw108信息、私有递归、原始奖励和配对接口，可作为后续明确问题的实现资产；参数移动本身不证明机制。
+- [early256 B02实现](../../../../experiments/candidates/metric_ground_transport_allocation/mgtap_early_exposure_b02/study.py)、[启动器](../../../../scripts/run_mgtap_early_exposure_b02.py)、[绑定测试](../../../../tests/experiments/candidates/metric_ground_transport_allocation/mgtap_early_exposure_b02/test_native_binding.py)：精确运行源码8744085c293288e2c178fbc6d2a97ae9ca053c43。固定256训练/32最终世界、CPU FP32/thread1；不能把更改后的实验冒充原对象延续。
+- [B02完整原始归档](early_exposure_b02_8242_20260913/NATIVE_EVIDENCE.zip)、[B01完整原始归档](early_exposure_b01_8241_20260913/NATIVE_EVIDENCE.zip)含最终模型、逐episode/rollout记录和supervisor凭据；无需加载模型就可复核已有主量。模型仅属于各自任务/配对，不可默默追加评估、选好模型再重新包装原主结论。
+- [DIRECTION.md](DIRECTION.md)、各卡片/intake、完整Pro归档和owner简报保留完整研究来源；旧权责/路径/额度文字只是历史，不是当前派发或运行授权。
+
+## 未决问题与具体重开条件
+
+真正的新机制、比较器、开发选择或新证据，可以提出一个会改变后续选择的明确问题；无需事先成功或唯一机制证明。候选启示包括伙伴局部几何不必识别意图、共适应可能影响有用性、通用表示能否从同信息中学到同等东西。这些仍是解释候选，不是已选实验或全部必做诊断。
+
+重开时先说明会改变哪个具体开发选择、为何这次观察值得做（可以仍是不变配对）、最小充分证据和实际成本；保留有能力的同信息DENSE/FREE比较器与全部反证，不能用弱化baseline制造优势。单纯空闲时间、改watchdog、寻找另一条有利seed或缺少更多证据本身不自动重开；真实成本/可行性变化可以改变一个已明确有意义问题的价值。DM继续拥有方向判断；归档方向恢复需与当前Clerk协调实际槽位，避免重复任务，不恢复旧冻结运行。
+
+## 保全、成本和恢复入口
+
+早期两对完整原生运行合计378.77s（不是研究关键路径或CPU总和）；全支持/Pro/方向累计成本与aggregateCPU为UNKNOWN。仅陈述已测量的成本，不把普通wall计划写成主人硬限。
+
+B8242远端重复checkout与源包已移除，完整源码/结果仍可由固定提交与归档恢复；Windows拒绝删除的本地B8242及历史B8241/8231副本保留、不绕过。[CLOSEOUT.md](early_exposure_b02_8242_20260913/CLOSEOUT.md)记录精确范围、哈希和恢复入口。没有活实验。
+
+本次review operation b7c72164-ea38-4b77-9210-b61c255752d1已完整归档，native Transport终态COMPLETE且专用tab关闭。全回答commit47699fcad5714bbe8cfca43abef78c89a3887b62、24753 bytes、SHA256 a1e2ebd81bbfd20da9ca4e8b23ae44b6a5587711ecef217193cc4164e1a88d73；DM完整读取122行。没有未交接的运行、Pro请求、reviewer或monitor producer。完成本交接后，向实时注册的Clerk主动发送PARK及commit/资产/producer终态，再由Clerk核对安全closeout并在DM完成本轮后归档任务；此文不冒称已归档成功。共享方向分支codex/mgtap和authoring checkout保留，不删除历史证据或共享分支。
