@@ -1,0 +1,22 @@
+{
+  "request_id": "2026-09-14-folr-entity-history-b03-result-plan-review-01",
+  "task_sha": "41905d161d0f8540ee5b2a5463a3d66cb27e9639",
+  "task_sha256": "336a60ace9568755fe3bdd1a4927f257cd476984e5719c09537d7b711986cee4",
+  "task_bytes": 31290,
+  "handoff_sha": "c6572e97bf66994a014f82224b1a9454c695a710",
+  "source_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "conversation_binding_key": "em:vap_folr_core:convergence",
+  "requested_conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "app_handoff_count": 1,
+  "app_tool_result": {
+    "threadId": "01a09ea0-4a86-75b0-826d-6f864efa7480"
+  },
+  "recorded_at_utc": "2026-09-14T10:09:57.728472+00:00",
+  "provider_send_state": "UNCONFIRMED; no provider acceptance/IDs/full answer received yet",
+  "observation_owner": "Registered independent Transport, concurrent observation and full archive directly to this DM",
+  "same_request_reconciliation_required": true,
+  "scientific_change_from_render_repair": false,
+  "next_action": "Transport executes exact bound request once, observes/archives full response; DM reads/responds and forms substantive Portfolio report."
+}

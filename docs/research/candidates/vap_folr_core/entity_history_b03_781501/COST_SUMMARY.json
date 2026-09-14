@@ -45,5 +45,11 @@
   "E_F_B02_B03_known_native_seconds": 12538.44,
   "full_direction_native_and_support_cost": "UNKNOWN; earlier families and incomplete support accounting not reset",
   "planning_comparison": "Actual native3779.85 below DM7200 native plan; plans are not scientific or owner caps. Full9000 combined-plan compliance cannot be claimed because total support is UNKNOWN.",
-  "new_scientific_invocations_in_collection_analysis": 0
+  "new_scientific_invocations_in_collection_analysis": 0,
+  "post_initial_intake_support_windows_seconds": {
+    "support_archive_collection": 1.562999999965541,
+    "published_preservation_and_remote_cleanup": 2.6560000000172295
+  },
+  "collection_analysis_and_cleanup_lower_bound_seconds": 13.186999999976251,
+  "later_cost_scope": "Adds only measured later disjoint windows; fixed review input6642b5e63 correctly reported the earlier8.968s lower bound. Total support/provider/lifetime remains UNKNOWN."
 }

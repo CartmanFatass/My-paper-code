@@ -66,8 +66,10 @@ No active native producer or additional fit remains selected. [DM intake](FOLR_E
 favors reviewing a bounded proposal that preserves generic recurrence in both arms
 while testing persistent versus current-only entity state. It is unimplemented and
 not yet selected; stopping, longer learning and a changed host remain real alternatives.
-One independent result/plan review is being authored; DM response and a substantive
-Portfolio direction report follow. Current ACTIVE/MEDIUM remains; no automatic PARK.
+The independent result/plan review is published and its exact App handoff dispatched
+to registered browser Transport. Provider acceptance and full answer are not yet
+confirmed. DM response and a substantive Portfolio direction report follow.
+Current ACTIVE/MEDIUM remains; no automatic PARK.
 FOLR continues to occupy the existing third slot, with the
 same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
 Full support/provider cost remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves
