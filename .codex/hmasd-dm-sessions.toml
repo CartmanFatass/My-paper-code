@@ -51,14 +51,14 @@ legacy_native = "/root/dm_acvc_resume"
 legacy_state = "retired_paused"
 
 [directions.metric_ground_transport_allocation]
-state = "reentry_pending_dm_acceptance"
-occupies_slot = false
+state = "implementation_in_progress"
+occupies_slot = true
 park_document = "docs/research/candidates/metric_ground_transport_allocation/PARK.md"
 owner_mode = "independent_task"
 accepted_event = "mgtap-session-astra-max-v1"
 accepted_turn = "01a09cd9-d3be-7922-85ec-da2dc1766572"
-last_processed_event = "MGTAP_PORTFOLIO_FULL_RESPONSE_READ_INTAKE_20260914"
-next_action = "MGTAP DM has read the complete Portfolio response and is conducting substantive re-entry intake; await explicit CONTINUE/PARK decision and first concrete action before occupying the slot"
+last_processed_event = "MGTAP_REENTRY_LR_SELECTION_CONTINUE_20260914"
+next_action = "CONTINUE accepted for MGTAP-LR-SELECTION-B01; protocol implementation and 13 synthetic checks complete, with zero native exposure so far; DM owns runner, independent review, admission and launch"
 portfolio_selection_archive = "docs/research/portfolio/pro_packets/20260914_lcac_park_vacancy_selection"
 portfolio_response_full_received = true
 portfolio_response_full_source = "C:/Users/fires/.codex/attachments/ff3b2a2c-ffe5-45b9-b634-ed0d368bf037/pasted-text.txt"
@@ -69,6 +69,9 @@ legacy_native = "/root/dm_mgtap_resume"
 legacy_state = "retired_paused"
 authoring_checkout = "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904"
 authoring_branch = "codex/mgtap"
+reentry_commit = "304450d6f9f776c2e72fe6d3517a6909e9ee83ae"
+selected_object = "MGTAP-LR-SELECTION-B01"
+selected_object_scope = "three-candidate learning-rate selection plus one fresh selected-program holdout pair; 8 fits; 589824 team ticks; 4096 Adam; no native launch yet"
 
 [directions.roster_consistent_latent_exploration]
 state = "management_in_progress"
@@ -241,7 +244,7 @@ binding_key = "portfolio:cross_direction"
 transport_config = "C:/Projects/HMASD/.codex/hmasd-transport.toml"
 new_request_coordinator = "clerk"
 planning_state = "three_direction_target_lcac_vacancy_replacement"
-reserved_slots = 1
+reserved_slots = 0
 request_status = "mgtap_selected_pending_dm_acceptance"
 request_status_commit = "723a4dcb3"
 request_conversation_id = "6aa77158-7194-83e8-8f8a-caf16ae6b84b"
@@ -253,7 +256,7 @@ selected_task_id = "01a09cd8-676e-7513-806d-a86b7e104518"
 pending_vacancy_direction = "metric_ground_transport_allocation"
 pending_vacancy_source = "learned_counterfactual_agent_credit"
 pending_vacancy_count = 1
-next_action = "MGTAP remains selected for the LCAC vacancy and is processing explicit re-entry; reservation stays pending CONTINUE/PARK. FOLR has now released its slot after reversible PARK; keep the resulting Portfolio candidate parked under the owner concurrency stop, with no fourth direction"
+next_action = "MGTAP CONTINUE is accepted and occupies the LCAC-replacement slot; FOLR released its slot via reversible PARK. RCLE/MGTAP are the two active directions; retain one remaining vacancy as a parked Portfolio candidate under the owner concurrency stop, with no fourth direction"
 selection_response_url = "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1"
 legacy_accepted_routes = "preserve_through_closeout"
 candidate_direction = "fourth-slot-portfolio-candidate-unselected"
