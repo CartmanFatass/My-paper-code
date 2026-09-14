@@ -74,5 +74,15 @@
     }
   ],
   "accepted_user_node_id": "caca35ed-9351-48c7-b8f1-d06f0cb0b955",
-  "send_observed_at": "2026-09-14T20:06:55.6280526Z"
+  "send_observed_at": "2026-09-14T20:06:55.6280526Z",
+  "post_input_peer_facts": [
+    {
+      "event": "MGTAP_FIXED8253_COMPLETE_ADVERSE_PEER_CONTEXT_20260914",
+      "record": "docs/research/candidates/acvc/ACVC_POST_C01_PEER_CONTEXT_20260914.md",
+      "peer_intake_sha": "e4a67d816da001b1b2988f1554f50b785fcba72f",
+      "peer_main_sha": "64ccb0be13be4dcef5cc530b5f88e8100c19d2d5",
+      "fact": "Fixed1e-4 fresh8253 COND-DENSE=-.025924927546066238J,2positive/30negative,178.86s whole nativewall; own DirectionPro next; slot/default unchanged.",
+      "effect": "Accepted Portfolio input remains frozen; at full-answer intake assess whether a material conclusion depends on now-superseded peer-preparation facts. No automatic new prompt, requery or ACVC disposition."
+    }
+  ]
 }
