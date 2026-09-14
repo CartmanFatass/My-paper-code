@@ -1,6 +1,6 @@
 {
   "object": "FOLR_ENTITY_HISTORY_B03_781501",
-  "phase": "GENERIC_RUNNING",
+  "phase": "GENERIC_ACCEPTED_BANK_READY",
   "planned_at_utc": "2026-09-14T08:16:51.805742+00:00",
   "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
   "portfolio_decision_sha": "4776103de4f55beaee610c52506112651bfaed04",
@@ -85,7 +85,25 @@
           "state_path": "C:/Projects/HMASD/temp/directions/vap_folr_core/exp/entity_history_b03_781501/MONITOR_STATE.json",
           "dm_routine_polling": "ended after direct MONITOR_ADOPTED; Monitor delivers terminal facts to this DM"
         }
-      ]
+      ],
+      "terminal": {
+        "task": "folr-b03-781501-generic",
+        "status": "finished",
+        "exit_code": 0,
+        "pid": 3666806,
+        "uptime_seconds": 2529,
+        "tmux_active": false
+      },
+      "technical_acceptance": {
+        "at_utc": "2026-09-14T09:07:41.070878+00:00",
+        "complete_exposure_valid": true,
+        "summary_sha256": "d1b46eac0487632de92ba33e22d029a64882e66633b7418f2d50b2c01fe4e2ec",
+        "collection": "GENERIC_COLLECTION.json",
+        "intake": "GENERIC_INTAKE.md",
+        "raw_archive": "GENERIC_RAW.tar.gz",
+        "checkpoint_integrity_passed": true,
+        "monitor_terminal_received": "Direct parent App MONITOR_TERMINAL plus native completion; duplicate delivery processed once. Child state snapshot has terminal=false delivery bookkeeping, but terminal receipt was actually delivered."
+      }
     }
   },
   "launch_assets": {
@@ -125,7 +143,7 @@
       "LAUNCH_ASSET_PREPARATION.json"
     ]
   },
-  "next_action": "Native Monitor owns Generic observation. On terminal facts DM collects/accepts Generic, then launches selected BANK in this same batch regardless of Generic sign/completeness; both results receive full scientific intake.",
+  "next_action": "Publish Generic technical collection and exact BANK plan, then accept the one preselected detached BANK invocation; assign actual handle to same batch recovery Monitor and confirm direct adoption. Full pair scientific interpretation awaits BANK.",
   "monitor_transfer": {
     "reason": "Initial observer finalized three turns with a nonempty running handle set, despite required until-terminal observation. This was execution noncompliance, not a scientific termination or missing rule.",
     "previous_native": "/root/folr_b03_monitor",
@@ -139,5 +157,26 @@
     "source_or_science_change": false,
     "parent_route": "independent DM App task01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
     "support_cost": "UNKNOWN; all prior queries and interruptions remain counted, no reset"
+  },
+  "bank_launch_plan": {
+    "handle": "folr-b03-781501-bank",
+    "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+    "out": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK",
+    "generic_summary": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/summary.json",
+    "generic_summary_sha256": "d1b46eac0487632de92ba33e22d029a64882e66633b7418f2d50b2c01fe4e2ec",
+    "argv": [
+      "/usr/local/bin/agent-task",
+      "run",
+      "folr-b03-781501-bank",
+      "bash",
+      "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_LAUNCH.sh",
+      "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+      "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d",
+      "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK",
+      "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/summary.json"
+    ],
+    "admission": "Create new output directory, then committed launcher performs fresh adjacent physical/effective >=4GiB admission. No current BANK admission claimed.",
+    "monitor": "Reuse /root/folr_b03_monitor_recovery in the same B03 batch with an awaited until-terminal observation loop.",
+    "no_score_gate": true
   }
 }
