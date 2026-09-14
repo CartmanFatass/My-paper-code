@@ -1,8 +1,19 @@
 # Augmentation B01 current execution
 
-Event: FOLR_AUGMENTATION_B01_GENERIC_RUNNING_MONITOR_ADOPTED_20260914.
-The selected Generic invocation is actually running; the A invocation is selected
-and unlaunched. No B01 final scientific result or pair polarity exists yet.
+Event: FOLR_AUGMENTATION_B01_AUGMENTED_RUNNING_MONITOR_ADOPTED_20260914.
+G is complete and collected at b881dd67c2a89aaa95ab5741541d98ff265653ff.
+A is actually running:handle folr-augmentation-b01-781601-augmented,PID3679958,
+source d9977dc18baf33b78dc626764c252391f1ddaa9d,accepted19:39:55.755736Z.
+Same checkout/run root below; current A output is augmented_persistent. The same
+batch Monitor adopted A at19:40:29.085Z with observation deadline21:39:55.755736Z.
+No A-G result exists yet. DM next collects A terminal outputs, computes the frozen
+primary, writes full scientific intake/Chinese brief and obtains independent
+scientific review. No third fit or automatic lifecycle change is selected.
+
+The following G sections preserve its execution/collection history; current
+observation and dispatch refer only to A above.
+
+## Original Generic launch and observation
 
 Accepted source: d9977dc18baf33b78dc626764c252391f1ddaa9d.
 Technical acceptance publication:50bbaa5e9b4cadba8ac8361f704b46b17590ba24.
@@ -53,3 +64,66 @@ running,1400episodes/1369updates/319.730s progress. Both the premature final and
 readoption are preserved in GENERIC_MONITOR_ADOPTION.json. No new observer, process,
 fit, stop or scientific retry was introduced. The observation deadline remains
 17:36:55.744043Z; actual terminal delivery remains due.
+
+## Generic terminal collection — current consequence
+
+The Monitor delivered terminal at2026-09-14T15:57:33.617Z; the exact original
+handle finished exit0 at15:56:34Z. DM freshly reconciled it at19:31:23.814475Z,
+with source d9977dc18 unchanged/clean, no live G process and A handle/output absent.
+A failed control turn did not change the accepted native experiment. ACVC's peer
+resume reports unsupported reasoning.effort=none as the control failure; no native
+failure or repeat G occurred. The resulting inter-arm control delay belongs to
+study elapsed and is not charged as additional G native wall or hidden as zero
+support. Future Monitor returns explicitly retain the required Astra/max DM route.
+
+[Collection](GENERIC_COLLECTION.json) accepts one complete Generic fitted policy:
+5000train/100000ticks/4969updates, final checkpoint,128greedy/2560ticks;
+train781601/eval1781601,CPU FP32,Torch1/1. Mean-0.966484375,SD7.3115709817,
+conditional episode SE0.6462576778,75/128negative,range[-16.56,20.08]. Actor has
+103173 parameters; finite model/target/optimizer checkpoint matches arm/update
+identity. The technical check initially confused26 registered buffer elements
+with parameters; source-grounded correction is recorded, with no scientific change.
+
+Complete native time1178.68s, aggregate user+system CPU1177.50s,peakRSS741336KiB,
+exit0. Collection's measured prefix is0.929s wall/2.558s processCPU, not complete
+support cost. Historical known native subtotal12538.44s becomes13717.12s including
+this G only; A and full support/provider/engineering/lifetime costs remain unknown.
+The G mean is a conditional endpoint, not a population ranking or A-G polarity.
+
+The original summary, checkpoint, timing, admission, command and supervisor files
+are preserved in GENERIC_RAW.tar.gz. Every raw member hash was checked after local
+transfer (GENERIC_ARCHIVE_READBACK.json); source summary SHA256 is
+152b1b807f148a9d7004f8b0208d30ce2fa1c147734c11d4d7cb01f84216336c. A will consume
+that exact original remote G summary after fresh source/handle/admission checks,
+regardless of G score. The original empirical endpoints and two-fit bound remain.
+
+## Original selected A actually accepted
+
+[A launch](AUGMENTED_LAUNCH_RECEIPT.json) records the single original submission
+at19:39:55.755736Z after source/unused-handle/no-live-FOLR reconciliation, exact
+collected G summary digest verification and creation of the empty A directory.
+[Adjacent admission](AUGMENTED_ADMISSION_READBACK.json) passed at19:39:55.784913Z
+with15625777152 physical/effective available bytes each,above4GiB. The original
+card, seeds, two-fit bound, exposure and prediction remain unchanged.
+
+G terminal-to-A preparation interval13401.737549s is inter-arm control elapsed,
+including delayed control consequence and later collection/preparation. It is
+not extra G native wall or all measured active support. Unknown total support
+and historical costs remain. [Direct Monitor adoption](AUGMENTED_MONITOR_ADOPTION.json)
+uses the same native child with a new7200s A observation window. Current assignment
+explicitly retains the original DM's required Astra/max App return settings after
+the reported unsupported-none control failure. Native Monitor remains Luna/low.
+Owner-console current review returned[]; no owner reply was invented.
+
+DM corrected its initial snapshot reader assumption: the Monitor stored current A
+under active_handle and retained G at the root, rather than exposing A at the root.
+This caused a local record assertion, not a scientific failure. Original snapshot
+is preserved. Monitor was asked to separate active A from completed G clearly and
+correct the old G source-time transcription15:56:34+08:00 to the actual raw
+23:56:34+08:00 (=15:56:34Z), preserving the correction. No raw output changed.
+
+ACVC_POST_C01_PORTFOLIO_CONTEXT_20260914 was received from original ACVC DM.
+FOLR_PEER_FACTS_FOR_ACVC_20260914 was directly delivered with committed G facts,
+last complete B03 review/DM response, applied Portfolio A-G choice, real limits
+and unknown costs. This is report context, not a sibling approval barrier or
+new direction/global resource choice.
