@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "LCAC_B02_1024",
+      "arm": "Q",
+      "n": 1,
+      "mean": 0.1906683360649764,
+      "sample_sd": null,
+      "min": 0.1906683360649764,
+      "max": 0.1906683360649764,
+      "runs": {
+        "9412": 0.1906683360649764
+      }
+    },
+    {
+      "task": "LCAC_B02_1024",
+      "arm": "V",
+      "n": 1,
+      "mean": 0.18844570785317188,
+      "sample_sd": null,
+      "min": 0.18844570785317188,
+      "max": 0.18844570785317188,
+      "runs": {
+        "9412": 0.18844570785317188
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "LCAC_B02_1024",
+      "arm": "Q",
+      "baseline": "V",
+      "summary": {
+        "n": 1,
+        "mean": 0.0022226282118045226,
+        "sample_sd": null,
+        "min": 0.0022226282118045226,
+        "max": 0.0022226282118045226
+      },
+      "differences": {
+        "9412": 0.0022226282118045226
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

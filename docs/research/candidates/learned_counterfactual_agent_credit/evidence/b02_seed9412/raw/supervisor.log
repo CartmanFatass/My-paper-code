@@ -1,0 +1,19 @@
+=== Task 'lcac-b02-s9412-25ea4d61-20260914' started at 2026-09-14T12:07:01+08:00 ===
+{
+  "assessed_at": "2026-09-14T04:07:01.185239Z",
+  "available_physical_bytes": 15631114240,
+  "captured_at": "2026-09-14T04:07:01.184917Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15631114240,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+complete=True summary=/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b02_9412_20260914/summary.json
+=== Task 'lcac-b02-s9412-25ea4d61-20260914' exited with code 0 at 2026-09-14T12:14:25+08:00 (Duration: 444s) ===
