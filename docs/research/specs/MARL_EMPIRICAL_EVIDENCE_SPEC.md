@@ -234,21 +234,31 @@ or a portfolio value judgment that no narrower or recast object merits investmen
 
 ## 8. Responsibility split
 
-### 8.1 DM decisions, independent scientific review and Portfolio reporting
+### 8.1 DM research ownership, independent review and Portfolio final interpretation
 
-OWNER_DIRECT 2026-09-13: DM owns its whole direction lifecycle and scientific decisions, including
-family/recast/C-promotion and PARK/CLOSE, with specific owner constraints and this evidence standard.
-Direction Pro Convergence is the independent scientific Reviewer: it examines design, evidence,
-interpretation, conclusions and next plans. DM reads the full review, responds to material findings,
-corrects scientific flaws or limits the affected claim, and owns the resulting decision. Review is
-not an investment/lifecycle approval and does not replace the DM's management responsibility.
+OWNER_DIRECT 2026-09-14: DM owns innovation, hypotheses, ordinary bounded experiments,
+implementation/repair, evidence interpretation and reports within current direction scope.
+Portfolio is the global scientific synthesizer and final direction-level interpreter for
+CONTINUE, RECAST, PARK, CLOSE and reopening under current owner constraints and this evidence
+standard. At substantive lifecycle/family/recast questions or contested direction interpretation,
+DM submits complete evidence and alternatives under docs/project/PORTFOLIO_DECISION_PROTOCOL.md.
+DM cannot unilaterally PARK/CLOSE the direction or release its slot. Ordinary in-scope experiments
+do not require per-experiment Portfolio approval.
 
-Clerk coordinates/records and compiles Portfolio as the user-facing report. Only an explicit owner
-request starts Portfolio consultation or cross-direction adjustment; report recommendations do not
-authorize implementation. Existing accepted requests and historical decisions remain evidence,
-without standing automatic Portfolio finality or automatic vacancy replacement.
+Direction Pro Convergence independently reviews design, evidence, interpretation, conclusions
+and next plans. DM reads the full review, responds to material findings, corrects defects and
+bounds claims; review findings are inputs to Portfolio, not a final lifecycle verdict. DM applies
+a complete conforming Portfolio decision without Root ratification. Concrete conflicts return
+to the same Portfolio conversation while independent authorized work continues. Pending decision
+or transport recovery is not scientific PARK.
 
-DM scientific decisions, independent reviews and Portfolio reports MUST:
+Clerk is retired. Equal peer DMs coordinate and record actual handoffs and vacancies under
+PEER_DM_COORDINATION.md; Root owns user interaction and shared-control engineering. Portfolio
+receives the protocol's fixed repository context and identifies actual source access; a local
+citation does not establish web access. Existing accepted requests and historical decisions
+retain their provenance. Scientific evidence requirements below remain unchanged.
+
+DM scientific decisions, independent reviews and Portfolio decisions/reports MUST:
 
 1. identify the decision question and assign the lowest sufficient evidence class before investing;
 2. compare directions at their honest claim ceilings rather than reward those with the most formal

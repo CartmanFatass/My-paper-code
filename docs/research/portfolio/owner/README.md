@@ -19,13 +19,20 @@ card/intake。`seed-ledger` 停止批量补建旧条目。既有 owner 指令仍
 
 ## ★ 重要改动与当前权责
 
-DM 在持续授权内负责方向的完整生命周期，记录真实决定、证据和执行状态；科学侧 Pro Convergence
-负责独立 review，DM 回应意见并决定。Clerk 汇总为用户可读 Portfolio 报告，不进行科学批准。
-只有用户主动要求才进入跨方向调整或 Portfolio 咨询。报告/建议本身不产生执行权，空槽不自动补位。
-历史 PRO_FINAL 与批改项保留出处，不作为未来方向决定的审批门槛。星标便于查看，不要求逐项批准。
+DM 负责创新、实验、工程修复、证据解释和报告，在当前方向范围内自主推进普通研究。
+方向 Pro Convergence 负责独立 review；DM 回应意见。Portfolio 按
+`docs/project/PORTFOLIO_DECISION_PROTOCOL.md` 总览全局，最终解释并决定方向级
+CONTINUE/RECAST/PARK/CLOSE/重开。完整合规决定由 DM 执行，不等待 Root 或用户逐项批准；
+普通实验不逐项提交 Portfolio。DM 的建议或待回复状态不能写为已 PARK、已关闭或已释放席位。
+
+Clerk 已退役。平行 DM 按 `PEER_DM_COORDINATION.md` 直接协调并记录交接，实际空槽按当前
+三个占用加预留席位的目标处理，已有请求和预留不得重复创建。Web Portfolio 必须收到固定版本的
+完整相关上下文并说明实际访问情况。历史 PRO_FINAL 与批改项保留出处；星标便于用户异步介入。
+
+对已执行的 Portfolio 决定，记录真实来源和应用状态，例如：
 
 ```powershell
-python tools/owner_console/item.py trace <id> --authority "OWNER_DELEGATED / DM_DECISION" --source <dm-intake.md> --record <application-intake.md> --state applied --summary "实际变化与影响" --auto-applied <option-key>
+python tools/owner_console/item.py trace <id> --authority "PRO_FINAL / OWNER_DELEGATED" --source <portfolio-response.md> --record <dm-intake.md> --state applied --summary "实际变化与影响" --auto-applied <option-key>
 ```
 
 共享治理改动记录真实 OWNER_DIRECT 来源。planned/applied/blocked 描述实际应用状态；不能把待建议项

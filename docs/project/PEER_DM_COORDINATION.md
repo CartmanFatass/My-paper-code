@@ -1,10 +1,10 @@
 # Equal DM coordination
 
 OWNER_DIRECT: DMs are independent peers. The central Clerk role is retired. Each Astra/max DM
-owns its full direction lifecycle, implementation, review intake, execution, records, accepted
-main integration and cleanup. Root is the user entry and shared-control engineering owner.
-Portfolio supplies independent cross-direction advice and delegated vacancy selection; direction
-Pro is a scientific Reviewer. Independent Luna/high browser Transport returns directly to authors.
+owns direction innovation, ordinary research execution, implementation, review intake, reports,
+accepted main integration and cleanup, and applies conforming Portfolio direction decisions. Root is the user entry and shared-control engineering owner.
+Portfolio owns final direction-level interpretation and delegated vacancy selection; direction
+Pro is an independent scientific Reviewer. Independent Luna/high browser Transport returns directly to authors.
 There is no coordinator approval, mandatory receipt hop or DM hierarchy.
 
 
