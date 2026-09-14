@@ -27,7 +27,7 @@ environment question with an independent bounded observation. Own only the probe
 assigned proof root is the only writable location; tracked source/tests and Git state remain
 read-only.
 Complete the assigned observation at this level; do not spawn children. Return any out-of-scope
-decision with its direct evidence to the actual assigning parent, and reuse this task for related follow-ups.
+decision with its direct evidence to the actual assigning parent, and reuse this task only for follow-ups within this work batch; independent new batches use new children.
 
 Freeze the question, exact command or probe, cwd, proof root, expected alternatives, observation
 bound, and stop condition. Check for an existing relevant process or artifact so the probe cannot

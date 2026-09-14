@@ -9,6 +9,11 @@ DM owns its entire direction lifecycle; Clerk coordinates and records; Root is t
 Portfolio is a report for the user. Read current routes/state from .codex/hmasd-dm-sessions.toml
 and procedure from docs/project/CLERK_OPERATIONS.md. Owner instructions take precedence.
 
+Native specialists follow SIBLING_COMMUNICATION.md: same work batch may reuse its child;
+independent new batches use new children, default fork_turns=none. The assigning DM determines
+the batch and preserves in-flight work; Clerk coordinates actual conflicts without approval.
+Do not rotate long-lived independent DM tasks, create cache keepalives or resume owner-paused work.
+
 On an actionable event:
 1. Reconcile the actual owner, newest owner boundary and event/evidence revision.
 2. Integrate accepted facts and complete the unfinished consequence; delivered is not applied.
