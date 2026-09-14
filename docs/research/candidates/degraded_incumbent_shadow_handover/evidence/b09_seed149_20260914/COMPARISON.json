@@ -1,0 +1,84 @@
+{
+  "rows": [
+    {
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K8",
+      "REPLACE_service": 428,
+      "BYPASS_service": 434,
+      "service_difference": 6,
+      "REPLACE_energy": 280213.16166161245,
+      "BYPASS_energy": 283072.9756071654,
+      "energy_difference": 2859.8139455529745,
+      "REPLACE_invalid": 105,
+      "BYPASS_invalid": 110,
+      "REPLACE_CAS": 0,
+      "BYPASS_CAS": 0,
+      "ticks_each": 1200
+    },
+    {
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K4_TO_K12",
+      "REPLACE_service": 478,
+      "BYPASS_service": 448,
+      "service_difference": -30,
+      "REPLACE_energy": 295428.12872378173,
+      "BYPASS_energy": 295987.62965891237,
+      "energy_difference": 559.5009351306362,
+      "REPLACE_invalid": 25,
+      "BYPASS_invalid": 22,
+      "REPLACE_CAS": 0,
+      "BYPASS_CAS": 0,
+      "ticks_each": 1200
+    },
+    {
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K8",
+      "REPLACE_service": 269,
+      "BYPASS_service": 223,
+      "service_difference": -46,
+      "REPLACE_energy": 277237.73247929296,
+      "BYPASS_energy": 282510.50155160506,
+      "energy_difference": 5272.769072312105,
+      "REPLACE_invalid": 103,
+      "BYPASS_invalid": 104,
+      "REPLACE_CAS": 0,
+      "BYPASS_CAS": 0,
+      "ticks_each": 1200
+    },
+    {
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K4_TO_K12",
+      "REPLACE_service": 471,
+      "BYPASS_service": 400,
+      "service_difference": -71,
+      "REPLACE_energy": 287714.548885681,
+      "BYPASS_energy": 292452.83829669707,
+      "energy_difference": 4738.289411016041,
+      "REPLACE_invalid": 34,
+      "BYPASS_invalid": 13,
+      "REPLACE_CAS": 0,
+      "BYPASS_CAS": 0,
+      "ticks_each": 1200
+    }
+  ],
+  "means": {
+    "BYPASS": 376.25,
+    "REPLACE": 411.5
+  },
+  "Delta_bypass": -35.25,
+  "Delta_percent_of_horizon": -2.9375,
+  "Delta_percent_of_REPLACE": -8.566221142162819,
+  "mean_energy_difference": 3357.5933410029393,
+  "eval_invalid_totals": {
+    "BYPASS": 249,
+    "REPLACE": 267
+  },
+  "train_invalid_totals": {
+    "BYPASS": 2408,
+    "REPLACE": 2111
+  },
+  "native_training_calls_pair_bounds": [
+    314428,
+    837268
+  ]
+}

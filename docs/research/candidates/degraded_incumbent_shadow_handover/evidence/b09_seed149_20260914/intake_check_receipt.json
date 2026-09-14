@@ -1,0 +1,7 @@
+{
+  "invocation": "read-only recorded summary and checkpoint validation; no native execution or optimization",
+  "exit_code": 1,
+  "enclosing_process_wall_seconds": 5.418701399990823,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"C:\\Projects\\HMASD-worktrees\\dm-dish-b06-scientific-intake-20260907\\temp\\directions\\degraded_incumbent_shadow_handover\\test\\b09-intake-20260914-01\\check_recorded.py\", line 9, in <module>\n    initial=torch.load(root/'shared/initial_state.pt',map_location='cpu',weights_only=False)\n  File \"C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\lib\\site-packages\\torch\\serialization.py\", line 1525, in load\n    return _load(\n  File \"C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\lib\\site-packages\\torch\\serialization.py\", line 2114, in _load\n    result = unpickler.load()\n  File \"C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\lib\\site-packages\\torch\\serialization.py\", line 2103, in find_class\n    return super().find_class(mod_name, name)\nModuleNotFoundError: No module named 'experiments'\n"
+}

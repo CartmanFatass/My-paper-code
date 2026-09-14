@@ -1,31 +1,29 @@
 # Direction degraded_incumbent_shadow_handover: degraded incumbent shadow handover
 
-## Current DM decision: one receipt-use ablation B09 — 2026-09-14
+## B09 accepted; scoped lifecycle review — 2026-09-14
 
-**CONTINUE under OWNER_DELEGATED authority.** The new independent DM read the current
-evidence and proposed direction PARK, then accepted an independent review's material
-value disagreement: whether to retain or bypass the learned arrival update is already
-a concrete controller-default decision that B08 did not test. The PARK proposal was
-never applied. [Reassessment and complete DM response](DISH_LIFECYCLE_REASSESSMENT_20260914.md#6-complete-independent-review-dm-response-and-changed-choice).
+**REPLACE remains the development default; the fixed BYPASS extension ends.** One fresh
+matched seed149 pair gives BYPASS376.25 versus REPLACE411.5 native service ticks,−35.25,
+beyond the frozen−24 scale. The four differences+6,−30,−46,−71 and every native companion
+are preserved in the [intake](DISH_RECEIPT_BYPASS_B09_RESULT_INTAKE_20260914.md) and
+[E0 evidence](DISH_RECEIPT_BYPASS_B09_RESULT_EVIDENCE_20260914.md). Both learners completed
+16 updates/65536 transitions/512 optimizer calls and four final1200-tick episodes.
 
-Select exactly one new seed149 B/EXPLORE pair, BYPASS versus freshly trained REPLACE,
-with equal 16-update learning and final-only native service. BYPASS preserves post-reset
-history before ordinary GRU advancement in both live control and replay; native packet
-and charge laws, other actor information and source promotion remain. The scientific
-question is presence of the receipt-processing operation. B08 WITHIN/REPLACE, its fixed
-half-retention programme PARK, and all earlier package stops are preserved.
+BYPASS used more energy in every final condition, had18 fewer final invalid commits and
+297 more TRAIN invalid commits. All ordinary TRAIN/EVAL CAS counts were zero; post-CAS
+source value is unestimated. The result is one finite whole-policy comparison, not
+stable inferiority or proof that each packet is necessary. B08 WITHIN/REPLACE and the
+fixed-half-retention programme PARK, earlier packages, MEDIUM priority and recasts remain.
 
-This may change the finite-controller development default; it does not estimate all
-communication necessity or post-CAS source value. The strongest contrary expectation is
-discarding useful forecast information. DM predicts a negative BYPASS-minus-REPLACE sign
-with low confidence; no outcome exists yet. [B09 frozen card](DISH_RECEIPT_BYPASS_B09_SCIENCE_CARD_20260914.md)
-sets the new finite exposure/2700s complete machine-work plan and engineering acceptance.
-Source and independent technical review are accepted. The B09 pair is running remotely
-under handle `dish-b09-s149-3a749256-20260914-submit02`, source `3a749256d`, with native
-Monitor `/root/mon_ll_dish_b09` adopted. The first wrapper failed before scientific execution
-and is preserved; the corrected submission passed fresh admission. DM owns collection,
-intake and the next lifecycle decision. Priority, recasts and UAV-entry state are unchanged.
-Review `eaed5cb6c` is evidence, not a spending grant.
+The DM's earlier PARK proposal was corrected by independent review into this useful
+binary comparison; that proposal was never applied. With B09 complete, DM proposes
+reversible direction PARK and requests one independent review of its all-outcome
+interpretation and value reasoning, including another independent pair and ordinary-source
+alternatives. Broader PARK is not yet applied. Native experiment observation has ended;
+full evidence is archived in direction and main roots. The current producer is DM-owned
+Convergence Transport `/root/tr_lh_dish_b09_review_20260914`, pending the exact published
+request. DM owns full-response intake, lifecycle decision and closeout; no new experiment
+is selected. [Frozen B09 card](DISH_RECEIPT_BYPASS_B09_SCIENCE_CARD_20260914.md).
 
 ## Tested arrival-bridge retention family parked — 2026-09-10
 
