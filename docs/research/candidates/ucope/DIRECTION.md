@@ -1,5 +1,35 @@
 # Direction ucope: UCOPE
 
+## Current DM position — 2026-09-13 reactive continuation selected, recasts 2
+
+**OWNER_DELEGATED / CONTINUE:** the independent DM selects one new B/EXPLORE
+comparison of feedback-conditioned continuation R against fresh trained fixed
+renewal F and ordinary recurrent feedback G, with hover H. The complete independent
+Convergence review narrowly supports this choice; the DM answers its material
+state, likelihood and credit findings in the
+[review intake](pro_packets/20260913_reactive_renewal_convergence/INTAKE.md).
+
+R can use the next already-allowed observation after one movement tick to keep
+the actual command for one more tick or end and sample a new command immediately.
+Adopting this changed decision boundary is **recast 2**. The 8801-L/unchanged-L
+spending stops and older retained-policy/root-residual PARK remain. This creates
+no priority, global resource, formal UAV entry or C change.
+
+The strongest support is the concrete feedback opportunity absent from tested
+precommitted-duration recipes, with attained F/G alternatives making a finite
+comparison meaningful. The strongest contrary case is the repeated T/F deficits,
+8801 L/F loss, useful simpler comparators, and R's unmeasured implementation and
+complete cost. Reversible PARK was the serious runner-up; no R benefit is known.
+All prior mixed F/G, hover, incomplete8702 and dependent-A01 evidence remains.
+
+The [new B01 card](UCOPE_REACTIVE_RENEWAL_B01_CARD_20260913.md) selects one
+master8901 R/F/G instance,2048 training episodes each and one final64-world panel
+each plus H. R−F is primary; R−G and learned−H contrasts remain. It selects
+1638400 native team steps and12288 Adam calls, without a retry or automatic
+successor. Current work is implementation and independent high-risk code review;
+no empirical invocation is yet accepted. The claim ceiling is one whole-package
+learning observation, with no stable ranking or component causality.
+
 ## Research organization — 2026-09-04
 
 This source belongs to route **K3 — 付费获取**, in the **信息获取与续约** family
