@@ -24,5 +24,5 @@
     {"path": "/home/wu/hmasd-worktrees/rcle-b11-d1-c7eb5986f", "source_sha": "c7eb5986f38d42f24fb0d9749c705c975aa40b0d", "removed": true, "unregistered": true},
     {"path": "/home/wu/hmasd-worktrees/rcle-b12-15eaa7ea6", "source_sha": "15eaa7ea655a0f42a0ec3986927487892bdce212", "removed": true, "unregistered": true}
   ],
-  "continuation": "RCLE ACTIVE; accepted scientific review belongs to native /root/tr_rcle_b12. Future retained-checkpoint input, if selected, uses archived bytes with a declared digest, not an old live execution checkout."
+  "continuation": "RCLE ACTIVE; dispatched scientific review belongs to native /root/tr_rcle_b12. Future retained-checkpoint input, if selected, uses archived bytes with a declared digest, not an old live execution checkout."
 }
