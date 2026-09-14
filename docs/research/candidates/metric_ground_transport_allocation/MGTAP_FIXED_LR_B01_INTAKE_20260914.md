@@ -139,6 +139,16 @@ this exact request. DM sent same-request executor recovery at20:24:39Z, preservi
 original bytes and requiring actual-effect reconciliation before any Send. App delivery
 is not provider acceptance; no provider Send count or complete response is inferred.
 
+Subsequent actual Transport queue readback resolves that delivery gap: executor
+adopted20:29:04.1745412Z after reconciling all prior user requests; none matched the
+new TASK/request. The sole exact1942-byte prompt (SHA256
+a78f4ee59887f909b6a621f07f3fe4542fa2d449bb10ab3bedf5462416dd420f) was accepted
+20:29:37.7532926Z as user8d56e527-169b-4ddf-9aec-ea7bd872cd01. Send1/manual0;
+Transport verified full composer and actual user body apart from the Show-more UI
+suffix. State WAITING_GENERATION, no full response yet. DM uses the explicit queue
+receipt rather than claiming personal browser inspection. Same original request and
+executor retain observation through full original-byte archive and direct DM return.
+
 ACVC relayed OWNER_DIRECT `OWNER_PAUSE_AFTER_INFLIGHT_20260914` (2026-09-14 13:23 PDT):
 finish work/experiments already in hand and write handoff, without stopping accepted
 processes or requests. This existing current-object review, full intake and evidence

@@ -1,6 +1,7 @@
 # MGTAP — owner-pause closeout handoff, 2026-09-14
 
-Status at20:27:42Z: **current-object review closeout still pending; not yet drained**.
+Status after20:29:37.7532926Z: **current-object review accepted and generating;
+full response/DM intake still pending, not yet drained**.
 Owner event `OWNER_PAUSE_AFTER_INFLIGHT_20260914` is recorded in current main at
 `docs/research/portfolio/decisions/2026-09-14-owner-pause-after-inflight.md`
 (source7a087459d0b1fd1ecae000a502f5da3beff02d9e).
@@ -71,8 +72,8 @@ and the22fixed references remain unchanged. Registered Transport is
 App01a09ea0-4a86-75b0-826d-6f864efa7480, Codexiab; provider target is existing
 MGTAP Convergence6a9b6b01-a918-83e8-8b06-ca9dd8184dab/6Pro.
 
-Original Appdispatch20:16:55Z precedes the owner pause. Provider acceptance is not
-yet evidenced in this handoff. At20:23Z the executor queue omitted this exact request;
+Original Appdispatch20:16:55Z precedes the owner pause. At the initial20:27 handoff,
+provider acceptance was not yet evidenced. At20:23Z the queue omitted this exact request;
 same-request recovery was delivered20:24:39Z. Its20:25 queue-drained pause handoff
 still omitted the author-owned obligation. DM returned a concrete correction20:27:42Z
 citing the explicit owner record permitting this in-hand review to finish. These are
@@ -84,8 +85,16 @@ review reading, substantive response, record integration and final handoff accep
 
 ## First closeout / later resume action
 
-First reconcile this exact current review with Transport's actual adoption/acceptance
-receipt; read and archive its complete response, resolve concrete dependent findings
+The omitted queue entry has now been recovered. Actual Transport adoption was
+20:29:04.1745412Z and provider acceptance20:29:37.7532926Z, user
+8d56e527-169b-4ddf-9aec-ea7bd872cd01,Send1/manual0. Transport verified the complete
+1942-byte composer and accepted user body (apart from Show-more UI suffix), digest
+a78f4ee59887f909b6a621f07f3fe4542fa2d449bb10ab3bedf5462416dd420f. Its durable queue
+is WAITING_GENERATION. The earlier omission/unknown state above is preserved history,
+not a current lack of adoption. No second Send or other native work followed.
+
+First obtain this exact current review's complete terminal response from its existing
+Transport observer; read and archive it, resolve concrete dependent findings
 or bound claims, and finish this handoff. Do not create another review or experiment
 to clear a queue defect. Preserve the current task if an actual external restriction
 prevents completion, naming its owner and exact unfinished effect.
