@@ -88,5 +88,10 @@ same current source revision. Clerk records actual propagation separately from R
   `TIMEOUT_WAITING_FOR_PROMPT` receipt (`sendAttempted=false`); the DM is repairing that same
   request without a new seed, consultation or approval request.
 - MGTAP and RCLE still returned `no rollout found` for their registry thread IDs, while FOLR and
-  ACVC later supplied concrete receipts above. Until such a receipt exists, message delivery is
-  not counted as synchronization.
+  ACVC later supplied concrete receipts above. RCLE subsequently returned a concrete rollout:
+  its session commit `2e12ccc0d03918378f0efcebcb1216d22e847414` and authoring merge
+  `34afdc8262b05b08f2ed8f8aa057f323be93d375` have all 25 scoped blobs equal to the repaired
+  source, each checkout passed 160 focused tests and parsed the three scoped TOMLs, and no target
+  overlap/conflict occurred. Its independently delivered scientific response was preserved in
+  the authoring merge; main was not edited for that response. Until a concrete receipt exists,
+  message delivery is not counted as synchronization.
