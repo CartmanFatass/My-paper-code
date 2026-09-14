@@ -5,8 +5,9 @@ Binding structure: systems / information flow; both actors use the same legal lo
 
 Status: prospective B/EXPLORE protocol selected by DM at the 2026-09-14 reentry.
 The complete runner is implemented and technically accepted after independent review.
-The single exact-source programme passed actual-node admission and was launched on
-2026-09-14; completion and scientific intake remain pending. See [actual launch facts](reentry_20260914/LAUNCH.md).
+The single exact-source programme completed on2026-09-14. Its frozen rule reads
+COND_ABOVE_MEI; see [complete result intake](MGTAP_LR_SELECTION_B01_INTAKE_20260914.md)
+and [actual launch facts](reentry_20260914/LAUNCH.md). The prospective contract below is unchanged.
 No old frozen invocation is resumed. The current development decision is in
 [DM reentry intake](reentry_20260914/DM_REENTRY_INTAKE.md).
 

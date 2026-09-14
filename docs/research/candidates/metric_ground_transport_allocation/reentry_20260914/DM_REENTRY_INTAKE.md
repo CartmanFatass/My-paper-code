@@ -140,3 +140,23 @@ counterarguments, not defects that review can erase. There is no assumed tuning 
 native causal diagnosis, programme replication or population confirmation. Ordinary
 implementation/execution proceeds; a later direction disposition goes to Portfolio with
 the full signed evidence and strongest alternative, without unilateral PARK or slot release.
+
+## Completed new empirical consequence
+
+The selected programme has now completed all8fits at its exact published source.
+Both own-score winners are1e-4; the fresh8252 pair gives+0.023704897713093642 J,
+conditional paired-world SE0.004197354694630503,29positive/3adverse worlds. The frozen
+MEI0.01 rule reads COND_ABOVE_MEI. Full-command wall658.02s; actual counts and original
+20native/supervisor member bytes were collected/verified without additional science.
+The [complete new intake](../MGTAP_LR_SELECTION_B01_INTAKE_20260914.md) updates the
+optional-branch hypothesis, retains all old contrary evidence and compares a proposed
+fixed-selected-LR recurrence with programme repetition and PARK. It does not claim
+causal tuning benefit, stable ordering or automatic successor/default promotion.
+Independent actual-results review and the resulting Portfolio report are the next
+concrete work, not a return to Clerk or a new owner-approval gate.
+
+FOLR's full Portfolio decision4776103de4f55beaee610c52506112651bfaed04 is CONTINUE/MEDIUM;
+main5456aec117b9746f141d09292af2da1f803b8262 closes the possible FOLR vacancy with
+three occupied/zero reserved or vacant. The bounded MGTAP retirement/vacancy handoff is
+therefore complete; RCLE receives the released Portfolio conversation directly. No DISH
+replacement is applied or requested by this DM.

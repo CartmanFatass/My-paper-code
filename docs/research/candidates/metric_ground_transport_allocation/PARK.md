@@ -3,8 +3,11 @@
 ## 2026-09-14 当前状态补记：已选择 CONTINUE
 
 DM 已实质回应两份完整 Portfolio 答复，选择恢复本方向工作，首对象为双方等量
-学习率选择后新配对检验的 MGTAP-LR-SELECTION-B01。协议实现与合成测试已执行，
-原生 runner、验收及新实验尚未执行。使用 LCAC 释放的同一唯一预留，不新增方向。
+学习率选择后新配对检验的 MGTAP-LR-SELECTION-B01。该程序现已完整完成：双方选中1e-4，
+全新8252配对差+0.023704897713093642 J，按MEI0.01为COND_ABOVE_MEI。
+[完整结果intake](MGTAP_LR_SELECTION_B01_INTAKE_20260914.md)保留单一训练配对、
+旧正负结果和成本边界；方向级最终解释交给Portfolio，不自动延长网格或加跑。
+使用 LCAC 释放的同一原占位，不新增方向。
 完整依据、保留 PARK 的最强反对理由和交接见
 [重入 intake](reentry_20260914/DM_REENTRY_INTAKE.md)及[事件](reentry_20260914/EVENT.json)。
 下面保留的是当时的 PARK 知识和原始停止理由，不因重入被追溯改成错误或阳性证据。

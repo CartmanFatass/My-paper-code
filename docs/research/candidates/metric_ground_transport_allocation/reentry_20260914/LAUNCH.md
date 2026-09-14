@@ -96,3 +96,27 @@ The monitor's initial timestamp labeled node UTC+08 local time with Z; DM reques
 same-event metadata correction, preserving the original event ID and process evidence.
 Its direction-owned MONITOR.json retains observation/delivery state. Useful observation
 interval120 seconds uses interruptible waits no longer than60 seconds per tool call.
+
+## Terminal and completed-output acceptance
+
+The original supervisor log records exit0 at2026-09-14T16:06:39+08:00, i.e.08:06:39Z.
+GNU time reports complete-command wall658.02s and peakRSS559984KiB. The body-only
+timings are retained separately. DM's fresh direct date -u/status at08:10:39Z confirms
+finished, exit0, pid3665484, tmux_active=false; uptime898s is time since start including
+time after exit, not native duration. No next invocation/retry was dispatched.
+
+Monitor terminal eventMGTAP_LR_SELECTION_B01_20260914:MONITOR_TERMINAL:20260914T081848Z
+reported finished/exit0, but its08:18:48Z label was inconsistent with the contemporaneous
+direct UTC observation. That label is retained as a receipt identifier, not accepted as
+an observation/execution timestamp. Earlier15:57:03Z adoption was corrected to07:57:03Z.
+The monitor also returned prematurely while running; same-batch recovery ultimately used
+a yielding read-only wait/status loop and delivered terminal. These observer issues do
+not supply native timing or scientific polarity; independent supervisor/raw evidence does.
+
+DM collected14 native files and6 supervisor files, checked every member against fresh
+remote hashes and read back all archive members. The complete8-fit summary and raw
+panels recompute exactly; see ../MGTAP_LR_SELECTION_B01_INTAKE_20260914.md and
+COLLECTION.json/INTAKE_ANALYSIS.json. Original8checkpoints and all raw learning/evaluation
+records remain intact. Native source/runtime and scientific result are technically accepted.
+Meaningful independent review of the actual result/conclusions/next proposal is the next
+scientific work; direction-level disposition remains Portfolio-owned.
