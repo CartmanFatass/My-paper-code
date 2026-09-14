@@ -1,0 +1,18 @@
+=== Task 'acvc-longer-c-b01-914a3d0e7' started at 2026-09-14T22:08:46+08:00 ===
+{
+  "assessed_at": "2026-09-14T14:08:46.682793Z",
+  "available_physical_bytes": 15632846848,
+  "captured_at": "2026-09-14T14:08:46.682525Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15632846848,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+=== Task 'acvc-longer-c-b01-914a3d0e7' exited with code 0 at 2026-09-14T22:13:42+08:00 (Duration: 296s) ===

@@ -71,5 +71,15 @@
     "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
     "source": "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_SCIENCE_CARD_20260914.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-14T14:26:01+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-03-unattended-delegation.md",
+      "record": "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md",
+      "state": "applied",
+      "summary": "按所有者持续委托，DM自主选择并执行一个新1024轮对象；计数和原始证据验收、双均值UP与不利尾部保留、独立科学评审已发。不是Pro逐项许可或方向处置。"
+    }
+  ]
 }
