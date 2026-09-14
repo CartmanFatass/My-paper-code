@@ -1,0 +1,25 @@
+{
+  "batch": "LCAC_B01_9411_20260914",
+  "monitor": "/root/lcac_b01_monitor",
+  "active_set": [],
+  "completed": [
+    {
+      "assignment": "LCAC_B01_9411_20260914",
+      "handle": "lcac-b01-s9411-133218a8-20260914",
+      "node": "wsl_4070",
+      "supervisor": "/usr/local/bin/agent-task",
+      "launch_sha": "133218a8e08c29e833b4d549ffd48f00b204bf2e",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3653575,
+      "tmux_active": false,
+      "last_observed": "2026-09-14T03:09:28Z",
+      "next_due": null,
+      "delivery": "terminal_pending",
+      "terminal_event_id": "MONITOR_TERMINAL-LCAC_B01_9411-20260914T030928Z",
+      "output_path": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914",
+      "summary": "summary.json present; final_V.pt, final_Q.pt, episodes.jsonl, rollouts.jsonl present"
+    }
+  ],
+  "notices": []
+}
