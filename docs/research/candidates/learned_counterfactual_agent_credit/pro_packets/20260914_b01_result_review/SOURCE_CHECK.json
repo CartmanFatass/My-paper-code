@@ -1,0 +1,73 @@
+{
+  "observed_published_refs": "631ffab0142b2e548120cd483350472ce124293e\trefs/heads/codex/lcac\nc627c78a7a760bbe0e61533ee505702675cb224f\trefs/heads/main\n",
+  "references": [
+    {
+      "path": "docs/research/candidates/learned_counterfactual_agent_credit/LCAC_B01_SCIENCE_CARD_20260914.md",
+      "commit_sha": "22260a8e3a5b352412e34b25a779f299ab781f54",
+      "bytes": 12808,
+      "sha256": "90a1bc77e99ed39137493003b39b75aebd4a3c7086c3a538e32988e910a54a0e"
+    },
+    {
+      "path": "docs/research/candidates/learned_counterfactual_agent_credit/LCAC_B01_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "631ffab0142b2e548120cd483350472ce124293e",
+      "bytes": 7571,
+      "sha256": "8cda2889e8d5ba737a544e48ca5168751281c3c2adfe906cd936ca708875b564"
+    },
+    {
+      "path": "docs/research/candidates/learned_counterfactual_agent_credit/LCAC_B01_INTAKE_20260914.md",
+      "commit_sha": "631ffab0142b2e548120cd483350472ce124293e",
+      "bytes": 3380,
+      "sha256": "11b1875bf1d4e6e46b7faea996daca83ee430a1d0e8921ca1534863dc8565de1"
+    },
+    {
+      "path": "docs/research/candidates/learned_counterfactual_agent_credit/evidence/b01_seed9411/raw/summary.json",
+      "commit_sha": "631ffab0142b2e548120cd483350472ce124293e",
+      "bytes": 4265,
+      "sha256": "be417110293b5a54594e260dc49a5cf72b1c751b3bfe7a18cf0407e709dc1e6a"
+    },
+    {
+      "path": "docs/research/candidates/learned_counterfactual_agent_credit/evidence/b01_seed9411/ANALYSIS.json",
+      "commit_sha": "631ffab0142b2e548120cd483350472ce124293e",
+      "bytes": 10638,
+      "sha256": "146e6cd26a972752a0d5ce24c203ce7373fc45ca102fea235f65796911be7a0e"
+    },
+    {
+      "path": "docs/research/candidates/learned_counterfactual_agent_credit/pro_packets/20260914_first_design_review/archive/RESPONSE.md",
+      "commit_sha": "b98a5f084107143fc8650b34a3ff8b06312002fe",
+      "bytes": 11986,
+      "sha256": "04a0eb8bd8cb3874a904921913e343ed40ee96fb3a2e2e5a43e0e501e3eebbf9"
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "c627c78a7a760bbe0e61533ee505702675cb224f",
+      "bytes": 46482,
+      "sha256": "680886536224925216377a4f6ff96c5ffe933fcc036f16f079129887a6c7e68a"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "c627c78a7a760bbe0e61533ee505702675cb224f",
+      "bytes": 46423,
+      "sha256": "8e38bc58532953665b676b0a1c706fa97d80df54a432a21a8fdda1a7d9d5b713"
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "c627c78a7a760bbe0e61533ee505702675cb224f",
+      "bytes": 26454,
+      "sha256": "7d36b45ace079de839cb083fe47039d200e16a7b419b7959e00091c339f54e1c"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "c627c78a7a760bbe0e61533ee505702675cb224f",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "c627c78a7a760bbe0e61533ee505702675cb224f",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c"
+    }
+  ],
+  "raw_result_git_bytes_match_remote_digests": true,
+  "all_reference_commits_reachable_from_observed_published_refs": true
+}
