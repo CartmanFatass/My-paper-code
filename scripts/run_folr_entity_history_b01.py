@@ -22,11 +22,18 @@ def publish(out, summary):
         raise IOError('summary publication/readback mismatch')
 
 
-def add_bank_comparison(summary, generic):
+def add_bank_comparison(summary, generic, require_complete_exposure=False):
     from experiments.candidates.vap_folr_core.entity_history_b01.publication import pair_result
     if generic['status'] == 'incomplete':
         summary['pair_primary'] = None
         summary['pair_primary_unavailable'] = 'Collected Generic arm is incomplete; no BANK-minus-Generic estimate or MEI branch.'
+    elif require_complete_exposure:
+        from experiments.candidates.vap_folr_core.entity_history_b02.binding import complete_exposure
+        if not complete_exposure(generic):
+            summary['pair_primary'] = None
+            summary['pair_primary_unavailable'] = 'Collected Generic arm has wrong complete exposure; no BANK-minus-Generic estimate or MEI branch.'
+        else:
+            summary['pair_primary'] = pair_result(generic, summary)
     else:
         summary['pair_primary'] = pair_result(generic, summary)
 
@@ -41,9 +48,17 @@ def main():
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--generic-summary', type=Path)
     parser.add_argument('--reference-use', action='store_true')
+    parser.add_argument('--fresh-learning', action='store_true')
     parser.add_argument('--retained-checkpoint', type=Path)
     args = parser.parse_args()
-    caps = {'GENERIC_RETAIN': 2700, 'BANK': 300} if args.reference_use else {'GENERIC_RETAIN': 1800, 'BANK': 3000}
+    if args.reference_use and args.fresh_learning:
+        parser.error('--fresh-learning cannot be combined with --reference-use')
+    if args.fresh_learning:
+        caps = {'GENERIC_RETAIN': 3600, 'BANK': 3600}
+    elif args.reference_use:
+        caps = {'GENERIC_RETAIN': 2700, 'BANK': 300}
+    else:
+        caps = {'GENERIC_RETAIN': 1800, 'BANK': 3000}
     if args.cap_seconds != caps[args.arm]:
         parser.error('cap must match the selected object and arm')
     fixed_bank = args.reference_use and args.arm == 'BANK'
@@ -56,16 +71,24 @@ def main():
         binding = (BANK_TRAINING_SEED, BANK_EVALUATION_SEED) if fixed_bank else (GENERIC_SEED, GENERIC_EVALUATION_SEED)
         if (args.seed, args.evaluation_seed) != binding:
             parser.error('seeds must match the selected new use card')
+    elif args.fresh_learning:
+        from experiments.candidates.vap_folr_core.entity_history_b02.binding import (
+            TRAINING_SEED, EVALUATION_SEED)
+        if (args.seed, args.evaluation_seed) != (TRAINING_SEED, EVALUATION_SEED):
+            parser.error('seeds must match the selected B02 fresh-learning card')
     generic = None
     if args.arm == 'BANK':
         if args.generic_summary is None:
             parser.error('BANK requires the technically collected Generic summary')
         generic = json.loads(args.generic_summary.read_text())
-        if generic['status'] not in ('complete', 'incomplete') or generic['arm'] != 'GENERIC_RETAIN':
+        if args.fresh_learning:
+            from experiments.candidates.vap_folr_core.entity_history_b02.binding import require_generic
+            require_generic(generic)
+        elif generic['status'] not in ('complete', 'incomplete') or generic['arm'] != 'GENERIC_RETAIN':
             raise ValueError('BANK requires the technically collected selected Generic arm')
         if args.reference_use:
             require_generic_endpoint(generic)
-        elif (generic['training_seed'], generic['evaluation_seed']) != (args.seed, args.evaluation_seed):
+        elif not args.fresh_learning and (generic['training_seed'], generic['evaluation_seed']) != (args.seed, args.evaluation_seed):
             raise ValueError('different selected seed binding')
     args.out.mkdir(parents=True, exist_ok=True)
     summary = dict(object='FOLR_ENTITY_HISTORY_B01_781201', arm=args.arm,
@@ -80,6 +103,10 @@ def main():
         if fixed_bank:
             summary['training_seed'] = None
             summary['retained_training_seed'] = args.seed
+    elif args.fresh_learning:
+        from experiments.candidates.vap_folr_core.entity_history_b02.binding import OBJECT
+        summary['object'] = OBJECT
+        summary['training_identity_kind'] = 'fresh_unscreened_fit'
 
     def timed_out(signum, frame):
         raise TimeoutError(f'{args.cap_seconds}-second complete arm cap')
@@ -155,9 +182,9 @@ def main():
                 from experiments.candidates.vap_folr_core.entity_history_b01.retained_use import reference_use_result
                 summary['use_primary'] = reference_use_result(generic, summary)
             else:
-                add_bank_comparison(summary, generic)
+                add_bank_comparison(summary, generic, args.fresh_learning)
         publish(args.out, summary)
-        if time.monotonic() - START >= args.cap_seconds:
+        if not args.fresh_learning and time.monotonic() - START >= args.cap_seconds:
             raise TimeoutError('runner publication exceeded the complete arm cap')
     except BaseException as exc:
         summary['status'] = 'incomplete'
