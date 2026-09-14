@@ -58,9 +58,17 @@ one NEW22591/32591 C programme,1024episodes/2048updates,two fixed512/1024snapsho
 private64-world panels AFTER all learning. Total360448ticks; direct paired-change uncertainty
 retains within-world/checkpoint dependence. This concrete within-programme development question
 changed the DM tentative report preference; report remains a close runner-up, with no quantified
-net-value separation. A new native Sol/medium implementation batch is active under this DM;
-[its intake](ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md) records actual progress.
-No new native invocation, technical acceptance or lifecycle disposition is claimed yet.
+net-value separation. Independent Sol/high engineering review found no material issue and9focused
+synthetic checks passed. The sole original source8fd41b61f run is complete and technically accepted:
+324.92s,0.524GiB,all1408episode/2048update rows and direct paired covariance checked. F−C/F−dwell
+are separately UP at512(+.1405118427/+.1191862743J) and1024(+.1132431734/+.0687279633J).
+Designated G_dwell−.0504583109J is DECREASE while later added value remains useful; C rises
+.0835366160→.2110828649, yet later F−dwell has10adverse worlds/worst−.2238660859.
+[Full result](ACVC_CLUSTER_PAIRED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md) and
+[intake](ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md) preserve one-programme/common-world
+claim limits, both checkpoints and all contrary tails. A full independent scientific review follows;
+DM tentatively favors a Portfolio report over another exposure B, with fixed-recipe C-BENCH the
+strongest population-question alternative. No new lifecycle disposition is claimed.
 
 Earlier [PARK knowledge](PARK.md), [reentry judgment](ACVC_REENTRY_INTAKE_20260914.md)
 and [B02 full-review response](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md)

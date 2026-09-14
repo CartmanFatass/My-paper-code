@@ -10,7 +10,7 @@
   "output": "/home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914",
   "monitor": "/root/acvc_paired_exposure_b01_monitor",
   "monitor_record": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914_monitor.json",
-  "state": "accepted_adopted_monitor_resumed",
+  "state": "finished_exit0_collected_checked",
   "scientific_invocations_accepted": 1,
   "planned_command": "/usr/local/bin/agent-task run acvc-paired-exposure-b01-8fd41b61f env HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 bash /home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/experiments/candidates/acvc/cluster_paired_exposure_b01/launch.sh 8fd41b61f3c8d3c70057492a18e619ef0faeda78 /home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914",
   "preparation": {
@@ -20,7 +20,7 @@
     "shell_startup_warnings": "Configured zsh emitted zle/monitor/gitstatus initialization warnings; fetch/worktree commands succeeded with exit0 and full SHA/launcher digest verified."
   },
   "supervisor_acceptance": "Original agent-task run returned exit0 and task started in tmux agent_acvc-paired-exposure-b01-8fd41b61f; no retry",
-  "monitor_metadata": "Preparation App-route attempt incorrectly included prose prefix App and was rejected before delivery; literal UUID corrected. First adoption notice used00:00 placeholder, superseded by actual direct query2026-09-14T15:11:48.9306632Z, running pid3672959. Child then prematurely returned final while running; DM immediately resumed same child/handle and explicitly required real observation until terminal. No background coverage is claimed between ended turns, no duplicate run or observer. All earlier erroneous notices retained as operational metadata.",
+  "monitor_metadata": "Preparation App-route attempt incorrectly included prose prefix App and was rejected before delivery; literal UUID corrected. First adoption notice used00:00 placeholder, superseded by actual direct query2026-09-14T15:11:48.9306632Z, running pid3672959. Child then prematurely returned final while running; DM immediately resumed same child/handle and explicitly required real observation until terminal. No background coverage is claimed between ended turns, no duplicate run or observer. All earlier erroneous notices retained as operational metadata. A second premature running final caused another same-child resume. Final direct terminal notice arrived2026-09-14T15:16:01.3291783Z, exit0 and empty active set. Both observation gaps retained; no native restart.",
   "pid": 3672959,
   "adoption_event": "ACVC_CLUSTER_PAIRED_EXPOSURE_B01/MONITOR_ADOPTED_CORRECTION",
   "observation": {
@@ -44,5 +44,21 @@
     "passed": true,
     "physical_floor_pass": true,
     "schema_version": 1
-  }
+  },
+  "exit_code": 0,
+  "native_wall_s": 324.92,
+  "peak_rss_kib": 549536,
+  "terminal_observed_at": "2026-09-14T15:16:01.3291783Z",
+  "monitor_terminal_event": "acvc-paired-exposure-b01-8fd41b61f-terminal-20260914T151601Z",
+  "monitor_active_set_empty": true,
+  "archive": "temp/directions/acvc/retained/cluster_paired_exposure_b01_20260914/native_output.tar.gz",
+  "archive_bytes": 837148,
+  "archive_sha256": "ccd9595e4573cc4ece0a9eb45fa408a7ea4f89a53d1a37769b7365eaffb9fb22",
+  "supervisor_task_log": "=== Task 'acvc-paired-exposure-b01-8fd41b61f' started at 2026-09-14T23:10:31+08:00 ===\n{\n  \"assessed_at\": \"2026-09-14T15:10:31.646436Z\",\n  \"available_physical_bytes\": 15632191488,\n  \"captured_at\": \"2026-09-14T15:10:31.646174Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15632191488,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\n=== Task 'acvc-paired-exposure-b01-8fd41b61f' exited with code 0 at 2026-09-14T23:15:56+08:00 (Duration: 325s) ===\n",
+  "technical_acceptance": "All1408episode/2048update records, frozen identity/configuration/counts/stage-order/exposure and all endpoint/change vectors checked; direct float64 with independent stdlib mean/SD agreement at absolute1e-14. Native cost_law exact and limits empty.",
+  "supervisor_started_at": "2026-09-14T15:10:31Z",
+  "supervisor_finished_at": "2026-09-14T15:15:56Z",
+  "supervisor_rounded_duration_s": 325,
+  "internal_publication_elapsed_s": 311.58278230100404,
+  "collector_supervisor_uptime_s": 403
 }
