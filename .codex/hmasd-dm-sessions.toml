@@ -11,7 +11,7 @@ heartbeat_state = "MISSING"
 heartbeat_target = "unassigned"
 
 main_writer = "unclaimed"
-main_writer_event = "MGTAP_FIXED8253_CURRENT_REVIEW_ACTUALLY_ACCEPTED_20260914_RELEASED"
+main_writer_event = "MGTAP_OLD_LR_REMOTE_CLEANUP_VERIFIED_20260914_RELEASED"
 main_writer_turn = ""
 owner_instruction = "各方向可以先暂停 手中的任务和实验不要停止 完成后写handoff"
 owner_pause_record = "docs/research/portfolio/decisions/2026-09-14-owner-pause-after-inflight.md"
