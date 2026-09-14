@@ -10,7 +10,7 @@
   "supervisor_record": "/home/wu/.agent-tasks/acvc-cluster-b03-091c6725b",
   "planned_command": "/usr/local/bin/agent-task run acvc-cluster-b03-091c6725b env HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 bash /home/wu/hmasd-worktrees/acvc-cluster-b03-091c6725b/experiments/candidates/acvc/cluster_deployment_b03/launch.sh 091c6725b149cd2dfa9665408cabee17b8f958e3 /home/wu/hmasd-worktrees/acvc-cluster-b03-091c6725b/temp/directions/acvc/exp/cluster_deployment_b03_20260914",
   "monitor": "/root/acvc_b03_monitor",
-  "launch_state": "planned_not_submitted",
+  "launch_state": "accepted_running_monitor_adopted",
   "retained_source": "Remote detached worktree HEAD and corrected launch SHA256 verified; bash syntax passed. Configured zsh login shell used for lazy-fetching worktree creation after non-login preparation was terminated. No actual scientific admission/invocation yet.",
   "watchdogs_s": {
     "inner": 1800,
@@ -20,5 +20,23 @@
   "scientific_invocations_selected": 1,
   "native_planning_estimate_s": 300,
   "support_planning_estimate_s": 1200,
-  "cost_coverage": "Plans are prospectively revisable; full preparation/provider/agent/support cost UNKNOWN. Earlier own non-login fetch and worktree lazy-fetch stalls retained as preparation failures, no scientific invocation."
+  "cost_coverage": "Plans are prospectively revisable; full preparation/provider/agent/support cost UNKNOWN. Earlier own non-login fetch and worktree lazy-fetch stalls retained as preparation failures, no scientific invocation.",
+  "accepted_at": "2026-09-14T13:14:07Z",
+  "launch_receipt": "Task acvc-cluster-b03-091c6725b started in tmux session agent_acvc-cluster-b03-091c6725b; /home/wu/.agent-tasks/acvc-cluster-b03-091c6725b/task.log",
+  "admission": {
+    "assessed_at": "2026-09-14T13:14:06.230887Z",
+    "available_physical_bytes": 15628996608,
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "effective_available_bytes": 15628996608
+  },
+  "monitor_adoption": {
+    "pid": 3671264,
+    "event": "ACVC_CLUSTER_DEPLOYMENT_B03/acvc-cluster-b03-091c6725b",
+    "tmux_active": true,
+    "at": "2026-09-14T13:14:34Z",
+    "state": "running"
+  },
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-14/20260914-acvc-001.json",
+  "main_accepted_source": "b7d540f06"
 }
