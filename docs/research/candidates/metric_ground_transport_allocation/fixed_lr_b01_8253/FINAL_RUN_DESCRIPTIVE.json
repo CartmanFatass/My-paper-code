@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "MGTAP_FIXED_LR_B01",
+      "arm": "COND",
+      "n": 1,
+      "mean": 0.12336686392942982,
+      "sample_sd": null,
+      "min": 0.12336686392942982,
+      "max": 0.12336686392942982,
+      "runs": {
+        "8253": 0.12336686392942982
+      }
+    },
+    {
+      "task": "MGTAP_FIXED_LR_B01",
+      "arm": "DENSE",
+      "n": 1,
+      "mean": 0.14929179147549604,
+      "sample_sd": null,
+      "min": 0.14929179147549604,
+      "max": 0.14929179147549604,
+      "runs": {
+        "8253": 0.14929179147549604
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "MGTAP_FIXED_LR_B01",
+      "arm": "COND",
+      "baseline": "DENSE",
+      "summary": {
+        "n": 1,
+        "mean": -0.02592492754606622,
+        "sample_sd": null,
+        "min": -0.02592492754606622,
+        "max": -0.02592492754606622
+      },
+      "differences": {
+        "8253": -0.02592492754606622
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

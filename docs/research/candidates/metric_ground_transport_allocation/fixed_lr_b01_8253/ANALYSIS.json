@@ -1,0 +1,46 @@
+{
+  "object": "MGTAP-FIXED-LR-B01",
+  "source": "390aa2711245a10c13af7fbd0d1a24ff3237d5da",
+  "mean_J_by_arm": {
+    "COND": 0.12336686392942982,
+    "DENSE": 0.14929179147549604
+  },
+  "delta_J": -0.025924927546066238,
+  "conditional_panel_se": 0.002797864052725455,
+  "positive_worlds": 2,
+  "negative_worlds": 30,
+  "zero_worlds": 0,
+  "positive_indices": [
+    17,
+    24
+  ],
+  "positive_values": [
+    0.006612496099347498,
+    0.010973520356019284
+  ],
+  "reading": "COND_ADVERSE",
+  "independent_new_training_pairs": 1,
+  "training_run_sd": null,
+  "raw_episode_rows": 576,
+  "raw_rollout_rows": 256,
+  "total_exposure": {
+    "fits": 2,
+    "train_episodes": 512,
+    "evaluation_episodes": 64,
+    "train_team_ticks": 131072,
+    "evaluation_team_ticks": 16384,
+    "rollouts": 256,
+    "adam_calls": 1024,
+    "total_team_ticks": 147456,
+    "actor_row_uses_collection_evaluation_replay": 3358720
+  },
+  "body_fit_sum_seconds": 177.50624078302644,
+  "study_body_wall_seconds": 177.51259447296616,
+  "whole_command_wall_seconds": 178.86,
+  "peak_rss_kib": 568040,
+  "peak_rss_mib": 554.7265625,
+  "new_command_exit": 0,
+  "prior_lr_study_plus_this_native_wall_seconds": 836.88,
+  "resource_scope": "Native-command walls only; not lifetime or support/provider totals",
+  "checks": "all raw counts/bindings/finite learner and branch displacements/final scores/signs/primary recomputed from original files; no new learning"
+}
