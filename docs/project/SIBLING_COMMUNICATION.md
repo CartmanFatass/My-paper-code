@@ -9,6 +9,11 @@ not inherit automatically from a custom subagent role file.
 
 Root is the user entry. DM owns its entire direction lifecycle; Clerk coordinates and records.
 Direction Pro Convergence is the independent scientific Reviewer; Portfolio supplies user reports and delegated vacancy selection.
+DM owns direct Portfolio scientific exchanges, including reopening questions, full-answer intake
+and reasoned responses; Clerk coordinates shared conversation access and records under
+CLERK_OPERATIONS.md's Direct DM–Portfolio alignment contract. Use one executor per request,
+existing Portfolio binding and DM-owned browser/Transport; do not route science through Clerk
+summaries. An archived DM can be resumed for focused discussion without reopening scientific work.
 Use send_message_to_thread for actionable DM-to-Clerk and Clerk-to-DM handoffs. A final alone does
 not deliver to another independent task. Messages give event/assignment/evidence revision, actual
 DM decision, next owner/action and real dependency. Keep full science in the intake/review record.

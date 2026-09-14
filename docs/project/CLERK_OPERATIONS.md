@@ -52,6 +52,53 @@ request through full answer intake, selected-task creation and verification of t
 
 ## PARK, archival and vacancy replacement
 
+### Direct DM–Portfolio alignment (OWNER_DIRECT 2026-09-14)
+
+The relevant DM owns scientific communication with Portfolio: authoring questions, direct Send
+or its own Transport, reading complete answers, responding to disagreements and updating the
+actual direction decision. This includes reopening and vacancy-related science, without Root or
+Clerk permission. Clerk owns capacity facts, request/executor coordination, archives and routing;
+it must not substitute its scientific summary for the DM's conversation. Direction Pro remains
+the independent scientific Reviewer; Portfolio does not approve routine objects or launches.
+
+Both sides work from the same current evidence: direction/intake/PARK revision, actual lifecycle
+and work, alternatives already considered and rejected, reasons, unresolved questions, resource
+and owner constraints. Supply accessible relevant contents or fixed source links, not just a local
+path Portfolio cannot read. Preserve the exact prompt and complete answer with conversation/request
+identity and the DM's response in the existing decision records. A Clerk extract is an index, not
+the complete scientific handoff. Check material intervening DM decisions before applying advice.
+The request author includes this authority/information contract in the Portfolio conversation
+when first applying it or when it changes; editing local specifications alone does not update Pro.
+Subsequent exchanges carry relevant changes rather than repeat full history. DM sends its applied
+decision or substantive dissent back to that conversation and the archive/next action to Clerk;
+there is no need to solicit another answer for a factual decision update.
+
+Portfolio must address the latest DM reasons when recommending a parked direction, identify what
+research judgment or objective should change and why, and give a useful next research objective.
+An unresolved question alone does not rebut PARK. New data, a new customer or a different mechanism
+is not required: an explicit reasoned reassessment can suffice. DM directly accepts, refines or
+disagrees with the recommendation, stating its substantive reason and actual next action; it
+must not silently reapply the old PARK or ask Portfolio for permission to design an object.
+
+If an archived direction is proposed, route the full exchange to its existing DM (unarchive if
+needed) for this focused discussion; do not create a replacement DM merely to reread the same
+PARK. Recover a new DM only if the existing task is unavailable, carrying the full exchange.
+Discussion alone neither reopens research nor occupies an execution slot; preserve the single
+vacancy reservation while selection is unresolved. A genuine new direction receives a full-lifecycle
+DM assignment. Once a DM selects continuation, it proceeds through object design, proportionate
+review, implementation, execution and intake in that task without a second dispatch/authorization.
+"No experiment preselected" means the DM selects it; it is not a documentary-only assignment.
+
+Return a declined recommendation and its reasons directly to Portfolio in the same vacancy
+exchange. Portfolio must incorporate that response when selecting another option or revising its
+recommendation. Do not recycle an unchanged direction/object/reopening rationale by opening a new
+vacancy request or task. This is event deduplication, not a cooldown, permanent exclusion or an
+empirical novelty gate. A material new rationale can be discussed directly by the same DM.
+No mutual approval or mandatory consultation precedes ordinary DM work or PARK; unresolved
+scientific disagreement is recorded, the DM retains its lifecycle judgment, and Portfolio can
+select another direction. Clerk counts actual work separately from occupancy and never describes
+identity checks or an unselected re-entry intention as research execution.
+
 On scientific PARK, DM writes docs/research/candidates/<direction>/PARK.md, a concise knowledge
 handoff in Chinese: why stop now and alternatives considered; what the research teaches, supported
 and adverse findings with evidence links; reusable code/data/models and their limits; unresolved
@@ -85,8 +132,9 @@ unrecoverable, create/rebind one with preserved provenance; never duplicate a po
 request. A browser timeout alone is not nonacceptance. Keep one executor per request.
 
 Portfolio selects replacements and supplies rationale, prior evidence, initial useful research
-objective and first DM assignment within the vacant slots/current resources. Clerk reads the full
-answer, records its application and creates those independent tasks via create_thread using the
+objective and full-lifecycle DM assignment within the vacant slots/current resources. Apply direct
+DM–Portfolio alignment above for existing directions; reuse their tasks. For genuinely new or
+unrecoverable direction tasks, Clerk reads the full answer, records its application and uses create_thread with the
 HMASD project, model gpt-6-astra and thinking max. Give each DM full lifecycle authority, current
 controls, evidence/PARK lessons and Clerk return route. Follow tool requirements for project lookup
 and setup; reuse direction authoring branches. Pending clientThreadId reserves a slot but is not

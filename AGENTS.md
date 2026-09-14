@@ -47,10 +47,18 @@ coordinates shared infrastructure, owner discovery and operation ordering under 
 cross-task impact alone does not route an issue to Root. Root handles a concrete shared policy/
 control-code change or actual user choice outside delegation. Follow SIBLING_COMMUNICATION.md;
 routine repair traffic does not need Root messages or acknowledgement.
+OWNER_DIRECT 2026-09-14: relevant DMs own direct scientific dialogue with Portfolio, including
+vacancy/reopening questions and responses; Clerk coordinates capacity, records and routes only.
+Both sides use the latest DM decision/evidence and complete exchange. Portfolio must address the
+actual PARK rationale; DM records its response and continues its selected work without a second
+assignment. Reuse existing DMs; never recycle unchanged reopening advice through new tasks.
+CLERK_OPERATIONS.md, Direct DM–Portfolio alignment, defines the shared information contract.
+
 **Portfolio** supplies the user-facing report and owner-delegated vacancy selection. It summarizes DM-owned conclusions,
 lifecycle, actual work, costs, uncertainty and options. It does not approve ordinary DM research. OWNER_DIRECT 2026-09-13, clarified 2026-09-14, delegates filling genuine
 PARK/CLOSE vacancies up to three occupied/reserved independent DM slots: Clerk requests Portfolio
-selection directly through the Codex in-app browser, then creates selected Astra/max DM tasks.
+selection directly through the Codex in-app browser, with relevant DMs owning scientific dialogue;
+Clerk reuses existing DMs or creates genuinely new/unrecoverable Astra/max DM tasks.
 CLERK_OPERATIONS.md governs notification, PARK knowledge records, safe archival and deduplication.
 Other global adjustments require an explicit owner request.
 

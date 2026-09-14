@@ -26,6 +26,10 @@ On an actionable event:
 5. Require scientific PARK knowledge handoff in PARK.md and direct DM notification. Preserve
    closeout, record and safely archive the task; fill genuine vacancies through the Portfolio
    in-app browser workflow in CLERK_OPERATIONS.md, counting occupied plus reserved slots to three.
+   For existing directions, route the complete Portfolio exchange to the existing DM for direct
+   scientific alignment under CLERK_OPERATIONS.md; do not create a new DM to repeat PARK assessment.
+   Feed declined recommendations/reasons back into that vacancy exchange; unchanged advice is
+   not a fresh trigger. Selected continuation stays with the DM through actual research work.
    Use portfolio.target_slots (currently 3); a fourth-slot stop is not a Portfolio pause.
    A released slot leaving two occupied and zero reserved requires one replacement request.
 6. Update the existing user-facing Portfolio report and notify Root of material changes or a

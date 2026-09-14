@@ -1,11 +1,11 @@
 ---
 name: hmasd-pro-research-prompt-author
-description: "Use when DM authors an independent scientific review request, or Clerk publishes an explicitly owner-requested Portfolio consultation for fixed GitHub task delivery through the author-owned native Agentify Transport subagent, with explicit author, parent and executor routing."
+description: "Use when DM authors an independent scientific review request, a DM conducts direct Portfolio scientific dialogue, or Clerk publishes a scoped Portfolio consultation for fixed GitHub task delivery through the author-owned native Agentify Transport subagent, with explicit author, parent and executor routing."
 ---
 
 # HMASD Pro Research Prompt Author
 
-Owner-delegated Clerk vacancy requests may instead use the direct Codex in-app browser route
+DM-owned Portfolio scientific exchanges and Clerk-owned capacity requests may use the direct Codex in-app browser route
 in CLERK_OPERATIONS.md and hmasd-portfolio-task. The GitHub/native-Transport requirements below
 apply to requests using this delivery workflow, not as gates on that direct vacancy route.
 
@@ -15,7 +15,7 @@ Read docs/project/CLERK_OPERATIONS.md for event handling and writes. DM/Pro reta
 judgment. Clerk routes missing science or complex engineering repair to the relevant Astra DM;
 it never turns a helper failure into a scientific stop or adds a Root ACK gate.
 
-Portfolio and EM requests use GitHub delivery. Preserve accepted request content
+Requests choosing this delivery workflow use GitHub delivery; direct Portfolio dialogue may use the supported browser route. Preserve accepted request content
 and reconcile existing Send state before continuation.
 See docs/project/GITHUB_RESEARCH_COLLABORATION.md.
 
@@ -50,7 +50,7 @@ returns its ready handoff; it does not dispatch Transport. A command may already
 transport of the completed DM-authored request, so no extra planning vote is needed.
 For a command that includes dispatch, use the following sequence.
 
-The dispatch owner (DM for direction nodes; Clerk for all new Portfolio requests under hmasd-portfolio-task)
+The dispatch owner (DM for direction nodes; the relevant DM for Portfolio science; Clerk for mechanical capacity requests under hmasd-portfolio-task)
 creates a new native Luna/high Transport child for an independent request batch before rendering,
 using fork_turns=none; reuse is only for the same request's preparation/recovery/closeout
 and the transport role/skill with minimal context. Supply source_thread_id=parent_thread_id=the author's

@@ -1,6 +1,6 @@
 ---
 name: hmasd-portfolio-task
-description: Use when Clerk prepares Portfolio reports, handles vacancies after DM PARK/CLOSE, or executes owner-requested overall research planning.
+description: Use when DMs communicate directly with Portfolio about direction or reopening choices, or Clerk coordinates Portfolio reports and vacancy selection.
 ---
 
 # Portfolio reporting and vacancy selection
@@ -9,6 +9,17 @@ DM owns the direction lifecycle; Pro Convergence independently reviews its scien
 reports current knowledge and selects replacements under the owner's three-slot vacancy delegation.
 Follow docs/project/CLERK_OPERATIONS.md for PARK.md, direct DM notification, safe task archival,
 occupied/reserved slot counting, direct Codex in-app browser requests and new Astra/max DM creation.
+
+Relevant DMs own the scientific conversation with Portfolio, using their browser or own Transport;
+Clerk coordinates capacity, shared access, complete archives and routes. Apply the shared contract
+in CLERK_OPERATIONS.md, Direct DM–Portfolio alignment. Both sides receive current DM decisions,
+PARK reasons, considered alternatives, accessible evidence and constraints. Preserve exact prompts,
+full answers and DM responses; local summaries alone do not constitute alignment.
+Portfolio reopening advice must address why the latest PARK judgment should change. DM directly
+accepts/refines/disagrees with reasons and actual next work. No new data or mutual approval is
+required. Reuse the existing DM for a parked direction, and feed declined advice into the same
+vacancy exchange rather than create another task/request with unchanged rationale. Full-lifecycle
+continuation includes DM object selection and execution, not just a re-entry document.
 
 Before a vacancy request, use current affected DM handoffs/intakes and PARK knowledge records;
 include lessons, failed alternatives, useful assets, claim limits and actual resources. Do not
@@ -20,8 +31,9 @@ slots and complete consequences rather than resend on a timeout.
 Clerk can use supported CUA iab controls directly for this request; native Transport, Agentify
 and fixed GitHub packet delivery are not prerequisites. Verify actual Pro/model/login, preserve
 prompt and complete response, reconcile uncertain Send on the same request. Use Portfolio's
-selected replacements to create independent Astra/max DMs under current slot/resource authority;
-Clerk does not invent replacement science. Report recommendations and actual application separately.
+selected replacements to reuse existing DMs or create genuinely new/unrecoverable independent
+Astra/max DMs under current slot/resource authority;
+Clerk does not invent replacement science; existing directions reuse their DM after direct alignment. Report recommendations and actual application separately.
 
 Other global changes require explicit owner scope. Generic reporting/advice is not additional
 execution authority. No Portfolio approval is needed for routine DM objects, recasts or lifecycle.

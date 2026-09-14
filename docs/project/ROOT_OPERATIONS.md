@@ -73,7 +73,11 @@ actual work/producer, cost and uncertainty, next DM action, and optional choices
 Report statements distinguish observed/applied facts from recommendations. Genuine vacancies
 trigger the owner-delegated three-slot replacement workflow, not per-object approval.
 
-Clerk may request and execute scoped Portfolio vacancy selection under the current owner delegation.
+Relevant DMs own direct scientific dialogue with Portfolio under CLERK_OPERATIONS.md's
+Direct DM–Portfolio alignment contract. Clerk initiates capacity requests and coordinates their
+execution; direction judgments and responses travel directly between DM and Portfolio. Reuse the
+existing DM for proposed reopening; complete exchanges and latest DM reasons must remain aligned.
+A selected continuation includes object selection and execution, without another authorization.
 Other cross-direction changes require an explicit owner request.
 A request to see a report or recommendations does not by itself authorize implementation.
 Clerk can prepare factual materials; Root interprets the requested scope and routes the work.
