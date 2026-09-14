@@ -9,8 +9,9 @@ The [six-programme fixed1024 C01 card](ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CAR
 and first iid training/evaluation draw are now frozen. Final private C/F/own-dwell panels
 address expected added value under the declared law, with simultaneous df5 working-model
 t intervals and explicit actual-calibration limits. [Current intake](ACVC_CLUSTER_FIXED_RECIPE_C01_INTAKE_20260914.md)
-records the actual complete Sol/medium implementation assignment. Source acceptance,
-independent review and all six original native invocations remain unperformed.
+records the complete Sol/medium implementation return and13 passing focused checks.
+The exact staged high-risk diff is now under independent Sol/high review. Source acceptance
+and all six original native invocations remain unperformed.
 The original independent ACVC DM owns ordinary research, implementation, engineering acceptance,
 launch/observation, scientific intake and reports. Portfolio owns final direction-level
 CONTINUE/recast/PARK/CLOSE/reopening. Direction Pro supplies independent scientific review;
