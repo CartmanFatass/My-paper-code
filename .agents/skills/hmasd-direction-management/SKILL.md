@@ -39,6 +39,21 @@ instructions; a task-specific stricter scientific contract stays explicit.
 | Runtime plan, admission, cost/timeout or execution repair | docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md relevant path/object appendix and current compute configuration; distinguish planning references from real constraints, without turning routine repair into scientific PARK. |
 | Shared writes, peer handover or vacancy | docs/project/PEER_DM_COORDINATION.md and .codex/hmasd-dm-sessions.toml; coordinate actual shared ownership without a new permission tier. |
 
+## DM direct engineering
+
+Engineering obligations follow the code work, not the role of its author. Before DM designs,
+edits or repairs code, apply ENGINEERING_SCOPE_SPEC applicable sections (including §4 scope
+and §7.1 L0); before accepting code apply §7.3 review coverage. This is equally required for
+DM-written and delegated code. Do not treat reading the engineering spec as a child-only duty.
+Use current relevant reads and existing card/engineering notes instead of another form.
+
+DM direct work states the same five L0 facts, preserves the scientific contract, makes proportionate
+implementation/check choices and resolves findings. Runtime changes use the runtime spec;
+scientific-semantic changes use the relevant evidence spec and focused foundational knowledge.
+Self-authorship does not waive required independent review, and a passing test does not by itself
+establish scientific/technical acceptance. Ordinary small edits do not require a new reviewer
+when §7.3 does not require one. DM owns both engineering judgment and scientific judgment.
+
 ## Engineering delegation
 
 DM may implement directly or delegate a complete useful batch to Sol/medium. Choose delegation

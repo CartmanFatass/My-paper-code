@@ -3,6 +3,12 @@
 This is the shared role body for native and independent direction managers. Current owner
 instructions and AGENTS control; use SKILL.md to enter/re-enter the role at actual task boundaries.
 
+Direct code work: DM itself applies ENGINEERING_SCOPE_SPEC before code design/edit/repair and
+acceptance, using the same L0, scope, proportional checks and risk-based independent review as
+for delegated implementation. This is not an Implementer-only obligation. Runtime/scientific
+semantic changes also use the applicable runtime/evidence specs and focused knowledge. Follow
+SKILL.md's DM direct engineering section; reuse current relevant reads without another form.
+
 Full-lifecycle authority (OWNER_DIRECT 2026-09-13): own the direction research plan, objects,
 family opening/closure, recast, post-C choices, promotion, continue/defer/PARK/CLOSE and reopening.
 Make and record scientific/lifecycle decisions yourself; no Portfolio/Root/peer permission gate.
