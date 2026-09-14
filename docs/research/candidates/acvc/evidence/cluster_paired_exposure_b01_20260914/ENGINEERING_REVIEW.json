@@ -1,0 +1,29 @@
+{
+  "event": "ACVC_CLUSTER_PAIRED_EXPOSURE_B01_REVIEW_20260914_01",
+  "reviewer": "/root/acvc_paired_exposure_b01_review",
+  "reviewer_app_task": "01a0a070-9bf4-75b0-897d-eb62e578aeb7",
+  "role": "independent Sol/high engineering Reviewer",
+  "parent": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "reviewed_head": "0f2ebeb4aea0476aab9e5a15a2b7fcba50268565",
+  "reviewed_working_bytes_sha256": {
+    "scripts/run_acvc_cluster_paired_exposure_b01.py": "198f83103139330e4272cb5fe4bf4729233fe6ddfa6aa7b40dfb15a237942373",
+    "experiments/candidates/acvc/cluster_paired_exposure_b01/protocol.py": "24e45e224956a3c365914bfe1d32659b676735a4c0939c2d92c305953c8bf90f",
+    "experiments/candidates/acvc/cluster_paired_exposure_b01/launch.sh": "8c4bc58fd1dc7e1e608bf312411e34157d769e599fe2139a0ec5a28844a31854",
+    "tests/experiments/candidates/acvc/cluster_paired_exposure_b01/test_protocol.py": "2470cd959d0b008df4e496eb53fdc91833972430e245d56aeeb8323ec0a617a1",
+    "tests/experiments/candidates/acvc/cluster_paired_exposure_b01/test_runner.py": "6e3435294225f1aa17616a030b386fc3b1c01d3cfd9b06fb86a69443d4cbecef"
+  },
+  "findings": [],
+  "finding_summary": "No material finding. Read-only independent review, not scientific validity or DM acceptance.",
+  "coverage": [
+    "1024episodes/512rollouts/2048updates; midpoint after rollout255 fourth update; immutable snapshot with no continued-learning read",
+    "all training completes before six separate private C/F/dwell panels in stage-major512/1024 order; unchanged common evaluation stream addressing",
+    "stage/identity/reset completeness and direct float64 covariance-preserving changes, inclusive plus/minus .01 thresholds",
+    "1408rows/360448ticks/two snapshots/six loads/seven constructors; partial publication and actual exit",
+    "adjacent memory admission; original output refusal; inner1800/outer1860+10 safeguards; GNU wall/RSS/exit; LF-pinned launcher",
+    "542 non-test runtime lines, entry362; no unselected scope facility; shared source unchanged"
+  ],
+  "checks": "Final r5 nine focused synthetic tests passed1.83s, with all earlier invocations and repair reasons retained; bash-n/compile/order/whitespace passed. Reviewer did not repeat tests or execute a scientific probe.",
+  "limitations": "Synthetic orchestration/reduction interfaces only. Real-native output, counts/exposure and scientific interpretation require actual run and intake. DM ANALYZE.py outside independent review.",
+  "dm_response": "Accepted after reading full report, confirming reviewed working-byte digests, reading reachable orchestration and confirming shared runner diff empty versus914a3d0e7. No material finding requires repair. New analysis AST checked without execution; all result acceptance remains pending original run.",
+  "cleanup": "Creator-owned four scratch directories/four pyc/two empty wrong evidence dirs retained after automatic review rejected cleanup before execution: blocked by policy. Exact paths in engineering_check.txt; no bypass."
+}
