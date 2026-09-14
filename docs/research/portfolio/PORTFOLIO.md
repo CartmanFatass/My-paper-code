@@ -10,11 +10,11 @@
 | 方向 | 已知科学位置 | 当前工作与席位 |
 | --- | --- | --- |
 | [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B13真实学习与nearest收益保留，sampled对greedy−0.019784；modal512行已测结局相同、恢复利益/损害和B11缺失保留。完整151行Portfolio判断接受新独立实例仍有价值，当前选择可逆PARK。 | 已应用PARK并释放1席；不CLOSE/RECAST，不新增fit。[完整裁决与回应](../candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/INTAKE.md)、[PARK知识与原始资产](../candidates/roster_consistent_latent_exploration/PARK.md)已保全。原DM已完成本次唯一空缺接续及直接交接，无RCLE科学producer；源码和558文件恢复已保全，历史四个被拒删除路径作为清理例外保留。 |
-| [ACVC](../candidates/acvc/DIRECTION.md) | Longer-C B01双UP：F−C+.12926346J、F−dwell+.06355783J；F−dwell15/64不利、最差−.18593。完整独立评审已读并回应，无失效缺陷；保留强dwell、四个各自限定的终点、C01资格和失败家族，不升级总体/因果/部署结论。 | 占用1席，CONTINUE / MEDIUM / recasts2。上一原始调用296.30s、全部证据归档且远端清理完毕。DM选[新配对暴露B01](../candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md)：同一新1024轮C程序，固定512/1024快照，全部训练后六私有面板，360448ticks；检查F增量如何变化，保留端点读数及配对相关性。报告为接近备选，close-call已公开；新Sol/medium实现子任务实际开工，尚无新native或方向处置。 |
+| [ACVC](../candidates/acvc/DIRECTION.md) | [配对暴露B01](../candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md)已完整验收：512/1024两个固定端点的F−C/F−dwell均分别UP；G_dwell−.05045831J为DECREASE，后期F−dwell仍+.06872796J，但10/64不利、最差−.22386609。共同世界上C从.08353662升到.21108286；一次程序/两个相关快照，不作总体、纯因果或安全推断。旧C01资格和全部失败家族保留。 | 占用1席，CONTINUE / MEDIUM / recasts2。原始调用324.92s/0.524GiB、1408episode/2048updates/360448ticks；两个模型与全部记录已校验归档，远端执行资源清理完毕。[完整科学intake](../candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md)与中文简报已发布。独立科学请求于15:33:12Z接受一次Send，完整答复待回；DM暂倾向报告，固定配方C-BENCH为最强替代，尚无新实验或方向处置。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 对称有限选率双方均选1e-4；全新8252主量+0.023704897713093642 J，COND_ABOVE_MEI。一次选择/一对最终训练，历史混合符号和DENSE默认保持；不声称稳定排序或调参收益。 | 占用1席。8拟合/589824ticks/4096Adam已完成，658.02s、exit0。完整166行结果审查和139行Portfolio裁决已读；[全文与DM回应](../candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md)已应用CONTINUE，下一目标为固定1e-4新配对，尚无新卡/seed/native启动。完整归档18522字节及原错误回执保留；实际提问仅标题，模型自行找到固定报告/材料清单。当前会话已释放给下一作者RCLE；三席不变。 |
 | [FOLR](../candidates/vap_folr_core/DIRECTION.md) | B03完整比较Generic4.92594、BANK-1.71078，差值-6.63672；B02差值-4.83086单独保留。两次完整学习与评估实例均偏向Generic，不声称稳定排名或实体历史普遍无用。 | 占用1席，CONTINUE / MEDIUM。[完整116行澄清与DM回应](../candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/INTAKE.md)唯一选择增强持久程序对新训练未增强Generic；撤回内部A-Z执行选择，不增加第三臂。共用actor192741参数已通过5测试及独立Sol/high审查，保留对103173参数Generic的容量/归因限制。[新B01卡](../candidates/vap_folr_core/FOLR_ENTITY_HISTORY_AUGMENTATION_B01_SCIENCE_CARD_20260914.md)已定781601/1781601、两臂5000/4969/128；完整learner/runner/checkpoint实现cf1efd77c已完成，11项合成检查通过；独立Sol/high完整路径审查正在进行，原DM负责处理发现及技术接受。无新native启动。Portfolio科学会话已释放；完整输入、原冲突答复及最终澄清已保全，无FOLR提供方producer或恢复待办。 |
 
-实际为3占用、0预留、0空缺。完整185行Portfolio裁决已落实为原ACVC DM的实际B03对象工作，原有同一个预留转为占用；没有重复任务或第四席。ACVC随后已实际完成B03及其技术验收，当前producer为独立科学评审。RCLE继续其已应用PARK和本次交接责任，前次CONTINUE已真实执行为B13。
+实际为3占用、0预留、0空缺。完整185行Portfolio裁决已落实为原ACVC DM的实际B03对象工作，原有同一个预留转为占用；没有重复任务或第四席。ACVC随后已完成B03、longer-C和配对暴露B01及技术验收，当前producer为配对结果的独立科学评审。RCLE继续其已应用PARK和本次交接责任，前次CONTINUE已真实执行为B13。
 停止第四个方向限制扩容，不停止现有研究或真实空缺的合规补位。旧报告的 UCOPE/LCAC/ACVC 工作集和
 RCLE/MGTAP/FOLR 归档表已经过期，不能用来判断现在是否“开始后直接结束”。
 
@@ -37,6 +37,8 @@ afb647d0ddf7522ad0e0e99162a54403ede21c43；此前 E01 审查、前次 CONTINUE �
 Portfolio 的新决定前瞻应用，不擅自重写结果或批量重启旧方向。
 
 ## 当前交接与成本口径
+
+ACVC已知五个clustered开发学习程序（K/B01、B02、B03、longer-C、paired-exposure）的原生wall合计1114.44s，3584训练episode、1152评估episode、7168更新、1212416team ticks。这只是已列调用的资源合计；五个学习程序含不同暴露、六个限定快照，不合并为统计确认。此前其他家族及全部支持/provider/agent累计成本仍未知，不能把1114.44s当作方向全部成本。
 
 FOLR 请求2026-09-14-folr-portfolio-direction-reconciliation-01已完成并应用 CONTINUE；
 完整答复保全于4776103de4f55beaee610c52506112651bfaed04。RCLE 请求

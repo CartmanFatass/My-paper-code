@@ -11,7 +11,7 @@ heartbeat_state = "MISSING"
 heartbeat_target = "unassigned"
 
 main_writer = "unclaimed"
-main_writer_event = "ACVC_PAIRED_REVIEW_PROVIDER_ACCEPTED_20260914_RELEASED"
+main_writer_event = "ACVC_PAIRED_RESULT_PORTFOLIO_REPORT_REFRESH_20260914_RELEASED"
 main_writer_turn = ""
 
 [retired_clerk]
