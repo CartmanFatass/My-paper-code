@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "{\n  \"source_sha\": \"15eaa7ea655a0f42a0ec3986927487892bdce212\",\n  \"cwd\": \"/home/wu/hmasd-worktrees/rcle-b12-15eaa7ea6\",\n  \"test_exit\": 0,\n  \"test_wall_s\": 3.1241063709603623,\n  \"stdout\": \".....                                                                    [100%]\\n5 passed, 7 deselected in 2.58s\\n\",\n  \"stderr\": \"\",\n  \"scratch_removed\": true,\n  \"control_exists\": true,\n  \"out_exists\": false\n}\n",
+  "stderr": ""
+}

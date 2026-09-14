@@ -30,8 +30,7 @@ PARK, the complete independent-review response, adverse service/recovery evidenc
 This prospectively revises the earlier value judgment; it does not change B10's observation
 or establish learned superiority. The current observed-service preference remains fixed greedy.
 
-The same DM proceeds through B11 engineering, accepted remote execution and full intake;
-the original handoff's lack of a preselected object is not a documentary-only stop.
+The same DM completed B11 execution/failure intake and D1 collection and proceeds through the explicitly selected B12; the original handoff's lack of a preselected object is not a documentary-only stop.
 One independently generated final1024 fit and four512 panels are fixed; no run has yet
 been accepted at this checkpoint. Both exact-recipe HOLDs, historical
 recasts and UNKNOWN costs remain. Portfolio admitted one UCOPE-vacancy replacement under
