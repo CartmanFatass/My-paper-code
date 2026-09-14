@@ -1,5 +1,29 @@
 # Direction degraded_incumbent_shadow_handover: degraded incumbent shadow handover
 
+## Current DM decision: one receipt-use ablation B09 — 2026-09-14
+
+**CONTINUE under OWNER_DELEGATED authority.** The new independent DM read the current
+evidence and proposed direction PARK, then accepted an independent review's material
+value disagreement: whether to retain or bypass the learned arrival update is already
+a concrete controller-default decision that B08 did not test. The PARK proposal was
+never applied. [Reassessment and complete DM response](DISH_LIFECYCLE_REASSESSMENT_20260914.md#6-complete-independent-review-dm-response-and-changed-choice).
+
+Select exactly one new seed149 B/EXPLORE pair, BYPASS versus freshly trained REPLACE,
+with equal 16-update learning and final-only native service. BYPASS preserves post-reset
+history before ordinary GRU advancement in both live control and replay; native packet
+and charge laws, other actor information and source promotion remain. The scientific
+question is presence of the receipt-processing operation. B08 WITHIN/REPLACE, its fixed
+half-retention programme PARK, and all earlier package stops are preserved.
+
+This may change the finite-controller development default; it does not estimate all
+communication necessity or post-CAS source value. The strongest contrary expectation is
+discarding useful forecast information. DM predicts a negative BYPASS-minus-REPLACE sign
+with low confidence; no outcome exists yet. [B09 frozen card](DISH_RECEIPT_BYPASS_B09_SCIENCE_CARD_20260914.md)
+sets the new finite exposure/2700s complete machine-work plan and engineering acceptance.
+The current producer is DM implementation/self-check plus independent high-risk review;
+no B09 experiment has been launched at this selection boundary. Priority, recasts and
+UAV-entry state are unchanged. Review `eaed5cb6c` is evidence, not a spending grant.
+
 ## Tested arrival-bridge retention family parked — 2026-09-10
 
 Convergence's complete post-B08 decision parks the retained-A03 finite-training received-

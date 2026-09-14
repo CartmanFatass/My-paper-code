@@ -161,3 +161,56 @@ prospectively explain revisiting its family stop. Slot admission/archival belong
 under current owner policy; this DM makes no replacement nomination or cross-direction
 resource commitment. The current review remains a real producer until fully archived and
 addressed, so no premature PARK handoff or task archival occurs.
+
+## 6. Complete independent review, DM response and changed choice
+
+The full review arrived at immutable `eaed5cb6cc52422ec9535e559755dd89dd8ea992`:
+[response](pro_packets/20260914_lifecycle_review/archive/RESPONSE.md), 11,976 bytes,
+SHA256 `e7dccea38cf810c562e6a37ca24e3b78554d7b745762dd638af0e0647ca04ca4`.
+I read all 53 lines, including every scientific section and the access record. Canonical
+Git bytes match Transport's downloaded full response. The Issue4 comment5657863234 points
+to that commit; its only changed path is the scoped response. The 66-byte chat receipt is
+separate. [Completion facts](pro_packets/20260914_lifecycle_review/archive/COMPLETION.json)
+preserve one accepted Send, operation/message identities, native return and terminal archive.
+No historical request or scientific evidence was resent or changed.
+
+The reviewer reports all thirteen listed exact-source accesses and no critical gap. Its
+method reading conforms to current DM ownership and the B evidence ceiling. Its material
+finding is a **scientific-value disagreement**: the assessment already names a useful
+binary decision—whether the received-packet bridge should remain in the finite-budget
+controller. Calling that simplification/redundancy did not justify declining it. B08's two
+packet-using rules do not measure use-versus-bypass; a binary presence ablation is more
+discriminating than choosing another intermediate retention coefficient.
+
+**DM response: accept this finding and change the recommendation.** My initial argument
+underweighted the concrete default decision and overemphasized its resemblance to receipt
+screening. I am not treating any untested option as an entitlement to compute. This specific
+option has an active pre-CAS control/learning path, a competent fresh comparator, a direct
+native-service endpoint and a small ordinary comparison. Those properties justify one
+finite observation now. Bypass could discard useful forecast information; full REPLACE
+may already use the history well. That is the strong contrary expectation, not a reason
+to require a positive pilot or a diagnosed overwrite defect.
+
+Other findings are accepted: bypass preserves **post-reset** history, not a fresh reset
+at each receipt; it must apply in both live control and recurrent replay. Native packet
+generation/charging laws and allowed actor inputs remain, while realized messages, costs
+and trajectories may differ. Other partner inputs remain, so this is not a test of all
+communication or memory necessity. Another HALF_RETAIN pair could be legitimate under the
+same research objective; a changed objective or external customer is not required. I choose
+the binary operation comparison for its larger incremental discrimination, not because
+replication is ineligible. Source-origin and post-CAS quantities remain separate.
+
+**Direction decision:** options (a) continue with one new receipt-use ablation B09;
+(b) reversible direction PARK with bypass explicitly unpurchased; (c) revisit fixed0.5.
+Recommend/select(a). **Owner-delegated decision (unattended, 2026-09-13 full-lifecycle
+instruction, continuing 2026-09-03 delegation): (a).** The initial PARK proposal above
+was never applied. The independent value disagreement is resolved by accepting it, not
+overruled or relabeled as approval. Record the close call and the positive-review correction
+in the owner surface and audit. No new recast, priority change or C promotion occurs.
+
+B08 remains WITHIN/REPLACE. Its fixed half-retention programme remains PARKED; B09 selects
+the presence of the arrival-processing operation, not another interpolation coefficient,
+B08 replication or a rewritten old package. The new [B09 card](DISH_RECEIPT_BYPASS_B09_SCIENCE_CARD_20260914.md)
+defines one fresh pair, its own master, endpoint, complete finite plan and engineering L0.
+This is a prospective DM selection under standing authority, not an inferred Portfolio or
+Pro grant. No empirical bypass outcome exists at this decision boundary.

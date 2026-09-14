@@ -1,0 +1,25 @@
+{
+  "request_id": "dish-lifecycle-review-20260914-01",
+  "handoff_commit": "8545df628ffe534155dd7f8927ae65f8765b1535",
+  "task_commit": "53d7c48d0a5699a9112b241c815a98a47ce36517",
+  "response_commit": "eaed5cb6cc52422ec9535e559755dd89dd8ea992",
+  "response_bytes": 11976,
+  "response_sha256": "e7dccea38cf810c562e6a37ca24e3b78554d7b745762dd638af0e0647ca04ca4",
+  "download_matches_git_bytes": true,
+  "issue_comment": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5657863234",
+  "native_operator": "/root/tr_lh_dish_lifecycle_20260914",
+  "operation_id": "c1d6a60d-8986-4bab-bcec-725862c3fd4a",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "native_report": {
+    "one_accepted_send": true,
+    "natural_completion": true,
+    "provider_user_message_id": "bdd25c02-3834-49ca-86a4-265db1268518",
+    "provider_assistant_message_id": "d01554dd-9d4a-4051-b93e-da3d9049e660",
+    "tab_closed_after_archive": true,
+    "registry_state": "ARCHIVED"
+  },
+  "short_chat_receipt_bytes": 66,
+  "full_DM_read": "all 53 lines, opening plus sections1-4, source access and exact reference list",
+  "scientific_result": "DM accepted the material value disagreement, responded in reassessment section6 and selected new B09; no experiment yet",
+  "new_experiment_handles": []
+}

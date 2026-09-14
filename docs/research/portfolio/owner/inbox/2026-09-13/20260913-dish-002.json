@@ -1,0 +1,75 @@
+{
+  "id": "20260913-dish-002",
+  "created": "2026-09-13T18:56:43-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "冻结DISH B09：一次BYPASS对REPLACE新训练比较",
+  "context": "仅一对新种子149，固定终点native service，零自动续跑；工程验证及独立审查后启动。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按已冻结科学卡完成一对，记录所有结果与完整成本。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在安全边界停止依赖此卡的新工作，保留已发生效果。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "先记录具体修改及其作用范围，再推进依赖工作。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RECEIPT_BYPASS_B09_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L7",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留DM已按委托选择的B09：一次BYPASS对新训练REPLACE比较？当前不请求逐项批准。",
+    "changes_if_approved": [
+      {
+        "target": "DISH方向与B09科学卡",
+        "from": "建议方向PARK，未实施",
+        "to": "接受独立科学审查的关键反对意见，继续一次新B09；B08及其固定半保留家族PARK不变"
+      }
+    ],
+    "if_refused": "在下一安全边界应用所有者覆盖；保留已发生的效果及证据，不自动重跑或撤销。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260914_lifecycle_review/archive/RESPONSE.md",
+        "quote": "The reassessment itself identifies the choice: **should this received-packet bridge remain in the finite-budget controller?**",
+        "why": "二元的保留或绕过问题会改变具体控制器默认值，B08两种使用消息的规则没有测量此对比。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260914_lifecycle_review/archive/RESPONSE.md",
+        "quote": "The strongest case against my recommendation is that full REPLACE/GRU already learns useful retention and may need the packet; bypass can discard useful forecasts or reinforce stale history.",
+        "why": "可能丢弃有用信息，单对学习仍不能提供总体结论。"
+      }
+    ],
+    "uncertainty": [
+      "BYPASS效果尚未测量；DM弱预测差值为负，是否越过−24未知。",
+      "所有B08普通CAS为零，源状态价值仍未估计。",
+      "完整成本未知，历史计时不是新报价。"
+    ],
+    "cost": {
+      "compute": "新B09仅一对，合计131072训练转换、1024优化器调用和8个最终回合；新计划2700秒机器工作，含每臂900和共享900。",
+      "owner_time": "可异步查看，无须回复才开始。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; independent engineering review and actual-node admission remain the scientific execution dependencies"
+    },
+    "verdict_text": "DM response: accept this finding and change the recommendation.",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_LIFECYCLE_REASSESSMENT_20260914.md"
+  },
+  "starred": false
+}
