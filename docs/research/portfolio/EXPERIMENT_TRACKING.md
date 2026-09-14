@@ -1,25 +1,25 @@
 # HMASD current execution tracking
 
-OWNER_PAUSED after all in-hand work completed. Root coordinates native DM chains; each DM owns its
-direction lifecycle and Direction Pro remains the independent scientific Reviewer. Do not start a
-successor experiment, new direction or vacancy replacement until explicit owner resume. Current
-producer and resume facts are in the 2026-09-14 owner-pause handoffs below.
+OWNER_RESUMED by the explicit 2026-09-14 instruction to restore the subagent DM control plane,
+read the handoffs and continue. Root currently coordinates three native Astra/max DM chains; each
+DM owns its direction lifecycle and Direction Pro remains the independent scientific Reviewer.
+The owner-pause handoffs remain the recovery baseline, while the rows below record new work.
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; Q recovery intaken. Portfolio PRO_FINAL applied reversible whole-direction PARKED/HIGH; SHARED/default and all evidence retained; old operation remains unsent record | No active work. Re-entry requires a changed operating/training-resource requirement or trustworthy relevant evidence/cost fact and a new Portfolio/owner decision |
-| MGTAP | Portfolio B 与 conformance amendment 已完整 intake；唯一 master pair 完成：COND512 0.16574499572521276 J、DENSE768 0.19507936796417658 J、delta −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026、7/25 worlds；ACTIVE/MEDIUM | post-8231 R 已完整 intake；mean-COND eligibility 与 DENSE default 保留。OWNER_RESUMED，无在途外部依赖/新 pair；旧 UNCERTAIN_EFFECT 不阻挡已完成 intake 且绝不重发。DM 复用 R 科学结论，解决未决方向接续/容量问题 |
+| MGTAP | ACTIVE/MEDIUM；固定 1e-4 的 late-exposure B01 已选择并实现，fresh8254 同一路径评价 256/512，最终512为唯一 primary；卡、12项检查和独立审查已集成 main 2951c0d44 | DM 正在完成 exact-source 远端准入、唯一 launch 和 Monitor；旧8252正/8253负、DENSE default、optional COND scope均保留，无自动 successor |
 | RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Greedy-anchored A 仅保留 epsilon .1 exact-greedy 候选；Portfolio B09 已完整 intake，seed29/256-update/four-panel 完成（native47.13s、exit0），G_U +.0512695、D_n +.1460205、D_g -.0317708；OWNER_RESUMED，两项 HOLD 保留；DM 负责下一管理决定 |
-| ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Next-use/no-addition 已完整 intake，Transport ARCHIVED；无新 fit/K retry 或在途外部依赖。OWNER_RESUMED；现核对科学 no-addition 是否覆盖容量/生命周期，未覆盖则由 DM 提出该未决管理选择 |
-| FOLR | Portfolio F 已完整 intake；新 Generic64 完成/技术接受 e617175e（5000/4969/128、exit0、native2156.67s），随后固定 BANK128 一次 admission/提交 db935e57；同一 Monitor 回 ADOPTED+TERMINAL exit0/n128/duration3s，ACTIVE/MEDIUM | DM 已完成 BANK collection/combined scientific intake，结论为该固定用途中 Generic-only（BANK worse）；无运行中实验或新 Pro 请求。Generic→BANK 顺序和五 caps 保持，无 Root ACK/再审批、旧 Generic retry 或 transfer/renewal |
+| ACVC | ACTIVE/MEDIUM/recasts2；Portfolio 选择的 extended-exposure B01 已形成新27457/37457、连续4096训练、1024/4096快照和六个私有64-world面板；卡、9项检查和独立审查完成 | DM 正在提交并远端启动；无旧 C01 重跑或 Root ACK 门槛 |
+| FOLR | ACTIVE/MEDIUM；entity-persistence B01 选择 fresh A−Z，比较持久实体流与每时刻置零；卡、实现、27项检查及独立审查修正已集成至 main c8d11980f | Z/current-only handle `folr-persistence-b01-781701-current-only` 已在 source 42e337f36、PID3695656 启动并由 `/root/dm_folr_resume_20260914/monitor_l_low_folr` 采纳；DM 继续终止收集、原选 A/persistent 臂和 scientific intake |
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
 | FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 
 
-The four registered DMs remain their direction owners until a recorded handoff. Report actual
-running work separately from occupancy; a DM can decide PARK/CLOSE without Portfolio approval.
-Clerk records any released capacity and does not fill it automatically. Scientific conclusions and
-new objects stay with their DM and independent review, not a mechanical coordinator.
+The three native DMs remain their direction owners until a recorded handoff. Report actual running
+work separately from occupancy; object completion never releases a slot. Root processes native
+events and integrates accepted commits, while scientific conclusions and new objects stay with
+their DM and independent review.
 
 The unsent automatic overall-planning packet was retained as report material at 469e85fe7.
 It creates no live Pro request or authority. Existing accepted requests retain their own archive
