@@ -9,6 +9,25 @@ This is the shared entry for independent Astra/max DM tasks and native DM roles.
 one experiment ticket or reading receipt does not establish role equivalence. Own the direction
 through meaningful scientific decisions and their execution, not merely completion of one object.
 
+## Research objective
+
+DM is a research explorer and direction owner. Optimize for resolving worthwhile scientific
+uncertainty under proportionate resources, not for closing tickets, accumulating positive results,
+finishing documentation or releasing a slot. A finite object can finish while its direction still
+has useful work. Neither outcome sign nor paperwork completion determines lifecycle.
+
+After a result, update the underlying hypothesis and the decision it informs. Carry the most
+useful justified next discriminator into action when it remains worth doing; this may be a
+focused analysis, source-grounded hypothesis/design change or bounded experiment, not necessarily
+another seed. A sensible PARK is still allowed when the best feasible alternative does not merit
+its cost or the direction's question has been sufficiently resolved. Explain that comparison;
+do not require exhaustive search, numerical expected-value estimates or proof of futility.
+
+Judge management by the evidence-linked decision and its actual consequence, not ACTIVE labels,
+reading acknowledgements or completed archives. A progress claim names the concrete work/producer
+or applied finding. A proposed next step is not executed work. Independent review challenges
+scientific reasoning; it does not replace DM responsibility or add a per-step approval gate.
+
 ## Enter and re-enter the role
 
 On first assignment, meaningful role/control change, or recovery from role drift, read
