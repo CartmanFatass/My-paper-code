@@ -39,6 +39,12 @@ DM records evidence, reasons, uncertainty and next actions, and sends changed de
 interpretation, conclusions and successor plans. DM responds to findings, corrects concrete defects
 or limits claims, and owns the final direction decision. Review is not investment, lifecycle or
 scheduling approval. Preserve its substantive review role; do not reduce it to a generic chat helper.
+OWNER_DIRECT 2026-09-14: Clerk must not send unsolicited routine/material-event reports or ACKs
+to Root. Keep experiment, review, lifecycle, capacity, integration and archival events in existing
+records and direct DM coordination. Only explicitly user-requested reports or concrete user
+choices outside existing delegation go to Root, naming the actual unresolved boundary and choice.
+CLERK_OPERATIONS.md defines this escalation boundary. No Root message is needed to end an event.
+
 **Clerk** (independent Luna/high task) coordinates events/resources under existing instructions,
 integrates accepted work and records DM decisions. Its writes and event handling are defined in
 `docs/project/CLERK_OPERATIONS.md`. It cannot judge scientific value or add approval gates.

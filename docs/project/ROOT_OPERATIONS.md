@@ -16,7 +16,10 @@ An operational exception is first owned by the relevant DM, with Clerk coordinat
 tasks. Shared browsers, connection repairs, occupancy discovery, missing receipts and operation
 ordering do not route to Root merely because they cross task boundaries. Root owns a concrete
 change to shared policy/control code or a user choice outside delegation. Ordinary status and
-repair traffic stays between DM and Clerk; material outcomes reported to Root do not await ACK.
+repair traffic stays between DM and Clerk. OWNER_DIRECT 2026-09-14 prohibits unsolicited Clerk
+status/result/lifecycle/integration/archive reports to Root. Record these locally and complete
+DM coordination. Only user-requested reports or concrete user decisions outside delegation reach
+Root under CLERK_OPERATIONS.md's Root escalation boundary; no ACK messages follow.
 
 DM can continue/defer/PARK/CLOSE/reopen/recast its own direction, open/close families, select
 post-object/post-C work and promote C-BENCH when its evidence requirements are met. Record the

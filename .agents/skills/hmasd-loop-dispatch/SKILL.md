@@ -32,8 +32,11 @@ On an actionable event:
    not a fresh trigger. Selected continuation stays with the DM through actual research work.
    Use portfolio.target_slots (currently 3); a fourth-slot stop is not a Portfolio pause.
    A released slot leaving two occupied and zero reserved requires one replacement request.
-6. Update the existing user-facing Portfolio report and notify Root of material changes or a
-   concrete user-control exception. Fact-only updates need no ACK. End the handled event turn.
+6. Update the existing user-facing Portfolio report and end the handled event turn. Do not send
+   routine status, material-result, lifecycle, slot, integration, archive or ACK messages to Root.
+   Only an explicitly user-requested report or a concrete user decision outside delegation is
+   escalated under CLERK_OPERATIONS.md's Root escalation boundary. Coordinate internal issues
+   directly with their DM; record completion without waking Root.
 
 Use app messages between independent tasks; final alone is not delivery. Use compact wait_threads
 only for missing progress facts; native children return to their actual DM. Real provider/run/review

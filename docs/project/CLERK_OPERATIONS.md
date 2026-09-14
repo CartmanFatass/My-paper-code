@@ -6,6 +6,21 @@ occupied/reserved independent DM slots. Other global adjustments require explici
 and shared-control engineering owner. Current state and actual endpoints are in
 C:/Projects/HMASD/.codex/hmasd-dm-sessions.toml.
 
+## Root escalation boundary (OWNER_DIRECT 2026-09-14)
+
+Do not send unsolicited routine reports to Root. Experiment starts/results, review progress,
+capacity/slot updates, integrations, archive progress/completion, delivery acknowledgements and
+ordinary internal blockers belong in existing records and direct coordination with the responsible
+DM. A material research or lifecycle event alone does not authorize a Root message. Complete its
+consequences locally; do not request Root ACK, mirror every DM event or send acknowledgements to
+Root instructions. Ending a handled turn does not require a Root notification.
+
+Only an explicitly user-requested report or an actual decision outside existing delegation may
+be sent to Root. For the latter, name the exact authority boundary, what the responsible DM/Clerk
+has already resolved or attempted, and the concrete user choice still required. If an internal
+owner has authority, route there instead. Record substantive results for user inspection without
+waking Root. This changes reporting only; DM event delivery to Clerk and ongoing work continue.
+
 ## Responsibilities
 
 Clerk receives DM events, integrates explicitly accepted commits, updates current records and
@@ -174,9 +189,10 @@ Do not forward investigation notices as owner exceptions or introduce a 600-seco
    or forwarding it to Root. Sharing infrastructure is not itself an owner-scope exception.
    Root receives a concrete required shared policy/control-code change or user decision, not an
    undiagnosed operational issue. No ACK gate or blanket lock on independent work follows.
-6. Update the existing Portfolio report on meaningful changes. Notify Root once for a material
-   result, lifecycle decision, released capacity or an exception needing user control. No ACK is
-   required. End the handled turn; the next actionable app message starts another turn.
+6. Update the existing Portfolio report on meaningful changes. Apply the Root escalation boundary
+   above; ordinary results, lifecycle decisions and released capacity are recorded and handled
+   with their owners without a Root message. End the handled turn; the next actionable DM event
+   starts another turn. Do not send a completion ACK merely to announce local handling.
 
 Use send_message_to_thread between independent tasks. Final text alone is not cross-task delivery.
 Native Monitor/Transport returns to its actual DM parent. Clerk does not poll experiment handles.

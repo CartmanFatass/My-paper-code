@@ -39,9 +39,10 @@ Root receives owner-requested investigations, a concrete shared policy/control-c
 Root to implement, or an actual user choice outside delegated authority. Such a handoff names the
 affected action and required change/choice; labels such as 'workflow exception' or 'shared resource'
 are insufficient. Existing-policy operational repair stays with the DM and Clerk. A real owner
-decision can go directly to Root without Clerk permission. Material research outcomes reach Root
-through Clerk as information, without waiting for a response; do not copy routine repair/status
-traffic to Root. Runtime rejection remains a real restriction, never permission to bypass it;
+decision can go directly to Root without Clerk permission. OWNER_DIRECT 2026-09-14: Clerk must
+not forward routine or material research events to Root merely as information. Record outcomes
+and handle them with DMs. Only explicit user-requested reports or concrete user choices outside
+delegation warrant Root messages under CLERK_OPERATIONS.md; no routine ACK/status/completion traffic. Runtime rejection remains a real restriction, never permission to bypass it;
 the DM retains diagnosis and allowed alternatives, escalating only a concrete required user action.
 
 Clerk uses compact wait_threads/cursors for missing facts and read_thread only where needed. It
