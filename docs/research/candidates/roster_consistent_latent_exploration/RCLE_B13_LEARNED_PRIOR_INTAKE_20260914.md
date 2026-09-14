@@ -247,3 +247,7 @@ ordering dependency, not PARK, a new funding request or a reason to fabricate an
 ### Current shared authority correction received —2026-09-14
 
 Root published f26a24611ec3d728260bb96d1d1809c151581cc2 correcting empirical-spec8.1, the owner-item skill/README and PEER_DM_COORDINATION opening to the current Portfolio final-direction protocol. DM read the actual diff and applies it to the still-unsent post-B13 packet. No accepted request is regenerated, no scientific evidence requirement changes, and no new lifecycle disposition or launch follows from the text repair.
+
+### Predecessor full decision and actual release processed —2026-09-14
+
+MGTAP delivered its actual release after complete Portfolio CONTINUE and DM application at d03ee1f04f7c0ea9dc2e7ae5ae817b75511a5f80/main e38836b0820eab80e964caa861171c5d48230e18. RCLE read the full139-line18522-byte original answer, complete intake and corrected delivery facts; SHA256 df3e7910a281e4bbc0fa928d59d780c6bdce13974f68165bbbba659381238272 verified. Main03be1bd7b11213070b91d9b6281c9c58279e1dd4 claims the released conversation for the one new post-B13 request. GLOBAL_CONTEXT preserves latest peer science and the predecessor title-only input defect; actual full composer and accepted-node checks are assigned for the new request. No predecessor resend, RCLE disposition, slot change or native fit follows from this authoring event. Owner reviews remain empty.
