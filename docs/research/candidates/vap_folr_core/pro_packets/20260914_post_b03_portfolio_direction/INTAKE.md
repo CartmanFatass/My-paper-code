@@ -374,3 +374,19 @@ commands/collection; it does not trigger an unnecessary new validator or fit.
 Owner-console clean-boundary review returned[]; no new owner reply is invented.
 Remote source/shell preparation is complete with zero scientific invocations.
 DM now carries this acceptance into G launch and actual Monitor adoption.
+
+### Selected Generic actually launched and monitored
+
+G was accepted at2026-09-14T15:36:55.744043Z, handle
+`folr-augmentation-b01-781601-generic`,PID3674297,source d9977dc18. The exact new
+empty output directory was verified before the one submission, and adjacent
+physical/effective admission passed at15629955072bytes each.
+[Current execution](../../entity_history_augmentation_b01_781601/EXECUTION.md)
+preserves source, exact command, launch/admission receipts and Monitor ownership.
+Native`/root/folr_augmentation_b01_monitor` delivered actual adoption; DM caught an
+inconsistent reported observation time, retained the original and accepted a fresh
+same-command UTC/status/log correction at15:39:25.653Z. Actual handle coverage was
+preserved throughout; no repeat launch or duplicate observer was created.
+G is running and A is selected/unlaunched. DM stops routine polling and processes
+the Monitor's terminal consequence, including unconditional-on-G-score A execution
+after collection/admission. No new final B01 result or favorable claim is made.
