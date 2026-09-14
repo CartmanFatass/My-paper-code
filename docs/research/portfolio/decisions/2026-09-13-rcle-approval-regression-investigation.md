@@ -79,7 +79,14 @@ same current source revision. Clerk records actual propagation separately from R
   direction science and accepted packets were outside the sync scope. Session sync was
   `27316d65315e7296a19368445b8e49b4384824f3`; authoring sync was
   `98875c4b6211b1f53ad54e29ce7479b26716a12`.
-- ACVC's registered task accepted the Clerk sync message. MGTAP and RCLE initially returned
-  `no rollout found` for their registry thread IDs; FOLR initially did too and later supplied
-  the successful receipt above. Until a concrete receipt exists, message delivery is not counted
-  as synchronization.
+- ACVC later returned a concrete successful rollout as well: its registered session and authoring
+  checkout matched all 25 named blobs from the repaired main revision, both trees were clean
+  before/after, and each focused consumer suite passed 160 tests (3.46s and 3.66s). Its sync
+  commits were session `d95fd8ec55159367197ab9d4acaabd54c1aef753` and authoring
+  `ebf214476904dcf980ba09b2e62b91427c183d50`; live registries, snapshots, science and packets
+  were unchanged. ACVC's separate scientific-review producer remains pending with an actual
+  `TIMEOUT_WAITING_FOR_PROMPT` receipt (`sendAttempted=false`); the DM is repairing that same
+  request without a new seed, consultation or approval request.
+- MGTAP and RCLE still returned `no rollout found` for their registry thread IDs, while FOLR and
+  ACVC later supplied concrete receipts above. Until such a receipt exists, message delivery is
+  not counted as synchronization.
