@@ -192,6 +192,20 @@
       "published_remote_refs": [
         "refs/remotes/origin/codex/rcle"
       ]
+    },
+    {
+      "id": "score_scale_plan",
+      "sha": "094d1ff2a3e5f984d62e00dae782cda31a11be52",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "id": "score_scale",
+      "sha": "094d1ff2a3e5f984d62e00dae782cda31a11be52",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
     }
   ]
 }
