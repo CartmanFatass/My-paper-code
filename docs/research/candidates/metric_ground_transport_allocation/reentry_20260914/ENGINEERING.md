@@ -62,3 +62,34 @@ This batch performed local source/record reading, protocol implementation, synth
 tests, count calculation and archival normalization only. Native exposure is zero.
 Do not read the unittest duration as full support cost; full support/provider/lifetime
 totals remain UNKNOWN. No file or worktree was deleted and no deletion refusal bypassed.
+
+## Complete runner implementation batch (prospective continuation)
+
+L0: implement one runnable eight-fit MGTAP-LR-SELECTION-B01 entry point and focused
+synthetic wiring/publication tests, reusing the accepted native learner. Authoring
+checkout is C:/Projects/HMASD-worktrees/dm-n5-continue-20260904, branch codex/mgtap,
+starting HEAD1fb4259905f0a803f515b40131bea9c7417eec61, initially clean.
+The Implementer owns only new `mgtap_lr_selection_b01/study.py` and its focused
+`test_study.py`; DM retains card/protocol changes, Git, technical acceptance and launch.
+Other writers' documentation and request files are preserved.
+
+The current card §§2–5 supplies the exact native semantics, three-candidate order,
+fresh state/RNG ownership, stage fence, eight-fit exposure, primary, output and limits.
+Use existing `mgtap_early_exposure_b02/study.py`, `conditional_pooling.py`, and
+`ucope/uav_motion_prefix_b01/learner.py` as read-only dependencies; do not modify frozen
+learners or other directions. Focused tests must exercise candidate order and fresh
+state, selected per-arm rates, a persisted selection record before holdout construction,
+all panels/raw output and the primary, and failure partials. They are synthetic checks,
+not native science, and must not create extra empirical evidence.
+
+Bounds: one runner under600 lines, this research attempt under2000 non-test source
+lines, focused test budget5 minutes for this directory; no scientific run, remote
+execution, additional candidate/seed, changed endpoint, child delegation, or Git commit
+by the Implementer. Return actual diff/check output and precise residual issues to DM.
+Independent Sol/high changed-path review follows; it is technical evidence, not a
+lifecycle grant. Required §4 items and the corrected4GiB admission plan are explicit
+in the prospectively updated card. Native exposure remains zero.
+
+Actual Implementer dispatch: `/root/im_s_m_mgtap_lr_runner`, model gpt-5.6-sol,
+reasoning medium, fork_turns=none; batch MGTAP_LR_RUNNER_IMPL_20260914.
+Parent is this DM App task01a09cd8-676e-7513-806d-a86b7e104518, native /root.
