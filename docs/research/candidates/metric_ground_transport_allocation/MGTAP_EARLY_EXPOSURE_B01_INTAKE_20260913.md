@@ -78,3 +78,35 @@ resources, retaining UNKNOWN full costs and any original-plan deviation. This
 adds no8241 fit/evaluation/retry and does not claim original full-cap compliance.
 The workflow-control synchronization is a separate owner-assigned repair, not
 native learning work or a change to the frozen card.
+
+### Actual closeout and successor decision
+
+At 2026-09-14T00:23:08Z, the exact finished remote worktree
+`/home/wu/hmasd-worktrees/mgtap-early-8241-20260913` and source bundle
+`/home/wu/hmasd-inputs/mgtap-early-8241-20260913.bundle` were removed after
+archive publication, source preservation and exact path/terminal reconciliation.
+The worktree is absent on disk and from Git registration. Its six native files
+and six supervisor files remain in the published archive; the supervisor receipt
+itself remains remotely. Twelve local duplicate file hashes/lengths match
+COLLECTION.json. Windows rejected the scoped local raw/test cleanup before
+process creation, so both duplicate directories remain; no alternative deletion
+tool or retry was used. Local `support/early256_20260913/published_source.bundle`
+also remains a committed-object duplicate. These retained duplicates and the
+separate old8231 policy-blocked raw are not live scientific producers or gates.
+
+The explicit owner control-sync task is complete: authoring fea6df33ced6a6cfb2028cb9a9171b70024a0559
+(pushed) and session f00416a0cb23efc00cc394f703b80f49c514352d (original detached
+HEAD, local) contain exactly the specified 25 paths from 8f536adcb. No conflicts;
+both clean, exact Git blob identity, six skill validations and three TOML parses
+passed. Live task TOMLs, report snapshots, science and accepted packets were
+excluded. Clerk received the actual combined result/review/sync event
+`mgtap-b8241-intake-and-control-sync-20260913-r1`; no ACK is awaited.
+
+DM now selects the finite fresh **B02 master8242** independent recurrence check
+in the [new card](MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md). The earlier
+draft successor discussion above is superseded prospectively, not rewritten.
+This follows the recorded positive branch and full design review, with PARK as
+the strongest alternative. One new fitted pair answers a distinct recurrence
+question that more 8241 worlds cannot. It is not a retry or extension of B01.
+No new run has yet been accepted at this decision. Full cumulative support costs
+remain UNKNOWN; the frozen B01 native exposure and caps remain closed.

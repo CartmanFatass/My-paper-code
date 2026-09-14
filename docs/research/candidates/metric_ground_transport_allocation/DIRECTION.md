@@ -52,8 +52,13 @@ not stable superiority or a curve. [E0](MGTAP_EARLY_EXPOSURE_B01_RESULT_20260913
 and [intake](MGTAP_EARLY_EXPOSURE_B01_INTAKE_20260913.md) preserve all outcomes,
 Monitor's corrected premature observation, archive and complete independent
 design/next-plan review (no material design defect; full DM response recorded).
-DM's candidate next action is one further independent
-256/256 instance, not yet a selected card/seed or automatic successor.
+At the post-result boundary DM selects one further independent 256/256 instance,
+[B02 master8242](MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md), to check
+recurrence of this exact early endpoint. It is an explicit finite ordinary
+object, not an automatic successor, repeated 8241 evaluation or old-grant reuse.
+All other scientific bindings remain unchanged. One more pair cannot establish
+population ordering; the new card stops after that sole pair and preserves
+meaningful independent review of actual evidence and the DM's successor plan.
 
 All dated sections below retain historical results and then-current dispositions,
 not current approval requirements. Frozen objects/results remain unchanged;

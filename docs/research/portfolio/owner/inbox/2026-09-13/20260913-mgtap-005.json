@@ -1,0 +1,75 @@
+{
+  "id": "20260913-mgtap-005",
+  "created": "2026-09-13T17:29:07-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "新独立256/256配对8242：检查早期端点收益是否复现",
+  "context": "Claim: one new matched training instance can test recurrence of the fixed256 endpoint observation. Binding MARL structure: partial observability and other-agent non-stationarity. DM已自主选择；DENSE默认、反例和UNKNOWN成本保留。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行只一个全新8242训练配对，保存全部正负端点，不自动第三次；不等待回复。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在安全边界停止未执行工作，保留已执行事实，由DM判断PARK。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在尚未执行部分应用具体修改；冻结科学调用不事后重写。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "一个新的训练配对可检验8241的有限正结果是否复现，更多8241评估世界不能替代它；原生工作约188秒为直接锚点，非成本保证。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L36",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "DM 已选择一个独立 256/256 训练配对检查 B8241 正结果是否复现；所有者可异步覆盖这张新卡。",
+    "changes_if_approved": [
+      {
+        "target": "MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md",
+        "from": "一个已完成的早期端点训练配对，Delta +0.01513 J；没有新调用",
+        "to": "只执行全新 master8242 的一个训练配对，保持原程序、MEI 和每臂450/总900秒原生限制"
+      }
+    ],
+    "if_refused": "在下个安全边界应用覆盖，保留实际已执行证据；不自动撤销结果、换种子或重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md",
+        "quote": "The above-MEI B01 result supplies a concrete reason to check recurrence under new initialization, training worlds and private streams.",
+        "why": "新训练实例能区分单次端点收益与再次出现的有限支持，增加原8241评估世界不能回答这个问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md",
+        "quote": "PARK is the strongest alternative because another local noisy observation may not justify continued development.",
+        "why": "既有512/512结果混合，TOP和不等暴露有不利证据；两个配对仍不能建立稳定优势。"
+      }
+    ],
+    "uncertainty": [
+      "选择复现发生于已知B8241有利结果之后，是 outcome-informed 开发，不是确认性独立测试计划。",
+      "DENSE保持通用默认；新结果不自动开启第三配对或C-BENCH。",
+      "完整累计support/provider成本与未测尾部仍UNKNOWN，不能宣称旧计划完全合规。"
+    ],
+    "cost": {
+      "compute": "1个新训练配对，2 fits，147456 team ticks，1024 Adam；原生450秒/臂、900秒/配对。自设支持计划2700秒、完整3600秒，按现行规则记录累计成本和偏差，非所有者硬上限。",
+      "owner_time": "无需回复或ACK；DM负责技术和科学全链路，Clerk登记实际结果。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing; DM standing delegation applies"
+    },
+    "verdict_text": "Owner-delegated decision (2026-09-03 standing instruction, as corrected by the 2026-09-13 full-lifecycle delegation): execute this one new B02 pair.",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md"
+  },
+  "starred": false
+}

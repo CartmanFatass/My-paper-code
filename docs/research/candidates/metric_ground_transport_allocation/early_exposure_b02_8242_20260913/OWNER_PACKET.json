@@ -1,0 +1,38 @@
+{
+  "question": "DM 已选择一个独立 256/256 训练配对检查 B8241 正结果是否复现；所有者可异步覆盖这张新卡。",
+  "changes_if_approved": [
+    {
+      "target": "MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md",
+      "from": "一个已完成的早期端点训练配对，Delta +0.01513 J；没有新调用",
+      "to": "只执行全新 master8242 的一个训练配对，保持原程序、MEI 和每臂450/总900秒原生限制"
+    }
+  ],
+  "if_refused": "在下个安全边界应用覆盖，保留实际已执行证据；不自动撤销结果、换种子或重跑。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md",
+      "quote": "The above-MEI B01 result supplies a concrete reason to check recurrence under new initialization, training worlds and private streams.",
+      "why": "新训练实例能区分单次端点收益与再次出现的有限支持，增加原8241评估世界不能回答这个问题。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md",
+      "quote": "PARK is the strongest alternative because another local noisy observation may not justify continued development.",
+      "why": "既有512/512结果混合，TOP和不等暴露有不利证据；两个配对仍不能建立稳定优势。"
+    }
+  ],
+  "uncertainty": [
+    "选择复现发生于已知B8241有利结果之后，是 outcome-informed 开发，不是确认性独立测试计划。",
+    "DENSE保持通用默认；新结果不自动开启第三配对或C-BENCH。",
+    "完整累计support/provider成本与未测尾部仍UNKNOWN，不能宣称旧计划完全合规。"
+  ],
+  "cost": {
+    "compute": "1个新训练配对，2 fits，147456 team ticks，1024 Adam；原生450秒/臂、900秒/配对。自设支持计划2700秒、完整3600秒，按现行规则记录累计成本和偏差，非所有者硬上限。",
+    "owner_time": "无需回复或ACK；DM负责技术和科学全链路，Clerk登记实际结果。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing; DM standing delegation applies"
+  },
+  "verdict_text": "Owner-delegated decision (2026-09-03 standing instruction, as corrected by the 2026-09-13 full-lifecycle delegation): execute this one new B02 pair.",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md"
+}
