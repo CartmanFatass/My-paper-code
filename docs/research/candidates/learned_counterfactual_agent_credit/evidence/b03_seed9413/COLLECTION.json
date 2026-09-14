@@ -1,0 +1,65 @@
+{
+  "handle": "lcac-b03-s9413-81fec5e1-20260914",
+  "launch_sha": "81fec5e1b3a2cee810029f0cd30713a0ea64fce3",
+  "collected_at": "2026-09-14T05:05:29.193543+00:00",
+  "status": {
+    "task": "lcac-b03-s9413-81fec5e1-20260914",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3660054,
+    "uptime_seconds": 611,
+    "tmux_active": false
+  },
+  "files": [
+    {
+      "name": "summary.json",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914/summary.json",
+      "sha256": "e489edc28b14c7b41ef87f1e95a32adfa8d5b3df1424cc3440097cc463f6d906",
+      "bytes": 4433
+    },
+    {
+      "name": "episodes.jsonl",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914/episodes.jsonl",
+      "sha256": "2df90758cfd16cfafe39c4786a600a64f4957e0429a1ad387c0dd5c72148efab",
+      "bytes": 394434
+    },
+    {
+      "name": "rollouts.jsonl",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914/rollouts.jsonl",
+      "sha256": "5fc1750f6e9ccdc9243f7fb2916d07ce66c4442dc8e54be802cde65dac14628f",
+      "bytes": 1410991
+    },
+    {
+      "name": "final_V.pt",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914/final_V.pt",
+      "sha256": "5791f2909455a495e22c17d114937f5aaf629fa3d301b483a730b5534a8d244e",
+      "bytes": 283504
+    },
+    {
+      "name": "final_Q.pt",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914/final_Q.pt",
+      "sha256": "6f0932582c08b4233f104b67014ae3ba86dd367e8cd1b71ef21c3fbef1f47560",
+      "bytes": 301424
+    },
+    {
+      "name": "admission.json",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914_receipts/admission.json",
+      "sha256": "c3463a4e064e06d9714cecb3899c376c74a391c58c129990d6f2c011c18436f7",
+      "bytes": 504
+    },
+    {
+      "name": "runner_time.json",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914_receipts/runner_time.json",
+      "sha256": "c55972c570bd089e340de915a8aba691941a67e08484e450237c4c4d53103b8c",
+      "bytes": 62
+    },
+    {
+      "name": "supervisor.log",
+      "source": "/home/wu/.agent-tasks/lcac-b03-s9413-81fec5e1-20260914/task.log",
+      "sha256": "fffe509314ed64189c025541de9a9ba0b163543451ba505f4d3a3152d57efb9b",
+      "bytes": 823
+    }
+  ],
+  "transfer_and_hash_wall_seconds": 4.4908097999868914,
+  "remote_sha256_stdout": "e489edc28b14c7b41ef87f1e95a32adfa8d5b3df1424cc3440097cc463f6d906  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914/summary.json\n2df90758cfd16cfafe39c4786a600a64f4957e0429a1ad387c0dd5c72148efab  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914/episodes.jsonl\n5fc1750f6e9ccdc9243f7fb2916d07ce66c4442dc8e54be802cde65dac14628f  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914/rollouts.jsonl\n5791f2909455a495e22c17d114937f5aaf629fa3d301b483a730b5534a8d244e  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914/final_V.pt\n6f0932582c08b4233f104b67014ae3ba86dd367e8cd1b71ef21c3fbef1f47560  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914/final_Q.pt\nc3463a4e064e06d9714cecb3899c376c74a391c58c129990d6f2c011c18436f7  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914_receipts/admission.json\nc55972c570bd089e340de915a8aba691941a67e08484e450237c4c4d53103b8c  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914_receipts/runner_time.json\nfffe509314ed64189c025541de9a9ba0b163543451ba505f4d3a3152d57efb9b  /home/wu/.agent-tasks/lcac-b03-s9413-81fec5e1-20260914/task.log\n"
+}

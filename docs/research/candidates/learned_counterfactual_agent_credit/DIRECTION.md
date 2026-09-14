@@ -1,12 +1,12 @@
 # LCAC — learned counterfactual agent credit
 
-## Current position — B02 reviewed; B03 running,2026-09-14
+## Current position — PARK,2026-09-14
 
-**CONTINUE; recasts0.** B01 at256/master9411 gave Q−V−0.00362643 (129.80s runner); B02 at1024/master9412 gave+0.00222263, V0.18844571/Q0.19066834,15/32 adverse (443.91s). Both means within MEI±.01, one trained pair per endpoint; no equivalence, stable effect, causal duration/credit claim. Both runs/monitors terminal; files/models preserved.
+**PARK; recasts0.** [B03](LCAC_B03_RESULT_EVIDENCE_20260914.md) independently repeated the1024/32 package and observed Q−V−0.01780441, V.20659912/Q.18879471,18/32 adverse worlds: ADVERSE under the frozen−.01 threshold. B02 at the same endpoint was+.00222263 within-MEI; B01's256 endpoint was−.00362643 within-MEI and remains separate. No equivalence, stable inferiority or universal mechanism failure is claimed.
 
-The complete [B02 review/DM response](LCAC_B02_INTAKE_20260914.md#full-independent-review-and-actual-dm-decision) reconsidered a working PARK preference. DM narrowly selects [B03](LCAC_B03_SCIENCE_CARD_20260914.md): independent unchanged1024/32 master9413. Its complete-procedure sensitivity question, differentiated B02 diagnostics/world effects and observed runner cost justify this specific continuation. No4096 endpoint or optimizer intervention.
+[Actual DM intake](LCAC_B03_INTAKE_20260914.md) weighs one further1024 pair and4096/intervention against PARK. The later endpoint and its first independent replication supply no above-MEI gain and substantive contrary evidence; no diagnosed defect or selected next objective currently warrants continuation. Small n, inexpensive sampling and possible different future outcomes remain explicit. Prior meaningful Pro review covered the replication question and anticipated adverse-case alternatives; actual B03 intake is DM-owned.
 
-B03 source81fec5e1b3a2cee810029f0cd30713a0ea64fce3 technically accepted after focused independent review, then launched onwsl_4070 at2026-09-14T04:55:14Z under lcac-b03-s9413-81fec5e1-20260914. PID3660054, initial running/tmux active; new native /root/lcac_b03_monitor owns assigned observation. Completed counts still refer only to B01+B02:688128 ticks/5120 Adam,573.71s runner wall sum, with total support/provider/lifetime UNKNOWN. B03 planned counts become actual only after terminal collection. DM collects and decides the actual next step. Current routes/slots belong to the live registry/Clerk; historical routes below are not current dispatch.
+All3 experiments and their monitors are terminal, complete raw/model archives retained, accepted Pro requests closed. No new scientific producer or consultation. Completed total1228800 ticks/9216 Adam/1072.33s runner-wall sum; CPU and complete support/provider/lifetime UNKNOWN. [PARK knowledge and reopening record](PARK.md) preserves assets, alternatives, current evidence/limits and same-DM reopening through live Clerk slot coordination. One local test-scratch cleanup restriction remains separately documented, with verified copy backup; it does not occupy a scientific slot. Current routes come from C:/Projects/HMASD live controls, not historical text below.
 
 ## Historical accepted registration — 2026-09-12
 

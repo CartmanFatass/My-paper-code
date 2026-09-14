@@ -1,0 +1,32 @@
+{
+  "batch": "lcac-b03",
+  "monitor": "/root/lcac_b03_monitor",
+  "handles": [
+    {
+      "handle": "lcac-b03-s9413-81fec5e1-20260914",
+      "source_sha": "81fec5e1b3a2cee810029f0cd30713a0ea64fce3",
+      "node": "wsl_4070",
+      "ssh_target": "hmasd-wsl-node",
+      "supervisor": "/usr/local/bin/agent-task",
+      "cwd": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3",
+      "output": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914",
+      "receipts": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914_receipts",
+      "supervisor_log": "/home/wu/.agent-tasks/lcac-b03-s9413-81fec5e1-20260914/task.log",
+      "adopted_at": "2026-09-14T04:55:43Z",
+      "terminal_at": "2026-09-14T05:03:32Z",
+      "last_observation": {
+        "status": "finished",
+        "exit_code": 0,
+        "pid": 3660054,
+        "tmux_active": false
+      },
+      "next_due_check": null,
+      "delivery": "SENT",
+      "delivered_via": "native_final",
+      "runner_wall_seconds": 498.62,
+      "terminal_event_id": "lcac-b03-s9413-81fec5e1-20260914:terminal:20260914T050332Z"
+    }
+  ],
+  "active_set": [],
+  "pending_notices": []
+}
