@@ -1,0 +1,18 @@
+test_addresses_disjoint_across_stages (test_protocol.ProtocolTests.test_addresses_disjoint_across_stages) ... ok
+test_counts_are_work_not_new_experiment_results (test_protocol.ProtocolTests.test_counts_are_work_not_new_experiment_results) ... ok
+test_duplicate_episode_rejected (test_protocol.ProtocolTests.test_duplicate_episode_rejected) ... ok
+test_each_arm_maximizes_its_own_validation_score (test_protocol.ProtocolTests.test_each_arm_maximizes_its_own_validation_score) ... ok
+test_exact_tie_prefers_inherited_rate_independent_of_row_order (test_protocol.ProtocolTests.test_exact_tie_prefers_inherited_rate_independent_of_row_order) ... ok
+test_final_rows_must_use_selected_rates (test_protocol.ProtocolTests.test_final_rows_must_use_selected_rates) ... ok
+test_fresh_holdout_and_carded_readings (test_protocol.ProtocolTests.test_fresh_holdout_and_carded_readings) ... ok
+test_holdout_cannot_enter_selection (test_protocol.ProtocolTests.test_holdout_cannot_enter_selection) ... ok
+test_no_replacement_of_missing_candidate_or_episode (test_protocol.ProtocolTests.test_no_replacement_of_missing_candidate_or_episode) ... ok
+test_nonfinite_bool_and_missing_scores_rejected (test_protocol.ProtocolTests.test_nonfinite_bool_and_missing_scores_rejected) ... ok
+test_randomization_endpoint_and_rate_bindings (test_protocol.ProtocolTests.test_randomization_endpoint_and_rate_bindings) ... ok
+test_retuning_selection_record_without_validation_support_rejected (test_protocol.ProtocolTests.test_retuning_selection_record_without_validation_support_rejected) ... ok
+test_selection_provenance_must_remain_separate (test_protocol.ProtocolTests.test_selection_provenance_must_remain_separate) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.010s
+
+OK

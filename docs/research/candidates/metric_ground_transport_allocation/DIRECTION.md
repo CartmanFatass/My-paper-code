@@ -1,6 +1,27 @@
 # Direction metric_ground_transport_allocation: metric ground transport allocation
 
-## Current DM decision — reversible PARK, 2026-09-13
+## Current DM decision — CONTINUE after reentry, 2026-09-14
+
+DM explicitly accepts the existing single LCAC-vacancy reservation and resumes
+direction-local implementation as **CONTINUE**. The first selected object is
+[MGTAP-LR-SELECTION-B01](MGTAP_LR_SELECTION_B01_SCIENCE_CARD_20260914.md): equal
+three-candidate LR selection for both legal-information arms, followed by one
+fresh selected-program holdout pair. The executable selection/holdout contract
+and workload calculation have been implemented and tested; no native study has
+launched. This is actual implementation work, not a request for another dispatch.
+
+[DM reentry intake](reentry_20260914/DM_REENTRY_INTAKE.md) answers both full
+user-delivered Portfolio texts and preserves the strongest continued-PARK case.
+[The integration event](reentry_20260914/EVENT.json) asks the live Clerk to convert
+the same reservation into occupancy: RCLE/FOLR unchanged, occupied3/reserved0,
+no fourth direction. Main registry application is not claimed before its receipt.
+No new Portfolio request, old experiment restart or parallel DM is selected.
+
+DENSE remains the generic default; no new empirical advantage is claimed.
+The native runner, proportionate independent review, actual admission, launch
+and intake are this DM's next direction-local work, not scientific approval waits.
+
+## Historical DM decision — reversible PARK, 2026-09-13
 
 DM has completed the actual-result independent scientific review and selects
 **PARK** under current full-lifecycle delegation. No numerical successor or
@@ -24,8 +45,8 @@ remote duplicates removed and policy-rejected local duplicates retained. DM send
 the committed handoff to the live Clerk before ending. Clerk archival is a
 subsequent mechanical action, not claimed as already complete here.
 
-Sections below preserve historical stages and decisions; their CONTINUE/ACTIVE
-or old authority wording does not supersede this current PARK.
+Sections below preserve historical stages and decisions; neither their old
+CONTINUE/ACTIVE wording nor this historical PARK supersedes the current reentry.
 
 ## Research organization — 2026-09-04
 

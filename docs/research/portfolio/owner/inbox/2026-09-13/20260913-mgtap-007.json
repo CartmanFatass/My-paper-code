@@ -1,0 +1,75 @@
+{
+  "id": "20260913-mgtap-007",
+  "created": "2026-09-13T23:32:16-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "MGTAP 重入：CONTINUE 与等量学习率选择对象",
+  "context": "已完整读取两份 Portfolio 正文并回应原 PARK；DM 恢复方向内实现，协议与13项合成测试已完成，零新原生曝光。",
+  "options": [
+    {
+      "key": "a",
+      "label": "CONTINUE 同一 MGTAP 方向",
+      "consequence": "同一 LCAC 预留转换为占槽，推进新协议；不新增第四方向或恢复旧运行。"
+    },
+    {
+      "key": "b",
+      "label": "维持 PARK",
+      "consequence": "停止尚未执行的新对象，保留旧结果和资产，不自动启动候补。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "有限、对称的学习率选择及新配对能够改变 COND 可选分支的开发判断。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/DM_REENTRY_INTAKE.md"
+  ],
+  "ledger_row": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/AUDIT.md#L5",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否维持 DM 已执行的可逆 CONTINUE 决定及同一预留的占位转换？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+        "from": "PARK / reentry_pending_dm_acceptance",
+        "to": "CONTINUE / implementation_in_progress；同一预留转换为 MGTAP 占位，由 Clerk 集成 registry"
+      }
+    ],
+    "if_refused": "保留旧 PARK、全部模型与正负证据，停止该新对象未执行部分；不自动启动其他候补或新方向。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/DM_REENTRY_INTAKE.md",
+        "quote": "这不是再取一次固定学习率 early256 符号。",
+        "why": "首个具体比较改变了开发选择所依赖的信息，双方等量选择且最终用新配对。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/PORTFOLIO_USER_COPY.md",
+        "quote": "这是一个能够由该 DM 实际改变的内部开发选择，不需要虚构用户、部署任务或跨方向需求。",
+        "why": "接受方向内实现去留目标，不虚构客户或把空槽当科学证据。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/PARK.md",
+        "quote": "继续做一对独立训练确实可能增加关于重复性的知识，但当前预计开发价值有限。",
+        "why": "旧停止理由仍成立；新程序需8次拟合，选择不稳定且收益未成立。"
+      }
+    ],
+    "uncertainty": [
+      "一个选择 master 和一个最终配对不能支持总体稳定排序。",
+      "有限三点选择不能证明最优或识别调参的独立因果收益。",
+      "支持、provider、方向累计成本及 aggregate CPU 为 UNKNOWN。"
+    ],
+    "cost": {
+      "compute": "当前仅13项合成测试与工作量计算，零新原生曝光；计划8拟合、589824 team ticks、4096 Adam calls。",
+      "owner_time": "异步介入；不要求答复",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "DM 选择 CONTINUE：恢复 MGTAP 方向内实现工作，接续 LCAC 释放的唯一预留；首个研究对象为 MGTAP-LR-SELECTION-B01。",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/DM_REENTRY_INTAKE.md"
+  },
+  "starred": true
+}
