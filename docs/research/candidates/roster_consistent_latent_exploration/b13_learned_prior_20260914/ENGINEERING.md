@@ -11,7 +11,7 @@ exact existing log(q) by exp(eta) in the actual sampled/modal law. Existing B08�
 have no scalar in their state_dict and preserve their q arithmetic and four panels.
 B13 has its own object/seed33/domain,1,024 updates and one additional final-modal panel.
 The summary separates sampled learning/greedy/nearest contrasts from modal comparisons;
-it reports the scalar and zero evaluation parameter movement, without relabeling a decoder
+it reports the scalar and measured evaluation parameter displacement, without relabeling a decoder
 change as learning. The existing native world/event/own-trajectory/full-Y paths are reused.
 
 L0, exact invariants, acceptance, finite preparation scope and future admission/launch
@@ -27,11 +27,26 @@ All24 focused new/legacy/E01 tests passed in11.24s (manager enclosing12.5843584s
 invocation's scratch removed. Exact command/result are in TEST_RESULT.json/TEST_OUTPUT.txt.
 These are engineering evidence, not a scientific B13 result or independent review.
 
-Independent Sol/high code review is required for the changed learning/numerical/state
-semantics under current canonical ENGINEERING_SCOPE_SPEC §7.3. It is being commissioned
-on the complete published preparation; technical acceptance remains pending its findings.
+Independent Sol/high code review covers the changed learning/numerical/state semantics
+under current canonical ENGINEERING_SCOPE_SPEC §7.3. Its complete report is preserved in
+CODE_REVIEW.md, event RCLE-B13-ENG-REVIEW-91811C61-20260914-01; no material finding.
 No claim that B11 SIG11 is repaired follows from this work or the synthetic checks.
 
 The assigned independent Reviewer is native /root/rv_s_h_rcle_b13 (Sol/high), reviewing
 source91811c61cff2617f0b691c793dd40a7df76c5bdb against2ef3096104d92345a191278316a9f421f808be73.
 It returns directly to RCLE App01a09e10-9d9f-7f82-87c0-d58cbe0c7618; no Clerk hop.
+
+## DM technical acceptance — 2026-09-14 08:14 UTC
+
+DM accepts source91811c61cff2617f0b691c793dd40a7df76c5bdb with the recorded24 passing
+focused checks and independent complete-path review. The reviewer independently checked
+the work law, normalized scalar gradient/Adam path, unchanged legacy inventory, combined
+modal law and separate result publication. No new concern calls for repeating the suite.
+The66-addition/6-deletion non-test diff and28-line runner introduce no §4 machinery.
+
+The review's wording about zero evaluation displacement is bounded precisely: the code
+computes displacement, and zero has been observed in the synthetic fixture only. No native
+B13 trajectory, eta evolution, displacement, result, timing, RSS or remote admission has
+yet been measured. Synthetic driver mocks remain interface/semantic evidence. The actual
+future invocation must establish its full native record; B11 SIG11 remains unexplained.
+Technical acceptance applies to preparation, not a direction verdict or native launch.

@@ -47,7 +47,8 @@ initialization a pure learning effect. All recovery tradeoffs, signs/ties and ow
 learning remain; no scalar recovery/service exchange rate is invented.
 
 Record actual eta/exp(eta), updates, full parameter movement and sampled/modal exposures;
-measure zero parameter movement across the final evaluation panels. One fit contains65,536
+measure displacement across final evaluation panels, which must not mutate parameters.
+Zero displacement is synthetic evidence so far, not an observed B13 native fact. One fit contains65,536
 training plus2,560 evaluation episodes =68,096 total,4,358,144 native ticks and2,128 native32
 batches,1,024 backward/Adam. No per-panel independent fit or population equivalence follows.
 Historical B10/B12 are context, not matching controls for eta causality. This one new object
@@ -83,3 +84,8 @@ minutes and support10–20 invoked minutes are estimates with error allowed and 
 An ordinary1,800s operational watchdog is DM-adjustable prospectively, not a scientific
 endpoint or600s support cap. Retain full wall/RSS, all partials and failed costs; no automatic
 retry, endpoint extension, second fit, new paid capacity or other-direction resource change.
+
+Preparation accepted2026-09-14 after24 focused checks and independent Sol/high complete-path
+review with no material finding. Exact source91811c61cff2617f0b691c793dd40a7df76c5bdb and
+full review/DM acceptance are in b13_learned_prior_20260914/{CODE_REVIEW.md,ENGINEERING.md}.
+Native invocation and direction decision remain pending; no scientific exposure is claimed.
