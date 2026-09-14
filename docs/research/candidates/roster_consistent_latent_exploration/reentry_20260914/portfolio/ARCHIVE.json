@@ -16,6 +16,19 @@
     "bytes": 10678,
     "sha256": "fdbdb79d78e5b35b61735a8a2cd44687ae11ca776380b9e55ce062f31b279001"
   },
-  "dm_followup_state": "PREPARED_NOT_SENT",
-  "parent_task": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618"
+  "dm_followup_state": "SENT_ONCE_PROVIDER_ACKNOWLEDGED_COMPLETE",
+  "parent_task": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "acknowledgement_read_utc": "2026-09-14T04:38:57.390092+00:00",
+  "dm_sent": {
+    "file": "DM_RESPONSE_AS_SENT.txt",
+    "sha256": "0c1c4d0098946134e1675b2936287a15aa2f8581cadb790d4e563592e1b3c884",
+    "chars": 4207,
+    "format_note": "composer normalized six double-newline paragraph boundaries to single newlines; actual provider Copy message bytes retained"
+  },
+  "acknowledgement": {
+    "file": "ACKNOWLEDGEMENT.md",
+    "sha256": "8b2e30bb850a0361439baba72a1e1441c63663db47cccb33824eb58b25286674",
+    "chars": 2265,
+    "bytes": 2273
+  }
 }

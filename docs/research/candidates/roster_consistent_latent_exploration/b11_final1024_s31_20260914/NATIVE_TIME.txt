@@ -1,0 +1,4 @@
+Command terminated by signal 11
+whole_native_wall_s=40.83
+peak_rss_kib=846192
+exit_code=0
