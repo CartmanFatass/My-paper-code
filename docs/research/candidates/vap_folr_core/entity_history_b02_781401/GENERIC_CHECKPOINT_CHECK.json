@@ -1,0 +1,171 @@
+{
+  "arm": "GENERIC_RETAIN",
+  "updates": 4969,
+  "weights_only": true,
+  "map_location": "cpu",
+  "checkpoint_loads_this_check": 1,
+  "checkpoint_loads_cumulative": 2,
+  "actor_constructions": 0,
+  "rng_resets": 0,
+  "new_training_or_evaluation": 0,
+  "tensor_checks": {
+    "actor": {
+      "tensor_count": 15,
+      "state_dict_elements": 103199,
+      "all_finite": true,
+      "floating_dtypes": [
+        "torch.float32"
+      ]
+    },
+    "mixer": {
+      "tensor_count": 32,
+      "state_dict_elements": 284292,
+      "all_finite": true,
+      "floating_dtypes": [
+        "torch.float32"
+      ]
+    },
+    "target_actor": {
+      "tensor_count": 15,
+      "state_dict_elements": 103199,
+      "all_finite": true,
+      "floating_dtypes": [
+        "torch.float32"
+      ]
+    },
+    "target_mixer": {
+      "tensor_count": 32,
+      "state_dict_elements": 284292,
+      "all_finite": true,
+      "floating_dtypes": [
+        "torch.float32"
+      ]
+    }
+  },
+  "actor_state_dict_entries": [
+    {
+      "key": "labels",
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "fc1.weight",
+      "shape": [
+        128,
+        14
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "fc1.bias",
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "attn.scale_factor",
+      "shape": [],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "attn.in_trans.weight",
+      "shape": [
+        384,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "attn.out_trans.weight",
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "attn.out_trans.bias",
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "fc2.weight",
+      "shape": [
+        64,
+        160
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "fc2.bias",
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "fc3.weight",
+      "shape": [
+        5,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "fc3.bias",
+      "shape": [
+        5
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "rnn.weight_ih",
+      "shape": [
+        192,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "rnn.weight_hh",
+      "shape": [
+        192,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "rnn.bias_ih",
+      "shape": [
+        192
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "key": "rnn.bias_hh",
+      "shape": [
+        192
+      ],
+      "dtype": "torch.float32"
+    }
+  ],
+  "prior_check": "First read validated arm/updates and finite tensor groups, then an overly broad parameter-count assertion failed: state_dict elements need not equal named parameter count. No native run or checkpoint changed. Diagnostic reread only.",
+  "support_wall_seconds": 1.6400000000139698,
+  "parameter_count_resolution": {
+    "known_registered_buffers": {
+      "labels": 25,
+      "attn.scale_factor": 1
+    },
+    "parameter_elements_excluding_buffers": 103173,
+    "matches_runner_named_parameters": true,
+    "scope": "Collection assertion corrected; accepted model/summary/checkpoint untouched; no further read needed."
+  },
+  "prior_failed_check_tool_wall_seconds": 2.1529695,
+  "technical_integrity_passed": true
+}
