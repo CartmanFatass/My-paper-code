@@ -111,6 +111,22 @@ host_id = "local"
 authoring_checkout = "C:/Projects/HMASD-worktrees/dm-dish-b06-scientific-intake-20260907"
 authoring_branch = "codex/pro-dish-post-b06-20260907"
 
+[directions.ucope]
+state = "management_in_progress"
+occupies_slot = true
+owner_mode = "independent_task"
+priority = "HIGH"
+recast_count = 2
+accepted_event = "ucope-reactive-recast2-20260913-01"
+accepted_turn = "01a09d7d-fd47-75f0-801e-3c6928abe5a6"
+last_processed_event = "ucope-reactive-recast2-20260913-01"
+next_action = "DM implements and reviews one feedback-conditioned R/F/G/H B; no invocation yet"
+thread_id = "01a09d7d-fd47-75f0-801e-3c6928abe5a6"
+host_id = "local"
+session_checkout = "C:/Users/fires/.codex/worktrees/a241/HMASD"
+authoring_checkout = "C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906"
+authoring_branch = "codex/ucope"
+
 [directions.learned_counterfactual_agent_credit]
 state = "management_in_progress"
 occupies_slot = true
@@ -133,7 +149,7 @@ binding_key = "portfolio:cross_direction"
 transport_config = "C:/Projects/HMASD/.codex/hmasd-transport.toml"
 new_request_coordinator = "clerk"
 planning_state = "three_direction_limit_acvc_candidate_parked"
-reserved_slots = 1
+reserved_slots = 0
 request_status_commit = "fa1922c37"
 legacy_accepted_routes = "preserve_through_closeout"
 candidate_direction = "fourth-slot-portfolio-candidate-unselected"
