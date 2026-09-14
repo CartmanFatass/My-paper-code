@@ -30,6 +30,12 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
+**Operational instruction — 2026-09-14 13:23 PDT:** finish the accepted
+augmentation B01 A−G run and required result/review/archival closeout, then write
+the [owner-pause handoff](HANDOFF_20260914_OWNER_PAUSE.md) and await explicit
+resume. Current A remains live; no successor object or direction/vacancy work
+follows. This operational pause does not change the scientific lifecycle below.
+
 **Current lifecycle: ACTIVE / MEDIUM — Portfolio CONTINUE applied on 2026-09-14.**
 The [complete Portfolio decision and DM intake](pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md)
 withdraw the disputed stopping rationale and select the prepared B03 bounded

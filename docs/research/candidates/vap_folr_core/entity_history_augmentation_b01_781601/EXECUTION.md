@@ -1,5 +1,12 @@
 # Augmentation B01 current execution
 
+**Owner pause after current closeout:** OWNER_PAUSE_AFTER_INFLIGHT_20260914
+(2026-09-14 13:23 PDT) preserves the accepted A invocation and its required
+collection, full intake/review/archive. No successor work follows. After actual
+closeout the direction becomes operationally owner-paused, without scientific
+PARK/CLOSE or vacancy. [Recovery handoff](../HANDOFF_20260914_OWNER_PAUSE.md)
+is pending completion; live obligations below remain.
+
 Event: FOLR_AUGMENTATION_B01_AUGMENTED_RUNNING_MONITOR_ADOPTED_20260914.
 G is complete and collected at b881dd67c2a89aaa95ab5741541d98ff265653ff.
 A is actually running:handle folr-augmentation-b01-781601-augmented,PID3679958,
