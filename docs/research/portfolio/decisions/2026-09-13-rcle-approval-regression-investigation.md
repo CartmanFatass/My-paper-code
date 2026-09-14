@@ -117,3 +117,10 @@ source of truth pending a control-owner repair.
   `9b46cc3d7bdd75c4b4fa420ca37922c16ed2160e` are byte/Git-blob equal and clean, with TOML parse
   and whitespace checks passing. The other 20 paths and focused suites were not redundantly rerun;
   live registries, science, source and accepted requests were excluded.
+- ACVC also completed that five-path synchronization: authoring `88840bbc30f1c28429bc12ebfa3ef459d6a31f1f`
+  and detached session `ade16c8a2c1d114c3a1af71728c55aa8075dde10` are clean and blob-equal to
+  `d2227e4bd`, with whitespace and DM-TOML checks passing. Its scoped exact-PID Agentify restart
+  command was refused before execution by policy; ACVC did not retry, terminate anything, or route
+  around the refusal. Read-only checks found PID/Chrome, operation-store hash and the original
+  `sendAttempted=false` operation unchanged; no provider generation is active, and the DM retains
+  same-request repair responsibility.
