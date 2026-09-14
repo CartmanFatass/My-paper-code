@@ -1,0 +1,64 @@
+# UCOPE reactive renewal B01 — master 8901
+
+One fresh R/F/G training instance tests whether feedback-conditioned persistence R earns a useful final native-return margin over trained fixed renewal F, with ordinary feedback G and hover H retained.
+Binding MARL structure: temporal abstraction/termination under private recurrent histories and teammate co-adaptation; this is a whole control/learning-package comparison.
+
+## 1. DM decision, question and boundaries
+
+Owner-delegated decision (unattended, 2026-09-03 and 2026-09-13 instructions): **CONTINUE with this one B/EXPLORE object**, adopting reactive continuation as UCOPE's second recorded recast. Independent scientific review at `6c104373f` narrowly supports the comparison; the DM accepts its three material method findings and retains the serious PARK alternative in the accompanying intake. Review is not an experiment grant. Existing HIGH priority and other directions are unchanged.
+
+The 8801-L and unchanged-L spending stops and older retained-policy/root-residual PARK remain. No old checkpoint, fitted comparator, optimizer or training stream is reused. No L residual or L separate/suffix credit is introduced. This is a new outcome-informed object, not an old compliant retry.
+
+Exactly one matched training instance is selected: fresh R, F and G; one final panel each plus H. No interim evaluation, best checkpoint, added seed, tuning sweep, numerical diagnostic or automatic retry/successor. A result leads to DM intake and a new explicit decision within standing authority. An incomplete attempt does not acquire favorable/negative polarity.
+
+## 2. Common host and learned comparators
+
+Reuse `uav_motion_prefix_b01.environment.make_real`: five fixed UAVs, 50 uniform users, area1000, altitude50–150, maximum speed30, dt1, horizon256, free-space/vectorized channel, original native reward, shadowing/paper_reward/FDMA off and the established actor observation limit. Legal velocities use the existing tanh transform. J is the sum of every UAV's original reward across256 ticks divided by256, with no extra agent average, shaping or duration normalization.
+
+CPU FP32 torch models, one compute thread; the configured remote node's existing Python/NumPy/Torch environment executes the exact committed bytes. The stochastic algorithm is portable between that remote Linux CPU and the configured Windows CPU implementation without bit-identity claims. A local fallback is allowed only after remote nonacceptance, fresh local admission and preserved scientific semantics; no accepted remote invocation is duplicated or moved.
+
+Common actor:108→64 tanh encoder,64-unit GRU and three-dimensional Gaussian mean/log_std, with the established clamp/tanh density. Critic:136→128→128→1, tanh hidden layers. Histories update every primitive tick; no owner or partner renewal resets recurrence. Common actor/critic initialization is shared; models, Adam states and private action generators are thereafter separate. Recurrent replay uses32-tick chunks and recorded detached chunk-start hidden states, preserving the existing approximation. Raw gamma-one Monte Carlo returns, global rollout advantage centering/scaling, per-owner compound PPO clipping0.2, sum over owners/all primitive rows, value coefficient0.5, entropy coefficient0, global gradient clipping0.5, Adam lr0.0003/betas(0.9,0.999)/eps1e-8, no weight decay/AMSGrad/foreach/fused; four epochs per two-episode rollout. No value normalization.
+
+**F:** retain the full initialized2242-parameter conditional duration head frozen at half/half physical{1,2}. At own expiry, sample velocity then duration; hold the actual command for the selected ticks. Actor inputs remain local104 features + actual last command3 + remaining/4; critic retains predecision global state plus those internal command/countdown fields. Real velocity actor/critic training remains66311 trainable parameters. **G:** sampled velocity every tick, no duration head, same actor/critic budget and features with countdown zero;66311 trainable parameters. **H:** zero velocity, no model or action draws, evaluated once.
+
+## 3. R state, action law and credit
+
+R adds a2242-parameter gate67→32 tanh→2: current recurrent feature64 concatenated with the recorded actual previous command3. Labels are KEEP=0 and END=1; final gate weights/bias start at zero, yielding half/half. This is the same architecture/initial parameter law as F's head, with different conditioning and learned parameters. R has68553 trainable actor/critic/gate parameters; matching common weights is not equal trainable capacity.
+
+R maintains per-owner **eligible** state, false at reset. Its actor's final feature is eligible/4; its critic receives the five predecision eligibility flags/4 with actual previous commands. These are known internal phase fields, explicitly different in meaning from F's remaining countdown. Actor receives only its own phase/command; no partner fresh decision or future information. Update private history using the current observation before acting.
+
+| Predecision phase | Draws and command this tick | Next phase |
+| --- | --- | --- |
+| Forced fresh (reset or after KEEP) | Draw velocity only; send it | Eligible |
+| Eligible, KEEP | Draw gate; copy actual previous command; draw no velocity | Forced fresh |
+| Eligible, END | Draw gate then fresh velocity; send new velocity immediately | Eligible |
+
+No command persists for more than two ticks. END starts a new command's first tick; it does not force another renewal next tick. KEEP is neither resampling nor recomputing a mean. Use recorded branch labels, never infer them from numerical command equality. Gate is evaluated before any new candidate velocity; it cannot inspect an unexecuted sample.
+
+Record current private features/hidden state, critic features, previous command, phase, branch label, fresh Gaussian pre-tanh sample, applicable old log probability, old value and native reward. Forced-fresh logp is log p(v); eligible KEEP logp is log q(KEEP); eligible END logp is log q(END)+log p(v). No velocity density is charged on KEEP or branch density on forced rows. Compute one compound ratio/clip per owner. **Policy-credit mask is fresh_velocity_mask OR gate_mask**, so KEEP rows receive gate credit. Preserve the all-primitive-row denominator. Stored commands/choices/behavior probabilities are fixed data; gradients pass through replayed recurrent/gate features, not stored commands or newly resampled actions.
+
+Every applicable choice receives the full current-and-future native return G_t=sum(r_t…r_255), using the existing raw old-value advantage normalization. Eligible final-tick gate decisions still receive credit because they affect the current action/reward. Forced-final rows receive velocity credit only. There is no t256 step, bootstrap, suffix omission, special residual, separate clip or duration-rate conversion.
+
+## 4. Prospective independent binding and measurements
+
+Master **8901**, base b=890100000, selected without a pilot or seed screening. Common actor/critic initialization uses b+11; F/R heads use b+12 in isolated initializer contexts. Persistent training velocity/gate generators: G b+21/b+22 (gate unused), F b+31/b+32, R b+41/b+42. Training world e=0…2047 uses b+10000+e, shared exogenously across arms.
+
+Each fit trains2048 complete episodes continuously:524288 native training steps,1024 two-episode rollouts,4096 Adam calls. Keep each learner and training generators through all rollouts. Only after episode2048's update, evaluate64 worlds b+20000+e, e=0…63. Per-episode evaluation velocity/gate seeds: F b+30000+e/b+40000+e; G b+50000+e/b+60000+e (gate unused); R b+70000+e/b+80000+e. H shares evaluation worlds and has no policy randomness. Evaluation uses separate generators, no updates and fresh reset histories; it must not change trained weights or training RNG. No extra constructor reset is scored as training/evaluation.
+
+Primary: mean of64 paired-world **R−F** differences, with all64 vectors retained. Also report R−G,R−H,F−H,G−H,F−G, every arm mean and paired-world conditional SE (sample SD/sqrt64), favorable/adverse/tied counts. One matched training instance cannot estimate training-population uncertainty; the three fits and256 evaluations are not independent treatment-effect replications.
+
+MEI is **0.01 J**, retaining the prior task-local scale (2.56 summed native reward units per256-tick episode), to identify a nontrivial development margin. Above+0.01 supports a bounded R-over-F signal; inside±0.01 shows no demonstrated margin at this scale, not equivalence; below−0.01 is adverse R-over-F package evidence. R−G and R−H limit practical interpretation and cannot rescue the primary. No stable superiority, isolated feedback/termination cause, sample-efficiency curve, transfer, deployment, optimum or C claim follows. All historical signs remain separate.
+
+Prospective DM forecast: P(R−F>0.01)=**0.35**, reflecting both the concrete feedback opportunity and the adverse earlier learned-package history. Score this event once at valid intake; owner prediction: **not taken (unattended)**.
+
+## 5. Work, resources and engineering L0
+
+Total scientific exposure is **1572864 training +65536 evaluation =1638400 native team steps**,12288 Adam calls and256 final evaluation episodes. No nested search. Each R training episode has128…255 eligible ticks per owner, hence1310720…2611200 gate selection rows across training and four times those eligible rows in PPO gate replay. Known counts do not make equal compute. Historical8703 native wall2108.73 seconds is context only; new complete cost/CPU remains unknown.
+
+Plan approximately45 minutes native elapsed, with an ordinary whole-invocation watchdog of6000 seconds. This is a DM operational plan, not an owner cumulative limit or scientific wall-budget comparison. Runtime deviation alone is not adverse science; preserve partial counts and actual cost, and prospectively revise plans under the runtime specification rather than silently extend scientific exposure. This card authorizes one invocation, not retries. Fresh actual-node mandatory memory admission (physical/effective≥4GiB) precedes all scientific creation.
+
+DM owns implementation and acceptance in the existing checkout. Owned new paths: `experiments/candidates/ucope/reactive_renewal_b01/{__init__.py,reactive.py,study.py}`, `scripts/run_ucope_reactive_renewal_b01.py`, mirrored focused tests and this card/intake. Reuse existing environment/policy/learner utilities for unchanged F/G; do not edit old scientific sources. Required scope-spec§4 additions: **none**. Minimal saved final checkpoints, episode/update records and one summary are the ordinary research output; no resumable machinery or extra guard framework.
+
+Acceptance: conform to sections2–4; one focused fixture suite exercises KEEP/END/forced sequences, command copying/no unnecessary draws, gate likelihood and KEEP gradient credit, final-tick reward credit, recurrence and all primary outputs; baseline untouched paths reuse accepted checks. Independent Astra/high code Reviewer covers changed scientific/state/RNG behavior, and DM fixes findings before technical acceptance. No new Implementer/CM is assigned. Budget≤2000 new lines, runner≤600; target<900. Focused checks≤300 seconds using one invocation-owned temp directory, cleaned by its creator after preserving results. Additional tests require a change, failure or uncovered concrete concern.
+
+Commit/push exact source before a detached exact-SHA remote `agent-task` invocation. Assign accepted handle to the new batch's native Luna/low Monitor and retain direct MONITOR_ADOPTED/terminal facts. DM collects, verifies counts/primary/exposure and responds scientifically, then informs Clerk at the actual result/lifecycle boundary. Complete cost includes checks, transfer, initialization, training, evaluation, publication, observation, collection and closeout; unknown support remains disclosed. No other direction's producer or resources are interrupted.
