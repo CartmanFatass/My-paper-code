@@ -1,0 +1,7 @@
+{
+  "purpose": "Determine whether checkout fetches omitted source blobs or filters after commit delivery",
+  "seconds": 0.40599999998812564,
+  "returncode": 0,
+  "stdout": "{\"extensions.partialClone\": {\"returncode\": 1, \"value\": \"\"}, \"remote.origin.promisor\": {\"returncode\": 0, \"value\": \"true\"}, \"remote.origin.partialclonefilter\": {\"returncode\": 0, \"value\": \"blob:none\"}, \"filter.lfs.required\": {\"returncode\": 1, \"value\": \"\"}, \"filter.lfs.process\": {\"returncode\": 1, \"value\": \"\"}, \"owned_index_files\": {\"index.lock\": 0}}\n",
+  "stderr": ""
+}

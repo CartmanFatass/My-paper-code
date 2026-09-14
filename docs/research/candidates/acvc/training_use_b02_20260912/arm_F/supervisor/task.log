@@ -1,0 +1,35 @@
+=== Task 'acvc-training-use-b02-f-ac64769f6' started at 2026-09-13T03:36:52+08:00 ===
+{
+  "assessed_at": "2026-09-12T19:36:52.986746Z",
+  "available_physical_bytes": 15323058176,
+  "captured_at": "2026-09-12T19:36:52.986356Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15323058176,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"rollouts": 16, "training_episodes": 32, "optimizer_steps": 64, "process_wall_s": 11.882198183098808}
+{"rollouts": 32, "training_episodes": 64, "optimizer_steps": 128, "process_wall_s": 22.089223908027634}
+{"rollouts": 48, "training_episodes": 96, "optimizer_steps": 192, "process_wall_s": 32.18806546507403}
+{"rollouts": 64, "training_episodes": 128, "optimizer_steps": 256, "process_wall_s": 42.435720756067894}
+{"rollouts": 80, "training_episodes": 160, "optimizer_steps": 320, "process_wall_s": 52.75899999809917}
+{"rollouts": 96, "training_episodes": 192, "optimizer_steps": 384, "process_wall_s": 63.09004588704556}
+{"rollouts": 112, "training_episodes": 224, "optimizer_steps": 448, "process_wall_s": 73.27197413006797}
+{"rollouts": 128, "training_episodes": 256, "optimizer_steps": 512, "process_wall_s": 84.17101208108943}
+{"rollouts": 144, "training_episodes": 288, "optimizer_steps": 576, "process_wall_s": 94.7488817810081}
+{"rollouts": 160, "training_episodes": 320, "optimizer_steps": 640, "process_wall_s": 105.22400842804927}
+{"rollouts": 176, "training_episodes": 352, "optimizer_steps": 704, "process_wall_s": 115.52700618002564}
+{"rollouts": 192, "training_episodes": 384, "optimizer_steps": 768, "process_wall_s": 125.71338550804649}
+{"rollouts": 208, "training_episodes": 416, "optimizer_steps": 832, "process_wall_s": 134.42949280003086}
+{"rollouts": 224, "training_episodes": 448, "optimizer_steps": 896, "process_wall_s": 143.1877815030748}
+{"rollouts": 240, "training_episodes": 480, "optimizer_steps": 960, "process_wall_s": 152.0242657380877}
+{"rollouts": 256, "training_episodes": 512, "optimizer_steps": 1024, "process_wall_s": 160.78100007306784}
+{"completed_arm": "F", "evaluation_episodes": 64, "process_wall_s": 172.9483941301005}
+=== Task 'acvc-training-use-b02-f-ac64769f6' exited with code 0 at 2026-09-13T03:39:49+08:00 (Duration: 177s) ===

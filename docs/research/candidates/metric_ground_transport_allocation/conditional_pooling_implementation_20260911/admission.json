@@ -1,0 +1,16 @@
+{
+  "assessed_at": "2026-09-11T08:10:44.842797Z",
+  "available_physical_bytes": 15552196608,
+  "captured_at": "2026-09-11T08:10:44.814555Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15552196608,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "GlobalMemoryStatusEx",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}

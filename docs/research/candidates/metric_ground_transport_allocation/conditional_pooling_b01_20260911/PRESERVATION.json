@@ -1,0 +1,58 @@
+{
+  "recorded_utc": "2026-09-11T17:18:45.643Z",
+  "native_files": "six individual remote hashes match INTAKE_ANALYSIS.json and preserved native/ files",
+  "source": "Full native source2814fbd3e and command published on codex/mgtap; shared authoring checkout retained",
+  "native_archive": {
+    "sha256": "b08986047da84cfc4afe5308afd809d3a2876c02177f5cd7e70a842358924288",
+    "remote_local_match": true,
+    "raw_files_preserved": true
+  },
+  "supervisor_archive": {
+    "sha256": "ff14a8533639933303047743c12a96ec0fe9a438a1bc26ae9b7acc7fe42603db",
+    "remote_local_match": true,
+    "raw_metadata_and_log_preserved": true
+  },
+  "removed": true,
+  "shared_authoring_checkout_retained": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904",
+  "inventory": [
+    {
+      "path": "/home/wu/hmasd-worktrees/mgtap-cond-b01-8212-20260911",
+      "kind": "completed detached exact-source worktree",
+      "retention": "all source and six native files preserved"
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/mgtap-cond-b01-8212-20260911",
+      "kind": "input/duplicate archives",
+      "known_files": [
+        "COMMAND.sh",
+        "source.bundle",
+        "native_result.tar.gz",
+        "supervisor.tar.gz"
+      ]
+    },
+    {
+      "path": "/home/wu/.agent-tasks/mgtap-cond-b01-8212-20260911",
+      "kind": "terminal supervisor state",
+      "known_files": [
+        "pid",
+        "start_time",
+        "status",
+        "exit_code",
+        "runner.sh",
+        "task.log"
+      ]
+    },
+    {
+      "path": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904/temp/directions/metric_ground_transport_allocation/exp/conditional_pooling_b01_20260911_8212_source",
+      "kind": "local duplicate published-source/result archives",
+      "known_files": [
+        "source.bundle",
+        "native_result.tar.gz",
+        "supervisor.tar.gz"
+      ]
+    }
+  ],
+  "cleanup_completed_utc": "2026-09-11T17:27:28.855Z",
+  "cleanup_record": "CLEANUP.json",
+  "root_integration_sha": "811f353382721a87e8aa6596bac4271165889f81"
+}

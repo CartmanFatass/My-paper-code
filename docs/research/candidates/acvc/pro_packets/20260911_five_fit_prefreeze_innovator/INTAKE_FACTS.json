@@ -1,0 +1,109 @@
+{
+  "read_at_utc": "2026-09-12T04:05:19.456084+00:00",
+  "request_id": "2026-09-11-acvc-five-fit-prefreeze-innovator-01",
+  "complete_response": {
+    "commit_sha": "b1709632efa060aa7e71ad377bd0559154289f12",
+    "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/archive/RESPONSE.md",
+    "bytes": 36040,
+    "lines": 161,
+    "sha256": "21e48f3c2a323083e5d61382ef8bf07ad9ccd4d3034bb702849c2d4e3db75cad",
+    "fresh_github_contents_equals_git_bytes": true,
+    "fresh_read_note": "Direct Contents equality and current delivery comment were checked in the preceding command before an unrelated suffix-enumeration assertion failed; this command reuses that verified read and exact saved comment.",
+    "commit_scope": "only scoped archive/RESPONSE.md"
+  },
+  "task_commit_sha": "a2960298fcf3c44dd5b67bce8974536a789376c1",
+  "prompt": {
+    "bytes": 1917,
+    "sha256": "598d86380745a5e7f6dc6912fa17fdf3f9187c1f2c4f27e3aa1b820f87ca5b0b",
+    "equals_bound_handoff": true
+  },
+  "source_mapping": {
+    "manifest_count": 18,
+    "response_source_pairs_equal_18_pins_plus_fixed_task": true,
+    "reported_access": "all eighteen manifest paths; full promotion/accepted intake; recovered same-pin transient Portfolio and out-of-range foundation reads; no remaining material gap"
+  },
+  "transport": {
+    "conversation_id": "6aa4c897-0b0c-83e8-9606-5916b52b1a75",
+    "binding": "em:acvc:innovator",
+    "user_message_id": "today-current-round|TASK.md@a2960298fcf3c44dd5b67bce8974536a789376c1|user-node",
+    "user_id_limit": "descriptive identifier; not a verified provider UUID",
+    "assistant_message_id": "ef17d600-df67-409e-ba52-a281d4658f06",
+    "assistant_id_limit": "actual UUID reported in Transport facts; DM did not inspect provider UI",
+    "send_click_count_reported": 1,
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "effort": "Pro, 5 of 5.",
+    "natural_completion": "Worked for 11m 26s; complete assistant response; Copy response present; no active generation control",
+    "captured_at": "2026-09-12T03:49:46Z",
+    "receipt_sent_at": "2026-09-12T03:51:05Z"
+  },
+  "raw_artifact_role_defect": {
+    "raw02_bytes": 406,
+    "chat_bytes": 406,
+    "raw02_equals_chat": true,
+    "raw02_sha256": "f02c91bdf2e0cfe52e7ed16da4bbc2d16049184d1a6d80667ef0236607cdbe27",
+    "actual_role": "short link-only chat receipt",
+    "interpretation": "Raw __02 and original Transport response_* fields describe the chat receipt, not the complete Git decision. Preserve original bytes and labels; use full immutable Git answer for science. Distinct roles, not conflicting scientific answers.",
+    "raw_labels_only_correction_sha256": "005753c90e52789bbed8ef8c1a65bc14d237263c324bf14132006df26f01d4a3",
+    "correction_state": "Transport-owned raw sidecar observed and byte-checked; repository publication will be reconciled when routed. No provider action, no replacement answer."
+  },
+  "issue_comment": {
+    "id": 5643255184,
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5643255184",
+    "created_at": "2026-09-12T03:46:36Z",
+    "updated_at": "2026-09-12T03:46:36Z",
+    "exact_delivery_link_matches": true
+  },
+  "raw_snapshot": {
+    "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/archive/TRANSPORT_ARCHIVE_SNAPSHOT.zip",
+    "bytes": 19164,
+    "sha256": "8734cb43da1d2e4f01b71ed95eb6f3d62e6a52dd751e26974309d5c5412a346b",
+    "members_verified_byte_identical": true,
+    "files": [
+      {
+        "name": "2026-09-11-acvc-five-fit-prefreeze-innovator-01--acvc--attempt-01__02_RESPONSE.md",
+        "bytes": 406,
+        "sha256": "f02c91bdf2e0cfe52e7ed16da4bbc2d16049184d1a6d80667ef0236607cdbe27"
+      },
+      {
+        "name": "2026-09-11-acvc-five-fit-prefreeze-innovator-01--acvc--attempt-01__03_TRANSPORT_FACTS.json",
+        "bytes": 5272,
+        "sha256": "1caca4cdd7a061fff314f1a22e5d9fe0db84e734a24d84b1e5d6c10c816b5d56"
+      },
+      {
+        "name": "2026-09-11-acvc-five-fit-prefreeze-innovator-01--acvc--attempt-01__04_CHAT_RECEIPT.md",
+        "bytes": 406,
+        "sha256": "f02c91bdf2e0cfe52e7ed16da4bbc2d16049184d1a6d80667ef0236607cdbe27"
+      },
+      {
+        "name": "2026-09-11-acvc-five-fit-prefreeze-innovator-01--acvc--attempt-01__PACKET_MANIFEST.json",
+        "bytes": 1746,
+        "sha256": "6e239ef225a0519778eeba45ed4aac72a88f226c553ef679db554fd0b3279832"
+      },
+      {
+        "name": "2026-09-11-acvc-five-fit-prefreeze-innovator-01--acvc__00_PROMPT.md",
+        "bytes": 1917,
+        "sha256": "598d86380745a5e7f6dc6912fa17fdf3f9187c1f2c4f27e3aa1b820f87ca5b0b"
+      },
+      {
+        "name": "RECEIPT_LABEL_CORRECTION.json",
+        "bytes": 1776,
+        "sha256": "005753c90e52789bbed8ef8c1a65bc14d237263c324bf14132006df26f01d4a3"
+      }
+    ]
+  },
+  "scientific_reading": "Reuse current evidence-spec 5.3,6.2-6.3,11.8 plus FOUNDATIONS 6 and 04_EMPIRICAL; complete fit-plus-panel unit, normal-model limit and package-versus-causal attribution. No new empirical analysis or literature proposition.",
+  "disposition_read": "Accept unchanged qualified design for prospective bindings and freeze, with no material redesign, extra question, exception or present population-performance finding. Full conformance reasoning is in the English intake.",
+  "current_exposure": {
+    "scientific_invocations": 0,
+    "scientific_rng_masters": 0,
+    "model_constructions": 0,
+    "model_loads": 0,
+    "native_ticks": 0,
+    "training_episodes": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "search_candidates": 0
+  }
+}

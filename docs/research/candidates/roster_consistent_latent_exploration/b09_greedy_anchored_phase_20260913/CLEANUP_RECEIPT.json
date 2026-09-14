@@ -1,0 +1,26 @@
+{
+  "time_utc": "2026-09-13T23:29:14.698129+00:00",
+  "integration_fact": "Clerk source task 01a09cfe-1614-7da1-8445-323658edcc70 confirmed exact response/dispatch archive integration at f4ccead4bae8dda6d625a97b6903629b1625d1a3, pushed origin/main and clean; accepted B09 source remains published on codex/rcle and unique raw/source digests verified before removal.",
+  "terminal_status": {
+    "task": "rcle-b09-s29-38a29c7e3",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3428027,
+    "uptime_seconds": 7639,
+    "tmux_active": false
+  },
+  "removed": [
+    {
+      "path": "/home/wu/hmasd-worktrees/rcle-b09-38a29c7e3",
+      "disk_absent": true,
+      "git_registration_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/rcle-b09-s29-38a29c7e3",
+      "disk_absent": true
+    }
+  ],
+  "shared_authoring_and_retained_local_evidence": "untouched",
+  "cleanup_command_wall_s": 0.743228,
+  "pre_cleanup_digest_inventory_wall_s": 0.2217987
+}

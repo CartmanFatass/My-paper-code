@@ -1,0 +1,90 @@
+{
+  "id": "20260911-fsd-004",
+  "created": "2026-09-11T19:35:22-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FSD 新 771103 原包学习对：固定一对后返回",
+  "context": "Claim: unchanged I1280 can again exceed freshly learned authentic D0 after the same five-rollout exposure. Binding structure: temporal abstraction/termination; asynchronous individual boundaries alter joint rows and valid credit heads.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行已分配的一对及完整接收清理，随后返回。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在干净边界停止后续动作并保留既有事实。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "只经相应权限修订未发生动作，不自增额度。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "Current Portfolio S authorizes one unchanged unscreened pair; only identity literals change and every outcome is retained.",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L125",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "记录新分配的 771103 学习对：是否保持 I1280 与真实 D0 的原契约，完成这一对后返回？已按现行委托执行卡片绑定，异步复核不阻塞。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md §8",
+        "from": "前两对已结束；新 Portfolio S 分配待绑定",
+        "to": "新训练种子 771103、终评种子 781103；一对原包 B/EXPLORE，无第四对或自动后继"
+      }
+    ],
+    "if_refused": "在下一干净边界应用拒绝或修改，保留已发生的证据与费用；不撤写历史，不自选替代实验。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+        "quote": "the two prior I1280 pairs gained +.0569774672 and\n+.2062859041",
+        "why": "两次本地原包收益支持再观察一个新学习对，但不是稳定优势。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/EXECUTION_MAPPING.md",
+        "quote": "## 1. FSD — one new unchanged I1280/authentic-D0 B pair",
+        "why": "新分配明确给出完整的一对、接收及清理额度。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+        "quote": "Both package pairs had lower I\ntraining means on their first two rollouts",
+        "why": "学习前期不占优，I 近两倍耗时，旧 batch128 负结果仍保留。"
+      }
+    ],
+    "uncertainty": [
+      "一对训练是独立单位；32 局误差仅条件于学得策略。",
+      "新 D0 表现与实际工作量未知，仍无调优的同信息余量记录。",
+      "只能解释原包，不能分离批大小和在线续期的因果贡献。"
+    ],
+    "cost": {
+      "compute": "D0≤900 秒，I≤1800 秒，原生和≤2700 秒；支持≤300 秒含唯一≤45 秒源码投递；完整≤3000 秒。",
+      "owner_time": "可异步审阅，无需逐步批准。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommend/select (a), with the stop above.",
+    "source": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T03:28:01+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/05c24bcd85f92efc26fb2a9cb2152bed51dd90e9/docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "771103 原包学习对完成：I−D0 −0.01243，按原规则为 opposite_sign；16升16降，保留条件不确定性和两次旧增益。低信心正收益预测错误。原生1495.25秒；本对结束，保存与授权清理，不加实验。"
+    }
+  ]
+}

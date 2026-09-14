@@ -1,0 +1,74 @@
+{
+  "id": "20260911-rcle-001",
+  "created": "2026-09-11T00:59:46-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "RCLE B05：全新1000步最近动作先验比较",
+  "context": "一个全新训练实例在1000次更新后能否改善自身初始化并胜过现成最近动作规则；绑定成员变化后的协调服务。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行已分配的一次B05比较，保留所有结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止尚未接受的执行，不自动替代。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按异步具体指令修订尚未执行的范围。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "Portfolio已明确分配，独立审阅和改变契约的两个检查通过。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B05_NEAREST_PRIOR1000_SCIENCE_CARD_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "执行已由Portfolio分配的一次全新1000步最近动作先验比较。",
+    "changes_if_approved": [
+      {
+        "target": "RCLE B05/master25",
+        "from": "B04/master24固定200步已结束",
+        "to": "单独新根的一次1000步训练及初始化/最终/最近动作参考比较"
+      }
+    ],
+    "if_refused": "停止尚未接受的新执行并记录异步指令；不改写B04结果或自动选择替代种子。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_five_chain_refill/EXECUTION_MAPPING.md",
+        "quote": "RCLE — new final1000 nearest-prior fit and attained reference",
+        "why": "完整Portfolio裁决明确分配此一次比较。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B04_NEAREST_PRIOR_RESULT_INTAKE_20260910.md",
+        "quote": "All eight final U means lose to nearest;",
+        "why": "短训练先验没有胜过现成规则，延长预算不保证成功。"
+      }
+    ],
+    "uncertainty": [
+      "一次训练只能说明这一配方；不能与旧200步种子建立纯预算因果。",
+      "保留全部碎片化、恢复失败和参考差距。"
+    ],
+    "cost": {
+      "compute": "学习≤600秒，参考≤10秒，全部支持≤140秒，完整≤750秒；70144回合、1000次更新。",
+      "owner_time": "无需等待回复",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommend/select(a): execute the Portfolio-selected fresh1000 comparison with the exact caps.",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B05_NEAREST_PRIOR1000_SCIENCE_CARD_20260911.md"
+  },
+  "starred": false
+}

@@ -1,0 +1,57 @@
+{
+  "question": "Portfolio已选择五项有限新B投资；当前两项出现执行空位，哪些实际状态与后续问题需要保留？",
+  "changes_if_approved": [
+    {
+      "target": "新研究投资",
+      "from": "作者仅建议A/B/C",
+      "to": "Pro选择A：FSD3000、FOLR3900、MGTAP1200、ACVC600、VNFC900秒，各项及子项不可转账；Root已派出五条原DM链。"
+    },
+    {
+      "target": "当前执行与空位",
+      "from": "派出时五条推进链",
+      "to": "MGTAP8213已运行并由Monitor接管，FOLR/ACVC继续；FSD770903源交付失败且零科学暴露，VNFC仍未就绪且900秒有条件排队。无自动替补，Root另委托准备新的Portfolio问题。"
+    },
+    {
+      "target": "比较器与技术边界",
+      "from": "原作者把ACVC的C/dwell简称写错；旧技术快照已有变化",
+      "to": "执行原卡：C发本轨迹提议，dwell按自己的事件判据置零，不借F时点/剂量。CBSC/FRRIE源观察已完成；VNFC新静态事实不等于运行修复。"
+    }
+  ],
+  "if_refused": "异步指示由Root和原DM在各自干净边界应用，保留已执行事实。不会撤销已运行结果、退还旧失败成本或自动另跑；不等待所有者逐项确认。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+      "quote": "FSD tests recurrence of a credible new-package gain; FOLR tests an already opened but unimplemented learned operation; MGTAP tests the small first COND signal across another training history; ACVC tests the fixed package on another independently trained base; VNFC seeks the first complete answer to its accepted temporal-credit question.",
+      "why": "五项各自回答一次复现、首次学习操作或尚未回答的比较，Pro明确选择有限投入。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+      "quote": "The new scalar supplies no new information.",
+      "why": "FOLR可能重复普通GRU已有能力，额外收益与成本未知；B的较小投入仍是最强反对方案。"
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-11-open-directions-research-program.md",
+      "quote": "The response supplies no automatic scientific replacement for these two vacancies.",
+      "why": "FSD失败和VNFC未就绪不产生科学负结果，也不给Root自行换方向或重试的权力。"
+    }
+  ],
+  "uncertainty": [
+    "新结果尚不支持稳定优越性、纯机制因果、上界、迁移或正式UAV验证。",
+    "FSD最新失败是零暴露的源交付限制；VNFC的40/32字节差异尚不能定位首次错误或证明生产路径修复。",
+    "缺失匹配headroom不等于零，不阻止B；旧成本尾项未知，不能证明完整上限合规或虚构超支。",
+    "原预测未征答；新结果按各自卡评分，缺主结果不按预测失败计。"
+  ],
+  "cost": {
+    "compute": "A的完整上限合计9600秒只是五项不可转移上限；不是实测费用或修复公款。当前FSD结束边界和VNFC条件限制保留，已运行MGTAP不受替补问题影响。",
+    "owner_time": "异步可阅，无需确认；作者/Pro/工具尾项总费用未测。",
+    "reversibility": "costly",
+    "waits_on_this": "无所有者等待；仅新替补科学投资送原Portfolio节点，已有独立工作继续。"
+  },
+  "verdict_text": "**Select A: fund one fresh, bounded scientific unit in each of FSD, FOLR, MGTAP, ACVC and VNFC, with separate complete caps of 3,000, 3,900, 1,200, 600 and 900 seconds. Independently continue the owner-directed technical-unblocking program. VNFC's new scientific allocation is selected now, but its execution remains dependent on acceptance of a repair relevant to the observed corruption; the current workaround proposal is not that acceptance. Resume bounded original-DM technical work for CBSC and FRRIE, with concrete technical scope and finite bounds supplied by Root, but allocate neither a scientific run.** These are five different purchases of information, not five names chosen to fill a dashboard. FSD tests recurrence of a credible new-package gain; FOLR tests an already opened but unimplemented learned operation; MGTAP tests the small first COND signal across another training history; ACVC tests the fixed package on another independently trained base; VNFC seeks the first complete answer to its accepted temporal-credit question. [Current brief §§1–4][brief]; [preparation and owner instructions][prep]; [proposed counts and caps][facts].",
+  "source": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+  "application_record": "docs/research/portfolio/decisions/2026-09-11-open-directions-research-program.md",
+  "application_state": "applied as Root assignments; later limitations recorded; intake publication pending Root integration",
+  "latest_facts": "docs/research/portfolio/pro_packets/20260911_open_directions_program/INTAKE_FACTS.json"
+}

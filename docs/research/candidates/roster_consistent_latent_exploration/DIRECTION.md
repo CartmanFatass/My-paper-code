@@ -6,8 +6,9 @@ This source belongs to route **N3 — 状态保留、重建与迁移**, in the *
 of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
 this does not establish scientific equivalence or pool result polarity.
 See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
-Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
-older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+The owner's 2026-09-13 direct instruction assigns this DM its entire direction lifecycle;
+`docs/research/portfolio/PORTFOLIO.md` is the user-readable cross-direction report maintained
+by Clerk. Older lifecycle/execution authority statements below are historical. Existing cards, technical quarantines,
 second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
@@ -15,45 +16,202 @@ This authority preserves the direction's source-grounded scientific question, ev
 ## Authority
 
 - Stable direction ID: `roster_consistent_latent_exploration`
-- Current lifecycle, priority, and owner are held only by `docs/research/portfolio/PORTFOLIO.md`; this file records only the direction's scientific authority and provenance.
+- This DM owns direction-local research, family adjustments, continuation, parking and ending under the owner's 2026-09-13 instruction. Clerk records these decisions in the Portfolio report; only owner-triggered cross-direction adjustments/consultations follow. This grants no control over other directions or extra resource commitments.
+
+## Current DM position — 2026-09-13 after B10: PARKED
+
+DM reversibly PARKS current RCLE research advancement, with reasons and alternatives in the
+[B10 intake](RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md). B10 is COMPLETE: G_U +.061531575521,
+D_n +.154589843750, D_g -.019075520833, all eight U cells retaining these signs. Real learning
+and nearest benefit coexist with a greedy deficit and mixed recovery. No sufficiently useful
+next native-service question is currently selected; this is a direction decision, not an ended
+allocation or support timeout automatically releasing it. No general learning impossibility,
+permanent CLOSE or other-direction adjustment follows. Both narrow recipe HOLDs remain.
+
+Independent scientific Convergence review of B10 design, evidence, interpretation and next-plan
+reasoning is complete at0366a47e6 and fully answered in the B10 intake. No invalidating defect was
+found; DM clarified imported starting capability versus learning and accepts the opportunity cost
+of not measuring another fresh1024 fit. Scientific discrimination remains real; current PARK is
+a qualitative value judgment, not population inferiority or a claim that repetition is useless.
+Mapped cleanup is complete. DM owns this disposition; no Pro/Portfolio lifecycle approval is requested. Reopen for a concrete
+defensible use/method discriminator or material review finding, with finite cost and comparator
+meaning stated. No positive-result/customer/headroom prerequisite is imposed. Clerk records this
+PARKED decision and completed closeout; no pending producer or automatic vacancy replacement remains.
+
+## B10 preparation decision — historical immediate predecessor
+
+DM selects one ordinary [B10](RCLE_B10_GREEDY_ANCHORED_1024_SCIENCE_CARD_20260913.md):
+fresh seed 30, unchanged greedy-anchored package, exactly 1024 updates and four 512-row
+panels. B09's positive own-initialization learning with a remaining greedy deficit makes
+longer finite-exposure native service a useful unresolved question. This is not a causal
+256-versus-1024 training-budget contrast, a retry of B09, or a rerun of either held recipe.
+One started invocation, native/support/complete caps 300/600/900 seconds, preserves real
+resource limits. DM proceeds through implementation, independent review, committed remote
+execution and intake; no new Portfolio purchase or lifecycle approval is required.
+
+At B10 selection RCLE continued ACTIVE with actual B10 preparation. B09 historical idle/no-successor text
+describes its completed allocation, not revocation of standing research authority. Both
+tested-recipe HOLDs remain; no family change or other-direction resource choice is made.
+Clerk receives this decision and evidence as report input, not an automatic Portfolio proposal.
 
 ## Current scientific question
 
-Fresh cycle
-`2026-08-29.8-successor-01a04a02-rcle-public-containment-03` asks for the exact
-containment boundary of public-plan continuity under roster churn. When CARRY's
-complete public maximum-overlap/minimum-travel repair is a legal member of a
-competent REPLAN class with identical public history, objective, actions,
-dynamics, clocks, and useful computation, can CARRY have any direct physical
-recovery or service-nonharm value over that class?
+How can jointly learned behavior improve useful native service through physical
+roster changes under legal information and a competent service reference? The
+accepted [joint-quota-phase family decision](RCLE_JOINT_QUOTA_PHASE_FAMILY_INTAKE_20260912.md)
+selects one learned public common-phase controller against GREEDY-QUOTA-PHASE,
+attained INDEPENDENT-NEAREST and its own initialization. This new family directly
+tests the existing roster-service question. Following its complete B08 observation,
+the exact tested joint-quota-phase/256-update Adam/final256 recipe is on a reversible
+development-spending HOLD under the [post-B08 Convergence intake](pro_packets/20260913_post_b08_development/INTAKE.md).
+The family remains open. The separate tested equal-unit/.99-prior/FLEX/final1000
+recipe remains on its earlier narrow spending HOLD.
 
-The cycle first derives the finite public-history containment theorem and its
-failure assumptions. It activates a fresh bounded finite host family only if a
-same-information, same-objective exception survives without comparator
-handicap. Finite-budget optimization, partial observability, private setup
-state, changed objectives, APFI event-order identification, and DISH controller
-handover are explicit separate objects.
+The complete [greedy-anchored Convergence intake](pro_packets/20260913_greedy_anchored_continuation/INTAKE.md)
+now retains one changed policy-package question for later finite B object/investment
+specification: exact greedy log-prior plus the existing learned phase scorer.
+This close-call candidate decision itself selected no fit or budget. The subsequent
+[conforming finite-investment intake](pro_packets/20260913_greedy_anchored_investment/INTAKE.md)
+allocated one fresh seed29 B09 at256 updates and four complete native panels,
+with180/600/780 s native/support/complete invoked caps. Its [complete B09 intake](RCLE_B09_GREEDY_ANCHORED_PHASE_INTAKE_20260913.md)
+now preserves G_U+.05126953125 and D_n+.1460205078125, with D_g−.0317708333333.
+Both primary paths/all8 U means improve from new initialization and beat nearest,
+yet lose to greedy. Positive learning is not erased by the rule deficit. This
+one-fit result favors fixed greedy for the observed U use; recovery worsens in3/8
+cells versus initialization and5/8 versus greedy despite all8 gains over nearest.
+No stable superiority, causal anchor attribution, headroom or broad direction
+failure follows. Both tested-recipe HOLDs remain intact and no new HOLD is applied.
+The finite unit ends after preserved closeout, with no automatic fit or consultation.
+A new discriminator requires a concrete changed use or observation with a stated
+consequence for the learned-versus-greedy development choice; none is allocated here.
 
 ## Current position
 
-This WORK ends at `SCOPE_FROZEN` / `TERMINAL_GAP`. Two independent result-blind
-local routes provisionally agreed that complete functional policy containment
-makes the exact CARRY trajectory law attainable by REPLAN and that no genuine
-same-information counterexample survives. They sharpened the candidate theorem
-to attainable-set containment and a class-value or competent-selector claim,
-not nested Pareto fronts or a claim about every arbitrary implementation.
+The accepted [post-B07 Convergence intake](RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md)
+applies response903aa067cee2833a81e6758ddc0abf593ad8b4b6: a reversible hold on
+further development spending for this exact tested recipe. Its intended service
+observation is complete. The prior candidate recommendation and separately funded
+B07 remain valid historical decisions; the new recommendation follows that
+observation and does not rewrite it. RCLE remains ACTIVE under current owner
+continuity. No whole-direction park/closure, Portfolio priority/capacity change,
+recast, new fit or consultation follows from this narrow judgment.
 
-The required Pro Innovator barrier was not validly completed. Primary operation
-`d330f60e-5ae3-4aed-97e4-b9e2814ea086` and the sole owner-authorized
-new-conversation replacement `8c0fa78b-501b-4e02-842f-ade354d29a06` each
-terminalized `SENT_INPUT_MISMATCH`; their separate provider conversations are
-isolated and no response archive exists. The shared replacement boundary is
-exhausted and no live Effect remains.
+The tested rule was d=u(g_M)+u(g_C), followed once by theta-=.02*u(d) for a nonzero
+direction; exact zero/cancellation leaves parameters fixed. Both stopped full-return
+derivatives use the same 64-episode graph/parameter state and the complete ordered
+26,161-scalar CPU FP64 inventory. The baseline update follows. There is no factor100,
+epsilon rejection, projection, second update or extra rollout. The .99 nearest prior,
+public tick24 physical roster event, entity-owned survivor/newcomer/departure FLEX
+state and four-tick claims remain the tested laws. Weak-channel noise or near
+cancellation could affect this heuristic, but no such cause is identified.
 
-The local theorem and counterexample observations remain provisional rather
-than accepted direction science. No synthesis, finite enumeration, CM, source
-change, result command, learning, or Convergence was reached. This transport-
-limited gap has no scientific decision impact and no lifecycle recommendation.
+The [complete B07 E0](RCLE_B07_EQUAL_UNIT_RESULT_EVIDENCE_20260912.md) and
+[empirical intake](RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md) preserve Delta_ref
+-0.008841959635417 (conditional 95% [-0.012610153128903,-0.005073766141930]) and
+G_U -0.000205485026042 (conditional interval across zero). Both primary paths and
+all eight reference U comparisons are negative. Against nearest, six F/two
+failure-coded tau cells worsen; against initialization, five U/four F/one tau
+cells worsen while three U cells improve. Favorable F/tau/Y observations remain.
+The .05 U MEI is unchanged. This n=1 comparison supports the bounded service
+reading and development judgment, not stable degradation/equivalence or an
+identified normalization-vs-joint100 effect. Tuned headroom remains absent.
+
+B06 stays separate: Delta_ref -0.00575764973958, G_U -0.000107828776042, eight
+reference U deficits, four local initialization gains and mixed native harms.
+It is neither a fresh joint100 control nor a second fit of the exact B07 recipe.
+Earlier W100/W1 native learning and the surviving local B06/B07 gains are the
+strongest support against broad RCLE unlearnability. The completed B07 attained-
+reference deficit and lack of positive aggregate initialization learning are the
+strongest contradiction to maintaining this unchanged candidate recommendation.
+The training-history variation of the exact recipe remains unmeasured; Pro
+accepts the risk of foregoing a favorable repetition without declaring it absent.
+Supplied-prior competence, finite exposure, update allocation and partner
+co-adaptation remain alternatives rather than identified explanations.
+
+The historical reference-column failure and its unknown unreturned work remain
+preserved. The authorized eager-reference completion supplies the intact missing
+panel without identifying a writer or establishing a global cure. No historical
+reproduction or diagnostic is required for the accepted development judgment.
+
+The next discriminator for reconsidering this recipe is a concrete changed use
+or credible new evidence affecting its service value/cost: state how another
+observation would alter inclusion of the optional learned path. It need not be
+positive, an exact optimum or a complete causal explanation. This is a revisit
+condition, not today's retained fit, new algorithm or automatic consultation.
+The broader direction remains open. Portfolio L's [accepted documentary intake](RCLE_L_DESIGN_INTAKE_20260912.md)
+returned one joint-quota-phase proposal; Convergence's complete response8aa3f7bd7,
+integrated31472f0b2 and [conformingly intaken](RCLE_JOINT_QUOTA_PHASE_FAMILY_INTAKE_20260912.md),
+selects it unchanged as a new object family, explicitly not a direction RECAST.
+That commitment funded [B08's complete one-fit comparison](RCLE_B08_JOINT_QUOTA_PHASE_INTAKE_20260912.md).
+The final learned quota phase improves U from its own initialization by.048152669,
+with256 nonzero Adam updates and all eight initialization cells improved. It
+nevertheless trails greedy quota phase by.533040365 U and attained nearest
+by.370141602 U on the prespecified two-path mean; both paths and all eight
+reference-service cells are adverse. The card's no-endpoint-advantage reading
+favors the fixed rules for this observed optional-service use. F=0 remains
+structural; favorable nearest-relative F/recovery and the mixed greedy recovery
+paths do not erase the native service deficits.
+
+This is the strongest present contradiction to the tested learned allocator,
+while actual learning remains support against a broad unlearnability claim.
+Finite training, policy-gradient signal quality and representation remain
+unidentified alternatives. Ideal public dispatch is shared with greedy and
+differs from nearest's communication requirement; no isolated correlation/credit/
+optimizer cause or equal-communication conclusion follows. The full invocation
+took45.39s with613,072KiB peak RSS; this bounded observation does not establish
+scalability, stable performance or C/UAV transfer. Historical recasts and the
+old recipe HOLD remain intact.
+
+The selected one-fit discriminator is complete. The conformingly accepted
+[post-B08 Convergence response](pro_packets/20260913_post_b08_development/INTAKE.md),
+immutable e4fd016e1612d0d4ad6a18a9a2eb4ac2f06478a0, now places only this tested
+joint-quota-phase/256-update Adam/final256 recipe on reversible development HOLD.
+The attained service deficits outweigh the current case for unchanged candidacy,
+while positive learning, short native execution and unknown training-history
+variation remain the strongest opposition. This qualitative development judgment
+does not establish stable inferiority or a class limit and selects no second fit.
+
+Revisit this exact recipe when an actual authorized use makes keeping it beside
+greedy a real development choice and another training history could change that
+choice, or credible new service-value/complete-cost facts change the judgment.
+The reason may use negative or mixed facts; no positive pilot, exact optimum or
+complete diagnosis is required. This condition commissions no prior diagnostic,
+search for a reason or automatic consultation. The family remains open.
+[Current continuation](RCLE_POST_B07_CONTINUATION_READINESS_20260912.md) retains
+the same DM and direction responsibility. B08 retention and cleanup are complete;
+neither its ended finite allocation nor this narrow recipe HOLD is a
+whole-direction disposition.
+
+The complete Convergence response5b04f22e844b74df5c12a0dfd334b3ff08f32634
+[selects A](pro_packets/20260913_greedy_anchored_continuation/INTAKE.md):
+retain only the explicitly offered epsilon=.1 greedy-anchored learned-correction
+question for later finite B object/investment specification. Its law is
+q(s given x)=.9*1[s=exact greedy(x)]+.1/N and
+pi_theta=softmax(log q+z_theta), recomputed on every public phase snapshot.
+It preserves native roster/action/information semantics and asks whether learning
+adds useful service beside fixed greedy and attained nearest. It neither reopens
+the unchanged B08 recipe nor establishes a changed use/cost fact.
+
+The strongest support is B08's real initialization learning plus a specific legal
+competent reference for an incremental package question. The strongest opposition
+is greedy's large attained service advantage: an anchor can import rule competence
+without learned value, and sampled departures can harm native trajectories.
+The node explicitly calls this a close-call against retaining no new empirical
+candidate. The new initialization, learned increment and complete cost are all
+unknown. The .9 greedy action preference is no native-return mixture or
+post-training safety guarantee; historical prior failures remain cautionary
+rather than matched controls.
+
+A separately specified/allocated real-learning comparison against the candidate's
+own new initialization, fixed greedy and nearest would be the next discriminator,
+retaining positive, small, mixed and adverse U/F/recovery consequences. It would
+test package service, not isolate an anchor cause. Candidate retention selects
+no fit, seed, card, numerical cap or automatic consultation; both HOLDs and the
+open-family boundary remain. Exact integer greedy ties and scoring the actually
+sampled combined distribution are future implementation constraints recorded in
+the intake, not newly implemented evidence.
+
+The historical sections below preserve earlier objects and their own limits.
 
 ## Portfolio recast — 2026-08-30
 
@@ -655,3 +813,68 @@ discriminator is one fresh final1000 comparison of the same prior against its ow
 initialization and nearest, asking longer-budget performance rather than budget
 causality. No successor, new seed/card, family/lifecycle/priority change or C claim
 is selected here. References: B04 card, E0, retained-data analysis and full intake.
+
+## Fresh nearest-prior1000: reference deficit persists — 2026-09-11
+
+The separately allocated B05/master25 is VALID_COMPLETE_B_EXPLORE under
+RCLE_B05_NEAREST_PRIOR1000_RESULT_INTAKE_20260911.md. Final1000 primary U.3379089355
+remains above attained nearest.2838907878; Delta_ref−.0540181478, conditional
+SE.0041478589. All8 final U means lose to nearest. Initialization gain+.0013387044
+has conditional95% interval[−.0021551607,+.0048325696] and opposite active-path signs.
+This one fit did not establish competent-reference service superiority.
+
+Strongest direct support:4/8 initialization U gains, active8→12 gain+.0057779948
+and all-cell native Y gain+.0018723806. Strongest contradiction: all8 reference U
+losses, active12→8 initialization U loss.0031005859, F worsening in6/8 cells versus
+both initialization and nearest, and2036/2048 final tau40 outcomes. All-cell F and
+failure-coded tau worsen from initialization despite small favorable primary means.
+No scalar tradeoff, general recovery or unqualified nonharm follows.
+
+The recorded1000 nonzero updates moved26,161 FP64 parameters by.8522123003 from
+fresh norm21.0707719761, along total normalized path20. Those exposure facts do
+not diagnose why service changes are small. Initial action-law exploration,
+finite learnability, normalized update allocation and partner co-adaptation remain
+surviving explanations. This fresh root and B04/master24 have different endpoints;
+their observations retain separate meaning and do not isolate training-budget
+causality or constitute matched1000 replication. Tuned headroom remains absent.
+
+This allocation ends at intake and preserved closeout. If further investment is
+selected, a possible discriminator is a specifically changed initial action law
+tested against its own initialization and the same attained nearest, with all
+F/recovery consequences. A lower exploratory mass is an unallocated option, not
+an established cause or selected successor. No new probability, seed, card, budget,
+family/lifecycle/priority disposition or C claim is created. References: B05 card,
+E0, compact summaries, retained-data analysis and full intake.
+
+## Nearest99-prior1000: no aggregate learning gain, reference deficit — 2026-09-11
+
+RCLE_B06_NEAREST99_PRIOR1000_RESULT_INTAKE_20260911.md accepts one fresh
+B06/master26 B. Final primary U=.287479654948 remains above attained nearest
+.281722005208, Delta_ref−.005757649740. Initialization gain is−.000107828776,
+with conditional95% interval[−.000743939284,+.000528281732]. All eight final
+service means lose to nearest;504/512 primary initialization comparisons tie in U.
+These are score ties, not policy/action identity or an equivalence result.
+
+The strongest direct support is four initialization U cell gains, including
+active8→12 +.000260416667. Strongest contradiction is all-cell reference deficit,
+active12→8 initialization loss.000476074219, five reference F losses and2012/2048
+final tau40 failure codes. The raw five-positive initial F count includes a
++3.25e−19 contrast with identical displayed endpoint means; preserve its precision
+qualification rather than describing five substantive harms. All-cell Y declines
+slightly and all-cell mean failure-coded tau improves slightly; neither supplies
+a general recovery/nonharm or learned-competence claim.
+
+One thousand nonzero .02 updates move the26,161 FP64 state by.714670178467 from
+fresh norm21.1477941906 along path20. That establishes exposure, not why competent
+service barely changes. The stronger legal prior adds a starting preference rather
+than information. Its own initialization was already close to nearest; cross-root
+comparison with the .9-prior B04/B05 results cannot isolate probability causality.
+Finite learning exposure, credit/update allocation and partner co-adaptation remain
+surviving limitations. Tuned same-information headroom is still absent.
+
+This named allocation ends at intake and preserved closeout. No probability sweep,
+longer training, new seed, family/lifecycle/priority change or automatic successor
+is selected. A separately allocated next discriminator would need actual learning
+from competent behavior while overcoming the attained legal null; no method or
+budget is chosen here. References: B06 card, E0, compact summaries, full preserved
+block/endpoint evidence, parameter facts and scientific intake.

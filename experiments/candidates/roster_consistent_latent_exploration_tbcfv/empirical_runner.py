@@ -1971,6 +1971,8 @@ def execute_scripted_batch(
     package: str,
     rng: SemanticRNG,
     coordinates: Sequence[EpisodeCoordinate],
+    *,
+    packed_views: bool = True,
 ) -> tuple[ScriptedEpisodeResult, ...]:
     coords = tuple(coordinates)
     _require_semantic_rng(rng).require_runtime_authority()
@@ -1980,7 +1982,7 @@ def execute_scripted_batch(
         )
     fixtures = materialize_fixture_batch(rng, coords)
     batch = reset_native_batch(
-        fixtures, packed_views=True, binding=rng._native_binding
+        fixtures, packed_views=packed_views, binding=rng._native_binding
     )
     previous: list[dict[int, int]] = [dict() for _ in coords]
     agent_ticks = [0] * len(coords)

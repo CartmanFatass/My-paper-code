@@ -1,0 +1,50 @@
+{
+  "question": "ACPS两次分别非正的native结果之后，下一笔投入是否只买一次有界原节点用途/设计判断，或选择不追加、明确停放、再买新独立pair？",
+  "changes_if_approved": [
+    {
+      "target": "ACPS未来投入",
+      "from": "B02完整inside-negative，B01单独adverse；ACTIVE/HIGH/recasts0，已无下一对象额度",
+      "to": "建议Q：一次原Convergence用途/设计判断及完整intake，完整费用须由Portfolio明确接受UNKNOWN；无新B/实现/实验"
+    },
+    {
+      "target": "其他方向与生命周期",
+      "from": "27=16ACTIVE+11PARKED；MGTAP/RCLE/ACVC/FOLR四项原节点工作独立，CADC显式PARK",
+      "to": "均保持；若Portfolio明确选ACPS PARK才改对应行，不能由对象结束推定。"
+    }
+  ],
+  "if_refused": "Portfolio可选不追加保留ACTIVE、明确可逆PARK或重新资助一次有具体用途的unchanged pair；每项须说明后果与全成本，无本地替代决定。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B02_CONTINUATION_NEED_20260912.md",
+      "quote": "what concrete next use, if any, makes further capability-specialization evidence worth purchasing after these two nonpositive aggregate observations?",
+      "why": "先让原方向节点选择一个能改变实际使用或训练资源建议的问题，最多一项或无候选；不默认继续第三次复制。"
+    },
+    {
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B02_INTAKE_20260912.md",
+      "quote": "The intact shared network can already respond differently to those inputs.",
+      "why": "同信息SHARED已经可以响应能力，未来必须保留这个强合法替代；不以多参数或信息故事代替收益。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B02_INTAKE_20260912.md",
+      "quote": "The strongest contrary evidence is that the new mean remains negative and never reaches the selected positive MEI; B01 independently recorded a beyond-MEI negative result.",
+      "why": "没有现成不同用途B，连一次文档判断也可能花费后只能返回无候选；不追加或Portfolio PARK是强反选。"
+    }
+  ],
+  "uncertainty": [
+    "不同对象、机制、比较器、estimand和新实证cap均UNKNOWN，尚未形成候选卡。",
+    "一次新原节点判断的完整preparation/Transport/provider/agent/intake/publication成本UNKNOWN；不称免费或廉价。",
+    "B02的inside负值不是等效或已恢复，也不能池化为训练总体结论；两次非正不证明整个方向无价值。",
+    "已发生native348.12/361.04秒与旧cap不是未来预测或余额。",
+    "四项独立方向请求保持绑定；ready handoff不证明provider已接受，当前槽数不能由旧控制表照抄。"
+  ],
+  "cost": {
+    "compute": "本作者科学exposure0；Q只购一次判断并由Portfolio接受或拒绝UNKNOWN全成本，零经验投入。R若选择，2fits/278528ticks/2048Adam，全部新caps仍UNKNOWN需Pro明确。",
+    "owner_time": "无需逐项确认；完整Pro裁决可异步覆盖。",
+    "reversibility": "costly",
+    "waits_on_this": "仅ACPS未来未分配事项；其他方向不等待。"
+  },
+  "verdict_text": "作者建议Q，仅一次原节点用途/设计判断及完整intake，不买可能产出的B；明确保留本轮不追加、Portfolio可逆PARK和有用途的新unchanged pair替代。成本UNKNOWN，当前无本地投资或生命周期选择。",
+  "source": "docs/research/portfolio/pro_packets/20260912_acps_post_b02_investment/SCIENCE_BRIEF.md"
+}

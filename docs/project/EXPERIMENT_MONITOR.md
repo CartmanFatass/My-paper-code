@@ -1,94 +1,59 @@
-# Experiment observation ownership
+# DM-owned experiment observation
 
-This document owns experiment observation and handover procedure. AGENTS §5–7 controls
-scientific execution, resources and Git; ROOT_OPERATIONS.md assigns planning and acceptance.
-Independent Transport observes Pro requests under its own skill.
+Each DM creates a native Luna/low experiment-monitor child for a new experiment batch
+and reuses it only across handles belonging to that batch. Use the registered HMASDExperimentMonitor
+role with fork_turns=none and only this procedure plus exact handle facts. If an existing runtime has not loaded that role, spawn a default child with explicit
+model gpt-5.6-luna, reasoning_effort low and fork_turns=none, supplying the role instructions
+and this document. Do not inherit the DM's full research conversation merely to monitor handles.
+No child is created for an idle direction. Root and DM wait natively under SIBLING_COMMUNICATION.md.
 
-## Independent monitor — OWNER_DIRECT 2026-09-09
+## Assignment and adoption
 
-One reusable independent Luna/low Codex task, configured in `.codex/hmasd-monitor.toml`,
-observes multiple explicitly assigned accepted experiments. DM owns launch, terminal collection, technical acceptance and separate scientific intake;
-an optional Operator executes its assigned batch. After confirmed monitor adoption,
-DM and Root do not maintain parallel status-polling loops. Independent Transport remains
-separate and observes Pro requests.
+DM owns exact launch inputs, resource admission, collection, technical acceptance and scientific
+intake. An optional Operator executes its named batch and uses the monitor address supplied by DM.
+After actual launch acceptance, send MONITOR_ADD via followup_task with direction/assignment ID,
+DM canonical name, node/supervisor handle, launch SHA, cwd/output/evidence paths, observation bound
+and relevant stop instructions. The monitor does not discover work by scanning historical handles.
 
-Read the endpoint from the live primary control checkout (currently
-`/home/fires/projects/HMASD/.codex/hmasd-monitor.toml`, supplied in the handoff), not a stale direction
-checkout or the frozen remote scientific SHA. Endpoint currentness does not change scientific
-source bindings. Root carries this exact live configuration path in new DM assignments.
+The monitor queries the exact handle, records direct status and replies MONITOR_ADOPTED to its DM
+with its native identity, adopted handles, observation time and evidence. Dispatch success alone
+is not adoption. DM retains pending ownership until this receipt, then stops routine process
+polling and uses native long waits. A first observation may already be terminal; report both facts.
+No independent app-task goal, goal-adoption handshake or Root relay is required.
 
-The monitor uses an active goal: observe all explicitly adopted accepted experiments, deliver
-each terminal notification, and finish when no observation or notification remains outstanding.
-It first reads its goal state. With an active goal, update the monitored set and task instructions
-and continue that goal; do not create a duplicate. With no active goal, create one only for a
-nonempty assignment, without an invented token budget. New accepted
-handles can join the active set by message; the goal describes this set rather than a fixed
-single handle. The current goal tool only updates completion/blocked status, not objective text;
-never fake an objective rewrite or mark unfinished work complete just to rename it.
-A completed goal is not an idle timer: a later assignment starts a new goal in
-the same task. Never claim to edit an existing goal through an unsupported tool operation.
+## Observation loop
 
-Keep a small recoverable task-local list of assigned node, handle, launch SHA, cwd, output and
-receipt paths, Root destination, original execution/DM owners, latest observation and notification state.
-This is the monitor's working record, not a new repository registry, service or scheduler.
-Root's existing tracking records monitor assignment and material changes. Do not discover work
-by scanning historical handles or create a task/worktree per experiment.
+Keep a compact recoverable handle list in the existing direction execution record or assigned
+output path: handle identity, last observation, next due check and delivery state. Reuse the batch's child
+for its multiple handles; batch independent due checks. Use bounded commands and interruptible waits
+no longer than 60 seconds per tool call, checking at the assignment's useful interval. Longer
+check intervals can span several waits without model-visible progress messages to DM. Do not let
+one inaccessible handle block observation of others. Unchanged healthy status needs no message or
+commit. The DM's configured long wait supplies periodic parent continuation; the monitor does
+not send artificial keepalive messages.
 
-## Assignment, adoption and return
+Use .codex/hmasd-compute.toml and supplied exact supervisor identities. Read bounded logs only
+when useful. Connection failure, missing PID or wait timeout alone is unknown, not terminal.
+The monitor never launches, retries, alters or stops an experiment, chooses science, gathers full
+scientific results or creates children. Local work requires a stable process identity and an
+accessible terminal witness, not another task's private terminal session ID.
 
-After launch acceptance, DM/Operator sends `MONITOR_ADD` directly to the configured monitor
-with the exact handle facts and original owners. This direct dispatch is authorized by
-OWNER_DIRECT 2026-09-09; it does not wait for Root to forward the launch or create another goal.
-The monitor itself creates or continues its set-scoped goal. A runtime without the cross-task
-tool returns the exact routing gap and handle to Root for forwarding; it must not invent a
-message API or silently substitute a second observer. DM records the accepted dispatch
-and returns pending collection; it does not continue a routine remote-status polling loop.
-The monitor checks the same supervisor and sends `MONITOR_ADOPTED` directly to Root with its
-actual task ID, goal state, observation time and direct status. Root confirms adoption to the
-original execution/DM owner. A dispatched message alone is not adoption: until confirmed, record adoption
-as pending; a rejected/unavailable dispatch or reported observation loss returns promptly to
-Root for the same-handle recovery. This pending boundary is not a second DM polling loop.
-A first query may already be
-terminal; then adoption and terminal facts can be delivered together.
+## Terminal facts and reuse
 
-The monitor saves direct terminal status and useful bounded log evidence in its own outputs,
-then sends `MONITOR_TERMINAL` directly to Root, including a stable event ID, original execution/DM owners,
-handle/source/cwd/root and evidence paths. No second Relay copy is needed. Root deduplicates
-against already received native facts and uses native `followup_task` on the original execution/DM owner
-when collection/intake still needs execution. If they already collected and are acting, convey
-only the new facts without dispatching duplicate work. Monitor exit-zero facts are not technical
-or scientific acceptance. DM collects and verifies artifacts and separately interprets the result.
+On completion or a material observation failure, send MONITOR_TERMINAL or MONITOR_BLOCKER directly
+to the DM using native send_message. Include a stable event ID, exact handle, source/output paths,
+direct status, bounded evidence and unresolved effects. Deliver each event promptly without
+waiting for all experiments. Save delivery state and reconcile uncertainty on the same event
+before retrying. Do not require an ACK loop. Successful observation is not scientific acceptance.
+DM processes the event, collects and checks outputs, obtains independent review where required,
+and continues the authorized direction. Root is involved only for a concrete Root-owned action.
 
-Cross-task messages omit model/effort overrides. A monitor app task cannot address Root's native
-children by inventing app IDs. Record accepted or uncertain message delivery. Reconcile an
-uncertain terminal send by the same event ID before retrying; do not finish the goal with an
-undelivered notification. Accepted app delivery does not require a Root ACK loop. Before goal
-completion, reconcile newly received additions and ensure the active set and pending notices
-are empty. Completed entries are retained as receipts, not polled again.
-
-## Multiple experiments and bounded observation
-
-Each round checks all due handles, batching independent read-only queries (including across
-nodes). One experiment's terminal event is sent immediately without waiting for other experiments
-to finish. A failed connection for one handle stays unknown and does not block checks or notices
-for the others. Use bounded connection/command waits and interruptible intervals of about60s;
-the interval is a working target, not a guaranteed delivery deadline. Do not spend an unbounded
-blocking wait on a single handle or poll the monitor's own Codex task status as remote evidence.
-
-Use the configured node/supervisor from `.codex/hmasd-compute.toml`, currently:
-`ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task status <accepted-name>`.
-Read bounded logs only when useful and quote supplied handles as data. SSH failure or PID absence
-alone is unknown; a wait timeout is not terminal. Healthy unchanged state needs no repeated
-messages or commits. The monitor never launches, retries, alters or stops scientific work,
-collects full scientific results, or interprets outcomes. For local accepted work, the supplied
-identity must include PID/start identity and an accessible exit witness, not a private exec ID.
-
-If the monitor loses access or must stop, report the affected handles and uncertain effects to
-Root; unrelated accessible handles continue. Root recovers this same task/handle set or confirms
-another actual observer. No fresh scientific invocation follows. This goal-driven task is not a
-remote callback or a guarantee of progress while the app/session is unavailable. No heartbeat or
-additional scheduler is enabled by this instruction. On owner pause, follow the specific permitted
-observation/closeout boundary and preserve accepted identities.
-
-For legacy accepted CM handles, preserve the original owner and parent until explicit closeout
-or transfer to DM. Role consolidation never changes a supervisor handle or authorizes a new run.
+When the active set and pending notices are empty, return a native final with terminal event IDs
+and empty active_set. Do not poll completed handles or keep an empty monitor running. If an Operator owns collection, DM resumes that same Operator
+with followup_task after terminal notice; no parallel collection or polling. A later
+nonempty assignment uses followup_task only for the same batch; an independent new batch
+uses spawn_agent with fork_turns=none. Record batch/child identity in the existing execution record.
+A long wait alone neither ends the batch nor calls for cache keepalives. If observation must transfer,
+preserve handles and notices and obtain actual replacement adoption before releasing ownership.
+Owner pause/stop instructions control which observation or closeout is permitted; no new run or
+research resumption follows from a monitor assignment or workflow change.

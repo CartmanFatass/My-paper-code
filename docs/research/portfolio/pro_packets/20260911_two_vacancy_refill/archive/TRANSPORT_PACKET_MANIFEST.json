@@ -1,0 +1,56 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-11-current-vacancies-refill-portfolio-01--portfolio",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-11-current-vacancies-refill-portfolio-01",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "acvc",
+    "capability_bound_semantic_currentness",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "finite_resource_relational_inductive_efficiency",
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation",
+    "roster_consistent_latent_exploration",
+    "semigroup_consistent_duration_model_policy",
+    "ucope",
+    "vap_folr_core",
+    "variable_n_fleet_churn",
+    "vsp_02",
+    "vsp_03",
+    "vsp_c1"
+  ],
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-11-current-vacancies-refill-portfolio-01--portfolio__00_PROMPT.md",
+    "bytes": 1901,
+    "sha256": "19060c81fc76b0194045e61dfebd9163feadc73e964c56d2287ba558126b174d",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-11-current-vacancies-refill-portfolio-01--portfolio__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-11-current-vacancies-refill-portfolio-01--portfolio__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-11-current-vacancies-refill-portfolio-01--portfolio__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "19060c81fc76b0194045e61dfebd9163feadc73e964c56d2287ba558126b174d",
+    "references": []
+  },
+  "archive_id": "2026-09-11-current-vacancies-refill-portfolio-01--portfolio--attempt-01",
+  "archive_response_sha256": "3c0930e104eb626116ff32c6efd00b9d754367d07b781bae4991ed2fe0f4028a",
+  "archive_response_bytes": 40449,
+  "github_delivery_commit": "a9adb7f003780e976f8d24d2390efa9517d469bc",
+  "github_response_path": "docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/archive/RESPONSE.md",
+  "issue_comment_id": 5639210136
+}

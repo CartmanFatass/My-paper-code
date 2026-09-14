@@ -1,0 +1,191 @@
+{
+  "object": "FSD_UAV_RENEWAL_BATCH_B02_771203",
+  "source_sha": "9eb99f8b68dd2863212c10693b911746a6d24354",
+  "independent_training_pairs": 1,
+  "paired_evaluation_episodes": 32,
+  "reading_rule_verbatim": "- Mean >+.01: `above_mei`; one additional local package gain.",
+  "card_reading": "above_mei",
+  "mean_I_minus_D0": 0.012554805665750726,
+  "sample_sd_differences": 0.07074935212229413,
+  "conditional_episode_se": 0.01250683666255726,
+  "positive_episodes": 19,
+  "negative_episodes": 13,
+  "zero_episodes": 0,
+  "minimum_difference": -0.11208704599634545,
+  "maximum_difference": 0.18244350591515257,
+  "means": {
+    "D0": {
+      "mean_U": 26.870870131336662,
+      "mean_J": 0.32245044157603997,
+      "sample_sd_J": 0.06944729399492691,
+      "conditional_episode_se_J": 0.012276663129717154,
+      "training_rollout_mean_J": [
+        0.23247372460590285,
+        0.25355037091340055,
+        0.27256066494717673,
+        0.27288989322065754,
+        0.2759799967371961
+      ],
+      "training_rows_M": [
+        800,
+        800,
+        800,
+        800,
+        800
+      ],
+      "coordinator_calls_per_rollout": [
+        105,
+        105,
+        105,
+        105,
+        105
+      ],
+      "optimizer_calls": {
+        "coordinator": 525,
+        "discoverer_actor": 11250,
+        "discoverer_critic": 11250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "final_relative_initialization_displacement": {
+        "coordinator": 0.04609966340858642,
+        "discoverer_actor": 0.42502415366654794,
+        "discoverer_critic": 0.16887085661095466,
+        "team_discriminator": 0.026904387340941836,
+        "individual_discriminator": 0.05387219228843745
+      },
+      "component_means": {
+        "coverage_reward": 0.49021375000000006,
+        "quality_reward": 0.14043147203443282,
+        "energy_penalty": 0.06282862503429015,
+        "total_reward": 0.32245044157603997
+      },
+      "training_individual_gap_causes": 0,
+      "training_agent_segment_means": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ],
+      "evaluation_gap_causes": 0,
+      "evaluation_coordinator_inference_calls": 549,
+      "evaluation_causes": {
+        "reset": 32,
+        "team_gap": 0,
+        "team_cap": 1568,
+        "gap": 0,
+        "cap": 0
+      },
+      "endpoint_duration": "unmeasured; evaluator segment storage empty"
+    },
+    "I": {
+      "mean_U": 27.91710393681589,
+      "mean_J": 0.3350052472417907,
+      "sample_sd_J": 0.055468434792728574,
+      "conditional_episode_se_J": 0.009805526595935551,
+      "training_rollout_mean_J": [
+        0.24012668507639395,
+        0.23931195471448483,
+        0.23456176352296024,
+        0.22476004047345532,
+        0.31046042776978233
+      ],
+      "training_rows_M": [
+        5018,
+        5198,
+        5123,
+        5129,
+        5872
+      ],
+      "coordinator_calls_per_rollout": [
+        60,
+        75,
+        75,
+        75,
+        75
+      ],
+      "optimizer_calls": {
+        "coordinator": 360,
+        "discoverer_actor": 11250,
+        "discoverer_critic": 11250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "final_relative_initialization_displacement": {
+        "coordinator": 0.042565534368372605,
+        "discoverer_actor": 0.42249762580528133,
+        "discoverer_critic": 0.16492505047597214,
+        "team_discriminator": 0.026857654461241002,
+        "individual_discriminator": 0.047727352445150015
+      },
+      "component_means": {
+        "coverage_reward": 0.4988237499999999,
+        "quality_reward": 0.12921791683605982,
+        "energy_penalty": 0.05293675280902739,
+        "total_reward": 0.33500524724179076
+      },
+      "training_individual_gap_causes": 47196,
+      "training_agent_segment_means": [
+        3.531489111241907,
+        3.467456476197356,
+        3.501604902246863,
+        3.3337963606056396,
+        3.0661130629191953
+      ],
+      "evaluation_gap_causes": 8,
+      "evaluation_coordinator_inference_calls": 556,
+      "evaluation_causes": {
+        "reset": 32,
+        "team_gap": 0,
+        "team_cap": 1568,
+        "gap": 8,
+        "cap": 0
+      },
+      "endpoint_duration": "unmeasured; evaluator segment storage empty"
+    }
+  },
+  "native_costs": {
+    "D0": {
+      "elapsed_seconds": 475.03,
+      "peak_rss_kib": 1663808.0,
+      "user_seconds": 1849.46,
+      "system_seconds": 19.97,
+      "exit_status": 0.0
+    },
+    "I": {
+      "elapsed_seconds": 1042.92,
+      "peak_rss_kib": 3476952.0,
+      "user_seconds": 4082.84,
+      "system_seconds": 47.15,
+      "exit_status": 0.0
+    }
+  },
+  "native_pair_wall_seconds": 1517.95,
+  "aggregate_cpu_seconds": 5999.42,
+  "I_to_D0_wall_ratio": 2.195482390585858,
+  "paired_publication_matches_reduction": true,
+  "method": "One source-defined pair integrity reduction over preserved JSON plus independent Python statistics over32 differences; no new learner/trajectory/RNG invocation.",
+  "component_difference": {
+    "coverage_reward": 0.00860999999999984,
+    "quality_reward": -0.011213555198372999,
+    "energy_penalty": -0.009891872225262763,
+    "total_reward": 0.01255480566575079
+  },
+  "training_mean_differences": [
+    0.007652960470491105,
+    -0.014238416198915721,
+    -0.0379989014242165,
+    -0.04812985274720222,
+    0.034480431032586245
+  ],
+  "weighted_component_contributions": {
+    "coverage": 0.0060269999999998875,
+    "quality": -0.0033640665595118997,
+    "altitude_penalty_reduction": 0.009891872225262763
+  },
+  "distance_above_MEI": 0.0025548056657507257,
+  "relative_difference_percent": 3.8935613188763654,
+  "supervisor_study_elapsed_seconds": 1798.0,
+  "study_elapsed_boundary": "D0 supervisor start to I terminal log; one-second timestamp resolution, includes inter-arm collection/publication gap; not summed native wall or a study cap."
+}

@@ -1,0 +1,255 @@
+{
+  "observed_remote_heads": {
+    "refs/heads/codex/portfolio": "248356600c5691b226631ba0d382b8067036c7f3",
+    "refs/heads/codex/rcle": "556118a7313ed06c30e4a7effb1efc51428ce0bb",
+    "refs/heads/main": "f35a3a5b2b7a40f2bf42874fc4af8f94dad15a06"
+  },
+  "references": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260912_post_b07_convergence/SCIENCE_BRIEF.md",
+      "commit_sha": "556118a7313ed06c30e4a7effb1efc51428ce0bb",
+      "purpose": "Read the complete question, DM recommendation/opposition, accepted observations, narrow consequences and complete-cost unknown.",
+      "provenance": "Current original-DM synthesis; advice only, not the node decision.",
+      "bytes": 8458,
+      "sha256": "4e063eb2d39e058be3602f0629ecc4fc3bb0d42ea50e9d3b2535472954b1773c",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260912_post_b07_convergence/EXPOSURE_AND_COST.json",
+      "commit_sha": "556118a7313ed06c30e4a7effb1efc51428ce0bb",
+      "purpose": "Read zero current exposure, reused historical counts and explicit unknown complete documentary cost.",
+      "provenance": "Machine-generated documentary exposure; historical scientific counts are read, not reexecuted.",
+      "bytes": 2018,
+      "sha256": "32ae3464e98610edc339bf22a957af772548c9612a41d1a4216cd70775a0a6e3",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "556118a7313ed06c30e4a7effb1efc51428ce0bb",
+      "purpose": "Read Current scientific question and Current position only; do not preload historical sections or linked dependencies.",
+      "provenance": "Accepted mechanism-level science and current owner continuity; lifecycle resides separately.",
+      "bytes": 54805,
+      "sha256": "145abd9562b5cbebe0eddea3b519377e4e57e9d248df77c04e2b51f6a05cb4ec",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_CHANNEL_NORMALIZATION_CONVERGENCE_INTAKE_20260912.md",
+      "commit_sha": "2e630eba2e9e60f64dc08c614170298bd5a7218a",
+      "purpose": "Read original selection/conformance, strongest support/contradiction, comparator/claim and cost limits. Its one proposed service observation is now completed B07.",
+      "provenance": "Accepted original-DM intake; earlier zero budget and future candidate wording are historical, not the new R grant.",
+      "bytes": 17815,
+      "sha256": "6293744f2aa6102ceadfe81341515442490ee6d9c411de17d623d1e5cf663bcd",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260911_channel_normalization_convergence/archive/RESPONSE.md",
+      "commit_sha": "02e8973fa06931d363fa4b096ba63c1f82b18e2d",
+      "purpose": "Read original choice and reasons, exact equal-unit rule/comparison and cost/claim limits; no recursive reference following.",
+      "provenance": "Exact complete previous original-node response; preserve its candidate-versus-hold close call.",
+      "bytes": 41605,
+      "sha256": "1dc39fa0cb88d1042bee07ff1d29bd242abdb29c49a658385deab3b93c34d4f6",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_SCIENCE_CARD_20260912.md",
+      "commit_sha": "1652c44ac65ed6e686610c3cfcff67dab1a0fc6b",
+      "purpose": "Read exact learner/native ownership, fixed comparisons/endpoint/.05U MEI/reading rows, independent unit and original whole cost scope.",
+      "provenance": "Original published B07 card before execution; its900/600/1500 allocation ended and is not current R funding.",
+      "bytes": 11595,
+      "sha256": "6a3ed482bb806fa56004bc07a9f470e5754b59c5e7d270bd571bb40290f5c5b2",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "8ca825bc70e0d6c05d35f314168904380750dba8",
+      "purpose": "Read full complete E0, all eight U/native side effects, conditional uncertainty, true exposure, failed reference and authorized completion, retained costs.",
+      "provenance": "Accepted combined one-fit result and scoped closeout; original failed attempt preserved.",
+      "bytes": 9224,
+      "sha256": "672746fc04c65e50c18d4250e87623b24cd747f9325a1c20bf9e0c59cf54a4de",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md",
+      "commit_sha": "8ca825bc70e0d6c05d35f314168904380750dba8",
+      "purpose": "Read full accepted result/decision/limits, support and contradiction; completed allocation does not close the direction.",
+      "provenance": "Original DM scientific and technical acceptance kept separate; later OWNER_DIRECT continuity applies.",
+      "bytes": 6086,
+      "sha256": "df78a16d379292c212b3099baacb66b0d3066222a0c03c5628af6e47eeb20e5e",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b07_equal_unit_20260912/FINAL_ANALYSIS.json",
+      "commit_sha": "f93a8ac9b9d59b87644bb381cae5e688ba0fb0a6",
+      "purpose": "Read primary, cells, harms, tau40_count, counts and prediction only; no new reduction or resampling.",
+      "provenance": "Published analysis of already collected bytes; n=1 and failed-reference work unknown.",
+      "bytes": 21423,
+      "sha256": "91e82425625b251092a0c290b7390a96e6ab5e1a895ef409bdfa49d5e5b07cc0",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "purpose": "Read primary/eight-cell U,F,tau tables and precision/failure-code qualifications; preserve all negative and local outcomes.",
+      "provenance": "Original version used by the preceding Convergence; not a matched joint100 control for B07.",
+      "bytes": 15200,
+      "sha256": "07d83ffecb262f81297dcd229fa6267822cb1e4d5d0df12542203146a16d882b",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_RESULT_INTAKE_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "purpose": "Read accepted bounded interpretation, negative aggregate G_U, local gains/opposed paths, score ties, harms and cost limits.",
+      "provenance": "Separate historical fit/recipe; no new pooled primary.",
+      "bytes": 11756,
+      "sha256": "a4734a2a474bce975ecd4b4d28a0442ca3f8d1d8f43ec98ff14c50b14b86ad09",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_SERVICE_COMPARISON_DESIGN_INTAKE_20260910.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "purpose": "Read sections2-6 for earlier native learning, legal overridable prior, own-init/attained-reference distinction and event-to-action path.",
+      "provenance": "Historical support/knowledge; old.9/200 proposal and budgets are not current candidates or authority.",
+      "bytes": 24333,
+      "sha256": "14f350f4e46b55354e46443e7c0e232f302a222a3412ba54fb5051f1510a2f17",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/archive/RESPONSE.md",
+      "commit_sha": "ba7ab4d20cd171916ee28f5d7157d64ff24d6f77",
+      "purpose": "Read operative R choice in section3 and R cost/limits in section5; no broader direction/Portfolio decision requested here.",
+      "provenance": "Complete formed Portfolio grant; its old activity snapshots are superseded by current OWNER_DIRECT and checked mapping.",
+      "bytes": 54727,
+      "sha256": "00446b0c206c80834f6663e5564f4d565e5dfaaa981bb127ea8fe56fba44f2c3",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/INTAKE.md",
+      "commit_sha": "0c0648bd06d96c8839bcfaa72f469c7f339a0405",
+      "purpose": "Read Rule/current-owner conformance and R/continuity decisions; retain the exact R grant after the owner correction.",
+      "provenance": "Designated Portfolio author full response check, integrated by Root.",
+      "bytes": 10274,
+      "sha256": "844dad31fca03512fb68ab30a0f58383b71f87e1fc3d8405ad2a229d85cede47",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/EXECUTION_MAPPING.md",
+      "commit_sha": "0c0648bd06d96c8839bcfaa72f469c7f339a0405",
+      "purpose": "Read R section only: one original question/full intake, unknown complete cost, zero implementation/numerical allowance and continued direction ownership.",
+      "provenance": "Accepted operative R execution scope; N and other direction scopes do not transfer.",
+      "bytes": 8772,
+      "sha256": "bc1fdfa74a6f9afee4ec9511bfbf606de5a978c577d2b982f2df23dcfdd366a9",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "0c0648bd06d96c8839bcfaa72f469c7f339a0405",
+      "purpose": "Apply sections1-4 decision/delegation and section5 OWNER_DIRECT2026-09-12 continuity: a finite allocation or narrow recipe hold does not stop the ACTIVE direction.",
+      "provenance": "Current published owner/governance authority pinned separately from frozen science; no specification change requested.",
+      "bytes": 45889,
+      "sha256": "6933e35eb254a2247e4a6b5f00067da90f4bf4e482ee16a555e52e43158efd09",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "0c0648bd06d96c8839bcfaa72f469c7f339a0405",
+      "purpose": "Apply sections4,5.2,11.4 (general rule only),11.7-11.10. Question/class determine burden; no stronger class, positive pilot, exact upper, full cause, seed quota, search or extra diagnostic prerequisite.",
+      "provenance": "Current controlling evidence authority; unrelated named exceptions do not apply to R.",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "0c0648bd06d96c8839bcfaa72f469c7f339a0405",
+      "purpose": "Apply sections4-5 and7.1/7.3 only insofar as documentary scope/no machinery and proportionate conformance; no implementation/check experiment is purchased.",
+      "provenance": "Current engineering authority; scope does not allocate new work.",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "0c0648bd06d96c8839bcfaa72f469c7f339a0405",
+      "purpose": "Apply sections1-3 complete-cost distinctions; historical native/support windows neither forecast nor finance this unknown-cost documentary unit.",
+      "provenance": "Current runtime cost semantics; no profiling or numerical allowance.",
+      "bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "0c0648bd06d96c8839bcfaa72f469c7f339a0405",
+      "purpose": "Read sections3-4 and6: team credit, finite learning and independent training units versus conditional evaluation.",
+      "provenance": "Explanatory scientific knowledge, not new authority; no unlisted citation tree.",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "0c0648bd06d96c8839bcfaa72f469c7f339a0405",
+      "purpose": "Read complete-recipe versus component comparison, conditional scenarios, independent fits and claim-proportionate uncertainty.",
+      "provenance": "Explanatory knowledge; do not import SESSION_CHOICES or unlisted sources.",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ]
+    }
+  ],
+  "pro_access_proved": false
+}

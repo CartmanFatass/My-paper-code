@@ -1,0 +1,221 @@
+{
+  "checked_at_utc": "2026-09-12T18:28:17.472609+00:00",
+  "purpose": "Fixed Pro-input publication check only; no scientific/numerical test or source execution.",
+  "reference_count": 19,
+  "references": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B03_QUESTION_20260912.md",
+      "commit_sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58",
+      "blob_id": "2483e72d254a5287c07d65854f22da9e97b2c65b",
+      "bytes": 10682,
+      "sha256": "b3dab33af0b9228cee618ad0810b9d87fe9a9292542db2292064395848d19f18",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/vap-folr",
+        "sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58"
+      }
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_learned_retention_post_b03_convergence/FACTS.json",
+      "commit_sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58",
+      "blob_id": "a3b9ebb73e392fbe19c58095ce764f1758224150",
+      "bytes": 4318,
+      "sha256": "f156019e4de73e73e43196a0e562bfab76e61d3bbe93faaaaad0a8f399cec9d3",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/vap-folr",
+        "sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58"
+      }
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md",
+      "commit_sha": "ed882448bda9b3f240addf88bde1921cebc24397",
+      "blob_id": "6e85ba74ec8ce4e40f77edcd458bfff5827b52e9",
+      "bytes": 34927,
+      "sha256": "a5ffd43de9407597c60ca1a3b7ee8b057800c6ab39950d2331665c349f0d2eb8",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/vap-folr",
+        "sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58"
+      }
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "d4ff89f66263c44911ba6ffc5dbdda6b02a3014e",
+      "blob_id": "b38cf71475e5129d774bd2569847f1a0a2e5a42d",
+      "bytes": 50517,
+      "sha256": "d57a7412adf9c1ea26465838c3ad3479c277ed0add2b2bbed281709beec66849",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/vap-folr",
+        "sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58"
+      }
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_SCIENCE_CARD_20260911.md",
+      "commit_sha": "d4ff89f66263c44911ba6ffc5dbdda6b02a3014e",
+      "blob_id": "b16914bb6d564e852e3ae78501ed65cc48fd95ff",
+      "bytes": 11952,
+      "sha256": "efbc777709100fe586c2a26bd65c187c6cfd97951498822b9ea0f9f1b62a72bf",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/vap-folr",
+        "sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58"
+      }
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md",
+      "commit_sha": "d4ff89f66263c44911ba6ffc5dbdda6b02a3014e",
+      "blob_id": "b349430b981a87e726f4bae6b0ac8ee3556b5451",
+      "bytes": 37709,
+      "sha256": "8182e6155be27f59c327907a7ad3c2eb507884863c77791c4fd89ffffb27e74b",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/vap-folr",
+        "sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58"
+      }
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "blob_id": "a610224f8bcf6587dbcce53ad0b9751239054085",
+      "bytes": 8559,
+      "sha256": "0b1e2698a6df49681bc6a986c1445c514dd39ee7f83dce5ae656229efdccf227",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/vap-folr",
+        "sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58"
+      }
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "blob_id": "84d1c7dae949e9e334eeec9f558b38c8b91d2146",
+      "bytes": 5529,
+      "sha256": "7822524bf0de8691e3afc1bdd0b453d747af7447c25c3055c1a724d640a35f78",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/vap-folr",
+        "sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58"
+      }
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md",
+      "commit_sha": "ed1d519c60fde333609c00fd207d5bd0a3e3f507",
+      "blob_id": "e04840ddeb085069ae3c840cb394c25593d88345",
+      "bytes": 54224,
+      "sha256": "05add75c7ee0194feef3e21ff219411ce22e971d9e6c7226d4ef630a43cef305",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/portfolio",
+        "sha": "3ed540a0ee42c9737e824197ab22938d7b09e97c"
+      }
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-12-two-remaining-chains.md",
+      "commit_sha": "bd5fd849aff580944c94e93f0c83e055b397ac03",
+      "blob_id": "a9470fb7f03fb031cc0cbb1d1ab0e6ad2b19d9ad",
+      "bytes": 3165,
+      "sha256": "a54dbb52fc0ca39f231482d03e3e2a4f010c6072ac43b2591ec5d20d80614b09",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/fsd",
+        "sha": "9eb99f8b68dd2863212c10693b911746a6d24354"
+      }
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/EXECUTION_MAPPING.md",
+      "commit_sha": "bd5fd849aff580944c94e93f0c83e055b397ac03",
+      "blob_id": "59e312beb79292796ed2283966f66580227f767a",
+      "bytes": 11050,
+      "sha256": "cc0ede6484b90fddd139ae2871a033deac1d5a2ce21e3bf44658f442e84d3fc5",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/fsd",
+        "sha": "9eb99f8b68dd2863212c10693b911746a6d24354"
+      }
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "bd5fd849aff580944c94e93f0c83e055b397ac03",
+      "blob_id": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/fsd",
+        "sha": "9eb99f8b68dd2863212c10693b911746a6d24354"
+      }
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "bd5fd849aff580944c94e93f0c83e055b397ac03",
+      "blob_id": "2d89dda3de24f0e62a88bfa43405cbc60e83bb33",
+      "bytes": 45124,
+      "sha256": "89fee75557747ee3f70ab9bd6842fc388ac6c901fab9f320807deb79b2643ff1",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/fsd",
+        "sha": "9eb99f8b68dd2863212c10693b911746a6d24354"
+      }
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "bd5fd849aff580944c94e93f0c83e055b397ac03",
+      "blob_id": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/fsd",
+        "sha": "9eb99f8b68dd2863212c10693b911746a6d24354"
+      }
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "bd5fd849aff580944c94e93f0c83e055b397ac03",
+      "blob_id": "a4dbb54d2e2128e2d8b907cf200e701d7729172a",
+      "bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/fsd",
+        "sha": "9eb99f8b68dd2863212c10693b911746a6d24354"
+      }
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "bd5fd849aff580944c94e93f0c83e055b397ac03",
+      "blob_id": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/fsd",
+        "sha": "9eb99f8b68dd2863212c10693b911746a6d24354"
+      }
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "bd5fd849aff580944c94e93f0c83e055b397ac03",
+      "blob_id": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/fsd",
+        "sha": "9eb99f8b68dd2863212c10693b911746a6d24354"
+      }
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/FACTS.json",
+      "commit_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+      "blob_id": "ede7f841926fe537905b5de3e9bc64ca5a78cbeb",
+      "bytes": 17236,
+      "sha256": "945c44d4bd2febe0d6e60896321db23e0cd8539942752122a290e1809f05dbd8",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/acvc",
+        "sha": "73bfb9c0d780b4b5a5677a2f4752d8d2e7831116"
+      }
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_learned_retention_post_b03_convergence/ISSUE_SNAPSHOT.json",
+      "commit_sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58",
+      "blob_id": "2627ac07b6fd37312af1579331846690a6a7ba10",
+      "bytes": 2958,
+      "sha256": "43ec7c2626525c5d48d251051c7a5f1a27121192b433d39219a644c49d55a85f",
+      "observed_published_ref": {
+        "ref": "refs/heads/codex/vap-folr",
+        "sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58"
+      }
+    }
+  ],
+  "delivery_branch_observed": {
+    "ref": "refs/heads/codex/vap-folr",
+    "sha": "e65d7fd9962725eb6d29d64b8debbce953da7e58"
+  },
+  "provider_access": "not established by local Git access"
+}

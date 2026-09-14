@@ -1,0 +1,299 @@
+{
+  "prepared_at_utc": "2026-09-12T20:26:22.567358+00:00",
+  "scope": "One newly owner-directed FOLR question and full intake outside the H package. No new implementation or empirical allocation. Configuration arithmetic below is documentary sizing, not a new numerical experiment.",
+  "new_author_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "policy_search_candidates": 0,
+    "profiling": 0,
+    "source_implementation_edits": 0,
+    "source_or_numerical_tests": 0,
+    "new_raw_result_analysis": 0,
+    "provider_sends": 0,
+    "transport_dispatches": 0
+  },
+  "machine_generated_exposure_line": "NEW AUTHOR EXPOSURE: scientific_invocations=0, models=0, checkpoint_loads=0, environments=0, scientific_rng_masters=0, training_episodes=0, native_ticks=0, optimizer_steps=0, evaluation_episodes=0, diagnostic_trajectories=0, policy_search_candidates=0, profiling=0, source_implementation_edits=0, source_or_numerical_tests=0, new_raw_result_analysis=0, provider_sends=0, transport_dispatches=0.",
+  "accepted_H": {
+    "response_commit": "65be91e1cecc4317a751964afd1fd16432de0b5f",
+    "response_path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_learned_retention_post_b03_convergence/archive/RESPONSE.md",
+    "scope": "Reversible tested LEARNED_EVENT/5000/128 package hold only; no whole-direction stop or recast; no fourth unchanged pair."
+  },
+  "accepted_observations_transcribed_without_new_analysis": [
+    {
+      "object": "B01",
+      "training_seed": 7809,
+      "final_seed": 107809,
+      "RETAIN_mean": -0.160078125,
+      "LEARNED_EVENT_mean": 1.60328125,
+      "d_LR": 1.763359375,
+      "branch": "LEARNED_EVENT_ABOVE_MEI",
+      "native_wall_s": 1703.12,
+      "evidence": "FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md",
+      "evidence_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e"
+    },
+    {
+      "object": "B02",
+      "training_seed": 7810,
+      "final_seed": 107810,
+      "RETAIN_mean": 6.290546875,
+      "LEARNED_EVENT_mean": 4.521015625,
+      "d_LR": -1.76953125,
+      "branch": "RETAIN_ABOVE_MEI",
+      "native_wall_s": 1815.99,
+      "evidence": "FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md",
+      "evidence_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e"
+    },
+    {
+      "object": "B03",
+      "training_seed": 7811,
+      "final_seed": 107811,
+      "RETAIN_mean": 0.947578125,
+      "LEARNED_EVENT_mean": -0.26796875,
+      "d_LR": -1.215546875,
+      "branch": "RETAIN_ABOVE_MEI",
+      "native_wall_s": 1750.81,
+      "support_known_lower_bound_s": 342.0027033,
+      "support_300_status": "owner reference, not hard stop",
+      "complete_cap_status": "unverified; no observed complete-cap breach",
+      "evidence": "FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md#final-technical-and-scientific-intake--2026-09-12",
+      "evidence_sha": "d4ff89f66263c44911ba6ffc5dbdda6b02a3014e"
+    }
+  ],
+  "counterevidence": {
+    "object": "N3 FOLR B04",
+    "source": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_INTAKE_20260904.md",
+    "commit": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+    "typed_minus_generic_AUC": 0.0026041666666666665,
+    "typed_and_generic_mean_final_return": 0.98828125,
+    "absolute_MEI": 0.05,
+    "scope": "Different one-reward-action replacement host; competent generic learning opposes an assumption of automatic typed benefit, not a native multi-step bank result."
+  },
+  "inspected_source": [
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "commit": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "git_bytes": 3025,
+      "sha256": "3936fd69b99d1b65c7644821848e419a9e3118120efbcc57667fba5ef5db3dc1"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+      "commit": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "git_bytes": 2588,
+      "sha256": "29dc8e1a18426a42f3cf01f0eba03f6bfa44eeeefddeec684d6458c7139b774c"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py",
+      "commit": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "git_bytes": 13583,
+      "sha256": "dc342eefc74af9be788b006dfc70ef471088380543a3d005af19b0309d57fc86"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+      "commit": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "git_bytes": 1791,
+      "sha256": "775e598921ee7b09721b205624c7e7ac30e1ace177bdcb720b9120c5f4443fa3"
+    }
+  ],
+  "new_information_variant": {
+    "same_for_both_arms": "Stable slot labels and public per-slot physical lifetime-boundary facts, including unseen end and same-step replacement; local visibility still masks physical position/target/action features.",
+    "historical_boundary": "Existing actor directly gets public any-event and own-birth; internal full per-slot metadata is not automatically legal actor information. No old information interface or result is rewritten."
+  },
+  "proposed_sizing_only": {
+    "execution_authorized": false,
+    "frozen_card": false,
+    "arms": 2,
+    "independent_training_pairs": 1,
+    "train_episodes_per_arm": 5000,
+    "final_episodes_per_arm": 128,
+    "ticks_per_episode": 20,
+    "total_native_team_ticks_expression": "2*(5000+128)*20",
+    "total_native_team_ticks": 205120,
+    "slots": 5,
+    "baseline_recurrent_cells_per_time": 5,
+    "keyed_bank_recurrent_cells_per_time": 25,
+    "example_bank_hidden_width": 16,
+    "baseline_hidden_width": 64,
+    "baseline_replay_GRU_rows_expression": "4969*32*21*5*2",
+    "baseline_replay_GRU_rows": 33391680,
+    "bank_replay_cell_rows_expression": "4969*32*21*5*5*2",
+    "bank_replay_cell_rows": 166958400,
+    "bank_replay_limit": "Upper dense observer-subject loop sizing, not measured cost or a frozen implementation. Smaller width does not guarantee lower wall time; local attention/mixer/backward/environment/publication remain.",
+    "search_candidates": 0,
+    "trajectory_enumeration": 0,
+    "complete_future_per_arm_wall": "unknown",
+    "support_and_peak_memory": "unknown"
+  },
+  "cost": {
+    "consultation_complete_documentary_provider_agent": "unknown",
+    "future_implementation_and_experiment": "unknown and unallocated",
+    "historical_costs": "Old B03 native1750.81s is not a price for the new architecture; no cap or allowance transfer."
+  },
+  "literature_retrieval": {
+    "question": "Does the local generic recurrence/visibility path already provide the legal history null, and can centralized sequence-retention evidence justify a decentralized per-trip memory bank?",
+    "my_lib_entry": "C:/Projects/My-lib/README.md",
+    "my_lib_actual_coverage": {
+      "command": "python -m my_lib coverage (PYTHONPATH=src)",
+      "collections": [
+        "synthetic-core"
+      ],
+      "papers": 2,
+      "mechanisms": 2,
+      "limitation": "Synthetic fixtures only; excluded from scientific evidence. No verified real-collection CLI index available at this entry; no fake real search or new index built."
+    },
+    "inst_sci_catalog": "C:/Projects/Inst-sci/papers/MyLib/llm-index/catalog.v2.jsonl",
+    "catalog_sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0",
+    "catalog_rows": 190,
+    "searched_fields": [
+      "title",
+      "keywords",
+      "algorithm_names"
+    ],
+    "terms": [
+      "recurrent",
+      "retention",
+      "memory",
+      "entity",
+      "agent identity",
+      "sable",
+      "cama",
+      "oryx"
+    ],
+    "candidate_hits": [
+      {
+        "id": "MARL-0005",
+        "title": "Contrastive Identity-Aware Learning for Multi-Agent Value Decomposition",
+        "year": "2023",
+        "official_url": "https://ojs.aaai.org/index.php/AAAI/article/view/26370"
+      },
+      {
+        "id": "MARL-0020",
+        "title": "Quantum Multi-Agent Meta Reinforcement Learning",
+        "year": "2023",
+        "official_url": "https://ojs.aaai.org/index.php/AAAI/article/view/26313"
+      },
+      {
+        "id": "MARL-0034",
+        "title": "Expressive Multi-Agent Communication via Identity-Aware Learning",
+        "year": "2024",
+        "official_url": "https://ojs.aaai.org/index.php/AAAI/article/view/29683"
+      },
+      {
+        "id": "MARL-0062",
+        "title": "AIR: Unifying Individual and Collective Exploration in Cooperative Multi-Agent Reinforcement Learning",
+        "year": "2025",
+        "official_url": "https://ojs.aaai.org/index.php/AAAI/article/view/34454"
+      },
+      {
+        "id": "MARL-0409",
+        "title": "Complementary Attention for Multi-Agent Reinforcement Learning",
+        "year": "2023",
+        "official_url": "https://proceedings.mlr.press/v202/shao23b.html"
+      },
+      {
+        "id": "MARL-0481",
+        "title": "Reidentify: Context-Aware Identity Generation for Contextual Multi-Agent Reinforcement Learning",
+        "year": "2025",
+        "official_url": "https://proceedings.mlr.press/v267/xu25j.html"
+      },
+      {
+        "id": "MARL-0485",
+        "title": "Sable: a Performant, Efficient and Scalable Sequence Model for MARL",
+        "year": "2025",
+        "official_url": "https://proceedings.mlr.press/v267/mahjoub25a.html"
+      },
+      {
+        "id": "MARL-0653",
+        "title": "Oryx: a Scalable Sequence Model for Many-Agent Coordination in Offline MARL",
+        "year": "2025",
+        "official_url": "https://papers.neurips.cc/paper_files/paper/2025/hash/efc12560842b25037c6d2d77754239f5-Abstract-Conference.html"
+      }
+    ],
+    "source_reads": [
+      {
+        "paper_id": "MARL-0409",
+        "official_url": "https://proceedings.mlr.press/v202/shao23b.html",
+        "source_json": "C:/Projects/Inst-sci/papers/MyLib/json/MARL-0409.json",
+        "sha256": "ee9d7b6adc209780a1bb0ad95d73332e9fe4456bfe7ed738926510f70448b20b",
+        "read_elements": [
+          {
+            "kid_index": 30,
+            "element_id": 138,
+            "page": 3
+          },
+          {
+            "kid_index": 39,
+            "element_id": 149,
+            "page": 3
+          },
+          {
+            "kid_index": 45,
+            "element_id": 155,
+            "page": 3
+          },
+          {
+            "kid_index": 46,
+            "element_id": 156,
+            "page": 3
+          }
+        ],
+        "verified_paraphrase": "Entity-wise observations are locally visibility-masked before aggregation; the published local Q path uses the acting agent observation-action history encoded by a GRU. This supports retaining a learned generic recurrent comparator and explicit visibility boundaries.",
+        "decision_effect_and_limit": "The full published CAMA also has a global coach/communication path omitted by this fixed local comparator. These passages establish neither entity-history-bank benefit nor equivalence to full CAMA.",
+        "metadata_read": "metadata/v2/papers.v2.jsonl; publication/source provenance inspected; research tags are abstract-grounded, not independent empirical validation"
+      },
+      {
+        "paper_id": "MARL-0485",
+        "official_url": "https://proceedings.mlr.press/v267/mahjoub25a.html",
+        "source_json": "C:/Projects/Inst-sci/papers/MyLib/json/MARL-0485.json",
+        "sha256": "2c3242b6947b0f6328140e825c75a7f092803712b3c8bca95f84a348c480a61b",
+        "read_elements": [
+          {
+            "kid_index": 34,
+            "element_id": 2236,
+            "page": 2
+          },
+          {
+            "kid_index": 36,
+            "element_id": 2241,
+            "page": 3
+          },
+          {
+            "kid_index": 66,
+            "element_id": 2372,
+            "page": 4
+          },
+          {
+            "kid_index": 77,
+            "element_id": 2388,
+            "page": 5
+          }
+        ],
+        "verified_paraphrase": "Sable is a centralized sequence policy: its encoder processes all agents at a timestep and resets episode memory; the decoder carries sequential state across agents and timesteps.",
+        "decision_effect_and_limit": "Its strong sequence-model headline cannot be transplanted as a same-information decentralized null. Episode resets do not justify per-trip entity cuts, and this read is no population-transfer or novelty verdict.",
+        "metadata_read": "metadata/v2/papers.v2.jsonl; publication/source provenance inspected; research tags are abstract-grounded, not independent empirical validation"
+      }
+    ],
+    "coverage_limit": "Eight metadata candidates in this 190-row snapshot; two relevant primary texts read. Others are retrieval hits, not evidence. No global novelty/coverage or Pro local-file-access assertion."
+  },
+  "scientific_reading": {
+    "sources": [
+      "FOUNDATIONS sections2-4,6",
+      "02_MARL actor/critic information and recurrence",
+      "04_EMPIRICAL comparison, independent units and package attribution"
+    ],
+    "concrete_assumption": "A local bank may reuse only its owner previous legal observations; any new identity boundary is common actor information. Shared weights do not license cross-trip hidden-state inheritance.",
+    "limit": "No useful-memory necessity, information gain, component cause, stable superiority, original-CAMA result or transfer follows from architecture/source inspection."
+  },
+  "recommendation": {
+    "state": "unexecuted close-call direction advice",
+    "candidate": "Observer-owned entity-history bank on an explicitly common lifecycle-identity-visible native variant",
+    "strongest_opposition": "Competent generic recurrence already learns stale-input handling; twenty-step host may have little additional decision-relevant history; information extension and bank work may not be worth it."
+  }
+}

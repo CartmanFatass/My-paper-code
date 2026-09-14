@@ -1,0 +1,90 @@
+{
+  "id": "20260912-root-016",
+  "created": "2026-09-12T15:03:06-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "五个新方向登记、两项首轮实验及独立TOP投资已合规",
+  "context": "原作者完整核对312行/80107bytes和59个固定来源；应用Pro具体选择，不作新的本地判断或等待owner批准。",
+  "options": [
+    {
+      "key": "selected",
+      "label": "执行已选集合",
+      "consequence": "登记五项，只资助ACPS/CADC及旧MGTAP T；原22不撤出。"
+    },
+    {
+      "key": "smaller",
+      "label": "T加ACPS",
+      "consequence": "保留五项登记，不追加CADC；需owner明确覆盖已有Pro选择。"
+    },
+    {
+      "key": "conserve",
+      "label": "T加仅登记",
+      "consequence": "省去两新实施/实验款，放弃其有限观察；需明确覆盖。"
+    }
+  ],
+  "recommended": "selected",
+  "auto_applied": "selected",
+  "dm_reason": "完整科学/spec检查无冲突，Pro final在已出版science/decision记录应用，实际代码/launch尚未发生。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L90",
+  "brief": "docs\\research\\portfolio\\owner\\briefs\\portfolio\\2026-09-12_NEW_DIRECTION_DISCOVERY.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "应用已完整核对的Portfolio新方向登记与T投资决定：五个新方向中资助ACPS/CADC，其余仅登记，T作为旧MGTAP独立投入。",
+    "changes_if_approved": [
+      {
+        "target": "新方向登记",
+        "from": "原22＝15ACTIVE+7PARKED",
+        "to": "新增ACPS/CADC ACTIVE/HIGH及TRDL/CPCP/LCAC PARKED/MEDIUM，合计27＝17ACTIVE+10PARKED；原生命周期不变"
+      },
+      {
+        "target": "三笔有限对象",
+        "from": "没有新方向实验款，TOP科学已选但未投",
+        "to": "ACPS1800/CADC2100/T1200 hard完整future invoked；各自一pair与所有必要support，不互借"
+      }
+    ],
+    "if_refused": "异步owner覆盖按实际指令处理并保留已执行效果；没有回复不暂停已合规选择。较小反选项是T+ACPS或T独立加仅登记，不能擦除原证据。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md",
+        "quote": "The two new purchases address different operational choices",
+        "why": "物理能力共享与真实传输争用分别改变native动作/信息，强同信息null和estimand清楚。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md",
+        "quote": "Both new implementations may consume more support than the chosen offers.",
+        "why": "全新成本未测，shared/RR/TOP的最强反方均可胜；5100不是预测或总账。"
+      }
+    ],
+    "uncertainty": [
+      "新wrapper/learner成本和基线在新host的实际能力未知，无新经验阳性。",
+      "新两DM由Root真实分配，funded-ready不是running；原五方向不能被Root自动撤出。",
+      "TRDL/CPCP/LCAC只登记，3000/5100/3000 offers未分配，无占位worktree或实施。"
+    ],
+    "cost": {
+      "compute": "ACPS450/arm900native900support1800complete；CADC600/arm1200native900support2100complete；T450/arm900nativehard300support1200complete，均future invoked hard且非fungible。",
+      "owner_time": "异步覆盖，不等逐项确认。",
+      "reversibility": "costly",
+      "waits_on_this": "Root集成与按真实容量独立派发；不存在owner批准门槛。"
+    },
+    "verdict_text": "Final decision: five distinct registrations, two new ACTIVE/HIGH starter grants (ACPS-B01 at1,800 and CADC-B01 at2,100 complete future invoked seconds), three PARKED/MEDIUM registration-only programmes with zero implementation/numerical grants, and separate T=yes at450/arm,900 native,hard300 support,1,200 complete.",
+    "source": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T22:03:06+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/INTAKE.md",
+      "state": "applied",
+      "summary": "已完整intake并应用明确科学登记/投资记录；ACPS1800/CADC2100与独立T1200(hard300support)，其余3只登记；Root派发和未来技术验收尚未声称完成。"
+    }
+  ]
+}

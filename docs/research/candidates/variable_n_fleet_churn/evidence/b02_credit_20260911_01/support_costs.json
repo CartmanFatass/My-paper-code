@@ -1,0 +1,256 @@
+{
+  "scope": "Selected non-overlapping documented support components through closeout preparation; not a complete support total or full-cost acceptance.",
+  "unit": "wall_seconds",
+  "components": [
+    {
+      "name": "Root response integration",
+      "seconds": 5.3663749,
+      "clock_scope": "internal command; preparation merge/inspection approximations separate"
+    },
+    {
+      "name": "DM card publication",
+      "seconds": 5.3832615,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "DM source publication",
+      "seconds": 5.3752014,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "DM exact-command publication",
+      "seconds": 4.6467948,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "DM launch/adoption publication",
+      "seconds": 5.0123783,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Focused synthetic checks, both commands",
+      "seconds": 5.6781842,
+      "clock_scope": "internal commands; do not add pytest clocks"
+    },
+    {
+      "name": "Independent reviewer commands",
+      "seconds": 3.251,
+      "clock_scope": "sum of 11 displayed command clocks; approximately8.9s enclosing tool scope is an alternative"
+    },
+    {
+      "name": "Unsuccessful remote HTTPS fetch",
+      "seconds": 37.02,
+      "clock_scope": "outer wall; conservatively includes network wait"
+    },
+    {
+      "name": "Source bundle creation and SCP",
+      "seconds": 0.7596152,
+      "clock_scope": "internal combined command"
+    },
+    {
+      "name": "Remote bundle import",
+      "seconds": 0.12,
+      "clock_scope": "remote command"
+    },
+    {
+      "name": "Remote detached worktree creation",
+      "seconds": 0.21,
+      "clock_scope": "remote command"
+    },
+    {
+      "name": "Pre-dispatch handle read and accepted launch",
+      "seconds": 1.5257668,
+      "clock_scope": "displayed enclosing command; includes0.3628601s launch internal clock"
+    },
+    {
+      "name": "Launch acceptance and admission receipt read",
+      "seconds": 0.5249107,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Monitor actual adoption observation",
+      "seconds": 1.0,
+      "clock_scope": "Root-forwarded command receipt"
+    },
+    {
+      "name": "Root source/launch integration through f6fb5606b",
+      "seconds": 10.4,
+      "clock_scope": "sum displayed1.1+2.2+0.1+1.5+5.5; later tracking publication excluded"
+    },
+    {
+      "name": "Last launch-boundary Git metadata read",
+      "seconds": 0.4459356,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Last launch-boundary owner review read",
+      "seconds": 0.5459685,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Terminal local branch inventory",
+      "seconds": 0.073726,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Terminal owner review read",
+      "seconds": 0.5377363,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Terminal remote inventory",
+      "seconds": 0.647792,
+      "clock_scope": "displayed enclosing command; includes remote0.02s"
+    },
+    {
+      "name": "Terminal archive creation and SCP preservation",
+      "seconds": 1.7622029,
+      "clock_scope": "displayed enclosing command; includes remote0.04s and internal copy0.9652381s"
+    },
+    {
+      "name": "Collection card/docs branch read",
+      "seconds": 0.1545811,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Collection skill/execution-record read",
+      "seconds": 0.2736474,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Collection rule/source read including missing-path lookup",
+      "seconds": 0.1551943,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Collection archive member read",
+      "seconds": 0.316212,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Collection evidence-rule and local tracking read",
+      "seconds": 0.1933748,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Collection primary-control owner/config read",
+      "seconds": 0.5593063,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Collection card path and rules read",
+      "seconds": 0.0814848,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Collection foundations/intake inventory read",
+      "seconds": 0.2564869,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Collection source flow and prior incomplete intake read",
+      "seconds": 0.2657817,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Local cleanup inventory",
+      "seconds": 0.293135,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Source-surface comparison and upstream read",
+      "seconds": 1.9930666,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Archive analysis and local recovery preservation",
+      "seconds": 0.3172668,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Initial support-accounting document write",
+      "seconds": 0.2587902,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Collection record consistency/readback",
+      "seconds": 0.5443903,
+      "clock_scope": "displayed command; static documents/archive bytes only"
+    },
+    {
+      "name": "Pre-publication owner review read",
+      "seconds": 0.4903421,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Pre-publication ignore/status read",
+      "seconds": 0.2653411,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "E0/intake/archive commit and push",
+      "seconds": 6.2844237,
+      "clock_scope": "internal command;6.5523181s displayed enclosing alternative not added"
+    },
+    {
+      "name": "Remote cleanup source/inventory read",
+      "seconds": 1.0690247,
+      "clock_scope": "displayed command"
+    },
+    {
+      "name": "Remote scoped removal with final here-document receipt error",
+      "seconds": 1.0538243,
+      "clock_scope": "displayed command; deletion executed once"
+    },
+    {
+      "name": "Read-only reconciliation of remote deletion effects",
+      "seconds": 0.4776158,
+      "clock_scope": "internal command;0.7175744s displayed enclosing alternative not added"
+    },
+    {
+      "name": "Local rejected-cleanup state reconciliation/record",
+      "seconds": 0.4462296,
+      "clock_scope": "displayed command; no local deletion"
+    },
+    {
+      "name": "Final owner review read",
+      "seconds": 2.9628743,
+      "clock_scope": "displayed command"
+    }
+  ],
+  "documented_component_sum_seconds": 108.9992429,
+  "additional_approximate_root_preparation_seconds": 3.7,
+  "approximate_sum_including_those_components_seconds": 112.6992429,
+  "excluded_nested_clock_examples": [
+    "pytest2.04/1.84s within test commands",
+    "reviewer approximately8.9s enclosing alternative",
+    "launch0.3628601s inside1.5257668s",
+    "terminal archive0.04s plus copy0.9652381s inside1.7622029s"
+  ],
+  "shared_monitor_terminal_query": {
+    "seconds": 1.3,
+    "assignment": "RCLE only per Root; VNFC participated but does not add it again"
+  },
+  "unmeasured": [
+    "Other early preparation/readback/patch and launch-support commands not reconstructed",
+    "Actual standalone admission command wall",
+    "Monitor commands other than adoption and the shared query",
+    "Root later tracking/publication and collection integration through cf93e737ee83f2d78d14c5569874590af8ccd347",
+    "Final cleanup-record write/commit/push and Root final integration, unless separately reported in handoff"
+  ],
+  "caps": {
+    "native_seconds": 600,
+    "support_seconds": 300,
+    "combined_seconds": 900
+  },
+  "observed_native_seconds": 77.84,
+  "native_within_cap": true,
+  "complete_primary_count": 0,
+  "support_complete": false,
+  "full_cost_conformance": "unestablished",
+  "cost_per_valid_result": null,
+  "cost_per_valid_result_reason": "No complete valid primary; do not divide by zero.",
+  "arithmetic": "Decimal sum of listed recorded components; nested clock alternatives excluded. Root estimates remain approximate. Deliberation/idle queue time is not inferred from elapsed conversation time.",
+  "first_collection_documented_component_sum_seconds": 95.1463868,
+  "local_cleanup_rejection": "CreateProcess rejected exact draft/source-copy Remove-Item command before execution: blocked by policy. No child process ran; approximately0.1s displayed tool dispatch is not a successful cleanup-command wall."
+}

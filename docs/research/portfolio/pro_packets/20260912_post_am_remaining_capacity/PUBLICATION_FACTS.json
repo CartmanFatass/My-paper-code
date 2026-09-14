@@ -1,0 +1,40 @@
+{
+  "request_id": "2026-09-12-post-am-remaining-capacity-01",
+  "checked_at_utc": "2026-09-12T19:59:06.849652+00:00",
+  "status": "READY_TO_DISPATCH; no author Send",
+  "input_sha": "381addb2003cf2f0ec3dd6a10b0c14ef714d9853",
+  "input_commits_for_root": [
+    "8c0b49a81e987dcc1985a00a4c1e47c773a3f7ea",
+    "381addb2003cf2f0ec3dd6a10b0c14ef714d9853"
+  ],
+  "exclude_input_merge": "c9b9b3a73a965e7140dcdfd3a067879d0f5c0112",
+  "task_sha": "8e026779f3711bc345bcce77791b7cfe6d23dcc8",
+  "task_path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/delivery_current/TASK.md",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/8e026779f3711bc345bcce77791b7cfe6d23dcc8/docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/delivery_current/TASK.md",
+  "task_bytes": 37819,
+  "task_sha256": "433e945471d0fc41ec245bc3413fb71d821fb8ca4587747884b35283645bf900",
+  "transport_prompt_bytes": 1926,
+  "transport_prompt_sha256": "95f01286138f2ac754d69c986db7f5e694e7698d31e6c20a4aec913e4e764cc5",
+  "handoff_path": "docs/research/portfolio/pro_packets/20260912_post_am_remaining_capacity/delivery_current/HANDOFF.json",
+  "exact_reference_count": 33,
+  "delivery_branch": "codex/portfolio",
+  "observed_delivery_ref_before_final_commit": "8e026779f3711bc345bcce77791b7cfe6d23dcc8\trefs/heads/codex/portfolio",
+  "source_thread_id": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "operator_thread_id": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+  "relay_thread_id": "01a095ca-8676-74e1-b78c-ea459d41e905",
+  "current_actual_directions": [
+    "metric_ground_transport_allocation"
+  ],
+  "current_actual_count": 1,
+  "current_vacancies": 4,
+  "ACVC_latest_complete_main_sha": "89910ecd7c70b1bd7e25951402620c5791c9dfe9",
+  "current_offers": "N or S mutuallyexclusive for FSD; R for RCLE; H/singletons; maximum2additionaldirections",
+  "new_proposal_not_allocation": true,
+  "superseded_unpublished_draft": "retained verbatim at TASKcommit8e026779f/delivery with TASK_NOT_PUBLISHED and zeroSend; removed from current checkout so only delivery_current remains",
+  "author_experiments": 0,
+  "author_numeric_analyses": 0,
+  "author_pro_sends": 0,
+  "owner_item_id": "20260912-root-010",
+  "limits": "N3000 futureinvoked offer plus unknownR completecost; S+R costsbothunknown; no oldbalance/Qresurrection/successor. Root reconciles actual activity at intake without enlarging units."
+}

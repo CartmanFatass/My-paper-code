@@ -1,0 +1,68 @@
+{
+  "source_sha": "e61facdff70091cd9cdd33bc231a149ed9106d35",
+  "bundle_sha256": "98506c65fef7bb2cc0d9d1b77d94d96bea71bb7fefe98634320296860f420b57",
+  "bundle_bytes": 113339685,
+  "bundle_receipt": {
+    "step": "single full-history source bundle",
+    "source_sha": "e61facdff70091cd9cdd33bc231a149ed9106d35",
+    "command": [
+      "git",
+      "-c",
+      "gc.auto=0",
+      "-c",
+      "maintenance.auto=false",
+      "bundle",
+      "create",
+      "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\8951-20260911\\source.bundle",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "timeout": false,
+    "stdout": "",
+    "stderr": "",
+    "command_wall_s": 5.265999999974156,
+    "bundle_bytes": 113339685,
+    "bundle_header": [
+      "# v2 git bundle",
+      "e61facdff70091cd9cdd33bc231a149ed9106d35 HEAD"
+    ],
+    "total_wall_s": 5.265999999974156
+  },
+  "remote_preparation_receipt": [
+    {
+      "command": [
+        "scp",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=5",
+        "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\8951-20260911\\source.bundle",
+        "hmasd-wsl-node:/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8951-e61facdff.bundle"
+      ],
+      "returncode": 0,
+      "timeout": false,
+      "stdout": "",
+      "stderr": "",
+      "wall_s": 8.844000000011874
+    },
+    {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=5",
+        "hmasd-wsl-node",
+        "timeout --signal=TERM --kill-after=2 43 bash -s"
+      ],
+      "returncode": 128,
+      "timeout": false,
+      "stdout": "",
+      "stderr": "bash: line 1: set: -\n: invalid option\nset: usage: set [-abefhkmnptuvxBCEHPT] [-o option-name] [--] [-] [arg ...]\nfatal: cannot change to '/home/wu/projects/HMASD?': No such file or directory\nfatal: cannot change to '/home/wu/projects/HMASD?': No such file or directory\nfatal: cannot change to '/home/wu/projects/HMASD?': No such file or directory\nfatal: cannot change to '/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8951-e61facdff?': No such file or directory\nfatal: cannot change to '/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8951-e61facdff?': No such file or directory\nfatal: cannot change to '/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8951-e61facdff?': No such file or directory\nfatal: cannot change to '/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8951-e61facdff?': No such file or directory\n",
+      "wall_s": 0.264999999984866
+    }
+  ],
+  "local_preparation_script_raw_utf8": "set -eu\r\nexport GIT_NO_LAZY_FETCH=1 GIT_TERMINAL_PROMPT=0\r\nrepo=/home/wu/projects/HMASD\r\nworktree=/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8951-e61facdff\r\nbundle=/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8951-e61facdff.bundle\r\nsha=e61facdff70091cd9cdd33bc231a149ed9106d35\r\ntest ! -e \"$worktree\"\r\ngit -C \"$repo\" -c protocol.allow=never bundle verify \"$bundle\"\r\ngit -C \"$repo\" -c protocol.allow=never -c protocol.file.allow=always -c gc.auto=0 -c maintenance.auto=false fetch --no-tags \"$bundle\" HEAD\r\ngit -C \"$repo\" -c protocol.allow=never -c gc.auto=0 -c maintenance.auto=false worktree add --detach --no-checkout \"$worktree\" \"$sha\"\r\ngit -C \"$worktree\" -c protocol.allow=never sparse-checkout set --cone hmasd ha_ctse_process envs environments experiments scripts tools tests manifold_hmasd\r\ngit -C \"$worktree\" -c protocol.allow=never checkout --detach \"$sha\"\r\ngit -C \"$worktree\" -c protocol.allow=never rev-parse HEAD\r\ngit -C \"$worktree\" -c protocol.allow=never status --porcelain\r\n",
+  "input_provenance": "The retained script was written with the same Windows text-mode newline translation as SSH stdin; raw stdin was not independently captured. CRLF attribution is inferred from this producer and the remote path errors.",
+  "preservation_wall_s": 0.09400000001187436
+}

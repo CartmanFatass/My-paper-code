@@ -1,0 +1,17 @@
+{
+  "recorded_utc": "2026-09-12T00:07:00.738665+00:00",
+  "dispatch": {
+    "prompt": "MONITOR_ADD: adopt the newly accepted FSD B02 I arm, handle fsd-uav-renewal-batch-b02-771003-I-20260911, source 5250c43536d8520d4005eed3f613226ec4bc6e73, accepted by agent-task at 2026-09-12T00:04:38.846392Z. This is the already selected second arm of the single 771003/781003 pair, not a retry. D0 is terminal and technically accepted in 569d921cd1394206cb824310ae8bba22f858240e. Execution node hmasd-wsl-node; cwd /home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771003-20260911; output temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003/I; supervisor log /home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771003-I-20260911/task.log; admission /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771003-20260911/I_admission.json; process cost /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771003-20260911/I_process_time.txt. The exact detached 1800-second command runs fresh admit-memory && frozen runner; its launcher returned 0 and admission was not yet published at launcher return. Read the actual admission/status as part of adoption. DM does no routine polling.\n\nApply current primary-control docs/project/EXPERIMENT_MONITOR.md and .codex/hmasd-monitor.toml, including OWNER_DIRECT goal persistence. Call get_goal now; continue a matching unfinished Monitor goal or create_goal without a token budget when none is unfinished. Add and retain this handle in that goal's active set until its terminal notice is delivered. MONITOR_ADOPTED must include the actual get_goal/create_goal result, unfinished goal state, task ID, observation time and actual status; message acceptance alone is not adoption. Do not finish the goal while accepted handles or undelivered notices remain. When active_set and pending notices are empty, first send MONITOR_GOAL_COMPLETE directly to Root with the goal result, terminal event IDs and active_set=[]; only after accepted delivery mark that goal complete. No extra acknowledgment loop.\n\nSend adoption and terminal facts directly to Root app 01a07249-b095-7821-8ce2-e9c32ba85267 for original DM /root/dm_fsd_i1280_implementation. The DM owns collection, technical/scientific acceptance and cleanup; Monitor only observes. Preserve actual observation wall cost, with shared queries explicitly unallocated and never split or fully charged to each direction. No relaunch, staging, evaluation or source edits. Existing authoring checkout C:/Projects/HMASD-worktrees/codex-fsd; I_LAUNCH_RECEIPT.json is being published in the existing uav_renewal_batch_b02_771003_20260911 evidence directory.",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a087e5-2044-7301-abb6-7a1709a98197\"}"
+        }
+      ],
+      "isError": false
+    },
+    "api_wall_seconds": 0.185
+  },
+  "actual_adoption": "confirmed by Root separately from accepted API delivery"
+}

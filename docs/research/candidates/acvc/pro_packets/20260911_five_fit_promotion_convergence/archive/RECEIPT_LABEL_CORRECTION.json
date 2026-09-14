@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-11-acvc-five-fit-promotion-convergence-01",
+  "correction_kind": "receipt_label_defect",
+  "conversation_binding_key": "em:acvc:convergence",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "send_click_count": 1,
+  "raw_capture": {
+    "original_label": "__02_RESPONSE.md",
+    "corrected_artifact_type": "chat_link_receipt",
+    "bytes": 384,
+    "sha256": "2f05087236a0633457685d92560d46a1ff42fb4906f95371073a1e60a571fc55",
+    "byte_identical_to": "__04_CHAT_RECEIPT.md"
+  },
+  "chat_receipt": {
+    "artifact_type": "chat_link_receipt",
+    "bytes": 384,
+    "sha256": "2f05087236a0633457685d92560d46a1ff42fb4906f95371073a1e60a571fc55"
+  },
+  "complete_response": {
+    "artifact_type": "github_git_response",
+    "repository_path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/archive/RESPONSE.md",
+    "commit": "103b8f811388089c714383708a13526f9a06aff3",
+    "git_blob_bytes": 33733,
+    "line_count": 157,
+    "sha256": "e4a71044732c39ee67aa0edcb10b33b769e563ebf5ab6d5115a48eebd3ca2ebe",
+    "binding_evidence": [
+      "direct Git/GitHub response read at the named commit",
+      "current paired chat receipt",
+      "GitHub issue comment 5642977368"
+    ]
+  },
+  "identity_note": "Descriptive current-round node markers are observations, not provider UUIDs.",
+  "supersedes_labels_only": true,
+  "preserves_original_artifacts": true,
+  "provider_action_during_correction": "none",
+  "scientific_interpretation": "not_assessed_by_transport"
+}
+

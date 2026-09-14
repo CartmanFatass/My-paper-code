@@ -1,0 +1,81 @@
+{
+  "source_before": "d843b5f903663dcc5a699c0a85fbae4e5252d20f",
+  "source_checked": "63fba179f309870a5b510b6e50739e4e5b50f063",
+  "command_argv": [
+    "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe",
+    "-I",
+    "-S",
+    "-B",
+    "C:\\Projects\\HMASD-worktrees\\dm-cbsc-next-20260906\\temp\\directions\\capability_bound_semantic_currentness\\test\\p47_source_only_unblocking_20260911_dm_amx_cbsc_next\\check.py"
+  ],
+  "checker_limit_seconds": 10,
+  "exit_code": 0,
+  "local_git_retrieval_wall_seconds": 0.06213229999411851,
+  "checker_subprocess_wall_seconds": 0.08437399999820627,
+  "checker_source": "import ast\nimport json\nfrom pathlib import Path\nimport sys\nimport time\n\nstarted = time.perf_counter()\nroot = Path.cwd()\ntarget_path = Path('tests/experiments/candidates/capability_bound_semantic_currentness/omrc_b01/test_initial_train_episode.py')\nedit_path = Path('temp/directions/capability_bound_semantic_currentness/test/p47_projection_20260908_control/edit_prefix.py')\nbefore = (Path(__file__).parent / 'original_test.py.txt').read_text(encoding='utf-8-sig')\ncurrent = (root / target_path).read_text(encoding='utf-8-sig')\nedit = (root / edit_path).read_text(encoding='utf-8-sig')\nast.parse(before)\nedit_tree = ast.parse(edit)\nassert [n.module for n in ast.walk(edit_tree) if isinstance(n, ast.ImportFrom)] == ['pathlib']\nassert not any(isinstance(n, (ast.Import, ast.For, ast.While)) for n in ast.walk(edit_tree))\ncalls = [n for n in ast.walk(edit_tree) if isinstance(n, ast.Call)]\nassert {ast.unparse(n.func) for n in calls if not isinstance(n.func, ast.Attribute) or n.func.attr != 'replace'} == {'Path', 'p.read_text', 'p.write_text'}\nassert [ast.literal_eval(n.args[0]) for n in calls if isinstance(n.func, ast.Name) and n.func.id == 'Path'] == [target_path.as_posix()]\nreplacements = sorted((n for n in calls if isinstance(n.func, ast.Attribute) and n.func.attr == 'replace'), key=lambda n: (n.lineno, n.col_offset, n.end_col_offset))\nreconstructed = before\nfor node in replacements:\n    assert len(node.args) == 2 and not node.keywords\n    old, new = map(ast.literal_eval, node.args)\n    assert isinstance(old, str) and isinstance(new, str)\n    assert reconstructed.count(old) == 1\n    reconstructed = reconstructed.replace(old, new)\nassert len(replacements) == 6\ncurrent_tree = ast.parse(current)\nassert ast.dump(ast.parse(reconstructed)) == ast.dump(current_tree)\nassert reconstructed == current\nmain = next(n for n in current_tree.body if isinstance(n, ast.FunctionDef) and n.name == 'main')\nranges = [n for n in ast.walk(main) if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == 'range']\nassert len(ranges) == 1 and ast.literal_eval(ranges[0].args[0]) == 52\nreference_read = next(n for n in ast.walk(main) if isinstance(n, ast.Call) and ast.unparse(n.func) == 'retained_prefix_reference.read_bytes')\ntuple_call = next(n for n in ast.walk(main) if isinstance(n, ast.Call) and ast.unparse(n.func) == 'tuple')\nassert reference_read.lineno > tuple_call.lineno\nresearch_prefixes = ('torch', 'numpy', 'experiments', 'envs', 'environments', 'ha_ctse_process')\nloaded = [name for name in sys.modules if name.split('.')[0] in research_prefixes]\nassert loaded == []\nprint(json.dumps({\n    'status': 'PASS_SOURCE_ONLY', 'prior_source': 'd843b5f903663dcc5a699c0a85fbae4e5252d20f',\n    'target_path': target_path.as_posix(), 'saved_edit_path': edit_path.as_posix(),\n    'source_inputs': 3, 'ast_parses': 4, 'literal_replacements': len(replacements),\n    'reconstructed_text_and_ast_equal': True, 'edit_script_executed': False,\n    'target_imported_or_executed': False, 'research_modules_loaded': loaded,\n    'module_scope_run_import_line': next(n.lineno for n in current_tree.body if isinstance(n, ast.ImportFrom) and n.module.startswith('experiments.')),\n    'unexecuted_prefix': {'tapes': 52, 'tokens': 52 * 152, 'pack_calls': 52 * 304, 'final_bytes': 152 * 17},\n    'target_invocations': 0, 'research_native_calls': 0, 'environment_tapes': 0,\n    'model_calls': 0, 'optimizer_updates': 0, 'score_evaluations': 0,\n    'checker_body_wall_seconds': time.perf_counter() - started,\n}))\n",
+  "stdout": "{\"status\": \"PASS_SOURCE_ONLY\", \"prior_source\": \"d843b5f903663dcc5a699c0a85fbae4e5252d20f\", \"target_path\": \"tests/experiments/candidates/capability_bound_semantic_currentness/omrc_b01/test_initial_train_episode.py\", \"saved_edit_path\": \"temp/directions/capability_bound_semantic_currentness/test/p47_projection_20260908_control/edit_prefix.py\", \"source_inputs\": 3, \"ast_parses\": 4, \"literal_replacements\": 6, \"reconstructed_text_and_ast_equal\": true, \"edit_script_executed\": false, \"target_imported_or_executed\": false, \"research_modules_loaded\": [], \"module_scope_run_import_line\": 8, \"unexecuted_prefix\": {\"tapes\": 52, \"tokens\": 7904, \"pack_calls\": 15808, \"final_bytes\": 2584}, \"target_invocations\": 0, \"research_native_calls\": 0, \"environment_tapes\": 0, \"model_calls\": 0, \"optimizer_updates\": 0, \"score_evaluations\": 0, \"checker_body_wall_seconds\": 0.019082700018770993}\n",
+  "stderr": "",
+  "check_result": {
+    "status": "PASS_SOURCE_ONLY",
+    "prior_source": "d843b5f903663dcc5a699c0a85fbae4e5252d20f",
+    "target_path": "tests/experiments/candidates/capability_bound_semantic_currentness/omrc_b01/test_initial_train_episode.py",
+    "saved_edit_path": "temp/directions/capability_bound_semantic_currentness/test/p47_projection_20260908_control/edit_prefix.py",
+    "source_inputs": 3,
+    "ast_parses": 4,
+    "literal_replacements": 6,
+    "reconstructed_text_and_ast_equal": true,
+    "edit_script_executed": false,
+    "target_imported_or_executed": false,
+    "research_modules_loaded": [],
+    "module_scope_run_import_line": 8,
+    "unexecuted_prefix": {
+      "tapes": 52,
+      "tokens": 7904,
+      "pack_calls": 15808,
+      "final_bytes": 2584
+    },
+    "target_invocations": 0,
+    "research_native_calls": 0,
+    "environment_tapes": 0,
+    "model_calls": 0,
+    "optimizer_updates": 0,
+    "score_evaluations": 0,
+    "checker_body_wall_seconds": 0.019082700018770993
+  },
+  "control_work_before_evidence_write_wall_seconds": 0.14990530000068247,
+  "cleanup_attempt": {
+    "tool": "exec_command",
+    "requested_command": "$cbscScratchExpected = [System.IO.Path]::GetFullPath('C:/Projects/HMASD-worktrees/dm-cbsc-next-20260906/temp/directions/capability_bound_semantic_currentness/test/p47_source_only_unblocking_20260911_dm_amx_cbsc_next')\n$cbscScratchResolved = (Resolve-Path -LiteralPath $cbscScratchExpected).Path\n$cbscTempRoot = [System.IO.Path]::GetFullPath('C:/Projects/HMASD-worktrees/dm-cbsc-next-20260906/temp/')\nif (-not $cbscScratchResolved.StartsWith($cbscTempRoot, [System.StringComparison]::OrdinalIgnoreCase) -or $cbscScratchResolved -ne $cbscScratchExpected) { throw 'Scratch target escaped the declared invocation path' }\n$cbscExpectedFiles = @('CHECK_RESULT.json','check.py','check.stderr','check.stdout','original_test.py.txt')\n$cbscActualFiles = @(Get-ChildItem -LiteralPath $cbscScratchResolved -Force)\nif ($cbscActualFiles.Count -ne 5 -or @($cbscActualFiles | Where-Object { $_.PSIsContainer -or $_.Name -notin $cbscExpectedFiles }).Count -ne 0) { throw 'Unexpected scratch contents; preserve them' }\nRemove-Item -LiteralPath $cbscScratchResolved -Recurse -Force\nif (Test-Path -LiteralPath $cbscScratchExpected) { throw 'Scratch remains after cleanup' }\nWrite-Output 'Owned source-only checker scratch removed; durable checker/result JSON retained.'",
+    "resolved_target": "C:/Projects/HMASD-worktrees/dm-cbsc-next-20260906/temp/directions/capability_bound_semantic_currentness/test/p47_source_only_unblocking_20260911_dm_amx_cbsc_next",
+    "response_excerpt": "exec_command failed: CreateProcess ... rejected: blocked by policy",
+    "accepted": false,
+    "process_created": false,
+    "removal_observed": false,
+    "retained_files": [
+      {
+        "name": "CHECK_RESULT.json",
+        "bytes": 6276
+      },
+      {
+        "name": "check.py",
+        "bytes": 3511
+      },
+      {
+        "name": "check.stderr",
+        "bytes": 0
+      },
+      {
+        "name": "check.stdout",
+        "bytes": 873
+      },
+      {
+        "name": "original_test.py.txt",
+        "bytes": 1602
+      }
+    ],
+    "total_bytes": 12262,
+    "cleanup_owner": "/root/dm_amx_cbsc_next",
+    "exit_condition": "Permitted removal of this exact owned invocation directory, followed by absence verification; no alternative method or executor selected.",
+    "effect_on_check": "No effect on PASS_SOURCE_ONLY. Retained52 remains unexecuted and is not released."
+  }
+}

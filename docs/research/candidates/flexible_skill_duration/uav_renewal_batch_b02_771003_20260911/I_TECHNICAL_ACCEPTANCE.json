@@ -1,0 +1,85 @@
+{
+  "status": "accepted_complete_I_and_dependent_pair",
+  "accepted_utc": "2026-09-12T00:27:33.830503+00:00",
+  "source_sha": "5250c43536d8520d4005eed3f613226ec4bc6e73",
+  "reused_D0_acceptance": "D0_TECHNICAL_ACCEPTANCE.json",
+  "counts": {
+    "model_constructions": 2,
+    "training_starts": 1,
+    "checkpoint_loads": 0,
+    "training_transitions": 40000,
+    "stored_training_transitions": 40000,
+    "training_episodes": 80,
+    "update_stages": 5,
+    "training_agent_step_batches": 2500,
+    "evaluation_steps": 16000,
+    "evaluation_episodes": 32,
+    "evaluation_agent_step_batches": 500
+  },
+  "optimizer_calls": {
+    "coordinator": 345,
+    "discoverer_actor": 11250,
+    "discoverer_critic": 11250,
+    "team_discriminator": 75,
+    "individual_discriminator": 300
+  },
+  "evaluation_optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 0,
+    "discoverer_critic": 0,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "all_measurements_finite": true,
+  "training_jsonl_matches_summary": true,
+  "all_stages_nonzero_optimizer_calls_and_movement": true,
+  "config_differences_from_D0": {
+    "learner_config": {
+      "coordinator_batch_size": {
+        "D0": 128,
+        "I": 1280
+      },
+      "interruption_cost_c": {
+        "D0": "Infinity",
+        "I": 0.25
+      }
+    },
+    "evaluation_config": {
+      "coordinator_batch_size": {
+        "D0": 128,
+        "I": 1280
+      },
+      "interruption_cost_c": {
+        "D0": "Infinity",
+        "I": 0.25
+      }
+    }
+  },
+  "initial_relative_displacement_final": {
+    "coordinator": 0.04356839281466031,
+    "discoverer_actor": 0.42823809853963624,
+    "discoverer_critic": 0.1629312328535469,
+    "team_discriminator": 0.027099147701741575,
+    "individual_discriminator": 0.04219039221423455
+  },
+  "ordered_pair_and_raw_native_component_accounting_match": true,
+  "arithmetic_check_tolerance": {
+    "absolute": 1e-09,
+    "relative": 1e-09,
+    "basis": "reused accepted scalar reporting check; no native replay"
+  },
+  "process_cost": {
+    "elapsed_seconds": 1069.26,
+    "peak_rss_kib": 3444284.0,
+    "user_seconds": 4191.74,
+    "system_seconds": 50.03,
+    "exit_status": 0.0
+  },
+  "aggregate_cpu_seconds": 4241.7699999999995,
+  "admission_bytes": {
+    "physical": 15628656640,
+    "effective": 15628656640,
+    "floor": 4294967296
+  },
+  "decision": "Owner-delegated decision (unattended, 2026-09-03 instruction): accept the complete bound pair; apply the original rule separately in scientific intake."
+}

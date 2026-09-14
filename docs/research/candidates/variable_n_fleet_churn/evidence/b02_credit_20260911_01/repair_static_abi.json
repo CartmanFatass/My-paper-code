@@ -1,0 +1,138 @@
+{
+  "kind": "static_ABI_inspection",
+  "source_sha": "76d4afca664f988fbaabca2923a0c891f8a784ff",
+  "native_sha256": "1e72526547c0709e2fbc8feb3101a09f0d9896d3e09ba52ce6e0e4ede3f1f5d8",
+  "checks": [
+    {
+      "structure": "_GeneralAgentInput",
+      "python_declared_bytes": 52,
+      "archived_binary_sizeof_bytes": 52,
+      "match": true,
+      "python_field_offsets": {
+        "rank": 0,
+        "opaque_rank": 4,
+        "fast": 8,
+        "radio": 12,
+        "node": 16,
+        "edge_from": 20,
+        "edge_to": 24,
+        "edge_remaining": 28,
+        "destination_node": 32,
+        "token": 36,
+        "token_state": 40,
+        "acquisition_elapsed": 44,
+        "energy_fifths": 48
+      }
+    },
+    {
+      "structure": "_EpisodeInput",
+      "python_declared_bytes": 920,
+      "archived_binary_sizeof_bytes": 920,
+      "match": true,
+      "python_field_offsets": {
+        "magic": 0,
+        "abi": 8,
+        "failed_zone": 12,
+        "active_count": 16,
+        "agents": 20,
+        "demand_1": 436,
+        "demand_2": 484,
+        "blocked_1": 532,
+        "blocked_2": 580,
+        "post_commands": 628,
+        "post_presentation": 724
+      }
+    },
+    {
+      "structure": "_DecisionTrace",
+      "python_declared_bytes": 3144,
+      "archived_binary_sizeof_bytes": 3144,
+      "match": true,
+      "python_field_offsets": {
+        "active_count": 0,
+        "epoch": 4,
+        "command": 8,
+        "token_state": 24,
+        "token_elapsed": 40,
+        "legality": 56,
+        "eta": 184,
+        "margin_fifths": 312,
+        "agent_rows": 440,
+        "zone_rows": 2872,
+        "globals": 3112
+      }
+    },
+    {
+      "structure": "_InteractiveOutput",
+      "python_declared_bytes": 6464,
+      "archived_binary_sizeof_bytes": 6464,
+      "match": true,
+      "python_field_offsets": {
+        "status": 0,
+        "terminal": 4,
+        "epoch": 8,
+        "failed_rank": 12,
+        "integrated_ticks": 16,
+        "safety_violation": 20,
+        "exclusivity_violation": 24,
+        "event_count": 28,
+        "fail_delivered": 32,
+        "fail_demand": 40,
+        "total_delivered": 48,
+        "total_demand": 56,
+        "intact_delivered": 64,
+        "intact_demand": 72,
+        "prehistory_commands": 80,
+        "applied_decision": 176,
+        "next_observation": 3320
+      }
+    },
+    {
+      "structure": "_BCRHCandidateRecord",
+      "python_declared_bytes": 120,
+      "archived_binary_sizeof_bytes": 120,
+      "match": true,
+      "python_field_offsets": {
+        "command": 0,
+        "floor_num": 16,
+        "floor_den": 20,
+        "releases": 24,
+        "objective_limbs": 32,
+        "checker_floor_num": 64,
+        "checker_floor_den": 68,
+        "checker_releases": 72,
+        "checker_objective_limbs": 80,
+        "exact_match": 112
+      }
+    },
+    {
+      "structure": "_BCRHOutput",
+      "python_declared_bytes": 235472,
+      "archived_binary_sizeof_bytes": 235472,
+      "match": true,
+      "python_field_offsets": {
+        "status": 0,
+        "candidate_count": 4,
+        "scorer_command": 8,
+        "checker_command": 24,
+        "scorer_checker_equal": 40,
+        "independent_enumerator_equal": 44,
+        "post60_reduced": 48,
+        "floor_num": 52,
+        "floor_den": 56,
+        "releases": 60,
+        "event_records": 64,
+        "reward_records": 68,
+        "objective_limbs": 72,
+        "checker_objective_limbs": 104,
+        "candidate_digest": 136,
+        "checker_digest": 144,
+        "records": 152
+      }
+    }
+  ],
+  "execution": "Parsed ELF symbols and constant-return sizeof machine code as bytes; skipped compiler ENDBR64 prefix. AST-compiled ctypes Structure declarations only. No CDLL/native function, model, environment, trajectory, RNG or build.",
+  "earlier_parser_attempt": "Stopped before ABI comparison because an ENDBR64 prefix was not recognized; displayed command0.3132354s, no scientific execution.",
+  "limitation": "Total struct sizes and source declaration/order agree. Not an exhaustive proof against native out-of-bounds writes or earlier heap corruption.",
+  "command_seconds": 0.07848709999234416
+}

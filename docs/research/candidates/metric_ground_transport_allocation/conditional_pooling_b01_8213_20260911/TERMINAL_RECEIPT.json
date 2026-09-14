@@ -1,0 +1,25 @@
+{
+  "source": "Root routed MONITOR_TERMINAL",
+  "handle": "mgtap-cond-b01-8213-20260911",
+  "source_sha": "323cdf576a7b7290bd74bbccf47c0386072dc4c2",
+  "status": "finished",
+  "reported_result": "COMPLETE COND_ADVERSE",
+  "exit_code": 0,
+  "native_wall_seconds": 358.11,
+  "terminal_observation": {
+    "whole_shared_command_wall_seconds": 0.9,
+    "shared_across_handles": 4,
+    "attribution": "Do not split; keep adoption timing separate."
+  },
+  "collection_receipt": "COLLECTION.json",
+  "terminal_log": "supervisor/task.log",
+  "terminal_at_utc": "2026-09-11T21:24:18Z",
+  "adoption_observation_seconds": 0.7,
+  "shared_terminal_observation_charge": {
+    "whole_seconds": 0.9,
+    "number_handles": 4,
+    "split": false,
+    "conservative_direction_enclosing_charge_seconds": 0.9
+  },
+  "root_routed_to_DM_at": "2026-09-11T21:38Z"
+}

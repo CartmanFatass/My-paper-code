@@ -1,0 +1,247 @@
+{
+  "request_id": "2026-09-11-remaining-capacity-refill-portfolio-01",
+  "at_utc": "2026-09-11T16:49:22.438224+00:00",
+  "authoring_worktree": "C:\\Projects\\HMASD-worktrees\\codex-portfolio",
+  "branch": "codex/portfolio",
+  "evidence_base_before_new_packet": "a22b3606a180e7a5567236d21ae8f1d1e2b06d67",
+  "actual_author_exposure": {
+    "scientific_invocations": 0,
+    "policy_models": 0,
+    "encoder_modules": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_environment_steps": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "real_evaluation_episodes": 0,
+    "replay": 0,
+    "profiling": 0,
+    "source_tests": 0,
+    "test_fixtures": 0,
+    "support_search": 0,
+    "raw_result_reanalysis": 0,
+    "source_implementation_edits": 0,
+    "provider_sends": 0,
+    "parameter_displacement": "not applicable: no learner"
+  },
+  "exposure_line": "REMAINING_CAPACITY_PREPARATION: scientific_invocations=0; policy_models=0; encoder_modules=0; checkpoint_loads=0; environments=0; native_steps=0; synthetic_environment_steps=0; training_episodes=0; optimizer_steps=0; real_evaluation_episodes=0; replay=0; profiling=0; source_tests=0; test_fixtures=0; support_search=0; raw_result_reanalysis=0; source_implementation_edits=0; provider_sends=0; parameter_displacement=not applicable: no learner",
+  "current_advancing_report": "MGTAP only; FSD B02 closed unexecuted; UCOPE complete narrow PARK; VNFC delivery-gap/no complete scientific decision",
+  "FSD_latest": {
+    "direction_intake_commit": "6173f14ba376a6a289e315f1d0c4b90a92d44fa8",
+    "status": "B02 zero-exposure support limitation, four paths and worktree registration absent",
+    "support_snapshot_s": 306.5315318,
+    "additional_final_publication_s_Root_report_approx": 5.744,
+    "support_cap_s": 300,
+    "scientific_handles": 0,
+    "admission": 0,
+    "submission": 0,
+    "limit": "reconstructed open-command wall spans; precise remote timing and full cost unmeasured; known projected support overrun, not empirical polarity"
+  },
+  "VNFC_latest": {
+    "original_request": "2026-09-10-vnfc-native-service-credit-reentry-01",
+    "state": "NATURAL_COMPLETION with short delivery-gap receipt; no complete scientific decision",
+    "send_clicks_total": 2,
+    "retry_reason": "Root reports authoritative no-effect of original click before one permitted same-request retry",
+    "further_send_authorized": false,
+    "response_sha256": "aebcaccc9250763f01bd36955c36ae5f11b1787283e62fa1a03f53874761f00d",
+    "raw_copies": [
+      {
+        "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\variable_n_fleet_churn\\2026-09-10-vnfc-native-service-credit-reentry-01\\2026-09-10-vnfc-native-service-credit-reentry-01--variable_n_fleet_churn--attempt-02__03_TRANSPORT_FACTS.json",
+        "copied_path": "archive/VNFC_TRANSPORT_FACTS.json",
+        "bytes": 8159,
+        "sha256": "9faccb8f262e81cda57f956091756cc0a895e747b600e0f922362fdf81818f8c"
+      },
+      {
+        "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\variable_n_fleet_churn\\2026-09-10-vnfc-native-service-credit-reentry-01\\2026-09-10-vnfc-native-service-credit-reentry-01--variable_n_fleet_churn--attempt-02__02_RESPONSE.md",
+        "copied_path": "archive/VNFC_DELIVERY_GAP.md",
+        "bytes": 546,
+        "sha256": "aebcaccc9250763f01bd36955c36ae5f11b1787283e62fa1a03f53874761f00d"
+      }
+    ]
+  },
+  "proposed": {
+    "RCLE": {
+      "independent_fits": 1,
+      "model_allocations": 7,
+      "untrained_helpers": 6,
+      "trainable_parameters": 26161,
+      "training_updates": 1000,
+      "training_episodes": 64000,
+      "training_ticks": 4096000,
+      "evaluation_panels": 3,
+      "evaluation_episodes": 6144,
+      "total_episodes": 70144,
+      "total_ticks": 4489216,
+      "training_rollout_batches": 2000,
+      "neural_agent_claims_card_count": 8847360,
+      "candidate_scores": 53084160,
+      "l2_path_budget": 20.0,
+      "nearest_probability": 0.99,
+      "other_probability": 0.002,
+      "logit_offset": 6.20455776256869,
+      "offset_ratio": 495,
+      "nonnearest_mass": 0.01,
+      "former_nonnearest_mass": 0.1,
+      "mass_reduction_factor": 10,
+      "caps_s": {
+        "learned": 600,
+        "reference": 10,
+        "support": 140,
+        "complete": 750
+      },
+      "retained_B05_s": {
+        "learned": 444.45,
+        "reference": 3.18,
+        "native": 447.63,
+        "known_support": 61.0232442,
+        "known_components": 508.6532442
+      },
+      "new_wall": "unknown; unchanged work counts, changed trajectory law; retained B05 is analogy only"
+    },
+    "ACVC": {
+      "independent_fits": 1,
+      "fresh_DENSE_initializations": 1,
+      "postfit_checkpoint_loads": 3,
+      "top_level_model_constructions_including_helpers": 9,
+      "model_construction_law": "training Actor helper + Critic + NativeGeometryActor; each of three load_base calls constructs Actor helper + NativeGeometryActor",
+      "trainable_actor_parameters": 34902,
+      "trainable_critic_parameters": 34177,
+      "training_episodes": 512,
+      "training_team_steps": 131072,
+      "two_episode_rollouts": 256,
+      "adam_calls": 1024,
+      "training_actor_agent_rows": 655360,
+      "replayed_actor_agent_rows": 2621440,
+      "critic_update_rows": 524288,
+      "evaluation_panels": 3,
+      "evaluation_episodes": 192,
+      "evaluation_team_steps": 49152,
+      "evaluation_actor_agent_rows": 245760,
+      "total_episodes": 704,
+      "total_team_steps": 180224,
+      "environment_constructors": 4,
+      "unscored_constructor_resets": 4,
+      "coordinate_pair_check_upper": 6553600,
+      "caps_s": {
+        "native": 270,
+        "support": 330,
+        "complete": 600
+      },
+      "old_8941_s": {
+        "source_preparation": 102.1040615,
+        "reconciliation": 12.0324544,
+        "known_original_support": 114.1365159,
+        "separate_root_recovery": 6.534741,
+        "old_support_cap": 90
+      },
+      "retained_earlier_native_charges_s": [
+        172,
+        169
+      ],
+      "retained_proxy_process_projection_s": 222.2,
+      "new_complete_wall": "unknown; new staging/trajectories/contention; old complete support unmeasured"
+    },
+    "FOLR": {
+      "allocation_proposed": "one source-grounded design and original em:vap_folr_core:convergence question plus complete intake",
+      "numerical_allowance": 0,
+      "implementation_allowance": 0,
+      "candidate_constructions": 0,
+      "proposed_gate_parameter_increment_if_later_chosen": 129,
+      "future_B_not_allocated": {
+        "training_fits": 2,
+        "training_episodes": 10000,
+        "training_ticks": 200000,
+        "optimizer_updates": 9938,
+        "final_evaluation_episodes": 256,
+        "total_team_ticks": 205120,
+        "retained_pair_replay_GRU_rows": 66783360,
+        "retained_pair_acting_rows": 1076880,
+        "scope_note": "retained pair count law plus a new scalar gate on one arm; any selected later card fixes its full cost, no B cap allocated"
+      },
+      "retained_fixed_half_B02_s": {
+        "native_pair": 1517.2,
+        "known_support": 67.695575
+      },
+      "new_design_Pro_calendar_cost": "unmeasured; zero numerical work does not mean zero authoring/Pro cost"
+    }
+  },
+  "option_caps_s": {
+    "A_RCLE_ACVC_FOLR": 1350,
+    "B_RCLE_ACVC": 1350,
+    "C_one_named_B_plus_optional_FOLR": "RCLE750 or ACVC600; FOLR zero numerical",
+    "D_no_new_investment": 0
+  },
+  "owner_reviews": {
+    "primary": [],
+    "shared": []
+  },
+  "applied_portfolio_choice": null,
+  "literature_retrieval": {
+    "My_lib": {
+      "registry_entries": 2,
+      "source_types": [
+        "SYNTHETIC_FIXTURE"
+      ],
+      "knowledge_fts_rows": 2,
+      "real_corpus_used": 0,
+      "limit": "verified default registry/index are fixtures only; no corpus-wide negative claim"
+    },
+    "InstSci": {
+      "catalog_rows": 190,
+      "literal_queries": [
+        "prior policy",
+        "policy prior",
+        "policy shaping",
+        "policy guidance",
+        "action prior",
+        "human guidance",
+        "CAMA",
+        "Sable",
+        "recurrent",
+        "state space",
+        "lifecycle"
+      ],
+      "later_query_hit_counts": {
+        "CAMA": 1,
+        "Sable": 5,
+        "recurrent": 0,
+        "state space": 7,
+        "lifecycle": 0
+      },
+      "source_reads": [
+        {
+          "id": "MARL-0576",
+          "sha256": "795b11f3ff6daf4830fc4e245aa8c2be4b54a47eb13a0f23e3032ef73636a1e1",
+          "passages": "PDF p3 kid26/id149; p4 kid69/id193; p5 kids82/84 ids210/212",
+          "effect": "overridable prior and own-initialization comparison; stronger bias may hinder exploration, .99 unvalidated"
+        },
+        {
+          "id": "MARL-0409",
+          "sha256": "ee9d7b6adc209780a1bb0ad95d73332e9fe4456bfe7ed738926510f70448b20b",
+          "passages": "PDF p2 kid23/id128; p3 kid46/id156; p4 kid48 figure2",
+          "effect": "competent local history GRU null; no original-CAMA or event-retention winner claim"
+        }
+      ],
+      "limit": "lexical coverage/read passages, not novelty; Sable hit is not a new passage claim"
+    }
+  },
+  "owner_item_cli_result": {
+    "raw": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-root-002.json\n"
+  },
+  "audit_line": 43,
+  "owner_item": "20260911-root-002",
+  "owner_auto_applied": null,
+  "MGTAP_snapshot": {
+    "receipt_commit": "ea8ef25d63710173de3efeb2e82c277b4e4fb099",
+    "handle": "mgtap-cond-b01-8212-20260911",
+    "state": "accepted and Monitor adoption confirmed; endpoint not read at receipt boundary",
+    "support_s": 191.61,
+    "monitor_wall": "unknown; no complete-cap certification"
+  },
+  "affected_DM_owners": {
+    "RCLE": "/root/dm_rcle_restart_recovery2 (Root recovers existing owner; not a currently listed top-level agent)",
+    "ACVC": "/root/dm_acvc_restart_successor2",
+    "FOLR": "/root/dm_folr_restart_recovery2"
+  }
+}

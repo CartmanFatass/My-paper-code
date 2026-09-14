@@ -1,0 +1,38 @@
+{
+  "question": "U 已决定什么当前用途？",
+  "changes_if_approved": [
+    {
+      "target": "FSD DIRECTION · Position / 当前用途",
+      "from": "完整 I1280 的可选用途待定",
+      "to": "同一已测宿主、完整配方和五轮预算下有限可选；真实 D0 继续默认"
+    }
+  ],
+  "if_refused": "异步 owner 可改用途建议；已发生的研究、原分支和成本记录保留，FSD 生命周期不由本条改变。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/archive/RESPONSE.md",
+      "quote": "选择有限可选成员资格：将完整 I1280 配方纳入同一宿主、同一已测学习条件下的可选学习方案集合，与 authentic D0 并列保留；D0 继续是默认方案与比较参照。",
+      "why": "原节点现在给出明确且范围有限的用途决定。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/archive/RESPONSE.md",
+      "quote": "最强反证不是旧的不同配方，而是 771103 在同一 I1280/authentic-D0 构造下出现的完整负结果。",
+      "why": "负配对、世界反例及较高 I 成本限制到可选用途，不能升级为默认或稳定收益。"
+    }
+  ],
+  "uncertainty": [
+    "各面板误差条件于本配对策略，五配对不自动给出总体把握。",
+    "没有组件因果、预算匹配优势、样本效率或部署可靠性结论。",
+    "B-LONG-D0 未被本次选择或资助。"
+  ],
+  "cost": {
+    "compute": "零新模型/RNG/训练/评价/数值重分析/profiling；完整 U 文档、工具、provider、agent 成本 UNKNOWN。",
+    "owner_time": "不等待回复；正常异步干预。",
+    "reversibility": "reversible",
+    "waits_on_this": "Root 记录集成；其他方向不等待。"
+  },
+  "verdict_text": "选择有限可选成员资格：将完整 I1280 配方纳入同一宿主、同一已测学习条件下的可选学习方案集合，与 authentic D0 并列保留；D0 继续是默认方案与比较参照。",
+  "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/archive/RESPONSE.md"
+}

@@ -1,0 +1,19 @@
+....E                                                                    [100%]
+==================================== ERRORS ====================================
+______ ERROR at setup of test_new_native_records_survive_pair_publication ______
+
+self = PosixPath('/home/wu/hmasd-worktrees/cbsc-public-stream-b01-20260912/temp/directions/capability_bound_semantic_currentness/test/public-contract-2717796')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           self._accessor.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/cbsc-public-stream-b01-20260912/temp/directions/capability_bound_semantic_currentness/test/public-contract-2717796'
+
+../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError
+=========================== short test summary info ============================
+ERROR tests/experiments/candidates/capability_bound_semantic_currentness/opportunity_credit_b04/test_direct_public.py::test_new_native_records_survive_pair_publication
+4 passed, 1 error in 1.42s

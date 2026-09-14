@@ -1,0 +1,32 @@
+{
+  "request_id": "2026-09-11-post-a-execution-refill-portfolio-01",
+  "at_utc": "2026-09-11T09:19:28.934582+00:00",
+  "delivery_mode": "github_delivery",
+  "task_sha": "b6b61e16680dc7ebe0aebebbb48dcbb62ab5130d",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/b6b61e16680dc7ebe0aebebbb48dcbb62ab5130d/docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/TASK.md",
+  "handoff_path": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/HANDOFF.json",
+  "worktree": "C:\\Projects\\HMASD-worktrees\\codex-portfolio",
+  "branch": "codex/portfolio",
+  "source_thread_id": "01a08ef0-996f-7f11-b134-db55149a4139",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "requested_conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "dispatch_state": "READY_TO_DISPATCH",
+  "actual_dispatches_by_author": 0,
+  "actual_provider_sends_by_author": 0,
+  "portfolio_choice_applied": null,
+  "source_task_bytes_match_bound_commit": true,
+  "task_sha256": "d4c72acdda3c264d6995c01417536d9694872dacbae0f522536f7ba8b55b97c8",
+  "fixed_references_verified": 26,
+  "owner_reviews_at_final_author_boundary": {
+    "shared_portfolio": [],
+    "primary_control": []
+  },
+  "owner_item": "20260911-root-001",
+  "owner_auto_applied": null,
+  "evidence_commit": "9f037e11d706b58f8493c71660dbe7ee6cbebc77",
+  "new_Portfolio_browser_access": "not tested or established; current UCOPE owning-account blocker preserved",
+  "next": "Root alone dispatches this HANDOFF once to configured independent Transport. This DM reads/checks the full immutable response after Root forwards the receipt. No new account/conversation or local Portfolio fallback.",
+  "retention": "Shared Portfolio checkout retained for pending delivery/intake; no test scratch, remote execution checkout or evidence roots created."
+}

@@ -1,0 +1,121 @@
+{
+  "checks": {
+    "complete": true,
+    "rows_match": true,
+    "train_order": true,
+    "final_order": true,
+    "all_steps": true,
+    "all_finite": true,
+    "rollout_epochs": true,
+    "source": true,
+    "own_arm": true,
+    "caps": true,
+    "world_binding": true,
+    "paired_reset_capabilities": true
+  },
+  "counts": {
+    "train_team_steps": 131072,
+    "eval_team_steps": 8192,
+    "team_steps": 139264,
+    "optimizer_steps": 1024,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "velocity_decisions": 696320,
+    "duration_decisions": 0,
+    "d4": 0,
+    "recurrent_observations": 696320,
+    "explicit_resets": 544,
+    "constructor_resets": 1,
+    "constructors": 1,
+    "step_calls": 139264,
+    "scientific_uav_calls": 139264,
+    "diagnostic_frames": 0,
+    "completed_episode_steps": 139264,
+    "rollouts": 256
+  },
+  "whole_native_wall_seconds": 195.99,
+  "partial_internal_wall_seconds": 195.6315034457948,
+  "J_mean": 0.11205113243683462,
+  "J_final": [
+    0.18379035103014643,
+    0.132154449000945,
+    0.06739524900911292,
+    0.10272452822306562,
+    0.21444360079021915,
+    0.03977610028672455,
+    0.1432231535284226,
+    0.15294442259582447,
+    0.13174006716340553,
+    0.07102157603063959,
+    0.10967694879759318,
+    0.08929658664604025,
+    0.18455353222470952,
+    0.11395286581880647,
+    0.06554704064248924,
+    0.0771698677926839,
+    0.07434851966499685,
+    0.0277297135434821,
+    0.0741892396871691,
+    0.09414391964708531,
+    0.11472021449224798,
+    0.12768302807253448,
+    0.09686061619135666,
+    0.1423205335887063,
+    0.1970010847822079,
+    0.13499170896523768,
+    0.10838322457689495,
+    0.12542283582192282,
+    0.09849317009616039,
+    0.10189354877731575,
+    0.13995668777492162,
+    0.04808785271563969
+  ],
+  "limits": [],
+  "exposure": {
+    "common_actor": {
+      "parameters": 37042,
+      "initial_norm": 12.788105964660645,
+      "final_norm": 13.179683685302734,
+      "displacement": 3.1482698917388916,
+      "relative_displacement": 0.24618734787145133
+    },
+    "critic": {
+      "parameters": 34177,
+      "initial_norm": 9.291126251220703,
+      "final_norm": 10.891023635864258,
+      "displacement": 5.452901363372803,
+      "relative_displacement": 0.586893474045343
+    },
+    "total": {
+      "parameters": 71219,
+      "initial_norm": 15.806978225708008,
+      "final_norm": 17.097322463989258,
+      "displacement": 6.296485900878906,
+      "relative_displacement": 0.39833583693045677
+    },
+    "adapter_a": {
+      "parameters": 60,
+      "initial_norm": 0.0,
+      "final_norm": 0.18454201519489288,
+      "displacement": 0.18454201519489288,
+      "relative_displacement": null
+    },
+    "adapter_b": {
+      "parameters": 1280,
+      "initial_norm": 2.5604794025421143,
+      "final_norm": 2.741757392883301,
+      "displacement": 0.8552083969116211,
+      "relative_displacement": 0.33400323238786717
+    }
+  },
+  "checkpoint_readback": {
+    "arm": "ACPS",
+    "seed": 9101,
+    "source": "2302072e2dcb7aa0c4ee2f71572ef8ca67cd9a46",
+    "actor_tensors": 14,
+    "critic_tensors": 6,
+    "all_finite": true,
+    "actor_parameters": 37042,
+    "critic_parameters": 34177
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "handle": "folr-entity-history-b01-781201-bank",
+  "source_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+  "node": "hmasd-wsl-node",
+  "runtime_cwd": "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304",
+  "output_root": "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_bank",
+  "supervisor_root": "/home/wu/.agent-tasks/folr-entity-history-b01-781201-bank",
+  "selected_generic_input": "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_generic/summary.json",
+  "launch_time_utc": "2026-09-13T00:26:48.544280+00:00",
+  "command": [
+    "/usr/local/bin/agent-task",
+    "run",
+    "folr-entity-history-b01-781201-bank",
+    "/bin/bash",
+    "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_support/BANK.sh",
+    "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+    "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304",
+    "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_bank",
+    "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/exp/entity_history_b01_781201_generic/summary.json"
+  ],
+  "launch_exit": 0,
+  "launch_stdout": "Task 'folr-entity-history-b01-781201-bank' started in tmux session 'agent_folr-entity-history-b01-781201-bank'. Output: /home/wu/.agent-tasks/folr-entity-history-b01-781201-bank/task.log\n",
+  "launch_stderr": "",
+  "status_exit": 0,
+  "status_stdout": "{\"task\": \"folr-entity-history-b01-781201-bank\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3413041, \"uptime_seconds\": 0, \"tmux_active\": true}\n",
+  "status_stderr": ""
+}

@@ -7,7 +7,6 @@ parameter fixtures or, after separate authorization, an externally bound state.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from fractions import Fraction
 import math
 from typing import Callable, Mapping, Sequence
 
@@ -103,11 +102,21 @@ def exact_binary64_mean(rows: np.ndarray) -> np.ndarray:
     values = np.asarray(rows, dtype=np.float64)
     if values.ndim != 2 or values.shape[0] == 0 or not np.isfinite(values).all():
         raise ValueError("pooling requires one nonempty finite binary64 matrix")
-    return np.array(
-        [float(sum((Fraction.from_float(float(x)) for x in values[:, j]), Fraction()) / values.shape[0])
-         for j in range(values.shape[1])],
-        dtype=np.float64,
-    )
+    return np.asarray(_exact_binary64_column_means(values.tolist()), dtype=np.float64)
+
+
+def _exact_binary64_column_means(rows: Sequence[Sequence[float]]) -> list[float]:
+    """Pool privately owned scalar rows without Fraction or shared array storage."""
+    if not rows or any(not math.isfinite(value) for row in rows for value in row):
+        raise ValueError("pooling requires one nonempty finite binary64 matrix")
+    means = []
+    for column in zip(*rows):
+        ratios = [value.as_integer_ratio() for value in column]
+        # Binary64 denominators are powers of two; the largest is a common denominator.
+        denominator = max(den for _, den in ratios)
+        numerator = sum(num * (denominator // den) for num, den in ratios)
+        means.append(numerator / (denominator * len(rows)))
+    return means
 
 
 def _silu(x: np.ndarray) -> np.ndarray:

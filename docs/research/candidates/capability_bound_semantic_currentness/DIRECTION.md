@@ -1,6 +1,32 @@
 # Direction capability_bound_semantic_currentness: capability-bound semantic currentness
 
-## Accepted B04 partial observation — 2026-09-06
+## Accepted public-stream opportunity-credit pair — 2026-09-12
+
+The newly bound CBSC-OPPORTUNITY-CREDIT-PUBLIC-STREAM-B01 completed both
+real48-update/768Adam learners at seed2026091231. RAW=STRUCT=11.15;
+all32 final paired differences are zero, inside the declared±0.25 MEI.
+Both final greedy policies REFRESH all768 decisions and lose1.3 to the
+same-public-information REQUEST_ONLY rule12.45. Both have positive model
+movement but only0.0125 return improvement over their initial means.
+This is a valid local zero representation effect under sampled opportunity
+credit; it is neither stable equivalence nor semantic-currentness failure.
+
+The strongest support is the intact common-panel native measurement and
+identical endpoint behavior. The strongest contradiction to useful currentness
+performance is the stronger public-request rule; earlier B02/B03 zero gaps
+remain separate contrary evidence. Finite learning/seed/package behavior and
+ordinary request conditioning remain surviving explanations. Matched tuned
+headroom is absent. One complete new public-row path is demonstrated, without
+locating the historical writer or rehabilitating old quarantined attempts.
+
+The purchased pair ends at intake/cleanup. No repeat, extra diagnostic, recast,
+family closure or Portfolio disposition follows locally. A future proper-node
+choice can decide whether a distinct learning question against REQUEST_ONLY
+merits new investment; there is no historical-cause or exact-upper prerequisite.
+See CBSC_PUBLIC_STREAM_B01_RESULT_EVIDENCE_20260912.md and
+CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md.
+
+## Historical B04 partial observation — 2026-09-06
 
 B04's one completed RAW learner reaches12.0375 at update48, above its initial
 -1.68125 and the same-tape ALWAYS_REFRESH11.025, but below public REQUEST_ONLY
@@ -11,17 +37,18 @@ a narrow observation of learned public-request sensitivity; a simple public-only
 rule still explains the relevant opportunity and performs better. It does not
 identify an effect of replacing GAE or a currentness-specific advantage.
 
-STRUCT has no formal policy measurement, so the selected B04 representation
-comparison remains unanswered. The two earlier zero representation gaps remain
+B04's STRUCT attempt has no formal policy measurement, so that allocation's
+representation comparison remained unanswered. The two earlier zero gaps remain
 contrary evidence, without adding a fabricated third zero or pooling different
 learning packages. The surviving alternative is ordinary public-activity
-conditioning, not demonstrated semantic currentness. The next scientific
-discriminator remains a complete paired native-return observation on a
-prospectively bound credible execution path; no successor or recast is selected.
+conditioning, not demonstrated semantic currentness. Its next scientific
+discriminator was a complete paired native-return observation on a
+prospectively bound execution path; the separate2026-09-12 pair above now
+provides that observation without filling in B04's missing outcome.
 See CBSC_OPPORTUNITY_CREDIT_B04_RESULT_EVIDENCE_20260906.md and
 CBSC_OPPORTUNITY_CREDIT_B04_INTAKE_20260906.md.
 
-## Accepted next discriminator — 2026-09-06
+## Historical selected discriminator — 2026-09-06
 
 Convergence selects CBSC-OPPORTUNITY-CREDIT-B04: one new paired RAW/STRUCT
 run with sampled decision-plus-settlement targets and matching decision-only
@@ -45,7 +72,7 @@ See CBSC_OPPORTUNITY_CREDIT_B04_CONVERGENCE_INTAKE_20260906.md,
 CBSC_OPPORTUNITY_CREDIT_B04_SCIENCE_CARD_20260906.md and the complete Pro
 decision in pro_packets/20260906_opportunity_credit_convergence/archive/RESPONSE.md.
 
-## Current learning evidence and scoped family decision — 2026-09-05
+## Earlier learning evidence and scoped family decision — 2026-09-05
 
 The Pro-selected **CBSC-DIRECT-RETURN-B02** is complete and valid at its local
 B/EXPLORE ceiling. Seed 21203 gave RAW = STRUCT = 10.7125 at update 48;

@@ -1,0 +1,38 @@
+{
+  "source_sha": "9eeef867f0adcf6d9a8ca9441781ad4ec2764a30",
+  "command_commit": "2c4777901c93527415f2adf6ff53232eb3b1cc37",
+  "handle": "rcle-b07-reference-completion-s27-20260912",
+  "exit_code": 0,
+  "stdout": "Task 'rcle-b07-reference-completion-s27-20260912' started in tmux session 'agent_rcle-b07-reference-completion-s27-20260912'. Output: /home/wu/.agent-tasks/rcle-b07-reference-completion-s27-20260912/task.log\n",
+  "stderr": "",
+  "submission_wall_s": 0.8037886000238359,
+  "enclosing_submission_command_wall_s": 1.0518815,
+  "monitor": {
+    "thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+    "dispatch_accepted": true,
+    "dispatch_elapsed_s": 0.154,
+    "actual_goal_adoption": "Root confirmed get_goal null followed by fresh unbudgeted goal creation; matching handle adopted, already terminal on first direct check.",
+    "terminal": {
+      "receipt": "Root-forwarded MONITOR_ADOPTED + TERMINAL and MONITOR_GOAL_COMPLETE",
+      "get_goal_result": null,
+      "fresh_unbudgeted_goal_created": true,
+      "already_terminal_on_first_direct_check": true,
+      "first_query_uptime_s": 11,
+      "uptime_is_runtime": false,
+      "stable_event": "rcle-b07-reference-completion-s27-20260912-exit0",
+      "terminal_delivery_accepted": true,
+      "final_goal": "complete",
+      "active_set": [],
+      "pending_observation_or_notification": false
+    }
+  },
+  "authority": "Root original-R logical-invocation reconciliation after main71198147e; exactly one reference-only completion",
+  "fits_added": 0,
+  "native_total_cap_s": 900,
+  "support_cap_s": 600,
+  "complete_object_cap_s": 1500,
+  "actual_admission": "Passed;18:04:14.677169Z;15,628,591,104 effective available bytes;unchanged4GiB floor.",
+  "status": "COMPLETE_TECHNICALLY_ACCEPTED_FINAL_INTAKE",
+  "terminal_receipt": "b07_equal_unit_20260912/REFERENCE_COMPLETION_TERMINAL.json",
+  "final_intake": "RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md"
+}

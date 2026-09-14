@@ -1,0 +1,24 @@
+{
+  "master": 8212,
+  "arm_count": 2,
+  "trained_actors": 2,
+  "trained_critics": 2,
+  "common_templates": 2,
+  "top_level_models": 6,
+  "per_arm": {
+    "training_episodes": 512,
+    "training_team_steps": 131072,
+    "rollouts": 256,
+    "adam_calls": 1024,
+    "final_episodes": 32,
+    "final_team_steps": 8192,
+    "actor_rows": 3317760
+  },
+  "pair": {
+    "training_episodes": 1024,
+    "final_episodes": 64,
+    "team_steps": 278528,
+    "rollouts": 512,
+    "adam_calls": 2048
+  }
+}

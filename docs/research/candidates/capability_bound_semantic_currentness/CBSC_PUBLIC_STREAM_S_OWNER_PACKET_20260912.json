@@ -1,0 +1,38 @@
+{
+  "question": "是否保留这份 CBSC 公共字节路径 B 候选，供以后投资选择？本次接受仅指描述完整，不授权实现或实验。",
+  "changes_if_approved": [
+    {
+      "target": "CBSC 公共流 B 候选卡与 S 就绪说明",
+      "from": "只有抽象恢复意向",
+      "to": "有明确源码调用边界、科学比较和剩余风险的候选描述；当前实验额度仍为零"
+    }
+  ],
+  "if_refused": "保留已完成的静态事实，结束这一轮 S 准备；不自动换方案、重试或追加实验。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_PUBLIC_STREAM_B_SCIENCE_CARD_20260912.md",
+      "quote": "The source mapping supports a reviewable candidate.",
+      "why": "公共 token、RAW FIFO、STRUCT 和学习器之间有具体接口，可在保持原问题的前提下描述局部替换。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_S_READINESS_INTAKE_20260912.md",
+      "quote": "No target has executed this candidate, and no passing existing check is attributed to its unimplemented bytes.",
+      "why": "共享解释器、host 构造和模型库仍可能出错；新的输入与原生评分边界也尚未实现或验证。"
+    }
+  ],
+  "uncertainty": [
+    "未定位历史故障 writer，也未证明新路径运行独立或不会崩溃。",
+    "后续若选中实现，需核对公共信息、RAW/STRUCT 特征、原生奖励及最终输出，并按实际高风险 diff 独立审查。",
+    "新路径完整运行与后续支持成本未知；S+B 仍未拨款。"
+  ],
+  "cost": {
+    "compute": "本轮只有静态读取、配置算术与文档/Git/owner 发布；零目标导入、模型、训练、评价、测试或实现。S 调用支持上限 600 秒、300 秒参考；完整文档和思考成本未知。",
+    "owner_time": "异步阅览，不等待回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；接受这个描述不释放下一轮。"
+  },
+  "verdict_text": "Accept the complete prospective candidate and explicit runtime limits; no implementation or scientific invocation is allocated.",
+  "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_S_READINESS_INTAKE_20260912.md"
+}

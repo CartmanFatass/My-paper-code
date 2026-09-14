@@ -1,0 +1,85 @@
+{
+  "id": "20260911-mgtap-003",
+  "created": "2026-09-11T14:14:05-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "新选定的COND/DENSE独立训练对8213",
+  "context": "一对全新原生训练检验条件池化相对同信息DENSE的小幅正信号能否在另一训练历史中出现；绑定结构为多智能体部分可观测与伙伴非平稳性。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行Portfolio已选的一对，保存所有结果，完整上限1200秒。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一个清晰边界按所有者覆盖指示停止后续动作，保留已发生事实。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "将具体修改送回相应层级，保护原比较和历史预算。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "Portfolio明确选择一个新单位，最小新身份绑定满足原卡语义。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L61",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "执行Portfolio已选的一对全新COND/DENSE训练，观察首个小幅正差能否在另一训练历史中出现。",
+    "changes_if_approved": [
+      {
+        "target": "MGTAP B01卡§6",
+        "from": "8212已完成，原额度结束",
+        "to": "独立8213实例；900秒原生、300秒支持、1200秒完整上限"
+      }
+    ],
+    "if_refused": "保存已发生的事实；在下一个清晰边界执行所有者的新指示，不复用旧训练状态。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+        "quote": "One fresh unchanged COND/intact-DENSE pair, final sampled native-return comparison and complete intake/closeout.",
+        "why": "Portfolio明确选择这一新的有限单位。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_INTAKE_20260911.md",
+        "quote": "inside the card's inclusive ±0.01 band",
+        "why": "首个差值仅+0.00576，并有13个不利世界，尚未显示有用的稳定收益。"
+      }
+    ],
+    "uncertainty": [
+      "新实例可能仍小或反向；32个评估世界不是32次独立训练。"
+    ],
+    "cost": {
+      "compute": "每臂450秒、原生900秒、支持300秒、完整1200秒；不是旧额度结余。",
+      "owner_time": "无需等待回复。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a)",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md#6-new-portfolio-allocation--master8213-2026-09-11"
+  },
+  "starred": true,
+  "approval_correction": "初始ledger_row中的L61不正确；本次选择的实际审计行为L76，以此记录链接为准。",
+  "execution_history": [
+    {
+      "at": "2026-09-11T21:15:23+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/audit/2026-09-11.md#L76",
+      "state": "applied",
+      "summary": "8213新身份与卡已绑定；原生运行尚未提交。",
+      "correction": "初始ledger_row中的L61不正确；本次选择的实际审计行为L76，以此记录链接为准。"
+    }
+  ]
+}

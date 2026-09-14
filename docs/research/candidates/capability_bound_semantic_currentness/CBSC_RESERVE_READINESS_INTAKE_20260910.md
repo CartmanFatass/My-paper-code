@@ -67,3 +67,11 @@ The missing fact is a current authoritative disposition of the original reported
 After this return, CBSC has no actively progressing task or accepted running handle from this batch and must not occupy a permanent waiting slot. Root can advance other authorized work while the dependency remains unresolved. The conditional technical next discriminator is still the retained TRAIN0..51/episode51 comparison; the scientific next discriminator remains a separately selected, freshly allocated complete RAW/STRUCT native-return pair on a credible path. Neither is released by this document.
 
 Cleanup inventory: no test scratch, runtime artifact, remote checkout or process was created in this batch. Preserve the shared `codex/cbsc` authoring checkout and all retained P47 source/evidence. Only the new intake, direction brief and CBSC audit row are delivered for integration.
+
+## Later owner-directed technical work — 2026-09-11
+
+The [technical unblocking intake](CBSC_P47_TECHNICAL_UNBLOCKING_INTAKE_20260911.md)
+records a newly authorized source-only operation that completed with zero target
+exposure. It preserves this readiness batch's historical scope and the unlocalized
+turn event; it supplies no retained52 execution release or production repair.
+Use that newer record for the current engineering boundary.

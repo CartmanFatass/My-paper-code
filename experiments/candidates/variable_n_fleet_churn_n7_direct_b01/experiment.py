@@ -60,12 +60,12 @@ def describe(values):
         minimum=min(values), maximum=max(values))
 
 
-def readout(evaluations):
+def readout(evaluations, arms=("MAPR", "DIRECT"), mei=0.10):
     indexed = {(row["arm"], row["checkpoint"], row["world"]): row for row in evaluations}
     identities = sorted({row["world"] for row in evaluations})
-    pairs = [(f"{arm}_final_minus_initial", (arm, "final"), (arm, "initial")) for arm in ("MAPR", "DIRECT")]
-    pairs += [("MAPR_minus_DIRECT", ("MAPR", "final"), ("DIRECT", "final"))]
-    pairs += [(f"{arm}_minus_BCRH", (arm, "final"), ("BCRH", "fixed")) for arm in ("MAPR", "DIRECT")]
+    pairs = [(f"{arm}_final_minus_initial", (arm, "final"), (arm, "initial")) for arm in arms]
+    pairs += [(f"{arms[0]}_minus_{arms[1]}", (arms[0], "final"), (arms[1], "final"))]
+    pairs += [(f"{arm}_minus_BCRH", (arm, "final"), ("BCRH", "fixed")) for arm in arms]
     contrasts = []
     for name, left, right in pairs:
         differences = [dict(world=world, zone=indexed[(*left, world)]["zone"],
@@ -84,7 +84,7 @@ def readout(evaluations):
     return dict(means=means, contrasts=contrasts, primary_checkpoint="final", primary_metric="R_fail_60",
                 uncertainty="episode-level conditional descriptive SE; one training seed cannot estimate training-seed population uncertainty",
                 exact_recovery_latencies="unavailable: observations have20s resolution; not inferred",
-                mei_absolute=0.10)
+                mei_absolute=mei)
 
 
 def publish_json(path, data):
@@ -95,13 +95,13 @@ def publish_json(path, data):
 
 
 def cost_projection(config, setup, generations, training, evaluation_times, bcrh_time,
-                    publication, evaluation_worlds, other_overhead):
+                    publication, evaluation_worlds, other_overhead, arms=("MAPR", "DIRECT")):
     scale = max(64 / config["rounds"], 64 / config["eval_episodes"])
     terms = dict(shared_setup=setup, shared_training_worlds=64 * max(generations),
                  evaluation_world_generation=64 * evaluation_worlds / config["eval_episodes"],
                  other_measured_overhead=scale * other_overhead)
     per_arm = {}
-    for arm in ("MAPR", "DIRECT"):
+    for arm in arms:
         rows = [row for row in training if row["arm"] == arm]
         evals = [row for row in evaluation_times if row["arm"] == arm]
         units = dict(collect_episode=max(row["collection_seconds"] / row["episodes"] for row in rows),
@@ -114,22 +114,22 @@ def cost_projection(config, setup, generations, training, evaluation_times, bcrh
     actual_rows = 2 * config["rounds"] * 32 + 7 * config["eval_episodes"]
     terms["publication"] = publication * max(1, (4096 + 448) / actual_rows)
     return dict(terms_seconds=terms, per_arm=per_arm, projected_complete_seconds=sum(terms.values()),
-                cap_seconds=2700, source="maximum observed unit wall; full/check publication row-ratio scaling includes all six checkpoints",
+                cap_seconds=config.get("projection_cap", 2700), source="maximum observed unit wall; full/check publication row-ratio scaling includes all six checkpoints",
                 formula="shared + sum(2048*collect_episode+64*update_round+192*eval_episode) +64*BCRH_episode+publication",
                 limitation="planning estimate from selected N7 sizes; no performance guarantee or additional benchmark")
 
 
-def run(config, out, launch_sha, started):
+def run(config, out, launch_sha, started, learner=learning, object_name="VNFC-N7-DIRECT-RETURN-B01", mei=0.10):
     torch.set_num_threads(1)
     torch.set_num_interop_threads(1)
     out.mkdir(parents=True, exist_ok=True)
     library = build(out)
-    models, optimizers = learning.initialize(config["seed"], config["namespace"])
+    models, optimizers = learner.initialize(config["seed"], config["namespace"])
     initial = {arm: {name: p.detach().clone() for name, p in model.named_parameters()}
                for arm, model in models.items()}
-    initial_stats = {arm: learning.parameter_state(model) for arm, model in models.items()}
+    initial_stats = {arm: learner.parameter_state(model) for arm, model in models.items()}
     world_start = perf_counter()
-    panel = learning.worlds(config["eval_seed"], config["namespace"], "evaluation", config["eval_episodes"])
+    panel = learner.worlds(config["eval_seed"], config["namespace"], "evaluation", config["eval_episodes"])
     evaluation_world_seconds = perf_counter() - world_start
     setup_seconds = perf_counter() - started - evaluation_world_seconds
     evaluations, bcrh_time = bcrh(library, panel)
@@ -143,7 +143,7 @@ def run(config, out, launch_sha, started):
                 item = checkpoint(out, arm, label, model, optimizers[arm], completed)
                 checkpoints.append(dict(arm=arm, checkpoint=label, **item))
                 publication_seconds += item["seconds"]
-                result = learning.rollout(library, panel, model, arm, config["namespace"], None, completed, False,
+                result = learner.rollout(library, panel, model, arm, config["namespace"], None, completed, False,
                     check_presentation=config["profile"] == "engineering-check" and completed == 0)
                 evaluations.extend(dict(row, arm=arm, checkpoint=label) for row in result["episodes"])
                 eval_times.append(dict(arm=arm, checkpoint=label, episodes=len(panel), seconds=result["seconds"],
@@ -152,13 +152,13 @@ def run(config, out, launch_sha, started):
         if completed == config["rounds"]:
             break
         generation_start = perf_counter()
-        fixtures = learning.worlds(config["seed"], config["namespace"], "training", 32, completed)
+        fixtures = learner.worlds(config["seed"], config["namespace"], "training", 32, completed)
         generations.append(perf_counter() - generation_start)
         for arm, model in models.items():
-            action_source = learning.rng(config["seed"], config["namespace"], f"actions/{arm}")
-            result = learning.rollout(library, fixtures, model, arm, config["namespace"], action_source, completed, True)
-            update = learning.update(model, optimizers[arm], result, config["seed"], config["namespace"], arm, completed)
-            motion = learning.parameter_state(model, initial[arm])
+            action_source = learner.rng(config["seed"], config["namespace"], f"actions/{arm}")
+            result = learner.rollout(library, fixtures, model, arm, config["namespace"], action_source, completed, True)
+            update = learner.update(model, optimizers[arm], result, config["seed"], config["namespace"], arm, completed)
+            motion = learner.parameter_state(model, initial[arm])
             curves.append(dict(arm=arm, round=completed + 1, episodes=len(fixtures), joint_transitions=len(result["records"]),
                 collection_seconds=result["seconds"], update=update, parameters=motion,
                 model_forward_calls=result["model_forward_calls"],
@@ -177,7 +177,7 @@ def run(config, out, launch_sha, started):
         optimizer_forward_decisions=sum(row["update"]["optimizer_forward_decisions"] for row in curves if row["arm"] == arm),
         evaluation_forward_calls=sum(row["model_forward_calls"] for row in eval_times if row["arm"] == arm),
         evaluation_episodes=sum(row["episodes"] for row in eval_times if row["arm"] == arm),
-        initial_parameters=initial_stats[arm], final_parameters=learning.parameter_state(models[arm], initial[arm]))
+        initial_parameters=initial_stats[arm], final_parameters=learner.parameter_state(models[arm], initial[arm]))
         for arm in models}
     for arm in exposure:
         if exposure[arm]["optimizer_steps"] != config["rounds"] * 32:
@@ -190,13 +190,14 @@ def run(config, out, launch_sha, started):
         if len(restored) != len(content):
             raise AssertionError("episode/curve publication readback count differs")
         publication_seconds += seconds
-    summary = dict(object="VNFC-N7-DIRECT-RETURN-B01", launch_sha=launch_sha, config=config,
+    summary = dict(object=object_name, launch_sha=launch_sha, config=config,
         training_seed_count=1, dtype="float64", device="cpu", torch_threads=1, native_threads=1,
         rng_domains="fresh addressed HMAC; paired exogenous-worlds; shared homologous initialization; arm-specific actions/minibatches; separate evaluation master",
         initial_parameters=initial_stats, exposure=exposure, checkpoints=checkpoints,
         initialization_scales=dict(hidden_stiefel_gain=math.sqrt(2), output_gain=0.01,
-                                   token_embedding_gain=1.0, initial_direct_residual_output=0.0),
-        readout=readout(evaluations), timings=dict(shared_setup=setup_seconds, world_generation=generations,
+                                   token_embedding_gain=1.0,
+                                   **({"initial_direct_residual_output": 0.0} if "DIRECT" in models else {})),
+        readout=readout(evaluations, tuple(models), mei), timings=dict(shared_setup=setup_seconds, world_generation=generations,
             evaluation=eval_times, evaluation_world_generation=evaluation_world_seconds,
             bcrh=bcrh_time, publication=publication_seconds),
         total_native_ticks=240 * (len(episode_rows) + len(evaluations)))
@@ -220,14 +221,14 @@ def run(config, out, launch_sha, started):
     summary["timings"]["other_measured_overhead"] = other_overhead
     summary["timings"]["other_overhead_scope"] = "parameter/curve/exposure bookkeeping, progress output and untimed wrappers; scaled by max round/evaluation ratio"
     summary["cost_projection"] = cost_projection(config, setup_seconds, generations, curves,
-        eval_times, bcrh_time, publication_seconds, evaluation_world_seconds, other_overhead)
+        eval_times, bcrh_time, publication_seconds, evaluation_world_seconds, other_overhead, tuple(models))
     summary["cost_projection"]["final_summary_write_scope"] = "final stdout adds this replacement write/readback cost"
     # Publish the measured cost of the complete artifact construction/readback.
     # The final stdout wall additionally includes this small summary replacement.
     _, final_summary_seconds = publish_json(out / "summary.json", summary)
     final_projection = cost_projection(config, setup_seconds, generations, curves,
         eval_times, bcrh_time, publication_seconds + final_summary_seconds,
-        evaluation_world_seconds, other_overhead)
+        evaluation_world_seconds, other_overhead, tuple(models))
     complete_wall = perf_counter() - started
     final = dict(summary=str(out / "summary.json"), complete_wall_seconds=complete_wall,
                  summary_publication_seconds=summary_seconds + final_summary_seconds, wall_cap_seconds=config["wall_cap"],

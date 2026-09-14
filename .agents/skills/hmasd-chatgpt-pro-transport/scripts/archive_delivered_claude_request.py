@@ -21,7 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from transport_contract import receipt_message_key, registry_lock, transition_record, utc_now  # noqa: E402
+from transport_contract import receipt_has_delivery_evidence, registry_lock, stage_receipt, transition_record, utc_now  # noqa: E402
 
 CHAIN = (
     "TAB_OPEN", "PAGE_READY", "PRO_VERIFIED", "PROMPT_READY", "SEND_ATTEMPTED",
@@ -75,12 +75,14 @@ def main(argv: list[str] | None = None) -> int:
     completed_at = _iso(args.completed_at)
     archive_map = {
         "prompt_file": str(Path(args.prompt_file).resolve()),
-        "response_file": str(Path(args.short_receipt).resolve()),
+        "response_file": str(Path(args.github_response).resolve()),
+        "short_receipt_file": str(Path(args.short_receipt).resolve()),
+        "short_receipt_sha256": receipt_sha,
         "transport_fact_file": str(Path(args.transport_facts).resolve()),
         "github_response_file": str(Path(args.github_response).resolve()),
         "github_response_sha256": github_sha,
         "github_commit": args.github_commit,
-        "response_sha256": receipt_sha,
+        "response_sha256": github_sha,
     }
 
     regpath = Path(args.registry)
@@ -111,11 +113,12 @@ def main(argv: list[str] | None = None) -> int:
         for next_state in CHAIN[start:]:
             updates: dict = {}
             if next_state == "SEND_ATTEMPTED":
-                updates = {"send_click_count": 1, "user_message_id": args.user_message_id}
+                updates = {"send_click_count": rec.get("send_click_count", 1),
+                           "user_message_id": args.user_message_id}
             elif next_state == "NATURAL_COMPLETION":
                 updates = {"assistant_message_id": args.assistant_message_id}
             elif next_state == "ARCHIVED":
-                updates = {"response_sha256": receipt_sha, "archive": archive_map,
+                updates = {"response_sha256": github_sha, "archive": archive_map,
                            "timestamps": timestamps, "tab_id": None, "tab_lifecycle": "CLOSED"}
             transition_record(rec, next_state, now=now, **updates)
         lease = dict(rec.get("tab_lease") or {})
@@ -123,15 +126,12 @@ def main(argv: list[str] | None = None) -> int:
         rec["tab_lease"] = lease
         rec["heartbeat"] = {"automation_id": None, "status": "PAUSED", "next_wake_at": None,
                             "retired_at": now, "retirement_verified": True}
-        receipt = dict(rec.get("return_receipt") or {})
-        receipt.update({
-            "status": "COMPLETE",
-            "message_key": receipt_message_key(args.request_id, str(rec.get("direction_id")),
-                                               str(rec.get("conversation_id")), receipt_sha),
-            "delivery_status": "CALLER_DIRECT: hub intake read the GitHub response file",
-            "delivered_at": completed_at,
-        })
-        rec["return_receipt"] = receipt
+        # Archiving proves artifact availability, not parent receipt delivery. Preserve
+        # existing routing, attempts and historical message keys without reinterpretation.
+        # A fresh receipt uses the normal parent-route contract and remains unsent.
+        receipt = rec.get("return_receipt") or {}
+        if receipt.get("kind") == "TERMINAL_BLOCKER" or not receipt_has_delivery_evidence(receipt):
+            stage_receipt(rec, archive_map, github_sha, now=now)
         rec["delivery"] = {"mode": "github", "commit": args.github_commit,
                            "github_response_sha256": github_sha, "note": args.note}
         rec["updated_at"] = now
@@ -140,6 +140,8 @@ def main(argv: list[str] | None = None) -> int:
             for key in ("state", "response_sha256", "archive", "tab_id", "tab_lifecycle",
                         "tab_lease", "send_click_count", "user_message_id",
                         "assistant_message_id", "timestamps", "heartbeat", "return_receipt",
+                        "return_receipt_state",
+                        "return_receipt_history",
                         "delivery"):
                 if key in rec:
                     drec[key] = json.loads(json.dumps(rec[key]))
@@ -152,7 +154,7 @@ def main(argv: list[str] | None = None) -> int:
         tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         os.replace(tmp, regpath)
     print(json.dumps({"archived": True, "state": "ARCHIVED", "request_id": args.request_id,
-                      "binding_key": args.binding_key, "response_sha256": receipt_sha,
+                      "binding_key": args.binding_key, "response_sha256": github_sha,
                       "github_response_sha256": github_sha}))
     return 0
 

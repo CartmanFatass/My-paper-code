@@ -1,0 +1,12 @@
+{
+  "target": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904/temp/directions/metric_ground_transport_allocation/exp/unequal_exposure_b01_8231_20260913",
+  "state": "BLOCKED_POLICY",
+  "removed": false,
+  "disk_present_after_rejection": true,
+  "attempt": "PowerShell recursive deletion after resolved absolute target and archive SHA verification",
+  "rejection": "Automatic approval review: exec_command CreateProcess rejected: blocked by policy",
+  "subsequent_non_destructive_record_command": "Also rejected before execution; this receipt is written by apply_patch only.",
+  "deletion_repeat_or_bypass_attempted": false,
+  "root_retention_integration": "48e6f98a8",
+  "archive_sha256": "2e9be88fd64c7825c5bfda5388be75f03444e68dc3add41b36ba9ce19c6253a1"
+}

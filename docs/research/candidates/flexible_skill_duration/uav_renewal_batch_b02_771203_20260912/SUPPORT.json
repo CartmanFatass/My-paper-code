@@ -1,0 +1,271 @@
+{
+  "object": "FSD_UAV_RENEWAL_BATCH_B02_771203",
+  "caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "native_sum": 2700,
+    "support": 300,
+    "complete": 3000,
+    "one_source_delivery": 45
+  },
+  "charges": [
+    {
+      "purpose": "known DM preparation/read/reconciliation/check commands; separate command walls, no nested SSH/reviewer double count",
+      "wall_seconds": 21.676732899999998
+    },
+    {
+      "purpose": "independent reviewer8 read-only commands",
+      "wall_seconds": 2.6005197
+    },
+    {
+      "purpose": "owner card/audit preparation",
+      "wall_seconds": 0.4274111
+    },
+    {
+      "purpose": "stage exact paths in local index",
+      "wall_seconds": 0.3485249
+    },
+    {
+      "purpose": "publish source/card/commands commit",
+      "wall_seconds": 0.4889665
+    },
+    {
+      "purpose": "immediate source push and full-SHA read",
+      "wall_seconds": 4.2874664
+    },
+    {
+      "purpose": "sole source-delivery complete outer command",
+      "wall_seconds": 6.3134795
+    },
+    {
+      "purpose": "preflight readback, receipt directory and sole D0 supervisor submission",
+      "wall_seconds": 0.6352291
+    },
+    {
+      "purpose": "direct D0 Monitor ADD delivery",
+      "wall_seconds": 0.153
+    },
+    {
+      "purpose": "receipt preparation read failed on Windows default cp1252; no scientific effect",
+      "wall_seconds": 0.2870528
+    },
+    {
+      "purpose": "previous D0 adopted-receipt preparation",
+      "wall_seconds": 0.2746345
+    },
+    {
+      "purpose": "previous D0 adopted-receipt commit",
+      "wall_seconds": 0.5637016
+    },
+    {
+      "purpose": "previous receipt push and owner boundary read",
+      "wall_seconds": 4.4606463
+    },
+    {
+      "purpose": "sole actionable D0 Relay handoff",
+      "wall_seconds": 0.15
+    },
+    {
+      "purpose": "current D0 terminal acceptance input read",
+      "wall_seconds": 0.1113166
+    },
+    {
+      "purpose": "current primary owner/config boundary read",
+      "wall_seconds": 0.453036
+    },
+    {
+      "purpose": "raw D0 collection and source/path reconciliation",
+      "wall_seconds": 0.9379817
+    },
+    {
+      "purpose": "read collected measurement shapes",
+      "wall_seconds": 0.2424675
+    },
+    {
+      "purpose": "D0 complete technical acceptance and record/audit writing",
+      "wall_seconds": 0.3466756
+    },
+    {
+      "purpose": "D0 evidence explicit staging and archive ignore check",
+      "wall_seconds": 0.3119839
+    },
+    {
+      "purpose": "D0 preservation/acceptance commit",
+      "wall_seconds": 0.5714594
+    },
+    {
+      "purpose": "D0 immediate preservation push",
+      "wall_seconds": 4.1266681
+    },
+    {
+      "purpose": "sole preselected I detached submission",
+      "wall_seconds": 0.8337178
+    },
+    {
+      "purpose": "direct I Monitor ADD delivery",
+      "wall_seconds": 0.155
+    },
+    {
+      "purpose": "I launch evidence and support update",
+      "wall_seconds": 0.2803836
+    },
+    {
+      "purpose": "I launch receipt commit",
+      "wall_seconds": 0.5616806
+    },
+    {
+      "purpose": "I receipt push and owner review boundary",
+      "wall_seconds": 4.3004915
+    },
+    {
+      "purpose": "single actionable I launch Relay handoff",
+      "wall_seconds": 0.143
+    },
+    {
+      "purpose": "actual I goal adoption record and commit",
+      "wall_seconds": 0.820552
+    },
+    {
+      "purpose": "actual I adoption push and clean-state read",
+      "wall_seconds": 4.2829603
+    },
+    {
+      "purpose": "paired terminal card/source/intake-method read",
+      "wall_seconds": 0.2590802
+    },
+    {
+      "purpose": "paired terminal primary owner/relay/audit read",
+      "wall_seconds": 0.4872049
+    },
+    {
+      "purpose": "I raw collection and terminal receipt publication",
+      "wall_seconds": 0.8523515
+    },
+    {
+      "purpose": "read recorded component/diagnostic shapes",
+      "wall_seconds": 0.2059195
+    },
+    {
+      "purpose": "read actual paired source return and prior analysis surface",
+      "wall_seconds": 0.2008773
+    },
+    {
+      "purpose": "I/pair technical intake, predeclared reduction and independent-run descriptive summary",
+      "wall_seconds": 0.5573203
+    },
+    {
+      "purpose": "read-only four-target cleanup inventory and22 raw byte matches",
+      "wall_seconds": 1.0502245
+    },
+    {
+      "purpose": "paired component and support arithmetic",
+      "wall_seconds": 0.2308374
+    },
+    {
+      "purpose": "read existing supervisor time boundaries for elapsed-path analysis",
+      "wall_seconds": 0.2457446
+    },
+    {
+      "purpose": "final E0/intake/execution/audit/owner trace, brief and link checks",
+      "wall_seconds": 0.507665
+    },
+    {
+      "purpose": "paired final support/staging",
+      "wall_seconds": 0.437362
+    },
+    {
+      "purpose": "paired final science commit",
+      "wall_seconds": 0.5660247
+    },
+    {
+      "purpose": "paired intake immediate push, clean status and owner boundary",
+      "wall_seconds": 4.4740269
+    },
+    {
+      "purpose": "paired published raw archive Git blob readback",
+      "wall_seconds": 0.3193552
+    },
+    {
+      "purpose": "paired intake Relay send",
+      "wall_seconds": 0.163
+    },
+    {
+      "purpose": "cleanup initial inventory, config and Git read",
+      "wall_seconds": 0.2549963
+    },
+    {
+      "purpose": "cleanup initial owner and relay read",
+      "wall_seconds": 0.4511783
+    },
+    {
+      "purpose": "cleanup resumed inventory, Git and live Relay procedure read",
+      "wall_seconds": 0.2504896
+    },
+    {
+      "purpose": "accepted main raw archive and metadata readback",
+      "wall_seconds": 0.3301943
+    },
+    {
+      "purpose": "scoped remote cleanup and complete enclosing local retention verification",
+      "wall_seconds": 1.4185428
+    },
+    {
+      "purpose": "cleanup current evidence record read",
+      "wall_seconds": 0.1414003
+    },
+    {
+      "purpose": "cleanup audit, brief, item and unsupported reviews flag read",
+      "wall_seconds": 0.3266075
+    },
+    {
+      "purpose": "cleanup documentation read encoding failure and owner CLI help",
+      "wall_seconds": 0.4995748
+    },
+    {
+      "purpose": "cleanup final E0 read and primary owner boundary",
+      "wall_seconds": 0.4047726
+    },
+    {
+      "purpose": "cleanup receipt, current records, audit and owner trace update",
+      "wall_seconds": 0.6017667
+    },
+    {
+      "purpose": "review scoped cleanup diff and unchanged scientific result",
+      "wall_seconds": 0.230374
+    }
+  ],
+  "known_support_wall_seconds": 76.61363109999998,
+  "counting": "Each known enclosing invoked command once. Initial batched output had one unavailable command wall; apply_patch, current owner-card preparation and later operations are recorded where measured or explicit unknown. Agent/provider/calendar time separate.",
+  "unknown": [
+    "one initial batched read command wall unavailable in truncated output",
+    "apply_patch execution intervals where tool reports rounded zero",
+    "Monitor command cost not included in terminal receipts; no extra observation query",
+    "Relay service/client and send interval rounding",
+    "Root integrations and cleanup receipt final publication tail until attributed"
+  ],
+  "source_delivery_transactions": 1,
+  "scientific_submissions": 2,
+  "source_transaction": {
+    "complete_helper_seconds": 6.063000000023749,
+    "enclosing_tool_seconds": 6.3134795,
+    "within45": true,
+    "nested_not_readded": true
+  },
+  "native_wall_seconds": {
+    "D0": 475.03,
+    "I": 1042.92
+  },
+  "native_pair_wall_seconds": 1517.95,
+  "aggregate_cpu_seconds": 5999.42,
+  "claim": "Native arm and sum caps pass; no observed breach. Support/complete total remains partially unmeasured, not certified from subtotal.",
+  "known_native_plus_support_seconds": 1594.5636311,
+  "supervisor_study_elapsed_seconds": 1798.0,
+  "study_elapsed_boundary": "D0 supervisor start to I terminal log; one-second timestamp resolution, includes inter-arm collection/publication gap; not summed native wall or a study cap.",
+  "cleanup": {
+    "complete": true,
+    "receipt": "CLEANUP_RECEIPT.json",
+    "root_retention_commit": "42a483997",
+    "scientific_submissions_added": 0,
+    "inner_remote_not_readded": true
+  }
+}

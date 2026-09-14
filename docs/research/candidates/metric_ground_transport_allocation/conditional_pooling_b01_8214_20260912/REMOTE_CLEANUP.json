@@ -1,0 +1,19 @@
+{
+  "accepted_main": "3c5f5471fa386ea33b81888f9bad68b83ef238a4",
+  "checked_raw_members": 12,
+  "checked_stage_files": 4,
+  "source_clean": true,
+  "pid_absent": true,
+  "tmux_inactive": true,
+  "removed_paths": [
+    "/home/wu/hmasd-worktrees/mgtap-cond-b01-8214-20260912",
+    "/home/wu/hmasd-inputs/mgtap-cond-b01-8214-20260912",
+    "/home/wu/.agent-tasks/mgtap-cond-b01-8214-20260912"
+  ],
+  "disk_absent": true,
+  "worktree_registration_absent": true,
+  "remote_removal_seconds": 0.10747726901900023,
+  "verified_at": "2026-09-12T20:01:43.847709+00:00",
+  "shared_repo_present": true,
+  "new_scientific_invocations": 0
+}

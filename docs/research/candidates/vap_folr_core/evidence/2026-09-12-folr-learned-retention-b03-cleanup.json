@@ -1,0 +1,436 @@
+{
+  "object": "FOLR-LEARNED-RETENTION-B03",
+  "evidence_publication_commit": "33a5acb2109e9ce6a956c11d15e8d769660ecc8f",
+  "before": {
+    "entries": [
+      {
+        "files": [
+          {
+            "bytes": 84,
+            "relative": ".git",
+            "sha256": "5839753d25a9d3201485cbad1e71c622b925c343cf6f9a3d3f211792742f38ba"
+          },
+          {
+            "bytes": 1791,
+            "relative": "experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+            "sha256": "775e598921ee7b09721b205624c7e7ac30e1ace177bdcb720b9120c5f4443fa3"
+          },
+          {
+            "bytes": 4333,
+            "relative": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+            "sha256": "0b95da626bab87c1cab7d38886b53291fd1a5167b66bfabf9e0dc33d5e81ed03"
+          },
+          {
+            "bytes": 2588,
+            "relative": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+            "sha256": "29dc8e1a18426a42f3cf01f0eba03f6bfa44eeeefddeec684d6458c7139b774c"
+          },
+          {
+            "bytes": 2358,
+            "relative": "experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py",
+            "sha256": "ae141219443ad169c5b7f58608e6785eadbd60a8de63c2d9366716ddd19fed9a"
+          },
+          {
+            "bytes": 2927,
+            "relative": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+            "sha256": "01770613528bc8e1f3b86c4cafa934dda98c9639490733a123b101c48723e54a"
+          },
+          {
+            "bytes": 3025,
+            "relative": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+            "sha256": "3936fd69b99d1b65c7644821848e419a9e3118120efbcc57667fba5ef5db3dc1"
+          },
+          {
+            "bytes": 13583,
+            "relative": "experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py",
+            "sha256": "dc342eefc74af9be788b006dfc70ef471088380543a3d005af19b0309d57fc86"
+          },
+          {
+            "bytes": 2836,
+            "relative": "scripts/__pycache__/hmasd_platform.cpython-310.pyc",
+            "sha256": "888cb73a6ab10484fbafbe3e7a4ce2bc959a7c8143d952f081d6aa95c85742dc"
+          },
+          {
+            "bytes": 2599,
+            "relative": "scripts/hmasd_platform.py",
+            "sha256": "f9e1fd0a88f9c0eef9b706802ae3aaceac4bc2f8ea394e895d01146e8e17865b"
+          },
+          {
+            "bytes": 21314,
+            "relative": "scripts/hmasd_resource_preflight.py",
+            "sha256": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc"
+          },
+          {
+            "bytes": 5869,
+            "relative": "scripts/run_folr_public_lifecycle_b01.py",
+            "sha256": "30d021557e10c25638cdc313274cae4e13cdacd75832c58ebafa87b4dad8026c"
+          },
+          {
+            "bytes": 4666395,
+            "relative": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event/final.pt",
+            "sha256": "ae87593110ef5ae570cf1eb375fbf4b822f13380a1a183f67a31f486c2391925"
+          },
+          {
+            "bytes": 4163,
+            "relative": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event/summary.json",
+            "sha256": "f4cafb0142b5d904406a68d1c056b1983271d8d3172824cb7b58f15e13009131"
+          },
+          {
+            "bytes": 504,
+            "relative": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_memory.json",
+            "sha256": "b46dc5716d825f89a1038478e16e4261afd4831bbe3e1ccbeab3dbfe6b3a0ea2"
+          },
+          {
+            "bytes": 1260,
+            "relative": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_whole_time.txt",
+            "sha256": "19b7e759494df5c70d25c3439730bcbc7d469bc54accf369327c072f5bbcdb7b"
+          },
+          {
+            "bytes": 4662779,
+            "relative": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain/final.pt",
+            "sha256": "98fb7645579278478bdc749de86c486e4b08592b0ffab8ad02f713ba4e407c9d"
+          },
+          {
+            "bytes": 4184,
+            "relative": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain/summary.json",
+            "sha256": "9a47cb79f0d121e8e61c7bc56321782bdaa64a2b4ffc36cfc2decf6f13369fc6"
+          },
+          {
+            "bytes": 504,
+            "relative": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_memory.json",
+            "sha256": "1f82c4b40b0d806380bc0f3debdad7b22f7c9b46a8917447beaade8e9f0a0d7d"
+          },
+          {
+            "bytes": 1239,
+            "relative": "temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_whole_time.txt",
+            "sha256": "95670c1c24dfdac7e9324734ee513f44ca7d913e667cb590cb9e25dbc02260bc"
+          },
+          {
+            "bytes": 24977,
+            "relative": "tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py",
+            "sha256": "faf58e6103cbf234a711e6870481b9145b1705a0ebc3a6578efa2ad85bff4d29"
+          }
+        ],
+        "root": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1"
+      },
+      {
+        "files": [
+          {
+            "bytes": 2,
+            "relative": "exit_code",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+          },
+          {
+            "bytes": 8,
+            "relative": "pid",
+            "sha256": "022c90c0545a70d3b4fa3d77262b42dac02d3f1293c371d6db727719275f7f3a"
+          },
+          {
+            "bytes": 1810,
+            "relative": "runner.sh",
+            "sha256": "41a86ae855e76d31a15d50456554e6cb200164bedbb78a66a1c05cf933ff88e9"
+          },
+          {
+            "bytes": 11,
+            "relative": "start_time",
+            "sha256": "617d6e9ffd880d14113abc48b9c25957e204afaff7cb455f31457d6a9faffd30"
+          },
+          {
+            "bytes": 9,
+            "relative": "status",
+            "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+          },
+          {
+            "bytes": 6023,
+            "relative": "task.log",
+            "sha256": "8a629eb28e6ebb0645a68a2bce2b3390dfc769664cf8f221f9098cc8e51ab4b9"
+          }
+        ],
+        "root": "/home/wu/.agent-tasks/folr-learned-retention-b03-retain-20260911"
+      },
+      {
+        "files": [
+          {
+            "bytes": 2,
+            "relative": "exit_code",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+          },
+          {
+            "bytes": 8,
+            "relative": "pid",
+            "sha256": "780f3d050e7cd382234c3e53a47ad5fe9ba7523eea64bd81c1a52b69b657382d"
+          },
+          {
+            "bytes": 1901,
+            "relative": "runner.sh",
+            "sha256": "d09358bbfdae343f6f4b9ebb58c3549f1734fcb8913a6bdc4d824e777fef3ccc"
+          },
+          {
+            "bytes": 11,
+            "relative": "start_time",
+            "sha256": "617d6e9ffd880d14113abc48b9c25957e204afaff7cb455f31457d6a9faffd30"
+          },
+          {
+            "bytes": 9,
+            "relative": "status",
+            "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+          },
+          {
+            "bytes": 6013,
+            "relative": "task.log",
+            "sha256": "7d779c061f297927528dcc2504078655783fe1d0dd5c8c31f3b2ca8687651642"
+          }
+        ],
+        "root": "/home/wu/.agent-tasks/folr-learned-retention-b03-learned-event-20260911"
+      }
+    ],
+    "known_pids_present": {
+      "3368237": false,
+      "3368272": false
+    },
+    "registered": true,
+    "source_sha": "89035d8f1e3f44a07e80c08e3140283c03592efb",
+    "supervisor_status": {
+      "folr-learned-retention-b03-learned-event-20260911": {
+        "exit_code": "0",
+        "pid": "3368272",
+        "status": "finished"
+      },
+      "folr-learned-retention-b03-retain-20260911": {
+        "exit_code": "0",
+        "pid": "3368237",
+        "status": "finished"
+      }
+    },
+    "tmux_active": {
+      "folr-learned-retention-b03-learned-event-20260911": false,
+      "folr-learned-retention-b03-retain-20260911": false
+    },
+    "utc": "2026-09-12T14:18:08.347804+00:00",
+    "inspection_wall_seconds": 0.8280000000377186
+  },
+  "status": "REMOTE_CLEANUP_VERIFIED_LOCAL_REMOVAL_POLICY_REJECTED_RETAINED",
+  "preservation": {
+    "status": "PASS",
+    "published_source_files": 11,
+    "published_original_native_files": 20,
+    "remote_generated_metadata_files": 2,
+    "classification": [
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/.git",
+        "preservation": "worktree registration pointer or generated Python bytecode"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/scripts/__pycache__/hmasd_platform.cpython-310.pyc",
+        "preservation": "worktree registration pointer or generated Python bytecode"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/scripts/hmasd_platform.py",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/scripts/hmasd_resource_preflight.py",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/scripts/run_folr_public_lifecycle_b01.py",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event/final.pt",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event/summary.json",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_memory.json",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_learned_event_whole_time.txt",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain/final.pt",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain/summary.json",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_memory.json",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/temp/directions/vap_folr_core/exp/learned_retention_b03_seed7811_retain_whole_time.txt",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1/tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-learned-retention-b03-retain-20260911/exit_code",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-learned-retention-b03-retain-20260911/pid",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-learned-retention-b03-retain-20260911/runner.sh",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-learned-retention-b03-retain-20260911/start_time",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-learned-retention-b03-retain-20260911/status",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-learned-retention-b03-retain-20260911/task.log",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-learned-retention-b03-learned-event-20260911/exit_code",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-learned-retention-b03-learned-event-20260911/pid",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-learned-retention-b03-learned-event-20260911/runner.sh",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-learned-retention-b03-learned-event-20260911/start_time",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-learned-retention-b03-learned-event-20260911/status",
+        "preservation": "preserved original evidence or published source"
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-learned-retention-b03-learned-event-20260911/task.log",
+        "preservation": "preserved original evidence or published source"
+      }
+    ],
+    "local_roots": [
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_control_20260911",
+        "files": 6,
+        "bytes": 1190184,
+        "all_bytes_preserved": true
+      },
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_resume_control_20260912",
+        "files": 4,
+        "bytes": 4302,
+        "all_bytes_preserved": true
+      },
+      {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b03_collection_20260912",
+        "files": 25,
+        "bytes": 17841058,
+        "all_bytes_preserved": true
+      }
+    ],
+    "verification_wall_seconds": 0.6720000000204891,
+    "new_scientific_execution": 0
+  },
+  "remote_cleanup_transport": {
+    "exit_code": 0,
+    "stdout": "{\"disk_absent\": {\"/home/wu/.agent-tasks/folr-learned-retention-b03-learned-event-20260911\": true, \"/home/wu/.agent-tasks/folr-learned-retention-b03-retain-20260911\": true, \"/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1\": true}, \"git_remove_exit_code\": 0, \"git_remove_stderr\": \"\", \"git_remove_stdout\": \"\", \"mutation_wall_seconds\": 0.012230647960677743, \"new_scientific_execution\": 0, \"preserved_before_removal\": \"31 original source/evidence files verified against published source/native archive; 2 metadata/cache files nonunique\", \"removed_paths\": [\"/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1\", \"/home/wu/.agent-tasks/folr-learned-retention-b03-retain-20260911\", \"/home/wu/.agent-tasks/folr-learned-retention-b03-learned-event-20260911\"], \"shared_remote_repo_exists\": true, \"utc\": \"2026-09-12T14:20:17.360018+00:00\", \"worktree_registration_absent\": true}\n",
+    "stderr": "",
+    "enclosing_wall_seconds": 0.39100000000325963
+  },
+  "remote_cleanup": {
+    "disk_absent": {
+      "/home/wu/.agent-tasks/folr-learned-retention-b03-learned-event-20260911": true,
+      "/home/wu/.agent-tasks/folr-learned-retention-b03-retain-20260911": true,
+      "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1": true
+    },
+    "git_remove_exit_code": 0,
+    "git_remove_stderr": "",
+    "git_remove_stdout": "",
+    "mutation_wall_seconds": 0.012230647960677743,
+    "new_scientific_execution": 0,
+    "preserved_before_removal": "31 original source/evidence files verified against published source/native archive; 2 metadata/cache files nonunique",
+    "removed_paths": [
+      "/home/wu/hmasd-worktrees/folr-learned-retention-b03-89035d8f1",
+      "/home/wu/.agent-tasks/folr-learned-retention-b03-retain-20260911",
+      "/home/wu/.agent-tasks/folr-learned-retention-b03-learned-event-20260911"
+    ],
+    "shared_remote_repo_exists": true,
+    "utc": "2026-09-12T14:20:17.360018+00:00",
+    "worktree_registration_absent": true
+  },
+  "local_cleanup": {
+    "state": "not performed; invocation rejected before process creation",
+    "tool_error_excerpt": "exec_command failed: CreateProcess ... Rejected ... blocked by policy",
+    "rejected_action": "PowerShell scoped Resolve-Path/GetFullPath validation and Remove-Item -LiteralPath -Recurse -Force for the three exact preserved local B03 duplicate roots",
+    "rejected_before_acceptance": true,
+    "removed_paths": [],
+    "retained_roots": [
+      {"path": "C:/Projects/HMASD-worktrees/codex-vap-folr/temp/directions/vap_folr_core/exp/learned_retention_b03_control_20260911", "exists": true, "files": 6, "bytes": 1190184, "all_bytes_preserved": true},
+      {"path": "C:/Projects/HMASD-worktrees/codex-vap-folr/temp/directions/vap_folr_core/exp/learned_retention_b03_resume_control_20260912", "exists": true, "files": 4, "bytes": 4302, "all_bytes_preserved": true},
+      {"path": "C:/Projects/HMASD-worktrees/codex-vap-folr/temp/directions/vap_folr_core/exp/learned_retention_b03_collection_20260912", "exists": true, "files": 25, "bytes": 17841058, "all_bytes_preserved": true}
+    ],
+    "retained_bytes": 19035544,
+    "read_only_presence_check": "PASS after rejection: three exact roots present with6/4/25 files; tool output45f543",
+    "shared_authoring_checkout_exists": true,
+    "shared_authoring_registered": true,
+    "older_B01_B02_paths_touched": false,
+    "alternative_used": "Retain the already archived copies and report the actual runtime restriction; no alternate deletion tool or retry.",
+    "documentation_write_rejection": "A subsequent command intended only to write this factual JSON record was also rejected before execution. The permitted file-edit tool records the facts; no deletion is performed.",
+    "root_action": "Accept preserved evidence and remote reclamation; record local retention under the actual runtime restriction. A future permitted cleanup requires restriction reconciliation, not a scientific retry."
+  },
+  "additional_named_cost": {
+    "measurements": [
+      {"operation": "publish complete result and immediate push", "invocation_wall_seconds": 9.4418205},
+      {"operation": "archive original control receipts", "invocation_wall_seconds": 0.239899},
+      {"operation": "remote cleanup inventory including enclosing SSH", "invocation_wall_seconds": 1.0684752},
+      {"operation": "read original ZIP membership for preservation", "invocation_wall_seconds": 0.2462332},
+      {"operation": "verify all scoped local/remote evidence preservation", "invocation_wall_seconds": 0.9337772},
+      {"operation": "remote exact cleanup and absence verification including enclosing SSH", "invocation_wall_seconds": 0.6312975},
+      {"operation": "read-only local retention and shared registration after rejection", "invocation_wall_seconds": 0.2543279}
+    ],
+    "sum_seconds": 12.8158305,
+    "clock_rule": "Enclosing exec_command clocks are charged once; nested SSH/hash/mutation clocks are not added. Rejected pre-creation commands have no accepted process and no invented measured duration.",
+    "limit": "Other unitemized final intake/check/publication and Root work remains unmeasured; this is a lower bound, not full complete-work certification."
+  }
+}

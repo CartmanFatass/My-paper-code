@@ -1,0 +1,43 @@
+{
+  "chosen_utc": "2026-09-11T21:11:08.443806+00:00",
+  "training_seed": 770903,
+  "evaluation_seed": 780903,
+  "training_lanes": [
+    770903,
+    770918
+  ],
+  "evaluation_lanes": [
+    780903,
+    780934
+  ],
+  "local_search": [
+    "rg",
+    "-n",
+    "--pcre2",
+    "(?<![0-9])(?:770903|770904|770905|770906|770907|770908|770909|770910|770911|770912|770913|770914|770915|770916|770917|770918|780903|780904|780905|780906|780907|780908|780909|780910|780911|780912|780913|780914|780915|780916|780917|780918|780919|780920|780921|780922|780923|780924|780925|780926|780927|780928|780929|780930|780931|780932|780933|780934)(?![0-9])",
+    "docs\\research\\candidates\\flexible_skill_duration",
+    "docs/research/portfolio",
+    "scripts",
+    "-g",
+    "run_fsd_*.py",
+    "-g",
+    "*.md",
+    "-g",
+    "*.json",
+    "-g",
+    "*.txt",
+    "-g",
+    "*.sh"
+  ],
+  "local_search_returncode": 1,
+  "local_matches": "",
+  "remote_paths_exist": {
+    "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-770903-20260911": false,
+    "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-770903-20260911": false,
+    "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-770903-D0-20260911": false,
+    "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-770903-I-20260911": false
+  },
+  "remote_command_wall_seconds": 0.4529999999795109,
+  "remote_stderr": "",
+  "scope": "Unscreened prospective selection. This checks the named published records and actual paths, not all historical RNG consumption. Zero scientific construction or launch."
+}

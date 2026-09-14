@@ -1,0 +1,184 @@
+{
+  "object": "ACVC_FRESH_DENSE_REUSE_B01",
+  "binding": "8951",
+  "selected_at": "2026-09-11T17:57:42.457636+00:00",
+  "authority_main_sha": "bb40797dc5312641ac640664cbf7c2bd174d9815",
+  "authoring_base": "bb40797dc5312641ac640664cbf7c2bd174d9815",
+  "status": "one new allocated unscreened independent fit; no scientific invocation yet",
+  "calculation_method": "Python integer/retained-timing arithmetic only; no project imports, model/RNG construction, native probe or new empirical output.",
+  "observed_new_scientific_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "model_loads": 0,
+    "training_episodes": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "native_steps": 0
+  },
+  "proposed_exposure": {
+    "independent_fresh_fits": 1,
+    "retained_fit_substitutions": 0,
+    "training_episodes": 512,
+    "training_team_steps": 131072,
+    "two_episode_rollouts": 256,
+    "adam_calls": 1024,
+    "backward_calls": 1024,
+    "training_actor_agent_forwards": 655360,
+    "training_critic_primitive_forwards": 131072,
+    "recurrent_update_batch_calls": 1024,
+    "recurrent_replay_agent_steps": 2621440,
+    "critic_update_rows": 524288,
+    "replay_shape_per_update": {
+      "time_steps": 32,
+      "independent_sequences": 80,
+      "hidden_width": 64
+    },
+    "evaluation_panels": 3,
+    "evaluation_episodes": 192,
+    "evaluation_team_steps": 49152,
+    "evaluation_actor_agent_forwards": 245760,
+    "total_episodes": 704,
+    "total_team_steps": 180224,
+    "total_collection_actor_agent_forwards": 901120,
+    "training_environment_constructors": 1,
+    "evaluation_environment_constructors": 3,
+    "total_unscored_constructor_resets": 4,
+    "fresh_DENSE_initializations": 1,
+    "postfit_checkpoint_loads": 3,
+    "gate_constructions": 0,
+    "duration_head_constructions": 0,
+    "selector_optimizer_updates": 0,
+    "evaluation_optimizer_updates": 0,
+    "coordinate_pair_check_upper_bound": 6553600,
+    "top_level_model_constructions": 9
+  },
+  "parameter_arithmetic": {
+    "raw_encoder": 6976,
+    "dense_inner": 1744,
+    "dense_projection": 1024,
+    "gru": 24960,
+    "mean_head": 195,
+    "log_std": 3,
+    "actor": 34902,
+    "critic": 34177,
+    "actor_plus_critic": 69079
+  },
+  "rng": {
+    "training_master": 8951,
+    "evaluation_namespace": 8952,
+    "common_actor_then_critic_initialization": 895100011,
+    "dense_branch_initialization": 895100012,
+    "persistent_training_velocity_seed": 895100021,
+    "training_constructor_seed": 895101000,
+    "training_reset_keys": [
+      895101000,
+      895101511
+    ],
+    "training_unused_duration_seed_keys": [
+      895104000,
+      895104511
+    ],
+    "evaluation_load_construction_seed": 895200014,
+    "evaluation_constructor_seeds": {
+      "C": 895200062,
+      "F": 895200063,
+      "dwell": 895200064
+    },
+    "evaluation_common_reset_keys": [
+      895202000,
+      895202063
+    ],
+    "evaluation_velocity_seed_keys": {
+      "C": [
+        895230200,
+        895230263
+      ],
+      "F": [
+        895230300,
+        895230363
+      ],
+      "dwell": [
+        895230400,
+        895230463
+      ]
+    },
+    "evaluation_unused_gate_seed_keys": {
+      "C": [
+        895240200,
+        895240263
+      ],
+      "F": [
+        895240300,
+        895240363
+      ],
+      "dwell": [
+        895240400,
+        895240463
+      ]
+    },
+    "prior_namespaces": [
+      8921,
+      8922,
+      8931,
+      8932,
+      8941,
+      8942
+    ],
+    "namespace_search_scope": "No prior seed binding8951/8952 in scoped ACVC cards/intakes/facts at selection; not a global registry claim.",
+    "no_rng_initialized_during_binding": true
+  },
+  "prospective_exposure_line": "1 fresh fit;69079 trainable actor+critic parameters;nonzero lr0.0003 loss-dependent Adam1024;512train/131072train team steps;192eval/49152eval team steps;0selector/eval updates. Can move; actual relative displacement awaits execution.",
+  "cost": {
+    "whole_supervised_task_cap_s": 270,
+    "all_support_including_monitor_cap_s": 330,
+    "complete_cap_s": 600,
+    "planned_dm_support_s": 270,
+    "planned_monitor_support_s": 60,
+    "prior_same_recipe_whole_task_s": [
+      172,
+      169
+    ],
+    "prior_same_recipe_panel_windows_s": {
+      "C": 9.556061281007715,
+      "F": 11.978827791986987,
+      "dwell": 11.570943174010608
+    },
+    "older_conservative_projection_s": 222.19968455692754,
+    "older_projection_plus_full_support_s": 552.1996845569275,
+    "older_per_panel_projection_s": {
+      "C": 11.96904265502235,
+      "F": 13.806098793982528,
+      "dwell": 13.679409444972407
+    },
+    "shared_fit_charge": "one common fit, never multiply by three panels",
+    "internal_timeout_s": 260,
+    "outer_term_s": 267,
+    "outer_kill_after_s": 1,
+    "old_inclusive_support_lower_bound_s": 52.3964878,
+    "old_inclusive_support_bound_is_strict": true,
+    "old_exact_total_unavailable": true,
+    "prior_directory_test_s": 29.8075815,
+    "test_directory_cap_s": 300,
+    "limitations": [
+      "New trajectory/contention wall unknown; prior timings are analogies, not admission.",
+      "No support/task budget transfer. All invoked preparation, review/check, Monitor, collection/reduction/preservation/publication and Root integration charged once, including failed commands.",
+      "No repeated preparation, numerical fixture, smoke, pilot/profile, extra scientific attempt, replacement or successor."
+    ],
+    "old_8931_measured_support_s": 6.0939838,
+    "old_8931_complete_conformance": "unestablished: Monitor estimated and unmeasured overhead remains",
+    "planned_preparation_review_check_s": 180,
+    "planned_collection_publication_integration_s": 90,
+    "whole_lifetime_preparation_deadline_required": true,
+    "root_integration_charged": true
+  },
+  "predictions": {
+    "F_minus_C_probability_UP": 0.75,
+    "F_minus_dwell_probability_UP": 0.65,
+    "owner": "not taken (unattended); unscored for8951"
+  },
+  "engineering_scope_section4": "none",
+  "authority_response_sha": "0dbbcbf807509ccc34a3a1de353114be88896897",
+  "reading_assumption": "Independent unit is the complete trained fit. Episode pairing is conditional on the final checkpoint and common initial worlds; private proposal streams and later own histories differ.",
+  "reading_limit": "No training-population CI, pure-retrace, matched-dose, headroom, formal UAV-entry or transfer claim.",
+  "old_8941_allocation": "ended after source-preparation support breach; zero scientific invocation; separate recovery completed; not retried"
+}

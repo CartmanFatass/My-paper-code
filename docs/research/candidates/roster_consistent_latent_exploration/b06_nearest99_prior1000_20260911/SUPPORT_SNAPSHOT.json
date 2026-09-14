@@ -1,0 +1,199 @@
+{
+  "object": "RCLE-TBCFV-B06-NEAREST99-PRIOR1000",
+  "source_sha": "baf63642a776ef3e60f4310ce47d76c45168c283",
+  "valid_results": 1,
+  "snapshot_boundary": "after retained-data intake and corrected figure inspection; before E0/intake publication and closeout",
+  "native_chain_s": 335.86,
+  "native_arms_s": {
+    "learned": 333.4,
+    "reference": 2.45
+  },
+  "native_complete_caps_pass": true,
+  "native_accounting": "Use chain335.86 once. Arm sum335.85 differs by0.01s of inter-arm/rounding; do not add arm times again.",
+  "support_components": [
+    {
+      "name": "accepted B06 assignment and checkout/applicable instructions",
+      "charged_s": 0.2409931
+    },
+    {
+      "name": "accepted B06 assignment and checkout/applicable instructions",
+      "charged_s": 0.3007695
+    },
+    {
+      "name": "required Portfolio-input fast-forward and push",
+      "charged_s": 5.0650517
+    },
+    {
+      "name": "B06 owned caller/card/spec pointers and live config",
+      "charged_s": 0.2154743
+    },
+    {
+      "name": "B06 owned caller/card/spec pointers and live config",
+      "charged_s": 0.2593653
+    },
+    {
+      "name": "current fixed card, law consumers and scientific-reading route",
+      "charged_s": 0.1337453
+    },
+    {
+      "name": "current fixed card, law consumers and scientific-reading route",
+      "charged_s": 0.5240226
+    },
+    {
+      "name": "law/credit dependent path and changed-risk review routes",
+      "charged_s": 0.1921784
+    },
+    {
+      "name": "law/credit dependent path and changed-risk review routes",
+      "charged_s": 0.2604281
+    },
+    {
+      "name": "unchanged learner/Monitor route readback",
+      "charged_s": 0.2177059
+    },
+    {
+      "name": "old test consumers and unscreened identity collision check",
+      "charged_s": 0.2482494
+    },
+    {
+      "name": "unchanged action-credit and historical stub consumers",
+      "charged_s": 0.2439734
+    },
+    {
+      "name": "fixed entry/wrapper and configuration exposure arithmetic",
+      "charged_s": 0.251508
+    },
+    {
+      "name": "one nonnumerical static/symbolic changed-law check",
+      "charged_s": 0.1830005
+    },
+    {
+      "name": "diff and owner clean-boundary readback",
+      "charged_s": 0.6981582
+    },
+    {
+      "name": "new-card owner item and object selection audit",
+      "charged_s": 0.4674438
+    },
+    {
+      "name": "independent high-risk static law/credit/serialization review",
+      "charged_s": 1.1550574,
+      "breakdown_s": [
+        0.5443512,
+        0.2487388,
+        0.3619674
+      ]
+    },
+    {
+      "name": "exact B06 source/card/check/review/owner publication",
+      "charged_s": 5.2085645
+    },
+    {
+      "name": "committed source bundle and bounded exact remote staging",
+      "charged_s": 2.473154
+    },
+    {
+      "name": "exact B06 command and staging publication",
+      "charged_s": 4.5128991
+    },
+    {
+      "name": "live destination/Monitor configuration and owner read before launch",
+      "charged_s": 0.578736
+    },
+    {
+      "name": "single exact detached B06 launch submission",
+      "charged_s": 0.8973439
+    },
+    {
+      "name": "accepted-handle Monitor dispatch",
+      "charged_s": 0.189,
+      "kind": "measured app-call elapsed"
+    },
+    {
+      "name": "Monitor B06 adoption observation",
+      "charged_s": 0.9,
+      "kind": "Root-forwarded locally measured command wall",
+      "earlier_observations": "no prior timing supplied; first-observation status to be clarified from existing records"
+    },
+    {
+      "name": "accepted-launch and actual-adoption receipt publication",
+      "charged_s": 5.2846987
+    },
+    {
+      "name": "Root accepted launch integration",
+      "charged_s": 4.9832446,
+      "breakdown_s": [
+        0.2660401,
+        0.6851209,
+        4.0320836
+      ],
+      "main_commit": "d8f2d3913",
+      "conflict_resolution_commands": 0
+    },
+    {
+      "name": "shared RCLE+VNFC terminal observation",
+      "charged_s": 1.3,
+      "kind": "whole shared command charged once to RCLE; no split",
+      "participants": [
+        "RCLE B06",
+        "VNFC"
+      ],
+      "other_observation_components": "unknown"
+    },
+    {
+      "name": "terminal collection checkout/owner/current-analysis readback",
+      "charged_s": 0.3149493
+    },
+    {
+      "name": "terminal collection checkout/owner/current-analysis readback",
+      "charged_s": 0.5263869
+    },
+    {
+      "name": "terminal-input fast-forward/push: first returned wait",
+      "charged_s": 10.0064728,
+      "process_wall_tail": "unmeasured after tool yielded; later completion was exit0"
+    },
+    {
+      "name": "completion of terminal-input push command after tool yield",
+      "charged_s": 0.000003,
+      "command_session": 18029,
+      "limit": "initial exec returned a running session; gaps outside returned tool waits are not exact process-wall measurements"
+    },
+    {
+      "name": "terminal archive collection, same-byte short extraction and source preservation",
+      "charged_s": 2.1214855,
+      "app_call_elapsed_s": 2.596
+    },
+    {
+      "name": "retained-data law/count/endpoint/tensor analysis and one-fit summarizer",
+      "charged_s": 2.7678277
+    },
+    {
+      "name": "retained-result figure and exact runtime/cell readback",
+      "charged_s": 1.7491573
+    },
+    {
+      "name": "retained floating-point contrast qualification and figure caption correction",
+      "charged_s": 0.96346
+    },
+    {
+      "name": "result figure visual inspection",
+      "charged_s": 0.022,
+      "kind": "measured image-read app elapsed"
+    }
+  ],
+  "known_support_charged_s": 55.4565082,
+  "known_native_plus_support_charged_s": 391.3165082,
+  "unknown_components": [
+    "Other Monitor observation components are not established. Adoption0.9s and whole shared RCLE+VNFC terminal query1.3s are retained; shared query is charged once to RCLE without splitting.",
+    "Terminal-input branch push yielded a tool session. Returned wait components are recorded; the full process-wall tail between yields was not measured.",
+    "E0/intake publication, result integration and cleanup/publication follow this snapshot."
+  ],
+  "support_cap_s": 140,
+  "complete_cap_s": 750,
+  "complete_support_wall_s": null,
+  "complete_allocation_wall_s": null,
+  "resources_unmeasured": true,
+  "full_cap_conformance": "neither pass nor overrun established from incomplete support timing",
+  "scientific_effect": "No primary-dependent reward/information/training/comparison defect was found; missing support telemetry does not change this valid B result."
+}

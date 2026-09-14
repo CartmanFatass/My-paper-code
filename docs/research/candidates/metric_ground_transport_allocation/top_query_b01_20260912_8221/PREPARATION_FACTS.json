@@ -1,0 +1,23 @@
+{
+  "prepared_at_utc": "2026-09-12T22:19:01.640218+00:00",
+  "source_input_base": "2f6f6180e2dea9978e235e11e41446ef78a1bb7e",
+  "assigned_main": "2492dcb06da495aed2cd4436342e81dec9507975",
+  "master": 8221,
+  "handle": "mgtap-top-b01-8221-20260912",
+  "identity_evidence": "Targeted card/source search no prior identity; remote status not_found and worktree/staging absent. Earlier unsupported agent-task inspect returned usage only, not an accepted process.",
+  "shared_consumers_match_10ea737f0": [
+    "environment.py",
+    "learner.py",
+    "policy.py",
+    "study.py",
+    "envs/pettingzoo/uav_env.py"
+  ],
+  "changes": "Only TOP query extension and distinct TOP pair/study/CLI/readout; old COND study/reducer unchanged.",
+  "stub_success_seconds": 0.138,
+  "stub_scratch_absent": true,
+  "ast_parsed_files": 7,
+  "new_scientific_exposure": 0,
+  "encoder_fixture": "PASS; sole committed remote supplied-input invocation; see ENCODER_FIXTURE.json",
+  "independent_review": "ACCEPTED; no material finding including completed COMMAND.sh; see INDEPENDENT_REVIEW.md",
+  "input_reconciliation_note": "595bd85c8 accidentally staged audit merge markers after exact-row guard reported2 absent prior rows.2f6f6180e immediately preserved assigned-main plus those2 original rows and removed all markers; no scientific source changed."
+}

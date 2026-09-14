@@ -1,0 +1,132 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-11-acvc-five-fit-promotion-convergence-01",
+  "source_thread_id": "01a08eda-0ae0-7123-aafc-619ab2addd1a",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "acvc",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+  "execution_mode": "REUSE_SINGLETON",
+  "delivery_mode": "github_delivery",
+  "reset_invalid_provider_context": false,
+  "github_delivery": {
+    "branch": "codex/acvc",
+    "base_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+    "response_path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  },
+  "scientific_question": "Decide actual promotion of the exact ACVC provisional single-task C-BENCH design already selected by this original Convergence node. Read SCIENCE_BRIEF and FACTS first, and your complete immutable prior response. The earlier response was claim design only; Portfolio now conditionally funds Assignment 2, but does not make the promotion decision. I recommend promotion of this unchanged qualified design, followed by the single allocated original Innovator review before any C freeze. You may reject promotion. State an actual direction-tier disposition with its scientific reason; do not return only another tentative design menu or infer a Portfolio/UAV change.\n\nThe three fresh development fits have F-C +.1229328560/+.0915279844/+.1414322041 J and F-dwell +.0877164686/+.0638998669/+.0944113176. Useful dwell also improves on C. F-dwell has 5/11/5 adverse worlds of 64, including -.0793154814 J in the latest panel. Keep these observations and all earlier selected retained-base panels as development only. None fills a new final slot; failed preparation supplies no fit. The strongest support is recurrence over both attained controls. The strongest opposition is useful dwell, unequal private trajectories/doses, outcome-informed development and unverified small-sample modeling. A narrow promotion hold is a serious alternative. Another one-fit B remains scientifically legitimate but is not the selected/funded replacement here.\n\nPreserve five independent NEW fresh-DENSE fit-plus-panel units: each 512 complete training episodes, 1024 Adam calls, its final unscreened checkpoint, then its fixed C/F/dwell64 panels on the unchanged native five-UAV/fifty-user H256 host, private 108-feature GRU64, training-only critic, native reward, CPU FP32/one-thread route. C applies its own sampled proposal. F reverses its own previous actual displacement on its own accepted history predicate. Dwell zeroes on its own predicate and otherwise applies its own proposal. Every rule owns recurrence, proposals, feedback and trajectory; C/dwell are not F-clock or equal-dose controls. The target is whole-package return, not retrace causation or information necessity.\n\nThe two population targets are expected F-C and F-dwell over the fixed fresh-training, world and private-proposal law, both exceeding .01 J. Preserve equal 64-world within-fit means and equal weights across five independent complete fit-plus-panel means. Retain mean +/- t_(.9875,4) sample_SD/sqrt(5) for each contrast: 97.5% two-sided marginals and at least 95% simultaneous coverage only under expressly stated iid normal fit-panel means. Shared-F dependence across contrasts is allowed. Actual neural-training outcomes need not be normal; 64 worlds and five fits validate no cross-fit tails. This is model-dependent, provisional inference, not distribution-free or established stable-population superiority. Both lower bounds strictly above .01 are required jointly; preserve component-only passes, unresolved crossings and adverse upper endpoints. A within-margin point is not equivalence. Conditional episode SE stays descriptive; no pooling worlds as training samples, double-added panel noise or manufactured training-only precision.\n\nThe outcome-blind namespace sampling law and all five actual bindings, exact source/analysis, checkpoint and full protocol will be fixed only after conforming promotion and original Innovator decisions, before question-relevant output. Different integer labels alone do not establish independence. Identify any concrete gap in whether this particular qualified claim can be promoted; do not impose a pilot, normality/calibration experiment, full causal census, exact upper, headroom measurement, retuned oracle, held-out transfer or seed quota as a universal gate. No new namespace, C card, model or scientific execution has been created now.\n\nMachine-generated current exposure: scientific_invocations=0; model_constructions=0; model_loads=0; scientific_rng_masters=0; native_ticks=0; training_episodes=0; optimizer_updates=0; evaluation_episodes=0; diagnostic_trajectories=0; search_candidates=0. Each complete planned unit is 704 episodes/180224 native ticks/1024 Adam calls, with all three final panels. Five units total 3520 episodes/901120 ticks/5120 Adam calls, 13107200 recurrent replay actor rows, 45 top-level model constructions, 15 post-fit loads and up to 32768000 inherited coordinate-pair checks. No extra search, initial-policy panel or validation trajectory is added. Full future cost is unknown; old 168.37/166.05/175.58-second commands are anchors only.\n\nThe NEW conditional cap is each complete native unit <=270 seconds, native sum <=1350, all invoked support <=1650 and complete invoked work <=3000. Both questions/intakes, card/source/analysis, necessary checks/review, staging, Monitor, collection, publication/integration and closeout count inside support; provider queue/generation and deliberation remain separately qualified unknowns. Old allocations are ended. Rejection, material design change, concrete blocker or unmet envelope ends dependent continuation. No substitute population/inference/arm set, extra question/panel, sixth/replacement fit, top-up or interim efficacy/futility stopping is funded. Complete all five preselected units unless a dependent integrity/resource limitation intervenes. Incomplete data do not reject the hypothesis or consume C; only a later valid complete frozen C retains its fixed consumption/rule.\n\nIf promoting, give the exact permissible provisional claim, preserved design and the original Innovator/pre-freeze boundary. If declining or requiring material redesign, name the affected requirement and narrow stop, retaining the favorable evidence without a broad negative or substitute allocation. Apply current evidence-spec section 11 to the question itself. No scientific/specification exception, new owner ratification, implementation or portfolio action is sought from this review. Report actual source access and any decision-critical gap.",
+  "deliverable": "One complete conclusion-first original-Convergence promotion decision with scientific/specification reasoning, explicit accepted or rejected scope, exact qualified claim/design/stop and conditional Innovator boundary. Write only the named response and one delivery comment, preserving prior responses. The DM will read the full immutable response and stop any materially changed or blocked dependent allocation.",
+  "claim_ceiling": "An actual direction-tier promotion decision for this exact provisional single-task complete-package C-BENCH design only. No current positive population result, broad/stable/causal/transfer/safety/UAV claim, Portfolio disposition, applied C freeze or immediate model/training permission.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/SCIENCE_BRIEF.md",
+      "purpose": "Read first and completely: actual promotion recommendation and strongest alternative, fixed design/claim, contrary evidence, finite work, exact caps and stop boundary.",
+      "provenance": "Original DM promotion preparation; no promotion, C freeze or scientific execution yet"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/FACTS.json",
+      "purpose": "Read current zero-exposure line, complete per-unit/five-unit arithmetic and accepted development evidence; no old fit fills a final slot.",
+      "provenance": "Deterministic Python arithmetic and copied accepted committed facts; not a new empirical estimate"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/EXECUTION_MAPPING.md",
+      "purpose": "Assignment 2 in full only: actual promotion then conditional Innovator/freeze/five-fit chain, exact 270/1350/1650/3000 envelopes and stopping.",
+      "provenance": "Root-integrated PRO_FINAL / OWNER_DELEGATED allocation; direction decisions remain yours",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md",
+      "purpose": "Opening and sections 1,3,7-8 as relevant to ACVC: original conditional investment and precise statistical/complete-cost limits. Other directions are outside this question.",
+      "provenance": "Original immutable Portfolio decision, not a local permission or C promotion",
+      "commit_sha": "05c24bcd85f92efc26fb2a9cb2152bed51dd90e9"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/archive/RESPONSE.md",
+      "purpose": "Read the complete original design decision, especially its population, five-unit analysis, model qualification and former zero-allowance boundary. Decide promotion now; do not replay the earlier design question.",
+      "provenance": "Original immutable response of this same Convergence node; selected claim design only",
+      "commit_sha": "67b9ab3a794d026cf95ade7dfa770037dc786528"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_THREE_FRESH_CONVERGENCE_INTAKE_20260911.md",
+      "purpose": "Sections 2-6: conformance, exact accepted design, support/contradiction, historical scope and actual independent unit.",
+      "provenance": "Accepted complete original-DM intake; later Portfolio allocation prospectively supplies the new conditional investment",
+      "commit_sha": "29b57b8b84c7407b7ba6e9c32f3688e0a6cde88e"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+      "purpose": "Sections 2-5: unchanged host, information, learner, C/F/dwell private rule/trajectory semantics and primary return. Section 16 only as historical 8961 binding, not future seeds or cap.",
+      "provenance": "Accepted developmental implementation law; no completed scientific rule is rewritten"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md",
+      "purpose": "Sections 1-5 and cost/closeout qualification: third fresh fit, all primary and adverse observations, private unequal timing/dose and ended allocation.",
+      "provenance": "Accepted valid B result; stable-population/pure-retrace/headroom conclusions remain unavailable"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/FACTS.json",
+      "purpose": "Read compact accepted result tables if validating the new facts: all three fresh and two selected-retained results, original paths/digests and cost limitations. Its old zero-funding status is historical.",
+      "provenance": "Previously accepted committed extraction; no fresh inference is commissioned",
+      "commit_sha": "3c7f0976e1116b43e3e42a06ca03c25a8045225c"
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "purpose": "Latest Scientific question and Post-three-fresh Convergence section only; older family stops remain unchanged. Read funding status through current Assignment 2.",
+      "provenance": "Accepted mechanism-level position; lifecycle authority remains Portfolio"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections 4,5.3,6.2-6.3,11.7-11.10: C claim/freeze/consumption, proportionality, independent unit and knowledge use; section 11 controls.",
+      "provenance": "Current controlling empirical requirements, adopted only for the named passages",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Section 6 only: empirical unit, selection, uncertainty and complete-package versus mechanism inference.",
+      "provenance": "Explanatory grounding reused by DM; no new authority or empirical evidence",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Relevant random hierarchy, independent seeds, fixed endpoint, package/causal comparison and claim-burden passages.",
+      "provenance": "Explanatory source; no universal seed quota or normality/positive-first gate",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Sections 4-5,7 as needed: no added machinery, full scope/budgets and proportionate technical acceptance for the later conditional change.",
+      "provenance": "Current engineering rules, no immediate implementation or numerical invocation in this question",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Sections 2-4 for actual direction promotion and Portfolio boundaries; 5-7 for shared checkout, current observation and later native admission.",
+      "provenance": "Current applicable authority; promotion/freeze/result acceptance are distinct",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e"
+    },
+    {
+      "path": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "purpose": "Scoped response/Issue delivery, full response and partial-success/fresh-readback rules only.",
+      "provenance": "Current authorized fixed GitHub delivery method",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/ISSUE_INPUT_SNAPSHOT.json",
+      "purpose": "Current Issue 14 promotion context and preserved previous accepted discussion; this fixed TASK alone bounds present scope.",
+      "provenance": "Actual issue-body readback after one context-prefix update; no Pro Send"
+    }
+  ],
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  ],
+  "constraints": [
+    "Use the original em:acvc:convergence provider binding, resolved by existing Transport; no context reset or replacement. Root alone dispatches this fixed handoff once and forwards the entire immutable response to the original DM.",
+    "This is at most one actual promotion question under current Assignment 2, distinct from the completed earlier design question. On a conforming promotion path at most one original Innovator review is funded before C freeze. No automatic additional consultation or substitute study follows a rejection, material redesign, blocker or unmet envelope.",
+    "Keep exact five-new-fit/64-world-per-rule design, two expected margins and qualified fit-level t/Bonferroni rule. All old data are development. No sixth/replacement fit, additional panel, outcome-driven expansion, interim efficacy/futility stop or change in population/inference/arm set is funded.",
+    "Respect complete 270-per-unit/1350-native/1650-support/3000-total invoked-work caps and unknown provider/deliberation cost. Old 8951/8961 and 270/330/600 allocations are not renewed. No model, scientific RNG, C card/freeze, code or numerical action is requested from Pro.",
+    "Write only this new archive/RESPONSE.md on the current descendant codex/acvc HEAD and one delivery-link comment on Issue 14. Preserve other paths and accepted requests; no force-push, main/code/card/PR/state edits. Input evidence stays pinned while the delivery branch advances.",
+    "Keep ACTIVE/MEDIUM, recasts 2/lowest contention and ended T/G/history-family boundaries. A decline is narrow to this proposed promotion, not Portfolio lifecycle or a general scientific negative."
+  ]
+}

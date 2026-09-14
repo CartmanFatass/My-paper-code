@@ -1,0 +1,43 @@
+{
+  "question": "按已接受的原Convergence及Innovator裁决，冻结这张五次新训练的有限C卡及首次随机抽取的五组编号；所有者可异步覆盖。",
+  "changes_if_approved": [
+    {
+      "target": "ACVC_FRESH_DENSE_PACKAGE_C01",
+      "from": "两个原节点均已同意，尚未绑定具体五组新编号",
+      "to": "固定独立同分布有放回抽样规则和首次五组m/q、双主指标、正态模型限制、全部训练/评估及成本；代码技术验收后才执行"
+    }
+  ],
+  "if_refused": "在下个干净边界停止该卡的后续；保留既有决策、抽取值和历史证据，不自动换编号、补样或再发问题。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/archive/RESPONSE.md",
+      "quote": "Accept the unchanged, expressly qualified five-new-fit proposal for subsequent prospective binding and freeze.",
+      "why": "此次卡和抽样是原节点明确选择的下一步，而不是新增科学投资。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md",
+      "quote": "Before any new training/evaluation, draw **five iid pairs** `(m_i,q_i)`, in unit order i=1..5: `m_i = 10000 + secrets.randbelow(10000)` and `q_i = 20000 + secrets.randbelow(10000)`.",
+      "why": "在结果前固定抽取规则并保留首次十个值，避免事后挑选训练种子。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md",
+      "quote": "Actual neural-training outcomes can be nonnormal; five fits and 64 worlds do not validate cross-fit tails or establish practical calibration.",
+      "why": "即使联合通过，也只有这个任务和既定统计模型下的暂定支持。"
+    }
+  ],
+  "uncertainty": [
+    "有益停留、不利场景、不等干预次数和训练尾部分布继续限制解释。",
+    "源码、检查和独立审查尚待完成；抽取值不是性能证据。",
+    "完整成本未知；222.5秒每单元是已有178秒事实乘1.25的规划值，不是保证。"
+  ],
+  "cost": {
+    "compute": "原270秒每单元、1350秒原生合计、1650秒全部调用支持、3000秒完整调用上限；五次每次512训练集/1024 Adam后完整C/F/dwell各64集。",
+    "owner_time": "无需逐项批准；可异步覆盖。",
+    "reversibility": "reversible",
+    "waits_on_this": "不等待回复；先完成最小源码和技术验收。"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): freeze the accepted C01 scientific protocol and the first outcome-blind five-unit namespace draw; preserve all stop and claim boundaries.",
+  "source": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_SCIENCE_CARD_20260911.md"
+}

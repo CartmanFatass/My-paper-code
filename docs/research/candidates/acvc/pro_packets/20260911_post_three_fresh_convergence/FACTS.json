@@ -1,0 +1,435 @@
+{
+  "prepared_at_utc": "2026-09-11T23:37:51.554672+00:00",
+  "method": "Read already-accepted compact JSON directly from committed Git blobs and use Python integer/count arithmetic; no project imports, RNG, model/environment construction, scientific rerun or population inference. Existing world vectors only preserve adverse counts.",
+  "input_commit": "3643a734223efd05bff39d8e1bfd7216745066c1",
+  "source_files": [
+    {
+      "path": "docs/research/candidates/acvc/fresh_dense_reuse_b01_20260910/dm_analysis.json",
+      "commit_sha": "3643a734223efd05bff39d8e1bfd7216745066c1",
+      "committed_blob_sha256": "3e1d738231713715bba370f1a26b95e39522d6aea93d364c7f51b217896f2657"
+    },
+    {
+      "path": "docs/research/candidates/acvc/fresh_dense_reuse_b01_8931_20260910/dm_analysis.json",
+      "commit_sha": "3643a734223efd05bff39d8e1bfd7216745066c1",
+      "committed_blob_sha256": "7b7d859ed30a8d265e38092efc465c31802338f0adcecbf1226312d48d9daf82"
+    },
+    {
+      "path": "docs/research/candidates/acvc/fresh_dense_reuse_b01_8961_20260911/dm_analysis.json",
+      "commit_sha": "3643a734223efd05bff39d8e1bfd7216745066c1",
+      "committed_blob_sha256": "f9adbab311acc34d9a030a9ad7e5c6d8269455ce78396566c6879b3c0f41e392"
+    },
+    {
+      "path": "docs/research/candidates/acvc/fixed_retrace_reuse_e01_20260909/summary.json",
+      "commit_sha": "3643a734223efd05bff39d8e1bfd7216745066c1",
+      "committed_blob_sha256": "2ab5942b0872cdca7877f0f5fade2d09e18c09b5a7a8aa1686b0af2c52f8ccae"
+    }
+  ],
+  "current_consultation_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "model_loads": 0,
+    "scientific_rng_masters": 0,
+    "native_ticks": 0,
+    "training_episodes": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "search_candidates": 0
+  },
+  "fresh_development_results": [
+    {
+      "master": 8921,
+      "independent_fresh_fits": 1,
+      "worlds_per_panel": 64,
+      "arm_means_J": {
+        "C": 0.11500737285938864,
+        "F": 0.23794022888254815,
+        "dwell": 0.15022376030952414
+      },
+      "contrasts": {
+        "F-C": {
+          "mean_J": 0.12293285602315951,
+          "mean_S": 31.470811141928834,
+          "conditional_SE_J": 0.006121691537787857,
+          "reading": "UP",
+          "adverse_worlds": 0,
+          "adverse_episode_ids": [],
+          "min_J": 0.02271950117339072
+        },
+        "F-dwell": {
+          "mean_J": 0.08771646857302401,
+          "mean_S": 22.455415954694146,
+          "conditional_SE_J": 0.007118684291838004,
+          "reading": "UP",
+          "adverse_worlds": 5,
+          "adverse_episode_ids": [
+            20,
+            25,
+            41,
+            46,
+            59
+          ],
+          "min_J": -0.04488634486434541
+        },
+        "dwell-C": {
+          "mean_J": 0.03521638745013549,
+          "mean_S": 9.015395187234686,
+          "conditional_SE_J": 0.0049383582599096115,
+          "reading": "UP",
+          "adverse_worlds": 13,
+          "adverse_episode_ids": [
+            3,
+            9,
+            17,
+            18,
+            27,
+            29,
+            36,
+            40,
+            43,
+            44,
+            48,
+            54,
+            57
+          ],
+          "min_J": -0.05661726590474324
+        }
+      },
+      "interventions": {
+        "C": {
+          "opportunities": 0,
+          "retrace": 0,
+          "dwell": 0,
+          "apply": 0,
+          "distinguishable": 0
+        },
+        "F": {
+          "opportunities": 7661,
+          "retrace": 7661,
+          "dwell": 0,
+          "apply": 0,
+          "distinguishable": 7661
+        },
+        "dwell": {
+          "opportunities": 4533,
+          "retrace": 0,
+          "dwell": 4533,
+          "apply": 0,
+          "distinguishable": 4533
+        }
+      }
+    },
+    {
+      "master": 8931,
+      "independent_fresh_fits": 1,
+      "worlds_per_panel": 64,
+      "arm_means_J": {
+        "C": 0.14106594568360992,
+        "F": 0.23259393005012113,
+        "dwell": 0.1686940631380608
+      },
+      "contrasts": {
+        "F-C": {
+          "mean_J": 0.09152798436651123,
+          "mean_S": 23.431163997826875,
+          "conditional_SE_J": 0.006375952119771575,
+          "reading": "UP",
+          "adverse_worlds": 4,
+          "adverse_episode_ids": [
+            9,
+            28,
+            45,
+            51
+          ],
+          "min_J": -0.011361569320604253
+        },
+        "F-dwell": {
+          "mean_J": 0.06389986691206033,
+          "mean_S": 16.358365929487444,
+          "conditional_SE_J": 0.00763352745581913,
+          "reading": "UP",
+          "adverse_worlds": 11,
+          "adverse_episode_ids": [
+            0,
+            20,
+            33,
+            34,
+            37,
+            44,
+            45,
+            47,
+            57,
+            60,
+            63
+          ],
+          "min_J": -0.05700477550728157
+        },
+        "dwell-C": {
+          "mean_J": 0.027628117454450894,
+          "mean_S": 7.072798068339429,
+          "conditional_SE_J": 0.0067297109590978834,
+          "reading": "UP",
+          "adverse_worlds": 19,
+          "adverse_episode_ids": [
+            3,
+            9,
+            13,
+            14,
+            17,
+            18,
+            23,
+            24,
+            28,
+            38,
+            39,
+            41,
+            42,
+            49,
+            51,
+            54,
+            55,
+            61,
+            62
+          ],
+          "min_J": -0.08952167289850688
+        }
+      },
+      "interventions": {
+        "C": {
+          "opportunities": 0,
+          "retrace": 0,
+          "dwell": 0,
+          "apply": 0,
+          "distinguishable": 0
+        },
+        "F": {
+          "opportunities": 7185,
+          "retrace": 7185,
+          "dwell": 0,
+          "apply": 0,
+          "distinguishable": 7185
+        },
+        "dwell": {
+          "opportunities": 4722,
+          "retrace": 0,
+          "dwell": 4722,
+          "apply": 0,
+          "distinguishable": 4722
+        }
+      }
+    },
+    {
+      "master": 8961,
+      "independent_fresh_fits": 1,
+      "worlds_per_panel": 64,
+      "arm_means_J": {
+        "C": 0.13170359446997576,
+        "F": 0.2731357985678663,
+        "dwell": 0.17872448096623217
+      },
+      "contrasts": {
+        "F-C": {
+          "mean_J": 0.1414322040978905,
+          "mean_S": 36.20664424905997,
+          "conditional_SE_J": 0.007915839892640088,
+          "reading": "UP",
+          "adverse_worlds": 1,
+          "adverse_episode_ids": [
+            28
+          ],
+          "min_J": -0.023734265038216795
+        },
+        "F-dwell": {
+          "mean_J": 0.0944113176016341,
+          "mean_S": 24.16929730601833,
+          "conditional_SE_J": 0.008297551606902116,
+          "reading": "UP",
+          "adverse_worlds": 5,
+          "adverse_episode_ids": [
+            20,
+            24,
+            28,
+            33,
+            62
+          ],
+          "min_J": -0.07931548140454164
+        },
+        "dwell-C": {
+          "mean_J": 0.047020886496256416,
+          "mean_S": 12.037346943041642,
+          "conditional_SE_J": 0.005906075474331409,
+          "reading": "UP",
+          "adverse_worlds": 10,
+          "adverse_episode_ids": [
+            3,
+            11,
+            30,
+            36,
+            37,
+            45,
+            46,
+            48,
+            49,
+            51
+          ],
+          "min_J": -0.045816065674009226
+        }
+      },
+      "interventions": {
+        "C": {
+          "opportunities": 0,
+          "retrace": 0,
+          "dwell": 0,
+          "apply": 0,
+          "distinguishable": 0
+        },
+        "F": {
+          "opportunities": 8004,
+          "retrace": 8004,
+          "dwell": 0,
+          "apply": 0,
+          "distinguishable": 8004
+        },
+        "dwell": {
+          "opportunities": 4705,
+          "retrace": 0,
+          "dwell": 4705,
+          "apply": 0,
+          "distinguishable": 4705
+        }
+      }
+    }
+  ],
+  "selected_retained_E01_context": [
+    {
+      "retained_selected_master": 8201,
+      "new_fits": 0,
+      "worlds_per_panel": 64,
+      "contrasts": {
+        "F-C": {
+          "mean_J": 0.10769858009718353,
+          "conditional_SE_J": 0.0066070153719637115,
+          "reading": "UP",
+          "adverse_worlds": 1,
+          "min_J": -0.010826266502490245
+        },
+        "F-dwell": {
+          "mean_J": 0.06892961182535368,
+          "conditional_SE_J": 0.007195484983059177,
+          "reading": "UP",
+          "adverse_worlds": 7,
+          "min_J": -0.05227473398692048
+        },
+        "dwell-C": {
+          "mean_J": 0.03876896827182985,
+          "conditional_SE_J": 0.006520051903074365,
+          "reading": "UP",
+          "adverse_worlds": 14,
+          "min_J": -0.061058937429326596
+        }
+      }
+    },
+    {
+      "retained_selected_master": 8202,
+      "new_fits": 0,
+      "worlds_per_panel": 64,
+      "contrasts": {
+        "F-C": {
+          "mean_J": 0.08791620353401795,
+          "conditional_SE_J": 0.007910710200633306,
+          "reading": "UP",
+          "adverse_worlds": 7,
+          "min_J": -0.07759025024901925
+        },
+        "F-dwell": {
+          "mean_J": 0.05744529646936167,
+          "conditional_SE_J": 0.008615935185277559,
+          "reading": "UP",
+          "adverse_worlds": 11,
+          "min_J": -0.08598214899615252
+        },
+        "dwell-C": {
+          "mean_J": 0.03047090706465629,
+          "conditional_SE_J": 0.007330299818264649,
+          "reading": "UP",
+          "adverse_worlds": 21,
+          "min_J": -0.10379276268412246
+        }
+      }
+    }
+  ],
+  "independent_fresh_training_units": 3,
+  "old_selected_panels_are_new_fits": false,
+  "proposed_not_allocated_work": {
+    "one_unchanged_B_unit": {
+      "fresh_fits": 1,
+      "training_episodes": 512,
+      "training_native_ticks": 131072,
+      "evaluation_panels": 3,
+      "evaluation_episodes": 192,
+      "evaluation_native_ticks": 49152,
+      "total_episodes": 704,
+      "native_ticks": 180224,
+      "adam_calls": 1024,
+      "training_collection_actor_rows": 655360,
+      "recurrent_replay_actor_rows": 2621440,
+      "critic_update_rows": 524288,
+      "evaluation_actor_rows": 245760,
+      "top_level_model_constructions": 9,
+      "postfit_loads": 3,
+      "coordinate_pair_check_upper_bound": 6553600
+    },
+    "five_fit_provisional_C_design_to_assess": {
+      "fresh_fits": 5,
+      "training_episodes": 2560,
+      "training_native_ticks": 655360,
+      "evaluation_panels": 15,
+      "evaluation_episodes": 960,
+      "evaluation_native_ticks": 245760,
+      "total_episodes": 3520,
+      "native_ticks": 901120,
+      "adam_calls": 5120,
+      "training_collection_actor_rows": 3276800,
+      "recurrent_replay_actor_rows": 13107200,
+      "critic_update_rows": 2621440,
+      "evaluation_actor_rows": 1228800,
+      "top_level_model_constructions": 45,
+      "postfit_loads": 15,
+      "coordinate_pair_check_upper_bound": 32768000
+    },
+    "unknowns": [
+      "future runtime",
+      "full support cost",
+      "training-population variance/precision",
+      "any different design selected by Pro"
+    ]
+  },
+  "historical_work_and_cost": {
+    "whole_command_s": [
+      168.37,
+      166.05,
+      175.58
+    ],
+    "conservative_native_charge_s": [
+      172,
+      169,
+      178
+    ],
+    "8961_final_known_support_s": 72.304424,
+    "8961_native_plus_known_support_s": 250.30442399999998,
+    "8961_cost_limit": "Unconditional full 330/600 conformance remains unestablished; missing overhead stays unknown, no observed overrun.",
+    "shared_query": "0.9 seconds is one enclosing four-handle observation, not four additive direction charges."
+  },
+  "headroom": "No tuned same-information native-host headroom record; not zero and not a launch gate.",
+  "authority": {
+    "original_portfolio_response_sha": "50703c1bd1a4411c31a0b211d3ec8aff88fa0d0f",
+    "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+    "main_archive_sha": "41c46303f66005f74a18dccf45974d99771b155b",
+    "sections": [
+      "1",
+      "6",
+      "9"
+    ],
+    "root_assignment": "2026-09-11: exactly one original Convergence question and full intake; zero implementation/numerical allowance; Root reports designated Portfolio-DM conformance PASS, durable mapping not yet supplied."
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "question": "Portfolio 已选择 K/E 两个独立真实 B、RCLE 一次有界设计和 FSD 一次用途判断；所有者可异步覆盖这项已完整核对的投入决定。",
+  "changes_if_approved": [
+    {
+      "target": "ACVC K",
+      "from": "已选 cluster B，未资助",
+      "to": "一 fit/三64面板，600 native/600 hard support/1200 complete，新硬上限"
+    },
+    {
+      "target": "FOLR E",
+      "from": "entity-history 家族 OPEN，未资助",
+      "to": "每臂5000训练/128终评、±1 native MEI；Generic1800/BANK3000/native4800/support1200/complete6000"
+    },
+    {
+      "target": "RCLE L 与 FSD U",
+      "from": "独立下一设计/用途判断未购买",
+      "to": "L 一设计或无候选，U 一原节点用途判断/full intake；各完整 documentary/provider/agent 成本明确接受 UNKNOWN，零实现/实验"
+    }
+  ],
+  "if_refused": "异步覆盖只按实际已执行状态作用于剩余工作；不删除已发生证据、不推定已有 ACTIVE 方向停止。最强较小选项为保留 K/L/U 而不再购买 E。",
+  "evidence_for": [
+    {
+      "path": "docs\\research\\portfolio\\pro_packets\\20260912_cluster_entity_investment\\archive\\RESPONSE.md",
+      "quote": "Select K=yes and E=yes, L=one bounded original-DM design deliverable, and U=yes for one original-Convergence same-host use judgment.",
+      "why": "完整 Pro 以具体用途与强对照选择四笔独立投入；原作者逐项核对未发现冲突。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs\\research\\portfolio\\pro_packets\\20260912_cluster_entity_investment\\archive\\RESPONSE.md",
+      "quote": "The strongest smaller portfolio retains K/L/U but declines E now.",
+      "why": "BANK 的实现与回放负担最大且速率未知；K 可能输 C/dwell，L 可能无候选，U 可能重复已有谨慎建议。"
+    }
+  ],
+  "uncertainty": [
+    "所有新速率和部分完整支持/agent/provider 归属未知；数值上限是愿投入范围，不是预测或全账证明。",
+    "一 fit/pair 不证明稳定增益或组件原因；保持全部反例、原有回退配方和生命周期。",
+    "FSD B-LONG-D0 与 ACPS 新需求晚于固定问题，均无本轮资助。"
+  ],
+  "cost": {
+    "compute": "K1200 与 E6000 是两个独立 future invoked cap，合7200但不可互借；L/U 全文档成本分别接受 UNKNOWN。全部必要实现/检查/评审/传输/准入/Monitor/intake/保全/cleanup计一次。",
+    "owner_time": "异步可覆盖，无逐项批准等待。",
+    "reversibility": "costly",
+    "waits_on_this": "Root 立即独立派发原 K/E/L/U DM；当前决定不等待其他方向。"
+  },
+  "verdict_text": "**Final decision: K=yes at 600 native/600 hard support/1,200 complete future invoked seconds; E=yes at Generic 1,800/BANK 3,000, native 4,800/hard support 1,200/complete 6,000, with exactly the selected 5,000/128-per-arm pair and ±1 reading; L=one design or no-candidate deliverable at explicitly accepted unknown complete documentary cost, zero empirical/implementation/Pro; U=yes for one original-node use judgment/full intake at explicitly accepted unknown complete documentary cost, zero empirical/implementation/reanalysis.** E precedes K under contention; earlier T/ACPS/CADC commitments and their order remain. No lifecycle/priority/recast change, new registration, held-recipe reopening, formal-UAV entry or specification exception is selected. Each affected DM proceeds independently within its actual allowance; neither a finished unit nor a missing receipt supplies an inferred direction stop or another purchase.",
+  "source": "docs\\research\\portfolio\\pro_packets\\20260912_cluster_entity_investment\\archive\\RESPONSE.md"
+}

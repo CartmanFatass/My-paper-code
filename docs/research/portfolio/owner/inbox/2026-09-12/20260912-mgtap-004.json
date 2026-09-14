@@ -1,0 +1,113 @@
+{
+  "id": "20260912-mgtap-004",
+  "created": "2026-09-12T16:17:01-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "MGTAP 下一用途：仅一次原节点决策，或不追加",
+  "context": "TOP8221 为负向，mean-COND 三次结果正负混合，DENSE 保持默认。Root 仅授权准备决策输入；推荐一次原节点决定 COND512/DENSE768 用途问题是否值得选择。投资尚未决定，ACTIVE/MEDIUM 不变。",
+  "options": [
+    {
+      "key": "a",
+      "label": "一次有界用途/设计决策",
+      "consequence": "只购一次原节点问题和intake，零实验额度，完整成本未知；可能拒绝候选。"
+    },
+    {
+      "key": "u",
+      "label": "本轮不追加，保持ACTIVE",
+      "consequence": "零新增咨询/实验；DENSE默认与ACTIVE/MEDIUM保留。"
+    },
+    {
+      "key": "p",
+      "label": "Portfolio另行PARK",
+      "consequence": "仅Portfolio可裁决生命周期PARK；不产生科学负向或删除证据。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "该问题比较条件汇总与普通训练的实际用途；若无边际价值则选择不追加，不为占槽维持咨询。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L115",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否只给 MGTAP 一次有界原节点用途/设计决策，判断 COND512 对 DENSE768 的新比较是否值得选入；还是本轮不追加，或由 Portfolio 另作 PARK？",
+    "changes_if_approved": [
+      {
+        "target": "MGTAP 下一投资",
+        "from": "T 已结束；ACTIVE/MEDIUM；无新实验或咨询额度",
+        "to": "仅一次原节点用途/设计问题及完整 intake；零实验额度，全部成本未知"
+      }
+    ],
+    "if_refused": "本轮不追加，保留 DENSE 默认、ACTIVE/MEDIUM 和所有证据。PARK 只是 Portfolio 单独可选的生命周期分支；DM 不自动执行。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md#3-one-forwardable-original-node-question",
+        "quote": "This deliberately asks about use of a learning procedure at stated exposures.",
+        "why": "把是否值得保留条件汇总，与把计算用于普通 DENSE 的更多训练相比较；只提出一个用途分叉，不枚举新架构。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md",
+        "quote": "COND−DENSE +0.02447811898058116 J",
+        "why": "一项完整本地正向观察使有限用途仍可讨论，但不证明稳定收益。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_TOP_QUERY_B01_INTAKE_20260912.md",
+        "quote": "TOP−DENSE −0.0684509798102144 J",
+        "why": "TOP 新查询显著低于本轮 DENSE；四次结果不能支持继续改查询的惯性。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md",
+        "quote": "8213−0.02246957345594415",
+        "why": "mean-COND 三次只有一次超过 MEI、一次为负；没有必需的新投入或 tuned headroom 证据。"
+      }
+    ],
+    "uncertainty": [
+      "原节点可以拒绝该新比较；不会从历史结果推断其符号。",
+      "增加 DENSE 训练不保证提高回报；这是不同暴露的用途问题，不是等预算或因果比较。",
+      "咨询全成本与潜在后续 B 的 native/support/完整成本均未知；无预算从 T 转移。"
+    ],
+    "cost": {
+      "compute": "本次只读准备：0新模型/实验/分析/Pro。候选A未来仅一次原节点问题及intake，native=0，完整 invoked cost UNKNOWN。未选择的 B 示例为344064team ticks、2560Adam、8273920actor-row uses；没有任何实验拨款。",
+      "owner_time": "不等待 owner 回复；Portfolio 作投入/生命周期裁决。",
+      "reversibility": "reversible",
+      "waits_on_this": "只有候选A的实际咨询/任何未来研究等待新的明确授权；现有独立科研不等待。"
+    },
+    "verdict_text": "DM recommendation A: fund at most one bounded original-node use/design decision and its complete intake, with zero numerical exposure. Strongest alternative U is no additional MGTAP allocation this round, retain DENSE and ACTIVE/MEDIUM. PARK is a Portfolio-only lifecycle alternative.",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T01:49:28+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/PREPARATION.md",
+      "state": "applied",
+      "summary": "Portfolio814139558已选择一次原Convergence用途问题及完整intake，文档全成本UNKNOWN；原DM现已执行authoring/Issue准备。没有任何代码、模型、测量或B拨款，B若被选中另返完整投资需求。"
+    },
+    {
+      "at": "2026-09-13T04:55:30+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_kelu_unused/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INTAKE.md",
+      "state": "applied",
+      "summary": "已完成一次原节点判断和原DM完整intake；该文档款闭合，新B只作为完整投资需求返回，零实验开销。"
+    },
+    {
+      "at": "2026-09-13T04:55:53+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INTAKE.md",
+      "state": "applied",
+      "summary": "已完成既有Portfolio购买的一次原Convergence判断及完整intake；新B仅返回全部投资需求，无新实验。原资金来源仍为post-KELU Portfolio决定814139558。",
+      "correction": "上一条trace的source目录笔误为cond512_kelu_unused，该路径不存在；本条更正为真实完整原节点RESPONSE.md，保留误记历史，不改变授权或实际动作。"
+    }
+  ],
+  "approval_correction": "上一条trace的source目录笔误为cond512_kelu_unused，该路径不存在；本条更正为真实完整原节点RESPONSE.md，保留误记历史，不改变授权或实际动作。"
+}

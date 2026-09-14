@@ -1,0 +1,75 @@
+{
+  "id": "20260912-mgtap-003",
+  "created": "2026-09-12T15:20:27-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "MGTAP：T新额度下固定TOP/DENSE 8221",
+  "context": "一个fresh8221 TOP/intact-DENSE训练配对，检验最高本地SINR伙伴query的有限学习价值；MARL绑定为部分可观测与队友非平稳。450/臂、900native、300support、1200complete均为新硬上限，DENSE保持默认。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "继续已获T授权的唯一8221配对与完整收集清理。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止未执行依赖工作，保留已经发生的调用和证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按异步明确修改处理未执行部分，不自动替换已启动对象。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "Portfolio T已明确投入；卡片和源码只实现原节点选定的TOP差异。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_TOP_QUERY_B01_SCIENCE_CARD_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L93",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "已获Portfolio T新投入，固定8221这一对TOP/intact-DENSE卡片；可异步覆盖，但不等待回复。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_TOP_QUERY_B01_SCIENCE_CARD_20260912.md",
+        "from": "原节点已选TOP科学对象，未有执行卡",
+        "to": "新T=yes下固定8221和唯一完整TOP/DENSE对比，保留DENSE默认"
+      }
+    ],
+    "if_refused": "停止尚未执行的依赖工作，保留已发生调用和证据；无自动替代种子或额外配对。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/EXECUTION_MAPPING.md",
+        "quote": "Original TOP science already selected. Buy minimal query/new-object binding implementation, focused conformance and independent high-risk review, then its one matched pair under450 s/whole arm,900 native,hard300 support,1,200 complete.",
+        "why": "这是新的完整T额度，卡片保持原科学对象。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/archive/RESPONSE.md",
+        "quote": "**The strongest structural contradiction is that radio prominence need not identify the partner that matters most to user service.**",
+        "why": "最强链路不代表服务相关性；旧COND正负均保留，TOP没有先验成功保证。"
+      }
+    ],
+    "uncertainty": [
+      "TOP第一次实测尚未发生；一个训练配对只能给本地包比较。",
+      "改变query可能放大换序；不是mean-COND消融，也不识别注意力因果。",
+      "TOP新运行和完整支撑成本未知，实际逐项记录。"
+    ],
+    "cost": {
+      "compute": "新硬上限450秒/完整臂、900native、300support、1200complete，唯一一对；另1次小encoder工程检查在同一support内。",
+      "owner_time": "不等待回复；异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): bind8221.",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_TOP_QUERY_B01_SCIENCE_CARD_20260912.md"
+  },
+  "starred": false
+}

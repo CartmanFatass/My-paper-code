@@ -1,0 +1,49 @@
+{
+  "authority": "Root native followup: one reference-only completion is covered by original R logical invocation after main71198147e integration",
+  "source_sha": "9eeef867f0adcf6d9a8ca9441781ad4ec2764a30",
+  "command_commit": "2c4777901c93527415f2adf6ff53232eb3b1cc37",
+  "handle": "rcle-b07-reference-completion-s27-20260912",
+  "source_bundle_sha256": "731576165675f19b5e839b7420f8999f52647d587d7827f91a7eab81017ea9cb",
+  "source_bundle_bytes": 37909,
+  "source_bundle_prerequisite": "1652c44ac65ed6e686610c3cfcff67dab1a0fc6b",
+  "learned_summary_sha256": "c6366cdb44ffd30325dba0c1a9164282d5725ab3e6ba59265bb7aefe16c9afbd",
+  "native_cpp_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+  "checks": "fresh handle/cwd/staging absent; exact detached SHA; empty experiments/scripts diff; remote source bundle and learned input digest equal local/bound; native kernel digest equals original; immutable command bash-n succeeds",
+  "steps": [
+    {
+      "step": "b07CompletionBundle",
+      "chunk_id": "bcfd5b",
+      "wall_time_seconds": 0.2699653,
+      "exit_code": 0,
+      "original_token_count": 80,
+      "output": "\r\nAlgorithm       Hash                                                                   Path\r\n---------       ----                                                                   ----\r\nSHA256          731576165675F19B5E839B7420F8999F52647D587D7827F91A7EAB81017EA9CB       C:\\Projects\\HMASD-worktrees\\dm-…\r\n37909\r\n\r\n"
+    },
+    {
+      "step": "b07CompletionDir",
+      "chunk_id": "77edb1",
+      "wall_time_seconds": 0.7001676,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "step": "b07CompletionTransfer",
+      "chunk_id": "eeaf53",
+      "wall_time_seconds": 1.3988901,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "step": "b07CompletionStage",
+      "chunk_id": "d49463",
+      "wall_time_seconds": 0.8962329,
+      "exit_code": 0,
+      "original_token_count": 210,
+      "output": "From /home/wu/hmasd-inputs/rcle-b07-reference-completion-s27-20260912/source.bundle\n * branch                codex/rcle -> FETCH_HEAD\nPreparing worktree (detached HEAD 9eeef867f)\nHEAD is now at 9eeef867f Intake RCLE B07 partial result and prepare scoped reference alternative\n9eeef867f0adcf6d9a8ca9441781ad4ec2764a30\n731576165675f19b5e839b7420f8999f52647d587d7827f91a7eab81017ea9cb  /home/wu/hmasd-inputs/rcle-b07-reference-completion-s27-20260912/source.bundle\nc6366cdb44ffd30325dba0c1a9164282d5725ab3e6ba59265bb7aefe16c9afbd  /home/wu/hmasd-inputs/rcle-b07-reference-completion-s27-20260912/learned-summary.json\n18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819  /home/wu/hmasd-worktrees/rcle-b07-reference-completion-s27-20260912/experiments/candidates/roster_consistent_latent_exploration_tbcfv/native/tbcfv_backend.cpp\n"
+    }
+  ],
+  "known_staging_command_wall_s": 3.2652559000000005,
+  "admission": "pending in exact adjacent command",
+  "submission": false
+}

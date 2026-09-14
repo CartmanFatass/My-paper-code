@@ -1,0 +1,13 @@
+{
+  "purpose": "One same-handle handover-state reconciliation because actual goal-adoption receipt is pending; no experiment status poll or duplicate ADD.",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"schemaVersion\":1,\"thread\":{\"id\":\"01a095d0-21ee-7c02-9d97-3681b5678200\",\"kind\":\"codex\",\"hostId\":\"local\",\"title\":\"HMASD Windows Monitor\",\"preview\":\"Observe accepted FOLR-LEARNED-RETENTION-B03 handles folr-learned-retention-b03-retain-20260911 and folr-learned-retention-b03-learned-event-20260911; deliver each terminal notification to Root and finish only after both terminal notices are accepted.\",\"status\":{\"type\":\"active\",\"activeFlags\":[]},\"cwd\":\"C:\\\\Projects\\\\HMASD\",\"createdAt\":1789219840,\"updatedAt\":1789246914},\"page\":{\"order\":\"newest_first\",\"limit\":1,\"nextCursor\":\"{\\\"requestedThreadId\\\":\\\"01a095d0-21ee-7c02-9d97-3681b5678200\\\",\\\"rolloutOrdinal\\\":4955,\\\"includeAnchor\\\":false,\\\"scope\\\":{\\\"kind\\\":\\\"turns\\\"}}\",\"hasMore\":true},\"turns\":[{\"id\":\"01a0976c-35ab-7ca2-8cfd-45392d935208\",\"status\":\"inProgress\",\"error\":null,\"startedAt\":1789246846,\"completedAt\":null,\"durationMs\":null,\"items\":[]}]}"
+      }
+    ],
+    "isError": false
+  },
+  "wall_seconds": 0.036
+}

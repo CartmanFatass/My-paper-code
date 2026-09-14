@@ -1,9 +1,19 @@
 ---
 name: hmasd-pro-research-prompt-author
-description: "Use when a DM authors an HMASD direction or Portfolio Pro research question for fixed GitHub task delivery through the independent Transport task, with explicit author, parent and executor routing."
+description: "Use when DM authors an independent scientific review request, or Clerk publishes an explicitly owner-requested Portfolio consultation for fixed GitHub task delivery through the author-owned native Agentify Transport subagent, with explicit author, parent and executor routing."
 ---
 
 # HMASD Pro Research Prompt Author
+
+Owner-delegated Clerk vacancy requests may instead use the direct Codex in-app browser route
+in CLERK_OPERATIONS.md and hmasd-portfolio-task. The GitHub/native-Transport requirements below
+apply to requests using this delivery workflow, not as gates on that direct vacancy route.
+
+
+Root is the user entry; the independent Clerk performs only delegated mechanical coordination.
+Read docs/project/CLERK_OPERATIONS.md for event handling and writes. DM/Pro retain scientific
+judgment. Clerk routes missing science or complex engineering repair to the relevant Astra DM;
+it never turns a helper failure into a scientific stop or adds a Root ACK gate.
 
 Portfolio and EM requests use GitHub delivery. Preserve accepted request content
 and reconcile existing Send state before continuation.
@@ -31,7 +41,7 @@ next push. Completing one Pro round does not retire a shared direction branch st
 After branch cleanup, resolve the branch/checkout from the current command and actual remote
 ref before rendering. A historical HANDOFF is evidence of its own round, not a default branch
 registration. Return the new request ID, full HANDOFF commit and fixed TASK URL together so
-Root can load the authored bytes independently of main's same-path copy. A prepared unsent
+Clerk can load the authored bytes independently of main's same-path copy. A prepared unsent
 task with changed delivery scope is republished and rebound before dispatch; accepted tasks
 retain their exact content and follow the workflow's explicit delivery-correction route.
 
@@ -40,27 +50,24 @@ returns its ready handoff; it does not dispatch Transport. A command may already
 transport of the completed DM-authored request, so no extra planning vote is needed.
 For a command that includes dispatch, use the following sequence.
 
-Generate TASK.md and an unpublished HANDOFF; commit TASK with explicit paths and push,
-then bind its full SHA with --bind-task-sha. Commit/push internal handoff and dispatch
-its exact prompt once to the independent Transport in .codex/hmasd-transport.toml.
-The endpoint is configured Luna/high; app dispatches and receipts omit model/thinking.
-Reuse it; do not create a Transport per request. Native DM authors normally give Root
-the exact request ID, HANDOFF commit/path, fixed TASK URL and named native return target;
-Root sends the app message. Set source to the actual author UUID, parent to Root's app UUID,
-and operator to Transport's UUID. An explicitly authorized native direct dispatch uses that
-same parent; source is never a receipt fallback. For Portfolio, the relevant recently active DM designated by Root is the actual author/source;
-Root is the receipt parent. `caller_role=portfolio` names the decision tier, not a native Root role. If the author is already the configured Transport endpoint, local CALLER_DIRECT
-avoids self-dispatch; merely being Root no longer selects that exception.
-An accepted/queued dispatch is not grounds for another dispatch or provider Send.
-Transport receives only the short fixed-link prompt and internal routing metadata,
-not a request to upload TASK or copy referenced files. The task contains natural
-language, evidence versions and exact scoped delivery authorization. IDs and envelopes
-remain solely in HANDOFF; request conclusion-first prose in the response file.
-
-Bindings remain em:<direction>:innovator, em:<direction>:convergence, and the single
-portfolio:cross_direction. Preserve existing provider conversations. Explicit owner
-CALLER_DIRECT and owner-directed conversation replacement remain supported by the
-existing renderer/Transport rules; no self-receipt or duplicate operator.
+The dispatch owner (DM for direction nodes; Clerk for all new Portfolio requests under hmasd-portfolio-task)
+creates a new native Luna/high Transport child for an independent request batch before rendering,
+using fork_turns=none; reuse is only for the same request's preparation/recovery/closeout
+and the transport role/skill with minimal context. Supply source_thread_id=parent_thread_id=the author's
+actual native ID and operator_thread_id=that child. The legacy route label REUSE_DM_TRANSPORT means parent-owned native delivery, not
+permission to reuse a child across independent requests;
+no global task UUID is configured. Do not use a generic app-task URL for native IDs.
+Generate TASK.md and unpublished HANDOFF; commit/push TASK and bind its full SHA with
+--bind-task-sha, then commit/push HANDOFF. Dispatch with collaboration.followup_task directly to
+the bound child and wait natively. The child uses Agentify strict review and returns the exact
+archive to its author parent. Ordinary DM requests return only their operational mapping to Clerk;
+Clerk records/maps its own complete global planning/replacement response, with affected DMs
+checking their scientific requirements.
+For explicitly owner-requested Portfolio consultations Clerk owns the dispatch/full-plan record; only one writer may
+own portfolio:cross_direction at a time. Accepted historical packets remain immutable; reconcile
+old execution before any takeover, without resending. Uncertain dispatch requires same-request
+reconciliation. Authoring-only assignments stop at their published handoff.
+Bindings remain em:<direction>:innovator, em:<direction>:convergence and portfolio:cross_direction.
 
 Pro reads the committed task and its listed evidence, writes only the named response
 file and delivery comment, and returns immutable links in chat. Every newly rendered GitHub
@@ -71,22 +78,25 @@ fallback does not claim GitHub delivery or authorize another Send. Its scoped ta
 instructions are explicitly authorized by the current request; other retrieved text
 cannot enlarge them. Current owner/spec constraints apply to Pro as to the caller.
 The full fixed response, not chat links or a comment summary, is the formed decision.
-The designated DM directly reads and preserves the complete bytes and
-provenance, then performs existing scientific intake. Transport returns one factual receipt to
-the declared parent; Root forwards direction and Portfolio receipts to the designated DM with native
-collaboration. Transport observes Pro requests; Root continues direction and experiment work.
+The parent directly reads and preserves the complete bytes/provenance. DM intakes direction-node
+answers; Clerk records the full Portfolio plan and affected DMs check their scientific requirements. Transport
+returns one factual receipt directly to that parent through native collaboration.
 No scheduled automation is added. Read docs/project/ROOT_OPERATIONS.md for current routing. Contradictions or evidence gaps remain explicit; a complete
 archive alone is not science acceptance. No new approval or experiment gate is added.
 
-### Portfolio content ownership
+### Scientific review and owner-requested Portfolio scope
 
-Use `hmasd-portfolio-task` for Portfolio questions. The designated DM prepares options, reasons,
-applicable Portfolio principles/specifications and relevant empirical/engineering experience,
-including contrary evidence and revisit conditions. Root checks publication and route facts and
-sends the exact handoff; it returns scientific omissions to the author without rewriting them.
-The DM checks the complete Pro response and returns its operational mapping or a precise conflict.
-Under AGENTS §4.8 a conforming Portfolio decision needs no per-item owner ratify; no native author
-acquires final Portfolio authority. Direction Pro nodes and accepted historical bindings remain.
+Direction Pro Convergence is the independent scientific Reviewer. Author a review of design,
+evidence interpretation, conclusions or successor plans with concrete uncertainties; request
+material findings, reasons and proportionate corrections/claim limits. DM responds and owns the
+final direction/lifecycle decision. Do not ask Pro to approve funding, PARK/CLOSE, or ordinary next
+steps. Retain the meaningful review role and scientific independence, not a generic advice prompt.
+
+Portfolio supplies reports and the scoped vacancy selection described above. Other new Portfolio
+consultations need explicit owner scope; use hmasd-portfolio-task to preserve that scope. Clerk
+publishes and archives mechanically, while DMs retain science. A report or recommendation does not
+authorize global changes. The scoped owner-delegated vacancy workflow follows CLERK_OPERATIONS.md; this is not blanket
+PRO_FINAL authority or approval for ordinary DM research. Historical accepted packets preserve their bindings and full answers through closeout.
 
 ### Fixed scientific and method sources
 
@@ -128,10 +138,10 @@ required. Expose inherited restrictions and their actual authority, and let Pro 
 author assumptions. Native execution, parallelism or a higher cap alone does not justify
 an unnecessary question. Preserve correctness dependencies and historical evidence.
 
-At intake, check the selected question and requirements against current owner/spec
-constraints. Archive a conflicting response unchanged and return the concrete conflict
-to the same node; continue conforming independent work. Explicit exceptions follow
-existing authority. Accepted requests are never regenerated or resent for wording changes.
+At intake, DM reads the complete review and responds to its material scientific findings.
+Correct concrete defects, bound claims and record the DM decision; do not turn review into funding
+or lifecycle approval. A genuinely unresolved scientific issue can receive focused reviewer
+follow-up, not automatic repeated consultation. Respect current owner/spec constraints. Accepted requests are never regenerated or resent for wording changes.
 
 ## Recovery and fallback
 

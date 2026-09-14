@@ -1,0 +1,49 @@
+{
+  "known_invoked_command_walls": [
+    {
+      "phase": "state-and-input",
+      "wall_seconds": 0.3074196
+    },
+    {
+      "phase": "live-control",
+      "wall_seconds": 0.5472121
+    },
+    {
+      "phase": "owned-source-and-T-mapping",
+      "wall_seconds": 0.2943472
+    },
+    {
+      "phase": "assigned-main-reconciliation",
+      "wall_seconds": 1.1577084
+    },
+    {
+      "phase": "reconciliation-and-source-binding",
+      "wall_seconds": 4.6319433
+    },
+    {
+      "phase": "audit-merge-repair-and-identity",
+      "wall_seconds": 5.1601477
+    },
+    {
+      "phase": "fresh-identity-and-source-currentness",
+      "wall_seconds": 0.624637
+    },
+    {
+      "phase": "implementation-new-object-binding",
+      "wall_seconds": 0.2956007
+    },
+    {
+      "phase": "configuration-and-pure-stub-binding-check",
+      "wall_seconds": 0.5655709
+    }
+  ],
+  "known_sum_seconds": 13.584586899999998,
+  "review_command_allowance_seconds": 20,
+  "limits": {
+    "per_arm": 450,
+    "native": 900,
+    "support": 300,
+    "complete": 1200
+  },
+  "unmeasured": "Patch/agent/provider/Root/Monitor and execution-tool client tails not included in command reports remain separate unknowns. No complete compliance certificate is inferred. No training/evaluation has occurred."
+}

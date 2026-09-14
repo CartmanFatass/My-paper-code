@@ -1,0 +1,293 @@
+{
+  "action_law": {
+    "distance_field": 76,
+    "nearest_probability": 0.99,
+    "other_probability": 0.002,
+    "pointer_output_initially_zero": true,
+    "tie": "first candidate"
+  },
+  "actor_score_weight": 100,
+  "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911/temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/learned-admission.json",
+  "allocations": {
+    "models": 7,
+    "training_instances": 1,
+    "untrained_helpers": 6
+  },
+  "arm": "learned",
+  "block_digest_hex": "c2025cc336c464a7786be608fa6c4955e33418bc0bab06f3e1e3cc358dbac6f1",
+  "cells": {
+    "12_to_12.ACTIVE_CONTINUATION": {
+      "40U_mean": 9.786132812500002,
+      "F_mean": 0.23981119791666666,
+      "U_mean": 0.24465332031250003,
+      "Y_mean": 0.7522379557291667,
+      "episodes": 256,
+      "tau40_count": 252,
+      "tau40_fraction": 0.984375,
+      "tau_mean": 39.375
+    },
+    "12_to_12.NEW_EPOCH": {
+      "40U_mean": 10.453450520833334,
+      "F_mean": 0.23792317708333333,
+      "U_mean": 0.26133626302083335,
+      "Y_mean": 0.7419535319010417,
+      "episodes": 256,
+      "tau40_count": 256,
+      "tau40_fraction": 1.0,
+      "tau_mean": 40.0
+    },
+    "12_to_8.ACTIVE_CONTINUATION": {
+      "40U_mean": 13.0087890625,
+      "F_mean": 0.32001953125,
+      "U_mean": 0.3252197265625,
+      "Y_mean": 0.7014668782552084,
+      "episodes": 256,
+      "tau40_count": 255,
+      "tau40_fraction": 0.99609375,
+      "tau_mean": 39.96875
+    },
+    "12_to_8.NEW_EPOCH": {
+      "40U_mean": 13.6611328125,
+      "F_mean": 0.32138671875,
+      "U_mean": 0.3415283203125,
+      "Y_mean": 0.6915283203125,
+      "episodes": 256,
+      "tau40_count": 246,
+      "tau40_fraction": 0.9609375,
+      "tau_mean": 39.046875
+    },
+    "8_to_12.ACTIVE_CONTINUATION": {
+      "40U_mean": 9.989583333333336,
+      "F_mean": 0.24274088541666666,
+      "U_mean": 0.24973958333333338,
+      "Y_mean": 0.718523661295573,
+      "episodes": 256,
+      "tau40_count": 254,
+      "tau40_fraction": 0.9921875,
+      "tau_mean": 39.703125
+    },
+    "8_to_12.NEW_EPOCH": {
+      "40U_mean": 10.422200520833336,
+      "F_mean": 0.24078776041666666,
+      "U_mean": 0.2605550130208334,
+      "Y_mean": 0.7127176920572917,
+      "episodes": 256,
+      "tau40_count": 253,
+      "tau40_fraction": 0.98828125,
+      "tau_mean": 39.55078125
+    },
+    "8_to_8.ACTIVE_CONTINUATION": {
+      "40U_mean": 12.8984375,
+      "F_mean": 0.3177734375,
+      "U_mean": 0.3224609375,
+      "Y_mean": 0.6718826293945312,
+      "episodes": 256,
+      "tau40_count": 249,
+      "tau40_fraction": 0.97265625,
+      "tau_mean": 39.375
+    },
+    "8_to_8.NEW_EPOCH": {
+      "40U_mean": 13.30322265625,
+      "F_mean": 0.310546875,
+      "U_mean": 0.33258056640625,
+      "Y_mean": 0.6693267822265625,
+      "episodes": 256,
+      "tau40_count": 247,
+      "tau40_fraction": 0.96484375,
+      "tau_mean": 39.140625
+    }
+  },
+  "counts": {
+    "backward_step_calls": 1000,
+    "final_episodes": 2048,
+    "init_episodes": 2048,
+    "nonzero_steps": 1000,
+    "training_episodes": 64000
+  },
+  "eight_cell_mean": {
+    "40U_mean": 11.69036865234375,
+    "F_mean": 0.27887369791666666,
+    "U_mean": 0.29225921630859375,
+    "Y_mean": 0.7074546813964844,
+    "cells": [
+      "8_to_8.ACTIVE_CONTINUATION",
+      "8_to_8.NEW_EPOCH",
+      "12_to_12.ACTIVE_CONTINUATION",
+      "12_to_12.NEW_EPOCH",
+      "8_to_12.ACTIVE_CONTINUATION",
+      "8_to_12.NEW_EPOCH",
+      "12_to_8.ACTIVE_CONTINUATION",
+      "12_to_8.NEW_EPOCH"
+    ],
+    "tau40_fraction": 0.982421875,
+    "tau_mean": 39.52001953125
+  },
+  "final_baselines": [
+    0.6597456869454564,
+    0.6552249838278769,
+    0.709889587566623,
+    0.6910747509083999,
+    0.6888559971630093,
+    0.6857312725608271,
+    0.6829696480677864,
+    0.666670491592488
+  ],
+  "final_displacement": 0.7146701784668121,
+  "initial_parameter_norm": 21.14779419060397,
+  "initialization_summary": {
+    "cells": {
+      "12_to_12.ACTIVE_CONTINUATION": {
+        "40U_mean": 9.776041666666668,
+        "F_mean": 0.23929036458333333,
+        "U_mean": 0.2444010416666667,
+        "Y_mean": 0.7523752848307292,
+        "episodes": 256,
+        "tau40_count": 252,
+        "tau40_fraction": 0.984375,
+        "tau_mean": 39.375
+      },
+      "12_to_12.NEW_EPOCH": {
+        "40U_mean": 10.457682291666668,
+        "F_mean": 0.23792317708333333,
+        "U_mean": 0.2614420572916667,
+        "Y_mean": 0.741729736328125,
+        "episodes": 256,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "12_to_8.ACTIVE_CONTINUATION": {
+        "40U_mean": 12.98974609375,
+        "F_mean": 0.319580078125,
+        "U_mean": 0.32474365234375,
+        "Y_mean": 0.701738993326823,
+        "episodes": 256,
+        "tau40_count": 255,
+        "tau40_fraction": 0.99609375,
+        "tau_mean": 39.96875
+      },
+      "12_to_8.NEW_EPOCH": {
+        "40U_mean": 13.65087890625,
+        "F_mean": 0.3208984375,
+        "U_mean": 0.34127197265625,
+        "Y_mean": 0.6919174194335938,
+        "episodes": 256,
+        "tau40_count": 247,
+        "tau40_fraction": 0.96484375,
+        "tau_mean": 39.1328125
+      },
+      "8_to_12.ACTIVE_CONTINUATION": {
+        "40U_mean": 10.000000000000002,
+        "F_mean": 0.24287109375000002,
+        "U_mean": 0.25000000000000006,
+        "Y_mean": 0.7183609008789064,
+        "episodes": 256,
+        "tau40_count": 254,
+        "tau40_fraction": 0.9921875,
+        "tau_mean": 39.703125
+      },
+      "8_to_12.NEW_EPOCH": {
+        "40U_mean": 10.410156250000002,
+        "F_mean": 0.24046223958333335,
+        "U_mean": 0.26025390625000006,
+        "Y_mean": 0.712890625,
+        "episodes": 256,
+        "tau40_count": 253,
+        "tau40_fraction": 0.98828125,
+        "tau_mean": 39.55078125
+      },
+      "8_to_8.ACTIVE_CONTINUATION": {
+        "40U_mean": 12.90087890625,
+        "F_mean": 0.318017578125,
+        "U_mean": 0.32252197265625,
+        "Y_mean": 0.6718521118164062,
+        "episodes": 256,
+        "tau40_count": 248,
+        "tau40_fraction": 0.96875,
+        "tau_mean": 39.34375
+      },
+      "8_to_8.NEW_EPOCH": {
+        "40U_mean": 13.3291015625,
+        "F_mean": 0.31123046875,
+        "U_mean": 0.3332275390625,
+        "Y_mean": 0.6689224243164062,
+        "episodes": 256,
+        "tau40_count": 247,
+        "tau40_fraction": 0.96484375,
+        "tau_mean": 39.140625
+      }
+    },
+    "eight_cell_mean": {
+      "40U_mean": 11.689310709635418,
+      "F_mean": 0.2787841796875,
+      "U_mean": 0.29223276774088547,
+      "Y_mean": 0.7074734369913738,
+      "cells": [
+        "8_to_8.ACTIVE_CONTINUATION",
+        "8_to_8.NEW_EPOCH",
+        "12_to_12.ACTIVE_CONTINUATION",
+        "12_to_12.NEW_EPOCH",
+        "8_to_12.ACTIVE_CONTINUATION",
+        "8_to_12.NEW_EPOCH",
+        "12_to_8.ACTIVE_CONTINUATION",
+        "12_to_8.NEW_EPOCH"
+      ],
+      "tau40_fraction": 0.982421875,
+      "tau_mean": 39.52685546875
+    }
+  },
+  "launch_sha": "baf63642a776ef3e60f4310ce47d76c45168c283",
+  "native": {
+    "abi": {
+      "abi_version": 2,
+      "event_input_size": 64,
+      "fixture_input_size": 224,
+      "fixture_magic": 5927665395199787847,
+      "snapshot_size": 464,
+      "step_input_size": 64
+    },
+    "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+    "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+    "load_seconds": 0.004263059003278613,
+    "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+    "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+    "runtime_abi": {
+      "byteorder": "little",
+      "cache_tag": "cpython-310",
+      "event_input_size": 64,
+      "fixture_input_size": 224,
+      "implementation": "cpython",
+      "machine": "x86_64",
+      "pointer_bits": 64,
+      "python_version": [
+        3,
+        10,
+        21
+      ],
+      "snapshot_size": 464,
+      "step_input_size": 64
+    },
+    "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+    "toolchain": {
+      "compile_flags": [
+        "-std=c++17",
+        "-O2",
+        "-fexceptions",
+        "-shared",
+        "-fPIC",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fno-unsafe-math-optimizations"
+      ],
+      "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+      "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+    }
+  },
+  "object": "RCLE-TBCFV-B06-NEAREST99-PRIOR1000",
+  "peak_rss_bytes": 585994240,
+  "root_key_hex": "43448f432f37cfc458c34aa494492b152b8c56ed5cc5054d69040030b772facb",
+  "seed": 26,
+  "status": "COMPLETE",
+  "updates_per_fit": 1000,
+  "wall_seconds": 313.3898086330155
+}

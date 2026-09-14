@@ -1,0 +1,134 @@
+{
+  "prepared_at_utc": "2026-09-12T03:15:52.893065+00:00",
+  "method": "Reuse committed accepted counts and observations; no new scientific imports, RNG draw, fit, evaluation, empirical interval, t quantile or calibration.",
+  "authority": {
+    "portfolio_response_sha": "05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+    "mapping_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+    "assignment": "2: the one original Innovator review after conforming actual promotion, before C freeze",
+    "promotion_response_sha": "103b8f811388089c714383708a13526f9a06aff3",
+    "promotion_response_git_sha256": "e4a71044732c39ee67aa0edcb10b33b769e563ebf5ab6d5115a48eebd3ca2ebe",
+    "promotion_intake_sha": "3a7f2a0297a6900c7c17bd6acf929e4897deeae4",
+    "receipt_correction_sha": "bf9dad3a06bdffb23679db99038ed4a7eb3b5a25"
+  },
+  "reused_count_and_evidence_source": {
+    "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/FACTS.json",
+    "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+    "sha256": "948e6af990c1406c6ca891fdef703dda3c912d9939d2176171e04841e655dd5e"
+  },
+  "current_new_scientific_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "model_loads": 0,
+    "scientific_rng_masters": 0,
+    "native_ticks": 0,
+    "training_episodes": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "search_candidates": 0
+  },
+  "planned_one_complete_unit": {
+    "fresh_fits": 1,
+    "training_episodes": 512,
+    "training_native_ticks": 131072,
+    "evaluation_panels": 3,
+    "evaluation_episodes": 192,
+    "evaluation_native_ticks": 49152,
+    "total_episodes": 704,
+    "native_ticks": 180224,
+    "adam_calls": 1024,
+    "training_collection_actor_rows": 655360,
+    "recurrent_replay_actor_rows": 2621440,
+    "critic_update_rows": 524288,
+    "evaluation_actor_rows": 245760,
+    "top_level_model_constructions": 9,
+    "postfit_loads": 3,
+    "coordinate_pair_check_upper_bound": 6553600
+  },
+  "planned_five_complete_units": {
+    "fresh_fits": 5,
+    "training_episodes": 2560,
+    "training_native_ticks": 655360,
+    "evaluation_panels": 15,
+    "evaluation_episodes": 960,
+    "evaluation_native_ticks": 245760,
+    "total_episodes": 3520,
+    "native_ticks": 901120,
+    "adam_calls": 5120,
+    "training_collection_actor_rows": 3276800,
+    "recurrent_replay_actor_rows": 13107200,
+    "critic_update_rows": 2621440,
+    "evaluation_actor_rows": 1228800,
+    "top_level_model_constructions": 45,
+    "postfit_loads": 15,
+    "coordinate_pair_check_upper_bound": 32768000
+  },
+  "new_allocation_caps_s": {
+    "per_native_unit": 270,
+    "native_sum": 1350,
+    "all_invoked_support": 1650,
+    "complete_invoked_work": 3000
+  },
+  "inference": {
+    "independent_unit": "one fresh fit plus its complete finite 64-world/rule panel",
+    "n_units": 5,
+    "primaries": [
+      "F-C",
+      "F-dwell"
+    ],
+    "margin_J_each": 0.01,
+    "weights": "equal worlds within each unit; equal five fit means",
+    "interval_each": "mean +/- t_(0.9875,4) sample_SD(five fit means)/sqrt(5)",
+    "coverage_qualification": "97.5% two-sided marginal and at least 95% simultaneous under iid normal fit-panel means; practical neural-training calibration is model-dependent/provisional, not distribution-free",
+    "joint_rule": "both lower endpoints strictly greater than 0.01 J",
+    "namespace_law_and_bindings": "not drawn or frozen; bind outcome-blind law and full five-unit list only after conforming proper-node decisions, before any question-relevant execution"
+  },
+  "headroom": "No tuned same-information native-host headroom record; not zero and not a launch gate.",
+  "fresh_development_contrasts": [
+    {
+      "master": 8921,
+      "F-C_mean_J": 0.12293285602315951,
+      "F-dwell_mean_J": 0.08771646857302401,
+      "dwell-C_mean_J": 0.03521638745013549,
+      "F-dwell_adverse_worlds": 5,
+      "F-dwell_min_J": -0.04488634486434541
+    },
+    {
+      "master": 8931,
+      "F-C_mean_J": 0.09152798436651123,
+      "F-dwell_mean_J": 0.06389986691206033,
+      "dwell-C_mean_J": 0.027628117454450894,
+      "F-dwell_adverse_worlds": 11,
+      "F-dwell_min_J": -0.05700477550728157
+    },
+    {
+      "master": 8961,
+      "F-C_mean_J": 0.1414322040978905,
+      "F-dwell_mean_J": 0.0944113176016341,
+      "dwell-C_mean_J": 0.047020886496256416,
+      "F-dwell_adverse_worlds": 5,
+      "F-dwell_min_J": -0.07931548140454164
+    }
+  ],
+  "all_existing_fits_are_development": true,
+  "historical_cost_anchors": {
+    "known_historical_complete_command_s": [
+      168.37,
+      166.05,
+      175.58
+    ],
+    "historical_conservative_native_charge_s": [
+      172,
+      169,
+      178
+    ],
+    "historical_8961_known_support_s": 72.304424,
+    "future_actual_cost": "unknown; caps are a planning envelope, not measured cost or old credit",
+    "support_includes": "both proper-node preparations/intakes, card/source/analysis, invoked checks/review, delivery, Monitor, collection, publication/integration, scoped closeout, counted once",
+    "separately_unknown": "provider generation/queue, deliberation, and unmeasured client/message overhead are explicitly qualified; never asserted zero",
+    "no_renewal": "old 8951/8961 and 270/330/600 allocations remain ended"
+  },
+  "actual_namespace_law_list_card_source_binding": "not yet chosen/drawn/frozen or implemented; only after conforming Innovator and before any new question-relevant execution",
+  "stop": "Rejection, material design change, concrete blocker or unmet envelope stops dependent continuation. No extra question, substitute population/inference/arms, sixth/replacement fit, extra panel, top-up or interim efficacy/futility stop.",
+  "current_stage": "Actual Convergence promotion accepted; exactly one funded original Innovator review is being prepared. No C freeze or source acceptance is implied."
+}

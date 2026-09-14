@@ -1,0 +1,32 @@
+{
+  "source": "Root routed actual MONITOR_ADOPTED receipt",
+  "handle": "fsd-uav-renewal-batch-b02-771303-D0-20260912",
+  "goal": {
+    "state": "unfinished",
+    "objective": "Observe accepted handle fsd-uav-renewal-batch-b02-771303-D0-20260912 through terminal completion; deliver terminal notification to Root and finish only after accepted delivery."
+  },
+  "status": "running",
+  "exit_code": null,
+  "pid": 3394294,
+  "tmux_active": true,
+  "uptime_seconds": 41,
+  "node": "hmasd-wsl-node",
+  "source_sha": "8ea629595da592dfce9b7774341863a7115c7cef",
+  "cwd": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771303-20260912",
+  "output": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771303-20260912/temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771303/D0",
+  "main_integrations": [
+    "3cbfae297",
+    "c5b9d1e1d"
+  ],
+  "observation_owner": "independent Monitor",
+  "dm_retains": [
+    "terminal collection",
+    "technical acceptance",
+    "preselected I under fresh admission",
+    "paired intake",
+    "authorized cleanup"
+  ],
+  "routine_polling": false,
+  "duplicate_ADD": false,
+  "new_scientific_submissions": 0
+}

@@ -1,0 +1,126 @@
+{
+  "read_at_utc": "2026-09-12T00:41:46.698Z",
+  "read_method": "GitHub connector fetch_issue and fetch_issue_comments, all 14 normalized comments",
+  "issue": {
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/17",
+    "title": "Portfolio: next five advancing chains after completed synthesis",
+    "body": "Choose the next five advancing research chains after the completed 2026-09-09 synthesis allocation. Compare FOLR, UCOPE, VSP03, RCLE, ACVC and the CBSC/FRRIE readiness alternatives. State bounded next investments, first actions, counterevidence, stops and full cost limits or explicit unknowns, preserving stopped families and second-recast ordering.\r\n\r\nFixed TASK scope: docs/research/portfolio/pro_packets/20260910_next_five_chains on existing codex/portfolio. Pro delivery: only this round archive/RESPONSE.md plus one immutable delivery-link comment here. No code, main, experiments or historical-request changes.\r\n\r\nThis new investment question does not alter the completed foundations-special-review Issue #16.\r\n",
+    "state": "open",
+    "comments": 14,
+    "updated_at": "2026-09-11T23:10:36Z"
+  },
+  "comments": [
+    {
+      "id": 5621611566,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5621611566",
+      "body": "Delivered this round's complete Portfolio decision: https://github.com/CartmanFatass/My-paper-code/blob/08e989073839fe5f0f91c6a8ad90a399bee37b6c/docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md\n\nFixed task: https://github.com/CartmanFatass/My-paper-code/blob/38653196ba2a6c8503cdf9db3fb49fae6d9cb7ba/docs/research/portfolio/pro_packets/20260910_next_five_chains/TASK.md\n\nCommit 08e989073839fe5f0f91c6a8ad90a399bee37b6c adds only the specified response file on codex/portfolio. Fixed scientific inputs and historical decisions are preserved; no experiment was executed.",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5622974120,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5622974120",
+      "body": "Delivered the complete ACVC fresh-DENSE allocation decision for this new round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/caf8cf61d92fb3a669f93439a0e2b9967eca943c/docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/17ee7705658f7c540eea51f9d91c9a04ce327c66/docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/TASK.md\n\nCommit caf8cf61d92fb3a669f93439a0e2b9967eca943c adds only the specified response file on codex/portfolio. The full file was read back. No experiment, science-code/card edit, main change or modification of the preceding next-five response was performed.",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5626718531,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5626718531",
+      "body": "Delivered the complete rolling-successor allocation decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/b4d71be60f789e97bf1f4c7130bb9995fc84f387/docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/134f9aaa4e1f82af05a61f291a796f373ceebfb9/docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/TASK.md\n\nCommit b4d71be60f789e97bf1f4c7130bb9995fc84f387 adds only the specified response file on codex/portfolio. The complete file was read back, and the commit comparison confirms that single-path scope. No experiment, source/card/Portfolio-state edit, main change or rewrite of either previous response was performed.",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5627190792,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5627190792",
+      "body": "Prepared a separate Portfolio question for the **one remaining fifth vacancy** after the complete A decision allocated FOLR, UCOPE, RCLE and ACVC. Those four allocations remain unchanged and excluded here.\r\n\r\n[Read the fixed task](https://github.com/CartmanFatass/My-paper-code/blob/9ada5ce1793862fc57aea4fd9b71ca9a83a64514/docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/TASK.md). Recommendation only: one bounded FSD source/design return, with MGTAP as the single conditional fallback; VSP03 is a substantive competing option. The requested first actions have zero numerical allowance and preserve existing family stops, priorities/recasts and access restrictions.\r\n\r\nThis is preparation for the normal Transport route, not a formed Portfolio decision. The complete response belongs only at `docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/archive/RESPONSE.md` on `codex/portfolio`, with its own immutable delivery-link comment. Previous accepted tasks and deliveries remain intact.\r\n",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5627433082,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5627433082",
+      "body": "Delivered the complete fifth-vacancy Portfolio decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/f4fce9a4fd9603db66463ad8c81bb9464533e260/docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/9ada5ce1793862fc57aea4fd9b71ca9a83a64514/docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/TASK.md\n\nCommit f4fce9a4fd9603db66463ad8c81bb9464533e260 adds only the specified response file on codex/portfolio. The complete file was read back and the commit comparison confirms the single-path scope. No experiment, source/card/Portfolio-state edit, main change or rewrite of previous responses was performed.",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5627828518,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5627828518",
+      "body": "Prepared new request `2026-09-10-four-slot-rolling-refill-01` for the same `portfolio:cross_direction` node.\r\n\r\nThe fixed [TASK](https://github.com/CartmanFatass/My-paper-code/blob/0a49fcc5659723e260f4d64d9892d25d3234b16c/docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/TASK.md) asks for up to four independent rolling replacements alongside the active FSD design, preserving its MGTAP-only fallback. Recommendation A compares UCOPE L/F (3300 s), RCLE nearest-prior (300 s), one zero-numerical FOLR Convergence question and one ACVC fresh fit (360 s); B substitutes the explicitly conditional VSP03 60 s opportunity. These are pending proposals, not local Portfolio decisions or released budgets.\r\n\r\nAuthor preparation has zero scientific/model/test/provider-Send exposure. Root dispatches the bound HANDOFF once to the existing Transport task. This is a new question, not a resend of the completed fifth-vacancy request.\r\n\r\nThe scoped response is `docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md` on current descendant `codex/portfolio` HEAD. Preserve earlier requests, responses and all unrelated paths.\r\n",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5629259208,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5629259208",
+      "body": "Delivered the complete four-slot rolling-refill Portfolio decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/1ea43d8fbc846807d71d4d894136f357f65551b6/docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/0a49fcc5659723e260f4d64d9892d25d3234b16c/docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/TASK.md\n\nCommit 1ea43d8fbc846807d71d4d894136f357f65551b6 adds only the specified response file on codex/portfolio, preserving concurrent changes. The complete response was read back, and comparison with its actual parent confirms the single-path scope. No experiment, source/card/Portfolio-state edit, main change or rewrite of a previous response was performed.",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5629909662,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5629909662",
+      "body": "Delivered the complete fifth-slot implementation-selection Portfolio decision:\nhttps://github.com/CartmanFatass/My-paper-code/blob/ade6a687d53b97b5f6cc2fe97da39daa2ad9bfa9/docs/research/portfolio/pro_packets/20260910_fifth_slot_implementation_selection/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/8e09049351afdd582bb4d4b264f34a821ad2e988/docs/research/portfolio/pro_packets/20260910_fifth_slot_implementation_selection/TASK.md\n\nCommit ade6a687d53b97b5f6cc2fe97da39daa2ad9bfa9 adds only the specified response file on codex/portfolio. The complete file was read back; comparison with parent 685c955a34ea4d6d0b2f2814b5a2200a4b2ca29f confirms single-path scope. No experiment, source/card/main edit or rewrite of previous responses was performed.\n\nTwo editorial clarifications identified on readback, preserving the delivered file: the source-gap table's assemble_pair phrase means I1280 batch 1280 versus D0 batch 128, as its make_config row explicitly specifies; the access paragraph's initial “twenty” is a count typo—the correct mapping is nineteen current-source files, three packet files and three special-version files, totaling 25, as that paragraph's final sentence and the per-file links specify. These clarify wording only; the selected option, check limits, scientific boundaries and source versions are unchanged.",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5631089878,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5631089878",
+      "body": "Delivered the complete five-chain refill Portfolio decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/ed0c4e1c3cd28be353253e8533bc89a261f25357/docs/research/portfolio/pro_packets/20260911_five_chain_refill/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/ab86a358828bdb6dd874780bf7614fe4d69f144a/docs/research/portfolio/pro_packets/20260911_five_chain_refill/TASK.md\n\nCommit ed0c4e1c3cd28be353253e8533bc89a261f25357 adds only the specified response file on codex/portfolio. The complete file was read back; comparison with parent e1fb5d66cdd9f88790bbc6e4bb9a90c8947bc86f confirms single-path scope. No scientific execution, source/card/Portfolio-state edit, main change or rewrite of earlier responses was performed.\n\nEditorial clarification identified on readback, preserving the delivered file: the access paragraph's phrase \"three small implementation sources\" is a counting slip. Four code files were read: the FSD entry, RCLE entry and study, and geometry.py, as the reference list records. All 35 evidence-path mappings, the selected investments, budgets and scientific boundaries are unchanged.",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5637047130,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5637047130",
+      "body": "Delivered the complete post-option-A execution-refill Portfolio decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/9a2789640f3e5663b4cd72736ba953bfa809095d/docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/b6b61e16680dc7ebe0aebebbb48dcbb62ab5130d/docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/TASK.md\n\nCommit 9a2789640f3e5663b4cd72736ba953bfa809095d adds only the specified response file on codex/portfolio. The complete 218-line response, including its fixed-reference definitions, was read back. Comparison with parent dbd529764c1ff01133ab5d7e8ab433c077171fd6 confirms the single-path addition and preserves concurrent changes. No scientific execution, source/card/Portfolio-state edit, main change or rewrite of prior responses was performed.",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5638193779,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5638193779",
+      "body": "Delivered the complete remaining-capacity refill Portfolio decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/0dbbcbf807509ccc34a3a1de353114be88896897/docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/aa5ba9120e63c8520e121af58892b1c4118324f0/docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/TASK.md\n\nCommit 0dbbcbf807509ccc34a3a1de353114be88896897 adds only the specified response file on codex/portfolio. The complete 247-line response, including all fixed-reference definitions, was read back. Comparison with parent 3f6b888fcd55180d354323b99dc87a5e91216799 confirms the single-path addition. No scientific execution, source/card/Portfolio-state edit, main change or rewrite of earlier responses was performed.\n\nProvenance clarification, preserving the delivered file: section 2's VNFC original-click no-effect statement comes from SCIENCE_BRIEF section 1, which summarizes Transport reconciliation. The archived Transport JSON records the retry and terminal receipt. This is supplied evidence, not a fresh browser observation by this reviewer; the allocation, budgets, no-further-Send boundary and scientific conclusions are unchanged.",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5639210136,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5639210136",
+      "body": "Delivered the complete two-vacancy refill Portfolio decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/a9adb7f003780e976f8d24d2390efa9517d469bc/docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/4077f460a1d1d9148605a32765d58516d7776473/docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/TASK.md\n\nCommit a9adb7f003780e976f8d24d2390efa9517d469bc adds only the specified response file on codex/portfolio. The complete 163-line response, including all fixed-reference definitions, was read back. Comparison with parent 5b9bfee404e436a086e4d97074bd08ae24cd0607 confirms the single-path addition. No scientific execution, source/card/Portfolio-state edit, main change or rewrite of earlier responses was performed.",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5640511203,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5640511203",
+      "body": "Delivered the complete open-directions research-program decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/6c32ade3216c374ecf2f5179b15d559729cd45c9/docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/5ef377713bfcdcc41621d86d0df4ea86a04c1e92/docs/research/portfolio/pro_packets/20260911_open_directions_program/TASK.md\n\nCommit 6c32ade3216c374ecf2f5179b15d559729cd45c9 adds only the specified response file on codex/portfolio. The complete 223-line response, including all fixed-reference definitions, was read back. Comparison with parent 655820def916691fb29ff199449a4115ea9639b1 confirms the single-path addition. No scientific execution, source/card/Portfolio-state edit, main change or rewrite of earlier responses was performed.\n\nTerminology clarification, preserving the delivered file: the opening's phrase “containing information-matched null” refers only to RETAIN having the same legal information. It does not establish functional policy-class containment or architectural equivalence. Section 3's same-information, finite-package interpretation controls; all selections, budgets, repair dependencies and claim ceilings are unchanged.",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    },
+    {
+      "id": 5641681525,
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5641681525",
+      "body": "Delivered the complete post-program-vacancies Portfolio decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/50703c1bd1a4411c31a0b211d3ec8aff88fa0d0f/docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/0cd37928e05cc442632f146835829760522cb85a/docs/research/portfolio/pro_packets/20260911_post_program_vacancies/delivery/TASK.md\n\nCommit 50703c1bd1a4411c31a0b211d3ec8aff88fa0d0f adds only the specified response file on codex/portfolio. The complete 224-line response, including all fixed-reference definitions, was read back. Comparison with parent d7cb91d576290826ae4496d577c8146421781c92 confirms the single-path addition. No scientific execution, source/card/Portfolio-state edit, main change or rewrite of earlier responses was performed.\n\nEditorial clarification, preserving the delivered file: the opening shorthand that RCLE's near-nearest initialization “barely improved” must not be read as a positive aggregate learning result. Section 5 controls: B06 G_U = -0.000107828776042, with local cell gains and opposing active-path signs but no positive aggregate initialization gain. B + P, all budgets, the explicit vacancy and the VNFC readiness condition are unchanged.",
+      "created_at": null,
+      "updated_at": null,
+      "author": "CartmanFatass"
+    }
+  ]
+}

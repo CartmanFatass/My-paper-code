@@ -1,0 +1,8 @@
+{
+  "label": "preserved exact remote checkout/supervisor/staging cleanup",
+  "wall_s": 0.611828199995216,
+  "exit_code": 0,
+  "timed_out": false,
+  "stdout": "{\"removed_paths_absent\": {\"/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8961-62d7eae7d\": true, \"/home/wu/.agent-tasks/acvc-fresh-dense-b01-8961-62d7eae7d\": true, \"/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d.bundle\": true, \"/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8961-62d7eae7d-collected.tar.gz\": true}, \"worktree_unregistered\": true, \"tmux_absent\": true, \"source_sha\": \"62d7eae7dedf5560171d636e845286108a4bc528\"}\n",
+  "stderr": ""
+}

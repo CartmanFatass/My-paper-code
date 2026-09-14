@@ -1,0 +1,19 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "FOLR_ENTITY_HISTORY_B01_781201",
+      "arm": "BANK",
+      "n": 1,
+      "mean": -4.32609375,
+      "sample_sd": null,
+      "min": -4.32609375,
+      "max": -4.32609375,
+      "runs": {
+        "781201": -4.32609375
+      }
+    }
+  ],
+  "paired_differences": []
+}

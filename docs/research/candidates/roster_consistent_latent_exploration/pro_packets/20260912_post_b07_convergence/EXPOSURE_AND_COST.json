@@ -1,0 +1,41 @@
+{
+  "current_unit": "one original post-B07 Convergence question and complete intake",
+  "authority": "PRO_FINAL R=yes main0c0648bd06d96c8839bcfaa72f469c7f339a0405 plus current owner continuity",
+  "actual_new_scientific_exposure": {
+    "implementation": 0,
+    "models_constructed": 0,
+    "models_loaded": 0,
+    "scientific_rng_roots": 0,
+    "tapes": 0,
+    "episodes": 0,
+    "environment_ticks": 0,
+    "derivative_traversals": 0,
+    "parameter_updates": 0,
+    "evaluations": 0,
+    "numerical_reanalysis": 0,
+    "tests": 0,
+    "profilers": 0
+  },
+  "machine_generated_exposure_line": "R documentary unit: implementation0/models0/loads0/scientific-RNG0/tapes0/episodes0/ticks0/derivatives0/updates0/evaluations0/numerical-reanalysis0/tests0/profilers0; no learner or parameter movement in this unit.",
+  "historical_B07_counts_reused_not_reexecuted": {
+    "training_episodes": 64000,
+    "init_episodes": 2048,
+    "final_episodes": 2048,
+    "reference_episodes": 2048,
+    "completed_episodes": 70144,
+    "completed_native_ticks": 4489216,
+    "derivative_traversals": 2000,
+    "nonzero_updates": 1000,
+    "failed_reference_unreturned_work": "unknown; physical total includes this in addition to completed counts"
+  },
+  "historical_B07_work_law": "one fit;1000x64 train;3x8x256 endpoint panels;two full derivatives/block;ordinary6-candidate scoring;26161 FP64 coordinates. No nested search or additional validation execution.",
+  "historical_B07_native_s": 343.43,
+  "historical_B07_known_support_through_cleanup_publication_s": 103.0701674,
+  "historical_B07_full_cost": "unknown prior review/Monitor/Root/delivery tails; no new grant or forecast",
+  "historical_B06_native_s": 335.86,
+  "current_complete_documentary_invoked_provider_agent_cost": "explicitly accepted UNKNOWN; not free",
+  "current_numerical_allowance": 0,
+  "current_implementation_allowance": 0,
+  "future_unchanged_candidate": "unfunded if retained;no seed/command/fit/allocation selected",
+  "pro_provider_sends_by_author": 0
+}

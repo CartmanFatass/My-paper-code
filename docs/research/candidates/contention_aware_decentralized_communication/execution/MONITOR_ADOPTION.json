@@ -1,0 +1,17 @@
+{
+  "source":"Root native forwarding of actual Monitor adoption receipts",
+  "monitor_thread_id":"01a095d0-21ee-7c02-9d97-3681b5678200",
+  "root_thread_id":"01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "actual_goal_state":"existing active unfinished goal, holding both CADC handles; MGTAP also remains active",
+  "goal_id":"not supplied in forwarded receipt",
+  "adopted":true,
+  "source_sha":"22e009c9387f2507aab6ebab4555d92e27f5070e",
+  "runtime_cwd":"/home/wu/hmasd-worktrees/cadc-b01-9302-20260912",
+  "handles":[
+    {"handle":"cadc-b01-9302-learned-20260912","status":"running","pid":3405003,"tmux_active":true,"observed_uptime_seconds":75,"arm":"LEARNED"},
+    {"handle":"cadc-b01-9302-rr-20260912","status":"running","pid":3405239,"tmux_active":true,"observed_uptime_seconds":41,"arm":"RR"}
+  ],
+  "root_instruction":"Stop routine polling; retain terminal collection, technical/scientific intake and cleanup for both preselected arms. No duplicate ADD/retry/extra arm.",
+  "dm_state":"collection pending; routine polling ceased after actual adoption; no further supervisor or result polling",
+  "terminal_delivery":"pending"
+}

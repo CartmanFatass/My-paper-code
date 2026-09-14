@@ -1,0 +1,82 @@
+{
+  "attempt": "initial mechanical collection",
+  "accepted_archive": false,
+  "error": "remote AssertionError at line11 before archive publication; reconcile exact run file set",
+  "result_inspection": {
+    "files": [
+      {
+        "name": "summary.json",
+        "directory": false,
+        "bytes": 49539
+      },
+      {
+        "name": "training.jsonl",
+        "directory": false,
+        "bytes": 22343
+      },
+      {
+        "name": "learner_logs",
+        "directory": true,
+        "bytes": 4096
+      },
+      {
+        "name": "manifest.json",
+        "directory": false,
+        "bytes": 1612
+      },
+      {
+        "name": "evaluation_logs",
+        "directory": true,
+        "bytes": 4096
+      }
+    ],
+    "summary_keys": [
+      "object_id",
+      "card",
+      "arm",
+      "launch_sha",
+      "training_seed",
+      "evaluation_seed",
+      "training_lane_seeds",
+      "evaluation_lane_seeds",
+      "host",
+      "device",
+      "torch_threads",
+      "learner_precision",
+      "reward_return_precision",
+      "native_score_factor",
+      "cap_seconds",
+      "summed_pair_cap_seconds",
+      "status",
+      "failure",
+      "learner_config",
+      "evaluation_config",
+      "training_rows",
+      "evaluation",
+      "initial_parameter_norms",
+      "optimizer_calls",
+      "counts",
+      "last_completed_boundary",
+      "wall_seconds_before_publication",
+      "optimizer_present",
+      "evaluation_optimizer_calls",
+      "peak_rss_bytes"
+    ],
+    "status": "complete",
+    "error": null,
+    "counts": {
+      "model_constructions": 2,
+      "training_starts": 1,
+      "checkpoint_loads": 0,
+      "training_transitions": 40000,
+      "stored_training_transitions": 40000,
+      "training_episodes": 80,
+      "update_stages": 5,
+      "training_agent_step_batches": 2500,
+      "evaluation_steps": 16000,
+      "evaluation_episodes": 32,
+      "evaluation_agent_step_batches": 500
+    }
+  },
+  "new_scientific_invocations": 0
+}

@@ -1,0 +1,103 @@
+{
+  "targets": [
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01",
+      "resolved": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01",
+      "under_expected_parent": true,
+      "head": "b93329b3c44ea9d0cf5622c00f5ca6eea0740dac",
+      "detached": true,
+      "locked": false,
+      "source_and_ignored_inventory_unchanged": true
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912",
+      "resolved": "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912",
+      "under_expected_parent": true,
+      "head": "d76d96cbe3df9b598e0db695a8b39deb23e7bdb1",
+      "detached": true,
+      "locked": false,
+      "source_and_ignored_inventory_unchanged": true
+    }
+  ],
+  "files": [
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01/temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01/INTERVAL_initial.pt",
+      "bytes": 722421,
+      "sha256": "aa583ad94c92d6a073bb4e8ecd3c8660d4f7dc01122e8ffb6ac1563247c0afef",
+      "accepted_archive_match": true
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01/temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01/INTERVAL_midpoint.pt",
+      "bytes": 2169211,
+      "sha256": "4b15ae6935a0fd0a4c0cdc88b01883cc108b540efe2594bde2bed8a0f963c42d",
+      "accepted_archive_match": true
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01/temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01/TERMINAL_initial.pt",
+      "bytes": 722421,
+      "sha256": "d5b956e61bc1058c62474e48be8b7bc05f7fb24b31f849e2c89776a5a9a26d51",
+      "accepted_archive_match": true
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01/temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01/TERMINAL_midpoint.pt",
+      "bytes": 2169211,
+      "sha256": "bf531d1796e032a2985a3db66e562dcb6a3704a979c44af77759d73c71191f1c",
+      "accepted_archive_match": true
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01/temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01/b01_native.so",
+      "bytes": 133704,
+      "sha256": "1e72526547c0709e2fbc8feb3101a09f0d9896d3e09ba52ce6e0e4ede3f1f5d8",
+      "accepted_archive_match": true
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01/temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01_memory.json",
+      "bytes": 504,
+      "sha256": "15c407312424a589728edf2a2fe2c12b480eea4adeff72312dcdfb94ba7ad735",
+      "accepted_archive_match": true
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01/temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01_outer_time.txt",
+      "bytes": 89,
+      "sha256": "57eece3c80262902c586fe5ed5294243cea77614a58930943cf5c2e7975f216d",
+      "accepted_archive_match": true
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01/temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01_collection.tar.gz",
+      "bytes": 5532089,
+      "sha256": "a9b98b58d6b0051f8f5055e8d8b261e6c8a87e9d253de5db14d0aea156e9e9fa",
+      "accepted_archive_match": true
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912/temp/directions/variable_n_fleet_churn/exp/owned_mean_check_20260912.json",
+      "bytes": 1563,
+      "sha256": "6829f36396e404cee42d641ecc24b8de0601c86e48dfc0667beba1034438b6d1",
+      "accepted_archive_match": true
+    }
+  ],
+  "active_processes_in_targets": [],
+  "terminal_supervisor": {
+    "path": "/home/wu/.agent-tasks/vnfc-b03-credit-20260912-01",
+    "status": "failed",
+    "exit_code": 139
+  },
+  "preserved_core": {
+    "path": "/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1789221288-3374215-_home_wu_.local_share_uv_python_cpython-3.10.21-linux-x86_64-gnu_bin_python3.10-11.dmp",
+    "bytes": 641089536
+  },
+  "root_integration": [
+    "efa676ac2",
+    "60ba92104",
+    "57da33f0c",
+    "7125f368b"
+  ],
+  "eligible_for_exact_two_reclamations": true,
+  "recorded_at": "2026-09-12T14:20:10.777692+00:00",
+  "local_command_seconds": 0.6680371999973431,
+  "transport_returncode": 0,
+  "transport_stderr": "",
+  "local_preserved_archive_match": true,
+  "local_preserved_maintenance_receipt_match": true,
+  "scientific_submissions": 0,
+  "diagnostic_invocations": 0
+}

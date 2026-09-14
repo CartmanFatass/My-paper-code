@@ -1,0 +1,25 @@
+{
+  "handle": "acvc-cluster-b01-e06b3d63f",
+  "execution_node": "hmasd-wsl-node",
+  "command": "cd /home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 BLIS_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\\npeak_rss_kib=%M\\nexit_code=%x' -o temp/directions/acvc/cluster_deployment_b01_task_time.txt timeout --signal=TERM --kill-after=1 595 bash experiments/candidates/acvc/cluster_deployment_b01/launch.sh e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+  "output": "temp/directions/acvc/exp/cluster_deployment_b01_20260912",
+  "supervisor": "/home/wu/.agent-tasks/acvc-cluster-b01-e06b3d63f",
+  "adjacent_admission": "temp/directions/acvc/cluster_deployment_b01_admission.json",
+  "whole_command_time": "temp/directions/acvc/cluster_deployment_b01_task_time.txt",
+  "deadline": {
+    "inner_s": 580,
+    "outer_TERM_s": 595,
+    "KILL_after_TERM_s": 1,
+    "native_cap_s": 600
+  },
+  "acceptance": "one unique submission; uncertain effect is reconciled on this handle without duplicate launch",
+  "source_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+  "command_publication_sha": "085dcd3c3daa58630fac2e64ee644af9d1a7d86c",
+  "submitted_utc": "2026-09-12T23:33:38.484298+00:00",
+  "uncertain": false,
+  "accepted": true,
+  "exit_code": 0,
+  "stdout": "Task 'acvc-cluster-b01-e06b3d63f' started in tmux session 'agent_acvc-cluster-b01-e06b3d63f'. Output: /home/wu/.agent-tasks/acvc-cluster-b01-e06b3d63f/task.log\n",
+  "stderr": "",
+  "wall_s": 0.5581011999747716
+}

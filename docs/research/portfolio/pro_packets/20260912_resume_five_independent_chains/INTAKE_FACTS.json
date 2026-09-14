@@ -1,0 +1,89 @@
+{
+  "received_request_id": "2026-09-12-resume-independent-chains-portfolio-01",
+  "binding": "portfolio:cross_direction",
+  "archive_commit": "86428c9e87fc4c61888b5638781603038c39399d",
+  "archive_path": "docs/research/portfolio/pro_packets/20260912_resume_five_independent_chains/archive/RESPONSE.md",
+  "response_bytes": 61049,
+  "response_lines": 235,
+  "response_sha256": "4df3f15cc8d052bc179ced28ce443f7fe0c8b7c87b24927e1f5f89cab754ce7e",
+  "transport_receipt_source": "Assigning Root forwarded TRANSPORT_COMPLETION_RECEIPT; not independent browser observation by author",
+  "transport_state": "ARCHIVED",
+  "natural_completion_reported": true,
+  "confirmed_Send_count_reported": 1,
+  "full_original_author_read": true,
+  "conformance": "accepted",
+  "authority": "PRO_FINAL / OWNER_DELEGATED",
+  "main_integration": "pending Root integration of this intake",
+  "new_units": {
+    "S": {
+      "direction": "capability_bound_semantic_currentness",
+      "selected": true,
+      "deliverable_count": 1,
+      "deliverable": "prospective same-meaning B card/L0 and supported execution candidate or concrete no-ready return",
+      "complete_invoked_support_cap_seconds": 600,
+      "support_reference_seconds": 300,
+      "full_documentary_cost": null,
+      "result_bearing_invocations": 0,
+      "runtime_verification": 0,
+      "implementation_and_numerical_allowance": 0
+    },
+    "A": {
+      "direction": "acvc",
+      "selected": true,
+      "consultations": 1,
+      "full_intakes": 1,
+      "workflow": "em:acvc:convergence",
+      "documentary_provider_complete_cost": null,
+      "implementation_allowance": 0,
+      "result_bearing_invocations": 0
+    },
+    "M": {
+      "selected": false,
+      "empirical_budget_allocated": 0
+    },
+    "S+B": {
+      "selected": false,
+      "empirical_budget_allocated": 0
+    },
+    "A+B": {
+      "selected": false,
+      "empirical_budget_allocated": 0
+    }
+  },
+  "current_capacity": {
+    "source": "Root intake assignment; accepted FOLR/VNFC/RCLE closeout records reconciled from published main51965a896a4e3b9288fccb6abe277c2547dc07b8",
+    "advancing_before_actual_new_starts": 0,
+    "independent_selected_ready_tasks": 2,
+    "advancing_if_both_started_and_no_other_change": 2,
+    "remaining_vacancies_if_both_started": 3,
+    "actual_starts_observed_by_author": [],
+    "funding_is_not_execution": true
+  },
+  "new_scientific_exposure": {
+    "result_bearing_invocations": 0,
+    "models": 0,
+    "training_seeds": 0,
+    "training_episodes": 0,
+    "environment_steps": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "exposure_line": "This author intake adds0 result-bearing invocations/models/training seeds/episodes/environment steps/optimizer steps/evaluations; S and A select0 new empirical invocations. Documentary/provider cost is not zero by assumption.",
+  "current_updates_after_fixed_input": {
+    "FOLR": "Final accepted B03 d_LR=-1.215546875, RETAIN_ABOVE_MEI, allocation ended; cleanup only",
+    "VNFC": "Final incomplete B03 accepted,104.89s/13440transitions/2240updates/no primary; allocation and diagnosis ended; cleanup only",
+    "RCLE": "Complete Convergence intake accepted; exact equal-unit candidate eligible for later separately funded single fit, no current implementation/numerical allowance"
+  },
+  "checks": {
+    "response_changed_paths": [
+      "archive/RESPONSE.md"
+    ],
+    "response_digest_matches_receipt": true,
+    "full235_lines_read": true,
+    "scientific_spec_sections_changed_since_task": false,
+    "cbsc_epsilon_target_and_architecture_match_card": true,
+    "mgtap_actor_rows": 6635520,
+    "owner_reviews_unapplied": []
+  },
+  "created_at_utc": "2026-09-12T14:45:34.101396+00:00"
+}

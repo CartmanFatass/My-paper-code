@@ -1,0 +1,70 @@
+{
+  "id": "20260912-mgtap-002",
+  "created": "2026-09-12T13:51:47-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "MGTAP：原节点选择TOP单伙伴查询的新B问题",
+  "context": "8214结束的是有限额度，MGTAP继续。原Convergence选择仅改变伙伴query的TOP/intact-DENSE包比较；已核对完整原文。三次COND结果分开保留、DENSE仍默认。当前记录科学选择和新投资需求，不是实验款或实施许可。",
+  "options": [
+    {
+      "key": "top",
+      "label": "保留已执行的TOP新B科学选择",
+      "consequence": "保留TOP的唯一有界科学对象并交proper Portfolio处理新投资，零数值执行。"
+    },
+    {
+      "key": "refine",
+      "label": "改为一个具体伙伴相关性源设计步骤",
+      "consequence": "异步改写尚未执行的下一步，保留完整Pro原文与既有证据。"
+    }
+  ],
+  "recommended": "top",
+  "auto_applied": "top",
+  "dm_reason": "完整原节点答复符合当前指令与B证据标准；实际问题是有限学习价值，不需要先做相关性证明。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/CONVERGENCE_INTAKE_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L62",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "原节点已选定一个新的 TOP/DENSE B 问题：是否保留这一方向选择？当前仅记录科学选择并提交新投入需求，尚未得到新实验额度。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+        "from": "原COND问题与三次正负结果；8214有限款结束",
+        "to": "增加唯一TOP单伙伴query的B科学选择；DENSE默认与全部历史结果保留，新额度走Portfolio"
+      }
+    ],
+    "if_refused": "按异步owner覆盖修改尚未执行的依赖工作，保留完整原文与证据；不自动换种子、重新实验或将整个ACTIVE方向判停。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/archive/RESPONSE.md",
+        "quote": "Select one new **TOP-versus-intact-DENSE B/EXPLORE training-pair comparison** as MGTAP's next direction-local scientific question. Replacing the mean visible-partner query with the already delivered highest-local-SINR partner's query is a concrete change in how partner information conditions user pooling. It can preserve a particular partner's learned geometry instead of averaging it with other partners, while leaving the complete raw observation and all-partner context available. That is a useful, falsifiable package question—not evidence that the strongest link is the most relevant partner or that averaging caused the earlier losses.",
+        "why": "原Convergence完整、符合当前指令的方向决定，已经过DM逐段核对。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/archive/RESPONSE.md",
+        "quote": "**The strongest structural contradiction is that radio prominence need not identify the partner that matters most to user service.**",
+        "why": "链路最强并不证明服务最相关；旧COND存在负结果，TOP尚无经验收益。"
+      }
+    ],
+    "uncertainty": [
+      "一对训练只能支持本地包对比，32个评估世界不能证明训练总体稳定优势。",
+      "单伙伴query可能失去上下文或放大换序扰动；不声称比mean-COND更好。",
+      "TOP实际速度、内存及完整支撑成本未知，历史361.85秒不是TOP测量。"
+    ],
+    "cost": {
+      "compute": "建议新450秒/完整臂、900秒native、1200秒完整future；300秒support是参考。此次响应不授予预算；零新模型/训练/评价/fixture。",
+      "owner_time": "不等待回复；可异步覆盖。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; 新投资由proper Portfolio路线决定，不等待此owner item"
+    },
+    "verdict_text": "Select one new **TOP-versus-intact-DENSE B/EXPLORE training-pair comparison** as MGTAP's next direction-local scientific question. Replacing the mean visible-partner query with the already delivered highest-local-SINR partner's query is a concrete change in how partner information conditions user pooling. It can preserve a particular partner's learned geometry instead of averaging it with other partners, while leaving the complete raw observation and all-partner context available. That is a useful, falsifiable package question—not evidence that the strongest link is the most relevant partner or that averaging caused the earlier losses.",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/archive/RESPONSE.md"
+  },
+  "starred": true
+}

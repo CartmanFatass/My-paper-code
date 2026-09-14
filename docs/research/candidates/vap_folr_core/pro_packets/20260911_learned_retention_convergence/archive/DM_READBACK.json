@@ -1,0 +1,337 @@
+{
+  "checked_at_utc": "2026-09-11T18:37:31.716733+00:00",
+  "request_id": "folr-learned-retention-convergence-20260911",
+  "response_commit": "a2a47f1d73a3fd1bc2f724e77b2a7f0859332788",
+  "response_path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/archive/RESPONSE.md",
+  "full_response_read": {
+    "lines": 137,
+    "bytes": 34159,
+    "sha256": "ed976d34511bad25061ccfe368390f88d085862d1ce434cf51bf383648cbd48b"
+  },
+  "github_git_and_transport_bytes_equal": true,
+  "fixed_task_commit": "41a92b8bbebfa76ffd81a3d675ed695a666443f1",
+  "fixed_task_sha256": "9102f18b391f40e4cb4c5089b70ca964294927e3578e956d5dc56b260d2da8d5",
+  "prompt_sha256": "85cd77c9261c285f282fa7ee4376b9e180f8c31cc8a71b66a56e75e32fa04e72",
+  "prompt_bytes": 1927,
+  "original_binding": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "transport_observation": {
+    "send_click_count": 1,
+    "wait_status": "NATURAL_COMPLETION",
+    "observed_page_state": "Worked for 12m 54s; complete link-only delivery receipt; no active generation control",
+    "archive_status": "ARCHIVED",
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "thinking_effort": "Pro, 5 of 5."
+  },
+  "transport_node_identifiers": "Descriptive visible-node labels; no unobserved DOM/server IDs inferred. DM did not observe or control provider generation.",
+  "issue_comment": {
+    "id": 5638939057,
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5638939057",
+    "created_at": "2026-09-11T18:26:16Z",
+    "body_sha256": "92a4396acc96bd47da3baa54cde2946f54212922e016644aacdddd13aab35bcf",
+    "direct_github_api_body_readback_matches_archive": true,
+    "matches_fixed_task_and_response": true
+  },
+  "delivery_commit_changed_paths": [
+    "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/archive/RESPONSE.md"
+  ],
+  "descends_from_handoff_commit": true,
+  "reference_count": 22,
+  "response_reference_count_including_task": 23,
+  "reference_mappings": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_CANDIDATE_20260911.md",
+      "commit_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+      "sha256": "a05279829edd6ef06e8665bf12a6f2df326d143fb892dde19784876765af91b5",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/FACTS.json",
+      "commit_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+      "sha256": "945c44d4bd2febe0d6e60896321db23e0cd8539942752122a290e1809f05dbd8",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_CONVERGENCE_INTAKE_20260911.md",
+      "commit_sha": "5ca3911c5b722a97eb936f3381b347224fb8ffb0",
+      "sha256": "07f2df1233b6a59996d850fd369135709cdf4717d2ab5350705b8fce45fc97a4",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/RESPONSE.md",
+      "commit_sha": "e1e9a600bd4f715328b514fe746bb367775ff3a7",
+      "sha256": "138b97ed8501db446068c236ad137d8b61661155fe06a962b8e7fd2c7e9b7563",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_SUMMARY_20260910.json",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "sha256": "2566394e3604f718fe9cb0141684fd68c9f6f3a5500eb2b4a676defedd5303d5",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_SUMMARY_20260910.json",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "sha256": "62683d5f5d7c7ac24206a473d1dc177b630dddf4331d519da23c1d7027b70ce4",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "sha256": "0eeea3a368eeb2738a4c9157cccf69f0a6cb8b0c02da18270332d617b311b970",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "sha256": "126df7c17e2d0a845bf12c76b03e7658706cc12b1921a182d0437ae4423c8f86",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "sha256": "775e598921ee7b09721b205624c7e7ac30e1ace177bdcb720b9120c5f4443fa3",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "sha256": "28f2d62d78a05a7d4f0d7b72936d2a55b4265b3b1fd7745b314a94b4941c1d3c",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "sha256": "01770613528bc8e1f3b86c4cafa934dda98c9639490733a123b101c48723e54a",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "scripts/run_folr_public_lifecycle_b01.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "sha256": "e1f33c4d98ced0fed809d672813528a059326c137d223c8db9e32b5012c5b0f1",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_SCIENCE_CARD_20260910.md",
+      "commit_sha": "ea73b1c3dabafe6482db03df8a9e51c1ad672260",
+      "sha256": "5d55b73d4f43bf06e7591c3a689d715427041812c81e99d53ba2f2c1f492f003",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/RESPONSE.md",
+      "commit_sha": "0dbbcbf807509ccc34a3a1de353114be88896897",
+      "sha256": "f4e2c50db1b743edba5e5cede0a9c1c0146afc82f9e4c8541d9fea4e03834322",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/EXECUTION_MAPPING.md",
+      "commit_sha": "bb40797dc5312641ac640664cbf7c2bd174d9815",
+      "sha256": "213d86ef04398b3b2a3336d11c364018f1d100085811b81aec763177ec6facf3",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-11-remaining-capacity-refill.md",
+      "commit_sha": "bb40797dc5312641ac640664cbf7c2bd174d9815",
+      "sha256": "6a8f73cf78a0403bf83bd4d0b9819cfbf580c5d28ce4f9cba31d169434d5d8af",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "sha256": "cfbe996017cd6ffd7e4a8e8af0321b8bc28904f7529626d1d0f7548222b0c4b5",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/ISSUE_SNAPSHOT.json",
+      "commit_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+      "sha256": "43044f7ad0348a514aa51c4b9c3f1014d4487f634a66de1b9a38bd01bc2e39ab",
+      "response_mapping_matches": true
+    }
+  ],
+  "current_primary_sha": "4cf12b6d3bbd9cfa36a40cb7f13e58d8603feef9",
+  "current_method_surfaces": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "cfbe996017cd6ffd7e4a8e8af0321b8bc28904f7529626d1d0f7548222b0c4b5",
+      "same_as_bound_method": true
+    },
+    {
+      "path": "docs/AGENTS.md",
+      "sha256": "0f8015331c5804b95da6fcf30ae9ea128a90707beaa0934e3ce5d058b6dd7899",
+      "same_as_bound_method": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "same_as_bound_method": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "same_as_bound_method": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "same_as_bound_method": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "same_as_bound_method": true
+    },
+    {
+      "path": ".agents/skills/hmasd-scientific-tools/SKILL.md",
+      "sha256": "d43010962ef2c9fcdc228e3dc18fb1c3a4ec63dc9311664c8cf106591fa6ee88",
+      "same_as_bound_method": true
+    },
+    {
+      "path": ".agents/skills/hmasd-owner-item/SKILL.md",
+      "sha256": "335b6c605389f10acce53749d1054473033d0ffc47f414d8621d6a5ef983ab5b",
+      "same_as_bound_method": true
+    },
+    {
+      "path": ".agents/skills/hmasd-pro-research-prompt-author/SKILL.md",
+      "sha256": "dc0c7ea4f2ddf93954a85eef5c5de7cb79911358ac80199c497295f964821b01",
+      "same_as_bound_method": true
+    }
+  ],
+  "source_surfaces": [
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "unchanged_from_bound_source": true,
+      "sha256": "0eeea3a368eeb2738a4c9157cccf69f0a6cb8b0c02da18270332d617b311b970"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+      "unchanged_from_bound_source": true,
+      "sha256": "126df7c17e2d0a845bf12c76b03e7658706cc12b1921a182d0437ae4423c8f86"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+      "unchanged_from_bound_source": true,
+      "sha256": "775e598921ee7b09721b205624c7e7ac30e1ace177bdcb720b9120c5f4443fa3"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+      "unchanged_from_bound_source": true,
+      "sha256": "28f2d62d78a05a7d4f0d7b72936d2a55b4265b3b1fd7745b314a94b4941c1d3c"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+      "unchanged_from_bound_source": true,
+      "sha256": "01770613528bc8e1f3b86c4cafa934dda98c9639490733a123b101c48723e54a"
+    },
+    {
+      "path": "scripts/run_folr_public_lifecycle_b01.py",
+      "unchanged_from_bound_source": true,
+      "sha256": "e1f33c4d98ced0fed809d672813528a059326c137d223c8db9e32b5012c5b0f1"
+    }
+  ],
+  "raw_artifacts": [
+    {
+      "name": "PROMPT_BODY.md",
+      "bytes": 1927,
+      "sha256": "85cd77c9261c285f282fa7ee4376b9e180f8c31cc8a71b66a56e75e32fa04e72",
+      "original_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-learned-retention-convergence-20260911\\PROMPT_BODY.md"
+    },
+    {
+      "name": "CHAT_RECEIPT.md",
+      "bytes": 390,
+      "sha256": "8ea7d396881b8a14ba57b0f3d76a3dc1947b7bc34c4146d280d0122ae9132a32",
+      "original_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-learned-retention-convergence-20260911\\CHAT_RECEIPT.md"
+    },
+    {
+      "name": "PACKET_MANIFEST.json",
+      "bytes": 1618,
+      "sha256": "145181f7ff2ed21ee2503a1ca8e646aba8fe54cd0eb58f10156e16054e5d2f08",
+      "original_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-learned-retention-convergence-20260911\\PACKET_MANIFEST.json"
+    },
+    {
+      "name": "TRANSPORT_FACTS.json",
+      "bytes": 4185,
+      "sha256": "2e01cf35b91caad6ca4a59d7c7899090a8d0cc1bcf1e004640151c1c77028063",
+      "original_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-learned-retention-convergence-20260911\\TRANSPORT_FACTS.json"
+    },
+    {
+      "name": "DELIVERY_COMMENT.json",
+      "bytes": 1182,
+      "sha256": "f1d3cacc08af3d1690dbd2453170cba9cda4795ec785733960d6d63cfffdf817",
+      "original_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-learned-retention-convergence-20260911\\DELIVERY_COMMENT.json"
+    }
+  ],
+  "exact_archive": {
+    "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/archive/EXACT_BYTES.zip",
+    "members": 6,
+    "bytes": 16917,
+    "sha256": "55b52cbab63de5728d3c42c04377fac42be59478cd8d08b1f48ac4335eb9b671",
+    "every_member_equals_original": true
+  },
+  "owner_reviews": [],
+  "scientific_conformance": "PASS: narrow OPEN as in-family learned-rule extension; RETAIN sole primary null; old fixed-half pause and zero implementation/numerical allocation preserved; no specification exception or recast.",
+  "source_reading_limit": "Pro connector-read assertions attributed to Pro; DM checked complete response and all effective mappings, reused current source/foundation/CAMA reads, did not audit every historical artifact or unlisted dependency.",
+  "current_exposure": {
+    "new_scientific_invocations": 0,
+    "models": 0,
+    "training_episodes": 0,
+    "native_steps": 0,
+    "evaluation_episodes": 0,
+    "optimizer_steps": 0,
+    "replay": 0,
+    "diagnostics": 0,
+    "implementation_changes": 0,
+    "tests": 0,
+    "checkpoints": 0,
+    "parameter_displacement": "not applicable (no learner)"
+  },
+  "future_work_unallocated": {
+    "training_fits": 2,
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_updates": 9938,
+    "final_evaluation_episodes": 256,
+    "total_team_ticks": 205120,
+    "retained_pair_replay_GRU_rows": 66783360,
+    "retained_pair_acting_rows": 1076880,
+    "new_gate_work": "additional work on candidate arm; actual invocation count/cost unknown",
+    "count_law": "2 learners*(5000 training+128 final)*20 native ticks;2*4969 updates*32 episodes*21 time positions*5 slots*2 online/target actor forwards;2*(5000+128)*21*5 acting rows",
+    "new_wall": "unknown",
+    "new_memory": "unknown",
+    "new_support": "unknown",
+    "new_cap": "unallocated; historical3900s not renewed",
+    "independent_unit": "one matched training pair; final episodes conditional, action-dependent world pairing not established"
+  },
+  "audit_reconciliation_sha": "4cf12b6d3bbd9cfa36a40cb7f13e58d8603feef9",
+  "audit_lines": [
+    62,
+    63
+  ],
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-folr-001.json",
+  "owner_auto_applied": "open",
+  "owner_brief_characters": 350,
+  "applied_direction_choice": "narrow OPEN / in-family learned-rule extension, not RECAST; no current implementation or numerical allocation"
+}

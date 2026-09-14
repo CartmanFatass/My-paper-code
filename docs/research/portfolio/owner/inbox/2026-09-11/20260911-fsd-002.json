@@ -1,0 +1,89 @@
+{
+  "id": "20260911-fsd-002",
+  "created": "2026-09-11T14:16:46-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FSD fresh770903 unchanged I1280/D0 pair",
+  "context": "Claim: the unchanged I1280 package can again exceed fresh authentic D0 after five training rollouts. Binding MARL structure: temporal abstraction and termination, with asynchronous individual skill boundaries and shared coordinator credit. This new allocation preserves the ended770803 attempt and all earlier outcomes.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按新额度执行原样训练对并保留全部结果；卡冻结已执行，科学运行待实际准入。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止未执行部分并保留已发生事实，不改写旧结果。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "记录具体修改意见，受影响的新运行在协调后执行；不静默改写冻结科学含义。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "Portfolio selected one fresh pair; only prospectively unscreened identity and exact command bindings change.",
+  "evidence": [
+    "docs\\research\\candidates\\flexible_skill_duration\\FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L76",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按新的独立额度执行一次原样I1280与D0比较，观察此前收益能否再次出现。",
+    "changes_if_approved": [
+      {
+        "target": "FSD B02卡§6",
+        "from": "旧770803实例未启动且已结束",
+        "to": "新增770903/780903实例；五次训练、32次最终评估和原读取规则不变"
+      }
+    ],
+    "if_refused": "应用明确的所有者异议；保留已执行事实，旧实例和科学结果不改写。",
+    "evidence_for": [
+      {
+        "path": "docs\\research\\candidates\\flexible_skill_duration\\FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+        "quote": "I1280−D0 +0.05697746721968016",
+        "why": "一个真实训练对支持有限复查。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+        "quote": "One fresh unchanged I1280/authentic-D0 training pair",
+        "why": "Portfolio明确选择新额度。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs\\research\\candidates\\flexible_skill_duration\\FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+        "quote": "−.049670563167111874 and−.035312725297886094",
+        "why": "旧batch128配置两次亏损；新配置也仅一个训练对。"
+      }
+    ],
+    "uncertainty": [
+      "不确定跨训练历史的稳定收益；本次仍只是一个独立训练对。",
+      "评估回合标准误不代表训练总体不确定性，不能归因于纯中断或纯批量效应。"
+    ],
+    "cost": {
+      "compute": "D0≤900秒，I≤1800秒，原生合计≤2700秒，支持≤300秒，总计≤3000秒。",
+      "owner_time": "无需等待回复。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+    "source": "docs\\research\\candidates\\flexible_skill_duration\\FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md#6"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T21:21:36+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md@6c32ade3216c374ecf2f5179b15d559729cd45c9",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_770903_EXECUTION_LIMITATION_INTAKE_20260911.md",
+      "state": "blocked",
+      "summary": "Fresh770903 card/source accepted, but the single staging fetch failed128 with GnuTLS/earlyEOF; zero scientific submissions, no retry, exact remote paths absent. Old allocation and all scientific evidence unchanged."
+    }
+  ]
+}

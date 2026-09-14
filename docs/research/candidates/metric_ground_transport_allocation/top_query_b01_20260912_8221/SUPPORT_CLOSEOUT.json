@@ -1,0 +1,216 @@
+{
+  "known_dm_command_walls": [
+    {
+      "phase": "state-and-input",
+      "wall_seconds": 0.3074196
+    },
+    {
+      "phase": "live-control",
+      "wall_seconds": 0.5472121
+    },
+    {
+      "phase": "owned-source-and-T-mapping",
+      "wall_seconds": 0.2943472
+    },
+    {
+      "phase": "assigned-main-reconciliation",
+      "wall_seconds": 1.1577084
+    },
+    {
+      "phase": "reconciliation-and-source-binding",
+      "wall_seconds": 4.6319433
+    },
+    {
+      "phase": "audit-merge-repair-and-identity",
+      "wall_seconds": 5.1601477
+    },
+    {
+      "phase": "fresh-identity-and-source-currentness",
+      "wall_seconds": 0.624637
+    },
+    {
+      "phase": "implementation-new-object-binding",
+      "wall_seconds": 0.2956007
+    },
+    {
+      "phase": "configuration-and-pure-stub-binding-check",
+      "wall_seconds": 0.5655709
+    },
+    {
+      "phase": "command-and-card-records",
+      "wall_seconds": 0.2168132
+    },
+    {
+      "phase": "card-source-checks-publication",
+      "wall_seconds": 4.8656992
+    },
+    {
+      "phase": "published-source-bundle-preparation",
+      "wall_seconds": 0.2611095
+    },
+    {
+      "phase": "resume-control-and-source-read",
+      "wall_seconds": 0.5636837
+    },
+    {
+      "phase": "published-source-bundle-corrected",
+      "wall_seconds": 0.4963198
+    },
+    {
+      "phase": "remote-staging-directory-and-sparse-config",
+      "wall_seconds": 0.8881257
+    },
+    {
+      "phase": "remote-source-and-command-copy",
+      "wall_seconds": 0.9061481
+    },
+    {
+      "phase": "remote-exact-sha-worktree-staging",
+      "wall_seconds": 0.7589934
+    },
+    {
+      "phase": "remote-checkout-reconcile-read",
+      "wall_seconds": 0.862947
+    },
+    {
+      "phase": "remote-empty-worktree-initialization",
+      "wall_seconds": 0.8171904
+    },
+    {
+      "phase": "sole-remote-encoder-gradient-publication-fixture",
+      "wall_seconds": 1.8398227999999999
+    },
+    {
+      "phase": "prelaunch-evidence-and-owner-read-0",
+      "wall_seconds": 0.0325837
+    },
+    {
+      "phase": "prelaunch-evidence-and-owner-read-1",
+      "wall_seconds": 0.2044741
+    },
+    {
+      "phase": "technical-acceptance-and-source-currentness",
+      "wall_seconds": 0.3915953
+    },
+    {
+      "phase": "technical-acceptance-commit-push",
+      "wall_seconds": 4.8132614
+    },
+    {
+      "phase": "exact-source-detached-launch-acceptance",
+      "wall_seconds": 0.6298443
+    },
+    {
+      "phase": "accepted-launch-admission-receipt-copy",
+      "wall_seconds": 0.5809223
+    },
+    {
+      "phase": "launch-boundary-direction-currentness",
+      "wall_seconds": 0.2866975
+    },
+    {
+      "phase": "launch-and-monitor-receipt-commit-push",
+      "wall_seconds": 4.5019691
+    },
+    {
+      "phase": "terminal-collection-read-0",
+      "wall_seconds": 0.1646957
+    },
+    {
+      "phase": "terminal-collection-read-1",
+      "wall_seconds": 0.5990291
+    },
+    {
+      "phase": "terminal-native-supervisor-preservation",
+      "wall_seconds": 0.767825
+    },
+    {
+      "phase": "terminal-archives-local-preservation",
+      "wall_seconds": 1.6171437
+    },
+    {
+      "phase": "archive-integrity-and-native-result-read",
+      "wall_seconds": 0.2583203
+    },
+    {
+      "phase": "complete-fit-count-movement-and-cost-read",
+      "wall_seconds": 0.2436686
+    },
+    {
+      "phase": "intake-form-and-current-owner-read-0",
+      "wall_seconds": 0.1615336
+    },
+    {
+      "phase": "intake-form-and-current-owner-read-1",
+      "wall_seconds": 0.2958399
+    },
+    {
+      "phase": "intake-owner-and-frozen-analysis-0",
+      "wall_seconds": 0.3694835
+    },
+    {
+      "phase": "intake-owner-and-frozen-analysis-1",
+      "wall_seconds": 0.1690842
+    },
+    {
+      "phase": "frozen-primary-complete-data-intake-and-run-summary",
+      "wall_seconds": 0.4280392
+    },
+    {
+      "phase": "accepted-result-branch-and-scientific-reading-currentness",
+      "wall_seconds": 0.1802453
+    },
+    {
+      "phase": "exact-top-postresult-authority-branch",
+      "wall_seconds": 0.1627886
+    },
+    {
+      "phase": "terminal-cleanup-inventory-currentness",
+      "wall_seconds": 0.7986937
+    },
+    {
+      "phase": "scientific-intake-current-direction-audit-and-publication-check",
+      "wall_seconds": 0.3756379
+    },
+    {
+      "phase": "complete-intake-evidence-commit-push",
+      "wall_seconds": 6.8931668
+    },
+    {
+      "phase": "accepted-retention-cleanup-entry-0",
+      "wall_seconds": 0.1627162
+    },
+    {
+      "phase": "accepted-retention-cleanup-entry-1",
+      "wall_seconds": 0.502454
+    },
+    {
+      "phase": "accepted-main-archive-blob-retention-check",
+      "wall_seconds": 0.3011038
+    },
+    {
+      "phase": "three-remote-duplicate-targets-removal-and-verification",
+      "wall_seconds": 0.9365976
+    },
+    {
+      "phase": "one-local-duplicate-removal-and-verification",
+      "wall_seconds": 0.3112274
+    }
+  ],
+  "known_dm_sum_seconds": 53.2020815,
+  "independent_review_command_seconds": 2.1409756,
+  "known_support_sum_seconds": 55.343057099999996,
+  "native_wall_seconds": 377.11,
+  "known_native_plus_support_seconds": 432.4530571,
+  "status": "T source/intake/preservation/assigned cleanup complete; snapshot before this final receipt commit/push",
+  "caps": {
+    "arm": 450,
+    "native": 900,
+    "support": 300,
+    "complete": 1200
+  },
+  "known_native_caps_pass": true,
+  "complete_support_and_total_certificate": false,
+  "shared_cost": "One-time discovery/registration/control-plane application charged to ACPS by Root, excluded from T. T-specific Root integration and Monitor work count once.",
+  "unknown_tails": "Root/Monitor/client and agent/provider portions absent from measured command records remain unknown, as does aggregate CPU. This final receipt publication adds its actual command wall in the handoff. No complete300/1200 certificate or observed breach is inferred from a partial known subtotal; native savings are not transferable."
+}

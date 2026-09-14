@@ -1,0 +1,9 @@
+{
+  "authority": "Root accepted main f6bf9e467 integration and the two local checkpoint archives; exactly six remote targets",
+  "started_utc": "2026-09-12T17:39:03.503616+00:00",
+  "exit_code": 0,
+  "stdout": "{\"preflight\": {\"targets\": [\"/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee\", \"/home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle\", \"/home/wu/hmasd-inputs/acvc-training-use-b01-C-a4c24e4ee.tar.gz\", \"/home/wu/hmasd-inputs/acvc-training-use-b01-F-a4c24e4ee.tar.gz\", \"/home/wu/.agent-tasks/acvc-training-use-b01-c-a4c24e4ee\", \"/home/wu/.agent-tasks/acvc-training-use-b01-f-a4c24e4ee\"], \"exact_source\": true, \"tracked_clean\": true, \"registered_before\": true, \"unexpected_scientific_files\": [], \"both_terminal_and_inactive\": true}}\n{\"complete\": true, \"absent_on_disk\": [\"/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee\", \"/home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle\", \"/home/wu/hmasd-inputs/acvc-training-use-b01-C-a4c24e4ee.tar.gz\", \"/home/wu/hmasd-inputs/acvc-training-use-b01-F-a4c24e4ee.tar.gz\", \"/home/wu/.agent-tasks/acvc-training-use-b01-c-a4c24e4ee\", \"/home/wu/.agent-tasks/acvc-training-use-b01-f-a4c24e4ee\"], \"worktree_absent_from_registration\": true, \"shared_remote_repo_exists\": true, \"C01_untouched\": true}\n",
+  "stderr": "",
+  "complete": true,
+  "whole_helper_wall_s": 0.7370950999902561
+}

@@ -29,7 +29,8 @@ def clipped_policy_loss(new_logp, old_logp, advantage, velocity_mask=None):
 def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, duration_rng,
                     metadata, check, counts, emit_episode, emit_diagnostic, limits,
                     real=False, diagnostics=False, ratio_grouping="joint", value_moments=None, renewal=False,
-                    duration_support=(1, 4), velocity_mode="sampled", credit_baseline=None):
+                    duration_support=(1, 4), velocity_mode="sampled", credit_baseline=None,
+                    execution_filter=None):
     """Counts survive an exception; only a complete episode emits a scored row."""
     check()
     obs, info = env.reset(seed=reset_seed)
@@ -105,6 +106,10 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
                 counts["duration_credit_rows"] += int(credit_mask.sum())
             if not torch.isfinite(logp).all():
                 raise FloatingPointError("nonfinite sampled density")
+        if execution_filter is not None:
+            # Score/store the sampled proposal above; only native execution changes.
+            # hold.advance below records this actual command in subsequent inputs.
+            sent = execution_filter(obs, sent)
         frames = []
         if diagnostics and t <= 4:
             for i in range(5):

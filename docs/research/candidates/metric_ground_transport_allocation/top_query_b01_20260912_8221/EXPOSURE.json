@@ -1,0 +1,33 @@
+{
+  "master": 8221,
+  "base": 822100000,
+  "independent_matched_training_units": 1,
+  "learning_instances": 2,
+  "factory_calls": 1,
+  "top_level_models": 6,
+  "train_team_steps_per_arm": 131072,
+  "adam_per_arm": 1024,
+  "final_team_steps_per_arm": 8192,
+  "pair_team_steps": 278528,
+  "pair_adam": 2048,
+  "pair_episodes": 1088,
+  "pair_actor_rows": 6635520,
+  "bounded_engineering_fixture": {
+    "invocations": 1,
+    "standalone_encoders": 2,
+    "full_actors": 0,
+    "critics": 0,
+    "environments": 0,
+    "trajectories": 0,
+    "optimizer_steps": 0,
+    "checkpoint_loads": 0,
+    "rows_per_forward": 6,
+    "TOP_forwards": 2,
+    "DENSE_forwards": 1,
+    "TOP_supplied_loss_backwards": 1,
+    "DENSE_supplied_loss_backwards": 0,
+    "synthetic_primary_readouts": 4
+  },
+  "learner_can_move": "Each fresh arm runs1024 Adam3e-4 steps without displacement clamp; prior native default-path fits had nonzero movement. New TOP own-arm displacement will be recorded after actual learning, not established by fixture.",
+  "machine_generated_exposure_line": "1 unscreened matched training unit,2 fits,512x256 train/32x256 final/1024 Adam per arm; pair1088 episodes,278528 native team ticks,2048 Adam,6635520 actor-row opportunities;0 extra arm/panel/search. Separate one engineering fixture:2 standalone encoders,TOP2/DENSE1 forwards,TOP1 supplied backward,4 synthetic readouts;0 full actors/critics/environments/optimizer/trajectory/checkpoint loads."
+}

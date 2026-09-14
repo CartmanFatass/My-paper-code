@@ -1,0 +1,322 @@
+{
+  "checked_at_utc": "2026-09-12T18:35:28.326025+00:00",
+  "all_effective_mappings_published": true,
+  "checks": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/SCIENCE_BRIEF.md",
+      "commit_sha": "ce257019becf2d0e7aa373b378b6442a0323ecf9",
+      "bytes": 11958,
+      "sha256": "b7d6fd41301793c031e9a0e316a05aacf3c748dacf6c45496af3f8b73d3e5bcf",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/FACTS.json",
+      "commit_sha": "ce257019becf2d0e7aa373b378b6442a0323ecf9",
+      "bytes": 19439,
+      "sha256": "edd87a3fdfbb5f13c3afef12c8928780e2b3cd3154986d610bbbc96ff72ea619",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/PREPARATION_INTAKE.md",
+      "commit_sha": "ce257019becf2d0e7aa373b378b6442a0323ecf9",
+      "bytes": 3382,
+      "sha256": "bcac3fbfbf2a5ef32f579d6bbc88fc7da5885fdb55fd349933112c9df71c8f6b",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/ISSUE_SNAPSHOT.json",
+      "commit_sha": "ce257019becf2d0e7aa373b378b6442a0323ecf9",
+      "bytes": 1145,
+      "sha256": "4e4171568c47da74af57b090592b5d741c5fd47a3ec0915d8f318b8180fde85b",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/ORACLE_RECOMMENDATIONS_20260911.md",
+      "commit_sha": "ce257019becf2d0e7aa373b378b6442a0323ecf9",
+      "bytes": 17366,
+      "sha256": "450f391727b5d134745c1a2effa3bd9774949ca31b239a1b65d110de4a5ef759",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_cf_completion/READINESS_BOUNDARY.md",
+      "commit_sha": "95b8711de7a543a3496f3042fe1ebdfb308e1d87",
+      "bytes": 10804,
+      "sha256": "e0bac280a303932a3c4cedfbd22df772fe203e4ae603f20b200c27a2f6dfd813",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_cf_completion/FACTS.json",
+      "commit_sha": "95b8711de7a543a3496f3042fe1ebdfb308e1d87",
+      "bytes": 7591,
+      "sha256": "1fa85a9a25701606c57e440a8614bd7bda8b02ed40e68ba76b1f8676bc52ed65",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "bytes": 9733,
+      "sha256": "2240335b2f69e89db5d64ddb0b168b09b8848cc344332d69d7afa8224b0b1f67",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "bytes": 4693,
+      "sha256": "4a07117bea9261607db05329f4244531fa265600e9c3aaa1ab2fd1f10a4e2470",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-12-two-remaining-chains.md",
+      "commit_sha": "592f8175000cca0b50e48ae6c466f8e8c5654035",
+      "bytes": 3165,
+      "sha256": "a54dbb52fc0ca39f231482d03e3e2a4f010c6072ac43b2591ec5d20d80614b09",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/EXECUTION_MAPPING.md",
+      "commit_sha": "592f8175000cca0b50e48ae6c466f8e8c5654035",
+      "bytes": 11050,
+      "sha256": "cc0ede6484b90fddd139ae2871a033deac1d5a2ce21e3bf44658f442e84d3fc5",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md",
+      "commit_sha": "ed1d519c60fde333609c00fd207d5bd0a3e3f507",
+      "bytes": 54224,
+      "sha256": "05add75c7ee0194feef3e21ff219411ce22e971d9e6c7226d4ef630a43cef305",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md",
+      "commit_sha": "268d2b4df7f31df8a27466ddfbb3bcef6ba587a4",
+      "bytes": 62954,
+      "sha256": "0fb92f8eea4f8d04a94462c2f963b9cf13b347da19e59c1982b6e7445f33587f",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "bytes": 45124,
+      "sha256": "89fee75557747ee3f70ab9bd6842fc388ac6c901fab9f320807deb79b2643ff1",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_SCIENCE_CARD_20260912.md",
+      "commit_sha": "f6bf9e4674b180037330a4a70ff680a1605c0bdd",
+      "bytes": 16911,
+      "sha256": "e6b4ec4a2bef058da02977885ddba2c8cf61c5505056493762dd49aa09f9be34",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/fsd",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/codex/vap-folr",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md",
+      "commit_sha": "f6bf9e4674b180037330a4a70ff680a1605c0bdd",
+      "bytes": 8016,
+      "sha256": "bc6c76825c086899ad47073511d3e95e9209d186921844303622692054ca8695",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/fsd",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/codex/vap-folr",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "f6bf9e4674b180037330a4a70ff680a1605c0bdd",
+      "bytes": 8487,
+      "sha256": "09f9b22106d61a5c3a4bc1bbeff69a6a5e5e1e9528b2187013251c453b951c21",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/fsd",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/codex/vap-folr",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_SCIENCE_CARD_20260912.md",
+      "commit_sha": "9ca150856e491cd190661c075e486ad68c1ecad6",
+      "bytes": 9026,
+      "sha256": "9495d05ff89f4443ffc74ce2e1b5cf7f748680a7f66beeee87b1bc141e444862",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/fsd",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/codex/vap-folr",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md",
+      "commit_sha": "9ca150856e491cd190661c075e486ad68c1ecad6",
+      "bytes": 5845,
+      "sha256": "8ffbe8dc5d1fe4bfde1403fb243c5233943e4b6f1f1eae52500f365955996980",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/fsd",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/codex/vap-folr",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "9ca150856e491cd190661c075e486ad68c1ecad6",
+      "bytes": 7428,
+      "sha256": "00ab005e2816e00b43e7487ebae9279a5213e32ccf6da1b7eb2505ca7a0322c5",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/fsd",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/codex/vap-folr",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "54723d292b381838d45f3ff63cff11a598c3bc48",
+      "bytes": 51066,
+      "sha256": "9f6dd82d1f9035e8093c3cd9882fea5ee5baa781182d85ce4c6343ad5b4c00d1",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/fsd",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/codex/vap-folr",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md",
+      "commit_sha": "54723d292b381838d45f3ff63cff11a598c3bc48",
+      "bytes": 16984,
+      "sha256": "746fb3f7feebbcb3ece119ff83f4bbf6299ba84203b1e2a9bdba9370dba4cae0",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/fsd",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/codex/vap-folr",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md",
+      "commit_sha": "54723d292b381838d45f3ff63cff11a598c3bc48",
+      "bytes": 12341,
+      "sha256": "d05b5042a4be39cea9c00c37c505e6d2974b11f86f4cc3c90c5db12ea0f6e1e7",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/fsd",
+        "refs/remotes/origin/codex/portfolio",
+        "refs/remotes/origin/codex/vap-folr",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "bytes": 6086,
+      "sha256": "df78a16d379292c212b3099baacb66b0d3066222a0c03c5628af6e47eeb20e5e",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "bytes": 9224,
+      "sha256": "672746fc04c65e50c18d4250e87623b24cd747f9325a1c20bf9e0c59cf54a4de",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    }
+  ]
+}

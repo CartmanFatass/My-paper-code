@@ -1,0 +1,45 @@
+{
+  "root_acceptance": "main2a59af854 intake and main011e3b1b9 publication check; exact five targets authorized by Root",
+  "state": "PARTIAL_ROOT_BLOCKER: four remote targets and Git registration verified absent; fifth local target remains after pre-execution policy rejection; unique archive and shared checkouts preserved",
+  "checked_utc": "2026-09-12T23:55:41.6718219Z",
+  "retained_archive": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\retained\\cluster_deployment_b01_20260912\\native_output.tar.gz",
+  "retained_archive_sha256": "ff33a922936ad9664f46afb487dc8afb07764d573b3c2910320d4ebe7ff40fc2",
+  "retained_archive_bytes": 416876,
+  "local_target": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\cluster-deployment-b01-20260912",
+  "local_reparse_points": 0,
+  "local_preflight_pass": true,
+  "remote": {
+    "completed_utc": "2026-09-12T16:56:35.369649-07:00",
+    "source_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+    "preflight_clean": true,
+    "terminal_pid_absent": 3408418,
+    "tmux_inactive": true,
+    "native_output_and_supervisor_hashes_match_retained_archive": true,
+    "disk_absent": {
+      "/home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f-output.tar.gz": true,
+      "/home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f.bundle": true,
+      "/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f": true,
+      "/home/wu/.agent-tasks/acvc-cluster-b01-e06b3d63f": true
+    },
+    "worktree_registration_absent": true,
+    "shared_remote_repo_present": true
+  },
+  "local_removal": {
+    "target": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\cluster-deployment-b01-20260912",
+    "executed": false,
+    "disk_absent": false,
+    "retained_archive_present": true,
+    "shared_authoring_checkout_present": true,
+    "attempted_command": "PowerShell Remove-Item -LiteralPath <exact approved target> -Recurse -Force",
+    "tool": "exec_command",
+    "rejection": "CreateProcess Rejected: blocked by policy",
+    "detail": "Automatic approval review rejected the command before process creation. Exact reason returned: blocked by policy. No more specific reason supplied. No retry or alternate deletion mechanism used.",
+    "checked_utc": "2026-09-12T23:57:44.9360033Z"
+  },
+  "remote_command": {
+    "wall_s": 0.47833800001535565,
+    "exit_code": 0,
+    "stdout": "{\"completed_utc\": \"2026-09-12T23:56:35.369649+00:00\", \"source_sha\": \"e06b3d63f7e9f77c13fd327dba0270d80e74d819\", \"preflight_clean\": true, \"terminal_pid_absent\": 3408418, \"tmux_inactive\": true, \"native_output_and_supervisor_hashes_match_retained_archive\": true, \"disk_absent\": {\"/home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f-output.tar.gz\": true, \"/home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f.bundle\": true, \"/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f\": true, \"/home/wu/.agent-tasks/acvc-cluster-b01-e06b3d63f\": true}, \"worktree_registration_absent\": true, \"shared_remote_repo_present\": true}\n",
+    "stderr": ""
+  }
+}

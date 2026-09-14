@@ -1,0 +1,1820 @@
+{
+  "object": "FOLR-LEARNED-RETENTION-B01",
+  "state": "complete_pair_intaken_remote_closeout_verified_local_cleanup_policy_blocked",
+  "authority_sha": "6c32ade3216c374ecf2f5179b15d559729cd45c9",
+  "source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+  "training_seed": 7809,
+  "evaluation_seed": 107809,
+  "arms": [
+    "RETAIN",
+    "LEARNED_EVENT"
+  ],
+  "primary": {
+    "J_RETAIN": -0.16007812500000018,
+    "J_LEARNED_EVENT": 1.6032812499999995,
+    "d_LR": 1.7633593749999998,
+    "rule": "LEARNED_EVENT_ABOVE_MEI",
+    "independent_training_pairs": 1,
+    "conditional_episode_rows_paired": false,
+    "training_seed_standard_error": null,
+    "absolute_MEI": 1.0
+  },
+  "commands": [
+    {
+      "arm": "RETAIN",
+      "handle": "folr-learned-retention-b01-retain-20260911",
+      "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30",
+      "output": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_memory.json",
+      "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_whole_time.txt",
+      "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7809 --evaluation-seed 107809 --launch-sha 8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain'",
+      "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b01-retain-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7809 --evaluation-seed 107809 --launch-sha 8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain'\"'\"''",
+      "status": "finished_exit0_collected_and_accepted",
+      "launch_receipt": {
+        "timestamp": "2026-09-11T21:28:08.036212+00:00",
+        "arm": "RETAIN",
+        "handle": "folr-learned-retention-b01-retain-20260911",
+        "command_commit": "b28f7c1c2bebf7f9632959ce96e8478b36e0d354",
+        "returncode": 0,
+        "output": "Task 'folr-learned-retention-b01-retain-20260911' started in tmux session 'agent_folr-learned-retention-b01-retain-20260911'. Output: /home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/task.log\n"
+      },
+      "initial_supervisor": {
+        "task": "folr-learned-retention-b01-retain-20260911",
+        "status": "running",
+        "exit_code": null,
+        "pid": 3351044,
+        "uptime_seconds": 13,
+        "tmux_active": true
+      },
+      "memory_admission": {
+        "assessed_at": "2026-09-11T21:28:07.913784Z",
+        "available_physical_bytes": 15323598848,
+        "captured_at": "2026-09-11T21:28:07.913462Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15323598848,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "monitor_dispatch": {
+        "accepted": true,
+        "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+        "model_thinking_overrides": false
+      },
+      "monitor_adoption": {
+        "confirmed_by": "Root forwarded authoritative MONITOR_ADOPTED",
+        "status": "running",
+        "observation_command_seconds": 0.9,
+        "same_handle_source_cwd_output": true
+      },
+      "terminal_supervisor": {
+        "task": "folr-learned-retention-b01-retain-20260911",
+        "status": "finished",
+        "exit_code": 0,
+        "pid": 3351044,
+        "uptime_seconds": 2128,
+        "tmux_active": false
+      }
+    },
+    {
+      "arm": "LEARNED_EVENT",
+      "handle": "folr-learned-retention-b01-learned-event-20260911",
+      "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30",
+      "output": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_memory.json",
+      "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_whole_time.txt",
+      "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7809 --evaluation-seed 107809 --launch-sha 8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event'",
+      "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b01-learned-event-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7809 --evaluation-seed 107809 --launch-sha 8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event'\"'\"''",
+      "status": "finished_exit0_collected_and_accepted",
+      "launch_receipt": {
+        "timestamp": "2026-09-11T21:29:10.728038+00:00",
+        "arm": "LEARNED_EVENT",
+        "handle": "folr-learned-retention-b01-learned-event-20260911",
+        "command_commit": "b28f7c1c2bebf7f9632959ce96e8478b36e0d354",
+        "returncode": 0,
+        "output": "Task 'folr-learned-retention-b01-learned-event-20260911' started in tmux session 'agent_folr-learned-retention-b01-learned-event-20260911'. Output: /home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/task.log\n"
+      },
+      "initial_supervisor": {
+        "task": "folr-learned-retention-b01-learned-event-20260911",
+        "status": "running",
+        "exit_code": null,
+        "pid": 3351209,
+        "uptime_seconds": 14,
+        "tmux_active": true
+      },
+      "memory_admission": {
+        "assessed_at": "2026-09-11T21:29:10.676083Z",
+        "available_physical_bytes": 15228657664,
+        "captured_at": "2026-09-11T21:29:10.675810Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15228657664,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "monitor_dispatch": {
+        "accepted": true,
+        "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+        "model_thinking_overrides": false
+      },
+      "monitor_adoption": {
+        "confirmed_by": "Root forwarded authoritative MONITOR_ADOPTED",
+        "status": "running",
+        "observation_command_seconds": 0.8,
+        "same_handle_source_cwd_output": true
+      },
+      "terminal_supervisor": {
+        "task": "folr-learned-retention-b01-learned-event-20260911",
+        "status": "finished",
+        "exit_code": 0,
+        "pid": 3351209,
+        "uptime_seconds": 2065,
+        "tmux_active": false
+      }
+    }
+  ],
+  "execution_plan": "two preselected independent detached arms, submit consecutively with fresh per-arm admission; each preserves its whole1800s cap, no retry or replacement. No result-dependent arm choice.",
+  "caps_seconds": {
+    "per_arm": 1800,
+    "native_sum": 3600,
+    "support": 300,
+    "complete": 3900
+  },
+  "prospective_exposure": {
+    "real_learners": 2,
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "final_episodes": 256,
+    "final_ticks": 5120,
+    "total_team_ticks": 205120,
+    "replay_GRU_rows": 66783360,
+    "acting_rows": 1076880,
+    "learned_gate_forward_rows": 33930120
+  },
+  "independent_review": {
+    "agent": "learned_retention_review",
+    "model": "Astra/high",
+    "read_only": true,
+    "material_findings": 0,
+    "review_command_seconds": 2.2064189,
+    "consumer_question": "complete finite arrays must be checked before learned_primary",
+    "consumer_plan_accepted": true,
+    "runtime_acceptance_asserted": false
+  },
+  "focused_checks": {
+    "source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+    "selected_cases": 10,
+    "initial_passed": 8,
+    "initial_setup_errors": 2,
+    "error": "pytest tmp_path could not mkdir absent parent under fresh remote worktree; no source defect",
+    "correction": "create only test scratch parent; rerun only two cases that never entered their bodies",
+    "remaining_passed": 2,
+    "test_process_seconds": [
+      2.323280825978145,
+      1.9172421910334378
+    ],
+    "known_test_directory_cumulative_seconds": 36.731686817011585,
+    "both_scratch_paths_absent": true,
+    "native_scientific_exposure": 0,
+    "synthetic_optimizer_steps": 2,
+    "initial_output": "..E..E....                                                               [100%]\n==================================== ERRORS ====================================\n___ ERROR at setup of test_runner_seed_routing_with_standins[LEARNED_EVENT] ____\n\nself = PosixPath('/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911')\nmode = 448, parents = False, exist_ok = False\n\n    def mkdir(self, mode=0o777, parents=False, exist_ok=False):\n        \"\"\"\n        Create a new directory at this given path.\n        \"\"\"\n        try:\n>           self._accessor.mkdir(self, mode)\nE           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911'\n\n../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError\n_ ERROR at setup of test_learned_optimizer_independent_target_replay_copy_and_checkpoint _\n\nself = PosixPath('/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911')\nmode = 448, parents = False, exist_ok = False\n\n    def mkdir(self, mode=0o777, parents=False, exist_ok=False):\n        \"\"\"\n        Create a new directory at this given path.\n        \"\"\"\n        try:\n>           self._accessor.mkdir(self, mode)\nE           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911'\n\n../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError\n=========================== short test summary info ============================\nERROR tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_runner_seed_routing_with_standins[LEARNED_EVENT]\nERROR tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_learned_optimizer_independent_target_replay_copy_and_checkpoint\n8 passed, 2 errors in 1.68s\n\n{\"command\": [\"/home/wu/.venvs/hmasd/bin/python\", \"-B\", \"-m\", \"pytest\", \"-q\", \"-p\", \"no:cacheprovider\", \"--basetemp\", \"/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_initial_birth_previous_action_and_terminal_counts\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_actor_input_reset_timing_and_replay_parity[LEARNED_EVENT]\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_runner_seed_routing_with_standins[LEARNED_EVENT]\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_learned_constructor_common_rng_tensors_and_no_event_parity\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_learned_lifetime_gate_input_state_gradient_and_before_gru\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_learned_optimizer_independent_target_replay_copy_and_checkpoint\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_learned_primary_inclusive_thresholds\"], \"pytest_returncode\": 1, \"whole_test_seconds\": 2.323280825978145}\n{\"scratch_absent\": true, \"scratch\": \"/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911\"}\n",
+    "remaining_output": "..                                                                       [100%]\n2 passed in 1.52s\n\n{\"command\": [\"/home/wu/.venvs/hmasd/bin/python\", \"-B\", \"-m\", \"pytest\", \"-q\", \"-p\", \"no:cacheprovider\", \"--basetemp\", \"/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911_remaining\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_runner_seed_routing_with_standins[LEARNED_EVENT]\", \"tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py::test_learned_optimizer_independent_target_replay_copy_and_checkpoint\"], \"pytest_returncode\": 0, \"whole_test_seconds\": 1.9172421910334378}\n{\"scratch_absent\": true, \"scratch\": \"/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/test/learned_retention_b01_20260911_remaining\"}\n"
+  },
+  "staging": {
+    "checkout_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+    "tracked_status": "clean",
+    "handles_before_submission": "both not_found",
+    "scientific_output_and_memory_paths_before_submission": "absent",
+    "command_return_note": "fetch/worktree creation succeeded; final agent-task --help returns1 after printing usage, causing local assertion. Do not repeat accepted staging. zsh prompt initialization diagnostics did not reject fetch/add.",
+    "literal_command_syntax_check": "both passed after transient SSH connect recovery; same command bytes",
+    "syntax_reconciliation_output": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6\n\nreturncode=0\n"
+  },
+  "support": {
+    "measured_invoked_commands": [
+      {
+        "label": "assignment initial reads 0",
+        "seconds": 0.4485755
+      },
+      {
+        "label": "assignment initial reads 1",
+        "seconds": 0.6529152
+      },
+      {
+        "label": "assignment focused reads 0",
+        "seconds": 0.3449747
+      },
+      {
+        "label": "assignment focused reads 1",
+        "seconds": 2.117648
+      },
+      {
+        "label": "allocation/implementation reading 0",
+        "seconds": 0.2423704
+      },
+      {
+        "label": "allocation/implementation reading 1",
+        "seconds": 0.2693617
+      },
+      {
+        "label": "bounded execution/test contract read 0",
+        "seconds": 0.2262349
+      },
+      {
+        "label": "bounded execution/test contract read 1",
+        "seconds": 0.222928
+      },
+      {
+        "label": "resume state/control config 0",
+        "seconds": 0.4791883
+      },
+      {
+        "label": "resume state/control config 1",
+        "seconds": 0.246383
+      },
+      {
+        "label": "specific test and review contract 0",
+        "seconds": 0.2270148
+      },
+      {
+        "label": "specific test and review contract 1",
+        "seconds": 0.2639427
+      },
+      {
+        "label": "owned changed path and review selection 0",
+        "seconds": 0.2170894
+      },
+      {
+        "label": "owned changed path and review selection 1",
+        "seconds": 0.2587744
+      },
+      {
+        "label": "L0 and dependent consumer grounding 0",
+        "seconds": 0.2117196
+      },
+      {
+        "label": "L0 and dependent consumer grounding 1",
+        "seconds": 0.1931081
+      },
+      {
+        "label": "current source and owner boundary 0",
+        "seconds": 0.6253051
+      },
+      {
+        "label": "current source and owner boundary 1",
+        "seconds": 0.2590729
+      },
+      {
+        "label": "prospective card and authority preparation",
+        "seconds": 0.3015646
+      },
+      {
+        "label": "focused changed-risk fixture edit",
+        "seconds": 0.017
+      },
+      {
+        "label": "owner item invocation syntax and ledger currentness",
+        "seconds": 0.4267207
+      },
+      {
+        "label": "card intake owner item and ledger publication preparation",
+        "seconds": 0.6335984
+      },
+      {
+        "label": "runner instructions and source publication readback",
+        "seconds": 0.3822439
+      },
+      {
+        "label": "independent reviewer six read/search/arithmetic commands",
+        "seconds": 2.2064189
+      },
+      {
+        "label": "source/card/review commit and immediate push",
+        "seconds": 5.4310006
+      },
+      {
+        "label": "remote published source staging and supervisor syntax",
+        "seconds": 6.0889589
+      },
+      {
+        "label": "remote focused tests including transport and scratch cleanup",
+        "seconds": 3.0706062
+      },
+      {
+        "label": "two failed fixture-setup checks after scratch-parent correction",
+        "seconds": 2.6821581
+      },
+      {
+        "label": "supervisor command ownership and prospective namespace absence",
+        "seconds": 0.6904653
+      },
+      {
+        "label": "focused-check acceptance and exact launch command publication preparation",
+        "seconds": 0.2943448
+      },
+      {
+        "label": "exact command syntax/current source acceptance commit and immediate push",
+        "seconds": 10.0119252
+      },
+      {
+        "label": "command publication completion wait (invoked wall continued)",
+        "seconds": 2.1e-06
+      },
+      {
+        "label": "local command/check evidence commit and immediate push after no-effect SSH timeout",
+        "seconds": 4.9980025
+      },
+      {
+        "label": "same read-only command syntax and remote source reconciliation",
+        "seconds": 0.8333313
+      },
+      {
+        "label": "prelaunch owner/source/monitor boundary 0",
+        "seconds": 0.5279781
+      },
+      {
+        "label": "prelaunch owner/source/monitor boundary 1",
+        "seconds": 0.343688
+      },
+      {
+        "label": "RETAIN supervisor submission control call",
+        "seconds": 0.7917308
+      },
+      {
+        "label": "RETAIN immediate launch/admission acceptance readback",
+        "seconds": 1.063376
+      },
+      {
+        "label": "direct RETAIN Monitor dispatch app call",
+        "seconds": 0.169
+      },
+      {
+        "label": "LEARNED_EVENT supervisor submission control call",
+        "seconds": 0.6807742
+      },
+      {
+        "label": "LEARNED_EVENT immediate launch/admission acceptance readback",
+        "seconds": 0.8827406
+      },
+      {
+        "label": "direct LEARNED_EVENT Monitor dispatch app call",
+        "seconds": 0.18
+      },
+      {
+        "label": "Monitor RETAIN adoption observation command (Root receipt)",
+        "seconds": 0.9
+      },
+      {
+        "label": "Monitor LEARNED_EVENT adoption observation command (Root receipt)",
+        "seconds": 0.8
+      },
+      {
+        "label": "accepted launch/adoption and restart evidence publication preparation",
+        "seconds": 0.3085179
+      },
+      {
+        "label": "launch/adoption evidence commit immediate push and clean boundary",
+        "seconds": 5.4587532
+      },
+      {
+        "label": "Monitor terminal shared query for both arms (Root receipt; not split)",
+        "seconds": 1.2
+      },
+      {
+        "label": "terminal intake current card/owner/config 0",
+        "seconds": 0.3674994
+      },
+      {
+        "label": "terminal intake current card/owner/config 1",
+        "seconds": 0.5355873
+      },
+      {
+        "label": "terminal artifact inventory/status/digests for both exact handles",
+        "seconds": 0.9571765
+      },
+      {
+        "label": "collect and verify all terminal checkpoints/summaries/admission/timing/supervisor bytes",
+        "seconds": 4.0198313
+      },
+      {
+        "label": "result reading rule and complete native clock/command interpretation 0",
+        "seconds": 0.2274848
+      },
+      {
+        "label": "result reading rule and complete native clock/command interpretation 1",
+        "seconds": 0.1712237
+      },
+      {
+        "label": "complete primary/checkpoint/optimizer/timing acceptance and frozen rule analysis",
+        "seconds": 2.5284123
+      },
+      {
+        "label": "existing retention convention and current owner/decision boundaries 0",
+        "seconds": 0.2982633
+      },
+      {
+        "label": "existing retention convention and current owner/decision boundaries 1",
+        "seconds": 0.5100102
+      },
+      {
+        "label": "dependent exposure/resource interpretation and scoped preservation 0",
+        "seconds": 0.2365352
+      },
+      {
+        "label": "dependent exposure/resource interpretation and scoped preservation 1",
+        "seconds": 0.1908193
+      },
+      {
+        "label": "shared owner/audit currentness before scientific intake updates",
+        "seconds": 0.328368
+      },
+      {
+        "label": "existing scientific-tools run-level paired endpoint summary (one fit pair only)",
+        "seconds": 0.4090099
+      },
+      {
+        "label": "complete scientific intake summary DIRECTION Chinese brief owner trace and audit",
+        "seconds": 0.4395847
+      },
+      {
+        "label": "exact completed-root cleanup inventory and no-live-handle check",
+        "seconds": 1.1188109
+      },
+      {
+        "label": "retain terminal archive verify control/analysis archive and preserve local source ref",
+        "seconds": 0.4509778
+      },
+      {
+        "label": "verified preservation then exact remote worktree/supervisor reclamation and absence",
+        "seconds": 1.0604384
+      }
+    ],
+    "native_clocks_not_in_support": true,
+    "full_budget_conformance": "native caps pass; full support/complete certificate unavailable because unitemized terms remain; no measured breach",
+    "note": "outer command durations include their nested operations once; test subclocks and reviewer detail are not double charged. Tool editing/authoring outside measured commands is not claimed zero.",
+    "known_seconds_through_snapshot": 72.73154000000001,
+    "monitor_adoption_seconds_included": 1.7,
+    "known_monitor_seconds_included": 2.9,
+    "unmeasured_terms": [
+      "unitemized tool editing/authoring work",
+      "any interim Monitor observation work not forwarded as timed receipts",
+      "main integration work not supplied in this direction ledger",
+      "publication and cleanup beyond this snapshot"
+    ]
+  },
+  "monitor": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "source": "live primary .codex/hmasd-monitor.toml and Root correction",
+    "dispatch": "both direct app sends accepted",
+    "adoption": "both adopted and terminal facts delivered to Root",
+    "routine_DM_polling": false,
+    "terminal_shared_query_seconds": 1.2
+  },
+  "cleanup": {
+    "remote": {
+      "removed_at_utc": "2026-09-11T22:17:49.048620+00:00",
+      "removed_paths": [
+        "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30",
+        "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911",
+        "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911"
+      ],
+      "disk_absence": {
+        "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30": true,
+        "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911": true,
+        "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911": true
+      },
+      "worktree_registration_absent": true,
+      "remote_source_ref": "refs/archive/folr-learned-retention-b01-20260911",
+      "source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "all20_preserved_source_files_still_matched_before_removal": true,
+      "other_roots_targeted": false
+    },
+    "inventory": {
+      "source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "tracked_status": "clean",
+      "ignored_files": 9,
+      "regenerable_cache_files": 1,
+      "noncommitted_noncache_files": [
+        "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event/final.pt",
+        "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event/summary.json",
+        "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_memory.json",
+        "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_whole_time.txt",
+        "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain/final.pt",
+        "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain/summary.json",
+        "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_memory.json",
+        "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_whole_time.txt"
+      ],
+      "unexpected_noncommitted_files": [],
+      "two_supervisors_finished_no_tmux": true
+    },
+    "preservation": {
+      "preserved_at": "2026-09-11T22:16:33.977569+00:00",
+      "root": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_retained_20260911",
+      "terminal_archive": {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_retained_20260911\\exact_terminal_artifacts.tar.gz",
+        "bytes": 8506791,
+        "sha256": "20b58004ab91c498e30cd7f1f15dfbddd38326a3bc35d90947ad034c7d73f51b",
+        "original_members_verified": 20
+      },
+      "control_archive": {
+        "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_retained_20260911\\control_and_analysis.tar.gz",
+        "bytes": 14549,
+        "sha256": "5221439cbf578c591309555d8ad05312c33dc92f274f970c8f2222f2f7fad50d",
+        "members": [
+          {
+            "member": "learned_retention_b01_control_20260911/acceptance_learned_event.txt",
+            "bytes": 682,
+            "sha256": "4f381ae8c1a0dab8b3aaca3d8e143e6c23156f19abb5021dd84b6b2398238d3d"
+          },
+          {
+            "member": "learned_retention_b01_control_20260911/acceptance_retain.txt",
+            "bytes": 675,
+            "sha256": "bcf18684e994e0596bd574e99bbbd1146a4e8269e403deaa9dd697d700320566"
+          },
+          {
+            "member": "learned_retention_b01_control_20260911/closeout_inventory.json",
+            "bytes": 1026,
+            "sha256": "ad0fa72f8e508b67bceaed5ee61d1fa0a3926880c4b6d56b76b9f1fcbb405bf5"
+          },
+          {
+            "member": "learned_retention_b01_control_20260911/command_syntax_reconciliation.txt",
+            "bytes": 58,
+            "sha256": "e9b7fad2baa205678333c89f97819bf05b214a6846163f9cb26c829fffad62ec"
+          },
+          {
+            "member": "learned_retention_b01_control_20260911/focused_tests.txt",
+            "bytes": 3685,
+            "sha256": "ac8de3bcd5761d5cdccc32640a08338821ca7b1ee8af689deedc38ae96f91ff3"
+          },
+          {
+            "member": "learned_retention_b01_control_20260911/focused_tests_command.py",
+            "bytes": 1657,
+            "sha256": "25fb7011543cac9da8860460c9986597872f8f69353673cbfbd96942f3530198"
+          },
+          {
+            "member": "learned_retention_b01_control_20260911/focused_tests_remaining.txt",
+            "bytes": 903,
+            "sha256": "0ba43f626fc5cbd36975dce0b36fafa1ef31d6382286451b39bb3c56d2a481de"
+          },
+          {
+            "member": "learned_retention_b01_control_20260911/focused_tests_remaining_command.py",
+            "bytes": 1420,
+            "sha256": "36a067b58ea17f2e344f96dcac0a62a14cb005fbc4a98dba15cab3a58b53cdad"
+          },
+          {
+            "member": "learned_retention_b01_control_20260911/launch_learned_event.json",
+            "bytes": 482,
+            "sha256": "1dc8986660f9f2b2130dba3a1c708520e24697691ebc1a9f0edbcf2f645d34dd"
+          },
+          {
+            "member": "learned_retention_b01_control_20260911/launch_retain.json",
+            "bytes": 447,
+            "sha256": "522dd39eb2b0a78d886512bcad58613e109996119d55f7ee7e73e30f60722904"
+          },
+          {
+            "member": "learned_retention_b01_control_20260911/prelaunch_identity.txt",
+            "bytes": 1739,
+            "sha256": "43e52b8039d7484d5e789ff4c5916edb00d57abadf246f432b19b36da696bc33"
+          },
+          {
+            "member": "learned_retention_b01_control_20260911/support_snapshot.json",
+            "bytes": 5040,
+            "sha256": "b4d1c690e1939d07358bf09ed4f86fba555f014868447dba75fe9085b0209d70"
+          },
+          {
+            "member": "learned_retention_b01_control_20260911/terminal_inventory.json",
+            "bytes": 6011,
+            "sha256": "fe6b2a715d3b460ff8752a0bffdf042a5bea6aef495c1053e8e4e88225e5852f"
+          },
+          {
+            "member": "learned_retention_b01_collected_20260911/accepted_analysis.json",
+            "bytes": 19902,
+            "sha256": "996fcca2d8b00ae04d1bbfc92b5e984c64e15303c2adb72b8e7c2044808acc2a"
+          },
+          {
+            "member": "learned_retention_b01_collected_20260911/analyze_collected.py",
+            "bytes": 6882,
+            "sha256": "a5a4f5177dbd3d79b0e2c663cd5dbc1a159d89b0c5f294c540f6d54c91970655"
+          },
+          {
+            "member": "learned_retention_b01_collected_20260911/run_scores.csv",
+            "bytes": 138,
+            "sha256": "28f9f713c1eb9a6cf08ec5f9a53f7367f4ee35a36642c3927e02cb2164942756"
+          },
+          {
+            "member": "learned_retention_b01_collected_20260911/run_level_summary.json",
+            "bytes": 1223,
+            "sha256": "f6ba0e2530a418220b41cac907defe8727b75c6ded6f5b19e3366c33306f2b50"
+          },
+          {
+            "member": "learned_retention_b01_collected_20260911/collection_receipt.json",
+            "bytes": 8495,
+            "sha256": "4cd3f4963c19043d8cb01108fd3e103c8bf1b351e51d1a8372eafc285ecbb1df"
+          }
+        ]
+      },
+      "local_source_ref": "refs/archive/folr-learned-retention-b01-20260911",
+      "source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6"
+    },
+    "local_redundant_paths": [
+      "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911",
+      "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_control_20260911"
+    ],
+    "local_cleanup_status": "guarded PowerShell Remove-Item command rejected by automatic approval review before CreateProcess; blocked by policy; no deletion effects",
+    "local_redundant_paths_present": [
+      true,
+      true
+    ],
+    "alternate_deletion_attempted": false,
+    "local_shared_authoring_checkout_retained": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr",
+    "Root_integration_and_reclamation_acceptance": "pending",
+    "cleanup_owner": "original FOLR DM for same exact local redundant paths when permitted; Root accepts remote reclamation and retained evidence"
+  },
+  "command_commit": "b28f7c1c2bebf7f9632959ce96e8478b36e0d354",
+  "arms_results": {
+    "RETAIN": {
+      "arm": "RETAIN",
+      "training_seed": 7809,
+      "evaluation_seed": 107809,
+      "launch_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "status": "complete",
+      "training_episodes": 5000,
+      "training_ticks": 100000,
+      "optimizer_steps": 4969,
+      "evaluation_episodes": 128,
+      "evaluation_ticks": 2560,
+      "evaluation_returns": [
+        4.66,
+        13.930000000000001,
+        -4.629999999999999,
+        0.8299999999999996,
+        10.56,
+        11.279999999999998,
+        -6.17,
+        0.1100000000000001,
+        0.3799999999999999,
+        -0.08000000000000074,
+        6.939999999999998,
+        -4.609999999999998,
+        -3.5999999999999996,
+        12.700000000000001,
+        -0.30000000000000027,
+        8.299999999999999,
+        3.6999999999999993,
+        8.249999999999998,
+        11.329999999999998,
+        -3.67,
+        -4.53,
+        10.379999999999997,
+        5.019999999999998,
+        -8.910000000000002,
+        -3.6699999999999986,
+        -10.349999999999998,
+        -7.220000000000002,
+        -11.760000000000002,
+        -9.270000000000001,
+        7.229999999999999,
+        9.31,
+        -2.64,
+        -9.329999999999998,
+        11.249999999999998,
+        4.559999999999999,
+        -1.0100000000000005,
+        -4.24,
+        -4.17,
+        6.8599999999999985,
+        5.499999999999999,
+        1.6999999999999988,
+        -3.99,
+        1.5099999999999998,
+        3.880000000000001,
+        -8.589999999999998,
+        0.9800000000000006,
+        17.63,
+        2.0599999999999983,
+        0.3699999999999999,
+        -4.010000000000001,
+        13.12,
+        0.32999999999999985,
+        -5.84,
+        10.279999999999998,
+        1.63,
+        1.9399999999999986,
+        -10.790000000000001,
+        9.15,
+        -9.84,
+        2.94,
+        1.1799999999999995,
+        -11.520000000000001,
+        1.0500000000000007,
+        3.7099999999999986,
+        -4.649999999999997,
+        -11.430000000000001,
+        0.6400000000000003,
+        -4.37,
+        -4.890000000000001,
+        -5.829999999999998,
+        -3.3200000000000003,
+        7.52,
+        4.449999999999999,
+        0.6400000000000003,
+        1.19,
+        6.499999999999999,
+        -8.830000000000002,
+        -2.4000000000000004,
+        -1.1399999999999992,
+        9.280000000000003,
+        3.2699999999999996,
+        -0.2400000000000002,
+        9.589999999999998,
+        -9.200000000000003,
+        -6.600000000000002,
+        -3.1799999999999997,
+        2.2000000000000006,
+        -2.619999999999999,
+        -7.410000000000004,
+        4.100000000000003,
+        -5.979999999999999,
+        6.5699999999999985,
+        -5.859999999999999,
+        -2.9499999999999993,
+        1.31,
+        2.8499999999999996,
+        -0.9000000000000002,
+        2.2800000000000002,
+        -13.749999999999998,
+        0.3699999999999998,
+        -4.58,
+        -0.72,
+        1.2600000000000011,
+        2.2600000000000002,
+        1.2199999999999998,
+        -21.040000000000003,
+        -1.1800000000000008,
+        8.88,
+        -9.5,
+        -2.829999999999999,
+        2.069999999999998,
+        0.36999999999999955,
+        -0.94,
+        6.33,
+        -2.99,
+        -6.210000000000001,
+        -6.000000000000001,
+        -1.1600000000000004,
+        14.95,
+        0.9700000000000006,
+        -8.239999999999997,
+        -12.049999999999999,
+        -3.71,
+        -0.8100000000000003,
+        3.4600000000000004,
+        -1.5199999999999996,
+        -10.879999999999999,
+        3.0900000000000007
+      ],
+      "training_return_sum": -27223.240000000085,
+      "training_events": {
+        "births": 20436,
+        "departures": 6905,
+        "survivor_opportunities": 44332,
+        "eligible_survivor_opportunities": 265986,
+        "survivor_resets": 0,
+        "survivor_attenuations": 0
+      },
+      "evaluation_events": {
+        "births": 497,
+        "departures": 169,
+        "survivor_opportunities": 1160,
+        "eligible_survivor_opportunities": 6626,
+        "survivor_resets": 0,
+        "survivor_attenuations": 0
+      },
+      "mean_native_return": -0.16007812500000018,
+      "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final greedy evaluation episodes",
+      "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107809 for final evaluation",
+      "torch_version": "2.7.0+cu118",
+      "numpy_version": "1.26.3",
+      "torch_threads": [
+        1,
+        1
+      ],
+      "wall_seconds": 834.937958498951,
+      "peak_rss_kib": 638384
+    },
+    "LEARNED_EVENT": {
+      "arm": "LEARNED_EVENT",
+      "training_seed": 7809,
+      "evaluation_seed": 107809,
+      "launch_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "status": "complete",
+      "training_episodes": 5000,
+      "training_ticks": 100000,
+      "optimizer_steps": 4969,
+      "evaluation_episodes": 128,
+      "evaluation_ticks": 2560,
+      "evaluation_returns": [
+        4.299999999999999,
+        -5.99,
+        -1.7600000000000002,
+        12.4,
+        -10.78,
+        -0.6000000000000013,
+        10.05,
+        9.330000000000002,
+        -5.04,
+        8.779999999999998,
+        3.2700000000000005,
+        3.9999999999999996,
+        -6.04,
+        6.9899999999999975,
+        -11.259999999999998,
+        1.1099999999999999,
+        -3.9399999999999995,
+        -12.379999999999997,
+        8.97,
+        -2.0999999999999996,
+        7.829999999999998,
+        11.959999999999996,
+        -4.170000000000001,
+        -7.580000000000001,
+        4.07,
+        8.29,
+        8.559999999999999,
+        -0.08999999999999975,
+        5.34,
+        2.829999999999999,
+        -12.569999999999999,
+        -0.0600000000000005,
+        0.4899999999999982,
+        2.0800000000000014,
+        -1.6500000000000026,
+        -9.4,
+        -6.77,
+        -2.27,
+        6.979999999999999,
+        -2.4,
+        3.51,
+        8.96,
+        -5.26,
+        18.48,
+        4.17,
+        0.4399999999999995,
+        -2.52,
+        3.080000000000001,
+        -4.159999999999998,
+        10.219999999999999,
+        -0.6400000000000005,
+        9.939999999999998,
+        7.61,
+        -5.540000000000001,
+        4.909999999999998,
+        2.1599999999999997,
+        2.5500000000000007,
+        -7.310000000000002,
+        1.039999999999999,
+        -4.65,
+        -4.790000000000001,
+        4.93,
+        1.62,
+        13.290000000000001,
+        1.1700000000000013,
+        -2.16,
+        4.090000000000001,
+        18.08,
+        -3.05,
+        5.9799999999999995,
+        8.86,
+        14.130000000000003,
+        0.5600000000000005,
+        -5.2700000000000005,
+        10.540000000000001,
+        5.009999999999998,
+        5.92,
+        3.800000000000001,
+        1.2400000000000009,
+        5.52,
+        -7.47,
+        -1.8500000000000008,
+        3.080000000000002,
+        -6.52,
+        -5.51,
+        6.1000000000000005,
+        -1.9600000000000017,
+        13.479999999999997,
+        10.610000000000001,
+        1.9299999999999997,
+        16.649999999999995,
+        2.099999999999999,
+        11.579999999999998,
+        -7.629999999999999,
+        -3.9400000000000004,
+        -0.39000000000000146,
+        1.9399999999999975,
+        1.4400000000000013,
+        0.019999999999999518,
+        -7.289999999999999,
+        4.23,
+        4.639999999999999,
+        14.66,
+        -2.190000000000001,
+        2.4599999999999995,
+        8.4,
+        -0.3799999999999999,
+        -4.800000000000002,
+        -9.76,
+        -0.19000000000000106,
+        -6.979999999999999,
+        1.2000000000000006,
+        -1.7300000000000002,
+        0.18000000000000016,
+        1.4799999999999995,
+        -2.8100000000000014,
+        -2.400000000000001,
+        -3.3999999999999995,
+        -0.9099999999999966,
+        6.179999999999999,
+        0.2999999999999996,
+        11.55,
+        -2.1400000000000006,
+        0.5400000000000007,
+        -2.38,
+        -5.179999999999999,
+        5.160000000000001,
+        5.879999999999997
+      ],
+      "training_return_sum": -22073.37000000001,
+      "training_events": {
+        "births": 20599,
+        "departures": 7580,
+        "survivor_opportunities": 45865,
+        "eligible_survivor_opportunities": 262032,
+        "survivor_resets": 0,
+        "survivor_attenuations": 45865
+      },
+      "evaluation_events": {
+        "births": 515,
+        "departures": 159,
+        "survivor_opportunities": 1317,
+        "eligible_survivor_opportunities": 6951,
+        "survivor_resets": 0,
+        "survivor_attenuations": 1317
+      },
+      "mean_native_return": 1.6032812499999995,
+      "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final greedy evaluation episodes",
+      "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107809 for final evaluation",
+      "torch_version": "2.7.0+cu118",
+      "numpy_version": "1.26.3",
+      "torch_threads": [
+        1,
+        1
+      ],
+      "wall_seconds": 867.4317783860024,
+      "peak_rss_kib": 649364
+    }
+  },
+  "accepted_readback": {
+    "RETAIN": {
+      "identities_counts_finite_arrays_published_mean_pass": true,
+      "checkpoint_updates": 4969,
+      "checkpoint_actor_parameter_count": 100614,
+      "optimizer_parameter_states": 41,
+      "optimizer_min_step": 4969.0,
+      "optimizer_max_step": 4969.0,
+      "online_target_exact_final_copy": true,
+      "all_published_network_optimizer_tensors_finite": true,
+      "conditional_return_sd": 6.842348274905938,
+      "minimum_return": -21.040000000000003,
+      "maximum_return": 17.63,
+      "training_return_mean": -5.444648000000017,
+      "timing": {
+        "runner_wall_seconds": 834.937958498951,
+        "whole_admission_runner_exit_seconds": 835.33,
+        "supervisor_log_duration_seconds": 836,
+        "supervisor_header": "=== Task 'folr-learned-retention-b01-retain-20260911' started at 2026-09-12T05:28:07+08:00 ===",
+        "supervisor_terminal": "=== Task 'folr-learned-retention-b01-retain-20260911' exited with code 0 at 2026-09-12T05:42:03+08:00 (Duration: 836s) ===",
+        "runner_peak_rss_kib": 638384,
+        "whole_chain_peak_rss_kib": 669112,
+        "user_seconds": 820.42,
+        "system_seconds": 16.43,
+        "exit_code": 0
+      },
+      "progress_rows": [
+        {
+          "episode": 200,
+          "updates": 169,
+          "wall_seconds": 30.023505526944064
+        },
+        {
+          "episode": 400,
+          "updates": 369,
+          "wall_seconds": 62.181741241016425
+        },
+        {
+          "episode": 600,
+          "updates": 569,
+          "wall_seconds": 95.29774435597938
+        },
+        {
+          "episode": 800,
+          "updates": 769,
+          "wall_seconds": 128.41550687002018
+        },
+        {
+          "episode": 1000,
+          "updates": 969,
+          "wall_seconds": 161.40527815802488
+        },
+        {
+          "episode": 1200,
+          "updates": 1169,
+          "wall_seconds": 194.91580780001823
+        },
+        {
+          "episode": 1400,
+          "updates": 1369,
+          "wall_seconds": 228.30235749203712
+        },
+        {
+          "episode": 1600,
+          "updates": 1569,
+          "wall_seconds": 261.4318741710158
+        },
+        {
+          "episode": 1800,
+          "updates": 1769,
+          "wall_seconds": 294.75080676795915
+        },
+        {
+          "episode": 2000,
+          "updates": 1969,
+          "wall_seconds": 328.0893843129743
+        },
+        {
+          "episode": 2200,
+          "updates": 2169,
+          "wall_seconds": 362.02217551204376
+        },
+        {
+          "episode": 2400,
+          "updates": 2369,
+          "wall_seconds": 396.0541864259867
+        },
+        {
+          "episode": 2600,
+          "updates": 2569,
+          "wall_seconds": 429.61521283898037
+        },
+        {
+          "episode": 2800,
+          "updates": 2769,
+          "wall_seconds": 463.3373454930261
+        },
+        {
+          "episode": 3000,
+          "updates": 2969,
+          "wall_seconds": 496.1461760819657
+        },
+        {
+          "episode": 3200,
+          "updates": 3169,
+          "wall_seconds": 529.0628219749779
+        },
+        {
+          "episode": 3400,
+          "updates": 3369,
+          "wall_seconds": 562.4212378959637
+        },
+        {
+          "episode": 3600,
+          "updates": 3569,
+          "wall_seconds": 596.1117613429669
+        },
+        {
+          "episode": 3800,
+          "updates": 3769,
+          "wall_seconds": 629.6838650410064
+        },
+        {
+          "episode": 4000,
+          "updates": 3969,
+          "wall_seconds": 662.9838178280042
+        },
+        {
+          "episode": 4200,
+          "updates": 4169,
+          "wall_seconds": 696.9654670839664
+        },
+        {
+          "episode": 4400,
+          "updates": 4369,
+          "wall_seconds": 730.406915139989
+        },
+        {
+          "episode": 4600,
+          "updates": 4569,
+          "wall_seconds": 764.1660066279583
+        },
+        {
+          "episode": 4800,
+          "updates": 4769,
+          "wall_seconds": 798.2703785690246
+        },
+        {
+          "episode": 5000,
+          "updates": 4969,
+          "wall_seconds": 833.1502239470137
+        }
+      ]
+    },
+    "LEARNED_EVENT": {
+      "identities_counts_finite_arrays_published_mean_pass": true,
+      "checkpoint_updates": 4969,
+      "checkpoint_actor_parameter_count": 100743,
+      "optimizer_parameter_states": 43,
+      "optimizer_min_step": 4969.0,
+      "optimizer_max_step": 4969.0,
+      "online_target_exact_final_copy": true,
+      "all_published_network_optimizer_tensors_finite": true,
+      "conditional_return_sd": 6.588527622711785,
+      "minimum_return": -12.569999999999999,
+      "maximum_return": 18.48,
+      "training_return_mean": -4.4146740000000015,
+      "gate": {
+        "parameter_count": 129,
+        "weight_shape": [
+          1,
+          128
+        ],
+        "bias_shape": [
+          1
+        ],
+        "weight_l2": 1.3390415229644184,
+        "initial_bias_float32": 4.595119953155518,
+        "final_bias": 4.789816379547119,
+        "bias_displacement": 0.19469642639160156,
+        "parameter_displacement_l2": 1.3531219082819292,
+        "nonzero_optimizer_square_avg": true,
+        "optimizer_steps_each": 4969,
+        "distribution_of_applied_gate_values": "not measured"
+      },
+      "timing": {
+        "runner_wall_seconds": 867.4317783860024,
+        "whole_admission_runner_exit_seconds": 867.79,
+        "supervisor_log_duration_seconds": 868,
+        "supervisor_header": "=== Task 'folr-learned-retention-b01-learned-event-20260911' started at 2026-09-12T05:29:10+08:00 ===",
+        "supervisor_terminal": "=== Task 'folr-learned-retention-b01-learned-event-20260911' exited with code 0 at 2026-09-12T05:43:38+08:00 (Duration: 868s) ===",
+        "runner_peak_rss_kib": 649364,
+        "whole_chain_peak_rss_kib": 671092,
+        "user_seconds": 846.91,
+        "system_seconds": 22.37,
+        "exit_code": 0
+      },
+      "progress_rows": [
+        {
+          "episode": 200,
+          "updates": 169,
+          "wall_seconds": 32.0722925279988
+        },
+        {
+          "episode": 400,
+          "updates": 369,
+          "wall_seconds": 67.72690283006523
+        },
+        {
+          "episode": 600,
+          "updates": 569,
+          "wall_seconds": 102.95885235501919
+        },
+        {
+          "episode": 800,
+          "updates": 769,
+          "wall_seconds": 138.08258036500774
+        },
+        {
+          "episode": 1000,
+          "updates": 969,
+          "wall_seconds": 173.22586434904952
+        },
+        {
+          "episode": 1200,
+          "updates": 1169,
+          "wall_seconds": 208.20939036202617
+        },
+        {
+          "episode": 1400,
+          "updates": 1369,
+          "wall_seconds": 243.371078355005
+        },
+        {
+          "episode": 1600,
+          "updates": 1569,
+          "wall_seconds": 278.4384003980085
+        },
+        {
+          "episode": 1800,
+          "updates": 1769,
+          "wall_seconds": 313.4604960610159
+        },
+        {
+          "episode": 2000,
+          "updates": 1969,
+          "wall_seconds": 348.0159966771025
+        },
+        {
+          "episode": 2200,
+          "updates": 2169,
+          "wall_seconds": 382.47335894510616
+        },
+        {
+          "episode": 2400,
+          "updates": 2369,
+          "wall_seconds": 417.4233115200186
+        },
+        {
+          "episode": 2600,
+          "updates": 2569,
+          "wall_seconds": 452.8395782971056
+        },
+        {
+          "episode": 2800,
+          "updates": 2769,
+          "wall_seconds": 488.5230572610162
+        },
+        {
+          "episode": 3000,
+          "updates": 2969,
+          "wall_seconds": 524.23621498805
+        },
+        {
+          "episode": 3200,
+          "updates": 3169,
+          "wall_seconds": 559.9832296790555
+        },
+        {
+          "episode": 3400,
+          "updates": 3369,
+          "wall_seconds": 595.852969020023
+        },
+        {
+          "episode": 3600,
+          "updates": 3569,
+          "wall_seconds": 632.0110289950389
+        },
+        {
+          "episode": 3800,
+          "updates": 3769,
+          "wall_seconds": 667.0974214270245
+        },
+        {
+          "episode": 4000,
+          "updates": 3969,
+          "wall_seconds": 701.2800404530717
+        },
+        {
+          "episode": 4200,
+          "updates": 4169,
+          "wall_seconds": 736.2048597410321
+        },
+        {
+          "episode": 4400,
+          "updates": 4369,
+          "wall_seconds": 771.6390187980141
+        },
+        {
+          "episode": 4600,
+          "updates": 4569,
+          "wall_seconds": 802.8561624240829
+        },
+        {
+          "episode": 4800,
+          "updates": 4769,
+          "wall_seconds": 834.3978776980657
+        },
+        {
+          "episode": 5000,
+          "updates": 4969,
+          "wall_seconds": 865.7706249320181
+        }
+      ]
+    }
+  },
+  "prediction": {
+    "DM": "WITHIN_MEI",
+    "confidence": "low",
+    "observed_branch": "LEARNED_EVENT_ABOVE_MEI",
+    "score": "miss",
+    "owner": "not taken"
+  },
+  "pair_totals": {
+    "real_training_fits": 2,
+    "independent_training_pairs": 1,
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_ticks": 5120,
+    "total_team_ticks": 205120,
+    "replay_GRU_rows": 66783360,
+    "acting_rows": 1076880,
+    "learned_gate_forward_rows": 33930120,
+    "learning_gate_displacement_l2": 1.3531219082819292,
+    "gate_displacement_relative_to_initial_gate_norm": 0.294469333135194
+  },
+  "run_analysis": {
+    "helper": "current primary .agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py",
+    "input": "task,seed,arm,score\neasy_traffic_junction,7809,RETAIN,-0.16007812500000018\neasy_traffic_junction,7809,LEARNED_EVENT,1.6032812499999995\n",
+    "output": {
+      "unit": "caller-declared independent training run",
+      "inference": "descriptive only; no confidence interval or success classification",
+      "groups": [
+        {
+          "task": "easy_traffic_junction",
+          "arm": "LEARNED_EVENT",
+          "n": 1,
+          "mean": 1.6032812499999995,
+          "sample_sd": null,
+          "min": 1.6032812499999995,
+          "max": 1.6032812499999995,
+          "runs": {
+            "7809": 1.6032812499999995
+          }
+        },
+        {
+          "task": "easy_traffic_junction",
+          "arm": "RETAIN",
+          "n": 1,
+          "mean": -0.16007812500000018,
+          "sample_sd": null,
+          "min": -0.16007812500000018,
+          "max": -0.16007812500000018,
+          "runs": {
+            "7809": -0.16007812500000018
+          }
+        }
+      ],
+      "paired_differences": [
+        {
+          "task": "easy_traffic_junction",
+          "arm": "LEARNED_EVENT",
+          "baseline": "RETAIN",
+          "summary": {
+            "n": 1,
+            "mean": 1.7633593749999998,
+            "sample_sd": null,
+            "min": 1.7633593749999998,
+            "max": 1.7633593749999998
+          },
+          "differences": {
+            "7809": 1.7633593749999998
+          },
+          "unmatched_arm_seeds": [],
+          "unmatched_baseline_seeds": []
+        }
+      ]
+    },
+    "meaning": "one declared matched training-seed pair, not128 independent fits or episode-paired worlds"
+  },
+  "collection": {
+    "inventory": {
+      "source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "tracked_status": "",
+      "records": [
+        {
+          "tag": "retain",
+          "handle": "folr-learned-retention-b01-retain-20260911",
+          "status": {
+            "task": "folr-learned-retention-b01-retain-20260911",
+            "status": "finished",
+            "exit_code": 0,
+            "pid": 3351044,
+            "uptime_seconds": 2128,
+            "tmux_active": false
+          },
+          "files": [
+            {
+              "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain/final.pt",
+              "bytes": 4662779,
+              "sha256": "d7b870308d8da86bb3230b14dc4a2f9c6cf65eacb705f77235370e15cd18d4b3"
+            },
+            {
+              "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain/summary.json",
+              "bytes": 4068,
+              "sha256": "52e736b12cd56464f97cb5487e6e56fdc37a5c4b7d2f87b4b45ab8a685964b2c"
+            },
+            {
+              "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_memory.json",
+              "bytes": 504,
+              "sha256": "465ee020ec56b4fc956e635044557bbaca8655645647e86b2e3f7dbf78386283"
+            },
+            {
+              "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_whole_time.txt",
+              "bytes": 1232,
+              "sha256": "f2b0ef848c3229d113446151cdf6440a140acc35eae8a1a428d576a6c825a1c9"
+            },
+            {
+              "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/exit_code",
+              "bytes": 2,
+              "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            {
+              "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/pid",
+              "bytes": 8,
+              "sha256": "0d75abbc7ce4aca1dd7f604165079ac79491394fa3e8ecccfc494a48ceedd341"
+            },
+            {
+              "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/runner.sh",
+              "bytes": 1810,
+              "sha256": "2addd8077b4636b3231480b95d0a0100e36c00abe3286bd0c5c0c92c973e4a0e"
+            },
+            {
+              "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/start_time",
+              "bytes": 11,
+              "sha256": "513690b0e1195ac983286e2124a665fe31a4aac80cb2105f485da429c556eaf4"
+            },
+            {
+              "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/status",
+              "bytes": 9,
+              "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+            },
+            {
+              "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/task.log",
+              "bytes": 5909,
+              "sha256": "b1a89651cf39eea2324d29472c6e6ad85246228a6e2cfcc913536ba43f1d8f4f"
+            }
+          ]
+        },
+        {
+          "tag": "learned_event",
+          "handle": "folr-learned-retention-b01-learned-event-20260911",
+          "status": {
+            "task": "folr-learned-retention-b01-learned-event-20260911",
+            "status": "finished",
+            "exit_code": 0,
+            "pid": 3351209,
+            "uptime_seconds": 2065,
+            "tmux_active": false
+          },
+          "files": [
+            {
+              "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event/final.pt",
+              "bytes": 4666395,
+              "sha256": "a789dc52d53c288661d7699b9d7af8b4cf0907540ec2448c7639fa1986708b76"
+            },
+            {
+              "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event/summary.json",
+              "bytes": 3950,
+              "sha256": "6d0804635488894d0ff0e41c5f0cc79276a5e8e69e31f8b0a0453cfebf4e49a0"
+            },
+            {
+              "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_memory.json",
+              "bytes": 504,
+              "sha256": "4627b957a68364fe4fce3d7aea1a09503fb8094f4e74d620c467d4d2e021c04f"
+            },
+            {
+              "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_whole_time.txt",
+              "bytes": 1250,
+              "sha256": "2aa4f7c437846f2e431821667f0488165f74236b8ccdd815e0aee671379e3526"
+            },
+            {
+              "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/exit_code",
+              "bytes": 2,
+              "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            {
+              "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/pid",
+              "bytes": 8,
+              "sha256": "bb06eea4087314747323545825961e898aade5589a16a5352792b8aea6340721"
+            },
+            {
+              "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/runner.sh",
+              "bytes": 1901,
+              "sha256": "ad7b746d9afa8a794db72e46cfd62e9bc9002f7f020d3e000066a49c6c3e74a8"
+            },
+            {
+              "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/start_time",
+              "bytes": 11,
+              "sha256": "dce6fb779cbbb2331896e9c4cf78a8c6c96011019ae3634393edf23c2cdbaf4e"
+            },
+            {
+              "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/status",
+              "bytes": 9,
+              "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+            },
+            {
+              "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/task.log",
+              "bytes": 5797,
+              "sha256": "17ff530a2b6f40d4780f9753fc0f971cd7038f3023a7fc1fff8993d33ec9c25a"
+            }
+          ]
+        }
+      ]
+    },
+    "verified_archive": {
+      "archive": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\exact_terminal_artifacts.tar.gz",
+      "archive_bytes": 8506791,
+      "archive_sha256": "20b58004ab91c498e30cd7f1f15dfbddd38326a3bc35d90947ad034c7d73f51b",
+      "files": [
+        {
+          "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain/final.pt",
+          "bytes": 4662779,
+          "sha256": "d7b870308d8da86bb3230b14dc4a2f9c6cf65eacb705f77235370e15cd18d4b3",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\retain\\run\\final.pt",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain/summary.json",
+          "bytes": 4068,
+          "sha256": "52e736b12cd56464f97cb5487e6e56fdc37a5c4b7d2f87b4b45ab8a685964b2c",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\retain\\run\\summary.json",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_memory.json",
+          "bytes": 504,
+          "sha256": "465ee020ec56b4fc956e635044557bbaca8655645647e86b2e3f7dbf78386283",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\retain\\run\\learned_retention_b01_seed7809_retain_memory.json",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_whole_time.txt",
+          "bytes": 1232,
+          "sha256": "f2b0ef848c3229d113446151cdf6440a140acc35eae8a1a428d576a6c825a1c9",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\retain\\run\\learned_retention_b01_seed7809_retain_whole_time.txt",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/exit_code",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\retain\\supervisor\\exit_code",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/pid",
+          "bytes": 8,
+          "sha256": "0d75abbc7ce4aca1dd7f604165079ac79491394fa3e8ecccfc494a48ceedd341",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\retain\\supervisor\\pid",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/runner.sh",
+          "bytes": 1810,
+          "sha256": "2addd8077b4636b3231480b95d0a0100e36c00abe3286bd0c5c0c92c973e4a0e",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\retain\\supervisor\\runner.sh",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/start_time",
+          "bytes": 11,
+          "sha256": "513690b0e1195ac983286e2124a665fe31a4aac80cb2105f485da429c556eaf4",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\retain\\supervisor\\start_time",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/status",
+          "bytes": 9,
+          "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\retain\\supervisor\\status",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/task.log",
+          "bytes": 5909,
+          "sha256": "b1a89651cf39eea2324d29472c6e6ad85246228a6e2cfcc913536ba43f1d8f4f",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\retain\\supervisor\\task.log",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event/final.pt",
+          "bytes": 4666395,
+          "sha256": "a789dc52d53c288661d7699b9d7af8b4cf0907540ec2448c7639fa1986708b76",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\learned_event\\run\\final.pt",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event/summary.json",
+          "bytes": 3950,
+          "sha256": "6d0804635488894d0ff0e41c5f0cc79276a5e8e69e31f8b0a0453cfebf4e49a0",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\learned_event\\run\\summary.json",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_memory.json",
+          "bytes": 504,
+          "sha256": "4627b957a68364fe4fce3d7aea1a09503fb8094f4e74d620c467d4d2e021c04f",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\learned_event\\run\\learned_retention_b01_seed7809_learned_event_memory.json",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30/temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_whole_time.txt",
+          "bytes": 1250,
+          "sha256": "2aa4f7c437846f2e431821667f0488165f74236b8ccdd815e0aee671379e3526",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\learned_event\\run\\learned_retention_b01_seed7809_learned_event_whole_time.txt",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/exit_code",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\learned_event\\supervisor\\exit_code",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/pid",
+          "bytes": 8,
+          "sha256": "bb06eea4087314747323545825961e898aade5589a16a5352792b8aea6340721",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\learned_event\\supervisor\\pid",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/runner.sh",
+          "bytes": 1901,
+          "sha256": "ad7b746d9afa8a794db72e46cfd62e9bc9002f7f020d3e000066a49c6c3e74a8",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\learned_event\\supervisor\\runner.sh",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/start_time",
+          "bytes": 11,
+          "sha256": "dce6fb779cbbb2331896e9c4cf78a8c6c96011019ae3634393edf23c2cdbaf4e",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\learned_event\\supervisor\\start_time",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/status",
+          "bytes": 9,
+          "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\learned_event\\supervisor\\status",
+          "digest_match": true
+        },
+        {
+          "path": "/home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/task.log",
+          "bytes": 5797,
+          "sha256": "17ff530a2b6f40d4780f9753fc0f971cd7038f3023a7fc1fff8993d33ec9c25a",
+          "local": "temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_collected_20260911\\learned_event\\supervisor\\task.log",
+          "digest_match": true
+        }
+      ]
+    },
+    "acceptance_script": "from pathlib import Path\nimport json,math,re,hashlib,statistics,sys\nimport numpy as np\nimport torch\nfrom experiments.candidates.vap_folr_core.public_lifecycle_b01.collection import learned_primary\nroot=Path.cwd()\np=root/'temp/directions/vap_folr_core/exp/learned_retention_b01_collected_20260911'\ncontrol=root/'temp/directions/vap_folr_core/exp/learned_retention_b01_control_20260911'\ninv=json.loads((control/'terminal_inventory.json').read_text(encoding='utf-8'))\nexpected_sha='8d518ff300c13d809f8d88d0a259a3d8f6ff59d6'\nassert inv['source_sha']==expected_sha and not inv['tracked_status']\naccepted={};readback={}\nfor rec,arm in zip(inv['records'],['RETAIN','LEARNED_EVENT']):\n tag=rec['tag'];run=p/tag/'run';sup=p/tag/'supervisor'\n assert rec['status']['status']=='finished' and rec['status']['exit_code']==0 and not rec['status']['tmux_active']\n assert (sup/'exit_code').read_text().strip()=='0' and (sup/'status').read_text().strip()=='finished'\n s=json.loads((run/'summary.json').read_text())\n wanted=dict(arm=arm,training_seed=7809,evaluation_seed=107809,launch_sha=expected_sha,status='complete',training_episodes=5000,training_ticks=100000,optimizer_steps=4969,evaluation_episodes=128,evaluation_ticks=2560)\n assert all(s[k]==v for k,v in wanted.items())\n arr=s['evaluation_returns'];assert len(arr)==128 and all(math.isfinite(x) for x in arr)\n mean=float(np.mean(arr));assert mean==s['mean_native_return']\n assert s['torch_threads']==[1,1] and s['torch_version']=='2.7.0+cu118' and s['numpy_version']=='1.26.3'\n checkpoint=torch.load(run/'final.pt',map_location='cpu',weights_only=True)\n assert checkpoint['arm']==arm and checkpoint['updates']==4969\n for name in ['actor','mixer','target_actor','target_mixer']:\n  assert all(torch.isfinite(v).all() for v in checkpoint[name].values())\n for online,target in [('actor','target_actor'),('mixer','target_mixer')]:\n  assert checkpoint[online].keys()==checkpoint[target].keys()\n  assert all(torch.equal(v,checkpoint[target][k]) for k,v in checkpoint[online].items())\n states=checkpoint['optimiser']['state'];steps=[float(x['step']) for x in states.values()]\n assert all(x==4969 for x in steps)\n assert all(torch.isfinite(t).all() for st in states.values() for t in st.values() if isinstance(t,torch.Tensor))\n info=dict(identities_counts_finite_arrays_published_mean_pass=True,checkpoint_updates=checkpoint['updates'],checkpoint_actor_parameter_count=sum(v.numel() for v in checkpoint['actor'].values()),optimizer_parameter_states=len(states),optimizer_min_step=min(steps),optimizer_max_step=max(steps),online_target_exact_final_copy=True,all_published_network_optimizer_tensors_finite=True,conditional_return_sd=statistics.stdev(arr),minimum_return=min(arr),maximum_return=max(arr),training_return_mean=s['training_return_sum']/5000)\n if arm=='LEARNED_EVENT':\n  w=checkpoint['actor']['retention_gate.weight'];b=checkpoint['actor']['retention_gate.bias'];assert list(w.shape)==[1,128] and list(b.shape)==[1]\n  initial_bias=torch.tensor(math.log(99),dtype=b.dtype)\n  displacement=math.sqrt(float(torch.sum(w.double()**2)+(b.double()-initial_bias.double()).square().sum()))\n  assert displacement>0\n  names=list(checkpoint['actor']);opt_ids=checkpoint['optimiser']['param_groups'][0]['params']\n  gate_states={k:states[opt_ids[names.index(k)]] for k in ['retention_gate.weight','retention_gate.bias']}\n  assert all(float(v['step'])==4969 and float(v['square_avg'].abs().sum())>0 for v in gate_states.values())\n  info['gate']=dict(parameter_count=w.numel()+b.numel(),weight_shape=list(w.shape),bias_shape=list(b.shape),weight_l2=float(torch.linalg.vector_norm(w.double())),initial_bias_float32=float(initial_bias),final_bias=float(b.item()),bias_displacement=float(b.item()-initial_bias.item()),parameter_displacement_l2=displacement,nonzero_optimizer_square_avg=True,optimizer_steps_each=4969,distribution_of_applied_gate_values='not measured')\n  assert s['training_events']['survivor_attenuations']==s['training_events']['survivor_opportunities']>0\n  assert s['evaluation_events']['survivor_attenuations']==s['evaluation_events']['survivor_opportunities']>0\n else:\n  assert not any(k.startswith('retention_gate.') for k in checkpoint['actor'])\n  assert s['training_events']['survivor_attenuations']==0 and s['evaluation_events']['survivor_attenuations']==0\n assert s['training_events']['survivor_resets']==0 and s['evaluation_events']['survivor_resets']==0\n timing=next(run.glob('*whole_time.txt')).read_text()\n stamp=re.search(r'Elapsed .*?: ([0-9:.]+)',timing).group(1)\n seconds=0.0\n for part in stamp.split(':'):seconds=seconds*60+float(part)\n assert '\\tExit status: 0' in timing and seconds<1800\n log=(sup/'task.log').read_text();headers=[x for x in log.splitlines() if x.startswith('===')]\n duration=int(re.search(r'Duration: (\\d+)s',headers[-1]).group(1))\n log_summaries=[json.loads(x) for x in log.splitlines() if x.startswith('{') and '\"status\": \"complete\"' in x]\n assert len(log_summaries)==1 and log_summaries[0]==s\n progress=[json.loads(x) for x in log.splitlines() if x.startswith('{') and '\"episode\":' in x]\n assert [x['episode'] for x in progress]==list(range(200,5001,200))\n info['timing']=dict(runner_wall_seconds=s['wall_seconds'],whole_admission_runner_exit_seconds=seconds,supervisor_log_duration_seconds=duration,supervisor_header=headers[0],supervisor_terminal=headers[-1],runner_peak_rss_kib=s['peak_rss_kib'],whole_chain_peak_rss_kib=int(re.search(r'Maximum resident set size \\(kbytes\\): (\\d+)',timing).group(1)),user_seconds=float(re.search(r'User time \\(seconds\\): ([0-9.]+)',timing).group(1)),system_seconds=float(re.search(r'System time \\(seconds\\): ([0-9.]+)',timing).group(1)),exit_code=0)\n info['progress_rows']=progress\n accepted[arm]=s;readback[arm]=info\nprimary=learned_primary(accepted['RETAIN']['evaluation_returns'],accepted['LEARNED_EVENT']['evaluation_returns'])\nprimary.update(independent_training_pairs=1,conditional_episode_rows_paired=False,training_seed_standard_error=None,absolute_MEI=1.0)\nout=dict(technical_acceptance='PASS',source_sha=expected_sha,arms=accepted,readback=readback,primary=primary,training_mean_difference=readback['LEARNED_EVENT']['training_return_mean']-readback['RETAIN']['training_return_mean'],whole_native_sum_seconds=sum(x['timing']['whole_admission_runner_exit_seconds'] for x in readback.values()),runner_wall_sum_seconds=sum(x['timing']['runner_wall_seconds'] for x in readback.values()),cpu_user_system_sum_seconds=sum(x['timing']['user_seconds']+x['timing']['system_seconds'] for x in readback.values()),prediction=dict(DM='WITHIN_MEI',confidence='low',observed_branch=primary['rule'],score='miss',owner='not taken'))\n(p/'accepted_analysis.json').write_text(json.dumps(out,indent=2,allow_nan=False)+'\\n',encoding='utf-8')\nprint(json.dumps({k:v for k,v in out.items() if k!='arms'},indent=2))\n",
+    "all20_terminal_files_verified": true,
+    "additional_models_or_trajectories": 0,
+    "terminal_return_provenance": "Root MONITOR_TERMINAL; shared query1.2s unsplit, additional to0.9+0.8 adoption",
+    "original_archive_path_is_historical": true,
+    "current_terminal_archive": {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_retained_20260911\\exact_terminal_artifacts.tar.gz",
+      "bytes": 8506791,
+      "sha256": "20b58004ab91c498e30cd7f1f15dfbddd38326a3bc35d90947ad034c7d73f51b",
+      "original_members_verified": 20
+    },
+    "current_control_archive": {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\learned_retention_b01_retained_20260911\\control_and_analysis.tar.gz",
+      "bytes": 14549,
+      "sha256": "5221439cbf578c591309555d8ad05312c33dc92f274f970c8f2222f2f7fad50d",
+      "members": [
+        {
+          "member": "learned_retention_b01_control_20260911/acceptance_learned_event.txt",
+          "bytes": 682,
+          "sha256": "4f381ae8c1a0dab8b3aaca3d8e143e6c23156f19abb5021dd84b6b2398238d3d"
+        },
+        {
+          "member": "learned_retention_b01_control_20260911/acceptance_retain.txt",
+          "bytes": 675,
+          "sha256": "bcf18684e994e0596bd574e99bbbd1146a4e8269e403deaa9dd697d700320566"
+        },
+        {
+          "member": "learned_retention_b01_control_20260911/closeout_inventory.json",
+          "bytes": 1026,
+          "sha256": "ad0fa72f8e508b67bceaed5ee61d1fa0a3926880c4b6d56b76b9f1fcbb405bf5"
+        },
+        {
+          "member": "learned_retention_b01_control_20260911/command_syntax_reconciliation.txt",
+          "bytes": 58,
+          "sha256": "e9b7fad2baa205678333c89f97819bf05b214a6846163f9cb26c829fffad62ec"
+        },
+        {
+          "member": "learned_retention_b01_control_20260911/focused_tests.txt",
+          "bytes": 3685,
+          "sha256": "ac8de3bcd5761d5cdccc32640a08338821ca7b1ee8af689deedc38ae96f91ff3"
+        },
+        {
+          "member": "learned_retention_b01_control_20260911/focused_tests_command.py",
+          "bytes": 1657,
+          "sha256": "25fb7011543cac9da8860460c9986597872f8f69353673cbfbd96942f3530198"
+        },
+        {
+          "member": "learned_retention_b01_control_20260911/focused_tests_remaining.txt",
+          "bytes": 903,
+          "sha256": "0ba43f626fc5cbd36975dce0b36fafa1ef31d6382286451b39bb3c56d2a481de"
+        },
+        {
+          "member": "learned_retention_b01_control_20260911/focused_tests_remaining_command.py",
+          "bytes": 1420,
+          "sha256": "36a067b58ea17f2e344f96dcac0a62a14cb005fbc4a98dba15cab3a58b53cdad"
+        },
+        {
+          "member": "learned_retention_b01_control_20260911/launch_learned_event.json",
+          "bytes": 482,
+          "sha256": "1dc8986660f9f2b2130dba3a1c708520e24697691ebc1a9f0edbcf2f645d34dd"
+        },
+        {
+          "member": "learned_retention_b01_control_20260911/launch_retain.json",
+          "bytes": 447,
+          "sha256": "522dd39eb2b0a78d886512bcad58613e109996119d55f7ee7e73e30f60722904"
+        },
+        {
+          "member": "learned_retention_b01_control_20260911/prelaunch_identity.txt",
+          "bytes": 1739,
+          "sha256": "43e52b8039d7484d5e789ff4c5916edb00d57abadf246f432b19b36da696bc33"
+        },
+        {
+          "member": "learned_retention_b01_control_20260911/support_snapshot.json",
+          "bytes": 5040,
+          "sha256": "b4d1c690e1939d07358bf09ed4f86fba555f014868447dba75fe9085b0209d70"
+        },
+        {
+          "member": "learned_retention_b01_control_20260911/terminal_inventory.json",
+          "bytes": 6011,
+          "sha256": "fe6b2a715d3b460ff8752a0bffdf042a5bea6aef495c1053e8e4e88225e5852f"
+        },
+        {
+          "member": "learned_retention_b01_collected_20260911/accepted_analysis.json",
+          "bytes": 19902,
+          "sha256": "996fcca2d8b00ae04d1bbfc92b5e984c64e15303c2adb72b8e7c2044808acc2a"
+        },
+        {
+          "member": "learned_retention_b01_collected_20260911/analyze_collected.py",
+          "bytes": 6882,
+          "sha256": "a5a4f5177dbd3d79b0e2c663cd5dbc1a159d89b0c5f294c540f6d54c91970655"
+        },
+        {
+          "member": "learned_retention_b01_collected_20260911/run_scores.csv",
+          "bytes": 138,
+          "sha256": "28f9f713c1eb9a6cf08ec5f9a53f7367f4ee35a36642c3927e02cb2164942756"
+        },
+        {
+          "member": "learned_retention_b01_collected_20260911/run_level_summary.json",
+          "bytes": 1223,
+          "sha256": "f6ba0e2530a418220b41cac907defe8727b75c6ded6f5b19e3366c33306f2b50"
+        },
+        {
+          "member": "learned_retention_b01_collected_20260911/collection_receipt.json",
+          "bytes": 8495,
+          "sha256": "4cd3f4963c19043d8cb01108fd3e103c8bf1b351e51d1a8372eafc285ecbb1df"
+        }
+      ]
+    }
+  },
+  "budget_reading": {
+    "whole_native_seconds": {
+      "RETAIN": 835.33,
+      "LEARNED_EVENT": 867.79
+    },
+    "whole_native_sum_seconds": 1703.12,
+    "runner_wall_sum_seconds": 1702.3697368849535,
+    "supervisor_log_duration_seconds": {
+      "RETAIN": 836,
+      "LEARNED_EVENT": 868
+    },
+    "native_study_elapsed_seconds_from_coarse_supervisor_headers": 931,
+    "CPU_user_plus_system_seconds": 1706.1299999999999,
+    "known_native_plus_support_seconds": 1775.8515399999999,
+    "native_caps_pass": true,
+    "full_support_and_complete_caps": "not certified from incomplete support account",
+    "current_status_uptime_is_runtime": false,
+    "gate_only_overhead_identified": false
+  },
+  "resources_unmeasured": true,
+  "resources_unmeasured_scope": "complete support accounting only; native wall, CPU user/system and peak RSS measured",
+  "scientific_intake": {
+    "path": "FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md",
+    "evidence_class": "B/EXPLORE",
+    "rule_verbatim": "d_LR >= 1: LEARNED_EVENT_ABOVE_MEI; d_LR <= -1: RETAIN_ABOVE_MEI; otherwise: WITHIN_MEI. An incomplete or untrustworthy primary has no paired performance polarity; preserve independently trustworthy facts.",
+    "classification": "LEARNED_EVENT_ABOVE_MEI",
+    "bounded_claim": "one new real learned-package pair beats competent RETAIN by1.763359375 native return at the fixed5000+128 endpoint",
+    "strongest_support": "valid native endpoint plus separately favorable changing-policy training mean; gate moved and was exposed to public survivor events",
+    "contradiction_and_limit": "one training pair cannot establish stable value; same-information genericGRU remains competent; oldhalf loss is different-law context, not learned-gate negative sample",
+    "owner_prediction": "not taken",
+    "DM_prediction": "WITHIN_MEI low confidence missed",
+    "owner_flags": [
+      "one_training_pair",
+      "resources_unmeasured_complete_support"
+    ],
+    "successor": "none selected or allocated; another unchanged independent pair is only a future discriminator",
+    "direction_or_Portfolio_disposition": "none",
+    "owner_brief": "docs/research/portfolio/owner/briefs/vap_folr_core/2026-09-11_FOLR_LEARNED_RETENTION_B01.md"
+  }
+}

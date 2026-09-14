@@ -1,0 +1,20 @@
+{
+  "generated_at_utc": "2026-09-12T19:24:54.222794+00:00",
+  "items": [
+    {
+      "id": "20260912-root-008",
+      "path": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-008.json",
+      "actual_application": "planned; no experiment auto_applied"
+    },
+    {
+      "id": "20260912-root-009",
+      "path": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-009.json",
+      "actual_application": "planned; no experiment auto_applied"
+    }
+  ],
+  "audit_conformance": "docs/research/portfolio/audit/2026-09-12.md#L52",
+  "audit_selection": "docs/research/portfolio/audit/2026-09-12.md#L53",
+  "decision": "docs/research/portfolio/decisions/2026-09-12-post-cfr-marginal-investment.md",
+  "owner_reviews_unapplied": [],
+  "no_owner_ratification_wait": true
+}

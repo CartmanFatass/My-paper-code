@@ -7,7 +7,7 @@ import torch
 from torch import nn
 
 from .models import direct_parameter_shapes,mapr_parameter_shapes
-from .models import exact_binary64_mean
+from .models import _exact_binary64_column_means
 from .numeric import canonical_stiefel
 from .empirical_contract import DOMAIN_LABELS
 
@@ -17,8 +17,9 @@ class _ExactRosterMean(torch.autograd.Function):
     @staticmethod
     def forward(ctx:object,rows:torch.Tensor)->torch.Tensor:
         ctx.n=rows.shape[1]  # type: ignore[attr-defined]
-        values=[torch.from_numpy(exact_binary64_mean(batch.detach().numpy())) for batch in rows]
-        return torch.stack(values)
+        batches=rows.detach().tolist()
+        means=[_exact_binary64_column_means(batch) for batch in batches]
+        return torch.tensor(means,dtype=torch.float64,device="cpu")
     @staticmethod
     def backward(ctx:object,gradient:torch.Tensor)->tuple[torch.Tensor]:
         return (gradient[:,None,:].expand(-1,ctx.n,-1)/ctx.n,)  # type: ignore[attr-defined]

@@ -26,10 +26,27 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 
 ## Position
 
-- Scheme ladder D0 to D8 and the B-class experiment ladder E0 to E6 are fixed in
-  `docs/Claude_docs/plans/FLEXIBLE_SKILL_DURATION_PLAN_20260902.md` (§3, §5, §11). The first object is D2 (policy-based interruption); D0 (fixed `k`) is the comparator; D1 (age-conditioned discriminator at fixed `k`) is the control arm; D8 (the `(z, k)` menu) is kept only as a comparator.
-- Theory ceiling (evidence spec §11.2): a suboptimality bound for the implemented rule against the best fixed `k` on the corridor host, stated with its assumptions; no invariance proof, no semigroup claim.
-- Claim ceiling now: B — EXPLORE. Promotion to C-BENCH only after E3 or E4 repeats across three to five seeds (plan §5).
+- Current claim ceiling is B — EXPLORE. Original Convergence U now selects the
+  complete I1280 recipe as a **limited optional learning scheme under the same
+  tested host, recipe and five-rollout conditions; authentic D0 remains default**.
+  The five separate observations remain four above-MEI and one opposite-sign;
+  latest771303 is +.0737976492 J,26 positive/6 adverse worlds and about2.15× D0 wall.
+  Membership includes the observed additional cost and possible adverse result,
+  not stable advantage, component attribution or a new scientific allocation.
+  The accepted use and its bounds are in [the complete U intake](pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md).
+  FSD remains ACTIVE under owner instruction; finite N/U completion creates no
+  direction stop, sixth pair, default/C/UAV promotion or automatic consultation.
+  Latest Portfolio selects **no current addition** while preserving ACTIVE/HIGH:
+  no LONG or repeated U purchase, sixth pair, code, analysis or experiment.
+  [Applied Portfolio boundary](FSD_POST_U_PORTFOLIO_APPLICATION_20260912.md).
+- C-BENCH requires the evidence and prior Innovator decision appropriate to its
+  actual claim. Evidence §11.8 supplies no fixed seed-count or all-positive
+  prerequisite, and no C promotion is selected here.
+- The earlier D0–D8 / E0–E6 corridor ladder and its conditional fixed-k theory
+  target remain historical provenance in
+  `docs/Claude_docs/plans/FLEXIBLE_SKILL_DURATION_PLAN_20260902.md` (§3, §5, §11).
+  They create no proof or automatic advancement requirement for the current
+  native package question.
 
 ## Accepted mechanism-level science (2026-09-05)
 
@@ -507,7 +524,193 @@ Evidence: `pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md
 `pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md`,
 and the accepted P70/P72 result/intake records above.
 
-## Objects and their state (2026-09-09)
+## Accepted native UAV renewal-batch gain (B01/770703, 2026-09-11)
+
+One fresh I1280/authentic-D0 pair gives native I1280−D0
+**+.05697746721968016**, above the .01 MEI. Means are.47325191775912245
+and.4162744505394423, with conditional endpoint SE.024192706725467705;
+24 episode contrasts are positive and8 negative. This is one native package
+observation at the declared five-update exposure, not stable superiority or
+isolated batching causality. The two old batch128 I losses remain unpooled.
+
+Coverage and quality improvements outweigh higher altitude penalty in this pair.
+I1280 produces42243 training individual-gap causes and24499 valid joint rows,
+versus0/4000 D0, while using330 versus525 coordinator updates. The first two
+sampled training means are lower and last three higher. At final evaluation
+there are eight extra individual-gap causes versuszero, so sparse online
+renewal is present but its causal contribution is unresolved. Empty evaluator
+segment storage leaves endpoint duration statistics unmeasured.
+
+Strongest support is the observed final native gain and24 positive contrasts.
+The eight negative contrasts, higher altitude cost,1.96307× D0 wall, and old
+P70/P72 losses remain contradictions to broad benefit. Seed variation, changed
+training data/credit, optimization grouping and learned spatial behavior remain
+alternatives. Tuned same-information UAV headroom is still absent.
+
+Both original arm caps pass (519.94/1020.68s;1540.62s summed wall).
+Partial Monitor/support telemetry leaves support300s/complete3000s certification
+unresolved without damaging the native primary. The allocated comparison is
+complete. One separately allocated fresh same-package pair is the recommended
+next discriminator; none is selected for execution here. P52/P74 stops and
+Portfolio lifecycle/priority remain unchanged.
+
+Evidence: `FSD_UAV_RENEWAL_BATCH_B01_RESULT_EVIDENCE_20260911.md`,
+`FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md`, and the unchanged card.
+
+## Accepted native UAV renewal-batch gain recurrence (B02/771003, 2026-09-11)
+
+The new unchanged I1280/authentic-D0 pair gives native I−D0
+**+.206285904082309**, above the .01 MEI, with means .46799609168995665 and
+.2617101876076477. All 32 ordered episode contrasts are positive; conditional
+SE is .01230361547990872. This is one new learning pair and the second local
+same-package gain, separate from B01's +.0569774672. It does not establish
+stable superiority or isolated batch/renewal causality. Both old batch128 losses
+remain −.0496705632 and−.0353127253 with their original meaning.
+
+Higher coverage/quality and lower altitude penalty account for this gain.
+I has 44697 training gap causes and 26492 valid joint rows versus 0/4000 D0, while
+coordinator calls are 345 versus 525. The first two I sampled training means are
+lower and the final three higher. Nine final gap causes versus zero show sparse
+online renewal without identifying its causal contribution. Endpoint duration
+statistics remain unmeasured because evaluator segment storage is empty.
+
+Strongest support is the second complete native gain and 32 positive contrasts.
+Strongest contradiction to broad benefit remains the older losses, B01's eight
+adverse episodes, initial sampled training deficits and 1.98504× D0 wall. The
+large change in fresh D0's score/altitude term across pairs highlights training
+instance variation; optimization grouping, data/credit and learned spatial
+behavior remain alternatives. Tuned same-information UAV headroom is absent.
+
+Both original arm caps pass at 538.66/1069.26s, sum 1607.92s. Partial support
+telemetry limits complete-cost certification while leaving the native primary
+intact. The allocated pair ends at intake/closeout. Further fresh-pair robustness
+against authentic D0 remains an unresolved discriminator, with no third pair,
+C freeze or Portfolio disposition selected here. Evidence:
+`FSD_UAV_RENEWAL_BATCH_B02_771003_RESULT_EVIDENCE_20260911.md` and
+`FSD_UAV_RENEWAL_BATCH_B02_771003_INTAKE_20260911.md`.
+
+## Accepted native UAV renewal-batch adverse pair (B02/771103, 2026-09-11)
+
+The third separately allocated unchanged I1280/authentic-D0 pair gives native
+I−D0 **−0.012430430599850807**, just beyond the negative .01 MEI. Means are
+.3948596946403985 and .4072901252402493; 16 ordered contrasts are positive and
+16 negative, with conditional episode SE .01926754789685166. The fixed
+`opposite_sign` branch is valid, while one trained pair cannot establish stable
+harm. The prior package gains +.0569774672 and +.2062859041 and older batch128
+losses retain their separate meanings.
+
+Lower coverage accounts for most of the new native loss; quality is slightly
+lower and altitude penalty higher. I has 42413 training gap causes and 24891
+joint rows versus 0/4000 D0, with 315 versus 525 coordinator calls. Its first
+three training means are higher and last two lower. Both final panels have
+zero individual gap causes, so extra online renewal is absent in this observed
+panel; training data, credit and update grouping still differ. Endpoint duration
+statistics remain unmeasured.
+
+Strongest support for benefit remains the two prior native gains. Strongest
+current contradiction is this complete unchanged-package loss and 2.16911× D0
+wall. The observed package history is mixed; learning-instance variation and
+learned spatial behavior remain alternatives. Tuned same-information UAV
+headroom is absent. No stable seed, isolated batch/renewal, transfer or safety
+claim follows.
+
+Both original arm caps pass at 471.82/1023.43 s, sum 1495.25 s. Partial support
+telemetry limits total-cost certification while the native primary remains
+valid. The allocation ends at intake/closeout. A repeatable advantage over
+fresh authentic D0 remains unresolved; no fourth unchanged pair, C promotion
+or next measurement is assigned. Evidence:
+`FSD_UAV_RENEWAL_BATCH_B02_771103_RESULT_EVIDENCE_20260911.md` and
+`FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md`.
+
+## Accepted fourth native UAV renewal-batch observation (B02/771203, 2026-09-12)
+
+The separately allocated unchanged I1280/authentic-D0 pair gives native
+I−D0 **+.012554805665750726 J**, just above the absolute .01 MEI. D0/I means
+are .32245044157604/.335005247241791;19 ordered contrasts are positive and13
+adverse, conditional episode SE .01250683666255726. The valid `above_mei`
+branch supplies a small local optional-package gain, not stable superiority.
+
+Higher coverage and lower altitude penalty outweigh lower quality. I's sampled
+training return is lower on rollouts2–4. Its training has47196 individual gap
+causes/26340 joint rows versus0/4000 D0; coordinator steps360 versus525.
+The final panel has8 individual gap causes versus0 D0. Training data/credit,
+advantage grouping and learned spatial behavior remain alternative explanations;
+sparse endpoint renewal does not establish causation. Endpoint duration and
+tuned same-information headroom remain unmeasured.
+
+Strongest support remains the prior +.2062859041 gain and this additional
+positive native observation. Strongest contradiction remains the prior
+unchanged −.0124304306, current13 adverse contrasts and2.19548× D0 wall.
+Earlier+.0569774672 and the different batch128 losses retain their separate
+meanings. The four package observations comprise three above-MEI and one
+opposite-sign reading; no pooled primary or fixed adequacy threshold is implied.
+
+Both native arms and their sum pass at475.03/1042.92s,total1517.95s. Partial
+support telemetry limits complete-cost certification without changing this
+primary. Robust optional-use value against fresh authentic D0 remains the
+unresolved discriminator; no fifth pair, new consultation, C promotion or
+successor is selected by this completed finite allocation. No isolated batching,
+renewal, transfer or safety claim follows. Evidence:
+`FSD_UAV_RENEWAL_BATCH_B02_771203_RESULT_EVIDENCE_20260912.md` and
+`FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md`.
+
+## Accepted fifth UAV package observation (2026-09-12)
+
+The new 771303/781303 I1280/authentic-D0 pair is valid B/EXPLORE with native
+I−D0 +.0737976491890039 J, D0 .4208673476989198 and I .4946649968879237.
+The frozen above_mei rule applies; 26 worlds are positive and six adverse,
+with conditional episode SE .013052781584169226 for one trained pair.
+This adds optional-package support without a stable population claim.
+
+Higher coverage, higher quality and lower altitude penalty account for the
+native gain; sampled I training remains lower on rollouts 2–4. I has 42,750
+training gap causes and 24,818 joint rows versus D0 0/4,000, with 315 versus
+525 coordinator steps. The final I panel has only two extra individual gap
+causes. Data/credit, grouping, learning-instance variation and learned spatial
+behavior remain causal alternatives; endpoint duration and tuned same-information
+headroom remain unmeasured. A sparse event count does not establish attribution.
+
+The prior +.2062859041 and this gain are strongest support; the unchanged
+−.0124304306, current six adverse worlds, training deficits and 2.15342× D0
+wall oppose broad benefit. All five results and older batch128 losses retain
+separate meanings. The subsequently selected U decision now resolves this
+same-host use as limited optional membership, with authentic D0 retained as default
+and the observed cost/variation included. Its complete intake is linked below.
+The owner-selected direction continues. This result's N allocation and completed
+U grant select no sixth pair, automatic consultation, C promotion, default switch
+or mechanism-causal claim.
+Evidence: [result](FSD_UAV_RENEWAL_BATCH_B02_771303_RESULT_EVIDENCE_20260912.md)
+and [intake](FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md).
+
+## Accepted I1280 optional-use decision (U, 2026-09-12)
+
+PRO_FINAL / OWNER_DELEGATED at response812ad330e selects the complete I1280
+training recipe as a same-condition optional learning scheme alongside authentic
+D0; D0 remains the default and comparison reference. Scope is scenario1, fixed
+six UAVs/fifty users,H500,CPU FP32/four threads, five16-lane training rollouts
+per arm and the sole-final protocol. The .25 individual gap/batch1280 package,
+original clock/caps, private reactive primitive actions, legal information and
+credit/optimizer/evaluator meaning travel with the recommendation.
+
+The native gains provide useful optional-use evidence, while the unchanged
+negative pair, adverse worlds, process deficits and higher I wall in all five
+pairs rule out an unconditional/default recommendation. All original MEI branches
+and conditional uncertainties are retained. The comparison does not establish
+stable training-population benefit, renewal/batching causality, matched-compute
+superiority or deployment reliability. Duration and tuned headroom remain absent.
+
+The use question is answered; no new scientific discriminator is selected by U.
+A concrete changed use, budget/host/information/recipe, later lawful evidence or
+primary-dependent defect may motivate a future properly scoped question. These
+are revisit conditions, not an experiment or consultation schedule. B-LONG-D0
+is absent from U; the latest Portfolio explicitly selects no current LONG or
+repeated-U purchase and leaves that offer unallocated. ACTIVE/HIGH and all earlier
+family boundaries remain. Complete U cost is accepted UNKNOWN; the no-addition
+application is linked in Position and is not a direction stop.
+Evidence: [full response](pro_packets/20260912_post_five_pair_use_convergence/archive/RESPONSE.md)
+and [original-DM intake](pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md).
+
+## Objects and their state (2026-09-12)
 
 | Object | State | Record |
 | --- | --- | --- |
@@ -526,6 +729,12 @@ and the accepted P70/P72 result/intake records above.
 | Native individual-renewal UAV B01 / P67–P70 | complete valid B, one new770503/780503 I/D0 pair; native I−D0−.0496705632 below−.01 MEI, coverage gain retained, training gaps but zero endpoint gaps; both exit0,1693.38s summed wall; no successor or broader closure | `FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_RESULT_EVIDENCE_20260908.md`; `FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_INTAKE_20260908.md`; original card/P67 decision |
 | Native individual-renewal UAV B02 / P72 | complete valid B, new770603/780603 pair; I−D0−.0353127253 below−.01, native loss in both observed learning instances; different component balance, training activity and endpoint inactivity retained;1768.78s summed wall; no successor selected | `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_RESULT_EVIDENCE_20260909.md`; `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md`; B02 card |
 | Post-native-UAV-B02 Convergence / P74 | complete PRO_FINAL A; end only unchanged .25/k10/five-update extension, no twenty-rollout B or successor selected; longer-budget value remains unresolved, no recast or Portfolio change | `pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md`; `pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md` |
+| UAV renewal batch B01 / 770703 | complete valid B, one I1280/D0 pair; native+.0569774672 above+.01,24 positive/8 negative contrasts;1540.62s arm wall, partial support telemetry; no successor allocated | `FSD_UAV_RENEWAL_BATCH_B01_RESULT_EVIDENCE_20260911.md`; `FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md`; original card |
+| UAV renewal batch B02 / 771003 | complete valid B, one new I1280/D0 pair; native+.2062859041 above+.01,32 positive contrasts;1607.92s arm wall, partial support telemetry; no successor selected | `FSD_UAV_RENEWAL_BATCH_B02_771003_RESULT_EVIDENCE_20260911.md`; `FSD_UAV_RENEWAL_BATCH_B02_771003_INTAKE_20260911.md`; card§7 |
+| UAV renewal batch B02 / 771103 | complete valid B, one new I1280/D0 pair; native −.0124304306 under opposite_sign, 16 positive/16 negative; 1495.25 s native wall, partial support telemetry; no successor | `FSD_UAV_RENEWAL_BATCH_B02_771103_RESULT_EVIDENCE_20260911.md`; `FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md`; card §8 |
+| UAV renewal batch B02 / 771203 | complete valid B, one new pair; native+.0125548057 above_mei,19 positive/13 adverse,1517.95s native wall; partial support telemetry, finite grant ends with no successor | `FSD_UAV_RENEWAL_BATCH_B02_771203_RESULT_EVIDENCE_20260912.md`; `FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md`; current card |
+| UAV renewal batch B02 / 771303 | complete valid B; native +.0737976492 above_mei, 26 positive/6 adverse, 1446.79 s native wall; partial support telemetry; finite N closeout preserves direction continuity | `FSD_UAV_RENEWAL_BATCH_B02_771303_RESULT_EVIDENCE_20260912.md`; `FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md` |
+| I1280 optional-use U | complete PRO_FINAL / OWNER_DELEGATED; limited same-condition optional recipe, D0 default, five-pair limits retained; no new experiment or automatic consultation | `pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code

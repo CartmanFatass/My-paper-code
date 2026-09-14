@@ -1,0 +1,62 @@
+[
+  {
+    "path": "scientific/episodes.jsonl",
+    "bytes": 410227,
+    "sha256": "5f4026327549b57491d8a7ff30d8d6aafff65ef87453e5b603c5072636a0a95f"
+  },
+  {
+    "path": "scientific/final_DENSE.pt",
+    "bytes": 282957,
+    "sha256": "069b6594b8ec3222c7412627c1f32338b6a29ffa2e2484ffa3b1af5d8a2a8318"
+  },
+  {
+    "path": "scientific/summary.json",
+    "bytes": 15954,
+    "sha256": "27065de0de9a9aafc80bf92204f39cc5f96b501bb81a6fa49b57683bcec738c9"
+  },
+  {
+    "path": "scientific/updates.jsonl",
+    "bytes": 236017,
+    "sha256": "f7716c4999de0c2c81ff7d9266ef42beda17286dc86b6f8ac5ae9b2d1eab025b"
+  },
+  {
+    "path": "supervisor/exit_code",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "supervisor/pid",
+    "bytes": 8,
+    "sha256": "03af4ea10392749aca1286cc024856cc4ed848e987528a0969c8d9fadd680997"
+  },
+  {
+    "path": "supervisor/runner.sh",
+    "bytes": 1548,
+    "sha256": "d057d440bd2fad7e898a73a7594f6ac193591a7f2cbd5dcf0820512ee7b18f7e"
+  },
+  {
+    "path": "supervisor/start_time",
+    "bytes": 11,
+    "sha256": "0c8f4099a6de494741356694dcf75141d18aff74f9b9680cc357d02b416daa77"
+  },
+  {
+    "path": "supervisor/status",
+    "bytes": 9,
+    "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+  },
+  {
+    "path": "supervisor/task.log",
+    "bytes": 2652,
+    "sha256": "8439e389f7784ce2a58be05042d54c74ab48808450ac6051adcfae34c76bf8d3"
+  },
+  {
+    "path": "support/admission.json",
+    "bytes": 504,
+    "sha256": "329f0431a67dfcef06d94743dc224ec36a213ef227ed283225a46c6ab55405f7"
+  },
+  {
+    "path": "support/task_time.txt",
+    "bytes": 60,
+    "sha256": "62ba1b794e8dd983310ba1c73588baac0eb34ce4aab30e4778b68fdebac0ad2f"
+  }
+]

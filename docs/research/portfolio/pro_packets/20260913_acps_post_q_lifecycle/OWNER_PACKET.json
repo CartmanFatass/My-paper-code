@@ -1,0 +1,37 @@
+{
+  "question": "Q 已完整回答无候选且已测用途暂停后，是否由 Portfolio 明确可逆停放整个 ACPS，还是给出保留 ACTIVE 的实际投资理由？",
+  "changes_if_approved": [
+    {
+      "target": "ACPS Portfolio 生命周期（仅待 Pro 决定）",
+      "from": "ACTIVE/HIGH，Q 已结束且无已选获资助的下一对象",
+      "to": "DM 建议可逆 PARK；目前未应用，仍 ACTIVE/HIGH/recasts0"
+    }
+  ],
+  "if_refused": "Pro 可以保留 ACTIVE 并说明实际可改变决定的下一对象/投资理由及完整成本；不自动动用旧 Q 或 B02 余额。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_POST_B02_USE_INTAKE_20260913.md",
+      "quote": "Apply the complete Convergence answer: no candidate; reversibly park advancement of only the exact tested ACPS package for its present fixed-budget final native-service use. Retain fully informed SHARED.",
+      "why": "用途节点已完成原有购买，并未选出不同用途或新的获资助对象；现在需要 Portfolio 自己决定整个方向。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_POST_B02_USE_INTAKE_20260913.md",
+      "quote": "Strongest contradiction to a broad negative is the real physical/learning pathway, favorable conditional worlds and unresolved finite optimization/training-instance variation.",
+      "why": "专属学习在有重要资源目标时仍可能有价值；建议可逆停放而非关闭或宣称稳定损害。"
+    }
+  ],
+  "uncertainty": [
+    "两次探索未证明所有实例、预算或共享机制都没有价值。",
+    "具体运行/训练资源要求或相关可靠证据可触发复审；不要求预先正向结果。"
+  ],
+  "cost": {
+    "compute": "本次仅 Portfolio 返回，零新实验/模型/RNG/原始分析；完整文书和 provider 成本 UNKNOWN。",
+    "owner_time": "可异步介入，无需等回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "DM recommendation: explicitly PARK the whole ACPS direction reversibly, retaining its evidence, informed-SHARED use advice and a concrete re-entry condition. This is a Portfolio recommendation, not an applied lifecycle change.",
+  "source": "docs/research/portfolio/pro_packets/20260913_acps_post_q_lifecycle/BRIEF.md"
+}

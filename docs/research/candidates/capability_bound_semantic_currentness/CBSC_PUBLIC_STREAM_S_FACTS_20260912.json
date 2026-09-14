@@ -1,0 +1,53 @@
+{
+  "source": "B04 card and run.py/learner.py read as data; no target import",
+  "per_arm": {
+    "training_episodes": 384,
+    "training_transitions": 58368,
+    "training_decisions": 9216,
+    "adam_steps": 768,
+    "evaluation_episodes": 64,
+    "evaluation_transitions": 9728,
+    "generated_public_tokens": 63232,
+    "public_projection_float_values": 10622976
+  },
+  "pair": {
+    "independent_training_pairs": 1,
+    "models": 2,
+    "training_episodes": 768,
+    "training_transitions": 116736,
+    "adam_steps": 1536,
+    "evaluation_executions": 128,
+    "evaluation_transitions": 19456,
+    "train_plus_evaluation_transitions": 136192
+  },
+  "shared_rule_context": {
+    "existing_tape_passes": 96,
+    "chosen_action_scores": 2304
+  },
+  "new_exposure": {
+    "target_imports": 0,
+    "target_invocations": 0,
+    "models": 0,
+    "scientific_rng": 0,
+    "environment_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_executions": 0,
+    "runtime_tests": 0,
+    "production_changes": 0
+  },
+  "source_revision": "6268d6638c85e47843157daad7d7bdc672035412",
+  "assignment": "Portfolio S, response86428c9e87fc4c61888b5638781603038c39399d, author intake739aec7f4; no S+B",
+  "candidate_state": "DOCUMENTARY_CANDIDATE_SUPPORTED_RUNTIME_UNVERIFIED",
+  "support": {
+    "limit_seconds": 600,
+    "reference_seconds": 300,
+    "prepublication_command_charge_upper_seconds": 45,
+    "document_writes_readback_owner_publication_and_review_charge_upper_seconds": 8,
+    "prepublication_prefix_charge_upper_seconds": 53,
+    "charge_method": "Conservative charge uses the next whole second strictly above each displayed outer-tool batch wall, multiplied by the number of shell invocations in that batch. Three source-read batches displayed as 1.0 seconds are each charged 2 seconds per invocation. The separate 8-second documentary charge covers initial document/audit writes, readback, owner publication and two completion review queries. Nested inner timers are not additionally charged.",
+    "complete_invoked_support_seconds": null,
+    "complete_conformance": "not certified; final documentation amendment, Git publication/readback, Relay and Root integration follow this prefix; no breach observed",
+    "full_documentary_provider_deliberation_cost": "unknown",
+    "native_seconds": 0
+  }
+}

@@ -87,12 +87,12 @@ returns the diff.
 
 | Quantity | Limit | On breach |
 | --- | --- | --- |
-| New lines in a research attempt (code, excluding tests and the card) | 2,000 | the DM splits the object or the implementer returns the excess as a named list |
+| New lines in a research attempt (code, excluding tests and the card) | 2,000 | the DM splits the object or the DM records the excess as a named list |
 | Runner script | 600 lines | same |
 | Orchestration share of a research diff (lines that do not compute, sample, learn, or evaluate) | 30% review signal | the reviewer identifies unnecessary machinery and concrete impact; ratio alone does not return the diff |
 | Launch conditions | the four of evidence spec §11.4 | any other gate is deleted, not recorded |
 | Test wall time per research directory | 5 minutes total excluding the smoke of the runner | delete unrequired duplication only; required scientific coverage remains, and insufficient budget returns a concrete gap; another bounded engineering task is separately selected, never automatic |
-| Time to first run of a new object, from card to launch | one session | if exceeded, the implementer reports which of §4 it was building |
+| Time to first run of a new object, from card to launch | one session | if exceeded, the DM records which of §4 it was building |
 
 ### Owner-ratified small reuse / net-deletion exception (2026-09-05)
 
@@ -157,15 +157,15 @@ never grows a service layer: no daemons, no dashboards, no control plane in Pyth
 
 Apply `MARL_RUNTIME_ENGINEERING_SPEC.md` and the actual object appendix before interpreting §4/§5.
 DM records full work/cost, shapes, topology/state ownership, protected semantics, measurement
-scope, validation and stop. A delegated Implementer follows that contract and returns any needed
-scientific-meaning change to DM. Independent review checks full
+scope, validation and stop. DM implements and reviews against that contract, resolving any needed
+scientific-meaning change under the existing decision ladder. Independent review checks full
 dependencies, internal threads, scientific outputs and publication as well as complete cost scope.
 No new profiling task or launch condition follows merely from this reference.
 
 - **Direction Manager**: the card names every §4 item the object needs, with the quantity that
   needs it; an object that needs none says so in one line. The DM returns a result whose
   implementation exceeded a §5 budget with the breach recorded.
-- **DM and Implementer**: before writing, list the §4 items the change would add and
+- **DM implementation**: before writing, list the §4 items the change would add and
   the card line for each; if there is none, do not add it. The smallest runnable path is the
   correct one. A guard is a bug until a card asks for it.
 - **Reviewer and critic**: the first check on any research diff is §4 and §5, before correctness.
@@ -197,14 +197,13 @@ into a global convention or write extra details merely to claim a higher level.
 
 ### 7.2 Direct work, delegation and acceptance
 
-DM implements directly by default and owns technical acceptance as well as separate scientific
-intake. Delegate one complete bounded implementation only when it saves material work, isolates
-substantial context or enables useful independent parallelism. Small edits and commands stay local.
-The Implementer owns its named edit/check scope; DM owns Git, review disposition and result-bearing
-execution. Reuse the same executor for corrections. Do not delegate and duplicate its work.
+OWNER_DIRECT 2026-09-12: DM performs science, implementation, self-checks, repairs and technical
+acceptance in the same task. New CM and Implementer assignments are temporarily
+suspended, including generic substitutes. Existing accepted work closes on its original route
+without successors. Independent Reviewer remains required for high-risk changes under §7.3. Other bounded specialist methods retain their existing scope.
 Root retains main integration and accepts shared control-plane engineering without a direction DM.
 
-Scout, Implementer, Reviewer, Verifier, Operator and Critic return to their actual assigning DM
+Scout, Reviewer, Verifier, Operator and scientific Critic return to their actual assigning DM
 (or Root for its own bounded work); they do not create another ordinary child chain. A missing
 specialist fact returns with the completed work and exact question so that the parent can resolve
 it or assign an independent sibling. Existing legacy tasks finish their accepted scope on their

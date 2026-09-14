@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-11-acvc-five-fit-prefreeze-innovator-01--acvc",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-11-acvc-five-fit-prefreeze-innovator-01",
+  "direction_id": "acvc",
+  "direction_ids": [
+    "acvc"
+  ],
+  "workflow_node": "em_innovator",
+  "conversation_binding_key": "em:acvc:innovator",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-11-acvc-five-fit-prefreeze-innovator-01--acvc__00_PROMPT.md",
+    "bytes": 1917,
+    "sha256": "598d86380745a5e7f6dc6912fa17fdf3f9187c1f2c4f27e3aa1b820f87ca5b0b",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-11-acvc-five-fit-prefreeze-innovator-01\\2026-09-11-acvc-five-fit-prefreeze-innovator-01--acvc__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-11-acvc-five-fit-prefreeze-innovator-01\\2026-09-11-acvc-five-fit-prefreeze-innovator-01--acvc--attempt-01__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-11-acvc-five-fit-prefreeze-innovator-01\\2026-09-11-acvc-five-fit-prefreeze-innovator-01--acvc__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "598d86380745a5e7f6dc6912fa17fdf3f9187c1f2c4f27e3aa1b820f87ca5b0b",
+    "references": []
+  }
+}

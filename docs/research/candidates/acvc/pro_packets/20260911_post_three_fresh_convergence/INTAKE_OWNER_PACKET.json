@@ -1,0 +1,40 @@
+{
+  "question": "在三次新训练的有界收益之后，采用原Convergence选定的五次新训练基准结论设计，还是改为一次B或窄暂缓？",
+  "changes_if_approved": [
+    {
+      "target": "acvc/DIRECTION.md · 下一判别问题",
+      "from": "三次普通B观察；尚无选定的总体结论设计",
+      "to": "采用五次全新训练、每规则64世界、两个独立主比较的暂定设计；本轮实现、训练与冻结预算仍为零"
+    }
+  ],
+  "if_refused": "保留全部既有观察；按所有者覆盖意见更新下一问题，未另获授权的训练仍不启动。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/archive/RESPONSE.md",
+      "quote": "The decisive support is the recurring F advantage over the useful dwell comparator, not merely over always-apply C.",
+      "why": "F相对有收益的停住规则仍多获约0.064至0.094 J，值得明确下一项有界主张。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/archive/RESPONSE.md",
+      "quote": "Five units cannot establish tail behavior or validate the approximation.",
+      "why": "收益不是逐世界保证，且五次训练不足以验证训练分布的尾部；统计结论依赖所声明的小样本模型。"
+    }
+  ],
+  "uncertainty": [
+    "五次是Pro选定的暂定设计数，不是功效证明或通用门槛。",
+    "完整未来时间、支持工作成本与预算尚未确定。",
+    "未证明纯反向移动、历史必要性、同剂量因果效果或迁移能力。"
+  ],
+  "cost": {
+    "compute": "本轮新增实验为0；撰写、Pro与入库总成本未计全。未来方案含901120环境步、5120次Adam，尚未获经费。",
+    "owner_time": "可异步覆盖；无需当前批准或回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; 当前仅应用方向设计决定，后续准备/冻结/投资另行授权"
+  },
+  "verdict_text": "**Select the provisional, single-task C-BENCH claim-design route, not an automatic fourth B fit and not C promotion.** The next useful question is whether the complete fixed F execution package improves expected endpoint native J by more than 0.01 against C and against own-predicate dwell under the specified fresh-training and evaluation law. I recommend a prospective design of **five genuinely new independent DENSE fits, with 64 paired initial worlds per rule per fit**, final checkpoints only, and the fit-level analysis below. The existing three fresh results justify designing that comparison; they do not already establish its population claim. Five is a bounded design choice with an explicitly provisional, assumption-dependent ceiling, not a power finding or a universal seed requirement. [Science brief §§2–5][brief]; [empirical specification §§5.3 and 11.8.3–11.8.4][spec].",
+  "source": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/archive/RESPONSE.md",
+  "authority": "PRO_FINAL / OWNER_DELEGATED; original Convergence67b9ab3a794d026cf95ade7dfa770037dc786528; current Portfolioa32eaff851a1be48ccf92afbd4a7ff77c1a3ce22",
+  "application_state": "applied as direction claim-design record only; no card/freeze/implementation/numerical/Innovator/investment action"
+}

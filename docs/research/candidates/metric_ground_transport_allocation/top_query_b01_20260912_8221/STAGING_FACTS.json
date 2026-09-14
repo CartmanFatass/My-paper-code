@@ -1,0 +1,17 @@
+{
+  "source_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+  "bundle_base": "10ea737f0f9210ee2c126ad1e095734f21d4fcbc",
+  "local_stage": "C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904\\temp\\directions\\metric_ground_transport_allocation\\exp\\top_query_b01_20260912_8221_source",
+  "bundle_preparation_inner_seconds": 0.23399999999674037,
+  "prior_bundle_command": "Full-SHA positive range returned empty-bundle refusal; no bundle created. Named branch range corrected the ordinary Git argument, with the same exact source and no remote invocation.",
+  "files": {
+    "COMMAND.sh": {
+      "bytes": 937,
+      "sha256": "821a5997c8a89a368a862492b0efe4df255168fd25bd4fba99c001939a1a6704"
+    },
+    "source.bundle": {
+      "bytes": 2246020,
+      "sha256": "c610478a215dbd68c029db6cbdb68509c59ba6254c72c496adc6ac3c3ab7372e"
+    }
+  }
+}

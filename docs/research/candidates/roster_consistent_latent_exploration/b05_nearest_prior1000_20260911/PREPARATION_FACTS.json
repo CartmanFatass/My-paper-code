@@ -1,0 +1,104 @@
+{
+  "starting_main": "5bbae6d90",
+  "starting_changes": [],
+  "test_result": {
+    "chunk_id": "0114a4",
+    "wall_time_seconds": 3.1091643,
+    "exit_code": 0,
+    "original_token_count": 25,
+    "output": "..                                                                       [100%]\r\n2 passed in 2.22s\r\n"
+  },
+  "technical_exposure": {
+    "full_scientific_model_allocations": 0,
+    "supplied_scalar_parameters": 2,
+    "backward_calls": 0,
+    "optimizers": 0,
+    "native_episodes": 0,
+    "scientific_rng_masters": 0,
+    "stub_updates": 1000,
+    "supplied_fixture_edits": 1,
+    "checkpoint_tensor_loads": 2
+  },
+  "unchanged_coverage": "B04 six accepted checks and prior independent PASS reused; not rerun",
+  "review": {
+    "reviewer": "rv_ah_rcle_b04",
+    "model_effort": "Astra/high",
+    "verdict": "PASS, no material findings",
+    "command_wall_s": 1.1534143,
+    "reviewed": "fresh domain/defaults, endpoint counts/checkpoint/panels/primary, FP64/thread1,600/10 complete caps",
+    "limits": "Actual native completion/runtime unmeasured. Unchanged interruption counters can omit an interrupted batch."
+  },
+  "scratch": {
+    "path": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906/temp/directions/roster_consistent_latent_exploration/test/b05-nearest-prior1000-20260911",
+    "files": 6,
+    "bytes": 189324,
+    "cleanup": "One exact-path checked PowerShell Remove-Item was rejected before process creation: blocked by policy. Retained; no bypass or repeated removal.",
+    "owner": "creating DM /root/dm_rcle_restart_recovery2"
+  },
+  "owner_reviews": [],
+  "owner_item": "20260911-rcle-001",
+  "support_so_far": [
+    {
+      "name": "initial assignment/status/card reads",
+      "charged_s": 3,
+      "kind": "conservative command-wall allowance"
+    },
+    {
+      "name": "input fast-forward/push and skill reads",
+      "measured_s": 4.4970322,
+      "charged_s": 4.4970322
+    },
+    {
+      "name": "focused instructions/config/source read",
+      "charged_s": 0.0000047
+    },
+    {
+      "name": "focused instructions/config/source read",
+      "charged_s": 0.2298883
+    },
+    {
+      "name": "focused instructions/config/source read",
+      "charged_s": 0.1672678
+    },
+    {
+      "name": "scope/evidence/testing focused reads",
+      "charged_s": 0.2071085
+    },
+    {
+      "name": "live configuration/reviews/owner route read",
+      "charged_s": 0.3724381
+    },
+    {
+      "name": "binding/exposure/current science read",
+      "charged_s": 0.2415526
+    },
+    {
+      "name": "learner/reading/identity/Monitor route",
+      "charged_s": 1.0840579
+    },
+    {
+      "name": "identity and analysis assumptions",
+      "charged_s": 0.2357005
+    },
+    {
+      "name": "configuration exposure calculation",
+      "charged_s": 0.2236061
+    },
+    {
+      "name": "one changed-binding supplied-tensor/stub check",
+      "charged_s": 3.1091643
+    },
+    {
+      "name": "independent changed-contract review",
+      "charged_s": 1.1534143
+    },
+    {
+      "name": "owner item/reviews, scratch inventory and diff readback",
+      "charged_s": 0.4997325
+    },
+    {
+      "name": "owner item/reviews, scratch inventory and diff readback",
+      "charged_s": 0.3154755
+    }
+  ]
+}

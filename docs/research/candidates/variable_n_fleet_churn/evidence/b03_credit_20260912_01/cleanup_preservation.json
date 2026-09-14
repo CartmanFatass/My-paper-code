@@ -1,0 +1,23 @@
+{
+  "receipt_path": "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912/temp/directions/variable_n_fleet_churn/exp/owned_mean_check_20260912.json",
+  "receipt_bytes": 1563,
+  "receipt_sha256": "6829f36396e404cee42d641ecc24b8de0601c86e48dfc0667beba1034438b6d1",
+  "worktrees": [
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01",
+      "head": "b93329b3c44ea9d0cf5622c00f5ca6eea0740dac",
+      "status_including_ignored": "!! envs/native/__pycache__/production_backend.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn/native_service_credit_b02/__pycache__/learning.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/__init__.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/association.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/contracts.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/empirical_contract.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/empirical_training.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/fixtures.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/frontier.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/lease.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/lifecycle.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/models.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/native_backend.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/numeric.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/production.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/rng.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/services.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/source_manifest.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/torch_models.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_bpcr_r09/__pycache__/training.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_n7_direct_b01/__pycache__/experiment.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_n7_direct_b01/__pycache__/learning.cpython-310.pyc\n!! experiments/candidates/variable_n_fleet_churn_n7_direct_b01/__pycache__/native.cpython-310.pyc\n!! scripts/__pycache__/hmasd_platform.cpython-310.pyc\n!! scripts/__pycache__/run_vnfc_bpcr_b_explore.cpython-310.pyc\n!! scripts/__pycache__/run_vnfc_bpcr_r02.cpython-310.pyc\n!! temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01/INTERVAL_initial.pt\n!! temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01/INTERVAL_midpoint.pt\n!! temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01/TERMINAL_initial.pt\n!! temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01/TERMINAL_midpoint.pt\n!! temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01/b01_native.so\n!! temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01_collection.tar.gz\n!! temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01_memory.json\n!! temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01_outer_time.txt\n"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912",
+      "head": "d76d96cbe3df9b598e0db695a8b39deb23e7bdb1",
+      "status_including_ignored": "!! temp/directions/variable_n_fleet_churn/exp/owned_mean_check_20260912.json\n"
+    }
+  ],
+  "recorded_at": "2026-09-12T14:14:22.277861+00:00",
+  "local_command_seconds": 1.3867772999801673,
+  "remote_stderr": "",
+  "local_receipt_path": "docs/research/candidates/variable_n_fleet_churn/evidence/b02_credit_20260911_01/repair_owned_boundary_remote_receipt_20260912.json",
+  "scientific_submissions": 0,
+  "purpose": "Preserve the exact completed maintenance receipt and inspect owned cleanup surfaces; no removal or live experiment polling."
+}

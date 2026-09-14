@@ -1,0 +1,74 @@
+{
+  "schema": "hmasd_agentify_operation_args_receipt_v1",
+  "request_id": "2026-09-13-acps-post-b02-use-rebind-01",
+  "operation": {
+    "schemaVersion": 4,
+    "operationId": "c827876f-c617-4299-9cee-1ee205673cd5",
+    "idempotencyKey": "2026-09-13-acps-post-b02-use-rebind-01",
+    "requestFingerprint": "6847176ca6d2015ea16738d04677748ff8a47efdedf79f03a746639b73f19c1c",
+    "stableKey": "hmasd-gen:7e64af7eba4439ec6a7221062db586ecd104dc58caaf80a481d114f8e5c728d8",
+    "provider": "chatgpt",
+    "productModel": "Latest",
+    "reasoningEffort": "Pro",
+    "conversationUrl": "https://chatgpt.com/",
+    "conversationId": "__new__",
+    "promptSha256": "bee9b6e037f7b68e37143d152dd004cfefd10a9904d5c13bb648750ee9a2ab84",
+    "responsePath": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-rebind-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-rebind-01--attempt-01__02_RESPONSE.md",
+    "sendAttempted": true,
+    "sendAttemptedAt": 1789298450343,
+    "providerUserMessageId": "44057cb0-b3ec-4ec6-8f3a-ec982819b2a9",
+    "providerAssistantMessageId": "1b71accf-2e04-478e-bad1-85f13249dee0",
+    "observedConversationUrl": "https://chatgpt.com/c/6aa68713-08c0-83e8-819c-1bf4e8ee5cea",
+    "observedConversationId": "6aa68713-08c0-83e8-819c-1bf4e8ee5cea",
+    "archive": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-rebind-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-rebind-01--attempt-01__02_RESPONSE.md",
+      "sha256": "2871ec8f8ed882698057f8787250fbd6ec9ad89f5f43b356a5954a5c09b7620e",
+      "sizeBytes": 376,
+      "projection": "exact",
+      "verifiedAt": 1789299112076
+    },
+    "error": null,
+    "createdAt": 1789298449856,
+    "updatedAt": 1789299112077
+  },
+  "strict_short_archive": {
+    "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-rebind-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-rebind-01--attempt-01__02_RESPONSE.md",
+    "sha256": "2871ec8f8ed882698057f8787250fbd6ec9ad89f5f43b356a5954a5c09b7620e",
+    "sizeBytes": 376,
+    "projection": "exact",
+    "verifiedAt": 1789299112076
+  },
+  "github_readback": {
+    "schema": "hmasd_github_delivery_readback_v1",
+    "request_id": "2026-09-13-acps-post-b02-use-rebind-01",
+    "fixed_task_url": "https://github.com/CartmanFatass/My-paper-code/blob/c32e6e241b9fa6942482f554524659d943fa8163/docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/delivery/TASK.md",
+    "delivery_commit": "f842439457bfaad8f9c57f1e3974d0f4bf22e9fd",
+    "delivery_commit_url": "https://github.com/CartmanFatass/My-paper-code/commit/f842439457bfaad8f9c57f1e3974d0f4bf22e9fd",
+    "delivery_path": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/archive/RESPONSE.md",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/f842439457bfaad8f9c57f1e3974d0f4bf22e9fd/docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/archive/RESPONSE.md",
+    "response_blob_sha": "3d19942f71c2578a3362b013770e626a15048a10",
+    "response_size_bytes": 27467,
+    "full_archive_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-rebind-01--actuator_conditioned_partial_sharing--attempt-01\\FULL_RESPONSE.md",
+    "full_archive_sha256": "b51e6815c3423ab36a19636e3fb03a9dff07c13b0035134c8c4bebe6294e7f7f",
+    "comment_id": 5652988155,
+    "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/19#issuecomment-5652988155",
+    "comment_body": "Delivered the complete post-B02 finite-use judgment for the fixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/c32e6e241b9fa6942482f554524659d943fa8163/docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/delivery/TASK.md\n\nComplete response, read back at delivery commit f842439457bfaad8f9c57f1e3974d0f4bf22e9fd:\nhttps://github.com/CartmanFatass/My-paper-code/blob/f842439457bfaad8f9c57f1e3974d0f4bf22e9fd/docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/archive/RESPONSE.md\n\nDecision: no candidate; reversibly park advancement only of the exact tested package for its present fixed-budget final-native-service use, retaining informed SHARED. No actual RECAST or whole-direction Portfolio disposition is selected; ACTIVE/HIGH/recasts0 and zero empirical/conditional funding remain unchanged. B01 ADVERSE and B02 INSIDE_MEI/negative remain separate.\n\nCitation correction identified during readback: the response's final [b01] reference contains a transcribed commit-SHA typo. The B01 intake actually read, and intended by every [b01] citation, is:\nhttps://github.com/CartmanFatass/My-paper-code/blob/f45a4dd675b73ce2013fe7f2844ed033c38f398d/docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_INTAKE_20260912.md\nThis corrects only the source link, not the observations or scientific decision. The committed response is preserved without overwrite.\n\nCommit comparison confirms this delivery adds only the authorized RESPONSE.md on codex/acps and preserves every other path. No empirical work was performed.",
+    "read_method": "gh api"
+  },
+  "effect": {
+    "send_click_count": 1,
+    "sendAttempted": true,
+    "provider_user_message_id": "44057cb0-b3ec-4ec6-8f3a-ec982819b2a9",
+    "provider_assistant_message_id": "1b71accf-2e04-478e-bad1-85f13249dee0"
+  },
+  "recovery_linkage": {
+    "previous_request_id": "2026-09-13-acps-post-b02-use-01",
+    "previous_operation_id": "b7f00c5e-8e41-4ad1-805d-65cebf1ec763",
+    "previous_stable_key": "em:actuator_conditioned_partial_sharing:convergence",
+    "previous_status": "VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE",
+    "new_stable_key": "hmasd-gen:7e64af7eba4439ec6a7221062db586ecd104dc58caaf80a481d114f8e5c728d8",
+    "handoff_commit": "c36369d105169e608a7dee4a4c42f5c45710f370",
+    "handoff_path": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/delivery/RECOVERY_HANDOFF_20260913.json"
+  },
+  "recorded_at": "2026-09-13T11:38:47.402969+00:00"
+}

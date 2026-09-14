@@ -1,0 +1,60 @@
+{
+  "admissions": {
+    "learned": {
+      "assessed_at": "2026-09-11T08:05:14.191138Z",
+      "available_physical_bytes": 15472226304,
+      "captured_at": "2026-09-11T08:05:14.190821Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15472226304,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "reference": {
+      "assessed_at": "2026-09-11T08:12:38.641408Z",
+      "available_physical_bytes": 14396583936,
+      "captured_at": "2026-09-11T08:12:38.641076Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 14396583936,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    }
+  },
+  "timing_text": {
+    "chain-time.txt": "wall_s=447.63,peak_rss_kib=580920,exit=0",
+    "learned-time.txt": "wall_s=444.45 peak_rss_kib=580920 exit=0",
+    "reference-time.txt": "wall_s=3.18 peak_rss_kib=431716 exit=0"
+  },
+  "supervisor": {
+    "exit_code": "0",
+    "pid": "3341809",
+    "start_time": "1789113914",
+    "status": "finished"
+  },
+  "monitor_known_terminal_command_wall_s": 0.825,
+  "monitor_earlier_observation_wall_s": null,
+  "native_chain_s": 447.63,
+  "learned_complete_s": 444.45,
+  "reference_complete_s": 3.18,
+  "native_complete_caps_pass": true,
+  "resource_limit": "resources_unmeasured: earlier Monitor observation-command wall; total support/cap conformance cannot be certified from retained timings",
+  "monitor_adoption": {
+    "confirmed_by_root": true,
+    "observed_pid": 3341809,
+    "source_sha": "3ffa65cb4e1a67182b90dce3822d0018ac623c72",
+    "observation": "running, tmux active, exact source/cwd; later finished exit0/tmux inactive"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "known_command_seconds": 23.3953093,
+  "records": [
+    {
+      "action": "focused-reading-0",
+      "seconds": 0.1558066
+    },
+    {
+      "action": "focused-reading-1",
+      "seconds": 0.271216
+    },
+    {
+      "action": "read-boundary-0",
+      "seconds": 0.3579847
+    },
+    {
+      "action": "read-boundary-1",
+      "seconds": 0.2081766
+    },
+    {
+      "action": "sync-existing-branch-merge-push",
+      "seconds": 4.3966301
+    },
+    {
+      "action": "source-acceptance-read-0",
+      "seconds": 0.0742889
+    },
+    {
+      "action": "source-acceptance-read-1",
+      "seconds": 0.4615865
+    },
+    {
+      "action": "current-input-reconciliation",
+      "seconds": 4.0554021
+    },
+    {
+      "action": "identity-and-delivery-read-0",
+      "seconds": 0.9078548
+    },
+    {
+      "action": "identity-and-delivery-read-1",
+      "seconds": 0.8476545
+    },
+    {
+      "action": "identity-cost-static-stub-check",
+      "seconds": 0.5189528
+    },
+    {
+      "action": "shared-source-drift-diff",
+      "seconds": 0.2315128
+    },
+    {
+      "action": "identity-cost-static-stub-check-after-default-hook-reconciliation",
+      "seconds": 0.953027
+    },
+    {
+      "action": "card-owner-audit-record",
+      "seconds": 0.4244571
+    },
+    {
+      "action": "owner-trace-source-check",
+      "seconds": 0.3396315
+    },
+    {
+      "action": "owner-method-and-native-path-check",
+      "seconds": 0.1973501
+    },
+    {
+      "action": "technical-acceptance-owner-trace",
+      "seconds": 0.5363164
+    },
+    {
+      "action": "independent-review-conservative-reserve",
+      "seconds": 4.5738604,
+      "qualification": "2.5738604 retained + 2 reserved missing early measurement"
+    },
+    {
+      "action": "initial-checkout-and-skill-reads-retained",
+      "seconds": 1.1657792
+    },
+    {
+      "action": "early-input-merge-conflict-read-retained",
+      "seconds": 2.7178211999999995
+    }
+  ],
+  "qualification": "Invoked command work subtotal; some early output fields, apply_patch/provider/tool overhead and future integration/collection tails remain unmeasured. Review includes declared conservative 2s reserve. Not a full support300/complete1200 certificate. No scientific invocation before this publication."
+}

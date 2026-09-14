@@ -1,0 +1,18 @@
+{
+  "source_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+  "technical_receipt_commit": "5484a9305b003c6bb1fd6830ce2963c6c8cf4a8b",
+  "handle": "mgtap-top-b01-8221-20260912",
+  "execution_node": "hmasd-wsl-node",
+  "supervisor_returncode": 0,
+  "stdout": "Task 'mgtap-top-b01-8221-20260912' started in tmux session 'agent_mgtap-top-b01-8221-20260912'. Output: /home/wu/.agent-tasks/mgtap-top-b01-8221-20260912/task.log\n",
+  "stderr": "",
+  "launch_command_wall_seconds": 0.6298443,
+  "accepted_scientific_processes": 1,
+  "ordered_arms": [
+    "TOP",
+    "DENSE"
+  ],
+  "admission": "ADMISSION.json: passed;15310286848 effective/physical available bytes versus4294967296 floor; measured2026-09-12T22:29:45.475388Z immediately before sole runner",
+  "monitor_dispatch": "Direct MONITOR_ADD accepted by app endpoint01a095d0-21ee-7c02-9d97-3681b5678200; actual adoption is separately recorded in MONITOR_ADOPTION.json",
+  "native_terminal": "pending; no scientific result or cost verdict yet"
+}

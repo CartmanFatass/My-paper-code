@@ -1,0 +1,35 @@
+{
+  "object_id": "FSD_UAV_RENEWAL_BATCH_B02",
+  "published_source": "2b8bd8f7094b7023a892fcf92ab49dc6421fc8f0",
+  "scientific_command_submissions": 0,
+  "admission_submissions": 0,
+  "source_staging_submissions": 1,
+  "staging": {
+    "start_utc": "2026-09-11T16:32:39.569925Z",
+    "stop_utc": "2026-09-11T16:36:02.881934Z",
+    "local_session": 74614,
+    "returncode_after_interrupt": 1,
+    "output": "",
+    "intended_operations": [
+      "fetch origin codex/fsd",
+      "create detached sparse worktree at published source",
+      "read exact source and shell bytes",
+      "create receipt directory"
+    ],
+    "remote_stage_reached": "not observed"
+  },
+  "concurrent_read_only_reconciliation": {
+    "start_utc": "2026-09-11T16:34:41.726921Z",
+    "stop_utc": "2026-09-11T16:36:02.881934Z",
+    "local_session": 18819,
+    "returncode_after_interrupt": 1,
+    "output": ""
+  },
+  "timing_method": "Approximate complete local command lifecycle spans, including pending remote waits; not remote CPU/service time. Retained partial tool-wait charges must not be added again.",
+  "stop_reason": "Known projected additional-support overrun before any scientific submission; no restart or scientific retry.",
+  "post_stop_evidence": [
+    "STAGING_RECONCILIATION.json",
+    "CLEANUP_FACTS.json"
+  ],
+  "scientific_polarity": "none"
+}

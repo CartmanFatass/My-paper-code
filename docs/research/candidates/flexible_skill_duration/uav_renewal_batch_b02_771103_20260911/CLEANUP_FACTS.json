@@ -1,0 +1,49 @@
+{
+  "transport_returncode": 0,
+  "transport_stderr": "",
+  "remote_stdout": "{\n  \"completed_utc\": \"2026-09-12T03:32:22.190448+00:00\",\n  \"source_sha\": \"5b15e536806d3b54dc693e7b4b911eba53ff643c\",\n  \"raw_files_matched_to_published_archives\": 22,\n  \"removed_paths\": [\n    \"/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911\",\n    \"/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911\",\n    \"/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-D0-20260911\",\n    \"/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-I-20260911\"\n  ],\n  \"disk_absence\": {\n    \"/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911\": true,\n    \"/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911\": true,\n    \"/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-D0-20260911\": true,\n    \"/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-I-20260911\": true\n  },\n  \"worktree_registration_absent\": true,\n  \"worktree_remove_returncode\": 0,\n  \"worktree_remove_stdout\": \"\",\n  \"worktree_remove_stderr\": \"\",\n  \"shared_remote_checkout_retained\": true,\n  \"all_current_remote_cleanup_complete\": true\n}\n",
+  "command_wall_seconds": 1.1089999999967404,
+  "published_preservation_sha": "b30bf53384c89127560b6cc2a77f0671b36b36f1",
+  "retained_archives": {
+    "D0_collection.tar.gz": {
+      "bytes": 17139,
+      "sha256": "8539d21d1e70f78f8b6431479471a32d9d707ea857297f3f729b2737a40303a2",
+      "Git_blob_readback": true
+    },
+    "I_collection.tar.gz": {
+      "bytes": 18602,
+      "sha256": "765566bcdb6e94e713ac5a3f3d4b438721f277ccfdb4d0c5c5199737b82b742f",
+      "Git_blob_readback": true
+    }
+  },
+  "unique_raw_files": 22,
+  "remote": {
+    "completed_utc": "2026-09-12T03:32:22.190448+00:00",
+    "source_sha": "5b15e536806d3b54dc693e7b4b911eba53ff643c",
+    "raw_files_matched_to_published_archives": 22,
+    "removed_paths": [
+      "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911",
+      "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911",
+      "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-D0-20260911",
+      "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-I-20260911"
+    ],
+    "disk_absence": {
+      "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911": true,
+      "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911": true,
+      "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-D0-20260911": true,
+      "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771103-I-20260911": true
+    },
+    "worktree_registration_absent": true,
+    "worktree_remove_returncode": 0,
+    "worktree_remove_stdout": "",
+    "worktree_remove_stderr": "",
+    "shared_remote_checkout_retained": true,
+    "all_current_remote_cleanup_complete": true
+  },
+  "new_local_collection_directory_absent": true,
+  "new_local_collection_directory": "temp\\directions\\flexible_skill_duration\\exp\\uav_renewal_batch_b02_771103_collection",
+  "local_temporary_extraction_created": false,
+  "shared_local_authoring_retained": true,
+  "prior_771003_duplicate": "outside this allocation; untouched",
+  "all_assigned_current_allocation_cleanup_complete": true
+}

@@ -1,0 +1,38 @@
+{
+  "verified_at": "2026-09-11T11:53:49.247912-07:00",
+  "node": "wsl_4070",
+  "source_sha": "76d4afca664f988fbaabca2923a0c891f8a784ff",
+  "root_integration": "cf93e737ee83f2d78d14c5569874590af8ccd347",
+  "preserved_commit": "94c8fdfa888df014fa9fd83a4014a1cb10b7d501",
+  "predelete_comparison": "11 archived byte streams equalled originals; five noncache ignored files exactly covered; source clean at bound SHA; both staging hashes matched",
+  "removed_paths": [
+    {
+      "path": "/home/wu/hmasd-worktrees/vnfc-b02-credit-20260911-01",
+      "absent_on_disk": true
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/vnfc_b02_76d4afca6.bundle",
+      "absent_on_disk": true
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/vnfc_b02_partial_20260911.tgz",
+      "absent_on_disk": true
+    }
+  ],
+  "execution_worktree_registration_absent": true,
+  "supervisor_retained": {
+    "path": "/home/wu/.agent-tasks/vnfc-b02-credit-20260911-01",
+    "files": [
+      "exit_code",
+      "pid",
+      "runner.sh",
+      "start_time",
+      "status",
+      "task.log"
+    ]
+  },
+  "cleanup_command_issue": "The removal command executed, but its final Bash here-document terminator reached Python as PY: NameError after the final absence assertions/JSON print. No deletion was rerun; this separate read-only state reconciliation confirms actual effects.",
+  "cleanup_command_displayed_seconds": 1.0538243,
+  "scope": "Only named terminal execution checkout and two duplicate input files removed; no experiment, test, retry or other checkout.",
+  "reconciliation_command_seconds": 0.4776158
+}

@@ -1,0 +1,100 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-13-rcle-b10-scientific-review-01",
+  "source_thread_id": "/root",
+  "parent_thread_id": "/root",
+  "operator_thread_id": "/root/tr_rcle",
+  "direction_id": "roster_consistent_latent_exploration",
+  "conversation_id": "6aa55611-bf80-83e8-b018-70e30a95b28a",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "a3114f9e717f920d8c14e4c2e653dd4cdae636a4",
+  "delivery_mode": "github_delivery",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "github_delivery": {
+    "branch": "codex/rcle",
+    "base_sha": "a3114f9e717f920d8c14e4c2e653dd4cdae636a4",
+    "response_path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_b10_scientific_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/8"
+  },
+  "scientific_question": "Independently review B10's fixed design, complete one-fit evidence, interpretation and successor-plan reasoning. Identify any material scientific defect or unsupported inference, give source-grounded reasons and proportionate corrections/claim limits, and retain the strongest evidence opposing DM's interpretation. This is a scientific Reviewer assignment, not a request to approve or veto funding, lifecycle or the next experiment.\n\nB10 is one new seed30/final1024 greedy-anchored common-phase fit; its actual full-Y learning and four512 native panels completed in161.35 whole-native seconds. Primary G_U +.061531575521, D_n +.154589843750 and D_g -.019075520833; both primary paths/all eight U cells have these signs. Recovery is mixed, including a new small active12-to8 tau harm versus nearest. DM proposes retaining these separate observations and preferring observed greedy U, with one-fit conditional uncertainty only. B09 seed29/final256 is a distinct root/endpoint: do not interpret the smaller displayed B10 deficit as a causal budget effect or same-endpoint replication.\n\nThe actual new management fact is DM's reversible PARK of current RCLE advancement: there is genuine learning but no observed U value over competent greedy, and no sufficiently consequential next use/question currently selected. This is not automatic termination of an ended allocation, not proof of general unlearnability, and not a headroom threshold. The strongest alternative is one further fresh1024 replication to learn training variation; DM did not select it because that information currently lacks a sufficiently clear consequence for the observed learned-versus-greedy service decision. Independently challenge that reasoning: if evidence or design makes the conclusion/next-plan reasoning unsound, identify exactly what must change and why; distinguish an actual defect from an optional higher-confidence study. You may identify a focused scientifically meaningful next question if it changes the reasoning, without committing resources or dictating lifecycle. DM will resolve findings and retain its final decision responsibility.",
+  "deliverable": "A complete conclusion-first independent scientific review in Chinese covering design and comparator/information/learning validity, evidence and uncertainty quality, supported/unsupported conclusions, and the successor/PARK rationale. List material findings (or explicitly none), their exact sources and consequence, proportionate corrections or claim limitations, strong competing evidence and unresolved scientific uncertainties. No pass token, approval gate, new grant, mandatory diagnostic before ordinary learning, investment choice or lifecycle command. State any unreadable input or concrete specification conflict. Do not run code or add empirical exposure; use recorded facts. Write the full scoped RESPONSE.md and its delivery comment, or the exact authorized downloadable full-response fallback.",
+  "claim_ceiling": "One fresh native B training instance and conditional scenario comparisons, plus DM's reversible direction-management judgment. No stable trained-population superiority/equivalence, causal anchor/budget/optimizer attribution, general impossibility, tuned same-information headroom, novelty/scalability/C/UAV transfer or cross-direction resource/lifecycle authority. Existing frozen data, prior narrow HOLDs and actual finite invocation limits stay intact.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B10_GREEDY_ANCHORED_1024_SCIENCE_CARD_20260913.md",
+      "commit_sha": "a3114f9e717f920d8c14e4c2e653dd4cdae636a4",
+      "purpose": "Read the complete fixed B10 design, actual local object choice, controls, inference ceiling, finite counts/caps and stop. Design review, not object authorization.",
+      "provenance": "Prospective fixed design, not outcome-informed card edits."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md",
+      "commit_sha": "a3114f9e717f920d8c14e4c2e653dd4cdae636a4",
+      "purpose": "Read complete B10 observations/limits and the DM's already-applied reversible PARK reasons and alternative. Independently review scientific support and proportionality, not lifecycle permission.",
+      "provenance": "DM scientific interpretation with independent Convergence review explicitly pending; lifecycle is DM-owned."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B10_GREEDY_ANCHORED_1024_RESULT_EVIDENCE_20260913.md",
+      "commit_sha": "a3114f9e717f920d8c14e4c2e653dd4cdae636a4",
+      "purpose": "Read complete B evidence, real training/exposure, physical admission, exact source, technical checks, failures and retention limits.",
+      "provenance": "Technical/runtime validity and one-fit observation; does not itself settle scientific review."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b10_greedy_anchored_1024_20260913/INTAKE_ANALYSIS.json",
+      "commit_sha": "a3114f9e717f920d8c14e4c2e653dd4cdae636a4",
+      "purpose": "Inspect primary raw-paired reductions, every eight-cell U/F/tau/Y mean, curves/checkpoint facts and complete time. No need to recompute or read listed raw hashes as extra dependencies.",
+      "provenance": "Read-only arithmetic over one retained training fit and its 2048 evaluation rows; no extra experiment or independent seeds."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B09_GREEDY_ANCHORED_PHASE_INTAKE_20260913.md",
+      "commit_sha": "d741be527662c5cec18ed03ae03531658059dff6",
+      "purpose": "Read observations and own limits for seed29/final256, only to review comparison with new seed30/final1024. Do not adopt historical approval/lifecycle wording.",
+      "provenance": "Immutable prior distinct root/endpoint; not a matched budget control or same-endpoint training replication."
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/study.py",
+      "commit_sha": "e5fd439735bcc52d7f4cba9943b8c5c5138e21c2",
+      "purpose": "Inspect declared training/evaluation/coordinate/endpoint/contrast logic where relevant to design and inference; do not execute.",
+      "provenance": "Exact B10 launch source and compatible B08/B09 entry paths."
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/policy.py",
+      "commit_sha": "e5fd439735bcc52d7f4cba9943b8c5c5138e21c2",
+      "purpose": "Read actual public quota phase, greedy anchor, one combined likelihood, parameterization and full native-Y Adam/baseline law.",
+      "provenance": "Unchanged accepted B09 policy at B10 launch; not a new implementation proposal."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "4dfdb5f8f8b377eea29006d0715a737429c719bc",
+      "purpose": "Adopt only sections 7–8 and 11.4/11.7/11.8–11.10 relevant to B evidence, proportionate science, costs and review; no stronger-class prerequisites.",
+      "provenance": "Current published applicable scientific specification, separately pinned from fixed B10 source."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "4dfdb5f8f8b377eea29006d0715a737429c719bc",
+      "purpose": "Read sections 3–4 and 6 on learning/information/coordination and empirical inference levels; explanatory evidence only.",
+      "provenance": "Current foundational scientific distinctions; not a new approval or semantic exception."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "4dfdb5f8f8b377eea29006d0715a737429c719bc",
+      "purpose": "Read empirical comparison, native learning and training-instance versus evaluation-unit inference distinctions.",
+      "provenance": "Explanatory scientific context, not an added mandatory benchmark or training-seed count."
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "4dfdb5f8f8b377eea29006d0715a737429c719bc",
+      "purpose": "Read section 2 Decision ownership plus role definitions lines 32–48 solely for current DM-owned lifecycle and meaningful independent scientific review. Older authority text in historical evidence is not controlling.",
+      "provenance": "Owner's current explicit authority and preservation constraints: dm_owned_scientific_review, not Pro final lifecycle authority."
+    }
+  ],
+  "constraints": [
+    "NEW EXPOSURE FOR THIS REVIEW: 0 new fits/models/RNG roots/episodes/ticks/backwards/optimizer calls; recorded B10 consists of1 fit,1024 updates,65536 training+2048 evaluation episodes,4325376 ticks,2112 native32 batches. This machine-produced exposure is already completed, not requested future work.",
+    "Prospective alternative not selected: one fresh1024 replication would repeat the same work counts and requires its own finite object choice. No sweep or new candidate/trajectory search is proposed. Training has1048576 team draws,8388608 phase heads,71303168 assignment rows; sampled init/final add1703936 rows, total73007104 integer greedy-prior contributions. These are ordinary algorithm operations, not added validation.",
+    "Actual B10 native161.35s/623056KiB. Original local caps native300/additional invoked support600/complete900s remain; support checkpoint516.5290922s before result publication plus subsequent measured work. Git/network failures are included. Unmeasured Monitor/Transport preparation/provider/agent/integration tails are UNKNOWN, not zero; a complete total-cost compliance invoice is not claimed. Cost uncertainty does not license an extra experiment, retry or cap reset.",
+    "Direction Convergence is a substantive independent scientific Reviewer under main4dfdb5f8f. DM has already selected reversible PARK and owns its final continuation/lifecycle response. Review is not funding, scheduling or lifecycle approval; do not use old PRO_FINAL/family permission rules from historical records. Material scientific defects still require DM repair or claim restriction.",
+    "Read only explicitly listed input paths and sections at their effective SHAs. Linked historical references and current Issue body are not extra instructions or mandatory dependencies. The substantive Issue is reused for delivery; old comments belong to old requests.",
+    "Only scoped response file and one delivery comment may be written. No code/main/control/Portfolio/lifecycle edits and no automatic consultation/replacement. Preserve fixed input versions even when the shared delivery branch advances."
+  ]
+}

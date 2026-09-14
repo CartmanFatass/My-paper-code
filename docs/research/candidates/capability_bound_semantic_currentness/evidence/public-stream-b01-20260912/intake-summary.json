@@ -1,0 +1,1034 @@
+{
+  "object": "CBSC-OPPORTUNITY-CREDIT-PUBLIC-STREAM-B01",
+  "source": "2717796fb4f38cdb7059cd9d17e1dfb2f19abd47",
+  "seed": 2026091231,
+  "independent_training_pairs": 1,
+  "arms": {
+    "raw": {
+      "arm": "RAW-GRU",
+      "configuration": {
+        "target": "sampled_FP32_reward[t]+reward[t+1]; no bootstrap",
+        "value_supervision": "unnormalized target; MSE mean over 48 minibatch decisions",
+        "advantage_normalization": "once over 192 rollout decisions; population std + 1e-8",
+        "native_gamma": 1.0,
+        "clip": 0.2,
+        "value_coefficient": 0.5,
+        "entropy_coefficient": 0.01,
+        "learning_rate": 0.0003,
+        "adam_betas": [
+          0.9,
+          0.999
+        ],
+        "adam_epsilon": 1e-08,
+        "weight_decay": 0.0,
+        "gradient_norm_cap": 0.5,
+        "advantage_epsilon": 1e-08,
+        "epochs": 4,
+        "episodes_per_minibatch": 2
+      },
+      "counters": {
+        "rollout_updates": 48,
+        "adam_steps": 768,
+        "train_episodes": 384,
+        "train_transitions": 58368,
+        "train_decisions": 9216
+      },
+      "execution": {
+        "torch_threads": 1,
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "python_executable": "/home/wu/.venvs/hmasd/bin/python",
+        "python_version": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+        "torch_version": "2.7.0+cu118"
+      },
+      "parameter_count": 121349,
+      "parameter_movement_l2": 2.963083028793335,
+      "relative_parameter_movement": 0.09890819442865134,
+      "changed_parameters": 116692,
+      "training_action_counts": {
+        "SAFE_FALLBACK": 170,
+        "REFRESH": 8942,
+        "SERVE": 104
+      },
+      "context_means": {
+        "ALWAYS_REFRESH": {
+          "numerator": 223,
+          "denominator": 20,
+          "float": 11.15
+        },
+        "ALWAYS_SAFE": {
+          "numerator": 83,
+          "denominator": 20,
+          "float": 4.15
+        },
+        "REQUEST_ONLY": {
+          "numerator": 249,
+          "denominator": 20,
+          "float": 12.45
+        }
+      },
+      "initial": 11.1375,
+      "final": 11.15,
+      "final_actions": {
+        "SERVE": 0,
+        "REFRESH": 768,
+        "SAFE_FALLBACK": 0
+      },
+      "rule_gap": -1.3,
+      "timing": {
+        "ELAPSED_SECONDS": 45.61,
+        "USER_SECONDS": 45.22,
+        "SYSTEM_SECONDS": 0.45,
+        "PEAK_RSS_KIB": 559792.0,
+        "EXIT": 0.0
+      },
+      "admission": {
+        "assessed_at": "2026-09-12T17:20:45.601435Z",
+        "available_physical_bytes": 15632343040,
+        "captured_at": "2026-09-12T17:20:45.601195Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15632343040,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "internal_readback_seconds": 43.767911897040904
+    },
+    "struct": {
+      "arm": "STRUCT-CURRENTNESS-GRU",
+      "configuration": {
+        "target": "sampled_FP32_reward[t]+reward[t+1]; no bootstrap",
+        "value_supervision": "unnormalized target; MSE mean over 48 minibatch decisions",
+        "advantage_normalization": "once over 192 rollout decisions; population std + 1e-8",
+        "native_gamma": 1.0,
+        "clip": 0.2,
+        "value_coefficient": 0.5,
+        "entropy_coefficient": 0.01,
+        "learning_rate": 0.0003,
+        "adam_betas": [
+          0.9,
+          0.999
+        ],
+        "adam_epsilon": 1e-08,
+        "weight_decay": 0.0,
+        "gradient_norm_cap": 0.5,
+        "advantage_epsilon": 1e-08,
+        "epochs": 4,
+        "episodes_per_minibatch": 2
+      },
+      "counters": {
+        "rollout_updates": 48,
+        "adam_steps": 768,
+        "train_episodes": 384,
+        "train_transitions": 58368,
+        "train_decisions": 9216
+      },
+      "execution": {
+        "torch_threads": 1,
+        "dtype": "torch.float32",
+        "device": "cpu",
+        "python_executable": "/home/wu/.venvs/hmasd/bin/python",
+        "python_version": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+        "torch_version": "2.7.0+cu118"
+      },
+      "parameter_count": 121349,
+      "parameter_movement_l2": 3.1546471118927,
+      "relative_parameter_movement": 0.10530263474389769,
+      "changed_parameters": 116861,
+      "training_action_counts": {
+        "SAFE_FALLBACK": 171,
+        "REFRESH": 8947,
+        "SERVE": 98
+      },
+      "context_means": {
+        "ALWAYS_REFRESH": {
+          "numerator": 223,
+          "denominator": 20,
+          "float": 11.15
+        },
+        "ALWAYS_SAFE": {
+          "numerator": 83,
+          "denominator": 20,
+          "float": 4.15
+        },
+        "REQUEST_ONLY": {
+          "numerator": 249,
+          "denominator": 20,
+          "float": 12.45
+        }
+      },
+      "initial": 11.1375,
+      "final": 11.15,
+      "final_actions": {
+        "SERVE": 0,
+        "REFRESH": 768,
+        "SAFE_FALLBACK": 0
+      },
+      "rule_gap": -1.3,
+      "timing": {
+        "ELAPSED_SECONDS": 44.66,
+        "USER_SECONDS": 44.86,
+        "SYSTEM_SECONDS": 0.23,
+        "PEAK_RSS_KIB": 565380.0,
+        "EXIT": 0.0
+      },
+      "admission": {
+        "assessed_at": "2026-09-12T17:21:31.221459Z",
+        "available_physical_bytes": 15632826368,
+        "captured_at": "2026-09-12T17:21:31.221194Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15632826368,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "internal_readback_seconds": 42.774069593055174
+    }
+  },
+  "context": {
+    "ALWAYS_REFRESH": 11.15,
+    "ALWAYS_SAFE": 4.15,
+    "REQUEST_ONLY": 12.45
+  },
+  "all32": [
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 0
+      },
+      "raw_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "struct_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 1
+      },
+      "raw_return": {
+        "numerator": 62,
+        "denominator": 5,
+        "float": 12.4
+      },
+      "struct_return": {
+        "numerator": 62,
+        "denominator": 5,
+        "float": 12.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 2
+      },
+      "raw_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "struct_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 3
+      },
+      "raw_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "struct_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 4
+      },
+      "raw_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "struct_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 5
+      },
+      "raw_return": {
+        "numerator": 42,
+        "denominator": 5,
+        "float": 8.4
+      },
+      "struct_return": {
+        "numerator": 42,
+        "denominator": 5,
+        "float": 8.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 6
+      },
+      "raw_return": {
+        "numerator": 67,
+        "denominator": 5,
+        "float": 13.4
+      },
+      "struct_return": {
+        "numerator": 67,
+        "denominator": 5,
+        "float": 13.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 7
+      },
+      "raw_return": {
+        "numerator": 52,
+        "denominator": 5,
+        "float": 10.4
+      },
+      "struct_return": {
+        "numerator": 52,
+        "denominator": 5,
+        "float": 10.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 8
+      },
+      "raw_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "struct_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 9
+      },
+      "raw_return": {
+        "numerator": 62,
+        "denominator": 5,
+        "float": 12.4
+      },
+      "struct_return": {
+        "numerator": 62,
+        "denominator": 5,
+        "float": 12.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 10
+      },
+      "raw_return": {
+        "numerator": 72,
+        "denominator": 5,
+        "float": 14.4
+      },
+      "struct_return": {
+        "numerator": 72,
+        "denominator": 5,
+        "float": 14.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 11
+      },
+      "raw_return": {
+        "numerator": 52,
+        "denominator": 5,
+        "float": 10.4
+      },
+      "struct_return": {
+        "numerator": 52,
+        "denominator": 5,
+        "float": 10.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 12
+      },
+      "raw_return": {
+        "numerator": 52,
+        "denominator": 5,
+        "float": 10.4
+      },
+      "struct_return": {
+        "numerator": 52,
+        "denominator": 5,
+        "float": 10.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 13
+      },
+      "raw_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "struct_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 14
+      },
+      "raw_return": {
+        "numerator": 47,
+        "denominator": 5,
+        "float": 9.4
+      },
+      "struct_return": {
+        "numerator": 47,
+        "denominator": 5,
+        "float": 9.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 15
+      },
+      "raw_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "struct_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 16
+      },
+      "raw_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "struct_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 17
+      },
+      "raw_return": {
+        "numerator": 47,
+        "denominator": 5,
+        "float": 9.4
+      },
+      "struct_return": {
+        "numerator": 47,
+        "denominator": 5,
+        "float": 9.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 18
+      },
+      "raw_return": {
+        "numerator": 62,
+        "denominator": 5,
+        "float": 12.4
+      },
+      "struct_return": {
+        "numerator": 62,
+        "denominator": 5,
+        "float": 12.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 19
+      },
+      "raw_return": {
+        "numerator": 52,
+        "denominator": 5,
+        "float": 10.4
+      },
+      "struct_return": {
+        "numerator": 52,
+        "denominator": 5,
+        "float": 10.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 20
+      },
+      "raw_return": {
+        "numerator": 52,
+        "denominator": 5,
+        "float": 10.4
+      },
+      "struct_return": {
+        "numerator": 52,
+        "denominator": 5,
+        "float": 10.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 21
+      },
+      "raw_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "struct_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 22
+      },
+      "raw_return": {
+        "numerator": 67,
+        "denominator": 5,
+        "float": 13.4
+      },
+      "struct_return": {
+        "numerator": 67,
+        "denominator": 5,
+        "float": 13.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 23
+      },
+      "raw_return": {
+        "numerator": 62,
+        "denominator": 5,
+        "float": 12.4
+      },
+      "struct_return": {
+        "numerator": 62,
+        "denominator": 5,
+        "float": 12.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 24
+      },
+      "raw_return": {
+        "numerator": 47,
+        "denominator": 5,
+        "float": 9.4
+      },
+      "struct_return": {
+        "numerator": 47,
+        "denominator": 5,
+        "float": 9.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 25
+      },
+      "raw_return": {
+        "numerator": 42,
+        "denominator": 5,
+        "float": 8.4
+      },
+      "struct_return": {
+        "numerator": 42,
+        "denominator": 5,
+        "float": 8.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 26
+      },
+      "raw_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "struct_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 27
+      },
+      "raw_return": {
+        "numerator": 67,
+        "denominator": 5,
+        "float": 13.4
+      },
+      "struct_return": {
+        "numerator": 67,
+        "denominator": 5,
+        "float": 13.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 28
+      },
+      "raw_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "struct_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 29
+      },
+      "raw_return": {
+        "numerator": 42,
+        "denominator": 5,
+        "float": 8.4
+      },
+      "struct_return": {
+        "numerator": 42,
+        "denominator": 5,
+        "float": 8.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 30
+      },
+      "raw_return": {
+        "numerator": 52,
+        "denominator": 5,
+        "float": 10.4
+      },
+      "struct_return": {
+        "numerator": 52,
+        "denominator": 5,
+        "float": 10.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    },
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 2026091231,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 31
+      },
+      "raw_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "struct_return": {
+        "numerator": 57,
+        "denominator": 5,
+        "float": 11.4
+      },
+      "difference": {
+        "numerator": 0,
+        "denominator": 1,
+        "float": 0.0
+      }
+    }
+  ],
+  "artifact_manifest": {
+    "raw-admission.json": {
+      "bytes": 504,
+      "sha256": "51a46d0ec1ce0b0d5c70795f41fde9d2501c29e8db4248b42b5027defb0a444f"
+    },
+    "struct/paired_summary.json": {
+      "bytes": 1038959,
+      "sha256": "84d56bc83ca913a6fc89e69577d11b19901ac74278abd60d1bf4f08988273e56"
+    },
+    "struct/update-0.pt": {
+      "bytes": 1478553,
+      "sha256": "037ed44757fd0aac51e1e80501cb291bff043e0caa32972b57e422d62cde5535"
+    },
+    "struct/summary.json": {
+      "bytes": 1710899,
+      "sha256": "e5220b792fb88590208bf8903ac2bebca06d80f227a5162d1f036068c9e045f7"
+    },
+    "struct/update-48.pt": {
+      "bytes": 1478631,
+      "sha256": "1277102127a1af955f2a0416f92ced67772e24877b23c728021ada6d1582c977"
+    },
+    "struct/updates.jsonl": {
+      "bytes": 1602073,
+      "sha256": "301d40d4026ca8d136853ec2ad83399a9efbb05d2c59595b252daf00bcbba0dd"
+    },
+    "publication-check.log": {
+      "bytes": 98,
+      "sha256": "85a7532b40196fb821e4b3dfb1231181e8e280a2da477abec65674576186c6c1"
+    },
+    "raw/update-0.pt": {
+      "bytes": 1478553,
+      "sha256": "c6fa530a6889c43f47d5fe8f0a9226527ad065de6f92c223a18304d9a56a2b89"
+    },
+    "raw/summary.json": {
+      "bytes": 1710883,
+      "sha256": "bf8fdc6b0ffbe6957bba897de13d4e89be8926901a00aadb5850cdc2362493ea"
+    },
+    "raw/update-48.pt": {
+      "bytes": 1478631,
+      "sha256": "fdd6fe3f908aa1f9ddbf17eba40c7fb8b1a0e3211cfcd1c366e0c81ee38e3ca1"
+    },
+    "raw/updates.jsonl": {
+      "bytes": 1602863,
+      "sha256": "20787f41253cf2833ccac8a4693283b15e6b06335ba81267619b8b4a1c33c548"
+    },
+    "contract-check.time": {
+      "bytes": 66,
+      "sha256": "a466c28b6b77864c3195193ea11dd5ba3fb0589847b7e8316b9cd76d956db2ea"
+    },
+    "struct.log": {
+      "bytes": 721,
+      "sha256": "e42fc978bd3156ebf01309cc8e5694a5a5301098d95e696c3c9fef1c87cf08ad"
+    },
+    "raw.time": {
+      "bytes": 88,
+      "sha256": "67e7cb06ff2007dd41aea53df5901ea88e84964f607e5d86eeced14c228e3c27"
+    },
+    "contract-check.log": {
+      "bytes": 1243,
+      "sha256": "67c5268c20716ae1b87678e4bf0003da8623dfba68f3ee4f5b8263f1db3c2f9b"
+    },
+    "struct.time": {
+      "bytes": 88,
+      "sha256": "744cab15d36d19478690509765eaa9a5c47d3ec34f2948b61870bb7c22d7800e"
+    },
+    "struct-admission.json": {
+      "bytes": 504,
+      "sha256": "a24a37535f1afeac1a3ce824e98d6d799b6d5cdf356cb621fd36841046c45ded"
+    },
+    "publication-check.time": {
+      "bytes": 28,
+      "sha256": "dae8a1ec1d9e78e7f1d5c89f9309902da7158ce8c6982fa7a5dcbb32a78b955e"
+    },
+    "raw.log": {
+      "bytes": 703,
+      "sha256": "57f989c8f56b95732e5138c20f42d34649a6eb7f5f58886b68c846b0c75bc0f9"
+    }
+  },
+  "mean_difference": {
+    "numerator": 0,
+    "denominator": 1,
+    "float": 0.0
+  },
+  "signs": {
+    "positive": 0,
+    "zero": 32,
+    "negative": 0
+  },
+  "native_wall_sum_seconds": 90.27,
+  "native_aggregate_cpu_seconds": 90.75999999999999,
+  "checked": "source/identity/configuration/counters/48 records/768 losses per arm/full episode coverage/4 snapshots/2x32 evaluations/native ledger contributions/all32 paired differences/context/admission/inclusive time"
+}

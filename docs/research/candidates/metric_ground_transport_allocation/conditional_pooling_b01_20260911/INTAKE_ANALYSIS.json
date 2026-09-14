@@ -1,0 +1,279 @@
+{
+  "independent_training_units": 1,
+  "conditional_evaluation_worlds": 32,
+  "seed": 8212,
+  "source_sha": "2814fbd3e24877464e4dd7c12df55c24567e8723",
+  "status": "COMPLETE",
+  "paired_primary": {
+    "reading": "INSIDE_MEI",
+    "mean": 0.005761321371348559,
+    "conditional_sample_sd": 0.050251354680017665,
+    "conditional_se": 0.00888326841451271,
+    "differences": [
+      0.057403699726691876,
+      0.007027623320651988,
+      0.01213445551573189,
+      0.019347765374776477,
+      -0.03196705668512051,
+      0.031291038918615954,
+      -0.03445909275194092,
+      -0.05556017403466801,
+      0.023504427215686907,
+      0.0708204891966023,
+      0.06610748364594987,
+      0.056365536866290006,
+      0.060360391606614994,
+      -0.01116521860922573,
+      -0.017629658170774498,
+      0.014950996692355473,
+      0.007066079290731164,
+      -0.13967545700876238,
+      0.06257857532860084,
+      -0.035264105892012815,
+      0.01597970487363884,
+      0.029382423589858236,
+      0.04196874590439523,
+      -0.03106679399630974,
+      -0.005210212626191729,
+      0.03309239615981899,
+      -0.0429148679717056,
+      -0.03463520337622358,
+      0.06907098466669143,
+      0.07127129126725139,
+      -0.08831989963178385,
+      -0.03749408452308059
+    ],
+    "positive": 19,
+    "negative": 13,
+    "zero": 0,
+    "minimum": -0.13967545700876238,
+    "maximum": 0.07127129126725139,
+    "mean_J": {
+      "COND": 0.16707705881756274,
+      "DENSE": 0.1613157374462142
+    }
+  },
+  "counts": {
+    "train_team_steps": 262144,
+    "eval_team_steps": 16384,
+    "team_steps": 278528,
+    "optimizer_steps": 2048,
+    "train_episodes": 1024,
+    "eval_episodes": 64,
+    "velocity_decisions": 1392640,
+    "duration_decisions": 0,
+    "d4": 0,
+    "recurrent_observations": 1392640,
+    "explicit_resets": 1088,
+    "constructor_resets": 2,
+    "constructors": 2,
+    "step_calls": 278528,
+    "scientific_uav_calls": 278528,
+    "diagnostic_frames": 0,
+    "completed_episode_steps": 278528,
+    "rollouts": 512,
+    "partial_episode_steps": 0
+  },
+  "per_arm_counts": {
+    "COND": {
+      "train_team_steps": 131072,
+      "eval_team_steps": 8192,
+      "team_steps": 139264,
+      "optimizer_steps": 1024,
+      "train_episodes": 512,
+      "eval_episodes": 32,
+      "velocity_decisions": 696320,
+      "duration_decisions": 0,
+      "d4": 0,
+      "recurrent_observations": 696320,
+      "explicit_resets": 544,
+      "constructor_resets": 1,
+      "constructors": 1,
+      "step_calls": 139264,
+      "scientific_uav_calls": 139264,
+      "diagnostic_frames": 0,
+      "completed_episode_steps": 139264,
+      "rollouts": 256
+    },
+    "DENSE": {
+      "train_team_steps": 131072,
+      "eval_team_steps": 8192,
+      "team_steps": 139264,
+      "optimizer_steps": 1024,
+      "train_episodes": 512,
+      "eval_episodes": 32,
+      "velocity_decisions": 696320,
+      "duration_decisions": 0,
+      "d4": 0,
+      "recurrent_observations": 696320,
+      "explicit_resets": 544,
+      "constructor_resets": 1,
+      "constructors": 1,
+      "step_calls": 139264,
+      "scientific_uav_calls": 139264,
+      "diagnostic_frames": 0,
+      "completed_episode_steps": 139264,
+      "rollouts": 256
+    }
+  },
+  "movement": {
+    "COND": {
+      "common_actor": {
+        "parameters": 34902,
+        "initial_norm": 12.922969818115234,
+        "final_norm": 13.456595420837402,
+        "displacement": 3.5267527103424072,
+        "relative_displacement": 0.2729057453495235
+      },
+      "critic": {
+        "parameters": 34177,
+        "initial_norm": 9.291167259216309,
+        "final_norm": 11.973119735717773,
+        "displacement": 7.221123695373535,
+        "relative_displacement": 0.7772030675919449
+      },
+      "total": {
+        "parameters": 69079,
+        "initial_norm": 15.916299819946289,
+        "final_norm": 18.012096405029297,
+        "displacement": 8.036330223083496,
+        "relative_displacement": 0.5049119653433439
+      },
+      "encoder": {
+        "parameters": 9744,
+        "initial_norm": 5.969009876251221,
+        "final_norm": 6.375388145446777,
+        "displacement": 1.970001459121704,
+        "relative_displacement": 0.3300382307892267
+      },
+      "recurrent": {
+        "parameters": 24960,
+        "initial_norm": 11.420075416564941,
+        "final_norm": 11.807125091552734,
+        "displacement": 2.916247844696045,
+        "relative_displacement": 0.25536152243493426
+      },
+      "branch_inner": {
+        "parameters": 144,
+        "initial_norm": 3.7597811222076416,
+        "final_norm": 3.8935701847076416,
+        "displacement": 0.3525157570838928,
+        "relative_displacement": 0.09375964866721054
+      },
+      "branch_projection": {
+        "parameters": 2624,
+        "initial_norm": 0.0,
+        "final_norm": 1.3489059209823608,
+        "displacement": 1.3489059209823608,
+        "relative_displacement": null
+      }
+    },
+    "DENSE": {
+      "common_actor": {
+        "parameters": 34902,
+        "initial_norm": 12.574790954589844,
+        "final_norm": 12.855230331420898,
+        "displacement": 2.665548801422119,
+        "relative_displacement": 0.2119755955425225
+      },
+      "critic": {
+        "parameters": 34177,
+        "initial_norm": 9.291167259216309,
+        "final_norm": 11.133892059326172,
+        "displacement": 5.830926418304443,
+        "relative_displacement": 0.6275773813586091
+      },
+      "total": {
+        "parameters": 69079,
+        "initial_norm": 15.634922981262207,
+        "final_norm": 17.006486892700195,
+        "displacement": 6.411306381225586,
+        "relative_displacement": 0.41006318924044943
+      },
+      "encoder": {
+        "parameters": 9744,
+        "initial_norm": 5.1721649169921875,
+        "final_norm": 5.357424259185791,
+        "displacement": 1.3662173748016357,
+        "relative_displacement": 0.26414806888947373
+      },
+      "recurrent": {
+        "parameters": 24960,
+        "initial_norm": 11.420075416564941,
+        "final_norm": 11.64441967010498,
+        "displacement": 2.2826900482177734,
+        "relative_displacement": 0.19988397317468737
+      },
+      "branch_inner": {
+        "parameters": 1744,
+        "initial_norm": 2.293070077896118,
+        "final_norm": 2.3969554901123047,
+        "displacement": 0.6510503888130188,
+        "relative_displacement": 0.28392084266786594
+      },
+      "branch_projection": {
+        "parameters": 1024,
+        "initial_norm": 0.0,
+        "final_norm": 0.4471718668937683,
+        "displacement": 0.4471718668937683,
+        "relative_displacement": null
+      }
+    }
+  },
+  "checkpoint_integrity_without_loading": {
+    "COND": {
+      "checkpoint_bytes": 282869,
+      "checkpoint_zip_entries": 24,
+      "crc_ok": true
+    },
+    "DENSE": {
+      "checkpoint_bytes": 282893,
+      "checkpoint_zip_entries": 24,
+      "crc_ok": true
+    }
+  },
+  "native_time": {
+    "COND_seconds": 192.9329937697621,
+    "DENSE_seconds_including_exit": 171.85700623023791,
+    "enclosing_seconds": 364.79,
+    "reported_pair_subtotal_seconds": 345.4267725656973,
+    "GNU_time_rounding_seconds": 0.005,
+    "arm_caps_pass": true,
+    "pair_cap_pass": true,
+    "peak_RSS_KiB": 559056
+  },
+  "preserved_files": [
+    {
+      "name": "admission.json",
+      "bytes": 504,
+      "sha256": "6bb0cbc8ae0a6f9da851ecbff31819af09ca69d07cd457f6af87b2cbb0236804"
+    },
+    {
+      "name": "episodes.jsonl",
+      "bytes": 763708,
+      "sha256": "be5191a55437a333c119200655a474baffbc0d35e66e54652391cb17ad6f7997"
+    },
+    {
+      "name": "final_COND.pt",
+      "bytes": 282869,
+      "sha256": "0e8827022cbeb809beec40bc65c0938eb6844aa375ebe43874646c32ffe3fdae"
+    },
+    {
+      "name": "final_DENSE.pt",
+      "bytes": 282893,
+      "sha256": "3021baa035a6a0613a41d32895c77bb4b47b4eb9b64822c1e2d53160ac2b92c6"
+    },
+    {
+      "name": "rollouts.jsonl",
+      "bytes": 420585,
+      "sha256": "7f1bd18817cb78d81e85cef40158c306afdacbf54f0fd442185c8aeb979d8fcc"
+    },
+    {
+      "name": "summary.json",
+      "bytes": 1016769,
+      "sha256": "ae8027d1d19e42cb66d979c834d714fa3ba1c11c5eccc84d83cc553631210a45"
+    }
+  ],
+  "pair_factory_calls": 1,
+  "top_level_model_constructions": 6
+}

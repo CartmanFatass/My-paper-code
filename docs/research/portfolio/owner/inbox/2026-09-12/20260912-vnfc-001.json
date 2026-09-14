@@ -1,0 +1,79 @@
+{
+  "id": "20260912-vnfc-001",
+  "created": "2026-09-12T06:46:48-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "VNFC B03：已拨款新N7时间信用训练对",
+  "context": "一组全新INTERVAL/TERMINAL真实训练，检验时间信用是否改善成员损失后的原生恢复；工程替代已验收，比较与600/300/900秒预算保留。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行已拨款的一组新训练对；无自动重试或追加。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "暂停未提交B03，保留既有证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体意见修改未提交卡并检查含义是否需对应决策节点。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "Portfolio已选单位的工程条件已满足，执行既有授权并保留全部结果。",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_SCIENCE_CARD_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "在已接受同义工程替代后，执行Portfolio已拨款的一组新N7时间信用比较。",
+    "changes_if_approved": [
+      {
+        "target": "variable_n_fleet_churn B03",
+        "from": "fresh pair已拨款但工程依赖未满足",
+        "to": "工程替代已验收，固定新身份并准备同预算的一次INTERVAL/TERMINAL训练对"
+      }
+    ],
+    "if_refused": "暂停尚未提交的B03，保留工程证据和B02未评分状态；不更改历史结果。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+        "quote": "The new **600-total-native/300-support/900-complete** allocation is usable only after that relevant acceptance and ordinary destination admission.",
+        "why": "既有科学拨款的工程条件已用真实有限检查满足。"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_INTAKE_20260911.md",
+        "quote": "Technical acceptance: supported bounded same-meaning alternative; the relevant Portfolio integrity dependency is satisfied.",
+        "why": "保留精确均值和梯度，原解释器下256次完整前后向检查正常结束。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_SCIENCE_CARD_20260912.md",
+        "quote": "B02 supplied no primary, and the technical repair supplies no performance.",
+        "why": "尚不能判断INTERVAL是否有收益，单训练对也不支持稳定优势。"
+      }
+    ],
+    "uncertainty": [
+      "新完整训练的成本与最终主测量尚未知。",
+      "旧内存问题的首次写入原因未定位；工程验收仅覆盖这条同义替代边界。"
+    ],
+    "cost": {
+      "compute": "一次新训练对；native最多600秒（含两臂与reference），support300秒，complete900秒；无重试或自动下一组。",
+      "owner_time": "无需等待回复",
+      "reversibility": "costly",
+      "waits_on_this": "仅普通远端资源准入与源码发布；不等owner回复"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): execute the already funded single fresh B03 pair with unchanged semantics and new identities.",
+    "source": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_SCIENCE_CARD_20260912.md"
+  },
+  "starred": false
+}

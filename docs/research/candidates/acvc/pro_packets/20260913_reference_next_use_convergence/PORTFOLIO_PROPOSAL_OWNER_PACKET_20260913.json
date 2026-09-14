@@ -1,0 +1,38 @@
+{
+  "question": "在整体研究计划中继续 ACVC 的有限同分布开发，还是正式 PARK 或有期限暂缓；普通 B 不等待此决定？",
+  "changes_if_approved": [
+    {
+      "target": "Portfolio overall plan / ACVC",
+      "from": "ACTIVE/MEDIUM/recasts2；K完成；无整体长期处置",
+      "to": "明确整体优先级、连续研究范围及复审责任；保留DM普通对象自主权"
+    }
+  ],
+  "if_refused": "Portfolio可选PARK或明确暂缓，DM在安全边界执行实际处置并保留全部证据；不把未采纳建议当作已PARK。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_SCIENCE_CARD_20260913.md",
+      "quote": "A fresh instance can change finite development advice; more K evaluation cannot answer that question.",
+      "why": "一个新的训练实例能检验已有增量在新训练中的表现，且有真实学习与可复用实现。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/INTAKE.md",
+      "quote": "The strongest case for P is that the observed reference already has a useful narrow role, while another instance may not change practice and complete support costs remain uncertain.",
+      "why": "整体规划可能更愿意保存已获知识而把容量配置给其他方向，DM不代替这种比较。"
+    }
+  ],
+  "uncertainty": [
+    "一个新增fit仍不足以断言稳定优势或纯retrace因果作用。",
+    "完整support/provider/agent成本未全覆盖；不是0。",
+    "Portfolio尚未选择任何整体处置；当前B02仅成卡准备。"
+  ],
+  "cost": {
+    "compute": "普通B02：一次fit+三面板；600s native/600s support/1200s complete。两fit连续范围仅为最高2400s规划方案，不自动执行第二个。",
+    "owner_time": "无需逐项批准；保留异步干预。",
+    "reversibility": "reversible",
+    "waits_on_this": "仅真正的整体优先级/容量/生命周期变化；普通B02不等待。"
+  },
+  "verdict_text": "建议 ACVC 继续有限的同分布部署开发，先由 DM 自主选择并准备一个独立 C fit 加 C/F/own-dwell 三面板的普通 B；Portfolio 处理总体优先级、连续研究范围及确有必要的容量或生命周期变化，不逐个批准普通实验。可逆 PARK 和有期限暂缓是整体规划的替代选项，当前均未执行。",
+  "source": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/INTAKE.md"
+}

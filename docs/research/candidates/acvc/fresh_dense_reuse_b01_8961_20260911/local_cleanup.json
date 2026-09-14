@@ -1,0 +1,40 @@
+{
+  "status": "blocked before process creation; no removal occurred",
+  "blocker": "CreateProcess Rejected: guarded native PowerShell Remove-Item -LiteralPath of exact owned preparation path rejected: blocked by policy",
+  "path": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\8961-20260911",
+  "path_still_present": true,
+  "files": [
+    {
+      "name": "launch_submission.json",
+      "bytes": 1084
+    },
+    {
+      "name": "preparation.json",
+      "bytes": 1571
+    },
+    {
+      "name": "preparation.sh",
+      "bytes": 888
+    },
+    {
+      "name": "prepare.py",
+      "bytes": 4227
+    },
+    {
+      "name": "source.bundle",
+      "bytes": 115509172
+    }
+  ],
+  "retained_bytes": 115516942,
+  "preserved_input_hash_matches": {
+    "prepare.py": true,
+    "preparation.sh": true,
+    "preparation.json": true,
+    "launch_submission.json": true
+  },
+  "local_archive_sha256": "aa2dfd36a1b648733be449c435aaecd7150920e353b5aa9828513d20c1493ea1",
+  "local_checkpoint_sha256": "069b6594b8ec3222c7412627c1f32338b6a29ffa2e2484ffa3b1af5d8a2a8318",
+  "test_scratch_absent": true,
+  "owner": "/root/dm_acvc_restart_successor2",
+  "resume_condition": "same authorized target when runtime policy permits; no alternative-shell/executor bypass or escalation request"
+}

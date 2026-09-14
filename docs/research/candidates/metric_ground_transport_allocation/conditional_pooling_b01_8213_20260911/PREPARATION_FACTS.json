@@ -1,0 +1,32 @@
+{
+  "master": 8213,
+  "base": 821300000,
+  "independent_matched_training_units": 1,
+  "learning_instances": 2,
+  "factory_calls": 1,
+  "top_level_models": 6,
+  "train_episodes_per_arm": 512,
+  "train_team_steps_per_arm": 131072,
+  "adam_per_arm": 1024,
+  "final_episodes_per_arm": 32,
+  "final_team_steps_per_arm": 8192,
+  "pair_team_steps": 278528,
+  "pair_adam": 2048,
+  "pair_episodes": 1088,
+  "actor_rows_per_fit": 3317760,
+  "command_sha256": "cdddd0581a0989e9c2a0f58d5339df89cd076719271d77964118d69d51d93234",
+  "command_bytes": 968,
+  "source_diff_only_MASTER": true,
+  "CLI_identical_to_accepted": true,
+  "command_diff_only_master_namespace": true,
+  "stub_success_case_passed": true,
+  "stub_scratch_absent": true,
+  "scientific_execution_in_checks": 0,
+  "caps_seconds": {
+    "COND": 450,
+    "DENSE": 450,
+    "native": 900,
+    "support": 300,
+    "complete": 1200
+  }
+}

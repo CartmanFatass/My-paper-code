@@ -1,0 +1,13 @@
+{
+  "checked_at_utc": "2026-09-12T02:34:16.962457+00:00",
+  "task_sha": "c2c1cf0e64ee5666d8178545e28a849fcf5a9f81",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/c2c1cf0e64ee5666d8178545e28a849fcf5a9f81/docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/TASK.md",
+  "task_bytes": 27043,
+  "task_sha256": "237b85484f3f38595b975ad5f2df9a7b808b97d40064414de21b9763ff12fcb1",
+  "github_contents_matches_committed_task": true,
+  "conversation_binding_key": "em:acvc:convergence",
+  "provider_send": "not performed by DM; Root dispatch pending",
+  "dispatch_prompt": "Execute the handoff packet at C:\\Projects\\HMASD-worktrees\\codex-acvc\\docs\\research\\candidates\\acvc\\pro_packets\\20260911_five_fit_promotion_convergence\\HANDOFF.json exactly once.",
+  "original_issue_context_readback": "ISSUE_INPUT_SNAPSHOT.json; four prior comments preserved",
+  "limit": "Publication and dispatch readiness only; no provider acceptance or scientific promotion inferred."
+}

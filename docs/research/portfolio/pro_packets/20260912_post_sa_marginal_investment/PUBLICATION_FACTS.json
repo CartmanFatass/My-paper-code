@@ -1,0 +1,22 @@
+{
+  "checked_at_utc": "2026-09-12T16:08:47.914172+00:00",
+  "request_id": "2026-09-12-post-sa-marginal-investment-01",
+  "binding": "portfolio:cross_direction",
+  "task_sha": "a356fbbb6868110d89762980ee20ada964b3397f",
+  "task_path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/delivery/TASK.md",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/a356fbbb6868110d89762980ee20ada964b3397f/docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/delivery/TASK.md",
+  "task_git_bytes": 36528,
+  "task_sha256": "25058cb3032039039808b870c540eb2673ec053f3376e624a3a6512da33e250b",
+  "task_working_copy_newline_normalized_match": true,
+  "observed_remote_branch_before_handoff_commit": "a356fbbb6868110d89762980ee20ada964b3397f",
+  "handoff_state": "READY_TO_DISPATCH",
+  "source_thread_id": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "operator_thread_id": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+  "provider_conversation": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "reference_count": 30,
+  "provider_sends": 0,
+  "scientific_invocations": 0,
+  "mechanical_check_correction": "The initial local assertion searched the native dispatch_prompt for the Git task URL; that field correctly names the HANDOFF path. Corrected read-only check verifies transport_request.prompt and task_url. No packet content changed and no Send was attempted.",
+  "root_action": "Dispatch exact bound handoff once to current Transport; original author checks full immutable response."
+}

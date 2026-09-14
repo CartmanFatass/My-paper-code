@@ -1,0 +1,113 @@
+{
+  "checked_at_utc": "2026-09-12T19:17:45.262505+00:00",
+  "request_id": "2026-09-12-post-cfr-marginal-investment-01",
+  "archive_commit": "7db34325601f494fdce1a2d775da7542589067e8",
+  "main_integrated_commit": "53f0bc71278e2d21d3453005d2689eed2504a3cf",
+  "response_path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md",
+  "response_bytes": 54857,
+  "response_sha256": "a7fa960a37dc4bc055f38600289454f94830b2141d43d9204b376af39cd778ce",
+  "response_lines_read": 252,
+  "read_windows_inclusive": [
+    [
+      1,
+      80
+    ],
+    [
+      81,
+      171
+    ],
+    [
+      172,
+      252
+    ]
+  ],
+  "complete_main_bytes_identical": true,
+  "archive_changed_only_scoped_response": true,
+  "TASK_commit": "8e114902c4f8e013137ec882bd37eb772c058b66",
+  "TASK_sha256": "8731a3668dec022b42f804b75f6353c5b9a0a207e1a02e1d2282071b2c199fa2",
+  "prompt_bytes": 1920,
+  "prompt_sha256": "7d79be1d9cef2a2b7ea48404e916bc812436d29a65f37a82414c7d62aaba07aa",
+  "confirmed_sends_from_Transport": 1,
+  "provider": "6 Pro / Latest / effort5of5",
+  "provider_completion": "natural ARCHIVED",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "assistant_message_id": "a4a6a88f-8682-43f2-b323-d6cdc4aa77ba",
+  "fixed_reference_mappings_verified": 30,
+  "method_surface_checks": [
+    {
+      "path": "AGENTS.md",
+      "bound_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "current_sha": "53f0bc71278e2d21d3453005d2689eed2504a3cf",
+      "content_identical": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "bound_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "current_sha": "53f0bc71278e2d21d3453005d2689eed2504a3cf",
+      "content_identical": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "bound_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "current_sha": "53f0bc71278e2d21d3453005d2689eed2504a3cf",
+      "content_identical": true
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "bound_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "current_sha": "53f0bc71278e2d21d3453005d2689eed2504a3cf",
+      "content_identical": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "bound_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "current_sha": "53f0bc71278e2d21d3453005d2689eed2504a3cf",
+      "content_identical": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "bound_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "current_sha": "53f0bc71278e2d21d3453005d2689eed2504a3cf",
+      "content_identical": true
+    }
+  ],
+  "selected": {
+    "A": {
+      "whole_arm": 270,
+      "native_sum": 540,
+      "support": 300,
+      "future_complete_invoked": 840
+    },
+    "M": {
+      "whole_arm": 450,
+      "native_sum": 900,
+      "support": 300,
+      "future_complete_invoked": 1200
+    }
+  },
+  "not_selected": [
+    "Q",
+    "H"
+  ],
+  "Q_zero_allowance": true,
+  "combined_invoked_ceiling": 2040,
+  "full_lifetime_agent_provider_cost": "unknown; no blanket2040total certification",
+  "actual_advancing_at_intake": 0,
+  "directions_ready_to_dispatch": [
+    "acvc",
+    "metric_ground_transport_allocation"
+  ],
+  "actual_after_both_independently_start": 2,
+  "remaining_after_both_actually_start": 3,
+  "newer_events": {
+    "FSD_complete_main": "42a483997",
+    "FOLR_H_complete_main": "79397ac52"
+  },
+  "concrete_conformance_conflicts": [],
+  "new_scientific_numeric_analysis": 0,
+  "author_experiment": 0,
+  "author_Send": 0,
+  "owner_prediction": "not taken",
+  "owner_reviews_unapplied": [],
+  "input_merge_not_to_cherrypick": "e88038655aceadc3043b71ed3e0659ce9e3d7081"
+}

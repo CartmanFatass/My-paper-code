@@ -1,0 +1,193 @@
+{
+  "object": "ACVC_FIXED_F_TRAINING_USE_B02",
+  "card": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_SCIENCE_CARD_20260912.md",
+  "mode": "UAV_B_EXPLORE",
+  "master": 20319,
+  "evaluation_namespace": 30319,
+  "launch_sha": "ac64769f6403e4495a00673e2230d100edb7a02b",
+  "status": "complete",
+  "counts": {
+    "environment_constructors": 2,
+    "unscored_constructor_resets": 2,
+    "explicit_resets": 576,
+    "step_calls": 147456,
+    "team_steps": 147456,
+    "train_team_steps": 131072,
+    "eval_team_steps": 16384,
+    "completed_episode_steps": 147456,
+    "train_episodes": 512,
+    "eval_episodes": 64,
+    "rollouts": 256,
+    "optimizer_steps": 1024,
+    "backward_calls": 1024,
+    "update_records": 1024,
+    "backward_calls_lower_bound": 1024,
+    "replayed_actor_agent_steps_lower_bound": 2621440,
+    "critic_update_rows_lower_bound": 524288,
+    "base_agent_forwards": 737280,
+    "train_actor_agent_forwards": 655360,
+    "eval_actor_agent_forwards": 81920,
+    "critic_forwards": 131072,
+    "replayed_actor_agent_steps": 2621440,
+    "critic_update_rows": 524288,
+    "learned_gate_agent_forwards": 0,
+    "recurrent_observations": 655360,
+    "velocity_decisions": 655360,
+    "duration_decisions": 0,
+    "d4": 0,
+    "scientific_uav_calls": 147456,
+    "diagnostic_frames": 0,
+    "fresh_dense_initializations": 1,
+    "post_fit_loads": 1,
+    "final_checkpoints": 1,
+    "new_fits": 1,
+    "selected_final_checkpoints": 1,
+    "gate_constructions": 0,
+    "duration_heads": 0,
+    "selector_updates": 0,
+    "evaluation_updates": 0
+  },
+  "configuration": {
+    "horizon": 256,
+    "training_episodes": 512,
+    "episodes_per_rollout": 2,
+    "ppo_epochs_per_rollout": 4,
+    "chunk": 32,
+    "evaluation_episodes_per_arm": 64,
+    "evaluation_order": [
+      "F"
+    ],
+    "ratio_grouping": "agent_compound",
+    "value_moments": null,
+    "renewal": false,
+    "duration_support": [
+      1,
+      4
+    ],
+    "velocity_mode": "sampled",
+    "entropy_coef": 0.01,
+    "device": "cpu",
+    "dtype": "float32",
+    "intraop_threads": 1,
+    "interop_threads": 1,
+    "remaining_process_timeout_s": 260.0,
+    "training_rule": "F"
+  },
+  "panels": [
+    {
+      "arm": "F",
+      "episodes": 64,
+      "wall_s": 12.164976920001209,
+      "counts": {
+        "explicit_resets": 64,
+        "step_calls": 16384,
+        "team_steps": 16384,
+        "eval_episodes": 64,
+        "base_agent_forwards": 81920
+      }
+    }
+  ],
+  "limits": [],
+  "fit_complete": true,
+  "checkpoint_complete": true,
+  "scientific_invocations": 1,
+  "resources": "resources_unmeasured",
+  "checkpoint_selection": "final checkpoint after the fixed fit; no fit-quality gate",
+  "cost_law": "imports+constructors + 131072 training team steps + 1024 full-rollout replay/backward/Adam calls + 1 checkpoint loads + 16384 evaluation team steps + publication/readback/exit; fixed F in training=True",
+  "allocation_seconds": {
+    "whole_supervised_arm": 270,
+    "native_sum": 540,
+    "future_support": 300,
+    "future_complete": 840
+  },
+  "last_training_F_episode": {
+    "episode": 511,
+    "training_F_agent_ticks": 1280,
+    "training_F_opportunities": 47,
+    "training_F_retrace": 47,
+    "scope": "Actual filter calls, including any incomplete final episode; do not add to complete-row totals."
+  },
+  "exposure": {
+    "common_actor": {
+      "parameters": 34902,
+      "initial_norm": 12.5513916015625,
+      "final_norm": 12.991870880126953,
+      "displacement": 3.331568717956543,
+      "relative_displacement": 0.265434210302349
+    },
+    "critic": {
+      "parameters": 34177,
+      "initial_norm": 9.300127029418945,
+      "final_norm": 11.560582160949707,
+      "displacement": 6.708896160125732,
+      "relative_displacement": 0.7213768305425147
+    },
+    "total": {
+      "parameters": 69079,
+      "initial_norm": 15.621452331542969,
+      "final_norm": 17.39067268371582,
+      "displacement": 7.4905686378479,
+      "relative_displacement": 0.47950526486723655
+    },
+    "encoder": {
+      "parameters": 9744,
+      "initial_norm": 5.1910552978515625,
+      "final_norm": 5.482259273529053,
+      "displacement": 1.7541766166687012,
+      "relative_displacement": 0.33792293012065766
+    },
+    "recurrent": {
+      "parameters": 24960,
+      "initial_norm": 11.386670112609863,
+      "final_norm": 11.738692283630371,
+      "displacement": 2.820373058319092,
+      "relative_displacement": 0.24769076739963664
+    },
+    "branch_inner": {
+      "parameters": 1744,
+      "initial_norm": 2.279674768447876,
+      "final_norm": 2.406113386154175,
+      "displacement": 0.7094115614891052,
+      "relative_displacement": 0.31118981150622604
+    },
+    "branch_projection": {
+      "parameters": 1024,
+      "initial_norm": 0.0,
+      "final_norm": 0.6580384373664856,
+      "displacement": 0.6580384373664856,
+      "relative_displacement": null
+    }
+  },
+  "parameters": {
+    "actor": 34902,
+    "critic": 34177,
+    "total": 69079
+  },
+  "primary": {
+    "complete": true,
+    "arm_mean_J": {
+      "F": 0.20839697151813052
+    },
+    "primaries": [],
+    "contrasts": {},
+    "scope": "One fitted arm's final F panel; the primary requires both fresh fits."
+  },
+  "training_rows": 512,
+  "evaluation_rows": 64,
+  "intervention_by_rule": {
+    "F": {
+      "opportunities": 7065,
+      "retrace": 7065,
+      "dwell": 0,
+      "apply": 0,
+      "distinguishable": 7065
+    }
+  },
+  "training_F_exposure": {
+    "training_F_agent_ticks": 655360,
+    "training_F_opportunities": 57353,
+    "training_F_retrace": 57353
+  },
+  "process_wall_s_to_summary": 172.94984761509113,
+  "timing_boundary": "Runner timing starts before imports and is sampled immediately before summary serialization; the supervisor records admission through final publication and actual process exit."
+}

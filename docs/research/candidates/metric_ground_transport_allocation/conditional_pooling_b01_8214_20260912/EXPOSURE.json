@@ -1,0 +1,18 @@
+{
+  "master": 8214,
+  "base": 821400000,
+  "independent_matched_training_units": 1,
+  "learning_instances": 2,
+  "factory_calls": 1,
+  "top_level_models": 6,
+  "train_team_steps_per_arm": 131072,
+  "adam_per_arm": 1024,
+  "final_team_steps_per_arm": 8192,
+  "pair_team_steps": 278528,
+  "pair_adam": 2048,
+  "pair_episodes": 1088,
+  "pair_actor_rows": 6635520,
+  "additional_training_or_evaluation": 0,
+  "learner_can_move": "Each fresh arm runs 1024 Adam3e-4 steps with no displacement clamp; prior same-law8212/8213 fits demonstrated nonzero branch/actor/critic/recurrent movement. Actual own-arm movement will be recorded at the declared final fit, not tested beforehand.",
+  "prior_movement_evidence": "conditional_pooling_b01_8213_20260911/native/summary.json"
+}

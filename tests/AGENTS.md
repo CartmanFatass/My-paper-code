@@ -1,10 +1,9 @@
 # tests/
 
-WSL control-plane tests use `/home/fires/.venvs/hmasd-control/bin/python`
-(Python 3.12, pytest and jsonschema; no torch). Scientific tests use the interpreter on the
-assigned execution node in `.codex/hmasd-compute.toml`; the remote node is the default for
-committed portable heavy checks. The preserved Windows CPU environment is a Windows-only
-fallback, not the default local WSL interpreter. Keep the assigned device and frozen versions.
+Scientific tests use `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` (Python 3.10,
+torch 2.7.0+cpu, pytest 9). Control-plane skill tests that import `tomllib` use an existing
+Python 3.11+ interpreter; the system `python` provides it but has no torch. Choose the
+interpreter for the tested surface without installing into either conda environment.
 
 ## Layout
 
@@ -23,19 +22,16 @@ collects both (`pytest.ini`). Two flattened research test directories exist from
 `conftest.py` exists only under `finite_resource_relational_inductive_efficiency/` (fixtures
 only). No lint, format, or type tooling is configured; do not add any.
 
-For an assigned short local CPU check, activate `/home/fires/.venvs/hmasd-linux-cpu`
-or use its `bin/python`. Activation also exposes Ninja for native extension builds.
-`environments/README.md` records the CPU and separate analysis environments. Their
-installation does not accept frozen Windows-specific tests on a new host.
-
 ## Commands
 
-```bash
-# From the current native checkout; replace <run-tag> with this invocation's unique tag.
-/home/fires/.venvs/hmasd-control/bin/python -m pytest -q \
-  --basetemp temp/tests/<run-tag> tests/hmasd_run_test.py::test_name
-# Scientific checks: run on the assigned node with its declared Python and source checkout.
-python -m pytest -q --basetemp temp/directions/ucope/test/<run-tag> tests/experiments/candidates/ucope/
+```powershell
+# one research directory
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q --basetemp temp/directions/ucope/test/<run-tag> tests/experiments/candidates/ucope/
+# one file or one test
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q --basetemp temp/tests/<run-tag> tests/hmasd_run_test.py::test_name
+# evidence-bearing run: isolate the temp dir under the direction's scratch root
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider `
+  --basetemp C:/Projects/HMASD/temp/directions/<direction-id>/test/<run-tag> <paths>
 ```
 
 Every invocation supplies its own `--basetemp`: research tests use

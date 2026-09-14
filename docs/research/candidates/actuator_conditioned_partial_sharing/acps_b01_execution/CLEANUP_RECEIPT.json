@@ -1,0 +1,99 @@
+{
+  "status": "remote_cleanup_complete",
+  "started_utc": "2026-09-12T22:51:33.315529+00:00",
+  "finished_utc": "2026-09-12T22:51:33.379575+00:00",
+  "remote_cleanup_wall_seconds": 0.06404611899051815,
+  "root_retention_main_commit": "e97f8cfa1d3235fad4c5a942ba7e43084263c1e4",
+  "source_sha": "2302072e2dcb7aa0c4ee2f71572ef8ca67cd9a46",
+  "verified_retained_files": 26,
+  "terminal_states": [
+    {
+      "task": "acps-b01-shared-9101-20260912",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3402337,
+      "uptime_seconds": 1668,
+      "tmux_active": false
+    },
+    {
+      "task": "acps-b01-acps-9101-20260912",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3403542,
+      "uptime_seconds": 1342,
+      "tmux_active": false
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "-C",
+        "/home/wu/projects/HMASD",
+        "worktree",
+        "remove",
+        "/home/wu/hmasd-worktrees/acps-b01-9101-20260912"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "rm",
+        "-r",
+        "--",
+        "/home/wu/hmasd-inputs/acps-b01-9101-20260912"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "rm",
+        "-r",
+        "--",
+        "/home/wu/.agent-tasks/acps-b01-shared-9101-20260912"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "rm",
+        "-r",
+        "--",
+        "/home/wu/.agent-tasks/acps-b01-acps-9101-20260912"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "targets": [
+    {
+      "path": "/home/wu/hmasd-worktrees/acps-b01-9101-20260912",
+      "disk_absent": true
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/acps-b01-9101-20260912",
+      "disk_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/acps-b01-shared-9101-20260912",
+      "disk_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/acps-b01-acps-9101-20260912",
+      "disk_absent": true
+    }
+  ],
+  "worktree_registration_absent": true,
+  "other_registration_snapshot_unchanged": true,
+  "other_registration_count": 164,
+  "shared_repo_exists": true,
+  "new_scientific_invocations": 0,
+  "ssh_invocation_wall_seconds": 0.4332287000142969
+}

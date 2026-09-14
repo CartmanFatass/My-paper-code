@@ -6,8 +6,10 @@ This source belongs to route **N3 — 状态保留、重建与迁移**, in the *
 of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
 this does not establish scientific equivalence or pool result polarity.
 See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
-Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
-older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+Current DM lifecycle decisions are recorded in this direction's intake and summarized
+below; `docs/research/portfolio/PORTFOLIO.md` is their reporting index under the
+2026-09-13 owner delegation of the whole direction lifecycle. Older lifecycle/execution
+statements below are historical. Existing cards, technical quarantines,
 second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
@@ -15,16 +17,70 @@ This authority preserves the direction's source-grounded scientific question, ev
 ## Authority
 
 - Stable direction ID: `vap_folr_core`
-- Current lifecycle, priority, and owner are held only by `docs/research/portfolio/PORTFOLIO.md`; this file records only the direction's scientific authority and provenance.
+- The direction DM owns its research and lifecycle under the current owner delegation; the Portfolio index reports the actual decision without another approval.
+- Convergence is the independent scientific Reviewer of design, evidence, interpretation, conclusions and successor plans. DM reads the full review, resolves concrete findings or limits claims, and owns the final decision. Review is not funding/lifecycle approval.
 
 ## Scientific question
 
-The formal scientific question is the source-defined question for this direction; this bootstrap does not broaden or replace it. The source-grounded current-position statement is: “Early typed-state evidence is retained, but later objects are non-identifying and DEARS is cleaner.”
+The current question is whether organizing a continuing agent's legally available
+history under physical membership change improves finite-learning native
+coordination over competent generic recurrence. Each accepted object fixes its
+own information interface and comparison; the latest entity-history opening
+below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
-The following bootstrap sentence is preserved as provenance and is not a new synthesis. Accepted
-current-host science below controls the bounded reading of the live B3 question.
+**Current lifecycle: reversibly PARKED/MEDIUM by DM decision on 2026-09-13.**
+The fixed reference-use question is resolved. A fresh same-host learning block
+would supply the first complete fresh/fresh comparison here, not just another
+panel of the old BANK. DM currently judges that unresolved comparison insufficiently
+valuable relative to its necessary work and unknown complete cost. No architecture
+change or earlier favorable result is required for reconsideration. This is a
+qualitative research-value judgment, not an empirical futility result or a
+consequence of expired permission. No new experiment is selected; the occupied
+execution slot is released without selecting a replacement or new resources.
+DM may revisit a specific useful information/lifetime, learning-performance or cost
+proposal within the owner's actual resource/cross-direction constraints. Portfolio
+consultation is not a re-entry prerequisite. Scientific evidence and narrower holds
+below retain their original meanings. Assigned remote reclamation is complete;
+the [cleanup receipt](retained_reference_use_b01_781301/CLEANUP_RECEIPT_20260913.json)
+retains preservation hashes, terminal checks and all five verified removals.
+See the [DM lifecycle decision](FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md#dm-lifecycle-decision--2026-09-13-full-direction-delegation).
+The complete post-F independent scientific review found no result-invalidating
+defect; DM accepts its R1/R2 reporting corrections and R3 judgment clarification
+in the [scientific-review response](pro_packets/20260913_post_f_scientific_review/INTAKE.md).
+No live scientific or Transport producer remains. Clerk retains the separately
+identified mechanical main-integration/reporting consequences.
+
+The observer-owned entity-history-before-aggregation B family remains OPEN on
+the lifecycle-identity-visible native Traffic Junction variant. Its allocated
+E batch produced one complete BANK policy (5000 train/4969 updates/128 final),
+with native mean return -4.32609375. The equally informed Generic arm timed out
+before final evaluation, so BANK-minus-Generic and its MEI rule are unavailable.
+This is an accepted own-arm observation, not evidence of a bank advantage.
+
+The separately selected and funded retained-reference use comparison is now
+complete: one fresh equally informed Generic64 has mean1.055 and the fixed
+historical BANK's new panel has mean-4.877421875, giving d_use=-5.932421875. The
+strict<-1 rule selects Generic-only for this named optional development-reference
+use. One newly trained Generic policy has a higher sampled mean than this fixed
+BANK reference; no absolute task-competence or information-sufficiency threshold
+has been established. This outcome-informed retained/new comparison is not a fresh matched
+training pair or BANK-learning replication; it does not repair E's unavailable
+primary or close the still-open family. The named finite F allocation supplies
+no retry or automatic successor. B04 remains contrary context on its own host.
+See [E0 result](FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md) and
+[final intake](FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md), and the
+[post-B01 use decision intake](pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md),
+and [completed reference-use intake](FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md).
+
+The accepted post-B03 H still holds the exact tested LEARNED_EVENT/5000-training/
+128-final package, retaining event-aware RETAIN and no currently recommended
+fourth unchanged pair. That package hold does not stop FOLR. All B01-B03,
+earlier narrow pauses, recast history and Portfolio fields remain unchanged.
+Earlier accepted findings below retain their own host and claim scope.
+
+The following bootstrap sentence is historical provenance, not the current synthesis.
 
 > Early typed-state evidence is retained, but later objects are non-identifying and DEARS is cleaner.
 
@@ -590,3 +646,412 @@ References:
 - `pro_packets/20260911_half_family_convergence/archive/RESPONSE.md`
 - `FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_CONVERGENCE_INTAKE_20260911.md`
 - `pro_packets/20260911_half_family_convergence/archive/DM_READBACK.json`
+
+## Accepted learned-retention Convergence — 2026-09-11
+
+**Conclusion.** The complete original-node response at
+`a2a47f1d73a3fd1bc2f724e77b2a7f0859332788` narrowly opens the specified learned
+event-retention question as an **in-family extension, not RECAST**. Its sole
+primary null is generic event-aware RETAIN. The exact fixed-half recipe remains
+paused. This is direction eligibility for a later separately allocated B; it
+supplies no implementation, B card, experiment or new cap. Portfolio disposition,
+recast counts and C/UAV status are unchanged.
+
+**Accepted candidate and bounded claim.** A shared scalar sigmoid of the existing
+64-wide local GRU input and 64-wide continuing trip's incoming hidden state scales
+that lifetime-masked state at a completed public membership event before the
+ordinary GRU. Other positions use ordinary continuation. The 129 coefficients
+start at zero weights and log(99) bias, initially .99 rather than exact RETAIN.
+Physical newcomers/replacements inherit no departed trip's state or action.
+The hypothesis concerns finite-training native-return value of an added learned
+package under the same information; no learned-gate result, information advantage,
+architectural equivalence/necessity or memory/timing cause is established.
+
+**Strongest support and contradiction.** Fixed-half B01's +1.56546875 versus its
+matching RETAIN supports bounded interest in changing this path; B02's
+-4.293046875 and separately worse training mean are the strongest empirical
+counterweight. Neither tests the learned gate or shows that histories predict
+beneficial attenuation. The strongest source objection is RETAIN's already
+learned input/history-dependent GRU gates. The extra scalar may be redundant,
+attenuate useful memory or hinder optimization. Same information still permits
+different finite-learning behavior; opening is a close qualitative judgment,
+not an expected-gain estimate. Every prior observation and pause remains intact.
+
+**Surviving alternative and next discriminator.** No new family investment and
+ordinary RETAIN remain the strong alternative. If later separately selected,
+one fresh learned-gate/RETAIN pair at 5000 training and 128 final episodes per arm
+would directly measure preliminary package value. A later card must state its
+own margin; MEI 1 and its collision-scale rationale are provisional. No fixed-.99
+or capacity ablation is required for this B package claim, and a gain would not
+isolate gate adaptation, initialization, added parameters or partner co-adaptation.
+Matching tuned headroom is absent. New wall/memory/support/cap are unknown; old
+3900 s is not renewed. No automatic fit, repeated consultation or implementation
+follows this completed question allocation.
+
+References:
+
+- `FOLR_LEARNED_RETENTION_CANDIDATE_20260911.md`
+- `pro_packets/20260911_learned_retention_convergence/archive/RESPONSE.md`
+- `FOLR_LEARNED_RETENTION_CONVERGENCE_INTAKE_20260911.md`
+- `pro_packets/20260911_learned_retention_convergence/archive/DM_READBACK.json`
+
+## Accepted first learned-retention B result — 2026-09-11
+
+**Conclusion and bounded claim.** The new Portfolio-allocated B01 has one valid
+fresh learned-event/RETAIN pair at5000 training and128 final episodes per arm.
+Final native means are1.603281250 and−0.160078125, respectively; d_LR+1.763359375
+meets this card's prospective inclusive absolute1 LEARNED_EVENT_ABOVE_MEI branch.
+Support for the opened learned law now includes one native package-level gain.
+It establishes neither stable training-population superiority nor a causal account
+of useful memory. This is not a C or UAV result.
+
+**Strongest support.** Both arms complete4969 optimizer updates and the full final
+panel. The separately reported changing-policy training mean also favors the gate
+by1.029974. Its129 coefficients moveL2 1.353121908 from initialization and its law
+receives45865 training/1317 final eligible survivor-event opportunities. Acting,
+replay, optimization and published final target/checkpoint paths passed the scoped
+checks and actual collection. One fit remains one fit, regardless of episode count.
+
+**Strongest contradiction and surviving alternative.** Generic event-aware RETAIN
+already has the same local information and adaptive GRU gates. There is no second
+independent learned-gate result; the current benefit could depend on initialization,
+extra coefficients and the resulting partner/trajectory co-adaptation. The old
+fixed-half loss−4.293046875 remains contrary context for unqualified retention claims,
+not a negative sample of the learned law. Its earlier gain+1.56546875 and the fixed-half
+pause remain unchanged. Gate displacement/event exposure does not isolate the cause
+of the return gap or show which histories were useful. Tuned headroom is still absent.
+
+**Next discriminator and boundary.** The funded first pair ends at intake/closeout;
+no automatic fit, consultation or direction/Portfolio disposition follows. If a later
+allocation needs recurrence across training histories, one fresh unchanged pair
+against RETAIN at the same endpoint is the direct discriminator. No positive-first,
+causal-isolation or extra-baseline prerequisite is introduced. Whole native clocks
+835.33/867.79s pass the allocated native caps; incomplete support accounting limits
+complete-cost claims without changing the trustworthy native observation.
+
+References:
+
+- `FOLR_LEARNED_RETENTION_B01_SCIENCE_CARD_20260911.md`
+- `FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B01_RESULT_SUMMARY_20260911.json`
+- `FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md`
+
+## Accepted second learned-retention B result — 2026-09-11
+
+**Conclusion and bounded claim.** The fresh unchanged B02 pair is valid and reverses
+B01: LEARNED_EVENT4.521015625 versus RETAIN6.290546875, d_LR-1.769531250, meets the
+prospective RETAIN_ABOVE_MEI branch. The first learned gain did not recur across
+this new training history. Two observed pairs now have opposite signs; this supports
+neither a stable learned-rule advantage nor stable harm or equivalence.
+
+**Strongest support.** B01 remains a complete+1.763359375 LEARNED_EVENT_ABOVE_MEI.
+The unchanged129-coefficient law is trainable and exercised in both runs. In B02,
+all4969 updates/full128-return endpoints and actor/target/optimizer/checkpoint paths
+pass; its gate movesL2 1.275477253 and acts at48158 training/1451 final survivor events.
+
+**Strongest contradiction.** B02's-1.769531250 native loss and changing-policy training
+difference-0.516890 favor the same-information event-aware GRU null. The latter is
+separate context, not a pre/post improvement estimate. Adaptive null gates, initial0.99
+scaling, extra coefficients and partner/trajectory co-adaptation remain possible
+contributors. Gate movement or event opportunity counts do not identify useful memory
+or explain the sign reversal. Fixed-half+1.56546875/-4.293046875 stays separate
+different-law context with its narrow pause unchanged. Tuned headroom is still absent.
+
+**Surviving alternative and next discriminator.** Ordinary RETAIN remains competent.
+Additional independently trained same-recipe evidence could further measure recurrence
+if separately selected, but opposite signs create no compulsory repeat or causal audit.
+This allocated pair ends at full intake/closeout; no third fit, consultation, family
+pause/recast, Portfolio action, C or UAV entry is selected. Both original primaries
+remain fixed. Whole native B02 wall1815.99s passes native caps; incomplete support
+accounting limits full-cost claims without changing the accepted native comparison.
+
+References:
+
+- FOLR_LEARNED_RETENTION_B02_SCIENCE_CARD_20260911.md
+- FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md
+- FOLR_LEARNED_RETENTION_B02_RESULT_SUMMARY_20260911.json
+- FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md
+- FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md
+
+## Accepted learned-retention post-B02 Convergence — 2026-09-11
+
+**Conclusion and bounded claim.** Original Convergence selects A: recommend one
+future separately allocated unchanged LEARNED_EVENT/RETAIN B pair at the existing
+easy public-lifecycle host and 5000-training/128-final endpoint. This continues
+the existing in-family opening; it is neither a new OPEN nor RECAST. No immediate
+narrow learned-recipe hold is selected. Generic event-aware RETAIN remains the
+usable default. The current documentary allocation supplies no implementation,
+seed, experiment, cap, C freeze or automatic further question.
+
+**Strongest support.** The actual learned package's B01 gain +1.763359375 gives
+one trustworthy practical benefit. Another independent unchanged pair can inform
+whether to keep this optional computation as a candidate for same-host development
+or conduct that development with RETAIN alone. This is a qualitative decision-value
+judgment, not a requirement for a third seed or stable population proof.
+
+**Strongest contradiction and surviving alternative.** B02's −1.769531250 loss
+against its own matched RETAIN remains intact. RETAIN already has adaptive GRU
+gates and the same legal information. A narrow hold is the strong alternative,
+and the author's prior unexecuted C recommendation is preserved as a close call.
+No particular gate modification, useful-memory cause, equivalence, stable harm or
+population advantage is established. All older fixed-half and blanket-clear pauses
+and results remain separate; matching tuned headroom is still absent.
+
+**Next discriminator.** If later separately funded, one fresh unscreened unchanged
+pair, sole RETAIN comparator, all 128 final outcomes and inclusive absolute MEI1
+can add recurrence information. A practical gain supports retaining candidacy;
+a loss or inside-MEI point makes a narrow hold more attractive, without a vote
+rule, equivalence claim or automatic fourth pair. Its full work is 205120 native
+ticks and 9938 updates plus recurrent/replay and support work; future complete cost
+and cap remain unknown. No ablation, diagnosis or cost pilot is a prerequisite.
+Portfolio disposition, recast count and C/UAV status remain unchanged.
+
+References:
+
+- `pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md`
+  at `ed882448bda9b3f240addf88bde1921cebc24397`
+- `FOLR_LEARNED_RETENTION_POST_B02_QUESTION_20260911.md`
+- `FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md`
+
+## Accepted learned-retention B03 — 2026-09-12
+
+**Conclusion and bounded claim.** The allocated third unchanged pair produced
+RETAIN0.947578125 and LEARNED_EVENT-0.267968750, d_LR=-1.215546875:
+**RETAIN_ABOVE_MEI** under the original inclusive absolute MEI1 rule. Both real
+fits completed5000 training and128 final episodes with4969 updates each. This
+is one adverse training-pair observation; generic event-aware RETAIN remains
+the usable default. The DM's low-confidence WITHIN_MEI prediction missed.
+
+**Strongest support and contradiction.** B01+1.763359375 remains the strongest
+direct supporting point. B02-1.76953125 remains the strongest contrary point,
+with B03 adding-1.215546875. The three results stay separate: no pooled new
+primary or vote rule. Conditional final-episode variation and a point only
+0.215546875 beyond the MEI do not establish stable harm or equivalence.
+
+**Surviving alternative.** The learned gate trained and was exercised, but this
+does not identify useful-memory selection. RETAIN already has adaptive recurrent
+gates; extra parameters, finite optimization, partner co-adaptation and traffic
+draws remain alternatives. Matching tuned headroom is absent. No causal,
+original CAMA-baseline, transfer or UAV-readiness claim is added.
+
+**Next discriminator.** The selected unchanged-pair observation is complete and
+every branch ends the finite grant. This adverse point makes a narrow hold more
+attractive as direction-local advice, without implementing a family disposition.
+A future concrete use or investment choice belongs to the appropriate node;
+no fourth pair, tuning, diagnostic or automatic question follows this intake.
+Existing lifecycle, priority, recast and C/UAV status are unchanged.
+
+References:
+
+- `FOLR_LEARNED_RETENTION_B03_SCIENCE_CARD_20260911.md`
+- `FOLR_LEARNED_RETENTION_B03_RESULT_EVIDENCE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B03_RESULT_SUMMARY_20260911.json`
+- `FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md`
+
+## Accepted learned-retention post-B03 Convergence — 2026-09-12
+
+**Conclusion.** The original Convergence node selects **H**, a reversible hold
+on further development spending on the exact LEARNED_EVENT / easy public-lifecycle
+Traffic Junction / 5000-training / 128-final package. Ordinary event-aware RETAIN
+remains the usable default. Do not retain another unchanged pair as the currently
+recommended funding candidate. This is a narrow in-family recipe hold, not RECAST,
+a new OPEN, permanent retirement of learned retention or Portfolio lifecycle change.
+
+**Bounded claim.** The independently generated B03 observation requested after
+B02 has arrived and gives another adverse within-pair reading. The node judges
+further unchanged development less attractive at this boundary; it does not
+apply a three-seed quota, sign vote or new pooled primary. Both H and U carried
+zero current empirical allowance, so no funded fourth pair was cancelled.
+
+**Strongest support and contradiction.** B01 +1.763359375 remains the strongest
+direct supporting learned-package point and opposition to H. B02 -1.769531250
+is the strongest adverse point; B03 adds -1.215546875. B03's proximity to the
+adverse MEI and conditional evaluation spread limit confidence, while its positive
+changing-policy training contrast stays separate. All original readings remain.
+No stable harm/equivalence, useful-memory cause or original-CAMA advantage follows.
+
+**Surviving alternative.** U, retaining one unchanged candidate for later funding,
+is legitimate but unselected. The extra learned scalar can alter finite learning
+with the same information; ordinary RETAIN already has adaptive GRU gates.
+Initial attenuation, added parameters, optimization, traffic and partner
+co-adaptation remain explanations. The conclusion does not prove containment,
+redundancy or universal harm. Matching tuned headroom remains absent.
+
+**Re-entry and next discriminator.** A renewed worthwhile same-host decision
+about including this exact optional controller versus RETAIN-only development
+can reopen consideration. No favorable pilot, novelty, fixed seed number, exact
+upper or complete causal account is required. If later selected and funded, one
+fresh unscreened unchanged training pair is the direct recurrence measurement;
+it is not a currently retained candidate or new allocation. No scheduled re-review,
+gate change, fourth pair, implementation, numerical work, C/UAV promotion or
+successor follows this completed consultation. Older fixed-half/blanket-clear
+pauses and current Portfolio lifecycle/priority/recast fields remain unchanged.
+
+References:
+
+- `pro_packets/20260912_learned_retention_post_b03_convergence/archive/RESPONSE.md`
+  at `65be91e1cecc4317a751964afd1fd16432de0b5f`
+- `pro_packets/20260912_learned_retention_post_b03_convergence/INTAKE.md`
+- `FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md`
+- `FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md`
+
+## Accepted entity-history continuity scope — 2026-09-12
+
+**Conclusion (scope, not a performance result).** Original-node Convergence
+selects and narrowly OPENs a new B family comparing observer-owned entity
+history before aggregation with fresh, adaptive generic RETAIN. This is within
+FOLR's physical-history/recovery programme, not a direction RECAST or a reopening
+of LEARNED_EVENT. The full response passed original-author scientific/spec
+intake. The exact scalar-package H, all B01-B03 observations, older pauses,
+recast history and Portfolio fields remain unchanged.
+
+**Accepted mechanism and information.** Both actors receive an explicitly new,
+idealized public channel: stable five-slot labels, active flags and per-slot
+birth/departure facts at the completed native-transition boundary, including
+initial occupancy and same-step replacement. The whole table reaches the
+generic comparator even for unseen subjects. Actor physical position/target/
+previous-action features remain limited to that observer's local sight. Both
+have the same observer-derived visibility/seen/primitive-age indicators; no
+other observer's mask, hidden state or critic-only feature is publicized.
+
+The selected treatment uses one shared GRU16 cell per observer-subject entry,
+including self, and replaces the pooled recurrent stage. Each entry carries
+only its observer's past permitted observations of that physical subject.
+Observer and subject continuation jointly cut state/temporal gradients; visible
+entries update pointwise, unseen continuing entries carry without fabricated
+observations, and reappearance in the same trip resumes them. Subject end or
+replacement clears its column; observer birth or replacement clears its row.
+Local seen/age bookkeeping obeys the same boundaries.
+
+One observer-local attention query reads its live, previously seen entries,
+with a direct current-visible-feature path and stale/visibility indicators,
+then a feedforward 64-to-five-Q readout. There is no additional pooled GRU,
+cross-observer attention or recurrent communication sweep. RETAIN keeps its
+ordinary locally masked attention and 64-coordinate own-trip GRU with the full
+same information. The existing native actions/reward/twenty-tick host and
+value-learning structure remain the reference; each arm needs its own fresh
+fit and own online/target history reconstruction. Old checkpoints are not this
+new-interface comparator.
+
+**Bounded claim.** This is a prospective whole memory-organization package
+question, with unmatched width/readout/optimization arrangements. No bank
+benefit, component cause, necessity, exact containment, complete causal
+forgetting, original-CAMA equivalence, tuned headroom, transfer or C/UAV claim
+is established. The truthful public announcements are an explicit new task
+assumption, not unchanged decentralized deployment feasibility. A five-by-five
+bank also establishes no large-population scaling result.
+
+**Strongest support and contradiction.** A separately associated local history
+could affect a continuing car's native move/wait choice after visibility change
+or replacement; the source confirms that the old actor aggregates before its
+GRU. This is an untested opportunity, not proof of a generic defect. The strongest
+opposition is B04's competent generic learner and within-MEI typed increment,
+plus the short native horizon and reobserved own position/target. Generic
+recurrence may already suffice, and the bank may add stale-information or
+optimization cost. Old signed scalar observations remain evidence about their
+own package only.
+
+**Next discriminator and actual boundary.** The selected next investment need
+is one bounded implementation/technical-acceptance batch and one matched real
+BANK/RETAIN pair, with sampled final full-episode native return. Source-sized
+5000 train/128 final per arm and inclusive absolute MEI 1 are prospective
+reference sizing/reading, not a frozen card or issued grant. A gain would
+support considering bounded independent follow-up; inside/adverse evidence
+would favor the generic package at that observation's scope. No branch funds
+an automatic successor or stops FOLR. Complete implementation, per-arm wall,
+support, memory and agent/provider costs are unknown; no old cap transfers.
+At that historical decision the OPEN did not itself allocate implementation or
+an experiment; its named investment request subsequently produced E. That old
+route is not current authority: DM now owns useful bounded research and lifecycle
+decisions with independent scientific review, and Clerk reports them.
+
+References:
+
+- `pro_packets/20260912_entity_history_continuity/archive/RESPONSE.md` at immutable commit `3bc6fb929f43463eddd37dc4584951896c08fe3e`
+- `pro_packets/20260912_entity_history_continuity/INTAKE.md`
+- `FOLR_ENTITY_HISTORY_CONTINUITY_QUESTION_20260912.md`
+- `pro_packets/20260912_entity_history_continuity/FACTS.json`
+
+## Accepted post-B01 retained-reference use selection — 2026-09-12
+
+**Conclusion and bounded claim.** Convergence selects one future B use comparison
+within the still-open entity-history family: the accepted final BANK weights
+against one genuinely new Generic GRU64 RETAIN fit, followed by fresh 128-episode
+panels for each. The decision is whether this particular BANK belongs in an
+optional executable reference set for development on the same public-information
+host. It is outcome-informed and conditional on one completed historical BANK;
+it neither repairs E's unavailable primary nor adds BANK training replication.
+This is no new family OPEN, direction RECAST or Portfolio disposition.
+
+**Mechanism and legal alternative.** The five-slot H20 native host, full common
+public lifecycle table, observer-local physical information and lifetime-owned
+GRU16 bank remain. Each evaluation episode resets recurrent records. Generic
+retains its adaptive own-trip GRU64 and identical public information, with the
+accepted full 5,000-episode learning exposure. New Generic parameters, optimizer,
+replay and RNG are fresh; the failed E prefix supplies no checkpoint or endpoint.
+
+**Strongest support and contradiction.** One executable BANK exists, so one new
+competent Generic fit could change the stated reference-use choice without another
+BANK training history. BANK has still shown no comparative value. The short
+horizon/common cues and B04's competent Generic on its different host preserve
+Generic sufficiency as the strongest alternative. The negative BANK raw return
+is not a contrast. Matching tuned headroom is absent; all old scalar signs, H,
+pauses and recast history remain under their own scope.
+
+**Next discriminator.** Fresh BANK-reference mean minus fresh Generic mean,
+with the proposed absolute MEI 1: strict >+1 supports optional BANK inclusion;
+inclusive [−1,+1] preserves sign and favors Generic-only use; strict <−1 favors
+Generic-only use. No equivalence, stable superiority, component-memory cause,
+original-CAMA, speed, transfer or C/UAV claim follows. Generic technical completion
+precedes the new BANK panel, whose acquisition is independent of Generic's score.
+A missing endpoint leaves the dependent contrast unavailable with no automatic
+replacement. The direction decision did not supply investment; Portfolio has
+now funded this same finite use once, with no change to its scientific ceiling
+([investment intake](pro_packets/20260913_retained_reference_investment/INTAKE.md)).
+
+References:
+
+- `pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md`, delivery `d6a29b287612f21fd5ddbb0cc19fbae4e8c1fb12`, integrated identical bytes `7ab178ad8fbf94ffa4c5da5b4812d632db2fdb9b`
+- `pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md`
+- `pro_packets/20260912_entity_history_post_b01_discriminator/INVESTMENT_READINESS.md`
+
+## Accepted retained-reference use result — 2026-09-13
+
+**Conclusion and bounded claim.** The exact fixed BANK is not retained as an
+optional executable development reference on the current public-information
+Traffic Junction host. One new full Generic64 fit and its128 new final episodes
+give mean1.055; the historical BANK16's128 new episodes give-4.877421875. Their
+nonpaired d_use=-5.932421875 selects the prespecified strict<-1
+GENERIC_ONLY_BANK_WORSE branch. This resolves the purchased use observation,
+without replacing the missing original E contrast.
+
+**Strongest support and contradiction.** Both native endpoints are complete,
+equally informed and technically accepted at the fixed source and exposure.
+One new Generic policy has a higher sampled mean than the fixed BANK on this
+exact host; this is not certified absolute competence. Against a broad negative, BANK is one outcome-informed historical policy
+and Generic one new fit; their capacities/histories are not matched. Episode
+SEs0.533175147760 and0.289917604837 remain conditional; no training-population or
+component-memory inference follows. Generic's62 negative-return episodes and
+range[-13.46,22.16] coexist with its higher mean; BANK has125 negative episodes
+and range[-19.80,1.46]. No adverse outcome is dropped.
+
+**Surviving alternative and next discriminator.** The observed comparison supports
+Generic-only selection for the named reference use, not general sufficiency.
+A fresh/fresh learning comparison on this unchanged host remains informative;
+other information/lifetime contexts are also unruled out, not prerequisites.
+No next empirical object is selected here. Repeating the same
+retained-reference question would reuse the completed Generic-only decision.
+Reconsider when a concrete new fact or proposal changes the action choice;
+no automatic fit, panel, consultation, family closure or whole-direction stop
+follows from this completed allocation. Matching tuned headroom remains absent;
+earlier scalar H, signs, smaller holds and recast history remain unchanged.
+
+References:
+
+- `FOLR_RETAINED_REFERENCE_USE_B01_SCIENCE_CARD_20260913.md`
+- `FOLR_RETAINED_REFERENCE_USE_B01_RESULT_EVIDENCE_20260913.md`
+- `FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md`
+- `retained_reference_use_b01_781301/RESULT_SUMMARY.json`

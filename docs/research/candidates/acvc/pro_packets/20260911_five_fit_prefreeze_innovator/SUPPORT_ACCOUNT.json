@@ -1,0 +1,340 @@
+{
+  "allocation": "Portfolio Assignment 2; same complete ACVC five-new-fit chain",
+  "allocation_source_sha": "05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+  "cutoff_utc": "2026-09-12T04:09:03.678Z",
+  "cutoff_phase": "complete Innovator conformance intake before publication",
+  "native_invoked_s": 0,
+  "known_measured_support_command_wall_s": 128.81047670000004,
+  "caps_s": {
+    "per_complete_native_unit": 270,
+    "native_sum": 1350,
+    "all_invoked_support": 1650,
+    "complete_invoked_work": 3000
+  },
+  "components": [
+    {
+      "phase": "initial checkout read",
+      "wall_s": 0.4440716
+    },
+    {
+      "phase": "allocation and docs instructions read",
+      "wall_s": 0.2349013
+    },
+    {
+      "phase": "skill reads",
+      "wall_s": 0.1996474
+    },
+    {
+      "phase": "fetch published branch and authority",
+      "wall_s": 2.3458715
+    },
+    {
+      "phase": "delivery reading and live routing/owner review",
+      "wall_s": 0.5797153
+    },
+    {
+      "phase": "accepted current scientific intake and direction",
+      "wall_s": 0.2394786
+    },
+    {
+      "phase": "current methods and authority diff",
+      "wall_s": 0.3880922
+    },
+    {
+      "phase": "focused source/index locations",
+      "wall_s": 0.2061706
+    },
+    {
+      "phase": "required main reconciliation merge",
+      "wall_s": 0.7639309
+    },
+    {
+      "phase": "funded design and inference passage read",
+      "wall_s": 0.2188941
+    },
+    {
+      "phase": "current dispatch and monitor authority",
+      "wall_s": 0.1791934
+    },
+    {
+      "phase": "append-only audit conflict inspection",
+      "wall_s": 0.402422
+    },
+    {
+      "phase": "preserve all audit rows, finish required merge and immediate push",
+      "wall_s": 4.6703974
+    },
+    {
+      "phase": "reuse recorded three-fit facts and exact old route template",
+      "wall_s": 0.319304
+    },
+    {
+      "phase": "read current substantive Issue and new-round absence",
+      "wall_s": 1.6736768
+    },
+    {
+      "phase": "prepare machine counts/exposure and retained Issue snapshot",
+      "wall_s": 1.6729121
+    },
+    {
+      "phase": "author exact promotion brief",
+      "wall_s": 0.021,
+      "measurement": "enclosing apply_patch call elapsed"
+    },
+    {
+      "phase": "publish precise new Issue context and verify preserved prior discussion",
+      "wall_s": 4.3056033
+    },
+    {
+      "phase": "owner review/ledger boundary and authored-document check",
+      "wall_s": 0.5356741
+    },
+    {
+      "phase": "publish fixed scientific and authority input documents",
+      "wall_s": 4.7088948
+    },
+    {
+      "phase": "author request, verify exact published source mapping and render unbound TASK",
+      "wall_s": 10.0065608
+    },
+    {
+      "phase": "completion of request source mapping/render command",
+      "wall_s": 2.4e-06,
+      "measurement": "additional tool wait; elapsed gap while asynchronous command ran is unmeasured"
+    },
+    {
+      "phase": "inspect rendered question, fixed reference mapping and original-node route",
+      "wall_s": 0.250412
+    },
+    {
+      "phase": "publish immutable TASK and bind fixed-link handoff",
+      "wall_s": 4.7435317
+    },
+    {
+      "phase": "fresh GitHub fixed-TASK readback, bound route and owner review",
+      "wall_s": 2.4553545
+    },
+    {
+      "phase": "final ready-handoff/account publication and immediate push/readback",
+      "wall_s": 6.4957071
+    },
+    {
+      "phase": "ready handoff relay app delivery",
+      "wall_s": 0.193,
+      "measurement": "enclosing app call"
+    },
+    {
+      "phase": "promotion return: actual checkout and published branch reconciliation",
+      "wall_s": 2.3467841
+    },
+    {
+      "phase": "promotion return: current Transport artifact locations and owner reviews",
+      "wall_s": 0.5155909
+    },
+    {
+      "phase": "fast-forward and full immutable promotion response read",
+      "wall_s": 0.6972787
+    },
+    {
+      "phase": "locate raw promotion receipt and compare current methods",
+      "wall_s": 0.3080878
+    },
+    {
+      "phase": "promotion GitHub/comment/scope and byte-form reconciliation",
+      "wall_s": 3.3658405
+    },
+    {
+      "phase": "bounded current Transport archive discovery",
+      "wall_s": 0.3088517
+    },
+    {
+      "phase": "promotion exact terminal-byte form hypothesis",
+      "wall_s": 0.3732385
+    },
+    {
+      "phase": "bounded raw receipt path lookup",
+      "wall_s": 0.7056654
+    },
+    {
+      "phase": "read exact raw promotion transport facts and compare full response byte forms",
+      "wall_s": 0.3267822
+    },
+    {
+      "phase": "preserve exact promotion artifacts, full Git response and source/prompt/comment conformance facts",
+      "wall_s": 5.4060168
+    },
+    {
+      "phase": "write complete promotion scientific intake, owner brief and accepted direction position",
+      "wall_s": 0.023,
+      "measurement": "enclosing apply_patch call"
+    },
+    {
+      "phase": "current owner CLI fields and existing audit append point",
+      "wall_s": 0.3706135
+    },
+    {
+      "phase": "reconcile newly published Transport correction paths before local intake publication",
+      "wall_s": 2.4986497
+    },
+    {
+      "phase": "preserve published Transport correction in direction branch and immediate push",
+      "wall_s": 4.5497612
+    },
+    {
+      "phase": "intake verified published receipt-label correction without changing raw evidence",
+      "wall_s": 0.4600035
+    },
+    {
+      "phase": "publish promotion decisions to audit and maintained owner item via CLI",
+      "wall_s": 0.4205645
+    },
+    {
+      "phase": "publish complete promotion intake, audit/owner surfaces and continuing support account",
+      "wall_s": 5.4321138
+    },
+    {
+      "phase": "start sole original Innovator packet with reused exact counts, zero exposure and current Issue snapshot",
+      "wall_s": 1.9051965
+    },
+    {
+      "phase": "Innovator continuation: current checkout, reused facts and author workflow",
+      "wall_s": 0.2883805
+    },
+    {
+      "phase": "Innovator exact promoted requirements and fixed delivery template read",
+      "wall_s": 0.2606646
+    },
+    {
+      "phase": "read promoted full decision and allocation with UTF-8 output",
+      "wall_s": 0.2333815
+    },
+    {
+      "phase": "author exact original Innovator scientific brief and preparation record",
+      "wall_s": 0.023,
+      "measurement": "enclosing apply_patch call"
+    },
+    {
+      "phase": "current owner and live fixed-route facts",
+      "wall_s": 0.235892
+    },
+    {
+      "phase": "fetch published refs before Innovator publication",
+      "wall_s": 2.1269001
+    },
+    {
+      "phase": "Innovator clean-boundary owner review",
+      "wall_s": 0.3840323
+    },
+    {
+      "phase": "verify current methodology pins, published branch, owner ledger and renderer",
+      "wall_s": 0.4976046
+    },
+    {
+      "phase": "publish original Innovator Issue context once and verify preserved discussion",
+      "wall_s": 6.7249177
+    },
+    {
+      "phase": "check Innovator scientific input files and explicit commit metadata",
+      "wall_s": 0.4949233
+    },
+    {
+      "phase": "publish original Innovator scientific and authority inputs",
+      "wall_s": 5.489213
+    },
+    {
+      "phase": "author original Innovator request, verify all exact published references and render TASK",
+      "wall_s": 6.0679802
+    },
+    {
+      "phase": "inspect rendered Innovator question and exact original-node/source manifest",
+      "wall_s": 0.4391719
+    },
+    {
+      "phase": "verify actual rendered path/full-SHA fields and original Innovator route",
+      "wall_s": 0.2428739
+    },
+    {
+      "phase": "publish immutable Innovator TASK and bind fixed-link HANDOFF",
+      "wall_s": 5.4457711
+    },
+    {
+      "phase": "fresh fixed Innovator TASK readback and bound publication facts",
+      "wall_s": 1.908462
+    },
+    {
+      "phase": "final Innovator boundary owner review",
+      "wall_s": 0.4221971
+    },
+    {
+      "phase": "final bound packet check and single Root-action relay contract",
+      "wall_s": 0.3686096
+    },
+    {
+      "phase": "final Innovator handoff/account publication and immediate push/readback",
+      "wall_s": 7.0684849
+    },
+    {
+      "phase": "original Innovator ready handoff relay app delivery",
+      "wall_s": 0.159,
+      "measurement": "enclosing app call"
+    },
+    {
+      "phase": "Innovator return: checkout and exact published response scope",
+      "wall_s": 2.6729666
+    },
+    {
+      "phase": "Innovator return: current owner review and raw archive location",
+      "wall_s": 0.4670316
+    },
+    {
+      "phase": "fast-forward and read complete immutable Innovator decision plus all raw artifacts",
+      "wall_s": 0.6010306
+    },
+    {
+      "phase": "verify full Innovator GitHub/comment/binding/source bytes and preserve all original raw artifacts",
+      "wall_s": 3.4569084
+    },
+    {
+      "phase": "reconcile newly arrived raw labels-only correction alongside original artifacts",
+      "wall_s": 0.2525856
+    },
+    {
+      "phase": "preserve verified full Innovator answer and original raw archive with corrected artifact roles",
+      "wall_s": 0.3634413
+    },
+    {
+      "phase": "current accepted intake/direction and owner-audit insertion points",
+      "wall_s": 0.2916253
+    },
+    {
+      "phase": "scientific-tool routing for the accepted prospective experiment",
+      "wall_s": 0.2301631
+    },
+    {
+      "phase": "write full conforming Innovator intake and Chinese brief, update accepted direction question",
+      "wall_s": 0.022,
+      "measurement": "enclosing apply_patch call"
+    },
+    {
+      "phase": "record accepted Innovator direction position, audit decisions and P2 owner item via CLI",
+      "wall_s": 0.4738565
+    },
+    {
+      "phase": "reconcile receipt-correction publication and check complete Innovator intake before commit",
+      "wall_s": 2.8289482
+    }
+  ],
+  "unknowns": [
+    "Enclosing client/message/authoring overhead where not measured; not zero.",
+    "Earlier asynchronous reference-publication command ran across a tool-yield gap not measured by its two tool receipts.",
+    "One earlier editing-tool duration was not measured; provider generation/queue and deliberation remain separately qualified.",
+    "Root/Transport preparation, delivery, observation, receipt-correction and integration command contributions have not been supplied; do not assert zero or unconditional complete-cap conformance.",
+    "This cutoff precedes its own intake publication; measured publication tails are carried into the next card/technical/result boundary, without repeated accounting-only commits."
+  ],
+  "interpretation": "Known subtotal is a lower bound for the support account, not a new allowance or proof of unconditional total conformance. No observed overrun in known work. Native and support caps remain separate. Count commands once; nested wall clocks do not add work.",
+  "historical": "Earlier 8951/8961 and 270/330/600 allocations remain ended. Historical cost anchors do not contribute credit.",
+  "pinned_pro_account_snapshot": {
+    "commit_sha": "dbe2c5a70a374911eb24bf02c5ca28b6ce2a0251",
+    "meaning": "TASK deliberately cites the earlier exact cutoff at the scientific-input commit; this current descendant extends the same account without changing that pinned evidence."
+  }
+}

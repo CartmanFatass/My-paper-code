@@ -1,0 +1,10 @@
+{
+  "body": "Choose the next five advancing research chains after the completed 2026-09-09 synthesis allocation. Compare FOLR, UCOPE, VSP03, RCLE, ACVC and the CBSC/FRRIE readiness alternatives. State bounded next investments, first actions, counterevidence, stops and full cost limits or explicit unknowns, preserving stopped families and second-recast ordering.\r\n\r\nFixed TASK scope: docs/research/portfolio/pro_packets/20260910_next_five_chains on existing codex/portfolio. Pro delivery: only this round archive/RESPONSE.md plus one immutable delivery-link comment here. No code, main, experiments or historical-request changes.\r\n\r\nThis new investment question does not alter the completed foundations-special-review Issue #16.\r\n",
+  "number": 17,
+  "state": "OPEN",
+  "title": "Portfolio: next five advancing chains after completed synthesis",
+  "updatedAt": "2026-09-12T16:32:42Z",
+  "url": "https://github.com/CartmanFatass/My-paper-code/issues/17",
+  "snapshot_at_utc": "2026-09-12T17:19:30.306895+00:00",
+  "scope_note": "Existing substantive Issue reused. Its historical body does not set this new round response path; the fixed new TASK does. No author comment or Send."
+}

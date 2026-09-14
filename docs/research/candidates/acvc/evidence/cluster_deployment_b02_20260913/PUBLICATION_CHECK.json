@@ -1,0 +1,27 @@
+{
+  "publication_sha": "d0d6055387a01b545c4c1f7fee01dac9f57ec046",
+  "exact_native_files_verified": [
+    "b02_focused_check_time.txt",
+    "b02_importlib_check_time.txt",
+    "cluster_deployment_b02_admission.json",
+    "cluster_deployment_b02_task_time.txt",
+    "episodes.jsonl",
+    "summary.json",
+    "supervisor_original/exit_code",
+    "supervisor_original/pid",
+    "supervisor_original/runner.sh",
+    "supervisor_original/start_time",
+    "supervisor_original/status",
+    "supervisor_original/task.log",
+    "supervisor_repaired/exit_code",
+    "supervisor_repaired/pid",
+    "supervisor_repaired/runner.sh",
+    "supervisor_repaired/start_time",
+    "supervisor_repaired/status",
+    "supervisor_repaired/task.log",
+    "updates.jsonl"
+  ],
+  "retained_archive_verified": true,
+  "scientific_invocations": 0,
+  "verification_wall_s": 0.9209999999729916
+}

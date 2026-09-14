@@ -486,12 +486,13 @@ def evaluate_learned(
 
 
 def evaluate_scripted(
-    rng: SemanticRNG, eval_episodes: int, *, arm: str = INDEPENDENT_NEAREST
+    rng: SemanticRNG, eval_episodes: int, *, arm: str = INDEPENDENT_NEAREST,
+    packed_views: bool = True,
 ) -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
     for cell in HELDOUT_CELLS:
         for coordinates in heldout_batches(cell, eval_episodes):
-            episodes = execute_scripted_batch(arm, rng, coordinates)
+            episodes = execute_scripted_batch(arm, rng, coordinates, packed_views=packed_views)
             for coordinate, episode in zip(coordinates, episodes):
                 rows.append(
                     scenario_row(cell, coordinate.update_or_scenario, arm, episode)

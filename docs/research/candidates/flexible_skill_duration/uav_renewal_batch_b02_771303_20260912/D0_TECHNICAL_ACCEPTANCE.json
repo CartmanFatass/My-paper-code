@@ -1,0 +1,59 @@
+{
+  "accepted_utc": "2026-09-12T21:14:02.952443+00:00",
+  "status": "technically accepted",
+  "arm": "D0",
+  "source_sha": "8ea629595da592dfce9b7774341863a7115c7cef",
+  "checks": [
+    "manifest/summary identity and declared seed lanes",
+    "same complete authentic-D0 configs except fresh seed versus prior accepted execution",
+    "five full optimized training rows, all module displacements positive",
+    "complete sole32-world endpoint and native scaling",
+    "isolated evaluator with zero optimizer calls",
+    "fresh physical/effective admission passed",
+    "whole-command exit0 within900s",
+    "eleven original raw files preserved and byte-verified",
+    "actual Monitor goal adoption and accepted terminal/empty-goal completion"
+  ],
+  "counts": {
+    "model_constructions": 2,
+    "training_starts": 1,
+    "checkpoint_loads": 0,
+    "training_transitions": 40000,
+    "stored_training_transitions": 40000,
+    "training_episodes": 80,
+    "update_stages": 5,
+    "training_agent_step_batches": 2500,
+    "evaluation_steps": 16000,
+    "evaluation_episodes": 32,
+    "evaluation_agent_step_batches": 500
+  },
+  "optimizer_calls": {
+    "coordinator": 525,
+    "discoverer_actor": 11250,
+    "discoverer_critic": 11250,
+    "team_discriminator": 75,
+    "individual_discriminator": 300
+  },
+  "last_relative_initialization_displacement": {
+    "coordinator": 0.04130671401299765,
+    "discoverer_actor": 0.42486693265813524,
+    "discoverer_critic": 0.16044913853689202,
+    "team_discriminator": 0.026676293961135744,
+    "individual_discriminator": 0.05104373608651
+  },
+  "D0_mean_native_J": 0.4208673476989198,
+  "paired_polarity": "not available; I is preselected and not score-selected",
+  "complete_command_cost": {
+    "elapsed_seconds": 458.8,
+    "peak_rss_kib": 1673964.0,
+    "user_seconds": 1789.69,
+    "system_seconds": 14.57,
+    "exit_status": 0.0
+  },
+  "aggregate_cpu_seconds": 1804.26,
+  "supervisor_duration_seconds": 459,
+  "archive_sha256": "6c31c63a700f91691f00c395faa25d26640d16d1bec9704d5ad8343913c1b5ff",
+  "mechanical_collection_issue": "initial assertion counted two empty log directories; corrected file inventory, no run/source/result change",
+  "decision": "accept complete D0 companion and execute preselected I under original N card/fresh admission",
+  "new_scientific_invocations_during_collection": 0
+}

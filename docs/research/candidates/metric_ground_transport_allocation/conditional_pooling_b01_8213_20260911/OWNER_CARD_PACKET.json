@@ -1,0 +1,36 @@
+{
+  "question": "执行Portfolio已选的一对全新COND/DENSE训练，观察首个小幅正差能否在另一训练历史中出现。",
+  "changes_if_approved": [
+    {
+      "target": "MGTAP B01卡§6",
+      "from": "8212已完成，原额度结束",
+      "to": "独立8213实例；900秒原生、300秒支持、1200秒完整上限"
+    }
+  ],
+  "if_refused": "保存已发生的事实；在下一个清晰边界执行所有者的新指示，不复用旧训练状态。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+      "quote": "One fresh unchanged COND/intact-DENSE pair, final sampled native-return comparison and complete intake/closeout.",
+      "why": "Portfolio明确选择这一新的有限单位。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_INTAKE_20260911.md",
+      "quote": "inside the card's inclusive ±0.01 band",
+      "why": "首个差值仅+0.00576，并有13个不利世界，尚未显示有用的稳定收益。"
+    }
+  ],
+  "uncertainty": [
+    "新实例可能仍小或反向；32个评估世界不是32次独立训练。"
+  ],
+  "cost": {
+    "compute": "每臂450秒、原生900秒、支持300秒、完整1200秒；不是旧额度结余。",
+    "owner_time": "无需等待回复。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a)",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md#6-new-portfolio-allocation--master8213-2026-09-11"
+}

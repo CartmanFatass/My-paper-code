@@ -1,0 +1,392 @@
+{
+  "recorded_utc": "2026-09-12T22:58:15.457804+00:00",
+  "request_id": "2026-09-12-existing-four-direction-investment-01",
+  "binding": "portfolio:cross_direction",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "response": {
+    "sha": "0aeab180b603930b0b882a2f1ed3cabb736709fa",
+    "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/archive/RESPONSE.md",
+    "git_bytes": 62716,
+    "lines": 242,
+    "sha256": "3e21397936e2867168ea78873cb0700c892cedcdbe7b4988727f2a465087b1d7",
+    "read_all_lines": true,
+    "local_blob_identical": true
+  },
+  "fixed_task": {
+    "sha": "b52ed2e045841659953abfe9a76b55c69adcce5d",
+    "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/delivery_ready/TASK.md",
+    "unchanged": true
+  },
+  "fixed_handoff_sha": "0a04cb44fcd562cc11cf5d0a31205d51e027c4a7",
+  "transport_receipt": {
+    "source": "Root authoritative forwarded Transport receipt",
+    "confirmed_sends": 1,
+    "completion": "natural",
+    "browser_observed_by_author": false
+  },
+  "issue_readback": {
+    "id": 5649214254,
+    "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5649214254",
+    "created_at": "2026-09-12T22:50:08Z",
+    "updated_at": "2026-09-12T22:50:08Z",
+    "body": "Delivered the complete cluster/entity investment and RCLE/FSD Portfolio decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/0aeab180b603930b0b882a2f1ed3cabb736709fa/docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/b52ed2e045841659953abfe9a76b55c69adcce5d/docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/delivery_ready/TASK.md\n\nAll 242 lines, including the fixed-reference definitions, were read back at the delivery commit. Comparison with its actual parent 0a04cb44fcd562cc11cf5d0a31205d51e027c4a7 confirms that commit 0aeab180b603930b0b882a2f1ed3cabb736709fa adds only the specified response file on codex/portfolio.\n\nNo scientific execution, source/card or registry/control-state edit, main write, new branch or rewrite of earlier responses was performed. The full response separates K/E's new bounded empirical investments from L/U's one-off documentary work, preserves existing T/ACPS/CADC commitments and direction continuity, and does not claim future code acceptance or execution."
+  },
+  "fixed_references_checked": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/SCIENCE_BRIEF.md",
+      "sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "git_bytes": 31051,
+      "sha256": "0d0290c6ac1e5121f8701a475f0f5b3c2e46e52627c2ee184ae5d48957dc3833",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/FACTS.json",
+      "sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "git_bytes": 30799,
+      "sha256": "6e221747eeea4dcbfff06941c2c1086d823f295157489b3b0b8aaf510f57d8fc",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/PREPARATION_INTAKE.md",
+      "sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "git_bytes": 4911,
+      "sha256": "93e9fa6f159666ba3692f7e1da8b3df2cc0ad310dc98799a01a122c7dba3aa02",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/ISSUE_SNAPSHOT.json",
+      "sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "git_bytes": 379,
+      "sha256": "bfe3fa698b5e7984deabd7880c290ff02e047ebc9068c7a5c6e46a04044d2c28",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/OWNER_KE_PACKET.json",
+      "sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "git_bytes": 3348,
+      "sha256": "91cac67abd69b8fe382aa0b635442d552a1be96c9326064e6d08ef4106d807e4",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/OWNER_L_PACKET.json",
+      "sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "git_bytes": 2689,
+      "sha256": "c9b47f23e0f23ea941402954eb7f6c69fa416696cfffe8b1721bfba0dd3f74b5",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/OWNER_U_PACKET.json",
+      "sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "git_bytes": 2247,
+      "sha256": "7fb133c01dea8a181d90da13fbb26c2349f2558f461c60bf6955afc7603fd9e6",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 15430,
+      "sha256": "bda680156f4adc85a9b028f2321ac516b5516e6b3654b6cb7b1301a16d8b162e",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/OWNER_PACKET.json",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 3611,
+      "sha256": "046203cb8bd1d9f38cdd0fa1db62fb6d6ddaf1a07ac4b277d19594474afdcb61",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 48822,
+      "sha256": "2fcd35c1030992782739a30e0a990133510ba0815dc5c82663cd18c64fda3766",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/INTAKE.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 18195,
+      "sha256": "8495e12624b9cedf90d0d076a1edff65938e33a5f09900888f8248b0203f9ef1",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 59187,
+      "sha256": "020d7c76427057d98f23670cf58f2ab6071e677ad910c474672360ba35f09ed2",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 15897,
+      "sha256": "3edca9f0304efa10ac5a915ddc24049a0e32c1c754c3b59cdcfa73d486a50a5f",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 54987,
+      "sha256": "55424b4d1d2b38d4ae983e8e91b04161bf59af18841dea8f5ecf77593d07a311",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONTINUATION_READINESS_20260912.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 3661,
+      "sha256": "813851874b52a086b4d7e267331611f6f92d41039cd7848eaa88e27215f5637e",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+      "sha": "5545f73218cd7827a151fa1cec4fbc2ef08e38d8",
+      "git_bytes": 11176,
+      "sha256": "1179f525f0e427dcf357420b089385cd2642da02a2784f729664d9f72d42ca7c",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "sha": "5545f73218cd7827a151fa1cec4fbc2ef08e38d8",
+      "git_bytes": 55343,
+      "sha256": "7c0ea28b8865181d5f3df8cefe43ef5923c13cd8bfaa40e3de4daa6c087d4998",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/INTAKE.md",
+      "sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "git_bytes": 14073,
+      "sha256": "4322618da80f4ad49ce0fb44b0ae8aa9d19dad504fa8984b56d74965c69e6b09",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-12-new-direction-discovery.md",
+      "sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "git_bytes": 3917,
+      "sha256": "b012671caff0fe9c88b3a2b2db003360f949c4051c911cb4b687d197e28d99a3",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/EXECUTION_MAPPING.md",
+      "sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "git_bytes": 12375,
+      "sha256": "4468958a496658f098ae83fa0fa67df9d2a6dab79327d99f86b30d5bb964d93c",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/REGISTRATION_MAPPING.json",
+      "sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "git_bytes": 3134,
+      "sha256": "93256f67538a3c8777ecb6a0572ccb858293a941d2f05bf7a03092442c2612bd",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md",
+      "sha": "b793cf69b4935306708ad744b355acc4d5b33712",
+      "git_bytes": 80107,
+      "sha256": "30d24b57ae8c3260dc103007d1cd427a2b630973c6851948aeed3597a12caba6",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/ORACLE_RECOMMENDATIONS_20260911.md",
+      "sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "git_bytes": 16588,
+      "sha256": "45064e7d8ff389ee7f4ac4f227d23c0512e57d57bd33a78434171a629f4d8462",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 10286,
+      "sha256": "bed9589a2938541faf8332dc7f11331b8303fd0ccb00c15aabf124c1e37f19cc",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/RESEARCH_MAP.md",
+      "sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "git_bytes": 13658,
+      "sha256": "012f8ef24f9c8a21c2601a2dbd321e965667b853fa1df383b4b8b72590c6fbc0",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "AGENTS.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 45889,
+      "sha256": "6933e35eb254a2247e4a6b5f00067da90f4bf4e482ee16a555e52e43158efd09",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 13467,
+      "sha256": "c13c9e7687026048a1712e1c8d56a659a8da71c905c4e3a8a690b1d13671b2a3",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 4038,
+      "sha256": "4dae3729dc54db39599a689712fa1f6ccdb80d5fd2f08e96757bcf8686e6e0b9",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 4598,
+      "sha256": "9fd3736fefe5c3cf52432b1ab3d4ed220188b1666bf10163ad55f5dcca69f06c",
+      "response_mapping_matches": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "git_bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "response_mapping_matches": true
+    }
+  ],
+  "reference_count": 34,
+  "additional_git_reference": "fixed TASK only",
+  "conformance": "PRO_FINAL / OWNER_DELEGATED; no concrete conflict; no specification exception",
+  "selected": {
+    "K": {
+      "direction": "acvc",
+      "fits": 1,
+      "train_episodes": 512,
+      "rollouts": 256,
+      "adam_calls": 1024,
+      "final_panels": {
+        "C": 64,
+        "F": 64,
+        "own-dwell": 64
+      },
+      "train_team_ticks": 131072,
+      "eval_team_ticks": 49152,
+      "total_team_ticks": 180224,
+      "whole_native_cap_seconds": 600,
+      "hard_support_cap_seconds": 600,
+      "complete_future_invoked_cap_seconds": 1200,
+      "rate_forecast": "UNKNOWN",
+      "MEI_J": 0.01
+    },
+    "E": {
+      "direction": "vap_folr_core",
+      "fits": 2,
+      "train_episodes_per_arm": 5000,
+      "final_episodes_per_arm": 128,
+      "native_team_ticks": 205120,
+      "optimizer_updates": 9938,
+      "Generic_replay_rows": 33391680,
+      "BANK_replay_rows": 166958400,
+      "Generic_whole_arm_cap_seconds": 1800,
+      "BANK_whole_arm_cap_seconds": 3000,
+      "native_sum_cap_seconds": 4800,
+      "hard_support_cap_seconds": 1200,
+      "complete_future_invoked_cap_seconds": 6000,
+      "rate_forecast": "UNKNOWN",
+      "MEI_native_return": 1,
+      "execution_sequence": "Generic technical collection, then preselected BANK regardless of intact Generic score"
+    },
+    "L": {
+      "direction": "roster_consistent_latent_exploration",
+      "deliverables": 1,
+      "scope": "at most one distinct B proposal or reasoned no candidate",
+      "complete_documentary_invoked_provider_agent_cost": "UNKNOWN explicitly accepted",
+      "implementation": 0,
+      "numerical_reanalysis": 0,
+      "experiments": 0,
+      "Pro_Send": 0
+    },
+    "U": {
+      "direction": "flexible_skill_duration",
+      "original_convergence_questions": 1,
+      "scope": "same-host optional-learning scheme judgment from five accepted pairs plus complete original-author intake/publication",
+      "complete_documentary_invoked_provider_agent_cost": "UNKNOWN explicitly accepted",
+      "implementation": 0,
+      "numerical_reanalysis": 0,
+      "experiments": 0,
+      "extra_evaluation": 0
+    }
+  },
+  "derived_cap_arithmetic": {
+    "K_plus_E_separate_complete_seconds": 7200,
+    "not_pooled": true,
+    "L_U_complete_cost": "separately accepted UNKNOWN",
+    "earlier_5100_set": "historical separate commitment, not renewed"
+  },
+  "contention_order": "E before K; existing T then ACPS then CADC among those earlier purchases remains; no lifecycle/priority/recast change",
+  "registry": {
+    "total": 27,
+    "ACTIVE": 17,
+    "PARKED": 10,
+    "changed_by_this_decision": false
+  },
+  "currentness": {
+    "ACVC_readiness_sha": "596e62253b7127b7d78c9d5c93b917ad1cf3f0dd",
+    "FOLR_readiness_sha": "78a896215ee588c49daf2b403974b6c1bc262712",
+    "meaning": "Later source-only readiness agrees with fixed DM facts; no rates measured or grant inferred from readiness.",
+    "FSD_later_comparator_sha": "bc8d619db494bbbb23d32a70c846dee92fbfb083",
+    "FSD_boundary": "B-LONG-D0 is not in this decision and remains a separate future need; U has no B allowance.",
+    "ACPS_intake_source": "e97f8cfa1d3235fad4c5a942ba7e43084263c1e4",
+    "ACPS_boundary": "First pair ADVERSE, current continuation need belongs to the separate next round; no new funds or direction stop here.",
+    "actual_running_count": "Root reconciles actual directions; this author does not count newly accepted grants as runs."
+  },
+  "author_work": {
+    "scientific_invocations": 0,
+    "model_or_rng_work": 0,
+    "raw_outcome_reanalysis": 0,
+    "fits": 0,
+    "evaluation_episodes": 0,
+    "tests_or_profiling": 0,
+    "Pro_Send": 0,
+    "performed": "complete document/source readback, configuration/cap integer arithmetic, conformance and publication",
+    "complete_support_cost": "UNKNOWN"
+  },
+  "git_reconciliation": {
+    "input_merge_excluded_from_Root_author_pick": "e0d2bccc5c8c14fe69604be8182e7fbf1d526bba",
+    "push_rejection": "non-fast-forward because provider response was published during input synchronization",
+    "permitted_resolution": "ordinary merge preserving provider response and all fixed bytes, immediately pushed",
+    "response_merge_excluded_from_Root_author_pick": "c9f80642efee011cf39330c4c9572b8e9b90b47f",
+    "no_force_or_rewrite": true
+  },
+  "owner_reviews": [],
+  "owner_prediction": "not taken; no new empirical prediction scored",
+  "audit_rows": [
+    "docs/research/portfolio/audit/2026-09-12.md#L105",
+    "docs/research/portfolio/audit/2026-09-12.md#L106",
+    "docs/research/portfolio/audit/2026-09-12.md#L107"
+  ],
+  "owner_trace_receipt": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-018.json",
+  "owner_existing_applied_items": [
+    "20260912-root-014",
+    "20260912-root-015",
+    "20260912-root-017"
+  ],
+  "owner_current_applied_item": "20260912-root-018"
+}

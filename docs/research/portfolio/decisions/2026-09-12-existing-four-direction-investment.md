@@ -1,0 +1,20 @@
+# Portfolio final: independent K/E/L/U investments — 2026-09-12
+
+**PRO_FINAL / OWNER_DELEGATED.** Full response `0aeab180b603930b0b882a2f1ed3cabb736709fa` to fixed TASK `b52ed2e045841659953abfe9a76b55c69adcce5d` is complete and conforming. The [original-author intake](../pro_packets/20260912_cluster_entity_investment/INTAKE.md) checks all242 lines,34 fixed sources, exact bytes and actual Issue readback. Root integration is publication of this decision, not a second scientific verdict.
+
+| Independent choice | Selected scope | Fresh complete envelope |
+| --- | --- | --- |
+| K=yes, ACVC | One cluster C fit,512 train/1,024 Adam, private final C/F/own-dwell64 each; two separate .01 J primaries | One whole native≤600 s; hard support≤600 s; complete invoked≤1,200 s |
+| E=yes, FOLR | One fresh BANK/Generic pair,5,000 train/128 final each; inclusive ±1 native-return margin explicitly selected | Generic≤1,800 s; BANK≤3,000 s; summed native≤4,800 s; hard support≤1,200 s; complete invoked≤6,000 s |
+| L=one design, RCLE | Original DM writes at most one distinct B proposal or reasoned no candidate; zero implementation/numerical work/Pro | Complete documentary/invoked/provider/agent cost expressly accepted UNKNOWN for one deliverable |
+| U=yes, FSD | One new original-Convergence same-host optional-use judgment from all five pairs and complete original-author intake; zero implementation/numerical work | Complete documentary/invoked/provider/agent cost expressly accepted UNKNOWN for one question/intake |
+
+K buys a previously useful fixed deployment package's native use test on cluster. C and own-dwell remain strong controls; uniform positives and adverse worlds/training-F losses survive. E buys a different memory-organization use against fresh equally informed adaptive recurrence; B04 Generic and old scalar mixed evidence argue against assuming structured memory helps. K/L/U without E is the strongest smaller investment because BANK carries the largest unknown implementation/replay work. K-only and no new K/E remain meaningful rejected alternatives.
+
+One L design is selected over explicit Portfolio PARK because earlier native roster learning remains a useful opening, while no ready new B and documentary drift are strong objections. One U is selected over no new consultation because optional-scheme status is still undecided; it may merely formalize cautious existing advice. Neither documentary cost is claimed cheap. These are Pro's qualitative marginal judgments, not measured information value or guaranteed outcomes.
+
+E precedes K under actual contention. ACVC keeps ACTIVE/MEDIUM/recasts2 and lowest-ACTIVE contention ordering. FOLR/RCLE remain ACTIVE/MEDIUM and FSD ACTIVE/HIGH. All other lifecycle/priority/recast histories,27=17ACTIVE+10PARKED, old narrow holds and formal-UAV boundaries remain. Earlier T/ACPS/CADC grants and their own ordering are preserved without renewal. Completed allocations do not stop directions; no forced replacement or permanent seven-chain target is selected.
+
+[Execution mapping](../pro_packets/20260912_cluster_entity_investment/EXECUTION_MAPPING.md) names the existing four DMs/shared branches, science/code/acceptance ownership, complete cost law, per-invocation admission, actual Monitor adoption and cleanup. Each can proceed independently under its new allowance. Generic then BANK is preselected regardless of intact first score. All future required work is counted once; hard native/support caps are nonfungible and unknown rates/tails remain unknown. No pilot, full reconstruction, extra seed, response retry or scientific approval gate is added.
+
+Revisit after the selected native observation, concrete cost/readiness limitation, one L proposal/no-candidate or U use verdict. A later candidate needs its own selection/investment; no successor is funded here. FSD's later B-LONG-D0 and ACPS's adverse-B01 continuation are separate next-boundary materials, not amendments or grants in this decision. Owner overrides remain asynchronous; no reply was invented.

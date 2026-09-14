@@ -1,0 +1,12 @@
+{
+  "created_at_utc": "2026-09-12T17:20:57.846701+00:00",
+  "unapplied_reviews": [],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L27",
+  "result": {
+    "created_item_path": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-005.json",
+    "item_id": "20260912-root-005",
+    "auto_applied": null
+  },
+  "recommendation_only": true,
+  "publication_note": "item.py succeeded and returned a plain path. Metadata reader corrected its JSON-output assumption; existing item read back, no duplicate add."
+}

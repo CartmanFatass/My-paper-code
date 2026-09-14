@@ -1,0 +1,307 @@
+{
+  "seed": 8213,
+  "independent_training_units": 1,
+  "conditional_evaluation_worlds": 32,
+  "source_sha": "323cdf576a7b7290bd74bbccf47c0386072dc4c2",
+  "accepted_encoder_source_sha": "4be7f07a3f9dab19b21e5f70705e605fdbd1feec",
+  "status": "COMPLETE",
+  "primary": {
+    "reading": "COND_ADVERSE",
+    "mean": -0.02246957345594415,
+    "conditional_sample_sd": 0.024394681266767956,
+    "conditional_se": 0.004312411137154014,
+    "differences": [
+      -0.05581946407656416,
+      0.006434612828805919,
+      -0.07629451973642323,
+      -0.01782542306686377,
+      -0.03045844971685943,
+      -0.03820759624364539,
+      -0.02434620545179647,
+      -0.0312274334958991,
+      -0.0036643442519167235,
+      -0.014522891522900983,
+      0.01796459669137146,
+      -0.01750814480263435,
+      -0.028230897390606108,
+      -0.026695003383494037,
+      -0.03310303835208328,
+      -0.04737627262538388,
+      -0.030665025543716057,
+      -0.058605298024218544,
+      -0.00892423405570597,
+      -0.06910598679385996,
+      -0.01016913300324837,
+      -0.01621437725730468,
+      -0.02884147246838953,
+      -0.04581156035632919,
+      0.026438548122882405,
+      -0.023218117839704372,
+      0.004286988583276502,
+      -0.012359254796999203,
+      -0.001817619918622837,
+      -0.014832019000934865,
+      -0.031130467347168317,
+      0.022823153706723776
+    ],
+    "positive": 5,
+    "negative": 27,
+    "zero": 0,
+    "minimum": -0.07629451973642323,
+    "maximum": 0.026438548122882405,
+    "mean_J": {
+      "COND": 0.19342135238526614,
+      "DENSE": 0.21589092584121028
+    }
+  },
+  "counts": {
+    "train_team_steps": 262144,
+    "eval_team_steps": 16384,
+    "team_steps": 278528,
+    "optimizer_steps": 2048,
+    "train_episodes": 1024,
+    "eval_episodes": 64,
+    "velocity_decisions": 1392640,
+    "duration_decisions": 0,
+    "d4": 0,
+    "recurrent_observations": 1392640,
+    "explicit_resets": 1088,
+    "constructor_resets": 2,
+    "constructors": 2,
+    "step_calls": 278528,
+    "scientific_uav_calls": 278528,
+    "diagnostic_frames": 0,
+    "completed_episode_steps": 278528,
+    "rollouts": 512,
+    "partial_episode_steps": 0
+  },
+  "per_arm_counts": {
+    "COND": {
+      "train_team_steps": 131072,
+      "eval_team_steps": 8192,
+      "team_steps": 139264,
+      "optimizer_steps": 1024,
+      "train_episodes": 512,
+      "eval_episodes": 32,
+      "velocity_decisions": 696320,
+      "duration_decisions": 0,
+      "d4": 0,
+      "recurrent_observations": 696320,
+      "explicit_resets": 544,
+      "constructor_resets": 1,
+      "constructors": 1,
+      "step_calls": 139264,
+      "scientific_uav_calls": 139264,
+      "diagnostic_frames": 0,
+      "completed_episode_steps": 139264,
+      "rollouts": 256
+    },
+    "DENSE": {
+      "train_team_steps": 131072,
+      "eval_team_steps": 8192,
+      "team_steps": 139264,
+      "optimizer_steps": 1024,
+      "train_episodes": 512,
+      "eval_episodes": 32,
+      "velocity_decisions": 696320,
+      "duration_decisions": 0,
+      "d4": 0,
+      "recurrent_observations": 696320,
+      "explicit_resets": 544,
+      "constructor_resets": 1,
+      "constructors": 1,
+      "step_calls": 139264,
+      "scientific_uav_calls": 139264,
+      "diagnostic_frames": 0,
+      "completed_episode_steps": 139264,
+      "rollouts": 256
+    }
+  },
+  "exposure": {
+    "COND": {
+      "common_actor": {
+        "parameters": 34902,
+        "initial_norm": 12.933257102966309,
+        "final_norm": 13.254803657531738,
+        "displacement": 2.8078956604003906,
+        "relative_displacement": 0.2171066142152365
+      },
+      "critic": {
+        "parameters": 34177,
+        "initial_norm": 9.315855979919434,
+        "final_norm": 12.488805770874023,
+        "displacement": 8.07429313659668,
+        "relative_displacement": 0.8667258439804306
+      },
+      "total": {
+        "parameters": 69079,
+        "initial_norm": 15.93908405303955,
+        "final_norm": 18.211528778076172,
+        "displacement": 8.54859447479248,
+        "relative_displacement": 0.5363290918314559
+      },
+      "encoder": {
+        "parameters": 9744,
+        "initial_norm": 5.902356147766113,
+        "final_norm": 6.052888870239258,
+        "displacement": 1.361485242843628,
+        "relative_displacement": 0.23066809402185662
+      },
+      "recurrent": {
+        "parameters": 24960,
+        "initial_norm": 11.46049976348877,
+        "final_norm": 11.745072364807129,
+        "displacement": 2.445890426635742,
+        "relative_displacement": 0.21341917692173648
+      },
+      "branch_inner": {
+        "parameters": 144,
+        "initial_norm": 3.62571120262146,
+        "final_norm": 3.6484625339508057,
+        "displacement": 0.25627124309539795,
+        "relative_displacement": 0.07068164803364321
+      },
+      "branch_projection": {
+        "parameters": 2624,
+        "initial_norm": 0.0,
+        "final_norm": 0.740759015083313,
+        "displacement": 0.740759015083313,
+        "relative_displacement": null
+      }
+    },
+    "DENSE": {
+      "common_actor": {
+        "parameters": 34902,
+        "initial_norm": 12.631447792053223,
+        "final_norm": 12.930471420288086,
+        "displacement": 2.7106821537017822,
+        "relative_displacement": 0.21459789869906515
+      },
+      "critic": {
+        "parameters": 34177,
+        "initial_norm": 9.315855979919434,
+        "final_norm": 12.308683395385742,
+        "displacement": 7.814750671386719,
+        "relative_displacement": 0.8388655522617326
+      },
+      "total": {
+        "parameters": 69079,
+        "initial_norm": 15.695180892944336,
+        "final_norm": 17.852195739746094,
+        "displacement": 8.271525382995605,
+        "relative_displacement": 0.527010516120492
+      },
+      "encoder": {
+        "parameters": 9744,
+        "initial_norm": 5.207888603210449,
+        "final_norm": 5.348061561584473,
+        "displacement": 1.275901198387146,
+        "relative_displacement": 0.2449939496786395
+      },
+      "recurrent": {
+        "parameters": 24960,
+        "initial_norm": 11.46049976348877,
+        "final_norm": 11.723894119262695,
+        "displacement": 2.3818671703338623,
+        "relative_displacement": 0.20783274896282306
+      },
+      "branch_inner": {
+        "parameters": 1744,
+        "initial_norm": 2.3302524089813232,
+        "final_norm": 2.3881635665893555,
+        "displacement": 0.5538064241409302,
+        "relative_displacement": 0.237659414922691
+      },
+      "branch_projection": {
+        "parameters": 1024,
+        "initial_norm": 0.0,
+        "final_norm": 0.4032916724681854,
+        "displacement": 0.4032916724681854,
+        "relative_displacement": null
+      }
+    }
+  },
+  "checkpoint_integrity_without_loading": {
+    "COND": {
+      "bytes": 282869,
+      "entries": 24,
+      "crc_ok": true,
+      "deserialized": false
+    },
+    "DENSE": {
+      "bytes": 282893,
+      "entries": 24,
+      "crc_ok": true,
+      "deserialized": false
+    }
+  },
+  "native_time": {
+    "COND_seconds": 199.2965511311777,
+    "DENSE_seconds_including_exit": 158.81344886882232,
+    "enclosing_seconds": 358.11,
+    "reported_python_subtotal_seconds": 357.7648903541267,
+    "outer_remainder_seconds": 0.3451096458733218,
+    "GNU_time_rounding_seconds": 0.005,
+    "arm_caps_pass": true,
+    "pair_cap_pass": true,
+    "peak_RSS_KiB": 558784,
+    "peak_RSS_MiB": 545.6875
+  },
+  "admission": {
+    "assessed_at": "2026-09-11T21:18:20.378761Z",
+    "available_physical_bytes": 15629406208,
+    "captured_at": "2026-09-11T21:18:20.378498Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15629406208,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "admitted_GiB": 14.556018829345703,
+  "pair_factory_calls": 1,
+  "top_level_model_constructions": 6,
+  "raw_episode_rows_match_summary": true,
+  "all_closed_ordered_world_action_bindings_match": true,
+  "J_matches_reward_sum_over256": true,
+  "all_rollouts_four_Adam_epochs": true,
+  "both_branches_move": true,
+  "all_native_file_sha256": {
+    "admission.json": "35036729aaf845cdbee72558deab9710a68815aa20651f38c966092bcb00ae0a",
+    "episodes.jsonl": "fa713f4b9a8428aff6f81ab0972eb9161836b9a7379b0dc43b5cbaeb96876f19",
+    "final_COND.pt": "cb29cfda66b15aac9a0c1e85978aba666d2bdf9862089ac079389971bf3ed13b",
+    "final_DENSE.pt": "8be19cfb6246838428cad411cabd91904bec5824a625a6b4d6dd4c9f29b7b818",
+    "rollouts.jsonl": "e1b0ed7125d63ff4c880e70800ebbe9eb2f9ba7fdaea1c4f58aca037cbd2cded",
+    "summary.json": "b610d941dce2a5bd3449d2af2f4dcd06f040808e332eed52139e11f1bd727ee6"
+  },
+  "prediction": {
+    "DM": "inside MEI",
+    "observation": "COND_ADVERSE",
+    "score": "missed",
+    "owner": "not taken (unattended)"
+  },
+  "separate_history": [
+    {
+      "seed": 8212,
+      "mean": 0.005761321371348559,
+      "conditional_se": 0.00888326841451271,
+      "positive": 19,
+      "negative": 13,
+      "reading": "INSIDE_MEI"
+    },
+    {
+      "seed": 8213,
+      "mean": -0.02246957345594415,
+      "conditional_se": 0.004312411137154014,
+      "positive": 5,
+      "negative": 27,
+      "reading": "COND_ADVERSE"
+    }
+  ],
+  "synthesis_limit": "Two separately preserved trained-pair observations with opposite signs; no pooled evaluation-world training count or population inference."
+}

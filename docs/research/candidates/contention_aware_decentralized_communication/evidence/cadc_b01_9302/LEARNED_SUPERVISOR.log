@@ -1,0 +1,19 @@
+=== Task 'cadc-b01-9302-learned-20260912' started at 2026-09-13T06:34:34+08:00 ===
+{
+  "assessed_at": "2026-09-12T22:34:34.330571Z",
+  "available_physical_bytes": 15314075648,
+  "captured_at": "2026-09-12T22:34:34.330143Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15314075648,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"status": "COMPLETE", "counts": {"train_episodes": 512, "eval_episodes": 32, "train_team_steps": 131072, "eval_team_steps": 8192, "team_steps": 139264, "optimizer_steps": 1024, "rollouts": 256, "explicit_resets": 544, "motion_decisions": 696320, "send_decisions": 630934, "attempts": 317191, "constructors": 1}, "elapsed_wall": 194.64879471389577}
+=== Task 'cadc-b01-9302-learned-20260912' exited with code 0 at 2026-09-13T06:37:49+08:00 (Duration: 195s) ===

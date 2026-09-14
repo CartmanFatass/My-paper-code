@@ -85,3 +85,10 @@ def half_primary(retain, half_event):
     d = jh - jr
     rule = 'HALF_EVENT_ABOVE_MEI' if d >= 1 else 'RETAIN_ABOVE_MEI' if d <= -1 else 'WITHIN_MEI'
     return dict(J_RETAIN=jr, J_HALF_EVENT=jh, d_HR=d, rule=rule)
+
+
+def learned_primary(retain, learned_event):
+    jr, jl = float(np.mean(retain)), float(np.mean(learned_event))
+    d = jl - jr
+    rule = 'LEARNED_EVENT_ABOVE_MEI' if d >= 1 else 'RETAIN_ABOVE_MEI' if d <= -1 else 'WITHIN_MEI'
+    return dict(J_RETAIN=jr, J_LEARNED_EVENT=jl, d_LR=d, rule=rule)

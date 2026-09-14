@@ -1,0 +1,84 @@
+{
+  "status": "accepted_complete_I_and_paired_primary",
+  "accepted_utc": "2026-09-12T03:11:52.411369+00:00",
+  "source_sha": "5b15e536806d3b54dc693e7b4b911eba53ff643c",
+  "reused_D0_acceptance": "D0_TECHNICAL_ACCEPTANCE.json",
+  "counts": {
+    "model_constructions": 2,
+    "training_starts": 1,
+    "checkpoint_loads": 0,
+    "training_transitions": 40000,
+    "stored_training_transitions": 40000,
+    "training_episodes": 80,
+    "update_stages": 5,
+    "training_agent_step_batches": 2500,
+    "evaluation_steps": 16000,
+    "evaluation_episodes": 32,
+    "evaluation_agent_step_batches": 500
+  },
+  "optimizer_calls": {
+    "coordinator": 315,
+    "discoverer_actor": 11250,
+    "discoverer_critic": 11250,
+    "team_discriminator": 75,
+    "individual_discriminator": 300
+  },
+  "evaluation_optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 0,
+    "discoverer_critic": 0,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "all_summary_training_measurements_finite": true,
+  "training_jsonl_matches_summary": true,
+  "initial_relative_displacement_final": {
+    "coordinator": 0.05601312497524782,
+    "discoverer_actor": 0.4422311134441051,
+    "discoverer_critic": 0.16281554665699216,
+    "team_discriminator": 0.026835388737411644,
+    "individual_discriminator": 0.050427668558492025
+  },
+  "primary_integrity": "both complete, correct and same-condition summaries; all 32 ordered stored differences/statistics and frozen numeric branch reproduced after integrity checks",
+  "process_cost": {
+    "elapsed_seconds": 1023.43,
+    "peak_rss_kib": 3510968.0,
+    "user_seconds": 4002.15,
+    "system_seconds": 44.57,
+    "exit_status": 0.0
+  },
+  "aggregate_cpu_seconds": 4046.7200000000003,
+  "native_pair_wall_seconds": 1495.25,
+  "admission_bytes": {
+    "physical": 15637217280,
+    "effective": 15637217280,
+    "floor": 4294967296
+  },
+  "work_law": {
+    "rows_M_per_rollout": [
+      4729,
+      4869,
+      4951,
+      5292,
+      5050
+    ],
+    "coordinator_calls_per_rollout": [
+      60,
+      60,
+      60,
+      75,
+      60
+    ],
+    "computed_coordinator_calls": 315,
+    "actual_coordinator_calls": 315,
+    "complete_law_matches": true,
+    "bound_rows_per_rollout": 8000,
+    "bound_calls": 525
+  },
+  "raw_archive": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771103_20260911/I_collection.tar.gz",
+  "raw_archive_sha256": "765566bcdb6e94e713ac5a3f3d4b438721f277ccfdb4d0c5c5199737b82b742f",
+  "raw_file_count": 13,
+  "new_scientific_invocations": 0,
+  "paired_reading": "opposite_sign",
+  "scientific_intake": "separate DM interpretation follows; no successor selected"
+}

@@ -1,0 +1,163 @@
+{
+  "completed_at_utc": "2026-09-14 00:26:07 UTC",
+  "assignment": "FOLR fixed-use F exact five-target remote reclamation",
+  "node": "hmasd-wsl-node",
+  "authority": "DM-scoped technical continuation within existing direction resources under current owner delegation; no main-copy ACK, new paid/shared commitment or experiment",
+  "preservation_commit": "8d214fd5a5b86019414095e8855bf679e51f3695",
+  "published_ref": "refs/heads/codex/vap-folr",
+  "published_ref_observed_matching": true,
+  "archives": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_RAW.tar.gz",
+      "sha256": "300d1b7b2d5886f83d813ae6f83ea9e4148f08f57792bee5c0ca4ff02ea5953e",
+      "git_blob": "555fa6bcc1eafecd08c8dd3add35cd4d19d237ad",
+      "published_commit": "8d214fd5a5b86019414095e8855bf679e51f3695",
+      "members": [
+        "./",
+        "./summary.json",
+        "./final.pt",
+        "./ADMISSION.json",
+        "./INVOCATION_TIME.json"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/BANK_RAW.tar.gz",
+      "sha256": "efd538cfdb19ba402ec08859bc85309b1e5f7dfd66233ebd6c8bbf614cf31402",
+      "git_blob": "8113837fc5bcc9ba2f350dd0c83fbc38b3dac17f",
+      "published_commit": "8d214fd5a5b86019414095e8855bf679e51f3695",
+      "members": [
+        "./",
+        "./summary.json",
+        "./ADMISSION.json",
+        "./INVOCATION_TIME.json"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/SUPPORT_SUPERVISORS_RAW.tar.gz",
+      "sha256": "4cb440c1b9b0612d98690263573193e55b22e84d3c1a5de2726be0e3e4b0be28",
+      "git_blob": "7a1c2bcb3f2dec1ca83cd09799be40ee9819867a",
+      "published_commit": "8d214fd5a5b86019414095e8855bf679e51f3695",
+      "members": [
+        "folr-ref-use-generic-781301-5dce539ed54a/",
+        "folr-ref-use-generic-781301-5dce539ed54a/runner.sh",
+        "folr-ref-use-generic-781301-5dce539ed54a/exit_code",
+        "folr-ref-use-generic-781301-5dce539ed54a/status",
+        "folr-ref-use-generic-781301-5dce539ed54a/start_time",
+        "folr-ref-use-generic-781301-5dce539ed54a/pid",
+        "folr-ref-use-generic-781301-5dce539ed54a/task.log",
+        "folr-ref-use-bank-781301-5dce539ed54a/",
+        "folr-ref-use-bank-781301-5dce539ed54a/runner.sh",
+        "folr-ref-use-bank-781301-5dce539ed54a/exit_code",
+        "folr-ref-use-bank-781301-5dce539ed54a/status",
+        "folr-ref-use-bank-781301-5dce539ed54a/start_time",
+        "folr-ref-use-bank-781301-5dce539ed54a/pid",
+        "folr-ref-use-bank-781301-5dce539ed54a/task.log",
+        "support/",
+        "support/check_5dce539ed54a/",
+        "support/check_5dce539ed54a/TEST_TIME.json",
+        "support/check_5dce539ed54a/TEST.log",
+        "support/check_0bd5c477b11d_r2/",
+        "support/check_0bd5c477b11d_r2/TEST_TIME.json",
+        "support/check_0bd5c477b11d_r2/TEST.log",
+        "support/check_0bd5c477b11d/",
+        "support/check_0bd5c477b11d/TEST_TIME.json",
+        "support/check_0bd5c477b11d/TEST.log",
+        "prepared/",
+        "prepared/GENERIC.sh",
+        "prepared/BANK.sh"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b01_781201/BANK_RAW.tar.gz",
+      "sha256": "f4d2726f98ae2b05157fd3b06b5cfc2f9c3c8c4fa0cc891bb41874f0c2b1595b",
+      "git_blob": "9e15750cd3cb9ec8c7d785c0cf4e65c54059dd95",
+      "published_commit": "8d214fd5a5b86019414095e8855bf679e51f3695",
+      "members": [
+        "ADMISSION.json",
+        "INVOCATION_TIME.json",
+        "final.pt",
+        "summary.json"
+      ]
+    }
+  ],
+  "archived_source_sha": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+  "retained_input_member_sha256": "2385b6ea0f03b36fd4e0f05006acbe64922a8dd9c2c8fa7d0cd396d5ed090989",
+  "preflight": {
+    "checks": "Exact canonical paths and no symlink; expected clean worktree/source; both handles finished/exit0 and no live recorded PIDs; all27 archive-manifest file digests OK plus frozen BANK input digest",
+    "exit_code": 127,
+    "stdout": "48564\t/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a\n4784\t/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301\n4432\t/home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301\n28\t/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a\n28\t/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a\nTERMINAL_NO_LIVE_PID /home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a 3424844\nTERMINAL_NO_LIVE_PID /home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a 3427261\n2385b6ea0f03b36fd4e0f05006acbe64922a8dd9c2c8fa7d0cd396d5ed090989  /home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301/BANK_final.pt\n/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a/runner.sh: OK\n/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a/exit_code: OK\n/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a/status: OK\n/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a/start_time: OK\n/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a/pid: OK\n/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a/task.log: OK\n/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a/runner.sh: OK\n/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a/exit_code: OK\n/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a/status: OK\n/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a/start_time: OK\n/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a/pid: OK\n/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a/task.log: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/support/check_5dce539ed54a/TEST_TIME.json: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/support/check_5dce539ed54a/TEST.log: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/support/check_0bd5c477b11d_r2/TEST_TIME.json: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/support/check_0bd5c477b11d_r2/TEST.log: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/support/check_0bd5c477b11d/TEST_TIME.json: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/support/check_0bd5c477b11d/TEST.log: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/prepared/GENERIC.sh: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/prepared/BANK.sh: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/GENERIC/summary.json: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/GENERIC/final.pt: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/GENERIC/ADMISSION.json: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/GENERIC/INVOCATION_TIME.json: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/BANK/summary.json: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/BANK/ADMISSION.json: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/BANK/INVOCATION_TIME.json: OK\nREAD_ONLY_PRESERVATION_CHECK_OK\\nbash: line 56: $'\\r': command not found\n{\"exit_code\":127,\"local_command_wall_seconds\":0.4263181,\"scientific_invocations\":0,\"removed\":false}\r\n",
+    "formatting_tail_error": "PowerShell pipe appended a CR-only final line; after all read-only checks succeeded Bash exited127. No deletion occurred. Preserved rather than hidden; next bounded operation strips CR from script transport, not from any file.",
+    "tool_command_wall_seconds": 0.6657529
+  },
+  "removal": {
+    "exit_code": 0,
+    "stdout": "48564\t/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a\n4784\t/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301\n4432\t/home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301\n28\t/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a\n28\t/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/GENERIC/final.pt: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/GENERIC/summary.json: OK\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/BANK/summary.json: OK\n/home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301/BANK_final.pt: OK\nREMOVED_AND_ABSENT /home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a\nREMOVED_AND_ABSENT /home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301\nREMOVED_AND_ABSENT /home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301\nREMOVED_AND_ABSENT /home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a\nREMOVED_AND_ABSENT /home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a\nFOLR_EXACT_CLEANUP_COMPLETE\n{\"exit_code\":0,\"local_command_wall_seconds\":0.4283752,\"scientific_invocations\":0,\"scope\":\"exact five F terminal paths\",\"preservation_commit\":\"8d214fd5a5b86019414095e8855bf679e51f3695\"}\r\n",
+    "tool_command_wall_seconds": 0.5987546,
+    "targets": [
+      {
+        "path": "/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a",
+        "inventoried_kib": 48564,
+        "removed": true,
+        "absence_verified": true
+      },
+      {
+        "path": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301",
+        "inventoried_kib": 4784,
+        "removed": true,
+        "absence_verified": true
+      },
+      {
+        "path": "/home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301",
+        "inventoried_kib": 4432,
+        "removed": true,
+        "absence_verified": true
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a",
+        "inventoried_kib": 28,
+        "removed": true,
+        "absence_verified": true
+      },
+      {
+        "path": "/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a",
+        "inventoried_kib": 28,
+        "removed": true,
+        "absence_verified": true
+      }
+    ],
+    "worktree_registration_removed": true,
+    "terminal_supervisor_roots_removed": true
+  },
+  "removed_inventory_kib": 57836,
+  "actual_filesystem_free_space_delta": "NOT MEASURED; inventory content size is not a disk-free-space measurement",
+  "recoverability": "Unique checkpoints/panels/supervisor/support records remain in the four hash-verified Git-published archives; source in its exact published commit. Removed remote working copies are reconstructible; no evidence root, shared author checkout or other direction was deleted.",
+  "excluded_from_deletion": [
+    "C:/Projects/HMASD-worktrees/codex-vap-folr",
+    "C:/Users/fires/.codex/worktrees/8f07/HMASD",
+    "/home/wu/projects/HMASD main checkout and Git object store",
+    "all other remote worktrees/tasks/inputs"
+  ],
+  "science": {
+    "new_invocations": 0,
+    "model_loads": 0,
+    "new_training_or_evaluation": 0,
+    "frozen_card_unchanged": true,
+    "result_unchanged": "GENERIC_ONLY_BANK_WORSE",
+    "lifecycle": "DM reversible PARKED/MEDIUM"
+  },
+  "accounting": {
+    "original_F_support_lower_bound_seconds": 144.192,
+    "previous_readonly_preflight_command_seconds": 0.7560686,
+    "archive_verification_tool_command_seconds": 2.3034660000000002,
+    "new_preflight_tool_command_seconds": 0.6657529,
+    "cleanup_tool_command_seconds": 0.5987546,
+    "post_intake_measured_control_command_lower_bound_seconds": 4.3240421,
+    "combined_original_lower_bound_plus_these_windows_seconds": 148.5160421,
+    "full_support_provider_agent_cost": "UNKNOWN; other reading/review/Git/intake/publication/integration windows are not fully measured; this lower-bound sum proves neither full cap compliance nor an unobserved breach",
+    "original_plan_deviation": "Separate finite DM administrative continuation; the old frozen F experiment and its caps are not extended or reclassified as a retry. One CR-tail transport error and its bounded repair are included. No new resources or new scientific allowance."
+  },
+  "main_integration_observation": "d2227e4bd2af5fe18403f14be74a322ce21e6f4f\n100644 blob 555fa6bcc1eafecd08c8dd3add35cd4d19d237ad\tdocs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_RAW.tar.gz",
+  "main_copy_not_required_for_preservation": true,
+  "remaining_direction_work": "Scientific review and assigned remote cleanup complete; current five-path control rollout ongoing. Clerk still owns four historical main integration paths and final reporting.",
+  "native_producer_pending": false
+}

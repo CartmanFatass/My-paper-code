@@ -1,0 +1,196 @@
+{
+  "generated_at_utc": "2026-09-12T17:41:52.710760+00:00",
+  "author_native_name": "/root/dm_a_mx_portfolio_resume",
+  "author_thread_id": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "control_sha": "63b0e63b3bca543c5959cce8e73cc7f73105923c",
+  "status": "UNSENT_READINESS_INPUT_ONLY",
+  "in_flight_request_unchanged": {
+    "request_id": "2026-09-12-two-remaining-chains-01",
+    "TASK_sha": "3784ea687113a7f8449e1941b7ee83f068922c0d",
+    "HANDOFF_sha": "8bafc81f67fa92988331275a32e720ae47e3c7ef",
+    "provider_conversation": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "accepted_send_count_reported_by_Root": 1,
+    "maximum_selected_directions": 2
+  },
+  "counts": {
+    "actual_advancing": 1,
+    "target": 5,
+    "newly_completed_directions": [
+      "capability_bound_semantic_currentness",
+      "acvc"
+    ],
+    "still_advancing": "roster_consistent_latent_exploration engineering repair only",
+    "conditional_remaining_if_current1_stays_and_selected_units_actually_start": {
+      "0": 4,
+      "1": 3,
+      "2": 2
+    },
+    "future_activity_must_be_reconciled": true
+  },
+  "cbsc": {
+    "RAW": "11.15",
+    "STRUCT": "11.15",
+    "REQUEST_ONLY": "12.45",
+    "rule_gap": "-1.30",
+    "paired_primary": "0",
+    "final_zero_differences": 32,
+    "independent_training_pairs": 1,
+    "train_episodes": 768,
+    "Adam": 1536,
+    "train_and_eval_transitions": 136192,
+    "native_seconds": "90.27",
+    "known_support_prefix_seconds": "129.058004",
+    "known_combined_lower_bound_seconds": "219.328004",
+    "branch": "WITHIN_MEI",
+    "complete_cost": "unknown",
+    "allocation": "ended; no unchanged repeat/successor"
+  },
+  "acvc": {
+    "control_train_C_deploy_F": "0.2975423661208032",
+    "treatment_train_F_deploy_F": "0.27144615364933855",
+    "original_reducer_mean_difference": "-0.026096212471464608",
+    "adverse_worlds": 43,
+    "favorable_worlds": 21,
+    "conditional_SE": "0.007136541708512396",
+    "independent_training_pairs": 1,
+    "train_episodes": 1024,
+    "eval_episodes": 128,
+    "native_team_steps": 294912,
+    "Adam": 2048,
+    "replay_actor_rows": 5242880,
+    "F_predicate_agent_tick_opportunities": 819200,
+    "measured_native_seconds": "330.56",
+    "alternative_conservative_inclusive_charge_seconds": 336,
+    "do_not_add_alternative_timings": true,
+    "branch": "DOWN",
+    "complete_cost": "unknown",
+    "allocation": "ended; no recurrence or consultation",
+    "C01": "unchanged qualified/consumed",
+    "recasts": 2
+  },
+  "unselected_candidate_boundaries": {
+    "Q": "one new CBSC original Convergence plus full intake; complete cost unknown; zero implementation/numeric",
+    "A": {
+      "comparison": "same accepted common-F training-use pair, new independent identity",
+      "new_future_caps_seconds": {
+        "each_arm": 270,
+        "native_sum": 540,
+        "support": 300,
+        "total": 840
+      },
+      "difference_from_old_F": "new smaller future-support offer after implementation ended; no old660/1200 balance",
+      "selected": false
+    },
+    "H": "no additional unit",
+    "residual_D_P_M": "unknown until complete in-flight decision; no automatic fallback/grant"
+  },
+  "new_exposure": {
+    "target_imports": 0,
+    "model_constructions": 0,
+    "fresh_fits": 0,
+    "training_episodes": 0,
+    "evaluation_episodes": 0,
+    "optimizer_steps": 0,
+    "new_outcome_analysis": 0,
+    "author_pro_sends": 0
+  },
+  "exposure_line": "Machine-generated preparation exposure: all target imports/models/fits/train/eval/optimizer/new-outcome-analysis/author-Send counts are zero; only existing accepted intakes and configuration arithmetic used.",
+  "matching_headroom": "still absent for both completed directions; not a prerequisite",
+  "source_refs": [
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
+      "commit_sha": "9ca150856e491cd190661c075e486ad68c1ecad6",
+      "bytes": 33746,
+      "sha256": "84bc01ca5be90ba6fd906c5e705192596b3a35b71a9b086d9f3fb292448310aa",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_SCIENCE_CARD_20260912.md",
+      "commit_sha": "9ca150856e491cd190661c075e486ad68c1ecad6",
+      "bytes": 9026,
+      "sha256": "9495d05ff89f4443ffc74ce2e1b5cf7f748680a7f66beeee87b1bc141e444862",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md",
+      "commit_sha": "9ca150856e491cd190661c075e486ad68c1ecad6",
+      "bytes": 5845,
+      "sha256": "8ffbe8dc5d1fe4bfde1403fb243c5233943e4b6f1f1eae52500f365955996980",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "9ca150856e491cd190661c075e486ad68c1ecad6",
+      "bytes": 7428,
+      "sha256": "00ab005e2816e00b43e7487ebae9279a5213e32ccf6da1b7eb2505ca7a0322c5",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "f6bf9e4674b180037330a4a70ff680a1605c0bdd",
+      "bytes": 44857,
+      "sha256": "b963c480051f3c9ff5f3af0bdb2eb243342849ccd5a05947dc18c0d35098db63",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_SCIENCE_CARD_20260912.md",
+      "commit_sha": "f6bf9e4674b180037330a4a70ff680a1605c0bdd",
+      "bytes": 16911,
+      "sha256": "e6b4ec4a2bef058da02977885ddba2c8cf61c5505056493762dd49aa09f9be34",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md",
+      "commit_sha": "f6bf9e4674b180037330a4a70ff680a1605c0bdd",
+      "bytes": 8016,
+      "sha256": "bc6c76825c086899ad47073511d3e95e9209d186921844303622692054ca8695",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "f6bf9e4674b180037330a4a70ff680a1605c0bdd",
+      "bytes": 8487,
+      "sha256": "09f9b22106d61a5c3a4bc1bbeff69a6a5e5e1e9528b2187013251c453b951c21",
+      "observed_published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "63b0e63b3bca543c5959cce8e73cc7f73105923c",
+      "bytes": 9977,
+      "sha256": "fae8e8220aa06eb4570872194c15e43445a63014630605ce3f27c2c80c01c22d"
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "commit_sha": "63b0e63b3bca543c5959cce8e73cc7f73105923c",
+      "bytes": 4641,
+      "sha256": "ab85457ddd82e3e23206ec42452cab8ba17b13529839621ed1b4d2125c2ee386"
+    }
+  ],
+  "no_new_source_CARD_TASK_HANDOFF_or_experiment": true,
+  "preparation_cost": "unknown, not zero"
+}

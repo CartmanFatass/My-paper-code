@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "CBSC-OPPORTUNITY-CREDIT-PUBLIC-STREAM-B01",
+      "arm": "RAW-GRU",
+      "n": 1,
+      "mean": 11.15,
+      "sample_sd": null,
+      "min": 11.15,
+      "max": 11.15,
+      "runs": {
+        "2026091231": 11.15
+      }
+    },
+    {
+      "task": "CBSC-OPPORTUNITY-CREDIT-PUBLIC-STREAM-B01",
+      "arm": "STRUCT-CURRENTNESS-GRU",
+      "n": 1,
+      "mean": 11.15,
+      "sample_sd": null,
+      "min": 11.15,
+      "max": 11.15,
+      "runs": {
+        "2026091231": 11.15
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "CBSC-OPPORTUNITY-CREDIT-PUBLIC-STREAM-B01",
+      "arm": "STRUCT-CURRENTNESS-GRU",
+      "baseline": "RAW-GRU",
+      "summary": {
+        "n": 1,
+        "mean": 0.0,
+        "sample_sd": null,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "differences": {
+        "2026091231": 0.0
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

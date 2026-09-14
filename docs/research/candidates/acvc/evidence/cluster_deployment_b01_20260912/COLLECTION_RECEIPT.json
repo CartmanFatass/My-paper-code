@@ -1,0 +1,79 @@
+{
+  "started_utc": "2026-09-12T23:40:05.193378+00:00",
+  "phases": [
+    {
+      "label": "terminal archive and source verification",
+      "wall_s": 0.7175976000144146,
+      "exit_code": 0,
+      "stdout": "{\"source_sha\": \"e06b3d63f7e9f77c13fd327dba0270d80e74d819\", \"remote_archive\": \"/home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f-output.tar.gz\", \"archive_bytes\": 416876, \"archive_sha256\": \"ff33a922936ad9664f46afb487dc8afb07764d573b3c2910320d4ebe7ff40fc2\", \"files\": {\"output/episodes.jsonl\": {\"bytes\": 412261, \"sha256\": \"fa929f6d9e3d15c7a5f1198fea46d265f03675758d3247cfbbd1cf82c7a225b4\"}, \"output/final_DENSE.pt\": {\"bytes\": 282957, \"sha256\": \"f7cf6e8d6829aa26838c7911728d46012b090f281393dac34f391fc6cb308611\"}, \"output/summary.json\": {\"bytes\": 17386, \"sha256\": \"2c2401736d8efc023fdf16ed0e87b05b16668eb003b2ef079c0d9d03d4b662b7\"}, \"output/updates.jsonl\": {\"bytes\": 237193, \"sha256\": \"e8494c4f8ff9994e07932edb5a6f05c88577bc7b1cd1779cf7ff3f85c94a5693\"}, \"supervisor/exit_code\": {\"bytes\": 2, \"sha256\": \"9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\"}, \"supervisor/pid\": {\"bytes\": 8, \"sha256\": \"a41814563aa0b29defa7b05239969f2c202d51fe1c94a17e088ce1dcc2ed50e8\"}, \"supervisor/runner.sh\": {\"bytes\": 1517, \"sha256\": \"ca22e72b662bc82a82051e80d32f3b4561962600b487c560fa6b8034a8bdd91b\"}, \"supervisor/start_time\": {\"bytes\": 11, \"sha256\": \"8b1be0353891cf9387a6c60bbfa5d92f9b2fc4a9101997a9dc5f849e1b5dc4d2\"}, \"supervisor/status\": {\"bytes\": 9, \"sha256\": \"161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983\"}, \"supervisor/task.log\": {\"bytes\": 2632, \"sha256\": \"8254f0b430efe53a576f5c83a28e87ad05f9800d86c5aac935655f1250ecd17d\"}, \"admission.json\": {\"bytes\": 504, \"sha256\": \"4717b50e963604cf6ba73a9dc1a63b45e1820c765f341c259b5ba8cc435683ea\"}, \"whole_command_time.txt\": {\"bytes\": 60, \"sha256\": \"8d93536ca20c8633a20bd8fd1b1b85c3946dbbf0e3ebfb6436f9a5e88fce155b\"}}, \"tracked_status\": \"\"}\n",
+      "stderr": ""
+    },
+    {
+      "label": "transfer retained terminal archive",
+      "wall_s": 0.7293721999740228,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "source_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+  "remote_archive": "/home/wu/hmasd-inputs/acvc-cluster-b01-e06b3d63f-output.tar.gz",
+  "archive_bytes": 416876,
+  "archive_sha256": "ff33a922936ad9664f46afb487dc8afb07764d573b3c2910320d4ebe7ff40fc2",
+  "files": {
+    "output/episodes.jsonl": {
+      "bytes": 412261,
+      "sha256": "fa929f6d9e3d15c7a5f1198fea46d265f03675758d3247cfbbd1cf82c7a225b4"
+    },
+    "output/final_DENSE.pt": {
+      "bytes": 282957,
+      "sha256": "f7cf6e8d6829aa26838c7911728d46012b090f281393dac34f391fc6cb308611"
+    },
+    "output/summary.json": {
+      "bytes": 17386,
+      "sha256": "2c2401736d8efc023fdf16ed0e87b05b16668eb003b2ef079c0d9d03d4b662b7"
+    },
+    "output/updates.jsonl": {
+      "bytes": 237193,
+      "sha256": "e8494c4f8ff9994e07932edb5a6f05c88577bc7b1cd1779cf7ff3f85c94a5693"
+    },
+    "supervisor/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "supervisor/pid": {
+      "bytes": 8,
+      "sha256": "a41814563aa0b29defa7b05239969f2c202d51fe1c94a17e088ce1dcc2ed50e8"
+    },
+    "supervisor/runner.sh": {
+      "bytes": 1517,
+      "sha256": "ca22e72b662bc82a82051e80d32f3b4561962600b487c560fa6b8034a8bdd91b"
+    },
+    "supervisor/start_time": {
+      "bytes": 11,
+      "sha256": "8b1be0353891cf9387a6c60bbfa5d92f9b2fc4a9101997a9dc5f849e1b5dc4d2"
+    },
+    "supervisor/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "supervisor/task.log": {
+      "bytes": 2632,
+      "sha256": "8254f0b430efe53a576f5c83a28e87ad05f9800d86c5aac935655f1250ecd17d"
+    },
+    "admission.json": {
+      "bytes": 504,
+      "sha256": "4717b50e963604cf6ba73a9dc1a63b45e1820c765f341c259b5ba8cc435683ea"
+    },
+    "whole_command_time.txt": {
+      "bytes": 60,
+      "sha256": "8d93536ca20c8633a20bd8fd1b1b85c3946dbbf0e3ebfb6436f9a5e88fce155b"
+    }
+  },
+  "tracked_status": "",
+  "local_archive": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\retained\\cluster_deployment_b01_20260912\\native_output.tar.gz",
+  "extracted_root": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\cluster-deployment-b01-20260912\\collected",
+  "complete": true,
+  "whole_collection_wall_s": 1.4749020999879576,
+  "completed_utc": "2026-09-12T23:40:06.669132+00:00"
+}

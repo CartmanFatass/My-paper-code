@@ -1,0 +1,41 @@
+Recorded stderr of the first allocator-guarded isolated autograd primitive check.
+Source76d4afca6, stored inputb75af3ba32ead6bfc5d08069ff579658643c2cc301818f2493703c3abde87a7a.
+Selected bound256 primitive applications on24 copies of a7x64 matrix; no model,
+environment, optimizer, RNG master or native backend constructed. Command failed;
+completed primitive count was not printed. Displayed command wall7.7646428s.
+
+Debug memory block at address p=0x7128b7b4f700: API 'm'
+    32 bytes originally requested
+    The 7 pad bytes at p-7 are FORBIDDENBYTE, as expected.
+    The 8 pad bytes at tail=0x7128b7b4f720 are not all FORBIDDENBYTE (0xfd):
+        at tail+0: 0xc0 *** OUCH
+        at tail+1: 0xba *** OUCH
+        at tail+2: 0xf9 *** OUCH
+        at tail+3: 0xfc *** OUCH
+        at tail+4: 0x22 *** OUCH
+        at tail+5: 0x57 *** OUCH
+        at tail+6: 0x00 *** OUCH
+        at tail+7: 0x00 *** OUCH
+    Data at p: cd cd cd cd cd cd cd cd ... c0 f5 b4 b7 28 71 00 00
+
+Enable tracemalloc to get the memory block allocation traceback
+
+Fatal Python error: _PyMem_DebugRawFree: bad trailing pad byte
+Python runtime state: initialized
+
+Thread 0x00007128b4fff6c0 (most recent call first):
+  <no Python frame>
+
+Current thread 0x000071297d145740 (most recent call first):
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/fractions.py", line 515 in _div
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/fractions.py", line 358 in forward
+  File "bound_models.py", line 107 in <listcomp>
+  File "bound_models.py", line 107 in exact_binary64_mean
+  File "bound_torch_models.py", line 20 in <listcomp>
+  File "bound_torch_models.py", line 20 in forward
+  File "/home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/autograd/function.py", line 575 in apply
+  File "<stdin>", line 18 in <module>
+
+The function-test process aborted and the timeout wrapper reported a core dump.
+This records a synthetic allocator failure, not a B02 result-bearing retry or a
+claim that the first corrupting writer has been identified.

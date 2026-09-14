@@ -1,0 +1,57 @@
+{
+  "completed_utc": "2026-09-11T17:27:28.855Z",
+  "authority": "Root integrated/pushed accepted result at811f35338 and explicitly assigned scoped removal; standing cleanup authorization continues.",
+  "preservation_commit": "e79800b5d4ef1b017bae727cdc80d1c2473c336d",
+  "root_integration_sha": "811f353382721a87e8aa6596bac4271165889f81",
+  "verified_preserved_git_native_files": 6,
+  "verified_preserved_git_supervisor_files": 6,
+  "native_source_sha": "2814fbd3e24877464e4dd7c12df55c24567e8723",
+  "pre_removal_checks": [
+    "Root-integrated Git bytes match all six native files and six supervisor/log files.",
+    "Remote exact source HEAD and clean tracked/untracked status; ignored inventory exactly the six preserved native files.",
+    "Remote paths resolve to the three exact owned targets; supervisor finished/exit0, tmux inactive.",
+    "Local duplicate archive directory resolves to the exact owned path, is not a reparse point, and contains only the three named archives."
+  ],
+  "removed": [
+    {
+      "path": "/home/wu/hmasd-worktrees/mgtap-cond-b01-8212-20260911",
+      "disk_absent": true,
+      "worktree_registration_absent": true
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/mgtap-cond-b01-8212-20260911",
+      "disk_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/mgtap-cond-b01-8212-20260911",
+      "disk_absent": true,
+      "supervisor_status_after_removal": "not_found (historical accepted run is preserved)"
+    },
+    {
+      "path": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904/temp/directions/metric_ground_transport_allocation/exp/conditional_pooling_b01_20260911_8212_source",
+      "disk_absent": true
+    }
+  ],
+  "shared_authoring": {
+    "path": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904",
+    "disk_present": true,
+    "worktree_registered": true,
+    "branch": "codex/mgtap"
+  },
+  "remote_cleanup_receipt": {
+    "chunk_id": "b8a453",
+    "wall_time_seconds": 0.9565585,
+    "exit_code": 0,
+    "original_token_count": 61,
+    "output": "IGNORED_INVENTORY_EXACTLY_SIX_PRESERVED_NATIVE_FILES\nREMOTE_WORKTREE_DISK_AND_REGISTRATION_ABSENT\nREMOTE_INPUTS_AND_SUPERVISOR_ABSENT\n{\"task\": \"mgtap-cond-b01-8212-20260911\", \"status\": \"not_found\"}\nCOMPLETE_SUPPORT_COMMAND_SECONDS=0.773058\r\n"
+  },
+  "local_cleanup_receipt": {
+    "chunk_id": "0a07cc",
+    "wall_time_seconds": 0.3414558,
+    "exit_code": 0,
+    "original_token_count": 48,
+    "output": "LOCAL_DUPLICATE_DIRECTORY_ABSENT=True\r\nSHARED_AUTHORING_DIRECTORY_RETAINED=True\r\n\r\nworktree C:/Projects/HMASD-worktrees/dm-n5-continue-20260904\r\nCOMPLETE_SUPPORT_COMMAND_SECONDS=0.1625669\r\n\r\n"
+  },
+  "retry_or_successor": false,
+  "unresolved_cleanup_blocker": null
+}

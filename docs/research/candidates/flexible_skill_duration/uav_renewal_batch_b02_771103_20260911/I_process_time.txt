@@ -1,0 +1,1 @@
+elapsed_seconds=1023.43,peak_rss_kib=3510968,user_seconds=4002.15,system_seconds=44.57,exit_status=0

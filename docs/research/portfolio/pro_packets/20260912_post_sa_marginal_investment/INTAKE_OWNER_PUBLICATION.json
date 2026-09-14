@@ -1,0 +1,15 @@
+{
+  "item": "20260912-root-004",
+  "ledger_row": 26,
+  "auto_applied": false,
+  "traces": [
+    {
+      "id": "20260912-root-003",
+      "result": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-003.json"
+    },
+    {
+      "id": "20260912-root-004",
+      "result": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-004.json"
+    }
+  ]
+}

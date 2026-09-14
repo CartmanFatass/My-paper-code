@@ -1,0 +1,33 @@
+{
+  "source_sha": "a4c24e4eef4eb290d5026596a0a49ba4f4f9ce4f",
+  "remote_worktree": "/home/wu/hmasd-worktrees/acvc-training-use-b01-a4c24e4ee",
+  "remote_bundle": "/home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle",
+  "started_utc": "2026-09-12T17:20:20.567745+00:00",
+  "phases": [
+    {
+      "label": "source bundle",
+      "wall_s": 5.1325350000406615,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "source transfer",
+      "wall_s": 7.867368300037924,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "offline exact checkout and wrapper syntax",
+      "wall_s": 4.824736099981237,
+      "exit_code": 0,
+      "stdout": "The bundle contains this ref:\na4c24e4eef4eb290d5026596a0a49ba4f4f9ce4f HEAD\nThe bundle records a complete history.\nThe bundle uses this hash algorithm: sha1\na4c24e4eef4eb290d5026596a0a49ba4f4f9ce4f\n",
+      "stderr": "/home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle is okay\nFrom /home/wu/hmasd-inputs/acvc-training-use-b01-a4c24e4ee.bundle\n * branch                HEAD       -> FETCH_HEAD\nPreparing worktree (detached HEAD a4c24e4ee)\nHEAD is now at a4c24e4ee Record ACVC pair source acceptance and admission wrapper\n"
+    }
+  ],
+  "source_bundle_bytes": 119365875,
+  "complete": true,
+  "whole_helper_wall_s": 17.826921099971514,
+  "completed_utc": "2026-09-12T17:20:38.428851+00:00"
+}

@@ -1,0 +1,30 @@
+{
+  "method": "Reuse the complete accepted runner work law and per-arm historical wall as planning anchors; future realized rows/work and contention remain unknown. No timing probe or extrapolated fixed coefficient.",
+  "per_arm": {
+    "D0": {
+      "latest_native_wall_anchor_seconds": 538.66,
+      "earlier_anchor_seconds": 519.94,
+      "complete_cap_seconds": 900,
+      "coordinator_calls": 525
+    },
+    "I": {
+      "latest_native_wall_anchor_seconds": 1069.26,
+      "earlier_anchor_seconds": 1020.68,
+      "complete_cap_seconds": 1800,
+      "coordinator_calls": "15*sum(ceil(M_r/1280)), five real M_r<=8000; upper525"
+    }
+  },
+  "latest_native_sum_anchor_seconds": 1607.92,
+  "native_sum_cap_seconds": 2700,
+  "support_cap_seconds": 300,
+  "single_source_transaction_cap_seconds": 45,
+  "complete_cap_seconds": 3000,
+  "support_terms": "Invoked preparation/check/review, one source delivery, Monitor, collection/reduction, publication/integration and preservation/cleanup, each charged once. Nested clocks are not added.",
+  "unknowns": [
+    "new realized I rows/decoder/recurrent/PPO time",
+    "future contention",
+    "future support and any unattributed observation/review/service time"
+  ],
+  "prior_allocation_cost_not_reused": true,
+  "scientific_submissions": 0
+}

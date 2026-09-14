@@ -1,0 +1,48 @@
+{
+  "source_sha": "1652c44ac65ed6e686610c3cfcff67dab1a0fc6b",
+  "handle": "rcle-b07-equal-unit-s27-20260912",
+  "cwd": "/home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912",
+  "output_root": "/home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912/temp/directions/roster_consistent_latent_exploration/exp/b07-equal-unit-s27-20260912",
+  "staging": "/home/wu/hmasd-inputs/rcle-b07-equal-unit-s27-20260912",
+  "local_bundle": "temp/directions/roster_consistent_latent_exploration/b07-equal-unit-preparation/source.bundle",
+  "bundle_prerequisite": "3ffa65cb4e1a67182b90dce3822d0018ac623c72",
+  "bundle_sha256": "196cb885a22bc558e776539be401c82dc3c3855abde3756da95f353a19b2b8d1",
+  "bundle_bytes": 5921795,
+  "steps": [
+    {
+      "step": "b07BundleCommand",
+      "chunk_id": "589ba9",
+      "wall_time_seconds": 0.6794559,
+      "exit_code": 0,
+      "original_token_count": 81,
+      "output": "\r\nAlgorithm       Hash                                                                   Path\r\n---------       ----                                                                   ----\r\nSHA256          196CB885A22BC558E776539BE401C82DC3C3855ABDE3756DA95F353A19B2B8D1       C:\\Projects\\HMASD-worktrees\\dm-…\r\n5921795\r\n\r\n"
+    },
+    {
+      "step": "b07RemoteStageDir",
+      "chunk_id": "ecdd96",
+      "wall_time_seconds": 0.4224064,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "step": "b07BundleTransfer",
+      "chunk_id": "39c3ca",
+      "wall_time_seconds": 1.0670589,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "step": "b07RemoteStage",
+      "chunk_id": "d41caa",
+      "wall_time_seconds": 1.3934663999999999,
+      "exit_code": 0,
+      "original_token_count": 108,
+      "output": "From /home/wu/hmasd-inputs/rcle-b07-equal-unit-s27-20260912/source.bundle\n * branch                codex/rcle -> FETCH_HEAD\nPreparing worktree (detached HEAD 1652c44ac)\nHEAD is now at 1652c44ac Implement funded RCLE B07 exact equal-unit single-fit path\n1652c44ac65ed6e686610c3cfcff67dab1a0fc6b\n196cb885a22bc558e776539be401c82dc3c3855abde3756da95f353a19b2b8d1  /home/wu/hmasd-inputs/rcle-b07-equal-unit-s27-20260912/source.bundle\n"
+    }
+  ],
+  "status": "STAGED_EXACT_SOURCE",
+  "staging_command_wall_s": 3.5623875999999997,
+  "scientific_execution": false
+}

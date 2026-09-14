@@ -1,0 +1,23 @@
+{
+  "recorded_at_utc": "2026-09-11T08:22:37.618Z",
+  "arm": "I (I1280)",
+  "source_sha": "c70f01ea30d6c4d063dcc46d8499b26bfe037da8",
+  "node": "hmasd-wsl-node",
+  "worktree": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b01-770703-20260911",
+  "handle": "fsd-uav-renewal-batch-b01-770703-I-20260911",
+  "supervisor_accepted": true,
+  "supervisor_receipt": "Task 'fsd-uav-renewal-batch-b01-770703-I-20260911' started in tmux session 'agent_fsd-uav-renewal-batch-b01-770703-I-20260911'. Output: /home/wu/.agent-tasks/fsd-uav-renewal-batch-b01-770703-I-20260911/task.log\n",
+  "admission_and_scientific_status": "not observed by DM after supervisor acceptance; adopted recovery Monitor owns observation",
+  "d0_companion": "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b01_770703/D0/summary.json",
+  "d0_companion_sha256": "cfd24b9fee9b51d91f3c71df9e731e375d5ae9685c74ba2605a1634f07eb5fe1",
+  "d0_collection_commit": "07f60d525",
+  "monitor_authority": "Root explicit current recovery route",
+  "monitor_native_task": "/root/monitor_fsd_rcle_20260911",
+  "monitor_add_dispatch": "sent successfully via native conversation",
+  "monitor_adoption": "pending",
+  "configured_app_monitor_dispatch_for_I": "not used; prior D0 app dispatch retained separately",
+  "root_native_task": "/root",
+  "dm_native_task": "/root/dm_fsd_i1280_implementation",
+  "support_note": "Native message dispatch execution duration unavailable; not silently zero",
+  "remaining_allocation": "I1280 terminal collection and all-outcome intake/cleanup only; no third arm, retry, seed or successor"
+}

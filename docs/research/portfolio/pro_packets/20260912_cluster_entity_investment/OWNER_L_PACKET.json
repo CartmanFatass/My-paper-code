@@ -1,0 +1,37 @@
+{
+  "question": "在当前 RCLE 没有已选 distinct 新实验、原节点只 HOLD 一个已测配方的情况下，Portfolio 是否买一次有界方向设计，还是明确 PARK 该方向？",
+  "changes_if_approved": [
+    {
+      "target": "roster_consistent_latent_exploration 下一 Portfolio 投入/生命周期",
+      "from": "ACTIVE/MEDIUM；equal-unit/.99-prior/FLEX/final1000 的继续投入 HOLD；无新对象",
+      "to": "建议维持 ACTIVE，明确买一份最多提出一个 distinct B 或无候选的设计件；PARK 是 Portfolio 的真实反选项而非 Root 推断"
+    }
+  ],
+  "if_refused": "若 Portfolio 明确选 PARK，原 DM 保全证据并记录可逆 lifecycle/revisit；不能称为科学证伪。若仅拒绝该设计投入而未作生命周期决定，不自动 PARK 或停止方向。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md",
+      "quote": "Earlier W100/W1 native learning, including the retained seed23 gains with fragmentation/recovery costs, remains the strongest support against a broad RCLE unlearnability claim.",
+      "why": "广义成员变化后的联合学习仍有真实信号，值得用一份具体设计检验是否存在不同用途。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md",
+      "quote": "This response does not select its next mechanism or object.",
+      "why": "当前没有 decision-ready 新实验，设计可能只返回无候选并继续消耗文档成本。"
+    }
+  ],
+  "uncertainty": [
+    "原 DM 明确报告无现成 distinct 新 B；不能把 held 配方改名或换 seed。",
+    "一次设计完整成本未知；不自动授权实现、数字分析、实验、再咨询或第二轮设计。"
+  ],
+  "cost": {
+    "compute": "当前0 numerical；一次文档件的 invoked/provider/agent 完整成本未知，不等于便宜；旧R与B07额度不转移。",
+    "owner_time": "异步覆盖；无需逐项确认。",
+    "reversibility": "costly",
+    "waits_on_this": "RCLE 下一具体投入/生命周期与排序；K/E 和其他方向独立。"
+  },
+  "verdict_text": "作者与原 RCLE DM 建议一次有界设计：基于既有证据提出最多一个明确区别于 held recipe 的真实学习问题、最强合法 null、estimand、MEI、工作乘数与 first-object 成本需求，或诚实返回无候选；PARK 为真实反选项，由 Portfolio 明确选择。",
+  "source": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/SCIENCE_BRIEF.md"
+}

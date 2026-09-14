@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-11-post-a-execution-refill-portfolio-01",
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "direction_id": "portfolio",
+  "direction_ids": [],
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "user_message_id": "today-current-round|TASK.md@b6b61e16680dc7ebe0aebebbb48dcbb62ab5130d|user-node",
+  "assistant_message_id": "today-current-round|Response — immutable commit|current-round-assistant-node",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "prompt_sha256": "b462bfe7f9dffaa01f7add0f13d7089c292b11ac78cf9ea3ee3789ea0f3f8379",
+  "response_sha256": "4bf41fd519d5df6ae20beaa27c90f0b581285c0ad254ff74107f2f79348b552d",
+  "response_bytes": 55041,
+  "response_characters": 54796,
+  "send_click_count": 1,
+  "natural_completion_observed": "Worked for 20m 56s; complete response and delivery links present; no active generation control",
+  "github_delivery": {
+    "commit": "9a2789640f3e5663b4cd72736ba953bfa809095d",
+    "response_path": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/archive/RESPONSE.md",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/9a2789640f3e5663b4cd72736ba953bfa809095d/docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/archive/RESPONSE.md",
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5637047130",
+    "issue_comment_id": 5637047130,
+    "http_status": 200,
+    "issue_comment_matches_request": true
+  },
+  "archive_paths": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-post-a-execution-refill-portfolio-01\\PROMPT_BODY.md",
+    "github_response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-post-a-execution-refill-portfolio-01\\GITHUB_RESPONSE.md",
+    "chat_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-post-a-execution-refill-portfolio-01\\CHAT_RECEIPT.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-post-a-execution-refill-portfolio-01\\PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-post-a-execution-refill-portfolio-01\\TRANSPORT_FACTS.json",
+    "github_response_sha256": "4bf41fd519d5df6ae20beaa27c90f0b581285c0ad254ff74107f2f79348b552d",
+    "delivery_commit": "9a2789640f3e5663b4cd72736ba953bfa809095d",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/9a2789640f3e5663b4cd72736ba953bfa809095d/docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/archive/RESPONSE.md",
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5637047130"
+  },
+  "captured_at": "2026-09-11T15:58:25Z",
+  "identity_validation": "PASS_WITH_DOM_ID_UNAVAILABLE"
+}

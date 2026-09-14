@@ -1,0 +1,48 @@
+{
+  "collected_at": "2026-09-13T20:01:28.066736+00:00",
+  "host": "LAPTOP-U9TDKC8A",
+  "node": "wsl_4070",
+  "source_tested": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+  "checks": [
+    {
+      "directory": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/support/check_0bd5c477b11d",
+      "name": "check_0bd5c477b11d",
+      "timing": {
+        "wall_seconds": 1.8,
+        "user_seconds": 1.29,
+        "system_seconds": 1.67,
+        "peak_rss_kib": 382232,
+        "exit_code": 1
+      },
+      "pytest_output": "....EE                                                                   [100%]\n==================================== ERRORS ====================================\n_____ ERROR at setup of test_fixed_loader_exact_weights_and_lifetime_reset _____\n\nself = PosixPath('/home/wu/hmasd-worktrees/folr-ref-use-0bd5c477b11d/temp/directions/vap_folr_core/test/ref-use-0bd5c477b11d')\nmode = 448, parents = False, exist_ok = False\n\n    def mkdir(self, mode=0o777, parents=False, exist_ok=False):\n        \"\"\"\n        Create a new directory at this given path.\n        \"\"\"\n        try:\n>           self._accessor.mkdir(self, mode)\nE           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/folr-ref-use-0bd5c477b11d/temp/directions/vap_folr_core/test/ref-use-0bd5c477b11d'\n\n../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError\n____ ERROR at setup of test_bank_runner_no_learner_and_truthful_publication ____\n\nself = PosixPath('/home/wu/hmasd-worktrees/folr-ref-use-0bd5c477b11d/temp/directions/vap_folr_core/test/ref-use-0bd5c477b11d')\nmode = 448, parents = False, exist_ok = False\n\n    def mkdir(self, mode=0o777, parents=False, exist_ok=False):\n        \"\"\"\n        Create a new directory at this given path.\n        \"\"\"\n        try:\n>           self._accessor.mkdir(self, mode)\nE           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/folr-ref-use-0bd5c477b11d/temp/directions/vap_folr_core/test/ref-use-0bd5c477b11d'\n\n../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError\n=========================== short test summary info ============================\nERROR tests/experiments/candidates/vap_folr_core/entity_history_b01/test_retained_use.py::test_fixed_loader_exact_weights_and_lifetime_reset\nERROR tests/experiments/candidates/vap_folr_core/entity_history_b01/test_retained_use.py::test_bank_runner_no_learner_and_truthful_publication\n4 passed, 2 errors in 1.36s\n"
+    },
+    {
+      "directory": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/support/check_0bd5c477b11d_r2",
+      "name": "check_0bd5c477b11d_r2",
+      "timing": {
+        "wall_seconds": 1.1,
+        "user_seconds": 1.18,
+        "system_seconds": 1.58,
+        "peak_rss_kib": 397560,
+        "exit_code": 0
+      },
+      "pytest_output": "..                                                                       [100%]\n2 passed in 0.85s\n"
+    },
+    {
+      "directory": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/support/check_5dce539ed54a",
+      "name": "check_5dce539ed54a",
+      "timing": {
+        "wall_seconds": 1.07,
+        "user_seconds": 1.24,
+        "system_seconds": 1.53,
+        "peak_rss_kib": 397748,
+        "exit_code": 0
+      },
+      "pytest_output": "..                                                                       [100%]\n2 passed in 0.83s\n"
+    }
+  ],
+  "sum_test_wall_seconds": 3.9700000000000006,
+  "scratch_cleanup": "All three exact invocation scratch paths verified absent. Old0bd5 detached test checkout removed and registration verified absent;5dce worktree retained for accepted execution.",
+  "support_scope": "Synthetic checks, no selected learner or result-bearing scientific panel. All failed checks count. SSH transport overhead/support beyond native test wall not inferred zero.",
+  "remote_command_method": "Binary UTF8 stdin to ssh hmasd-wsl-node bash -s; text-mode stdin probe produced CRLF numeric-exit error. Corrected read-only probe and this receipt collection exit0. No test was repeated merely to change SSH receipt."
+}

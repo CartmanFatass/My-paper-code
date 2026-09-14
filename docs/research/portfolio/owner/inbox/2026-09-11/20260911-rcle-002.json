@@ -1,0 +1,75 @@
+{
+  "id": "20260911-rcle-002",
+  "created": "2026-09-11T11:00:48-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "RCLE：0.99 最近目标初始策略，单次真实训练1000步",
+  "context": "Portfolio 已分配的一次新 B；检验更保守的初始偏好能否产生学习收益及规则优势。master26 未经筛选，保留旧结果和全部不利后果。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按固定新卡执行一次，并报告全部结果；无需等待回复。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "未启动时停止启动，保留历史证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在相关执行前应用你的具体覆盖，不自动替换或追加预算。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "执行明确分配的有限表现问题，避免把更好初始化误称为学习优势。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_SCIENCE_CARD_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L50",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "执行已获 Portfolio 分配的新 B06：初始选择最近目标的概率为 0.99，其余各 0.002，训练 1000 次后能否改善自身并胜过最近目标规则？",
+    "changes_if_approved": [
+      {
+        "target": "RCLE_B06_NEAREST99_PRIOR1000_SCIENCE_CARD_20260911.md",
+        "from": "B05 已结束，没有 B06 执行",
+        "to": "独立新 master26；一份训练、初始化/最终/最近目标三个端点；限定 600/10/140/750 秒"
+      }
+    ],
+    "if_refused": "在未接受运行时停止启动；保留已有证据，按覆盖指令收尾，不改写 B04/B05 或自动替换种子。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_SCIENCE_CARD_20260911.md",
+        "quote": "Claim to test: a fresh FLEX controller initialized at .99 nearest/.002 each other can improve its own initialization and outperform attained INDEPENDENT-NEAREST service after 1000 native learning updates.",
+        "why": "问题限定为单次真实训练的表现，使用合法可被学习覆盖的偏好，不增加观察信息。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B05_NEAREST_PRIOR1000_RESULT_INTAKE_20260911.md",
+        "quote": "**Accept one valid B/EXPLORE result: the attained nearest reference still wins\nall8 service cells after1000 updates.**",
+        "why": "旧 0.9 配方仍输给规则，微小自身改善不保证新 0.99 配方可学会优势。"
+      }
+    ],
+    "uncertainty": [
+      "一个训练实例只支持局部结论，场景区间不能估计训练种子不确定性。",
+      "更好的初始化本身不是学习收益，也不能把跨种子差异归因为探索概率。",
+      "新运行速度、激活内存和完整耗时未知；保留碎片化与恢复的所有不利结果。"
+    ],
+    "cost": {
+      "compute": "一份训练，1000 次更新，70144 总回合。学习≤600秒，规则≤10秒，额外支持≤140秒，完整≤750秒；无转借、重试、概率扫描或后续自动分配。",
+      "owner_time": "无需等待回复；可异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Object tier options: (a) execute the exact allocated fresh .99-prior1000 comparison;\n(b) defer/change it. Recommend/select (a). Owner-delegated decision\n(unattended, 2026-09-03 instruction): **(a)**.",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_SCIENCE_CARD_20260911.md"
+  },
+  "starred": false
+}

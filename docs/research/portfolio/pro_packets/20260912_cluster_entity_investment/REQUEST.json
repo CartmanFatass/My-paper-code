@@ -1,0 +1,283 @@
+{
+  "caller_role": "portfolio",
+  "workflow_node": "portfolio_decision",
+  "source_thread_id": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "direction_ids": [
+    "acvc",
+    "vap_folr_core",
+    "roster_consistent_latent_exploration",
+    "flexible_skill_duration"
+  ],
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "decision_authority": "pro_final",
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/17"
+  ],
+  "delivery_mode": "github_delivery",
+  "request_id": "2026-09-12-existing-four-direction-investment-01",
+  "commit_or_ref": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+  "scientific_question": "What additional investment and sequencing should Portfolio select for four scientifically separate needs: K, ACVC cluster-law deployment use; E, FOLR entity history versus equally informed Generic RETAIN; L, one RCLE direction-design deliverable versus explicit Portfolio PARK; and U, one FSD same-host optional-learning use judgment versus no new consultation or unchanged empirical spending? K/E science is already selected, but complete implementation/native/support costs are unknown and no caps are allocated. L has no ready new B; U needs no extra empirical observation for its limited decision. The author recommends K and E as finite B objects, one L design, and U once, with smaller or no-addition alternatives. Preserve the accepted 27-direction registry and separate T/ACPS/CADC investments. Completed allocations never stop ACTIVE directions. This question supplies no four automatic grants, old balances, sixth FSD pair, repeated held RCLE recipe, or third ACVC training-F pair.",
+  "deliverable": "Write a conclusion-first Portfolio decision with separate K/E/L/U choices, concrete consequences and priority/lifecycle effects. For each funded K/E, choose NEW numeric limits for each whole native arm, native sum, support with its meaning, and complete future invoked work; include the exact fit/panel exposure and all necessary implementation, checks, independent risk review, delivery, admission, Monitor, intake, preservation and cleanup once. Unknown rates and unmetered agent/provider tails stay explicit. K is the exact selected one-fit/three-panel object; E 5000/128 and MEI ±1 are source-sized proposals requiring explicit acceptance or a concrete sufficient exposure for the same question. For L, select one bounded original-DM design (at most one distinct B proposal or no candidate; zero implementation, numerical work or Pro) or an explicit reversible Portfolio PARK with a revisit condition. For U, decide one new original-Convergence use judgment and full intake at an explicitly accepted unknown or bounded complete documentary cost, or no present consultation/unchanged spending. Any actually proposed new object or lifecycle change must name its question, strongest legal null, estimand, lowest evidence class, MEI/headroom, work/cost, authority and first DM action. Give decisive reasons, strongest opposition, uncertainty and a concrete revisit condition. Do not add a mandatory pilot or owner approval. Preserve separately accepted discovery/T, N/R and old scientific boundaries. Each selected item proceeds independently. Return the full scoped response with immutable Issue17 delivery readback or the complete same-request downloadable fallback.",
+  "claim_ceiling": "Prospective Portfolio investment/priority and explicitly scoped RCLE/FSD current-direction consequences. No new empirical evidence, C freeze/promotion, UAV entry, global novelty, stable learning advantage/harm or component cause. K/E retain their accepted B mechanism and conditional claims; L has no selected new B; U is a concrete use judgment from five separate accepted pairs. No local disposition or inherited old allowance.",
+  "github_delivery": {
+    "branch": "codex/portfolio",
+    "base_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+    "response_path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/17"
+  },
+  "constraints": [
+    "Keep all four questions, budgets, mutable models/RNG and outcomes separate. K/E are accepted science without implementation or empirical funding. L has no decision-ready new B, and U has no extra observation prerequisite. Author recommendations allocate nothing; do not enumerate all combinations or combine mechanisms.",
+    "Apply current OWNER_DIRECT in AGENTS §5. A finite object/grant/cleanup/no-successor statement ends only that allocation. All four original DMs and latest DIRECTION/intakes were refreshed. Completed returns and queued intentions are not running work. L expressly offers Portfolio PARK; a funding refusal alone never implies a lifecycle change or Root stop. Any FSD lifecycle/priority change must be explicit and bounded by its evidence.",
+    "Preserve the separately completed discovery/T decision at intake 2f1ec644d: ACPS 1800, CADC 2100 and T 1200 complete future invoked caps, with new hard300 support for T; registry27=17ACTIVE+10PARKED. Preserve T→ACPS→CADC under actual contention among those purchases, all old22 lifecycle/recast/UAV fields, and second-recast ACVC/VNFC/SCDMP lowest ACTIVE contention ordering. No new registration, reset of recasts, silent replacement or old-balance transfer follows here.",
+    "K is one fresh C-trained DENSE fit under the existing cluster law in training and all three private C/F/own-dwell final64-world panels: five UAVs/fifty users,H256,CPU FP32/thread1,512 training episodes,256 rollouts,1024 Adam,180224 total team steps. No training through F, extra fit/panel, actor cluster labels, borrowed F/dwell masks or trajectories, checkpoint selection, or new C certificate. Reuse the existing make_env hook with new identity/law and SD/extreme publication. Historical runner270/330/600 defaults are not authorization.",
+    "E retains the common truthful public lifecycle interface including unseen peers, observer-owned GRU16 subject cells with visible pointwise updates/local attention/direct current features, and adaptive Generic RETAIN GRU64 with the same full public information. Preserve both lifetime state/gradient cuts, invisible carry, observer isolation, complete replay/TD/RMSprop/FlexQMixer/terminal21st pass and CPU FP32/Torch1/1. A thin direction-owned learner/runner is needed where old Actor imports and arm/1800s defaults are hardcoded. Source-sized two fits imply205120ticks/9938updates;33391680/166958400 replay rows are not timing ratios. No old scalar H reversal, fourth scalar pair, shared hidden actor information, cached replay-bank labels or width search.",
+    "L preserves the tested equal-unit/.99-prior/FLEX/final1000 spending HOLD. No unchanged fit or repeated completed consultation. Its one design deliverable may propose at most one materially distinct bounded B or no candidate, with an event→ownership→information→action/credit→learner exposure→native consequence path and strongest legal null. No implementation, numerical reanalysis, models, profiling, experiment, Pro or automatic second design cycle. Do not substitute gradient/writer/history enumeration or a hidden prerequisite A. Complete documentary cost is unknown and must be explicitly handled. PARK, if selected, is a reversible Portfolio investment judgment, not broad unlearnability or B07 automatically stopping RCLE.",
+    "U offers one new original-Convergence judgment: place I1280 in the same-host optional-learning scheme set, or retain exploration evidence without more unchanged spending. Keep authentic D0/defaults, all five separate pairs, costs and conditional uncertainty. No C promotion, stable-advantage/component claim, sixth pair, extra evaluation, reanalysis, new code, old S authorization or automatic repeated consultation. Existing evidence suffices for this limited use decision; any later empirical object needs its own specific decision value. Complete consultation cost is unknown, not presumed cheap.",
+    "For each funded empirical item, declare NEW numeric native/support/complete limits as willingness to invest under unknown rates, not forecasts. Include all required work once and label unmetered lifetime components. Historical C01 167–178s units/855 inclusive versus841.92 raw wall, old FOLR B03, RCLE343.43s and FSD1446.79s keep their original scopes/windows and create no future prices or balances. The owner-clarified old FOLR300 support reference and308.84 record do not hard-stop science; newly explicit caps retain their actual meaning. Missing telemetry is neither zero cost nor an unobserved breach.",
+    "Apply evidence §§7–8.1 and11.4/11.7–11.10 to question selection. No exact optimum, full reconstruction, exhaustive or bounded search before learning, positive pilot, fixed seed quota, missing-headroom gate, causality A, mandatory cost profiling or repeated Convergence vote for K/E. Separate intrinsic algorithm work from added checks. A cost refusal may select less or no work; it must not preserve an unnecessary prerequisite by renaming it.",
+    "Original DMs own implementation, technical acceptance, exact published remote inputs, fresh admission, actual Monitor goal adoption, collection, scientific intake and scoped cleanup on existing shared branches. Use independent review for actual high-risk changes only. Root owns main integration and real capacity; use current primary endpoints. Each selected chain proceeds independently; five is a rolling target, not four automatic grants or a permanent seven-chain goal. Author exposure is machine-recorded zero. Read only the listed exact Git references and named current sections. Full conformance is checked by the original author, then Root applies without per-item owner ratification; only the scoped response and Issue delivery comment may be written by Pro."
+  ],
+  "reference_files": [
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/SCIENCE_BRIEF.md",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "purpose": "Read complete four separate choices K/E/L/U, exact use questions, empirical opposition, known work/cost gaps, current DM source-only refresh, recommendation and strong alternatives.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/FACTS.json",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "purpose": "Machine-zero author exposure and configuration arithmetic; current27 registry, direct original-DM refresh, source bindings, old-grant and known-versus-unknown cost distinctions.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/PREPARATION_INTAKE.md",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "purpose": "Read original-author assignment/provenance/method assumptions and separate accepted discovery/T reconciliation; no experiment or Send.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/ISSUE_SNAPSHOT.json",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "purpose": "Pinned delivery-only Issue17 snapshot; mutable discussion does not create a scientific instruction.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/OWNER_KE_PACKET.json",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "purpose": "Chinese planned K/E recommendation and complete costs; no author grant.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/OWNER_L_PACKET.json",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "purpose": "Chinese planned RCLE one-design versus explicitPortfolioPARK reasons.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/OWNER_U_PACKET.json",
+      "commit_sha": "cdf01ea06588abf6451c698fe6d5112b22fc89f0",
+      "purpose": "Chinese planned FSD one-use-judgment versus no extra documentary/unchanged spending.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Complete accepted next-object intake, especially conformance and Exact future investment need: onecluster C-fit/privateC-F-dwell panels,180224total notalltrain, unknowncost, earlierpositive/negative evidence and no thirdtrainingF.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/OWNER_PACKET.json",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Original accepted ACVC owner decision packet, exact scope/support/opposition; selection is scientific, not empirical grant.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Current scientific question/position and latest cluster selection; consumedC01, separatetraining-FDOWN,recasts2 and narrow stoppedfamilies remain.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/INTAKE.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Read complete accepted scientific scope/conformance and section4 finiteinvestment: truthfulcommonpublicinterface,observer-subjectstate/lifetimegradients,competentGenericRETAIN,oneproposedpair,unknowncost.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Current question/position and accepted entity-history OPEN only; retain oldscalarH,B01-B03 andB04generic counterevidence, no lifecycle/recast change.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Complete latest original-node recipe-only HOLD, allB07/B06/local gains/harms,costwindows and continuingACTIVE ownership. No unchangedcandidate,newB orrepeatconsult selected.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Current scientific question and Position through Nextdiscriminator; oldexactpublic-state/recast appendix is provenance, not an instruction to re-run or uniquely reconstruct history.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONTINUATION_READINESS_20260912.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Current completed R and continuing DM boundary, preserved empirical/technical evidence and no automatic nextobject.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+      "commit_sha": "5545f73218cd7827a151fa1cec4fbc2ef08e38d8",
+      "purpose": "Complete fifthpair acceptedintake plus final cleanup and Direction-local input to currentPortfolio author: five separatepoints,cost/n=1 limits,one new original-node optionaluse recommendation,no readyB.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "commit_sha": "5545f73218cd7827a151fa1cec4fbc2ef08e38d8",
+      "purpose": "Current Scientificquestion/Position and latestfifthpairacceptedboundary: optionalB scheme, mixedhistory, noCpromotion orfixedseedquota; no automatic sixthpair.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/INTAKE.md",
+      "commit_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "purpose": "Preserve separately accepted discovery/T finalconformance, currentness corrections and three funded caps; no reopening thatrequest ordispositions.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/decisions/2026-09-12-new-direction-discovery.md",
+      "commit_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "purpose": "Existing prospective commitments: newACPS/CADC funded,three newPARKED onlyregistration,existingT funded separately;old22unchanged.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/EXECUTION_MAPPING.md",
+      "commit_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "purpose": "ExistingindependentT/ACPS/CADC ownership,newnonfungible caps,localcontentionorderT→ACPS→CADC andcontinuity. Compareadditionalinvestmentwithoutalteringthesegrants.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/REGISTRATION_MAPPING.json",
+      "commit_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "purpose": "Current accepted new5 identities/lifecycles/readiness27registryarithmetic;notarunningtaskcount.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md",
+      "commit_sha": "b793cf69b4935306708ad744b355acc4d5b33712",
+      "purpose": "Preserve finalchoice§1 and§§8–10 of the previousseparatequestion;source b793 fullintakeaccepted. No re-decision ofT,newregistrations orfirstgrants. Othernewdesignsectionsneednotbere-read forK/E/L/U.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/ORACLE_RECOMMENDATIONS_20260911.md",
+      "commit_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "purpose": "Current27direction synthesis and alloriginalscientific/headroom/recast/UAV boundaries, includinglatestACVC/FOLR/RCLE/FSD facts. Futurefourrecommendationsareunallocated.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Published current registry/priority only; source may precede finalcontrol-row updates. Exact accepteddiscovery/T and refreshedcurrentDM FACTS supersede olderactivity summaries, neverinferstops fromallocationend.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/RESEARCH_MAP.md",
+      "commit_sha": "2f1ec644d3938919c881f5c876fc4c863b07bff5",
+      "purpose": "27directionnavigation/newprogramme separation plushistorical22;currentDIRECTION/intakes govern scientificpositions.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "AGENTS.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Adopt current §§1–6, especially tiers/finality4.8,OWNER_DIRECT2026-09-12§5continuity and sharedworktree rules;completedgrantscannotmakeRootstopACTIVE directions.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Adopt §§7–8.1 and11.4,11.7–11.10: lowest sufficientclass,fullcost/MEI/headroom,appropriatecomplexity,noextraproof/costpilot/causalreconstruction/seedquota. Section11 controls.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Adopt applicable §§4–5 and7.1/7.3: minimalownedL0,realprotectedsemantics,proportionatechecks andindependenthighriskreview insideactualselectedscope;noframework.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Adopt §§1–3: complete logical nativeinvocation,support,elapsed/summedwall/CPU distinction;engineeringthresholdsarenotbudgetornewscienceauthorization.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Current Root/DM/Transport/Monitor responsibilities andpublishedintegration/launch acceptance;actualtaskidsfromprimarycontrol,notoldfrozenoperators.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Read §§2–6 for ownhistory/legalactorinformation,representationvsfinitelearning,temporal/creditpackages andindependenttrainingunits. Explanatoryknowledge,notpermissionorproof-first.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Read actor/criticinformation,parameter-sharing/coadaptation andcredit distinctions supportingcompetentnulls andboundedwhole-packageclaims.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Read heldoptionversusprimitiveaction,renewal/exposure/semimarkovclock distinctions relevanttoFSDuseandRCLEownership,notanewdiagnosticobligation.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "2492dcb06da495aed2cd4436342e81dec9507975",
+      "purpose": "Read actualindependenttrainingunit,conditionalendpointuncertainty,selection andpackage-versus-component limits. Existingfivepairsdo not implyfixedquota,stabilityorautomaticrepeat.",
+      "provenance": "Exact published Git input. Read named current sections, not recursive historical dependencies. Current source/owner state controls stale activity prose; accepted science is not new empirical funding. Author DM reports are explicit and no local outcome reanalysis is claimed."
+    }
+  ]
+}

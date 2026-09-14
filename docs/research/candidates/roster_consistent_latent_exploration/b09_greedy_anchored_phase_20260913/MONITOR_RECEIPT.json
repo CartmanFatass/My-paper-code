@@ -1,0 +1,16 @@
+{
+  "monitor": "/root/dm_rcle_resume/mon_l_l_rcle",
+  "source": "direct native child final; no independently claimed on-disk monitor receipt",
+  "handle": "rcle-b09-s29-38a29c7e3",
+  "adoption": "MONITOR_ADOPTED; first alive128/256 and admission passed",
+  "terminal_event": "rcle-b09-s29-38a29c7e3-terminal-20260913T212242Z",
+  "terminal_utc": "2026-09-13T21:22:42Z",
+  "terminal_status": "COMPLETE / exit0",
+  "native_wall_s": 47.13,
+  "peak_rss_kib": 617396,
+  "active_set": [],
+  "invoked_read_wall_s_approximate": 3.1,
+  "charged_bound_s": 3.2,
+  "bounded_wait_s_excluded_from_invoked_read_account": 20,
+  "provider_agent_lifetime": "UNKNOWN"
+}

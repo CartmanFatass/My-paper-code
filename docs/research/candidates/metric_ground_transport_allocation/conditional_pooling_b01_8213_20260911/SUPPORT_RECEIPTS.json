@@ -1,0 +1,115 @@
+{
+  "window": "new Portfolio-selected master8213 only",
+  "entries": [
+    {
+      "phase": "current_assignment_and_state_read",
+      "seconds": 1.2091758,
+      "exit_code": 0
+    },
+    {
+      "phase": "allocation_and_current_tools",
+      "seconds": 0.4507314,
+      "exit_code": 0
+    },
+    {
+      "phase": "current_bound_inputs_0",
+      "seconds": 0.6348428,
+      "exit_code": 0
+    },
+    {
+      "phase": "current_bound_inputs_1",
+      "seconds": 0.3502663,
+      "exit_code": 0
+    },
+    {
+      "phase": "immutable_allocation_and_owned_source",
+      "seconds": 0.3689672,
+      "exit_code": 1
+    },
+    {
+      "phase": "applicable_routes_and_caps_0",
+      "seconds": 0.3356749,
+      "exit_code": 0
+    },
+    {
+      "phase": "applicable_routes_and_caps_1",
+      "seconds": 1.4464327,
+      "exit_code": 0
+    },
+    {
+      "phase": "fresh_identity_and_exact_allocation",
+      "seconds": 0.5403979,
+      "exit_code": 0
+    },
+    {
+      "phase": "reconcile_checkout_or_fresh_handle_0",
+      "seconds": 4.9819037999999995,
+      "exit_code": 0
+    },
+    {
+      "phase": "reconcile_checkout_or_fresh_handle_1",
+      "seconds": 0.7326321,
+      "exit_code": 0
+    },
+    {
+      "phase": "binding_check_scope",
+      "seconds": 0.5210223,
+      "exit_code": 0
+    },
+    {
+      "phase": "minimal_identity_patch",
+      "seconds": null,
+      "exit_code": null
+    },
+    {
+      "phase": "fresh_card_and_command",
+      "seconds": 0.019,
+      "exit_code": null
+    },
+    {
+      "phase": "one_changed_binding_stub_and_static_facts",
+      "seconds": 0.8082398,
+      "exit_code": 0
+    },
+    {
+      "phase": "fresh_selection_audit",
+      "seconds": 0.017,
+      "exit_code": null
+    },
+    {
+      "phase": "owner_card_visibility",
+      "seconds": 0.5162502,
+      "exit_code": 0
+    },
+    {
+      "phase": "owner_ledger_link_correction_route",
+      "seconds": 0.3462206,
+      "exit_code": 0
+    },
+    {
+      "phase": "independent_review_command1",
+      "seconds": 0.3820111,
+      "exit_code": null
+    },
+    {
+      "phase": "independent_review_command2",
+      "seconds": 0.3299369,
+      "exit_code": null
+    },
+    {
+      "phase": "independent_review_command3",
+      "seconds": 0.2447248,
+      "exit_code": null
+    },
+    {
+      "phase": "owner_trace_arguments",
+      "seconds": 0.4078315,
+      "exit_code": 0
+    }
+  ],
+  "known_support_seconds": 14.643262100000001,
+  "unknown_entries": [
+    "minimal_identity_patch"
+  ],
+  "note": "Snapshot before source publication; later command/review/Monitor/collection/publication/cleanup charged separately. No native invocation yet."
+}

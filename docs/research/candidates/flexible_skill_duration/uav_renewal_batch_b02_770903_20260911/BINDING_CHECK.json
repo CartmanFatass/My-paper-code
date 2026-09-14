@@ -1,0 +1,82 @@
+{
+  "status": "pass",
+  "checked_utc": "2026-09-11T21:14:39.749370+00:00",
+  "inner_wall_seconds": 0.12060699998983182,
+  "tests": [
+    "D0/I config forwarding",
+    "fresh object/card/seed pair publication forwarding",
+    "main forwarding with exact caps",
+    "protected shared scientific paths equal accepted c70 and delivery helper unchanged",
+    "exact fresh shell/admission/companion/cap binding"
+  ],
+  "forwarded_calls": [
+    [
+      "make_config",
+      [
+        "D0",
+        [
+          "fake env"
+        ],
+        770903
+      ],
+      {
+        "renewal_batch": true
+      }
+    ],
+    [
+      "make_config",
+      [
+        "I",
+        [
+          "fake env"
+        ],
+        770903
+      ],
+      {
+        "renewal_batch": true
+      }
+    ],
+    [
+      "assemble_pair",
+      [
+        "treatment",
+        "control"
+      ],
+      {
+        "training_seed": 770903,
+        "evaluation_seed": 780903,
+        "object_id": "FSD_UAV_RENEWAL_BATCH_B02_770903",
+        "card": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+        "renewal_batch": true
+      }
+    ],
+    [
+      "main",
+      [
+        [
+          "--arm",
+          "I",
+          "--d0-summary",
+          "fresh/D0/summary.json"
+        ]
+      ],
+      {
+        "training_seed": 770903,
+        "evaluation_seed": 780903,
+        "object_id": "FSD_UAV_RENEWAL_BATCH_B02_770903",
+        "card": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+        "renewal_batch": true,
+        "caps": {
+          "D0": 900.0,
+          "I": 1800.0
+        }
+      }
+    ]
+  ],
+  "entry_lines": 29,
+  "real_model_environment_RNG_constructions": 0,
+  "numerical_imports": 0,
+  "scientific_submissions": 0,
+  "scratch_created": false,
+  "limitations": "In-memory stub checks the changed forwarding contract. Reuses unchanged numerical/pair checks; actual remote source readback and empirical terminal measurements remain pending."
+}

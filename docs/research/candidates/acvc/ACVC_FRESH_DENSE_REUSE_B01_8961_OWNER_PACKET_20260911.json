@@ -1,0 +1,42 @@
+{
+  "question": "记录新分配的一次未筛选DENSE训练8961及固定C/F/dwell比较；所有者可异步覆盖尚未执行的选择。",
+  "changes_if_approved": [
+    {
+      "target": "ACVC卡第16节",
+      "from": "8951准备失败已结束，输入传输修复单独验收",
+      "to": "新8961训练、8962评价；原生270秒、全部支持330秒、总600秒"
+    }
+  ],
+  "if_refused": "按明确异步覆盖处理尚未执行部分，保留证据；不自动替换重跑。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+      "quote": "C always applies the sampled proposal",
+      "why": "Portfolio明确选择原卡比较，并纠正了摘要中的缓存/同时间用词。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8951_INTAKE_20260911.md",
+      "quote": "A single focused static/stub/readback batch",
+      "why": "已修复LF/二进制输入，历史失败不构成科学负向。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md",
+      "quote": "The strongest contrary evidence is **11/64 F−dwell losses**",
+      "why": "两次正向均值伴随反例、停留收益和较小第二次差距；不能推断稳定优势。"
+    }
+  ],
+  "uncertainty": [
+    "新训练可能弱或反向，仍评价全部三组。",
+    "只配对初始世界；各组历史和机会不同，没有纯回撤或同剂量因果结论。"
+  ],
+  "cost": {
+    "compute": "一次704回合、180224团队步、1024 Adam；原生270秒、全部支持330秒、总600秒。",
+    "owner_time": "无需等待回复",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md"
+}

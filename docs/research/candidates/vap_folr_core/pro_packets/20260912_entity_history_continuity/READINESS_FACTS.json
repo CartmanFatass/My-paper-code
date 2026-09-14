@@ -1,0 +1,509 @@
+{
+  "kind": "source_inspection_and_configuration_arithmetic_only",
+  "recorded_at_utc": "2026-09-12T22:25:33.422541+00:00",
+  "author": "/root/dm_folr_post_b03",
+  "checkout": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr",
+  "branch": "codex/vap-folr",
+  "authoring_base": "78f0869d318ee79774b717bad1cbe2fbc52222d8",
+  "accepted_main_input_commits": [
+    "2e2549d3c6ea3613d33f856342db9524c4057a10",
+    "4049f41caccc0f776280b4072b53ba68ec2066c8"
+  ],
+  "accepted_science_surface_equal_at_base": [
+    "docs/research/candidates/vap_folr_core/DIRECTION.md",
+    "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/INTAKE.md"
+  ],
+  "source_commit": "4049f41caccc0f776280b4072b53ba68ec2066c8",
+  "sources": [
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+      "git_bytes": 2588,
+      "git_sha256": "29dc8e1a18426a42f3cf01f0eba03f6bfa44eeeefddeec684d6458c7139b774c",
+      "ast_entry_points": [
+        {
+          "name": "LifecycleEnv",
+          "line": 7
+        },
+        {
+          "name": "LifecycleEnv.reset",
+          "line": 8
+        },
+        {
+          "name": "LifecycleEnv._remove_car",
+          "line": 16
+        },
+        {
+          "name": "LifecycleEnv._add_car",
+          "line": 22
+        },
+        {
+          "name": "LifecycleEnv.step",
+          "line": 27
+        },
+        {
+          "name": "LifecycleEnv.observation",
+          "line": 37
+        },
+        {
+          "name": "count_transition",
+          "line": 52
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py",
+      "git_bytes": 13583,
+      "git_sha256": "dc342eefc74af9be788b006dfc70ef471088380543a3d005af19b0309d57fc86",
+      "ast_entry_points": [
+        {
+          "name": "Entity_Traffic_Junction_Env",
+          "line": 8
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.__init__",
+          "line": 9
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.reset",
+          "line": 55
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.step",
+          "line": 80
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.get_reward",
+          "line": 104
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env._remove_car",
+          "line": 136
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env._force_add_car",
+          "line": 143
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.exist_car_num",
+          "line": 156
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env._add_car",
+          "line": 159
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.get_entities",
+          "line": 188
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.get_entity_shape",
+          "line": 194
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.get_private_entity_shape",
+          "line": 196
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.get_masks",
+          "line": 199
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.close",
+          "line": 208
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.get_avail_actions",
+          "line": 211
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env._make_grid_world",
+          "line": 216
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env._get_corresponding_entrances",
+          "line": 250
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.get_env_info",
+          "line": 258
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env._choose_dead",
+          "line": 269
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.curriculum",
+          "line": 275
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.seed",
+          "line": 283
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.render",
+          "line": 289
+        },
+        {
+          "name": "Entity_Traffic_Junction_Env.get_center",
+          "line": 321
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "git_bytes": 3025,
+      "git_sha256": "3936fd69b99d1b65c7644821848e419a9e3118120efbcc57667fba5ef5db3dc1",
+      "ast_entry_points": [
+        {
+          "name": "Actor",
+          "line": 16
+        },
+        {
+          "name": "Actor.__init__",
+          "line": 17
+        },
+        {
+          "name": "Actor.forward",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+      "git_bytes": 1791,
+      "git_sha256": "775e598921ee7b09721b205624c7e7ac30e1ace177bdcb720b9120c5f4443fa3",
+      "ast_entry_points": [
+        {
+          "name": "EntityAttentionLayer",
+          "line": 12
+        },
+        {
+          "name": "EntityAttentionLayer.__init__",
+          "line": 13
+        },
+        {
+          "name": "EntityAttentionLayer.forward",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+      "git_bytes": 4333,
+      "git_sha256": "0b95da626bab87c1cab7d38886b53291fd1a5167b66bfabf9e0dc33d5e81ed03",
+      "ast_entry_points": [
+        {
+          "name": "epsilon_at",
+          "line": 7
+        },
+        {
+          "name": "select_action",
+          "line": 11
+        },
+        {
+          "name": "collect",
+          "line": 20
+        },
+        {
+          "name": "sample",
+          "line": 56
+        },
+        {
+          "name": "primary",
+          "line": 62
+        },
+        {
+          "name": "timing_primary",
+          "line": 68
+        },
+        {
+          "name": "half_primary",
+          "line": 83
+        },
+        {
+          "name": "learned_primary",
+          "line": 90
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+      "git_bytes": 2927,
+      "git_sha256": "01770613528bc8e1f3b86c4cafa934dda98c9639490733a123b101c48723e54a",
+      "ast_entry_points": [
+        {
+          "name": "Learner",
+          "line": 16
+        },
+        {
+          "name": "Learner.__init__",
+          "line": 17
+        },
+        {
+          "name": "Learner.update",
+          "line": 27
+        },
+        {
+          "name": "Learner.save",
+          "line": 57
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py",
+      "git_bytes": 2358,
+      "git_sha256": "ae141219443ad169c5b7f58608e6785eadbd60a8de63c2d9366716ddd19fed9a",
+      "ast_entry_points": [
+        {
+          "name": "AttentionHyperNet",
+          "line": 13
+        },
+        {
+          "name": "AttentionHyperNet.__init__",
+          "line": 14
+        },
+        {
+          "name": "AttentionHyperNet.forward",
+          "line": 21
+        },
+        {
+          "name": "FlexQMixer",
+          "line": 37
+        },
+        {
+          "name": "FlexQMixer.__init__",
+          "line": 38
+        },
+        {
+          "name": "FlexQMixer.forward",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "path": "scripts/run_folr_public_lifecycle_b01.py",
+      "git_bytes": 5869,
+      "git_sha256": "30d021557e10c25638cdc313274cae4e13cdacd75832c58ebafa87b4dad8026c",
+      "ast_entry_points": [
+        {
+          "name": "publish",
+          "line": 14
+        },
+        {
+          "name": "main",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "path": "scripts/hmasd_resource_preflight.py",
+      "git_bytes": 21314,
+      "git_sha256": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc",
+      "ast_entry_points": [
+        {
+          "name": "_utc_now",
+          "line": 42
+        },
+        {
+          "name": "_atomic_write_json",
+          "line": 50
+        },
+        {
+          "name": "_parse_memory_bytes",
+          "line": 80
+        },
+        {
+          "name": "_read_cpu",
+          "line": 129
+        },
+        {
+          "name": "_read_meminfo",
+          "line": 164
+        },
+        {
+          "name": "_read_cgroup_value",
+          "line": 204
+        },
+        {
+          "name": "capture_snapshot",
+          "line": 218
+        },
+        {
+          "name": "assess_memory_floor",
+          "line": 250
+        },
+        {
+          "name": "_memory_field",
+          "line": 352
+        },
+        {
+          "name": "_as_positive_number",
+          "line": 359
+        },
+        {
+          "name": "_as_positive_int",
+          "line": 371
+        },
+        {
+          "name": "assess_snapshot",
+          "line": 383
+        },
+        {
+          "name": "_parser",
+          "line": 508
+        },
+        {
+          "name": "main",
+          "line": 530
+        }
+      ]
+    },
+    {
+      "path": "tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py",
+      "git_bytes": 24977,
+      "git_sha256": "faf58e6103cbf234a711e6870481b9145b1705a0ebc3a6578efa2ad85bff4d29",
+      "ast_entry_points": [
+        {
+          "name": "one_thread",
+          "line": 18
+        },
+        {
+          "name": "fixture_env",
+          "line": 22
+        },
+        {
+          "name": "assert_rng_same",
+          "line": 34
+        },
+        {
+          "name": "test_native_reward_side_effects_rng_and_same_step_refill",
+          "line": 41
+        },
+        {
+          "name": "test_initial_birth_previous_action_and_terminal_counts",
+          "line": 74
+        },
+        {
+          "name": "test_random_collection_schedule_replay_and_rng_isolation",
+          "line": 105
+        },
+        {
+          "name": "test_timing_branches",
+          "line": 170
+        },
+        {
+          "name": "synthetic_batch",
+          "line": 178
+        },
+        {
+          "name": "test_actor_input_reset_timing_and_replay_parity",
+          "line": 206
+        },
+        {
+          "name": "test_half_event_incoming_state_and_gradient_before_gru",
+          "line": 241
+        },
+        {
+          "name": "test_real_learner_synthetic_gradient_targets_checkpoint",
+          "line": 268
+        },
+        {
+          "name": "test_primary_rules_replay_rng_and_publication",
+          "line": 291
+        },
+        {
+          "name": "test_runner_seed_routing_with_standins",
+          "line": 313
+        },
+        {
+          "name": "test_half_primary_inclusive_thresholds",
+          "line": 388
+        },
+        {
+          "name": "test_learned_constructor_common_rng_tensors_and_no_event_parity",
+          "line": 395
+        },
+        {
+          "name": "test_learned_lifetime_gate_input_state_gradient_and_before_gru",
+          "line": 416
+        },
+        {
+          "name": "test_learned_optimizer_independent_target_replay_copy_and_checkpoint",
+          "line": 453
+        },
+        {
+          "name": "test_learned_primary_inclusive_thresholds",
+          "line": 496
+        }
+      ]
+    }
+  ],
+  "proposal_sizing_not_a_grant": {
+    "arms": [
+      "GENERIC_RETAIN_GRU64",
+      "BANK_GRU16_OBSERVER_SUBJECT"
+    ],
+    "matched_training_pairs": 1,
+    "training_episodes_per_arm": 5000,
+    "final_episodes_per_arm": 128,
+    "ticks_per_episode": 20,
+    "controller_positions_per_episode_including_terminal": 21,
+    "replay_batch_episodes": 32,
+    "online_and_target_unroll_passes": 2,
+    "slots_and_observers": 5,
+    "optimizer_updates_per_arm": 4969,
+    "optimizer_updates_pair": 9938,
+    "train_ticks_per_arm": 100000,
+    "final_ticks_per_arm": 2560,
+    "native_ticks_pair": 205120,
+    "generic_replay_recurrent_positions": 33391680,
+    "bank_replay_recurrent_positions_dense_upper": 166958400,
+    "generic_acting_recurrent_positions": 538440,
+    "bank_acting_recurrent_positions_dense_upper": 2692200,
+    "pair_recurrent_positions_dense_upper": 203580720,
+    "generic_current_state_payload_bytes": 1280,
+    "bank_current_state_payload_bytes": 1600,
+    "generic_batch_hidden_history_payload_bytes": 860160,
+    "bank_batch_hidden_history_payload_bytes": 1075200,
+    "payload_limit": "Logical FP32 tensor payload only; not process peak or resource prediction; excludes autograd/gates/projections/critic/optimizer/targets/replay/Python objects."
+  },
+  "complete_cost_law_per_arm": "W = admission/initialization + 5000*C_collect_train + 4969*C_update(batch=32,time=21,online+target,backward+mixer+optimizer) + checkpoint + 128*C_collect_final + publication/exit",
+  "cost_and_budget": {
+    "new_generic_complete_invocation_wall": "UNKNOWN",
+    "bank_complete_invocation_wall": "UNKNOWN",
+    "peak_process_memory_each_arm": "UNKNOWN",
+    "implementation_review_checks_staging_collection_cleanup_cost": "UNKNOWN",
+    "complete_native_support_agent_cost": "UNKNOWN",
+    "new_per_arm_native_support_complete_caps": "UNALLOCATED",
+    "hardware_or_timing_probe_executed": false,
+    "old_cap_transfer": false
+  },
+  "configured_route_not_fresh_admission": {
+    "primary_checkout": "C:\\Projects\\HMASD",
+    "control_commit": "aec3a5794d036a6cf6166eb308eceb3b89cf1d95",
+    "config_path": ".codex/hmasd-compute.toml",
+    "config_git_sha256": "f2b6953ea409ab53532549d4e84bc2b74affa3f1ec3c70890ec3208c762deb3e",
+    "node": "wsl_4070",
+    "ssh_target": "hmasd-wsl-node",
+    "repo_root": "/home/wu/projects/HMASD",
+    "worktree_root": "/home/wu/hmasd-worktrees",
+    "python": "/home/wu/.venvs/hmasd/bin/python",
+    "supervisor": "/usr/local/bin/agent-task",
+    "selected_device_dtype_threads": "CPU FP32; Torch compute/inter-op 1/1",
+    "memory_floor_gib_physical_and_effective": 4,
+    "fresh_admission_result": null,
+    "remote_command_executed": false
+  },
+  "actual_work": {
+    "implementation_changes": 0,
+    "model_constructions": 0,
+    "scientific_rng_roots": 0,
+    "training_fits": 0,
+    "test_invocations": 0,
+    "consultations_or_sends": 0,
+    "owner_reviews_at_boundary": [],
+    "family": "OPEN",
+    "direction": "ACTIVE",
+    "old_scalar_H_and_B01_B04_evidence": "PRESERVED"
+  }
+}

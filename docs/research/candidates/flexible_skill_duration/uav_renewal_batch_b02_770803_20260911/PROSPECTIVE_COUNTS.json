@@ -1,0 +1,34 @@
+{
+  "object_id": "FSD_UAV_RENEWAL_BATCH_B02",
+  "training_base": 770803,
+  "evaluation_base": 780803,
+  "independent_training_pairs": 1,
+  "fits": 2,
+  "model_constructions": 4,
+  "training_team_steps": 80000,
+  "training_episodes": 160,
+  "update_stages": 10,
+  "final_evaluation_team_steps": 32000,
+  "final_evaluation_episodes": 64,
+  "total_native_team_steps": 112000,
+  "total_agent_observations": 672000,
+  "batched_controller_calls": 6000,
+  "coordinator_law_I1280": "15 * sum(ceil(M_r / 1280)), r=1..5, each M_r<=8000",
+  "coordinator_D0_chunks": 525,
+  "coordinator_I1280_upper_chunks": 525,
+  "old_same_package_complete_wall_analogue_seconds": {
+    "D0": 519.94,
+    "I1280": 1020.68
+  },
+  "new_time_coefficients": null,
+  "complete_caps_seconds": {
+    "D0": 900,
+    "I1280": 1800,
+    "native_sum": 2700,
+    "support": 300,
+    "complete": 3000
+  },
+  "extra_numeric_validation": 0,
+  "checkpoint_loads": 0,
+  "retained_work": "Every valid joint row across 15 epochs, six-agent ordered decoding, recurrent/gap checks, segment credit, actor/critic/discriminator updates and full native endpoint."
+}

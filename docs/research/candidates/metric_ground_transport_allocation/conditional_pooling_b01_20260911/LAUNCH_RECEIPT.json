@@ -1,0 +1,33 @@
+{
+  "recorded_utc": "2026-09-11T16:47:23.046Z",
+  "handle": "mgtap-cond-b01-8212-20260911",
+  "source_sha": "2814fbd3e24877464e4dd7c12df55c24567e8723",
+  "binding_sha": "3e440c99ab51d755ab435117c79fadba7797ddfe",
+  "root_integration_sha": "a22b3606a",
+  "node": "hmasd-wsl-node",
+  "cwd": "/home/wu/hmasd-worktrees/mgtap-cond-b01-8212-20260911",
+  "run_root": "temp/directions/metric_ground_transport_allocation/exp/conditional_pooling_b01_20260911_8212",
+  "launch_accepted": true,
+  "launch_response": {
+    "chunk_id": "868cf2",
+    "wall_time_seconds": 0.7920257,
+    "exit_code": 0,
+    "original_token_count": 53,
+    "output": "Task 'mgtap-cond-b01-8212-20260911' started in tmux session 'agent_mgtap-cond-b01-8212-20260911'. Output: /home/wu/.agent-tasks/mgtap-cond-b01-8212-20260911/task.log\nCOMPLETE_SUPPORT_COMMAND_SECONDS=0.5918407\r\n"
+  },
+  "monitor_dispatch": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a087e5-2044-7301-abb6-7a1709a98197\"}"
+      }
+    ],
+    "isError": false
+  },
+  "monitor_adopted": true,
+  "adoption_source": "Root routed MONITOR_ADOPTED: supervisor healthy/running; admission passed with15.63GB available; exact source/cwd/output match. Adoption observation-command wall unknown.",
+  "monitor_thread": "01a087e5-2044-7301-abb6-7a1709a98197",
+  "collector": "/root/dm_mgtap_cond_implementation",
+  "status": "RUNNING_COLLECTION_PENDING",
+  "scientific_reading": "No native endpoint observed yet."
+}

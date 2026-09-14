@@ -1,0 +1,97 @@
+{
+  "scope": "One post-B03 original-node question and complete intake; no fresh numerical analysis or implementation. Values below transcribe accepted records; no pooling/recomputation.",
+  "new_author_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "policy_search_candidates": 0,
+    "profiling": 0,
+    "source_implementation_edits": 0,
+    "source_or_numerical_tests": 0,
+    "new_raw_result_analysis": 0,
+    "provider_sends": 0,
+    "transport_dispatches": 0
+  },
+  "machine_generated_exposure_line": "NEW AUTHOR EXPOSURE: scientific_invocations=0, models=0, checkpoint_loads=0, environments=0, scientific_rng_masters=0, training_episodes=0, native_ticks=0, optimizer_steps=0, evaluation_episodes=0, diagnostic_trajectories=0, policy_search_candidates=0, profiling=0, source_implementation_edits=0, source_or_numerical_tests=0, new_raw_result_analysis=0, provider_sends=0, transport_dispatches=0.",
+  "accepted_observations": [
+    {
+      "object": "B01",
+      "training_seed": 7809,
+      "final_seed": 107809,
+      "RETAIN_mean": -0.160078125,
+      "LEARNED_EVENT_mean": 1.60328125,
+      "d_LR": 1.763359375,
+      "branch": "LEARNED_EVENT_ABOVE_MEI",
+      "native_wall_s": 1703.12,
+      "evidence": "FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md",
+      "evidence_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e"
+    },
+    {
+      "object": "B02",
+      "training_seed": 7810,
+      "final_seed": 107810,
+      "RETAIN_mean": 6.290546875,
+      "LEARNED_EVENT_mean": 4.521015625,
+      "d_LR": -1.76953125,
+      "branch": "RETAIN_ABOVE_MEI",
+      "native_wall_s": 1815.99,
+      "evidence": "FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md",
+      "evidence_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e"
+    },
+    {
+      "object": "B03",
+      "training_seed": 7811,
+      "final_seed": 107811,
+      "RETAIN_mean": 0.947578125,
+      "LEARNED_EVENT_mean": -0.26796875,
+      "d_LR": -1.215546875,
+      "branch": "RETAIN_ABOVE_MEI",
+      "native_wall_s": 1750.81,
+      "support_known_lower_bound_s": 342.0027033,
+      "support_300_status": "owner reference, not hard stop",
+      "complete_cap_status": "unverified; no observed complete-cap breach",
+      "evidence": "FOLR_LEARNED_RETENTION_B03_INTAKE_20260911.md#final-technical-and-scientific-intake--2026-09-12",
+      "evidence_sha": "d4ff89f66263c44911ba6ffc5dbdda6b02a3014e"
+    }
+  ],
+  "copied_unchanged_pair_counts": {
+    "source": "FOLR_LEARNED_RETENTION_B03_SCIENCE_CARD_20260911.md",
+    "source_sha": "d4ff89f66263c44911ba6ffc5dbdda6b02a3014e",
+    "real_fits": 2,
+    "independent_training_pairs": 1,
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_updates": 9938,
+    "final_episodes": 256,
+    "final_ticks": 5120,
+    "total_native_ticks": 205120,
+    "replay_GRU_rows": 66783360,
+    "acting_rows": 1076880,
+    "learned_gate_forward_rows": 33930120,
+    "future_execution_authorized": false
+  },
+  "cost": {
+    "current_P_complete_documentary_invoked_provider_agent": "explicitly accepted unknown",
+    "future_unchanged_pair_wall_support_caps": "unknown and unallocated",
+    "old_spend": "historical once; no transfer, reset or measured value-per-cost claim"
+  },
+  "reading": {
+    "concrete_assumption": "Equal legal information and the accepted lifetime/learning path support finite package comparisons; ordinary GRU adaptivity does not imply identical finite learning.",
+    "limit": "No stable population or component-causal reading, pooled primary, sign vote or episode-as-fit inference.",
+    "foundations": "sections 2-4,6; 04_EMPIRICAL",
+    "historical_literature_reuse": "Original learned FACTS at cb5d883bcaf614a1b0817b322f72462c954853e1, literature_retrieval: CAMA MARL-0409 pages2-3,16-17 for recurrent-null/reward-scale grounding only; no fresh corpus claim."
+  },
+  "recommendation": {
+    "option": "H",
+    "state": "unexecuted author advice",
+    "owner_flag": "close-call",
+    "alternative": "U: exactly one unallocated unchanged candidate if Pro identifies the live optional-use decision it changes."
+  }
+}

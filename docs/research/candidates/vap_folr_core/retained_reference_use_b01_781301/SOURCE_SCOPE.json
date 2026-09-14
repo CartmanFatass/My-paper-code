@@ -1,0 +1,8 @@
+{
+  "baseline": "8768f0f83ad9a62922f76888b88e77cb54219eac",
+  "accepted_source": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+  "numstat": "12\t0\tdocs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/BANK.sh\n12\t0\tdocs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC.sh\n49\t0\texperiments/candidates/vap_folr_core/entity_history_b01/retained_use.py\n67\t26\tscripts/run_folr_entity_history_b01.py\n",
+  "runner_lines": 174,
+  "section4_additions": "none; fixed input byte verification remains author staging work, not a new runtime predicate",
+  "orchestration": "Loader/mode/identity/publication changes dominate this small reuse; independent Reviewer found them necessary for the selected use. No ratio gate or added compute to inflate denominator."
+}

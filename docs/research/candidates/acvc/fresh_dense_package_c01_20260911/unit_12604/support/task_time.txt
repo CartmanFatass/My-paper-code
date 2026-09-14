@@ -1,0 +1,3 @@
+whole_command_wall_s=166.65
+peak_rss_kib=548880
+exit_code=0

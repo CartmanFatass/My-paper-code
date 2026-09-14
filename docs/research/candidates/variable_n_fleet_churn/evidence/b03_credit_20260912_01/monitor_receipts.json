@@ -1,0 +1,38 @@
+{
+  "source": "Root-routed actual Monitor receipts and one Root-requested same-handle reconciliation",
+  "monitor_thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+  "root_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "dispatch": "MONITOR_ADD app tool accepted",
+  "actual_goal": "Monitor get_goal found none and created an unbudgeted unfinished goal retaining this exact handle; Root subsequently confirmed active retention.",
+  "adoption": "confirmed with temporary observation loss, then direct running observation restored",
+  "accepted_handle": "vnfc-b03-credit-20260912-01",
+  "tmux_session": "agent_vnfc-b03-credit-20260912-01",
+  "reconciliation": {
+    "root_reported_initial_status": "not_found twice; not terminal and no relaunch",
+    "root_restored_direct_status": {
+      "status": "running",
+      "pid": 3374208,
+      "uptime_seconds": 79,
+      "tmux_active": true
+    },
+    "dm_one_requested_reconciliation": {
+      "status": "running",
+      "pid": 3374208,
+      "uptime_seconds": 105,
+      "tmux_active": true,
+      "command_seconds": 0.4851533
+    },
+    "cause": "not established from routed receipts; no scientific-state substitution"
+  },
+  "terminal": {
+    "status": "failed",
+    "exit_code": 139,
+    "pid": 3374208,
+    "tmux_active": false,
+    "supervisor_terminal_time": "2026-09-12T21:54:54+08:00",
+    "duration_seconds_supervisor": 105
+  },
+  "scientific_submissions": 1,
+  "retries": 0,
+  "independent_monitor_goal_completion": "not inferred; Root receives its empty-goal completion separately"
+}

@@ -1,0 +1,33 @@
+{
+  "source_sha": "ac64769f6403e4495a00673e2230d100edb7a02b",
+  "remote_worktree": "/home/wu/hmasd-worktrees/acvc-training-use-b02-ac64769f6",
+  "remote_bundle": "/home/wu/hmasd-inputs/acvc-training-use-b02-ac64769f6.bundle",
+  "started_utc": "2026-09-12T19:34:11.102573+00:00",
+  "phases": [
+    {
+      "label": "source bundle",
+      "wall_s": 4.600629199994728,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "source transfer",
+      "wall_s": 9.277982999978121,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "offline exact checkout and wrapper syntax",
+      "wall_s": 4.791031199973077,
+      "exit_code": 0,
+      "stdout": "The bundle contains this ref:\nac64769f6403e4495a00673e2230d100edb7a02b HEAD\nThe bundle records a complete history.\nThe bundle uses this hash algorithm: sha1\nac64769f6403e4495a00673e2230d100edb7a02b\n",
+      "stderr": "/home/wu/hmasd-inputs/acvc-training-use-b02-ac64769f6.bundle is okay\nFrom /home/wu/hmasd-inputs/acvc-training-use-b02-ac64769f6.bundle\n * branch                HEAD       -> FETCH_HEAD\nPreparing worktree (detached HEAD ac64769f64)\nHEAD is now at ac64769f64 Bind one newly allocated ACVC common-F recurrence pair\n"
+    }
+  ],
+  "source_bundle_bytes": 119740673,
+  "complete": true,
+  "whole_helper_wall_s": 18.671926800045185,
+  "completed_utc": "2026-09-12T19:34:29.806484+00:00"
+}

@@ -1,0 +1,271 @@
+{
+  "caller_role": "portfolio",
+  "workflow_node": "portfolio_decision",
+  "source_thread_id": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "direction_ids": [
+    "active_post_churn_population_flow_identification",
+    "acvc",
+    "capability_bound_semantic_currentness",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "ec4g_r1",
+    "eociv_lite",
+    "expressibility_gated_renewal_credit_relay",
+    "finite_resource_relational_inductive_efficiency",
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation",
+    "orbit_shadow_read",
+    "recct_lite",
+    "roster_consistent_latent_exploration",
+    "scope_1s",
+    "semigroup_consistent_duration_model_policy",
+    "ucope",
+    "vap_folr_core",
+    "variable_n_fleet_churn",
+    "vsp_02",
+    "vsp_03",
+    "vsp_c1"
+  ],
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "decision_authority": "pro_final",
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/17"
+  ],
+  "delivery_mode": "github_delivery",
+  "request_id": "2026-09-12-post-cfr-marginal-investment-01",
+  "commit_or_ref": "ce257019becf2d0e7aa373b378b6442a0323ecf9",
+  "scientific_question": "With FSD D and FOLR P independently funded and advancing and CBSC C/ACVC F/RCLE R now complete and ended, choose at most THREE new marginal direction units among A (one unchanged ACVC train-F versus train-C B pair, both deployF), M (explicitly newly reconsidered one unchanged MGTAP COND/intact-DENSE B pair), Q (one original CBSC Convergence question/full intake with zero numerical or implementation grant), or H (no additions). Author recommends A+M as a close call; Q as a third/replacement unit, smaller subsets and H are substantive counteroptions. Give yes/no for each and the actual practical choice its observation/decision could change. Current2/5 is scheduling context, not three automatic grants. M has no new empirical result and its two previous no decisions remain; the changed opportunity set means it no longer displaces funded D/P. Neither existing direction waits for or changes scope because of this question.",
+  "deliverable": "A conclusion-first complete Portfolio decision choosing any subset of A/M/Q up to three or H, with decisive reasons, strongest opposing option, uncertainty, practical revisit condition and bounded consequences. Explicitly accept/refuse selected NEW complete future work: A270perarm/native540/support300/total840 seconds (new offer after implementation, not oldF660/1200); M450perarm/native900/support300/total1200; Q exactly one original CBSC question and complete intake at explicitly unknown complete documentary/invoked/provider/agent cost, zero implementation/numerical allowance. Map selected units to the existing DM or Root explicit reassignment, designated branch/worktree, independent first action and finite stop. Preserve activeD/P, all completeC/F/R boundaries, twoM=no, historical cost unknowns and all22 lifecycle/priority/recasts/headroom/UAV facts. No new owner ratification or generic preparation gate. Write only the scoped response and immutable Issue17 delivery comment; perform actual-state readback and full downloadable response fallback if required.",
+  "claim_ceiling": "Prospective Portfolio investment only. A/M each buys one complete new independent training pair of an accepted package, not stable population superiority/degradation, causal isolation, C promotion or formal UAV entry. Q buys one direction decision/intake, no empirical observation or future candidate funding. All positive/adverse/incomplete evidence, native-vs-proxy distinctions, MEIs and conditional uncertainty ceilings remain. New caps are offers, not forecasts/refunds/balances; full historic and deliberation costs retain unknowns.",
+  "github_delivery": {
+    "branch": "codex/portfolio",
+    "base_sha": "ce257019becf2d0e7aa373b378b6442a0323ecf9",
+    "response_path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/17"
+  },
+  "constraints": [
+    "Read this current SCIENCE_BRIEF and FACTS first. Reuse post-CF READINESS_BOUNDARY for A/Q details; its in-flight status and1/5 are historical. Current RCLE complete intake supersedes its missing-reference status, without erasing the failed attempt. Previous D/P response is complete/intaken/applied and unchanged; this is a new marginal question, not recovery or resend.",
+    "Apply current evidence sections7-8.1 and11.4,11.7-11.10 to the question. Appropriate complexity serves a concrete use: no exact upper, complete causal/allocator history, enumeration/search-before-learning, seed quota, positive pilot, cost experiment or unnecessary precedingA. Real in-family A/M B needs no generic Convergence gate. Q is optional direction judgment, not a B prerequisite. Relevant changed-contract integrity and fresh resource admission remain.",
+    "Use only the exact reference manifest below and specified current sections, not a recursive citation tree. All22 direction source blobs and existing headroom/recasts/lifecycle are recorded in FACTS/Oracle. Explanatory Foundations is knowledge, not an additional authority. No specification change is requested. Historical branch/task routes never override current Root/Transport or the fixed TASK.",
+    "A means this newly proposed840-second ACVC pair, not the completed earlier ACVC consultationA. Preserve trainC/deployF as strong comparison, sampled-proposal old-density versus actualF feedback, every64final outcome, CPUFP32/thread1 and all accepted protected law. No C/dwell/extra panel, C01fit, learned gate or selected seed. Recasts2lowestACTIVEcontending priority stands.",
+    "M remains unallocated after two explicit no decisions and no new empirical evidence. Reconsideration is explicit new marginal judgment, never fallback or retroactive activation. Preserve currentCOND exception/intact same-informationDENSE,512train32final/H256/CPUFP32/thread1, original.01J rule and all32outcomes. Q compares only the testedCBSC package end with one concrete distinct future learning question versus REQUEST_ONLY; retainedcandidate stillunfunded.",
+    "NewA/M caps are nonfungible and include all necessary future card/identity/source/requiredchecks/review/Git/staging/admission/Monitor/collection/reduction/intake/Rootintegration/cleanup once; whole native startup-through-exit. Historical costs/unknowns stay once, with no balances/retries/replacementseed/successor. A+M=2040futureinvoked caps, not certified complete agent/provider cost; addingQ is2040+unknownQ. No profiling/cost pilot needed to price the offer.",
+    "Current FSD D and FOLR P continue independently under their accepted scopes. CompleteC/F/R, endedVNFC and other stoppedallocations have no automatic successor. Preserve15ACTIVE/7PARKED, all priorities/secondrecasts/headroomabsence/narrowfamily/UAV boundaries. No formal five-entry completion is inferred from nativeUAV use. At answer arrival recompute actual activity; if another direction ends, it releases a slot but expands none of these selected units.",
+    "Author did no experiment, targetimport/model, newnumericoutcomeanalysis or Send; machinezeroexposure is inFACTS and counts are reused from exact earlier machine records. Portfolio Pro selects within standingdelegation; actual author checks fullconformance, Root independentlydispatches and records actual state, without per-item owner approval."
+  ],
+  "reference_files": [
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/SCIENCE_BRIEF.md",
+      "commit_sha": "ce257019becf2d0e7aa373b378b6442a0323ecf9",
+      "purpose": "Read complete one-question A/M/Q/H marginal comparison, practical uses, newcaps/unknowns and current2/5.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/FACTS.json",
+      "commit_sha": "ce257019becf2d0e7aa373b378b6442a0323ecf9",
+      "purpose": "Read machine-zero new exposure, reused work counts, all22 exact direction blobs/lifecycle/headroom/recasts and cost boundaries.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/PREPARATION_INTAKE.md",
+      "commit_sha": "ce257019becf2d0e7aa373b378b6442a0323ecf9",
+      "purpose": "Read reused scientific/spec assumptions and limits, current accepted evidence and no local disposition.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_post_cfr_marginal_investment/ISSUE_SNAPSHOT.json",
+      "commit_sha": "ce257019becf2d0e7aa373b378b6442a0323ecf9",
+      "purpose": "Read current open substantive Issue17; its historical body does not define this round scope.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/ORACLE_RECOMMENDATIONS_20260911.md",
+      "commit_sha": "ce257019becf2d0e7aa373b378b6442a0323ecf9",
+      "purpose": "Read current complete22-direction summary, contrary evidence, narrow-family/recasts/headroom/UAV and explicit new proposal versus existing authority.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_post_cf_completion/READINESS_BOUNDARY.md",
+      "commit_sha": "95b8711de7a543a3496f3042fe1ebdfb308e1d87",
+      "purpose": "Read Q/A detailed existing-law proposals and completeC/F facts; old in-flight/1of5/missingRCLE status is historical, superseded by this brief/currentintake.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_post_cf_completion/FACTS.json",
+      "commit_sha": "95b8711de7a543a3496f3042fe1ebdfb308e1d87",
+      "purpose": "Reuse fixed machine A configuration counts and C/F outcome/cost facts; no new numerical analysis requested.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "purpose": "Read current actualFSD/FOLR2of5 and accepted completedC/F/R boundary; FSD D0 Monitor adoption is actual, not another direction slot.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "purpose": "Read current actualFSD/FOLR2of5 and accepted completedC/F/R boundary; FSD D0 Monitor adoption is actual, not another direction slot.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/decisions/2026-09-12-two-remaining-chains.md",
+      "commit_sha": "592f8175000cca0b50e48ae6c466f8e8c5654035",
+      "purpose": "Read final D/P yes,Mno, independent scopes and nonfungible grants; Root applied these on mainbd5fd849a/41beb59a5.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/EXECUTION_MAPPING.md",
+      "commit_sha": "592f8175000cca0b50e48ae6c466f8e8c5654035",
+      "purpose": "Preserve D/P scope, all complete future costs and exact finite stops; current actual2/5 supersedes mapping snapshot.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_two_remaining_chains/archive/RESPONSE.md",
+      "commit_sha": "ed1d519c60fde333609c00fd207d5bd0a3e3f507",
+      "purpose": "Read complete latest Portfolio decision, especially sections1,4-6: two existinggrants and actual marginal reasoning for Mno, not blanket replication prohibition.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/archive/RESPONSE.md",
+      "commit_sha": "268d2b4df7f31df8a27466ddfbb3bcef6ba587a4",
+      "purpose": "Read previous Mno reasoning/section6 and completeC/R/F grant boundaries; those allocations have now ended, no oldbalances.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "AGENTS.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "purpose": "Adopt sections1-6 and applicable runtime appendix for authority, independentrollingcapacity, exactGit and review; no obsolete localWSL override.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "purpose": "Adopt sections7-8.1 and11.4,11.7-11.10: lifecycle/investment, questionproportionality, B/evidence ceiling, no generic stronger prerequisite.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "purpose": "Adopt sections4-5 and7.1/7.3: proportionalL0, protected semantics and relevant independentreview without newmachinery.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "purpose": "Adopt complete logical invocation and per-arm accounting; thresholds are not new studygrants or automatic scientific polarity.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "purpose": "Read sections3-6: information/partnercoadaptation/credit and independenttrainingunit; explanatory scientific knowledge only.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "purpose": "Read independentfit versus conditionalepisode uncertainty and competent nativecomparison; no seedquota or exactupper condition.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_SCIENCE_CARD_20260912.md",
+      "commit_sha": "f6bf9e4674b180037330a4a70ff680a1605c0bdd",
+      "purpose": "Read complete accepted package law/strongcomparator, finalprimary/all outcomes, originalresource/exposure/unknowncost and endedgrant; freshidentity/funding not inherited.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md",
+      "commit_sha": "f6bf9e4674b180037330a4a70ff680a1605c0bdd",
+      "purpose": "Read complete accepted package law/strongcomparator, finalprimary/all outcomes, originalresource/exposure/unknowncost and endedgrant; freshidentity/funding not inherited.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "f6bf9e4674b180037330a4a70ff680a1605c0bdd",
+      "purpose": "Read complete accepted package law/strongcomparator, finalprimary/all outcomes, originalresource/exposure/unknowncost and endedgrant; freshidentity/funding not inherited.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_SCIENCE_CARD_20260912.md",
+      "commit_sha": "9ca150856e491cd190661c075e486ad68c1ecad6",
+      "purpose": "Read complete accepted package law/strongcomparator, finalprimary/all outcomes, originalresource/exposure/unknowncost and endedgrant; freshidentity/funding not inherited.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_INTAKE_20260912.md",
+      "commit_sha": "9ca150856e491cd190661c075e486ad68c1ecad6",
+      "purpose": "Read complete accepted package law/strongcomparator, finalprimary/all outcomes, originalresource/exposure/unknowncost and endedgrant; freshidentity/funding not inherited.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_B01_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "9ca150856e491cd190661c075e486ad68c1ecad6",
+      "purpose": "Read complete accepted package law/strongcomparator, finalprimary/all outcomes, originalresource/exposure/unknowncost and endedgrant; freshidentity/funding not inherited.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "54723d292b381838d45f3ff63cff11a598c3bc48",
+      "purpose": "Read current conditional-pooling eligibility, accepted8212 and8213, competent DENSE default and finite ended grants; not old REL whole-direction verdict. No M evidence changed after this source.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md",
+      "commit_sha": "54723d292b381838d45f3ff63cff11a598c3bc48",
+      "purpose": "Read accepted current512train/32final COND/DENSE recipe and8213 appendix, independent unit, .01J MEI and complete actor-row/model/native/support law. M is new explicitly requested funding only. No M evidence changed after this source.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md",
+      "commit_sha": "54723d292b381838d45f3ff63cff11a598c3bc48",
+      "purpose": "Read complete healthy-path adverse pair and earlier within contrast, branch validity, native358.11 and partial support/unknown total; no new M evidence since latesthold. No M evidence changed after this source.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_INTAKE_20260912.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "purpose": "Read complete current finalreference comparison and limits/costs/no successor; successful reference is4.53s,11s queryuptime; preserve originalfailure and unknown unreturnedwork.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    },
+    {
+      "repository": "CartmanFatass/My-paper-code",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B07_EQUAL_UNIT_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "324b9c917e33ce9b92b8d630d19e35e544c947be",
+      "purpose": "Read complete current finalreference comparison and limits/costs/no successor; successful reference is4.53s,11s queryuptime; preserve originalfailure and unknown unreturnedwork.",
+      "provenance": "Exact published repository input. Adopt only named applicable sections; original scientific source/identity/cost mappings remain. Historical routes and prior grants are provenance, not this request authority; no recursive reading or new prerequisite."
+    }
+  ]
+}

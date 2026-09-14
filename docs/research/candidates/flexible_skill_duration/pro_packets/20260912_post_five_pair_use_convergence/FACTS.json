@@ -1,0 +1,104 @@
+{
+  "record_type": "Documentary transcription of already accepted measurements; no numerical reanalysis",
+  "created_at": "2026-09-12T23:16:53.540303+00:00",
+  "scientific_input_base": "665f704f74980bb3e0fb10f1fee540e43b35063c",
+  "latest_scientific_source": "8ea629595da592dfce9b7774341863a7115c7cef",
+  "consultation_exposure": {
+    "new_scientific_invocations": 0,
+    "new_fits": 0,
+    "new_models_or_checkpoint_loads": 0,
+    "new_scientific_RNG_calls": 0,
+    "new_training_or_evaluation_steps": 0,
+    "new_optimizer_steps": 0,
+    "numerical_reanalyses": 0,
+    "implementation_changes": 0,
+    "test_or_profiling_invocations": 0,
+    "new_Pro_question_allowance": 1,
+    "actual_Pro_sends_by_author": 0
+  },
+  "exposure_line": "U: zero new scientific invocation / model or load / RNG / fit / optimizer / train or evaluation step / numerical reanalysis / profiling; one documentary Convergence question and complete intake. Reused accepted pairs each contain two fits, five update stages per arm and one sole-final 32-world panel per arm; all learner modules moved and evaluator optimizer counts are zero in their accepted records.",
+  "accepted_pairs_separate": [
+    {
+      "training_base": "770703",
+      "mean_I_minus_D0_J": "0.05697746721968016",
+      "positive_worlds": 24,
+      "adverse_worlds": 8,
+      "D0_complete_wall_s": "519.94",
+      "I_complete_wall_s": "1020.68",
+      "conditional_episode_SE": "0.024192706725467705",
+      "accepted_intake": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md"
+    },
+    {
+      "training_base": "771003",
+      "mean_I_minus_D0_J": "0.206285904082309",
+      "positive_worlds": 32,
+      "adverse_worlds": 0,
+      "D0_complete_wall_s": "538.66",
+      "I_complete_wall_s": "1069.26",
+      "conditional_episode_SE": "0.01230361547990872",
+      "accepted_intake": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771003_INTAKE_20260911.md"
+    },
+    {
+      "training_base": "771103",
+      "mean_I_minus_D0_J": "-0.012430430599850807",
+      "positive_worlds": 16,
+      "adverse_worlds": 16,
+      "D0_complete_wall_s": "471.82",
+      "I_complete_wall_s": "1023.43",
+      "conditional_episode_SE": "0.01926754789685166",
+      "accepted_intake": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md"
+    },
+    {
+      "training_base": "771203",
+      "mean_I_minus_D0_J": "0.012554805665750726",
+      "positive_worlds": 19,
+      "adverse_worlds": 13,
+      "D0_complete_wall_s": "475.03",
+      "I_complete_wall_s": "1042.92",
+      "conditional_episode_SE": "0.01250683666255726",
+      "accepted_intake": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771203_INTAKE_20260912.md"
+    },
+    {
+      "training_base": "771303",
+      "mean_I_minus_D0_J": "0.0737976491890039",
+      "positive_worlds": 26,
+      "adverse_worlds": 6,
+      "D0_complete_wall_s": "458.80",
+      "I_complete_wall_s": "987.99",
+      "conditional_episode_SE": "0.013052781584169226",
+      "accepted_intake": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md"
+    }
+  ],
+  "historical_package_exposure_per_pair": {
+    "source": "Accepted five-pair records, copied without re-execution",
+    "fits": 2,
+    "learner_and_evaluator_constructions": 4,
+    "training_rollouts_per_arm": 5,
+    "lanes_per_training_rollout": 16,
+    "horizon": 500,
+    "training_team_ticks_per_arm": 40000,
+    "training_updates_per_arm": 5,
+    "final_worlds_per_arm": 32,
+    "final_team_ticks_per_arm": 16000,
+    "total_pair_native_team_ticks": 112000,
+    "independent_unit": "A newly generated complete matched training pair; endpoint worlds conditional on its two learned policies"
+  },
+  "older_distinct_batch128_losses_J": [
+    "-0.0496705632",
+    "-0.0353127253"
+  ],
+  "latest_recorded_costs": {
+    "native_sum_s": "1446.79",
+    "aggregate_CPU_s": "5718.46",
+    "D0_start_to_I_terminal_elapsed_s": "1911",
+    "I_over_D0_wall": "2.15342",
+    "support_and_all_in_certification": "resources_unmeasured; partial coverage cannot certify old support300/complete3000"
+  },
+  "current_U_complete_cost": "UNKNOWN explicitly accepted for one complete documentary/invoked/provider/agent task; no inference of zero or cheaper than a fit",
+  "future_empirical_allocation": "none; B-LONG-D0 and every other empirical proposal excluded from U",
+  "readings": {
+    "assumption": "Whole training pair is the learning unit; final-world uncertainty is conditional; the complete renewal/batching/credit/optimizer package is the comparison.",
+    "effect_on_question": "Ask a limited practical scheme-use decision now without changing old results or requiring a causal explanation, more seeds or tuned headroom.",
+    "limit": "No stable population benefit, component attribution, tuned headroom, exact timing or deployment guarantee."
+  }
+}

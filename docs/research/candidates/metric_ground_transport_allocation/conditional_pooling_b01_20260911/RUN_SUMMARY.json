@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "MGTAP_CONDITIONAL_POOLING_B01",
+      "arm": "COND",
+      "n": 1,
+      "mean": 0.16707705881756274,
+      "sample_sd": null,
+      "min": 0.16707705881756274,
+      "max": 0.16707705881756274,
+      "runs": {
+        "8212": 0.16707705881756274
+      }
+    },
+    {
+      "task": "MGTAP_CONDITIONAL_POOLING_B01",
+      "arm": "DENSE",
+      "n": 1,
+      "mean": 0.1613157374462142,
+      "sample_sd": null,
+      "min": 0.1613157374462142,
+      "max": 0.1613157374462142,
+      "runs": {
+        "8212": 0.1613157374462142
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "MGTAP_CONDITIONAL_POOLING_B01",
+      "arm": "COND",
+      "baseline": "DENSE",
+      "summary": {
+        "n": 1,
+        "mean": 0.005761321371348549,
+        "sample_sd": null,
+        "min": 0.005761321371348549,
+        "max": 0.005761321371348549
+      },
+      "differences": {
+        "8212": 0.005761321371348549
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

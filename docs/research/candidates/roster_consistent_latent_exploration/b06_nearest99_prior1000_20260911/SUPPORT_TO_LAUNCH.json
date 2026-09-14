@@ -1,0 +1,90 @@
+{
+  "source_sha": "baf63642a776ef3e60f4310ce47d76c45168c283",
+  "boundary": "after staging; before exact-command publication and submission",
+  "components": [
+    {
+      "name": "accepted B06 assignment and checkout/applicable instructions",
+      "charged_s": 0.2409931
+    },
+    {
+      "name": "accepted B06 assignment and checkout/applicable instructions",
+      "charged_s": 0.3007695
+    },
+    {
+      "name": "required Portfolio-input fast-forward and push",
+      "charged_s": 5.0650517
+    },
+    {
+      "name": "B06 owned caller/card/spec pointers and live config",
+      "charged_s": 0.2154743
+    },
+    {
+      "name": "B06 owned caller/card/spec pointers and live config",
+      "charged_s": 0.2593653
+    },
+    {
+      "name": "current fixed card, law consumers and scientific-reading route",
+      "charged_s": 0.1337453
+    },
+    {
+      "name": "current fixed card, law consumers and scientific-reading route",
+      "charged_s": 0.5240226
+    },
+    {
+      "name": "law/credit dependent path and changed-risk review routes",
+      "charged_s": 0.1921784
+    },
+    {
+      "name": "law/credit dependent path and changed-risk review routes",
+      "charged_s": 0.2604281
+    },
+    {
+      "name": "unchanged learner/Monitor route readback",
+      "charged_s": 0.2177059
+    },
+    {
+      "name": "old test consumers and unscreened identity collision check",
+      "charged_s": 0.2482494
+    },
+    {
+      "name": "unchanged action-credit and historical stub consumers",
+      "charged_s": 0.2439734
+    },
+    {
+      "name": "fixed entry/wrapper and configuration exposure arithmetic",
+      "charged_s": 0.251508
+    },
+    {
+      "name": "one nonnumerical static/symbolic changed-law check",
+      "charged_s": 0.1830005
+    },
+    {
+      "name": "diff and owner clean-boundary readback",
+      "charged_s": 0.6981582
+    },
+    {
+      "name": "new-card owner item and object selection audit",
+      "charged_s": 0.4674438
+    },
+    {
+      "name": "independent high-risk static law/credit/serialization review",
+      "charged_s": 1.1550574,
+      "breakdown_s": [
+        0.5443512,
+        0.2487388,
+        0.3619674
+      ]
+    },
+    {
+      "name": "exact B06 source/card/check/review/owner publication",
+      "charged_s": 5.2085645
+    },
+    {
+      "name": "committed source bundle and bounded exact remote staging",
+      "charged_s": 2.473154
+    }
+  ],
+  "known_support_charged_s": 18.338843400000002,
+  "support_cap_s": 140,
+  "new_scientific_exposure": 0
+}

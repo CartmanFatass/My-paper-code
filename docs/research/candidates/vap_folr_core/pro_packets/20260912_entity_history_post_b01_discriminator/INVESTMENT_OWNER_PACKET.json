@@ -1,0 +1,38 @@
+{
+  "question": "建议 Portfolio 为一次旧 BANK／新 Generic 的参照用途比较拨付有限预算，或拒绝这个具体用途的后续开销？",
+  "changes_if_approved": [
+    {
+      "target": "仅 FOLR retained-BANK reference-use 单元的未来拨款",
+      "from": "未拨款，零新训练或评估授权",
+      "to": "提议 Generic 2700 秒、旧 BANK 评估 300 秒、原生合计 3000 秒、支持 1200 秒、完整调用 4200 秒；当前仍未执行"
+    }
+  ],
+  "if_refused": "不再为这个已训练 BANK 的可选参照纳入问题花费；旧结果和方向仍保留，不据此推断 FOLR PARK 或关闭家族。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md",
+      "quote": "Strongest support is the completed executable BANK and a missing competent legal alternative's endpoint.",
+      "why": "新对照的真实终点直接改变用途；不用再训练 BANK。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/INVESTMENT_READINESS.md",
+      "quote": "The recommendation is a close call and qualitative: no probability of improvement or measured information-per-second ranking is available.",
+      "why": "没有量化收益预期，已有成本不构成继续花费理由。"
+    }
+  ],
+  "uncertainty": [
+    "Generic 旧超时前缀按平稳速率约推到 2110–2113 秒，但完整终点时价仍未知。",
+    "BANK 单独评估时价与未来内存未知；新上限只是建议的有限风险，不是完工预测。",
+    "共享 Portfolio 当前仍需协调旧 ACPS 请求与 MGTAP；本轮仅准备，未 Send。"
+  ],
+  "cost": {
+    "compute": "提议完整调用 4200 秒硬上限；一新训练、4969 更新、105120 新 team ticks。未拨款；当前文档与 provider/agent 总费用未知。",
+    "owner_time": "无需逐项批准，已有委托不变；可异步覆盖。",
+    "reversibility": "costly",
+    "waits_on_this": "尚无实验在等待 owner；等待共享 Portfolio 写入协调"
+  },
+  "verdict_text": "Recommend option F: one finite B use comparison, with the proposed new limits below and no renewal. Option D: decline further spending on this particular retained-reference inclusion question is the substantive alternative.",
+  "source": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/INVESTMENT_READINESS.md"
+}

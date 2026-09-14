@@ -1,0 +1,28 @@
+{
+  "source_sha": "10ea737f0f9210ee2c126ad1e095734f21d4fcbc",
+  "launch_binding_sha": "f59b99d4a3066bc5c4bdc3d2d8de0283ffb9c7c6",
+  "handle": "mgtap-cond-b01-8214-20260912",
+  "original_dm": "/root/dm_mgtap_m_pair",
+  "node": "hmasd-wsl-node",
+  "runtime_cwd": "/home/wu/hmasd-worktrees/mgtap-cond-b01-8214-20260912",
+  "output_root": "/home/wu/hmasd-worktrees/mgtap-cond-b01-8214-20260912/temp/directions/metric_ground_transport_allocation/exp/conditional_pooling_b01_20260912_8214",
+  "supervisor_root": "/home/wu/.agent-tasks/mgtap-cond-b01-8214-20260912",
+  "submitted_at": "2026-09-12T19:42:56.750Z",
+  "accepted": true,
+  "submission_count": 1,
+  "submission": {
+    "chunk_id": "edb05e",
+    "wall_time_seconds": 0.4386346,
+    "exit_code": 0,
+    "original_token_count": 42,
+    "output": "Task 'mgtap-cond-b01-8214-20260912' started in tmux session 'agent_mgtap-cond-b01-8214-20260912'. Output: /home/wu/.agent-tasks/mgtap-cond-b01-8214-20260912/task.log\n"
+  },
+  "monitor_thread": "01a095d0-21ee-7c02-9d97-3681b5678200",
+  "root_thread": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "monitor_dispatch_accepted": true,
+  "monitor_dispatch_at": "2026-09-12T19:43:16.195Z",
+  "monitor_add_payload": "MONITOR_ADD\nObserve accepted handle mgtap-cond-b01-8214-20260912 on hmasd-wsl-node via /usr/local/bin/agent-task. Single supervisor submission accepted (exit0 started tmux agent_mgtap-cond-b01-8214-20260912). Source SHA 10ea737f0f9210ee2c126ad1e095734f21d4fcbc; runtime cwd /home/wu/hmasd-worktrees/mgtap-cond-b01-8214-20260912; output root /home/wu/hmasd-worktrees/mgtap-cond-b01-8214-20260912/temp/directions/metric_ground_transport_allocation/exp/conditional_pooling_b01_20260912_8214; supervisor root/log /home/wu/.agent-tasks/mgtap-cond-b01-8214-20260912/task.log. Exact COMMAND is /home/wu/hmasd-inputs/mgtap-cond-b01-8214-20260912/COMMAND.sh (enters stated runtime cwd; supervisor launcher initial shell cwd is not scientific cwd). Original DM/collection owner /root/dm_mgtap_m_pair, Root thread 01a095b7-850f-7401-ad4e-5e4320d285f1. Grant one COND/DENSE pair,450s/arm,900 native; no monitor launch/retry/scientific interpretation.\nCall get_goal now; continue the matching unfinished observation goal or create_goal without a token budget if none is active. Add this accepted handle to that goal's active set, keep it through accepted terminal delivery to Root, and report actual unfinished goal operation/state plus direct handle status in MONITOR_ADOPTED to Root. Message delivery alone is not adoption. Observe without a second DM polling loop. Send stable MONITOR_TERMINAL to Root when directly terminal, with original DM and exact binding. Before completing an empty goal, send MONITOR_GOAL_COMPLETE to Root after all terminal notices are accepted, with active_set and delivered event IDs.\nPlease report itemized observation-command wall seconds when available for this new support300s allowance; unmeasured/shared tails remain unknown rather than duplicating or inferring zero. Use live C:/Projects/HMASD/.codex/hmasd-monitor.toml and docs/project/EXPERIMENT_MONITOR.md.",
+  "actual_monitor_goal_adoption": "pending Root-routed MONITOR_ADOPTED",
+  "scientific_result": "not collected; no polarity",
+  "collection_boundary": "Same DM resumes on Root-routed terminal fact; no routine duplicate polling or launch."
+}

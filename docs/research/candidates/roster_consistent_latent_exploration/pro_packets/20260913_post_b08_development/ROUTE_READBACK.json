@@ -1,0 +1,19 @@
+{
+  "checked_by": "/root/dm_rcle_resume/tr_l_h_rcle",
+  "scope": "preparation-only recorded registry and GitHub read; no Send/browser/observation assignment",
+  "conversation_binding_key": "em:roster_consistent_latent_exploration:convergence",
+  "conversation_id": "6aa55611-bf80-83e8-b018-70e30a95b28a",
+  "latest_prior_request": "2026-09-12-rcle-joint-quota-phase-family-01",
+  "prior_state": "ARCHIVED",
+  "prior_sends": 1,
+  "prior_receipt": "SENT",
+  "outstanding_or_uncertain_rcle_request": false,
+  "prior_response_sha256": "de03b11d82bfbd7e1bed120ae1f1d079130d69c86797f53b2dde858e731119d3",
+  "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/8",
+  "issue_state": "OPEN",
+  "latest_prior_joint_quota_comment": "5650374253",
+  "observed_direction_head": "6fd46ddb35c549a6099499b4542f8ae674d684ca",
+  "new_source_parent": "/root/dm_rcle_resume",
+  "new_operator": "/root/dm_rcle_resume/tr_l_h_rcle",
+  "new_send": "NOT_AUTHORIZED_BY_PREPARATION_ONLY_ASSIGNMENT; no dispatch performed"
+}

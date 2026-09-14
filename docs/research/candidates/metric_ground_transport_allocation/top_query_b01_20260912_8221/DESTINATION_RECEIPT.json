@@ -1,0 +1,12 @@
+{
+  "status": "STAGED_EXACT_SOURCE",
+  "sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+  "worktree": "/home/wu/hmasd-worktrees/mgtap-top-b01-8221-20260912",
+  "worktree_clean": true,
+  "initialization_correction": "--no-checkout worktree had empty index and only .git; populated exact HEAD using read-tree after sparse pattern setup. No authored content existed.",
+  "staging": "/home/wu/hmasd-inputs/mgtap-top-b01-8221-20260912",
+  "bundle_sha256": "c610478a215dbd68c029db6cbdb68509c59ba6254c72c496adc6ac3c3ab7372e",
+  "command_sha256": "821a5997c8a89a368a862492b0efe4df255168fd25bd4fba99c001939a1a6704",
+  "encoder_fixture": "ENCODER_FIXTURE.json",
+  "scientific_launches": 0
+}

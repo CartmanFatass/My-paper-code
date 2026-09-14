@@ -1,0 +1,218 @@
+{
+  "intaken_at_utc": "2026-09-12T03:04:25.567385+00:00",
+  "request_id": "2026-09-11-acvc-five-fit-promotion-convergence-01",
+  "task_sha": "c2c1cf0e64ee5666d8178545e28a849fcf5a9f81",
+  "input_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+  "ready_handoff_sha": "6a083fc77a5dbf9a794e8bc12fc106fc3f10213b",
+  "response": {
+    "source_commit": "103b8f811388089c714383708a13526f9a06aff3",
+    "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/archive/RESPONSE.md",
+    "lines": 157,
+    "bytes": 33733,
+    "sha256": "e4a71044732c39ee67aa0edcb10b33b769e563ebf5ab6d5115a48eebd3ca2ebe",
+    "github_contents_matches_git": true,
+    "only_response_added": [
+      "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/archive/RESPONSE.md"
+    ]
+  },
+  "manifest_sources": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_THREE_FRESH_CONVERGENCE_INTAKE_20260911.md",
+      "commit_sha": "29b57b8b84c7407b7ba6e9c32f3688e0a6cde88e",
+      "sha256": "6db6620845f69349a86907b9f9fa8ed84667c73b280ab99a236882824d16b52f",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/archive/RESPONSE.md",
+      "commit_sha": "67b9ab3a794d026cf95ade7dfa770037dc786528",
+      "sha256": "de211e40dd6c07fdba22cd9d3801b565cf5e758d20c66c53d01503f2adcbdec2",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md",
+      "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+      "sha256": "d3a7b5bcae1b573d2029b615c714913733426ae63c06c0ff3cb680e8ac3d08db",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/EXECUTION_MAPPING.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "sha256": "58983c0a0c6b3f6cca5afc18bee4aa850e4ce22f88ffc3783b6ce1070f652cb3",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "sha256": "fb3ccd5f74c44a1f14e3de638dbc4b4fa7087fc79deacd2b84951760ad3d6c36",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "sha256": "f5f1e601be267d5881f05e0f46cc9a66aac99175fa9c91783f7688f1914687bd",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/ISSUE_INPUT_SNAPSHOT.json",
+      "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+      "sha256": "d96f36c146df2a791ca94749d7a32579f96eb0256fa62c1c19390e78c504d54d",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/FACTS.json",
+      "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+      "sha256": "948e6af990c1406c6ca891fdef703dda3c912d9939d2176171e04841e655dd5e",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/SCIENCE_BRIEF.md",
+      "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+      "sha256": "58c92c6d89af380596b26906b317109149180dc099889bcc8f68523561f5704c",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+      "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+      "sha256": "d52891c39dc300ad83449226962f98cd913eff9891b6d046e918b8742e04e599",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "6cfba2c690e55ea5266f34090cb9465088b404a9",
+      "sha256": "345a00a174f3830aa9b2d6fcdeff4bea02f0fb786b1f8a26da0cc21cbd731fe8",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/FACTS.json",
+      "commit_sha": "3c7f0976e1116b43e3e42a06ca03c25a8045225c",
+      "sha256": "3aa134859f50ee97c0fc30b724e2c653688d1f64c92a9f5b21ed65ecb14cf2ac",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "e83bbfc7c80af8712a1bba11ddd1572a6493800e",
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "unchanged_at_current_direction_head": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md",
+      "commit_sha": "05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+      "sha256": "85c1148a070bc53e5cbe7c7783fd938b71a74768c964a528e239fba35de13443",
+      "unchanged_at_current_direction_head": true
+    }
+  ],
+  "response_file_citation_count": 16,
+  "manifest_source_count": 17,
+  "attributed_pro_access": "16 manifest paths; earlier optional FACTS not separately retrieved; no unlisted code audit claimed",
+  "transport_snapshot": {
+    "source_directory": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-11-acvc-five-fit-promotion-convergence-01",
+    "files": {
+      "2026-09-11-acvc-five-fit-promotion-convergence-01--acvc--attempt-01__02_RESPONSE.md": {
+        "bytes": 384,
+        "sha256": "2f05087236a0633457685d92560d46a1ff42fb4906f95371073a1e60a571fc55"
+      },
+      "2026-09-11-acvc-five-fit-promotion-convergence-01--acvc--attempt-01__03_TRANSPORT_FACTS.json": {
+        "bytes": 5338,
+        "sha256": "11887d18277da6199c7de3f358921516b44c459ceca19d71ef87fa125b9a9860"
+      },
+      "2026-09-11-acvc-five-fit-promotion-convergence-01--acvc--attempt-01__04_CHAT_RECEIPT.md": {
+        "bytes": 384,
+        "sha256": "2f05087236a0633457685d92560d46a1ff42fb4906f95371073a1e60a571fc55"
+      },
+      "2026-09-11-acvc-five-fit-promotion-convergence-01--acvc--attempt-01__PACKET_MANIFEST.json": {
+        "bytes": 1768,
+        "sha256": "2dfc20af8c896d686a0c6894594297c0b2bc3f9784f9c2e23ab9c1dc3e1f71c9"
+      },
+      "2026-09-11-acvc-five-fit-promotion-convergence-01--acvc__00_PROMPT.md": {
+        "bytes": 1919,
+        "sha256": "6c04ccbb95b33372c59e0d3b1c77bfbbaa3be2f177950bcc0a07c7a74592a684"
+      },
+      "RECEIPT_LABEL_CORRECTION.json": {
+        "bytes": 1556,
+        "sha256": "78b970baefbf7e811471f606cd80f978d4165bf1a57b40be40c79140efa679ce"
+      }
+    },
+    "zip_path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/archive/TRANSPORT_ARCHIVE_SNAPSHOT.zip",
+    "zip_bytes": 18600,
+    "zip_sha256": "7f902abd12355772282c5b68abe88ca73ba8a36b2372938ff57532072f847c2a",
+    "raw_02_equals_chat_receipt": true,
+    "raw_02_equals_verified_git": false,
+    "archive_bytes_preserved": true,
+    "full_git_response_included_separately": true
+  },
+  "receipt_label_finding": {
+    "first_observed_raw_02_bytes": 384,
+    "first_observed_raw_02_sha256": "2f05087236a0633457685d92560d46a1ff42fb4906f95371073a1e60a571fc55",
+    "finding": "Transport __02 and response_* fields held the short chat link receipt, not the complete response. Verified immutable Git/GitHub full response is the decision source. Preserve the raw forms; no two conflicting scientific responses were observed.",
+    "root_route": "Root assigned preservation-aware correction to existing Transport, explicitly no browser/Pro/Send action, and instructed independent intake/Innovator preparation to continue.",
+    "provider_node_limit": "Transport stored descriptive current-round user/assistant markers, not actual provider UUIDs. Identity is attributed to its current-round observation; no native browser verification was performed."
+  },
+  "provider_observation_attributed": {
+    "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "user_marker": "today-current-round|TASK.md@c2c1cf0e64ee5666d8178545e28a849fcf5a9f81|user-node",
+    "assistant_marker": "today-current-round|Worked for 11m 11s|assistant-node",
+    "send_click_count": 1,
+    "visible_model": "6 Pro",
+    "mode": "Pro, 5 of 5.",
+    "wait_status": "NATURAL_COMPLETION",
+    "page_state": "Worked for 11m 11s; complete assistant response; Copy response present; no active generation control",
+    "timestamps": {
+      "completed_at": "2026-09-12T02:54:45Z",
+      "captured_at": "2026-09-12T02:54:45Z",
+      "archived_at": "2026-09-12T02:54:45Z"
+    },
+    "prompt_bytes": 1919,
+    "prompt_sha256": "6c04ccbb95b33372c59e0d3b1c77bfbbaa3be2f177950bcc0a07c7a74592a684",
+    "prompt_matches_bound_handoff": true
+  },
+  "issue_comment": {
+    "id": 5642977368,
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5642977368",
+    "created_at": "2026-09-12T02:51:30Z",
+    "updated_at": "2026-09-12T02:51:30Z",
+    "full_response_commit_bound": true
+  },
+  "scientific_conformance": "PASS: actual exact-design provisional C-BENCH promotion; only one funded original Innovator is the next step, before freeze/implementation/fits. No material redesign or specification exception.",
+  "current_new_scientific_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "model_loads": 0,
+    "scientific_rng_masters": 0,
+    "native_ticks": 0,
+    "training_episodes": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "search_candidates": 0
+  },
+  "main_authority_check": "Current normative files unchanged from e83bbfc7c at main d8b472c4971ec2b460ce07c06acbcec968904285; required Monitor goal adoption retained",
+  "scope_note": "Only receipt/source preservation and documentary intake. No RNG draw, C card, new science, source execution, test or additional Convergence Send.",
+  "receipt_label_correction": {
+    "status": "complete and published; labels only, no provider action",
+    "source_commit": "56e4844cf51b5549fc5127628f32311f053417e6",
+    "root_integration_commit": "bf9dad3a06bdffb23679db99038ed4a7eb3b5a25",
+    "direction_preservation_commit": "b6e5f01bb35305a8b86c87e7471f9ec1a6e8be74",
+    "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_promotion_convergence/archive/RECEIPT_LABEL_CORRECTION.json",
+    "sha256": "78b970baefbf7e811471f606cd80f978d4165bf1a57b40be40c79140efa679ce",
+    "verified_complete_response_and_both_original_receipt_hashes": true,
+    "node_UUID_limitation_retained": true
+  }
+}

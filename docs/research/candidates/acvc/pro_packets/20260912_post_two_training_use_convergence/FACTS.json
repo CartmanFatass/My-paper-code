@@ -1,0 +1,66 @@
+{
+  "current_authority": "OWNER_DIRECT 2026-09-12 as forwarded by Root: ACVC must continue; B02 allocation ending did not end the direction. Prepare one original-node next-object question and full intake.",
+  "object": "ACVC post-two-training-use direction question",
+  "status": "documentary_preparation; next object not selected or allocated",
+  "science_sha": "8f05e0d01ff829c8704f4ee08e29e451259ad237",
+  "method_sha": "f938006f1733365ce82b522a7be98d22f298554c",
+  "current_exposure": {
+    "new_models": 0,
+    "scientific_rng_draws": 0,
+    "train_episodes": 0,
+    "team_steps": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "runtime_tests": 0,
+    "outcome_reanalyses": 0
+  },
+  "exposure_line": "Consultation only: 0 models / 0 scientific RNG / 0 environment steps / 0 train episodes / 0 optimizer steps / 0 evaluation episodes / 0 runtime tests. Future candidate counts are arithmetic, not executed exposure.",
+  "candidate": {
+    "selected": false,
+    "law": "existing MultiUAVEnv user_distribution=cluster for fresh C training and final C/F/own-dwell; five UAVs/fifty users",
+    "new_fits": 1,
+    "train_episodes": 512,
+    "final_checkpoints": 1,
+    "evaluation_panels": 3,
+    "episodes_per_panel": 64,
+    "horizon": 256,
+    "team_steps": 180224,
+    "train_team_steps": 131072,
+    "eval_team_steps": 49152,
+    "rollouts": 256,
+    "adam_steps": 1024,
+    "replay_actor_rows": 2621440,
+    "train_actor_rows": 655360,
+    "eval_actor_rows": 245760,
+    "F_dwell_predicate_agent_ticks": 163840,
+    "nested_search": false,
+    "computed_cluster_centers": 5,
+    "computed_users_per_cluster": 10,
+    "cluster_std_m": 100.0
+  },
+  "observed_prior_primaries": {
+    "C01_F_minus_C_J": 0.095915968685,
+    "C01_F_minus_dwell_J": 0.065133768997,
+    "B01_trainF_minus_trainC_commonF_J": -0.026096212471464608,
+    "B02_trainF_minus_trainC_commonF_J": -0.05734219575429114,
+    "B01_adverse_worlds": 43,
+    "B02_adverse_worlds": 50,
+    "worlds_per_training_use_pair": 64,
+    "recomputed": false
+  },
+  "cost": {
+    "current_documentary_provider_complete": "unknown",
+    "future_native_cluster_chain": "unknown; historical uniform C01 units170-178s are not a forecast",
+    "future_implementation_support_complete": "unknown; include once if funded",
+    "numeric_cap_allocated": false,
+    "prior_allocations_ended": true
+  },
+  "reading": {
+    "local_real_catalog_entries": 190,
+    "query": "UAV|unmanned|hotspot|spatial concentration|clustered user",
+    "matching_candidates": 0,
+    "library_limit": "My-lib synthetic records are not scientific evidence; index miss establishes no absence or novelty. No external causal claim is made."
+  },
+  "owner_reviews": [],
+  "stop": "One original Convergence question/full intake now; no third unchanged pair, source patch, scientific invocation, new card/seed, diagnostic, exhaustive enumeration or automatic successor."
+}

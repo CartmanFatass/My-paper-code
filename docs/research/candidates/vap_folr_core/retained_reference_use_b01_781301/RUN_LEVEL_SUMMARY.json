@@ -1,0 +1,19 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "FOLR_RETAINED_REFERENCE_USE_B01_781301",
+      "arm": "GENERIC_RETAIN",
+      "n": 1,
+      "mean": 1.0549999999999995,
+      "sample_sd": null,
+      "min": 1.0549999999999995,
+      "max": 1.0549999999999995,
+      "runs": {
+        "781301": 1.0549999999999995
+      }
+    }
+  ],
+  "paired_differences": []
+}

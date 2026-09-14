@@ -1,0 +1,35 @@
+{
+  "object_id": "FSD_UAV_RENEWAL_BATCH_B02",
+  "prospective_training_range": [
+    770803,
+    770818
+  ],
+  "prospective_evaluation_range": [
+    780803,
+    780834
+  ],
+  "local_search": {
+    "scopes": [
+      "docs/research/candidates/flexible_skill_duration",
+      "docs/research/portfolio",
+      "scripts/run_fsd*.py"
+    ],
+    "method": "rg exact numeric token ranges across md/json/FSD entries before writing new binding",
+    "matches": 0,
+    "corrected_error": "Initial Windows literal scripts/run_fsd*.py glob was rejected by rg (OS123); rerun with -g succeeded. No execution effect."
+  },
+  "destination": {
+    "node": "hmasd-wsl-node",
+    "worktree": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-770803-20260911",
+    "worktree_exists": false,
+    "inputs": "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-770803-20260911",
+    "inputs_exist": false,
+    "handles": {
+      "fsd-uav-renewal-batch-b02-770803-D0-20260911": false,
+      "fsd-uav-renewal-batch-b02-770803-I-20260911": false
+    },
+    "actual_fsd_supervisor_names_read": true
+  },
+  "selection": "Prospective unscreened identities; no old state/checkpoint loads. One allocated fresh pair.",
+  "limit": "Scoped acceptance/identity reconciliation, not an exhaustive proof of all historical RNG consumption."
+}

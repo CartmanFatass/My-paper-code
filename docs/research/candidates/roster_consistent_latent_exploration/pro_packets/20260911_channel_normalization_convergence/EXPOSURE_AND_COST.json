@@ -1,0 +1,98 @@
+{
+  "request": "2026-09-11-rcle-channel-normalization-convergence-01",
+  "class": "zero-exposure direction consultation; prospective B design only",
+  "generated_at_utc": "2026-09-11T23:32:43.210379+00:00",
+  "actual_new_exposure": {
+    "models": 0,
+    "environments": 0,
+    "scientific_rng_roots": 0,
+    "episodes": 0,
+    "native_ticks": 0,
+    "derivative_calls": 0,
+    "optimizer_updates": 0,
+    "numerical_fixtures": 0,
+    "tests": 0,
+    "result_bearing_invocations": 0
+  },
+  "method": "Standard-library configuration arithmetic over the already published B06 exposure plan; no workload import or numerical scientific execution.",
+  "recommended_future_single_fit": {
+    "fresh_training_fits": 1,
+    "independent_training_roots": 1,
+    "updates_per_fit": 1000,
+    "training_episodes": 64000,
+    "endpoint_roles": [
+      "own initialization",
+      "final1000",
+      "INDEPENDENT-NEAREST"
+    ],
+    "endpoint_panels": 3,
+    "episodes_per_panel": 2048,
+    "endpoint_episodes": 6144,
+    "total_episodes": 70144,
+    "native_ticks": 4489216,
+    "training_agent_ticks": 32768000,
+    "training_rollout_batches": 2000,
+    "score_channel_derivative_traversals": 2000,
+    "parameter_update_attempts": 1000,
+    "actual_nonzero_steps": "unobserved; must be reported in any later funded execution",
+    "model_allocations_if_current_initializer_is_retained": 7,
+    "untrained_helpers": 6,
+    "neural_agent_claims": 8847360,
+    "candidate_scores": 53084160
+  },
+  "conditional_future_control_comparison": {
+    "fresh_training_fits": 2,
+    "independent_paired_training_roots": 1,
+    "training_episodes": 128000,
+    "endpoint_roles": [
+      "one common own initialization",
+      "changed final1000",
+      "fresh joint100 final1000",
+      "INDEPENDENT-NEAREST"
+    ],
+    "endpoint_panels": 4,
+    "endpoint_episodes": 8192,
+    "total_episodes": 136192,
+    "native_ticks": 8716288,
+    "training_agent_ticks": 65536000,
+    "training_rollout_batches": 4000,
+    "derivative_traversals": {
+      "changed": 2000,
+      "joint100": 1000,
+      "total": 3000
+    },
+    "parameter_update_attempts": 2000,
+    "model_allocations_if_current_initializer_is_retained_for_each_fit": 14,
+    "untrained_helpers": 12,
+    "neural_agent_claims": 17367040,
+    "candidate_scores": 104202240,
+    "pairing": "Same fresh initial state and semantic training/evaluation address law, own evolving policies; one shared initialization panel is charged once. No B06 checkpoint or root is reused."
+  },
+  "allocation_now": {
+    "implementation": 0,
+    "numerical": 0,
+    "future_caps_s": null,
+    "future_seed_or_rng_identity": null,
+    "stop": "One original Convergence answer and complete conformance intake, or exact blocker. No automatic fit or consultation ladder."
+  },
+  "historical_B06_window_s": {
+    "native_chain": 335.86,
+    "learned_complete": 333.4,
+    "reference_complete": 2.45,
+    "known_support_through_DM_closeout_publication": 86.7963743,
+    "limit": "Recorded historical window, not a changed-method forecast or complete support cost. Other Monitor components, the yielded terminal-input push tail and later Root closeout integration are outside this complete-cost claim."
+  },
+  "cost_law": {
+    "changed_fit": "startup/admission + seven model allocations + 1000*(two 32-episode native rollout batches + two score-channel derivative traversals on the same collected graph + whole-vector normalization/combination + one parameter update + eight-cell baseline update + existing scalar publication) + own-init and final panels of 2048 episodes each + checkpoint/primary publication + process exit",
+    "reference": "startup/admission + 2048 native deterministic-nearest episodes + endpoint publication + exit",
+    "conditional_joint100_control": "one additional fresh fit: startup/admission + seven allocations + 1000*(two rollout batches + one joint100 backward + one normalized update + baseline/publication) + one final2048 panel + checkpoint/publication/exit; use and charge the common identical initial panel once",
+    "new_unknowns": [
+      "time and peak memory of two traversals with retained graph",
+      "changed policy-dependent native runtime",
+      "complete supporting work including focused verification, Monitor, collection, publication, integration and preservation/cleanup"
+    ],
+    "no_preliminary_cost_invocation": true
+  },
+  "validation_exposure_now": 0,
+  "future_validation": "Only the changed rule and dependent primary publication if a later implementation is funded; no all-history gradient census, pilot, probability grid or extra evaluation."
+}

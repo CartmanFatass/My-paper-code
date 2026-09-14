@@ -1,0 +1,45 @@
+{
+  "purpose": "single scoped closeout read and removal of preserved staged duplicate; no preparation or scientific command",
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=5",
+    "hmasd-wsl-node",
+    "timeout --signal=TERM --kill-after=1 12 /usr/bin/python3 -"
+  ],
+  "input_utf8": "from pathlib import Path\nimport subprocess,os,json,hashlib\nrepo=Path('/home/wu/projects/HMASD')\nworktree=Path('/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8951-e61facdff')\nstage=Path('/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8951-e61facdff.bundle')\nsupervisor=Path('/home/wu/.agent-tasks/acvc-fresh-dense-b01-8951-e61facdff')\nenv=dict(os.environ,GIT_NO_LAZY_FETCH='1',GIT_TERMINAL_PROMPT='0')\nlisting=subprocess.run(['git','-C',str(repo),'-c','protocol.allow=never','worktree','list','--porcelain'],env=env,capture_output=True,text=True,check=True,timeout=4).stdout\nregistered=('worktree '+str(worktree)) in listing.splitlines()\nfacts={'worktree':str(worktree),'disk_present':worktree.exists(),'registered':registered,'supervisor_root':str(supervisor),'supervisor_root_present':supervisor.exists(),'stage':str(stage),'stage_present_before':stage.exists()}\nif not worktree.exists() and not registered and not supervisor.exists() and stage.exists():\n if stage.resolve().parent!=Path('/home/wu/hmasd-inputs').resolve():raise RuntimeError('Unexpected stage target')\n digest=hashlib.sha256(stage.read_bytes()).hexdigest()\n facts['stage_sha256']=digest\n if digest!='98506c65fef7bb2cc0d9d1b77d94d96bea71bb7fefe98634320296860f420b57':raise RuntimeError('Staged bytes differ; retained')\n facts['stage_bytes']=stage.stat().st_size\n stage.unlink()\n facts['stage_removed']=True\nfacts['stage_present_after']=stage.exists()\nprint(json.dumps(facts))\n",
+  "returncode": 0,
+  "timeout": false,
+  "stdout": "{\"worktree\": \"/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8951-e61facdff\", \"disk_present\": false, \"registered\": false, \"supervisor_root\": \"/home/wu/.agent-tasks/acvc-fresh-dense-b01-8951-e61facdff\", \"supervisor_root_present\": false, \"stage\": \"/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8951-e61facdff.bundle\", \"stage_present_before\": true, \"stage_sha256\": \"98506c65fef7bb2cc0d9d1b77d94d96bea71bb7fefe98634320296860f420b57\", \"stage_bytes\": 113339685, \"stage_removed\": true, \"stage_present_after\": false}\n",
+  "stderr": "",
+  "wall_s": 0.5150000000139698,
+  "remote_facts": {
+    "worktree": "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8951-e61facdff",
+    "disk_present": false,
+    "registered": false,
+    "supervisor_root": "/home/wu/.agent-tasks/acvc-fresh-dense-b01-8951-e61facdff",
+    "supervisor_root_present": false,
+    "stage": "/home/wu/hmasd-inputs/acvc-fresh-dense-b01-8951-e61facdff.bundle",
+    "stage_present_before": true,
+    "stage_sha256": "98506c65fef7bb2cc0d9d1b77d94d96bea71bb7fefe98634320296860f420b57",
+    "stage_bytes": 113339685,
+    "stage_removed": true,
+    "stage_present_after": false
+  },
+  "local_duplicate_cleanup": {
+    "path": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\preparation\\8951-20260911",
+    "preserved_evidence": "docs\\research\\candidates\\acvc\\ACVC_FRESH_DENSE_REUSE_B01_8951_PREPARATION_20260911.json",
+    "source_preserved_at_published_commit": "e61facdff70091cd9cdd33bc231a149ed9106d35",
+    "files": [
+      "bundle_receipt.json",
+      "remote_preparation.sh",
+      "remote_preparation_receipt.json",
+      "source.bundle"
+    ],
+    "absent": true,
+    "wall_s": 0.030999999988125637,
+    "shared_authoring_checkout_retained": true
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "id": "20260912-root-006",
+  "created": "2026-09-12T10:42:59-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "CBSC/ACVC已结束：下一轮未发送候选边界",
+  "context": "最新完整结果释放两槽；实际1/5。已发送D/P/M/H最多选两条且保持不动。只准备新的Q/A/H候选与成本，当前未选任何后续投入。",
+  "options": [
+    {
+      "key": "compare",
+      "label": "在答复intake后比较Q/A/H",
+      "consequence": "备齐具体新选项，Q未知成本咨询和A新840秒pair均未资助；后续由合适node明确决定。"
+    },
+    {
+      "key": "hold",
+      "label": "不追加新的投入问题",
+      "consequence": "不追加；原RCLE工作和本轮实际获选方向各自继续，不改变生命周期。"
+    }
+  ],
+  "recommended": "compare",
+  "auto_applied": null,
+  "dm_reason": "新完成的零差和adverse配对改变了边际事实，但不赋予重复或备用款；准备后续比较而非提前选预算。",
+  "evidence": [
+    "docs\\research\\portfolio\\pro_packets\\20260912_post_cf_completion\\READINESS_BOUNDARY.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L28",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "CBSC C与ACVC F均完成、当前仅RCLE修复1/5时，当前已发送答复intake后，是否比较新的CBSC原节点问题Q、ACVC同配方新B候选A与不追加H？",
+    "changes_if_approved": [
+      {
+        "target": "下一轮未发送材料",
+        "from": "已发送D/P/M/H最多选两条；新的CBSC/ACVC空位没有分配",
+        "to": "只备齐Q/A/H事实与成本边界，等完整答复intake后明确新选择；不改发出的问题、不自动释放款额。"
+      },
+      {
+        "target": "Q与A候选",
+        "from": "两条已购pair已结束，无successor",
+        "to": "Q为一次原CBSC咨询/full intake，完整成本未知；A为新270/arm、540native、300support、840future秒同配方pair备选。所有选项仍未资助。"
+      }
+    ],
+    "if_refused": "H不追加新工作；本轮实际获选的符合规范方向仍独立执行，RCLE原修复边界不变，不要求凑满五槽。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_cf_completion/READINESS_BOUNDARY.md",
+        "quote": "The in-flight question can select at most two independent directions.",
+        "why": "两项新完成使短缺扩展，旧问题不能被当成四笔分配。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_cf_completion/READINESS_BOUNDARY.md",
+        "quote": "No Convergence is inserted as a generic prerequisite for this accepted in-family\nB.",
+        "why": "ACVC同包复现可以作为一个具体新B投入比较，无需为填槽另加普通前置咨询。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_cf_completion/READINESS_BOUNDARY.md",
+        "quote": "The two new returns do not by\nthemselves justify two more grants.",
+        "why": "CBSC零差且输公开规则，ACVC新pair为负；空位本身不是投资收益。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_cf_completion/READINESS_BOUNDARY.md",
+        "quote": "An unselected D/P/M option is not an authorized replacement.",
+        "why": "必须读完整新答复的理由，不能把未选旧报价作为备用资金。"
+      }
+    ],
+    "uncertainty": [
+      "当前RCLE修复及后续选中方向可能随时结束，intake时重算实际数量，不声称纸面5/5。",
+      "Q咨询可能只是重述no-spend；A只增加一个独立训练历史，不提供稳定性或组件因果。",
+      "A840是实现已完成后的明确新future提案，旧F660support/1200和历史未知成本不变。"
+    ],
+    "cost": {
+      "compute": "本材料零实验/Send。Q一次完整咨询成本未知；A新840秒（540native+300support）仅备选；H零新增单位。",
+      "owner_time": "异步查看，不是再次批准层；尚未生成下一请求。",
+      "reversibility": "costly",
+      "waits_on_this": "只有未来新的科学选择；本轮符合规范的选中工作、RCLE修复与已列清理不等待它。"
+    },
+    "verdict_text": "Preparation recommendation only: retain Q/A/H as concrete unallocated post-response alternatives; select no investment before the bound complete response is intaken.",
+    "source": "docs/research/portfolio/pro_packets/20260912_post_cf_completion/READINESS_BOUNDARY.md"
+  },
+  "starred": true
+}

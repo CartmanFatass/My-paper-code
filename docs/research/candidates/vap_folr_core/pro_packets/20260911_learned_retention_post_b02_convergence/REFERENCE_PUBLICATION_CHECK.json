@@ -1,0 +1,547 @@
+{
+  "checked_utc": "2026-09-12T02:38:14.110177+00:00",
+  "request_id": "folr-learned-retention-post-b02-convergence-20260911",
+  "reference_count": 26,
+  "remote_heads": [
+    [
+      "6a083fc77a5dbf9a794e8bc12fc106fc3f10213b",
+      "refs/heads/codex/acvc"
+    ],
+    [
+      "c56bd0e88d3ae5f0e5260d2a7e25a4bfc7a97fff",
+      "refs/heads/codex/cbsc"
+    ],
+    [
+      "656c316d0871bdfcb2dd4d27a44d23e1240bb5b0",
+      "refs/heads/codex/crto"
+    ],
+    [
+      "3fd5fed2babca330865b89cea2a7d8f51d6e00a4",
+      "refs/heads/codex/direction-vsp_c1"
+    ],
+    [
+      "bf29ec0fa8218efc56a4d46480bc0179d3b395b0",
+      "refs/heads/codex/frrie"
+    ],
+    [
+      "5b15e536806d3b54dc693e7b4b911eba53ff643c",
+      "refs/heads/codex/fsd"
+    ],
+    [
+      "8c66f65ba36c6b80b611ed03a0b5627e7b82e016",
+      "refs/heads/codex/hmasd-pro-transport"
+    ],
+    [
+      "c284bd177c4a4a10d0bc4dd7de8e0a45cc1d4124",
+      "refs/heads/codex/mgtap"
+    ],
+    [
+      "440fb6c4efdaa4d3e8e94031db9b4a111b345774",
+      "refs/heads/codex/portfolio"
+    ],
+    [
+      "3151cb405e6d36a42c5102056f2eedb18daf7103",
+      "refs/heads/codex/pro-dish-post-b06-20260907"
+    ],
+    [
+      "5a335eaff0f2242c515f6867e22d04bdd8d832ef",
+      "refs/heads/codex/pro-rcle-post-a02-20260906"
+    ],
+    [
+      "4715e912cb926368db050f5440e5cc4957ebb90f",
+      "refs/heads/codex/pro-rcle-tbcfv-first-b-20260906"
+    ],
+    [
+      "25b73b91a25e3b11835de81cd690ac6232d94044",
+      "refs/heads/codex/pro-vnfc-b01-two-seed-convergence-20260905"
+    ],
+    [
+      "e130c1cdabae114ab98948f28f437167847e9a9e",
+      "refs/heads/codex/pro-vsp03-shared-service-convergence-20260906"
+    ],
+    [
+      "a7265e9733873e3dd16de76861c75f3634302095",
+      "refs/heads/codex/pro-vspc1-k4-three-seed-20260905"
+    ],
+    [
+      "640d018f0e2a374cd95b0cbae9f5f2e705b22aaa",
+      "refs/heads/codex/rcle"
+    ],
+    [
+      "92a3508741a6e23de941e7c620a2ccae5b54152c",
+      "refs/heads/codex/scdmp"
+    ],
+    [
+      "5accfc0d6c5f8f8e9bf91de759bc457070675eed",
+      "refs/heads/codex/ucope"
+    ],
+    [
+      "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb",
+      "refs/heads/codex/vap-folr"
+    ],
+    [
+      "c922b254476d551a8fc8f41849c998c16b400066",
+      "refs/heads/codex/vnfc"
+    ],
+    [
+      "6488595c063ac3844e72125f0dd48e88e527dd4d",
+      "refs/heads/codex/vsp02"
+    ],
+    [
+      "c45f468cbe383b075545d8f7226518d17adba910",
+      "refs/heads/main"
+    ]
+  ],
+  "references": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_QUESTION_20260911.md",
+      "commit_sha": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb",
+      "bytes": 14624,
+      "sha256": "d2a4a251149ed192443fea127cadaeacdadb96d699344a966581d71eeb8a7abb",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/FACTS.json",
+      "commit_sha": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb",
+      "bytes": 20752,
+      "sha256": "4c680a432b71fdf5b4cf948af3d81628eb2c4face3b3c5896ea3c6aa17a4c560",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "bytes": 45965,
+      "sha256": "d288e527b7304af8caddf0d501e0186d5e6923c3fff1e70e132bf9edbb8117f8",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_SCIENCE_CARD_20260911.md",
+      "commit_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "bytes": 11273,
+      "sha256": "593906f848ce614b32a8f93f52aa511e8816954ac33334bbc984c32b75d8dc8a",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_SCIENCE_CARD_20260911.md",
+      "commit_sha": "2b22270b3b076df60f4afd3203c3f09aeab3b98b",
+      "bytes": 10265,
+      "sha256": "e4f57ac40095b2fa513c25b57c1d6ff77bd56daa583b51be123526b6532464f0",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "bytes": 19895,
+      "sha256": "54f9eb1a539b29c3260dbae4ae5af9768a41f9620be5be03bb565ac804f4fa77",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "bytes": 8559,
+      "sha256": "0b1e2698a6df49681bc6a986c1445c514dd39ee7f83dce5ae656229efdccf227",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "bytes": 18060,
+      "sha256": "0216763afc49223d5bc6f156b749696f612af29b1e05602c2a109dfcb023845f",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "bytes": 5529,
+      "sha256": "7822524bf0de8691e3afc1bdd0b453d747af7447c25c3055c1a724d640a35f78",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/archive/RESPONSE.md",
+      "commit_sha": "a2a47f1d73a3fd1bc2f724e77b2a7f0859332788",
+      "bytes": 34159,
+      "sha256": "ed976d34511bad25061ccfe368390f88d085862d1ce434cf51bf383648cbd48b",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/acvc",
+          "head": "6a083fc77a5dbf9a794e8bc12fc106fc3f10213b"
+        },
+        {
+          "ref": "refs/heads/codex/fsd",
+          "head": "5b15e536806d3b54dc693e7b4b911eba53ff643c"
+        },
+        {
+          "ref": "refs/heads/codex/hmasd-pro-transport",
+          "head": "8c66f65ba36c6b80b611ed03a0b5627e7b82e016"
+        },
+        {
+          "ref": "refs/heads/codex/mgtap",
+          "head": "c284bd177c4a4a10d0bc4dd7de8e0a45cc1d4124"
+        },
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "440fb6c4efdaa4d3e8e94031db9b4a111b345774"
+        },
+        {
+          "ref": "refs/heads/codex/rcle",
+          "head": "640d018f0e2a374cd95b0cbae9f5f2e705b22aaa"
+        },
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        },
+        {
+          "ref": "refs/heads/codex/vnfc",
+          "head": "c922b254476d551a8fc8f41849c998c16b400066"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "c45f468cbe383b075545d8f7226518d17adba910"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_CONVERGENCE_INTAKE_20260911.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "bytes": 13932,
+      "sha256": "07f2df1233b6a59996d850fd369135709cdf4717d2ab5350705b8fce45fc97a4",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "commit_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "bytes": 3025,
+      "sha256": "3936fd69b99d1b65c7644821848e419a9e3118120efbcc57667fba5ef5db3dc1",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+      "commit_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "bytes": 2588,
+      "sha256": "29dc8e1a18426a42f3cf01f0eba03f6bfa44eeeefddeec684d6458c7139b774c",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+      "commit_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "bytes": 2927,
+      "sha256": "01770613528bc8e1f3b86c4cafa934dda98c9639490733a123b101c48723e54a",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+      "commit_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "bytes": 4333,
+      "sha256": "0b95da626bab87c1cab7d38886b53291fd1a5167b66bfabf9e0dc33d5e81ed03",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "scripts/run_folr_public_lifecycle_b01.py",
+      "commit_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "bytes": 5869,
+      "sha256": "30d021557e10c25638cdc313274cae4e13cdacd75832c58ebafa87b4dad8026c",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md",
+      "commit_sha": "05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+      "bytes": 62241,
+      "sha256": "85c1148a070bc53e5cbe7c7783fd938b71a74768c964a528e239fba35de13443",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "440fb6c4efdaa4d3e8e94031db9b4a111b345774"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/EXECUTION_MAPPING.md",
+      "commit_sha": "e1c3c4f15524027ba7baad1074ab49ca3fe22940",
+      "bytes": 15037,
+      "sha256": "58983c0a0c6b3f6cca5afc18bee4aa850e4ce22f88ffc3783b6ce1070f652cb3",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "440fb6c4efdaa4d3e8e94031db9b4a111b345774"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "cbec1bea043e7ced03d60a69de5f14b0571dd245",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/fsd",
+          "head": "5b15e536806d3b54dc693e7b4b911eba53ff643c"
+        },
+        {
+          "ref": "refs/heads/codex/hmasd-pro-transport",
+          "head": "8c66f65ba36c6b80b611ed03a0b5627e7b82e016"
+        },
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "c45f468cbe383b075545d8f7226518d17adba910"
+        }
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "cbec1bea043e7ced03d60a69de5f14b0571dd245",
+      "bytes": 44084,
+      "sha256": "f5f1e601be267d5881f05e0f46cc9a66aac99175fa9c91783f7688f1914687bd",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/fsd",
+          "head": "5b15e536806d3b54dc693e7b4b911eba53ff643c"
+        },
+        {
+          "ref": "refs/heads/codex/hmasd-pro-transport",
+          "head": "8c66f65ba36c6b80b611ed03a0b5627e7b82e016"
+        },
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "c45f468cbe383b075545d8f7226518d17adba910"
+        }
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "cbec1bea043e7ced03d60a69de5f14b0571dd245",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/fsd",
+          "head": "5b15e536806d3b54dc693e7b4b911eba53ff643c"
+        },
+        {
+          "ref": "refs/heads/codex/hmasd-pro-transport",
+          "head": "8c66f65ba36c6b80b611ed03a0b5627e7b82e016"
+        },
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "c45f468cbe383b075545d8f7226518d17adba910"
+        }
+      ]
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "cbec1bea043e7ced03d60a69de5f14b0571dd245",
+      "bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/fsd",
+          "head": "5b15e536806d3b54dc693e7b4b911eba53ff643c"
+        },
+        {
+          "ref": "refs/heads/codex/hmasd-pro-transport",
+          "head": "8c66f65ba36c6b80b611ed03a0b5627e7b82e016"
+        },
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "c45f468cbe383b075545d8f7226518d17adba910"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "cbec1bea043e7ced03d60a69de5f14b0571dd245",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/fsd",
+          "head": "5b15e536806d3b54dc693e7b4b911eba53ff643c"
+        },
+        {
+          "ref": "refs/heads/codex/hmasd-pro-transport",
+          "head": "8c66f65ba36c6b80b611ed03a0b5627e7b82e016"
+        },
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "c45f468cbe383b075545d8f7226518d17adba910"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "cbec1bea043e7ced03d60a69de5f14b0571dd245",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/fsd",
+          "head": "5b15e536806d3b54dc693e7b4b911eba53ff643c"
+        },
+        {
+          "ref": "refs/heads/codex/hmasd-pro-transport",
+          "head": "8c66f65ba36c6b80b611ed03a0b5627e7b82e016"
+        },
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "c45f468cbe383b075545d8f7226518d17adba910"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/FACTS.json",
+      "commit_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+      "bytes": 17236,
+      "sha256": "945c44d4bd2febe0d6e60896321db23e0cd8539942752122a290e1809f05dbd8",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/acvc",
+          "head": "6a083fc77a5dbf9a794e8bc12fc106fc3f10213b"
+        },
+        {
+          "ref": "refs/heads/codex/fsd",
+          "head": "5b15e536806d3b54dc693e7b4b911eba53ff643c"
+        },
+        {
+          "ref": "refs/heads/codex/hmasd-pro-transport",
+          "head": "8c66f65ba36c6b80b611ed03a0b5627e7b82e016"
+        },
+        {
+          "ref": "refs/heads/codex/mgtap",
+          "head": "c284bd177c4a4a10d0bc4dd7de8e0a45cc1d4124"
+        },
+        {
+          "ref": "refs/heads/codex/portfolio",
+          "head": "440fb6c4efdaa4d3e8e94031db9b4a111b345774"
+        },
+        {
+          "ref": "refs/heads/codex/rcle",
+          "head": "640d018f0e2a374cd95b0cbae9f5f2e705b22aaa"
+        },
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        },
+        {
+          "ref": "refs/heads/codex/vnfc",
+          "head": "c922b254476d551a8fc8f41849c998c16b400066"
+        },
+        {
+          "ref": "refs/heads/main",
+          "head": "c45f468cbe383b075545d8f7226518d17adba910"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/ISSUE_SNAPSHOT.json",
+      "commit_sha": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb",
+      "bytes": 11489,
+      "sha256": "86d00b76f8fe0f16a62d8bc70ba1a6fcc2a66eda96ffc65d0518387f1aba0db3",
+      "published_reachable_from": [
+        {
+          "ref": "refs/heads/codex/vap-folr",
+          "head": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "scope": "Read-only exact path/SHA/publication check; proves reachable Git evidence, not current Pro connector access. No source implementation/test or scientific invocation."
+}

@@ -1,0 +1,167 @@
+{
+  "observed_at_utc": "2026-09-12T20:25:55.783721+00:00",
+  "remote_refs": {
+    "refs/heads/codex/mgtap": "94d202b754ae23c48cbe547cce9c7b902b6e870e",
+    "refs/heads/main": "665eaba761a3636bf00aa02103daab72fd641264"
+  },
+  "references": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST8214_DIRECTION_QUESTION_20260912.md",
+      "commit_sha": "aae355b2a7485a53a58e0b9d996496bbe172eb77",
+      "bytes": 12152,
+      "sha256": "1217c69aedb17e3f33653b2dd932771671501c4c338d7fd9653c9e228395805b",
+      "observed_published_refs": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md",
+      "commit_sha": "6561056ed6f2f51d57801d315af2ca8749cee6d2",
+      "bytes": 11073,
+      "sha256": "9b7e6f460c9d2959140a8779a059ccff83e1bfc7d3aefd6b7c7650948830c5c6",
+      "observed_published_refs": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_RESULT_20260912.md",
+      "commit_sha": "a12fb206aeac848ccf5f7dc585e9a35afeef0f03",
+      "bytes": 5013,
+      "sha256": "c9168753ddcbfc3867d1f9dcadc829ba6e96504e0de4d1c7df188b377f18017a",
+      "observed_published_refs": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_SCIENCE_CARD_20260912.md",
+      "commit_sha": "10ea737f0f9210ee2c126ad1e095734f21d4fcbc",
+      "bytes": 11461,
+      "sha256": "c0ab57d4b98bad72bf33e0c94041046acf04ced18a1a0b9398b7705b70edd3ea",
+      "observed_published_refs": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "a12fb206aeac848ccf5f7dc585e9a35afeef0f03",
+      "bytes": 52767,
+      "sha256": "2160895aeb6e4c27f985b02e54f0bcc4e65d4a9345e545f9901ec19ce7e11bc3",
+      "observed_published_refs": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/archive/RESPONSE.md",
+      "commit_sha": "319c51a5fdc411eaaf1a47557d032f23ed269265",
+      "bytes": 37234,
+      "sha256": "c90dc1cd3782cb839d7d6afbd5619a18dd4d90df540c702cd5c069b8d5d1cc9e",
+      "observed_published_refs": [
+        "refs/heads/codex/mgtap",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py",
+      "commit_sha": "10ea737f0f9210ee2c126ad1e095734f21d4fcbc",
+      "bytes": 8386,
+      "sha256": "8c6108eda8c053d81cd686929cbca3765bec76d26e57fe66b6e386013a838fca",
+      "observed_published_refs": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "envs/pettingzoo/uav_env.py",
+      "commit_sha": "10ea737f0f9210ee2c126ad1e095734f21d4fcbc",
+      "bytes": 67979,
+      "sha256": "f50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803",
+      "observed_published_refs": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/conditional_pooling.py",
+      "commit_sha": "10ea737f0f9210ee2c126ad1e095734f21d4fcbc",
+      "bytes": 2914,
+      "sha256": "1425913aab459df3583952df3694ef327708dc54c7f9dbf1c27d0d31668cb752",
+      "observed_published_refs": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/EXPOSURE.json",
+      "commit_sha": "aae355b2a7485a53a58e0b9d996496bbe172eb77",
+      "bytes": 1563,
+      "sha256": "a57f6ed813d94003c07cb68fe2751170ee25c4e268f61a6b41f6bb14e08683d5",
+      "observed_published_refs": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_SOURCE_DESIGN_RETURN_20260910.md",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "bytes": 29066,
+      "sha256": "1b34ca5583b588b5a1fb3f67e3c813b556f0c2dbcb25fed70e5511abffb84626",
+      "observed_published_refs": [
+        "refs/heads/codex/mgtap",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "observed_published_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "observed_published_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "bytes": 45889,
+      "sha256": "6933e35eb254a2247e4a6b5f00067da90f4bf4e482ee16a555e52e43158efd09",
+      "observed_published_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "observed_published_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "6c2cde9453d503c519372d3a946a99413a81ec8b",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "observed_published_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/ISSUE_SNAPSHOT.json",
+      "commit_sha": "94d202b754ae23c48cbe547cce9c7b902b6e870e",
+      "bytes": 2718,
+      "sha256": "54543ccb51a6ff68d0f150835993da1019f49f59ace9ebcf698b09cd5915470f",
+      "observed_published_refs": [
+        "refs/heads/codex/mgtap"
+      ]
+    }
+  ],
+  "routing": "actual native author; current configured Root/Transport; original requested Convergence binding",
+  "provider_access_claim": false,
+  "scientific_execution": false
+}

@@ -1,0 +1,67 @@
+{
+  "observed_utc": "2026-09-12T04:39:31.979130+00:00",
+  "source": "Primary-control registry; read-only scoped snapshot",
+  "binding": {
+    "request_id": "2026-09-11-folr-unchanged-pair-funding-portfolio-01",
+    "state": "ARCHIVED",
+    "archive_status": "ARCHIVED",
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "send_click_count": 1,
+    "user_message_id": "e928626a-1ddb-4fc5-84e5-69eb3cdebbe2",
+    "assistant_message_id": "982821f5-4802-409a-bd41-8065b071f806",
+    "archive": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__00_PROMPT.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+      "chat_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__04_CHAT_RECEIPT.md",
+      "response_sha256": "8ed3e736e875268e2bcf7f904cd02c1c31d704fdbcde980690c98f79c06d6ebd",
+      "github_response_file": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md@f4bbe6cae2d351b4c80c5e0d9d66690d337749ce",
+      "github_response_url": "https://github.com/CartmanFatass/My-paper-code/blob/f4bbe6cae2d351b4c80c5e0d9d66690d337749ce/docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md",
+      "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5643446161",
+      "github_commit": "f4bbe6cae2d351b4c80c5e0d9d66690d337749ce"
+    },
+    "return_receipt": {
+      "required": true,
+      "source_thread_id": "01a08ed9-f1da-71c2-948f-a09c3c2d9b64",
+      "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+      "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+      "status": "SENT",
+      "attempt_count": 1,
+      "message_key": "2026-09-11-folr-unchanged-pair-funding-portfolio-01|portfolio|6a9c109e-b264-83e8-a78b-f9ea1b767b7b|8ed3e736e875268e2bcf7f904cd02c1c31d704fdbcde980690c98f79c06d6ebd",
+      "retry_allowed": false,
+      "routing_mode": "PARENT_SESSION",
+      "delivery_mode": "bounded_single_attempt",
+      "return_control_after_attempt": true,
+      "archive_paths": {
+        "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__PACKET_MANIFEST.json",
+        "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__00_PROMPT.md",
+        "reference_files": [],
+        "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__02_RESPONSE.md",
+        "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+        "chat_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__04_CHAT_RECEIPT.md",
+        "response_sha256": "8ed3e736e875268e2bcf7f904cd02c1c31d704fdbcde980690c98f79c06d6ebd",
+        "github_response_file": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md@f4bbe6cae2d351b4c80c5e0d9d66690d337749ce",
+        "github_response_url": "https://github.com/CartmanFatass/My-paper-code/blob/f4bbe6cae2d351b4c80c5e0d9d66690d337749ce/docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md",
+        "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5643446161",
+        "github_commit": "f4bbe6cae2d351b4c80c5e0d9d66690d337749ce"
+      },
+      "response_sha256": "8ed3e736e875268e2bcf7f904cd02c1c31d704fdbcde980690c98f79c06d6ebd",
+      "staged_at": "2026-09-12T04:30:37Z",
+      "fallback_enabled": false,
+      "delivery_status": "accepted",
+      "updated_at": "2026-09-12T04:31:30Z",
+      "sent_at": "2026-09-12T04:31:30Z"
+    },
+    "github_delivery": {
+      "commit": "6c32ade3216c374ecf2f5179b15d559729cd45c9",
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+      "issue_comment_id": 5640511203,
+      "response_sha256": "4610af5b470a2b3b10d6d89d6bf9e884bb811945171b7b8c2958328df43b876d",
+      "response_bytes": 66815,
+      "verified": true
+    },
+    "updated_at": "2026-09-12T04:31:30Z"
+  }
+}

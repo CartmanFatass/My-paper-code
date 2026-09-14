@@ -1,0 +1,76 @@
+{
+  "id": "20260912-cbsc-001",
+  "created": "2026-09-12T08:05:35-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CBSC S：公共字节路径 B 候选（未拨款）",
+  "context": "现有机会信用包缺完整 STRUCT 比较。本次提交保留原公共信息、学习器和最终32回报的执行候选；只完成描述，运行可靠性未验证，S+B仍未拨款。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "保留候选描述",
+      "consequence": "接受文档完整性供后续投资使用；零实现或实验授权。"
+    },
+    {
+      "key": "reject",
+      "label": "不保留该候选",
+      "consequence": "保留静态事实，结束S，不自动改换方案。"
+    },
+    {
+      "key": "revise",
+      "label": "记录所需修订",
+      "consequence": "保留未决意见供下一授权处理；本次S结束，不自动追加周期。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "具体调用边界支持一个可审阅候选，共享运行时与新评分接口风险仍明确。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_PUBLIC_STREAM_B_SCIENCE_CARD_20260912.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_S_READINESS_INTAKE_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L21",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否保留这份 CBSC 公共字节路径 B 候选，供以后投资选择？本次接受仅指描述完整，不授权实现或实验。",
+    "changes_if_approved": [
+      {
+        "target": "CBSC 公共流 B 候选卡与 S 就绪说明",
+        "from": "只有抽象恢复意向",
+        "to": "有明确源码调用边界、科学比较和剩余风险的候选描述；当前实验额度仍为零"
+      }
+    ],
+    "if_refused": "保留已完成的静态事实，结束这一轮 S 准备；不自动换方案、重试或追加实验。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_PUBLIC_STREAM_B_SCIENCE_CARD_20260912.md",
+        "quote": "The source mapping supports a reviewable candidate.",
+        "why": "公共 token、RAW FIFO、STRUCT 和学习器之间有具体接口，可在保持原问题的前提下描述局部替换。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_S_READINESS_INTAKE_20260912.md",
+        "quote": "No target has executed this candidate, and no passing existing check is attributed to its unimplemented bytes.",
+        "why": "共享解释器、host 构造和模型库仍可能出错；新的输入与原生评分边界也尚未实现或验证。"
+      }
+    ],
+    "uncertainty": [
+      "未定位历史故障 writer，也未证明新路径运行独立或不会崩溃。",
+      "后续若选中实现，需核对公共信息、RAW/STRUCT 特征、原生奖励及最终输出，并按实际高风险 diff 独立审查。",
+      "新路径完整运行与后续支持成本未知；S+B 仍未拨款。"
+    ],
+    "cost": {
+      "compute": "本轮只有静态读取、配置算术与文档/Git/owner 发布；零目标导入、模型、训练、评价、测试或实现。S 调用支持上限 600 秒、300 秒参考；完整文档和思考成本未知。",
+      "owner_time": "异步阅览，不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；接受这个描述不释放下一轮。"
+    },
+    "verdict_text": "Accept the complete prospective candidate and explicit runtime limits; no implementation or scientific invocation is allocated.",
+    "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_PUBLIC_STREAM_S_READINESS_INTAKE_20260912.md"
+  },
+  "starred": false
+}

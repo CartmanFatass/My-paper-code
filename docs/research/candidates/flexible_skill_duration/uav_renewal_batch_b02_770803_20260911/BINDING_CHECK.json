@@ -1,0 +1,87 @@
+{
+  "status": "pass",
+  "kind": "one_in_memory_binding_stub_and_AST_check",
+  "training_seed": 770803,
+  "evaluation_seed": 780803,
+  "calls": [
+    {
+      "consumer": "make_config",
+      "args": [
+        "D0",
+        "env_sentinel",
+        770803
+      ],
+      "kwargs": {
+        "renewal_batch": true
+      }
+    },
+    {
+      "consumer": "make_config",
+      "args": [
+        "I",
+        "env_sentinel",
+        770803
+      ],
+      "kwargs": {
+        "renewal_batch": true
+      }
+    },
+    {
+      "consumer": "assemble_pair",
+      "args": [
+        "treatment_sentinel",
+        "control_sentinel"
+      ],
+      "kwargs": {
+        "training_seed": 770803,
+        "evaluation_seed": 780803,
+        "object_id": "FSD_UAV_RENEWAL_BATCH_B02",
+        "card": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+        "renewal_batch": true
+      }
+    },
+    {
+      "consumer": "main",
+      "args": [
+        [
+          "--arm",
+          "I",
+          "--output-root",
+          "output_sentinel",
+          "--d0-summary",
+          "companion_sentinel"
+        ]
+      ],
+      "kwargs": {
+        "training_seed": 770803,
+        "evaluation_seed": 780803,
+        "object_id": "FSD_UAV_RENEWAL_BATCH_B02",
+        "card": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+        "renewal_batch": true,
+        "caps": {
+          "D0": 900.0,
+          "I": 1800.0
+        }
+      }
+    }
+  ],
+  "protected_surface_unchanged_from": "c70f01ea30d6c4d063dcc46d8499b26bfe037da8",
+  "protected_paths": [
+    "scripts/run_fsd_uav_renewal_batch_b01.py",
+    "scripts/run_fsd_uav_individual_renewal_b01.py",
+    "scripts/run_flexible_skill_duration_e0.py",
+    "hmasd/agent.py",
+    "hmasd/utils.py",
+    "configs/config_1.py",
+    "envs/pettingzoo/scenario1.py"
+  ],
+  "entry_lines": 29,
+  "new_numeric_fixtures": 0,
+  "model_constructions": 0,
+  "environments": 0,
+  "optimizer_calls": 0,
+  "scientific_roots": 0,
+  "scratch_files": 0,
+  "limitation": "Stub checks routing only; existing real source evidence and independent read-only review cover unchanged consumers. No native outcome or timing evidence.",
+  "inner_seconds": 0.07897060000686906
+}

@@ -1,0 +1,38 @@
+{
+  "status": "COMPLETE_TECHNICALLY_ACCEPTED",
+  "handle": "rcle-b07-reference-completion-s27-20260912",
+  "source_sha": "9eeef867f0adcf6d9a8ca9441781ad4ec2764a30",
+  "command_sha": "2c4777901c93527415f2adf6ff53232eb3b1cc37",
+  "pid": 3380786,
+  "exit_code": 0,
+  "tmux_active": false,
+  "started_at_utc": "2026-09-12T18:04:14Z",
+  "terminal_at_utc": "2026-09-12T18:04:19Z",
+  "supervisor_duration_s": 5,
+  "complete_command_wall_s": 4.53,
+  "internal_runner_wall_s": 4.124915931024589,
+  "complete_peak_rss_kib": 429972,
+  "monitor": {
+    "receipt": "Root-forwarded MONITOR_ADOPTED + TERMINAL and MONITOR_GOAL_COMPLETE",
+    "get_goal_result": null,
+    "fresh_unbudgeted_goal_created": true,
+    "already_terminal_on_first_direct_check": true,
+    "first_query_uptime_s": 11,
+    "uptime_is_runtime": false,
+    "stable_event": "rcle-b07-reference-completion-s27-20260912-exit0",
+    "terminal_delivery_accepted": true,
+    "final_goal": "complete",
+    "active_set": [],
+    "pending_observation_or_notification": false
+  },
+  "archive": {
+    "local_path": "temp/directions/roster_consistent_latent_exploration/b07-reference-completion-collection/terminal.tar.gz",
+    "bytes": 17564,
+    "sha256": "f93dd0b5299e3f579db518fc0ee0abab86066928048e397c930ead2174f93c9e",
+    "members": 9,
+    "manifest": "b07_equal_unit_20260912/FINAL_ANALYSIS.json#reference_manifest"
+  },
+  "fits_added": 0,
+  "additional_physical_reference_submissions": 1,
+  "scope": "Root original-R logical-invocation reconciliation; fixed required reference only; no retry/new fit/successor"
+}

@@ -1,0 +1,993 @@
+{
+  "intake_started_utc": "2026-09-11T21:00:57Z",
+  "verified_utc": "2026-09-11T21:14:49.109982+00:00",
+  "request_id": "2026-09-11-open-directions-research-program-portfolio-01",
+  "decision": "A",
+  "conformance": "PASS",
+  "provenance": "PRO_FINAL / OWNER_DELEGATED",
+  "author_native": "/root/dm_fifth_slot_blocker_intake",
+  "source_thread_id": "01a08ef0-996f-7f11-b134-db55149a4139",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "response": {
+    "commit": "6c32ade3216c374ecf2f5179b15d559729cd45c9",
+    "parent": "655820def916691fb29ff199449a4115ea9639b1",
+    "only_changed_path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+    "bytes": 66815,
+    "characters": 66578,
+    "lines": 223,
+    "sha256": "4610af5b470a2b3b10d6d89d6bf9e884bb811945171b7b8c2958328df43b876d",
+    "complete_read": "all 223 lines, contiguous complete Git object reads; not receipt-only",
+    "github_bytes_equal": true,
+    "github_blob_sha": "126b111a487e78f6bb8245b3a1100dc84d0380ac",
+    "transport_archive_bytes_equal": true
+  },
+  "task": {
+    "commit": "5ef377713bfcdcc41621d86d0df4ea86a04c1e92",
+    "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/TASK.md",
+    "bytes": 44138,
+    "sha256": "d222e7c8eebb15dd2346f27ab9f36d8afc094a2f8f29dbc852bfe1dd16c1c1f4",
+    "fixed_references": 46,
+    "response_fixed_reference_definitions": 47,
+    "exact_reference_mapping": true
+  },
+  "prompt": {
+    "bytes": 1906,
+    "sha256": "08865cf0822d815155870405d92507a7259ac2fb25e7433633d9b3c6e6085a7c",
+    "handoff_equal": true,
+    "transport_archive_equal": true
+  },
+  "transport": {
+    "schema_version": 4,
+    "request_id": "2026-09-11-open-directions-research-program-portfolio-01",
+    "workflow_node": "portfolio_decision",
+    "conversation_binding_key": "portfolio:cross_direction",
+    "direction_id": "portfolio",
+    "direction_ids": [
+      "acvc",
+      "capability_bound_semantic_currentness",
+      "commitment_residual_triggered_options",
+      "degraded_incumbent_shadow_handover",
+      "finite_resource_relational_inductive_efficiency",
+      "flexible_skill_duration",
+      "metric_ground_transport_allocation",
+      "roster_consistent_latent_exploration",
+      "semigroup_consistent_duration_model_policy",
+      "ucope",
+      "vap_folr_core",
+      "variable_n_fleet_churn",
+      "vsp_02",
+      "vsp_03",
+      "vsp_c1"
+    ],
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "state": "ARCHIVED",
+    "source_mode": "paste",
+    "send_click_count": 1,
+    "user_message_id": "today-current-round|TASK.md@5ef377713bfcdcc41621d86d0df4ea86a04c1e92|user-node",
+    "assistant_message_id": "paired-current-round-assistant-node",
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "thinking_effort": "Pro, 5 of 5.",
+    "response_sha256": "4610af5b470a2b3b10d6d89d6bf9e884bb811945171b7b8c2958328df43b876d",
+    "response_bytes": 66815,
+    "github_delivery_commit": "6c32ade3216c374ecf2f5179b15d559729cd45c9",
+    "github_response_path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+    "issue_comment_id": 5640511203,
+    "natural_completion_observed": "Worked for 30m 8s; complete response and delivery links present; no active generation control",
+    "archive_status": "ARCHIVED",
+    "archived_at": "2026-09-11T20:59:46Z",
+    "tab_id": "8",
+    "tab_lifecycle": "CLOSED",
+    "transport_scientific_conformance": "NOT_ASSESSED",
+    "github_delivery_verified": true,
+    "github_issue_comment_matches_request": true
+  },
+  "transport_sidecars": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/TRANSPORT_FACTS.json",
+      "bytes": 1937,
+      "sha256": "bf3c4ca890062c0a6718dd876bb62104e62ee273a44fe4469dde5acc2c1cf7d4",
+      "transport_source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\open-directions-20260911\\2026-09-11-open-directions-research-program-portfolio-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+      "copy_equal": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/CHAT_RECEIPT.md",
+      "bytes": 471,
+      "sha256": "14bff13d4640db9c43674fabb457c34f23817ad20e62d0cd9cabdd087d798c39",
+      "transport_source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\open-directions-20260911\\2026-09-11-open-directions-research-program-portfolio-01--portfolio--attempt-01__04_CHAT_RECEIPT.md",
+      "copy_equal": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/TRANSPORT_PACKET_MANIFEST.json",
+      "bytes": 2524,
+      "sha256": "0c590c0155570d91bdded8872368c31e121946985da1f4cdd119c5bf5a9ef62b",
+      "transport_source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\open-directions-20260911\\2026-09-11-open-directions-research-program-portfolio-01--portfolio--attempt-01__PACKET_MANIFEST.json",
+      "copy_equal": true
+    }
+  ],
+  "transport_limit": "Provider user/assistant identifiers in the sidecar are descriptive current-node labels, not stable provider message IDs. This intake independently verifies Git/Issue/archive bytes and attributes browser observations to Transport; no duplicate Send or browser action. CHAT_RECEIPT literal backslash-n text is preserved byte-for-byte.",
+  "issue_comment": {
+    "id": 5640511203,
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5640511203",
+    "created_at": "2026-09-11T20:53:40Z",
+    "updated_at": "2026-09-11T20:53:40Z",
+    "bytes": 4667,
+    "sha256": "1c51b8a3cc1a8790d01028e46fa4eb58d6d47b4c1474817a50a2dd029a45d7d9",
+    "terminology_clarification": "RETAIN has the same legal information; no functional policy-class containment or architectural equivalence is established."
+  },
+  "fixed_reference_checks": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/SCIENCE_BRIEF.md",
+      "commit_sha": "b109bb6aeefb7dcbc5df9ac05166ad3070951f85",
+      "bytes": 35941,
+      "sha256": "ae706f80a5671eed82e05dc41db816a574620499c76b62289aed92804ebd1089",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/PREPARATION_INTAKE.md",
+      "commit_sha": "b109bb6aeefb7dcbc5df9ac05166ad3070951f85",
+      "bytes": 12514,
+      "sha256": "1bae56a0a646cf6da2b69745a12509415f3ac40420cfe059960f1e6463db2b4a",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/FACTS.json",
+      "commit_sha": "b109bb6aeefb7dcbc5df9ac05166ad3070951f85",
+      "bytes": 9275,
+      "sha256": "b8ac6f608e360fe7c16c457ab4f4f9994b67a795b91645c52d3e5a280ac26af9",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/ISSUE_SNAPSHOT.json",
+      "commit_sha": "b109bb6aeefb7dcbc5df9ac05166ad3070951f85",
+      "bytes": 15661,
+      "sha256": "4c9a203a07993014b1685f96f4b24da2865a285ae8714de617390f2b5491fc84",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 42984,
+      "sha256": "cfbe996017cd6ffd7e4a8e8af0321b8bc28904f7529626d1d0f7548222b0c4b5",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 10764,
+      "sha256": "09f31d16810b7fca039b6895af0e97b201dee7962b8ed526312188385ab06ef8",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 4038,
+      "sha256": "4dae3729dc54db39599a689712fa1f6ccdb80d5fd2f08e96757bcf8686e6e0b9",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 4598,
+      "sha256": "9fd3736fefe5c3cf52432b1ab3d4ed220188b1666bf10163ad55f5dcca69f06c",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 61386,
+      "sha256": "11d30ea9d7e287689659c556fafa3b9138f85fc5a49dcbfd558ec95bab087f3f",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 218749,
+      "sha256": "f130096053a12269bb4282e008375ac40dfd77eef4e4219077a659d8fffe1c29",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-11-current-vacancies-refill.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 19270,
+      "sha256": "56ee6590d1845e00cce7d29cba26b0978febf37a41c46fd2734758d4e7950173",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 27639,
+      "sha256": "38202f0c06043a3845b11e58978bf9b7d6d19387b04c39ea1c80da18e9cd0904",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 32087,
+      "sha256": "9a59b0c716a6a1ea3bc98b09789a6d6e3d049c65442620cd8b6a097a54f84123",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 53389,
+      "sha256": "3522f67f1ed92078b6ba4954cc94ae1985d52a1a3b43fd5e59b36069f71d8ad2",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 84081,
+      "sha256": "08e5a85acb2fb73205022211c4ee35baa6107502b60da72c989b389d35019090",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 38169,
+      "sha256": "c056718e634bfea0825fb55b54b974e6e4fb78145feff28751483a21656cdba9",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 45824,
+      "sha256": "b745a7aa49b5dad9af70c072bcdeda998c8441c527d48988e416f09a01d2bea1",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 49198,
+      "sha256": "f5f19dbf69c723a614b77293c60618d629f9b4690dad28f7049c09610a5b562a",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 52543,
+      "sha256": "895476dcacf024a251f4902cec7f8168b9b68e04f659a66c14193fabf5b40744",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 54871,
+      "sha256": "eaf079ddba94cd33bb7b2d385c5fa7caf4339deb2477e4eec1b3a73e6df91e16",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/ucope/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 160313,
+      "sha256": "2be254a9501ae8de51df3b3c4a2d361a3e9c58424008e7a70f7a9c55c90566d2",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 41097,
+      "sha256": "fe8403f38551fac49711efba3b9cfbfe80faea243327ba99121d84aadda507f1",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 30428,
+      "sha256": "9639d9f76a06300f1bc1ab3b867420e8827c15edd933c4b04832955ca96ba8fa",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/vsp_02/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 10794,
+      "sha256": "9f12835000b6e29662bc23265eebd49b4a9f4a237e8d36e90b76d3b6c0c323e5",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 37002,
+      "sha256": "666f324eb0b109a06c3f73135da68bb6333a8f045014ca645b112d5f697d75ae",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/DIRECTION.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 63630,
+      "sha256": "063d9291faba212941c75a7ab0e14f69c741bcfbc0c4cdca95573d8b9a88020b",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 11383,
+      "sha256": "b3c5131b2a8bbea6cebbaf20dcd6e9591c0b26be7774fd7900bdd6ed5be093ad",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 10116,
+      "sha256": "53097d68ce4aa7a9d310139717dc05dbccdf4980e26c0ddbdeacde3994192b38",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_EXECUTION_LIMITATION_INTAKE_20260911.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 8586,
+      "sha256": "c045a21221efbfcfdcce22cc74a4ed059d8956c77fd3f15635df8d8715cc886e",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_SOURCE_DELIVERY_REPAIR_20260911.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 9919,
+      "sha256": "77903bfd268d963ef7ed8b848c6f95399bfec3d2a45d83a736fb57b52d227cc2",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_CANDIDATE_20260911.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 10495,
+      "sha256": "a05279829edd6ef06e8665bf12a6f2df326d143fb892dde19784876765af91b5",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_CONVERGENCE_INTAKE_20260911.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 14171,
+      "sha256": "b1a20f6ec2983888ab1a431f76676bffdc622e2951b230e0584c4ad949b3d16b",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_SCIENCE_CARD_20260910.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 11730,
+      "sha256": "5d55b73d4f43bf06e7591c3a689d715427041812c81e99d53ba2f2c1f492f003",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 11541,
+      "sha256": "412f90c94a44ab96fd686fd516f9adb21357a3a7f06deeeddc5778cc50bfc351",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_INTAKE_20260911.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 11445,
+      "sha256": "554aabaa00370b404d5c6b723ed85276b6613b04bd7fea6632f9812b71e1676d",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 38718,
+      "sha256": "ee30075c9772ac1bd79a4460896c726ae0c0259ae4b2274bf5fe2700c62d9b65",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8951_INTAKE_20260911.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 10628,
+      "sha256": "b28c57cbec7b4482b782430db569feb94747b64ade30757c202e2d39db42454e",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_SCIENCE_CARD_20260911.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 11583,
+      "sha256": "d2d764571ff5340c773a09a5ef06ec78b86c7f1a9ef95830be2a8e79773689fd",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_INTAKE_20260911.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 7039,
+      "sha256": "0c557ecf682c183d521334835d58b9191db5f67943a22dce74d9605c60a9b378",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_RESULT_INTAKE_20260911.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 11756,
+      "sha256": "a4734a2a474bce975ecd4b4d28a0442ca3f8d1d8f43ec98ff14c50b14b86ad09",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_RESERVE_READINESS_INTAKE_20260910.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 13270,
+      "sha256": "ff2f75a5646b6ad39fb1d27e13b08f6dad5f816daef808406a6c67c9f31f6e7b",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    },
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_READINESS_INTAKE_20260910.md",
+      "commit_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+      "bytes": 14433,
+      "sha256": "11270b36208761d089956255648d9b3b54467476ed281caf09def5408494a823",
+      "publication_github_bytes_equal": true,
+      "intake_git_bytes_match_publication": true
+    }
+  ],
+  "reference_check_method": "Reuse publication complete46 GitHub byte reads; recheck all46 immutable Git bytes against published facts at intake. Fetch and compare the response again through GitHub Contents. Do not equate local publication verification with independent observation of Pro reading.",
+  "pro_access_claim": "Response section10 reports all46 effective fixed paths plus TASK read, two read disconnections recovered; no external corpus/core/source-code analysis. This is Pro self-report, supported by exact reference mapping, not independently reconstructed tool history.",
+  "current_main_sha": "2bfe94789eb364e51c4a0c775755d031fb1963e8",
+  "later_technical_sha": "2565d6cf09572ff7956edd7abf6c1d8ad62ca3ad",
+  "governing_surface_checks": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "cfbe996017cd6ffd7e4a8e8af0321b8bc28904f7529626d1d0f7548222b0c4b5",
+      "unchanged_fixed_to_current_main": true
+    },
+    {
+      "path": "docs/AGENTS.md",
+      "sha256": "0f8015331c5804b95da6fcf30ae9ea128a90707beaa0934e3ce5d058b6dd7899",
+      "unchanged_fixed_to_current_main": true
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "sha256": "09f31d16810b7fca039b6895af0e97b201dee7962b8ed526312188385ab06ef8",
+      "unchanged_fixed_to_current_main": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "unchanged_fixed_to_current_main": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "unchanged_fixed_to_current_main": true
+    },
+    {
+      "path": ".agents/skills/hmasd-portfolio-task/SKILL.md",
+      "sha256": "a295cc77eb7c1359688d91bfc7a7ad8c40099a9a53839b15269a3b1c26a874a6",
+      "unchanged_fixed_to_current_main": true
+    },
+    {
+      "path": ".agents/skills/hmasd-owner-item/SKILL.md",
+      "sha256": "335b6c605389f10acce53749d1054473033d0ffc47f414d8621d6a5ef983ab5b",
+      "unchanged_fixed_to_current_main": true
+    },
+    {
+      "path": ".agents/skills/hmasd-scientific-tools/SKILL.md",
+      "sha256": "d43010962ef2c9fcdc228e3dc18fb1c3a4ec63dc9311664c8cf106591fa6ee88",
+      "unchanged_fixed_to_current_main": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "unchanged_fixed_to_current_main": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "sha256": "4dae3729dc54db39599a689712fa1f6ccdb80d5fd2f08e96757bcf8686e6e0b9",
+      "unchanged_fixed_to_current_main": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md",
+      "sha256": "9fd3736fefe5c3cf52432b1ab3d4ed220188b1666bf10163ad55f5dcca69f06c",
+      "unchanged_fixed_to_current_main": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "unchanged_fixed_to_current_main": true
+    }
+  ],
+  "rule_applied_verbatim": {
+    "portfolio_finality": "8. **Portfolio Pro finality (OWNER_DIRECT 2026-09-10).** A complete archived response from\n   `portfolio:cross_direction` decides the bound investment, priority, lifecycle, capacity,\n   fusion/separation or registration question within current owner instructions and specifications.\n   The designated DM checks scientific/specification conformance; Root implements and records the\n   decision without per-item owner ratification. Preserve asynchronous owner overrides and actual\n   application states using the existing owner console. `PRO_FINAL / OWNER_DELEGATED` traces the\n   Pro decision under this standing delegation; `ROOT_INTEGRATED` describes publication, not a\n   second scientific verdict. This does not enlarge a frozen invocation budget, rewrite history,\n   or retroactively apply an old unratified proposal. An explicit specification change still uses\n   §4.7. Material disagreement or a concrete conflict returns to the same Pro node, never a local\n   substitute. The current decision record supersedes older ratification requirements prospectively.",
+    "B_launch": "Only the following may hold a B launch: the §4 common integrity requirements; the §5.2 requirement\nthat the real learner runs and reports nonzero transition, update, and evaluation counts; the\nmandatory resource admission; and one machine-generated **exposure line** (parameter displacement\nbudget relative to initialisation scale, or an equivalent statement that the learner can move in its\nbudget). Nothing else, including hash chains, byte manifests, telemetry completeness beyond what\nthe run's own claim needs, capacity gates, formal-analysis flags, or prospective contracts, may\nhold a B launch. The quarantine rule for incomplete attempts (§6.2) is unchanged by this section;\nwhether an instrumentation failure downgrades rather than annuls a run is a separate owner decision\nnot taken here.",
+    "failure_dependency": "Report observed exception, exit, missing output and counts immediately. Root-cause attribution requires\ndirect evidence, but reproducing and uniquely locating every historical cause is not a universal\nprerequisite for later work. Repair or check a defect that threatens reward, information access,\ncomparison, training or the primary measurement. A credible alternative path may proceed without\nsolving unrelated historical failures, with the non-dependence stated. A damaged primary measurement\ncannot support its dependent performance claim; independently trustworthy narrower facts remain\nreportable. A new B that does not use an old publication system does not inherit that system's full\nreplay obligation. These rules do not retroactively change quarantined artifacts."
+  },
+  "selected_programs": [
+    {
+      "direction_id": "flexible_skill_duration",
+      "learners": 2,
+      "independent_training_units": 1,
+      "training_episodes": 160,
+      "training_team_ticks": 80000,
+      "evaluation_episodes": 64,
+      "evaluation_team_ticks": 32000,
+      "update_stages": 10,
+      "optimizer_steps": null,
+      "d0_coordinator_chunks": 525,
+      "i_coordinator_law": "15 * sum(ceil(M_r/1280)), five M_r <= 8000; observed B01 330",
+      "model_constructions": 4,
+      "batched_controller_calls": 6000,
+      "per_arm_cost_law": "init + rollout + 15*sum(ceil(M_r/batch))*coordinator_chunk + lower_PPO + final_evaluation + checkpoint/publication/exit",
+      "new_proposed_seconds": {
+        "D0": 900,
+        "I1280": 1800,
+        "native_sum": 2700,
+        "support": 300,
+        "complete": 3000
+      },
+      "anchor": "FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+      "future_rate_seconds": null,
+      "total_team_ticks": 112000,
+      "allocation_state": "PRO_FINAL new allocation",
+      "caps_seconds": {
+        "D0": 900,
+        "I1280": 1800,
+        "native_sum": 2700,
+        "support": 300,
+        "complete": 3000
+      }
+    },
+    {
+      "direction_id": "vap_folr_core",
+      "learners": 2,
+      "independent_training_units": 1,
+      "episode_pairing": "not matched post-action worlds; action-dependent native RNG",
+      "training_episodes": 10000,
+      "training_team_ticks": 200000,
+      "evaluation_episodes": 256,
+      "evaluation_team_ticks": 5120,
+      "optimizer_steps": 9938,
+      "base_online_target_replay_GRU_rows": 66783360,
+      "base_acting_GRU_rows": 1076880,
+      "new_gate_coefficients": 129,
+      "new_gate_work": null,
+      "per_arm_cost_law": "init +100000 collection ticks +4969 replay/RMSprop stages +2560 final ticks + publication/exit + new-arm gate work",
+      "new_proposed_seconds": {
+        "RETAIN": 1800,
+        "LEARNED_GATE": 1800,
+        "native_sum": 3600,
+        "support": 300,
+        "complete": 3900
+      },
+      "anchor": "FOLR_PUBLIC_LIFECYCLE_HALF_B02_SCIENCE_CARD_20260910.md historical envelope only; learned-retention candidate has unknown/unallocated future cap",
+      "future_rate_seconds": null,
+      "total_team_ticks": 205120,
+      "allocation_state": "PRO_FINAL new allocation",
+      "caps_seconds": {
+        "RETAIN": 1800,
+        "LEARNED_GATE": 1800,
+        "native_sum": 3600,
+        "support": 300,
+        "complete": 3900
+      }
+    },
+    {
+      "direction_id": "metric_ground_transport_allocation",
+      "learners": 2,
+      "independent_training_units": 1,
+      "training_episodes": 1024,
+      "training_team_ticks": 262144,
+      "evaluation_episodes": 64,
+      "evaluation_team_ticks": 16384,
+      "optimizer_steps": 2048,
+      "model_constructions": 6,
+      "actor_rows_per_fit": 3317760,
+      "per_arm_cost_law": "init +131072 collection ticks +1024 replay/Adam calls +8192 final ticks + publication/exit",
+      "new_proposed_seconds": {
+        "COND": 450,
+        "DENSE": 450,
+        "native_sum": 900,
+        "support": 300,
+        "complete": 1200
+      },
+      "anchor": "MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md",
+      "future_rate_seconds": null,
+      "total_team_ticks": 278528,
+      "allocation_state": "PRO_FINAL new allocation",
+      "caps_seconds": {
+        "COND": 450,
+        "DENSE": 450,
+        "native_sum": 900,
+        "support": 300,
+        "complete": 1200
+      }
+    },
+    {
+      "direction_id": "acvc",
+      "learners": 1,
+      "independent_training_units": 1,
+      "training_episodes": 512,
+      "training_team_ticks": 131072,
+      "evaluation_episodes": 192,
+      "evaluation_team_ticks": 49152,
+      "optimizer_steps": 1024,
+      "model_constructions_including_helpers": 9,
+      "actor_collect_rows": 655360,
+      "actor_replay_rows": 2621440,
+      "actor_evaluation_rows": 245760,
+      "coordinate_pair_check_upper": 6553600,
+      "per_arm_cost_law": "one learner init +131072 collection ticks +1024 replay/Adam calls +3*64*256 final ticks/controller work + publication/exit",
+      "new_proposed_seconds": {
+        "one_fit_with_three_panels": 270,
+        "native_sum": 270,
+        "support": 330,
+        "complete": 600
+      },
+      "anchor": "ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md 8951 append-only allocation, ended",
+      "future_rate_seconds": null,
+      "total_team_ticks": 180224,
+      "allocation_state": "PRO_FINAL new allocation",
+      "caps_seconds": {
+        "one_fit_with_three_panels": 270,
+        "native_sum": 270,
+        "support": 330,
+        "complete": 600
+      }
+    },
+    {
+      "direction_id": "variable_n_fleet_churn",
+      "learners": 2,
+      "independent_training_units": 1,
+      "training_episodes": 4096,
+      "training_team_ticks": 983040,
+      "evaluation_episodes": 384,
+      "evaluation_team_ticks": 92160,
+      "reference_episodes": 64,
+      "reference_team_ticks": 15360,
+      "optimizer_steps": 4096,
+      "collection_forwards": 768,
+      "optimizer_forwards": 4096,
+      "evaluation_forwards": 36,
+      "full_BCRH_calls": 384,
+      "unique_exogenous_fixtures": 2112,
+      "actor_parameters_each": 89090,
+      "per_arm_cost_law": "2048*c_collect +64*c_update +192*c_eval +delta_new; shared/reference/build/publication charged once",
+      "new_proposed_seconds": {
+        "native_sum_both_arms_and_reference": 600,
+        "native_sum": 600,
+        "support": 300,
+        "complete": 900
+      },
+      "anchor": "VNFC_N7_NATIVE_SERVICE_CREDIT_B02_SCIENCE_CARD_20260911.md ended allocation;600 total not per arm",
+      "future_rate_seconds": null,
+      "total_team_ticks": 1090560,
+      "allocation_state": "PRO_FINAL new allocation",
+      "caps_seconds": {
+        "native_sum_both_arms_and_reference": 600,
+        "native_sum": 600,
+        "support": 300,
+        "complete": 900
+      }
+    }
+  ],
+  "selected_work_totals": {
+    "learners": 9,
+    "independent_training_units": 5,
+    "training_episodes": 15792,
+    "policy_evaluation_episodes": 960,
+    "reference_episodes": 64,
+    "team_ticks": 1866432,
+    "complete_cap_seconds": 9600,
+    "native_cap_seconds": 8070,
+    "support_cap_seconds": 1530
+  },
+  "totals_limit": "Nine learner fits in five independent question-level training units. Evaluation/checkpoint rows are not training units. Caps are nontransferable and are not costs, forecasts or a pooled scientific estimand. Future rates remain unknown.",
+  "other_options": {
+    "B": "FSD/MGTAP4200 with FOLR preparation only; not selected",
+    "C": "other named subset or proper direction questions; not selected"
+  },
+  "scientific_holds": [
+    "roster_consistent_latent_exploration",
+    "ucope",
+    "vsp_03",
+    "vsp_c1",
+    "semigroup_consistent_duration_model_policy",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "vsp_02"
+  ],
+  "scientifically_unfunded_technical_only": [
+    "capability_bound_semantic_currentness",
+    "finite_resource_relational_inductive_efficiency"
+  ],
+  "ordering": [
+    "FSD HIGH first under compute contention",
+    "ready MGTAP native before FOLR native; FOLR implementation independent",
+    "ACVC/VNFC/SCDMP preserve second-recast lowest contention; ready VNFC HIGH before ready ACVC MEDIUM; unready VNFC holds nobody"
+  ],
+  "lifecycle_priority_recast_registration_fusion_C_UAV_changes": 0,
+  "headroom": "Matching upper-minus-tuned-same-information current-host headroom absent for all15 scoped records; not zero and not a B gate.",
+  "author_correction": {
+    "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/SCIENCE_BRIEF.md",
+    "lines": [
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187
+    ],
+    "incorrect_shorthand": [
+      "cached C",
+      "clock-matched dwell"
+    ],
+    "accepted_meaning": "C always transmits sampled proposal; dwell zeros on its own-history predicate, otherwise proposal. No borrowed F event times, history or dose. Source card section4 and Pro section5 agree. Frozen packet unchanged."
+  },
+  "later_technical_facts": {
+    "ACVC": {
+      "state": "READY input delivery; old8951 remains zero exposure and ended",
+      "source": "721e1cf6372fef2c932191a1d351ca83a8c12a44",
+      "main_acceptance": "88f9e87d5207d0526691a3069d8598f5762fb0da"
+    },
+    "FSD": {
+      "state": "READY source delivery; no historical support refund or cap certificate",
+      "source": "acaa4f67e2685f559c22bd57dedde0a1a0b9e28b",
+      "main_acceptance": "20258e5efc2680d2d46ed47c47f11574920bb98b",
+      "source_paths": 9,
+      "helper_wall_seconds": 5.672000000020489,
+      "remote_nested_wall_seconds": 4.897623604047112
+    },
+    "CBSC": {
+      "state": "COMPLETED source-only observation; no attributable production repair or target allowance",
+      "source": "929f95c370cb9ee33dd28d2d3d830f90af55d12c",
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_P47_TECHNICAL_UNBLOCKING_INTAKE_20260911.md",
+      "checker_seconds": 0.084374,
+      "text_AST_replacements": 6,
+      "research_imports": 0,
+      "retained52_run": false,
+      "old_rejection_trigger": "unlocalized; exact tool/payload/full rejection remains absent",
+      "scratch_cleanup": "actual guarded PowerShell Remove-Item rejected before process creation as blocked by policy;5 files12262bytes retained by creator; no alternate deletion method/executor"
+    },
+    "FRRIE": {
+      "state": "COMPLETED source-only observation; native attribution remains missing in bounded retained locations",
+      "source": "77028e93b347ea524cf89a7b590a416743686155",
+      "audit": "6903e5d665ad7b7cd475803b2f79858701558280",
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_STATIC_UNBLOCK_INTAKE_20260911.md",
+      "observer_lines": 76,
+      "source_files": 6,
+      "source_lines": 2480,
+      "retained_frames": 9,
+      "workload_imports": 0,
+      "check_outer_wall_seconds": 0.5353359,
+      "parser_nested_seconds": 0.0644326,
+      "ssh_work_seconds": 4.9838216,
+      "numeric_allowance": 0,
+      "scope_limit": "Two known native-context retention locations, not a global absence proof; no oldP63/R09 revival."
+    },
+    "VNFC": {
+      "state": "NOT_READY; bounded technical scope CLOSED by Root, no further old-scope diagnostic",
+      "source": "f68fcb952dce9a88246f38bc61581fe41fe07eab",
+      "production_changed": false,
+      "same_meaning_integer_candidate_accepted_as_repair": false,
+      "synthetic_mean_cases": [
+        1025,
+        1536
+      ],
+      "synthetic_backwards": 64,
+      "corrupting_writer": "unknown;32-byte CPythonAPI mcall argument-block tail before current NumPy output exists; not established NumPy output-buffer overwrite",
+      "proposed_20s_probe": "not executed/queued; exact new technical bound and permissible method remain with Root/original DM; funded900B is not a diagnostic reserve",
+      "original_core_bytes": 631513088,
+      "original_core_sha256": "0698c60ba73088b5c512c1941a2bdfc9cec3e87f22cf8a10adfd2f0a3e32e323",
+      "synthetic_core_bytes": 537112576,
+      "synthetic_core_sha256": "b2dd8cab7946120d68a312189a4a8821e34a4e6a64b3f78d2612c13d1999d2e7"
+    }
+  },
+  "rolling_count_snapshots": {
+    "frozen_packet_advancing_technical": 1,
+    "later_main_before_new_dispatch": 0,
+    "target": 5,
+    "new_ready_DM_tasks": 4,
+    "actual_new_dispatches": "Root reports all five original DM chains dispatched and active; four scientific-unit preparation/execution chains, VNFC technical readiness chain. New static VNFC return is separately recorded; Root owns subsequent count.",
+    "funded_VNFC_not_ready": true,
+    "root_reported_advancing_count": 5,
+    "report_recorded_utc": "2026-09-11T21:23:10.638121+00:00",
+    "native_snapshot": "FSD/MGTAP/FOLR/ACVC/VNFC original DM status running; reviewer completions are not extra direction chains.",
+    "later_after_FSD_VNFC_returns": "Three continuing funded chains: MGTAP/FOLR/ACVC, per Root latest facts; two execution vacancies. Earlier five dispatches preserved as historical snapshot."
+  },
+  "actual_intake_exposure": {
+    "scientific_invocations": 0,
+    "policy_models": 0,
+    "encoder_modules": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_environment_steps": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "replay": 0,
+    "profiling": 0,
+    "source_tests": 0,
+    "numerical_fixtures": 0,
+    "support_search": 0,
+    "raw_result_reanalysis": 0,
+    "source_implementation_edits": 0,
+    "provider_sends": 0,
+    "parameter_displacement": "not applicable: no learner"
+  },
+  "exposure_line": "OPEN_DIRECTIONS_PROGRAM_INTAKE: scientific_invocations=0; policy_models=0; encoder_modules=0; checkpoint_loads=0; environments=0; native_steps=0; synthetic_environment_steps=0; training_episodes=0; optimizer_steps=0; evaluation_episodes=0; replay=0; profiling=0; source_tests=0; numerical_fixtures=0; support_search=0; raw_result_reanalysis=0; source_implementation_edits=0; provider_sends=0; parameter_displacement=not applicable: no learner",
+  "owner_reviews_at_entry": {
+    "shared": [],
+    "primary": []
+  },
+  "prediction": "not taken (unattended); no new empirical observation to score",
+  "owner_item": "20260911-root-004",
+  "technical_dispatch_mapping_sent_utc": "2026-09-11T21:06:19Z",
+  "cleanup": "No test scratch, execution worktree, new runtime outputs or experiment handles created. Preserve shared codex/portfolio authoring checkout for Root integration/intake; Root owns eventual reclamation. Other DMs retain their recorded evidence/cleanup duties.",
+  "later_VNFC_static": {
+    "commit": "06fc94e6268072a3be02abc78738d32813b950f0",
+    "path": "docs/research/candidates/variable_n_fleet_churn/evidence/b02_credit_20260911_01/repair_exact_interpreter_static.json",
+    "bytes": 34141,
+    "sha256": "8ef122123e26fc24b16d16ba10bfc514d9d6f3bd1232370ebad67f60981e054d",
+    "mapping": {
+      "constructor": "Exact installed fractions.py:515 calls Fraction(n,d,_normalize=False); __new__ receives cls,numerator,denominator and keyword-only _normalize.",
+      "positional_count": 3,
+      "keyword_count": 1,
+      "reserved_leading_slots": 1,
+      "pointer_bytes": 8,
+      "expected_allocation_bytes": 40,
+      "recorded_debug_allocation_bytes": 32,
+      "prepend": "ELF0x27266f reads positional tuple size;0x272673 adds cls;0x27273c calls _PyStack_UnpackDict. This maps the expected declared call, not a captured allocation-time register value.",
+      "allocation": "ELF0x15c09f reads keyword dict size;0x15c0c1 sums positional+keyword count;0x15c0c5 scales by8;0x15c0c9 adds8;0x15c0dd calls configured PyMem allocator.",
+      "layout": "ELF0x15c1a0 advances returned args by8. ELF0x15c1e4 computes keyword-value start after positional args;0x15c287 stores the keyword value. Expected _normalize=False offset is32 from allocation base.",
+      "deallocation": "ELF0x2727e8 subtracts8 from argument pointer;0x2727f6 frees via configured PyMem allocator. Saved return PC is0x5722fc1c27fc.",
+      "core_load_base": "0x5722fbf50000 = 0x5722fc1c27fc - 0x2727fc",
+      "false_elf_symbol": "0x104bac0",
+      "false_runtime_address": "0x5722fcf9bac0",
+      "recorded_tail_value": "0x5722fcf9bac0",
+      "tail_interpretation": "Exactly _Py_FalseStruct after relocation. Valid keyword position for a40-byte argument vector; invalid tail for the reported32-byte allocation.",
+      "ownership": "CPython call-argument vector, freed in _PyObject_Call_Prepend; distinct from Fraction instance storage and the64-float/512-byte mean result."
+    },
+    "conclusion": "The binary includes the extra slot and expects40bytes for this constructor call. The32byte debug header is discrepant; no missing-plus-one allocation formula is shown. The arithmetic substitution removes the implicated Fraction constructor path and preserves exact arithmetic, but these facts do not identify the origin of corruption or prove runtime repair.",
+    "remaining_fact": "Actual allocation-time positional/keyword counts and requested size versus subsequently observed debug size metadata. Existing static receipts cannot distinguish changed call state, size-metadata corruption, or another earlier corruption, and do not identify the first erroneous writer.",
+    "scope": "Static file/hash/source/symbol/disassembly reads only. No debugger, fixture, scientific-code import, model/environment/optimizer/RNG construction, native trajectory, admission, training, evaluation or production edit.",
+    "prior_review_command_sum_seconds": 4.9540463,
+    "prior_review_enclosing_tool_wall_approx_seconds": 6.7,
+    "additional_static_capture_seconds": 0.6437807,
+    "timing_rule": "Prior command and enclosing-tool sums are nested alternatives, not additive. This publication capture is additional static read time; commit/push costs are returned separately.",
+    "acceptance": "published exact-build static finding; no production readiness or scientific execution"
+  },
+  "later_VNFC_assignment": {
+    "source": "Root native followup received during full-response intake",
+    "root_followup_utc": "2026-09-11T21:07:27.825Z",
+    "checkout": "C:/Projects/HMASD-worktrees/codex-vnfc",
+    "branch": "codex/vnfc",
+    "scope": "Portfolio-conditioned technical readiness only; current-source repair, reproducible focused regression, independent review and remote staging readback before future launch; bounded static/dynamic tiny deterministic bridge diagnosis",
+    "prohibited": "scientific models/environments/optimizers/RNG, train/eval/scientific roots and conditional900s consumption",
+    "actual": "Service filtering prevented the DM turn; Root continued already-running reviewer with static-only exact-build analysis, now published. No permission/restriction bypass or production acceptance follows.",
+    "prior_scope": "f68fcb952 closed historical batch; this later assignment is distinct."
+  },
+  "root_application": {
+    "state": "A applied as five DM assignments; later FSD bounded staging limitation and VNFC readiness gap create two execution vacancies. MGTAP8213 running/adopted; FOLR/ACVC continue. Intake integration pending.",
+    "auto_applied": "A",
+    "live_monitor_task": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "stale_monitor_native": "/root/monitor_fsd_rcle_20260911",
+    "root_integration_of_intake": "pending this publication"
+  },
+  "latest_main_at_update": "05a76cb0d6bfb90230b55fe05fe40fcc079e5273",
+  "later_execution_receipt": {
+    "source": "Root native receipt during this intake; direct DM terminal/readiness records still being published",
+    "recorded_utc": "2026-09-11T21:26:23.232286+00:00",
+    "FSD770903": {
+      "stage": "single authorized source staging attempt",
+      "exit": 128,
+      "error": "GnuTLS decode / early EOF during remote Git fetch",
+      "checkout_admission_created": false,
+      "scientific_exposure": 0,
+      "monitor_dispatch": false,
+      "remote_paths": "absent, per Root receipt",
+      "result": "bounded execution limitation; no scientific polarity, repair retry or replacement selected"
+    },
+    "VNFC": {
+      "result": "DM reports material readiness gap under response section6",
+      "reason": "40-byte exact binary requirement versus32-byte saved allocation header has no established origin; proposed regression does not establish non-dependence on earlier corruption",
+      "production_changed": false,
+      "scientific_launch": false,
+      "conditional900": "funded and queued"
+    },
+    "MGTAP8213": {
+      "state": "accepted and running",
+      "monitor": "MONITOR_ADOPTED"
+    },
+    "FOLR_ACVC": "existing funded units continue independently",
+    "replacement_rule": "No automatic replacement in response1/8/9; new Portfolio investment question for different units or renewal, or an explicit vacancy decision. Existing separate bounded technical authority does not grant science.",
+    "next_packet_assignment": "Root explicitly assigned same DM after this intake publication; not yet authored or sent."
+  },
+  "audit_rows": {
+    "conformance": 83,
+    "portfolio_selection": 84,
+    "path": "docs/research/portfolio/audit/2026-09-11.md",
+    "main_rows_preserved": 82,
+    "main_snapshot_sha": "707eed347b84fede28e4d9ad437c98b22ce9a19e",
+    "main_snapshot_sha256": "33f2ec2bbb9005e74790ec138c9003ce71b977938ec5b225f4b26f6edba42197"
+  },
+  "owner_brief_characters": 369,
+  "owner_reviews_final": {
+    "primary": [],
+    "shared": []
+  },
+  "verification": {
+    "utc": "2026-09-11T21:29:39.371040+00:00",
+    "all11_intake_paths_in_scope": true,
+    "JSON_parses": true,
+    "relative_links_checked": 10,
+    "rules_verbatim": true,
+    "owner_quotes_verbatim": true,
+    "frozen_packet_and_response_unchanged": true,
+    "owner_trace_applied_A": true,
+    "brief_characters": 369,
+    "brief_six_headings": true,
+    "audit_base_sha": "707eed347b84fede28e4d9ad437c98b22ce9a19e",
+    "all_audit_base_rows_preserved": true,
+    "audit_concurrent_policy": "Preserve this exact main snapshot and append only two author rows. Later independent main appends are Root integration facts, not a prepublication wait.",
+    "runtime_tests": "not needed: documentary intake only; no source/runtime edits",
+    "mechanical_check_corrections": "UTF8 console encoding, archive filename prefix and request reference_files key corrected; concurrent audit append preserved; no scientific execution or external Send."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "test": {
+    "command": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906/temp/directions/roster_consistent_latent_exploration/test/b07-equal-unit-memory-20260912 tests/experiments/candidates/roster_consistent_latent_exploration/b07_equal_unit/test_update.py",
+    "environment": {
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "outcome": "15 passed in 1.74s",
+    "command_wall_s": 2.5407404,
+    "scratch_exists_after": false,
+    "scientific_models": 0,
+    "scientific_rng": 0,
+    "native_rollouts": 0
+  },
+  "rejected_command": {
+    "action": "prior PowerShell pytest plus contained scratch cleanup",
+    "phase": "before CreateProcess",
+    "reason": "blocked by policy",
+    "test_started": false,
+    "known_created_scratch": false,
+    "resolution": "Changed only the fixture's unnecessary disk dependency to MemoryPath/StringIO. Successful check performs no cleanup operation; rejected deletion was not retried."
+  },
+  "prelaunch_namespace_check": {
+    "cwd": "/home/wu/hmasd-worktrees/rcle-b07-equal-unit-s27-20260912",
+    "supervisor_root": "/home/wu/.agent-tasks/rcle-b07-equal-unit-s27-20260912",
+    "staging": "/home/wu/hmasd-inputs/rcle-b07-equal-unit-s27-20260912",
+    "all_absent": true,
+    "prerequisite_commit_available": "3ffa65cb4e1a67182b90dce3822d0018ac623c72",
+    "help_exit": 1,
+    "help_note": "agent-task --help printed usage with exit1 after all chained absence/prerequisite checks succeeded; this was not a launch",
+    "command_wall_s": 0.3624544
+  },
+  "known_support_command_wall_components_s": [
+    0.2767649,
+    0.4494161,
+    0.2705082,
+    0.4003907,
+    1.0932788,
+    0.279974,
+    4.4785995,
+    0.2465258,
+    0.262656,
+    0.1878509,
+    0.1657499,
+    2.5407404,
+    0.4106612,
+    0.3624544,
+    0.4378354,
+    0.2405051
+  ],
+  "accounting_note": "Sum known enclosing executed-command wall once. Test runtime and namespace helper substeps are not added again. Tool/authoring tails, not-yet-returned independent review commands and future publication/staging/observation/collection/integration/cleanup are not zero; full cost not yet measured. Rejected CreateProcess has no executed-command wall receipt. No native scientific invocation has occurred.",
+  "known_support_command_wall_s": 12.1039113
+}

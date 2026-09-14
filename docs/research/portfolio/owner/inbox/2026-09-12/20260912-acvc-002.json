@@ -1,0 +1,94 @@
+{
+  "id": "20260912-acvc-002",
+  "created": "2026-09-12T10:17:10-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "固定 F 进入训练的一对增量比较",
+  "context": "原 Convergence 选择的 common-F 训练比较已获 Portfolio 新投入；保护原 PPO 采样密度与实际反馈，只运行一对新训练。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行已投入的两臂协议；不授权后继或重跑。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在可停边界停止未执行部分，保留已有证据与费用。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "先核对异步修改的科学范围，冻结含义不追改。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "原方向选择与新 Portfolio F=yes 已一致；按既定协议实现并观察一对。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_SCIENCE_CARD_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L24",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Portfolio 已投入的一对训练：固定 F 进入训练，是否比仅部署 F 更有用？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC_FIXED_F_TRAINING_USE_B01",
+        "from": "原方向已选定但此前未投入",
+        "to": "按新 Portfolio F=yes 执行两次训练与同一组 F 评估"
+      }
+    ],
+    "if_refused": "在下一可停边界应用异步指令；保留已发生的结果和费用，不擅自改卡或重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260912_post_c01_training_use_convergence/INTAKE.md",
+        "quote": "Train-C → deploy-F remains the competent current reference.",
+        "why": "比较直接检验训练时加入纠偏的增量用途。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_SCIENCE_CARD_20260912.md",
+        "quote": "This is one comparative training replication.",
+        "why": "单对结果无法支持稳定胜出或跨任务推广。"
+      }
+    ],
+    "uncertainty": [
+      "训练中 F 的实际新增耗时尚未知，不能用旧测试时间冒充实测。",
+      "当前主机上调优的同信息比较器 headroom 仍缺失；recasts:2 的最低争用顺序保持。"
+    ],
+    "cost": {
+      "compute": "新未来额度：每完整臂 270 秒、原生合计 540 秒、完整支持 660 秒、合计 1200 秒；历史 A 费用另保留且有未知部分。",
+      "owner_time": "无需答复即可继续现有授权",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Claim tested: on the fixed native task and learning budget, training through fixed F improves final common-F native return over training C by more than .01 J.",
+    "source": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_SCIENCE_CARD_20260912.md"
+  },
+  "starred": true,
+  "approval_correction": "原 packet evidence_for 的 Train-C → deploy-F remains the competent current reference. 是对 intake 的概括而非逐字引文。更正逐字来源为新卡第1节 The latter remains the competent current reference.；方向 OWNER_PACKET 已修正，原副本保留此更正轨迹。",
+  "execution_history": [
+    {
+      "at": "2026-09-12T17:19:22+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/EXECUTION_MAPPING.md",
+      "record": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_EXECUTION_20260912.md",
+      "state": "applied",
+      "summary": "F=yes 已执行到卡与代码；独立审查与14项检查通过，尚未训练。",
+      "correction": "原 packet evidence_for 的 Train-C → deploy-F remains the competent current reference. 是对 intake 的概括而非逐字引文。更正逐字来源为新卡第1节 The latter remains the competent current reference.；方向 OWNER_PACKET 已修正，原副本保留此更正轨迹。"
+    },
+    {
+      "at": "2026-09-12T17:35:09+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_sa_marginal_investment/EXECUTION_MAPPING.md",
+      "record": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B01_INTAKE_20260912.md",
+      "state": "applied",
+      "summary": "已投入的两臂完整结束；DOWN，保留训练C部署F参考。所有结果已保留，无重跑或后继。完整支持费用与清理限制见intake。"
+    }
+  ]
+}

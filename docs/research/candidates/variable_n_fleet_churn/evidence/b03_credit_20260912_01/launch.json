@@ -1,0 +1,30 @@
+{
+  "attempted_at": "2026-09-12T13:53:09.244627+00:00",
+  "source_sha": "b93329b3c44ea9d0cf5622c00f5ca6eea0740dac",
+  "inputs_commit": "f72f0d8634a365518a24c4fad7166bdda7ea1c68",
+  "supervisor_name": "vnfc-b03-credit-20260912-01",
+  "supervisor_command": "cd /home/wu/hmasd-worktrees/vnfc-b03-credit-20260912-01 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01_memory.json && /usr/bin/time -f 'elapsed_seconds=%e\npeak_rss_kib=%M\nexit_status=%x' -o temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01_outer_time.txt /usr/bin/timeout --signal=TERM --kill-after=1s 600s /home/wu/.venvs/hmasd/bin/python scripts/run_vnfc_native_service_credit_b03.py --seed 2026091201 --eval-seed 2026091202 --out temp/directions/variable_n_fleet_churn/exp/b03_credit_20260912_01 --launch-sha b93329b3c44ea9d0cf5622c00f5ca6eea0740dac",
+  "transport_command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=8",
+    "-o",
+    "ServerAliveInterval=3",
+    "-o",
+    "ServerAliveCountMax=1",
+    "hmasd-wsl-node",
+    "/home/wu/.venvs/hmasd/bin/python -B -u -"
+  ],
+  "acceptance": "accepted once: supervisor run returned0/started; fresh destination admission passed and scientific entry executed",
+  "transport_returncode": 0,
+  "transport_stdout": "{\"returncode\": 0, \"stdout\": \"Task 'vnfc-b03-credit-20260912-01' started in tmux session 'agent_vnfc-b03-credit-20260912-01'. Output: /home/wu/.agent-tasks/vnfc-b03-credit-20260912-01/task.log\\n\", \"stderr\": \"\"}\n",
+  "transport_stderr": "",
+  "supervisor_receipt": {
+    "returncode": 0,
+    "stdout": "Task 'vnfc-b03-credit-20260912-01' started in tmux session 'agent_vnfc-b03-credit-20260912-01'. Output: /home/wu/.agent-tasks/vnfc-b03-credit-20260912-01/task.log\n",
+    "stderr": ""
+  },
+  "local_elapsed_seconds": 0.6720000000204891
+}

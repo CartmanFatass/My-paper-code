@@ -1,0 +1,61 @@
+{
+  "checked_at_utc": "2026-09-12T19:00:00.803831+00:00",
+  "author": "/root/dm_folr_post_b03",
+  "author_uuid": "01a096d5-6991-7611-892d-f1a1fa910761",
+  "response": {
+    "commit_sha": "65be91e1cecc4317a751964afd1fd16432de0b5f",
+    "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_learned_retention_post_b03_convergence/archive/RESPONSE.md",
+    "bytes": 31464,
+    "lines": 120,
+    "sha256": "b663aa3f5f4129e7f3ce47ebcdec3674e7f46ff2fa56d2a67d6b02e7c12a8607",
+    "integrated_main_sha": "b7f328cd65464d2bbad08a1e964ec742628c1b88",
+    "main_and_direction_git_blob_bytes_match": true,
+    "windows_worktree_bytes": 31584,
+    "windows_worktree_sha256": "b023e054eca3059c5f8c69b1d56019f9b80d454bf22333231e005e23c46c7eec",
+    "windows_worktree_difference": "ordinary CRLF checkout; LF-normalized text exactly equals original Git bytes and git diff empty; no archive edit",
+    "complete_author_read": true
+  },
+  "task": {
+    "commit_sha": "02c1cde2736938fd1f2e07feadf8afe02c4caef2",
+    "request_id": "folr-learned-retention-post-b03-convergence-20260912",
+    "evidence_mapping_count": 19,
+    "all_response_citations_match_effective_task_versions": true
+  },
+  "transport_receipt_routed_by_root": {
+    "state": "ARCHIVED",
+    "observation": [
+      "SEND_CONFIRMED",
+      "NATURAL_COMPLETION"
+    ],
+    "send_count": 1,
+    "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+    "assistant_message_id": "62a26618-5667-43da-9505-a0e17457de44",
+    "provider": "6 Pro / Latest / effort 5 of 5",
+    "prompt_bytes": 1945,
+    "prompt_sha256": "f23a63d35b779ff37ca5838151479aec0ce0e274025317251a616d739dd32c93",
+    "committed_prompt_matches": true
+  },
+  "direct_delivery_comment": {
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5647949947",
+    "created_at": "2026-09-12T18:47:42Z",
+    "response_and_task_match": true,
+    "artifact": "archive/DELIVERY_COMMENT.json"
+  },
+  "currentness": "No content difference from pinned method version on current main in AGENTS, evidence spec, FOUNDATIONS and04_EMPIRICAL; current owner reviews [].",
+  "scope_check": "Delivery commit adds only named RESPONSE.md; branch fast-forwarded from a4a66d157; no unrelated paths changed.",
+  "scientific_conformance": {
+    "author_decision": "accept",
+    "conflicts": [],
+    "pro_decision": "H",
+    "classification": "reversible in-family tested-recipe hold",
+    "recast": false,
+    "retained_U_candidate": false,
+    "new_invocation_allowance": 0,
+    "portfolio_lifecycle_change": false,
+    "strongest_support": "B01+1.763359375",
+    "strongest_contradiction": "B02-1.769531250",
+    "B03_preserved": "-1.215546875, original RETAIN_ABOVE_MEI; conditional/near-margin limits retained"
+  },
+  "new_intake_work": "Document/hash/citation/Issue readback and accepted science interpretation only; no new source, model, RNG, environment, checkpoint, numerical analysis, test, training or evaluation.",
+  "cost": "Complete P documentary/invoked/provider/agent cost explicitly accepted unknown; no fourth pair or successor."
+}

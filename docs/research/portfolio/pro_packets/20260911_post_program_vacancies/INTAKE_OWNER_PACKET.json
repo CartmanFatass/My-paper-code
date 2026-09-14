@@ -1,0 +1,67 @@
+{
+  "question": "本轮Portfolio已选择B+P：两个新训练比较、两个原方向问题及一个空位；请异步查看实际选择和执行边界。",
+  "changes_if_approved": [
+    {
+      "target": "本轮四项投入",
+      "from": "作者建议A含MGTAP第三对；五个旧分配均结束",
+      "to": "Pro选择B：新FSD一对3000秒、RCLE和ACVC各一个原Convergence问题；不买MGTAP第三对"
+    },
+    {
+      "target": "FOLR第五位独立选择",
+      "from": "首次学习门控结果已接受，旧分配结束",
+      "to": "Pro选择P：新相同LEARNED_EVENT/RETAIN一对3900秒"
+    },
+    {
+      "target": "队列和容量",
+      "from": "五个空位，VNFC条件排队未就绪",
+      "to": "四项新任务，一个明确空位；VNFC原900秒保留，新增修复额度为零"
+    }
+  ],
+  "if_refused": "所有者可异步覆盖；保留已经发生的派发、运行和结果，不推断回滚、补跑或新预算。覆盖到达前，Root依合规Pro决定推进。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "quote": "Select B for the four-slot alternatives and, independently, P for FOLR. Fund one new unchanged FSD I1280/authentic-D0 pair with a 3,000-second complete cap and one new unchanged FOLR LEARNED_EVENT/RETAIN pair with a 3,900-second complete cap. Commission one zero-implementation, zero-numerical original-Convergence question and complete intake each for RCLE and ACVC. Do not fund another MGTAP COND/DENSE pair now. Retain VNFC's existing conditional 900-second allocation in the queue, without relaxing its repair-acceptance condition or allocating another technical investigation.",
+      "why": "这是原Portfolio节点在完整问题上的实际裁决，不是作者原建议或本地投资选择。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "quote": "FSD still lacks a second I1280/D0 learning observation because the later attempts failed before exposure. FOLR now has its first accepted learned-gate gain, making an independent unchanged pair more useful than another eligibility discussion.",
+      "why": "两次新真实训练各回答独立训练历史上是否再次出现收益，不增加诊断或阳性门槛。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "quote": "A third MGTAP pair would be legitimate independent B evidence, not a search for positivity, and its previous native costs are modest. Leaving a slot vacant carries an opportunity cost.",
+      "why": "少投有代价；两个相反结果未证明MGTAP无效，后续仍可另作投资决定。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "quote": "The strongest opposing case is that this is one learned pair with a relatively weak realized RETAIN endpoint and substantial conditional rollout spread.",
+      "why": "FOLR仍只有一对训练，新增门控与共同学习不能解释成纯记忆因果效应或稳定优势。"
+    }
+  ],
+  "uncertainty": [
+    "FSD只允许一次45秒以内源交付事务，失败即结束本轮，不能反复准备直到成功。",
+    "RCLE总体初始化收益为负；分别归一化梯度只是待原节点选择的候选，不是已经修复。",
+    "ACVC三次新训练均值为正，但dwell也受益且存在负世界；未选择第四次训练、C冻结或UAV升级。",
+    "VNFC仍无已接受的相关修复或不依赖旧损坏的路径，原900秒不充当修复经费。",
+    "两项新实验的完整未来成本未知；已有支持成本不完整，不能认证旧300/3900全成本通过。"
+  ],
+  "cost": {
+    "compute": "新FSD3000与FOLR3900秒，合计上限6900，各自不可借用；原生6300、支持600。两个方向问题零实现和数值额度，但作者及Pro时间未知。",
+    "owner_time": "无需逐项批准；所有者可异步覆盖。",
+    "reversibility": "costly",
+    "waits_on_this": "合规检查已通过，无所有者等待；Root负责实际派发及集成。"
+  },
+  "verdict_text": "Select B for the four-slot alternatives and, independently, P for FOLR. Fund one new unchanged FSD I1280/authentic-D0 pair with a 3,000-second complete cap and one new unchanged FOLR LEARNED_EVENT/RETAIN pair with a 3,900-second complete cap. Commission one zero-implementation, zero-numerical original-Convergence question and complete intake each for RCLE and ACVC. Do not fund another MGTAP COND/DENSE pair now. Retain VNFC's existing conditional 900-second allocation in the queue, without relaxing its repair-acceptance condition or allocating another technical investigation.",
+  "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+  "actual_application": "Root已派发四项；RCLE、ACVC已确认准备。FSD新771003的D0及FOLR两臂均已分别确认Monitor接管并运行；完整比较结果尚未接受。第五位留空，VNFC原条件队列不变。",
+  "decision_record": "docs/research/portfolio/decisions/2026-09-11-post-program-vacancies.md",
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L108",
+  "maintained_items": [
+    "20260911-root-005",
+    "20260911-root-006"
+  ]
+}

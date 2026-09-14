@@ -1,0 +1,69 @@
+{
+  "archive": "docs/research/candidates/actuator_conditioned_partial_sharing/acps_b02_execution/ACPS_B02_SUPERVISOR.tar.gz",
+  "archive_bytes": 1722,
+  "archive_sha256": "28888dc1dec33af56e5ae891080bca8cbfe0f31063f68d1d942f170bdd4bf6b9",
+  "files": [
+    {
+      "path": "acps-b02-shared-9102-20260912/runner.sh",
+      "bytes": 1209,
+      "sha256": "1c21813215ec3bdf9e3d9907254eac7fc8df82d61fe47c16972bfe54c286f289"
+    },
+    {
+      "path": "acps-b02-shared-9102-20260912/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "acps-b02-shared-9102-20260912/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "acps-b02-shared-9102-20260912/start_time",
+      "bytes": 11,
+      "sha256": "904cf4ea35dc7ab054a28ca5e7e5a9f0b95896500cc73f915d44c401c12d61cf"
+    },
+    {
+      "path": "acps-b02-shared-9102-20260912/pid",
+      "bytes": 8,
+      "sha256": "3c11ca3bf78dfbb3d602cc444e272ed95c2c31eb10907f22f978220032eb5225"
+    },
+    {
+      "path": "acps-b02-shared-9102-20260912/task.log",
+      "bytes": 1454,
+      "sha256": "9c7e9a369088099be5a3d5f8a0753ff34d0e8eefaf86c58cd63cbeef87ecab83"
+    },
+    {
+      "path": "acps-b02-acps-9102-20260912/runner.sh",
+      "bytes": 1187,
+      "sha256": "ee001be3cfdd9d1d7c01127fed53189421f8392b415b2fd65907680342c55fdd"
+    },
+    {
+      "path": "acps-b02-acps-9102-20260912/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "acps-b02-acps-9102-20260912/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "acps-b02-acps-9102-20260912/start_time",
+      "bytes": 11,
+      "sha256": "67a821173803f3be7f89cabfacc8c0648a3afc93b95f87178ea524429ae76327"
+    },
+    {
+      "path": "acps-b02-acps-9102-20260912/pid",
+      "bytes": 8,
+      "sha256": "4ad44325f07b9a9a8ea59218ed691b8918d8a53974b92c5f64b9776f94dc7be3"
+    },
+    {
+      "path": "acps-b02-acps-9102-20260912/task.log",
+      "bytes": 1447,
+      "sha256": "337d59abfce8a63226b46a46c77e5b5abf5b97a529f5e3d32d4884bab5d1a3fb"
+    }
+  ],
+  "remote_sha256_matches": true,
+  "terminal_status": "both finished and exit_code0"
+}

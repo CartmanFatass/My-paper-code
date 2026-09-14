@@ -1,0 +1,37 @@
+{
+  "source_sha":"22e009c9387f2507aab6ebab4555d92e27f5070e",
+  "command_commit":"e05d99efe",
+  "staging_commit":"a981b05b5",
+  "node":"hmasd-wsl-node",
+  "runtime_cwd":"/home/wu/hmasd-worktrees/cadc-b01-9302-20260912",
+  "arms":{
+    "LEARNED":{
+      "handle":"cadc-b01-9302-learned-20260912",
+      "submissions":1,
+      "submit_exit":0,
+      "submit_command_seconds":0.471965,
+      "accepted_message":"Task 'cadc-b01-9302-learned-20260912' started in tmux session 'agent_cadc-b01-9302-learned-20260912'. Output: /home/wu/.agent-tasks/cadc-b01-9302-learned-20260912/task.log",
+      "direct_status_at":"2026-09-12T22:34:41Z",
+      "direct_status":{"status":"running","exit_code":null,"pid":3405003,"uptime_seconds":7,"tmux_active":true},
+      "admission":"LEARNED_MEMORY.json",
+      "output_root":"/home/wu/hmasd-worktrees/cadc-b01-9302-20260912/temp/directions/contention_aware_decentralized_communication/exp/cadc_b01_9302/LEARNED",
+      "monitor_add":"accepted by Codex app; actual adoption separately recorded"
+    },
+    "RR":{
+      "handle":"cadc-b01-9302-rr-20260912",
+      "submissions":1,
+      "submit_exit":0,
+      "submit_command_seconds":0.4929342,
+      "accepted_message":"Task 'cadc-b01-9302-rr-20260912' started in tmux session 'agent_cadc-b01-9302-rr-20260912'. Output: /home/wu/.agent-tasks/cadc-b01-9302-rr-20260912/task.log",
+      "direct_status_at":"2026-09-12T22:35:32Z",
+      "direct_status":{"status":"running","exit_code":null,"pid":3405239,"uptime_seconds":17,"tmux_active":true},
+      "admission":"RR_MEMORY.json",
+      "output_root":"/home/wu/hmasd-worktrees/cadc-b01-9302-20260912/temp/directions/contention_aware_decentralized_communication/exp/cadc_b01_9302/RR",
+      "monitor_add":"accepted by Codex app; actual adoption separately recorded"
+    }
+  },
+  "capacity_fact":"T was already active; physical available15.3GB at preparation and both adjacent physical/effective4GiB floors passed. Root explicitly directed independent execution when capacity was available, without waiting for a sibling result. Both private preselected whole arms were admitted once.",
+  "native_primary":"pending accepted terminal collection; no scientific result interpreted",
+  "next_owner":"/root/dm_cadc_start",
+  "retry_or_successor":false
+}

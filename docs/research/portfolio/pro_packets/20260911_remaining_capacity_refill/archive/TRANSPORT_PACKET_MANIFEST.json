@@ -1,0 +1,55 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-11-remaining-capacity-refill-portfolio-01--portfolio",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-11-remaining-capacity-refill-portfolio-01",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "acvc",
+    "capability_bound_semantic_currentness",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "finite_resource_relational_inductive_efficiency",
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation",
+    "roster_consistent_latent_exploration",
+    "semigroup_consistent_duration_model_policy",
+    "ucope",
+    "vap_folr_core",
+    "variable_n_fleet_churn",
+    "vsp_02",
+    "vsp_03",
+    "vsp_c1"
+  ],
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-11-remaining-capacity-refill-portfolio-01--portfolio__00_PROMPT.md",
+    "bytes": 1908,
+    "sha256": "97f87083ff13c16695873bb2b12877bda18e29c447751da917b21b3a56ecf40f",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-11-remaining-capacity-refill-portfolio-01\\2026-09-11-remaining-capacity-refill-portfolio-01--portfolio__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-11-remaining-capacity-refill-portfolio-01\\2026-09-11-remaining-capacity-refill-portfolio-01--portfolio__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-11-remaining-capacity-refill-portfolio-01\\2026-09-11-remaining-capacity-refill-portfolio-01--portfolio__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "97f87083ff13c16695873bb2b12877bda18e29c447751da917b21b3a56ecf40f",
+    "references": []
+  },
+  "archive_id": "2026-09-11-remaining-capacity-refill-portfolio-01--portfolio--attempt-01",
+  "archive_response_sha256": "f4e2c50db1b743edba5e5cede0a9c1c0146afc82f9e4c8541d9fea4e03834322",
+  "archive_response_bytes": 59218,
+  "github_delivery_commit": "0dbbcbf807509ccc34a3a1de353114be88896897",
+  "github_response_path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/RESPONSE.md"
+}

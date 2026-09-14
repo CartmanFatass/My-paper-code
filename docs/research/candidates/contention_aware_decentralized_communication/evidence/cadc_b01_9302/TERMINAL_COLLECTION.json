@@ -1,0 +1,126 @@
+{
+  "collected_at": "2026-09-12T22:48:20.606090+00:00",
+  "source_sha": "22e009c9387f2507aab6ebab4555d92e27f5070e",
+  "runtime_worktree": "/home/wu/hmasd-worktrees/cadc-b01-9302-20260912",
+  "root_terminal_receipt": "Root forwarded authoritative COMPLETE/exit0 and inactive tmux for both handles; original DM resumed for collection, no routine polling",
+  "supervisor_archive": {
+    "path": "CADC_SUPERVISORS.tar.gz",
+    "bytes": 1447,
+    "sha256": "555ea01968abd87e514ad1fd73132a28f3e11cacdbe4864bd299a302b5cd3852"
+  },
+  "supervisors": {
+    "LEARNED": {
+      "handle": "cadc-b01-9302-learned-20260912",
+      "metadata": {
+        "exit_code": "0",
+        "status": "finished",
+        "start_time": "1789252474",
+        "pid": "3405003"
+      },
+      "files": {
+        "runner.sh": {
+          "bytes": 1038,
+          "sha256": "95af4a48320f17050dea740474ae5f561d97664f6c9176cd9d7b462d0bf5e978"
+        },
+        "exit_code": {
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "status": {
+          "bytes": 9,
+          "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+        },
+        "start_time": {
+          "bytes": 11,
+          "sha256": "9d6f2bc4fc4cc98e64512d3bcb8f4dca7ba875761ca349c0d0d246f7f14f8c3b"
+        },
+        "pid": {
+          "bytes": 8,
+          "sha256": "e7e0b124607cfa2d6488c818df52bdf560820a9b19155b1958675d93171cf794"
+        },
+        "task.log": {
+          "bytes": 1047,
+          "sha256": "6b0d751484573697fb097665cc287c9478fefe7793452a7f04dd27a74ebd5322"
+        }
+      }
+    },
+    "RR": {
+      "handle": "cadc-b01-9302-rr-20260912",
+      "metadata": {
+        "exit_code": "0",
+        "status": "finished",
+        "start_time": "1789252515",
+        "pid": "3405239"
+      },
+      "files": {
+        "runner.sh": {
+          "bytes": 988,
+          "sha256": "9b2bd00680cdd137ae9cd71cd6aaf4cfd83917e910f2f82af44b3b43bc8877aa"
+        },
+        "exit_code": {
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        "status": {
+          "bytes": 9,
+          "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+        },
+        "start_time": {
+          "bytes": 11,
+          "sha256": "102289474201881b4c7da0f09fc76197ae08b08ed6c454d97ef0be64b3836e97"
+        },
+        "pid": {
+          "bytes": 8,
+          "sha256": "58a70c5f990d15739f3504318eb328f578e71c8474ef1dbaf645f5a192c258e5"
+        },
+        "task.log": {
+          "bytes": 1032,
+          "sha256": "af212c61f689df80fb854db3346e548e32cceeb80600944811597a9f3e011509"
+        }
+      }
+    }
+  },
+  "output_accounting_checks": {
+    "LEARNED": {
+      "all544_rows_phase_order_rng_reward_and_packet_accounting": true,
+      "evaluation_optimizer_steps": 0,
+      "configuration": {
+        "horizon": 256,
+        "train": 512,
+        "final": 32,
+        "chunk": 32,
+        "dtype": "float32",
+        "device": "cpu",
+        "threads": 1,
+        "whole_arm_cap": 600
+      }
+    },
+    "RR": {
+      "all544_rows_phase_order_rng_reward_and_packet_accounting": true,
+      "evaluation_optimizer_steps": 0,
+      "configuration": {
+        "horizon": 256,
+        "train": 512,
+        "final": 32,
+        "chunk": 32,
+        "dtype": "float32",
+        "device": "cpu",
+        "threads": 1,
+        "whole_arm_cap": 600
+      }
+    }
+  },
+  "arm_wall": {
+    "LEARNED": {
+      "elapsed_seconds": 195.0,
+      "peak_rss_kib": 555392,
+      "exit_code": 0
+    },
+    "RR": {
+      "elapsed_seconds": 180.34,
+      "peak_rss_kib": 554288,
+      "exit_code": 0
+    }
+  },
+  "terminal_delivery_is_not_intake": "This retained receipt supports the separate DM technical/scientific intake."
+}

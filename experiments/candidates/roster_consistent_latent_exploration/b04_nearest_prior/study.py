@@ -19,16 +19,21 @@ LAW = {"nearest_probability": .9, "other_probability": .02,
 
 
 class NearestPriorModel(TBCFVModel):
+    def __init__(self, action_law=None):
+        super().__init__()
+        self.action_law = dict(LAW if action_law is None else action_law)
+
     def claim_probabilities(self, pointer_inputs):
         logits = self.pointer_logits(pointer_inputs)
-        nearest = pointer_inputs[..., 76].abs().argmin(dim=-1, keepdim=True)
-        offset = torch.zeros_like(logits).scatter_(-1, nearest, math.log(45.0))
+        nearest = pointer_inputs[..., self.action_law["distance_field"]].abs().argmin(dim=-1, keepdim=True)
+        odds = self.action_law["nearest_probability"] / self.action_law["other_probability"]
+        offset = torch.zeros_like(logits).scatter_(-1, nearest, math.log(odds))
         return torch.softmax(logits + offset, dim=-1)
 
 
-def initialize_model(rng):
+def initialize_model(rng, action_law=None):
     helpers = b03.initialize_block_models(rng)
-    model = NearestPriorModel()
+    model = NearestPriorModel(action_law=action_law)
     model.load_state_dict(helpers[b03.FLEX].state_dict())
     with torch.no_grad():
         model.pointer_score.weight.zero_()
@@ -37,13 +42,13 @@ def initialize_model(rng):
 
 
 def save_model(model, path):
-    torch.save({"state_dict": model.state_dict(), "action_law": LAW,
+    torch.save({"state_dict": model.state_dict(), "action_law": model.action_law,
                 "model": "NearestPriorModel"}, path)
 
 
-def make_rng(seed):
-    key = host.seed_root_key(f"{OBJECT_ID}/seed/{seed}")
-    digest = host.block_digest_hex(key, OBJECT_ID, 0)
+def make_rng(seed, object_id=OBJECT_ID):
+    key = host.seed_root_key(f"{object_id}/seed/{seed}")
+    digest = host.block_digest_hex(key, object_id, 0)
     authority = host.B01BlockAuthority(
         certificate={"native": host.native_certificate_payload()}, block_index=0, root_digest=digest)
     return authority, b03.SemanticRNG(authority, 0, now=datetime.now(timezone.utc))
@@ -97,40 +102,58 @@ def reading(delta, gain, mixed):
     return branches
 
 
-def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summary=None, seed=SEED):
+def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summary=None, seed=SEED,
+        *, updates=UPDATES, object_id=OBJECT_ID, panel_label="B04", action_law=None,
+        equal_unit_update=None, reference_packed_views=True):
+    action_law = dict(LAW if action_law is None else action_law)
     out.mkdir(parents=True, exist_ok=True)
-    summary = dict(object=OBJECT_ID, seed=seed, arm=arm, launch_sha=launch_sha,
-                   admission_receipt=str(admission_receipt), action_law=LAW,
+    summary = dict(object=object_id, seed=seed, arm=arm, launch_sha=launch_sha,
+                   admission_receipt=str(admission_receipt), action_law=action_law,
                    status="IN_PROGRESS", scenarios=[], curves=[])
     try:
-        authority, rng = make_rng(seed)
-        summary.update(root_key_hex=host.seed_root_key(f"{OBJECT_ID}/seed/{seed}").hex(),
+        authority, rng = make_rng(seed, object_id=object_id)
+        summary.update(root_key_hex=host.seed_root_key(f"{object_id}/seed/{seed}").hex(),
                        block_digest_hex=authority.root_digest, native=authority.certificate["native"])
         if arm == "learned":
-            model = initialize_model(rng)
+            model = initialize_model(rng, action_law=action_law)
             initial = host.flat_parameters(model).clone()
             summary.update(allocations=dict(models=7, training_instances=1, untrained_helpers=6),
                            initial_parameter_norm=float(torch.linalg.vector_norm(initial)),
-                           actor_score_weight=100, updates_per_fit=UPDATES)
+                           updates_per_fit=updates)
+            if equal_unit_update is None:
+                summary["actor_score_weight"] = 100
+            else:
+                summary["update_rule"] = "equal-unit-manager-claim; full-vector .02; no factor100"
             save_model(model, out / "initial_parameters.pt")
-            summary["initialization_panel"] = b03.panel(model, rng, "B04-INITIAL", started, wall_cap)
+            summary["initialization_panel"] = b03.panel(model, rng, f"{panel_label}-INITIAL", started, wall_cap)
             host.write_json(out / "init_scenarios.json", summary["initialization_panel"])
             baselines = torch.zeros(8, dtype=torch.float64)
-            for update in range(UPDATES):
+            for update in range(updates):
                 host.check_wall(started, wall_cap)
-                baselines, curve = b03.training_update(model, rng, update, baselines, 100.0)
+                if equal_unit_update is None:
+                    baselines, curve = b03.training_update(model, rng, update, baselines, 100.0)
+                else:
+                    summary["partial_update"] = {"update": update}
+                    baselines, curve = equal_unit_update(model, rng, update, baselines,
+                                                         summary["partial_update"])
                 summary["curves"].append(curve)
+                if equal_unit_update is not None:
+                    summary["partial_update"] = {}
                 with (out / "completed_blocks.jsonl").open("a", encoding="ascii") as blocks:
                     blocks.write(b03.json.dumps(curve, allow_nan=False) + "\n")
             save_model(model, out / "parameters.pt")
             host.write_json(out / "summary.json", summary)
-            summary["scenarios"] = b03.panel(model, rng, "B04-FINAL", started, wall_cap)
+            summary["scenarios"] = b03.panel(model, rng, f"{panel_label}-FINAL", started, wall_cap)
             summary["initialization_summary"] = b03.panel_summary(summary["initialization_panel"])
             summary["final_displacement"] = float(torch.linalg.vector_norm(host.flat_parameters(model) - initial))
             summary["final_baselines"] = baselines.tolist()
         else:
             summary["allocations"] = dict(models=0, training_instances=0)
-            summary["scenarios"] = host.evaluate_scripted(rng, 256)
+            if reference_packed_views:
+                summary["scenarios"] = host.evaluate_scripted(rng, 256)
+            else:
+                summary["reference_packed_views"] = False
+                summary["scenarios"] = host.evaluate_scripted(rng, 256, packed_views=False)
             summary["Y_note"] = "ScriptedEpisodeResult has no Y; Y is unavailable"
             learned = host.load_control_summary(learned_summary)
             result = comparisons(learned["initialization_panel"], learned["scenarios"], summary["scenarios"])
@@ -154,6 +177,16 @@ def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summ
                                   backward_step_calls=len(curves), nonzero_steps=sum(c["nonzero"] for c in curves),
                                   final_episodes=len(summary["scenarios"]),
                                   init_episodes=len(summary.get("initialization_panel", [])))
+        if equal_unit_update is not None:
+            partial = summary.get("partial_update", {})
+            summary["counts"].pop("backward_step_calls")
+            summary["counts"]["training_episodes"] += partial.get("returned_training_episodes", 0)
+            summary["counts"]["score_channel_derivative_traversals"] = sum(
+                c["score_channel_derivative_traversals"] for c in curves) + partial.get("derivatives_completed", 0)
+            summary["counts"]["score_channel_derivative_attempts"] = 2 * len(curves) + partial.get("derivative_attempts", 0)
+            summary["counts"]["parameter_update_attempts"] = len(curves) + partial.get("parameter_step_attempts", 0)
+            summary["counts"]["completed_parameter_steps"] = len(curves) + partial.get("parameter_steps_completed", 0)
+            summary["counts"]["nonzero_steps"] += partial.get("nonzero_steps", 0)
         summary["wall_seconds"] = time.perf_counter() - started
         summary["peak_rss_bytes"] = host.peak_rss_bytes()
         host.write_json(out / "summary.json", summary)

@@ -1,0 +1,28 @@
+{
+  "recorded_at": "2026-09-12T13:41:51.679213+00:00",
+  "authority": "OWNER_DIRECT 2026-09-12 resumed finite engineering; single <=20s maintenance check. Portfolio 6c32ade32 section6 acceptance condition unchanged.",
+  "source_sha": "d76d96cbe3df9b598e0db695a8b39deb23e7bdb1",
+  "review": "repair_owned_boundary_review_20260912.md",
+  "staging": "repair_owned_boundary_staging_20260912.json",
+  "check": "repair_owned_boundary_check_20260912.json",
+  "decision": "Accept the bounded same-meaning owned pooling boundary; continue the separately selected fresh pair, not B02.",
+  "claim_ceiling": "Relevant finite alternative-path correctness and completion; no old-writer attribution/general heap safety, no training result.",
+  "engineering_check_count": 1,
+  "complete_process_seconds": 3.1772158649982885,
+  "check_ceiling_seconds": 20,
+  "forward_backward_applications": 256,
+  "completed_scientific_pairs": 0,
+  "new_scientific_submissions": 0,
+  "support_components_seconds": {
+    "independent_design_review": "1.8918168",
+    "independent_source_review": "1.6770806",
+    "independent_receipt_review": "0.1740222",
+    "source_staging_outer": "6.407000000006519",
+    "check_transport_outer": "3.89000000001397"
+  },
+  "selected_component_sum_seconds": "14.039919600020489",
+  "cost_scope": "Selected additional maintenance clocks only. Remote staging5.6297 and check3.1772/cleanup0.0001 are nested and not added to their outer transport clocks. Reads, edits, Git publication/integration and final record work not comprehensively timed; no full-maintenance total inferred. Scientific900 allocation untouched.",
+  "test_scratch_absent": true,
+  "retained_remote_checkout": "/home/wu/hmasd-worktrees/vnfc-owned-mean-20260912",
+  "cleanup_owner_event": "DM retains temporary exact-source checkout and its sole receipt through Root source/evidence integration and retention acceptance, then reclaims; shared direction authoring checkout remains."
+}

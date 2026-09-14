@@ -1,0 +1,31 @@
+{
+  "arms": 2,
+  "training_pairs": 1,
+  "training_seed": 771003,
+  "evaluation_seed": 781003,
+  "training_lanes": 16,
+  "evaluation_lanes": 32,
+  "horizon": 500,
+  "rollouts_per_arm": 5,
+  "training_team_ticks": 80000,
+  "training_episodes": 160,
+  "update_stages": 10,
+  "fits": 2,
+  "model_constructions": 4,
+  "evaluation_team_ticks": 32000,
+  "evaluation_episodes": 64,
+  "total_native_team_ticks": 112000,
+  "agent_observations": 672000,
+  "batched_controller_calls": 6000,
+  "D0_coordinator_chunks": 525,
+  "I_coordinator_chunks_upper": 525,
+  "I_cost_law": "15 * sum(ceil(M_r/1280)) for five rollouts, M_r <= 8000; native simulation, all six-agent decoding, recurrence/lower PPO and full endpoint/publication retained",
+  "caps_seconds": {
+    "D0": 900,
+    "I": 1800,
+    "native_sum": 2700,
+    "support": 300,
+    "complete": 3000,
+    "one_source_delivery_transaction": 45
+  }
+}

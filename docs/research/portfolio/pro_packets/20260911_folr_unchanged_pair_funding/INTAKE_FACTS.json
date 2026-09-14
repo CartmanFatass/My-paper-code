@@ -1,0 +1,421 @@
+{
+  "checked_utc": "2026-09-12T04:39:31.980134+00:00",
+  "request_id": "2026-09-11-folr-unchanged-pair-funding-portfolio-01",
+  "scope": "Complete scientific/specification intake and documentary checks; no numerical or implementation work.",
+  "response": {
+    "commit": "f4bbe6cae2d351b4c80c5e0d9d66690d337749ce",
+    "path": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RESPONSE.md",
+    "parent": "2f3f5c047e369d854e51c2a78e3ef9b0b49ba847",
+    "bytes": 50629,
+    "characters": 50482,
+    "lines": 201,
+    "sha256": "a80571571b323bf937adee9875969d67356db121ff0c6de4b5de9b3483e3dabf",
+    "git_blob": "2912a6ba0c917b99e6a7d741c2cc48936d00bf06",
+    "github_full_contents_equal_git": true,
+    "full_read": "All201lines including all37fixed-file citations read in order"
+  },
+  "task_commit": "19c2b1db12c286f85d528efaf062f7f2bf010f51",
+  "handoff_commit": "e425432837944138ab9974e4ff0e1edeb01bd22f",
+  "authoring_input_sync_commit": "d93d03e3115e121c12a9227e01cbf33481e9d5c3",
+  "current_accepted_main_inputs": "f5628f0e4650520796aede3c6a7c2245c64916b7",
+  "references": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/SCIENCE_BRIEF.md",
+      "commit_sha": "95d9a0c33ff81bb20efe08af6698ee28608ef077",
+      "bytes": 19566,
+      "sha256": "d3e78c997e840399332a783e3f84f69ea610232de58aeacef094e3b3fedd586b",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/PREPARATION_INTAKE.md",
+      "commit_sha": "95d9a0c33ff81bb20efe08af6698ee28608ef077",
+      "bytes": 5160,
+      "sha256": "2f9f020a4fab9baa3e19191efd9ded0bd20905e78c7e34d870afa4b48b51701e",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/FACTS.json",
+      "commit_sha": "95d9a0c33ff81bb20efe08af6698ee28608ef077",
+      "bytes": 8811,
+      "sha256": "51e37be731a508c76a58f77e25ae24f642cf8052f451584f70f04432bb41d457",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/ISSUE_SNAPSHOT.json",
+      "commit_sha": "95d9a0c33ff81bb20efe08af6698ee28608ef077",
+      "bytes": 21354,
+      "sha256": "5cbe2a9c14127c5d8edc3900b4833ca107f987c06ea88c2dec763fd85466b83b",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 44084,
+      "sha256": "f5f1e601be267d5881f05e0f46cc9a66aac99175fa9c91783f7688f1914687bd",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 11577,
+      "sha256": "c5a6deca6277702bc7777eaae02bfdf2c74381873efd75881e0c425683422667",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 11428,
+      "sha256": "fb3ccd5f74c44a1f14e3de638dbc4b4fa7087fc79deacd2b84951760ad3d6c36",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 23929,
+      "sha256": "d78d5edd0ab48828affe6bc237a98966729ac637261fd28f33ec67ff1d361c90",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 67306,
+      "sha256": "269a2a9dd32af353d10bd05e419232c4f783e82a01f1610a4cce403f1f2bd783",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/archive/RESPONSE.md",
+      "commit_sha": "05c24bcd85f92efc26fb2a9cb2152bed51dd90e9",
+      "bytes": 62241,
+      "sha256": "85c1148a070bc53e5cbe7c7783fd938b71a74768c964a528e239fba35de13443",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-11-rolling-capacity-after-b02.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 18997,
+      "sha256": "cb6e21290e4a1591300169851424c19bfc96243970305709e02daae43bc72706",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/EXECUTION_MAPPING.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 15037,
+      "sha256": "58983c0a0c6b3f6cca5afc18bee4aa850e4ce22f88ffc3783b6ce1070f652cb3",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/archive/RESPONSE.md",
+      "commit_sha": "ed882448bda9b3f240addf88bde1921cebc24397",
+      "bytes": 34927,
+      "sha256": "a5ffd43de9407597c60ca1a3b7ee8b057800c6ab39950d2331665c349f0d2eb8",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_POST_B02_CONVERGENCE_INTAKE_20260911.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 21584,
+      "sha256": "7e987b163d4988ad4910e1a4c60cb44043f8a1191ca502a682ead0bcb434abd9",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 48545,
+      "sha256": "e46c22d0d83f6cc76546496a691302211f6d350b55cd3dd4480ad39d1be1f2ab",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_SCIENCE_CARD_20260911.md",
+      "commit_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+      "bytes": 11273,
+      "sha256": "593906f848ce614b32a8f93f52aa511e8816954ac33334bbc984c32b75d8dc8a",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_SCIENCE_CARD_20260911.md",
+      "commit_sha": "2b22270b3b076df60f4afd3203c3f09aeab3b98b",
+      "bytes": 10265,
+      "sha256": "e4f57ac40095b2fa513c25b57c1d6ff77bd56daa583b51be123526b6532464f0",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "bytes": 8559,
+      "sha256": "0b1e2698a6df49681bc6a986c1445c514dd39ee7f83dce5ae656229efdccf227",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_INTAKE_20260911.md",
+      "commit_sha": "8da607b4b7fb415b4212e0e20d74f9dc9c20a32e",
+      "bytes": 19895,
+      "sha256": "54f9eb1a539b29c3260dbae4ae5af9768a41f9620be5be03bb565ac804f4fa77",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "bytes": 5529,
+      "sha256": "7822524bf0de8691e3afc1bdd0b453d747af7447c25c3055c1a724d640a35f78",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B02_INTAKE_20260911.md",
+      "commit_sha": "5a09c770169bd85dcdc5f48f8930235073ea2c0e",
+      "bytes": 18060,
+      "sha256": "0216763afc49223d5bc6f156b749696f612af29b1e05602c2a109dfcb023845f",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_post_b02_convergence/FACTS.json",
+      "commit_sha": "3877aad6c28766b3bcc757d2e7ff9ffa6737a7eb",
+      "bytes": 20752,
+      "sha256": "4c680a432b71fdf5b4cf948af3d81628eb2c4face3b3c5896ea3c6aa17a4c560",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+      "commit_sha": "5b15e536806d3b54dc693e7b4b911eba53ff643c",
+      "bytes": 29756,
+      "sha256": "ed556924120300ad413a60a53ca80eed4f7d3ea555a7b0075312c6db3d080ae3",
+      "matches_current_normalized_text": false
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771103_INTAKE_20260911.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 11685,
+      "sha256": "c1d4d0bee29d0b3715a58ab9df179e103db58760bc3fb7cc406d1fc9620d34aa",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771103_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 9758,
+      "sha256": "d8a0ac0ea5302680fd3aac8a84251ff9907cd6ae072df408e5f7fc9e13927c77",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771103_20260911/SUPPORT.json",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 10804,
+      "sha256": "0b36462927a79dc0587db8cade3b6d5b8d290c134133590e4fa4077853842290",
+      "matches_current_normalized_text": false
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 50480,
+      "sha256": "7106a326624f891f8a816c9d849330b8aa79c14bfe5ab25fcd278c02d79c8792",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIVE_FIT_PROMOTION_CONVERGENCE_INTAKE_20260911.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 15658,
+      "sha256": "ce60f1f4d2a6868615155bdad04ab66b33539b639500ea1a911a5ba68d2b3b2c",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_five_fit_prefreeze_innovator/SCIENCE_BRIEF.md",
+      "commit_sha": "be2eb581d4593da27de2258985c4d7d215772302",
+      "bytes": 16436,
+      "sha256": "094136bca5af732ed45c34d578b22c4708ec0aac8983c496f6eed2955963222e",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 12341,
+      "sha256": "d05b5042a4be39cea9c00c37c505e6d2974b11f86f4cc3c90c5db12ea0f6e1e7",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260911_channel_normalization_convergence/TRANSPORT_BLOCKER_INTAKE.md",
+      "commit_sha": "640d018f0e2a374cd95b0cbae9f5f2e705b22aaa",
+      "bytes": 7376,
+      "sha256": "1accba1571578c1ece267e9bca3680e5331703de94d5a987996ebd30e2ad8a99",
+      "matches_current_normalized_text": true
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_INTAKE_20260911.md",
+      "commit_sha": "d4c135a068dc51ec85af988f02bf9609bce9e4be",
+      "bytes": 12981,
+      "sha256": "fc3d75fc48f5f33a2b4759d906e62769dd4127a245f99766ab9c3e2dfe5295c6",
+      "matches_current_normalized_text": true
+    }
+  ],
+  "response_reference_mappings_equal_fixed_request": true,
+  "prompt_exact_match": true,
+  "prompt_bytes": 1925,
+  "prompt_sha256": "2407bd2730afe5dcfd929369b2f6bb55915dde9be9c9510f9c015a0aea6a61ab",
+  "raw_artifacts": [
+    {
+      "role": "manifest_file",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__PACKET_MANIFEST.json",
+      "bytes": 2325,
+      "sha256": "ae0444f0adf7d7a39bfc86e49f8ab9071a2772b5788bc6233e226205171d06f0",
+      "preserved_readable": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/TRANSPORT_MANIFEST_ORIGINAL.json"
+    },
+    {
+      "role": "prompt_file",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__00_PROMPT.md",
+      "bytes": 1925,
+      "sha256": "2407bd2730afe5dcfd929369b2f6bb55915dde9be9c9510f9c015a0aea6a61ab",
+      "preserved_readable": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/SUBMITTED_PROMPT.md"
+    },
+    {
+      "role": "response_file",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__02_RESPONSE.md",
+      "bytes": 470,
+      "sha256": "8ed3e736e875268e2bcf7f904cd02c1c31d704fdbcde980690c98f79c06d6ebd",
+      "preserved_readable": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RAW_CAPTURED__02_RESPONSE.md"
+    },
+    {
+      "role": "transport_fact_file",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+      "bytes": 6143,
+      "sha256": "9bef0a5945a077b23cb0f4c75bf3edd703d1cabd6fe4c228ed2ca8e03e3e89b2",
+      "preserved_readable": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/TRANSPORT_FACTS_ORIGINAL.json"
+    },
+    {
+      "role": "chat_receipt_file",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__04_CHAT_RECEIPT.md",
+      "bytes": 470,
+      "sha256": "8ed3e736e875268e2bcf7f904cd02c1c31d704fdbcde980690c98f79c06d6ebd",
+      "preserved_readable": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/RAW_CHAT_RECEIPT.md"
+    }
+  ],
+  "raw_originals_preserved_zip": {
+    "path": "docs/research/portfolio/pro_packets/20260911_folr_unchanged_pair_funding/archive/TRANSPORT_ARCHIVE_SNAPSHOT.zip",
+    "bytes": 23664,
+    "sha256": "3ba1122fa7f327917c550f7a31edac96cf4bbfe05f5b9b54ca26ca4b3c574251",
+    "entries_verified_bytes_equal": true
+  },
+  "receipt_limitations": [
+    "__02_RESPONSE and __04_CHAT_RECEIPT are identical470-byte link receipts; supplied8ed3 hash belongs to these, not full Git decision",
+    "Original facts send_confirmed_at01:18:26Z predates this TASK; current Send timestamp not established here",
+    "Scoped registry github_delivery points to older6c32ade response, while current archive/user/assistant/comment/return fields match",
+    "scientific_decision_formed:false is raw transport bookkeeping, not this full-response conformance verdict"
+  ],
+  "currentness_differences": {
+    "fsd_card": "Only terminal status and appended8.1result, not prospective meaning",
+    "fsd_support": "Later window119.2788229/nativeplus1614.5288229 preserves pinned107.0341971/1602.2841971",
+    "acvc_new_intake": "Independent Innovator conformance accepted on mainf5628; does not renew its grant or alter the bound snapshot",
+    "primary_uncommitted_ROOT_OPERATIONS_addendum": "Now committed by Root at8bf1269e58dd2f77d53dfd00ca20e5861660f306 and reconciled; original observation preserved, no local edits or scientific conflict."
+  },
+  "decision": {
+    "conformance": "PASS",
+    "portfolio_choice": "F+U",
+    "label": "PRO_FINAL / OWNER_DELEGATED",
+    "root_execution_state": "Conformance and mapping complete; Root integration/resumption pending at author publication; no new FOLR execution performed by author."
+  },
+  "actual_intake_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "policy_search_candidates": 0,
+    "profiling": 0,
+    "source_implementation_edits": 0,
+    "source_or_numerical_tests": 0,
+    "raw_return_reanalyses": 0,
+    "provider_sends": 0,
+    "transport_dispatches": 0
+  },
+  "machine_generated_exposure_line": "NEW INTAKE EXPOSURE: scientific_invocations=0, models=0, checkpoint_loads=0, environments=0, scientific_rng_masters=0, training_episodes=0, native_ticks=0, optimizer_steps=0, evaluation_episodes=0, diagnostic_trajectories=0, policy_search_candidates=0, profiling=0, source_implementation_edits=0, source_or_numerical_tests=0, raw_return_reanalyses=0, provider_sends=0, transport_dispatches=0. Documentary retrieval and configuration arithmetic only.",
+  "future_F_work_reused_from_frozen_FACTS": {
+    "independent_training_pairs": 1,
+    "real_fits": 2,
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_calls": 9938,
+    "final_episodes": 256,
+    "final_ticks": 5120,
+    "replay_gru_rows": 66783360,
+    "acting_gru_rows": 1076880,
+    "learned_arm_gate_forward_rows": 33930120,
+    "search_candidates": 0,
+    "additional_diagnostic_trajectories": 0,
+    "total_native_ticks": 205120
+  },
+  "future_F_caps_s": {
+    "native_each": 1350,
+    "native_sum": 2700,
+    "support": 300,
+    "complete": 3000
+  },
+  "resolved_documentary_check_failure": "Initial command included67k base64 and CreateProcess refused OS206 before execution. Compared outputs of a short Git-byte reader against connector base64 in functions instead; exact equality passed. No scientific invocation or temporary executable was created.",
+  "initial_reference_comparison_revision": "d93d03e3115e121c12a9227e01cbf33481e9d5c3",
+  "final_rule_reconciliation": {
+    "checked_utc": "2026-09-12T04:48:27.560173+00:00",
+    "accepted_root_commit": "8bf1269e58dd2f77d53dfd00ca20e5861660f306",
+    "input_sync_commit": "2f5a2128d0c10fdae457c859b7baf27f30b0e0cd",
+    "changes_read": [
+      "AGENTS section3",
+      "ROOT_OPERATIONS Portfolio response route",
+      "hmasd-portfolio-task complete-response intake"
+    ],
+    "scientific_conflict": false,
+    "rule": "A verified complete response enters scientific conformance while Transport corrects metadata independently."
+  },
+  "final_runtime_update": {
+    "source": "Root native messages during final publication",
+    "fact": "ACVC live unit1; original Innovator intake already accepted. No new FOLR start observed here.",
+    "scope": "Updates only current execution count; fixed03:47:12UTC request snapshot preserved."
+  },
+  "final_owner_review_read": {
+    "checked_utc": "2026-09-12T04:48:27.560173+00:00",
+    "surface": "primary-control owner_console reviews --json",
+    "unapplied": [],
+    "prediction": "not taken"
+  },
+  "final_documentary_checks": {
+    "checked_utc": "2026-09-12T04:50:21.137106+00:00",
+    "status": "PASS",
+    "markdown_targets_exist": true,
+    "json_parses": true,
+    "quoted_words_equal_sources_after_linewrap_whitespace_normalization": true,
+    "brief_headings": 6,
+    "brief_characters": 367,
+    "owner_application": "planned; auto_applied=null",
+    "ledger_line": 140,
+    "archive_zip_digest_unchanged": true,
+    "zero_exposure": true,
+    "fixed_refs": 36,
+    "resolved_check_assumption": "A first literal-substring check rejected an otherwise exact quote solely at two Markdown wrapping newlines; normalized whitespace comparison passed. No source, quoted words or scientific result changed."
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-12-acvc-post-cluster-use-convergence-01",
+  "source_thread_id": "01a095be-63c8-7c23-8384-edaf74dcb154",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "direction_id": "acvc",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "0791b04744549d6f16d65d07a287156f9a4b1f1a",
+  "execution_mode": "REUSE_SINGLETON",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "reset_invalid_provider_context": false,
+  "github_delivery": {
+    "branch": "codex/acvc",
+    "base_sha": "0791b04744549d6f16d65d07a287156f9a4b1f1a",
+    "response_path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  },
+  "scientific_question": "After the accepted one-fit cluster deployment comparison gives F−C+0.12407302446321236J and F−own-dwell+0.07674096500501802J (both UP, with1/64 and8/64 adverse worlds), what is the next scientifically useful direction-local object or practical use to propose for separate investment, or should we recommend no additional empirical allocation now? Judge the marginal decision value of one independently trained unchanged cluster C-fit/three64-world panels against retaining the qualified observed reference without more spending. If neither is the most useful continuation, select only one better justified bounded object/use and explain what native outcome would change a competent use/investment decision. The DM leans toward one repetition only if its result would matter; that assumption is yours to challenge, not an already selected object. Preserve the qualified uniform C01 result, useful own-dwell and the two separate common-F training-use DOWN observations. Root continues ACVC ACTIVE; no extra experiment, empirical budget or lifecycle change is locally inferred.",
+  "deliverable": "A complete conclusion-first scientific direction decision, preferably900–1500 words unless one concrete conflict needs more. Select one next object/use or explicit no-additional-allocation advice; give one strongest rejected alternative and why the possible observation changes an actual decision. If selecting future work, specify the minimum class, learner/comparator, primary/use interpretation and dominant work plus separate support/investment need. If declining more compute now, retain the valid current use/limits and a concrete revisit condition without inferring PARK. Report actual source access and any concrete owner/spec conflict. Do not produce a full mechanism inventory or implementation patch.",
+  "claim_ceiling": "One original direction-node selection or no-additional-empirical-allocation recommendation. The proposed empirical ceiling is a bounded independent cluster B/use observation, not stable population superiority, causal retrace/history necessity, tuned headroom, transfer or formal UAV validation. Any selected empirical work still requires separate Portfolio investment and accepted implementation; no science is executed by this request.",
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_CLUSTER_USE_DIRECTION_QUESTION_20260912.md",
+      "purpose": "Read completely: the actual marginal-use question, strongest alternative, bounded recommendation for discussion, mechanism path, prior evidence and zero-exposure L0.",
+      "provenance": "Current original DM preparation under Root continuation; proposal only, not a local science or investment verdict."
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/FACTS.json",
+      "purpose": "Read current_exposure, machine-generated exposure line, copied_accepted_K and proposed_repetition_counts/future_cost_projection; no outcome recomputation is requested.",
+      "provenance": "Documentary copying of immutable accepted data and exact loop arithmetic; zero new model/RNG/empirical output."
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "purpose": "Scientific question, Current position, Bounded conclusion, and Cluster deployment B01 accepted2026-09-12 only; preserve C01, both training-use DOWN points and current one-fit cluster claim.",
+      "provenance": "Accepted mechanism-level science including the complete K result; older lifecycle text is historical.",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md",
+      "purpose": "Read completely: card-conformant scientific use reading, independent unit, strongest support/contradiction, predictions, cost limits and next unallocated need.",
+      "provenance": "Original DM complete K intake accepted by Root; its no-successor boundary is not a direction stop.",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/summary.json",
+      "purpose": "Read counts, configuration, exposure, primary arm means/contrast means/SD/SE/adverse extremes and intervention totals; all64 differences are retained but no new reduction or subgroup search is requested.",
+      "provenance": "Original complete native output, later byte-verified against the immutable Git blob; one trained endpoint.",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_EXECUTION_FACTS_20260912.json",
+      "purpose": "Read cost and support coverage, source binding and cleanup status only; distinguish166s recorded native charge and known support from missing full-cost coverage. The local policy refusal supplies no scientific polarity.",
+      "provenance": "Accepted K execution/cost facts through bounded cleanup; no future budget or universal rate.",
+      "commit_sha": "d8bb4b2b049f87989cb138181b598e9ada496a22"
+    },
+    {
+      "path": "experiments/candidates/acvc/cluster_deployment_b01/protocol.py",
+      "purpose": "Constants and make_cluster plus final_panel/publication interface: current21457/31457 bindings, constructor-only law override and two separate .01J readings. A new fit would need fresh bindings, not rerunning K.",
+      "provenance": "Accepted narrow source; read-only feasibility, not authorization to execute or modify it.",
+      "commit_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819"
+    },
+    {
+      "path": "scripts/run_acvc_cluster_deployment_b01.py",
+      "purpose": "The short entry point: thread limits before imports, exact seed choice and delegation to the existing full native C-fit/three-panel chain.",
+      "provenance": "Accepted source implementation; no new run, source patch or pilot.",
+      "commit_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819"
+    },
+    {
+      "path": "experiments/candidates/acvc/native_link_loss_b01/binding.py",
+      "purpose": "Binding.observe only: own anchor/current private observation, loss predicate, previous realized-displacement action and state update.",
+      "provenance": "Existing fixed mechanism source; not proof of necessity, increased saturation or isolated causal benefit.",
+      "commit_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections3–4,5.2,11.4 and11.7–11.10, especially11.8.1–11.8.3 and11.8.6–11.8.8: smallest sufficient class, independent learning unit, marginal value, proportionate question/checks and negative scope. Section11 controls.",
+      "provenance": "Current applicable scientific requirements; only these named sections are adopted by this TASK.",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Section6 only: task-bound empirical estimand, training unit, evaluation hierarchy and claim limits.",
+      "provenance": "Explanatory scientific-reading source, not an investment authority or performance guarantee.",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "First three sections only: comparison definition, randomness hierarchy and complete package versus mechanism attribution.",
+      "provenance": "Previously verified interpretive grounding; no extra seed quota, search or full reconstruction requirement.",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Current Windows override and sections2,4,5–6 relevant authority/standing delegation, ACTIVE continuity, budget and existing branch reuse. The current Root assignment in the DM question grants this one documentary question only.",
+      "provenance": "Current owner-governed method and authority; no empirical or lifecycle enlargement.",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Sections4–5 and7.1/7.3 only: proportionate documentary L0 now, future narrowly affected implementation/currentness/check/review work if separately authorized.",
+      "provenance": "Current engineering limits; no new gate or unseen implementation acceptance.",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/ISSUE_INPUT_SNAPSHOT.json",
+      "purpose": "New current-question prefix and latest prior Convergence delivery comment only; older prefixes/comments remain historical and cannot enlarge this request.",
+      "provenance": "Fresh Issue14 readback after one prefix update with all eight prior comments and previous body preserved."
+    }
+  ],
+  "constraints": [
+    "Authority continuity: ACVC remains ACTIVE/MEDIUM,recasts2 under the current owner/Root instruction. Declining another finite allocation is not PARK or direction closure. Direction-local scientific selection and Portfolio funding/lifecycle remain separate. Generic verdict menus cannot silently override that boundary.",
+    "Current documentary exposure is zero: no source change, model/RNG creation, fit, train/eval/native step, optimizer call, runtime test, profiling, diagnostic or empirical cap is authorized. Provider/full documentary cost is UNKNOWN. One accepted question/full original-author intake only; no replacement or automatic consultation.",
+    "Do not relaunch K at21457/31457, add a sixth C01 unit, repeat the unchanged train-through-F pair, discard weak/adverse outcomes or pool historical primaries. A future fresh object, if selected and funded, preserves historical identities/evidence and uses new unscreened bindings.",
+    "The discussed unchanged fresh cluster B would be1fit×512×256 train ticks,256×4Adam and3panels×64×256eval ticks =180224team ticks/1024Adam. No initial/extra panel, gate, candidate sweep or hidden diagnostic. K165.33s whole-native/166s charged and its measured RSS are observed references only; new native/support costs and caps stay unallocated and unknown where not established.",
+    "Apply empirical§11.8 at question selection. One or two independent training seeds can be proportionate but are not a universal prerequisite. Ask whether added evidence changes use/investment; positive evidence is neither an entitlement to unlimited repetitions nor a demand for stability proof before B. Zero learner or finite search is not presumed cheap.",
+    "No exact policy maximum, exhaustive support/cause reconstruction, full history replay, profiling pilot or prerequisite A is required. Compare any proposed diagnostic with a direct minimal real B using known dominant work; unknown rates do not create a calibration gate.",
+    "Preserve one training unit versus64 conditional initial-world pairs, private own-history F/dwell masks, native S/J and legal information/action/feedback. Useful dwell, adverse worlds and unequal events remain alternatives to isolated retrace attribution. No increased saturation, headroom or zero-shot effect was measured.",
+    "The fifth local cleanup target was retained after a pre-execution runtime policy rejection; four remote targets are gone and unique evidence is preserved. This operational fact does not choose scientific polarity, funding or lifecycle and is not a reason to withhold a formed direction decision.",
+    "Use only the named applicable specification passages as requirements and the pinned scientific/method sources for evidence. Check actual access rather than treating this author manifest as proof of provider capability. Any concrete conflict must be stated precisely; do not silently invent a stronger class or substitute an unfunded experiment."
+  ],
+  "response_schema": [
+    "One actual direction-local selection or no-additional-allocation recommendation, with bounded use/revisit consequence.",
+    "Strongest support and contradiction, independent unit/claim ceiling and why the next observation changes a real decision.",
+    "For selected future work: minimal class/learner/comparator/primary, intrinsic multiplicative work and necessary support, costs and separate unallocated investment need.",
+    "Actual fixed-source access, concrete conflicts if any, and complete scoped delivery/readback."
+  ]
+}

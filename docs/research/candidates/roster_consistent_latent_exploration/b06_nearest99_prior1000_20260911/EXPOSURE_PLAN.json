@@ -1,0 +1,41 @@
+{
+  "object": "RCLE-TBCFV-B06-NEAREST99-PRIOR1000",
+  "seed": 26,
+  "updates": 1000,
+  "action_law": {
+    "nearest_probability": 0.99,
+    "other_probability": 0.002,
+    "distance_field": 76,
+    "tie": "first candidate",
+    "pointer_output_initially_zero": true
+  },
+  "offset_log_odds": 6.20455776256869,
+  "fresh_training_instances": 1,
+  "model_allocations": 7,
+  "untrained_helpers": 6,
+  "training_episodes": 64000,
+  "endpoint_episodes": 6144,
+  "total_episodes": 70144,
+  "native_ticks": 4489216,
+  "training_native_ticks": 4096000,
+  "training_agent_ticks": 32768000,
+  "backward_step_calls": 1000,
+  "training_rollout_batches": 2000,
+  "training_agent_claims": 8192000,
+  "neural_agent_claims": 8847360,
+  "candidate_scores": 53084160,
+  "nominal_l2_path": 20.0,
+  "validation_numerical_exposure": 0,
+  "independent_unit": "one complete training fit; scenario uncertainty conditional",
+  "cost_limits_s": {
+    "learned": 600,
+    "reference": 10,
+    "support": 140,
+    "complete": 750
+  },
+  "known_prior_analogy_s": {
+    "learned": 444.45,
+    "reference": 3.18
+  },
+  "new_rate_or_guarantee": null
+}

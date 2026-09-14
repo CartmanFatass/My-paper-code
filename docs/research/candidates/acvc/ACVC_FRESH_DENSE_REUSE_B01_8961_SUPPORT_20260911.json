@@ -1,0 +1,179 @@
+{
+  "identity": "fresh8961",
+  "known_components": [
+    {
+      "label": "assignment checkout and current specification deltas",
+      "s": 0.4250756
+    },
+    {
+      "label": "Portfolio source, active node/Monitor and owner reads",
+      "s": 0.5616209
+    },
+    {
+      "label": "read immutable Portfolio \u00a7\u00a71\u20139, current scientific law and exact C/F/dwell consumers",
+      "s": 0.8777441
+    },
+    {
+      "label": "complete affected immutable Portfolio sections and current repair acceptance",
+      "s": 0.3434817
+    },
+    {
+      "label": "read affected Portfolio sections with explicit UTF-8 output",
+      "s": 0.3071097
+    },
+    {
+      "label": "rejected fast-forward (direction repair was cherry-picked on main)",
+      "s": 0.3141475
+    },
+    {
+      "label": "merge accepted main while preserving shared-branch history and push if complete",
+      "s": 0.9689999999827705
+    },
+    {
+      "label": "inspect sole append-only audit merge conflict",
+      "s": 0.3217665
+    },
+    {
+      "label": "finish audit-preserving accepted-input merge and immediate push",
+      "s": 4.422000000020489
+    },
+    {
+      "label": "prospective namespace/exposure/cost arithmetic and new-card/audit publication",
+      "s": 0.2533897
+    },
+    {
+      "label": "one changed-binding stub, shell syntax and owned test cleanup",
+      "s": 5.7189999999827705
+    },
+    {
+      "label": "independent changed-risk review commands",
+      "s": 1.1236679
+    },
+    {
+      "label": "publish review/check acceptance and new-card owner item",
+      "s": 0.6550986
+    },
+    {
+      "label": "commit and immediate push of new8961 source/card/acceptance",
+      "s": 4.655999999988126
+    },
+    {
+      "label": "resumed exact source/command/helper and live Monitor reads",
+      "s": 0.8166148
+    },
+    {
+      "label": "new payload LF syntax, source bundle, transfer and exact remote preparation",
+      "s": 19.794037800020305
+    },
+    {
+      "label": "read preparation receipt and owner-boundary command",
+      "s": 0.2891437
+    },
+    {
+      "label": "prelaunch owner and live Monitor boundary",
+      "s": 0.4355783
+    },
+    {
+      "label": "publish exact command and preparation receipt, immediate push",
+      "s": 4.7365363
+    },
+    {
+      "label": "single detached submission complete local command",
+      "s": 0.9550454
+    },
+    {
+      "label": "direct MONITOR_ADD app delivery",
+      "s": 0.181
+    },
+    {
+      "label": "Monitor actual adoption query (Root-routed receipt)",
+      "s": 0.7
+    },
+    {
+      "label": "publish launch and adopted Monitor receipts, immediate push",
+      "s": 5.0733916
+    },
+    {
+      "label": "Monitor terminal query shared across four handles; charged whole, not split",
+      "s": 0.9
+    },
+    {
+      "label": "terminal intake current tools and prior E0/intake structure",
+      "s": 0.2242087
+    },
+    {
+      "label": "terminal intake current tools and actual publication and accepted direction state",
+      "s": 0.2409559
+    },
+    {
+      "label": "scientific reading/card rule and intake/authoring ownership",
+      "s": 0.2142289
+    },
+    {
+      "label": "terminal source verification, complete archive, transfer and hash match",
+      "s": 1.5404735999999999
+    },
+    {
+      "label": "extract and inventory verified archive, read exact receipts and publication rows",
+      "s": 0.3673265
+    },
+    {
+      "label": "inspect evaluation keys, supervisor exit and intake rule/audit",
+      "s": 0.3161535
+    },
+    {
+      "label": "independent finite reduction of all episode/update/primary/receipt records",
+      "s": 0.2704657
+    },
+    {
+      "label": "intake owner-review/audit boundary",
+      "s": 0.4923872
+    },
+    {
+      "label": "existing new-card owner item application state",
+      "s": 0.2354779
+    },
+    {
+      "label": "preserve readable evidence/preparation inputs, write collection and intake audit, check required brief",
+      "s": 0.350283
+    },
+    {
+      "label": "artifact/source-surface check and result preservation commit with immediate push",
+      "s": 5.8939969
+    },
+    {
+      "label": "resolve cleanup retention owner boundary",
+      "s": 0.2100002
+    },
+    {
+      "label": "preservation verification and exact remote cleanup/absence",
+      "s": 0.8773843
+    },
+    {
+      "label": "read-only local preservation/blocker inventory and tracked supervisor-log copy",
+      "s": 0.2818184
+    },
+    {
+      "label": "final owner-review boundary",
+      "s": 0.4276555
+    }
+  ],
+  "known_support_s": 66.77326629999446,
+  "support_cap_s": 330,
+  "native_cap_s": 270,
+  "complete_cap_s": 600,
+  "known_native_charge_s": 178,
+  "known_native_plus_support_s": 244.77326629999448,
+  "native_cap_pass": true,
+  "full_support_and_complete_cap_conformance": "unestablished: known subtotals are not complete bills",
+  "observed_cap_breach": false,
+  "missing_or_pending": [
+    "unmeasured client/message overhead including rejected local cleanup before process creation",
+    "this final closeout publication/push tail, to be returned once to Root",
+    "Root integration and associated support tail",
+    "same-path local cleanup if runtime policy later permits; not attempted through another executor"
+  ],
+  "monitor_shared_query": "0.9s full four-handle terminal query charged without splitting, separately from 0.7s adoption",
+  "non_effect_rejection": "apply_patch refused same-file delete/add for support JSON; no mutation or following command occurred; corrected with a direct data write",
+  "cleanup_state": "remote absent/unregistered; local5-file preparation duplicate115516942bytes retained after blocked-by-policy rejection"
+}

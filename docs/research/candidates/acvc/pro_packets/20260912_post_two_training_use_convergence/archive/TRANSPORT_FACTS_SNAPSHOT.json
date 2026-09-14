@@ -1,0 +1,125 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-12-acvc-post-two-training-use-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:acvc:convergence",
+  "direction_id": "acvc",
+  "direction_ids": [
+    "acvc"
+  ],
+  "decision_authority": "pro_final",
+  "source_thread_id": "01a095be-63c8-7c23-8384-edaf74dcb154",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "operator_thread_id": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+  "return_route": "PARENT_SESSION",
+  "repository": "CartmanFatass/My-paper-code",
+  "task_commit": "86c4daafe55507ddac9c0b04833c90307f32af30",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "provider_url": "https://chatgpt.com/c/6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "tab_id": "10",
+  "tab_lifecycle": "CLOSED",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "75ba6621d0073019e06f59abc2f6094f567396261cf19c3be677107ab8793370",
+  "prompt_bytes": 1922,
+  "manifest_sha256": "e120d20dae9f315c52a0669fdcb6644f702ec4d4474ccdfb9d501b16069f82a9",
+  "manifest_bytes": 1762,
+  "response_sha256": "4a32206bba1c466f5ac9cd1c0ba575cfbbb3014d1150e08c81c48e7d0c54fac2",
+  "response_bytes": 388,
+  "github_response_sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+  "github_response_bytes": 31907,
+  "github_commit": "15c56cc40c56d2edb6e8c9a1a217a994f30cb3fc",
+  "github_response_path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md",
+  "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/14",
+  "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5648661785",
+  "send_evidence": {
+    "send_click_count": 1,
+    "send_attempted": true,
+    "provider_user_message_id": "cbd324f2-37a1-4975-a026-1880cee17529",
+    "provider_assistant_message_id": "4edf6a43-14e6-414c-91aa-5075005364ba",
+    "observed_conversation_url": "https://chatgpt.com/c/6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "user_node_exact": true
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 12m 21s; complete assistant response; no active generation control",
+  "capture_method": "Latest assistant Copy response via CUA and clipboard; raw receipt and GitHub response preserved",
+  "archive_status": "ARCHIVED",
+  "response_identity": "PASS",
+  "identity_binding": {
+    "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "user_message_id": "cbd324f2-37a1-4975-a026-1880cee17529",
+    "assistant_message_id": "4edf6a43-14e6-414c-91aa-5075005364ba"
+  },
+  "timestamps": {
+    "sent_at": "2026-09-12T21:03:45Z",
+    "completed_at": "2026-09-12T21:03:45Z",
+    "captured_at": "2026-09-12T21:03:45Z",
+    "archived_at": "2026-09-12T21:04:09Z"
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a095be-63c8-7c23-8384-edaf74dcb154",
+    "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+    "destination_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-12-acvc-post-two-training-use-convergence-01|acvc|6aa12e74-8e54-83e8-95f6-001681b456f7|78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\PROMPT_BODY.md",
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\GITHUB_RESPONSE.md",
+      "short_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\RESPONSE.md",
+      "short_receipt_sha256": "4a32206bba1c466f5ac9cd1c0ba575cfbbb3014d1150e08c81c48e7d0c54fac2",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\TRANSPORT_FACTS.json",
+      "github_response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\GITHUB_RESPONSE.md",
+      "github_response_sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+      "github_commit": "15c56cc40c56d2edb6e8c9a1a217a994f30cb3fc",
+      "response_sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb"
+    },
+    "response_sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+    "staged_at": "2026-09-12T21:03:54Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted_by_codex_app",
+    "updated_at": "2026-09-12T21:04:09Z",
+    "sent_at": "2026-09-12T21:04:09Z"
+  },
+  "notes": [
+    "Exactly one provider Send confirmed.",
+    "Natural completion observed; no second Send.",
+    "Transport does not assess scientific conformance."
+  ],
+  "reconciliation": {
+    "immutable_git_blob": {
+      "commit": "15c56cc40c56d2edb6e8c9a1a217a994f30cb3fc",
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/archive/RESPONSE.md",
+      "bytes": 31907,
+      "sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+      "line_feeds": 149,
+      "crlf_pairs": 0,
+      "source": "raw GitHub immutable blob fetched at commit"
+    },
+    "preserved_transport_archive": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\GITHUB_RESPONSE.md",
+      "bytes": 31907,
+      "sha256": "78f624ac238e5834ae4eae001b510cc99686e59c01bd6e0ff39760dc7f253bdb",
+      "byte_equal_to_immutable_blob": true
+    },
+    "short_chat_receipt": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-12-acvc-post-two-training-use-convergence-01\\RESPONSE.md",
+      "bytes": 388,
+      "sha256": "4a32206bba1c466f5ac9cd1c0ba575cfbbb3014d1150e08c81c48e7d0c54fac2",
+      "is_full_response": false
+    },
+    "reported_variant_not_found_locally": {
+      "bytes": 31932,
+      "sha256": "b179fae665eab1977543f0514a2a192b74d1786cc560386294143a151e01bc0e",
+      "status": "reported by DM/Root but not present in immutable blob, preserved archive, registry or extraction files searched"
+    },
+    "conclusion": "Authoritative complete-response bytes are 31907 with SHA-256 78f624...253bdb; 31932/b179... is an external transcription variant and does not match any preserved complete-response artifact."
+  }
+}

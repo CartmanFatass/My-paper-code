@@ -1,0 +1,52 @@
+{
+  "object": "RCLE-TBCFV-B06-NEAREST99-PRIOR1000",
+  "seed": 26,
+  "required_input_sha": "bb40797dc5312641ac640664cbf7c2bd174d9815",
+  "portfolio_response_sha": "0dbbcbf807509ccc34a3a1de353114be88896897",
+  "checkout": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906",
+  "branch": "codex/rcle",
+  "starting_changes": [],
+  "changes": [
+    "Explicit model-owned action_law, passed by initialization and the common study; checkpoint saves model law; summary publishes selected law.",
+    "Fresh B06 law .99 nearest/.002 each other, identity26 and fixed final1000 entry/wrapper.",
+    "Historical test stubs accept the law keyword and expose the model-law attribute; their numerical checks are reused, not rerun."
+  ],
+  "check": {
+    "command": "python -B tests/experiments/candidates/roster_consistent_latent_exploration/b06_nearest99_prior1000/test_law_binding.py",
+    "exit_code": 0,
+    "command_wall_s": 0.1830005,
+    "output": "test_entry_initialization_and_summary_bindings (__main__.LawBinding.test_entry_initialization_and_summary_bindings) ... ok\r\ntest_model_offset_and_saved_law (__main__.LawBinding.test_model_offset_and_saved_law) ... ok\r\ntest_six_unchanged_reading_rows (__main__.LawBinding.test_six_unchanged_reading_rows) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 3 tests in 0.027s\r\n\r\nOK\r\n",
+    "tests": 3,
+    "unittest_inner_wall_s": 0.027,
+    "Torch_imports": 0,
+    "tensors": 0,
+    "scientific_models": 0,
+    "RNG_masters": 0,
+    "native_episodes": 0,
+    "backward_calls": 0,
+    "optimizers": 0,
+    "numerical_fixtures": 0,
+    "temporary_files": 0
+  },
+  "independent_review": {
+    "reviewer": "rv_ah_rcle_b04",
+    "model_effort": "Astra/high",
+    "verdict": "PASS",
+    "command_wall_s": 1.1550574,
+    "source_base": "bb40797dc5312641ac640664cbf7c2bd174d9815",
+    "tests_or_numerical_execution": 0,
+    "record": "INDEPENDENT_REVIEW.md"
+  },
+  "technical_acceptance": "Accepted changed contract from source/consumer inspection and the permitted static/symbolic check. Actual native execution/performance and runtime remain unmeasured until the one B.",
+  "residual_limits": [
+    "Static/symbolic checks establish wiring, not numerical performance or complete runtime publication.",
+    "Reconstruction of a saved new-law model must pass checkpoint action_law to NearestPriorModel; this allocation evaluates its in-memory fitted model.",
+    "An interrupted native batch may be absent from completed-block counters, as in the unchanged B05 path."
+  ],
+  "scope_section4": "none",
+  "prior_test_scratch": "B04/B05 prior policy-rejected exceptions unchanged; no new scratch created.",
+  "owner_item": "20260911-rcle-002",
+  "owner_reviews": [],
+  "support_known_charged_s": 10.657124900000001,
+  "native_new_wall_or_memory": null
+}

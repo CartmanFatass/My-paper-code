@@ -1,0 +1,15 @@
+MGTAP 继续推进。8214 结束的是第三次 COND/DENSE 配对的额度，方向并未停止。这是 DM 的新方向问题，尚未形成 Pro 决定，也未启动新实验。
+
+三次独立训练配对的完整 native J 差分别为 +0.005761321371348559、-0.02246957345594415、+0.02447811898058116。首个在 MEI 内、第二个 adverse、第三个 above-MEI；每次的全部结果和条件评价不确定性分开保留。DENSE 仍是通用默认，不能从其中一个正点推断稳定优势。
+
+原 Convergence 节点现在需要判断一个具体候选：将 COND 的所有可见伙伴均值查询，改为观测中本地 SINR 排名第一的伙伴查询（TOP）。原始 108 维输入、所有伙伴的上下文分量、循环状态、动作、奖励与 PPO 均保留，比较器仍为完整 DENSE。行排序已有来源，不增加通信、距离重建、用户与伙伴全组合、搜索或新参数。该候选可能避免均值混合，但最强链路不一定是最有决策价值的伙伴；原负结果也没有被归因为平均查询。
+
+请原节点判断是否值得选择一个新的 TOP/DENSE B 问题；若候选不值得，给出一个有依据的下一步。禁止第四次不变 COND/DENSE 配对，不要求穷举、完整因果解释或完整重建；不改变 Portfolio 状态。当前只有咨询授权，拟议对象和资源额度是新提案，不是旧 M 余额。
+
+固定证据：
+
+- [本轮源代码依据、建议、工作量及边界](https://github.com/CartmanFatass/My-paper-code/blob/aae355b2a7485a53a58e0b9d996496bbe172eb77/docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST8214_DIRECTION_QUESTION_20260912.md)
+- [完整 8214 intake 与三次分别保留的结果](https://github.com/CartmanFatass/My-paper-code/blob/6561056ed6f2f51d57801d315af2ca8749cee6d2/docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md)
+- [原节点 COND 科学资格决定](https://github.com/CartmanFatass/My-paper-code/blob/319c51a5fdc411eaaf1a47557d032f23ed269265/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/archive/RESPONSE.md)
+
+后续完整 TASK 和 RESPONSE 使用共享 codex/mgtap 分支及本轮独立响应路径。旧 Issue #5 中的 MGTAP 交付仍是历史证据；本 Issue 只承载当前 MGTAP 问题。

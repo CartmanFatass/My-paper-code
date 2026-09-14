@@ -1,0 +1,29 @@
+{
+  "readback": {
+    "chunk_id": "0e2d07",
+    "wall_time_seconds": 0.607334,
+    "exit_code": 0,
+    "original_token_count": 86,
+    "output": "3ffa65cb4e1a67182b90dce3822d0018ac623c72\n/home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911\n/home/wu/hmasd-inputs/rcle-b05-nearest-prior1000-s25-20260911\n48445788\t/home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911\n2951105\t/home/wu/hmasd-inputs/rcle-b05-nearest-prior1000-s25-20260911\nsource.bundle\nterminal.tar.gz\n"
+  },
+  "source_and_evidence": "Published source plus verified local source.bundle/terminal.tar.gz and mapped raw outputs; COLLECTION.json",
+  "completed_execution_path": "/home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911",
+  "execution_bytes": 48445788,
+  "staging_path": "/home/wu/hmasd-inputs/rcle-b05-nearest-prior1000-s25-20260911",
+  "staging_bytes": 2951105,
+  "staged_files": [
+    "source.bundle",
+    "terminal.tar.gz"
+  ],
+  "source_sha": "3ffa65cb4e1a67182b90dce3822d0018ac623c72",
+  "tracked_untracked_status": "clean; outputs ignored and preserved",
+  "retained_shared_checkout": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906",
+  "creator_test_scratch": {
+    "path": "temp/directions/roster_consistent_latent_exploration/test/b05-nearest-prior1000-20260911",
+    "files": 6,
+    "bytes": 189324,
+    "reason": "policy rejected removal before process creation",
+    "owner": "/root/dm_rcle_restart_recovery2"
+  },
+  "removal_status": "pending scoped reclamation after integration/retention fact; no active/shared checkout selected"
+}

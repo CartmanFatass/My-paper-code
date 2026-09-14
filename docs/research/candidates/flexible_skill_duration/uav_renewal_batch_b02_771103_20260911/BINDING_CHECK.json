@@ -1,0 +1,90 @@
+{
+  "checked_utc": "2026-09-12T02:30:44.256637+00:00",
+  "status": "pass",
+  "check": "single in-memory forwarder/AST and exact command binding",
+  "source_path": "scripts/run_fsd_uav_renewal_batch_b02.py",
+  "old_source": "5250c43536d8520d4005eed3f613226ec4bc6e73",
+  "ast_change_only_new_seed_object_literals_and_docstring": true,
+  "forwarded_calls": [
+    {
+      "name": "make_config",
+      "args": [
+        "D0",
+        16,
+        771103
+      ],
+      "kwargs": {
+        "renewal_batch": true
+      }
+    },
+    {
+      "name": "make_config",
+      "args": [
+        "I",
+        32,
+        781103
+      ],
+      "kwargs": {
+        "renewal_batch": true
+      }
+    },
+    {
+      "name": "assemble_pair",
+      "args": [
+        {
+          "arm": "I"
+        },
+        {
+          "arm": "D0"
+        }
+      ],
+      "kwargs": {
+        "training_seed": 771103,
+        "evaluation_seed": 781103,
+        "object_id": "FSD_UAV_RENEWAL_BATCH_B02_771103",
+        "card": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+        "renewal_batch": true
+      }
+    },
+    {
+      "name": "main",
+      "args": [
+        [
+          "--arm",
+          "I"
+        ]
+      ],
+      "kwargs": {
+        "training_seed": 771103,
+        "evaluation_seed": 781103,
+        "object_id": "FSD_UAV_RENEWAL_BATCH_B02_771103",
+        "card": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+        "renewal_batch": true,
+        "caps": {
+          "D0": 900.0,
+          "I": 1800.0
+        }
+      }
+    }
+  ],
+  "commands": {
+    "D0": [
+      "/usr/local/bin/agent-task",
+      "run",
+      "fsd-uav-renewal-batch-b02-771103-D0-20260911",
+      "/usr/bin/time -f elapsed_seconds=%e,peak_rss_kib=%M,user_seconds=%U,system_seconds=%S,exit_status=%x -o /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911/D0_process_time.txt /usr/bin/timeout --signal=KILL 900s /bin/bash /home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911/docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771103_20260911/D0.sh"
+    ],
+    "I": [
+      "/usr/local/bin/agent-task",
+      "run",
+      "fsd-uav-renewal-batch-b02-771103-I-20260911",
+      "/usr/bin/time -f elapsed_seconds=%e,peak_rss_kib=%M,user_seconds=%U,system_seconds=%S,exit_status=%x -o /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771103-20260911/I_process_time.txt /usr/bin/timeout --signal=KILL 1800s /bin/bash /home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771103-20260911/docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771103_20260911/I.sh"
+    ]
+  },
+  "new_scientific_submissions": 0,
+  "models": 0,
+  "simulation_steps": 0,
+  "scratch_files": 0,
+  "inner_check_wall_seconds": 0.046999999991385266,
+  "limits": "No numerical/shared learner replay; unchanged protected source, prior review/check evidence and current independent review are reused."
+}

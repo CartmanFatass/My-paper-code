@@ -1,0 +1,37 @@
+{
+  "question": "接受原方向节点的单次用途选择：旧 BANK 是否值得成为同一主机的可选开发参照？",
+  "changes_if_approved": [
+    {
+      "target": "DIRECTION.md 当前科学位置",
+      "from": "下一判别尚未选择，E 差值不可用",
+      "to": "选择旧 BANK 与一个新 Generic 的条件用途比较；拨款仍待 Portfolio"
+    }
+  ],
+  "if_refused": "保留完整 Pro 与 E/H 证据；实际异步冲突返回同一节点，不编造替代裁决，也不重试旧 Generic。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md",
+      "quote": "Select one future, separately funded comparison of the accepted, frozen BANK policy against one newly trained, equally informed Generic RETAIN policy.",
+      "why": "一个新 Generic 终点能改变具体参照用途，避免另购 BANK 训练。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md",
+      "quote": "BANK has not demonstrated comparative value, the twenty-tick host may offer little useful additional history, and current local features plus adaptive Generic recurrence may already suffice.",
+      "why": "没有比较收益，节省开销是实质替代项；B04 的 Generic 能力仍是不同主机上的反证。"
+    }
+  ],
+  "uncertainty": [
+    "仅一个已知结果的旧 BANK 加一个新 Generic；没有 BANK 训练复现或总体不确定性。",
+    "公共信息接口是理想化任务假设；匹配的调优 headroom 缺失。"
+  ],
+  "cost": {
+    "compute": "本次新增科学调用为零；未来完整原生、支持及模型费用未知，现有 E 预算不续期。",
+    "owner_time": "无需等待回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Final decision: select the one conditional retained-BANK-reference versus fresh-Generic use comparison described above for possible separate investment.",
+  "source": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md"
+}

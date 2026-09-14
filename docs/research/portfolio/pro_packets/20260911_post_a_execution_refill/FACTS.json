@@ -1,0 +1,263 @@
+{
+  "request_id": "2026-09-11-post-a-execution-refill-portfolio-01",
+  "prepared_at_utc": "2026-09-11T09:12:54.314455+00:00",
+  "author_thread_id": "01a08ef0-996f-7f11-b134-db55149a4139",
+  "author_native_name": "/root/dm_fifth_slot_blocker_intake",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "worktree": "C:\\Projects\\HMASD-worktrees\\codex-portfolio",
+  "branch": "codex/portfolio",
+  "assignment_input_sha": "cc22d3ca4dbeef070dd4f90c12f94c3a970507a2",
+  "reconciled_current_main_sha": "3abb38014627ed9971ef02f6a6ccaea4e6c8dee9",
+  "starting_changes": [],
+  "active_rows": [
+    {
+      "direction_id": "acvc",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction_id": "capability_bound_semantic_currentness",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction_id": "commitment_residual_triggered_options",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction_id": "degraded_incumbent_shadow_handover",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction_id": "finite_resource_relational_inductive_efficiency",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction_id": "flexible_skill_duration",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction_id": "metric_ground_transport_allocation",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction_id": "roster_consistent_latent_exploration",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction_id": "semigroup_consistent_duration_model_policy",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction_id": "ucope",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction_id": "vap_folr_core",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction_id": "variable_n_fleet_churn",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction_id": "vsp_02",
+      "lifecycle": "ACTIVE",
+      "priority": "LOW"
+    },
+    {
+      "direction_id": "vsp_03",
+      "lifecycle": "ACTIVE",
+      "priority": "LOW"
+    },
+    {
+      "direction_id": "vsp_c1",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    }
+  ],
+  "recommendation": "A: FSD and MGTAP",
+  "alternatives": {
+    "B": "FSD only",
+    "C": "MGTAP only",
+    "D": "zero new investment"
+  },
+  "portfolio_choice_applied": null,
+  "actual_preparation_exposure": {
+    "scientific_invocations": 0,
+    "policy_models": 0,
+    "encoder_modules": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_environment_steps": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "real_evaluation_episodes": 0,
+    "replay": 0,
+    "profiling": 0,
+    "source_tests": 0,
+    "test_fixtures": 0,
+    "support_search": 0,
+    "raw_result_reanalysis": 0,
+    "source_implementation_edits": 0,
+    "provider_sends": 0,
+    "parameter_displacement": "not applicable: no learner"
+  },
+  "exposure_line": "POST_A_REFILL_PREPARATION: scientific_invocations=0; policy_models=0; encoder_modules=0; checkpoint_loads=0; environments=0; native_steps=0; synthetic_environment_steps=0; training_episodes=0; optimizer_steps=0; real_evaluation_episodes=0; replay=0; profiling=0; source_tests=0; test_fixtures=0; support_search=0; raw_result_reanalysis=0; source_implementation_edits=0; provider_sends=0; parameter_displacement=not applicable: no learner",
+  "prospective_fsd": {
+    "training_pairs": 1,
+    "learning_instances": 2,
+    "model_allocations": 4,
+    "training_team_steps": 80000,
+    "training_episodes": 160,
+    "training_stages": 10,
+    "final_evaluation_episodes": 64,
+    "final_evaluation_steps": 32000,
+    "total_native_steps": 112000,
+    "coordinator_law": "I1280:15*sum_r ceil(M_r/1280), five M_r<=8000; D0:15*5*ceil(800/128)=525; all rows/epochs/6-agent decoding persist",
+    "d0_coordinator_chunks": 525,
+    "i1280_upper_chunks": 525,
+    "per_arm_caps_s": {
+      "D0": 900,
+      "I1280": 1800
+    },
+    "support_cap_s": 300,
+    "complete_cap_s": 3000,
+    "new_identity": "not chosen/reserved; one unused training/evaluation binding selected prospectively after actual acceptance reconciliation",
+    "MEI_absolute_J": 0.01,
+    "runtime_forecast": "unknown; actual same-package519.94/1020.68s are anchors, not bounds"
+  },
+  "prospective_mgtap": {
+    "training_pairs": 1,
+    "learning_instances": 2,
+    "top_level_model_allocations": 6,
+    "allocation_breakdown": {
+      "trained_actors": 2,
+      "trained_critics": 2,
+      "common_untrained_actor": 1,
+      "common_untrained_critic": 1
+    },
+    "training_episodes": 1024,
+    "training_team_steps": 262144,
+    "rollout_batches": 512,
+    "adam_calls": 2048,
+    "final_sampled_evaluation_episodes": 64,
+    "final_evaluation_steps": 16384,
+    "total_native_steps": 278528,
+    "actor_rows_per_fit": 3317760,
+    "per_arm_complete_work_law": "initialization +131072 collection steps +1024 Adam calls with4 recurrent replay epochs +8192 sampled evaluation steps +checkpoint/publication/exit",
+    "per_arm_caps_s": {
+      "COND": 450,
+      "DENSE": 450
+    },
+    "native_pair_cap_s": 900,
+    "support_cap_s": 300,
+    "complete_cap_s": 1200,
+    "MEI_absolute_J": 0.01,
+    "future_master": "not chosen/reserved",
+    "required_source_work": "minimal separate native CLI/binding using accepted build_cond_pair and primary plus existing native collector/PPO; no relabelled old REL/H/two-master command",
+    "extra_numerical_encoder_fixtures": 0,
+    "extra_full_policy_smokes": 0,
+    "extra_native_validation_episodes": 0,
+    "runtime_forecast": "unknown; old REL/DENSE353.71/368.12 pair walls and722.64 aggregate are analogues, not COND forecast"
+  },
+  "proposed_complete_cap_sum_s": 4200,
+  "cap_sum_limit": "Separate invoked-runtime caps; no transfer, no measured study/calendar forecast. Authoring/Pro/idle elapsed unmeasured.",
+  "current_fsd_result": {
+    "source_sha": "c70f01ea30d6c4d063dcc46d8499b26bfe037da8",
+    "delta": 0.05697746721968016,
+    "conditional_sd": 0.13685461584668487,
+    "conditional_se": 0.024192706725467705,
+    "positive_negative_episodes": [
+      24,
+      8
+    ],
+    "native_arm_walls_s": {
+      "D0": 519.94,
+      "I1280": 1020.68
+    },
+    "native_pair_sum_s": 1540.62,
+    "aggregate_cpu_s": 6080.79,
+    "current_recorded_support_s": 90.7833929,
+    "current_known_native_plus_support_s": 1631.4033929,
+    "cost_limit": "missing10 Monitor-loop walls/attribution; snapshot precedes own publication; no full support/complete certification or inferred breach",
+    "cleanup": "Root-integrated all4 named remote paths/worktree registration absent; shared checkout retained"
+  },
+  "current_rcle_result": {
+    "primary_reference_minus_final_U": -0.0540181477865,
+    "initialization_gain_U": 0.0013387044271,
+    "conditional_interval": [
+      -0.00215516073,
+      0.004832569584
+    ],
+    "reference_cells_lost": 8,
+    "final_tau40": [
+      2036,
+      2048
+    ],
+    "native_wall_s": 447.63,
+    "known_support_s": 61.0232442,
+    "known_total_s": 508.6532442,
+    "cost_limit": "earlier Monitor/integration/publication incomplete, no140/750 pass or inferred breach",
+    "next_option": "less exploratory initial prior remains unspecified/unallocated; no new probability, seed, card or source request in this packet"
+  },
+  "current_mgtap_technical": {
+    "source_sha": "4be7f07a3f9dab19b21e5f70705e605fdbd1feec",
+    "complete_fixture_wall_s": 3.8409721,
+    "scientific_training_instances": 0,
+    "native_steps": 0,
+    "native_CLI_exists": false,
+    "accepted_APIs": [
+      "build_cond_pair",
+      "primary"
+    ],
+    "copied_files_cleanup_complete": true,
+    "claim_ceiling": "tested technical properties only"
+  },
+  "current_ucope_blocker": {
+    "request_id": "2026-09-11-ucope-post8801-convergence-01",
+    "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+    "state": "BLOCKED_PRE_SEND_BROWSER_ACCOUNT_MISMATCH",
+    "send_click_count": 0,
+    "provider_send_accepted": false,
+    "composer_text_entered": false,
+    "recovery": "same unsent prompt on owning-account surface, by Root/Transport; no new account/conversation/request",
+    "new_Portfolio_browser_access": "not tested or established by author"
+  },
+  "headroom": "Current tuned same-information upper-minus-baseline records absent; attained references not substituted",
+  "explicit_recasts": {
+    "ucope": 1,
+    "vsp_02": 1,
+    "vsp_03": 1,
+    "acvc": 2,
+    "semigroup_consistent_duration_model_policy": 2,
+    "variable_n_fleet_churn": 2
+  },
+  "other_recasts": "NR in current scoped inputs; preserved unchanged, not inferred0",
+  "owner_reviews": {
+    "at_utc": "2026-09-11T09:12:54.314455+00:00",
+    "unapplied": [],
+    "nonempty_current_audit_owner_rows": []
+  },
+  "administrative_cost": "unmeasured; standard-library counts/documents, Git/Issue/review reads only",
+  "cleanup": "No scratch/remote/experiment roots created; shared Portfolio checkout retained for delivery/intake.",
+  "owner_item": {
+    "id": "20260911-root-001",
+    "path": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-root-001.json",
+    "auto_applied": null
+  },
+  "audit_rows": [
+    29
+  ]
+}

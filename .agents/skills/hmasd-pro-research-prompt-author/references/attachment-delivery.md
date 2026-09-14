@@ -33,11 +33,11 @@ or inaccessible discussion. The attachment authorizes read-only scientific analy
 it does not authorize GitHub response-file writes, Issue comments, code or main changes.
 The answer is complete natural-language scientific prose, not a routing envelope.
 
-Commit and push the packet using the existing Git rules. A rendered local
-CALLER_DIRECT request is executed in the caller under the Transport skill.
-Otherwise dispatch its exact `dispatch_prompt` once to the configured independent Transport task
-with model/thinking omitted. An accepted or queued message is a dispatch fact;
-reconcile uncertain acceptance before continuing. Do not create another executor.
+Commit and push the packet using existing Git rules. For accepted historical attachment work,
+preserve its original route and bytes during same-request recovery. New DM-native dispatch uses
+the exact child and parent in HANDOFF, not a configured independent app task. Agentify strict
+promptPath pastes text and cannot substitute for an upload: absent a contract-conforming available
+upload tool, report the capability gap before Send. Do not silently select a new input mode.
 
 ## Transport and intake
 
@@ -47,7 +47,7 @@ The companion is provider text; internal dispatch and routing fields stay in HAN
 Follow the Transport skill for 6 Pro verification, the exact bound conversation,
 one Send, paired-message capture, full response archive and tab cleanup.
 
-Transport observes pending requests while Root continues its goal under ROOT_OPERATIONS.md.
+DM-owned Transport observes pending requests while DM waits natively under ROOT_OPERATIONS.md.
 Each request retains its source, parent, provider identity, archive and Send facts.
 A single request's completion does not pause observation needed by another.
 

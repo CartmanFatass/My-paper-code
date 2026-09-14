@@ -1,0 +1,93 @@
+{
+  "purpose": "Separate non-result-bearing CRLF/SSH input repair; no source transfer, checkout, admission or scientific invocation",
+  "checks": [
+    {
+      "case": "Windows text=True producer",
+      "observed_stdin_hex": "736574202d65750d0a7265706f3d2f6578616d706c650d0a",
+      "observed_CRLF": true
+    },
+    {
+      "case": "retained CRLF and LF inputs normalize to identical syntax-checked bytes",
+      "bytes": 975,
+      "sha256": "64b2b11dfc7fa5198dda84c25dacc85c6fd1661d40e6a6d783389f117295a26b"
+    },
+    {
+      "case": "bare CR and invalid shell syntax rejected locally before SSH",
+      "passed": true
+    },
+    {
+      "case": "record sender uses same immutable bytes with text=False and inherited50s client bound",
+      "passed": true
+    }
+  ],
+  "local_check_wall_s": 0.29699999999138527,
+  "remote_readback": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=3",
+      "hmasd-wsl-node",
+      "timeout --signal=TERM --kill-after=1 6 /usr/bin/python3 -c 'import sys; data=sys.stdin.buffer.read(); sys.stdout.buffer.write(data)' "
+    ],
+    "purpose": "read and echo stdin bytes only; shell payload never evaluated",
+    "client_timeout_s": 10,
+    "returncode": 0,
+    "received_bytes": 975,
+    "received_sha256": "64b2b11dfc7fa5198dda84c25dacc85c6fd1661d40e6a6d783389f117295a26b",
+    "byte_identical": true,
+    "wall_s": 0.4379999999946449
+  },
+  "total_check_wall_s": 0.7349999999860302,
+  "real_model_environment_rng_or_scientific_calls": 0,
+  "scratch_created": false,
+  "technical_status": "READY for checked LF/binary SSH input; future source preparation and scientific allocation remain unperformed",
+  "technical_support_cap_s": 60,
+  "known_command_support_components_before_terminal_publication": [
+    {
+      "label": "checkout/current-main scope read",
+      "s": 0.3951689
+    },
+    {
+      "label": "preserved payload and applicable instructions",
+      "s": 0.2359272
+    },
+    {
+      "label": "synchronize required committed main and push branch",
+      "s": 4.297000000020489
+    },
+    {
+      "label": "single focused static/stub batch and read-only SSH byte echo",
+      "s": 0.7349999999860302
+    },
+    {
+      "label": "independent external-effect snippet review",
+      "s": 0.6707192
+    },
+    {
+      "label": "incorporate Root8951 accounting and new technical-repair audit row",
+      "s": 0.2421368
+    },
+    {
+      "label": "final focused diff and scientific-source preservation check",
+      "s": 0.5316507
+    },
+    {
+      "label": "live-primary repair-boundary owner review",
+      "s": 0.3969123
+    }
+  ],
+  "known_command_support_before_terminal_publication_s": 7.504515100006519,
+  "independent_review": {
+    "reviewer": "rv_ah_acvc_8941_binding",
+    "finding": "No material findings in two snippets, ordering, byte transport or readiness ceiling",
+    "command_wall_s": 0.6707192,
+    "limit": "Reviewer tool/client overhead unmeasured"
+  },
+  "scope_section4": "none; no new runner/orchestration/shared module",
+  "scientific_source_preservation": "Diff against synchronized f2ca4a811 is empty for runner/wrapper, ACVC source and mapped tests",
+  "old_8951_account": "Unchanged ended allocation; later repair runtime is separate",
+  "cumulative_acvc_focused_check_wall_s_conservative": 36.62058149996554,
+  "accounting_tail": "Final record write, terminal commit/push and Root integration add ordinary measured receipts once; no recursive accounting-only commit required. Unmeasured tool/client overhead is not asserted zero."
+}

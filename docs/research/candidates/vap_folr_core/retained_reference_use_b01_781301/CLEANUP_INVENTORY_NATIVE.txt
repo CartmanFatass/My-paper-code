@@ -1,0 +1,9 @@
+5dce539ed54afd4334d09db9dcd94df38c52c2fc
+48564	/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a
+4784	/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301
+4432	/home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301
+28	/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a
+28	/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a
+worktree /home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a
+HEAD 5dce539ed54afd4334d09db9dcd94df38c52c2fc
+detached

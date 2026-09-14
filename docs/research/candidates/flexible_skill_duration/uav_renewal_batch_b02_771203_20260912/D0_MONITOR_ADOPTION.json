@@ -1,0 +1,16 @@
+{
+  "source": "Root routed native MONITOR_ADOPTED",
+  "monitor_thread_id": "01a095d0-21ee-7c02-9d97-3681b5678200",
+  "goal": "fresh unbudgeted unfinished monitoring goal created",
+  "handle": "fsd-uav-renewal-batch-b02-771203-D0-20260912",
+  "status": "running",
+  "pid": 3381323,
+  "exit_code": null,
+  "tmux_active": true,
+  "uptime_approx_seconds": 33,
+  "source_sha": "9eb99f8b68dd2863212c10693b911746a6d24354",
+  "cwd": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771203-20260912",
+  "output": "temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771203/D0",
+  "supervisor_root": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-771203-D0-20260912",
+  "direct_message_delivery_is_not_adoption": true
+}

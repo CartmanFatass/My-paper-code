@@ -1,0 +1,11 @@
+{
+  "question": "按 Portfolio 已拨款执行 ACPS 首个有限配对：按物理能力分配少量残差参数，是否胜过同等信息的完整共享策略？",
+  "changes_if_approved": [{"target": "ACPS-B01", "from": "已注册并拨款，尚无实现或结果", "to": "固化比较器和指标，实施一次两臂训练及最终评价"}],
+  "if_refused": "在下一个干净边界应用明确的异步指令；保留已经产生的证据，不自行重跑。",
+  "evidence_for": [{"path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md", "quote": "Fund ACPS-B01: physical heterogeneity and partial sharing", "why": "Portfolio 已明确选择新方向、比较器和本次完整投入。"}],
+  "evidence_against": [{"path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_SCIENCE_CARD_20260912.md", "quote": "the strongest countercase is that informed SHARED already adapts, while adapters waste data or hurt optimization.", "why": "结构合理并不保证有限训练受益；同等信息共享基线可能已经足够。"}],
+  "uncertainty": ["新异质执行主机的收益、用时和匹配调优余量尚无实测。", "一个配对只能支持本实例的完整方法比较，不能证明稳定优势或机制原因。"],
+  "cost": {"compute": "两臂各450秒；native900秒、support900秒、完整1800秒，均为新的硬投入上限。", "owner_time": "无需等待回复，保留异步干预。", "reversibility": "costly", "waits_on_this": "nothing"},
+  "verdict_text": "按已接受的 Portfolio 决策执行一次 ACPS-B01 配对，保持强比较器、完整学习及最终32个评价；不追加实验。",
+  "source": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_SCIENCE_CARD_20260912.md"
+}

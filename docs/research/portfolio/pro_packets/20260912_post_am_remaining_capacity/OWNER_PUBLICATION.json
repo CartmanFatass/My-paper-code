@@ -1,0 +1,16 @@
+{
+  "created_at_utc": "2026-09-12T19:47:38.184508+00:00",
+  "request_id": "2026-09-12-post-am-remaining-capacity-01",
+  "proposal_item_id": "20260912-root-010",
+  "proposal_item_path": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-010.json",
+  "proposal_auto_applied": false,
+  "audit_row": "docs/research/portfolio/audit/2026-09-12.md#L55",
+  "prior_final_AM_item": "20260912-root-009",
+  "prior_AM_application_state": "A completed and grant ended/main89910ecd7; M independently active. Original2of5start trace remains history.",
+  "authority": "N/S/R/H recommendation only; portfolio:cross_direction decides",
+  "current_pre_send_actual_count": 1,
+  "current_vacancies": 4,
+  "latest_evidence_main_sha": "89910ecd7c70b1bd7e25951402620c5791c9dfe9",
+  "updated_audit_row": "docs/research/portfolio/audit/2026-09-12.md#L56",
+  "proposal_item_trace": "planned only; old AM Pro authority traced solely for completed A grant, not N/S/R/H selection; no auto_applied"
+}

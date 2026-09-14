@@ -1,0 +1,50 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-11-folr-unchanged-pair-funding-portfolio-01",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "acvc",
+    "capability_bound_semantic_currentness",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "finite_resource_relational_inductive_efficiency",
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation",
+    "roster_consistent_latent_exploration",
+    "semigroup_consistent_duration_model_policy",
+    "ucope",
+    "vap_folr_core",
+    "variable_n_fleet_churn",
+    "vsp_02",
+    "vsp_03",
+    "vsp_c1"
+  ],
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio__00_PROMPT.md",
+    "bytes": 1925,
+    "sha256": "2407bd2730afe5dcfd929369b2f6bb55915dde9be9c9510f9c015a0aea6a61ab",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-folr-unchanged-pair-funding-portfolio-01\\2026-09-11-folr-unchanged-pair-funding-portfolio-01--portfolio--attempt-01__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "2407bd2730afe5dcfd929369b2f6bb55915dde9be9c9510f9c015a0aea6a61ab",
+    "references": []
+  }
+}

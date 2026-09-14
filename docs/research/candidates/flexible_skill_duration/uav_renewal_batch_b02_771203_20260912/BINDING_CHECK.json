@@ -1,0 +1,19 @@
+{
+  "status": "pass",
+  "checks": [
+    "new identity and card bind consistently",
+    "real CLI forwards both seed bases, object, card, batching and complete caps without rewriting argv",
+    "unchanged authentic D0 configuration forwarding",
+    "pair publication forwards exact fresh identity",
+    "real unchanged publisher rejects previous allocation before any numeric access",
+    "both LF-only wrappers preserve adjacent admission, exact runner and source-bound companion",
+    "two preselected detached complete-cap commands only"
+  ],
+  "check_count": 7,
+  "entry_sha256": "67beb40a42747e445646d2ec575f1cf53d3c27a675ee0339252da0d35191f0fc",
+  "new_models": 0,
+  "new_rng_masters": 0,
+  "scientific_submissions": 0,
+  "test_scratch_created": false,
+  "limit": "Pure stub/AST/command checks only; prior accepted numerical/source evidence reused. No new numerical execution."
+}

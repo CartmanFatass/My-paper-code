@@ -1,0 +1,19 @@
+{
+  "at_utc": "2026-09-11T16:39:19.376142+00:00",
+  "actual_wall_seconds": 0.4038859999855049,
+  "returncode": 0,
+  "stderr": "",
+  "facts": {
+    "disk_exists": {
+      "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-770803-20260911": false,
+      "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-770803-20260911": false,
+      "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-770803-D0-20260911": false,
+      "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b02-770803-I-20260911": false
+    },
+    "execution_worktree_registered": false,
+    "removed_paths": [],
+    "scientific_run_submitted": false,
+    "shared_authoring_checkout_retained": true
+  },
+  "purpose": "final exact-path disk/registration absence after stopped zero-exposure source preparation; no removal"
+}

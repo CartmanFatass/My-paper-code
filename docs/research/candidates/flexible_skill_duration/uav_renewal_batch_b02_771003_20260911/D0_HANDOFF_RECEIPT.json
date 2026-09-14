@@ -1,0 +1,21 @@
+{
+  "recorded_utc": "2026-09-11T23:36:33.590482+00:00",
+  "monitor_adoption": "confirmed by Root",
+  "root_receipt_verbatim": "D0 accepted/adopted under handle fsd-uav-renewal-batch-b02-771003-D0-20260911 at source 5250c43536d8520d4005eed3f613226ec4bc6e73 on hmasd-wsl-node; actual admission passed15.64GB/4GB and supervisor is running. Shared app Monitor was notified with exact cwd/output/log. Continue your assigned collection/acceptance and preselected I arm only after D0 terminal acceptance; no duplicate launch or polling by Root.",
+  "admission_limit": "Root/Monitor receipt confirms pass. Exact physical/effective units and native resource values will be read from the retained admission at collection; the shorthand15.64GB/4GB is not reinterpreted here.",
+  "relay_delivery": "accepted",
+  "relay": {
+    "prompt": "HMASD_ROOT_HANDOFF\nevent_id: /root/dm_fsd_i1280_implementation|FSD_B02_771003_D0_launch|6ccb35c2cf4b64b5536cb29dd947af9021263314|READY_HANDOFF\nsource: /root/dm_fsd_i1280_implementation\nparent: /root\ndirection/request: flexible_skill_duration / post-program-vacancies new771003 I1280-authentic-D0 B pair\nstatus: READY_HANDOFF\nroot_action: Integrate published source5250c43536d8520d4005eed3f613226ec4bc6e73 and handover6ccb35c2cf4b64b5536cb29dd947af9021263314; record the accepted D0 handle and direct Monitor dispatch. Actual Monitor adoption remains pending its receipt. On routed D0 terminal resume the original DM for collection/technical acceptance and the already selected I arm at the same source and new adjacent admission. No extra pair or source transaction.\nevidence: Clean codex/fsd at6ccb35c2cf4b64b5536cb29dd947af9021263314, C:/Projects/HMASD-worktrees/codex-fsd. Execution record docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771003_EXECUTION_20260911.md; card\u00a77; evidence directory docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_771003_20260911/ contains static review/check, exact commands, staging, D0_LAUNCH_RECEIPT.json, MONITOR_DISPATCH.json and SUPPORT.json.\nresult: The new unscreened771003/781003 binding and independent review passed; shared science/helper unchanged. Exactly one source-delivery transaction succeeded,7.359s complete helper inside7.5772148s enclosing command, all nine declared paths matched and both shells passed. Exact source5250c43536d8520d4005eed3f613226ec4bc6e73. D0 agent-task accepted at2026-09-11T23:32:28.668494Z on hmasd-wsl-node, handle fsd-uav-renewal-batch-b02-771003-D0-20260911, tmux agent_fsd-uav-renewal-batch-b02-771003-D0-20260911. Cwd /home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b02-771003-20260911; scientific root temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b02_771003/D0; receipt root /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b02-771003-20260911. Fresh admit-memory && full runner is within900s; admission file was not yet present at launcher return, so its actual outcome is pending. MONITOR_ADD accepted directly by live app01a087e5-2044-7301-abb6-7a1709a98197; no model/thinking override and no parallel DM polling. I not yet submitted. No primary or scientific polarity yet; all prior gains/losses and ended identities preserved. Source/support record subtotal24.1014184s plus4.7307724s handover publication, with Monitor/integration/native/future closeout and remaining attribution pending; charge shared observations once. Fresh caps900/1800/native2700/support300/complete3000 remain. DM retains collection/intake/Chinese brief/scoped cleanup; active remote checkout/input/D0 root are retained for that named event. This is pending collection, not complete paired science.",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a08456-2cf3-7f02-8595-42d84ba41a4c\"}"
+        }
+      ],
+      "isError": false
+    },
+    "message_call_elapsed_seconds": 0.221
+  },
+  "relay_send_count_this_handover": 1
+}

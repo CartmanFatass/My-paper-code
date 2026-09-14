@@ -1,0 +1,96 @@
+{
+  "master": 12794,
+  "handle": "acvc-fresh-dense-c01-12794-3fd9062d5",
+  "phases": [
+    {
+      "label": "terminal source verification and complete unit archive",
+      "wall_s": 0.8611181000014767,
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout": "{\"head\": \"3fd9062d5456a6b61a132a16ebd33a7099810143\", \"git_status\": \"\", \"tmux_absent\": true, \"archive\": \"/home/wu/hmasd-inputs/acvc-fresh-dense-c01-12794-3fd9062d5-collected.tar.gz\", \"archive_sha256\": \"b0fef35c0d490888ac62141e85b93daabed31cee060d1cb96312ec6658681088\", \"archive_bytes\": 416465}\n",
+      "stderr": ""
+    },
+    {
+      "label": "complete unit archive transfer",
+      "wall_s": 0.6571351000166032,
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "local_root": "temp\\directions\\acvc\\exp\\fresh_dense_package_c01_20260911_collection",
+  "remote_archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-12794-3fd9062d5-collected.tar.gz",
+  "remote_receipt": {
+    "head": "3fd9062d5456a6b61a132a16ebd33a7099810143",
+    "git_status": "",
+    "tmux_absent": true,
+    "archive": "/home/wu/hmasd-inputs/acvc-fresh-dense-c01-12794-3fd9062d5-collected.tar.gz",
+    "archive_sha256": "b0fef35c0d490888ac62141e85b93daabed31cee060d1cb96312ec6658681088",
+    "archive_bytes": 416465
+  },
+  "local_archive_sha256": "b0fef35c0d490888ac62141e85b93daabed31cee060d1cb96312ec6658681088",
+  "remote_local_match": true,
+  "files": [
+    {
+      "path": "unit_12794\\episodes.jsonl",
+      "bytes": 412496,
+      "sha256": "0a351743fb304fabd9cf0b7736baae7feddea3f6fd09e077e7a7858d1fde248f"
+    },
+    {
+      "path": "unit_12794\\final_DENSE.pt",
+      "bytes": 282957,
+      "sha256": "ee4827a71486e1f83e8280ff866c28e4df768e8a4d0913fa7a2dfccf3b92d073"
+    },
+    {
+      "path": "unit_12794\\summary.json",
+      "bytes": 16044,
+      "sha256": "ce132b11a81989cce81d993781f6c354f2822ce7454d4f69f67abf43e4657360"
+    },
+    {
+      "path": "unit_12794\\supervisor\\exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "unit_12794\\supervisor\\pid",
+      "bytes": 8,
+      "sha256": "2765e37a7f61217f1d737d0f6832cdb6e3f20eabde286dd0f247cb34791bb235"
+    },
+    {
+      "path": "unit_12794\\supervisor\\runner.sh",
+      "bytes": 1581,
+      "sha256": "7c81b46e94437af415403db0e91d68d369b1fa188208a8a7548d76d7cb16e46d"
+    },
+    {
+      "path": "unit_12794\\supervisor\\start_time",
+      "bytes": 11,
+      "sha256": "806edc015308a83f8ae7740ec8b1998c6aaf597a09b7bacaa9e3379b6c1a123b"
+    },
+    {
+      "path": "unit_12794\\supervisor\\status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "unit_12794\\supervisor\\task.log",
+      "bytes": 2656,
+      "sha256": "02835351c68f08c1a9d1f0c26726c7c1783b5ceac06fd2c90a6e32a9a1c3e923"
+    },
+    {
+      "path": "unit_12794\\support\\admission.json",
+      "bytes": 504,
+      "sha256": "8eeae519e01d95c37f827a6209fc25c9c8615dd2fd263eaf0b1aeefd76a6c478"
+    },
+    {
+      "path": "unit_12794\\support\\task_time.txt",
+      "bytes": 60,
+      "sha256": "cbe54e98324980a21880b0eed01641ba8f67c846f4df2b8ced5bedaa664e7a49"
+    },
+    {
+      "path": "unit_12794\\updates.jsonl",
+      "bytes": 237117,
+      "sha256": "b905c6e409cb1e0acafe58cb64f04e866ca476fe21c55f61513f910149f9ccb1"
+    }
+  ]
+}

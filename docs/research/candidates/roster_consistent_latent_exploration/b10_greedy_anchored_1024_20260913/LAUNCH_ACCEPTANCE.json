@@ -1,0 +1,19 @@
+{
+  "source_sha": "e5fd439735bcc52d7f4cba9943b8c5c5138e21c2",
+  "command_publication_commit": "bf98ebba6c088d282df10ff88844e3b7d97c1630",
+  "command_sha256": "3ecf4e83d8e18a3010def35cbad28aa437a952398336cf43f4e1d3df1281243a",
+  "handle": "rcle-b10-s30-e5fd43973",
+  "node": "wsl_4070",
+  "remote_checkout": "/home/wu/hmasd-worktrees/rcle-b10-e5fd43973",
+  "acceptance_exit_code": 0,
+  "acceptance_stdout": "Task 'rcle-b10-s30-e5fd43973' started in tmux session 'agent_rcle-b10-s30-e5fd43973'. Output: /home/wu/.agent-tasks/rcle-b10-s30-e5fd43973/task.log\n",
+  "acceptance_stderr": "",
+  "launch_support_wall_s": 0.017665168968960643,
+  "accepted_utc": "2026-09-13T23:32:46.746645+00:00",
+  "monitor": "/root/mon_rcle",
+  "monitor_adopted_utc": "2026-09-13T23:33:26Z",
+  "terminal_event": "rcle-b10-s30-e5fd43973-terminal-20260913T233550Z",
+  "scientific_result": "COMPLETE; retained-data checks passed; independent scientific review pending",
+  "whole_native_wall_s": 161.35,
+  "peak_rss_kib": 623056
+}

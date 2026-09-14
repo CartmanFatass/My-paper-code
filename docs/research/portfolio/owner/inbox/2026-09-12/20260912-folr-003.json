@@ -1,0 +1,69 @@
+{
+  "id": "20260912-folr-003",
+  "created": "2026-09-12T16:20:59-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FOLR 实体历史单对原生比较",
+  "context": "已接受 Portfolio E：观察者自有 GRU16 实体历史 BANK 对同样公共信息的 GRU64 Generic。固定5000训练/128最终评估，先Generic后BANK且不看分数决定顺序。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "launch as carded"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "do not launch"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "revise before launch"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "按已接受拨款绑定选定 B 对象，不增加咨询或实验预算。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_SCIENCE_CARD_20260912.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L116",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按已接受 E 拨款实施实体历史 BANK，并与同样知情的 Generic 比较一个训练对。",
+    "changes_if_approved": [
+      "none"
+    ],
+    "if_refused": "应用实际异步 owner 指令；不推断已有拨款被撤销，也不扩大旧 H。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/EXECUTION_MAPPING.md",
+        "quote": "Generic first includes declared shared startup; complete technical collection permits the already selected BANK, regardless of Generic score.",
+        "why": "Portfolio 已选择完整两臂和固定暴露。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/INTAKE.md",
+        "quote": "The strongest direct opposition remains N3 B04: generic and typed final return both `0.98828125`, typed-minus-generic AUC `0.0026041666666666665` inside its MEI `0.05`.",
+        "why": "旧证据未证明额外记忆包能胜过 Generic。"
+      }
+    ],
+    "uncertainty": [
+      "新两臂时价和峰值内存未知；一训练对不能估计训练总体的不确定性。"
+    ],
+    "cost": {
+      "compute": "Generic1800/BANK3000/native4800/support1200/complete invoked6000 秒新硬上限；费用率未知。",
+      "owner_time": "无需等待答复；预测未提交。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "source": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_SCIENCE_CARD_20260912.md",
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): bind and execute E."
+  },
+  "starred": false
+}

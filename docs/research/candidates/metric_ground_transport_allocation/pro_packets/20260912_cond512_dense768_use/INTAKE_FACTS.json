@@ -1,0 +1,188 @@
+{
+  "checked_utc": "2026-09-13T04:49:45.568690+00:00",
+  "request_id": "2026-09-12-mgtap-cond512-dense768-use-01",
+  "response_commit": "71baa4a814fb8cb5d0cd2944deb0548b8fc644b2",
+  "root_integrated_commit": "e6d8e932a47346ab5444d0cde468f2fcc8a84d75",
+  "response_bytes": 34652,
+  "response_lines": 202,
+  "response_sha256": "18c850a28efe3098e356972a15655bea3eaa2ed5f05f1c6d767d8763d2fd8475",
+  "response_equals_root_integrated_bytes": true,
+  "response_changed_paths": [
+    "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md"
+  ],
+  "provider_commit_parent": "69a43730aa81e3335d7e2300ce2025afaf70cd96",
+  "fixed_task_commit": "e10ae82fb9f9fe914d9a18633b3436c5d1b2e8b0",
+  "fixed_task_sha256": "e69b43eec07248d5729ad6b8add4c7e060d3e9aaaf910d26d6fc6c611d195743",
+  "response_reference_mapping_matches_all18": true,
+  "source_checks": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/EXECUTION_MAPPING.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md",
+      "commit_sha": "e854bd6f11b3ca0b95783fbd6fc49c75b6095ed3",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/next_use_20260912/EXPOSURE_AND_COST.json",
+      "commit_sha": "e854bd6f11b3ca0b95783fbd6fc49c75b6095ed3",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_TOP_QUERY_B01_INTAKE_20260912.md",
+      "commit_sha": "bf175fafbe916b174e553801a01c6378597f094c",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md",
+      "commit_sha": "6561056ed6f2f51d57801d315af2ca8749cee6d2",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "bf175fafbe916b174e553801a01c6378597f094c",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_conditional_pooling_b01/study.py",
+      "commit_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/conditional_pooling.py",
+      "commit_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py",
+      "commit_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "commit_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "commit_sha": "aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/EXPOSURE.json",
+      "commit_sha": "59d441e25fb5623596b042f5f319cbd75a176c3e",
+      "byte_digest_matches": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/ISSUE_SNAPSHOT.json",
+      "commit_sha": "59d441e25fb5623596b042f5f319cbd75a176c3e",
+      "byte_digest_matches": true
+    }
+  ],
+  "current_method_files_changed": [],
+  "inspected_source_vs_fixed_changed": [],
+  "matching_issue_comment": "https://github.com/CartmanFatass/My-paper-code/issues/18#issuecomment-5650131023",
+  "provider_send_status": "Root reports Transport completion recovered; no fresh DM Send, Send count/timing not independently measured by this intake",
+  "decision": "PRO_FINAL / OWNER_DELEGATED: select one fresh mean-COND512/intact-DENSE768 B use question",
+  "scientific_conformance": "accepted; source-preserving reading retains masked partner sum/10 explicitly confirmed by delivery comment",
+  "empirical_allocation": null,
+  "numerical_allowances": {
+    "COND_complete_arm_seconds": null,
+    "DENSE_complete_arm_seconds": null,
+    "native_pair_seconds": null,
+    "additional_support_seconds": null,
+    "complete_future_invoked_seconds": null
+  },
+  "prospective_source_counts": {
+    "purpose": "Intentional COND512 versus intact DENSE768 use-of-training comparison, not equal-budget comparison, no unchanged repeat",
+    "arms": {
+      "COND512": {
+        "train_episodes": 512,
+        "final_episodes": 32,
+        "train_team_ticks": 131072,
+        "final_team_ticks": 8192,
+        "rollouts": 256,
+        "adam_calls": 1024,
+        "actor_row_uses": 3317760,
+        "train_reset_offsets": [
+          1000,
+          1511
+        ],
+        "final_reset_offsets": [
+          2000,
+          2031
+        ]
+      },
+      "DENSE768": {
+        "train_episodes": 768,
+        "final_episodes": 32,
+        "train_team_ticks": 196608,
+        "final_team_ticks": 8192,
+        "rollouts": 384,
+        "adam_calls": 1536,
+        "actor_row_uses": 4956160,
+        "train_reset_offsets": [
+          1000,
+          1767
+        ],
+        "final_reset_offsets": [
+          2000,
+          2031
+        ]
+      }
+    },
+    "pair": {
+      "episodes": 1344,
+      "team_ticks": 344064,
+      "adam_calls": 2560,
+      "actor_row_uses": 8273920
+    },
+    "numerical_native_support_complete_costs": "UNKNOWN; no models, pilot, per-step rate or numerical budget inferred",
+    "fresh_master": "unassigned"
+  },
+  "actual_new_scientific_exposure": {
+    "models": 0,
+    "rng_streams": 0,
+    "environment_instances": 0,
+    "scientific_invocations": 0,
+    "training": 0,
+    "evaluation": 0,
+    "optimizers": 0,
+    "checkpoint_loads": 0,
+    "numerical_reanalysis": 0,
+    "tests_or_profiling": 0,
+    "pro_send_by_dm": 0
+  },
+  "complete_documentary_cost": "UNKNOWN, expressly accepted; includes this intake/publication/Root integration once",
+  "complete_empirical_cost": "UNKNOWN, rates/memory/support/tails unmeasured; no fabricated cap",
+  "owner_reviews_unapplied": [],
+  "owner_ledger_overrides": [],
+  "prediction": "not taken (unattended; no empirical observation)"
+}

@@ -4,6 +4,8 @@ Adapted from CAMA/modules/agents/entity_rnn_agent.py, thu-rllab/CAMA
 commit 1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58. The selected source
 fc1/attention/fc2/GRU/fc3 chain is retained; E and own B extend fc2 input.
 """
+import math
+
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -20,6 +22,12 @@ class Actor(nn.Module):
         self.fc2 = nn.Linear(130, 64)
         self.rnn = nn.GRUCell(64, 64)
         self.fc3 = nn.Linear(64, 5)
+        if arm == "LEARNED_EVENT":
+            # Preserve common actor/mixer initialization and subsequent CPU draws.
+            with torch.random.fork_rng(devices=[]):
+                self.retention_gate = nn.Linear(128, 1)
+            nn.init.zeros_(self.retention_gate.weight)
+            nn.init.constant_(self.retention_gate.bias, math.log(99))
 
     def forward(self, batch, hidden=None):
         entities = torch.cat((batch["entities"], batch["previous_action"]), dim=-1)
@@ -43,6 +51,10 @@ class Actor(nn.Module):
             if self.arm == "HALF_EVENT":
                 attenuate = carry & batch["event"][:, t, None].bool()
                 h = h * (1 - 0.5 * attenuate.reshape(bs * ne, 1).to(h.dtype))
+            elif self.arm == "LEARNED_EVENT":
+                attenuate = (carry & batch["event"][:, t, None].bool()).reshape(bs * ne, 1)
+                gate = torch.sigmoid(self.retention_gate(torch.cat((x3[:, t].reshape(bs * ne, 64), h), -1)))
+                h = h * torch.where(attenuate, gate, torch.ones_like(gate))
             h = self.rnn(x3[:, t].reshape(bs * ne, 64), h)
             h = h.masked_fill(batch["entity_mask"][:, t].reshape(bs * ne, 1).bool(), 0)
             hs.append(h.reshape(bs, ne, 64))

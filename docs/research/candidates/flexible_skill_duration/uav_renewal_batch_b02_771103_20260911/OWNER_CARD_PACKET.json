@@ -1,0 +1,43 @@
+{
+  "question": "记录新分配的 771103 学习对：是否保持 I1280 与真实 D0 的原契约，完成这一对后返回？已按现行委托执行卡片绑定，异步复核不阻塞。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md §8",
+      "from": "前两对已结束；新 Portfolio S 分配待绑定",
+      "to": "新训练种子 771103、终评种子 781103；一对原包 B/EXPLORE，无第四对或自动后继"
+    }
+  ],
+  "if_refused": "在下一干净边界应用拒绝或修改，保留已发生的证据与费用；不撤写历史，不自选替代实验。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+      "quote": "the two prior I1280 pairs gained +.0569774672 and\n+.2062859041",
+      "why": "两次本地原包收益支持再观察一个新学习对，但不是稳定优势。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_rolling_capacity_after_folr_b02/EXECUTION_MAPPING.md",
+      "quote": "## 1. FSD — one new unchanged I1280/authentic-D0 B pair",
+      "why": "新分配明确给出完整的一对、接收及清理额度。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+      "quote": "Both package pairs had lower I\ntraining means on their first two rollouts",
+      "why": "学习前期不占优，I 近两倍耗时，旧 batch128 负结果仍保留。"
+    }
+  ],
+  "uncertainty": [
+    "一对训练是独立单位；32 局误差仅条件于学得策略。",
+    "新 D0 表现与实际工作量未知，仍无调优的同信息余量记录。",
+    "只能解释原包，不能分离批大小和在线续期的因果贡献。"
+  ],
+  "cost": {
+    "compute": "D0≤900 秒，I≤1800 秒，原生和≤2700 秒；支持≤300 秒含唯一≤45 秒源码投递；完整≤3000 秒。",
+    "owner_time": "可异步审阅，无需逐步批准。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Recommend/select (a), with the stop above.",
+  "source": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md"
+}

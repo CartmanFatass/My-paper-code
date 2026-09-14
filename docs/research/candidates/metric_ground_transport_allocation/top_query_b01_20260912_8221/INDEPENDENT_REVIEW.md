@@ -1,0 +1,11 @@
+# Independent high-risk review and DM acceptance
+
+Reviewer: /root/dm_mgtap_m_pair/review_mgtap_8214, reused hmasd-reviewer (Astra/high), read-only. Review inspected the actual TOP diff from reconciled input2f6f6180e; the reviewed source and final command are published at aae3b8ce47b7c38e8d06fe1c3e0ae525c8e5e788.
+
+The reviewer returned **no material source finding**. TOP uses the existing masked row0 embedding, whose native order is actual local SINR before clipping with stable ties. Full raw108 and all partner context, empty-set behavior, zero projection, common/private initialization order, private GRU and RNG ownership are preserved. TOP is directly constructed without a discarded encoder. The unchanged native learner, environment, old COND path and DENSE default agree with10ea737f0. TOP identities, paired32-world reduction and closed publication are bound separately; source_base_sha labels provenance while launch_sha records actual Git HEAD. No Engineering Scope section4 addition or section5 excess was found.
+
+The first review explicitly left the numerical fixture and final shell command pending. Its focused follow-up compared the completed COMMAND.sh to the accepted8214 command and found only TOP handle/output/CLI/master changes. The pre-admission clock, adjacent admit-memory&&sole native runner, CPU/thread settings, GNU time/exit record and outer-cost attribution remain intact. Shell bytes contain LF. No launch or timing test was performed by the reviewer.
+
+Seven read-only review command walls total **2.1409756s**, charged once to T support (six initial commands1.9132144s plus final shell read0.2277612s), within the allocated20s. No reviewer model construction, numerical execution, optimizer, network or file mutation occurred.
+
+DM accepts these findings with the sole committed remote encoder fixture in ENCODER_FIXTURE.json: PASS, two standalone encoders, TOP two forwards/one supplied-loss backward and DENSE one forward, six supplied rows, four synthetic publication cases, unchanged constructor global RNG, finite nonzero changed-path gradients, scratch removed. This technical result does not predict native gain or establish native counts/cost. Those remain for the already-authorized paired execution and terminal intake.

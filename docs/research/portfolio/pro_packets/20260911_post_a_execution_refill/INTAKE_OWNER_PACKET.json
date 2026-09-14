@@ -1,0 +1,48 @@
+{
+  "question": "Portfolio已完整选择A：FSD一次同包独立复现，加MGTAP最小原生入口与首次COND/DENSE配对。应按原边界独立执行；Root派发尚未发生，本记录不等待所有者逐项批准。",
+  "changes_if_approved": [
+    {
+      "target": "FSD下一次独立B",
+      "from": "首次I1280收益已完成，后续仅建议",
+      "to": "Pro选定一个全新同包配对：D0≤900秒、I1280≤1800秒、支持≤300秒、完整≤3000秒；无自动下一对"
+    },
+    {
+      "target": "MGTAP首次原生B",
+      "from": "编码器和唯一测试已接受，完整原生效果未测",
+      "to": "Pro选定最小新入口和一个COND/DENSE配对：各≤450秒、原生合计≤900秒、支持≤300秒、完整≤1200秒；不追加测试或预跑"
+    }
+  ],
+  "if_refused": "B仅FSD、C仅MGTAP、D零投入是Pro已经比较但未选择的原选项；异步所有者覆盖仍可改变执行。其余三槽未分配，RCLE和UCOPE没有新预算。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/archive/RESPONSE.md",
+      "quote": "Select option A: fund one fresh, unchanged FSD I1280/D0 matched training pair and the minimal native binding plus first fresh MGTAP COND/DENSE matched training pair.",
+      "why": "完整回应已决定这个有限投入问题；固定任务、26个引用、提交与Issue回执一致。"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+      "quote": "The next useful discriminator would be one separately allocated fresh matched I1280/D0 training pair with the same final endpoint, preserving every sign.",
+      "why": "首次收益值得用新训练历史检查；MGTAP则需要首次真实比较，不再重复编码测试。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/archive/RESPONSE.md",
+      "quote": "The strongest overall alternative is **B, FSD only**",
+      "why": "FSD已有8个反向终点评估和更高成本；MGTAP旧REL对比为负，COND原生耗时未知。新投入不保证收益。"
+    }
+  ],
+  "uncertainty": [
+    "每个新对比仅一个独立训练配对，32个终点不能冒充32次训练。",
+    "旧损失、缺失成本和基线余量均保留；不声称稳定优势或孤立机制因果。",
+    "早期浏览器阻塞已被完整交付替代；当前所有者规则允许Transport使用可访问且已登录的目标表面，不再以任务归属阻止发送。"
+  ],
+  "cost": {
+    "compute": "FSD完整3000秒，MGTAP完整1200秒。4200秒为分离上限，不能互借；未知新耗时仍未知，无额外数值验证或自动重试。",
+    "owner_time": "完整合规Pro决定已生效；Root记录实际派发，无逐项确认等待。",
+    "reversibility": "costly",
+    "waits_on_this": "只有新任务的实际派发；两方向独立推进，不等兄弟结果或旧访问问题。"
+  },
+  "verdict_text": "PRO_FINAL / OWNER_DELEGATED: A. Complete conformance PASS. Root application planned; no direction dispatch or experiment by Portfolio author.",
+  "source": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/archive/RESPONSE.md at 9a2789640f3e5663b4cd72736ba953bfa809095d"
+}

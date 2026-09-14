@@ -1,0 +1,18 @@
+{
+  "source_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+  "kind": "focused_incomplete_generic_publication_regression",
+  "scientific_invocations": 0,
+  "admission_exit": 0,
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "--basetemp",
+    "/home/wu/hmasd-worktrees/folr-entity-history-b01-781201-5d511b304/temp/directions/vap_folr_core/test/entity_history_b01_partial_publication_5b3ae6b98",
+    "tests/experiments/candidates/vap_folr_core/entity_history_b01/test_contract.py::test_incomplete_generic_preserves_completed_bank_without_pair"
+  ],
+  "pytest_exit": 0,
+  "scratch_absent": true,
+  "support_wall_seconds": 1.6849011840531603
+}

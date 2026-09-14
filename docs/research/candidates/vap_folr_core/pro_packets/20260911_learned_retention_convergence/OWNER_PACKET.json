@@ -1,0 +1,38 @@
+{
+  "question": "是否窄范围开启这一个可学习事件保留门家族，还是不再投入新家族？这只是给原Convergence节点的建议，未执行。",
+  "changes_if_approved": [
+    {
+      "target": "FOLR可学习事件保留门候选",
+      "from": "仅获一次源码说明、原节点问题和完整intake，固定0.5配方已窄范围暂停",
+      "to": "建议只开启指定的129参数标量门问题，供以后另行分配真实B；现在仍无实现或数值预算"
+    }
+  ],
+  "if_refused": "保留普通事件感知RETAIN、固定0.5暂停和全部相反结果；本次不释放替代后继。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_CANDIDATE_20260911.md",
+      "quote": "A scalar\noperation at a known public event makes a concrete finite-learning question;",
+      "why": "干预位置、合法信息和真实收益比较可以明确，若以后获分配可直接以最小真实训练对观察。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_CANDIDATE_20260911.md",
+      "quote": "The candidate therefore adds an unproven\ninductive bias and 129 parameters.",
+      "why": "RETAIN已经用同样事件和自身历史学习GRU门；新标量可能多余、损失有用记忆或妨碍优化。"
+    }
+  ],
+  "uncertainty": [
+    "没有测试过可学习门；固定半衰减的+1.56546875和-4.293046875不证明适应性必要或失败。",
+    "0.99是唯一建议初始化，不是精确策略相等或调优结果；同信息调优余量缺失。",
+    "未来最小B的时间、内存、支持开销和上限未知且未分配。"
+  ],
+  "cost": {
+    "compute": "本次新增数值和实现均为0。仅作决策价值对比的未来两学习器为205120团队步、9938更新和66783360回放GRU行，另加门计算；旧3900秒不续期。",
+    "owner_time": "可异步查看，无需回复；作者、Pro和intake时间未测量。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; 原Convergence节点决定，Root向既有Transport发送一次固定问题。"
+  },
+  "verdict_text": "The DM recommends the narrow opening as an **unexecuted close call**.",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_QUESTION_INTAKE_20260911.md"
+}

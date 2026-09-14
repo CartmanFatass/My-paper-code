@@ -1,0 +1,103 @@
+{
+  "handle": "rcle-b05-nearest-prior1000-s25-20260911",
+  "source_sha": "3ffa65cb4e1a67182b90dce3822d0018ac623c72",
+  "archive": {
+    "path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\terminal.tar.gz",
+    "sha256": "356a1c2aabca9badfdda30a2268aebc3c63cc5d4abd81fdfb09d019abf566e42",
+    "bytes": 807465
+  },
+  "preserved_source_bundle": {
+    "path": "temp\\directions\\roster_consistent_latent_exploration\\b05-nearest-prior1000-preparation\\source.bundle",
+    "sha256": "d3734822bae9ce945df6c666ed1d322689c04ee987b1368ae758621e0812e671",
+    "bytes": 2143640
+  },
+  "raw_files": [
+    {
+      "archive_path": "temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911/reference/summary.json",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\reference\\summary.json",
+      "bytes": 398416
+    },
+    {
+      "archive_path": "temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911/learned/summary.json",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\learned\\summary.json",
+      "bytes": 3228284
+    },
+    {
+      "archive_path": "temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911/learned/initial_parameters.pt",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\learned\\initial_parameters.pt",
+      "bytes": 219989
+    },
+    {
+      "archive_path": "temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911/learned/init_scenarios.json",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\learned\\init_scenarios.json",
+      "bytes": 421379
+    },
+    {
+      "archive_path": "temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911/learned/parameters.pt",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\learned\\parameters.pt",
+      "bytes": 219701
+    },
+    {
+      "archive_path": "temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911/learned/completed_blocks.jsonl",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\learned\\completed_blocks.jsonl",
+      "bytes": 1560534
+    },
+    {
+      "archive_path": "temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911/reference-admission.json",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\reference-admission.json",
+      "bytes": 504
+    },
+    {
+      "archive_path": "temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911/chain-time.txt",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\chain-time.txt",
+      "bytes": 41
+    },
+    {
+      "archive_path": "temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911/learned-admission.json",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\learned-admission.json",
+      "bytes": 504
+    },
+    {
+      "archive_path": "temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911/learned-time.txt",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\learned-time.txt",
+      "bytes": 41
+    },
+    {
+      "archive_path": "temp/directions/roster_consistent_latent_exploration/exp/b05-nearest-prior1000-s25-20260911/reference-time.txt",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\reference-time.txt",
+      "bytes": 39
+    },
+    {
+      "archive_path": "rcle-b05-nearest-prior1000-s25-20260911/runner.sh",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\supervisor\\runner.sh",
+      "bytes": 1697
+    },
+    {
+      "archive_path": "rcle-b05-nearest-prior1000-s25-20260911/exit_code",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\supervisor\\exit_code",
+      "bytes": 2
+    },
+    {
+      "archive_path": "rcle-b05-nearest-prior1000-s25-20260911/status",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\supervisor\\status",
+      "bytes": 9
+    },
+    {
+      "archive_path": "rcle-b05-nearest-prior1000-s25-20260911/start_time",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\supervisor\\start_time",
+      "bytes": 11
+    },
+    {
+      "archive_path": "rcle-b05-nearest-prior1000-s25-20260911/pid",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\supervisor\\pid",
+      "bytes": 8
+    },
+    {
+      "archive_path": "rcle-b05-nearest-prior1000-s25-20260911/task.log",
+      "local_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\raw\\supervisor\\task.log",
+      "bytes": 1256
+    }
+  ],
+  "member_count": 21,
+  "extraction_note": "Initial prefix-preserving extraction failed on learned/initial_parameters.pt; archived bytes were unchanged. Same archive unpacked into the shorter mapping below. Any partial earlier extraction remains inside raw/temp and is unused for analysis."
+}

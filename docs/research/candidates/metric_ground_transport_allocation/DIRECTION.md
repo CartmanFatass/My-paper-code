@@ -6,11 +6,245 @@ This source belongs to route **N5 — 配置结构与 FREE**, in the **资源配
 of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
 this does not establish scientific equivalence or pool result polarity.
 See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
-Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
-older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
-second-recast counts and stopped object-family boundaries remain unchanged.
+Current direction lifecycle/research decisions belong to this DM and are recorded
+here and in the current card/intake. Portfolio reports them, not approves them.
+Cross-direction layout/resource adjustments require an explicit owner instruction.
+Historical evidence remains unchanged; previous authority wording below is not
+a current dispatch route or Portfolio approval requirement.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
+
+## DM CONTINUE and early-exposure B — 2026-09-13
+
+Under current AGENTS section2 at main4dfdb5f8f, this DM selects **CONTINUE
+ACTIVE/MEDIUM** through one ordinary mean-COND256/DENSE256 B/EXPLORE, master8241.
+It tests new common early-learning exposure within the eligible mechanism.
+DENSE stays generic default. No sibling allocation, resource commitment,
+old-grant reuse or automatic successor is selected.
+
+The strongest alternative is reversible PARK: historical equal-exposure instances
+have mixed signs, TOP and unequal-exposure8231 are adverse, and another local
+point may not justify weak-result chasing. The concrete256/256 question uses
+modest native work and informs this DM's next useful object or lifecycle decision;
+no external customer is claimed. Completed outcome-informed A/RECON describes
+the three existing pair means: +0.0025899556319951833 J, sample
+SD0.02363397187880618 J. It adds no independent fit, replaces no primary and
+does not establish a population/stable effect.
+
+Convergence remains independent scientific Reviewer of design, evidence,
+conclusions and successor plans. DM reads the full review, responds to findings,
+corrects concrete defects or limits claims, then makes the direction decision.
+This is neither optional generic advice nor funding/lifecycle approval. New
+requests use the main renderer/Transport marker dm_owned_scientific_review;
+accepted/uncertain requests keep exact bytes/routes. No automatic Portfolio
+question is sent; the unsent proposal is now report input. Clerk records the
+actual decision without an ACK gate.
+
+The [management intake](MGTAP_POST_8231_MANAGEMENT_20260913.md) records options,
+contrary evidence and costs. The [card](MGTAP_EARLY_EXPOSURE_B01_SCIENCE_CARD_20260913.md)
+fixes two256-episode fits,32 final worlds per arm, MEI0.01 J and new caps450s/arm,
+900s native,2700s support,3600s complete. The sole pair is now complete and
+technically accepted: COND meanJ0.05611652551644544, DENSE0.040987677883755035,
+Delta+0.015128847632690413 J (COND_ABOVE_MEI), conditional SE0.004195093455269184.
+Complete native188.19s passes the450/450/900s limits; support/complete compliance
+is UNKNOWN with unmeasured tails. This is one realized early-exposure pair,
+not stable superiority or a curve. [E0](MGTAP_EARLY_EXPOSURE_B01_RESULT_20260913.md)
+and [intake](MGTAP_EARLY_EXPOSURE_B01_INTAKE_20260913.md) preserve all outcomes,
+Monitor's corrected premature observation, archive and complete independent
+design/next-plan review (no material design defect; full DM response recorded).
+DM's candidate next action is one further independent
+256/256 instance, not yet a selected card/seed or automatic successor.
+
+All dated sections below retain historical results and then-current dispositions,
+not current approval requirements. Frozen objects/results remain unchanged;
+any later family/lifecycle revision is a prospective DM decision.
+
+## Historical unchanged proposal declined; mean-COND eligibility retained — 2026-09-13
+
+Post-8231 Convergence selects reversible preparation option R: retain mean-COND's
+scientific eligibility and DENSE default, but do not prepare another unchanged
+equal-exposure empirical proposal now. This does not park, close or recast the family
+or direction, and creates no successor, master, numerical allowance or experiment.
+
+The accepted reason is the current proposal's underdefined additional development
+consequence, not proof that replication has no information value. Another independent
+pair could inform recurrence despite all three result signs already having occurred.
+Mean8214 +.02447811898058116 J remains the strongest support; equal-exposure8213
+−.02246957345594415 and the separate unequal-exposure8231 adverse use result remain
+contrary evidence. No pooled result, causal account or stable ordering follows.
+
+The next discriminator is a concrete same-host development decision limited to512
+episodes per fit where fresh useful COND evidence would enable a specified non-default
+development commitment. This is an illustrative revisit fact, not an observed workload,
+mandatory qualification or funded activity. Native headroom and complete future costs
+remain unknown; neither becomes a prerequisite. Legal DENSE processing, finite learning,
+partner co-adaptation and trajectory-dependent usefulness remain live alternatives.
+
+[Complete Pro response](pro_packets/20260913_post_8231_continuation/archive/RESPONSE.md),
+[full DM intake and limits](pro_packets/20260913_post_8231_continuation/INTAKE.md).
+
+## Unequal-exposure COND512/DENSE768 adverse use result — 2026-09-13
+
+The selected and funded sole master8231 pair is complete and valid: COND512 mean
+native J0.16574499572521276 versus intact-DENSE768 J0.19507936796417658;
+**COND−DENSE −0.02933437223896382 J**, conditional SE0.009856726660478026,
+7 positive/25 adverse final worlds. The card's below−.01 branch is adverse for
+this exact procedure choice. Both real fits and all32 endpoints completed;
+DENSE remains default and MGTAP remains ACTIVE/MEDIUM.
+
+This question compares two expressly unequal-exposure learning procedures.
+The result supplies no beyond-MEI support for optional COND development in this
+realized pair. It does not identify the effect of extra DENSE training, a query
+mechanism, optimal training length, equal-time performance or stable superiority/
+inferiority. The32 worlds condition on one trained pair, not32 independent fits.
+
+Prior equal-exposure mean-COND8214+.02447811898058116J remains the strongest
+conditional-pooling support;8213−.02246957345594415 contradicts consistent benefit,
+and8212+.005761321371348559 was inside MEI. The new8231 result is the direct
+adverse evidence for the unequal-exposure use procedure. TOP8221−.0684509798102144
+is a separate query package. These observations are not pooled or relabelled.
+Finite training variation, partner co-adaptation, trajectory-dependent usefulness
+and competent generic learning remain alternatives. Tuned same-information
+native headroom remains absent; no new mechanism explanation is asserted.
+
+The exact pair completed344064 native ticks/2560Adam in432.30s; its native
+600/900/1500s caps pass. Support900/complete2400s compliance remains UNKNOWN with
+unmeasured tails included in scope. This allocation ends without an extra fit,
+master, panel or automatic successor. The next scientific discriminator requires
+a newly selected bounded direction question; this intake creates no new run or
+Portfolio lifecycle choice. Preserve the ACTIVE slot while the evidence is
+integrated and duplicate retention/cleanup closes.
+
+[Card](MGTAP_UNEQUAL_EXPOSURE_B01_SCIENCE_CARD_20260913.md),
+[complete E0](MGTAP_UNEQUAL_EXPOSURE_B01_RESULT_20260913.md),
+[DM intake](MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md),
+[funding and conforming amendment](pro_packets/20260912_cond512_dense768_use/PORTFOLIO_INTAKE_20260913.md).
+
+## TOP single-partner query fresh8221 adverse result — 2026-09-12
+
+The selected and Portfolio-funded TOP/intact-DENSE B is a complete valid
+**TOP_ADVERSE** observation: TOP meanJ0.10615334230466392 versus
+DENSE0.1746043221148783, difference **−0.0684509798102144 J**, conditional
+SE0.009502685781897066,4 positive/28 adverse final worlds. Both native
+512-train/32-final fits completed1024 Adam calls with nonzero own-arm movement.
+
+This first TOP observation is direct local evidence against unchanged TOP
+carry-forward at this exposure. Prior mean-COND8214+.02447811898058116 remains
+the strongest direct support for conditional-pooling development;8213
+−.02246957345594415 remains its strongest prior contradiction, and8212
++.005761321371348559 was inside MEI. Those are distinct mean-query packages
+and fitted identities, not TOP replicates or a direct TOP-versus-mean comparison.
+No pooled primary or reclassified history is introduced.
+
+TOP replaced only the mean visible-partner query with the mapped delivered
+highest-local-SINR row while preserving raw108/all-partner context, private
+recurrence, primitive action/reward and PPO. Strongest-link irrelevance, rank
+switching, lost query-context usefulness, finite training variation, partner
+co-adaptation and competent DENSE adaptation remain alternatives; the loss does
+not identify any one mechanism. Claim ceiling is this realized package outcome,
+not stable inferiority, general geometry/attention/credit failure, scaling/churn,
+transfer or formal UAV validation. DENSE remains default and tuned native
+same-information headroom remains absent.
+
+The accepted Convergence negative branch recommends against carrying this TOP
+package forward unchanged. This one T grant ends at result/intake/scoped cleanup;
+no second pair, search, causal/timing panel, fourth unchanged COND pair or
+consultation is funded by it. MGTAP remains ACTIVE and advancing under the current
+owner instruction. The next discriminator is a properly selected distinct bounded
+use question informed by mixed mean-COND and adverse TOP evidence, with its own
+investment; none is locally opened here. Old coordinate-family PARK, C meanings,
+recast count and both earlier M=no facts remain unchanged.
+
+[TOP E0 result](MGTAP_TOP_QUERY_B01_RESULT_20260912.md),
+[technical/scientific intake](MGTAP_TOP_QUERY_B01_INTAKE_20260912.md),
+[card](MGTAP_TOP_QUERY_B01_SCIENCE_CARD_20260912.md),
+[original Convergence intake](pro_packets/20260912_post8214_top_query/CONVERGENCE_INTAKE_20260912.md).
+
+## Conditional pooling fresh8214 local gain — 2026-09-12
+
+The newly Portfolio-funded third unchanged COND/DENSE pair is a complete valid
+B/EXPLORE **COND_ABOVE_MEI** observation: COND meanJ0.20802816765678933 versus
+intact same-information DENSE0.1835500486762082, difference
+**+0.02447811898058116 J**, conditional SE0.004658159652932406,26 positive/6
+adverse final worlds. Both native512-train/32-final fits completed1024 Adam calls
+with actual own-arm/branch movement, one matched training unit and no extra panel.
+
+This is the package's strongest direct native support and first above-MEI point.
+The strongest direct contradiction remains unchanged8213−0.02246957345594415;
+earlier8212+0.005761321371348559 was inside MEI. Preserve each trained-pair
+observation separately without historical pooling or stable-superiority wording.
+Generic DENSE adaptation, finite training/evaluation variation and usefulness on
+only some trajectories remain alternatives. No attention, geometry or individual
+causal-credit mechanism is identified. Tuned native headroom remains absent;
+DENSE remains the generic default.
+
+The complete new M allocation ends with this pair/intake and scoped closeout;
+both previous M=no facts remain, and no fourth pair or consultation is funded by
+this result. A later discriminator requires a separately allocated consequential
+optional-use question informed by all three retained histories. No family,
+lifecycle, priority or formal UAV-entry decision follows locally.
+[Fresh8214 E0](MGTAP_CONDITIONAL_POOLING_B01_8214_RESULT_20260912.md),
+[intake](MGTAP_CONDITIONAL_POOLING_B01_8214_INTAKE_20260912.md),
+[card](MGTAP_CONDITIONAL_POOLING_B01_8214_SCIENCE_CARD_20260912.md).
+
+## Conditional pooling fresh8213 adverse result — 2026-09-11
+
+The separately Portfolio-selected unchanged COND/DENSE follow-up is a valid
+complete B/EXPLORE observation. COND meanJ0.19342135238526614 versus intact
+same-information DENSE0.21589092584121028 gives **−0.02246957345594415** over
+all32 ordered final differences, conditional SE0.004312411137154014, with5
+positive and27 adverse worlds. It is below the card's−0.01 threshold:
+COND adverse; DENSE remains generic. Both native fits completed the same
+512×256 training/1024 Adam calls and32×256 sampled final steps, with nonzero
+own-arm and conditional-branch movement.
+
+The strongest support for COND remains the first8212 point+0.005761321371348559,
+inside MEI. This new complete below-MEI loss is the strongest direct contradiction
+to recurrence of that package signal. Keep the two trained-pair observations
+separate; they have opposing signs and do not establish a training-population
+effect or stable superiority. Older REL adverse results remain a different
+package's evidence. Generic DENSE adaptation, finite training/evaluation variation
+and conditional usefulness on only some trajectories remain live alternatives;
+no attention, geometry or causal-credit mechanism is identified. Tuned native
+same-information headroom is still absent.
+
+This allowance ends after its one pair/intake/cleanup; no third pair, diagnostic,
+recast, family closure or Portfolio change is selected. A later discriminator
+would need a separately authorized consequential question informed by both
+training histories; no such next task is opened by this result.
+[Fresh result](MGTAP_CONDITIONAL_POOLING_B01_8213_RESULT_20260911.md),
+[intake](MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md),
+[card§6](MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md#6-new-portfolio-allocation--master8213-2026-09-11).
+
+## Conditional pooling native B01 result — 2026-09-11
+
+The sole allocated COND/DENSE native pair8212 is complete and intaken as a valid
+B/EXPLORE package observation. Mean final J is0.16707705881756274 for COND and
+0.1613157374462142 for intact same-information DENSE. The mean of all32 ordered
+paired differences is **+0.005761321371348559**, conditional evaluation
+SE0.00888326841451271, with19 positive and13 negative worlds. It is inside the
+card's inclusive±0.01 band: retain the positive sign; DENSE remains the generic
+choice. Both real fits completed the declared512×256 training and32×256 final
+sampled episodes, with nonzero actor/critic/recurrent/branch movement.
+
+The strongest support is this positive complete native package observation;
+the strongest contradiction is that it does not reach the declared MEI, retains
+13 negative worlds including a−0.1396754570 difference, and sits alongside the
+separate old REL adverse aggregate−0.02396310430506595 (including its inside-MEI
+second master). Shared legal information allows generic DENSE adaptation; finite
+training variation and conditional pooling that helps some worlds but harms
+others remain live alternatives. Movement does not isolate attention causality.
+One trained pair supplies no training-population uncertainty or stable-superiority
+claim; tuned same-information native headroom is still absent.
+
+The named allocation ends here without another seed, evaluation, retry or automatic
+successor. A possible future discriminator is a separately allocated independent
+matched training pair assessing this small positive sign across training variation;
+none is selected here. No direction/Portfolio disposition, historical family
+boundary or recast count changes. Evidence:
+[card](MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md),
+[complete result](MGTAP_CONDITIONAL_POOLING_B01_RESULT_20260911.md),
+[scientific and technical intake](MGTAP_CONDITIONAL_POOLING_B01_INTAKE_20260911.md).
 
 ## Conditional user-pooling eligibility — 2026-09-10
 

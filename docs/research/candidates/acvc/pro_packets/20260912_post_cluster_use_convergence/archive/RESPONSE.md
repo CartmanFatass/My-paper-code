@@ -1,0 +1,65 @@
+**Recommend no additional empirical allocation now; retain train-C → deploy-F as the qualified observed cluster reference.** The completed comparison answers its bounded use question. Another independent fit could reveal important variation, but the present proposal identifies increased confidence rather than a concrete change in how the reference would be used. I prefer retaining the useful finding at its actual scope to purchasing another unchanged observation by default. This is a marginal-value judgment, not a claim that replication is unnecessary or that further ACVC research lacks value. [Direction question, “The decision this question must change”][question]; [empirical specification §§11.8–11.9][spec].
+
+ACVC remains **ACTIVE/MEDIUM, recasts 2**, with unchanged contention treatment. This recommendation neither parks the direction nor releases it from continuing ownership. Scientific advice, Portfolio investment/lifecycle decisions and implementation acceptance remain distinct. The current assignment ends with this response and its full intake, not an automatic experiment or replacement consultation. [TASK, authority continuity][task]; [AGENTS §§2, 4–5][agents].
+
+## The reference worth retaining
+
+The accepted native summary and complete intake agree on one fresh C-trained endpoint, 512 training episodes, 1,024 updates and all three final 64-world panels. Nonzero actor/critic displacement accompanies intact learning records; this was real learning followed by deployment evaluation, not a fixed-policy toy. The accepted observations are:
+
+| Cluster contrast | Mean difference J | Conditional SE J | Adverse worlds |
+|---|---:|---:|---:|
+| F−C | +0.12407302446321236 | 0.008490426540329714 | 1/64 |
+| F−own-dwell | +0.07674096500501802 | 0.010170152134996446 | 8/64 |
+
+Both retain their separate UP readings above 0.01 J. Absolute C/F/dwell means are 0.19723740813395618/0.32131043259716857/0.24456946759215054 J. These are existing results, not recalculations. [Native summary, counts/configuration/exposure/primary][summary]; [intake, “What was checked”][intake].
+
+**The strongest support is F's additional value over useful dwell, not merely over C.** The strongest contradiction to unrestricted use is the eight F−dwell losses, including −0.12128082288171904 J; the F−C minimum is −0.024574273874233443 J. Dwell itself gains +0.04733205945819434 J over C. F/dwell intervene 6,623/4,546 times on different private histories. Retain every adverse and favorable world; neither the means nor those event counts identify isolated retrace benefit. [Summary, contrasts/intervention totals][summary]; [intake, “Observation, interpretation and limits”][intake].
+
+The empirical unit is **one complete fit with its finite evaluation panels**. The 64 paired initial worlds describe conditional deployment spread, not 64 independent learners. Both training and evaluation use cluster; no zero-shot transfer was tested. My retained-use recommendation concerns this demonstrated endpoint and declared evaluation law. The rule and evidence may serve a named reference where host, observation/action information and budget match, but are not automatically installed elsewhere or certified for every freshly trained policy. [FOUNDATIONS §6][foundations]; [empirical topic, first three sections][empirical]; [spec §11.7][spec].
+
+Uniform C01 remains consumed and model-qualified: its five-unit F−C and F−dwell means are +0.095915968685 and +0.065133768997 J under the prespecified iid-normal fit-panel model, whose neural-training calibration remains unestablished. Its useful dwell and adverse worlds remain. The two separate common-F training-use DOWN means, −0.026096212471464608 and −0.05734219575429114 J, favor retaining C training rather than repeating unchanged training-F. None is pooled with cluster, reversed or expanded into stable harm. Ended learned-gate and uncertain/delayed families remain ended; tuned cluster headroom remains absent, not zero. [DIRECTION, Scientific question/Current position/Bounded conclusion][direction].
+
+## Why not buy the strongest alternative now?
+
+**One fresh unchanged cluster B is the strongest rejected alternative.** It samples the uncertainty that more episodes on the existing checkpoint cannot address: another learned proposer. A second UP/UP observation would strengthen recurrence; F−dwell WITHIN or DOWN would make the simpler control competitive on that endpoint; a clear F−C loss would favor ordinary C there. These would genuinely change expectations about carrying the recipe to new policies. They would not erase the original endpoint's measured usefulness. [Question, proposed repetition][question]; [spec §11.8.3][spec].
+
+I do not discount that counterexample value. I decline the purchase because **the recommendation being retained is deliberately narrower than that extrapolation**. The packet does not identify a receiving use or imminent decision that needs F adopted across fresh cluster-trained policies. Another positive would presently leave the same practical advice; a negative would mainly reinforce a caution already explicit. Accepting that unresolved risk is preferable here to an open-ended sequence whose stopping rationale is “more confidence.” This is my judgment about this purchase, not a universal requirement for a customer, deployment plan or positive pilot before B research. [Question, marginal-use discussion][question]; [spec §§11.8.1–11.8.3, 11.9][spec].
+
+**Concrete revisit:** a named same-law use proposes F as the default for a newly trained cluster policy rather than retaining the observed endpoint as evidence. At that boundary, F's incremental value over own-dwell and ordinary C can change the actual default or investment. One fresh C-fit/three-panel B would then be a direct candidate for separate funding. Preserve the same signed means, 0.01 J practical scale and conditional uncertainty: UP supports local usefulness, inclusive ±0.01 is WITHIN without equivalence, and DOWN weighs against that named comparison. No significance gate, pooled confirmation or all-positive-world requirement follows. This trigger commissions no investigation now. [Protocol, `final_panel`][protocol]; [intake, reading rule][intake].
+
+## Mechanism and cost do not supply shortcuts
+
+The inspected path remains local retained-user loss plus an away-pointing proposal → private fixed correction → actual motion → recurrent/teammate feedback → native team return. F reverses the preceding realized displacement. The note's shorthand “by its previous realized displacement” omits the reversal: `Binding.observe` explicitly computes `clip(-displacement, -1, 1)`. I retain that implemented sign, not a new action rule. Its current 1–19-visible-row guard and private anchor updates are source facts; increased saturation and their causal contribution under cluster were not measured. [Question, mechanism paragraph][question]; [Binding.observe][binding].
+
+The rejected repetition's supplied work is one fit ×512×256 training ticks, 256×4 Adam calls and three×64×256 evaluation ticks: **180,224 team ticks and 1,024 updates**, with one final checkpoint and no search, initial panel or extra diagnostic. It is not three training replications. The accepted wrapper selects cluster at construction and delegates C training plus C/F/dwell evaluation; its hardcoded 21457/31457 bindings cannot simply be rerun as fresh evidence. [FACTS, proposed_repetition_counts/future_cost_projection][facts]; [protocol constants/`make_cluster`][protocol]; [entry point][entry].
+
+A later funded repetition needs new unscreened identity/output/cap bindings, narrowly affected checks and review, preserved shared defaults, complete training/replay/checkpoint/load/evaluation/publication/exit, and separately counted staging, admission, Monitor, collection/intake/integration/preservation/cleanup support. Reuse unchanged checks; no generic framework, full replay or profiling pilot is warranted. [Engineering Scope §§4–5, 7.1/7.3][engineering]; [facts, future path][facts].
+
+K's **165.33-second whole command, 166-second charge and 0.53149-GiB peak RSS** are observed references, not future guarantees. Known support is 75.29171340009022 seconds; full coverage remains unestablished, without an observed breach. Four remote cleanup targets are gone; the fifth local target remains after pre-execution policy rejection, with unique evidence preserved. Neither missing accounting nor that refusal invalidates the primary or determines this scientific recommendation. No historical balance or numerical cap is renewed. [Execution facts, cost/support/cleanup][execution].
+
+## Access and final boundary
+
+All fifteen listed paths were accessed at their specified versions: complete question/intake; relevant FACTS, native summary, execution facts and DIRECTION sections; the three source paths; named method/knowledge passages; and the snapshot's current prefix. The reference definitions retain exact paths and full commits. No unlisted dependency, external paper, raw-result reanalysis or code execution was substituted. No decision-critical access gap or unresolved specification conflict was found; the displacement wording is resolved by the inspected source.
+
+The live Issue 14 body and latest prior delivery comment were read, with no newer delivery returned at reconciliation. The observation clock was checked at **September 12, 2026, 19:17:59 America/Los_Angeles**; this is distinct from the snapshot's capture time. [Issue][issue]; [prior delivery][prior]; [snapshot][snapshot].
+
+**Final decision: retain the qualified observed cluster reference and recommend no additional empirical allocation now, with the concrete fresh-policy-use revisit above.** ACVC remains ACTIVE under existing ownership; Portfolio alone decides any later funding or lifecycle consequence. This review adds zero models, scientific RNG, fitting, evaluation, optimizer calls, runtime tests or diagnostics. Documentary/provider cost remains unknown. No new object, card, additional consultation or empirical continuation is released. [Facts, current_exposure and assignment][facts]; [TASK][task]; [AGENTS §5][agents].
+
+[task]: https://github.com/CartmanFatass/My-paper-code/blob/4ebcd0f610ea9e15e8f48c30ec3f1f147d272913/docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/TASK.md
+[question]: https://github.com/CartmanFatass/My-paper-code/blob/0791b04744549d6f16d65d07a287156f9a4b1f1a/docs/research/candidates/acvc/ACVC_POST_CLUSTER_USE_DIRECTION_QUESTION_20260912.md
+[facts]: https://github.com/CartmanFatass/My-paper-code/blob/0791b04744549d6f16d65d07a287156f9a4b1f1a/docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/FACTS.json
+[direction]: https://github.com/CartmanFatass/My-paper-code/blob/f569a80bc28bb9c679884da36824613652b414f0/docs/research/candidates/acvc/DIRECTION.md
+[intake]: https://github.com/CartmanFatass/My-paper-code/blob/f569a80bc28bb9c679884da36824613652b414f0/docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md
+[summary]: https://github.com/CartmanFatass/My-paper-code/blob/f569a80bc28bb9c679884da36824613652b414f0/docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/summary.json
+[execution]: https://github.com/CartmanFatass/My-paper-code/blob/d8bb4b2b049f87989cb138181b598e9ada496a22/docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_EXECUTION_FACTS_20260912.json
+[protocol]: https://github.com/CartmanFatass/My-paper-code/blob/e06b3d63f7e9f77c13fd327dba0270d80e74d819/experiments/candidates/acvc/cluster_deployment_b01/protocol.py
+[entry]: https://github.com/CartmanFatass/My-paper-code/blob/e06b3d63f7e9f77c13fd327dba0270d80e74d819/scripts/run_acvc_cluster_deployment_b01.py
+[binding]: https://github.com/CartmanFatass/My-paper-code/blob/e06b3d63f7e9f77c13fd327dba0270d80e74d819/experiments/candidates/acvc/native_link_loss_b01/binding.py
+[spec]: https://github.com/CartmanFatass/My-paper-code/blob/814139558ccb28502b2e23da6800897b4d7af4b3/docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md
+[foundations]: https://github.com/CartmanFatass/My-paper-code/blob/814139558ccb28502b2e23da6800897b4d7af4b3/docs/rl-marl-foundations-20260907/FOUNDATIONS.md
+[empirical]: https://github.com/CartmanFatass/My-paper-code/blob/814139558ccb28502b2e23da6800897b4d7af4b3/docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md
+[agents]: https://github.com/CartmanFatass/My-paper-code/blob/814139558ccb28502b2e23da6800897b4d7af4b3/AGENTS.md
+[engineering]: https://github.com/CartmanFatass/My-paper-code/blob/814139558ccb28502b2e23da6800897b4d7af4b3/docs/project/ENGINEERING_SCOPE_SPEC.md
+[snapshot]: https://github.com/CartmanFatass/My-paper-code/blob/0791b04744549d6f16d65d07a287156f9a4b1f1a/docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/ISSUE_INPUT_SNAPSHOT.json
+[issue]: https://github.com/CartmanFatass/My-paper-code/issues/14
+[prior]: https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5648661785

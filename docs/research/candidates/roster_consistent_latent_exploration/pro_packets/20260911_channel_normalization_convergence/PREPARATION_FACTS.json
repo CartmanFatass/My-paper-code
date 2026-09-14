@@ -1,0 +1,32 @@
+{
+  "source_before_sync": "b842a255359f96d2173d0d4ee9d7551860680229",
+  "required_input_sync": "84ae51da0c6903197c9d92df23786caf3ed283ae",
+  "starting_git_status": "clean",
+  "current_code_surface": "Five named B06/loss/normalizer/model source paths unchanged against baf63642a776ef3e60f4310ce47d76c45168c283",
+  "portfolio_original_response_sha": "50703c1bd1a4411c31a0b211d3ec8aff88fa0d0f",
+  "portfolio_main_response_sha": "41c46303f66005f74a18dccf45974d99771b155b",
+  "portfolio_response_blob": "ebcfea177338a682a21f2b22daaba7175b8ca4f0",
+  "portfolio_conformance": "Root reports designated-DM complete PASS; its durable mapping is still being published and no immutable conformance commit is invented here.",
+  "observed_remote_refs": {
+    "refs/heads/codex/portfolio": "50703c1bd1a4411c31a0b211d3ec8aff88fa0d0f",
+    "refs/heads/codex/rcle": "84ae51da0c6903197c9d92df23786caf3ed283ae",
+    "refs/heads/main": "edf1bdf80b0f4913f4293d5787aa5c02a8a65042"
+  },
+  "issue": {
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/8",
+    "state": "OPEN",
+    "title": "RCLE：TBCFV 原生学习与比较 — B06 后 Convergence",
+    "accepted_edit": true,
+    "fresh_actual_state_readback": true,
+    "all_nonblank_body_lines_match": true,
+    "prior_comments_preserved": 4,
+    "readback_qualification": "The first strict whole-string comparison failed because historical CRLF text was translated while writing the body file. Fresh actual Issue reads confirm the intended title and every nonblank body line; no second mutation was sent. Original and current snapshots are retained.",
+    "body_sha256": "4c94d39f75e02a60693a04bf07f76cef2d02c4f0b0adbddf713c10d519608adf"
+  },
+  "owner_reviews_at_preparation": [],
+  "actual_new_scientific_exposure": 0,
+  "implementation_edits": 0,
+  "numerical_checks": 0,
+  "transport_dispatches_by_DM": 0,
+  "authoring_consultation_and_publication_effort": "unmeasured, not free; not charged to ended B06 or an invented future allowance"
+}

@@ -1,0 +1,89 @@
+{
+  "id": "20260912-contenti-002",
+  "created": "2026-09-12T18:43:52-07:00",
+  "direction": "contention_aware_decentralized_communication",
+  "tier": "portfolio",
+  "kind": "decision",
+  "title": "CADC 已按Portfolio明确决定可逆停放",
+  "context": "Portfolio完整答复e9f097ed85d554352df95fc97ec4c3f303ac8f5e已由原作者核对并由Root在main814139558集成。本项记录CADC方向本地应用，与总Portfolio项20260912-root-021同源；保留HIGH、recasts0、训练过的RR及全部B01证据。",
+  "options": [
+    {
+      "key": "keep",
+      "label": "保留已形成的可逆PARK决定",
+      "consequence": "维持PARKED/HIGH/recasts0并保全RR和B01证据；本次不购买任何科研工作。"
+    },
+    {
+      "key": "amend",
+      "label": "按明确异步指令修改所指状态",
+      "consequence": "仅应用具体覆盖，不自动恢复旧额度或启动新实验；保全既有证据。"
+    }
+  ],
+  "recommended": "keep",
+  "auto_applied": "keep",
+  "dm_reason": "这是Portfolio已形成决定的方向本地应用；不是DM追加的生命周期选择或批准环节。",
+  "evidence": [
+    "docs/research/candidates/contention_aware_decentralized_communication/DIRECTION.md",
+    "docs/research/portfolio/decisions/2026-09-12-post-kelu-marginal-investment.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "记录已形成并由Root集成的Portfolio决定：CADC可逆停放，保留HIGH、recasts0、训练过的RR与全部B01证据。无需逐项确认，可异步覆盖。",
+    "changes_if_approved": [
+      {
+        "target": "CADC DIRECTION.md 当前生命周期",
+        "from": "ACTIVE/HIGH/recasts0",
+        "to": "PARKED/HIGH/recasts0，可逆；无新增科研投入"
+      }
+    ],
+    "if_refused": "在下一干净边界按实际异步覆盖更新所指状态；保全已接受证据，不从覆盖推断额外实验、设计、清理或Pro授权。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+        "quote": "**Only CADC's lifecycle changes: ACTIVE to PARKED, retaining HIGH priority and recasts 0 as recorded attributes.**",
+        "why": "Portfolio明确决定生命周期，原作者已做完整conformance intake，Root在main814139558集成并派发本地应用。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/INTAKE.md",
+        "quote": "Current trained RR is stronger and original DM supplies no next action-changing use.",
+        "why": "本次投资依据是当前下一行动的价值；保留RR与完整结果，不由分配结束自行推断停向。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/INTAKE.md",
+        "quote": "One pair cannot establish unlearnability; finite learning may be insufficient.",
+        "why": "可逆停放没有关闭所有学习通信方案，也没有完成失败原因的因果诊断。"
+      }
+    ],
+    "uncertainty": [
+      "具体新用途、可信新证据或实质成本／就绪事实可触发新的适当节点决定；不要求正向pilot或完整因果重建。",
+      "方向状态和owner记录的完整documentary成本为UNKNOWN；不生成科研额度。",
+      "原有本地synthetic scratch策略拒绝保持创建者责任，本次不重复清理。"
+    ],
+    "cost": {
+      "compute": "零新科研调用；状态应用与保全文档完整成本UNKNOWN。旧B01额度没有余额。",
+      "owner_time": "无需回复即可应用已形成决定；可异步覆盖。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "**Only CADC's lifecycle changes: ACTIVE to PARKED, retaining HIGH priority and recasts 0 as recorded attributes.**",
+    "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+    "authority": "PRO_FINAL / OWNER_DELEGATED; ROOT_INTEGRATED main814139558",
+    "portfolio_owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-021.json",
+    "application_record": "docs/research/candidates/contention_aware_decentralized_communication/DIRECTION.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T01:44:53+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+      "record": "docs/research/candidates/contention_aware_decentralized_communication/DIRECTION.md",
+      "state": "applied",
+      "summary": "Root已在main814139558集成完整Portfolio决定并派发本地应用；原DM现将CADC当前状态设为可逆PARKED/HIGH/recasts0，保留RR、B01证据和已完成远端清理事实。零设计、数值分析、模型、实验、Pro或重复清理。"
+    }
+  ]
+}

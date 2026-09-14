@@ -1,0 +1,51 @@
+{
+  "status": "pass",
+  "invocations": [
+    {
+      "kind": "binary LF/EOF receiver",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=5",
+        "-o",
+        "ServerAliveInterval=3",
+        "-o",
+        "ServerAliveCountMax=1",
+        "hmasd-wsl-node",
+        "/home/wu/.venvs/hmasd/bin/python -c 'import sys,json; b=sys.stdin.buffer.read(); print(json.dumps({'\"'\"'received_hex'\"'\"':b.hex(),'\"'\"'cr_count'\"'\"':b.count(bytes([13])),'\"'\"'eof_received'\"'\"':True}))'"
+      ],
+      "seconds": 0.4379999999946449,
+      "returncode": 0,
+      "stdout": "{\"received_hex\": \"465344207472616e73706f72742062797465730a66696e69746520454f460a\", \"cr_count\": 0, \"eof_received\": true}\n",
+      "stderr": ""
+    },
+    {
+      "kind": "finite binary Python script stdin",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=5",
+        "-o",
+        "ServerAliveInterval=3",
+        "-o",
+        "ServerAliveCountMax=1",
+        "hmasd-wsl-node",
+        "/usr/bin/timeout --signal=KILL 8s /home/wu/.venvs/hmasd/bin/python -u -"
+      ],
+      "seconds": 0.4529999999795109,
+      "returncode": 0,
+      "stdout": "{\"binary_python_stdin_executed\": true, \"old_published_object_present\": true, \"technical_checkout_exists\": false, \"ended_b02_worktree_exists\": false}\n",
+      "stderr": ""
+    }
+  ],
+  "complete_local_wall_seconds": 0.8909999999741558,
+  "payload_lf_normalization": true,
+  "source_payload_executions": 1,
+  "scientific_exposure": 0,
+  "limit_seconds": 20,
+  "cause_limit": "Confirms corrected binary/EOF path now; does not identify original silent-session cause or reproduce ACVC shell failure."
+}

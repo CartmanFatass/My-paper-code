@@ -1,0 +1,112 @@
+{
+  "id": "20260912-root-014",
+  "created": "2026-09-12T14:49:57-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "ACVC 与 FOLR 独立全链投入建议",
+  "context": "两项原节点已选，完整成本未知；不改前次 discovery/MGTAP T 请求，维持各自科学和现有生命周期。",
+  "options": [
+    {
+      "key": "a",
+      "label": "分别投入 K 与 E",
+      "consequence": "Portfolio 明示各自新上限；不形成联合机制或共享余额。"
+    },
+    {
+      "key": "b",
+      "label": "只投入 K",
+      "consequence": "获得 cluster 用途观察，不买 E 的实现与回放负担。"
+    },
+    {
+      "key": "c",
+      "label": "只投入 E",
+      "consequence": "获得新的同信息记忆比较，K 暂不拨款但方向继续。"
+    },
+    {
+      "key": "d",
+      "label": "两项均不投入",
+      "consequence": "省去本次未知投入，未获得新观察；不推断方向停止。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "原作者建议，Portfolio 决定，未执行投资或停放。",
+  "evidence": [
+    "docs\\research\\portfolio\\pro_packets\\20260912_cluster_entity_investment\\SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L84",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Portfolio 是否分别投入 ACVC 的一个 cluster-law C-fit/三 panel 与 FOLR 的一个实体历史/同信息 Generic RETAIN 配对，并明确全链新上限和排序？",
+    "changes_if_approved": [
+      {
+        "target": "acvc 下一 cluster-law B",
+        "from": "科学已选、投入未知且未分配",
+        "to": "仅按 Portfolio 明示的全链新上限执行一 fit/三 panel；维持 ACTIVE/MEDIUM/recasts2最低争用排序"
+      },
+      {
+        "target": "vap_folr_core 下一 entity-history B",
+        "from": "家族 OPEN、实现/实验未分配",
+        "to": "仅按 Portfolio 明示的全链新上限执行一次有限实现/验收与一 matched pair；旧 scalar H 不变"
+      }
+    ],
+    "if_refused": "未选项没有新实现或实验拨款，但方向不会因资金单元结束被 Root 自动暂停；选择较小子集也不影响另一个独立项。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE.md",
+        "quote": "The node selects **one complete chain**, not three fitted arms:",
+        "why": "一个真实 C-fit 的三个私有部署对照可判 clustered 服务几何中的实际用途。"
+      },
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/INTAKE.md",
+        "quote": "One bounded implementation/technical-acceptance batch for the accepted two-arm scope, then exactly one independently trained matched pair and one final panel per fit",
+        "why": "新实体历史家族已被原节点选择，比较器是同样完整公开信息的通用循环策略。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260912_post_two_training_use_convergence/INTAKE.md",
+        "quote": "Full future native and support costs remain unknown and unallocated.",
+        "why": "旧时钟不是 cluster 成本；旧 training-F 两次 DOWN 和 C01 adverse worlds 不能隐藏。"
+      },
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_continuity/INTAKE.md",
+        "quote": "Complete implementation effort, per-arm wall, peak memory, support and agent/provider cost unknown.",
+        "why": "BANK 回放有更多实体循环行，窄宽度不证明便宜；B04 通用策略本可适应。"
+      }
+    ],
+    "uncertainty": [
+      "两项各自完整成本均未知，Portfolio 须选择新的数值上限与 support 含义；没有现成余额。",
+      "一 fit/pair 只能产生有界 B 观察；E 5000/128 与 ±1 仍需明确选定。"
+    ],
+    "cost": {
+      "compute": "K:1 fit/512 train/3×64 eval/180224总team steps；E:2 fits/205120ticks/9938updates，速率未知；全实现/检查/评审/Monitor/intake/cleanup计一次。",
+      "owner_time": "异步可覆盖；当前不等待回复。",
+      "reversibility": "costly",
+      "waits_on_this": "仅各自新实现/实验投资；已有方向工作独立继续。"
+    },
+    "verdict_text": "作者建议分别选择 K=yes、E=yes，以明确的新全链上限买两个有界观察；实际争用时保留 E 在 second-recast ACVC 之前。Portfolio 可选择任一更小子集或两项均不投入；作者不拨款。",
+    "source": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T21:49:57+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md#5-capacity-and-resume",
+      "record": "docs\\research\\portfolio\\pro_packets\\20260912_cluster_entity_investment\\PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "Root指定作者准备当前独立Portfolio问题；建议未成为拨款/生命周期决定，不等待owner回复。"
+    },
+    {
+      "at": "2026-09-12T23:04:56+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_cluster_entity_investment/INTAKE.md",
+      "state": "applied",
+      "summary": "完整PRO_FINAL已验收并记录K/E新投入：K600 native/600 hard support/1200complete；E Generic1800/BANK3000/native4800/support1200/complete6000、每臂5000/128和±1。拨款决定已记录，Root派发和DM代码/实验验收仍是独立后续事实；无历史余额。"
+    }
+  ]
+}

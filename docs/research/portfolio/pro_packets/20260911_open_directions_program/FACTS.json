@@ -1,0 +1,208 @@
+{
+  "created_utc": "2026-09-11T20:08:33.862978+00:00",
+  "question": "New owner-requested forward research across existing open directions; separate technical unblocking",
+  "fixed_current_input_sha": "10828c8d504a7bcdb8a57c6ae4ed4434d1d3d472",
+  "authority": "Preparation only; options are not allocations or local Portfolio verdicts",
+  "actual_author_exposure": {
+    "scientific_invocations": 0,
+    "policy_models": 0,
+    "encoder_modules": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_environment_steps": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "replay": 0,
+    "profiling": 0,
+    "source_tests": 0,
+    "numerical_fixtures": 0,
+    "support_search": 0,
+    "raw_result_reanalysis": 0,
+    "source_implementation_edits": 0,
+    "provider_sends": 0,
+    "parameter_displacement": "not applicable: no learner"
+  },
+  "exposure_line": "OPEN_DIRECTIONS_PROGRAM_PREPARATION: scientific_invocations=0; policy_models=0; encoder_modules=0; checkpoint_loads=0; environments=0; native_steps=0; synthetic_environment_steps=0; training_episodes=0; optimizer_steps=0; evaluation_episodes=0; replay=0; profiling=0; source_tests=0; numerical_fixtures=0; support_search=0; raw_result_reanalysis=0; source_implementation_edits=0; provider_sends=0; parameter_displacement=not applicable: no learner",
+  "count_snapshots": {
+    "completed_old_four": 0,
+    "subsequently_dispatched_technical_chains": 3,
+    "current_active_technical_at_main_snapshot": 1,
+    "target_advancing_directions": 5,
+    "formal_UAV_entry_authorized_by_this_packet": 0
+  },
+  "scope_counts": {
+    "ACTIVE_directions": 15,
+    "new_result_bearing_allowance_now": 0
+  },
+  "proposed_programs": [
+    {
+      "direction_id": "flexible_skill_duration",
+      "learners": 2,
+      "independent_training_units": 1,
+      "training_episodes": 160,
+      "training_team_ticks": 80000,
+      "evaluation_episodes": 64,
+      "evaluation_team_ticks": 32000,
+      "update_stages": 10,
+      "optimizer_steps": null,
+      "d0_coordinator_chunks": 525,
+      "i_coordinator_law": "15 * sum(ceil(M_r/1280)), five M_r <= 8000; observed B01 330",
+      "model_constructions": 4,
+      "batched_controller_calls": 6000,
+      "per_arm_cost_law": "init + rollout + 15*sum(ceil(M_r/batch))*coordinator_chunk + lower_PPO + final_evaluation + checkpoint/publication/exit",
+      "new_proposed_seconds": {
+        "D0": 900,
+        "I1280": 1800,
+        "native_sum": 2700,
+        "support": 300,
+        "complete": 3000
+      },
+      "anchor": "FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+      "future_rate_seconds": null,
+      "total_team_ticks": 112000
+    },
+    {
+      "direction_id": "vap_folr_core",
+      "learners": 2,
+      "independent_training_units": 1,
+      "episode_pairing": "not matched post-action worlds; action-dependent native RNG",
+      "training_episodes": 10000,
+      "training_team_ticks": 200000,
+      "evaluation_episodes": 256,
+      "evaluation_team_ticks": 5120,
+      "optimizer_steps": 9938,
+      "base_online_target_replay_GRU_rows": 66783360,
+      "base_acting_GRU_rows": 1076880,
+      "new_gate_coefficients": 129,
+      "new_gate_work": null,
+      "per_arm_cost_law": "init +100000 collection ticks +4969 replay/RMSprop stages +2560 final ticks + publication/exit + new-arm gate work",
+      "new_proposed_seconds": {
+        "RETAIN": 1800,
+        "LEARNED_GATE": 1800,
+        "native_sum": 3600,
+        "support": 300,
+        "complete": 3900
+      },
+      "anchor": "FOLR_PUBLIC_LIFECYCLE_HALF_B02_SCIENCE_CARD_20260910.md historical envelope only; learned-retention candidate has unknown/unallocated future cap",
+      "future_rate_seconds": null,
+      "total_team_ticks": 205120
+    },
+    {
+      "direction_id": "metric_ground_transport_allocation",
+      "learners": 2,
+      "independent_training_units": 1,
+      "training_episodes": 1024,
+      "training_team_ticks": 262144,
+      "evaluation_episodes": 64,
+      "evaluation_team_ticks": 16384,
+      "optimizer_steps": 2048,
+      "model_constructions": 6,
+      "actor_rows_per_fit": 3317760,
+      "per_arm_cost_law": "init +131072 collection ticks +1024 replay/Adam calls +8192 final ticks + publication/exit",
+      "new_proposed_seconds": {
+        "COND": 450,
+        "DENSE": 450,
+        "native_sum": 900,
+        "support": 300,
+        "complete": 1200
+      },
+      "anchor": "MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md",
+      "future_rate_seconds": null,
+      "total_team_ticks": 278528
+    },
+    {
+      "direction_id": "acvc",
+      "learners": 1,
+      "independent_training_units": 1,
+      "training_episodes": 512,
+      "training_team_ticks": 131072,
+      "evaluation_episodes": 192,
+      "evaluation_team_ticks": 49152,
+      "optimizer_steps": 1024,
+      "model_constructions_including_helpers": 9,
+      "actor_collect_rows": 655360,
+      "actor_replay_rows": 2621440,
+      "actor_evaluation_rows": 245760,
+      "coordinate_pair_check_upper": 6553600,
+      "per_arm_cost_law": "one learner init +131072 collection ticks +1024 replay/Adam calls +3*64*256 final ticks/controller work + publication/exit",
+      "new_proposed_seconds": {
+        "one_fit_with_three_panels": 270,
+        "native_sum": 270,
+        "support": 330,
+        "complete": 600
+      },
+      "anchor": "ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md 8951 append-only allocation, ended",
+      "future_rate_seconds": null,
+      "total_team_ticks": 180224
+    },
+    {
+      "direction_id": "variable_n_fleet_churn",
+      "learners": 2,
+      "independent_training_units": 1,
+      "training_episodes": 4096,
+      "training_team_ticks": 983040,
+      "evaluation_episodes": 384,
+      "evaluation_team_ticks": 92160,
+      "reference_episodes": 64,
+      "reference_team_ticks": 15360,
+      "optimizer_steps": 4096,
+      "collection_forwards": 768,
+      "optimizer_forwards": 4096,
+      "evaluation_forwards": 36,
+      "full_BCRH_calls": 384,
+      "unique_exogenous_fixtures": 2112,
+      "actor_parameters_each": 89090,
+      "per_arm_cost_law": "2048*c_collect +64*c_update +192*c_eval +delta_new; shared/reference/build/publication charged once",
+      "new_proposed_seconds": {
+        "native_sum_both_arms_and_reference": 600,
+        "native_sum": 600,
+        "support": 300,
+        "complete": 900
+      },
+      "anchor": "VNFC_N7_NATIVE_SERVICE_CREDIT_B02_SCIENCE_CARD_20260911.md ended allocation;600 total not per arm",
+      "future_rate_seconds": null,
+      "total_team_ticks": 1090560
+    }
+  ],
+  "option_A_if_explicitly_selected": {
+    "learners": 9,
+    "independent_training_units": 5,
+    "training_episodes": 15792,
+    "policy_evaluation_episodes": 960,
+    "reference_episodes": 64,
+    "team_ticks": 1866432,
+    "complete_cap_seconds": 9600,
+    "native_cap_seconds": 8070,
+    "support_cap_seconds": 1530,
+    "warning": "Separate nontransferable caps, not global fungible budget, clock prediction or permission to repeat. No pooled cross-direction scientific estimand."
+  },
+  "option_B_if_explicitly_selected": {
+    "directions": [
+      "flexible_skill_duration",
+      "metric_ground_transport_allocation"
+    ],
+    "complete_cap_seconds": 4200,
+    "FOLR_preparation_numerical_allowance": 0
+  },
+  "known_cost_arithmetic": {
+    "FSD_B01_native_arm_sum": "1540.62",
+    "MGTAP_known_native_plus_support": "583.6022161",
+    "RCLE_B06_known_native_plus_support": "422.6563743",
+    "FOLR_HALF_B02_known_native_plus_support": "1584.8955750"
+  },
+  "cost_limitations": "Known component sums are not full-history/full-support certificates; native and support cannot replenish one another. Authoring/Pro cost, unknown tool/client tails and future unit rates remain unknown. Failed attempts retained; all-attempt cost per valid result is undefined for incomplete pairs, not zero.",
+  "headroom": "Matching upper-minus-tuned-same-information current-host headroom absent for all15 scoped records; not zero and not a B gate.",
+  "second_recast_lowest_contention": [
+    "acvc",
+    "semigroup_consistent_duration_model_policy",
+    "variable_n_fleet_churn"
+  ],
+  "current_repair_reports": {
+    "ACVC": "Accepted source transport at88f9e87d5; no8951 retry",
+    "FSD": "Accepted/integrated through20258e5ef, tracking10828c8d5;9 paths matched, helper5.672s/nested remote4.898s, owned technical checkout absent. Source delivery READY; future scientific allocation separate.",
+    "VNFC": "Root reports Fraction path32-byte tail corruption; corrupting writer unknown; exact-integer replacement candidate workaround only. Next diagnostic turn rejected by service automated content filter before work; no scientific exclusion or readiness fact. Root resumed bounded engineering; acceptance still pending. Root reports the resumed diagnostic was again rejected before effect; bounded engineering recovery remains with Root/original DM and does not establish a permitted replacement method or runtime readiness."
+  },
+  "new_technical_allocation": "Current ACVC/VNFC/FSD scopes from owner; CBSC/FRRIE bounded original-DM repair recommended, exact runtime bounds supplied by Root/original DM at dispatch. No expired probe budget is reused."
+}

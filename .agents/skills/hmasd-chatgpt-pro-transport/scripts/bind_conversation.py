@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import argparse
+import copy
+import hashlib
 import json
 import os
 import re
@@ -253,26 +255,30 @@ def _expected_binding_key(workflow_node: str, direction_id: str, direction_ids: 
 
 
 def _archived_round(record: dict) -> dict:
-    """Preserve the completed provider round before clearing an admitted reset."""
+    """Keep complete round evidence without recursively duplicating prior rounds."""
 
-    archived = {
-        "request_id": record.get("request_id"),
-        "packet_id": record.get("packet_id"),
-        "state": record.get("state"),
-        "source_thread_id": record.get("source_thread_id"),
-        "creator_thread_id": record.get("creator_thread_id") or record.get("source_thread_id"),
-        "parent_thread_id": record.get("parent_thread_id"),
-        "operator_thread_id": record.get("operator_thread_id"),
-        "return_route": record.get("return_route"),
-        "conversation_id": record.get("conversation_id"),
-        "provider_url": record.get("provider_url"),
-        "archive": record.get("archive"),
-        "return_receipt": record.get("return_receipt"),
-    }
-    for key in LEGACY_TOP_LEVEL_ROUTE_FIELDS:
-        if key in record:
-            archived[key] = record[key]
-    return archived
+    return copy.deepcopy({key: value for key, value in record.items() if key != "request_history"})
+
+
+def _binding_fields(record: dict) -> dict:
+    """Carry only durable conversation identity and context-reset provenance forward.
+
+    Request observations are intentionally not enumerated: new or ad-hoc fields
+    belong to the archived round unless explicitly admitted here.
+    """
+
+    fields = (
+        "conversation_binding_key", "workflow_node", "direction_id",
+        "decision_authority", "conversation_id", "provider_url", "agentify_stable_key",
+        "request_history", "quarantined_provider_conversations",
+        "pending_context_reset", "last_provider_context_reset",
+    )
+    return {key: copy.deepcopy(record[key]) for key in fields if key in record}
+
+
+def _agentify_generation_key(binding_key: str, request_id: str) -> str:
+    identity = json.dumps([binding_key, request_id], ensure_ascii=True, separators=(",", ":"))
+    return "hmasd-gen:" + hashlib.sha256(identity.encode("utf-8")).hexdigest()
 
 
 def _archived_direction_mirror(
@@ -339,6 +345,106 @@ def _reconcile_archived_binding_mirror(
         "stale_binding_updated_at": binding.get("updated_at"),
     }
     return reconciled
+
+
+def prepare_unaccepted_first_binding_rebind(
+    registry_path: Path, *, request: dict, prior: dict,
+) -> dict:
+    """Reserve an owner-authorized generation for an unbound, never-sent operation.
+
+    The Transport supplies its fresh authoritative operation audit. This helper
+    neither contacts the provider nor treats a missing operation as nonacceptance.
+    Existing concrete bindings continue through prepare_context_reset instead.
+    """
+
+    evidence = validate_provider_context_reset_evidence(request.get("provider_context_reset_evidence"))
+    if request.get("reset_invalid_provider_context") is not True or evidence.get("reset_authority") != "OWNER_DIRECT":
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: explicit owner recovery is required")
+    previous_id = evidence["previous_request_id"]
+    replacement_id = request.get("request_id")
+    if not isinstance(replacement_id, str) or not replacement_id.strip() or replacement_id == previous_id:
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: replacement requires a distinct request_id")
+    direction = request.get("direction_id")
+    node = request.get("workflow_node")
+    key = request.get("conversation_binding_key")
+    if key != _expected_binding_key(node, direction, request.get("direction_ids", [])):
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: decision binding mismatch")
+    if request.get("requested_conversation_id") is not None:
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: no replacement provider identity may be supplied")
+    operation = prior.get("old_operation", {})
+    null_effect_fields = (
+        "sendAttemptedAt", "providerUserMessageId", "providerAssistantMessageId",
+        "observedConversationUrl", "observedConversationId", "archive",
+    )
+    if (
+        prior.get("status") != "VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE"
+        or operation.get("sendAttempted") is not False
+        or any(field not in operation or operation[field] is not None for field in null_effect_fields)
+        or operation.get("conversationUrl") != "https://chatgpt.com/"
+        or operation.get("conversationId") != "__new__"
+        or operation.get("provider") != "chatgpt"
+        or not UUID_RE.fullmatch(str(operation.get("operationId", "")))
+        or operation.get("operationId") != prior.get("old_operation_id")
+        or operation.get("idempotencyKey") != previous_id
+        or prior.get("request_id") != previous_id
+        or operation.get("stableKey") != prior.get("stableKey")
+        or operation.get("stableKey") != key
+    ):
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: exact never-sent operation evidence is required")
+    tab = prior.get("old_tab", {})
+    if (
+        tab.get("protected") is not False or tab.get("preserved") is not True
+        or not _tab_handle(tab.get("tab_id")) or tab.get("stable_key") != operation["stableKey"]
+        or prior.get("old_operation_mutated") is not False
+        or not prior.get("durable_prior_receipts")
+    ):
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: preserved old tab/operation/receipts are required")
+    prompt = request.get("prompt")
+    prompt_hash = hashlib.sha256(prompt.encode("utf-8")).hexdigest() if isinstance(prompt, str) else None
+    product = request.get("provider_requirement", {})
+    if (
+        not prompt or prompt_hash != operation.get("promptSha256")
+        or prompt_hash != prior.get("old_handoff", {}).get("prompt_sha256")
+        or product.get("model") != operation.get("productModel")
+        or product.get("mode") != operation.get("reasoningEffort")
+    ):
+        raise ValueError("UNBOUND_REBIND_UNAVAILABLE: frozen prompt/model/effort changed")
+    pending = {
+        "replacement_request_id": replacement_id,
+        "evidence": evidence,
+        "unaccepted_first_binding_rebind": copy.deepcopy(prior),
+        "frozen_prompt_sha256": prompt_hash,
+        "provider_requirement": copy.deepcopy(product),
+    }
+    resolved_path = registry_path.resolve()
+    with registry_lock(resolved_path):
+        registry = _load(resolved_path)
+        current = registry["bindings"].get(key)
+        if isinstance(current, dict) and current.get("state") == "CONTEXT_RESET_PENDING" and current.get("pending_context_reset") == pending:
+            return current
+        if current is not None or registry["directions"].get(direction) is not None:
+            raise ValueError("UNBOUND_REBIND_UNAVAILABLE: an existing binding or direction record requires reconciliation")
+        old_round = {
+            "request_id": previous_id,
+            "state": "VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE",
+            "agentify_stable_key": operation["stableKey"],
+            "recovery_audit": copy.deepcopy(prior),
+        }
+        record = {
+            "schema_version": SCHEMA_VERSION,
+            "conversation_binding_key": key, "workflow_node": node,
+            "direction_id": direction, "direction_ids": copy.deepcopy(request["direction_ids"]),
+            "decision_authority": request["decision_authority"],
+            "conversation_id": None, "provider_url": None, "request_id": None,
+            "state": "CONTEXT_RESET_PENDING", "send_click_count": 0,
+            "agentify_stable_key": _agentify_generation_key(key, replacement_id),
+            "request_history": [old_round], "pending_context_reset": pending,
+            "tab_id": None, "tab_lifecycle": "HANDOFF", "archive": None,
+        }
+        registry["bindings"][key] = record
+        registry["directions"][direction] = record
+        _atomic_write(resolved_path, registry)
+        return record
 
 
 def prepare_context_reset(
@@ -429,6 +535,7 @@ def prepare_context_reset(
                 "packet_id": None,
                 "packet": None,
                 "state": "CONTEXT_RESET_PENDING",
+                "agentify_stable_key": _agentify_generation_key(conversation_binding_key, replacement_request_id),
                 "request_history": history,
                 "quarantined_provider_conversations": quarantined,
                 "pending_context_reset": {
@@ -492,8 +599,12 @@ def bind(args: argparse.Namespace) -> int:
             args.conversation_binding_key = expected_binding_key
         if args.conversation_binding_key != expected_binding_key:
             raise ValueError(f"conversation_binding_key must be {expected_binding_key}")
-        if args.workflow_node != "legacy" and args.decision_authority != "pro_final":
-            raise ValueError("decision_authority must be pro_final")
+        expected_authority = (
+            "owner_requested_advice" if args.workflow_node == "portfolio_decision"
+            else "dm_owned_scientific_review"
+        )
+        if args.workflow_node != "legacy" and args.decision_authority not in {"pro_final", expected_authority}:
+            raise ValueError(f"decision_authority must be {expected_authority} (or frozen legacy pro_final)")
         args.direction_ids = direction_ids
     except (json.JSONDecodeError, ValueError) as exc:
         return _result({"bound": False, "state": "BINDING_SCOPE_INVALID", "error": str(exc)}, 2)
@@ -573,6 +684,15 @@ def bind(args: argparse.Namespace) -> int:
             )
         if old is None and args.conversation_binding_key == f"legacy:{args.direction_id}":
             old = directions.get(args.direction_id)
+        if old is None:
+            prebinding = directions.get(args.direction_id)
+            if (
+                isinstance(prebinding, dict)
+                and prebinding.get("conversation_binding_key") == args.conversation_binding_key
+                and prebinding.get("request_id") == args.request_id
+                and prebinding.get("conversation_id") is None
+            ):
+                old = prebinding
         if old is not None:
             old = _reconcile_archived_binding_mirror(
                 old,
@@ -596,6 +716,49 @@ def bind(args: argparse.Namespace) -> int:
                     },
                     3,
                 )
+        if (
+            old is not None
+            and old.get("conversation_id") is None
+            and old.get("request_id") == args.request_id
+            and old.get("state") != "CONTEXT_RESET_PENDING"
+        ):
+            # Binding the observed URL does not start a new request or erase its
+            # home-page attempts. The operator records actual clicks before bind.
+            if not observed_after_successful_send or reset_invalid_provider_context:
+                return _result(
+                    {"bound": False, "state": "CONVERSATION_UNVERIFIED",
+                     "error": "prebinding recovery requires an observed successful Send"}, 3,
+                )
+            for field in ("prompt_sha256", "source_thread_id", "parent_thread_id", "operator_thread_id"):
+                if old.get(field) != getattr(args, field):
+                    return _result(
+                        {"bound": False, "state": "BINDING_CONFLICT",
+                         "error": f"prebinding recovery identity mismatch: {field}"}, 3,
+                    )
+            if not _tab_handle(old.get("tab_id")) or _tab_handle(old.get("tab_id")) != _tab_handle(args.tab_id):
+                return _result(
+                    {"bound": False, "state": "BINDING_CONFLICT",
+                     "error": "prebinding recovery requires the original tab"}, 3,
+                )
+            count = old.get("send_click_count", 1)
+            if not isinstance(count, int) or isinstance(count, bool) or count < 1:
+                return _result(
+                    {"bound": False, "state": "BINDING_CONFLICT",
+                     "error": "prebinding recovery requires a positive actual Send count"}, 3,
+                )
+            recovered = copy.deepcopy(old)
+            recovered.update(conversation_id=args.conversation_id, provider_url=args.provider_url,
+                             state="SEND_CONFIRMED", send_click_count=count)
+            # Preserve acceptance even if a later operational blocker changes state.
+            recovered.setdefault("send_evidence", {})["observed_after_successful_send"] = True
+            monitor = recovered.setdefault("monitor", {})
+            monitor.update(identity_key=monitor_identity_key(recovered), provider_url=args.provider_url,
+                           last_observed_url=args.provider_url)
+            bindings[args.conversation_binding_key] = recovered
+            directions[args.direction_id] = recovered
+            _atomic_write(registry_path, registry)
+            return _result({"bound": True, "idempotent": False, "prebinding_recovered": True,
+                            "state": "BOUND", "record": recovered})
         if old is not None and old.get("state") == "CONTEXT_RESET_PENDING":
             pending_reset = old.get("pending_context_reset")
             if not isinstance(pending_reset, dict):
@@ -618,6 +781,16 @@ def bind(args: argparse.Namespace) -> int:
                     {"bound": False, "state": "CONVERSATION_UNVERIFIED", "error": "replacement must be observed after successful send"},
                     3,
                 )
+            if pending_reset.get("unaccepted_first_binding_rebind") is not None:
+                product = pending_reset["provider_requirement"]
+                if (
+                    args.prompt_sha256 != pending_reset["frozen_prompt_sha256"]
+                    or args.underlying_model != product["model"]
+                    or args.thinking_effort != product["mode"]
+                ):
+                    return _result(
+                        {"bound": False, "state": "BINDING_CONFLICT", "error": "unbound recovery changed frozen prompt/model/effort"}, 3,
+                    )
             packet_names = packet_artifacts(
                 args.request_id,
                 args.direction_id,
@@ -636,12 +809,14 @@ def bind(args: argparse.Namespace) -> int:
                 canonical_refs.append(enriched)
             tab_handle = _tab_handle(args.tab_id)
             logical_packet_id = args.packet_id or packet_id(args.request_id, args.direction_id)
+            old = _binding_fields(old)
             old.update(
                 {
                     "schema_version": SCHEMA_VERSION,
                     "conversation_id": args.conversation_id,
                     "provider_url": args.provider_url,
                     "direction_ids": direction_ids,
+                    "decision_authority": args.decision_authority,
                     "request_id": args.request_id,
                     "packet_id": logical_packet_id,
                     "packet": {
@@ -775,10 +950,12 @@ def bind(args: argparse.Namespace) -> int:
                     canonical_refs.append(enriched)
                 tab_handle = _tab_handle(args.tab_id)
                 logical_packet_id = args.packet_id or packet_id(args.request_id, args.direction_id)
+                old = _binding_fields(old)
                 old.update(
                     {
                         "schema_version": SCHEMA_VERSION,
                         "direction_ids": direction_ids,
+                        "decision_authority": args.decision_authority,
                         "request_id": args.request_id,
                         "request_history": history,
                         "packet_id": logical_packet_id,
@@ -933,7 +1110,7 @@ def main() -> int:
         required=True,
     )
     parser.add_argument("--conversation-binding-key", required=True)
-    parser.add_argument("--decision-authority", choices=("pro_final",), required=True)
+    parser.add_argument("--decision-authority", choices=("pro_final", "dm_owned_scientific_review", "owner_requested_advice"), required=True)
     parser.add_argument("--conversation-id", required=True)
     parser.add_argument("--provider-url", required=True)
     parser.add_argument("--tab-id", default=None)

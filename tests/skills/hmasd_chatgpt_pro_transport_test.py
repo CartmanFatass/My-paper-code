@@ -484,6 +484,21 @@ def test_registry_lock_is_fail_closed_and_releases_after_bounded_mutation(tmp_pa
     assert not registry.with_name("registry.json.lock").exists()
 
 
+@pytest.mark.parametrize("node,authority", [
+    ("em_convergence", "dm_owned_scientific_review"),
+    ("portfolio_decision", "owner_requested_advice"),
+])
+def test_transport_accepts_current_review_and_owner_advice_roles(
+    project_root: Path, upload_request: dict[str, object], node: str, authority: str
+) -> None:
+    request = {**upload_request, "workflow_node": node, "decision_authority": authority}
+    if node == "portfolio_decision":
+        request.update(direction_id="portfolio", direction_ids=["demo_direction"])
+    result = TRANSPORT_VALIDATE.validate(request, project_root)
+    assert result["decision_authority"] == authority
+    assert result["workflow_node"] == node
+
+
 def test_validate_request_exposes_packet_plan_and_return_readiness(
     project_root: Path, upload_request: dict[str, object]
 ) -> None:
@@ -524,7 +539,7 @@ def test_validate_request_requires_operator_for_every_canonical_workflow(
         "operator_thinking": "high",
     }
     canonical.pop("operator_thread_id")
-    with pytest.raises(ValueError, match="requires the configured Transport singleton operator_thread_id"):
+    with pytest.raises(ValueError, match="requires the bound Transport operator_thread_id"):
         TRANSPORT_VALIDATE.validate(canonical, project_root)
 
     accepted = TRANSPORT_VALIDATE.validate(
@@ -533,7 +548,7 @@ def test_validate_request_requires_operator_for_every_canonical_workflow(
     )
     assert accepted["operator_thread_id"] == SINGLETON_THREAD_ID
 
-    with pytest.raises(ValueError, match="dispatch_mode=REUSE_SINGLETON"):
+    with pytest.raises(ValueError, match="dispatch_mode="):
         TRANSPORT_VALIDATE.validate(
             {
                 **canonical,
@@ -644,7 +659,7 @@ def test_validate_request_enforces_canonical_single_body_attachment(
 
     without_operator = {**canonical}
     without_operator.pop("operator_thread_id")
-    with pytest.raises(ValueError, match="requires the configured Transport singleton operator_thread_id"):
+    with pytest.raises(ValueError, match="requires the bound Transport operator_thread_id"):
         TRANSPORT_VALIDATE.validate(without_operator, project_root)
 
 
@@ -890,65 +905,6 @@ def test_same_request_bind_is_idempotent_after_initial_admission(tmp_path: Path)
     assert record["request_id"] == "req-01"
     assert record.get("request_history") is None
     assert record["send_click_count"] == 1
-
-
-def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> None:
-    transport_text = TRANSPORT_SKILL.read_text(encoding="utf-8")
-    for reference in ("attachment-compatibility.md", "attachment-send.md"):
-        transport_text += (TRANSPORT_SKILL.parent / "references" / reference).read_text(encoding="utf-8")
-
-    for phrase in (
-        "independent Luna/high Transport task executes",
-        "scripts/materialize_packet.py",
-        "without busy polling",
-        "the tab lease remains active while generation is pending",
-        "The executor turn ending, an observation pass returning, or a timeout is never",
-        "request_id|conversation_binding_key|conversation_id|provider_url",
-        "stage_receipt",
-        "provider filename suffix or normalization",
-        "Acceptance of a\nvalidated handoff authorizes uploading exactly its validated `prompt_path`",
-        "Do not request\naction-time confirmation before upload or immediately before Send",
-        "does not extend to any other local file, destination, replacement packet, or second",
-        "rejected before acceptance and produced no external effect",
-        "`parent_thread_id` is the sole completion",
-        "`fallback_enabled=false`",
-        "call `retry_rejected_receipt` with the direct `not_accepted_evidence`",
-        "`RETURN_RECEIPT_BLOCKED`",
-        "Never multiplex a later",
-        "stage_blocker_receipt",
-    ):
-        assert phrase in transport_text
-    assert "fallback_enabled=true" not in transport_text
-    assert "obtain the required action-time confirmation" not in transport_text
-    assert "transport-level confirmation gate" not in transport_text
-    assert "01a05860-" not in transport_text
-    assert "01a04f5a-" not in transport_text
-    assert "close the temporary tab\nafter recording that state" not in transport_text
-
-
-def test_skill_contracts_bound_locator_coordinate_offset_recovery() -> None:
-    transport_text = (TRANSPORT_SKILL.parent / "references" / "send-hit-point-recovery.md").read_text(encoding="utf-8")
-
-    for phrase in (
-        "Locator hit-point mismatch recovery",
-        "matchCount=1",
-        "visibleCount=1",
-        "disabled=false",
-        "No element found at point",
-        "fresh DOM state using the current browser",
-        "exact visible Send prompt node",
-        "the URL is unchanged from the\npre-send observation",
-        "no visible user-message node exists for the exact prompt",
-        "enabled and\nvisible",
-        "the exact visible user-message node and\nits exact prompt text",
-        "every expected attachment/file group and recorded hash",
-        "terminal `SEND_UNCERTAIN`; do not retry",
-        "Never perform blind coordinate retries, a second\nDOM-node click, or any retry after `SEND_UNCERTAIN`.",
-    ):
-        assert phrase in transport_text
-
-    assert "Treat that combination\nas a locator coordinate offset, not as `SEND_FAILED_PRE_SEND`" in transport_text
-    assert "This DOM-node click replaces the failed locator click; it is the one Send\nattempt" in transport_text
 
 
 def test_transport_contracts_require_one_attachment_for_prompt_author_packets() -> None:

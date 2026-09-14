@@ -1,0 +1,74 @@
+{
+  "id": "20260912-contenti-001",
+  "created": "2026-09-12T15:21:22-07:00",
+  "direction": "contention_aware_decentralized_communication",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CADC-B01 通信与运动联合学习首个配对实验",
+  "context": "按已接受的 Portfolio 授权冻结一个 LEARNED/RR 配对；共享延迟信道和相同信息，主量为扣除发送尝试成本的原生服务。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行已选的一组配对和完整验收，保持 2100 秒完整调用上限。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "应用撤回指令，保全已有证据，不自动启动替代实验。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在相关下一执行边界应用具体修订，保持原有授权边界。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "最小实现直接测试已选的完整通信包与强轮转基线，额外因果实验没有拨款。",
+  "evidence": [
+    "docs/research/candidates/contention_aware_decentralized_communication/CADC_B01_CARD.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按 Portfolio 已选方案执行 CADC 首个通信与运动联合学习配对实验。",
+    "changes_if_approved": [
+      {
+        "target": "CADC-B01",
+        "from": "方向已登记且获拨款，尚无实施",
+        "to": "冻结共同信道、强比较器和 1 个配对实验的具体执行卡"
+      }
+    ],
+    "if_refused": "应用异步修订指令并保留已产生证据；未获得新的实验或替代方案授权。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md",
+        "quote": "Fund CADC-B01: communication contention as part of control",
+        "why": "Portfolio 已明确选择学习发送与固定轮转发送的完整比较。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/contention_aware_decentralized_communication/CADC_B01_CARD.md",
+        "quote": "RR likely wins this first finite comparison because collision-free reports and a fully adaptive motion null may capture the available value before noisy decentralized Bernoulli learning does.",
+        "why": "轮转基线可能已取得全部有用信息；新增发送学习可能带来碰撞和优化噪声。"
+      }
+    ],
+    "uncertainty": [
+      "原生完整运行成本未知。",
+      "一个训练配对不能估计训练种子总体优势。"
+    ],
+    "cost": {
+      "compute": "每臂上限 600 秒，原生合计 1200 秒；支撑 900 秒；完整未来调用 2100 秒，互不挪用。",
+      "owner_time": "无需等待回复",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Execute the already funded exact pair with the minimal source-grounded 171/451 observation wiring; no new Portfolio or direction-tier disposition is made locally.",
+    "source": "docs/research/candidates/contention_aware_decentralized_communication/CADC_B01_CARD.md"
+  },
+  "starred": false
+}
