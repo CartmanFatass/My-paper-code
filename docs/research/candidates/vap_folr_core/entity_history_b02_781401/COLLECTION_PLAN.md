@@ -44,3 +44,14 @@ author checkout, all older evidence and the shared Git object store. Record
 study elapsed, summed invocation wall, CPU work and support lower bounds with
 uncovered costs UNKNOWN. Finish with a DM lifecycle/next-work decision, required
 owner/audit/Chinese brief records and actionable Clerk integration handoff.
+
+Analysis L0: DM directly owns this directory's short analyze.py and generated
+RESULT_SUMMARY.json, scores.csv and RESULT_FIGURE.png. It reads only the collected
+Generic/BANK summaries, keeps the exact mean/MEI and conditional-unit semantics,
+and preserves every training/final return. Acceptance compares independent
+statistics with the native publication and uses the existing run summarizer
+without pairing. The figure uses fixed non-overlapping100-episode training
+windows and all128 final returns per arm as empirical CDFs; no tuned smoothing,
+checkpoint choice or inferred training uncertainty. One local short analysis
+invocation is planned within30 s, with repair only for an actual failure; no
+empirical runner, RNG, model or further panel is invoked.
