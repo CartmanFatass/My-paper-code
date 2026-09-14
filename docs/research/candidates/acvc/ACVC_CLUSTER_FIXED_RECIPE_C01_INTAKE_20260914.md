@@ -2,7 +2,7 @@
 
 ## Current state
 
-Accepted source6e8d1b8946e1b2eb0e4207cbc9cc9d006ad2abda is executing the six original units in frozen order. 4/6 original components have complete verified records; exact current dispatch/monitor/collection states and all preselected identities remain in EXECUTION_FACTS.json. No final C claim is accepted before the complete six-unit reduction and full independent scientific response. No efficacy gate, replacement or survivor inference is introduced.
+Accepted source6e8d1b8946e1b2eb0e4207cbc9cc9d006ad2abda is executing the six original units in frozen order. 5/6 original components have complete verified records; exact current dispatch/monitor/collection states and all preselected identities remain in EXECUTION_FACTS.json. No final C claim is accepted before the complete six-unit reduction and full independent scientific response. No efficacy gate, replacement or survivor inference is introduced.
 
 ## Applied authority and actual design choice
 
@@ -97,7 +97,7 @@ Each row is a retained component of the frozen six-unit study; the next selected
 | 2 | complete,1024/2048/192 checked | 287.56 | 287.79 / 0.78 | 0.07448163361961681 | 0.04061844459906548 | [unit facts](evidence/cluster_fixed_recipe_c01_20260914/unit_02/UNIT_FACTS.json), [archive](evidence/cluster_fixed_recipe_c01_20260914/unit_02/NATIVE_ARCHIVE_MANIFEST.json) |
 | 3 | complete,1024/2048/192 checked | 286.1 | 285.72 / 0.33 | 0.10273287413258897 | 0.08741625680587661 | [unit facts](evidence/cluster_fixed_recipe_c01_20260914/unit_03/UNIT_FACTS.json), [archive](evidence/cluster_fixed_recipe_c01_20260914/unit_03/NATIVE_ARCHIVE_MANIFEST.json) |
 | 4 | complete,1024/2048/192 checked | 285.93 | 284.4 / 0.31 | 0.11424291130630136 | 0.09571541017623963 | [unit facts](evidence/cluster_fixed_recipe_c01_20260914/unit_04/UNIT_FACTS.json), [archive](evidence/cluster_fixed_recipe_c01_20260914/unit_04/NATIVE_ARCHIVE_MANIFEST.json) |
-| 5 | running_monitor_adopted | — | — | — | — | [original identity/status](evidence/cluster_fixed_recipe_c01_20260914/EXECUTION_FACTS.json) |
+| 5 | complete,1024/2048/192 checked | 287.53 | 287.62 / 0.52 | 0.08597773246911818 | 0.05445829439702123 | [unit facts](evidence/cluster_fixed_recipe_c01_20260914/unit_05/UNIT_FACTS.json), [archive](evidence/cluster_fixed_recipe_c01_20260914/unit_05/NATIVE_ARCHIVE_MANIFEST.json) |
 | 6 | selected_uninvoked | — | — | — | — | [original identity/status](evidence/cluster_fixed_recipe_c01_20260914/EXECUTION_FACTS.json) |
 
 Unit1 final C/F/dwell=.15382744156755837/.2398798049510402/.19145147354711406J. F-C has11 adverse worlds/min-.14428615287843227; F-dwell16/min-.1491303328974227; own-dwell-C13/min-.26712151043852295. These are complete finite-panel facts, with no six-unit confidence claim yet. The single checkpoint and all original files are preserved in the verified559717byte archive SHA256a716ecb1afb48fe764d20ce5ad6ef4e6842ed813e2e7eabed066fe94fb8405aa.
@@ -107,3 +107,5 @@ Unit2 terminal was directly delivered at2026-09-14T18:26:30.0158608Z. DM collect
 Unit3 terminal was directly delivered at2026-09-14T18:34:08.8334114Z. DM collected the original 562142byte archive (SHA256708ff37a84ef33aa263ce0073cf7390eab7dba1c0408088fd9cd3f97deb23c4d) and verified all14 files and complete original records. All paired vectors, adverse/favourable/zero indices/extrema, absolute arms and native CPU/wall/RSS are retained in its unit facts/raw files. The next frozen action proceeds from technical completeness, without an efficacy selection.
 
 Unit4 terminal was directly delivered at2026-09-14T18:45:16.2876810Z. DM collected the original 561829byte archive (SHA256cdd8619c934e9f779fb2ff8eb7b1ac758325ce77464615f9faff3e69e007ae42) and verified all14 files and complete original records. All paired vectors, adverse/favourable/zero indices/extrema, absolute arms and native CPU/wall/RSS are retained in its unit facts/raw files. The next frozen action proceeds from technical completeness, without an efficacy selection.
+
+Unit5 terminal was directly delivered at2026-09-14T18:52:28.9362594Z. DM collected the original 560724byte archive (SHA2561d3fb343bf83c2909be6f327b950bd73b9200a5584f1d6c4b4c046fd812947cc) and verified all14 files and complete original records. All paired vectors, adverse/favourable/zero indices/extrema, absolute arms and native CPU/wall/RSS are retained in its unit facts/raw files. The next frozen action proceeds from technical completeness, without an efficacy selection.
