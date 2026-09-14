@@ -25,7 +25,7 @@ ritual or permission gate. Independent task creation/resume must explicitly supp
 
 OWNER_DIRECT 2026-09-14: DM may directly implement or delegate a complete bounded implementation
 batch to a native Sol/medium Implementer. DM retains science, design choices, technical acceptance,
-Git ownership, experiment launch and lifecycle; no per-task Root/Portfolio approval is needed.
+Git ownership, experiment launch and lifecycle reporting/execution; ordinary code work needs no Root/Portfolio approval.
 CM remains retired. Implementer and independent code Reviewer are direct siblings under the DM,
 not another management chain. Code Reviewer defaults to Sol/high; DM may select Astra for a
 concrete difficult scientific-semantic, numerical or concurrency review without Root approval.
@@ -41,27 +41,15 @@ separate identity, permission, approval, or blocking system.
 
 **Root** is the user entry and workflow-control owner. It applies owner instructions, handles
 exceptions and accepts shared control-plane engineering; it does not approve each research step.
-**DM** (independent Astra/max task) owns its complete direction lifecycle: research plan, objects,
-family changes, recast, C promotion, engineering, results, continue/defer/PARK/CLOSE and reopening.
-DM records evidence, reasons, uncertainty and next actions, and directly coordinates only affected peers.
-DM direction ownership includes needed implementation files and dependencies in its authoring
-checkout; path lists coordinate writers, not per-file permission. Main integration, registry
-updates and ACKs are not research continuation/launch gates. Read live canonical controls when
-a direction checkout is stale. SIBLING_COMMUNICATION.md, DM execution authority and mechanical
-coordination, defines this boundary; actual runtime denials and scientific constraints remain.
+**DM** (independent Astra/max) owns innovation, experiments, implementation, interpretation and
+reports, and executes direction decisions. **Portfolio** is the global scientific synthesizer and
+final direction-level decision owner. **Direction Pro** independently reviews science. **Root** is
+the user entry; peer DMs coordinate mechanics; Clerk is retired. See
+`docs/project/PORTFOLIO_DECISION_PROTOCOL.md` for final authority and mandatory web-context prompt.
+Ordinary experiments and repairs within current direction scope remain DM-owned without per-step
+approval. DM proposes PARK/CLOSE/recast; Portfolio/owner decides and only then is a slot released.
 
-**Direction Pro Convergence** is the independent scientific Reviewer. It reviews design, evidence,
-interpretation, conclusions and successor plans. DM responds to findings, corrects concrete defects
-or limits claims, and owns the final direction decision. Review is not investment, lifecycle or
-scheduling approval. Preserve its substantive review role; do not reduce it to a generic chat helper.
-**Peer coordination**: the central Clerk is retired. Equal DMs directly coordinate affected
-work and own their own records/integration. Shared coupling state exists only in
-.codex/hmasd-dm-sessions.toml. PEER_DM_COORDINATION.md governs temporary vacancy ownership,
-main write serialization, PARK knowledge handover and direct messages. No standing manager
-interprets DM authority. Root remains the user entry and shared-control engineering owner.
-
-**Portfolio** supplies the user-facing report and owner-delegated vacancy selection. It summarizes DM-owned conclusions,
-lifecycle, actual work, costs, uncertainty and options. It does not approve ordinary DM research. OWNER_DIRECT 2026-09-13, clarified 2026-09-14, delegates filling genuine
+OWNER_DIRECT 2026-09-13, clarified 2026-09-14, delegates filling genuine
 PARK/CLOSE vacancies up to three occupied/reserved independent DM slots: the owning DM requests Portfolio
 selection directly through the Codex in-app browser, with relevant DMs owning scientific dialogue;
 the owning DM reuses existing DMs or creates genuinely new/unrecoverable Astra/max DM tasks.
@@ -176,18 +164,10 @@ A child's completion is evidence for that owner, not acceptance or scientific au
 
 ## 2. Decision ownership
 
-OWNER_DIRECT 2026-09-13: DM owns the entire lifecycle of its admitted direction. Its standing
-delegation covers useful ordinary A/B and C work, opening/closing families, recast, post-C choices,
-C-BENCH promotion, continuing, deferring, parking, closing and reopening its own direction. Review
-and evidence requirements follow the actual claim; there is no mandatory Pro approval tier.
-
-| Scope | Accountable decision owner | Record |
-| --- | --- | --- |
-| Direction research and lifecycle | DM, subject to specific owner overrides | Existing card/intake/DIRECTION.md, reasons/evidence/next condition, OWNER_DELEGATED |
-| Independent scientific review | Direction Pro Convergence; DM responds and resolves findings | Full review, DM response/corrections and accepted claim limits |
-| Mechanical coordination/reporting | the owning DM | Actual events, accepted integration, current report and pending consequences |
-| Vacancy replacement up to three occupied/reserved slots | Portfolio selection, the owning DM execution under owner delegation | DM PARK/closeout, request, selected tasks and actual application |
-| Other cross-direction layout or new resource commitments | Owner through Root on an explicit request | Owner instruction and actual application; requested advice remains advice |
+Portfolio owns final direction-level continuation/recast/PARK/CLOSE/reopening interpretation under
+PORTFOLIO_DECISION_PROTOCOL.md. DM owns ordinary objects, innovation, execution, engineering and
+reports. Direction Reviewer supplies independent findings. Routine work does not need Portfolio
+approval; direction proposals do not become dispositions until a conforming Portfolio/owner decision.
 
 DM declares finite invocation/cost/resource bounds and stopping conditions before execution.
 Standing delegation is the authority; a card records work rather than requests permission. An ended
@@ -211,8 +191,8 @@ extend a running frozen scientific exposure/comparison endpoint or disguise a sc
 Only a concrete boundary outside this delegation needs escalation, with its exact source and
 affected action. This is decision ownership, not an extra checklist or per-step approval.
 
-Preserve frozen objects, completed C rules and historical results. A prospective DM decision may
-revise an earlier Pro family/lifecycle recommendation with explicit reasons; it cannot rewrite
+Preserve frozen objects, completed C rules and historical results. A prospective Portfolio/owner decision may
+revise an earlier family/lifecycle decision with explicit reasons; it cannot rewrite
 history or disguise a new object as a compliant retry of the old frozen allocation. DM may not
 change another direction or make new resource commitments. If no useful work remains, DM makes
 the lifecycle decision rather than waiting for permission or manufacturing low-value experiments.
@@ -227,13 +207,13 @@ actual evidence burden. Current specifications may not be silently relaxed to av
 
 Portfolio report comparisons retain honest claim ceilings, headroom/MEI, costs, contrary results
 and recast history. Existing owner priority/resource ordering remains until changed by owner.
-A new recast is DM's decision and report fact, not an automatic global priority change. Three is the occupied/reserved slot target under the owner's scoped vacancy delegation. the owning DM
+A new recast is Portfolio's direction decision on the DM report, not an automatic global priority change. Three is the occupied/reserved slot target under the owner's scoped vacancy delegation. the owning DM
 requests Portfolio replacement for genuine empty slots; unrelated priority changes remain owner-owned.
 
 ## 3. Scientific gaps and external-effect recovery
 
 A real missing scientific fact or unresolved review finding can hold only the work/claim depending
-on it. The DM owns resolution; lack of a Portfolio decision is not a direction blocker. Scientific
+on it. The DM owns resolution; ordinary independent work continues while an actual Portfolio direction decision is pending. Scientific
 review is not replaced by a local fabricated Pro verdict. Record the DM's actual decision and
 reasoning while independent work continues.
 
@@ -293,12 +273,9 @@ When the owner is absent the loop keeps running under a standing delegation (own
    authorizes this workflow change. Scientific evidence requirements remain controlling; a review
    recommendation alone does not amend them. Trace the real authority, exact change and application
    using existing records; never invent owner replies or silently convert a recommendation to policy.
-8. **Portfolio reporting and owner-requested adjustment.** The former standing Portfolio Pro finality
-   is withdrawn prospectively. Maintain a user-readable report from DM decisions and evidence.
-   The owner delegates Portfolio selection and the owning DM creation of replacement DMs for genuine
-   vacancies up to three occupied/reserved slots. Other consultations/global adjustments require
-   explicit owner scope. Preserve historical PRO_FINAL provenance and accepted request effects;
-   a generic report is not authorization to change other directions.
+8. **Portfolio direction finality.** Apply PORTFOLIO_DECISION_PROTOCOL.md. Portfolio reads the
+   complete fixed context and makes final direction-level decisions within owner/spec scope;
+   DM submits reports and executes conforming outcomes without per-item Root ratification.
 
 ## 5. Capacity and resume
 
@@ -310,7 +287,7 @@ Each DM handles its own result/review/repair events and directly messages affect
 when a shared consequence needs them. Native specialists return to their actual parent; independent
 Transport returns full answers directly to the author. The common registry records actual state.
 
-Scientific PARK/CLOSE requires the DM's scientific/development rationale and knowledge preservation.
+Scientific PARK/CLOSE requires Portfolio/owner disposition from the DM report and knowledge preservation.
 A missing file/tool, support estimate, main integration or ended object is not scientific PARK.
 Preserve actual pending producers and recovery ownership. Before archival the departing DM completes
 or transfers its vacancy transaction to an accepting peer under PEER_DM_COORDINATION.md. Claim

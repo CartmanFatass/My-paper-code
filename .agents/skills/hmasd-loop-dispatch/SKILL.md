@@ -5,6 +5,14 @@ description: "Use when a DM handles a peer event, updates shared coupling record
 
 # Peer DM event handling
 
+Portfolio authority: docs/project/PORTFOLIO_DECISION_PROTOCOL.md now controls direction-level
+CONTINUE/RECAST/PARK/CLOSE/reopening. DM owns innovation, experiments, reports and ordinary
+in-scope execution, and submits lifecycle recommendations to Portfolio. No unilateral DM PARK,
+slot release or archival pending that decision. Existing references to DM lifecycle management
+mean proposal, reporting and execution, not final interpretation. Web Portfolio must receive and
+read the protocol's fixed repository context; local conversation/skill inheritance is not assumed.
+
+
 Read docs/project/PEER_DM_COORDINATION.md and live .codex/hmasd-dm-sessions.toml. Clerk is retired.
 Each DM owns its full direction and records; there is no standing event coordinator. On a real
 event, resolve the exact owner/decision/revision, perform the next authorized consequence and

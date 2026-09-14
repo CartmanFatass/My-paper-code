@@ -10,6 +10,14 @@ Shared-file transactions and vacancy transfer follow PEER_DM_COORDINATION.md; ac
 restrictions and frozen science still bind. An archived DM can discuss Portfolio advice without
 resuming experiments. Questions/workflow edits alone do not pause research.
 
+
+Portfolio authority: docs/project/PORTFOLIO_DECISION_PROTOCOL.md now controls direction-level
+CONTINUE/RECAST/PARK/CLOSE/reopening. DM owns innovation, experiments, reports and ordinary
+in-scope execution, and submits lifecycle recommendations to Portfolio. No unilateral DM PARK,
+slot release or archival pending that decision. Existing references to DM lifecycle management
+mean proposal, reporting and execution, not final interpretation. Web Portfolio must receive and
+read the protocol's fixed repository context; local conversation/skill inheritance is not assumed.
+
 ## Independent DM role mapping
 
 A new App task does not automatically inherit .codex/agents/hmasd-direction-manager.toml or a

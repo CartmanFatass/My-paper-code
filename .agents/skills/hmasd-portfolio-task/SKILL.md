@@ -1,42 +1,23 @@
 ---
 name: hmasd-portfolio-task
-description: Use when DMs communicate directly with Portfolio about direction or reopening choices, or the vacancy-owning DM coordinates Portfolio reports and vacancy selection.
+description: "Use when DM submits a direction report/recommendation to Portfolio for final global interpretation, continuation/PARK/CLOSE/recast/reopening decisions or vacancy selection."
 ---
 
-# Portfolio reporting and vacancy selection
+# Portfolio direction decisions
 
-DM owns the direction lifecycle; Pro Convergence independently reviews its science. Portfolio
-reports current knowledge and selects replacements under the owner's three-slot vacancy delegation.
-Follow docs/project/PEER_DM_COORDINATION.md for PARK.md, direct DM notification, safe task archival,
-occupied/reserved slot counting, direct Codex in-app browser requests and new Astra/max DM creation.
+Read docs/project/PORTFOLIO_DECISION_PROTOCOL.md. Portfolio owns final direction-level decisions;
+DM owns innovation, experiments, reports and execution. Equal peers coordinate mechanics and the
+three-slot shared registry; Clerk is retired. No per-experiment Portfolio or Root approval.
 
-Relevant DMs own the scientific conversation with Portfolio, using their browser or own Transport;
-the vacancy-owning DM coordinates capacity, shared access, complete archives and routes. Apply the shared contract
-in PEER_DM_COORDINATION.md, Direct DM–Portfolio alignment. Both sides receive current DM decisions,
-PARK reasons, considered alternatives, accessible evidence and constraints. Preserve exact prompts,
-full answers and DM responses; local summaries alone do not constitute alignment.
-Portfolio reopening advice must address why the latest PARK judgment should change. DM directly
-accepts/refines/disagrees with reasons and actual next work. No new data or mutual approval is
-required. Reuse the existing DM for a parked direction, and feed declined advice into the same
-vacancy exchange rather than create another task/request with unchanged rationale. Full-lifecycle
-continuation includes DM object selection and execution, not just a re-entry document.
+At a substantive lifecycle choice submit the latest full DM report, alternatives and contrary
+evidence, not a pre-applied PARK. Use the protocol's web-context prompt in the ACTUAL request,
+with a fixed source manifest: authority/spec/foundations, global snapshot and affected direction
+results/reviews. The web model must actually access those contents or receive scoped complete
+copies; it has no inherited local context. Use independent browser Transport with exact request
+and author return route. Preserve complete answers and material access limitations.
 
-Before a vacancy request, use current affected DM handoffs/intakes and PARK knowledge records;
-include lessons, failed alternatives, useful assets, claim limits and actual resources. Do not
-repeat an exhausted family as a fresh idea while hiding its negative evidence. No new experiment
-is needed to prepare this handoff. Mechanical assembly belongs to the vacancy-owning DM; scientific analysis uses
-the scientific-tools skill as needed. Preserve pending requests and full answers, count reserved
-slots and complete consequences rather than resend on a timeout.
-
-the vacancy-owning DM can use supported CUA iab controls directly for this request; native Transport, Agentify
-and fixed GitHub packet delivery are not prerequisites. Verify actual Pro/model/login, preserve
-prompt and complete response, reconcile uncertain Send on the same request. Use Portfolio's
-selected replacements to reuse existing DMs or create genuinely new/unrecoverable independent
-Astra/max DMs under current slot/resource authority;
-the vacancy-owning DM does not invent replacement science; existing directions reuse their DM after direct alignment. Report recommendations and actual application separately.
-
-Other global changes require explicit owner scope. Generic reporting/advice is not additional
-execution authority. No Portfolio approval is needed for routine DM objects, recasts or lifecycle.
-Apply owner pauses to their named scope. Stopping a fourth direction does not disable
-replacement below portfolio.target_slots (currently 3); only an explicit workflow/research pause
-suspends the delegated replacement process. The heartbeat recovers missed events without unchanged chatter.
+Apply the complete conforming Portfolio decision without another Root approval. Return concrete
+conflicts to the same conversation; independent authorized DM work continues. Pending decision is
+not PARK and does not free a slot. Only Portfolio/owner disposition releases it after safe producer
+handover and knowledge preservation. Count occupied/reserved before replacement; reuse existing DMs.
+No unchanged advice ping-pong, duplicate requests or local lifecycle substitute.

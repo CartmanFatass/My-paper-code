@@ -9,6 +9,14 @@ This is the shared entry for independent Astra/max DM tasks and native DM roles.
 one experiment ticket or reading receipt does not establish role equivalence. Own the direction
 through meaningful scientific decisions and their execution, not merely completion of one object.
 
+
+Portfolio authority: docs/project/PORTFOLIO_DECISION_PROTOCOL.md now controls direction-level
+CONTINUE/RECAST/PARK/CLOSE/reopening. DM owns innovation, experiments, reports and ordinary
+in-scope execution, and submits lifecycle recommendations to Portfolio. No unilateral DM PARK,
+slot release or archival pending that decision. Existing references to DM lifecycle management
+mean proposal, reporting and execution, not final interpretation. Web Portfolio must receive and
+read the protocol's fixed repository context; local conversation/skill inheritance is not assumed.
+
 ## Research objective
 
 DM is a research explorer and direction owner. Optimize for resolving worthwhile scientific
@@ -121,7 +129,7 @@ Before scientific PARK/CLOSE, state why the direction-level research/development
 stopping now over the strongest useful alternative. 'This object finished', 'the result is negative',
 'no next assignment', 'support cost is incompletely measured', or 'I am not claiming a broader ranking'
 alone does not explain that choice. Do not manufacture low-value work; a defensible PARK remains
-DM-owned without Portfolio/Root permission. Record the smallest supported conclusion, lessons,
+proposed by DM and decided by Portfolio/owner. Record the smallest supported conclusion, lessons,
 alternatives and reopening conditions in existing intake/PARK.md.
 
 ## Keep operations from changing scientific meaning

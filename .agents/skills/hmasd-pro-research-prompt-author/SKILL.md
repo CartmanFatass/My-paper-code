@@ -82,19 +82,16 @@ returns one factual receipt directly to that parent through App task messages.
 No scheduled automation is added. Read docs/project/ROOT_OPERATIONS.md for current routing. Contradictions or evidence gaps remain explicit; a complete
 archive alone is not science acceptance. No new approval or experiment gate is added.
 
-### Scientific review and owner-requested Portfolio scope
+### Scientific review and Portfolio finality
 
-Direction Pro Convergence is the independent scientific Reviewer. Author a review of design,
-evidence interpretation, conclusions or successor plans with concrete uncertainties; request
-material findings, reasons and proportionate corrections/claim limits. DM responds and owns the
-final direction/lifecycle decision. Do not ask Pro to approve funding, PARK/CLOSE, or ordinary next
-steps. Retain the meaningful review role and scientific independence, not a generic advice prompt.
-
-Portfolio supplies reports and the scoped vacancy selection described above. Other new Portfolio
-consultations need explicit owner scope; use hmasd-portfolio-task to preserve that scope. the request-owning DM
-publishes and archives mechanically, while DMs retain science. A report or recommendation does not
-authorize global changes. The scoped owner-delegated vacancy workflow follows PEER_DM_COORDINATION.md; this is not blanket
-PRO_FINAL authority or approval for ordinary DM research. Historical accepted packets preserve their bindings and full answers through closeout.
+Direction Pro independently reviews evidence; DM responds and owns ordinary research execution.
+Portfolio is the global scientific synthesizer and final direction-level interpreter under
+docs/project/PORTFOLIO_DECISION_PROTOCOL.md. Include that protocol's web-context instruction in
+every new Portfolio TASK/prompt, with fixed source manifest and actual accessible repository
+contents. Cover global context, affected direction report/review/contrary evidence, applicable
+spec and focused foundations. A local file citation is not provider access. Lifecycle questions
+are authorized direction reports, not per-experiment permission requests. Archive complete
+answers and apply conforming decisions; preserve accepted historical requests without resending.
 
 ### Fixed scientific and method sources
 

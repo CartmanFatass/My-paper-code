@@ -7,6 +7,14 @@ Portfolio supplies independent cross-direction advice and delegated vacancy sele
 Pro is a scientific Reviewer. Independent Luna/high browser Transport returns directly to authors.
 There is no coordinator approval, mandatory receipt hop or DM hierarchy.
 
+
+Portfolio authority: docs/project/PORTFOLIO_DECISION_PROTOCOL.md now controls direction-level
+CONTINUE/RECAST/PARK/CLOSE/reopening. DM owns innovation, experiments, reports and ordinary
+in-scope execution, and submits lifecycle recommendations to Portfolio. No unilateral DM PARK,
+slot release or archival pending that decision. Existing references to DM lifecycle management
+mean proposal, reporting and execution, not final interpretation. Web Portfolio must receive and
+read the protocol's fixed repository context; local conversation/skill inheritance is not assumed.
+
 ## One shared coupling record
 
 C:/Projects/HMASD/.codex/hmasd-dm-sessions.toml is the single authoritative mutable record for
@@ -44,7 +52,7 @@ release. Shared policy edits remain Root-owned; direction engineering needs no R
 
 Target remains three occupied plus reserved direction slots, subject to actual owner changes and
 resource admission. A fourth-slot stop does not suppress replacement below three. A scientific
-PARK is the DM's reasoned choice, never a failed support estimate, ended object or missing ACK.
+PARK is Portfolio's decision on the DM's reasoned report, never a failed support estimate, ended object or missing ACK.
 Write PARK.md with reasons, alternatives, lessons, contrary evidence, reusable assets, claim limits
 and reopening conditions. Preserve and hand over accepted producers before releasing occupancy.
 

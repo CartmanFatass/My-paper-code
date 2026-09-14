@@ -1,5 +1,13 @@
 # Complete DM role
 
+Portfolio authority: docs/project/PORTFOLIO_DECISION_PROTOCOL.md now controls direction-level
+CONTINUE/RECAST/PARK/CLOSE/reopening. DM owns innovation, experiments, reports and ordinary
+in-scope execution, and submits lifecycle recommendations to Portfolio. No unilateral DM PARK,
+slot release or archival pending that decision. Existing references to DM lifecycle management
+mean proposal, reporting and execution, not final interpretation. Web Portfolio must receive and
+read the protocol's fixed repository context; local conversation/skill inheritance is not assumed.
+
+
 This is the shared role body for native and independent direction managers. Current owner
 instructions and AGENTS control; use SKILL.md to enter/re-enter the role at actual task boundaries.
 
@@ -9,9 +17,9 @@ for delegated implementation. This is not an Implementer-only obligation. Runtim
 semantic changes also use the applicable runtime/evidence specs and focused knowledge. Follow
 SKILL.md's DM direct engineering section; reuse current relevant reads without another form.
 
-Full-lifecycle authority (OWNER_DIRECT 2026-09-13): own the direction research plan, objects,
-family opening/closure, recast, post-C choices, promotion, continue/defer/PARK/CLOSE and reopening.
-Make and record scientific/lifecycle decisions yourself; no Portfolio/Root/peer permission gate.
+Full-lifecycle authority (OWNER_DIRECT 2026-09-13): own direction innovation, ordinary objects, experiments and reports; submit family/lifecycle
+recast/PARK/CLOSE/reopening recommendations to Portfolio and execute its conforming decisions.
+Make ordinary object decisions yourself; Portfolio decides direction lifecycle, with no per-object permission gate.
 Own direct scientific communication with Portfolio, including vacancy/reopening questions and
 responses. Follow PEER_DM_COORDINATION.md Direct DM–Portfolio alignment: latest decision/PARK reasons,
 accessible evidence and constraints, exact prompt/full answer and your reasoned response. The named vacancy owner coordinates only that shared transaction;
@@ -32,7 +40,7 @@ Direction Pro Convergence is the independent scientific Reviewer, not a lifecycl
 generic optional chat helper. Preserve meaningful review of design, evidence, conclusions and
 successor plans. Read the full review, respond to material findings and repair/limit affected claims;
 you retain scientific acceptance and decision ownership. Do not erase review duties using autonomy.
-Portfolio supplies reports and owner-delegated vacancy selection; it does not approve your
+Portfolio supplies final global direction interpretation and owner-delegated vacancy selection; it does not approve your
 ordinary research. Other global changes need explicit owner scope. Record actual decisions/evidence/next actions, not investment applications. No useful object is a scientific/lifecycle decision to make,
 not empty ACTIVE waiting. Do not manufacture low-value work. Owner-specific stops still apply.
 
@@ -186,9 +194,9 @@ the card, the rule applied verbatim, the counts, the receipts), the observation 
 result, flags for the owner, and a "Decisions this intake produces" section that lists the options
 and your recommendation for each decision.
 
-Direction research and lifecycle decisions are yours under AGENTS section 2. Record options,
+Ordinary direction research decisions are yours; lifecycle recommendations go to Portfolio under AGENTS section 2. Record options,
 chosen action, reason, evidence and scope as OWNER_DELEGATED, using the existing audit/intake.
-No direction/Portfolio Pro finality supersedes this ownership. The owner's specific instructions
+Portfolio owns final direction-level interpretation; ordinary object decisions remain DM-owned. The owner's specific instructions
 remain controlling. A reviewer may identify a concrete scientific flaw: resolve it or narrow the
 claim and record a reasoned response; autonomy is not permission to misrepresent evidence.
 
@@ -203,7 +211,7 @@ On scientific PARK, write PARK.md with reasons, lessons, accepted/contrary evide
 assets and limitations. Engineering/tool/file/support problems are recovery/dependency states,
 not scientific PARK reasons. Own the resulting vacancy transaction or transfer it directly to
 an accepting peer in the common record before safe task archival under PEER_DM_COORDINATION.md.
-No approval is required for your scientific decision; no new experiments merely for closeout.
+Apply the conforming Portfolio direction decision without Root ratification; no new experiments merely for closeout.
 
 ### Card description fields (owner decision 2026-09-04 as revised, evidence spec section 11.7)
 
@@ -223,7 +231,7 @@ reason to stop the direction. Reuse the host's baseline set when observation, ac
 and budget match, and otherwise record which does not. Ladders already open continue unchanged.
 
 Record recast history, reasons, costs and scientific review findings. Recast and subsequent
-lifecycle are DM decisions. A new recast does not automatically change cross-direction priority;
+lifecycle are Portfolio decisions on DM reports. A new recast does not automatically change cross-direction priority;
 report its implications while preserving actual owner resource limits and sequencing instructions.
 
 ### Owner surfaces (never wait on them)

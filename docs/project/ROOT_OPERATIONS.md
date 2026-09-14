@@ -3,6 +3,14 @@
 Current control: C:/Projects/HMASD, Windows PowerShell. Read live DM/service endpoints and shared
 coupling state from .codex/hmasd-dm-sessions.toml. Historical task IDs are not dispatch routes.
 
+
+Portfolio authority: docs/project/PORTFOLIO_DECISION_PROTOCOL.md now controls direction-level
+CONTINUE/RECAST/PARK/CLOSE/reopening. DM owns innovation, experiments, reports and ordinary
+in-scope execution, and submits lifecycle recommendations to Portfolio. No unilateral DM PARK,
+slot release or archival pending that decision. Existing references to DM lifecycle management
+mean proposal, reporting and execution, not final interpretation. Web Portfolio must receive and
+read the protocol's fixed repository context; local conversation/skill inheritance is not assumed.
+
 ## Equal direction owners
 
 Independent Astra/max DMs own full direction science, implementation and optional native Sol/medium
@@ -20,7 +28,7 @@ Read canonical controls directly; independent science does not wait for main mir
 
 ## Research continuity
 
-DM chooses useful next work or a reasoned scientific/development PARK/CLOSE, considering alternatives
+DM chooses useful in-scope next work or submits a reasoned scientific/development PARK/CLOSE recommendation, considering alternatives
 and contrary evidence. A tool fault, support estimate, completed object or missing ACK is not a
 scientific stopping reason. Keep recovery and actual awaited producers explicit; do independent work.
 Ordinary objects carry prospective DM-declared finite plans. Toy >5400s and UAV >64800s are routine
