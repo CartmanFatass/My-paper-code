@@ -1,7 +1,7 @@
 # GitHub research collaboration
 
 Owner-delegated Clerk vacancy requests may instead use the direct Codex in-app browser route
-in CLERK_OPERATIONS.md and hmasd-portfolio-task. The GitHub/native-Transport requirements below
+in CLERK_OPERATIONS.md and hmasd-portfolio-task. The GitHub delivery requirements below
 apply to requests using this delivery workflow, not as gates on that direct vacancy route.
 
 
@@ -53,9 +53,9 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
    that the fixed TASK is published and that the delivery branch and Issue exist.
    Commit and push the updated internal handoff.
 3. Send the rendered handoff via send_message_to_thread to the registered independent browser Transport.
-   Source and parent are the author (DM for direction nodes, Clerk for new Portfolio agendas); operator is its actual request-batch child.
-   Legacy requests retain their frozen metadata; assigned recovery records the actual native
-   parent/child separately. Transport runs one exact preflight and the appropriate effect branch,
+   Source and parent are the author (DM for direction nodes, Clerk for new Portfolio agendas); operator is the registered independent browser task.
+   Legacy requests retain their frozen metadata; assigned recovery records the actual App
+   parent/executor separately. Transport inspects the actual page and request state,
    then bounded observation/archive and one direct receipt. Verified pre-Send nonacceptance permits
    repairing and continuing the same operation; uncertain or accepted effects permit observation only.
    Preserve accepted request content and migration evidence under ROOT_OPERATIONS.md;
@@ -132,7 +132,7 @@ ROOT_OPERATIONS.md, “Current records, integration and cleanup”. Request-spec
 Send and archive fields belong to that request; carrying a prior round's fields into a new
 current record is not delivery evidence. Preserve them in their original request history.
 
-For owner-commissioned Portfolio consultation Clerk is author/source/parent and its native
-Transport is operator. Direction scientific-review packets remain DM-owned. Preserve accepted
+For owner-commissioned Portfolio consultation Clerk is author/source/parent and the registered
+independent browser Transport is operator. Direction scientific-review packets remain DM-owned. Preserve accepted
 request identities and archive full answers; DM responds to scientific findings, and Portfolio
 advice enters the user report rather than automatically changing the research layout.
