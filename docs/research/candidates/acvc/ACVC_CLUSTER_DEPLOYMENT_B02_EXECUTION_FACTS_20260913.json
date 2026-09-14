@@ -202,9 +202,19 @@
     "dependency": "Permitted user-managed/shared-runtime reconnection; then original native Transport resumes this same operation/request.",
     "status": "Full scientific review not formed or archived. Exact unsent operation and all failure receipts preserved; no new request or scientific invocation."
   },
-  "status": "One valid B/EXPLORE accepted with both primaries UP; source/raw evidence/checkpoint preserved and remote cleanup complete. No active native producer. Scientific review is unsent pending permitted shared-runtime reconnection; full review, DM findings response and lifecycle decision remain unfinished. ACTIVE technical dependency; no further empirical object selected.",
+  "execution_control": {
+    "state": "OWNER_PAUSED",
+    "paused_utc": "2026-09-14T00:30:49Z",
+    "in_flight_handles": [],
+    "provider_request_in_flight": false,
+    "active_observer": null,
+    "retained_native_transport": "/root/acvc_transport",
+    "scientific_lifecycle": "ACTIVE unchanged; this execution pause is not PARK/CLOSE",
+    "resume_condition": "Explicit owner resumption first; then same HANDOFF/request/operation and permitted runtime recovery, full scientific review and DM findings response. No automatic Send or successor."
+  },
+  "status": "OWNER_PAUSED at a safe recoverable boundary. Valid B02 result/raw evidence/checkpoint retained and remote cleanup complete; no run, generation or observation in flight. Prepared review remains explicitly unsent. Runtime recovery, independent review, DM findings response and lifecycle judgment remain unfinished and inactive; scientific lifecycle unchanged.",
   "stop": "No scientific retry/replacement, extra panel, checkpoint selection or automatic successor.",
-  "updated_utc": "2026-09-14 00:23:29 UTC",
+  "updated_utc": "2026-09-14 00:30:49 UTC",
   "monitor": {
     "native": "/root/acvc_monitor",
     "adopted": true,

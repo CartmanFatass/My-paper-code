@@ -26,6 +26,24 @@ approval, reserve or re-entry wording is not a current dispatch or permission re
 - Current lifecycle: ACTIVE, DM-owned. Existing owner priority MEDIUM/recasts 2 and lowest-ACTIVE contention order remain until the owner changes cross-direction ordering. Portfolio reports rather than approves this state.
 - Current authoring checkout/branch: `C:/Projects/HMASD-worktrees/codex-acvc`, `codex/acvc`; live task endpoints come from main `.codex/hmasd-dm-sessions.toml`.
 
+## Execution control — OWNER_PAUSED, 2026-09-14 00:30:49 UTC
+
+The latest explicit owner instruction pauses direction execution at its current safe boundary.
+No new experiment, Pro Send/review request, research object, successor or connection-repair work
+starts. B02 is terminal, technically/scientifically intaken to its bounded result, retained and
+remotely cleaned; its Monitor has no active handle. The original independent-review request
+`2026-09-13-acvc-cluster-b02-scientific-review-01` is prepared but **unsent**: operation
+`38dbacca-f772-43f5-ad16-31dd94ff302d` still has `sendAttempted=false`, no provider pairing/archive.
+No native experiment, provider generation or observation is in flight. The original Transport
+`/root/acvc_transport` is retained but inactive. This is an owner execution pause, **not** a DM
+PARK/CLOSE decision; scientific lifecycle ACTIVE and existing priority remain unchanged.
+
+Resume only on an explicit owner resumption instruction: read the latest B02 intake pause
+section, recover the same operation/binding and actual allowed runtime prerequisite, then complete
+independent scientific review and DM findings response/lifecycle judgment. No automatic retry,
+Send or successor follows the prepared request or a repaired browser. Clerk receives actual pause
+facts; historical next-action wording below is inactive while this owner pause applies.
+
 ## Current execution — cluster B02
 
 DM selected the one independent same-law C-fit and C/F/own-dwell64 observation in
