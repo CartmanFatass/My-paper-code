@@ -9,7 +9,7 @@
 
 | 方向 | 已知科学位置 | 当前工作与席位 |
 | --- | --- | --- |
-| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B13 实际学习 G_U=+0.072437，nearest 收益+0.154964，greedy 对比-0.019784；先验强度学到1.211991，modal 与 greedy 全512行测量相同，恢复取舍和 B11 缺失保留。 | 占用1席，完整 Portfolio CONTINUE 已读取、回应并应用。选定 B13 已完成1,024更新/4,358,144ticks，完整命令163.92s、exit0；完整原始证据已校验。[结果与 intake](../candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md)。独立 B13 实际结果审阅已派发，等待完整答复；未默认追加 seed 或 PARK/CLOSE。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B13 实际学习 G_U=+0.072437，nearest 收益+0.154964，greedy 对比-0.019784；先验强度学到1.211991，modal 与 greedy 全512行测量相同，恢复取舍和 B11 缺失保留。 | 占用1席，前次完整 Portfolio CONTINUE 已实际执行为 B13：1,024更新/4,358,144ticks，完整命令163.92s、exit0。291行完整独立审阅已读并实质回应，未发现已证实的失效缺陷。[当前方向报告](../candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md)建议可逆 PARK，并将一个同法则新独立实例列为接近的反方案；仅为建议，未PARK/CLOSE/释放席位。待前序MGTAP会话实际释放后提交新报告。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 对称有限选率双方均选1e-4；全新8252主量+0.023704897713093642 J，COND_ABOVE_MEI。一次选择/一对最终训练，历史混合符号和DENSE通用默认保持；不声称稳定排序或调参收益。 | 占用1席。8拟合/589824ticks/4096Adam完整完成，658.02s、exit0，原始证据保全。166行独立结果审查已读并实质回应；[完整方向报告](../candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/REPORT.md)及固定请求已交既有Transport，等待Portfolio完整方向答复；Transport报告已接受并生成中。建议固定率新配对而非已启动后继实验；无槽位变更。 |
 | [FOLR](../candidates/vap_folr_core/DIRECTION.md) | B03完整比较Generic4.92594、BANK-1.71078，差值-6.63672；B02差值-4.83086单独保留。两次完整学习与评估实例均偏向Generic，不声称稳定排名或实体历史普遍无用。 | 占用1席，CONTINUE / MEDIUM。两臂均完成5000训练/4969更新/128最终评估，3779.85s完整调用合计；原始证据已保全，终态远端执行副本已清理，无活动native实验。[科研解释与后继方案](../candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md)已写成固定独立审查任务并派发到现有Transport，实际provider接受/完整答复尚待核实；未选择新拟合或PARK。 |
 
@@ -17,9 +17,8 @@
 停止第四个方向限制扩容，不停止三席中的研究和接续。旧报告的 UCOPE/LCAC/ACVC 工作集和
 RCLE/MGTAP/FOLR 归档表已经过期，不能用来判断现在是否“开始后直接结束”。
 
-RCLE 当前完整审查/回应固定于93bb8ffcd4de430a722bbb6b84e9733f40d26782与
-6f13c2b2fa713414e777190b7bcfbec11243b61a；新报告及一次未定位原因的保留权重分析见
-094d1ff2a3e5f984d62e00dae782cda31a11be52。MGTAP 当前科学卡/重入依据见
+RCLE B13 完整审查固定于d45d4bc6ea2012b93d1d044402268520be5eea9a，DM 实质回应和后续方向取舍报告见
+998c4dbde11727b2ed26ced1bebaddc60b164c43；此前 E01 审查、前次 CONTINUE 理由及全部反证保留。MGTAP 当前科学卡/重入依据见
 3594eafe28ed91b2558fcc064e46ea714edd2e1c；FOLR 的完整裁决、修正及实际应用见
 4776103de4f55beaee610c52506112651bfaed04。这里引用已有 DM 结论，不新增跨方向的数值排序。
 
@@ -39,7 +38,7 @@ Portfolio 的新决定前瞻应用，不擅自重写结果或批量重启旧方�
 
 FOLR 请求2026-09-14-folr-portfolio-direction-reconciliation-01已完成并应用 CONTINUE；
 完整答复保全于4776103de4f55beaee610c52506112651bfaed04。RCLE 请求
-2026-09-14-rcle-e01-direction-decision-01完整答复已按一次 Send 归档，20,895字节/SHA256 7c7476fca152aec673c7ff0974ae182c0ef30c091e230a4ba7039ac71f06a416；CONTINUE 于5f4abd6f应用，B13随后实际完成，完整证据见c58ec2fb4。该对话现已释放，没有新空缺。
+2026-09-14-rcle-e01-direction-decision-01完整答复已按一次 Send 归档，20,895字节/SHA256 7c7476fca152aec673c7ff0974ae182c0ef30c091e230a4ba7039ac71f06a416；CONTINUE 于5f4abd6f应用，B13随后实际完成，完整证据见c58ec2fb4。此前 RCLE 请求已结清并释放会话供后继 MGTAP 请求；当前归属以共享登记表为准，没有新空缺。
 旧6aa7836e会话答复已由552f0dce7904e35206b8e32f9180ab85aee822ad保全，其 DISH 建议未应用。
 新的 Portfolio 决定须基于实际读取的固定权限、全局上下文、完整结果/反证/审查和 DM 回应。
 

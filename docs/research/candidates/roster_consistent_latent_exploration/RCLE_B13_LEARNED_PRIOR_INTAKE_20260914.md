@@ -1,5 +1,8 @@
 # B13 intake — learning observed, greedy increment not observed
 
+Current review state: complete independent result review read and substantively answered below.
+DM is preparing a direction-level Portfolio report; no new PARK/CLOSE, fit or slot release is applied.
+
 The complete B13 invocation answers the concrete objective selected by the full Portfolio
 CONTINUE. The package learned from its own initialization and beat nearest, while sampled
 service/full-Y still trailed greedy and all measured modal/greedy outcomes tied. This is a
@@ -131,3 +134,112 @@ the verified local archive and supervisor records remain. REMOTE_CLEANUP.json re
 exact path, complete inventory and removal of its Git worktree registration. Cleanup
 took 0.6578088s enclosing support wall; it changes no scientific result or authoring branch.
 The canonical owner-console review check at this clean boundary returned [], no override.
+
+## Complete independent review and DM response — 2026-09-14
+
+DM has read the entire 291-line independent response, including all conclusion, forward-choice,
+access and reference sections. Its actual delivery commit is
+d45d4bc6ea2012b93d1d044402268520be5eea9a; it adds only the authorized
+[RESPONSE.md](pro_packets/20260914_b13_learned_prior_review/archive/RESPONSE.md) on parent
+0c502d78363e1ba0067b1d5983f4154aaaab0459. The complete original Git blob is 45,167 bytes,
+SHA256 3931f16f20994687cb63d304796915dda3378eb6c737bcc6cbaa47e148b2cf3d, exactly equal to
+the received local archive. The Issue8 delivery comment5662100435 names the correct TASK,
+parent and response. ARCHIVE_RECONCILIATION.json corrects a receipt-only detail: the reported
+45,166-byte web capture was not the canonical Git blob; there is no actual local/Git content
+difference and no added-LF correction is needed. The original Transport receipt is preserved.
+No additional Send, scientific execution or changed response followed this reconciliation.
+
+The reviewer accessed the 22 required text scopes and full question at their fixed versions,
+with no decision-critical textual access gap. It did not independently unpack the optional
+native archive, rerun the analyzer or read all native dependencies. DM accepts its scientific
+source-and-record scrutiny, not a claim of an independent native replay or complete runtime
+oracle. Its headline found no demonstrated defect invalidating the present primary comparison.
+
+DM responds to the substantive findings as follows.
+
+1. **Real learned law and actual exposure.** Accept. The normalized scalar score derivative,
+   shared team-action likelihood, direct full-Y/Adam path, five separate roles and all work
+   counts are consistent with the declared package. There is no scientific correction that
+   calls for new training, data deletion or a changed endpoint. Parameter movement proves
+   participation in optimization, not a useful behavioral contribution of every coordinate.
+2. **Causality and the prior hypothesis.** Accept. In fixed-state/fixed-scorer algebra,
+   increasing exp(eta) raises the non-greedy relative-score threshold. Theta and trajectories
+   also changed, so observed eta growth does not prove a globally reduced non-greedy rate,
+   imitation, causal service harm or an independently useful eta contribution. Historical
+   B12 and post-training eta replacement would not identify the training effect of eta.
+   We make no such claim and therefore select no mandatory matched-control/decoder fit.
+3. **Conditional uncertainty and outcome equality.** Accept. Eight adverse cell means do
+   not mean every scenario is adverse: primary12→8 has 3 favorable, 12 adverse and 49 tied
+   service differences. Normal intervals are conditional approximations for the declared
+   semantic scenario domains, not exact coverage or training uncertainty. Comparators share
+   the final fit/panel; repeated views are not independent evidence. All512 modal outcome
+   ties on a new prospective panel remain finite consequences, not policy/action equivalence.
+4. **Recovery and actual use.** Accept. Keep both tau and failure counts, including the
+   primary12→8 mixed direction and both8→8 sampled benefits. Learning also worsened primary
+   recovery relative to initialization (54 to61 failures), alongside its positive U/full-Y
+   gain. No post-result utility weight turns these facts into total dominance. The current
+   greedy-replacement question has no agreed service sacrifice for those local benefits.
+5. **Checkpoint and runtime limits.** Accept. Evaluation freezing is the actual runner's
+   before/after measurement, not two independently saved checkpoints. B11's missing endpoint
+   and unknown SIG11 remain; neither this successful run nor the completed reviews repairs
+   it. B10/B12 are the two completed fixed-prior endpoints out of three attempts; B13 is a
+   changed-law fit, so the three completed endpoints are not one algorithm's three-seed study.
+6. **Costs and requirements.** Accept. Keep native wall, its nested body, named support and
+   UNKNOWN tails separate. Provider's displayed 17m51s is its UI work duration, not measured
+   author/support CPU or a complete project bill. The605.33s enumerated native-chain sum is
+   never compared with support600s. Interest .025, planning windows and ordinary watchdogs
+   remain neither lifecycle nor validity criteria. Scientific evidence requirements hold.
+7. **Specific authority drift.** Accept the identified version conflict. Current canonical
+   empirical-spec8.1 still carries the superseded2026-09-13 DM-final/Clerk/report-only wording;
+   owner-item skill/README retain related old text. Current owner Portfolio protocol and
+   task-specific authority govern direction disposition. This changes no scientific burden.
+   The shared-text correction belongs to Root; it is not a reason to stop science, re-review
+   the result or wait for an ACK before preparing the proper Portfolio report.
+
+### Updated scientific judgment and next consequence
+
+The earlier CONTINUE had a concrete untested reason: allowing prior strength to learn might
+let this package attain native value beyond fixed greedy. B13 has now actually tested that
+freedom. It is not a dead scalar or an unperformed proposal, but this realization did not
+attain the target increment. That is a scientific update beyond merely ending a card.
+
+The strongest continuation is one unscreened independent training-and-evaluation instance
+of the SAME learned-prior law. It is a new question about recurrence of this changed
+programme, not a repeat of B12's fixed-prior programme. It could show an incremental result
+or materially different service/recovery tradeoff and change whether to carry the learned
+package forward. One fit leaves that possibility open. It would require65,536 training plus
+2,560 evaluation episodes,4,358,144 ticks and1,024 Adam steps; old163.92s is a planning anchor,
+not a future total cost. A second fit is neither obligatory nor forbidden by the sign.
+
+DM nevertheless currently recommends **reversible PARK, submitted to Portfolio rather than
+applied locally**, with that single new instance as the close runner-up. This is a qualitative
+development-value judgment: two older fixed-prior completions had no sampled greedy increment;
+the specifically proposed new training freedom now also has no sampled increment and no modal
+increment on a genuinely new panel. Those different programmes are not pooled for inference,
+but their related adverse development evidence matters. Actual learning mainly supplies a
+better version of the starting stochastic package in the observed outcomes, while the strong
+legal rule remains available. No measured use tradeoff currently makes its recovery advantages
+a sufficient substitute for the service/full-Y deficit. These facts weaken the marginal case
+for extending this recipe's sampling sequence at a finite three-slot research boundary.
+
+This recommendation does NOT claim a converged optimizer, an incapable representation,
+universally optimal greedy, a futile family, a high estimated probability of failure, or a
+mandatory positive-first/new-mechanism gate. Another realization can contradict the pattern;
+declining it accepts the risk of missing useful value. We do not regard the lack of a selected
+successor or a fully known support bill as a stopping argument. No concrete new representation,
+state-dependent prior or objective has yet earned priority over the honest same-law alternative;
+that absence alone is not the reason for PARK. Permanent CLOSE is not supported.
+
+Options for the direction report are (a) reversible PARK of current development, recommended;
+(b) CONTINUE for one finite independent same-law programme, strongest alternative; or a
+Portfolio-explained concrete conforming objective that improves on those choices. A new
+direction/family choice belongs in that report. DM accepts the review's argument against
+automatic empirical extension and gives the explicit weighing above, not a reviewer veto.
+No scientific retry, extra fit, disposition or vacancy is created by this recommendation.
+
+Owner-delegated decision (unattended, standing2026-09-03 instruction): publish the full review
+response and submit this recommendation/alternative through the current Portfolio protocol.
+The existing CONTINUE and occupied slot persist pending its direction interpretation. MGTAP
+owns the preceding actual serial Portfolio request; RCLE prepares its report independently
+and uses the same shared conversation only after that owner releases it. This is a real
+ordering dependency, not PARK, a new funding request or a reason to fabricate an idle producer.

@@ -1,0 +1,30 @@
+{
+  "event": "RCLE_B13_FULL_REVIEW_RESPONSE_AND_DIRECTION_REPORT_20260914",
+  "utc": "2026-09-14T10:21:53.421480+00:00",
+  "base_head": "f26a24611ec3d728260bb96d1d1809c151581cc2",
+  "source_commit": "998c4dbde11727b2ed26ced1bebaddc60b164c43",
+  "main_previous_acceptance": "a65a0013fec15eb1cc979566ea3b193abc623741",
+  "paths": [
+    "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/PARK.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_RESULT_EVIDENCE_20260914.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/archive/ARCHIVE_RECONCILIATION.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/archive/CHAT_RECEIPT.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/archive/ISSUE_COMMENT.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/archive/RESPONSE.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/archive/TRANSPORT_FACTS.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/OWNER_PACKET.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/PROPOSED_COUNTS.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md",
+    "docs/research/portfolio/audit/2026-09-14.md",
+    "docs/research/portfolio/owner/briefs/roster_consistent_latent_exploration/2026-09-14_B13.md",
+    "docs/research/portfolio/owner/inbox/2026-09-14/20260914-rcle-003.json"
+  ],
+  "full_response_original_commit": "d45d4bc6ea2012b93d1d044402268520be5eea9a",
+  "full_response_sha256": "3931f16f20994687cb63d304796915dda3378eb6c737bcc6cbaa47e148b2cf3d",
+  "main_ledger_line": 54,
+  "item_main_trace": "Added through item.py; source ledger locator retained as original provenance",
+  "peer_and_portfolio_rows_preserved": true,
+  "disposition_applied": false
+}
