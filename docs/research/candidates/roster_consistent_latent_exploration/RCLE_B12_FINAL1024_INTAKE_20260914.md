@@ -80,3 +80,24 @@ was an earlier console observation; final B11 intake retains164 complete updates
 
 Independent full review and DM finding responses will be appended here. Current
 claim ceilings, actual failure accounting and cost uncertainty already apply.
+
+## Independent review accepted; full response pending
+
+Request `2026-09-14-rcle-b12-scientific-review-01` is published with fixed TASK
+`0d8a29cb832da3e998c97133ee0dd325801ad08b` and HANDOFF
+`d91427da54cb8999df5b2cdbe6cf449e2add87d0`; input evidence remains
+`d3db2215fc12cf6e42a2e1af529bb60a29970357`, with separately pinned method/old sources.
+Native `/root/tr_rcle_b12` reported strict operation
+`c13a3806-4a9c-456c-93ab-2ebab3b0fa47` accepted with `sendAttempted=true` and provider
+user `673c3463-5bc2-43a6-9134-d3f1a2f33d01` on conversation
+`6aa55611-bf80-83e8-b018-70e30a95b28a`. A menu failure was repaired before Send;
+the subsequent non-sending wait timeout does not permit resend. No full response
+or scientific-review completion is asserted at this checkpoint. Transport observes
+the same request and returns the complete artifact directly to this DM for response.
+
+Separately, read-only comparison of the four retained B10/B11/D1/B12 native source
+snapshots confirms identical50757-byte C++ source, SHA256
+`18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819`, matching the
+executed B12 source commit and summary metadata. The recorded receipt is
+`b12_final1024_s32_20260914/ARCHIVED_SOURCE_IDENTITY.json`. This rules out an
+unreported C++ source patch between those runs, not an unknown runtime fault.
