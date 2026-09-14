@@ -1,0 +1,15 @@
+{
+  "source_commit": "867fdadff71eb9fac4a85b4e3cb44a0bfc55d033",
+  "response_bytes": 13545,
+  "response_sha256": "382b8634a7dbbbb9c5f348eb6c375bf49ee9d3438cc0a43c98e5845b62407c47",
+  "line_count": 70,
+  "trailing_lf": true,
+  "changed_scope": [
+    "docs/research/candidates/acvc/pro_packets/20260914_cluster_b03_scientific_review/archive/RESPONSE.md"
+  ],
+  "author_read_full_response": true,
+  "accepted_user_node": "e21afbd9-9939-4a15-8201-6248f05a1d38",
+  "assistant_receipt_node": "3a8f83e5-ef5f-4a0a-a81e-91cbc7b1a768",
+  "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5664914614",
+  "transport_dom_count": "13544 bytes without terminal LF; Git blob canonical bytes recorded separately, not overwritten by DOM rendering"
+}

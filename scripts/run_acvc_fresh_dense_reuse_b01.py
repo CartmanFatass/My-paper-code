@@ -175,8 +175,9 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
         "resources": "resources_unmeasured",
         "checkpoint_selection": "final checkpoint after the fixed fit; no fit-quality gate",
         "cost_law": (
-            "imports+construction + 131072 training team steps + 1024 full-rollout "
-            "replay/backward/Adam calls + 3 checkpoint loads + 49152 evaluation team "
+            f"imports+construction + {train_episodes * horizon} training team steps + "
+            f"{2 * train_episodes} full-rollout replay/backward/Adam calls + "
+            f"{len(eval_arms)} checkpoint loads + {len(eval_arms) * eval_episodes * horizon} evaluation team "
             "steps + C/F/dwell checks + publication and process exit"
         ),
         "allocation_seconds": dict(allocation_seconds) if allocation_seconds is not None else {
