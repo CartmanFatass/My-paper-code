@@ -30,16 +30,26 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
-**Current lifecycle: ACTIVE/MEDIUM; bounded DM re-entry on 2026-09-14.**
-The [new intake](FOLR_REENTRY_INTAKE_20260914.md) prospectively changes the prior
-value judgment: the first complete fresh/fresh learning contrast merits one direct
-observation. DM selects [entity-history B02](FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md),
-one new BANK16/Generic64 training block on the unchanged equally informed H20 host.
-The fixed F reference-use result remains GENERIC_ONLY_BANK_WORSE; E's missing
-contrast stays unavailable. Prior PARK and all negative evidence remain historical
-facts. Portfolio filled the ACVC vacancy; it did not select this scientific object.
-The next boundary is B02's complete result or concrete failure, followed by DM's
-intake/lifecycle choice, without an automatic second block or approval handshake.
+**Current lifecycle: ACTIVE/MEDIUM for B02 scientific review and closeout.**
+Both selected fresh fits in [entity-history B02](FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md)
+completed on 2026-09-14: Generic mean -0.65296875, BANK mean -5.483828125,
+BANK-minus-Generic -4.830859375. The frozen branch is **GENERIC_ABOVE_MEI**.
+This is the first complete prospective fresh-learning comparison on this exact
+equally informed H20 host, with one training realization per arm. It establishes
+an observed package preference, not training-population superiority, component
+cause, convergence or Generic competence. E's original missing contrast remains
+unavailable; F's outcome-informed retained-reference use remains separate.
+See the [complete result](FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md)
+and [current intake](FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md). There is no live
+scientific invocation or selected successor. DM selects one independent Convergence
+review of the new interpretation and value judgment, then completes the lifecycle
+decision. The current recommendation is reversible PARK/MEDIUM; another fresh
+block remains a scientifically legitimate alternative, with no automatic launch.
+
+The [re-entry intake](FOLR_REENTRY_INTAKE_20260914.md) records why the first missing
+fresh/fresh comparison merited one observation. Its rationale was independent of
+the eventual sign. Prior PARK and all negative evidence remain historical facts.
+Portfolio filled the ACVC vacancy; DM selected and completed this scientific object.
 
 **Previous lifecycle judgment (2026-09-13), superseded prospectively above:**
 Owner lifted the later operational pause on 2026-09-13. DM reconsidered the
