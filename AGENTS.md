@@ -55,8 +55,8 @@ new direction, replacement or revival follows a vacancy or a DM decision.
 OWNER_DIRECT 2026-09-13: this full-lifecycle DM delegation and report-only Portfolio replace older
 mandatory Portfolio/Pro finality and automatic replacement rules prospectively. Specific owner
 stops and actual resource limits remain. Preserve accepted external requests through archive;
-new advice does not automatically change global layout. Current research is resumed, with live
-state/endpoints in `.codex/hmasd-dm-sessions.toml`. Historical pauses/routes are not current rules.
+new advice does not automatically change global layout. Current research state and endpoints are
+in `.codex/hmasd-dm-sessions.toml`; historical pauses/routes are not current rules.
 
 OWNER_DIRECT 2026-09-10: DM absorbs the former CM's engineering responsibilities and implements
 directly. Under the temporary 2026-09-12 owner instruction, DM performs implementation and self-checks;
