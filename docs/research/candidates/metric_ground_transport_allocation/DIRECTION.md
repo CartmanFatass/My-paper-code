@@ -34,6 +34,15 @@ operational permission wait. [B02 E0](MGTAP_EARLY_EXPOSURE_B02_RESULT_20260913.m
 and [intake](MGTAP_EARLY_EXPOSURE_B02_INTAKE_20260913.md) retain both signs,
 all earlier contrary evidence, costs and the concrete stopping/revisit logic.
 
+The actual-result review now has fixed TASK3f9a5641e and HANDOFFe63e3b6b4,
+request2026-09-13-mgtap-early256-results-review-02, dispatched to DM-owned native
+/root/mgtap_early_results_transport. This is the concrete remaining producer;
+no numerical successor is selected. B8242 archive is published, remote checkout
+and source duplicate are removed, and policy-rejected local duplicates remain
+as recorded in [closeout](early_exposure_b02_8242_20260913/CLOSEOUT.md).
+DM has not yet applied PARK; final full-review response and PARK.md knowledge
+handoff will be sent to the current Clerk before closeout.
+
 ## Historical owner execution pause — 2026-09-13
 
 OWNER_DIRECT: research is paused at a clean, recoverable boundary. This is an

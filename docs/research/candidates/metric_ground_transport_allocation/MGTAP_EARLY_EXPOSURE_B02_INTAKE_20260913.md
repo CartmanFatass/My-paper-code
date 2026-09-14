@@ -61,6 +61,18 @@ not a duplicated run. Native process finished normally. Full evidence is in
 follows verified publication; old local8231/B8241 runtime deletion restrictions
 are retained, not bypassed or treated as research permission gates.
 
-Current pending work is this DM's concrete actual-result scientific review and
-preservation/closeout. No accepted run or Pro generation remains at this intake
-revision; the new review request identity will be recorded after publication.
+Preservation and exact remote duplicate cleanup are complete in the
+[closeout receipt](early_exposure_b02_8242_20260913/CLOSEOUT.md). The new local
+duplicate deletion was policy-rejected before process creation; those files
+remain without a workaround. No live experiment remains.
+
+Current pending work is the concrete actual-result scientific review,
+request2026-09-13-mgtap-early256-results-review-02. Its fixed
+[TASK](pro_packets/20260913_early256_results_review/TASK.md) is published at
+3f9a5641e8c8f3c4d501ea198a4aa030834e7266, exact HANDOFF at
+e63e3b6b4de9eb1d570f9cc19a81b73fe425f53b. DM dispatched its request-batch native
+Transport /root/mgtap_early_results_transport; the awaited event is its complete
+paired response archive. Dispatch alone is not a provider Send receipt. The
+fixed evidence input remains201cf6c80, and this current progress update does
+not amend the published question. Final disposition and Chinese PARK knowledge
+handoff follow DM's response to the independent review, without a Root/Clerk ACK.
