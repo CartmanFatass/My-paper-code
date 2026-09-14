@@ -119,3 +119,12 @@ record exact members/bytes/SHA256; extracted summary copies agree with native
 hashes. Published preservation and exact scoped cleanup are recorded separately.
 No other direction, historical archive, author checkout or shared object store
 is a cleanup target. E and F remain separate historical cost/evidence accounts.
+
+Published preservation and cleanup completed before the new scientific review.
+The [receipt](entity_history_b02_781401/CLEANUP_RECEIPT_20260914.json) verifies all
+three archive Git blobs at 88bc759283502a5047c89edab6b6dbce168c7b5b, every remote
+member digest, clean exact source, terminal supervisors and absent live processes.
+Only the B02 detached execution checkout and its two supervisor directories were
+removed; the worktree is unregistered. Full learner checkpoints remain published.
+This measured preservation/cleanup window adds 3.327356 s, bringing the selected
+measured support lower bound to 29.0223255 s; full cost remains UNKNOWN.

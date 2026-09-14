@@ -30,10 +30,11 @@
     "generic_checkpoint_diagnostic": 1.6400000000139698,
     "bank_checkpoint_integrity": 1.5619999999762513,
     "analysis_batch": 2.7189999999827705,
-    "supervisor_preservation": 0.6099999999860302
+    "supervisor_preservation": 0.6099999999860302,
+    "published_preservation_and_remote_cleanup": 3.3273560000234284
   },
-  "selected_measured_support_lower_bound_seconds": 25.694969499976253,
-  "support_limitations": "Selected non-overlapping command windows only, mixing native test time and local control/collection waits. Excludes initial CRLF failure, earlier90/60/55s local SSH timeout windows and unmeasured remote lazy-fetch wait, other Git/reading/authoring/review/monitor/receipt/intake/preservation/cleanup work. Not complete support cost, CPU work or proof of full planning compliance.",
+  "selected_measured_support_lower_bound_seconds": 29.02232549999968,
+  "support_limitations": "Selected non-overlapping command windows only, mixing native test time and local control/collection waits. Excludes initial CRLF failure, earlier 90/60/55 s local SSH timeout windows and unmeasured remote lazy-fetch wait, other Git/reading/authoring/review/monitor/receipt/intake/unmeasured preservation/cleanup work. Not complete support cost, CPU work or proof of full planning compliance.",
   "provider_work": "Portfolio factual acknowledgment worked51s; original selection/synchronization were existing answers. Provider usage/billing and complete model-task cost UNKNOWN. Post-B02 scientific review and final closeout remain pending.",
   "valid_complete_learning_comparisons": 1,
   "native_seconds_per_valid_learning_comparison": 3041.46,
@@ -53,5 +54,14 @@
     "F_native_seconds": 2159.85,
     "F_later_support_lower_bound_seconds": 148.5160421,
     "complete_direction_cost": "UNKNOWN; no historical account reset or pooling"
+  },
+  "remaining_closeout_plan": {
+    "selected_provider_requests": 1,
+    "selected_new_empirical_invocations": 0,
+    "work": "One independent Convergence result review, full exact-byte archive and DM response, then one final lifecycle/owner/audit/brief/PARK knowledge publication if selected. No automatic review repeat or scientific successor.",
+    "additional_active_support_planning_seconds": 1800,
+    "provider_observation_planning_seconds": 5400,
+    "authority": "Prospective finite DM administrative closeout under AGENTS section 2; these are planning allowances, not owner caps or expiry of an accepted request. If observation is unresolved, reconcile the same request and record actual deviation before selecting needed recovery.",
+    "accountability": "Old card plans and unknown full cumulative/support/provider cost remain. No original total-plan compliance claim, accounting reset, extra training or changed endpoint."
   }
 }

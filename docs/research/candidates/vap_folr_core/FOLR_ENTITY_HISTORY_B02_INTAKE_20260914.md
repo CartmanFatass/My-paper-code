@@ -82,3 +82,12 @@ After that scientific response and verified preservation, DM records the lifecyc
 owner/audit/Chinese brief and final PARK knowledge/revisit conditions if selected,
 then sends Clerk the committed actionable handoff. The same task completes these
 consequences; dispatch or a child's terminal message alone is not completion.
+
+The finite remaining closeout is one independent review, one full archive and
+scientific response, then one lifecycle/owner/audit/brief/knowledge publication.
+DM plans up to 1800 additional active support seconds and 5400 provider-observation
+seconds for this work, with no new empirical invocation. These prospective plans
+do not erase unknown cumulative cost or terminate an accepted request; unresolved
+effects are reconciled on that request and any needed recovery is recorded under
+the existing DM closeout authority. There is no automatic second consultation.
+The exact terminal remote copies have now been reclaimed after published preservation.
