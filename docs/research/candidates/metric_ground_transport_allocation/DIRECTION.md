@@ -1,10 +1,10 @@
 # Direction metric_ground_transport_allocation: metric ground transport allocation
 
-## Current discriminator — fixed-rate later exposure, 2026-09-14
+## Current result — fixed-rate later exposure inside MEI, 2026-09-14
 
 The owner explicitly resumed the direction through the restored native DM. The accepted scientific position remains optional mean-COND within CONTINUE, with DENSE default: fixed1e-4/256 has one useful positive8252 and one similarly sized adverse8253, not a stable ordering. All prior evidence and the complete review below remain.
 
-The selected [late-exposure B01](MGTAP_LATE_EXPOSURE_B01_SCIENCE_CARD_20260914.md) asks about the fixed1e-4/512 configuration, observing256/512 on one fresh learning path. Final512 is primary; no best-checkpoint selection or cross-seed dose attribution. Its strongest alternative is another cheaper256 pair; this close choice prefers learning about a different finite training configuration over further unchanged draws. Missing mechanism attribution or tuned headroom is not a gate. No scientific PARK, default promotion, C reopening or capacity disposition follows.
+The selected [late-exposure B01](MGTAP_LATE_EXPOSURE_B01_SCIENCE_CARD_20260914.md) completed: fresh8254 final512 COND−DENSE=-0.005375013231600323 J, conditional world SE0.004649366246290445, INSIDE_MEI. The256 difference was+0.008370279359008794; both arms improved on the same training path, but DENSE improved more. This supplies no useful late relative advantage on that path, not equivalence, a dose mechanism or stable ordering. [Full intake](MGTAP_LATE_EXPOSURE_B01_INTAKE_20260914.md) preserves every sign, real learning and the strongest prior support8252 versus contradiction8253. One further independent512 pair could discriminate training recurrence; current-result review will challenge its development value against no immediate numerical extension. Missing mechanism attribution or tuned headroom is not a gate. No scientific PARK, default promotion, C reopening or capacity disposition follows.
 
 ## Historical owner-pause boundary after complete current-object closeout, 2026-09-14
 
