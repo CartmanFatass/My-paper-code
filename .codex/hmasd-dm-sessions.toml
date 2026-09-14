@@ -110,15 +110,18 @@ authoring_checkout = "C:/Projects/HMASD-worktrees/dm-dish-b06-scientific-intake-
 authoring_branch = "codex/pro-dish-post-b06-20260907"
 
 [directions.learned_counterfactual_agent_credit]
-state = "setup_pending"
+state = "management_in_progress"
 occupies_slot = true
 reserved_by = "portfolio-single-slot-20260914"
 owner_mode = "independent_task"
 accepted_event = "portfolio-lcac-single-slot-selection-20260914"
-last_processed_event = "portfolio-lcac-create-thread-pending-20260914"
-next_action = "reconcile pending clientThreadId and register actual threadId/host; then verify first concrete DM action"
-pending_client_thread_id = "client-new-thread:80a5b9ef-0afc-41ff-a5e7-32278cb8d3e3"
+last_processed_event = "lcac-adopted-20260914"
+next_action = "DM completes bounded first-object/lifecycle assessment and independent design review; no experiment or Send yet"
+thread_id = "01a09da1-6639-7fd0-bedd-9e006db051a9"
 host_id = "local"
+session_checkout = "C:/Users/fires/.codex/worktrees/891a/HMASD"
+authoring_checkout = "C:/Users/fires/.codex/worktrees/891a/HMASD"
+authoring_branch = "codex/lcac"
 
 [portfolio]
 role = "report_and_vacancy_selection"
@@ -127,7 +130,7 @@ automatic_replacement = true
 binding_key = "portfolio:cross_direction"
 transport_config = "C:/Projects/HMASD/.codex/hmasd-transport.toml"
 new_request_coordinator = "clerk"
-planning_state = "ucope_lcac_pending_setup_dish_active"
-reserved_slots = 2
+planning_state = "ucope_pending_dish_lcac_active"
+reserved_slots = 1
 request_status_commit = "fa1922c37"
 legacy_accepted_routes = "preserve_through_closeout"
