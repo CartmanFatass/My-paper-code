@@ -7,18 +7,21 @@ closeout the direction becomes operationally owner-paused, without scientific
 PARK/CLOSE or vacancy. [Recovery handoff](../HANDOFF_20260914_OWNER_PAUSE.md)
 is pending completion; live obligations below remain.
 
-Event: FOLR_AUGMENTATION_B01_AUGMENTED_RUNNING_MONITOR_ADOPTED_20260914.
-G is complete and collected at b881dd67c2a89aaa95ab5741541d98ff265653ff.
-A is actually running:handle folr-augmentation-b01-781601-augmented,PID3679958,
-source d9977dc18baf33b78dc626764c252391f1ddaa9d,accepted19:39:55.755736Z.
-Same checkout/run root below; current A output is augmented_persistent. The same
-batch Monitor adopted A at19:40:29.085Z with observation deadline21:39:55.755736Z.
-No A-G result exists yet. DM next collects A terminal outputs, computes the frozen
-primary, writes full scientific intake/Chinese brief and obtains independent
-scientific review. No third fit or automatic lifecycle change is selected.
+Event: FOLR_AUGMENTATION_B01_PAIR_COLLECTED_20260914.
+Both original fits finished exit0 and are collected. G mean−0.966484375;
+A mean4.329921875; A−G=+5.29640625, AUGMENTED_ABOVE_MEI. Complete original
+5000/4969/128 endpoints per arm; source d9977dc18 unchanged. A terminal at
+20:26:32Z was directly reported20:26:49.622Z and collected20:27:40.958451Z.
+Native wall3975.48s, CPU3972.96s; study17377s including the documented control gap.
+Both raw archives and original summaries/checkpoints were transferred and hash-checked.
+No native process or monitor remains live in this completed two-fit batch.
+[Result](../FOLR_ENTITY_HISTORY_AUGMENTATION_B01_RESULT_EVIDENCE_20260914.md) and
+[intake](../FOLR_ENTITY_HISTORY_AUGMENTATION_B01_INTAKE_20260914.md) preserve
+all units and claim limits. Necessary current-result Pro review, its substantive
+response, evidence-preserving cleanup and final owner-pause handoff remain.
+No third fit, new-object consultation or lifecycle change is selected.
 
-The following G sections preserve its execution/collection history; current
-observation and dispatch refer only to A above.
+The following G sections preserve its execution/collection history; completed observation is historical; current obligations are closeout above.
 
 ## Original Generic launch and observation
 
@@ -134,3 +137,21 @@ FOLR_PEER_FACTS_FOR_ACVC_20260914 was directly delivered with committed G facts,
 last complete B03 review/DM response, applied Portfolio A-G choice, real limits
 and unknown costs. This is report context, not a sibling approval barrier or
 new direction/global resource choice.
+
+## Original A terminal and full-pair collection
+
+Direct event FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601:MONITOR_TERMINAL:folr-augmentation-b01-781601-augmented:20260914T202649Z
+records20:26:49.622Z finished/exit0 at the original source/PID3679958. Raw source
+time2026-09-15T04:26:32+08:00 equals2026-09-14T20:26:32Z. The same native Monitor
+then completed; no observation was transferred or successor launched.
+AUGMENTED_COLLECTION.json and AUGMENTED_COLLECTION_CALL.json preserve one weights-only
+technical readback, exact G digest, independently recomputed publisher, all counts
+and finite FP32 checkpoint with192741 parameters+27 buffers. A raw archive has15
+members; local transferred digest/member checks passed. MONITOR_TERMINAL_STATE.json
+preserves completed batch observation. G's14 original members remain separately.
+
+Owner pause event arrived before this original A ended. It did not stop or change
+A; full-result intake, brief and necessary independent review remain authorized
+closeout. Any prospective next empirical work remains deferred to explicit owner
+resume. The execution checkout/supervisor files are retained only through verified
+archival and scoped reclamation; no live-process dependency remains.

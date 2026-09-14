@@ -1,0 +1,201 @@
+{
+  "event": "FOLR_AUGMENTATION_B01_AUGMENTED_COLLECTED_20260914",
+  "collected_utc": "2026-09-14T20:27:40.958451+00:00",
+  "source_sha": "d9977dc18baf33b78dc626764c252391f1ddaa9d",
+  "status": {
+    "task": "folr-augmentation-b01-781601-augmented",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3679958,
+    "uptime_seconds": 2864,
+    "tmux_active": false
+  },
+  "terminal_at_source": "2026-09-15T04:26:32+08:00",
+  "summary_sha256": "ac8a8e647eb18f6028af2743ae7fa0a9634ac24b388124f80bbf89f23298ff0e",
+  "generic_summary_sha256": "152b1b807f148a9d7004f8b0208d30ce2fa1c147734c11d4d7cb01f84216336c",
+  "binding": {
+    "object": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601",
+    "arm": "AUGMENTED_PERSISTENT",
+    "training_seed": 781601,
+    "evaluation_seed": 1781601,
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560,
+    "actor_parameters": 192741,
+    "actor_change_l2": 47.83620211342986,
+    "torch_version": "2.7.0+cu118",
+    "numpy_version": "1.26.3",
+    "torch_threads": [
+      1,
+      1
+    ]
+  },
+  "panel": {
+    "mean": 4.329921875,
+    "sample_sd": 8.237034430808265,
+    "conditional_episode_se": 0.7280578628614497,
+    "minimum": -15.200000000000003,
+    "maximum": 23.639999999999997,
+    "n": 128
+  },
+  "negative_returns": 42,
+  "primary_recomputed": {
+    "generic": {
+      "mean": -0.9664843750000004,
+      "sample_sd": 7.311570981685563,
+      "conditional_episode_se": 0.6462576777845804,
+      "minimum": -16.56,
+      "maximum": 20.080000000000002,
+      "n": 128
+    },
+    "augmented": {
+      "mean": 4.329921874999999,
+      "sample_sd": 8.237034430808267,
+      "conditional_episode_se": 0.7280578628614498,
+      "minimum": -15.200000000000003,
+      "maximum": 23.639999999999997,
+      "n": 128
+    },
+    "augmented_minus_generic": 5.2964062499999995,
+    "rule": "AUGMENTED_ABOVE_MEI",
+    "mei": 1.0,
+    "training_pairs": 1,
+    "paired_difference_se": null,
+    "uncertainty": "Per-arm episode dispersion is conditional on each fitted policy; shared seed labels do not establish paired trajectories or training-population uncertainty.",
+    "claim": "Exploratory whole-package native comparison on the selected public-lifecycle host."
+  },
+  "native_time": {
+    "wall_seconds": 2796.8,
+    "user_seconds": 2614.51,
+    "system_seconds": 180.95,
+    "peak_rss_kib": 866572,
+    "exit_code": 0
+  },
+  "aggregate_cpu_seconds": 2795.46,
+  "checkpoint": {
+    "arm": "AUGMENTED_PERSISTENT",
+    "updates": 4969,
+    "state_tensor_counts_including_buffers": {
+      "actor": 192768,
+      "target_actor": 192768,
+      "mixer": 284292,
+      "target_mixer": 284292
+    },
+    "actor_parameters": 192741,
+    "actor_buffer_elements": 27,
+    "actor_buffers": {
+      "labels": 25,
+      "attn.scale_factor": 1,
+      "entity_attn.scale_factor": 1
+    },
+    "dtypes": [
+      "torch.float32"
+    ],
+    "devices": [
+      "cpu"
+    ],
+    "finite": true,
+    "optimiser_finite": true
+  },
+  "archive": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/AUGMENTED_RAW.tar.gz",
+  "archive_reused": false,
+  "archive_bytes": 5282464,
+  "archive_sha256": "0190acfca2c38ac45963abbc425b0de4620bbe707880994733b65ac6880a06bd",
+  "manifest": [
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/augmented_persistent/ADMISSION.json",
+      "member": "augmented_persistent/ADMISSION.json",
+      "bytes": 504,
+      "sha256": "1d5aea57296f3b98dffa13f393f1bdca63a8116f5c5657a6d5066a1f5aab8136"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/augmented_persistent/INVOCATION_TIME.json",
+      "member": "augmented_persistent/INVOCATION_TIME.json",
+      "bytes": 108,
+      "sha256": "aa411fac5955d8104b1ecb711e1c9fe8666b85a99fa1e41804187c9edd374d0a"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/augmented_persistent/final.pt",
+      "member": "augmented_persistent/final.pt",
+      "bytes": 5782043,
+      "sha256": "0b97414c52114cf7ec59fb931934d835a5e23c3df8fe2aa471813a15f3529af2"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/augmented_persistent/summary.json",
+      "member": "augmented_persistent/summary.json",
+      "bytes": 110627,
+      "sha256": "ac8a8e647eb18f6028af2743ae7fa0a9634ac24b388124f80bbf89f23298ff0e"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/GENERIC_CONTROL_LAUNCH.json",
+      "member": "control/GENERIC_CONTROL_LAUNCH.json",
+      "bytes": 2157,
+      "sha256": "4576fa239bb247f4da45fa6add56fcf991042c0571d9fde2defa1ce1c5a20143"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/AUGMENTED_CONTROL_LAUNCH.json",
+      "member": "control/AUGMENTED_CONTROL_LAUNCH.json",
+      "bytes": 2501,
+      "sha256": "180e5ea96413bcc113a6bee05fb08b92b43ec1d70610e38673c1fe5494be647d"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/GENERIC_LAUNCH.sh",
+      "member": "control/GENERIC_LAUNCH.sh",
+      "bytes": 664,
+      "sha256": "1301c9ef2068ace19d852db8b9fbd796cafa1ba7fa3755198022389bc6bae8f1"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/AUGMENTED_LAUNCH.sh",
+      "member": "control/AUGMENTED_LAUNCH.sh",
+      "bytes": 744,
+      "sha256": "67558e16221e37077a94ac4737bd2d2ef997d9db51f97a8be3846298133a64db"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/LAUNCH_PREPARATION.json",
+      "member": "control/LAUNCH_PREPARATION.json",
+      "bytes": 1580,
+      "sha256": "bb189ff43a4bedc0cdeb26a1b77dc4efa408bac99fc68b40a020903a200a6b10"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-augmentation-b01-781601-augmented/exit_code",
+      "member": "supervisor/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-augmentation-b01-781601-augmented/pid",
+      "member": "supervisor/pid",
+      "bytes": 8,
+      "sha256": "b936144821d44bb518075ed31265657f3ed16c95f591be9d9f5ce36f01f451bd"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-augmentation-b01-781601-augmented/runner.sh",
+      "member": "supervisor/runner.sh",
+      "bytes": 1699,
+      "sha256": "ba1c1d7a3feb57bd6f241b24596b6f1826adca0a7d003542ce292c8371ba9fcb"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-augmentation-b01-781601-augmented/start_time",
+      "member": "supervisor/start_time",
+      "bytes": 11,
+      "sha256": "3f90f2ce2e5b5e78e7b132656a9088c4ea28356834a85ac90dbb7c545d634046"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-augmentation-b01-781601-augmented/status",
+      "member": "supervisor/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-augmentation-b01-781601-augmented/task.log",
+      "member": "supervisor/task.log",
+      "bytes": 2701,
+      "sha256": "a51c20b08731c987aa72295549df1c05117b1fe30746d7b671fcef2dff8f9437"
+    }
+  ],
+  "collection_process_measured_prefix_wall_seconds": 0.996080553974025,
+  "collection_process_cpu_seconds": 2.656131613,
+  "claim": "One complete A and original G, one fresh fitted policy per arm; sampled whole-program difference only. Episode SEs are conditional, no training-population SE or paired-world inference."
+}

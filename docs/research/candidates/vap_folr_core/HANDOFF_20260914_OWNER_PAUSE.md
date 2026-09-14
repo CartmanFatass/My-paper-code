@@ -6,6 +6,19 @@ Owner event: `OWNER_PAUSE_AFTER_INFLIGHT_20260914`, instruction at
 The owner said: “各方向可以先暂停 手中的任务和实验不要停止 完成后写handoff”.
 This record is an interim recovery handoff, not a claim of completed closeout.
 
+## Latest consequence — complete pair, closeout still pending
+
+Both original fits are now terminal and collected. A ended20:26:32Z, exit0;
+its Monitor terminal was delivered20:26:49.622Z, followed by DM collection and
+full raw-archive local verification. A4.329921875 minus G−0.966484375 gives
++5.29640625, AUGMENTED_ABOVE_MEI. Native3975.48s, CPU3972.96s; no live native
+process/monitor remains. [Full result](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_RESULT_EVIDENCE_20260914.md)
+and [initial scientific intake](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_INTAKE_20260914.md)
+are written. Independent current-object review and substantive response,
+evidence-preserving reclamation and final main integration/handoff remain due.
+The original pending-at-owner-instruction facts below are historical snapshots;
+first recovery now processes closeout and never repeats either invocation.
+
 ## Scope and present state
 
 Finish the accepted augmentation B01 A−G object: current A invocation, terminal
@@ -87,7 +100,7 @@ The low-confidence prospective DM prediction remains GENERIC_ABOVE_MEI;
 owner prediction was not taken. Historical E/F/B02/B03 results remain separate.
 
 G native wall1178.68s and aggregate CPU1177.50s are complete invocation facts.
-Known E/F/B02/B03 plus G native subtotal is13717.12s; A is pending. Full
+Known E/F/B02/B03 plus G native subtotal is13717.12s; A is now2796.80s, making the known native subtotal16513.92s. Full
 support/provider/engineering/direction-lifetime costs remain UNKNOWN. The
 13401.737549s G-terminal-to-A-preparation control interval is study elapsed,
 not extra native G work and not all measured active support. G's first diagnostic
