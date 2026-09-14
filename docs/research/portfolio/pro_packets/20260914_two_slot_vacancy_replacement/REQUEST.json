@@ -1,0 +1,44 @@
+{
+  "caller_role": "portfolio",
+  "workflow_node": "portfolio_decision",
+  "source_thread_id": "01a09cfe-1614-7da1-8445-323658edcc70",
+  "parent_thread_id": "01a09cfe-1614-7da1-8445-323658edcc70",
+  "operator_thread_id": "/root/portfolio_transport_20260913",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "decision_authority": "pro_final",
+  "discussion_urls": ["https://github.com/CartmanFatass/My-paper-code/issues/17"],
+  "delivery_mode": "github_delivery",
+  "request_id": "2026-09-14-two-slot-vacancy-replacement-01",
+  "commit_or_ref": "2fa37c64c",
+  "scientific_question": "With RCLE and FOLR now formally PARKED and their independent DM tasks archived, while ACVC and MGTAP retain concrete in-flight producers, what Portfolio-level replacement, priority, capacity and lifecycle plan should fill the two released direction slots? Decide only Portfolio-tier replacement/registration/capacity/lifecycle boundaries; preserve DM autonomy for ordinary objects and do not infer a vacancy from an active technical wait.",
+  "deliverable": "Write one complete conclusion-first Portfolio decision: confirm the two-slot vacancy and occupied/reserved directions; choose, defer or decline replacement using the registered 27-direction index; state priority/capacity/resource/dependency treatment, any new DM registration and its owner, and explicit revisit triggers. Preserve RCLE/FOLR PARK evidence, ACVC/MGTAP active producers, all existing caps and contrary evidence. Do not approve ordinary A/B objects, alter scientific meaning, create grants, or rewrite history.",
+  "claim_ceiling": "Prospective Portfolio replacement, registration, priority, lifecycle, capacity and real-resource planning only. Consultation exposure is zero; no ordinary experiment approval, new provider Send beyond this consultation, result reinterpretation, causal or superiority claim, recast reset, specification change or historical rewrite.",
+  "github_delivery": {
+    "branch": "codex/portfolio",
+    "base_sha": "dc36e431d41e5a935b8f7fe2cf974e1bcb22f7aa",
+    "response_path": "docs/research/portfolio/pro_packets/20260914_two_slot_vacancy_replacement/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/17"
+  },
+  "direction_ids": ["active_post_churn_population_flow_identification", "actuator_conditioned_partial_sharing", "acvc", "capability_bound_semantic_currentness", "contention_aware_decentralized_communication", "commitment_residual_triggered_options", "cross_play_compatible_population_learning", "degraded_incumbent_shadow_handover", "ec4g_r1", "eociv_lite", "expressibility_gated_renewal_credit_relay", "finite_resource_relational_inductive_efficiency", "flexible_skill_duration", "learned_counterfactual_agent_credit", "metric_ground_transport_allocation", "orbit_shadow_read", "recct_lite", "roster_consistent_latent_exploration", "scope_1s", "semigroup_consistent_duration_model_policy", "tail_return_distributional_learning", "ucope", "vap_folr_core", "variable_n_fleet_churn", "vsp_02", "vsp_03", "vsp_c1"],
+  "constraints": [
+    "Owner_DIRECT 2026-09-14 explicitly authorizes this vacancy/replacement consultation and selected DM creation; this supersedes prior report-only/no-automatic-replacement wording.",
+    "RCLE and FOLR are PARKED with complete review/cleanup and no in-flight handle/request; their independent tasks were archived. ACVC and MGTAP each retain a concrete in-flight producer and remain occupied/reserved.",
+    "Do not treat ordinary technical waits as released slots. Do not approve ACVC/MGTAP ordinary objects, alter caps, or restart archived RCLE/FOLR work.",
+    "If Portfolio selects replacements, Root/Clerk creates only the selected independent Astra/max DM tasks after the complete response; the selected DM owns ordinary implementation, admission, launch, collection and lifecycle.",
+    "No experiment, model, result-bearing exposure or new provider Send is authorized by the author; consultation exposure is zero and all evidence is reused."
+  ],
+  "reference_files": [
+    {"repository":"CartmanFatass/My-paper-code","path":"AGENTS.md","commit_sha":"2fa37c64c","purpose":"Current owner authority, four-DM lifecycle and Portfolio boundary.","provenance":"Pinned current main control source."},
+    {"repository":"CartmanFatass/My-paper-code","path":"docs/research/portfolio/PORTFOLIO.md","commit_sha":"2fa37c64c","purpose":"Complete registered 27-direction index and lifecycle/priority rows.","provenance":"Pinned current main report."},
+    {"repository":"CartmanFatass/My-paper-code","path":"docs/research/portfolio/ROOT_HANDOFF.md","commit_sha":"2fa37c64c","purpose":"Current DM ownership, occupancy and handoff boundaries.","provenance":"Pinned current handoff."},
+    {"repository":"CartmanFatass/My-paper-code","path":"docs/research/portfolio/EXPERIMENT_TRACKING.md","commit_sha":"2fa37c64c","purpose":"Actual producers, cleanup and resource facts.","provenance":"Pinned current tracking."},
+    {"repository":"CartmanFatass/My-paper-code","path":"docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md","commit_sha":"2fa37c64c","purpose":"Sections 7, 8.1 and 11.7-11.10 for proportional evidence and Portfolio boundaries.","provenance":"Pinned specification."},
+    {"repository":"CartmanFatass/My-paper-code","path":"docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md","commit_sha":"2fa37c64c","purpose":"RCLE PARK lifecycle and released-slot evidence.","provenance":"Pinned direction record."},
+    {"repository":"CartmanFatass/My-paper-code","path":"docs/research/candidates/vap_folr_core/DIRECTION.md","commit_sha":"2fa37c64c","purpose":"FOLR PARK lifecycle and released-slot evidence.","provenance":"Pinned direction record."},
+    {"repository":"CartmanFatass/My-paper-code","path":"docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md","commit_sha":"2fa37c64c","purpose":"ACVC active same-operation recovery producer and preserved boundaries.","provenance":"Pinned current intake."},
+    {"repository":"CartmanFatass/My-paper-code","path":"docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B01_INTAKE_20260913.md","commit_sha":"2fa37c64c","purpose":"MGTAP active producer/result boundary and preserved scientific scope.","provenance":"Pinned current intake."},
+    {"repository":"CartmanFatass/My-paper-code","path":"docs/research/portfolio/decisions/2026-09-13-dm-autonomy-consolidation.md","commit_sha":"2fa37c64c","purpose":"DM autonomy and event routing.","provenance":"Pinned owner-directed control decision."}
+  ]
+}
