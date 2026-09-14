@@ -165,6 +165,18 @@ caps and specific owner constraints apply; no unlimited compute follows. Use emp
 for proportionate work and cost reasoning. New seeds/scales/comparisons need scientific reasons,
 not evidence of an entirely new mechanism or a Portfolio grant.
 
+Resource authority is determined by the source and scope of the limit. Owner-set cumulative limits,
+physical admission failures, additional paid capacity and commitments affecting other directions
+are outside a DM's unilateral adjustment. A DM's own planning allowance does not become an
+owner-only limit merely because the DM wrote it in a card. The DM owns proportionate prospective
+support/closeout choices within the existing direction resources, including observation, archival,
+review response and publication of an already accepted request. Record the finite additional work,
+reason, stopping condition and cumulative cost/deviation in the existing intake. Preserve the old
+card, unknown costs and actual overruns; do not claim original-cap compliance, reset accounting,
+extend a running frozen experiment or disguise a scientific retry as administrative closeout.
+Only a concrete boundary outside this delegation needs escalation, with its exact source and
+affected action. This is decision ownership, not an extra checklist or per-step approval.
+
 Preserve frozen objects, completed C rules and historical results. A prospective DM decision may
 revise an earlier Pro family/lifecycle recommendation with explicit reasons; it cannot rewrite
 history or disguise a new object as a compliant retry of the old frozen allocation. DM may not

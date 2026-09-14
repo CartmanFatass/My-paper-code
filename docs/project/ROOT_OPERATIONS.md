@@ -28,6 +28,15 @@ authority. Preserve actual cumulative limits, frozen object semantics and resour
 The DM chooses a useful next object or makes its lifecycle decision; no need to manufacture
 low-value experiments or await an external customer to avoid ACTIVE-idle.
 
+Apply AGENTS section 2 to resource exceptions. Self-declared support budgets remain accountable
+plans; DM can select finite prospective administrative closeout and disclose the original-plan
+deviation and full cumulative cost. Root is not the approver for each added observation, archive or
+review response. Owner-set cumulative limits, new paid/shared resource commitments and physical
+admission failures remain actual boundaries. Preserve frozen runs and unknown costs; do not hide
+continued work in a renamed allocation. Ordinary decisions go to Clerk for records. An escalation
+names the exact boundary outside DM authority and the concrete owner choice; no generic cap label
+or the fact that Root originally created a task establishes such a boundary.
+
 A real pending run/review/consultation has an identity, owner and awaited event. DM does independent
 work first, then observes through its actual native child route. Scientific value and lifecycle are
 DM judgments; a timeout or engineering failure alone does not establish a negative scientific result.

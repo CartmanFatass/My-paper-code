@@ -22,6 +22,12 @@ Root approval. It reports released slots rather than creating replacements. Only
 request initiates a cross-direction change or Portfolio consultation. Reporting does not authorize
 implementation; no automatic global planning queue or per-object investment request exists.
 
+Root messages are for requested investigation/user responses and actual workflow or owner-scope
+exceptions, not ordinary DM approvals. A routine cost/closeout decision goes to Clerk after the DM
+decides it under AGENTS section 2. A missing fact is reconciled by its responsible DM; calling it
+an exception does not transfer responsibility. Do not add a Clerk approval before contacting Root
+when a real owner decision is needed.
+
 Clerk uses compact wait_threads/cursors for missing facts and read_thread only where needed. It
 never waits for independent DM messages through collaboration.wait_agent. The 50-minute heartbeat
 is silent recovery for missed/interrupted events, not automatic planning. Owner pause takes priority.
@@ -57,3 +63,11 @@ commits and records DM decisions, returns semantic conflicts to their DM, and ne
 policy/code itself. Independent task session worktrees are only hosting; reuse each designated
 direction authoring checkout. Accepted legacy children/requests keep their original routes until
 reconciled closeout; migration does not reparent or duplicate them. No extra relay service is needed.
+
+Control publication includes the registered session checkout and direction authoring checkout,
+not only main. Root publishes the exact control revision/paths; each task's existing writer brings
+those current control paths into its own checkouts at a clean boundary, preserving unrelated work
+and frozen scientific inputs. Clerk records actual synchronization or the concrete conflict, not
+message delivery as completion. In an already-running turn, the explicit current policy message
+supersedes stale injected instructions; changing a role TOML does not by itself update an independent
+task's instructions. Do not reread all history or restart research merely to synchronize controls.
