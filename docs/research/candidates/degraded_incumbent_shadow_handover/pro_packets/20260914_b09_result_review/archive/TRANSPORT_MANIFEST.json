@@ -1,0 +1,26 @@
+{
+  "schema_version": 4,
+  "packet_id": "dish-b09-result-review-20260914-01--degraded_incumbent_shadow_handover",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "dish-b09-result-review-20260914-01",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_ids": [
+    "degraded_incumbent_shadow_handover"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "decision_authority": "dm_owned_scientific_review",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "dish-b09-result-review-20260914-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "bytes": 1936,
+    "sha256": "6b3c260f126530be8c46b0f5aa946162ea8acdd70733903f9602a82e8d46eac3"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true
+}

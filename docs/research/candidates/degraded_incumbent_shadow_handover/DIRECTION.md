@@ -1,32 +1,34 @@
 # Direction degraded_incumbent_shadow_handover: degraded incumbent shadow handover
 
-## B09 accepted; scoped lifecycle review — 2026-09-14
+## Current DM lifecycle: PARK — 2026-09-14
 
-**REPLACE remains the development default; the fixed BYPASS extension ends.** One fresh
-matched seed149 pair gives BYPASS376.25 versus REPLACE411.5 native service ticks,−35.25,
-beyond the frozen−24 scale. The four differences+6,−30,−46,−71 and every native companion
-are preserved in the [intake](DISH_RECEIPT_BYPASS_B09_RESULT_INTAKE_20260914.md) and
-[E0 evidence](DISH_RECEIPT_BYPASS_B09_RESULT_EVIDENCE_20260914.md). Both learners completed
-16 updates/65536 transitions/512 optimizer calls and four final1200-tick episodes.
+**Reversible whole-direction PARK under OWNER_DELEGATED authority.** REPLACE remains the
+development default. B09's one fresh matched pair gives BYPASS376.25 versus REPLACE411.5,
+Delta−35.25 beyond the frozen−24 scale; the fixed BYPASS extension ends. All four
+outcomes+6/−30/−46/−71, uniformly higher energy,18 fewer final invalid commits and297
+more TRAIN invalid commits remain in the [result intake](DISH_RECEIPT_BYPASS_B09_RESULT_INTAKE_20260914.md)
+and [E0](DISH_RECEIPT_BYPASS_B09_RESULT_EVIDENCE_20260914.md).
 
-BYPASS used more energy in every final condition, had18 fewer final invalid commits and
-297 more TRAIN invalid commits. All ordinary TRAIN/EVAL CAS counts were zero; post-CAS
-source value is unestimated. The result is one finite whole-policy comparison, not
-stable inferiority or proof that each packet is necessary. B08 WITHIN/REPLACE and the
-fixed-half-retention programme PARK, earlier packages, MEDIUM priority and recasts remain.
+DM read the complete independent post-B09 review and accepted its rationale correction:
+repetition could reverse a development choice, not merely improve publication precision.
+DM presently declines further receipt screening or repetition based on the service/energy
+evidence and current marginal value, and has not selected an ordinary-source comparison.
+This is not stable inferiority or an empirical direction-wide null. Reopening may revisit
+the same objective when independent-pair uncertainty warrants a new finite plan, or specify
+a consequential ordinary-source comparison; no positive pilot/new-customer prerequisite.
 
-The DM's earlier PARK proposal was corrected by independent review into this useful
-binary comparison; that proposal was never applied. With B09 complete, DM proposes
-reversible direction PARK and requests one independent review of its all-outcome
-interpretation and value reasoning, including another independent pair and ordinary-source
-alternatives. Broader PARK is not yet applied. Native experiment observation has ended;
-full evidence is archived in direction and main roots. The current producer is DM-owned
-Convergence Transport `/root/tr_lh_dish_b09_review_20260914`, executing exact request
-`dish-b09-result-review-20260914-01` via published
-[HANDOFF](pro_packets/20260914_b09_result_review/HANDOFF.json) at `5226571d5` and fixed
-TASK commit `2510d3552`. The completed remote execution checkout is removed after verified
-archival. DM owns full-response intake, lifecycle decision and closeout; no new experiment
-is selected. [Frozen B09 card](DISH_RECEIPT_BYPASS_B09_SCIENCE_CARD_20260914.md).
+All ordinary B09 TRAIN/EVAL CAS counts are zero, so source-origin value remains unestimated.
+B08 WITHIN/REPLACE, fixed-half-retention family PARK, earlier stops, MEDIUM priority,
+recast count, evidence requirements and UAV-entry state are preserved. No successor,
+C promotion or cross-direction adjustment is selected. Full cost remains unknown.
+
+[Complete independent-review response and final DM decision](DISH_POST_B09_CONVERGENCE_INTAKE_20260914.md)
+records the options and reasons. [PARK knowledge handoff](PARK.md) records reusable assets,
+limits and reentry. All native children, experiment handles and Pro requests are terminal
+and reconciled. Full scientific archives are verified in main and direction evidence
+roots; the remote execution checkout is removed from disk and Git registration. Clerk
+owns accepted integration, safe task archival, authoring-checkout/branch reclamation and
+vacancy consequences. No owner reply or Root ACK is required for this delegated decision.
 
 ## Tested arrival-bridge retention family parked — 2026-09-10
 
