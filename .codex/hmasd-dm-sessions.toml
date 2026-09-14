@@ -61,12 +61,14 @@ authoring_checkout = "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904"
 authoring_branch = "codex/mgtap"
 
 [directions.roster_consistent_latent_exploration]
-state = "management_in_progress"
+state = "scientific_park_archived"
+occupies_slot = false
+park_document = "PARK.md record-only supplement pending"
 owner_mode = "independent_task"
 accepted_event = "rcle-session-astra-max-v1"
 accepted_turn = "01a09cd9-d528-7e53-a41d-56738d296d0c"
 last_processed_event = "rcle-session-astra-max-v1"
-next_action = "DM prepares ordinary within-mechanism B and technical closeout; retain independent scientific review and DM lifecycle ownership"
+next_action = "Clerk restores original DM for PARK.md knowledge handoff only, then archives; slot remains released"
 thread_id = "01a09cd8-674f-7851-aa2a-71311759ad0f"
 host_id = "local"
 session_checkout = "C:/Users/fires/.codex/worktrees/b984/HMASD"
@@ -76,12 +78,14 @@ authoring_checkout = "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906"
 authoring_branch = "codex/rcle"
 
 [directions.vap_folr_core]
-state = "management_in_progress"
+state = "scientific_park_archived"
+occupies_slot = false
+park_document = "PARK.md record-only supplement pending"
 owner_mode = "independent_task"
 accepted_event = "folr-session-astra-max-v1"
 accepted_turn = "01a09cd9-d6a0-7500-9d14-f9a3b7bfab38"
 last_processed_event = "folr-session-astra-max-v1"
-next_action = "DM assesses useful ordinary A/B versus scientifically justified DM lifecycle decision; reconcile scoped technical closeout"
+next_action = "Clerk restores original DM for PARK.md knowledge handoff only, then archives; slot remains released"
 thread_id = "01a09cd8-6767-7760-aef6-559aa1c263aa"
 host_id = "local"
 session_checkout = "C:/Users/fires/.codex/worktrees/8f07/HMASD"
@@ -91,11 +95,13 @@ authoring_checkout = "C:/Projects/HMASD-worktrees/codex-vap-folr"
 authoring_branch = "codex/vap-folr"
 
 [portfolio]
-role = "user_facing_report"
-consultation_trigger = "explicit_owner_request_only"
-automatic_replacement = false
+role = "report_and_vacancy_selection"
+consultation_trigger = "vacancy_below_four_or_explicit_owner_request"
+automatic_replacement = true
 binding_key = "portfolio:cross_direction"
 transport_config = "C:/Projects/HMASD/.codex/hmasd-transport.toml"
 new_request_coordinator = "clerk"
-planning_state = "automatic_planning_stopped_report_only"
+planning_state = "two_vacancies_draft_published_unsent"
+reserved_slots = 2
+request_status_commit = "64d4fc2a2"
 legacy_accepted_routes = "preserve_through_closeout"

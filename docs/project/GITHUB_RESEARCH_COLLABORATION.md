@@ -1,5 +1,10 @@
 # GitHub research collaboration
 
+Owner-delegated Clerk vacancy requests may instead use the direct Codex in-app browser route
+in CLERK_OPERATIONS.md and hmasd-portfolio-task. The GitHub/native-Transport requirements below
+apply to requests using this delivery workflow, not as gates on that direct vacancy route.
+
+
 DM authors and intakes direction Pro scientific reviews, responding to findings and retaining
 research/lifecycle decisions. Portfolio is the user report. Clerk publishes a Portfolio Pro packet
 only on an explicit owner commission, preserving its advice/implementation scope; recommendations

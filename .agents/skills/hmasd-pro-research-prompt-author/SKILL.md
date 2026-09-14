@@ -5,6 +5,11 @@ description: "Use when DM authors an independent scientific review request, or C
 
 # HMASD Pro Research Prompt Author
 
+Owner-delegated Clerk vacancy requests may instead use the direct Codex in-app browser route
+in CLERK_OPERATIONS.md and hmasd-portfolio-task. The GitHub/native-Transport requirements below
+apply to requests using this delivery workflow, not as gates on that direct vacancy route.
+
+
 Root is the user entry; the independent Clerk performs only delegated mechanical coordination.
 Read docs/project/CLERK_OPERATIONS.md for event handling and writes. DM/Pro retain scientific
 judgment. Clerk routes missing science or complex engineering repair to the relevant Astra DM;
@@ -87,11 +92,11 @@ material findings, reasons and proportionate corrections/claim limits. DM respon
 final direction/lifecycle decision. Do not ask Pro to approve funding, PARK/CLOSE, or ordinary next
 steps. Retain the meaningful review role and scientific independence, not a generic advice prompt.
 
-Portfolio is a user-facing report. Only an explicit owner request may commission a new Portfolio
-consultation; use hmasd-portfolio-task to preserve that exact advisory/implementation scope. Clerk
+Portfolio supplies reports and the scoped vacancy selection described above. Other new Portfolio
+consultations need explicit owner scope; use hmasd-portfolio-task to preserve that scope. Clerk
 publishes and archives mechanically, while DMs retain science. A report or recommendation does not
-authorize global changes. No automatic vacancy request, replacement selection or blanket PRO_FINAL
-application. Historical accepted packets preserve their bindings and full answers through closeout.
+authorize global changes. The scoped owner-delegated vacancy workflow follows CLERK_OPERATIONS.md; this is not blanket
+PRO_FINAL authority or approval for ordinary DM research. Historical accepted packets preserve their bindings and full answers through closeout.
 
 ### Fixed scientific and method sources
 
