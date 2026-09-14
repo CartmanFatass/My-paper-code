@@ -1,0 +1,64 @@
+{
+  "record": "Existing accepted B08 arithmetic and unselected comparison scale; no experiment",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/EXPOSURE_AND_COST.json",
+  "source_commit": "ff2cfddb629a16b5e38efb1af6bb46579b407a99",
+  "new_scientific_exposure": {
+    "learners": 0,
+    "native_calls": 0,
+    "ordinary_transitions": 0,
+    "optimizer_calls": 0,
+    "evaluation_episodes": 0,
+    "selection_trials": 0
+  },
+  "b08": {
+    "condition_differences": [
+      -15,
+      0,
+      -8,
+      -3
+    ],
+    "computed_mean_difference": -6.5,
+    "effect_band_ticks": [
+      -24,
+      24
+    ],
+    "read": "WITHIN; negative mean favors REPLACE under original rule; not equivalence",
+    "independent_training_pairs": 1,
+    "energy_difference": -2496.189061493693,
+    "final_invalid_commits": {
+      "REPLACE": 0,
+      "HALF_RETAIN": 4
+    },
+    "ordinary_TRAIN_CAS": {
+      "REPLACE": 0,
+      "HALF_RETAIN": 0
+    },
+    "ordinary_EVAL_CAS": {
+      "REPLACE": 0,
+      "HALF_RETAIN": 0
+    },
+    "runner_wall_seconds": 454.5,
+    "complete_cost": "UNKNOWN; preserve missing Monitor command wall and other resource gaps"
+  },
+  "unselected_fresh_comparison_scale": {
+    "arms": 2,
+    "independent_training_pairs": 1,
+    "transitions_per_arm": 65536,
+    "transitions_pair": 131072,
+    "optimizer_calls_per_arm": 512,
+    "optimizer_calls_pair": 1024,
+    "final_episodes_pair": 8,
+    "final_native_ticks_max": 9600,
+    "native_training_calls_per_arm_bounds": [
+      131072,
+      1572864
+    ],
+    "native_training_calls_pair_bounds": [
+      262144,
+      3145728
+    ],
+    "cost_law": "2N+2E+H; 0<=E<=N; 0<=H<=20E",
+    "new_runtime_quote_seconds": null,
+    "new_experiment_allocation": false
+  }
+}
