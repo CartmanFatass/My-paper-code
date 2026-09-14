@@ -285,3 +285,22 @@ the earlier accepted Portfolio request without replacement application. This
 substantive report must follow actual-state reconciliation in the same Portfolio
 binding, without duplicate Send. A complete conforming decision will be archived,
 answered and applied without another Root approval.
+
+## Portfolio reconciliation applied — 2026-09-14
+
+The [complete Portfolio response and DM intake](pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md)
+now select and apply CONTINUE / MEDIUM, with B03 as the concrete next bounded
+objective. The historical PARK and the owner-requested correction above retain
+their actual provenance. Portfolio substantively answers the second-block value
+challenge and withdraws its earlier DISH preference for this slot. B02 remains
+GENERIC_ABOVE_MEI with the same limited evidence. E and F share a historical BANK
+fit and are not two learning replications.
+
+One interpretive clarification is material: B03 changes both training and final
+evaluation seeds. It supplies a new whole-learning-program realization rather
+than isolating pure training variance. This narrows the earlier 'training
+realization alone' wording without changing any frozen acquisition or result.
+B03 source, independent engineering review and nine focused remote tests are
+accepted at the evidence links in that intake; the earlier preparation-status
+sentences above are historical. Scientific exposure is zero at this application,
+and DM proceeds to the selected detached invocations and their full intake.

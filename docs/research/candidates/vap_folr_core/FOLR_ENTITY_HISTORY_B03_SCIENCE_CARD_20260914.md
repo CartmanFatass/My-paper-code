@@ -154,3 +154,16 @@ The full independent B02 review already identified this follow-up as materially
 capable of changing development advice. No extra prelaunch Pro request is added
 solely to approve continuation. The new result and its implications receive scoped
 scientific review; all material findings remain DM's responsibility to resolve.
+
+## Portfolio disposition and interpretation clarification — 2026-09-14
+
+The [complete Portfolio decision](pro_packets/20260914_portfolio_direction_reconciliation/archive/RESPONSE.md)
+selects CONTINUE / MEDIUM with this prepared B03 objective; DM applies it in the
+[decision intake](pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md).
+The original pending-disposition wording above describes card preparation. No
+exposure, seed, architecture, comparator, outcome rule or historical result changes.
+Both the training and final-evaluation seeds change relative to B02, so this is a
+new complete learning-program observation, not isolated pure training variance.
+The direction decision converts the existing reservation to occupancy; it does
+not claim a launch. Exact-source engineering acceptance and nine passing focused
+remote tests are recorded in entity_history_b03_781501/TECHNICAL_ACCEPTANCE.md.

@@ -9,25 +9,25 @@
 
 | 方向 | 已知科学位置 | 当前工作与席位 |
 | --- | --- | --- |
-| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B10/B12 有真实自身学习与 nearest 收益，但 sampled 服务仍落后 greedy；E01 两套保留 mode 的所有已测结局与 greedy 相等，零新拟合。完整审查已回应，恢复代价和 B11 缺失/未知 SIG11 保留。 | 占用1席，pending_portfolio_decision。[完整报告](../candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REPORT.md)建议一个可学习先验强度 B，尚未应用或启动；等待 FOLR 同会话前序完成/归档后提交。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B10/B12 有真实自身学习与 nearest 收益，但 sampled 服务仍落后 greedy；E01 两套保留 mode 的所有已测结局与 greedy 相等，零新拟合。完整审查已回应，恢复代价和 B11 缺失/未知 SIG11 保留。 | 占用1席，pending_portfolio_decision。[完整报告](../candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REPORT.md)建议一个可学习先验强度 B，尚未应用或启动；FOLR 同会话前序已完整归档并 intake，RCLE 接续提交自有报告。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 历史混合符号保留，DENSE 仍为通用默认；新问题比较对称学习率选择后的完整学习程序。 | 占用1席。LR-SELECTION-B01 的8拟合/589,824 team ticks/4,096 Adam 是计划工作；runner 与独立审查推进，尚无本报告可引用的新原生结果。DM 负责实际接受、准入、执行和结果解释。 |
-| [FOLR](../candidates/vap_folr_core/DIRECTION.md) | B02 一个 fresh/fresh 对比 BANK−Generic=−4.830859375。DM 已修正把局部负结果推成停止理由的不足，推荐一个新的同预算 B03 来观察复现性。 | 预留1席，pending_portfolio_decision。完整报告已交独立 Transport，当前 Portfolio 同会话作者为 FOLR；B03 实现/独立工程审查推进，零已报告的新原生曝光。 |
+| [FOLR](../candidates/vap_folr_core/DIRECTION.md) | B02 完整学习比较 BANK−Generic=−4.830859375，有限负面证据保持。完整 Portfolio 答复撤回原停止理由，选择 B03 观察新完整学习程序的结果变化；训练与评估变异不能单独分离。 | 占用1席，CONTINUE / MEDIUM 已应用。[完整裁决及 intake](../candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md)已归档；B03 实现、独立审查和九项远端测试已接受，下一步相邻准入和分离运行；此时零 B03 科学曝光。 |
 
-上述席位为2占用+1预留，总计3。RCLE/FOLR 的建议不是已应用的 PARK、CLOSE、CONTINUE 或新运行。
+上述席位为3占用+0预留，总计3。FOLR CONTINUE 已应用；RCLE 的后继建议仍待其 Portfolio 决定。方向裁决本身不代表新实验已启动。
 停止第四个方向限制扩容，不停止三席中的研究和接续。旧报告的 UCOPE/LCAC/ACVC 工作集和
 RCLE/MGTAP/FOLR 归档表已经过期，不能用来判断现在是否“开始后直接结束”。
 
 RCLE 当前完整审查/回应固定于93bb8ffcd4de430a722bbb6b84e9733f40d26782与
 6f13c2b2fa713414e777190b7bcfbec11243b61a；新报告及一次未定位原因的保留权重分析见
 094d1ff2a3e5f984d62e00dae782cda31a11be52。MGTAP 当前科学卡/重入依据见
-3594eafe28ed91b2558fcc064e46ea714edd2e1c；FOLR 的完整修正与推荐卡见
-fb38cbfadd69f578672f6918ebc2824338919040。这里引用已有 DM 结论，不新增跨方向的数值排序。
+3594eafe28ed91b2558fcc064e46ea714edd2e1c；FOLR 的完整裁决、修正及实际应用见
+4776103de4f55beaee610c52506112651bfaed04。这里引用已有 DM 结论，不新增跨方向的数值排序。
 
 ## 已归档方向的知识入口
 
 | 方向 | 保留知识与当前限制 |
 | --- | --- |
-| [DISH](../candidates/degraded_incumbent_shadow_handover/PARK.md) | 保留 B09 −35.25、REPLACE 与 BYPASS 边界；旧 Portfolio 补位建议未应用，不能抢占 FOLR 的预留席位。 |
+| [DISH](../candidates/degraded_incumbent_shadow_handover/PARK.md) | 保留 B09 −35.25、REPLACE 与 BYPASS 边界；旧 Portfolio 补位建议未应用；新裁决已选择继续 FOLR，当前没有空槽。 |
 | [UCOPE](../candidates/ucope/PARK.md) | 保留 reactive renewal 的结果、反证和重新研究条件；当前未占用席位。 |
 | [LCAC](../candidates/learned_counterfactual_agent_credit/PARK.md) | 保留 B03 负结果及基线/学习证据；当前未占用席位。 |
 | [ACVC](../candidates/acvc/PARK.md) | 保留实际部署/重复性证据和完整 Portfolio 交流；当前未占用席位。 |
@@ -37,8 +37,9 @@ Portfolio 的新决定前瞻应用，不擅自重写结果或批量重启旧方�
 
 ## 当前交接与成本口径
 
-FOLR 请求2026-09-14-folr-portfolio-direction-reconciliation-01先处理，RCLE 请求
-2026-09-14-rcle-e01-direction-decision-01随后；同一会话只保留一个在途请求，完整答复归档后交接。
+FOLR 请求2026-09-14-folr-portfolio-direction-reconciliation-01已完成并应用 CONTINUE；
+完整答复保全于4776103de4f55beaee610c52506112651bfaed04。RCLE 请求
+2026-09-14-rcle-e01-direction-decision-01接续该会话；本交接尚不声称 RCLE 已 Send。
 旧6aa7836e会话答复已由552f0dce7904e35206b8e32f9180ab85aee822ad保全，其 DISH 建议未应用。
 新的 Portfolio 决定须基于实际读取的固定权限、全局上下文、完整结果/反证/审查和 DM 回应。
 

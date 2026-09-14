@@ -1,0 +1,40 @@
+{
+  "request_id": "2026-09-14-folr-portfolio-direction-reconciliation-01",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "provider": {
+    "platform": "ChatGPT",
+    "conversation_url": "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1",
+    "binding": "portfolio:cross_direction",
+    "model_ui": "6 Pro",
+    "model_slug": "gpt-6-pro",
+    "user_message_id": "2fbffedc-fe81-44c1-993c-37cc67ac4dc6",
+    "assistant_message_id": "59c57a65-c3e2-4dfa-861f-e15a67323945",
+    "sent_once": true,
+    "retry_or_regenerate": false,
+    "terminal_observed": true
+  },
+  "source": {
+    "immutable_commit": "8ac65986d4a6cd09afbc95a30741d12f9237f5ba",
+    "github_prompt_url": "https://github.com/CartmanFatass/My-paper-code/blob/8ac65986d4a6cd09afbc95a30741d12f9237f5ba/docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/PROMPT.md",
+    "local_prompt_path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\docs\\research\\candidates\\vap_folr_core\\pro_packets\\20260914_portfolio_direction_reconciliation\\PROMPT.md",
+    "prompt_bytes": 30159,
+    "prompt_sha256": "6fe4e6818aae27aa65aaf3d7d3346d523c5708f60a11962855034a53c10c0698",
+    "access": "Prompt source read from immutable GitHub commit; full provider response reports all 35 fixed source-manifest paths read with no decision-critical gaps."
+  },
+  "response": {
+    "archive_path": "archive/RESPONSE.md",
+    "format": "provider Copy response Markdown",
+    "chars": 8366,
+    "bytes": 17764,
+    "sha256": "12f367046d07b6b7b54461cb321329eb1bd691b02ca74ee4cdf6518a1c9a675f",
+    "conclusion": "FOLR CONTINUE; retain the reserved third slot; use prepared B03 as the next bounded objective; do not apply DISH; no RCLE/MGTAP changes.",
+    "claims": "No repository write, task creation, formal test execution, or experiment launch was claimed."
+  },
+  "archive": {
+    "archive_dir": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\docs\\research\\candidates\\vap_folr_core\\pro_packets\\20260914_portfolio_direction_reconciliation\\archive",
+    "prompt_archive": "archive/PROMPT_BODY.md",
+    "prompt_archive_note": "apply_patch-normalized text body; source PROMPT.md remains the byte-exact immutable source (archive body differs only in terminal newline normalization).",
+    "response_archive": "archive/RESPONSE.md"
+  },
+  "transport_scope": "Direct Portfolio dialogue only; no GitHub writes, no main/index integration, no Root ACK, no new task, no experiment."
+}
