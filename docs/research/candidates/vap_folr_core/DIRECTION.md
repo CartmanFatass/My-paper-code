@@ -6,10 +6,10 @@ This source belongs to route **N3 — 状态保留、重建与迁移**, in the *
 of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
 this does not establish scientific equivalence or pool result polarity.
 See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
-Current DM lifecycle decisions are recorded in this direction's intake and summarized
-below; `docs/research/portfolio/PORTFOLIO.md` is their reporting index under the
-2026-09-13 owner delegation of the whole direction lifecycle. Older lifecycle/execution
-statements below are historical. Existing cards, technical quarantines,
+Current reports and direction decisions are recorded in this direction's intake and
+summarized below under OWNER_DIRECT 2026-09-14 Portfolio final interpretation.
+`docs/research/portfolio/PORTFOLIO.md` is a report that may lag actual producers.
+Older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
 second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
@@ -17,8 +17,8 @@ This authority preserves the direction's source-grounded scientific question, ev
 ## Authority
 
 - Stable direction ID: `vap_folr_core`
-- The direction DM owns its research and lifecycle under the current owner delegation; the Portfolio index reports the actual decision without another approval.
-- Convergence is the independent scientific Reviewer of design, evidence, interpretation, conclusions and successor plans. DM reads the full review, resolves concrete findings or limits claims, and owns the final decision. Review is not funding/lifecycle approval.
+- OWNER_DIRECT 2026-09-14: DM owns innovation, ordinary experiments/engineering and reports; Portfolio is the final direction-level interpreter under PORTFOLIO_DECISION_PROTOCOL. The owner-challenged disposition is pending, with the third slot reserved.
+- Convergence independently reviews design/evidence/interpretation and successor plans. DM reads the full review and responds to material findings. Portfolio makes the conforming final direction decision; DM executes it without Root ratification.
 
 ## Scientific question
 
@@ -30,36 +30,37 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
-**Current lifecycle: reversible PARK/MEDIUM after B02 and full independent review
-on 2026-09-14; DM close-call judgment.** Both fresh fits completed: Generic mean
--0.65296875, BANK mean -5.483828125, BANK-minus-Generic **-4.830859375**,
-so the frozen branch is **GENERIC_ABOVE_MEI**. This supplies the first complete
-prospective fresh-learning contrast on the exact equally informed H20 host.
-There is one training realization per arm, with no population, component-causal,
-competence, convergence, speed or general BANK-negative claim. E's original
-contrast remains unavailable; F's outcome-informed reference-use choice stays separate.
+**Current lifecycle: pending_portfolio_decision — DM recommends CONTINUE with B03 on 2026-09-14.**
+The [owner-requested reconciliation](FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md#owner-requested-scientific-reconciliation--2026-09-14)
+withdraws the prior stopping rationale and submits the direction judgment to
+Portfolio under the latest owner authority. B02 remains a valid
+adverse observation: Generic -0.65296875, BANK -5.483828125, d=-4.830859375,
+GENERIC_ABOVE_MEI, one fitted instance per arm. E's missing contrast and F's
+outcome-informed negative fixed-reference use stay separate. There is no population,
+component-causal, competence, convergence, speed or general BANK-negative claim.
 
-The [final B02 intake](FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md#final-dm-lifecycle-decision--2026-09-14)
-records options P/B/L/C and selects P under standing delegation. The [independent
-review response](pro_packets/20260914_entity_history_b02_review/INTAKE.md) accepts
-all findings and preserves the substantive possibility that another fresh block
-could change development advice. PARK is a qualitative close call, not compelled
-by one adverse result or by completing the first comparison. Another same-host
-block is an eligible reopening option without novelty, a favorable pilot or
-Portfolio permission. The broader entity-history family remains scientifically OPEN.
+The surviving uncertainty is whether the current package's substantial disadvantage
+recurs under a new training realization. The [B03 card](FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md)
+selects new seed781501/eval1781501 with the same legal information, H20 and
+5000-train/4969-update/128-final exposure per arm. A reversal/near tie or further
+adverse observation would change development advice about this exact memory package.
+The observed B02 cost of3041.46 native seconds and existing accepted path make this
+question proportionate; one negative sign or completed ticket did not justify PARK.
+This is no fixed seed quota, favorable-output search or automatic future repetition.
 
-No successor, live scientific invocation or pending Pro request remains. Both
-remote runs and the one accepted review are fully preserved; exact owned remote
-copies and browser tab are closed out. Native wall was 3041.46 s; full cumulative
-support/provider cost remains UNKNOWN. The occupied research slot is released;
-Clerk owns integration, report and safe archival, not a new scientific approval.
-See the [current PARK knowledge](PARK.md) and [complete result](FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md).
+BANK's observer-subject histories could alter native decisions after visibility and
+membership changes; short H20 trips, reobserved cues and adaptive Generic recurrence
+remain its strongest opposition. The comparison preserves that legal generic null.
+It tests the intact package, not necessity or a particular component's causal effect.
+The full [B02 independent review](pro_packets/20260914_entity_history_b02_review/INTAKE.md)
+challenged the stopping inference; the correction now answers it through selected work.
 
-The [re-entry intake](FOLR_REENTRY_INTAKE_20260914.md) preserves the prospective
-reason for acquiring the first missing contrast, independent of its eventual sign.
-Portfolio filled the ACVC vacancy; DM selected and completed B02, then chose this
-new disposition from the changed evidence. Prior decisions and negative evidence
-below remain historical; they are not current dispatch instructions.
+Implementation has been assigned in this existing DM's authoring checkout; no B03
+scientific run is yet claimed. DM owns review, admission, execution and intake under
+current peer coordination. The third slot stays reserved while Portfolio reviews
+the full report and alternatives; no replacement task is selected. Full support/provider cost
+remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves
+the previous decisions as history, not current lifecycle or dispatch instructions.
 
 **Previous lifecycle judgment (2026-09-13), superseded prospectively above:**
 Owner lifted the later operational pause on 2026-09-13. DM reconsidered the

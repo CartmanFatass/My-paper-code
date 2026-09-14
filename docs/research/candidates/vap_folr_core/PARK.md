@@ -1,6 +1,19 @@
 # FOLR PARK knowledge handoff
 
-## Current disposition after B02 — 2026-09-14
+## Current disposition — pending Portfolio decision after owner-requested reconciliation
+
+The B02 direction PARK below is preserved as history. Its disputed stopping
+rationale is being reconciled under Portfolio final direction interpretation.
+The [scientific reconciliation](FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md#owner-requested-scientific-reconciliation--2026-09-14)
+identifies the unsupported stopping inference and recommends one [B03 fresh-learning
+block](FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md). The broader legal entity-history
+question remains open; B02's negative local result is unchanged. This existing DM
+retains the reserved slot and owns implementation preparation, the full report
+and execution of the eventual conforming Portfolio decision.
+Historical Clerk routes below are evidence only; current coupling is direct with
+MGTAP under the live shared registry. No duplicate replacement request is selected.
+
+## Historical disposition after B02 — superseded prospectively on 2026-09-14
 
 **Reversible PARK/MEDIUM, selected by DM as a close call.** The entity-history
 family remains scientifically OPEN. The [final B02 intake](FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md#final-dm-lifecycle-decision--2026-09-14)
