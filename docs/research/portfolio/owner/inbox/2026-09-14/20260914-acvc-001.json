@@ -71,5 +71,15 @@
     "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
     "source": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_SCIENCE_CARD_20260914.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-14T13:33:33+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_RESULT_EVIDENCE_20260914.md",
+      "state": "applied",
+      "summary": "已执行Portfolio选择的一个新512episode C拟合及C/F/own-dwell：B03双UP、全部计数/证据保全、独立科学评审已派发；普通实现选择由DM承担。"
+    }
+  ]
 }

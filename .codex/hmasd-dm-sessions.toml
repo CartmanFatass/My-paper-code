@@ -11,8 +11,8 @@ heartbeat_state = "MISSING"
 heartbeat_target = "unassigned"
 
 main_writer = "unclaimed"
-main_writer_event = "FOLR_POST_B03_PORTFOLIO_APP_DISPATCH_20260914_RELEASED"
-main_writer_turn = "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc"
+main_writer_event = "ACVC_B03_RESULT_INTEGRATION_RELEASED_20260914"
+main_writer_turn = ""
 
 [retired_clerk]
 thread_id = "01a09d6c-e4e0-7613-ba99-7b0a1b6c540e"
@@ -31,14 +31,14 @@ host_id = "local"
 checkout = "C:/Projects/HMASD"
 
 [directions.acvc]
-state = "active"
+state = "active_b03_scientific_review"
 occupies_slot = true
 park_document = "docs/research/candidates/acvc/PARK.md"
 owner_mode = "independent_task"
 accepted_event = "acvc-session-astra-max-v1"
 accepted_turn = "01a09cd8-cabf-72a2-aed4-3bf5f68fa98a"
-last_processed_event = "ACVC_REOPEN_ACTUAL_RESEARCH_STARTED_20260914"
-next_action = "ACVC owns B03 engineering review/checks, committed/pushed exact-source remote admission/launch, native monitor, collection/intake and independent scientific response. Card and implementation actually begun; no native result claimed at handoff."
+last_processed_event = "ACVC_B03_RESULT_ACCEPTED_REVIEW_DISPATCHED_20260914"
+next_action = "B03 single original remote invocation complete/exit0 at source091c6725b,163.36s; both separate UP means+.1436987981/+.1178477937J with6/64 and5/64 adverse worlds. Full rows/checks/raw archive accepted and remote cleanup complete. One independent result/next-question review dispatched:2026-09-14-acvc-cluster-b03-scientific-review-01,HANDOFFdd9453b9e,Transport01a09ea0-4a86-75b0-826d-6f864efa7480 returns directly to original ACVC DM. No native producer or successor selected; DM reads full answer/responds, then ordinary next object or Portfolio report."
 portfolio_exchange_archive = "docs/research/candidates/acvc/pro_packets/20260914_portfolio_vacancy_selection_recovery/archive"
 first_action = "read PARK.md, DIRECTION.md, final B02 intake/review and current registry; confirmed checkout clean and open repeatability question"
 first_action_evidence = "docs/research/portfolio/decisions/2026-09-14-acvc-dish-vacancy-selection.md; docs/research/candidates/acvc/PARK.md; docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md"
