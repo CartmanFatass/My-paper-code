@@ -12,7 +12,7 @@ provider's complete answers. No new Portfolio request or Send was made.
 
 | Direction | Vacancy | Provider conversation | URL | Prompt chars | Response chars | Local complete archive |
 |---|---|---|---|---:|---:|---|
-| ACVC | DISH released slot | `6aa76925-4558-83e8-86e2-40c5e0a2c320` | https://chatgpt.com/c/6aa76925-4558-83e8-86e2-40c5e0a2c320 | 573 | 9756 | not present; provider page is canonical |
+| ACVC | DISH released slot | `6aa76925-4558-83e8-86e2-40c5e0a2c320` | https://chatgpt.com/c/6aa76925-4558-83e8-86e2-40c5e0a2c320 | 573 | 9756 | `docs/research/candidates/acvc/pro_packets/20260914_portfolio_vacancy_selection_recovery/archive/` |
 | RCLE | UCOPE released slot | `6aa76e5a-e590-83e8-b27b-596c8b8cbe1c` | https://chatgpt.com/c/6aa76e5a-e590-83e8-b27b-596c8b8cbe1c | 625 | 10627 | not present; provider page is canonical |
 | FOLR | ACVC released slot | `6aa77158-7194-83e8-8f8a-caf16ae6b84b` | https://chatgpt.com/c/6aa77158-7194-83e8-8f8a-caf16ae6b84b | 629 | 8370 | not present; provider page is canonical |
 
@@ -34,17 +34,12 @@ The copied user requests are short and are preserved here verbatim.
 
 ## Complete-answer delivery status
 
-The complete answers were recovered from the live provider conversations during
-this Clerk turn. Their text is not copied into this repository because the browser
-session exposes the provider clipboard only; no local complete-answer file was
-available to restore without inventing or truncating content. The three existing
-decision notes link the applied selection and preserve the selected direction,
-rationale, limits and handoff summary. Each current DM receives its exact provider
-conversation URL and the verified character count, and must read the provider
-answer in full before relying on the selection.
-
-This limitation is explicit: this file is an evidence index, not a complete-answer
-replacement. No scientific judgment is made by Clerk from the copied text.
+The ACVC complete answer is now archived byte-for-byte under the path above,
+with hashes and provider message identities in `RECOVERY_FACTS.json`. RCLE and
+FOLR current DMs received one-time technical closeout instructions to archive
+their already-read complete texts; their provider pages remain the canonical
+source until those DM-owned files are published. The three local decision notes
+remain summaries, not substitutes for the complete answers.
 
 ## Direct alignment fact update
 
@@ -58,12 +53,10 @@ new consultation, or launch gate. The new user message is visibly present in the
 conversation; at the final check the provider was still generating its factual
 acknowledgement. No second Send or duplicate request was made.
 
-## Remaining archive limitation
+## Archive completion note
 
-RCLE and FOLR current DMs were sent one-time technical closeout instructions to
-save their already-read provider text into their direction archives; this does
-not add research or approval. ACVC is already archived, so its one-time routing
-attempt returned: `session 01a09dfa-0655-7831-aa3a-9fff2ddd2508 is archived. Run
-codex unarchive ... first.` It was not unarchived, and no ACVC scientific turn,
-experiment, or Send was started. The ACVC complete answer therefore remains
-provider-live only pending a future safe archival opportunity.
+ACVC required a record-only temporary unarchive solely for text recovery; it was
+not a scientific turn, experiment, or new Send, and the task is eligible for safe
+re-archival after its closeout. The earlier browser limitation is retained in
+`RECOVERY_FACTS.json` as evidence of the failed `tab_content_export` attempt;
+supported copy/read controls subsequently recovered exact UTF-8 bytes.
