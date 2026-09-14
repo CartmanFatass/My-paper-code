@@ -1,0 +1,122 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-13-mgtap-early256-results-review-02",
+  "source_thread_id": "/root",
+  "parent_thread_id": "/root",
+  "operator_thread_id": "/root/mgtap_early_results_transport",
+  "direction_id": "metric_ground_transport_allocation",
+  "conversation_id": "6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "201cf6c80a93605661f4368635023a53320039ce",
+  "scientific_question": "Independently review the actual evidence-to-claim chain and the DM's proposed scientific stopping/revisit logic after two early256 mean-COND/intact-DENSE matched training pairs. The earlier complete design review saw only pre-run8241 inputs; it did not review these outcomes. B8241 completed with all32-world ordered-primary Delta=+0.015128847632690413 J (MEI0.01); the prospectively declared fresh8242 recurrence check completed with Delta=-0.05684388886006531 J, 2positive/30adverse worlds. Both valid signed results remain. The outcome-informed descriptive summary of the two fitted-pair endpoint estimates is mean=-0.020857520613687442 J, sampleSD=0.050892410034580046 J, n=2; neither64 final worlds nor repeated endpoints are independent training units. Review whether the cards, exact execution/intake facts and comparison units support the stated local claims; whether outcome-informed selection and stopping are disclosed adequately; and whether any contrary interpretation materially changes the development rationale. DM has selected no additional unchanged early256 numerical work and plans reversible PARK after this review and preservation, while retaining DENSE as the generic development default. The strongest alternative is another independent pair to learn more about recurrence; it could add information but would not itself identify a mechanism or establish stable ordering. DM currently sees weak practical value for unchanged sampling given mixedearly256, mixedequal512, and distinctadverseTOP/unequal outcomes. Challenge this rationale, including any outcome-dependent asymmetry, conflation of tasks, or overclaim. The smallest sufficient evidence class for this question is the existing B/EXPLORE observations plus explicit development judgment, not a publication benchmark or a population inferiority finding. The adverse recurrence discriminates against treating the first positive early256 point as a reliably recurring local development signal, but does not prove non-recurrence or inferiority generally. Give material findings, specific evidence/reasons and minimal proportionate corrections or claim limits. Do not grant lifecycle/funding/scheduling permission: DM reads and responds to the full independent review and owns the final disposition. No successor experiment is selected for this review.",
+  "deliverable": "A conclusion-first independent scientific review of the two actual early256 results, their outcome-informed selection and descriptive/inference limits, and the proposed no-third-unchanged-pair/PARK/reopening rationale. Distinguish direct observations, inferences, scientific defects and optional alternatives. Respond to the strongest continuation case and specify the smallest correction needed for each material finding; state when no material correction is needed. Identify exactly which pinned sources/sections you accessed and any decision-relevant gaps. Preserve all contrary evidence and prior design-review findings. A concise decision-useful review is preferred to repeating the experiment history.",
+  "claim_ceiling": "B/EXPLORE: two local independently trained matched pairs, each with one sole32-world final panel at256trainingepisodes per arm. Conditional world-panel SE describes a fixed fitted pair; the n=2 endpoint spread mixes fit variation and finite evaluation noise. No64-world population test, fixed seed quota, stable algorithm ordering, equivalence, learning-curve/sample-efficiency result, causal exposure effect, geometry/attention mechanism proof or broad COND failure is claimed. DENSE default and PARK are development choices, not empirical population conclusions. Historical512/512, TOP and unequal-exposure objects remain distinct; no pooled test across them.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_SCIENCE_CARD_20260913.md",
+      "purpose": "Read the complete B02 card, especially prospective primary/branches and section5's prelaunch runtime clarification; compare its exact scientific endpoint with the actual result.",
+      "provenance": "DM-authored B/EXPLORE card. B02 launch fixed at8744085c293288e2c178fbc6d2a97ae9ca053c43; current evidence copy preserves section5. Older450/900 wording is historical administrative planning, not owner hard limits."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_RESULT_20260913.md",
+      "purpose": "Read the actual8242 primary, complete exposure, integrity facts, finite-panel limits, native cost, collection repair and archive identity.",
+      "provenance": "Accepted native one-pair result and retained-byte technical collection; no retry, extra evaluation or numerical diagnostics. Scientific launch SHA is distinguished from its inherited source baseline."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B02_INTAKE_20260913.md",
+      "purpose": "Review the full DM scientific intake, no-third-unchanged-pair selection, strongest alternative, planned PARK and reopening conditions.",
+      "provenance": "DM's actual-result interpretation and proposed final direction disposition; this is the position to challenge, not an instruction to agree."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/early_exposure_b02_8242_20260913/TWO_TRAINING_INSTANCES_DESCRIPTIVE.json",
+      "purpose": "Inspect the two declared independent matched training units, both endpoint estimates and descriptive spread; do not treat episode rows as fits.",
+      "provenance": "Existing summarize_runs output from one endpoint per arm per actual training instance, paired explicitly. Tiny subtraction-order floating differences do not replace either card's ordered-world primary."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B01_SCIENCE_CARD_20260913.md",
+      "commit_sha": "0d161633e3bb6884b56ef57a0200060b659c56a8",
+      "purpose": "Read the frozen8241 early256 common-endpoint question, same-information comparator, private pairing, final panel and interpretation branches.",
+      "provenance": "Prospective B01 scientific input before its result and before the later8242 recurrence selection. Preserve this original science version."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B01_RESULT_20260913.md",
+      "commit_sha": "a123ee3929ced2da9f49abe08d664a044ce0c503",
+      "purpose": "Read the actual8241 positive primary, bounded integrity and native188.19s; retain its validity and limits.",
+      "provenance": "Accepted first early256 pair, not selected evaluation of8242 and not a learning curve."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B01_INTAKE_20260913.md",
+      "commit_sha": "a123ee3929ced2da9f49abe08d664a044ce0c503",
+      "purpose": "Inspect the outcome-informed rationale selecting the fresh8242 recurrence pair after the positive8241 observation.",
+      "provenance": "DM intake before8242 numerical output; explicitly not population confirmation or an unlimited successor ladder."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_8231_MANAGEMENT_20260913.md",
+      "purpose": "Read only the accepted descriptive512/512 A/RECON result, its mixed signs/noise limits, and how early256 was selected; keep the unselected illustrative future envelope distinct.",
+      "provenance": "Outcome-informed analysis of existing endpoint evidence, zero newfits. Its development history informs selection bias, not a pooled early256 inference."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "purpose": "Read only the current early256 headings and the separate Unequal-exposure COND512/DENSE768 adverse use result, TOP single-partner query fresh8221 adverse result, and three Conditional pooling native/fresh8213/fresh8214 result headings. Use these for distinct historical alternatives/limits; do not traverse old citations.",
+      "provenance": "DM-maintained direction history at fixed evidence revision. Historical pause and former Pro/Portfolio authority wording are evidence of old operation, not current authority or a pooled experiment."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_scientific_review/archive/RESPONSE.md",
+      "commit_sha": "66f2659d215312e3e46e06c1e3e372308644a456",
+      "purpose": "Read the prior complete independent review's design findings, conditional-successor reasoning and explicit claim limits; this new question adds actual8241/8242 evidence.",
+      "provenance": "Archived review of pre-run8241 inputs only, SHA2569a8c8984ccf9857d19ae8852be5523afc5a797bd8f281d1a02679ec96b51f74e. Not a review of either later realized outcome."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_scientific_review/INTAKE.md",
+      "purpose": "Inspect the DM's response to prior material limitations so repeated findings and genuinely new corrections remain distinguishable.",
+      "provenance": "Accepted full-review intake, including finite-evaluation/training-spread correction and exact delivery-format caveat. No new scientific authority."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "1c6ba284ecd03c20fc6b7e6fa1a3d27efd630abf",
+      "purpose": "Apply sections11.4 and11.7–11.10 only: B evidence burden, cardMEI, proportional exploratory inference, no generic seed/positive-first/diagnostic prerequisite and scientific knowledge use.",
+      "provenance": "Current applicable empirical requirements at a separately pinned published method revision; not a retroactive rewrite of frozen exposure/comparators."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "1c6ba284ecd03c20fc6b7e6fa1a3d27efd630abf",
+      "purpose": "Read sections2–4 and6 for history/information fairness, multi-agent learning and independent training/evaluation/selection concepts.",
+      "provenance": "Explanatory scientific knowledge, not a new authority, gate or unlisted dependency."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "1c6ba284ecd03c20fc6b7e6fa1a3d27efd630abf",
+      "purpose": "Read the independent training unit, finite evaluation uncertainty, paired comparisons and outcome-informed selection passages.",
+      "provenance": "Explanatory empirical knowledge scoped to this interpretation; do not recursively follow references."
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "7fd9c5a071c2a56e37242bd5775c090d018079c1",
+      "purpose": "Apply section2's current DM lifecycle ownership, independent scientific Reviewer responsibility and runtime-plan/scientific-endpoint distinction.",
+      "provenance": "Current owner delegation. This is scientific review, not lifecycle/funding approval; other global vacancy machinery is outside this request."
+    }
+  ],
+  "constraints": [
+    "Machine-generated existing exposure (accepted RUN_SUMMARY/INTAKE_ANALYSIS and paired summarize_runs records):2early256 invocations=2matchedtrainingpairs=4fits;4*65536=262144 trainingteamticks;4*8192=32768 finalteamticks;total294912teamticks;4*512=2048Adamcalls;4*1679360=6717440actorrowuses. Existing complete native wall188.19+190.58=378.77s (sum of invocations, not elapsed critical path or aggregate CPU). Additional fits, environment/evaluation ticks and optimizer calls for this review=0.",
+    "Per actual early256 arm the work law is initialization +65536 collectionteamticks +512Adam/recurrent replay calls +8192 finalteamticks +checkpoint/publication/exit. No search/solver/trajectory diagnostic is selected. The reviewed continuation alternative would add one such two-arm pair; it is not selected or authorized by this request. Unit-time forecasts beyond retained native timings remain estimates/UNKNOWN.",
+    "Full support/provider/direction-lifetime totals and aggregate CPU are UNKNOWN. Original self-declared support/complete plans are not converted into owner hard caps or zero cost. B02's prelaunch1800arm/3600pair ordinary watchdog correction did not change scientific exposure, dtype/device/RNG, primary or comparator; neither old nor new native watchdog was reached.",
+    "Read only listed paths at their effective fullSHA and named relevant sections. Do not require supplementary code replay, model loading, new experiments, exact maxima, search-before-learning, exhaustive mechanism identification or a fixed seed quota without a concrete material scientific need. If a genuine evidence defect exists, name it and the smallest correction; do not assume technical acceptance guarantees scientific validity.",
+    "Historical positive and adverse results all remain. Distinct early256, equal512, TOP and unequal-exposure objects are not pooled as a common estimand. Proposed reopening can arise from a concrete new mechanism/comparator/development question or evidence; it does not require a customer, positive result first, unused time or a changed watchdog.",
+    "Pro may write only this request's response file and delivery comment. It does not modify source/cards, direction lifecycle, branch names, main, resources or old request archives. Finish the full review in the same accepted turn even if GitHub delivery needs the already instructed downloadable Markdown fallback."
+  ],
+  "response_schema": [
+    "Conclusion and most material scientific findings, if any.",
+    "Evidence/selection/independent-unit assessment with direct pinned support and contrary interpretation.",
+    "Assessment of the proposed development stopping/revisit rationale, separating optional continuation value from required corrections.",
+    "Minimal corrections or accepted claim limits, plus actual source access/gaps."
+  ],
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/mgtap",
+    "base_sha": "b1b5927eba1e4413fd83f84b3fd0843250084571",
+    "response_path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_results_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/18"
+  }
+}
