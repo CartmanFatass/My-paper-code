@@ -324,3 +324,28 @@ update/save/collector consumers, fixed exposure/RNG and final-checkpoint identit
 complete/incomplete result handling, primary and exact proposed launch argv.
 Review findings and DM technical acceptance remain pending. No B01 result-bearing
 invocation, remote process or monitor adoption has occurred.
+
+### Exact remote launch preparation
+
+DM prepares the two13-line shell invocations in
+`../../entity_history_augmentation_b01_781601/GENERIC.sh` and `AUGMENTED.sh`,
+reusing the previously executed native time/admission wrapper. This scoped support
+adds26 non-test lines (353 with the327-line integration). Each accepts exact
+source SHA, detached checkout and a new output directory; A also accepts the G
+summary path. External control verifies the committed source and unused handle/output
+before one supervisor submission. Its adjacent committed memory preflight must
+pass the existing physical/effective4GiB floor before the runner begins.
+
+The outer native time process covers admission, initialization, training, checkpoint,
+final evaluation, JSON write/readback and process exit. It publishes elapsed wall,
+aggregate user/system CPU, maximum resident KiB and exit code. Runner-internal
+wall/CPU fields are pre-publication snapshots and are not the complete-invocation
+measure. The summary itself is not silently relabeled. No elapsed watchdog is
+selected for this finite5000/128 object; the native monitor observes progress and
+reports concrete failure or exceeded ordinary plan for DM investigation without
+automatic stop/retry. Scientific endpoints and one-arm-at-a-time remain fixed.
+
+The full-path independent Reviewer receives these exact scripts and updated source
+identity in the same bounded review. A final launch SHA/path is recorded after
+review resolution and acceptance, before result-bearing execution. No remote
+worktree or selected-arm process has been created during this preparation.
