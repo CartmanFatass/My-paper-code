@@ -1,0 +1,38 @@
+{
+  "question": "选择准备两份已训练模型的固定众数推理比较，保留明确的零新增训练范围及待处理规范条款。",
+  "changes_if_approved": [
+    {
+      "target": "RCLE E01 card / DIRECTION",
+      "from": "B12独立review已完成",
+      "to": "准备两份固定checkpoint的条件众数比较；尚未开始原生调用"
+    }
+  ],
+  "if_refused": "保留B12及完整review；DM重新选择PARK或有明确理由的不同问题，不自动重训。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_INTAKE_20260914.md",
+      "quote": "No new native invocation has started.",
+      "why": "已学参数在新执行法则下是否有用，会直接影响保留该控制器还是使用固定greedy。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b12_scientific_review/archive/RESPONSE.md",
+      "quote": "PARK 是有力的竞争意见：当前 sampled 方法已经两次完成并落后于同支持的强规则，modal 也可能只恢复 greedy 行为而没有新用途价值。",
+      "why": "不能因为便宜或要保持ACTIVE而不断改变执行方式追求阳性。"
+    }
+  ],
+  "uncertainty": [
+    "B11故障未定位，成功运行不等于修复。",
+    "原评价面板已被看过，两个checkpoint是完成者；不作独立确认或总体推广。",
+    "ordinary B非零更新条款需Root按具体共享规范范围处理；不借A标签或无用更新绕过。"
+  ],
+  "cost": {
+    "compute": "拟定1024新评价episode/65536tick、0新fit/0更新；原生15–45s与support10–20min仅参考，费用未知项保留。",
+    "owner_time": "无需在owner条目中逐步批准；Root处理的是已经具象化的共享规范条款适用。",
+    "reversibility": "reversible",
+    "waits_on_this": "E01原生调用仅依赖具体规范适用处理；准备和review不等待owner条目回复。"
+  },
+  "verdict_text": "Owner-delegated decision (2026-09-03/13): prepare E01. No new native invocation has started.",
+  "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_INTAKE_20260914.md"
+}

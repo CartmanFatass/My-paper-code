@@ -18,29 +18,28 @@ This authority preserves the direction's source-grounded scientific question, ev
 - Stable direction ID: `roster_consistent_latent_exploration`
 - This DM owns direction-local research, family adjustments, continuation, parking and ending under the owner's 2026-09-13 instruction. Clerk records these decisions in the Portfolio report; only owner-triggered cross-direction adjustments/consultations follow. This grants no control over other directions or extra resource commitments.
 
-## Current DM position — 2026-09-14: ACTIVE / B12 complete, scientific intake
+## Current DM position — 2026-09-14: ACTIVE / full B12 review complete; modal E01 preparation
 
-The new [B12 result](RCLE_B12_FINAL1024_RESULT_EVIDENCE_20260914.md) completed1024 updates
-and four512 panels in192.81s including debugger/admission/publication. G_U+.065030924479,
-D_n+.156380208333, D_g-.014135742187: learning and nearest benefit recur while observed
-sampled U/full-Y still favor fixed greedy in all eight cells. Recovery remains mixed.
-The [B12 intake](RCLE_B12_FINAL1024_INTAKE_20260914.md) preserves two completed1024
-observations among three attempted scientific invocations; B11 failed after164 updates,
-and synthetic D1/B12 non-reproduction did not diagnose or repair its native fault.
+B12 completed1024 updates and four512 panels: G_U+.065030924479, D_n+.156380208333,
+D_g-.014135742187, with mixed recovery. The [full B12 intake/reviewer response](RCLE_B12_FINAL1024_INTAKE_20260914.md)
+retains the complete Convergence review atad6e30953c5fd1f78e3f5da6cdee103769a6bfde and
+DM responses to all material findings. No demonstrated invalidation of B12 was found;
+B11's unexplained SIG11 and two completed endpoints among three attempts remain.
 
-DM proceeds to complete independent scientific review and finding responses. The
-provisional successor recommendation is a separate small inference-law contrast using
-retained checkpoints, with unchanged-fit repetition and PARK as alternatives; no new
-invocation is allocated at this checkpoint. RCLE remains ACTIVE. No PARK/CLOSE, automated
-retry, additional paid capacity or other-direction adjustment is applied.
+DM selects preparation of [fixed-modal E01](RCLE_FIXED_MODAL_REUSE_E01_SCIENCE_CARD_20260914.md):
+two retained trained checkpoints, original conditional panels, actual combined-law modes
+versus their own greedy references, zero new fitting. This is a new execution package,
+not a rewrite of the sampled results. The exact zero-update B applicability issue in
+empirical-spec5.2/11.4 is routed through the [bounded Root proposal](fixed_modal_reuse_e01_20260914/SPECIFICATION_SCOPE_PROPOSAL.md);
+only that result-bearing invocation awaits resolution. Source preparation and independent
+engineering review continue. No further scientific invocation/PARK/CLOSE is applied.
 
-The full [direct Portfolio alignment](reentry_20260914/portfolio/ACKNOWLEDGEMENT.md)
-confirms actual full-lifecycle re-entry, not a documentary-only handoff. B11 attempted
-and B12 completed the independent-instance work motivated by that selection. Both old
-exact-recipe HOLDs, historical recasts, frozen results and UNKNOWN costs remain.
-Historical support600s and reasonable time plans are estimates with allowed deviation;
-they do not create stop lines, Send gates or approval triggers. Owner/physical resource
-limits and fixed scientific endpoints retain their actual scope.
+The full [direct Portfolio acknowledgment](reentry_20260914/portfolio/ACKNOWLEDGEMENT.md)
+confirms full-lifecycle re-entry; B11 attempted and B12 completed the independent-instance
+work. Historical support600s and ordinary wall plans allow deviation and are not stop,
+Send or approval gates. Frozen evidence, both exact-recipe HOLDs, unknown costs and real
+resource/scientific limits retain their actual scope. Completed detached execution checkouts
+were removed only after full hash-verified archival; the shared authoring checkout remains.
 
 ## Historical DM position — 2026-09-13 after B10: PARKED
 
