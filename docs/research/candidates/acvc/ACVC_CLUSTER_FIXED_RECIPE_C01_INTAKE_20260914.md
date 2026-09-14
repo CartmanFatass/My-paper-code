@@ -2,7 +2,7 @@
 
 ## Current state
 
-All six preselected original units are complete and technically accepted at fixed source6e8d1b894. The frozen joint reading is JOINT_ABOVE_MEI: F-C+.096377354920J, interval[.074826981257,.117927728584]; F-own-dwell+.064088940259J, interval[.035375804426,.092802076092]. These are prespecified97.5% marginal t intervals with at least95% simultaneous coverage only under the iid-normal complete-fit-panel working model; actual neural-training calibration remains unestablished. The complete74-line independent scientific review identifies no material defect and has been fully read/responded. The DM is reporting a close-call bounded-reference PARK recommendation with a substantive new-B alternative to Portfolio; no new experiment or direction disposition is selected.
+All six preselected original units are complete and technically accepted at fixed source6e8d1b894. The frozen joint reading is JOINT_ABOVE_MEI: F-C+.096377354920J, interval[.074826981257,.117927728584]; F-own-dwell+.064088940259J, interval[.035375804426,.092802076092]. These are prespecified97.5% marginal t intervals with at least95% simultaneous coverage only under the iid-normal complete-fit-panel working model; actual neural-training calibration remains unestablished. The complete74-line independent scientific review identifies no material defect and has been fully read/responded. The complete Portfolio decision selects CONTINUE/MEDIUM/recasts2 and a future1024/4096 B. The later direct owner pause defers that unstarted successor; current C01/review/report closeout is complete and handed off.
 
 ## Applied authority and actual design choice
 
@@ -152,3 +152,10 @@ At this boundary DM prospectively records3600s remaining closeout/report wall pl
 The full74-line/14488-byte independent response at9a655b28b5ac33935f88954c32b7a06b84c3252e was read through its last reference and verified against the immutable Git blob, response-only commit scope and Issue14 comment5669662010. [Full response and every material DM response](pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/INTAKE.md) retain actual access boundaries, single user/assistant exchange, receipt hashes and the ordinary CRLF checkout difference. No material empirical/inferential/reporting defect was identified. No repair run or repeat consultation follows.
 
 DM accepts the exact qualified result and selects the [post-C01 direction development/retention report](ACVC_POST_C01_DIRECTION_REPORT_20260914.md). Its close-call recommendation is bounded-reference PARK, with the useful new1024/4096 B as the strongest continuation alternative. This responds to the review's investment challenge; the review itself did not grant a lifecycle choice. Current CONTINUE/MEDIUM/recasts2/one occupied slot remains until the complete conforming Portfolio/owner decision is actually applied. Native C01 is consumed, and no successor has been selected or invoked.
+
+
+## Complete Portfolio intake and owner-pause handoff
+
+The complete144-line/24996-byte Portfolio response atfa1e385efc89135288b6afb102ec9353c9acf1c3 has been read,verified and substantively answered. [Full decision/application](../../portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/INTAKE.md) selects CONTINUE/MEDIUM/recasts2 and one future1024/4096 paired B,with no C01 repair/extension or extra recast.
+
+The later owner instruction requires completing current work and then pausing with a handoff. Therefore no new card,seed,source or invocation is created for the selected future B. Scientific CONTINUE and operational owner pause are separate; the original slot remains. [ACVC handoff](ACVC_OWNER_PAUSE_HANDOFF_20260914.md) records complete originals/reviews/archives,policy-denied local cleanup and the first action after an explicit owner resume. No current ACVC native or provider obligation remains.

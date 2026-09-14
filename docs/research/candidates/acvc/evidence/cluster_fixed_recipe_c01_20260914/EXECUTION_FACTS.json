@@ -9,7 +9,7 @@
   "cwd": "/home/wu/hmasd-worktrees/acvc-fixed-recipe-c01-6e8d1b894",
   "output_root": "/home/wu/hmasd-worktrees/acvc-fixed-recipe-c01-6e8d1b894/temp/directions/acvc/exp/cluster_fixed_recipe_c01_20260914",
   "source_surface": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/SOURCE_SURFACE.json",
-  "state": "all_six_complete_scientific_review_intaken_direction_report",
+  "state": "complete_fully_reviewed_portfolio_intaken_owner_paused",
   "scientific_invocations_accepted": 6,
   "units": [
     {
@@ -682,5 +682,19 @@
     "actual_cumulative_support_provider_agent_cost": "UNKNOWN",
     "actual_native_added": 0,
     "stopping": "Complete that review/report decision chain or identify the actual dependent external/scientific boundary; no automatic extra fit or new paid/shared resource."
+  },
+  "post_c01_portfolio_application": {
+    "response_commit": "fa1e385efc89135288b6afb102ec9353c9acf1c3",
+    "intake_path": "docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/INTAKE.md",
+    "scientific_decision": "CONTINUE/MEDIUM/recasts2; one future1024/4096 B",
+    "execution_override": "LaterOWNER_PAUSE_AFTER_INFLIGHT_20260914 defers unstarted successor; no new card/seed/source/run",
+    "handoff_path": "docs/research/candidates/acvc/ACVC_OWNER_PAUSE_HANDOFF_20260914.md"
+  },
+  "owner_pause_closeout_support_plan": {
+    "prospective_additional_wall_plan_s": 3600,
+    "scope": "Complete existing Portfolio intake/handoff and collect current peer handoffs under owner instruction; zero scientific invocations.",
+    "stop_condition": "Actual current-work handoffs complete or concrete outside-scope blocker recorded; no automatic new consultation or research.",
+    "old_plans_preserved": true,
+    "cumulative_support_provider_agent_cost": "UNKNOWN"
   }
 }

@@ -1,36 +1,37 @@
 # Direction acvc: ACVC
 
-## Current research ownership — OWNER_DIRECT / Portfolio, 2026-09-14
+## Current scientific disposition and owner pause — 2026-09-14
 
-ACVC is **CONTINUE**, MEDIUM/recasts2, under the complete conforming
-[post-paired Portfolio decision](../../portfolio/pro_packets/20260914_acvc_post_paired_direction/archive/RESPONSE.md)
-and [full DM response/application](../../portfolio/pro_packets/20260914_acvc_post_paired_direction/INTAKE.md).
+ACVC's scientific disposition is **CONTINUE / MEDIUM / recasts2**, with its one occupied slot retained,
+under the complete [post-C01 Portfolio decision](../../portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/archive/RESPONSE.md)
+and [full actual DM response/application](../../portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/INTAKE.md).
+The later [direct owner instruction](../../portfolio/decisions/2026-09-14-owner-pause-after-inflight.md)
+requires finishing in-hand tasks/experiments, writing handoffs and then operational pause.
+ACVC current C01 and both scientific/provider intakes are complete; **new research is owner-paused**.
+The selected future1024/4096 paired B has no new card,seed,source or native invocation and is deferred
+until explicit owner resume. No scientific PARK/CLOSE,vacancy or automatic replacement follows.
+
 The [six-programme fixed1024 C01](ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md)
-is complete at source6e8d1b894: all six preselected originals,7296 episode rows and12288 updates
-were verified. [Full E0](ACVC_CLUSTER_FIXED_RECIPE_C01_RESULT_EVIDENCE_20260914.md) gives
+is complete at source6e8d1b894: all six originals,7296episode rows and12288updates verified.
+[Full E0](ACVC_CLUSTER_FIXED_RECIPE_C01_RESULT_EVIDENCE_20260914.md) gives
 F-C+.096377354920J [.074826981257,.117927728584] and F-own-dwell+.064088940259J
-[.035375804426,.092802076092], both prespecified lower bounds>.01J. Simultaneous coverage
+[.035375804426,.092802076092],both unrounded lower bounds>.01J. Simultaneous coverage
 is qualified by the iid-normal complete-fit-panel working model; actual neural-training calibration
-is unestablished. Adverse worlds30/384 and56/384 and all absolute/control/learning/cost evidence
-remain. Native summed wall1733.09s; full support/provider/agent costs UNKNOWN.
-[Current intake](ACVC_CLUSTER_FIXED_RECIPE_C01_INTAKE_20260914.md) records the consumed frozen C,
-complete engineering findings/repairs and actual reporting corrections. The complete74-line
-[independent scientific review and DM response](pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/INTAKE.md)
-find no material defect at the exact qualified ceiling. The
-[post-C01 development report](ACVC_POST_C01_DIRECTION_REPORT_20260914.md) recommends a close-call
-bounded-reference PARK to Portfolio, compared with a concrete useful1024/4096 paired-exposure B.
-This is a direction proposal; current CONTINUE/MEDIUM/recasts2/one occupied slot remains.
-No new empirical successor or lifecycle disposition exists.
-The original independent ACVC DM owns ordinary research, implementation, engineering acceptance,
-launch/observation, scientific intake and reports. Portfolio owns final direction-level
-CONTINUE/recast/PARK/CLOSE/reopening. Direction Pro supplies independent scientific review;
-the DM reads full answers and responds to material findings. Root owns shared policy/control
-engineering. Canonical live endpoints and slot mechanics are in main
-`C:/Projects/HMASD/.codex/hmasd-dm-sessions.toml`; Clerk is retired.
+is unestablished. Adverse panels30/384 and56/384 and all absolute/control/learning/cost evidence
+remain. Native1733.09s; full support/provider/agent costs UNKNOWN. The frozen C is consumed.
 
-Reuse `C:/Projects/HMASD-worktrees/codex-acvc`, branch `codex/acvc`. No additional DM or
-fourth slot is created. RCLE completed this reservation's conversion to occupancy at main
-`6c6b2432402bf9d9c77b53d683b35ebbb4c325ee`. The original DM owns research continuation.
+The full74-line independent review found no material defect within its actual inspected scope;
+every material point is answered in [scientific intake](pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/INTAKE.md).
+The full144-line Portfolio decision substantively chose the finite longer-exposure development
+question over the report's close-call PARK preference. Its rationale is retained, while the later
+owner pause controls execution. See [current operational handoff](ACVC_OWNER_PAUSE_HANDOFF_20260914.md)
+for exact evidence,preserved archives,cleanup limits and first resume action.
+
+Reuse original independent DM01a09dfa-0655-7831-aa3a-9fff2ddd2508 at Astra/max,
+C:/Projects/HMASD-worktrees/codex-acvc,branchcodex/acvc. Read live control from
+C:/Projects/HMASD/.codex/hmasd-dm-sessions.toml and ROOT_OPERATIONS.md; historical task/host
+literals are not dispatch routes. No ACVC experiment/monitor/Pro request remains live.
+The original DM only follows the user's all-direction handoff coordination to completion.
 
 ## Completed reopening evidence — B03, longer-C and paired exposure
 
