@@ -57,3 +57,13 @@ routing and archives. It explicitly stated that this was not an approval request
 new consultation, or launch gate. The new user message is visibly present in the
 conversation; at the final check the provider was still generating its factual
 acknowledgement. No second Send or duplicate request was made.
+
+## Remaining archive limitation
+
+RCLE and FOLR current DMs were sent one-time technical closeout instructions to
+save their already-read provider text into their direction archives; this does
+not add research or approval. ACVC is already archived, so its one-time routing
+attempt returned: `session 01a09dfa-0655-7831-aa3a-9fff2ddd2508 is archived. Run
+codex unarchive ... first.` It was not unarchived, and no ACVC scientific turn,
+experiment, or Send was started. The ACVC complete answer therefore remains
+provider-live only pending a future safe archival opportunity.
