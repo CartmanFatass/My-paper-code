@@ -59,7 +59,7 @@ mandatory checklist, scheduler or current return route.
   "agentify_stable_key": "em:example_direction:innovator",
   "direction_id": "example_direction",
   "direction_ids": ["example_direction"],
-  "decision_authority": "pro_final",
+  "decision_authority": "dm_owned_scientific_review",
   "request_id": "example-review-01",
   "packet_id": "example-review-01--example_direction",
   "source_thread_id": "/root/dm_example",
@@ -367,14 +367,14 @@ each request's recorded observation facts without rewriting another request's st
 
 ## Automatic return outbox
 
-New records use REUSE_DM_TRANSPORT: author and receipt parent are the owning author (DM, or Root for Portfolio vacancy replacement), operator is
+New records use REUSE_DM_TRANSPORT: author and receipt parent are the owning author (DM for direction nodes, Clerk for explicitly owner-commissioned Portfolio consultation), operator is
 its actual native Transport child. execution_thread_id records actual recovery ownership without
-rewriting immutable accepted historical metadata. No app-task self-dispatch or Root forwarding.
+rewriting immutable accepted historical metadata. No app-task self-dispatch or Clerk forwarding.
 Existing attempted/uncertain delivery evidence is never restaged during recovery.
 The following external-parent procedure applies only when executor differs from parent.
 
 After `ARCHIVED`, call `stage_receipt` from `scripts/transport_contract.py` before
-using native `collaboration.send_message` to the validated waiting author parent (DM or Root). The deterministic `message_key` remains
+using native `collaboration.send_message` to the validated waiting author parent (DM or Clerk). The deterministic `message_key` remains
 `request_id|direction_id|conversation_id|response_sha256`. The outbox transitions
 from `PENDING` to `SENT`, `UNCERTAIN`, `FAILED`, or `BLOCKED` and records the exact
 parent destination, timestamp, attempt count, delivery status, and error.
@@ -393,3 +393,9 @@ available, no outbox message is staged: the receipt records
 `required=false`, `receipt_state=RETURN_RECEIPT_BLOCKED`,
 `destination_thread_id=null`, and no message key. Preserve the evidence and report the
 missing parent; do not invent a destination or another Send.
+
+New direction requests carry decision_authority=dm_owned_scientific_review; explicitly owner-requested
+Portfolio consultations carry owner_requested_advice. Frozen legacy pro_final values remain readable
+for reconciliation but do not confer current decision authority. DM retains direction lifecycle and
+responds to independent scientific review; Portfolio recommendations require the owner's actual
+implementation instruction for cross-direction effects.

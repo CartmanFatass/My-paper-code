@@ -10,7 +10,7 @@ calculate and measure facts instead of repeatedly deriving them in prose. Select
 only the mode needed now; this is not a launch checklist or new review layer.
 
 - **Scientific reading:** for DM/Claude hub mechanism/card/comparator/estimand choices,
-  intake or scientific Pro questions, Portfolio material preparation and Pro-response conformance by its author (DM, or Root for vacancy replacement), and a
+  intake or scientific Pro questions, user-requested Portfolio analysis and DM responses to independent Pro scientific review, and a
   critic's reviewed claim, use [scientific-reading.md](references/scientific-reading.md).
   During implementation and review, DM and independent Reviewer use this mode for affected reward, information,
   termination, duration or inference semantics; do not create an Implementer task.
@@ -22,7 +22,7 @@ only the mode needed now; this is not a launch checklist or new review layer.
   verify decision-relevant claims in the source. Reuse relevant prior retrieval;
   routine implementation does not require another literature pass. For a specific
   coverage gap or current-information need, use official paper/code sources or the locally available
-  `/mnt/c/Projects/HMASD-scientific-skills/.agents/skills/paper-lookup/SKILL.md` and its
+  `C:/Projects/HMASD-scientific-skills/.agents/skills/paper-lookup/SKILL.md` and its
   relevant database reference. Existing web/connector tools remain valid alternatives.
   Retrieve public queries, retain exact relevant excerpts/links, and distinguish
   metadata existence from support for a claim. Do not route to an additional LLM
@@ -56,8 +56,8 @@ do not upgrade the live research interpreter. Frozen experiments keep their cont
 New tools do not authorize new arms, altered reward/information or changed dtypes.
 
 Keep compact tool-produced tables/timings and relevant source snippets in the normal
-intake/engineering record. DM/Pro judge scientific implications within their respective decision scopes; Root checks its
-vacancy response against scope/specifications without locally selecting science; reviewers name
+intake/engineering record. DM owns scientific decisions and responds to independent Pro review;
+Clerk records outcomes and the user controls cross-direction adjustments. Reviewers name
 concrete risks to actual measurements. Do not add generic power, normality, p-value,
 exactness or all-seeds-positive prerequisites. One seed remains a local observation.
 

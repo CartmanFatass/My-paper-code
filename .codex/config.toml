@@ -22,7 +22,7 @@ max_concurrent_threads_per_session = 40
 interrupt_message = true
 
 [agents.HMASDDirectionManager]
-description = "Direction science and engineering owner; optional Portfolio Pro author and response checker."
+description = "Full-lifecycle direction manager; owns research decisions and responds to independent Pro scientific review."
 config_file = "./agents/hmasd-direction-manager.toml"
 
 [agents.HMASDScout]
@@ -54,6 +54,6 @@ description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"
 
 [mcp_servers.agentify-desktop]
-command = "/mnt/c/Program Files/nodejs/node.exe"
+command = "node"
 args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
 tool_timeout_sec = 2700
