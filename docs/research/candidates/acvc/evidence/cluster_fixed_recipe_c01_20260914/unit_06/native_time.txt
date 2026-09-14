@@ -1,0 +1,5 @@
+native_wall_s=293.45
+user_cpu_s=292.07
+system_cpu_s=0.64
+peak_rss_kib=553164
+exit_code=0
