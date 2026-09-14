@@ -1,6 +1,6 @@
 {
   "object": "FOLR_ENTITY_HISTORY_B03_781501",
-  "phase": "BANK_RUNNING",
+  "phase": "COMPLETE_SCIENTIFIC_REVIEW_AUTHORING",
   "planned_at_utc": "2026-09-14T08:16:51.805742+00:00",
   "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
   "portfolio_decision_sha": "4776103de4f55beaee610c52506112651bfaed04",
@@ -165,6 +165,22 @@
         },
         "state_path": "C:\\Projects\\HMASD\\temp\\directions\\vap_folr_core\\exp\\entity_history_b03_781501\\MONITOR_RECOVERY_STATE.json",
         "parent_routine_polling": "ended after actual direct MONITOR_ADOPTED"
+      },
+      "terminal": {
+        "task": "folr-b03-781501-bank",
+        "status": "finished",
+        "exit_code": 0,
+        "pid": 3669107,
+        "uptime_seconds": 2313,
+        "tmux_active": false
+      },
+      "technical_acceptance": {
+        "complete_exposure_valid": true,
+        "summary_sha256": "0d0daac87e5b365ce777e81c2a59033b91b265d3e789d07806d337e3a2fdbf3d",
+        "collection": "BANK_COLLECTION.json",
+        "raw_archive": "BANK_RAW.tar.gz",
+        "checkpoint_integrity_passed": true,
+        "monitor_terminal_received": "Direct MONITOR_TERMINAL and duplicate completion report handled as one event."
       }
     }
   },
@@ -205,7 +221,7 @@
       "LAUNCH_ASSET_PREPARATION.json"
     ]
   },
-  "next_action": "Same batch native recovery Monitor observes accepted BANK to terminal and returns directly to this DM. DM then collects/accepts both endpoints, writes scientific result/intake and full independent review. No further empirical invocation is selected.",
+  "next_action": "Publish complete result/intake and one fixed Convergence result-and-proposal request; archive full answer, respond to findings, then Portfolio substantive direction report. Terminal remote copies may be reclaimed after verified published preservation. No new empirical object selected.",
   "monitor_transfer": {
     "reason": "Initial observer finalized three turns with a nonempty running handle set, despite required until-terminal observation. This was execution noncompliance, not a scientific termination or missing rule.",
     "previous_native": "/root/folr_b03_monitor",
@@ -240,5 +256,12 @@
     "admission": "Create new output directory, then committed launcher performs fresh adjacent physical/effective >=4GiB admission. No current BANK admission claimed.",
     "monitor": "Reuse /root/folr_b03_monitor_recovery in the same B03 batch with an awaited until-terminal observation loop.",
     "no_score_gate": true
+  },
+  "result": {
+    "bank_minus_generic": -6.63671875,
+    "rule": "GENERIC_ABOVE_MEI",
+    "result_evidence": "../FOLR_ENTITY_HISTORY_B03_RESULT_EVIDENCE_20260914.md",
+    "dm_intake": "../FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md",
+    "native_wall_sum_seconds": 3779.85
   }
 }

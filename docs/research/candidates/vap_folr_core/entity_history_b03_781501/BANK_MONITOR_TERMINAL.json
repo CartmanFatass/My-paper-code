@@ -1,0 +1,54 @@
+{
+  "event_id": "FOLR_B03_GENERIC_MONITOR_RECOVERY_20260914_R1",
+  "handle": "folr-b03-781501-generic",
+  "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+  "expected_pid": 3666806,
+  "observer": "replacement /root/folr_b03_monitor_recovery",
+  "last_observation": {
+    "event_id": "FOLR_B03_GENERIC_MONITOR_RECOVERY_20260914_R1",
+    "handle": "folr-b03-781501-generic",
+    "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+    "expected_pid": 3666806,
+    "observer": "replacement /root/folr_b03_monitor_recovery",
+    "observed_utc": "2026-09-14T08:58:41.297599+00:00",
+    "returncode": 0,
+    "stdout": "{\"task\": \"folr-b03-781501-generic\", \"status\": \"finished\", \"exit_code\": 0, \"pid\": 3666806, \"uptime_seconds\": 2061, \"tmux_active\": false}\n",
+    "stderr": "",
+    "status": {
+      "task": "folr-b03-781501-generic",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3666806,
+      "uptime_seconds": 2061,
+      "tmux_active": false
+    }
+  },
+  "delivery": {
+    "adopted": true,
+    "terminal": false,
+    "adopted_event": " FOLR_B03_GENERIC_MONITOR_RECOVERY_20260914_R1"
+  },
+  "bank_observation": {
+    "event_id": "FOLR_B03_BANK_MONITOR_20260914_R1",
+    "handle": "folr-b03-781501-bank",
+    "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+    "expected_pid": 3669107,
+    "observer": "replacement /root/folr_b03_monitor_recovery",
+    "observed_utc": "2026-09-14T09:39:41.498445+00:00",
+    "returncode": 0,
+    "stdout": "{\"task\": \"folr-b03-781501-bank\", \"status\": \"finished\", \"exit_code\": 0, \"pid\": 3669107, \"uptime_seconds\": 1872, \"tmux_active\": false}\n",
+    "stderr": "",
+    "status": {
+      "task": "folr-b03-781501-bank",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3669107,
+      "uptime_seconds": 1872,
+      "tmux_active": false
+    }
+  },
+  "bank_delivery": {
+    "adopted": true,
+    "terminal": false
+  }
+}
