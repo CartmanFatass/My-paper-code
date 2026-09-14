@@ -205,8 +205,8 @@ authoring_checkout = "C:/Users/fires/.codex/worktrees/891a/HMASD"
 authoring_branch = "codex/lcac"
 
 [portfolio]
-role = "report_and_vacancy_selection"
-consultation_trigger = "vacancy_below_three_or_explicit_owner_request"
+role = "global_scientific_interpretation_and_final_direction_decisions"
+consultation_trigger = "direction_lifecycle_or_global_interpretation_or_vacancy_or_owner_request"
 automatic_replacement = true
 target_slots = 3
 binding_key = "portfolio:cross_direction"
@@ -243,7 +243,7 @@ retirement_handoff_state = "assigned_to_mgtap_peer; clerk_final_handoff_pending"
 
 [coordination.folr_owner_review]
 thread_id = "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc"
-state = "requested_in_existing_dm"
+state = "dm_report_for_portfolio_final_interpretation"
 reservation = 1
 reason = "owner challenges repeated post-negative PARK and incomplete direction-role/knowledge mapping"
-next_action = "DM loads complete current role and relevant scientific foundations, revisits direction-level rationale, records decision and concrete action; coordinates slot directly with MGTAP"
+next_action = "FOLR DM submits full report and fixed web context to Portfolio for final direction decision; preserve reservation and coordinate outcome with MGTAP"
