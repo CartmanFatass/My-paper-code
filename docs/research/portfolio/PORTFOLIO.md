@@ -10,11 +10,11 @@
 | 方向 | 已知科学位置 | 当前工作与席位 |
 | --- | --- | --- |
 | [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B13真实学习与nearest收益保留，sampled对greedy−0.019784；modal512行已测结局相同、恢复利益/损害和B11缺失保留。完整151行Portfolio判断接受新独立实例仍有价值，当前选择可逆PARK。 | 已应用PARK并释放1席；不CLOSE/RECAST，不新增fit。[完整裁决与回应](../candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/INTAKE.md)、[PARK知识与原始资产](../candidates/roster_consistent_latent_exploration/PARK.md)已保全。原DM已完成本次唯一空缺接续及直接交接，无RCLE科学producer；源码和558文件恢复已保全，历史四个被拒删除路径作为清理例外保留。 |
-| [ACVC](../candidates/acvc/DIRECTION.md) | 已完成clustered开发学习程序、训练F负结果和配对增量衰减分别保留。完整Portfolio[裁决与DM回应](pro_packets/20260914_acvc_post_paired_direction/INTAKE.md)选择一次六个全新fixed1024程序的期望增量研究；两项主量使用df5同时t区间，覆盖只在预设iid-normal完整fit-panel工作模型下成立，实际神经训练校准未建立。 | 占用1席，CONTINUE / MEDIUM / recasts2。冻结source6e8d1b894的六个原始fixed1024单元已有6/6完成全部记录核验；当前无登记中的活跃调用，后续实际工作见[完整执行记录](../candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/EXECUTION_FACTS.json)。每个完整单元1024训练/2048更新/192评估；原始文件与不利世界逐一保留，按预选顺序推进。六单元统计已完成：F-C+.096377354920J，区间[.074826981257,.117927728584]；F-dwell+.064088940259J，[.035375804426,.092802076092]，两个下界均>.01。尾部30/384与56/384个负向世界保留；native合计1733.09s，support/provider/agent成本UNKNOWN。冻结C已消费，完整独立科学审查与回应待完成。独立科学审查已由实际provider用户节点接收，单次Send；远端运行资源已在六档案/84文件核验后回收，完整科学回应待入库。 |
+| [ACVC](../candidates/acvc/DIRECTION.md) | 六个全新fixed1024完整fit-panel单元给出F-C+.096377354920J，区间[.074826981257,.117927728584]；F-dwell+.064088940259J，[.035375804426,.092802076092]，两下界均>.01。两项97.5%边际t区间（df5）的同时覆盖仅在预设iid-normal模型下成立；实际神经训练校准未建立。既有负结果、配对增量衰减和有用dwell均保留。 | 占用1席，CONTINUE / MEDIUM / recasts2。C01六原始单元/7296回合/12288更新全部核验，完整74行独立审查和[DM回应](../candidates/acvc/pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/INTAKE.md)未发现实质缺陷。F-C与F-dwell尾部仍有30/384和56/384负向世界；native1733.09s，支持/provider/agent成本UNKNOWN。远端资源经84文件保全后回收；本地被策略拒绝的测试清理仍保留。[方向报告](../candidates/acvc/ACVC_POST_C01_DIRECTION_REPORT_20260914.md)向Portfolio提出close-call有限参考PARK建议，强替代是一次1024/4096配对B。当前仅认领报告对话，未Send、未裁决PARK、未新增实验或空槽。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 对称有限选率双方均选1e-4；全新8252主量+0.023704897713093642 J，COND_ABOVE_MEI。一次选择/一对最终训练，历史混合符号和DENSE默认保持；不声称稳定排序或调参收益。 | 占用1席。8拟合/589824ticks/4096Adam已完成，658.02s、exit0。完整166行结果审查和139行Portfolio裁决已读；[全文与DM回应](../candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md)已应用CONTINUE，下一目标为固定1e-4新配对，尚无新卡/seed/native启动。完整归档18522字节及原错误回执保留；实际提问仅标题，模型自行找到固定报告/材料清单。当前会话已释放给下一作者RCLE；三席不变。 |
 | [FOLR](../candidates/vap_folr_core/DIRECTION.md) | B03完整比较Generic4.92594、BANK-1.71078，差值-6.63672；B02差值-4.83086单独保留。两次完整学习与评估实例均偏向Generic，不声称稳定排名或实体历史普遍无用。 | 占用1席，CONTINUE / MEDIUM。原A-G B01两臂各5000/4969/128。[Generic已完整收集](../candidates/vap_folr_core/entity_history_augmentation_b01_781601/EXECUTION.md)：均值-0.966484375、128条件评估、native1178.68s，原始14文件/检查点已保全。原增强臂于19:39:55UTC实际接受，source d9977dc18、4GiB准入通过，同批Monitor已接管；尚无A-G结果或追加实验。两臂间13401.737549s控制延迟单独记录，不能当作G计算耗时。ACVC事实交接已直接提供；完整既有科学评审/Portfolio应用及负结果保持。 |
 
-实际为3占用、0预留、0空缺。原 ACVC DM 已完成 B03、longer-C、配对暴露 B01 及全部科学回应，并应用完整 Portfolio 决定继续一次六程序固定配方研究；当前六程序卡已冻结，原始单位按固定顺序执行，已有6/6完整技术记录。该决定保留现有 ACVC 席位，不形成空缺、替代方向或第四席。
+实际为3占用、0预留、0空缺。ACVC六程序C01和完整独立科学回应均完成，原DM已认领Portfolio对话以提交最新方向报告；close-call PARK只是建议，当前席位和其他方向承诺保持。
 停止第四个方向限制扩容，不停止现有研究或真实空缺的合规补位。旧报告的 UCOPE/LCAC/ACVC 工作集和
 RCLE/MGTAP/FOLR 归档表已经过期，不能用来判断现在是否“开始后直接结束”。
 
@@ -31,14 +31,14 @@ afb647d0ddf7522ad0e0e99162a54403ede21c43；此前 E01 审查、前次 CONTINUE �
 | [DISH](../candidates/degraded_incumbent_shadow_handover/PARK.md) | 保留 B09 −35.25、REPLACE 与 BYPASS 边界；旧 Portfolio 补位建议未应用；前次裁决选择继续 FOLR；本次 RCLE 空缺已由新完整裁决选给 ACVC，旧 DISH 建议不应用。 |
 | [UCOPE](../candidates/ucope/PARK.md) | 保留 reactive renewal 的结果、反证和重新研究条件；当前未占用席位。 |
 | [LCAC](../candidates/learned_counterfactual_agent_credit/PARK.md) | 保留 B03 负结果及基线/学习证据；当前未占用席位。 |
-| [ACVC](../candidates/acvc/PARK.md) | 原PARK知识与全部反证保留；本次新裁决已落实复开并实际占用1席，B03对象工作由原DM继续。 |
+| [ACVC](../candidates/acvc/PARK.md) | 原PARK知识与全部反证保留；后续已复开并占用1席，现已完成六程序C01，最新方向提案待Portfolio裁决，未再次PARK。 |
 
 其他方向见 [Research map](../RESEARCH_MAP.md)。历史决定保留原始出处；当前 owner 挑战和
 Portfolio 的新决定前瞻应用，不擅自重写结果或批量重启旧方向。
 
 ## 当前交接与成本口径
 
-ACVC已知五个clustered开发学习程序（K/B01、B02、B03、longer-C、paired-exposure）的原生wall合计1114.44s，3584训练episode、1152评估episode、7168更新、1212416team ticks。这只是已列调用的资源合计；五个学习程序含不同暴露、六个限定快照，不合并为统计确认。此前其他家族及全部支持/provider/agent累计成本仍未知，不能把1114.44s当作方向全部成本。
+ACVC五个历史clustered开发学习程序native1114.44s，六个新fixed1024 C01单元native1733.09s，已知子集合计2847.53s。各科学对象/暴露/快照保持独立，费用相加不构成统计合并。C01本身6144训练/1152评估/12288更新/1867776team ticks，CPU1732.73s。完整支持、provider、agent、维护及方向生命周期成本UNKNOWN。
 
 FOLR 请求2026-09-14-folr-portfolio-direction-reconciliation-01已完成并应用 CONTINUE；
 完整答复保全于4776103de4f55beaee610c52506112651bfaed04。RCLE 请求

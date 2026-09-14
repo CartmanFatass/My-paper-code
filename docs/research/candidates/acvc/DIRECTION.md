@@ -14,9 +14,13 @@ is qualified by the iid-normal complete-fit-panel working model; actual neural-t
 is unestablished. Adverse worlds30/384 and56/384 and all absolute/control/learning/cost evidence
 remain. Native summed wall1733.09s; full support/provider/agent costs UNKNOWN.
 [Current intake](ACVC_CLUSTER_FIXED_RECIPE_C01_INTAKE_20260914.md) records the consumed frozen C,
-complete engineering findings/repairs and actual reporting corrections. Independent scientific
-review and DM response are pending; report is the tentative next-investment preference, with a
-concrete changed-exposure alternative. No new empirical successor or lifecycle disposition exists.
+complete engineering findings/repairs and actual reporting corrections. The complete74-line
+[independent scientific review and DM response](pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/INTAKE.md)
+find no material defect at the exact qualified ceiling. The
+[post-C01 development report](ACVC_POST_C01_DIRECTION_REPORT_20260914.md) recommends a close-call
+bounded-reference PARK to Portfolio, compared with a concrete useful1024/4096 paired-exposure B.
+This is a direction proposal; current CONTINUE/MEDIUM/recasts2/one occupied slot remains.
+No new empirical successor or lifecycle disposition exists.
 The original independent ACVC DM owns ordinary research, implementation, engineering acceptance,
 launch/observation, scientific intake and reports. Portfolio owns final direction-level
 CONTINUE/recast/PARK/CLOSE/reopening. Direction Pro supplies independent scientific review;
