@@ -1,0 +1,33 @@
+{
+  "request_id": "2026-09-14-folr-portfolio-direction-reconciliation-01",
+  "operation": "direct_portfolio_dialogue",
+  "author_role": "direction_dm",
+  "source_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "provider_requirement": {
+    "model": "GPT-6 Astra",
+    "mode": "Pro",
+    "label": "6 Pro"
+  },
+  "conversation_binding_key": "portfolio:cross_direction",
+  "requested_conversation_id": "6aa7836e-e4a0-83e8-985d-c633d94935b1",
+  "requested_conversation_url": "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1",
+  "prompt_path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\docs\\research\\candidates\\vap_folr_core\\pro_packets\\20260914_portfolio_direction_reconciliation\\PROMPT.md",
+  "prompt_sha256": "6fe4e6818aae27aa65aaf3d7d3346d523c5708f60a11962855034a53c10c0698",
+  "prompt_bytes": 30159,
+  "source_manifest_path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\docs\\research\\candidates\\vap_folr_core\\pro_packets\\20260914_portfolio_direction_reconciliation\\SOURCE_MANIFEST.json",
+  "report_input_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+  "archive_destination": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\docs\\research\\candidates\\vap_folr_core\\pro_packets\\20260914_portfolio_direction_reconciliation\\archive",
+  "decision_scope": "Final FOLR direction interpretation and its existing third-slot reservation; no fourth direction or changes to RCLE/MGTAP science.",
+  "delivery_scope": "Complete direct-chat answer or actual full downloadable document, archived exactly with request binding; no GitHub writes requested.",
+  "state": "PREPARED_UNSENT",
+  "previous_exchange": {
+    "archive_commit": "552f0dce7904e35206b8e32f9180ab85aee822ad",
+    "user_id": "5acd92f4-4244-4464-9f5d-976b7c00b70d",
+    "assistant_id": "9f4d8304-d85d-45a7-b3ae-09c344748d64",
+    "state": "terminal archived; old DISH recommendation unapplied; no duplicate old Send"
+  },
+  "next_conversation_author": "RCLE DM01a09e10-9d9f-7f82-87c0-d58cbe0c7618 after terminal/archive/release",
+  "transport_instructions": "Paste the exact committed PROMPT.md once using iab, reconcile actual request state before any retry, retain all full text/links/access limitations and return complete archive directly to parent. Do not substitute stale renderer authority instructions."
+}
