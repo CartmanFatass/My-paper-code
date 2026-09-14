@@ -20,3 +20,15 @@ Independent tensor-only checks verified:
 Scope: **406 source lines**, including **23 runner lines**; within limits. CPU telemetry needs explicit accounting scope under runtime §6, reconciling the current “§4 additions: none” statement. No other prohibited machinery identified.
 
 Residual limits: no native experiment was executed for this review; actual remote topology, complete costs, learner behavior and final artifacts remain runtime evidence. Synthetic checks establish implementation behavior, not scientific efficacy. Same-batch timing correction remains available for review.
+
+---
+
+## Full same-batch correction response
+
+No material finding in timing correction `133218a8`.
+
+The renamed fields accurately describe their measurement boundaries; shared setup is recorded separately. Removing in-run CPU/resource telemetry resolves the scope discrepancy and optional-module publication dependency. No stale consumers of the removed fields were found in the assigned code/tests.
+
+Scientific computations, RNG, exposure and primary aggregation are unchanged. No additional probe was warranted.
+
+The original timing finding is resolved in source and reporting scope. Complete invocation wall and peak RSS remain dependent on the planned enclosing GNU-time measurement; its actual output has not been reviewed here.
