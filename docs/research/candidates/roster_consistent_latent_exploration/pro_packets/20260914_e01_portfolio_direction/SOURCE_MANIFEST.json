@@ -1,6 +1,6 @@
 {
   "request_id": "2026-09-14-rcle-e01-direction-decision-01",
-  "decision_scope": "RCLE direction CONTINUE/RECAST/PARK/CLOSE only; preserve current MGTAP and FOLR occupied/reserved positions",
+  "decision_scope": "RCLE direction CONTINUE/RECAST/PARK/CLOSE only; preserve three occupied slots and actual MGTAP/FOLR work.",
   "repository": "https://github.com/CartmanFatass/My-paper-code",
   "actual_access_required": true,
   "sources": [
@@ -31,18 +31,18 @@
     {
       "id": "registry",
       "path": ".codex/hmasd-dm-sessions.toml",
-      "commit_sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
-      "url": "https://github.com/CartmanFatass/My-paper-code/blob/e49af7704c95c6efee4917818c9d73a46ac6cd62/.codex/hmasd-dm-sessions.toml",
-      "read_scope": "Root/Portfolio/coordination plus RCLE/MGTAP/FOLR rows. Apply the later evidence-linked corrections in REPORT.",
-      "provenance": "Fixed global snapshot has stale producer/old FOLR-PARK wording; REPORT reconciles it, does not silently use old rows."
+      "commit_sha": "5456aec117b9746f141d09292af2da1f803b8262",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/5456aec117b9746f141d09292af2da1f803b8262/.codex/hmasd-dm-sessions.toml",
+      "read_scope": "Root/Portfolio/coordination and RCLE/MGTAP/FOLR rows; reconcile the explicitly dated RCLE producer corrections in REPORT.",
+      "provenance": "FOLR CONTINUE applied;3 occupied,0 reserved/vacant; actual author turn released to RCLE. RCLE report/review descriptions still partly predate the final report."
     },
     {
       "id": "portfolio_report",
       "path": "docs/research/portfolio/PORTFOLIO.md",
-      "commit_sha": "4b23f943691a09a93a9e0cfb9c0a003e995624a5",
-      "url": "https://github.com/CartmanFatass/My-paper-code/blob/4b23f943691a09a93a9e0cfb9c0a003e995624a5/docs/research/portfolio/PORTFOLIO.md",
-      "read_scope": "Complete short report and compare with REPORT current three-slot reconciliation.",
-      "provenance": "Known stale derived report: old UCOPE/LCAC/ACVC workset and RCLE/MGTAP archived rows are not current facts."
+      "commit_sha": "5456aec117b9746f141d09292af2da1f803b8262",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/5456aec117b9746f141d09292af2da1f803b8262/docs/research/portfolio/PORTFOLIO.md",
+      "read_scope": "Complete current derived report.",
+      "provenance": "Old working-set/archived-direction error corrected; FOLR CONTINUE applied. Registry/REPORT give the later actual MGTAP accepted invocation."
     },
     {
       "id": "mgtap_direction",
@@ -50,7 +50,7 @@
       "commit_sha": "3594eafe28ed91b2558fcc064e46ea714edd2e1c",
       "url": "https://github.com/CartmanFatass/My-paper-code/blob/3594eafe28ed91b2558fcc064e46ea714edd2e1c/docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
       "read_scope": "Current reentry position and preserved signed results; do not apply historical authority as current.",
-      "provenance": "Peer-published latest scientific position; no new native result."
+      "provenance": "Peer-published latest scientific position; no new native result. Latest execution delta is in mgtap_launch and the current registry; no new return is asserted."
     },
     {
       "id": "mgtap_intake",
@@ -58,7 +58,7 @@
       "commit_sha": "3594eafe28ed91b2558fcc064e46ea714edd2e1c",
       "url": "https://github.com/CartmanFatass/My-paper-code/blob/3594eafe28ed91b2558fcc064e46ea714edd2e1c/docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/DM_REENTRY_INTAKE.md",
       "read_scope": "Full current reentry reasoning and contrary evidence.",
-      "provenance": "Equal-peer global opportunity context, not authority to modify MGTAP."
+      "provenance": "Equal-peer global opportunity context, not authority to modify MGTAP. Latest execution delta is in mgtap_launch and the current registry; no new return is asserted."
     },
     {
       "id": "mgtap_card",
@@ -66,7 +66,7 @@
       "commit_sha": "3594eafe28ed91b2558fcc064e46ea714edd2e1c",
       "url": "https://github.com/CartmanFatass/My-paper-code/blob/3594eafe28ed91b2558fcc064e46ea714edd2e1c/docs/research/candidates/metric_ground_transport_allocation/MGTAP_LR_SELECTION_B01_SCIENCE_CARD_20260914.md",
       "read_scope": "Question, selected procedure, counts, uncertainty and costs.",
-      "provenance": "Current8-fit programme; actual engineering status updated in REPORT from peer message."
+      "provenance": "Current8-fit programme; actual engineering status updated in REPORT from peer message. Latest execution delta is in mgtap_launch and the current registry; no new return is asserted."
     },
     {
       "id": "folr_intake",
@@ -79,16 +79,16 @@
     {
       "id": "folr_card",
       "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md",
-      "commit_sha": "fb38cbfadd69f578672f6918ebc2824338919040",
-      "url": "https://github.com/CartmanFatass/My-paper-code/blob/fb38cbfadd69f578672f6918ebc2824338919040/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md",
-      "read_scope": "Full recommended new block and bounded exposure/cost, pending Portfolio.",
-      "provenance": "Reserved third slot; no B03 native exposure at snapshot."
+      "commit_sha": "4776103de4f55beaee610c52506112651bfaed04",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/4776103de4f55beaee610c52506112651bfaed04/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md",
+      "read_scope": "Full selected B03 card and claim limits, including jointly changed training/evaluation seeds.",
+      "provenance": "Portfolio CONTINUE / MEDIUM applied; native exposure was zero at application."
     },
     {
       "id": "rcle_direction",
       "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
-      "commit_sha": "6f13c2b2fa713414e777190b7bcfbec11243b61a",
-      "url": "https://github.com/CartmanFatass/My-paper-code/blob/6f13c2b2fa713414e777190b7bcfbec11243b61a/docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "4512350929e87522d52bbaf4bcc0fce8cbc1f216",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/4512350929e87522d52bbaf4bcc0fce8cbc1f216/docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
       "read_scope": "Current authority/position/scientific question and named historical recipe HOLD boundaries.",
       "provenance": "Latest RCLE recommendation; historical lower sections do not restore retired authorities."
     },
@@ -227,6 +227,57 @@
       "url": "https://github.com/CartmanFatass/My-paper-code/blob/094d1ff2a3e5f984d62e00dae782cda31a11be52/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/SCORE_SCALE.json",
       "read_scope": "Complete two-checkpoint head-weight sums/ideal-range arithmetic and zero-exposure record.",
       "provenance": "One short A/RECON; does not establish insufficient head range, actual score margins, prior causation or native equivalence."
+    },
+    {
+      "id": "b13_card",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_SCIENCE_CARD_20260914.md",
+      "commit_sha": "4512350929e87522d52bbaf4bcc0fce8cbc1f216",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/4512350929e87522d52bbaf4bcc0fce8cbc1f216/docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_SCIENCE_CARD_20260914.md",
+      "read_scope": "Complete concrete recommendation, inherited scientific contract, measurements/counts, claim limits and finite execution scope.",
+      "provenance": "Engineering preparation accepted, no B13 native invocation or direction decision applied."
+    },
+    {
+      "id": "b13_engineering",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/ENGINEERING.md",
+      "commit_sha": "4512350929e87522d52bbaf4bcc0fce8cbc1f216",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/4512350929e87522d52bbaf4bcc0fce8cbc1f216/docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/ENGINEERING.md",
+      "read_scope": "Complete technical acceptance and synthetic-versus-native limits.",
+      "provenance": "DM acceptance of source91811c61 after24 focused checks and independent review; zero native B13 exposure."
+    },
+    {
+      "id": "b13_code_review",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/CODE_REVIEW.md",
+      "commit_sha": "4512350929e87522d52bbaf4bcc0fce8cbc1f216",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/4512350929e87522d52bbaf4bcc0fce8cbc1f216/docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/CODE_REVIEW.md",
+      "read_scope": "Full independent engineering review, interpreted with the DM displacement clarification.",
+      "provenance": "Independent Sol/high no material finding, not a scientific result or lifecycle grant."
+    },
+    {
+      "id": "mgtap_launch",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/LAUNCH.md",
+      "commit_sha": "cde2d77e9212b5e29cf96c94bee51eb97410aa5f",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/cde2d77e9212b5e29cf96c94bee51eb97410aa5f/docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/LAUNCH.md",
+      "read_scope": "Source/exposure binding, actual accepted invocation and monitor facts.",
+      "provenance": "One eight-fit invocation actually accepted07:55:41UTC; no final scientific result in this snapshot."
+    },
+    {
+      "id": "folr_decision",
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/archive/RESPONSE.md",
+      "commit_sha": "4776103de4f55beaee610c52506112651bfaed04",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/4776103de4f55beaee610c52506112651bfaed04/docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/archive/RESPONSE.md",
+      "read_scope": "Final verdict, rationale against premature stopping, strongest alternative/opportunity-cost reasoning, scope and source-access declaration; this is the preceding complete answer in this conversation.",
+      "provenance": "Actual archived Portfolio CONTINUE / MEDIUM;17764 bytes; historical DISH advice not applied."
+    },
+    {
+      "id": "folr_decision_intake",
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md",
+      "commit_sha": "4776103de4f55beaee610c52506112651bfaed04",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/4776103de4f55beaee610c52506112651bfaed04/docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md",
+      "read_scope": "Complete DM response, conformance, actual application, current engineering facts and no-vacancy handoff.",
+      "provenance": "FOLR author applied the conforming decision and released this conversation to RCLE; no RCLE disposition follows from the predecessor."
     }
-  ]
+  ],
+  "report_sha": "4512350929e87522d52bbaf4bcc0fce8cbc1f216",
+  "global_snapshot_sha": "5456aec117b9746f141d09292af2da1f803b8262",
+  "predecessor_state": "terminal/full archived/intaken/applied CONTINUE; binding released to RCLE, no RCLE Send yet"
 }
