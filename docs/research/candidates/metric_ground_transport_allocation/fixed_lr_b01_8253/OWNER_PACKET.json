@@ -1,0 +1,11 @@
+{
+  "question": "沿已应用的 Portfolio CONTINUE，固定双方1e-4，以未筛选新种子8253做一次两臂复验；如需干预可修改或撤回此新卡。",
+  "changes_if_approved": [{"target": "MGTAP ordinary object", "from": "后继目标已选但未实现", "to": "MGTAP-FIXED-LR-B01，单次两臂固定学习率新训练；不重新调参"}],
+  "if_refused": "保留全部历史结果和方向席位，停止尚未开始的新卡依赖工作并按具体意见修改；不自动 PARK 或重跑旧实验。",
+  "evidence_for": [{"path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_FIXED_LR_B01_SCIENCE_CARD_20260914.md", "quote": "The previous8251 finite grid selected1e-4 for both arms;8252 then gave+0.0237048977 J.", "why": "完整科学 review 和 Portfolio 已选用更小的固定配置复验澄清重复性。"}],
+  "evidence_against": [{"path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_FIXED_LR_B01_SCIENCE_CARD_20260914.md", "quote": "The slow validation contrast favored DENSE, and earlier fixed3e-4 contrasts were\nmixed (8241+0.0151288476;8242-0.0568438889).", "why": "历史符号混合；当前配置和复验决策都受既有结果影响。"}],
+  "uncertainty": ["这是适应性选择历史条件下的固定配置复验，不是完整调参流程的独立重做。", "单个新训练对不能估计训练总体不确定性或证明稳定优势；原生调优headroom仍未测。", "全部支持、工程和provider累计成本仍UNKNOWN。"],
+  "cost": {"compute": "2fits；512训练+64最终评价episodes；147456team ticks；1024Adam；原生3—6分钟仅未测估计，实际节点需新4GiB准入。", "owner_time": "无需等待回复；仅按需异步干预。", "reversibility": "reversible", "waits_on_this": "nothing"},
+  "verdict_text": "select this one fixed1e-4 pair.",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_FIXED_LR_B01_SCIENCE_CARD_20260914.md"
+}

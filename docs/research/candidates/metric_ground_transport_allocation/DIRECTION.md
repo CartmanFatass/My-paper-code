@@ -19,17 +19,21 @@ is now archived and read. DM applies CONTINUE under PRO_FINAL / OWNER_DELEGATED;
 the [full intake](pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md)
 responds to its reasoning, preserves the actual title-only input-delivery defect
 and records the next objective: one fresh fixed-selected-LR1e-4 pair at256/32/H256.
-This is not another eight-fit selector or lower-grid expansion. No new card, seed
-or native successor has launched. MGTAP retains its existing occupied slot and
+This is not another eight-fit selector or lower-grid expansion. The selected
+[MGTAP-FIXED-LR-B01 card](MGTAP_FIXED_LR_B01_SCIENCE_CARD_20260914.md) now fixes
+unscreened master8253 and a fresh two-fit entry, with no checkpoint transfer.
+Its [engineering record](fixed_lr_b01_8253/ENGINEERING.md) records implementation,
+focused checks and independent review; no native successor has launched at this
+preparation boundary. MGTAP retains its existing occupied slot and
 DENSE remains the generic default; adaptive selection history and contrary validation
 are explicit, without a stable-ranking or tuning-causality claim.
 
-Clerk retirement/handoff is complete. All three original peers remain occupied,
-with zero reserved/vacant. Later RCLE review/PARK recommendation and FOLR's complete
-adverse B03 are preserved as peer-owned facts, not applied direction stops.
-After full decision/intake publication MGTAP releases the shared Portfolio conversation
-and directly notifies RCLE; the current common registry records that actual event.
-No legacy MGTAP-owned vacancy transaction or FOLR replacement is reopened.
+Clerk retirement/handoff is complete. At the earlier MGTAP Portfolio release boundary
+the then-current three original peers were occupied; MGTAP released the conversation
+and directly notified RCLE. That is a historical handoff, not current dialogue ownership.
+RCLE subsequently parked and its completed vacancy transaction admitted ACVC; current
+capacity/routes/other directions' actual work live in the shared registry. No legacy
+MGTAP-owned vacancy transaction or FOLR replacement is reopened by this new object.
 
 ## Historical reentry decision — CONTINUE, 2026-09-14
 

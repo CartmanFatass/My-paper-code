@@ -65,79 +65,103 @@ def _optimizer(actor, critic, learning_rate):
 
 
 def _native_fit(*, stage, master, lr_key, arm, models, output, emit_episode,
-                emit_rollout, study_start, clock=time.monotonic):
+                emit_rollout, study_start, clock=time.monotonic, contract=protocol,
+                emit_partial_fit=None):
     """Fit and evaluate one candidate-owned actor/critic/Adam/RNG state."""
     actor, critic = models
-    learning_rate = protocol.LEARNING_RATES[lr_key]
+    learning_rate = contract.LEARNING_RATES[lr_key]
     fit_start = clock()
     deadline = StudyDeadline(study_start, fit_start, clock)
     counts, limits = new_counts(False), []
-    base = 100000 * master
-    env = make_real(base + 1000)
-    counts["constructors"] += 1
-    counts["constructor_resets"] += 1
-    initial = geometry_snapshot(actor, critic)
-    optimizer = _optimizer(actor, critic, learning_rate)
-    # Equal numeric addresses do not imply shared live RNG state: every fit owns these.
-    train_velocity = generator(base + 21)
+    initial, phase = None, "initialization"
+    try:
+        base = 100000 * master
+        env = make_real(base + 1000)
+        counts["constructors"] += 1
+        counts["constructor_resets"] += 1
+        initial = geometry_snapshot(actor, critic)
+        optimizer = _optimizer(actor, critic, learning_rate)
+        # Equal numeric addresses do not imply shared live RNG state: every fit owns these.
+        train_velocity = generator(base + 21)
 
-    def episode(phase, index, velocity_rng, duration_rng):
-        address = protocol.randomization(master, phase, index)
-        metadata = {
-            "object": protocol.OBJECT, "stage": stage, "pair_master": master,
-            "arm": arm, "lr_key": lr_key, "learning_rate": learning_rate,
-            "phase": phase, "episode": index,
-            "velocity_seed": address["velocity_seed"],
-            "duration_seed": address["duration_seed"],
-        }
-        return collect_episode(
-            env, actor, critic, protocol.HORIZON, address["reset_seed"],
-            velocity_rng, duration_rng, metadata, deadline.check, counts,
-            emit_episode, lambda _row: None, limits, real=True, diagnostics=False,
-            ratio_grouping="agent_compound")
+        def episode(phase, index, velocity_rng, duration_rng):
+            address = contract.randomization(master, phase, index)
+            metadata = {
+                "object": contract.OBJECT, "stage": stage, "pair_master": master,
+                "arm": arm, "lr_key": lr_key, "learning_rate": learning_rate,
+                "phase": phase, "episode": index,
+                "velocity_seed": address["velocity_seed"],
+                "duration_seed": address["duration_seed"],
+            }
+            return collect_episode(
+                env, actor, critic, contract.HORIZON, address["reset_seed"],
+                velocity_rng, duration_rng, metadata, deadline.check, counts,
+                emit_episode, lambda _row: None, limits, real=True, diagnostics=False,
+                ratio_grouping="agent_compound")
 
-    for rollout_index in range(protocol.TRAIN_EPISODES // protocol.EPISODES_PER_ROLLOUT):
-        before = counts.copy()
-        episodes = []
-        for offset in range(protocol.EPISODES_PER_ROLLOUT):
-            index = protocol.EPISODES_PER_ROLLOUT * rollout_index + offset
-            address = protocol.randomization(master, "train", index)
-            episodes.append(episode("train", index, train_velocity,
-                                    generator(address["duration_seed"])))
-        records = update(actor, critic, optimizer, episodes, 32, deadline.check, counts,
-                         ratio_grouping="agent_compound", entropy_coef=.01)
-        counts["rollouts"] += 1
-        emit_rollout({
-            "object": protocol.OBJECT, "stage": stage, "pair_master": master,
-            "arm": arm, "lr_key": lr_key, "learning_rate": learning_rate,
-            "rollout": rollout_index, "episodes": 2, "steps": 512,
-            "epochs": records,
-            "optimizer_steps": counts["optimizer_steps"] - before["optimizer_steps"],
-        })
+        phase = "training"
+        for rollout_index in range(contract.TRAIN_EPISODES // contract.EPISODES_PER_ROLLOUT):
+            before = counts.copy()
+            episodes = []
+            for offset in range(contract.EPISODES_PER_ROLLOUT):
+                index = contract.EPISODES_PER_ROLLOUT * rollout_index + offset
+                address = contract.randomization(master, "train", index)
+                episodes.append(episode("train", index, train_velocity,
+                                        generator(address["duration_seed"])))
+            records = update(actor, critic, optimizer, episodes, 32, deadline.check, counts,
+                             ratio_grouping="agent_compound", entropy_coef=.01)
+            counts["rollouts"] += 1
+            emit_rollout({
+                "object": contract.OBJECT, "stage": stage, "pair_master": master,
+                "arm": arm, "lr_key": lr_key, "learning_rate": learning_rate,
+                "rollout": rollout_index, "episodes": 2, "steps": 512,
+                "epochs": records,
+                "optimizer_steps": counts["optimizer_steps"] - before["optimizer_steps"],
+            })
+            deadline.check()
+
+        training_counts = counts.copy()
+        phase = "evaluation"
+        for index in range(contract.EVAL_EPISODES):
+            address = contract.randomization(master, "eval", index)
+            episode("eval", index, generator(address["velocity_seed"]),
+                    generator(address["duration_seed"]))
         deadline.check()
-
-    training_counts = counts.copy()
-    for index in range(protocol.EVAL_EPISODES):
-        address = protocol.randomization(master, "eval", index)
-        episode("eval", index, generator(address["velocity_seed"]),
-                generator(address["duration_seed"]))
-    deadline.check()
-    checkpoint = output / f"{stage}_{lr_key}_{arm}.pt"
-    torch.save({
-        "object": protocol.OBJECT, "stage": stage, "pair_master": master,
-        "arm": arm, "lr_key": lr_key, "learning_rate": learning_rate,
-        "actor": actor.state_dict(), "critic": critic.state_dict(),
-        "optimizer": optimizer.state_dict(),
-    }, checkpoint)
-    return {
-        "stage": stage, "pair_master": master, "arm": arm, "lr_key": lr_key,
-        "learning_rate": learning_rate, "fit_complete": True,
-        "panel_complete": counts["eval_episodes"] == protocol.EVAL_EPISODES,
-        "counts": counts, "training_counts": training_counts,
-        "exposure": geometry_exposure(initial, actor, critic),
-        "checkpoint": checkpoint.name, "fit_body_wall": clock() - fit_start,
-        "limits": limits,
-    }
+        phase = "checkpoint"
+        checkpoint = output / f"{stage}_{lr_key}_{arm}.pt"
+        torch.save({
+            "object": contract.OBJECT, "stage": stage, "pair_master": master,
+            "arm": arm, "lr_key": lr_key, "learning_rate": learning_rate,
+            "actor": actor.state_dict(), "critic": critic.state_dict(),
+            "optimizer": optimizer.state_dict(),
+        }, checkpoint)
+        return {
+            "stage": stage, "pair_master": master, "arm": arm, "lr_key": lr_key,
+            "learning_rate": learning_rate, "fit_complete": True,
+            "panel_complete": counts["eval_episodes"] == contract.EVAL_EPISODES,
+            "counts": counts, "training_counts": training_counts,
+            "exposure": geometry_exposure(initial, actor, critic),
+            "checkpoint": checkpoint.name, "fit_body_wall": clock() - fit_start,
+            "limits": limits,
+        }
+    except Exception as error:
+        if emit_partial_fit is not None:
+            exposure, exposure_error = None, None
+            if initial is not None:
+                try:
+                    exposure = geometry_exposure(initial, actor, critic)
+                except Exception as diagnostic_error:
+                    exposure_error = f"{type(diagnostic_error).__name__}: {diagnostic_error}"
+            emit_partial_fit({
+                "stage": stage, "pair_master": master, "arm": arm, "lr_key": lr_key,
+                "learning_rate": learning_rate, "fit_complete": False, "phase": phase,
+                "counts": counts.copy(), "exposure": exposure,
+                "exposure_error": exposure_error,
+                "counts_scope": "observed counters; an interrupted primitive may have additional unobserved work",
+                "fit_body_wall": clock() - fit_start,
+                "limits": limits + [f"{type(error).__name__}: {error}"],
+            })
+        raise
 
 
 def _fit_errors(fits):
