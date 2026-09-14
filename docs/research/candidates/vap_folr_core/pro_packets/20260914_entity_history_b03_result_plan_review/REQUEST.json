@@ -1,0 +1,160 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-14-folr-entity-history-b03-result-plan-review-01",
+  "source_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "direction_id": "vap_folr_core",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+  "execution_mode": "REUSE_SINGLETON",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "scientific_question": "You are FOLR's independent Convergence scientific Reviewer. Review the newly complete B03 result, its scientific interpretation, and the concrete proposed next comparison. The DM must read your entire answer and respond to material findings. Current authority has changed since older exchanges: DM owns innovation, ordinary experiments and reports; Portfolio has final substantive direction/family/recast/lifecycle interpretation under the separately pinned PORTFOLIO_DECISION_PROTOCOL. Do not issue an experiment grant or substitute a lifecycle verdict. FOLR remains ACTIVE/MEDIUM under the applied Portfolio CONTINUE. No successor fit is selected.\n\nB03 (train781501/eval1781501) completed both fresh Generic64 and BANK16 fits at5000training episodes/100000ticks/4969RMSprop updates plus128final greedy episodes/2560ticks per arm. Total2fits/205120ticks/9938updates/256final episodes. Generic was frozen first and BANK followed its collection irrespective of score. Source b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f preserves the legal-information H20 easy Traffic Junction protocol and numerical core of B02, with new binding only. Both complete exit0, one checkpoint and one final panel each, no scientific retry/extra fit/selection. BANK's collected Generic summary was publication-only input, not learned state. Full raw arrays/checkpoints/supervisor records are preserved by byte/member hashes; no new computation or raw archive download is requested from you.\n\nB03 Generic mean4.9259375, BANK-1.71078125, difference d=-6.63671875. The frozen strict d<-1 branch is GENERIC_ABOVE_MEI; the gap favoring Generic is6.63671875 and its excess beyond MEI1 is5.63671875. Per-fitted-policy conditional episode SEs are0.7084027573/0.2451046450 and negative episodes40/128 versus97/128. B02 separately produced means-0.65296875/-5.483828125 and d=-4.830859375. These are two prospective complete whole-learning-and-evaluation realizations, with one fit per arm in each. Both seeds change between blocks; this does not isolate pure training variance. Equal labels do not establish paired episode worlds or training uncertainty. Do not pool episode rows or infer a stable population rank. Generic's higher mean does not certify competence, tuned headroom or sufficiency. Curves show learning and late separation, not convergence or the effect of a longer budget.\n\nPreserve historical evidence: E has no intact fresh comparison because Generic ended without its final endpoint; F is a new Generic versus an outcome-informed retained BANK use and shares that BANK fit with E. It is not another BANK learning replication. Your full B02 review challenged the original DM inference that completion of the first missing contrast made the next block low-value. The owner challenged PARK; the full Portfolio response substantively selected B03, and the DM applied it. B03 now supplies the second observation that was previously missing. Please assess what it actually changes rather than ratifying another ticket-completion stop. Historical negative results, failed preparation, old recasts/stopped scalar family and costs remain.\n\nThe proposed next question comes from a visible code asymmetry, not a newly diagnosed bug: Generic GRU64 recurrently processes already-fused current attention and public/local metadata, whereas BANK GRU16 updates subject-specific state before the final current fusion and replaces the generic fused recurrence. Current physical bypass and equal legal information do not make these representations equivalent. This source fact leaves a concrete alternative: entity history may help as an addition while generic recurrent coordination remains available, even though this replacement prototype loses. It does not prove that dropping generic recurrence caused the loss, that16-wide state is deficient, or that an additive design will win.\n\nThe DM tentatively prefers a bounded two-fit persistent-versus-current-only bank comparison over a third unchanged BANK16/Generic64 block. Both proposed arms would retain the same learned Generic64 current-attention/metadata/own-trip recurrent path, plus identically parameterized subject-bank and fusion modules. Treatment carries lawful observer-subject GRU16 histories with current lifetime cuts and visible-only updates; control zeros that branch's hidden input at each step while evaluating the same cell/readout. The common Generic64 recurrence continues in both. Public/local inputs, seen/age metadata, current bypass and final fusion architecture are identical across those proposed arms. Control is not memory-free; it tests additional persistent entity-indexed state over a common generic memory path. Functional temporal capacity intentionally changes even if parameter counts match. No claim that either augmented policy beats an unaugmented Generic is available from this pair; the historical B03 Generic cannot silently fill that comparator. Review whether this narrower first question is useful and whether a contemporaneous unaugmented arm is materially needed, rather than adding it by default.\n\nA possible finite protocol is2fresh fits, each5000train/4969updates/128final on the same H20 host and native reward, persistent-minus-current-only mean with MEI1. No seeds are selected or screened, no code implemented and no successor card frozen. Full construction/RNG, initial fusion, reset/visibility behavior and endpoints would be specified before launch. The proposal does not revive scalar LEARNED_EVENT, reset recast counts or rewrite B02/B03. The later Portfolio report must resolve whether it is the useful within-family refinement/recast or should be declined. Please critique this proposal as an independent scientific Reviewer, including any concrete confound or unnecessary complexity; do not simply polish it or invent mandatory prelaunch diagnostic gates.\n\nThe strongest stopping alternative is repeated adverse prototype evidence plus short trips, reobserved cues, truthful public signals and a generic policy already processing the same legal history. An extra bank can be redundant and harder to optimize. Longer learning of unchanged BANK16/Generic64 is legitimate (e.g.10000episodes/9969updates/128final each:405120total ticks/19938updates), but asks exposure sensitivity with the same representational asymmetry. A third unchanged block adds realization information with less design discrimination. A more history-demanding native host/horizon is legitimate without a positive pilot or exact opportunity census, but changes task demand/credit conditions. Compare the strongest useful option and the reason to stop substantively; a negative result does not entail universal failure or an entitlement to unlimited redesigns.\n\nThe smallest sufficient class for these local performance questions is B with real training and sampled returns. No exact optimum, full causal reconstruction, fixed seed quota, favorable pilot, external customer, convergence certificate or full-history replay is required merely to propose another B. A genuine information/reward/measurement defect holds its dependent claim and needs a proportionate correction. You may recommend a better bounded question or narrower claim and identify decision-critical source gaps.\n\nB03 complete native walls2005.71+1774.14=3779.85s; aggregate CPU3776.06s; study elapsed4424s including644s inter-arm gap. Current measured collection/analysis windows8.968s are only a lower bound; other support/provider/lifetime totals remain UNKNOWN. E3557.28+F2159.85+B023041.46+B033779.85=12538.44known native seconds, not a whole-direction total. Preparation's blocked Git lazy-fetch was resolved before any scientific launch; Generic Monitor coverage was repaired on the same live handle, preserving all costs/failures. Both final scientific endpoints remain intact.\n\nThe proposed pair still has205120ticks/9938updates, with both recurrent paths per fit:33391680Generic GRU replay positions plus BANK upper166958400 at different widths. Their sum does not yield a measured wall law because other work is shared. A tentative planning allowance5400s per augmented fit/10800native plus1800support is finite and unselected; it is neither owner cap, hard abort nor resource grant. One FOLR invocation at a time and fresh physical/effective>=4GiB admission remain; no paid capacity or cross-direction resource change is proposed. Do not demand a cost pilot or exhaustive mechanism diagnosis before ordinary B solely because the forecast is uncertain.\n\nReturn the consequential findings first. Distinguish (1) evidence/integrity or interpretation defects in actual B03; (2) limits on how it updates B02/Portfolio reasoning; (3) scientific merits, confounds and proportionate improvements of the concrete additive-history comparison versus stopping/longer-learning/changed-host alternatives; and (4) remaining uncertainty and exact claim ceilings. Identify which source passages you actually accessed, report decision-critical access gaps honestly, and separate an inference defect from a defensible qualitative development-value disagreement. Do not replace full source reading with old chat memory. DM will respond to all material findings before the later substantive Portfolio report.",
+  "deliverable": "One complete independent scientific review of actual B03 and the concrete successor proposal, about1800-2600words unless an actual issue warrants more. Give consequential evidence-linked findings, source-access declaration, strongest alternatives, proportionate corrections and exact claim limits; explicitly state if no result-invalidating defect is found. Do not decide direction lifecycle or approve new work. Deliver only the scoped full RESPONSE.md and Issue15 delivery-link comment, or the same accepted turn complete downloadable Markdown fallback.",
+  "claim_ceiling": "Exploratory interpretation of two separately visible complete BANK16/Generic64 realizations and assessment of an unselected bounded persistent-versus-current-only entity-history proposal with generic recurrence retained. No population superiority, pure training variance, uniquely diagnosed mechanism cause, Generic competence/sufficiency, matched functional capacity, optimality/convergence, measured tuned headroom, speed/scaling, C/UAV/transfer claim or final lifecycle/resource authority.",
+  "constraints": [
+    "Current separately pinned PORTFOLIO_DECISION_PROTOCOL supersedes conflicting historical DM-final/Clerk/Portfolio-advice wording. DM responds to independent review and later reports the substantive family/direction question to Portfolio; current ACTIVE/MEDIUM remains.",
+    "Read only listed fixed paths and specified sections. Issue15 is scoped delivery, not an unpinned science input. Other linked files do not enlarge the manifest; actual access must be distinguished from URL availability.",
+    "No code execution, scientific model/checkpoint construction/loading, new training/evaluation, raw-result reruns, source edits, profiling, cost pilot, additional consultation or cross-direction action is requested.",
+    "Preserve frozen B03 strict>+1/inclusive[-1,+1]/strict<-1 rule, all outcomes and cost unknowns. Do not pool episodes, call equal labels paired or treat the proposed arms as already implemented/selected.",
+    "Critique substantive merits and confounds of the proposal independently. No positive-first, fixed seed count, exact optimum, exhaustive cause census or mandatory prelaunch diagnosis is introduced by ordinary B evidence.",
+    "One accepted review request only. Actual partial/uncertain GitHub effects must be reconciled; output fallback retains this exact scientific question. Do not resubmit for wording or delivery convenience."
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md",
+      "purpose": "Read complete frozen B03 question, legal comparator, exposure/RNG, primary rule, prediction and appended Portfolio clarification.",
+      "provenance": "Prospective card with prelaunch authority clarification; no endpoint change.",
+      "commit_sha": "4776103de4f55beaee610c52506112651bfaed04"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read complete E0 including all results, units, historical distinction, prediction, cost and deviations.",
+      "provenance": "DM technically accepted actual B03 evidence.",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md",
+      "purpose": "Read complete interpretation and proposed next comparison, strongest alternatives, costs and unresolved decisions.",
+      "provenance": "DM provisional scientific interpretation and unselected proposal, not independent review or final Portfolio decision.",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/RESULT_SUMMARY.json",
+      "purpose": "Read full compact independent arithmetic and uncertainty units.",
+      "provenance": "Descriptive analysis of original final policy returns; no new science.",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/BLOCK_COMPARISON.json",
+      "purpose": "Read two individually identified completed block outcomes, without episode pooling.",
+      "provenance": "Descriptive comparison, no population estimator.",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/COST_SUMMARY.json",
+      "purpose": "Read full per-arm native, study elapsed, support scopes and unknown cost declarations.",
+      "provenance": "Native GNU time and supervisor facts plus labeled disjoint support windows.",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/GENERIC_COLLECTION.json",
+      "purpose": "Read identity, source, counts/integrity checks and archive member manifests; no archive download or checkpoint execution.",
+      "provenance": "Actual terminal Generic collection and one weights-only integrity read.",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/BANK_COLLECTION.json",
+      "purpose": "Read identity, exact Generic input digest, source, integrity and archive member manifests.",
+      "provenance": "Actual terminal BANK collection and one weights-only integrity read.",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "purpose": "Read Current position, Scientific question, entity-history family opening and stopped-family/recast context only.",
+      "provenance": "Current direction scientific report with historical sections explicitly preserved.",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_history_b01/model.py",
+      "purpose": "Read the complete small Actor/ObserverAttention source to assess pre-fusion BANK versus post-fusion Generic recurrence, legal information, current bypass and proposal assumptions. Do not execute.",
+      "provenance": "Actual numerical implementation reused unchanged for B02/B03.",
+      "commit_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read complete prior valid B02 result and its claim/cost boundaries.",
+      "provenance": "Prior first intact fresh-learning comparison, preserved separately.",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b02_review/archive/RESPONSE.md",
+      "purpose": "Read the complete independent B02 review and its stopping-inference challenge. Historical authority wording is superseded by current protocol.",
+      "provenance": "Independent provider review, exact preserved source.",
+      "commit_sha": "b4a67c7bf7b0eec726f107bf7acdf148f7e60109"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md",
+      "purpose": "Read owner-requested scientific reconciliation and later historical-reading correction sections; the E/F and B02 boundaries in the same intake remain context.",
+      "provenance": "DM substantive correction responding to the owner and independent review.",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/archive/RESPONSE.md",
+      "purpose": "Read the entire actual Portfolio decision, including opportunity/value argument for B03 and its claim/authority limits.",
+      "provenance": "Full independent final direction interpretation, CONTINUE applied.",
+      "commit_sha": "4776103de4f55beaee610c52506112651bfaed04"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md",
+      "purpose": "Read full DM response and actual application of Portfolio CONTINUE, including whole-program realization clarification.",
+      "provenance": "DM response to complete Portfolio decision before B03.",
+      "commit_sha": "4776103de4f55beaee610c52506112651bfaed04"
+    },
+    {
+      "path": "docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+      "purpose": "Read current authority scope: direction Pro reviews; DM innovates/executes/reports; Portfolio is final direction-level interpreter. This supersedes historical conflicting wording.",
+      "provenance": "Current OWNER_DIRECT2026-09-14 authority, not an experiment-by-experiment approval gate.",
+      "commit_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply sections11.4 and11.7-11.10 for B launch constraints, MEI/headroom, units/proportionate exploration and scientific knowledge; sections7-8 only with the current separately pinned Portfolio authority correction.",
+      "provenance": "Current evidence requirements; existing frozen card semantics preserved.",
+      "commit_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Read sections2,4,6: legal history/state, representation versus successful finite learning, and empirical units/claim boundaries.",
+      "provenance": "Explanatory knowledge; no extra authority or fixed seed/diagnostic gate.",
+      "commit_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Read complete concise topic for learning/evaluation units, end-to-end versus mechanism questions, selection and costs. Do not recursively open its links.",
+      "provenance": "Explanatory methodology, not additional requirements.",
+      "commit_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Read sections4-5 and7.1-7.3 only for actual feasibility/proportion of proposed local model/runner change; no code implementation is requested.",
+      "provenance": "Current engineering scope; prospective optional implementation remains bounded.",
+      "commit_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a"
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "purpose": "Read section1 for complete invocation, planning versus actual limits and preserved scientific endpoints.",
+      "provenance": "Current runtime interpretation, not a time-based scientific failure rule.",
+      "commit_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a"
+    }
+  ],
+  "github_delivery": {
+    "branch": "codex/vap-folr",
+    "base_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+    "response_path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b03_result_plan_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/15"
+  }
+}
