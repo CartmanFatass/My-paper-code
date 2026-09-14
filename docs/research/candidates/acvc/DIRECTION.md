@@ -13,10 +13,10 @@ engineering. Canonical live endpoints and slot mechanics are in main
 `C:/Projects/HMASD/.codex/hmasd-dm-sessions.toml`; Clerk is retired.
 
 Reuse `C:/Projects/HMASD-worktrees/codex-acvc`, branch `codex/acvc`. No additional DM or
-fourth slot is created. RCLE owns this existing reservation's application; the DM has sent
-actual card/code-start evidence and owns research continuation without an ACK barrier.
+fourth slot is created. RCLE completed this reservation's conversion to occupancy at main
+`6c6b2432402bf9d9c77b53d683b35ebbb4c325ee`. The original DM owns research continuation.
 
-## Active object — B03 new C fit and C/F/own-dwell endpoint comparison
+## Active object — fixed F after one fresh 1,024-episode C fit
 
 The DM read the entire 21,323-byte Portfolio answer, SHA256
 `3b81868e9065d370f0d2a5430dd81da960d8a4cd3d4be799dff7c98cbd54ceb7`, and its full intake.
@@ -30,8 +30,21 @@ Native B03 is complete and technically accepted: one original invocation at sour
 (F−C+.1436987981J, F−dwell+.1178477937J; adverse6/64 and5/64). All rows/updates checked.
 [Full result](ACVC_CLUSTER_DEPLOYMENT_B03_RESULT_EVIDENCE_20260914.md) and
 [intake and next-question alternatives](ACVC_CLUSTER_DEPLOYMENT_B03_INTAKE_20260914.md) retain
-absolute comparator scores, tails and private intervention differences. Independent scientific
-result/plan review is being prepared; no scientific successor is selected or launched.
+absolute comparator scores, tails and private intervention differences. The complete independent
+[B03 review](pro_packets/20260914_cluster_b03_scientific_review/archive/RESPONSE.md),
+13,545 bytes at `867fdadff71eb9fac4a85b4e3cb44a0bfc55d033`, was read and every material
+finding answered in that intake. No B03 empirical defect or rerun was identified.
+
+DM selected [ACVC_CLUSTER_LONGER_C_B01](ACVC_CLUSTER_LONGER_C_B01_SCIENCE_CARD_20260914.md):
+one unscreened new C fit, master22319/eval32319, with 1,024 training episodes/2,048 updates
+and the same three private 64-world final panels, 311,296 team ticks. This tests fixed-F use
+at greater C training exposure; it guarantees neither a stronger policy nor a causal effect
+of duration. It is a new B/EXPLORE object, not a fourth unchanged 512-episode programme.
+The adapter and narrow shared workload-report correction are technically accepted after 26
+focused synthetic checks and an independent Sol/high review with no material findings. Source
+`914a3d0e78d49d385c54aaec0776ead63712b624` is pushed and the exact remote checkout is prepared
+for the single selected invocation. [Current intake](ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md)
+records actual acceptance, launch, collection and scientific review as they occur.
 
 Earlier [PARK knowledge](PARK.md), [reentry judgment](ACVC_REENTRY_INTAKE_20260914.md)
 and [B02 full-review response](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md)
