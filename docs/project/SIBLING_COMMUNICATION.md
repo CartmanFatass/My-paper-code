@@ -1,65 +1,73 @@
 # Task collaboration
 
-Control runs on Windows C:/Projects/HMASD with PowerShell. Resolve native IDs from runtime
-results; read Agentify/provider settings from .codex/hmasd-transport.toml.
-Historical task IDs are evidence, not dispatch routes.
+Control: C:/Projects/HMASD, Windows PowerShell. Resolve current Root/Clerk/DM endpoints and main
+writer from .codex/hmasd-dm-sessions.toml; old native names and queued clientThreadIds are not routes.
+Independent DMs use gpt-6-astra/max, Clerk uses gpt-5.6-luna/high. Explicit task model settings do
+not inherit automatically from a custom subagent role file.
 
-## Native task tree
+## Independent tasks
 
-Root coordinates DM direction chains. Each DM owns science, implementation, self-checks, repairs
-and acceptance, retains independent high-risk Reviewer review, and reuses one Luna/low native
-experiment-monitor child for its accepted experiments. CM and Implementer assignments are suspended.
-Do not create equivalent implementation roles under generic names.
+Root is the user entry. DM owns its entire direction lifecycle; Clerk coordinates and records.
+Direction Pro Convergence is the independent scientific Reviewer; Portfolio is the user report.
+Use send_message_to_thread for actionable DM-to-Clerk and Clerk-to-DM handoffs. A final alone does
+not deliver to another independent task. Messages give event/assignment/evidence revision, actual
+DM decision, next owner/action and real dependency. Keep full science in the intake/review record.
+Fact-only events need no ACK. Message delivery and completed consequences are distinct; deduplicate
+while preserving unfinished actions. A concrete missing action triggers follow-up, not confirmation
+loops. Clerk can end a handled turn; the next message starts another turn.
 
-Use collaboration.followup_task for work assigned to an existing non-Root agent, including
-resuming an idle monitor or delivering evidence requiring action. Use collaboration.send_message
-for facts to an active/waiting parent; it does not start an idle recipient's turn. Native final
-returns complete a bounded assignment. Do not send duplicate work through both tools.
+DM decides continue/defer/PARK/CLOSE/reopen/recast/family/C work, responds to independent scientific
+review and reports decisions to Clerk directly. Clerk records dispositions without Portfolio or
+Root approval. It reports released slots rather than creating replacements. Only an explicit owner
+request initiates a cross-direction change or Portfolio consultation. Reporting does not authorize
+implementation; no automatic global planning queue or per-object investment request exists.
 
-Root dispatches ready independent actions before waiting. While DM work is outstanding, Root
-uses native collaboration.wait_agent. DM does independent work first, then uses the same native
-long wait for its monitor or Reviewer. Use the configured 1500000 ms default/minimum wait;
-process an arriving event promptly. An unchanged timeout requires only a brief continuation of
-waiting: no rereading all cards, status census, repeated assignment or progress broadcast.
-The owner accepts periodic context reuse/cache refresh and brief continuation as design premises.
-No per-DM keepalive messages, ACK loops, timers or separate relay are needed.
+Root messages are for requested investigation/user responses and actual workflow or owner-scope
+exceptions, not ordinary DM approvals. A routine cost/closeout decision goes to Clerk after the DM
+decides it under AGENTS section 2. A missing fact is reconciled by its responsible DM; calling it
+an exception does not transfer responsibility. Do not add a Clerk approval before contacting Root
+when a real owner decision is needed.
 
-Wait only for an actual active dependency. A concrete blocker returns to its accountable owner;
-an idle child with unfinished authorized work is resumed once with followup_task. Never interpret
-a timeout as failed execution, a new invocation budget or permission to retry scientific work.
-Owner pause/stop boundaries take precedence. No-work completion is not a reason to loop forever.
+Clerk uses compact wait_threads/cursors for missing facts and read_thread only where needed. It
+never waits for independent DM messages through collaboration.wait_agent. The 50-minute heartbeat
+is silent recovery for missed/interrupted events, not automatic planning. Owner pause takes priority.
 
-DM sends Root only actionable integration, cross-direction dependency, formal direction disposition or scope-conflict
-facts, with assignment identity, commits/evidence, requested next action and uncertain effects.
-Continue independent authorized direction work after a partial handoff. Root handles the changed
-direction without waiting for siblings or routinely reloading the whole portfolio. Deduplicate
-message and final copies by source, assignment and evidence revision. Root accepts artifacts;
-message delivery is not acceptance. Routine specialist and monitor returns go directly to DM.
+## Native DM specialists and scientific review
 
-## Experiment observation
+DM owns implementation and acceptance, with independent high-risk code Reviewer coverage; no new
+CM/Implementer chains. Its native Luna/low Monitor observes accepted experiment handles and returns
+adoption/terminal facts directly to DM. DM collects/intakes, then sends only actionable outcomes to
+Clerk. EXPERIMENT_MONITOR.md owns the observation procedure.
 
-Follow EXPERIMENT_MONITOR.md. DM creates/reuses its monitor; Operator uses the exact native
-monitor address supplied by DM and cannot create another child. Adoption and terminal facts go
-to DM. DM collects results and completes scientific intake without Root forwarding terminal events.
-Root receives the resulting actionable direction handoff, not every experiment status.
+Direction Pro Convergence reviews science independently through the DM's native Luna/high Transport.
+It examines design, evidence, interpretation, conclusions and successor plans; DM reads the full
+review and responds to material findings with correction/claim limits or reasoned resolution.
+The Pro review does not confer funding or lifecycle authority. Preserve scientific independence
+and appropriate review coverage; it is not generic optional advice or a per-step approval ritual.
 
-## DM-owned Agentify Transport
+Use collaboration.followup_task for a native child's concrete assignment; collaboration.send_message
+for factual parent returns, noting it does not start an idle native turn. Native final completes its
+bounded assignment. Real Monitor/Reviewer/Transport producers retain their actual parent/wait route;
+unchanged waits do not cause repeated status, reminders or duplicate requests.
 
-Each DM creates/reuses one native Luna/high Transport child with minimal context. DM authors and
-publishes the exact handoff, dispatches via followup_task, and waits natively for the complete
-archive. Transport owns Agentify Send, observation, one-Send reconciliation and direct DM receipt.
-Root receives the DM's conformance/decision mapping and integrates it. Root and DM continue native
-waits while these dependencies run; there is no independent app-task wake branch.
-Different provider bindings may proceed concurrently. Serialize each exact conversation and the
-shared Portfolio node under its current author. Root uses its own native Transport only for
-vacancy replacement after formal pause/closure leaves fewer than four occupied direction slots;
-those archives return directly to Root for complete intake and Pro-selected DM creation. Existing uncertain or accepted requests
-require same-request reconciliation, never a new Send after changing executor. Transport skill
-owns exact Agentify arguments and immutable archival. Experiment monitor never operates Pro.
+Each exact Pro conversation has one executor. Keep accepted/uncertain requests, operations and
+immutable archives; verified nonacceptance permits repaired same-request Send, not a new scientific
+question. Direction DM repairs complex Transport defects; Clerk assigns a related Astra DM only for
+an explicitly commissioned Portfolio Transport defect, preserving its real parent/operator.
+No browser executor overlap. The Transport skill owns supported recovery and screenshot use.
 
-## Recoverable ownership
+## Recovery and integration
 
-Record active native names, assignments, accepted handles and pending actions in existing direction
-and experiment tracking. No new messaging service or scheduler. Before transferring any already
-accepted work, reconcile its current observer and undelivered notices; confirm new adoption before
-releasing the old observer. Preserve external identities, evidence and invocation budgets.
+Root/Clerk serialize main index through a named writer handoff. Clerk integrates explicitly accepted
+commits and records DM decisions, returns semantic conflicts to their DM, and never implements shared
+policy/code itself. Independent task session worktrees are only hosting; reuse each designated
+direction authoring checkout. Accepted legacy children/requests keep their original routes until
+reconciled closeout; migration does not reparent or duplicate them. No extra relay service is needed.
+
+Control publication includes the registered session checkout and direction authoring checkout,
+not only main. Root publishes the exact control revision/paths; each task's existing writer brings
+those current control paths into its own checkouts at a clean boundary, preserving unrelated work
+and frozen scientific inputs. Clerk records actual synchronization or the concrete conflict, not
+message delivery as completion. In an already-running turn, the explicit current policy message
+supersedes stale injected instructions; changing a role TOML does not by itself update an independent
+task's instructions. Do not reread all history or restart research merely to synchronize controls.
