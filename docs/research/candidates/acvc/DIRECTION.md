@@ -11,9 +11,9 @@ address expected added value under the declared law, with simultaneous df5 worki
 t intervals and explicit actual-calibration limits. [Current intake](ACVC_CLUSTER_FIXED_RECIPE_C01_INTAKE_20260914.md)
 records the complete Sol/medium implementation return and13 passing focused checks.
 Independent Sol/high review verified both publication-deadline and CPU-accounting repairs.
-DM accepted source6e8d1b894 and verified its exact remote bytes. Original unit1 is
-running after fresh memory admission and direct batch-monitor adoption; units2–6
-remain preselected/uninvoked. No complete C result exists yet.
+DM accepted source6e8d1b894 and verified its exact remote bytes. The six original
+units are being addressed in frozen order; current per-unit receipts and monitor state
+are in the intake/EXECUTION_FACTS. No complete C result exists yet.
 The original independent ACVC DM owns ordinary research, implementation, engineering acceptance,
 launch/observation, scientific intake and reports. Portfolio owns final direction-level
 CONTINUE/recast/PARK/CLOSE/reopening. Direction Pro supplies independent scientific review;

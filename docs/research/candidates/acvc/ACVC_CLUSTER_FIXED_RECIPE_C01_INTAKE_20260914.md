@@ -4,7 +4,7 @@
 
 The [science card](ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md) and [first prospective draw](ACVC_CLUSTER_FIXED_RECIPE_C01_PROSPECTIVE_FACTS_20260914.json) are frozen at `cc7913a2920a49e15b918def066935e0e95cb334`. The actual bounded implementation batch was assigned to native Sol/medium `/root/acvc_fixed_recipe_c01_implementation`, event `ACVC_CLUSTER_FIXED_RECIPE_C01_IMPL_20260914_01`. It owns only the card's new source/test paths and engineering_check.txt; DM retains the card, interpretation, Git, independent review and acceptance.
 
-Exact source6e8d1b8946e1b2eb0e4207cbc9cc9d006ad2abda is accepted/pushed and remotely byte-verified. Original unit1 was accepted at18:10:19Z after fresh4GiB admission and is running under the new batch monitor, directly adopted18:11:17.5553666Z. Units2–6 remain preselected/uninvoked; no final scientific result exists. DM will collect/verify each original before the next fixed-order invocation, then reduce all six and obtain one complete independent scientific review.
+Accepted source6e8d1b8946e1b2eb0e4207cbc9cc9d006ad2abda is executing the six original units in frozen order. Unit1 is complete and its full records are verified; units2–6 remain preselected, with exact current dispatch/monitor/collection state in EXECUTION_FACTS.json. All individual units remain interim study components until the six-unit complete-record reduction and independent scientific review. No extra fit, survivor inference or efficacy gate is introduced.
 
 ## Applied authority and actual design choice
 
@@ -88,3 +88,13 @@ Accepted source **`6e8d1b8946e1b2eb0e4207cbc9cc9d006ad2abda`** was committed and
 The configured login-shell exact-SHA fetch and detached worktree creation both exited0; known zsh zle/monitor/gitstatus startup warnings were retained without treating them as Git failure. Remote HEAD and all13 declared byte surfaces match accepted6e8d1b894; tracked source is clean and no original output existed before execution.
 
 Unit1 handle `acvc-fixed-recipe-c01-u01-6e8d1b894` was submitted once at2026-09-14T18:10:19.429443Z and returned accepted at18:10:20.091124Z. Adjacent admission assessed18:10:19.815663Z, physical/effective15,625,986,048bytes, both>=4GiB. The new batch-scoped native Luna/low `/root/acvc_fixed_recipe_c01_monitor`, actual App child01a0a11d-2f13-7411-aecc-c846a2bd8f40, received MONITOR_ADD and directly reported MONITOR_ADOPTED at18:11:17.5553666Z: running,pid3675879,tmux active. DM stops routine process polling after actual adoption; the child observes until terminal and returns directly. Full source/commands/admission/adoption are in EXECUTION_FACTS.json; the compact temp monitor record preserves subsequent observations. There is no duplicate run or observer.
+
+## Original unit receipts
+
+Each row is a retained component of the frozen six-unit study; the next selected unit follows technical collection, without an efficacy/futility choice. Raw rows, paired64 vectors, all negative identities/extrema and native/source metadata remain linked.
+
+| Unit | Technical state | Native wall s | User/system CPU s | F-C mean J | F-dwell mean J | Evidence |
+| --- | --- | ---: | --- | ---: | ---: | --- |
+| 1 | complete,1024/2048/192 checked; all14 original files archived | 292.52 | 291.55 / 1.00 | .08605236338348182 | .04842833140392613 | [unit facts](evidence/cluster_fixed_recipe_c01_20260914/unit_01/UNIT_FACTS.json), [archive](evidence/cluster_fixed_recipe_c01_20260914/unit_01/NATIVE_ARCHIVE_MANIFEST.json) |
+
+Unit1 final C/F/dwell=.15382744156755837/.2398798049510402/.19145147354711406J. F-C has11 adverse worlds/min-.14428615287843227; F-dwell16/min-.1491303328974227; own-dwell-C13/min-.26712151043852295. These are complete finite-panel facts, with no six-unit confidence claim yet. The single checkpoint and all original files are preserved in the verified559717byte archive SHA256a716ecb1afb48fe764d20ce5ad6ef4e6842ed813e2e7eabed066fe94fb8405aa.
