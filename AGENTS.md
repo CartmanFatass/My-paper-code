@@ -46,14 +46,15 @@ coordinates shared infrastructure, owner discovery and operation ordering under 
 cross-task impact alone does not route an issue to Root. Root handles a concrete shared policy/
 control-code change or actual user choice outside delegation. Follow SIBLING_COMMUNICATION.md;
 routine repair traffic does not need Root messages or acknowledgement.
-**Portfolio** is the user-facing overall research report. It summarizes DM-owned conclusions,
-lifecycle, actual work, costs, uncertainty and options. It is no longer a standing Pro decision
-node. Portfolio consultation and cross-direction adjustment occur only when explicitly requested
-by the owner. Reports/recommendations do not themselves authorize execution. No automatic request,
-new direction, replacement or revival follows a vacancy or a DM decision.
+**Portfolio** supplies the user-facing report and owner-delegated vacancy selection. It summarizes DM-owned conclusions,
+lifecycle, actual work, costs, uncertainty and options. It does not approve ordinary DM research. OWNER_DIRECT 2026-09-13, clarified 2026-09-14, delegates filling genuine
+PARK/CLOSE vacancies up to three occupied/reserved independent DM slots: Clerk requests Portfolio
+selection directly through the Codex in-app browser, then creates selected Astra/max DM tasks.
+CLERK_OPERATIONS.md governs notification, PARK knowledge records, safe archival and deduplication.
+Other global adjustments require an explicit owner request.
 
-OWNER_DIRECT 2026-09-13: this full-lifecycle DM delegation and report-only Portfolio replace older
-mandatory Portfolio/Pro finality and automatic replacement rules prospectively. Specific owner
+OWNER_DIRECT 2026-09-13, clarified 2026-09-14: full-lifecycle DM delegation and the scoped three-slot replacement delegation replace
+older blanket Portfolio finality and blanket prohibitions on vacancy replacement prospectively. Specific owner
 stops and actual resource limits remain. Preserve accepted external requests through archive;
 new advice does not automatically change global layout. Current research state and endpoints are
 in `.codex/hmasd-dm-sessions.toml`; historical pauses/routes are not current rules.
@@ -71,7 +72,8 @@ Clerk receives independent DM handoffs through app messages. DM also owns native
 Each DM creates a native Luna/high Agentify Transport child per request batch for exact Pro Send,
 observation, reconciliation, archive and direct native receipts. DM authors and publishes the
 request, dispatches to its child, waits natively and checks the complete response. Clerk uses the
-same parent/child route only for explicitly owner-commissioned Portfolio consultation,
+parent/child route for separately commissioned Portfolio consultation; vacancy requests may
+go directly through Clerk's Codex in-app browser under CLERK_OPERATIONS.md,
 preserving its advisory or expressly authorized scope; it does not forward routine transport
 receipts. Recover uncertain effects on the same request before another Send. Scientific review responsibility and
 frozen input/provider bindings remain explicit. The Transport skill owns current Agentify APIs;
@@ -167,7 +169,8 @@ and evidence requirements follow the actual claim; there is no mandatory Pro app
 | Direction research and lifecycle | DM, subject to specific owner overrides | Existing card/intake/DIRECTION.md, reasons/evidence/next condition, OWNER_DELEGATED |
 | Independent scientific review | Direction Pro Convergence; DM responds and resolves findings | Full review, DM response/corrections and accepted claim limits |
 | Mechanical coordination/reporting | Clerk | Actual events, accepted integration, current report and pending consequences |
-| Cross-direction layout, new directions or new resource commitments | Owner through Root on an explicit request | Owner instruction and actual application; requested advice remains advice |
+| Vacancy replacement up to three occupied/reserved slots | Portfolio selection, Clerk execution under owner delegation | DM PARK/closeout, request, selected tasks and actual application |
+| Other cross-direction layout or new resource commitments | Owner through Root on an explicit request | Owner instruction and actual application; requested advice remains advice |
 
 DM declares finite invocation/cost/resource bounds and stopping conditions before execution.
 Standing delegation is the authority; a card records work rather than requests permission. An ended
@@ -207,9 +210,8 @@ actual evidence burden. Current specifications may not be silently relaxed to av
 
 Portfolio report comparisons retain honest claim ceilings, headroom/MEI, costs, contrary results
 and recast history. Existing owner priority/resource ordering remains until changed by owner.
-A new recast is DM's decision and report fact, not an automatic global priority change. Four is a
-working-set target, not automatic replacement authority. Report vacancies and continue independent
-work; only an explicit owner adjustment admits replacements or changes cross-direction priorities.
+A new recast is DM's decision and report fact, not an automatic global priority change. Four is the occupied/reserved slot target under the owner's scoped vacancy delegation. Clerk
+requests Portfolio replacement for genuine empty slots; unrelated priority changes remain owner-owned.
 
 ## 3. Scientific gaps and external-effect recovery
 
@@ -276,10 +278,10 @@ When the owner is absent the loop keeps running under a standing delegation (own
    using existing records; never invent owner replies or silently convert a recommendation to policy.
 8. **Portfolio reporting and owner-requested adjustment.** The former standing Portfolio Pro finality
    is withdrawn prospectively. Maintain a user-readable report from DM decisions and evidence.
-   Only an explicit owner request starts a Portfolio consultation or cross-direction adjustment;
-   a request for reporting/advice alone does not authorize implementation. Preserve historical
-   PRO_FINAL records as provenance and ongoing accepted requests through archive, without automatic
-   new dispositions or replacement launches. Owner instructions remain the source of global changes.
+   The owner delegates Portfolio selection and Clerk creation of replacement DMs for genuine
+   vacancies up to three occupied/reserved slots. Other consultations/global adjustments require
+   explicit owner scope. Preserve historical PRO_FINAL provenance and accepted request effects;
+   a generic report is not authorization to change other directions.
 
 ## 5. Capacity and resume
 
@@ -294,12 +296,14 @@ deduplicates delivery while completing unfinished consequences, integrates accep
 reports changed facts. Native children return to their actual DM. No unchanged status/ACK loop.
 
 DM PARK/CLOSE/defer applies at a safe boundary with live runs/requests reconciled and a recorded
-reason/revisit condition. Clerk records released capacity and tells the user; it does not automatically
-seek Portfolio replacement, create a new direction or revive another direction. Existing admitted
-DMs manage their own reopening within actual owner scope and resource capacity. The four-direction
-target cannot override a scientifically justified DM stop or authorize new global investment.
+reason/revisit condition. For scientific PARK, DM writes PARK.md preserving reasons, research
+lessons, reusable evidence/assets, limitations and reopening conditions, then sends Clerk its
+committed handoff before ending. Clerk records and archives the task after safe closeout and
+knowledge preservation, then fills genuine vacancies through Portfolio under CLERK_OPERATIONS.md.
+A record-only closeout does not occupy a scientific slot; do not force low-value work to avoid PARK.
+Reopening an archived direction coordinates slot admission with Clerk and Portfolio to avoid duplicates.
 
-Clerk uses hmasd-loop-dispatch for changed events; the enabled 50-minute heartbeat recovers missed
+Clerk uses hmasd-loop-dispatch for changed events; an actually enabled 50-minute heartbeat recovers missed
 or interrupted consequences only. A real run/review/request has an owner/identity/event and retains
 observation. An ACTIVE-idle direction without work or a lifecycle decision goes back to its DM for
 that missing decision; no indefinite empty waits or forced low-value experiments. Specific owner
@@ -503,7 +507,8 @@ appendix and completed historical tasks remain unchanged.
 ## Appendix A — Codex specifics
 
 - Scoped GitHub Pro delivery is described in
-  `docs/project/GITHUB_RESEARCH_COLLABORATION.md`. New requests use committed task links and
+  `docs/project/GITHUB_RESEARCH_COLLABORATION.md`. Clerk vacancy requests may use direct iab
+  under CLERK_OPERATIONS.md instead. Requests using GitHub delivery use committed task links and
   a named branch response/comment; Transport archives its receipt and Clerk/DM reads
   the complete fixed file for intake. When the GitHub connector cannot expose or complete the
   scoped writes after actual-state readback, the same prompt requires Pro to attach its complete
@@ -532,8 +537,9 @@ appendix and completed historical tasks remain unchanged.
 - Each independent DM uses Astra/max and owns its full lifecycle. Direction Pro Convergence is
   its independent scientific Reviewer, served by its request-batch native Transport. Source/parent
   are the actual DM; operator is its child. Review responses inform DM decisions, not grants.
-- Portfolio is a user-facing report. Only an explicit owner-commissioned consultation uses a new
-  Portfolio request with Clerk as source/parent and its native Transport as operator. Preserve old
+- Portfolio supplies reports and owner-delegated vacancy selection. Clerk may directly execute
+  vacancy requests in the Codex in-app browser; separate native Transport remains available for
+  other explicitly commissioned consultations. Preserve old
   accepted source/parent/provider IDs through archival; no automatic global application or resend.
   Clerk task creation/resume explicitly selects gpt-5.6-luna/high. App messages keep these settings.
 - Reuse each node's current verified 6 Pro conversation. Apply the provider-exclusion policy
