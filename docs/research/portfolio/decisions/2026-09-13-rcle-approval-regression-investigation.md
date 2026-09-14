@@ -13,7 +13,16 @@ DM session/authoring checkout entrypoints. This investigates workflow, not RCLE 
   60 seconds for the already accepted scientific review. Its next message told Clerk that this
   owner choice had been requested. The message tool delivered the DM-authored request; there is
   no evidence that the tool generated an approval requirement or automatically routed a receipt.
-- The intake records support approximately 595.669065 seconds plus UNKNOWN tails and now calls
+- The DM later confirmed the direct reasoning: it had read main `4dfdb5f8f` section 2 and knew
+  the full-lifecycle delegation, but misclassified the card's local 300/600/900-second ceilings,
+  the 46.7-second transport repair and 10-second observation as an owner/shared-resource
+  exception. The “cannot reset the original cap, therefore ask for 60 seconds” step was the
+  DM's own finite-grant habit, not a rule in the card or the repaired controls. The initial
+  b984 session AGENTS text was stale background that increased propagation risk, but the DM
+  confirms current owner messages and main controls superseded it; stale text is not the sole
+  direct cause. Clerk did not instruct the DM to seek approval; the DM independently sent Root
+  the request and copied Clerk.
+- The intake records support approximately 595.669065 seconds plus UNKNOWN tails and now call
   the prior approval request an over-escalation of its own selected card ceiling. DM has selected
   finite administrative continuation under existing delegation; no experiment or Send is added.
 

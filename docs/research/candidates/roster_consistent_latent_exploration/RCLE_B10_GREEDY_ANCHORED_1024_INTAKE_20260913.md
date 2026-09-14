@@ -40,3 +40,26 @@ Alternative B costs, if later selected, are one fresh1024 fit with65,536 trainin
 B10 native161.35 s; support known charged through the current accounting checkpoint is tracked in SUPPORT_ACCOUNT.json under the600-second support/900-second complete bounds. Remote Git support stalls are actual costs, not science failures or free work. Full Monitor/Transport preparation and provider/agent/main-integration tails are UNKNOWN; do not claim a complete invoice or silently reset this cap. One started result invocation consumed its single slot; zero retries. Unique raw297865 bytes and source bundle24822 bytes are preserved locally with hashes and published ancestors; raw/source can recover the named terminal assets after scoped cleanup. B09's own closeout and original cap remain separately accounted.
 
 Next: publish this result and decision to Clerk as report input; obtain and respond to the full independent Convergence scientific review; preserve its exact answer and any corrections, integrate accepted explicit paths, then reclaim only mapped terminal B10 artifacts with absence checks. No automatic Portfolio request or placeholder next experiment is pending.
+
+### Actual closeout and scientific-review budget boundary
+
+Clerk integrated accepted result/PARK/technical/B09-closeout records at c6353c954fee03cac3bdd671e0e5b52de2a1d3c3, pushed main. At23:54:45 UTC the B10 terminal remote worktree, supervisor and staging raw-copy were reclaimed with disk/Git-registration absence verified. The failed staging source-bundle/lock targets were absent. Local complete raw/source evidence remains recoverable; [cleanup receipt](b10_greedy_anchored_1024_20260913/CLEANUP_RECEIPT.json) is actual completion, not another scientific permission.
+
+Scientific review request2026-09-13-rcle-b10-scientific-review-01 was accepted exactly once, operation094a6cba-6f76-4140-860b-1358e15b6cd9, provider user48359fbe-0414-4524-b36c-4734c76f3eb0. It was still generating at the direct Transport boundary. No complete review is yet archived or scientifically intaken; no Stop/Continue/new Send occurred. [Dispatch record](pro_packets/20260913_b10_scientific_review/DISPATCH_RECORD.json) preserves exact identities and current recovery action.
+
+Transport reports approximately46.7s strict repair plus one10s bounded wait; known charged support was approximately591.003s before boundary publication and595.669065s after it, against the original600s card plan. Monitor/preparation/other tails remain UNKNOWN, so no complete compliance invoice is claimed. DM initially paused active observation and requested owner supplemental60s; that request was an over-escalation of its own selected card ceiling, not an identified owner direction-wide cumulative limit. The accepted provider request was never stopped or rebound.
+
+### Current administrative continuation under existing DM authority
+
+Root clarified the existing full-lifecycle delegation, not an owner new grant. DM now selects
+up to60s additional active administrative closeout: original-request observation/archive,
+full independent scientific-review intake, concrete findings response and publication. This
+is worth completing because the meaningful already-accepted review remains missing; another
+experiment or consultation adds no value to obtaining it. Alternative: preserve the unresolved
+review indefinitely; not selected while a small bounded recovery remains feasible. This is a
+transparent subsequent cost/plan deviation, not reset/relabeling of B10's300/600/900 original
+card, a claim of original-cap compliance, or extra empirical authority. Aggregate every new
+cost with the prior595.669065s and preserve UNKNOWN tails. At the60s boundary or an actual
+scientific/effect conflict, DM evaluates actual remaining work and value and records its next
+bounded action, rather than returning automatically to per-step owner approval. Current state:
+same accepted scientific review closeout ACTIVE; research direction PARKED; no owner reply gate.
