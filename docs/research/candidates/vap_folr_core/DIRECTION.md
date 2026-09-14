@@ -33,8 +33,9 @@ below does not rewrite the older typed-state or scalar-gate objects.
 **Operational instruction — 2026-09-14 13:23 PDT:** finish the accepted
 augmentation B01 A−G run and required result/review/archival closeout, then write
 the [owner-pause handoff](HANDOFF_20260914_OWNER_PAUSE.md) and await explicit
-resume. The original pair is complete and collected; current-result review/closeout
-remains. No successor object or direction/vacancy work follows. This operational pause does not change the scientific lifecycle below.
+resume. The original pair, independent review and material response are complete.
+Owner pause follows the final committed handoff; no successor object or
+direction/vacancy work follows. This operational pause does not change the scientific lifecycle below.
 
 **Current lifecycle: ACTIVE / MEDIUM — Portfolio CONTINUE applied on 2026-09-14.**
 The [complete Portfolio decision and DM intake](pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md)
@@ -112,9 +113,14 @@ Generic-win prediction missed. Both5000/4969/128 endpoints and all raw evidence
 are intact; native3975.48s/CPU3972.96s. [Full result and interpretation](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_INTAKE_20260914.md)
 support this one complete-program increment, without persistence attribution or
 training-population ranking. Old replacement losses remain separate. The
-13401.737549s inter-arm control interval stays outside native work. Necessary
-independent current-result review, its response and owner-pause handoff remain;
-no new empirical successor follows.
+13401.737549s inter-arm control interval stays outside native work. The full112-line independent current-result review at4da68fe7a9577a0bc32a00d6fc7c7e7412e50568
+finds no invalidating defect and accepts this bounded program-level observation.
+DM read the complete answer and corrected the MEI contrast subject and nonpaired
+negative-count wording; numerical evidence and inference limits remain. All
+accepted provider input/response/comment artifacts are verified, and remote
+execution was reclaimed20:44:04.991160Z after complete published preservation.
+Current-object science/review closeout is complete. [Final operational handoff](HANDOFF_20260914_OWNER_PAUSE.md)
+records the explicit owner pause; no successor, new direction or vacancy follows.
 FOLR continues to occupy one existing slot, with the
 same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
 Full support/provider cost remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves

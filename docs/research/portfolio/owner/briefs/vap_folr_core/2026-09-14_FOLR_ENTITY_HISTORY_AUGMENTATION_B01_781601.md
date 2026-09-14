@@ -34,4 +34,6 @@ PARK/CLOSE或空缺。未来若恢复，再根据完整证据选择有价值的�
 · [科学解读](../../../../candidates/vap_folr_core/FOLR_ENTITY_HISTORY_AUGMENTATION_B01_INTAKE_20260914.md)
 · [交接状态](../../../../candidates/vap_folr_core/HANDOFF_20260914_OWNER_PAUSE.md)
 
-独立复核状态：待完成；本简报不把自审冒充独立复核。
+独立复核已读完：未发现使结果失效的缺陷，接受单次完整程序的正收益结论。
+DM 已按意见明确 MEI 针对 A−G 差值，且负回报数量差不代表配对 episode 改善；
+未改变数值或启动额外实验。完整回复与实质回应已保留，最终暂停状态见交接。

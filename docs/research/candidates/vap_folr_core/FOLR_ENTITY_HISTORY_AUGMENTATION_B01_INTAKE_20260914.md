@@ -24,8 +24,8 @@ post-G change to which A would run.
 
 The strongest support is the contemporaneous fresh comparison itself: complete
 real training and final evaluation, same legal input interface, no historical
-checkpoint comparator, +5.2964 difference and33 fewer negative final episodes.
-The mean is4.2964 above the fixed positive-MEI boundary. This is meaningful on
+checkpoint comparator, +5.2964 difference and33 fewer negative observations across the two panels, without paired-episode
+improvements. The A−G mean difference exceeds+1 by4.29640625. This is meaningful on
 the selected return scale, without a significance certificate. A's trained paths
 and finite checkpoint support technical credibility, not a unique mechanism story.
 
@@ -98,3 +98,53 @@ unresolved technical defect. Necessary full independent review, DM response,
 accepted integration, preserved-evidence remote reclamation and final handoff
 remain due. [Owner-pause handoff](HANDOFF_20260914_OWNER_PAUSE.md) is updated to
 actual completion only after those consequences have been handled.
+
+## Full independent review and substantive DM response
+
+The complete112-line/26,392-byte independent Convergence response at
+`4da68fe7a9577a0bc32a00d6fc7c7e7412e50568` is read and verified against its
+committed SHA256`b3b1666d901cd9612113306de1fc516731dca1823f1a2120d8a57f3160ebf907`.
+[Full review](pro_packets/20260914_augmentation_b01_result_closeout_review/archive/RESPONSE.md)
+finds no result-invalidating binding, measurement or implementation defect in its
+listed evidence/static source. It reports access to all21fixed sources and no
+critical gap, while explicitly relying on collection/engineering for unlisted
+inherited paths and raw binary facts. DM verified the response-only commit scope,
+all21fixed path/SHA mappings and complete bytes; this is separate from Pro's own
+access account. No numerical result or frozen primary changes.
+
+1. **Contrast wording accepted and corrected.** The earlier sentence's “mean”
+   could refer to an arm mean. It now explicitly states that A−G exceeds+1 by
+   4.29640625. “33 fewer negative observations across the two panels” is retained
+   with no implication of33 matched episodes improved, collisions prevented or
+   safety effect. The arithmetic/counts were correct; these repairs concern their
+   interpretation, so no new analysis, fit, test or regrading is justified.
+2. **Whole-program inference accepted with its alternatives.** Compatible-module
+   initialization is not matched initial Q or a fixed Generic policy plus isolated
+   memory. Added current processing, attention/readout, capacity, head/gradients,
+   optimization/coadaptation and realization can account for some or all of the gain.
+   The observed +5.2964 supports this concrete candidate, without identifying
+   persistence, stable ranking or a compelled continuation. Native-return increment
+   is not economic benefit net of computation. The missed prediction,42negative A
+   episodes and separate old replacement losses remain explicit.
+3. **Actual-case integrity boundary accepted.** The publisher does not independently
+   enforce equal launch SHAs and inherits panel reduction. Exact verified commands,
+   clean execution source, original G digest and collection checks establish the
+   current object's required facts; a hypothetical mixed-source helper input does
+   not show one occurred here. The code review and actual collection support
+   accepting this measured comparison. No unrelated runtime guard is added during
+   closeout. The G buffer-check correction/control delay remain recorded facts,
+   with no unsupported unique root-cause claim or scientific retry.
+4. **Costs, access and closeout responsibility accepted and completed by DM evidence.**
+   The review did not inspect later cleanup/handoff or certify their completion.
+   DM's separate published source/archive checks and cleanup receipt establish
+   actual remote reclamation at20:44:04.991160Z after46file preservation checks.
+   Native3975.48s, CPU3972.96s and study17377s remain distinct; full support/provider/
+   lifetime costs are unknown. Original active duties end only after actual full
+   archive, this response, accepted integration and final handoff, not the review's
+   existence. Owner pause preserves scientific CONTINUE/MEDIUM and the occupied slot.
+
+The review raises no material dissent or unresolved primary defect and asks for
+no empirical repair. DM accepts the bounded result and both wording corrections;
+there is no unresolved scientific gap that calls for another consultation.
+Any future repeatability or persistence question remains only deferred recovery
+knowledge. No successor card/seed/fit, lifecycle request or vacancy is selected.
