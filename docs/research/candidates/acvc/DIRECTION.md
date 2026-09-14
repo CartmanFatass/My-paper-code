@@ -32,7 +32,8 @@ DM selected the one independent same-law C-fit and C/F/own-dwell64 observation i
 [B02's card](ACVC_CLUSTER_DEPLOYMENT_B02_SCIENCE_CARD_20260913.md), master21493/eval31493,
 under ordinary direction discretion. The unchanged reviewed comparison asks whether K's useful
 F increment appears on this new endpoint; it is not K renewal, a scientific retry, a customer
-search or a new family. Native600/support600/complete1200 bounds and the one-fit stop remain.
+search or a new family. The original native600/support600/complete1200 plan and one-fit stop
+remain preserved; prospective post-run administrative support is separately declared in the intake.
 
 Source `be76f696cb773f2e5db8f4d55ebff1f3b6335ae6` passed independent code review and18 remote
 synthetic checks. The first supervisor submission failed before admission/Python because of
@@ -47,6 +48,16 @@ and11/64 adverse worlds. This is a second separately observed cluster endpoint, 
 stable training-population finding. [Complete intake](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md)
 records the proposed bounded synthesis and no-immediate-third-fit plan for independent Convergence
 review. DM responds to findings and makes the lifecycle decision; no Portfolio Send is pending.
+
+As of2026-09-14 00:23:29 UTC the original scientific review is **not sent**, not generating:
+operation`38dbacca-f772-43f5-ad16-31dd94ff302d` explicitly records`sendAttempted=false` and a
+prompt-readiness timeout. The stale shared Agentify/Chrome connection was diagnosed and a scoped
+repair independently reviewed, but its execution was blocked before running by tool policy.
+Original operation/binding bytes, runtime and Chrome remain unchanged. No native run, generation
+or observation is active. The concrete dependency is permitted reconnection of that shared runtime;
+then the same DM/Transport resumes the unchanged request and full scientific findings response.
+No alternative execution of the rejected action, third fit, replacement or new review is selected.
+This is an ACTIVE technical dependency, not a scientific lifecycle verdict or claimed advance.
 
 ## Scientific question
 
