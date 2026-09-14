@@ -5,15 +5,18 @@
 ACVC is **CONTINUE**, MEDIUM/recasts2, under the complete conforming
 [post-paired Portfolio decision](../../portfolio/pro_packets/20260914_acvc_post_paired_direction/archive/RESPONSE.md)
 and [full DM response/application](../../portfolio/pro_packets/20260914_acvc_post_paired_direction/INTAKE.md).
-The [six-programme fixed1024 C01 card](ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md)
-and first iid training/evaluation draw are now frozen. Final private C/F/own-dwell panels
-address expected added value under the declared law, with simultaneous df5 working-model
-t intervals and explicit actual-calibration limits. [Current intake](ACVC_CLUSTER_FIXED_RECIPE_C01_INTAKE_20260914.md)
-records the complete Sol/medium implementation return and13 passing focused checks.
-Independent Sol/high review verified both publication-deadline and CPU-accounting repairs.
-DM accepted source6e8d1b894 and verified its exact remote bytes. The six original
-units are being addressed in frozen order; current per-unit receipts and monitor state
-are in the intake/EXECUTION_FACTS. No complete C result exists yet.
+The [six-programme fixed1024 C01](ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md)
+is complete at source6e8d1b894: all six preselected originals,7296 episode rows and12288 updates
+were verified. [Full E0](ACVC_CLUSTER_FIXED_RECIPE_C01_RESULT_EVIDENCE_20260914.md) gives
+F-C+.096377354920J [.074826981257,.117927728584] and F-own-dwell+.064088940259J
+[.035375804426,.092802076092], both prespecified lower bounds>.01J. Simultaneous coverage
+is qualified by the iid-normal complete-fit-panel working model; actual neural-training calibration
+is unestablished. Adverse worlds30/384 and56/384 and all absolute/control/learning/cost evidence
+remain. Native summed wall1733.09s; full support/provider/agent costs UNKNOWN.
+[Current intake](ACVC_CLUSTER_FIXED_RECIPE_C01_INTAKE_20260914.md) records the consumed frozen C,
+complete engineering findings/repairs and actual reporting corrections. Independent scientific
+review and DM response are pending; report is the tentative next-investment preference, with a
+concrete changed-exposure alternative. No new empirical successor or lifecycle disposition exists.
 The original independent ACVC DM owns ordinary research, implementation, engineering acceptance,
 launch/observation, scientific intake and reports. Portfolio owns final direction-level
 CONTINUE/recast/PARK/CLOSE/reopening. Direction Pro supplies independent scientific review;
