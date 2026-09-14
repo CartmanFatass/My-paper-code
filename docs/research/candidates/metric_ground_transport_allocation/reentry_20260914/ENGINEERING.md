@@ -180,3 +180,29 @@ DM technical acceptance is therefore complete for the reviewed source and prepar
 command. This establishes readiness to perform the selected ordinary experiment, not
 that remote source/admission/launch or any scientific result exists. The next concrete
 action is commit/push, exact detached staging, current admission and agent-task dispatch.
+
+### DM direct completed-output audit scope
+
+L0 goal: collect the one completed programme, verify raw byte preservation and recompute
+the already fixed selection/primary without scientific execution. Owned source is only
+reentry_20260914/analyze_intake.py and its generated intake/CSV/archive records in this
+authoring checkout; native inputs are the named completed output plus supervisor files.
+Protected semantics are the existing protocol's own-score selector, exact ties, one fresh
+holdout pair and conditional paired-world primary. The audit reuses that pure reducer;
+it never imports Torch, constructs a model/RNG, loads checkpoints, fits or evaluates.
+Acceptance checks compare all20 native/supervisor member hashes with direct remote reads,
+all eight complete training/evaluation/rollout paths, original reward_sum/256 J, selected
+configuration/hash and raw-panel primary with the published result; archive members are
+read back byte-for-byte. Counts derive from these completed records, not a simulation.
+Bounds are one data-only local pass and the supplied run-summary tool on only two final
+run endpoints, no exclusion/search/extra scientific row or generic audit framework.
+No new scientific producer or estimand is introduced; DM inspection and exact comparison
+to the already independently reviewed reducer are proportionate for this mechanical audit.
+
+Actual audit and supplied run-summary commands both exited0. The data-only check reports
+PASS for20 remote hashes/archive readbacks, all8fits/2304episodes/1024rollouts and exact
+selection/primary recomputation. Completed counts match589824teamticks/4096Adam/
+13434880actorrowuses. Generic descriptive input contains only2final endpoint rows,
+explicitly paired; it reports n=1 and sample_sd=null, not32training replications.
+All native/checkpoint bytes are retained in NATIVE_EVIDENCE.zip (6666445bytes) and original
+local/remote outputs. This audit performed no new scientific execution or checkpoint load.

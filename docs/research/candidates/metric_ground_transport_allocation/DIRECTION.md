@@ -1,6 +1,28 @@
 # Direction metric_ground_transport_allocation: metric ground transport allocation
 
-## Current DM decision — CONTINUE after reentry, 2026-09-14
+## Current boundary — finite LR programme complete, 2026-09-14
+
+MGTAP-LR-SELECTION-B01 completed at source2d351d48604396ce478aa900584bd24b3255def5.
+Both arms independently selected1e-4; the fresh8252 final pair yielded
+COND−DENSE+0.023704897713093642 J, conditional paired-world SE0.004197354694630503,
+so the frozen MEI0.01 rule reads COND_ABOVE_MEI. All8 fits and their original artifacts
+passed collection/recomputation; full-command wall658.02s. This remains one selected
+programme and one final training pair, not stable superiority or causal tuning gain.
+
+The [complete new intake](MGTAP_LR_SELECTION_B01_INTAKE_20260914.md) retains all signed
+prior evidence, inference/cost limits and the strongest PARK alternative. DM accepts the
+bounded observation and prepares actual-results/next-question independent scientific
+review. The leading next option is a fixed-selected-LR recurrence, not automatic grid
+extension or a new launch. Portfolio owns the final direction-level interpretation;
+MGTAP remains occupied under its existing continuation, with DENSE generic default unchanged.
+
+Clerk retirement/handoff is complete. FOLR's full Portfolio decision4776103de4f55beaee610c52506112651bfaed04
+is CONTINUE/MEDIUM; main5456aec117b9746f141d09292af2da1f803b8262 records three occupied,
+zero reserved/vacant and releases the Portfolio binding to RCLE. No FOLR replacement
+or remaining MGTAP-owned vacancy transaction is needed. Current shared rows, not the
+historical snapshots below, control peer coupling.
+
+## Historical reentry decision — CONTINUE, 2026-09-14
 
 DM explicitly accepts the existing single LCAC-vacancy reservation and resumes
 direction-local implementation as **CONTINUE**. The first selected object is
