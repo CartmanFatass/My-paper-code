@@ -19,16 +19,21 @@ This authority preserves the direction's source-grounded scientific question, ev
 - Stable direction ID: `roster_consistent_latent_exploration`
 - This DM owns direction-local innovation, bounded experiments, implementation and reports. Portfolio decides direction-level CONTINUE/RECAST/PARK/CLOSE/reopening from the full report and global context; ordinary experiments need no per-experiment approval. No unilateral slot release or other-direction resource change follows a DM recommendation.
 
-## Current position — 2026-09-14: Portfolio CONTINUE applied / B13 selected
+## Current position — 2026-09-14: Portfolio CONTINUE applied / B13 complete
 
 The complete [Portfolio decision and DM response](pro_packets/20260914_e01_portfolio_direction/INTAKE.md)
 select CONTINUE in the existing joint-quota-phase family and the prepared B13 learned-prior
 object. DM has read the full answer and applied the conforming decision: retain this slot,
 priority and both exact-recipe HOLDs; no RECAST/PARK/CLOSE or per-experiment ratification.
-The unchanged seed33/1024-update/five-panel invocation is selected at published source
-cf4d9bd93ff9eb255800223d95de170b68315ba6. Native exposure is zero at application; actual
-launch/monitor/collection will follow through the existing remote route. Later MGTAP result
-context is preserved in the intake and does not create a slot/resource conflict.
+The unchanged seed33/1024-update/five-panel invocation completed at published source
+cf4d9bd93ff9eb255800223d95de170b68315ba6: 4,358,144 ticks, 1,024 updates, 163.92s whole
+native wall, exit0. The [complete B13 result and intake](RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md)
+retain sampled learning (+0.072437), nearest benefit (+0.154964), greedy deficit (-0.019784),
+learned prior strength 1.211991 and all recovery tradeoffs. Every measured modal/greedy
+outcome ties on 512 new held-out scenarios, without a policy/population equivalence claim.
+DM has accepted the complete collected bytes and selected independent result review and
+full response as the next work. No automatic second fit, PARK/CLOSE or slot release.
+Later MGTAP context is preserved and does not create a slot/resource conflict.
 
 ### Evidence and recommendation leading to this decision
 

@@ -2,17 +2,29 @@
 
 ## Complete answer and current authority
 
-RCLE DM has read the complete20,896-byte archived RESPONSE.md, SHA256
-2e3eb34bf9af4b050b4856b9d7993136d911d08f4bb8c6735b21792394373370. It answers the
+RCLE DM has read the complete archived RESPONSE.md. The final exact provider copy is
+20,895 bytes, SHA256
+7c7476fca152aec673c7ff0974ae182c0ef30c091e230a4ba7039ac71f06a416. It answers the
 exact request2026-09-14-rcle-e01-direction-decision-01, published at
 cf4d9bd93ff9eb255800223d95de170b68315ba6 for conversation
-6aa7836e-e4a0-83e8-985d-c633d94935b1. The registered Transport reports the answer terminal,
-complete and correct, and retains ownership of its final transfer/binding receipt. The
-complete answer and prompt are already on disk; no missing substantive paragraph has
-been identified. Receipt completion remains a separate actual producer and is not a new
-scientific approval step. Any real byte correction will be retained explicitly before the
-Transport archive is closed. The local prompt copy differs from its
-20,120-byte Git source only in terminal CR/LF whitespace; both actual versions remain.
+6aa7836e-e4a0-83e8-985d-c633d94935b1. The registered Transport has completed the full
+archive and receipt: user e74f2a90-f5a2-45f4-ae50-3fccb9715a27, assistant
+1bfcdd25-19b0-4852-abe4-a1b4aee4a52f, 6 Pro / gpt-6-pro, one Send, no retry or regenerate.
+The exact prompt is20,120 bytes, SHA256
+bae1fb96f26b704f43d0ecd34aab0c8578feeb6eb15476e05e7027e116a687f9.
+
+DM read and applied the complete answer at5f4abd6f0774c9b9e6ffe9b1c8bc721861b4265a
+while Transport finished its exact-copy receipt. That20,896-byte snapshot remains in Git.
+TRANSFER_CORRECTIONS.json records the entire difference: one extra hyphen in a Markdown
+table separator, with no changed scientific text, number or decision. The earlier prompt
+copy had two extra terminal LF characters; the final copy exactly matches the published
+source. These are explicit archive corrections, not a new answer, changed authority or
+retroactive decision. The full answer already existed and had been read before B13 launch.
+
+CHAT_RECEIPT/TRANSPORT_FACTS describe provider effects: Pro did not itself write the repo,
+create a task or launch an experiment. Those receipt fields do not prohibit DM execution;
+the complete decision expressly selects B13 without another startup ratification. The
+Portfolio request is terminal and its conversation may be released for the next peer.
 
 Under current PORTFOLIO_DECISION_PROTOCOL, the verdict is **CONTINUE in the existing
 joint-quota-phase family, with prepared B13 as the next concrete research objective**.
@@ -111,3 +123,12 @@ state and paired arithmetic, reports actual outcomes/costs and obtains meaningfu
 scientific review of that result and next interpretation. A new substantive direction/family/
 recast or contested interpretation returns to Portfolio. Neither a negative B13 result nor
 this CONTINUE creates an automatic lifecycle outcome or unlimited repeated experimentation.
+
+## Actual execution received — 2026-09-14
+
+The selected invocation was accepted at09:01:24.653422Z and completed exit0 at09:04:08Z;
+the native monitor delivered its terminal observation at09:05:03Z. The complete result is
+RCLE_B13_LEARNED_PRIOR_RESULT_EVIDENCE_20260914.md, with DM interpretation in the matching
+INTAKE. There are1,024 actual updates,4,358,144 native ticks and163.92s whole-native wall.
+Full collection and retained-byte checks passed. Result review and DM response follow;
+there is no new Portfolio direction decision merely because this selected object ended.

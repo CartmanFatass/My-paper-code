@@ -3,8 +3,11 @@ Binding MARL structure: public quota-phase coordination through actual physical 
 
 # B13 — learnable prior strength
 
-Status: **selected after full Portfolio CONTINUE and DM conformance/application** on2026-09-14;
-no B13 native invocation has yet launched at application. Complete decision/response is
+Status: **complete after full Portfolio CONTINUE and actual execution** on2026-09-14.
+The unchanged selected source completed once; actual counts, costs and results are in
+RCLE_B13_LEARNED_PRIOR_RESULT_EVIDENCE_20260914.md and RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md.
+The remaining prospective language below is the frozen plan, not a current run-status claim.
+At the earlier application no B13 invocation had launched. Complete decision/response is
 pro_packets/20260914_e01_portfolio_direction/INTAKE.md. The exact scientific proposal is
 unchanged. Earlier reversible preparation occurred while the direction verdict was pending;
 that ordering and the zero-exposure state are preserved in Git and engineering records.

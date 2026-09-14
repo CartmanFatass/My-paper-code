@@ -133,5 +133,3 @@ SOURCE_MANIFEST: exact full-SHA URLs and scopes follow. The first three authorit
   Provenance: FOLR author applied the conforming decision and released this conversation to RCLE; no RCLE disposition follows from the predecessor.
 
 Return the complete reasoned decision in Chinese Markdown in this chat; a full downloadable RESPONSE.md is also acceptable. No repository write is required for this direct scientific dialogue. State actual material accessed and any critical gap, the strongest continuation and PARK alternatives, how the scientific hypothesis changed, your direction verdict and claim ceiling, the next DM research objective, and any actual resource condition. Address the original Portfolio reentry rationale, the later E01 reviewer challenge, and the DM's changed recommendation substantively. Do not substitute a delivery receipt, a positive-result quota, or an automatic extra-seed/diagnosis gate. DM will read the complete response, resolve substantive findings and execute a conforming direction decision without another Root ratification.
-
-

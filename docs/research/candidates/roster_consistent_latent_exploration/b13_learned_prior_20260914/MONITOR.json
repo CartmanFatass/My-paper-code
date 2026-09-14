@@ -1,0 +1,20 @@
+{
+  "batch_id": "rcle-b13",
+  "event_id": "rcle-b13-s33-cf4d9bd93-adoption-20260914T090214Z",
+  "handle": "rcle-b13-s33-cf4d9bd93",
+  "accepted_at": "2026-09-14T09:01:24.653422Z",
+  "launch_sha": "cf4d9bd93ff9eb255800223d95de170b68315ba6",
+  "node": "wsl_4070",
+  "supervisor": "/usr/local/bin/agent-task",
+  "status": "finished",
+  "pid": 3668475,
+  "tmux_active": false,
+  "last_observed_at": "2026-09-14T09:05:03Z",
+  "terminal_event_id": "rcle-b13-s33-cf4d9bd93-terminal-20260914T090503Z",
+  "terminal": {"status": "finished", "exit_code": 0, "uptime_seconds": 203, "tmux_active": false, "supervisor_log_tail": "No current process; exited code 0 at 2026-09-14T17:04:08+08:00 (Duration: 164s)"},
+  "last_status": {"status": "running", "pid": 3668475, "tmux_active": true, "uptime_seconds": 127},
+  "source_cwd": "/home/wu/hmasd-worktrees/rcle-b13-cf4d9bd93",
+  "output_cwd": "/home/wu/hmasd-worktrees/rcle-b13-cf4d9bd93/temp/directions/roster_consistent_latent_exploration/exp/b13_seed33",
+  "evidence_receipt": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906/docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/LAUNCH_RECEIPT.json",
+  "delivery": {"adoption": "delivered_app", "terminal": "pending_parent_delivery"}
+}
