@@ -234,16 +234,21 @@ or a portfolio value judgment that no narrower or recast object merits investmen
 
 ## 8. Responsibility split
 
-### 8.1 Portfolio Pro and its designated DM author
+### 8.1 DM decisions, independent scientific review and Portfolio reporting
 
-OWNER_DIRECT 2026-09-10: Portfolio is the persistent `portfolio:cross_direction` Pro node.
-Root designates a relevant recently active DM to prepare its materials and check the full response
-for scientific/specification conformance. Root owns routing and operational application, not
-scientific selection. A complete conforming Pro decision is final under AGENTS §4.8 without
-per-item owner ratification; asynchronous owner overrides remain. Existing direction Pro nodes
-and DM object-tier decisions retain their scopes. A local conformance check is not another verdict.
+OWNER_DIRECT 2026-09-13: DM owns its whole direction lifecycle and scientific decisions, including
+family/recast/C-promotion and PARK/CLOSE, with specific owner constraints and this evidence standard.
+Direction Pro Convergence is the independent scientific Reviewer: it examines design, evidence,
+interpretation, conclusions and next plans. DM reads the full review, responds to material findings,
+corrects scientific flaws or limits the affected claim, and owns the resulting decision. Review is
+not an investment/lifecycle approval and does not replace the DM's management responsibility.
 
-Portfolio MUST:
+Clerk coordinates/records and compiles Portfolio as the user-facing report. Only an explicit owner
+request starts Portfolio consultation or cross-direction adjustment; report recommendations do not
+authorize implementation. Existing accepted requests and historical decisions remain evidence,
+without standing automatic Portfolio finality or automatic vacancy replacement.
+
+DM scientific decisions, independent reviews and Portfolio reports MUST:
 
 1. identify the decision question and assign the lowest sufficient evidence class before investing;
 2. compare directions at their honest claim ceilings rather than reward those with the most formal
@@ -259,7 +264,7 @@ Portfolio MUST:
    material lifecycle packet and decision record.
 
 When an external scientific consultation applies a stronger class than the stated claim requires,
-Portfolio must treat the mismatch as an unresolved methodology issue and seek a class-corrected
+The DM and scientific reviewer must treat the mismatch as an unresolved methodology issue and seek a class-corrected
 answer. It must not convert the mismatched standard into a scientific negative.
 
 **Portfolio principles and experience.** Keep classification, management grouping, investment
@@ -278,11 +283,12 @@ decision relevance, known complete cost, uncertainty, substitutability and rever
 unknown costs and the observation that would change the recommendation. Do not turn a benchmark
 sample or local failure into a universal investment threshold.
 
-Experience informs the choice; it does not silently override a specification. Pro states its
-chosen option, decisive reasons, uncertainty, revisit condition and bounded consequences. A needed
-rule change names the exact rule, necessity and scope under the proper-node authority. Owner
-changes to the question return to that node; preserve its previous answer instead of inventing
-a revised local decision. No new required response schema or scientific exposure follows.
+Experience informs the choice; it does not silently override a specification. The DM states its
+chosen option, decisive reasons, uncertainty, revisit condition and bounded consequences, including
+responses to material independent-review findings. A needed rule change names its exact necessity
+and accountable owner; a review recommendation alone does not amend the specification. Preserve
+original answers/evidence when making prospective decisions. No new response schema or scientific
+exposure follows from reporting.
 
 ### 8.2 Direction Manager (including engineering delivery)
 
@@ -300,7 +306,8 @@ EM MUST:
 6. preserve every valid result at its original meaning while permitting explicitly new follow-up
    objects;
 7. implement and technically accept the performance/instrumentation path required by the selected
-   class, optionally using a bounded Implementer, not unrelated proof machinery; and
+   class, with DM implementing and reviewing directly during the temporary code-subagent suspension,
+   not unrelated proof machinery; and
 8. recommend lifecycle consequences at the smallest supported unit and state what evidence would
    justify promotion, parking, recasting, or closure.
 
@@ -592,12 +599,12 @@ runs nothing; unknown cost is not zero and does not demand a separate calibratio
 On cost refusal, reconsider the chosen question and necessary evidence as well as execution.
 Moving a prohibited B prerequisite into a preceding A does not make it permissible.
 
-Pro decisions are final within current owner instructions and applicable specifications. In the
-existing intake, the designated DM cites any concrete conflict and returns it to the same node for correction
-before executing the affected requirement, while independent conforming work continues. Preserve
-the exact response and do not invent a substitute decision. Explicit specification exceptions name
-the rule, scientific necessity and scope and follow existing appropriate-node authority. No silent
-exception follows from response completeness, and no extra reviewer/approval/launch gate is added.
+Direction Pro provides independent scientific review. The DM preserves the complete response,
+answers material findings and owns corrections, claim limits and the final direction decision.
+Concrete unresolved scientific issues can receive focused review follow-up; this is not an approval
+or lifecycle veto. Portfolio advice/reporting authorizes no global change without an explicit owner
+instruction. Specification requirements cannot be silently waived by reviewer or DM; identify any
+needed change, necessity and accountable owner. Independent work continues without a blanket gate.
 
 This owner-directed clarification changes future authoring and current decision intake; it does
 not rewrite accepted request bodies, historical results or completed experiment assignments.

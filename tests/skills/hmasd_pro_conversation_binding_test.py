@@ -183,6 +183,7 @@ def test_owner_replacement_preserves_real_history_and_binds_one_observed_send(tm
     assert binder.bind(_bind_args(registry, **common, conversation_id=old_id, request_id="old-review")) == 0
     data = json.loads(registry.read_text())
     prior = data["bindings"][key]
+    prior["agentify_stable_key"] = "original-agentify-key"
     prior.update(state=prior_state, send_click_count=1, archive={"response_sha256": "a" * 64, "actual_repository_paths_read": 17})
     registry.write_text(json.dumps(data))
     evidence = {"previous_request_id": "old-review", "reset_authority": "OWNER_DIRECT", "owner_instruction": "Open a new conversation for 6 Pro."}
@@ -193,6 +194,9 @@ def test_owner_replacement_preserves_real_history_and_binds_one_observed_send(tm
     assert registry.read_bytes() == original
     binder.prepare_context_reset(registry, **kwargs)
     pending = registry.read_bytes()
+    pending_binding = json.loads(pending)["bindings"][key]
+    assert pending_binding["agentify_stable_key"] == binder._agentify_generation_key(key, "new-review")
+    assert pending_binding["request_history"][-1]["agentify_stable_key"] == "original-agentify-key"
     binder.prepare_context_reset(registry, **kwargs)
     assert registry.read_bytes() == pending
     with pytest.raises(ValueError, match="different replacement"):
@@ -210,6 +214,7 @@ def test_owner_replacement_preserves_real_history_and_binds_one_observed_send(tm
     assert accepted["state"] == "SEND_CONFIRMED"
     assert accepted["send_click_count"] == 1
     assert accepted["conversation_id"] == new_id
+    assert accepted["agentify_stable_key"] == binder._agentify_generation_key(key, "new-review")
     assert accepted["request_history"][-1]["request_id"] == "old-review"
     assert binder.bind(next_args) == 0
     assert json.loads(registry.read_text())["bindings"][key]["send_click_count"] == 1
@@ -328,19 +333,24 @@ def test_persistent_binding_allows_next_round_only_after_archive(tmp_path: Path)
         operator_thread_id="dddddddd-dddd-dddd-dddd-dddddddddddd",
     )
 
+    second.decision_authority = "dm_owned_scientific_review"
     assert binder.bind(first) == 0
     assert binder.bind(second) == 4
 
     value = json.loads(registry.read_text(encoding="utf-8"))
     value["bindings"]["em:alpha:innovator"]["state"] = "ARCHIVED"
+    value["bindings"]["em:alpha:innovator"]["agentify_stable_key"] = "existing-generation"
     value["directions"]["alpha"]["state"] = "ARCHIVED"
     registry.write_text(json.dumps(value), encoding="utf-8")
 
     assert binder.bind(second) == 0
     current = json.loads(registry.read_text(encoding="utf-8"))["bindings"]["em:alpha:innovator"]
     assert current["conversation_id"] == conversation_id
+    assert current["agentify_stable_key"] == "existing-generation"
     assert current["request_id"] == "alpha-innovator-02"
     assert current["state"] == "DIRECTION_VERIFIED"
+    assert current["decision_authority"] == "dm_owned_scientific_review"
+    assert current["request_history"][-1]["decision_authority"] == "pro_final"
     assert current["request_history"][-1]["request_id"] == "alpha-innovator-01"
     assert current["request_history"][-1]["creator_thread_id"] == "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
     assert current["request_history"][-1]["parent_thread_id"] == "cccccccc-cccc-cccc-cccc-cccccccccccc"
@@ -348,6 +358,7 @@ def test_persistent_binding_allows_next_round_only_after_archive(tmp_path: Path)
     assert current["creator_thread_id"] == "cccccccc-cccc-cccc-cccc-cccccccccccc"
     assert current["parent_thread_id"] == "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"
     assert current["operator_thread_id"] == "dddddddd-dddd-dddd-dddd-dddddddddddd"
+
 
 
 def test_evidenced_provider_context_reset_quarantines_then_binds_only_new_observed_url(
@@ -417,11 +428,14 @@ def test_evidenced_provider_context_reset_quarantines_then_binds_only_new_observ
         provider_context_reset_evidence=evidence,
         observed_after_successful_send=True,
     )
+    observed.decision_authority = "dm_owned_scientific_review"
     assert binder.bind(observed) == 0
     current = json.loads(registry.read_text(encoding="utf-8"))["bindings"][binding_key]
     assert current["conversation_id"] == new_id
     assert current["provider_url"] == f"https://chatgpt.com/c/{new_id}"
     assert current["state"] == "SEND_CONFIRMED"
+    assert current["decision_authority"] == "dm_owned_scientific_review"
+    assert current["request_history"][-1]["decision_authority"] == "pro_final"
     assert current["send_click_count"] == 1
     assert current["send_evidence"]["post_send_replacement"] is True
     with pytest.raises(ValueError, match="invalid transport transition"):
