@@ -1,5 +1,9 @@
 # RCLE — PARK 知识交接
 
+> 2026-09-14 后续决定：新 DM 完成全文 intake 后重入并选择一个独立 final1024 B11，见
+> [重入记录](RCLE_REENTRY_INTAKE_20260914.md)。同一任务继续工程、执行与 intake。以下原 PARK
+> 决定、record-only 工作范围和成本/保全事实作为历史完整保留；当前状态见 DIRECTION.md。
+
 记录日期：2026-09-14 UTC（2026-09-13 本地日期）。方向：`roster_consistent_latent_exploration`。
 
 ## 状态与本文件范围

@@ -1,4 +1,4 @@
-"""One fixed fit and four native endpoints for quota-phase B08, B09 or B10."""
+"""One fixed fit and four native endpoints for quota-phase B08 through B11."""
 import hashlib
 import json
 import math
@@ -22,6 +22,7 @@ OBJECT = "RCLE-TBCFV-B08-JOINT-QUOTA-PHASE"
 SEED = 28
 B09_OBJECT = "RCLE-TBCFV-B09-GREEDY-ANCHORED-PHASE"
 B10_OBJECT = "RCLE-TBCFV-B10-GREEDY-ANCHORED-1024"
+B11_OBJECT = "RCLE-TBCFV-B11-GREEDY-ANCHORED-1024-REPLICATION"
 PRIMARY = ("8_to_12.ACTIVE_CONTINUATION", "12_to_8.ACTIVE_CONTINUATION")
 ROLES = ("initialization", "final256", "greedy", "nearest")
 
@@ -162,6 +163,12 @@ def run_exposure1024(out, launch_sha, seed=30):
     if seed != 30:
         raise ValueError("seed must match the selected fixed B10 object")
     return _run(out, launch_sha, seed, B10_OBJECT, 1024, True)
+
+
+def run_replication1024(out, launch_sha, seed=31):
+    if seed != 31:
+        raise ValueError("seed must match the selected fixed B11 object")
+    return _run(out, launch_sha, seed, B11_OBJECT, 1024, True)
 
 
 def _run(out, launch_sha, seed, object_id, updates, greedy_anchored):

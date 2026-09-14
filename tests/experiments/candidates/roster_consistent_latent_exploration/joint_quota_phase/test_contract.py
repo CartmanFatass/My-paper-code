@@ -1,4 +1,4 @@
-"""TEST-only fixtures for B08/B09/B10 public phase, learner and publication."""
+"""TEST-only fixtures for B08 through B11 public phase, learner and publication."""
 from dataclasses import replace
 from types import SimpleNamespace
 import hashlib
@@ -216,28 +216,37 @@ def test_b09_fresh_identity_rejects_crossed_seed_before_scientific_construction(
     assert 'no_positive_own_initialization_learning' not in flags
 
 
-def test_b10_and_legacy_entries_bind_only_their_fixed_identity_and_endpoint(tmp_path, monkeypatch):
+def test_b10_b11_and_legacy_entries_bind_only_their_fixed_identity_and_endpoint(tmp_path, monkeypatch):
     calls = []
     monkeypatch.setattr(study, '_run', lambda *args: calls.append(args))
     study.run(tmp_path, 'TEST', 28)
     study.run(tmp_path, 'TEST', 29, greedy_anchored=True)
     study.run_exposure1024(tmp_path, 'TEST', 30)
+    study.run_replication1024(tmp_path, 'TEST', 31)
     assert [c[2:] for c in calls] == [
         (28, study.OBJECT, 256, False), (29, study.B09_OBJECT, 256, True),
-        (30, study.B10_OBJECT, 1024, True)]
+        (30, study.B10_OBJECT, 1024, True), (31, study.B11_OBJECT, 1024, True)]
     with pytest.raises(ValueError, match='seed must match'):
         study.run_exposure1024(tmp_path, 'TEST', 29)
-    assert len(calls) == 3
+    with pytest.raises(ValueError, match='seed must match'):
+        study.run_replication1024(tmp_path, 'TEST', 30)
+    assert len(calls) == 4
+    assert study.B11_OBJECT != study.B10_OBJECT
 
 
-def test_b10_synthetic_driver_reaches1024_and_publishes_the_actual_final_role(tmp_path, monkeypatch):
+@pytest.mark.parametrize('entry,seed,object_id', [
+    (study.run_exposure1024, 30, study.B10_OBJECT),
+    (study.run_replication1024, 31, study.B11_OBJECT),
+])
+def test_b10_b11_synthetic_driver_reaches1024_and_publishes_the_actual_final_role(
+        tmp_path, monkeypatch, entry, seed, object_id):
     # Wiring fixture only: no native environment, real scientific master or learning.
     original_sha256 = hashlib.sha256
     domains, updates_seen, evaluated = [], [], []
     def test_hash(data=b''):
-        if data.startswith(b'RCLE-TBCFV-B10-GREEDY-ANCHORED-1024/'):
+        if data.startswith((object_id + '/').encode('ascii')):
             domains.append(data)
-            return original_sha256(b'SYNTHETIC-TEST-B10-WIRING/' + data)
+            return original_sha256(b'SYNTHETIC-TEST-FINAL1024-WIRING/' + data)
         return original_sha256(data)
     monkeypatch.setattr(study.hashlib, 'sha256', test_hash)
     monkeypatch.setattr(study, 'bind_native_backend',
@@ -258,8 +267,8 @@ def test_b10_synthetic_driver_reaches1024_and_publishes_the_actual_final_role(tm
         return [dict(cell=c, scenario=i, U=values[role], F=0, tau=40, Y=.5,
                      unmet_ticks=40*values[role]) for c in study.HELDOUT_CELLS for i in range(64)]
     monkeypatch.setattr(study, 'evaluate', fake_evaluate)
-    result = study.run_exposure1024(tmp_path, 'SYNTHETIC-TEST-SOURCE', 30)
-    assert domains[0] == b'RCLE-TBCFV-B10-GREEDY-ANCHORED-1024/seed/30'
+    result = entry(tmp_path, 'SYNTHETIC-TEST-SOURCE', seed)
+    assert domains[0] == f'{object_id}/seed/{seed}'.encode('ascii')
     assert len(updates_seen) == 2048
     assert all(len(row) == 32 for row in updates_seen)
     assert [row[0] for row in updates_seen] == [u for u in range(1,1025) for _ in (0,1)]
@@ -271,8 +280,8 @@ def test_b10_synthetic_driver_reaches1024_and_publishes_the_actual_final_role(tm
     assert result['comparison']['D_g']['mean'] == pytest.approx(.05)
     assert result['comparison']['G_U']['mean'] == pytest.approx(.1)
     checkpoint = torch.load(tmp_path/'final1024.pt', weights_only=True)
-    assert checkpoint['updates'] == 1024 and checkpoint['seed'] == 30
-    assert checkpoint['object_id'] == study.B10_OBJECT
+    assert checkpoint['updates'] == 1024 and checkpoint['seed'] == seed
+    assert checkpoint['object_id'] == object_id
     assert not (tmp_path/'final256.pt').exists()
     assert len((tmp_path/'curves.jsonl').read_text().splitlines()) == 1024
     assert json.loads((tmp_path/'summary.json').read_text()) == result
