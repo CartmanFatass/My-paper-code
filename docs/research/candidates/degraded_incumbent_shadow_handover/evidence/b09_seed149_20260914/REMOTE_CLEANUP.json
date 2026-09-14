@@ -1,0 +1,25 @@
+{
+  "removed_worktree": "/home/wu/hmasd-worktrees/dish-b09-3a749256",
+  "disk_absent": true,
+  "registration_absent": true,
+  "removed_stray_receipt": "/home/wu/temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01",
+  "stray_absent": true,
+  "verified_ignored_files_before_removal": [
+    "temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01/bypass/checkpoint_update16.pt",
+    "temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01/replace/checkpoint_update16.pt",
+    "temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01/shared/initial_state.pt",
+    "temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01/shared/resets.json",
+    "temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01/summary.json",
+    "temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/memory.json",
+    "temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/preflight_wall.txt",
+    "temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/runner_wall.txt"
+  ],
+  "source_commit_preserved": "3a749256d2aaf16345308827518283c8d2b91ad7",
+  "archive_sha256": "f6f2392d09e9048228e2e406dd81f5cf590cb6ba9342a1f3c9aea548c0dd9ac1",
+  "terminal_supervisor_directories": "retained; immutable copies are also in both local archives",
+  "git_stdout": "",
+  "git_stderr": "",
+  "cleanup_ssh_wall_seconds": 0.811791899963282,
+  "completed_at_utc": "2026-09-14T02:38:44.871228+00:00",
+  "both_local_archives_reverified_before_removal": true
+}

@@ -14,7 +14,9 @@
     "monitor_direct_only": 1.9,
     "collection_enclosing": 2.0807948000147007,
     "failed_local_intake_import": 5.418701399990823,
-    "successful_local_intake": 2.3712076999945566
+    "successful_local_intake": 2.3712076999945566,
+    "remote_cleanup_inspection": 0.9788666000240482,
+    "remote_cleanup": 0.811791899963282
   },
   "not_added_again": [
     "contained preflight0.04",
@@ -27,7 +29,7 @@
   "monitor_total": "UNKNOWN; original243.6s conflicts with its rows and included waits; reconciliation retains1.9s direct and unknown combined-call SSH portions, not a measured total",
   "unknown": [
     "remaining monitor SSH command portions",
-    "all remaining local publication/cleanup support coverage",
+    "all remaining local publication/support coverage beyond the named cleanup commands",
     "aggregate CPU work",
     "H exact native consequence calls",
     "peak scratch",
@@ -37,5 +39,6 @@
   "valid_results": 1,
   "peak_self_rss_bytes": 625741824,
   "peak_reaped_child_rss_bytes": 625741824,
-  "accounted_pair_charge_through_intake_seconds_excluding_unknown": 587.402524700053
+  "accounted_pair_charge_through_intake_seconds_excluding_unknown": 587.402524700053,
+  "accounted_pair_charge_through_named_components_seconds_excluding_unknown": 589.1931832000404
 }

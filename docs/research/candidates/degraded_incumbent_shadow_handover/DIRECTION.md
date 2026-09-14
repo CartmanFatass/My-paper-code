@@ -21,8 +21,11 @@ reversible direction PARK and requests one independent review of its all-outcome
 interpretation and value reasoning, including another independent pair and ordinary-source
 alternatives. Broader PARK is not yet applied. Native experiment observation has ended;
 full evidence is archived in direction and main roots. The current producer is DM-owned
-Convergence Transport `/root/tr_lh_dish_b09_review_20260914`, pending the exact published
-request. DM owns full-response intake, lifecycle decision and closeout; no new experiment
+Convergence Transport `/root/tr_lh_dish_b09_review_20260914`, executing exact request
+`dish-b09-result-review-20260914-01` via published
+[HANDOFF](pro_packets/20260914_b09_result_review/HANDOFF.json) at `5226571d5` and fixed
+TASK commit `2510d3552`. The completed remote execution checkout is removed after verified
+archival. DM owns full-response intake, lifecycle decision and closeout; no new experiment
 is selected. [Frozen B09 card](DISH_RECEIPT_BYPASS_B09_SCIENCE_CARD_20260914.md).
 
 ## Tested arrival-bridge retention family parked — 2026-09-10

@@ -122,3 +122,20 @@ BYPASS `5abf845d782a9e97611d2b6197dd181c5e9aeb182740d5526c5d15c6e8253a43`.
 
 Monitor active set is empty. DM owns bounded post-result scientific review, its response,
 remote checkout cleanup and final lifecycle handoff; no next experiment is selected.
+
+
+### Completed remote closeout
+
+At2026-09-14T02:38:44.871228Z the terminal exact-SHA execution checkout was removed.
+[Inspection](evidence/b09_seed149_20260914/REMOTE_CLEANUP_INSPECTION.json) found clean
+tracked source, no ordinary untracked files and only the eight scientific/receipt files
+plus the archive itself as ignored content. Every data file matched its archive member,
+and both local archives were rehashed before removal. Both exact supervisor handles were
+terminal with no tmux session. [Cleanup receipt](evidence/b09_seed149_20260914/REMOTE_CLEANUP.json)
+confirms absence on disk and in Git worktree registration. The failed home receipt was
+also byte-verified against the archive and removed. Historical supervisor directories
+remain, with immutable copies already archived. No other worktree or evidence root was
+removed; source3a749256 remains published and both checkpoint archives remain accessible.
+Inspection0.9788666s and cleanup0.8117919s are added once to known support; overall cost
+coverage remains incomplete. The direction authoring checkout still owns live Pro review
+and DM acceptance; its eventual reclamation is Clerk-owned.
