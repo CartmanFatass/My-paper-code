@@ -1,0 +1,41 @@
+{
+  "request_id": "2026-09-13-folr-post-f-scientific-review-01",
+  "conversation_binding_key": "em:vap_folr_core:convergence",
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "provider_url": "https://chatgpt.com/c/6aa18137-9d88-83e8-a01f-46630813faf8",
+  "operation_id": "42924be1-1ea3-40cb-a48b-18bdee94c2a4",
+  "idempotency_key": "2026-09-13-folr-post-f-scientific-review-01",
+  "request_fingerprint": "17ca52cc2937cda97c0f51c67292a41947b3ca8f1601891d1531109cc2aa9707",
+  "stable_key": "em:vap_folr_core:convergence",
+  "product_model": "Latest",
+  "reasoning_effort": "Pro",
+  "prompt_sha256": "133207fcfe497758366934af4fabd1ca5303d5d0796f9e7b009ed124271a453c",
+  "send_attempted": true,
+  "send_attempted_at": 1789343385120,
+  "provider_user_message_id": "554e303b-70ea-452a-85d8-0628176fa5a3",
+  "provider_assistant_message_id": "80aaeb4e-2b66-4d83-a6e3-1f5ee411df66",
+  "full_archive": {
+    "path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/vap_folr_core/20260913_post_f_scientific_review/GITHUB_RESPONSE.md",
+    "sha256": "64f4c8e3acd7b48a72459ebad7598de823cc58e76a89916b55ee98df4c8f42cf",
+    "size_bytes": 37737,
+    "github_blob_sha": "ccefcc41322010ef61cfaaa68423630cb34e30f1",
+    "github_commit": "36d9638a000b75c888e139a29006be000894e063",
+    "github_url": "https://github.com/CartmanFatass/My-paper-code/blob/36d9638a000b75c888e139a29006be000894e063/docs/research/candidates/vap_folr_core/pro_packets/20260913_post_f_scientific_review/archive/RESPONSE.md"
+  },
+  "short_chat_receipt": {
+    "path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/vap_folr_core/20260913_post_f_scientific_review/RESPONSE.md",
+    "sha256": "3d9e538a5586dcb9e9691a6162d6d3530febc879d43125cf36c5d813652744ea",
+    "size_bytes": 108
+  },
+  "github_pairing": {
+    "commit_sha": "36d9638a000b75c888e139a29006be000894e063",
+    "response_path": "docs/research/candidates/vap_folr_core/pro_packets/20260913_post_f_scientific_review/archive/RESPONSE.md",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/36d9638a000b75c888e139a29006be000894e063/docs/research/candidates/vap_folr_core/pro_packets/20260913_post_f_scientific_review/archive/RESPONSE.md",
+    "blob_sha": "ccefcc41322010ef61cfaaa68423630cb34e30f1",
+    "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5657188845",
+    "comment_body": "Delivered the complete independent post-F scientific review for the fixed task at 157c14a4a53c4b01af4cce7372ebc9d0b9843083. [Read the complete review at delivery commit 36d9638a000b75c888e139a29006be000894e063](https://github.com/CartmanFatass/My-paper-code/blob/36d9638a000b75c888e139a29006be000894e063/docs/research/candidates/vap_folr_core/pro_packets/20260913_post_f_scientific_review/archive/RESPONSE.md)."
+  },
+  "natural_completion": "Worked for 8m 8s; complete scientific review at commit 36d9638a000b75c888e139a29006be000894e063; no active generation control",
+  "provider_model_observed": "6 Pro",
+  "provider_effort_observed": "Pro"
+}

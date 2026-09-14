@@ -31,10 +31,12 @@ below does not rewrite the older typed-state or scalar-gate objects.
 ## Current position
 
 **Current lifecycle: reversibly PARKED/MEDIUM by DM decision on 2026-09-13.**
-The fixed reference-use question is resolved. A fresh same-host learning block is
-possible under DM autonomy, but its incremental training-variation information is
-not presently worth the bounded work on this short-horizon/common-cue host. This
-is an investment judgment, not proof against all entity-history methods or a
+The fixed reference-use question is resolved. A fresh same-host learning block
+would supply the first complete fresh/fresh comparison here, not just another
+panel of the old BANK. DM currently judges that unresolved comparison insufficiently
+valuable relative to its necessary work and unknown complete cost. No architecture
+change or earlier favorable result is required for reconsideration. This is a
+qualitative research-value judgment, not an empirical futility result or a
 consequence of expired permission. No new experiment is selected; the occupied
 execution slot is released without selecting a replacement or new resources.
 DM may revisit a specific useful information/lifetime, learning-performance or cost
@@ -42,6 +44,9 @@ proposal within the owner's actual resource/cross-direction constraints. Portfol
 consultation is not a re-entry prerequisite. Scientific evidence and narrower holds
 below retain their original meanings; assigned technical preservation/cleanup remains.
 See the [DM lifecycle decision](FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md#dm-lifecycle-decision--2026-09-13-full-direction-delegation).
+The complete post-F independent scientific review found no result-invalidating
+defect; DM accepts its R1/R2 reporting corrections and R3 judgment clarification
+in the [scientific-review response](pro_packets/20260913_post_f_scientific_review/INTAKE.md).
 
 The observer-owned entity-history-before-aggregation B family remains OPEN on
 the lifecycle-identity-visible native Traffic Junction variant. Its allocated
@@ -54,8 +59,9 @@ The separately selected and funded retained-reference use comparison is now
 complete: one fresh equally informed Generic64 has mean1.055 and the fixed
 historical BANK's new panel has mean-4.877421875, giving d_use=-5.932421875. The
 strict<-1 rule selects Generic-only for this named optional development-reference
-use. Generic sufficiency now has direct support on the exact public-information
-host. This outcome-informed retained/new comparison is not a fresh matched
+use. One newly trained Generic policy has a higher sampled mean than this fixed
+BANK reference; no absolute task-competence or information-sufficiency threshold
+has been established. This outcome-informed retained/new comparison is not a fresh matched
 training pair or BANK-learning replication; it does not repair E's unavailable
 primary or close the still-open family. The named finite F allocation supplies
 no retry or automatic successor. B04 remains contrary context on its own host.
@@ -1020,18 +1026,19 @@ without replacing the missing original E contrast.
 
 **Strongest support and contradiction.** Both native endpoints are complete,
 equally informed and technically accepted at the fixed source and exposure.
-Generic is now directly competent on this exact host, beyond B04's different-host
-context. Against a broad negative, BANK is one outcome-informed historical policy
+One new Generic policy has a higher sampled mean than the fixed BANK on this
+exact host; this is not certified absolute competence. Against a broad negative, BANK is one outcome-informed historical policy
 and Generic one new fit; their capacities/histories are not matched. Episode
 SEs0.533175147760 and0.289917604837 remain conditional; no training-population or
 component-memory inference follows. Generic's62 negative-return episodes and
 range[-13.46,22.16] coexist with its higher mean; BANK has125 negative episodes
 and range[-19.80,1.46]. No adverse outcome is dropped.
 
-**Surviving alternative and next discriminator.** Generic recurrence with the full
-common lifecycle table suffices for this concrete use. A distinct entity-history
-use under a changed decision-relevant information/lifetime context is not ruled
-out, but no such next object or investment is selected here. Repeating the same
+**Surviving alternative and next discriminator.** The observed comparison supports
+Generic-only selection for the named reference use, not general sufficiency.
+A fresh/fresh learning comparison on this unchanged host remains informative;
+other information/lifetime contexts are also unruled out, not prerequisites.
+No next empirical object is selected here. Repeating the same
 retained-reference question would reuse the completed Generic-only decision.
 Reconsider when a concrete new fact or proposal changes the action choice;
 no automatic fit, panel, consultation, family closure or whole-direction stop
