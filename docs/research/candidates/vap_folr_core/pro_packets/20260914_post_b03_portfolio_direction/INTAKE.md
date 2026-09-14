@@ -409,3 +409,13 @@ ACVC's direct request for peer facts is answered from these committed facts and
 the existing complete B03 review/Portfolio application, not treated as a launch
 approval. A remains the original selected second fit with the same fixed source
 and card. DM now submits it after fresh admission and reuses this batch's Monitor.
+
+### Original A launched and observed
+
+A was accepted2026-09-14T19:39:55.755736Z,source d9977dc18,handle
+`folr-augmentation-b01-781601-augmented`,PID3679958. Fresh memory admission passed;
+G input remains unchanged. The same batch Monitor delivered actual adoption at
+19:40:29.085Z. DM retains A terminal/full-pair intake; no pair result exists yet.
+[Execution](../../entity_history_augmentation_b01_781601/EXECUTION.md) preserves
+exact receipts,13401.737549s inter-arm control elapsed, observation state/route
+repair and the ACVC factual handoff. Original science and resource scope remain.
