@@ -13,15 +13,15 @@ trained scorer merits continued development with a changed execution law. This i
 not continuation merely to keep ACTIVE or to obtain a positive result. Owner-delegated
 decision (2026-09-03/13): prepare E01; owner prediction not taken (unattended).
 
-Proposed evidence class is **B/EXPLORE with a named zero-update applicability resolution**,
-not ordinary-B compliance already established. Current empirical-spec §§5.2/11.4
-require a real learner/trainer and nonzero updates, while §3/5.1 prohibits claiming an
-algorithm effect from A. The existing §11.4.1 exception is ACVC-only. This proposed
-execution-package effect therefore needs an explicit bounded shared-specification
-resolution by Root; neither relabeling it A nor adding a useless training step resolves
-the scientific issue. No native result-bearing E01 invocation starts until that exact
-applicability is resolved. Source preparation/review, input preservation and B12 intake
-continue independently. This is not a runtime-estimate or general research-approval gate.
+Evidence class is **B/EXPLORE under owner-approved empirical-spec §11.4.2**.
+The owner explicitly approved the bounded proposal at a8e55d843; Root applied it in
+main c833f026e02a36ce940cfb17382fb761a65336c3, safely included here as ec81437de.
+This resolves the exact zero-update applicability in §§5.2/11.4/11.8.6 for this named
+object only. The [application record](fixed_modal_reuse_e01_20260914/OWNER_DIRECT_APPLICATION.json)
+retains the actual source and unchanged finite scope. There is no further Root,
+Portfolio or Pro authorization dependency. DM completes engineering acceptance, exact
+source publication and fresh actual-node admission before this already selected invocation.
+No fit, panel, retry, new evidence class or general exception is added.
 
 ## Fixed inputs and actual treatment
 

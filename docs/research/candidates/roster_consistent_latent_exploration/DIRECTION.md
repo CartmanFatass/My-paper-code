@@ -30,9 +30,11 @@ DM selects preparation of [fixed-modal E01](RCLE_FIXED_MODAL_REUSE_E01_SCIENCE_C
 two retained trained checkpoints, original conditional panels, actual combined-law modes
 versus their own greedy references, zero new fitting. This is a new execution package,
 not a rewrite of the sampled results. The exact zero-update B applicability issue in
-empirical-spec5.2/11.4 is routed through the [bounded Root proposal](fixed_modal_reuse_e01_20260914/SPECIFICATION_SCOPE_PROPOSAL.md);
-only that result-bearing invocation awaits resolution. Source preparation and independent
-engineering review continue. No further scientific invocation/PARK/CLOSE is applied.
+empirical-spec5.2/11.4 is resolved by the owner-approved named §11.4.2 in Root commit
+c833f026e02a36ce940cfb17382fb761a65336c3, included here as ec81437de. The [application record](fixed_modal_reuse_e01_20260914/OWNER_DIRECT_APPLICATION.json)
+preserves the exact scope. DM completes independent engineering review and fresh admission,
+then proceeds with the selected two-panel invocation. No further authorization is required;
+no E01 invocation or new PARK/CLOSE has yet occurred.
 
 The full [direct Portfolio acknowledgment](reentry_20260914/portfolio/ACKNOWLEDGEMENT.md)
 confirms full-lifecycle re-entry; B11 attempted and B12 completed the independent-instance
