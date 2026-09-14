@@ -1,6 +1,15 @@
 # MGTAP 科学 PARK 知识交接
 
-## 当前决定与为什么现在停止
+## 2026-09-14 当前状态补记：已选择 CONTINUE
+
+DM 已实质回应两份完整 Portfolio 答复，选择恢复本方向工作，首对象为双方等量
+学习率选择后新配对检验的 MGTAP-LR-SELECTION-B01。协议实现与合成测试已执行，
+原生 runner、验收及新实验尚未执行。使用 LCAC 释放的同一唯一预留，不新增方向。
+完整依据、保留 PARK 的最强反对理由和交接见
+[重入 intake](reentry_20260914/DM_REENTRY_INTAKE.md)及[事件](reentry_20260914/EVENT.json)。
+下面保留的是当时的 PARK 知识和原始停止理由，不因重入被追溯改成错误或阳性证据。
+
+## 历史 PARK 决定与为什么当时停止
 
 DM 在持续授权内选择可逆 PARK，停止当前 MGTAP 方向的数值推进；不再追加不变的 early256 配对。独立实际结果 review 的全文、DM回应及最终决定见 [review intake](pro_packets/20260913_early256_results_review/INTAKE.md)。这不是 Pro 的生命周期批准，也不是等待 Root/Clerk ACK。
 

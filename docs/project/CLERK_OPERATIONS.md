@@ -202,7 +202,7 @@ Use compact task snapshots only for missed facts or interrupted work, not repeat
 
 Outside the vacancy delegation above, an explicit owner commission is required. Clerk
 mechanically publishes the exact scope using Portfolio/prompt/Transport skills and owns that new
-request's native Transport/archive. Preserve all prior accepted request bindings and complete
+request's independent Transport/archive. Preserve all prior accepted request bindings and complete
 answers. Pending old planning answers are report/advice inputs; do not automatically implement
 cross-direction choices under the superseded standing Pro-finality rule.
 

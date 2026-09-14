@@ -1,12 +1,12 @@
 ---
 name: hmasd-pro-research-prompt-author
-description: "Use when DM authors an independent scientific review request, a DM conducts direct Portfolio scientific dialogue, or Clerk publishes a scoped Portfolio consultation for fixed GitHub task delivery through the author-owned native Agentify Transport subagent, with explicit author, parent and executor routing."
+description: "Use when DM authors an independent scientific review request, a DM conducts direct Portfolio scientific dialogue, or Clerk publishes a scoped Portfolio consultation for fixed GitHub task delivery through the registered independent browser Transport task, with explicit author, parent and executor routing."
 ---
 
 # HMASD Pro Research Prompt Author
 
 DM-owned Portfolio scientific exchanges and Clerk-owned capacity requests may use the direct Codex in-app browser route
-in CLERK_OPERATIONS.md and hmasd-portfolio-task. The GitHub/native-Transport requirements below
+in CLERK_OPERATIONS.md and hmasd-portfolio-task. The GitHub delivery requirements below
 apply to requests using this delivery workflow, not as gates on that direct vacancy route.
 
 
@@ -51,18 +51,16 @@ transport of the completed DM-authored request, so no extra planning vote is nee
 For a command that includes dispatch, use the following sequence.
 
 The dispatch owner (DM for direction nodes; the relevant DM for Portfolio science; Clerk for mechanical capacity requests under hmasd-portfolio-task)
-creates a new native Luna/high Transport child for an independent request batch before rendering,
-using fork_turns=none; reuse is only for the same request's preparation/recovery/closeout
-and the transport role/skill with minimal context. Supply source_thread_id=parent_thread_id=the author's
-actual native ID and operator_thread_id=that child. The legacy route label REUSE_DM_TRANSPORT means parent-owned native delivery, not
-permission to reuse a child across independent requests;
-no global task UUID is configured. Do not use a generic app-task URL for native IDs.
-Generate TASK.md and unpublished HANDOFF; commit/push TASK and bind its full SHA with
---bind-task-sha, then commit/push HANDOFF. Dispatch with collaboration.followup_task directly to
-the bound child and wait natively. The child uses Agentify strict review and returns the exact
-archive to its author parent. Ordinary DM requests return only their operational mapping to Clerk;
-Clerk records/maps its own complete global planning/replacement response, with affected DMs
-checking their scientific requirements.
+uses the registered independent Luna/high browser Transport task in the live control checkout.
+Use execution_mode=REUSE_SINGLETON and actual author App source_thread_id=parent_thread_id;
+operator_thread_id is the registered Transport task. The current renderer retains this supported
+independent-session mode. Read C:/Projects/HMASD control configuration even when authoring in an
+older direction checkout. Commit/push TASK, bind its full SHA with --bind-task-sha, then
+commit/push the exact HANDOFF; send the bound
+HANDOFF commit, request identity and current return route with send_message_to_thread.
+Transport uses Codex iab and sends the complete archive directly to its author. No native child,
+Agentify operation or Root forwarding. Preserve accepted legacy packets and supply a separate
+migration execution route after old executor release; do not regenerate already accepted inputs.
 For explicitly owner-requested Portfolio consultations Clerk owns the dispatch/full-plan record; only one writer may
 own portfolio:cross_direction at a time. Accepted historical packets remain immutable; reconcile
 old execution before any takeover, without resending. Uncertain dispatch requires same-request
@@ -80,7 +78,7 @@ cannot enlarge them. Current owner/spec constraints apply to Pro as to the calle
 The full fixed response, not chat links or a comment summary, is the formed decision.
 The parent directly reads and preserves the complete bytes/provenance. DM intakes direction-node
 answers; Clerk records the full Portfolio plan and affected DMs check their scientific requirements. Transport
-returns one factual receipt directly to that parent through native collaboration.
+returns one factual receipt directly to that parent through App task messages.
 No scheduled automation is added. Read docs/project/ROOT_OPERATIONS.md for current routing. Contradictions or evidence gaps remain explicit; a complete
 archive alone is not science acceptance. No new approval or experiment gate is added.
 

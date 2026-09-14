@@ -42,7 +42,7 @@ description = "Optional focused runtime-observation method."
 config_file = "./agents/hmasd-verifier.toml"
 
 [agents.HMASDTransport]
-description = "Reusable author-owned Luna/high Agentify Pro transport; direct native receipts."
+description = "Legacy Transport role; new work uses the independent browser task in hmasd-transport.toml."
 config_file = "./agents/hmasd-transport.toml"
 
 [agents.HMASDExperimentMonitor]
@@ -58,6 +58,7 @@ description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"
 
 [mcp_servers.agentify-desktop]
+enabled = false
 command = "node"
 args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
 tool_timeout_sec = 2700

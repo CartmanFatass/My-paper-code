@@ -1,3 +1,6 @@
+> Historical compatibility reference only. Agentify MCP is disabled by OWNER_DIRECT 2026-09-14.
+> Current execution follows ../SKILL.md using the independent Codex iab Transport task.
+
 # Agentify objects, interfaces and recovery
 
 Use the currently exposed MCP schemas. This reference explains their boundaries; it does not

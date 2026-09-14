@@ -49,6 +49,18 @@ Clerk uses compact wait_threads/cursors for missing facts and read_thread only w
 never waits for independent DM messages through collaboration.wait_agent. When enabled, the 50-minute heartbeat
 silently recovers missed/interrupted events, including unfinished owner-delegated vacancy actions. Owner pause takes priority.
 
+## Independent Transport execution
+
+OWNER_DIRECT 2026-09-14: the registered Luna/high Transport App task uses Codex iab for
+Send, concurrent Pro observation and complete archives. Dispatch and returns use
+send_message_to_thread, directly between author DM/Clerk and Transport. Native wait_agent
+and native final are not this route. One executor per conversation, independent pending
+conversations advance concurrently. Native batch reuse rules below govern other specialists.
+Before migration the DM releases its old Transport from browser operation, preserves exact
+request/effect/archive state and sends a takeover assignment to the registered task. Do not
+rewrite accepted HANDOFF IDs; record actual current execution/return routing separately.
+The Transport skill owns browser state, recovery, queue and completion behavior. No Agentify MCP.
+
 ## Native DM specialists and scientific review
 
 OWNER_DIRECT 2026-09-13: reuse a native subagent within one bounded work batch; create a new
@@ -56,7 +68,6 @@ subagent for an independent batch. The assigning parent determines the batch fro
 and deliverable, without Root/Clerk approval. A tool call, commit, empty-set final or elapsed wait
 is not itself a batch boundary. Direction membership alone does not make unrelated work one batch.
 
-Transport's batch is one exact request through preparation, Send, recovery, observation and archive.
 Monitor's batch is one experiment batch and its accepted handles through terminal delivery.
 Reviewer reuses context for the same change and its corrective reviews; a new independent change
 gets a new reviewer child. Scout, Verifier and Operator follow the same objective/closeout rule.
@@ -71,7 +82,7 @@ Reuse role configuration and designated checkout, not unrelated conversational h
 
 Let current accepted handles/requests reach safe closeout in their existing children. If replacement
 is actually necessary, preserve same-handle/request state and transfer observation/execution without
-overlap or another Send. A new Transport child does not require a new provider conversation.
+overlap or another Send. An executor change does not require a new provider conversation.
 Long waits do not trigger rotation; do not send cache keepalives or infer cache expiry from a timer.
 Independent DM, Clerk and Root tasks remain continuous; this rule governs their native specialists.
 Owner pause takes precedence: changing this policy does not resume science or create a new batch.
@@ -81,7 +92,7 @@ independent Sol/high code Reviewer coverage. No CM chain. Its native Luna/low Mo
 adoption/terminal facts directly to DM. DM collects/intakes, then sends only actionable outcomes to
 Clerk. EXPERIMENT_MONITOR.md owns the observation procedure.
 
-Direction Pro Convergence reviews science independently through the DM's native Luna/high Transport.
+Direction Pro Convergence reviews science independently through the registered independent Luna/high browser Transport.
 It examines design, evidence, interpretation, conclusions and successor plans; DM reads the full
 review and responds to material findings with correction/claim limits or reasoned resolution.
 The Pro review does not confer funding or lifecycle authority. Preserve scientific independence
@@ -89,7 +100,7 @@ and appropriate review coverage; it is not generic optional advice or a per-step
 
 Use collaboration.followup_task for a native child's concrete assignment; collaboration.send_message
 for factual parent returns, noting it does not start an idle native turn. Native final completes its
-bounded assignment. Real Monitor/Reviewer/Transport producers retain their actual parent/wait route;
+bounded assignment. Real Monitor/Reviewer producers retain their actual parent/wait route;
 unchanged waits do not cause repeated status, reminders or duplicate requests.
 
 Each exact Pro conversation has one executor. Keep accepted/uncertain requests, operations and

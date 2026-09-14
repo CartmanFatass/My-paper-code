@@ -52,7 +52,7 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
 2. Commit and push TASK.md, then bind its full commit SHA using the renderer. Confirm
    that the fixed TASK is published and that the delivery branch and Issue exist.
    Commit and push the updated internal handoff.
-3. Send the rendered handoff via followup_task to its native Agentify Transport.
+3. Send the rendered handoff via send_message_to_thread to the registered independent browser Transport.
    Source and parent are the author (DM for direction nodes, Clerk for new Portfolio agendas); operator is its actual request-batch child.
    Legacy requests retain their frozen metadata; assigned recovery records the actual native
    parent/child separately. Transport runs one exact preflight and the appropriate effect branch,

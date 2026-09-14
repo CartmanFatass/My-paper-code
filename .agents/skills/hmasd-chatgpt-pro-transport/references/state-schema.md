@@ -1,3 +1,6 @@
+> Legacy record/schema reference only; native/Agentify procedure below is not current dispatch policy.
+> Use ../SKILL.md for independent iab execution; preserve historical fields without replaying them.
+
 # State, packet, lease, and evidence schema
 
 The shared registry is JSON at the absolute registry_path in live

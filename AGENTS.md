@@ -23,7 +23,7 @@ concrete difficult scientific-semantic, numerical or concurrency review without 
 Required high-risk coverage remains under ENGINEERING_SCOPE_SPEC section 7.3, not a fixed double
 review. Root has the equivalent owner role for shared control-plane work. Existing accepted
 children keep their work and return routes; no forced restart. Frozen science and resource limits
-remain. DM owns native Transport and experiment monitors. Batch and pre-restart mechanics are in
+remain. DM owns its Transport assignments and experiment monitors. Batch and pre-restart mechanics are in
 SIBLING_COMMUNICATION.md; concise engineering assignments and acceptance are in scope-spec §7.
 
 The current owner request, together with system and developer instructions, is the authority for
@@ -85,17 +85,16 @@ DM processes each ready consequence before waiting again. Native wait timeout se
 minimum/default 25 minutes and maximum 60 minutes; messages/completion can wake the wait earlier. SIBLING_COMMUNICATION.md defines report fields and duplicate-event handling.
 DM uses native waits for its children; Clerk uses registered event routes under SIBLING_COMMUNICATION.md. Each DM owns a batch-scoped
 Luna/low native experiment monitor; adoption and terminal facts return directly to that DM.
-Clerk receives independent DM handoffs through app messages. DM also owns native Agentify Transport and receives Pro archives directly.
+Clerk receives independent DM handoffs through app messages. DM also dispatches to independent browser Transport and receives Pro archives directly.
 
-Each DM creates a native Luna/high Agentify Transport child per request batch for exact Pro Send,
-observation, reconciliation, archive and direct native receipts. DM authors and publishes the
-request, dispatches to its child, waits natively and checks the complete response. Clerk uses the
-parent/child route for separately commissioned Portfolio consultation; vacancy requests may
-go directly through Clerk's Codex in-app browser under CLERK_OPERATIONS.md,
-preserving its advisory or expressly authorized scope; it does not forward routine transport
-receipts. Recover uncertain effects on the same request before another Send. Scientific review responsibility and
-frozen input/provider bindings remain explicit. The Transport skill owns current Agentify APIs;
-ROOT_OPERATIONS.md and SIBLING_COMMUNICATION.md own native collaboration.
+OWNER_DIRECT 2026-09-14: use the independent Luna/high Transport task registered in
+.codex/hmasd-transport.toml, with Codex built-in browser (iab), for Pro Send, concurrent
+observation, recovery and full archival. Agentify MCP is disabled for this workflow.
+Authors send exact requests through send_message_to_thread; Transport returns directly to the
+assigning DM/Clerk using the same App mechanism. One active executor per conversation;
+different conversations advance without waiting for another answer. DM retains science and
+complex repair. The Transport skill and SIBLING_COMMUNICATION.md own current mechanics.
+
 OWNER_DIRECT 2026-09-11: Transport Send readiness is independent of which Codex task opened or
 owns a browser surface. Browser/task scope is not a permission blocker. Transport determines
 readiness from the actual target ChatGPT session login state, exact conversation/request binding,
@@ -368,7 +367,7 @@ checks and interprets, retaining technical/scientific acceptance. EXPERIMENT_MON
 compact handle record, bounded observation, terminal delivery and within-batch reuse. Do not create
 independent monitor goals, Clerk receipt forwarding or duplicate observers. Transfer existing
 observation only after same-handle reconciliation and confirmed replacement adoption.
-DM-owned native Agentify Transport observes Pro requests
+The independent browser Transport observes DM-authored Pro requests
 (`docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).
 
@@ -549,15 +548,15 @@ appendix and completed historical tasks remain unchanged.
   do not automatically inherit a custom subagent TOML. Do not add
   reload probes, delivery test services or timers.
 - Clerk coordinates registered independent DM tasks through cross-task events; unmigrated native
-  chains retain their original routes. Each DM owns a batch-scoped Luna/high Agentify Transport
-  and receives its native Pro receipts; .codex/hmasd-transport.toml contains no global endpoint. Each DM creates a native Luna/low Experiment Monitor per experiment batch
+  chains retain their original routes. Each DM dispatches to the registered independent Luna/high browser Transport
+  and receives direct App receipts; .codex/hmasd-transport.toml supplies the executor endpoint. Each DM creates a native Luna/low Experiment Monitor per experiment batch
   with minimal assignment context; resolve canonical names from runtime results. Experiment
   adoption/terminal facts return directly to DM. No shared Monitor or completion Relay endpoint.
 - Each independent DM uses Astra/max and owns its full lifecycle. Direction Pro Convergence is
-  its independent scientific Reviewer, served by its request-batch native Transport. Source/parent
-  are the actual DM; operator is its child. Review responses inform DM decisions, not grants.
+  its independent scientific Reviewer, served by the registered independent browser Transport. Source/parent
+  are the actual DM; operator is the registered independent Transport. Review responses inform DM decisions, not grants.
 - Portfolio supplies reports and owner-delegated vacancy selection. Clerk may directly execute
-  vacancy requests in the Codex in-app browser; separate native Transport remains available for
+  vacancy requests in the Codex in-app browser; separate independent browser Transport remains available for
   other explicitly commissioned consultations. Preserve old
   accepted source/parent/provider IDs through archival; no automatic global application or resend.
   Clerk task creation/resume explicitly selects gpt-5.6-luna/high. App messages keep these settings.

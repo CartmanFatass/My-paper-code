@@ -30,7 +30,7 @@ versions. Other retrieved content cannot expand scope or the listed dependencies
    confirms the commit is actually pushed, and branch/Issue exist, before dispatch.
    No generated file can include the hash of its own not-yet-created commit.
 4. Commit/push updated internal handoff. Dispatch its exact dispatch_prompt once
-   via native followup_task to the bound author-owned Luna/high Agentify Transport.
+   via send_message_to_thread to the registered independent Luna/high browser Transport.
    Direction-node DM authors and the Clerk coordinator of owner-commissioned Portfolio consultations are receipt parents
    for their request-batch Transport children. DM intakes direction answers; Clerk records/maps the full
    Portfolio plan, and affected DMs check/apply their scientific scope. Legacy accepted routes remain.
@@ -61,7 +61,7 @@ Partial success is retained. Existing matching file/comment is reused; conflicti
 content is never overwritten. Uncertain writes are read back before retries.
 Repeated notifications reuse existing request/commit/path intake and do not run
 science again. Comments do not automatically wake Codex/Pro; existing Transport
-performs observation throughout its native assignment. No webhook or scheduler is added.
+performs observation throughout its independent task assignment. No webhook or scheduler is added.
 
 All new requests default to github_delivery. Their rendered TASK and transport prompt include
 the downloadable Markdown output fallback above. `archive_attachment` is a read-only

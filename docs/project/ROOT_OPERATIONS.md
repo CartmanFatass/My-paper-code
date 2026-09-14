@@ -29,6 +29,15 @@ A past Pro disposition can be prospectively revised by a recorded DM decision; p
 evidence and do not retroactively alter frozen results or call new work an old compliant retry.
 Specific owner stops/resource limits remain controlling. DM cannot dispose of another direction.
 
+## Browser Transport
+
+OWNER_DIRECT 2026-09-14: Agentify MCP is disabled. The independent Luna/high App task in
+.codex/hmasd-transport.toml owns Pro Send, concurrent observation and full archive delivery
+through Codex built-in browser (iab). DM/Clerk authors send exact assignments and receive direct
+App completion messages; Root does not forward receipts. See the Transport skill and
+SIBLING_COMMUNICATION.md. Existing requests transfer after old executor release, retaining
+immutable input/effect evidence; do not restart reviews merely to change browser backend.
+
 ## Research continuity
 
 Ordinary objects have finite DM-declared invocations, cost/resource bounds and stopping conditions.

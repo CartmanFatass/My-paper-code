@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "source_kind": "user_pasted_two_portfolio_answer_bodies",
+  "attachment": "C:/Users/fires/.codex/attachments/ff3b2a2c-ffe5-45b9-b634-ed0d368bf037/pasted-text.txt",
+  "original_bytes": 34319,
+  "original_sha256": "155b26ba9a2ad9369508b16b5defd200ec7bfaa5a1799c9ac3656d7e514daaa3",
+  "archived_path": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/PORTFOLIO_USER_COPY.md",
+  "archived_bytes": 34014,
+  "archived_sha256": "431799313d2eeafef0c874de1619298e71362be3e71d163305b782ec8eca6b99",
+  "normalization": "CRLF to LF only; verify decoded content equality after newline normalization",
+  "associated_conversation_url": "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1",
+  "provider_message_ids": null,
+  "provider_api_export": false,
+  "scope": "Both user-supplied answer bodies fully read; original Portfolio request is not reconstructed.",
+  "current_assignment_source": "User: 算了 继续吧 同步clerk最新状态即可; current Clerk requests explicit CONTINUE/PARK and first concrete action.",
+  "old_agents_revocation_preserved": true
+}
