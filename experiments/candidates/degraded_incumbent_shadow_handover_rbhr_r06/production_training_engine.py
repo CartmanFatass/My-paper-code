@@ -91,6 +91,8 @@ class ExactPolicyGraph(nn.Module):
         snapshot_mask: torch.Tensor, reset_mask: torch.Tensor, owner: torch.Tensor,
     ) -> torch.Tensor:
         hidden = hidden * reset_mask[:, None, None]
+        if self.arrival_bridge_mode == "BYPASS":
+            return hidden
         active = snapshot_mask.to(torch.bool)
         if torch.any(active):
             encoded_snapshot = torch.tanh(self.snapshot_encoder(snapshot))
