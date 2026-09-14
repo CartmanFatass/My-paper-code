@@ -110,3 +110,24 @@ this batch; its interpretation will be recorded instead of substituted by a rece
 
 Chinese owner brief:
 [B13 brief](../../portfolio/owner/briefs/roster_consistent_latent_exploration/2026-09-14_B13.md).
+
+## Published review and exact execution cleanup
+
+The complete actual-result review TASK was published at
+e62ad353fc853293e24ae345e3416d96b0a42cbf; its bound HANDOFF is
+8951dddfeb2aefe484c2ed064147f9dcd1612be6, request
+2026-09-14-rcle-b13-learned-prior-results-review-01. DM read the full generated TASK,
+verified all 23 exact reference objects and published ancestry, and dispatched once to
+the registered independent browser Transport. App delivery was accepted; the first
+snapshot showed Transport reconciling the exact RCLE convergence conversation. Provider
+acceptance/complete answer had not yet returned at this record. DISPATCH.json preserves
+that distinction. This new actual-result review is independent of the closed Portfolio
+request and gives no new experiment or direction decision.
+
+At 09:31:48Z DM removed only the completed detached B13 execution worktree. Its tracked
+source was unchanged; the original PID and tmux session were absent. All 13 noncommitted
+files, including the native build, matched the 19-file original archive. Remote staging,
+the verified local archive and supervisor records remain. REMOTE_CLEANUP.json records the
+exact path, complete inventory and removal of its Git worktree registration. Cleanup
+took 0.6578088s enclosing support wall; it changes no scientific result or authoring branch.
+The canonical owner-console review check at this clean boundary returned [], no override.
