@@ -1,0 +1,19 @@
+{
+  "time_utc": "2026-09-14T08:31:52.854556+00:00",
+  "scope": "Conditional exact-source Git materialization only; no admission, scientific Python, model/RNG or supervisor run.",
+  "launch_sha": "cf4d9bd93ff9eb255800223d95de170b68315ba6",
+  "worktree": "/home/wu/hmasd-worktrees/rcle-b13-cf4d9bd93",
+  "exit_code": 0,
+  "enclosing_wall_s": 6.89100000000326,
+  "stdout": "cf4d9bd93ff9eb255800223d95de170b68315ba6\n490a1e02d7f87af30fd8b1fd8c2e2fde56f62d40f39a24c145551f886cb2d472  experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/policy.py\nc0b489b53f3703c25c62634f98f7beafbd7291939543a809fee805d5826d9f88  experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/study.py\n0e018282934932c966308d865d7b167169af99feaefa5968212ef48d6f9d7071  scripts/run_rcle_learned_prior_b13.py\n",
+  "stderr": "(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\nFrom https://github.com/CartmanFatass/My-paper-code\n * branch                codex/rcle -> FETCH_HEAD\nPreparing worktree (detached HEAD cf4d9bd93)\n",
+  "source_hashes_match_committed_blobs": {
+    "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/policy.py": "490a1e02d7f87af30fd8b1fd8c2e2fde56f62d40f39a24c145551f886cb2d472",
+    "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/study.py": "c0b489b53f3703c25c62634f98f7beafbd7291939543a809fee805d5826d9f88",
+    "scripts/run_rcle_learned_prior_b13.py": "0e018282934932c966308d865d7b167169af99feaefa5968212ef48d6f9d7071"
+  },
+  "scientific_sources_match_independently_reviewed_sha": "91811c61cff2617f0b691c793dd40a7df76c5bdb",
+  "worktree_and_index_clean": true,
+  "detached": true,
+  "shell_warning_scope": "Configured interactive zsh prompt/gitstatus warnings; actual Git materialization and checks exited0."
+}

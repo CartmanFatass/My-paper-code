@@ -50,3 +50,37 @@ B13 trajectory, eta evolution, displacement, result, timing, RSS or remote admis
 yet been measured. Synthetic driver mocks remain interface/semantic evidence. The actual
 future invocation must establish its full native record; B11 SIG11 remains unexplained.
 Technical acceptance applies to preparation, not a direction verdict or native launch.
+
+## Retained-byte intake preparation
+
+L0: adapt the already used B12 ANALYZE_RECORDED.py to this B13 card's identity, one
+additional modal panel and learned scalar state. Owned file is this directory's
+ANALYZE_RECORDED.py; source policy/study/runner and accepted scientific definitions stay
+at the independently reviewed bytes. It reads only terminal collected JSON/tensors/time,
+recomputes paired arithmetic, checks all1024 updates/nine Adam parameter states and all
+five512 panels, and reports actual eta, recovery counts and native wall/RSS. No model,
+RNG, rollout, update, new diagnostic exposure or time-validity cap is introduced.
+
+Acceptance is syntax review plus independent scientific-semantic review of the changed
+intake checks, then the actual retained-byte run after any selected invocation completes.
+No synthetic native result is fabricated to test an outcome. Tau40 is explicitly a count
+of128 primary scenarios; the runner's measured evaluation displacement is not described
+as an independent post-evaluation checkpoint comparison. Conditional scenario summaries
+remain separate from training-population uncertainty and from eta causal claims.
+
+The complete independent extension review in INTAKE_CODE_REVIEW.md found no material
+finding at2d5432792e521edbb15ebdc9d43a49feb2cb0a9a. DM accepts the153-line read-only
+analyzer and exact proposed command (SHA256eb7f5b4c764dc1112a7befc49afa884eca103f33fa8e15826a9b53037bd70000),
+including the four-argument supervisor boundary, adjacent admission and child-exit
+handling. Syntax/static checks are evidence; an actual retained-byte analysis has not run.
+This added intake script is scoped separately from the earlier small policy/runner diff;
+it introduces no new framework, scientific observations or mandatory diagnosis.
+
+Subsequent DM preparation fact: at08:31:52UTC, exact sourcecf4d9bd93 was materialized in
+the unique detached remote worktree. All three policy/study/runner hashes match committed
+blobs and the earlier independently accepted scientific source; tracked/index state is clean.
+REMOTE_PREPARATION.json records the6.891s Git/SSH work and harmless configured-shell prompt
+warnings. No resource admission, scientific Python/model/RNG or supervisor run occurred.
+The review's suggested post-decision materialization order is not an extra permission
+condition: this reversible source preparation is independent work under the current
+Portfolio protocol. Native execution remains dependent on the actual direction decision.
