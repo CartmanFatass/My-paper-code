@@ -30,16 +30,57 @@ All accepted entity_history_b01/public_lifecycle_b01 and dependent environment
 numerical paths have an empty committed diff from source5dce539ed. This is source
 inspection, not a fresh runtime reproduction.
 
-Final non-test change is A58/D6; existing runner201 lines, new helper25 lines;
+Runtime Python change is A58/D6, excluding the two 12-line executable arm scripts;
+existing runner201 lines, new helper24 blob lines;
 synthetic tests173 lines. Scope:none. Child AST/whitespace checks passed; no pytest
 or scientific execution was performed by the child. Proposed remote check is the
 new test_b02.py plus accepted test_retained_use.py in one invocation, with synthetic
 models/collections and patched scientific seed resets in the new runner fixtures.
 
-Current state: source publication for independent review/remote focused tests;
-technical acceptance remains pending;
-new scientific invocations = 0. Exact future handles/source/run roots will be
-recorded after code publication and before launch. Owner items generated through
+Owner items generated through
 the CLI are 20260913-folr-004 (direction close-call) and 20260913-folr-005 (new card);
 their date follows the console's local-day convention, while the intake uses UTC
 2026-09-14. No owner reply is pending as a launch prerequisite.
+
+## DM acceptance — 2026-09-14
+
+DM accepts exact source `82b12d7e0f205ea228ca69e28e581ca6ee5f2ca6` for the
+card's one B02 block. Independent Sol/high Reviewer `/root/folr_b02_review`
+returned event FOLR_B02_FRESH_BINDING_REVIEW_20260914_R1 directly to this task:
+no material finding. The complete review scope, qualifications and DM response
+are retained in ENGINEERING_REVIEW.md. The reviewer did not run tests or science.
+
+REMOTE_FOCUSED_TEST.json records the single committed remote invocation:
+18 passed in 1.32 s; native command wall1.73 s, user1.30 s, system1.60 s,
+peakRSS396548 KiB, exit0. Both the new B02 synthetic checks and retained-use
+regressions passed; selected model/seed execution was not used as a smoke test.
+The creator removed its exact owned test scratch. This stays within both the
+180 s invocation plan and the 300 s research-test allowance. No repeated suite
+is selected because the source has not changed.
+
+The detached execution checkout is
+`/home/wu/hmasd-worktrees/folr-entity-history-b02-781401-82b12d7e0` on wsl_4070.
+Its exact HEAD and clean tracked status were verified. SOURCE_SETUP.json retains
+failed setup and repair: CRLF stdin, local SSH timeouts, partial-clone lazy fetch
+without the configured network shell, then a terminal TLS fetch failure. The
+owned stuck setup tree was reconciled and terminated; its automatic cleanup was
+verified before rebuilding the same path. A process-local HTTP/1.1 recovery in
+the configured network shell completed successfully. No global network or Git
+configuration was changed, and no scientific attempt was accepted during setup.
+Known setup waits remain support costs; full setup/support/provider costs are
+not reconstructed as exact native totals.
+
+DM applies the reviewer's one launch detail: prepare an empty arm output root
+before invoking /usr/bin/time, whose output file is opened before runner mkdir.
+The committed GENERIC.sh and BANK.sh are accepted unchanged. The adjacent
+admit-memory command runs inside the timed, detached invocation immediately
+before model/RNG construction; no old admission is reused. One FOLR arm runs
+at a time. LAUNCH_RECORD.json specifies source, planned handles and paths;
+actual receipts replace pending state only after verified acceptance.
+
+Native Luna/low `/root/folr_b02_monitor` owns this experiment batch's observation
+after direct MONITOR_ADOPTED. DM owns launch, full collection, technical and
+scientific intake. The first direct Portfolio factual return was accepted in the
+bound conversation after the full original and synchronization responses were
+read; its answer is being preserved independently of the B02 launch consequence.
+At this acceptance boundary new scientific invocations are still zero.

@@ -1,0 +1,39 @@
+{
+  "source_sha": "82b12d7e0f205ea228ca69e28e581ca6ee5f2ca6",
+  "cwd": "/home/wu/hmasd-worktrees/folr-entity-history-b02-781401-82b12d7e0",
+  "command": [
+    "/usr/bin/time",
+    "-q",
+    "-f",
+    "{\"wall_seconds\":%e,\"user_seconds\":%U,\"system_seconds\":%S,\"peak_rss_kib\":%M,\"exit_code\":%x}",
+    "-o",
+    "/home/wu/hmasd-worktrees/folr-entity-history-b02-781401-82b12d7e0/temp/directions/vap_folr_core/test/b02_binding_82b12d7e0_20260914/TIME.json",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=5s",
+    "180s",
+    "/home/wu/.venvs/hmasd/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/home/wu/hmasd-worktrees/folr-entity-history-b02-781401-82b12d7e0/temp/directions/vap_folr_core/test/b02_binding_82b12d7e0_20260914/pytest",
+    "tests/experiments/candidates/vap_folr_core/entity_history_b02/test_b02.py",
+    "tests/experiments/candidates/vap_folr_core/entity_history_b01/test_retained_use.py"
+  ],
+  "scientific_invocations": 0,
+  "exit_code": 0,
+  "stdout": "..................                                                       [100%]\n18 passed in 1.32s\n",
+  "stderr": "",
+  "timing": {
+    "wall_seconds": 1.73,
+    "user_seconds": 1.3,
+    "system_seconds": 1.6,
+    "peak_rss_kib": 396548,
+    "exit_code": 0
+  },
+  "scratch_removed": true,
+  "ssh_wall_seconds": 2.1089999999967404
+}
