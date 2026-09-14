@@ -96,6 +96,19 @@ legacy_state = "retired_paused"
 authoring_checkout = "C:/Projects/HMASD-worktrees/codex-vap-folr"
 authoring_branch = "codex/vap-folr"
 
+[directions.degraded_incumbent_shadow_handover]
+state = "management_in_progress"
+occupies_slot = true
+owner_mode = "independent_task"
+accepted_event = "dish-lifecycle-b09-selection-20260914-01"
+accepted_turn = "01a09d7d-fd3a-7be0-b681-dce0185ec2b3"
+last_processed_event = "dish-lifecycle-b09-selection-20260914-01"
+next_action = "DM implements and checks B09 receipt-use object; independent review, launch and intake remain DM-owned"
+thread_id = "01a09d7d-fd3a-7be0-b681-dce0185ec2b3"
+host_id = "local"
+authoring_checkout = "C:/Projects/HMASD-worktrees/dm-dish-b06-scientific-intake-20260907"
+authoring_branch = "codex/pro-dish-post-b06-20260907"
+
 [directions.learned_counterfactual_agent_credit]
 state = "setup_pending"
 occupies_slot = true
@@ -114,7 +127,7 @@ automatic_replacement = true
 binding_key = "portfolio:cross_direction"
 transport_config = "C:/Projects/HMASD/.codex/hmasd-transport.toml"
 new_request_coordinator = "clerk"
-planning_state = "three_replacements_pending_setup"
-reserved_slots = 3
+planning_state = "ucope_lcac_pending_setup_dish_active"
+reserved_slots = 2
 request_status_commit = "fa1922c37"
 legacy_accepted_routes = "preserve_through_closeout"
