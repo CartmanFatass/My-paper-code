@@ -10,9 +10,11 @@ from ..entity_history_b01.model import Actor, ObserverAttention
 class AugmentedActor(nn.Module):
     """Functional two-stream actor with packed Generic and entity state."""
 
-    def __init__(self):
+    def __init__(self, arm="AUGMENTED_PERSISTENT"):
         super().__init__()
-        self.arm = "AUGMENTED_PERSISTENT"
+        if arm not in ("AUGMENTED_PERSISTENT", "AUGMENTED_CURRENT_ONLY"):
+            raise ValueError(arm)
+        self.arm = arm
         # Construct the complete reference so its discarded Q head consumes the
         # same draws as a fresh Generic actor from the same external RNG state.
         generic = Actor("GENERIC_RETAIN")
@@ -97,6 +99,8 @@ class AugmentedActor(nn.Module):
 
             pair_continuation = continuation[:, :, None] & continuation[:, None, :]
             entity_state = entity_state * pair_continuation[..., None]
+            if self.arm == "AUGMENTED_CURRENT_ONLY":
+                entity_state = torch.zeros_like(entity_state)
             candidate = self.entity_rnn(
                 entity_input[:, step].reshape(b * n * n, 128),
                 entity_state.reshape(b * n * n, 16),

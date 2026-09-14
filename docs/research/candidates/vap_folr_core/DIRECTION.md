@@ -30,7 +30,19 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
-**Operational instruction — 2026-09-14 13:23 PDT:** finish the accepted
+**Owner-resumed 2026-09-14:** the explicit instruction to restore subagent DM
+control and continue supersedes the operational pause below. The completed
+A−G +5.29640625 remains one intact-program observation with unknown repeatability
+and unobserved persistence contribution. The next object selects a fresh A−Z
+learning comparison inside the existing family: both retain Generic64 and the
+same entity/current-processing/fusion modules; only Z discards entity hidden state
+each primitive observation. This informs whether to retain persistent entity
+state or simplify that design, without claiming A−G replication, general memory
+cause or stable superiority. Generic recurrence/current cues remain the strongest
+alternative. [Prospective B card](FOLR_ENTITY_PERSISTENCE_B01_SCIENCE_CARD_20260914.md)
+fixes the actual exposure, comparator, reading and bounded recommendation.
+
+**Historical operational instruction — 2026-09-14 13:23 PDT (superseded by explicit resume):** finish the accepted
 augmentation B01 A−G run and required result/review/archival closeout, then write
 the [owner-pause handoff](HANDOFF_20260914_OWNER_PAUSE.md) and await explicit
 resume. The original pair, independent review and material response are complete.
