@@ -67,7 +67,11 @@ prior 或存在更好动作。这个1.56s内层/2.06s外层的记录量检查没
 greedy、nearest、fixed final mode 五个512评价面板。合计68,096 episodes、4,358,144 ticks、
 2,128 native32 batches、1,024更新。mode 面板服务这个问题，不是普遍加码要求；初始 mode
 由 eta=0/zero scorer 解析为 greedy，因此不再重复买初始 mode 面板。全结果向量、真实参数变化
-及 eta 变化保留。精确新对象/训练身份/代码由 DM 在方向决定应用后固定；当前零新原生曝光。
+及 eta 变化保留。DM 已将建议具体化为 B13 实现准备卡和 seed33/新域的代码；24项合成/旧路径
+检查通过，独立 Sol/high 代码审查无实质发现，DM 已接受源码91811c61的工程准备。完整审查及
+验收在清单内；零评价参数位移目前只在合成 fixture 观察到，没有真实 B13 结果。它前瞻推进了
+原先计划在方向决定后才开始的可逆实现准备；
+原生调用仍未选择或启动，须按 Portfolio 的实际方向决定应用，当前零新原生曝光。
 
 这仅支持新学习 package 的有限比较。没有新的固定-eta 匹配控制，就不能声称 eta 的纯因果
 效果；历史 B10/B12 也不能冒充控制。不是系数网格、decoder 扫描或跑到阳性为止。
@@ -91,30 +95,36 @@ support/provider/agent/review/integration 尾项仍有 UNKNOWN。历史 B10 supp
 
 ## 4. 三席全局快照与过期记录的明确修正
 
-目标三个 occupied+reserved。SOURCE_MANIFEST 的 registry/portfolio_report 是固定快照，
-其中部分文案过期；按更新的具名方向证据和实际 peer 消息作以下对齐，不能把旧归档表当作当前：
+目标三个 occupied+reserved。实际提交前更新为 main5456aec117b9746f141d09292af2da1f803b8262
+的固定快照：FOLR 的完整 Portfolio CONTINUE 已归档、读完并应用，第三席从预留转为占用。
+SOURCE_MANIFEST 的 registry/portfolio_report 和下列具名证据共同说明当前三占用、零预留/空缺；
+报告初稿的旧工作集与 pending FOLR 文案已由本次实际决定替代，不沿用过期归档表：
 
 | 方向 | 当前席位及真实工作 | 科学位置、反证与机会成本 |
 | --- | --- | --- |
 | RCLE | 占用1；E01及完整审查/回应已完成，本报告待 Portfolio；未新拟合 | 当前 .9-prior learned package 有学习/nearest收益而未超过 greedy；建议新可学习 prior 强度问题，完整成本未知。 |
-| MGTAP | 占用1；LR-SELECTION-B01 runner 已交付，独立工程审查在途；科学设计审查已派 Transport，尚无 accepted 事实；零新 native | 原符号混合，DENSE仍默认；等机会三候选学习率选择后新 holdout，共8 fits/589,824 team ticks/4,096 Adam。当前卡原生15–30分钟为未测估计；未知成本保留。 |
-| FOLR | 预留1；owner challenge 后向 Portfolio 推荐 B03；实现完成、独立工程审查在途；零 B03 native | B02 一个 fresh/fresh 对比 BANK−Generic=−4.830859375 不等于复现性结论；建议新同预算块2 fits/205,120 ticks/9,938更新。旧3041.46 native秒是比较参考，不能从一次负值直接结束方向。 |
+| MGTAP | 占用1；独立工程与科学设计审查已 intake；LR-SELECTION-B01 于07:55:41UTC实际接受，原生调用在途，本报告无新结果 | 原符号混合，DENSE仍默认；等机会三候选学习率选择后新 holdout，共8 fits/589,824 team ticks/4,096 Adam。原生15–30分钟为规划参考；实际结果及完整成本未知。 |
+| FOLR | 占用1；Portfolio CONTINUE / MEDIUM 已应用，B03 工程审查和九项远端测试已接受；裁决应用时零 B03 native，DM正准备执行 | B02 一个 fresh/fresh 对比 BANK−Generic=−4.830859375 保持不利证据；B03 是新完整学习程序实现敏感性，2 fits/205,120 ticks/9,938更新。训练与最终评价种子都变，不能单独识别训练方差。旧3041.46 native秒仅为工作量参考。 |
 
-MGTAP 科学位置固定3594eafe28ed91b2558fcc064e46ea714edd2e1c；其 DM 在本次协调消息报告
-runner273行/test184行、16 tests+16 subtests通过1.93s且 review 在途。这是 peer 的工程事实，
-不是新的 return 数据或本 DM 独立代码接受。FOLR 位置与修正固定fb38cbfadd69f578672f6918ebc2824338919040。
-两方向的完整现行 intake/card 在清单内，供实际读取；不同 host/算法的 tick 数不作跨方向效能排序。
+MGTAP 初始科学位置固定3594eafe28ed91b2558fcc064e46ea714edd2e1c；实际接受的源码与设计
+intake 为2d351d48604396ce478aa900584bd24b3255def5，launch receipt为cde2d77e9212b5e29cf96c94bee51eb97410aa5f。
+这是具名登记和 peer 发布的执行事实，不是本 DM 独立代码接受或新 return 数据。
+FOLR 完整新裁决及 DM 回应固定4776103de4f55beaee610c52506112651bfaed04，完整答复17,764字节，
+SHA25612f367046d07b6b7b54461cb321329eb1bd691b02ca74ee4cdf6518a1c9a675f。其最强 PARK 反方
+和 DISH 替代仍保留；Portfolio 明确说明第二个完整程序观察能改变开发选择，并从机会成本与
+原空缺前提两方面撤回旧 DISH 选择。它没有认定每个负结果必须再买第二个 seed。
+各方向的完整现行材料在清单内，供实际读取；不同 host/算法的 tick 数不作跨方向效能排序。
 
-旧 PORTFOLIO.md 仍列 UCOPE/LCAC/ACVC 为工作集、RCLE/MGTAP/FOLR 为归档，和当前记录不符；
-该表不控制本次处置。中央 Clerk 已退休。注册表原 RCLE review-generating 文字也已被完成答复
-和本 intake 替代；FOLR old PARK/slot-release 字段由 owner reconciliation 与第三席预留取代。
-不能因此创造空缺、重复 DM 或抢先应用旧 DISH 补位建议。
+旧 PORTFOLIO.md 曾列 UCOPE/LCAC/ACVC 为工作集、RCLE/MGTAP/FOLR 为归档；当前 derived report
+已修正。中央 Clerk 已退休。注册表 RCLE report仍引用08c012初稿、次要 historical_evidence
+仍写旧 review producer；本报告/完整归档/精确最终请求前瞻替代这些过时描述。FOLR 旧 PARK 与
+预留状态由新 CONTINUE 实际应用替代。不能因此创造空缺、重复 DM 或应用旧 DISH 补位建议。
 
-同一个 Portfolio 会话6aa7836e-e4a0-83e8-985d-c633d94935b1的旧请求已终态归档；其 DISH 建议
-未应用。FOLR 请求2026-09-14-folr-portfolio-direction-reconciliation-01先行，RCLE
-请求2026-09-14-rcle-e01-direction-decision-01随后；前一个必须完成/归档并释放绑定才 Send。
-实际提交前保留其新增决定作为明确 delta，不能假设它还 pending 或越过未归档答复。
-本报告只请决定 RCLE；不改变 MGTAP/FOLR 的研究、预留或额外资源。
+同一个 Portfolio 会话6aa7836e-e4a0-83e8-985d-c633d94935b1中，FOLR 请求
+2026-09-14-folr-portfolio-direction-reconciliation-01已经终态，assistant
+59c57a65-c3e2-4dfa-861f-e15a67323945；作者已归档、intake并释放绑定给 RCLE。
+当前 registry指定 RCLE 请求2026-09-14-rcle-e01-direction-decision-01接续；尚无 RCLE Send。
+本报告只请决定 RCLE，不改变 MGTAP/FOLR 的研究、占用或额外资源。
 
 ## 5. 需要 Portfolio 决定并交还执行的内容
 

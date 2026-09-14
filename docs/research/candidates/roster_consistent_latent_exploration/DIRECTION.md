@@ -38,6 +38,16 @@ question was not resolved by E01. The full evidence, contrary case, costs and gl
 go to Portfolio for the final direction decision. No new fit/PARK/CLOSE has been applied;
 RCLE retains its slot. E01 enclosing chain6.73s and all cost/claim ceilings remain preserved.
 
+While the Portfolio predecessor processed, DM prepared the concrete
+[B13 learned-prior object](RCLE_B13_LEARNED_PRIOR_SCIENCE_CARD_20260914.md) and implementation.
+Twenty-four focused synthetic/legacy/E01 checks pass; independent Sol/high review found
+no material defect and DM technically accepted preparation at the recorded source91811c61.
+No native B13 result follows. The predecessor FOLR decision is now fully archived/applied
+CONTINUE, with three occupied slots; RCLE owns the next exact Portfolio request. This remains
+reversible preparation, with zero B13 native exposure and no unilateral direction decision.
+The separate retained-head scale check was inconclusive about the prior bottleneck and is
+retained in the full Portfolio report.
+
 The [direct Portfolio acknowledgment](reentry_20260914/portfolio/ACKNOWLEDGEMENT.md)
 confirms full-lifecycle re-entry. B11 attempted, B12 completed and E01 completed real
 research after that selection; this was not documentary-only closeout. Historical support
