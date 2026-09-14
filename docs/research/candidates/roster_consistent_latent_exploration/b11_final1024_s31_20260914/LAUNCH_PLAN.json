@@ -1,0 +1,20 @@
+{
+  "assignment_id": "RCLE-B11-FINAL1024-S31-20260914",
+  "state": "PLANNED_NOT_LAUNCHED",
+  "parent_native": "/root",
+  "parent_thread_id": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "host_id": "local",
+  "node": "wsl_4070",
+  "ssh_target": "hmasd-wsl-node",
+  "supervisor": "/usr/local/bin/agent-task",
+  "handle": "rcle-b11-s31-e863914e2",
+  "launch_sha": "e863914e2c2c071b8dbdd8787f159233245000d5",
+  "cwd": "/home/wu/hmasd-worktrees/rcle-b11-e863914e2",
+  "output": "/home/wu/hmasd-worktrees/rcle-b11-e863914e2/temp/directions/roster_consistent_latent_exploration/exp/b11_seed31",
+  "control": "/home/wu/hmasd-worktrees/rcle-b11-e863914e2/temp/directions/roster_consistent_latent_exploration/exp/b11_control",
+  "expected_native_seconds": "historical161.35; planning180-300, adjustable",
+  "operational_watchdog_s": 1800,
+  "scientific_endpoint": "one fit,1024 updates x64 and4x512 evaluation",
+  "monitor_native": "/root/monitor_rcle_b11",
+  "preparation": "PREP_RECEIPT.json: exact control parent created before agent-task; no scientific output created"
+}
