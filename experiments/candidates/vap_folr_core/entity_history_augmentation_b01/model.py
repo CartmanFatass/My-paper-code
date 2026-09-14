@@ -12,6 +12,7 @@ class AugmentedActor(nn.Module):
 
     def __init__(self):
         super().__init__()
+        self.arm = "AUGMENTED_PERSISTENT"
         # Construct the complete reference so its discarded Q head consumes the
         # same draws as a fresh Generic actor from the same external RNG state.
         generic = Actor("GENERIC_RETAIN")

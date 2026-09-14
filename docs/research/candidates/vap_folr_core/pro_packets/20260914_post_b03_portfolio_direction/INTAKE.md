@@ -357,3 +357,42 @@ e218a89096b14331b783e7544503210e74be0f89 against4ec6086. It returns directly to
 this original independent DM App task. No Implementer remains active; DM retains
 review consequence and exact-source execution. Actual shell counts are12+12,
 correcting the initial prose count without changing source or scientific work.
+
+### Complete-path technical acceptance
+
+The full independent Sol/high completion event
+`FOLR_AUGMENTATION_B01_INTEGRATION_20260914_REVIEW_01` is preserved in
+[the review record](../../entity_history_augmentation_b01_781601/INDEPENDENT_REVIEW.md).
+It reports no material finding after tracing affected code/inherited consumers and
+the actual final launch argv. DM accepts source
+`d9977dc18baf33b78dc626764c252391f1ddaa9d` under
+[technical acceptance](../../entity_history_augmentation_b01_781601/TECHNICAL_ACCEPTANCE.md).
+Both exact empty arm output directories will be created before their respective
+submissions, resolving the identified outer-time prerequisite. The bounded publisher
+probe's cross-source trust limit is retained and controlled by the fixed same-source
+commands/collection; it does not trigger an unnecessary new validator or fit.
+Owner-console clean-boundary review returned[]; no new owner reply is invented.
+Remote source/shell preparation is complete with zero scientific invocations.
+DM now carries this acceptance into G launch and actual Monitor adoption.
+
+### Selected Generic actually launched and monitored
+
+G was accepted at2026-09-14T15:36:55.744043Z, handle
+`folr-augmentation-b01-781601-generic`,PID3674297,source d9977dc18. The exact new
+empty output directory was verified before the one submission, and adjacent
+physical/effective admission passed at15629955072bytes each.
+[Current execution](../../entity_history_augmentation_b01_781601/EXECUTION.md)
+preserves source, exact command, launch/admission receipts and Monitor ownership.
+Native`/root/folr_augmentation_b01_monitor` delivered actual adoption; DM caught an
+inconsistent reported observation time, retained the original and accepted a fresh
+same-command UTC/status/log correction at15:39:25.653Z. Actual handle coverage was
+preserved throughout; no repeat launch or duplicate observer was created.
+G is running and A is selected/unlaunched. DM stops routine polling and processes
+the Monitor's terminal consequence, including unconditional-on-G-score A execution
+after collection/admission. No new final B01 result or favorable claim is made.
+
+The Monitor then prematurely finalized with a live handle. DM did not treat its
+final text as continued coverage: same-batch followup resumed actual waiting and
+returned MONITOR_READOPTED at15:42:46.321Z,same PID/source,running. Original error
+and recovery are retained in the execution/adoption record; no new scientific
+process or duplicate observer was created.
