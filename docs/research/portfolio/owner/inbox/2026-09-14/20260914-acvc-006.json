@@ -73,5 +73,15 @@
     "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): submit the report with CONTINUE recommendation; no Portfolio disposition or new experiment applied.",
     "source": "docs/research/candidates/acvc/ACVC_POST_PAIRED_DIRECTION_REPORT_20260914.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-14T16:44:53+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md",
+      "record": "docs/research/portfolio/pro_packets/20260914_acvc_post_paired_direction/INTAKE.md",
+      "state": "applied",
+      "summary": "依据既有 OWNER_DIRECT 的持续 DM 委托，实际已形成并提交该方向建议；仅是作者动作，完整 Portfolio 处置、新对象与 native 均未应用。"
+    }
+  ]
 }
