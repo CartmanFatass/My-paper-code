@@ -35,7 +35,7 @@ Owner lifted the later operational pause on 2026-09-13. DM reconsidered the
 runtime-policy change and retains this scientific PARK, independently of any
 wall-time estimate, investigation reference or missing permission. The
 [resume readback](pro_packets/20260913_post_f_scientific_review/INTAKE.md#owner-resume-and-runtime-policy-readback--2026-09-13)
-records the synchronized controls, comparison limits and remaining integration.
+records the synchronized controls, comparison limits and preservation closeout.
 The fixed reference-use question is resolved. A fresh same-host learning block
 would supply the first complete fresh/fresh comparison here, not just another
 panel of the old BANK. DM currently judges that unresolved comparison insufficiently
@@ -54,8 +54,9 @@ See the [DM lifecycle decision](FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.
 The complete post-F independent scientific review found no result-invalidating
 defect; DM accepts its R1/R2 reporting corrections and R3 judgment clarification
 in the [scientific-review response](pro_packets/20260913_post_f_scientific_review/INTAKE.md).
-No live scientific or Transport producer remains. Clerk retains the separately
-identified mechanical main-integration/reporting consequences.
+No live scientific or Transport producer remains. Clerk completed the four old
+main-preservation gaps and f80 cleanup publication; DM verified the exact accepted
+blobs. Current decision/report integration is separate from scientific execution.
 
 The observer-owned entity-history-before-aggregation B family remains OPEN on
 the lifecycle-identity-visible native Traffic Junction variant. Its allocated

@@ -222,8 +222,13 @@ helper, runner and test. A separate readback found the six-path f80f98c42 cleanu
 publication still outstanding there, including two absent JSON receipts. DM sent
 the exact fixed commit/paths to Clerk for mechanical integration, preserving other
 directions' audit rows. The original remote five-target cleanup is already complete
-and is not repeated. Published direction evidence remains intact while that main
-consequence is completed.
+and is not repeated. Published direction evidence remained intact throughout.
+Clerk subsequently published that cleanup integration at
+`cc121bc06160f064e89d7941a984439c3e552fbd`. DM read main
+`2fa37c64c9441c9d8190e396b438dc78ece65ce8` and verified all five FOLR document/JSON
+blobs exactly match f80, with its cleanup audit row present once. Both original
+preservation consequences are now complete; only this new continuation record's
+ordinary main/report integration remains with Clerk.
 
 The completed post-F Transport child receives no unrelated new work. A future
 independent batch creates a fresh child with minimal context; same-request recovery
