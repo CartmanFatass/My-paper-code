@@ -1,0 +1,104 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "lcac-first-design-review-20260914-01",
+  "source_thread_id": "/root",
+  "parent_thread_id": "/root",
+  "operator_thread_id": "/root/lcac_first_design_transport",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "direction_id": "learned_counterfactual_agent_credit",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "b5a4265071e302902f1195dd7dd8e68ce3632f40",
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/lcac",
+    "base_sha": "b5a4265071e302902f1195dd7dd8e68ce3632f40",
+    "response_path": "docs/research/candidates/learned_counterfactual_agent_credit/pro_packets/20260914_first_design_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/20"
+  },
+  "scientific_question": "Independently review LCAC's first-object assessment. The DM provisionally recommends a shared scalar joint-Q, focal-seven-action baseline versus a fully trained scalar central V on one matched 512-train/32-final categorical five-UAV comparison, as the next direct implementation objective; current batch executes no experiment. Does this concrete comparison have sufficient development value to select over 256 episodes, a masked multi-output critic, or reversible PARK? Challenge the author's preference, especially unknown complete cost and extrapolation, without treating staffing as scientific support or requiring a positive pilot. Assess actual scientific correctness and fairness of pre-current-rollout-fit Q/V freezing, sampled G-minus-baseline, normalized per-agent categorical PPO, unchanged actor information/private recurrence, shared-state zero-extra-column critic initialization, and separate common actor/critic gradient clipping. Identify material defects and the smallest corrections or claim limits. Review the decision and design; do not approve funding/lifecycle or choose global layout.",
+  "deliverable": "A focused independent scientific review, preferably 900–1400 words, leading with your assessment, followed by material findings and their impact, the strongest contrary case, and concrete proportionate corrections if needed. Explicitly distinguish no empirical signal yet, first finite learning-package comparison, counterfactual causal/variance claims, and training-population claims. Challenge the baseline competence and work accounting from the listed source regions. Say whether the proposed implementation is a reasonable first comparison or whether a smaller/different bounded objective has better decision value, preserving uncertainty and DM decision ownership. Cite the fixed inputs actually read; state exact access gaps and what reasoning they limit. Preserve all historical outcomes and unallocated offers. Complete only the scoped response/comment, with the same-turn full Markdown fallback when required.",
+  "claim_ceiling": "Existing-evidence first-object/lifecycle design assessment. LCAC has no empirical result. A proposed B01 would support only a finite same-categorical-task whole-learning-package contrast conditional on one trained pair and its final panel, with no stable population superiority, equality, causal credit/variance reduction, COMA reproduction, continuous-action comparison, headroom, safety, scale transfer, C promotion or formal-UAV claim. Zero new scientific execution in this review.",
+  "constraints": [
+    "Apply current AGENTS sections1–5 and empirical-spec sections4,5.2,11.4,11.7–11.10 at the listed input version. DM owns ordinary lifecycle and proportionate bounded work. Independent scientific review supplies substantive findings, not an investment grant, launch gate, Portfolio vote or lifecycle veto. The older registration's funding/ownership words remain historical; the current replacement assignment authorizes this first decision only, not automatic launch of its old offer.",
+    "Assess the actual question's decision value and strongest alternative. No exact-credit proof, tuned headroom, optimal policy search, all-positive seeds, mandatory profiler, full causal matrix or full historical replay is a general prerequisite. Unknown cost is not zero, and finite arithmetic or batched/native execution does not prove affordability. Do not use a missing mechanism theorem as a PARK reason.",
+    "LCAC's proposed scalar Q fits one factual joint-action target per tick and marginalizes N*A=35 inputs once before fitting that rollout. Do not mistake it for 7^5 environment calls. The masked multi-output alternative uses five baseline input rows and five factual fitting rows per tick; its whole-run speedup is unmeasured. Dense MACs omit backward, nonlinear, native and recurrent work; keep these limits. 256 and512 endpoints answer different finite learning questions; no historical LCAC offer is allocated.",
+    "Read the changed categorical design in the assessment, not an assumed reuse of the Gaussian collector. Both arms change to the same specified per-agent loss mean and separate gradient clipping. Critic weights/baselines are frozen before current-rollout fitting, normalized advantages are detached and held four epochs, and Q adds4480 parameters. These choices are open to substantive critique; a positive endpoint would not isolate any one of them or inherit an exact COMA/PPO theorem.",
+    "MGTAP's mixed signs and 378.77s for two prior early256 pairs remain their original comparisons, not categorical headroom or an LCAC runtime forecast. All32 final worlds describe an endpoint panel conditional on one trained pair; no pooled training-seed inference. Preserve adverse worlds, absolute V competence, unknown costs and registration recasts0.",
+    "Current support is one review through archive and DM response, zero models, native constructors, fits, transitions, updates, evaluation or selection trials. Do not execute code, tests, profiling or experiments. Read only the listed fixed passages; linked histories and external literature are provenance unless explicitly listed. The author reports limited primary COMA/PPO reading in the assessment; this is not a claim you accessed those papers. Explanatory sources are not policy authority.",
+    "Pro's only write scope is this request's response at the named path on current descendant codex/lcac and one Issue20 delivery comment. Preserve unrelated branch advances and fixed input SHA. No main, source, card, DIRECTION, audit/owner, previous response, PR, other-direction or shared-control edits. The fixed TASK authorizes the same-turn full downloadable Markdown fallback after actual-state readback if GitHub writes cannot be completed. No second Send follows delivery trouble."
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/learned_counterfactual_agent_credit/LCAC_FIRST_DECISION_20260914.md",
+      "purpose": "Entire assessment: current assignment, actual zero exposure, evidence, options, proposed comparison, work and L0; this is the object of independent review.",
+      "provenance": "DM-authored proposal at initial admission; not a performed first-object decision or experiment."
+    },
+    {
+      "path": "docs/research/candidates/learned_counterfactual_agent_credit/pro_packets/20260914_first_design_review/COUNTS.json",
+      "purpose": "Entire short arithmetic record: compare512/256 and scalar/multi-output dominant work, with explicit omitted costs.",
+      "provenance": "Python arithmetic over declared loops only; no model instantiated or measured throughput."
+    },
+    {
+      "path": "docs/research/candidates/learned_counterfactual_agent_credit/DIRECTION.md",
+      "purpose": "Entire historical registration and its explicit unallocated offer/claim limits.",
+      "provenance": "Accepted registration at Portfolio discovery; older ownership/funding language does not override current DM assignment."
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md",
+      "purpose": "Section7 only: full historical LCAC first-object suggestion and why it was not then selected.",
+      "provenance": "Historical independent Portfolio response; preserves scientific proposal without current grant or global authority."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/PARK.md",
+      "purpose": "Knowledge/limits, reusable assets, and cost sections: strongest comparator lesson and limits of borrowing evidence.",
+      "provenance": "Actual MGTAP DM scientific PARK handoff; not LCAC evidence or resumed work."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "purpose": "returns_to_go, clipped_policy_loss, recurrent_outputs, optimizer_for and update; inspect inherited gradient, shape and replay semantics which the LCAC proposal must adapt. Collector history and optional modes need not be expanded.",
+      "provenance": "Existing accepted real-learner source, Gaussian/duration-aware rather than an LCAC implementation."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "purpose": "make_real, actor_features, critic_features and team_reward: native task and information/return interface only.",
+      "provenance": "Existing native adapter helpers; no LCAC run occurs during reading."
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py",
+      "purpose": "DenseResidualEncoder and NativeGeometryActor plus build_pair: reusable DENSE/GRU64 source only.",
+      "provenance": "Existing MGTAP actors still have Gaussian heads; proposed categorical adaptation is unimplemented."
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Sections1–5: current DM/scientific review, owner-delegated decisions, resource/accounting and no new CM/Implementer authority.",
+      "provenance": "Current owner-directed methods and role boundaries, prospectively superseding historical Portfolio finality."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections4,5.2,11.4,11.7–11.10: scientific integrity, B burden, description fields, proportionality, complexity and knowledge-use limits.",
+      "provenance": "Applicable current empirical specification; expressly adopted for this review."
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Sections4–5 and7.1–7.3: bounded direction-only implementation and independent high-risk code review coverage.",
+      "provenance": "Applicable engineering scope; scientific Pro review does not replace code review."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Sections2–4 and6: local history, CTDE, approximation and finite-learning inference.",
+      "provenance": "Explanatory knowledge, not grant or claim of mechanism effectiveness."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "purpose": "CTDE, credit assignment and MAPPO passages: competent critic/actor distinction and claim limits.",
+      "provenance": "Explanatory source summary; cited papers need not be recursively opened."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Comparison, randomness hierarchy and whole-method versus mechanism passages: paired endpoint unit and honest inference.",
+      "provenance": "Explanatory empirical reasoning; no fixed seed or positivity requirement."
+    }
+  ]
+}
