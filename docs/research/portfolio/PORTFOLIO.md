@@ -10,11 +10,11 @@
 | 方向 | 已知科学位置 | 当前工作与席位 |
 | --- | --- | --- |
 | [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B13真实学习与nearest收益保留，sampled对greedy−0.019784；modal512行已测结局相同、恢复利益/损害和B11缺失保留。完整151行Portfolio判断接受新独立实例仍有价值，当前选择可逆PARK。 | 已应用PARK并释放1席；不CLOSE/RECAST，不新增fit。[完整裁决与回应](../candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/INTAKE.md)、[PARK知识与原始资产](../candidates/roster_consistent_latent_exploration/PARK.md)已保全。原DM负责本次单一真实空缺接续及最后checkout保全/清理，无RCLE科学producer。 |
-| [ACVC](../candidates/acvc/DIRECTION.md) | 两个聚集学习终点的固定F双对照均值收益、不利尾部和失败门控方案保留。新的投入判断研究固定F在新学得proposer上的用途，范围B/EXPLORE。 | 预留1席；[完整裁决与作者回应](pro_packets/20260914_rcle_park_vacancy_selection/INTAKE.md)已接受。复用原Astra/max DM，拟开展1拟合/512训练/1024更新/192最终评价/180224ticks；尚未恢复任务或开始新对象。 |
+| [ACVC](../candidates/acvc/DIRECTION.md) | 两个聚集学习终点的固定F双对照均值收益、不利尾部和失败门控方案保留。新的投入判断研究固定F在新学得proposer上的用途，范围B/EXPLORE。 | 预留1席；[完整裁决与作者回应](pro_packets/20260914_rcle_park_vacancy_selection/INTAKE.md)已接受。复用原Astra/max DM，拟开展1拟合/512训练/1024更新/192最终评价/180224ticks；原任务已恢复并收到完整研究交接，App显示正在执行；具体对象的发布证据尚待接收。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 对称有限选率双方均选1e-4；全新8252主量+0.023704897713093642 J，COND_ABOVE_MEI。一次选择/一对最终训练，历史混合符号和DENSE默认保持；不声称稳定排序或调参收益。 | 占用1席。8拟合/589824ticks/4096Adam已完成，658.02s、exit0。完整166行结果审查和139行Portfolio裁决已读；[全文与DM回应](../candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md)已应用CONTINUE，下一目标为固定1e-4新配对，尚无新卡/seed/native启动。完整归档18522字节及原错误回执保留；实际提问仅标题，模型自行找到固定报告/材料清单。当前会话已释放给下一作者RCLE；三席不变。 |
 | [FOLR](../candidates/vap_folr_core/DIRECTION.md) | B03完整比较Generic4.92594、BANK-1.71078，差值-6.63672；B02差值-4.83086单独保留。两次完整学习与评估实例均偏向Generic，不声称稳定排名或实体历史普遍无用。 | 占用1席，CONTINUE / MEDIUM。B03完整调用3779.85s，原始证据及清理已完成；无活动native或FOLR provider。[完整独立审查与DM回应](../candidates/vap_folr_core/pro_packets/20260914_entity_history_b03_result_plan_review/INTAKE.md)已读并回应P1/P2/P3，保留结果及容量/净增益限制。[方向取舍报告](../candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/REPORT.md)建议附加实体状态的受控问题，PARK为最接近备选；26项固定来源的完整提问草稿已完成；待RCLE实际释放当前会话后更新补位/全局事实并发送。未选择新fit、recast或PARK。 |
 
-实际为2占用+1个ACVC预留，已达到目标3，无未预留空缺。完整185行Portfolio裁决已选择复开原ACVC DM，开展一次新C拟合及C/F/own-dwell完整比较；原DM恢复及实际对象接续尚待执行，不能把预留写为实验已启动。RCLE继续其已应用PARK和本次交接责任，前次CONTINUE已真实执行为B13。
+实际为2占用+1个ACVC预留，已达到目标3，无未预留空缺。完整185行Portfolio裁决已选择复开原ACVC DM，开展一次新C拟合及C/F/own-dwell完整比较；原DM已恢复并接收完整研究交接，实际对象证据尚待接收，不能把预留写为实验已启动。RCLE继续其已应用PARK和本次交接责任，前次CONTINUE已真实执行为B13。
 停止第四个方向限制扩容，不停止现有研究或真实空缺的合规补位。旧报告的 UCOPE/LCAC/ACVC 工作集和
 RCLE/MGTAP/FOLR 归档表已经过期，不能用来判断现在是否“开始后直接结束”。
 
@@ -40,7 +40,7 @@ Portfolio 的新决定前瞻应用，不擅自重写结果或批量重启旧方�
 
 FOLR 请求2026-09-14-folr-portfolio-direction-reconciliation-01已完成并应用 CONTINUE；
 完整答复保全于4776103de4f55beaee610c52506112651bfaed04。RCLE 请求
-2026-09-14-rcle-e01-direction-decision-01完整答复已按一次 Send 归档，20,895字节/SHA256 7c7476fca152aec673c7ff0974ae182c0ef30c091e230a4ba7039ac71f06a416；CONTINUE 于5f4abd6f应用，B13随后实际完成，完整证据见c58ec2fb4。此前 RCLE CONTINUE 请求已结清并执行为B13；后续完整方向裁决现已可逆PARK并形成一个真实空缺，当前补位完整裁决已选择ACVC，RCLE负责实际恢复与对象接续；应用后将实际会话释放事实交给下一作者FOLR。
+2026-09-14-rcle-e01-direction-decision-01完整答复已按一次 Send 归档，20,895字节/SHA256 7c7476fca152aec673c7ff0974ae182c0ef30c091e230a4ba7039ac71f06a416；CONTINUE 于5f4abd6f应用，B13随后实际完成，完整证据见c58ec2fb4。此前 RCLE CONTINUE 请求已结清并执行为B13；后续完整方向裁决现已可逆PARK并形成一个真实空缺，当前补位完整裁决已选择ACVC，原DM已恢复并收到完整研究目标，RCLE跟进实际对象接续；应用后将实际会话释放事实交给下一作者FOLR。
 旧6aa7836e会话答复已由552f0dce7904e35206b8e32f9180ab85aee822ad保全，其 DISH 建议未应用。
 新的 Portfolio 决定须基于实际读取的固定权限、全局上下文、完整结果/反证/审查和 DM 回应。
 
