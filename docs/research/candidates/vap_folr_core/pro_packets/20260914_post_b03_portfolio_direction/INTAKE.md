@@ -327,10 +327,10 @@ invocation, remote process or monitor adoption has occurred.
 
 ### Exact remote launch preparation
 
-DM prepares the two13-line shell invocations in
+DM prepares the two12-line shell invocations in
 `../../entity_history_augmentation_b01_781601/GENERIC.sh` and `AUGMENTED.sh`,
 reusing the previously executed native time/admission wrapper. This scoped support
-adds26 non-test lines (353 with the327-line integration). Each accepts exact
+adds24 non-test lines (351 with the327-line integration). Each accepts exact
 source SHA, detached checkout and a new output directory; A also accepts the G
 summary path. External control verifies the committed source and unused handle/output
 before one supervisor submission. Its adjacent committed memory preflight must
@@ -349,3 +349,11 @@ The full-path independent Reviewer receives these exact scripts and updated sour
 identity in the same bounded review. A final launch SHA/path is recorded after
 review resolution and acceptance, before result-bearing execution. No remote
 worktree or selected-arm process has been created during this preparation.
+
+Review dispatch: native `/root/folr_augmentation_b01_review`, Sol/high, independent
+minimal context, event `FOLR_AUGMENTATION_B01_INTEGRATION_20260914_REVIEW_01`,
+reviews cf1efd77ce5c38a33a1d1d283922bc3f13208c7b plus the exact launch scripts at
+e218a89096b14331b783e7544503210e74be0f89 against4ec6086. It returns directly to
+this original independent DM App task. No Implementer remains active; DM retains
+review consequence and exact-source execution. Actual shell counts are12+12,
+correcting the initial prose count without changing source or scientific work.
