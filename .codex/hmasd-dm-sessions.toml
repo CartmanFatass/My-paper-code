@@ -21,7 +21,7 @@ model = "gpt-5.6-luna"
 reasoning_effort = "high"
 state = "active"
 activated_event = "clerk-activate-20260913-01"
-last_observable_action = "owner resumed research; heartbeat ACTIVE; control paths synchronized to all four DM session/authoring surfaces; four DM resume messages delivered; accepted FOLR preservation integrated as 8a7c85bea; shared Agentify/Chrome restarted and verified, DM browser recovery released"
+last_observable_action = "owner resumed research; heartbeat ACTIVE; control paths synchronized to all four DM session/authoring surfaces; four DM resume messages delivered; accepted FOLR preservation integrated as 8a7c85bea and cc121bc06; shared Agentify/Chrome restarted and verified, DM browser recovery released"
 session_checkout = "C:/Users/fires/.codex/worktrees/6c1c/HMASD"
 operational_checkout = "C:/Projects/HMASD"
 
