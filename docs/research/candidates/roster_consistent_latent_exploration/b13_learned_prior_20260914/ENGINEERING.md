@@ -50,3 +50,20 @@ B13 trajectory, eta evolution, displacement, result, timing, RSS or remote admis
 yet been measured. Synthetic driver mocks remain interface/semantic evidence. The actual
 future invocation must establish its full native record; B11 SIG11 remains unexplained.
 Technical acceptance applies to preparation, not a direction verdict or native launch.
+
+## Retained-byte intake preparation
+
+L0: adapt the already used B12 ANALYZE_RECORDED.py to this B13 card's identity, one
+additional modal panel and learned scalar state. Owned file is this directory's
+ANALYZE_RECORDED.py; source policy/study/runner and accepted scientific definitions stay
+at the independently reviewed bytes. It reads only terminal collected JSON/tensors/time,
+recomputes paired arithmetic, checks all1024 updates/nine Adam parameter states and all
+five512 panels, and reports actual eta, recovery counts and native wall/RSS. No model,
+RNG, rollout, update, new diagnostic exposure or time-validity cap is introduced.
+
+Acceptance is syntax review plus independent scientific-semantic review of the changed
+intake checks, then the actual retained-byte run after any selected invocation completes.
+No synthetic native result is fabricated to test an outcome. Tau40 is explicitly a count
+of128 primary scenarios; the runner's measured evaluation displacement is not described
+as an independent post-evaluation checkpoint comparison. Conditional scenario summaries
+remain separate from training-population uncertainty and from eta causal claims.
