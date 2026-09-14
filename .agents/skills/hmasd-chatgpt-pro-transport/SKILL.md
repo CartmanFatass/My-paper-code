@@ -27,6 +27,31 @@ per wait). Do not block the entire queue until one answer finishes. A generating
 pending work: retain observation until terminal or explicitly handed over. End when no requests
 remain; a new App assignment starts a new turn. No ACK or Root-report loop.
 
+### Durable outstanding assignments and turn completion
+
+On each incoming assignment, persist its request ID and exact input reference, author/return
+route, binding, observed acceptance state, archive destination and next action before switching
+to another request. Keep this queue in `pending-requests.json` beside the configured binding
+registry; reuse any existing per-request durable queue by recording its path there rather than
+maintaining competing copies. This is execution state owned by Transport, not a new approval
+or scientific ledger. A request waiting to be inspected is outstanding even without a provider
+acceptance receipt. Deduplicate follow-ups by request ID; retain their new facts and input binding.
+
+At resume/compaction and before finalizing a turn, reconcile the durable outstanding set against
+incoming assignments and this turn's completed work. A conversation's old ARCHIVED binding is
+not the status of a newer request. Match request identity and actual provider turn; an absent
+GitHub response or missing local receipt alone does not prove that Send failed. Preserve the
+exact accepted input through same-request recovery.
+
+Completing or reporting one request removes only that request after its full archive and direct
+author delivery are recorded. Continue other queued, inspecting, generating, archiving or
+undelivered requests. A final response is appropriate only when the outstanding set is empty,
+or each remaining request has an explicit handover with a named receiving owner and observable
+acceptance of responsibility. A blocker notice alone is not a handover. If interrupted before
+recording a newly arrived assignment, recover it from recent App messages on resume; do not
+interpret the last successful archive as completion of the service's whole queue. Report concrete
+unrecoverable coverage gaps to the affected author DM; no routine Root escalation or status loop.
+
 ## Execute from actual page state
 
 1. Read the exact assigned bytes and current request history once. Reuse the bound conversation;
