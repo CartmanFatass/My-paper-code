@@ -159,3 +159,77 @@ helper/test and runner), fully retained on the accepted direction branch. There
 is no pending experiment or scientific-review producer. The separate latest
 five-file control-entry synchronization is administrative work under Root's
 explicit rollout instruction, not research reopening.
+
+## Owner resume and runtime-policy readback — 2026-09-13
+
+The owner explicitly lifted the operational pause and directed continuation from
+preserved state. This is not an automatic reversal of the prior scientific PARK.
+DM reconsidered P versus the first fresh/fresh learning block and retains the
+existing **reversible PARKED/MEDIUM** decision and item 20260913-folr-003. No new
+card, empirical invocation, scientific-review request or replacement is selected.
+
+The previous 6900 s first-block envelope and 120 s cleanup allowance were DM plans,
+not owner hard limits, unavoidable bills or research/Send gates. The current
+toy 5400 s / UAV 64800 s investigation references are also not launch, stop or escalation
+conditions; 600 s is not a generic watchdog. Ordinary operational wall plans may be
+adjusted prospectively under real resources, preserving frozen scientific
+exposure/comparison endpoints and actual owner/platform constraints. A stopped
+historical run remains stopped; this correction does not repair E's missing
+contrast, alter F's counts or authorize a disguised retry.
+
+For the scientific choice, F still resolves only the optional use of one fixed
+historical BANK against one new Generic fit. The first intact fresh/fresh block
+would supply real new learning-comparison information and could support a
+different development choice; neither the adverse fixed BANK nor H20/common cues
+proves it futile. Removing a putative wall-permission barrier therefore does not
+remove the scientific uncertainty. I continue to assign that same-host comparison
+modest marginal value relative to its real learning work, rather than requiring
+architecture novelty, a positive pilot, exact headroom or complete cost knowledge.
+This is my qualitative allocation judgment, not an estimated probability of
+failure, certified Generic sufficiency or reviewer veto. The still-open family
+and unobserved learning/context variation are why P remains reversible, not CLOSE.
+A concrete useful learning/information/lifetime or cost proposal, or an owner
+request, can trigger DM reconsideration without Root/Portfolio approval.
+
+Scientific-reading mode reuses empirical-spec 11.8–11.10 and the already-read
+FOUNDATIONS 2,4,6; this boundary refreshed 6 and 04_EMPIRICAL. The operative limit is
+that conditional evaluation episodes do not supply independent training evidence,
+and a package-use result does not identify a memory-component cause. These limits
+support keeping the unresolved comparison explicit, not adding a launch gate.
+The previous complete independent review and DM's R1–R3 responses remain accepted;
+there is no new scientific finding requiring another Send. Main owner-console
+unapplied reviews returned []; no duplicate owner item or invented reply is written.
+
+Clerk performed the assigned control propagation while DM was reading. The two
+initial staged indexes were reconciled with that actual writer before DM edits:
+
+- Session: `3c7bfd09bf085ca22ca42fa9d06dfa3a2ab374b4`.
+- Authoring: `a1d78025cda35e6f0880122cabe6b7e6e15108c8`, observed on origin.
+- Eighteen scoped paths from `4068047744de2c474d0dcb225ce7f4477ffadaee` and
+  `1c6ba284ecd03c20fc6b7e6fa1a3d27efd630abf` match between both checkouts.
+  Seventeen match 1c6 exactly; AGENTS has only the explicit current owner-resumed
+  sentence instead of the source's neutral current-state sentence. Main's live
+  registry was not copied, and frozen direction/source/evidence paths were not
+  changed by either control commit.
+- Six skill-structure checks and ten role-TOML parses passed; both worktrees were
+  clean at readback. The combined check/read command wall was 1.5740514 s, partial
+  administrative coverage only. No experiment or accepted source suite was rerun.
+
+Clerk reports the four old preservation gaps integrated at 8a7c85bea. DM verified
+all four exact accepted a726ffbfe blobs at main
+bf463a3b7bc37495595b93c2c24b7e5e0c6ba191: legacy Portfolio response, retained-use
+helper, runner and test. A separate readback found the six-path f80f98c42 cleanup
+publication still outstanding there, including two absent JSON receipts. DM sent
+the exact fixed commit/paths to Clerk for mechanical integration, preserving other
+directions' audit rows. The original remote five-target cleanup is already complete
+and is not repeated. Published direction evidence remains intact while that main
+consequence is completed.
+
+The completed post-F Transport child receives no unrelated new work. A future
+independent batch creates a fresh child with minimal context; same-request recovery
+would preserve its original binding and one-Send reconciliation. There is currently
+no scientific/provider producer or empty native wait. The concurrent owner-directed
+Agentify/Chrome 9222 maintenance and its subsequent verified release require no FOLR
+browser action; only independent document/Git closeout continues. New empirical and
+provider-Send exposure is 0;
+full direction/support/provider costs remain UNKNOWN, not reset or declared zero.
