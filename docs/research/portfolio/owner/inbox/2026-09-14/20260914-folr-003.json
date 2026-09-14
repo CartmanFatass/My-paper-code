@@ -29,7 +29,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "旧替代套件的两次损失未回答共同Generic路径下的额外persistence；此窄价值仍须与停止和成本实质比较。",
   "evidence": [
     "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/REPORT.md",
@@ -77,5 +77,17 @@
     "verdict_text": "DM 建议继续 FOLR 当前实体历史问题，优先发展一次“共同保留 Generic64 循环路径，比较持续实体状态与逐步清空实体状态”的有限学习比较，维持现有一个席位和 MEDIUM。",
     "source": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/REPORT.md"
   },
-  "starred": true
+  "starred": true,
+  "approval_correction": "a的consequence是提交建议，不是运行内部比较；不得把该旧auto_applied标记解释成A-Z fit或第三臂。实际新A-G卡见20260914-folr-004。",
+  "execution_history": [
+    {
+      "at": "2026-09-14T15:11:06+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/archive/clarification_01/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/INTAKE.md",
+      "state": "applied",
+      "summary": "此旧条目a的实际动作仅为向Portfolio提交原内部persistence建议；提交与裁决已完成。最终完整澄清改选A-G，原A-Z实验没有执行。",
+      "correction": "a的consequence是提交建议，不是运行内部比较；不得把该旧auto_applied标记解释成A-Z fit或第三臂。实际新A-G卡见20260914-folr-004。"
+    }
+  ]
 }
