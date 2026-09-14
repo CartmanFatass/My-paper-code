@@ -1,0 +1,26 @@
+{
+  "status": "FROZEN_INPUTS_STAGED_VERIFIED_NO_NATIVE_EXECUTION",
+  "input_root": "/home/wu/hmasd-inputs/rcle-fixed-modal-e01-20260914/inputs",
+  "tar": "/home/wu/hmasd-inputs/rcle-fixed-modal-e01-20260914/rcle-fixed-modal-e01-inputs.tar",
+  "tar_bytes": 368640,
+  "tar_sha256": "f42d79970b1a8df0e72f73ee7892cab88aeebb51a0a0a9b0d6712c1712804825",
+  "members": {
+    "b10/final1024.pt": {
+      "bytes": 71886,
+      "sha256": "c0e0a5385d190460c289c5ab1e43b1ef13628e4b5ec5df23188dbe3aae9793cf"
+    },
+    "b10/greedy.json": {
+      "bytes": 110012,
+      "sha256": "00804e6f141379ca240a526b362e425a9c112a67f3da48c92ef5ce913e667ed1"
+    },
+    "b12/final1024.pt": {
+      "bytes": 71886,
+      "sha256": "0bece0f2db200e4589c84e7624f21f77a6aee31a51f55d81df90280622b4d3eb"
+    },
+    "b12/greedy.json": {
+      "bytes": 110441,
+      "sha256": "90857130ebb8f7cc1f80f5a1c8b03ac7787658026122966c4c9710382eabb936"
+    }
+  },
+  "utc": "2026-09-14T06:14:40.518110+00:00"
+}
