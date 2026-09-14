@@ -93,3 +93,90 @@ in the prospectively updated card. Native exposure remains zero.
 Actual Implementer dispatch: `/root/im_s_m_mgtap_lr_runner`, model gpt-5.6-sol,
 reasoning medium, fork_turns=none; batch MGTAP_LR_RUNNER_IMPL_20260914.
 Parent is this DM App task01a09cd8-676e-7513-806d-a86b7e104518, native /root.
+
+### Implementation delivery and first DM consequence
+
+Batch MGTAP_LR_RUNNER_IMPL_20260914 returned the two assigned files only:
+study.py273 lines and test_study.py184 lines. The Implementer reports py_compile and
+the combined protocol/study pytest checks:16 passed,16 subtests passed in1.93s,
+command wall2.924s. One initial wiring failure passed train rows into the eval-only
+selector; the same batch corrected explicit stage+phase projection and the rerun passed.
+Its two task-owned scratch directories were removed and verified absent by the creator.
+No Git mutation, native/reward run, remote execution or admission was performed by it.
+
+DM read both full files and received the writer release. Actual next consequence:
+independent read-only Sol/high Reviewer /root/rv_s_h_mgtap_lr_runner, minimal fresh
+context, batch MGTAP_LR_RUNNER_REVIEW_20260914, covers the full changed protocol/runner,
+state/RNG lifetime, scientific consumers and publication. DM flagged a concrete point
+for assessment: fit-local limits versus top-level COMPLETE; its reachable meaning,
+not a hypothetical hostile-input guard, determines whether correction is required.
+Technical acceptance and real execution remain pending; passing synthetic tests are
+not a native scientific observation.
+
+The scientific design review was separately published as TASKbceb608c441c7c94ebbded02f011c7eb4d85f675,
+HANDOFF7f0a2c0b4b0f231f028d12fe12a9b7cd269db9c3 and dispatched to the registered
+independent iab Transport. At this boundary App delivery is confirmed, provider
+acceptance has not yet been returned; no claim of a completed scientific review follows.
+
+### Independent review findings and selected corrections
+
+The Reviewer returned two concrete engineering findings, no material protected scientific
+behavior defect: P2 the runner's elapsed_wall is body-only, omitting import/setup and final
+publication; P3 stdlib TemporaryDirectory ignores pytest --basetemp and uses OS temp.
+DM accepts both. The same Implementer corrects explicit body-only timing names/scope and
+routes test scratch through the invocation-owned pytest root, followed by focused checks.
+No new object, seed, endpoint, RNG/learning change or generic telemetry layer is selected.
+
+The exact [command](COMMAND.sh) supplies authoritative complete-command wall and peak RSS
+through existing GNU time, surrounding timeout, shell setup, memory admission, imports,
+learning/evaluation, checkpoints/summary/stdout and exit. It excludes agent-task queue/setup,
+Git/SSH/staging, provider/DM work and later archival; those remain separate scope/UNKNOWN.
+The serial14400s external watchdog is an ordinary technical plan, not a new owner cap.
+It does not retry a stopped run. Admission on wsl_4070 immediately precedes the learner
+in the same detached command;4GiB physical and effective available remain required.
+This file is prepared, NOT a launch receipt. Exact published SHA and detached worktree
+are bound before dispatch; no process is accepted by writing a command.
+
+DM accepts the reviewer's per-fit-limit classification for this fixed producer: with
+diagnostics=False, the only possible appended collector diagnostic concerns served-users,
+which MultiUAVEnv.step supplies numerically. It is not used by J/selection; any fit-local
+diagnostic remains in that fit's output rather than being silently deleted. No new generic
+diagnostic gate is added. Primary finiteness, complete panels/counts and thrown learner
+failures remain binding. If this protected producer or claim changes, reassess the actual
+dependency; optional resource/diagnostic gaps are not automatically scientific polarity.
+
+### Correction recheck and DM technical acceptance
+
+The same Implementer released corrected study.py281 lines, SHA256
+e5a23642fe6e11e27d23d6345a1273be1a298030685983736be5cac7b6ab3ef9,
+and test_study.py192 lines, SHA256
+726d26f5f6cc209c498cec23b4de6fdabf28b3637a8d620752c02575670ea071.
+Actual focused correction checks: py_compile and the combined protocol/study pytest
+suite,16 passed and16 subtests passed in2.12s, complete check-command wall3.154s.
+The invocation-owned scratch was inspected for containment, removed by its creator,
+and verified absent. These are synthetic checks, not native exposure.
+
+Independent same-batch correction recheck MGTAP_LR_RUNNER_REVIEW_20260914 cleared
+both findings with no remaining material defect. It also inspected the12-line command
+and ran non-executing bash -n successfully (exit0); it did not repeat the passing suite,
+change repository state or perform admission/native work. DM read the corrected timing
+and scratch paths and accepts the review's actual coverage, not just its verdict.
+
+DM direct-command L0: goal is the full-command launch/timing boundary for the selected
+eight-fit study; only reentry_20260914/COMMAND.sh in this authoring checkout is owned;
+card §3 scientific semantics, masters8251/8252, CPU FP32/thread1 and no retry are preserved;
+acceptance is independent syntax/boundary review plus actual exact-SHA staging and fresh
+4GiB physical/effective admission before native execution; bounds are one12-line command,
+the existing agent-task supervisor and14400s ordinary watchdog, no new framework or pilot.
+
+Scientific-review §3's three concrete producer/consumer dependencies are covered by the
+actual changed-path inspection: complete six candidate fits and count checks; own-score
+selection JSON and byte hash persisted before the holdout pair factory; fresh8252 model,
+optimizer, environment and private RNG construction, taking only selected LR labels.
+The hash alone is not proof of temporal isolation. Raw learning/evaluation records,
+count facts, checkpoints and the actual complete command receipt remain to be obtained.
+
+DM technical acceptance is therefore complete for the reviewed source and prepared
+command. This establishes readiness to perform the selected ordinary experiment, not
+that remote source/admission/launch or any scientific result exists. The next concrete
+action is commit/push, exact detached staging, current admission and agent-task dispatch.

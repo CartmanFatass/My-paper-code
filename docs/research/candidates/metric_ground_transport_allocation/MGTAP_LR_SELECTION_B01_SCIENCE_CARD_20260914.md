@@ -4,7 +4,8 @@ Claim under study: a finitely selected COND learning procedure may provide usefu
 Binding structure: systems / information flow; both actors use the same legal local information in a partially observed multi-UAV task.
 
 Status: prospective B/EXPLORE protocol selected by DM at the 2026-09-14 reentry.
-Implementation has begun; native runner acceptance and scientific execution are pending.
+The complete runner is implemented and technically accepted after independent review;
+actual-node admission and scientific execution remain pending at this boundary.
 No old frozen invocation is resumed. The current development decision is in
 [DM reentry intake](reentry_20260914/DM_REENTRY_INTAKE.md).
 
@@ -140,9 +141,14 @@ Verification targets the NEW selection boundary, candidate opportunities, fresh
 initialization/optimizer/RNG ownership, stage/address segregation, learner movement,
 real exposure, all retained panels and closed primary. Reuse accepted unchanged
 semantics rather than replaying all historical science. Independent review of the
-completed runner/changed behavior remains to be obtained proportionately before
-its dependent claims; the old independent review does not claim to cover this new object.
+completed runner/changed behavior is recorded in [engineering acceptance](reentry_20260914/ENGINEERING.md).
+The new [scientific design review intake](pro_packets/20260914_lr_selection_design_review/INTAKE.md)
+retains its implementation dependencies and inference limits. Neither review is an
+actual-node admission, launch receipt or native scientific observation.
 
-DM owns implementation, review response, technical acceptance, launch, intake and
-subsequent lifecycle. A Pro review is scientific review, not lifecycle approval;
-no additional Portfolio request is part of this assignment.
+DM owns implementation, review response, technical acceptance, launch and intake.
+Under the later OWNER Portfolio authority correction, direction-level continuation,
+recast, PARK/CLOSE or reopening is reported with full evidence and alternatives to
+Portfolio for final interpretation. Ordinary work on this selected object needs
+no per-experiment approval. Direction Pro remains its independent scientific Reviewer;
+the already-dispatched design question is preserved at its exact earlier input version.
