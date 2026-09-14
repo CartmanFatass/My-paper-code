@@ -109,3 +109,5 @@ Three old512 clustered programmes, longer-C and paired512/1024 evidence informed
 The selected fixed-recipe expectation question is now empirically addressed under its stated qualifications. Full scientific response and the next development/retention judgment remain DM work; Portfolio owns final direction lifecycle. Neither another fit nor PARK is automatically selected by this result.
 
 ![Six unit means and complete training curves](evidence/cluster_fixed_recipe_c01_20260914/RESULT_FIGURE.png)
+
+Native closeout at19:20:29.668364Z is now complete: all84 original files/six local archives were freshly verified, and the exact remote execution worktree, six supervisors and staging copies are absent. [Actual cleanup receipt](evidence/cluster_fixed_recipe_c01_20260914/REMOTE_CLEANUP.json). Local original checkpoints/archives remain; creator-owned rejected test cleanup remains a separate limitation.
