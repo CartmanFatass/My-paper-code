@@ -101,3 +101,53 @@ snapshots confirms identical50757-byte C++ source, SHA256
 executed B12 source commit and summary metadata. The recorded receipt is
 `b12_final1024_s32_20260914/ARCHIVED_SOURCE_IDENTITY.json`. This rules out an
 unreported C++ source patch between those runs, not an unknown runtime fault.
+
+## Full independent review and DM response — completed
+
+DM read every one of the26,234 characters of the full [Convergence response](pro_packets/20260914_b12_scientific_review/archive/RESPONSE.md)
+at immutable delivery `ad6e30953c5fd1f78e3f5da6cdee103769a6bfde`. Exact Git bytes43622,
+SHA256 `4f8e4cb130727897298f1acca05429a19e8e6b4266ffcef3be111c7ebad42b0a`; commit parent
+is the actual prior authoring HEAD8b0928d5c, and only the specified response path changed.
+The provider's163-byte chat receipt is separate. The first acquisition sidecar added
+one terminal LF (43623 bytes); both forms are preserved, the exact Git blob is canonical,
+and Transport's subsequent hash metadata typo was corrected and independently checked.
+No scientific content differed and no new Send occurred. Full request/paired identities,
+actual Issue comment and archive mappings are in TRANSPORT_FACTS.json. The previous
+pending-response section describes the earlier checkpoint; this response is now complete.
+
+Conformance: the reviewer reports reading all18 fixed paths (reusing previously read
+same-blob historical material), with no new computation or unlisted native/checkpoint
+inspection. It found no demonstrated B12 reward, information, actual-likelihood,
+endpoint or primary-pairing defect. Its retained learning/service/recovery/missingness
+claims match the actual E0 and applicable specifications; no lifecycle or funding grant
+was requested or inferred. Limits of its independent checks remain explicit.
+
+| Material point | DM response and actual consequence |
+| --- | --- |
+| B12 learning/reference reading | Accept. Preserve positive own-init learning and nearest gain, negative sampled greedy U/full-Y, all native recovery tradeoffs; no blanket negative or no-harm/equivalence claim. |
+| B11 shared SIG11 risk and missing endpoint | Accept. Two completed endpoints among three attempted scientific invocations; no missing-at-random assumption, runtime repair claim or population CI. Any later concrete fault limits its actual dependencies; no broad compulsory replay or synthetic repetition now. |
+| Actual modal implementation | Accept. New card requires combined-log-probability argmax with smallest-index tie, greedy_anchored=True, exact frozen checkpoint metadata and no re-initialization/optimizer. Existing sampled/no_grad/eval behavior cannot substitute. These are new implementation requirements, not an already implemented capability. |
+| Raw comparator and world coupling | Accept. Pin each original key and EpisodeCoordinate(0,cell,0,i), consume its own greedy rows, run a new complete own trajectory. State-dependent events may differ even under identical exogenous addresses. Source/byte checks support preparation; actual code review still covers reuse before execution. |
+| Conditional, selected-panel inference | Accept. New package, reused seen scenarios, selected completed checkpoints, zero new independent fits. Old+.025 is context only; no imported both-reference success label. U/tau/tau40/Y remain a vector without an invented acceptable-recovery threshold. |
+| Zero-update evidence-class applicability | Accept as a real scoped issue. A permits no algorithm effect and ordinary B explicitly requires nonzero learner/trainer updates; ACVC's exception is not RCLE authority. Prepare the concrete E01 card and bounded shared-spec proposal for Root, holding only its native invocation for that exact resolution. No fake training step, reclassification trick or automatic new owner/Pro approval process. |
+
+### Actual next decision
+
+DM selects preparation of [RCLE_FIXED_MODAL_REUSE_E01](RCLE_FIXED_MODAL_REUSE_E01_SCIENCE_CARD_20260914.md)
+with its exact two retained inputs and two512 modal panels, rather than another unchanged
+sampled fit or immediate PARK. The reviewer supports the question's finite discrimination,
+not the authority to execute it. The strongest contrary case remains that modal may only
+reproduce greedy and not justify loading/development/support costs. This is worth one
+specified conditional comparison because it directly changes whether trained modal
+control is retained; no future positive result is required to justify the present question.
+Owner-delegated decision (2026-09-03/13): prepare E01. No new native invocation has started.
+
+The [specific applicability proposal](fixed_modal_reuse_e01_20260914/SPECIFICATION_SCOPE_PROPOSAL.md)
+contains complete narrow wording, counts, claim limits and source. Root owns resolution
+of this shared-specification issue; DM continues implementation and independent engineering
+review under existing authority. The endpoint/source/inputs will be published before any
+subsequently permitted detached launch. If the actual scope cannot be resolved, DM will
+make an explicit lifecycle/alternative decision rather than wait indefinitely or perform
+extra training merely to satisfy a label. This does not reopen either older recipe HOLD,
+change another direction or turn support600s into a stop. RCLE remains ACTIVE with concrete
+preparation work and a named policy issue, not an empty documentary handoff.
