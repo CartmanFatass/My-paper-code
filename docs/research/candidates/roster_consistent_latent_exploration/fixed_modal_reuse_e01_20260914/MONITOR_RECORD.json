@@ -1,0 +1,20 @@
+{
+  "batch_id": "RCLE_FIXED_MODAL_REUSE_E01",
+  "event_id": "RCLE-FIXED-MODAL-E01-ACCEPTED-20260914",
+  "monitor": "monitor_rcle_modal_e01",
+  "parent_thread_id": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "active_set": [],
+  "handles": [
+    {
+      "handle": "rcle-modal-e01-5c3ab7b07",
+      "node": "wsl_4070",
+      "launch_sha": "5c3ab7b074f185902078452811774e6a8d727a9d",
+      "cwd": "/home/wu/hmasd-worktrees/rcle-modal-e01-5c3ab7b07",
+      "output": "/home/wu/hmasd-worktrees/rcle-modal-e01-5c3ab7b07/temp/directions/roster_consistent_latent_exploration/exp/modal_e01",
+      "status": "finished",
+      "exit_code": 0,
+      "observed_at": "2026-09-14T14:18:33+08:00",
+      "delivery": "delivered"
+    }
+  ]
+}

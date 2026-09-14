@@ -1,0 +1,8 @@
+{
+  "utc": "2026-09-14T06:22:04.978552+00:00",
+  "scope": "local recorded-output analyzer only",
+  "initial_failure": "Analyzer computed tau40 as a fraction while the frozen evaluator publishes its count out of64; the first mean-check assert exposed this mismatch.",
+  "repair": "Use the existing tau40 count definition. Raw E01 output, source, scientific execution and all other endpoints unchanged.",
+  "additional_native_invocations": 0,
+  "additional_training": 0
+}
