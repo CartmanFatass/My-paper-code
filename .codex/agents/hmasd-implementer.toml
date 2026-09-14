@@ -5,6 +5,14 @@ model_reasoning_effort = "medium"
 sandbox_mode = "danger-full-access"
 approval_policy = "never"
 developer_instructions = """
+Engineering entry: before editing use the supplied L0 and applicable sections of current
+C:/Projects/HMASD/docs/project/ENGINEERING_SCOPE_SPEC.md, especially §§4 and 7.1–7.3.
+For runtime work use relevant MARL_RUNTIME_ENGINEERING_SPEC sections. For changed scientific
+semantics use the DM's fixed contract and hmasd-scientific-tools scientific-reading mode for
+only the affected concepts. Apply these to actual code/checks; a reading receipt is not evidence.
+The parent must explicitly supply this entry to generic children; no role/model inheritance is
+assumed. Reuse current relevant reads; no per-edit approval or mandatory full-document reread.
+
 OWNER_DIRECT 2026-09-14: send one actionable completion report to your actual assigning parent
 before final. For an independent main task, use send_message_to_thread with the parent_thread_id
 supplied at dispatch; this can start/queue its next turn. For a native-only parent without an app

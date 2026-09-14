@@ -23,6 +23,46 @@ below using the relevant existing evidence; refresh only the passages that bear 
 For purely mechanical commits, formatting or receipts, do not load scientific textbooks or run
 another lifecycle review. No knowledge-confirmation message or parent approval is required.
 
+## Trigger and source map
+
+Paths below are relative to C:/Projects/HMASD. These are the sources for the actual decision,
+not a demand to reread complete documents at each trigger. Preserve applicable current owner
+instructions; a task-specific stricter scientific contract stays explicit.
+
+| Trigger | Relevant source and application |
+| --- | --- |
+| Direction takeover/resume or role drift | references/role.md, AGENTS.md, DIRECTION.md and latest intake; recover whole-direction objective and actual next action. |
+| New mechanism/object, comparator or estimand | docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md applicable class/comparison sections and §§11.8–11.10; hmasd-scientific-tools scientific-reading maps to docs/rl-marl-foundations-20260907/FOUNDATIONS.md and relevant topic note. State information, learning and inference assumptions. |
+| Results, uncertainty or negative findings | Same evidence spec and foundations §6/topic-notes/04_EMPIRICAL.md; distinguish training realizations from evaluation episodes, finite package evidence from broader direction conclusions, and implications for useful next work. |
+| Scientific review, CONTINUE/PARK/CLOSE/reopen | Direction question, latest full review/evidence and the relevant knowledge above; resolve the review's actual argument and compare the strongest useful next discriminator with stopping. |
+| Code design, direct implementation or Implementer dispatch | docs/project/ENGINEERING_SCOPE_SPEC.md §§4 and 7.1–7.3 plus affected sections; define L0, proportionate implementation and independent review needs. Use applicable evidence-spec §11.8 verification/failure rules. |
+| Runtime plan, admission, cost/timeout or execution repair | docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md relevant path/object appendix and current compute configuration; distinguish planning references from real constraints, without turning routine repair into scientific PARK. |
+| Shared writes, peer handover or vacancy | docs/project/PEER_DM_COORDINATION.md and .codex/hmasd-dm-sessions.toml; coordinate actual shared ownership without a new permission tier. |
+
+## Engineering delegation
+
+DM may implement directly or delegate a complete useful batch to Sol/medium. Choose delegation
+when substantial separable implementation context or parallel work benefits the direction; small
+or tightly coupled edits may remain local. No mandatory child for every code change.
+
+Every implementation assignment, including a generic pre-restart child, supplies the five L0
+facts from ENGINEERING_SCOPE_SPEC §7.1: goal, exact owned paths/checkout and entry points,
+preserved semantics, acceptance with applicable card/spec sections, and bounds/return conditions.
+Explicitly tell Implementer to read .codex/agents/hmasd-implementer.toml duties and the applicable
+ENGINEERING_SCOPE_SPEC sections BEFORE editing. Do not assume fork_turns=none, a model setting
+or role name delivered the parent's knowledge. Include current canonical control revision/path
+when the direction checkout is stale; instructions govern without waiting for a mirror commit.
+
+For reward, information, duration, termination, recurrence, RNG or inference changes, supply the
+relevant scientific contract and focused scientific-reading passage; Implementer preserves those
+semantics and returns scientific ambiguity to DM while doing independent in-scope work. Runtime
+work also carries relevant MARL_RUNTIME_ENGINEERING_SPEC sections. No wholesale textbook load.
+Name actual parent App return route and tell the child other writers exist. Implementer owns
+assigned edits/checks, not science selection, main integration, formal experiment launch or child
+creation. DM reads the returned diff/checks and owns acceptance; independent Reviewer coverage
+follows §7.3 and uses a separate context. Same-batch repairs reuse that child; new batches use
+fresh context under SIBLING_COMMUNICATION.md.
+
 ## Make the scientific judgment
 
 Start with the direction's underlying question and the current uncertainty, not the current
