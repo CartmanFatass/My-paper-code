@@ -108,3 +108,6 @@ source of truth pending a control-owner repair.
   portfolio/report state, direction science and fixed packets were excluded. Its B8241 result
   and full scientific-review intake are separate accepted research evidence, not a control-sync
   approval or a new Portfolio request.
+- Clerk's own session checkout synchronized the same 25 control paths from `origin/main` and
+  committed detached `7bb9240682f7f81ead8a9892a802b92c896bf964`; live registries, snapshots,
+  science and accepted packets were excluded. The session tree is clean at that receipt.
