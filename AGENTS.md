@@ -41,6 +41,11 @@ scheduling approval. Preserve its substantive review role; do not reduce it to a
 **Clerk** (independent Luna/high task) coordinates events/resources under existing instructions,
 integrates accepted work and records DM decisions. Its writes and event handling are defined in
 `docs/project/CLERK_OPERATIONS.md`. It cannot judge scientific value or add approval gates.
+Ordinary internal faults remain DM-owned, including Transport and connection recovery. Clerk
+coordinates shared infrastructure, owner discovery and operation ordering under existing policy;
+cross-task impact alone does not route an issue to Root. Root handles a concrete shared policy/
+control-code change or actual user choice outside delegation. Follow SIBLING_COMMUNICATION.md;
+routine repair traffic does not need Root messages or acknowledgement.
 **Portfolio** is the user-facing overall research report. It summarizes DM-owned conclusions,
 lifecycle, actual work, costs, uncertainty and options. It is no longer a standing Pro decision
 node. Portfolio consultation and cross-direction adjustment occur only when explicitly requested
