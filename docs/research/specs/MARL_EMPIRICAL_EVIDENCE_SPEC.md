@@ -660,11 +660,13 @@ On cost refusal, reconsider the chosen question and necessary evidence as well a
 Moving a prohibited B prerequisite into a preceding A does not make it permissible.
 
 Direction Pro provides independent scientific review. The DM preserves the complete response,
-answers material findings and owns corrections, claim limits and the final direction decision.
-Concrete unresolved scientific issues can receive focused review follow-up; this is not an approval
-or lifecycle veto. Portfolio advice/reporting authorizes no global change without an explicit owner
-instruction. Specification requirements cannot be silently waived by reviewer or DM; identify any
-needed change, necessity and accountable owner. Independent work continues without a blanket gate.
+answers material findings and owns corrections, claim limits, ordinary research execution and
+reports. Under §8.1 and PORTFOLIO_DECISION_PROTOCOL.md, Portfolio supplies final direction-level
+interpretation and decisions within current owner/spec constraints; DM applies a complete conforming
+decision without Root ratification. Concrete unresolved scientific issues can receive focused review
+follow-up; direction review is not a lifecycle veto or per-experiment approval. Specification
+requirements cannot be silently waived by reviewer, DM or Portfolio; identify any needed change,
+necessity and applicable authority. Independent authorized work continues without a blanket gate.
 
 This owner-directed clarification changes future authoring and current decision intake; it does
 not rewrite accepted request bodies, historical results or completed experiment assignments.

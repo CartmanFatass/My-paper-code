@@ -75,6 +75,20 @@ unrecoverable coverage gaps to the affected author DM; no routine Root escalatio
    No routine messages to Root. Author reads full answer and owns scientific intake. Archive-only
    work never authorizes a new scientific request.
 
+### Archive bytes and receipt accuracy
+
+Compute byte count and SHA256 from the exact saved binary content. For a GitHub file, identify
+the immutable commit/path and obtain raw bytes or decoded Git blob bytes; do not hash a tool's
+rendered text/JSON representation and label it original file bytes. Do not strip trailing newline,
+normalize line endings, re-encode or otherwise transform before computing the original digest.
+If only extracted text is available, label its provenance and representation explicitly; do not
+claim byte identity with the source until verified. Compare archive/source digests on the same
+representation. A text display omitting a final newline does not establish that the source lacks it.
+
+A receipt metadata error with a complete verified archive is repaired by a factual addendum citing
+the original receipt and actual source/archive byte evidence. Preserve the original receipt and
+accepted answer; this correction does not authorize another Send or rewriting the scientific text.
+
 ## Recovery and handover
 
 DM takes over a difficult browser/tool fault locally, updates the workflow if needed, and returns
