@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "E01只改变执行法则，未改变先验在训练中的固定强度；具体学习问题仍可能改变开发选择。",
   "evidence": [
     "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REPORT.md",
@@ -67,5 +67,15 @@
     "verdict_text": "DM 建议 **CONTINUE：用一个有限的新 B 检验可学习先验强度**，提交 Portfolio 作最终方向判断。",
     "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REPORT.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-14T08:54:48+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/archive/RESPONSE.md",
+      "record": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/INTAKE.md",
+      "state": "applied",
+      "summary": "已全文读取并应用Portfolio的CONTINUE裁决；选择原B13有限真实学习比较，保留本席位及历史反证；实际启动、准入与结果另记。"
+    }
+  ]
 }

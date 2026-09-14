@@ -1,13 +1,19 @@
 Claim under study: a genuinely learned prior-strength/scorer package may supply finite native service beyond fixed greedy, with its recovery consequences retained.
 Binding MARL structure: public quota-phase coordination through actual physical roster changes under unchanged legal information.
 
-# Proposed B13 — learnable prior strength
+# B13 — learnable prior strength
 
-Status: engineering preparation selected while the RCLE direction decision is pending
-Portfolio; **no B13 native invocation selected or launched**. This makes the recommendation
-concrete without a unilateral direction disposition. DM prospectively advances reversible
-implementation preparation beyond the earlier report's after-decision ordering. The actual
-Portfolio decision and any resulting amendment will be recorded before native execution.
+Status: **complete after full Portfolio CONTINUE and actual execution** on2026-09-14.
+The unchanged selected source completed once; actual counts, costs and results are in
+RCLE_B13_LEARNED_PRIOR_RESULT_EVIDENCE_20260914.md and RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md.
+The remaining prospective language below is the frozen plan, not a current run-status claim.
+At the earlier application no B13 invocation had launched. Complete decision/response is
+pro_packets/20260914_e01_portfolio_direction/INTAKE.md. The exact scientific proposal is
+unchanged. Earlier reversible preparation occurred while the direction verdict was pending;
+that ordering and the zero-exposure state are preserved in Git and engineering records.
+Selected launch sourcecf4d9bd93ff9eb255800223d95de170b68315ba6 has the accepted91811c61
+policy/study/runner bytes; exact command, source verification and predictions are in
+b13_learned_prior_20260914/. One native invocation follows actual fresh admission.
 
 ## Scientific object and why it matters
 
@@ -88,4 +94,7 @@ retry, endpoint extension, second fit, new paid capacity or other-direction reso
 Preparation accepted2026-09-14 after24 focused checks and independent Sol/high complete-path
 review with no material finding. Exact source91811c61cff2617f0b691c793dd40a7df76c5bdb and
 full review/DM acceptance are in b13_learned_prior_20260914/{CODE_REVIEW.md,ENGINEERING.md}.
-Native invocation and direction decision remain pending; no scientific exposure is claimed.
+The full Portfolio decision now selects this unchanged object; no scientific exposure is
+claimed at application. Command and retained-byte analysis at2d543279 also received a
+complete independent no-finding review, with DM acceptance and remote source preparation
+recorded in the same engineering directory. New actual launch/result facts will be separate.

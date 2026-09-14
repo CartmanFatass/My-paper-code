@@ -1,0 +1,7 @@
+{
+  "exit_code": 0,
+  "stdout": "{\"task\": \"rcle-b13-s33-cf4d9bd93\", \"status\": \"not_found\"}\n",
+  "stderr": "",
+  "enclosing_wall_s": 0.625,
+  "time_utc": "2026-09-14T09:01:23.763885+00:00"
+}
