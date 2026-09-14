@@ -1,0 +1,12 @@
+{
+  "submitted_at_utc": "2026-09-14T02:14:34.509584+00:00",
+  "binding_commit": "2d8badfe6c77bdd35304b62f9c0b84c7b0d931cb",
+  "source_sha": "3a749256d2aaf16345308827518283c8d2b91ad7",
+  "handle": "dish-b09-s149-3a749256-20260914-submit02",
+  "ssh_exit_code": 0,
+  "stdout": "Task 'dish-b09-s149-3a749256-20260914-submit02' started in tmux session 'agent_dish-b09-s149-3a749256-20260914-submit02'. Output: /home/wu/.agent-tasks/dish-b09-s149-3a749256-20260914-submit02/task.log\n",
+  "stderr": "",
+  "submission_wall_seconds": 0.5688454000046477,
+  "supervisor_accepted": true,
+  "remote_command": "/usr/local/bin/agent-task run dish-b09-s149-3a749256-20260914-submit02 'cd /home/wu/hmasd-worktrees/dish-b09-3a749256 && export PYTHONPATH=\"$PWD\" PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 MAX_JOBS=1 && mkdir -p temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01 && /usr/bin/time -f '\"'\"'preflight_wall_seconds=%e'\"'\"' -o temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/preflight_wall.txt /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/memory.json && /usr/bin/time -f '\"'\"'runner_wall_seconds=%e'\"'\"' -o temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/runner_wall.txt /home/wu/.venvs/hmasd/bin/python scripts/run_dish_receipt_bypass_b09.py --seed 149 --output temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01 --launch-sha 3a749256d2aaf16345308827518283c8d2b91ad7 --prior-shared-seconds 180'"
+}

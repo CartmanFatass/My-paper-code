@@ -20,9 +20,12 @@ communication necessity or post-CAS source value. The strongest contrary expecta
 discarding useful forecast information. DM predicts a negative BYPASS-minus-REPLACE sign
 with low confidence; no outcome exists yet. [B09 frozen card](DISH_RECEIPT_BYPASS_B09_SCIENCE_CARD_20260914.md)
 sets the new finite exposure/2700s complete machine-work plan and engineering acceptance.
-The current producer is DM implementation/self-check plus independent high-risk review;
-no B09 experiment has been launched at this selection boundary. Priority, recasts and
-UAV-entry state are unchanged. Review `eaed5cb6c` is evidence, not a spending grant.
+Source and independent technical review are accepted. The B09 pair is running remotely
+under handle `dish-b09-s149-3a749256-20260914-submit02`, source `3a749256d`, with native
+Monitor `/root/mon_ll_dish_b09` adopted. The first wrapper failed before scientific execution
+and is preserved; the corrected submission passed fresh admission. DM owns collection,
+intake and the next lifecycle decision. Priority, recasts and UAV-entry state are unchanged.
+Review `eaed5cb6c` is evidence, not a spending grant.
 
 ## Tested arrival-bridge retention family parked — 2026-09-10
 

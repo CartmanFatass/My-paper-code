@@ -195,3 +195,22 @@ the accepted failed effect, its cost and verified non-execution. DM selects one 
 submission through [EXECUTION_PLAN_SUBMIT02.json](evidence/b09_seed149_20260914/EXECUTION_PLAN_SUBMIT02.json),
 a new supervisor handle and the same scientific/source/output/accounting bindings.
 This is the first scientific execution if admitted; no additional exposure is authorized.
+
+
+### Accepted scientific launch
+
+Corrected handle `dish-b09-s149-3a749256-20260914-submit02` was accepted at
+2026-09-14T02:14:34.509584Z after binding commit `2d8badfe6c77bdd35304b62f9c0b84c7b0d931cb`
+was pushed. Exact scientific source remains `3a749256d2aaf16345308827518283c8d2b91ad7`.
+[Actual submission](evidence/b09_seed149_20260914/launch_receipt_submit02.json) and
+[admission/wrapper readback](evidence/b09_seed149_20260914/admission_submit02.json) confirm
+the intended single-shell command, fresh admission passing at15,634,288,640 available
+physical/effective bytes versus4,294,967,296 floor, then creation of the scientific root.
+Preflight wall0.04s is already inside the conservative prior support charge.
+
+Batch Monitor `/root/mon_ll_dish_b09` delivered MONITOR_ADOPTED directly to this DM at
+2026-09-14T02:14:35Z: running, pid3434447, tmux active, exact accepted handle. Its owned
+`evidence/b09_seed149_20260914/monitor_submit02.json` records bounded observation and
+terminal facts; the old failed monitor record stays intact. DM stops routine polling.
+No result is claimed at this boundary. DM collects and checks the full terminal artifact,
+applies the frozen all-outcome interpretation, and makes the next useful lifecycle choice.
