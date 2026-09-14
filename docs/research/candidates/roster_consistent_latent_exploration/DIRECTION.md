@@ -29,11 +29,14 @@ allocation or support timeout automatically releasing it. No general learning im
 permanent CLOSE or other-direction adjustment follows. Both narrow recipe HOLDs remain.
 
 Independent scientific Convergence review of B10 design, evidence, interpretation and next-plan
-reasoning remains genuine closeout work. DM resolves material findings and owns the final
-direction decision; no Pro/Portfolio lifecycle approval is requested. Reopen for a concrete
+reasoning is complete at0366a47e6 and fully answered in the B10 intake. No invalidating defect was
+found; DM clarified imported starting capability versus learning and accepts the opportunity cost
+of not measuring another fresh1024 fit. Scientific discrimination remains real; current PARK is
+a qualitative value judgment, not population inferiority or a claim that repetition is useless.
+Mapped cleanup is complete. DM owns this disposition; no Pro/Portfolio lifecycle approval is requested. Reopen for a concrete
 defensible use/method discriminator or material review finding, with finite cost and comparator
 meaning stated. No positive-result/customer/headroom prerequisite is imposed. Clerk records this
-PARKED decision and actual closeout work; no automatic vacancy replacement is authorized.
+PARKED decision and completed closeout; no pending producer or automatic vacancy replacement remains.
 
 ## B10 preparation decision — historical immediate predecessor
 
