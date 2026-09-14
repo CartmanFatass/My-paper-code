@@ -96,6 +96,17 @@ legacy_state = "retired_paused"
 authoring_checkout = "C:/Projects/HMASD-worktrees/codex-vap-folr"
 authoring_branch = "codex/vap-folr"
 
+[directions.learned_counterfactual_agent_credit]
+state = "setup_pending"
+occupies_slot = true
+reserved_by = "portfolio-single-slot-20260914"
+owner_mode = "independent_task"
+accepted_event = "portfolio-lcac-single-slot-selection-20260914"
+last_processed_event = "portfolio-lcac-create-thread-pending-20260914"
+next_action = "reconcile pending clientThreadId and register actual threadId/host; then verify first concrete DM action"
+pending_client_thread_id = "client-new-thread:80a5b9ef-0afc-41ff-a5e7-32278cb8d3e3"
+host_id = "local"
+
 [portfolio]
 role = "report_and_vacancy_selection"
 consultation_trigger = "vacancy_below_four_or_explicit_owner_request"
@@ -103,7 +114,7 @@ automatic_replacement = true
 binding_key = "portfolio:cross_direction"
 transport_config = "C:/Projects/HMASD/.codex/hmasd-transport.toml"
 new_request_coordinator = "clerk"
-planning_state = "three_vacancies_two_replacements_pending_setup"
-reserved_slots = 2
+planning_state = "three_replacements_pending_setup"
+reserved_slots = 3
 request_status_commit = "fa1922c37"
 legacy_accepted_routes = "preserve_through_closeout"
