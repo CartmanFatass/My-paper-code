@@ -1,0 +1,197 @@
+{
+  "checked_at": "2026-09-14T07:16:32.365716+00:00",
+  "source_access_limit": "Published Git objects verified locally; Portfolio actual access is not yet established.",
+  "references": [
+    {
+      "id": "authority",
+      "sha": "4b23f943691a09a93a9e0cfb9c0a003e995624a5",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "id": "agents",
+      "sha": "4b23f943691a09a93a9e0cfb9c0a003e995624a5",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "id": "peers",
+      "sha": "4b23f943691a09a93a9e0cfb9c0a003e995624a5",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "id": "registry",
+      "sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "id": "portfolio_report",
+      "sha": "4b23f943691a09a93a9e0cfb9c0a003e995624a5",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "id": "mgtap_direction",
+      "sha": "3594eafe28ed91b2558fcc064e46ea714edd2e1c",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/mgtap"
+      ]
+    },
+    {
+      "id": "mgtap_intake",
+      "sha": "3594eafe28ed91b2558fcc064e46ea714edd2e1c",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/mgtap"
+      ]
+    },
+    {
+      "id": "mgtap_card",
+      "sha": "3594eafe28ed91b2558fcc064e46ea714edd2e1c",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/mgtap"
+      ]
+    },
+    {
+      "id": "folr_intake",
+      "sha": "fb38cbfadd69f578672f6918ebc2824338919040",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/vap-folr"
+      ]
+    },
+    {
+      "id": "folr_card",
+      "sha": "fb38cbfadd69f578672f6918ebc2824338919040",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/vap-folr"
+      ]
+    },
+    {
+      "id": "rcle_direction",
+      "sha": "6f13c2b2fa713414e777190b7bcfbec11243b61a",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "id": "e01_intake",
+      "sha": "6f13c2b2fa713414e777190b7bcfbec11243b61a",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "id": "e01_evidence",
+      "sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "id": "e01_review",
+      "sha": "93bb8ffcd4de430a722bbb6b84e9733f40d26782",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "id": "b12_intake",
+      "sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "id": "sampled_comparison",
+      "sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "id": "b11_failure",
+      "sha": "6f13c2b2fa713414e777190b7bcfbec11243b61a",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "id": "prior_original_prompt",
+      "sha": "6f13c2b2fa713414e777190b7bcfbec11243b61a",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "id": "prior_original_response",
+      "sha": "6f13c2b2fa713414e777190b7bcfbec11243b61a",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "id": "prior_dm_response_as_sent",
+      "sha": "6f13c2b2fa713414e777190b7bcfbec11243b61a",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "id": "prior_acknowledgement",
+      "sha": "6f13c2b2fa713414e777190b7bcfbec11243b61a",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "id": "empirical",
+      "sha": "4b23f943691a09a93a9e0cfb9c0a003e995624a5",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "id": "foundations",
+      "sha": "be8ad6604041bd3e68767b7f51bdf412078b8260",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "id": "empirical_topic",
+      "sha": "be8ad6604041bd3e68767b7f51bdf412078b8260",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "id": "runtime",
+      "sha": "4b23f943691a09a93a9e0cfb9c0a003e995624a5",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "id": "policy",
+      "sha": "5c3ab7b074f185902078452811774e6a8d727a9d",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    }
+  ]
+}
