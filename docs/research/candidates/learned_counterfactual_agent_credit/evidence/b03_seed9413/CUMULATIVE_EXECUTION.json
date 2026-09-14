@@ -1,0 +1,72 @@
+{
+  "objects": [
+    {
+      "object": "LCAC_B01_256",
+      "seed": 9411,
+      "launch_sha": "133218a8e08c29e833b4d549ffd48f00b204bf2e",
+      "train_endpoint": 256,
+      "delta": -0.0036264284161591363,
+      "wall_seconds": 129.8,
+      "peak_rss_kib": 569916,
+      "counts": {
+        "train_episodes": 512,
+        "eval_episodes": 64,
+        "native_transitions": 147456,
+        "action_draws": 737280,
+        "optimizer_steps": 1024,
+        "q_baseline_rows": 2293760,
+        "critic_fit_rows": 524288
+      }
+    },
+    {
+      "object": "LCAC_B02_1024",
+      "seed": 9412,
+      "launch_sha": "25ea4d61c0e1f2484da77f4bc1851e17cdc8eb4a",
+      "train_endpoint": 1024,
+      "delta": 0.002222628211804524,
+      "wall_seconds": 443.91,
+      "peak_rss_kib": 570212,
+      "counts": {
+        "train_episodes": 2048,
+        "eval_episodes": 64,
+        "native_transitions": 540672,
+        "action_draws": 2703360,
+        "optimizer_steps": 4096,
+        "q_baseline_rows": 9175040,
+        "critic_fit_rows": 2097152
+      }
+    },
+    {
+      "object": "LCAC_B03_1024",
+      "seed": 9413,
+      "launch_sha": "81fec5e1b3a2cee810029f0cd30713a0ea64fce3",
+      "train_endpoint": 1024,
+      "delta": -0.01780440933504144,
+      "wall_seconds": 498.62,
+      "peak_rss_kib": 573156,
+      "counts": {
+        "train_episodes": 2048,
+        "eval_episodes": 64,
+        "native_transitions": 540672,
+        "action_draws": 2703360,
+        "optimizer_steps": 4096,
+        "q_baseline_rows": 9175040,
+        "critic_fit_rows": 2097152
+      }
+    }
+  ],
+  "counts": {
+    "train_episodes": 4608,
+    "eval_episodes": 192,
+    "native_transitions": 1228800,
+    "action_draws": 6144000,
+    "optimizer_steps": 9216,
+    "q_baseline_rows": 20643840,
+    "critic_fit_rows": 4718592
+  },
+  "whole_runner_wall_sum_seconds": "1072.33",
+  "maximum_single_process_peak_rss_kib": 573156,
+  "scope": "sum of3disjoint complete runner processes; not study elapsed/aggregate CPU/lifetime",
+  "cpu_seconds": null,
+  "complete_support_provider_lifetime": "UNKNOWN"
+}
