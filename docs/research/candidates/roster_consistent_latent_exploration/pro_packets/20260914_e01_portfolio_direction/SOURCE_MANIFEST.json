@@ -211,6 +211,22 @@
       "url": "https://github.com/CartmanFatass/My-paper-code/blob/5c3ab7b074f185902078452811774e6a8d727a9d/experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/policy.py",
       "read_scope": "Read-only phase_log_probabilities/initialization/adam_update and feature interface.",
       "provenance": "Exact historical q/scorer/full-Y learning law grounds proposal; no checkpoint-margin measurement or code execution required."
+    },
+    {
+      "id": "score_scale_plan",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/RETAINED_SCORE_SCALE.md",
+      "commit_sha": "094d1ff2a3e5f984d62e00dae782cda31a11be52",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/094d1ff2a3e5f984d62e00dae782cda31a11be52/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/RETAINED_SCORE_SCALE.md",
+      "read_scope": "Complete finite read-only plan, inconclusive recorded result and inference limits.",
+      "provenance": "One short A/RECON; does not establish insufficient head range, actual score margins, prior causation or native equivalence."
+    },
+    {
+      "id": "score_scale",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/SCORE_SCALE.json",
+      "commit_sha": "094d1ff2a3e5f984d62e00dae782cda31a11be52",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/094d1ff2a3e5f984d62e00dae782cda31a11be52/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/SCORE_SCALE.json",
+      "read_scope": "Complete two-checkpoint head-weight sums/ideal-range arithmetic and zero-exposure record.",
+      "provenance": "One short A/RECON; does not establish insufficient head range, actual score margins, prior causation or native equivalence."
     }
   ]
 }
