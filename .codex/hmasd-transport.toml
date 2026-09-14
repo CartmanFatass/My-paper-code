@@ -1,13 +1,19 @@
 schema_version = 1
-mode = "dm_native"
+mode = "singleton"
+# Independent browser Transport; direct receipts to each assigning DM/Clerk.
 status = "active"
-backend = "agentify"
+thread_id = "01a09ea0-4a86-75b0-826d-6f864efa7480"
+host_id = "local"
+project_id = "177ab8d8-53ae-448c-9a9e-aaa2fecd2498"
+operational_checkout = "C:/Projects/HMASD"
+task_title = "HMASD Browser Transport"
+backend = "codex_iab"
 registry_path = "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/registry.json"
 environment = "local"
 model = "gpt-5.6-luna"
 reasoning_effort = "high"
 
-# Native task identities are request-bound, never global endpoints.
+# Request identities remain distinct from the shared executor.
 [provider]
 model = "GPT-6 Astra"
 mode = "Pro"

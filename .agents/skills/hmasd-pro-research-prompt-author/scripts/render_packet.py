@@ -494,7 +494,7 @@ def validate(data: dict, project_root: Path) -> dict:
         "reset_invalid_provider_context": reset_invalid_provider_context,
         "provider_context_reset_evidence": provider_context_reset_evidence,
         "decision_authority": (
-            "owner_requested_advice" if role == "portfolio" else "dm_owned_scientific_review"
+            "portfolio_final_direction_interpretation" if role == "portfolio" else "dm_owned_scientific_review"
         ),
         "repository": repository,
         "repository_url": repository_url,
@@ -600,7 +600,7 @@ failed, reuse the file and check existing comments before completing the notific
 {GITHUB_DELIVERY_MARKDOWN_FALLBACK}
 Return actual file/commit/comment links when confirmed. Otherwise return the downloadable
 Markdown document and the precise GitHub gap. The committed or downloaded Markdown file
-contains the complete review or requested advice; a short chat summary does not substitute for it.
+contains the complete review or Portfolio decision; a short chat summary does not substitute for it.
 """
     body_path.unlink()  # this invocation just generated it; TASK is the sole new body
     (out_dir / "TASK.md").write_text(body, encoding="utf-8", newline="\n")
@@ -672,7 +672,7 @@ def _node_decision_contract(workflow_node: str) -> str:
         return (
             "Assess candidate scientific objects, mechanisms and decision-relevant discriminators. "
             "Give reasoned scientific recommendations, falsifiers, evidence requirements and claim "
-            "ceilings. The DM owns the direction decision; this review grants no execution authority."
+            "ceilings. The DM owns ordinary research execution and reports; Portfolio owns final direction-level interpretation. This review is not a lifecycle decision."
         )
     if workflow_node == "em_convergence":
         return (
@@ -680,14 +680,23 @@ def _node_decision_contract(workflow_node: str) -> str:
             "design, comparison integrity, evidence interpretation, conclusions and successor plans. "
             "Identify material findings, strongest contrary evidence, residual uncertainty and "
             "proportionate corrections or claim limits. The DM must respond to material findings. "
-            "The DM retains the direction decision and lifecycle; this review is not funding, "
+            "The DM owns ordinary research execution and reports; Portfolio owns final direction-level interpretation. This review is not funding, "
             "lifecycle or scheduling approval."
         )
     return (
-        "Provide the report or cross-direction advice covered by the explicit owner request. "
-        "Compare evidence-bounded options, costs and uncertainties. Recommendations do not authorize "
-        "execution or automatic replacement; global adjustments remain within the owner's express "
-        "implementation instruction, while DMs own their direction lifecycles."
+        "Act as Portfolio, the global scientific synthesizer and final direction-level interpreter "
+        "under PORTFOLIO_DECISION_PROTOCOL.md and current owner/spec constraints. The DM owns "
+        "innovation, ordinary experiments, implementation and reports. Read the fixed repository "
+        "sources and specified sections in the evidence manifest: current authority, global state, "
+        "affected direction evidence, contrary results, complete review and DM response, applicable "
+        "specifications and focused foundations. Do not assume local session memory or filesystem "
+        "access. Identify material sources actually accessed and decision-critical gaps; request "
+        "missing exact contents rather than inventing access or parking for a transport gap. "
+        "Explain the hypothesis update, strongest feasible alternative and opportunity cost, then "
+        "decide the bound CONTINUE, RECAST, PARK, CLOSE or reopening question with rationale, "
+        "scope, claim ceiling, next DM objective and actual resource conditions. A complete "
+        "conforming decision is applied without Root ratification; ordinary experiments require "
+        "no per-experiment Portfolio approval. Do not infer universal failure from local negatives."
     )
 
 
@@ -758,9 +767,10 @@ uncertainties, and recommendations. Preserve the finite claim ceiling above.
 
 {node_contract}
 
-Your complete response supplies independent scientific review or owner-requested advice;
-it does not transfer DM lifecycle authority or create global execution authority. Respect current
-owner instructions and applicable specifications; completeness does not authorize an exception. If
+Your complete response follows the node-specific authority above: direction nodes provide
+independent scientific review; Portfolio decides the bound direction-level question. DM owns
+ordinary execution and applies conforming Portfolio decisions without Root ratification. Respect
+current owner instructions and applicable specifications; completeness does not authorize an exception. If
 connector access or evidence is insufficient, explain the exact gap and state
 which review conclusions remain unsupported; do not manufacture evidence or an approval.
 
