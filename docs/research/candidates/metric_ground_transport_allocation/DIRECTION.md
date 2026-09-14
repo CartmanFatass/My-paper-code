@@ -11,8 +11,11 @@ programme and one final training pair, not stable superiority or causal tuning g
 
 The [complete new intake](MGTAP_LR_SELECTION_B01_INTAKE_20260914.md) retains all signed
 prior evidence, inference/cost limits and the strongest PARK alternative. DM accepts the
-bounded observation and prepares actual-results/next-question independent scientific
-review. The leading next option is a fixed-selected-LR recurrence, not automatic grid
+bounded observation and has read the complete actual-results scientific review at
+68144bc0123397fbdc5184fcc4e86055c05c20d8; its [DM intake](pro_packets/20260914_lr_selection_results_review/INTAKE.md)
+records no result-changing finding and the substantive recurrence-versus-PARK comparison.
+DM now prepares the full Portfolio direction report. The leading next option is a
+fixed-selected-LR recurrence, not automatic grid
 extension or a new launch. Portfolio owns the final direction-level interpretation;
 MGTAP remains occupied under its existing continuation, with DENSE generic default unchanged.
 

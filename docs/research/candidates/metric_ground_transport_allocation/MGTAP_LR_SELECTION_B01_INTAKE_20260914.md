@@ -181,3 +181,19 @@ are at the edge. PARK remains the cheaper alternative if the best feasible next 
 does not merit further development effort. Independent review should challenge this actual
 tradeoff, not grant lifecycle/resource permission. A full signed report and recommendation
 then go to Portfolio for its conforming direction-level decision under the current protocol.
+
+## Independent actual-results review received
+
+DM has read the complete166-line response at68144bc0123397fbdc5184fcc4e86055c05c20d8
+and recorded its substantive [intake](pro_packets/20260914_lr_selection_results_review/INTAKE.md).
+No material defect requires changing the local primary or its COND_ABOVE_MEI reading.
+The review favors the specific fixed-selected-rate recurrence over a new selection
+programme or PARK, as scientific advice only. DM accepts that recommendation for
+the direction report, not as an applied lifecycle/launch decision.
+
+One contrary observation is now explicit: at the selected slow rate, validation
+means favor DENSE0.1687065165636938 over COND0.16492958901611127, whereas fresh8252
+favors COND. Different fitted policies/panels permit that reversal; the selection-
+used candidate is not a second favorable independent replication. Any future fixed-
+rate pair is adaptively proposed after8252, not an originally frozen two-pair study.
+All earlier evidence, the native source/endpoint and current generic default remain.
