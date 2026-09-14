@@ -31,6 +31,7 @@ class Harness:
     def __init__(self, root, fail_at=None):
         self.root, self.fail_at = Path(root), fail_at
         self.factory_calls, self.invocations, self.model_ids = [], [], []
+        self.live_models = []  # Retain fixtures so Python cannot recycle id() across fits.
 
     def factory(self, master):
         if master == protocol.HOLDOUT_MASTER:
@@ -41,8 +42,10 @@ class Harness:
             assert study.hashlib.sha256(body).hexdigest() == digest
         serial = len(self.factory_calls)
         self.factory_calls.append(master)
-        return {arm: (FakeModel(serial * 10 + i), FakeModel(serial * 10 + i + 2))
+        pair = {arm: (FakeModel(serial * 10 + i), FakeModel(serial * 10 + i + 2))
                 for i, arm in enumerate(protocol.ARMS)}
+        self.live_models.extend(model for models in pair.values() for model in models)
+        return pair
 
     def fit(self, *, stage, master, lr_key, arm, models, output, emit_episode,
             emit_rollout, study_start, clock):
