@@ -25,8 +25,13 @@ to assess fixed F's further development value on a new learned proposer. The
 [B03 science card](ACVC_CLUSTER_DEPLOYMENT_B03_SCIENCE_CARD_20260914.md) selects one
 unscreened new C fit, master21937/eval31937, with 512 training episodes/1024 updates and
 three64-world private C/F/own-dwell final panels. B/EXPLORE; C is an arm label.
-New object protocol/runner/launch and focused tests are implemented; exact acceptance and
-execution facts will be recorded at the actual launch/result boundary.
+Native B03 is complete and technically accepted: one original invocation at source
+`091c6725b149cd2dfa9665408cabee17b8f958e3`,163.36s/0.523GiB, both separate primaries UP
+(F−C+.1436987981J, F−dwell+.1178477937J; adverse6/64 and5/64). All rows/updates checked.
+[Full result](ACVC_CLUSTER_DEPLOYMENT_B03_RESULT_EVIDENCE_20260914.md) and
+[intake and next-question alternatives](ACVC_CLUSTER_DEPLOYMENT_B03_INTAKE_20260914.md) retain
+absolute comparator scores, tails and private intervention differences. Independent scientific
+result/plan review is being prepared; no scientific successor is selected or launched.
 
 Earlier [PARK knowledge](PARK.md), [reentry judgment](ACVC_REENTRY_INTAKE_20260914.md)
 and [B02 full-review response](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md)
