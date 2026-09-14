@@ -1,6 +1,6 @@
 {
   "object": "FOLR_ENTITY_HISTORY_B03_781501",
-  "phase": "BOTH_COLLECTED_ANALYSIS",
+  "phase": "COMPLETE_SCIENTIFIC_REVIEW_AUTHORING",
   "planned_at_utc": "2026-09-14T08:16:51.805742+00:00",
   "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
   "portfolio_decision_sha": "4776103de4f55beaee610c52506112651bfaed04",
@@ -221,7 +221,7 @@
       "LAUNCH_ASSET_PREPARATION.json"
     ]
   },
-  "next_action": "Both selected invocations complete and collected; DM computes frozen rule/uncertainty/costs, writes scientific intake and one independent result-and-next-plan review. No active native handle or further empirical invocation selected.",
+  "next_action": "Publish complete result/intake and one fixed Convergence result-and-proposal request; archive full answer, respond to findings, then Portfolio substantive direction report. Terminal remote copies may be reclaimed after verified published preservation. No new empirical object selected.",
   "monitor_transfer": {
     "reason": "Initial observer finalized three turns with a nonempty running handle set, despite required until-terminal observation. This was execution noncompliance, not a scientific termination or missing rule.",
     "previous_native": "/root/folr_b03_monitor",
@@ -256,5 +256,12 @@
     "admission": "Create new output directory, then committed launcher performs fresh adjacent physical/effective >=4GiB admission. No current BANK admission claimed.",
     "monitor": "Reuse /root/folr_b03_monitor_recovery in the same B03 batch with an awaited until-terminal observation loop.",
     "no_score_gate": true
+  },
+  "result": {
+    "bank_minus_generic": -6.63671875,
+    "rule": "GENERIC_ABOVE_MEI",
+    "result_evidence": "../FOLR_ENTITY_HISTORY_B03_RESULT_EVIDENCE_20260914.md",
+    "dm_intake": "../FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md",
+    "native_wall_sum_seconds": 3779.85
   }
 }

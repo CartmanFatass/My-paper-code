@@ -56,16 +56,19 @@ It tests the intact package, not necessity or a particular component's causal ef
 The full [B02 independent review](pro_packets/20260914_entity_history_b02_review/INTAKE.md)
 challenged the stopping inference; the correction now answers it through selected work.
 
-B03 implementation at source b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f is technically
-accepted after independent review and nine focused remote tests; the initial fixture
-setup failure remains recorded. [B03 execution](entity_history_b03_781501/EXECUTION.json)
-records Generic complete and technically accepted at5000/4969/128, with original
-summary, checkpoint and supervisor archive preserved. Its final mean4.9259375 is
-one fitted policy's conditional observation. The selected BANK invocation actually
-started at2026-09-14 09:08:30 UTC, PID3669107, after fresh physical/effective memory
-admission. No complete B03 pair result exists yet. The same recovered native batch
-Monitor is assigned BANK; actual adoption and terminal evidence are recorded in
-EXECUTION.json. The existing third-slot reservation becomes FOLR occupancy, with the
+B03 at source b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f is now complete and
+technically accepted for both arms. [B03 result](FOLR_ENTITY_HISTORY_B03_RESULT_EVIDENCE_20260914.md):
+Generic4.9259375, BANK-1.71078125, d=-6.63671875, GENERIC_ABOVE_MEI. Both arms
+completed5000/4969/128; summed native wall3779.85s. B02 and B03 are two separate
+whole-learning-and-evaluation realizations, with no pooled population ranking.
+All original outputs/checkpoints/logs and operational failures are preserved.
+No active native producer or additional fit remains selected. [DM intake](FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md)
+favors reviewing a bounded proposal that preserves generic recurrence in both arms
+while testing persistent versus current-only entity state. It is unimplemented and
+not yet selected; stopping, longer learning and a changed host remain real alternatives.
+One independent result/plan review is being authored; DM response and a substantive
+Portfolio direction report follow. Current ACTIVE/MEDIUM remains; no automatic PARK.
+FOLR continues to occupy the existing third slot, with the
 same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
 Full support/provider cost remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves
 the previous decisions as history, not current lifecycle or dispatch instructions.
