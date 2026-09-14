@@ -173,3 +173,9 @@ actual provider-effect reconciliation before possible Send. This is control
 recovery, not another consultation or permission request. The current owner
 pause still permits this result review and prohibits successor work. Final
 handoff remains pending full review and substantive DM response.
+
+Same review recovery succeeded: the original request was adopted20:46:00.3985413Z
+and accepted20:46:33.9318003Z as user7ee820c2-d2d1-495c-af8e-eeb77dab4c19,
+one Send/manual0, with1937-byte exact prompt. DM compared the actual queue digest
+to the unchanged HANDOFF. The registered Transport is actively observing;
+full scientific response remains pending. No second consultation or native work.
