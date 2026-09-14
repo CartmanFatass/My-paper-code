@@ -1,0 +1,26 @@
+{
+  "source_commit": "fcd806cb2b1f99158540d8f7d1123a9df249b214",
+  "response_bytes": 13756,
+  "response_sha256": "3bf2b5bf96bfb07f1fc9ccbfb80c432be73910883d612cddd2ffb29d8d21794a",
+  "line_count": 71,
+  "trailing_lf": true,
+  "changed_scope": [
+    "docs/research/candidates/acvc/pro_packets/20260914_cluster_longer_c_b01_scientific_review/archive/RESPONSE.md"
+  ],
+  "author_read_full_response": true,
+  "accepted_user_node": "cfaabca5-d5c3-48df-8f67-e73466d726e3",
+  "matching_comment_count": 1,
+  "delivery_comments": [
+    {
+      "id": 5665652555,
+      "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5665652555",
+      "created_at": "2026-09-14T14:33:35Z"
+    }
+  ],
+  "canonical_source": "Git blob; Transport DOM/assistant receipt remains independently archived",
+  "terminal_assistant_node": "98e73470-e3f7-4c2c-af35-cc2a61ca9b66",
+  "receipt_bytes": 99,
+  "receipt_sha256": "928ac6b8182f75aee169adff1b51f7a5d2bd3b61331efb0d7a55dd6a0808be9f",
+  "dom_bytes": 13755,
+  "provider_closeout": "Transport direct notice and queue verified"
+}

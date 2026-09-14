@@ -1,0 +1,37 @@
+{
+  "request_id": "2026-09-14-acvc-cluster-longer-c-b01-scientific-review-01",
+  "author_parent_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "transport_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "author_observed_at": "2026-09-14T14:34:41.578744+00:00",
+  "observation_source": "Transport-owned pending-requests.json entry read directly; not a second browser executor",
+  "provider_state": "COMPLETED_PROVIDER_DELIVERY_VERIFIED",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "accepted_user_node_id": "cfaabca5-d5c3-48df-8f67-e73466d726e3",
+  "send_count": 1,
+  "send_observed_at": "2026-09-14T14:23:16.350Z",
+  "short_prompt_sha256": "657207f0b780021fc40e6a0d9c042518c9246673e81d813f0e6d108f35cd95ad",
+  "local_handoff_prompt_matches": [
+    {
+      "field": ".transport_request.prompt",
+      "characters": 1927,
+      "bytes": 1927
+    }
+  ],
+  "task_sha": "11da57fca73effbee96979dce0dd40568600ea12",
+  "handoff_sha": "914df64026f04525d0c092140cad652880a8a4e7",
+  "scientific_input_sha": "45955bdf7026769f703ae580caf814fdc1655421",
+  "queue_metadata_errors": {
+    "json_parse_error": "extra closing brace near line125; no accepted provider request invalidated",
+    "handoff_commit_in_source_entry": "45955bdf7026769f703ae580caf814fdc1655421 is scientific input, not bound HANDOFF commit",
+    "repair_requested_from_same_Transport": true
+  },
+  "complete_response_pending": false,
+  "next_action": "Full answer read/responded; original Transport closeout delivered. New paired-exposure B selected by DM; no provider request remains for longer-C B01.",
+  "terminal_assistant_node": "98e73470-e3f7-4c2c-af35-cc2a61ca9b66",
+  "canonical_delivery_commit": "fcd806cb2b1f99158540d8f7d1123a9df249b214",
+  "canonical_response_bytes": 13756,
+  "canonical_response_sha256": "3bf2b5bf96bfb07f1fc9ccbfb80c432be73910883d612cddd2ffb29d8d21794a",
+  "dom_response_bytes": 13755,
+  "receipt_bytes": 99,
+  "queue_now_parses": true
+}

@@ -79,6 +79,16 @@
     "handoff_sha": "914df64026f04525d0c092140cad652880a8a4e7",
     "scientific_input_sha": "45955bdf7026769f703ae580caf814fdc1655421",
     "transport_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
-    "state": "author_dispatch_accepted_provider_acceptance_and_response_pending"
+    "state": "complete_read_and_responded",
+    "accepted_user_node_id": "cfaabca5-d5c3-48df-8f67-e73466d726e3",
+    "send_count": 1,
+    "send_observed_at": "2026-09-14T14:23:16.350Z",
+    "dm_observation": "docs/research/candidates/acvc/pro_packets/20260914_cluster_longer_c_b01_scientific_review/DM_TRANSPORT_OBSERVATION.json",
+    "delivery_commit": "fcd806cb2b1f99158540d8f7d1123a9df249b214",
+    "response_bytes": 13756,
+    "response_sha256": "3bf2b5bf96bfb07f1fc9ccbfb80c432be73910883d612cddd2ffb29d8d21794a",
+    "terminal_assistant_node": "98e73470-e3f7-4c2c-af35-cc2a61ca9b66",
+    "dm_findings_response": "ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md#complete-independent-scientific-review-and-actual-dm-response",
+    "successor": "ACVC_CLUSTER_PAIRED_EXPOSURE_B01"
   }
 }
