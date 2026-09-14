@@ -40,11 +40,18 @@ one unscreened new C fit, master22319/eval32319, with 1,024 training episodes/2,
 and the same three private 64-world final panels, 311,296 team ticks. This tests fixed-F use
 at greater C training exposure; it guarantees neither a stronger policy nor a causal effect
 of duration. It is a new B/EXPLORE object, not a fourth unchanged 512-episode programme.
-The adapter and narrow shared workload-report correction are technically accepted after 26
-focused synthetic checks and an independent Sol/high review with no material findings. Source
-`914a3d0e78d49d385c54aaec0776ead63712b624` is pushed and the exact remote checkout is prepared
-for the single selected invocation. [Current intake](ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md)
-records actual acceptance, launch, collection and scientific review as they occur.
+The adapter and narrow shared workload-report correction passed26 focused checks and an
+independent Sol/high review with no material findings. The one original remote invocation at
+source `914a3d0e78d49d385c54aaec0776ead63712b624` is complete/exit0:296.30s,0.523GiB,
+all1216episode/2048update rows checked. F−C+0.1292634628J (1/64 adverse),
+F−own-dwell+0.0635578296J (15/64 adverse,worst−0.1859325036), both separate UP;
+dwell−C+0.0657056332J is descriptive. Absolute C/F/dwell .1744460128/.3037094757/.2401516461J
+and private interventions6595/4825 retain the strong dwell and tail qualification.
+[Full result](ACVC_CLUSTER_LONGER_C_B01_RESULT_EVIDENCE_20260914.md) and
+[current intake](ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md) preserve the changed-exposure
+claim ceiling and costs. An independent result/next-question review is being prepared.
+The tentative preference is a Portfolio development/retention report, with a prospective
+paired-exposure B and fixed-recipe C-BENCH as alternatives; no successor or disposition is selected.
 
 Earlier [PARK knowledge](PARK.md), [reentry judgment](ACVC_REENTRY_INTAKE_20260914.md)
 and [B02 full-review response](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md)

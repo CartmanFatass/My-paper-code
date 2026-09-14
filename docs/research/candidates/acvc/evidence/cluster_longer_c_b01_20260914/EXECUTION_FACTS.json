@@ -10,7 +10,7 @@
   "output": "/home/wu/hmasd-worktrees/acvc-longer-c-b01-914a3d0e7/temp/directions/acvc/exp/cluster_longer_c_b01_20260914",
   "monitor": "/root/acvc_longer_c_b01_monitor",
   "monitor_record": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/cluster_longer_c_b01_20260914_monitor.json",
-  "state": "running_monitor_adopted",
+  "state": "finished_exit0_collected_checked",
   "planned_command": "/usr/local/bin/agent-task run acvc-longer-c-b01-914a3d0e7 env HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 bash /home/wu/hmasd-worktrees/acvc-longer-c-b01-914a3d0e7/experiments/candidates/acvc/cluster_longer_c_b01/launch.sh 914a3d0e78d49d385c54aaec0776ead63712b624 /home/wu/hmasd-worktrees/acvc-longer-c-b01-914a3d0e7/temp/directions/acvc/exp/cluster_longer_c_b01_20260914",
   "scientific_invocations_accepted": 1,
   "preparation": {
@@ -28,5 +28,36 @@
     "tmux_active": true,
     "native_wall": "not yet complete"
   },
-  "monitor_metadata": "Original direct adoption notice used a literal timestamp placeholder; first compact record showed2026-09-14T07:09:33.0645957-07:00, preserved separately. Fresh observation07:10:44-07:00 is verified. Monitor prematurely returned final with running handle; DM immediately resumed same child/same accepted handle. No new launch/observer or scientific effect."
+  "monitor_metadata": "Original direct adoption notice used a literal timestamp placeholder; first compact record showed2026-09-14T07:09:33.0645957-07:00, preserved separately. Fresh observation07:10:44-07:00 is verified. Monitor prematurely returned final with running handle; DM immediately resumed same child/same accepted handle. No new launch/observer or scientific effect. Same monitor returned a second running final at221s; DM resumed it again explicitly until terminal. It then delivered exit0/native296.30s and empty active set. No duplicate invocation or parallel observer.",
+  "exit_code": 0,
+  "native_wall_s": 296.3,
+  "peak_rss_kib": 548524,
+  "supervisor_started_at": "2026-09-14T14:08:46Z",
+  "supervisor_finished_at": "2026-09-14T14:13:42Z",
+  "supervisor_rounded_duration_s": 296,
+  "terminal_observed_at": "2026-09-14T07:14:16.0754760-07:00",
+  "monitor_terminal_event": "ACVC_CLUSTER_LONGER_C_B01/terminal-20260914-01",
+  "monitor_terminal_uptime_s": 311,
+  "monitor_active_set_empty": true,
+  "admission": {
+    "assessed_at": "2026-09-14T14:08:46.682793Z",
+    "available_physical_bytes": 15632846848,
+    "captured_at": "2026-09-14T14:08:46.682525Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15632846848,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "archive": "temp/directions/acvc/retained/cluster_longer_c_b01_20260914/native_output.tar.gz",
+  "archive_bytes": 561848,
+  "archive_sha256": "1e2d9e304a8c36908ed25710c7c367ac51ba1addfc8cb873e0ca249342f9f7dd",
+  "technical_acceptance": "all1216episode/2048update rows and frozen counts/configuration/exposure/primaries checked",
+  "remote_cleanup": "pending owned preservation reconciliation"
 }
