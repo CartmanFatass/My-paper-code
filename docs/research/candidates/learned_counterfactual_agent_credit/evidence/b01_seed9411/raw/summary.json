@@ -1,0 +1,142 @@
+{
+  "object": "LCAC_B01_256",
+  "card": "docs/research/candidates/learned_counterfactual_agent_credit/LCAC_B01_SCIENCE_CARD_20260914.md",
+  "launch_sha": "133218a8e08c29e833b4d549ffd48f00b204bf2e",
+  "seed": 9411,
+  "mode": "NATIVE_B_EXPLORE",
+  "config": {
+    "horizon": 256,
+    "train_episodes": 256,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "epochs": 4,
+    "dtype": "float32",
+    "device": "cpu",
+    "threads": 1
+  },
+  "timing_scope": "Arm body includes its optimizer/environment, training, checkpoint, evaluation and close. Shared setup and final publication are separate; the enclosing process measurement supplies complete invocation costs.",
+  "arms": {
+    "V": {
+      "counts": {
+        "constructors": 1,
+        "constructor_resets": 1,
+        "explicit_resets": 288,
+        "step_calls": 73728,
+        "native_transitions": 73728,
+        "train_steps": 65536,
+        "eval_steps": 8192,
+        "train_episodes": 256,
+        "eval_episodes": 32,
+        "action_draws": 368640,
+        "rollouts": 128,
+        "optimizer_steps": 512,
+        "q_baseline_rows": 0,
+        "v_baseline_rows": 65536,
+        "critic_fit_rows": 262144
+      },
+      "complete": true,
+      "training_exposure": {
+        "actor": {
+          "parameters": 35159,
+          "initial_norm": 12.588682174682617,
+          "displacement": 2.2057058811187744,
+          "relative_displacement": 0.17521340601915578
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.307272911071777,
+          "displacement": 4.893677234649658,
+          "relative_displacement": 0.525790667299357
+        }
+      },
+      "arm_body_wall_seconds": 61.80049726204015
+    },
+    "Q": {
+      "counts": {
+        "constructors": 1,
+        "constructor_resets": 1,
+        "explicit_resets": 288,
+        "step_calls": 73728,
+        "native_transitions": 73728,
+        "train_steps": 65536,
+        "eval_steps": 8192,
+        "train_episodes": 256,
+        "eval_episodes": 32,
+        "action_draws": 368640,
+        "rollouts": 128,
+        "optimizer_steps": 512,
+        "q_baseline_rows": 2293760,
+        "v_baseline_rows": 0,
+        "critic_fit_rows": 262144
+      },
+      "complete": true,
+      "training_exposure": {
+        "actor": {
+          "parameters": 35159,
+          "initial_norm": 12.588682174682617,
+          "displacement": 2.216186285018921,
+          "relative_displacement": 0.17604593191461637
+        },
+        "critic": {
+          "parameters": 38657,
+          "initial_norm": 9.307271957397461,
+          "displacement": 4.858670711517334,
+          "relative_displacement": 0.5220295199019774
+        }
+      },
+      "arm_body_wall_seconds": 63.7313643040834
+    }
+  },
+  "primary": {
+    "delta": -0.0036264284161591363,
+    "differences": [
+      0.0012385868436154551,
+      -0.001437506347833989,
+      -0.02705096386041192,
+      0.01055764476526816,
+      -0.014927074770757776,
+      0.003850267876015459,
+      -0.01334008806621817,
+      0.0010505570676778986,
+      -0.012187705881033017,
+      0.012098678759834475,
+      -0.009654557955070142,
+      -0.04021499500978254,
+      -0.017292589075616593,
+      -0.015290640641413042,
+      -0.017966940398469675,
+      -0.006248109242221134,
+      -0.013294658516436658,
+      0.008344559382173516,
+      -0.012935759144617504,
+      0.004317258876188473,
+      0.005689009581517357,
+      0.004340976339551619,
+      0.0008121186436229333,
+      0.014704374593282055,
+      0.00798445902036124,
+      0.009536838621036436,
+      0.006851843493691917,
+      -0.006101336003874552,
+      0.02108230449743345,
+      -0.013582901805016978,
+      -0.008797855248072611,
+      0.001818494288483491
+    ],
+    "paired_worlds": 32,
+    "absolute_means": {
+      "V": 0.18068077013009282,
+      "Q": 0.1770543417139337
+    },
+    "descriptive_sd": 0.013188138800756956,
+    "minimum": -0.04021499500978254,
+    "maximum": 0.02108230449743345,
+    "adverse_worlds": 16,
+    "mei": 0.01,
+    "reading": "WITHIN_MEI",
+    "uncertainty": "one trained pair; descriptive fixed panel; no training-population interval"
+  },
+  "complete": true,
+  "shared_setup_wall_seconds": 0.7312712910352275,
+  "elapsed_to_summary_start_seconds": 126.26353250897955
+}

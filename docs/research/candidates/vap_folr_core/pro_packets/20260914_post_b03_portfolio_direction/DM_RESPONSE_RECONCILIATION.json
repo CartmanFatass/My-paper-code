@@ -1,0 +1,67 @@
+{
+  "request_id": "2026-09-14-folr-post-b03-direction-decision-01",
+  "archive": "archive/RESPONSE.md",
+  "archive_bytes": 44907,
+  "archive_characters": 21740,
+  "archive_sha256": "417dc9dd7770edd96d486f089316cc1d337e242e21291db7ffeb9f0b66d5f219",
+  "terminal_lf": true,
+  "raw_archive_unchanged": true,
+  "representation": "Transport-saved normalized browser clipboard, two complete displayed assistant nodes in one archive; not a unique final comparator.",
+  "sections": [
+    {
+      "provider_node_id": "0c677f66-e6b6-4c37-b56a-09a604b7883d",
+      "start_byte": 0,
+      "end_byte_exclusive": 23448,
+      "sha256_of_archive_slice": "5bd6e55bade3a678eb0bdbe4e706a7902583cfd367b66387849375aedd8c159b",
+      "comparison": "augmented persistent versus fresh unaugmented Generic64"
+    },
+    {
+      "provider_node_id": "a6051fe1-fbaf-4456-85df-980e1c9e52ec",
+      "start_byte": 23448,
+      "end_byte_exclusive": 44907,
+      "sha256_of_archive_slice": "2ff2f4e5e792d59e6f8fac2d066caeef934addb408b723f2f0d70e112dff9385",
+      "comparison": "augmented persistent versus augmented current-only"
+    }
+  ],
+  "dm_verification": "Local raw file/hash/full401line reading plus fresh same-conversation DOM identities/order/headings/closing scopes; no independent raw-provider-byte or source-access certification.",
+  "next_action": "One focused same-request comparator clarification; preserve both complete answers; no new empirical invocation selected from conflict.",
+  "clarification": {
+    "request_id": "2026-09-14-folr-post-b03-direction-decision-01-clarification-01",
+    "archive_path": "archive/clarification_01/RESPONSE.md",
+    "utf8_bytes": 12282,
+    "characters": 5518,
+    "lines": 116,
+    "sha256": "268a587084181f808f944b65afdfec60848cb8c4568974d6aa95afc82092b497",
+    "terminal_lf": true,
+    "crlf_count": 0,
+    "full_read": true,
+    "dm_intake_at": "2026-09-14T15:06:36.695218+00:00",
+    "reported_assistant_node_id": "de97d8bb-b4f9-4d74-90d6-ebbc473e7a8c",
+    "reported_user_node_id": "683bebb0-ddcc-4e04-89b5-1b30fa7ca534",
+    "archive_representation": "Transport normalized provider Copy-response clipboard; original raw-provider byte identity not claimed",
+    "decision": "Unique A-G; second A-Z execution selection explicitly withdrawn. CONTINUE/MEDIUM, family/slot/history unchanged.",
+    "input_capture_closeout": {
+      "status": "complete",
+      "file": "archive/clarification_01/INPUT_CAPTURES.json",
+      "utf8_bytes": 14240,
+      "sha256": "444adf7cae7b3d95c21ccbfb2b0d8bed6fd9733abb5d6dfe908cb79eec272804",
+      "original_rollout_outputs_independently_checked": [
+        9253,
+        9281
+      ],
+      "body_chars": 1045,
+      "body_utf8_bytes": 2207,
+      "body_sha256": "7ad878962f4781b1fb23aaadbac1f7cbec09954cf5c83f0c886596f10edb3d4f",
+      "authored_difference": "Only final LF represented by one terminal space; all other authored characters match. Both original DOM strings retained with UI suffixes.",
+      "timestamp_correction": "Composer originally observed14:44:24.905Z, accepted body14:44:58.725Z; earlier queue14:44:00 is a reported minute label, not an independently verified exact Send time.",
+      "receipt_limit": "One accepted submission is supported. Transport describes manual_send_count=0 as no resend; preserve that wording without treating it as a count of all submit actions.",
+      "observed_submit_click_tool_call": {
+        "rollout_line": 9271,
+        "call_timestamp": "2026-09-14T14:44:48.946Z",
+        "observed_submit_click_calls": 1,
+        "observed_resends": 0,
+        "scope": "Tool call is one explicit Send click; provider effect confirmed by the subsequent accepted user node."
+      }
+    }
+  }
+}

@@ -1,37 +1,27 @@
 # HMASD current execution tracking
 
-Updated 2026-09-12. Windows control checkout: C:/Projects/HMASD; PowerShell.
-Current direction details: [Portfolio](PORTFOLIO.md). Only current work appears here.
+OWNER_PAUSED after all in-hand work completed. Root coordinates native DM chains; each DM owns its
+direction lifecycle and Direction Pro remains the independent scientific Reviewer. Do not start a
+successor experiment, new direction or vacancy replacement until explicit owner resume. Current
+producer and resume facts are in the 2026-09-14 owner-pause handoffs below.
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |
 | ACPS | B02 complete INSIDE_MEI negative: −0.0051864274 J, 12 positive/20 adverse; Q recovery intaken. Portfolio PRO_FINAL applied reversible whole-direction PARKED/HIGH; SHARED/default and all evidence retained; old operation remains unsent record | No active work. Re-entry requires a changed operating/training-resource requirement or trustworthy relevant evidence/cost fact and a new Portfolio/owner decision |
-| MGTAP | Portfolio B 与 conformance amendment 已完整 intake；唯一 master pair 完成：COND512 0.16574499572521276 J、DENSE768 0.19507936796417658 J、delta −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026、7/25 worlds；ACTIVE/MEDIUM | 终端/哈希/cleanup 已核验；post-8231 direction question 已绑定 delivery_v2 `PREPARED_UNSENT`，无 Pro 决策或 Send。无自动 successor，保持占位 |
-| RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Greedy-anchored continuation question prepared/bound but recommendation unapplied; zero Send/fit. Await same direction-node decision; no automatic successor |
-| ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Prepare next direction-node use/no-addition question; no new fit or K retry before proper decision |
-| FOLR | BANK −4.3261 retained; Generic no final, no paired primary; finite investment readiness published but unfunded; ACTIVE/MEDIUM | Keep material ready behind shared Portfolio writer; no Generic retry, model load or experiment |
+| MGTAP | Portfolio B 与 conformance amendment 已完整 intake；唯一 master pair 完成：COND512 0.16574499572521276 J、DENSE768 0.19507936796417658 J、delta −0.02933437223896382 J（COND_ADVERSE），SE 0.009856726660478026、7/25 worlds；ACTIVE/MEDIUM | post-8231 R 已完整 intake；mean-COND eligibility 与 DENSE default 保留。OWNER_RESUMED，无在途外部依赖/新 pair；旧 UNCERTAIN_EFFECT 不阻挡已完成 intake 且绝不重发。DM 复用 R 科学结论，解决未决方向接续/容量问题 |
+| RCLE | B08 complete: D_g −0.533040365, D_n −0.370141602, G_U +0.048152669; post-B08 response applied reversible development HOLD; ACTIVE/MEDIUM | Greedy-anchored A 仅保留 epsilon .1 exact-greedy 候选；Portfolio B09 已完整 intake，seed29/256-update/four-panel 完成（native47.13s、exit0），G_U +.0512695、D_n +.1460205、D_g -.0317708；OWNER_RESUMED，两项 HOLD 保留；DM 负责下一管理决定 |
+| ACVC | Qualified train-C→deploy-F reference retained; F−C +0.124073 J and F−dwell +0.076741 J; ACTIVE/MEDIUM/recasts2 | Next-use/no-addition 已完整 intake，Transport ARCHIVED；无新 fit/K retry 或在途外部依赖。OWNER_RESUMED；现核对科学 no-addition 是否覆盖容量/生命周期，未覆盖则由 DM 提出该未决管理选择 |
+| FOLR | Portfolio F 已完整 intake；新 Generic64 完成/技术接受 e617175e（5000/4969/128、exit0、native2156.67s），随后固定 BANK128 一次 admission/提交 db935e57；同一 Monitor 回 ADOPTED+TERMINAL exit0/n128/duration3s，ACTIVE/MEDIUM | DM 已完成 BANK collection/combined scientific intake，结论为该固定用途中 Generic-only（BANK worse）；无运行中实验或新 Pro 请求。Generic→BANK 顺序和五 caps 保持，无 Root ACK/再审批、旧 Generic retry 或 transfer/renewal |
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
 | FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
 
-Working-set target: **4**; existing overlap drains without interruption or fifth-slot admission.
-Recorded advancing directions: **4** — MGTAP, RCLE, ACVC and FOLR. Each has an active assignment
-with its original DM. Completed Portfolio intake, CADC disposition, FSD U, old experiments and cleanup
-do not fill a slot. CADC is PARKED only because the complete Portfolio decision explicitly selected it.
-One-time Portfolio discovery intake/registration/control-plane application overhead is attributed
-to ACPS support only, unknown unless directly measured. MGTAP T and CADC exclude that shared item;
-each direction still counts its own implementation-through-cleanup and later Root integration once.
 
-## Current routing
+The four registered DMs remain their direction owners until a recorded handoff. Report actual
+running work separately from occupancy; a DM can decide PARK/CLOSE without Portfolio approval.
+Clerk records any released capacity and does not fill it automatically. Scientific conclusions and
+new objects stay with their DM and independent review, not a mechanical coordinator.
 
-| Role | Task | Runtime |
-| --- | --- | --- |
-| Root | 01a095b7-850f-7401-ad4e-5e4320d285f1 | Windows main control |
-
-Read .codex/hmasd-transport.toml for Agentify/provider configuration. Each DM creates/reuses
-its native Transport, binds its exact ID in new handoffs, and receives archives directly. Root and DM use native
-long waits; each DM resolves and records its own reusable native Luna/low monitor identity on
-adoption. Experiment events return directly to DM. Root-action completions remain native.
-Historical packet addresses are not new dispatch routes.
-FOLR's300-second support value is an owner-clarified reference: recorded308.8422538 is not
-by itself a hard stop. Native/scientific scope and remaining explicit complete-work limits persist.
-Historical run roots, fixed SHAs and complete data remain in their scientific evidence records.
+The unsent automatic overall-planning packet was retained as report material at 469e85fe7.
+It creates no live Pro request or authority. Existing accepted requests retain their own archive
+and return route. Review pending facts from current DM events rather than treating an old allocation
+as the direction's entire future permission. The 50-minute heartbeat is event-recovery only.

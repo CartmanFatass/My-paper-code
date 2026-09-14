@@ -1,10 +1,11 @@
 # FOLR retained-BANK use — minimum Portfolio investment materials
 
-The scoped F/D Portfolio question is now being published under the current
-autonomous DM assignment. No funding, scientific seed or experiment is bound.
-The complete direction decision passed [conformance intake](INTAKE.md). This is
-its finite investment question for `portfolio:cross_direction`; FOLR remains
-ACTIVE/MEDIUM and the entity-history family OPEN.
+Portfolio has now selected F once at the five proposed caps below, unchanged.
+The complete [investment intake](../20260913_retained_reference_investment/INTAKE.md)
+accepts response `9e37525139abc18ab6b9dcd393a21e5a24f12e26` under
+`PRO_FINAL / OWNER_DELEGATED`. This document preserves the original F/D readiness;
+its proposed scientific unit is now funded, with no empirical execution at intake.
+FOLR remains ACTIVE/MEDIUM and the entity-history family OPEN.
 
 ## Decision ready for the proper node
 
@@ -143,3 +144,11 @@ new empirical work waits for a conforming Portfolio decision; FOLR remains
 ACTIVE/MEDIUM and occupies its direction slot throughout this continuation.
 The dated earlier readiness review remains preserved in the intake/audit and Git
 history; its transport snapshots are not current routing instructions.
+
+## Accepted investment — 2026-09-13
+
+The single Portfolio Send is ARCHIVED and full conformance intake accepted F.
+All proposed caps are now the exact funded caps; original zero-allocation wording
+in dated preparation records is historical. Proceed through the ordinary bounded
+DM implementation/acceptance/admission sequence without Root ACK. No new model,
+seed, fit or panel was constructed at this intake. The [application record](../../../../portfolio/decisions/2026-09-13-folr-retained-reference-investment.md) supplies Root integration.

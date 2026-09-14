@@ -1,0 +1,15 @@
+{
+  "request_id": "lcac-park-vacancy-20260914-01",
+  "conversation_id": "6aa7836e-e4a0-83e8-985d-c633d94935b1",
+  "conversation_url": "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1",
+  "binding": "portfolio:cross_direction",
+  "selection": "metric_ground_transport_allocation",
+  "selected_dm_thread": "01a09cd8-676e-7513-806d-a86b7e104518",
+  "source_vacancy": "LCAC_B03_PARK",
+  "maximum_slots_requested": 1,
+  "occupied_before": ["roster_consistent_latent_exploration", "vap_folr_core"],
+  "reserved_before": 0,
+  "response_file": "PORTFOLIO_RESPONSE.md",
+  "prompt_file": "ORIGINAL_PROMPT.txt",
+  "note": "Provider conversation is authoritative complete response; local file records URL and application summary. No DM setup or experiment launch is implied by this selection."
+}

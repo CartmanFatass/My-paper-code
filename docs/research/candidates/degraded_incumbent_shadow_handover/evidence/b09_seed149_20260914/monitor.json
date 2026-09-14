@@ -1,0 +1,23 @@
+{
+  "batch": "dish-b09-s149-20260914",
+  "handle": "dish-b09-s149-3a749256-20260914",
+  "assignment": "dish-b09-s149-20260914",
+  "source_sha": "3a749256d2aaf16345308827518283c8d2b91ad7",
+  "node": "hmasd-wsl-node",
+  "cwd": "/home/wu/hmasd-worktrees/dish-b09-3a749256",
+  "supervisor": "/usr/local/bin/agent-task",
+  "status": "failed",
+  "active_set": [],
+  "observations": [
+    {
+      "observed_at": "2026-09-14T02:06:29Z",
+      "direct_status": {"status": "failed", "exit_code": 2, "pid": 3434191, "uptime_seconds": 32, "tmux_active": false},
+      "bounded_log": "python: can't open file '/home/wu/scripts/hmasd_resource_preflight.py': [Errno 2] No such file or directory",
+      "enclosing_ssh_wall_seconds": 1.0
+    }
+  ],
+  "last_observation": "2026-09-14T02:06:29Z",
+  "next_due": null,
+  "observation_command_wall_seconds_total": 1.9,
+  "delivery": {"adopted": "pending", "terminal": "pending"}
+}

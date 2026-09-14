@@ -14,7 +14,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from bind_conversation import _atomic_write
-from transport_contract import canonical_packet_manifest, registry_lock, validate_parent_thread_id, validate_source_thread_id
+from transport_contract import canonical_packet_manifest, registry_lock, utc_now, validate_parent_thread_id, validate_source_thread_id
 from validate_request import validate
 
 
@@ -245,13 +245,56 @@ def verify_github_pairing(record: dict, archive: dict, pairing: dict) -> None:
     issue = scope['issue_url']
     if not re.fullmatch(re.escape(issue) + r'#issuecomment-[0-9]+', pairing.get('comment_url', '')):
         raise ValueError('GitHub pairing requires the specified delivery issue comment')
-    if task_url not in pairing.get('comment_body', '') or url not in pairing.get('comment_body', ''):
+    comment = pairing.get('comment_body', '')
+    if url not in comment:
         raise ValueError('GitHub delivery comment must pair the exact fixed TASK and response')
     verified = verify_archive(Path(archive['path']), archive['sha256'], archive['size_bytes'])
     raw = Path(verified['path']).read_bytes()
     blob = hashlib.sha1(f'blob {len(raw)}\0'.encode('ascii') + raw).hexdigest()
     if blob != pairing.get('blob_sha'):
         raise ValueError('GitHub response bytes differ from the observed Git blob')
+    if task_url not in comment:
+        # A full fixed TASK SHA in the same delivery comment is sufficient only
+        # when the hash-verified response also contains the exact TASK URL.
+        task_sha = task_url.partition('/blob/')[2].partition('/')[0]
+        exact_sha = (re.fullmatch(r'[0-9a-f]{40}', task_sha)
+                     and re.search(rf'(?<![0-9A-Za-z]){re.escape(task_sha)}(?![0-9A-Za-z])', comment))
+        url_boundary = r"""[\s<>"'\[\]`()]"""
+        exact_url = re.search(rf'(?:^|{url_boundary}){re.escape(task_url)}(?=$|{url_boundary})',
+                              raw.decode('utf-8'))
+        if not exact_sha or not exact_url:
+            raise ValueError('GitHub delivery comment must pair the exact fixed TASK and response')
+
+
+def reconcile_github_archive(record: dict, archive: dict) -> dict:
+    """Resolve a pairing-only conflict over the same recorded GitHub archive.
+
+    Generic terminal transitions remain closed. This performs no registry write,
+    Send or receipt delivery; the caller persists the checked record under its lock.
+    """
+    if record.get('state') not in {'ARCHIVE_CONFLICT', 'ARCHIVED'}:
+        raise ValueError('GitHub archive reconciliation requires its prior archive conflict')
+    pairing = record.get('github_response_pairing')
+    stored = record.get('archive', {})
+    if (not isinstance(pairing, dict) or record.get('response_sha256') != archive.get('sha256')
+            or stored.get('response_sha256') != archive.get('sha256')
+            or not stored.get('response_file')
+            or Path(stored['response_file']).resolve() != Path(archive['path']).resolve()
+            or stored.get('github_commit') != pairing.get('commit_sha')):
+        raise ValueError('GitHub archive reconciliation cannot replace the recorded response')
+    verify_github_pairing(record, archive, pairing)
+    if record['state'] == 'ARCHIVED':
+        return record
+    history = record.get('archive_reconciliation_history', [])
+    if not isinstance(history, list):
+        raise ValueError('archive reconciliation history must be preserved as a list')
+    now = utc_now()
+    record['archive_reconciliation_history'] = history + [dict(
+        from_state='ARCHIVE_CONFLICT', to_state='ARCHIVED', observed_at=now,
+        response_sha256=archive['sha256'], response_url=pairing['response_url'],
+        reason='Existing exact GitHub archive and fixed TASK pairing verified')]
+    record.update(state='ARCHIVED', native_state='ARCHIVE', updated_at=now)
+    return record
 
 
 def stage_native_receipt(record: dict, archive: dict | None = None, *, boundary: str = 'COMPLETE',

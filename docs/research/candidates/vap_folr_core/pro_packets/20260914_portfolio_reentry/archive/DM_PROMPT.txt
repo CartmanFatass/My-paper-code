@@ -1,0 +1,9 @@
+FOLR DM直接事实反馈（不请求批准或新的科学评估）：我已完整读取本会话原选择回答和刚完成的事实同步。采纳重入建议，并已独立选择一个fresh BANK16/fresh Generic64 B02；这改变的是我对首个完整新训练对比的投入价值判断，没有新数据，也不认为旧PARK判断在科学上错误。F只解决已知BANK的固定参考用途，E没有Generic最终端点，所以这一新学习块能够改变学习方案的开发选择。继续PARK仍是强备选，原因是现存BANK不利证据和真实学习成本。
+
+实际工作：现有DM与codex/vap-folr已复用；B02卡和intake已发布，最小新模式代码已提交82b12d7e0，独立Sol/high审查未发现实质问题，远端检查待完成。每臂5000训练/4969更新/128最终评价，训练781401、评价1781401；一块205120团队tick。我的运作计划3600秒每臂、7200秒native加1800秒support，不是owner硬限或费用预测；完整历史及provider费用仍UNKNOWN。尚无科学调用接受，无第二块或额外付费资源。保留F的GENERIC_ONLY_BANK_WORSE、E缺失primary、旧H/负结果/claim limits；ACVC和其他方向不在本次改动范围。
+
+固定证据：
+https://github.com/CartmanFatass/My-paper-code/blob/0a1b5facc2bce7f00f8b4f95cf69b4c9f24b5d13/docs/research/candidates/vap_folr_core/FOLR_REENTRY_INTAKE_20260914.md
+https://github.com/CartmanFatass/My-paper-code/blob/0a1b5facc2bce7f00f8b4f95cf69b4c9f24b5d13/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md
+
+我直接采用OWNER_DIRECT 2026-09-14科学沟通约定：DM拥有问题、完整答复intake、异议回应和方向决定；Portfolio回应最新DIRECTION/intake/PARK、已考虑备选、理由与真实约束；Clerk协调容量/会话写入/归档。普通对象不等待双方批准。下一科研边界是这块的实际结果或具体失败及DM intake，不再重复未变化的PARK/重选评估。本条仅记录已作决定，可简短收讫，无需另作研究。

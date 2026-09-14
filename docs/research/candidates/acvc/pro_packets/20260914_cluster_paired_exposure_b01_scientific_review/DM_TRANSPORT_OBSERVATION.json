@@ -1,0 +1,48 @@
+{
+  "request_id": "2026-09-14-acvc-cluster-paired-exposure-b01-scientific-review-01",
+  "author_parent_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "transport_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "scientific_input_sha": "ae1ec3632fe59312850e912a7e32890295da4425",
+  "task_sha": "d17e4f4e5f2710c9af157ae42bde98617a600cc0",
+  "handoff_sha": "6b532decfd860b059764dbb36f0cac5c79a2f2b8",
+  "author_dispatch_at": "2026-09-14T15:28:27Z",
+  "state": "complete_full_response_read_dm_findings_answered",
+  "send_count": 1,
+  "provider_prompt_bytes": 1934,
+  "provider_prompt_sha256": "17e9ac4e18d69a42b58960823b7322622658af0406f8c84c22f5a4b82248676a",
+  "pre_dispatch_repairs": [
+    "Renderer initially rejected mixed rendering/binding arguments before mutation/Send.",
+    "Binding-only call initially defaulted project_root to main and rejected direction-worktree path. Explicit project-root corrected binding. Published TASK bytes remained unchanged; no provider Send occurred during either failed CLI call."
+  ],
+  "accepted_user_node_id": "f25bcae8-4dc3-47ca-a5e6-ba636027e79b",
+  "send_observed_at": "2026-09-14T15:33:12.5162252Z",
+  "accepted_prompt_readback": "Producer reopened exact user node f25bcae8-4dc3-47ca-a5e6-ba636027e79b read-only; programmatic .markdown innerText equality to HANDOFF true,1934chars. Bound readback tab closed; no provider mutation or resend.",
+  "queue_metadata_errors": [
+    {
+      "field": "input_reference.task_commit",
+      "observed": "ae1ec3632fe59312850e912a7e32890295da4425",
+      "correct": "d17e4f4e5f2710c9af157ae42bde98617a600cc0",
+      "meaning": "Observed value is scientific input SHA, not published TASK commit."
+    },
+    {
+      "field": "input_reference.dispatch_prompt_sha256",
+      "observed": "17e9ac4e18d69a42b58960823b7322622658af0406f8c84c22e5f4b82248676",
+      "correct": "17e9ac4e18d69a42b58960823b7322622658af0406f8c84c22f5a4b82248676a"
+    },
+    {
+      "field": "next_action",
+      "meaning": "Still instructed paste/Send despite send_count1 and WAITING_GENERATION; requested observation/archive-only correction."
+    }
+  ],
+  "metadata_correction_requested_at": "2026-09-14T15:34:46Z",
+  "delivery_commit": "68fed46f448312827f38b4b4f9bade36e2aedc35",
+  "response_bytes": 14654,
+  "response_lines": 73,
+  "response_sha256": "98a9fb29fd1c9c610b9ccc2b767fd694ed0e9b3170ad5c5a6e94f3789404d18f",
+  "terminal_assistant_node_id": "a394e176-e2a8-42c1-8e6a-c5bcf733ba77",
+  "delivery_comment_id": 5666688209,
+  "queue_state_observed": "COMPLETED_PROVIDER_DELIVERY_VERIFIED",
+  "queue_remaining_correction": "Resolved by producer programmatic hashlib assignment;64-character digest matches exact HANDOFF. Failed prior63-character correction remains in queue error history.",
+  "provider_request_closed": true
+}

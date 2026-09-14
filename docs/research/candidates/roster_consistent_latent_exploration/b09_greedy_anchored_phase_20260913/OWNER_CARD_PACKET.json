@@ -1,0 +1,37 @@
+{
+  "question": "已拨款的唯一B09是否按精确科学卡直接执行？本项记录对象绑定，供异步干预，不是再次申请投资。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B09_GREEDY_ANCHORED_PHASE_SCIENCE_CARD_20260913.md",
+      "from": "Portfolio A已拨款，零新fit",
+      "to": "绑定seed29、256次更新、四面板及180/600/780秒边界；DM直接实施完整链条"
+    }
+  ],
+  "if_refused": "按所有者明确新指令处理尚未执行部分，保留已经发生的事实；不自动替代fit或改变方向生命周期。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260913_rcle_greedy_anchored_investment/archive/RESPONSE.md",
+      "quote": "选择 A：购买所提出的唯一一次 RCLE B09 greedy-anchored phase 比较",
+      "why": "完整且符合规范的投资裁决已给予精确一次预算。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B08_JOINT_QUOTA_PHASE_INTAKE_20260912.md",
+      "quote": "D_g=-0.5330403645833333; D_n=-0.3701416015625",
+      "why": "历史正学习没有克服规则服务亏损；本次新先验不保证结果或成本。"
+    }
+  ],
+  "uncertainty": [
+    "新初始化与最终服务均未测；必须保留正学习与两项规则差的独立符号。",
+    "完整provider/agent成本UNKNOWN，仅对本有限单位接受风险。"
+  ],
+  "cost": {
+    "compute": "native≤180秒、额外invoked support≤600秒、complete≤780秒；一次fit，无重试/续期。",
+    "owner_time": "无需逐步批准，可异步干预。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing; original DM executes within the accepted grant."
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): bind and execute the exact funded B09 under current546 standard. No new Portfolio choice.",
+  "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B09_GREEDY_ANCHORED_PHASE_SCIENCE_CARD_20260913.md"
+}

@@ -1,0 +1,81 @@
+{
+  "id": "20260913-rcle-003",
+  "created": "2026-09-13T13:32:50-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "RCLE：是否购买唯一一次 greedy 锚定 B09",
+  "context": "候选A已保留但明确未分配fit/card/cap；这一次Portfolio问题购买或拒绝拟议180/600/780秒的单fit四角色观察。普通获批实验不重复送审批。",
+  "options": [
+    {
+      "key": "a",
+      "label": "购买这一个明确的有限 B09",
+      "consequence": "若完整符合范围，分配拟议单fit与完整support；同DM自行实施/准入/执行，无第二Portfolio ACK。"
+    },
+    {
+      "key": "b",
+      "label": "当前不分配该实验",
+      "consequence": "候选保留且未资助；两个HOLD/开放家族/ACTIVE-MEDIUM不变，无替代试验或连续咨询。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "真实学习和强服务null使新初始化/训练后/两规则比较能改变有界开发选择；巨大服务差距和未知成本令推荐仍是close-call。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_investment/INVESTMENT_QUESTION.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_investment/PREPARATION_INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L15",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否购买这唯一一项 greedy 锚定 B09 比较，还是暂不分配？DM 推荐购买但尚未应用；本项是一次新投资，不是获批实验的重复审批。",
+    "changes_if_approved": [
+      {
+        "target": "RCLE B09 的对象分配与执行记录",
+        "from": "候选已保留；没有 fit/card/seed/cap 分配",
+        "to": "仅拟议 seed29/256更新及四角色比较：180秒 native、600秒额外 support、780秒完整 invoked；获准后由同DM自行实施/准入/执行，不再索取Portfolio或Root ACK"
+      }
+    ],
+    "if_refused": "不购买这次观察，候选保持已保留但未获资助；两个原样配方 HOLD、家族开放、ACTIVE/MEDIUM及其他方向均不变，不追加诊断、替代算法或连续咨询。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_investment/INVESTMENT_QUESTION.md",
+        "quote": "B08 produced real learning:256 nonzero Adam steps/all2,561 coordinates moved, G_U=+.048152669, all eight initialization U means improved.",
+        "why": "加入已保留的固定 greedy 偏好后，真实新初始化与训练后/两规则的比較可判断是否有值得保留的学习增量；不是只看规则导入成绩。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_investment/INVESTMENT_QUESTION.md",
+        "quote": "The new initialization and learned increment are unmeasured.",
+        "why": "B08 两主路径和八格服务均输给两规则；greedy 已很强，随机偏离可能伤害服务，保留候选本身不保证投资价值。"
+      }
+    ],
+    "uncertainty": [
+      "这仍是 close-call 投资建议；单个fit只支持有界开发判断，不识别训练总体或锚定因果。",
+      "新初始化、学习增量与完整实际成本未知；原45.39秒native和420.3480783秒已知support不是保证。",
+      "缺少同信息调优headroom，但不先买调优、精确上界、阳性pilot或病因诊断。"
+    ],
+    "cost": {
+      "compute": "拟议总18,432 episodes/1,179,648 ticks，另复用已有距离作19,529,728项整数归约；无新轨迹搜索。拟议180/600/780秒为全新有限上限，未来实际完整成本UNKNOWN，本次文书/Pro成本另记UNKNOWN。当前未运行fit/模型/RNG/测试。",
+      "owner_time": "异步查看，无须即时回复。",
+      "reversibility": "costly",
+      "waits_on_this": "只有这项尚未获资助的实验等待完整Portfolio决定；方向仍ACTIVE，已有工作无需再审批。"
+    },
+    "verdict_text": "DM recommends A, unapplied, as a close-call.",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_investment/INVESTMENT_QUESTION.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T21:10:51+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260913_rcle_greedy_anchored_investment/archive/RESPONSE.md",
+      "record": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_investment/INTAKE.md",
+      "state": "applied",
+      "summary": "完整Portfolio答复及同轮勘误已接受：A拨款唯一B09 seed29/256更新/四面板，180/600/780秒；当前零fit，DM直接完成获批链条，无额外ACK。"
+    }
+  ]
+}

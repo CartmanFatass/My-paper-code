@@ -1,0 +1,38 @@
+{
+  "question": "是否支持向Portfolio建议受控的附加实体历史开发，而不是当前停止；最终方向决定仍由Portfolio作出？",
+  "changes_if_approved": [
+    {
+      "target": "FOLR下一方向开发目标",
+      "from": "B03及其review已完成，尚无后继实验",
+      "to": "拟继续共同Generic路径下的持续/逐步清空实体状态比较；只有Portfolio形成决定后才应用方向结局"
+    }
+  ],
+  "if_refused": "保留真实B03/旧反证及完整审查，按具体异议向Portfolio提交停止或其他明确问题，不自行改写结果或释放席位。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b03_result_plan_review/INTAKE.md",
+      "quote": "DM nevertheless favors bringing this candidate forward because it tests a concrete unresolved intervention without removing generic fused recurrence.",
+      "why": "旧替代架构两次失败没有回答保留共同Generic路径后的额外persistence问题。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/REPORT.md",
+      "quote": "窄消融即使阳性也不证明增强净收益，存在多走一个无效开发阶段的风险。",
+      "why": "短行程、公共线索和已有Generic历史处理可能使附加分支价值不足；PARK是最接近备选。"
+    }
+  ],
+  "uncertainty": [
+    "同参数量不等于同时间容量、同优化或同已学策略。",
+    "两臂比较不能证明任一增强方案优于未增强Generic。",
+    "新结构实际wall/峰值内存和完整支持服务成本未知。"
+  ],
+  "cost": {
+    "compute": "拟议2fits/205120ticks/9938更新；10800native秒+1800支持秒只是未选择计划。当前无新fit，既有12538.44native秒不是全方向总成本。",
+    "owner_time": "异步阅读，无需等待用户确认；完整合规Portfolio决定由DM应用。",
+    "reversibility": "reversible",
+    "waits_on_this": "没有工作等待此owner条目；Portfolio会话由RCLE当前单一空缺作者占用，FOLR独立准备报告。"
+  },
+  "verdict_text": "DM 建议继续 FOLR 当前实体历史问题，优先发展一次“共同保留 Generic64 循环路径，比较持续实体状态与逐步清空实体状态”的有限学习比较，维持现有一个席位和 MEDIUM。",
+  "source": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/REPORT.md"
+}

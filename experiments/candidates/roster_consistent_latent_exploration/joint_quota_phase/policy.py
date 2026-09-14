@@ -8,8 +8,13 @@ from experiments.candidates.roster_consistent_latent_exploration_tbcfv.models im
 
 
 class PhasePolicy(nn.Module):
-    def __init__(self):
+    def __init__(self, greedy_anchored=False, *, learned_prior_strength=False):
         super().__init__()
+        if learned_prior_strength and not greedy_anchored:
+            raise ValueError("learned prior strength requires the greedy-anchored law")
+        self.greedy_anchored = greedy_anchored
+        self.log_prior_strength = (nn.Parameter(torch.zeros((), dtype=torch.float64))
+                                   if learned_prior_strength else None)
         self.row1 = DeterministicZeroLinear(8, 32, dtype=torch.float64)
         self.row2 = DeterministicZeroLinear(32, 32, dtype=torch.float64)
         self.head = DeterministicZeroLinear(36, 32, dtype=torch.float64)
@@ -51,7 +56,7 @@ def quota_arrays(public):
     return positions, ranks, demands, targets, targets_at, signed
 
 
-def phase_features(public):
+def phase_features(public, *, retain_signed=False):
     x, ranks, demands, targets, target_x, signed = quota_arrays(public)
     shape = targets.shape
     assigned_d = np.take_along_axis(demands[:, None, :], targets, axis=2)
@@ -65,17 +70,39 @@ def phase_features(public):
         np.broadcast_to(ranks[:, None, :] / max(n - 1, 1), shape),
         np.broadcast_to(newcomers[:, None, :], shape)), axis=-1)
     context = [[n / 12, p.tick / 64, float(p.roster_event), float(p.new_epoch)] for p in public]
-    return torch.from_numpy(rows), torch.tensor(context, dtype=torch.float64), targets
+    features = torch.from_numpy(rows), torch.tensor(context, dtype=torch.float64), targets
+    return (*features, signed) if retain_signed else features
+
+
+def phase_log_probabilities(model, public):
+    features, context, targets, signed = phase_features(public, retain_signed=True)
+    logits = model(features, context)
+    if model.greedy_anchored:
+        # Reuse the feature builder's exact int64 distances, never floating features.
+        greedy = np.abs(signed).sum(axis=-1).argmin(axis=-1)
+        q = torch.full_like(logits, .1 / logits.shape[1])
+        q[torch.arange(len(public)), torch.from_numpy(greedy)] += .9
+        log_prior = q.log()
+        if model.log_prior_strength is not None:
+            log_prior = model.log_prior_strength.exp() * log_prior
+        logits = logits + log_prior
+    return torch.log_softmax(logits, dim=-1), targets
 
 
 def sampled_phase(model, public, uniforms):
-    features, context, targets = phase_features(public)
-    log_probability = torch.log_softmax(model(features, context), dim=-1)
+    log_probability, targets = phase_log_probabilities(model, public)
     cdf = log_probability.detach().exp().numpy().cumsum(axis=-1)
     phases = np.minimum((cdf < np.asarray(uniforms)[:, None]).sum(axis=-1), cdf.shape[1] - 1)
     selected = log_probability[torch.arange(len(public)), torch.from_numpy(phases)]
     actions = targets[np.arange(len(public)), phases]
     return actions, selected, phases
+
+
+def modal_phase(model, public):
+    """Lowest-index mode of the actual combined policy, without a phase draw."""
+    log_probability, targets = phase_log_probabilities(model, public)
+    phases = log_probability.argmax(dim=-1).detach().numpy()
+    return targets[np.arange(len(public)), phases], phases
 
 
 def greedy_phase(public):

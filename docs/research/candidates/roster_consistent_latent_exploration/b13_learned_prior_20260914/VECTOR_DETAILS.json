@@ -1,0 +1,80 @@
+{
+  "method": "Join raw rows by cell/scenario; count exact modal versus greedy equality. Cell directions compare recorded means/counts, lower U/tau/tau40 and higher Y; descriptive only.",
+  "modal_greedy_equal_rows_of512": {
+    "U": 512,
+    "F": 512,
+    "tau": 512,
+    "unmet_ticks": 512,
+    "Y": 512
+  },
+  "sampled_cell_sign_counts_of8": {
+    "initialization": {
+      "U": {
+        "better": 8,
+        "worse": 0,
+        "ties": 0
+      },
+      "Y": {
+        "better": 8,
+        "worse": 0,
+        "ties": 0
+      },
+      "tau": {
+        "better": 5,
+        "worse": 3,
+        "ties": 0
+      },
+      "tau40": {
+        "better": 1,
+        "worse": 3,
+        "ties": 4
+      }
+    },
+    "greedy": {
+      "U": {
+        "better": 0,
+        "worse": 8,
+        "ties": 0
+      },
+      "Y": {
+        "better": 0,
+        "worse": 8,
+        "ties": 0
+      },
+      "tau": {
+        "better": 2,
+        "worse": 6,
+        "ties": 0
+      },
+      "tau40": {
+        "better": 3,
+        "worse": 1,
+        "ties": 4
+      }
+    },
+    "nearest": {
+      "U": {
+        "better": 8,
+        "worse": 0,
+        "ties": 0
+      },
+      "Y": {
+        "better": 8,
+        "worse": 0,
+        "ties": 0
+      },
+      "tau": {
+        "better": 8,
+        "worse": 0,
+        "ties": 0
+      },
+      "tau40": {
+        "better": 8,
+        "worse": 0,
+        "ties": 0
+      }
+    }
+  },
+  "known_selected_native_chain_sum_s": 605.33,
+  "known_native_sum_scope": "B10+B11 accepted partial+D1 synthetic diagnostic+B12+E01+B13 only; not CPU aggregate, study elapsed, complete support or lifetime cost"
+}

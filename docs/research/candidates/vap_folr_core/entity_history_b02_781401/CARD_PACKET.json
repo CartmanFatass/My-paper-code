@@ -1,0 +1,11 @@
+{
+  "question": "是否保留已冻结的FOLR B02：在原H20同信息主机上取得首个完整fresh/fresh学习比较？",
+  "changes_if_approved": [{"target": "FOLR_ENTITY_HISTORY_B02_781401", "from": "缺失完整新训练比较", "to": "一块两臂新学习，固定终点、全部结果保留"}],
+  "if_refused": "按实际owner修改在安全边界处理；已发生的训练与失败如实保留，不能伪装成E的修复。",
+  "evidence_for": [{"path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md", "quote": "Acquire the first complete prospective fresh-BANK versus fresh-Generic learning comparison on the existing five-slot H20 public-lifecycle Traffic Junction host.", "why": "直接检验未回答的学习方案比较，不重复已拒绝的固定参考用途。"}],
+  "evidence_against": [{"path": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_RESULT_EVIDENCE_20260913.md", "quote": "Observed d_use = -5.932421875, strictly below-1.", "why": "旧BANK结果支持Generic优先；新结果可能继续不利，必须保留。"}],
+  "uncertainty": ["DM低信心预测GENERIC_ABOVE_MEI；owner预测未参与。", "两臂不同容量/读出，比较的是整套学习方案，不是单个记忆组件。", "相同seed标签不意味着相同动作后轨迹或评价episode配对。"],
+  "cost": {"compute": "每臂5000训练/4969更新/128最终评价。DM计划3600秒每臂、7200native+1800support；无自动第二块或科学retry。完整provider/support费用未知。", "owner_time": "无需答复即可继续", "reversibility": "costly", "waits_on_this": "nothing"},
+  "verdict_text": "One unscreened fresh training block: training identity 781401, final evaluation identity 1781401, both reset per arm.",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md"
+}

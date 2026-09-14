@@ -1,0 +1,37 @@
+{
+  "question": "FOLR 是否继续，以已准备的 B03 完整学习比较作为下一目标？",
+  "changes_if_approved": [
+    {
+      "target": "FOLR 当前方向及第三槽位",
+      "from": "等待 Portfolio 决定，第三槽位预留",
+      "to": "Portfolio 已决定 CONTINUE / MEDIUM；同一 DM 执行 B03，预留转占位"
+    }
+  ],
+  "if_refused": "按所有者的新明确指令调整尚未执行的后续工作；保存已经发生的结果、成本和请求。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/archive/RESPONSE.md",
+      "quote": "决定：FOLR 继续推进（CONTINUE，保持 MEDIUM），在现有实体历史研究族内，以已准备的 B03 同预算新训练块作为下一项具体研究目标。",
+      "why": "第二个完整学习观察可以改变当前 BANK 程序的开发取舍，比较器和有限工作已具体化。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md",
+      "quote": "GENERIC_ABOVE_MEI",
+      "why": "B02 中 BANK 落后 4.830859375；短行程、公共提示和通用循环是保留的强反方。"
+    }
+  ],
+  "uncertainty": [
+    "一个新块仍不能估计稳定总体排名或单独识别训练方差。",
+    "B03 实际总成本及方向完整成本尚未知。"
+  ],
+  "cost": {
+    "compute": "两次新拟合，共 205120 原生步、9938 次更新和 256 个最终评估 episode；B02 实测 native 3041.46 秒仅作尺度。",
+    "owner_time": "可选异步介入。",
+    "reversibility": "reversible",
+    "waits_on_this": "无需等待所有者回复；实验按既有条件执行。"
+  },
+  "verdict_text": "决定：FOLR 继续推进（CONTINUE，保持 MEDIUM），在现有实体历史研究族内，以已准备的 B03 同预算新训练块作为下一项具体研究目标。不 RECAST，不 PARK/CLOSE，不应用此前 DISH 替代建议。",
+  "source": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/archive/RESPONSE.md"
+}

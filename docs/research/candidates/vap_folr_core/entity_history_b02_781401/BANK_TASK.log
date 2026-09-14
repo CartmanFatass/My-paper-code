@@ -1,0 +1,44 @@
+=== Task 'folr-b02-bank-781401-82b12d7e0' started at 2026-09-14T13:09:52+08:00 ===
+{
+  "assessed_at": "2026-09-14T05:09:52.361618Z",
+  "available_physical_bytes": 15628066816,
+  "captured_at": "2026-09-14T05:09:52.361221Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15628066816,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"episode": 200, "updates": 169, "wall_seconds": 61.374441014020704}
+{"episode": 400, "updates": 369, "wall_seconds": 131.41902327991556}
+{"episode": 600, "updates": 569, "wall_seconds": 200.77942577097565}
+{"episode": 800, "updates": 769, "wall_seconds": 270.46207609097473}
+{"episode": 1000, "updates": 969, "wall_seconds": 339.70158611796796}
+{"episode": 1200, "updates": 1169, "wall_seconds": 409.3267090569716}
+{"episode": 1400, "updates": 1369, "wall_seconds": 478.5907668459695}
+{"episode": 1600, "updates": 1569, "wall_seconds": 547.7114882669412}
+{"episode": 1800, "updates": 1769, "wall_seconds": 617.5740420449292}
+{"episode": 2000, "updates": 1969, "wall_seconds": 687.5874731009826}
+{"episode": 2200, "updates": 2169, "wall_seconds": 758.089427237981}
+{"episode": 2400, "updates": 2369, "wall_seconds": 828.8159971149871}
+{"episode": 2600, "updates": 2569, "wall_seconds": 899.8467748590047}
+{"episode": 2800, "updates": 2769, "wall_seconds": 971.2132513700053}
+{"episode": 3000, "updates": 2969, "wall_seconds": 1042.2555038359715}
+{"episode": 3200, "updates": 3169, "wall_seconds": 1113.2944397489773}
+{"episode": 3400, "updates": 3369, "wall_seconds": 1184.0076256579487}
+{"episode": 3600, "updates": 3569, "wall_seconds": 1254.0992348790169}
+{"episode": 3800, "updates": 3769, "wall_seconds": 1323.9218784369295}
+{"episode": 4000, "updates": 3969, "wall_seconds": 1393.0779481489444}
+{"episode": 4200, "updates": 4169, "wall_seconds": 1462.922223225003}
+{"episode": 4400, "updates": 4369, "wall_seconds": 1532.406665456947}
+{"episode": 4600, "updates": 4569, "wall_seconds": 1602.1551158369984}
+{"episode": 4800, "updates": 4769, "wall_seconds": 1671.5649641909404}
+{"episode": 5000, "updates": 4969, "wall_seconds": 1741.2585566049675}
+{"arm": "BANK", "status": "complete", "panel": {"mean": -5.483828125, "sample_sd": 4.5698291842667365, "conditional_episode_se": 0.40391965063239976, "minimum": -19.95, "maximum": 3.8999999999999995, "n": 128}}
+=== Task 'folr-b02-bank-781401-82b12d7e0' exited with code 0 at 2026-09-14T13:39:41+08:00 (Duration: 1789s) ===

@@ -1,0 +1,44 @@
+{
+  "scope": "B09 one valid scientific pair, including failed non-scientific submit01 in prior charge; costs unknown where observation mixed sleep and command wall",
+  "exclusive_seconds": {
+    "BYPASS": 190.89707398798782,
+    "REPLACE": 193.61598394298926
+  },
+  "external_runner_seconds": 395.21,
+  "summary_before_write_seconds": 387.294012008002,
+  "additional_exit_wall_seconds": 7.915987991997952,
+  "prior_shared_conservative_charge_seconds": 180,
+  "external_shared_before_other_closeout_seconds": 190.69694206902295,
+  "known_postlaunch_components_seconds": {
+    "admission_readback": 0.42182080005295575,
+    "monitor_direct_only": 1.9,
+    "collection_enclosing": 2.0807948000147007,
+    "failed_local_intake_import": 5.418701399990823,
+    "successful_local_intake": 2.3712076999945566,
+    "remote_cleanup_inspection": 0.9788666000240482,
+    "remote_cleanup": 0.811791899963282
+  },
+  "not_added_again": [
+    "contained preflight0.04",
+    "contained archiveSSH/SCP",
+    "summary in-run already inside external runner",
+    "supervisor duration/uptime",
+    "sleep/wait latency",
+    "failed submit01 costs already in prior180"
+  ],
+  "monitor_total": "UNKNOWN; original243.6s conflicts with its rows and included waits; reconciliation retains1.9s direct and unknown combined-call SSH portions, not a measured total",
+  "unknown": [
+    "remaining monitor SSH command portions",
+    "all remaining local publication/support coverage beyond the named cleanup commands",
+    "aggregate CPU work",
+    "H exact native consequence calls",
+    "peak scratch",
+    "provider/agent effort and USD cost"
+  ],
+  "complete_plan_conformance": "Not certified from incomplete complete-chain measurements; exclusive arms meet900s each. No measured breach is inferred.",
+  "valid_results": 1,
+  "peak_self_rss_bytes": 625741824,
+  "peak_reaped_child_rss_bytes": 625741824,
+  "accounted_pair_charge_through_intake_seconds_excluding_unknown": 587.402524700053,
+  "accounted_pair_charge_through_named_components_seconds_excluding_unknown": 589.1931832000404
+}

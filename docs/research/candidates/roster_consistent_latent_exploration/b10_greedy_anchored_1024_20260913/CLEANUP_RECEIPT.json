@@ -1,0 +1,21 @@
+{
+  "time_utc": "2026-09-13T23:54:45.147901+00:00",
+  "terminal_status": {
+    "task": "rcle-b10-s30-e5fd43973",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3429759,
+    "uptime_seconds": 1319,
+    "tmux_active": false
+  },
+  "removed": [
+    "/home/wu/hmasd-worktrees/rcle-b10-e5fd43973",
+    "/home/wu/.agent-tasks/rcle-b10-s30-e5fd43973",
+    "/home/wu/hmasd-inputs/rcle-b10-e5fd43973-evidence.tgz"
+  ],
+  "disk_absent": true,
+  "git_registration_absent": true,
+  "local_preserved_raw_source_and_shared_roots": "untouched",
+  "integration_commit": "c6353c954fee03cac3bdd671e0e5b52de2a1d3c3",
+  "invoked_cleanup_wall_s": 0.7822278
+}

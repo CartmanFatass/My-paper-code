@@ -1,0 +1,23 @@
+{
+  "request_id": "2026-09-14-folr-post-b03-direction-decision-01",
+  "source_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "provider_url": "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1",
+  "prompt_bytes": 26264,
+  "prompt_sha256": "1e5962974d30980246f8db52e6ca5d48663d87c1436a203cba23175e8d95863f",
+  "prompt_characters": 17726,
+  "handoff_commit": "797e09e6a5ea3ad9742e79dc5a7c14bfaac722ff",
+  "prompt_commit": "acb58504c3c5699422428f415836dc6f550fbc2f",
+  "dispatch_state": "APP_MESSAGE_DELIVERED_PROVIDER_ACCEPTANCE_PENDING",
+  "recorded_after_dispatch_utc": "2026-09-14T13:29:39Z",
+  "app_tool": "mcp__codex_app__send_message_to_thread",
+  "app_result": {
+    "threadId": "01a09ea0-4a86-75b0-826d-6f864efa7480"
+  },
+  "app_is_error": false,
+  "actual_provider_user_message_id": null,
+  "actual_provider_acceptance": "NOT_YET_OBSERVED_BY_AUTHOR",
+  "next_action": "Registered Transport owns same-request reconciliation, full actual composer/accepted-user preservation, one Send, durable terminal observation/full archive/direct author return. DM owns complete scientific intake and conforming decision application.",
+  "scientific_state": "B03 complete and fully reviewed; current direction remains ACTIVE/MEDIUM. No new empirical invocation or lifecycle disposition selected by dispatch."
+}

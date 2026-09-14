@@ -1,0 +1,19 @@
+{
+  "event": "MGTAP_PORTFOLIO_FULL_DECISION_APPLIED_RELEASED_20260914",
+  "received_from": "01a09cd8-676e-7513-806d-a86b7e104518",
+  "read_by": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "utc": "2026-09-14T10:48:00.647996+00:00",
+  "predecessor_request": "2026-09-14-mgtap-lr-selection-direction-decision-01",
+  "response_commit": "d03ee1f04f7c0ea9dc2e7ae5ae817b75511a5f80",
+  "response_path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/archive/RESPONSE.md",
+  "response_bytes": 18522,
+  "response_lines": 139,
+  "response_sha256": "df3e7910a281e4bbc0fa928d59d780c6bdce13974f68165bbbba659381238272",
+  "full_response_and_intake_read_to_eof": true,
+  "actual_release_commit": "e38836b0820eab80e964caa861171c5d48230e18",
+  "new_rcle_claim_commit": "03be1bd7b11213070b91d9b6281c9c58279e1dd4",
+  "predecessor_disposition": "CONTINUE optional COND; DENSE default; one fresh fixed1e-4 pair next; no successor seed/card/native launch claimed",
+  "actual_user_node": "759e27d6-a38c-4de3-8244-d9111fd57dbc",
+  "predecessor_input_deviation": "Actual rendered node contains only23-character heading; intended20627-byte prompt was not fully delivered. MGTAP preserved deviation and accepted actual full answer on its matching complete evidence/context contents; no resend.",
+  "new_request_delivery_requirement": "Before this different new request Send, verify actual complete composer contents; after acceptance verify matching complete user node, preserving actual observed contents/IDs. File hash alone is not delivery; uncertainty permits observation/reconciliation, not duplicate Send."
+}

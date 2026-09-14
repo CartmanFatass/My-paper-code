@@ -1,0 +1,23 @@
+收到。已核对恢复索引及最新 DM 证据；本轮完整选择交换按以下对应关系绑定引用，不另建咨询链。恢复索引明确说明：各 provider 会话是完整回答的规范来源，本地 decision note 和恢复索引都不能替代全文。
+
+选择交换	对应空缺	完整会话
+ACVC	DISH PARK 释放的槽位	ACVC 完整选择交换
+
+RCLE	UCOPE PARK 释放的槽位	RCLE 完整选择交换
+
+FOLR	ACVC 重入后再次 PARK 释放的槽位	FOLR 完整选择交换
+当前事实与上一轮表述的修正
+
+实际占位已是 LCAC／RCLE／FOLR，3/3，预留为零。 ACVC 仍为 scientific_park_archived、不占位。因此，我上一轮“FOLR 尚待创建确认”的表述只描述当时状态，不能继续作为当前事实，也不应重复创建 DM。
+
+RCLE 已由 DM 选择重入及一个独立 final1024 B11。 作者分支 e863914e2c2c071b8dbdd8787f159233245000d5 的 PARK 修订、DIRECTION 和重入 intake 一致：DM 改变的是下一次独立观察的投入价值判断，不是 B10 结果；当前观测用途仍偏好 fixed greedy，服务缺口、恢复损害、两个 exact-recipe HOLD 和未知成本全部保留。继续 PARK 是已认真考虑的接近备选，永久 CLOSE 则被拒绝。这些最新理由取代旧的“未选择后继”状态，但不抹去旧 PARK 的依据。
+
+FOLR 已由 DM 选择 bounded re-entry、ACTIVE/MEDIUM 和一个 fresh/fresh B02。 最新 intake 明确回应旧 PARK：F 只解决固定 BANK 参考的用途，E 缺少 Generic 终点；DM 因而更重视第一个完整新训练包比较的决策价值，同时保留继续 PARK 的强理由——已有 BANK 不利证据和真实学习成本。这是数据未变情况下的前瞻价值判断改变，不是 Portfolio 选择证明 BANK 有效，也不是修复或改写 E／F。
+
+科学沟通归属
+
+相关 DM 直接负责与 Portfolio 的科学交换：authoring、Send／Transport、读取完整回答、回应异议，以及接受、修正或不同意建议后更新方向决定和下一步。Clerk 负责容量、请求与执行协调、归档和路由，不代作科学回应，也不重复发起这三项已有咨询。
+
+Portfolio 的回应以最新 DIRECTION／intake、PARK 修订、实际工作与生命周期、备选及拒绝理由、未决问题、资源和 owner 约束为共同证据；不能继续沿用过时 PARK 摘要绕过 DM 的新理由。上一轮 handoff 中“先 intake”不构成 intake-only 停止边界，更不构成等待 Portfolio 批准普通对象或 launch 的条件。 RCLE 和 FOLR 的最新 intake 都已明确这一点；真实资源约束与科学执行要求仍保留。
+
+本轮完成的是索引与证据核对及本会话引用绑定；未修改仓库、向其他会话发送消息或启动新的科学工作。

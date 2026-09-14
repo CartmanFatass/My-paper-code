@@ -1,0 +1,85 @@
+{
+  "id": "20260914-acvc-001",
+  "created": "2026-09-14T06:12:05-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "B03：一个新 C proposer 的固定 F 使用比较",
+  "context": "一个新 C 拟合及私有 C/F/own-dwell 三终点；cluster UAV 的私有历史影响执行与团队服务。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "launch as carded"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "do not launch"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "revise before launch"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "按已生效 Portfolio CONTINUE，新学习实例回答后续固定 F 开发价值；无需等待批改。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L60",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按已生效的 Portfolio CONTINUE，执行一个新 C proposer 拟合及 C/F/own-dwell 终点评价；所有者可异步改动下一干净边界。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC B03",
+        "from": "旧 PARK 保留参考知识",
+        "to": "已开工的新独立 B/EXPLORE，检验固定 F 在新学得策略上的后续开发价值"
+      }
+    ],
+    "if_refused": "在下一干净边界应用明确的新指令；保留已经发生的工作、旧结果和独立评审，不推断自动重跑或删除证据。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_SCIENCE_CARD_20260914.md",
+        "quote": "The changed investment objective is to assess whether fixed F deserves further development on a newly learned proposer.",
+        "why": "两个已观察 cluster 终点均有超过 .01J 的均值增益；一个新学习实例直接提供这一新投入问题的信息。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md",
+        "quote": "F−C",
+        "why": "B02 对 C 和 own-dwell 分别有4/64和11/64不利世界；只有两个 cluster 学习实例，旧 PARK 合理且成本尾部未知。"
+      }
+    ],
+    "uncertainty": [
+      "新训练和评价随机域同时变化，不单独隔离训练方差。",
+      "第三个终点不回溯构成预注册确认研究；没有稳定优势或部署默认结论。",
+      "完整支持、代理及 provider 累计成本仍未知。"
+    ],
+    "cost": {
+      "compute": "一个新拟合：512训练 episode、1024更新、3×64终局，180224团队步；native预估300秒、支持预估1200秒为可前瞻修订计划。",
+      "owner_time": "无需等待回复；可异步审阅。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+    "source": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_SCIENCE_CARD_20260914.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-14T13:33:33+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_RESULT_EVIDENCE_20260914.md",
+      "state": "applied",
+      "summary": "已执行Portfolio选择的一个新512episode C拟合及C/F/own-dwell：B03双UP、全部计数/证据保全、独立科学评审已派发；普通实现选择由DM承担。"
+    }
+  ]
+}

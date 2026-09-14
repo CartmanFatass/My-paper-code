@@ -1,0 +1,95 @@
+{
+  "observed_remote_refs": "e5e3ff09e03b2d5d128561bf9844043af19bbffe\trefs/heads/codex/vap-folr\n4d13a0b65f18fba91d339f2db42531527ce79aa1\trefs/heads/main\n",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md",
+      "commit_sha": "0a1b5facc2bce7f00f8b4f95cf69b4c9f24b5d13",
+      "bytes": 10511,
+      "sha256": "508430f6d49a1f656f0772f0c26a467baf456292fff2b59b3b6a6e211c6422fa",
+      "published_descendant": "e5e3ff09e03b2d5d128561bf9844043af19bbffe"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "e5e3ff09e03b2d5d128561bf9844043af19bbffe",
+      "bytes": 8023,
+      "sha256": "6201545ecd735956c0ef51146bfb5c1f827012b3f6cb625725e560ce525b26fa",
+      "published_descendant": "e5e3ff09e03b2d5d128561bf9844043af19bbffe"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md",
+      "commit_sha": "e5e3ff09e03b2d5d128561bf9844043af19bbffe",
+      "bytes": 6578,
+      "sha256": "6a54b89bc4e2938b10c585171438ce1b50ecb298d31e7b7551a67d446ea12a8e",
+      "published_descendant": "e5e3ff09e03b2d5d128561bf9844043af19bbffe"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b02_781401/RESULT_SUMMARY.json",
+      "commit_sha": "e5e3ff09e03b2d5d128561bf9844043af19bbffe",
+      "bytes": 1040,
+      "sha256": "10434754d1dbfd38936de76a00eba95d400b03f1005b1a5bc35c4dc06f0a6540",
+      "published_descendant": "e5e3ff09e03b2d5d128561bf9844043af19bbffe"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b02_781401/COST_SUMMARY.json",
+      "commit_sha": "e5e3ff09e03b2d5d128561bf9844043af19bbffe",
+      "bytes": 3676,
+      "sha256": "e80372627044799e6e6c6c135d560e7fde599d3d683ac3cf1e864db6c44c2015",
+      "published_descendant": "e5e3ff09e03b2d5d128561bf9844043af19bbffe"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_REENTRY_INTAKE_20260914.md",
+      "commit_sha": "0a1b5facc2bce7f00f8b4f95cf69b4c9f24b5d13",
+      "bytes": 8128,
+      "sha256": "b901f1ce9216917460f84c189331dcea7a2384e52027c1a1120bd2211dfc643b",
+      "published_descendant": "e5e3ff09e03b2d5d128561bf9844043af19bbffe"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_RESULT_EVIDENCE_20260913.md",
+      "commit_sha": "a726ffbfe4efb532a0ea84ea602071e5f5c09009",
+      "bytes": 7257,
+      "sha256": "07bb687db44eece9577bb79ca561789076bbfa99ac9074449571470f88400743",
+      "published_descendant": "e5e3ff09e03b2d5d128561bf9844043af19bbffe"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260913_post_f_scientific_review/archive/RESPONSE.md",
+      "commit_sha": "36d9638a000b75c888e139a29006be000894e063",
+      "bytes": 37737,
+      "sha256": "64f4c8e3acd7b48a72459ebad7598de823cc58e76a89916b55ee98df4c8f42cf",
+      "published_descendant": "e5e3ff09e03b2d5d128561bf9844043af19bbffe"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260913_post_f_scientific_review/INTAKE.md",
+      "commit_sha": "e5e3ff09e03b2d5d128561bf9844043af19bbffe",
+      "bytes": 16922,
+      "sha256": "d919a1a30d4cb450762943f05888d5284083febbed4706d45d5ee696ff909e91",
+      "published_descendant": "e5e3ff09e03b2d5d128561bf9844043af19bbffe"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "77c6ab3663e674208ac3ff084e08f3b1642579c3",
+      "bytes": 46423,
+      "sha256": "8e38bc58532953665b676b0a1c706fa97d80df54a432a21a8fdda1a7d9d5b713",
+      "published_descendant": "4d13a0b65f18fba91d339f2db42531527ce79aa1"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "77c6ab3663e674208ac3ff084e08f3b1642579c3",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "published_descendant": "4d13a0b65f18fba91d339f2db42531527ce79aa1"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "77c6ab3663e674208ac3ff084e08f3b1642579c3",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "published_descendant": "4d13a0b65f18fba91d339f2db42531527ce79aa1"
+    }
+  ],
+  "issue": {
+    "number": 15,
+    "state": "OPEN",
+    "title": "FOLR: finite next discriminator after entity-history B01"
+  },
+  "provider_send_at_authoring": 0
+}

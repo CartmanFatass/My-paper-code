@@ -1,0 +1,17 @@
+# LCAC-B02 engineering acceptance and execution
+
+L0, preserved algorithms, budget/stop and the actual seed-overlap defect are in the frozen B02 card at2242a4d601c7fee4ef8cc367653f4e28f0607598. DM directly implemented only entry configuration, explicit final-reset offset and summary/checkpoint metadata. Scope:none. No CM/Implementer. Existing learner/policy/native source remains unchanged.
+
+DM accepts source25ea4d61c0e1f2484da77f4bc1851e17cdc8eb4a after its NEW batch independent [Astra/high review](evidence/b02_seed9412/ENGINEERING_REVIEW.md) found no material defect. Reviewer traced actual fixedPLAN→run_pair→collection/publication and independently computed the frozen counts. All B01 defaults remain unchanged. Scientific design review and seed repair are in the completed B01 intake; code review does not grant lifecycle authority.
+
+[Focused remote checks](evidence/b02_seed9412/FOCUSED_CHECKS.json) at that exact source passed2 tests in2.76s; enclosing11.515s includes fetch/fast-forward/preparation and is not additive to pytest duration. One tiny non-native master29 publication fixture and the full1024 range/count arithmetic consume zero native B02 exposure. Own remote scratch was verified removed; prior local B01 restricted scratch untouched. No unchanged full algorithm suite repeated.
+
+Before reusing the existing detached remote checkout /home/wu/hmasd-worktrees/lcac-b01-26e23ff3, exact old B01 supervisor status was finished0/tmux inactive, and all its result/model bytes had been collected and matched to committed Git artifacts. No live process migrated. The checkout now holds25ea4d61c; earlier result folders/receipts retain their actual133218a8 launch SHA.
+
+[Prospective launch plan](evidence/b02_seed9412/LAUNCH_PLAN.json) binds the single B02 source/handle/output and command. DM selects execution of the already frozen B02 under standing delegation after technical acceptance. Fresh memory admission immediately precedes the runner; complete GNU-time wall/RSS includes publication/exit. Plan600s pair is not a kill threshold, and frozen scientific endpoints cannot be extended. New native batch Monitor owns adopted observation through terminal; DM owns collection, scientific interpretation and next decision. No further seed or retry follows automatically.
+
+Actual [launch receipt](evidence/b02_seed9412/LAUNCH_RECEIPT.json) records accepted2026-09-14T04:07:01Z, handle lcac-b02-s9412-25ea4d61-20260914, PID3655108, initialrunning/tmuxactive. New native Monitor /root/lcac_b02_monitor adopted the exact running handle at04:07:41Z. The first notice arrived through an app message; DM directed remaining child facts through native collaboration without replacing observation. Live observation continues, and no terminal/result is inferred yet. Offline analyze.py is intake arithmetic for completed archived outputs only; it cannot invoke a native task or alter live source.
+
+## Completed collection acceptance
+
+The earlier live record above is historical. Monitor event LCAC_B02_9412_20260914-terminal-20260914T041432Z and DM direct status agree finished / exit 0 / tmux inactive. DM collected and SHA256-verified all eight output/receipt files, checked all declared seeds/counts/units, safely read final checkpoint metadata/finite tensors, and accepts the technical result. Complete wall 443.91 s / peak 570,212 KiB; native monitor active_set empty. Offline intake uses the completed archive only. [Result and limits](LCAC_B02_RESULT_EVIDENCE_20260914.md); no successor run follows from technical acceptance.

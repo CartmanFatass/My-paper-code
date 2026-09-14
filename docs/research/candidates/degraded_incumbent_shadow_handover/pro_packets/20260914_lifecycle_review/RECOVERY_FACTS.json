@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-09-14",
+  "new_experiment_handles": [],
+  "b08_archive_presence": [
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\directions\\degraded_incumbent_shadow_handover\\exp\\b08_s137_a01522a6_collected\\complete_evidence.tar.gz",
+      "exists": true,
+      "bytes": 4589570,
+      "sha256": "abb98590a104842175ae43e8062020ffc336c5f9e765cccb4e334999ce56655e"
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\dm-dish-b06-scientific-intake-20260907\\temp\\directions\\degraded_incumbent_shadow_handover\\exp\\b08_s137_a01522a6_collected\\complete_evidence.tar.gz",
+      "exists": true,
+      "bytes": 4589570,
+      "sha256": "abb98590a104842175ae43e8062020ffc336c5f9e765cccb4e334999ce56655e"
+    }
+  ],
+  "review_request": "dish-lifecycle-review-20260914-01",
+  "review_status": "complete; archived eaed5cb6c; full DM response recorded",
+  "source_current_equals_accepted_B08_engine_and_trainer": true
+}

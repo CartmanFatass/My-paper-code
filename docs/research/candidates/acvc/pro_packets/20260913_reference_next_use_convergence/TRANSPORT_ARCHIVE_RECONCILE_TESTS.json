@@ -1,0 +1,26 @@
+{
+  "utc": "2026-09-13T19:36:39.694625+00:00",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Projects\\HMASD\\temp\\tests\\acvc-archive-reconcile-20260913-1944",
+    "tests/skills/test_native_transport_workflow.py",
+    "-k",
+    "github_delivery or sha_comment or github_archive_reconciliation"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 2.5,
+  "stdout": "...................                                                      [100%]\n19 passed, 62 deselected in 1.92s\n",
+  "stderr": "",
+  "purpose": "Same-record verified GitHub archive transition and dependent native receipt, including rejection without mutation",
+  "empirical_invocations": 0,
+  "network_or_provider_calls": 0,
+  "scratch_removed": true
+}

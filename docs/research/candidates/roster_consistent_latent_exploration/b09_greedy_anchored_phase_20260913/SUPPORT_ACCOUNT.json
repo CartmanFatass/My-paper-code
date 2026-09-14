@@ -1,0 +1,134 @@
+{
+  "object_id": "RCLE-TBCFV-B09-GREEDY-ANCHORED-PHASE",
+  "as_of": "complete valid native result, preserved publication and verified two-target cleanup 2026-09-13T23:29:14Z; invoked invoice tail still partially unavailable",
+  "native_cap_s": 180,
+  "additional_invoked_support_cap_s": 600,
+  "complete_invoked_cap_s": 780,
+  "whole_native_wall_s": 47.13,
+  "known_support_charged_s": 51.6534893,
+  "known_complete_invoked_s": 98.7834893,
+  "rows": [
+    {
+      "operation": "final exact-target pre-cleanup retention hash read",
+      "wall_s": 0.2217987
+    },
+    {
+      "operation": "terminal two-target cleanup and disk-registration absence verification",
+      "wall_s": 0.743228
+    },
+    {
+      "operation": "initial_read_0",
+      "wall_s": 0.034392
+    },
+    {
+      "operation": "initial_read_1",
+      "wall_s": 0.19931
+    },
+    {
+      "operation": "policy_test_launch_read",
+      "wall_s": 0.3815121
+    },
+    {
+      "operation": "monitor_test_inventory",
+      "wall_s": 0.2157166
+    },
+    {
+      "operation": "contract_and_launch_evidence_read",
+      "wall_s": 0.2384135
+    },
+    {
+      "operation": "B09_source_test_edit",
+      "wall_s": 0.2148015
+    },
+    {
+      "operation": "accepted_card_owner_review_method",
+      "wall_s": 0.4741167
+    },
+    {
+      "operation": "B09_card_packet_AST",
+      "wall_s": 0.2643597
+    },
+    {
+      "operation": "B09_card_source_owner_commit_push",
+      "wall_s": 4.8724886
+    },
+    {
+      "operation": "exact_remote_source_staging",
+      "wall_s": 7.8160193
+    },
+    {
+      "operation": "complete_remote_contract_test_and_scratch_cleanup",
+      "wall_s": 4.5453882
+    },
+    {
+      "operation": "failed_fixture_parent_repair_and_remaining_five_tests_cleanup",
+      "wall_s": 5.5765012
+    },
+    {
+      "operation": "test_collection_and_exact_command_technical_record",
+      "wall_s": 1.1596502
+    },
+    {
+      "operation": "support_snapshot_and_diff_counts",
+      "wall_s": 0.2653033
+    },
+    {
+      "operation": "test_command_support_publication",
+      "wall_s": 4.3382172
+    },
+    {
+      "operation": "independent_Astra_high_B09_review",
+      "wall_s": 1.207603
+    },
+    {
+      "operation": "review_acceptance_owner_boundary_publication",
+      "wall_s": 4.8447048
+    },
+    {
+      "operation": "single_detached_B09_supervisor_launch",
+      "wall_s": 1.1523762
+    },
+    {
+      "operation": "collection_analysis_E0_scope_preparation",
+      "wall_s": 0.186471
+    },
+    {
+      "operation": "B09_read_only_analysis_preparation",
+      "wall_s": 0.2232671
+    },
+    {
+      "operation": "terminal_complete_archive_transfer_source_preservation",
+      "wall_s": 1.9063576
+    },
+    {
+      "operation": "retained_data_checkpoint_primary_native_consequence_analysis",
+      "wall_s": 5.9027975
+    },
+    {
+      "operation": "result_scientific_reading_and_allowed_closeout",
+      "wall_s": 0.2435001
+    },
+    {
+      "operation": "raw_publication_receipts_terminal_cleanup_inventory",
+      "wall_s": 0.9293631
+    },
+    {
+      "operation": "Monitor_invoked_reads_conservative_bound",
+      "wall_s": 3.2,
+      "approximate_report_s": 3.1,
+      "bound": true
+    },
+    {
+      "operation": "E0_scientific_intake_brief_current_position_audit",
+      "wall_s": 0.2958321
+    }
+  ],
+  "accounting_complete": false,
+  "unmeasured_support_components": [
+    "result and final closeout publication commands incompletely covered in this invoice",
+    "Root/Clerk invoked main integration/retention time unavailable"
+  ],
+  "provider_agent_lifetime_cost": "UNKNOWN explicitly accepted for this finite unit",
+  "documentary_investment_intake": "separate UNKNOWN through88e39c358",
+  "interpretation": "Known invoked support charged once; parent tool envelopes replace nested shell/subcommand times; two test invocations and native Monitor read bound preserved. No observed cap breach; incomplete tail coverage is not zero or proof of a complete invoice. Native47.13s separate; no transfer, rollover or automatic successor."
+}

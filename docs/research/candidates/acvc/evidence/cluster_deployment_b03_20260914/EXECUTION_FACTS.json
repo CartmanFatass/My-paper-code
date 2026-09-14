@@ -1,0 +1,125 @@
+{
+  "object": "ACVC_CLUSTER_DEPLOYMENT_B03",
+  "source_sha": "091c6725b149cd2dfa9665408cabee17b8f958e3",
+  "author_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "node": "hmasd-wsl-node",
+  "handle": "acvc-cluster-b03-091c6725b",
+  "remote_cwd": "/home/wu/hmasd-worktrees/acvc-cluster-b03-091c6725b",
+  "remote_output": "/home/wu/hmasd-worktrees/acvc-cluster-b03-091c6725b/temp/directions/acvc/exp/cluster_deployment_b03_20260914",
+  "supervisor": "/usr/local/bin/agent-task",
+  "supervisor_record": "/home/wu/.agent-tasks/acvc-cluster-b03-091c6725b",
+  "planned_command": "/usr/local/bin/agent-task run acvc-cluster-b03-091c6725b env HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 bash /home/wu/hmasd-worktrees/acvc-cluster-b03-091c6725b/experiments/candidates/acvc/cluster_deployment_b03/launch.sh 091c6725b149cd2dfa9665408cabee17b8f958e3 /home/wu/hmasd-worktrees/acvc-cluster-b03-091c6725b/temp/directions/acvc/exp/cluster_deployment_b03_20260914",
+  "monitor": "/root/acvc_b03_monitor",
+  "launch_state": "finished_exit0_collected_technically_accepted",
+  "retained_source": "Remote detached worktree HEAD and corrected launch SHA256 verified; bash syntax passed. Configured zsh login shell used for lazy-fetching worktree creation after non-login preparation was terminated. No actual scientific admission/invocation yet.",
+  "watchdogs_s": {
+    "inner": 1800,
+    "kill_grace": 10,
+    "outer": 1860
+  },
+  "scientific_invocations_selected": 1,
+  "native_planning_estimate_s": 300,
+  "support_planning_estimate_s": 1200,
+  "cost_coverage": "Plans are prospectively revisable; full preparation/provider/agent/support cost UNKNOWN. Earlier own non-login fetch and worktree lazy-fetch stalls retained as preparation failures, no scientific invocation.",
+  "accepted_at": "2026-09-14T13:14:07Z",
+  "launch_receipt": "Task acvc-cluster-b03-091c6725b started in tmux session agent_acvc-cluster-b03-091c6725b; /home/wu/.agent-tasks/acvc-cluster-b03-091c6725b/task.log",
+  "admission": {
+    "assessed_at": "2026-09-14T13:14:06.230887Z",
+    "available_physical_bytes": 15628996608,
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "effective_available_bytes": 15628996608
+  },
+  "monitor_adoption": {
+    "pid": 3671264,
+    "event": "ACVC_CLUSTER_DEPLOYMENT_B03/acvc-cluster-b03-091c6725b",
+    "tmux_active": true,
+    "at": "2026-09-14T13:14:34Z",
+    "state": "running"
+  },
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-14/20260914-acvc-001.json",
+  "main_accepted_source": "b7d540f06",
+  "terminal_event": "ACVC_CLUSTER_DEPLOYMENT_B03:acvc-cluster-b03-091c6725b:finished:20260914T131712Z",
+  "terminal_observed_at": "2026-09-14T13:17:12Z",
+  "native_exit_at": "2026-09-14T13:16:49Z",
+  "native_wall_s": 163.36,
+  "supervisor_rounded_duration_s": 163,
+  "monitor_observed_uptime_s": 185,
+  "peak_rss_kib": 548876,
+  "scientific_invocations_actual": 1,
+  "archive": {
+    "archive": "temp\\directions\\acvc\\retained\\cluster_deployment_b03_20260914\\native_output.tar.gz",
+    "bytes": 420924,
+    "sha256": "c0bd6559406ce247c4db53727718373272e0f1175db0b7aea5fd141e446894b4",
+    "members": {
+      "cluster_deployment_b03_20260914/stdout.log": {
+        "bytes": 1947,
+        "sha256": "7ad6fa4402f7a08f81693bef9769de24c5c3b97a3e468d11aaa4f33f117b0fd2"
+      },
+      "cluster_deployment_b03_20260914/summary.json": {
+        "bytes": 17385,
+        "sha256": "7ac32ae4140c23ef774baeb9ad54220536098de5db185ad6f24cf857c4f4f6ba"
+      },
+      "cluster_deployment_b03_20260914/native_time.txt": {
+        "bytes": 53,
+        "sha256": "6003f61971d36c6d56988a53fceaebad606954d5cd5d7a6e125d9ff90b3ef5fa"
+      },
+      "cluster_deployment_b03_20260914/episodes.jsonl": {
+        "bytes": 412529,
+        "sha256": "aae8b14d0584422a68d42b7e8679432aa9b2d0410c7c5dbfbefbb83a07ea61a0"
+      },
+      "cluster_deployment_b03_20260914/final_DENSE.pt": {
+        "bytes": 282957,
+        "sha256": "b5502c21400e469a9ab667abd0821da317d5a13851231a90a858f57a836d2517"
+      },
+      "cluster_deployment_b03_20260914/admission.json": {
+        "bytes": 504,
+        "sha256": "b303b0a4ca42cf86258a9ecc3a086276ad82b11293aa7c22c50d45dc4e5f5b9e"
+      },
+      "cluster_deployment_b03_20260914/updates.jsonl": {
+        "bytes": 237476,
+        "sha256": "6bf7db7ec166397e73f98b483330d722447af46ef59dada9f7fadf5c950d6e4c"
+      },
+      "cluster_deployment_b03_20260914/stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "acvc-cluster-b03-091c6725b/runner.sh": {
+        "bytes": 1285,
+        "sha256": "d0b7f41e463c665b718f137544bffe7e480022c6e59fb6412c46d81b4d88848a"
+      },
+      "acvc-cluster-b03-091c6725b/exit_code": {
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "acvc-cluster-b03-091c6725b/status": {
+        "bytes": 9,
+        "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+      },
+      "acvc-cluster-b03-091c6725b/start_time": {
+        "bytes": 11,
+        "sha256": "437f234a420447dbc02be1a133b324fcce4669b1ddad3d18067c1d3855525f56"
+      },
+      "acvc-cluster-b03-091c6725b/pid": {
+        "bytes": 8,
+        "sha256": "21069c339cf7ce4aeedfd73e88e9110f4e4a87096e563805f2199e19ce8a3ac9"
+      },
+      "acvc-cluster-b03-091c6725b/task.log": {
+        "bytes": 690,
+        "sha256": "d0679622fb8abaf593c83d002fd97c57d9578b80fe41023c2e4b4581518397b7"
+      }
+    }
+  },
+  "remote_cleanup": "Completed: exact detached worktree absent on disk/from git; supervisor record and staging archive removed only after all files matched the verified locally retained archive and published evidence. See REMOTE_CLEANUP.json. No live native handle.",
+  "preparation_resolution": "Initial non-login fetch eventually returned SSL timeout, no live fetch retained. Non-login worktree lazy-fetch observed83s was terminated and Git removed its own incomplete worktree; both old preparation directories absent. Configured zsh -lic exact-SHA fetch with --refmap= and worktree creation succeeded; shell init warnings did not alter Git/source results. All happened before adjacent admission/sole scientific invocation.",
+  "scientific_review": {
+    "dispatched_at": "2026-09-14T13:28:21Z",
+    "state": "Author App dispatch accepted; actual provider Send/archive await Transport facts",
+    "task_commit": "c15227abeafa0cd58960750c0c9c47223b9d6a9f",
+    "parent_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+    "handoff_commit": "dd9453b9e3570439d93cd72ef65635d4b633d8ea",
+    "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "request_id": "2026-09-14-acvc-cluster-b03-scientific-review-01",
+    "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480"
+  }
+}

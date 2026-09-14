@@ -1,0 +1,10 @@
+{
+  "sha": "25ea4d61c0e1f2484da77f4bc1851e17cdc8eb4a",
+  "cwd": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3",
+  "scratch": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/temp/directions/learned_counterfactual_agent_credit/test/b02-binding-check01",
+  "exit_code": 0,
+  "enclosing_seconds": 11.51500000001397,
+  "stdout": "..                                                                       [100%]\n2 passed in 2.76s\n\n\n{\"pytest_exit\": 0, \"scratch_removed\": true, \"prior_B01_terminal\": {\"task\": \"lcac-b01-s9411-133218a8-20260914\", \"status\": \"finished\", \"exit_code\": 0, \"pid\": 3653575, \"uptime_seconds\": 3398, \"tmux_active\": false}, \"native_exposure\": 0}\n",
+  "stderr": "From https://github.com/CartmanFatass/My-paper-code\n * branch                codex/lcac -> FETCH_HEAD\n   133218a8e..25ea4d61c  codex/lcac -> origin/codex/lcac\nUpdating files:  66% (2/3)\nUpdating files: 100% (3/3)\nUpdating files: 100% (3/3), done.\n",
+  "native_exposure": 0
+}

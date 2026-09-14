@@ -1,0 +1,44 @@
+{
+  "question": "是否保留完整Portfolio的CONTINUE科学裁决，并按随后所有者指令在现有收尾后暂停、将未启动后继留待明确恢复？",
+  "changes_if_approved": [
+    {
+      "target": "ACVC当前处置、主控注册表与暂停handoff",
+      "from": "完整Portfolio答复已交付、共享记录尚待实际intake和释放",
+      "to": "完整裁决与DM逐项回应已接收；CONTINUE/MEDIUM/recasts2和一席保留；当前工作完成后owner-paused，1024/4096后继未建卡未启动"
+    }
+  ],
+  "if_refused": "保留全部历史证据；只有后续所有者明确指令可以改变本次暂停或科学取舍，不自动恢复实验或另行咨询。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/archive/RESPONSE.md",
+      "quote": "**ACVC CONTINUE，保持 MEDIUM、recasts2 和现有席位；下一目标选择一个全新的4096回合 C-only 学习程序，前瞻固定1024／4096两个快照，并在全部学习结束后完成各自的 C／F／own-dwell 评价。当前不采纳可逆 PARK 建议，不 RECAST、不 CLOSE，也不追加或重跑已消费的六程序 C01。**",
+      "why": "完整Portfolio选择一次有明确开发问题的有限B，并要求保留已消费C01；该科学裁决不等于实际已启动。"
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-14-owner-pause-after-inflight.md",
+      "quote": "各方向可以先暂停 手中的任务和实验不要停止 完成后写handoff",
+      "why": "后来的直接所有者指令要求完成当前工作后暂停，控制后继是否执行。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_C01_DIRECTION_REPORT_20260914.md",
+      "quote": "DM recommends PARK ACVC as a bounded optional fixed-F research reference, MEDIUM/recasts2 unchanged. This is a close call against one new1024/4096 paired-exposure B; no PARK is yet applied.",
+      "why": "原DM近似并列地偏好限定参考并PARK；完整Portfolio已给出实质反方理由，原建议不改写成已执行。"
+    }
+  ],
+  "uncertainty": [
+    "新B未创建卡片、种子、源码或调用，其结果与完整成本均未知。",
+    "C01覆盖仅在预设iid-normal工作模型下成立；神经训练实际校准未建立。",
+    "本地创建者测试清理曾被自动审批以blocked by policy拒绝，原路径保留，不能绕过。",
+    "MGTAP/FOLR仍各自完成手中对象；ACVC已完成并不代表全方向收尾完成。"
+  ],
+  "cost": {
+    "compute": "当前应用与handoff零新增科学调用；C01原生1733.09秒、CPU1732.73秒，既有clustered原生2847.53秒仅为已知子集；全部支持/provider/agent/生命周期费用UNKNOWN。",
+    "owner_time": "可异步查看；不等待确认。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；当前暂停已由所有者直接要求。"
+  },
+  "verdict_text": "**ACVC CONTINUE，保持 MEDIUM、recasts2 和现有席位；下一目标选择一个全新的4096回合 C-only 学习程序，前瞻固定1024／4096两个快照，并在全部学习结束后完成各自的 C／F／own-dwell 评价。当前不采纳可逆 PARK 建议，不 RECAST、不 CLOSE，也不追加或重跑已消费的六程序 C01。**\n\n后续控制指令：各方向可以先暂停 手中的任务和实验不要停止 完成后写handoff。实际应用：当前任务完成，后继未启动，等待明确恢复。",
+  "source": "docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/INTAKE.md"
+}

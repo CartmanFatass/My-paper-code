@@ -1,0 +1,37 @@
+{
+  "event": "RCLE_B13_PREPARATION_ACCEPTED_PORTFOLIO_REQUEST_READY_20260914",
+  "time_utc": "2026-09-14T08:22:51.793733+00:00",
+  "main_start_sha": "5456aec117b9746f141d09292af2da1f803b8262",
+  "source_commits": [
+    "91811c61cff2617f0b691c793dd40a7df76c5bdb",
+    "a95c05b1c487473ed7ffece8b5208b606fca377b",
+    "4512350929e87522d52bbaf4bcc0fce8cbc1f216",
+    "cf4d9bd93ff9eb255800223d95de170b68315ba6"
+  ],
+  "integrated_paths": [
+    ".codex/hmasd-dm-sessions.toml",
+    "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_SCIENCE_CARD_20260914.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/CODE_REVIEW.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/ENGINEERING.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/OWNER_PACKET.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/TEST_OUTPUT.txt",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/TEST_RESULT.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/HANDOFF.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/PROMPT.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REFERENCE_PUBLICATION.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REPORT.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/SOURCE_MANIFEST.json",
+    "docs/research/portfolio/PORTFOLIO.md",
+    "docs/research/portfolio/audit/2026-09-14.md",
+    "docs/research/portfolio/owner/inbox/2026-09-14/20260914-rcle-002.json",
+    "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/policy.py",
+    "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/study.py",
+    "scripts/run_rcle_learned_prior_b13.py",
+    "tests/experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/test_learned_prior.py"
+  ],
+  "audit_merge": "Only new RCLE rows from the named commit interval, retaining every existing main row.",
+  "registry_scope": "Own RCLE row, already assigned own Portfolio request and transaction fields only; other directions/coordination preserved.",
+  "acceptance": "24 focused checks plus independent Sol/high complete-path no-material-finding review; no native B13 run.",
+  "unrelated_untracked": "Preserved; never staged."
+}

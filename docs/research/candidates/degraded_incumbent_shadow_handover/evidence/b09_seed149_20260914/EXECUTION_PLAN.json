@@ -1,0 +1,23 @@
+{
+  "object": "DISH-RECEIPT-BYPASS-B09",
+  "assignment_id": "dish-b09-s149-20260914",
+  "source_sha": "3a749256d2aaf16345308827518283c8d2b91ad7",
+  "node": "wsl_4070",
+  "ssh_target": "hmasd-wsl-node",
+  "remote_cwd": "/home/wu/hmasd-worktrees/dish-b09-3a749256",
+  "supervisor": "/usr/local/bin/agent-task",
+  "handle": "dish-b09-s149-3a749256-20260914",
+  "command": "cd /home/wu/hmasd-worktrees/dish-b09-3a749256 && export PYTHONPATH=\"$PWD\" PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 MAX_JOBS=1 && mkdir -p temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01 && /usr/bin/time -f 'preflight_wall_seconds=%e' -o temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/preflight_wall.txt /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/memory.json && /usr/bin/time -f 'runner_wall_seconds=%e' -o temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/runner_wall.txt /home/wu/.venvs/hmasd/bin/python scripts/run_dish_receipt_bypass_b09.py --seed 149 --output temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01 --launch-sha 3a749256d2aaf16345308827518283c8d2b91ad7 --prior-shared-seconds 180",
+  "remote_output": "/home/wu/hmasd-worktrees/dish-b09-3a749256/temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01",
+  "remote_receipts": "/home/wu/hmasd-worktrees/dish-b09-3a749256/temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01",
+  "prior_shared_seconds": 180,
+  "prior_shared_basis": "Conservative prelaunch charge from the new B09 card/engineering boundary: measured setup 6.4575352s and enclosing remote focused-check call 7.6011197s (do not add contained pytest6.8644327s), plus local source/doc/check/read/commit/push commands and remaining final binding/submission/admission. This is an enclosing allocation, not a complete priced study total. Provider/agent effort remains separately unknown; actual postlaunch monitor, collection and publication are added once.",
+  "shared_allowance_seconds": 900,
+  "exclusive_allowance_per_arm_seconds": 900,
+  "complete_allowance_seconds": 2700,
+  "external_shared_reserve_seconds": 120,
+  "scientific_launch_state": "NOT_SUBMITTED",
+  "checks": "10 remote focused cases passed at exact source; scratch removed",
+  "monitor": "new native batch child assigned after engineering acceptance; no accepted handle yet",
+  "stop": "No automatic retry, successor or additional exposure. On incomplete primary preserve partial outputs and exact failure; DM decides next dependency. SIGALRM bounds whole active phase; detached supervisor retains terminal facts."
+}

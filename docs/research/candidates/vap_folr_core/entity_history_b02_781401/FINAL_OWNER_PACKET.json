@@ -1,0 +1,50 @@
+{
+  "question": "在首次完整的新训练对比之后，保留可逆 PARK，还是投入另一组新训练？DM 已在持续授权内选择 PARK，这里供所有者异步介入，不等待批准。",
+  "changes_if_approved": [
+    {
+      "target": "vap_folr_core · DIRECTION.md / PARK.md / Clerk 报告",
+      "from": "ACTIVE/MEDIUM，B02 结果后的科学审阅与收尾",
+      "to": "PARK/MEDIUM，close-call；实体历史研究族仍 OPEN；释放研究槽位，无已选后继实验"
+    }
+  ],
+  "if_refused": "DM 在干净边界应用所有者的具体覆盖指令，保留 B02、E/F 和完整独立审阅历史；若要求重新选择普通研究，明确有区分力的问题、有限工作量并协调实际槽位，不把新工作伪装成旧对象重试。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md",
+      "quote": "`d_fresh = BANK - Generic = -4.830859375 < -1`. Both selected fresh fits completed.",
+      "why": "首次完整的新训练比较已补上，在这个固定终点没有观察到 BANK 的实际优势。"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b02_review/INTAKE.md",
+      "quote": "DM read the complete independent Convergence review and accepts findings 1–3.",
+      "why": "没有用行政自主权跳过科学审阅，DM 接受全部发现并保留严格的结论范围。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b02_review/INTAKE.md",
+      "quote": "The actual 3041.46 native seconds make another block concrete and plausibly\naffordable; the larger original planning allowance is not its required cost and\ndoes not support a refusal.",
+      "why": "第二组可能改变开发建议，而且不是被实际硬预算排除；PARK 与继续之间没有明确的实证分界。"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md",
+      "quote": "P and B are not\nclearly separated by the evidence, so the owner record explicitly marks close-call.",
+      "why": "第二组仍有有用信息，当前选择属于可逆的研究价值判断，并非算法普遍无效的结论。"
+    }
+  ],
+  "uncertainty": [
+    "每个方法仅一次训练，尚无跨训练实现的不确定性估计；128 个 episode 不是训练重复。",
+    "Generic 平均回报仍为负，但零分不是已定义的胜任门槛；负回报数不等于碰撞率。",
+    "E 原始主比较仍缺失；F 是结果知情保留参考的用途比较，不能和 B02 当作同一重复协议合并。",
+    "另一组同主机新训练、明确的信息／生命周期问题或学习预算问题仍可重新考虑；无需新机制、正结果或客户。",
+    "完整支持、模型服务和方向累计成本未知。"
+  ],
+  "cost": {
+    "compute": "B02 原生运行合计 3041.46 秒；2 个新 fit、205120 tick、9938 更新、256 最终 episode。已记部分支持下界 29.0223255 秒，后续审阅与部分收尾未完全计量。PARK 不选择新实验；再一组需要 2 个新 fit，未来耗时未知。",
+    "owner_time": "可异步阅读此项与中文 brief；无阻塞等待。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；PARK 已由 DM 执行，Clerk 处理已提交结果的集成、报告和安全归档。"
+  },
+  "verdict_text": "**Owner-delegated decision (unattended, 2026-09-03 instruction): (P), reversible\nPARK/MEDIUM.**",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md"
+}

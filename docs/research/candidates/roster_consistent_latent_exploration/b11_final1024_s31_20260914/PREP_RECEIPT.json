@@ -1,0 +1,7 @@
+{
+  "purpose": "explicit pre-launch control-parent preparation; E02 finding repair",
+  "exit_code": 0,
+  "wall_s": 0.40385950001655146,
+  "stdout": "{\"control\": \"/home/wu/hmasd-worktrees/rcle-b11-e863914e2/temp/directions/roster_consistent_latent_exploration/exp/b11_control\", \"exists\": true, \"scientific_output_exists\": false}\n",
+  "stderr": ""
+}

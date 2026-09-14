@@ -1,0 +1,287 @@
+{
+  "object": "FOLR_ENTITY_HISTORY_B03_781501",
+  "phase": "COMPLETE_REVIEW_DISPATCHED",
+  "planned_at_utc": "2026-09-14T08:16:51.805742+00:00",
+  "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+  "portfolio_decision_sha": "4776103de4f55beaee610c52506112651bfaed04",
+  "node": "hmasd-wsl-node",
+  "execution_checkout": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d",
+  "output_root": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501",
+  "supervisor": "/usr/local/bin/agent-task",
+  "python": "/home/wu/.venvs/hmasd/bin/python",
+  "native_monitor": "/root/folr_b03_monitor_recovery",
+  "monitor_thread_id": "01a09f10-8f6a-7cb3-8de4-cc137ab0b05c",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "planned_handles": {
+    "GENERIC": "folr-b03-781501-generic",
+    "BANK": "folr-b03-781501-bank"
+  },
+  "accepted_handles": {
+    "GENERIC": {
+      "name": "folr-b03-781501-generic",
+      "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+      "accepted_at_utc": "2026-09-14T08:24:20.780128+00:00",
+      "status_at_acceptance": {
+        "task": "folr-b03-781501-generic",
+        "status": "running",
+        "exit_code": null,
+        "pid": 3666806,
+        "uptime_seconds": 0,
+        "tmux_active": true
+      },
+      "out": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC",
+      "supervisor_directory": "/home/wu/.agent-tasks/folr-b03-781501-generic",
+      "admission": {
+        "assessed_at": "2026-09-14T08:24:20.801708Z",
+        "available_physical_bytes": 15631683584,
+        "captured_at": "2026-09-14T08:24:20.801307Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15631683584,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "monitor_adoption": {
+        "event_id": "FOLR_B03_GENERIC_MONITOR_RECOVERY_20260914_R1",
+        "sender_thread_id": "01a09f10-8f6a-7cb3-8de4-cc137ab0b05c",
+        "native_identity": "/root/folr_b03_monitor_recovery",
+        "received_at_utc": "2026-09-14T08:40:30.935960+00:00",
+        "direct_observation": {
+          "event_id": "FOLR_B03_GENERIC_MONITOR_RECOVERY_20260914_R1",
+          "handle": "folr-b03-781501-generic",
+          "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+          "expected_pid": 3666806,
+          "observer": "replacement /root/folr_b03_monitor_recovery",
+          "observed_utc": "2026-09-14T08:40:23.116584+00:00",
+          "returncode": 0,
+          "stdout": "{\"task\": \"folr-b03-781501-generic\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3666806, \"uptime_seconds\": 962, \"tmux_active\": true}\n",
+          "stderr": "",
+          "status": {
+            "task": "folr-b03-781501-generic",
+            "status": "running",
+            "exit_code": null,
+            "pid": 3666806,
+            "uptime_seconds": 962,
+            "tmux_active": true
+          }
+        },
+        "state_path": "C:/Projects/HMASD/temp/directions/vap_folr_core/exp/entity_history_b03_781501/MONITOR_RECOVERY_STATE.json",
+        "dm_routine_polling": "ended after replacement direct adoption"
+      },
+      "launch_receipt": "GENERIC_LAUNCH_ACCEPTANCE.json",
+      "monitor_adoption_history": [
+        {
+          "event_id": "FOLR_ENTITY_HISTORY_B03_781501:GENERIC:20260914T082420Z",
+          "sender_thread_id": "01a09efc-5418-7181-9700-800b9c755b8e",
+          "native_identity": "/root/folr_b03_monitor",
+          "received_at_utc": "2026-09-14T08:26:53.719792+00:00",
+          "direct_observation": "running, tmux_active=true, exit_code=null, PID3666806",
+          "state_path": "C:/Projects/HMASD/temp/directions/vap_folr_core/exp/entity_history_b03_781501/MONITOR_STATE.json",
+          "dm_routine_polling": "ended after direct MONITOR_ADOPTED; Monitor delivers terminal facts to this DM"
+        }
+      ],
+      "terminal": {
+        "task": "folr-b03-781501-generic",
+        "status": "finished",
+        "exit_code": 0,
+        "pid": 3666806,
+        "uptime_seconds": 2529,
+        "tmux_active": false
+      },
+      "technical_acceptance": {
+        "at_utc": "2026-09-14T09:07:41.070878+00:00",
+        "complete_exposure_valid": true,
+        "summary_sha256": "d1b46eac0487632de92ba33e22d029a64882e66633b7418f2d50b2c01fe4e2ec",
+        "collection": "GENERIC_COLLECTION.json",
+        "intake": "GENERIC_INTAKE.md",
+        "raw_archive": "GENERIC_RAW.tar.gz",
+        "checkpoint_integrity_passed": true,
+        "monitor_terminal_received": "Direct parent App MONITOR_TERMINAL plus native completion; duplicate delivery processed once. Child state snapshot has terminal=false delivery bookkeeping, but terminal receipt was actually delivered."
+      }
+    },
+    "BANK": {
+      "name": "folr-b03-781501-bank",
+      "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+      "accepted_at_utc": "2026-09-14T09:08:30.703494+00:00",
+      "status_at_acceptance": {
+        "task": "folr-b03-781501-bank",
+        "status": "running",
+        "exit_code": null,
+        "pid": 3669107,
+        "uptime_seconds": 0,
+        "tmux_active": true
+      },
+      "out": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK",
+      "supervisor_directory": "/home/wu/.agent-tasks/folr-b03-781501-bank",
+      "admission": {
+        "assessed_at": "2026-09-14T09:08:30.720233Z",
+        "available_physical_bytes": 15624404992,
+        "captured_at": "2026-09-14T09:08:30.719960Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15624404992,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "generic_summary_sha256": "d1b46eac0487632de92ba33e22d029a64882e66633b7418f2d50b2c01fe4e2ec",
+      "launch_receipt": "BANK_LAUNCH_RECEIPT.json",
+      "monitor_adoption": {
+        "event_id": "FOLR_B03_BANK_MONITOR_20260914_R1",
+        "direct_parent_receipt_received": true,
+        "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+        "sender_thread_id": "01a09f10-8f6a-7cb3-8de4-cc137ab0b05c",
+        "native_identity": "/root/folr_b03_monitor_recovery",
+        "recorded_at_utc": "2026-09-14T09:10:38.842452+00:00",
+        "observation": {
+          "event_id": "FOLR_B03_BANK_MONITOR_20260914_R1",
+          "handle": "folr-b03-781501-bank",
+          "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+          "expected_pid": 3669107,
+          "observer": "replacement /root/folr_b03_monitor_recovery",
+          "observed_utc": "2026-09-14T09:09:25.713719+00:00",
+          "returncode": 0,
+          "stdout": "{\"task\": \"folr-b03-781501-bank\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3669107, \"uptime_seconds\": 55, \"tmux_active\": true}\n",
+          "stderr": "",
+          "status": {
+            "task": "folr-b03-781501-bank",
+            "status": "running",
+            "exit_code": null,
+            "pid": 3669107,
+            "uptime_seconds": 55,
+            "tmux_active": true
+          }
+        },
+        "state_path": "C:\\Projects\\HMASD\\temp\\directions\\vap_folr_core\\exp\\entity_history_b03_781501\\MONITOR_RECOVERY_STATE.json",
+        "parent_routine_polling": "ended after actual direct MONITOR_ADOPTED"
+      },
+      "terminal": {
+        "task": "folr-b03-781501-bank",
+        "status": "finished",
+        "exit_code": 0,
+        "pid": 3669107,
+        "uptime_seconds": 2313,
+        "tmux_active": false
+      },
+      "technical_acceptance": {
+        "complete_exposure_valid": true,
+        "summary_sha256": "0d0daac87e5b365ce777e81c2a59033b91b265d3e789d07806d337e3a2fdbf3d",
+        "collection": "BANK_COLLECTION.json",
+        "raw_archive": "BANK_RAW.tar.gz",
+        "checkpoint_integrity_passed": true,
+        "monitor_terminal_received": "Direct MONITOR_TERMINAL and duplicate completion report handled as one event."
+      }
+    }
+  },
+  "launch_assets": {
+    "GENERIC": {
+      "source_path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/GENERIC.sh",
+      "bytes": 675,
+      "sha256": "c28edbb07847aeba73188252443a7c3d985355c4bd7629150dd3e4f098939357",
+      "staged_path": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC_LAUNCH.sh"
+    },
+    "BANK": {
+      "source_path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/BANK.sh",
+      "bytes": 721,
+      "sha256": "de2ef45b69834e62c1c3da9c1d41bd79f4dab28699312a21919efd867695e5b3",
+      "staged_path": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_LAUNCH.sh"
+    }
+  },
+  "scope": "One invocation per arm; Generic then BANK regardless of score/completeness, subject to real shared integrity and physical resource dependencies. No scientific retry or extra block.",
+  "science_exposure_per_arm": {
+    "training_episodes": 5000,
+    "native_training_ticks": 100000,
+    "updates": 4969,
+    "final_greedy_episodes": 128,
+    "final_ticks": 2560
+  },
+  "admission": "Both selected arm admissions passed freshly adjacent to their invocation; actual per-arm memory evidence retained under accepted_handles.",
+  "resource_and_support_notes": "CPU FP32 Torch intra/inter1/1; DM plans3600s/arm,7200native+1800support are not hard stops. Remote supervisor usage lookup took0.35899999999674037s SSH elapsed; no scientific work. Full support/provider cost UNKNOWN.",
+  "preparation_recovery": {
+    "initial_ssh_timeout_seconds": 35.03200000000652,
+    "cause": "Sparse checkout lacked committed launch-script blobs; plain bash Git show blocked in lazy network fetch.",
+    "verified_no_acceptance": "Same supervisor handle not_found; no Generic output directory or admission/learning; owned helper group3666451 verified and terminated with no remaining members.",
+    "repair": "Fetch only committed launch assets using configured zsh -lic and git HTTP/1.1; both byte hashes verified. Startup theme warnings retained; preparation exit0.",
+    "new_scientific_invocations": 0,
+    "receipts": [
+      "GENERIC_LAUNCH_RECEIPT.json",
+      "GENERIC_PREPARATION_RECONCILIATION.json",
+      "GENERIC_PREPARATION_RECOVERY.json",
+      "LAUNCH_ASSET_PREPARATION.json"
+    ]
+  },
+  "next_action": "Registered independent Transport reconciles/observes the one bound B03 review and archives it directly to this DM; DM reads/responds then forms substantive Portfolio report. Native batch and terminal execution-copy cleanup are complete. No successor fit or direction disposition selected.",
+  "monitor_transfer": {
+    "reason": "Initial observer finalized three turns with a nonempty running handle set, despite required until-terminal observation. This was execution noncompliance, not a scientific termination or missing rule.",
+    "previous_native": "/root/folr_b03_monitor",
+    "previous_thread_id": "01a09efc-5418-7181-9700-800b9c755b8e",
+    "previous_state_preserved": "MONITOR_INITIAL_STATE.json",
+    "replacement_native": "/root/folr_b03_monitor_recovery",
+    "replacement_thread_id": "01a09f10-8f6a-7cb3-8de4-cc137ab0b05c",
+    "replacement_method": "One awaited functions.exec loop with bounded native status queries and120s observation intervals; direct parent callback on terminal or actual blocker.",
+    "same_handle_adoption": "MONITOR_RECOVERY_ADOPTION.json",
+    "old_observer_release": "interrupt_agent confirmed previous completed status after replacement adoption; no remaining old observation turn",
+    "source_or_science_change": false,
+    "parent_route": "independent DM App task01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+    "support_cost": "UNKNOWN; all prior queries and interruptions remain counted, no reset"
+  },
+  "bank_launch_plan": {
+    "handle": "folr-b03-781501-bank",
+    "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+    "out": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK",
+    "generic_summary": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/summary.json",
+    "generic_summary_sha256": "d1b46eac0487632de92ba33e22d029a64882e66633b7418f2d50b2c01fe4e2ec",
+    "argv": [
+      "/usr/local/bin/agent-task",
+      "run",
+      "folr-b03-781501-bank",
+      "bash",
+      "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_LAUNCH.sh",
+      "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+      "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d",
+      "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK",
+      "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/summary.json"
+    ],
+    "admission": "Create new output directory, then committed launcher performs fresh adjacent physical/effective >=4GiB admission. No current BANK admission claimed.",
+    "monitor": "Reuse /root/folr_b03_monitor_recovery in the same B03 batch with an awaited until-terminal observation loop.",
+    "no_score_gate": true
+  },
+  "result": {
+    "bank_minus_generic": -6.63671875,
+    "rule": "GENERIC_ABOVE_MEI",
+    "result_evidence": "../FOLR_ENTITY_HISTORY_B03_RESULT_EVIDENCE_20260914.md",
+    "dm_intake": "../FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md",
+    "native_wall_sum_seconds": 3779.85
+  },
+  "scientific_review": {
+    "request_id": "2026-09-14-folr-entity-history-b03-result-plan-review-01",
+    "task_sha": "41905d161d0f8540ee5b2a5463a3d66cb27e9639",
+    "handoff_sha": "c6572e97bf66994a014f82224b1a9454c695a710",
+    "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+    "provider_send_state": "UNCONFIRMED; no provider acceptance/IDs/full answer received yet",
+    "receipt": "../pro_packets/20260914_entity_history_b03_result_plan_review/DISPATCH_RECEIPT.json"
+  },
+  "cleanup": {
+    "complete": true,
+    "receipt": "CLEANUP_RECEIPT_20260914.json",
+    "published_preservation_sha": "0427cbcc914e4e8182821320c106f132eb0e0cf9",
+    "completed_at_utc": "2026-09-14T10:12:04.969606+00:00",
+    "removed": [
+      "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d",
+      "/home/wu/.agent-tasks/folr-b03-781501-generic",
+      "/home/wu/.agent-tasks/folr-b03-781501-bank"
+    ],
+    "all_removed_and_unregistered": true
+  }
+}

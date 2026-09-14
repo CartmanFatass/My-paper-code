@@ -1,0 +1,9 @@
+{
+  "verified_at_utc": "2026-09-14T20:28:19.137523+00:00",
+  "archive_sha256": "0190acfca2c38ac45963abbc425b0de4620bbe707880994733b65ac6880a06bd",
+  "archive_bytes": 5282464,
+  "members_verified": 15,
+  "summary_sha256": "ac8a8e647eb18f6028af2743ae7fa0a9634ac24b388124f80bbf89f23298ff0e",
+  "all_original_member_hashes_match": true,
+  "complete_transfer_readback_wall_seconds": 2.172000000020489
+}

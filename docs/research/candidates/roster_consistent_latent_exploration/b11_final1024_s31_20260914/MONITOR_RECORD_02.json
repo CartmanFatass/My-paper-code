@@ -1,0 +1,14 @@
+{
+  "batch_id": "RCLE-B11-FINAL1024-S31-20260914",
+  "handle": "rcle-b11-s31-e863914e2-launch02",
+  "adopted_at": "2026-09-14T04:31:53.915372Z",
+  "parent_thread_id": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "node": "wsl_4070",
+  "supervisor": "/usr/local/bin/agent-task",
+  "launch_sha": "e863914e2c2c071b8dbdd8787f159233245000d5",
+  "cwd": "/home/wu/hmasd-worktrees/rcle-b11-e863914e2",
+  "output": "/home/wu/hmasd-worktrees/rcle-b11-e863914e2/temp/directions/roster_consistent_latent_exploration/exp/b11_seed31",
+  "control": "/home/wu/hmasd-worktrees/rcle-b11-e863914e2/temp/directions/roster_consistent_latent_exploration/exp/b11_control",
+  "last_observation": {"observed_at":"2026-09-14T04:33:05Z","status":"failed","exit_code":139,"pid":3657500,"tmux_active":false,"terminal_witness":"task.log: updates 32/1024 through 160/1024; timeout: monitored command dumped core; exited code 139","control_timing":"native.time: Command terminated by signal 11; whole_native_wall_s=40.83; peak_rss_kib=846192"},
+  "delivery": {"adoption":"sent","terminal":"sent","terminal_event_id":"RCLE-B11-FINAL1024-S31-20260914_TERM02"}
+}

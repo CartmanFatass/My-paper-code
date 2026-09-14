@@ -197,13 +197,23 @@ into a global convention or write extra details merely to claim a higher level.
 
 ### 7.2 Direct work, delegation and acceptance
 
-OWNER_DIRECT 2026-09-12: DM performs science, implementation, self-checks, repairs and technical
-acceptance in the same task. New CM and Implementer assignments are temporarily
-suspended, including generic substitutes. Existing accepted work closes on its original route
-without successors. Independent Reviewer remains required for high-risk changes under §7.3. Other bounded specialist methods retain their existing scope.
-Root retains main integration and accepts shared control-plane engineering without a direction DM.
+OWNER_DIRECT 2026-09-14: DM owns science, design choices, repair and technical acceptance. It may
+implement directly or assign a complete bounded batch to an optional native Sol/medium Implementer.
+Delegate when isolating substantial code context or independent work helps; do not split every
+function into a handoff. Use §7.1's five L0 facts: deliverable, owned paths/checkout, protected
+semantics, acceptance evidence, and bounds/return conditions. DM resolves scientific ambiguity;
+Implementer chooses routine in-scope methods and completes checks/repairs without per-step ACK.
 
-Scout, Reviewer, Verifier, Operator and scientific Critic return to their actual assigning DM
+One editing owner per overlapping path; reuse the direction authoring checkout and preserve other
+writers' changes. Implementer returns the exact diff, check evidence, failures and residual risks;
+DM owns Git/technical acceptance and experiment decisions. Implementer does not launch scientific
+runs or create children. Reviewer is a separate DM child with independent context; do not pass it
+the implementation discussion as a substitute for the contract and source. Same-batch corrections
+reuse children; unrelated batches use new minimal-context children. No CM layer or Root permission.
+Root may use the same method for its shared control-plane assignments. Existing accepted work
+keeps its original route. Required high-risk review remains under §7.3.
+
+Implementer, Scout, Reviewer, Verifier, Operator and scientific Critic return to their actual assigning DM
 (or Root for its own bounded work); they do not create another ordinary child chain. A missing
 specialist fact returns with the completed work and exact question so that the parent can resolve
 it or assign an independent sibling. Existing legacy tasks finish their accepted scope on their
@@ -218,7 +228,8 @@ Keep technical validity, scientific interpretation and dispatch/observation stat
 
 An independent Reviewer is required for a high-risk diff affecting shared core, scientific meaning,
 numerics, RNG, replay/recurrent state, checkpoint compatibility, bit identity or external effects.
-Codex uses Astra/high, read-only. Ordinary mechanical edits use owner self-checks. Risk determines
+Codex defaults to Sol/high, read-only. DM may choose Astra for a concrete difficult semantic,
+numerical or concurrency question; this is neither a Root approval nor a mandatory second review. Ordinary mechanical edits use owner self-checks. Risk determines
 review needs, not whether implementation was delegated. Reviewer evidence is not permission or
 a scientific disposition; DM (or Root for control-plane work) resolves findings and accepts.
 

@@ -1,0 +1,12 @@
+{
+  "source_sha": "15eaa7ea655a0f42a0ec3986927487892bdce212",
+  "cwd": "/home/wu/hmasd-worktrees/rcle-b12-15eaa7ea6",
+  "output": "/home/wu/hmasd-worktrees/rcle-b12-15eaa7ea6/temp/directions/roster_consistent_latent_exploration/exp/b12_seed32",
+  "control": "/home/wu/hmasd-worktrees/rcle-b12-15eaa7ea6/temp/directions/roster_consistent_latent_exploration/exp/b12_control",
+  "handle": "rcle-b12-s32-15eaa7ea6",
+  "node": "wsl_4070",
+  "status": "PREPARED_NOT_LAUNCHED",
+  "watchdog_s": 1800,
+  "scientific_endpoint": "1024updatesx64+4x512evaluation",
+  "monitor": "/root/monitor_rcle_b12"
+}

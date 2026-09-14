@@ -1,4 +1,4 @@
-"""One fit and four full native endpoints for the selected quota-phase B08."""
+"""Fixed fits and their native endpoints for quota-phase B08 through B13."""
 import hashlib
 import json
 import math
@@ -16,10 +16,15 @@ from experiments.candidates.roster_consistent_latent_exploration_tbcfv.native_ba
     StepInput, bind_native_backend, materialize_fixtures_compact as native_materialize_fixtures_compact,
     semantic_uniform_words as native_semantic_uniform_words, reset_native_batch,
 )
-from .policy import PhasePolicy, adam_update, flat_parameters, greedy_phase, sampled_phase
+from .policy import PhasePolicy, adam_update, flat_parameters, greedy_phase, modal_phase, sampled_phase
 
 OBJECT = "RCLE-TBCFV-B08-JOINT-QUOTA-PHASE"
 SEED = 28
+B09_OBJECT = "RCLE-TBCFV-B09-GREEDY-ANCHORED-PHASE"
+B10_OBJECT = "RCLE-TBCFV-B10-GREEDY-ANCHORED-1024"
+B11_OBJECT = "RCLE-TBCFV-B11-GREEDY-ANCHORED-1024-REPLICATION"
+B12_OBJECT = "RCLE-TBCFV-B12-GREEDY-ANCHORED-1024-INDEPENDENT"
+B13_OBJECT = "RCLE-TBCFV-B13-LEARNED-PRIOR-STRENGTH-1024"
 PRIMARY = ("8_to_12.ACTIVE_CONTINUATION", "12_to_8.ACTIVE_CONTINUATION")
 ROLES = ("initialization", "final256", "greedy", "nearest")
 
@@ -42,6 +47,8 @@ def phase_uniforms(key, binding, coordinates, tick):
 
 
 def rollout(model, role, key, binding, coordinates, training=False, observe=None):
+    if role == "modal" and training:
+        raise ValueError("fixed-modal evaluation has no training likelihood or update")
     cells, updates, rows = _compact_coordinate_columns(coordinates)
     fixtures = native_materialize_fixtures_compact(key, 0, cells, updates, rows, binding=binding)
     score_terms = [[] for _ in coordinates]
@@ -63,12 +70,14 @@ def rollout(model, role, key, binding, coordinates, training=False, observe=None
                 else:
                     actions = [None] * len(snapshots)
                     phase_u = (phase_uniforms(key, binding, coordinates, tick)
-                               if role != "greedy" else None)
+                               if role not in ("greedy", "modal") else None)
                     for n in sorted({len(s.positions) for s in snapshots}):
                         lanes = [i for i, s in enumerate(snapshots) if len(s.positions) == n]
                         public = [snapshots[i].public_observation() for i in lanes]
                         if role == "greedy":
                             choices = greedy_phase(public)
+                        elif role == "modal":
+                            choices, _ = modal_phase(model, public)
                         else:
                             choices, scores, _ = sampled_phase(model, public, [phase_u[i] for i in lanes])
                             if training:
@@ -101,13 +110,13 @@ def cell_means(rows):
         for cell in HELDOUT_CELLS if (part := [r for r in rows if r["cell"] == cell])}
 
 
-def contrasts(panels):
+def contrasts(panels, final_role="final256"):
     result = {}
     for name, comparator in (("D_g", "greedy"), ("D_n", "nearest"), ("G_U", "initialization")):
         paths = {}
         for cell in PRIMARY:
             base = {(r["cell"], r["scenario"]): r for r in panels[comparator]}
-            final = {(r["cell"], r["scenario"]): r for r in panels["final256"]}
+            final = {(r["cell"], r["scenario"]): r for r in panels[final_role]}
             differences = np.asarray([base[(cell, i)]["U"] - final[(cell, i)]["U"] for i in range(64)])
             paths[cell] = dict(mean=float(differences.mean()), sd=float(differences.std(ddof=1)),
                               conditional_se=float(differences.std(ddof=1) / 8),
@@ -149,13 +158,50 @@ def evaluate(model, role, key, binding, out):
     return rows
 
 
-def run(out, launch_sha, seed=SEED):
+def run(out, launch_sha, seed=SEED, *, greedy_anchored=False):
+    object_id = B09_OBJECT if greedy_anchored else OBJECT
+    if seed != (29 if greedy_anchored else SEED):
+        raise ValueError("seed must match the selected fixed B08/B09 object")
+    return _run(out, launch_sha, seed, object_id, 256, greedy_anchored)
+
+
+def run_exposure1024(out, launch_sha, seed=30):
+    if seed != 30:
+        raise ValueError("seed must match the selected fixed B10 object")
+    return _run(out, launch_sha, seed, B10_OBJECT, 1024, True)
+
+
+def run_replication1024(out, launch_sha, seed=31):
+    if seed != 31:
+        raise ValueError("seed must match the selected fixed B11 object")
+    return _run(out, launch_sha, seed, B11_OBJECT, 1024, True)
+
+
+def run_b12_exposure1024(out, launch_sha, seed=32):
+    if seed != 32:
+        raise ValueError("seed must match the selected fixed B12 object")
+    return _run(out, launch_sha, seed, B12_OBJECT, 1024, True)
+
+
+def run_b13_learned_prior1024(out, launch_sha, seed=33):
+    if seed != 33:
+        raise ValueError("seed must match the selected fixed B13 object")
+    return _run(out, launch_sha, seed, B13_OBJECT, 1024, True, learned_prior_strength=True)
+
+
+def _run(out, launch_sha, seed, object_id, updates, greedy_anchored, *, learned_prior_strength=False):
+    final_role = f"final{updates}"
+    roles = ("initialization", final_role, "greedy", "nearest")
+    action_law = "softmax(log(q)+z); q=.9*exact_greedy+.1/N" if greedy_anchored else "softmax(z)"
+    if learned_prior_strength:
+        roles += ("modal",)
+        action_law = "softmax(exp(eta)*log(q)+z); eta0=0; q=.9*exact_greedy+.1/N"
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
-    key = hashlib.sha256(f"{OBJECT}/seed/{seed}".encode("ascii")).digest()
+    key = hashlib.sha256(f"{object_id}/seed/{seed}".encode("ascii")).digest()
     binding = bind_native_backend(build_root=out / "native_build")
-    model = PhasePolicy()
+    model = PhasePolicy(greedy_anchored=greedy_anchored, learned_prior_strength=learned_prior_strength)
     def parameter_uniforms(name, count):
         return uniforms(key, binding, [_address(0, parameter_entry=name,
             draw_kind="common-initial-parameter", draw_index=i) for i in range(count)])
@@ -167,7 +213,7 @@ def run(out, launch_sha, seed=SEED):
                                  weight_decay=0, foreach=False)
     baselines = torch.zeros(8, dtype=torch.float64)
     curves = []
-    for update in range(1, 257):
+    for update in range(1, updates + 1):
         episodes, batch_scores = [], []
         for cell_start in (0, 4):
             coords = tuple(EpisodeCoordinate(0, cell, update, row)
@@ -183,33 +229,49 @@ def run(out, launch_sha, seed=SEED):
             agent_claims=sum(r["agent_claims"] for r in episodes),
             per_cell={c: {k: float(np.mean([r[k] for r in episodes[i*8:(i+1)*8]]))
                          for k in ("Y", "U", "F", "tau")} for i, c in enumerate(TRAINING_CELLS)})
+        if learned_prior_strength:
+            curve.update(log_prior_strength=float(model.log_prior_strength.detach()),
+                         prior_strength=float(model.log_prior_strength.detach().exp()))
         curves.append(curve)
         with (out / "curves.jsonl").open("a", encoding="utf8") as f:
             f.write(json.dumps(curve, allow_nan=False) + "\n")
         if update % 32 == 0:
-            print(f"update {update}/256", flush=True)
+            print(f"update {update}/{updates}", flush=True)
     torch.save(dict(model=model.state_dict(), optimizer=optimizer.state_dict(), baselines=baselines,
-                    updates=256, seed=seed, object_id=OBJECT, launch_sha=launch_sha), out / "final256.pt")
-    for role in ROLES[1:]:
+                    updates=updates, seed=seed, object_id=object_id, action_law=action_law, launch_sha=launch_sha,
+                    **({"learned_prior_strength": True} if learned_prior_strength else {})), out / (final_role + ".pt"))
+    before_evaluation = flat_parameters(model).clone() if learned_prior_strength else None
+    for role in roles[1:]:
         panels[role] = evaluate(model, role, key, binding, out)
-    comparison = contrasts(panels)
-    summary = dict(status="COMPLETE", object_id=OBJECT, seed=seed, launch_sha=launch_sha,
+    comparison = contrasts(panels, final_role)
+    summary = dict(status="COMPLETE", object_id=object_id, seed=seed, launch_sha=launch_sha,
+        action_law=action_law,
         parameters=sum(p.numel() for p in model.parameters()), independent_fits=1,
         training_episodes=sum(c["training_episodes"] for c in curves), training_updates=len(curves),
         backward_calls=sum(c["backward_calls"] for c in curves),
         optimizer_calls=sum(c["optimizer_calls"] for c in curves),
-        evaluation_episodes={r: len(panels[r]) for r in ROLES},
+        evaluation_episodes={r: len(panels[r]) for r in roles},
         native_ticks=64 * (sum(c["training_episodes"] for c in curves) + sum(map(len, panels.values()))),
         initial_norm=float(torch.linalg.vector_norm(initial)),
         displacement=float(torch.linalg.vector_norm(flat_parameters(model) - initial)),
         nonzero_parameter_updates=sum(c["parameter_step_norm"] > 0 for c in curves),
         phase_draws_training=16 * sum(c["training_episodes"] for c in curves),
-        phase_draws_evaluation=16 * (len(panels["initialization"]) + len(panels["final256"])),
+        phase_draws_evaluation=16 * (len(panels["initialization"]) + len(panels[final_role])),
         endpoint_means={role: cell_means(rows) for role, rows in panels.items()}, comparison=comparison,
         reading_flags=reading(*(comparison[n]["mean"] for n in ("D_g", "D_n", "G_U"))),
         native_Y_source="direct native terminal endpoint for all roles; never inferred from post-event U",
         uncertainty="paired scenario uncertainty conditional on one fit; contrasts share final panel",
         native_source_sha256=binding.source_sha256, study_body_wall_s=time.monotonic() - started)
+    if learned_prior_strength:
+        modal = contrasts(panels, "modal")
+        summary.update(learned_prior_strength=True,
+            prior_strength=dict(initial_log=0.0, initial=1.0,
+                final_log=float(model.log_prior_strength.detach()),
+                final=float(model.log_prior_strength.detach().exp())),
+            modal_comparison={name: modal[name] for name in ("D_g", "D_n")},
+            modal_team_decisions=16 * len(panels["modal"]),
+            evaluation_parameter_displacement=float(torch.linalg.vector_norm(
+                flat_parameters(model) - before_evaluation)))
     write_json(out / "summary.json", summary)
     # The required publication path is exercised inside this invocation.
     published = json.loads((out / "summary.json").read_text(encoding="utf8"))

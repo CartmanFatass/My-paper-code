@@ -1,0 +1,30 @@
+{
+  "terminated_own_source_bundle_job": [
+    {
+      "pid": 3430866,
+      "elapsed_s": 53,
+      "command": "git -C /home/wu/hmasd-worktrees/rcle-b10-e5fd43973 bundle create /home/wu/hmasd-inputs/rcle-b10-e5fd43973-source.bundle HEAD ^d741be527662c5cec18ed03ae03531658059dff6"
+    },
+    {
+      "pid": 3430867,
+      "elapsed_s": 53,
+      "command": "/usr/lib/git-core/git pack-objects --stdout --thin --delta-base-offset --all-progress-implied"
+    },
+    {
+      "pid": 3430868,
+      "elapsed_s": 53,
+      "command": "/usr/lib/git-core/git -c fetch.negotiationAlgorithm=noop fetch origin --no-tags --no-write-fetch-head --recurse-submodules=no --filter=blob:none --stdin"
+    },
+    {
+      "pid": 3430869,
+      "elapsed_s": 53,
+      "command": "/usr/lib/git-core/git remote-https origin https://github.com/CartmanFatass/My-paper-code.git"
+    },
+    {
+      "pid": 3430870,
+      "elapsed_s": 53,
+      "command": "/usr/lib/git-core/git-remote-https origin https://github.com/CartmanFatass/My-paper-code.git"
+    }
+  ],
+  "retained_archive": "unchanged; use local published source objects for bundle"
+}

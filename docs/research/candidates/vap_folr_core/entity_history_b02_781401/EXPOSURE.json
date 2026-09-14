@@ -1,0 +1,32 @@
+{
+  "object": "FOLR_ENTITY_HISTORY_B02_781401",
+  "training_seed": 781401,
+  "evaluation_seed": 1781401,
+  "fresh_fits": 2,
+  "per_arm": {
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_updates": 4969,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560,
+    "native_ticks": 102560
+  },
+  "block": {
+    "native_ticks": 205120,
+    "optimizer_updates": 9938,
+    "evaluation_episodes": 256
+  },
+  "replay_positions": {
+    "generic": 33391680,
+    "bank_upper": 166958400
+  },
+  "actor_can_move": "4969 RMSprop actor/mixer updates at nonzero lr 0.0005; actor initial and displacement L2 reported by accepted runner",
+  "dm_operational_plan_seconds": {
+    "per_arm": 3600,
+    "native_sum": 7200,
+    "support": 1800,
+    "complete_invoked": 9000
+  },
+  "new_empirical_exposure_at_freeze": 0,
+  "computation": "Python integer configuration arithmetic only; no imports of scientific runtime, model, environment or RNG."
+}

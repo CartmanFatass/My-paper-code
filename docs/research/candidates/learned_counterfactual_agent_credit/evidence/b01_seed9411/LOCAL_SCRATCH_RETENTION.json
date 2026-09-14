@@ -1,0 +1,61 @@
+{
+  "recorded_at": "2026-09-14T04:30:57.833267+00:00",
+  "purpose": "Copy-only preservation of own synthetic test scratch; no deletion, move, training or native execution",
+  "original_directories": [
+    "C:\\Users\\fires\\.codex\\worktrees\\891a\\HMASD\\temp\\directions\\learned_counterfactual_agent_credit\\test\\b01-check-20260914-02",
+    "C:\\Users\\fires\\.codex\\worktrees\\891a\\HMASD\\temp\\directions\\learned_counterfactual_agent_credit\\test\\b01-check-20260914-03"
+  ],
+  "originals_retained": true,
+  "cleanup_owner": "LCAC DM, at an actually permitted cleanup boundary; no alternate deleter or Clerk bypass",
+  "automatic_approval_limitation": "Earlier combined test/recursive-cleanup command rejected before process creation; no new deletion attempted",
+  "archive": "docs/research/candidates/learned_counterfactual_agent_credit/evidence/b01_seed9411/LOCAL_SCRATCH_RECOVERY.zip",
+  "archive_bytes": 1052348,
+  "archive_sha256": "7bb75e7d5274b40e6a982f1e847491350e3150ad4154c9ee34b673c1c85bf952",
+  "files": [
+    {
+      "path": "temp/directions/learned_counterfactual_agent_credit/test/b01-check-20260914-02/test_complete_engineering_chai0/pair/episodes.jsonl",
+      "bytes": 1358,
+      "sha256": "e18f66617b98427598492f2de2d309ab5f4b0e3c02ddf3af5f9602ad4a50244f"
+    },
+    {
+      "path": "temp/directions/learned_counterfactual_agent_credit/test/b01-check-20260914-02/test_complete_engineering_chai0/pair/final_Q.pt",
+      "bytes": 301168,
+      "sha256": "f8a34da80f2425c656f4eeae7495ec64dc1ee6c20b7f0f52fa0aad9b016f79cf"
+    },
+    {
+      "path": "temp/directions/learned_counterfactual_agent_credit/test/b01-check-20260914-02/test_complete_engineering_chai0/pair/final_V.pt",
+      "bytes": 283248,
+      "sha256": "526eb15dcbf672d752e1f3e2920b53a0e67addc9379bb44039388fc460fff09e"
+    },
+    {
+      "path": "temp/directions/learned_counterfactual_agent_credit/test/b01-check-20260914-02/test_complete_engineering_chai0/pair/rollouts.jsonl",
+      "bytes": 2739,
+      "sha256": "f35b272adc3dde7cc7c9cbe4bd7a2389d273f45339e46a6c744b4112dbfcbe70"
+    },
+    {
+      "path": "temp/directions/learned_counterfactual_agent_credit/test/b01-check-20260914-03/test_complete_engineering_chai0/pair/episodes.jsonl",
+      "bytes": 1358,
+      "sha256": "e18f66617b98427598492f2de2d309ab5f4b0e3c02ddf3af5f9602ad4a50244f"
+    },
+    {
+      "path": "temp/directions/learned_counterfactual_agent_credit/test/b01-check-20260914-03/test_complete_engineering_chai0/pair/final_Q.pt",
+      "bytes": 301168,
+      "sha256": "f8a34da80f2425c656f4eeae7495ec64dc1ee6c20b7f0f52fa0aad9b016f79cf"
+    },
+    {
+      "path": "temp/directions/learned_counterfactual_agent_credit/test/b01-check-20260914-03/test_complete_engineering_chai0/pair/final_V.pt",
+      "bytes": 283248,
+      "sha256": "526eb15dcbf672d752e1f3e2920b53a0e67addc9379bb44039388fc460fff09e"
+    },
+    {
+      "path": "temp/directions/learned_counterfactual_agent_credit/test/b01-check-20260914-03/test_complete_engineering_chai0/pair/rollouts.jsonl",
+      "bytes": 2739,
+      "sha256": "f35b272adc3dde7cc7c9cbe4bd7a2389d273f45339e46a6c744b4112dbfcbe70"
+    },
+    {
+      "path": "temp/directions/learned_counterfactual_agent_credit/test/b01-check-20260914-03/test_complete_engineering_chai0/pair/summary.json",
+      "bytes": 3183,
+      "sha256": "65b051f60bd350b8cb90c5931be988c8107c3a67d5a19c180fce66fca9bbed7e"
+    }
+  ]
+}

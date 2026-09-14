@@ -1,5 +1,43 @@
 # Direction ucope: UCOPE
 
+## Current DM position — 2026-09-13 PARK after reactive8901
+
+**OWNER_DELEGATED / PARK:** the DM accepts one complete feedback-conditioned
+R/F/G/H B instance and selects reversible whole-direction PARK at its safe
+boundary. No successor, retry or additional scientific invocation is selected.
+Recasts remain2; the8801-L/unchanged-L and older root-residual stops remain.
+[DM decision and alternatives](UCOPE_REACTIVE_RENEWAL_B01_8901_INTAKE_20260913.md)
+and [PARK knowledge/reopening record](PARK.md) hold the current disposition.
+
+The original primary R−F is−0.0032978552991116817, WITHIN the frozen±0.01J
+band; R−G is−0.01806329032976254, DOWN. All three learned arms beat hover
+in this one trained instance. R learned and its gate moved, but it did not
+supply a present development margin against both attained alternatives.
+[Complete result and all contrasts](UCOPE_REACTIVE_RENEWAL_B01_8901_RESULT_EVIDENCE_20260913.md)
+preserve all64 world differences, conditional SE and contrary signs.
+
+Another independent instance could change the ordering: one training instance
+cannot establish a stable lack of benefit or equivalence. The DM currently
+prefers PARK to another fit package without a sufficiently useful selected
+question. This is a reversible research-value judgment, not a universal negative
+about reactive persistence, a timing-plan stop, or a change to other directions.
+Historical T/F losses,8801 L/F loss, mixed F/G results, early hover losses,
+incomplete8702 and dependent A01 remain separately recorded.
+
+The design Pro response was fully read and its three substantive findings were
+applied; independent code review then found and resolved an incomplete-polarity
+defect before launch. Those reviewers are not credited with this new lifecycle
+verdict. The sole native run completed at exact source831b83c15 with1638400
+team steps and12288 Adam calls. Complete runner wall1813.83s, CPU1811.91s;
+full support cost remains unknown. Outputs and final checkpoints are preserved
+in a verified2.13MB archive. No scientific run or accepted review remains live.
+
+Clerk owns accepted integration, safe task archival and vacancy handling under
+the owner's current three-direction limit. Reopening requires a prospective DM
+question and coordinated admission; positive-first evidence, a new mechanism
+or an exact optimum is not mandatory. See PARK.md for the concrete preserved
+assets, remaining uncertainty and cleanup handoff.
+
 ## Research organization — 2026-09-04
 
 This source belongs to route **K3 — 付费获取**, in the **信息获取与续约** family

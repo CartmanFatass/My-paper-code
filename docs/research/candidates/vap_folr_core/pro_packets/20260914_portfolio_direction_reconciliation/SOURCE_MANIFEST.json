@@ -1,0 +1,352 @@
+[
+  {
+    "label": "Current Portfolio authority",
+    "path": "docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+    "commit_sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/e49af7704c95c6efee4917818c9d73a46ac6cd62/docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+    "purpose": "Read complete protocol; OWNER_DIRECT2026-09-14 supersedes historical DM/Clerk final-authority wording while preserving scientific evidence requirements.",
+    "bytes": 4876,
+    "sha256": "86a55c5386d4691203185d7f8b0d667d6626d94abc9665a8727c7f5aed346368",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "Current owner instructions",
+    "path": "AGENTS.md",
+    "commit_sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/e49af7704c95c6efee4917818c9d73a46ac6cd62/AGENTS.md",
+    "purpose": "Read current authority/decision ownership/unattended/resources/capacity and transport paragraphs; target3 and no fourth-slot expansion. Historical evidence language does not supersede current owner instruction.",
+    "bytes": 44883,
+    "sha256": "85c87049d109792ef253fa16866646e3a3632cf6cc0c02a93765da12e6e2ef11",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "Peer and vacancy mechanics",
+    "path": "docs/project/PEER_DM_COORDINATION.md",
+    "commit_sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/e49af7704c95c6efee4917818c9d73a46ac6cd62/docs/project/PEER_DM_COORDINATION.md",
+    "purpose": "Read complete: one shared record, serialization, preserved producers, vacancy ownership; no Clerk manager.",
+    "bytes": 7324,
+    "sha256": "710dae5c925076247b8421cf8dfb3704bd6e800ac8ea69181aaae686cf24cce1",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "Global live-state snapshot",
+    "path": ".codex/hmasd-dm-sessions.toml",
+    "commit_sha": "eaddc7c6190a032c9e4bcc0ab1cfb6aa2b6e358b",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/eaddc7c6190a032c9e4bcc0ab1cfb6aa2b6e358b/.codex/hmasd-dm-sessions.toml",
+    "purpose": "Read all active/reserved direction and Portfolio fields. Two occupied plus FOLR one reserved; no genuine free fourth slot. RCLE latest scientific update is pinned separately below. Latest RCLE pending decision/report is reflected here; FOLR request ownership preserved.",
+    "bytes": 15696,
+    "sha256": "1e96f5c143eb6008a1e710e933082cc47d01fa6213863285689c36d2922e7789",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "Global report with stale rows",
+    "path": "docs/research/portfolio/PORTFOLIO.md",
+    "commit_sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/e49af7704c95c6efee4917818c9d73a46ac6cd62/docs/research/portfolio/PORTFOLIO.md",
+    "purpose": "Read report; FOLR/MGTAP/RCLE PARK rows lag actual state. Use explicit reconciled snapshot in REPORT and the registry, not these stale rows to release/create slots.",
+    "bytes": 3523,
+    "sha256": "b4aadc428c05fbda333d65767399f4564df359f27a567e5140f046db10c2ab02",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "FOLR question and current position",
+    "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+    "commit_sha": "fb38cbfadd69f578672f6918ebc2824338919040",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/fb38cbfadd69f578672f6918ebc2824338919040/docs/research/candidates/vap_folr_core/DIRECTION.md",
+    "purpose": "Read Scientific question, Current position and Accepted entity-history continuity scope2026-09-12; source knowledge/history is broader than one B02 instance.",
+    "bytes": 70819,
+    "sha256": "8c9c1041e18618d47366949c47d6e7c8aa06e48128534fa8266f94ce1c8fb598",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "Complete B02 result",
+    "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md",
+    "commit_sha": "88200c5ec483816973bcd1107ffc21d8696607c2",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/88200c5ec483816973bcd1107ffc21d8696607c2/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md",
+    "purpose": "Read complete E0: exact observation, selected units, adverse outcomes, native/support cost, historical missingness and claim ceiling.",
+    "bytes": 9178,
+    "sha256": "206afb1cdefe010f758ce7e951e59e4140fe7f127133bef995e37070141756c1",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "B02 machine summary",
+    "path": "docs/research/candidates/vap_folr_core/entity_history_b02_781401/RESULT_SUMMARY.json",
+    "commit_sha": "88200c5ec483816973bcd1107ffc21d8696607c2",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/88200c5ec483816973bcd1107ffc21d8696607c2/docs/research/candidates/vap_folr_core/entity_history_b02_781401/RESULT_SUMMARY.json",
+    "purpose": "Read all final numeric fields; no raw model load or reanalysis required.",
+    "bytes": 1040,
+    "sha256": "10434754d1dbfd38936de76a00eba95d400b03f1005b1a5bc35c4dc06f0a6540",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "Complete B02 intake and correction",
+    "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md",
+    "commit_sha": "fb38cbfadd69f578672f6918ebc2824338919040",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/fb38cbfadd69f578672f6918ebc2824338919040/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md",
+    "purpose": "Read complete intake including historical PARK, substantive independent-review challenge, owner-requested scientific reconciliation and latest authority/pending dependency. Reading logs are not empirical evidence.",
+    "bytes": 20045,
+    "sha256": "66244eae34a7c43a1626bd216af2152ccb98a5ba4d3608de1780d62fa9d52e1e",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "Full independent B02 review",
+    "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b02_review/archive/RESPONSE.md",
+    "commit_sha": "b4a67c7bf7b0eec726f107bf7acdf148f7e60109",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/b4a67c7bf7b0eec726f107bf7acdf148f7e60109/docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b02_review/archive/RESPONSE.md",
+    "purpose": "Read entire20351-byte response, especially challenge to the first-comparison/second-block value argument; historical reviewer authority wording is superseded.",
+    "bytes": 20351,
+    "sha256": "f98b5af4b38c20777a6da5b142feec5d4c8e273a91051744c150f8a59f45ea34",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "DM response to that review",
+    "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b02_review/INTAKE.md",
+    "commit_sha": "88200c5ec483816973bcd1107ffc21d8696607c2",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/88200c5ec483816973bcd1107ffc21d8696607c2/docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b02_review/INTAKE.md",
+    "purpose": "Read complete response; the later owner reconciliation supersedes its insufficient stopping rationale, preserving all findings and numerical interpretation.",
+    "bytes": 8281,
+    "sha256": "306a1aae395cef37a00e0a4f0e2ab55c416449110445a813bfbee2c8ed976a9a",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "E incomplete fresh comparison",
+    "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md",
+    "commit_sha": "88200c5ec483816973bcd1107ffc21d8696607c2",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/88200c5ec483816973bcd1107ffc21d8696607c2/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md",
+    "purpose": "Read complete result: BANK completed, Generic timed out before final panel; original pair missing, not a negative pair.",
+    "bytes": 8998,
+    "sha256": "c4d19ed48330185ec72558b900e3a9b70a521fe90e6df44a52edc1e53cc35b49",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "F outcome-informed retained use",
+    "path": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_RESULT_EVIDENCE_20260913.md",
+    "commit_sha": "88200c5ec483816973bcd1107ffc21d8696607c2",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/88200c5ec483816973bcd1107ffc21d8696607c2/docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_RESULT_EVIDENCE_20260913.md",
+    "purpose": "Read complete result: new Generic fit versus historical BANK weights and new panel, zero new BANK learning; preserve adverse fixed-use choice separately.",
+    "bytes": 7257,
+    "sha256": "07bb687db44eece9577bb79ca561789076bbfa99ac9074449571470f88400743",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "Prior FOLR reentry Portfolio reasoning",
+    "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_reentry/archive/RESPONSE_RENDERED.txt",
+    "commit_sha": "88200c5ec483816973bcd1107ffc21d8696607c2",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/88200c5ec483816973bcd1107ffc21d8696607c2/docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_reentry/archive/RESPONSE_RENDERED.txt",
+    "purpose": "Read complete prior response: first missing fresh/fresh contrast motivated reentry then; that gap is now supplied. This is complete rendered text, not original Markdown.",
+    "bytes": 8257,
+    "sha256": "c57767be6fd541324e7ba6a29f97c8b359e5019ef1e965525505dbb0a25f2de2",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "Prepared B03 alternative",
+    "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md",
+    "commit_sha": "fb38cbfadd69f578672f6918ebc2824338919040",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/fb38cbfadd69f578672f6918ebc2824338919040/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md",
+    "purpose": "Read complete scientific/engineering plan; proposed same-budget unscreened new block, no empirical launch or final direction decision yet.",
+    "bytes": 10728,
+    "sha256": "1554e1f829dcb3dbda559c35707a916d69d4a566b6975a54ca6a1868e4217066",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "B03 executable work counts",
+    "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/EXPOSURE.json",
+    "commit_sha": "fb38cbfadd69f578672f6918ebc2824338919040",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/fb38cbfadd69f578672f6918ebc2824338919040/docs/research/candidates/vap_folr_core/entity_history_b03_781501/EXPOSURE.json",
+    "purpose": "Read all counts; no simulation or added scientific evidence.",
+    "bytes": 482,
+    "sha256": "19c2126090086539d4a5dab489cf7dcb19f8c53fe082103eedae43c313542469",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "Earlier same-conversation vacancy request",
+    "path": "docs/research/portfolio/pro_packets/20260914_folr_park_vacancy_retirement/archive/PROMPT_BODY.md",
+    "commit_sha": "552f0dce7904e35206b8e32f9180ab85aee822ad",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/552f0dce7904e35206b8e32f9180ab85aee822ad/docs/research/portfolio/pro_packets/20260914_folr_park_vacancy_retirement/archive/PROMPT_BODY.md",
+    "purpose": "Read complete accepted old prompt; historical vacancy/authority snapshot was superseded by owner review and reservation.",
+    "bytes": 2933,
+    "sha256": "db9f31aa06a56dad158a3eeeaf672496d34b333ada167bc82b044e6102667dba",
+    "observed_published_ref": "refs/remotes/origin/codex/mgtap"
+  },
+  {
+    "label": "Earlier same-conversation full answer",
+    "path": "docs/research/portfolio/pro_packets/20260914_folr_park_vacancy_retirement/archive/RESPONSE.md",
+    "commit_sha": "552f0dce7904e35206b8e32f9180ab85aee822ad",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/552f0dce7904e35206b8e32f9180ab85aee822ad/docs/research/portfolio/pro_packets/20260914_folr_park_vacancy_retirement/archive/RESPONSE.md",
+    "purpose": "Read complete17577-byte answer selecting DISH; it is preserved and unapplied. Address its concrete alternative and uncertainties; do not silently apply its old slot assumptions.",
+    "bytes": 17577,
+    "sha256": "9cfc0a010931dd73ad7aa3dd3530e45bb4c8e4d928467fe793c1852279512fac",
+    "observed_published_ref": "refs/remotes/origin/codex/mgtap"
+  },
+  {
+    "label": "Earlier exchange preservation/intake",
+    "path": "docs/research/portfolio/pro_packets/20260914_folr_park_vacancy_retirement/HANDOFF_INTAKE.md",
+    "commit_sha": "552f0dce7904e35206b8e32f9180ab85aee822ad",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/552f0dce7904e35206b8e32f9180ab85aee822ad/docs/research/portfolio/pro_packets/20260914_folr_park_vacancy_retirement/HANDOFF_INTAKE.md",
+    "purpose": "Read actual terminal/archive, no replacement application; old Clerk executor closed.",
+    "bytes": 3531,
+    "sha256": "0c8b430f282f2cc2782e10deb509e378268d0fddbd259bd9fb078a6943e807be",
+    "observed_published_ref": "refs/remotes/origin/codex/mgtap"
+  },
+  {
+    "label": "MGTAP current question/work",
+    "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+    "commit_sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/e49af7704c95c6efee4917818c9d73a46ac6cd62/docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+    "purpose": "Read current reentry position and strongest prior PARK case; accepted direction occupancy and ongoing LR-selection implementation persist; authority wording is historical where inconsistent with new protocol.",
+    "bytes": 65949,
+    "sha256": "e71f5dbee9c9ed3f298c0933636ed8258c597ff7755734224ee1cfc53729f93c",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "MGTAP selected complete procedure",
+    "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LR_SELECTION_B01_SCIENCE_CARD_20260914.md",
+    "commit_sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/e49af7704c95c6efee4917818c9d73a46ac6cd62/docs/research/candidates/metric_ground_transport_allocation/MGTAP_LR_SELECTION_B01_SCIENCE_CARD_20260914.md",
+    "purpose": "Read question, equal selection/holdout, exposure/cost and claim ceiling;8fits589824ticks, no supplied fresh native result.",
+    "bytes": 9280,
+    "sha256": "b65dc190822412f760f152a180a7841d7df1d178ce9e7ecd053404290eec9a19",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "RCLE latest full interpretation and recommendation",
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_FIXED_MODAL_REUSE_E01_INTAKE_20260914.md",
+    "commit_sha": "6f13c2b2fa713414e777190b7bcfbec11243b61a",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/6f13c2b2fa713414e777190b7bcfbec11243b61a/docs/research/candidates/roster_consistent_latent_exploration/RCLE_FIXED_MODAL_REUSE_E01_INTAKE_20260914.md",
+    "purpose": "Read Full E01 review response and Portfolio recommendation section. DM proposes trainable prior scale; no new card/seed/fit yet; RCLE occupies one slot and will submit a subsequent independent direction report.",
+    "bytes": 13910,
+    "sha256": "5c3feec7ed1ce4fea073d42b7c7e43ce43d838c1fff470dbcdf2cd4553b82253",
+    "observed_published_ref": "refs/remotes/origin/codex/rcle"
+  },
+  {
+    "label": "RCLE complete latest result",
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_FIXED_MODAL_REUSE_E01_RESULT_EVIDENCE_20260914.md",
+    "commit_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/b9cf894062984af4c03fd7c489f17a58fc0594c0/docs/research/candidates/roster_consistent_latent_exploration/RCLE_FIXED_MODAL_REUSE_E01_RESULT_EVIDENCE_20260914.md",
+    "purpose": "Read bounded E01 zero-learning result and retained adverse recovery/missingness; no training-population/general equality.",
+    "bytes": 7039,
+    "sha256": "b7975a0557378284a6fc6004be5ca212f304495229e66567808c9f37a60ffc99",
+    "observed_published_ref": "refs/remotes/origin/codex/rcle"
+  },
+  {
+    "label": "RCLE complete independent review",
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_fixed_modal_e01_review/archive/RESPONSE.md",
+    "commit_sha": "93bb8ffcd4de430a722bbb6b84e9733f40d26782",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/93bb8ffcd4de430a722bbb6b84e9733f40d26782/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_fixed_modal_e01_review/archive/RESPONSE.md",
+    "purpose": "For global context read conclusions and concrete trainable-prior alternative; complete source provided, but do not decide/change RCLE in this FOLR-scoped request.",
+    "bytes": 36074,
+    "sha256": "628c07bbe61b88d04578748befcb09858ff40ed4abf99abf1f6204a6b1cc752a",
+    "observed_published_ref": "refs/remotes/origin/codex/rcle"
+  },
+  {
+    "label": "DISH preserved PARK knowledge",
+    "path": "docs/research/candidates/degraded_incumbent_shadow_handover/PARK.md",
+    "commit_sha": "fd5364b926725da351cb516b0f839dd80c6a21d9",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/fd5364b926725da351cb516b0f839dd80c6a21d9/docs/research/candidates/degraded_incumbent_shadow_handover/PARK.md",
+    "purpose": "Read latest postB09 knowledge/limits, best alternative and reusable assets for the earlier vacancy recommendation; no DISH reentry has been applied.",
+    "bytes": 4277,
+    "sha256": "7066ac180824ee2cd2556cfd12ee2e6ab6a8557aaee3f7862480b2115ae8c14d",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "DISH postB09 response",
+    "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B09_CONVERGENCE_INTAKE_20260914.md",
+    "commit_sha": "fd5364b926725da351cb516b0f839dd80c6a21d9",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/fd5364b926725da351cb516b0f839dd80c6a21d9/docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B09_CONVERGENCE_INTAKE_20260914.md",
+    "purpose": "Read complete DM response and stopping/ordinary-source alternative reasoning; historical authority routes are evidence only.",
+    "bytes": 7827,
+    "sha256": "2df30e084b8671530f34f8a3bca1d0204fa01a1ce0d203a6ee8adf331991346d",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "DISH full postB09 independent review",
+    "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260914_b09_result_review/archive/RESPONSE.md",
+    "commit_sha": "fd5364b926725da351cb516b0f839dd80c6a21d9",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/fd5364b926725da351cb516b0f839dd80c6a21d9/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260914_b09_result_review/archive/RESPONSE.md",
+    "purpose": "Published archive verified byte-identical to original delivery af2e6e12519e6b73b8677dec9ac1b2465a50526e. Read decision-relevant conclusions/source-intervention constraints when weighing the DISH alternative; complete original response is available.",
+    "bytes": 11842,
+    "sha256": "2fc4ccf71e1e3f79da6e35dc2a58b380559e18eaad379be7d2dce949233b117a",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "Empirical evidence standard",
+    "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+    "commit_sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/e49af7704c95c6efee4917818c9d73a46ac6cd62/docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+    "purpose": "Apply §§7–8 principles,11.4 actual B requirements and11.7–11.10. Historical ownership prose in8.1 is superseded by the current protocol, not the evidence burden. No mandatory seed quota/positive pilot/exact headroom or cost census.",
+    "bytes": 49457,
+    "sha256": "4045155bd4e81114fdbb5b2a2c7adc7c860cf02fc03d83b53d0db77e72a25f86",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "RL/MARL foundations",
+    "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+    "commit_sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/e49af7704c95c6efee4917818c9d73a46ac6cd62/docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+    "purpose": "Read §§2,4,6: legal history versus sufficient state, representation versus learning, instances versus episodes and package versus component inference.",
+    "bytes": 7819,
+    "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "Empirical knowledge topic",
+    "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+    "commit_sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/e49af7704c95c6efee4917818c9d73a46ac6cd62/docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+    "purpose": "Read complete concise note; knowledge explains assumptions, not a new numerical threshold or gate.",
+    "bytes": 4252,
+    "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "Relevant runtime interpretation",
+    "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+    "commit_sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/e49af7704c95c6efee4917818c9d73a46ac6cd62/docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+    "purpose": "Read §1 and complete-invocation cost definitions only: DM planning references versus real caps, native wall/CPU versus study/support time. No extra engineering task or profiling request.",
+    "bytes": 26556,
+    "sha256": "029cf0840f1a9a8be0882834a1bcf59ce3b33984a6f03cccbd56469548118fca",
+    "observed_published_ref": "refs/remotes/origin/HEAD"
+  },
+  {
+    "label": "RCLE current complete direction report",
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REPORT.md",
+    "commit_sha": "08c012cb080204419b7ec63e844d87d09fd920f2",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/08c012cb080204419b7ec63e844d87d09fd920f2/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REPORT.md",
+    "purpose": "Read current report for global opportunity context; new proposed trainable-prior B, strongest contrary case and current no-exposure state. This request does not decide RCLE.",
+    "bytes": 10874,
+    "sha256": "b57d69a0b9ce24e672731beb14827c419a8c98dcf2858a3994a06b1762fdc9a1",
+    "observed_published_ref": "refs/remotes/origin/codex/rcle"
+  },
+  {
+    "label": "Full current FOLR report",
+    "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/REPORT.md",
+    "commit_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f/docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/REPORT.md",
+    "purpose": "Read complete report; all alternatives, changed stopping inference, global context/costs and requested scope.",
+    "bytes": 13398,
+    "sha256": "3f65b70e617987bf765264e16aea9670623a584e64af51439c4ebb1810b2a6ce",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "Reconciled global snapshot",
+    "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/GLOBAL_SNAPSHOT.json",
+    "commit_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f/docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/GLOBAL_SNAPSHOT.json",
+    "purpose": "Read complete compact snapshot with fixed global registry and latest peer sources; no unoccupied fourth slot.",
+    "bytes": 1067,
+    "sha256": "444be1520f9941f88e8f6562252d2ece62f682f628d13040beca62b8dbded28d",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  },
+  {
+    "label": "B03 independent engineering preparation",
+    "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/ENGINEERING_REVIEW.md",
+    "commit_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f/docs/research/candidates/vap_folr_core/entity_history_b03_781501/ENGINEERING_REVIEW.md",
+    "purpose": "Read for actual preparation and removal of copied hard timeout; no formal pytest or empirical execution claimed at this input revision.",
+    "bytes": 2182,
+    "sha256": "60e36c9859e5ac2cb3eb89af49c216d2948660e91b8be961e6606484867eaf5b",
+    "observed_published_ref": "refs/remotes/origin/codex/vap-folr"
+  }
+]

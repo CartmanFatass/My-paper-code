@@ -1,0 +1,19 @@
+{
+  "batch": "newB12",
+  "handle": "rcle-b12-s32-15eaa7ea6",
+  "source_sha": "15eaa7ea655a0f42a0ec3986927487892bdce212",
+  "node": "wsl_4070",
+  "ssh_target": "hmasd-wsl-node",
+  "supervisor": "/usr/local/bin/agent-task",
+  "accepted_at": "2026-09-14T05:01:17.769397Z",
+  "last_observation": {
+    "at": "2026-09-14T05:05:10Z",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3661072,
+    "uptime_seconds": 233,
+    "tmux_active": false
+  },
+  "delivery": {"adoption": "delivered", "terminal": "delivered"},
+  "terminal_event": "newB12-terminal-rcle-b12-s32-15eaa7ea6"
+}

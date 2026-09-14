@@ -1,0 +1,165 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "source_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "parent_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "direction_id": "acvc",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "execution_mode": "REUSE_SINGLETON",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "reset_invalid_provider_context": false,
+  "request_id": "2026-09-14-acvc-cluster-fixed-recipe-c01-scientific-review-01",
+  "commit_or_ref": "a94e4ae95bb8c558cf8d18e0d62f0f906ce9393a",
+  "github_delivery": {
+    "branch": "codex/acvc",
+    "base_sha": "a94e4ae95bb8c558cf8d18e0d62f0f906ce9393a",
+    "response_path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  },
+  "scientific_question": "Independently review the actual complete six-original ACVC clustered fixed1024 C01. The prespecified joint reading is JOINT_ABOVE_MEI. Actual primaries are F-C mean+.096377354920J with interval[.074826981257,.117927728584], and F-own-dwell mean+.064088940259J with interval[.035375804426,.092802076092]. Assess whether the declared iid with-replacement programme/evaluation sampling, fresh state, six-unit equal weighting, df5 t(.9875) margins and shared-F joint interpretation support precisely the qualified claim, without treating six neural fits as verified calibration. Preserve all absolute controls, training/exposure, negative/extreme panels and development-selection history. Identify any concrete empirical/inferential/reporting defect and its affected claim. Then challenge the tentative DM preference to consolidate a development/retention report from this now-addressed recipe-specific expectation question rather than automatically add another study. Compare retaining bounded fixed F with the strongest decision-useful next development experiment, including what actual outcome could change fixed-F use or investment. Another bounded B may be worthwhile without solving all population or causal uncertainty. This is independent Direction Pro scientific review; Portfolio owns final lifecycle.",
+  "deliverable": "Complete conclusion-first independent scientific review, normally900-1300words, with actual pinned-source access and limits. Give material findings and required corrections or explicit no material defect, precise passing/nonpassing wording and contrary results. Evaluate marginal/joint uncertainty, six fit-panel units, seeded-law interpretation, calibration and package/tail limits. Compare the tentative report preference against the strongest live alternative using concrete information gain, known dominant work and unknown support, without mandatory baseline/calibration/seed/power gates. Full scoped GitHub response/comment or entire downloadable Markdown fallback; no source/card edits, additional experiment, new permission or Portfolio disposition.",
+  "claim_ceiling": "One complete C-BENCH study under the declared clustered fixed1024 training/private-panel law. Expected complete-F-package increments above .01J receive only provisional model-dependent single-task support if both frozen lower bounds pass. Two97.5% two-sided marginal t intervals provide at least95% simultaneous coverage only under expressly assumed iid-normal complete-fit-panel means; actual neural-training calibration unestablished. No independent-world/snapshot pooling, tail acceptability, default/deployment,single-component causality,tuned headroom,transfer or formal-UAV claim. All previous consumed objects and negative families remain unchanged.",
+  "constraints": [
+    "Applied full Portfolio decision902df04e46a4cea8fe788baed14ca8c447cf18ea selected exactly one six-programme fixed1024 expectation study. Original ACVC remains CONTINUE/MEDIUM/recasts2, one occupied slot; no new lifecycle disposition or global adjustment. Full prior review and Portfolio response were read/responded before this card.",
+    "First twelve OS-backed uniform-integer calls at2026-09-14T17:22:32.036382+00:00, m thenq perindex, with replacement/no screening/rejection/redraw: (13783,22845),(17291,22568),(14179,21574),(13325,26056),(11751,28453),(17639,20217). Domains10000..19999 and20000..29999; fixed inherited reset/actor/proposal/constructor consumers and offsets. Index remains unit identity even if numeric pairs repeat; separate fresh processes and state.",
+    "Each original C-only1024 fit has512 two-episode rollouts/2048 persistent Adam/backward calls, final-only checkpoint, then C,F,own-dwell private64-world panels. No old checkpoint/prefix, fitted F/dwell, midpoint/initial panel, efficacy gate, survivor, scientific retry or seventh fit. Six6144training+1152evaluation,12288updates,1867776ticks,6checkpoints18loads24constructors. All original raw records, checkpoints, paired vectors and signs retained.",
+    "The independent unit is a complete fresh fit plus finite three-arm panel; every unit has equal weight. SD ddof1/sqrt6; scipy t(.9875,5)=3.1633814497486235. Two marginal97.5% intervals, conjunction of both lower>.01; no independent-contrast multiplication. Finite-panel noise already included between units, not subtracted/double-added. Zero between-unitSD would yield no interval; missing unit no six-unit or survivor inference. This allocation is now technically complete and consumes its frozen C regardless of polarity/precision.",
+    "Absolute equal-unit C/F/dwell means .120916419617/.217293774537/.153204834278J. F-C30/384 adverse,worst-.144286152878; F-dwell56/384,worst-.149130332897; dwell-C84/384,worst-.267121510439J. All individual unit means,64 vectors and sign identities are retained. These are descriptive nested-panel counts, not iid-world safety inference. F/dwell have private evolving histories, predicates and interventions; C bypass incidence is unmeasured.",
+    "All raw training/update/evaluation numeric fields finite; identities/ordered counts/native J=S/256 verified. Independent NumPy versus stdlib recorded-data reductions agree within1e-14. Positive actor/critic/recurrent displacements document actual updating, not tuned competence. Fixed source6e8d1b894 reviewed by independent Sol/high; publication-timeout and CPU-logging findings were repaired before launch with exact-byte acceptance. Full Python timeout1800 inside1860,all exit0/admission passed. No model loaded during intake. Creator-owned policy-rejected scratch remains retained; compact monitor stale-current metadata repaired by same child, with unchanged actual acceptance/terminal and originals.",
+    "Native summed wall1733.09s,aggregateCPU1732.73s,max per-unitRSS556932KiB; mean288.8483333333s per complete fit-panel. First local dispatch to last observed terminal3054.763358s includes collection/publication/monitor latency. Focused pytest command wall8.513s measures only a support subset. Native reference1777.8s and plans500/unit,3000native,4800support,7800combined remain DM estimates, not owner caps; total support/provider/agent/lifetime costs UNKNOWN. Five earlier clustered programmes separately cost1114.44s native, known combined subset2847.53s. No pooled scientific estimator or full-cost claim follows.",
+    "Prior paired programme improved attained C and attenuated F increments while retaining useful later means; those correlated snapshots and all old B endpoints are excluded from this sample. Old uniform five-fit C01 keeps its different population/working-model qualification. Failed learned gates, two train-through-F DOWNs and stopped uncertain/delayed family remain. Tuned same-information comparator/oracle headroom absent; .01J is this card MEI, not an optimality gap.",
+    "Tentative report preference is discretionary: the selected fixed-recipe future-programme expectation question is now addressed under its model limits. This does not prove there is no valuable next B, require a wholly new mechanism, or mandate PARK because safety/calibration/tuned headroom is absent. Challenge the investment rationale concretely; any new experiment must have prospective changed question, finite work and claim scope, and is not preselected by this review.",
+    "Only named applicable specification sections are adopted at their fixed versions. Historical routes or blanket authorities do not supersede current DM/Portfolio roles. Complete independent findings return to the original DM for response and actual decision; no role-based veto or experiment grant."
+  ],
+  "response_schema": [
+    "Conclusion and actual fixed-source access/limits.",
+    "Material validity/reporting findings and affected claims, or explicit no material defect.",
+    "Exact primary/joint/absolute/tail interpretation, independent-unit law, calibration and package limits.",
+    "Development/report alternatives, concrete decision dependency and prospective work; no lifecycle disposition."
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md",
+      "purpose": "Read complete frozen sampling, endpoints/inference, forecasts, native work and actual watchdog clarification.",
+      "provenance": "Frozen scientific input or preserved history; no moving branch substitution."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_RECIPE_C01_PROSPECTIVE_FACTS_20260914.json",
+      "purpose": "Inspect first outcome-blind draw, identity/order and executable address/cost/quantile facts.",
+      "provenance": "Frozen scientific input or preserved history; no moving branch substitution."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_RECIPE_C01_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read complete E0 tables, all six absolute arms/tails/resources and claim ceilings.",
+      "provenance": "Frozen scientific input or preserved history; no moving branch substitution."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_RECIPE_C01_INTAKE_20260914.md",
+      "purpose": "Read complete technical/scientific intake and actual tentative decision rationale, including findings/repairs.",
+      "provenance": "Frozen scientific input or preserved history; no moving branch substitution."
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/INTAKE_ANALYSIS.json",
+      "purpose": "Inspect exact primaries, every unit summary/vector/sign/extreme, all training curves/counts/costs. Raw records are linked if needed; report actual inspection extent.",
+      "provenance": "Frozen scientific input or preserved history; no moving branch substitution."
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/EXECUTION_FACTS.json",
+      "purpose": "Inspect all six original admissions/handles/terminal/archive/publication and monitor corrections.",
+      "provenance": "Frozen scientific input or preserved history; no moving branch substitution."
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/ENGINEERING_REVIEW.json",
+      "purpose": "Inspect complete independent engineering findings and exact repairs/DM acceptance; technical review is not a substitute for this scientific judgment.",
+      "provenance": "Frozen scientific input or preserved history; no moving branch substitution."
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "purpose": "Read current synthesis and retained contrary learned-gate/train-through-F/uncertain history and prior C qualification.",
+      "provenance": "Frozen scientific input or preserved history; no moving branch substitution."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read previous paired attenuation, improved attained controls and adverse later worlds; no pooling.",
+      "provenance": "Frozen scientific input or preserved history; no moving branch substitution."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md",
+      "purpose": "Read full prior scientific-review responses and the concrete report/alternative investment judgment.",
+      "provenance": "Frozen scientific input or preserved history; no moving branch substitution."
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_paired_exposure_b01_scientific_review/archive/RESPONSE.md",
+      "purpose": "Read complete preceding independent scientific review, including why a bounded B can still be decision-useful.",
+      "provenance": "Frozen scientific input or preserved history; no moving branch substitution."
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_paired_direction/archive/RESPONSE.md",
+      "purpose": "Read complete Portfolio decision selecting six and its investment/qualification reasoning.",
+      "provenance": "Conforming direction decision already applied, not new approval.",
+      "commit_sha": "902df04e46a4cea8fe788baed14ca8c447cf18ea"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_paired_direction/INTAKE.md",
+      "purpose": "Read full actual DM response and application of that Portfolio decision.",
+      "provenance": "All material findings responded before this new frozen study."
+    },
+    {
+      "path": "scripts/run_acvc_cluster_fixed_recipe_c01.py",
+      "purpose": "Inspect exact indexed original/fresh final-only run mapping and publication.",
+      "provenance": "Exact original result-bearing source; no later scientific code changes.",
+      "commit_sha": "6e8d1b8946e1b2eb0e4207cbc9cc9d006ad2abda"
+    },
+    {
+      "path": "experiments/candidates/acvc/cluster_fixed_recipe_c01/protocol.py",
+      "purpose": "Inspect complete-unit validation, all-record reduction, df5 joint/zero-SD/incomplete logic.",
+      "provenance": "Exact original result-bearing source; no later scientific code changes.",
+      "commit_sha": "6e8d1b8946e1b2eb0e4207cbc9cc9d006ad2abda"
+    },
+    {
+      "path": "scripts/run_acvc_fresh_dense_reuse_b01.py",
+      "purpose": "Inspect reused run/model/private-load/RNG interfaces only as relevant; shared learner unchanged.",
+      "provenance": "Exact original result-bearing source; no later scientific code changes.",
+      "commit_sha": "6e8d1b8946e1b2eb0e4207cbc9cc9d006ad2abda"
+    },
+    {
+      "path": "experiments/candidates/acvc/native_link_loss_b01/binding.py",
+      "purpose": "Binding.observe only: unchanged legal own-history predicate and clipped negative prior-displacement/30 intervention.",
+      "provenance": "Exact original result-bearing source; no later scientific code changes.",
+      "commit_sha": "6e8d1b8946e1b2eb0e4207cbc9cc9d006ad2abda"
+    },
+    {
+      "path": "experiments/candidates/acvc/cluster_deployment_b01/protocol.py",
+      "purpose": "Inspect the unchanged make_cluster and reused clustered final-only run/publication interfaces as relevant to source lineage.",
+      "provenance": "Exact original shared source; no scientific learner/world changes.",
+      "commit_sha": "6e8d1b8946e1b2eb0e4207cbc9cc9d006ad2abda"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections5.3,7-8.2,11.4,11.7-11.10; section11 controls C-BENCH, model/independent-unit claims and proportionate useful research.",
+      "provenance": "Only named current method/authority scope adopted; no extra textbook gate.",
+      "commit_sha": "bbf9a0ee1908046960dd57751a202fec3275a166"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Section6 only: independent programmes, nested worlds/snapshots, selection and claim limits.",
+      "provenance": "Only named current method/authority scope adopted; no extra textbook gate.",
+      "commit_sha": "bbf9a0ee1908046960dd57751a202fec3275a166"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "First three sections: randomness/comparison hierarchy, complete-package versus isolated mechanism.",
+      "provenance": "Only named current method/authority scope adopted; no extra textbook gate.",
+      "commit_sha": "bbf9a0ee1908046960dd57751a202fec3275a166"
+    },
+    {
+      "path": "docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+      "purpose": "Current roles and final direction authority only; this request is independent Direction Pro review.",
+      "provenance": "Only named current method/authority scope adopted; no extra textbook gate.",
+      "commit_sha": "bbf9a0ee1908046960dd57751a202fec3275a166"
+    }
+  ]
+}

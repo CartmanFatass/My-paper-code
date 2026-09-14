@@ -1,0 +1,59 @@
+{
+  "object": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601",
+  "invocations": {
+    "G": {
+      "wall_seconds": 1178.68,
+      "user_seconds": 1077.72,
+      "system_seconds": 99.78,
+      "peak_rss_kib": 741336,
+      "exit_code": 0
+    },
+    "A": {
+      "wall_seconds": 2796.8,
+      "user_seconds": 2614.51,
+      "system_seconds": 180.95,
+      "peak_rss_kib": 866572,
+      "exit_code": 0
+    }
+  },
+  "summed_native_wall_seconds": 3975.4800000000005,
+  "aggregate_cpu_seconds": 3972.96,
+  "supervisor_time_witnesses": {
+    "g": {
+      "start": "2026-09-14T23:36:55+08:00",
+      "end": "2026-09-14T23:56:34+08:00"
+    },
+    "a": {
+      "start": "2026-09-15T03:39:55+08:00",
+      "end": "2026-09-15T04:26:32+08:00"
+    }
+  },
+  "study_elapsed_at_supervisor_second_resolution": 17377.0,
+  "interarm_gap_at_supervisor_second_resolution": 13401.0,
+  "precise_control_interval_G_terminal_to_A_preparation_seconds": 13401.737549,
+  "study_elapsed_acceptance_to_A_terminal_seconds": 17376.255957,
+  "clock_scope_note": "Supervisor stamps are second-resolution; precise control acceptance/preparation and native GNU-time durations are different witnesses. Do not require exact arithmetic equality or count postexit uptime as runtime.",
+  "known_earlier_E_F_B02_B03_native_subtotal_seconds": 12538.44,
+  "known_including_current_object_native_subtotal_seconds": 16513.920000000002,
+  "full_direction_lifetime_cost": "UNKNOWN",
+  "full_support_provider_engineering_cost": "UNKNOWN",
+  "planning_reference_seconds": {
+    "G": 3600,
+    "A": 5400,
+    "summed_native": 9000,
+    "active_support": 1800
+  },
+  "native_planning_reference_exceeded": false,
+  "active_support_total_compliance": "UNKNOWN",
+  "observed_A_over_G_wall_ratio": 2.3728238368344248,
+  "ratio_claim": "Observed invocation ratio only; sequential runs and different work/machine timing are not a controlled efficiency result.",
+  "support_windows": {
+    "G_collection_prefix_wall": 0.9290892339777201,
+    "G_collection_prefix_cpu": 2.5580587759999998,
+    "A_remote_collection_prefix_wall": 0.996080553974025,
+    "A_remote_collection_cpu": 2.656131613,
+    "A_complete_local_ssh_wall": 1.5,
+    "A_transfer_and_local_archive_readback_wall": 2.172000000020489
+  },
+  "support_scope": "Some nested windows overlap and are not summed. Failed G checker attempts, waiting and other support/provider work are not zero. No new full-cost measurement was made."
+}

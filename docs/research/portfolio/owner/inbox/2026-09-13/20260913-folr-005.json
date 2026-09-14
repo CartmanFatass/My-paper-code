@@ -1,0 +1,75 @@
+{
+  "id": "20260913-folr-005",
+  "created": "2026-09-13T21:15:48-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FOLR B02：同信息H20 fresh BANK16/Generic64",
+  "context": "首个完整新训练比较；训练781401、评价1781401，5000/4969/128每臂。保留所有结果；不声称训练总体优势或记忆因果。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按冻结卡完成一块比较与科学intake。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在安全边界应用拒绝并保全实际效果。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "由DM处理具体修改，保留原冻结记录与实际调用。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "直接取得未被E/F回答的有限学习对比。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L18",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已冻结的FOLR B02：在原H20同信息主机上取得首个完整fresh/fresh学习比较？",
+    "changes_if_approved": [
+      {
+        "target": "FOLR_ENTITY_HISTORY_B02_781401",
+        "from": "缺失完整新训练比较",
+        "to": "一块两臂新学习，固定终点、全部结果保留"
+      }
+    ],
+    "if_refused": "按实际owner修改在安全边界处理；已发生的训练与失败如实保留，不能伪装成E的修复。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md",
+        "quote": "Acquire the first complete prospective fresh-BANK versus fresh-Generic learning comparison on the existing five-slot H20 public-lifecycle Traffic Junction host.",
+        "why": "直接检验未回答的学习方案比较，不重复已拒绝的固定参考用途。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_RESULT_EVIDENCE_20260913.md",
+        "quote": "Observed d_use = -5.932421875, strictly below-1.",
+        "why": "旧BANK结果支持Generic优先；新结果可能继续不利，必须保留。"
+      }
+    ],
+    "uncertainty": [
+      "DM低信心预测GENERIC_ABOVE_MEI；owner预测未参与。",
+      "两臂不同容量/读出，比较的是整套学习方案，不是单个记忆组件。",
+      "相同seed标签不意味着相同动作后轨迹或评价episode配对。"
+    ],
+    "cost": {
+      "compute": "每臂5000训练/4969更新/128最终评价。DM计划3600秒每臂、7200native+1800support；无自动第二块或科学retry。完整provider/support费用未知。",
+      "owner_time": "无需答复即可继续",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "One unscreened fresh training block: training identity 781401, final evaluation identity 1781401, both reset per arm.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md"
+  },
+  "starred": false
+}

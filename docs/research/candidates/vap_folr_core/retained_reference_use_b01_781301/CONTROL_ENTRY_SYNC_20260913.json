@@ -1,0 +1,70 @@
+{
+  "source_revision": "8f536adcbfa464dd75515ef67966f4d71c11e1e6",
+  "assignment": "Root exact control-entry rollout, 2026-09-13",
+  "l0": {
+    "goal": "Synchronize only the specified published control entrypoints in both FOLR checkouts",
+    "owners": [
+      "FOLR DM"
+    ],
+    "preserved": "Live hmasd TOML, current reports, scientific source/evidence and accepted request bytes",
+    "acceptance": "25 exact Git blob identities per checkout; existing 3 focused suites; TOML and six skill frontmatter checks; clean commits and published reachability",
+    "budget_stop": "One bounded mechanical sync and focused local checks; no source redesign, research restart, paid/shared resource change or new branch; stop on unrelated dirty scope or actual identity/test conflict"
+  },
+  "paths": [
+    ".agents/skills/hmasd-chatgpt-pro-transport/SKILL.md",
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/state-schema.md",
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/bind_conversation.py",
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/validate_request.py",
+    ".agents/skills/hmasd-loop-dispatch/SKILL.md",
+    ".agents/skills/hmasd-owner-item/SKILL.md",
+    ".agents/skills/hmasd-portfolio-task/SKILL.md",
+    ".agents/skills/hmasd-pro-research-prompt-author/SKILL.md",
+    ".agents/skills/hmasd-pro-research-prompt-author/references/github-delivery.md",
+    ".agents/skills/hmasd-pro-research-prompt-author/scripts/render_packet.py",
+    ".agents/skills/hmasd-scientific-tools/SKILL.md",
+    ".codex/agents/hmasd-direction-manager.toml",
+    ".codex/agents/hmasd-transport.toml",
+    ".codex/config.toml",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "docs/project/CLERK_OPERATIONS.md",
+    "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+    "docs/project/ROOT_OPERATIONS.md",
+    "docs/project/SIBLING_COMMUNICATION.md",
+    "docs/research/portfolio/owner/README.md",
+    "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+    "tests/skills/hmasd_chatgpt_pro_transport_test.py",
+    "tests/skills/hmasd_pro_conversation_binding_test.py",
+    "tests/skills/hmasd_pro_research_prompt_author_test.py"
+  ],
+  "session": {
+    "checkout": "C:/Users/fires/.codex/worktrees/8f07/HMASD",
+    "before_sha": "f1d05112ec30b80e9ed8c904f263f3f7a0e0d732",
+    "sync_commit": "27316d65315e7296a19368445b8e49b4384824f3",
+    "detached": true,
+    "baseline_mismatch_count": 25,
+    "after_matches": 25,
+    "tests_passed": 160,
+    "test_command_wall_seconds": 5.0024599
+  },
+  "author": {
+    "checkout": "C:/Projects/HMASD-worktrees/codex-vap-folr",
+    "before_sha": "36d9638a000b75c888e139a29006be000894e063",
+    "sync_commit": "98875c4b6211b1f53ad54e29ce7479b26716a12e",
+    "baseline_mismatch_count": 25,
+    "after_matches": 25,
+    "tests_passed": 160,
+    "test_command_wall_seconds": 5.0310673
+  },
+  "published_commit": "66a188538df8677ee4f7aba4635c79b19451b6ec",
+  "content_preserving_receipt_merge": true,
+  "new_branch": false,
+  "scientific_invocations": 0,
+  "unmeasured_full_support_cost": "UNKNOWN",
+  "warnings": [
+    "Author pytest emitted one pre-existing/contended global temporary-directory cleanup warning; all tests passed.",
+    "quick_validate.py default cp1252 read failed on UTF-8 content; rerun of affected remaining checks with -X utf8 passed; no source bytes changed.",
+    "Initial git diff comparison treated newly added untracked CLERK_OPERATIONS.md as absent; actual hash-object already matched; final exact Git/index blob checks included the new file."
+  ],
+  "conflicts": []
+}

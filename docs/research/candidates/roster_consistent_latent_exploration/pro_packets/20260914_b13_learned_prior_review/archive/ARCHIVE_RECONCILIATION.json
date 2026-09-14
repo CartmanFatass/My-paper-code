@@ -1,0 +1,15 @@
+{
+  "utc": "2026-09-14T09:57:17.219056+00:00",
+  "delivery_commit": "d45d4bc6ea2012b93d1d044402268520be5eea9a",
+  "parent_commit": "0c502d78363e1ba0067b1d5983f4154aaaab0459",
+  "changed_paths": [
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/archive/RESPONSE.md"
+  ],
+  "canonical_git_blob_bytes": 45167,
+  "canonical_git_blob_sha256": "3931f16f20994687cb63d304796915dda3378eb6c737bcc6cbaa47e148b2cf3d",
+  "local_archive_matches_git_blob_exactly": true,
+  "canonical_terminal_lf": true,
+  "transport_reported_web_capture_bytes": 45166,
+  "correction": "The45166-byte web capture was not the exact Git blob. Original committed Git blob and received local archive both have45167 bytes including one terminal LF, and are identical. No archive content correction, duplicate copy or new Send is required. Original Transport receipt is preserved.",
+  "provider_user_assistant_ids": "not supplied in received receipt; no invented IDs; complete scoped Git response, exact TASK/prompt and issue delivery match this request"
+}

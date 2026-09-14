@@ -1,0 +1,100 @@
+{
+  "kind": "prospective_loop_arithmetic_not_runtime_evidence",
+  "current_batch": {
+    "models": 0,
+    "native_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "independent_pro_reviews_selected": 1
+  },
+  "units": {
+    "tick": "one joint native environment transition",
+    "critic_row": "one MLP input row, not an environment call",
+    "optimizer_call": "one joint Adam.step over actor and critic",
+    "training_pair": "two separately trained arms sharing declared initial/exogenous seeds"
+  },
+  "config": {
+    "arms": 2,
+    "agents": 5,
+    "actions": 7,
+    "horizon": 256,
+    "episodes_per_rollout": 2,
+    "epochs": 4,
+    "final_episodes_per_arm": 32,
+    "scalar_v_input": 136,
+    "scalar_q_input": 171,
+    "critic_width": 128
+  },
+  "256": {
+    "train_episodes_per_arm": 256,
+    "train_ticks_per_arm": 65536,
+    "train_agent_transitions_per_arm": 327680,
+    "rollouts_per_arm": 128,
+    "adam_calls_per_arm": 512,
+    "pair_adam_calls": 1024,
+    "pair_final_ticks": 16384,
+    "pair_total_native_ticks": 147456,
+    "pair_total_episodes": 576,
+    "q_baseline_rows": 2293760,
+    "q_factual_forward_rows_across_epochs": 262144,
+    "v_factual_forward_rows_across_epochs": 262144,
+    "q_baseline_dense_macs_excluding_nonlinearity": 88080384000,
+    "q_fit_forward_dense_macs_excluding_backward": 10066329600,
+    "v_fit_forward_dense_macs_excluding_backward": 8891924480,
+    "masked_vector_alternative": {
+      "critic_input": 176,
+      "critic_output": 7,
+      "baseline_input_rows": 327680,
+      "factual_fit_rows_all_focals_all_epochs": 1310720,
+      "baseline_dense_macs": 13044285440,
+      "fit_forward_dense_macs_excluding_backward": 52177141760
+    },
+    "backward_time": "UNKNOWN",
+    "complete_wall_time": "UNKNOWN"
+  },
+  "512": {
+    "train_episodes_per_arm": 512,
+    "train_ticks_per_arm": 131072,
+    "train_agent_transitions_per_arm": 655360,
+    "rollouts_per_arm": 256,
+    "adam_calls_per_arm": 1024,
+    "pair_adam_calls": 2048,
+    "pair_final_ticks": 16384,
+    "pair_total_native_ticks": 278528,
+    "pair_total_episodes": 1088,
+    "q_baseline_rows": 4587520,
+    "q_factual_forward_rows_across_epochs": 524288,
+    "v_factual_forward_rows_across_epochs": 524288,
+    "q_baseline_dense_macs_excluding_nonlinearity": 176160768000,
+    "q_fit_forward_dense_macs_excluding_backward": 20132659200,
+    "v_fit_forward_dense_macs_excluding_backward": 17783848960,
+    "masked_vector_alternative": {
+      "critic_input": 176,
+      "critic_output": 7,
+      "baseline_input_rows": 655360,
+      "factual_fit_rows_all_focals_all_epochs": 2621440,
+      "baseline_dense_macs": 26088570880,
+      "fit_forward_dense_macs_excluding_backward": 104354283520
+    },
+    "backward_time": "UNKNOWN",
+    "complete_wall_time": "UNKNOWN"
+  },
+  "critic_parameters": {
+    "V": 34177,
+    "Q": 38657,
+    "Q_extra": 4480
+  },
+  "one_rollout_q_baseline_input_bytes": 12257280,
+  "one_rollout_q_baseline_input_mib": 11.689453125,
+  "cost_limits": "Dense multiply-accumulate counts omit nonlinearities, backwards, recurrent learning, environment and I/O. They are not a throughput, total-work ratio or measured capacity claim. Actual scientific exposure remains zero in this batch.",
+  "intake_correction": {
+    "reviewed_input_commit": "b5a4265071e302902f1195dd7dd8e68ce3632f40",
+    "selected_object": "LCAC_B01_256",
+    "scalar_v_old_baseline_rows": {
+      "256": 65536,
+      "512": 131072
+    },
+    "reuse": "one prefit V inference per factual training tick, reused through all four epochs; no extra fitting",
+    "current_experiment_launches": 0
+  }
+}

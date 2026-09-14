@@ -1,0 +1,85 @@
+{
+  "id": "20260914-acvc-002",
+  "created": "2026-09-14T07:08:11-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "Longer-C B01：增加C训练暴露后的固定F价值",
+  "context": "B03完整独立评审已读并回应；选择一个新1024轮C拟合及三私有终点，更多训练不保证更强策略。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "执行已冻结卡片",
+      "consequence": "按新对象固定暴露执行一次原始运行并完整接收结果"
+    },
+    {
+      "key": "reject",
+      "label": "停止尚未发生的调用",
+      "consequence": "保留已发生工作和证据，不自动重跑或PARK"
+    },
+    {
+      "key": "revise",
+      "label": "在下一干净边界修订",
+      "consequence": "应用实际修订，保留冻结历史及已发生效果"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "DM选择新训练暴露问题以服务当前固定F后续开发判断；Pro意见是科学证据而非许可。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L62",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "在当前 CONTINUE 下，执行一次新 1,024 轮 C 训练，检验该终点的固定 F 增量价值；所有者可异步介入。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC longer-C B01",
+        "from": "已完成三个 512 轮 cluster 实例和 B03 完整独立评审",
+        "to": "一个新 1,024 轮 C 拟合及私有 C/F/own-dwell 终点评价"
+      }
+    ],
+    "if_refused": "在下一干净边界应用实际指令，保留已经发生的工作与证据；不自动重跑、改写旧结果或释放席位。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_SCIENCE_CARD_20260914.md",
+        "quote": "Greater training exposure tests a relevant regime without presuming a stronger policy.",
+        "why": "三个旧实例支持已观察终点的固定 F 增量；在仍开发中的 C 训练配置下，更多训练暴露后的价值是有用的新问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_INTAKE_20260914.md",
+        "quote": "Larger differences do not show F improved, proposer competence increased, or a causal stabilization mechanism.",
+        "why": "B03 较大差值伴随较弱 C/dwell；增加训练不保证更强比较器，单个新实例仍不能支持总体稳定性。"
+      }
+    ],
+    "uncertainty": [
+      "新训练与评价根同时变化，不能把历史差值归因于训练时长。",
+      "新对象不作为第四个不变 512 轮实例，不借用 C01 未校准的神经训练覆盖率。",
+      "固定配置 C-BENCH 与保留参考并报告仍是认真备选；完整累计支持成本未知。"
+    ],
+    "cost": {
+      "compute": "一次 1024 训练 episode、2048 更新、192 终局、311296 团队步；native450秒、支持1800秒为可修订计划。",
+      "owner_time": "无需等待回复，可异步审阅。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+    "source": "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_SCIENCE_CARD_20260914.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-14T14:26:01+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-03-unattended-delegation.md",
+      "record": "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md",
+      "state": "applied",
+      "summary": "按所有者持续委托，DM自主选择并执行一个新1024轮对象；计数和原始证据验收、双均值UP与不利尾部保留、独立科学评审已发。不是Pro逐项许可或方向处置。"
+    }
+  ]
+}

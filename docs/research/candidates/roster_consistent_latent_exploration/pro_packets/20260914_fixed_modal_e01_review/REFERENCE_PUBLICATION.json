@@ -1,0 +1,104 @@
+[
+  {
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_FIXED_MODAL_REUSE_E01_SCIENCE_CARD_20260914.md",
+    "commit": "5c3ab7b074f185902078452811774e6a8d727a9d",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_FIXED_MODAL_REUSE_E01_RESULT_EVIDENCE_20260914.md",
+    "commit": "b9cf894062984af4c03fd7c489f17a58fc0594c0",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_FIXED_MODAL_REUSE_E01_INTAKE_20260914.md",
+    "commit": "b9cf894062984af4c03fd7c489f17a58fc0594c0",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/fixed_modal_reuse_e01_20260914/summary.json",
+    "commit": "b9cf894062984af4c03fd7c489f17a58fc0594c0",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/fixed_modal_reuse_e01_20260914/INTAKE_ANALYSIS.json",
+    "commit": "b9cf894062984af4c03fd7c489f17a58fc0594c0",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/fixed_modal_reuse_e01_20260914/ENGINEERING_ACCEPTANCE.md",
+    "commit": "b9cf894062984af4c03fd7c489f17a58fc0594c0",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "experiments/candidates/roster_consistent_latent_exploration/fixed_modal_reuse_e01/study.py",
+    "commit": "5c3ab7b074f185902078452811774e6a8d727a9d",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/policy.py",
+    "commit": "5c3ab7b074f185902078452811774e6a8d727a9d",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/study.py",
+    "commit": "5c3ab7b074f185902078452811774e6a8d727a9d",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_INTAKE_20260914.md",
+    "commit": "b9cf894062984af4c03fd7c489f17a58fc0594c0",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/b12_final1024_s32_20260914/RECORDED_COMPARISON.json",
+    "commit": "b9cf894062984af4c03fd7c489f17a58fc0594c0",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b12_scientific_review/archive/RESPONSE.md",
+    "commit": "ad6e30953c5fd1f78e3f5da6cdee103769a6bfde",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+    "commit": "5c3ab7b074f185902078452811774e6a8d727a9d",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  },
+  {
+    "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+    "commit": "be8ad6604041bd3e68767b7f51bdf412078b8260",
+    "published_ref": "origin/main",
+    "observed_ref_sha": "e03aff478b27a701438c21dbc9826e2d42832bdb"
+  },
+  {
+    "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+    "commit": "be8ad6604041bd3e68767b7f51bdf412078b8260",
+    "published_ref": "origin/main",
+    "observed_ref_sha": "e03aff478b27a701438c21dbc9826e2d42832bdb"
+  },
+  {
+    "path": "AGENTS.md",
+    "commit": "be8ad6604041bd3e68767b7f51bdf412078b8260",
+    "published_ref": "origin/main",
+    "observed_ref_sha": "e03aff478b27a701438c21dbc9826e2d42832bdb"
+  },
+  {
+    "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+    "commit": "5c3ab7b074f185902078452811774e6a8d727a9d",
+    "published_ref": "origin/codex/rcle",
+    "observed_ref_sha": "b9cf894062984af4c03fd7c489f17a58fc0594c0"
+  }
+]

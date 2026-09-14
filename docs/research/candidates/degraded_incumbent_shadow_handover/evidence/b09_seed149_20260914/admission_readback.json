@@ -1,0 +1,6 @@
+{
+  "remote_path": "/home/wu/hmasd-worktrees/dish-b09-3a749256/temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/memory.json",
+  "exit_code": 1,
+  "enclosing_wall_seconds": 0.4175575000117533,
+  "stderr": "cat: /home/wu/hmasd-worktrees/dish-b09-3a749256/temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/memory.json: No such file or directory\n"
+}

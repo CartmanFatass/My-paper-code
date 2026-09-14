@@ -1,0 +1,31 @@
+{
+  "event_id": "FOLR_B03_GENERIC_MONITOR_RECOVERY_20260914_R1",
+  "handle": "folr-b03-781501-generic",
+  "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+  "expected_pid": 3666806,
+  "observer": "replacement /root/folr_b03_monitor_recovery",
+  "last_observation": {
+    "event_id": "FOLR_B03_GENERIC_MONITOR_RECOVERY_20260914_R1",
+    "handle": "folr-b03-781501-generic",
+    "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+    "expected_pid": 3666806,
+    "observer": "replacement /root/folr_b03_monitor_recovery",
+    "observed_utc": "2026-09-14T08:40:23.116584+00:00",
+    "returncode": 0,
+    "stdout": "{\"task\": \"folr-b03-781501-generic\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3666806, \"uptime_seconds\": 962, \"tmux_active\": true}\n",
+    "stderr": "",
+    "status": {
+      "task": "folr-b03-781501-generic",
+      "status": "running",
+      "exit_code": null,
+      "pid": 3666806,
+      "uptime_seconds": 962,
+      "tmux_active": true
+    }
+  },
+  "delivery": {
+    "adopted": true,
+    "terminal": false,
+    "adopted_event": " FOLR_B03_GENERIC_MONITOR_RECOVERY_20260914_R1"
+  }
+}

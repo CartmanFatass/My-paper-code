@@ -1,0 +1,31 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "public_lifecycle_traffic_junction_h20",
+      "arm": "AUGMENTED_PERSISTENT",
+      "n": 1,
+      "mean": 4.329921875,
+      "sample_sd": null,
+      "min": 4.329921875,
+      "max": 4.329921875,
+      "runs": {
+        "781601": 4.329921875
+      }
+    },
+    {
+      "task": "public_lifecycle_traffic_junction_h20",
+      "arm": "GENERIC_RETAIN",
+      "n": 1,
+      "mean": -0.9664843750000002,
+      "sample_sd": null,
+      "min": -0.9664843750000002,
+      "max": -0.9664843750000002,
+      "runs": {
+        "781601": -0.9664843750000002
+      }
+    }
+  ],
+  "paired_differences": []
+}

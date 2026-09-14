@@ -1,21 +1,111 @@
 # Direction acvc: ACVC
 
-## Research organization — 2026-09-04
+## Current scientific disposition and owner pause — 2026-09-14
 
-This source is a callable research reserve. Its independent investment and re-entry condition
-are recorded in Portfolio; retained evidence may serve a named receiving object without restarting
-a separate management chain.
-See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
-Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
-older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
-second-recast counts and stopped object-family boundaries remain unchanged.
+ACVC's scientific disposition is **CONTINUE / MEDIUM / recasts2**, with its one occupied slot retained,
+under the complete [post-C01 Portfolio decision](../../portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/archive/RESPONSE.md)
+and [full actual DM response/application](../../portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/INTAKE.md).
+The later [direct owner instruction](../../portfolio/decisions/2026-09-14-owner-pause-after-inflight.md)
+requires finishing in-hand tasks/experiments, writing handoffs and then operational pause.
+ACVC current C01 and both scientific/provider intakes are complete; **new research is owner-paused**.
+The selected future1024/4096 paired B has no new card,seed,source or native invocation and is deferred
+until explicit owner resume. No scientific PARK/CLOSE,vacancy or automatic replacement follows.
 
-This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
+The [six-programme fixed1024 C01](ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md)
+is complete at source6e8d1b894: all six originals,7296episode rows and12288updates verified.
+[Full E0](ACVC_CLUSTER_FIXED_RECIPE_C01_RESULT_EVIDENCE_20260914.md) gives
+F-C+.096377354920J [.074826981257,.117927728584] and F-own-dwell+.064088940259J
+[.035375804426,.092802076092],both unrounded lower bounds>.01J. Simultaneous coverage
+is qualified by the iid-normal complete-fit-panel working model; actual neural-training calibration
+is unestablished. Adverse panels30/384 and56/384 and all absolute/control/learning/cost evidence
+remain. Native1733.09s; full support/provider/agent costs UNKNOWN. The frozen C is consumed.
 
-## Authority
+The full74-line independent review found no material defect within its actual inspected scope;
+every material point is answered in [scientific intake](pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/INTAKE.md).
+The full144-line Portfolio decision substantively chose the finite longer-exposure development
+question over the report's close-call PARK preference. Its rationale is retained, while the later
+owner pause controls execution. See [current operational handoff](ACVC_OWNER_PAUSE_HANDOFF_20260914.md)
+for exact evidence,preserved archives,cleanup limits and first resume action.
 
-- Stable direction ID: `acvc`
-- Current lifecycle, priority, and owner are held only by `docs/research/portfolio/PORTFOLIO.md`; this file records only the direction's scientific authority and provenance.
+Reuse original independent DM01a09dfa-0655-7831-aa3a-9fff2ddd2508 at Astra/max,
+C:/Projects/HMASD-worktrees/codex-acvc,branchcodex/acvc. Read live control from
+C:/Projects/HMASD/.codex/hmasd-dm-sessions.toml and ROOT_OPERATIONS.md; historical task/host
+literals are not dispatch routes. No ACVC experiment/monitor/Pro request remains live.
+The original DM only follows the user's all-direction handoff coordination to completion.
+
+## Completed reopening evidence — B03, longer-C and paired exposure
+
+The DM read the entire 21,323-byte Portfolio answer, SHA256
+`3b81868e9065d370f0d2a5430dd81da960d8a4cd3d4be799dff7c98cbd54ceb7`, and its full intake.
+No material scientific/specification conflict was found. The prospective investment goal is
+to assess fixed F's further development value on a new learned proposer. The
+[B03 science card](ACVC_CLUSTER_DEPLOYMENT_B03_SCIENCE_CARD_20260914.md) selects one
+unscreened new C fit, master21937/eval31937, with 512 training episodes/1024 updates and
+three64-world private C/F/own-dwell final panels. B/EXPLORE; C is an arm label.
+Native B03 is complete and technically accepted: one original invocation at source
+`091c6725b149cd2dfa9665408cabee17b8f958e3`,163.36s/0.523GiB, both separate primaries UP
+(F−C+.1436987981J, F−dwell+.1178477937J; adverse6/64 and5/64). All rows/updates checked.
+[Full result](ACVC_CLUSTER_DEPLOYMENT_B03_RESULT_EVIDENCE_20260914.md) and
+[intake and next-question alternatives](ACVC_CLUSTER_DEPLOYMENT_B03_INTAKE_20260914.md) retain
+absolute comparator scores, tails and private intervention differences. The complete independent
+[B03 review](pro_packets/20260914_cluster_b03_scientific_review/archive/RESPONSE.md),
+13,545 bytes at `867fdadff71eb9fac4a85b4e3cb44a0bfc55d033`, was read and every material
+finding answered in that intake. No B03 empirical defect or rerun was identified.
+
+DM selected [ACVC_CLUSTER_LONGER_C_B01](ACVC_CLUSTER_LONGER_C_B01_SCIENCE_CARD_20260914.md):
+one unscreened new C fit, master22319/eval32319, with 1,024 training episodes/2,048 updates
+and the same three private 64-world final panels, 311,296 team ticks. This tests fixed-F use
+at greater C training exposure; it guarantees neither a stronger policy nor a causal effect
+of duration. It is a new B/EXPLORE object, not a fourth unchanged 512-episode programme.
+The adapter and narrow shared workload-report correction passed26 focused checks and an
+independent Sol/high review with no material findings. The one original remote invocation at
+source `914a3d0e78d49d385c54aaec0776ead63712b624` is complete/exit0:296.30s,0.523GiB,
+all1216episode/2048update rows checked. F−C+0.1292634628J (1/64 adverse),
+F−own-dwell+0.0635578296J (15/64 adverse,worst−0.1859325036), both separate UP;
+dwell−C+0.0657056332J is descriptive. Absolute C/F/dwell .1744460128/.3037094757/.2401516461J
+and private interventions6595/4825 retain the strong dwell and tail qualification.
+[Full result](ACVC_CLUSTER_LONGER_C_B01_RESULT_EVIDENCE_20260914.md) and
+[current intake](ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md) preserve the changed-exposure
+claim ceiling and costs. The full71-line/13756-byte independent review atfcd806cb2 was read and all findings responded
+to in the intake. It identifies no result-invalidating defect and confirms the reporting repair.
+Native resources are removed after verified preservation; the same provider request is fully archived.
+
+DM selected [ACVC_CLUSTER_PAIRED_EXPOSURE_B01](ACVC_CLUSTER_PAIRED_EXPOSURE_B01_SCIENCE_CARD_20260914.md):
+one NEW22591/32591 C programme,1024episodes/2048updates,two fixed512/1024snapshots and six
+private64-world panels AFTER all learning. Total360448ticks; direct paired-change uncertainty
+retains within-world/checkpoint dependence. This concrete within-programme development question
+changed the DM tentative report preference; report remains a close runner-up, with no quantified
+net-value separation. Independent Sol/high engineering review found no material issue and9focused
+synthetic checks passed. The sole original source8fd41b61f run is complete and technically accepted:
+324.92s,0.524GiB,all1408episode/2048update rows and direct paired covariance checked. F−C/F−dwell
+are separately UP at512(+.1405118427/+.1191862743J) and1024(+.1132431734/+.0687279633J).
+Designated G_dwell−.0504583109J is DECREASE while later added value remains useful; C rises
+.0835366160→.2110828649, yet later F−dwell has10adverse worlds/worst−.2238660859.
+[Full result](ACVC_CLUSTER_PAIRED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md) and
+[intake](ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md) preserve one-programme/common-world
+claim limits, both checkpoints and all contrary tails. The complete73-line/14654-byte independent
+review at68fed46f4 was read and all material findings answered: no empirical defect, but the
+report rationale now explicitly recognizes that another B can change judgment without settling
+population uncertainty. DM selects a substantive Portfolio report on continuation for a fixed-recipe
+future-proposer comparison versus retaining bounded F and PARK. The complete report must address
+the actual reopening objective; no new empirical successor or lifecycle disposition is applied.
+
+Earlier [PARK knowledge](PARK.md), [reentry judgment](ACVC_REENTRY_INTAKE_20260914.md)
+and [B02 full-review response](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md)
+remain historical evidence. The new decision changes future investment, not the old empirical
+facts or the defensibility of retaining a bounded reference. It neither revives failed families
+nor establishes a required third seed or a new mechanism. The original B02 retained native
+archive was freshly verified unchanged at 420,438 bytes and SHA256
+`be32ec3b31643d310fbdba780feb7d64f964cbe4df1fdc8b10a58b521b0849c0`.
+
+K/B01 and B02 keep their separate F−C and F−dwell gains, adverse worlds, useful dwell and
+unequal own-history intervention counts. B02's two means are +0.10459355901545042 and
++0.06070900770904247 J, adverse4/64 and11/64, native164.53s. These are two observed cluster
+endpoints, not training-population stability. The uniform C01 five-fit qualified result remains
+separate. Learned gates below F, both train-through-F DOWN observations and the stopped
+uncertain/delayed family stay preserved. No deployment/default, causal component, tuned
+headroom or transfer claim follows. Old completed review/provider requests are retained;
+new result review uses the registered independent browser Transport and current bindings.
 
 ## Scientific question
 
@@ -110,8 +200,9 @@ ends with complete intake and scoped cleanup; no third pair, consultation or suc
 That allocation boundary is preserved in the [B02 intake](ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md).
 The subsequent original Convergence decision selected the distinct cluster-law deployment-use B
 described below. Its separately funded complete result supports observed use. The subsequent
-post-cluster Convergence retains that observed reference and recommends no extra empirical
-allocation now; fresh-policy repeatability is a conditional revisit, not a selected successor.
+post-cluster Convergence retained that observed reference and recommended no extra empirical
+allocation at its historical named-use boundary. The current DM-owned B02 above prospectively
+addresses a useful independent development endpoint without rewriting that answer.
 
 Exact binding remains a useful protocol primitive. Neither historical learner object nor the
 new native comparisons support adaptive ACVC superiority over their strongest competent fixed control.
@@ -545,14 +636,13 @@ Faithful rollout/storage/replay/reset and final common-F measurement are later i
 dependencies. Their specification is not acceptance of the currently absent F-training path
 or a proof of learning improvement. Shared UCOPE defaults and legal actor information remain.
 
-Portfolio bought only the now-complete question and intake. This next B, all source/check/run
-work, its card and identities remain unfunded and uncreated; no 270/540/660/1200 offer is renewed.
-The complete changed-path cost and this consultation's documentary/provider cost remain unknown.
-Retain train-C→deploy-F as the current same-host reference while a proper Portfolio investment
-considers the exact faithful pair and full support. No automatic recurrence fit, extra panel,
-cost pilot or Innovator follows. The next observation would be the complete paired common-F
-endpoint, not more C01 evaluation. Recasts:2, lowest-contention status and the ended T/G and
-uncertain/delayed families remain; no Portfolio lifecycle change or formal UAV entry occurs.
+At that historical question boundary Portfolio had bought only the question/intake; the future
+pair's card/source/identities and allowance had not yet been created. The two later completed
+training-use pairs are recorded above. Historical offers were not renewed by the consultation,
+whose complete documentary/provider cost remains unknown. Train-C→deploy-F remained the reference;
+the next proposed observation was the paired common-F endpoint, not more C01 evaluation. This
+paragraph preserves that historical sequence, not a current Portfolio funding or lifecycle gate.
+Recasts2, contrary results and ended T/G/uncertain-delay family evidence remain intact.
 
 ### Post-two-training-use Convergence — accepted 2026-09-12
 
@@ -626,7 +716,8 @@ judgment about this purchase, not a claim that replication is unnecessary.
 Strongest support remains F's observed gain over useful own-dwell. Eight adverse F−dwell worlds,
 one training unit and unequal private interventions bound the reference; motion suppression,
 private recurrence and teammate consequences remain coupled explanations. The inspected action
-is the clipped negative of the UAV's previous realized displacement. No increased saturation,
+is the clipped negative of the UAV's previous realized displacement divided by 30 (the
+existing action-space conversion in `Binding.observe`). No increased saturation,
 isolated retrace effect, tuned cluster headroom or fresh-policy default benefit was measured.
 
 The concrete next discriminator becomes relevant when a named same-law use proposes F as the
@@ -635,7 +726,21 @@ with final C/F/own-dwell panels could change the default. Retain separate signed
 practical scale and conditional uncertainty. This is a revisit condition, not a newly selected
 object, automatic investigation or Portfolio lifecycle/funding disposition.
 
+### Reference next-use Convergence — accepted 2026-09-13
+
+The [complete next-use intake](pro_packets/20260913_reference_next_use_convergence/INTAKE.md)
+accepts the original node's unchanged reference-retention/no-addition decision. No receiving
+use/default decision or new empirical result was supplied, so no additional documentary study,
+reuse artifact, receiver search or empirical object is selected. The existing observed-endpoint
+claim, strongest support and adverse-world contradiction remain exactly those above. The next
+discriminator is still an actual named same-law fresh-policy default decision; the consultation
+does not supply it. ACTIVE status is not evidence of a newly advancing experiment, and this
+finite answer is not a lifecycle disposition or another recast.
+
 ## Evidence set
+
+- `docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/archive/RESPONSE.md`
+- `docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/INTAKE.md`
 
 - `docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/archive/RESPONSE.md`
 - `docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/INTAKE.md`

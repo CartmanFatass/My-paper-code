@@ -1,0 +1,134 @@
+{
+  "object": "ACVC_CLUSTER_FIXED_RECIPE_C01",
+  "drawn_at": "2026-09-14T17:22:32.036382+00:00",
+  "law": "Six iid pairs; m=10000+secrets.randbelow(10000), then q=20000+secrets.randbelow(10000), ordered1..6; sampling with replacement, no identity or outcome rejection/redraw.",
+  "external_uniform_calls": 12,
+  "first_and_only_draw": true,
+  "units": [
+    {
+      "unit_index": 1,
+      "master": 13783,
+      "evaluation_namespace": 22845,
+      "training_reset_inclusive": [
+        1378301000,
+        1378302023
+      ],
+      "evaluation_reset_inclusive": [
+        2284502000,
+        2284502063
+      ],
+      "output_suffix": "unit_01"
+    },
+    {
+      "unit_index": 2,
+      "master": 17291,
+      "evaluation_namespace": 22568,
+      "training_reset_inclusive": [
+        1729101000,
+        1729102023
+      ],
+      "evaluation_reset_inclusive": [
+        2256802000,
+        2256802063
+      ],
+      "output_suffix": "unit_02"
+    },
+    {
+      "unit_index": 3,
+      "master": 14179,
+      "evaluation_namespace": 21574,
+      "training_reset_inclusive": [
+        1417901000,
+        1417902023
+      ],
+      "evaluation_reset_inclusive": [
+        2157402000,
+        2157402063
+      ],
+      "output_suffix": "unit_03"
+    },
+    {
+      "unit_index": 4,
+      "master": 13325,
+      "evaluation_namespace": 26056,
+      "training_reset_inclusive": [
+        1332501000,
+        1332502023
+      ],
+      "evaluation_reset_inclusive": [
+        2605602000,
+        2605602063
+      ],
+      "output_suffix": "unit_04"
+    },
+    {
+      "unit_index": 5,
+      "master": 11751,
+      "evaluation_namespace": 28453,
+      "training_reset_inclusive": [
+        1175101000,
+        1175102023
+      ],
+      "evaluation_reset_inclusive": [
+        2845302000,
+        2845302063
+      ],
+      "output_suffix": "unit_05"
+    },
+    {
+      "unit_index": 6,
+      "master": 17639,
+      "evaluation_namespace": 20217,
+      "training_reset_inclusive": [
+        1763901000,
+        1763902023
+      ],
+      "evaluation_reset_inclusive": [
+        2021702000,
+        2021702063
+      ],
+      "output_suffix": "unit_06"
+    }
+  ],
+  "model_environment_or_scientific_rng_created": false,
+  "per_unit_work": {
+    "training_episodes": 1024,
+    "evaluation_episodes": 192,
+    "episode_rows": 1216,
+    "optimizer_updates": 2048,
+    "training_team_ticks": 262144,
+    "evaluation_team_ticks": 49152,
+    "team_ticks": 311296,
+    "final_checkpoints": 1,
+    "private_loads": 3,
+    "environment_constructors": 4
+  },
+  "six_unit_work": {
+    "training_episodes": 6144,
+    "evaluation_episodes": 1152,
+    "episode_rows": 7296,
+    "optimizer_updates": 12288,
+    "training_team_ticks": 1572864,
+    "evaluation_team_ticks": 294912,
+    "team_ticks": 1867776,
+    "final_checkpoints": 6,
+    "private_loads": 18,
+    "environment_constructors": 24
+  },
+  "native_reference": {
+    "single_unit_measured_s": 296.3,
+    "six_unit_summed_reference_s": 1777.8000000000002,
+    "not_a_wall_guarantee_or_total_cost": true
+  },
+  "uncertainty_method": {
+    "module": "scipy.stats.t.ppf",
+    "scipy_version_measured_locally": "1.15.2",
+    "probability": 0.9875,
+    "df": 5,
+    "critical": 3.1633814497486235,
+    "n_units": 6,
+    "marginal_two_sided_coverage": 0.975,
+    "simultaneous_at_least_coverage": 0.95,
+    "coverage_scope": "Only the stated iid-normal working model; actual neural-training calibration unestablished."
+  }
+}

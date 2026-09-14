@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "event_id": "folr-b02-transport-agentify-cleanup-20260914-01",
+  "request_id": "2026-09-14-folr-entity-history-b02-result-review-01",
+  "native_task_id": "01a09e7a-4f2f-77e3-8098-4e160c5ebc79",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "conversation_binding_key": "em:vap_folr_core:convergence",
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "owned_tab_id": "da345b8d-c537-4d0a-b025-f7fe14b60513",
+  "initial_cua_inference": "INSUFFICIENT: zero browsers/tabs in generic CUA inventory did not establish the Agentify Chrome-CDP target was closed.",
+  "agentify_before": {
+    "tabs_api_present": true,
+    "url": "https://chatgpt.com/c/6aa18137-9d88-83e8-a01f-46630813faf8",
+    "protected_tab": false,
+    "browser_kind": "chrome-cdp",
+    "browser_product": "Chrome/153.0.8010.36",
+    "debug_port": 9222,
+    "strict_transport_eligible": true,
+    "status_blocked": false,
+    "active_query": null,
+    "send_visible": false
+  },
+  "accepted_work_secured": {
+    "registry_state": "ARCHIVED",
+    "native_state": "RECEIPT",
+    "send_click_count": 1,
+    "full_response_sha256": "f98b5af4b38c20777a6da5b142feec5d4c8e273a91051744c150f8a59f45ea34"
+  },
+  "close_action": {
+    "api": "agentify_tab_close",
+    "receipt_status": "CLOSED",
+    "tab_id": "da345b8d-c537-4d0a-b025-f7fe14b60513"
+  },
+  "agentify_after": {
+    "exact_tab_present": false,
+    "tabs_api_verified": true
+  },
+  "outcome": "CLOSED_EXACT_AGENTIFY_TAB",
+  "conversation_binding_preserved": true,
+  "no_query_send_or_replacement": true,
+  "observed_at": "2026-09-14T06:24:58Z"
+}

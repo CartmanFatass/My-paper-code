@@ -1,0 +1,20 @@
+{
+  "event": "RCLE_B13_REVIEW_DISPATCH_AND_EXECUTION_CLEANUP_20260914",
+  "utc": "2026-09-14T09:35:05.642095+00:00",
+  "base_head": "bc4dec35273005676a9939a856b09ed0fcc9fb54",
+  "source_commit": "0c502d78363e1ba0067b1d5983f4154aaaab0459",
+  "main_previous_acceptance": "bc4dec35273005676a9939a856b09ed0fcc9fb54",
+  "paths": [
+    "docs/research/candidates/roster_consistent_latent_exploration/PARK.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/REMOTE_CLEANUP.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/CONTROL_INPUT_SYNC.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/DISPATCH.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/REFERENCE_PUBLICATION.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/REQUEST.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/delivery/HANDOFF.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/delivery/TASK.md"
+  ],
+  "peer_and_portfolio_rows_preserved": true,
+  "provider_state": "acceptance not yet received"
+}

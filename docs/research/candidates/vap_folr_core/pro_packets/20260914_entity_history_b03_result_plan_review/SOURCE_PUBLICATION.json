@@ -1,0 +1,199 @@
+{
+  "observed_at_utc": "2026-09-14T10:00:32.582638+00:00",
+  "observed_refs": {
+    "refs/heads/main": "c35cb34ad507e6ed987473a669e7a654259a3abd",
+    "refs/heads/codex/vap-folr": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86"
+  },
+  "references": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md",
+      "commit_sha": "4776103de4f55beaee610c52506112651bfaed04",
+      "bytes": 11646,
+      "sha256": "477f5094e83452c233d05541210402519a4372a73dc3cb03fb0fbcc99174df3c",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+      "bytes": 7669,
+      "sha256": "f9f5ccb7367ede561e492865579768d7fdc022af1ab7ab6aacd48e5e08f27b18",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+      "bytes": 10029,
+      "sha256": "8aadd7543f61ce7f48bcf56e1ba30cee515877ce133f48e7b1db6fd4c350d057",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/RESULT_SUMMARY.json",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+      "bytes": 1054,
+      "sha256": "104d1cec11c9eb623efdcef1764b0132b6a2834ba6b209960f4aa61dd5579538",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/BLOCK_COMPARISON.json",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+      "bytes": 812,
+      "sha256": "63edb6507608fb17a4fe74bb82047070531784bc05a2ac03e367043e9f6103bb",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/COST_SUMMARY.json",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+      "bytes": 1874,
+      "sha256": "5fe1bf3fc3c6bb998978e92efed87677222931bc7a33256bd7ff5d5c4bc4d937",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/GENERIC_COLLECTION.json",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+      "bytes": 4538,
+      "sha256": "b87e05207449d02176e8cbbd139b04b9cab0b8530b592351709b47a40599706e",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/BANK_COLLECTION.json",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+      "bytes": 4611,
+      "sha256": "9bd32ab044400cbfcf5df75ad63725adbb139837d717ab1b98efb2d8a28611f9",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+      "bytes": 71785,
+      "sha256": "2a06c731a52cf97a9de612ef1f4fa8aa208edcb02ee9ecafd066a2436843cd8a",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_history_b01/model.py",
+      "commit_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+      "bytes": 5320,
+      "sha256": "65c31caf7f7d23182e965d8eefb1da416c2f0900eb7347dab04260a8bd3e3ce0",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+      "bytes": 9178,
+      "sha256": "206afb1cdefe010f758ce7e951e59e4140fe7f127133bef995e37070141756c1",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b02_review/archive/RESPONSE.md",
+      "commit_sha": "b4a67c7bf7b0eec726f107bf7acdf148f7e60109",
+      "bytes": 20351,
+      "sha256": "f98b5af4b38c20777a6da5b142feec5d4c8e273a91051744c150f8a59f45ea34",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md",
+      "commit_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+      "bytes": 21277,
+      "sha256": "a8b5c7560e8a79c771bcfa618b913a10c949a89ad0825cad979282272e6c96d3",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/archive/RESPONSE.md",
+      "commit_sha": "4776103de4f55beaee610c52506112651bfaed04",
+      "bytes": 17764,
+      "sha256": "12f367046d07b6b7b54461cb321329eb1bd691b02ca74ee4cdf6518a1c9a675f",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md",
+      "commit_sha": "4776103de4f55beaee610c52506112651bfaed04",
+      "bytes": 7038,
+      "sha256": "42daa05e1a3af43c99af6cc0729947cff1a3e59792cc847a9829b30fed8112b6",
+      "reachable_observed_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+      "commit_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a",
+      "bytes": 4876,
+      "sha256": "86a55c5386d4691203185d7f8b0d667d6626d94abc9665a8727c7f5aed346368",
+      "reachable_observed_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a",
+      "bytes": 49457,
+      "sha256": "4045155bd4e81114fdbb5b2a2c7adc7c860cf02fc03d83b53d0db77e72a25f86",
+      "reachable_observed_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "reachable_observed_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "reachable_observed_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a",
+      "bytes": 21838,
+      "sha256": "ee7d7f5b183c95cdc024823c582ffd008f4bb6df00869b5e8ed22d6079d34673",
+      "reachable_observed_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a",
+      "bytes": 26556,
+      "sha256": "029cf0840f1a9a8be0882834a1bcf59ce3b33984a6f03cccbd56469548118fca",
+      "reachable_observed_refs": [
+        "refs/heads/main"
+      ]
+    }
+  ],
+  "provider_access": "NOT_CLAIMED; this verifies publication only."
+}

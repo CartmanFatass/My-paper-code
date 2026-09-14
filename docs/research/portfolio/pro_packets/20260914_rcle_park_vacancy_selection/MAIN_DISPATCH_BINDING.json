@@ -1,0 +1,21 @@
+{
+  "event": "RCLE_SINGLE_VACANCY_PACKET_BOUND_20260914",
+  "time_utc": "2026-09-14T11:51:28.690765+00:00",
+  "main_base": "e359ce5b5daa105eee6e004a412ed91f8e9d0bf9",
+  "source_commit": "1fb1e98cf337f4ea9e275ab4150eaa48536c5c8e",
+  "request_id": "2026-09-14-rcle-park-vacancy-selection-01",
+  "author_thread_id": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "occupied": 2,
+  "reserved": 0,
+  "vacancy": 1,
+  "send_state": "NOT_DISPATCHED_OR_ACCEPTED_AT_THIS_TRANSACTION",
+  "candidate_selected": false,
+  "owned_paths": [
+    "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/REPORT.md",
+    "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/SOURCE_MANIFEST.json",
+    "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/PROMPT.md",
+    "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/HANDOFF.json",
+    ".codex/hmasd-dm-sessions.toml"
+  ],
+  "reconciliation": "First main transaction copied own new packet and updated own registry fields, then stopped at already-corrected DISH text check. FOLR e359ce5b5 had completed before the mutex acquisition. Its accepted-review metadata, peer rows and already-corrected DISH report are preserved byte-semantically; no staged peer work or external Send was involved. Fixed808 report accurately labels its earlier review-unconfirmed snapshot; later FOLR acceptance adds no result/decision, and full answer remains pending."
+}

@@ -1,0 +1,127 @@
+{
+  "object_id": "RCLE-TBCFV-B10-GREEDY-ANCHORED-1024",
+  "as_of": "full independent review read and explanatory response written; before owner trace, final documentary validation and final commit/push",
+  "native_cap_s": 300,
+  "additional_invoked_support_cap_s": 600,
+  "complete_invoked_cap_s": 900,
+  "whole_native_wall_s": 161.35,
+  "known_support_charged_s": 627.289636,
+  "rows": [
+    {
+      "operation": "two stalled own remote staging invocations including termination rounding",
+      "wall_s": 395,
+      "bound": true,
+      "evidence": "STAGING_RECOVERY.json",
+      "method": "279 s plus 109 s observed process lifetimes rounded up jointly; descendants not added"
+    },
+    {
+      "operation": "other preparation, source publication, source/contract reads and repaired network sparse staging to test01",
+      "wall_s": 29,
+      "bound": true,
+      "method": "conservative enclosing tool-command sum; excludes stalled processes and B09 closeout"
+    },
+    {
+      "operation": "focused test02 enclosing remote invocation",
+      "wall_s": 4.1,
+      "bound": true
+    },
+    {
+      "operation": "independent engineering Reviewer",
+      "wall_s": 8.8,
+      "approximate": true
+    },
+    {
+      "operation": "rounding remainder",
+      "wall_s": 0.1,
+      "bound": true
+    },
+    {
+      "operation": "command/source acceptance publication, launch, read-only intake/collection/recovery and scientific review publication through f6f4ab063",
+      "wall_s": 96.5210191,
+      "breakdown": [
+        4.9941867,
+        0.8040261,
+        0.6777381,
+        0.6946478,
+        0.5492744,
+        0.3182782,
+        0.7,
+        0.7188638,
+        3.3906573,
+        55,
+        7.636629,
+        3.4958976,
+        0.2669506,
+        0.2819426,
+        5.1036497,
+        2.5666389,
+        4.6575895,
+        4.6640488
+      ],
+      "method": "Enclosing tool walls replace nested command times.55s bounds the observed53s failed source-bundle job; pack/fetch descendants not added. Explicit recovery query/kill costs separate, including conservative overlap."
+    },
+    {
+      "operation": "same accepted Transport strict repair and earlier bounded observation",
+      "wall_s": 56.7,
+      "approximate": true,
+      "method": "46.7 s reported strict repair plus10 s earlier bounded wait; preserves prior conservative charge rather than silently reclassifying it",
+      "evidence": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_b10_scientific_review/DISPATCH_RECORD.json"
+    },
+    {
+      "operation": "B10 mapped cleanup and prior boundary publication",
+      "wall_s": 5.4480459,
+      "breakdown": [
+        0.7822278,
+        4.6658181
+      ],
+      "method": "Enclosing recorded tool walls; cleanup complete with preserved raw/source"
+    },
+    {
+      "operation": "subsequent DM-selected administrative continuation, current checkpoint",
+      "wall_s": 31.620570999999998,
+      "approximate": true,
+      "breakdown": {
+        "early_administrative_publication": 5.5061038,
+        "postcompletion_transport": 9.7,
+        "full_response_read": 0.1738716,
+        "context_read": 0.2718307,
+        "direction_owner_help": 0.3661576,
+        "dispatch_owner_review": 6.4947607,
+        "receipt_preservation_delivery_merge_push": 8.0389211,
+        "owner_item_context": 0.166423,
+        "read_support_for_update": 0.1456496,
+        "read_dispatch_for_update": 0.1517677,
+        "archive_hash_check": 0.2237904,
+        "line_ending_verification": 0.3562948,
+        "scientific_document_patch": 0.025
+      },
+      "method": "Actual known tool walls, with approximately9.7 s reported post-completion Transport archival; no provider lifetime or ordinary native waiting counted as measured active work. The earlier10 s charge remains separately preserved."
+    }
+  ],
+  "accounting_complete": false,
+  "unmeasured_support_components": [
+    "Monitor invoked observation reads remain UNKNOWN",
+    "Transport initial preparation and any unmeasured intermediate observation calls remain UNKNOWN; read-only work is not free",
+    "small documentary/raw-copy tails not separately measured in earlier checkpoints",
+    "final owner trace, final documentary validation and publication after this checkpoint; actual known tool walls will be included in the final native handoff",
+    "external Clerk/main integration outside this DM checkpoint"
+  ],
+  "provider_agent_lifetime_cost": "UNKNOWN; provider generation and agent lifetime are not measured active work; native waiting is distinguished from active invocation",
+  "interpretation": "Known cumulative charged support has exceeded the original600 s DM-selected card plan. Preserve300/600/900 original values and all UNKNOWN tails; no original-cap compliance or complete invoice is claimed. Native161.35 s remains within300. Subsequent finite administrative work closes the same accepted review under existing DM authority, not a new grant, retry or accounting reset. The owner-requested separate control synchronization/shared-runtime coordination is not relabeled B10 scientific work.",
+  "known_complete_invoked_s": 788.639636,
+  "prior_accounting_checkpoint": {
+    "as_of": "full B10 intake/PARK published a3114f9e7 and scientific review HANDOFF dispatched f6f4ab063, before Transport result and final cleanup",
+    "known_support_charged_s": 533.5210191,
+    "known_complete_invoked_s": 694.8710191,
+    "interpretation": "Known charged work at checkpoint is below600s support and900s complete; missing coverage prevents a complete compliance invoice. Original caps remain, no retry/rollover. Nominal measured support headroom66.479s; Transport active work bound near45s reserves about15s for DM closeout, with unknown prior reads explicit."
+  },
+  "original_support_plan_known_overrun_s": 27.289636,
+  "administrative_continuation": {
+    "authority": "OWNER_DELEGATED under current owner2026-09-13 full-lifecycle responsibility; a self-selected allowance is not an owner-only boundary",
+    "active_work_plan_s": 60,
+    "known_active_at_checkpoint_s": 31.620570999999998,
+    "new_empirical_invocations": 0,
+    "new_sends": 0,
+    "plan_reset": false
+  }
+}

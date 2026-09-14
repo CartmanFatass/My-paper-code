@@ -1,0 +1,92 @@
+{
+  "utc": "2026-09-14T09:31:48.212550+00:00",
+  "removed_worktree": "/home/wu/hmasd-worktrees/rcle-b13-cf4d9bd93",
+  "launch_sha": "cf4d9bd93ff9eb255800223d95de170b68315ba6",
+  "status_before": {
+    "task": "rcle-b13-s33-cf4d9bd93",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3668475,
+    "uptime_seconds": 1824,
+    "tmux_active": false
+  },
+  "live_cwd_processes": [],
+  "all_noncommitted_files_verified_against_archive": [
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_control/admission.json",
+      "bytes": 504,
+      "sha256": "52da71e53201f1f98d7af9a9ac0da1f1fbbe7b939965e959efedbfc78b4b137c"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_control/native.time",
+      "bytes": 60,
+      "sha256": "f5016e0c772ef2727bb74356559696e13fcf2add48960f6347a83b2b868cf21a"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_seed33/curves.jsonl",
+      "bytes": 1178598,
+      "sha256": "a864e2476e37f4aecd7cd6deb7eaf828e621ae9354031b6d158a76f4b31ae5fa"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_seed33/final1024.json",
+      "bytes": 110090,
+      "sha256": "c1e96a2e43204cc01f2bb4def62eef87eb2feb82f1d8b93899d9341fbeb4c683"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_seed33/final1024.pt",
+      "bytes": 72970,
+      "sha256": "c5317fd0615c0712ae38d93d57bfca2190a3d442ff6b9ad37a0b092832cf719b"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_seed33/greedy.json",
+      "bytes": 110155,
+      "sha256": "ddb16de763daaaced1f56c1e4e0d77aa39f8066a1194a0faffb02988b4069bba"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_seed33/initialization.json",
+      "bytes": 110075,
+      "sha256": "e5477741cc2b058a3d8f60b5c86746e91659b45ede04c75e974ce579f1179b59"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_seed33/initialization.pt",
+      "bytes": 24370,
+      "sha256": "f19f1ea1dcc3dde69e4103d3abfb036193f8b669edc6bd3bc0913e5ddc6c8b97"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_seed33/modal.json",
+      "bytes": 110155,
+      "sha256": "ddb16de763daaaced1f56c1e4e0d77aa39f8066a1194a0faffb02988b4069bba"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_seed33/native_build/8400160e6ca2c23b0932f6a073ce126099000cf0de7562c1eb8a13d1458496ce/tbcfv_backend.so",
+      "bytes": 85416,
+      "sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_seed33/native_build/8400160e6ca2c23b0932f6a073ce126099000cf0de7562c1eb8a13d1458496ce/tbcfv_backend.source.cpp",
+      "bytes": 50757,
+      "sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_seed33/nearest.json",
+      "bytes": 115345,
+      "sha256": "8f10245a7a614ef12074115405b68bf1871156b57511c178f1c04c18eeb45909"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b13_seed33/summary.json",
+      "bytes": 29793,
+      "sha256": "b8b50f5790d2f13432f91766eb3146c1fca9a44134a17e688f8f9f2cd12b2d8b"
+    }
+  ],
+  "archive": "/home/wu/hmasd-inputs/rcle-b13-cf4d9bd93-evidence.tgz",
+  "archive_sha256": "efea49fc263d0f5eae74b806e280bcb5d07cfb0b3f2f6692e5ab1a2b2ea2a020",
+  "archive_bytes": 320580,
+  "archive_regular_files": 19,
+  "worktree_removed": true,
+  "registration_removed": true,
+  "supervisor_original_records_preserved": "/home/wu/.agent-tasks/rcle-b13-s33-cf4d9bd93",
+  "scope": "Only completed exact-SHA execution worktree removed after complete archive and local-copy verification; no authoring branch, staging archive or scientific evidence deleted.",
+  "enclosing_local_support_wall_s": 0.6578087999951094,
+  "local_committed_archive": "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/NATIVE_EVIDENCE.tgz",
+  "local_archive_verified": true
+}

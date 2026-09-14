@@ -1,0 +1,26 @@
+{
+  "utc": "2026-09-13T19:28:32.353263+00:00",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Projects\\HMASD\\temp\\tests\\acvc-task-sha-pairing-correction-20260913-1930",
+    "tests/skills/test_native_transport_workflow.py",
+    "-k",
+    "github_delivery or sha_comment"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.75,
+  "stdout": "...........                                                              [100%]\n11 passed, 62 deselected in 1.20s\n",
+  "stderr": "",
+  "purpose": "Reviewer P2 exact URL-token correction and dependent receipt rejection",
+  "empirical_invocations": 0,
+  "network_or_provider_calls": 0,
+  "scratch_removed": true
+}

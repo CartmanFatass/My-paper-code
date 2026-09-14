@@ -1,0 +1,15 @@
+{
+  "removed": [
+    "/home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f",
+    "/home/wu/.agent-tasks/acvc-paired-exposure-b01-8fd41b61f",
+    "/home/wu/hmasd-inputs/acvc-paired-exposure-b01-8fd41b61f-native.tar.gz"
+  ],
+  "absent_on_disk": true,
+  "worktree_absent_from_git": true,
+  "preserved_file_count": 15,
+  "published_text_file_count": 13,
+  "published_sha": "00a0b661bb30d4e9143c146ed33a2ee2bc25eaee",
+  "preservation": "Verified local837148byte original archive ccd9595e4573cc4ece0a9eb45fa408a7ea4f89a53d1a37769b7365eaffb9fb22; both checkpoints inside,13 published text blobs byte-identical. Every remote native/supervisor file matched archive; tracked source clean, no extra untracked files, supervisor terminal.",
+  "cleanup_owner": "ACVC DM",
+  "no_live_native_handles": true
+}

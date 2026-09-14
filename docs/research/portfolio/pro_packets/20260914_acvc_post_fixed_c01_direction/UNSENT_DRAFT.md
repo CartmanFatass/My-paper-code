@@ -1,0 +1,3 @@
+# Unsent initial rendering
+
+This initial NOT_PUBLISHED draft was never dispatched or sent. Its per-path SHA mapping was correct, but author prepublication verification found that the renderer prints repository/path/SHA rather than explicit immutable per-file URLs required by the Portfolio web-context contract. The same logical unsent request was rendered in the fresh sibling _r2 directory with exact URLs added to each reference purpose and the response path prospectively moved there. The original TASK/HANDOFF/REQUEST remain drafting history only. No scientific input or accepted request changed; the active request is _r2.

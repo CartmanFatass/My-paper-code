@@ -1,0 +1,12 @@
+{
+  "request_id": "2026-09-14-rcle-post-b13-direction-decision-01",
+  "state": "Final immutable source references verified locally; source author commits already published; no provider access or Send claimed",
+  "source_count": 34,
+  "required_scope_count": 29,
+  "prompt_bytes": 23431,
+  "prompt_sha256": "e91f1beb4fe40f38eabe67488d9a98163e195437be6f9eb6d9937f030a41a59f",
+  "report_commit": "371882900017b3ee774cc72ef2e4a5d544d27da5",
+  "global_snapshot_sha": "03be1bd7b11213070b91d9b6281c9c58279e1dd4",
+  "source_git_blobs_verified": true,
+  "no_placeholders": true
+}

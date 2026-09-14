@@ -1,0 +1,75 @@
+{
+  "recorded_at_utc": "2026-09-14T11:54:11.256363+00:00",
+  "source_checkout": "C:\\Projects\\HMASD-worktrees\\dm-rcle-a02-20260906",
+  "source_head": "3695e89018c9563910e68322a78851d4925209cb",
+  "archive_path": "C:\\Projects\\HMASD\\temp\\directions\\roster_consistent_latent_exploration\\recovery\\20260914-park-authoring-nontracked\\NONTRACKED.zip",
+  "archive_bytes": 230300169,
+  "archive_sha256": "949e119c7acf6a90f7af2cf8782db86f07d3f33b3ab28586aca3a122d08eb973",
+  "file_count": 558,
+  "source_bytes": 302188638,
+  "verification": "Every archived member and unchanged source file independently hashed after ZIP creation; exact relative-path set matched.",
+  "scientific_acceptance": "Recovery-only; the two pre-existing untracked historical Transport files are preserved without scientific acceptance or publication.",
+  "cleanup_state": "No source file or checkout deleted; current live dependency is RCLE-owned vacancy Transport/archive/intake/handoff. Final retirement requires a fresh change inventory and source-lineage/PR preservation.",
+  "manifest_path": "C:/Projects/HMASD/temp/directions/roster_consistent_latent_exploration/recovery/20260914-park-authoring-nontracked/MANIFEST.json",
+  "manifest_bytes": 152230,
+  "manifest_sha256": "615c5a63bd7b13661806c8a89c6880d165d08b097c80cdd643819b0d71c763c3",
+  "native_children": "All9 owned native helpers completed on fresh collaboration listing; no active scientific writer from this batch. Registered independent Transport remains active on the new vacancy request.",
+  "retention_owner": "RCLE DM",
+  "retirement_event": "Complete vacancy/accepted transfer and preserve final source-lineage ref. Physical whole-worktree removal remains unavailable while it would delete four explicitly policy-rejected existing scratch paths. Preserve this narrow cleanup exception; do not claim directory retirement.",
+  "open_pr_reconciliation": {
+    "checked_at_utc": "2026-09-14T11:56:11.823958+00:00",
+    "command": "gh pr list --head codex/rcle --state all --json number,url,state,headRefName,baseRefName,title --limit100",
+    "result": [],
+    "meaning": "No matching PR returned; no PR mutation."
+  },
+  "source_lineage": {
+    "head_at_check": "3695e89018c9563910e68322a78851d4925209cb",
+    "unique_to_direction_vs_origin_main": 138,
+    "state": "Full current branch remains published; preserve final recovery ref before any branch retirement. Unique commits are not automatically accepted or merged."
+  },
+  "historical_deletion_rejections": {
+    "discovered_at_utc": "2026-09-14T12:00:17.128547+00:00",
+    "reason": "Automatic approval review rejected original exact scratch deletion with only blocked by policy; no new deletion attempted or alternate whole-checkout removal.",
+    "same_current_paths_verified": [
+      {
+        "suffix": "temp/directions/roster_consistent_latent_exploration/test/b03-focused-20260909",
+        "files": 1,
+        "bytes": 3541,
+        "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_CM_RECORD_20260909.md"
+      },
+      {
+        "suffix": "temp/directions/roster_consistent_latent_exploration/test/b03-recovery-focused-20260909",
+        "files": 3,
+        "bytes": 224097,
+        "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_CM_RECORD_20260909.md"
+      },
+      {
+        "suffix": "temp/directions/roster_consistent_latent_exploration/test/b04-nearest-prior-20260910",
+        "files": 7,
+        "bytes": 724042,
+        "source": "docs/research/candidates/roster_consistent_latent_exploration/b04_nearest_prior_20260910/LOCAL_TEST_SCRATCH.json"
+      },
+      {
+        "suffix": "temp/directions/roster_consistent_latent_exploration/test/b05-nearest-prior1000-20260911",
+        "files": 6,
+        "bytes": 189324,
+        "source": "docs/research/candidates/roster_consistent_latent_exploration/b05_nearest_prior1000_20260911/PREPARATION_FACTS.json"
+      }
+    ],
+    "all_original_bytes_in_verified_recovery": true,
+    "cleanup_owner": "Original RCLE DM; preserve each creator provenance. Resume removal only at an actually permitted boundary, not elapsed time, another tool/agent, or whole-checkout deletion.",
+    "scientific_effect": "No scientific occupancy or stop; vacancy and selected-DM research continue independently."
+  },
+  "source_lineage_finalization": {
+    "recorded_at_utc": "2026-09-14T12:54:07.476154+00:00",
+    "source_checkout": "C:\\Projects\\HMASD-worktrees\\dm-rcle-a02-20260906",
+    "source_head": "7a490382cb469f2a62e276a756a2be32b460cc69",
+    "recovery_ref": "refs/tags/codex/recovery-rcle-park-20260914-7a490382",
+    "remote": "origin",
+    "remote_verified_sha": "7a490382cb469f2a62e276a756a2be32b460cc69",
+    "unique_commits_vs_origin_main": 143,
+    "retirement": "No branch or worktree deleted. Historical rejected paths remain intact."
+  },
+  "current_cleanup_state": "Exact final RCLE source lineage is preserved by a locally and remotely verified recovery tag. Full558-file nontracked recovery remains. No source/scratch/branch/worktree deleted; four historical automatic-review deletion rejections remain a narrow cleanup exception. Scientific occupancy is zero; only original ACVC continuation/application and FOLR release remain before RCLE task closeout.",
+  "current_cleanup_state_recorded_at_utc": "2026-09-14T12:55:36.332862+00:00"
+}

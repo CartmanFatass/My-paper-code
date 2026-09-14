@@ -1,0 +1,46 @@
+{
+  "head": "3a749256d2aaf16345308827518283c8d2b91ad7",
+  "tracked_clean": true,
+  "tracked_diff": "",
+  "untracked": [],
+  "ignored_files": [
+    {
+      "path": "temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01/bypass/checkpoint_update16.pt",
+      "bytes": 2070775
+    },
+    {
+      "path": "temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01/replace/checkpoint_update16.pt",
+      "bytes": 2356639
+    },
+    {
+      "path": "temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01/shared/initial_state.pt",
+      "bytes": 836667
+    },
+    {
+      "path": "temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01/shared/resets.json",
+      "bytes": 3002
+    },
+    {
+      "path": "temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01/summary.json",
+      "bytes": 70233
+    },
+    {
+      "path": "temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/complete_evidence.tar.gz",
+      "bytes": 4298237
+    },
+    {
+      "path": "temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/memory.json",
+      "bytes": 504
+    },
+    {
+      "path": "temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/preflight_wall.txt",
+      "bytes": 28
+    },
+    {
+      "path": "temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/runner_wall.txt",
+      "bytes": 27
+    }
+  ],
+  "registered": true,
+  "inspection_command_wall_seconds": 0.9788666000240482
+}

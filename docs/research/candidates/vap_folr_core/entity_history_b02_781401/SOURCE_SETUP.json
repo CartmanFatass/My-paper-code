@@ -1,0 +1,15 @@
+{
+  "source_sha": "82b12d7e0f205ea228ca69e28e581ca6ee5f2ca6",
+  "earlier_setup": "CRLF syntax failure; SSH fetch wrapper timeouts at 90 and 60 s, reconciled source present and no worktree; later worktree add blocked by blob:none lazy fetch outside configured network shell. Exact owned process tree 3657791/93/94/95/96 terminated and automatic cleanup verified target absent. No experiment accepted. Earlier total remote cost unknown.",
+  "returncode": 128,
+  "stdout": "",
+  "stderr": "(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\nPreparing worktree (detached HEAD 82b12d7e0)\nerror: RPC failed; curl 56 GnuTLS recv error (-9): Error decoding the received TLS packet.\nerror: 10114 bytes of body are still expected\nfetch-pack: unexpected disconnect while reading sideband packet\nfatal: early EOF\nfatal: index-pack failed\nfatal: could not fetch 60c2558b745663be6bc32e4aab535893f0ee0854 from promisor remote\n",
+  "local_observed_wall_seconds": 4.922000000020489,
+  "recovery": {
+    "returncode": 0,
+    "stdout": "82b12d7e0f205ea228ca69e28e581ca6ee5f2ca6\n",
+    "stderr": "(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\nHEAD is now at 82b12d7e0 feat(folr): bind one fresh entity-history learning comparison\n",
+    "local_observed_wall_seconds": 4.719000000040978,
+    "note": "Same worktree recovery after observed terminal TLS fetch failure, process-local HTTP/1.1 only."
+  }
+}

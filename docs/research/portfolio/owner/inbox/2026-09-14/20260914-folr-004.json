@@ -1,0 +1,119 @@
+{
+  "id": "20260914-folr-004",
+  "created": "2026-09-14T08:11:06-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FOLR增强实体历史对新训练Generic：B01两臂对象",
+  "context": "完整Portfolio澄清唯一选择A-G并撤回内部A-Z执行目标；DM据此冻结781601/1781601、两次完整5000/4969/128训练评价。共用actor已独立审查通过；完整训练路径在实现，无native启动。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留已经选定的新卡并继续完整实现、独立审查及资源准入；不会因此声称已经运行实验。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在干净边界按所有者覆盖停止该未运行对象，保留历史及已发生实现；不自动改为其他实验。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体意见前瞻修订尚未执行对象；保留旧卡和已发生工作。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "先回答增强完整程序相对现有Generic的开发增量，接受容量/优化归因损失，少一个增强分支且保持有限两fit。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_AUGMENTATION_B01_SCIENCE_CARD_20260914.md",
+    "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L67",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否覆盖已应用的FOLR CONTINUE及新A-G对象：保留Generic循环、附加持久实体历史，对同期未增强Generic，各一次完整训练评价？",
+    "changes_if_approved": [
+      {
+        "target": "FOLR当前对象",
+        "from": "B03完成；两份相冲突的Portfolio比较选择已完整保留",
+        "to": "完整澄清唯一选择A-G；新781601/1781601卡与完整实现，不执行current-only第三臂"
+      }
+    ],
+    "if_refused": "在下一个干净边界落实所有者的具体覆盖指令，保留已发生工作及旧负结果；不改写冻结的已执行科学含义或自动补跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/archive/clarification_01/RESPONSE.md",
+        "quote": "当前我优先支付完整程序相对现有方案的增量信息，放弃本轮的内部状态法则比较信息。",
+        "why": "A-G直接影响完整增强候选是否值得维护，少一个实体分支；旧替代BANK的负结果尚未回答保留Generic路径后的这一问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/archive/clarification_01/RESPONSE.md",
+        "quote": "H20短行程、重新可见的线索、公共生命周期信息和 Generic 自己的记忆，可能已使新增实体状态没有足够收益空间；增加路径还可能增加优化负担。",
+        "why": "两次旧替代程序大幅落后，新的增强结构也可能损害学习；当前继续接受再次不利的风险。"
+      }
+    ],
+    "uncertainty": [
+      "每臂只有一个新拟合，最终128回合不代表128次训练重复。",
+      "增强192741参数对Generic103173，头部/容量/优化共同变化，不能归因于持久记忆。",
+      "增强墙时、完整支持及提供方成本未知；同ticks不代表同计算量。"
+    ],
+    "cost": {
+      "compute": "新2fits/205120ticks/9938RMSprop/256final；普通计划G3600s+A5400s=9000native及1800active-support，可前瞻调整；旧12538.44native秒仅已知历史小计，不清零。",
+      "owner_time": "异步覆盖，无需回复才推进；DM执行已选普通工作。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；完整训练路径的实现、独立审查及实际资源准入尚未完成，不是等待此owner条目。"
+    },
+    "verdict_text": "最终执行依据：A 对 G；A 对 Z 的选择已撤回。CONTINUE／MEDIUM和现有family／席位／历史边界不变。",
+    "source": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/archive/clarification_01/RESPONSE.md",
+    "science_card": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_AUGMENTATION_B01_SCIENCE_CARD_20260914.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-14T15:11:06+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/archive/clarification_01/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/INTAKE.md",
+      "state": "applied",
+      "summary": "完整澄清A-G已应用；新卡选择及实现委派已实际发生，未声称任何native运行或结果。"
+    },
+    {
+      "at": "2026-09-14T15:47:20+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/archive/clarification_01/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/entity_history_augmentation_b01_781601/EXECUTION.md",
+      "state": "applied",
+      "summary": "完整实现及独立审查已接受；source d9977dc18的Generic于15:36:55UTC实际启动，内存准入通过，原Monitor同批重新接管。A仍选定且未启动，G收集后按原卡执行；无B01最终结果或新科学重试。"
+    },
+    {
+      "at": "2026-09-14T19:49:00+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/archive/clarification_01/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/entity_history_augmentation_b01_781601/EXECUTION.md",
+      "state": "applied",
+      "summary": "Generic已完整收集保全，均值-0.966484375；原增强臂于19:39:55UTC实际启动并由同批Monitor观察。两臂间控制延迟单独记账；无G重跑、追加实验或A-G最终结论。"
+    },
+    {
+      "at": "2026-09-14T20:49:58+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-14-owner-pause-after-inflight.md",
+      "record": "docs/research/candidates/vap_folr_core/HANDOFF_20260914_OWNER_PAUSE.md",
+      "state": "applied",
+      "summary": "Original two-arm B01 complete: d+5.29640625/AUGMENTED_ABOVE_MEI, no retry; current-result review and final handoff remain before owner pause. Scientific lifecycle and slot unchanged."
+    },
+    {
+      "at": "2026-09-14T21:10:25+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-14-owner-pause-after-inflight.md",
+      "record": "docs/research/candidates/vap_folr_core/HANDOFF_20260914_OWNER_PAUSE.md",
+      "state": "applied",
+      "summary": "原始A/G及完整独立复核、实质回应、原始保全和远端回收全部完成；d=+5.29640625，限单次训练比较，旧负结果保留。最终handoff935694878已发布，0存活实验/监控/Pro/归档/审查义务；依所有者指示暂停，科学CONTINUE/MEDIUM及占位不变，无后继。"
+    }
+  ]
+}

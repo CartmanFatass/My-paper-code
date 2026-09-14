@@ -1,0 +1,75 @@
+{
+  "id": "20260914-folr-001",
+  "created": "2026-09-14T00:10:12-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FOLR B03同预算新训练比较：待Portfolio方向裁决",
+  "context": "B02有效负结果只约束当前实例；DM建议新块观察训练实例变化是否改变开发判断。当前只进行实现准备，保留第三槽，提交Portfolio作最终方向决定。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留卡片和实现准备；Portfolio方向决定前不宣称已运行。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "处理未启动工作并保留已有负面结果。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体意见修订未启动协议并保留历史。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L23",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留作为Portfolio待裁决方向建议的B03卡及其实现准备？",
+    "changes_if_approved": [
+      {
+        "target": "FOLR B03 scientific card",
+        "from": "B02只有一个完整新训练比较",
+        "to": "新的同预算比较协议；方向最终决定待Portfolio，当前只实施代码准备"
+      }
+    ],
+    "if_refused": "按实际owner修改处理未启动工作；保留B02全部负面结果，不伪造旧结果或删除证据。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md",
+        "quote": "A new fit can expose a reversal, near tie or repeated disadvantage that changes whether further work should retain this exact memory package.",
+        "why": "拟观察量能改变当前方案开发判断，评价回合不能替代新的训练实例。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md",
+        "quote": "-4.830859375",
+        "why": "B02明显有利于Generic；新比较也可能进一步不利于BANK。"
+      }
+    ],
+    "uncertainty": [
+      "一个新块不会证明总体排序或组件因果；不以得到阳性为停止标准。",
+      "Portfolio拥有最终方向决定；第三槽保留，不将DM建议写成最终CONTINUE。",
+      "更长训练与不同历史需求环境均是合法替代问题，未自动选择。"
+    ],
+    "cost": {
+      "compute": "准备代码；候选执行2 fits/205120 native ticks/9938 updates/256 final episodes。参考B02 native3041.46秒；DM计划3600每臂/7200 native+1800 support，非owner硬上限。完整provider费用未知。",
+      "owner_time": "无需答复即可进行已授权准备和Portfolio报告。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing; final direction decision is a real Portfolio dependency, not owner-console approval"
+    },
+    "verdict_text": "DM recommends CONTINUE with one new same-budget B03 block; final direction disposition is pending Portfolio.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md"
+  },
+  "starred": false
+}

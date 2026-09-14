@@ -1,0 +1,110 @@
+{
+  "object": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601",
+  "source_sha": "d9977dc18baf33b78dc626764c252391f1ddaa9d",
+  "training_instances_per_arm": 1,
+  "primary": {
+    "generic": {
+      "mean": -0.9664843750000004,
+      "sample_sd": 7.311570981685563,
+      "conditional_episode_se": 0.6462576777845804,
+      "minimum": -16.56,
+      "maximum": 20.080000000000002,
+      "n": 128
+    },
+    "augmented": {
+      "mean": 4.329921874999999,
+      "sample_sd": 8.237034430808267,
+      "conditional_episode_se": 0.7280578628614498,
+      "minimum": -15.200000000000003,
+      "maximum": 23.639999999999997,
+      "n": 128
+    },
+    "augmented_minus_generic": 5.2964062499999995,
+    "rule": "AUGMENTED_ABOVE_MEI",
+    "mei": 1.0,
+    "training_pairs": 1,
+    "paired_difference_se": null,
+    "uncertainty": "Per-arm episode dispersion is conditional on each fitted policy; shared seed labels do not establish paired trajectories or training-population uncertainty.",
+    "claim": "Exploratory whole-package native comparison on the selected public-lifecycle host."
+  },
+  "independent_numpy_difference": 5.29640625,
+  "distance_above_positive_mei": 4.29640625,
+  "total_training_episodes": 10000,
+  "total_training_ticks": 200000,
+  "total_optimizer_steps": 9938,
+  "total_final_episodes": 256,
+  "total_final_ticks": 5120,
+  "total_native_ticks": 205120,
+  "arms": [
+    {
+      "arm": "GENERIC_RETAIN",
+      "training_seed": 781601,
+      "evaluation_seed": 1781601,
+      "n_conditional_episodes": 128,
+      "mean": -0.9664843750000002,
+      "sample_sd": 7.311570981685563,
+      "conditional_episode_se": 0.6462576777845804,
+      "minimum": -16.56,
+      "maximum": 20.080000000000002,
+      "negative_returns": 75,
+      "training_episodes": 5000,
+      "training_ticks": 100000,
+      "optimizer_steps": 4969,
+      "evaluation_ticks": 2560,
+      "actor_parameters": 103173,
+      "actor_change_l2": 31.432660528931173,
+      "native_wall_seconds": 1178.68,
+      "aggregate_cpu_seconds": 1177.5,
+      "peak_rss_kib": 741336,
+      "training_1000_episode_bin_means": [
+        -10.695689999999999,
+        -8.00894,
+        -5.555809999999999,
+        -4.4961,
+        -2.1111100000000005
+      ],
+      "fresh_fits": 1
+    },
+    {
+      "arm": "AUGMENTED_PERSISTENT",
+      "training_seed": 781601,
+      "evaluation_seed": 1781601,
+      "n_conditional_episodes": 128,
+      "mean": 4.329921875,
+      "sample_sd": 8.237034430808265,
+      "conditional_episode_se": 0.7280578628614497,
+      "minimum": -15.200000000000003,
+      "maximum": 23.639999999999997,
+      "negative_returns": 42,
+      "training_episodes": 5000,
+      "training_ticks": 100000,
+      "optimizer_steps": 4969,
+      "evaluation_ticks": 2560,
+      "actor_parameters": 192741,
+      "actor_change_l2": 47.83620211342986,
+      "native_wall_seconds": 2796.8,
+      "aggregate_cpu_seconds": 2795.46,
+      "peak_rss_kib": 866572,
+      "training_1000_episode_bin_means": [
+        -11.02046,
+        -7.61057,
+        -3.154080000000001,
+        0.31859999999999966,
+        2.443799999999999
+      ],
+      "fresh_fits": 1
+    }
+  ],
+  "dm_prediction": {
+    "rule": "GENERIC_ABOVE_MEI",
+    "confidence": "low",
+    "score": "miss",
+    "prospective_card": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_SCIENCE_CARD_20260914.md"
+  },
+  "owner_prediction": "not taken (unattended)",
+  "training_population_uncertainty": null,
+  "inference": "One complete fitted policy per arm; positive selected whole-program contrast, not paired-episode/training-population, causal persistence, convergence, competence, C or transfer evidence.",
+  "analysis_wall_seconds_measured_prefix": 0.015000000013969839,
+  "fresh_fits_total": 2,
+  "primary_training_pairs_field_meaning": "One selected comparison block; not proof of statistically paired trajectories or independent arm draws."
+}
