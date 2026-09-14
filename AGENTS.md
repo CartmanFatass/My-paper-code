@@ -169,7 +169,8 @@ and evidence requirements follow the actual claim; there is no mandatory Pro app
 | Direction research and lifecycle | DM, subject to specific owner overrides | Existing card/intake/DIRECTION.md, reasons/evidence/next condition, OWNER_DELEGATED |
 | Independent scientific review | Direction Pro Convergence; DM responds and resolves findings | Full review, DM response/corrections and accepted claim limits |
 | Mechanical coordination/reporting | Clerk | Actual events, accepted integration, current report and pending consequences |
-| Cross-direction layout, new directions or new resource commitments | Owner through Root on an explicit request | Owner instruction and actual application; requested advice remains advice |
+| Vacancy replacement up to four occupied/reserved slots | Portfolio selection, Clerk execution under owner delegation | DM PARK/closeout, request, selected tasks and actual application |
+| Other cross-direction layout or new resource commitments | Owner through Root on an explicit request | Owner instruction and actual application; requested advice remains advice |
 
 DM declares finite invocation/cost/resource bounds and stopping conditions before execution.
 Standing delegation is the authority; a card records work rather than requests permission. An ended
