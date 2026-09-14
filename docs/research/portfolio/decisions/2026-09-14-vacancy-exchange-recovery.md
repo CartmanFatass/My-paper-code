@@ -45,3 +45,15 @@ answer in full before relying on the selection.
 
 This limitation is explicit: this file is an evidence index, not a complete-answer
 replacement. No scientific judgment is made by Clerk from the copied text.
+
+## Direct alignment fact update
+
+On 2026-09-14 Clerk sent the Direct DM–Portfolio alignment contract as a factual
+follow-up in the current FOLR Portfolio conversation
+(`6aa77158-7194-83e8-8f8a-caf16ae6b84b`). The message bound the three provider
+exchanges above, the RCLE/FOLR current PARK/intake evidence paths, and the rule
+that DMs own scientific communication and decisions while Clerk handles capacity,
+routing and archives. It explicitly stated that this was not an approval request,
+new consultation, or launch gate. The new user message is visibly present in the
+conversation; at the final check the provider was still generating its factual
+acknowledgement. No second Send or duplicate request was made.
