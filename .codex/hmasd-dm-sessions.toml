@@ -11,8 +11,8 @@ heartbeat_state = "MISSING"
 heartbeat_target = "unassigned"
 
 main_writer = "unclaimed"
-main_writer_event = "FOLR_B03_COMPLETE_REVIEW_AUTHORING_20260914_RELEASED"
-main_writer_turn = "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc"
+main_writer_event = "MGTAP_PORTFOLIO_NEXT_RCLE_NOTICE_RECORDED_20260914_RELEASED"
+main_writer_turn = "01a09cd8-676e-7513-806d-a86b7e104518"
 
 [retired_clerk]
 thread_id = "01a09d6c-e4e0-7613-ba99-7b0a1b6c540e"
@@ -334,6 +334,9 @@ active_observation_source = "wait_threads revision124, Transport turn01a09f57-c2
 previous_response_path = "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/archive/RESPONSE.md"
 active_prompt_sha256 = "1b1b0a3ddd28cab5b058d1fcb1799379f534c83a01c42d802cd8b33f2a9fa196"
 active_report_sha = "fcdc592236660389ca6c651a23973d32cc534ed5"
+next_peer_notice_thread_id = "01a09e10-9d9f-7f82-87c0-d58cbe0c7618"
+next_peer_notice_condition = "After complete MGTAP answer/intake and actual serial-conversation release, send RCLE one direct notice with release and latest full MGTAP report/decision/intake sources. RCLE is preparing independently; no next request or reservation claimed here."
+next_peer_notice_source_sha = "3c56fda470968cbe02cee0dbe6df7ce3f3122a1b"
 
 [coordination]
 policy = "docs/project/PEER_DM_COORDINATION.md"
