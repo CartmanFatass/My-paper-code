@@ -41,7 +41,14 @@ without per-commit ACK. Root retains policy/skill engineering; Clerk is not an I
 4. Record DM decisions and actual work separately from occupancy. Resource conflicts are scheduled
    under current owner priorities; if those do not settle a cross-direction policy choice, surface
    it in the report to Root/user while unrelated work continues. Do not invent a policy.
-5. Update the existing Portfolio report on meaningful changes. Notify Root once for a material
+5. Own ordinary cross-task coordination through resolution: locate the current technical owner,
+   connect affected DMs directly and sequence actual shared operations under existing policy.
+   Browser connection recovery, occupancy queries, missing receipts and first-attempt failures
+   stay with the relevant DM; Clerk tracks the unfinished consequence without repeated reminders
+   or forwarding it to Root. Sharing infrastructure is not itself an owner-scope exception.
+   Root receives a concrete required shared policy/control-code change or user decision, not an
+   undiagnosed operational issue. No ACK gate or blanket lock on independent work follows.
+6. Update the existing Portfolio report on meaningful changes. Notify Root once for a material
    result, lifecycle decision, released capacity or an exception needing user control. No ACK is
    required. End the handled turn; the next actionable app message starts another turn.
 
