@@ -1,0 +1,9 @@
+{
+  "utc": "2026-09-14T05:01:17.769397+00:00",
+  "exit": 0,
+  "wall_s": 0.6073080999776721,
+  "stdout": "Task 'rcle-b12-s32-15eaa7ea6' started in tmux session 'agent_rcle-b12-s32-15eaa7ea6'. Output: /home/wu/.agent-tasks/rcle-b12-s32-15eaa7ea6/task.log\n",
+  "stderr": "",
+  "source_sha": "15eaa7ea655a0f42a0ec3986927487892bdce212",
+  "handle": "rcle-b12-s32-15eaa7ea6"
+}
