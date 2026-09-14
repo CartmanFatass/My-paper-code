@@ -1,209 +1,112 @@
 # Task collaboration
 
-Current control: C:/Projects/HMASD, Windows PowerShell. Equal independent DMs use Astra/max;
-Transport uses Luna/high. Root is the user entry. Clerk is retired. Read endpoints, coupling
-owners and main writer from .codex/hmasd-dm-sessions.toml and follow PEER_DM_COORDINATION.md.
+Control runs on Windows C:/Projects/HMASD with PowerShell. Resolve native IDs from runtime
+results; read Agentify/provider settings from .codex/hmasd-transport.toml.
+Historical task IDs are evidence, not dispatch routes.
 
-DMs directly message affected peers and services. No standing coordinator, mandatory event
-forwarding, ACK or integration permission gate. Each DM owns its records and accepted integration.
-Shared-file transactions and vacancy transfer follow PEER_DM_COORDINATION.md; actual runtime
-restrictions and frozen science still bind. An archived DM can discuss Portfolio advice without
-resuming experiments. Questions/workflow edits alone do not pause research.
+## Native task tree
 
+Root coordinates DM direction chains. Each DM owns science, implementation, self-checks, repairs
+and acceptance, retains independent high-risk Reviewer review, and reuses one Luna/low native
+experiment-monitor child for its accepted experiments. CM and Implementer assignments are suspended.
+Do not create equivalent implementation roles under generic names.
 
-Portfolio authority: docs/project/PORTFOLIO_DECISION_PROTOCOL.md now controls direction-level
-CONTINUE/RECAST/PARK/CLOSE/reopening. DM owns innovation, experiments, reports and ordinary
-in-scope execution, and submits lifecycle recommendations to Portfolio. No unilateral DM PARK,
-slot release or archival pending that decision. Existing references to DM lifecycle management
-mean proposal, reporting and execution, not final interpretation. Web Portfolio must receive and
-read the protocol's fixed repository context; local conversation/skill inheritance is not assumed.
+Use collaboration.followup_task for work assigned to an existing non-Root agent, including
+resuming an idle monitor or delivering evidence requiring action. Use collaboration.send_message
+for facts to an active/waiting parent; it does not start an idle recipient's turn. Native final
+returns complete a bounded assignment. Do not send duplicate work through both tools.
 
-## Independent DM role mapping
+Root dispatches ready independent actions before waiting. While DM work is outstanding, Root
+uses native collaboration.wait_agent. DM does independent work first, then uses the same native
+long wait for its monitor or Reviewer. Use the configured 1500000 ms default/minimum wait;
+process an arriving event promptly. An unchanged timeout requires only a brief continuation of
+waiting: no rereading all cards, status census, repeated assignment or progress broadcast.
+The owner accepts periodic context reuse/cache refresh and brief continuation as design premises.
+No per-DM keepalive messages, ACK loops, timers or separate relay are needed.
 
-A new App task does not automatically inherit .codex/agents/hmasd-direction-manager.toml or a
-native parent's developer instructions. Every independent DM must explicitly use hmasd-direction-management/SKILL.md and its
-references/role.md complete duties plus current AGENTS, PEER_DM_COORDINATION and its direction intake.
-A task title/model or brief ticket is not role equivalence. Supply actual authoring checkout,
-full-lifecycle objective, live service routes and current owner overrides in the initial task or
-an explicit continuation. Do not replace the existing DM or discard its scientific history merely
-to repair instructions. At the first useful boundary record the loaded role revision and actual
-next action in its existing intake; no approval handshake or recurring role-reading checklist.
+An unchanged timeout stays quiet. When a bounded assignment reaches completion, hits a material
+blocker or scope conflict, or has no immediate authorized work while its direction remains ACTIVE,
+the DM must send one proactive action message to its parent before returning a native final or
+entering idle wait. That message names the assignment, state, evidence or commit, and next action
+or dependency and its owner (or none), including the executed decision's authority and limit.
+Use ordinary prose and existing evidence records, not a new schema or approval item. Root treats
+message/final copies at the same assignment/evidence revision as one event, without an ACK.
 
-Engineering/support/transport waits retain the owning DM and actual next recovery action; they
-are not scientific PARK. A PARK rationale must explain the scientific/development judgment and
-alternatives, not merely missing files, review access, estimate overrun or a completed allocation.
-DM can select low-cost bounded repair or defer dependent work while pursuing useful independent
-work. This is not a demand to manufacture experiments or disregard real scientific futility.
+If accepted card/Pro/grant scope fixes the work, the same DM completes implementation, checks and
+required review, publication, fresh admission, launch/Monitor, collection, technical acceptance,
+scientific intake, preservation and assigned cleanup, then its authorized dependent continuation.
+Neither an additional Root dispatch nor integration/ACK nor a repeat Portfolio vote is needed.
+An idle child with such unfinished work is resumed once with followup_task; an already running DM
+continues directly. Actual shared-writer/runtime conflicts go to Root for execution coordination.
+New scientific meaning or investment/budget choices go to the proper node, authored and intaken
+by the DM under AGENTS §2; Root is not an intermediate scientific approver.
 
-## Independent Transport execution
+Distinguish a pending external dependency from ACTIVE-idle with none. A real dependency names its
+request/handle/producer and required event; after independent work, wait for that direct return.
+If no authorized work or concrete unresolved question exists, record the missing fact and revisit
+condition once, send ACTIVE-idle once, and remain available in native event wait. A possible future
+use or instruction is a condition, not a promised outside result. Root does not reassign the same
+assessment on unchanged facts. A concrete new proposal can be prepared and sent by the original DM
+without Root inventing or approving its scope; repeated inputs/options/consequence reuse the last
+complete answer. A timeout supplies neither a new fact nor permission to retry, request an audit,
+Send again or change lifecycle. Owner pause/stop boundaries still take precedence.
 
-OWNER_DIRECT 2026-09-14: the registered Luna/high Transport App task uses Codex iab for
-Send, concurrent Pro observation and complete archives. Dispatch and returns use
-send_message_to_thread, directly between author DM and Transport. Native wait_agent
-and native final are not this route. One executor per conversation, independent pending
-conversations advance concurrently. Native batch reuse rules below govern other specialists.
-Before migration the DM releases its old Transport from browser operation, preserves exact
-request/effect/archive state and sends a takeover assignment to the registered task. Do not
-rewrite accepted HANDOFF IDs; record actual current execution/return routing separately.
-The Transport skill owns browser state, recovery, queue and completion behavior. No Agentify MCP.
+DM sends Root only actionable integration, cross-direction dependency, formal direction disposition,
+scope-conflict, or bounded-assignment completion/ACTIVE-idle facts, with assignment identity,
+commits/evidence, requested next action and uncertain effects.
+Continue independent authorized direction work after a partial handoff. Root handles the changed
+direction without waiting for siblings or routinely reloading the whole portfolio. Deduplicate
+message and final copies by source, assignment and evidence revision. Root accepts artifacts;
+message delivery is not acceptance. Routine specialist and monitor returns go directly to DM.
 
-## Native DM specialists and scientific review
+## Experiment observation
 
-OWNER_DIRECT 2026-09-13: reuse a native subagent within one bounded work batch; create a new
-subagent for an independent batch. The assigning parent determines the batch from its objective
-and deliverable, without Root/peer approval. A tool call, commit, empty-set final or elapsed wait
-is not itself a batch boundary. Direction membership alone does not make unrelated work one batch.
+Follow EXPERIMENT_MONITOR.md. DM creates/reuses its monitor; Operator uses the exact native
+monitor address supplied by DM and cannot create another child. Adoption and terminal facts go
+to DM. DM collects results and completes scientific intake without Root forwarding terminal events.
+Root receives the resulting actionable direction handoff, not every experiment status.
 
-Monitor's batch is one experiment batch and its accepted handles through terminal delivery.
-Reviewer reuses context for the same change and its corrective reviews; a new independent change
-gets a new reviewer child. Scout, Verifier and Operator follow the same objective/closeout rule.
-After a batch is complete, retain its evidence and stop assigning unrelated work to its child.
+## DM-owned Agentify Transport
 
-Use spawn_agent for a new batch, default fork_turns=none, with role, objective, owned paths/current
-revision, needed evidence, completion condition and actual return parent. Inherit parent history
-only when concrete relevant context warrants it; do not copy a long old conversation into a new
-child. Use followup_task for same-batch continuation. Record batch/child identity in the existing
-assignment record; no new registry, service, placeholder agent or approval checklist is required.
-Reuse role configuration and designated checkout, not unrelated conversational history.
+Each DM creates/reuses one native Luna/high Transport child with minimal context. DM authors and
+publishes the exact handoff, dispatches via followup_task, and waits natively for the complete
+archive. Transport owns Agentify Send, observation, one-Send reconciliation and direct DM receipt.
+A verified complete bound response goes directly to conformance intake even while short receipt
+or metadata reconciliation remains unresolved. An uncertain effect forbids another Send; it does
+not turn that complete decision into a pending scientific answer.
+Root receives the DM's conformance/decision mapping and integrates it. Root and DM continue native
+waits while these dependencies run; there is no independent app-task wake branch.
+Different provider bindings may proceed concurrently. Serialize each exact conversation and the
+shared Portfolio node under its current author. Root uses its own native Transport only for
+vacancy replacement after formal pause/closure leaves fewer than four occupied direction slots;
+those archives return directly to Root for complete intake and Pro-selected DM creation. Existing uncertain or accepted requests
+require same-request reconciliation, never a new Send after changing executor. Transport skill
+owns exact Agentify arguments and immutable archival. Experiment monitor never operates Pro.
+Verified nonacceptance permits same-request repair and continuation without a parent handshake.
+Transport sends one direct archive receipt and records its actual native delivery outcome; no
+ACK, Root forwarding or duplicate app-task wake follows. Its final closes that same assignment.
+Historical HANDOFF IDs stay immutable; an assigned native recovery route is recorded separately.
+At completion, material conflict or no-current-work while its direction remains ACTIVE, each
+bounded assignment sends one direct action message to its assigning parent before final:
+assignment, status, evidence/commit and next step. DM sends its actionable boundary to Root;
+Transport sends to DM. A factual conflict needs no completed archive. Active generation remains
+ongoing work and unchanged waits require no broadcasts. A later changed boundary preserves
+the prior return and sends its own update once; this is not an ACK or forwarding chain.
+If a leaf runtime lacks collaboration.send_message, its actionable native final is the direct
+parent return. Record that actual capability/method; never fabricate tool delivery or add an app relay.
 
-Let current accepted handles/requests reach safe closeout in their existing children. If replacement
-is actually necessary, preserve same-handle/request state and transfer observation/execution without
-overlap or another Send. An executor change does not require a new provider conversation.
-Long waits do not trigger rotation; do not send cache keepalives or infer cache expiry from a timer.
-Independent DM and Root tasks remain continuous; this rule governs their native specialists.
-Owner pause takes precedence: changing this policy does not resume science or create a new batch.
+Pure Transport engineering defects default to local repair by the author DM, including focused
+helper/fixture and skill updates with proportional review. Keep the same operation and immutable
+receipts; involve Root only for a shared runtime/load, cross-direction dependency or scientific
+decision. If the original conversation remains unrecoverable after supported same-request repair,
+the author DM may rebind the identical frozen prompt to a new conversation only with verified
+pre-Send nonacceptance (`sendAttempted=false`, no provider pairing). Preserve and close the old
+operation as `CONVERSATION_UNRECOVERABLE`, link the new handoff/idempotency, and never apply this
+fallback to uncertain or possibly accepted effects.
 
-DM owns engineering and acceptance, with optional direct Sol/medium implementation children and
-independent Sol/high code Reviewer coverage. No CM chain. Its native Luna/low Monitor observes accepted experiment handles and returns
-adoption/terminal facts directly to DM. DM collects/intakes, then records outcomes and messages only affected peers. EXPERIMENT_MONITOR.md owns the observation procedure.
+## Recoverable ownership
 
-Direction Pro Convergence reviews science independently through the registered independent Luna/high browser Transport.
-It examines design, evidence, interpretation, conclusions and successor plans; DM reads the full
-review and responds to material findings with correction/claim limits or reasoned resolution.
-The Pro review does not confer funding or lifecycle authority. Preserve scientific independence
-and appropriate review coverage; it is not generic optional advice or a per-step approval ritual.
-
-Use collaboration.followup_task for a native child's concrete assignment; collaboration.send_message
-for factual parent returns, noting it does not start an idle native turn. Native final completes its
-bounded assignment. Real Monitor/Reviewer producers retain their actual parent/wait route;
-unchanged waits do not cause repeated status, reminders or duplicate requests.
-
-Each exact Pro conversation has one executor. Keep accepted/uncertain requests, operations and
-immutable archives; verified nonacceptance permits repaired same-request Send, not a new scientific
-question. Direction DM repairs complex Transport defects; the request-owning DM repairs
-a Portfolio Transport defect, preserving its real parent/operator.
-No browser executor overlap. The Transport skill owns supported recovery and screenshot use.
-
-## Native child completion and prompt return
-
-OWNER_DIRECT 2026-09-14: each native child sends its actual assigning parent one actionable
-completion report before final. Report batch/event identity, completed work, artifacts/diff,
-check results, remaining issues and next owner/action. Report a real blocker or required parent
-decision promptly. Dispatch supplies both the native parent identity and, for an independent DM,
-its actual parent_thread_id/host. Never infer the central Root thread as every child's recipient.
-
-For an independent main task, use send_message_to_thread to that supplied parent_thread_id as the
-primary report route. The App tool starts/queues a follow-up turn; it handles the case where DM
-has ended its turn as well as active work. For a native-only parent without an app route, use
-collaboration.send_message: it queues a native message and can wake wait_agent, but does not itself
-start an idle native turn. Native final remains bounded completion evidence. If the primary route
-fails, keep the failure and full report, use another available direct parent route once with the
-same event ID, and end without a delivery/ACK loop. A final alone is not promised to restart an
-independent App task. Do not create intermediary relay tasks or a new timer service.
-
-Owner observation: a main task whose turn has ended and is idle is not restarted by native
-child completion/message. Do not treat an active wait and an idle task as the same state.
-The app report and automatic native final describe one batch event. DM deduplicates by event and
-evidence revision, but completes any unfinished acceptance/continuation. Delivery success means
-accepted for delivery, not that the next action ran; record the parent's first actual consequence.
-Do not send both native and App status repeatedly or broadcast child receipts to peers/Root.
-
-In .codex/config.toml, min_wait_timeout_ms=1500000 and default_wait_timeout_ms=1500000
-(25 minutes), while max_wait_timeout_ms=3600000 (60 minutes). These bound/default the requested
-timeout; 25 minutes is not the global maximum or a required silence period. Native messages and
-completion notifications can wake the parent earlier; App messages also supply new input to
-the independent parent. Keep these settings unchanged. On either return, DM handles the ready consequence:
-inspect/accept evidence, resolve findings or dispatch the next concrete step before waiting again.
-If the message arrives before the child releases its files, wait for final/edit-owner release
-before overlapping writes. Already finished children with an unhandled report are not reasons
-for another empty wait. Wait only for actual remaining producers after independent useful work.
-No extra timers, polling service, periodic keepalive or ACK chain is introduced.
-
-## Optional code delegation and pre-restart operation
-
-OWNER_DIRECT 2026-09-14: DM may choose direct implementation or a complete bounded Implementer
-batch. Default Implementer is gpt-5.6-sol/medium; code Reviewer is gpt-5.6-sol/high. DM may select
-Astra for a concrete difficult review without asking Root. Direction Pro scientific review is
-unchanged. Do not create idle placeholder children or restart accepted work to change models.
-
-Before updated named roles are loaded, use the live generic native spawn interface explicitly:
-
-```text
-Implementer: agent_type="default", model="gpt-5.6-sol",
-             reasoning_effort="medium", fork_turns="none"
-Reviewer:    agent_type="default", model="gpt-5.6-sol",
-             reasoning_effort="high", fork_turns="none"
-```
-
-Supply a batch-specific task_name and concise message. Include the actual native parent and
-independent parent_thread_id/host return route,
-role, five L0 assignment facts, the explicit completion-message rule above, and the current
-corresponding role-file path. Tell the child to
-read the role duties and relevant current instructions, not the whole direction history. State
-that other writers exist, it owns only assigned paths, preserves their edits and creates no
-children. Implementer may edit/run agreed focused non-scientific checks; return diff and evidence,
-not scientific acceptance or an experiment launch. Scientific ambiguity returns to DM while
-independent implementation continues. Reviewer receives the contract, source/diff and relevant
-evidence without the Implementer's conversation and is instructed not to edit repository files.
-A generic child does not gain a read-only sandbox merely by reading a role file; describe its
-read-only assignment honestly. Use the configured read-only role once actually loaded, but live parent permission overrides
-can still take precedence; retain explicit no-edit instructions.
-
-The explicit model/effort arguments above are supported by the current runtime; check the live
-spawn schema in another runtime. Full-history forks do not support these overrides. Do not claim
-that editing TOML hot-reloads an already-running named role, and do not select a stale role with
-fixed settings expecting a model argument to replace them. Once loaded, use the configured
-Implementer/Reviewer roles with their documented defaults. Record the actual chosen role/model
-from the dispatch, not just the intended configuration.
-
-Only delegate a concrete batch when useful independent DM work can proceed alongside it. Keep
-same-batch fixes with the same child; new independent batches receive new minimal-context children.
-DM reviews returned artifacts and focused checks without redoing all implementation, resolves
-review findings, then accepts/commits and continues the lifecycle. Neither child completion nor
-review creates a new Root/Portfolio approval step. Ordinary tiny edits can stay with DM;
-review coverage follows scope-spec §7.3 rather than a mandatory Implementer-plus-Reviewer ceremony.
-
-## Recovery and integration
-
-Peer DMs and Root serialize main transactions under PEER_DM_COORDINATION.md. Each DM integrates its accepted
-commits and records DM decisions, returns semantic conflicts to their DM, and never implements shared
-policy/code itself. Independent task session worktrees are only hosting; reuse each designated
-direction authoring checkout. Accepted legacy children/requests keep their original routes until
-reconciled closeout; migration does not reparent or duplicate them. No extra relay service is needed.
-
-Control publication includes the registered session checkout and direction authoring checkout,
-not only main. Root publishes the exact control revision/paths; each task's existing writer brings
-those current control paths into its own checkouts at a clean boundary, preserving unrelated work
-and frozen scientific inputs. Each DM records actual synchronization or the concrete conflict, not
-message delivery as completion. In an already-running turn, the explicit current policy message
-supersedes stale injected instructions; changing a role TOML does not by itself update an independent
-task's instructions. Do not reread all history or restart research merely to synchronize controls.
-
-Mechanism evidence: [official subagent documentation](https://learn.chatgpt.com/docs/agent-configuration/subagents)
-describes model precedence, isolated context and permission inheritance. The precise wait/message
-distinction above comes from the current runtime tool contracts: wait_agent returns on mailbox
-activity; native send_message does not trigger a turn; App send_message_to_thread starts/queues
-a follow-up. Documentation does not guarantee fault-free delivery or measured wakeup latency.
-Long native waiting reduces parent status polling, not Monitor's necessary remote observation.
-
-The [App Server lifecycle documentation](https://learn.chatgpt.com/docs/app-server) distinguishes
-turn/start (begin generation), turn/steer (requires an active turn), and thread/inject_items
-(append history without starting a turn). These support the distinction; they do not establish
-that our native notification tool implements turn/start. Use the existing App messaging tool
-for independent task continuation, not a custom raw app-server integration.
-
-Bounded check 2026-09-14, event sol-return-route-probe-20260914-01: a generic Sol/medium child
-(fork_turns=none) delivered a native report, an App report and final to the active Root parent.
-Both messages were observed. This establishes live spawn/active delivery only, not idle restart
-or wait latency. Validate an independent parent's next actual turn/action on the first real
-completed batch; delivery receipts alone are insufficient. Do not claim idle wakeup was tested.
+Record active native names, assignments, accepted handles and pending actions in existing direction
+and experiment tracking. No new messaging service or scheduler. Before transferring any already
+accepted work, reconcile its current observer and undelivered notices; confirm new adoption before
+releasing the old observer. Preserve external identities, evidence and invocation budgets.

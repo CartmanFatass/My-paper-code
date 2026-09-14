@@ -253,18 +253,17 @@ def verify_github_pairing(record: dict, archive: dict, pairing: dict) -> None:
     blob = hashlib.sha1(f'blob {len(raw)}\0'.encode('ascii') + raw).hexdigest()
     if blob != pairing.get('blob_sha'):
         raise ValueError('GitHub response bytes differ from the observed Git blob')
-    task_sha = task_url.partition('/blob/')[2].partition('/')[0]
-    # The frozen delivery contract does not require repeating a TASK URL in the
-    # answer. The scoped response/comment above plus its exact TASK SHA suffice.
-    if (pairing.get('task_url', task_url) != task_url
-            or pairing.get('task_sha', task_sha) != task_sha):
-        raise ValueError('GitHub delivery comment must pair the exact fixed TASK and response')
-    url_boundary = r"""[\s<>"'\[\]`()]"""
-    exact_url = re.search(rf'(?:^|{url_boundary}){re.escape(task_url)}(?=$|{url_boundary})', comment)
-    exact_sha = (re.fullmatch(r'[0-9a-f]{40}', task_sha)
-                 and re.search(rf'(?<![0-9A-Za-z]){re.escape(task_sha)}(?![0-9A-Za-z])', comment))
-    if not exact_url and not exact_sha:
-        raise ValueError('GitHub delivery comment must pair the exact fixed TASK and response')
+    if task_url not in comment:
+        # A full fixed TASK SHA in the same delivery comment is sufficient only
+        # when the hash-verified response also contains the exact TASK URL.
+        task_sha = task_url.partition('/blob/')[2].partition('/')[0]
+        exact_sha = (re.fullmatch(r'[0-9a-f]{40}', task_sha)
+                     and re.search(rf'(?<![0-9A-Za-z]){re.escape(task_sha)}(?![0-9A-Za-z])', comment))
+        url_boundary = r"""[\s<>"'\[\]`()]"""
+        exact_url = re.search(rf'(?:^|{url_boundary}){re.escape(task_url)}(?=$|{url_boundary})',
+                              raw.decode('utf-8'))
+        if not exact_sha or not exact_url:
+            raise ValueError('GitHub delivery comment must pair the exact fixed TASK and response')
 
 
 def reconcile_github_archive(record: dict, archive: dict) -> dict:

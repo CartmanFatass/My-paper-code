@@ -1,6 +1,3 @@
-> Legacy record/schema reference only; native/Agentify procedure below is not current dispatch policy.
-> Use ../SKILL.md for independent iab execution; preserve historical fields without replaying them.
-
 # State, packet, lease, and evidence schema
 
 The shared registry is JSON at the absolute registry_path in live
@@ -19,11 +16,9 @@ its operator UUID never selects a provider conversation.
 
 ## Native execution overlay
 
-Current native Transport stores `native_state`: READY_UNSENT, SEND_ATTEMPTED, OBSERVE, ARCHIVE,
-RECEIPT. These are bookkeeping labels, not a browser-state model or a required action sequence.
-READY_UNSENT does not certify page/model readiness or imply that the composer is empty.
-Use SKILL.md for action selection and agentify.md for the facts each MCP surface supplies.
-Preserve legacy evidence without replaying every old `state` transition.
+Current native Transport uses `native_state`: READY_UNSENT, SEND_ATTEMPTED, OBSERVE, ARCHIVE,
+RECEIPT. These are the operator's four steps (observation and archival share one step), not
+another required transition through every legacy `state` value below. Preserve legacy evidence.
 `scripts/native_transport.py` reads immutable HANDOFF/TASK bytes and claims the existing binding
 under its brief registry lock. It handles existing-conversation GitHub requests; first-binding
 continues through the existing firstBinding route in agentify.md. `frozen_handoff`, `frozen_routing` and `manifest` identify those
@@ -32,9 +27,7 @@ current native parent/child; it never overwrites frozen or historical receipt ID
 live executor requires factual same-request transfer, not an automatic route rewrite.
 
 Keep the exact Agentify `operation` (including operationId, responsePath and productModel) and
-effect receipts. Optional `next_step` summarizes caller-supplied facts; it does not inspect a
-browser. Missing page fields in its summary are observation gaps, not a requirement to add an
-external preflight before the strict query or to invent true-valued fields. It classifies explicit false plus no acceptance as VERIFIED_NONACCEPTANCE;
+effect receipts. `next_step` classifies explicit false plus no acceptance as VERIFIED_NONACCEPTANCE;
 unknown/possible acceptance as UNCERTAIN_EFFECT; paired current user/archive as ACCEPTED. Only
 the first permits repaired same-request Send. False-valued legacy send placeholders are not a
 Send. The native state overlay alone is bookkeeping: a failed pre-Send strict operation can
@@ -66,7 +59,7 @@ mandatory checklist, scheduler or current return route.
   "agentify_stable_key": "em:example_direction:innovator",
   "direction_id": "example_direction",
   "direction_ids": ["example_direction"],
-  "decision_authority": "dm_owned_scientific_review",
+  "decision_authority": "pro_final",
   "request_id": "example-review-01",
   "packet_id": "example-review-01--example_direction",
   "source_thread_id": "/root/dm_example",
@@ -184,17 +177,6 @@ Preserve delivered or uncertain receipts; never infer permission to resend from 
 
 ## Explicit provider-conversation replacement
 
-This is exceptional recovery, not the next step after an ordinary tab or menu error. For the
-unrecoverable, never-sent fallback, the parent may choose a replacement only after supported
-recovery of the original conversation is exhausted
-and its operation is positively `sendAttempted=false` with no pairing or possible accepted effect.
-Preserve the old HANDOFF, prompt hash, operation/key, tab facts and failure receipts as
-`VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE`. An admitted replacement carries the
-identical scientific prompt and frozen inputs, with a linked new handoff/idempotency key.
-Never use this fallback for true, unknown or contradictory Send history. The routes below
-define the actual helper/authority requirements; a missing route is not permission to reset
-the registry by hand. An explicit owner-directed replacement is the separate route below.
-
 An owner-authorized unrecoverable initial homepage operation may have no binding at all.
 `prepare_unaccepted_first_binding_rebind(registry_path, request=<validated transport_request>,
 prior=<fresh operation audit>)` supports that case only. The audit preserves explicit false Send,
@@ -271,7 +253,7 @@ as `provider_filename`; it never changes the canonical filename or reference ord
 
 ## State vocabulary and transitions
 
-The retained legacy GitHub-delivery vocabulary is:
+The normal GitHub-delivery sequence is:
 
 `RECEIVED` → `DIRECTION_VERIFIED` → `TAB_OPEN` → `PAGE_READY` → `PRO_VERIFIED` →
 `PROMPT_READY` → `SEND_ATTEMPTED` →
@@ -325,16 +307,14 @@ The monitor identity is exactly:
 
 `request_id|conversation_binding_key|conversation_id|provider_url`.
 
-Observation must concern the persisted provider URL/conversation. Reuse the strict tool's
-identity-checked receipt; do not add a separate URL probe on every unchanged wake. When using
-an unpaired page-reading tool, use its returned URL when exposed; otherwise reuse scoped URL
-evidence or obtain the missing URL fact. `agentify_read_page` currently returns text only.
-Check the current request context. A mismatched URL is `MONITOR_IDENTITY_MISMATCH`; an unavailable observation is a missing fact, not a
-fabricated mismatch. A tab handle alone is not conversation identity.
+Every wake must verify the loaded URL against the persisted `provider_url` before
+reading the page, then persist the observed URL, page state, completion controls,
+and optional cursor. `tab_id` is only the current lease handle. A tab ID without an
+exact URL/conversation observation is not monitor evidence and must produce
+`MONITOR_IDENTITY_MISMATCH`.
 
 ## Send evidence
 
-The following are Send evidence semantics, not extra checks after a valid strict receipt.
 `SEND_CONFIRMED` requires all of:
 
 1. a concrete provider URL containing one conversation UUID;
@@ -343,7 +323,7 @@ The following are Send evidence semantics, not extra checks after a valid strict
    visible newline normalization; and
 4. for upload mode, the file group plus the exact companion text, when one was
    supplied; and
-5. for upload mode with a non-empty reference list, every expected canonical file group is associated
+5. for a non-empty reference list, every expected canonical file group is associated
    with the bound conversation and matches its pre-upload size/hash.
 
 A URL alone, a cleared composer, a spinner, an attachment chip before Send, or a
@@ -353,9 +333,9 @@ evidence of a failed click. Observe the same tab; do not send again.
 
 ## Natural completion and archive evidence
 
-For page-based capture, the same conversation must have the complete assistant node paired
+Capture only when the same conversation has the complete assistant node paired
 with this request's recorded user message, the active
-generation controls are absent, and completion is established (for example
+generation controls are absent, and the page reports completion (for example
 `Response complete`). Keep the raw assistant node separate from status text and UI
 labels. Hash the exact bytes written to the response file. Set `ARCHIVE_PENDING`,
 write and verify the canonical artifacts, then set `ARCHIVED`; do not close a tab
@@ -387,14 +367,14 @@ each request's recorded observation facts without rewriting another request's st
 
 ## Automatic return outbox
 
-New records use REUSE_DM_TRANSPORT: author and receipt parent are the owning author (DM for direction nodes, Clerk for explicitly owner-commissioned Portfolio consultation), operator is
+New records use REUSE_DM_TRANSPORT: author and receipt parent are the owning author (DM, or Root for Portfolio vacancy replacement), operator is
 its actual native Transport child. execution_thread_id records actual recovery ownership without
-rewriting immutable accepted historical metadata. No app-task self-dispatch or Clerk forwarding.
+rewriting immutable accepted historical metadata. No app-task self-dispatch or Root forwarding.
 Existing attempted/uncertain delivery evidence is never restaged during recovery.
 The following external-parent procedure applies only when executor differs from parent.
 
 After `ARCHIVED`, call `stage_receipt` from `scripts/transport_contract.py` before
-using native `collaboration.send_message` to the validated waiting author parent (DM or Clerk). The deterministic `message_key` remains
+using native `collaboration.send_message` to the validated waiting author parent (DM or Root). The deterministic `message_key` remains
 `request_id|direction_id|conversation_id|response_sha256`. The outbox transitions
 from `PENDING` to `SENT`, `UNCERTAIN`, `FAILED`, or `BLOCKED` and records the exact
 parent destination, timestamp, attempt count, delivery status, and error.
@@ -413,9 +393,3 @@ available, no outbox message is staged: the receipt records
 `required=false`, `receipt_state=RETURN_RECEIPT_BLOCKED`,
 `destination_thread_id=null`, and no message key. Preserve the evidence and report the
 missing parent; do not invent a destination or another Send.
-
-New direction requests carry decision_authority=dm_owned_scientific_review; explicitly owner-requested
-Portfolio consultations carry owner_requested_advice. Frozen legacy pro_final values remain readable
-for reconciliation but do not confer current decision authority. DM retains direction lifecycle and
-responds to independent scientific review; Portfolio recommendations require the owner's actual
-implementation instruction for cross-direction effects.

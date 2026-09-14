@@ -13,14 +13,10 @@ Keep every scientific card, prediction, result, Chinese brief and required audit
 `item.py add` returns `skipped` without an ID or file for P3/P4; cite the card/intake
 directly and do not upgrade an ordinary item to manufacture a higher priority.
 
-DM records ordinary research decisions and direction recommendations with their actual authority.
-Direction Pro supplies independent scientific review. Portfolio provides final direction-level
-interpretation and CONTINUE/RECAST/PARK/CLOSE/reopening decisions under
-`docs/project/PORTFOLIO_DECISION_PROTOCOL.md`. DM applies complete conforming decisions without
-Root ratification; ordinary experiments need no per-object Portfolio approval. A recommendation
-or pending response is not an applied disposition or slot release. Trace the complete Portfolio
-source as `PRO_FINAL / OWNER_DELEGATED` and record actual application, preserving historical
-provenance and owner overrides. Specification changes retain their applicable authority.
+Apply AGENTS §4.7 for a complete Pro-directed specification plan within delegated scope.
+Read/archive the full decision, implement its exact authorized plan, and use `item.py trace`
+on the relevant P1/P2 item with the actual authority, source, application record and state.
+Do not fabricate owner replies, accept code solely from a rule change or broaden scope.
 
 The owner intervenes softly through `tools/owner_console/`. The loop never waits for the owner and
 never writes item JSON by hand: it calls `tools/owner_console/item.py`, which validates the item
@@ -37,8 +33,8 @@ Rule text: `AGENTS.md` §4.4–4.5. Controlling decision:
 | a science card is frozen | `new-card` | default `accept / reject / revise` | `--context` = the one-sentence claim and binding structure line; `--evidence` = the card |
 | you overrule a critic return ending `MATERIAL_DISSENT: yes` | `critic-dissent` | your options plus the critic's position as one option | `--evidence` = the critic return and the card |
 | your recommendation and its runner-up were not clearly separated | `close-call` | as `decision` | as `decision` |
-| DM records a second `RECAST` for the direction | `second-recast` | default `continue / park` | `--tier direction`, `--evidence` = the Portfolio decision, DM intake and scientific review |
-| A Portfolio direction/capacity decision or recommendation is recorded | `portfolio` | default `keep / refuse / amend` | `--tier portfolio`, `--direction portfolio` for cross-direction items |
+| Convergence returns a second `RECAST` for the direction | `second-recast` | default `continue-low-priority / park` | `--tier direction`, `--evidence` = the Pro archive |
+| Portfolio records its conforming Pro decision | `portfolio` | default `keep / refuse / amend` | `--tier portfolio`, `--direction portfolio` for cross-direction items |
 
 For a created P1/P2 item, the audit row can cite the returned item path. A `skipped`
 result has no item path; ordinary audit rows cite the card/intake directly.

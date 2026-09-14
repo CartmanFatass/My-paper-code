@@ -484,21 +484,6 @@ def test_registry_lock_is_fail_closed_and_releases_after_bounded_mutation(tmp_pa
     assert not registry.with_name("registry.json.lock").exists()
 
 
-@pytest.mark.parametrize("node,authority", [
-    ("em_convergence", "dm_owned_scientific_review"),
-    ("portfolio_decision", "owner_requested_advice"),
-])
-def test_transport_accepts_current_review_and_owner_advice_roles(
-    project_root: Path, upload_request: dict[str, object], node: str, authority: str
-) -> None:
-    request = {**upload_request, "workflow_node": node, "decision_authority": authority}
-    if node == "portfolio_decision":
-        request.update(direction_id="portfolio", direction_ids=["demo_direction"])
-    result = TRANSPORT_VALIDATE.validate(request, project_root)
-    assert result["decision_authority"] == authority
-    assert result["workflow_node"] == node
-
-
 def test_validate_request_exposes_packet_plan_and_return_readiness(
     project_root: Path, upload_request: dict[str, object]
 ) -> None:

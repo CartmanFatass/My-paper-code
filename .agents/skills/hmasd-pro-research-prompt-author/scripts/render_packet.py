@@ -47,7 +47,7 @@ BASE_REQUIRED_FIELDS = (
 DEFAULT_COMPANION_PROMPT = (
     "Execute the attached PROMPT_BODY.md exactly. "
     "It contains the complete read-only evidence manifest. "
-    "Return the complete scientific review or requested advice, with any exact evidence gap."
+    "Return this node's final decision or the exact blocker."
 )
 
 
@@ -165,25 +165,9 @@ def _require_registered_direction(project_root: Path, portfolio: str, direction_
             f"direction DIRECTION.md not found: {direction_id}",
             field="direction_id",
         )
-    registry_path = project_root / ".codex" / "hmasd-dm-sessions.toml"
-    if registry_path.is_file():
-        try:
-            registry = tomllib.loads(registry_path.read_text(encoding="utf-8"))
-        except (OSError, tomllib.TOMLDecodeError) as exc:
-            raise PacketInputError(f"cannot read direction registry: {exc}", field="direction_id") from exc
-        directions = registry.get("directions", {})
-        # Registration is independent of occupancy or lifecycle: parked directions
-        # still need reviews and reopening reports. Human report formatting is irrelevant.
-        if isinstance(directions, dict) and isinstance(directions.get(direction_id), dict):
-            return
-        raise PacketInputError(
-            f"direction not registered in .codex/hmasd-dm-sessions.toml: {direction_id}",
-            field="direction_id",
-        )
-    # Compatibility for historical checkouts without the session registry.
     if not re.search(rf"^\|\s*{re.escape(direction_id)}\s*\|", portfolio, re.MULTILINE):
         raise PacketInputError(
-            f"direction not registered in legacy PORTFOLIO.md: {direction_id}",
+            f"direction not registered in PORTFOLIO.md: {direction_id}",
             field="direction_id",
         )
 
@@ -509,9 +493,7 @@ def validate(data: dict, project_root: Path) -> dict:
         "requested_conversation_id": requested_conversation_id,
         "reset_invalid_provider_context": reset_invalid_provider_context,
         "provider_context_reset_evidence": provider_context_reset_evidence,
-        "decision_authority": (
-            "portfolio_final_direction_interpretation" if role == "portfolio" else "dm_owned_scientific_review"
-        ),
+        "decision_authority": "pro_final",
         "repository": repository,
         "repository_url": repository_url,
         "commit_or_ref": commit_or_ref,
@@ -616,7 +598,7 @@ failed, reuse the file and check existing comments before completing the notific
 {GITHUB_DELIVERY_MARKDOWN_FALLBACK}
 Return actual file/commit/comment links when confirmed. Otherwise return the downloadable
 Markdown document and the precise GitHub gap. The committed or downloaded Markdown file
-contains the complete review or Portfolio decision; a short chat summary does not substitute for it.
+contains the complete decision; a short chat summary does not substitute for it.
 """
     body_path.unlink()  # this invocation just generated it; TASK is the sole new body
     (out_dir / "TASK.md").write_text(body, encoding="utf-8", newline="\n")
@@ -686,33 +668,20 @@ def bind_github_task(handoff_path: Path, sha: str, project_root: Path) -> dict:
 def _node_decision_contract(workflow_node: str) -> str:
     if workflow_node == "em_innovator":
         return (
-            "Assess candidate scientific objects, mechanisms and decision-relevant discriminators. "
-            "Give reasoned scientific recommendations, falsifiers, evidence requirements and claim "
-            "ceilings. The DM owns ordinary research execution and reports; Portfolio owns final direction-level interpretation. This review is not a lifecycle decision."
+            "Select the next scientific object, mechanism, or cheapest decision-relevant "
+            "discriminator for this direction. Return one explicit final selection with its "
+            "falsifier, evidence requirements, and claim ceiling."
         )
     if workflow_node == "em_convergence":
         return (
-            "Act as the independent scientific Reviewer for this direction. Review experimental "
-            "design, comparison integrity, evidence interpretation, conclusions and successor plans. "
-            "Identify material findings, strongest contrary evidence, residual uncertainty and "
-            "proportionate corrections or claim limits. The DM must respond to material findings. "
-            "The DM owns ordinary research execution and reports; Portfolio owns final direction-level interpretation. This review is not funding, "
-            "lifecycle or scheduling approval."
+            "Decide the smallest supported direction conclusion and whether the direction should "
+            "continue, park, close, or recast. Return one explicit final decision with the strongest "
+            "contradiction, residual uncertainty, and any required next evidence."
         )
     return (
-        "Act as Portfolio, the global scientific synthesizer and final direction-level interpreter "
-        "under PORTFOLIO_DECISION_PROTOCOL.md and current owner/spec constraints. The DM owns "
-        "innovation, ordinary experiments, implementation and reports. Read the fixed repository "
-        "sources and specified sections in the evidence manifest: current authority, global state, "
-        "affected direction evidence, contrary results, complete review and DM response, applicable "
-        "specifications and focused foundations. Do not assume local session memory or filesystem "
-        "access. Identify material sources actually accessed and decision-critical gaps; request "
-        "missing exact contents rather than inventing access or parking for a transport gap. "
-        "Explain the hypothesis update, strongest feasible alternative and opportunity cost, then "
-        "decide the bound CONTINUE, RECAST, PARK, CLOSE or reopening question with rationale, "
-        "scope, claim ceiling, next DM objective and actual resource conditions. A complete "
-        "conforming decision is applied without Root ratification; ordinary experiments require "
-        "no per-experiment Portfolio approval. Do not infer universal failure from local negatives."
+        "Decide the priority, capacity, lifecycle, fusion, separation, new-direction registration, "
+        "or next investment question across the supplied direction scope. Return one explicit final "
+        "Portfolio decision and its evidence-bounded rationale."
     )
 
 
@@ -783,12 +752,10 @@ uncertainties, and recommendations. Preserve the finite claim ceiling above.
 
 {node_contract}
 
-Your complete response follows the node-specific authority above: direction nodes provide
-independent scientific review; Portfolio decides the bound direction-level question. DM owns
-ordinary execution and applies conforming Portfolio decisions without Root ratification. Respect
-current owner instructions and applicable specifications; completeness does not authorize an exception. If
+Your complete response provides the final decision within current owner instructions
+and applicable specifications; completeness does not authorize a silent exception. If
 connector access or evidence is insufficient, explain the exact gap and state
-which review conclusions remain unsupported; do not manufacture evidence or an approval.
+in ordinary language that no decision could be reached; do not manufacture one.
 
 ## Direct scientific reading
 

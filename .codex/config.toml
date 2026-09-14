@@ -22,19 +22,15 @@ max_concurrent_threads_per_session = 40
 interrupt_message = true
 
 [agents.HMASDDirectionManager]
-description = "Full-lifecycle direction manager; owns research decisions and responds to independent Pro scientific review."
+description = "Direction science and engineering owner; optional Portfolio Pro author and response checker."
 config_file = "./agents/hmasd-direction-manager.toml"
 
 [agents.HMASDScout]
 description = "Optional engineering-surface mapping method."
 config_file = "./agents/hmasd-scout.toml"
 
-[agents.HMASDImplementer]
-description = "Optional Sol/medium implementation of a complete DM-owned code batch."
-config_file = "./agents/hmasd-implementer.toml"
-
 [agents.HMASDReviewer]
-description = "Independent Sol/high review for high-risk changes; evidence returns to the assigning owner."
+description = "Independent Astra/high review for high-risk changes; evidence returns to the assigning owner."
 config_file = "./agents/hmasd-reviewer.toml"
 
 [agents.HMASDVerifier]
@@ -42,7 +38,7 @@ description = "Optional focused runtime-observation method."
 config_file = "./agents/hmasd-verifier.toml"
 
 [agents.HMASDTransport]
-description = "Legacy Transport role; new work uses the independent browser task in hmasd-transport.toml."
+description = "Reusable author-owned Luna/high Agentify Pro transport; direct native receipts."
 config_file = "./agents/hmasd-transport.toml"
 
 [agents.HMASDExperimentMonitor]
@@ -58,7 +54,6 @@ description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"
 
 [mcp_servers.agentify-desktop]
-enabled = false
 command = "node"
 args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
 tool_timeout_sec = 2700

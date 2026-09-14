@@ -1,126 +1,140 @@
 ---
 name: hmasd-chatgpt-pro-transport
-description: "Execute and monitor exact Pro requests in the independent Luna/high Transport task using Codex built-in browser; archive complete responses and notify the assigning author DM."
+description: "Use when an author-owned native Transport executes or recovers an exact Agentify Pro handoff, from one preflight through Send or observation, immutable archive and direct parent receipt."
 ---
 
-# Independent browser Transport
+# Native Agentify Pro Transport
 
-OWNER_DIRECT 2026-09-14 replaces Agentify MCP and native Transport children. Read the live
-endpoint and registry path in C:/Projects/HMASD/.codex/hmasd-transport.toml. Use only the
-supported Codex built-in browser (iab) API; initialize through the current tool documentation
-and read its returned methods before acting. Screenshots are useful when page layout/state is
-ambiguous. No Agentify operation, strict query, process or receipt is a readiness prerequisite.
+The author DM owns one reusable native Luna/high leaf Transport. Root uses this route for its
+own Portfolio vacancy request. Execute the assigned request; the author reads the full answer
+and decides scientific/specification conformance. The current native assignment supplies the
+direct return parent. Preserve frozen HANDOFF IDs as provenance when recovering an older request.
+No singleton app task, relay, ACK loop, new scientific prompt or science selection belongs here.
 
-## Assignment and concurrency
+## DM-local repair default
 
-The author supplies request ID, exact prompt or immutable HANDOFF revision, input/delivery scope,
-provider model/effort, conversation binding, archive destination and actual parent_thread_id.
-Use send_message_to_thread to the registered Transport. The executor is an independent
-Luna/high task serving related concurrent transport work; native-child batch rotation does not
-apply to this service. It owns no science, experiment monitoring or main Git index. DM owns
-scientific authorship, intake and difficult technical repair; the request-owning DM handles shared coordination.
+Transport failures that are engineering defects (selector/model aliasing, tab binding,
+preflight state, receipt handling or workflow sequencing) are owned by the author DM by default.
+The DM may patch its direction-owned Transport helpers, fixtures and related skill/control
+instructions in place, run proportional focused tests and independent review, and recover the
+same unchanged operation when the effect is verified nonacceptance. Preserve the original
+operation, prompt hash, idempotency key, binding and all failure receipts. Do not create a
+replacement request or alter scientific meaning. Escalate to Root only when the repair requires a
+shared application runtime/load, a cross-direction resource or a scientific/Portfolio decision;
+Root then coordinates that dependency while the DM retains Transport acceptance.
 
-Maintain a per-request queue and existing binding registry. One executor and one pending request
-per provider conversation; different conversations can generate concurrently. Perform short
-browser actions, move to other ready requests, then bounded observation/waits (up to 60 seconds
-per wait). Do not block the entire queue until one answer finishes. A generating answer is real
-pending work: retain observation until terminal or explicitly handed over. End when no requests
-remain; a new App assignment starts a new turn. No ACK or Root-report loop.
+## Unrecoverable-conversation fallback
 
-### Durable outstanding assignments and turn completion
+If the original conversation cannot be recovered after the supported same-request repair path,
+the author DM may use a new conversation only when the old operation is positively verified as
+`sendAttempted=false` with no provider pairing or accepted effect. Record the old operation as
+`VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE` and preserve its HANDOFF, prompt hash,
+idempotency key, tab facts and receipts. Then create a new handoff/conversation and idempotency
+key carrying the identical scientific prompt and frozen inputs, bind it as a new operation, and
+link both records. This is a recovery rebind, not a resend of an uncertain effect. Never use this
+fallback when `sendAttempted=true`, acceptance is unknown, or any provider pairing may exist; in
+those cases observe and reconcile the original operation only.
 
-On each incoming assignment, persist its request ID and exact input reference, author/return
-route, binding, observed acceptance state, archive destination and next action before switching
-to another request. Keep this queue in `pending-requests.json` beside the configured binding
-registry; reuse any existing per-request durable queue by recording its path there rather than
-maintaining competing copies. This is execution state owned by Transport, not a new approval
-or scientific ledger. A request waiting to be inspected is outstanding even without a provider
-acceptance receipt. Deduplicate follow-ups by request ID; retain their new facts and input binding.
+For a failed initial homepage operation with no registry binding, use
+`bind_conversation.prepare_unaccepted_first_binding_rebind` with the validated replacement
+request and the fresh preserved operation audit. It reserves one deterministic generation,
+retains the prior audit in request history, and admits only explicit OWNER_DIRECT recovery with
+identical prompt/model/effort. It does not invent or quarantine a conversation UUID. Then use
+normal firstBinding and bind only the actual post-Send URL with the same reset evidence.
+An existing binding requires its own reconciliation or concrete-context replacement route.
 
-At resume/compaction and before finalizing a turn, reconcile the durable outstanding set against
-incoming assignments and this turn's completed work. A conversation's old ARCHIVED binding is
-not the status of a newer request. Match request identity and actual provider turn; an absent
-GitHub response or missing local receipt alone does not prove that Send failed. Preserve the
-exact accepted input through same-request recovery.
+## One preflight, one action, one return
 
-Completing or reporting one request removes only that request after its full archive and direct
-author delivery are recorded. Continue other queued, inspecting, generating, archiving or
-undelivered requests. A final response is appropriate only when the outstanding set is empty,
-or each remaining request has an explicit handover with a named receiving owner and observable
-acceptance of responsibility. A blocker notice alone is not a handover. If interrupted before
-recording a newly arrived assignment, recover it from recent App messages on resume; do not
-interpret the last successful archive as completion of the service's whole queue. Report concrete
-unrecoverable coverage gaps to the affected author DM; no routine Root escalation or status loop.
+```text
+READY_UNSENT --strict query--> SEND_ATTEMPTED
+    ^                           | verified pre-Send failure
+    +------ repair same input --+
+                                | uncertain effect / accepted
+                                v
+                             OBSERVE --full bytes verified--> ARCHIVE --> RECEIPT
+```
 
-## Execute from actual page state
+1. **Preflight once.** Read the committed HANDOFF and fixed TASK bytes, validate its logical
+   manifest, prompt hash/path and caller/parent/operator IDs. For GitHub handoffs on an existing
+   conversation use
+   `scripts/native_transport.py` with full `--handoff-sha`, repository-relative `--handoff-path`,
+   current `--parent`, `--operator`, `--assignment`, and immutable `--out`; pass existing
+   `--manifest` and `--prompt` together. It validates frozen routing separately from the current
+   native child route. New requests still use `REUSE_DM_TRANSPORT`; historical requests are never
+   rewritten to fit current configuration. First-binding uses the existing route in agentify.md;
+   this recovery helper rejects it. Explicit attachment contracts retain their input mode.
 
-1. Read the exact assigned bytes and current request history once. Reuse the bound conversation;
-   keep task IDs distinct from provider IDs. For migration, the author releases the old executor
-   and records the new execution route separately from immutable historical request fields.
-2. Open/select the actual iab conversation, inspect login, requested model/effort and visible
-   message/composer state. Fix ordinary navigation/model/composer issues locally. A screenshot
-   can resolve an ambiguity; do not repeat an already successful readiness checklist.
-3. Send the exact authorized prompt using supported browser controls. Preserve observed user
-   turn/URL and effect facts. An ineffective click can be repaired and retried when the exact
-   prompt is demonstrably unsent. Timeout or missing Agentify receipt is not a permanent ban.
-   If acceptance is unclear, inspect the actual thread/latest matching turn before another Send;
-   continue other requests meanwhile. Do not blindly duplicate an accepted request.
-4. Observe the matching answer until completion. Do not click Stop/Regenerate as observation.
-   Read full text with supported page/copy/download facilities. For GitHub delivery retrieve the
-   exact scoped RESPONSE.md at its immutable commit; preserve chat receipt separately. An answer
-   existing only on screen/clipboard is not yet a disk archive. Save its complete actual bytes,
-   source, request binding, hash and size; never reconstruct missing text from a summary.
-5. Send one completion or concrete blocker report directly to the supplied parent App task with
-   event/request ID, acceptance facts, full archive paths, remaining issue and next owner/action.
-   No routine messages to Root. Author reads full answer and owns scientific intake. Archive-only
-   work never authorizes a new scientific request.
+   Read the absolute registry from live `C:/Projects/HMASD/.codex/hmasd-transport.toml`.
+   `--claim-registry` makes one brief locked claim of the exact request/binding. A different
+   unfinished request or live executor is a real writer conflict. Keep ownership through failure,
+   uncertainty and generation; release only after full archival. Never hold the file lock across
+   a browser wait. [State records](references/state-schema.md) preserve earlier evidence.
 
-### Multiline composer input and original UI evidence
+   Reuse the matching Agentify operation and its original arguments. Inspect one clear screenshot
+   with CUA when useful to understand the real page; one scoped UI sample is enough. Read the
+   actual composer/model/current response, excluding sidebar titles and historical receipts.
+   Screenshot interpretation is a human observation, not OCR or proof of Send history. Supplement
+   only missing hidden facts: exact conversation, dedicated tab key, protected-tab exclusion and
+   persisted operation. Any accessible logged-in surface is usable regardless of its task owner.
+   Send uses a dedicated non-protected Agentify tab with the recorded stable key. Require
+   GPT-6 Astra (verified `Latest`) and `Pro`, not merely an account subscription. Strict query
+   already checks its target before Send; call separate non-sending preflight only for an unresolved
+   or repaired model/tab fact. Do not repeat identity, DOM or model-menu checks without new evidence.
 
-Use the current browser API's documented multiline-safe paste/fill operation. When the API
-provides `paste(text, {format: "text"})` for this purpose, use it for multiline prompts. Never
-substitute keyboard `typeText` for multiline text when newlines can act as submit keys. Read the
-current API documentation rather than assuming that similarly named input methods are equivalent.
+2. **Take the unique effect branch.** Use `next_step` or its rule below, recording the exact
+   operation receipt. A timeout or failed tool label alone does not prove nonacceptance.
 
-Before the deliberate Send, read back the whole actual composer and compare it with the exact
-authored prompt. A local source digest proves only local bytes, not UI delivery. Documented
-rendering-only newline differences may be normalized for the comparison while preserving both
-original captures and the original prompt; do not clear correct content or switch to keyboard
-entry merely because CRLF/LF rendering differs. A truncated readback is insufficient to establish
-whole-composer agreement; use a supported complete readback. Repair a real mismatch locally.
+   | Effect | Evidence | Only next action |
+   | --- | --- | --- |
+   | VERIFIED_NONACCEPTANCE | Same request, no acceptance evidence; strict operation explicitly `sendAttempted=false`, or positively reconciled never-Send history | Repair the failed fact, then continue this same unchanged operation once. No extra parent confirmation. |
+   | UNCERTAIN_EFFECT | `sendAttempted=true` without a paired user turn, missing/unknown operation history, or another possible accepted effect | Non-sending reconciliation/observation of this request. Never create a new operation or change its idempotency key. |
+   | ACCEPTED | Exact current request paired with provider user/assistant identity or verified archive | Observe/archive that response only. |
 
-If unexpected partial messages were submitted, preserve all actual user nodes and their original
-DOM/tool captures. Extract node IDs, counts and hashes programmatically from those captures;
-never retype identifiers or label another record verified without matching the original source.
-Keep author request identity separate from each actual provider message identity. Reconcile the
-current generation and evidence access with the author DM; incomplete input is not by itself
-permission to Send again, Stop or Regenerate. Honor any adopted ARCHIVE_ONLY continuation.
-Corrections to inaccurate receipts retain the originals and cite the original captured evidence.
+   `agentify_review_query` preserves its operation on pre-Send failure: changing only the repaired
+   `existingTabId` can recover TAB_KEY_MISMATCH. Keep prompt/hash, provider/model/effort,
+   binding/conversation, response path and idempotency key fixed. `verifyExisting=true` can still
+   Send when its operation says false; it is observation-only only after true. If the operation
+   is absent or effect uncertain, use non-sending tools, not a new strict query. Exact interfaces
+   and first-binding exceptions are in [agentify.md](references/agentify.md).
 
-### Archive bytes and receipt accuracy
+3. **Observe and archive.** Bound each observation call to at most 60000 ms. Continue the same
+   request while work is in progress; unchanged observations need no new inventory/preflight,
+   parent message or polling relay. Report a concrete external prerequisite once and retain
+   same-request recovery. Never click Stop, Regenerate or Continue as natural observation.
+   Agentify's two stable completion samples and exact user/assistant pairing protect completeness;
+   do not add another independent stability loop.
 
-Compute byte count and SHA256 from the exact saved binary content. For a GitHub file, identify
-the immutable commit/path and obtain raw bytes or decoded Git blob bytes; do not hash a tool's
-rendered text/JSON representation and label it original file bytes. Do not strip trailing newline,
-normalize line endings, re-encode or otherwise transform before computing the original digest.
-If only extracted text is available, label its provenance and representation explicitly; do not
-claim byte identity with the source until verified. Compare archive/source digests on the same
-representation. A text display omitting a final newline does not establish that the source lacks it.
+   Save exact assistant UTF-8 bytes and its hash/size receipt. In GitHub delivery this may be only
+   the short chat receipt: obtain the full scoped RESPONSE.md at the immutable delivery commit,
+   or its paired downloadable fallback. Keep these separate; never overwrite the operation's
+   fixed responsePath to rename a historical attempt. Preserve full answer source, paired IDs,
+   path/hash/size and Git commit (or download evidence). A conflicting file is ARCHIVE_CONFLICT:
+   retain both candidates and return the conflict. Delivery failure alone does not erase a formed
+   decision. Never synthesize a missing GitHub response.
 
-A receipt metadata error with a complete verified archive is repaired by a factual addendum citing
-the original receipt and actual source/archive byte evidence. Preserve the original receipt and
-accepted answer; this correction does not authorize another Send or rewriting the scientific text.
+   On strict pairing/archive failure, check the fixed GitHub response scope and its delivery
+   comment; check again at natural completion if the earlier target was absent. Page absence is
+   not GitHub absence. Read response bytes at the observed full commit, verify the Git blob/hash/
+   size and comment pairing to the exact fixed TASK. `verify_github_pairing` tests this route.
+   A complete task-bound GitHub response can be archived/returned with provider IDs still null;
+   retain the strict mismatch instead of inventing IDs or waiting on a stale page after delivery.
 
-## Recovery and handover
+4. **Return once.** Verify the full archive, stage `native_receipt` for the current direct parent,
+   then send one factual `collaboration.send_message` with request/binding, effect, operation,
+   paired IDs, full archive source/hash/size, cleanup and missing facts. Record the actual tool
+   outcome. Delivered or uncertain receipts are reconciled without repetition; a rejected-before-
+   delivery receipt may recover to the same parent. Native final closes this same assignment,
+   not a second dispatch. No ACK is required. Close only owned non-protected tabs after the
+   archive or exact recoverable conversation is secured. The parent performs full scientific intake.
 
-DM takes over a difficult browser/tool fault locally, updates the workflow if needed, and returns
-operation after avoiding overlapping executors. the request-owning DM coordinates shared access. No routine Root
-approval. If an existing conversation cannot be recovered, DM may create and bind a replacement
-with the same task/context, recording the reason and unresolved prior effects; first secure any
-recoverable old answer and avoid two live submissions of the same request. A unavailable UI/tool
-is not evidence that an old request was never accepted. Preserve contrary facts and exact scope.
-
-Use existing archive/registry formats where useful; legacy Agentify fields may remain null or
-historical. Old helper interfaces are optional compatibility tools, not launch gates. Do not load
-legacy Agentify API instructions as the current procedure. Provider generation capacity remains
-an observed account limit; independent sessions do not remove it. Keep protected/user tabs intact.
+   At completion, a material conflict, or no-current-work while the direction remains ACTIVE,
+   send one direct native action message before ending: assignment, status, evidence/commit and
+   next step. `stage_native_receipt` supports COMPLETE, CONFLICT and NO_CURRENT_WORK; only COMPLETE
+   requires the full archive. UNCHANGED_WAIT stages nothing. Preserve earlier boundary receipts
+   when a later changed boundary occurs. Active generation is ongoing work, not a reason to end
+   as blocked. The author DM sends the same concise action update to Root at its own boundary;
+   ordinary unchanged waits remain silent. A missing archive never prevents reporting a real conflict.
+   If this runtime lacks `collaboration.send_message`, return those same actionable fields once
+   in native final, which reaches the assigning parent directly. Record `transport=native_final`
+   and the actual native outcome; do not invent a tool success, create an app relay or require
+   another handshake. Tool availability does not hold a verified full answer away from its author.

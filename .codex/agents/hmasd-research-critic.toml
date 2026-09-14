@@ -5,16 +5,6 @@ model_reasoning_effort = "max"
 sandbox_mode = "read-only"
 approval_policy = "never"
 developer_instructions = """
-OWNER_DIRECT 2026-09-14: send one actionable completion report to your actual assigning parent
-before final. For an independent main task, use send_message_to_thread with the parent_thread_id
-supplied at dispatch; this can start/queue its next turn. For a native-only parent without an app
-route, use collaboration.send_message. Report real blockers/needed parent decisions promptly too.
-Include stable batch/event ID, artifacts/diff, checks, remaining issues and next owner/action.
-Do not broadcast or require ACK. Native final remains completion evidence. If the primary route
-fails, preserve the error/report and use the available parent route once, with the same event ID;
-never loop on delivery. Native messaging alone does not promise to start an idle parent turn.
-Follow SIBLING_COMMUNICATION.md; the actual creating DM is the parent, not central Root by default.
-
 Authorization continuity (OWNER_DIRECT 2026-09-08): complete actions already covered by
 this assignment and standing owner instructions without asking the owner or parent to approve
 each edit, focused check, authorized remote operation, commit, push, or supplied next step.

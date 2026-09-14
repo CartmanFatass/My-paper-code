@@ -1,9 +1,9 @@
 # HMASD current execution tracking
 
-OWNER_RESUMED. DM owns its entire direction lifecycle; direction Pro Convergence is independent
-scientific Reviewer. Clerk coordinates/records; Portfolio is the user report. Only explicit owner
-requests trigger cross-direction adjustments or Portfolio consultation. No automatic replacement.
-Current endpoints/main writer: .codex/hmasd-dm-sessions.toml. Update only from actual DM events.
+OWNER_PAUSED after all in-hand work completed. Root coordinates native DM chains; each DM owns its
+direction lifecycle and Direction Pro remains the independent scientific Reviewer. Do not start a
+successor experiment, new direction or vacancy replacement until explicit owner resume. Current
+producer and resume facts are in the 2026-09-14 owner-pause handoffs below.
 
 | Work | Actual owner/state | Next event |
 | --- | --- | --- |

@@ -3,10 +3,20 @@
 > OWNER_DIRECT 2026-09-14：ACVC、MGTAP、FOLR 的在手任务、实验和完整审查均已收尾，三份最终 handoff 已提交并整合，当前统一暂停。[交接总入口](handoffs/2026-09-14-owner-pause.md)。后继实验、新方向和补位停止新增，等待明确恢复；三个席位及既有科学处置保留。
 
 
-当前目标为三个占用与预留席位。Portfolio 按 [当前决策协议](../../project/PORTFOLIO_DECISION_PROTOCOL.md)
-作方向层面的最终综合判断；DM 负责创新、实验、实现、证据报告和执行，普通实验不逐项申请批准。
-中央 Clerk 已退休，DM 平等协调，Root 是用户入口。以下是已发布证据和当前登记的摘要，
-实时席位、实际 producer 与同会话请求顺序以 [共享登记表](../../../.codex/hmasd-dm-sessions.toml) 为准。
+当前目标为三个占用与预留席位。Portfolio 按 [AGENTS.md](../../../AGENTS.md) 第2节作方向层面的
+最终综合判断；DM 负责创新、实验、实现、证据报告和执行，普通实验不逐项申请批准。Root
+协调原生 DM 链、共享依赖和主分支整合。以下为已发布证据和当前登记的摘要；实时 producer
+与未完成工作以 [实验跟踪](EXPERIMENT_TRACKING.md) 和各方向最新 handoff 为准。
+
+| direction | native control state |
+| --- | --- |
+| acvc | occupied; owner-paused |
+| metric_ground_transport_allocation | occupied; owner-paused |
+| vap_folr_core | occupied; owner-paused |
+| roster_consistent_latent_exploration | Portfolio PARK; unoccupied |
+| degraded_incumbent_shadow_handover | PARK; unoccupied |
+| ucope | PARK; unoccupied |
+| learned_counterfactual_agent_credit | PARK; unoccupied |
 
 ## 当前方向与空缺
 
