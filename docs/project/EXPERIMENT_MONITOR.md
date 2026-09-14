@@ -12,7 +12,7 @@ No child is created for an idle direction. Root and DM wait natively under SIBLI
 DM owns exact launch inputs, resource admission, collection, technical acceptance and scientific
 intake. An optional Operator executes its named batch and uses the monitor address supplied by DM.
 After actual launch acceptance, send MONITOR_ADD via followup_task with direction/assignment ID,
-DM canonical name, node/supervisor handle, launch SHA, cwd/output/evidence paths, observation bound
+DM canonical name and actual independent parent_thread_id/host, node/supervisor handle, launch SHA, cwd/output/evidence paths, observation bound
 and relevant stop instructions. The monitor does not discover work by scanning historical handles.
 
 The monitor queries the exact handle, records direct status and replies MONITOR_ADOPTED to its DM
@@ -41,7 +41,8 @@ accessible terminal witness, not another task's private terminal session ID.
 ## Terminal facts and reuse
 
 On completion or a material observation failure, send MONITOR_TERMINAL or MONITOR_BLOCKER directly
-to the DM using native send_message. Include a stable event ID, exact handle, source/output paths,
+to the DM using the supplied parent route in SIBLING_COMMUNICATION.md (App message for an
+independent DM, native send_message for a native-only parent). Include a stable event ID, exact handle, source/output paths,
 direct status, bounded evidence and unresolved effects. Deliver each event promptly without
 waiting for all experiments. Save delivery state and reconcile uncertainty on the same event
 before retrying. Do not require an ACK loop. Successful observation is not scientific acceptance.

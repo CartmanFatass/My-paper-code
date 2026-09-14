@@ -103,11 +103,14 @@ no answer exists; check again at natural completion if it was previously absent.
 task-bound GitHub answer may be returned with provider IDs null. Never invent IDs or bytes.
 
 Verify archive source/hash/size, preserve conflicting candidates without overwrite, and use the
-existing `native_receipt` helper to send one factual native message to the actual parent:
+supplied direct parent route in SIBLING_COMMUNICATION.md to send one factual report
+(App send_message_to_thread for an independent parent; `native_receipt` for a native-only parent):
 request, effect, operation/pairing, full archive, cleanup and any concrete missing fact.
 Completion, material conflict and no-current-work are reportable boundaries; unchanged waiting
 is not. Record the actual delivery outcome and preserve earlier receipts. Native final closes
-the same assignment; when messaging is unavailable, it is the direct return, not an app relay.
+the same assignment. If report delivery fails, retain the report/error and use an available direct
+parent route once with the same event ID; no relay task or ACK loop. Final alone does not promise
+to restart an independent parent task.
 Close only owned non-protected tabs after pending work is secured under the applicable cleanup
 rule. The parent reads the full review and owns scientific intake.
 

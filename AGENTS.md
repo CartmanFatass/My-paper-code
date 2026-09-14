@@ -14,16 +14,17 @@ Directory conventions live beside the code in one `AGENTS.md` per area (`experim
 
 ## 1. Operating model
 
-OWNER_DIRECT 2026-09-12: temporarily suspend new CM and Implementer subagent assignments,
-including equivalent code-implementation roles under generic names. DM owns direction science,
-implementation, self-checks, repair and technical acceptance in the same task. Retain the
-independent code Reviewer and high-risk review under ENGINEERING_SCOPE_SPEC section 7.3;
-DM resolves findings and accepts the work. Root owns shared control-plane implementation and
-acceptance with independent review where required. Accepted CM/Implementer work preserves its
-artifacts and original return route through closeout, without successors. Other specialists,
-Frozen scientific budgets remain; current DM/reviewer/report authority is defined below. DM owns native Agentify Transport. Experiment observation
-uses DM-owned native monitors under EXPERIMENT_MONITOR.md.
-
+OWNER_DIRECT 2026-09-14: DM may directly implement or delegate a complete bounded implementation
+batch to a native Sol/medium Implementer. DM retains science, design choices, technical acceptance,
+Git ownership, experiment launch and lifecycle; no per-task Root/Portfolio approval is needed.
+CM remains retired. Implementer and independent code Reviewer are direct siblings under the DM,
+not another management chain. Code Reviewer defaults to Sol/high; DM may select Astra for a
+concrete difficult scientific-semantic, numerical or concurrency review without Root approval.
+Required high-risk coverage remains under ENGINEERING_SCOPE_SPEC section 7.3, not a fixed double
+review. Root has the equivalent owner role for shared control-plane work. Existing accepted
+children keep their work and return routes; no forced restart. Frozen science and resource limits
+remain. DM owns native Transport and experiment monitors. Batch and pre-restart mechanics are in
+SIBLING_COMMUNICATION.md; concise engineering assignments and acceptance are in scope-spec §7.
 
 The current owner request, together with system and developer instructions, is the authority for
 repository work. Repository documents describe methods and record evidence; they do not create a
@@ -59,12 +60,15 @@ stops and actual resource limits remain. Preserve accepted external requests thr
 new advice does not automatically change global layout. Current research state and endpoints are
 in `.codex/hmasd-dm-sessions.toml`; historical pauses/routes are not current rules.
 
-OWNER_DIRECT 2026-09-10: DM absorbs the former CM's engineering responsibilities and implements
-directly. Under the temporary 2026-09-12 owner instruction, DM performs implementation and self-checks;
-CM and Implementer receive no new work; independent Reviewer remains available. Other specialists do not create another ordinary child chain. Codex model defaults and
-restart behavior are in Appendix A. Migration authority and historical boundaries:
-`docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md`.
+DM retains the former CM's engineering management responsibilities. Optional implementation
+children do not acquire scientific or lifecycle authority. CM and Routine Implementer remain
+retired. Codex model defaults and restart behavior are in Appendix A; current delegation is the
+2026-09-14 instruction above.
 
+Native children send completion/blocker reports directly to their actual parent before final
+(App task message for an independent DM, native message for a native-only parent);
+DM processes each ready consequence before waiting again. Native wait timeout settings are
+minimum/default 25 minutes and maximum 60 minutes; messages/completion can wake the wait earlier. SIBLING_COMMUNICATION.md defines report fields and duplicate-event handling.
 DM uses native waits for its children; Clerk uses registered event routes under SIBLING_COMMUNICATION.md. Each DM owns a batch-scoped
 Luna/low native experiment monitor; adoption and terminal facts return directly to that DM.
 Clerk receives independent DM handoffs through app messages. DM also owns native Agentify Transport and receives Pro archives directly.
@@ -84,7 +88,7 @@ readiness from the actual target ChatGPT session login state, exact conversation
 provider state and one-Send reconciliation, and may use any accessible logged-in browser surface.
 Each DM owns its card, predictions, implementation, technical acceptance, result collection,
 scientific intake and authorized continuation. Scout, scientific Critic, Verifier and Operator
-remain optional working methods, not additional authorities. Implementer is suspended; independent Reviewer remains available. Legacy CM tasks retain only
+remain optional working methods, not additional authorities. Implementer is optional; independent Reviewer remains available. Legacy CM tasks retain only
 their already accepted assignments and return paths through closeout; no new CM assignment starts.
 
 Scientific meaning lives in `docs/research/candidates/<direction>/DIRECTION.md` and its cited
@@ -113,7 +117,7 @@ and existing unattended delegation remain binding.
 
 DM implements, reviews and repairs its bounded engineering objective directly. Scientific/semantic
 risk sets review coverage under ENGINEERING_SCOPE_SPEC §7, including independent Reviewer
-review for high-risk changes. No new Implementer handoff starts during the temporary suspension. Models follow Appendix A.
+review for high-risk changes. Complete bounded implementation batches may be delegated under §7.2. Models follow Appendix A.
 
 Existing authorization and unattended object-tier delegation persist until the owner changes them.
 An owner question or status request alone is not a takeover of each pending object decision.
@@ -210,7 +214,7 @@ actual evidence burden. Current specifications may not be silently relaxed to av
 
 Portfolio report comparisons retain honest claim ceilings, headroom/MEI, costs, contrary results
 and recast history. Existing owner priority/resource ordering remains until changed by owner.
-A new recast is DM's decision and report fact, not an automatic global priority change. Four is the occupied/reserved slot target under the owner's scoped vacancy delegation. Clerk
+A new recast is DM's decision and report fact, not an automatic global priority change. Three is the occupied/reserved slot target under the owner's scoped vacancy delegation. Clerk
 requests Portfolio replacement for genuine empty slots; unrelated priority changes remain owner-owned.
 
 ## 3. Scientific gaps and external-effect recovery
@@ -521,9 +525,10 @@ appendix and completed historical tasks remain unchanged.
 
 
 - Native custom subagents are registered in `.codex/config.toml`: Direction Manager,
-  Scout, Reviewer, Critic, Verifier, Experiment Monitor, Transport and Operator. Root follows the Codex app model/effort selection; Clerk explicitly uses gpt-5.6-luna/high; DM defaults
-  to `gpt-6-astra/max`. Implementer registration is temporarily removed; its
-  role file remains for recovery of accepted work. Reviewer remains Astra/high with read-only access. Other specialist model settings
+  Scout, Implementer, Reviewer, Critic, Verifier, Experiment Monitor, Transport and Operator. Root follows the Codex app model/effort selection; Clerk explicitly uses gpt-5.6-luna/high; DM defaults
+  to `gpt-6-astra/max`. Implementer is Sol/medium. Code Reviewer is Sol/high with read-only access; DM can select
+  Astra for a concrete difficult review. Before configuration reload, use the explicit generic
+  native-child route in SIBLING_COMMUNICATION.md. Other specialist model settings
   are unchanged. CM, Routine Implementer and the dedicated Terra/high workflow-outsource
   path are retired. Configurations take effect after restart; Codex App provides native
   task/message lifecycle behavior. OWNER_DIRECT independent DM tasks explicitly use gpt-6-astra/max and load DM duties; they

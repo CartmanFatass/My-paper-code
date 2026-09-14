@@ -82,7 +82,9 @@ automatically change layout under obsolete Portfolio-finality rules.
 
 ## Engineering, integration and recovery
 
-DM implements and self-checks direction code directly; no new CM/Implementer chain. Independent
+DM owns direction engineering and may use a direct native Sol/medium Implementer for a complete
+bounded batch; CM remains retired. Sol/high code Reviewer is independent; DM can choose Astra
+for a concrete difficult review. Independent
 high-risk Reviewer coverage remains under ENGINEERING_SCOPE_SPEC section 7. Root owns shared policy/
 control code and its acceptance. Clerk integrates only named accepted commits in the registered
 main writer interval, preserving unrelated changes and returning semantic conflicts to the DM.
