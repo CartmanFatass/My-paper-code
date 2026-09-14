@@ -2,7 +2,8 @@
 
 Current review state: complete independent result review read and substantively answered below.
 The complete direction report and exact23,431-byte Portfolio request are published and dispatched
-to registered Transport; actual provider acceptance/full answer is not yet confirmed. No new
+to registered Transport. Its complete accepted user-node content has been verified by Transport
+with rendering-only whitespace differences; the one Portfolio answer is generating. No new
 PARK/CLOSE, fit or slot release is applied.
 
 The complete B13 invocation answers the concrete objective selected by the full Portfolio
@@ -257,3 +258,7 @@ MGTAP delivered its actual release after complete Portfolio CONTINUE and DM appl
 ### Exact next Portfolio request dispatched —2026-09-14
 
 Request2026-09-14-rcle-post-b13-direction-decision-01 has final full prompt17cb06ae3f1922568c5dc5f8af3c711feba5b952 and HANDOFF383cd3dd298bf8536ad7db3bab86561a3e0fe8e2. DM read the entire generated prompt to EOF and verified its exact23431-byte Git blob/SHA256 e91f1beb4fe40f38eabe67488d9a98163e195437be6f9eb6d9937f030a41a59f. One App handoff was accepted by registered Transport, not yet a verified provider Send. Transport owns actual full-composer and accepted-user-node comparison, same-request observation and complete direct archive. The final fixed report/global context include the complete MGTAP decision/application and current FOLR result/proposal. DM awaits the full actual Portfolio answer, then reads, responds and applies its conforming direction decision; no local PARK/new fit/slot release is pre-applied.
+
+### Complete accepted request verified —2026-09-14
+
+Registered Transport returned the actual post-Send readback for userbf84ddba-6465-44c7-8ce4-237e60d26c8c: all non-whitespace content of the23431-character bound prompt matches. The observed body23294characters/23305including Show more differs only through rendered whitespace and UI controls; raw innerText SHA2565d67ac93cf0f1248106f3bd30a2a329366358139718206398f700e36a8910938 is retained separately from the source hash. This is an attributed actual DOM check, not a byte-exact server-envelope claim. See pro_packets/20260914_post_b13_portfolio_direction/ACCEPTED_INPUT_VERIFICATION.json. One Send, no regeneration or resend; Transport continues direct observation to the full final answer. Partial reasoning is not a disposition.

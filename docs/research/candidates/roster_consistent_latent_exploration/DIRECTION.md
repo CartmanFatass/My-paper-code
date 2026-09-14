@@ -39,7 +39,9 @@ recommending reversible PARK with one same-law fresh instance as the strongest a
 This is a pending direction recommendation, not an applied disposition. Existing CONTINUE
 and the occupied slot remain. MGTAP completed its full decision/application and released the
 conversation; RCLE claimed it and dispatched the exact23,431-byte request through registered
-Transport, with actual full-composer/accepted-node checks and full terminal archive pending. No automatic
+Transport. The actual composer and accepted user node were checked for complete content;
+only rendering whitespace differed. The one request is generating; its complete terminal answer
+and DM direction intake remain pending. No automatic
 second fit, PARK/CLOSE or slot release. The complete response and global context govern the
 next consequence, without a per-experiment approval or Root ratification.
 
