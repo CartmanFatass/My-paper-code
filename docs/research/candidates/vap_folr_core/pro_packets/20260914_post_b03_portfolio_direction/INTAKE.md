@@ -144,3 +144,23 @@ preserve their changes, read current role/engineering entry before editing, and
 return directly to the actual parent App task
 `01a09e16-f7b1-7e60-83a0-ba2a7cd969bc` before native final. DM handles source
 publication, full review response and the later selected complete execution path.
+
+### Common actor implementation return
+
+Event `FOLR_AUGMENTED_ACTOR_COMMON_20260914_COMPLETE_01` returned directly to the
+actual DM parent. The three assigned files contain 136 new non-test lines and
+154 test lines. DM read their complete contents: both recurrent streams and the
+packed state are functional, Generic common modules and downstream constructor
+RNG are preserved, and the independent entity route follows the selected masks
+and lifetime transitions. No existing learner, actor, runner or scientific object
+was changed. This is implementation evidence pending independent review, not
+full-path technical acceptance or an empirical result.
+
+Implementer ran the one focused model suite with the configured scientific Python:
+`python.exe -m pytest -q --basetemp temp/directions/vap_folr_core/test/augmented_actor_common_20260914_impl tests/experiments/candidates/vap_folr_core/entity_history_augmentation_b01/test_model.py`.
+Reported result: **5 passed in 1.99s**, process wall **3.05s**; invocation-owned
+scratch was resolved, removed and confirmed absent. An initial wrapper was
+rejected before process creation; the revised exact-path cleanup wrapper ran
+once. No scientific invocation or result-bearing retry occurred. DM did not
+repeat the unchanged suite merely for receipt confirmation. An independent
+Sol/high Reviewer next checks the published actual diff against this L0.
