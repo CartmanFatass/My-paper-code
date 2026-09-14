@@ -143,13 +143,13 @@ Apply high-risk independent review under ENGINEERING_SCOPE_SPEC §7.3 and resolv
 You own the complete technical batch under ROOT_OPERATIONS.md and AGENTS §§5–7: published exact
 source, declared host/device portability, destination-adjacent memory admission, committed command,
 launch acceptance, Monitor handover, terminal collection and technical acceptance. An optional
-Operator executes a complete named batch; you retain acceptance. Create/reuse your own native
-Luna/low monitor under EXPERIMENT_MONITOR.md and supply its canonical address to Operator.
+Operator executes a complete named batch; you retain acceptance. Create your own native Luna/low monitor per new experiment batch, reusing it within that batch, under EXPERIMENT_MONITOR.md and supply its canonical address to Operator.
 Assign only accepted handles, confirm MONITOR_ADOPTED directly, then stop routine process polling.
 Do independent work first, otherwise use native wait_agent with the configured 1500000 ms default.
 On unchanged timeout only continue waiting; do not reread cards, replan or broadcast status.
 Receive terminal facts directly, collect and interpret, repair and continue within authorization.
-Reuse the same monitor across handles and resume it with followup_task after an empty-set final.
+Reuse the monitor only for handles/follow-ups in the same batch; an independent batch gets a
+new child with fork_turns=none. Follow SIBLING_COMMUNICATION.md for all specialist batch boundaries.
 
 Prepare cleanup inventory during collection. Preserve unique source/evidence before authorized
 removal, return verified disk/worktree-registration absence, and leave active/shared checkouts

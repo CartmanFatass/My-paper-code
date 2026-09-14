@@ -44,6 +44,31 @@ is silent recovery for missed/interrupted events, not automatic planning. Owner 
 
 ## Native DM specialists and scientific review
 
+OWNER_DIRECT 2026-09-13: reuse a native subagent within one bounded work batch; create a new
+subagent for an independent batch. The assigning parent determines the batch from its objective
+and deliverable, without Root/Clerk approval. A tool call, commit, empty-set final or elapsed wait
+is not itself a batch boundary. Direction membership alone does not make unrelated work one batch.
+
+Transport's batch is one exact request through preparation, Send, recovery, observation and archive.
+Monitor's batch is one experiment batch and its accepted handles through terminal delivery.
+Reviewer reuses context for the same change and its corrective reviews; a new independent change
+gets a new reviewer child. Scout, Verifier and Operator follow the same objective/closeout rule.
+After a batch is complete, retain its evidence and stop assigning unrelated work to its child.
+
+Use spawn_agent for a new batch, default fork_turns=none, with role, objective, owned paths/current
+revision, needed evidence, completion condition and actual return parent. Inherit parent history
+only when concrete relevant context warrants it; do not copy a long old conversation into a new
+child. Use followup_task for same-batch continuation. Record batch/child identity in the existing
+assignment record; no new registry, service, placeholder agent or approval checklist is required.
+Reuse role configuration and designated checkout, not unrelated conversational history.
+
+Let current accepted handles/requests reach safe closeout in their existing children. If replacement
+is actually necessary, preserve same-handle/request state and transfer observation/execution without
+overlap or another Send. A new Transport child does not require a new provider conversation.
+Long waits do not trigger rotation; do not send cache keepalives or infer cache expiry from a timer.
+Independent DM, Clerk and Root tasks remain continuous; this rule governs their native specialists.
+Owner pause takes precedence: changing this policy does not resume science or create a new batch.
+
 DM owns implementation and acceptance, with independent high-risk code Reviewer coverage; no new
 CM/Implementer chains. Its native Luna/low Monitor observes accepted experiment handles and returns
 adoption/terminal facts directly to DM. DM collects/intakes, then sends only actionable outcomes to
