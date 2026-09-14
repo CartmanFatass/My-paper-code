@@ -1,0 +1,51 @@
+{
+  "checked_fields": {
+    "object": "FOLR_RETAINED_REFERENCE_USE_B01_781301",
+    "arm": "GENERIC_RETAIN",
+    "training_seed": 781301,
+    "evaluation_seed": 1781301,
+    "launch_sha": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+    "cap_seconds": 2700,
+    "status": "complete",
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560,
+    "torch_threads": [
+      1,
+      1
+    ]
+  },
+  "training_return_count": 5000,
+  "evaluation_return_count": 128,
+  "all_returns_finite": true,
+  "actor_initial_l2": 19.244039949915255,
+  "actor_change_l2": 32.96180604013214,
+  "actor_parameters": 103173,
+  "panel_recomputed": {
+    "mean": 1.0549999999999995,
+    "sample_sd": 6.032188200660601,
+    "conditional_episode_se": 0.5331751477600736,
+    "minimum": -13.459999999999997,
+    "maximum": 22.16,
+    "n": 128
+  },
+  "native_time": {
+    "wall_seconds": 2156.67,
+    "user_seconds": 2041.5,
+    "system_seconds": 114.43,
+    "peak_rss_kib": 769632,
+    "exit_code": 0
+  },
+  "resources_unmeasured": false,
+  "own_policy_observation_only": true,
+  "new_bank_panels_before_acceptance": 0,
+  "model_loads": 0,
+  "scientific_invocations": 0,
+  "scientific_limit": "One fresh fitted Generic conditional episode panel; no comparative use verdict until fixed BANK128.",
+  "native_monitor_event_id": "MONITOR_TERMINAL-folr-ref-use-generic-781301-5dce539ed54a-20260913T204255Z",
+  "native_monitor_reported_duration_seconds": 2156,
+  "supervisor_logged_exit_utc": "2026-09-13T20:43:15Z",
+  "monitor_event_clock_note": "Preserve native event identifier; do not use its embedded clock as terminal time. Full collected supervisor log establishes exit clock; integer duration is rounded relative to GNU time2156.67s."
+}

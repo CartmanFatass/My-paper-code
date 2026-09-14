@@ -1,0 +1,29 @@
+{
+  "accepted_at": "2026-09-13T20:48:31.127840+00:00",
+  "source_sha": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+  "plan_commit": "e617175ecc764cf137f8d8a91d7cba4056a57a40",
+  "supervisor_task": "folr-ref-use-bank-781301-5dce539ed54a",
+  "launch_stdout": "Task 'folr-ref-use-bank-781301-5dce539ed54a' started in tmux session 'agent_folr-ref-use-bank-781301-5dce539ed54a'. Output: /home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a/task.log\n",
+  "launch_transport_exit": 0,
+  "status": {
+    "task": "folr-ref-use-bank-781301-5dce539ed54a",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3427261,
+    "uptime_seconds": 0,
+    "tmux_active": true
+  },
+  "command": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/prepared/BANK.sh",
+  "arguments": [
+    "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+    "/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a",
+    "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/BANK",
+    "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/GENERIC/summary.json",
+    "/home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301/BANK_final.pt"
+  ],
+  "previous_status": {
+    "task": "folr-ref-use-bank-781301-5dce539ed54a",
+    "status": "not_found"
+  },
+  "scientific_submission_count": 1
+}

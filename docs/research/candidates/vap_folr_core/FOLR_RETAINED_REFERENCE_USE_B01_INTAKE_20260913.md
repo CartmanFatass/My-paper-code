@@ -23,7 +23,8 @@ the exact counts, receipts, hashes, conditional dispersion and adverse outcomes.
 
 Rule applied verbatim: **strict >+1 OPTIONAL_BANK_REFERENCE; inclusive [-1,+1]
 GENERIC_ONLY_WITHIN_MEI preserving sign; strict <-1 GENERIC_ONLY_BANK_WORSE.**
-No changed threshold, fitted-policy selection, episode pooling or pairing occurs.
+No changed threshold, additional post-F fitted-policy selection, episode pooling
+or pairing occurs. Historical outcome-informed BANK selection remains explicit.
 The observed primary is strictly below-1, so this is the BANK-worse branch and
 not the within-MEI branch or an equivalence claim.
 
@@ -65,15 +66,16 @@ existing run-level tool receives only one new Generic training endpoint and
 reports n1/null training-run SD; fixed BANK is separately described as historical.
 No new literature claim, missing source issue or novelty judgment was introduced.
 
-Strongest support for **Generic-only use** is now a complete equally informed
-competent Generic endpoint and a fresh fixed-BANK panel on the exact same host,
-with a signed margin5.932421875 beyond the declared absolute MEI1. The new evidence
-is stronger for this use than B04's earlier generic competence on a different host.
+Strongest support for **Generic-only use** is the complete equally informed
+Generic endpoint and fresh fixed-BANK panel on the exact same host. Generic
+exceeds this BANK reference by5.932421875 native-return units; the signed
+BANK-minus-Generic difference lies4.932421875 below the declared-1 boundary.
+This is direct evidence for the named use, not an absolute competence threshold.
 
 Strongest limit to a broad negative is the conditional, outcome-informed BANK
 selection and one new Generic realization. Actor capacity and training histories
-are not matched; short H20 and full common lifecycle cues may make Generic
-sufficient here. The observation cannot distinguish architecture, optimization,
+are not matched; short H20 and full common lifecycle cues are possible reasons
+for modest incremental BANK benefit, not tested sufficiency. The observation cannot distinguish architecture, optimization,
 capacity or memory-necessity explanations. Entity-history-to-action remains a
 legal executable mechanism, but this BANK earns no optional-reference role under
 the named rule. Other hosts, lifetimes and mechanisms remain untested.
@@ -217,9 +219,13 @@ P is preferred because the only concrete purchased use is settled and the strong
 current same-information Generic directly beats the available BANK by 5.932421875
 native-return units. The twenty-tick horizon and common lifecycle cues make generic
 sufficiency a credible explanation, already preserved in the accepted decision.
-Further current-host training would buy learning-variation information, at nontrivial
-complete cost, without an identified architectural/information change that presently
-makes it the best use of this slot. This is a relative investment recommendation
+Further current-host training would supply the first complete fresh/fresh package
+comparison as well as learning-variation information. No architectural/information
+change is necessary for that question to be useful. DM currently assigns
+insufficient marginal value to acquiring it relative to its necessary workload
+and unknown complete cost; the proposed caps are not inevitable bills. This is
+qualitative judgment under uncertainty, not measured futility or the only
+conclusion entailed by F. This is a relative research-value recommendation
 for the user-facing Portfolio report, not a measured cross-direction
 return-per-second ranking. Historical scalar H and B04 provide context at their own
 hosts; their signs are not pooled into a current-host training sample.
@@ -387,8 +393,9 @@ archive absent from main `f6763abc42a859cb9e89ad20194456210412fbbe`, although re
 on the accepted/published direction branch; BANK/support/old-input archives match main.
 DM explicitly accepts mechanical integration of the recheck's listed historical paths
 at `a726ffbfe4efb532a0ea84ea602071e5f5c09009`. Clerk owns that integration/retention
-consequence. After its concrete preservation handoff, DM can finish the exact assigned
-remote reclamation within the original technical scope. No deletion, remote rerun or
+consequence. This identified an integration gap, not loss of the published branch
+archive. DM can verify durable branch preservation directly before the exact
+assigned reclamation; a main-copy ACK is not a new permission gate. No deletion, remote rerun or
 new budget follows here, and this preservation issue does not hold overall planning.
 
 ## DM lifecycle decision — 2026-09-13 full direction delegation
@@ -431,13 +438,15 @@ its complete review, responds to specific findings, repairs concrete defects or
 limits the dependent claim, and owns the final direction decision. Scientific
 review is distinct from finance, lifecycle and scheduling approval.
 
-DM is preparing one bounded post-F scientific review through native child
-`/root/transport_folr` on the existing Convergence binding. It examines the new
-complete F evidence, conditional fixed-use interpretation and scientific merits/
-limits of the fresh-learning alternative, without deciding PARK or purchasing
-another experiment. Preparation is not a provider Send; an accepted handle will
-be recorded when real. The prior suggestion that this role was merely optional
-advice is withdrawn. No Monitor or new empirical invocation has been created.
+The bounded post-F scientific review through `/root/transport_folr` is now
+complete: one accepted Send, full response `36d9638a000b75c888e139a29006be000894e063`,
+and [DM response to every R1–R3 finding](pro_packets/20260913_post_f_scientific_review/INTAKE.md).
+It finds no result-invalidating defect; DM corrects competence/sufficiency shorthand,
+the distance-beyond-MEI sentence and the marginal-value rationale. The fresh/fresh
+alternative remains genuinely informative; P is still the DM's qualitative
+choice, not review approval or an empirically compelled stop. No provider producer,
+Monitor or new empirical invocation remains. The earlier optional-advice
+characterization is withdrawn; the independent scientific findings were handled.
 The report-route change and selected P were sent to Clerk as
 `folr-portfolio-report-route-v1`; the published decision follows as
 `folr-dm-park-decision-v1`, with no ACK requirement.
@@ -450,5 +459,8 @@ records 0.7560686 s of local command wall, not a full resource bill; it adds no
 scientific invocation. Main `469e85fe794e3b2aaff3a2acd65b22ade9493ed7` still lacked
 the accepted Generic raw archive at the subsequent read. Clerk owns the explicitly
 requested integration/retention fact; DM owns the already assigned exact reclamation.
-No remote data has been deleted at this boundary, and this technical dependency
-neither delays PARK nor restarts research.
+The earlier main-copy dependency is not a requirement for another approval:
+DM can verify the unique raw/input/support archives on the observed published
+direction branch and complete the scoped cleanup directly. No remote data had
+been deleted at the documented preflight. The later cleanup receipt will record
+actual removal; no research restart or frozen experiment extension follows.
