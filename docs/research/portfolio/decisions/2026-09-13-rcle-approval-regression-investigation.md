@@ -69,3 +69,17 @@ associated tests/skills changes with the renderer/consumer source where needed. 
 live .codex/hmasd-*.toml registries, current Portfolio snapshots, direction science or accepted
 packet bytes; resolve operational routes from main. The new four-file repair is included in that
 same current source revision. Clerk records actual propagation separately from Root publication.
+
+## Clerk propagation receipts
+
+- FOLR returned a concrete successful rollout: its registered session and authoring checkout each
+  synchronized the exact 25 control paths from the repaired main revision, with 25/25 blob matches
+  before/after, three local suites reporting 160 passed in each checkout, parsed TOML and
+  skill-frontmatter checks, and clean final trees. Live `hmasd-*.toml` registries, reports,
+  direction science and accepted packets were outside the sync scope. Session sync was
+  `27316d65315e7296a19368445b8e49b4384824f3`; authoring sync was
+  `98875c4b6211b1f53ad54e29ce7479b26716a12`.
+- ACVC's registered task accepted the Clerk sync message. MGTAP and RCLE initially returned
+  `no rollout found` for their registry thread IDs; FOLR initially did too and later supplied
+  the successful receipt above. Until a concrete receipt exists, message delivery is not counted
+  as synchronization.
