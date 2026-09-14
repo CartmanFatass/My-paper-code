@@ -40,9 +40,10 @@ one unscreened new C fit, master22319/eval32319, with 1,024 training episodes/2,
 and the same three private 64-world final panels, 311,296 team ticks. This tests fixed-F use
 at greater C training exposure; it guarantees neither a stronger policy nor a causal effect
 of duration. It is a new B/EXPLORE object, not a fourth unchanged 512-episode programme.
-The adapter and narrow shared workload-report correction are implemented; 26 focused synthetic
-checks passed and a new independent engineering Reviewer is inspecting the source before
-the single selected remote invocation. [Current intake](ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md)
+The adapter and narrow shared workload-report correction are technically accepted after 26
+focused synthetic checks and an independent Sol/high review with no material findings. Source
+`914a3d0e78d49d385c54aaec0776ead63712b624` is pushed and the exact remote checkout is prepared
+for the single selected invocation. [Current intake](ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md)
 records actual acceptance, launch, collection and scientific review as they occur.
 
 Earlier [PARK knowledge](PARK.md), [reentry judgment](ACVC_REENTRY_INTAKE_20260914.md)

@@ -1,0 +1,17 @@
+{
+  "object": "ACVC_CLUSTER_LONGER_C_B01",
+  "launch_sha": "914a3d0e78d49d385c54aaec0776ead63712b624",
+  "dm_parent_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "dm_native_name": "/root",
+  "execution_node": "hmasd-wsl-node",
+  "supervisor": "/usr/local/bin/agent-task",
+  "handle": "acvc-longer-c-b01-914a3d0e7",
+  "cwd": "/home/wu/hmasd-worktrees/acvc-longer-c-b01-914a3d0e7",
+  "output": "/home/wu/hmasd-worktrees/acvc-longer-c-b01-914a3d0e7/temp/directions/acvc/exp/cluster_longer_c_b01_20260914",
+  "monitor": "/root/acvc_longer_c_b01_monitor",
+  "monitor_record": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/cluster_longer_c_b01_20260914_monitor.json",
+  "state": "prepared_not_launched",
+  "planned_command": "/usr/local/bin/agent-task run acvc-longer-c-b01-914a3d0e7 env HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 bash /home/wu/hmasd-worktrees/acvc-longer-c-b01-914a3d0e7/experiments/candidates/acvc/cluster_longer_c_b01/launch.sh 914a3d0e78d49d385c54aaec0776ead63712b624 /home/wu/hmasd-worktrees/acvc-longer-c-b01-914a3d0e7/temp/directions/acvc/exp/cluster_longer_c_b01_20260914",
+  "scientific_invocations_accepted": 0,
+  "preparation": {"exact_remote_head_confirmed": true, "bash_syntax_passed": true, "launcher_sha256": "b9dc19a7655ba21d8979f237b08945f98577b2b0f5e444b6cc9c1cff91345149"}
+}
