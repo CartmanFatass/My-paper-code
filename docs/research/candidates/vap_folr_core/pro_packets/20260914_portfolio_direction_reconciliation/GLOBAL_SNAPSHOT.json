@@ -1,0 +1,19 @@
+{
+  "source_commit": "eaddc7c6190a032c9e4bcc0ab1cfb6aa2b6e358b",
+  "captured_utc": "2026-09-14T07:25:39.480109+00:00",
+  "target_slots": 3,
+  "occupied_directions": [
+    "metric_ground_transport_allocation",
+    "roster_consistent_latent_exploration"
+  ],
+  "reserved_for": "vap_folr_core owner-challenged disposition",
+  "reserved_slots": 1,
+  "free_slots": 0,
+  "stale_report_warning": "PORTFOLIO.md PARK rows and old vacancy snapshots are superseded by this registry plus latest peer intake below. pending_vacancy_count is a preserved transaction, not an additional available slot.",
+  "rcle_latest_intake_sha": "6f13c2b2fa713414e777190b7bcfbec11243b61a",
+  "portfolio_previous_request": "terminal/archive552f0dce; old DISH suggestion not applied",
+  "new_request_id": "2026-09-14-folr-portfolio-direction-reconciliation-01",
+  "binding_owner": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "next_report_owner": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618 after this request terminal/archive/release",
+  "rcle_full_report_sha": "08c012cb080204419b7ec63e844d87d09fd920f2"
+}
