@@ -10,13 +10,15 @@
   "output": "/home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914",
   "monitor": "/root/acvc_paired_exposure_b01_monitor",
   "monitor_record": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914_monitor.json",
-  "state": "prepared_not_launched",
-  "scientific_invocations_accepted": 0,
+  "state": "accepted_pending_monitor_adoption",
+  "scientific_invocations_accepted": 1,
   "planned_command": "/usr/local/bin/agent-task run acvc-paired-exposure-b01-8fd41b61f env HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 bash /home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/experiments/candidates/acvc/cluster_paired_exposure_b01/launch.sh 8fd41b61f3c8d3c70057492a18e619ef0faeda78 /home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914",
   "preparation": {
     "exact_remote_head_confirmed": true,
     "bash_syntax_passed": true,
     "launcher_sha256": "8c4bc58fd1dc7e1e608bf312411e34157d769e599fe2139a0ec5a28844a31854",
     "shell_startup_warnings": "Configured zsh emitted zle/monitor/gitstatus initialization warnings; fetch/worktree commands succeeded with exit0 and full SHA/launcher digest verified."
-  }
+  },
+  "supervisor_acceptance": "Original agent-task run returned exit0 and task started in tmux agent_acvc-paired-exposure-b01-8fd41b61f; no retry",
+  "monitor_metadata": "Preparation-only attempted App route incorrectly included prose prefix App and was rejected. Actual MONITOR_ADD supplies literal parent UUID and corrects routing; no native effect or duplicate observer/launch."
 }
