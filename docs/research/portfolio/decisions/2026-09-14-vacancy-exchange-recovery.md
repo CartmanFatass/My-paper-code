@@ -14,7 +14,7 @@ provider's complete answers. No new Portfolio request or Send was made.
 |---|---|---|---|---:|---:|---|
 | ACVC | DISH released slot | `6aa76925-4558-83e8-86e2-40c5e0a2c320` | https://chatgpt.com/c/6aa76925-4558-83e8-86e2-40c5e0a2c320 | 573 | 9756 | `docs/research/candidates/acvc/pro_packets/20260914_portfolio_vacancy_selection_recovery/archive/` |
 | RCLE | UCOPE released slot | `6aa76e5a-e590-83e8-b27b-596c8b8cbe1c` | https://chatgpt.com/c/6aa76e5a-e590-83e8-b27b-596c8b8cbe1c | 625 | 10627 | `docs/research/candidates/roster_consistent_latent_exploration/reentry_20260914/portfolio/` |
-| FOLR | ACVC released slot | `6aa77158-7194-83e8-8f8a-caf16ae6b84b` | https://chatgpt.com/c/6aa77158-7194-83e8-8f8a-caf16ae6b84b | 629 | 8370 | not present; provider page is canonical |
+| FOLR | ACVC released slot | `6aa77158-7194-83e8-8f8a-caf16ae6b84b` | https://chatgpt.com/c/6aa77158-7194-83e8-8f8a-caf16ae6b84b | 629 | 8370 | `docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_reentry/` |
 
 ## Exact request text recovered
 
@@ -34,12 +34,10 @@ The copied user requests are short and are preserved here verbatim.
 
 ## Complete-answer delivery status
 
-The ACVC and RCLE complete answers are now archived byte-for-byte under their
-paths above. RCLE's archive also contains the DM's as-sent factual reply and
+The ACVC, RCLE and FOLR complete exchanges are now archived under their paths
+above. RCLE and FOLR archives also contain the DM's as-sent factual reply and
 Portfolio's complete acknowledgment, with hashes and provider message identities.
-FOLR's current DM received the same one-time technical closeout instruction; its
-provider page remains canonical until that DM-owned archive is published. The
-three local decision notes remain summaries, not substitutes for the complete answers.
+The three local decision notes remain summaries, not substitutes for the complete answers.
 
 ## Direct alignment fact update
 
