@@ -1,0 +1,33 @@
+{
+  "object": "FOLR_ENTITY_HISTORY_B02_781401",
+  "source_sha": "82b12d7e0f205ea228ca69e28e581ca6ee5f2ca6",
+  "node": "wsl_4070",
+  "ssh_target": "hmasd-wsl-node",
+  "host": "LAPTOP-U9TDKC8A",
+  "cwd": "/home/wu/hmasd-worktrees/folr-entity-history-b02-781401-82b12d7e0",
+  "python": "/home/wu/.venvs/hmasd/bin/python",
+  "supervisor": "/usr/local/bin/agent-task",
+  "dm_task": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "monitor": "/root/folr_b02_monitor",
+  "order": "GENERIC_RETAIN terminal technical collection, then BANK regardless of Generic score or completeness",
+  "new_result_invocations_accepted": 0,
+  "arms": {
+    "GENERIC_RETAIN": {
+      "state": "selected_not_launched",
+      "planned_handle": "folr-b02-generic-781401-82b12d7e0",
+      "command_file": "GENERIC.sh",
+      "output": "/home/wu/hmasd-worktrees/folr-entity-history-b02-781401-82b12d7e0/experiments/results/folr_entity_history_b02_781401/GENERIC_RETAIN"
+    },
+    "BANK": {
+      "state": "selected_not_launched",
+      "planned_handle": "folr-b02-bank-781401-82b12d7e0",
+      "command_file": "BANK.sh",
+      "output": "/home/wu/hmasd-worktrees/folr-entity-history-b02-781401-82b12d7e0/experiments/results/folr_entity_history_b02_781401/BANK",
+      "generic_summary": "/home/wu/hmasd-worktrees/folr-entity-history-b02-781401-82b12d7e0/experiments/results/folr_entity_history_b02_781401/GENERIC_RETAIN/summary.json"
+    }
+  },
+  "preparation": "Verify exact committed checkout and absence of the named supervisor handle/output; create empty arm output before time -o; invoke committed arm command through agent-task. Reconcile any uncertain acceptance on that same handle before another action.",
+  "admission": "Fresh admit-memory inside each timed arm, immediately before construction; physical/effective floor4 GiB.",
+  "observation": "Monitor exact accepted handle, interval180s with bounded waits/commands; no stopping or retries. Retain observation through terminal delivery and DM collection.",
+  "stopping": "One attempt per selected arm; fixed5000 train/4969 update/128 final exposure. Real timeout/failure retained. No automatic second block or scientific retry."
+}
