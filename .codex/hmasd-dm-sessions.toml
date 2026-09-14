@@ -99,13 +99,13 @@ authoring_checkout = "C:/Projects/HMASD-worktrees/codex-vap-folr"
 authoring_branch = "codex/vap-folr"
 
 [directions.degraded_incumbent_shadow_handover]
-state = "management_in_progress"
-occupies_slot = true
+state = "scientific_park_archived"
+occupies_slot = false
 owner_mode = "independent_task"
 accepted_event = "dish-lifecycle-b09-selection-20260914-01"
 accepted_turn = "01a09d7d-fd3a-7be0-b681-dce0185ec2b3"
-last_processed_event = "dish-b09-result-intake-20260914-01"
-next_action = "DM completes scoped B09 result review and lifecycle decision; retain producer/authoring checkout until review closeout"
+last_processed_event = "dish-post-b09-park-closeout-20260914-01"
+next_action = "PARK preserved; no vacancy replacement under owner three-direction concurrency limit"
 thread_id = "01a09d7d-fd3a-7be0-b681-dce0185ec2b3"
 host_id = "local"
 authoring_checkout = "C:/Projects/HMASD-worktrees/dm-dish-b06-scientific-intake-20260907"
