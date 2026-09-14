@@ -1,0 +1,127 @@
+{
+  "commit": "d2227e4bd2af5fe18403f14be74a322ce21e6f4f",
+  "matches": 16,
+  "requested_count": 20,
+  "rows": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/BANK.sh",
+      "accepted_blob": "42c448762bcf45e26cf9aec8fa965b14ed2d24a9",
+      "main_blob": "42c448762bcf45e26cf9aec8fa965b14ed2d24a9",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/BANK_ADMISSION.json",
+      "accepted_blob": "24e3c4d5ab67dfa822cec72579ed193275d6ab0f",
+      "main_blob": "24e3c4d5ab67dfa822cec72579ed193275d6ab0f",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/BANK_LAUNCH.json",
+      "accepted_blob": "726432a421a87a6b5a1a53c81d98f89d729595ca",
+      "main_blob": "726432a421a87a6b5a1a53c81d98f89d729595ca",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/BANK_LAUNCH_PLAN.json",
+      "accepted_blob": "b95839a3d90b7bffafd8ddbdb61e64e9ad4ada8b",
+      "main_blob": "b95839a3d90b7bffafd8ddbdb61e64e9ad4ada8b",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/CHECK_RESULTS.json",
+      "accepted_blob": "3582836e0b77345228e2566b30f6edec1bfbffab",
+      "main_blob": "3582836e0b77345228e2566b30f6edec1bfbffab",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/EXPOSURE.json",
+      "accepted_blob": "0a6088e34e0b8e770aec28cf987997a38801c08a",
+      "main_blob": "0a6088e34e0b8e770aec28cf987997a38801c08a",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC.sh",
+      "accepted_blob": "46a216e987648386e030d46b12c1fd6c39e341f1",
+      "main_blob": "46a216e987648386e030d46b12c1fd6c39e341f1",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_ACCEPTANCE_FACTS.json",
+      "accepted_blob": "c6ec279a60e1686ac72adf7537e101888350a812",
+      "main_blob": "c6ec279a60e1686ac72adf7537e101888350a812",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_COLLECTION.json",
+      "accepted_blob": "d9d2aea42ac126abad2e9e40204819dae1427d67",
+      "main_blob": "d9d2aea42ac126abad2e9e40204819dae1427d67",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_INVOCATION_TIME.json",
+      "accepted_blob": "0f32c56a3cf852efcff8b23e049e119909115665",
+      "main_blob": "0f32c56a3cf852efcff8b23e049e119909115665",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_RAW.tar.gz",
+      "accepted_blob": "555fa6bcc1eafecd08c8dd3add35cd4d19d237ad",
+      "main_blob": "555fa6bcc1eafecd08c8dd3add35cd4d19d237ad",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_SUPERVISOR.txt",
+      "accepted_blob": "19967b217c6d223236ef9ec716a8574f8eca70b8",
+      "main_blob": "19967b217c6d223236ef9ec716a8574f8eca70b8",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_summary.json",
+      "accepted_blob": "50e9e7e51d1dc302aeecbccda4d153b5e68baa71",
+      "main_blob": "50e9e7e51d1dc302aeecbccda4d153b5e68baa71",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/INDEPENDENT_REVIEW.md",
+      "accepted_blob": "4b4810a8a4349eb1aa305978480f32122008916c",
+      "main_blob": "4b4810a8a4349eb1aa305978480f32122008916c",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/OWNER_PACKET.json",
+      "accepted_blob": "fc5cb92cbe907a6b96c6ca4ad9da88cebcee1897",
+      "main_blob": "fc5cb92cbe907a6b96c6ca4ad9da88cebcee1897",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/SOURCE_SCOPE.json",
+      "accepted_blob": "6c436f2cfb8ee28c67c7fe6f8ec42f778be9ad44",
+      "main_blob": "6c436f2cfb8ee28c67c7fe6f8ec42f778be9ad44",
+      "match": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260913_folr_retained_reference_investment/archive/RESPONSE.md",
+      "accepted_blob": "039b390a3e0c97e1a5718f05db5478ef2d3441a6",
+      "main_blob": null,
+      "match": false
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_history_b01/retained_use.py",
+      "accepted_blob": "52513aada55a9b7990aa318883a709056498b513",
+      "main_blob": null,
+      "match": false
+    },
+    {
+      "path": "scripts/run_folr_entity_history_b01.py",
+      "accepted_blob": "7f8a4d40de48476c5a32581c4cbaf1bb30d5c727",
+      "main_blob": "a6786de0bc4025c6863270503ebd0f98adccdced",
+      "match": false
+    },
+    {
+      "path": "tests/experiments/candidates/vap_folr_core/entity_history_b01/test_retained_use.py",
+      "accepted_blob": "c9c92ec91dba71d8e468404b0c9972da8e738ce3",
+      "main_blob": null,
+      "match": false
+    }
+  ]
+}
