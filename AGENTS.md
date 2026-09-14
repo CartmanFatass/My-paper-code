@@ -12,6 +12,15 @@ Directory conventions live beside the code in one `AGENTS.md` per area (`experim
 `ha_ctse_process/`, `envs/`, `tests/`, `scripts/`, `docs/`), each imported by a one-line `CLAUDE.md`;
 `docs/project/PROJECT_MAP.md` indexes them. Nearest file wins on a conflict.
 
+## DM skill entry
+
+Use .agents/skills/hmasd-direction-management/SKILL.md when taking over/resuming a direction,
+selecting research work, interpreting a result/review, making a lifecycle decision or handling
+an operational obstacle that could derail the direction. Native and independent DMs share its
+references/role.md; load full duties at initial assignment/control change or actual role drift.
+Apply relevant scientific knowledge to the judgment, reusing current reads; no per-tool reading
+ritual or permission gate. Independent task creation/resume must explicitly supply this entry.
+
 ## 1. Operating model
 
 OWNER_DIRECT 2026-09-14: DM may directly implement or delegate a complete bounded implementation

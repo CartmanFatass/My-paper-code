@@ -13,8 +13,8 @@ resuming experiments. Questions/workflow edits alone do not pause research.
 ## Independent DM role mapping
 
 A new App task does not automatically inherit .codex/agents/hmasd-direction-manager.toml or a
-native parent's developer instructions. Every independent DM must explicitly read and apply that
-complete role body plus current AGENTS, PEER_DM_COORDINATION and its current direction intake.
+native parent's developer instructions. Every independent DM must explicitly use hmasd-direction-management/SKILL.md and its
+references/role.md complete duties plus current AGENTS, PEER_DM_COORDINATION and its direction intake.
 A task title/model or brief ticket is not role equivalence. Supply actual authoring checkout,
 full-lifecycle objective, live service routes and current owner overrides in the initial task or
 an explicit continuation. Do not replace the existing DM or discard its scientific history merely

@@ -9,6 +9,9 @@ Owner approved adoption batches 1 and 2 on 2026-09-05. Use tools to retrieve,
 calculate and measure facts instead of repeatedly deriving them in prose. Select
 only the mode needed now; this is not a launch checklist or new review layer.
 
+DM role/lifecycle entry is hmasd-direction-management. At scientific decisions this skill supplies
+the focused knowledge method; it does not replace direction ownership or justify a stopping label.
+
 - **Scientific reading:** for DM/Claude hub mechanism/card/comparator/estimand choices,
   intake or scientific Pro questions, user-requested Portfolio analysis and DM responses to independent Pro scientific review, and a
   critic's reviewed claim, use [scientific-reading.md](references/scientific-reading.md).
