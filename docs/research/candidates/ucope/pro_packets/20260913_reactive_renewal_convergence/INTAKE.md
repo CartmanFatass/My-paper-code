@@ -24,6 +24,14 @@ The complete GitHub blob is39910 bytes; Windows working-copy CRLF adds186 bytes.
 
 These are real implementation requirements, not a request for reviewer funding or another scientific approval. Independent code review remains required for the changed state/RNG/credit implementation; DM will resolve its findings and accept the code. Pro did not inspect R source, run tests or certify a learner.
 
+### Implementation and focused self-check
+
+DM implemented the card in the three new reactive-renewal module files, its runner and mirrored tests; prior scientific sources are unchanged. The recorded conditional branch law separates eligible KEEP/END from forced renewal, retains every primitive row in credit normalization and uses current-return credit. This applies the history/termination reading without claiming a classical option-gradient theorem for recurrent PPO.
+
+The focused synthetic suite passed **5 tests in5.77 seconds** using the configured Windows scientific interpreter, `-m pytest -q -p no:cacheprovider --basetemp temp/directions/ucope/test/reactive-b01-20260913-a tests/experiments/candidates/ucope/reactive_renewal_b01/`. Coverage includes per-owner transition/draw rules, copied commands, multidimensional likelihood/gradients, replay identity, KEEP/final-current-reward credit, final R/F/G/H publication and an incomplete failure. The complete fixture used192 synthetic team steps and24 Adam calls; these are engineering fixtures, not native UAV scientific evidence. A draft multidimensional branch-index expression was corrected before this suite.
+
+Cleanup of this invocation's verified absolute scratch directory was rejected by automatic approval review, including a literal `Remove-Item -LiteralPath ... -Recurse -Force` command; the only stated reason was `blocked by policy`. The creating DM retains cleanup ownership for `C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906/temp/directions/ucope/test/reactive-b01-20260913-a` at the next permitted boundary. No other scratch/evidence was removed. Independent code review and DM technical acceptance remain pending; no result invocation has begun.
+
 ## Why proceed, and why the decision remains close
 
 The concrete new opportunity is to use free feedback after a movement before choosing whether its command persists. Earlier T/L selected duration before that feedback; their adverse results therefore do not directly test R. A fresh R/F/G comparison at the established continuous opportunity can change whether reactive persistence deserves further development relative to both attained alternatives. This is a reason for one measurement, not a prediction theorem.
