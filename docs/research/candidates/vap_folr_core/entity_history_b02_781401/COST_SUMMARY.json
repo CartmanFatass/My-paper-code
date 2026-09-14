@@ -35,7 +35,7 @@
   },
   "selected_measured_support_lower_bound_seconds": 29.02232549999968,
   "support_limitations": "Selected non-overlapping command windows only, mixing native test time and local control/collection waits. Excludes initial CRLF failure, earlier 90/60/55 s local SSH timeout windows and unmeasured remote lazy-fetch wait, other Git/reading/authoring/review/monitor/receipt/intake/unmeasured preservation/cleanup work. Not complete support cost, CPU work or proof of full planning compliance.",
-  "provider_work": "Portfolio factual acknowledgment worked51s; original selection/synchronization were existing answers. Provider usage/billing and complete model-task cost UNKNOWN. Post-B02 scientific review and final closeout remain pending.",
+  "provider_work": "Portfolio factual acknowledgment worked 51 s; original selection/synchronization were existing answers. One post-B02 independent scientific review Send completed and its full 20351-byte response was read and preserved. Provider work duration/usage/billing and complete model-task cost remain UNKNOWN.",
   "valid_complete_learning_comparisons": 1,
   "native_seconds_per_valid_learning_comparison": 3041.46,
   "fresh_fits": 2,
@@ -63,5 +63,16 @@
     "provider_observation_planning_seconds": 5400,
     "authority": "Prospective finite DM administrative closeout under AGENTS section 2; these are planning allowances, not owner caps or expiry of an accepted request. If observation is unresolved, reconcile the same request and record actual deviation before selecting needed recovery.",
     "accountability": "Old card plans and unknown full cumulative/support/provider cost remain. No original total-plan compliance claim, accounting reset, extra training or changed endpoint."
+  },
+  "review_and_closeout": {
+    "status": "complete",
+    "scientific_review_sends": 1,
+    "response_commit": "b4a67c7bf7b0eec726f107bf7acdf148f7e60109",
+    "review_intake_new_empirical_invocations": 0,
+    "remote_cleanup_complete": true,
+    "exact_agentify_tab_cleanup_complete": true,
+    "lifecycle": "PARK/MEDIUM",
+    "owner_flag": "close-call",
+    "complete_cost": "UNKNOWN; published lower bound is not a full total and does not include all later closeout work."
   }
 }

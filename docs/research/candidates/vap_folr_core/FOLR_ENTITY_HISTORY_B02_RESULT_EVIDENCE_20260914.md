@@ -128,3 +128,21 @@ Only the B02 detached execution checkout and its two supervisor directories were
 removed; the worktree is unregistered. Full learner checkpoints remain published.
 This measured preservation/cleanup window adds 3.327356 s, bringing the selected
 measured support lower bound to 29.0223255 s; full cost remains UNKNOWN.
+
+
+## Post-result scientific review and disposition
+
+The complete independent review at b4a67c7bf7b0eec726f107bf7acdf148f7e60109 found
+no material design, primary or rule defect. DM read the entire answer and accepted
+all three findings in the [review intake](pro_packets/20260914_entity_history_b02_review/INTAKE.md).
+No numerical result, frozen rule, source or historical exposure was changed.
+
+For precision, negative returns are not collision counts/failure probabilities;
+no absolute competence cutoff is defined. Lack of demonstrated competence does
+not prove incompetence. The plotted training curves are changing-policy training
+returns, not repeated greedy evaluations or forecasts of further improvement.
+The final [DM lifecycle decision](FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md#final-dm-lifecycle-decision--2026-09-14)
+is reversible PARK/MEDIUM, marked close-call. Another fresh block remains a
+legitimate action-changing possibility. The reviewer did not choose the lifecycle.
+The [Chinese owner brief](../../portfolio/owner/briefs/vap_folr_core/2026-09-14_FOLR_ENTITY_HISTORY_B02_781401.md)
+records the valid result and the final boundary.

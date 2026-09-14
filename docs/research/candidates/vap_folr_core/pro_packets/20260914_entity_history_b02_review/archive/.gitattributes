@@ -1,0 +1,8 @@
+RESPONSE.md text eol=lf
+PROMPT_BODY.md -text
+CHAT_RECEIPT.md -text
+TRANSPORT_FACTS.json -text whitespace=cr-at-eol
+PREFLIGHT.json -text
+ISSUE_COMMENT.json -text
+TAB_CLEANUP.json -text whitespace=cr-at-eol
+TAB_CLEANUP_INITIAL.json -text whitespace=cr-at-eol
