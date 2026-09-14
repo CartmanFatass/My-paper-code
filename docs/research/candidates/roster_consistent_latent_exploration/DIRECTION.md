@@ -19,7 +19,7 @@ This authority preserves the direction's source-grounded scientific question, ev
 - Stable direction ID: `roster_consistent_latent_exploration`
 - This DM owns direction-local innovation, bounded experiments, implementation and reports. Portfolio decides direction-level CONTINUE/RECAST/PARK/CLOSE/reopening from the full report and global context; ordinary experiments need no per-experiment approval. No unilateral slot release or other-direction resource change follows a DM recommendation.
 
-## Current position — 2026-09-14: Portfolio CONTINUE applied / B13 complete
+## Current position — 2026-09-14: B13 full review answered / next Portfolio interpretation pending
 
 The complete [Portfolio decision and DM response](pro_packets/20260914_e01_portfolio_direction/INTAKE.md)
 select CONTINUE in the existing joint-quota-phase family and the prepared B13 learned-prior
@@ -31,9 +31,15 @@ native wall, exit0. The [complete B13 result and intake](RCLE_B13_LEARNED_PRIOR_
 retain sampled learning (+0.072437), nearest benefit (+0.154964), greedy deficit (-0.019784),
 learned prior strength 1.211991 and all recovery tradeoffs. Every measured modal/greedy
 outcome ties on 512 new held-out scenarios, without a policy/population equivalence claim.
-DM has accepted the complete collected bytes and selected independent result review and
-full response as the next work. No automatic second fit, PARK/CLOSE or slot release.
-Later MGTAP context is preserved and does not create a slot/resource conflict.
+The complete independent review at d45d4bc6ea2012b93d1d044402268520be5eea9a found no
+demonstrated defect invalidating the bounded comparison. DM read all291 lines and responded
+substantively in the B13 intake. The new freedom is now tested; no eta causal success or
+family-wide failure follows. DM is preparing the [next full direction report](pro_packets/20260914_post_b13_portfolio_direction/REPORT.md),
+recommending reversible PARK with one same-law fresh instance as the strongest alternative.
+This is a pending direction recommendation, not an applied disposition. Existing CONTINUE
+and the occupied slot remain; MGTAP owns the preceding serial Portfolio request. No automatic
+second fit, PARK/CLOSE or slot release. The complete response and global context govern the
+next consequence, without a per-experiment approval or Root ratification.
 
 ### Evidence and recommendation leading to this decision
 

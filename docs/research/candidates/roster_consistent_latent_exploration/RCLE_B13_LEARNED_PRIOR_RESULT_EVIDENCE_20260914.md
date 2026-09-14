@@ -1,7 +1,8 @@
 # B13 learned prior strength — actual result evidence
 
-Status: one complete native B/EXPLORE result, technically collected and checked; independent
-scientific result review pending. Portfolio CONTINUE was read/applied before this invocation.
+Status: one complete native B/EXPLORE result, technically collected and checked; complete
+independent scientific review read and answered in the matching intake, with no demonstrated
+invalidating defect. Portfolio CONTINUE was read/applied before this invocation.
 No new direction disposition or automatic follow-on fit is implied by the observed signs.
 
 ## Exact execution and retained evidence
