@@ -1,0 +1,79 @@
+{
+  "recorded_at": "2026-09-14T11:27:28.135514+00:00",
+  "purpose": "PARK knowledge and existing-byte preservation, no scientific execution or recomputation",
+  "source_checkout": "C:\\Projects\\HMASD-worktrees\\dm-rcle-a02-20260906",
+  "historical_park_source_commit": "6e1047e603907acbaefd2fd7fe29c56edfcac99b",
+  "historical_park_sha256": "962903865b0b332bf5961c61d1ec5c7975f5bada8c369fcfcf8eec64d76e24c0",
+  "archives": [
+    {
+      "original_local_path": "temp/directions/roster_consistent_latent_exploration/exp/b08-collected-012a/source.bundle",
+      "bytes": 32015,
+      "sha256": "55acc8f03cba87a3aba6b5b9eaee85b785c632edf511e5917d5960385866a052",
+      "retention": "Original local source bundle preserved; include in verified authoring-checkout recovery before eventual removal. This change does not remove the checkout."
+    },
+    {
+      "original_local_path": "temp/directions/roster_consistent_latent_exploration/exp/b09-collected-38a29/b09-evidence.tgz",
+      "bytes": 204105,
+      "sha256": "6cec5dda3404b33ef88b406f1ac47d63c6cfedfa309fd4bf417fd2b224d5a674",
+      "published_copy_in_this_change": "docs/research/candidates/roster_consistent_latent_exploration/park_post_b13_20260914/native_archives/b09-evidence.tgz"
+    },
+    {
+      "original_local_path": "temp/directions/roster_consistent_latent_exploration/exp/b09-collected-38a29/b09-source.bundle",
+      "bytes": 24567,
+      "sha256": "d497b6c0085e5116918df933f0c36863a32e77fd0b1476b6e4f749c24599d01e",
+      "retention": "Original local source bundle preserved; include in verified authoring-checkout recovery before eventual removal. This change does not remove the checkout."
+    },
+    {
+      "original_local_path": "temp/directions/roster_consistent_latent_exploration/exp/b10-collected-e5fd4/rcle-b10-e5fd43973-evidence.tgz",
+      "bytes": 297865,
+      "sha256": "b87737bf2bb42f3f2c7df497bdb04030602c51be2ad7c7aa891d74b3c4a14133",
+      "published_copy_in_this_change": "docs/research/candidates/roster_consistent_latent_exploration/park_post_b13_20260914/native_archives/rcle-b10-e5fd43973-evidence.tgz"
+    },
+    {
+      "original_local_path": "temp/directions/roster_consistent_latent_exploration/exp/b10-collected-e5fd4/rcle-b10-e5fd43973-source.bundle",
+      "bytes": 24822,
+      "sha256": "a461bd83347908a1e85a70b4374d9897fb82677f35db9230ea86aa8a5c7f9582",
+      "retention": "Original local source bundle preserved; include in verified authoring-checkout recovery before eventual removal. This change does not remove the checkout."
+    },
+    {
+      "original_local_path": "temp/directions/roster_consistent_latent_exploration/exp/b11-collected-e863914e2/rcle-b11-e863914e2-partial-evidence.tgz",
+      "bytes": 98831,
+      "sha256": "45c8bb473d11bdba6a0590b5409ef538b5d6611be3dc7f349d656fbe90495cda",
+      "published_copy_in_this_change": "docs/research/candidates/roster_consistent_latent_exploration/park_post_b13_20260914/native_archives/rcle-b11-e863914e2-partial-evidence.tgz"
+    },
+    {
+      "original_local_path": "temp/directions/roster_consistent_latent_exploration/exp/b11-d1-collected-c7eb5986f/rcle-b11-d1-c7eb5986f-evidence.tgz",
+      "bytes": 53487,
+      "sha256": "636f21758ba6e8ac0847220886f52c2fd771943836ff46e323bb4df225d035f5",
+      "published_copy_in_this_change": "docs/research/candidates/roster_consistent_latent_exploration/park_post_b13_20260914/native_archives/rcle-b11-d1-c7eb5986f-evidence.tgz"
+    },
+    {
+      "original_local_path": "temp/directions/roster_consistent_latent_exploration/exp/b12-collected-15eaa7ea6/rcle-b12-15eaa7ea6-evidence.tgz",
+      "bytes": 301860,
+      "sha256": "92c1e4a3f60cbd7a6541af4be73122d7add8e3559609f76ac481f453b16e4dfa",
+      "published_copy_in_this_change": "docs/research/candidates/roster_consistent_latent_exploration/park_post_b13_20260914/native_archives/rcle-b12-15eaa7ea6-evidence.tgz"
+    },
+    {
+      "original_local_path": "temp/directions/roster_consistent_latent_exploration/exp/b13-collected-cf4d9bd93/rcle-b13-cf4d9bd93-evidence.tgz",
+      "bytes": 320580,
+      "sha256": "efea49fc263d0f5eae74b806e280bcb5d07cfb0b3f2f6692e5ab1a2b2ea2a020",
+      "existing_published_copy": "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/NATIVE_EVIDENCE.tgz"
+    },
+    {
+      "original_local_path": "temp/directions/roster_consistent_latent_exploration/exp/modal-e01-collected-5c3ab7b07/rcle-modal-e01-5c3ab7b07-evidence.tgz",
+      "bytes": 77332,
+      "sha256": "72163a49bae7be5791b4ac6e1e687edcd707585762c3fa7d8a24cc804b40037f",
+      "published_copy_in_this_change": "docs/research/candidates/roster_consistent_latent_exploration/park_post_b13_20260914/native_archives/rcle-modal-e01-5c3ab7b07-evidence.tgz"
+    },
+    {
+      "original_local_path": "temp/directions/roster_consistent_latent_exploration/exp/reentry-remote-closeout-20260914/rcle-reentry-20260914-remote-closeout.tgz",
+      "bytes": 557612,
+      "sha256": "7ac0c65c69f433a3f5baa27ea1332a1f91266fed4fd0eea24b8b4287a8554569",
+      "published_copy_in_this_change": "docs/research/candidates/roster_consistent_latent_exploration/park_post_b13_20260914/native_archives/rcle-reentry-20260914-remote-closeout.tgz"
+    }
+  ],
+  "all_native_evidence_copies_byte_equal": true,
+  "source_bundles_are_not_assumed_self_contained": true,
+  "authoring_checkout_cleanup": "RCLE DM owns eventual retirement after live vacancy authoring/handover completes, with fresh unique-commit/dirty/ignored-file preservation and PR/ref reconciliation; no current removal",
+  "native_monitor_state": "All existing native monitor/reviewer children completed; B13 remote execution cleanup already recorded. No new observer or replay."
+}

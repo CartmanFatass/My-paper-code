@@ -5,16 +5,16 @@
 中央 Clerk 已退休，DM 平等协调，Root 是用户入口。以下是已发布证据和当前登记的摘要，
 实时席位、实际 producer 与同会话请求顺序以 [共享登记表](../../../.codex/hmasd-dm-sessions.toml) 为准。
 
-## 当前三席
+## 当前方向与空缺
 
 | 方向 | 已知科学位置 | 当前工作与席位 |
 | --- | --- | --- |
-| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B13 实际学习 G_U=+0.072437，nearest 收益+0.154964，greedy 对比-0.019784；先验强度学到1.211991，modal 与 greedy 全512行测量相同，恢复取舍和 B11 缺失保留。 | 占用1席，前次完整 Portfolio CONTINUE 已实际执行为 B13：1,024更新/4,358,144ticks，完整命令163.92s、exit0。291行完整独立审阅已读并实质回应，未发现已证实的失效缺陷。[当前方向报告](../candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md)建议可逆 PARK，并将一个同法则新独立实例列为接近的反方案；仅为建议，未PARK/CLOSE/释放席位。MGTAP完整决定/应用后已实际释放会话；RCLE完整全局背景与固定全文已派发给现有Transport，实际完整输入已由Transport核对，一次请求已接受并生成中，等待完整裁决。 |
+| [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B13真实学习与nearest收益保留，sampled对greedy−0.019784；modal512行已测结局相同、恢复利益/损害和B11缺失保留。完整151行Portfolio判断接受新独立实例仍有价值，当前选择可逆PARK。 | 已应用PARK并释放1席；不CLOSE/RECAST，不新增fit。[完整裁决与回应](../candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/INTAKE.md)、[PARK知识与原始资产](../candidates/roster_consistent_latent_exploration/PARK.md)已保全。原DM负责本次单一真实空缺接续及最后checkout保全/清理，无RCLE科学producer。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 对称有限选率双方均选1e-4；全新8252主量+0.023704897713093642 J，COND_ABOVE_MEI。一次选择/一对最终训练，历史混合符号和DENSE默认保持；不声称稳定排序或调参收益。 | 占用1席。8拟合/589824ticks/4096Adam已完成，658.02s、exit0。完整166行结果审查和139行Portfolio裁决已读；[全文与DM回应](../candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md)已应用CONTINUE，下一目标为固定1e-4新配对，尚无新卡/seed/native启动。完整归档18522字节及原错误回执保留；实际提问仅标题，模型自行找到固定报告/材料清单。当前会话已释放给下一作者RCLE；三席不变。 |
 | [FOLR](../candidates/vap_folr_core/DIRECTION.md) | B03完整比较Generic4.92594、BANK-1.71078，差值-6.63672；B02差值-4.83086单独保留。两次完整学习与评估实例均偏向Generic，不声称稳定排名或实体历史普遍无用。 | 占用1席，CONTINUE / MEDIUM。两臂均完成5000训练/4969更新/128最终评估，3779.85s完整调用合计；原始证据已保全，终态远端执行副本已清理，无活动native实验。[科研解释与后继方案](../candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md)已写成固定独立审查任务并派发到现有Transport，实际provider接受/完整答复尚待核实；未选择新拟合或PARK。 |
 
-上述席位为3占用+0预留，总计3。FOLR 与 RCLE 的完整 CONTINUE 均已应用；RCLE 的 B13 已实际运行完成。方向裁决和实际执行分别记录。
-停止第四个方向限制扩容，不停止三席中的研究和接续。旧报告的 UCOPE/LCAC/ACVC 工作集和
+实际为2占用+0预留，存在1个由RCLE可逆PARK产生的真实空缺；目标仍为3。原RCLE DM已登记负责一次Portfolio补位选择，尚未选择或创建替代方向。前次CONTINUE已真实执行为B13，本次PARK发生在新结果、完整独立审阅和完整Portfolio裁决之后。
+停止第四个方向限制扩容，不停止现有研究或真实空缺的合规补位。旧报告的 UCOPE/LCAC/ACVC 工作集和
 RCLE/MGTAP/FOLR 归档表已经过期，不能用来判断现在是否“开始后直接结束”。
 
 RCLE B13 完整审查固定于d45d4bc6ea2012b93d1d044402268520be5eea9a，DM 实质回应和后续方向取舍报告见
@@ -22,10 +22,11 @@ afb647d0ddf7522ad0e0e99162a54403ede21c43；此前 E01 审查、前次 CONTINUE �
 3594eafe28ed91b2558fcc064e46ea714edd2e1c；FOLR 的完整裁决、修正及实际应用见
 4776103de4f55beaee610c52506112651bfaed04。这里引用已有 DM 结论，不新增跨方向的数值排序。
 
-## 已归档方向的知识入口
+## PARK及已归档方向的知识入口
 
 | 方向 | 保留知识与当前限制 |
 | --- | --- |
+| [RCLE](../candidates/roster_consistent_latent_exploration/PARK.md) | 新Portfolio可逆PARK已应用，B10/B12固定先验、B11缺失、E01旧面板、B13新法则分开保留；完整原始归档、恢复向量和新实例复开反方案保全。原DM仍执行已登记的空缺交接，不占科研席位。 |
 | [DISH](../candidates/degraded_incumbent_shadow_handover/PARK.md) | 保留 B09 −35.25、REPLACE 与 BYPASS 边界；旧 Portfolio 补位建议未应用；新裁决已选择继续 FOLR，当前没有空槽。 |
 | [UCOPE](../candidates/ucope/PARK.md) | 保留 reactive renewal 的结果、反证和重新研究条件；当前未占用席位。 |
 | [LCAC](../candidates/learned_counterfactual_agent_credit/PARK.md) | 保留 B03 负结果及基线/学习证据；当前未占用席位。 |
@@ -38,7 +39,7 @@ Portfolio 的新决定前瞻应用，不擅自重写结果或批量重启旧方�
 
 FOLR 请求2026-09-14-folr-portfolio-direction-reconciliation-01已完成并应用 CONTINUE；
 完整答复保全于4776103de4f55beaee610c52506112651bfaed04。RCLE 请求
-2026-09-14-rcle-e01-direction-decision-01完整答复已按一次 Send 归档，20,895字节/SHA256 7c7476fca152aec673c7ff0974ae182c0ef30c091e230a4ba7039ac71f06a416；CONTINUE 于5f4abd6f应用，B13随后实际完成，完整证据见c58ec2fb4。此前 RCLE 请求已结清并释放会话供后继 MGTAP 请求；当前归属以共享登记表为准，没有新空缺。
+2026-09-14-rcle-e01-direction-decision-01完整答复已按一次 Send 归档，20,895字节/SHA256 7c7476fca152aec673c7ff0974ae182c0ef30c091e230a4ba7039ac71f06a416；CONTINUE 于5f4abd6f应用，B13随后实际完成，完整证据见c58ec2fb4。此前 RCLE CONTINUE 请求已结清并执行为B13；后续完整方向裁决现已可逆PARK并形成一个真实空缺，当前会话由RCLE负责新补位请求。
 旧6aa7836e会话答复已由552f0dce7904e35206b8e32f9180ab85aee822ad保全，其 DISH 建议未应用。
 新的 Portfolio 决定须基于实际读取的固定权限、全局上下文、完整结果/反证/审查和 DM 回应。
 

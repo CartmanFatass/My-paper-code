@@ -1,107 +1,53 @@
-# RCLE — PARK 知识交接
+# RCLE — B13 后可逆 PARK 与知识保全
 
-> 2026-09-14 当前裁决：Portfolio 全文审阅后的 **CONTINUE 已应用，B13 已实际完成**，见
-> [完整裁决与 DM 回应](pro_packets/20260914_e01_portfolio_direction/INTAKE.md)。原 DM 继续实际研究，
-> 当前仍占用1席；完整 B13 结果审阅已读并回应，新的可逆 PARK 建议与继续反方案待 Portfolio 裁决，尚未应用。
-> 下面的 PARK/record-only/Clerk 路由属于历史，不是当前状态或派发路线。
+当前方向决定为 **可逆 PARK**，由 Portfolio 完整裁决后在 2026-09-14T11:27:28.135514+00:00 由原 RCLE DM 应用；不是 CLOSE、RECAST 或新增配方 HOLD。完整答复与实质回应见[本次 intake](pro_packets/20260914_post_b13_portfolio_direction/INTAKE.md)，原文固定于 `05e1fcb7052efd7a11010936105c87f6071e3c6f`，151行/20289字节，SHA256 `7ea74e98cdff648cf11cbf84ee907056241ee6b6befddf9f349031f251c63780`。实际席位释放、空缺和当前责任人以主分支共享登记的完成事务为准；不能把收到答复写成已经改了登记。
 
-> 2026-09-14 后续决定：新 DM 完成全文 intake 后重入并选择一个独立 final1024 B11，见
-> [重入记录](RCLE_REENTRY_INTAKE_20260914.md)。同一任务继续工程、执行与 intake。以下原 PARK
-> 决定、record-only 工作范围和成本/保全事实作为历史完整保留；当前状态见 DIRECTION.md。
+前次 CONTINUE 已真正落实为 B13，其理由和结果保持有效。当前没有 RCLE 原生实验；全体已有 native 子任务完成，本次 Portfolio 答复已终态归档。原始接受后输入捕获的交接也已核对完成；原 DM 继续完成一次真实空缺的接续，以及最后的作者工作区保全/清理。Clerk 已退休。
 
-记录日期：2026-09-14 UTC（2026-09-13 本地日期）。方向：`roster_consistent_latent_exploration`。
+## 为什么暂缓，以及最强的反方
 
-## 状态与本文件范围
+研究问题仍是：成员变化下，在同样合法信息与共同调度条件中，学习的联合行为能否相对现成协调规则提供原生服务及恢复增量。B13 将先验强度放进实际归一化行动分布并与 scorer 共同接受 full-Y 学习，真正测试了前次最有针对性的未测自由度。1024次更新后 eta0→.1922643915495339、exp(eta)1→1.2119909147637744；自身学习与 nearest 收益真实存在，sampled服务/full-Y仍落后greedy，新面板modal也没有已测增量。
 
-**PARKED / RECORD_ONLY。** 本文件保留已有可逆 PARK 的理由和可恢复知识，不重新作出关闭结论，不恢复科研，不占用研究执行槽位。B10 实验、独立科学评审、DM 完整回应和指定清理均已完成；**没有在途实验、未回评审、待发送请求或其他科学 producer**。本次唯一工作是新增此文件、提交推送并向 Clerk 交接，之后保持 record-only，供 Clerk 归档任务。
+PARK 的理由是这批新增开发证据削弱了继续当前程序实例序列的边际依据，而不是卡片结束、600s、缺少授权、故障或找不到一个“全新机制”。当前强服务规则已经可用；观察到的恢复利益仍未使该学习程序成为当前服务用途的优选，但不被视为零价值。
 
-已有 [B10 intake](RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md)、[完整独立评审](pro_packets/20260913_b10_scientific_review/archive/RESPONSE.md)及其原始记录不被改写。本文件也不恢复此前已撤销的 AGENTS 指令、旧持续委托、自动派发或历史审批用语；旧卡片中的权限/状态措辞只是当时记录，不是当前执行授权。
+最强反方案仍是一个未筛选的同法则完整新实例：65536训练+2560评价、4358144ticks、2128native32、1024Adam。它可能得到服务增量或改变恢复取舍；旧固定先验实例不能代替新法则重复。Portfolio与DM接受错过该信息的风险，仍在这个接近的价值选择上暂不购买它。没有估计成功概率、负期望信息值、收敛、总体劣势或普遍无效；不要求阳性pilot、理论突破或新客户才能再论证研究。
 
-## 为什么 PARK，以及这个理由的薄弱处
+## 必须分别保留的结果和缺失
 
-原科学问题是：在真实物理成员变化、合法公共信息和共同调度条件下，学习到的联合行为能否比已有协调规则提供更好的原生服务与恢复？当前 joint-quota-phase 家族测试一个学习的共同配额相位控制器，而不是只检验配额是否守恒。
+正 G_U=初始化U−finalU、D_n=nearestU−finalU、D_g=greedyU−finalU 有利于学习终点；各对象保持自己的随机根、法则、曝光和条件评价单位。
 
-B09、B10 均显示真实学习，但在各自观测中仍不及现成 fixed greedy 的服务 U；B10 的八类场景均值都保留这一劣势，恢复指标也有局部损害。DM 因而保留 greedy 作为**这些观测用途的服务偏好**，并判断暂不继续投入这一学习方案，选择可逆 PARK 而非永久 CLOSE。见 [B10 原决定与评审回应](RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md#dm-direction-decision-reversibly-park-current-advancement)。
+| 对象 | G_U | D_n | D_g | 身份与实际原生墙时 |
+| --- | ---: | ---: | ---: | --- |
+| B10，固定先验seed30 | +.061531575521 | +.154589843750 | −.019075520833 | 完整1024更新实例，161.35s |
+| B11，固定先验seed31 | 无最终端点 | 无最终端点 | 无极性 | 164更新后SIG11，40.83s；不是零值或负结果 |
+| D1 synthetic | 不构成效力结果 | 不构成效力结果 | 不构成效力结果 | 192更新诊断未复现，39.69s；不同前缀/数据，未定位修复 |
+| B12，固定先验seed32 | +.065030924479 | +.156380208333 | −.014135742188 | 完整1024更新实例，192.81s |
+| E01，旧权重旧面板mode | 零新学习 | 保留对nearest收益 | 两套已测结局与greedy相同 | 1024评价/65536ticks、0更新，6.73s |
+| B13，可学习先验seed33 | +.072436523438 | +.154964192708 | −.019783528646 | 新法则1fit/1024更新/五面板，163.92s |
 
-必须同时保留这个判断的薄弱处：**从“本次不胜 greedy”到“下一项信息暂不值得购买”不是数据自动给出的结论。** DM 没有测得训练总体劣势，也没有估计下一次成功概率或信息价值。一个新的独立 final1024 实例有实际辨别力，可能改变 learned-versus-greedy 的开发取舍。当前 PARK 是定性的投入价值判断，接受未测训练变异、可能错过更好实例的机会成本；不是重复训练无用、家族不可学或所有后续问题无价值的证明。独立评审明确提出了这一挑战，DM 已接受并补清表述。
+B13全部八格 sampled U/directY 均值优于初始化及nearest、落后greedy，不等于每条场景都不利。modal新面板全部512行U/F/tau/40U/directY与greedy相同；没有action trace，不证明动作、轨迹、策略或总体等价。条件SE/normal区间不估计训练总体不确定性；.025是局部正收益关注尺度，不是等价、有效性或去留界限。
 
-以下都不是此次科学 PARK 的依据：一次分配用完；600 秒支持计划接近或超出；浏览器/Agentify 故障；账户或操作暂停；缺少新客户、阳性先导结果、精确上界或 headroom 证书。此前误把自定 600 秒计划升级为 owner-only 限制、暂停主动评审观察并请求额外 60 秒，是另一项已承认的工作流错误，不能拿来证明科学方向应停。
+恢复向量独立保留：sampled对greedy的tau格均值2好/6坏，失败数量3好/1坏/4平。active12→8为38.9375与61/64失败，对照38.75与62/64；active8→8为38.5/60，对照40/64；new-epoch8→8为20.875/31，对照21.640625/33。主路径学习时失败54/128→61/128，与正服务收益并存。tau40是失败编码，不是第40tick成功。完整40行见[B13 E0](RCLE_B13_LEARNED_PRIOR_RESULT_EVIDENCE_20260914.md)。不得事后发明兑换率宣布支配，或删除这些恢复利益。
 
-## 关键证据与反证
+## 可复用资产与实际保全
 
-U 是越低越好的未满足服务量。主结果对 ACTIVE_CONTINUATION 的 8→12、12→8 两条路径等权。三个差分别为：`G_U = U_own-init - U_final`，`D_n = U_nearest - U_final`，`D_g = U_greedy - U_final`；正值有利于学习终点。
-
-| 独立对象 | 自身初始化学习 G_U | 对 nearest 的 D_n | 对 greedy 的 D_g | 实际完整 native 时间 |
-| --- | ---: | ---: | ---: | ---: |
-| B09：seed29 / final256 | +.05126953125 | +.1460205078125 | −.0317708333333 | 47.13 s |
-| B10：seed30 / final1024 | +.061531575521 | +.154589843750 | −.019075520833 | 161.35 s |
-
-数值直接来自 [B09 intake](RCLE_B09_GREEDY_ANCHORED_PHASE_INTAKE_20260913.md)、[B10 intake](RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md)和已发表的 [B10 分析记录](b10_greedy_anchored_1024_20260913/INTAKE_ANALYSIS.json)，本次没有重新计算实验结果。
-
-B10 的绝对主 U：初始化 .186840820313，final1024 .125309244792，greedy .106233723958，nearest .279899088542。全部八格 U 均保留正 G_U、正 D_n、负 D_g。主场景对 greedy 为 2/128 有利、29/128 不利、97/128 平局；不能写成每个场景都输。
-
-支持继续研究、反对过度停止的证据同样真实：学习终点明显改善自身初始化并超过 nearest；greedy 平均缺口较小；只有一个 final1024 训练实例；真实完整调用已在记录节点完成。这使独立重复成为严肃候选问题，而不是没有研究价值的机械重跑。另一方面，初始化本身已经优于 nearest，因此 D_n 是完整 package 的优势，不能全算成训练新增；G_U 才是本实例相对自身起点的新增学习读数，二者都不是锚定的独立因果效应。
-
-恢复后果不能被主 U 遮蔽：B10 final 的 failure-coded tau 均值相对初始化在 3/8 格恶化，相对 greedy 在 5/8 格恶化；相对 nearest 有 7 格改善，但 active 12→8 有 +.1875 的小损害。两条主路径的 final tau40 失败码分别为 0/64 和 61/64。tau 均值和失败码计数可能反向变化，tau40 也不是“40 tick 必然恢复”。三个 quota 角色的 F=0 是结构性申领计数事实，不是到位、恢复或无害保证。完整 full-Y 与全部 U/F/tau/40U 后果仍在原分析中。
-
-## 学到什么，仍不知道什么
-
-- 合法公共信息、共同相位支持和正确组合似然，使当前比较有明确含义；它们不证明无通信分散执行、等计算/等通信公平性或总体性能。
-- 参数真的更新、训练曲线提高与服务收益是不同事实。B10 有 1024 个真实非零更新，但 useful service 要看原生比较，不能只看位移或训练曲线。
-- 采用强协调参照会暴露只与 nearest 比较时被掩盖的缺口。已有规则能力、学习增益和剩余 greedy 差距必须分开保留。
-- B10 是一个 seed30/final1024 训练实例。四个 512-episode 面板、八格和 1024 个曲线点不是独立训练重复；报告的近似 95% 区间只是条件场景不确定性。
-- B09 与 B10 的随机根、终点和场景实例不同，不能把负差变小归因为 256→1024 的训练预算效应，也不能把两者合并成两个 final1024 重复。
-- 原 .025 U 兴趣尺度属于各参考收益，不是 G_U 门槛或事后对称等价界。小负差、大量平局不认证等价、非劣或相同动作策略。
-- 训练实例变动、表示/优化限制、减少锚定策略随机偏离与真正有益服务修正各占多少，以及 U 与恢复的实际用途取舍，仍未识别。可能原因不是已证明故障；不要求先找到唯一原因才能提出未来有意义的问题。
-- 没有稳定训练总体优势/劣势、锚定/优化器因果归因、全局最优、普遍不可学、规模化、C/UAV 迁移或全面无害结论；同信息 tuned headroom 仍缺失，但这种缺失本身不是 PARK 的门槛。
-
-## 可复用实现与记录
-
-这些是复用知识和核对历史的入口，不是启动命令。
-
-| 资产 | 保留内容与入口 |
+| 资产 | 入口和用途 |
 | --- | --- |
-| 问题、家族及历史边界 | [DIRECTION.md](DIRECTION.md)、[joint-quota-phase 家族 intake](RCLE_JOINT_QUOTA_PHASE_FAMILY_INTAKE_20260912.md)。保留两项更早 exact-recipe HOLD：unanchored phase/Adam256/final256，以及 equal-unit/.99-prior/FLEX/final1000；不把它们扩大成普遍失败，也不回溯给 B09 新加 HOLD。 |
-| 冻结设计与原结论 | [B10 card](RCLE_B10_GREEDY_ANCHORED_1024_SCIENCE_CARD_20260913.md)、[B10 intake](RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md)、[B10 E0](RCLE_B10_GREEDY_ANCHORED_1024_RESULT_EVIDENCE_20260913.md)、[B09 intake](RCLE_B09_GREEDY_ANCHORED_PHASE_INTAKE_20260913.md)。 |
-| 实际策略与训练链 | [policy.py](../../../../experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/policy.py)、[study.py](../../../../experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/study.py)、[runner](../../../../scripts/run_rcle_joint_quota_phase.py)、[focused contract tests](../../../../tests/experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/test_contract.py)。B10 实际 source 是 `e5fd439735bcc52d7f4cba9943b8c5c5138e21c2`；当前分支文件不替代这个冻结版本。 |
-| 真实执行与分析 | [summary](b10_greedy_anchored_1024_20260913/summary.json)、[完整已记录分析](b10_greedy_anchored_1024_20260913/INTAKE_ANALYSIS.json)、[分析脚本](b10_greedy_anchored_1024_20260913/ANALYZE_RECORDED.py)、[technical acceptance](b10_greedy_anchored_1024_20260913/TECHNICAL_ACCEPTANCE.md)、[独立工程 review](b10_greedy_anchored_1024_20260913/INDEPENDENT_REVIEW.md)、[原调用记录](b10_greedy_anchored_1024_20260913/LAUNCH_COMMAND.txt)。 |
-| 独立科学 review 及完整回应 | [完整 RESPONSE](pro_packets/20260913_b10_scientific_review/archive/RESPONSE.md)、[配对、哈希及 DM intake facts](pro_packets/20260913_b10_scientific_review/RESPONSE_INTAKE_FACTS.json)、[dispatch/completion record](pro_packets/20260913_b10_scientific_review/DISPATCH_RECORD.json)、[短原生回执](pro_packets/20260913_b10_scientific_review/archive/NATIVE_CHAT_RECEIPT.md)、[中文结果 brief](../../portfolio/owner/briefs/roster_consistent_latent_exploration/2026-09-13_RCLE_B10_FINAL.md)。短回执不能替代全文。 |
-| 保全、清理与成本 | [retention](b10_greedy_anchored_1024_20260913/RETENTION_RECEIPT.json)、[cleanup](b10_greedy_anchored_1024_20260913/CLEANUP_RECEIPT.json)、[bundle recovery](b10_greedy_anchored_1024_20260913/BUNDLE_RECOVERY.json)、[support account](b10_greedy_anchored_1024_20260913/SUPPORT_ACCOUNT.json)。retention 中早期 `cleanup_pending` 列表已由后来的 COMPLETE cleanup receipt 解决，不是新的待办。 |
+| 当前问题及历史边界 | [DIRECTION](DIRECTION.md)、[joint-quota-phase family](RCLE_JOINT_QUOTA_PHASE_FAMILY_INTAKE_20260912.md)。两项旧精确HOLD仍是unanchored phase/Adam256/final256及equal-unit/.99-prior/FLEX/final1000；不扩为整个RCLE失败。 |
+| 原始学习/比较 | [B13 card](RCLE_B13_LEARNED_PRIOR_SCIENCE_CARD_20260914.md)、[E0](RCLE_B13_LEARNED_PRIOR_RESULT_EVIDENCE_20260914.md)、[科学 intake](RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md)、[B12 intake](RCLE_B12_FINAL1024_INTAKE_20260914.md)、[B11缺失](RCLE_B11_PARTIAL_FAILURE_INTAKE_20260914.md)、[E01 intake](RCLE_FIXED_MODAL_REUSE_E01_INTAKE_20260914.md)。 |
+| 已执行源码 | B13 exact SHA cf4d9bd93ff9eb255800223d95de170b68315ba6；policy.py/study.py/run_rcle_joint_quota_phase.py。初始q=.9greedy+.1/N，pi=softmax(exp(eta)logq+z)，FP64/thread1、2562参数、full-Y、单Adam、八baseline。当前分支不替代冻结SHA。 |
+| B13完整原始证据 | [NATIVE_EVIDENCE.tgz](b13_learned_prior_20260914/NATIVE_EVIDENCE.tgz)，320580字节，SHA256 efea49fc263d0f5eae74b806e280bcb5d07cfb0b3f2f6692e5ab1a2b2ea2a020；19文件含模型/优化器、五面板、曲线、native构建/原始调用记录。 |
+| 其余此前仅本机的原始归档 | [本次保全清单](park_post_b13_20260914/ASSET_RETENTION.json)和native_archives中的逐字节副本；B09、B10、B11partial、D1、B12、E01及早期remote closeout原件保持。源bundle本机原件不假装是自足备份，作者工作区移除前另作完整恢复保全。 |
+| 复核和完整独立审阅 | [B13记录分析](b13_learned_prior_20260914/INTAKE_ANALYSIS.json)、[向量明细](b13_learned_prior_20260914/VECTOR_DETAILS.json)、[完整291行审阅](pro_packets/20260914_b13_learned_prior_review/archive/RESPONSE.md)、本次完整Portfolio答复及DM回应。源码/记录检查不是独立奖励oracle或双checkpoint证明。 |
+| 已完成的远端清理 | [B13 REMOTE_CLEANUP](b13_learned_prior_20260914/REMOTE_CLEANUP.json)于09:31:48Z核对全部13个非提交文件与19文件原始归档，确认终态后移除精确执行worktree。B11/B12/E01已有各自终态/保全记录，本次不重放它们。 |
+| 原B10 PARK完整历史 | [当时文档完整快照](park_post_b13_20260914/HISTORICAL_PARK_BEFORE_B13_DECISION.md)，来自6e1047e603907acbaefd2fd7fe29c56edfcac99b的原Git字节；保留更早B09/B10细节和当时错误/修正，不作为当前路由。 |
 
-B10 可复用 package 的识别要点：120-sector、六 beacon、H64 原生宿主，t24 先处理成员/epoch 事件，每四 tick 一次合法共同配额相位；`q=.9*1[phase=greedy]+.1/N`，`pi=softmax(log(q)+z)`，真实组合分布采样与 log likelihood；2,561 个 FP64 参数、full-Y score loss、单 Adam、八个 cell baseline。B10 固定 1024×64 训练 episodes 和四个新 512-episode 面板，总计 67,584 episodes、4,325,376 native ticks。详细法则以冻结 card/source 为准；本文件不新增配置、seed 或预算。
+先前source bundle及两项未追踪Transport附属原件继续保留，不转成新请求。当前作者checkout为C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906、branch codex/rcle，因实际空缺作者工作继续在用。清理owner是原RCLE DM，事件为当前空缺接续完成或被明确接手；到时先保全unique commits、所有非提交内容、PR与固定证据链接，再移除废弃worktree/branch。不能把保留中的本机原件假称普通clone已有，也不留无用途的完整detached副本。
 
-### 仅本机保存的原始证据
+## 成本、未来再研究和接续边界
 
-本次只读检查确认以下两文件仍存在，大小和 SHA-256 与保全记录一致。它们位于 authoring checkout 的未追踪 `temp/` 下，**不能假定一次普通 Git clone 会包含它们**。
+六条具名native链的605.33s是B10+B11partial+D1+B12+E01+B13之和，不是支持、研究elapsed、aggregateCPU或生命周期总账。B13163.92s与其body156.055563641s是嵌套口径；peak1234556KiB。旧B10支持下界627.289636s与后续641.3301317s是不同记录时点。旧审阅UI17m51s及本次Portfolio/作者成本另有口径，完整尾项UNKNOWN。600s、普通wall/watchdog及toy5400/UAV64800调查参考均非PARK/Send/启动/升级门槛，没有此次资源耗尽判定。
 
-- Authoring checkout：`C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906`，原有分支 `codex/rcle`。
-- 相对目录：`temp/directions/roster_consistent_latent_exploration/exp/b10-collected-e5fd4/`。
-- `rcle-b10-e5fd43973-evidence.tgz`：297,865 bytes；SHA-256 `b87737bf2bb42f3f2c7df497bdb04030602c51be2ad7c7aa891d74b3c4a14133`。保留模型/优化器、曲线、完整四角色面板和原执行证据；本次未展开或重新分析。
-- `rcle-b10-e5fd43973-source.bundle`：24,822 bytes；SHA-256 `a461bd83347908a1e85a70b4374d9897fb82677f35db9230ea86aa8a5c7f9582`。这是增量 bundle：tip `bf98ebba6c088d282df10ff88844e3b7d97c1630`，需要前置 `d741be527662c5cec18ed03ae03531658059dff6`，包含实际 launch source `e5fd4397…`；不是自足的完整仓库备份。
-- 已有两个 Transport 未追踪附属文件继续原样保留：本轮 `archive/GITHUB_RESPONSE_0366a47e.md` 的原始 LF 全文副本，以及 `delivery/HANDOFF_PREFLIGHT.json`。本次不把它们改成新请求、不提交或删除它们。
+重开可以来自：(1)同法则新完整实例的信息价值经过实质重新评估而上升，即使没有新增实验事实；(2)一个具体合法学习或服务—恢复用途问题，能说明不同结果如何改变开发动作；(3)影响现有解释的具体证据或完整性问题。保留强参照、真实奖励、历史阈值和两项精确HOLD；不以弱化比较、改写终点或重命名旧失败制造成功。重开由Portfolio按当时真实容量判断，优先复用原DM及资产，不机械从“可逆”推出重跑。
 
-## 评审、清理和成本的完成边界
-
-完整科学 review 的 immutable delivery commit 为 `0366a47e6a5b58a75dabdbb2772a33a0cdcb0eeb`，对应 37,180 UTF-8/LF bytes，SHA-256 `c9d8f998976a88ddfa3831a6bdc48dafb641da9b268d2d6c355835ad62751741`；fixed TASK 是 `34c7ad37324453a87e809222ed8849e0644c0b82`，配对 Issue #8 comment 为 `5657222254`。Windows checkout 的 CRLF 大小差异、原 163-byte chat receipt 和完整 GitHub 回答的区别已记录在 intake facts。
-
-Reviewer 未发现足以使主比较失效、必须换终点或补跑的已证实科学缺陷；其范围是指定的 11 个证据/源码路径，不是重跑原生环境、独立重算 raw 统计或认证全成本。DM 读完八节及引用，接受“起点能力与新增学习分开”和“承认重复训练的信息价值及放弃它的机会成本”两项澄清。最终科学回应已发布于 `ea95465efdf3841ac9685ed39f055644530940ef`；review 不是生命周期批准。
-
-历史运行 `rcle-b10-s30-e5fd43973` 已 finished/exit0。2026-09-13T23:54:45Z 的 cleanup receipt 记录远端 worktree、supervisor 和 staging raw 副本被移除，磁盘与 Git worktree 注册均确认不存在；本地 unique raw/source 未动。本次不重做远端轮询，也不重新分配 Monitor。历史 request `2026-09-13-rcle-b10-scientific-review-01`、operation `094a6cba-6f76-4140-860b-1358e15b6cd9` 已一次接受、自然结束、完整归档并回应，不能当成待发/待恢复请求。
-
-成本不能因为已归档而抹去。B10 完整 native 实测 161.35 s；归档 support JSON 的明确检查点为 627.289636 s，native+known support 为 788.639636 s。此任务在最终发给 Clerk 的交接中另报告包含后续文档核验/发布尾部后的已知 support 641.3301317 s、native+known support 802.6801317 s；它不是 JSON 的原检查点，也不是完整费用发票。Monitor/Transport 初始准备及未测调用、provider/agent lifetime、部分集成尾项仍为 UNKNOWN，不计零。
-
-原 native/support/complete 的 300/600/900 s 计划及其实际支持超支保留。普通 DM wall 计划与真实 owner/平台硬限、冻结科学 exposure/比较终点必须区分；接近 600 s 不是通用 stop、Send 或上报门槛。网络 staging/打包停滞是实际工程成本，不是科学无效、另一个训练实例或 PARK 证明。本次知识整理不重开这次调用、不重置成本，也不把文档操作当训练量。
-
-## 明确的科学复开条件（候选问题，不是当前任务）
-
-以下说明何时值得重新提出 RCLE 研究。没有条件自动触发实验、Pro 请求、任务唤醒或槽位占用；本次 record-only 指令保持有效。
-
-1. **训练实例变异确实会改变开发选择。** 如果当前需要决定是否继续采用/发展 final1024 学习 package，而对 greedy 的缺口是否依赖训练实例会改变这一选择，则一个前瞻定义的新独立训练比较是有意义的问题。更好的 greedy 对比可能削弱当前偏好，相近缺口可能加强它，混合结果会揭示不稳定性。它不需要先取得阳性结果或换一个机制才有科学价值；本文件不选择 seed、样本数或执行。
-2. **有具体方法或服务用途问题能区分现有解释。** 例如确实需要解决 U 与成员变化后恢复之间的取舍，或一个明确的合法共同相位方法变化可能改变这种取舍。未来提案须说明所需选择、允许信息、保持有竞争力的实际参照、会区分哪些结果；不能削弱 greedy、换评价权重或把旧终点改名来制造成功。解释机制尚不唯一并不自动禁止提出有辨别力的问题。
-3. **出现改变当前理由的实质证据。** 新的可信观察或具体的主量/比较器缺陷，使当前服务偏好或学习解释需要修正。先说明哪个主张受影响及什么观察可解决；不把一般技术故障、浏览器恢复或运行时间偏差等同于科学反证，也不自动撤销全部历史结果。
-
-这不是“必须先有新客户、精确 headroom、唯一病因、显著性或 Pro 批准”的清单。真正要交代的是：所问问题、竞争选项、能改变选择的观察及相称工作范围。后续是否正式重开，须在新的有效工作指令下明确选择；本交接本身不授予科研或恢复旧持续授权。若没有这样的选择，维持 PARK/record-only，而不是制造实验保持忙碌。
-
-## 交接后行动
-
-仅把本文件的精确路径和提交号返回当前 Clerk，供其记录并归档本任务。原 authoring branch、冻结证据和本机保全资产保留；不创建 Pro 请求、Monitor、Reviewer 或后继对象。不需要等待科学 review、清理、实验结果或其他外部 producer。归档任务是关闭这个记录性工作入口，不是删除证据或永久关闭研究问题。
+本次完整决定应用并出版保全后，只释放RCLE的一席。随后原DM负责一个真实空缺的Portfolio选择及执行，或交给明确接受的同伴；不自动恢复旧DISH建议，不改变MGTAP/FOLR，不新增第四席。科学PARK不要求为结案再做实验；完整答复也不代替实际记录与安全交接。

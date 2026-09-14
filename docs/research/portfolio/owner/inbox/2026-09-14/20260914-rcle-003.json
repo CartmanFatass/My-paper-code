@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "此前最明确的未测学习自由度已获真实检验仍无本次greedy增量，削弱续做同配方的边际理由；单实例不确定性使一次新实例成为接近的反方案。",
   "evidence": [
     "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md",
@@ -90,6 +90,22 @@
       "record": "docs/research/portfolio/audit/2026-09-14.md#L54",
       "state": "planned",
       "summary": "Main integration from 998c4dbde11727b2ed26ced1bebaddc60b164c43; original source ledger locator retained, appended main ledger row is 54. Recommendation only; current Portfolio CONTINUE and occupied slot preserved; no PARK/CLOSE/new fit applied."
+    },
+    {
+      "at": "2026-09-14T11:27:28+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/archive/RESPONSE.md",
+      "record": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/INTAKE.md",
+      "state": "applied",
+      "summary": "完整151行Portfolio答复与原始捕获一致；DM全文回应并应用可逆PARK，保留同法则新实例作为接近的反方案。不CLOSE/RECAST/新增fit；本次知识保全后按真实主分支事务释放一席并由RCLE负责空缺接续。前次CONTINUE与B13实测仍有效，600s仅为参考。"
+    },
+    {
+      "at": "2026-09-14T11:32:27+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/audit/2026-09-14.md#L56",
+      "state": "applied",
+      "summary": "Full Portfolio PARK/intake and raw evidence integrated. This actual main transaction releases only RCLE:2occupied/0reserved/1vacant; originalRCLE owns one pending vacancy request, no replacement chosen. Source decision/owner history preserved."
     }
   ]
 }

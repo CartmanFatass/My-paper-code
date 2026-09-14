@@ -19,68 +19,30 @@ This authority preserves the direction's source-grounded scientific question, ev
 - Stable direction ID: `roster_consistent_latent_exploration`
 - This DM owns direction-local innovation, bounded experiments, implementation and reports. Portfolio decides direction-level CONTINUE/RECAST/PARK/CLOSE/reopening from the full report and global context; ordinary experiments need no per-experiment approval. No unilateral slot release or other-direction resource change follows a DM recommendation.
 
-## Current position — 2026-09-14: B13 full review answered / next Portfolio interpretation pending
+## Current position — 2026-09-14: Portfolio reversible PARK applied after completed B13
 
-The complete [Portfolio decision and DM response](pro_packets/20260914_e01_portfolio_direction/INTAKE.md)
-select CONTINUE in the existing joint-quota-phase family and the prepared B13 learned-prior
-object. DM has read the full answer and applied the conforming decision: retain this slot,
-priority and both exact-recipe HOLDs; no RECAST/PARK/CLOSE or per-experiment ratification.
-The unchanged seed33/1024-update/five-panel invocation completed at published source
-cf4d9bd93ff9eb255800223d95de170b68315ba6: 4,358,144 ticks, 1,024 updates, 163.92s whole
-native wall, exit0. The [complete B13 result and intake](RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md)
-retain sampled learning (+0.072437), nearest benefit (+0.154964), greedy deficit (-0.019784),
-learned prior strength 1.211991 and all recovery tradeoffs. Every measured modal/greedy
-outcome ties on 512 new held-out scenarios, without a policy/population equivalence claim.
-The complete independent review at d45d4bc6ea2012b93d1d044402268520be5eea9a found no
-demonstrated defect invalidating the bounded comparison. DM read all291 lines and responded
-substantively in the B13 intake. The new freedom is now tested; no eta causal success or
-family-wide failure follows. DM has published the [next full direction report](pro_packets/20260914_post_b13_portfolio_direction/REPORT.md),
-recommending reversible PARK with one same-law fresh instance as the strongest alternative.
-This is a pending direction recommendation, not an applied disposition. Existing CONTINUE
-and the occupied slot remain. MGTAP completed its full decision/application and released the
-conversation; RCLE claimed it and dispatched the exact23,431-byte request through registered
-Transport. The actual composer and accepted user node were checked for complete content;
-only rendering whitespace differed. The one request is generating; its complete terminal answer
-and DM direction intake remain pending. No automatic
-second fit, PARK/CLOSE or slot release. The complete response and global context govern the
-next consequence, without a per-experiment approval or Root ratification.
+The full [post-B13 Portfolio decision and DM application](pro_packets/20260914_post_b13_portfolio_direction/INTAKE.md)
+select reversible PARK of current direction-level development. DM read the entire151-line20289-byte
+answer, verified it against the original captured provider text, responded substantively and applies
+the conforming decision. This is not CLOSE/RECAST or a new recipe HOLD. The prior CONTINUE was
+actually executed as B13 and retains its original rationale; no historical result is rewritten.
 
-### Evidence and recommendation leading to this decision
+B13 completed one learned-prior fit,1024updates/4358144ticks/163.92s, with sampled G_U+0.072437,
+D_n+0.154964,D_g−0.019784 and prior strength1.211991. Modal/greedy measured outcomes tie on512
+new scenarios; recovery benefits/harms and B11 missingness remain. The entire independent291-line
+review found no demonstrated invalidating defect and was answered. No eta-causal, training-population,
+action/policy-equivalence or universal-failure claim follows.
 
-[Fixed-modal E01](RCLE_FIXED_MODAL_REUSE_E01_INTAKE_20260914.md) completed once under the
-owner-approved empirical-spec11.4.2: zero new fits,1024 evaluations/65536 native ticks.
-Both retained B10/B12 modal panels tie their own greedy reference row by row on every
-U/F/tau/40U/direct-Y endpoint. This gives no observed increment for the selected modal
-package, not policy equivalence, greedy optimality or general unlearnability. Full B12
-review was previously accepted and answered; its old positive learning/nearest gains,
-greedy deficits and mixed recovery remain. B11 SIG11 remains unexplained with no endpoint.
+A fresh same-law full instance remains a close, informative reopening alternative; Portfolio declines
+that information purchase now on development-value grounds, not because of600s, object completion,
+positive-first conditions or missing permissions. [PARK knowledge](PARK.md) preserves reasons,
+contrary evidence, exact HOLDs, raw assets, actual/UNKNOWN costs and substantive reopening conditions.
 
-The complete independent E01 review at93bb8ffcd4de430a722bbb6b84e9733f40d26782 found no
-material invalidating defect. DM has read and answered it in the intake, preserving modal's
-recovery losses relative to the sampled policy and the review's challenge to the earlier
-PARK rationale. DM now recommends one fresh B with a learned scalar multiplying log(q),
-initialized at the same prior strength, rather than immediate PARK. This concrete learning
-question was not resolved by E01. The full evidence, contrary case, costs and global context
-went to Portfolio for the final direction decision now applied above. No B13 native run
-had occurred at application; RCLE retains its slot. E01 enclosing chain6.73s and all
-cost/claim ceilings remain preserved.
-
-While the Portfolio predecessor processed, DM prepared the concrete
-[B13 learned-prior object](RCLE_B13_LEARNED_PRIOR_SCIENCE_CARD_20260914.md) and implementation.
-Twenty-four focused synthetic/legacy/E01 checks pass; independent Sol/high review found
-no material defect and DM technically accepted preparation at the recorded source91811c61.
-No native B13 result follows from preparation. The predecessor FOLR decision was fully
-archived/applied CONTINUE before RCLE's own request; the resulting complete RCLE verdict
-is now read and applied. Three slots remain occupied. No unilateral lifecycle decision follows.
-The separate retained-head scale check was inconclusive about the prior bottleneck and is
-retained in the full Portfolio report.
-
-The [direct Portfolio acknowledgment](reentry_20260914/portfolio/ACKNOWLEDGEMENT.md)
-confirms full-lifecycle re-entry. B11 attempted, B12 completed and E01 completed real
-research after that selection; this was not documentary-only closeout. Historical support
-600s and ordinary wall plans permit deviation and never automatically stop research/Send.
-Both exact-recipe HOLDs and frozen historical evidence remain. Portfolio's direction-level
-decision uses the new owner protocol; DM needs no Root ratification or per-experiment approval.
+No native RCLE producer remains. The current Portfolio reply and actual accepted input are terminal/fully preserved; the actual
+vacancy follow-through remains with the original DM.
+The shared registry records actual slot release and any reservation; this decision does not preselect
+a replacement or affect MGTAP/FOLR. Keep the authoring checkout only for its live closeout/vacancy work,
+then retire it after verified recovery preservation and reconciliation.
 
 ## Historical DM position — 2026-09-13 after B10: PARKED
 
