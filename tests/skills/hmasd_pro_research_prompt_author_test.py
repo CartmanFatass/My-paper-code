@@ -918,3 +918,18 @@ def test_root_dispatches_to_independent_transport_without_model_override(project
     assert handoff["operator_thinking"] == "high"
     assert handoff["dispatch_required"] is True
     assert "omit model/thinking" in handoff["dispatch_instruction"]
+
+
+@pytest.mark.parametrize("state", ["active", "scientific_park_archived"])
+def test_registration_uses_live_registry_not_report_format(project_root, state):
+    registry = project_root / ".codex/hmasd-dm-sessions.toml"
+    registry.write_text(f'[directions.demo_direction]\nstate = "{state}"\noccupies_slot = false\n', encoding="utf-8")
+    renderer = _renderer()
+    renderer._require_registered_direction(project_root, "| [Demo](../candidates/demo_direction/DIRECTION.md) |", "demo_direction")
+
+
+def test_registration_rejects_stale_report_when_live_registry_exists(project_root):
+    (project_root / ".codex/hmasd-dm-sessions.toml").write_text("[directions]\n", encoding="utf-8")
+    renderer = _renderer()
+    with pytest.raises(renderer.PacketInputError, match="hmasd-dm-sessions.toml"):
+        renderer._require_registered_direction(project_root, "| demo_direction | ACTIVE |", "demo_direction")

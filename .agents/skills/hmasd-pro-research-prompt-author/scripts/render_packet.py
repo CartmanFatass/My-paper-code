@@ -165,9 +165,25 @@ def _require_registered_direction(project_root: Path, portfolio: str, direction_
             f"direction DIRECTION.md not found: {direction_id}",
             field="direction_id",
         )
+    registry_path = project_root / ".codex" / "hmasd-dm-sessions.toml"
+    if registry_path.is_file():
+        try:
+            registry = tomllib.loads(registry_path.read_text(encoding="utf-8"))
+        except (OSError, tomllib.TOMLDecodeError) as exc:
+            raise PacketInputError(f"cannot read direction registry: {exc}", field="direction_id") from exc
+        directions = registry.get("directions", {})
+        # Registration is independent of occupancy or lifecycle: parked directions
+        # still need reviews and reopening reports. Human report formatting is irrelevant.
+        if isinstance(directions, dict) and isinstance(directions.get(direction_id), dict):
+            return
+        raise PacketInputError(
+            f"direction not registered in .codex/hmasd-dm-sessions.toml: {direction_id}",
+            field="direction_id",
+        )
+    # Compatibility for historical checkouts without the session registry.
     if not re.search(rf"^\|\s*{re.escape(direction_id)}\s*\|", portfolio, re.MULTILINE):
         raise PacketInputError(
-            f"direction not registered in PORTFOLIO.md: {direction_id}",
+            f"direction not registered in legacy PORTFOLIO.md: {direction_id}",
             field="direction_id",
         )
 
