@@ -40,19 +40,6 @@ def primary(rows, expected=32, horizon=256):
                 uncertainty="one trained pair; descriptive fixed panel; no training-population interval")
 
 
-def resources():
-    try:
-        import resource
-        own = resource.getrusage(resource.RUSAGE_SELF)
-        children = resource.getrusage(resource.RUSAGE_CHILDREN)
-        return {"peak_rss_bytes": own.ru_maxrss * 1024,
-                "aggregate_cpu_seconds": own.ru_utime + own.ru_stime + children.ru_utime + children.ru_stime}
-    except (ImportError, OSError):
-        # Optional telemetry never suppresses the scientifically valid primary.
-        return {"peak_rss_bytes": None, "aggregate_cpu_seconds": None,
-                "self_cpu_seconds": time.process_time(), "resources_unmeasured": True}
-
-
 def run_pair(output, seed=9411, *, start=None, env_factory=make_real, horizon=256,
              train_episodes=256, eval_episodes=32, chunk=32, native=True):
     start = time.monotonic() if start is None else start
@@ -66,12 +53,16 @@ def run_pair(output, seed=9411, *, start=None, env_factory=make_real, horizon=25
                    config=dict(horizon=horizon, train_episodes=train_episodes,
                                eval_episodes=eval_episodes, chunk=chunk, epochs=4,
                                dtype="float32", device="cpu", threads=1),
+                   timing_scope="Arm body includes its optimizer/environment, training, checkpoint, "
+                                "evaluation and close. Shared setup and final publication are separate; "
+                                "the enclosing process measurement supplies complete invocation costs.",
                    arms={}, primary=None, complete=False)
     rows = []
     base = 100000 * seed
     try:
         # Each arm gets an independent environment, parameters, optimizer and trajectory.
         pair = build_pair(seed)
+        summary["shared_setup_wall_seconds"] = time.monotonic() - start
         with (output / "episodes.jsonl").open("w", encoding="utf-8") as episode_file, \
                 (output / "rollouts.jsonl").open("w", encoding="utf-8") as rollout_file:
             def emit(row):
@@ -115,13 +106,12 @@ def run_pair(output, seed=9411, *, start=None, env_factory=make_real, horizon=25
                     result["complete"] = True
                 finally:
                     env.close()
-                    result["elapsed_wall_seconds"] = time.monotonic() - arm_start
+                    result["arm_body_wall_seconds"] = time.monotonic() - arm_start
         summary["primary"] = primary(rows, eval_episodes, horizon)
         summary["complete"] = True
     except Exception as error:
         summary["error"] = f"{type(error).__name__}: {error}"
     finally:
-        summary["elapsed_wall_seconds"] = time.monotonic() - start
-        summary.update(resources())
+        summary["elapsed_to_summary_start_seconds"] = time.monotonic() - start
         (output / "summary.json").write_text(json.dumps(summary, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     return summary
