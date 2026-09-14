@@ -18,9 +18,9 @@ This authority preserves the direction's source-grounded scientific question, ev
 - Stable direction ID: `roster_consistent_latent_exploration`
 - This DM owns direction-local research, family adjustments, continuation, parking and ending under the owner's 2026-09-13 instruction. Clerk records these decisions in the Portfolio report; only owner-triggered cross-direction adjustments/consultations follow. This grants no control over other directions or extra resource commitments.
 
-## Current DM position — 2026-09-14: ACTIVE / B11 incomplete; fault diagnosis
+## Current DM position — 2026-09-14: ACTIVE / B12 selected after B11 failure
 
-B11 reached actual native training but crashed after164 recorded updates; no final1024 comparison exists. The [partial-failure intake](RCLE_B11_PARTIAL_FAILURE_INTAKE_20260914.md) records preserved raw evidence, costs, completed direct Portfolio alignment and DM-owned bounded diagnosis. No new PARK/CLOSE or automatic scientific rerun applies.
+B11 reached actual native training but crashed after164 recorded updates; no final1024 comparison exists. One synthetic D1 completed192 updates without reproduction. DM selects the explicit new [B12 card](RCLE_B12_FINAL1024_SCIENCE_CARD_20260914.md), seed32/final1024 with fatal-stack capture and all failed-instance accounting; no automatic B11 retry or speculative production repair. The [partial-failure intake](RCLE_B11_PARTIAL_FAILURE_INTAKE_20260914.md) records preserved raw evidence, costs, completed direct Portfolio alignment and DM-owned bounded diagnosis. No new PARK/CLOSE or automatic scientific rerun applies.
 
 The replacement DM completed the full PARK/B10/review/cost intake and selects a bounded
 return to the unchanged greedy-anchored final1024 training-instance question, selecting
