@@ -1,140 +1,134 @@
-# FOLR owner-pause handoff — current closeout pending
+# FOLR handoff — owner pause after current closeout
 
-Owner event: `OWNER_PAUSE_AFTER_INFLIGHT_20260914`, instruction at
-2026-09-14 13:23 PDT, delivered by original ACVC DM task
-`01a09dfa-0655-7831-aa3a-9fff2ddd2508` to this original FOLR DM.
-The owner said: “各方向可以先暂停 手中的任务和实验不要停止 完成后写handoff”.
-This record is an interim recovery handoff, not a claim of completed closeout.
+Current state: both accepted experiments complete, preserved and reclaimed;
+current-result scientific review and final pause integration remain outstanding.
+This is a concrete interim handoff, not final completion. Owner event
+`OWNER_PAUSE_AFTER_INFLIGHT_20260914` at2026-09-14 13:23 PDT instructs:
+“各方向可以先暂停 手中的任务和实验不要停止 完成后写handoff”.
+[Canonical instruction](../../portfolio/decisions/2026-09-14-owner-pause-after-inflight.md)
+is at`51c597fdec5ba22826f748e3389cf462575d57e5`.
 
-## Latest consequence — complete pair, closeout still pending
+Finish only the current object and its necessary scientific review/material
+response, evidence records and final handoff. Then remain operationally
+owner-paused until explicit resume. No successor experiment, new direction,
+vacancy replacement or open-ended continuation consultation. Scientific
+CONTINUE/MEDIUM, family/history and occupied slot remain; this is not PARK/CLOSE.
+No automatic task archival. Initial pending-A handoff is preserved in commit
+`62122f156474fd872915aa5bd066a27b4402aa4e`; do not mistake it for current state.
 
-Both original fits are now terminal and collected. A ended20:26:32Z, exit0;
-its Monitor terminal was delivered20:26:49.622Z, followed by DM collection and
-full raw-archive local verification. A4.329921875 minus G−0.966484375 gives
-+5.29640625, AUGMENTED_ABOVE_MEI. Native3975.48s, CPU3972.96s; no live native
-process/monitor remains. [Full result](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_RESULT_EVIDENCE_20260914.md)
-and [initial scientific intake](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_INTAKE_20260914.md)
-are written. Independent current-object review and substantive response,
-evidence-preserving reclamation and final main integration/handoff remain due.
-The original pending-at-owner-instruction facts below are historical snapshots;
-first recovery now processes closeout and never repeats either invocation.
+## Original owner, checkout and fixed source
 
-## Scope and present state
+Original independent Astra/max DM: `01a09e16-f7b1-7e60-83a0-ba2a7cd969bc`.
+Resume this task with `.agents/skills/hmasd-direction-management/SKILL.md`.
+Canonical controls are `C:/Projects/HMASD/.codex/hmasd-*.toml` and
+`docs/project/ROOT_OPERATIONS.md`; authoring control copies can be stale.
+Designated authoring checkout remains `C:/Projects/HMASD-worktrees/codex-vap-folr`,
+branch `codex/vap-folr`. It is retained for the pending review delivery and later
+explicit owner resume. No new task, branch or independent DM is needed.
 
-Finish the accepted augmentation B01 A−G object: current A invocation, terminal
-collection/integrity checks, complete result/intake, Chinese owner brief, necessary
-independent review of this result and its material response, evidence preservation
-and authorized scoped cleanup. Then become operationally owner-paused awaiting
-explicit resume. No successor fit, next-object design/consultation, new direction
-or vacancy replacement is selected. No live process or accepted provider request
-is stopped because of this instruction. Current-object review remains part of the
-work already in hand; any future-work recommendation stays deferred.
+Object: `FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601`, B/EXPLORE.
+Card: `FOLR_ENTITY_HISTORY_AUGMENTATION_B01_SCIENCE_CARD_20260914.md`, fixed at
+`8d219f4bcc29259e626c16dea23182660ae350d9`.
+Execution source: `d9977dc18baf33b78dc626764c252391f1ddaa9d`.
+Technical acceptance: `50bbaa5e9b4cadba8ac8361f704b46b17590ba24`.
+Independent common-actor/full-integration reviews are complete;11 focused
+integration tests passed, with no selected-seed scientific smoke or new test run.
 
-Scientific lifecycle remains the applied Portfolio CONTINUE / MEDIUM, same
-entity-history family and occupied slot. Operational pause is neither scientific
-PARK/CLOSE nor vacancy release. Do not archive this task automatically.
+## Actual completed work and interpretation
 
-## Owner and recoverable locations
+G `folr-augmentation-b01-781601-generic`,PID3674297: accepted15:36:55.744043Z,
+terminal15:56:34Z, exit0; collection`b881dd67c2a89aaa95ab5741541d98ff265653ff`.
+A `folr-augmentation-b01-781601-augmented`,PID3679958: accepted19:39:55.755736Z,
+terminal20:26:32Z, exit0; direct terminal reported20:26:49.622Z and DM collected
+20:27:40.958451Z. Both original handles are terminal and subsequently reclaimed.
+Native `/root/folr_augmentation_b01_monitor` completed after direct terminal return;
+no monitor, native process, retry, successor handle or observer remains active.
 
-- Original independent Astra/max DM: `01a09e16-f7b1-7e60-83a0-ba2a7cd969bc`.
-- Canonical controls: `C:/Projects/HMASD/.codex/hmasd-*.toml` and
-  `docs/project/ROOT_OPERATIONS.md`; current owner instructions prevail.
-- Shared direction authoring checkout: `C:/Projects/HMASD-worktrees/codex-vap-folr`,
-  branch `codex/vap-folr`; no new branch or replacement DM is needed.
-- Frozen card: `FOLR_ENTITY_HISTORY_AUGMENTATION_B01_SCIENCE_CARD_20260914.md`.
-- Execution/evidence directory: `entity_history_augmentation_b01_781601/`;
-  [execution record](entity_history_augmentation_b01_781601/EXECUTION.md).
-- Execution source: `d9977dc18baf33b78dc626764c252391f1ddaa9d`;
-  technical acceptance: `50bbaa5e9b4cadba8ac8361f704b46b17590ba24`.
-- Node `ssh hmasd-wsl-node`, supervisor `/usr/local/bin/agent-task`, interpreter
-  `/home/wu/.venvs/hmasd/bin/python`; remote detached worktree
-  `/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18`.
-- Relative remote run root:
-  `temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/`.
+Full result/intake/Chinese brief and raw A collection were published at
+`15f47648566c923c28389778b67313c6292e4a9a`:
+[scientific intake](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_INTAKE_20260914.md),
+[result evidence](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_RESULT_EVIDENCE_20260914.md),
+[compact numbers](entity_history_augmentation_b01_781601/RESULT_SUMMARY.json).
+G−0.966484375; A4.329921875; **A−G=+5.29640625, AUGMENTED_ABOVE_MEI**.
+Each original fit completed5000train/100000ticks/4969updates/128final/2560ticks,
+train781601/eval1781601,CPU FP32,Torch1/1. Two fits total205120ticks/9938updates.
+The prospective low-confidence Generic-win prediction missed; owner not taken.
 
-## Accepted experiments and pending producers
+This is one complete-program increment, not training-population superiority or
+causal persistence/A−Z, convergence, competence, tuned headroom, transfer/speed,
+C/UAV evidence.128episodes per arm are conditional observations, not128training
+samples. A adds capacity/current processing/fusion and changes optimization,
+so a favorable realization and these factors remain alternatives. Earlier
+replacement BANK B02−4.830859375 and B03−6.63671875 remain separate; E's missing
+fresh contrast and F's outcome-informed historical BANK use are not rewritten.
+No new scientific choice follows the positive sign during owner pause.
 
-G `folr-augmentation-b01-781601-generic`, PID3674297, finished exit0 at
-2026-09-14T15:56:34Z and is fully collected at
-`b881dd67c2a89aaa95ab5741541d98ff265653ff`. Its mean is −0.966484375,
-5000 training episodes / 100000 ticks / 4969 updates, one checkpoint and
-128 greedy final episodes / 2560 ticks. Original summary SHA256
-`152b1b807f148a9d7004f8b0208d30ce2fa1c147734c11d4d7cb01f84216336c`.
-All14 raw members were locally transferred and hash-verified in
-`GENERIC_RAW.tar.gz`; SHA256
-`8bfe7c3d711d85ae51e70a932503538415afc059e2bffd7a4d6ff5d39f5d2efc`.
+## Preserved artifacts, reclaimed execution and cost limits
 
-A `folr-augmentation-b01-781601-augmented`, PID3679958, was accepted
-2026-09-14T19:39:55.755736Z and remains the live final selected invocation.
-Output directory is `augmented_persistent`. Latest factual monitor observation
-at handoff preparation:2026-09-14T20:20:45.946Z, running, exit null.
-Native `/root/folr_augmentation_b01_monitor` adopted A at19:40:29.085Z;
-assignment `FOLR_AUGMENTATION_B01_AUGMENTED_MONITOR_20260914_R1`.
-The monitor's7200s observation deadline is21:39:55.755736Z, not a scientific
-stop; it reports over-plan facts and terminal directly to this DM. Its App callback
-explicitly retains model `gpt-6-astra`, thinking `max` for the parent; monitor
-itself remains Luna/low. Live state is
-`C:/Projects/HMASD/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/MONITOR_STATE.json`,
-with A under `active_handle`; the root G fields are completed history.
-No A endpoint or A−G polarity has yet been collected. Both selected invocations
-are already accepted; never rerun G or resubmit A on resumption.
+All evidence is under `entity_history_augmentation_b01_781601/`.
+- G archive `GENERIC_RAW.tar.gz`:4,298,469bytes;
+  SHA256`8bfe7c3d711d85ae51e70a932503538415afc059e2bffd7a4d6ff5d39f5d2efc`.
+- A archive `AUGMENTED_RAW.tar.gz`:5,282,464bytes;
+  SHA256`0190acfca2c38ac45963abbc425b0de4620bbe707880994733b65ac6880a06bd`.
+- Extra collection sidecars/generated bytecode `SUPPORT_RAW.tar.gz`:25,090bytes;
+  SHA256`1dba47b361b13b22825b3f056fa26e6f9e5dede10c38c6b2607a275d8ed0894a`.
 
-The native code implementation and independent Sol/high review children are
-complete. No FOLR provider request is pending. The last complete scientific
-review is B03, response `18e03e45d69def09d29c0f2c299bb855891b0f27` and
-DM intake `7557dc5c44d684ea44d5603e5300c3cfd97098c0`; it is not a review of
-this unfinished B01 pair. The full post-B03 Portfolio clarification was applied
-at `8d219f4bcc29259e626c16dea23182660ae350d9`, selecting A−G. Its accepted
-requests, malformed earlier inputs and complete archives have no pending recovery.
-ACVC owns its separate current Portfolio dialogue; no FOLR ACK or new dialogue
-is required by that peer notice.
+All archives/member hashes and full Git blobs were checked against published
+`2ca2dd387fa9dd04a93f1d4e54b2350229b14c29`. At20:44:04.991160Z cleanup verified
+all46 untracked/supervisor files against preserved bytes, no live process, fixed
+clean source, both terminal handles, then removed/unregistered only
+`/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18`
+and its two named directories under`/home/wu/.agent-tasks/`.
+[CLEANUP_RECEIPT_20260914.json](entity_history_augmentation_b01_781601/CLEANUP_RECEIPT_20260914.json)
+confirms all three absent and the worktree absent from Git registration.
+Do not poll or revive those historical handles/paths. Local authoring checkout,
+shared Git/interpreter, other directions and all committed evidence remain.
+The local temp Monitor state and collector are historical recovery artifacts,
+not active coverage or runnable continuation instructions.
 
-## Checks, limits and cost unknowns
+Native wall3975.48s; aggregate CPU3972.96s; study elapsed17377s at supervisor
+second resolution, including13401.737549s precisely recorded inter-arm control
+interval. Prior known native12538.44s plus this object is16513.92s, not total
+lifetime cost. Full support/provider/engineering/lifetime costs remain UNKNOWN;
+measured nested readback windows are not summed. The unsupported-none parent
+control failure delayed A, without a native retry. G's buffer-count checker
+mistake was corrected before acceptance; A correctly checks192741parameters+27
+buffers. Neither affects the primary. No unresolved technical defect is identified.
 
-The fixed per-arm train/eval seeds are781601/1781601, source-bound CPU FP32,
-Torch1/1, full5000/4969/128 endpoint. Whole-program A−G uses strict >1 and <-1
-branches with inclusive[-1,1]. One training instance per arm and128 conditional
-evaluation episodes do not provide training-population uncertainty or paired
-worlds. A−G does not attribute persistence's causal contribution or measure A−Z.
-The low-confidence prospective DM prediction remains GENERIC_ABOVE_MEI;
-owner prediction was not taken. Historical E/F/B02/B03 results remain separate.
+Real resources remain one FOLR invocation at a time, fresh physical/effective
+memory>=4GiB, existing remote CPU capacity and no new paid/cross-direction
+commitment. Those do not authorize research during owner pause. Native planning
+references were not hard endpoints, and full support-plan compliance is UNKNOWN.
 
-G native wall1178.68s and aggregate CPU1177.50s are complete invocation facts.
-Known E/F/B02/B03 plus G native subtotal is13717.12s; A is now2796.80s, making the known native subtotal16513.92s. Full
-support/provider/engineering/direction-lifetime costs remain UNKNOWN. The
-13401.737549s G-terminal-to-A-preparation control interval is study elapsed,
-not extra native G work and not all measured active support. G's first diagnostic
-checker incorrectly included26 buffers in its parameter count; the corrected
-source-grounded check passed with103173 learnable parameters. For A classify
-192741 parameters plus27 buffers, rather than equating state_dict size to parameters.
-A parent callback previously failed before execution with unsupported effort=none;
-no native failure or repeat followed, and its recovery/delay is preserved.
+## One outstanding review, actual recovery and final action
 
-Real resource limits stay one FOLR invocation at a time and fresh physical AND
-effective memory >=4GiB. Ordinary G3600s/A5400s and9000s summed-native plans are
-planning references, not abort endpoints. No additional paid or cross-direction
-resource commitment is permitted. There is no new scientific invocation in this
-closeout. The original raw evidence and remote checkout remain retained because
-A is live; removal/unregistration follows verified terminal preservation. The
-shared authoring checkout remains the designated recovery location.
+Necessary current-result Convergence request:
+`2026-09-14-folr-augmentation-b01-result-closeout-review-01`.
+Packet: `pro_packets/20260914_augmentation_b01_result_closeout_review/`.
+Fixed result input`15f47648566c923c28389778b67313c6292e4a9a`;
+TASK`53f9f10aa8612da7375ef7c8e2492670fb53801f`;
+HANDOFF`48c8658dfb887ee5a566bfde6a9961a18d7ba610`.
+Author=parent is this DM. Registered independent Luna/high Transport is
+`01a09ea0-4a86-75b0-826d-6f864efa7480`, Codex iab/6 Pro; requested existing
+Convergence conversation`6aa18137-9d88-83e8-a01f-46630813faf8`.
+Pro may add only this round's`archive/RESPONSE.md` to the shared direction branch
+and its Issue15 delivery comment, with the accepted full-Markdown fallback.
 
-## First recovery action and remaining closeout
+The first App assignment returned success. Transport then ended its MGTAP turn
+idle with an empty nonterminal queue and omitted this request. DM's actual
+readback found no FOLR queue entry and resumed the same unchanged assignment,
+requiring same-conversation effect reconciliation before any Send. Queue absence
+is not itself verified provider nonacceptance. The recovery is not a second
+scientific request. Provider acceptance/full response is not yet observed by DM.
+A parent callback must retain model`gpt-6-astra`,thinking`max`; Transport stays
+Luna/high. See packet`DISPATCH_RECEIPT.json` for the actual control facts.
 
-Read this handoff, current execution record and canonical controls. Reconcile the
-original A handle and actual monitor state. If its accepted terminal event is ready,
-collect/check its original output and exact G input digest, preserve checkpoint/logs/
-controls with raw archive/member hashes, independently recompute the frozen primary
-and publish the complete result/intake/Chinese brief. The prepared terminal-only
-readback script is under the same local temp run root as
-`collect_augmented_terminal.py`; it has been syntax-checked but not executed.
-Its existence does not establish a result. Do not replace or extend either fit.
-
-Then arrange the one necessary independent current-result review through the
-registered Transport, preserve its full answer and respond to material findings.
-Restrict that question to completed-object integrity, interpretation and handoff;
-future research suggestions are deferred, with no new successor consultation.
-After evidence-preserving cleanup and accepted main integration, update this
-handoff to actual final commits/statuses and send its immutable commit/path plus
-remaining obligations directly to original ACVC DM. Only then record
-`owner-paused-awaiting-explicit-resume`. No claim of completed handoff, zero live
-obligations or fully measured cost is made at this interim boundary.
+First recovery action: inspect this exact request's actual Transport/provider
+state, preserve any accepted input and complete response without resending, read
+the full review and address material findings. Complete its scientific intake,
+update this handoff to actual final review/cleanup/integration commits, integrate
+accepted paths/current operational records and send the final immutable handoff
+path/commit plus remaining obligations to original ACVC
+`01a09dfa-0655-7831-aa3a-9fff2ddd2508`. Then record owner-paused-awaiting-explicit-resume.
+No other FOLR provider recovery remains. ACVC's independent Portfolio dialogue
+is not a FOLR dependency. No successor decision, task archival or vacancy follows.

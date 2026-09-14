@@ -10,5 +10,16 @@
   "recorded_utc": "2026-09-14T20:42:21.964346+00:00",
   "provider_acceptance": "Not yet observed by DM; Transport reconciles exact request before Send.",
   "owner_scope": "Current-result review closeout under OWNER_PAUSE_AFTER_INFLIGHT_20260914; no successor consultation.",
-  "parent_callback_requirement": "model gpt-6-astra, thinking max"
+  "parent_callback_requirement": "model gpt-6-astra, thinking max",
+  "same_assignment_recovery": {
+    "reason": "Transport ended latest MGTAP turn idle without adding the delivered FOLR assignment to its durable queue.",
+    "observed_thread_turn": "01a0a19a-a6d8-7493-b14a-a2ba3013ab91",
+    "observed_status": "idle",
+    "matching_queue_entry_present": false,
+    "followup_control_messages": 1,
+    "followup_tool_result": "success",
+    "actual_provider_acceptance": "UNVERIFIED; actual conversation reconciliation required, no blind repeat Send",
+    "source_handoff_unchanged": true,
+    "recorded_utc": "2026-09-14T20:46:54.907697+00:00"
+  }
 }
