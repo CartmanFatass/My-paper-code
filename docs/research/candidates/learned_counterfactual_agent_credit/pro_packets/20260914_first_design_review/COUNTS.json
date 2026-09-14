@@ -86,5 +86,15 @@
   },
   "one_rollout_q_baseline_input_bytes": 12257280,
   "one_rollout_q_baseline_input_mib": 11.689453125,
-  "cost_limits": "Dense multiply-accumulate counts omit nonlinearities, backwards, recurrent learning, environment and I/O. They are not a throughput, total-work ratio or measured capacity claim. Actual scientific exposure remains zero in this batch."
+  "cost_limits": "Dense multiply-accumulate counts omit nonlinearities, backwards, recurrent learning, environment and I/O. They are not a throughput, total-work ratio or measured capacity claim. Actual scientific exposure remains zero in this batch.",
+  "intake_correction": {
+    "reviewed_input_commit": "b5a4265071e302902f1195dd7dd8e68ce3632f40",
+    "selected_object": "LCAC_B01_256",
+    "scalar_v_old_baseline_rows": {
+      "256": 65536,
+      "512": 131072
+    },
+    "reuse": "one prefit V inference per factual training tick, reused through all four epochs; no extra fitting",
+    "current_experiment_launches": 0
+  }
 }

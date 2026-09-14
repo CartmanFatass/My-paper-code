@@ -1,0 +1,81 @@
+{
+  "id": "20260913-learnedc-002",
+  "created": "2026-09-13T19:27:15-07:00",
+  "direction": "learned_counterfactual_agent_credit",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "LCAC-B01：一对256训练/32最终评估的分类动作原生学习比较",
+  "context": "同一五UAV任务和去中心actor；factual标量Q按当前rollout拟合前快照做七动作baseline，与完整标量V训练比较。只选首对象和下一实现任务，当前模型/原生步/Adam/评估0。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留卡片并由DM直接实现及独立高风险代码review，当前不启动实验"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止依赖此卡的新执行并由DM重新作首对象或生命周期判断"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按实际指令前瞻修订未运行对象，保留旧卡与全部review证据"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "已落实独立review的freeze、shape、V拟合记录与不确定性边界；只保留一对首对象",
+  "evidence": [
+    "docs/research/candidates/learned_counterfactual_agent_credit/LCAC_B01_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L10",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留 DM 已执行的 LCAC 首对象选择：先实现一对256训练/32最终评估的标量Q与标量V比较？这是异步介入入口，不等待批准。",
+    "changes_if_approved": [
+      {
+        "target": "LCAC DIRECTION.md 与 LCAC-B01",
+        "from": "有槽位的历史注册，512 offer仍未分配",
+        "to": "CONTINUE；选择新的256/32 B01进入DM直接实现，尚无模型或实验启动"
+      }
+    ],
+    "if_refused": "在下一干净边界应用所有者指定替代选项；保留已完成review和全部历史，不自动启动、延长、重跑或改写旧512提案。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/learned_counterfactual_agent_credit/pro_packets/20260914_first_design_review/archive/RESPONSE.md",
+        "quote": "The scalar joint-Q versus trained central-V comparison is a reasonable first implementation, but the evidence does not preferentially select 512 episodes.",
+        "why": "独立review认可这个有限原生学习问题；256比512具有更小的已知训练暴露，且不需要额外诊断前置。"
+      },
+      {
+        "path": "docs/research/candidates/learned_counterfactual_agent_credit/LCAC_B01_SCIENCE_CARD_20260914.md",
+        "quote": "One fresh matched training pair, master9411 (declared identifier only; no RNG/model instantiated by this card).",
+        "why": "首对象限于一对，保留有能力的同信息actor/完整V学习，不把32评估世界当训练重复。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/learned_counterfactual_agent_credit/pro_packets/20260914_first_design_review/archive/RESPONSE.md",
+        "quote": "The strongest case against my 256 preference is that it may observe immature Q learning while implementation/review costs are largely fixed; a later fresh 512 comparison could duplicate substantial work.",
+        "why": "256/512没有数据裁决，选择不明显，所以标记close-call；Q外推、V欠拟合和完整成本仍未知。"
+      }
+    ],
+    "uncertainty": [
+      "LCAC尚无经验结果；缺失headroom不是零，也不构成新增启动门槛。",
+      "Q额外4480参数和反事实外推可能改变有限优化；不能识别因果信用或方差降低。",
+      "单训练配对只产生条件于该配对的固定面板描述，不能估计训练总体不确定性。",
+      "若256结果无明显差异，不自动追加512或另一个seed；DM根据实际信息价值再作决定。"
+    ],
+    "cost": {
+      "compute": "当前模型/原生步/Adam/评估均0。已完成一次独立设计review，support/provider/lifetime总成本UNKNOWN。选中首对象预计147456 native ticks、1024 Adam、2293760 Q baseline rows；900秒/完整arm与1200秒实现support是可前瞻修订的计划，不是已测成本或旧offer拨付。",
+      "owner_time": "无需回复；可异步选择保留、512、PARK或改用multi-output设计。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "CONTINUE LCAC and select one256-train/32-final scalar-Q versus trained-V B01 for direct DM implementation.",
+    "source": "docs/research/candidates/learned_counterfactual_agent_credit/LCAC_FIRST_DECISION_20260914.md"
+  },
+  "starred": false
+}

@@ -1,0 +1,17 @@
+{
+  "repository": "CartmanFatass/My-paper-code",
+  "branch": "codex/lcac",
+  "delivery_commit": "b98a5f084107143fc8650b34a3ff8b06312002fe",
+  "response_path": "docs/research/candidates/learned_counterfactual_agent_credit/pro_packets/20260914_first_design_review/archive/RESPONSE.md",
+  "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/b98a5f084107143fc8650b34a3ff8b06312002fe/docs/research/candidates/learned_counterfactual_agent_credit/pro_packets/20260914_first_design_review/archive/RESPONSE.md",
+  "response_blob_sha": "bca7e5976174328f685f298a00451144723a901f",
+  "local_full_response_path": "C:\Projects\HMASD\temp\sessions\hmasd-chatgpt-pro-transport\archive\learned_counterfactual_agent_credit\lcac-first-design-review-20260914-01\GITHUB_RESPONSE.md",
+  "local_full_response_sha256": "04a0eb8bd8cb3874a904921913e343ed40ee96fb3a2e2e5a43e0e501e3eebbf9",
+  "local_full_response_bytes": 11986,
+  "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/20",
+  "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/20#issuecomment-5658110830",
+  "comment_id": 5658110830,
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/542dc20551fb6d921b8a86de00850818aa268fca/docs/research/candidates/learned_counterfactual_agent_credit/pro_packets/20260914_first_design_review/TASK.md",
+  "task_sha": "542dc20551fb6d921b8a86de00850818aa268fca",
+  "evidence_sha": "b5a4265071e302902f1195dd7dd8e68ce3632f40"
+}
