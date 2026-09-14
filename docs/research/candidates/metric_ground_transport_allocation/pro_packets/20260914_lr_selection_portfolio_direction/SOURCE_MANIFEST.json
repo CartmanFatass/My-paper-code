@@ -1,0 +1,225 @@
+{
+  "request_id": "2026-09-14-mgtap-lr-selection-direction-decision-01",
+  "repository": "CartmanFatass/My-paper-code",
+  "report_sha": "fcdc592236660389ca6c651a23973d32cc534ed5",
+  "global_snapshot_sha": "a65a0013fec15eb1cc979566ea3b193abc623741",
+  "scope": "MGTAP direction-level interpretation only; preserve other directions and three-slot owner constraints",
+  "references": [
+    {
+      "id": "report",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/REPORT.md",
+      "commit_sha": "fcdc592236660389ca6c651a23973d32cc534ed5",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/fcdc592236660389ca6c651a23973d32cc534ed5/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/REPORT.md",
+      "purpose": "完整方向报告：实际结果、假设更新、完整审查回应、最强PARK替代、具体下一辨别和全局机会成本。",
+      "provenance": "DM建议，不是已应用方向裁决；其bc4快照由本请求固定a65共享记录前瞻补充。"
+    },
+    {
+      "id": "authority",
+      "path": "docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+      "commit_sha": "a65a0013fec15eb1cc979566ea3b193abc623741",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/a65a0013fec15eb1cc979566ea3b193abc623741/docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+      "purpose": "完整当前协议，尤其首节最终方向权限和web-context合同。",
+      "provenance": "OWNER_DIRECT2026-09-14；优先于旧DM-final/Clerk-advice措辞。"
+    },
+    {
+      "id": "roles",
+      "path": "AGENTS.md",
+      "commit_sha": "a65a0013fec15eb1cc979566ea3b193abc623741",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/a65a0013fec15eb1cc979566ea3b193abc623741/AGENTS.md",
+      "purpose": "当前Operating model、Decision ownership、scientific gaps、unattended scope与Appendix A职责；保留实际资源和历史对象边界。",
+      "provenance": "当前共同控制；较早历史段落不撤销本次明确采用的Portfolio最终方向协议。"
+    },
+    {
+      "id": "peers",
+      "path": "docs/project/PEER_DM_COORDINATION.md",
+      "commit_sha": "a65a0013fec15eb1cc979566ea3b193abc623741",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/a65a0013fec15eb1cc979566ea3b193abc623741/docs/project/PEER_DM_COORDINATION.md",
+      "purpose": "完整共同记录、共享写入、三槽/真实空缺、同会话序列、Clerk退休职责。",
+      "provenance": "同级DM机械协调，不是审批层；不授权本次改变其他方向。"
+    },
+    {
+      "id": "global_report",
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "a65a0013fec15eb1cc979566ea3b193abc623741",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/a65a0013fec15eb1cc979566ea3b193abc623741/docs/research/portfolio/PORTFOLIO.md",
+      "purpose": "完整派生全局报告；按本报告及固定更近原始证据纠正MGTAP/FOLR旧运行行。",
+      "provenance": "不是实时调度真相或新科学排序；不同host的原始数值不能横向相减排名。"
+    },
+    {
+      "id": "global_registry",
+      "path": ".codex/hmasd-dm-sessions.toml",
+      "commit_sha": "a65a0013fec15eb1cc979566ea3b193abc623741",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/a65a0013fec15eb1cc979566ea3b193abc623741/.codex/hmasd-dm-sessions.toml",
+      "purpose": "三占用/零预留/零空缺；RCLE已完成B13并派发独立审查，Portfolio当前无活动请求；FOLR BANK在已记录执行中。",
+      "provenance": "请求前固定耦合快照；MGTAP随后已完成完整结果审查，以下固定全文/DM回应取代其较早等待行。"
+    },
+    {
+      "id": "direction",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "5a67bb53e5669fcd5fe4b8159047f7a48e3ac6dd",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/5a67bb53e5669fcd5fe4b8159047f7a48e3ac6dd/docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "purpose": "当前方向/家族问题、已完成LR程序与全文审查的更新；日期较早段落按历史读取。",
+      "provenance": "当前MGTAP科学位置；无默认升级或新实验。"
+    },
+    {
+      "id": "actual_intake",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LR_SELECTION_B01_INTAKE_20260914.md",
+      "commit_sha": "5a67bb53e5669fcd5fe4b8159047f7a48e3ac6dd",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/5a67bb53e5669fcd5fe4b8159047f7a48e3ac6dd/docs/research/candidates/metric_ground_transport_allocation/MGTAP_LR_SELECTION_B01_INTAKE_20260914.md",
+      "purpose": "完整实际结果、选率/最终配对、所有反例、成本、原始数据审计和独立审查补记。",
+      "provenance": "一个选择master和一对最终训练；当前建议不等于方向裁决。"
+    },
+    {
+      "id": "full_review",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_results_review/archive/RESPONSE.md",
+      "commit_sha": "68144bc0123397fbdc5184fcc4e86055c05c20d8",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/68144bc0123397fbdc5184fcc4e86055c05c20d8/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_results_review/archive/RESPONSE.md",
+      "purpose": "完整166行独立实际结果审查，含最强PARK论证、建议、实际访问声明和未重放范围。",
+      "provenance": "原Git交付35098bytes/SHA256d43f75460ad57df249696f0aa157717f0018f935eec08ad92ea9170f9a20b55c；独立科学建议，不是方向权限。"
+    },
+    {
+      "id": "review_intake",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_results_review/INTAKE.md",
+      "commit_sha": "5a67bb53e5669fcd5fe4b8159047f7a48e3ac6dd",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/5a67bb53e5669fcd5fe4b8159047f7a48e3ac6dd/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_results_review/INTAKE.md",
+      "purpose": "完整DM回应：验证DENSE优先的选择面板、训练/选择不确定性、固定率重复性与全程序重复性的区别、实际后果及原始字节。",
+      "provenance": "没有新seed/card/launch或生命周期应用；原UI复制换行观察不替代实际Git字节核对。"
+    },
+    {
+      "id": "park_knowledge",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/PARK.md",
+      "commit_sha": "7cfd65834b3b54f18c488706295aac85b86bb531",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/7cfd65834b3b54f18c488706295aac85b86bb531/docs/research/candidates/metric_ground_transport_allocation/PARK.md",
+      "purpose": "完整PARK知识、旧有符号/结构结论、最强停止理由与重新研究边界。",
+      "provenance": "历史PARK及反例不能擦除，也不作为当前审批或继续门槛。"
+    },
+    {
+      "id": "prior_portfolio",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/PORTFOLIO_USER_COPY.md",
+      "commit_sha": "304450d6f9f776c2e72fe6d3517a6909e9ee83ae",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/304450d6f9f776c2e72fe6d3517a6909e9ee83ae/docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/PORTFOLIO_USER_COPY.md",
+      "purpose": "完整两份用户复制的Portfolio答复；读取原可选分支问题与重入理由，和本轮已完成事实作实质比较。",
+      "provenance": "用户交付复制件，不冒充新浏览器导出；旧容量/角色/约束措辞按历史处理。"
+    },
+    {
+      "id": "reentry_response",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/DM_REENTRY_INTAKE.md",
+      "commit_sha": "7cfd65834b3b54f18c488706295aac85b86bb531",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/7cfd65834b3b54f18c488706295aac85b86bb531/docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/DM_REENTRY_INTAKE.md",
+      "purpose": "完整DM重入解释和后续附记：为何选择对称有限LR机会而非不变early256采样，保留最强PARK替代。",
+      "provenance": "前瞻选择后发生真实执行；早期准备/Clerk路由段是日期明确的历史。"
+    },
+    {
+      "id": "frozen_card",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LR_SELECTION_B01_SCIENCE_CARD_20260914.md",
+      "commit_sha": "2d351d48604396ce478aa900584bd24b3255def5",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/2d351d48604396ce478aa900584bd24b3255def5/docs/research/candidates/metric_ground_transport_allocation/MGTAP_LR_SELECTION_B01_SCIENCE_CARD_20260914.md",
+      "purpose": "完整冻结§§1–5：原始合同、选择/holdout、MEI、独立单位、成本/后果。",
+      "provenance": "真正启动前版本，冻结字段不能因结果修改；未完成状态元数据是当时快照。"
+    },
+    {
+      "id": "native_summary",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/RUN_SUMMARY.json",
+      "commit_sha": "7cfd65834b3b54f18c488706295aac85b86bb531",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/7cfd65834b3b54f18c488706295aac85b86bb531/docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/RUN_SUMMARY.json",
+      "purpose": "完整八拟合元数据、候选均值、选率、全部最终值/主量、计数与嵌套时钟。",
+      "provenance": "原始完成记录，不把候选或世界数量伪装成训练重复。"
+    },
+    {
+      "id": "actual_audit",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/INTAKE_ANALYSIS.json",
+      "commit_sha": "7cfd65834b3b54f18c488706295aac85b86bb531",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/7cfd65834b3b54f18c488706295aac85b86bb531/docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/INTAKE_ANALYSIS.json",
+      "purpose": "完整已执行数据审计结果、八拟合检查、配对主量和完整命令计时。",
+      "provenance": "数据读取/纯约定reduce；非额外拟合或独立的程序重复。"
+    },
+    {
+      "id": "prior_results_review",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_results_review/archive/RESPONSE.md",
+      "commit_sha": "47699fcad5714bbe8cfca43abef78c89a3887b62",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/47699fcad5714bbe8cfca43abef78c89a3887b62/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_results_review/archive/RESPONSE.md",
+      "purpose": "完整较早实际结果审查，尤其真实混合符号、机制/稳定排序不是B前提、停止应比较开发价值。",
+      "provenance": "旧8241/8242观察，不和8251/8252混合成同一主量。"
+    },
+    {
+      "id": "prior_review_response",
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_results_review/INTAKE.md",
+      "commit_sha": "7cfd65834b3b54f18c488706295aac85b86bb531",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/7cfd65834b3b54f18c488706295aac85b86bb531/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_results_review/INTAKE.md",
+      "purpose": "完整旧DM回应与价值取舍，检验本次是否真正改变问题而非循环贴close-call标签。",
+      "provenance": "保留当时判断；新正结果不追溯宣告其错误。"
+    },
+    {
+      "id": "method",
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "a65a0013fec15eb1cc979566ea3b193abc623741",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/a65a0013fec15eb1cc979566ea3b193abc623741/docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "采用§§7–8的科学/组合原则和§§11.4、11.7–11.10的B完整性、证据单位、MEI、比例工作/成本与知识使用。",
+      "provenance": "科学原则有效；其中较早§8.1权限/Clerk文字由当前authority首节前瞻取代；RCLE等命名对象例外不导入MGTAP。"
+    },
+    {
+      "id": "foundations",
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "a65a0013fec15eb1cc979566ea3b193abc623741",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/a65a0013fec15eb1cc979566ea3b193abc623741/docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "直接读取§§2–4、6：合法信息/CTDE、完整学习程序、配对随机化及条件与总体不确定性。",
+      "provenance": "解释性科学知识，不是独立权限或新证明/全面阅读门槛。"
+    },
+    {
+      "id": "empirical_topic",
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "a65a0013fec15eb1cc979566ea3b193abc623741",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/a65a0013fec15eb1cc979566ea3b193abc623741/docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "完整相关训练单位、选择/holdout、方法比较/因果归因、成本范围讨论。",
+      "provenance": "帮助处理当前自适应B与潜在固定配置重复，不是C升级。"
+    },
+    {
+      "id": "runtime",
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "a65a0013fec15eb1cc979566ea3b193abc623741",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/a65a0013fec15eb1cc979566ea3b193abc623741/docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "purpose": "General requirements第1节：完整逻辑调用、规划/调查参考与真实资源/冻结端点边界。",
+      "provenance": "只为成本/执行约束解释；本次没有实现/性能探测/新wall额度。"
+    },
+    {
+      "id": "rcle_actual",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/c58ec2fb49795035ff99f5ba9c60c44083f8d13b/docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md",
+      "purpose": "完整RCLE最新已执行B13结果/取舍/成本与未取得独立实际结果审查的边界。",
+      "provenance": "RCLE DM原始科学intake，1fit且有greedy反例/恢复取舍；不要求本次改变RCLE。"
+    },
+    {
+      "id": "rcle_application",
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/INTAKE.md",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/c58ec2fb49795035ff99f5ba9c60c44083f8d13b/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/INTAKE.md",
+      "purpose": "完整已应用Portfolio CONTINUE回应、B13真实执行补记及MGTAP后来事实的处理。",
+      "provenance": "同会话前驱已完成，不能继续当作未执行或未释放；不改原前驱答复。"
+    },
+    {
+      "id": "folr_application",
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md",
+      "commit_sha": "4776103de4f55beaee610c52506112651bfaed04",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/4776103de4f55beaee610c52506112651bfaed04/docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md",
+      "purpose": "完整FOLR CONTINUE的科学理由、B02反例、DISH偏好撤回、B03新程序观察及成本边界。",
+      "provenance": "作用于FOLR既有第三槽，无新空缺；不能据此强制所有方向固定第二seed。"
+    },
+    {
+      "id": "folr_generic",
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/GENERIC_INTAKE.md",
+      "commit_sha": "faef7f8b0bf996ffaf0818d201608d0fe4962ed3",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/faef7f8b0bf996ffaf0818d201608d0fe4962ed3/docs/research/candidates/vap_folr_core/entity_history_b03_781501/GENERIC_INTAKE.md",
+      "purpose": "完整已完成Generic单臂原生事实、2005.71s完整成本、主量范围及BANK照卡执行。",
+      "provenance": "一个已拟合端点，不是B03配对结论或跨host评分。"
+    },
+    {
+      "id": "folr_execution",
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/EXECUTION.json",
+      "commit_sha": "ed98c18dd793aac5a810ff812fe755cd09544711",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/ed98c18dd793aac5a810ff812fe755cd09544711/docs/research/candidates/vap_folr_core/entity_history_b03_781501/EXECUTION.json",
+      "purpose": "读取接受/终止、Generic收集、BANK实际运行/Monitor和固定两臂科学曝光。",
+      "provenance": "固定快照中BANK尚未终止；后续事实不能预先假定，其他方向工作不在本次裁决范围。"
+    }
+  ]
+}
