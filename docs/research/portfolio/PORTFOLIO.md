@@ -1,6 +1,6 @@
 # 科研 Portfolio 报告
 
-> OWNER_DIRECT 2026-09-14：各方向完成手中任务与实验后暂停并写handoff；不停止已接受的运行/审查，不启动后继实验或补位。[当前指令](decisions/2026-09-14-owner-pause-after-inflight.md)。三个席位保持，科学CONTINUE等既有处置与这次运行暂停分别记录。
+> OWNER_DIRECT 2026-09-14：ACVC、MGTAP、FOLR 的在手任务、实验和完整审查均已收尾，三份最终 handoff 已提交并整合，当前统一暂停。[交接总入口](handoffs/2026-09-14-owner-pause.md)。后继实验、新方向和补位停止新增，等待明确恢复；三个席位及既有科学处置保留。
 
 
 当前目标为三个占用与预留席位。Portfolio 按 [当前决策协议](../../project/PORTFOLIO_DECISION_PROTOCOL.md)
@@ -17,7 +17,7 @@
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 固定1e-4新8253配对完成：COND−DENSE−0.025924927546066238 J，COND_ADVERSE，条件世界SE0.0027978641，2正/30负；前次8252正向及更早混合结果保留。这次未再出现有用正向，不是普遍不可复现、稳定劣势或事前两种子确认。 | 占用1席，科学CONTINUE/DENSE默认保留；当前工作全部收尾，现已按所有者指令暂停。[最终handoff](../candidates/metric_ground_transport_allocation/MGTAP_OWNER_PAUSE_HANDOFF_20260914.md)发布于fa7edbb339c6b9d9d33b22c93dd2ae68a58d1240。完整181行独立审查494dbefe0已读取并逐项回应，未见需改判或补跑缺陷；收窄复现措辞，明确机制解释不是新增普通B的门槛。实际2拟合/178.86s/exit0，证据及checkpoint完整保留，两轮远端目录已核验回收，无native/monitor/provider遗留。后续取舍仅保留供明确恢复时讨论；不PARK、不释放席位、不新增实验/咨询。 |
 | [FOLR](../candidates/vap_folr_core/DIRECTION.md) | A-G增强B01完整：G−0.966484375，A4.329921875，d=+5.29640625，AUGMENTED_ABOVE_MEI；DM低置信度Generic胜预测错误。每臂1次训练/128条件评价，不声称稳定排名或持久记忆因果收益；旧替换BANK B02/B03负结果分别保留。 | 当前实验、完整独立复核与实质回应、原始保全和远端回收均完成，现依所有者指示暂停，等待明确恢复；占用1席，科学CONTINUE/MEDIUM保持。复核未发现推翻结果的缺陷，两处表述已修正；无存活实验、监控、Pro请求或未决审查问题。native3975.48s、CPU3972.96s、study17377s，完整支持成本未知。最终[交接](../candidates/vap_folr_core/HANDOFF_20260914_OWNER_PAUSE.md)已发布；无后继实验、空缺或新方向。 |
 
-实际为3占用、0预留、0空缺。ACVC已完成当前对象及完整Portfolio回应并释放对话，现已暂停；MGTAP也已完成当前对象及完整审查并暂停，FOLR也已完成其在手工作、完整复核和最终交接并暂停。所有后继实验和补位依直接所有者暂停指令停止新增。
+实际为3占用、0预留、0空缺；三个方向现均已完成在手工作并运行暂停。审查传递队列无未完成请求。完整交接见[总入口](handoffs/2026-09-14-owner-pause.md)，新研究须待明确所有者恢复指令。
 第四方向限制的历史效力保留；当前额外适用所有者暂停指令：仅收尾在手工作，不新增研究或补位。旧报告的 UCOPE/LCAC/ACVC 工作集和
 RCLE/MGTAP/FOLR 归档表已经过期，不能用来判断现在是否“开始后直接结束”。
 

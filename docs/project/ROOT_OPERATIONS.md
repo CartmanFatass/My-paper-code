@@ -13,6 +13,8 @@ read the protocol's fixed repository context; local conversation/skill inheritan
 
 ## Owner pause after current work — 2026-09-14
 
+All three current directions have now completed their in-hand experiments, full scientific intake and final handoffs. Current operational state is owner_paused; [the completed handoff index](../research/portfolio/handoffs/2026-09-14-owner-pause.md) names actual committed sources, preserved assets and first resume actions. Transport has zero nonterminal requests.
+
 Current owner instruction is [pause after current work](../research/portfolio/decisions/2026-09-14-owner-pause-after-inflight.md): finish tasks/experiments already in hand without stopping accepted processes or provider requests, write committed handoffs, then remain operationally paused. No successor experiment, new direction or vacancy replacement starts. Scientific CONTINUE/PARK history and occupied slots remain; this is not a scientific disposition. Original DMs retain collection, current-object review, integration and handoff ownership. A later explicit owner resume is required for new research.
 
 ## Equal direction owners
