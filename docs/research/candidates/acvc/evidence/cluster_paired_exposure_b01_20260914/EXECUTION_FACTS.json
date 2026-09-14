@@ -1,0 +1,22 @@
+{
+  "object": "ACVC_CLUSTER_PAIRED_EXPOSURE_B01",
+  "launch_sha": "8fd41b61f3c8d3c70057492a18e619ef0faeda78",
+  "dm_parent_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "dm_native_name": "/root",
+  "execution_node": "hmasd-wsl-node",
+  "supervisor": "/usr/local/bin/agent-task",
+  "handle": "acvc-paired-exposure-b01-8fd41b61f",
+  "cwd": "/home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f",
+  "output": "/home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914",
+  "monitor": "/root/acvc_paired_exposure_b01_monitor",
+  "monitor_record": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914_monitor.json",
+  "state": "prepared_not_launched",
+  "scientific_invocations_accepted": 0,
+  "planned_command": "/usr/local/bin/agent-task run acvc-paired-exposure-b01-8fd41b61f env HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 bash /home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/experiments/candidates/acvc/cluster_paired_exposure_b01/launch.sh 8fd41b61f3c8d3c70057492a18e619ef0faeda78 /home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914",
+  "preparation": {
+    "exact_remote_head_confirmed": true,
+    "bash_syntax_passed": true,
+    "launcher_sha256": "8c4bc58fd1dc7e1e608bf312411e34157d769e599fe2139a0ec5a28844a31854",
+    "shell_startup_warnings": "Configured zsh emitted zle/monitor/gitstatus initialization warnings; fetch/worktree commands succeeded with exit0 and full SHA/launcher digest verified."
+  }
+}
