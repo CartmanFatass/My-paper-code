@@ -1,0 +1,50 @@
+{
+  "status": "COMPLETE_ORIGINAL_RESPONSE_AND_ACTUAL_ACCEPTED_BODY",
+  "recorded_at_utc": "2026-09-14T12:37:36.140256+00:00",
+  "author_thread_id": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "preserved_earlier_metadata": {
+    "assistant_node_id_first_return": "936a224b-a316-40d6-a326-c0803ffdfb8",
+    "actual_assistant_id": "936a224b-a316-40d6-a326-c0803ffdfb8c",
+    "original_accepted_user_node_file_meaning": "The23,740byte ACCEPTED_USER_NODE.txt is the saved logical composer, not independently captured post-Send body; unchanged and truthfully labelled.",
+    "operator_final_dom_local_file": null,
+    "operator_final_git_state": "No commit/push from Transport; final author accepts local publication ownership. This is not a scientific or owner-approval blocker.",
+    "provider_reasoning_field": "max"
+  },
+  "accepted_user_id": "712fe70b-7b64-4cd9-8589-dc05506fd639",
+  "actual_assistant_id": "936a224b-a316-40d6-a326-c0803ffdfb8c",
+  "response": {
+    "file": "RESPONSE.md",
+    "bytes": 21323,
+    "characters": 10034,
+    "lines": 185,
+    "sha256": "3b81868e9065d370f0d2a5430dd81da960d8a4cd3d4be799dff7c98cbd54ceb7",
+    "exact_original_tool_string": true,
+    "source_call_id": "call_CNyWGTtXByRKjMrooavt6bJR",
+    "source_rollout_line": 6788,
+    "source_output_timestamp": "2026-09-14T12:22:32.633Z"
+  },
+  "actual_accepted_body": {
+    "source": "Original request-scoped Transport CUA tool output string; extracted without text reconstruction or browser/backend/loopback access.",
+    "source_rollout": "C:/Users/fires/.codex/sessions/2026/09/13/rollout-2026-09-13T23-35-00-01a09ea0-4a86-75b0-826d-6f864efa7480.jsonl",
+    "line": 7313,
+    "call_id": "call_u2F36SymJA2vkzHFTMK1A6ba",
+    "captured_at": "2026-09-14T12:35:47.688Z",
+    "recorded_at_utc": "2026-09-14T12:36:11.768200+00:00",
+    "user_id": "712fe70b-7b64-4cd9-8589-dc05506fd639",
+    "file": "ACCEPTED_USER_DOM_BODY.txt",
+    "bytes": 23839,
+    "characters": 23814,
+    "sha256": "6c7d9f59f2312da2a64d9f7ba10eb7c585aa38294e2af56e4ab39e2d17a1f2ec",
+    "terminal_lf": false,
+    "body_boundary": "Actual persisted body excluding Show more/Show less controls; not the pre-Send composer.",
+    "comparison": "Exactly equal to bound Git PROMPT.md minus its sole terminal LF; no other character difference.",
+    "original_matching_capture_count": 2,
+    "original_composer_preserved": true
+  },
+  "composer_preserved": "COMPOSER_LOGICAL_CAPTURE.txt and ACCEPTED_USER_NODE.txt remain their original23740byte source-labelled copies; no relabelling or editing.",
+  "scientific_acceptance": "Author read complete185line answer and responded in ../INTAKE.md; actual reservation/task restoration remains separately recorded.",
+  "send_count": 1,
+  "new_scientific_invocations": 0,
+  "archive_owner": "RCLE DM now owns exact archive commit/push; no further Transport acquisition needed.",
+  "provider_mode_note": "Observed provider is6Pro; max is the selected Codex DM effort, not a separately verified provider reasoning setting."
+}
