@@ -1,0 +1,16 @@
+{
+  "batch_id": "FOLR_ENTITY_HISTORY_B02_781401",
+  "event_id": "FOLR_B02_GENERIC_ACCEPTED_20260914",
+  "handle": "folr-b02-generic-781401-82b12d7e0",
+  "source_sha": "82b12d7e0f205ea228ca69e28e581ca6ee5f2ca6",
+  "node": "wsl_4070",
+  "ssh_target": "hmasd-wsl-node",
+  "supervisor": "/usr/local/bin/agent-task",
+  "pid": 3658558,
+  "cwd": "/home/wu/hmasd-worktrees/folr-entity-history-b02-781401-82b12d7e0",
+  "output": "/home/wu/hmasd-worktrees/folr-entity-history-b02-781401-82b12d7e0/experiments/results/folr_entity_history_b02_781401/GENERIC_RETAIN",
+  "supervisor_log": "/home/wu/.agent-tasks/folr-b02-generic-781401-82b12d7e0/task.log",
+  "state": "adopted_running",
+  "last_observed_utc": "2026-09-14T04:43:47Z",
+  "delivery": "pending_terminal"
+}
