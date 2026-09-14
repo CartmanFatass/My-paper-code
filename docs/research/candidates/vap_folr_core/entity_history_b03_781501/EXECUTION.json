@@ -1,6 +1,6 @@
 {
   "object": "FOLR_ENTITY_HISTORY_B03_781501",
-  "phase": "GENERIC_READY_TO_LAUNCH",
+  "phase": "GENERIC_RUNNING",
   "planned_at_utc": "2026-09-14T08:16:51.805742+00:00",
   "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
   "portfolio_decision_sha": "4776103de4f55beaee610c52506112651bfaed04",
@@ -16,7 +16,49 @@
     "GENERIC": "folr-b03-781501-generic",
     "BANK": "folr-b03-781501-bank"
   },
-  "accepted_handles": {},
+  "accepted_handles": {
+    "GENERIC": {
+      "name": "folr-b03-781501-generic",
+      "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+      "accepted_at_utc": "2026-09-14T08:24:20.780128+00:00",
+      "status_at_acceptance": {
+        "task": "folr-b03-781501-generic",
+        "status": "running",
+        "exit_code": null,
+        "pid": 3666806,
+        "uptime_seconds": 0,
+        "tmux_active": true
+      },
+      "out": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC",
+      "supervisor_directory": "/home/wu/.agent-tasks/folr-b03-781501-generic",
+      "admission": {
+        "assessed_at": "2026-09-14T08:24:20.801708Z",
+        "available_physical_bytes": 15631683584,
+        "captured_at": "2026-09-14T08:24:20.801307Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15631683584,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "monitor_adoption": {
+        "event_id": "FOLR_ENTITY_HISTORY_B03_781501:GENERIC:20260914T082420Z",
+        "sender_thread_id": "01a09efc-5418-7181-9700-800b9c755b8e",
+        "native_identity": "/root/folr_b03_monitor",
+        "received_at_utc": "2026-09-14T08:26:53.719792+00:00",
+        "direct_observation": "running, tmux_active=true, exit_code=null, PID3666806",
+        "state_path": "C:/Projects/HMASD/temp/directions/vap_folr_core/exp/entity_history_b03_781501/MONITOR_STATE.json",
+        "dm_routine_polling": "ended after direct MONITOR_ADOPTED; Monitor delivers terminal facts to this DM"
+      },
+      "launch_receipt": "GENERIC_LAUNCH_ACCEPTANCE.json"
+    }
+  },
   "launch_assets": {
     "GENERIC": {
       "source_path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/GENERIC.sh",
@@ -53,5 +95,6 @@
       "GENERIC_PREPARATION_RECOVERY.json",
       "LAUNCH_ASSET_PREPARATION.json"
     ]
-  }
+  },
+  "next_action": "Native Monitor owns Generic observation. On terminal facts DM collects/accepts Generic, then launches selected BANK in this same batch regardless of Generic sign/completeness; both results receive full scientific intake."
 }
