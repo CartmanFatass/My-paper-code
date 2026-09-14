@@ -5,10 +5,12 @@
 ACVC is **CONTINUE**, MEDIUM/recasts2, under the complete conforming
 [post-paired Portfolio decision](../../portfolio/pro_packets/20260914_acvc_post_paired_direction/archive/RESPONSE.md)
 and [full DM response/application](../../portfolio/pro_packets/20260914_acvc_post_paired_direction/INTAKE.md).
-The selected next objective is one prospective six-programme fixed1024 C-only study with
-final private C/F/own-dwell panels. It addresses expected added value under a declared
-training/evaluation law, with assumption-qualified single-task inference. The new science
-card, sampling/seed list, uncertainty method, source and invocation remain to be bound.
+The [six-programme fixed1024 C01 card](ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md)
+and first iid training/evaluation draw are now frozen. Final private C/F/own-dwell panels
+address expected added value under the declared law, with simultaneous df5 working-model
+t intervals and explicit actual-calibration limits. [Current intake](ACVC_CLUSTER_FIXED_RECIPE_C01_INTAKE_20260914.md)
+records the actual complete Sol/medium implementation assignment. Source acceptance,
+independent review and all six original native invocations remain unperformed.
 The original independent ACVC DM owns ordinary research, implementation, engineering acceptance,
 launch/observation, scientific intake and reports. Portfolio owns final direction-level
 CONTINUE/recast/PARK/CLOSE/reopening. Direction Pro supplies independent scientific review;
