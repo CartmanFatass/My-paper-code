@@ -241,7 +241,8 @@ implementation/repair, evidence interpretation and reports within current direct
 Portfolio is the global scientific synthesizer and final direction-level interpreter for
 CONTINUE, RECAST, PARK, CLOSE and reopening under current owner constraints and this evidence
 standard. At substantive lifecycle/family/recast questions or contested direction interpretation,
-DM submits complete evidence and alternatives under docs/project/PORTFOLIO_DECISION_PROTOCOL.md.
+DM submits complete evidence and alternatives under `AGENTS.md` §§2 and 4.8 and the
+current `hmasd-portfolio-task` procedure.
 DM cannot unilaterally PARK/CLOSE the direction or release its slot. Ordinary in-scope experiments
 do not require per-experiment Portfolio approval.
 
@@ -661,7 +662,7 @@ Moving a prohibited B prerequisite into a preceding A does not make it permissib
 
 Direction Pro provides independent scientific review. The DM preserves the complete response,
 answers material findings and owns corrections, claim limits, ordinary research execution and
-reports. Under §8.1 and PORTFOLIO_DECISION_PROTOCOL.md, Portfolio supplies final direction-level
+reports. Under §8.1 and `AGENTS.md` §§2 and 4.8, Portfolio supplies final direction-level
 interpretation and decisions within current owner/spec constraints; DM applies a complete conforming
 decision without Root ratification. Concrete unresolved scientific issues can receive focused review
 follow-up; direction review is not a lifecycle veto or per-experiment approval. Specification
