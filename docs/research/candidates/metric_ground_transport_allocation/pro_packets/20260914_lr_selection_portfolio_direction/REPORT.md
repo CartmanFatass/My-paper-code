@@ -73,7 +73,7 @@ partner sum processing versus intact raw/nonlinear DENSE. RecurrentPPO keeps
 agent_compound,chunk32,two episodes/rollout,four epochs,entropy.01 and global
 actor+critic clip.5; only Adam LR varies. CPUFP32/thread1 and private randomized
 objects remain. Full panels/counts/learning displacement were checked, and all
-20original native/supervisor members plus8checkpoints are preserved with hashes.
+20original native/supervisor members, including8checkpoints, are preserved with hashes.
 
 Native8251 now shows local LR sensitivity, beyond the old toy motivation. It does
 not explain old adverse runs or measure fresh-holdout tuning gain without an
