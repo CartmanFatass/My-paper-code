@@ -1,6 +1,6 @@
 {
   "object": "FOLR_ENTITY_HISTORY_B03_781501",
-  "phase": "GENERIC_NOT_LAUNCHED",
+  "phase": "GENERIC_READY_TO_LAUNCH",
   "planned_at_utc": "2026-09-14T08:16:51.805742+00:00",
   "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
   "portfolio_decision_sha": "4776103de4f55beaee610c52506112651bfaed04",
@@ -40,5 +40,18 @@
     "final_ticks": 2560
   },
   "admission": "Committed launcher immediately checks >=4GiB physical and effective available memory before runner; no current admission claimed.",
-  "resource_and_support_notes": "CPU FP32 Torch intra/inter1/1; DM plans3600s/arm,7200native+1800support are not hard stops. Remote supervisor usage lookup took0.35899999999674037s SSH elapsed; no scientific work. Full support/provider cost UNKNOWN."
+  "resource_and_support_notes": "CPU FP32 Torch intra/inter1/1; DM plans3600s/arm,7200native+1800support are not hard stops. Remote supervisor usage lookup took0.35899999999674037s SSH elapsed; no scientific work. Full support/provider cost UNKNOWN.",
+  "preparation_recovery": {
+    "initial_ssh_timeout_seconds": 35.03200000000652,
+    "cause": "Sparse checkout lacked committed launch-script blobs; plain bash Git show blocked in lazy network fetch.",
+    "verified_no_acceptance": "Same supervisor handle not_found; no Generic output directory or admission/learning; owned helper group3666451 verified and terminated with no remaining members.",
+    "repair": "Fetch only committed launch assets using configured zsh -lic and git HTTP/1.1; both byte hashes verified. Startup theme warnings retained; preparation exit0.",
+    "new_scientific_invocations": 0,
+    "receipts": [
+      "GENERIC_LAUNCH_RECEIPT.json",
+      "GENERIC_PREPARATION_RECONCILIATION.json",
+      "GENERIC_PREPARATION_RECOVERY.json",
+      "LAUNCH_ASSET_PREPARATION.json"
+    ]
+  }
 }
