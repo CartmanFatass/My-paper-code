@@ -1,5 +1,5 @@
 schema_version = 1
-mode = "independent_tasks"
+mode = "peer_dms"
 dm_model = "gpt-6-astra"
 dm_reasoning_effort = "max"
 research_state = "owner_resumed"
@@ -8,18 +8,18 @@ authority_correction = "2026-09-13-dm-full-lifecycle-pro-scientific-reviewer"
 root_role = "user_entry_and_workflow_control"
 heartbeat_role = "recovery_backstop"
 heartbeat_state = "MISSING"
-heartbeat_target = "clerk"
+heartbeat_target = "unassigned"
 
-main_writer = "clerk"
-main_writer_event = "MAIN_WRITER_RELEASED / three-slot-workflow-owner-correction"
+main_writer = "root"
+main_writer_event = "peer-dm-control-transition"
 main_writer_turn = "01a095b7-850f-7401-ad4e-5e4320d285f1"
 
-[clerk]
+[retired_clerk]
 thread_id = "01a09d6c-e4e0-7613-ba99-7b0a1b6c540e"
 host_id = "local"
 model = "gpt-5.6-luna"
 reasoning_effort = "high"
-state = "active"
+state = "retiring_handoff_requested"
 activated_event = "clerk-activate-20260913-01"
 last_observable_action = "three-slot target restored after DISH PARK; current directions and Portfolio continuation are recorded below"
 session_checkout = "C:/Projects/HMASD"
@@ -242,10 +242,12 @@ automatic_replacement = true
 target_slots = 3
 binding_key = "portfolio:cross_direction"
 transport_config = "C:/Projects/HMASD/.codex/hmasd-transport.toml"
-new_request_coordinator = "clerk"
+new_request_coordinator = "metric_ground_transport_allocation"
+coordinator_thread_id = "01a09cd8-676e-7513-806d-a86b7e104518"
+coordination_scope = "only current FOLR vacancy and transferred pending Portfolio exchange; no authority over peers"
 planning_state = "three_direction_target_lcac_vacancy_replacement"
 reserved_slots = 0
-request_status = "mgtap_selected_pending_dm_acceptance"
+request_status = "mgtap_selection_applied; folr_vacancy_handoff_reconciliation"
 request_status_commit = "723a4dcb3"
 request_conversation_id = "6aa77158-7194-83e8-8f8a-caf16ae6b84b"
 vacancy_source = "lcac-park-20260914;folr-park-20260914"
@@ -253,12 +255,19 @@ previous_selected_direction = "acvc"
 previous_selection_task_id = "01a09dfa-0655-7831-aa3a-9fff2ddd2508"
 selected_direction = "metric_ground_transport_allocation"
 selected_task_id = "01a09cd8-676e-7513-806d-a86b7e104518"
-pending_vacancy_direction = "metric_ground_transport_allocation"
-pending_vacancy_source = "learned_counterfactual_agent_credit"
+pending_vacancy_direction = "unselected"
+pending_vacancy_source = "vap_folr_core"
 pending_vacancy_count = 1
-next_action = "MGTAP CONTINUE is accepted and occupies the LCAC-replacement slot; FOLR released its slot via reversible PARK. RCLE/MGTAP are the two active directions; retain one remaining vacancy as a parked Portfolio candidate under the owner concurrency stop, with no fourth direction"
+next_action = "MGTAP DM owns current FOLR vacancy reconciliation and one Portfolio selection transaction; preserve any accepted Clerk request before sending. RCLE/MGTAP occupy two slots; target remains three, no fourth direction."
 selection_response_url = "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1"
 legacy_accepted_routes = "preserve_through_closeout"
 candidate_direction = "fourth-slot-portfolio-candidate-unselected"
 candidate_status = "parked-after-owner-concurrency-limit-20260914"
 owner_stop_event = "2026-09-14-stop-fourth-slot-request-only"
+
+[coordination]
+policy = "docs/project/PEER_DM_COORDINATION.md"
+model = "equal_peers_no_standing_coordinator"
+main_mutex = 'Local\HMASD_Main_Transaction'
+retirement_handoff_owner = "root"
+retirement_handoff_state = "awaiting_clerk_exact_pending_request_and_index_handoff"

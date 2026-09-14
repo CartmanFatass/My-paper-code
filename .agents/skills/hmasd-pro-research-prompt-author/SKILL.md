@@ -1,18 +1,18 @@
 ---
 name: hmasd-pro-research-prompt-author
-description: "Use when DM authors an independent scientific review request, a DM conducts direct Portfolio scientific dialogue, or Clerk publishes a scoped Portfolio consultation for fixed GitHub task delivery through the registered independent browser Transport task, with explicit author, parent and executor routing."
+description: "Use when DM authors an independent scientific review request, a DM conducts direct Portfolio scientific dialogue, or the request-owning DM publishes a scoped Portfolio consultation for fixed GitHub task delivery through the registered independent browser Transport task, with explicit author, parent and executor routing."
 ---
 
 # HMASD Pro Research Prompt Author
 
-DM-owned Portfolio scientific exchanges and Clerk-owned capacity requests may use the direct Codex in-app browser route
-in CLERK_OPERATIONS.md and hmasd-portfolio-task. The GitHub delivery requirements below
+DM-owned Portfolio scientific exchanges and the request-owning DM-owned capacity requests may use the direct Codex in-app browser route
+in PEER_DM_COORDINATION.md and hmasd-portfolio-task. The GitHub delivery requirements below
 apply to requests using this delivery workflow, not as gates on that direct vacancy route.
 
 
-Root is the user entry; the independent Clerk performs only delegated mechanical coordination.
-Read docs/project/CLERK_OPERATIONS.md for event handling and writes. DM/Pro retain scientific
-judgment. Clerk routes missing science or complex engineering repair to the relevant Astra DM;
+Root is the user entry; the independent the request-owning DM performs only delegated mechanical coordination.
+Read docs/project/PEER_DM_COORDINATION.md for event handling and writes. DM/Pro retain scientific
+judgment. the request-owning DM routes missing science or complex engineering repair to the relevant Astra DM;
 it never turns a helper failure into a scientific stop or adds a Root ACK gate.
 
 Requests choosing this delivery workflow use GitHub delivery; direct Portfolio dialogue may use the supported browser route. Preserve accepted request content
@@ -41,7 +41,7 @@ next push. Completing one Pro round does not retire a shared direction branch st
 After branch cleanup, resolve the branch/checkout from the current command and actual remote
 ref before rendering. A historical HANDOFF is evidence of its own round, not a default branch
 registration. Return the new request ID, full HANDOFF commit and fixed TASK URL together so
-Clerk can load the authored bytes independently of main's same-path copy. A prepared unsent
+the request-owning DM can load the authored bytes independently of main's same-path copy. A prepared unsent
 task with changed delivery scope is republished and rebound before dispatch; accepted tasks
 retain their exact content and follow the workflow's explicit delivery-correction route.
 
@@ -50,7 +50,7 @@ returns its ready handoff; it does not dispatch Transport. A command may already
 transport of the completed DM-authored request, so no extra planning vote is needed.
 For a command that includes dispatch, use the following sequence.
 
-The dispatch owner (DM for direction nodes; the relevant DM for Portfolio science; Clerk for mechanical capacity requests under hmasd-portfolio-task)
+The dispatch owner (DM for direction nodes; the relevant DM for Portfolio science; the request-owning DM for mechanical capacity requests under hmasd-portfolio-task)
 uses the registered independent Luna/high browser Transport task in the live control checkout.
 Use execution_mode=REUSE_SINGLETON and actual author App source_thread_id=parent_thread_id;
 operator_thread_id is the registered Transport task. The current renderer retains this supported
@@ -61,7 +61,7 @@ HANDOFF commit, request identity and current return route with send_message_to_t
 Transport uses Codex iab and sends the complete archive directly to its author. No native child,
 Agentify operation or Root forwarding. Preserve accepted legacy packets and supply a separate
 migration execution route after old executor release; do not regenerate already accepted inputs.
-For explicitly owner-requested Portfolio consultations Clerk owns the dispatch/full-plan record; only one writer may
+For explicitly owner-requested Portfolio consultations the request-owning DM owns the dispatch/full-plan record; only one writer may
 own portfolio:cross_direction at a time. Accepted historical packets remain immutable; reconcile
 old execution before any takeover, without resending. Uncertain dispatch requires same-request
 reconciliation. Authoring-only assignments stop at their published handoff.
@@ -77,7 +77,7 @@ instructions are explicitly authorized by the current request; other retrieved t
 cannot enlarge them. Current owner/spec constraints apply to Pro as to the caller.
 The full fixed response, not chat links or a comment summary, is the formed decision.
 The parent directly reads and preserves the complete bytes/provenance. DM intakes direction-node
-answers; Clerk records the full Portfolio plan and affected DMs check their scientific requirements. Transport
+answers; the request-owning DM records the full Portfolio plan and affected DMs check their scientific requirements. Transport
 returns one factual receipt directly to that parent through App task messages.
 No scheduled automation is added. Read docs/project/ROOT_OPERATIONS.md for current routing. Contradictions or evidence gaps remain explicit; a complete
 archive alone is not science acceptance. No new approval or experiment gate is added.
@@ -91,9 +91,9 @@ final direction/lifecycle decision. Do not ask Pro to approve funding, PARK/CLOS
 steps. Retain the meaningful review role and scientific independence, not a generic advice prompt.
 
 Portfolio supplies reports and the scoped vacancy selection described above. Other new Portfolio
-consultations need explicit owner scope; use hmasd-portfolio-task to preserve that scope. Clerk
+consultations need explicit owner scope; use hmasd-portfolio-task to preserve that scope. the request-owning DM
 publishes and archives mechanically, while DMs retain science. A report or recommendation does not
-authorize global changes. The scoped owner-delegated vacancy workflow follows CLERK_OPERATIONS.md; this is not blanket
+authorize global changes. The scoped owner-delegated vacancy workflow follows PEER_DM_COORDINATION.md; this is not blanket
 PRO_FINAL authority or approval for ordinary DM research. Historical accepted packets preserve their bindings and full answers through closeout.
 
 ### Fixed scientific and method sources

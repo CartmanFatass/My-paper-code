@@ -1,12 +1,12 @@
 # GitHub research collaboration
 
-Owner-delegated Clerk vacancy requests may instead use the direct Codex in-app browser route
-in CLERK_OPERATIONS.md and hmasd-portfolio-task. The GitHub delivery requirements below
+Owner-delegated the request-owning DM vacancy requests may instead use the direct Codex in-app browser route
+in PEER_DM_COORDINATION.md and hmasd-portfolio-task. The GitHub delivery requirements below
 apply to requests using this delivery workflow, not as gates on that direct vacancy route.
 
 
 DM authors and intakes direction Pro scientific reviews, responding to findings and retaining
-research/lifecycle decisions. Portfolio is the user report. Clerk publishes a Portfolio Pro packet
+research/lifecycle decisions. Portfolio is the user report. the request-owning DM publishes a Portfolio Pro packet
 only on an explicit owner commission, preserving its advice/implementation scope; recommendations
 do not automatically authorize global changes. Accepted old request bindings remain immutable.
 
@@ -28,7 +28,7 @@ that branch, establishing it on demand only if absent. Pro is authorized only to
 and its delivery-link comment. It cannot change source, main, PRs or direction state.
 An extra delivery branch requires a concrete special isolation reason in the handoff; there
 is no mandatory prefix or per-round branch. Only this exception is temporary: after complete
-archival/intake or explicit obsolete-request resolution, Clerk preserves fixed commits and retires
+archival/intake or explicit obsolete-request resolution, the request-owning DM preserves fixed commits and retires
 its names. Completing a round does not retire the shared direction branch while it remains in use.
 Uncertain accepted delivery keeps its original binding until reconciled; cleanup neither
 rewrites the fixed TASK nor grants Pro branch-deletion authority.
@@ -47,13 +47,13 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
 
 1. The author parent renders TASK.md and HANDOFF.json with `delivery_mode=github_delivery`.
    TASK_NOT_PUBLISHED is preparation state and has no provider payload. Follow the
-   normal worktree/integration rules. Clerk maintains control-plane files on main;
+   normal worktree/integration rules. the request-owning DM maintains control-plane files on main;
    Pro response delivery uses the scoped non-main branch.
 2. Commit and push TASK.md, then bind its full commit SHA using the renderer. Confirm
    that the fixed TASK is published and that the delivery branch and Issue exist.
    Commit and push the updated internal handoff.
 3. Send the rendered handoff via send_message_to_thread to the registered independent browser Transport.
-   Source and parent are the author (DM for direction nodes, Clerk for new Portfolio agendas); operator is the registered independent browser task.
+   Source and parent are the author (DM for direction nodes, the request-owning DM for new Portfolio agendas); operator is the registered independent browser task.
    Legacy requests retain their frozen metadata; assigned recovery records the actual App
    parent/executor separately. Transport inspects the actual page and request state,
    then bounded observation/archive and one direct receipt. Verified pre-Send nonacceptance permits
@@ -87,12 +87,12 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
    reads the complete response at its fixed commit, preserves original bytes and the
    comment snapshot, or reads the hash-verified downloaded artifact, and performs
    specification-conformance and scientific intake.
-   Clerk checks the actual changed scope and integrates under the normal Git rules.
+   the request-owning DM checks the actual changed scope and integrates under the normal Git rules.
    A file delivery or process success alone is not a formed scientific decision.
 
 Transport handles Pro observation and parent receipts under ROOT_OPERATIONS.md. Issue comments
 do not themselves establish automatic wakeup. Completion goes to the declared parent;
-Transport returns archives directly to its author parent. For ordinary DM questions Clerk receives
+Transport returns archives directly to its author parent. For ordinary DM questions the request-owning DM receives
 only the checked operational mapping; it records/maps the full new Portfolio plan and affected
 DMs check their scientific requirements.
 Repeated notifications reuse the existing request/commit/path intake.
@@ -108,8 +108,8 @@ Repeated notifications reuse the existing request/commit/path intake.
 | Response exists, comment is missing | Verify the Issue. Only confirmed absence permits completing the same authorized comment; retain the response. |
 | Comment exists, chat receipt or notification is missing | Recover the immutable delivery links and notify once; do not create another response or comment. |
 | Shared direction branch advances | Add only the scoped response on current descendant HEAD, retaining fixed evidence and unrelated files. Reconcile the remote commit before local pushes; report non-descendant history or target conflicts. |
-| Accepted legacy TASK forbids branch-base changes | Preserve its exact Send and reply. New workflow wording does not amend the accepted TASK. Clerk arranges a bounded delivery correction after reconciling actual file/comment state; use a distinct request and response path, unchanged scientific evidence unless explicitly authorized. |
-| Cleanup removed or renamed a delivery target | Reconcile the affected request and recovery ref before further writes. Correct unsent handoffs and publish/bind their new TASK; preserve accepted/uncertain handoffs and Clerk resolves restoration or explicit correction. Branch cleanup alone never authorizes a replacement conversation or another Send. |
+| Accepted legacy TASK forbids branch-base changes | Preserve its exact Send and reply. New workflow wording does not amend the accepted TASK. the request-owning DM arranges a bounded delivery correction after reconciling actual file/comment state; use a distinct request and response path, unchanged scientific evidence unless explicitly authorized. |
+| Cleanup removed or renamed a delivery target | Reconcile the affected request and recovery ref before further writes. Correct unsent handoffs and publish/bind their new TASK; preserve accepted/uncertain handoffs and the request-owning DM resolves restoration or explicit correction. Branch cleanup alone never authorizes a replacement conversation or another Send. |
 | Main advances after input was bound | Keep each original effective input path/SHA mapping. The author assesses scope/specification conformance at intake; unrelated commits do not invalidate the response. |
 | Provider access is unavailable | Record the precise unreadable paths or unavailable action and any confirmed partial delivery. A local tool's access does not establish Pro access. |
 | GitHub write actions are unavailable after actual-state readback | Complete the review in the same accepted turn and attach the full answer as downloadable `RESPONSE.md`. Transport downloads and hash-archives it; do not send a second scientific prompt merely to change delivery mode. |
@@ -132,7 +132,7 @@ ROOT_OPERATIONS.md, “Current records, integration and cleanup”. Request-spec
 Send and archive fields belong to that request; carrying a prior round's fields into a new
 current record is not delivery evidence. Preserve them in their original request history.
 
-For owner-commissioned Portfolio consultation Clerk is author/source/parent and the registered
+For owner-commissioned Portfolio consultation the request-owning DM is author/source/parent and the registered
 independent browser Transport is operator. Direction scientific-review packets remain DM-owned. Preserve accepted
 request identities and archive full answers; DM responds to scientific findings, and Portfolio
 advice enters the user report rather than automatically changing the research layout.

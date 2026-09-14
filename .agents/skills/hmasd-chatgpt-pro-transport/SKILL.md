@@ -1,6 +1,6 @@
 ---
 name: hmasd-chatgpt-pro-transport
-description: "Execute and monitor exact Pro requests in the independent Luna/high Transport task using Codex built-in browser; archive complete responses and notify the assigning DM/Clerk."
+description: "Execute and monitor exact Pro requests in the independent Luna/high Transport task using Codex built-in browser; archive complete responses and notify the assigning author DM."
 ---
 
 # Independent browser Transport
@@ -18,7 +18,7 @@ provider model/effort, conversation binding, archive destination and actual pare
 Use send_message_to_thread to the registered Transport. The executor is an independent
 Luna/high task serving related concurrent transport work; native-child batch rotation does not
 apply to this service. It owns no science, experiment monitoring or main Git index. DM owns
-scientific authorship, intake and difficult technical repair; Clerk handles shared coordination.
+scientific authorship, intake and difficult technical repair; the request-owning DM handles shared coordination.
 
 Maintain a per-request queue and existing binding registry. One executor and one pending request
 per provider conversation; different conversations can generate concurrently. Perform short
@@ -53,7 +53,7 @@ remain; a new App assignment starts a new turn. No ACK or Root-report loop.
 ## Recovery and handover
 
 DM takes over a difficult browser/tool fault locally, updates the workflow if needed, and returns
-operation after avoiding overlapping executors. Clerk coordinates shared access. No routine Root
+operation after avoiding overlapping executors. the request-owning DM coordinates shared access. No routine Root
 approval. If an existing conversation cannot be recovered, DM may create and bind a replacement
 with the same task/context, recording the reason and unresolved prior effects; first secure any
 recoverable old answer and avoid two live submissions of the same request. A unavailable UI/tool

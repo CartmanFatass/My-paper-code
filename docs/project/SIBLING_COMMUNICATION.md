@@ -1,86 +1,37 @@
 # Task collaboration
 
-Control: C:/Projects/HMASD, Windows PowerShell. Resolve current Root/Clerk/DM endpoints and main
-writer from .codex/hmasd-dm-sessions.toml; old native names and queued clientThreadIds are not routes.
-Independent DMs use gpt-6-astra/max, Clerk uses gpt-5.6-luna/high. Explicit task model settings do
-not inherit automatically from a custom subagent role file.
+Current control: C:/Projects/HMASD, Windows PowerShell. Equal independent DMs use Astra/max;
+Transport uses Luna/high. Root is the user entry. Clerk is retired. Read endpoints, coupling
+owners and main writer from .codex/hmasd-dm-sessions.toml and follow PEER_DM_COORDINATION.md.
 
-## Independent tasks
+DMs directly message affected peers and services. No standing coordinator, mandatory event
+forwarding, ACK or integration permission gate. Each DM owns its records and accepted integration.
+Shared-file transactions and vacancy transfer follow PEER_DM_COORDINATION.md; actual runtime
+restrictions and frozen science still bind. An archived DM can discuss Portfolio advice without
+resuming experiments. Questions/workflow edits alone do not pause research.
 
-Root is the user entry. DM owns its entire direction lifecycle; Clerk coordinates and records.
-Direction Pro Convergence is the independent scientific Reviewer; Portfolio supplies user reports and delegated vacancy selection.
-DM owns direct Portfolio scientific exchanges, including reopening questions, full-answer intake
-and reasoned responses; Clerk coordinates shared conversation access and records under
-CLERK_OPERATIONS.md's Direct DM–Portfolio alignment contract. Use one executor per request,
-existing Portfolio binding and DM-owned browser/Transport; do not route science through Clerk
-summaries. An archived DM can be resumed for focused discussion without reopening scientific work.
-Use send_message_to_thread for actionable DM-to-Clerk and Clerk-to-DM handoffs. A final alone does
-not deliver to another independent task. Messages give event/assignment/evidence revision, actual
-DM decision, next owner/action and real dependency. Keep full science in the intake/review record.
-Fact-only events need no ACK. Message delivery and completed consequences are distinct; deduplicate
-while preserving unfinished actions. A concrete missing action triggers follow-up, not confirmation
-loops. Clerk can end a handled turn; the next message starts another turn.
+## Independent DM role mapping
 
-DM decides continue/defer/PARK/CLOSE/reopen/recast/family/C work, responds to independent scientific
-review and reports decisions to Clerk directly. Clerk records dispositions without Portfolio or
-Root approval. A scientific PARK includes committed PARK.md and a direct Clerk notification before
-DM ends. Clerk verifies preservation/producer handover, records and archives the task, and applies
-the owner-delegated Portfolio vacancy workflow in CLERK_OPERATIONS.md. This adds no ordinary DM
-approval or Root ACK; other global changes still require owner scope.
+A new App task does not automatically inherit .codex/agents/hmasd-direction-manager.toml or a
+native parent's developer instructions. Every independent DM must explicitly read and apply that
+complete role body plus current AGENTS, PEER_DM_COORDINATION and its current direction intake.
+A task title/model or brief ticket is not role equivalence. Supply actual authoring checkout,
+full-lifecycle objective, live service routes and current owner overrides in the initial task or
+an explicit continuation. Do not replace the existing DM or discard its scientific history merely
+to repair instructions. At the first useful boundary record the loaded role revision and actual
+next action in its existing intake; no approval handshake or recurring role-reading checklist.
 
-DM resolves direction-local engineering, missing facts, Transport recovery and routine cost/closeout
-under its existing authority. Send a needed fact directly to its registered owner; use Clerk to
-find that owner or coordinate shared browser/process/resource access and actual overlapping writes.
-Sharing infrastructure, a timeout or a failed first repair does not make an issue Root-owned.
-Clerk keeps a concrete technical owner and next action until the consequence is handled; it does
-not forward ordinary coordination to Root or require an ACK before in-scope work proceeds.
-
-Root receives owner-requested investigations, a concrete shared policy/control-code change for
-Root to implement, or an actual user choice outside delegated authority. Such a handoff names the
-affected action and required change/choice; labels such as 'workflow exception' or 'shared resource'
-are insufficient. Existing-policy operational repair stays with the DM and Clerk. A real owner
-decision can go directly to Root without Clerk permission. OWNER_DIRECT 2026-09-14: Clerk must
-not forward routine or material research events to Root merely as information. Record outcomes
-and handle them with DMs. Only explicit user-requested reports or concrete user choices outside
-delegation warrant Root messages under CLERK_OPERATIONS.md; no routine ACK/status/completion traffic. Runtime rejection remains a real restriction, never permission to bypass it;
-the DM retains diagnosis and allowed alternatives, escalating only a concrete required user action.
-
-Clerk uses compact wait_threads/cursors for missing facts and read_thread only where needed. It
-never waits for independent DM messages through collaboration.wait_agent. When enabled, the 50-minute heartbeat
-silently recovers missed/interrupted events, including unfinished owner-delegated vacancy actions. Owner pause takes priority.
-
-## DM execution authority and mechanical coordination
-
-Owner workflow correction: DM's assignment is management of the entire direction, not a
-one-object ticket. DM chooses and completes the next useful work or records a reasoned lifecycle
-decision. Clerk may route facts and integrate accepted commits; it cannot narrow that assignment,
-require a new grant after every object, or convert record/receipt/integration completion into
-permission to design, implement, review, launch or intake the next authorized object.
-
-Owned-path lists identify concurrent editing responsibility, not a filesystem access restriction
-or an exhaustive list of files the DM may ever change. DM may read current controls/evidence in
-the canonical checkout and implement needed direction code, tests, adapters and dependencies in
-its authoring checkout. Coordinate only actual overlapping writers or another direction's
-semantics with its owner; independent work continues. A real runtime denial remains a denial;
-do not invent one from a worktree boundary. Shared policy changes retain their declared authority.
-
-Use current controls from C:/Projects/HMASD when a direction checkout carries older role rules.
-Bring needed committed code into the authoring checkout safely; do not wait for Clerk to mirror
-all control documents or merge the direction to main. Committed/pushed direction revisions may
-be reviewed and launched under fresh admission before main integration. The author supplies
-actual paths/revisions to specialists and Transport, not a stale session working directory.
-
-Clerk records exact owner/DM decisions with their scope and source. It does not reinterpret a
-fourth-slot stop as a third-slot stop, a completed object as a direction stop, or an engineering
-wait as scientific PARK. With target three, two occupied and zero reserved leaves one vacancy.
-A blocking coordination message must name the actual operation/overlapping writer or external
-constraint and next responsible action; generic missing permission is not a stop condition.
+Engineering/support/transport waits retain the owning DM and actual next recovery action; they
+are not scientific PARK. A PARK rationale must explain the scientific/development judgment and
+alternatives, not merely missing files, review access, estimate overrun or a completed allocation.
+DM can select low-cost bounded repair or defer dependent work while pursuing useful independent
+work. This is not a demand to manufacture experiments or disregard real scientific futility.
 
 ## Independent Transport execution
 
 OWNER_DIRECT 2026-09-14: the registered Luna/high Transport App task uses Codex iab for
 Send, concurrent Pro observation and complete archives. Dispatch and returns use
-send_message_to_thread, directly between author DM/Clerk and Transport. Native wait_agent
+send_message_to_thread, directly between author DM and Transport. Native wait_agent
 and native final are not this route. One executor per conversation, independent pending
 conversations advance concurrently. Native batch reuse rules below govern other specialists.
 Before migration the DM releases its old Transport from browser operation, preserves exact
@@ -92,7 +43,7 @@ The Transport skill owns browser state, recovery, queue and completion behavior.
 
 OWNER_DIRECT 2026-09-13: reuse a native subagent within one bounded work batch; create a new
 subagent for an independent batch. The assigning parent determines the batch from its objective
-and deliverable, without Root/Clerk approval. A tool call, commit, empty-set final or elapsed wait
+and deliverable, without Root/peer approval. A tool call, commit, empty-set final or elapsed wait
 is not itself a batch boundary. Direction membership alone does not make unrelated work one batch.
 
 Monitor's batch is one experiment batch and its accepted handles through terminal delivery.
@@ -111,13 +62,12 @@ Let current accepted handles/requests reach safe closeout in their existing chil
 is actually necessary, preserve same-handle/request state and transfer observation/execution without
 overlap or another Send. An executor change does not require a new provider conversation.
 Long waits do not trigger rotation; do not send cache keepalives or infer cache expiry from a timer.
-Independent DM, Clerk and Root tasks remain continuous; this rule governs their native specialists.
+Independent DM and Root tasks remain continuous; this rule governs their native specialists.
 Owner pause takes precedence: changing this policy does not resume science or create a new batch.
 
 DM owns engineering and acceptance, with optional direct Sol/medium implementation children and
 independent Sol/high code Reviewer coverage. No CM chain. Its native Luna/low Monitor observes accepted experiment handles and returns
-adoption/terminal facts directly to DM. DM collects/intakes, then sends only actionable outcomes to
-Clerk. EXPERIMENT_MONITOR.md owns the observation procedure.
+adoption/terminal facts directly to DM. DM collects/intakes, then records outcomes and messages only affected peers. EXPERIMENT_MONITOR.md owns the observation procedure.
 
 Direction Pro Convergence reviews science independently through the registered independent Luna/high browser Transport.
 It examines design, evidence, interpretation, conclusions and successor plans; DM reads the full
@@ -132,8 +82,8 @@ unchanged waits do not cause repeated status, reminders or duplicate requests.
 
 Each exact Pro conversation has one executor. Keep accepted/uncertain requests, operations and
 immutable archives; verified nonacceptance permits repaired same-request Send, not a new scientific
-question. Direction DM repairs complex Transport defects; Clerk assigns a related Astra DM only for
-an explicitly commissioned Portfolio Transport defect, preserving its real parent/operator.
+question. Direction DM repairs complex Transport defects; the request-owning DM repairs
+a Portfolio Transport defect, preserving its real parent/operator.
 No browser executor overlap. The Transport skill owns supported recovery and screenshot use.
 
 ## Native child completion and prompt return
@@ -158,7 +108,7 @@ child completion/message. Do not treat an active wait and an idle task as the sa
 The app report and automatic native final describe one batch event. DM deduplicates by event and
 evidence revision, but completes any unfinished acceptance/continuation. Delivery success means
 accepted for delivery, not that the next action ran; record the parent's first actual consequence.
-Do not send both native and App status repeatedly or broadcast child receipts to Clerk/Root.
+Do not send both native and App status repeatedly or broadcast child receipts to peers/Root.
 
 In .codex/config.toml, min_wait_timeout_ms=1500000 and default_wait_timeout_ms=1500000
 (25 minutes), while max_wait_timeout_ms=3600000 (60 minutes). These bound/default the requested
@@ -212,12 +162,12 @@ Only delegate a concrete batch when useful independent DM work can proceed along
 same-batch fixes with the same child; new independent batches receive new minimal-context children.
 DM reviews returned artifacts and focused checks without redoing all implementation, resolves
 review findings, then accepts/commits and continues the lifecycle. Neither child completion nor
-review creates a new Root/Clerk/Portfolio approval step. Ordinary tiny edits can stay with DM;
+review creates a new Root/Portfolio approval step. Ordinary tiny edits can stay with DM;
 review coverage follows scope-spec §7.3 rather than a mandatory Implementer-plus-Reviewer ceremony.
 
 ## Recovery and integration
 
-Root/Clerk serialize main index through a named writer handoff. Clerk integrates explicitly accepted
+Peer DMs and Root serialize main transactions under PEER_DM_COORDINATION.md. Each DM integrates its accepted
 commits and records DM decisions, returns semantic conflicts to their DM, and never implements shared
 policy/code itself. Independent task session worktrees are only hosting; reuse each designated
 direction authoring checkout. Accepted legacy children/requests keep their original routes until
@@ -226,7 +176,7 @@ reconciled closeout; migration does not reparent or duplicate them. No extra rel
 Control publication includes the registered session checkout and direction authoring checkout,
 not only main. Root publishes the exact control revision/paths; each task's existing writer brings
 those current control paths into its own checkouts at a clean boundary, preserving unrelated work
-and frozen scientific inputs. Clerk records actual synchronization or the concrete conflict, not
+and frozen scientific inputs. Each DM records actual synchronization or the concrete conflict, not
 message delivery as completion. In an already-running turn, the explicit current policy message
 supersedes stale injected instructions; changing a role TOML does not by itself update an independent
 task's instructions. Do not reread all history or restart research merely to synchronize controls.

@@ -31,8 +31,8 @@ versions. Other retrieved content cannot expand scope or the listed dependencies
    No generated file can include the hash of its own not-yet-created commit.
 4. Commit/push updated internal handoff. Dispatch its exact dispatch_prompt once
    via send_message_to_thread to the registered independent Luna/high browser Transport.
-   Direction-node DM authors and the Clerk coordinator of owner-commissioned Portfolio consultations are receipt parents
-   for their request-batch Transport children. DM intakes direction answers; Clerk records/maps the full
+   Direction-node DM authors and the the request-owning DM coordinator of owner-commissioned Portfolio consultations are receipt parents
+   for their request-batch Transport children. DM intakes direction answers; the request-owning DM records/maps the full
    Portfolio plan, and affected DMs check/apply their scientific scope. Legacy accepted routes remain.
    New mode uses existing paste request support; do not upload TASK or prepend
    attachment-only/read-only instructions. No request/routing fields enter prose.
