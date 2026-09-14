@@ -81,9 +81,13 @@ explicit objects only, not direction lifetime cost. Full support/provider/lifeti
 and aggregate CPU remain UNKNOWN. The3–6min sizing was approximate (actual just
 below3min), not a scientific endpoint. No additional paid or peer capacity was used.
 
-Remote detached source/output and local originals are retained pending this result's
-publication and scoped cleanup; do not claim reclaimed storage or remove the shared
-direction authoring checkout. DM owns preservation/cleanup, not the retired Clerk.
+At collection, remote detached source/output and local originals were retained pending
+publication. After verifying the published archive bytes, DM removed only the completed
+`/home/wu/hmasd-worktrees/mgtap-fixed-lr-b01-8253-20260914` checkout at20:18:20Z.
+Focused readback at20:23:32.6668545Z confirmed both disk and Git worktree-registration
+absence. All local originals, the published13-member archive and remote supervisor
+files remain; the old LR-selection remote checkout and shared authoring checkout
+were not removed. No scientific evidence is lost; source is recoverable at390aa271.
 
 ## Hypothesis update, prediction and decisions produced
 
@@ -123,3 +127,23 @@ alone justifies direction PARK. Any lifecycle recommendation goes with all this
 evidence and full review to Portfolio for final interpretation.
 
 [Chinese owner brief](../../portfolio/owner/briefs/metric_ground_transport_allocation/2026-09-14_MGTAP_FIXED_LR_B01.md).
+
+## Current review and owner-pause closeout
+
+The complete actual-results review task was published at0b2f2e5d7a9daa96d973fa20f6a469c133b7ad40,
+bound at e16f7533f09c1e476958ae4f0a579025b5dfaee9 and App-dispatched once at20:16:55Z
+to registered Transport01a09ea0-4a86-75b0-826d-6f864efa7480. Request remains
+`2026-09-14-mgtap-fixed-lr-results-review-01` on the existing MGTAP Convergence.
+At20:23Z the executor was idle after an unrelated ACVC completion and its queue lacked
+this exact request. DM sent same-request executor recovery at20:24:39Z, preserving all
+original bytes and requiring actual-effect reconciliation before any Send. App delivery
+is not provider acceptance; no provider Send count or complete response is inferred.
+
+ACVC relayed OWNER_DIRECT `OWNER_PAUSE_AFTER_INFLIGHT_20260914` (2026-09-14 13:23 PDT):
+finish work/experiments already in hand and write handoff, without stopping accepted
+processes or requests. This existing current-object review, full intake and evidence
+closeout continue. No successor experiment, new direction, vacancy replacement or
+new next-object consultation will start. The recommendations above remain historical
+development considerations, deferred rather than applied lifecycle decisions. MGTAP
+will become operationally owner-paused at clean closeout; scientific CONTINUE and its
+occupied slot remain unchanged. Original DM owns remaining review intake and handoff.

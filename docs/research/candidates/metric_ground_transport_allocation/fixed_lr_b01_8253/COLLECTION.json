@@ -23,6 +23,9 @@
   "native_experiment_complete": true,
   "full_new_scientific_review": "not yet requested at collection; DM preparation next",
   "new_native_successor_selected": false,
-  "remote_cleanup": "not yet performed; DM retains source/output pending publication and scoped cleanup",
+  "remote_cleanup_at_collection": "not yet performed; DM retained source/output pending publication and scoped cleanup",
+  "remote_cleanup": "Completed after exact archive publication verification; removal command completed 2026-09-14T20:18:20Z, focused disk and git-worktree registration absence verified 2026-09-14T20:23:32.6668545Z",
+  "removed_exact_remote_checkout": "/home/wu/hmasd-worktrees/mgtap-fixed-lr-b01-8253-20260914",
+  "retained": "All local raw originals and published 13-member archive; remote supervisor files; prior LR-selection remote checkout untouched",
   "resource_scope": "178.86s native command; support/provider/lifetime/aggregate CPU remain UNKNOWN"
 }
