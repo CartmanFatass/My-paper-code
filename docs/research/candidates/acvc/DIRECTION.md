@@ -14,71 +14,45 @@ material findings, repairs concrete defects or limits affected claims, and owns 
 Review is neither optional conversation nor funding/lifecycle/scheduling permission. New review
 packets use main's current renderer/Transport contract with `dm_owned_scientific_review`.
 
-Portfolio is the user-readable report. Clerk coordinates mechanically and records the DM's
-actual lifecycle state; only an explicit owner request initiates cross-direction adjustment,
-new direction/resource commitments or Portfolio consultation. The dated historical decisions
+Portfolio supplies the user-readable report and owner-delegated genuine-vacancy selection.
+Clerk coordinates mechanically and records the DM's actual lifecycle; current main controls
+govern vacancy replacement and other owner-requested cross-direction/resource changes. The dated historical decisions
 below retain their original evidence and authority at their own boundaries; their old funding,
 approval, reserve or re-entry wording is not a current dispatch or permission requirement.
 
 ## Authority
 
 - Stable direction ID: `acvc`
-- Current lifecycle: ACTIVE, DM-owned. Existing owner priority MEDIUM/recasts 2 and lowest-ACTIVE contention order remain until the owner changes cross-direction ordering. Portfolio reports rather than approves this state.
+- Current lifecycle: **PARK**, DM-owned reversible decision after complete B02 scientific review on2026-09-14 UTC (2026-09-13 local). Historical priority MEDIUM/recasts2 is preserved, not an active-slot claim. [PARK knowledge handoff](PARK.md) records alternatives, assets, limits and reopening conditions.
 - Current authoring checkout/branch: `C:/Projects/HMASD-worktrees/codex-acvc`, `codex/acvc`; live task endpoints come from main `.codex/hmasd-dm-sessions.toml`.
 
-## Execution control — same-review recovery active, 2026-09-14 00:50 UTC
+## Current outcome — reviewed cluster B02 and reversible PARK
 
-The latest explicit owner instruction lifts the earlier execution pause, whose actual boundary
-remains preserved in the B02 intake. Scientific lifecycle ACTIVE and existing priority are unchanged;
-there was no scientific PARK/CLOSE to reverse. B02 is terminal, accepted to its bounded result,
-retained and remotely cleaned. Its Monitor has no active handle. The original scientific-review
-request`2026-09-13-acvc-cluster-b02-scientific-review-01` remains **unsent**: a fresh check of
-operation`38dbacca-f772-43f5-ad16-31dd94ff302d` still shows`sendAttempted=false`, no provider
-pairing/archive. No experiment, provider generation or observation is in flight.
+B02 is terminal, technically accepted, retained and remotely cleaned. Its single new independent
+C-fit used source`be76f696cb773f2e5db8f4d55ebff1f3b6335ae6`, master21493/eval31493,
+1024 updates/192 evaluations/180224 team ticks; complete native wall164.53s. Both separate frozen
+readings are UP: F−C+0.10459355901545042 J and F−own-dwell+0.06070900770904247 J, with4/64
+and11/64 adverse worlds. K and B02 support recurrence on **two observed cluster endpoints**,
+not a pooled primary, stable training-population benefit or fresh-policy default.
 
-Root separately received explicit owner authority to restart Agentify and Chrome, completed that
-shared action and returned a healthy runtime handoff. DM did not repeat or bypass its earlier
-rejected process command. New AgentifyPID14460/API49382 and ChromePID18144/CDP9222 use the
-retained profile and immutable operation store; default tab is protected. DM's fresh persistent
-check still found the original operation`sendAttempted=false`, no provider IDs/archive. The same
-request-batch native Transport`/root/acvc_transport` is now active on dedicated-tab recovery and the
-same-operation strict route. Dispatch does not prove provider acceptance. No new question, key,
-conversation or scientific invocation is selected. DM will read the full scientific review,
-respond to findings and make the lifecycle judgment. Neither wall estimates nor another ACK gate
-controls that continuation. No third fit is selected.
+The [complete independent review](pro_packets/20260913_cluster_b02_scientific_review/archive/RESPONSE.md)
+was delivered at`80be57f9e95818666f336e5fe89791875dc63425`. DM read it fully and accepted both
+wording findings: C/own-dwell remain the controls for this same two-control package claim, not
+mandatory comparators for every changed question; an additional unchanged independent fit has
+legitimate research value without a current defect, new customer or ability to establish stability.
+DM nevertheless selects no immediate third fit and reversible PARK, explicitly accepting unresolved
+between-fit variation while retaining only bounded evidence. This is a marginal-value choice,
+not proof that further research is useless or a Pro lifecycle verdict. [Final findings response
+and decision](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md#complete-scientific-review-and-dm-decision--2026-09-14-utc).
 
-## Current execution — cluster B02
-
-DM selected the one independent same-law C-fit and C/F/own-dwell64 observation in
-[B02's card](ACVC_CLUSTER_DEPLOYMENT_B02_SCIENCE_CARD_20260913.md), master21493/eval31493,
-under ordinary direction discretion. The unchanged reviewed comparison asks whether K's useful
-F increment appears on this new endpoint; it is not K renewal, a scientific retry, a customer
-search or a new family. The original native600/support600/complete1200 plan and one-fit stop
-remain preserved; prospective post-run administrative support is separately declared in the intake.
-
-Source `be76f696cb773f2e5db8f4d55ebff1f3b6335ae6` passed independent code review and18 remote
-synthetic checks. The first supervisor submission failed before admission/Python because of
-shell argument joining; its exit125/duration0/logs are preserved. One reviewed pre-execution
-repair, published at `f48be7c9fc5b83d923cf4350ed66a0636d79be10`, left scientific inputs/caps
-unchanged. The exact repaired handle `acvc-cluster-b02-be76f696c-launch2` was accepted on the
-configured remote node at23:38:16 UTC and passed adjacent memory admission. The DM-owned native
-Monitor actually adopted its running PID3430922 and returned terminal exit0. Full native wall
-164.53s; one fit/1024 updates/192 evaluations/180224 ticks and the original checkpoint are accepted.
-F−C +0.10459355901545042 J and F−dwell +0.06070900770904247 J are both separately UP, with4/64
-and11/64 adverse worlds. This is a second separately observed cluster endpoint, not a pooled or
-stable training-population finding. [Complete intake](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md)
-records the proposed bounded synthesis and no-immediate-third-fit plan for independent Convergence
-review. DM responds to findings and makes the lifecycle decision; no Portfolio Send is pending.
-
-As of2026-09-14 00:23:29 UTC the original scientific review is **not sent**, not generating:
-operation`38dbacca-f772-43f5-ad16-31dd94ff302d` explicitly records`sendAttempted=false` and a
-prompt-readiness timeout. The stale shared Agentify/Chrome connection was diagnosed and a scoped
-repair independently reviewed, but its execution was blocked before running by tool policy.
-Original operation/binding bytes, runtime and Chrome remain unchanged. No native run, generation
-or observation is active. The concrete dependency is permitted reconnection of that shared runtime;
-then the same DM/Transport resumes the unchanged request and full scientific findings response.
-No alternative execution of the rejected action, third fit, replacement or new review is selected.
-This is an ACTIVE technical dependency, not a scientific lifecycle verdict or claimed advance.
+No experiment or provider generation is pending. The original review was sent once and its full
+GitHub bytes and paired provider IDs are preserved. Root accepted the concrete helper/contract
+repair and Clerk published it at main`ff955721b`; the same Transport completed supported
+reconciliation to ARCHIVED and returned COMPLETE/SENT, preserving the prior CONFLICT. Its owned
+non-protected tab is closed; no other tab changed. No scientific or Transport producer remains.
+Clerk receives the committed PARK handoff and safely archives the DM after this publication turn
+ends. The intake preserves the old connection failure, owner pause/resumption, policy refusals
+and all request history; no direction slot is occupied by the completed record-only closeout.
 
 ## Scientific question
 
