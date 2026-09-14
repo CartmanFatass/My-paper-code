@@ -396,3 +396,16 @@ final text as continued coverage: same-batch followup resumed actual waiting and
 returned MONITOR_READOPTED at15:42:46.321Z,same PID/source,running. Original error
 and recovery are retained in the execution/adoption record; no new scientific
 process or duplicate observer was created.
+
+### Generic complete; original augmented continuation remains selected
+
+DM accepts the exact G endpoint after source/count/checkpoint/finite-CPU checks
+and full raw preservation:mean-0.966484375,128 conditional final episodes; native
+wall1178.68s/CPU1177.50s. No A-G result exists. The complete collection and the
+control-turn gap are recorded in the [execution record](../../entity_history_augmentation_b01_781601/EXECUTION.md).
+An initial collection assertion counted26 registered buffer elements as learnable
+parameters; correcting this checker required no scientific change or invocation.
+ACVC's direct request for peer facts is answered from these committed facts and
+the existing complete B03 review/Portfolio application, not treated as a launch
+approval. A remains the original selected second fit with the same fixed source
+and card. DM now submits it after fresh admission and reuses this batch's Monitor.

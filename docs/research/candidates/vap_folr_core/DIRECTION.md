@@ -96,8 +96,11 @@ at2026-09-14T15:36:55.744043Z after fresh memory admission, handle
 `folr-augmentation-b01-781601-generic`,PID3674297. Native
 `/root/folr_augmentation_b01_monitor` adopted it and owns bounded observation;
 its initial timestamp inconsistency and factual correction are both preserved.
-A remains selected/unlaunched and follows G collection regardless of G score or
-completeness, under fresh admission. No final B01 result or pair polarity exists yet.
+G has now completed and been collected:mean-0.966484375,5000/4969/128,
+1178.68s native wall,exit0. Original raw evidence is preserved. A remains the
+selected second fit and follows under fresh admission regardless of G score;
+there is no A-G pair polarity yet. The control-turn delay is recorded separately
+from native work, and no G rerun was introduced.
 FOLR continues to occupy one existing slot, with the
 same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
 Full support/provider cost remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves

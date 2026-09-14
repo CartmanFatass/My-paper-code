@@ -1,0 +1,163 @@
+{
+  "event": "FOLR_AUGMENTATION_B01_GENERIC_COLLECTED_20260914",
+  "collected_utc": "2026-09-14T19:34:53.915502+00:00",
+  "source_sha": "d9977dc18baf33b78dc626764c252391f1ddaa9d",
+  "status": {
+    "task": "folr-augmentation-b01-781601-generic",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3674297,
+    "uptime_seconds": 14278,
+    "tmux_active": false
+  },
+  "summary_sha256": "152b1b807f148a9d7004f8b0208d30ce2fa1c147734c11d4d7cb01f84216336c",
+  "binding": {
+    "object": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601",
+    "arm": "GENERIC_RETAIN",
+    "training_seed": 781601,
+    "evaluation_seed": 1781601,
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560,
+    "actor_parameters": 103173,
+    "actor_change_l2": 31.432660528931173,
+    "torch_version": "2.7.0+cu118",
+    "numpy_version": "1.26.3",
+    "torch_threads": [
+      1,
+      1
+    ]
+  },
+  "panel": {
+    "mean": -0.9664843750000004,
+    "sample_sd": 7.311570981685563,
+    "conditional_episode_se": 0.6462576777845804,
+    "minimum": -16.56,
+    "maximum": 20.080000000000002,
+    "n": 128
+  },
+  "negative_returns": 75,
+  "native_time": {
+    "wall_seconds": 1178.68,
+    "user_seconds": 1077.72,
+    "system_seconds": 99.78,
+    "peak_rss_kib": 741336,
+    "exit_code": 0
+  },
+  "aggregate_cpu_seconds": 1177.5,
+  "checkpoint": {
+    "arm": "GENERIC_RETAIN",
+    "updates": 4969,
+    "state_tensor_counts_including_buffers": {
+      "actor": 103199,
+      "mixer": 284292,
+      "target_actor": 103199,
+      "target_mixer": 284292
+    },
+    "actor_parameters": 103173,
+    "actor_buffer_elements": 26,
+    "dtypes": [
+      "torch.float32"
+    ],
+    "devices": [
+      "cpu"
+    ],
+    "finite": true,
+    "optimiser_finite": true
+  },
+  "archive": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/GENERIC_RAW.tar.gz",
+  "archive_bytes": 4298469,
+  "archive_sha256": "8bfe7c3d711d85ae51e70a932503538415afc059e2bffd7a4d6ff5d39f5d2efc",
+  "manifest": [
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/generic_retain/ADMISSION.json",
+      "member": "generic_retain/ADMISSION.json",
+      "bytes": 504,
+      "sha256": "7b8eb94c22be96b1e8976aa872a052aaae85e5b8e821bec3fe37bbae6b756fa4"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/generic_retain/INVOCATION_TIME.json",
+      "member": "generic_retain/INVOCATION_TIME.json",
+      "bytes": 107,
+      "sha256": "5636ef2b9f00c653cd5aa8d5db5878de8ba1932c9f47e2eb45367479633208d1"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/generic_retain/final.pt",
+      "member": "generic_retain/final.pt",
+      "bytes": 4694195,
+      "sha256": "c0ea4e6a45007022b3e26c3ae688ab4f19a8413628072fe0e98cdc7573b4c5bb"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/generic_retain/summary.json",
+      "member": "generic_retain/summary.json",
+      "bytes": 106427,
+      "sha256": "152b1b807f148a9d7004f8b0208d30ce2fa1c147734c11d4d7cb01f84216336c"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/GENERIC_CONTROL_LAUNCH.json",
+      "member": "control/GENERIC_CONTROL_LAUNCH.json",
+      "bytes": 2157,
+      "sha256": "4576fa239bb247f4da45fa6add56fcf991042c0571d9fde2defa1ce1c5a20143"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/GENERIC_LAUNCH.sh",
+      "member": "control/GENERIC_LAUNCH.sh",
+      "bytes": 664,
+      "sha256": "1301c9ef2068ace19d852db8b9fbd796cafa1ba7fa3755198022389bc6bae8f1"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/AUGMENTED_LAUNCH.sh",
+      "member": "control/AUGMENTED_LAUNCH.sh",
+      "bytes": 744,
+      "sha256": "67558e16221e37077a94ac4737bd2d2ef997d9db51f97a8be3846298133a64db"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/LAUNCH_PREPARATION.json",
+      "member": "control/LAUNCH_PREPARATION.json",
+      "bytes": 1580,
+      "sha256": "bb189ff43a4bedc0cdeb26a1b77dc4efa408bac99fc68b40a020903a200a6b10"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/exit_code",
+      "member": "supervisor/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/pid",
+      "member": "supervisor/pid",
+      "bytes": 8,
+      "sha256": "66210377ada2ad0492778a33e27a7a21f3b0ff0f8798f33dc92e0ca20435bd1f"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/runner.sh",
+      "member": "supervisor/runner.sh",
+      "bytes": 1493,
+      "sha256": "d041350b1ccc5bac0243c840066cf725cd9985e50be7677034352c718dfd5a59"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/start_time",
+      "member": "supervisor/start_time",
+      "bytes": 11,
+      "sha256": "c7d80eab2184308d2b75126ca20e5748e9756600692d48389e015b3e252c9ce1"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/status",
+      "member": "supervisor/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/task.log",
+      "member": "supervisor/task.log",
+      "bytes": 2683,
+      "sha256": "ff251bfc94b39bac205691f4eb67c060377b011a471434c343ca73bacdb27228"
+    }
+  ],
+  "collection_process_wall_seconds": 0.9290892339777201,
+  "collection_process_cpu_seconds": 2.5580587759999998,
+  "collection_checker_correction": "Initial technical checker incorrectly equated all actor state_dict elements with learnable parameters. Source registers labels25 and attn.scale_factor1 as buffers; corrected103199 state elements =103173 parameters+26 buffers. Initial check stopped before archive and did not run or alter native science.",
+  "claim": "One complete fitted Generic policy; conditional128-episode panel; no A-G polarity before A."
+}
