@@ -1,6 +1,6 @@
 {
   "object": "FOLR_ENTITY_HISTORY_B03_781501",
-  "phase": "GENERIC_ACCEPTED_BANK_READY",
+  "phase": "BANK_RUNNING",
   "planned_at_utc": "2026-09-14T08:16:51.805742+00:00",
   "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
   "portfolio_decision_sha": "4776103de4f55beaee610c52506112651bfaed04",
@@ -104,6 +104,68 @@
         "checkpoint_integrity_passed": true,
         "monitor_terminal_received": "Direct parent App MONITOR_TERMINAL plus native completion; duplicate delivery processed once. Child state snapshot has terminal=false delivery bookkeeping, but terminal receipt was actually delivered."
       }
+    },
+    "BANK": {
+      "name": "folr-b03-781501-bank",
+      "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+      "accepted_at_utc": "2026-09-14T09:08:30.703494+00:00",
+      "status_at_acceptance": {
+        "task": "folr-b03-781501-bank",
+        "status": "running",
+        "exit_code": null,
+        "pid": 3669107,
+        "uptime_seconds": 0,
+        "tmux_active": true
+      },
+      "out": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK",
+      "supervisor_directory": "/home/wu/.agent-tasks/folr-b03-781501-bank",
+      "admission": {
+        "assessed_at": "2026-09-14T09:08:30.720233Z",
+        "available_physical_bytes": 15624404992,
+        "captured_at": "2026-09-14T09:08:30.719960Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15624404992,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "generic_summary_sha256": "d1b46eac0487632de92ba33e22d029a64882e66633b7418f2d50b2c01fe4e2ec",
+      "launch_receipt": "BANK_LAUNCH_RECEIPT.json",
+      "monitor_adoption": {
+        "event_id": "FOLR_B03_BANK_MONITOR_20260914_R1",
+        "direct_parent_receipt_received": true,
+        "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+        "sender_thread_id": "01a09f10-8f6a-7cb3-8de4-cc137ab0b05c",
+        "native_identity": "/root/folr_b03_monitor_recovery",
+        "recorded_at_utc": "2026-09-14T09:10:38.842452+00:00",
+        "observation": {
+          "event_id": "FOLR_B03_BANK_MONITOR_20260914_R1",
+          "handle": "folr-b03-781501-bank",
+          "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+          "expected_pid": 3669107,
+          "observer": "replacement /root/folr_b03_monitor_recovery",
+          "observed_utc": "2026-09-14T09:09:25.713719+00:00",
+          "returncode": 0,
+          "stdout": "{\"task\": \"folr-b03-781501-bank\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3669107, \"uptime_seconds\": 55, \"tmux_active\": true}\n",
+          "stderr": "",
+          "status": {
+            "task": "folr-b03-781501-bank",
+            "status": "running",
+            "exit_code": null,
+            "pid": 3669107,
+            "uptime_seconds": 55,
+            "tmux_active": true
+          }
+        },
+        "state_path": "C:\\Projects\\HMASD\\temp\\directions\\vap_folr_core\\exp\\entity_history_b03_781501\\MONITOR_RECOVERY_STATE.json",
+        "parent_routine_polling": "ended after actual direct MONITOR_ADOPTED"
+      }
     }
   },
   "launch_assets": {
@@ -128,7 +190,7 @@
     "final_greedy_episodes": 128,
     "final_ticks": 2560
   },
-  "admission": "Committed launcher immediately checks >=4GiB physical and effective available memory before runner; no current admission claimed.",
+  "admission": "Both selected arm admissions passed freshly adjacent to their invocation; actual per-arm memory evidence retained under accepted_handles.",
   "resource_and_support_notes": "CPU FP32 Torch intra/inter1/1; DM plans3600s/arm,7200native+1800support are not hard stops. Remote supervisor usage lookup took0.35899999999674037s SSH elapsed; no scientific work. Full support/provider cost UNKNOWN.",
   "preparation_recovery": {
     "initial_ssh_timeout_seconds": 35.03200000000652,
@@ -143,7 +205,7 @@
       "LAUNCH_ASSET_PREPARATION.json"
     ]
   },
-  "next_action": "Publish Generic technical collection and exact BANK plan, then accept the one preselected detached BANK invocation; assign actual handle to same batch recovery Monitor and confirm direct adoption. Full pair scientific interpretation awaits BANK.",
+  "next_action": "Same batch native recovery Monitor observes accepted BANK to terminal and returns directly to this DM. DM then collects/accepts both endpoints, writes scientific result/intake and full independent review. No further empirical invocation is selected.",
   "monitor_transfer": {
     "reason": "Initial observer finalized three turns with a nonempty running handle set, despite required until-terminal observation. This was execution noncompliance, not a scientific termination or missing rule.",
     "previous_native": "/root/folr_b03_monitor",
