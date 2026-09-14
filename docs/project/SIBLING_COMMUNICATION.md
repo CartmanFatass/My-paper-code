@@ -49,6 +49,33 @@ Clerk uses compact wait_threads/cursors for missing facts and read_thread only w
 never waits for independent DM messages through collaboration.wait_agent. When enabled, the 50-minute heartbeat
 silently recovers missed/interrupted events, including unfinished owner-delegated vacancy actions. Owner pause takes priority.
 
+## DM execution authority and mechanical coordination
+
+Owner workflow correction: DM's assignment is management of the entire direction, not a
+one-object ticket. DM chooses and completes the next useful work or records a reasoned lifecycle
+decision. Clerk may route facts and integrate accepted commits; it cannot narrow that assignment,
+require a new grant after every object, or convert record/receipt/integration completion into
+permission to design, implement, review, launch or intake the next authorized object.
+
+Owned-path lists identify concurrent editing responsibility, not a filesystem access restriction
+or an exhaustive list of files the DM may ever change. DM may read current controls/evidence in
+the canonical checkout and implement needed direction code, tests, adapters and dependencies in
+its authoring checkout. Coordinate only actual overlapping writers or another direction's
+semantics with its owner; independent work continues. A real runtime denial remains a denial;
+do not invent one from a worktree boundary. Shared policy changes retain their declared authority.
+
+Use current controls from C:/Projects/HMASD when a direction checkout carries older role rules.
+Bring needed committed code into the authoring checkout safely; do not wait for Clerk to mirror
+all control documents or merge the direction to main. Committed/pushed direction revisions may
+be reviewed and launched under fresh admission before main integration. The author supplies
+actual paths/revisions to specialists and Transport, not a stale session working directory.
+
+Clerk records exact owner/DM decisions with their scope and source. It does not reinterpret a
+fourth-slot stop as a third-slot stop, a completed object as a direction stop, or an engineering
+wait as scientific PARK. With target three, two occupied and zero reserved leaves one vacancy.
+A blocking coordination message must name the actual operation/overlapping writer or external
+constraint and next responsible action; generic missing permission is not a stop condition.
+
 ## Independent Transport execution
 
 OWNER_DIRECT 2026-09-14: the registered Luna/high Transport App task uses Codex iab for

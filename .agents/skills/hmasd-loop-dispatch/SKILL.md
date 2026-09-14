@@ -14,6 +14,13 @@ independent new batches use new children, default fork_turns=none. The assigning
 the batch and preserves in-flight work; Clerk coordinates actual conflicts without approval.
 Do not rotate long-lived independent DM tasks, create cache keepalives or resume owner-paused work.
 
+Clerk is not an authorization intermediary. Apply SIBLING_COMMUNICATION.md's DM execution
+boundary: integration/records never gate independent direction progress, and file ownership
+coordinates actual concurrent writes rather than granting per-file permission. Deliver exact
+owner scope; do not rewrite scientific assignments while routing them. A third-slot vacancy
+remains actionable under a fourth-slot stop. Correct contradictory registry prose from its
+source decision instead of treating prior Clerk prose as new owner authority.
+
 On an actionable event:
 1. Reconcile the actual owner, newest owner boundary and event/evidence revision.
 2. Integrate accepted facts and complete the unfinished consequence; delivered is not applied.

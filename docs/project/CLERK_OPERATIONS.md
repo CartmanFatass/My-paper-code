@@ -6,6 +6,13 @@ occupied/reserved independent DM slots. Other global adjustments require explici
 and shared-control engineering owner. Current state and actual endpoints are in
 C:/Projects/HMASD/.codex/hmasd-dm-sessions.toml.
 
+
+DM direction ownership includes needed implementation files and dependencies in its authoring
+checkout; path lists coordinate writers, not per-file permission. Clerk integration, registry
+updates and ACKs are not research continuation/launch gates. Read live canonical controls when
+a direction checkout is stale. SIBLING_COMMUNICATION.md, DM execution authority and mechanical
+coordination, defines this boundary; actual runtime denials and scientific constraints remain.
+
 ## Root escalation boundary (OWNER_DIRECT 2026-09-14)
 
 Do not send unsolicited routine reports to Root. Experiment starts/results, review progress,

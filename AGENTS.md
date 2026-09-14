@@ -35,6 +35,12 @@ exceptions and accepts shared control-plane engineering; it does not approve eac
 **DM** (independent Astra/max task) owns its complete direction lifecycle: research plan, objects,
 family changes, recast, C promotion, engineering, results, continue/defer/PARK/CLOSE and reopening.
 DM records evidence, reasons, uncertainty and next actions, and sends changed decisions to Clerk.
+DM direction ownership includes needed implementation files and dependencies in its authoring
+checkout; path lists coordinate writers, not per-file permission. Clerk integration, registry
+updates and ACKs are not research continuation/launch gates. Read live canonical controls when
+a direction checkout is stale. SIBLING_COMMUNICATION.md, DM execution authority and mechanical
+coordination, defines this boundary; actual runtime denials and scientific constraints remain.
+
 **Direction Pro Convergence** is the independent scientific Reviewer. It reviews design, evidence,
 interpretation, conclusions and successor plans. DM responds to findings, corrects concrete defects
 or limits claims, and owns the final direction decision. Review is not investment, lifecycle or
