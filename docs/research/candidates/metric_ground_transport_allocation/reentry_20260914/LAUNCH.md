@@ -41,3 +41,58 @@ exact published SHA and materialize/verify this named detached source, then disp
 
 Actual source verification, resource receipt, acceptance/PID and observation adoption
 will be appended below only after those events occur. A prepared command is not a run.
+
+## Materialization and actual accepted launch
+
+The named detached worktree now holds exact source2d351d48604396ce478aa900584bd24b3255def5.
+Both tracked-worktree and index diffs are clean; branch --show-current is empty.
+Remote verified SHA256 values match the independently reviewed source bytes:
+
+- study.py: e5a23642fe6e11e27d23d6345a1273be1a298030685983736be5cac7b6ab3ef9.
+- test_study.py:726d26f5f6cc209c498cec23b4de6fdabf28b3637a8d620752c02575670ea071.
+- COMMAND.sh:061f6fbdb45c8d5e172b40c588b712bb4aa4c54438be1c634f97a4b23ec9c365.
+
+Remote bash -n passed; existing time, timeout and research Python are executable.
+Sparse materialization includes the MGTAP/UCOPE native source and accepted library
+dependencies, scripts/tools, focused tests and current command documents. It copies no
+uncommitted source and does not modify another worktree's per-worktree configuration.
+
+Two staging recovery facts are retained, with zero native exposure: the first direct
+non-login remote Git fetch stalled; after inspecting exact process ancestry, DM stopped
+only that invocation's git-remote-https helper. The configured zsh -lic network route then
+fetched the exact commit successfully. This partial clone also lazily fetches source blobs
+during checkout, so an initially non-login read-tree hit the same network issue; its own
+inspected HTTP helper was stopped and materialization completed through the configured
+network shell. The new --no-checkout worktree initially had an empty index and only .git;
+normal read-tree initialized it at the fixed HEAD. No existing user files were deleted,
+scientific process stopped, interpreter changed, or scientific invocation retried.
+Interactive prompt-component warnings did not change successful Git exit0/source checks.
+
+Immediately before dispatch, exact supervisor status was again not_found. DM then issued
+one agent-task run of the committed absolute COMMAND.sh. The supervisor accepted it in
+tmux agent_mgtap-lr-selection-8251-8252-20260914 and returned log path
+/home/wu/.agent-tasks/mgtap-lr-selection-8251-8252-20260914/task.log.
+
+Fresh actual-node admission at2026-09-14T07:55:41.107820Z passed physical AND effective
+available15632691200 bytes versus minimum4294967296 bytes; no failure reasons. Source
+/proc/meminfo; cgroup limit/current/headroom fields were null, not invented measurements.
+The exact admission.json was copied to the direction-owned local output directory;
+SHA2564f6c88a2175d027a4a432bab25279ed26b1701113f6bdd9ddc08718670d7b715.
+
+Direct supervisor status13 seconds after start: running, pid3665484, exit_code null,
+tmux_active true. This is actual acceptance/running evidence, not completed fits or a result.
+No second run was dispatched. All complete native wall/RSS/exit and scientific outputs
+remain to be collected after terminal observation.
+
+## Actual monitor ownership
+
+New-batch native Monitor /root/mgtap_lr_selection_monitor, Luna/low with fresh context,
+owns only this handle under EXPERIMENT_MONITOR.md. Independent parent return route is
+MGTAP App01a09cd8-676e-7513-806d-a86b7e104518, not Root/Clerk. Monitor App backing task
+01a09eeb-1baa-7e60-84ec-c1b83183d070 returned actual MONITOR_ADOPTED: same running PID,
+live tmux and passing admission, observed after about82 seconds uptime. DM stopped
+routine handle polling after receipt; collection/technical/scientific acceptance remain DM-owned.
+The monitor's initial timestamp labeled node UTC+08 local time with Z; DM requested a
+same-event metadata correction, preserving the original event ID and process evidence.
+Its direction-owned MONITOR.json retains observation/delivery state. Useful observation
+interval120 seconds uses interruptible waits no longer than60 seconds per tool call.

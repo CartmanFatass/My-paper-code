@@ -4,8 +4,9 @@ Claim under study: a finitely selected COND learning procedure may provide usefu
 Binding structure: systems / information flow; both actors use the same legal local information in a partially observed multi-UAV task.
 
 Status: prospective B/EXPLORE protocol selected by DM at the 2026-09-14 reentry.
-The complete runner is implemented and technically accepted after independent review;
-actual-node admission and scientific execution remain pending at this boundary.
+The complete runner is implemented and technically accepted after independent review.
+The single exact-source programme passed actual-node admission and was launched on
+2026-09-14; completion and scientific intake remain pending. See [actual launch facts](reentry_20260914/LAUNCH.md).
 No old frozen invocation is resumed. The current development decision is in
 [DM reentry intake](reentry_20260914/DM_REENTRY_INTAKE.md).
 
