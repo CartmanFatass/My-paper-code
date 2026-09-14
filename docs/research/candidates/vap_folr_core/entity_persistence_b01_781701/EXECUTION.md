@@ -40,3 +40,21 @@ Native wall/aggregate CPU/peak RSS use each INVOCATION_TIME.json through process
 exit. Runner timing, study elapsed, support and provider costs have separate scope.
 Local test scratch deletion was rejected automatically before execution; both
 creator directories are retained and named in ENGINEERING.md, without a workaround.
+
+## First accepted invocation
+
+Z accepted2026-09-14T23:26:49.531636Z, PID3695656, exact handle
+folr-persistence-b01-781701-current-only. Adjacent admission captured23:26:49.552971Z,
+physical/effective available15285231616bytes, passed4GiB. The native Monitor
+/root/dm_folr_resume_20260914/monitor_l_low_folr directly adopted at23:27:29Z.
+It prematurely returned a final while the handle was active; DM immediately
+resumed the same monitor's complete observation assignment, with no launch or
+scientific retry. Its compact state remains in the named direction temp path.
+DM ceases routine process polling after direct adoption; terminal collection follows
+that monitor's native event.
+
+The earlier preparation's stopped git-show parent returned SIGTERM; its orphaned
+HTTPS helper subsequently exited with `SSL connection timeout`. A later attempt
+to stop those same two helper PIDs found them already absent. No scientific process
+was stopped and no ambiguous launch existed; repaired preparation was completed
+through the configured network shell before this accepted invocation.
