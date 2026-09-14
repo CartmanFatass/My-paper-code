@@ -58,9 +58,11 @@ challenged the stopping inference; the correction now answers it through selecte
 
 B03 implementation at source b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f is technically
 accepted after independent review and nine focused remote tests; the initial fixture
-setup failure remains recorded. DM proceeds to adjacent admission, detached execution,
-Monitor adoption and intake; scientific exposure is still zero at this decision
-application. The existing third-slot reservation becomes FOLR occupancy, with the
+setup failure remains recorded. [B03 execution](entity_history_b03_781501/EXECUTION.json)
+now has Generic accepted and running in detached agent-task at 2026-09-14 08:24 UTC
+after adjacent physical/effective memory admission. No final B03 result exists yet;
+BANK remains selected after Generic collection. The new native batch Monitor owns
+observation after its direct adoption receipt. The existing third-slot reservation becomes FOLR occupancy, with the
 same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
 Full support/provider cost remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves
 the previous decisions as history, not current lifecycle or dispatch instructions.
