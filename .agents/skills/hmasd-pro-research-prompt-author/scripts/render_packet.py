@@ -47,7 +47,7 @@ BASE_REQUIRED_FIELDS = (
 DEFAULT_COMPANION_PROMPT = (
     "Execute the attached PROMPT_BODY.md exactly. "
     "It contains the complete read-only evidence manifest. "
-    "Return this node's final decision or the exact blocker."
+    "Return the complete scientific review or requested advice, with any exact evidence gap."
 )
 
 
@@ -493,7 +493,9 @@ def validate(data: dict, project_root: Path) -> dict:
         "requested_conversation_id": requested_conversation_id,
         "reset_invalid_provider_context": reset_invalid_provider_context,
         "provider_context_reset_evidence": provider_context_reset_evidence,
-        "decision_authority": "pro_final",
+        "decision_authority": (
+            "owner_requested_advice" if role == "portfolio" else "dm_owned_scientific_review"
+        ),
         "repository": repository,
         "repository_url": repository_url,
         "commit_or_ref": commit_or_ref,
@@ -598,7 +600,7 @@ failed, reuse the file and check existing comments before completing the notific
 {GITHUB_DELIVERY_MARKDOWN_FALLBACK}
 Return actual file/commit/comment links when confirmed. Otherwise return the downloadable
 Markdown document and the precise GitHub gap. The committed or downloaded Markdown file
-contains the complete decision; a short chat summary does not substitute for it.
+contains the complete review or requested advice; a short chat summary does not substitute for it.
 """
     body_path.unlink()  # this invocation just generated it; TASK is the sole new body
     (out_dir / "TASK.md").write_text(body, encoding="utf-8", newline="\n")
@@ -668,20 +670,24 @@ def bind_github_task(handoff_path: Path, sha: str, project_root: Path) -> dict:
 def _node_decision_contract(workflow_node: str) -> str:
     if workflow_node == "em_innovator":
         return (
-            "Select the next scientific object, mechanism, or cheapest decision-relevant "
-            "discriminator for this direction. Return one explicit final selection with its "
-            "falsifier, evidence requirements, and claim ceiling."
+            "Assess candidate scientific objects, mechanisms and decision-relevant discriminators. "
+            "Give reasoned scientific recommendations, falsifiers, evidence requirements and claim "
+            "ceilings. The DM owns the direction decision; this review grants no execution authority."
         )
     if workflow_node == "em_convergence":
         return (
-            "Decide the smallest supported direction conclusion and whether the direction should "
-            "continue, park, close, or recast. Return one explicit final decision with the strongest "
-            "contradiction, residual uncertainty, and any required next evidence."
+            "Act as the independent scientific Reviewer for this direction. Review experimental "
+            "design, comparison integrity, evidence interpretation, conclusions and successor plans. "
+            "Identify material findings, strongest contrary evidence, residual uncertainty and "
+            "proportionate corrections or claim limits. The DM must respond to material findings. "
+            "The DM retains the direction decision and lifecycle; this review is not funding, "
+            "lifecycle or scheduling approval."
         )
     return (
-        "Decide the priority, capacity, lifecycle, fusion, separation, new-direction registration, "
-        "or next investment question across the supplied direction scope. Return one explicit final "
-        "Portfolio decision and its evidence-bounded rationale."
+        "Provide the report or cross-direction advice covered by the explicit owner request. "
+        "Compare evidence-bounded options, costs and uncertainties. Recommendations do not authorize "
+        "execution or automatic replacement; global adjustments remain within the owner's express "
+        "implementation instruction, while DMs own their direction lifecycles."
     )
 
 
@@ -752,10 +758,11 @@ uncertainties, and recommendations. Preserve the finite claim ceiling above.
 
 {node_contract}
 
-Your complete response provides the final decision within current owner instructions
-and applicable specifications; completeness does not authorize a silent exception. If
+Your complete response supplies independent scientific review or owner-requested advice;
+it does not transfer DM lifecycle authority or create global execution authority. Respect current
+owner instructions and applicable specifications; completeness does not authorize an exception. If
 connector access or evidence is insufficient, explain the exact gap and state
-in ordinary language that no decision could be reached; do not manufacture one.
+which review conclusions remain unsupported; do not manufacture evidence or an approval.
 
 ## Direct scientific reading
 

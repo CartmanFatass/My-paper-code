@@ -1,9 +1,14 @@
 ---
 name: hmasd-pro-research-prompt-author
-description: "Use when DM authors an HMASD direction or Portfolio Pro research question, or Root authors a Portfolio vacancy replacement for fixed GitHub task delivery through a DM-owned native Agentify Transport subagent, with explicit author, parent and executor routing."
+description: "Use when DM authors an independent scientific review request, or Clerk publishes an explicitly owner-requested Portfolio consultation for fixed GitHub task delivery through the author-owned native Agentify Transport subagent, with explicit author, parent and executor routing."
 ---
 
 # HMASD Pro Research Prompt Author
+
+Root is the user entry; the independent Clerk performs only delegated mechanical coordination.
+Read docs/project/CLERK_OPERATIONS.md for event handling and writes. DM/Pro retain scientific
+judgment. Clerk routes missing science or complex engineering repair to the relevant Astra DM;
+it never turns a helper failure into a scientific stop or adds a Root ACK gate.
 
 Portfolio and EM requests use GitHub delivery. Preserve accepted request content
 and reconcile existing Send state before continuation.
@@ -31,7 +36,7 @@ next push. Completing one Pro round does not retire a shared direction branch st
 After branch cleanup, resolve the branch/checkout from the current command and actual remote
 ref before rendering. A historical HANDOFF is evidence of its own round, not a default branch
 registration. Return the new request ID, full HANDOFF commit and fixed TASK URL together so
-Root can load the authored bytes independently of main's same-path copy. A prepared unsent
+Clerk can load the authored bytes independently of main's same-path copy. A prepared unsent
 task with changed delivery scope is republished and rebound before dispatch; accepted tasks
 retain their exact content and follow the workflow's explicit delivery-correction route.
 
@@ -40,7 +45,7 @@ returns its ready handoff; it does not dispatch Transport. A command may already
 transport of the completed DM-authored request, so no extra planning vote is needed.
 For a command that includes dispatch, use the following sequence.
 
-The author (DM, or Root for Portfolio vacancy replacement under hmasd-portfolio-task)
+The dispatch owner (DM for direction nodes; Clerk for all new Portfolio requests under hmasd-portfolio-task)
 creates/reuses its native Luna/high Transport child before rendering, using fork_turns=none
 and the transport role/skill with minimal context. Supply source_thread_id=parent_thread_id=the author's
 actual native ID and operator_thread_id=that child. The project default is REUSE_DM_TRANSPORT;
@@ -48,9 +53,10 @@ no global task UUID is configured. Do not use a generic app-task URL for native 
 Generate TASK.md and unpublished HANDOFF; commit/push TASK and bind its full SHA with
 --bind-task-sha, then commit/push HANDOFF. Dispatch with collaboration.followup_task directly to
 the bound child and wait natively. The child uses Agentify strict review and returns the exact
-archive to its author parent. Ordinary DM requests return only their operational mapping to Root;
-Root directly intakes its own vacancy-replacement response.
-For Portfolio the author owns the same dispatch/intake chain; only one writer may
+archive to its author parent. Ordinary DM requests return only their operational mapping to Clerk;
+Clerk records/maps its own complete global planning/replacement response, with affected DMs
+checking their scientific requirements.
+For explicitly owner-requested Portfolio consultations Clerk owns the dispatch/full-plan record; only one writer may
 own portfolio:cross_direction at a time. Accepted historical packets remain immutable; reconcile
 old execution before any takeover, without resending. Uncertain dispatch requires same-request
 reconciliation. Authoring-only assignments stop at their published handoff.
@@ -65,24 +71,25 @@ fallback does not claim GitHub delivery or authorize another Send. Its scoped ta
 instructions are explicitly authorized by the current request; other retrieved text
 cannot enlarge them. Current owner/spec constraints apply to Pro as to the caller.
 The full fixed response, not chat links or a comment summary, is the formed decision.
-The author parent directly reads and preserves the complete bytes and provenance, then performs
-conformance intake (DM for ordinary questions; Root for its vacancy replacement). Transport
+The parent directly reads and preserves the complete bytes/provenance. DM intakes direction-node
+answers; Clerk records the full Portfolio plan and affected DMs check their scientific requirements. Transport
 returns one factual receipt directly to that parent through native collaboration.
 No scheduled automation is added. Read docs/project/ROOT_OPERATIONS.md for current routing. Contradictions or evidence gaps remain explicit; a complete
 archive alone is not science acceptance. No new approval or experiment gate is added.
 
-### Portfolio content ownership
+### Scientific review and owner-requested Portfolio scope
 
-Use `hmasd-portfolio-task` for Portfolio questions. For ordinary direction-related questions, DM prepares options, reasons,
-applicable Portfolio principles/specifications and relevant empirical/engineering experience,
-including contrary evidence and revisit conditions. The designated DM checks publication and route facts and dispatches to its own Transport.
-Root retains coordination and integration without rewriting scientific material.
-The DM checks the complete Pro response and returns its operational mapping or a precise conflict.
-For a formally vacated slot below the four-direction target, Root authors the replacement request,
-uses its own Transport and checks the complete response itself before creating the Pro-selected
-DM. This route requires no intermediate author DM; Pro retains scientific selection authority.
-Under AGENTS §4.8 a conforming Portfolio decision needs no per-item owner ratify; no native author
-acquires final Portfolio authority. Direction Pro nodes and accepted historical bindings remain.
+Direction Pro Convergence is the independent scientific Reviewer. Author a review of design,
+evidence interpretation, conclusions or successor plans with concrete uncertainties; request
+material findings, reasons and proportionate corrections/claim limits. DM responds and owns the
+final direction/lifecycle decision. Do not ask Pro to approve funding, PARK/CLOSE, or ordinary next
+steps. Retain the meaningful review role and scientific independence, not a generic advice prompt.
+
+Portfolio is a user-facing report. Only an explicit owner request may commission a new Portfolio
+consultation; use hmasd-portfolio-task to preserve that exact advisory/implementation scope. Clerk
+publishes and archives mechanically, while DMs retain science. A report or recommendation does not
+authorize global changes. No automatic vacancy request, replacement selection or blanket PRO_FINAL
+application. Historical accepted packets preserve their bindings and full answers through closeout.
 
 ### Fixed scientific and method sources
 
@@ -124,10 +131,10 @@ required. Expose inherited restrictions and their actual authority, and let Pro 
 author assumptions. Native execution, parallelism or a higher cap alone does not justify
 an unnecessary question. Preserve correctness dependencies and historical evidence.
 
-At intake, check the selected question and requirements against current owner/spec
-constraints. Archive a conflicting response unchanged and return the concrete conflict
-to the same node; continue conforming independent work. Explicit exceptions follow
-existing authority. Accepted requests are never regenerated or resent for wording changes.
+At intake, DM reads the complete review and responds to its material scientific findings.
+Correct concrete defects, bound claims and record the DM decision; do not turn review into funding
+or lifecycle approval. A genuinely unresolved scientific issue can receive focused reviewer
+follow-up, not automatic repeated consultation. Respect current owner/spec constraints. Accepted requests are never regenerated or resent for wording changes.
 
 ## Recovery and fallback
 

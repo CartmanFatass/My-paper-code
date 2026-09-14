@@ -1,98 +1,36 @@
 ---
 name: hmasd-loop-dispatch
-description: Use when HMASD Root plans or advances the research working set, handles native direction returns, replaces an available direction slot, or is about to wait.
+description: Use when Clerk processes direction events, records DM lifecycle decisions, integrates accepted work or recovers an unfinished handoff.
 ---
 
-# HMASD research loop
+# HMASD event coordination
 
-Root maintains four parallel direction DM chains. DM owns ordinary science, code, Pro intake,
-monitor adoption, collection and continuation. Root records changed events, integrates accepted
-commits and resolves actual cross-direction dependencies. ROOT_OPERATIONS.md owns routing.
+DM owns its entire direction lifecycle; Clerk coordinates and records; Root is the user entry.
+Portfolio is a report for the user. Read current routes/state from .codex/hmasd-dm-sessions.toml
+and procedure from docs/project/CLERK_OPERATIONS.md. Owner instructions take precedence.
 
-## Completion as a stable dispatch point
+On an actionable event:
+1. Reconcile the actual owner, newest owner boundary and event/evidence revision.
+2. Integrate accepted facts and complete the unfinished consequence; delivered is not applied.
+3. DM independently selects/executes its next bounded object or records continue/defer/PARK/CLOSE/
+   reopen/recast/family/C-promotion. No Portfolio approval; direction Pro Convergence independently reviews science, with DM responses
+   and corrections recorded. Review does not transfer lifecycle authority.
+4. If an ACTIVE DM has neither work nor a decision, return the specific unfinished management
+   question to that DM. Do not demand a Portfolio permission packet, infer a scientific stop or
+   repeat identical reminders indefinitely.
+5. Record the DM's actual lifecycle and next condition. Report vacancies honestly; never
+   automatically send a Portfolio request, create a replacement or revive another direction.
+6. Update the existing user-facing Portfolio report and notify Root of material changes or a
+   concrete user-control exception. Fact-only updates need no ACK. End the handled event turn.
 
-A DM bounded-assignment completion, material blocker/scope conflict, or ACTIVE-idle event is an
-actionable native return. Root immediately runs the stable next-action trigger at that boundary:
-integrate the named evidence/commit, recount actual running and reserved direction slots, and
-resume the same direction's next authorized bounded assignment when one exists. If no immediate
-action is authorized, keep the direction ACTIVE and occupied, retain its prepared
-materials/dependency, and leave the DM in a native wait after one proactive parent event. An object,
-allocation, cleanup, Pro wait or child completion never releases a direction slot. Only an explicit
-Portfolio or owner lifecycle pause/closure releases it and can trigger vacancy replacement.
+Use app messages between independent tasks; final alone is not delivery. Use compact wait_threads
+only for missing progress facts; native children return to their actual DM. Real provider/run/review
+work has an ID, owner and event. Empty intentions do not count as advancing work. An enabled
+50-minute heartbeat is interruption recovery, not a planning trigger.
 
-## Stable next-action trigger
-
-At goal-turn entry, every bounded-assignment completion or actionable native return, and before
-the first wait after useful work:
-
-1. Apply owner pause/stop boundaries. Workflow edits and status questions do not resume research.
-2. Process only changed direction events. Write a brief existing-log entry with direction, event,
-   evidence/commit and any Root action. DM handles routine Monitor/Transport receipts directly;
-   Root does not poll their handles, recheck adoption or repeat scientific intake.
-3. Integrate ready accepted work and resolve concrete dependencies when needed. Direction-local
-   continuation remains with the original DM without a new Root approval or dispatch per object.
-4. A formal direction pause/closure releases its slot. When occupied slots fall below four,
-   Root uses hmasd-portfolio-task to author and dispatch a bounded replacement question to
-   portfolio:cross_direction through its own reusable native Luna/high Agentify Transport child.
-   Root reads the complete response, checks scope/specification conformance, records the Pro
-   decision and creates the selected new direction's DM with its bounded starting assignment.
-   Pro selects the direction and investment. Ordinary direction-related Portfolio questions and
-   responses remain with their author DMs. Preserve the shared node's single-writer binding.
-5. Record pending replacement request IDs and reserved slots in existing tracking. Repeated events
-   or timeouts reuse the same request; recount occupied/reserved slots before creating a DM.
-   An experiment/object/allocation ending, temporary blocker, Pro wait or idle child is not a
-   direction vacancy. Resume the same DM's authorized continuation/recovery when necessary.
-   Existing overlap above four drains without interrupting live directions; no fifth admission.
-6. After useful independent work, wait natively for DM events or Root's own replacement Transport.
-   Use the configured 1500000 ms default/minimum. An unchanged timeout briefly continues waiting
-   without a new dispatch pass, full-record reread, status polling or Portfolio request. The owner
-   accepts periodic context reuse and brief continuation as the cache-preservation premises.
-   Reconcile an idle/unassigned child rather than waiting indefinitely. Owner pause/stop and
-   no-work completion end the turn. Never impose a sibling or batch barrier.
-
-DM event visibility: unchanged waits remain quiet, but a bounded assignment completion, material
-blocker/scope conflict, or ACTIVE direction entering idle must produce one proactive parent action
-message before native final/idle return. Include assignment, state, evidence or commit, and the
-next action/dependency; this is not a periodic keepalive or an extra dispatch.
-
-## Authorization gate
-
-At each dispatch point, distinguish an already-authorized next state from a new scientific choice.
-If the current card, accepted Pro decision or published handoff fixes the next object, question,
-inputs, comparator and budget, the owning DM dispatches it immediately; no extra Root/owner
-approval, ACK or waiting interval is required. A prepared question for the proper direction or
-Portfolio node is itself dispatchable when its scope is fixed; only the returned decision gates
-execution that would change science, budget or lifecycle. Wait only for an actual external
-dependency, an unformed proper-node decision, or a concrete blocker. A running DM with an
-authorized next state must never remain in native wait merely because the prior object completed.
-
-DM autonomy is the operating default: Root need not re-authorize a card-fixed object, a scope-fixed
-proper-node question, an admitted run, Transport repair, collection, intake or direction-local
-continuation. The DM dispatches and carries that work through its own acceptance, then reports the
-changed boundary for Root integration. Root involvement is reserved for shared dependencies,
-formal lifecycle/vacancy work or a genuinely new scientific, budget or lifecycle choice.
-
-## Bounded assignments
-
-Use ENGINEERING_SCOPE_SPEC §7.1 for L0 and optional L1–L3 detail. Include the existing
-branch/checkout and known collection, integration, intake, cleanup and selected follow-on work.
-DM carries science, implementation, self-checks, repairs and acceptance through completion in
-the same task. Under OWNER_DIRECT 2026-09-12, do not dispatch CM or Implementer
-subagents, including generic implementation substitutes. Retain independent Reviewer review for
-high-risk changes under ENGINEERING_SCOPE_SPEC §7.3; DM resolves findings and accepts.
-Accepted legacy assignments close on their original routes without
-successors; other specialist and independent-task routes are unchanged.
-
-Native work uses `followup_task`; `send_message` only conveys information requiring no
-new work. Retain actual dispatch outcomes and reconcile uncertain delivery before retrying.
-An unavailable recipient is a Root recovery decision within the same role and scope.
-A written next step does not count as active work.
-
-Root maintains PORTFOLIO.md, EXPERIMENT_TRACKING.md and useful evidence in the existing
-root-log. Combine routine record edits only when they are already ready together; never delay a
-direction to manufacture a multi-direction update. Push every commit immediately.
-Coordinate only actual overlapping file/index work. Follow SIBLING_COMMUNICATION.md for
-native tool addressing and DM-owned Transport receipts.
-
-Owner delegation, scientific caps, exact-source execution, memory admission and uncertain
-Send rules remain binding. A repaired wrapper does not authorize another scientific attempt.
+Portfolio consultation/cross-direction adjustment requires an explicit owner request. Reporting
+or advice alone does not authorize implementation. Preserve accepted old request/handle bindings;
+archive pending answers as advice without automatically applying obsolete global dispositions.
+Ordinary direction work continues independently. Root/Clerk cannot make scientific judgments,
+expand resource commitments or impose approval gates. Actual frozen evidence and resource
+constraints remain; a DM can prospectively revise its direction choices with a reasoned new record.

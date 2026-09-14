@@ -599,8 +599,12 @@ def bind(args: argparse.Namespace) -> int:
             args.conversation_binding_key = expected_binding_key
         if args.conversation_binding_key != expected_binding_key:
             raise ValueError(f"conversation_binding_key must be {expected_binding_key}")
-        if args.workflow_node != "legacy" and args.decision_authority != "pro_final":
-            raise ValueError("decision_authority must be pro_final")
+        expected_authority = (
+            "owner_requested_advice" if args.workflow_node == "portfolio_decision"
+            else "dm_owned_scientific_review"
+        )
+        if args.workflow_node != "legacy" and args.decision_authority not in {"pro_final", expected_authority}:
+            raise ValueError(f"decision_authority must be {expected_authority} (or frozen legacy pro_final)")
         args.direction_ids = direction_ids
     except (json.JSONDecodeError, ValueError) as exc:
         return _result({"bound": False, "state": "BINDING_SCOPE_INVALID", "error": str(exc)}, 2)
@@ -812,6 +816,7 @@ def bind(args: argparse.Namespace) -> int:
                     "conversation_id": args.conversation_id,
                     "provider_url": args.provider_url,
                     "direction_ids": direction_ids,
+                    "decision_authority": args.decision_authority,
                     "request_id": args.request_id,
                     "packet_id": logical_packet_id,
                     "packet": {
@@ -950,6 +955,7 @@ def bind(args: argparse.Namespace) -> int:
                     {
                         "schema_version": SCHEMA_VERSION,
                         "direction_ids": direction_ids,
+                        "decision_authority": args.decision_authority,
                         "request_id": args.request_id,
                         "request_history": history,
                         "packet_id": logical_packet_id,
@@ -1104,7 +1110,7 @@ def main() -> int:
         required=True,
     )
     parser.add_argument("--conversation-binding-key", required=True)
-    parser.add_argument("--decision-authority", choices=("pro_final",), required=True)
+    parser.add_argument("--decision-authority", choices=("pro_final", "dm_owned_scientific_review", "owner_requested_advice"), required=True)
     parser.add_argument("--conversation-id", required=True)
     parser.add_argument("--provider-url", required=True)
     parser.add_argument("--tab-id", default=None)
