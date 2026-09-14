@@ -26,8 +26,9 @@ The [new B01 card](UCOPE_REACTIVE_RENEWAL_B01_CARD_20260913.md) selects one
 master8901 R/F/G instance,2048 training episodes each and one final64-world panel
 each plus H. R−F is primary; R−G and learned−H contrasts remain. It selects
 1638400 native team steps and12288 Adam calls, without a retry or automatic
-successor. Current work is implementation and independent high-risk code review;
-no empirical invocation is yet accepted. The claim ceiling is one whole-package
+successor. Corrected source831b83c15 passed focused checks and independent code
+review; one detached remote invocation is active with direct native Monitor
+adoption recorded in the card. No R outcome is yet known. The claim ceiling is one whole-package
 learning observation, with no stable ranking or component causality.
 
 ## Research organization — 2026-09-04
