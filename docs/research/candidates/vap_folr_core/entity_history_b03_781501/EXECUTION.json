@@ -1,0 +1,44 @@
+{
+  "object": "FOLR_ENTITY_HISTORY_B03_781501",
+  "phase": "GENERIC_NOT_LAUNCHED",
+  "planned_at_utc": "2026-09-14T08:16:51.805742+00:00",
+  "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+  "portfolio_decision_sha": "4776103de4f55beaee610c52506112651bfaed04",
+  "node": "hmasd-wsl-node",
+  "execution_checkout": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d",
+  "output_root": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501",
+  "supervisor": "/usr/local/bin/agent-task",
+  "python": "/home/wu/.venvs/hmasd/bin/python",
+  "native_monitor": "/root/folr_b03_monitor",
+  "monitor_thread_id": "01a09efc-5418-7181-9700-800b9c755b8e",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "planned_handles": {
+    "GENERIC": "folr-b03-781501-generic",
+    "BANK": "folr-b03-781501-bank"
+  },
+  "accepted_handles": {},
+  "launch_assets": {
+    "GENERIC": {
+      "source_path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/GENERIC.sh",
+      "bytes": 675,
+      "sha256": "c28edbb07847aeba73188252443a7c3d985355c4bd7629150dd3e4f098939357",
+      "staged_path": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC_LAUNCH.sh"
+    },
+    "BANK": {
+      "source_path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/BANK.sh",
+      "bytes": 721,
+      "sha256": "de2ef45b69834e62c1c3da9c1d41bd79f4dab28699312a21919efd867695e5b3",
+      "staged_path": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_LAUNCH.sh"
+    }
+  },
+  "scope": "One invocation per arm; Generic then BANK regardless of score/completeness, subject to real shared integrity and physical resource dependencies. No scientific retry or extra block.",
+  "science_exposure_per_arm": {
+    "training_episodes": 5000,
+    "native_training_ticks": 100000,
+    "updates": 4969,
+    "final_greedy_episodes": 128,
+    "final_ticks": 2560
+  },
+  "admission": "Committed launcher immediately checks >=4GiB physical and effective available memory before runner; no current admission claimed.",
+  "resource_and_support_notes": "CPU FP32 Torch intra/inter1/1; DM plans3600s/arm,7200native+1800support are not hard stops. Remote supervisor usage lookup took0.35899999999674037s SSH elapsed; no scientific work. Full support/provider cost UNKNOWN."
+}
