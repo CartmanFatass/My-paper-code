@@ -141,3 +141,21 @@ P1/P2 or fictitious owner reply. The current owner README advertises
 only OWNER_DIRECT or historical PRO_FINAL/OWNER_DELEGATED. No false authority
 label is written to bypass that tool mismatch; the existing item's P and this
 DM response remain valid records, and Clerk receives the concrete interface gap.
+
+## Technical closeout result
+
+The original five-target remote reclamation is now complete, with full
+[preservation/deletion receipt](../../retained_reference_use_b01_781301/CLEANUP_RECEIPT_20260913.json).
+All unique weights/panels,27 result/support/supervisor files and fixed BANK input
+were matched to published preservation; final exit0 verifies five absences and
+removal of only the assigned detached worktree registration. A read-only CR-tail
+shell-wrapper error is retained separately; it made no deletion and no new
+scientific invocation. The archive contains reconstructible evidence; no original
+response, card, source SHA or result was changed.
+
+At maind2227e4bd,16/20 requested historical integration paths match, including
+GENERIC_RAW; four remain with Clerk (legacy Portfolio response, retained-use
+helper/test and runner), fully retained on the accepted direction branch. There
+is no pending experiment or scientific-review producer. The separate latest
+five-file control-entry synchronization is administrative work under Root's
+explicit rollout instruction, not research reopening.

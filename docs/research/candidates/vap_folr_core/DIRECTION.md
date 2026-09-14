@@ -42,11 +42,15 @@ execution slot is released without selecting a replacement or new resources.
 DM may revisit a specific useful information/lifetime, learning-performance or cost
 proposal within the owner's actual resource/cross-direction constraints. Portfolio
 consultation is not a re-entry prerequisite. Scientific evidence and narrower holds
-below retain their original meanings; assigned technical preservation/cleanup remains.
+below retain their original meanings. Assigned remote reclamation is complete;
+the [cleanup receipt](retained_reference_use_b01_781301/CLEANUP_RECEIPT_20260913.json)
+retains preservation hashes, terminal checks and all five verified removals.
 See the [DM lifecycle decision](FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md#dm-lifecycle-decision--2026-09-13-full-direction-delegation).
 The complete post-F independent scientific review found no result-invalidating
 defect; DM accepts its R1/R2 reporting corrections and R3 judgment clarification
 in the [scientific-review response](pro_packets/20260913_post_f_scientific_review/INTAKE.md).
+No live scientific or Transport producer remains. Clerk retains the separately
+identified mechanical main-integration/reporting consequences.
 
 The observer-owned entity-history-before-aggregation B family remains OPEN on
 the lifecycle-identity-visible native Traffic Junction variant. Its allocated

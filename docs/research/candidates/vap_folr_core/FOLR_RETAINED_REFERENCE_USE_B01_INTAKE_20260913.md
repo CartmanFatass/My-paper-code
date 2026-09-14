@@ -464,3 +464,39 @@ DM can verify the unique raw/input/support archives on the observed published
 direction branch and complete the scoped cleanup directly. No remote data had
 been deleted at the documented preflight. The later cleanup receipt will record
 actual removal; no research restart or frozen experiment extension follows.
+
+## Assigned remote reclamation — 2026-09-13 complete
+
+The [actual cleanup receipt](retained_reference_use_b01_781301/CLEANUP_RECEIPT_20260913.json)
+closes the original five-path assignment. Four local archives matched their
+collected SHA256 and Git blobs at observed published branch commit
+`8d214fd5a5b86019414095e8855bf679e51f3695`. All27 listed supervisor/support/result
+files matched remote digests, as did the frozen BANK input. Exact realpaths,
+no-symlink/clean-worktree/source identity, both finished/exit0 handles and absent
+PIDs were checked. A CR-only final input line caused the read-only wrapper to
+exit127 after successful checks; that zero-deletion attempt is preserved.
+The bounded cleanup invocation normalized script transport, rechecked critical
+facts, removed the one detached worktree and four exact temporary roots, and
+verified all five paths plus worktree registration absent; exit0.
+
+The target inventory was57836KiB; actual filesystem free-space delta was not
+measured. Unique checkpoints, panels, logs/support and source remain in the
+published archives/commit. No shared authoring checkout, evidence archive,
+unrelated task/worktree, experiment budget or frozen card was changed.
+These remote working copies are reconstructible from retained evidence.
+
+The non-overlapping recorded post-intake control-command windows total a lower
+bound4.3240421s, including the failed read-only wrapper and successful cleanup.
+Added to the original known support lower bound144.192s this is148.5160421s of
+recorded partial coverage, not a full support/direction bill or cap-compliance
+claim. Provider/agent and uncovered reading/Git/intake/integration remain UNKNOWN.
+The present finite DM administrative continuation does not reset or extend F.
+
+At main `d2227e4bd2af5fe18403f14be74a322ce21e6f4f`,16 of the20 previously requested
+historical paths now match, including unique GENERIC_RAW. The remaining
+[four integration paths](retained_reference_use_b01_781301/MAIN_PRESERVATION_AT_CLEANUP.json)
+are the historical Portfolio F response, retained-use helper/test and runner.
+All are still preserved at accepted author commit a726ffb; Clerk owns their
+mechanical integration or a concrete overlap return. This is neither a missing
+scientific producer nor permission for new research. FOLR remains DM-selected
+reversible PARKED/MEDIUM after the completed independent science review.
