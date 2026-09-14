@@ -76,3 +76,71 @@ support/provider/cumulative costs remain UNKNOWN. No new empirical invocation
 is selected while the dependent comparison is unresolved. The common persistent
 augmented architecture is supported by both decisions and can receive bounded
 ordinary engineering preparation with its L0 specified before editing.
+
+## Common augmented actor engineering — L0, 2026-09-14
+
+Batch `FOLR_AUGMENTED_ACTOR_COMMON_20260914` implements the persistent augmented
+actor required by both complete answers while their comparator conflict is
+clarified. This is ordinary reversible engineering preparation; no empirical card,
+comparator, seed, runner or new fit is selected by this batch. DM retains the
+scientific design below, Git ownership and technical acceptance.
+
+- **Deliverable and ownership:** one functional `AugmentedActor` in
+  `experiments/candidates/vap_folr_core/entity_history_augmentation_b01/model.py`,
+  its package `__init__.py`, and focused tests in the exactly mirrored
+  `tests/experiments/candidates/vap_folr_core/entity_history_augmentation_b01/test_model.py`.
+  Work in `C:/Projects/HMASD-worktrees/codex-vap-folr`, branch `codex/vap-folr`.
+  Existing `entity_history_b01/model.py` and `public_lifecycle_b01/attention.py`
+  are read-only dependencies. Existing Generic/BANK code remains unchanged.
+- **Preserved information and learning semantics:** five physical slots, H20,
+  current legal visibility, all existing public lifecycle/local seen/age metadata,
+  and FP32 CPU behavior. Sanitize unseen physical/action features before learned
+  operations. The Generic route has its existing current visible attention,
+  32 metadata features and GRU64 with only its own lifetime reset. Entity history
+  must not feed into that Generic route. Its independent branch uses a GRU16 for
+  each observer-subject pair, updates on visible input, carries through unseen
+  steps, resets on either lifetime boundary and zeros inactive pairs. Entity tokens
+  use memory16 + sanitized current9 + label5 + local3, independent attention128,
+  and a Linear160-to64/ReLU readout. Concatenate Generic64 and entity64, then one
+  Linear128-to5 Q head; no additional fusion layer. Readout uses existing seen and
+  active pair masks. No current-only arm, baseline wrapper, driver, mixer, replay,
+  optimizer or checkpoint behavior is introduced in this bounded common batch.
+- **State and initialization:** input carried state `[B,5,144]` packs Generic64
+  followed by that observer's five GRU16 states. Return Q `[B,T,5,5]` and states
+  `[B,T,5,144]`; no mutable module state or input mutation. BPTT follows functional
+  lifetime masks. Separate actor instances own separate parameters/state; future
+  online/target ownership remains the existing learner's responsibility. Initialize
+  a temporary fresh `Actor('GENERIC_RETAIN')`, retain only its fc1, attn, fc2, rnn
+  and labels, and discard its old fc3. Construct the independent entity fc1,
+  GRU16, token projection, attention, fc2 and fusion head inside one
+  `torch.random.fork_rng(devices=[])`. Same-role Generic initial weights and
+  the external post-constructor Torch RNG therefore match a fresh original
+  Generic from the same initial state; the discarded reference fc3 still consumes
+  its original constructor draws. No unused fc3 is registered. No equal initial
+  Q, parameter-count, temporal-capacity, optimization or performance claim follows.
+- **Acceptance:** apply current canonical `C:/Projects/HMASD` engineering spec
+  §§4 and 7.1–7.3, evidence spec §§11.8–11.10, and the completed B03 review/DM
+  response's common-route, information, lifetime and initialization findings.
+  Focused scientific-reading concepts are FOUNDATIONS §§2/4 (legal observation,
+  recurrent state and information) and §6/04_EMPIRICAL (program-level comparison
+  limits). Tests must exercise same-initialization Generic hidden equivalence;
+  own-versus-peer lifetime behavior; unseen carry and forbidden-feature isolation;
+  full-sequence versus chunk/one-step carried state; inactive zeros; finite useful
+  gradients through both live branches/fusion; and downstream RNG preservation.
+  Existing unchanged learner tests need not be repeated. DM reads the actual diff
+  and independent Sol/high recurrent/RNG review before technical acceptance.
+- **Bounds and return:** at most 300 new non-test lines and proportionate focused
+  tests, with no engineering-spec §4 machinery (`scope: none`). One short local
+  non-result-bearing CPU test suite is allowed with the configured scientific
+  Python and unique invocation-owned `temp/directions/vap_folr_core/test/` scratch,
+  cleaned by its creator after retaining needed output. Repairs rerun only affected
+  checks for a concrete failure/change. No native reward run, experiment, profiler,
+  new environment/dependency, scientific seed/comparison choice or child creation.
+  Return actual changed paths, checks, failures, residual scientific ambiguity and
+  next DM action. Stop only the affected work for a concrete contract/ownership gap.
+
+Other writers exist. An assigned Implementer owns only those three files and must
+preserve their changes, read current role/engineering entry before editing, and
+return directly to the actual parent App task
+`01a09e16-f7b1-7e60-83a0-ba2a7cd969bc` before native final. DM handles source
+publication, full review response and the later selected complete execution path.
