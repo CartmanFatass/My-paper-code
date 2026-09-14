@@ -101,3 +101,42 @@ Clerk reports a previously sent Portfolio request in conversation
 are being reconciled with the registered independent Transport; no new Send or replacement
 application is authorized by that report. Current state is recorded only in the shared registry.
 Tool/file/support recovery does not supply scientific polarity or a PARK reason.
+
+The later OWNER Portfolio authority correction supersedes the earlier DM-final-lifecycle
+wording prospectively. PORTFOLIO_DECISION_PROTOCOL.md and the updated direction/Portfolio
+skills were read and applied: DM continues innovation, bounded experiments, engineering,
+evidence interpretation and reports; Portfolio supplies final direction-level interpretation.
+The already selected LR object continues without a new per-experiment permission request.
+No unilateral new PARK, slot release or automatic replacement follows its eventual sign.
+The pending direction-design review keeps its exact published input and is intaken under
+current authority; its scientific question has not been duplicated or re-sent.
+
+Clerk retirement is complete: full prior exchange preserved at552f0dce7904e35206b8e32f9180ab85aee822ad,
+integrated on mainf92dc1619, shared preservation record40bc9a5a9, then actual App archive
+confirmed and recorded atf1c5072d70639c6e0dec91d82bda03b696d08d72. The observed Clerk turn
+was completed/idle with no remaining reported writer or producer. Main transaction
+preserved the unrelated untracked tests/pelican_bicycle.html. Third-slot reservation
+remains with FOLR's pending Portfolio interpretation. Full fixed old question/answer and
+actual binding were delivered directly to FOLR and RCLE; they coordinate their own
+new reports with Transport. MGTAP is not a standing coordinator.
+
+## Completed implementation and scientific design review intake
+
+The complete runner and focused tests are now delivered, with both engineering findings
+corrected and independently rechecked. DM technical acceptance and the actual check
+scope are in [ENGINEERING.md](ENGINEERING.md). No native invocation has yet occurred.
+
+The full159-line independent design review atbf71e5287f830e6a36601d01553d2c74296e3137
+was read, its immutable Git blob verified and reconciled into this branch. The
+[substantive intake](../pro_packets/20260914_lr_selection_design_review/INTAKE.md)
+answers the stronger PARK alternative and binds the review's three implementation
+dependencies to the completed runner review. The exact earlier scientific question was
+sent once, with no resend due to later Portfolio-authority wording.
+
+DM retains the selected finite experiment: symmetric three-rate selection followed by
+one genuinely fresh final pair asks a different useful development question from a third
+unchanged draw. Its fourfold fit cost and noisy single-master selection remain real
+counterarguments, not defects that review can erase. There is no assumed tuning gain,
+native causal diagnosis, programme replication or population confirmation. Ordinary
+implementation/execution proceeds; a later direction disposition goes to Portfolio with
+the full signed evidence and strongest alternative, without unilateral PARK or slot release.
