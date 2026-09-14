@@ -84,3 +84,15 @@ scientific intake. The first direct Portfolio factual return was accepted in the
 bound conversation after the full original and synchronization responses were
 read; its answer is being preserved independently of the B02 launch consequence.
 At this acceptance boundary new scientific invocations are still zero.
+
+## Observation recovery during the accepted Generic invocation
+
+The initial Monitor adopted the correct run/admission, then twice returned a
+premature native final while Generic remained running (reported prefixes400/369
+and1200/1169). Those finals did not maintain active observation. DM resumed the
+same batch/child after each event and strengthened the concrete bounded-wait
+assignment after the second failure. DM's exact-handle reconciliation observed
+running/exitnull/tmuxtrue, PID3658558, uptime548 s, with the last2200/2169 log at
+515.880103693 s. No new scientific handle, altered endpoint, stop or retry followed.
+The child owns subsequent observation; final intake retains these supervision
+faults and unknown support cost rather than claiming uninterrupted monitoring.
