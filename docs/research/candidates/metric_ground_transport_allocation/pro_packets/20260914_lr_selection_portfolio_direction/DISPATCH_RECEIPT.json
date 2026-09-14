@@ -1,0 +1,21 @@
+{
+  "request_id": "2026-09-14-mgtap-lr-selection-direction-decision-01",
+  "recorded_at_utc": "2026-09-14 09:57:37 UTC",
+  "author_parent_thread_id": "01a09cd8-676e-7513-806d-a86b7e104518",
+  "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "packet_sha": "066e1d50953132025597b3a752acf88e09240fa8",
+  "shared_claim_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a",
+  "prompt_bytes": 20627,
+  "prompt_sha256": "1b1b0a3ddd28cab5b058d1fcb1799379f534c83a01c42d802cd8b33f2a9fa196",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "provider_url": "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1",
+  "app_handoff_count": 1,
+  "app_handoff_result": "send_message_to_thread returned the registered Transport task id; delivery confirmed",
+  "transport_task_observation": "active, new turn01a09f57-c2b1-7410-9d19-db711aaff23b, revision123",
+  "provider_send_acceptance": "UNCONFIRMED; App delivery is not provider Send",
+  "provider_user_message_id": null,
+  "provider_assistant_message_id": null,
+  "full_response_state": "pending",
+  "next_owner": "Registered independent Transport observes and archives the complete same-request answer to the MGTAP parent. MGTAP reads/intakes and applies a conforming direction decision; no duplicate Send or another Root permission.",
+  "scientific_changes": "none; no new fit, seed/card/default, lifecycle application, paid resource or slot change"
+}
