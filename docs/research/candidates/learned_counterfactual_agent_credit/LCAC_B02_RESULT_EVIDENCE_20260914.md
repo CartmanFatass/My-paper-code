@@ -47,7 +47,7 @@ Completed B01+B02 native execution, kept as separate objects: 2,688 episodes; 68
 
 ## Intake and next action
 
-DM accepts this complete, limited B/EXPLORE observation. [Intake](LCAC_B02_INTAKE_20260914.md) records a working PARK preference and one bounded independent review of the actual result and competing continuation reasons. PARK is not applied yet; no successor experiment is selected. [Chinese owner brief](../../portfolio/owner/briefs/learned_counterfactual_agent_credit/2026-09-14_LCAC_B02.md).
+DM accepts this complete, limited B/EXPLORE observation. [Intake](LCAC_B02_INTAKE_20260914.md#full-independent-review-and-actual-dm-decision) records the completed independent review and substantive DM response: narrowly select one unchanged1024/32 B03 pair, master9413, over immediate PARK. The prior working PARK preference was never applied. [Chinese owner brief](../../portfolio/owner/briefs/learned_counterfactual_agent_credit/2026-09-14_LCAC_B02.md).
 
 ## All final worlds
 

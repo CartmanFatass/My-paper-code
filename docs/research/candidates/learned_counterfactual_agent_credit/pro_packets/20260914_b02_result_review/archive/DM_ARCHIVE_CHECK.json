@@ -1,0 +1,13 @@
+{
+  "full_response_read": true,
+  "response_commit": "37ac988f5d73cee346c4c3a910a5e68e0d8bdef9",
+  "response_bytes": 13195,
+  "response_sha256": "2938834a86fa33797850af9c0066cc4d7e3c9a028e038052300fab2b5c79fbfa",
+  "raw_archive_equals_immutable_git_blob": true,
+  "chat_receipt_separate": true,
+  "native_child": "/root/lcac_b02_result_transport",
+  "native_child_reported_receipt": "SENT",
+  "native_child_reported_tab": "CLOSED",
+  "send_click_count": 1,
+  "readback_time": "2026-09-14T04:49:20.765191+00:00"
+}

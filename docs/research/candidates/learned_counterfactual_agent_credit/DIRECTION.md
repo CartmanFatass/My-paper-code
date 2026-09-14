@@ -1,12 +1,12 @@
 # LCAC — learned counterfactual agent credit
 
-## Current position — B02 complete; lifecycle review, 2026-09-14
+## Current position — B02 reviewed; B03 selected,2026-09-14
 
-**ACTIVE: one bounded result/lifecycle review; recasts 0.** [B01](LCAC_B01_RESULT_EVIDENCE_20260914.md), 256/32 master 9411: Q−V −0.00362643, complete wall 129.80 s. [B02](LCAC_B02_RESULT_EVIDENCE_20260914.md), 1024/32 master 9412: Q−V +0.00222263, V 0.18844571 / Q 0.19066834, 15/32 adverse worlds, complete wall 443.91 s. Both observed means lie within MEI ±0.01. Keep the two endpoints separate; there is one trained pair at each, with no equivalence, stable superiority, causal duration or causal credit claim.
+**CONTINUE; recasts0.** B01 at256/master9411 gave Q−V−0.00362643 (129.80s runner); B02 at1024/master9412 gave+0.00222263, V0.18844571/Q0.19066834,15/32 adverse (443.91s). Both means within MEI±.01, one trained pair per endpoint; no equivalence, stable effect, causal duration/credit claim. Both runs/monitors terminal; files/models preserved.
 
-B02 source 25ea4d61c0e1f2484da77f4bc1851e17cdc8eb4a completed all 540,672 native ticks and 4,096 Adam calls. All raw files/models, seeds/counters/units and complete receipts verified; monitor active_set is empty. B01+B02 whole-run wall sum is 573.71 s, not total research cost. Complete support/provider/lifetime cost remains UNKNOWN.
+The complete [B02 review/DM response](LCAC_B02_INTAKE_20260914.md#full-independent-review-and-actual-dm-decision) reconsidered a working PARK preference. DM narrowly selects [B03](LCAC_B03_SCIENCE_CARD_20260914.md): independent unchanged1024/32 master9413. Its complete-procedure sensitivity question, differentiated B02 diagnostics/world effects and observed runner cost justify this specific continuation. No4096 endpoint or optimizer intervention.
 
-[Current intake](LCAC_B02_INTAKE_20260914.md) records a working reversible PARK preference, strongest replication/later-budget alternatives, and selection of one independent Pro result/lifecycle review before the actual decision. No new scientific invocation is selected. DM owns full answer intake, substantive response and applied next work or safe PARK. Current routes/slots belong to the live registry and Clerk; historical ownership language below is not a dispatch route.
+B03 prospectively frozen, not launched. Completed exposure remains B01+B02:688128 ticks/5120 Adam,573.71s runner wall sum, with total support/provider/lifetime UNKNOWN. DM implements/checks/reviews the binding, executes remotely, collects and decides the actual next step. Current routes/slots belong to the live registry/Clerk; historical routes below are not current dispatch.
 
 ## Historical accepted registration — 2026-09-12
 
