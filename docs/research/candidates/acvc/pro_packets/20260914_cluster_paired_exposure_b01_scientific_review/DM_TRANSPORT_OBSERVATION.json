@@ -7,12 +7,33 @@
   "task_sha": "d17e4f4e5f2710c9af157ae42bde98617a600cc0",
   "handoff_sha": "6b532decfd860b059764dbb36f0cac5c79a2f2b8",
   "author_dispatch_at": "2026-09-14T15:28:27Z",
-  "state": "author_dispatched_provider_acceptance_pending",
-  "send_count": null,
+  "state": "WAITING_GENERATION",
+  "send_count": 1,
   "provider_prompt_bytes": 1934,
   "provider_prompt_sha256": "17e9ac4e18d69a42b58960823b7322622658af0406f8c84c22f5a4b82248676a",
   "pre_dispatch_repairs": [
     "Renderer initially rejected mixed rendering/binding arguments before mutation/Send.",
     "Binding-only call initially defaulted project_root to main and rejected direction-worktree path. Explicit project-root corrected binding. Published TASK bytes remained unchanged; no provider Send occurred during either failed CLI call."
-  ]
+  ],
+  "accepted_user_node_id": "f25bcae8-4dc3-47ca-a5e6-ba636027e79b",
+  "send_observed_at": "2026-09-14T15:33:12.5162252Z",
+  "accepted_prompt_readback": "Requested same-node text reconciliation because durable queue mistyped digest; no duplicate Send or changed prompt.",
+  "queue_metadata_errors": [
+    {
+      "field": "input_reference.task_commit",
+      "observed": "ae1ec3632fe59312850e912a7e32890295da4425",
+      "correct": "d17e4f4e5f2710c9af157ae42bde98617a600cc0",
+      "meaning": "Observed value is scientific input SHA, not published TASK commit."
+    },
+    {
+      "field": "input_reference.dispatch_prompt_sha256",
+      "observed": "17e9ac4e18d69a42b58960823b7322622658af0406f8c84c22e5f4b82248676",
+      "correct": "17e9ac4e18d69a42b58960823b7322622658af0406f8c84c22f5a4b82248676a"
+    },
+    {
+      "field": "next_action",
+      "meaning": "Still instructed paste/Send despite send_count1 and WAITING_GENERATION; requested observation/archive-only correction."
+    }
+  ],
+  "metadata_correction_requested_at": "2026-09-14T15:34:46Z"
 }

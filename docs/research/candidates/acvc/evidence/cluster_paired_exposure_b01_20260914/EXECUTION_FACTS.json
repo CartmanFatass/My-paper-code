@@ -83,8 +83,18 @@
     "handoff_sha": "6b532decfd860b059764dbb36f0cac5c79a2f2b8",
     "scientific_input_sha": "ae1ec3632fe59312850e912a7e32890295da4425",
     "transport_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
-    "state": "author_dispatched_provider_acceptance_pending",
-    "send_count": null,
-    "dm_observation": "docs/research/candidates/acvc/pro_packets/20260914_cluster_paired_exposure_b01_scientific_review/DM_TRANSPORT_OBSERVATION.json"
+    "state": "WAITING_GENERATION",
+    "send_count": 1,
+    "dm_observation": "docs/research/candidates/acvc/pro_packets/20260914_cluster_paired_exposure_b01_scientific_review/DM_TRANSPORT_OBSERVATION.json",
+    "accepted_user_node_id": "f25bcae8-4dc3-47ca-a5e6-ba636027e79b",
+    "send_observed_at": "2026-09-14T15:33:12.5162252Z"
+  },
+  "support_closeout_plan": {
+    "recorded_at": "2026-09-14T15:36:24.265290+00:00",
+    "remaining_accepted_review_closeout_wall_plan_s": 1800,
+    "scope": "Observe/archive the same accepted review, read full answer, respond to material findings and integrate existing records; no additional scientific invocation or provider consultation.",
+    "calendar_s_since_selection_audit_row": 2703.413602,
+    "accounting": "Calendar interval includes execution/waiting and is not aggregate compute/support cost. Original native500/support2100/combined2600 estimates retained; cumulative support/provider/agent cost UNKNOWN. Prospective ordinary DM support plan, not owner cap or reset.",
+    "stopping_condition": "Complete full same-request review/response/integration, or preserve an actual external blocker without resending."
   }
 }
