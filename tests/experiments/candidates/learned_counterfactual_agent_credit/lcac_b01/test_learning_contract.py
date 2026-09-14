@@ -235,11 +235,19 @@ def test_primary_all_worlds_units_and_pairing():
 
 
 def test_complete_engineering_chain_counts_and_publication(tmp_path):
+    from scripts.run_lcac_b02 import PLAN
     path = tmp_path / "pair"
-    result = study.run_pair(path, seed=29, env_factory=ToyAdapter, horizon=4,
-                            train_episodes=2, eval_episodes=2, chunk=2, native=False)
+    fixture = dict(PLAN, seed=29, env_factory=ToyAdapter, horizon=4,
+                   train_episodes=2, eval_episodes=2, chunk=2, native=False)
+    result = study.run_pair(path, **fixture)
     assert result["complete"], result.get("error")
-    assert json.loads((path / "summary.json").read_text())["complete"]
+    published = json.loads((path / "summary.json").read_text())
+    assert published["complete"] and published["mode"] == "ENGINEERING_CHECK"
+    assert published["object"] == PLAN["object_id"] and published["card"] == PLAN["card_path"]
+    assert published["seed_offsets"]["eval_reset"] == 3000
+    final = [json.loads(row) for row in (path / "episodes.jsonl").read_text().splitlines()
+             if json.loads(row)["phase"] == "eval"]
+    assert all(row["reset_seed"] == 100000 * 29 + 3000 + row["episode"] for row in final)
     assert len((path / "episodes.jsonl").read_text().splitlines()) == 8
     for arm in ("V", "Q"):
         assert (path / f"final_{arm}.pt").exists()
@@ -248,3 +256,19 @@ def test_complete_engineering_chain_counts_and_publication(tmp_path):
         assert c["optimizer_steps"] == 4
     assert result["arms"]["Q"]["counts"]["q_baseline_rows"] == 280
     assert result["arms"]["V"]["counts"]["v_baseline_rows"] == 8
+
+
+def test_b02_frozen_endpoint_is_disjoint_and_b01_defaults_remain():
+    import inspect
+    from scripts.run_lcac_b02 import PLAN
+    assert PLAN["seed"] == 9412 and PLAN["train_episodes"] == 1024 and PLAN["eval_episodes"] == 32
+    training = set(range(1000, 1000 + PLAN["train_episodes"]))
+    final = set(range(PLAN["eval_reset_offset"], PLAN["eval_reset_offset"] + PLAN["eval_episodes"]))
+    assert len(training & set(range(2000, 2032))) == 24
+    assert training.isdisjoint(final)
+    assert set(range(10000, 11024)).isdisjoint(range(20000, 20032))
+    assert 2 * (len(training) + len(final)) * 256 == 540672
+    defaults = inspect.signature(study.run_pair).parameters
+    assert defaults["seed"].default == 9411 and defaults["train_episodes"].default == 256
+    assert defaults["eval_reset_offset"].default == 2000
+    assert defaults["object_id"].default == "LCAC_B01_256" and defaults["card_path"].default == study.CARD

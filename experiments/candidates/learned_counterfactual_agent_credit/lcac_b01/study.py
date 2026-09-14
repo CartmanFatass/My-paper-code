@@ -41,15 +41,19 @@ def primary(rows, expected=32, horizon=256):
 
 
 def run_pair(output, seed=9411, *, start=None, env_factory=make_real, horizon=256,
-             train_episodes=256, eval_episodes=32, chunk=32, native=True):
+             train_episodes=256, eval_episodes=32, chunk=32, native=True,
+             eval_reset_offset=2000, object_id="LCAC_B01_256", card_path=CARD):
     start = time.monotonic() if start is None else start
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
     torch.set_num_threads(1)
     torch.set_num_interop_threads(1)
     sha = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
-    summary = dict(object="LCAC_B01_256", card=CARD, launch_sha=sha, seed=seed,
+    summary = dict(object=object_id, card=card_path, launch_sha=sha, seed=seed,
                    mode="NATIVE_B_EXPLORE" if native else "ENGINEERING_CHECK",
+                   seed_offsets=dict(actor_init=11, critic_init=12, train_reset=1000,
+                                     eval_reset=eval_reset_offset, train_action=10000,
+                                     eval_action=20000),
                    config=dict(horizon=horizon, train_episodes=train_episodes,
                                eval_episodes=eval_episodes, chunk=chunk, epochs=4,
                                dtype="float32", device="cpu", threads=1),
@@ -96,10 +100,12 @@ def run_pair(output, seed=9411, *, start=None, env_factory=make_real, horizon=25
                         rollout_file.flush()
                     result["training_exposure"] = movement(initial, actor, critic)
                     torch.save(dict(actor=actor.state_dict(), critic=critic.state_dict(),
-                                    arm=arm, seed=seed, launch_sha=sha, config=summary["config"]),
+                                    arm=arm, seed=seed, launch_sha=sha, config=summary["config"],
+                                    object=object_id, card=card_path,
+                                    seed_offsets=summary["seed_offsets"]),
                                output / f"final_{arm}.pt")
                     for episode in range(eval_episodes):
-                        collect_episode(env, actor, horizon, base + 2000 + episode,
+                        collect_episode(env, actor, horizon, base + eval_reset_offset + episode,
                                         base + 20000 + episode,
                                         dict(arm=arm, phase="eval", episode=episode, master=seed),
                                         counts, emit, native=native)
