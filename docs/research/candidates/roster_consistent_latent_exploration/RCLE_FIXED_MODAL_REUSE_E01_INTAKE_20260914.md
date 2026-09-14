@@ -65,3 +65,24 @@ responses, lifecycle/knowledge record and safe exact-worktree closeout. Planning
 allow deviation; all actual/unknown cumulative costs stay visible. Accepted review effects
 are reconciled on the same request before any further Send. Ordinary scope authority persists;
 no new fit/panel/search/retry or cross-direction resource commitment is made.
+
+## Full independent DM role loaded — OWNER_DIRECT 2026-09-14
+
+At this review/response boundary the actual independent DM explicitly read the complete
+canonical developer_instructions in C:/Projects/HMASD/.codex/agents/hmasd-direction-manager.toml,
+full current AGENTS.md, and full PEER_DM_COORDINATION.md. Raw-file SHA256 revisions are,
+respectively,2d98d52288c0514550ca9f4bfa7261c99687a609e6ee915cbbed9e134d184b1d,
+43a434e2172f0732ec1fd410c230f95270a9823223ad870cf3e700c1cacd0ed9, and
+38050b641e0b8ae1de543ec3f099af3fd2b5e926b7a3525974d1284f81b65bc9.
+These were current canonical working bytes while Root prepared publication, not an
+assumption that independent App tasks automatically inherit native-role configuration.
+
+Actual next action: read and respond to the same E01 scientific review now accepted once
+in the bound Pro conversation through independent browser Transport, then make the
+scientific/development choice with evidence and alternatives. The old native Transport
+is released. DM owns needed implementation dependencies, records, accepted integration,
+direct Portfolio scientific dialogue and any resulting vacancy transaction/accepted-peer
+handover. Routine Clerk messages stop. Main integration follows the short named-mutex
+transaction after Root releases its explicit transition; this limits only actual overlapping
+main writes, not direction research, scientific authority or review observation. No new
+fit/PARK/CLOSE or authority from a tool/support/file failure is inferred.
