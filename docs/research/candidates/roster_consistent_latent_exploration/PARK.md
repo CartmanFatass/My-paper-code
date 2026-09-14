@@ -1,5 +1,9 @@
 # RCLE — PARK 知识交接
 
+> 2026-09-14 当前裁决：Portfolio 全文审阅后的 **CONTINUE 已应用，B13 已选择**，见
+> [完整裁决与 DM 回应](pro_packets/20260914_e01_portfolio_direction/INTAKE.md)。原 DM 继续实际研究，
+> 当前仍占用1席。下面的 PARK/record-only/Clerk 路由属于历史，不是当前状态或派发路线。
+
 > 2026-09-14 后续决定：新 DM 完成全文 intake 后重入并选择一个独立 final1024 B11，见
 > [重入记录](RCLE_REENTRY_INTAKE_20260914.md)。同一任务继续工程、执行与 intake。以下原 PARK
 > 决定、record-only 工作范围和成本/保全事实作为历史完整保留；当前状态见 DIRECTION.md。

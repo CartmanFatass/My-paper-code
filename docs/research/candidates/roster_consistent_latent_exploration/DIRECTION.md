@@ -19,7 +19,18 @@ This authority preserves the direction's source-grounded scientific question, ev
 - Stable direction ID: `roster_consistent_latent_exploration`
 - This DM owns direction-local innovation, bounded experiments, implementation and reports. Portfolio decides direction-level CONTINUE/RECAST/PARK/CLOSE/reopening from the full report and global context; ordinary experiments need no per-experiment approval. No unilateral slot release or other-direction resource change follows a DM recommendation.
 
-## Current DM position — 2026-09-14: pending Portfolio decision / recommend CONTINUE
+## Current position — 2026-09-14: Portfolio CONTINUE applied / B13 selected
+
+The complete [Portfolio decision and DM response](pro_packets/20260914_e01_portfolio_direction/INTAKE.md)
+select CONTINUE in the existing joint-quota-phase family and the prepared B13 learned-prior
+object. DM has read the full answer and applied the conforming decision: retain this slot,
+priority and both exact-recipe HOLDs; no RECAST/PARK/CLOSE or per-experiment ratification.
+The unchanged seed33/1024-update/five-panel invocation is selected at published source
+cf4d9bd93ff9eb255800223d95de170b68315ba6. Native exposure is zero at application; actual
+launch/monitor/collection will follow through the existing remote route. Later MGTAP result
+context is preserved in the intake and does not create a slot/resource conflict.
+
+### Evidence and recommendation leading to this decision
 
 [Fixed-modal E01](RCLE_FIXED_MODAL_REUSE_E01_INTAKE_20260914.md) completed once under the
 owner-approved empirical-spec11.4.2: zero new fits,1024 evaluations/65536 native ticks.
@@ -35,16 +46,17 @@ recovery losses relative to the sampled policy and the review's challenge to the
 PARK rationale. DM now recommends one fresh B with a learned scalar multiplying log(q),
 initialized at the same prior strength, rather than immediate PARK. This concrete learning
 question was not resolved by E01. The full evidence, contrary case, costs and global context
-go to Portfolio for the final direction decision. No new fit/PARK/CLOSE has been applied;
-RCLE retains its slot. E01 enclosing chain6.73s and all cost/claim ceilings remain preserved.
+went to Portfolio for the final direction decision now applied above. No B13 native run
+had occurred at application; RCLE retains its slot. E01 enclosing chain6.73s and all
+cost/claim ceilings remain preserved.
 
 While the Portfolio predecessor processed, DM prepared the concrete
 [B13 learned-prior object](RCLE_B13_LEARNED_PRIOR_SCIENCE_CARD_20260914.md) and implementation.
 Twenty-four focused synthetic/legacy/E01 checks pass; independent Sol/high review found
 no material defect and DM technically accepted preparation at the recorded source91811c61.
-No native B13 result follows. The predecessor FOLR decision is now fully archived/applied
-CONTINUE, with three occupied slots; RCLE owns the next exact Portfolio request. This remains
-reversible preparation, with zero B13 native exposure and no unilateral direction decision.
+No native B13 result follows from preparation. The predecessor FOLR decision was fully
+archived/applied CONTINUE before RCLE's own request; the resulting complete RCLE verdict
+is now read and applied. Three slots remain occupied. No unilateral lifecycle decision follows.
 The separate retained-head scale check was inconclusive about the prior bottleneck and is
 retained in the full Portfolio report.
 
