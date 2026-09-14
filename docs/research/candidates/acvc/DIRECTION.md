@@ -1,66 +1,49 @@
 # Direction acvc: ACVC
 
-## Research organization — current OWNER_DIRECT, 2026-09-13
+## Current research ownership — OWNER_DIRECT / Portfolio, 2026-09-14
 
-The ACVC DM owns the complete admitted direction: research/family/object choices, implementation,
-execution, scientific intake, continuation and lifecycle decisions. The standing delegation is
-not an unused balance from a completed Portfolio grant. Finite cards, real resource limits,
-frozen scientific meaning and contrary evidence remain binding. DM records decisions here or in
-the current intake and sends actual outcomes to Clerk; no Portfolio/Root/Clerk approval is required.
+ACVC is **CONTINUE / reopened**, MEDIUM/recasts2, under the complete conforming
+[Portfolio decision](../../portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md)
+and [author intake](../../portfolio/pro_packets/20260914_rcle_park_vacancy_selection/INTAKE.md).
+The original independent ACVC DM owns ordinary research, implementation, engineering acceptance,
+launch/observation, scientific intake and reports. Portfolio owns final direction-level
+CONTINUE/recast/PARK/CLOSE/reopening. Direction Pro supplies independent scientific review;
+the DM reads full answers and responds to material findings. Root owns shared policy/control
+engineering. Canonical live endpoints and slot mechanics are in main
+`C:/Projects/HMASD/.codex/hmasd-dm-sessions.toml`; Clerk is retired.
 
-Direction Pro Convergence is the independent scientific Reviewer of experimental design,
-evidence/comparisons, conclusions and successor plans. DM reads the full review, responds to
-material findings, repairs concrete defects or limits affected claims, and owns the final decision.
-Review is neither optional conversation nor funding/lifecycle/scheduling permission. New review
-packets use main's current renderer/Transport contract with `dm_owned_scientific_review`.
+Reuse `C:/Projects/HMASD-worktrees/codex-acvc`, branch `codex/acvc`. No additional DM or
+fourth slot is created. RCLE owns this existing reservation's application; the DM has sent
+actual card/code-start evidence and owns research continuation without an ACK barrier.
 
-Portfolio supplies the user-readable report and owner-delegated genuine-vacancy selection.
-Clerk coordinates mechanically and records the DM's actual lifecycle; current main controls
-govern vacancy replacement and other owner-requested cross-direction/resource changes. The dated historical decisions
-below retain their original evidence and authority at their own boundaries; their old funding,
-approval, reserve or re-entry wording is not a current dispatch or permission requirement.
+## Active object — B03 new C fit and C/F/own-dwell endpoint comparison
 
-## Authority
+The DM read the entire 21,323-byte Portfolio answer, SHA256
+`3b81868e9065d370f0d2a5430dd81da960d8a4cd3d4be799dff7c98cbd54ceb7`, and its full intake.
+No material scientific/specification conflict was found. The prospective investment goal is
+to assess fixed F's further development value on a new learned proposer. The
+[B03 science card](ACVC_CLUSTER_DEPLOYMENT_B03_SCIENCE_CARD_20260914.md) selects one
+unscreened new C fit, master21937/eval31937, with 512 training episodes/1024 updates and
+three64-world private C/F/own-dwell final panels. B/EXPLORE; C is an arm label.
+New object protocol/runner/launch and focused tests are implemented; exact acceptance and
+execution facts will be recorded at the actual launch/result boundary.
 
-- Stable direction ID: `acvc`
-- Current lifecycle: **PARK**, retained by the replacement DM after the 2026-09-14 scoped vacancy selection and substantive [re-entry assessment](ACVC_REENTRY_INTAKE_20260914.md). No B03 or new empirical budget is selected. The prior full B02 review and close-call PARK remain preserved; historical priority MEDIUM/recasts2 is not an active-slot claim. [PARK knowledge handoff](PARK.md) records assets, limits and reopening conditions.
-- Current authoring checkout/branch: `C:/Projects/HMASD-worktrees/codex-acvc`, `codex/acvc`; live task endpoints come from main `.codex/hmasd-dm-sessions.toml`.
+Earlier [PARK knowledge](PARK.md), [reentry judgment](ACVC_REENTRY_INTAKE_20260914.md)
+and [B02 full-review response](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md)
+remain historical evidence. The new decision changes future investment, not the old empirical
+facts or the defensibility of retaining a bounded reference. It neither revives failed families
+nor establishes a required third seed or a new mechanism. The original B02 retained native
+archive was freshly verified unchanged at 420,438 bytes and SHA256
+`be32ec3b31643d310fbdba780feb7d64f964cbe4df1fdc8b10a58b521b0849c0`.
 
-## Current outcome — reviewed cluster B02 and reversible PARK
-
-The replacement DM completed the newly assigned re-entry decision on 2026-09-14 UTC.
-It retained reversible PARK after reading the full prior review and Portfolio selection,
-acknowledging that another independent fit is scientifically useful while choosing to
-accept unresolved between-fit variation at the present bounded-reference scope. This is
-a new close-call decision, not a new result or a restriction on future replication.
-No experiment, provider Send or scientific successor was created. The [new intake](ACVC_REENTRY_INTAKE_20260914.md)
-records actual identity, preserved archive, options, costs and Clerk's integration/slot-release action.
-
-B02 is terminal, technically accepted, retained and remotely cleaned. Its single new independent
-C-fit used source`be76f696cb773f2e5db8f4d55ebff1f3b6335ae6`, master21493/eval31493,
-1024 updates/192 evaluations/180224 team ticks; complete native wall164.53s. Both separate frozen
-readings are UP: F−C+0.10459355901545042 J and F−own-dwell+0.06070900770904247 J, with4/64
-and11/64 adverse worlds. K and B02 support recurrence on **two observed cluster endpoints**,
-not a pooled primary, stable training-population benefit or fresh-policy default.
-
-The [complete independent review](pro_packets/20260913_cluster_b02_scientific_review/archive/RESPONSE.md)
-was delivered at`80be57f9e95818666f336e5fe89791875dc63425`. DM read it fully and accepted both
-wording findings: C/own-dwell remain the controls for this same two-control package claim, not
-mandatory comparators for every changed question; an additional unchanged independent fit has
-legitimate research value without a current defect, new customer or ability to establish stability.
-DM nevertheless selects no immediate third fit and reversible PARK, explicitly accepting unresolved
-between-fit variation while retaining only bounded evidence. This is a marginal-value choice,
-not proof that further research is useless or a Pro lifecycle verdict. [Final findings response
-and decision](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md#complete-scientific-review-and-dm-decision--2026-09-14-utc).
-
-No experiment or provider generation is pending. The original review was sent once and its full
-GitHub bytes and paired provider IDs are preserved. Root accepted the concrete helper/contract
-repair and Clerk published it at main`ff955721b`; the same Transport completed supported
-reconciliation to ARCHIVED and returned COMPLETE/SENT, preserving the prior CONFLICT. Its owned
-non-protected tab is closed; no other tab changed. No scientific or Transport producer remains.
-Clerk receives the committed PARK handoff and safely archives the DM after this publication turn
-ends. The intake preserves the old connection failure, owner pause/resumption, policy refusals
-and all request history; no direction slot is occupied by the completed record-only closeout.
+K/B01 and B02 keep their separate F−C and F−dwell gains, adverse worlds, useful dwell and
+unequal own-history intervention counts. B02's two means are +0.10459355901545042 and
++0.06070900770904247 J, adverse4/64 and11/64, native164.53s. These are two observed cluster
+endpoints, not training-population stability. The uniform C01 five-fit qualified result remains
+separate. Learned gates below F, both train-through-F DOWN observations and the stopped
+uncertain/delayed family stay preserved. No deployment/default, causal component, tuned
+headroom or transfer claim follows. Old completed review/provider requests are retained;
+new result review uses the registered independent browser Transport and current bindings.
 
 ## Scientific question
 
