@@ -16,7 +16,7 @@ Reuse `C:/Projects/HMASD-worktrees/codex-acvc`, branch `codex/acvc`. No addition
 fourth slot is created. RCLE completed this reservation's conversion to occupancy at main
 `6c6b2432402bf9d9c77b53d683b35ebbb4c325ee`. The original DM owns research continuation.
 
-## Active object — fixed F after one fresh 1,024-episode C fit
+## Current research — paired512/1024 exposure after complete longer-C review
 
 The DM read the entire 21,323-byte Portfolio answer, SHA256
 `3b81868e9065d370f0d2a5430dd81da960d8a4cd3d4be799dff7c98cbd54ceb7`, and its full intake.
@@ -49,10 +49,18 @@ dwell−C+0.0657056332J is descriptive. Absolute C/F/dwell .1744460128/.30370947
 and private interventions6595/4825 retain the strong dwell and tail qualification.
 [Full result](ACVC_CLUSTER_LONGER_C_B01_RESULT_EVIDENCE_20260914.md) and
 [current intake](ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md) preserve the changed-exposure
-claim ceiling and costs. One independent result/next-question review is dispatched through the registered Transport;
-remote outputs are preserved and the completed native resources are removed.
-The tentative preference is a Portfolio development/retention report, with a prospective
-paired-exposure B and fixed-recipe C-BENCH as alternatives; no successor or disposition is selected.
+claim ceiling and costs. The full71-line/13756-byte independent review atfcd806cb2 was read and all findings responded
+to in the intake. It identifies no result-invalidating defect and confirms the reporting repair.
+Native resources are removed after verified preservation; the same provider request is fully archived.
+
+DM selected [ACVC_CLUSTER_PAIRED_EXPOSURE_B01](ACVC_CLUSTER_PAIRED_EXPOSURE_B01_SCIENCE_CARD_20260914.md):
+one NEW22591/32591 C programme,1024episodes/2048updates,two fixed512/1024snapshots and six
+private64-world panels AFTER all learning. Total360448ticks; direct paired-change uncertainty
+retains within-world/checkpoint dependence. This concrete within-programme development question
+changed the DM tentative report preference; report remains a close runner-up, with no quantified
+net-value separation. A new native Sol/medium implementation batch is active under this DM;
+[its intake](ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md) records actual progress.
+No new native invocation, technical acceptance or lifecycle disposition is claimed yet.
 
 Earlier [PARK knowledge](PARK.md), [reentry judgment](ACVC_REENTRY_INTAKE_20260914.md)
 and [B02 full-review response](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md)
