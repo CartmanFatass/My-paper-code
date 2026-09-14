@@ -13,7 +13,7 @@ provider's complete answers. No new Portfolio request or Send was made.
 | Direction | Vacancy | Provider conversation | URL | Prompt chars | Response chars | Local complete archive |
 |---|---|---|---|---:|---:|---|
 | ACVC | DISH released slot | `6aa76925-4558-83e8-86e2-40c5e0a2c320` | https://chatgpt.com/c/6aa76925-4558-83e8-86e2-40c5e0a2c320 | 573 | 9756 | `docs/research/candidates/acvc/pro_packets/20260914_portfolio_vacancy_selection_recovery/archive/` |
-| RCLE | UCOPE released slot | `6aa76e5a-e590-83e8-b27b-596c8b8cbe1c` | https://chatgpt.com/c/6aa76e5a-e590-83e8-b27b-596c8b8cbe1c | 625 | 10627 | not present; provider page is canonical |
+| RCLE | UCOPE released slot | `6aa76e5a-e590-83e8-b27b-596c8b8cbe1c` | https://chatgpt.com/c/6aa76e5a-e590-83e8-b27b-596c8b8cbe1c | 625 | 10627 | `docs/research/candidates/roster_consistent_latent_exploration/reentry_20260914/portfolio/` |
 | FOLR | ACVC released slot | `6aa77158-7194-83e8-8f8a-caf16ae6b84b` | https://chatgpt.com/c/6aa77158-7194-83e8-8f8a-caf16ae6b84b | 629 | 8370 | not present; provider page is canonical |
 
 ## Exact request text recovered
@@ -34,12 +34,12 @@ The copied user requests are short and are preserved here verbatim.
 
 ## Complete-answer delivery status
 
-The ACVC complete answer is now archived byte-for-byte under the path above,
-with hashes and provider message identities in `RECOVERY_FACTS.json`. RCLE and
-FOLR current DMs received one-time technical closeout instructions to archive
-their already-read complete texts; their provider pages remain the canonical
-source until those DM-owned files are published. The three local decision notes
-remain summaries, not substitutes for the complete answers.
+The ACVC and RCLE complete answers are now archived byte-for-byte under their
+paths above. RCLE's archive also contains the DM's as-sent factual reply and
+Portfolio's complete acknowledgment, with hashes and provider message identities.
+FOLR's current DM received the same one-time technical closeout instruction; its
+provider page remains canonical until that DM-owned archive is published. The
+three local decision notes remain summaries, not substitutes for the complete answers.
 
 ## Direct alignment fact update
 
@@ -59,4 +59,7 @@ ACVC required a record-only temporary unarchive solely for text recovery; it was
 not a scientific turn, experiment, or new Send, and the task is eligible for safe
 re-archival after its closeout. The earlier browser limitation is retained in
 `RECOVERY_FACTS.json` as evidence of the failed `tab_content_export` attempt;
-supported copy/read controls subsequently recovered exact UTF-8 bytes.
+supported copy/read controls subsequently recovered exact UTF-8 bytes. RCLE's
+direct alignment response was sent in the original provider conversation and its
+acknowledgment is preserved with the exchange archive; no new consultation was
+created.
