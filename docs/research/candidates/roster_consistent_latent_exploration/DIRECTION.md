@@ -6,9 +6,10 @@ This source belongs to route **N3 — 状态保留、重建与迁移**, in the *
 of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
 this does not establish scientific equivalence or pool result polarity.
 See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
-The owner's 2026-09-13 direct instruction assigns this DM its entire direction lifecycle;
-`docs/research/portfolio/PORTFOLIO.md` is the user-readable cross-direction report maintained
-by Clerk. Older lifecycle/execution authority statements below are historical. Existing cards, technical quarantines,
+The owner's latest 2026-09-14 instruction assigns Portfolio final direction-level interpretation
+under `docs/project/PORTFOLIO_DECISION_PROTOCOL.md`; DM owns innovation, ordinary research,
+implementation, evidence/reporting and execution. Equal peers coordinate; Clerk is retired.
+Older lifecycle/execution authority statements below are historical. Existing cards, technical quarantines,
 second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
@@ -16,9 +17,9 @@ This authority preserves the direction's source-grounded scientific question, ev
 ## Authority
 
 - Stable direction ID: `roster_consistent_latent_exploration`
-- This DM owns direction-local research, family adjustments, continuation, parking and ending under the owner's 2026-09-13 instruction. Clerk records these decisions in the Portfolio report; only owner-triggered cross-direction adjustments/consultations follow. This grants no control over other directions or extra resource commitments.
+- This DM owns direction-local innovation, bounded experiments, implementation and reports. Portfolio decides direction-level CONTINUE/RECAST/PARK/CLOSE/reopening from the full report and global context; ordinary experiments need no per-experiment approval. No unilateral slot release or other-direction resource change follows a DM recommendation.
 
-## Current DM position — 2026-09-14: ACTIVE / E01 complete; result and development review
+## Current DM position — 2026-09-14: pending Portfolio decision / recommend CONTINUE
 
 [Fixed-modal E01](RCLE_FIXED_MODAL_REUSE_E01_INTAKE_20260914.md) completed once under the
 owner-approved empirical-spec11.4.2: zero new fits,1024 evaluations/65536 native ticks.
@@ -28,18 +29,21 @@ package, not policy equivalence, greedy optimality or general unlearnability. Fu
 review was previously accepted and answered; its old positive learning/nearest gains,
 greedy deficits and mixed recovery remain. B11 SIG11 remains unexplained with no endpoint.
 
-DM now owns one concrete independent review of this new result/development reasoning and
-its full-answer response. The intake recommends considering reversible PARK against a
-specific changed-law continuation or unchanged replication; no new PARK/CLOSE or scientific
-invocation is applied before that response. This is scientific review, not lifecycle
-permission. E01 actual enclosing chain6.73s; all cost/claim ceilings remain in the intake.
+The complete independent E01 review at93bb8ffcd4de430a722bbb6b84e9733f40d26782 found no
+material invalidating defect. DM has read and answered it in the intake, preserving modal's
+recovery losses relative to the sampled policy and the review's challenge to the earlier
+PARK rationale. DM now recommends one fresh B with a learned scalar multiplying log(q),
+initialized at the same prior strength, rather than immediate PARK. This concrete learning
+question was not resolved by E01. The full evidence, contrary case, costs and global context
+go to Portfolio for the final direction decision. No new fit/PARK/CLOSE has been applied;
+RCLE retains its slot. E01 enclosing chain6.73s and all cost/claim ceilings remain preserved.
 
 The [direct Portfolio acknowledgment](reentry_20260914/portfolio/ACKNOWLEDGEMENT.md)
 confirms full-lifecycle re-entry. B11 attempted, B12 completed and E01 completed real
 research after that selection; this was not documentary-only closeout. Historical support
 600s and ordinary wall plans permit deviation and never automatically stop research/Send.
-Both exact-recipe HOLDs and frozen historical evidence remain. DM owns the next decision,
-with no further Root/Portfolio authorization dependency or global capacity adjustment.
+Both exact-recipe HOLDs and frozen historical evidence remain. Portfolio's direction-level
+decision uses the new owner protocol; DM needs no Root ratification or per-experiment approval.
 
 ## Historical DM position — 2026-09-13 after B10: PARKED
 

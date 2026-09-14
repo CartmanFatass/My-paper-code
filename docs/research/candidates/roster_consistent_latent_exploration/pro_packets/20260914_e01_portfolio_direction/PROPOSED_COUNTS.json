@@ -1,0 +1,16 @@
+{
+  "status": "proposed_not_executed",
+  "training_fits": 1,
+  "updates": 1024,
+  "training_episodes": 65536,
+  "evaluation_panels": 5,
+  "episodes_per_panel": 512,
+  "total_episodes": 68096,
+  "native_ticks": 4358144,
+  "native32_batches": 2128,
+  "source_defined_prior_barriers": {
+    "8": 4.290459441148391,
+    "12": 4.6913478822291435
+  },
+  "interpretation": "Arithmetic from proposed counts and existing q; zero simulation, fitting or checkpoint-margin measurement."
+}
