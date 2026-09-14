@@ -1,6 +1,6 @@
 # Direction metric_ground_transport_allocation: metric ground transport allocation
 
-## Current boundary — finite LR programme complete, 2026-09-14
+## Current boundary — Portfolio CONTINUE applied, 2026-09-14
 
 MGTAP-LR-SELECTION-B01 completed at source2d351d48604396ce478aa900584bd24b3255def5.
 Both arms independently selected1e-4; the fresh8252 final pair yielded
@@ -14,16 +14,22 @@ prior evidence, inference/cost limits and the strongest PARK alternative. DM acc
 bounded observation and has read the complete actual-results scientific review at
 68144bc0123397fbdc5184fcc4e86055c05c20d8; its [DM intake](pro_packets/20260914_lr_selection_results_review/INTAKE.md)
 records no result-changing finding and the substantive recurrence-versus-PARK comparison.
-DM now prepares the full Portfolio direction report. The leading next option is a
-fixed-selected-LR recurrence, not automatic grid
-extension or a new launch. Portfolio owns the final direction-level interpretation;
-MGTAP remains occupied under its existing continuation, with DENSE generic default unchanged.
+The complete18,522-byte [Portfolio answer](pro_packets/20260914_lr_selection_portfolio_direction/archive/RESPONSE.md)
+is now archived and read. DM applies CONTINUE under PRO_FINAL / OWNER_DELEGATED;
+the [full intake](pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md)
+responds to its reasoning, preserves the actual title-only input-delivery defect
+and records the next objective: one fresh fixed-selected-LR1e-4 pair at256/32/H256.
+This is not another eight-fit selector or lower-grid expansion. No new card, seed
+or native successor has launched. MGTAP retains its existing occupied slot and
+DENSE remains the generic default; adaptive selection history and contrary validation
+are explicit, without a stable-ranking or tuning-causality claim.
 
-Clerk retirement/handoff is complete. FOLR's full Portfolio decision4776103de4f55beaee610c52506112651bfaed04
-is CONTINUE/MEDIUM; main5456aec117b9746f141d09292af2da1f803b8262 records three occupied,
-zero reserved/vacant and releases the Portfolio binding to RCLE. No FOLR replacement
-or remaining MGTAP-owned vacancy transaction is needed. Current shared rows, not the
-historical snapshots below, control peer coupling.
+Clerk retirement/handoff is complete. All three original peers remain occupied,
+with zero reserved/vacant. Later RCLE review/PARK recommendation and FOLR's complete
+adverse B03 are preserved as peer-owned facts, not applied direction stops.
+After full decision/intake publication MGTAP releases the shared Portfolio conversation
+and directly notifies RCLE; the current common registry records that actual event.
+No legacy MGTAP-owned vacancy transaction or FOLR replacement is reopened.
 
 ## Historical reentry decision — CONTINUE, 2026-09-14
 
