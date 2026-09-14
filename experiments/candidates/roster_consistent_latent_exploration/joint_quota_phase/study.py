@@ -1,4 +1,4 @@
-"""One fit and four full native endpoints for the selected quota-phase B08 or greedy-anchored B09."""
+"""One fixed fit and four native endpoints for quota-phase B08 through B11."""
 import hashlib
 import json
 import math
@@ -21,6 +21,8 @@ from .policy import PhasePolicy, adam_update, flat_parameters, greedy_phase, sam
 OBJECT = "RCLE-TBCFV-B08-JOINT-QUOTA-PHASE"
 SEED = 28
 B09_OBJECT = "RCLE-TBCFV-B09-GREEDY-ANCHORED-PHASE"
+B10_OBJECT = "RCLE-TBCFV-B10-GREEDY-ANCHORED-1024"
+B11_OBJECT = "RCLE-TBCFV-B11-GREEDY-ANCHORED-1024-REPLICATION"
 PRIMARY = ("8_to_12.ACTIVE_CONTINUATION", "12_to_8.ACTIVE_CONTINUATION")
 ROLES = ("initialization", "final256", "greedy", "nearest")
 
@@ -102,13 +104,13 @@ def cell_means(rows):
         for cell in HELDOUT_CELLS if (part := [r for r in rows if r["cell"] == cell])}
 
 
-def contrasts(panels):
+def contrasts(panels, final_role="final256"):
     result = {}
     for name, comparator in (("D_g", "greedy"), ("D_n", "nearest"), ("G_U", "initialization")):
         paths = {}
         for cell in PRIMARY:
             base = {(r["cell"], r["scenario"]): r for r in panels[comparator]}
-            final = {(r["cell"], r["scenario"]): r for r in panels["final256"]}
+            final = {(r["cell"], r["scenario"]): r for r in panels[final_role]}
             differences = np.asarray([base[(cell, i)]["U"] - final[(cell, i)]["U"] for i in range(64)])
             paths[cell] = dict(mean=float(differences.mean()), sd=float(differences.std(ddof=1)),
                               conditional_se=float(differences.std(ddof=1) / 8),
@@ -154,6 +156,24 @@ def run(out, launch_sha, seed=SEED, *, greedy_anchored=False):
     object_id = B09_OBJECT if greedy_anchored else OBJECT
     if seed != (29 if greedy_anchored else SEED):
         raise ValueError("seed must match the selected fixed B08/B09 object")
+    return _run(out, launch_sha, seed, object_id, 256, greedy_anchored)
+
+
+def run_exposure1024(out, launch_sha, seed=30):
+    if seed != 30:
+        raise ValueError("seed must match the selected fixed B10 object")
+    return _run(out, launch_sha, seed, B10_OBJECT, 1024, True)
+
+
+def run_replication1024(out, launch_sha, seed=31):
+    if seed != 31:
+        raise ValueError("seed must match the selected fixed B11 object")
+    return _run(out, launch_sha, seed, B11_OBJECT, 1024, True)
+
+
+def _run(out, launch_sha, seed, object_id, updates, greedy_anchored):
+    final_role = f"final{updates}"
+    roles = ("initialization", final_role, "greedy", "nearest")
     action_law = "softmax(log(q)+z); q=.9*exact_greedy+.1/N" if greedy_anchored else "softmax(z)"
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
@@ -172,7 +192,7 @@ def run(out, launch_sha, seed=SEED, *, greedy_anchored=False):
                                  weight_decay=0, foreach=False)
     baselines = torch.zeros(8, dtype=torch.float64)
     curves = []
-    for update in range(1, 257):
+    for update in range(1, updates + 1):
         episodes, batch_scores = [], []
         for cell_start in (0, 4):
             coords = tuple(EpisodeCoordinate(0, cell, update, row)
@@ -192,25 +212,25 @@ def run(out, launch_sha, seed=SEED, *, greedy_anchored=False):
         with (out / "curves.jsonl").open("a", encoding="utf8") as f:
             f.write(json.dumps(curve, allow_nan=False) + "\n")
         if update % 32 == 0:
-            print(f"update {update}/256", flush=True)
+            print(f"update {update}/{updates}", flush=True)
     torch.save(dict(model=model.state_dict(), optimizer=optimizer.state_dict(), baselines=baselines,
-                    updates=256, seed=seed, object_id=object_id, action_law=action_law, launch_sha=launch_sha), out / "final256.pt")
-    for role in ROLES[1:]:
+                    updates=updates, seed=seed, object_id=object_id, action_law=action_law, launch_sha=launch_sha), out / (final_role + ".pt"))
+    for role in roles[1:]:
         panels[role] = evaluate(model, role, key, binding, out)
-    comparison = contrasts(panels)
+    comparison = contrasts(panels, final_role)
     summary = dict(status="COMPLETE", object_id=object_id, seed=seed, launch_sha=launch_sha,
         action_law=action_law,
         parameters=sum(p.numel() for p in model.parameters()), independent_fits=1,
         training_episodes=sum(c["training_episodes"] for c in curves), training_updates=len(curves),
         backward_calls=sum(c["backward_calls"] for c in curves),
         optimizer_calls=sum(c["optimizer_calls"] for c in curves),
-        evaluation_episodes={r: len(panels[r]) for r in ROLES},
+        evaluation_episodes={r: len(panels[r]) for r in roles},
         native_ticks=64 * (sum(c["training_episodes"] for c in curves) + sum(map(len, panels.values()))),
         initial_norm=float(torch.linalg.vector_norm(initial)),
         displacement=float(torch.linalg.vector_norm(flat_parameters(model) - initial)),
         nonzero_parameter_updates=sum(c["parameter_step_norm"] > 0 for c in curves),
         phase_draws_training=16 * sum(c["training_episodes"] for c in curves),
-        phase_draws_evaluation=16 * (len(panels["initialization"]) + len(panels["final256"])),
+        phase_draws_evaluation=16 * (len(panels["initialization"]) + len(panels[final_role])),
         endpoint_means={role: cell_means(rows) for role, rows in panels.items()}, comparison=comparison,
         reading_flags=reading(*(comparison[n]["mean"] for n in ("D_g", "D_n", "G_U"))),
         native_Y_source="direct native terminal endpoint for all roles; never inferred from post-event U",

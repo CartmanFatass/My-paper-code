@@ -18,7 +18,26 @@ This authority preserves the direction's source-grounded scientific question, ev
 - Stable direction ID: `roster_consistent_latent_exploration`
 - This DM owns direction-local research, family adjustments, continuation, parking and ending under the owner's 2026-09-13 instruction. Clerk records these decisions in the Portfolio report; only owner-triggered cross-direction adjustments/consultations follow. This grants no control over other directions or extra resource commitments.
 
-## Current DM position — 2026-09-13 after B10: PARKED
+## Current DM position — 2026-09-14: ACTIVE / B11 independent final1024
+
+The replacement DM completed the full PARK/B10/review/cost intake and selects a bounded
+return to the unchanged greedy-anchored final1024 training-instance question, selecting
+one fresh seed31 comparison in the [B11 card](RCLE_B11_FINAL1024_REPLICATION_SCIENCE_CARD_20260914.md). The
+[re-entry intake](RCLE_REENTRY_INTAKE_20260914.md) records the close-call against continued
+PARK, the complete independent-review response, adverse service/recovery evidence and costs.
+This prospectively revises the earlier value judgment; it does not change B10's observation
+or establish learned superiority. The current observed-service preference remains fixed greedy.
+
+The same DM proceeds through B11 engineering, accepted remote execution and full intake;
+the original handoff's lack of a preselected object is not a documentary-only stop.
+One independently generated final1024 fit and four512 panels are fixed; no run has yet
+been accepted at this checkpoint. Both exact-recipe HOLDs, historical
+recasts and UNKNOWN costs remain. Portfolio admitted one UCOPE-vacancy replacement under
+target_slots=3; the scientific re-entry decision is DM-owned and creates no fourth slot.
+No B10 producer remains pending. Ordinary runtime estimates allow deviation and do not
+create600s support stops; no automatic later replication or generic approval wait follows.
+
+## Historical DM position — 2026-09-13 after B10: PARKED
 
 DM reversibly PARKS current RCLE research advancement, with reasons and alternatives in the
 [B10 intake](RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md). B10 is COMPLETE: G_U +.061531575521,
