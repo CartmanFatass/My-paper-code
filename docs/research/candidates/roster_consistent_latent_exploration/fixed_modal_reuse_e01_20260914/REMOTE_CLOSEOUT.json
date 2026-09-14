@@ -1,0 +1,25 @@
+{
+  "utc": "2026-09-14T06:34:05.673361+00:00",
+  "status": "OWN_COMPLETED_EXECUTION_WORKTREE_REMOVED_AFTER_VERIFIED_PRESERVATION",
+  "source_sha": "5c3ab7b074f185902078452811774e6a8d727a9d",
+  "removed_path": "/home/wu/hmasd-worktrees/rcle-modal-e01-5c3ab7b07",
+  "registered_after": false,
+  "live_cwd_users_before": [],
+  "verified_preserved_temp_files": [
+    "modal_e01_control/native.time",
+    "modal_e01_control/admission.json",
+    "modal_e01/summary.json",
+    "modal_e01/native_build/485fab289f65b2e9a953d0849144e6a00dcb75106653e2bff3877a5b14e78fd9/tbcfv_backend.so",
+    "modal_e01/native_build/485fab289f65b2e9a953d0849144e6a00dcb75106653e2bff3877a5b14e78fd9/tbcfv_backend.source.cpp",
+    "modal_e01/b10/modal.json",
+    "modal_e01/b10/result.json",
+    "modal_e01/b10/greedy.json",
+    "modal_e01/b12/modal.json",
+    "modal_e01/b12/result.json",
+    "modal_e01/b12/greedy.json"
+  ],
+  "archive": "/home/wu/hmasd-inputs/rcle-modal-e01-5c3ab7b07-evidence.tgz",
+  "archive_sha256": "72163a49bae7be5791b4ac6e1e687edcd707585762c3fa7d8a24cc804b40037f",
+  "retained_supervisor": "/home/wu/.agent-tasks/rcle-modal-e01-5c3ab7b07",
+  "shared_authoring_branch_retained": "codex/rcle"
+}
