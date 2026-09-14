@@ -13,12 +13,12 @@
 | 方向 | 已知科学位置 | 当前工作与席位 |
 | --- | --- | --- |
 | [RCLE](../candidates/roster_consistent_latent_exploration/DIRECTION.md) | B13真实学习与nearest收益保留，sampled对greedy−0.019784；modal512行已测结局相同、恢复利益/损害和B11缺失保留。完整151行Portfolio判断接受新独立实例仍有价值，当前选择可逆PARK。 | 已应用PARK并释放1席；不CLOSE/RECAST，不新增fit。[完整裁决与回应](../candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/INTAKE.md)、[PARK知识与原始资产](../candidates/roster_consistent_latent_exploration/PARK.md)已保全。原DM已完成本次唯一空缺接续及直接交接，无RCLE科学producer；源码和558文件恢复已保全，历史四个被拒删除路径作为清理例外保留。 |
-| [ACVC](../candidates/acvc/DIRECTION.md) | 六个全新fixed1024完整fit-panel单元给出F-C+.096377354920J，区间[.074826981257,.117927728584]；F-dwell+.064088940259J，[.035375804426,.092802076092]，两下界均>.01。两项97.5%边际t区间（df5）的同时覆盖仅在预设iid-normal模型下成立；实际神经训练校准未建立。既有负结果、配对增量衰减和有用dwell均保留。 | 占用1席，CONTINUE / MEDIUM / recasts2。C01六原始单元/7296回合/12288更新全部核验，完整74行独立审查和[DM回应](../candidates/acvc/pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/INTAKE.md)未发现实质缺陷。F-C与F-dwell尾部仍有30/384和56/384负向世界；native1733.09s，支持/provider/agent成本UNKNOWN。远端资源经84文件保全后回收；本地被策略拒绝的测试清理仍保留。[方向报告](../candidates/acvc/ACVC_POST_C01_DIRECTION_REPORT_20260914.md)向Portfolio提出close-call有限参考PARK建议，强替代是一次1024/4096配对B。Portfolio请求已实际接收并生成中，Send一次；固定输入之后的MGTAP8253负向结果已另录，完整裁决到达后评估其影响。当前未裁决PARK、未新增实验或空槽。 |
+| [ACVC](../candidates/acvc/DIRECTION.md) | 六个原始fixed1024完整程序的F-C均值+.096377354920J、区间[.074826981257,.117927728584]；F-dwell+.064088940259J、[.035375804426,.092802076092]，两下界均>.01。df5两项97.5%边际区间的同时覆盖仅在预设iid-normal模型下成立；实际神经训练校准未建立，全部反证保留。 | 占用1席，科学CONTINUE / MEDIUM / recasts2；当前工作已完成并按所有者指令暂停。[最终handoff](../candidates/acvc/ACVC_OWNER_PAUSE_HANDOFF_20260914.md)发布于cccd8068f9fa7398591b4c76e4e6c3df00b5f893。六原始单元/7296回合/12288更新、完整74行科学审查和144行Portfolio决定均已接收并逐项回应，已释放完成的对话。所选未来1024/4096 B未建卡、未抽种子、未写源码、未启动。原生1733.09s，完整支持/provider/agent费用UNKNOWN；原始档案保全，远端清理完成，本地被策略拒绝的测试清理保留。 |
 | [MGTAP](../candidates/metric_ground_transport_allocation/DIRECTION.md) | 固定1e-4新8253配对完成：COND−DENSE−0.025924927546066238 J，COND_ADVERSE，条件世界SE0.0027978641，2正/30负；前次8252正向和更早混合结果均保留。一次新训练对，不是稳定劣势或事前两种子确认。 | 占用1席，科学CONTINUE/DENSE默认保留；按所有者指令仅完成在手工作后暂停。原始12文件含双checkpoint已保全，实际2拟合/178.86s/exit0，monitor完成，两轮已结束远端checkout均完成归档核对与回收。暂停前的当前结果review已恢复，并于20:29:37Z实际接收一次，完整1942字节提示核对通过，全文生成中。[交接记录](../candidates/metric_ground_transport_allocation/MGTAP_OWNER_PAUSE_HANDOFF_20260914.md)b52e58ca0列出唯一待收尾review；不启动后继、PARK或释放席位。 |
 | [FOLR](../candidates/vap_folr_core/DIRECTION.md) | B03完整比较Generic4.92594、BANK-1.71078，差值-6.63672；B02差值-4.83086单独保留。两次完整学习与评估实例均偏向Generic，不声称稳定排名或实体历史普遍无用。 | 占用1席，CONTINUE / MEDIUM。原A-G B01两臂各5000/4969/128。[Generic已完整收集](../candidates/vap_folr_core/entity_history_augmentation_b01_781601/EXECUTION.md)：均值-0.966484375、128条件评估、native1178.68s，原始14文件/检查点已保全。原增强臂于19:39:55UTC实际接受，source d9977dc18、4GiB准入通过，同批Monitor已接管；尚无A-G结果或追加实验。两臂间13401.737549s控制延迟单独记录，不能当作G计算耗时。ACVC事实交接已直接提供；完整既有科学评审/Portfolio应用及负结果保持。 |
 
-实际为3占用、0预留、0空缺。ACVC六程序C01和完整独立科学回应均完成，原DM已认领Portfolio对话以提交最新方向报告；close-call PARK只是建议，当前席位和其他方向承诺保持。
-停止第四个方向限制扩容，不停止现有研究或真实空缺的合规补位。旧报告的 UCOPE/LCAC/ACVC 工作集和
+实际为3占用、0预留、0空缺。ACVC已完成当前对象及完整Portfolio回应并释放对话，现已暂停；MGTAP与FOLR各自收尾当前对象并写最终handoff。所有后继实验和补位依直接所有者暂停指令停止新增。
+第四方向限制的历史效力保留；当前额外适用所有者暂停指令：仅收尾在手工作，不新增研究或补位。旧报告的 UCOPE/LCAC/ACVC 工作集和
 RCLE/MGTAP/FOLR 归档表已经过期，不能用来判断现在是否“开始后直接结束”。
 
 RCLE B13 完整审查固定于d45d4bc6ea2012b93d1d044402268520be5eea9a，DM 实质回应和后续方向取舍报告见
@@ -34,7 +34,7 @@ afb647d0ddf7522ad0e0e99162a54403ede21c43；此前 E01 审查、前次 CONTINUE �
 | [DISH](../candidates/degraded_incumbent_shadow_handover/PARK.md) | 保留 B09 −35.25、REPLACE 与 BYPASS 边界；旧 Portfolio 补位建议未应用；前次裁决选择继续 FOLR；本次 RCLE 空缺已由新完整裁决选给 ACVC，旧 DISH 建议不应用。 |
 | [UCOPE](../candidates/ucope/PARK.md) | 保留 reactive renewal 的结果、反证和重新研究条件；当前未占用席位。 |
 | [LCAC](../candidates/learned_counterfactual_agent_credit/PARK.md) | 保留 B03 负结果及基线/学习证据；当前未占用席位。 |
-| [ACVC](../candidates/acvc/PARK.md) | 原PARK知识与全部反证保留；后续已复开并占用1席，现已完成六程序C01，最新方向提案待Portfolio裁决，未再次PARK。 |
+| [ACVC](../candidates/acvc/PARK.md) | 原PARK知识与全部反证保留；后续复开并完成六程序C01，最新完整Portfolio仍CONTINUE，当前依所有者指令运行暂停；未再次PARK、未释放席位。 |
 
 其他方向见 [Research map](../RESEARCH_MAP.md)。历史决定保留原始出处；当前 owner 挑战和
 Portfolio 的新决定前瞻应用，不擅自重写结果或批量重启旧方向。
