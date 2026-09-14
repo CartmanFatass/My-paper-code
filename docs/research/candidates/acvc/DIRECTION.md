@@ -66,9 +66,12 @@ Designated G_dwell−.0504583109J is DECREASE while later added value remains us
 .0835366160→.2110828649, yet later F−dwell has10adverse worlds/worst−.2238660859.
 [Full result](ACVC_CLUSTER_PAIRED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md) and
 [intake](ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md) preserve one-programme/common-world
-claim limits, both checkpoints and all contrary tails. A full independent scientific review follows;
-DM tentatively favors a Portfolio report over another exposure B, with fixed-recipe C-BENCH the
-strongest population-question alternative. No new lifecycle disposition is claimed.
+claim limits, both checkpoints and all contrary tails. The complete73-line/14654-byte independent
+review at68fed46f4 was read and all material findings answered: no empirical defect, but the
+report rationale now explicitly recognizes that another B can change judgment without settling
+population uncertainty. DM selects a substantive Portfolio report on continuation for a fixed-recipe
+future-proposer comparison versus retaining bounded F and PARK. The complete report must address
+the actual reopening objective; no new empirical successor or lifecycle disposition is applied.
 
 Earlier [PARK knowledge](PARK.md), [reentry judgment](ACVC_REENTRY_INTAKE_20260914.md)
 and [B02 full-review response](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md)

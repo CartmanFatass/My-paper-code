@@ -10,7 +10,7 @@
   "output": "/home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914",
   "monitor": "/root/acvc_paired_exposure_b01_monitor",
   "monitor_record": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914_monitor.json",
-  "state": "native_complete_scientific_review_author_dispatched",
+  "state": "complete_native_and_full_scientific_review_responded",
   "scientific_invocations_accepted": 1,
   "planned_command": "/usr/local/bin/agent-task run acvc-paired-exposure-b01-8fd41b61f env HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 bash /home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/experiments/candidates/acvc/cluster_paired_exposure_b01/launch.sh 8fd41b61f3c8d3c70057492a18e619ef0faeda78 /home/wu/hmasd-worktrees/acvc-paired-exposure-b01-8fd41b61f/temp/directions/acvc/exp/cluster_paired_exposure_b01_20260914",
   "preparation": {
@@ -83,11 +83,18 @@
     "handoff_sha": "6b532decfd860b059764dbb36f0cac5c79a2f2b8",
     "scientific_input_sha": "ae1ec3632fe59312850e912a7e32890295da4425",
     "transport_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
-    "state": "WAITING_GENERATION",
+    "state": "complete_read_and_responded",
     "send_count": 1,
     "dm_observation": "docs/research/candidates/acvc/pro_packets/20260914_cluster_paired_exposure_b01_scientific_review/DM_TRANSPORT_OBSERVATION.json",
     "accepted_user_node_id": "f25bcae8-4dc3-47ca-a5e6-ba636027e79b",
-    "send_observed_at": "2026-09-14T15:33:12.5162252Z"
+    "send_observed_at": "2026-09-14T15:33:12.5162252Z",
+    "delivery_commit": "68fed46f448312827f38b4b4f9bade36e2aedc35",
+    "response_bytes": 14654,
+    "response_lines": 73,
+    "response_sha256": "98a9fb29fd1c9c610b9ccc2b767fd694ed0e9b3170ad5c5a6e94f3789404d18f",
+    "terminal_assistant_node": "a394e176-e2a8-42c1-8e6a-c5bcf733ba77",
+    "dm_findings_response": "ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md#complete-independent-scientific-review-and-material-finding-response",
+    "successor_action": "Substantive Portfolio direction report; no empirical successor selected"
   },
   "support_closeout_plan": {
     "recorded_at": "2026-09-14T15:36:24.265290+00:00",
