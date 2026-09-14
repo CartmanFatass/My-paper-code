@@ -1,0 +1,33 @@
+{
+  "request_id": "2026-09-14-mgtap-lr-selection-direction-decision-01",
+  "provider_url": "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1",
+  "binding": "portfolio:cross_direction",
+  "model": "GPT-6 Astra",
+  "label": "6 Pro",
+  "handoff_commit": "066e1d50953132025597b3a752acf88e09240fa8",
+  "prompt_bytes": 20627,
+  "prompt_sha256": "1b1b0a3ddd28cab5b058d1fcb1799379f534c83a01c42d802cd8b33f2a9fa196",
+  "provider_user_message_id": "759e27d6-a38c-4de3-8244-d9111fd57dbc",
+  "provider_assistant_message_id": "3ea6a40e-4c0f-4933-bf46-b8583cb24fda",
+  "sent_exactly_once": true,
+  "duplicate_or_retry": false,
+  "terminal": true,
+  "decision": "MGTAP CONTINUE",
+  "selected_learning_rate": "1e-4",
+  "default_arm": "DENSE",
+  "holdout_delta_j": 0.023704897713093642,
+  "holdout_paired_world_se": 0.004197354694630503,
+  "holdout_favorable_worlds": 29,
+  "holdout_adverse_worlds": 3,
+  "holdout_classification": "COND_ABOVE_MEI",
+  "response_chars": 8296,
+  "response_utf8_bytes": 18522,
+  "response_sha256": "df3e7910a281e4bbc0fa928d59d780c6bdce13974f68165bbbba659381238272",
+  "post_send_changes": "none",
+  "github_writes": "none",
+  "experiments_started": false,
+  "source_gaps": [
+    "Provider exposes message IDs but no independent raw transport envelope or server-side delivery receipt.",
+    "Full response is authoritative in the bound provider conversation; local RESPONSE.md records the decision and access pointer."
+  ]
+}

@@ -197,3 +197,15 @@ favors COND. Different fitted policies/panels permit that reversal; the selectio
 used candidate is not a second favorable independent replication. Any future fixed-
 rate pair is adaptively proposed after8252, not an originally frozen two-pair study.
 All earlier evidence, the native source/endpoint and current generic default remain.
+
+## Subsequent Portfolio direction decision
+
+The complete18,522-byte Portfolio answer is now preserved with its exact original
+hash and read in full. The [direction intake](pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md)
+applies CONTINUE for one prospective fixed-selected-rate1e-4 fresh pair, preserves
+the title-only actual prompt delivery deviation and all source/claim limits,
+and updates later peer facts. The intended20,627-byte prompt was not actually sent
+in full; Portfolio located the matching immutable report/manifest and materially
+addressed it. No duplicate request or historical input rewrite repairs that fact.
+This is an applied direction disposition, not an executed successor. No new seed,
+card, two-fit driver or native invocation exists at this intake boundary.
