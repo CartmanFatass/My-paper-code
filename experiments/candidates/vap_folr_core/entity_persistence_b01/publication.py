@@ -1,12 +1,18 @@
 """The selected A-minus-Z primary; conditional episodes are not training runs."""
 
-from ..entity_history_b01.publication import arm_result
+from ..entity_history_b01.publication import arm_result as _arm_result
 
 
 OBJECT = "FOLR_ENTITY_PERSISTENCE_B01_781701"
 TRAINING_SEED = 781701
 EVALUATION_SEED = 1781701
 COMPLETE_EXPOSURE = (5000, 100000, 4969, 128, 2560)
+
+
+def arm_result(values):
+    result = _arm_result(values)
+    result["negative_count"] = sum(value < 0 for value in values)
+    return result
 
 
 def _endpoint(summary, arm):

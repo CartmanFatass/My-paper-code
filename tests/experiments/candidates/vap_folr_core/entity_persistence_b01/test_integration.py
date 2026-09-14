@@ -145,6 +145,8 @@ def test_primary_strict_boundaries_and_binding(difference, rule):
     assert result["persistent_minus_current_only"] == pytest.approx(difference)
     assert result["rule"] == rule
     assert result["paired_difference_se"] is None
+    assert result["current_only"]["negative_count"] == 0
+    assert result["persistent"]["negative_count"] == (128 if difference < 0 else 0)
 
 
 @pytest.mark.parametrize(
@@ -247,6 +249,7 @@ def test_runner_executes_complete_augmented_path_and_keeps_foreign_comparator(
     assert summary["optimizer_steps"] == 4969
     assert (summary["evaluation_episodes"], summary["evaluation_ticks"]) == (128, 2560)
     assert summary["native_panel"]["mean"] == 2.0 and summary["status"] == "complete"
+    assert summary["native_panel"]["negative_count"] == 0
     assert summary["pair_primary"] is None
     assert "foreign or incomplete" in summary["pair_primary_unavailable"]
     assert seed_calls == [
