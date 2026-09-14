@@ -243,3 +243,7 @@ The existing CONTINUE and occupied slot persist pending its direction interpreta
 owns the preceding actual serial Portfolio request; RCLE prepares its report independently
 and uses the same shared conversation only after that owner releases it. This is a real
 ordering dependency, not PARK, a new funding request or a reason to fabricate an idle producer.
+
+### Current shared authority correction received —2026-09-14
+
+Root published f26a24611ec3d728260bb96d1d1809c151581cc2 correcting empirical-spec8.1, the owner-item skill/README and PEER_DM_COORDINATION opening to the current Portfolio final-direction protocol. DM read the actual diff and applies it to the still-unsent post-B13 packet. No accepted request is regenerated, no scientific evidence requirement changes, and no new lifecycle disposition or launch follows from the text repair.

@@ -1,0 +1,17 @@
+{
+  "event": "RCLE_POST_B13_PORTFOLIO_DRAFT_PREPARED_20260914",
+  "utc": "2026-09-14T10:29:01.709395+00:00",
+  "base_head": "ede1cd96591ec2c07cbcc2b96821e77e6dcd6f70",
+  "source_commit": "40f52661b75606030f52b5f534b2700d28a16f02",
+  "report_commit": "c7c471d6a25d4be3be5b53682f4d57329dda7654",
+  "main_previous_acceptance": "ede1cd96591ec2c07cbcc2b96821e77e6dcd6f70",
+  "paths": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/DRAFT_PROMPT.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/DRAFT_SOURCE_MANIFEST.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md"
+  ],
+  "peer_and_portfolio_rows_preserved": true,
+  "request_sent": false,
+  "remaining_dependency": "MGTAP complete Portfolio answer/application and actual conversation release; then final context and exact new RCLE prompt binding"
+}
