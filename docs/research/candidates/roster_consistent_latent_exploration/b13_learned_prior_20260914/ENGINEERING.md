@@ -31,3 +31,7 @@ Independent Sol/high code review is required for the changed learning/numerical/
 semantics under current canonical ENGINEERING_SCOPE_SPEC §7.3. It is being commissioned
 on the complete published preparation; technical acceptance remains pending its findings.
 No claim that B11 SIG11 is repaired follows from this work or the synthetic checks.
+
+The assigned independent Reviewer is native /root/rv_s_h_rcle_b13 (Sol/high), reviewing
+source91811c61cff2617f0b691c793dd40a7df76c5bdb against2ef3096104d92345a191278316a9f421f808be73.
+It returns directly to RCLE App01a09e10-9d9f-7f82-87c0-d58cbe0c7618; no Clerk hop.
