@@ -23,10 +23,18 @@ approval, reserve or re-entry wording is not a current dispatch or permission re
 ## Authority
 
 - Stable direction ID: `acvc`
-- Current lifecycle: **PARK**, DM-owned reversible decision after complete B02 scientific review on2026-09-14 UTC (2026-09-13 local). Historical priority MEDIUM/recasts2 is preserved, not an active-slot claim. [PARK knowledge handoff](PARK.md) records alternatives, assets, limits and reopening conditions.
+- Current lifecycle: **PARK**, retained by the replacement DM after the 2026-09-14 scoped vacancy selection and substantive [re-entry assessment](ACVC_REENTRY_INTAKE_20260914.md). No B03 or new empirical budget is selected. The prior full B02 review and close-call PARK remain preserved; historical priority MEDIUM/recasts2 is not an active-slot claim. [PARK knowledge handoff](PARK.md) records assets, limits and reopening conditions.
 - Current authoring checkout/branch: `C:/Projects/HMASD-worktrees/codex-acvc`, `codex/acvc`; live task endpoints come from main `.codex/hmasd-dm-sessions.toml`.
 
 ## Current outcome — reviewed cluster B02 and reversible PARK
+
+The replacement DM completed the newly assigned re-entry decision on 2026-09-14 UTC.
+It retained reversible PARK after reading the full prior review and Portfolio selection,
+acknowledging that another independent fit is scientifically useful while choosing to
+accept unresolved between-fit variation at the present bounded-reference scope. This is
+a new close-call decision, not a new result or a restriction on future replication.
+No experiment, provider Send or scientific successor was created. The [new intake](ACVC_REENTRY_INTAKE_20260914.md)
+records actual identity, preserved archive, options, costs and Clerk's integration/slot-release action.
 
 B02 is terminal, technically accepted, retained and remotely cleaned. Its single new independent
 C-fit used source`be76f696cb773f2e5db8f4d55ebff1f3b6335ae6`, master21493/eval31493,
