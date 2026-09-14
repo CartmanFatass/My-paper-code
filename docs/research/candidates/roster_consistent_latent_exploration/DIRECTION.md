@@ -18,30 +18,28 @@ This authority preserves the direction's source-grounded scientific question, ev
 - Stable direction ID: `roster_consistent_latent_exploration`
 - This DM owns direction-local research, family adjustments, continuation, parking and ending under the owner's 2026-09-13 instruction. Clerk records these decisions in the Portfolio report; only owner-triggered cross-direction adjustments/consultations follow. This grants no control over other directions or extra resource commitments.
 
-## Current DM position — 2026-09-14: ACTIVE / full B12 review complete; modal E01 preparation
+## Current DM position — 2026-09-14: ACTIVE / E01 complete; result and development review
 
-B12 completed1024 updates and four512 panels: G_U+.065030924479, D_n+.156380208333,
-D_g-.014135742187, with mixed recovery. The [full B12 intake/reviewer response](RCLE_B12_FINAL1024_INTAKE_20260914.md)
-retains the complete Convergence review atad6e30953c5fd1f78e3f5da6cdee103769a6bfde and
-DM responses to all material findings. No demonstrated invalidation of B12 was found;
-B11's unexplained SIG11 and two completed endpoints among three attempts remain.
+[Fixed-modal E01](RCLE_FIXED_MODAL_REUSE_E01_INTAKE_20260914.md) completed once under the
+owner-approved empirical-spec11.4.2: zero new fits,1024 evaluations/65536 native ticks.
+Both retained B10/B12 modal panels tie their own greedy reference row by row on every
+U/F/tau/40U/direct-Y endpoint. This gives no observed increment for the selected modal
+package, not policy equivalence, greedy optimality or general unlearnability. Full B12
+review was previously accepted and answered; its old positive learning/nearest gains,
+greedy deficits and mixed recovery remain. B11 SIG11 remains unexplained with no endpoint.
 
-DM selects preparation of [fixed-modal E01](RCLE_FIXED_MODAL_REUSE_E01_SCIENCE_CARD_20260914.md):
-two retained trained checkpoints, original conditional panels, actual combined-law modes
-versus their own greedy references, zero new fitting. This is a new execution package,
-not a rewrite of the sampled results. The exact zero-update B applicability issue in
-empirical-spec5.2/11.4 is resolved by the owner-approved named §11.4.2 in Root commit
-c833f026e02a36ce940cfb17382fb761a65336c3, included here as ec81437de. The [application record](fixed_modal_reuse_e01_20260914/OWNER_DIRECT_APPLICATION.json)
-preserves the exact scope. DM completes independent engineering review and fresh admission,
-then proceeds with the selected two-panel invocation. No further authorization is required;
-no E01 invocation or new PARK/CLOSE has yet occurred.
+DM now owns one concrete independent review of this new result/development reasoning and
+its full-answer response. The intake recommends considering reversible PARK against a
+specific changed-law continuation or unchanged replication; no new PARK/CLOSE or scientific
+invocation is applied before that response. This is scientific review, not lifecycle
+permission. E01 actual enclosing chain6.73s; all cost/claim ceilings remain in the intake.
 
-The full [direct Portfolio acknowledgment](reentry_20260914/portfolio/ACKNOWLEDGEMENT.md)
-confirms full-lifecycle re-entry; B11 attempted and B12 completed the independent-instance
-work. Historical support600s and ordinary wall plans allow deviation and are not stop,
-Send or approval gates. Frozen evidence, both exact-recipe HOLDs, unknown costs and real
-resource/scientific limits retain their actual scope. Completed detached execution checkouts
-were removed only after full hash-verified archival; the shared authoring checkout remains.
+The [direct Portfolio acknowledgment](reentry_20260914/portfolio/ACKNOWLEDGEMENT.md)
+confirms full-lifecycle re-entry. B11 attempted, B12 completed and E01 completed real
+research after that selection; this was not documentary-only closeout. Historical support
+600s and ordinary wall plans permit deviation and never automatically stop research/Send.
+Both exact-recipe HOLDs and frozen historical evidence remain. DM owns the next decision,
+with no further Root/Portfolio authorization dependency or global capacity adjustment.
 
 ## Historical DM position — 2026-09-13 after B10: PARKED
 
