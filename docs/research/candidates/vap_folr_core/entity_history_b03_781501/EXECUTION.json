@@ -221,7 +221,7 @@
       "LAUNCH_ASSET_PREPARATION.json"
     ]
   },
-  "next_action": "Registered independent Transport owns actual Send reconciliation/observation/full review archive; DM reads and responds to material findings, then substantive Portfolio report. Native work complete, no successor fit selected; finish verified terminal execution-copy cleanup.",
+  "next_action": "Registered independent Transport reconciles/observes the one bound B03 review and archives it directly to this DM; DM reads/responds then forms substantive Portfolio report. Native batch and terminal execution-copy cleanup are complete. No successor fit or direction disposition selected.",
   "monitor_transfer": {
     "reason": "Initial observer finalized three turns with a nonempty running handle set, despite required until-terminal observation. This was execution noncompliance, not a scientific termination or missing rule.",
     "previous_native": "/root/folr_b03_monitor",
@@ -271,5 +271,17 @@
     "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
     "provider_send_state": "UNCONFIRMED; no provider acceptance/IDs/full answer received yet",
     "receipt": "../pro_packets/20260914_entity_history_b03_result_plan_review/DISPATCH_RECEIPT.json"
+  },
+  "cleanup": {
+    "complete": true,
+    "receipt": "CLEANUP_RECEIPT_20260914.json",
+    "published_preservation_sha": "0427cbcc914e4e8182821320c106f132eb0e0cf9",
+    "completed_at_utc": "2026-09-14T10:12:04.969606+00:00",
+    "removed": [
+      "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d",
+      "/home/wu/.agent-tasks/folr-b03-781501-generic",
+      "/home/wu/.agent-tasks/folr-b03-781501-bank"
+    ],
+    "all_removed_and_unregistered": true
   }
 }
