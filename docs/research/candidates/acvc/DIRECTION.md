@@ -49,7 +49,8 @@ dwell−C+0.0657056332J is descriptive. Absolute C/F/dwell .1744460128/.30370947
 and private interventions6595/4825 retain the strong dwell and tail qualification.
 [Full result](ACVC_CLUSTER_LONGER_C_B01_RESULT_EVIDENCE_20260914.md) and
 [current intake](ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md) preserve the changed-exposure
-claim ceiling and costs. An independent result/next-question review is being prepared.
+claim ceiling and costs. One independent result/next-question review is dispatched through the registered Transport;
+remote outputs are preserved and the completed native resources are removed.
 The tentative preference is a Portfolio development/retention report, with a prospective
 paired-exposure B and fixed-recipe C-BENCH as alternatives; no successor or disposition is selected.
 

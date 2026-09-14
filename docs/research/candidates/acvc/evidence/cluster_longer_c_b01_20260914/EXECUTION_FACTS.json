@@ -59,5 +59,26 @@
   "archive_bytes": 561848,
   "archive_sha256": "1e2d9e304a8c36908ed25710c7c367ac51ba1addfc8cb873e0ca249342f9f7dd",
   "technical_acceptance": "all1216episode/2048update rows and frozen counts/configuration/exposure/primaries checked",
-  "remote_cleanup": "pending owned preservation reconciliation"
+  "remote_cleanup": {
+    "removed": [
+      "/home/wu/hmasd-worktrees/acvc-longer-c-b01-914a3d0e7",
+      "/home/wu/.agent-tasks/acvc-longer-c-b01-914a3d0e7",
+      "/home/wu/hmasd-inputs/acvc-longer-c-b01-914a3d0e7-native.tar.gz"
+    ],
+    "absent_on_disk": true,
+    "worktree_absent_from_git": true,
+    "preserved_file_count": 14,
+    "preservation": "Local verified561848byte archive SHA2561e2d9e304a8c36908ed25710c7c367ac51ba1addfc8cb873e0ca249342f9f7dd;13 native/supervisor published blobs verified at45955bdf7026769f703ae580caf814fdc1655421;checkpoint retained only in original archive",
+    "cleanup_owner": "ACVC DM",
+    "no_live_native_handles": true
+  },
+  "scientific_review": {
+    "request_id": "2026-09-14-acvc-cluster-longer-c-b01-scientific-review-01",
+    "author_dispatch_at": "2026-09-14T14:21:58Z",
+    "task_sha": "11da57fca73effbee96979dce0dd40568600ea12",
+    "handoff_sha": "914df64026f04525d0c092140cad652880a8a4e7",
+    "scientific_input_sha": "45955bdf7026769f703ae580caf814fdc1655421",
+    "transport_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+    "state": "author_dispatch_accepted_provider_acceptance_and_response_pending"
+  }
 }

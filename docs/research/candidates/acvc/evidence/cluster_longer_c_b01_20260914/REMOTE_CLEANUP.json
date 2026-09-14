@@ -1,0 +1,13 @@
+{
+  "removed": [
+    "/home/wu/hmasd-worktrees/acvc-longer-c-b01-914a3d0e7",
+    "/home/wu/.agent-tasks/acvc-longer-c-b01-914a3d0e7",
+    "/home/wu/hmasd-inputs/acvc-longer-c-b01-914a3d0e7-native.tar.gz"
+  ],
+  "absent_on_disk": true,
+  "worktree_absent_from_git": true,
+  "preserved_file_count": 14,
+  "preservation": "Local verified561848byte archive SHA2561e2d9e304a8c36908ed25710c7c367ac51ba1addfc8cb873e0ca249342f9f7dd;13 native/supervisor published blobs verified at45955bdf7026769f703ae580caf814fdc1655421;checkpoint retained only in original archive",
+  "cleanup_owner": "ACVC DM",
+  "no_live_native_handles": true
+}
