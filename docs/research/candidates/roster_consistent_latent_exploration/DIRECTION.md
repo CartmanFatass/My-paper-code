@@ -18,25 +18,29 @@ This authority preserves the direction's source-grounded scientific question, ev
 - Stable direction ID: `roster_consistent_latent_exploration`
 - This DM owns direction-local research, family adjustments, continuation, parking and ending under the owner's 2026-09-13 instruction. Clerk records these decisions in the Portfolio report; only owner-triggered cross-direction adjustments/consultations follow. This grants no control over other directions or extra resource commitments.
 
-## Current DM position — 2026-09-14: ACTIVE / B12 selected after B11 failure
+## Current DM position — 2026-09-14: ACTIVE / B12 complete, scientific intake
 
-B11 reached actual native training but crashed after164 recorded updates; no final1024 comparison exists. One synthetic D1 completed192 updates without reproduction. DM selects the explicit new [B12 card](RCLE_B12_FINAL1024_SCIENCE_CARD_20260914.md), seed32/final1024 with fatal-stack capture and all failed-instance accounting; no automatic B11 retry or speculative production repair. The [partial-failure intake](RCLE_B11_PARTIAL_FAILURE_INTAKE_20260914.md) records preserved raw evidence, costs, completed direct Portfolio alignment and DM-owned bounded diagnosis. No new PARK/CLOSE or automatic scientific rerun applies.
+The new [B12 result](RCLE_B12_FINAL1024_RESULT_EVIDENCE_20260914.md) completed1024 updates
+and four512 panels in192.81s including debugger/admission/publication. G_U+.065030924479,
+D_n+.156380208333, D_g-.014135742187: learning and nearest benefit recur while observed
+sampled U/full-Y still favor fixed greedy in all eight cells. Recovery remains mixed.
+The [B12 intake](RCLE_B12_FINAL1024_INTAKE_20260914.md) preserves two completed1024
+observations among three attempted scientific invocations; B11 failed after164 updates,
+and synthetic D1/B12 non-reproduction did not diagnose or repair its native fault.
 
-The replacement DM completed the full PARK/B10/review/cost intake and selects a bounded
-return to the unchanged greedy-anchored final1024 training-instance question, selecting
-one fresh seed31 comparison in the [B11 card](RCLE_B11_FINAL1024_REPLICATION_SCIENCE_CARD_20260914.md). The
-[re-entry intake](RCLE_REENTRY_INTAKE_20260914.md) records the close-call against continued
-PARK, the complete independent-review response, adverse service/recovery evidence and costs.
-This prospectively revises the earlier value judgment; it does not change B10's observation
-or establish learned superiority. The current observed-service preference remains fixed greedy.
+DM proceeds to complete independent scientific review and finding responses. The
+provisional successor recommendation is a separate small inference-law contrast using
+retained checkpoints, with unchanged-fit repetition and PARK as alternatives; no new
+invocation is allocated at this checkpoint. RCLE remains ACTIVE. No PARK/CLOSE, automated
+retry, additional paid capacity or other-direction adjustment is applied.
 
-The same DM completed B11 execution/failure intake and D1 collection and proceeds through the explicitly selected B12; the original handoff's lack of a preselected object is not a documentary-only stop.
-One independently generated final1024 fit and four512 panels are fixed; no run has yet
-been accepted at this checkpoint. Both exact-recipe HOLDs, historical
-recasts and UNKNOWN costs remain. Portfolio admitted one UCOPE-vacancy replacement under
-target_slots=3; the scientific re-entry decision is DM-owned and creates no fourth slot.
-No B10 producer remains pending. Ordinary runtime estimates allow deviation and do not
-create600s support stops; no automatic later replication or generic approval wait follows.
+The full [direct Portfolio alignment](reentry_20260914/portfolio/ACKNOWLEDGEMENT.md)
+confirms actual full-lifecycle re-entry, not a documentary-only handoff. B11 attempted
+and B12 completed the independent-instance work motivated by that selection. Both old
+exact-recipe HOLDs, historical recasts, frozen results and UNKNOWN costs remain.
+Historical support600s and reasonable time plans are estimates with allowed deviation;
+they do not create stop lines, Send gates or approval triggers. Owner/physical resource
+limits and fixed scientific endpoints retain their actual scope.
 
 ## Historical DM position — 2026-09-13 after B10: PARKED
 
