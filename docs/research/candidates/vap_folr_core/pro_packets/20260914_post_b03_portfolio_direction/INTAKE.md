@@ -298,3 +298,29 @@ evidence supports one explicit submission and no observed resend. Its original
 wording is retained alongside this correction. Input archival is now complete;
 no FOLR provider generation, observation or capture recovery remains. This did
 not create another question, experiment or approval step.
+
+### Complete augmentation B01 integration returned
+
+Native batch `FOLR_AUGMENTATION_B01_INTEGRATION_20260914` returned from
+`/root/folr_augmentation_b01_integration`. It started at card/source8d219f4;
+documentation-only advancement to4ec6086f56f13ca7d0e9fbddbbaebd761405ff25
+did not overlap its five owned files. DM read every changed/new source and test
+file in full. The batch adds learner, complete two-arm runner, primary publication
+and integration tests, plus the accepted actor's explicit arm identity. Existing
+model math/tests and prior attempt paths remain unchanged.
+
+The returned focused synthetic CPU suite completed11 tests in6.08s under the
+configured local scientific Python. It exercises fresh constructor/RNG/mixer
+alignment, independent target and optimizer ownership, an actual synthetic
+recurrent update/checkpoint, endpoint/strict-MEI handling and complete runner
+control flow with fake environment/collector. It is not a native performance
+result. Creator verified and removed its exact invocation-owned temp scratch.
+DM inspected the real diff and successful check evidence; no unchanged suite
+was repeated. Reported added non-test scope is327 lines, runner209, scope:none.
+
+The implementation is published for independent full-path Sol/high review against
+4ec6086f56f13ca7d0e9fbddbbaebd761405ff25. Required review includes inherited
+update/save/collector consumers, fixed exposure/RNG and final-checkpoint identity,
+complete/incomplete result handling, primary and exact proposed launch argv.
+Review findings and DM technical acceptance remain pending. No B01 result-bearing
+invocation, remote process or monitor adoption has occurred.
