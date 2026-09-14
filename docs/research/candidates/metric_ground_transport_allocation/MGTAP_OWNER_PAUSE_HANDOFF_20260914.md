@@ -1,11 +1,11 @@
 # MGTAP — owner-pause closeout handoff, 2026-09-14
 
-Status after20:29:37.7532926Z: **current-object review accepted and generating;
-full response/DM intake still pending, not yet drained**.
+Final current-object closeout: **full scientific review and DM intake complete;
+operationally owner-paused, no live native/provider obligation**.
 Owner event `OWNER_PAUSE_AFTER_INFLIGHT_20260914` is recorded in current main at
 `docs/research/portfolio/decisions/2026-09-14-owner-pause-after-inflight.md`
 (source7a087459d0b1fd1ecae000a502f5da3beff02d9e).
-Finish work already in hand, then remain operationally owner-paused awaiting explicit
+Work already in hand has finished. Remain operationally owner-paused awaiting explicit
 resume. No successor experiment, new direction, vacancy replacement or next-object
 consultation starts. This is not scientific PARK/CLOSE or a slot release.
 
@@ -13,7 +13,9 @@ consultation starts. This is not scientific PARK/CLOSE or a slot release.
 
 - Original MGTAP DM: App01a09cd8-676e-7513-806d-a86b7e104518, hostlocal.
 - Authoring: `C:/Projects/HMASD-worktrees/dm-n5-continue-20260904`, `codex/mgtap`.
-- Current pre-handoff record:8fff7c2406bc66f24c50963147d8c125f2713ddc.
+- Full independent review:494dbefe004bfa4b52017dc2ba903f4eff30204c.
+- Earlier interim handoff/cleanup:b52e58ca014487f90b4e24aab7436364beb7b7b1;
+  final publication revision is recorded in the shared registry and direct return.
 - Current controls/shared registry: `C:/Projects/HMASD`; Clerk is retired.
 - Pause follow-through peer: ACVC App01a09dfa-0655-7831-aa3a-9fff2ddd2508.
   Report changed actual handoff/remaining-obligation facts directly; no ACK barrier.
@@ -30,7 +32,7 @@ Frozen rule: COND_ADVERSE. One matched training pair, n1perarm;32worlds are not3
 independent training replicates. Prior8252+0.023704897713093642 and8241/8242 mixed
 results remain separate. No stable superiority/inferiority, causal tuning gain or
 retrospectively prespecified two-seed claim. DENSE stays default; existing scientific
-Portfolio CONTINUE and occupied slot remain, operational execution now drains to pause.
+Portfolio CONTINUE and occupied slot remain; operational execution is owner-paused.
 
 Handle `mgtap-fixed-lr-b01-8253-20260914`, node `hmasd-wsl-node`, PID3681084,
 accepted19:57:46Z; immediate physical/effective4GiB admission passed. Supervisor
@@ -44,7 +46,11 @@ peak568040KiB. Earlier8-fit LR-selection command658.02s; sum836.88s describes on
 these two native objects. Support/provider/engineering-lifetime/aggregateCPU costs
 remain UNKNOWN.34tests+16subtests and focused independent counterexample1passed;
 the independent Sol/high Reviewer finding about partial exposure was repaired and
-rechecked with no remaining material engineering finding. New scientific review is pending.
+rechecked with no remaining material engineering finding. The complete181-line
+scientific review found no primary-changing defect or need for supplemental execution.
+The [DM review intake](pro_packets/20260914_fixed_lr_results_review/INTAKE.md) applies
+the local-non-recurrence and no-mechanism-gate clarifications. No current-object
+scientific defect requiring further work remains within the stated review limits.
 
 ## Preserved artifacts and cleanup
 
@@ -68,9 +74,10 @@ and the exact published Git blob were rechecked20:36:27Z. Ordinary Git worktree 
 All local originals, source2d351d486 and remote supervisor files remain. See
 `reentry_20260914/COLLECTION.json` for this separate completed cleanup. Neither
 completed remote checkout remains an obligation; no scientific evidence was lost.
-Preserve the shared authoring checkout for current review delivery and future resume.
+Preserve the designated direction authoring checkout and evidence for explicit resume;
+do not create a new task/worktree or archive this task automatically.
 
-## Sole unfinished current-work obligation
+## Completed current-object review and preserved delivery history
 
 Request `2026-09-14-mgtap-fixed-lr-results-review-01`: exact TASK
 0b2f2e5d7a9daa96d973fa20f6a469c133b7ad40, bound HANDOFF
@@ -86,27 +93,42 @@ same-request recovery was delivered20:24:39Z. Its20:25 queue-drained pause hando
 still omitted the author-owned obligation. DM returned a concrete correction20:27:42Z
 citing the explicit owner record permitting this in-hand review to finish. These are
 executor recovery messages, not provider Send attempts or additional Send authorization.
-Do not infer no provider acceptance from queue absence. Transport must reconcile actual
-effects, observe any accepted request and preserve at-most-one original Send, with
-complete actual prompt readback and full original response archival. DM retains full
-review reading, substantive response, record integration and final handoff acceptance.
+Queue absence was not treated as proof of provider nonacceptance. Transport completed
+actual-effect reconciliation and the original one Send with complete prompt readback,
+then returned the full immutable response. DM has completed substantive intake;
+the earlier uncertain-effect and omitted-queue records remain preserved history.
 
-## First closeout / later resume action
+## Final response, remaining obligations and first resume action
 
 The omitted queue entry has now been recovered. Actual Transport adoption was
 20:29:04.1745412Z and provider acceptance20:29:37.7532926Z, user
 8d56e527-169b-4ddf-9aec-ea7bd872cd01,Send1/manual0. Transport verified the complete
 1942-byte composer and accepted user body (apart from Show-more UI suffix), digest
-a78f4ee59887f909b6a621f07f3fe4542fa2d449bb10ab3bedf5462416dd420f. Its durable queue
-is WAITING_GENERATION. The earlier omission/unknown state above is preserved history,
-not a current lack of adoption. No second Send or other native work followed.
+a78f4ee59887f909b6a621f07f3fe4542fa2d449bb10ab3bedf5462416dd420f. Its final durable
+queue state is COMPLETED_PROVIDER_DELIVERY_VERIFIED at20:43:13.9462897Z, terminal
+assistant16a020df-2a3d-4156-bcce-5e67c8922a0e. No second Send or native work followed.
 
-First obtain this exact current review's complete terminal response from its existing
-Transport observer; read and archive it, resolve concrete dependent findings
-or bound claims, and finish this handoff. Do not create another review or experiment
-to clear a queue defect. Preserve the current task if an actual external restriction
-prevents completion, naming its owner and exact unfinished effect.
-After current-object closeout, mark operationally owner-paused and send committed
-handoff plus actual remaining obligations to ACVC. Do not automatically archive the
-App task. On explicit owner resume, read canonical controls and this handoff/full
-review, then make the evidence-linked next-work judgment; no successor is preselected.
+Original full response at494dbefe004bfa4b52017dc2ba903f4eff30204c:
+`pro_packets/20260914_fixed_lr_results_review/archive/RESPONSE.md`,181lines,
+36825bytes,SHA256e98e57c92f4f696194d48eeaacba85632b67574540ba7a8134e56807d9c5f92e.
+DM read all sections/references and verified the local file equals the published Git
+blob. The separate424-byte delivery receipt is not the full review. Archive facts:
+`pro_packets/20260914_fixed_lr_results_review/archive/DM_ARCHIVE_CHECK.json`.
+The review favors no further unchanged pair now, while preserving another cheap
+honest fixed pair as a legitimate potentially useful alternative. This is a deferred
+development preference, not a scientific PARK, no-benefit proof or seed quota.
+Future direction interpretation and any Portfolio consultation await explicit resume;
+the later owner pause governs actual operational stopping independently of that preference.
+
+Remaining live experiments:0. Active native monitors:0. Accepted provider requests
+awaiting completion:0. Unresolved current-object claim-changing findings:0. Both
+completed remote checkout cleanups are verified. Source, all original results,
+checkpoints, supervisor files and unknown cost disclosures remain preserved. Main
+publication and direct final handoff report their actual accepted revisions; no other
+direction's obligations or global pause completion are asserted here.
+
+First action only after explicit owner resume: read current canonical controls,
+this handoff, the complete review and substantive DM intake; preserve old results
+and then choose a scientifically useful next objective under that current instruction.
+Do not auto-launch another seed, reopen a closed request, issue a new consultation,
+release a slot or archive/recreate the App task from this handoff alone.
