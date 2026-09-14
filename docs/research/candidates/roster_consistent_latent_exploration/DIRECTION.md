@@ -34,10 +34,12 @@ outcome ties on 512 new held-out scenarios, without a policy/population equivale
 The complete independent review at d45d4bc6ea2012b93d1d044402268520be5eea9a found no
 demonstrated defect invalidating the bounded comparison. DM read all291 lines and responded
 substantively in the B13 intake. The new freedom is now tested; no eta causal success or
-family-wide failure follows. DM is preparing the [next full direction report](pro_packets/20260914_post_b13_portfolio_direction/REPORT.md),
+family-wide failure follows. DM has published the [next full direction report](pro_packets/20260914_post_b13_portfolio_direction/REPORT.md),
 recommending reversible PARK with one same-law fresh instance as the strongest alternative.
 This is a pending direction recommendation, not an applied disposition. Existing CONTINUE
-and the occupied slot remain; MGTAP owns the preceding serial Portfolio request. No automatic
+and the occupied slot remain. MGTAP completed its full decision/application and released the
+conversation; RCLE claimed it and dispatched the exact23,431-byte request through registered
+Transport, with actual full-composer/accepted-node checks and full terminal archive pending. No automatic
 second fit, PARK/CLOSE or slot release. The complete response and global context govern the
 next consequence, without a per-experiment approval or Root ratification.
 

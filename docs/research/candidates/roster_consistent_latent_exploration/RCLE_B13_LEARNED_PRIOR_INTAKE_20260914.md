@@ -1,7 +1,9 @@
 # B13 intake — learning observed, greedy increment not observed
 
 Current review state: complete independent result review read and substantively answered below.
-DM is preparing a direction-level Portfolio report; no new PARK/CLOSE, fit or slot release is applied.
+The complete direction report and exact23,431-byte Portfolio request are published and dispatched
+to registered Transport; actual provider acceptance/full answer is not yet confirmed. No new
+PARK/CLOSE, fit or slot release is applied.
 
 The complete B13 invocation answers the concrete objective selected by the full Portfolio
 CONTINUE. The package learned from its own initialization and beat nearest, while sampled
@@ -251,3 +253,7 @@ Root published f26a24611ec3d728260bb96d1d1809c151581cc2 correcting empirical-spe
 ### Predecessor full decision and actual release processed —2026-09-14
 
 MGTAP delivered its actual release after complete Portfolio CONTINUE and DM application at d03ee1f04f7c0ea9dc2e7ae5ae817b75511a5f80/main e38836b0820eab80e964caa861171c5d48230e18. RCLE read the full139-line18522-byte original answer, complete intake and corrected delivery facts; SHA256 df3e7910a281e4bbc0fa928d59d780c6bdce13974f68165bbbba659381238272 verified. Main03be1bd7b11213070b91d9b6281c9c58279e1dd4 claims the released conversation for the one new post-B13 request. GLOBAL_CONTEXT preserves latest peer science and the predecessor title-only input defect; actual full composer and accepted-node checks are assigned for the new request. No predecessor resend, RCLE disposition, slot change or native fit follows from this authoring event. Owner reviews remain empty.
+
+### Exact next Portfolio request dispatched —2026-09-14
+
+Request2026-09-14-rcle-post-b13-direction-decision-01 has final full prompt17cb06ae3f1922568c5dc5f8af3c711feba5b952 and HANDOFF383cd3dd298bf8536ad7db3bab86561a3e0fe8e2. DM read the entire generated prompt to EOF and verified its exact23431-byte Git blob/SHA256 e91f1beb4fe40f38eabe67488d9a98163e195437be6f9eb6d9937f030a41a59f. One App handoff was accepted by registered Transport, not yet a verified provider Send. Transport owns actual full-composer and accepted-user-node comparison, same-request observation and complete direct archive. The final fixed report/global context include the complete MGTAP decision/application and current FOLR result/proposal. DM awaits the full actual Portfolio answer, then reads, responds and applies its conforming direction decision; no local PARK/new fit/slot release is pre-applied.
