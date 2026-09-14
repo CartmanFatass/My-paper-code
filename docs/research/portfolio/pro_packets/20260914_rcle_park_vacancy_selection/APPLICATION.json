@@ -24,11 +24,11 @@
     "object_started": true,
     "object_start_phase": "card_and_implementation_created; no accepted source/native launch at report",
     "conversation_released": true,
-    "release_notice_delivered": false
+    "release_notice_delivered": true
   },
   "owner_item": "docs/research/portfolio/owner/inbox/2026-09-14/20260914-root-001.json",
   "audit_line": 58,
-  "next_action": "RCLE sends actual release/application to FOLR and capacity completion to ACVC, records delivery and ends parked task. ACVC owns ongoing B03 research under current Portfolio protocol.",
+  "next_action": "Original ACVC independently continues accepted B03; FOLR owns its prepared Portfolio question using delivered actual release/global facts. RCLE task archive next; physical checkout cleanup exception remains documented.",
   "peer_science_preserved": true,
   "handoff": {
     "recorded_at_utc": "2026-09-14T12:53:14.413339+00:00",
@@ -95,8 +95,10 @@
     "active_author_after_release": "",
     "queued_next_author": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
     "queued_request": "2026-09-14-folr-post-b03-direction-decision-01",
-    "notice_state": "pending_direct_delivery",
+    "notice_state": "delivered_directly_to_folr; actual_capacity_also_delivered_to_acvc",
     "does_not_wait_for_acvc_experiment": true
   },
-  "application_audit_line": 59
+  "application_audit_line": 59,
+  "peer_delivery_path": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/PEER_RELEASE.json",
+  "coupling_complete": true
 }
