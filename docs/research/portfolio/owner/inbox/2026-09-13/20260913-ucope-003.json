@@ -1,0 +1,76 @@
+{
+  "id": "20260913-ucope-003",
+  "created": "2026-09-13T20:41:06-07:00",
+  "direction": "ucope",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "UCOPE完成8901后可逆PARK",
+  "context": "一次完整R/F/G/H研究：主R-F=-0.0032978553处于原±0.01内，R-G=-0.0180632903；三组学习均超过悬停。DM选择可逆PARK，保留n=1训练不确定性、全部旧证据及8801-L/不变L停支。没有新后继。",
+  "options": [
+    {
+      "key": "park",
+      "label": "可逆PARK并保留知识",
+      "consequence": "零新增科学调用，Clerk接续安全归档与三槽内空位处理；未来可有理由重开。"
+    },
+    {
+      "key": "repeat",
+      "label": "再选一个独立R/F/G实例",
+      "consequence": "需前瞻新卡和master，新增三组拟合以观察训练变异；当前未执行。"
+    },
+    {
+      "key": "new_question",
+      "label": "提出有决策价值的新反馈比较",
+      "consequence": "需具体问题和有限工作描述，不能从G当前较好直接推导应做哪项改动；当前未执行。"
+    }
+  ],
+  "recommended": "park",
+  "auto_applied": "park",
+  "dm_reason": "新R未显示对F的开发margin且落后普通G；承认再做独立实例可能改变排序，但现阶段选择保留知识并暂停该方向。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_REACTIVE_RENEWAL_B01_8901_INTAKE_20260913.md",
+    "docs/research/candidates/ucope/PARK.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L75",
+  "brief": "docs/research/portfolio/owner/briefs/ucope/2026-09-13_reactive-renewal-b01-8901.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "UCOPE完成一次反馈后续约R/F/G比较后，是否按DM已执行的选择可逆PARK，而不继续新训练？",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE DIRECTION.md与PARK.md",
+        "from": "一次R/F/G/H研究执行中",
+        "to": "完整结果已接收；DM选择PARK，无新卡或后继；Clerk接续安全归档和空位处理"
+      }
+    ],
+    "if_refused": "按所有者新指令重估具体后继，并在当前三方向容量内协调准入；不把该答复当作重跑旧8801-L或改写冻结对象的许可。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_REACTIVE_RENEWAL_B01_8901_INTAKE_20260913.md",
+        "quote": "Primary **R−F−0.0032978552991116817** is WITHIN the frozen±0.01J band, conditional world SE0.007273884687935381. R−G is−0.01806329032976254 (DOWN), and R−H is+0.055448365668267365.",
+        "why": "R没有显示相对两个已达到替代方案的当前开发优势；此前T/F与L/F证据也要求谨慎。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_REACTIVE_RENEWAL_B01_8901_INTAKE_20260913.md",
+        "quote": "one R instance cannot establish a stable lack of benefit, and R−F lies inside the margin rather than showing a large adverse effect.",
+        "why": "第二次独立训练可能改变排序；PARK是可逆资源判断，不是全体续约方法无效的证明。"
+      }
+    ],
+    "uncertainty": [
+      "一个配对训练实例的64世界条件SE不包括训练总体不确定性。",
+      "门控更新且平均保留率接近一半，不能识别失败原因或孤立反馈的因果作用。",
+      "未测最优headroom；完整支持与端到端成本仍未知。"
+    ],
+    "cost": {
+      "compute": "本次完整1638400原生步、12288次Adam；完整runner1813.83秒，CPU1811.91秒，峰值0.536GiB；PARK新增科学调用0。",
+      "owner_time": "可异步介入；当前不等待确认。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; scientific work and accepted review are complete"
+    },
+    "verdict_text": "Owner-delegated decision (unattended,2026-09-03 and2026-09-13 instructions): (a) PARK UCOPE at this completed boundary.",
+    "source": "docs/research/candidates/ucope/UCOPE_REACTIVE_RENEWAL_B01_8901_INTAKE_20260913.md"
+  },
+  "starred": true
+}

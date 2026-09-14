@@ -1,0 +1,78 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "UCOPE-REACTIVE-RENEWAL-B01",
+      "arm": "F",
+      "n": 1,
+      "mean": 0.20048152053860563,
+      "sample_sd": null,
+      "min": 0.20048152053860563,
+      "max": 0.20048152053860563,
+      "runs": {
+        "8901": 0.20048152053860563
+      }
+    },
+    {
+      "task": "UCOPE-REACTIVE-RENEWAL-B01",
+      "arm": "G",
+      "n": 1,
+      "mean": 0.2152469555692565,
+      "sample_sd": null,
+      "min": 0.2152469555692565,
+      "max": 0.2152469555692565,
+      "runs": {
+        "8901": 0.2152469555692565
+      }
+    },
+    {
+      "task": "UCOPE-REACTIVE-RENEWAL-B01",
+      "arm": "R",
+      "n": 1,
+      "mean": 0.19718366523949393,
+      "sample_sd": null,
+      "min": 0.19718366523949393,
+      "max": 0.19718366523949393,
+      "runs": {
+        "8901": 0.19718366523949393
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "UCOPE-REACTIVE-RENEWAL-B01",
+      "arm": "G",
+      "baseline": "F",
+      "summary": {
+        "n": 1,
+        "mean": 0.014765435030650864,
+        "sample_sd": null,
+        "min": 0.014765435030650864,
+        "max": 0.014765435030650864
+      },
+      "differences": {
+        "8901": 0.014765435030650864
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    },
+    {
+      "task": "UCOPE-REACTIVE-RENEWAL-B01",
+      "arm": "R",
+      "baseline": "F",
+      "summary": {
+        "n": 1,
+        "mean": -0.003297855299111696,
+        "sample_sd": null,
+        "min": -0.003297855299111696,
+        "max": -0.003297855299111696
+      },
+      "differences": {
+        "8901": -0.003297855299111696
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

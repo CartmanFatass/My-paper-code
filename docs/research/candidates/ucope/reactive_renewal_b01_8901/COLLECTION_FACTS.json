@@ -1,0 +1,193 @@
+{
+  "verified_at": "2026-09-14T03:29:54.465788+00:00",
+  "launch_sha": "831b83c15ec40939fc908a6aaac99f2a3b1a597a",
+  "native_artifacts_matched_remote_sha256": 8,
+  "all_episode_ids_world_seeds_rewards_and_counts_checked": true,
+  "all_update_epochs_finite_and_counts_checked": true,
+  "evaluation_parameter_and_training_rng_isolation": true,
+  "independent_matched_training_instances": 1,
+  "arm_means": {
+    "R": 0.19718366523949393,
+    "F": 0.20048152053860563,
+    "G": 0.2152469555692565,
+    "H": 0.14173529957122658
+  },
+  "contrasts": {
+    "R_minus_F": {
+      "mean": -0.0032978552991116817,
+      "conditional_world_se": 0.007273884687935381,
+      "n_worlds": 64,
+      "favorable": 27,
+      "adverse": 37,
+      "tied": 0,
+      "reading": "WITHIN"
+    },
+    "R_minus_G": {
+      "mean": -0.01806329032976254,
+      "conditional_world_se": 0.009141773796144283,
+      "n_worlds": 64,
+      "favorable": 26,
+      "adverse": 38,
+      "tied": 0,
+      "reading": "DOWN"
+    },
+    "R_minus_H": {
+      "mean": 0.055448365668267365,
+      "conditional_world_se": 0.009138495293396914,
+      "n_worlds": 64,
+      "favorable": 51,
+      "adverse": 13,
+      "tied": 0,
+      "reading": "UP"
+    },
+    "F_minus_H": {
+      "mean": 0.05874622096737905,
+      "conditional_world_se": 0.008811008434780394,
+      "n_worlds": 64,
+      "favorable": 51,
+      "adverse": 13,
+      "tied": 0,
+      "reading": "UP"
+    },
+    "G_minus_H": {
+      "mean": 0.0735116559980299,
+      "conditional_world_se": 0.009645788424337796,
+      "n_worlds": 64,
+      "favorable": 54,
+      "adverse": 10,
+      "tied": 0,
+      "reading": "UP"
+    },
+    "F_minus_G": {
+      "mean": -0.014765435030650859,
+      "conditional_world_se": 0.008208376779783744,
+      "n_worlds": 64,
+      "favorable": 24,
+      "adverse": 40,
+      "tied": 0,
+      "reading": "DOWN"
+    }
+  },
+  "prediction": {
+    "event": "R_minus_F > 0.01",
+    "probability": 0.35,
+    "outcome": false,
+    "brier_score": 0.12249999999999998,
+    "owner": "not taken (unattended)"
+  },
+  "gate_keep_fraction": {
+    "train": 0.49910699695834276,
+    "eval": 0.48779155514284156
+  },
+  "cost": {
+    "complete_runner_wall_seconds": 1813.83,
+    "supervisor_chain_wall_seconds": 1814,
+    "complete_runner_cpu_seconds": 1811.91,
+    "summary_internal_wall_seconds": 1778.5461654390674,
+    "summary_internal_cpu_seconds": 1810.762745969,
+    "peak_rss_kib": 561872,
+    "peak_rss_gib": 0.5358428955078125,
+    "valid_native_results": 1,
+    "complete_support_cost": "UNKNOWN; implementation, Pro, control recovery, observation, collection and publication are not zero"
+  },
+  "archive": {
+    "path": "RUN_ARTIFACTS.tar.gz",
+    "bytes": 2127560,
+    "sha256": "9d7463ebfe12cd99df478fcb2ecd500ab2d2031733830f9f8f202d93917a7dda",
+    "all_entries_reopened_and_verified": true,
+    "entries": [
+      {
+        "path": "episodes.jsonl",
+        "bytes": 3659389,
+        "sha256": "5412e0855ffab54f36eebd5f0a51c3aa21413f777b3499b8ee1e3e11d549ee49"
+      },
+      {
+        "path": "F_final.pt",
+        "bytes": 280490,
+        "sha256": "023952c74b3eff88fd7acbfc5597c90e5e659a89832e7cc9d985817dcc39dc34"
+      },
+      {
+        "path": "G_final.pt",
+        "bytes": 270390,
+        "sha256": "b521fb1f9fb4cb86a68cd6fd911dd055581f71876d7c6f29e8739794ac18ce67"
+      },
+      {
+        "path": "memory.json",
+        "bytes": 504,
+        "sha256": "bf28c503fb145f3fe47f7eb5c5d53a770fc413f98605531103091dc856922306"
+      },
+      {
+        "path": "MONITOR.json",
+        "bytes": 598,
+        "sha256": "18cba9f5767c4496b8f5d21cc520490024e244bf2602847408d2de9b700e15ab"
+      },
+      {
+        "path": "R_final.pt",
+        "bytes": 280490,
+        "sha256": "0110b2bf3f10176d1349654b5d6d90e955d7a86ae6315988f455e1b036a83fba"
+      },
+      {
+        "path": "summary.json",
+        "bytes": 40934,
+        "sha256": "0e0f35659356d8f869241af7aced6dba1120084f6cedab6a8c830a6e2d9a02dc"
+      },
+      {
+        "path": "supervisor/exit_code",
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      {
+        "path": "supervisor/pid",
+        "bytes": 8,
+        "sha256": "993bea76cc994da613987941b71e68e12dcafc4cc037b5cdabb278bef779746e"
+      },
+      {
+        "path": "supervisor/runner.sh",
+        "bytes": 1499,
+        "sha256": "c2e4e0dc9e8fc7f7b03d28ed0221c3a536e8ea1514149175be06ebb6878b2a61"
+      },
+      {
+        "path": "supervisor/start_time",
+        "bytes": 11,
+        "sha256": "71571a9de6566925e17cbf21ca5e8e1251a798beba477b936648a2243b43f1e6"
+      },
+      {
+        "path": "supervisor/status",
+        "bytes": 9,
+        "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+      },
+      {
+        "path": "supervisor/task.log",
+        "bytes": 1524,
+        "sha256": "93c2fb2b4bb04bf39b62b5b79bccc611a5396b7091df50e7f5664776ac759a50"
+      },
+      {
+        "path": "time.txt",
+        "bytes": 915,
+        "sha256": "74977090a19db872e943ae2f27bc4dddf83faac0ad6ec4d7602cc97a80c55785"
+      },
+      {
+        "path": "updates.jsonl",
+        "bytes": 2160553,
+        "sha256": "ebdc321349ec3e10cc5e58078a38c46aae1e4bac925097f0f51d0aefd4413942"
+      }
+    ]
+  },
+  "checkpoint_inspection": {
+    "R": {
+      "checkpoint_metadata_matches": true,
+      "finite_float32": true,
+      "total_parameters": 68553
+    },
+    "F": {
+      "checkpoint_metadata_matches": true,
+      "finite_float32": true,
+      "total_parameters": 68553
+    },
+    "G": {
+      "checkpoint_metadata_matches": true,
+      "finite_float32": true,
+      "total_parameters": 66311
+    }
+  }
+}

@@ -1,35 +1,42 @@
 # Direction ucope: UCOPE
 
-## Current DM position — 2026-09-13 reactive continuation selected, recasts 2
+## Current DM position — 2026-09-13 PARK after reactive8901
 
-**OWNER_DELEGATED / CONTINUE:** the independent DM selects one new B/EXPLORE
-comparison of feedback-conditioned continuation R against fresh trained fixed
-renewal F and ordinary recurrent feedback G, with hover H. The complete independent
-Convergence review narrowly supports this choice; the DM answers its material
-state, likelihood and credit findings in the
-[review intake](pro_packets/20260913_reactive_renewal_convergence/INTAKE.md).
+**OWNER_DELEGATED / PARK:** the DM accepts one complete feedback-conditioned
+R/F/G/H B instance and selects reversible whole-direction PARK at its safe
+boundary. No successor, retry or additional scientific invocation is selected.
+Recasts remain2; the8801-L/unchanged-L and older root-residual stops remain.
+[DM decision and alternatives](UCOPE_REACTIVE_RENEWAL_B01_8901_INTAKE_20260913.md)
+and [PARK knowledge/reopening record](PARK.md) hold the current disposition.
 
-R can use the next already-allowed observation after one movement tick to keep
-the actual command for one more tick or end and sample a new command immediately.
-Adopting this changed decision boundary is **recast 2**. The 8801-L/unchanged-L
-spending stops and older retained-policy/root-residual PARK remain. This creates
-no priority, global resource, formal UAV entry or C change.
+The original primary R−F is−0.0032978552991116817, WITHIN the frozen±0.01J
+band; R−G is−0.01806329032976254, DOWN. All three learned arms beat hover
+in this one trained instance. R learned and its gate moved, but it did not
+supply a present development margin against both attained alternatives.
+[Complete result and all contrasts](UCOPE_REACTIVE_RENEWAL_B01_8901_RESULT_EVIDENCE_20260913.md)
+preserve all64 world differences, conditional SE and contrary signs.
 
-The strongest support is the concrete feedback opportunity absent from tested
-precommitted-duration recipes, with attained F/G alternatives making a finite
-comparison meaningful. The strongest contrary case is the repeated T/F deficits,
-8801 L/F loss, useful simpler comparators, and R's unmeasured implementation and
-complete cost. Reversible PARK was the serious runner-up; no R benefit is known.
-All prior mixed F/G, hover, incomplete8702 and dependent-A01 evidence remains.
+Another independent instance could change the ordering: one training instance
+cannot establish a stable lack of benefit or equivalence. The DM currently
+prefers PARK to another fit package without a sufficiently useful selected
+question. This is a reversible research-value judgment, not a universal negative
+about reactive persistence, a timing-plan stop, or a change to other directions.
+Historical T/F losses,8801 L/F loss, mixed F/G results, early hover losses,
+incomplete8702 and dependent A01 remain separately recorded.
 
-The [new B01 card](UCOPE_REACTIVE_RENEWAL_B01_CARD_20260913.md) selects one
-master8901 R/F/G instance,2048 training episodes each and one final64-world panel
-each plus H. R−F is primary; R−G and learned−H contrasts remain. It selects
-1638400 native team steps and12288 Adam calls, without a retry or automatic
-successor. Corrected source831b83c15 passed focused checks and independent code
-review; one detached remote invocation is active with direct native Monitor
-adoption recorded in the card. No R outcome is yet known. The claim ceiling is one whole-package
-learning observation, with no stable ranking or component causality.
+The design Pro response was fully read and its three substantive findings were
+applied; independent code review then found and resolved an incomplete-polarity
+defect before launch. Those reviewers are not credited with this new lifecycle
+verdict. The sole native run completed at exact source831b83c15 with1638400
+team steps and12288 Adam calls. Complete runner wall1813.83s, CPU1811.91s;
+full support cost remains unknown. Outputs and final checkpoints are preserved
+in a verified2.13MB archive. No scientific run or accepted review remains live.
+
+Clerk owns accepted integration, safe task archival and vacancy handling under
+the owner's current three-direction limit. Reopening requires a prospective DM
+question and coordinated admission; positive-first evidence, a new mechanism
+or an exact optimum is not mandatory. See PARK.md for the concrete preserved
+assets, remaining uncertainty and cleanup handoff.
 
 ## Research organization — 2026-09-04
 
