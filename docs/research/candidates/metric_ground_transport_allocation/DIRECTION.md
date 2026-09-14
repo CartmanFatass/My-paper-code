@@ -43,10 +43,17 @@ actual decision without an ACK gate.
 The [management intake](MGTAP_POST_8231_MANAGEMENT_20260913.md) records options,
 contrary evidence and costs. The [card](MGTAP_EARLY_EXPOSURE_B01_SCIENCE_CARD_20260913.md)
 fixes two256-episode fits,32 final worlds per arm, MEI0.01 J and new caps450s/arm,
-900s native,2700s support,3600s complete. Source/static checks are accepted;
-engineering review has no material finding. Actual source binding, admission,
-detached launch, Monitor adoption and full result/intake remain DM work. No
-scientific invocation has yet run under this card.
+900s native,2700s support,3600s complete. The sole pair is now complete and
+technically accepted: COND meanJ0.05611652551644544, DENSE0.040987677883755035,
+Delta+0.015128847632690413 J (COND_ABOVE_MEI), conditional SE0.004195093455269184.
+Complete native188.19s passes the450/450/900s limits; support/complete compliance
+is UNKNOWN with unmeasured tails. This is one realized early-exposure pair,
+not stable superiority or a curve. [E0](MGTAP_EARLY_EXPOSURE_B01_RESULT_20260913.md)
+and [intake](MGTAP_EARLY_EXPOSURE_B01_INTAKE_20260913.md) preserve all outcomes,
+Monitor's corrected premature observation, archive and complete independent
+design/next-plan review (no material design defect; full DM response recorded).
+DM's candidate next action is one further independent
+256/256 instance, not yet a selected card/seed or automatic successor.
 
 All dated sections below retain historical results and then-current dispositions,
 not current approval requirements. Frozen objects/results remain unchanged;

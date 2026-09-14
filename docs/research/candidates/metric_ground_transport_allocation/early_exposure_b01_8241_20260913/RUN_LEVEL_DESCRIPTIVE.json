@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "MGTAP-EARLY-EXPOSURE-B01",
+      "arm": "COND",
+      "n": 1,
+      "mean": 0.05611652551644544,
+      "sample_sd": null,
+      "min": 0.05611652551644544,
+      "max": 0.05611652551644544,
+      "runs": {
+        "8241": 0.05611652551644544
+      }
+    },
+    {
+      "task": "MGTAP-EARLY-EXPOSURE-B01",
+      "arm": "DENSE",
+      "n": 1,
+      "mean": 0.040987677883755035,
+      "sample_sd": null,
+      "min": 0.040987677883755035,
+      "max": 0.040987677883755035,
+      "runs": {
+        "8241": 0.040987677883755035
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "MGTAP-EARLY-EXPOSURE-B01",
+      "arm": "COND",
+      "baseline": "DENSE",
+      "summary": {
+        "n": 1,
+        "mean": 0.015128847632690408,
+        "sample_sd": null,
+        "min": 0.015128847632690408,
+        "max": 0.015128847632690408
+      },
+      "differences": {
+        "8241": 0.015128847632690408
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}
