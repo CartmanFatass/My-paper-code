@@ -1,0 +1,86 @@
+{
+  "id": "20260914-mgtap-001",
+  "created": "2026-09-14T03:43:09-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "MGTAP：应用完整 Portfolio CONTINUE，固定选中配置后继尚未启动",
+  "context": "已读完整139行裁决；原始全文18522字节恢复且哈希一致。应用有限CONTINUE，保留DENSE默认、反证、成本UNKNOWN。仅标题实际发出这一传输偏差如实保留，Portfolio自行定位固定包后作答。",
+  "options": [
+    {
+      "key": "a",
+      "label": "保留已应用的有限CONTINUE",
+      "consequence": "原DM推进固定1e-4新配对的前瞻设计；不自动加网格/改默认。"
+    },
+    {
+      "key": "b",
+      "label": "提出PARK/不同方向取舍",
+      "consequence": "按具体owner覆盖或同会话科学反馈处理，保留历史证据；不推定新运行。"
+    },
+    {
+      "key": "c",
+      "label": "修改后续研究目标",
+      "consequence": "明确新问题和范围后前瞻修改，旧选择程序与结果保持。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "新固定配置观察可改变实际开发选择，优于继续搜索；PARK反方仍保留。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/archive/RESPONSE.md",
+    "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L55",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "已按完整 Portfolio 裁决继续 MGTAP 的固定选中配置研究；此项供异步介入，不是等待批准的启动申请。",
+    "changes_if_approved": [
+      {
+        "target": "MGTAP DIRECTION.md / common registry",
+        "from": "pending_portfolio_decision",
+        "to": "CONTINUE，保留原槽位；下一目标为固定1e-4新配对，未启动"
+      }
+    ],
+    "if_refused": "保留全部已发生结果和归档；在干净边界执行具体 owner 覆盖，不推定重跑或删除证据。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/archive/RESPONSE.md",
+        "quote": "**决定：MGTAP CONTINUE，继续现有可选 COND 开发范围，保持既有优先级；下一项具体目标是将双方学习率固定为本轮各自选中的 \\(10^{-4}\\)，进行一对全新训练比较。DENSE 仍是通用开发默认。不 RECAST、不 PARK/CLOSE，不自动重做八拟合选择程序，也不向更低学习率扩展网格。**",
+        "why": "完整回答权衡固定配置的可改变开发判断与两拟合有限工作；不是单次正结果自动追加。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md",
+        "quote": "Slow validation favored DENSE0.1687065165636938 over COND0.16492958901611127. It is contrary evidence, not a second favorable repetition.",
+        "why": "历史混合、一次自适应选择和未知维护成本仍支持停止反方案。"
+      }
+    ],
+    "uncertainty": [
+      "新配对不是原先冻结的第二个确证样本，也不重复完整选择程序。",
+      "仅标题被实际发送；完整答复自行定位了固定包，原错误回执与完整原文都保留。",
+      "新 seed、科学卡、两拟合命令和准入尚未完成；不把裁决记录当作运行。"
+    ],
+    "cost": {
+      "compute": "后继拟议2fits/147456ticks/1024Adam；3–6分钟是UNMEASURED规划；既有native658.02s，完整维护与提供方成本UNKNOWN。",
+      "owner_time": "无需等待 owner/Root 回复；可异步覆盖。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; ordinary DM work is not waiting for approval"
+    },
+    "verdict_text": "**决定：MGTAP CONTINUE，继续现有可选 COND 开发范围，保持既有优先级；下一项具体目标是将双方学习率固定为本轮各自选中的 \\(10^{-4}\\)，进行一对全新训练比较。DENSE 仍是通用开发默认。不 RECAST、不 PARK/CLOSE，不自动重做八拟合选择程序，也不向更低学习率扩展网格。**",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-14T10:43:09+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md",
+      "state": "applied",
+      "summary": "有限方向CONTINUE已应用；完整原文和输入偏差保留，无后继native启动、无槽位增减。"
+    }
+  ]
+}
