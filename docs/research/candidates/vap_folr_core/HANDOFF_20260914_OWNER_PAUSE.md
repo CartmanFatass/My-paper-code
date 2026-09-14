@@ -119,7 +119,12 @@ idle with an empty nonterminal queue and omitted this request. DM's actual
 readback found no FOLR queue entry and resumed the same unchanged assignment,
 requiring same-conversation effect reconciliation before any Send. Queue absence
 is not itself verified provider nonacceptance. The recovery is not a second
-scientific request. Provider acceptance/full response is not yet observed by DM.
+scientific request. The same request is now accepted20:46:33.9318003Z as user
+`7ee820c2-d2d1-495c-af8e-eeb77dab4c19`, one Send, exact1937-byte prompt;
+DM verified the queue against HANDOFF SHA256
+`3896abfb211903f3caf49c03b18e9af04b84b628877a36e4848e76b163d02222`.
+Transport is actively observing the same generation. Full response remains pending.
+`PROVIDER_ACCEPTANCE.json` preserves this actual recovery outcome.
 A parent callback must retain model`gpt-6-astra`,thinking`max`; Transport stays
 Luna/high. See packet`DISPATCH_RECEIPT.json` for the actual control facts.
 
