@@ -1,0 +1,30 @@
+{
+  "request_id": "2026-09-14-acvc-post-paired-direction-decision-01",
+  "authority": "PRO_FINAL / OWNER_DELEGATED",
+  "source_commit": "902df04e46a4cea8fe788baed14ca8c447cf18ea",
+  "source_path": "docs/research/portfolio/pro_packets/20260914_acvc_post_paired_direction/archive/RESPONSE.md",
+  "source_sha256": "47cd2bf107f1ebe12e1904ded88d6d9f929a206150f88bf46041ed1e289c34e7",
+  "full_response_read_and_material_findings_answered": true,
+  "dm_applied_at": "2026-09-14T17:09:05.470325+00:00",
+  "direction": "acvc",
+  "disposition": "CONTINUE",
+  "priority": "MEDIUM",
+  "recasts": 2,
+  "occupies_slot": true,
+  "next_objective": "One prospective six-programme, fixed1024 C-only learning recipe, final private64-world C/F/own-dwell panels; single-task assumption-qualified expected added-value study.",
+  "study_design_state": "Next objective selected by Portfolio and applied by original DM; C science card, sampling law/seed list, uncertainty method, source and invocation remain unbound/unperformed.",
+  "fixed_candidate_work": {
+    "programmes": 6,
+    "training_episodes": 6144,
+    "evaluation_episodes": 1152,
+    "updates": 12288,
+    "team_ticks": 1867776,
+    "final_checkpoints": 6,
+    "private_loads": 18
+  },
+  "cost_status": "1777.8s summed native reference;3000native/4800support are candidate DM planning estimates, not actual expenditure or owner caps. Complete cumulative costs UNKNOWN.",
+  "no_new_empirical_result_claimed": true,
+  "vacancy_count_created": 0,
+  "peer_changes": null,
+  "dialogue_release": "Owned by the original author after complete local archival/intake; actual release is recorded in the canonical shared registry transaction."
+}
