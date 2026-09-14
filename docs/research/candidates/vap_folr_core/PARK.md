@@ -1,5 +1,114 @@
 # FOLR PARK knowledge handoff
 
+## Current disposition after B02 — 2026-09-14
+
+**Reversible PARK/MEDIUM, selected by DM as a close call.** The entity-history
+family remains scientifically OPEN. The [final B02 intake](FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md#final-dm-lifecycle-decision--2026-09-14)
+records the actual P decision under standing unattended delegation after full
+independent review and response. No experiment, Monitor, pending provider request
+or Transport producer remains. The occupied research slot is released; Clerk
+owns report/integration, safe task archival and delegated vacancy coordination.
+No new resource, replacement direction or automatic reopening is selected here.
+
+### What changed and why PARK is now selected
+
+B02 completed the first prospective fresh-learning Generic64/BANK16 contrast on
+the unchanged equally informed H20 host: one fresh fit per arm, 5000 training
+episodes/4969 updates and 128 final greedy episodes each. Generic mean is
+-0.65296875; BANK mean -5.483828125. BANK-minus-Generic is **-4.830859375**, giving
+**GENERIC_ABOVE_MEI**. The observed gap is 4.830859375; excess beyond MEI 1 is
+3.830859375. E's original missing comparator remains missing; F's negative
+outcome-informed fixed-reference use remains separate. Neither is pooled into B02.
+
+This is new information since the preserved post-F PARK below. Re-entry selected
+the first missing learning contrast before seeing its result; that particular
+gap is now supplied. DM currently prefers to preserve the finite adverse BANK
+observation rather than acquire a broader same-host ranking across training
+realizations. This is a qualitative choice, not empirical futility, a universal
+negative or a cost/permission barrier. The complete [independent review](pro_packets/20260914_entity_history_b02_review/archive/RESPONSE.md)
+found no material design/primary/rule defect and challenged the value reasoning.
+DM accepts all findings in the [review response](pro_packets/20260914_entity_history_b02_review/INTAKE.md).
+
+The strongest opposition remains another fresh block: it could reveal a BANK gain,
+a near-tie or another adverse outcome and change development advice. Firstness and
+adverse signs do not by themselves settle its value. P and that alternative are
+not cleanly separated by evidence; the owner/audit record therefore marks
+**close-call**, not critic dissent or second recast. Full decision ownership
+remains with DM; review completion is not a lifecycle grant.
+
+### Lessons, limits and reusable assets
+
+- Separate newly learned package comparisons from evaluation of a historically
+  selected reference. B02 contributes a new BANK realization; F does not.
+- One training realization per arm has no training-population uncertainty estimate.
+  Shared seed labels do not produce independent arm draws or paired traffic worlds.
+- Generic's negative mean and 73/128 negative returns are not evidence of competence;
+  no absolute competence cutoff is defined, and negative returns are not collision
+  or failure rates. BANK has 121/128 negative returns. Absence of demonstrated
+  competence is not proof of incompetence.
+- Legal-information parity protects the comparison, while unlike architectures,
+  capacity and optimization leave component memory cause/necessity unidentified.
+  Changing-policy training curves establish no convergence, inevitable improvement
+  or budget-independent rank. There is no tuned-headroom, speed, C/UAV or transfer claim.
+- Native wall was **3041.46 s** for one valid complete learning comparison; study
+  elapsed approximately 3375 s and aggregate CPU 3041.57 s are distinct. The selected
+  support lower bound after remote cleanup is 29.0223255 s, excluding much other
+  work. Complete support/provider/direction cost remains UNKNOWN; E/F accounts and
+  original operational plans are preserved without an accounting reset.
+
+Frozen execution source is `82b12d7e0f205ea228ca69e28e581ca6ee5f2ca6`. Reusable B02
+assets are the [card](FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md),
+[complete result](FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md),
+[technical acceptance](entity_history_b02_781401/TECHNICAL_ACCEPTANCE.md),
+[machine summary](entity_history_b02_781401/RESULT_SUMMARY.json),
+[analysis script](entity_history_b02_781401/analyze.py),
+[figure](entity_history_b02_781401/RESULT_FIGURE.png),
+[Generic raw/checkpoint archive](entity_history_b02_781401/GENERIC_RAW.tar.gz),
+[BANK raw/checkpoint archive](entity_history_b02_781401/BANK_RAW.tar.gz) and
+[supervisor archive](entity_history_b02_781401/SUPERVISOR_RAW.tar.gz).
+Both complete fresh checkpoints, arrays, launch records and source remain preserved.
+They are evidence/reuse assets, not instructions to run a new result-bearing object.
+
+### Safe closeout and reopening conditions
+
+Published archive preservation at `88bc759283502a5047c89edab6b6dbce168c7b5b` preceded
+removal of only the B02 detached remote execution checkout and its two terminal
+supervisor directories. The [cleanup receipt](entity_history_b02_781401/CLEANUP_RECEIPT_20260914.json)
+retains exact paths, source, all member hashes, terminal/no-live-process checks and
+verified unregister/removal. No shared authoring checkout, object store or other
+direction was deleted. Historical E/F cleanup remains complete and separate.
+
+One post-B02 review Send is fully archived at
+`b4a67c7bf7b0eec726f107bf7acdf148f7e60109`, 20351 bytes, SHA256
+`f98b5af4b38c20777a6da5b142feec5d4c8e273a91051744c150f8a59f45ea34`.
+DM read the full response and responded to all findings. Exact owned browser-tab
+closure was confirmed using Agentify after correcting an insufficient CUA-inventory
+inference; both receipts remain in the [readback](pro_packets/20260914_entity_history_b02_review/READBACK.json).
+Conversation history and accepted effects are retained, with no duplicate Send.
+
+A useful same-host fresh block can reopen the direction when DM judges its possible
+change to package-development advice worth two full fits (205120 native ticks,
+9938 updates, 256 final episodes at the existing 5000/128 endpoints). Another
+information/lifetime contrast or longer-learning question can also be considered
+with explicit information parity and a finite scope. A concrete integrity finding
+or owner reconsideration request may change the decision. These are alternatives,
+not a cumulative checklist or a demand for new favorable evidence, novel mechanism,
+exact headroom, external customer, causal diagnosis or Portfolio permission.
+
+Any reopening dialogue must use the complete B02 evidence and this actual PARK
+reason, not recycle the superseded claim that the first fresh comparison is absent.
+The existing DM retains scientific selection, with actual slot coordination to
+avoid duplicate admissions. No timer, automatic consultation, empirical successor
+or empty observation wait is installed. Historical record-only instructions below
+belong to their old assignment and do not revoke current full-lifecycle delegation.
+
+## Historical post-F knowledge — preserved 2026-09-13 record
+
+The remaining sections preserve the earlier handoff and its intervening re-entry
+notice. Their current/missing/record-only language describes that earlier boundary;
+the B02 disposition above is the current research state.
+
+
 **Later disposition, 2026-09-14:** DM has selected bounded re-entry and a new
 fresh/fresh B02 learning comparison; see [re-entry intake](FOLR_REENTRY_INTAKE_20260914.md).
 The record-only boundary and PARK choice below describe the preserved earlier

@@ -30,26 +30,36 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
-**Current lifecycle: ACTIVE/MEDIUM for B02 scientific review and closeout.**
-Both selected fresh fits in [entity-history B02](FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md)
-completed on 2026-09-14: Generic mean -0.65296875, BANK mean -5.483828125,
-BANK-minus-Generic -4.830859375. The frozen branch is **GENERIC_ABOVE_MEI**.
-This is the first complete prospective fresh-learning comparison on this exact
-equally informed H20 host, with one training realization per arm. It establishes
-an observed package preference, not training-population superiority, component
-cause, convergence or Generic competence. E's original missing contrast remains
-unavailable; F's outcome-informed retained-reference use remains separate.
-See the [complete result](FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md)
-and [current intake](FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md). There is no live
-scientific invocation or selected successor. DM selects one independent Convergence
-review of the new interpretation and value judgment, then completes the lifecycle
-decision. The current recommendation is reversible PARK/MEDIUM; another fresh
-block remains a scientifically legitimate alternative, with no automatic launch.
+**Current lifecycle: reversible PARK/MEDIUM after B02 and full independent review
+on 2026-09-14; DM close-call judgment.** Both fresh fits completed: Generic mean
+-0.65296875, BANK mean -5.483828125, BANK-minus-Generic **-4.830859375**,
+so the frozen branch is **GENERIC_ABOVE_MEI**. This supplies the first complete
+prospective fresh-learning contrast on the exact equally informed H20 host.
+There is one training realization per arm, with no population, component-causal,
+competence, convergence, speed or general BANK-negative claim. E's original
+contrast remains unavailable; F's outcome-informed reference-use choice stays separate.
 
-The [re-entry intake](FOLR_REENTRY_INTAKE_20260914.md) records why the first missing
-fresh/fresh comparison merited one observation. Its rationale was independent of
-the eventual sign. Prior PARK and all negative evidence remain historical facts.
-Portfolio filled the ACVC vacancy; DM selected and completed this scientific object.
+The [final B02 intake](FOLR_ENTITY_HISTORY_B02_INTAKE_20260914.md#final-dm-lifecycle-decision--2026-09-14)
+records options P/B/L/C and selects P under standing delegation. The [independent
+review response](pro_packets/20260914_entity_history_b02_review/INTAKE.md) accepts
+all findings and preserves the substantive possibility that another fresh block
+could change development advice. PARK is a qualitative close call, not compelled
+by one adverse result or by completing the first comparison. Another same-host
+block is an eligible reopening option without novelty, a favorable pilot or
+Portfolio permission. The broader entity-history family remains scientifically OPEN.
+
+No successor, live scientific invocation or pending Pro request remains. Both
+remote runs and the one accepted review are fully preserved; exact owned remote
+copies and browser tab are closed out. Native wall was 3041.46 s; full cumulative
+support/provider cost remains UNKNOWN. The occupied research slot is released;
+Clerk owns integration, report and safe archival, not a new scientific approval.
+See the [current PARK knowledge](PARK.md) and [complete result](FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md).
+
+The [re-entry intake](FOLR_REENTRY_INTAKE_20260914.md) preserves the prospective
+reason for acquiring the first missing contrast, independent of its eventual sign.
+Portfolio filled the ACVC vacancy; DM selected and completed B02, then chose this
+new disposition from the changed evidence. Prior decisions and negative evidence
+below remain historical; they are not current dispatch instructions.
 
 **Previous lifecycle judgment (2026-09-13), superseded prospectively above:**
 Owner lifted the later operational pause on 2026-09-13. DM reconsidered the
