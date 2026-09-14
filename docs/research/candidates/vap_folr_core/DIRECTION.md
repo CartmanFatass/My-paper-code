@@ -30,7 +30,24 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
-**Current lifecycle: reversibly PARKED/MEDIUM by DM decision on 2026-09-13.**
+**Current lifecycle: ACTIVE/MEDIUM; bounded DM re-entry on 2026-09-14.**
+The [new intake](FOLR_REENTRY_INTAKE_20260914.md) prospectively changes the prior
+value judgment: the first complete fresh/fresh learning contrast merits one direct
+observation. DM selects [entity-history B02](FOLR_ENTITY_HISTORY_B02_SCIENCE_CARD_20260914.md),
+one new BANK16/Generic64 training block on the unchanged equally informed H20 host.
+The fixed F reference-use result remains GENERIC_ONLY_BANK_WORSE; E's missing
+contrast stays unavailable. Prior PARK and all negative evidence remain historical
+facts. Portfolio filled the ACVC vacancy; it did not select this scientific object.
+The next boundary is B02's complete result or concrete failure, followed by DM's
+intake/lifecycle choice, without an automatic second block or approval handshake.
+
+**Previous lifecycle judgment (2026-09-13), superseded prospectively above:**
+Owner lifted the later operational pause on 2026-09-13. DM reconsidered the
+runtime-policy change and retains this scientific PARK, independently of any
+wall-time estimate, investigation reference or missing permission. The
+[resume readback](pro_packets/20260913_post_f_scientific_review/INTAKE.md#owner-resume-and-runtime-policy-readback--2026-09-13)
+records the synchronized controls, comparison limits and preservation closeout.
+>>>>>>> 0a1b5facc (docs(folr): reopen for one fresh entity-history learning block)
 The fixed reference-use question is resolved. A fresh same-host learning block
 would supply the first complete fresh/fresh comparison here, not just another
 panel of the old BANK. DM currently judges that unresolved comparison insufficiently
@@ -46,11 +63,12 @@ below retain their original meanings. Assigned remote reclamation is complete;
 the [cleanup receipt](retained_reference_use_b01_781301/CLEANUP_RECEIPT_20260913.json)
 retains preservation hashes, terminal checks and all five verified removals.
 See the [DM lifecycle decision](FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md#dm-lifecycle-decision--2026-09-13-full-direction-delegation).
-The complete post-F independent scientific review found no result-invalidating
+ The complete post-F independent scientific review found no result-invalidating
 defect; DM accepts its R1/R2 reporting corrections and R3 judgment clarification
 in the [scientific-review response](pro_packets/20260913_post_f_scientific_review/INTAKE.md).
-No live scientific or Transport producer remains. Clerk retains the separately
-identified mechanical main-integration/reporting consequences.
+At that PARK closeout no live scientific or Transport producer remained. Clerk completed the four old
+main-preservation gaps and f80 cleanup publication; DM verified the exact accepted
+blobs. Current decision/report integration is separate from scientific execution.
 
 The observer-owned entity-history-before-aggregation B family remains OPEN on
 the lifecycle-identity-visible native Traffic Junction variant. Its allocated

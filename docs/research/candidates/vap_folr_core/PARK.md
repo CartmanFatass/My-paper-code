@@ -1,5 +1,11 @@
 # FOLR PARK knowledge handoff
 
+**Later disposition, 2026-09-14:** DM has selected bounded re-entry and a new
+fresh/fresh B02 learning comparison; see [re-entry intake](FOLR_REENTRY_INTAKE_20260914.md).
+The record-only boundary and PARK choice below describe the preserved earlier
+assignment. They are not the current execution instruction. All historical
+measurements, reasons, cleanup facts and claim limits remain unchanged.
+
 Recorded 2026-09-13 from authoring branch `codex/vap-folr`, evidence revision
 `dcbf9a83ab3253ad822be276a8afbad59111c3ba`.
 
