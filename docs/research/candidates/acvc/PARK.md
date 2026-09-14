@@ -1,3 +1,4 @@
+> Historical PARK knowledge record. Portfolio prospectively reopened ACVC with CONTINUE on 2026-09-14; see the current DIRECTION.md and ACVC_CLUSTER_DEPLOYMENT_B03_SCIENCE_CARD_20260914.md. The dated rationale, failed families and retained assets below remain evidence, not the current lifecycle or dispatch route.
 # ACVC · 可逆 PARK 知识交接
 
 2026-09-14 UTC（本地2026-09-13）。DM 在完整独立科学复核后作出生命周期决定；不是 Pro 批准，也不是因传输故障而放弃。详见[最终复核回应与决定](ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md#complete-scientific-review-and-dm-decision--2026-09-14-utc)。

@@ -11,8 +11,8 @@ heartbeat_state = "MISSING"
 heartbeat_target = "unassigned"
 
 main_writer = "unclaimed"
-main_writer_event = "RCLE_FINAL_PEER_DELIVERY_RECORDED_RELEASED_20260914"
-main_writer_turn = "01a09e10-9d9f-7f82-87c0-d58cbe0c7618"
+main_writer_event = "ACVC_B03_ACCEPTED_SOURCE_TRANSACTION_RELEASED_20260914"
+main_writer_turn = ""
 
 [retired_clerk]
 thread_id = "01a09d6c-e4e0-7613-ba99-7b0a1b6c540e"
