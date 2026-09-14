@@ -203,18 +203,19 @@
     "status": "Full scientific review not formed or archived. Exact unsent operation and all failure receipts preserved; no new request or scientific invocation."
   },
   "execution_control": {
-    "state": "OWNER_PAUSED",
+    "state": "OWNER_RESUMED_TECHNICAL_DEPENDENCY",
     "paused_utc": "2026-09-14T00:30:49Z",
+    "resumption_observed_utc": "2026-09-14T00:43:00Z",
     "in_flight_handles": [],
     "provider_request_in_flight": false,
     "active_observer": null,
     "retained_native_transport": "/root/acvc_transport",
     "scientific_lifecycle": "ACTIVE unchanged; this execution pause is not PARK/CLOSE",
-    "resume_condition": "Explicit owner resumption first; then same HANDOFF/request/operation and permitted runtime recovery, full scientific review and DM findings response. No automatic Send or successor."
+    "resume_condition": "Owner has explicitly resumed. Current prerequisite is permitted user-managed Agentify reconnection preserving existing Chrome/profile/conversations/operation store; then original request-batch Transport recovers the unchanged unsent operation, full scientific review and DM findings response. Do not bypass prior policy refusal or duplicate Send."
   },
-  "status": "OWNER_PAUSED at a safe recoverable boundary. Valid B02 result/raw evidence/checkpoint retained and remote cleanup complete; no run, generation or observation in flight. Prepared review remains explicitly unsent. Runtime recovery, independent review, DM findings response and lifecycle judgment remain unfinished and inactive; scientific lifecycle unchanged.",
+  "status": "OWNER_RESUMED; valid B02 result/raw evidence/checkpoint retained and remote cleanup complete. No run, generation or observation in flight; unchanged review is explicitly unsent. DM recovery currently needs permitted Agentify reconnection; prior process action was policy-rejected and is not retried/bypassed. Scientific review, findings response and lifecycle judgment remain unfinished. ACTIVE lifecycle unchanged; no third fit selected.",
   "stop": "No scientific retry/replacement, extra panel, checkpoint selection or automatic successor.",
-  "updated_utc": "2026-09-14 00:30:49 UTC",
+  "updated_utc": "2026-09-14 00:43:00 UTC",
   "monitor": {
     "native": "/root/acvc_monitor",
     "adopted": true,
