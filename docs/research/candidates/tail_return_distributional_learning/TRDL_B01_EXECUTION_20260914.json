@@ -40,7 +40,7 @@
     "optimizer_calls": 128
   },
   "source_acceptance": "DM accepts reviewed0874 after both P2 repairs and focused tests; actual-node admission remains immediately adjacent in each command.",
-  "current_state": "Both original arms admitted/accepted; native Monitor adopted; no terminal result yet.",
+  "current_state": "Both originals complete/exit0 and collected; Monitor active_set empty; scientific intake accepted. Full result/plan review is next, with no additional invocation grant.",
   "admissions": {
     "SCALAR": {
       "assessed_at": "2026-09-15T03:34:21.089801Z",
@@ -61,5 +61,11 @@
   },
   "monitor": "/root/dm_trdl_vacancy_20260914/monitor_trdl_b01",
   "monitor_delivery": "MONITOR_ADOPTED received via native_final; send_message unavailable in leaf runtime. Same child resumed for terminal-only native delivery.",
-  "monitor_last_direct_observation": "2026-09-15T03:36:15Z: both running, exit null, episode/update files advancing; node timestamp corrected after initial receipt's erroneous2026-09-14 date."
+  "monitor_last_direct_observation": "2026-09-15T03:36:15Z: both running, exit null, episode/update files advancing; node timestamp corrected after initial receipt's erroneous2026-09-14 date.",
+  "terminal_observed_at": "2026-09-15T03:39:17Z",
+  "terminal_events": [
+    "TRDL-B01-SCALAR-TERMINAL-20260915T033917Z",
+    "TRDL-B01-Q32-TERMINAL-20260915T033917Z"
+  ],
+  "result_intake": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_INTAKE_20260914.md"
 }
