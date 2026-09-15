@@ -50,3 +50,28 @@ handle. Its actual current capability/adoption/terminal return will be recorded
 directly; dispatch alone is not MONITOR_ADOPTED. If send_message is unavailable,
 the existing explicit terminal-only native-final fallback applies, without a
 fabricated intermediate delivery or a claim of continuous historical coverage.
+
+## G collected and second original invocation accepted
+
+G exited0 at 2026-09-15T02:53:14Z, raw supervisor timestamp. The terminal-only
+Monitor returned finished/exit0 at 02:55:12Z; its actual state was local under
+generic/MONITOR_STATE.json, with the corrected location and delivery capability
+preserved in GENERIC_MONITOR_TERMINAL.json. Its copied runner_pid is not an
+independently measured learner PID. No intermediate direct adoption was claimed.
+
+DM collected the full G at 02:56:49Z, verified source/counts/checkpoint and all
+10 transferred archive members, then accepted it in GENERIC_INTAKE.md. Original
+wall2112.27s exceeded the ordinary1800s plan, which is not an owner hard cap.
+This is not a score-based change or a scientific retry.
+
+Z was accepted at 2026-09-15T02:59:58.244731Z, supervisor PID3703852, handle
+folr-current-increment-b01-781801-current-only. Its new adjacent admission at
+02:59:58.262941Z passed with physical/effective15626321920 bytes. The G input
+summary SHA256 is 49b98f1ce155c4c90798692c3a8de844293e5133b669ed4d926b0f3fd2a99e93,
+verified unchanged before the exact published command. Source remains8ad304d61.
+Both original invocations are now accepted; no third fit or retry is selected.
+
+The same native terminal-only Monitor is resumed for Z only. Its specified local
+state path is C:/Projects/HMASD-worktrees/codex-vap-folr/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/MONITOR_STATE.json.
+It reports only the supervisor PID unless it independently measures a learner PID.
+The actual pending producer is Z plus this observation assignment; G is complete.
