@@ -1,0 +1,43 @@
+{
+  "assignment": "TRDL-B01",
+  "dm": "/root/dm_trdl_vacancy_20260914",
+  "author_worktree": "C:/Projects/HMASD-worktrees/codex-trdl",
+  "branch": "codex/trdl",
+  "source_sha": "0874ccfb6102859e5cd7ecfbc4b7d578eab06d91",
+  "execution_node": "hmasd-wsl-node",
+  "remote_cwd": "/home/wu/hmasd-worktrees/trdl-b01-9601",
+  "supervisor": "/usr/local/bin/agent-task",
+  "python": "/home/wu/.venvs/hmasd/bin/python",
+  "output_root": "/home/wu/hmasd-worktrees/trdl-b01-9601/temp/directions/tail_return_distributional_learning/exp/b01_9601",
+  "arms": [
+    {
+      "arm": "SCALAR",
+      "handle": "trdl-b01-9601-scalar",
+      "command": "cd /home/wu/hmasd-worktrees/trdl-b01-9601 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/trdl-b01-9601/temp/directions/tail_return_distributional_learning/exp/b01_9601/SCALAR_ADMISSION.json && /usr/bin/time -q -f '{\"wall_seconds\":%e,\"user_seconds\":%U,\"system_seconds\":%S,\"peak_rss_kib\":%M,\"exit_code\":%x}' -o /home/wu/hmasd-worktrees/trdl-b01-9601/temp/directions/tail_return_distributional_learning/exp/b01_9601/SCALAR_INVOCATION_TIME.json /home/wu/.venvs/hmasd/bin/python -u scripts/run_trdl_b01.py arm --arm SCALAR --seed 9601 --out /home/wu/hmasd-worktrees/trdl-b01-9601/temp/directions/tail_return_distributional_learning/exp/b01_9601/SCALAR --launch-sha 0874ccfb6102859e5cd7ecfbc4b7d578eab06d91 --max-seconds 7200",
+      "output": "/home/wu/hmasd-worktrees/trdl-b01-9601/temp/directions/tail_return_distributional_learning/exp/b01_9601/SCALAR"
+    },
+    {
+      "arm": "Q32",
+      "handle": "trdl-b01-9601-q32",
+      "command": "cd /home/wu/hmasd-worktrees/trdl-b01-9601 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/trdl-b01-9601/temp/directions/tail_return_distributional_learning/exp/b01_9601/Q32_ADMISSION.json && /usr/bin/time -q -f '{\"wall_seconds\":%e,\"user_seconds\":%U,\"system_seconds\":%S,\"peak_rss_kib\":%M,\"exit_code\":%x}' -o /home/wu/hmasd-worktrees/trdl-b01-9601/temp/directions/tail_return_distributional_learning/exp/b01_9601/Q32_INVOCATION_TIME.json /home/wu/.venvs/hmasd/bin/python -u scripts/run_trdl_b01.py arm --arm Q32 --seed 9601 --out /home/wu/hmasd-worktrees/trdl-b01-9601/temp/directions/tail_return_distributional_learning/exp/b01_9601/Q32 --launch-sha 0874ccfb6102859e5cd7ecfbc4b7d578eab06d91 --max-seconds 7200",
+      "output": "/home/wu/hmasd-worktrees/trdl-b01-9601/temp/directions/tail_return_distributional_learning/exp/b01_9601/Q32"
+    }
+  ],
+  "actual_launches": 0,
+  "retries_allowed": 0,
+  "ordering": "Two separately admitted original arms; may overlap if actual memory admission permits. No score-dependent arm selection.",
+  "watchdog_note": "7200 seconds per whole original is a prospective operational watchdog, selected before exposure because900 seconds is an unmeasured plan for196608 native ticks plus replay/closeout per arm. It is not an additional scientific allowance. Fixed endpoints and two originals remain. Record actual wall including final exit; a terminating watchdog retains partial facts and authorizes no retry.",
+  "initial_ordinary_plans_seconds": {
+    "per_arm": 900,
+    "native_sum": 1800,
+    "support": 1200,
+    "combined": 3000
+  },
+  "scientific_exposure_per_arm": {
+    "train_episodes": 512,
+    "eval_episodes": 256,
+    "horizon": 256,
+    "optimizer_calls": 128
+  },
+  "source_acceptance": "DM accepts reviewed0874 after both P2 repairs and focused tests; actual-node admission remains immediately adjacent in each command."
+}
