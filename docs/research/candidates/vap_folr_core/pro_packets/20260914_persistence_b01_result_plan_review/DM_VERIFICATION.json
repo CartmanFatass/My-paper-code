@@ -1,0 +1,87 @@
+{
+  "verified_utc": "2026-09-15T01:49:26.053493+00:00",
+  "response_commit": "5f49770d9d87aa952a1894b522056ce158000545",
+  "response_git_blob": "81599b0853a9555c7314918dc95a78507bb2ef18",
+  "response_sha256": "5614aaefc7ef19b15671606e09127544c0fbd83c0aa95138efebede465a15e2e",
+  "response_bytes": 30597,
+  "response_lines": 123,
+  "full_response_read_by_DM": true,
+  "only_scoped_response_changed": [
+    "docs/research/candidates/vap_folr_core/pro_packets/20260914_persistence_b01_result_plan_review/archive/RESPONSE.md"
+  ],
+  "response_reference_mappings_match": 22,
+  "actual_Pro_source_access": "Pro reports all22 read; mappings verified, raw code/tests/checkpoints and unlisted library source not independently executed/read by Pro",
+  "prompt_sha256": "243b5ccf27c917cac94dd47cdf482d4302a055902f0762a4ff0d383a6d3dae57",
+  "prompt_bytes": 1932,
+  "configured_prompt_matches_preserved_input_and_operation_hash": true,
+  "accepted_raw_DOM_not_in_this_archive": true,
+  "provider_user_id": "ae569981-16e3-4ee9-8653-4b0f9975cd82",
+  "provider_assistant_id": "c2975baf-9305-47b7-b30c-114db350e6a1",
+  "operation_id": "a8b4b1b1-bb41-493e-909b-39ab44091633",
+  "provider_facts": {
+    "provider": "chatgpt",
+    "product_model": "Latest",
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "reasoning_effort": "Pro",
+    "tab_id": "c58747e5-d6e2-49f7-9175-f16009d9a470",
+    "tab_protected": false,
+    "conversation_url": "https://chatgpt.com/c/6aa18137-9d88-83e8-a01f-46630813faf8",
+    "branch_head": "5f49770d9d87aa952a1894b522056ce158000545"
+  },
+  "pre_send_history_source": "Native Transport reports one verified pre-Send menu-open failure, followed by same-operation one-Send success; not independently reenacted by DM",
+  "issue_comment_id": 5673326949,
+  "issue_comment_matches_fixed_TASK_and_response": true,
+  "issue_comment_body_exactly_matches_Transport": true,
+  "transport_raw_archive": {
+    "path": "docs\\research\\candidates\\vap_folr_core\\pro_packets\\20260914_persistence_b01_result_plan_review\\archive\\TRANSPORT_RAW.tar.gz",
+    "bytes": 15297,
+    "sha256": "807262d3774978e07bf8a6b1c92b0da5334fab47cf444c222ade018ecd6afef8",
+    "members": [
+      {
+        "name": "AGENTIFY_CLEANUP_RECEIPT.json",
+        "bytes": 289,
+        "sha256": "1cd051abb23159cda0e5a2a4aa10d58020b2c4c2885a14b0fcf5ae9eb65f5749"
+      },
+      {
+        "name": "GITHUB_RESPONSE.md",
+        "bytes": 30597,
+        "sha256": "5614aaefc7ef19b15671606e09127544c0fbd83c0aa95138efebede465a15e2e"
+      },
+      {
+        "name": "PACKET_MANIFEST.json",
+        "bytes": 1828,
+        "sha256": "4f3d6c41abd4be82cfffcdc172d762505e85328d80b366e9a060a1f8c12cbf38"
+      },
+      {
+        "name": "PREFLIGHT.json",
+        "bytes": 5007,
+        "sha256": "18dfc2029f8afc40a06e9c14ba389ab81d3d662ab9e209483a6f9560a6d89a79"
+      },
+      {
+        "name": "PROMPT_BODY.md",
+        "bytes": 1932,
+        "sha256": "243b5ccf27c917cac94dd47cdf482d4302a055902f0762a4ff0d383a6d3dae57"
+      },
+      {
+        "name": "RESPONSE.md",
+        "bytes": 124,
+        "sha256": "80caf3b0566edca520a95a08ec48e220c7def32748a4de7ce01c2ef5e05c657d"
+      },
+      {
+        "name": "TRANSPORT_FACTS.json",
+        "bytes": 6071,
+        "sha256": "120e5babd7381084b4629ec87b0fcdf8532ecf348cb3a2aa1b9c0e95b9afabeb"
+      }
+    ]
+  },
+  "native_return_method": "actionable native_final; leaf send_message unavailable",
+  "checkout_EOL_reconciliation": {
+    "initial_checkout_bytes": 30720,
+    "initial_checkout_CRLF": 123,
+    "git_and_transport_original_bytes": 30597,
+    "only_CRLF_to_LF_differed": true,
+    "worktree_restored_from_immutable_Git_bytes": true
+  },
+  "local_comment_readback_repair": "Initial locale-default text decoding differed from UTF-8 GitHub JSON; explicit byte/UTF-8 JSON reads match exactly. No external artifact changed."
+}
