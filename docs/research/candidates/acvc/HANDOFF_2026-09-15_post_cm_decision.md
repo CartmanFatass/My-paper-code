@@ -54,13 +54,18 @@ commits are cherry-picked into `main` by the hub).
   and note that `CARD` points at the intake document.
 - `DIRECTION.md` addendum for the selected object at the next clean boundary.
 
+## Block 2 complete (2026-09-15 16:55Z)
+
+Both granted fits finished exit 0, were collected, reduced through the b02 wrapper and
+intaken: D2 = F−M −.03919 J (M_ABOVE_MEI), reversing block 1; F−C and F−own-dwell UP in
+both blocks; two-block pooled F−M −.0079 J with a df = 1 interval [−.406, +.390]
+([E0](ACVC_CLUSTER_MAPPO_COMPARISON_B02_RESULT_EVIDENCE_20260915.md),
+[intake](ACVC_CLUSTER_MAPPO_COMPARISON_B02_INTAKE_20260915.md)). The grant is consumed.
+
 ## First resume step
 
-Check `agent-task status acvc-mappo-m-b02-28431-2dc9631c`. When finished with exit 0:
-collect its output root into `evidence/cluster_mappo_comparison_b02_20260915/native/M/` with
-an `M_COLLECTION.json` mirroring the C one; run `--mode reduce` through the b02 wrapper over
-both originals; write the block-2 result evidence and intake (D2 alone first, supporting
-contrasts, D1/D2 individually, equal-block accumulation with provenance, Chinese brief),
-ledger row and P1 trace; preserve; then assigned cleanup of the remote worktree
-`/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8` and staging `/home/wu/hmasd-inputs/acvc-mappo-b02-28431`
-with a CLEANUP.json as in block 1. The grant ends there; no successor is authorized.
+Send the direction-tier question to `em:acvc:convergence` (packet under
+`docs/research/candidates/acvc/pro_packets/20260915_post_block2_convergence/`): close the C/M
+family with the internal-usefulness reading (A), a bounded baseline-calibration design (B), or
+a third unchanged block (C); DM recommends B or A. Then verify the remote cleanup
+(CLEANUP.json) and hold ACVC ACTIVE-idle until the answer. No fit is authorized.

@@ -32,7 +32,7 @@ ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-ta
 | Arm | Handle | Launch (UTC) | Remote pid | Admission | State |
 | --- | --- | --- | ---: | --- | --- |
 | C | acvc-mappo-c-b02-28431-2dc9631c | 2026-09-15T13:26:42Z | 3732902 | passed, 5,225,508,864 B available | finished exit 0; native wall 2,495.72 s, peak RSS 562,308 KiB (beside four FSD fits); collected to [native/C/](native/C/), [C_COLLECTION.json](C_COLLECTION.json) |
-| M | acvc-mappo-m-b02-28431-2dc9631c | 2026-09-15T16:01:41Z | 3736172 | passed, 13,061,177,344 B available | running beside five FSD elements (single thread); expected end about 16:45Z |
+| M | acvc-mappo-m-b02-28431-2dc9631c | 2026-09-15T16:01:41Z | 3736172 | passed, 13,061,177,344 B available | finished exit 0 about 16:42Z; native wall 2,427.41 s, peak RSS 585,504 KiB (beside five FSD elements); collected to [native/M/](native/M/), [M_COLLECTION.json](M_COLLECTION.json) |
 
 Sequencing per the grant: ready FSD work has first access; this fit is single-thread backfill
 (block-1 peak RSS 561,040 / 589,924 KiB) and did not displace any FSD element (available
@@ -40,3 +40,16 @@ memory 5,049 MiB before launch, 4,319 MiB after). Operator observation at launch
 is empty (0 bytes); the operator's "[exited with code 0]" note was the tool's own trailer, not
 file content. Observation continues through the hub's monitor; collection into this folder at
 terminal state.
+
+## Reduce and accumulation (2026-09-15 16:50Z, hub, local)
+
+```
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/run_acvc_cluster_mappo_comparison_b02.py --mode reduce \
+  --output temp/directions/acvc/exp/cluster_mappo_comparison_b02_reduce_20260915 \
+  --c-summary <evidence>/native/C/summary.json --m-summary <evidence>/native/M/summary.json
+```
+
+Output copied to [COMPARISON.json](COMPARISON.json); per-world rows exported to
+[WORLD_DIFFERENCES.csv](WORLD_DIFFERENCES.csv); the fixed equal-block accumulation with block 1
+computed by hand into [TWO_BLOCK_ACCUMULATION.json](TWO_BLOCK_ACCUMULATION.json). No native
+invocation; analysis only.
