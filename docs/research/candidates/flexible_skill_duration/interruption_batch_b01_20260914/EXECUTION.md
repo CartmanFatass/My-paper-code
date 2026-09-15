@@ -309,6 +309,39 @@ invented timestamp or status inference follows. Original5's terminal is verified
 this discovery does not invent an earlier directly received adoption for it.
 At this revision: six accepted, five complete endpoints, one live, two unsubmitted.
 
+### Two-block primary available; original7 continues
+
+I1280/772103 returned terminal exit0, PID3715954, tmux absent and observed
+elapsed1362s. The complete endpoint/source/configuration/actual learner checks
+pass with finite update losses. J is0.4015695357830863; joint rows
+5734/5234/5161/5036/5226 require75/75/75/60/75 coordinator steps,360 total.
+Whole-command wall1319.23s, user5152.13s/system74.71s, peak RSS3558196KiB, exit0.
+Summary SHA256
+`2d8cff9b8afd236a3fdf33b0b512706b0227feb5cb9bd667b8763e2fbcf9d567`;
+archive SHA256
+`99417affbb004d2b594a5461c134aec376512bfbfd1cad08fd007bf25d34b1c7`.
+
+Both predeclared primary training blocks are now operand-complete:
+−0.026440300139166675 and+0.08464985087421936J. Equal-weight mean
+**+0.029104775367526342J**, sample SD0.07855259910460288 and
+SE0.05554507550669301. The card's iid-normal/df1 working-model95% interval is
+[−0.6766623261067976,+0.7348718768418502]. Its uncheckable two-block assumption
+and broad precision are explicit; it is not verified interval coverage. The mean
+is above the declared+.01 MEI, a bounded local signal, but the two blocks disagree
+in sign and provide weak training precision. No stable renewal benefit follows.
+Conditional episode precision has not replaced training uncertainty. The low-batch,
+marginal and interaction aggregate readouts still lack original7/8.
+
+Original7 `fsd-ib-b01-772103-D128` is accepted from168e61295. Its adjacent
+admission at `2026-09-15T06:29:41.180525Z` passed with15023423488 bytes.
+DM read its actual adoption using duplicate-key-preserving parsing: running,
+PID3719200, tmux active, exit null. Repeated aggregate-state merging remained
+faulty, so DM now owns the aggregate format repair at the safe boundary; the
+same Monitor continues exact-handle observation/native terminal return. A final
+separate single-handle adoption file will avoid further aggregate overwrites.
+Current allocation: seven accepted, six complete endpoints, one live, one
+unsubmitted. Original8 is the last preselected fit before the owner pause closeout.
+
 ## Collection and preservation inventory
 
 Collect every original summary, training rows, logs, adjacent admission,
