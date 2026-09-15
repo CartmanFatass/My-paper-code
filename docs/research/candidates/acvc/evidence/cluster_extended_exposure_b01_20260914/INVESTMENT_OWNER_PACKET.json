@@ -1,0 +1,43 @@
+{
+  "question": "ACVC已完成更长训练及完整审查：建议再投资一个固定低学习率对原学习率的两臂B，还是只整理保留现有F？",
+  "changes_if_approved": [
+    {
+      "target": "ACVC 下一有限投资",
+      "from": "原1024/4096单programme与完整review已结束，尚无后继额度",
+      "to": "仅在Portfolio选择后建立1e-4/3e-4两个fresh4096训练、六个final C/F/停留面板；不重开旧C、不自动追加"
+    }
+  ],
+  "if_refused": "仍提交完整反案供Portfolio选择；无本地PARK或新增实验。可保留F与全部证据，明确无新producer的ACTIVE-idle或由Portfolio作最小正式处置。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_EXTENDED_EXPOSURE_INVESTMENT_REPORT_20260914.md",
+      "quote": "I favor buying this one recipe comparison. It directly compares two executable late proposer recipes and measures whether F's useful increment persists on what each actually attains.",
+      "why": "相同延长训练的重复可能仍留在同一弱C歧义；固定两配方能改变实际采用哪种proposer以及是否保留F的选择。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_EXTENDED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md",
+      "quote": "The designated directly paired change **G_dwell=.029538626341757208 J**, conditional SE=.012601448530551193, is **INCREASE**.",
+      "why": "这次投资完成了局部较晚用途问题；新问题须不同于重复增益符号，而不能把有用结果当普遍结论。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_extended_exposure_b01_scientific_review/archive/RESPONSE.md",
+      "quote": "I favor consolidating the bounded optional-package result now rather than automatically repeating the exposure programme.",
+      "why": "独立审查者优先整理，认为下一次可能仍未得到更强C；DM的不同建议明确提交给Portfolio判断。"
+    }
+  ],
+  "uncertainty": [
+    "低学习率只是待检验假设，可能更差或仍波动；没有文献或诊断证明它能改善C。",
+    "两个fresh配方仍只有一个训练配对，不证明稳定优势、tuned headroom、因果或安全。",
+    "缺乏匹配host的tuned headroom不是启动或停止门槛；recasts2的最低争用顺序保留。"
+  ],
+  "cost": {
+    "compute": "建议而未授予：2fits，8192训练集，384评价集，2195456 team ticks，16384 Adam。粗native参考2461.16秒，非实测新耗时/上限；新增support/provider未知。当前报告/咨询0新增learner。",
+    "owner_time": "无需逐步批准；可异步覆盖建议或后续完整Portfolio应用。",
+    "reversibility": "reversible",
+    "waits_on_this": "不等owner回复。共享Portfolio先由MGTAP完成归档/intake，释放后才Send；新数值工作等待该节点真实选择。"
+  },
+  "verdict_text": "Recommendation to Portfolio: CONTINUE for one fixed lower-learning-rate versus current-rate final4096 B, consisting of two fresh C-only fits and six private final C/F/own-dwell panels.",
+  "source": "docs/research/candidates/acvc/ACVC_POST_EXTENDED_EXPOSURE_INVESTMENT_REPORT_20260914.md"
+}
