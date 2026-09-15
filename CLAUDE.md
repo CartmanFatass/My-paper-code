@@ -113,11 +113,21 @@ rolling chains; 2026-09-13 DM autonomy; 2026-09-14 two-axis calibration, evidenc
 bind Claude sessions exactly as they bind Codex. Where a Claude file below is silent, the Codex
 role file or skill it was ported from applies.
 
+**Owner instruction 2026-09-15 05:45 PDT (supersedes the read-only rule above for Claude
+sessions):** the restriction is lifted. Any file, including `AGENTS.md`, `.agents/**`, `.codex/**`
+and the shared transport state, may be modified when the work needs it, provided every change is
+traceable through Git history (commit by pathspec with the runtime trailers) and documented under
+`docs/`: one row per change in `docs/Claude_docs/changes/<date>-<slug>.md`, indexed by
+`docs/Claude_docs/README.md`. The transport registry and transport scripts are basic tools (owner
+05:38 PDT). Unchanged: no `git add -A`/stash/reset/history rewrites, no evidence deletion, and
+scientific-meaning changes still follow the decision ladder in `AGENTS.md` section 2.
+
 ### Claude Code session rules (formerly AGENTS.md Appendix B)
 
 - `CLAUDE.md` at the repository root carries the environment, commands, architecture, and
-  repo-specific working rules; it is tracked. `.claude/settings.json` denies edits to the Codex
-  control plane.
+  repo-specific working rules; it is tracked. `.claude/settings.json` still carries the
+  2026-09-06 deny rules on the Codex control plane; the hub cannot edit its own settings, so the
+  owner removes them by hand when the lifted restriction should take effect for the file tools.
 - Deliverables of a Claude session (reviews, plans, experiment designs and results outside the
   research authority tree) live under `docs/Claude_docs/<category>/`, indexed by its README.
   Research authority records (cards, intakes, `DIRECTION.md`, decisions, handoffs, ledger,

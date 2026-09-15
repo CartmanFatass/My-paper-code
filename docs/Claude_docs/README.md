@@ -22,8 +22,14 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 | `plans/` | Follow-up plans written for alignment with the owner: concern registers, candidate schemes, experiment ladders, and the decisions still open. |
 | `artifacts/` | Rendered, published forms of the above and the script that builds them. |
 | `experiments/` | B-class experiment designs and result documents for the duration direction (E0 onward). |
+| `changes/` | Running record of control-plane and shared-state changes made by the Claude hub (owner instruction 2026-09-15: any change is allowed if traceable in Git and documented here). |
 
 ## Documents
+
+### changes/
+
+- `2026-09-15-control-plane-changes.md` — transport tab discipline, registry reconciliation, the
+  lifted restriction, and the pending `bind_conversation.py` root-cause fix.
 
 ### reviews/
 
