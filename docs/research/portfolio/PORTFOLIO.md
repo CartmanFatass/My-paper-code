@@ -6,7 +6,7 @@
 
 | 方向 | 当前科学位置 | 当前 producer / 下一事件 |
 | --- | --- | --- |
-| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。final-only 1e-4/3e-4 配对 B 的卡、实现、13项检查和独立review修复已接受；两个 originals 均在 exact source 与 fresh admission 下各接受一次。 | 两 handles 已交原 Monitor，真实 adoption 尚未返回，DM 不杜撰 PID 并保留pending交接责任；随后完成收集、intake和cleanup。无新recast/PARK/default/retry或自动追加。 |
+| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。fixed-rate B 已完成：primary lowC−refC −.1285335613 J（DOWN），两率F对照均UP；各4096train/8192Adam/192eval、exit0，限于一个匹配训练block。 | DM 继续完整 Convergence 科学/计划 review 与 exact remote reclamation；无第三fit/retry，保留3e-4 reference与optionalF。先前未获支持的Monitor adoption/time字段已更正，不声称live coverage。 |
 | vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。fresh Z−G B 已按 object-tier standing delegation 选定；卡、实现、独立review、检查和exact命令已接受，两原始各5000/4969/128。 | G handle 在 source8ad304d61 与 fresh admission 下运行；terminal-only Monitor 已接任务但未伪称adoption。G终态后由同一DM收集并fresh admission启动卡内Z；retry0，不把A−Z与旧A−G拼成排名。 |
 | tail_return_distributional_learning | [ACTIVE/MEDIUM/recasts0](../candidates/tail_return_distributional_learning/DIRECTION.md)。零暴露A01已完成：native五UAV/H256与DENSE/GRU64可复用；scalar与Q32被明确为学习同一lower-tail目标W的两种方法。 | prospective B01 card 已形成，393216 ticks/256 Adam仅为方案计数；无实现或实测可行性，旧3000秒offer未拨款。DM 正准备唯一B01投资问题并使用自己的Transport；当前无其他共享 Portfolio writer。 |
 
