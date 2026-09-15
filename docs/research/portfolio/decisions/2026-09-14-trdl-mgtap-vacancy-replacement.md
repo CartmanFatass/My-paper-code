@@ -1,0 +1,7 @@
+# Portfolio vacancy replacement — TRDL for MGTAP slot
+
+**PRO_FINAL / OWNER_DELEGATED / ROOT_INTEGRATED.** The complete Portfolio response selects `tail_return_distributional_learning` (TRDL) as ACTIVE/MEDIUM, recasts0, for the one slot released by MGTAP's reversible PARK. ACVC and FOLR retain their existing occupied slots; MGTAP stays PARKED/MEDIUM; every unselected direction keeps its lifecycle and evidence.
+
+The selected initial assignment is a zero-new-exposure A/RECON preparation. One Astra/max DM reads the current TRDL direction and directly relevant design/code surfaces, defines the distributional and scalar updates under the same lower-tail objective, and returns one concrete prospective B card with host, legal information, training/evaluation unit, separate-arm worst64-of256 primary, local MEI reason, dominant work factors, resource plan and minimal implementation outline, or one precise incompatibility and smallest correction. It performs no fit, native environment/evaluation call, optimizer update, cost pilot or historical numerical rerun. The historical 3000-second offer is not activated.
+
+Selection fills the management vacancy without claiming TRDL efficacy or creating a fourth slot. CPCP remains the strongest stated alternative. Any later numerical investment follows the concrete prepared object and current authority; preparation completion alone does not release the direction. Complete response and conformance intake are [archived here](../pro_packets/20260914_mgtap_vacancy_replacement/INTAKE.md).

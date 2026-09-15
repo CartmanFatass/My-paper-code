@@ -1,0 +1,42 @@
+{
+  "question": "是否以TRDL填补MGTAP正式PARK释放的唯一科研席位，并先执行零新实验暴露的首对象准备？",
+  "changes_if_approved": [
+    {
+      "target": "PORTFOLIO.md · tail_return_distributional_learning",
+      "from": "PARKED/MEDIUM，注册但无DM/工作区/实验拨款",
+      "to": "ACTIVE/MEDIUM/recasts0，占用第三席；一个A/RECON准备任务，零result-bearing invocation"
+    }
+  ],
+  "if_refused": "保持ACVC/FOLR两席和一个空缺；不恢复MGTAP，不启动TRDL数值实验，并由同一Portfolio节点处理明确修订。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_mgtap_vacancy_replacement/archive/RESPONSE.md",
+      "quote": "Select TRDL — tail_return_distributional_learning — for the single released MGTAP place.",
+      "why": "完整Portfolio决定给出唯一方向、生命周期和有界初始任务。"
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/DIRECTION.md",
+      "quote": "A distributional training baseline may improve finite lower-tail cooperative return over a scalar baseline aimed at the same lower-tail objective.",
+      "why": "问题具体且可由一个有限的同目标比较区分。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_mgtap_vacancy_replacement/archive/RESPONSE.md",
+      "quote": "Absence of adverse TRDL data is not evidence in its favor.",
+      "why": "TRDL尚无功效证据，首任务必须停留在设计与工作量准备。"
+    }
+  ],
+  "uncertainty": [
+    "当前TRDL实现、宿主、训练长度、更新定义和完整成本尚未建立。",
+    "CPCP是最强替代方向，当前选择不表示其科学价值较低。"
+  ],
+  "cost": {
+    "compute": "本次A/RECON为0 fits/0 native env或evaluation calls/0 optimizer updates；人工准备成本存在但未量化。",
+    "owner_time": "无需同步批准；可异步覆盖。",
+    "reversibility": "reversible",
+    "waits_on_this": "第三方向DM创建与首对象准备"
+  },
+  "verdict_text": "Select TRDL — tail_return_distributional_learning — for the single released MGTAP place. Reopen it as ACTIVE/MEDIUM for one bounded, zero-new-exposure first-object preparation assignment, owned by one Astra/max DM.",
+  "source": "docs/research/portfolio/pro_packets/20260914_mgtap_vacancy_replacement/archive/RESPONSE.md"
+}

@@ -15,7 +15,7 @@ Difference of own-arm64-lowest-of256 final J means, not tail of paired differenc
 
 Unfunded proposed pair:512train+256sole-final/arm,H256,393216ticks,256jointAdam.32quantile outputs/factual target; no counterfactual trajectories/search.
 
-Registration only. Proposed900s/arm,1800native,1200support,3000complete offer is UNALLOCATED; zero implementation/numerical/consultation grant.
+Portfolio vacancy selection on 2026-09-14 reopens the direction as **ACTIVE/MEDIUM, recasts0** for one Astra/max DM and one zero-new-exposure A/RECON first-object preparation. The DM must return a source-grounded prospective B card and minimal implementation/work outline, or one precise incompatibility and smallest correction. No fit, native environment/evaluation call, optimizer update, cost pilot or historical numerical rerun is granted. Proposed900s/arm,1800native,1200support,3000complete offer remains UNALLOCATED.
 
 The complete exact first-object scientific design and all retained laws are in source response §5; this summary does not authorize a change. Above-MEI/inside-inclusive-band/opposite-sign readings preserve sign and all outcomes without equivalence or stable-population claims. The actual training unit and endpoint uncertainty remain distinct. Matching tuned same-information host headroom is absent, not zero and not an exclusion gate. Proposed counts and unknown rates/memory are not measured feasibility.
 
@@ -27,4 +27,4 @@ New means materially different question/comparator/estimand/first object from ex
 
 ## Responsibility and finite boundary
 
-Registration-only ownership remains with the current Portfolio author through Root until an actual funded direction assignment. No placeholder branch, worktree, runtime root or implementation task is created. A useful concrete use/cost question can prompt proper Portfolio re-entry; no positive pilot, exact proof, full reconstruction or automatic release of the unallocated offer is required or authorized. PARKED is this explicit reversible investment judgment, not scientific falsification.
+Root creates one reusable direction worktree and one Astra/max DM for the accepted preparation. The DM owns the bounded assessment and subsequent current-authority decisions; no positive pilot, exact proof, full reconstruction or automatic release of the unallocated offer is required or authorized. Preparation completion alone does not release the occupied direction.
