@@ -55,3 +55,26 @@ The clean-boundary owner review query returned no unapplied instructions. These
 archives are ready for Root integration/retention before the already assigned
 bounded reclamation. Removal has not yet occurred. Retain the authoring checkout,
 shared remote source checkout, live direction branch and current Transport archive.
+
+## Reclamation result, 2026-09-15T04:03:57Z
+
+Root confirmed main integration/retention at17b81fcf2 and authorized the exact
+remote removal. Immediately before removal all53 original digests and the
+support archive still matched; the only added untracked file was that preserved
+archive. Source remained8ad304d61 with clean tracked status and both supervisors
+finished/exit0/tmux=false. REMOTE_CLEANUP_RECEIPT.json verifies the exact remote
+worktree absent on disk and from Git worktree registration, and both named
+supervisor directories absent on disk. Shared source, author checkout, review
+branch and Transport archive remain. Scientific processes stopped0; retries0.
+
+The separate attempted local cleanup used native PowerShell and the exact
+current-object root, with intended path/reparse/inventory/archive checks before
+Remove-Item. Automatic approval review rejected the command before process
+creation: `blocked by policy`. None of that command's checks or removal ran.
+A combined readback/documentation command was also rejected before execution;
+the exact same reason was returned, without evidence of the refusal's cause.
+A separate permitted native read-only call then verified all4 local files still
+present and matching their archived digests. LOCAL_CLEANUP_BLOCKER.json records
+the actual boundary. No deletion retry, alternate deletion method or escalation
+is used; these4 files remain. Old A-Z rejected roots were not touched. This
+technical restriction changes neither the valid result nor invocation budget.
