@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "buy",
-  "auto_applied": null,
+  "auto_applied": "buy",
   "dm_reason": "两臂确实追求同一尾部目标且最小源码路径明确，真实pair可决定是否保留Q32；标量充分性和未知成本仍是反面理由。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/TASK.md",
@@ -72,5 +72,17 @@
     "verdict_text": "DM推荐购买这一个具体同尾部目标学习pair及最小实现验证；最强替代是保留标量而不购买Q32。请求已发送到正确Portfolio节点，DM没有执行本地投资决定。",
     "source": "docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/TASK.md"
   },
-  "starred": true
+  "starred": true,
+  "approval_correction": "原packet所述Portfolio尚未形成仅描述发问时状态；现由d23d8805b响应及完整intake替代。当前校准§11.11保留baseline、独立replication和归因区别，不改已发绑定或增加调用。",
+  "execution_history": [
+    {
+      "at": "2026-09-15T03:10:00+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/INTAKE.md",
+      "state": "applied",
+      "summary": "已读取并核对d23d8805b完整24923字节答复，Portfolio正式选择两个原始训练臂及最小实现验证。每臂512train+256evalH256、128Adam；时间为可修订估计，调用和科学曝光固定。当前0科学fit/native/update；先直接实现和独立审查，之后逐臂实际节点admission。ACTIVE/MEDIUM/recasts0不变，无自动重试或后继。",
+      "correction": "原packet所述Portfolio尚未形成仅描述发问时状态；现由d23d8805b响应及完整intake替代。当前校准§11.11保留baseline、独立replication和归因区别，不改已发绑定或增加调用。"
+    }
+  ]
 }
