@@ -1,0 +1,333 @@
+{
+  "request_id": "2026-09-14-acvc-post-baseline-match-investment-01",
+  "observed_at_utc": "2026-09-15T04:46:55.814190+00:00",
+  "default_scientific_input": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+  "task_utf8_bytes": 31657,
+  "task_sha256": "ed3f30e3558e9105881ebacc2fe4803ee1db62479ca59639d78f3777817b1e74",
+  "effective_manifest_matches_request": true,
+  "full_generated_task_read_by_author": true,
+  "provider_access_claimed": false,
+  "provider_acceptance_claimed": false,
+  "reference_count": 29,
+  "references": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_BASELINE_MATCH_INVESTMENT_REPORT_20260914.md",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "5a4e11f9657e5dddc29c1e0204fcb0e890e72a6a",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_BASELINE_MATCH_A01_SCIENCE_CARD_20260914.md",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "dad649e813ee3c233fd99f2de7f811e64ae4a395",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_BASELINE_MATCH_A01_RESULT_EVIDENCE_20260914.md",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "7157972b224ea3a5fd65a8d8660a454a7a699867",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_BASELINE_MATCH_A01_INTAKE_20260914.md",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "dc321ec044e70948f16d207f57d9b1ca46ab8158",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_PROSPECTIVE_20260914.md",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "b12df10b5bd235874cb2d7e8c29fd4149ad466f1",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_baseline_match_a01_20260914/PROSPECTIVE_COMPARISON_FACTS.json",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "437ae513c9ec81816494d848525111c8399a4ab9",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_baseline_match_a01_20260914/CORRECTED_INVESTMENT_PEER_CONTEXT.md",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "aaf245d158c662b4a648ace9ee10fefcf332f494",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "ec4dae6259563f58615f60c88801bbd7117143d8",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_rate_investment/archive/RESPONSE.md",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "fc28e6234dc2f5a9a5adeaf576580753d5a4a1d8",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_rate_investment/INTAKE.md",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "fbdda4cfa5e5cda8919826e9905ed2e13514dbf1",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_LR_PAIR_B01_RESULT_EVIDENCE_20260914.md",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "61778e08e244242818390843a4a2e6d1faeb5cfe",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_fixed_lr_pair_b01_scientific_review/archive/RESPONSE.md",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "4d2148590ec72fd193fe8b7b125f491aa0abed32",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_fixed_lr_pair_b01_scientific_review/INTAKE.md",
+      "effective_commit_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+      "git_blob": "2852ae627fa0489eb572ad738b4689e9498b4153",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "hmasd/networks.py",
+      "effective_commit_sha": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "git_blob": "d2f2da48ab3436f22fe2fa2549e8c43b76aa242b",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "hmasd/baselines.py",
+      "effective_commit_sha": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "git_blob": "e74d1908b357d72bdd433f05cd9e2159fc33a282",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "effective_commit_sha": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "git_blob": "4b59281bfb76245dd3283fe860327e35463c2b26",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/acvc",
+          "head": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_CURRENT_INCREMENT_B01_INTAKE_20260914.md",
+      "effective_commit_sha": "2d83f5b8fe0d6eba9c5e749569d44fcf000d03f1",
+      "git_blob": "7403724c2a1f4dcf480868c1a363922b2b9e3484",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/vap-folr",
+          "head": "5f19f33e10ba95e8ddf8b11b8812abb8ae664222"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_INTAKE_20260914.md",
+      "effective_commit_sha": "9e8ea42b0efe6e86bb5cc9fec9feca90c5bd1d38",
+      "git_blob": "e397259b57af5cd4a0d68305b27be59a17d9b334",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/trdl",
+          "head": "5bbd499c410ef9f92635c6c7a64a640c53731e34"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_fsd_interruption_batch_investment/INTAKE.md",
+      "effective_commit_sha": "6bdea263a119c4360c967515f73f001db0e47c42",
+      "git_blob": "a2587b23b2b962e8713fc6c4552c14752e67c443",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/fsd",
+          "head": "0c837c6dd52a51fbd4de2e15aefe18964d1fcde0"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md",
+      "effective_commit_sha": "cbdac09d54291b3a7d01db1a56c897174a6b32af",
+      "git_blob": "681db8edb595e6f4d86f7ec1ab58458760150f06",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/fsd",
+          "head": "0c837c6dd52a51fbd4de2e15aefe18964d1fcde0"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "effective_commit_sha": "7710de2603038c373afb252a50eda06989048aa8",
+      "git_blob": "254c8fa75fcb350efae696d7d9342826b8a98b45",
+      "observed_published_descendants": [
+        {
+          "branch": "main",
+          "head": "7710de2603038c373afb252a50eda06989048aa8"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "effective_commit_sha": "df2bf1ed35484d0be236b8b84f22aaddba7dacdf",
+      "git_blob": "cf0abe05a871accc7a0b10a075bec3c44607081c",
+      "observed_published_descendants": [
+        {
+          "branch": "main",
+          "head": "7710de2603038c373afb252a50eda06989048aa8"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md",
+      "effective_commit_sha": "df2bf1ed35484d0be236b8b84f22aaddba7dacdf",
+      "git_blob": "2904067f8b61241b166482a39cfa111ee3e74878",
+      "observed_published_descendants": [
+        {
+          "branch": "main",
+          "head": "7710de2603038c373afb252a50eda06989048aa8"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "effective_commit_sha": "df2bf1ed35484d0be236b8b84f22aaddba7dacdf",
+      "git_blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "observed_published_descendants": [
+        {
+          "branch": "main",
+          "head": "7710de2603038c373afb252a50eda06989048aa8"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md",
+      "effective_commit_sha": "df2bf1ed35484d0be236b8b84f22aaddba7dacdf",
+      "git_blob": "d816b6e3446f0e2527602970a177d1620fc6b3de",
+      "observed_published_descendants": [
+        {
+          "branch": "main",
+          "head": "7710de2603038c373afb252a50eda06989048aa8"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "effective_commit_sha": "df2bf1ed35484d0be236b8b84f22aaddba7dacdf",
+      "git_blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "observed_published_descendants": [
+        {
+          "branch": "main",
+          "head": "7710de2603038c373afb252a50eda06989048aa8"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_current_increment_b01_result_plan_review/INTAKE.md",
+      "effective_commit_sha": "5f19f33e10ba95e8ddf8b11b8812abb8ae664222",
+      "git_blob": "84ce02e6e1c2f0459e9acd0192ded4bad7448e50",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/vap-folr",
+          "head": "5f19f33e10ba95e8ddf8b11b8812abb8ae664222"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "effective_commit_sha": "5f19f33e10ba95e8ddf8b11b8812abb8ae664222",
+      "git_blob": "48387062138750200c06c6d8cb45a1843819c87d",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/vap-folr",
+          "head": "5f19f33e10ba95e8ddf8b11b8812abb8ae664222"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/pro_packets/20260914_b01_result_review_v2/INTAKE.md",
+      "effective_commit_sha": "96f834ea4164d26a11b11d0a3382ab055acf591c",
+      "git_blob": "82d911b6a5ff89f339ec35496f86541a5567b876",
+      "observed_published_descendants": [
+        {
+          "branch": "codex/trdl",
+          "head": "5bbd499c410ef9f92635c6c7a64a640c53731e34"
+        }
+      ]
+    }
+  ]
+}
