@@ -1,5 +1,25 @@
 # Direction acvc: ACVC
 
+## Selected next object and grant — 2026-09-15 (Claude hub as DM)
+
+Owner resume 2026-09-14/15 ended the operational pause. The post-C/M direction question went to
+`em:acvc:convergence`, which selected **A, k = 1**: one further unchanged C/M paired block
+(master 28431 / evaluation namespace 38431), D2 = mean64(J_F − J_M) as the primary reading at
+the fixed ±.01 J MEI bands, prospective equal-block accumulation with block 1 (df = 1 working-model
+interval), no rescoring of block 1 ([full intake](pro_packets/20260915_cluster_mappo_comparison_b01_result_review/INTAKE.md),
+`PRO_FINAL`; the DM's recommendation B, a 3× budget probe, was overruled). The withheld
+allocation was granted by `portfolio:cross_direction` on 2026-09-15 13:19Z (**G**, two original
+fits and bounded support, [decision](../../portfolio/decisions/2026-09-15-acvc-one-block-replication-grant.md),
+[intake](../../portfolio/pro_packets/20260915_acvc_one_block_replication_investment/INTAKE.md),
+`PRO_FINAL / OWNER_DELEGATED`). Implementation is the reviewed identity-binding wrapper
+`scripts/run_acvc_cluster_mappo_comparison_b02.py` (Opus review accepted with corrections at
+`3ae041d9e`; three identity tests), launch source `codex/acvc 2dc9631c8`, on-policy `de66d7a4b`
+re-staged; execution C then M as lower-priority backfill beside FSD, zero retries or extensions
+([block-2 evidence folder](evidence/cluster_mappo_comparison_b02_20260915/)). Lifecycle
+**ACTIVE/MEDIUM/recasts2** and the lowest sequencing priority are unchanged. Recurrence, reversal
+or an inside-band D2 changes only optional-F development advice; none of it establishes stable
+superiority, tuned headroom, equivalence or attribution.
+
 ## Latest complete private-baseline comparison — 2026-09-14
 
 The selected [C/M B block](ACVC_CLUSTER_MAPPO_COMPARISON_B01_SCIENCE_CARD_20260914.md) is complete: F−M **+.02343964960218458J**, F_ABOVE_MEI at the fixed.01 point rule. C−M−.011309900227360047 DOWN; F−C+.03474954982954462 and F−own-dwell+.012221377181678915 UP. C/F/own-dwell/M attain.3224744244456476/.35722397427519226/.34500259709351333/.33378432467300767J. [Full E0](ACVC_CLUSTER_MAPPO_COMPARISON_B01_RESULT_EVIDENCE_20260914.md), [full intake](ACVC_CLUSTER_MAPPO_COMPARISON_B01_INTAKE_20260914.md).
