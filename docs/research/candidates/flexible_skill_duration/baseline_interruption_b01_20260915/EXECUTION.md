@@ -153,3 +153,26 @@ FLAT queues: not launched (dependent work, see the pre-launch record).
 
   Pending elements in launch order: 772503-D1280, 772303-FLAT, 772403-FLAT, 772503-I1280,
   772503-FLAT (each `fsd-bi-b01-<seed>-<arm>`).
+
+### 2026-09-15 16:01Z — remaining five elements launched together (morning check-in)
+
+- The three I1280 elements and FLAT 772203 finished with exit 0 by about 14:15Z
+  (walls: I1280 6,369 / 6,550 / 6,353 s at peak RSS about 3.8 GiB each under four-fit
+  contention; FLAT 772203 2,023 s at 1.25 GiB). The hub's session was rate-limited from
+  13:30Z to 15:40Z, so the node idled about two hours before the check-in; no scientific
+  effect, recorded as a scheduling gap.
+- With the node idle (14.9 GiB available) all five remaining elements were launched by
+  five operators within one minute, one handle per element, plus the ACVC B02 M fit as
+  single-thread backfill. Peak-RSS projection 2.8 + 3.8 + 3 × 1.25 + 0.56 ≈ 10.9 GiB;
+  21 threads on 20 cores while the FLAT fits run (about 35 min), then 8 + 1.
+
+  | Handle | Launch (UTC) | Remote pid | Admission (available bytes) |
+  | --- | --- | ---: | --- |
+  | fsd-bi-b01-772403-FLAT | 2026-09-15T16:01:14Z | 3735333 | passed, 15,613,427,712 |
+  | fsd-bi-b01-772503-FLAT | 2026-09-15T16:01:15Z | 3735439 | passed, 15,424,118,784 |
+  | fsd-bi-b01-772503-I1280 | 2026-09-15T16:01:31Z | 3735922 | passed, 13,899,333,632 |
+  | fsd-bi-b01-772303-FLAT | 2026-09-15T16:01:40Z | 3736070 | passed, 13,265,879,040 |
+  | fsd-bi-b01-772503-D1280 | 2026-09-15T16:02:04Z | 3736794 | passed, 12,005,937,152 |
+
+  Every recorded `runner.sh` ends `BLOCK.sh <W> <seed> <arm>` (single token). Expected
+  ends: FLAT about 16:40Z, D1280 about 16:50Z, I1280 about 17:50Z (critical path).
