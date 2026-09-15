@@ -172,6 +172,42 @@ adoption state was identified and returned to the same child for correction;
 only actual observations/sends are evidence. This affects observation metadata,
 not training or the endpoint.
 
+### First high-batch pair and original3
+
+I1280/772003 completed with supervisor exit0 and Monitor terminal event
+`monitor-terminal-fsd-ib-b01-772003-I1280-exit0` (PID3709290, tmux absent,
+observed elapsed1134s). Its collected summary passes the same complete endpoint,
+configuration and actual-learner checks. All five update-loss sets are finite;
+joint rows are4912/4887/4995/5230/5185 and coordinator optimizer steps
+60/60/60/75/75=330, consistent with the declared batch1280 cost law.
+The32 final native scores have mean0.3768410822229793J. Complete-command wall
+1075.13s, user4200.18s, system49.92s, peak RSS3534244KiB, exit0. The two completed
+originals total1562.73s wall and6170.59s CPU; this is their sum, not study critical
+path or a support-inclusive total.
+
+The exact reducer checks common non-factor configurations and reads the first
+high-batch pair as I1280−D1280 = **−0.026440300139166675J**. Its conditional
+evaluation-episode SD0.11203067918976853 and SE0.01980441323900499 describe this
+fixed trained pair. There is only one completed training block for this contrast;
+training SD/SE/interval remain unavailable. The two-block primary and all low-batch,
+marginal and interaction conclusions remain incomplete. This first opposite-sign
+observation is retained and does not select or cancel any of the eight originals.
+
+The I1280 archive SHA256 is
+`2559a0de98450c41abc52c656ce5e4e6f8ec0dcdf53d62fc8d47b4b8bb5e5602`;
+summary SHA256 is
+`67c35998fa25cb0e43eec4a9f47eabadde97bd304e76d044b9cbffbba6198017`.
+Local receipts `772003_I1280_COLLECTION.json` and `first_high_pair.json` preserve
+the technical read and partial reduction. Raw archive and supervisor facts remain
+preserved locally and remotely.
+
+Original3 `fsd-ib-b01-772003-D128` is accepted at the same168e61295 source.
+Adjacent admission assessed `2026-09-15T05:23:34.354677Z`: effective/physical
+15626428416 bytes, required4294967296, passed. The same Monitor recorded
+running/PID3710339/tmux active/null exit adoption and continues the exact handle.
+Current allocation: three accepted originals, two complete endpoints, one live,
+five unsubmitted. DM continues the already selected order directly.
+
 ## Collection and preservation inventory
 
 Collect every original summary, training rows, logs, adjacent admission,
