@@ -31,35 +31,44 @@ below does not rewrite the older typed-state or scalar-gate objects.
 ## Current position
 
 **Owner-resumed 2026-09-14:** the explicit instruction to restore subagent DM
-control and continue supersedes the operational pause below. The complete new
-fresh A−Z B gives A−1.476796875/Z1.59265625, d−3.069453125,
-CURRENT_ONLY_ABOVE_MEI. Both have one5000/4969/128 fit, identical augmented modules
-and Generic64 retained; Z clears only the learned entity state every primitive
-observation. This supports prioritizing current-only entity processing for bounded
-development in this design, not closing persistent history or establishing a stable
-ranking. Z remains recurrent through Generic memory and retains seen/age metadata.
+control and continue supersedes the operational pause below. The latest complete
+fresh Z−G B gives Z−0.136015625/G4.307734375, d−4.44375, GENERIC_ABOVE_MEI.
+Each has one5000/4969/128 fit. This weighs against the current-only augmented
+package in that realization, without closing augmentation/history or establishing
+a stable ranking. Z retains Generic64 memory and seen/age metadata; its extra
+current cell, attention/fusion and capacity form a whole-program comparison.
+
+The preceding A−Z B gave A−1.476796875/Z1.59265625, d−3.069453125,
+CURRENT_ONLY_ABOVE_MEI, with identical augmented modules and Generic memory
+retained. That internal result motivated Z−G; it did not establish Z's increment
+over Generic or an isolated persistence effect. Its original reading remains.
 
 The old A−G +5.29640625 remains the strongest positive complete-program observation,
 with unknown repeatability and no isolated persistence attribution. Old replacement
 BANK negatives remain separate. A favorable complete Z realization and easier
-optimization/current-processing/fusion are surviving alternatives. The next useful
-discriminator is a prospective fresh Z−G block against adaptive Generic64: current
-evidence does not show whether Z earns any increment over that null. No historical
-G substitution, exact diagnostic, family closure, C promotion or Portfolio change
-follows from the present result. Same-host tuned headroom remains unmeasured.
+optimization/current-processing/fusion are surviving alternatives. The next
+prepared discriminator is a prospective repetition of A−G, the surviving direct
+positive contrast. Two new blocks versus one is a cost close-call for full review,
+with no new allocation or invocation frozen by that preparation. No historical
+endpoint substitution, exact diagnostic, family closure, C promotion or Portfolio
+change follows. Same-host tuned headroom remains unmeasured.
+The [Z−G card](FOLR_ENTITY_CURRENT_INCREMENT_B01_SCIENCE_CARD_20260914.md),
+[E0 result](FOLR_ENTITY_CURRENT_INCREMENT_B01_RESULT_EVIDENCE_20260914.md) and
+[complete intake/next question](FOLR_ENTITY_CURRENT_INCREMENT_B01_INTAKE_20260914.md)
+record the current bounded conclusion and missed low-confidence prediction.
 [Card](FOLR_ENTITY_PERSISTENCE_B01_SCIENCE_CARD_20260914.md),
 [E0 result](FOLR_ENTITY_PERSISTENCE_B01_RESULT_EVIDENCE_20260914.md) and
 [intake/next question](FOLR_ENTITY_PERSISTENCE_B01_INTAKE_20260914.md) fix the
 bounded interpretation and preserve the missed low-confidence prediction.
-The [complete independent result/plan review and DM response](pro_packets/20260914_persistence_b01_result_plan_review/INTAKE.md)
-find no result-invalidating defect and support preparing fresh Z−G. Selection of Z
+The preceding [complete independent A−Z result/plan review and DM response](pro_packets/20260914_persistence_b01_result_plan_review/INTAKE.md)
+found no result-invalidating defect and supported the now-completed Z−G. Selection of Z
 is outcome-informed; repeating the earlier direct A−G positive remains the strongest
 rival. Equal registered parameters do not equal trained temporal capacity, and Z is
 not established smaller or faster. The comparison remains a whole learning/execution
 law. This completed review neither grants a new fit nor changes the direction's
 lifecycle, priority or family status.
-The subsequent object-tier selection is the [fresh Z−G B card](FOLR_ENTITY_CURRENT_INCREMENT_B01_SCIENCE_CARD_20260914.md),
-with two new original fits and a whole-program increment as its claim ceiling.
+Both original fits of that Z−G card are complete, with whole-program increment as
+its claim ceiling; its complete independent scientific review remains due.
 Under the [owner's accepted two-axis calibration](../../portfolio/decisions/2026-09-14-two-axis-research-calibration.md),
 this adaptive A−G / A−Z / Z−G sequence is not independent replication of a fixed
 contrast or a stable method ranking. Each original object's reading stays frozen;

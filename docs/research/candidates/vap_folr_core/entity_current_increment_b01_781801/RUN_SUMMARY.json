@@ -1,0 +1,31 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "FOLR_ENTITY_CURRENT_INCREMENT_B01_781801",
+      "arm": "G_GENERIC",
+      "n": 1,
+      "mean": 4.307734374999999,
+      "sample_sd": null,
+      "min": 4.307734374999999,
+      "max": 4.307734374999999,
+      "runs": {
+        "781801": 4.307734374999999
+      }
+    },
+    {
+      "task": "FOLR_ENTITY_CURRENT_INCREMENT_B01_781801",
+      "arm": "Z_CURRENT_ONLY",
+      "n": 1,
+      "mean": -0.1360156250000004,
+      "sample_sd": null,
+      "min": -0.1360156250000004,
+      "max": -0.1360156250000004,
+      "runs": {
+        "781801": -0.1360156250000004
+      }
+    }
+  ],
+  "paired_differences": []
+}

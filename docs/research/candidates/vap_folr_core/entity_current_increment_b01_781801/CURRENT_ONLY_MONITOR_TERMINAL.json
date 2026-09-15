@@ -1,0 +1,25 @@
+{
+  "native_child": "/root/dm_folr_resume_20260914/monitor_l_low_folr_terminal",
+  "actual_method": "terminal-only actionable native final; collaboration.send_message unavailable",
+  "native_terminal_confirmation_utc": "2026-09-15T03:37:01.2560763Z",
+  "handle": "folr-current-increment-b01-781801-current-only",
+  "status": "finished",
+  "exit_code": 0,
+  "pid": 3703852,
+  "active_set": [],
+  "actual_state_path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801\\current_only\\MONITOR_STATE.json",
+  "state_sha256": "32ec36a062e0aabc2fd735c4ea30625e7e1b19084d2007287db245d972fa57b8",
+  "state_readback": {
+    "handle": "folr-current-increment-b01-781801-current-only",
+    "source_sha": "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+    "supervisor_pid": 3703852,
+    "accepted_at": "2026-09-15T02:59:58.244731Z",
+    "status": "finished",
+    "exit_code": 0,
+    "terminal_observed_at": "2026-09-15T03:37:01.2560763Z",
+    "observation_method": "bounded PowerShell SSH loop; exact agent-task status query every 180 seconds; exited on non-null exit_code; terminal timestamp confirmed by direct UTC status query",
+    "session_id": 39356,
+    "delivery_state": "native_final_to_parent"
+  },
+  "intermediate_MONITOR_ADOPTED_delivered": false
+}

@@ -1,0 +1,29 @@
+{
+  "preparation_only": true,
+  "new_native_exposure": 0,
+  "proposed_A_G_blocks": 2,
+  "proposed_fits": 4,
+  "per_arm_per_block": {
+    "train": 5000,
+    "ticks": 100000,
+    "updates": 4969,
+    "eval": 128,
+    "eval_ticks": 2560
+  },
+  "proposed_total": {
+    "training_ticks": 400000,
+    "optimizer_steps": 19876,
+    "evaluation_episodes": 512,
+    "evaluation_ticks": 10240,
+    "native_ticks": 410240,
+    "generic_replay_positions": 133566720,
+    "entity_replay_positions": 333916800
+  },
+  "heterogeneous_cost_reference_seconds": {
+    "old_A": 2829.32,
+    "current_G": 2112.27,
+    "one_block": 4941.59,
+    "two_blocks": 9883.18
+  },
+  "unknowns": "future realized native/support costs; exact future labels and primary rule remain for later card; no grant or invocation fixed by this preparation"
+}
