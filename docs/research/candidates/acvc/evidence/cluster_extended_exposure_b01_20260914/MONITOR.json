@@ -1,0 +1,26 @@
+{
+  "assignment": "ACVC_CLUSTER_EXTENDED_EXPOSURE_B01",
+  "parent_dm": "/root/dm_acvc_resume_20260914",
+  "node": "hmasd-wsl-node",
+  "handle": "acvc-extended-b01-27457-66ea85e01",
+  "tmux": "agent_acvc-extended-b01-27457-66ea85e01",
+  "source_sha": "66ea85e0154e838ccb570eab81e2fecea8ff5973",
+  "cwd": "/home/wu/hmasd-worktrees/acvc-extended-b01-66ea85e01",
+  "output_cwd": "cwd/temp/directions/acvc/exp/cluster_extended_exposure_b01_27457",
+  "supervisor_log": "/home/wu/.agent-tasks/acvc-extended-b01-27457-66ea85e01/task.log",
+  "observation_bound": {"plan_seconds": 1400, "inner_seconds": 3600, "outer_seconds": 3660, "watchdog_seconds": 10},
+  "state": "terminal_exit0",
+  "last_observation": {
+    "observed_at": "2026-09-14T23:48:33Z",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3696275,
+    "uptime_seconds": 1246,
+    "tmux_active": false,
+    "admission": {"assessed_at": "2026-09-14T23:28:03.281661Z", "physical_bytes": 14768009216, "effective_bytes": 14768009216, "floor_bytes": 4294967296, "passed": true}
+  },
+  "adoption_delivery": {"status": "delivered", "event": "MONITOR_ADOPTED"},
+  "terminal_delivery": {"status": "delivered", "event_id": "acvc-extended-b01-27457-66ea85e01-terminal-exit0-20260915T074833+08:00"},
+  "active_set": [],
+  "next_due_check": null
+}

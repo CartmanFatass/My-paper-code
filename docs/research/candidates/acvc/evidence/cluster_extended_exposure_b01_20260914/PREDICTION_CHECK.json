@@ -1,0 +1,53 @@
+{
+  "1024_F-C": {
+    "probabilities": [
+      0.8,
+      0.15,
+      0.05
+    ],
+    "observed_category": "UP",
+    "multiclass_Brier": 0.06499999999999997
+  },
+  "1024_F-dwell": {
+    "probabilities": [
+      0.75,
+      0.2,
+      0.05
+    ],
+    "observed_category": "UP",
+    "multiclass_Brier": 0.10500000000000001
+  },
+  "4096_F-C": {
+    "probabilities": [
+      0.65,
+      0.25,
+      0.1
+    ],
+    "observed_category": "UP",
+    "multiclass_Brier": 0.195
+  },
+  "4096_F-dwell": {
+    "probabilities": [
+      0.55,
+      0.3,
+      0.15
+    ],
+    "observed_category": "UP",
+    "multiclass_Brier": 0.315
+  },
+  "G_dwell": {
+    "probabilities": [
+      0.15,
+      0.3,
+      0.55
+    ],
+    "observed_category": "INCREASE",
+    "multiclass_Brier": 1.115
+  },
+  "completeness": {
+    "p_complete": 0.95,
+    "observed": true,
+    "binary_Brier": 0.0025000000000000044
+  },
+  "owner": "not taken (unattended); canonical pending reviews returned [] at intake"
+}

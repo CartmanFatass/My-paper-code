@@ -1,37 +1,16 @@
 # Direction acvc: ACVC
 
-## Current scientific disposition and owner pause — 2026-09-14
+## Current scientific disposition and extended-exposure evidence — 2026-09-14
 
-ACVC's scientific disposition is **CONTINUE / MEDIUM / recasts2**, with its one occupied slot retained,
-under the complete [post-C01 Portfolio decision](../../portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/archive/RESPONSE.md)
-and [full actual DM response/application](../../portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/INTAKE.md).
-The later [direct owner instruction](../../portfolio/decisions/2026-09-14-owner-pause-after-inflight.md)
-requires finishing in-hand tasks/experiments, writing handoffs and then operational pause.
-ACVC current C01 and both scientific/provider intakes are complete; **new research is owner-paused**.
-The selected future1024/4096 paired B has no new card,seed,source or native invocation and is deferred
-until explicit owner resume. No scientific PARK/CLOSE,vacancy or automatic replacement follows.
+ACVC remains **CONTINUE / MEDIUM / recasts2**, with an occupied direction slot under the complete [post-C01 Portfolio decision](../../portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/archive/RESPONSE.md) and [full DM response](../../portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/INTAKE.md). The owner explicitly resumed the paused native DM chain on2026-09-14. The previously selected single fresh1024/4096 B is now complete; the historical [pause handoff](ACVC_OWNER_PAUSE_HANDOFF_20260914.md) remains provenance, not current execution authority.
 
-The [six-programme fixed1024 C01](ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md)
-is complete at source6e8d1b894: all six originals,7296episode rows and12288updates verified.
-[Full E0](ACVC_CLUSTER_FIXED_RECIPE_C01_RESULT_EVIDENCE_20260914.md) gives
-F-C+.096377354920J [.074826981257,.117927728584] and F-own-dwell+.064088940259J
-[.035375804426,.092802076092],both unrounded lower bounds>.01J. Simultaneous coverage
-is qualified by the iid-normal complete-fit-panel working model; actual neural-training calibration
-is unestablished. Adverse panels30/384 and56/384 and all absolute/control/learning/cost evidence
-remain. Native1733.09s; full support/provider/agent costs UNKNOWN. The frozen C is consumed.
+The new [extended-exposure B](ACVC_CLUSTER_EXTENDED_EXPOSURE_B01_SCIENCE_CARD_20260914.md) follows one uninterrupted C-only4096-episode programme and evaluates both prospective snapshots afterwards. At4096, F−C is +.11686423203454274J and F−own-dwell +.09235407167737772J, both UP at the fixed .01J scale. The directly paired increment changes are G_dwell+.029538626341757208J and G_C+.019610381319255195J, both INCREASE. This supports optional fixed-F usefulness on this attained later endpoint; it contradicts the DM's modal attenuation forecast without reversing the older512/1024 programme's DECREASE. See [complete E0](ACVC_CLUSTER_EXTENDED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md) and [scientific intake](ACVC_CLUSTER_EXTENDED_EXPOSURE_B01_INTAKE_20260914.md).
 
-The full74-line independent review found no material defect within its actual inspected scope;
-every material point is answered in [scientific intake](pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/INTAKE.md).
-The full144-line Portfolio decision substantively chose the finite longer-exposure development
-question over the report's close-call PARK preference. Its rationale is retained, while the later
-owner pause controls execution. See [current operational handoff](ACVC_OWNER_PAUSE_HANDOFF_20260914.md)
-for exact evidence,preserved archives,cleanup limits and first resume action.
+The strongest limit is the comparator: absolute C improves only .1349242379204369→.14684878254069542J, with unstable training blocks. More exposure has not demonstrated a substantially stronger or tuned proposer. Later F remains adverse to dwell on4/64 worlds (worst−.0707986040519717J) and to C on1/64. Two correlated checkpoints provide one programme, no4096 training-population interval, monotonic training law, default/safety conclusion or pure component cause. Same-information tuned headroom remains unmeasured. The surviving alternative is that fixed F remains useful because this attained C is still weak or uneven; this B does not distinguish that from broader late-learning usefulness.
 
-Reuse original independent DM01a09dfa-0655-7831-aa3a-9fff2ddd2508 at Astra/max,
-C:/Projects/HMASD-worktrees/codex-acvc,branchcodex/acvc. Read live control from
-C:/Projects/HMASD/.codex/hmasd-dm-sessions.toml and ROOT_OPERATIONS.md; historical task/host
-literals are not dispatch routes. No ACVC experiment/monitor/Pro request remains live.
-The original DM only follows the user's all-direction handoff coordination to completion.
+The six-programme [fixed1024 C01](ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md) remains complete and consumed. Its [E0](ACVC_CLUSTER_FIXED_RECIPE_C01_RESULT_EVIDENCE_20260914.md) gives F−C+.096377354920J [.074826981257,.117927728584] and F−own-dwell+.064088940259J [.035375804426,.092802076092], both unrounded lower bounds>.01J under the qualified iid-normal complete-fit-panel working model. Neural-training calibration remains unestablished, and adverse panels30/384 and56/384 remain. The full independent review and every material response are preserved in its [intake](pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/INTAKE.md). Both train-through-F DOWNs, learned-gate losses, the older consumed C object and stopped uncertain/delayed family are unchanged.
+
+The next discriminator is whether another independent extended-exposure programme would change a concrete development choice enough to justify new investment, versus consolidating the bounded optional-package result. The selected allocation includes complete independent scientific review and DM response; this review is being prepared on the existing Convergence node. No second fit, automatic8192 extension or local PARK follows. A new funded object beyond the completed original must retain its proper decision authority. Native1146880 team ticks,8192 updates and1230.58s wall are observed; complete support/provider/agent costs remain UNKNOWN.
 
 ## Completed reopening evidence — B03, longer-C and paired exposure
 
