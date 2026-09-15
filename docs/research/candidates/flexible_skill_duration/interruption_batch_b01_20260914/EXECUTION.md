@@ -277,6 +277,38 @@ missing receipt to the same child for factual correction, without a new launch o
 claiming adoption from assignment alone. Its terminal event will trigger original6
 directly. Current allocation: five accepted, four complete, one live, three unsubmitted.
 
+### Second-block original5 and owner pause boundary
+
+Original5 D1280/772103 returned a direct terminal receipt: exit0, PID3713801,
+tmux absent, elapsed624s. Its initial adoption receipt had been missing while
+live; the terminal observation is accepted without inventing an earlier adoption.
+Complete source/configuration/40000-train/16000-final/five-update checks pass,
+with all recorded update losses finite. Its mean J is0.3169196849088669;
+five800-row rollouts give75 total coordinator steps. Complete wall594.97s,
+user2314.98s/system16.08s, peak RSS2540840KiB, exit0. Summary SHA256
+`a8e5e572cf1bf570db365462a47457c3b79293fd1878a1da56dcdea374fec008`;
+archive SHA256
+`8db008ecfd31220d2a0aeb4b13a5e4c5cc917ca4e2fd0683cba704f473357ae5`.
+The collected receipt preserves all technical facts; the second primary pair
+remains pending.
+
+**OWNER_PAUSE_REQUEST received from Root:** finish this already funded and begun
+eight-original chain, Monitor, collection, intake/review, preservation and necessary
+cleanup, then stop at a safe boundary and return a direction pause handoff. Do not
+interrupt a live original or start any successor fit/object/Portfolio/Direction
+request. This is an owner execution pause after completion, not scientific PARK.
+
+Original6 `fsd-ib-b01-772103-I1280` continues that same fixed allocation from
+168e61295. Admission at `2026-09-15T06:06:00.037885Z` passed with13602533376
+effective/physical bytes. DM received original6's actual adoption by raw state
+readback: running, PID3715954, tmux active, exit null. The concrete state defect
+was duplicate top-level `current_adoption` keys: ordinary JSON decoding retained
+the last old handle and hid newer receipts. The same Monitor owns repair into one
+unique-key document with one entry per handle; no additional scientific call,
+invented timestamp or status inference follows. Original5's terminal is verified;
+this discovery does not invent an earlier directly received adoption for it.
+At this revision: six accepted, five complete endpoints, one live, two unsubmitted.
+
 ## Collection and preservation inventory
 
 Collect every original summary, training rows, logs, adjacent admission,
