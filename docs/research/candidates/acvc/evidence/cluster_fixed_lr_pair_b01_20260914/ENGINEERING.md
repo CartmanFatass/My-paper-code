@@ -1,0 +1,13 @@
+# Fixed-rate-pair B01 engineering acceptance record
+
+DM directly owns the card's new source and mirrored tests, in `C:/Projects/HMASD-worktrees/codex-acvc` / `codex/acvc`. Protected original shared source remains unchanged. The lower-rate wrapper changes only fresh Adam group learning rates; the inherited collection/update path, parameter membership, RNG laws, dtype and three private evaluator packages are reused. One final snapshot replaces the previous midpoint/final schedule.
+
+Focused command: `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp temp/directions/acvc/test/fixed_lr_pair_b01_20260914_01 tests/experiments/candidates/acvc/cluster_fixed_lr_pair_b01`.
+
+Result: **11 passed in 10.22 s**, exit0. Tests exercise both complete synthetic 4096/8192 schedules, final-only serialization/private load ordering, inherited optimizer options and actual first Adam group rate on tiny linear parameters, exact RNG addresses, direct paired covariance and orientation, five inclusive rule boundaries, invalid identities and incomplete dependent publication. Zero native scientific trajectories or fits were executed. A real tiny optimizer step is engineering test activity only. `git diff --check` passed. Runner377 lines, protocol84, analysis106; no §5 line or test-time breach. No extra orchestration service, cost pilot or native smoke.
+
+Independent high-risk review is pending for rate/RNG/checkpoint/measurement semantics. DM will resolve actual findings and record technical acceptance before either original launch. This is not a numerical success claim or an additional scientific decision.
+
+New test scratch was inspected at its exact resolved invocation path. Its actual cleanup outcome will be appended. Older local policy-denied ACVC scratch remains retained and is not touched.
+
+Cleanup fact: the exact new scratch resolved to `C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/fixed_lr_pair_b01_20260914_01` and contained 11 files. Native PowerShell `Remove-Item -LiteralPath <that exact path> -Recurse -Force` was rejected **before execution: blocked by policy**. No deletion or fallback was attempted; this scratch remains retained, separately from the older denied paths. This limits local reclamation, not scientific validity or launch authority.
