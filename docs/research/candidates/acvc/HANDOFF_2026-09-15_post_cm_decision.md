@@ -1,7 +1,8 @@
 # ACVC handoff — after the em:acvc:convergence decision (2026-09-15, Claude hub)
 
-**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; one direction-tier
-decision intaken (`PRO_FINAL`), zero new exposure, no live producer.** Driven by
+**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; B01 complete and reviewed
+(`PRO_FINAL`, B02 selected), one-fit B02 investment request pending with Portfolio, no live
+producer, no launch authorised.** Driven by
 the Claude Code research hub (owner 2026-09-15 resume; two directions, ACVC and
 FSD). Authoring checkout `C:/Projects/HMASD-worktrees/codex-acvc`, branch
 `codex/acvc` (1,140 commits behind `main`; a merge of `main` conflicts in Codex
@@ -77,6 +78,42 @@ and `em:acvc:convergence` selected it with corrections (**B**, `PRO_FINAL`,
 card §5 and §7 acceptance groups) is engineering work that proceeds meanwhile with independent
 Opus review.
 
+## Result review intaken and B02 investment question sent (2026-09-15 22:10Z)
+
+- `em:acvc:convergence` answered the result review at `codex/acvc 1fb3d9e14` (21:57Z; one
+  Send at 21:46Z, receipt COMPLETE, registry ARCHIVED, tab closed; facts under
+  `temp/sessions/hmasd-chatgpt-pro-transport/archive/acvc/2026-09-15-acvc-m-deployment-transfer-result-review-01/`).
+  **B, `PRO_FINAL`**: one further independently initialised M fit,
+  [ACVC_M_DEPLOYMENT_TRANSFER_B02](ACVC_M_DEPLOYMENT_TRANSFER_B02_PROSPECTIVE_CARD_20260915.md)
+  (MASTER 28631 / namespace 38631, same three panels, T_F,2 primary, per-instance display
+  beside B01, no pooled verdict, end after one). Intake
+  [pro_packets/20260915_m_deployment_transfer_result_review/INTAKE.md](pro_packets/20260915_m_deployment_transfer_result_review/INTAKE.md);
+  ledger row 33; owner item `20260915-acvc-006`. B01's E0, intake and `DIRECTION.md` carry
+  the node's three narrative corrections (U a complete package contrast; T_F variability not
+  inherited from the .044 J block dispersion; M score ordering descriptive only). Commit
+  `74d49807b` (main `6d00be0e8`).
+- The one-fit B02 investment question is with `portfolio:cross_direction`: packet
+  `docs/research/portfolio/pro_packets/20260915_acvc_m_deployment_transfer_b02_investment/`
+  (request `2026-09-15-acvc-m-deployment-transfer-b02-investment-01`, TASK `92c5957c7`, bound
+  HANDOFF `4ebfad9df`, references at `74d49807b` / main `3580587ac`, conversation
+  `6a9c109e-b264-83e8-a78b-f9ea1b767b7b`). Transport: one Send at 22:13:13Z (first call errored review_user_message_not_observed_after_click with persisted sendAttempted=true; the identical verifyExisting observation confirmed the single send, user message 721f8b05-4e0f-4a28-a556-d778056ebfc6, operation 5b50fcbb-a76b-4427-b9b4-02bb6fd65252), matched labels Latest / Pro, tab fee2561b-aa1e-43aa-905d-44dc1a80dd76 open for phase 2, prompt sha256 9ca41561260fdaa363fe5018dad2fe6fd13a7ced3fc4527d980c23fe5b1d9728; the registry binding's history lists the one-block replication round as its last request (the transfer-investment round has an archive folder but no history row), state ARCHIVED before this send.
+- No producer, no launch. Engineering that may proceed meanwhile at zero exposure: the B02
+  binding change (new identities bound before any recipe import, delegating to the B01 runner,
+  wrapped evaluator and reducer at `a741758a1`) with one focused binding test and independent
+  review of the changed behaviour.
+
+## First resume step (current)
+
+Wait for the archived Portfolio answer to the B02 investment request (GitHub readback of the
+response path above at a fresh `codex/acvc` head; then transport phase 2: COMPLETE receipt,
+archive, `bind_conversation.py --direction-id portfolio --direction-ids-json '["acvc"]'`,
+registry to ARCHIVED, tab close). Intake it as `PRO_FINAL / OWNER_DELEGATED` with a decision
+record under `docs/research/portfolio/decisions/` and a P1 `portfolio` owner item. If G2:
+implement the B02 binding change and focused test, independent review, technical acceptance,
+fresh admission and launch through `hmasd-experiment-operator` only (plan about 1,200 s). If N:
+ACVC is ACTIVE-idle with the selected successor on record. No launch before a conforming grant
+and technical acceptance. FSD-side work is unaffected.
+
 ## Transfer fit complete and intaken: TRANSFERS on one instance (2026-09-15 21:45Z)
 
 - Handle `acvc-transfer-m-b01-28531-a741758a` finished exit 0/0 at about 21:26Z (native wall
@@ -94,7 +131,7 @@ Opus review.
   would need a Portfolio investment question). Remote worktree and staging reclaimed after the
   push (CLEANUP.json in the evidence folder).
 
-## First resume step (current)
+## First resume step as written at 21:45Z (superseded 22:10Z by the section above)
 
 If the result-review request to `em:acvc:convergence` has been sent (see the packet folder
 `pro_packets/20260915_m_deployment_transfer_result_review/` and the transport registry), wait for
