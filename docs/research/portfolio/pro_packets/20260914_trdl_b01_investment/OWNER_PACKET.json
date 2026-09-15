@@ -1,0 +1,38 @@
+{
+  "question": "在零暴露准备明确源码路径与同目标更新后，是否投入TRDL这一组具体Q32/标量学习比较及最小实现验证？",
+  "changes_if_approved": [
+    {
+      "target": "TRDL_B01_SCIENCE_CARD_20260914.md",
+      "from": "prospective / unfunded，旧3000秒offer未拨款",
+      "to": "仅在完整合规Portfolio决定明确选择后，按其实际调用和投入边界实施这一pair"
+    }
+  ],
+  "if_refused": "保留A01源码事实和具体B卡，不启动该数值购买；TRDL仍ACTIVE/MEDIUM/recasts0，本问题不处置生命周期。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_A01_INTAKE_20260914.md",
+      "quote": "The strongest support is a complete lawful path from native service events through identical actor information to two trained score baselines and the registered own-arm tail endpoint.",
+      "why": "新事实是已明确最小实现与比较含义，不再只有注册摘要；一对真实学习结果可改变开发选择。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_SCIENCE_CARD_20260914.md",
+      "quote": "Strongest null: a scalar conditional estimate of the exact score the actor needs is sufficient and easier to fit.",
+      "why": "分位表示不是必要性证明，32个输出可能只增加拟合误差、优化耦合和成本。"
+    }
+  ],
+  "uncertainty": [
+    "完整速率、峰值内存、support/provider成本和同信息tuned headroom未知。",
+    "每批16条轨迹估计经验阈值；一fit每臂只能给出局部开发信号。",
+    "实际Portfolio选择尚未形成，原有3000秒offer仍不能直接使用。"
+  ],
+  "cost": {
+    "compute": "当前0fit/0native/0optimizer。未来提案393216 scored team ticks、256 joint Adam；旧900秒每臂、1800 native+1200 support只是未拨款方案，节点需明确实际投入及硬限制/时间计划区别。",
+    "owner_time": "异步了解即可；不存在逐步批准等待。",
+    "reversibility": "costly",
+    "waits_on_this": "Portfolio完整决定约束尚未拨款的实现/实验；owner item本身不形成等待。"
+  },
+  "verdict_text": "DM推荐购买这一个具体同尾部目标学习pair及最小实现验证；最强替代是保留标量而不购买Q32。请求已发送到正确Portfolio节点，DM没有执行本地投资决定。",
+  "source": "docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/TASK.md"
+}
