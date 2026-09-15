@@ -1,6 +1,6 @@
 """One real tiny-host execution per arm class: the actual HMASD stack under the FLAT and D2 configurations.
 
-Two lanes, eight-step episodes, the real Scenario 1 environment and the real agent. This checks that
+Two lanes, twenty-step episodes, the real Scenario 1 environment and the real agent. This checks that
 the FLAT configuration (single constant skill, no coordinator/discriminator training) runs through
 the collector, fifteen updates and three panels; it is a technical check, never a scientific result.
 """
@@ -23,7 +23,7 @@ shared = baseline.shared
 def tiny(monkeypatch):
     monkeypatch.setattr(shared, "TRAIN_LANES", 2)
     monkeypatch.setattr(shared, "EVAL_LANES", 2)
-    monkeypatch.setattr(shared, "HORIZON", 8)
+    monkeypatch.setattr(shared, "HORIZON", 20)
     monkeypatch.setattr(shared, "PROCESS_START", shared.time.perf_counter())
 
 
@@ -40,7 +40,7 @@ def test_real_tiny_fit_completes_with_expected_learning(tmp_path, tiny, arm):
     if arm == "FLAT":
         assert all(calls[k] == 0 for k in baseline.FLAT_ONLY_ZERO)
         assert summary["learner_config"]["n_Z"] == summary["learner_config"]["n_z"] == 1
-        assert summary["learner_config"]["k"] == summary["learner_config"]["skill_cap_k_max"] == 9
+        assert summary["learner_config"]["k"] == 10 and summary["learner_config"]["policy_interruption_mode"] == "off"
     else:
         assert calls["coordinator"] > 0 and summary["learner_config"]["coordinator_batch_size"] == 1280
     assert not any(summary["evaluation_optimizer_calls"].values())

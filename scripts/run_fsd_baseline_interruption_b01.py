@@ -2,7 +2,8 @@
 
 Every fit runs the frozen collector loop for 15 rollouts and evaluates the same 32-world panel
 after rollouts 5, 10 and 15 from one evaluator, inside the RNG-preserving wrapper. FLAT is the
-private-actor flat reduction of the same HMASD stack (hmasd.baselines "mappo" configuration).
+private-actor flat reduction of the same HMASD stack: the ordinary `off` configuration with the
+hmasd.baselines "mappo" switch applied (Portfolio decision 2026-09-15, option S: four blocks).
 Ordinary wall plans are not deadlines. No retry, extra endpoint, tuning or successor fit.
 """
 import argparse
@@ -19,29 +20,50 @@ from hmasd.baselines import apply_algorithm_config
 OBJECT_ID = "FSD_BASELINE_INTERRUPTION_B01"
 CARD = ("docs/research/candidates/flexible_skill_duration/"
         "FSD_BASELINE_INTERRUPTION_B01_PROSPECTIVE_CARD_20260915.md")
-BLOCKS = {772203: 782203, 772303: 782303, 772403: 782403, 772503: 782503, 772603: 782603, 772703: 782703}
+BLOCKS = {772203: 782203, 772303: 782303, 772403: 782403, 772503: 782503}
 ARMS = {"FLAT": ("FLAT", None), "D1280": ("D0", 1280), "I1280": ("I", 1280)}
 ROLLOUTS = 15
 PANEL_ROLLOUTS = (5, 10, 15)
 WALL_PLANS = {"FLAT": 1600., "D1280": 1800., "I1280": 4000.}
 PRIMARY, PRIMARY_MEI = "SI1280", .05
-CONTRASTS = {"SI1280": {"I1280": 1., "D1280": -1.}, "H": {"D1280": 1., "FLAT": -1.}, "HI": {"I1280": 1., "FLAT": -1.}}
+CONTRASTS = {"SI1280": {"I1280": 1., "D1280": -1.}, "GAP_D": {"D1280": 1., "FLAT": -1.}, "GAP_I": {"I1280": 1., "FLAT": -1.}}
+CONTRAST_MEANING = {
+    "SI1280": "high-batch renewal simple effect; primary at rollout 15",
+    "GAP_D": "untuned cross-information package gap D1280 minus FLAT; not section 11.7 headroom",
+    "GAP_I": "untuned cross-information package gap I1280 minus FLAT; not section 11.7 headroom"}
 # Configuration fields that differ between arms by design; any other difference invalidates a contrast.
 PLANNED_CONFIG_DIFFERENCES = frozenset({
-    "interruption_cost_c", "coordinator_batch_size", "n_Z", "n_z", "k", "skill_cap_k_max", "team_cap_k_Z",
-    "lambda_D", "lambda_d", "lambda_h", "high_level_buffer_size", "high_level_batch_size"})
+    "interruption_cost_c", "coordinator_batch_size", "n_Z", "n_z", "k", "policy_interruption_mode",
+    "interruption_delta", "interruption_cost_c_Z", "skill_cap_k_max", "team_cap_k_Z", "age_feature",
+    "lambda_D", "lambda_d", "lambda_h", "high_level_buffer_size", "high_level_batch_size", "use_process_exploration"})
 FLAT_ONLY_ZERO = ("coordinator", "team_discriminator", "individual_discriminator")
+FLAT_K = 10  # identical recurrent chunk length and skill period to the D arms; one constant skill
 T975 = {1: 12.7062, 2: 4.3027, 3: 3.1824, 4: 2.7764, 5: 2.5706, 6: 2.4469, 7: 2.3646, 8: 2.3060}
 
 
 def make_config(arm, envs, seed):
     renewal, batch = ARMS[arm]
     if arm == "FLAT":
-        config = apply_algorithm_config(shared.make_config("D0", envs, seed), "mappo")
-        # The single constant skill is assigned once at each reset; no cap-forced renewal inside an episode.
-        config.skill_cap_k_max = config.team_cap_k_Z = config.k
+        # Ordinary `off` route, then the flat switch: constant single skill with the switch-selected long k,
+        # no coordinator/discriminator training, private recurrent actor and central-state critic.
+        config = shared.e0._make_config("off", seed, len(envs), shared.HORIZON, shared.HORIZON, shared.N_UAVS,
+                                        shared.N_USERS, shared.ROLLOUTS, envs[0].state_dim, envs[0].obs_dim)
+        config.n_Z = config.n_z = 6  # the switch below fixes both to 1; start from the ordinary value
+        config = apply_algorithm_config(config, "mappo")
+        # The switch's k = rollout_length + 1 is not runnable here: the discoverer's recurrent training chunk
+        # length is config.k (hmasd/agent.py), and a chunk longer than the rollout cannot be split. Keep the
+        # D arms' k = 10 so the recurrent chunking is identical across arms; with one constant skill the
+        # periodic re-assignment changes nothing but the chunk boundaries the D arms also have.
+        config.k = FLAT_K
         return config
     return shared.make_config(renewal, envs, seed, coordinator_batch_size=batch)
+
+
+def renewal_metrics(agent):
+    """D2 renewal metrics where the arm has them; the FLAT arm runs the `off` route and has none."""
+    if getattr(agent, "d2_metrics", None) is None:
+        return {"d2_metrics": None, "segments": None}
+    return shared.renewal_metrics(agent)
 
 
 def build_learner(arm, summary, out, training_seed):
@@ -134,7 +156,7 @@ def collect_training(envs, agent, theta0, counters, summary, out, *, rollouts, p
             summary["optimizer_calls"] = shared.optimizer_counts(counters)
             row["optimizer_calls_total"] = summary["optimizer_calls"].copy()
             row["optimizer_calls_delta"] = {k: v - before[k] for k, v in summary["optimizer_calls"].items()}
-        row.update(shared.renewal_metrics(agent))  # Per-rollout metrics, before ordinary clear.
+        row.update(renewal_metrics(agent))  # Per-rollout metrics, before ordinary clear.
         row["relative_initialization_displacement"] = shared.measured(shared.e0._exposure_line(agent, theta0), "learner parameters")
         with (out / "training.jsonl").open("a", encoding="utf-8") as stream:
             stream.write(json.dumps(row, allow_nan=False) + "\n")
@@ -219,7 +241,7 @@ def evaluate_panel(learner, evaluator, summary, out, rollouts_completed):
                         raise ValueError("evaluation has an unexpected terminal boundary")
             if not dones.all():
                 raise ValueError("evaluation missing terminal episodes")
-            result.update(shared.renewal_metrics(evaluator.agent))
+            result.update(renewal_metrics(evaluator.agent))
             result["returns_U"] = shared.measured(returns, "primary scalar returns")
             result["native_scores_J"] = shared.measured(shared.N_UAVS * returns / horizon, "primary native scores")
             result["component_means"] = shared.measured({k: v / horizon for k, v in components.items()}, "native components")
@@ -304,15 +326,15 @@ def arm_panels(summary):
     for key, count, phase_seed in (("learner_config", shared.TRAIN_LANES, seed),
                                    ("evaluation_config", lanes, evaluation_seed)):
         config = summary[key]
-        expected = {"policy_interruption_mode": "d2", "interruption_cost_c_Z": "Infinity", "interruption_delta": 1,
-                    "age_feature": "off", "n_agents": shared.N_UAVS, "n_users": shared.N_USERS, "num_envs": count,
+        expected = {"n_agents": shared.N_UAVS, "n_users": shared.N_USERS, "num_envs": count,
                     "rollout_length": horizon, "seed": phase_seed}
         if arm == "FLAT":
-            expected.update(n_Z=1, n_z=1, k=horizon + 1, skill_cap_k_max=horizon + 1, team_cap_k_Z=horizon + 1,
-                            interruption_cost_c="Infinity", lambda_D=0., lambda_d=0., lambda_h=0.)
+            expected.update(policy_interruption_mode="off", n_Z=1, n_z=1, k=FLAT_K,
+                            lambda_D=0., lambda_d=0., lambda_h=0., use_process_exploration=False)
         else:
-            expected.update(n_Z=6, n_z=6, k=10, skill_cap_k_max=10, team_cap_k_Z=10, coordinator_batch_size=batch,
-                            interruption_cost_c=.25 if renewal == "I" else "Infinity")
+            expected.update(policy_interruption_mode="d2", interruption_cost_c_Z="Infinity", interruption_delta=1,
+                            age_feature="off", n_Z=6, n_z=6, k=10, skill_cap_k_max=10, team_cap_k_Z=10,
+                            coordinator_batch_size=batch, interruption_cost_c=.25 if renewal == "I" else "Infinity")
         if any(config.get(k) != v for k, v in expected.items()):
             raise ValueError("arm construction mismatch: " + key)
     if (summary["training_lane_seeds"] != list(range(seed, seed + shared.TRAIN_LANES))
@@ -407,27 +429,26 @@ def assemble_blocks(summaries, historical_si1280_5=()):
                  for name in CONTRASTS}
     primary = dict(aggregate[PRIMARY][str(ROLLOUTS)], name=f"{PRIMARY}_{ROLLOUTS}", mei_J=PRIMARY_MEI)
     mean, interval = primary["mean"], primary["working_model_95pct_interval"]
-    if mean is None or interval is None:
-        reading = None
-    elif mean > PRIMARY_MEI and interval[0] > 0:
-        reading = "supports_development"
-    elif -PRIMARY_MEI < interval[0] and interval[1] < PRIMARY_MEI:
-        reading = "no_mei_sized_effect"
-    elif mean < -PRIMARY_MEI:
-        reading = "adverse"
-    else:
-        reading = "unresolved"
-    primary["available_reading"] = reading
+    # Importance and uncertainty are reported separately (Portfolio decision 2026-09-15).
+    primary["importance_reading"] = (None if mean is None else "locally_substantial_positive" if mean > PRIMARY_MEI
+                                     else "adverse" if mean < -PRIMARY_MEI else "small_signed")
+    primary["uncertainty_reading"] = (None if interval is None else "interval_excludes_zero"
+                                      if interval[0] > 0 or interval[1] < 0 else "interval_includes_zero")
+    primary["interval_inside_mei"] = (None if interval is None
+                                      else bool(-PRIMARY_MEI < interval[0] and interval[1] < PRIMARY_MEI))
     historical = [float(v) for v in historical_si1280_5]
-    pooled = block_statistics(values[PRIMARY][PANEL_ROLLOUTS[0]] + historical, planned + len(historical))
-    pooled.update(name=f"{PRIMARY}_{PANEL_ROLLOUTS[0]}_pooled", new_block_values=values[PRIMARY][PANEL_ROLLOUTS[0]],
-                  historical_block_values=historical,
-                  note="prospectively declared replication of the completed factorial's primary at rollout 5; "
-                       "historical blocks were not outcome-blind to this rule")
+    new_values = values[PRIMARY][PANEL_ROLLOUTS[0]]
+    pooled = block_statistics(new_values + historical, planned + len(historical))
+    pooled.update(name=f"{PRIMARY}_{PANEL_ROLLOUTS[0]}_accumulated",
+                  new_blocks=block_statistics(new_values, planned),
+                  historical_blocks=block_statistics(historical, len(historical)),
+                  note="explicitly outcome-informed descriptive accumulation of the rollout-5 primary over the new "
+                       "blocks and the completed factorial's two blocks; the five-rollout prefix, evaluation and "
+                       "seed semantics are inherited unchanged; not prospective independent confirmation")
     complete = all(s["available_training_blocks"] == planned for by_r in aggregate.values() for s in by_r.values())
     return {"object_id": OBJECT_ID, "card": CARD, "launch_sha": shared.e0._git("rev-parse", "HEAD"),
             "status": "complete" if complete else "incomplete", "blocks": blocks, "contrasts": aggregate,
-            "primary": primary, "pooled_replication": pooled,
+            "primary": primary, "rollout5_accumulation": pooled, "contrast_meaning": CONTRAST_MEANING,
             "interpretation_limit": "Independent training blocks only; panel worlds are nested endpoint conditions; "
                                     "no equivalence, no selection among panels, no extension without a new decision."}
 

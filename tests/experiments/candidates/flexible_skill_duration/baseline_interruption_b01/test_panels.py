@@ -78,14 +78,15 @@ def test_fit_bindings_three_panels_and_rng(monkeypatch, tmp_path, fake_only, arm
     assert learner is not evaluator and learner.updates == 15 and evaluator.updates == 0 and not evaluator.training
     for agent, phase_seed in ((learner, SEED), (evaluator, EVAL_SEED)):
         config = agent.config
-        assert config.policy_interruption_mode == "d2" and config.interruption_cost_c_Z == float("inf")
         assert config.seed == phase_seed
         if arm == "FLAT":
-            assert config.n_Z == config.n_z == 1 and config.interruption_cost_c == float("inf")
-            assert config.k == config.skill_cap_k_max == config.team_cap_k_Z == r.HORIZON + 1
+            assert config.policy_interruption_mode == "off" and config.n_Z == config.n_z == 1
+            assert config.k == baseline.FLAT_K == 10 and config.disable_high_level_training
+            assert config.disable_discriminator_training and config.disable_discriminator_rewards
             assert config.lambda_D == config.lambda_d == config.lambda_h == 0.
             assert getattr(config, "coordinator_batch_size", None) is None
         else:
+            assert config.policy_interruption_mode == "d2" and config.interruption_cost_c_Z == float("inf")
             assert config.n_Z == config.n_z == 6 and config.k == config.skill_cap_k_max == config.team_cap_k_Z == 10
             assert config.coordinator_batch_size == 1280
             assert config.interruption_cost_c == (.25 if arm == "I1280" else float("inf"))
@@ -115,6 +116,37 @@ def test_fit_bindings_three_panels_and_rng(monkeypatch, tmp_path, fake_only, arm
     panels = baseline.arm_panels(summary)
     assert list(panels) == [5, 10, 15]
     np.testing.assert_allclose(panels[15], summary["evaluation"]["native_scores_J"])
+    if arm == "FLAT":
+        d1280 = baseline.arm_panels(run_fake_fit(monkeypatch, tmp_path, "D1280")[0]) and json.loads(
+            (tmp_path / "D1280_772203" / "summary.json").read_text())
+        differing = {k for k in set(summary["learner_config"]) | set(d1280["learner_config"])
+                     if summary["learner_config"].get(k) != d1280["learner_config"].get(k)}
+        assert differing <= baseline.PLANNED_CONFIG_DIFFERENCES, differing
+
+
+def test_panel_leaves_learner_state_untouched(monkeypatch, tmp_path, fake_only):
+    """A panel changes nothing on the learner: no events, no normalizer or parameter change, RNG restored."""
+    out = tmp_path / "learner"
+    out.mkdir()
+    summary = r.base_summary("D0", training_seed=SEED, evaluation_seed=EVAL_SEED, object_id="X", card="Y", caps=None)
+    summary.update(factorial_arm="D1280", panels=[], panel_rollouts=[5, 10, 15], rollouts=15)
+    envs, learner, theta0, counters = baseline.build_learner("D1280", summary, out, SEED)
+    evaluator = baseline.build_evaluator("D1280", summary, out, EVAL_SEED)
+    learner.value_norm_coordinator.mean += 1.5  # a learner state the evaluator must copy, not share
+    events, norms = list(learner.events), copy.deepcopy((learner.obs_norm, learner.state_norm,
+                                                          learner.value_norm_coordinator, learner.value_norm_discoverer))
+    parameters = [v.clone() for name in ("skill_coordinator", "skill_discoverer") for v in getattr(learner, name).parameters()]
+    before = helpers.rng_state()
+    baseline.evaluate_panel(learner, evaluator, summary, out, 5)
+    helpers.assert_rng_equal(before, helpers.rng_state())
+    assert learner.events == events and learner.training
+    for old, new in zip(norms, (learner.obs_norm, learner.state_norm, learner.value_norm_coordinator, learner.value_norm_discoverer)):
+        assert old.mean == new.mean and old.var == new.var and old.count == new.count
+    for old, new in zip(parameters, [v for name in ("skill_coordinator", "skill_discoverer") for v in getattr(learner, name).parameters()]):
+        assert helpers.torch.equal(old, new)
+    assert evaluator.agent.value_norm_coordinator.mean == learner.value_norm_coordinator.mean
+    assert evaluator.agent.value_norm_coordinator is not learner.value_norm_coordinator
+    assert "clear" in evaluator.agent.events and summary["panels"][0]["status"] == "complete"
 
 
 def supplied_summaries(monkeypatch, tmp_path, scores):
@@ -153,33 +185,37 @@ def designed_scores(si1280_15, h_15):
     return scores
 
 
-@pytest.mark.parametrize("si,expected", [
-    ([.08, .09, .10, .07, .085, .095], "supports_development"),
-    ([.01, -.01, .005, .0, -.005, .002], "no_mei_sized_effect"),
-    ([-.08, -.09, -.10, -.07, -.085, -.095], "adverse"),
-    ([.12, -.05, .09, .0, .11, -.02], "unresolved"),
+@pytest.mark.parametrize("si,importance,uncertainty,inside", [
+    ([.08, .09, .10, .07], "locally_substantial_positive", "interval_excludes_zero", False),
+    ([.01, -.01, .005, .0], "small_signed", "interval_includes_zero", True),
+    ([-.08, -.09, -.10, -.07], "adverse", "interval_excludes_zero", False),
+    ([.12, -.05, .09, .0], "small_signed", "interval_includes_zero", False),
 ])
-def test_reduce_primary_reading_headroom_and_pooled(monkeypatch, tmp_path, fake_only, si, expected):
-    h = [.02, -.01, .03, .0, .015, -.005]
+def test_reduce_primary_readings_gaps_and_accumulation(monkeypatch, tmp_path, fake_only, si, importance, uncertainty, inside):
+    h = [.02, -.01, .03, .0]
     summaries = supplied_summaries(monkeypatch, tmp_path, designed_scores(si, h))
     historical = [-.02644030, .08464985]
     result = baseline.assemble_blocks(summaries, historical)
-    assert result["status"] == "complete" and len(result["blocks"]) == 6
+    assert result["status"] == "complete" and len(result["blocks"]) == 4
     primary = result["primary"]
-    assert primary["name"] == "SI1280_15" and primary["mei_J"] == .05 and primary["available_training_blocks"] == 6
-    assert primary["mean"] == pytest.approx(np.mean(si)) and primary["available_reading"] == expected
-    se = np.std(si, ddof=1) / math.sqrt(6)
+    assert primary["name"] == "SI1280_15" and primary["mei_J"] == .05 and primary["available_training_blocks"] == 4
+    assert primary["mean"] == pytest.approx(np.mean(si))
+    assert primary["importance_reading"] == importance and primary["uncertainty_reading"] == uncertainty
+    assert primary["interval_inside_mei"] is inside
+    se = np.std(si, ddof=1) / math.sqrt(4)
     assert primary["se"] == pytest.approx(se)
-    assert primary["working_model_95pct_interval"] == pytest.approx([np.mean(si) - 2.5706 * se, np.mean(si) + 2.5706 * se])
-    assert result["contrasts"]["H"]["15"]["mean"] == pytest.approx(np.mean(h))
-    assert result["contrasts"]["HI"]["15"]["mean"] == pytest.approx(np.mean(h) + np.mean(si))
+    assert primary["working_model_95pct_interval"] == pytest.approx([np.mean(si) - 3.1824 * se, np.mean(si) + 3.1824 * se])
+    assert result["contrasts"]["GAP_D"]["15"]["mean"] == pytest.approx(np.mean(h))
+    assert result["contrasts"]["GAP_I"]["15"]["mean"] == pytest.approx(np.mean(h) + np.mean(si))
     assert result["contrasts"]["SI1280"]["5"]["mean"] == pytest.approx(np.mean(si) / 3)
-    pooled = result["pooled_replication"]
+    assert "not section 11.7 headroom" in result["contrast_meaning"]["GAP_D"]
+    pooled = result["rollout5_accumulation"]
     values = [v / 3 for v in si] + historical
-    assert pooled["available_training_blocks"] == 8 and pooled["planned_training_blocks"] == 8
+    assert pooled["available_training_blocks"] == 6 and pooled["planned_training_blocks"] == 6
     assert pooled["mean"] == pytest.approx(np.mean(values))
     assert pooled["working_model_95pct_interval"][1] - pooled["mean"] == pytest.approx(
-        2.3646 * np.std(values, ddof=1) / math.sqrt(8))
+        2.5706 * np.std(values, ddof=1) / math.sqrt(6))
+    assert pooled["new_blocks"]["available_training_blocks"] == 4 and pooled["historical_blocks"]["mean"] == pytest.approx(np.mean(historical))
     block = result["blocks"][0]
     assert set(block["arms"]) == set(baseline.ARMS) and not block["missing_or_invalid_arms"]
     assert block["contrasts"]["SI1280"]["by_rollout"]["15"]["value"] == pytest.approx(si[0])
@@ -187,7 +223,7 @@ def test_reduce_primary_reading_headroom_and_pooled(monkeypatch, tmp_path, fake_
 
 @pytest.mark.parametrize("damage", ["flat_coordinator_trained", "unplanned_config", "missing_panel", "wrong_rollouts"])
 def test_damaged_fit_limits_only_dependent_contrasts(monkeypatch, tmp_path, fake_only, damage):
-    summaries = supplied_summaries(monkeypatch, tmp_path, designed_scores([.06] * 6, [.02] * 6))
+    summaries = supplied_summaries(monkeypatch, tmp_path, designed_scores([.06] * 4, [.02] * 4))
     victim = next(s for s in summaries if s["factorial_arm"] == "FLAT" and s["block_seed"] == SEED)
     if damage == "flat_coordinator_trained":
         victim["optimizer_calls"]["coordinator"] = 1
@@ -201,14 +237,14 @@ def test_damaged_fit_limits_only_dependent_contrasts(monkeypatch, tmp_path, fake
     block = result["blocks"][0]
     assert result["status"] == "incomplete" and "FLAT" in block["missing_or_invalid_arms"] or damage == "unplanned_config"
     assert block["contrasts"]["SI1280"]["status"] == "complete"
-    assert block["contrasts"]["H"]["status"] == block["contrasts"]["HI"]["status"] == "incomplete"
-    assert result["primary"]["available_training_blocks"] == 6
-    assert result["contrasts"]["H"]["15"]["available_training_blocks"] == 5
-    assert result["pooled_replication"]["available_training_blocks"] == 6
+    assert block["contrasts"]["GAP_D"]["status"] == block["contrasts"]["GAP_I"]["status"] == "incomplete"
+    assert result["primary"]["available_training_blocks"] == 4
+    assert result["contrasts"]["GAP_D"]["15"]["available_training_blocks"] == 3
+    assert result["rollout5_accumulation"]["available_training_blocks"] == 4
 
 
 def test_reduce_reads_historical_factorial_summary(monkeypatch, tmp_path, fake_only):
-    summaries = supplied_summaries(monkeypatch, tmp_path, designed_scores([.06] * 6, [.02] * 6))
+    summaries = supplied_summaries(monkeypatch, tmp_path, designed_scores([.06] * 4, [.02] * 4))
     paths = []
     for i, s in enumerate(summaries):
         path = tmp_path / f"s{i}.json"
@@ -221,8 +257,8 @@ def test_reduce_reads_historical_factorial_summary(monkeypatch, tmp_path, fake_o
     assert baseline.main(["reduce", "--summaries", *paths, "--historical-factorial-summary", str(old),
                           "--output-root", str(out)]) == 0
     result = json.loads((out / "summary.json").read_text())
-    assert result["pooled_replication"]["historical_block_values"] == [-.02644030, .08464985]
-    assert result["pooled_replication"]["available_training_blocks"] == 8
+    assert result["rollout5_accumulation"]["historical_blocks"]["mean"] == pytest.approx(np.mean([-.02644030, .08464985]))
+    assert result["rollout5_accumulation"]["available_training_blocks"] == 6
     old.write_text(json.dumps({"object_id": "OTHER", "blocks": []}))
     with pytest.raises(ValueError):
         baseline.main(["reduce", "--summaries", *paths, "--historical-factorial-summary", str(old),
@@ -244,6 +280,32 @@ def test_collector_copy_matches_frozen_collector(monkeypatch, tmp_path, fake_onl
                         (out / "training.jsonl").read_text()))
     frozen, copy_ = outputs
     assert frozen[0] == copy_[0] and frozen[1] == copy_[1] and frozen[3] == copy_[3] and frozen[4] == copy_[4]
+    assert frozen[0][0]["segments"]["agent"]["count"] > 0  # the D arms keep their renewal metrics
+
+
+def test_flat_rows_carry_no_renewal_metrics(monkeypatch, tmp_path, fake_only):
+    class OffAgent(PanelAgent):
+        """The real agent has no D2 metrics on the `off` route; the fake mirrors that."""
+
+        def _reset_metrics(self):
+            super()._reset_metrics()
+            if self.config.policy_interruption_mode == "off":
+                self.d2_metrics = None
+
+        def store_transition_batch(self, **kwargs):
+            if self.d2_metrics is None:
+                self.d2_metrics = {"segment_lengths_agent": [], "segment_lengths_team": []}
+                try:
+                    super().store_transition_batch(**kwargs)
+                finally:
+                    self.d2_metrics = None
+            else:
+                super().store_transition_batch(**kwargs)
+    monkeypatch.setattr(r, "HMASDAgent", OffAgent)
+    summary, _ = run_fake_fit(monkeypatch, tmp_path, "FLAT")
+    assert all(row["d2_metrics"] is None and row["segments"] is None for row in summary["training_rows"])
+    assert all(panel["d2_metrics"] is None for panel in summary["panels"])
+    assert list(baseline.arm_panels(summary)) == [5, 10, 15]
     assert len(frozen[2]) == len(copy_[2]) == 5 * r.HORIZON
     for a, b in zip(frozen[2], copy_[2]):
         for key in ("states", "next_states", "observations", "next_observations", "actions", "rewards", "dones"):
