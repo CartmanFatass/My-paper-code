@@ -1,0 +1,434 @@
+{
+  "schema": "acvc_cluster_baseline_match_a01_static_v1",
+  "recorded_at_utc": "2026-09-15T04:10:21.554362+00:00",
+  "card_commit": "d87719a614706cd9af1fd1166d374eb23d9cd7f7",
+  "source_commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+  "current_native_source": "2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97",
+  "actual_new_exposure": {
+    "model_constructions": 0,
+    "model_loads": 0,
+    "environment_constructions": 0,
+    "native_calls": 0,
+    "fits": 0,
+    "optimizer_steps": 0,
+    "evaluations": 0,
+    "research_code_implementation": 0,
+    "research_code_execution": 0
+  },
+  "static_observation": "DIRECT_HMASD_EXECUTION_INFORMATION_MISMATCH",
+  "claim_ceiling": "Source-grounded A/RECON; no runtime or competence/headroom acceptance",
+  "sources": [
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "hmasd/baselines.py",
+      "git_blob": "e74d1908b357d72bdd433f05cd9e2159fc33a282",
+      "sha256_git_bytes": "efc506f96c0140042eb7a0dd17e797386248f20676f8be0c9b08d952d1aa4106",
+      "line_ranges": [
+        [
+          91,
+          154
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "hmasd/agent.py",
+      "git_blob": "83deb59054660d9ca8dd47c48d2eed78ef14a86e",
+      "sha256_git_bytes": "24b103cf52601c8850bc40790aa205873d68809da89b070240ab71534352c27c",
+      "line_ranges": [
+        [
+          476,
+          548
+        ],
+        [
+          641,
+          678
+        ],
+        [
+          1732,
+          2036
+        ],
+        [
+          3042,
+          3131
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "hmasd/networks.py",
+      "git_blob": "d2f2da48ab3436f22fe2fa2549e8c43b76aa242b",
+      "sha256_git_bytes": "81e22a3ff16d9281e616e20a87a8bee0cf2c56d24fce73debe0de525cb4d1140",
+      "line_ranges": [
+        [
+          703,
+          866
+        ],
+        [
+          1401,
+          1495
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "hmasd/r_mappo_utils.py",
+      "git_blob": "b7accf6f0cb76f0f9436bb34596ea75a6f63d487",
+      "sha256_git_bytes": "b953c49b7ab5d64e6cf52c7d201104914659386b0d9535c2b66e7845d21e15b5",
+      "line_ranges": [
+        [
+          73,
+          164
+        ],
+        [
+          209,
+          235
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "experiments/launchers/main.py",
+      "git_blob": "c9bf46242c07879a018da402037f0a92fe5f4288",
+      "sha256_git_bytes": "3b90f909db325a3caf25746d058925bdd922717595999409a9e22ecde78d792b",
+      "line_ranges": [
+        [
+          166,
+          228
+        ],
+        [
+          392,
+          419
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "configs/config_1.py",
+      "git_blob": "4be746b2573de92e01ba54e09e86147402e0348b",
+      "sha256_git_bytes": "c3e6ac74076c50b44b8d6dffb6f00809d8e1b646057e1e85f74dcc4eaa8a63b4",
+      "line_ranges": [
+        [
+          5,
+          45
+        ],
+        [
+          130,
+          216
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "envs/pettingzoo/scenario1.py",
+      "git_blob": "8fa3e35de12183ebfe55934fb0cb7852b0966145",
+      "sha256_git_bytes": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e",
+      "line_ranges": [
+        [
+          1,
+          125
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "envs/pettingzoo/uav_env.py",
+      "git_blob": "21b0474e8d7ba6cdc46ed344fa65bf98ef66a907",
+      "sha256_git_bytes": "f50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803",
+      "line_ranges": [
+        [
+          265,
+          435
+        ],
+        [
+          1421,
+          1486
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "envs/pettingzoo/env_adapter.py",
+      "git_blob": "58da35c3263e00319d90b93169a6d14b0f7e5bda",
+      "sha256_git_bytes": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+      "line_ranges": [
+        [
+          172,
+          225
+        ],
+        [
+          249,
+          289
+        ],
+        [
+          315,
+          317
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "experiments/baselines/scenario_1/baseline_set.json",
+      "git_blob": "a1457e3b2073235e1b6b6862daf36a14d7ff9619",
+      "sha256_git_bytes": "9c8dcf795e0042905095eb157563bf2db14a1134faeeccf8fac71c4fcf4bcd5c",
+      "line_ranges": [
+        [
+          1,
+          116
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "scripts/run_acvc_cluster_fixed_lr_pair_b01.py",
+      "git_blob": "1dfe71abd7432ed5fbcd77aff8f6311c46be6a02",
+      "sha256_git_bytes": "048ddc6bd07a9bfea9d1cdb1995f19f6a2eaece56b838542a663f38d10132a7b",
+      "line_ranges": [
+        [
+          26,
+          118
+        ],
+        [
+          178,
+          220
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "scripts/run_acvc_fresh_dense_reuse_b01.py",
+      "git_blob": "55db07fc5d3e864351e4d803823f70b36cc3d583",
+      "sha256_git_bytes": "451029fbc0bdfca9e583f82809bfe74cd1f97830c7d12a35cc9fcf610cfb1504",
+      "line_ranges": [
+        [
+          34,
+          52
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "experiments/candidates/acvc/cluster_deployment_b01/protocol.py",
+      "git_blob": "fb6c8935813c59694c86bb02854a5368bc3f2594",
+      "sha256_git_bytes": "af0edb9ab3d5b548833ed5896c14a135cac2b0c1f9eb079ed5b7bc91b5252ed2",
+      "line_ranges": [
+        [
+          23,
+          32
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "experiments/candidates/acvc/cluster_fixed_lr_pair_b01/protocol.py",
+      "git_blob": "5cf951321a8db8a6a2c32f02c2c9b86206d1f678",
+      "sha256_git_bytes": "c31755ec87641c3c02b6887eccb70920e3dc199a51f76ef53f613eb6edaffcb0",
+      "line_ranges": [
+        [
+          1,
+          84
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "git_blob": "4b59281bfb76245dd3283fe860327e35463c2b26",
+      "sha256_git_bytes": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6",
+      "line_ranges": [
+        [
+          1,
+          75
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+      "git_blob": "ed228c88530feda63bf96c1a1597486cc52f0842",
+      "sha256_git_bytes": "e324640251d0d025549705ff7541b765e7b96733f422c48ee9c2f5bd07709614",
+      "line_ranges": [
+        [
+          1,
+          42
+        ],
+        [
+          68,
+          97
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "git_blob": "30c07ff798f198227b98add3a3a452249db22f13",
+      "sha256_git_bytes": "466ec7b0efabdf474f838b662e781a2b7a3b5e1c1a41096b6ccf0f00eb0471f1",
+      "line_ranges": [
+        [
+          12,
+          25
+        ],
+        [
+          29,
+          116
+        ],
+        [
+          208,
+          268
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "HMASD",
+      "commit": "18d9a9ae04bb62adb7172872ef50e5ef80103e66",
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py",
+      "git_blob": "bc00b7e708ce7f52525540e7537adb888c1057a5",
+      "sha256_git_bytes": "8c6108eda8c053d81cd686929cbca3765bec76d26e57fe66b6e386013a838fca",
+      "line_ranges": [
+        [
+          60,
+          74
+        ],
+        [
+          130,
+          155
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "marlbenchmark/on-policy",
+      "commit": "de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+      "path": "onpolicy/algorithms/r_mappo/algorithm/rMAPPOPolicy.py",
+      "git_blob": "62bf50c2b3bc1a5cd157aa32d877e9d13167d332",
+      "sha256_git_bytes": "33bb77fea3034c9bc79af6add5a7a5989cbb65056332786756e6ac502aa9d5ca",
+      "line_ranges": [
+        [
+          17,
+          38
+        ],
+        [
+          48,
+          86
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "marlbenchmark/on-policy",
+      "commit": "de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+      "path": "onpolicy/algorithms/r_mappo/algorithm/r_actor_critic.py",
+      "git_blob": "fb1b05242fe37f3334e7639f370d8b61776a16a9",
+      "sha256_git_bytes": "db6ff5de5b56e8a28a91181acf831bddd1c8b12d124a26025d9f63bcd3f98ee5",
+      "line_ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "marlbenchmark/on-policy",
+      "commit": "de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+      "path": "onpolicy/algorithms/r_mappo/r_mappo.py",
+      "git_blob": "346e667114186cbc316c8ecba8e1992a8e342d76",
+      "sha256_git_bytes": "8a889d010cb5e327eeffa9d8ab1d910cab384e295d0690dd05e268dc56e047be",
+      "line_ranges": [
+        [
+          18,
+          46
+        ],
+        [
+          119,
+          169
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "marlbenchmark/on-policy",
+      "commit": "de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+      "path": "onpolicy/utils/shared_buffer.py",
+      "git_blob": "4204feef2a5c95266fc3116f2c5619012ea2b998",
+      "sha256_git_bytes": "78a19d8a0e7a49cde1f3efde45cac193c04d9c3e861bc979e57824ec9e000d0e",
+      "line_ranges": [
+        [
+          499,
+          512
+        ],
+        [
+          552,
+          608
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "marlbenchmark/on-policy",
+      "commit": "de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+      "path": "onpolicy/algorithms/utils/act.py",
+      "git_blob": "ebea30e3615b532e1ca574ac50d0b651935d7b7c",
+      "sha256_git_bytes": "e1ca14c07401baa2f2342853c09dd9faf0ce89eac6facd02bbe078d2439b7f22",
+      "line_ranges": [
+        [
+          17,
+          30
+        ],
+        [
+          77,
+          85
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    },
+    {
+      "repository": "marlbenchmark/on-policy",
+      "commit": "de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+      "path": "onpolicy/algorithms/utils/mlp.py",
+      "git_blob": "d1933ddefd4ff0cb126e10d3b1fc06aa6c143591",
+      "sha256_git_bytes": "790c0c6ec9f38569919e7e5c065d765c2b808da962619beb85eb6f7ba3a30087",
+      "line_ranges": [
+        [
+          6,
+          33
+        ]
+      ],
+      "working_matches_git_ignoring_eol": true
+    }
+  ]
+}

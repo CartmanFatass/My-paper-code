@@ -1,0 +1,42 @@
+{
+  "question": "源码确认直接HMASD有周期性集中执行权限后，是否投资一组保持ACVC局部信息的ACVC与flat MAPPO新训练比较，或改选原参考模型复现/收整？",
+  "changes_if_approved": [
+    {
+      "target": "ACVC下一数值分配",
+      "from": "有限静态A已完成；无新fit授权",
+      "to": "提议1个新训练block、2个原始fit和4个最终面板，连同最小baseline适配与检查；当前仅提案。"
+    }
+  ],
+  "if_refused": "保留全部F正负证据及现有状态，由Portfolio选择原参考B或收整；不自动启动其它对象。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_BASELINE_MATCH_A01_RESULT_EVIDENCE_20260914.md",
+      "quote": "The as-shipped direct fixed-k HMASD path is not a same-execution-information comparator for the retained ACVC cluster asset.",
+      "why": "直接读取全局状态及所有观测，不能把纯适配视为相同信息的层次比较。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_PROSPECTIVE_20260914.md",
+      "quote": "The smallest proposal retaining ACVC's present intended use is a different, explicitly named comparison.",
+      "why": "保持当前资产和宿主，用明确flat MAPPO recipe补充目标baseline比较。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_PROSPECTIVE_20260914.md",
+      "quote": "Unknown cost weighs against this option compared with one unchanged reference fit.",
+      "why": "新增适配/验证成本未知；1配对也不能估计训练总体，基线尚未证实调优能力。"
+    }
+  ],
+  "uncertainty": [
+    "改变的是原HMASD-versus-MAPPO对比，不能由DM当成已接受预算内替换。",
+    "当前参考F对C与dwell各有16/64负向world；baseline准备不抹去该限制。"
+  ],
+  "cost": {
+    "compute": "提案2fit/2162688native ticks/24576 optimizer.step；当前0模型、native、fit、update、eval和科研代码执行。MAPPO原始native、支持和provider成本未知。",
+    "owner_time": "无需逐步批准；Portfolio完整决定后执行，保留异步override",
+    "reversibility": "costly",
+    "waits_on_this": "只有新数值投资及相关实现；当前A已完成"
+  },
+  "verdict_text": "Recommend purchasing this one corrected paired B only as a new Portfolio decision.",
+  "source": "docs/research/candidates/acvc/ACVC_CLUSTER_BASELINE_MATCH_A01_INTAKE_20260914.md"
+}

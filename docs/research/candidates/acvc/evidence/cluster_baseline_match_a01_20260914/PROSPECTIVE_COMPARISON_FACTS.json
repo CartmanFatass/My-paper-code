@@ -1,0 +1,60 @@
+{
+  "status": "PROSPECTIVE_UNFUNDED_NOT_FROZEN",
+  "question": "one fresh paired-block comparison of retained local ACVC F with a bounded-action shared recurrent MAPPO-style recipe",
+  "independent_programme_blocks": 1,
+  "fits": 2,
+  "native_agents": 5,
+  "horizon": 256,
+  "train_episodes_per_fit": 4096,
+  "eval_worlds_per_package": 64,
+  "packages": {
+    "ACVC": [
+      "C",
+      "F",
+      "dwell"
+    ],
+    "MAPPO": [
+      "M"
+    ]
+  },
+  "train_team_ticks_per_fit": 1048576,
+  "train_team_ticks_total": 2097152,
+  "eval_team_ticks_by_fit": {
+    "ACVC": 49152,
+    "MAPPO": 16384
+  },
+  "all_native_team_ticks": 2162688,
+  "train_episode_rows": 8192,
+  "eval_episode_rows": 256,
+  "rollouts_per_fit": 2048,
+  "ppo_minibatches_per_fit": 8192,
+  "ordered_Adam_step_calls": {
+    "ACVC_joint_actor_critic": 8192,
+    "MAPPO_actor": 8192,
+    "MAPPO_critic": 8192,
+    "total": 24576
+  },
+  "actor_replay_rows_per_fit": 20971520,
+  "critic_replay_rows": {
+    "ACVC_team_rows": 4194304,
+    "MAPPO_repeated_agent_rows": 20971520
+  },
+  "MAPPO_chunks_per_minibatch": 80,
+  "chunk_length": 32,
+  "MAPPO_minibatches_per_epoch": 1,
+  "fixed_final_snapshots": 2,
+  "final_evaluation_loads": 4,
+  "tuning_fits": 0,
+  "checkpoint_screening": 0,
+  "numerical_retry_grant": 0,
+  "prospective_MEI_J": 0.01,
+  "MEI_in_episode_sum_units": 2.56,
+  "cost_s": {
+    "historical_reference_fit_with_three_panels": 1192.29,
+    "future_MAPPO_native": null,
+    "future_complete_native": null,
+    "future_support": null,
+    "provider": null
+  },
+  "cost_scope": "No numerical allocation or support allowance is transferred from any prior object; fixed counts are a proposal, not launch authority."
+}
