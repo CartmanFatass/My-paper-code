@@ -131,6 +131,47 @@ native messages or a terminal native final, with no app-thread relay/lookup or
 replacement monitor. DM has stopped routine process polling. Later terminal facts
 trigger collection and original2 (I1280, same block), without Root ACK or a new grant.
 
+### Original1 collection and original2 continuation
+
+Monitor returned `monitor-terminal-fsd-ib-b01-772003-D1280-exit0`: finished,
+exit0, PID3708689, tmux absent, observed uptime499s. DM collected the complete
+original directory and supervisor facts in `772003_D1280.tar.gz`; its SHA256 is
+`614168dbcf15ef0776355b21dd00487700bc9b62d04822a26114979599b68020`.
+The unchanged summary SHA256 is
+`2c65edcc87a40b5e317e59eda3c0ea62e57ec60253a00bd2940e958955b381cb`.
+Both remain under the owned local exp root named above.
+
+The committed `arm_endpoint` accepted the collected summary: exact168e61295,
+40000 trained/stored transitions,80 training episodes, five actual updates,
+16000 final evaluation steps/32 sole-final episodes, two models, no checkpoint
+load and no evaluator optimizer calls. All recorded update losses are finite;
+each rollout contains800 coordinator joint rows and15 coordinator steps,75 total.
+Actor/critic optimizer calls11250 each and nonzero initialization displacement
+confirm real learning. D1280 mean native J is0.40328138236214595. This is a single
+arm endpoint, with no renewal or batch contrast yet.
+
+Complete-command GNU-time wall487.60s, user1909.19s, system11.30s,
+peak RSS2589996KiB, exit0; aggregate CPU1920.49s is summed once. The narrower
+before-publication runner wall is475.362186311977s. Collection receipt is
+`receipts/772003_D1280_COLLECTION.json`; no scientific output was deleted.
+
+Original2 `fsd-ib-b01-772003-I1280` was accepted with the same committed script
+and source, I1280/772003. Its adjacent admission assessed
+`2026-09-15T05:03:37.442640Z`: physical/effective15087321088 bytes, required
+4294967296, passed. DM resumed the same Monitor and received its recorded
+adoption: running, PID3709290, tmux active, exit null. At this revision there
+are two originals accepted, one complete endpoint, one live and six unsubmitted.
+
+Actual Monitor runtime lacks `clock.sleep`, native `wait_agent` and native
+`send_message`. The DM's permitted correction uses its available shell-session
+waits, each at most60s, with exact-handle observation at60–120s; the Monitor
+stays active until terminal and returns by native final. The original1 terminal
+arrived this way. Native final reaches the DM directly; app-thread relay is not
+needed. An inherited wrong observation timestamp/delivery label in original2's
+adoption state was identified and returned to the same child for correction;
+only actual observations/sends are evidence. This affects observation metadata,
+not training or the endpoint.
+
 ## Collection and preservation inventory
 
 Collect every original summary, training rows, logs, adjacent admission,

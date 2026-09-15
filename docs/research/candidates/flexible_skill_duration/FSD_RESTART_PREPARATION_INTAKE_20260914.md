@@ -134,6 +134,62 @@ factorial proposal can compare its factors while honestly retaining the missing
 strong-baseline limitation. No extra model test, source modification or invocation
 was needed to resolve this interface distinction.
 
+### Baseline information audit and bounded work plan
+
+Further readback resolved the previously open actor-information question.
+At accepted scientific source `0c837c6dd`, the ordinary HMASD coordinator consumes
+global state and joint observations and samples the skills used by private actors
+(`hmasd/agent.py:1950`, `hmasd/networks.py:749`). Its skill path therefore carries
+central information into action selection. FSD D2 uses the same legal central
+inputs for held/partial assignments (`hmasd/agent.py:2424`). Its private actor
+continues to receive its observation, skill and recurrent state at primitive time
+(`hmasd/networks.py:1439`). This is matched within the allocated2×2.
+
+By contrast, the existing flat reduction disables high-level decisions and uses
+constant skills. Its actor receives private observation/private recurrent state;
+the critic's global state is a training input. Scenario1 has both
+`use_opt_compact=False` and `use_compact_in_low_level_actor=False`.
+Consequently a plain private-actor flat comparison does **not** automatically
+match the current hierarchy's execution information, even though both have
+central critics. This is a future baseline-design fact, not an integrity failure
+or reclassification of completed FSD evidence.
+
+Scientific-reading grounding: reused §11.11, FOUNDATIONS §§3–6 and topics
+02_MARL/04_EMPIRICAL. Question-driven retrieval first read the local on-policy
+report index, then verified the primary implementation at
+`C:/Projects/ref-lib/on-policy/onpolicy/algorithms/r_mappo/algorithm/rMAPPOPolicy.py:47`
+(commit `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`): `get_actions` sends `obs`
+to the actor and `cent_obs` separately to the critic. It establishes that
+interface distinction, not performance or correctness on this UAV host.
+
+The baseline work plan now offers these explicit choices before a new investment:
+
+| Candidate | Question and claim limit | Work still needed |
+| --- | --- | --- |
+| Direct fixed-k10 HMASD versus central-input flat PPO/MAPPO-style | Early-budget method comparison with global state and joint observations legally available to both action paths; the flat shared recurrent actor would also receive ego identity | Bound the flat input adapter and label it as central-input, not standard private-actor MAPPO; retain common native reward, reset, action, optimizer/exposure and final evaluation rights |
+| Direct fixed-k10 HMASD versus existing private-actor flat reduction | Practical comparison of two implemented information architectures | Explicit information-restricted comparator; cannot isolate hierarchy value or establish same-information headroom |
+| Restrict the hierarchy to private execution | A different architecture question | Requires its own mechanism design; not selected as an unrecorded baseline fix |
+
+For the first candidate, the smallest draft B budget considered is two fresh
+independent training blocks × two methods × five16-lane500-step rollouts, then
+one32-world500-step final endpoint per fit: four originals,160000 team training
+steps/320 episodes,64000 final evaluation steps/128 episodes, eight models and
+20 update stages. These counts were computed from the existing recipe constants;
+they are **unfunded design quantities**, not selected seeds or a launch allocation.
+Tuning/search fits are zero in this early-recipe option; k10 is a declared fixed
+recipe, so this would not establish tuned competence or tuned headroom. A stronger
+baseline/tuning offer must state its finite selection budget and final endpoint
+separately. Complete method wall/CPU cost is unknown; no model-bearing cost probe
+or new capability smoke has been added.
+
+DM recommends preparing the matched-information central-input option for the
+next substantive investment discussion, while retaining the private-actor option
+as an explicitly different scientific question. The current F grant continues
+unchanged; its eight fits include none of these baseline fits. FSD DM owns the
+prospective baseline contract and integration; actual shared-code overlap will be
+coordinated before edits. This preparation has zero new model/learner/evaluation
+exposure and creates no Portfolio decision or launch condition.
+
 ## Decisions this intake produces
 
 1. Object technical: apply the direct owner restart and current scientific reading
