@@ -1,0 +1,98 @@
+{
+  "object": "TRDL-B02",
+  "class": "B/EXPLORE",
+  "status": "PROSPECTIVE_PREPARATION_ONLY_NO_NEW_GRANT",
+  "proposed_master": 9602,
+  "base": 960200000,
+  "actual_new_scientific_exposure": {
+    "fits": 0,
+    "model_constructions": 0,
+    "native_calls": 0,
+    "optimizer_updates": 0,
+    "seed_instantiations": 0
+  },
+  "proposed_original_arms": [
+    "SCALAR",
+    "Q32"
+  ],
+  "per_arm": {
+    "train_episodes": 512,
+    "sole_final_evaluation_episodes": 256,
+    "horizon": 256,
+    "training_batches": 32,
+    "joint_adam_calls": 128,
+    "scored_team_ticks": 196608,
+    "explicit_resets": 768,
+    "unscored_constructor_resets": 1,
+    "collection_and_eval_agent_rows": 983040,
+    "four_epoch_actor_replay_agent_rows": 2621440,
+    "critic_training_context_rows": 524288,
+    "frozen_baseline_context_rows": 131072,
+    "actor_trainable_parameters_reused_B01": 34902
+  },
+  "SCALAR": {
+    "critic_trainable_parameters_reused_B01": 34305,
+    "mse_terms": 524288
+  },
+  "Q32": {
+    "critic_trainable_parameters_reused_B01": 38304,
+    "pinball_terms": 16777216,
+    "frozen_baseline_quantile_transforms": 4194304
+  },
+  "pair": {
+    "original_fits": 2,
+    "training_episodes": 1024,
+    "final_evaluation_episodes": 512,
+    "scored_team_ticks": 393216,
+    "joint_adam_calls": 256,
+    "collection_and_eval_agent_rows": 1966080,
+    "four_epoch_actor_replay_agent_rows": 5242880,
+    "extra_training_instances_per_method": 1,
+    "after_complete_B02_training_instances_per_method_including_B01": 2
+  },
+  "seed_arithmetic_only": {
+    "actor": 960200011,
+    "branch": 960200012,
+    "critic_trunk": 960200013,
+    "SCALAR_head": 960200014,
+    "Q32_head": 960200015,
+    "SCALAR_training_actions": 960200021,
+    "Q32_training_actions": 960200022,
+    "constructor_reset": 960201000,
+    "training_resets_inclusive": [
+      960201000,
+      960201511
+    ],
+    "final_resets_inclusive": [
+      960202000,
+      960202255
+    ],
+    "SCALAR_final_actions_inclusive": [
+      960203000,
+      960203255
+    ],
+    "Q32_final_actions_inclusive": [
+      960206000,
+      960206255
+    ]
+  },
+  "native_whole_wall_reference_B01_seconds": {
+    "SCALAR": 197.99,
+    "Q32": 197.65,
+    "sum": 395.64
+  },
+  "native_peak_rss_reference_B01_kib": {
+    "SCALAR": 655784,
+    "Q32": 655900
+  },
+  "prospective_ordinary_plans_seconds": {
+    "SCALAR": 300,
+    "Q32": 300,
+    "native_sum": 600,
+    "support": 1200,
+    "combined": 1800
+  },
+  "cost_status": "Ordinary plans, not hard time caps; future actual and full support/provider/maintenance cost unknown. B01 whole times are references, not an assurance. Fixed two-original and scientific exposure limits remain distinct.",
+  "arithmetic_method": "Python 3.11 standard-library integer/decimal-literal arithmetic only; no research import, model/RNG construction, env, fitting, evaluation or numerical-result reanalysis.",
+  "exposure_line": "PROPOSED ONLY: 2 originals (SCALAR/Q32), each 512 train + 256 sole-final H256 episodes, 128 joint Adam calls at lr .0003, actor 34902 and critic 34305/38304 trainable parameters; pair 393216 scored team ticks / 256 updates; 0 retries/extra native smoke/eval. Actual new scientific exposure = 0."
+}
