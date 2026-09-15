@@ -96,6 +96,42 @@ boundaries; FSD retains primitive observations and reactive actions. This suppor
 explicitly describing FSD's information/time semantics, not importing ACAC padding,
 encoder or GAE machinery, a claim of novelty or a predicted FSD gain.
 
+## Same-host baseline preparation completed beside the factorial proposal
+
+Source readback of `hmasd/baselines.py:126`,
+`scripts/run_flexible_skill_duration_e0.py:237`, and
+`hmasd/agent.py:477,6974` distinguishes the three candidate implementations:
+
+| Method | Construction boundary | Meaning and missing evidence |
+| --- | --- | --- |
+| FSD D2-D0 | E0 D0 config; D2 enabled, infinite gaps, common k/caps10; native FSD collector | Existing performance comparator, segment/credit path and primitive-reactive actor; no tuned fixed-k headroom |
+| Direct fixed-k HMASD | E0 off config; ordinary hierarchy, k fixed prospectively | A separate ordinary high-level update route; E0 counters cannot establish its performance or equality to D2-D0 |
+| Existing flat MAPPO-style reduction | Start from off configuration, then apply the mappo algorithm switch before construction | One constant team/individual skill, high-level/discriminator learning and intrinsic rewards disabled; source-config capability, no accepted Scenario1 performance run |
+
+Concrete integration consequence: `apply_algorithm_config(..., "mappo")` does
+not itself clear a pre-existing D2 interruption mode. Reusing FSD's D0 construction
+and merely applying this switch would leave an unintended D2 path. A future
+baseline entry must explicitly select the ordinary off route before model
+construction, then verify actual actor/critic inputs, zero high-level/discriminator
+learning, native reward, reset/memory and evaluator mode. This is a source-grounded
+integration requirement, not a discovered fault in any completed FSD experiment.
+
+Candidate smallest first comparison is flat reduction versus direct fixed-k
+HMASD on the exact Scenario1 host, common prospective training/evaluation schedule
+and declared optimization/tuning rights. An untuned k10 comparison would answer
+only that early-budget method question and cannot be called tuned baseline
+competence or headroom. A fixed-k selection/tuning budget and the performance
+endpoint must be concrete in its own prospective card before requesting that
+additional investment; this record does not add hidden flat-MAPPO, HMASD or
+tuning fits to the F/S factorial offers.
+
+FSD DM owns this baseline design preparation. Any eventual shared baseline
+implementation is a named integration responsibility coordinated for actual
+overlapping code writers; no shared module is being edited now. The current
+factorial proposal can compare its factors while honestly retaining the missing
+strong-baseline limitation. No extra model test, source modification or invocation
+was needed to resolve this interface distinction.
+
 ## Decisions this intake produces
 
 1. Object technical: apply the direct owner restart and current scientific reading
