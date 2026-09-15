@@ -108,3 +108,11 @@ All53 remote support members and4 local runtime members are now archived and
 read back byte-for-byte. CLEANUP_INVENTORY.md and SUPPORT_READBACK.json record
 the exact retention/removal boundary. No cleanup, successor fit or retry has yet
 occurred at this preservation step.
+
+Root retained the support on main17b81fcf2. The assigned remote reclamation
+completed at2026-09-15T04:03:57Z with disk and registration absence in
+REMOTE_CLEANUP_RECEIPT.json. Current-object local PowerShell deletion was rejected
+before execution by automatic approval review (`blocked by policy`); all4 files
+remain byte-preserved without deletion retry or an alternate method, as recorded
+in LOCAL_CLEANUP_BLOCKER.json. The exact review remains the pending outside
+producer; scientific exposure and both frozen outcomes are unchanged.

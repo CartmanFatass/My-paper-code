@@ -1,0 +1,37 @@
+{
+  "recorded_utc": "2026-09-15 04:06:31 UTC",
+  "action": "Native PowerShell exact-target recursive removal after intended full-path/reparse/inventory/archive checks",
+  "target": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801",
+  "automatic_approval_review": "rejected before process creation",
+  "tool_failure_type": "CreateProcess Rejected",
+  "exact_reason": "blocked by policy",
+  "prechecks_in_rejected_command_executed": false,
+  "removal_executed": false,
+  "documentation_attempt": "A following combined Python readback/JSON documentation and Git-fetch command was also rejected before process creation; it requested no deletion and its documentation contained the rejected command text. The reason again was blocked by policy; no root cause for that refusal is inferred.",
+  "permitted_post_denial_readback": "A separate native PowerShell Get-ChildItem/Get-FileHash read-only call succeeded; all four files remain and match the preserved SHA256 values.",
+  "files": [
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801\\collect_terminal.py",
+      "sha256": "92f6404777f43c57070f61685219e0bf108833e8e2fbd7a7230e0f9aebf914fc"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801\\read_pair.py",
+      "sha256": "42c6e6bb12591cf36227e19cee80b13fb8c74e225783616adc01129e52a3ce7e"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801\\current_only\\MONITOR_STATE.json",
+      "sha256": "32ec36a062e0aabc2fd735c4ea30625e7e1b19084d2007287db245d972fa57b8"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801\\generic\\MONITOR_STATE.json",
+      "sha256": "0958727ed3a59ff3e949309ada9ffc07d9e36ea25a0edf0cfc93fe5f4db1523e"
+    }
+  ],
+  "all_four_archived_digests_match": true,
+  "same_deletion_retried": false,
+  "alternate_delete_method_used": false,
+  "old_A_Z_rejected_targets_touched": false,
+  "authoring_checkout_preserved": "C:/Projects/HMASD-worktrees/codex-vap-folr",
+  "scientific_processes_stopped": 0,
+  "scientific_retries": 0
+}
