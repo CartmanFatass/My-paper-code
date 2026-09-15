@@ -1,0 +1,14 @@
+{
+  "assignment": "ACVC_CLUSTER_FIXED_LR_PAIR_B01",
+  "parent_dm": "/root/dm_acvc_resume_20260914",
+  "node": "hmasd-wsl-node",
+  "source_sha": "2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97",
+  "observation_bound": {"inner_seconds": 3600, "outer_seconds": 3660, "watchdog_seconds": 10},
+  "handles": [
+    {"role": "low", "handle": "acvc-rate-low-b01-27931-2bbaa99ad", "pid": 3701076, "cwd": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad", "output": "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low", "status": "finished", "exit_code": 0, "uptime_seconds": 1277, "tmux_active": false, "observed_at": "post-terminal status query; exact wall time not recorded", "terminal_at": "2026-09-15T10:24:11+08:00", "duration_seconds": 1189, "event_id": "acvc-rate-low-b01-27931-2bbaa99ad-terminal-exit0-20260915T102411+08:00", "admission": {"assessed_at": "2026-09-15T02:04:22.464554Z", "physical_bytes": 15629537280, "effective_bytes": 15629537280, "floor_bytes": 4294967296, "passed": true}, "terminal_delivery": {"status": "delivered", "provenance": "parent_received_native_final"}},
+    {"role": "reference", "handle": "acvc-rate-ref-b01-27931-2bbaa99ad", "pid": 3701127, "cwd": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad", "output": "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference", "status": "finished", "exit_code": 0, "uptime_seconds": 1277, "tmux_active": false, "observed_at": "post-terminal status query; exact wall time not recorded", "terminal_at": "2026-09-15T10:24:15+08:00", "duration_seconds": 1193, "event_id": "acvc-rate-ref-b01-27931-2bbaa99ad-terminal-exit0-20260915T102415+08:00", "admission": {"assessed_at": "2026-09-15T02:04:22.851159Z", "physical_bytes": 15556071424, "effective_bytes": 15556071424, "floor_bytes": 4294967296, "passed": true}, "terminal_delivery": {"status": "delivered", "provenance": "parent_received_native_final"}}
+  ],
+  "adoption_delivery": {"status": "unconfirmed", "event": "MONITOR_ADOPTED", "provenance": "no_successful_native_send_receipt_recorded"},
+  "active_set": [],
+  "next_due_check": null
+}

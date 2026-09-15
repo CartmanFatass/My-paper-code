@@ -1,14 +1,11 @@
 {
   "assignment": "ACVC_CLUSTER_FIXED_LR_PAIR_B01",
-  "state": "prospective_collection_inventory",
+  "state": "originals_terminal_preserved_pending_retention_integration",
   "authoring_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
   "retain_authoring": true,
   "source": "2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97",
   "remote_checkout": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad",
-  "active_handles": [
-    "acvc-rate-low-b01-27931-2bbaa99ad",
-    "acvc-rate-ref-b01-27931-2bbaa99ad"
-  ],
+  "active_handles": [],
   "remote_outputs": {
     "low": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low",
     "reference": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference"
@@ -39,5 +36,9 @@
     "temp/directions/acvc/test/fixed_lr_pair_b01_ingestion_20260914_01"
   ],
   "local_cleanup_limit": "Native recursive Remove-Item was rejected before execution: blocked by policy. No shell/tool deletion workaround.",
-  "unique_raw_preservation": "pending terminal originals; no archive or completion yet claimed"
+  "unique_raw_preservation": "all28 original files verified; local archive 2840872 bytes sha256c10b687a1652566f39b341cb3e278c872da3d5719eafd2e197fae3928f1fcbee; see PRESERVATION.json",
+  "terminal_handles": [
+    "acvc-rate-low-b01-27931-2bbaa99ad",
+    "acvc-rate-ref-b01-27931-2bbaa99ad"
+  ]
 }
