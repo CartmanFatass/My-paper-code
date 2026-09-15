@@ -1,0 +1,11 @@
+{
+  "deletion_rejected_before_execution": true,
+  "no_bypass_or_further_deletion_attempt": true,
+  "exact_retained_paths_exists": {
+    "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\test\\extended_b01_20260914_01": true,
+    "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\test\\fixed_lr_pair_b01_20260914_01": true,
+    "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\test\\fixed_lr_pair_b01_ingestion_20260914_01": true,
+    "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\test\\cluster_mappo_b01_20260914_01": true,
+    "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\test\\cluster_mappo_b01_cfixture_20260914_01": true
+  }
+}
